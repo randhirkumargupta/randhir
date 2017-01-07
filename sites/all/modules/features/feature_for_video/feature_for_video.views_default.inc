@@ -81,6 +81,40 @@ function feature_for_video_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'entityreference_fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Email id */
+  $handler->display->display_options['fields']['field_reporter_email_id']['id'] = 'field_reporter_email_id';
+  $handler->display->display_options['fields']['field_reporter_email_id']['table'] = 'field_data_field_reporter_email_id';
+  $handler->display->display_options['fields']['field_reporter_email_id']['field'] = 'field_reporter_email_id';
+  $handler->display->display_options['fields']['field_reporter_email_id']['label'] = '';
+  $handler->display->display_options['fields']['field_reporter_email_id']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_reporter_email_id']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_reporter_email_id']['alter']['text'] = '([field_reporter_email_id])';
+  $handler->display->display_options['fields']['field_reporter_email_id']['element_label_colon'] = FALSE;
+  /* Field: Content: Occupation */
+  $handler->display->display_options['fields']['field_celebrity_pro_occupation']['id'] = 'field_celebrity_pro_occupation';
+  $handler->display->display_options['fields']['field_celebrity_pro_occupation']['table'] = 'field_data_field_celebrity_pro_occupation';
+  $handler->display->display_options['fields']['field_celebrity_pro_occupation']['field'] = 'field_celebrity_pro_occupation';
+  $handler->display->display_options['fields']['field_celebrity_pro_occupation']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_celebrity_pro_occupation']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_celebrity_pro_occupation']['delta_offset'] = '0';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[title] [field_reporter_email_id] ([field_celebrity_pro_occupation])';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $export['anchor_option_view'] = $view;
 
   $view = new view();
@@ -255,7 +289,7 @@ function feature_for_video_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -463,7 +497,7 @@ function feature_for_video_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -575,7 +609,7 @@ function feature_for_video_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -1117,7 +1151,7 @@ return variable_get(\'ipl_for_widget\');
       'empty_column' => 0,
     ),
   );
-  /* Relationship: : field_upload_video (field_upload_video:fid) */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['field_upload_video_fid']['id'] = 'field_upload_video_fid';
   $handler->display->display_options['relationships']['field_upload_video_fid']['table'] = 'field_data_field_upload_video';
   $handler->display->display_options['relationships']['field_upload_video_fid']['field'] = 'field_upload_video_fid';
@@ -1381,7 +1415,7 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -1647,7 +1681,7 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -1943,7 +1977,7 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -2274,7 +2308,7 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -2661,7 +2695,7 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -2937,7 +2971,7 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -3298,7 +3332,7 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -3682,7 +3716,7 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -3945,7 +3979,7 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -4279,7 +4313,7 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -4593,7 +4627,7 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';

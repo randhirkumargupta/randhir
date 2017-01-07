@@ -172,6 +172,7 @@ function itg_user_activity_front() {
   
   $nd_id = $_POST['nd_id'];
   $dtag = $_POST['dtag'];
+  $dstatus = $_POST['dstatus'];
   $user_activity = $_POST['data_activity'];
   $activity_date = date('d-m-Y');
   $activity_date_time = date('d-m-Y h:i:s');
@@ -180,18 +181,25 @@ function itg_user_activity_front() {
     $con = mongodb();
     if ($con) {
       $people = $con->front_user_activity;
-      $get_previous_info = itg_get_front_activity_info($nd_id, $dtag, $user->uid, $user_activity);
+      $get_previous_info = itg_get_front_activity_info($nd_id, $dtag, $user->uid, $user_activity, $status='');
       if(empty($get_previous_info['nid'])) {
-      $qry = array("nid" => $nd_id, "uid" => $user->uid, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time);
+      $qry = array("nid" => $nd_id, "uid" => $user->uid, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus);
       $result = $people->insert($qry);
-      $response = array('success' => 'success');
+      $response = array('success' => $dstatus);
       print json_encode($response);
       }
-      else
-      {
-      $response = array('error' => 'error');
-      print json_encode($response);
+      else {
+        try {
+        $newdata = array('$set' => array("status" => $dstatus, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time));
+        $people->update(array("nid" => $nd_id), $newdata);
+        $response = array("success" => $dstatus);
+        print json_encode($response);
+        }
+        catch (Exception $e){
+          print $e->getMessage().$nd_id;
+        }
       }
+     
     }
   }
 }
@@ -203,16 +211,23 @@ function itg_user_activity_front() {
  * @param string $ntype
  * @param int $uid
  * @param string $activity
+ * @param string $status
  */
-function itg_get_front_activity_info($nid, $ntype, $uid, $activity) {
+function itg_get_front_activity_info($nid, $ntype, $uid, $activity, $status) {
   $data = '';
   if (function_exists('mongodb')) {
     $con = mongodb();
     $people = $con->front_user_activity;
-    $cond = array('nid' => $nid, 'ntype' => $ntype, 'uid' => $uid, 'activity' => $activity);
+    if(!empty($status)) {
+    $cond = array('nid' => $nid, 'ntype' => $ntype, 'uid' => $uid, 'activity' => $activity, 'status' => $status);
+    }
+    else {
+     $cond = array('nid' => $nid, 'ntype' => $ntype, 'uid' => $uid, 'activity' => $activity); 
+    }
     $cursor = $people->find($cond);
     foreach ($cursor as $document) {
       $data['nid'] = $document['nid'];
+      $data['status'] = $document['status'];
     }
     return $data;
   } 

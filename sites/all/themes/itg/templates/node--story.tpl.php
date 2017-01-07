@@ -70,7 +70,7 @@ if (!empty($content)):
                 $pipelinetext=' <span class="story-pipline">||</span> <a target="_blank" href="'.$node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'].'">'.ucfirst($node->field_story_new_title[LANGUAGE_NONE][0]['value']).'</a>';
             }
             if(!empty($get_develop_story_status)) {?>
-            <h1><?php print $node->title.$pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true"></i> <i class="fa fa-circle" aria-hidden="true"></i></h1>
+            <h1><?php print $node->title.$pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true"></i></h1>
             <?php } else { ?>
             <h1><?php print $node->title.$pipelinetext; ?></h1>
             <?php } ?>
@@ -226,7 +226,7 @@ if (!empty($content)):
                                      <?php } if ($config_name == 'other') { ?> 
                                      <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                                      <?php } ?>
-                                     <li><a href="javascript:void(0)"><i class="fa fa-bookmark"></i></a>
+                                     <li><a href="javascript:void(0)" title="READ LATER"><i class="fa fa-bookmark"></i></a>
                                          <span></span>
                                      </li>
                                  </ul>
@@ -550,10 +550,10 @@ if (!empty($content)):
                                 <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span><?php print $comment_count; ?></span></a></li>
                               <?php } ?>
                             <li class="mhide"><span class="share-count"><?php if(!empty($tot_count)) { print $tot_count;} else { print 0; } ?></span> SHARES</li>
-                            <?php if($user->uid > 0): if(!empty($follow_status['nid'])): ?>  
-                            <li class="mhide following"><?php print t('Following'); ?></li>
+                            <?php if($user->uid > 0): if(!empty($follow_status['nid']) && $follow_status['status'] == '1'): ?>  
+                            <li class="mhide follow-story"><a title = "Unfollow Story" href="javascript:" id="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="follow_story" data-status="0" class="def-cur-pointer">Unfollow Story</a></li>
                             <?php else:?>
-                            <li class="mhide follow-story"><a title = "follow story" href="javascript:" id="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="follow_story" class="def-cur-pointer">follow the Story</a></li>
+                            <li class="mhide follow-story"><a title = "Follow the Story" href="javascript:" id="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="follow_story" data-status="1" class="def-cur-pointer">Follow the Story</a></li>
                              <?php endif; else: ?>
                             <li class="mhide"><?php if(function_exists(itg_sso_url)) { print itg_sso_url('follow story'); }  ?></li>
                              <?php endif; ?>
@@ -577,7 +577,7 @@ if (!empty($content)):
                             $like = "no-of-likes_" . arg(1);
                             $dislike = "no-of-dislikes_" . arg(1);
                             ?>
-                            <div class="agbutton"><button title ="Agree" id="like_count" rel="<?php print arg(1); ?>">Like <span id="<?php print $like; ?>"><?php print $like_count; ?></span> </button> <button title ="Disagree" id="dislike_count" rel="<?php print arg(1); ?>">Dislike <span id="<?php print $dislike; ?>"><?php print $dislike_count; ?></span></button>  <a href="<?php echo $base_url; ?>/snappost"> More from Snap post</a><p class="error-msg" id="<?php print $pid; ?>"></p></div>
+                            <div class="agbutton"><button title ="Like" id="like_count" rel="<?php print arg(1); ?>">Like <span id="<?php print $like; ?>"><?php print $like_count; ?></span> </button> <button title ="Dislike" id="dislike_count" rel="<?php print arg(1); ?>">Dislike <span id="<?php print $dislike; ?>"><?php print $dislike_count; ?></span></button>  <a href="<?php echo $base_url; ?>/snappost"> More from Snap post</a><p class="error-msg" id="<?php print $pid; ?>"></p></div>
                         </div>
                     <?php } ?>
                     <div class="tags">

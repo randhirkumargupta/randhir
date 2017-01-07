@@ -145,6 +145,11 @@ function itg_layout_manager_block_info() {
         'cache' => DRUPAL_CACHE_GLOBAL,
     );
 
+    $blocks['front_end_breadcrumb'] = array(
+        'info' => t('Front end breadcrumb'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
+
     return $blocks;
 }
 
@@ -322,6 +327,27 @@ function itg_layout_manager_block_view($delta = '') {
       $data['highlights_widget'] = get_highlights_widget_list();
       $block['content'] = theme('layout_highlights_widgets_list_block', array('data' => $data));
     break;
+    
+    case 'front_end_breadcrumb':
+      
+      if (arg(0) == 'node' && arg(1)) {
+        $entity_object = menu_get_object();
+        if (isset($entity_object->field_primary_category['und'][0]['value'])) {          
+          $id = $entity_object->field_primary_category['und'][0]['value'];
+          if (function_exists('frontend_breadcrumb_display')) {
+            $breadcrumb = frontend_breadcrumb_display($id, $entity_object);
+          } 
+        }
+               
+      } else if (arg(0) == 'taxonomy' && arg(1) == 'term' && arg(2)) {
+        $id = arg(2);
+        if (function_exists('frontend_breadcrumb_display')) {
+          $breadcrumb = frontend_breadcrumb_display($id);
+        }
+      }
+
+      $block['content'] = theme('frontend_breadcrumb_display_block', array('data' => $breadcrumb));
+    break;
   }
 
   return $block;
@@ -416,6 +442,11 @@ function itg_layout_manager_theme($existing, $type, $theme, $path) {
     'itg_highlights_widget' => array(
         'arguments' => array('form' => NULL),
         'template' => 'layout-itg-highlights-widget',
+        'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+    ),
+    'frontend_breadcrumb_display_block' => array(
+        'arguments' => array('form' => NULL),
+        'template' => 'frontend-breadcrumb-display',
         'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
     ),
       
