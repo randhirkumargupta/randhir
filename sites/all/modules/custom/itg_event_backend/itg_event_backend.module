@@ -1935,12 +1935,9 @@ function itg_event_get_target_id_of_speakers($field_program_schedule) {
   $target_id = array();
   if (!empty($field_program_schedule)) {
     foreach ($field_program_schedule as $key => $field_select_speaker) {
-      $spekar_target_id = (int) $field_select_speaker['field_select_speaker']['und'][0]['target_id'];
-      // Field collection give emtpy target id for add more to skip this.
-      if ($spekar_target_id) {
-        if (!empty($field_select_speaker['field_select_speaker']['und'][0]['target_id'])) {
-          $target_id[] = $field_select_speaker['field_select_speaker']['und'][0]['target_id'];
-        }
+      $spekar_target_id_array = $field_select_speaker['field_select_speaker']['und'];
+      foreach ($spekar_target_id_array as $target_id_value) {
+        $target_id[] = $target_id_value['target_id'];
       }
     }
   }
@@ -1975,10 +1972,10 @@ function update_itg_widget_order_table_data_for_speaker($form, &$form_state) {
   // If made change is order then save otherwise skip to save.
   if ($weightcount) {
     db_delete('itg_widget_order')
-      ->condition('widget', $widget)
-      ->condition('cat_id', $cat_id)
-      ->execute();
-    
+        ->condition('widget', $widget)
+        ->condition('cat_id', $cat_id)
+        ->execute();
+
     // Get extra , nid , content type from custom_table because it will further use to insert again.
     foreach ($draggable_view_data as $key => $value) {
       if ($weightcount > 0) {
@@ -1999,5 +1996,19 @@ function update_itg_widget_order_table_data_for_speaker($form, &$form_state) {
   }
   else {
     drupal_set_message(t("This order already saved"));
+  }
+}
+
+/**
+ * Implementation of hook_node_delete().
+ * {@inheritdoc}
+ */
+function itg_event_backend_node_delete($node) {
+  // Delete Reporter frpom custom table while deleting it.
+  if ($node->type == 'reporter') {
+    db_delete('itg_widget_order')
+        ->condition('nid', $node->nid)
+        ->condition('widget', 'itg_event_speaker_widget')
+        ->execute();
   }
 }
