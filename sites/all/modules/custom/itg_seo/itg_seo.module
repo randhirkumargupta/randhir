@@ -164,47 +164,6 @@ function itg_additional_settings_element_hide($form, &$form_state, $form_id) {
   return $form;
 }
 
-/**
- * Implements hook_block_info().
- */
-function itg_seo_block_info() {
-  $blocks = array();
-  $blocks['front_end_breadcrumb'] = array(
-      'info' => t('Front end breadcrumb'),
-  );
-
-  return $blocks;
-}
-
-/**
- * Implements hook_block_view().
- */
-function itg_seo_block_view($delta = '') {
-  $block = array();
-
-  switch ($delta) {
-    case 'front_end_breadcrumb' :
-
-      $entity_object = '';
-      if (arg(0) == 'node' && arg(1)) {
-        $entity_object = menu_get_object();
-        if (isset($entity_object->nid)) {
-          if (arg(0) == 'node' && arg(1)) {
-            $id = $entity_object->field_primary_category['und'][0]['value'];
-          }
-        }
-      }
-
-      if (arg(0) == 'taxonomy' && arg(1) == 'term' && arg(2)) {
-        $id = arg(2);
-      }
-
-      $block['content'] = front_end_breadcrumb_view($id, $entity_object);
-      break;
-  }
-
-  return $block;
-}
 
 /**
  * Returms a front end breadcrumb view 
@@ -213,7 +172,7 @@ function itg_seo_block_view($delta = '') {
  * @param text $type
  * @param object $entity_object
  */
-function front_end_breadcrumb_view($id = NULL, $entity_object = NULL) {
+function frontend_breadcrumb_display($id, $entity_object = NULL) {
 
   $section_link = l('News', '<front>');
 
@@ -224,15 +183,15 @@ function front_end_breadcrumb_view($id = NULL, $entity_object = NULL) {
     }
   }
 
-  if ($entity_object->type == 'story') {
+  if (!empty($entity_object->type) && $entity_object->type == 'story') {
     $section_link .= ' > ' . t($entity_object->title);
-  } else if ($entity_object->type == 'videogallery') {
+  } else if (!empty($entity_object->type) && $entity_object->type == 'videogallery') {
     $section_link .= ' > Video > ' . t($entity_object->title);
-  } else if ($entity_object->type == 'photo') {
+  } else if (!empty($entity_object->type) && $entity_object->type == 'photo') {
     $section_link .= ' > Gallery > ' . t($entity_object->title);
-  } else if ($entity_object->type == 'poll') {
+  } else if (!empty($entity_object->type) && $entity_object->type == 'poll') {
     $section_link .= ' > Poll';
-  } else if ($entity_object->type == 'blog') {
+  } else if (!empty($entity_object->type) && $entity_object->type == 'blog') {
     $section_link .= ' > Blog > ' . t($entity_object->title);
   }
 

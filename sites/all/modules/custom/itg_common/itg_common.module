@@ -15,8 +15,15 @@ module_load_include('inc', 'itg_common', 'includes/itg_common_mail');
  * {@inheritdoc}
  */
 function itg_common_init() {
-  global $user;
-  //phpinfo();exit;
+  
+  global $user, $base_url, $theme;
+  if ($theme == 'itgadmin') {
+    $settings = array();
+    $settings['base_url'] = $base_url;
+    $settings['uid'] = $user->uid;
+    drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.admin.js');
+  }
 }
 
 /**
@@ -70,13 +77,8 @@ function itg_common_dropdown_mazine($id = '') {
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
     global $user;
 
-    if ($user->uid != '1') {
-        // checkbox hide for all user of Provide a menu link on all form
-        drupal_add_js('jQuery(document).ready(function() {                  
-             jQuery(".form-item-menu-enabled").hide();                         
-      });', array('type' => 'inline', 'scope' => 'footer'));
-
-    
+    if ($user->uid != '1') {        
+        
       if ($form_id == 'menu_edit_item') {      
           if ($form['original_item']['#value']['menu_name'] == 'menu-itg-main-menu-header') {
             $form['description']['#type'] = 'checkbox';
@@ -987,6 +989,7 @@ function itg_get_related_story_id($related_content) {
  */
 
 function itg_sso_url($link_name) {
+  global $user;
   $site = 'indiatoday';
   if ($_SERVER['HTTP_HOST'] == PARENT_SSO) {
     if ($user->uid == 0) {

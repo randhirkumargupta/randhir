@@ -1466,22 +1466,17 @@ function features_for_story_field_default_field_bases() {
       'type' => 0,
     ),
     'indexes' => array(
-      'rgb' => array(
-        0 => 'rgb',
+      'format' => array(
+        0 => 'format',
       ),
     ),
     'locked' => 0,
-    'module' => 'color_field',
+    'module' => 'text',
     'settings' => array(
-      'allow_empty' => 0,
-      'palette' => '',
-      'show_buttons' => 0,
-      'show_input' => 0,
-      'show_palette' => 0,
-      'show_palette_only' => 0,
+      'max_length' => 255,
     ),
     'translatable' => 0,
-    'type' => 'color_field_rgb',
+    'type' => 'text',
   );
 
   // Exported field_base: 'field_story_listicle_description'.
