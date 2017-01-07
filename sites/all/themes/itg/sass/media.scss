@@ -899,12 +899,16 @@
     .archive-header{
         border:none;
         margin: 0 -15px;
+        padding-top: 35px;
+        position: relative;
         #archive-story-date-slider, .archive-calender-custom{
             float: none;
             width: 100%;
         }
         .archive-calender-custom{
             text-align: right;
+            position: absolute;
+            top: -15px;
         }
         #archive-story-date-slider{
             border-top: 1px solid #ddd;
@@ -1157,7 +1161,22 @@
 }
 /*end category wise content list css*/
 
-
+/*pop up big story*/
+#block-itg-widget-big-story-format{
+    .video-slider-images{
+        .slick-slider{
+            padding: 10px 45px;   
+        }
+        .slick-prev, .slick-next{
+            background: transparent;                
+            color:#fff;
+            &:hover{
+                background: transparent;    
+            }
+        }
+    }
+}
+/*pop up big story end*/
 
 }
 
@@ -2025,6 +2044,18 @@
         h2{
             @include font(26px,null,300);
         }
+        .video-slider-images{
+                .slick-slider{
+                    padding: 10px 45px;   
+                }
+                .slick-prev, .slick-next{
+                    background: transparent;                
+                    color:#fff;
+                    &:hover{
+                        background: transparent;    
+                    }
+                }
+            }
     }
     .view-display-id-so_sorry_page{
         margin:0;

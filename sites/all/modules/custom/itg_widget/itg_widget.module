@@ -1043,11 +1043,11 @@ function itg_widget_dailymotion_get_videogallery_slider($nid) {
       <?php
     }
     $newimageds.='</ul></div></div></div>';
-    if (count($videoids) > 1) {
-      print $newimageds;
-    }
   }
   print '</div>';
+  if (count($videoids) > 1) {
+      print $newimageds;
+    }
 }
 
 /**
