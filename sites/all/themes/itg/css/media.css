@@ -848,6 +848,8 @@
   .view-archive-story .archive-header {
     border: none;
     margin: 0 -15px;
+    padding-top: 35px;
+    position: relative;
   }
   .view-archive-story .archive-header #archive-story-date-slider, .view-archive-story .archive-header .archive-calender-custom {
     float: none;
@@ -855,6 +857,8 @@
   }
   .view-archive-story .archive-header .archive-calender-custom {
     text-align: right;
+    position: absolute;
+    top: -15px;
   }
   .view-archive-story .archive-header #archive-story-date-slider {
     border-top: 1px solid #ddd;
