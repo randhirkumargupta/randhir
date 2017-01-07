@@ -411,6 +411,10 @@ function _related_story_left_block_content() {
 function _related_story_bottom_block_content() {
   global $base_url;
 
+  $related_content = itg_get_related_content(arg(1));
+  if (function_exists(itg_get_related_story_id)) {
+    $related_result = itg_get_related_story_id($related_content);
+  }
   $related_story = '<h3><span>Related</span></h3>';
   $related_story.= "<div class='row'><ul>";
   $i = 0;
