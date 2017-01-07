@@ -15,8 +15,9 @@
 
                 var nd_id = jQuery(this).attr('rel');
                 var dtag = jQuery(this).attr('data-tag');
+                var dstatus = jQuery(this).attr('data-status');
                 var data_activity = jQuery(this).attr('data-activity');
-                var post_data = "&nd_id=" + nd_id + "&dtag=" + dtag + "&data_activity=" + data_activity;
+                var post_data = "&nd_id=" + nd_id + "&dtag=" + dtag + "&data_activity=" + data_activity + "&dstatus=" + dstatus;
 
                 $.ajax({
                     'url': base_url + '/user-activity-front-end',
@@ -30,9 +31,19 @@
                     'success': function (result)
                     {
                         var obj = jQuery.parseJSON(result);
-                        if (obj.success == 'success') {
-
-                            $(".follow-story").html('Following');
+                        if (obj.success == 1) {
+                            console.log('create');
+                            $(".follow-story a").attr({
+                                'data-status': 0,
+                                title: 'Unfollow story'
+                            }).html('Unfollow story');
+                        }
+                        if (obj.success == 0) {
+                            console.log('update');
+                             $(".follow-story a").attr({
+                                'data-status': 1,
+                                title: 'Follow the Story'
+                            }).html('Follow the Story');
                         }
                         if (obj.error == 'error') {
 

@@ -987,6 +987,7 @@ function itg_get_related_story_id($related_content) {
  */
 
 function itg_sso_url($link_name) {
+  global $user;
   $site = 'indiatoday';
   if ($_SERVER['HTTP_HOST'] == PARENT_SSO) {
     if ($user->uid == 0) {

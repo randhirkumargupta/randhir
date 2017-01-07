@@ -1,15 +1,15 @@
 <?php if (!empty($data)) : global $base_url; ?>
     <div class="featured-news">
         <div class="featured-post featured-post-first">
-            <?php if (!empty($data[0]['uri'])) : ?>
+            <?php if (!empty($data[0]['li_file_uri'])) : ?>
                 <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" .$data[0]['nid']); ?>">
-                    <?php $extra_large_image_url = file_create_url($data[0]['uri']);
+                    <?php $extra_large_image_url = file_create_url($data[0]['li_file_uri']);
                     ?>
                     <img src="<?php print $extra_large_image_url; ?>"  />
                 </a>
             <?php else : ?>
                 <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" .$data[0]['nid']); ?>">
-                    <img src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                  <img width="483" height="271" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
                 </a>
             <?php endif; ?>
 
@@ -21,9 +21,9 @@
         </div>
 
         <div class="featured-post">
-            <?php if (isset($data[1]['uri'])) : ?>
+            <?php if (isset($data[1]['si_file_uri'])) : ?>
                 <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[1]['nid']); ?>">
-                    <img src="<?php print image_style_url("home_page_feature_small", $data[1]['uri']); ?>" />
+                    <img src="<?php print image_style_url("home_page_feature_small", $data[1]['si_file_uri']); ?>" />
                 </a>
             <?php else : ?>
                 <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[1]['nid']); ?>">
@@ -38,9 +38,9 @@
         </div>
 
         <div class="featured-post">
-            <?php if (isset($data[2]['uri'])) : ?>
+            <?php if (isset($data[2]['si_file_uri'])) : ?>
                 <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[2]['nid']); ?>">
-                    <img src="<?php print image_style_url("home_page_feature_small", $data[2]['uri']); ?>" />
+                    <img src="<?php print image_style_url("home_page_feature_small", $data[2]['si_file_uri']); ?>" />
                 </a>
             <?php else : ?>
                 <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[2]['nid']); ?>">

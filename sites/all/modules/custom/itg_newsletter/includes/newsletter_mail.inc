@@ -234,6 +234,11 @@ function itg_update_newsletter_cron_tbl($nid) {
         'scheduled_time' => $scheduled_time,
       ))
       ->condition('nid', $nid, '=')
-      ->execute();
+      ->execute();   
+    //field_survey_start_date update after runing cron.
+    $node_load_data = node_load($nid);
+    $new_time_value = date('Y-m-d 00:00:00' , $scheduled_time);
+    $node_load_data->field_survey_start_date[LANGUAGE_NONE][0]['value'] = $new_time_value;
+    field_attach_update('node', $node_load_data);
   }
 }

@@ -54,11 +54,11 @@ $resultdata = array_unique($consti);
                         print ' <p class="status green"><i class="fa fa-thumbs-o-up"></i><span>WON</span></p>';
                     } else if ($row['extra'] == "Lost")
                     {
-                        print ' <p class="status red"><i class="fa fa-thumbs-o-down"></i><span>LEADING</span></p>';
+                        print ' <p class="status red"><i class="fa fa-thumbs-o-down"></i><span>LOST</span></p>';
                     }
                     else if ($row['extra'] == "Lead")
                     {
-                        print ' <p class="status orange"> <i class="fa fa-hand-o-up" aria-hidden="true"></i><span>LEAD</span></p>';
+                        print ' <p class="status orange"> <i class="fa fa-hand-o-up" aria-hidden="true"></i><span>LEADING</span></p>';
                     }
                     ?>
                 </li>         
