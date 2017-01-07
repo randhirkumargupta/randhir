@@ -172,8 +172,10 @@ function itg_widget_views_pre_render(&$view) {
   }
   elseif ($view->name == "category_wise_content_list" && $view->current_display == 'section_wise_content_listing') {
     $arg = arg();
+    $curentPath =  current_path();
     $term = taxonomy_term_load($arg[2]);
     $header_content = '<h1 class="category-heading">' . $term->name . '</h1>';
+    $header_content .= '<div class="list-grid"><i class="fa fa-list" aria-hidden="true"></i> ' .l('List',$curentPath, array('query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span><i class="fa fa-th" aria-hidden="true"></i> '.l('Grid',$curentPath ,array('query'=>array('view_type'=>'grid'))).'</div>';
     $view->attachment_before = $header_content;
   }
   

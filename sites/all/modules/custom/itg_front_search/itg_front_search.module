@@ -184,7 +184,7 @@ function itg_front_search_views_pre_render(&$view) {
 
       // image condition when image not image
       //$image = $related_result->sm_thumb_medium_field_story_extra_large_image[0];
-      $image = $related_result->sm_thumb_medium_field_story_small_image[0];
+      $image = $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0];
       $blog_image = $related_result->sm_thumb_medium_field_blog_image[0];
       $magazine_image = $related_result->sm_thumb_medium_field_magazine_cover_photo[0];
 
@@ -193,17 +193,17 @@ function itg_front_search_views_pre_render(&$view) {
       if (preg_match($pattern, $image, $matches)) {
         $src = $matches[1];
         if (getimagesize($src) !== false) {
-          $related_result->sm_thumb_medium_field_story_small_image[0] = $related_result->sm_thumb_medium_field_story_small_image[0];
+          $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0] = $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0];
         }
         else {
           $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
-          $related_result->sm_thumb_medium_field_story_small_image[0] = "<img src='$img_url' width='220' height='154' />";
+          $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0] = "<img src='$img_url' width='170' height='127' />";
         }
       }
 
       if (empty($image) && empty($magazine_image)) {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
-        $related_result->sm_thumb_medium_field_story_small_image[0] = "<img src='$img_url' width='220' height='154' />";
+        $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0] = "<img src='$img_url' width='170' height='127' />";
       }
 
       $words = $_GET['keyword'];
