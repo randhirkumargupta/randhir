@@ -502,3 +502,21 @@ function itg_event_registration_get_form() {
   }
   return $form;
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter() for taxonomy_form_term().
+ * {@inheritdoc}
+ */
+function itg_event_registration_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
+  global $user;
+  global $base_url;
+// Add js to category management form
+  if ($form['#vocabulary']->machine_name == 'event_type') {
+    $tid = $form['tid']['#value'];
+    $used_by_content = taxonomy_select_nodes($tid);
+    if (count($used_by_content) > 0) {
+      $form['actions']['delete']['#access'] = 0;
+    }
+  }
+  
+}
