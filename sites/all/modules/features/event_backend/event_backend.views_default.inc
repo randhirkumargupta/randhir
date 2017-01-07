@@ -2786,21 +2786,16 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'event speaker order reorder';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: Content: Program Schedule (field_program_schedule) */
-  $handler->display->display_options['relationships']['field_program_schedule_value']['id'] = 'field_program_schedule_value';
-  $handler->display->display_options['relationships']['field_program_schedule_value']['table'] = 'field_data_field_program_schedule';
-  $handler->display->display_options['relationships']['field_program_schedule_value']['field'] = 'field_program_schedule_value';
-  $handler->display->display_options['relationships']['field_program_schedule_value']['delta'] = '-1';
-  /* Relationship: Field collection item: Entity with the Program Schedule (field_program_schedule) */
-  $handler->display->display_options['relationships']['field_program_schedule_node']['id'] = 'field_program_schedule_node';
-  $handler->display->display_options['relationships']['field_program_schedule_node']['table'] = 'field_collection_item';
-  $handler->display->display_options['relationships']['field_program_schedule_node']['field'] = 'field_program_schedule_node';
-  $handler->display->display_options['relationships']['field_program_schedule_node']['relationship'] = 'field_program_schedule_value';
+  /* Relationship: Section wise ordering content: itg_widget_order nid Title */
+  $handler->display->display_options['relationships']['nid']['id'] = 'nid';
+  $handler->display->display_options['relationships']['nid']['table'] = 'itg_widget_order';
+  $handler->display->display_options['relationships']['nid']['field'] = 'nid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
   $handler->display->display_options['fields']['counter']['table'] = 'views';
   $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = 'S.No.';
   $handler->display->display_options['fields']['counter']['counter_start'] = '0';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
   /* Field: Draggableviews: Content */
@@ -2812,61 +2807,55 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['draggableviews']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['draggableviews']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['draggableviews']['draggableviews']['ajax'] = 0;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  /* Field: Field collection item: Field collection item ID */
-  $handler->display->display_options['fields']['item_id']['id'] = 'item_id';
-  $handler->display->display_options['fields']['item_id']['table'] = 'field_collection_item';
-  $handler->display->display_options['fields']['item_id']['field'] = 'item_id';
-  $handler->display->display_options['fields']['item_id']['relationship'] = 'field_program_schedule_value';
-  /* Field: Field collection item: Select Speaker */
-  $handler->display->display_options['fields']['field_select_speaker']['id'] = 'field_select_speaker';
-  $handler->display->display_options['fields']['field_select_speaker']['table'] = 'field_data_field_select_speaker';
-  $handler->display->display_options['fields']['field_select_speaker']['field'] = 'field_select_speaker';
-  $handler->display->display_options['fields']['field_select_speaker']['relationship'] = 'field_program_schedule_value';
-  $handler->display->display_options['fields']['field_select_speaker']['label'] = 'Speaker';
-  $handler->display->display_options['fields']['field_select_speaker']['settings'] = array(
-    'link' => 0,
-  );
-  $handler->display->display_options['fields']['field_select_speaker']['delta_offset'] = '0';
-  /* Field: Field collection item: Title */
-  $handler->display->display_options['fields']['field_breaking_tile']['id'] = 'field_breaking_tile';
-  $handler->display->display_options['fields']['field_breaking_tile']['table'] = 'field_data_field_breaking_tile';
-  $handler->display->display_options['fields']['field_breaking_tile']['field'] = 'field_breaking_tile';
-  $handler->display->display_options['fields']['field_breaking_tile']['relationship'] = 'field_program_schedule_value';
-  /* Field: Field collection item: Start Time */
-  $handler->display->display_options['fields']['field_start_time']['id'] = 'field_start_time';
-  $handler->display->display_options['fields']['field_start_time']['table'] = 'field_data_field_start_time';
-  $handler->display->display_options['fields']['field_start_time']['field'] = 'field_start_time';
-  $handler->display->display_options['fields']['field_start_time']['relationship'] = 'field_program_schedule_value';
-  $handler->display->display_options['fields']['field_start_time']['settings'] = array(
-    'format_type' => 'long',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-    'show_remaining_days' => 0,
-  );
+  $handler->display->display_options['fields']['nid']['label'] = 'Speaker Id';
+  /* Field: Content: Email id */
+  $handler->display->display_options['fields']['field_reporter_email_id']['id'] = 'field_reporter_email_id';
+  $handler->display->display_options['fields']['field_reporter_email_id']['table'] = 'field_data_field_reporter_email_id';
+  $handler->display->display_options['fields']['field_reporter_email_id']['field'] = 'field_reporter_email_id';
+  /* Field: Content: Link */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = 'Action';
+  $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node] </span>';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Draggableviews: Weight */
+  /* Sort criterion: Section wise ordering content: weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
-  $handler->display->display_options['sorts']['weight']['table'] = 'draggableviews_structure';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order';
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
-  $handler->display->display_options['sorts']['weight']['draggableviews_setting_view'] = 'event_speaker_order_reorder:block_1';
-  $handler->display->display_options['sorts']['weight']['draggableviews_setting_arguments'] = 'none';
-  $handler->display->display_options['sorts']['weight']['draggableviews_setting_new_items_bottom_list'] = 1;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Content: Nid */
-  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['table'] = 'node';
-  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
-  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  /* Contextual filter: Section wise ordering content: Category */
+  $handler->display->display_options['arguments']['cat_id']['id'] = 'cat_id';
+  $handler->display->display_options['arguments']['cat_id']['table'] = 'itg_widget_order';
+  $handler->display->display_options['arguments']['cat_id']['field'] = 'cat_id';
+  $handler->display->display_options['arguments']['cat_id']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['cat_id']['default_argument_type'] = 'taxonomy_tid';
+  $handler->display->display_options['arguments']['cat_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['cat_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['cat_id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['cat_id']['limit'] = '0';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Section wise ordering content: Widget */
+  $handler->display->display_options['filters']['widget']['id'] = 'widget';
+  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['widget']['field'] = 'widget';
+  $handler->display->display_options['filters']['widget']['value'] = 'itg_event_speaker_widget';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['block_description'] = 'event speaker order reorder';
 
   /* Display: event speaker order reorder */
@@ -3383,7 +3372,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['relationships']['field_program_schedule_value']['table'] = 'field_data_field_program_schedule';
   $handler->display->display_options['relationships']['field_program_schedule_value']['field'] = 'field_program_schedule_value';
   $handler->display->display_options['relationships']['field_program_schedule_value']['delta'] = '-1';
-  /* Field: Field: Session Title  */
+  /* Field: Field: Kicker */
   $handler->display->display_options['fields']['field_story_expert_name']['id'] = 'field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['table'] = 'field_data_field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['field'] = 'field_story_expert_name';
@@ -3480,7 +3469,7 @@ return itg_event_backend_get_event_node();
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Field: Session Title  */
+  /* Field: Field: Kicker */
   $handler->display->display_options['fields']['field_story_expert_name']['id'] = 'field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['table'] = 'field_data_field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['field'] = 'field_story_expert_name';
@@ -3636,7 +3625,6 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'row';
   $handler->display->display_options['defaults']['group_by'] = FALSE;
-  $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'customstyle';
   $handler->display->display_options['style_options']['custom-class-columncount'] = '0';
@@ -3649,6 +3637,10 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['relationships']['field_program_schedule_value']['table'] = 'field_data_field_program_schedule';
   $handler->display->display_options['relationships']['field_program_schedule_value']['field'] = 'field_program_schedule_value';
   $handler->display->display_options['relationships']['field_program_schedule_value']['delta'] = '-1';
+  /* Relationship: Section wise ordering content: itg_widget_order nid Title */
+  $handler->display->display_options['relationships']['nid']['id'] = 'nid';
+  $handler->display->display_options['relationships']['nid']['table'] = 'itg_widget_order';
+  $handler->display->display_options['relationships']['nid']['field'] = 'nid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Field collection item: Select Speaker */
   $handler->display->display_options['fields']['field_select_speaker']['id'] = 'field_select_speaker';
@@ -3673,7 +3665,11 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['field_select_speaker_1']['label'] = '';
   $handler->display->display_options['fields']['field_select_speaker_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_select_speaker_1']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_select_speaker_1']['separator'] = ', ';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   /* Field: Global: View */
   $handler->display->display_options['fields']['view']['id'] = 'view';
   $handler->display->display_options['fields']['view']['table'] = 'views';
@@ -3682,26 +3678,31 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['view']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['view']['view'] = 'program_schedule';
   $handler->display->display_options['fields']['view']['display'] = 'block_6';
-  $handler->display->display_options['fields']['view']['arguments'] = '[%field_select_speaker]';
+  $handler->display->display_options['fields']['view']['arguments'] = '[%nid]';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Section wise ordering content: weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Content: Nid */
-  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['table'] = 'node';
-  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'php';
-  $handler->display->display_options['arguments']['nid']['default_argument_options']['code'] = 'if(function_exists(\'itg_event_backend_get_event_node\')){
+  /* Contextual filter: Section wise ordering content: Category */
+  $handler->display->display_options['arguments']['cat_id']['id'] = 'cat_id';
+  $handler->display->display_options['arguments']['cat_id']['table'] = 'itg_widget_order';
+  $handler->display->display_options['arguments']['cat_id']['field'] = 'cat_id';
+  $handler->display->display_options['arguments']['cat_id']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['cat_id']['default_argument_type'] = 'php';
+  $handler->display->display_options['arguments']['cat_id']['default_argument_options']['code'] = 'if(function_exists(\'itg_event_backend_get_event_node\')){
   return itg_event_backend_get_event_node();
 }';
-  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['cat_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['cat_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['cat_id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['cat_id']['limit'] = '0';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -3711,13 +3712,6 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'event_backend' => 'event_backend',
-  );
 
   /* Display: sponsor page block */
   $handler = $view->new_display('block', 'sponsor page block', 'block_4');
