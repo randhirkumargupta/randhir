@@ -1350,10 +1350,16 @@ function itg_widget_insert_widget_data_by_min_weight($node, $widget_name, $categ
  * @param string $type
  * @return int
  */
-function get_min_weight_for_special($type) {
+function get_min_weight_for_special($type , $cat_id = 0 , $extra = 0) {
   $max_query = db_select('itg_widget_order');
   $max_query->addExpression('MIN(weight)');
   $max_query->condition('widget', $type);
+  if(is_numeric($cat_id) && $cat_id) {
+    $max_query->condition('cat_id', $cat_id);
+  }
+  if($extra!=0 && isset($extra)) {
+    $max_query->condition('extra', $extra);
+  }
   $max_result = $max_query->execute()->fetchField();
   return isset($max_result) ? $max_result : 1;
 }
