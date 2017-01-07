@@ -1257,7 +1257,8 @@ div.vertical-tabs {
               @extend .full;
               max-width: none;
               img{
-                max-height: 124px;
+                height: 124px;
+                width: 100%;
               }
               .image-fullname{
                 @extend .desc-popup;
@@ -8675,7 +8676,7 @@ div.node{
 }
 [id*="edit-field-story-reporter"], 
 [id*="field-video-anchor-values"]{
-  table tbody{
+  tbody{
     overflow: visible !important;
   }
 }
@@ -9536,4 +9537,11 @@ span.file a{pointer-events: none;}
 .node-category-form .metatags-form > legend{display: none;}
 .node-videogallery-form #BasicDetails.itg-form-section-wrapper .itg-form-section{
   padding-bottom: 10px;
+}
+.node-story-form .itg-sidebar-form{
+  .form-field-name-field-story-syndication, .form-field-name-field-story-syndications-photo{
+    float: left;
+    width: 50%;
+    .form-type-checkboxes{margin-top: 0;}
+  }
 }
