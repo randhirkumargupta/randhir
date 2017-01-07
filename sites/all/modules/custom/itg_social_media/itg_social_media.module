@@ -313,8 +313,9 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
  *
  * {@inheritdoc}
  */
-function itg_social_media_form_submit($form, &$form_state) {  
-  $node = node_load($form_state['values']['nid']);  
+function itg_social_media_form_submit($form, &$form_state) {
+  $nid = check_plain($form_state['values']['nid']);
+  $node = node_load($nid);  
   date_default_timezone('Asia/Kolkata');      
   // Facebook section
   if (isset($form_state['values']['itg_smi']['facebook']) && $form_state['values']['itg_smi']['facebook'] === 'facebook') {    
@@ -330,7 +331,7 @@ function itg_social_media_form_submit($form, &$form_state) {
     
     // Facebook Video
     if ($form_state['values']['itg_fb_video']) {      
-      $desc = $form_state['values']['itg_facebook_video_text'];
+      $desc = $form_state['values']['itg_facebook_narrative'];
       $fid = $form_state['values']['itg_fb_video'];
       $stime = $form_state['values']['video_schedule_time'] !== '' ? strtotime($form_state['values']['video_schedule_time']) : '';      
       itg_social_media_facebook_post($fid, $desc, 'videos', $node, $stime);
@@ -339,8 +340,8 @@ function itg_social_media_form_submit($form, &$form_state) {
         'fid' => $fid,
         'display' => 1,
         'description' => ''
-      );
-      $node->field_story_facebook_vdescripti['und'][0]['value'] = $desc;
+      );      
+      $node->field_story_facebook_narrative['und'][0]['value'] = $form_state['values']['itg_facebook_narrative'];
     }    
   }
 
@@ -355,7 +356,7 @@ function itg_social_media_form_submit($form, &$form_state) {
   $node->field_story_social_media_integ['und'] = $data;
 
   // TWITTER Section
-  if ($form_state['values']['itg_smi']['twitter'] === 'twitter') {
+  if (!empty($form_state['values']['itg_smi']['twitter']) && $form_state['values']['itg_smi']['twitter'] === 'twitter') {
     // Twitter image
     if ($form_state['values']['itg_twitter_img'] > 0) {      
       $stime = $form_state['values']['tw_img_schedule_time'] != NULL ? strtotime($form_state['values']['tw_img_schedule_time']) : NULL;      
@@ -375,23 +376,23 @@ function itg_social_media_form_submit($form, &$form_state) {
     // Twitter video
     if ($form_state['values']['itg_twit_video'] > 0) { 
       $stime = $form_state['values']['tw_vid_schedule_time'] != NULL ? strtotime($form_state['values']['tw_vid_schedule_time']) : NULL;      
-      $desc = $form_state['values']['field_story_twitter_video_desc'];
+      $desc = $form_state['values']['itg_twitter_narrative'];
       $fid = $form_state['values']['itg_twit_video'];
       $node->field_story_twitter_video['und'][] = array(
         'fid' => $fid,
         'display' => 1,
         'description' => ''
       );
-      $node->field_story_twitter_video_desc['und'][0]['value'] = $desc;
+      $node->field_story_tweet['und'][0]['value'] = $desc;
       if ($stime != NULL) {
         itg_social_media_save_scheduled_post($node, 'Twitter Video', $stime);
       }
       else {
         itg_social_media_tvideo_post($fid, $desc, $node);
-      }
-      
+      }      
     }
   }
+  // Save node object.
   node_save($node);  
 }
 
