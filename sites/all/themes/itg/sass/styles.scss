@@ -8313,7 +8313,7 @@ input[type="radio"]:checked + label:after{
     top: 100px;        
     background: #f2f2f2;    
     border-radius: 3px;
-    box-shadow: 2px 2px 3px #ccc;
+    box-shadow: 0px 0px 4px #ccc;
     text-align: center;
     border-right: 1px solid #b3b3b3;     
     ul{       
@@ -8329,13 +8329,13 @@ input[type="radio"]:checked + label:after{
         min-width: 100%;
         height: 75px;
         overflow: hidden;
-        &:hover{
-             background: #fff;
-             a{
-                background: #fff;
-                color: #b00202;                   
-             }             
-         }
+        a{
+            vertical-align: middle;
+            display: table-cell;
+            height: 75px;
+            text-align: center;
+            width: 58px;
+        }       
     }
     img{
         margin: 0 auto;
@@ -8352,6 +8352,13 @@ input[type="radio"]:checked + label:after{
         word-wrap: break-word;
         color:#383838;    
         height:100%;
+        &:hover{
+             background: #fff;
+                color: #b00202;
+        }
+        &.sponsored-active{
+            background: #ffc106;
+        }
     }
     .vertical-menu-parent{  
             height: 375px;

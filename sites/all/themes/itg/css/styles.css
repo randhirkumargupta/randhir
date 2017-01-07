@@ -9767,7 +9767,7 @@ footer .footer-copyright {
   top: 100px;
   background: #f2f2f2;
   border-radius: 3px;
-  box-shadow: 2px 2px 3px #ccc;
+  box-shadow: 0px 0px 4px #ccc;
   text-align: center;
   border-right: 1px solid #b3b3b3;
 }
@@ -9785,12 +9785,12 @@ footer .footer-copyright {
   height: 75px;
   overflow: hidden;
 }
-#block-itg-menu-manager-vertical-menu li:hover {
-  background: #fff;
-}
-#block-itg-menu-manager-vertical-menu li:hover a {
-  background: #fff;
-  color: #b00202;
+#block-itg-menu-manager-vertical-menu li a {
+  vertical-align: middle;
+  display: table-cell;
+  height: 75px;
+  text-align: center;
+  width: 58px;
 }
 #block-itg-menu-manager-vertical-menu img {
   margin: 0 auto;
@@ -9809,6 +9809,13 @@ footer .footer-copyright {
   word-wrap: break-word;
   color: #383838;
   height: 100%;
+}
+#block-itg-menu-manager-vertical-menu a:hover {
+  background: #fff;
+  color: #b00202;
+}
+#block-itg-menu-manager-vertical-menu a.sponsored-active {
+  background: #ffc106;
 }
 #block-itg-menu-manager-vertical-menu .vertical-menu-parent {
   height: 375px;
