@@ -8518,7 +8518,16 @@ input[type="radio"]:checked + label:after{
 }
 /*email and change password end*/
 /*css start static pages menu*/
-
+h1.about-us-heading{
+    text-transform: capitalize;
+    font-size: 35px;
+    + div{
+        p{
+            padding: 10px 0;
+            color:#7e7e7e;
+        }
+    }
+}
 #block-menu-menu-about-us-page-menu{
     ul{
         @extend .list-none;      
