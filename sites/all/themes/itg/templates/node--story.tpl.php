@@ -70,28 +70,31 @@ if (!empty($content)):
                 $pipelinetext=' <span class="story-pipline">||</span> <a target="_blank" href="'.$node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'].'">'.ucfirst($node->field_story_new_title[LANGUAGE_NONE][0]['value']).'</a>';
             }
             if(!empty($get_develop_story_status)) {?>
-            <h1><?php print $node->title.$pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true"></i></h1>
+            <h1><?php print $node->title.$pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
             <?php } else { ?>
             <h1><?php print $node->title.$pipelinetext; ?></h1>
             <?php } ?>
+            <?php
+              $associate_type = '';
+              $associate_id = '';
+                   
+              if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
+                $associate_type = 'gallery';
+                $associate_id = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
+              } else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') {
+                  $associate_type = 'video';
+                  $associate_id = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
+              }
+              $associate_type = 'gallery';
+              ?>
+           <a href="javascript:void(0)" class="associate-content-block" data-widget="<?php echo $associate_type;?>-<?php echo $associate_id;?>">click here</a>
+           <div id="videogallery-iframe"></div>
             <div class="story-left-section">
                 <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_listicle[LANGUAGE_NONE])) { ?>
                     <div class="story-left">
                         <div class="byline">              
                             <div class="profile-pic">
-                               <?php
-              /*$associate_type = '';
-              $associate_id = '';
-                        
-              if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
-                $associate_type = 'gallery';
-                $associate_id = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
-              } else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
-                  $associate_type = 'video';
-                  $associate_id = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
-              }*/
-              ?>
-<!--              <a href="javascript:void(0)" class="associate-content-block" data-widget="<?php //echo $associate_type;?>-<?php //echo $associate_id;?>">click</a>-->
+                               
                                 <?php
                                 $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                                 if (!empty($file)) {
@@ -219,16 +222,25 @@ if (!empty($content)):
                                      <li><div id="fb-root"></div><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
                                      <li><a title = "share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
                                      <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
-                                     <?php
-                                     if ($config_name == 'vukkul') {
-                                     ?>
+                                     <?php if ($config_name == 'vukkul'): ?>
                                      <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
-                                     <?php } if ($config_name == 'other') { ?> 
+                                     <?php endif; ?>
+                                     <?php if ($config_name == 'other'): ?> 
                                      <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
-                                     <?php } ?>
-                                     <li><a href="javascript:void(0)" title="READ LATER"><i class="fa fa-bookmark"></i></a>
-                                         <span></span>
+                                     <?php endif; ?>
+                                     
+                                     <li>
+                                         <?php if ($user->uid > 0): ?>
+                                         <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>
+                                         <?php print $read_later; ?>                                         
+                                         <?php else: ?>
+                                         <?php if(function_exists(itg_sso_url)): ?>
+                                           <?php print itg_sso_url('<i class="fa fa-bookmark"></i>READ LATER', 'READ LATER'); ?>
+                                         <?php endif; ?>
+                                         
+                                         <?php endif; ?>
                                      </li>
+                                     
                                  </ul>
                              </div>
                         </div>
@@ -393,19 +405,20 @@ if (!empty($content)):
                             $num = 1;
                             foreach ($wrapper->field_story_listicle as $i):
                               $listicletype = '';
+                           
                               print '<div class="listicle-detail">';
                               $type = $i->field_story_listicle_type->value();
                               $description = $i->field_story_listicle_description->value();
-                              $color = $i->field_story_listicle_color->value();
+                               $color = $i->field_listicle_color ->value();
                               $li_type =$node->field_story_templates[LANGUAGE_NONE][0]['value'];
-                              $color = ($color['rgb']) ? $color['rgb'] : '#000000';
+                              $color = ($color) ? $color : '#000000';
                               if($li_type=='bullet_points')
                               {
                                   print '<span class="bullet_points"></span>';
                               } else {
                                   print '<span>' . $num . '</span>';
                               }
-                              
+
                               if (isset($type)) {
                                 $listicletype = '<span class="listicle-type" style="color: ' . $color . '">' . $type . ': </span>';
                               }
@@ -484,11 +497,11 @@ if (!empty($content)):
                   $get_val = '0'.arg(1);
                   $like = itg_flag_get_count($get_val, 'like_count');
                   $dislike = itg_flag_get_count($get_val, 'dislike_count');
-                  if (!empty($like)) {
-                    $like_count = $like;
+                  if (!empty($like['like_count'])) {
+                    $like_count = $like['like_count'];
                   }
-                  if (!empty($dislike)) {
-                    $dislike_count = $dislike;
+                  if (!empty($dislike['dislike_count'])) {
+                    $dislike_count = $dislike['dislike_count'];
                   }
                   $pid = "voted_" . $get_val;
                   $like = "no-of-likes_" . $get_val;
@@ -513,10 +526,10 @@ if (!empty($content)):
                           <?php
                               if ($config_name == 'vukkul') {
                           ?>
-                                <span id="dsty-dv" style="display:none"><?php print t('Too bad.');?></br> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><?php print t('comments section');?></a></span> 
+                                <span id="dsty-dv" style="display:none"><?php print t('Too bad.');?></br> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><?php print t('comments');?></a></span> 
                             
                           <?php } if ($config_name == 'other') { ?> 
-                                <span id="dsty-dv" style="display:none"><?php print t('Too bad.');?></br> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><?php print t('comments section');?></a></span> 
+                                <span id="dsty-dv" style="display:none"><?php print t('Too bad.');?></br> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><?php print t('comments');?></a></span> 
                           <?php } ?>
                                 
                             </span>                                       
@@ -567,11 +580,11 @@ if (!empty($content)):
                             <?php
                             $like = itg_flag_get_count(arg(1), 'like_count');
                             $dislike = itg_flag_get_count(arg(1), 'dislike_count');
-                            if (!empty($like)) {
-                                $like_count = '(' . $like . ')';
+                            if (!empty($like['like_count'])) {
+                                $like_count = '(' . $like['like_count'] . ')';
                             }
-                            if (!empty($dislike)) {
-                                $dislike_count = '(' . $dislike . ')';
+                            if (!empty($dislike['dislike_count'])) {
+                                $dislike_count = '(' . $dislike['dislike_count'] . ')';
                             }
                             $pid = "voted_" . arg(1);
                             $like = "no-of-likes_" . arg(1);
@@ -639,6 +652,7 @@ if (!empty($content)):
                         <?php print render($content['comments']); ?>
                     </div>
                 <?php } ?>
-            </div>
-        </div>
+            </div>            
+        </div>               
+        
     <?php endif; ?>

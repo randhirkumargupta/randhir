@@ -81,6 +81,7 @@ function itg_syndication_client_node_form_custom_validate($form, &$form_state) {
     form_set_error("syndication_client_node_form", "FTP username can't be same");
   }
 }
+
 /**
  * After build callback function.
  * @param array $form
@@ -258,6 +259,7 @@ function itg_syndication_form_syndication_rule_node_form_alter(&$form, &$form_st
   $form['#after_build'][] = 'itg_syndication_rule_after_build';
   $form['actions']['submit']['#submit'][] = 'itg_syndication_rule_change_message';
   $form['#validate'][] = 'itg_syndication_rule_after_build_validate';
+  drupal_add_js(drupal_get_path('module', 'itg_menu_manager') . '/js/itg_menu_manager.js','file');
 }
 
 /**
@@ -494,34 +496,34 @@ function itg_syndication_rule_after_build_validate($form, &$form_state) {
 
   $lang = isset($form_state['values']['language']) ? $form_state['values']['language'] : LANGUAGE_NONE;
   foreach ($form_state['values']['field_syndication_rule_details'][$lang] as $k => $item) {
-    if ($k === 'add_more')
+    if ($k === 'add_more') {
       continue; // skip loop if key is add_more
-    $syndication_frequency = $item['field_syndication_frequency'][$lang][0]['value'];
-    if ($syndication_frequency == 'Weekly') {
-      if (isset($item['field_syndication_set_day'][$lang][0]['value']) && !empty($item['field_syndication_set_day'][$lang][0]['value'])) {
-        
-      }
-      else {
-        form_set_error('field_syndication_rule_details][' . $lang . '][' . $k . '][field_syndication_set_day', t('Set Day field is required for row[' . ($k + 1) . ']'));
-      }
-    }
-
-    if ($syndication_frequency == 'Monthly') {
-      if (isset($item['field_syndication_set_day_month'][$lang][0]['value']) && !empty($item['field_syndication_set_day_month'][$lang][0]['value'])) {
-        
-      }
-      else {
-        form_set_error('field_syndication_rule_details][' . $lang . '][' . $k . '][field_syndication_set_day_month', t('Set Date field is required for row[' . ($k + 1) . ']'));
-      }
-    }
-
-    if (isset($item['field_syndication_time'][$lang][0]['value']) && !empty($item['field_syndication_time'][$lang][0]['value'])) {
-      
     }
     else {
+      $syndication_frequency = $item['field_syndication_frequency']['und'][0]['value'];
+      $syndication_day = $item['field_syndication_set_day']['und'][0]['value'];
+      $syndication_monthly = $item['field_syndication_set_day_month']['und'][0]['value'];
+      //$syndication_frequency = $item['field_syndication_frequency'][$lang][0]['value'];
+      if ($syndication_frequency == 'Weekly') {
+        if (empty($syndication_day)) {
+          form_set_error('field_syndication_rule_details][' . $lang . '][' . $k . '][field_syndication_set_day', t('Set Day field is required for row[' . ($k + 1) . ']'));
+        }
+      }
 
-      if (preg_match("/(2[0-4]|[01][1-9]|10):([0-5][0-9])/", $item['field_syndication_time'][$lang][0]['value'])) {
-        form_set_error('field_syndication_rule_details][' . $lang . '][' . $k . '][field_syndication_time', t('Set Date field format should be “HH:MM” for row[' . ($k + 1) . ']'));
+      if ($syndication_frequency == 'Monthly') {
+        if (empty($syndication_monthly)) {
+          form_set_error('field_syndication_rule_details][' . $lang . '][' . $k . '][field_syndication_set_day_month', t('Set Date field is required for row[' . ($k + 1) . ']'));
+        }
+      }
+
+      if (isset($item['field_syndication_time'][$lang][0]['value']) && !empty($item['field_syndication_time'][$lang][0]['value'])) {
+        
+      }
+      else {
+
+        if (preg_match("/(2[0-4]|[01][1-9]|10):([0-5][0-9])/", $item['field_syndication_time'][$lang][0]['value'])) {
+          form_set_error('field_syndication_rule_details][' . $lang . '][' . $k . '][field_syndication_time', t('Set Date field format should be “HH:MM” for row[' . ($k + 1) . ']'));
+        }
       }
     }
   }

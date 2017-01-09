@@ -235,7 +235,7 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
 
         $source_type = "<select class='form-item form-type-select' id='fake-soruce-type'>";
         foreach ($option as $option_value => $option_element) {
-            if ($_GET['field_story_source_type_value'] == $option_value) {
+            if (!empty($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == $option_value) {
                 $select = "selected";
             }
             else {

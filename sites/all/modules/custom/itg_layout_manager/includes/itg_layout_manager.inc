@@ -10,7 +10,7 @@
  */
 
 function itg_layout_admin() {
-  
+  $data = '';
   if (isset($_GET['section']) && isset($_GET['template_name'])) {    
     $data = get_layout_details($_GET['section'], $_GET['template_name'], 'admin');    
   }
@@ -39,7 +39,7 @@ function itg_layout_list() {
     array('data' => t('Action')),
   );
   
-  if ($_GET['items_per_page']) {
+  if (isset($_GET['items_per_page'])) {
     $items_per_page = $_GET['items_per_page'];
   }
   else {
@@ -77,8 +77,8 @@ function itg_layout_list() {
     );
     $count++;
   }
-  
-  $output = render(drupal_get_form('itg_layout_manager_filter_form'));
+  $filter_form = drupal_get_form('itg_layout_manager_filter_form');
+  $output = render($filter_form);
   $output .= '<div class="view"><div class="attachment"><span class="count">Count (' . $count . ') </span>';
   $output .= l(t('Add New Template'), 'itg-layout-manager/'.  arg(1)).'</div></div>';  
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));

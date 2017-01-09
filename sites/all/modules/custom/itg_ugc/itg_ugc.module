@@ -92,23 +92,6 @@ function itg_ugc_send_follow_story_content_mail($node) {
   }
 }
 
-/**
- * Implements itg_get_follow_story_user
- * @param int $nid
- * @param int $status
- */
-function itg_get_follow_story_user($nid, $status) {
-  if (function_exists('mongodb')) {
-    $con = mongodb();
-    $people = $con->front_user_activity;
-    $cond = array('nid' => $nid, 'status' => $status);
-    $cursor = $people->find($cond);
-    foreach ($cursor as $document) {
-      $options[] = $document['uid'];
-    }
-    return $options;
-  }
-}
 
 /**
  * Implements itg_get_user_email_by_id

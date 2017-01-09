@@ -95,13 +95,16 @@ function itg_story_get_content_nid($nid) {
  * 
  */
 function associate_photo_video_content() {
-  
+  //p(arg(2));
    if (arg(1) == 'video') {
-     if (function_exists('get_video_in_fieldcollection_by_nid')) {
-      $videoids = get_video_in_fieldcollection_by_nid(arg(2));
+       
+     if (function_exists('itg_widget_dailymotion_get_videogallery_slider')) {
+         print '<div class="big-story-popup"><span id="close-big-story"><a href="#">X</a></span>';
+      print $videoids = itg_widget_dailymotion_get_videogallery_slider(arg(2));
+      print '</div>';
     }
    } else if (arg(1) == 'gallery') {
-      echo views_embed_view('photo_landing_slider','block', arg(2));
+      print views_embed_view('photo_landing_slider','block', arg(2));
    }    
       
 }
