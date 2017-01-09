@@ -30,6 +30,9 @@
     h4{
         font-size: $mobile-h4-font-size;
         line-height: $h4-line-height;
+    }
+    .static-feedback-from h1{
+        font-size: 26px;
     }    
 
     #block-itg-layout-manager-header-block{ 
@@ -293,6 +296,29 @@
 }
 /*Election page css end*/
 
+/*static pages start*/
+.static-feedback-from .webform-submit-social, .static-feedback-from .form-actions, .static-feedback-from .or-share-detail{
+    padding-left: 0;    
+}
+.static-feedback-from .name-email-continer > div.user-name label{
+    text-align: left;
+}
+.static-feedback-from .submit-feedback{
+    width: 100%;
+}
+.static-feedback-from .webform-submit-social{
+    a{
+        display:block;
+        img{
+            max-width: 100px;
+            &:first-child{
+                max-width:  90px;
+            }
+        }   
+    }    
+}
+/*static page end*/
+
 }   
 @media only screen and (max-width:991px){
     /*CSS start education page special*/
@@ -372,7 +398,6 @@
     }  
 }
 /*story page css end*/
-
 
 }
 
@@ -1570,6 +1595,28 @@
         }
     }
     /*election page css end*/
+    
+/*static page css start*/
+.static-feedback-from .name-email-continer input[type="text"]{
+    width: 100%;
+}
+.static-feedback-from .webform-submit-social{
+    a{        
+        img{
+            @include display-inline;
+            margin-bottom: 10px;
+        }   
+    }    
+}
+.static-feedback-from .form-submit{    
+    height: 40px;
+    width: 140px;    
+    font-size: 16px;    
+    font-weight: 300;
+}
+/*static page css end*/
+    
+    
 }
 
 /*Start header CSS Desktop version*/

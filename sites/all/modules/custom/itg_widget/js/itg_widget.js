@@ -90,7 +90,7 @@ Drupal.behaviors.itg_widgets = {
                 beforeSend: function() {
                    // $('.itg-ajax-loader').show();
                 },
-                success: function(data) {
+                success: function(data) {                    
                    jQuery ("#videogallery-iframe").html (data);                   
                    videoGallery();
                 }
