@@ -221,6 +221,7 @@ function feature_smi_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'recipe' => 'recipe',
     'story' => 'story',
+    'videogallery' => 'videogallery',
     'photogallery' => 'photogallery',
   );
   $handler->display->display_options['filters']['type']['exposed'] = TRUE;
@@ -252,6 +253,9 @@ function feature_smi_views_default_views() {
     18 => 0,
     23 => 0,
     22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
   /* Filter criterion: Content: Type */
@@ -261,6 +265,7 @@ function feature_smi_views_default_views() {
   $handler->display->display_options['filters']['type_1']['value'] = array(
     'recipe' => 'recipe',
     'story' => 'story',
+    'videogallery' => 'videogallery',
     'photogallery' => 'photogallery',
   );
   /* Filter criterion: Content: Schedule date &amp; time (field_story_schedule_date_time) */
