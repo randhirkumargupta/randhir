@@ -220,16 +220,25 @@ if (!empty($content)):
                                      <li><div id="fb-root"></div><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
                                      <li><a title = "share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
                                      <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
-                                     <?php
-                                     if ($config_name == 'vukkul') {
-                                     ?>
+                                     <?php if ($config_name == 'vukkul'): ?>
                                      <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
-                                     <?php } if ($config_name == 'other') { ?> 
+                                     <?php endif; ?>
+                                     <?php if ($config_name == 'other'): ?> 
                                      <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
-                                     <?php } ?>
-                                     <li><a href="javascript:void(0)" title="READ LATER"><i class="fa fa-bookmark"></i></a>
-                                         <span></span>
+                                     <?php endif; ?>
+                                     
+                                     <li>
+                                         <?php if ($user->uid > 0): ?>
+                                         <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>
+                                         <?php print $read_later; ?>                                         
+                                         <?php else: ?>
+                                         <?php if(function_exists(itg_sso_url)): ?>
+                                           <?php print itg_sso_url('<i class="fa fa-bookmark"></i>READ LATER', 'READ LATER'); ?>
+                                         <?php endif; ?>
+                                         
+                                         <?php endif; ?>
                                      </li>
+                                     
                                  </ul>
                              </div>
                         </div>
@@ -486,11 +495,11 @@ if (!empty($content)):
                   $get_val = '0'.arg(1);
                   $like = itg_flag_get_count($get_val, 'like_count');
                   $dislike = itg_flag_get_count($get_val, 'dislike_count');
-                  if (!empty($like)) {
-                    $like_count = $like;
+                  if (!empty($like['like_count'])) {
+                    $like_count = $like['like_count'];
                   }
-                  if (!empty($dislike)) {
-                    $dislike_count = $dislike;
+                  if (!empty($dislike['dislike_count'])) {
+                    $dislike_count = $dislike['dislike_count'];
                   }
                   $pid = "voted_" . $get_val;
                   $like = "no-of-likes_" . $get_val;
@@ -515,10 +524,10 @@ if (!empty($content)):
                           <?php
                               if ($config_name == 'vukkul') {
                           ?>
-                                <span id="dsty-dv" style="display:none"><?php print t('Too bad.');?></br> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><?php print t('comments section');?></a></span> 
+                                <span id="dsty-dv" style="display:none"><?php print t('Too bad.');?></br> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><?php print t('comments');?></a></span> 
                             
                           <?php } if ($config_name == 'other') { ?> 
-                                <span id="dsty-dv" style="display:none"><?php print t('Too bad.');?></br> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><?php print t('comments section');?></a></span> 
+                                <span id="dsty-dv" style="display:none"><?php print t('Too bad.');?></br> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><?php print t('comments');?></a></span> 
                           <?php } ?>
                                 
                             </span>                                       
@@ -569,11 +578,11 @@ if (!empty($content)):
                             <?php
                             $like = itg_flag_get_count(arg(1), 'like_count');
                             $dislike = itg_flag_get_count(arg(1), 'dislike_count');
-                            if (!empty($like)) {
-                                $like_count = '(' . $like . ')';
+                            if (!empty($like['like_count'])) {
+                                $like_count = '(' . $like['like_count'] . ')';
                             }
-                            if (!empty($dislike)) {
-                                $dislike_count = '(' . $dislike . ')';
+                            if (!empty($dislike['dislike_count'])) {
+                                $dislike_count = '(' . $dislike['dislike_count'] . ')';
                             }
                             $pid = "voted_" . arg(1);
                             $like = "no-of-likes_" . arg(1);
