@@ -70,7 +70,8 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                         <ul>
                             <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span><?php
                                         if (function_exists(itg_flag_get_count)) {
-                                            print $like_count = itg_flag_get_count(arg(1), 'like_count');
+                                             $like_count = itg_flag_get_count(arg(1), 'like_count');
+                                             print $like_count['like_count'];
                                         }
                                         ?></span></a></li>
                             <li><?php print $row['ops']; ?></li>
@@ -108,7 +109,8 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                         <ul>
                             <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span><?php
                                         if (function_exists(itg_flag_get_count)) {
-                                            print $like_count = itg_flag_get_count(arg(1), 'like_count');
+                                             $like_count = itg_flag_get_count(arg(1), 'like_count');
+                                              print $like_count['like_count'];
                                         }
                                         ?></span></a></li>
                             <li><?php print $row['ops']; ?></li>
