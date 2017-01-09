@@ -687,7 +687,7 @@ function itg_videogallery_after_build($form, &$form_state) {
     }
 
 
-  $settings = array();
+    $settings = array();
     $settings['base_url'] = $base_url;
     $settings['uid'] = $user->uid;
     drupal_add_js(array('itg_videogallery' => array('settings' => $settings)), array('type' => 'setting'));
