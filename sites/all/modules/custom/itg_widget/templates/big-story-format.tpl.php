@@ -67,7 +67,7 @@ if (!empty($data)) :
               $get_develop_story_status = itg_msi_get_lock_story_status($data['node_data']->nid, 'developing_story');
               if (!empty($get_develop_story_status)) {
                 $red_dot_class = "";
-                $node_title = $node_title . "<i class='fa fa-circle' aria-hidden='true'></i>";
+                $node_title = $node_title . "<i class='fa fa-circle' aria-hidden='true' title='Development story'></i>";
               }
             }
 
