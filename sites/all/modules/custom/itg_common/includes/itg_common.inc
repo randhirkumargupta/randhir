@@ -408,22 +408,35 @@ function itg_get_related_story_id($related_content) {
 /** 
  * Implements itg_sso_url
  * @param string $link_name
+ *   Link text.
+ * @param string $link_title
+ *   In case link text is an Icon.
  */
 
-function itg_sso_url($link_name) {
+function itg_sso_url($link_name, $link_title = NULL) {
   global $user;
   $site = 'indiatoday';
   if ($_SERVER['HTTP_HOST'] == PARENT_SSO) {
     if ($user->uid == 0) {
       $url = 'http://' . PARENT_SSO . '/saml_login/other/domain_info';
-      return '<a title ="'.$link_name.'" href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, ' . "'" . $url . "'" . ', ' . "'" . $site . "'" . ')">' . $link_name . '</a>';
+      if ($link_title !== NULL) {
+        return '<a title ="'.$link_title.'" href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, ' . "'" . $url . "'" . ', ' . "'" . $site . "'" . ')">' . $link_name . '</a>';
+      }
+      else {
+        return '<a title ="'.$link_name.'" href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, ' . "'" . $url . "'" . ', ' . "'" . $site . "'" . ')">' . $link_name . '</a>';
+      }      
     }
   }
   else {
     if ($user->uid == 0) {
       $url = PARENT_SSO;
       $sam_param = '/saml_login/other';
-      return '<a title ="'.$link_name.'" href="javascript:void(0)" onclick="Go (550, 500, 50, ' . "'" . $site . "'" . ', ' . "'" . $site . "'" . ', ' . "'" . $url . "'" . ', ' . "'" . $sam_param . "'" . ')">'. $link_name .'</a>';
+      if ($link_title !== NULL) {
+        return '<a title ="'.$link_title.'" href="javascript:void(0)" onclick="Go (550, 500, 50, ' . "'" . $site . "'" . ', ' . "'" . $site . "'" . ', ' . "'" . $url . "'" . ', ' . "'" . $sam_param . "'" . ')">'. $link_name .'</a>';
+      }
+      else {
+        return '<a title ="'.$link_name.'" href="javascript:void(0)" onclick="Go (550, 500, 50, ' . "'" . $site . "'" . ', ' . "'" . $site . "'" . ', ' . "'" . $url . "'" . ', ' . "'" . $sam_param . "'" . ')">'. $link_name .'</a>';
+      }
      
     }
   }
