@@ -4,6 +4,59 @@
  */
 Drupal.behaviors.itg_widgets = {
   attach: function (context, settings) {
+       //common function for popup video
+   function videoGallery(){          
+       jQuery ("#videogallery-iframe").show ();
+       jQuery('.big-story-col-1 .loading-popup').hide();      
+        jQuery('.videogallery-slider').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            fade: false,
+            asNavFor: '.video-slider-images ul'
+        });               
+            jQuery('.video-slider-images ul').slick({
+                slidesToShow: 7,
+                slidesToScroll: 1,
+                asNavFor: '.videogallery-slider',
+                dots: false,
+                centerMode: false,
+                arrows: true,
+                variableWidth: true,
+                focusOnSelect: true,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 7,
+                            slidesToScroll: 1,
+                            arrows: false
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 4,
+                            arrows: false,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 3,
+                            arrows: false,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });              
+        jQuery("#videogallery-iframe").on('click', '#close-big-story', function () {
+            jQuery("#videogallery-iframe").html(" ");
+            jQuery("#videogallery-iframe").hide();
+        }); 
+  
+   }
       //alert('@@@');
 
     //        jQuery('#edit-actionitg-widget-categories-wise-node-group').click(function() {
@@ -25,8 +78,7 @@ Drupal.behaviors.itg_widgets = {
     //            return false;
     //        });
     jQuery ('.associate-content-block').click (function () {        
-        var widgets_type = jQuery(this).attr('data-widget');
-        
+        var widgets_type = jQuery(this).attr('data-widget');        
         var widgets_type_array = widgets_type.split("-");
         var widgets_type = widgets_type_array[0];
         var widgets_id = widgets_type_array[1];
@@ -39,7 +91,8 @@ Drupal.behaviors.itg_widgets = {
                    // $('.itg-ajax-loader').show();
                 },
                 success: function(data) {
-                   jQuery("#associate_content_block").html(data);
+                   jQuery ("#videogallery-iframe").html (data);                   
+                   videoGallery();
                 }
             });
     });
@@ -325,63 +378,14 @@ jQuery (document).ready (function () {
   //        }
   //    });
   jQuery ("div.big-news-content-videogallery a.has-ajax-big-story").click (function () {
-      jQuery('.big-story-col-1 .loading-popup').show();
+    jQuery('.big-story-col-1 .loading-popup').show();
     var nid = jQuery (this).attr ("data-nid");
     jQuery.get ("big-story-video-gallery/" + nid, function (data) {      
       // add new data data.
-      jQuery ("#videogallery-iframe").html (data);
-       jQuery ("#videogallery-iframe").show ();
-       jQuery('.big-story-col-1 .loading-popup').hide();
-      
-        jQuery('.videogallery-slider').slick({
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                arrows: false,
-                fade: false,
-                asNavFor: '.video-slider-images ul'
-            });               
-            jQuery('.video-slider-images ul').slick({
-                slidesToShow: 7,
-                slidesToScroll: 1,
-                asNavFor: '.videogallery-slider',
-                dots: false,
-                centerMode: false,
-                arrows: true,
-                variableWidth: true,
-                focusOnSelect: true,
-                responsive: [
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: 7,
-                            slidesToScroll: 1,
-                            arrows: false
-                        }
-                    },
-                    {
-                        breakpoint: 600,
-                        settings: {
-                            slidesToShow: 4,
-                            arrows: false,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 480,
-                        settings: {
-                            slidesToShow: 3,
-                            arrows: false,
-                            slidesToScroll: 1
-                        }
-                    }
-                ]
-            });         
+        jQuery ("#videogallery-iframe").html (data);      
+        videoGallery();
     });
   });
-  jQuery ("#videogallery-iframe").on ('click','#close-big-story', function () {        
-        jQuery ("#videogallery-iframe").html(" ");
-        jQuery ("#videogallery-iframe").hide();
-      });
   
   jQuery("select#fake-soruce-type").on("change",function(){
     var soruce_type = jQuery(this).val();

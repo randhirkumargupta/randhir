@@ -1009,7 +1009,7 @@ function itg_get_video_display_for_big_story($nid) {
 function itg_widget_dailymotion_get_videogallery_slider($nid) {
   $videoids = "";
 
-  print '<div class="videogallery-slider">';
+  print '<div class="videogallery-slider slider-for-nid-'.$nid.'">';
   if (function_exists('get_video_in_fieldcollection_by_nid')) {
     $videoids = get_video_in_fieldcollection_by_nid($nid);
   }
@@ -1037,7 +1037,7 @@ function itg_widget_dailymotion_get_videogallery_slider($nid) {
                   src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=0&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
                   allowfullscreen></iframe>
         </div>
-        <?php print ucfirst($video_value->field_videogallery_description_value) ?>
+        <?php// print ucfirst($video_value->field_videogallery_description_value) ?>
       </div>
 
       <?php
