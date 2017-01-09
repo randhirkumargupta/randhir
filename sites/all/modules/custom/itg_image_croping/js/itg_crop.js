@@ -23,7 +23,15 @@
     });
     jQuery('form').submit(function() {
         // Move cropped image data to hidden input
-        var imageData = jQuery('.image-editor').cropit('export');
+         var image_exten=jQuery('#image_exten').val();
+         if(image_exten == ""){
+             image_exten='png';
+         }
+         alert(image_exten);
+        var imageData = jQuery('.image-editor').cropit('export',{
+        type: 'image/'+image_exten,
+       
+    });
         jQuery('.hidden-image-data').val(imageData);
 
         // Print HTTP request params
@@ -53,9 +61,22 @@
 
     jQuery('.crop-image').click(function() {
          showloader();
+         
+         var image_exten=jQuery('#image_exten').val();
+         if(image_exten == ""){
+             image_exten='png';
+         }
+         if(image_exten=='jpg')
+         {
+          image_exten='jpeg';   
+         }
         var content_type = jQuery('#data_content_name').val();
         var field_name = jQuery('#data_field_name').val();
-        var image_data_first = jQuery('.image-editor').cropit('export');
+        var image_data_first = jQuery('.image-editor').cropit('export',{
+        type: 'image/'+image_exten,
+        
+       
+    });
         var imagefield = []; // more efficient than new Array()
         jQuery(".checkbox-image-size").each(function() {
             if (jQuery(this).is(':checked'))
