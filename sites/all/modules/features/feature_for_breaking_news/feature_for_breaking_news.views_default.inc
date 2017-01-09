@@ -302,10 +302,11 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_type']['table'] = 'field_data_field_type';
   $handler->display->display_options['fields']['field_type']['field'] = 'field_type';
   $handler->display->display_options['fields']['field_type']['element_label_colon'] = FALSE;
-  /* Field: Content: Activate Live TV */
+  /* Field: Content: Video expires */
   $handler->display->display_options['fields']['field_story_expires']['id'] = 'field_story_expires';
   $handler->display->display_options['fields']['field_story_expires']['table'] = 'field_data_field_story_expires';
   $handler->display->display_options['fields']['field_story_expires']['field'] = 'field_story_expires';
+  $handler->display->display_options['fields']['field_story_expires']['label'] = 'Activate Live TV';
   $handler->display->display_options['fields']['field_story_expires']['type'] = 'list_key';
   $handler->display->display_options['fields']['field_story_expires']['delta_offset'] = '0';
   /* Field: Content: Display on */
@@ -550,6 +551,7 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_breaking_tile']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['field_breaking_tile']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['field_breaking_tile']['alter']['max_length'] = '100';
+  $handler->display->display_options['fields']['field_breaking_tile']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['field_breaking_tile']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -628,6 +630,7 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_breaking_tile']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['field_breaking_tile']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['field_breaking_tile']['alter']['max_length'] = '100';
+  $handler->display->display_options['fields']['field_breaking_tile']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['field_breaking_tile']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Section (field_section) */

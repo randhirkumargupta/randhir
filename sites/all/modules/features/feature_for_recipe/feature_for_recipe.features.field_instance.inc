@@ -1604,6 +1604,45 @@ function feature_for_recipe_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-food_news-field_story_syndication'.
+  $field_instances['node-food_news-field_story_syndication'] = array(
+    'bundle' => 'food_news',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_syndication',
+    'label' => 'Syndication',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 16,
+    ),
+  );
+
   // Exported field_instance: 'node-food_news-field_stroy_city'.
   $field_instances['node-food_news-field_stroy_city'] = array(
     'bundle' => 'food_news',
@@ -2526,7 +2565,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-recipe-field_recipe_writer_image'] = array(
     'bundle' => 'recipe',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (88 x 66)',
     'display' => array(
       'default' => array(
         'label' => 'above',
