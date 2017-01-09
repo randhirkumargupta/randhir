@@ -962,7 +962,11 @@ function daily_motion_video_dashboard($form, &$form_state) {
     return $form;
 }
 
-
+/**
+ * this function use for reset dailymotion dashboard filter
+ * @param type $form
+ * @param type $form_state
+ */
 function itg_videogallery_daily_motion_video_reset($form, $form_state) {
 
   drupal_goto('daily-motion-video-dashboard');
