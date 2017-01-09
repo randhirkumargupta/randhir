@@ -6,15 +6,19 @@
  *
  * @ingroup views_templates
  */
+$arg = arg(1);
+if (is_numeric($arg[1]) && isset($arg[1])) {
+  $nid = arg(1);
+}
 // Logic for default feature video on sosorry page if feature is not selected in widget.
-if (function_exists('get_recent_created_node_for_sosorry')) {
+if(function_exists('get_feature_nid_in_sosorry')){
+  $nid = get_feature_nid_in_sosorry();
+}
+if (function_exists('get_recent_created_node_for_sosorry') && empty($nid)) {
   $nid = get_recent_created_node_for_sosorry();
 }
-if (is_numeric(arg(1))) {
-  $nid = arg(1);
-  if (function_exists('itg_widget_dailymotion_get_videogallery_slider')) {
+if (function_exists('itg_widget_dailymotion_get_videogallery_slider')) {
     itg_widget_dailymotion_get_videogallery_slider($nid);
-  }
 }
 ?>
 

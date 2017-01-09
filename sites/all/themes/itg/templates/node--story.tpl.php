@@ -70,7 +70,7 @@ if (!empty($content)):
                 $pipelinetext=' <span class="story-pipline">||</span> <a target="_blank" href="'.$node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'].'">'.ucfirst($node->field_story_new_title[LANGUAGE_NONE][0]['value']).'</a>';
             }
             if(!empty($get_develop_story_status)) {?>
-            <h1><?php print $node->title.$pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true"></i></h1>
+            <h1><?php print $node->title.$pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
             <?php } else { ?>
             <h1><?php print $node->title.$pipelinetext; ?></h1>
             <?php } ?>
@@ -85,8 +85,10 @@ if (!empty($content)):
                   $associate_type = 'video';
                   $associate_id = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
               }
+              $associate_type = 'gallery';
               ?>
-           <a href="javascript:void(0)" class="associate-content-block" data-widget="<?php echo $associate_type;?>-<?php echo $associate_id;?>">click</a>
+           <a href="javascript:void(0)" class="associate-content-block" data-widget="<?php echo $associate_type;?>-<?php echo $associate_id;?>">click here</a>
+           <div id="videogallery-iframe"></div>
             <div class="story-left-section">
                 <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_listicle[LANGUAGE_NONE])) { ?>
                     <div class="story-left">
@@ -650,6 +652,7 @@ if (!empty($content)):
                         <?php print render($content['comments']); ?>
                     </div>
                 <?php } ?>
-            </div>
-        </div>
+            </div>            
+        </div>               
+        
     <?php endif; ?>
