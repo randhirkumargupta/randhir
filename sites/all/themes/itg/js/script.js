@@ -700,10 +700,10 @@ jQuery(document).ready(function () {
         });
         
         // jQuery code to set personalization tab in mobile
-        $('body').on('click', '.personal-menu-tab-mobile', function(){
-          $(this).next().slideToggle();
+        jQuery('body').on('click', '.personal-menu-tab-mobile', function(){
+          jQuery(this).next().slideToggle();
         });
-        $('.personal-menu-tab').on('click', 'li', function(){
+        jQuery('.personal-menu-tab').on('click', 'li', function(){
           var el = $(this);
           var get_class = el.attr('class'), get_text = el.find('a').text();
           el.closest('.personal-menu-tab-wrapper').find('.tab-text').attr('data-tab', get_class).text(get_text);
