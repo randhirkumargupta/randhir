@@ -495,11 +495,11 @@ if (!empty($content)):
                   $get_val = '0'.arg(1);
                   $like = itg_flag_get_count($get_val, 'like_count');
                   $dislike = itg_flag_get_count($get_val, 'dislike_count');
-                  if (!empty($like)) {
-                    $like_count = $like;
+                  if (!empty($like['like_count'])) {
+                    $like_count = $like['like_count'];
                   }
-                  if (!empty($dislike)) {
-                    $dislike_count = $dislike;
+                  if (!empty($dislike['dislike_count'])) {
+                    $dislike_count = $dislike['dislike_count'];
                   }
                   $pid = "voted_" . $get_val;
                   $like = "no-of-likes_" . $get_val;
@@ -578,11 +578,11 @@ if (!empty($content)):
                             <?php
                             $like = itg_flag_get_count(arg(1), 'like_count');
                             $dislike = itg_flag_get_count(arg(1), 'dislike_count');
-                            if (!empty($like)) {
-                                $like_count = '(' . $like . ')';
+                            if (!empty($like['like_count'])) {
+                                $like_count = '(' . $like['like_count'] . ')';
                             }
-                            if (!empty($dislike)) {
-                                $dislike_count = '(' . $dislike . ')';
+                            if (!empty($dislike['dislike_count'])) {
+                                $dislike_count = '(' . $dislike['dislike_count'] . ')';
                             }
                             $pid = "voted_" . arg(1);
                             $like = "no-of-likes_" . arg(1);
