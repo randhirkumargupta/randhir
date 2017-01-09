@@ -6071,6 +6071,29 @@ footer .footer-copyright {
 .view-so-sorry h2 span {
   font-weight: 700;
 }
+.view-so-sorry .videogallery-slider .slick-slide {
+  width: 100%;
+}
+.view-so-sorry .video-slider-images .slick-slider {
+  background: #171717;
+  padding: 10px 0px;
+}
+.view-so-sorry .video-slider-images li {
+  padding: 0 5px;
+  cursor: pointer;
+}
+.view-so-sorry .video-slider-images li:focus {
+  outline: none;
+  border: none;
+}
+.view-so-sorry .video-slider-images li img {
+  border: 1px solid transparent;
+  height: 66px;
+  width: 88px;
+}
+.view-so-sorry .video-slider-images li.slick-current img {
+  border: 1px solid #fff;
+}
 
 #block-views-so-sorry-the-remix {
   max-width: 370px;
@@ -7289,6 +7312,13 @@ footer .footer-copyright {
   font-weight: 700;
 }
 
+#block-itg-event-backend-event-registration h2 span {
+  float: right;
+  font-size: 12px;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
 #block-views-program-schedule-block-3 .col-md-3 {
   margin-bottom: 30px;
 }
@@ -7794,6 +7824,14 @@ footer .footer-copyright {
           display: none;
       } */
 }
+#content [id*='event-registration-node-form'] .mandatory-message {
+  width: 620px;
+  text-align: right;
+  font-size: 12px;
+}
+#content [id*='event-registration-node-form'] .mandatory-message span {
+  padding-left: 0;
+}
 #content [id*='event-registration-node-form'] .form-field-type-field-collection .form-item .form-item {
   margin: 15px 0;
 }
@@ -8011,7 +8049,7 @@ footer .footer-copyright {
 #content [id*='event-registration-node-form'] .form-submit[value="Remove"] {
   background: #ef3c24;
   float: right;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-right: 20px;
   border: none;
   padding: 5px 10px;
@@ -8019,6 +8057,9 @@ footer .footer-copyright {
   font-weight: 500;
   font-family: roboto;
   border-radius: 4px;
+}
+#content [id*='event-registration-node-form'] #field-erf-registration-fee-add-more-wrapper > .form-item {
+  margin: 0 0 20px 0;
 }
 
 #block-itg-event-backend-event-registration .event-registration-main-container {
@@ -9767,7 +9808,7 @@ footer .footer-copyright {
   top: 100px;
   background: #f2f2f2;
   border-radius: 3px;
-  box-shadow: 2px 2px 3px #ccc;
+  box-shadow: 0px 0px 4px #ccc;
   text-align: center;
   border-right: 1px solid #b3b3b3;
 }
@@ -9785,12 +9826,12 @@ footer .footer-copyright {
   height: 75px;
   overflow: hidden;
 }
-#block-itg-menu-manager-vertical-menu li:hover {
-  background: #fff;
-}
-#block-itg-menu-manager-vertical-menu li:hover a {
-  background: #fff;
-  color: #b00202;
+#block-itg-menu-manager-vertical-menu li a {
+  vertical-align: middle;
+  display: table-cell;
+  height: 75px;
+  text-align: center;
+  width: 58px;
 }
 #block-itg-menu-manager-vertical-menu img {
   margin: 0 auto;
@@ -9809,6 +9850,13 @@ footer .footer-copyright {
   word-wrap: break-word;
   color: #383838;
   height: 100%;
+}
+#block-itg-menu-manager-vertical-menu a:hover {
+  background: #fff;
+  color: #b00202;
+}
+#block-itg-menu-manager-vertical-menu a.sponsored-active {
+  background: #ffc106;
 }
 #block-itg-menu-manager-vertical-menu .vertical-menu-parent {
   height: 375px;
@@ -11017,7 +11065,7 @@ footer .footer-copyright {
   background: rgba(0, 0, 0, 0.76);
   display: none;
 }
-#block-itg-widget-big-story-format #videogallery-iframe iframe {
+#block-itg-widget-big-story-format #videogallery-iframe .big-story-popup {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -11027,7 +11075,7 @@ footer .footer-copyright {
   margin-top: -175px;
 }
 #block-itg-widget-big-story-format #videogallery-iframe #close-big-story {
-  position: absolute;
+  position: fixed;
   right: 20px;
   top: 20px;
   color: #000;
@@ -11045,6 +11093,32 @@ footer .footer-copyright {
 #block-itg-widget-big-story-format #videogallery-iframe #close-big-story a {
   color: #000;
   font-family: roboto;
+}
+#block-itg-widget-big-story-format .videogallery-slider .slick-slide {
+  width: 100%;
+}
+#block-itg-widget-big-story-format .video-slider-images .slick-slider {
+  background: #171717;
+  padding: 10px 0px;
+}
+#block-itg-widget-big-story-format .video-slider-images li {
+  padding: 0 5px;
+  cursor: pointer;
+}
+#block-itg-widget-big-story-format .video-slider-images li:focus {
+  outline: none;
+  border: none;
+}
+#block-itg-widget-big-story-format .video-slider-images li img {
+  border: 1px solid transparent;
+  height: 66px;
+  width: 88px;
+}
+#block-itg-widget-big-story-format .video-slider-images li.slick-current img {
+  border: 1px solid #fff;
+}
+#block-itg-widget-big-story-format .iframe-video iframe {
+  border: 5px solid #171717;
 }
 
 /*css end big story format*/

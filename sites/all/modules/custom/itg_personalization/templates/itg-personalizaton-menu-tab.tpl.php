@@ -7,7 +7,10 @@
 ?>
 <?php $arg = arg(); ?>
 <div class="personal-menu-tab-wrapper">
-  <div class="personal-menu-tab-mobile"><span class="tab-text edit-profile">Edit Profile</span><span class="tab-trigger"></span></div>
+  <div class="personal-menu-tab-mobile">
+    <span data-tab="<?php print $data['data_tab'] ?>" class="tab-text"><?php print $data['menu_title']; ?></span>
+    <span class="tab-trigger"></span>
+  </div>
   <ul class="personal-menu-tab">    
     <li class="saved-items">   
       <?php
@@ -21,7 +24,7 @@
     <li class="my-content">      
 <?php echo l(t('My Content'), 'personalization/my-content'); ?>
     </li>
-    <li class="my-Preferences">      
+    <li class="my-preferences">      
 <?php echo l(t('My Preferences'), 'personalization/my-preferences'); ?>    
     </li>
     <li class="following">

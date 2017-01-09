@@ -168,7 +168,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                             <div class="row itg-325-layout">
                                 <div class="col-md-6 mt-50">
                                     <div class="itg-widget">
-                                        <div class="droppable <?php print $gray_bg_layout; ?>">
+                                        <div class=" <?php print $gray_bg_layout; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-3']['widget_name']; ?>">
                                                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-3']['block_title'])) { ?>
                                                     <h4 class="heading"><?php print $widget_data['itg-block-3']['block_title']; ?></h4>
@@ -211,24 +211,26 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                     </div>
                                                 <?php } ?>  
 
-                                                <div class="data-holder highlight" id="itg-block-4"> <div class="auto-block-2">
+<!--                                                <div class="data-holder highlight" id="itg-block-4"> <div class="auto-block-2">
                                                         <div class="special-top-news">
 
                                                             <ul class="itg-listing">   
                                                                 <?php
-                                                                foreach ($highlights['node_data']->field_story_highlights['und'] as $index => $row) {
+                                                               // foreach ($highlights['node_data']->field_story_highlights['und'] as $index => $row) {
 
-                                                                    $desc = $row['value'];
+                                                                   // $desc = $row['value'];
                                                                     ?>
-                                                                    <li><?php echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/{$highlights['node_data']->nid}")) ?></li>
+                                                                    <li><?php //echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/{$highlights['node_data']->nid}")) ?></li>
 
-                                                                <?php } ?>
+                                                                <?php //} ?>
 
                                                             </ul>
 
                                                         </div>
 
-                                                    </div></div>
+                                                    </div></div>-->
+                    <div class="data-holder" id="itg-block-2"><?php print $widget_data['itg-block-4']['widget']; ?></div>
+
                                             </div>             
                                         </div>
                                     </div>
