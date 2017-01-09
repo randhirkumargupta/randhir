@@ -811,7 +811,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['filters']['field_lrp_completed_value']['value'] = array(
     'Sold out' => 'Sold out',
   );
-  /* Filter criterion: Content: Other Item (field_poll_itg_state) */
+  /* Filter criterion: Content: ITG State (field_poll_itg_state) */
   $handler->display->display_options['filters']['field_poll_itg_state_value']['id'] = 'field_poll_itg_state_value';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['table'] = 'field_data_field_poll_itg_state';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['field'] = 'field_poll_itg_state_value';
@@ -1017,7 +1017,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['filters']['field_lrp_completed_value']['value'] = array(
     'Sold out' => 'Sold out',
   );
-  /* Filter criterion: Content: Other Item (field_poll_itg_state) */
+  /* Filter criterion: Content: ITG State (field_poll_itg_state) */
   $handler->display->display_options['filters']['field_poll_itg_state_value']['id'] = 'field_poll_itg_state_value';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['table'] = 'field_data_field_poll_itg_state';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['field'] = 'field_poll_itg_state_value';
@@ -1072,7 +1072,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['filters']['field_lrp_completed_value']['value'] = array(
     'Sold out' => 'Sold out',
   );
-  /* Filter criterion: Content: Other Item (field_poll_itg_state) */
+  /* Filter criterion: Content: ITG State (field_poll_itg_state) */
   $handler->display->display_options['filters']['field_poll_itg_state_value']['id'] = 'field_poll_itg_state_value';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['table'] = 'field_data_field_poll_itg_state';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['field'] = 'field_poll_itg_state_value';
@@ -1119,7 +1119,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['filters']['field_lrp_completed_value']['value'] = array(
     'Sold out' => 'Sold out',
   );
-  /* Filter criterion: Content: Other Item (field_poll_itg_state) */
+  /* Filter criterion: Content: ITG State (field_poll_itg_state) */
   $handler->display->display_options['filters']['field_poll_itg_state_value']['id'] = 'field_poll_itg_state_value';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['table'] = 'field_data_field_poll_itg_state';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['field'] = 'field_poll_itg_state_value';
@@ -1304,7 +1304,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['filters']['field_lrp_completed_value']['value'] = array(
     'Sold out' => 'Sold out',
   );
-  /* Filter criterion: Content: Other Item (field_poll_itg_state) */
+  /* Filter criterion: Content: ITG State (field_poll_itg_state) */
   $handler->display->display_options['filters']['field_poll_itg_state_value']['id'] = 'field_poll_itg_state_value';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['table'] = 'field_data_field_poll_itg_state';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['field'] = 'field_poll_itg_state_value';
