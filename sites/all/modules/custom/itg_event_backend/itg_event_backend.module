@@ -1716,11 +1716,11 @@ function itg_event_backend_highlights_block_content() {
 function itg_event_backend_highlights_like_dislike($unique_id) {
   $like = itg_flag_get_count($unique_id, 'like_count');
   $dislike = itg_flag_get_count($unique_id, 'dislike_count');
-  if (!empty($like)) {
-    $like_count = '(' . $like . ')';
+  if (!empty($like['like_count'])) {
+    $like_count = '(' . $like['like_count'] . ')';
   }
-  if (!empty($dislike)) {
-    $dislike_count = '(' . $dislike . ')';
+  if (!empty($dislike['dislike_count'])) {
+    $dislike_count = '(' . $dislike['dislike_count'] . ')';
   }
   $pid = "voted_" . $unique_id;
   $like = "no-of-likes_" . $unique_id;

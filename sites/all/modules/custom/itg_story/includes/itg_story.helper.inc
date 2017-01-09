@@ -3,31 +3,6 @@
 /*
  * Inc file contains the helper functions
  */
-
-/**
- * Helper function to populate the second dropdown.
- * @param string $id
- * @return array $data
- */
-function itg_common_tv_time($id = '') {
-  $data = '';
-  $final_id = date('Y/m/d', strtotime($id));
-  if (function_exists('mongodb')) {
-    $db = mongodb();
-    $people = $db->tv_schedule;
-    $date = $final_id;
-    $cond = array('program date' => $date);
-    $cursor = $people->find($cond);
-    // Fetch query for supplements
-    $select = t('- None -');
-    $data = array('_none' => $select);
-    foreach ($cursor as $document) {
-      $data[$document['time']] = $document['time'];
-    }
-    return $data;
-  } 
-}
-
 /**
  * Get breakingnews  id
  * @param int $breaking_id
