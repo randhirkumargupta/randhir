@@ -12,9 +12,7 @@
             // FTP browse
 
 
-            setTimeout(function() {
-                jQuery(".video-ftp").trigger("click");
-            }, 1000);
+            
 
             $(".ftp-server .asso-filed_single").click(function(e) {
                 jQuery('#loader-data img').show().parent().addClass('loader_overlay');
@@ -309,7 +307,9 @@ jQuery('document').ready(function() {
         });
     })
 
-
+setTimeout(function() {
+                jQuery(".video-ftp").trigger("click");
+            }, 1000);
 });
 
 // Implement function for video search by title
