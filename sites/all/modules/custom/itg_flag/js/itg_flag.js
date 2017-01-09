@@ -128,6 +128,7 @@ function scrollToAnchor(aid) {
 // code for like dislike
 jQuery(document).ready(function () {
     jQuery('#like_count,#dislike_count').click(function (event) {
+        jQuery('#like_count,#dislike_count').prop('disabled', true);
         var nd_id = jQuery(this).attr('rel');
         var typ = jQuery(this).attr('id');
         var dtag = jQuery(this).attr('data-tag');
@@ -163,6 +164,7 @@ jQuery(document).ready(function () {
 
                     jQuery("#voted_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
                 }
+                 jQuery('#like_count,#dislike_count').prop('disabled', false);
             }
         });
 
