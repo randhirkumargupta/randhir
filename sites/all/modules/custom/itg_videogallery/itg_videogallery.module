@@ -226,15 +226,17 @@ function itg_videogallery_custom_submit($form, &$form_state) {
         $term_load = taxonomy_term_load($playlist_term['tid']);
         $playlist_name[] = $term_load->name;
     }
-
+//p($form_state['values']['field_story_extra_large_image']);
     // assign image in field after resize
     if ($form_state['values']['field_story_extra_large_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_medium_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_small_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_extra_small_image'][LANGUAGE_NONE][0]['fid'] == 0) {
-       if(!empty($image_url)) {
-        $image_url = $vid_result['dailymotion_thumb_url'];
+       $image_url = $vid_result['dailymotion_thumb_url'];
+        if(!empty($image_url)) {
+       
         $imagedata = file_get_contents($image_url);
         $image_url = 'itg' . time() . end(explode('/', $image_url));
         $image_extension = end(explode('.', $image_url));
         $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
+       
        }
         if(!empty($file_data_temp))
         {
@@ -1240,10 +1242,10 @@ function itg_videogallery_cronapi($op, $job = NULL) {
 function itg_videogallery_thumb_url() {
     $query = db_select('dailymotion_response_details', 'drd');
     $query->fields('drd');
-    $db_or = db_or();
-    $db_or->isNull('drd.dailymotion_thumb_url');
-    $db_or->condition('drd.video_duration', 0, '=');
-    $query->condition($db_or);
+   // $db_or = db_or();
+   // $db_or->isNull('drd.dailymotion_thumb_url');
+  //  $db_or->condition('drd.video_duration', 0, '=');
+   // $query->condition($db_or);
     $result = $query->execute()->fetchAll();
     $api = itg_videogallery_dailymotion_api();
     foreach ($result as $val) {
