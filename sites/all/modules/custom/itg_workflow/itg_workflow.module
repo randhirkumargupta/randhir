@@ -202,6 +202,12 @@ function itg_workflow_node_presave($node) {
  */
 function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
     global $user, $base_url;
+    
+    $settings = array();
+    
+    $settings['form_id'] = $form['#id'];
+    drupal_add_js(array('itg_workflow' => array('settings' => $settings)), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'itg_workflow') . '/js/itg_workflow_form.js');
 
     if ($form['#id'] == 'views-exposed-form-strory-menegment-page-6' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-6') {
         $form['state']['#options'] = array('All' => '-All-',
@@ -227,80 +233,6 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
                  });
             });', array('type' => 'inline', 'scope' => 'footer'));
     }
-    elseif ($form['#id'] == 'views-exposed-form-strory-menegment-page') {
-
-        // Code for Bulk opration related work for story
-
-        drupal_add_js('jQuery(document).ready(function() {
-               jQuery("#edit-actionviews-bulk-operations-modify-action").val("Archive");
-               var myInputBoxID = "edit-bundle-story-appendfield-story-archive";
-               jQuery("label[for=" + myInputBoxID + "]").hide();
-               jQuery("#edit-bundle-story-appendfield-story-archive").hide();
-               jQuery("#edit-tokens").hide();
-               jQuery("#edit-actions-submit").val("Archive");
-               jQuery("#edit-bundle-story-field-story-archive-und-yes").attr("checked", true);
-               jQuery("#edit-bundle-story-field-story-archive-und").hide();               
-             });', array('type' => 'inline', 'scope' => 'footer'));
-    }
-    elseif ($form['#id'] == 'views-exposed-form-photo-gallery-management-page') {
-
-        // Code for Bulk opration related work for Gallery        
-
-        drupal_add_js('jQuery(document).ready(function() {
-               jQuery("#edit-actionviews-bulk-operations-modify-action").val("Archive");
-               var myInputBoxID = "edit-bundle-photogallery-appendfield-story-archive";
-               jQuery("label[for=" + myInputBoxID + "]").hide();
-               jQuery("#edit-bundle-photogallery-appendfield-story-archive").hide();
-               jQuery("#edit-tokens").hide();
-               jQuery("#edit-actions-submit").val("Archive");
-               jQuery("#edit-bundle-photogallery-field-story-archive-und-yes").attr("checked", true);
-               jQuery("#edit-bundle-photogallery-field-story-archive-und").hide();               
-             });', array('type' => 'inline', 'scope' => 'footer'));
-    }
-    elseif ($form['#id'] == 'views-exposed-form-blogs-management-page') {
-        
-        // Code for Bulk opration related work for Blog
-        drupal_add_js('jQuery(document).ready(function() {
-               jQuery("#edit-actionviews-bulk-operations-modify-action").val("Archive");
-               var myInputBoxID = "edit-bundle-blog-appendfield-story-archive";
-               jQuery("label[for=" + myInputBoxID + "]").hide();
-               jQuery("#edit-bundle-blog-appendfield-story-archive").hide();
-               jQuery("#edit-tokens").hide();
-               jQuery("#edit-actions-submit").val("Archive");
-               jQuery("#edit-bundle-blog-field-story-archive-und-yes").attr("checked", true);
-               jQuery("#edit-bundle-blog-field-story-archive-und").hide();               
-             });', array('type' => 'inline', 'scope' => 'footer'));
-    }
-    elseif ($form['#id'] == 'views-exposed-form-podcast-management-page') {
-        
-        // Code for Bulk opration related work for podcast
-        drupal_add_js('jQuery(document).ready(function() {
-               jQuery("#edit-actionviews-bulk-operations-modify-action").val("Archive");
-               var myInputBoxID = "edit-bundle-podcast-appendfield-story-archive";
-               jQuery("label[for=" + myInputBoxID + "]").hide();
-               jQuery("#edit-bundle-podcast-appendfield-story-archive").hide();
-               jQuery("#edit-tokens").hide();
-               jQuery("#edit-actions-submit").val("Archive");
-               jQuery("#edit-bundle-podcast-field-story-archive-und-yes").attr("checked", true);
-               jQuery("#edit-bundle-podcast-field-story-archive-und").hide();               
-             });', array('type' => 'inline', 'scope' => 'footer'));
-    }
-    
-    elseif ($form['#id'] == 'views-exposed-form-videogallery-management-page') {
-        
-        // Code for Bulk opration related work for videogallery
-        drupal_add_js('jQuery(document).ready(function() {
-               jQuery("#edit-actionviews-bulk-operations-modify-action").val("Archive");
-               var myInputBoxID = "edit-bundle-videogallery-appendfield-story-archive";
-               jQuery("label[for=" + myInputBoxID + "]").hide();
-               jQuery("#edit-bundle-videogallery-appendfield-story-archive").hide();
-               jQuery("#edit-tokens").hide();
-               jQuery("#edit-actions-submit").val("Archive");
-               jQuery("#edit-bundle-videogallery-field-story-archive-und-yes").attr("checked", true);
-               jQuery("#edit-bundle-videogallery-field-story-archive-und").hide();               
-             });', array('type' => 'inline', 'scope' => 'footer'));
-    }
-    
 
     return $form;
 }
@@ -357,7 +289,8 @@ function itg_workflow_node_access($node, $op, $account) {
         elseif (($story_expiry_date < $current_time) && (arg(0) != 'issue-listing'))
             return NODE_ACCESS_DENY;
     } elseif (isset($node->type) && $op == 'update' && ($node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery')) {
-        if ($node->status == 0 && (($node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected')) {
+        if (!empty($node) && $node->status == 0 
+                && ((!empty($node->field_story_archive[LANGUAGE_NONE][0]['value']) && $node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected')) { //shravan
             return NODE_ACCESS_DENY;
         }
     }

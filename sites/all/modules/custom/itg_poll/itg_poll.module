@@ -13,7 +13,11 @@
  * {@inheritdoc}
  */
 function itg_poll_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
   if ($form_id == "poll_node_form") {
+    if($user->uid != 1) {
+    $form['field_common_related_content']['#attributes']['class'][] = 'element-hidden';
+    }
     $form['actions']['submit']['#submit'][] = 'alter_submit_status_message';
     $form['field_poll_question_text']['#states'] = array(
       'visible' => array(
