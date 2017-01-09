@@ -8,6 +8,7 @@
  *
  */
 module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
+module_load_include('inc', 'itg_common', 'includes/itg_mongo.helper');
 module_load_include('inc', 'itg_common', 'includes/itg_common_mail');
 module_load_include('inc', 'itg_common', 'includes/itg_common');
 
