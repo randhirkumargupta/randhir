@@ -50,11 +50,6 @@ function itg_flag_menu() {
 function itg_flag_details() {
   global $user;
   
-  if (function_exists('mongodb')) {
-    $con = mongodb();
-    $people = $con->front_user_activity;
-  }
-  
   $nd_id = $_POST['nd_id'];
   $typ = $_POST['typ'];
   $dtag = $_POST['dtag'];
