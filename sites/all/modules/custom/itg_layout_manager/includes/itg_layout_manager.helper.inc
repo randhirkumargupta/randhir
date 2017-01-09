@@ -435,7 +435,7 @@ function get_section_widgets_id($cid, $section, $widget_type) {
  * @return array
  */
 function get_widgets_poll_list() {
-  
+  $widget_type = '';
   $date = date('Y-m-d H:i:s');
   //echo $date;
   $query = db_select('node', 'n');
