@@ -226,15 +226,17 @@ function itg_videogallery_custom_submit($form, &$form_state) {
         $term_load = taxonomy_term_load($playlist_term['tid']);
         $playlist_name[] = $term_load->name;
     }
-
+//p($form_state['values']['field_story_extra_large_image']);
     // assign image in field after resize
     if ($form_state['values']['field_story_extra_large_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_medium_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_small_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_extra_small_image'][LANGUAGE_NONE][0]['fid'] == 0) {
-       if(!empty($image_url)) {
-        $image_url = $vid_result['dailymotion_thumb_url'];
+       $image_url = $vid_result['dailymotion_thumb_url'];
+        if(!empty($image_url)) {
+       
         $imagedata = file_get_contents($image_url);
         $image_url = 'itg' . time() . end(explode('/', $image_url));
         $image_extension = end(explode('.', $image_url));
         $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
+       
        }
         if(!empty($file_data_temp))
         {
@@ -940,7 +942,7 @@ function daily_motion_video_dashboard($form, &$form_state) {
     $form['fieldset']['filtertype'] = array(
         '#type' => 'select',
         '#title' => 'Status',
-        '#options' => array('' => '-Select-', '1' => 'Used', '0' => 'Ready To Use'),
+        '#options' => array('' => '-Select-', '1' => 'Used', '0' => 'Ready To Use /Under Process'),
         '#submit' => array('ge_custom_search_report_search_submit_dis'),
         '#default_value' => isset($_GET['filtertype']) ? $_GET['filtertype'] : '',
     );
@@ -950,6 +952,8 @@ function daily_motion_video_dashboard($form, &$form_state) {
         '#value' => t('Search'),
         '#submit' => array('daily_motion_video_dashboard_submit'),
     );
+      $form['filters']['buttons']['reset'] = array('#type' => 'submit', '#value' => t('Reset'), '#submit' => array('itg_videogallery_daily_motion_video_reset'),);
+
 
     $form['markup'] = array(
         '#markup' => daily_motion_video_dashboard_rows(),
@@ -958,6 +962,15 @@ function daily_motion_video_dashboard($form, &$form_state) {
     return $form;
 }
 
+/**
+ * this function use for reset dailymotion dashboard filter
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_videogallery_daily_motion_video_reset($form, $form_state) {
+
+  drupal_goto('daily-motion-video-dashboard');
+}
 /*
  * Submit handler for ITG dailymotion dashboard
  */
@@ -997,7 +1010,7 @@ function daily_motion_video_dashboard_rows() {
     $query = db_select('dailymotion_response_details', 'n');
     $query->fields('n');
 
-    if (isset($filtertype) && !empty($filtertype)) {
+    if (isset($filtertype) && $filtertype != "" ) {
         $query->condition('n.dailymotion_published', $filtertype, '=');
     }
     if (isset($video_id) && !empty($video_id)) {
@@ -1242,10 +1255,10 @@ function itg_videogallery_cronapi($op, $job = NULL) {
 function itg_videogallery_thumb_url() {
     $query = db_select('dailymotion_response_details', 'drd');
     $query->fields('drd');
-    $db_or = db_or();
-    $db_or->isNull('drd.dailymotion_thumb_url');
-    $db_or->condition('drd.video_duration', 0, '=');
-    $query->condition($db_or);
+   // $db_or = db_or();
+   // $db_or->isNull('drd.dailymotion_thumb_url');
+  //  $db_or->condition('drd.video_duration', 0, '=');
+   // $query->condition($db_or);
     $result = $query->execute()->fetchAll();
     $api = itg_videogallery_dailymotion_api();
     foreach ($result as $val) {
@@ -1504,7 +1517,11 @@ p($node->field_story_medium_image[LANGUAGE_NONE][0]['fid']);
 function get_video_filed_collection_by_its_id($entity_fid) {
     $query = db_select('field_data_field_videogallery_video_upload', 'fvd');
     $query->fields('fvd', array('field_videogallery_video_upload_fid', 'field_videogallery_video_upload_description'));
-    $query->condition('	entity_id', $entity_fid);
+    $query->leftJoin('field_data_field_include_ads', 'ads_inc', 'ads_inc.entity_id = fvd.entity_id');
+    $query->leftJoin('field_data_field_videogallery_description', 'desc_inc', 'desc_inc.entity_id = fvd.entity_id');
+     $query->fields('ads_inc', array('field_include_ads_value'));
+    $query->fields('desc_inc', array('field_videogallery_description_value'));
+    $query->condition('fvd.entity_id', $entity_fid);
     $result_video = $query->execute()->fetchAll();
     return $result_video;
 }

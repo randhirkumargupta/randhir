@@ -80,7 +80,7 @@ function itg_block_render($module, $block_id) {
 function itg_preprocess_comment(&$variables) {
   $comment = $variables['elements']['#comment'];
   $node = $variables['elements']['#node'];
-  if ($node->type == 'story' || $node->type == 'blog') {
+  if ($node->type == 'story' || $node->type == 'blog' || $node->type == 'photogallery' || $node->type == 'videogallery') {
     $variables['created'] = format_date($comment->created, 'custom', 'D, d/m/Y h:i');
     $variables['changed'] = format_date($comment->changed, 'custom', 'D, d/m/Y h:i');
     if ($comment->uid != 0) {

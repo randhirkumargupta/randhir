@@ -43,7 +43,7 @@ if (!empty($data)) :
           <img class="loading-popup" src="<?php echo drupal_get_path('theme', 'itg').'/images/tab-loading.gif' ?>" alt="loading">
           <?php
           // prepare configuration for sharing
-          $image = file_create_url($data['node_data']->field_story_extra_large_image['und'][0]['uri']);
+          $fb_image = file_create_url($data['node_data']->field_story_extra_large_image['und'][0]['uri']);
         }
         else {
           ?>
@@ -67,7 +67,7 @@ if (!empty($data)) :
               $get_develop_story_status = itg_msi_get_lock_story_status($data['node_data']->nid, 'developing_story');
               if (!empty($get_develop_story_status)) {
                 $red_dot_class = "";
-                $node_title = $node_title . "<i class='fa fa-circle' aria-hidden='true'></i>";
+                $node_title = $node_title . "<i class='fa fa-circle' aria-hidden='true' title='Development story'></i>";
               }
             }
 
@@ -109,7 +109,7 @@ if (!empty($data)) :
         <?php if(!empty($data['node_data']->nid)) : ?>
           <div class="share-new">
             <ul>
-              <li><a onclick="fbpop ('<?php print $actual_link; ?>', '<?php print $bigstory_fb_share; ?>', '<?php print $share_desc_fb; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
+              <li><a onclick="fbpop ('<?php print $actual_link; ?>', '<?php print $bigstory_fb_share; ?>', '<?php print $share_desc_fb; ?>', '<?php print $fb_image; ?>')"><i class="fa fa-facebook"></i></a></li>
               <li><a href="javascript:" onclick="twitter_popup ('<?php print urlencode($share_title); ?>', '<?php print $short_url; ?>')"><i class="fa fa-twitter"></i></a></li>
               
               <?php if(!empty($data['node_data']->type) && $data['node_data']->type == 'story') :
