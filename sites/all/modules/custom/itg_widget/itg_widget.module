@@ -1037,7 +1037,7 @@ function itg_widget_dailymotion_get_videogallery_slider($nid) {
                   src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=0&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
                   allowfullscreen></iframe>
         </div>
-        <?php// print ucfirst($video_value->field_videogallery_description_value) ?>
+        
       </div>
 
       <?php
