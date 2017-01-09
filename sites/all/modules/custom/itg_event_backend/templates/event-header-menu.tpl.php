@@ -10,9 +10,9 @@ if($arg[0] == 'event') {
   $baseurl = $base_url.'/'.$arg[0].'/'.$arg[1];
 } elseif(!empty($arg[1]) && is_numeric($arg[1])) {//shravan
   $baseurl = $base_url.'/'.drupal_get_path_alias('node/'.  $arg[1]);
-} else {
+} /*else { me
   $baseurl = $base_url;
-}
+}*/
 
 $node = itg_event_backend_get_event_node('node');
 if (!empty($node) && ($node->type == 'event_backend')) {//shravan
@@ -53,7 +53,7 @@ if (!empty($node) && ($node->type == 'event_backend')) {//shravan
             }
 
             if ($event_config_flashback) {
-              $flash_old = itg_event_backend_flashback($node->nid);
+              $flash_old = itg_event_backend_flashback($node->nid, $menu_font_color);
               $flash_old_event = '';
               if(!empty($flash_old)){
                 $flash_old_event = $flash_old;
@@ -61,9 +61,9 @@ if (!empty($node) && ($node->type == 'event_backend')) {//shravan
               print '<li>'.l('Flashback', 'node/'.$node->nid, array('attributes' => array("style" => "color:$menu_font_color"))).$flash_old_event.'</li>';
             }
             
-            if ($node->nid) {
-              print '<li>'.l('Sing and Win', $baseurl.'/sing-and-win', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
-            }
+//            if ($node->nid) {
+//              print '<li>'.l('Sing and Win', $baseurl.'/sing-and-win', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
+//            }
           ?>
       </ul>
     </div>

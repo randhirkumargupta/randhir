@@ -528,7 +528,7 @@ function feature_for_podcast_field_default_field_instances() {
   $field_instances['node-podcast-field_story_extra_large_image'] = array(
     'bundle' => 'podcast',
     'deleted' => 0,
-    'description' => 'Extra large image',
+    'description' => 'Image Size (647 x 363)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -604,7 +604,7 @@ function feature_for_podcast_field_default_field_instances() {
   $field_instances['node-podcast-field_story_extra_small_image'] = array(
     'bundle' => 'podcast',
     'deleted' => 0,
-    'description' => 'Extra small image',
+    'description' => 'Image Size (88 x 66)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -726,7 +726,7 @@ function feature_for_podcast_field_default_field_instances() {
   $field_instances['node-podcast-field_story_large_image'] = array(
     'bundle' => 'podcast',
     'deleted' => 0,
-    'description' => 'Large image',
+    'description' => 'Image Size (483 x 271)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -802,7 +802,7 @@ function feature_for_podcast_field_default_field_instances() {
   $field_instances['node-podcast-field_story_medium_image'] = array(
     'bundle' => 'podcast',
     'deleted' => 0,
-    'description' => 'Medium image',
+    'description' => 'Image Size (370 x 208)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -962,7 +962,7 @@ function feature_for_podcast_field_default_field_instances() {
   $field_instances['node-podcast-field_story_small_image'] = array(
     'bundle' => 'podcast',
     'deleted' => 0,
-    'description' => 'Small image',
+    'description' => 'Image Size (170 x 127)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1134,6 +1134,11 @@ function feature_for_podcast_field_default_field_instances() {
   t('Description');
   t('Extra large image');
   t('Extra small image');
+  t('Image Size (170 x 127)');
+  t('Image Size (370 x 208)');
+  t('Image Size (483 x 271)');
+  t('Image Size (647 x 363)');
+  t('Image Size (88 x 66)');
   t('Kicker');
   t('Kicker Message');
   t('Large image');

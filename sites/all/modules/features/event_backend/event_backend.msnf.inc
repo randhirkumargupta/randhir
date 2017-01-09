@@ -42,10 +42,9 @@ function event_backend_msnf_step_info() {
       18 => 'field_story_expert_description',
       19 => 'field_e_associate_highlights',
       20 => 'field_event_twitter',
-      21 => 'domain',
-      22 => 'metatags',
-      23 => 'path',
-      24 => 'additional_settings',
+      21 => 'metatags',
+      22 => 'path',
+      23 => 'additional_settings',
     ),
     'format_type' => 'default',
     'format_settings' => array(

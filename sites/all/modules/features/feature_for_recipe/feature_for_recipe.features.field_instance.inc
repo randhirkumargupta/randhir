@@ -183,7 +183,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-cooking_tips-field_recipe_writer_image'] = array(
     'bundle' => 'cooking_tips',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (88 x 66)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -229,7 +229,6 @@ function feature_for_recipe_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -341,7 +340,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-cooking_tips-field_story_extra_large_image'] = array(
     'bundle' => 'cooking_tips',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (647 x 363)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -387,7 +386,6 @@ function feature_for_recipe_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -460,7 +458,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-cooking_tips-field_story_large_image'] = array(
     'bundle' => 'cooking_tips',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (483 x 271)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -506,7 +504,6 @@ function feature_for_recipe_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -537,7 +534,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-cooking_tips-field_story_medium_image'] = array(
     'bundle' => 'cooking_tips',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (370 x 208)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -583,7 +580,6 @@ function feature_for_recipe_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -701,7 +697,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-cooking_tips-field_story_small_image'] = array(
     'bundle' => 'cooking_tips',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (170 x 127)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -747,7 +743,6 @@ function feature_for_recipe_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -1065,7 +1060,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-food_news-field_recipe_writer_image'] = array(
     'bundle' => 'food_news',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (88 x 66)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1180,7 +1175,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-food_news-field_story_extra_large_image'] = array(
     'bundle' => 'food_news',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (647 x 363)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1298,7 +1293,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-food_news-field_story_large_image'] = array(
     'bundle' => 'food_news',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (483 x 271)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1374,7 +1369,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-food_news-field_story_medium_image'] = array(
     'bundle' => 'food_news',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (370 x 208)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1537,7 +1532,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-food_news-field_story_small_image'] = array(
     'bundle' => 'food_news',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (170 x 127)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2570,7 +2565,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-recipe-field_recipe_writer_image'] = array(
     'bundle' => 'recipe',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (88 x 66)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2769,7 +2764,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-recipe-field_story_extra_large_image'] = array(
     'bundle' => 'recipe',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (647 x 363)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3042,8 +3037,8 @@ function feature_for_recipe_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -3115,7 +3110,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-recipe-field_story_large_image'] = array(
     'bundle' => 'recipe',
     'deleted' => 0,
-    'description' => 'Please upload Large Image.',
+    'description' => 'Image Size (483 x 271)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3191,7 +3186,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-recipe-field_story_medium_image'] = array(
     'bundle' => 'recipe',
     'deleted' => 0,
-    'description' => 'Please upload medium Image.',
+    'description' => 'Image Size (370 x 208)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3354,7 +3349,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-recipe-field_story_small_image'] = array(
     'bundle' => 'recipe',
     'deleted' => 0,
-    'description' => 'Please upload small Image.',
+    'description' => 'Image Size (170 x 127)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3753,8 +3748,8 @@ function feature_for_recipe_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -3846,6 +3841,11 @@ function feature_for_recipe_field_default_field_instances() {
   t('Festivals');
   t('Food type');
   t('Garnishing');
+  t('Image Size (170 x 127)');
+  t('Image Size (370 x 208)');
+  t('Image Size (483 x 271)');
+  t('Image Size (647 x 363)');
+  t('Image Size (88 x 66)');
   t('Ingredients');
   t('Kicker');
   t('Large image');
@@ -3873,10 +3873,7 @@ function feature_for_recipe_field_default_field_instances() {
   t('Please select festivals (e.g. Holi, Christmas etc.) ');
   t('Please select food type.');
   t('Please select section.');
-  t('Please upload Large Image.');
   t('Please upload audio');
-  t('Please upload medium Image.');
-  t('Please upload small Image.');
   t('Please upload video.');
   t('Primary category html');
   t('Primary category textarea');

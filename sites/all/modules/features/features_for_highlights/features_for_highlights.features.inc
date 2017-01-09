@@ -26,7 +26,7 @@ function features_for_highlights_views_api($module = NULL, $api = NULL) {
 function features_for_highlights_node_info() {
   $items = array(
     'heighlights' => array(
-      'name' => t('Heighlights'),
+      'name' => t('Highlights'),
       'base' => 'node_content',
       'description' => t('Created for heighlights.'),
       'has_title' => '1',

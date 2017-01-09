@@ -1112,7 +1112,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 24,
+      'weight' => 23,
     ),
   );
 
@@ -1188,7 +1188,7 @@ function event_backend_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 19,
+      'weight' => 18,
     ),
   );
 
@@ -1231,7 +1231,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 22,
+      'weight' => 21,
     ),
   );
 
@@ -1275,7 +1275,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 23,
+      'weight' => 22,
     ),
   );
 
@@ -1314,7 +1314,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 20,
+      'weight' => 19,
     ),
   );
 
@@ -1357,7 +1357,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 21,
+      'weight' => 20,
     ),
   );
 
@@ -1400,7 +1400,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 26,
+      'weight' => 25,
     ),
   );
 
@@ -1443,7 +1443,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 25,
+      'weight' => 24,
     ),
   );
 
@@ -1738,7 +1738,7 @@ function event_backend_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 27,
+      'weight' => 26,
     ),
   );
 
@@ -2210,7 +2210,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 31,
+      'weight' => 10,
     ),
   );
 
@@ -2218,16 +2218,7 @@ function event_backend_field_default_field_instances() {
   // 'node-event_backend-field_story_expert_description'.
   $field_instances['node-event_backend-field_story_expert_description'] = array(
     'bundle' => 'event_backend',
-    'default_value' => array(
-      0 => array(
-        'value' => '<li>Licence of copyright in the website and restrictions on what may be done with the material on the website) </li>
-<li>Disclaimer of liability;</li>
-<li>Clause governing the use of password and restricted areas of the website;</li>
-<li>An acceptable use clause;</li>
-<li>A variation clause;</li>
-<li>An entire agreement clause;</li>',
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -2252,7 +2243,7 @@ function event_backend_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'text_processing' => 0,
+      'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -2262,7 +2253,7 @@ function event_backend_field_default_field_instances() {
         'rows' => 4,
       ),
       'type' => 'text_textarea',
-      'weight' => 28,
+      'weight' => 27,
     ),
   );
 

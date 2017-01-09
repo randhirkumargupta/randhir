@@ -49,6 +49,7 @@ features[field_instance][] = field_collection_item-field_poll_answer-field_poll_
 features[field_instance][] = field_collection_item-field_poll_answer-field_poll_answer_text
 features[field_instance][] = field_collection_item-field_poll_answer-field_poll_manipulate_value
 features[field_instance][] = node-poll-field_associate_poll
+features[field_instance][] = node-poll-field_common_related_content
 features[field_instance][] = node-poll-field_display_result
 features[field_instance][] = node-poll-field_poll_answer
 features[field_instance][] = node-poll-field_poll_answer_option

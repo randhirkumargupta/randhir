@@ -76,13 +76,13 @@
                 SHARES
             </span> 
             <span>
-                <a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a>                
+                <a title="share on google+" class="def-cur-pointer" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a>                
             </span>
             <span>
-                <a href="javacript:void();" title ="share on facebook" onclick="fbpop('<?php print $actual_link;?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>', '<?php print $base_url; ?>', '<?php print $node->nid; ?>')"><i class="fa fa-facebook"></i></a>
+                <a class="def-cur-pointer" title ="share on facebook" onclick="fbpop('<?php print $actual_link;?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>', '<?php print $base_url; ?>', '<?php print $node->nid; ?>')"><i class="fa fa-facebook"></i></a>
             </span>
             <span>
-                <a href="javacript:void();" title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>                
+                <a class="def-cur-pointer" title="share on twitter" onclick="twitter_popup('<?php print urlencode($node->title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>                
             </span>            
             <span>
                 <?php
@@ -145,7 +145,8 @@
               <?php if ($reviews[$field_collection['value']]->field_story_review_type['und'][0]['value'] == 'external'): ?>
                 <?php print '<h2>' . t('Other Reviewers') . '</h2>'; ?>
               <?php endif; ?>
-              <h2><?php print $reviews[$field_collection['value']]->field_buzz_headline['und'][0]['value']; ?></h2>
+              
+              <h2><?php print l($reviews[$field_collection['value']]->field_buzz_headline['und'][0]['value'], $reviews[$field_collection['value']]->field_mega_review_url_link['und'][0]['value']); ?></h2>
               <div class="other-reviews-posted-on">
                   <!-- Byline reporter -->
                   <!-- Get Multiple reviewers name -->

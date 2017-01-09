@@ -145,6 +145,11 @@ function itg_layout_manager_block_info() {
         'cache' => DRUPAL_CACHE_GLOBAL,
     );
 
+    $blocks['front_end_breadcrumb'] = array(
+        'info' => t('Front end breadcrumb'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
+
     return $blocks;
 }
 
@@ -252,7 +257,9 @@ function itg_layout_manager_block_view($delta = '') {
     break;
     // for admin widgets list in side bar
     case 'layout_widget_list_block':
-      $template_id = check_template_of_section($_GET['section'], $_GET['template_name']);
+      if (!empty($_GET['section']) && !empty($_GET['template_name'])) {
+        $template_id = check_template_of_section($_GET['section'], $_GET['template_name']);
+      }      
       
       if (empty($template_id)) {
           $widget_array['default_widget'] = get_all_widgets_list_by_setting_page('Template widgets list');
@@ -270,17 +277,19 @@ function itg_layout_manager_block_view($delta = '') {
       $section_widgets_form = drupal_get_form('layout_section_widgets_search_form');
       $data['section_widgets_form'] = drupal_render($section_widgets_form);
       //condition base change widget
-      if ($_GET["template_name"] == 'page--section_photo') {
+      $widgets_type = '';
+      if (!empty($_GET["template_name"]) && $_GET["template_name"] == 'page--section_photo') {
         $widgets_type = 'photo_list_of_category';
       }
-      elseif ($_GET["template_name"] == 'page--section_video') {
+      elseif (!empty($_GET["template_name"]) && $_GET["template_name"] == 'page--section_video') {
         $widgets_type = 'video_list_of_category';
       }
       else {
         $widgets_type = 'section_wise_order';
       }
-
-      $data['widgets_list'] = display_section_widgets_list($_GET['section'], $_GET['template_name'], $widgets_type);
+      if (!empty($_GET['section']) && !empty($_GET['template_name'])) {
+        $data['widgets_list'] = display_section_widgets_list($sectiontpl, $template_nametpl, $widgets_type);
+      }    
 
       $block['content'] = theme('layout_section_widgets_block', array('data' => $data));
       break;
@@ -321,6 +330,27 @@ function itg_layout_manager_block_view($delta = '') {
       $data['highlights_widgets_form'] = drupal_render($highlights_widgets_form);
       $data['highlights_widget'] = get_highlights_widget_list();
       $block['content'] = theme('layout_highlights_widgets_list_block', array('data' => $data));
+    break;
+    
+    case 'front_end_breadcrumb':
+      
+      if (arg(0) == 'node' && arg(1)) {
+        $entity_object = menu_get_object();
+        if (isset($entity_object->field_primary_category['und'][0]['value'])) {          
+          $id = $entity_object->field_primary_category['und'][0]['value'];
+          if (function_exists('frontend_breadcrumb_display')) {
+            $breadcrumb = frontend_breadcrumb_display($id, $entity_object);
+          } 
+        }
+               
+      } else if (arg(0) == 'taxonomy' && arg(1) == 'term' && arg(2)) {
+        $id = arg(2);
+        if (function_exists('frontend_breadcrumb_display')) {
+          $breadcrumb = frontend_breadcrumb_display($id);
+        }
+      }
+
+      $block['content'] = theme('frontend_breadcrumb_display_block', array('data' => $breadcrumb));
     break;
   }
 
@@ -416,6 +446,11 @@ function itg_layout_manager_theme($existing, $type, $theme, $path) {
     'itg_highlights_widget' => array(
         'arguments' => array('form' => NULL),
         'template' => 'layout-itg-highlights-widget',
+        'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+    ),
+    'frontend_breadcrumb_display_block' => array(
+        'arguments' => array('form' => NULL),
+        'template' => 'frontend-breadcrumb-display',
         'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
     ),
       

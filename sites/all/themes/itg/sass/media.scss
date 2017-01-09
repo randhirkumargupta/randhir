@@ -30,6 +30,9 @@
     h4{
         font-size: $mobile-h4-font-size;
         line-height: $h4-line-height;
+    }
+    .static-feedback-from h1{
+        font-size: 26px;
     }    
 
     #block-itg-layout-manager-header-block{ 
@@ -280,6 +283,41 @@
 }
 /*story page css end*/
 
+/*Election page css start*/
+.election-page{
+    h1 {
+        margin-top: 20px;
+    }
+    .election-graph{      
+        .col-el-5{
+            width: 240px;
+        }   
+    }    
+}
+/*Election page css end*/
+
+/*static pages start*/
+.static-feedback-from .webform-submit-social, .static-feedback-from .form-actions, .static-feedback-from .or-share-detail{
+    padding-left: 0;    
+}
+.static-feedback-from .name-email-continer > div.user-name label{
+    text-align: left;
+}
+.static-feedback-from .submit-feedback{
+    width: 100%;
+}
+.static-feedback-from .webform-submit-social{
+    a{
+        display:block;
+        img{
+            max-width: 100px;
+            &:first-child{
+                max-width:  90px;
+            }
+        }   
+    }    
+}
+/*static page end*/
 
 }   
 @media only screen and (max-width:991px){
@@ -360,7 +398,6 @@
     }  
 }
 /*story page css end*/
-
 
 }
 
@@ -574,7 +611,8 @@
     .itg-layout-container .top-colum-3 .droppable,
     .itg-common-section .droppable, .sport-home-layout-page .itg-layout-615 .auto-block-1,
     .sport-home-layout-page .itg-layout-615 .auto-block-2, .sport-home-layout-page .itg-layout-615 .droppable,
-    .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable, .tech-layout-page .itg-h396-section .droppable, .tech-layout-page .itg-h385-section .droppable{
+    .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable, .tech-layout-page .itg-h396-section .droppable,
+    .tech-layout-page .itg-h385-section .droppable, .election-page .left-side .itg-photo .droppable{
         height: auto;        
     }
     
@@ -886,12 +924,16 @@
     .archive-header{
         border:none;
         margin: 0 -15px;
+        padding-top: 35px;
+        position: relative;
         #archive-story-date-slider, .archive-calender-custom{
             float: none;
             width: 100%;
         }
         .archive-calender-custom{
             text-align: right;
+            position: absolute;
+            top: -15px;
         }
         #archive-story-date-slider{
             border-top: 1px solid #ddd;
@@ -1097,6 +1139,69 @@
 }
 /*side bar for all pages end*/
 
+/*election page css start*/
+.election-page {
+    margin: 0 0px 20px 0px;
+    
+}
+.election-page{
+    .key-candidate .list-state {
+        white-space: nowrap;
+        overflow: auto;
+    }
+    .itg-most-popular .most_popular {
+        .col-md-3{
+            &:nth-child(2n+1){
+                clear:left;
+            }
+        }
+    }
+    .left-side{
+        .itg-325-layout, .itg-415-layout, .itg-map, .itg-most-popular, .itg-photo{
+            .droppable{
+               min-height: auto;
+               height: auto;
+            }
+        }                       
+    }
+    .right-side .key_candidate_extra_block .droppable{
+        min-height: auto;
+        height: auto;
+    }
+} 
+/*election page css end*/
+
+/*Start category wise content list css*/
+.view-category-wise-content-list{
+    .catagory-grid{                 
+        .col-md-3{            
+            &:nth-child(4n+1){
+                clear: none;
+            }
+            &:nth-child(3n+1){
+                clear: left;
+            }
+        }        
+    }
+}
+/*end category wise content list css*/
+
+/*pop up big story*/
+#block-itg-widget-big-story-format{
+    .video-slider-images{
+        .slick-slider{
+            padding: 10px 45px;   
+        }
+        .slick-prev, .slick-next{
+            background: transparent;                
+            color:#fff;
+            &:hover{
+                background: transparent;    
+            }
+        }
+    }
+}
+/*pop up big story end*/
 
 }
 
@@ -1384,10 +1489,29 @@
     }
 } 
 .tech-layout-page{
-    .techwatch.osscar-video ul .dont-miss-listing .dm-pic{
-        width: 124px;
+    .techwatch.osscar-video ul .dont-miss-listing{
+      .dm-pic{
+            width: 124px;
+        }
+        .dm-detail{
+            overflow: initial;
+        }  
+    } 
+}
+/*Start category wise content list css*/
+.view-category-wise-content-list{
+    .catagory-grid{                 
+        .col-md-3{                       
+            &:nth-child(3n+1){
+                clear: none;
+            }
+            &:nth-child(2n+1){
+                clear: left;
+            }
+        }        
     }
 }
+/*end category wise content list css*/
 
 }
 @media only screen and (max-width:640px){
@@ -1454,6 +1578,44 @@
         margin: 0 auto;
     }
     /*story page css end*/
+    /*election page css end*/
+    .election-page{
+        h1 {
+            margin-top: 20px;
+        }
+        .election-graph{     
+            margin-top: -50px;
+            padding-bottom:50px;
+            .col-el-5{
+                width: 100%;
+            }
+        }
+        .col-el-5.mt-50 {
+            margin-top: 0;
+        }
+    }
+    /*election page css end*/
+    
+/*static page css start*/
+.static-feedback-from .name-email-continer input[type="text"]{
+    width: 100%;
+}
+.static-feedback-from .webform-submit-social{
+    a{        
+        img{
+            @include display-inline;
+            margin-bottom: 10px;
+        }   
+    }    
+}
+.static-feedback-from .form-submit{    
+    height: 40px;
+    width: 140px;    
+    font-size: 16px;    
+    font-weight: 300;
+}
+/*static page css end*/
+    
     
 }
 
@@ -1929,6 +2091,18 @@
         h2{
             @include font(26px,null,300);
         }
+        .video-slider-images{
+                .slick-slider{
+                    padding: 10px 45px;   
+                }
+                .slick-prev, .slick-next{
+                    background: transparent;                
+                    color:#fff;
+                    &:hover{
+                        background: transparent;    
+                    }
+                }
+            }
     }
     .view-display-id-so_sorry_page{
         margin:0;

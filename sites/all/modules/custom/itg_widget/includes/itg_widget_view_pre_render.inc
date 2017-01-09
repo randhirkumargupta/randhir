@@ -172,8 +172,10 @@ function itg_widget_views_pre_render(&$view) {
   }
   elseif ($view->name == "category_wise_content_list" && $view->current_display == 'section_wise_content_listing') {
     $arg = arg();
+    $curentPath =  current_path();
     $term = taxonomy_term_load($arg[2]);
     $header_content = '<h1 class="category-heading">' . $term->name . '</h1>';
+    $header_content .= '<div class="list-grid"><i class="fa fa-list" aria-hidden="true"></i> ' .l('List',$curentPath, array('query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span><i class="fa fa-th" aria-hidden="true"></i> '.l('Grid',$curentPath ,array('query'=>array('view_type'=>'grid'))).'</div>';
     $view->attachment_before = $header_content;
   }
   
@@ -246,14 +248,14 @@ function itg_widget_views_pre_render(&$view) {
   }
    elseif ($view->name == "category_of_stroy_base_magazin_widget" && $view->current_display == 'issue_category_magazin_widget') {
     if (!isset($_POST['views_bulk_operations'])) {
-      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      //$header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Widget - Category List'), 'issue-magazin-primary-cat-widget-list' , array('query' => $color_box_query, 'attributes' => $color_box_class));
       $view->attachment_before = $header_content;
     }
   }
    elseif ($view->name == "supplement_base_magazin_widget" && $view->current_display == 'supplement_base_magazin_widget') {
     if (!isset($_POST['views_bulk_operations'])) {
-      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      //$header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Widget - Supplement List'), 'supplement-base-magazin-widget-list' , array('query' => $color_box_query, 'attributes' => $color_box_class));
       $view->attachment_before = $header_content;
     }

@@ -622,7 +622,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   $field_instances['node-breaking_news-field_story_extra_large_image'] = array(
     'bundle' => 'breaking_news',
     'deleted' => 0,
-    'description' => 'Image Size (650 x 445)',
+    'description' => 'Image Size (647 x 363)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -668,7 +668,6 @@ function feature_for_breaking_news_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -865,7 +864,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   $field_instances['node-breaking_news-field_story_large_image'] = array(
     'bundle' => 'breaking_news',
     'deleted' => 0,
-    'description' => 'Image Size (300x350)',
+    'description' => 'Image Size (483x271)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -911,7 +910,6 @@ function feature_for_breaking_news_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -942,7 +940,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   $field_instances['node-breaking_news-field_story_medium_image'] = array(
     'bundle' => 'breaking_news',
     'deleted' => 0,
-    'description' => 'Image Size (300x225)',
+    'description' => 'Image Size (370x208)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -988,7 +986,6 @@ function feature_for_breaking_news_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -1019,7 +1016,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   $field_instances['node-breaking_news-field_story_small_image'] = array(
     'bundle' => 'breaking_news',
     'deleted' => 0,
-    'description' => 'Image Size (210 x 145)',
+    'description' => 'Image Size (170 x 127)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1065,7 +1062,6 @@ function feature_for_breaking_news_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -1146,10 +1142,10 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Extra large image');
   t('Extra small image');
   t('Highlights');
-  t('Image Size (210 x 145)');
-  t('Image Size (300x225)');
-  t('Image Size (300x350)');
-  t('Image Size (650 x 445)');
+  t('Image Size (170 x 127)');
+  t('Image Size (370x208)');
+  t('Image Size (483x271)');
+  t('Image Size (647 x 363)');
   t('Image Size (88 x 66)');
   t('Large image');
   t('Mark as Breaking band');

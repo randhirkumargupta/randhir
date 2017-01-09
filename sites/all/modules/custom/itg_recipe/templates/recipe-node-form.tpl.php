@@ -20,7 +20,7 @@
   <?php print drupal_render($form['field_recipe_ingredients']); ?>
   <?php print drupal_render($form['field_recipe_garnishing']); ?>
   <?php print drupal_render($form['field_associate_photo_gallery']); ?>
-   <?php print drupal_render($form['field_recipe_writer_image']); ?>
+
   
 </div>
 
@@ -44,6 +44,7 @@
   <?php print drupal_render($form['field_story_large_image']); ?>
   <?php print drupal_render($form['field_story_medium_image']); ?>
   <?php print drupal_render($form['field_story_small_image']); ?>
+     <?php print drupal_render($form['field_recipe_writer_image']); ?>
 </div>
 <div id="SocialMedia">
   <h2 class="story-title"><?php print t('Social Media'); ?></h2>

@@ -566,7 +566,8 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     drupal_add_css('.views-widget-filter-field_story_syndication_value_1 , .views-widget-filter-field_story_syndication_value {display:inline-block !important;}', array('type' => 'inline'));
 
     $url_chunk = explode("?", $_SERVER['REQUEST_URI']);
-    $url_without_query_string = end(explode('/', $url_chunk[0]));
+    $url_chunk_array = explode('/', $url_chunk[0]);
+    $url_without_query_string = end($url_chunk_array);
 
     $form['reset'] = array(
       '#type' => 'markup',
@@ -823,25 +824,25 @@ function forms_uses_checked_content_id() {
  * @return array
  */
 function get_sessions_of_ticked_nodes(&$form) {
-  if (isset($form['views_bulk_operations'])) {
-    foreach ($form['views_bulk_operations'] as $key => $form_node_data) {
-      if (in_array($form_node_data['#return_value'], $_SESSION[$form['#form_id']])) {
-        $form['views_bulk_operations'][$key]['#attributes']['class'][] = 'custom-selected';
-        $form['views_bulk_operations'][$key]['#default_value'] = $form_node_data['#return_value'];
-      }
-    }
-    drupal_add_js('jQuery(window).load(function() {
-            var sessionids="' . implode($_SESSION[$form['#form_id']], ',') . '";
-                if(sessionids!="")
-                {
-                sessionids=sessionids.split(",");
-                }
-                jQuery.each(sessionids, function( index, value ) {
-                jQuery(".nodes_id_container").append("<span id=spn_"+value+" class=content-ids>"+value+"<a class=removeid cid="+value+" href=javascript:void(0)>X</a></span>");});
-                
-            });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-    );
-  }
+//  if (isset($form['views_bulk_operations'])) {
+//    foreach ($form['views_bulk_operations'] as $key => $form_node_data) {
+//      if (in_array($form_node_data['#return_value'], $_SESSION[$form['#form_id']])) {
+//        $form['views_bulk_operations'][$key]['#attributes']['class'][] = 'custom-selected';
+//        $form['views_bulk_operations'][$key]['#default_value'] = $form_node_data['#return_value'];
+//      }
+//    }
+//    drupal_add_js('jQuery(window).load(function() {
+//            var sessionids="' . implode($_SESSION[$form['#form_id']], ',') . '";
+//                if(sessionids!="")
+//                {
+//                sessionids=sessionids.split(",");
+//                }
+//                jQuery.each(sessionids, function( index, value ) {
+//                jQuery(".nodes_id_container").append("<span id=spn_"+value+" class=content-ids>"+value+"<a class=removeid cid="+value+" href=javascript:void(0)>X</a></span>");});
+//                
+//            });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+//    );
+//  }
 
   return $form;
 }

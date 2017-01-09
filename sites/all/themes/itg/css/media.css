@@ -63,6 +63,10 @@
     line-height: 18px;
   }
 
+  .static-feedback-from h1 {
+    font-size: 26px;
+  }
+
   #block-itg-layout-manager-header-block .top-nav .main-nav li a {
     padding: 0 15px;
     font-size: 20px;
@@ -277,6 +281,39 @@
   }
 
   /*story page css end*/
+  /*Election page css start*/
+  .election-page h1 {
+    margin-top: 20px;
+  }
+  .election-page .election-graph .col-el-5 {
+    width: 240px;
+  }
+
+  /*Election page css end*/
+  /*static pages start*/
+  .static-feedback-from .webform-submit-social, .static-feedback-from .form-actions, .static-feedback-from .or-share-detail {
+    padding-left: 0;
+  }
+
+  .static-feedback-from .name-email-continer > div.user-name label {
+    text-align: left;
+  }
+
+  .static-feedback-from .submit-feedback {
+    width: 100%;
+  }
+
+  .static-feedback-from .webform-submit-social a {
+    display: block;
+  }
+  .static-feedback-from .webform-submit-social a img {
+    max-width: 100px;
+  }
+  .static-feedback-from .webform-submit-social a img:first-child {
+    max-width: 90px;
+  }
+
+  /*static page end*/
 }
 @media only screen and (max-width: 991px) {
   /*CSS start education page special*/
@@ -570,7 +607,8 @@
   .itg-layout-container .top-colum-3 .droppable,
   .itg-common-section .droppable, .sport-home-layout-page .itg-layout-615 .auto-block-1,
   .sport-home-layout-page .itg-layout-615 .auto-block-2, .sport-home-layout-page .itg-layout-615 .droppable,
-  .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable, .tech-layout-page .itg-h396-section .droppable, .tech-layout-page .itg-h385-section .droppable {
+  .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable, .tech-layout-page .itg-h396-section .droppable,
+  .tech-layout-page .itg-h385-section .droppable, .election-page .left-side .itg-photo .droppable {
     height: auto;
   }
 
@@ -838,6 +876,8 @@
   .view-archive-story .archive-header {
     border: none;
     margin: 0 -15px;
+    padding-top: 35px;
+    position: relative;
   }
   .view-archive-story .archive-header #archive-story-date-slider, .view-archive-story .archive-header .archive-calender-custom {
     float: none;
@@ -845,6 +885,8 @@
   }
   .view-archive-story .archive-header .archive-calender-custom {
     text-align: right;
+    position: absolute;
+    top: -15px;
   }
   .view-archive-story .archive-header #archive-story-date-slider {
     border-top: 1px solid #ddd;
@@ -1055,6 +1097,50 @@
   }
 
   /*side bar for all pages end*/
+  /*election page css start*/
+  .election-page {
+    margin: 0 0px 20px 0px;
+  }
+
+  .election-page .key-candidate .list-state {
+    white-space: nowrap;
+    overflow: auto;
+  }
+  .election-page .itg-most-popular .most_popular .col-md-3:nth-child(2n+1) {
+    clear: left;
+  }
+  .election-page .left-side .itg-325-layout .droppable, .election-page .left-side .itg-415-layout .droppable, .election-page .left-side .itg-map .droppable, .election-page .left-side .itg-most-popular .droppable, .election-page .left-side .itg-photo .droppable {
+    min-height: auto;
+    height: auto;
+  }
+  .election-page .right-side .key_candidate_extra_block .droppable {
+    min-height: auto;
+    height: auto;
+  }
+
+  /*election page css end*/
+  /*Start category wise content list css*/
+  .view-category-wise-content-list .catagory-grid .col-md-3:nth-child(4n+1) {
+    clear: none;
+  }
+  .view-category-wise-content-list .catagory-grid .col-md-3:nth-child(3n+1) {
+    clear: left;
+  }
+
+  /*end category wise content list css*/
+  /*pop up big story*/
+  #block-itg-widget-big-story-format .video-slider-images .slick-slider {
+    padding: 10px 45px;
+  }
+  #block-itg-widget-big-story-format .video-slider-images .slick-prev, #block-itg-widget-big-story-format .video-slider-images .slick-next {
+    background: transparent;
+    color: #fff;
+  }
+  #block-itg-widget-big-story-format .video-slider-images .slick-prev:hover, #block-itg-widget-big-story-format .video-slider-images .slick-next:hover {
+    background: transparent;
+  }
+
+  /*pop up big story end*/
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/
@@ -1325,6 +1411,19 @@
   .tech-layout-page .techwatch.osscar-video ul .dont-miss-listing .dm-pic {
     width: 124px;
   }
+  .tech-layout-page .techwatch.osscar-video ul .dont-miss-listing .dm-detail {
+    overflow: initial;
+  }
+
+  /*Start category wise content list css*/
+  .view-category-wise-content-list .catagory-grid .col-md-3:nth-child(3n+1) {
+    clear: none;
+  }
+  .view-category-wise-content-list .catagory-grid .col-md-3:nth-child(2n+1) {
+    clear: left;
+  }
+
+  /*end category wise content list css*/
 }
 @media only screen and (max-width: 640px) {
   #block-views-anchor-landing-page-block .anchor-left {
@@ -1381,6 +1480,41 @@
   }
 
   /*story page css end*/
+  /*election page css end*/
+  .election-page h1 {
+    margin-top: 20px;
+  }
+  .election-page .election-graph {
+    margin-top: -50px;
+    padding-bottom: 50px;
+  }
+  .election-page .election-graph .col-el-5 {
+    width: 100%;
+  }
+  .election-page .col-el-5.mt-50 {
+    margin-top: 0;
+  }
+
+  /*election page css end*/
+  /*static page css start*/
+  .static-feedback-from .name-email-continer input[type="text"] {
+    width: 100%;
+  }
+
+  .static-feedback-from .webform-submit-social a img {
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 10px;
+  }
+
+  .static-feedback-from .form-submit {
+    height: 40px;
+    width: 140px;
+    font-size: 16px;
+    font-weight: 300;
+  }
+
+  /*static page css end*/
 }
 /*Start header CSS Desktop version*/
 @media only screen and (min-width: 769px) {
@@ -1901,6 +2035,16 @@
     font-size: 26px;
     font-size: 1.625rem;
     font-weight: 300;
+  }
+  .view-so-sorry .video-slider-images .slick-slider {
+    padding: 10px 45px;
+  }
+  .view-so-sorry .video-slider-images .slick-prev, .view-so-sorry .video-slider-images .slick-next {
+    background: transparent;
+    color: #fff;
+  }
+  .view-so-sorry .video-slider-images .slick-prev:hover, .view-so-sorry .video-slider-images .slick-next:hover {
+    background: transparent;
   }
 
   .view-display-id-so_sorry_page {
