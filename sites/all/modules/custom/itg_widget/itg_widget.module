@@ -1006,7 +1006,7 @@ function itg_get_video_display_for_big_story($nid) {
  * Function returns videogallery iframe slider.
  * @param int $nid
  */
-function itg_widget_dailymotion_get_videogallery_slider($nid) {
+function itg_widget_dailymotion_get_videogallery_slider($nid , $type = 'gallery') {
   $videoids = "";
 
   print '<div class="videogallery-slider slider-for-nid-'.$nid.'">';
@@ -1037,7 +1037,12 @@ function itg_widget_dailymotion_get_videogallery_slider($nid) {
                   src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=0&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
                   allowfullscreen></iframe>
         </div>
-        
+        <?php
+        if($type != 'video')
+        {
+               print ucfirst($video_value->field_videogallery_description_value);
+        }
+      ?>
       </div>
 
       <?php
