@@ -36,9 +36,9 @@
                 fb_image: function (value, element) {
                     // Validate for facebook.
                     var facebook_condition = $('input[name="itg_facebook_condition"]:checked').val();                    
-                    
+                    var smi_fb = $('input[name="itg_smi[facebook]"]').is(':checked');
                     // Validate Image condion.
-                    if (facebook_condition == 0 && value == 0) {                        
+                    if (facebook_condition == 0 && value == 0 && smi_fb) {                        
                         return false;                     
                     }
                     else {
@@ -48,9 +48,9 @@
                 fb_video: function (value, element) {
                     // Validate for facebook.
                     var facebook_condition = $('input[name="itg_facebook_condition"]:checked').val();                    
-                    
+                    var smi_fb = $('input[name="itg_smi[facebook]"]').is(':checked');
                     // Validate video condition.
-                    if (facebook_condition == 1 && value == 0) {                        
+                    if (facebook_condition == 1 && value == 0 && smi_fb) {                        
                         return false;                                                
                     }
                     else {
@@ -60,9 +60,9 @@
                 twitter_video: function (value, element) {
                     // Validate for facebook.
                     var twitter_condition = $('input[name="itg_twitter_condition"]:checked').val();                    
-                    
+                    var smi_twitter = $('input[name="itg_smi[twitter]"]').is(':checked');                    
                     // Validate video condition.
-                    if (twitter_condition == 1 && value == 0) {
+                    if (twitter_condition == 1 && value == 0 && smi_twitter) {
                         console.log('video case');
                         console.log('video fid: ' + value);
                         return false;                                                
@@ -74,9 +74,10 @@
                 twitter_image: function (value, element) {
                     // Validate for facebook.
                     var twitter_condition = $('input[name="itg_twitter_condition"]:checked').val();                    
+                    var smi_twitter = $('input[name="itg_smi[twitter]"]').is(':checked');
                     
                     // Validate video condition.
-                    if (twitter_condition == 0 && value == 0) {                        
+                    if (twitter_condition == 0 && value == 0 && smi_twitter) {
                         return false;                                                
                     }
                     else {
