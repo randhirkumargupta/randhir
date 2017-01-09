@@ -2398,6 +2398,7 @@ function domain_enable() {
  */
 function domain_form_alter(&$form, &$form_state, $form_id) {
   // There are forms that we never want to alter, and they are passed here.
+  
   $forms = module_invoke_all('domain_ignore');
   if (in_array($form_id, $forms)) {
     return;
@@ -2452,24 +2453,30 @@ function domain_form_alter(&$form, &$form_state, $form_id) {
   $options = array();
   // Get the display format of the form element.
   $format = domain_select_format();
-  $seleted_domain_id = ltrim($form['#node']->domain_source, '-');
+  if (!empty($form['#node']->domain_source)) {
+    $seleted_domain_id = ltrim($form['#node']->domain_source, '-');
+  }
+  //$seleted_domain_id = ltrim($form['#node']->domain_source, '-');
 
   $arg = arg();
   if($arg[2] == 'edit') {
     $except_this_node = 'node/'.$arg[1];
     $all_redirect_records = itg_event_backend_get_redirect_all_domains($except_this_node);
   }
-  
-  foreach (domain_domains() as $data) {
+  $domain_val = domain_domains();
+  if (!empty($domain_val)) {
+    foreach ($domain_val as $data) {
     // The domain must be valid.
     if ($data['valid'] || user_access('access inactive domains')) {
       
       // Checkboxes must be filtered, select lists should not.
-      if(!in_array($data['sitename'], $all_redirect_records)) {
+      if(is_array($data['sitename']) && !in_array($data['sitename'], $all_redirect_records)) {
         $options[$data['domain_id']] = empty($format) ? check_plain($data['sitename']) : $data['sitename'];
       }
     }
   }
+  }
+  
   // If the user is a site admin, show the form, otherwise pass it silently.
   if (user_access('set domain access')) {
 
