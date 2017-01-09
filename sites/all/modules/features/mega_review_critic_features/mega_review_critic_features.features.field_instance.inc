@@ -628,7 +628,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'description' => ' Please select cast name',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'entityreference',
         'settings' => array(
           'link' => FALSE,
@@ -674,7 +674,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'description' => 'Director',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -717,7 +717,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'description' => 'Movie Plot',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -921,7 +921,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_mega_review_youtube_url',
     'label' => 'Youtube url',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -989,7 +989,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'description' => 'Image Size (647 x 363)',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
@@ -1066,7 +1066,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'description' => 'Image Size (88 x 66)',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
@@ -1142,7 +1142,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'description' => 'Image Size (483 x 271)',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
@@ -1219,7 +1219,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'description' => 'Image Size (370 x 208)',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
@@ -1297,7 +1297,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',

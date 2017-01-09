@@ -74,24 +74,25 @@ if (!empty($content)):
             <?php } else { ?>
             <h1><?php print $node->title.$pipelinetext; ?></h1>
             <?php } ?>
+            <?php
+              $associate_type = '';
+              $associate_id = '';
+                   
+              if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
+                $associate_type = 'gallery';
+                $associate_id = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
+              } else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') {
+                  $associate_type = 'video';
+                  $associate_id = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
+              }
+              ?>
+           <a href="javascript:void(0)" class="associate-content-block" data-widget="<?php echo $associate_type;?>-<?php echo $associate_id;?>">click</a>
             <div class="story-left-section">
                 <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_listicle[LANGUAGE_NONE])) { ?>
                     <div class="story-left">
                         <div class="byline">              
                             <div class="profile-pic">
-                               <?php
-              /*$associate_type = '';
-              $associate_id = '';
-                        
-              if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
-                $associate_type = 'gallery';
-                $associate_id = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
-              } else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
-                  $associate_type = 'video';
-                  $associate_id = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
-              }*/
-              ?>
-<!--              <a href="javascript:void(0)" class="associate-content-block" data-widget="<?php //echo $associate_type;?>-<?php //echo $associate_id;?>">click</a>-->
+                               
                                 <?php
                                 $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                                 if (!empty($file)) {
@@ -393,19 +394,20 @@ if (!empty($content)):
                             $num = 1;
                             foreach ($wrapper->field_story_listicle as $i):
                               $listicletype = '';
+                           
                               print '<div class="listicle-detail">';
                               $type = $i->field_story_listicle_type->value();
                               $description = $i->field_story_listicle_description->value();
-                              $color = $i->field_story_listicle_color->value();
+                               $color = $i->field_listicle_color ->value();
                               $li_type =$node->field_story_templates[LANGUAGE_NONE][0]['value'];
-                              $color = ($color['rgb']) ? $color['rgb'] : '#000000';
+                              $color = ($color) ? $color : '#000000';
                               if($li_type=='bullet_points')
                               {
                                   print '<span class="bullet_points"></span>';
                               } else {
                                   print '<span>' . $num . '</span>';
                               }
-                              
+
                               if (isset($type)) {
                                 $listicletype = '<span class="listicle-type" style="color: ' . $color . '">' . $type . ': </span>';
                               }

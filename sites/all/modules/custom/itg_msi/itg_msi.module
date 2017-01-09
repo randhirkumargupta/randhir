@@ -949,8 +949,9 @@ function itg_msi_issue_category_data($issue_date){
   //$query->join('field_data_field_story_category', 'story_section', 'n.nid = story_section.entity_id');
   $query->join('field_data_field_primary_category', 'story_section', 'n.nid = story_section.entity_id');
   $query->join('taxonomy_term_data', 'term_name', 'story_section.field_primary_category_value = term_name.tid');
-  $query->leftJoin('field_data_field_story_extra_large_image', 'story_large_image', 'n.nid = story_large_image.entity_id');
-  $query->leftJoin('file_managed', 'f_managed', 'f_managed.fid = story_large_image.field_story_extra_large_image_fid');
+ // $query->leftJoin('field_data_field_story_extra_large_image', 'story_large_image', 'n.nid = story_large_image.entity_id');
+  $query->leftJoin('field_data_field_story_medium_image', 'story_large_image', 'n.nid = story_large_image.entity_id');
+  $query->leftJoin('file_managed', 'f_managed', 'f_managed.fid = story_large_image.field_story_medium_image_fid');
   $query->join('itg_widget_order', 'itg_order', 'story_section.field_primary_category_value = itg_order.cat_id');
   $query->fields('n', array('nid', 'title'));
   $query->fields('term_name', array('name'));
@@ -983,8 +984,9 @@ function itg_msi_issue_suppliment_data($issue_date){
   $query->join('field_data_field_story_magazine_story_issue', 'issue_based', 'n.nid = issue_based.entity_id');
   $query->join('field_data_field_story_issue_date', 'issue_date', 'n.nid = issue_date.entity_id');
   $query->join('field_data_field_story_select_supplement', 'story_supplement', 'n.nid = story_supplement.entity_id');
-  $query->leftJoin('field_data_field_story_extra_large_image', 'story_large_image', 'n.nid = story_large_image.entity_id');
-  $query->leftJoin('file_managed', 'f_managed', 'f_managed.fid = story_large_image.field_story_extra_large_image_fid');
+  //$query->leftJoin('field_data_field_story_extra_large_image', 'story_large_image', 'n.nid = story_large_image.entity_id');
+  $query->leftJoin('field_data_field_story_medium_image', 'story_large_image', 'n.nid = story_large_image.entity_id');
+  $query->leftJoin('file_managed', 'f_managed', 'f_managed.fid = story_large_image.field_story_medium_image_fid');
   $query->fields('n', array('nid', 'title'));
   $query->fields('issue_date', array('field_story_issue_date_value'));
   $query->fields('f_managed', array('fid', 'uri'));

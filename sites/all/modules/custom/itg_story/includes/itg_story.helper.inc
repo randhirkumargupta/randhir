@@ -10,7 +10,7 @@
  * @return array $data
  */
 function itg_common_tv_time($id = '') {
-
+  $data = '';
   $final_id = date('Y/m/d', strtotime($id));
   if (function_exists('mongodb')) {
     $db = mongodb();
