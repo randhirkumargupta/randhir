@@ -1394,7 +1394,7 @@ footer .footer-copyright {
 }
 
 .itg-layout-container .top-colum-3 .droppable {
-  height: 276px;
+  height: 266px;
 }
 
 .itg-common-section .droppable {
@@ -1679,6 +1679,8 @@ footer .footer-copyright {
 }
 .featured-news .featured-post a {
   display: block;
+}
+.featured-news .featured-post a img {
   margin-bottom: 10px;
 }
 .featured-news .featured-post a:hover {
@@ -1691,6 +1693,9 @@ footer .footer-copyright {
   float: none;
   width: 100%;
   margin-bottom: 10px;
+}
+.featured-news .featured-post.featured-post-first a img {
+  margin-bottom: 0;
 }
 
 /*End CSS Featured New Home page*/
@@ -1943,6 +1948,7 @@ footer .footer-copyright {
   color: #fff;
   text-align: center;
   line-height: 23px;
+  font-size: 15px;
 }
 @media screen and (min-width: 768px) {
   .view-front-end-global-search .view-content .social-share ul li a {
@@ -3854,6 +3860,7 @@ footer .footer-copyright {
   color: #fff;
   text-align: center;
   line-height: 23px;
+  font-size: 15px;
 }
 @media screen and (min-width: 768px) {
   .live-block > .social-share ul li a {
@@ -3921,6 +3928,7 @@ footer .footer-copyright {
   color: #fff;
   text-align: center;
   line-height: 23px;
+  font-size: 15px;
 }
 @media screen and (min-width: 768px) {
   .live-block .breaking-section .social-share ul li a {
@@ -4348,6 +4356,7 @@ footer .footer-copyright {
   color: #fff;
   text-align: center;
   line-height: 23px;
+  font-size: 15px;
 }
 @media screen and (min-width: 768px) {
   .poll-wrapper .social-share ul li a {
@@ -4580,6 +4589,7 @@ footer .footer-copyright {
   color: #fff;
   text-align: center;
   line-height: 23px;
+  font-size: 15px;
 }
 @media screen and (min-width: 768px) {
   .poll-banner .detail .social-share ul li a {
@@ -5443,6 +5453,7 @@ footer .footer-copyright {
   color: #fff;
   text-align: center;
   line-height: 23px;
+  font-size: 15px;
 }
 @media screen and (min-width: 768px) {
   .view-archive-story .view-content .social-share ul li a {
@@ -9126,6 +9137,7 @@ footer .footer-copyright {
 }
 #block-itg-menu-manager-third-level-menu img {
   padding-top: 10px;
+  max-height: 50px;
 }
 #block-itg-menu-manager-third-level-menu ul {
   padding-top: 30px;
@@ -9374,6 +9386,7 @@ footer .footer-copyright {
   color: #fff;
   text-align: center;
   line-height: 23px;
+  font-size: 15px;
 }
 @media screen and (min-width: 768px) {
   .election-page h1 ul li a {
@@ -10648,6 +10661,7 @@ h1.about-us-heading + div p {
   color: #fff;
   text-align: center;
   line-height: 23px;
+  font-size: 15px;
 }
 @media screen and (min-width: 768px) {
   .factoids-page ul li a {
@@ -11111,6 +11125,7 @@ h1.about-us-heading + div p {
   color: #fff;
   text-align: center;
   line-height: 23px;
+  font-size: 15px;
 }
 @media screen and (min-width: 768px) {
   #main-container-budget ul li a {
@@ -11420,6 +11435,7 @@ h1.about-us-heading + div p {
   color: #fff;
   text-align: center;
   line-height: 23px;
+  font-size: 15px;
 }
 @media screen and (min-width: 768px) {
   .breakingnew-home .new-detail .social-share ul li a {

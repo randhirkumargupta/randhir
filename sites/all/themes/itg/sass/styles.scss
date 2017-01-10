@@ -1237,7 +1237,7 @@ footer{
         height: 673px;
     }
     .itg-layout-container .top-colum-3 .droppable{
-        height: 276px;
+        height: 266px;
     }
     .itg-common-section{
         .droppable{
@@ -1407,7 +1407,9 @@ footer{
         padding:5px;
          a{
             display: block;
-            margin-bottom: 10px;
+            img{
+                margin-bottom: 10px;
+            }
             &:hover{
                 color:$blue-color;
             }
@@ -1419,6 +1421,11 @@ footer{
             @include float(none);
             @include calculate-width(1);
             margin-bottom: 10px;
+            a{
+                img{
+                    margin-bottom: 0;
+                }
+            }
         }
     }
 }
@@ -7612,6 +7619,7 @@ footer{
     }
     img{
         padding-top: 10px;
+        max-height: 50px;
     }
     ul{        
         @extend .list-none;
@@ -9541,11 +9549,11 @@ h1.about-us-heading{
         }
     }    
 .node-type-videogallery, .node-type-photogallery, .node-type-story{
-#cboxLoadedContent{        
+    #cboxLoadedContent{        
         background: url(../images/tab-loading.gif);
         background-position: center;
-        background-repeat: no-repeat;
-    }
+        background-repeat: no-repeat;        
+    }  
 }
 /*css end story page submit story */
 
