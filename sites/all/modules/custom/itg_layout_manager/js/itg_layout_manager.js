@@ -98,6 +98,13 @@
                                 // for category tab widget
                                 $('input[name = ' + block_name + ']').val(category_name_tab);
                                 $('.widget-title[data-id="' + block_name + '"]').html(category_name_tab);
+                                if(block_name == 'itg-block-2' && splitewidgitname[0] == 'highlights' && template_name == 'page--special_budget') {
+                                  $('.highlights-title').html(category_name_tab);
+                                }
+                                
+                                  if(block_name == 'itg-block-4' && splitewidgitname[0] == 'highlights' && template_name == 'page--special_election') {
+                                    $('.highlights-title').html(category_name_tab);
+                                }
                                 $('.tab-buttons span[data-class="' + block_name + '"]').html(category_name_tab);
                                 
                                 if(wid_name == 'sport_poll_widget_block'){

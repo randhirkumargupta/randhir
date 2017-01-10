@@ -137,9 +137,8 @@ if ($theme == 'itgadmin' && !isset($preview)) {
     </div>    
     <?php endif; ?>
                 <?php
-                if (!empty($highlights['node_data']->title)) {
-                    echo '<h1>' . mb_strimwidth($highlights['node_data']->title, 0, 90, "..") . ' <span class="disc-share"><a href="#"><i class="fa fa-share-alt"></i></a></h1>';
-                }
+                echo '<h1><span class="highlights-title">' . mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, "..") . '</span><span class="disc-share"><a href="#"><i class="fa fa-share-alt"></i></a></span></h1>';
+
                 $graphdata=itg_widget_get_graph_data();
                 
                 if(count($graphdata)>2){
@@ -229,7 +228,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                         </div>
 
                                                     </div></div>-->
-                    <div class="data-holder" id="itg-block-2"><?php print $widget_data['itg-block-4']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-4"><?php print $widget_data['itg-block-4']['widget']; ?></div>
 
                                             </div>             
                                         </div>
