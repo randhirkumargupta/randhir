@@ -132,7 +132,12 @@ function itg_loyalty_reward_menu() {
         'type' => MENU_CALLBACK,
         'file' => 'includes/itg_loyalty_reward.checkout.inc',
     );
-   
+    $items['send-mail'] = array(
+        'page callback' => 'itg_loyalty_reward_product_expiry_notification_callback',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+
     return $items;
 }
 
@@ -404,14 +409,23 @@ function itg_loyalty_reward_product_expiry_notification_callback() {
     $result = $query->execute();
     // Fetch node to send notification mail
     while ($record = $result->fetchAssoc()) {
+        $query_user = db_select('node', 'n');
+        $query_user->join('users', 'u', 'u.uid = n.uid');
+        $query_user->fields('u', array('uid', 'mail'))
+                ->condition('n.nid', $record['nid'], '=');
+        $result_user = $query_user->execute()->fetchAll();
+        if (!empty($result_user)) {
+            $node_user = $result_user[0]->mail;
+        }
+        //set node owner
         $end_date = $record['scheduled_time'];
         $diff = $end_date - $current_time;
         $diff_in_hours = round($diff / ( 60 * 60 ));
-   
+
         if ($diff_in_hours > 0) {
             if ($diff_in_hours <= 48) {
-               
-               itg_loyalty_reward_send_mail_product_expiration($record['nid']);
+
+                itg_loyalty_reward_send_mail_product_expiration($record['nid'], $node_user);
             }
         }
     }
