@@ -30,7 +30,7 @@ function ads_features_node_info() {
       'base' => 'node_content',
       'description' => t('ITG CMS user should be able to create a place holder in the CMS and enter the script in the placeholder, and accordingly ads will appear on the front end.'),
       'has_title' => '1',
-      'title_label' => t('Placeholder Title'),
+      'title_label' => t('Title'),
       'help' => '',
     ),
   );
