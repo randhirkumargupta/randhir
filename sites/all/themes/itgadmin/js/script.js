@@ -902,11 +902,11 @@ jQuery(document).ready(function () {
     get_value = jQuery(this).val(), 
     set_class = '.' + get_value + "-tab-form", 
     siblings = jQuery(this).closest('.templates-tab-wrapper').find(set_class).siblings('.tab-form');
-    if(get_value){
-      siblings.find('input[type=text], textarea').val(''),
-      siblings.find('input[type=radio], input[type=checkbox]').removeAttr('checked'),
-      siblings.find('.image-widget-data input[value="Remove"]').trigger('mousedown');
-    }
+//    if(get_value){
+//      siblings.find('input[type=text], textarea').val(''),
+//      siblings.find('input[type=radio], input[type=checkbox]').removeAttr('checked'),
+//      siblings.find('.image-widget-data input[value="Remove"]').trigger('mousedown');
+//    }
     jQuery(this).closest('.templates-tab-wrapper').find(set_class).show().siblings('.tab-form').hide();
   });   
      
