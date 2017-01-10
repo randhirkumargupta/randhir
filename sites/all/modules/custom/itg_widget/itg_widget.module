@@ -1006,9 +1006,9 @@ function itg_get_video_display_for_big_story($nid) {
  * Function returns videogallery iframe slider.
  * @param int $nid
  */
+
 function itg_widget_dailymotion_get_videogallery_slider($nid , $type = 'gallery') {
   $videoids = "";
-
   print '<div class="videogallery-slider slider-for-nid-'.$nid.'">';
   if (function_exists('get_video_in_fieldcollection_by_nid')) {
     $videoids = get_video_in_fieldcollection_by_nid($nid);
