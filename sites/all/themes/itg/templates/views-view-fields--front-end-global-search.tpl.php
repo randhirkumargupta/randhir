@@ -27,7 +27,7 @@
 // configuration for social sharing
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $search_title = preg_replace("/'/", "\\'", $row->label);
-$search_share_title= htmlentities($factoidsSocialShare_title, ENT_QUOTES);    
+$search_share_title= htmlentities($search_title, ENT_QUOTES);    
 $short_url = shorten_url($row->url, 'goo.gl');
 $share_title = addslashes($row->label);
 $share_desc = '';
