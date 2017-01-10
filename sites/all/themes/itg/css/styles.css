@@ -8878,6 +8878,10 @@ footer .footer-copyright {
   top: 7px;
   left: 4px;
 }
+.sport-home-layout-page .page-sports-video a {
+  margin-top: 10px;
+  display: block;
+}
 
 .live-scorecard {
   text-align: center;
