@@ -21,7 +21,8 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
       $data[] = $option['value'];
     }
   }
-  if (!in_array('facebook', $data)) {
+  $errors = array_filter($data);
+  if (empty($errors)) {
     $data[] = 'facebook';
   }
   

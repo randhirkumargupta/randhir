@@ -8,6 +8,7 @@
  *
  */
 module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
+module_load_include('inc', 'itg_common', 'includes/itg_mongo.helper');
 module_load_include('inc', 'itg_common', 'includes/itg_common_mail');
 module_load_include('inc', 'itg_common', 'includes/itg_common');
 
@@ -90,7 +91,13 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     // Set title on Preview
     if (arg(1) == 'add' && isset($form['#node']->op) && $form['#node']->op == 'Preview') {
       $content_type_name = get_content_type_name($form['#node']->type);
-      drupal_set_title('Create ' . $content_type_name);
+      if ($content_type_name == 'heighlights') {
+        drupal_set_title('Create Highlight');
+      } else {
+          drupal_set_title('Create ' . $content_type_name);
+      }
+      
+      
     }
 
     // code to change page title on node edit
@@ -99,8 +106,14 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
         $node_type = str_replace("_", " ", $node_type);
         $node_type = ucfirst($node_type);
         $node_title = $form['#node']->title;
-        $edit_title = 'Edit ' . $node_type . ' - ' . $node_title;
-        drupal_set_title($edit_title);
+        
+        if ($node_type == 'Heighlights') {
+          $edit_title = 'Edit Highlight - ' . $node_title;
+        } else {
+           $edit_title = 'Edit ' . $node_type . ' - ' . $node_title;
+        }
+        
+        drupal_set_title($edit_title);        
     }
 
 

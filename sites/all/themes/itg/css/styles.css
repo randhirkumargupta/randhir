@@ -2823,6 +2823,72 @@ footer .footer-copyright {
 .story-section .buzzfeed-byline .social-share-story li a:hover i {
   color: #1a3c8d;
 }
+.story-section #videogallery-iframe {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  background: rgba(0, 0, 0, 0.76);
+  display: none;
+}
+.story-section #videogallery-iframe .big-story-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 350px;
+  margin-left: -300px;
+  margin-top: -175px;
+}
+.story-section #videogallery-iframe #close-big-story {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  color: #000;
+  z-index: 99;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: #fff;
+  text-align: center;
+  border-radius: 100%;
+  line-height: 30px;
+  font-weight: 900;
+  cursor: pointer;
+}
+.story-section #videogallery-iframe #close-big-story a {
+  color: #000;
+  font-family: roboto;
+}
+.story-section .videogallery-slider .slick-slide {
+  width: 100%;
+}
+.story-section .video-slider-images .slick-slider {
+  background: #171717;
+  padding: 10px 0px;
+  height: inherit;
+}
+.story-section .video-slider-images li {
+  padding: 0 5px;
+  cursor: pointer;
+}
+.story-section .video-slider-images li:focus {
+  outline: none;
+  border: none;
+}
+.story-section .video-slider-images li img {
+  border: 1px solid transparent;
+  height: 66px;
+  width: 88px;
+}
+.story-section .video-slider-images li.slick-current img {
+  border: 1px solid #fff;
+}
+.story-section .iframe-video iframe {
+  border: 5px solid #171717;
+}
 
 .buzz-feedback {
   width: 100%;
@@ -8812,6 +8878,10 @@ footer .footer-copyright {
   top: 7px;
   left: 4px;
 }
+.sport-home-layout-page .page-sports-video a {
+  margin-top: 10px;
+  display: block;
+}
 
 .live-scorecard {
   text-align: center;
@@ -9961,6 +10031,15 @@ footer .footer-copyright {
 
 /*email and change password end*/
 /*css start static pages menu*/
+h1.about-us-heading {
+  text-transform: capitalize;
+  font-size: 35px;
+}
+h1.about-us-heading + div p {
+  padding: 10px 0;
+  color: #7e7e7e;
+}
+
 #block-menu-menu-about-us-page-menu ul {
   border: 1px solid #dddddd;
 }
@@ -11050,11 +11129,6 @@ footer .footer-copyright {
 
 /*budget predictor css end*/
 /*css start big story format*/
-#block-itg-widget-big-story-format {
-  /*    .live-tv-big-story{
-          margin-bottom: 50px;
-      }*/
-}
 #block-itg-widget-big-story-format #videogallery-iframe {
   position: fixed;
   top: 0;
@@ -11100,6 +11174,7 @@ footer .footer-copyright {
 #block-itg-widget-big-story-format .video-slider-images .slick-slider {
   background: #171717;
   padding: 10px 0px;
+  height: inherit;
 }
 #block-itg-widget-big-story-format .video-slider-images li {
   padding: 0 5px;
