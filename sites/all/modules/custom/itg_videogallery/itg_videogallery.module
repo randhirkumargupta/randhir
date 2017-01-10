@@ -395,6 +395,13 @@ function itg_videogallery_custom_submit($form, &$form_state) {
                 // Perform playlist and tags when new video create.
                 $response_result['video_id'] = $response['id'];
                 $response_result['fid'] = $response['fid'];
+                $duration="";
+                 if ($response['duration'] < 3600) {
+                    $duration = gmdate("i:s", $response['duration']);
+                }
+                else {
+                    $duration = gmdate("H:i:s", $response['duration']);
+                }
                 $nid = db_insert('dailymotion_response_details')
                         ->fields(array(
                             'title' => $response['title'],
@@ -404,7 +411,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
                             'video_id' => $response['id'],
                             'nid' => $node_id,
                             'upload_time' => REQUEST_TIME,
-                            'video_duration' => $response['duration'],
+                            'video_duration' => $duration ,
                             'dailymotion_published' => 1,
                             'type' => 'local',
                             'name' => $file_details->filename,
