@@ -33,7 +33,7 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
   );
 
   $mail = drupal_mail('itg_newsletter', 'send_newsletter', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
-
+  
   if ($mail['result']) {
     drupal_set_message(t('Newsletter has been sent successfully.'));
     if ($news_eng_type == 'automatically') {
@@ -194,7 +194,6 @@ function itg_get_newsletter_mail_content_stories($template_node) {
  * @param int $nid
  */
 function itg_update_newsletter_cron_tbl($nid) {
-
   $query = db_select('itg_cron_newsletter', 'nc')
     ->fields('nc', array('nid', 'type', 'scheduled_time', 'frequency'))
     ->condition('nc.nid', $nid);
