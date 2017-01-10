@@ -7339,7 +7339,13 @@ input[type="radio"]:checked + label:after{
     left: 4px;
 }
         } 
-    }    
+    } 
+    .page-sports-video{
+        a{
+            margin-top: 10px;
+            display: block;
+        }
+    }
 }
 .live-scorecard{
         text-align: center;   
