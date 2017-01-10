@@ -8646,7 +8646,7 @@ footer .footer-copyright {
 .sport-home-layout-page .itg-layout-615 .auto-block-1 .featured-news a:hover {
   color: #f1f1f1;
 }
-.sport-home-layout-page .itg-layout-615 .auto-block-1 .featured-news .featured-post .no-result-image {
+.sport-home-layout-page .itg-layout-615 .auto-block-1 .featured-news .featured-post .featured-post-first .no-result-image {
   height: 270px;
 }
 .sport-home-layout-page .itg-layout-615 .auto-block-2 {
@@ -8781,7 +8781,7 @@ footer .footer-copyright {
   color: #fff;
   text-transform: uppercase;
   cursor: pointer;
-  padding: 12px;
+  padding: 0px;
   font-size: 18px;
   box-shadow: 4px 4px 0 #00b3e6;
 }

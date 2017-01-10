@@ -7085,9 +7085,11 @@ footer{
                         }
                     }
                     .featured-post{
-                        .no-result-image{
-                            height: 270px;
-                        }
+                        .featured-post-first{
+                            .no-result-image{
+                                height: 270px;
+                            }    
+                        }                        
                     }
                 }
             }
@@ -7237,7 +7239,7 @@ footer{
                 color: #fff;
                 text-transform: uppercase;
                 cursor: pointer;
-                padding: 12px;
+                padding: 0px;
                 font-size: 18px;
                 box-shadow: 4px 4px 0 #00b3e6;
             } 
@@ -7307,37 +7309,37 @@ footer{
                 float: left;
             }
             input[type="radio"] {
-    display:none;
-}
-input[type="radio"] + label {    
-    padding-left: 25px;
-    position: relative;
-}
-input[type="radio"] + label:before, input[type="radio"] + label:after{
-    display:inline-block;
-    width:15px;
-    height:15px;    
-    vertical-align:middle;
-    cursor:pointer;
-    -moz-border-radius:  50%;
-    border-radius:  50%;
-    position: absolute;
-    top:3px;
-    left: 0;
-    content: '';
-}
+                display:none;
+            }
+            input[type="radio"] + label {    
+                padding-left: 25px;
+                position: relative;
+            }
+            input[type="radio"] + label:before, input[type="radio"] + label:after{
+                display:inline-block;
+                width:15px;
+                height:15px;    
+                vertical-align:middle;
+                cursor:pointer;
+                -moz-border-radius:  50%;
+                border-radius:  50%;
+                position: absolute;
+                top:3px;
+                left: 0;
+                content: '';
+            }
 
-input[type="radio"] + label:before{
-     background-color:#c0c0c0;
-}
+            input[type="radio"] + label:before{
+                background-color:#c0c0c0;
+            }
 
-input[type="radio"]:checked + label:after{
-    background-color: #333;
-    width: 7px;
-    height: 7px;
-    top: 7px;
-    left: 4px;
-}
+            input[type="radio"]:checked + label:after{
+                background-color: #333;
+                width: 7px;
+                height: 7px;
+                top: 7px;
+                left: 4px;
+            }
         } 
     } 
     .page-sports-video{
