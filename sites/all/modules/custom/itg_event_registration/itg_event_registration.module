@@ -117,16 +117,19 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
         '#markup' => '<div class = "event-no-of-memeber"><span class="event-form-remove">-</span><input readonly value="1" type="text" name="no_of_mem" class="event-form-number" /><span class="event-form-add">+</span></div>',
         '#suffix'=> '</div>'
     );*/
-    
-    $current_event_nid = itg_event_registration_get_event_nid();
+    $current_event_nid_old = itg_event_registration_get_event_nid();
+    if(!empty($current_event_nid_old)){
+      $_SESSION['current_event_id'] = $current_event_nid_old;
+    }
+     $current_event_nid = $_SESSION['current_event_id'];
     $max_delta = $form['field_erf_registration_fee'][LANGUAGE_NONE]['#max_delta'] + 1;
     $node = node_load($current_event_nid);
     $no_of_tickets = $node->field_no_of_tickets[LANGUAGE_NONE][0]['value'];
 
     $total_registered_users = itg_event_registration_get_total_registration($current_event_nid);
     $tickets_available = $no_of_tickets - $total_registered_users;
-    $group_tickets_available = $tickets_available - 1;
-
+    //$group_tickets_available = $tickets_available - 1;
+    $group_tickets_available = $tickets_available;
     if ($group_tickets_available > 0) {
       $_SESSION['total_ava_ticket'] = $group_tickets_available;
     }
