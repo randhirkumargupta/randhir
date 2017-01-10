@@ -21,6 +21,26 @@ function features_for_loyalty_and_rewards_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any loyalty_and_rewards content'.
+  $permissions['delete any loyalty_and_rewards content'] = array(
+    'name' => 'delete any loyalty_and_rewards content',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own loyalty_and_rewards content'.
+  $permissions['delete own loyalty_and_rewards content'] = array(
+    'name' => 'delete own loyalty_and_rewards content',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any loyalty_and_rewards content'.
   $permissions['edit any loyalty_and_rewards content'] = array(
     'name' => 'edit any loyalty_and_rewards content',
