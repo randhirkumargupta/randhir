@@ -289,14 +289,25 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   }
 
   if ($form_id == 'ugc_node_form') {
-   $user_fields = user_load($user->uid);
-  if ($user->uid != '1') {
+    //pr($form);
+    
+    $user_fields = user_load($user->uid);
+   
+   if ($user->uid != '1') {
       // hide source and type field from other users
       if ($form_id == 'ugc_node_form') {
         $form['field_story_source_type']['#access'] = FALSE;
         $form['field_source']['#access'] = FALSE;
       }
     }
+    
+    // Add label for captcha
+    if ($user->uid == 0) {
+      $form['captcha']['#prefix'] = '<div class="row">Captcha';
+      $form['captcha']['#suffix'] = '</div>';
+    }
+
+    
     $type = "ugc";
     $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
     foreach ($tax as $key => $term) {
@@ -766,5 +777,5 @@ function itg_ugc_views_pre_render(&$view) {
  * Implements itg_ugc_thank_you
  */
 function itg_ugc_thank_you() {
- print '<div class="ugc-success">UGC content has been submitted successfully for further review and approval.</div>';
+ print '<div class="ugc-success" style="height: 100%; background: #fff;">UGC content has been submitted successfully for further review and approval.</div>';
 }
