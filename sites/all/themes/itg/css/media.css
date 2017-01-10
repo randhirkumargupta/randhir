@@ -63,7 +63,7 @@
     line-height: 18px;
   }
 
-  .static-feedback-from h1 {
+  .static-feedback-from h1, h1.about-us-heading {
     font-size: 26px;
   }
 
@@ -379,17 +379,19 @@
     margin: 0;
   }
 
-  .page-sports-video .view-content .photo-list {
+  .sport-home-layout-page .page-sports-video .view-content .photo-list {
     white-space: nowrap;
     overflow: auto;
+    margin: 0 -6px;
   }
-  .page-sports-video .view-content .photo-list li {
+  .sport-home-layout-page .page-sports-video .view-content .photo-list li {
     float: none;
     display: inline-block;
-    width: 170px;
+    width: 156px;
     vertical-align: top;
+    padding: 15px 6px;
   }
-  .page-sports-video .view-content .photo-list li a {
+  .sport-home-layout-page .page-sports-video .view-content .photo-list li a {
     white-space: pre-wrap;
   }
 
@@ -683,6 +685,10 @@
   }
 
   /*css end special event page for osscar*/
+  .static_page_menu {
+    margin-bottom: 40px;
+  }
+
   /*css start snappost page*/
   .page-snappost .spanpost-header .spost-left {
     width: 100%;
@@ -1141,6 +1147,22 @@
   }
 
   /*pop up big story end*/
+  /*static page css start*/
+  .static-feedback-from .name-email-continer input[type="text"] {
+    width: 260px;
+    height: 40px;
+  }
+
+  /*static page css end*/
+  /*poll css start*/
+  .home_page_poll_widget_block .poll-data form .form-radios {
+    text-align: left;
+  }
+  .home_page_poll_widget_block .poll-data form .form-radios .form-item {
+    display: block;
+  }
+
+  /*poll css end*/
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/
@@ -1512,6 +1534,16 @@
     width: 140px;
     font-size: 16px;
     font-weight: 300;
+  }
+
+  .static-feedback-from h1 span {
+    float: none;
+    display: block;
+    font-size: 10px;
+  }
+
+  .static-feedback-from .webform-name-field.feedback .form-textarea-wrapper, .static-feedback-from .webform-name-field.feedback label {
+    width: 100%;
   }
 
   /*static page css end*/
