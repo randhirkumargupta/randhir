@@ -45,50 +45,40 @@
                     <div class="field-label"><?php echo t('Title'); ?>:</div>
                     <div class="field-items"><?php print $title; ?></div>
                   </div>
-                 
                   <?php
-                  $field_ads_short_description = render($content['field_ads_short_description']);
-                  if (!empty($field_ads_short_description)): print render($content['field_ads_short_description']);
-                  endif;
-                  ?>
-                  <?php
+                  // All fields widget will be render here
+
                   $field_ads_template_selection = render($content['field_ads_template_selection']);
                   if (!empty($field_ads_template_selection)): print render($content['field_ads_template_selection']);
                   endif;
-                  ?>
-                  <?php
-                  $field_ads_section_selection = render($content['field_ads_section_selection']);
-                  if (!empty($field_ads_section_selection)): print render($content['field_ads_section_selection']);
+
+
+                  $field_adds_code_holder = render($content['field_adds_code_holder']);
+                  if (!empty($field_adds_code_holder)): print $field_adds_code_holder;
                   endif;
-                  ?>
-                  <?php
-                  $field_ads_template_variants = render($content['field_ads_template_variants']);
-                  if (!empty($field_ads_template_variants)): print render($content['field_ads_template_variants']);
+
+                  $field_code_visibility_flag = render($content['field_code_visibility_flag']);
+                  if (!empty($field_code_visibility_flag)): print $field_code_visibility_flag;
                   endif;
-                  ?>
-                  <?php
-                  $field_ads_placeholder = render($content['field_ads_placeholder']);
-                  if (!empty($field_ads_placeholder)): print render($content['field_ads_placeholder']);
-                  endif;
-                  ?>
-                  <?php
-                  $field_ads_ad_code = render($content['field_ads_ad_code']);
-                  if (!empty($field_ads_ad_code)): print render($content['field_ads_ad_code']);
-                  endif;
-                  ?>
-                  <?php
+
                   $field_ads_header_script = render($content['field_ads_header_script']);
-                  if (!empty($field_ads_header_script)): print render($content['field_ads_header_script']);
+                  if (!empty($field_ads_header_script)): print $field_ads_header_script;
                   endif;
-                  ?>
-                  <?php
+
+                  $field_ads_body_start = render($content['field_ads_body_start']);
+                  if (!empty($field_ads_body_start)): print $field_ads_body_start;
+                  endif;
+
+                  $field_ads_body_close = render($content['field_ads_body_close']);
+                  if (!empty($field_ads_body_close)): print $field_ads_body_close;
+                  endif;
+
                   $field_ads_start_date = render($content['field_ads_start_date']);
-                  if (!empty($field_ads_start_date)): print render($content['field_ads_start_date']);
+                  if (!empty($field_ads_start_date)): print $field_ads_start_date;
                   endif;
-                  ?>
-                  <?php
+
                   $field_ads_end_date = render($content['field_ads_end_date']);
-                  if (!empty($field_ads_end_date)): print render($content['field_ads_end_date']);
+                  if (!empty($field_ads_end_date)): print $field_ads_end_date;
                   endif;
                   ?>
                 </div>
@@ -97,11 +87,11 @@
           <?php endif; ?>
 
         </div>
-<?php endif; ?>
+      <?php endif; ?>
 
       <?php if ($layout): ?>
       </div></div>
-      <?php endif; ?>
+  <?php endif; ?>
 </div>
 
 <?php if (!empty($post_object)) print render($post_object) ?>

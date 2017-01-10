@@ -10,16 +10,63 @@
 /**
  * Implements hook_block_info(). 
  * {@inheritdoc}
+ *
+ * ##Code started for new block creation as per suggested sheet 6 block name have been given as follows##
+ * 1.Page pusher 1x1
+ * 2.Overlay 1x1
+ * 3.Super Banner (Top Nav) 728x90
+ * 4.Super Banner (Bottom nav) 728x90
+ * 5.Medium Rectangle-RHS1-300x250
+ * 6.Medium Rectangle-RHS2-300x250
+ * 
+ * ### And corresponding machine names are given as follows ##
+ * 1.ads_page_pusher_1x1
+ * 2.ads_overlay_1x1
+ * 3.ads_super_banner_top_nav_728x90
+ * 4.ads_super_banner_bottom
+ * 5.ads_medium_rectangle_rhs1_300x250
+ * 6.ads_medium_rectangle_rhs2_300x250
+ * 
  */
 function itg_ads_block_info() {
-  $blocks['ad_right_sidebar_1'] = array(
-      'info' => t('Ad right sidebar 1'),
+
+  // Start code for ads block configuration 
+
+  $blocks['ads_page_pusher_1x1'] = array(
+      'info' => t('Ads- Page pusher 1x1'),
       'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  $blocks['ad_right_sidebar_2'] = array(
-      'info' => t('Ad right sidebar 2'),
+  $blocks['ads_overlay_1x1'] = array(
+      'info' => t('Ads- Overlay 1x1'),
       'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['ads_super_banner_top_nav_728x90'] = array(
+      'info' => t('Ads- Super Banner (Top Nav) 728x90'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['ads_super_banner_bottom_nav_728x90'] = array(
+      'info' => t('Ads- Super Banner (Bottom nav) 728x90'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  $blocks['ads_medium_rectangle_rhs1_300x250'] = array(
+      'info' => t('Ads- Medium Rectangle-RHS1-300x250'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['ads_medium_rectangle_rhs2_300x250'] = array(
+      'info' => t('Ads- Medium Rectangle-RHS2-300x250'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  // End code for newly added block configuration 
+//  $blocks['ad_right_sidebar_1'] = array(
+//      'info' => t('Ad right sidebar 1'),
+//      'cache' => DRUPAL_CACHE_GLOBAL,
+//  );
+//  $blocks['ad_right_sidebar_2'] = array(
+//      'info' => t('Ad right sidebar 2'),
+//      'cache' => DRUPAL_CACHE_GLOBAL,
+//  );
 
   return $blocks;
 }
@@ -31,16 +78,68 @@ function itg_ads_block_info() {
 function itg_ads_block_view($delta = '') {
   $block = array();
   switch ($delta) {
-    case 'ad_right_sidebar_1':
-      $page_name = 'Rest';
-      $data['itg_ad'] = get_ad_script($page_name);
-      $block['content'] = theme('ad_right_sidebar_block1', array('data' => $data));
+
+
+    case 'ads_page_pusher_1x1':
+      $page_name = 'Page pusher 1x1';
+      $data['itg_ad'] = '';
+      $block['content'] = 'ads_page_pusher_1x1 content coming soon..';
       break;
-    case 'ad_right_sidebar_2':
-      $page_name = 'Rest';
-      $data['itg_ad'] = get_ad_script($page_name);
-      $block['content'] = theme('ad_right_sidebar_block2', array('data' => $data));
+
+
+    // For Overlay 1x1
+
+    case 'ads_overlay_1x1':
+      $page_name = 'Overlay 1x1';
+      $data['itg_ad'] = '';
+      $block['content'] = 'Overlay 1x1 code content coming soon...';
       break;
+
+
+    // For Super Banner (Top Nav) 728x90
+
+    case 'ads_super_banner_top_nav_728x90':
+      $page_name = 'Super Banner (Top Nav) 728x90';
+      $data['itg_ad'] = '';
+      $block['content'] = 'Super Banner (Top Nav) 728x90 code content coming soon...';
+      break;
+
+    // For Super Banner (Bottom nav) 728x90  
+
+    case 'ads_super_banner_bottom_nav_728x90':
+      $page_name = 'Super Banner (Bottom Nav) 728x90';
+      $data['itg_ad'] = '';
+      $block['content'] = 'Super Banner (Bottom Nav) 728x90 code content coming soon...';
+      break;
+
+
+    // Medium Rectangle-RHS1-300x250
+    case 'ads_medium_rectangle_rhs1_300x250':
+      $page_name = 'Medium Rectangle-RHS1-300x250';
+      $data['itg_ad'] = '';
+      $block['content'] = 'Medium Rectangle-RHS1-300x250 code content coming soon..';
+      break;
+
+    // Medium Rectangle-RHS2-300x250
+    case 'ads_medium_rectangle_rhs2_300x250':
+      $page_name = 'Medium Rectangle-RHS2-300x250';
+      $data['itg_ad'] = '';
+      $block['content'] = 'Medium Rectangle-RHS2-300x250 code content coming soon..';
+      break;
+    
+    // Code end
+    
+    
+//    case 'ad_right_sidebar_1':
+//      $page_name = 'Rest';
+//      $data['itg_ad'] = get_ad_script($page_name);
+//      $block['content'] = theme('ad_right_sidebar_block1', array('data' => $data));
+//      break;
+//    case 'ad_right_sidebar_2':
+//      $page_name = 'Rest';
+//      $data['itg_ad'] = get_ad_script($page_name);
+//      $block['content'] = theme('ad_right_sidebar_block2', array('data' => $data));
+//      break;
   }
 
   return $block;
@@ -90,17 +189,11 @@ function itg_ads_theme($existing, $type, $theme, $path) {
  * {@inheritdoc}
  */
 function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form_id) {
-  //dpm('field_ads_placeholder');
-  //code for client related mode display in dropdown
+
   $syndication_mode = 'field_ads_placeholder';
   $syndication_rule_title = 'field_ads_template_selection';
   $rule_title = $form[$syndication_rule_title][LANGUAGE_NONE]['#entity']->field_ads_template_selection[LANGUAGE_NONE][0]['value'];
 
-  
- 
-  
-  
-  
   $option_array = array(
       '_none' => '- Select a value -',
       'Home' => 'Home Page',
@@ -133,14 +226,11 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
   //Get mode 
   if (isset($form_state['input'][$syndication_rule_title][LANGUAGE_NONE])) {
     $op = $option_array_ds + itg_ads_get_mode($form_state['input'][$syndication_rule_title][LANGUAGE_NONE]);
-    //dpm($op);
   } else if (isset($rule_title)) {
     $op = itg_ads_get_mode($rule_title);
   }
-//  else {
-//    $op = array('_none' => '- None -');
-//  }
-//dpm($op);
+
+
   foreach ($form['field_adds_code_holder'][LANGUAGE_NONE] as $key => $item) {
     if (is_numeric($key)) {
 
@@ -149,8 +239,6 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
       }
 
       $syndication_mode_value = $form['field_adds_code_holder'][LANGUAGE_NONE][$key]['#entity']->field_ads_placeholder[LANGUAGE_NONE][0]['value'];
-//dpm('$syndication_mode_value='.$syndication_mode_value);
-//pr($form['field_adds_code_holder'][LANGUAGE_NONE][$key][$syndication_mode]);
       $form['field_adds_code_holder'][LANGUAGE_NONE][$key][$syndication_mode][LANGUAGE_NONE]['#options'] = $op;
       if (isset($syndication_mode_value)) {
         $form['field_adds_code_holder'][LANGUAGE_NONE][$key][$syndication_mode][LANGUAGE_NONE]['#default_value'] = $syndication_mode_value;
@@ -160,155 +248,7 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
     }
   }
 
-  //$form['#after_build'][] = 'itg_syndication_rule_after_build';
-  // $form['actions']['submit']['#submit'][] = 'itg_syndication_rule_change_message';
   $form['#validate'][] = 'itg_ads_rule_after_build_validate';
-
-  
-//   $check_add_template_existance = check_add_template_existance($form_state['values']['field_ads_template_selection']['und'][0]['value']);
-//
-//  if (isset($form_state['values']['nid']) && !empty($form_state['values']['nid']) && $form_state['values']['nid']!=$check_add_template_existance) {
-//        form_set_error('field_ads_template_selection','OOPS! Already added place holder for selected template.If you want to edit selected templete please '.l('click here!','node/'.$form_state['values']['nid'].'/edit'));
-//  }
-  
-
-
-
-
-
-  /* $formdata = NULL;
-
-    // Hide the template variant field temporary
-    unset($form['field_ads_template_variants']);
-    $form['#attached']['js'] = array(
-    drupal_get_path('module', 'itg_ads') . '/js/itg_ads.js',
-    );
-
-    $form['#after_build'][] = 'itg_common_cancel_button';
-
-    // Custom callback on submit button
-    $form['actions']['submit']['#submit'][] = 'alter_ad_submit_status_message';
-
-    // Code to check if section is selected then section selection field show
-    $form['field_ads_select_secton_option']['#states'] = array(
-    'visible' => array(
-    ':input[name="field_ads_template_selection[und]"]' => array('value' => 'Section'),
-    )
-    );
-
-    // Code to check if section is selected then section selection field show
-    $form['field_ads_section_selection']['#states'] = array(
-    'visible' => array(
-    ':input[name="field_ads_template_selection[und]"]' => array('value' => 'Section'),
-    )
-    );
-
-    // Ajax work based on field template selection
-    $template_selection_field = 'field_ads_template_selection';
-    $ads_placeholder_field = 'field_ads_placeholder';
-
-    // Set template selection on edit and trigger action
-    if (isset($form[$template_selection_field][LANGUAGE_NONE]['#default_value'][0]) && !isset($form_state['triggering_element'])) {
-    $template_id = $form[$template_selection_field][LANGUAGE_NONE]['#default_value'][0];
-    $formdata = $template_id;
-    } else {
-    $template_id = $form_state['input'][$template_selection_field][LANGUAGE_NONE];
-    }
-
-    // Add ajax on template selection field
-
-    $option_array = array(
-    '_none' => '- Select a value -',
-    'Home' => 'Home Page',
-    'Rest' => 'Rest of the Site',
-    );
-
-
-    $combined_final_array = $option_array + get_all_list_of_section_page();
-
-
-    $form[$template_selection_field][LANGUAGE_NONE]['#options'] = $combined_final_array;
-
-
-    $form[$template_selection_field][LANGUAGE_NONE]['#ajax'] = array(
-    'event' => 'change',
-    'callback' => 'itg_ads_value_ajax_callback',
-    'wrapper' => $ads_placeholder_field . '_replace',
-    );
-    $form['field_ads_placeholder']['#validated'] = TRUE;
-
-    // Setup Ads placeholder field select
-    $form[$ads_placeholder_field][LANGUAGE_NONE]['#prefix'] = '<div id="' . $ads_placeholder_field . '_replace">';
-    $form[$ads_placeholder_field][LANGUAGE_NONE]['#suffix'] = '</div>';
-
-    //  if (function_exists('itg_common_dropdown_supplement')) {
-    if ($template_id == 'Home' || $template_id == 'Rest') {
-    $form['field_ads_select_secton_option'][LANGUAGE_NONE]['#options'] = array('_none' => 'NONE');
-    unset($form['field_ads_select_secton_option']);
-
-    //$form['field_ads_select_secton_option'][LANGUAGE_NONE]['#default_value'] = array('_none' => '-None-');
-    $form[$ads_placeholder_field][LANGUAGE_NONE]['#options'] = itg_ads_placeholder_values($template_id, $template_id);
-    } else {
-
-    //Ajax work based on field section selection
-    $section_selection_field = 'field_ads_section_selection';
-    $ads_placeholder_field = 'field_ads_select_secton_option';
-    // set section selection on edit and trigger action
-    if (isset($form[$section_selection_field][LANGUAGE_NONE]['#default_value'][0]) && !isset($form_state['triggering_element'])) {
-    $section_id = $form[$section_selection_field][LANGUAGE_NONE]['#default_value'][0];
-    } else {
-    $section_id = $form_state['input'][$section_selection_field][LANGUAGE_NONE];
-    }
-
-    // add ajax on template selection field
-    $form[$section_selection_field][LANGUAGE_NONE]['#ajax'] = array(
-    'event' => 'change',
-    'callback' => 'itg_ads_value_ajaxs',
-    'wrapper' => $ads_placeholder_field . '_replace',
-    );
-    $form['field_ads_select_secton_option']['#validated'] = TRUE;
-
-    // Setup Ads placeholder field select
-    $form[$ads_placeholder_field][LANGUAGE_NONE]['#prefix'] = '<div id="' . $ads_placeholder_field . '_replace">';
-    $form[$ads_placeholder_field][LANGUAGE_NONE]['#suffix'] = '</div>';
-    if ($section_id == 'Photo' || $section_id == 'Video' || $section_id == 'Default') {
-    $form[$ads_placeholder_field][LANGUAGE_NONE]['#options'] = itg_ads_placeholder($form, $section_id);
-    }
-
-    //Ajax work based on field select section option.
-    $select_secton_field = 'field_ads_select_secton_option';
-    $ads_placeholder_field = 'field_ads_placeholder';
-    if (arg(2) == 'edit' && arg(0) == 'node' && is_numeric(arg(1))) {
-    $select_section_id = $form[$select_secton_field][LANGUAGE_NONE]['#entity']->field_ads_select_secton_option[LANGUAGE_NONE][0]['value'];
-    $section_id = $form[$select_secton_field][LANGUAGE_NONE]['#entity']->field_ads_section_selection[LANGUAGE_NONE][0]['value'];
-    } else {
-    $select_section_id = $form_state['input'][$select_secton_field][LANGUAGE_NONE];
-    $section_id = $form_state['input']['field_ads_section_selection'][LANGUAGE_NONE];
-    }
-    // add ajax on template selection field
-    $form[$select_secton_field][LANGUAGE_NONE]['#ajax'] = array(
-    'event' => 'change',
-    'callback' => 'itg_ads_value_ajax',
-    'wrapper' => $ads_placeholder_field . '_replace',
-    );
-    $form['field_ads_placeholder']['#validated'] = TRUE;
-
-    // Setup Ads placeholder field select
-    $form[$ads_placeholder_field][LANGUAGE_NONE]['#prefix'] = '<div id="' . $ads_placeholder_field . '_replace">';
-    $form[$ads_placeholder_field][LANGUAGE_NONE]['#suffix'] = '</div>';
-    $form[$ads_placeholder_field][LANGUAGE_NONE]['#options'] = itg_ads_placeholder_value($select_section_id, $section_id);
-    }
-    if (arg(2) == 'edit') {
-    $db_options = $form_state['build_info']['args'][0]->field_ads_placeholder['und'][0]['value'];
-    $form['field_ads_placeholder']['und']['#options'][$db_options] = $db_options;
-    $form['field_ads_placeholder']['und']['#default_value'] = array($db_options);
-
-    $db_option = $form_state['build_info']['args'][0]->field_ads_select_secton_option['und'][0]['value'];
-    $term = taxonomy_term_load($db_option);
-    $term_data = $term->name;
-    $form['field_ads_select_secton_option']['und']['#options'][$db_option] = t($term_data);
-    $form['field_ads_select_secton_option']['und']['#default_value'] = $db_option;
-    } */
 }
 
 /**
@@ -320,16 +260,6 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
 function itg_ads_mode_ajax_callback($form, $form_state) {
   return $form['field_adds_code_holder'];
 }
-
-/**
- * Ajax callback for syndication_mode dropdown
- * @param array $form
- * @param array $form_state
- * @return $form; 
- */
-//function itg_syndication_delivery_mode_ajax_callback($form, $form_state) {
-//  return $form['client_delivery_mode'];
-//}
 
 /**
  * Ajax callback for ads placeholder dropdown.
@@ -784,12 +714,44 @@ function itg_ads_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
     $combined_final_array = $option_array + get_all_list_of_section_page();
     $form['field_ad_master_template_section'][LANGUAGE_NONE]['#options'] = $combined_final_array;
 
+
     if (isset($form['#entity']->field_ad_master_template_section['und'][0]['value']) && !empty($form['#entity']->field_ad_master_template_section['und'][0]['value'])) {
       $form['field_ad_master_template_section'][LANGUAGE_NONE]['#default_value'] = $form['#entity']->field_ad_master_template_section['und'][0]['value'];
+    }
+    $form['#validate'][] = 'ads_form_validate_term_validate';
+  }
+}
+
+/**
+ * Ads template master form validate
+ * @param array $form
+ * @param array $form_state
+ */
+function ads_form_validate_term_validate($form, &$form_state) {
+
+
+  if (isset($form_state['values']['field_ad_master_template_section']['und'][0]['value']) && !empty($form_state['values']['field_ad_master_template_section']['und'][0]['value'])) {
+    $check_ads_placeholder_existance = check_ads_placeholder_existance($form_state['values']['field_ad_master_template_section']['und'][0]['value']);
+  }
+
+  if (isset($check_ads_placeholder_existance) && !empty($check_ads_placeholder_existance)) {
+    if (isset($form_state['values']['tid']) && !empty($form_state['values']['tid'])) {
+      if ($form_state['values']['tid'] == $check_ads_placeholder_existance) {
+        
+      } else {
+        form_set_error('field_ads_template_selection', 'OOPS! Already added place holder for selected template.If you want to edit selected templete please ' . l('click here!', 'taxonomy/term/' . $check_ads_placeholder_existance . '/edit'));
+      }
+    } else {
+      form_set_error('field_ads_template_selection', 'OOPS! Already added place holder for selected template.If you want to edit selected templete please ' . l('click here!', 'taxonomy/term/' . $check_ads_placeholder_existance . '/edit'));
     }
   }
 }
 
+/**
+ * Getting add mode
+ * @param string $type
+ * @return array $array;
+ */
 function itg_ads_get_mode($type) {
 
   if ($type == 'Home' || $type == 'Rest') {
@@ -816,35 +778,22 @@ function itg_ads_get_mode($type) {
  * {@inheritdoc}
  */
 function itg_ads_rule_after_build_validate($form, &$form_state) {
-//p('ll');
 
-
-//  dpm($form_state['values']);
-//  dpm($form_state['values']['field_ads_template_selection']['und'][0]['value']);
   $check_add_template_existance = check_add_template_existance($form_state['values']['field_ads_template_selection']['und'][0]['value']);
 
-  if (isset($form_state['values']['nid']) && !empty($form_state['values']['nid']) && $form_state['values']['nid']!=$check_add_template_existance) {
-        form_set_error('field_ads_template_selection','OOPS! Already added place holder for selected template.If you want to edit selected templete please '.l('click here!','node/'.$form_state['values']['nid'].'/edit'));
-  } elseif(isset($_GET['q']) && !empty($_GET['q']) && $_GET['q']=='node/add/ads-management'){
-    if(isset($check_add_template_existance) && !empty($check_add_template_existance)) {
-              form_set_error('field_ads_template_selection','OOPS! Already added place holder for selected template.If you want to edit selected templete please '.l('click here!','node/'.$check_add_template_existance.'/edit'));
-
+  if (isset($form_state['values']['nid']) && !empty($form_state['values']['nid']) && $form_state['values']['nid'] != $check_add_template_existance) {
+    form_set_error('field_ads_template_selection', 'OOPS! Already added place holder for selected template.If you want to edit selected templete please ' . l('click here!', 'node/' . $check_add_template_existance . '/edit'));
+  } elseif (isset($_GET['q']) && !empty($_GET['q']) && $_GET['q'] == 'node/add/ads-management') {
+    if (isset($check_add_template_existance) && !empty($check_add_template_existance)) {
+      form_set_error('field_ads_template_selection', 'OOPS! Already added place holder for selected template.If you want to edit selected templete please ' . l('click here!', 'node/' . $check_add_template_existance . '/edit'));
     }
-    
   }
-
-
 
   $placeholder_data = array();
   $device_data = array();
 
   $syndication_mode = 'field_ads_placeholder';
   $syndication_rule_title = 'field_ads_template_selection';
-
-  //foreach ($form['field_adds_code_holder'][LANGUAGE_NONE] as $key => $item) {
-  //watchdog('test7878','<pre>' . print_r($form['field_adds_code_holder'][LANGUAGE_NONE][$key][$syndication_mode], true). '</pre>');
-  //$form['field_adds_code_holder'][LANGUAGE_NONE][$key][$syndication_mode][LANGUAGE_NONE]['#value'] = $op;
-  // }
 
 
   $lang = isset($form_state['values']['language']) ? $form_state['values']['language'] : LANGUAGE_NONE;
@@ -869,17 +818,12 @@ function itg_ads_rule_after_build_validate($form, &$form_state) {
   $placeholder_data_final = array_filter($placeholder_data);
   $device_data_final = array_filter($device_data);
 
-  // dpm($placeholder_data_final);
-  // dpm($device_data_final);
-
-
   foreach ($placeholder_data_final as $placeholder_chunk_key => $placeholder_chunk) {
     $p_matched_key = NULL;
     $p_search_key = NULL;
 
     $p_search_key = $placeholder_chunk_key;
 
-    //for ($i = 0; $i < count($placeholder_data_final); $i++) {
     foreach ($placeholder_data_final as $i => $placeholderinner_chunk) {
 
       if ($placeholder_data_final[$placeholder_chunk_key] == $placeholder_data_final[$i]) {
@@ -887,21 +831,11 @@ function itg_ads_rule_after_build_validate($form, &$form_state) {
       }
 
 
-//      if ($p_search_key == $i) {
-//        continue;
-//      } else {
-//        if ($placeholder_data_final[$placeholder_chunk_key] == $placeholder_data_final[$i]) {
-//          $p_matched_key = $i;
-//        }
-//      }
-
       if (!empty($p_matched_key)) {
         if ($placeholder_chunk_key != $i) {
 
           if ($placeholder_data_final[$placeholder_chunk_key] == $placeholder_data_final[$i]) {
-            // dpm("$placeholder_chunk_key = $i");
-            //dpm("$placeholder_data_final[$placeholder_chunk_key] = $placeholder_data_final[$i]");
-            //dpm("$device_data_final[$p_search_key]");
+
             switch ($device_data_final[$p_search_key]) {
               case 'mobile':
                 if ($device_data_final[$p_matched_key] == 'mobile' || $device_data_final[$p_matched_key] == 'both') {
@@ -924,13 +858,13 @@ function itg_ads_rule_after_build_validate($form, &$form_state) {
       }
     }
   }
-
-//  if (count(array_unique(array_filter($maindata))) != count(array_filter($maindata))) {
-//    // ads  has duplicates
-//    form_set_error('field_adds_code_holder][' . $lang . '][' . $k . '][field_ads_placeholder', t('Ads Placeholder should be unique for all rows'));
-//  }
 }
 
+/**
+ * Check whether the template is already exist or not
+ * @param string $template
+ * @return int entity_id;
+ */
 function check_add_template_existance($template) {
 
   if (isset($template) && !empty($template)) {
@@ -938,6 +872,26 @@ function check_add_template_existance($template) {
     $query = db_select('field_data_field_ads_template_selection', 'b');
     $query->condition('b.field_ads_template_selection_value', $template);
     $query->condition('b.bundle', 'ads_management');
+    $query->fields('b');
+    $data = $query->execute()->fetchObject();
+    if (isset($data->entity_id) && !empty($data->entity_id)) {
+      return $data->entity_id;
+    }
+    return NULL;
+  }
+}
+
+/**
+ * Check whether the master template is already exist or not
+ * @param string $template
+ * @return int entity_id;
+ */
+function check_ads_placeholder_existance($template) {
+
+  if (isset($template) && !empty($template)) {
+    $query = db_select('field_data_field_ad_master_template_section', 'b');
+    $query->condition('b.field_ad_master_template_section_value', $template);
+    $query->condition('b.bundle', 'ads_template_placeholder');
     $query->fields('b');
     $data = $query->execute()->fetchObject();
     if (isset($data->entity_id) && !empty($data->entity_id)) {
