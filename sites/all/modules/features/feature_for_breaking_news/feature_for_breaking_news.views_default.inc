@@ -297,6 +297,11 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'Content Id';
   /* Field: Content: Type */
   $handler->display->display_options['fields']['field_type']['id'] = 'field_type';
   $handler->display->display_options['fields']['field_type']['table'] = 'field_data_field_type';
@@ -314,11 +319,6 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_display_on']['table'] = 'field_data_field_display_on';
   $handler->display->display_options['fields']['field_display_on']['field'] = 'field_display_on';
   $handler->display->display_options['fields']['field_display_on']['element_label_colon'] = FALSE;
-  /* Field: Content: Content Type */
-  $handler->display->display_options['fields']['field_content_type']['id'] = 'field_content_type';
-  $handler->display->display_options['fields']['field_content_type']['table'] = 'field_data_field_content_type';
-  $handler->display->display_options['fields']['field_content_type']['field'] = 'field_content_type';
-  $handler->display->display_options['fields']['field_content_type']['element_label_colon'] = FALSE;
   /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
@@ -395,38 +395,6 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    7 => 0,
-    9 => 0,
-    5 => 0,
-    8 => 0,
-    20 => 0,
-    6 => 0,
-    10 => 0,
-    19 => 0,
-    13 => 0,
-    11 => 0,
-    16 => 0,
-    17 => 0,
-    14 => 0,
-    12 => 0,
-    15 => 0,
-    18 => 0,
-  );
-  /* Filter criterion: Content: Content Type (field_content_type) */
-  $handler->display->display_options['filters']['field_content_type_value']['id'] = 'field_content_type_value';
-  $handler->display->display_options['filters']['field_content_type_value']['table'] = 'field_data_field_content_type';
-  $handler->display->display_options['filters']['field_content_type_value']['field'] = 'field_content_type_value';
-  $handler->display->display_options['filters']['field_content_type_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_content_type_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_content_type_value']['expose']['operator_id'] = 'field_content_type_value_op';
-  $handler->display->display_options['filters']['field_content_type_value']['expose']['label'] = 'Content Type';
-  $handler->display->display_options['filters']['field_content_type_value']['expose']['operator'] = 'field_content_type_value_op';
-  $handler->display->display_options['filters']['field_content_type_value']['expose']['identifier'] = 'field_content_type_value';
-  $handler->display->display_options['filters']['field_content_type_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,

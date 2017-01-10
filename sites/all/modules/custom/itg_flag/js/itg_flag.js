@@ -9,7 +9,7 @@
             var uid = settings.itg_flag.settings.uid;
             var base_url = settings.itg_flag.settings.base_url;
             //alert(base_url);
-            
+
             // jquery for front user activity
             $('#user-activity').click(function (event) {
 
@@ -40,7 +40,7 @@
                         }
                         if (obj.success == 0) {
                             console.log('update');
-                             $(".follow-story a").attr({
+                            $(".follow-story a").attr({
                                 'data-status': 1,
                                 title: 'Follow the Story'
                             }).html('Follow the Story');
@@ -52,7 +52,18 @@
                 });
 
             });
-            
+
+            // Code for date range on DOB field of edit profile.
+            if ($('body').hasClass('page-personalization-edit-profile-general-settings')) {                
+                $("#edit-dob-datepicker-popup-0").datepicker({
+                    maxDate: '+0d',
+                    minDate: new Date(1970, 01, 01),
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat: 'yy-mm-dd',
+                });
+            }
+
             // end here
         }
 
@@ -66,7 +77,7 @@
         return;
     js = d.createElement(s);
     js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";    
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
@@ -83,7 +94,7 @@ function fbpop(linkurl, title, desc, image, base_url, node_id) {
             jQuery.ajax({
                 url: base_url + '/earn-loyalty-point/' + node_id + '/share',
                 type: 'POST',
-                dataType: 'JSON',                
+                dataType: 'JSON',
             });
         }
     });
@@ -164,7 +175,7 @@ jQuery(document).ready(function () {
 
                     jQuery("#voted_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
                 }
-                 jQuery('#like_count,#dislike_count').prop('disabled', false);
+                jQuery('#like_count,#dislike_count').prop('disabled', false);
             }
         });
 
