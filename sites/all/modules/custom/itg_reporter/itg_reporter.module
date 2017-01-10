@@ -131,6 +131,16 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
     }
   }
 
+  if($form_id == 'videogallery_node_form') {
+     if (!empty($form['field_video_anchor'][LANGUAGE_NONE])) {
+      foreach ($form['field_video_anchor'][LANGUAGE_NONE] as $key => $buzz_item) {
+        if (!empty($buzz_item['target_id']['#default_value'])) {
+          preg_match('#\((.*?)\)#', $buzz_item['target_id']['#default_value'], $match);
+          $form['field_video_anchor'][LANGUAGE_NONE][$key]['target_id']['#default_value'] = itg_autocomplete_byline($match[1]);
+        }
+      }
+    }
+  }
 
   if ($form_id == 'photogallery_node_form') {
     foreach ($form['field_gallery_image']['und'] as $key => $val) {
