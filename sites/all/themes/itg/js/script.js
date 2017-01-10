@@ -151,6 +151,9 @@
                 $(this).addClass('active').siblings().removeClass('active');
                 $(this).parent().parent().find(dataID).show().siblings('.tab-data').hide();
             });
+            $('.tab-buttons').on('click', 'span a', function (e) {
+                e.preventDefault();
+            });
             // jQuery Code for tabbing End
 
             //ITG Listing top spacing          
