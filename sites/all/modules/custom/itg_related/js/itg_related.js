@@ -71,7 +71,8 @@ jQuery(document).ready(function(){
    // var itemString = parent.jQuery('#edit-field-story-kicker-text-und-0-value').val();
     var itemString = parent.jQuery('#edit-field-common-related-content-und-0-value').val();
     var insvalue = '';
-    jQuery('#insvalue').val(itemString);  
+    jQuery('#insvalue').val(itemString);
+    jQuery('#insvalue').attr('title', itemString);
     var insvalue = jQuery('#insvalue').val();
     var item = [];
     if(insvalue){
@@ -95,6 +96,7 @@ jQuery(document).ready(function(){
             item.splice(hasurl, 1);
         }
         jQuery('#insvalue').val(item);
+        jQuery('#insvalue').attr('title', item);
         //console.log("hasurl index = " + item);
     });
 
