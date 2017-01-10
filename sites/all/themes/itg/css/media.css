@@ -63,7 +63,7 @@
     line-height: 18px;
   }
 
-  .static-feedback-from h1 {
+  .static-feedback-from h1, h1.about-us-heading {
     font-size: 26px;
   }
 
@@ -685,6 +685,10 @@
   }
 
   /*css end special event page for osscar*/
+  .static_page_menu {
+    margin-bottom: 40px;
+  }
+
   /*css start snappost page*/
   .page-snappost .spanpost-header .spost-left {
     width: 100%;

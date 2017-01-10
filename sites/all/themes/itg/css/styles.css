@@ -30,6 +30,11 @@
 /*mixin for listing with image*/
 /*mixin for pager*/
 /* Global CSS */
+* {
+  box-sizing: border-box;
+  word-break: break-word;
+}
+
 body {
   font: 400 14px/18px "Roboto Slab", sans-serif;
   color: #333;
@@ -312,10 +317,6 @@ input[type="text"], select, input[type="password"] {
 
 .form-required, .error {
   color: red;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 .row {
@@ -10061,6 +10062,13 @@ h1.about-us-heading + div p {
 }
 #block-menu-menu-about-us-page-menu ul li ul li a {
   padding: 10px 0 10px 35px;
+}
+#block-menu-menu-about-us-page-menu ul li ul li + li {
+  border-top: none;
+}
+#block-menu-menu-about-us-page-menu ul li ul li + li a {
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 /*css end static pages menu*/

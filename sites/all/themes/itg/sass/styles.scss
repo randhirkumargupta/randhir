@@ -2,6 +2,12 @@
 @import "itg-variables";
 @import "itg-mixins";
 /* Global CSS */
+*{
+    @extend .mr-0;
+    @extend .pd-0;
+    box-sizing: border-box;
+    word-break: break-word;
+}
 body{
     font: 400 14px/18px $itg-robotoslab;
     color: #333;
@@ -216,11 +222,6 @@ input[type="text"], select, input[type="password"]{
 }
 .form-required, .error{
     color: red;
-}
-*{
-    @extend .mr-0;
-    @extend .pd-0;
-    box-sizing: border-box;
 }
 .row{
     @include clearfix;
@@ -8559,6 +8560,13 @@ h1.about-us-heading{
                     a{
                         padding: 10px 0 10px 35px;
                     }
+                    +li{
+                        border-top:none;
+                        a{
+                            padding-top: 5px;
+                            padding-bottom: 5px;
+                        } 
+                    } 
                 }
             }
         }
