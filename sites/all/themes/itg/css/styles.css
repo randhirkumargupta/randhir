@@ -11327,11 +11327,19 @@ h1.about-us-heading + div p {
   left: auto;
   margin: 10px 0;
 }
+#content [id*="ugc-node-form"].ugc-custom-wrapper .captcha-lable {
+  width: 220px;
+  float: left;
+  padding-right: 20px;
+}
 
 .node-type-videogallery #cboxLoadedContent, .node-type-photogallery #cboxLoadedContent, .node-type-story #cboxLoadedContent {
   background: url(../images/tab-loading.gif);
   background-position: center;
   background-repeat: no-repeat;
+}
+.node-type-videogallery #cboxTitle, .node-type-photogallery #cboxTitle, .node-type-story #cboxTitle {
+  display: none !important;
 }
 
 /*css end story page submit story */
