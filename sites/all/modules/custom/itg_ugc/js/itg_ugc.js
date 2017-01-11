@@ -89,6 +89,11 @@
                         required: true,
                         email: true
                     },
+                    'field_user_message[und][0][value]': {
+                        required: function (element) {
+                            return $("#edit-field-ugc-ctype-und").val() == 'story';
+                        }
+                    },
                     'title': {
                         required: true
 
@@ -109,6 +114,10 @@
                     },
                     'field_user_email[und][0][value]': {
                         required: 'Email field is required.'
+
+                    },
+                    'field_user_message[und][0][value]': {
+                        required: 'Description field is required.'
 
                     },
                     'title': {

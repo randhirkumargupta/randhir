@@ -195,6 +195,7 @@ function itg_layout_manager_block_view($delta = '') {
 
       if (arg(0) == 'personalization') {
         // change message according to argument
+        $change_pass_msg = '';
         if(!empty($_GET['pass']) && ($_GET['pass'] == 'success')) {
           $change_pass_msg = 'Your password has been changed successfully!';
         }
@@ -208,8 +209,9 @@ function itg_layout_manager_block_view($delta = '') {
         $pop_output.= '<p>'.$change_pass_msg.'</p>';
         $pop_output.= '<a href = "javascript:void(0)" class = "close-pass-popup">ok</a>';
         $pop_output.= '</div></div>';
-
-        print $pop_output;
+        if (!empty($change_pass_msg)) {
+          print $pop_output;
+        }                
       }
 
       /* code for sso login */
@@ -229,6 +231,7 @@ function itg_layout_manager_block_view($delta = '') {
         }
 
         // condition for change password
+        $change_arg = NULL;
         if(arg(0) == 'password-success' || arg(0) == 'complete-page') {
           $change_arg = arg(1);                  
         }

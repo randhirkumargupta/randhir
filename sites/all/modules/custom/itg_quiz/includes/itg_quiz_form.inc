@@ -296,13 +296,13 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
               '#value' => $button_text,
               '#prefix' => '<div class="quiz-submit-btn-wrapper">',
               '#name' => 'quizsubmit_' . $num,
-              '#suffix' => '</div>',
+              //'#suffix' => '</div>',
               '#ajax' => array(
                   'callback' => 'quiz_form_ajax_handler',
                   'effect' => 'fade',
               ),
               '#attributes' => array('class' => array('quiz-submit')),
-              '#suffix' => '</div>'
+              '#suffix' => '</div></div>'
           );
         }
       }
