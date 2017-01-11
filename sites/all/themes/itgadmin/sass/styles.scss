@@ -131,6 +131,7 @@ div.filefield-sources-list a.active{font-weight: 400;}
   text-align: center;
   text-transform: uppercase;
   color: #fff;
+  cursor: pointer;
   margin-right: 0;
   &:hover{
     box-shadow: 0 0 2px #ee4d4d;
@@ -146,6 +147,7 @@ div.filefield-sources-list a.active{font-weight: 400;}
   height: 36px;
   text-transform: uppercase;
   color: #fff;
+  cursor: pointer;
   text-align: center;
   display: inline-block;
   vertical-align: top;
@@ -153,7 +155,7 @@ div.filefield-sources-list a.active{font-weight: 400;}
   &:hover{
     box-shadow: 0 0 2px #3a8a82;
   }
-  &[value="Reset"]{
+  &[value="Reset"], &#edit-delete, &[data-id="edit-delete"]{
     border: 1px solid #ee4d4d;
     background-color: #ee4d4d;
     box-shadow: 0 0 5px #ee4d4d;
@@ -162,7 +164,22 @@ div.filefield-sources-list a.active{font-weight: 400;}
     }
   }
 }
+.btn-small{
+  height: 28px;
+  line-height: 26px;
+  padding: 0 10px;
+}
 .form-submit{@extend .btn-submit;}
+.icon-cross{
+  background: url("../images/cross_small.png") no-repeat center center;
+  border: none !important;
+  box-shadow: none;
+  height: 12px;
+  margin: 0;
+  padding: 0;
+  text-indent: -9999px;
+  width: 12px;
+}
 .icon-add-more{
   background: url("../images/add-item.png") no-repeat center center;
   border: none;
@@ -1078,7 +1095,7 @@ div.vertical-tabs {
       color: #ee4d4d;
       font-size: 13px;
       height: auto;
-      left: 775px;
+      left: 400px;
       line-height: 18px;
       padding: 0;
       position: absolute;
@@ -3276,6 +3293,12 @@ fieldset#edit-select{
       width: 150px;
     }
   }
+  .form-field-name-field-group-registration-fee-5,
+  .form-field-name-field-group-registration-fee-10{
+    .form-type-textfield > label{
+      padding: 0;
+    }
+  }
   .form-field-name-field-individual-registration-fe,
   .form-field-name-field-group-registration-fee-5,
   .form-field-name-field-group-registration-fee-10,
@@ -4872,6 +4895,11 @@ div.node{
 .save-checklist-ordre{
   text-align: right;
   padding: 0 10px 15px;
+  .save-checklist{
+    @extend .btn-submit;
+    @extend .btn-small;
+    margin-right: 0;
+  }
 }
 .variables-and-field-container{
   .variables{
@@ -5159,12 +5187,11 @@ div.node{
             padding-left: 10px;
           }
           .hide-message{
-            background: url('../images/cross_small.png') 5px center no-repeat #fff;
+            @extend .icon-cross;
             bottom: 2px;
             height: 20px;
             position: absolute;
             right: 2px;
-            text-indent: -9999px;
             width: 20px;
           }
         }
@@ -5176,6 +5203,7 @@ div.node{
         textarea{
           height: 48px;
         }
+        .form-type-textarea div.description{left: 220px;}
         .form-type-textfield, .form-type-checkboxes, .form-type-textarea, .form-type-managed-file{
           margin: 10px 0;
           padding: 0 7px;
@@ -5197,14 +5225,13 @@ div.node{
                 display: none;
               }
               .form-submit[value="Remove"]{
+                @extend .icon-cross;
                 left: auto;
-                background: url('../images/cross_small.png') 3px center no-repeat #fff;
                 width: 16px;
                 height: 16px;
                 border-radius: 2px;
                 right: 3px;
                 top: -73px;
-                text-indent: -9999px;
               }
             }
             .image-preview{
@@ -5279,31 +5306,24 @@ div.node{
               margin-top: 8px;
             }
             > input[value="Remove"]{
-              border: none;
-              background: url('../images/cross_small.png') center center no-repeat !important;
-              width: 12px;
-              height: 12px;
-              text-indent: -9999px;
+              @extend .icon-cross;
               margin: 12px 0 4px 5px;
               left: 175px !important;
             }
             .form-file{
-              margin: 6px 0 0;
-              width: 118px;
+              margin: 0;
+              width: 110px;
+              & + .form-submit{
+                @extend .btn-small;
+              }
             }
           }
         }
         > input[value="Remove"], > .ajax-new-content > input[value="Remove"]{
+          @extend .icon-cross;
           position: absolute;
-          border: none !important;
-          background: url('../images/cross_small.png') center center no-repeat;
-          width: 12px;
-          height: 12px;
-          text-indent: -9999px;
           top: 9px;
           right: 7px;
-          padding: 0;
-          margin: 0;
         }
         &:before{
           content: 'Audio Gallery';
@@ -5956,8 +5976,7 @@ div.node{
 .page-node-add-poll{
   .form-type-managed-file{
     .image-widget-data{
-      position: relative;  
-      float: none;
+      position: relative;
     }
     a.filefield-sources-imce-browse{
       height: 100%;
@@ -7916,6 +7935,7 @@ div.node{
         .form-managed-file{
           padding-left: 0;
           min-height: 28px;
+          @extend .pos-rel;
           .image-widget-data{
             > .form-item{
               margin: 0;
@@ -8124,7 +8144,7 @@ div.node{
         box-shadow: 0 0 2px #ee4d4d;
       }
     }
-    .form-submit, a[data-id="story_submit_link"]{
+    .form-submit, a[data-id="story_submit_link"], a[data-id="edit-cancel"]{
       border-radius: 1px;
       border: 1px solid #1fb5ad;
       background-color: #1fb5ad;
