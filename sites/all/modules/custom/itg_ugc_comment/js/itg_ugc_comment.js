@@ -9,12 +9,12 @@
              var uid = settings.itg_ugc_comment.settings.uid;
 
 
-             jQuery(function () {
-                jQuery("a.reply").click(function () {
+             $(function () {
+                $("a.reply").click(function () {
                     var id = $(this).attr("id");
                     $('body').find('.ugc-comment-popup').addClass('comment-popup').parent().addClass('comment-popup-wrapper');
-                    jQuery("#parent_id").attr("value", id);
-                    jQuery("#edit-fname").focus();
+                    $("#parent_id").attr("value", id);
+                    $("#edit-fname").focus();
                 });
                 $('body').on('click', '.close-comment-popup', function(){
                     $('body').find('.ugc-comment-popup').removeClass('comment-popup').parent().removeClass('comment-popup-wrapper');
