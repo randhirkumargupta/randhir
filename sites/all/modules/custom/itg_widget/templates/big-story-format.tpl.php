@@ -5,6 +5,7 @@ if (!empty($data)) :
   $href = $base_url . '/' . drupal_get_path_alias("node/{$data['node_data']->nid}");
   $data_nid = "";
   $has_ajax = "";
+  $photo_icon = "";
   $image = "<img src='".$base_url .drupal_get_path('theme', 'itg') . "/images/default_for_all.png />";
   $share_desc = $share_desc_fb = "";
   if ($data['node_data']->type == 'videogallery') {
