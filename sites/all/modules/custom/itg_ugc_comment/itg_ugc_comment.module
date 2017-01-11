@@ -1,0 +1,286 @@
+<?php
+
+/**
+ * @file
+ * The ITG Comment module.
+ *
+ * Contains functionality related to User Generated Comment.
+ *
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function itg_ugc_comment_menu() {
+  $items['ugc-comment-listing'] = array(
+      'title' => 'UGC Comment Listing',
+      'page callback' => 'ugc_comment_listing',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/ugc_comment_listing.inc',
+  );
+  
+  
+  $items['ugc-comment-reject-listing'] = array(
+      'title' => 'UGC Reject Comment Listing',
+      'page callback' => 'ugc_comment_reject_listing',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/ugc_comment_listing.inc',
+  );
+  
+  $items['ugccommentview/%'] = array(
+    'page callback' => 'ugc_comment_view',
+    'page arguments' => array(1),
+    'access callback' => TRUE,
+    'file' => 'includes/ugc_comment_listing.inc',
+  );
+  
+  $items['ugccommentapprove/%'] = array(
+    'page callback' => 'ugc_comment_approve',
+    'page arguments' => array(1),
+    'access callback' => TRUE,
+    'file' => 'includes/ugc_comment_listing.inc',
+  );
+  return $items;
+}
+
+/**
+ * Implement ugc_comment_form
+ * @param array $form
+ * @param array $form_state
+ */
+function ugc_comment_form($form, &$form_state) {
+  
+  global $user, $base_url;
+  $user_fields = user_load($user->uid);
+  $page_id = arg(1);
+  
+    $fname = '';
+    if(!empty($user_fields->field_first_name['und']['0']['value'])) {
+      $fname = $user_fields->field_first_name['und']['0']['value'];
+    }
+  $form['fmessage'] = array(
+    '#type' => 'textarea', //you can find a list of available types in the form api
+    '#title' => t(''),
+    '#size' => 10,
+    '#prefix' => '<div id="user-message">',
+    '#suffix' => '</div>',
+    '#attributes' => array(
+      'placeholder' => 'What is your opinion?',
+    ),
+    );
+  
+  $form['fname'] = array(
+    '#type' => 'textfield', //you can find a list of available types in the form api
+    '#title' => t(''),
+    '#size' => 20,
+    '#default_value' => $fname,
+    '#maxlength' => 50,
+    //'#value' => $user_fields->field_first_name['und']['0']['value'],
+    '#prefix' => '<div id="user-name">',
+    '#suffix' => '</div>',
+    '#attributes' => array(
+      'placeholder' => 'Name',
+    ),
+    );
+  
+  
+  $form['femail'] = array(
+    '#type' => 'textfield', //you can find a list of available types in the form api
+    '#title' => t(''),
+    '#size' => 20,
+    '#default_value' => $user_fields->mail,
+    //'#value' => $user->mail,
+    '#maxlength' => 50,
+    '#prefix' => '<div id="user-email">',
+    '#suffix' => '</div>',
+    '#attributes' => array(
+      'placeholder' => 'Email',
+    ),
+    );
+  
+  $form['page_id'] = array(
+    '#type' => 'hidden', //you can find a list of available types in the form api
+    '#title' => t('page id'),
+    '#value' => $page_id,
+    '#maxlength' => 20,
+    );
+  
+    $form['parent_id'] = array(
+    '#type' => 'hidden', //you can find a list of available types in the form api
+    '#title' => t('parent id'),
+    '#default_value' => 0,
+    '#attributes' => array(
+      'id' => 'parent_id',
+    ),
+  );
+
+  $form['submit_button'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
+  
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+  drupal_add_js(array('itg_ugc_comment' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_ugc_comment') . '/js/itg_ugc_comment.js');
+  // Add js file to form.
+  $form['#attached']['js'] = array(
+    drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
+  );
+  
+  return $form;
+}
+
+/**
+ * Implement ugc_comment_form_submit
+ * @param array $form
+ * @param array $form_state
+ */
+function ugc_comment_form_submit($form, &$form_state) {
+
+  $fname = $form_state['values']['fname'];
+  $femail = $form_state['values']['femail'];
+  $fmessage = $form_state['values']['fmessage'];
+  $page_id = $form_state['values']['page_id'];
+  $parent_id = $form_state['values']['parent_id'];
+  $comment_date = date('d-m-Y');
+  $comment_date_time = date('d-m-Y h:i:s');
+  // drupal_set_message(t('The form has been submitted.'));
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $people = $con->itgcms_comment;
+    $qry = array("page_id" => $page_id, "email" => $femail, "name" => $fname, "comment" => $fmessage, "parent_comment_id" => $parent_id, "comment_date" => $comment_date, "comment_date_time" => $comment_date_time, "property" => 'India Today', "content_type" => 'story', "status" => 0);
+    $result = $people->insert($qry);
+
+    $_SESSION['msg'] = '<div class="messages--status messages status">Comment Submitted Sucessfully</div>';
+  }
+}
+
+/**
+* Implements hook_block_info().
+*/
+function itg_ugc_comment_block_info() {
+  $blocks = array();
+  $blocks['ugc_form_comment_block'] = array(
+    'info' => t('ugc form comment block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  return $blocks;
+}
+
+/**
+* Implements hook_block_view().
+*/
+function itg_ugc_comment_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'ugc_form_comment_block':
+      
+      if (function_exists('mongodb')) {
+        $con = mongodb();
+        $people = $con->itgcms_comment;
+      }
+      $page_id = arg(1);
+      
+      $data = $people->find(array('page_id' => $page_id, 'parent_comment_id' => "0"));
+      foreach ($data as $my_data) {        
+       $contect .= getmycomments($my_data);
+      }
+      $total_comments = totalcomments($page_id);
+      $block['content'] = theme('itg_comment_block', array('comment_data' => $contect, 'total_comments' => $total_comments, 'comment_form' => drupal_get_form('ugc_comment_form')));
+      break;
+  }
+  return $block;
+}
+
+
+
+/**
+ * Implements hook_theme().
+ * @param type $existing
+ * @param type $type
+ * @param type $theme
+ * @param type $path
+ */
+function itg_ugc_comment_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'itg_comment_block' => array(
+      'template' => 'ugc-comment-template',
+      'path' => drupal_get_path('module', 'itg_ugc_comment') . '/templates',
+      'variables' => array('comment_data' => NULL, 'comment_form' => NULL, 'total_comments' => NULL),
+      )
+  );
+  return $themes;
+}
+  
+
+/**
+* Implements getmycomments()
+* @param array $data
+*/
+function getmycomments($data) {
+  global $base_url;
+  
+  $image = $base_url.'/sites/all/themes/rubik/images/user-default.png';
+  
+  $contect .= "<div class='itg-comment'>
+                <div class='comment-image'>
+                <img src= $image width='50' height='50'></div>
+                <div class='comment-details'><div class='comment-name'>" . $data['name'] . "</div>
+                <div class='comment-body'>" . $data['comment'] . "</div>
+                <span class='comment-timestamp'>" . $data['comment_date'] . "</span>
+                <a href='javascript:' class='reply' id='" . $data['_id'] . "'>Reply</a></div>";
+  
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+  }
+
+  $relation_id = $data['_id'];
+  $reply_comment = $con->itgcms_comment;
+  $reply_data = $reply_comment->find(array('parent_comment_id' => "$relation_id"));
+  
+  $contect .= "<ul>";
+  
+  foreach ($reply_data as $my_reply_data) {
+   $contect .= getmycomments($my_reply_data);
+  }
+  
+  $contect .= "</ul></div>";
+  
+  return $contect;
+}
+
+
+/**
+* Implements totalcomments()
+* @param array $page_id
+*/
+function totalcomments($page_id) {
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $reply_comment = $con->itgcms_comment;
+    $count = $reply_comment->count(array('page_id' => "$page_id"));
+    return $count;
+  }
+}
+
+/**
+ * Implements ugc_comment_form_validate
+ * @param array $form
+ * @param array $form_state
+ */
+//function ugc_comment_form_validate($form, &$form_state) {
+//  $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
+//  $tax = taxonomy_get_tree($vocab_id->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+//
+//  foreach ($tax as $key => $val) {
+//    $op[] = $val->name;
+//  }
+//  $bad_word_check = preg_grep('/^' . $form_state['values']['fmessage'] . ' (\w+)/i', $op);
+//  if (!empty($bad_word_check[0])) {
+//    form_set_error('fmessage', t('Please Remove bad word form description!'));
+//  }
+//}
