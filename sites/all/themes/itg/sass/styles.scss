@@ -2,6 +2,12 @@
 @import "itg-variables";
 @import "itg-mixins";
 /* Global CSS */
+*{
+    @extend .mr-0;
+    @extend .pd-0;
+    box-sizing: border-box;
+    word-break: break-word;
+}
 body{
     font: 400 14px/18px $itg-robotoslab;
     color: #333;
@@ -216,11 +222,6 @@ input[type="text"], select, input[type="password"]{
 }
 .form-required, .error{
     color: red;
-}
-*{
-    @extend .mr-0;
-    @extend .pd-0;
-    box-sizing: border-box;
 }
 .row{
     @include clearfix;
@@ -1236,7 +1237,7 @@ footer{
         height: 673px;
     }
     .itg-layout-container .top-colum-3 .droppable{
-        height: 276px;
+        height: 266px;
     }
     .itg-common-section{
         .droppable{
@@ -1406,7 +1407,9 @@ footer{
         padding:5px;
          a{
             display: block;
-            margin-bottom: 10px;
+            img{
+                margin-bottom: 10px;
+            }
             &:hover{
                 color:$blue-color;
             }
@@ -1418,6 +1421,11 @@ footer{
             @include float(none);
             @include calculate-width(1);
             margin-bottom: 10px;
+            a{
+                img{
+                    margin-bottom: 0;
+                }
+            }
         }
     }
 }
@@ -7085,9 +7093,11 @@ footer{
                         }
                     }
                     .featured-post{
-                        .no-result-image{
-                            height: 270px;
-                        }
+                        .featured-post-first{
+                            .no-result-image{
+                                height: 270px;
+                            }    
+                        }                        
                     }
                 }
             }
@@ -7237,7 +7247,7 @@ footer{
                 color: #fff;
                 text-transform: uppercase;
                 cursor: pointer;
-                padding: 12px;
+                padding: 0px;
                 font-size: 18px;
                 box-shadow: 4px 4px 0 #00b3e6;
             } 
@@ -7307,37 +7317,37 @@ footer{
                 float: left;
             }
             input[type="radio"] {
-    display:none;
-}
-input[type="radio"] + label {    
-    padding-left: 25px;
-    position: relative;
-}
-input[type="radio"] + label:before, input[type="radio"] + label:after{
-    display:inline-block;
-    width:15px;
-    height:15px;    
-    vertical-align:middle;
-    cursor:pointer;
-    -moz-border-radius:  50%;
-    border-radius:  50%;
-    position: absolute;
-    top:3px;
-    left: 0;
-    content: '';
-}
+                display:none;
+            }
+            input[type="radio"] + label {    
+                padding-left: 25px;
+                position: relative;
+            }
+            input[type="radio"] + label:before, input[type="radio"] + label:after{
+                display:inline-block;
+                width:15px;
+                height:15px;    
+                vertical-align:middle;
+                cursor:pointer;
+                -moz-border-radius:  50%;
+                border-radius:  50%;
+                position: absolute;
+                top:3px;
+                left: 0;
+                content: '';
+            }
 
-input[type="radio"] + label:before{
-     background-color:#c0c0c0;
-}
+            input[type="radio"] + label:before{
+                background-color:#c0c0c0;
+            }
 
-input[type="radio"]:checked + label:after{
-    background-color: #333;
-    width: 7px;
-    height: 7px;
-    top: 7px;
-    left: 4px;
-}
+            input[type="radio"]:checked + label:after{
+                background-color: #333;
+                width: 7px;
+                height: 7px;
+                top: 7px;
+                left: 4px;
+            }
         } 
     } 
     .page-sports-video{
@@ -7609,6 +7619,7 @@ input[type="radio"]:checked + label:after{
     }
     img{
         padding-top: 10px;
+        max-height: 50px;
     }
     ul{        
         @extend .list-none;
@@ -8557,6 +8568,13 @@ h1.about-us-heading{
                     a{
                         padding: 10px 0 10px 35px;
                     }
+                    +li{
+                        border-top:none;
+                        a{
+                            padding-top: 5px;
+                            padding-bottom: 5px;
+                        } 
+                    } 
                 }
             }
         }
@@ -9531,11 +9549,11 @@ h1.about-us-heading{
         }
     }    
 .node-type-videogallery, .node-type-photogallery, .node-type-story{
-#cboxLoadedContent{        
+    #cboxLoadedContent{        
         background: url(../images/tab-loading.gif);
         background-position: center;
-        background-repeat: no-repeat;
-    }
+        background-repeat: no-repeat;        
+    }  
 }
 /*css end story page submit story */
 

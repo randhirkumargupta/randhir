@@ -19,15 +19,15 @@
   $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
   
   // get global comment config
-    if (function_exists(global_comment_last_record)) {
+  if (function_exists('global_comment_last_record')) {      
     $last_record = $global_comment_last_record;
     $config_name = trim($last_record[0]->config_name);
-    }
+  }
     
-   // get facebook share count 
-    if (function_exists(itg_total_share_count)) {
+  // get facebook share count 
+  if (function_exists('itg_total_share_count')) {
     $tot_count = itg_total_share_count($actual_link);
-    }
+  }
 
 ?>
 <article class="node-<?php print $node->nid; ?> <?php print $classes; ?> clearfix"<?php print $attributes; ?>>
