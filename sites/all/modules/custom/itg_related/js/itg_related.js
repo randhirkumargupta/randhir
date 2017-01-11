@@ -45,12 +45,12 @@
 
                             if (tmp[0])
                             {
-                                $('.success').fadeIn(200).show();
+                                $('.success').fadeIn(200).show(0).delay(2000).hide(1000);
                                 //$("#search-title").val('');
                             }
                             else
                             {
-                                $('.erro').fadeIn(200).show();
+                                $('.erro').fadeIn(200).show(0).delay(2000).hide(1000);
                             }
                         }
                     });
