@@ -300,6 +300,11 @@ function itg_msi_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   }
   if ($form['#id'] == 'views-exposed-form-issue-listing-page-1') {
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
+    $form['nid']['#attributes'] = array('placeholder' => t('Nid'));
+  }
+  if ($form['#id'] == 'views-exposed-form-supplement-listing-page-1') {
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+    $form['nid']['#attributes'] = array('placeholder' => t('Nid'));
   }
   if($form['#id'] == "views-exposed-form-category-of-stroy-base-magazin-widget-issue-category-magazin-widget") {
     $form['field_story_issue_date_value']['value']['#date_format'] = 'd-m-Y';
@@ -709,15 +714,46 @@ function itg_msi_check_for_issue_existence($node, $type, $nid = NULL) {
 
 /**
  * Used in views: Manage issues and Manage Supplements
- * List of mapped stories with issues and supplements
+ * List of mapped stories with supplements
  * @param Object $row
  * @return String
  */
 function itg_msi_show_mapped_stories($row) {
-  $result = db_select('field_data_field_story_source_id', 'si')
+  $result = db_select('field_data_field_story_select_supplement', 'si')
       ->fields('si', array('entity_id'))
-      ->condition('field_story_source_id_value', $row->nid, '=')
+      ->condition('field_story_select_supplement_target_id', $row->nid, '=')
       ->execute();
+  while ($record = $result->fetchAssoc()) {
+    $entity_id[] = $record['entity_id'];
+  }
+  $count = count($entity_id);
+  $text = 'List Stories(' . $count . ')';
+  $path = 'supplement-listing/' . $row->type . '/' . $row->nid;
+
+  //Prepare link for list associated stoies to this node
+  if ($count < 1) {
+    return $text;
+  }
+  else {
+    return l($text, $path, array('attributes' => array('target' => '_blank')));
+  }
+}
+
+/**
+ * Used in views: Manage issues and Manage Supplements
+ * List of mapped stories with issue
+ * @param Object $row
+ * @return String
+ */
+function itg_msi_show_issue_mapped_stories($row) {
+  $subQuery = db_select('field_data_field_issue_title', 'issue_title')
+      ->fields('issue_title', array('field_issue_title_value'))
+      ->condition('issue_title.entity_id', $row->nid, '=')
+      ->condition('issue_title.bundle', 'issue', '=');
+    $query = db_select('field_data_field_story_issue_date','issue_date_story');
+    $query->fields('issue_date_story',array('entity_id'));
+    $query->condition('issue_date_story.field_story_issue_date_value',$subQuery,'IN');
+    $result = $query->execute();
   while ($record = $result->fetchAssoc()) {
     $entity_id[] = $record['entity_id'];
   }
@@ -733,6 +769,21 @@ function itg_msi_show_mapped_stories($row) {
     return l($text, $path, array('attributes' => array('target' => '_blank')));
   }
 }
+
+/**
+ * Implements function return nid of issue and supplement
+ * @param int $nid
+ * @param string $type
+ */
+  function itg_msi_return_date_val($nid) {
+    $query = db_select('field_data_field_issue_title', 'issue_title')
+      ->fields('issue_title', array('field_issue_title_value'))
+      ->condition('issue_title.entity_id', $nid, '=')
+      ->condition('issue_title.bundle', 'issue', '=');
+    $results = $query->execute()->fetchField();
+    $result = explode(' 00:', $results); 
+    return $result[0];
+  }
 
 /**
  * Get fids of files associated with a node
@@ -898,6 +949,18 @@ function itg_msi_views_query_alter(&$view, &$query) {
       unset($query->where[1]['conditions'][4]);
       unset($query->orderby[0]);
     }
+  }
+  if ($view->name == 'issue_listing' && $view->current_display == 'page_1') {
+      $arg = arg();
+      if(function_exists('itg_msi_return_date_val')){
+        $value = itg_msi_return_date_val(arg(2));
+      }
+      $query->where[0]['conditions'][0]['value'][':field_data_field_story_issue_date_field_story_issue_date_value'] = $value;
+      $query->where[0]['conditions'][0]['value'][':field_data_field_story_issue_date_field_story_issue_date_value1'] = $value;
+  }
+  if ($view->name == 'supplement_listing' && $view->current_display == 'page_1') {
+      $value = arg(2);
+      $query->where[0]['conditions'][0]['value'][':field_data_field_story_select_supplement_field_story_select_supplement_target_id'] = $value;
   }
 }
 

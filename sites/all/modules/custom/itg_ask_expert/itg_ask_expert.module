@@ -416,7 +416,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
     $form['askname'] = array(
         '#type' => 'textfield', //you can find a list of available types in the form api
         '#title' => t(''),
-        '#value' => $fname,
+        '#default_value' => $fname,
         '#prefix' => '<div id="askname" class="askname">',
         //'#suffix' => '</div>',
         '#attributes' => array(
@@ -426,7 +426,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
     $form['askemail'] = array(
         '#type' => 'textfield', //you can find a list of available types in the form api
         '#title' => t(''),
-        '#value' => $user_fields->mail,
+        '#default_value' => $user_fields->mail,
         //'#prefix' => '<div id="askemail">',
         '#suffix' => '</div>',
         '#attributes' => array(
@@ -492,6 +492,7 @@ function itg_custom_get_ask_quation_data($cat_id) {
  * {@inheritdoc}
  */
 function itg_custom_ask_an_expert_form_validate($form, &$form_state) {
+  watchdog('expert', '<pre>'.print_r($form_state['values'],true).'</pre>');
     $askname = $form_state['values']['askname'];
     $askemail = $form_state['values']['askemail'];
     $question = $form_state['values']['question'];

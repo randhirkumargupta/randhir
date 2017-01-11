@@ -9546,6 +9546,11 @@ h1.about-us-heading{
                 left: auto;
                 margin: 10px 0;
             }
+            .captcha-lable{
+                width: 220px;
+                float: left;
+                padding-right: 20px;
+            }
         }
     }    
 .node-type-videogallery, .node-type-photogallery, .node-type-story{
@@ -9553,7 +9558,10 @@ h1.about-us-heading{
         background: url(../images/tab-loading.gif);
         background-position: center;
         background-repeat: no-repeat;        
-    }  
+    }
+    #cboxTitle{
+        display: none !important;
+    }
 }
 /*css end story page submit story */
 
