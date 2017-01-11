@@ -8,6 +8,7 @@
         attach: function(context, settings) {
             var uid = settings.itg_story.settings.uid;
             $(".form-item-field-story-configurations-und-breaking-news").hide('');
+            $("label[for='edit-field-story-configurations-und-tv']").html("Associate Story with TV");
             // enable check box of developing story based on condition 
             var longheadline = $('#edit-title').val();
             

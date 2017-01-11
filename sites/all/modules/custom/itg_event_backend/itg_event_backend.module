@@ -1640,7 +1640,7 @@ function itg_event_backend_convert_number_to_words($number) {
 /**
  * Implement function for get old event flasback
  */
-function itg_event_backend_flashback($curr_event_id, $menu_font_color) {
+function itg_event_backend_flashback($curr_event_id, $menu_font_color, $event_type) {
   $current_date_time = date('Y-m-d H:i:s');
   $query = db_select('node', 'n');
   $query->fields('n', array('nid', 'title', 'created'));
@@ -1650,6 +1650,7 @@ function itg_event_backend_flashback($curr_event_id, $menu_font_color) {
   $query->condition('n.type', 'event_backend', '=');
   $query->condition('n.nid', $curr_event_id, '!=');
   $query->condition('event_close_date.field_event_close_date_value', $current_date_time, '<');
+  $query->condition('event_types.field_event_types_tid', $event_type, '=');
   $query->condition('n.status', 1, '=');
   $query->orderBy('n.created', 'DESC');
   $result = $query->execute();
