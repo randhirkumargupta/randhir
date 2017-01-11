@@ -131,9 +131,10 @@ function itg_related_views_pre_render(&$view) {
     $settings['uid'] = $user->uid;
     drupal_add_js(array('itg_related' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_related') . '/js/itg_related.js', array('weight' => 1));
-    
+    $titlename = '';
     if(!empty($_GET['sname'])) {
-    $sname = '<span class="sname">Search Name : ' . $_GET['sname'] . '&nbsp;</span>';
+    $titlename = t('Search Name :');
+    $sname = '<span class="sname">'.$titlename. $_GET['sname'] . '&nbsp;</span>';
     $view->attachment_before = $sname;
     }
 
