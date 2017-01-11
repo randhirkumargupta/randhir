@@ -307,7 +307,7 @@ img {
 [id*="field-story-reporter-values"] tbody tr td,
 [id*="field-story-template-guru-values"] tbody tr td,
 [id*="field-video-anchor-values"] tbody tr td,
-[id*="field-story-listicle-values"] tbody tr td, [id*="field-videogallery-video-upload-values"] tbody tr td, [id*="field-pti-print-media-values"] tbody tr td, [id*="field-highlights-values"] tbody tr td, .image-repo-browse .form-field-type-image .image-widget-data, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .form-field-type-image .image-widget-data, .node-photogallery-form #BrowseMedia .form-field-type-image .image-widget-data, .node-notification-form .form-field-type-image .image-widget-data,
+[id*="field-story-listicle-values"] tbody tr td, [id*="field-videogallery-video-upload-values"] tbody tr td, [id*="field-pti-print-media-values"] tbody tr td, [id*="field-highlights-values"] tbody tr td, .image-repo-browse .form-field-type-image .image-widget-data, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .form-field-type-image .image-widget-data, .node-photogallery-form #BrowseMedia .form-field-type-image .image-widget-data, .node-poll-form .form-field-type-image .image-widget-data, .node-notification-form .form-field-type-image .image-widget-data,
 .node-food_news-form .form-field-type-image .image-widget-data,
 .node-cooking_tips-form .form-field-type-image .image-widget-data,
 .node-reporter-form .form-field-type-image .image-widget-data,
@@ -319,7 +319,7 @@ img {
 .page-admin-people form .form-field-type-image .image-widget-data,
 .page-user form .form-field-type-image .image-widget-data,
 .node-newsletter_templates-form .form-field-type-image .image-widget-data,
-.node-mega_review_critic-form .form-field-type-image .image-widget-data, .node-loyalty_and_rewards-form .form-field-type-image .image-widget-data, .image-repo-browse .field-type-image .image-widget-data, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .field-type-image .image-widget-data, .node-photogallery-form #BrowseMedia .field-type-image .image-widget-data, .node-notification-form .field-type-image .image-widget-data,
+.node-mega_review_critic-form .form-field-type-image .image-widget-data, .node-loyalty_and_rewards-form .form-field-type-image .image-widget-data, .image-repo-browse .field-type-image .image-widget-data, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .field-type-image .image-widget-data, .node-photogallery-form #BrowseMedia .field-type-image .image-widget-data, .node-poll-form .field-type-image .image-widget-data, .node-notification-form .field-type-image .image-widget-data,
 .node-food_news-form .field-type-image .image-widget-data,
 .node-cooking_tips-form .field-type-image .image-widget-data,
 .node-reporter-form .field-type-image .image-widget-data,
@@ -845,7 +845,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
   top: 0;
 }
 
-.image-repo-browse .form-field-type-image .form-type-managed-file > label, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .form-field-type-image .form-type-managed-file > label, .node-photogallery-form #BrowseMedia .form-field-type-image .form-type-managed-file > label, .node-notification-form .form-field-type-image .form-type-managed-file > label,
+.image-repo-browse .form-field-type-image .form-type-managed-file > label, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .form-field-type-image .form-type-managed-file > label, .node-photogallery-form #BrowseMedia .form-field-type-image .form-type-managed-file > label, .node-poll-form .form-field-type-image .form-type-managed-file > label, .node-notification-form .form-field-type-image .form-type-managed-file > label,
 .node-food_news-form .form-field-type-image .form-type-managed-file > label,
 .node-cooking_tips-form .form-field-type-image .form-type-managed-file > label,
 .node-reporter-form .form-field-type-image .form-type-managed-file > label,
@@ -857,7 +857,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .page-admin-people form .form-field-type-image .form-type-managed-file > label,
 .page-user form .form-field-type-image .form-type-managed-file > label,
 .node-newsletter_templates-form .form-field-type-image .form-type-managed-file > label,
-.node-mega_review_critic-form .form-field-type-image .form-type-managed-file > label, .node-loyalty_and_rewards-form .form-field-type-image .form-type-managed-file > label, .image-repo-browse .field-type-image .form-type-managed-file > label, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .field-type-image .form-type-managed-file > label, .node-photogallery-form #BrowseMedia .field-type-image .form-type-managed-file > label, .node-notification-form .field-type-image .form-type-managed-file > label,
+.node-mega_review_critic-form .form-field-type-image .form-type-managed-file > label, .node-loyalty_and_rewards-form .form-field-type-image .form-type-managed-file > label, .image-repo-browse .field-type-image .form-type-managed-file > label, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .field-type-image .form-type-managed-file > label, .node-photogallery-form #BrowseMedia .field-type-image .form-type-managed-file > label, .node-poll-form .field-type-image .form-type-managed-file > label, .node-notification-form .field-type-image .form-type-managed-file > label,
 .node-food_news-form .field-type-image .form-type-managed-file > label,
 .node-cooking_tips-form .field-type-image .form-type-managed-file > label,
 .node-reporter-form .field-type-image .form-type-managed-file > label,
@@ -873,7 +873,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
   padding-bottom: 5px;
   padding-top: 5px;
 }
-.image-repo-browse .form-field-type-image .image-widget-data .form-submit[value="Remove"], [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .form-field-type-image .image-widget-data .form-submit[value="Remove"], .node-photogallery-form #BrowseMedia .form-field-type-image .image-widget-data .form-submit[value="Remove"], .node-notification-form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
+.image-repo-browse .form-field-type-image .image-widget-data .form-submit[value="Remove"], [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .form-field-type-image .image-widget-data .form-submit[value="Remove"], .node-photogallery-form #BrowseMedia .form-field-type-image .image-widget-data .form-submit[value="Remove"], .node-poll-form .form-field-type-image .image-widget-data .form-submit[value="Remove"], .node-notification-form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
 .node-food_news-form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
 .node-cooking_tips-form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
 .node-reporter-form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
@@ -885,7 +885,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .page-admin-people form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
 .page-user form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
 .node-newsletter_templates-form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
-.node-mega_review_critic-form .form-field-type-image .image-widget-data .form-submit[value="Remove"], .node-loyalty_and_rewards-form .form-field-type-image .image-widget-data .form-submit[value="Remove"], .image-repo-browse .field-type-image .image-widget-data .form-submit[value="Remove"], [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .field-type-image .image-widget-data .form-submit[value="Remove"], .node-photogallery-form #BrowseMedia .field-type-image .image-widget-data .form-submit[value="Remove"], .node-notification-form .field-type-image .image-widget-data .form-submit[value="Remove"],
+.node-mega_review_critic-form .form-field-type-image .image-widget-data .form-submit[value="Remove"], .node-loyalty_and_rewards-form .form-field-type-image .image-widget-data .form-submit[value="Remove"], .image-repo-browse .field-type-image .image-widget-data .form-submit[value="Remove"], [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .field-type-image .image-widget-data .form-submit[value="Remove"], .node-photogallery-form #BrowseMedia .field-type-image .image-widget-data .form-submit[value="Remove"], .node-poll-form .field-type-image .image-widget-data .form-submit[value="Remove"], .node-notification-form .field-type-image .image-widget-data .form-submit[value="Remove"],
 .node-food_news-form .field-type-image .image-widget-data .form-submit[value="Remove"],
 .node-cooking_tips-form .field-type-image .image-widget-data .form-submit[value="Remove"],
 .node-reporter-form .field-type-image .image-widget-data .form-submit[value="Remove"],
@@ -900,7 +900,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .node-mega_review_critic-form .field-type-image .image-widget-data .form-submit[value="Remove"], .node-loyalty_and_rewards-form .field-type-image .image-widget-data .form-submit[value="Remove"] {
   left: 400px;
 }
-.image-repo-browse .form-field-type-image a.filefield-sources-imce-browse, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .form-field-type-image a.filefield-sources-imce-browse, .node-photogallery-form #BrowseMedia .form-field-type-image a.filefield-sources-imce-browse, .node-notification-form .form-field-type-image a.filefield-sources-imce-browse,
+.image-repo-browse .form-field-type-image a.filefield-sources-imce-browse, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .form-field-type-image a.filefield-sources-imce-browse, .node-photogallery-form #BrowseMedia .form-field-type-image a.filefield-sources-imce-browse, .node-poll-form .form-field-type-image a.filefield-sources-imce-browse, .node-notification-form .form-field-type-image a.filefield-sources-imce-browse,
 .node-food_news-form .form-field-type-image a.filefield-sources-imce-browse,
 .node-cooking_tips-form .form-field-type-image a.filefield-sources-imce-browse,
 .node-reporter-form .form-field-type-image a.filefield-sources-imce-browse,
@@ -912,7 +912,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .page-admin-people form .form-field-type-image a.filefield-sources-imce-browse,
 .page-user form .form-field-type-image a.filefield-sources-imce-browse,
 .node-newsletter_templates-form .form-field-type-image a.filefield-sources-imce-browse,
-.node-mega_review_critic-form .form-field-type-image a.filefield-sources-imce-browse, .node-loyalty_and_rewards-form .form-field-type-image a.filefield-sources-imce-browse, .image-repo-browse .field-type-image a.filefield-sources-imce-browse, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .field-type-image a.filefield-sources-imce-browse, .node-photogallery-form #BrowseMedia .field-type-image a.filefield-sources-imce-browse, .node-notification-form .field-type-image a.filefield-sources-imce-browse,
+.node-mega_review_critic-form .form-field-type-image a.filefield-sources-imce-browse, .node-loyalty_and_rewards-form .form-field-type-image a.filefield-sources-imce-browse, .image-repo-browse .field-type-image a.filefield-sources-imce-browse, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .field-type-image a.filefield-sources-imce-browse, .node-photogallery-form #BrowseMedia .field-type-image a.filefield-sources-imce-browse, .node-poll-form .field-type-image a.filefield-sources-imce-browse, .node-notification-form .field-type-image a.filefield-sources-imce-browse,
 .node-food_news-form .field-type-image a.filefield-sources-imce-browse,
 .node-cooking_tips-form .field-type-image a.filefield-sources-imce-browse,
 .node-reporter-form .field-type-image a.filefield-sources-imce-browse,
@@ -931,7 +931,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
   top: 0;
   width: 100%;
 }
-.image-repo-browse .form-field-type-image a.filefield-sources-imce-browse:after, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .form-field-type-image a.filefield-sources-imce-browse:after, .node-photogallery-form #BrowseMedia .form-field-type-image a.filefield-sources-imce-browse:after, .node-notification-form .form-field-type-image a.filefield-sources-imce-browse:after,
+.image-repo-browse .form-field-type-image a.filefield-sources-imce-browse:after, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .form-field-type-image a.filefield-sources-imce-browse:after, .node-photogallery-form #BrowseMedia .form-field-type-image a.filefield-sources-imce-browse:after, .node-poll-form .form-field-type-image a.filefield-sources-imce-browse:after, .node-notification-form .form-field-type-image a.filefield-sources-imce-browse:after,
 .node-food_news-form .form-field-type-image a.filefield-sources-imce-browse:after,
 .node-cooking_tips-form .form-field-type-image a.filefield-sources-imce-browse:after,
 .node-reporter-form .form-field-type-image a.filefield-sources-imce-browse:after,
@@ -943,7 +943,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .page-admin-people form .form-field-type-image a.filefield-sources-imce-browse:after,
 .page-user form .form-field-type-image a.filefield-sources-imce-browse:after,
 .node-newsletter_templates-form .form-field-type-image a.filefield-sources-imce-browse:after,
-.node-mega_review_critic-form .form-field-type-image a.filefield-sources-imce-browse:after, .node-loyalty_and_rewards-form .form-field-type-image a.filefield-sources-imce-browse:after, .image-repo-browse .field-type-image a.filefield-sources-imce-browse:after, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .field-type-image a.filefield-sources-imce-browse:after, .node-photogallery-form #BrowseMedia .field-type-image a.filefield-sources-imce-browse:after, .node-notification-form .field-type-image a.filefield-sources-imce-browse:after,
+.node-mega_review_critic-form .form-field-type-image a.filefield-sources-imce-browse:after, .node-loyalty_and_rewards-form .form-field-type-image a.filefield-sources-imce-browse:after, .image-repo-browse .field-type-image a.filefield-sources-imce-browse:after, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .field-type-image a.filefield-sources-imce-browse:after, .node-photogallery-form #BrowseMedia .field-type-image a.filefield-sources-imce-browse:after, .node-poll-form .field-type-image a.filefield-sources-imce-browse:after, .node-notification-form .field-type-image a.filefield-sources-imce-browse:after,
 .node-food_news-form .field-type-image a.filefield-sources-imce-browse:after,
 .node-cooking_tips-form .field-type-image a.filefield-sources-imce-browse:after,
 .node-reporter-form .field-type-image a.filefield-sources-imce-browse:after,
@@ -5846,8 +5846,7 @@ div.node #comments h2 {
 .page-node-add-recipe .form-type-managed-file .image-widget-data,
 .node-type-print-team-integration .form-type-managed-file .image-widget-data,
 [id*="field-service-content-values"] .form-type-managed-file .image-widget-data,
-.node-category-form .form-type-managed-file .image-widget-data,
-.page-node-add-poll .form-type-managed-file .image-widget-data {
+.node-category-form .form-type-managed-file .image-widget-data {
   position: relative;
 }
 .page-node-add-magazine .form-type-managed-file a.filefield-sources-imce-browse,
@@ -5862,8 +5861,7 @@ div.node #comments h2 {
 .page-node-add-recipe .form-type-managed-file a.filefield-sources-imce-browse,
 .node-type-print-team-integration .form-type-managed-file a.filefield-sources-imce-browse,
 [id*="field-service-content-values"] .form-type-managed-file a.filefield-sources-imce-browse,
-.node-category-form .form-type-managed-file a.filefield-sources-imce-browse,
-.page-node-add-poll .form-type-managed-file a.filefield-sources-imce-browse {
+.node-category-form .form-type-managed-file a.filefield-sources-imce-browse {
   height: 100%;
   left: 0;
   position: absolute;
@@ -5882,8 +5880,7 @@ div.node #comments h2 {
 .page-node-add-recipe .form-type-managed-file a.filefield-sources-imce-browse:after,
 .node-type-print-team-integration .form-type-managed-file a.filefield-sources-imce-browse:after,
 [id*="field-service-content-values"] .form-type-managed-file a.filefield-sources-imce-browse:after,
-.node-category-form .form-type-managed-file a.filefield-sources-imce-browse:after,
-.page-node-add-poll .form-type-managed-file a.filefield-sources-imce-browse:after {
+.node-category-form .form-type-managed-file a.filefield-sources-imce-browse:after {
   background-color: #fff;
   border: 1px solid #d9d9d9;
   border-radius: 5px;

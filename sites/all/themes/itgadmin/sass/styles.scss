@@ -4335,6 +4335,7 @@ div.node{
   }
 }
 .node-poll-form{
+  @extend .image-repo-browse;
   .form-field-name-field-poll-start-date, 
   .form-field-name-field-poll-end-date{
     .form-type-textfield:first-child{
@@ -5979,8 +5980,7 @@ div.node{
 .page-node-add-recipe, 
 .node-type-print-team-integration,
 [id*="field-service-content-values"],
-.node-category-form,
-.page-node-add-poll{
+.node-category-form{
   .form-type-managed-file{
     .image-widget-data{
       position: relative;
