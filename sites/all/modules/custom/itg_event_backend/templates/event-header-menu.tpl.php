@@ -23,6 +23,7 @@ if (!empty($node) && ($node->type == 'event_backend')) {//shravan
   $event_config_speakers = $node->field_config_speakers[LANGUAGE_NONE][0]['value'];
   $event_config_sponsors = $node->field_config_sponsors[LANGUAGE_NONE][0]['value'];
   $event_config_flashback = $node->field_config_flashback[LANGUAGE_NONE][0]['value'];
+  $event_type = $node->field_event_types[LANGUAGE_NONE][0]['tid'];
   //$event_config_photo = $node->field_config_photo[LANGUAGE_NONE][0]['value'];
   //$event_config_video = $node->field_config_video[LANGUAGE_NONE][0]['value'];
   $menu_font_color = $node->field_e_menu_font_color[LANGUAGE_NONE][0]['rgb'] ? $node->field_e_menu_font_color[LANGUAGE_NONE][0]['rgb'] : '#f7ee23';
@@ -53,7 +54,7 @@ if (!empty($node) && ($node->type == 'event_backend')) {//shravan
             }
 
             if ($event_config_flashback) {
-              $flash_old = itg_event_backend_flashback($node->nid, $menu_font_color);
+              $flash_old = itg_event_backend_flashback($node->nid, $menu_font_color, $event_type);
               $flash_old_event = '';
               if(!empty($flash_old)){
                 $flash_old_event = $flash_old;
