@@ -1455,35 +1455,6 @@ function features_for_story_field_default_field_bases() {
     'type' => 'field_collection',
   );
 
-  // Exported field_base: 'field_story_listicle_color'.
-  $field_bases['field_story_listicle_color'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_story_listicle_color',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'rgb' => array(
-        0 => 'rgb',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'color_field',
-    'settings' => array(
-      'allow_empty' => 0,
-      'palette' => '',
-      'show_buttons' => 0,
-      'show_input' => 0,
-      'show_palette' => 0,
-      'show_palette_only' => 0,
-    ),
-    'translatable' => 0,
-    'type' => 'color_field_rgb',
-  );
-
   // Exported field_base: 'field_story_listicle_description'.
   $field_bases['field_story_listicle_description'] = array(
     'active' => 1,
