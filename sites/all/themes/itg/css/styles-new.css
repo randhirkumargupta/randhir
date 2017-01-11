@@ -4700,6 +4700,13 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   font-size: 13px;
   color: #0db533;
 }
+[id*="itg-personalization-edit-profile-form"] span.error, [id*="itg-personalization-refer-a-friend-form"] span.error {
+  font-size: 12px;
+  position: absolute;
+  right: 5px;
+  top: 8px;
+  z-index: 9;
+}
 
 @media all and (min-width: 768px) {
   .block-itg-personalization .personal-menu-tab, .block-itg-personalization .saved-item-tab {
