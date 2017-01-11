@@ -100,7 +100,7 @@ function tv_schedule_listing() {
             }
             $node_detail = node_load(tv_story_list($ass_search_date, $document['time']));
             if(!empty($node_detail->nid)) {
-            $out[$keys]['story_attach'] = l('', 'node/'.$node_detail->nid, array('options' => array('absolute' => TRUE), 'attributes'=> array('target'=>'_blank', 'class' => array('fa fa-file-text'))));
+            $out[$keys]['story_attach'] = l('', 'node/'.$node_detail->nid, array('options' => array('absolute' => TRUE), 'attributes'=> array('target'=>'_blank', 'class' => array('fa', 'fa-file-text'))));
             }
             $keys++;
 

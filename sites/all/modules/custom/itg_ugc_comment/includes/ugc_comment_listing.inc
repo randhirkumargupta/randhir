@@ -64,7 +64,7 @@ function ugc_comment_view($id) {
     $output.= 'Post date : '.$final_view['comment_date'].'<br/>';
   }
   
-  $output.='Action : '. l(  t('Cancel'),  'ugc-comment-listing',  array('attributes' =>array('class'=>'ugc-comment-listing', 'id'=>'ugc-comment-listing')));
+  $output.='Action : '. l(  t('Cancel'),  'ugc-comment-listing',  array('attributes' => array('class'=> array('ugc-comment-listing'), 'id'=> array('ugc-comment-listing'))));
   
     $output.= '</div>';
   
