@@ -9496,3 +9496,15 @@ span.file a{pointer-events: none;}
     @extend .btn-small;
   }
 }
+.node-cooking_tips-form, .node-food_news-form, .node-recipe-form{
+  [id*="field-story-reporter-values"] tbody tr td,
+  [id*="field-story-reporter-values"] + div.clearfix{
+    .ajax-progress{@extend .hide;}
+  }
+  [id*="field-story-reporter-values"] tbody tr td > .form-submit[value="Remove"], 
+  [id*="field-story-reporter-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]{margin: 0;}
+  [id*="field-story-reporter-values"] + div.clearfix, 
+  [id*="field-story-reporter-values"] + div.description + div.clearfix{
+    right: 532px;
+  }
+}
