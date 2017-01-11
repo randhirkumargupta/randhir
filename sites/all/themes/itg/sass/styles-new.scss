@@ -4475,6 +4475,13 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         color: #0db533;    
       }
     }
+    span.error {
+        font-size: 12px;
+        position: absolute;
+        right: 5px;
+        top: 8px;
+        z-index: 9;
+    }
   }
 
 

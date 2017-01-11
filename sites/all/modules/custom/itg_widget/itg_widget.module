@@ -1033,7 +1033,7 @@ function itg_widget_dailymotion_get_videogallery_slider($nid , $type = 'gallery'
       }
       ?>
         <div class="iframe-video">
-          <iframe frameborder="0"
+          <iframe class='iframe-video-dailymotion' frameborder="0"
                   src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=0&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
                   allowfullscreen></iframe>
         </div>
