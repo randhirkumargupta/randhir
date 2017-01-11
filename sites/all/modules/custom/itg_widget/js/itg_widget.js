@@ -13,6 +13,25 @@ Drupal.behaviors.itg_widgets = {
         videoGallery ();
       });
     });
+    //Prevent stop video if it is palyed previously.
+    jQuery ('body').on('click', '.slick-track img', function (e){
+      jQuery (".iframe-video-dailymotion").each (function () {
+        var url = jQuery (this).attr ("src");
+        jQuery (this).removeAttr("src");
+        var Updatedurl = updateQueryStringParameter (url, 'autoplay', '0');
+        jQuery (this).attr ('src', Updatedurl);
+      });
+    });
+
+    function updateQueryStringParameter (uri, key, value) {
+      var re = new RegExp ("([?&])" + key + "=.*?(&|$)", "i");
+      var separator = uri.indexOf ('?') !== -1 ? "&" : "?";
+      if (uri.match (re)) {
+        return uri.replace (re, '$1' + key + "=" + value + '$2');
+      } else {
+        return uri + separator + key + "=" + value;
+      }
+    }
     //common function for popup video
     function videoGallery () {
       jQuery ("#videogallery-iframe").show ();
