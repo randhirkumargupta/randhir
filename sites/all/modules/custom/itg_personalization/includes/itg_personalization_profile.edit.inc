@@ -75,9 +75,11 @@ function itg_personalization_edit_profile_form() {
   $form['dob'] = array(
     '#type' => 'date_popup',
     '#title' => t("DOB"),
-    '#date_format' => 'Y/m/d',
+    '#date_format' => 'd/m/Y',
     '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly'),
     '#default_value' => $dob_default_value,
+    '#date_year_range' => '1900:+0d',
+    '#datepicker_options' => array('maxDate' => '+0d'),
     '#date_timezone' => date_default_timezone(),
   );
   $gender_default_value = '';
