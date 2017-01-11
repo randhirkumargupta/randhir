@@ -6167,29 +6167,30 @@ footer{
         @include calculate-width(3);
         @include float(left);
         .view-content{            
-            @include clearfix;
-            .views-row{                
-                @include calculate-width(1);
-                @include float(none);
-                @include text-align(center);
-                margin-bottom:30px;
-                img{
-                    border-radius: 100%;
-                    border: 1px solid #ddd;
-                }
-                .views-field-title, .views-field-field-story-new-title{
-                    font-size: 11px;
-                    font-weight: 700;
-                    font-family: roboto;
-                    color: #000;
-                    margin-top: 10px;
-                    text-transform: uppercase;
-                }
-                .views-field-field-story-new-title{
-                    color: #ef2a24;  
-                    margin-top:0; 
-                }
+            @include clearfix;                        
+            @include calculate-width(1);
+            @include float(none);
+            @include text-align(center);
+            margin-bottom:30px;
+            img{
+                border-radius: 100%;
+                border: 1px solid #ddd;
             }
+            .views-field-title, .views-field-field-story-new-title{
+                font-size: 11px;
+                font-weight: 700;
+                font-family: roboto;
+                color: #000;
+                margin-top: 10px;
+                text-transform: uppercase;
+            }
+            .views-field-field-story-new-title{
+                color: #ef2a24;  
+                margin-top:0; 
+            }
+        }        
+        &:nth-child(3n+1){
+            clear: left;
         }
     }
 }
@@ -6271,14 +6272,15 @@ footer{
         }
     }
 }
-.speaker-detail-page, #block-views-event-subsite-speaker-block-3{
+.speaker-detail-page, #block-views-program-schedule-block-3{
     .col-md-3{
         text-align: center;
         h4{
             font-size: 15px;
             margin: 10px 0 0 0;
-            color:#000000;
+            color:#000;
             text-transform: uppercase;
+            font-weight: 600;
         }
         p{
             text-transform: uppercase;
