@@ -1,0 +1,6 @@
+name = ITG UGC Comment
+description = "functionality related to User Generated Comment."
+package = "ITG"
+core = 7.x
+
+files[] = itg_ugc_comment.module

@@ -22,14 +22,14 @@ if ($widget_style == 'auto-road-trip') {
                         ?>
 
                         <?php if (!empty($extra_large_image_url)) { ?>
-                            <a class="pic  <?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
+                            <a class="pic <?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                                 <img  src="<?php print $extra_large_image_url ?>" />
                             </a>
                             <?php
                         }
                         else {
                             ?>
-                            <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
+                            <a class="pic <?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                                 <img  height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
                             </a>
                         <?php }

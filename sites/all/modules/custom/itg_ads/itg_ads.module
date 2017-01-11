@@ -19,13 +19,13 @@
  * 5.Medium Rectangle-RHS1-300x250
  * 6.Medium Rectangle-RHS2-300x250
  * 
- * ### And corresponding machine names are given as follows ##
+ * ## And corresponding machine names are given as follows ##
  * 1.ads_page_pusher_1x1
  * 2.ads_overlay_1x1
  * 3.ads_super_banner_top_nav_728x90
- * 4.ads_super_banner_bottom
- * 5.ads_medium_rectangle_rhs1_300x250
- * 6.ads_medium_rectangle_rhs2_300x250
+ * 4.ads_super_banner_bottomnav728x90
+ * 5.ads_medium_rectangl_rhs1_300x250
+ * 6.ads_medium_rectangl_rhs2_300x250
  * 
  */
 function itg_ads_block_info() {
@@ -44,16 +44,16 @@ function itg_ads_block_info() {
       'info' => t('Ads- Super Banner (Top Nav) 728x90'),
       'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  $blocks['ads_super_banner_bottom_nav_728x90'] = array(
+  $blocks['ads_super_banner_bottomnav728x90'] = array(
       'info' => t('Ads- Super Banner (Bottom nav) 728x90'),
       'cache' => DRUPAL_CACHE_GLOBAL,
   );
 
-  $blocks['ads_medium_rectangle_rhs1_300x250'] = array(
+  $blocks['ads_medium_rectangl_rhs1_300x250'] = array(
       'info' => t('Ads- Medium Rectangle-RHS1-300x250'),
       'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  $blocks['ads_medium_rectangle_rhs2_300x250'] = array(
+  $blocks['ads_medium_rectangl_rhs2_300x250'] = array(
       'info' => t('Ads- Medium Rectangle-RHS2-300x250'),
       'cache' => DRUPAL_CACHE_GLOBAL,
   );
@@ -106,7 +106,7 @@ function itg_ads_block_view($delta = '') {
 
     // For Super Banner (Bottom nav) 728x90  
 
-    case 'ads_super_banner_bottom_nav_728x90':
+    case 'ads_super_banner_bottomnav728x90':
       $page_name = 'Super Banner (Bottom Nav) 728x90';
       $data['itg_ad'] = '';
       $block['content'] = 'Super Banner (Bottom Nav) 728x90 code content coming soon...';
@@ -114,22 +114,20 @@ function itg_ads_block_view($delta = '') {
 
 
     // Medium Rectangle-RHS1-300x250
-    case 'ads_medium_rectangle_rhs1_300x250':
+    case 'ads_medium_rectangl_rhs1_300x250':
       $page_name = 'Medium Rectangle-RHS1-300x250';
       $data['itg_ad'] = '';
       $block['content'] = 'Medium Rectangle-RHS1-300x250 code content coming soon..';
       break;
 
     // Medium Rectangle-RHS2-300x250
-    case 'ads_medium_rectangle_rhs2_300x250':
+    case 'ads_medium_rectangl_rhs2_300x250':
       $page_name = 'Medium Rectangle-RHS2-300x250';
       $data['itg_ad'] = '';
       $block['content'] = 'Medium Rectangle-RHS2-300x250 code content coming soon..';
       break;
-    
+
     // Code end
-    
-    
 //    case 'ad_right_sidebar_1':
 //      $page_name = 'Rest';
 //      $data['itg_ad'] = get_ad_script($page_name);
@@ -899,4 +897,42 @@ function check_ads_placeholder_existance($template) {
     }
     return NULL;
   }
+}
+
+/**
+ * This is for getting itg custom page name
+ * @param string $placeholdername
+ * @return array $ad_value;
+ */
+function get_itg_page_name($placeholder_name) {
+  $arg = arg();
+  $is_front_page = drupal_is_front_page();
+  if ($is_front_page) {
+    $page_name = $is_front_page;
+  } else if ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) {
+    $taxonomy_array = taxonomy_get_parents_all($arg[2]);
+    $terms = array_reverse($taxonomy_array);
+    $page_name = $terms[0]->tid;
+  } else if ($arg[0] == 'node' && is_numeric($arg[1])) {
+    $tid = '';
+    $taxonomy_array = taxonomy_get_parents_all($arg[2]);
+    $terms = array_reverse($taxonomy_array);
+    $page_name = $terms[0]->tid;
+  } else {
+    $page_name = 'ros';
+  }
+
+  $ad_value = get_ad_of_placeholder($placeholder_name, $page_name);
+  return $ad_value;
+}
+
+/*
+ * Getting all ads of selected placeholder on the basis of placeholder and page name
+ * @param string $placeholdername
+ * @param string $page_name
+ * @return array $ads;
+ */
+
+function get_ad_of_placeholder($placeholder_name, $page_name) {
+  
 }
