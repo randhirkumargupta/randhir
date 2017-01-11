@@ -158,6 +158,43 @@ function features_for_story_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'field_collection_item-field_story_listicle-field_story_listicle_color'.
+  $field_instances['field_collection_item-field_story_listicle-field_story_listicle_color'] = array(
+    'bundle' => 'field_story_listicle',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 5,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_listicle_color',
+    'label' => 'Listicle Color',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_story_listicle-field_story_listicle_description'.
   $field_instances['field_collection_item-field_story_listicle-field_story_listicle_description'] = array(
     'bundle' => 'field_story_listicle',
@@ -2030,48 +2067,6 @@ function features_for_story_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 33,
-    ),
-  );
-
-  // Exported field_instance: 'node-story-field_story_facebook_vdescripti'.
-  $field_instances['node-story-field_story_facebook_vdescripti'] = array(
-    'bundle' => 'story',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 65,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_facebook_vdescripti',
-    'label' => 'Facebook Video Narrative',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 59,
     ),
   );
 
@@ -4572,48 +4567,6 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-story-field_story_twitter_video_desc'.
-  $field_instances['node-story-field_story_twitter_video_desc'] = array(
-    'bundle' => 'story',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 67,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_twitter_video_desc',
-    'label' => 'Twitter Video Description',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 62,
-    ),
-  );
-
   // Exported field_instance: 'node-story-field_story_ugc_source_id'.
   $field_instances['node-story-field_story_ugc_source_id'] = array(
     'bundle' => 'story',
@@ -4770,7 +4723,6 @@ function features_for_story_field_default_field_instances() {
   t('Extra small image');
   t('Facebook Narrative');
   t('Facebook Video');
-  t('Facebook Video Narrative');
   t('Facebook image');
   t('Facebook narrative');
   t('Factoids');
@@ -4850,7 +4802,6 @@ function features_for_story_field_default_field_instances() {
   t('Tweet');
   t('Twitter Image');
   t('Twitter Video');
-  t('Twitter Video Description');
   t('Twitter narrative');
   t('UGC Source ID');
   t('common by line reporter id');
