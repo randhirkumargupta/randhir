@@ -566,7 +566,8 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     drupal_add_css('.views-widget-filter-field_story_syndication_value_1 , .views-widget-filter-field_story_syndication_value {display:inline-block !important;}', array('type' => 'inline'));
 
     $url_chunk = explode("?", $_SERVER['REQUEST_URI']);
-    $url_without_query_string = end(explode('/', $url_chunk[0]));
+    $url_chunk_array = explode('/', $url_chunk[0]);
+    $url_without_query_string = end($url_chunk_array);
 
     $form['reset'] = array(
       '#type' => 'markup',

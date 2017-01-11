@@ -684,19 +684,19 @@ function features_supplement_magazine_views_default_views() {
     'nid' => 'nid',
     'type' => 'type',
     'field_issue_title' => 'field_issue_title',
+    'title_1' => 'title_1',
     'field_issue_magazine' => 'field_issue_magazine',
-    'field_issue_supplement' => 'field_issue_supplement',
+    'title' => 'title',
     'uid' => 'uid',
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
     'nothing_1' => 'nothing_1',
     'changed' => 'changed',
+    'php' => 'php',
     'view_node' => 'nothing',
     'edit_node' => 'nothing',
     'delete_node' => 'nothing',
     'nothing' => 'nothing',
-    'nothing_2' => 'nothing_2',
-    'php' => 'php',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -726,6 +726,13 @@ function features_supplement_magazine_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'title_1' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'field_issue_magazine' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
@@ -733,7 +740,7 @@ function features_supplement_magazine_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_issue_supplement' => array(
+    'title' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -771,6 +778,11 @@ function features_supplement_magazine_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'php' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'view_node' => array(
       'align' => '',
       'separator' => '',
@@ -791,16 +803,6 @@ function features_supplement_magazine_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'nothing_2' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'php' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
   );
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
@@ -813,6 +815,14 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_issue_supplement_target_id']['id'] = 'field_issue_supplement_target_id';
+  $handler->display->display_options['relationships']['field_issue_supplement_target_id']['table'] = 'field_data_field_issue_supplement';
+  $handler->display->display_options['relationships']['field_issue_supplement_target_id']['field'] = 'field_issue_supplement_target_id';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_issue_magazine_target_id']['id'] = 'field_issue_magazine_target_id';
+  $handler->display->display_options['relationships']['field_issue_magazine_target_id']['table'] = 'field_data_field_issue_magazine';
+  $handler->display->display_options['relationships']['field_issue_magazine_target_id']['field'] = 'field_issue_magazine_target_id';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -997,24 +1007,24 @@ function features_supplement_magazine_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Magazine */
-  $handler->display->display_options['fields']['field_issue_magazine']['id'] = 'field_issue_magazine';
-  $handler->display->display_options['fields']['field_issue_magazine']['table'] = 'field_data_field_issue_magazine';
-  $handler->display->display_options['fields']['field_issue_magazine']['field'] = 'field_issue_magazine';
-  $handler->display->display_options['fields']['field_issue_magazine']['alter']['max_length'] = '30';
-  $handler->display->display_options['fields']['field_issue_magazine']['alter']['trim'] = TRUE;
-  $handler->display->display_options['fields']['field_issue_magazine']['settings'] = array(
-    'link' => 0,
-  );
-  /* Field: Content: Supplement */
-  $handler->display->display_options['fields']['field_issue_supplement']['id'] = 'field_issue_supplement';
-  $handler->display->display_options['fields']['field_issue_supplement']['table'] = 'field_data_field_issue_supplement';
-  $handler->display->display_options['fields']['field_issue_supplement']['field'] = 'field_issue_supplement';
-  $handler->display->display_options['fields']['field_issue_supplement']['alter']['max_length'] = '30';
-  $handler->display->display_options['fields']['field_issue_supplement']['alter']['trim'] = TRUE;
-  $handler->display->display_options['fields']['field_issue_supplement']['settings'] = array(
-    'link' => 0,
-  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['fields']['title_1']['table'] = 'node';
+  $handler->display->display_options['fields']['title_1']['field'] = 'title';
+  $handler->display->display_options['fields']['title_1']['relationship'] = 'field_issue_magazine_target_id';
+  $handler->display->display_options['fields']['title_1']['label'] = 'Magazine';
+  $handler->display->display_options['fields']['title_1']['alter']['max_length'] = '30';
+  $handler->display->display_options['fields']['title_1']['alter']['trim'] = TRUE;
+  $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'field_issue_supplement_target_id';
+  $handler->display->display_options['fields']['title']['label'] = 'Supplement';
+  $handler->display->display_options['fields']['title']['alter']['max_length'] = '30';
+  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Author uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'node';

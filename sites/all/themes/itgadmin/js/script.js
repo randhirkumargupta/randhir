@@ -381,7 +381,10 @@ jQuery(document).ready(function() {
         if (!$('.img-crt').parent().hasClass('.generate-image')) {
             $('.img-crt, .pre-desc').wrapAll('<div class="generate-image"></div>');
         }
-        $('.form-field-name-field-credit-to-all, .form-field-name-field-credit-name').wrapAll('<div class="credit-to-all"></div>');
+        var get_parent_for_credit = jQuery('.form-field-name-field-credit-to-all, .form-field-name-field-credit-name').parent().attr('class');
+        if(get_parent_for_credit != "credit-to-all"){
+          jQuery('.form-field-name-field-credit-to-all, .form-field-name-field-credit-name').wrapAll('<div class="credit-to-all"></div>');
+        }
         
         
           $('.image-widget').each(function() {
@@ -899,11 +902,11 @@ jQuery(document).ready(function () {
     get_value = jQuery(this).val(), 
     set_class = '.' + get_value + "-tab-form", 
     siblings = jQuery(this).closest('.templates-tab-wrapper').find(set_class).siblings('.tab-form');
-    if(get_value){
-      siblings.find('input[type=text], textarea').val(''),
-      siblings.find('input[type=radio], input[type=checkbox]').removeAttr('checked'),
-      siblings.find('.image-widget-data input[value="Remove"]').trigger('mousedown');
-    }
+//    if(get_value){
+//      siblings.find('input[type=text], textarea').val(''),
+//      siblings.find('input[type=radio], input[type=checkbox]').removeAttr('checked'),
+//      siblings.find('.image-widget-data input[value="Remove"]').trigger('mousedown');
+//    }
     jQuery(this).closest('.templates-tab-wrapper').find(set_class).show().siblings('.tab-form').hide();
   });   
      

@@ -106,7 +106,7 @@ function itg_layout_manager_filter_form($form, &$form_state) {
     '#type' => 'select',
     '#title' => 'Items per page',
     '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
-    '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
+    '#default_value' => isset($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
   );
   
   $form['submit'] = array(
@@ -143,14 +143,14 @@ function itg_layout_manager_filter_form_submit($form, &$form_state) {
 function layout_section_widgets_search_form($form, &$form_state) {
   
   if ($_GET['template_name'] != 'page--front' ) {
-    $arg = $_GET['section'];
+    $arg = !empty($_GET['section']) ? $_GET['section'] : '';
   }
   
   // condition base widget
-  if ($_GET["template_name"] == 'page--section_photo') {
+  if (!empty($_GET["template_name"]) && $_GET["template_name"] == 'page--section_photo') {
     $widgets_type = 'photo_list_of_category';
   }
-  else if ($_GET["template_name"] == 'page--section_video') {
+  else if (!empty($_GET["template_name"]) && $_GET["template_name"] == 'page--section_video') {
     $widgets_type = 'video_list_of_category';
   }
   else {

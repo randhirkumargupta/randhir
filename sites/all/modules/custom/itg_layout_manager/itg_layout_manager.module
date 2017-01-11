@@ -195,6 +195,7 @@ function itg_layout_manager_block_view($delta = '') {
 
       if (arg(0) == 'personalization') {
         // change message according to argument
+        $change_pass_msg = '';
         if(!empty($_GET['pass']) && ($_GET['pass'] == 'success')) {
           $change_pass_msg = 'Your password has been changed successfully!';
         }
@@ -208,8 +209,9 @@ function itg_layout_manager_block_view($delta = '') {
         $pop_output.= '<p>'.$change_pass_msg.'</p>';
         $pop_output.= '<a href = "javascript:void(0)" class = "close-pass-popup">ok</a>';
         $pop_output.= '</div></div>';
-
-        print $pop_output;
+        if (!empty($change_pass_msg)) {
+          print $pop_output;
+        }                
       }
 
       /* code for sso login */
@@ -229,6 +231,7 @@ function itg_layout_manager_block_view($delta = '') {
         }
 
         // condition for change password
+        $change_arg = NULL;
         if(arg(0) == 'password-success' || arg(0) == 'complete-page') {
           $change_arg = arg(1);                  
         }
@@ -257,7 +260,9 @@ function itg_layout_manager_block_view($delta = '') {
     break;
     // for admin widgets list in side bar
     case 'layout_widget_list_block':
-      $template_id = check_template_of_section($_GET['section'], $_GET['template_name']);
+      if (!empty($_GET['section']) && !empty($_GET['template_name'])) {
+        $template_id = check_template_of_section($_GET['section'], $_GET['template_name']);
+      }      
       
       if (empty($template_id)) {
           $widget_array['default_widget'] = get_all_widgets_list_by_setting_page('Template widgets list');
@@ -275,17 +280,19 @@ function itg_layout_manager_block_view($delta = '') {
       $section_widgets_form = drupal_get_form('layout_section_widgets_search_form');
       $data['section_widgets_form'] = drupal_render($section_widgets_form);
       //condition base change widget
-      if ($_GET["template_name"] == 'page--section_photo') {
+      $widgets_type = '';
+      if (!empty($_GET["template_name"]) && $_GET["template_name"] == 'page--section_photo') {
         $widgets_type = 'photo_list_of_category';
       }
-      elseif ($_GET["template_name"] == 'page--section_video') {
+      elseif (!empty($_GET["template_name"]) && $_GET["template_name"] == 'page--section_video') {
         $widgets_type = 'video_list_of_category';
       }
       else {
         $widgets_type = 'section_wise_order';
       }
-
-      $data['widgets_list'] = display_section_widgets_list($_GET['section'], $_GET['template_name'], $widgets_type);
+      if (!empty($_GET['section']) && !empty($_GET['template_name'])) {
+        $data['widgets_list'] = display_section_widgets_list($sectiontpl, $template_nametpl, $widgets_type);
+      }    
 
       $block['content'] = theme('layout_section_widgets_block', array('data' => $data));
       break;

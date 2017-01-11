@@ -113,8 +113,15 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
     }
     // Add block of speekar order reorder.
     if (isset($_GET['step']) && $_GET['step'] == 'step_configuration' && is_numeric(arg(1))) {
-      $view_embded_view = views_embed_view('event_speaker_order_reorder', 'block_1', arg(1));
-      $form['#suffix'] = "<div>$view_embded_view</div>";
+      $color_box_query = array("width" => "900", "height" => "600", "iframe" => "true");
+      $color_box_class = array("class" => array("colorbox-load anchor-order-reorder"));
+      $link_text = l(t('Click here'), "speaker-order-reorder/" . arg(1), array('query' => $color_box_query, 'attributes' => $color_box_class));
+      $link = '<div class="form-item form-type-textfield form-item-field-e-associate-highlights-und">
+        <label for="widget-order-reorder">' . t("Speaker Order/Reorder") . ' </label>
+        ' . $link_text . '
+     </div>';
+      drupal_add_css("a.anchor-order-reorder {text-decoration:underline !important}" ,"inline");
+      $form['field_e_associate_highlights']['#suffix'] = "<div class='form-wrapper speaker-order-reorder'>$link</div>";
     }
   }
 
@@ -233,6 +240,38 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   $registration_close = strtotime($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']);
   $registration_start = strtotime($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']);
 
+  // node insert validation
+  if(arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'event-backend'){
+    if($current_date >= $start_date){
+      form_set_error('field_event_start_date', t('Event start date must be greater than current date & time.'));
+    }
+    if($current_date >= $end_date){
+      form_set_error('field_event_close_date', t('Event close date must be greater than current date & time.'));
+    }
+    if($current_date >= $registration_start){
+      form_set_error('field_story_expiry_date', t('Registration start date must be greater than current date & time.'));
+    }
+    if($current_date >= $registration_close){
+      form_set_error('field_registration_close_date', t('Registration close date must be greater than current date & time.'));
+    }
+  }elseif(arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit'){
+    $status = itg_event_backend_node_status(arg(1));
+    if($status != 1){
+      if($current_date >= $start_date){
+      form_set_error('field_event_start_date', t('Event start date must be greater than current date & time.'));
+    }
+    if($current_date >= $end_date){
+      form_set_error('field_event_close_date', t('Event close date must be greater than current date & time.'));
+    }
+    if($current_date >= $registration_start){
+      form_set_error('field_story_expiry_date', t('Registration start date must be greater than current date & time.'));
+    }
+    if($current_date >= $registration_close){
+      form_set_error('field_registration_close_date', t('Registration close date must be greater than current date & time.'));
+    }
+    }
+  }
+  
   if ($registration_close <= $registration_start) {
     form_set_error('field_story_expiry_date', t('Registration start date must be less than registration close date.'));
   }
@@ -1716,11 +1755,11 @@ function itg_event_backend_highlights_block_content() {
 function itg_event_backend_highlights_like_dislike($unique_id) {
   $like = itg_flag_get_count($unique_id, 'like_count');
   $dislike = itg_flag_get_count($unique_id, 'dislike_count');
-  if (!empty($like)) {
-    $like_count = '(' . $like . ')';
+  if (!empty($like['like_count'])) {
+    $like_count = '(' . $like['like_count'] . ')';
   }
-  if (!empty($dislike)) {
-    $dislike_count = '(' . $dislike . ')';
+  if (!empty($dislike['dislike_count'])) {
+    $dislike_count = '(' . $dislike['dislike_count'] . ')';
   }
   $pid = "voted_" . $unique_id;
   $like = "no-of-likes_" . $unique_id;
@@ -1936,12 +1975,9 @@ function itg_event_get_target_id_of_speakers($field_program_schedule) {
   $target_id = array();
   if (!empty($field_program_schedule)) {
     foreach ($field_program_schedule as $key => $field_select_speaker) {
-      $spekar_target_id = (int) $field_select_speaker['field_select_speaker']['und'][0]['target_id'];
-      // Field collection give emtpy target id for add more to skip this.
-      if ($spekar_target_id) {
-        if (!empty($field_select_speaker['field_select_speaker']['und'][0]['target_id'])) {
-          $target_id[] = $field_select_speaker['field_select_speaker']['und'][0]['target_id'];
-        }
+      $spekar_target_id_array = $field_select_speaker['field_select_speaker']['und'];
+      foreach ($spekar_target_id_array as $target_id_value) {
+        $target_id[] = $target_id_value['target_id'];
       }
     }
   }
@@ -1954,6 +1990,15 @@ function itg_event_get_target_id_of_speakers($field_program_schedule) {
  * {@inheritdoc}
  */
 function itg_widget_form_views_form_event_speaker_order_reorder_block_1_alter(&$form, &$form_state, $form_id) {
+  $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_speaker";
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}
+ */
+function itg_widget_form_views_form_event_speaker_order_reorder_page_11_alter(&$form, &$form_state, $form_id) {
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_speaker";
 }
 
@@ -1976,10 +2021,10 @@ function update_itg_widget_order_table_data_for_speaker($form, &$form_state) {
   // If made change is order then save otherwise skip to save.
   if ($weightcount) {
     db_delete('itg_widget_order')
-      ->condition('widget', $widget)
-      ->condition('cat_id', $cat_id)
-      ->execute();
-    
+        ->condition('widget', $widget)
+        ->condition('cat_id', $cat_id)
+        ->execute();
+
     // Get extra , nid , content type from custom_table because it will further use to insert again.
     foreach ($draggable_view_data as $key => $value) {
       if ($weightcount > 0) {
@@ -2001,4 +2046,30 @@ function update_itg_widget_order_table_data_for_speaker($form, &$form_state) {
   else {
     drupal_set_message(t("This order already saved"));
   }
+}
+
+/**
+ * Implementation of hook_node_delete().
+ * {@inheritdoc}
+ */
+function itg_event_backend_node_delete($node) {
+  // Delete Reporter frpom custom table while deleting it.
+  if ($node->type == 'reporter') {
+    db_delete('itg_widget_order')
+        ->condition('nid', $node->nid)
+        ->condition('widget', 'itg_event_speaker_widget')
+        ->execute();
+  }
+}
+
+/**
+ * Implements get node status
+ */
+function itg_event_backend_node_status($nid){
+  $query = db_select('node', 'n');
+  $query ->fields('n', array('status'));
+  $query -> condition('n.status', 1, '=');
+  $query -> condition('n.nid', $nid, '=');
+  $result = $query->execute()->fetchField();
+  return $result;
 }

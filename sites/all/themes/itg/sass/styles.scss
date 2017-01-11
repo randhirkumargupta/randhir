@@ -2,6 +2,12 @@
 @import "itg-variables";
 @import "itg-mixins";
 /* Global CSS */
+*{
+    @extend .mr-0;
+    @extend .pd-0;
+    box-sizing: border-box;
+    word-break: break-word;
+}
 body{
     font: 400 14px/18px $itg-robotoslab;
     color: #333;
@@ -216,11 +222,6 @@ input[type="text"], select, input[type="password"]{
 }
 .form-required, .error{
     color: red;
-}
-*{
-    @extend .mr-0;
-    @extend .pd-0;
-    box-sizing: border-box;
 }
 .row{
     @include clearfix;
@@ -1236,7 +1237,7 @@ footer{
         height: 673px;
     }
     .itg-layout-container .top-colum-3 .droppable{
-        height: 276px;
+        height: 266px;
     }
     .itg-common-section{
         .droppable{
@@ -1406,7 +1407,9 @@ footer{
         padding:5px;
          a{
             display: block;
-            margin-bottom: 10px;
+            img{
+                margin-bottom: 10px;
+            }
             &:hover{
                 color:$blue-color;
             }
@@ -1418,6 +1421,11 @@ footer{
             @include float(none);
             @include calculate-width(1);
             margin-bottom: 10px;
+            a{
+                img{
+                    margin-bottom: 0;
+                }
+            }
         }
     }
 }
@@ -2322,7 +2330,8 @@ footer{
                 }                
             }
         }
-    }   
+    } 
+    @include video-gallery-popup;
 }
 .buzz-feedback{    
     @include calculate-width(1);
@@ -4662,7 +4671,36 @@ footer{
         span{
             font-weight: 700;
         }
-    }    
+    }
+    .videogallery-slider{
+        .slick-slide{
+            width: 100%;    
+        }   
+    }
+    .video-slider-images{                        
+            .slick-slider{
+                background: #171717;
+                padding: 10px 0px;   
+            }
+            li{
+                padding: 0 5px;
+                cursor: pointer;
+                &:focus{
+                    outline: none;
+                    border: none;  
+                }
+                img{
+                    border: 1px solid transparent;
+                    height: 66px;
+                    width: 88px;
+                }
+                &.slick-current{
+                    img{
+                        border: 1px solid #fff;
+                    }
+                }
+            }
+        }
 }
 #block-views-so-sorry-the-remix{
     max-width: 370px;
@@ -5810,6 +5848,16 @@ footer{
         font-weight: 700;
     }
 }
+#block-itg-event-backend-event-registration{
+    h2{
+        span{
+            float: right;
+            font-size: 12px;    
+            text-transform: capitalize;
+            font-weight: 600;
+        }
+    }
+}
 #block-views-program-schedule-block-3{
     .col-md-3{
         margin-bottom: 30px;
@@ -6283,6 +6331,14 @@ footer{
 }
 #content{
     [id*='event-registration-node-form']{
+        .mandatory-message{
+            width: 620px;
+            text-align: right;
+            font-size: 12px;
+                span{
+                padding-left: 0;
+            }
+        }
         .form-field-type-field-collection .form-item .form-item{
             margin: 15px 0;
         }
@@ -6532,7 +6588,7 @@ footer{
         .form-submit[value="Remove"]{
             background: #ef3c24;
             float: right;
-            margin-top: 20px;
+            margin-top: 10px;
             margin-right: 20px;
             border: none;
             padding: 5px 10px;
@@ -6540,6 +6596,11 @@ footer{
             font-weight: 500;
             font-family: roboto;
             border-radius: 4px;
+        }
+        #field-erf-registration-fee-add-more-wrapper{
+            > .form-item {
+             margin: 0 0 20px 0;
+            }
         }
     }        
 }
@@ -7032,9 +7093,11 @@ footer{
                         }
                     }
                     .featured-post{
-                        .no-result-image{
-                            height: 270px;
-                        }
+                        .featured-post-first{
+                            .no-result-image{
+                                height: 270px;
+                            }    
+                        }                        
                     }
                 }
             }
@@ -7184,7 +7247,7 @@ footer{
                 color: #fff;
                 text-transform: uppercase;
                 cursor: pointer;
-                padding: 12px;
+                padding: 0px;
                 font-size: 18px;
                 box-shadow: 4px 4px 0 #00b3e6;
             } 
@@ -7254,39 +7317,45 @@ footer{
                 float: left;
             }
             input[type="radio"] {
-    display:none;
-}
-input[type="radio"] + label {    
-    padding-left: 25px;
-    position: relative;
-}
-input[type="radio"] + label:before, input[type="radio"] + label:after{
-    display:inline-block;
-    width:15px;
-    height:15px;    
-    vertical-align:middle;
-    cursor:pointer;
-    -moz-border-radius:  50%;
-    border-radius:  50%;
-    position: absolute;
-    top:3px;
-    left: 0;
-    content: '';
-}
+                display:none;
+            }
+            input[type="radio"] + label {    
+                padding-left: 25px;
+                position: relative;
+            }
+            input[type="radio"] + label:before, input[type="radio"] + label:after{
+                display:inline-block;
+                width:15px;
+                height:15px;    
+                vertical-align:middle;
+                cursor:pointer;
+                -moz-border-radius:  50%;
+                border-radius:  50%;
+                position: absolute;
+                top:3px;
+                left: 0;
+                content: '';
+            }
 
-input[type="radio"] + label:before{
-     background-color:#c0c0c0;
-}
+            input[type="radio"] + label:before{
+                background-color:#c0c0c0;
+            }
 
-input[type="radio"]:checked + label:after{
-    background-color: #333;
-    width: 7px;
-    height: 7px;
-    top: 7px;
-    left: 4px;
-}
+            input[type="radio"]:checked + label:after{
+                background-color: #333;
+                width: 7px;
+                height: 7px;
+                top: 7px;
+                left: 4px;
+            }
         } 
-    }    
+    } 
+    .page-sports-video{
+        a{
+            margin-top: 10px;
+            display: block;
+        }
+    }
 }
 .live-scorecard{
         text-align: center;   
@@ -7550,6 +7619,7 @@ input[type="radio"]:checked + label:after{
     }
     img{
         padding-top: 10px;
+        max-height: 50px;
     }
     ul{        
         @extend .list-none;
@@ -8313,7 +8383,7 @@ input[type="radio"]:checked + label:after{
     top: 100px;        
     background: #f2f2f2;    
     border-radius: 3px;
-    box-shadow: 2px 2px 3px #ccc;
+    box-shadow: 0px 0px 4px #ccc;
     text-align: center;
     border-right: 1px solid #b3b3b3;     
     ul{       
@@ -8329,13 +8399,13 @@ input[type="radio"]:checked + label:after{
         min-width: 100%;
         height: 75px;
         overflow: hidden;
-        &:hover{
-             background: #fff;
-             a{
-                background: #fff;
-                color: #b00202;                   
-             }             
-         }
+        a{
+            vertical-align: middle;
+            display: table-cell;
+            height: 75px;
+            text-align: center;
+            width: 58px;
+        }       
     }
     img{
         margin: 0 auto;
@@ -8352,6 +8422,13 @@ input[type="radio"]:checked + label:after{
         word-wrap: break-word;
         color:#383838;    
         height:100%;
+        &:hover{
+             background: #fff;
+                color: #b00202;
+        }
+        &.sponsored-active{
+            background: #ffc106;
+        }
     }
     .vertical-menu-parent{  
             height: 375px;
@@ -8458,6 +8535,16 @@ input[type="radio"]:checked + label:after{
 }
 /*email and change password end*/
 /*css start static pages menu*/
+h1.about-us-heading{
+    text-transform: capitalize;
+    font-size: 35px;
+    + div{
+        p{
+            padding: 10px 0;
+            color:#7e7e7e;
+        }
+    }
+}
 #block-menu-menu-about-us-page-menu{
     ul{
         @extend .list-none;      
@@ -8481,6 +8568,13 @@ input[type="radio"]:checked + label:after{
                     a{
                         padding: 10px 0 10px 35px;
                     }
+                    +li{
+                        border-top:none;
+                        a{
+                            padding-top: 5px;
+                            padding-bottom: 5px;
+                        } 
+                    } 
                 }
             }
         }
@@ -9334,48 +9428,7 @@ input[type="radio"]:checked + label:after{
 
 /*css start big story format*/
 #block-itg-widget-big-story-format{
-    #videogallery-iframe{
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 99;
-        background:rgba(0, 0, 0, 0.76);
-        display:none;
-        iframe{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 600px;
-            height: 350px;
-            margin-left: -300px;
-            margin-top: -175px;
-        }
-        #close-big-story{
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            color: #000;
-            z-index: 99;
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            background: #fff;
-            text-align: center;
-            border-radius: 100%;
-            line-height: 30px;
-            font-weight: 900;
-            cursor: pointer;
-            a{
-                color: #000;
-                font-family: roboto;
-            }
-        }
-    }
-/*    .live-tv-big-story{
-        margin-bottom: 50px;
-    }*/
+    @include video-gallery-popup;
 }
 /*css end big story format*/
 /*like dislike photo page start*/
@@ -9496,11 +9549,11 @@ input[type="radio"]:checked + label:after{
         }
     }    
 .node-type-videogallery, .node-type-photogallery, .node-type-story{
-#cboxLoadedContent{        
+    #cboxLoadedContent{        
         background: url(../images/tab-loading.gif);
         background-position: center;
-        background-repeat: no-repeat;
-    }
+        background-repeat: no-repeat;        
+    }  
 }
 /*css end story page submit story */
 

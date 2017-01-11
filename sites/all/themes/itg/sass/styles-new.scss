@@ -708,7 +708,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         content: '\f064';
       }
     }
-    &.my-Preferences{
+    &.my-preferences{
       a:before{
         content: '\f013';
       }
@@ -944,7 +944,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     @include pager;
   }
 }
-#content{ 
+.page-personalization{ 
   #block-formblock-ugc{
     margin: 0 auto;
     max-width: 750px;
@@ -1727,6 +1727,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         margin: 15px auto 0;
         display: inherit;
         font-size: 14px;
+        line-height: 32px;
         &:hover{
           box-shadow: 0 0 5px 0 #999;
         }
@@ -2846,8 +2847,7 @@ body.has-cart-popup{
 /* CSS For Block quotes */
 blockquote {
   color: #000;
-  font: 600 20px/28px "Roboto Slab",sans-serif;
-  margin: 0 0 20px;
+  font: 600 20px/28px "Roboto Slab",sans-serif;  
   position: relative;
   text-align: justify;
   text-indent: 40px;
@@ -4079,8 +4079,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 .view-product{
   @include pager;
 }
-@media all and (min-width: 768px){
-  [id*="itg-personalization-edit-profile-form"], [id*="itg-personalization-refer-a-friend-form"]{
+
+[id*="itg-personalization-edit-profile-form"], [id*="itg-personalization-refer-a-friend-form"]{
     max-width: 780px;
     margin: 0 auto;
     background-color: #f8f8f8;
@@ -4201,14 +4201,16 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       .form-type-checkboxes{
         > label{
           font: 300 14px/18px Roboto;
-          color: #757575;
+          color: #000;
           display: block;
+          padding: 5px 0;
         }
         .form-checkboxes{
           padding: 10px 0;
           .form-type-checkbox{
             display: inline-block;
             margin-right: 30px;
+            margin-bottom: 10px;
             vertical-align: top;
             label{
               font: 400 13px/18px Roboto;
@@ -4443,6 +4445,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       }
       input[type="file"]{
         width: 200px;
+        max-width: 100%;
+        margin-bottom: 10px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -4472,6 +4476,13 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       }
     }
   }
+
+
+
+@media all and (min-width: 768px){
+  .block-itg-personalization .personal-menu-tab, .block-itg-personalization .saved-item-tab{display: inline-block !important;}
+  .personal-menu-tab-mobile{display: none;}
+  
 }
 
 /* Responsive CSS */
@@ -4497,6 +4508,218 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 }
 /* Responsive CSS Personalization pages */
 @media all and (max-width: 767px){
+  .page-personalization{ 
+    #block-formblock-ugc{
+      .node-ugc-form{
+        .form-field-name-field-ugc-ctype{
+          text-align: center;
+          .form-select{
+            width: 450px;
+            max-width: 100%;
+            height: 44px;
+            border-radius: 5px;
+            border: 1px solid rgba(0,0,0,.20);
+            box-shadow: 0 0 3px 0 #ccc;
+            color: #bababa;
+            font: 300 16px/normal Roboto;
+            text-align: center;
+          }
+        }
+        .form-field-name-field-recipe-audio{
+          .form-type-managed-file{margin: 20px 0;}
+        }
+        .form-type-textfield{
+          overflow: visible;
+          margin: 20px 0 !important;
+          label{
+            width: 115px;
+            padding: 0 8px;
+          }
+          .form-text{
+            padding-left: 125px;
+          }
+          span.error{
+            right: 0;
+            top: 40px;
+            padding-left: 0;
+          }
+        }
+        .form-type-textarea{
+          margin: 20px 0;
+          label{
+            width: 100%;
+            height: auto;
+            padding: 0 8px;
+            border-right: none;
+          }
+          .form-textarea-wrapper{
+            padding-left: 0;
+            position: static;
+            width: 100%;
+            height: 805px;
+            > .cke{
+              border: none;
+            }
+          }
+          .form-textarea{
+            border: none;
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+          }
+        }
+        .field-type-image, .form-field-type-image{
+          .form-type-managed-file{
+            label{
+              width: 115px;
+              padding: 0 8px;
+              height: 200px;
+            }
+            div.image-widget-data{
+              float: none;
+              .form-type-textfield{
+                margin: 10px 0 0 !important;
+                .form-text{
+                  border: 1px solid #ddd;
+                  height: 28px;
+                  padding: 5px;
+                  position: static;
+                  width: 100%;
+                }
+                div.description{
+                  display: none;
+                }
+              }
+              .form-submit[value="Remove"] {
+                left: auto;
+                right: 10px;
+              }
+            }
+            div.description{
+              display: none;
+            }
+            .form-managed-file{
+              padding-left: 125px;
+              .form-submit[value="Upload"]{
+                width: 100px;
+              }
+              .image-preview{
+                img{
+                  max-width: 100px;
+                  max-height: 80px;
+                }
+              }
+            }
+          }
+        }
+        .form-field-type-file{
+          .form-type-managed-file{
+            label{
+              width: 115px;
+              padding: 0 8px;
+              height: 85px;
+            }
+            .form-managed-file{
+              padding-left: 125px;
+              .form-submit[value="Upload"]{
+                width: 100px;
+              }
+            }
+            div.description{
+              display: none;
+            }
+            span.file{
+              position: static;
+              img{display: none;}
+              a{
+                font: 400 13px/18px Roboto;
+                color: #323232;
+                pointer-events: none;
+              }
+            }
+            span.file-size{
+              font-size: 12px;
+            }
+            .form-submit[value="Remove"] {
+              position: static;
+              float: right;
+              cursor: pointer;
+            }
+          }
+        }
+        .form-actions{
+          padding: 20px 0;
+          text-align: center;
+          .form-submit{
+            background: url(../images/btn-blue.png) 0 0 / 100% 100% no-repeat;
+            height: 41px;
+            border: none;
+            width: 170px;
+            max-width: 40%;
+            font: 300 20px/28px Roboto;
+            color: #fff;
+            cursor: pointer;
+            &:hover{
+              background: #3C91F2;
+            }
+          }
+          a.button{
+            background: url(../images/btn-blue.png) 0 0 / 100% 100% no-repeat;
+            height: 41px;
+            border: none;
+            width: 170px;
+            max-width: 40%;
+            border-radius: 4px;
+            font: 300 20px/41px Roboto;
+            display: inline-block;
+            vertical-align: top;
+            color: #fff;
+            &:hover{
+              background: #3C91F2;
+            }
+          }
+        }
+        table{
+          td{
+            position: relative;
+            > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+              position: absolute;
+              right: 10px;
+              margin: 0;
+              bottom: 20px;
+            }
+            .ajax-progress{
+              display: none;
+            }
+          }
+          + div{
+            .field-add-more-submit{
+              margin-left: 0;
+            }
+          }
+        }
+        .messages.error.file-upload-js-error{
+          display: none;
+        }
+        input[type="file"]{
+          width: 200px;
+          max-width: 100%;
+          margin-bottom: 10px;
+        }
+        .captcha{
+          max-width: 100%;
+          margin-left: 0;
+          border: 1px solid #e0e0e0;
+        }
+      }
+      [id*="field-ugc-personalization-photo-add-more-wrapper"]{
+        > .form-item{
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+    }
+  }
   .page-personalization{
     .personalized-wrapper{
       .personalized-user-area {
@@ -4524,8 +4747,9 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             padding: 0;
             text-align: center;
             span{
-              padding: 0 5px;
-              dfn{font-size: 14px;}
+              padding: 0 3px;
+              width: 36px;
+              dfn{font-size: 12px;}
             }
          }
       }
@@ -4540,11 +4764,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       margin: 0 -15px;
     }
     .personal-menu-tab-mobile{
-      background-color: #ddd;
+      background-color: #e7e5e6;
       color: #4f4f4f;
       cursor: pointer;
       font: 300 18px/40px Roboto;
-      height: 40px;
       text-align: left;
       position: relative;
       .tab-text{
@@ -4552,7 +4775,9 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         color: #4f4f4f;
         font: 300 18px/18px Roboto;
         padding: 10px 8px;
-        background-color: #f6f6f7;
+        background-color: #e7e5e6;
+        height: 40px;
+        
         &:before{
           display: inline-block;
           margin-right: 5px;
@@ -4560,22 +4785,22 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           font-family: 'FontAwesome';
         }
         
-        &.saved-items:before{
+        &[data-tab="saved-items"]:before{
           content: '\f02e';
         }
-        &.my-content:before{
+        &[data-tab="my-content"]:before{
             content: '\f064';
         }
-        &.my-Preferences:before{
+        &[data-tab="my-preferences"]:before{
             content: '\f013';
         }
-        &.following:before{
+        &[data-tab="following"]:before{
             content: '\f007';
         }
-        &.my-credits:before{
+        &[data-tab="my-credits"]:before{
             content: '\f1c0';
         }
-        &.edit-profile:before{
+        &[data-tab="edit-profile"]:before{
             content: '\f040';
         }
       }
@@ -4610,12 +4835,21 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     }
     .personal-menu-tab{
       text-align: left;
+      display: none;
       border: none;
       li{
         float: none; 
         border: none; 
         border-top: 1px solid #c6c6c6;
-        a{padding: 10px 15px;}
+        a{
+          padding: 10px 15px;
+          &.active{
+            background-color: #f6f6f7;
+          }
+        }
+        &:last-child{
+          border-bottom: 1px solid #c6c6c6;
+        }
       }
     }
     .profile-edit-tab{
@@ -4648,133 +4882,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       }
     }
   }
-  #content #block-formblock-ugc .node-ugc-form{
-    .form-type-textfield{
-      border: none;
-      overflow: visible;
-      border-radius: 0;
-      label{
-        background-color: #fff;
-        border-right: medium none;
-        display: block;
-        font: 300 14px/28px Roboto;
-        padding: 0;
-        position: relative;
-        width: 100%;
-        z-index: 99;
-      }
-      .form-text {
-        border: 1px solid #e0e0e0;
-        padding-left: 10px;
-        height: auto;
-        position: static;
-      }
-      span.error{
-        position: static;
-        padding-left: 0;
-      }
-    }
-    .form-type-textarea{
-      border: none;
-      overflow: visible;
-      border-radius: 0;
-      label{
-        background-color: #fff;
-        border-right: medium none;
-        display: block;
-        font: 300 14px/28px Roboto;
-        padding: 0;
-        position: relative;
-        width: 100%;
-        z-index: 99;
-        height: auto;
-        float: none;
-      }
-      .form-textarea-wrapper {
-        height: auto;
-        padding-left: 0;
-        position: static;
-      }
-    }
-    .form-field-type-file, .field-type-image, .form-field-type-image{
-      .form-type-managed-file{
-        border: none;
-        overflow: visible;
-        border-radius: 0;
-        label{
-          background-color: #fff;
-          border-right: medium none;
-          display: block;
-          font: 300 14px/28px Roboto;
-          padding: 0;
-          position: relative;
-          width: 100%;
-          z-index: 99;
-          height: auto;
-          float: none;
-        }
-        .form-managed-file {
-          padding: 0;
-          position: static;
-        }
-        input[type="file"]{
-          max-width: 185px;
-        }
-        div.description{
-          margin-top: 3px;
-          padding: 0;
-        }
-      }
-    }
-    .form-field-type-file{
-      .file-widget span.file a{max-width: 50%;}
-      .file-widget .form-submit[value="Remove"]{
-        left: auto;
-        right: 0;
-        top: 27px;
-      }
-    }
-    .form-field-type-image, .field-type-image{
-      .image-preview + .image-widget-data{
-        position: relative;
-        span.file{
-          font-size: 12px;
-          left: 0;
-          overflow: hidden;
-          padding: 75px 0 0;
-          position: absolute;
-          text-overflow: ellipsis;
-          top: 0;
-          width: 100%;
-          img{display: none;}
-          pointer-events: none;
-        }
-        span.file-size{display: none;}
-        .form-submit[value="Remove"]{
-          left: auto;
-          right: 0;
-          top: -1px;
-        }
-        .form-type-textfield{
-          left: 0;
-          max-width: none;
-          padding-left: 105px;
-          position: absolute;
-          top: 18px;
-          width: 100%;
-          label{display: none;}
-          & + .form-type-textfield{
-            top: 49px;
-            margin: 0 !important;
-          }
-          .form-text{
-            height: 26px;
-            padding: 0 5px;
-          }
-        }
-      }
-    }
-  } 
+
   .view-personalization-my-content{
     .view-content{overflow-x: auto;}
     .views-table th:first-child{min-width: 100px;}
@@ -4792,8 +4900,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   #content #block-formblock-ugc [id*="field-ugc-personalization-photo-add-more-wrapper"] > .form-item{
     margin-top: 0;
   }
-  #content #block-formblock-ugc .node-ugc-form table td > .form-submit[value="Remove"], 
-  #content #block-formblock-ugc .node-ugc-form table td .ajax-new-content > .form-submit[value="Remove"]{position: static;}
+
   .view-personalization-my-preferences{
     #views-form-personalization-my-preferences-block{
       .personalization-low-high{
@@ -4801,19 +4908,15 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       }
       table{
         width: 100%;
-        tr{
-          display: inline-block;
-          padding-bottom: 20px;
-          vertical-align: top;
-          width: 100%;
-        }
         td{
-          padding: 10px 0;
-          display: block;
-          float: left;
-          width: 100%;
           &.views-field-name{
-            padding: 0;
+            font-size: 13px;
+          }
+        }
+        .form-type-slider{
+          min-width: 180px;
+          .sliderfield-display-values-field{
+            font-size: 13px;
           }
         }
       }
@@ -4821,12 +4924,13 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         .form-submit, .form-reset{
           background-size: 100% 100%;
           width: 120px;
+          margin: 0 10px;
         }
       }
     }
   }  
   .page-personalization-my-following #block-views-follow-tags-block, 
-  .page-personalization-my-following #block-views-follow-tags-block-1{width: 100%; padding: 50px 0 0;}
+  .page-personalization-my-following #block-views-follow-tags-block-1{width: 50%; float: left; padding: 50px 0 0;}
   #block-itg-personalization-user-my-point{
     .header-point{
       padding: 20px 0;
@@ -4845,87 +4949,217 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     &:first-child{margin-top: 10px;}
     img{max-width: 35px;}
   }
-  [id*="itg-personalization-edit-profile-form"], [id*="itg-personalization-refer-a-friend-form"]{
-    background-color: #f8f8f8;
-    text-align: left;
-    padding: 15px;
-    .form-item{
-      margin-bottom: 15px;
-      .form-item{margin: 0;}
-    }
-    input[type="text"], select, input[type="password"]{
-      width: 100%;
-    }
-    .form-item-dob{
-      .form-type-textfield{
-        label{display: none;}
-      }
-    }
-    .form-type-radios, .form-type-checkboxes, .form-type-managed-file, .form-item-dob, .form-type-textfield, .form-type-select, .form-type-textarea{
-      > label{
-        display: block;
-        padding-bottom: 5px;
-        font-weight: 600;
-      }
-    }
-    .form-item-profile-pic{
-      .form-managed-file{
-        position: relative;
-        .ajax-progress{display: none;}
-        .form-file{
-          max-width: 185px;
-          margin-right: 5px;
-          & + .form-submit{
-            padding: 5px 10px;
-            background-color: #ededed;
-            border: 1px solid #bababa;
-            border-radius: 3px;
-            color: #fff;
-          }
-        }
-        span.file{
-          position: absolute;
-          left: 0;
-          bottom: 0;
-          width: 130px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipses;
-          font-size: 13px;
-          img{display: none;}
-        }
-        .upload-preview{
-          margin-bottom: 20px;
-          & + .form-submit{
-            border: none;
-            color: #ee4d4d;
-            background-color: transparent;
-            margin-left: 30px;
-            font-size: 13px;
-          }
-        }
-      }
-      .description{font-size: 12px; color: #828282;}
-    }
-    > div [id*="edit-submit"]{
-      background: url(../images/btn-blue.png) no-repeat 0 0;
-      border: medium none;
-      color: #fff;
-      cursor: pointer;
-      font: 300 20px/28px Roboto;
-      height: 41px;
-      width: 170px;
-      margin: 30px auto 0;
-      display: block;
-    }
-  }
   .cart-dropdown{
     left: auto;
     right: -5px;
     width: 300px;
   }
+  
+  [id*="itg-personalization-edit-profile-form"], [id*="itg-personalization-refer-a-friend-form"]{
+    > div {
+      .form-field-name-field-ugc-ctype{
+        text-align: center;
+        .form-select{
+        }
+      }
+      .form-type-textfield{
+        label{
+          width: 100px;
+          padding: 0 8px;
+        }
+        .form-text{
+          padding-left: 110px;
+        }
+      }
+      .form-type-select{
+        label{
+          width: 100px;
+          padding: 0 8px;
+        }
+        .form-select{
+          left: 0;
+          width: 100%;
+          padding-left: 110px;
+        }
+      }
+      .form-type-textarea{
+        label{
+          width: 100px;
+          padding: 0 8px;
+        }
+        .form-textarea-wrapper{
+          padding-left: 100px;
+        }
+      }
+      
+      .form-type-radios{
+        > label{
+          width: 100px;
+        }
+        .form-radios{
+          .form-type-radio{
+            margin-left: 30px;
+          }
+        }
+      }
+      .container-inline-date{
+        .form-type-date-popup{
+          div.description{}
+          .date-padding{
+            input[type="text"]{
+            }
+            label{
+            }
+            .form-type-textfield{
+              .form-text{
+              }
+            }
+          }
+          > label{
+            width: 100px;
+            padding: 0 8px;
+          }
+        }
+      }      
+      .form-type-managed-file{
+        label{
+          width: 100px;
+          padding: 0 8px;
+        }
+        .form-managed-file{
+          padding: 10px 10px 10px 110px;
+        }
+        .upload-preview{
+          & + .form-submit{
+            margin: 0;
+            float: right;
+          }
+        }
+        span.file{
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          font-size: 13px;
+          position: absolute;
+          left: 110px;
+          top: 80px;
+          width: 130px;
+          img{display: none;}
+          a{
+            font: 400 13px/18px Roboto;
+            color: #323232;
+            pointer-events: none;
+          }
+        }
+      }
+      div.image-widget-data{
+        float: none;
+        .form-type-textfield{
+          max-width: 200px;
+          border: none;
+          border-radius: 0;
+          margin: 0;
+          overflow: hidden;
+          .form-text{
+            border: 1px solid #ddd;
+            height: 34px;
+            padding: 5px;
+            position: static;
+            width: 100%;
+          }
+          div.description{
+            display: none;
+          }
+        }
+        .form-submit[value="Remove"] {
+          color: #ee4d4d;
+          font-size: 13px;
+          left: 550px;
+          position: absolute;
+          top: 16px;
+          cursor: pointer;
+        }
+      }
+      .form-actions{
+        padding: 20px 0;
+        text-align: center;
+        .form-submit{
+          background: url(../images/btn-blue.png) no-repeat;
+          height: 41px;
+          border: none;
+          width: 170px;
+          font: 300 20px/28px Roboto;
+          color: #fff;
+          cursor: pointer;
+        }
+        a.button{
+          background: url(../images/btn-blue.png) no-repeat;
+          height: 41px;
+          border: none;
+          width: 170px;
+          font: 300 20px/41px Roboto;
+          display: inline-block;
+          vertical-align: top;
+          color: #fff;
+        }
+      }
+      table{
+        td{
+          position: relative;
+          > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+            position: absolute;
+            right: 10px;
+            margin: 0;
+            bottom: 20px;
+          }
+          .ajax-progress{
+            display: none;
+          }
+        }
+        + div{
+          .field-add-more-submit{
+            margin-left: 0;
+          }
+        }
+      }
+      .messages.error.file-upload-js-error{
+        display: none;
+      }
+      input[type="file"]{
+        width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      [id*="edit-submit"]{
+        background: rgba(0, 0, 0, 0) url("../images/btn-blue.png") no-repeat scroll 0 0;
+        border: medium none;
+        color: #fff;
+        cursor: pointer;
+        font: 300 20px/28px Roboto;
+        height: 41px;
+        width: 170px;
+        margin: 30px auto 0;
+        display: block;
+      }
+    }
+    .change-mobile, .change-email{
+      position: relative;    
+      a{
+        position: absolute;
+        top: 20px;
+        display: inline-block;
+        right: 8px;
+        z-index: 9;
+        font-size: 13px;
+        color: #0db533;    
+      }
+    }
+  }
+  
 }
 @media all and(max-width: 767px){
+  
   /* Responsive CSS For Loyalty and Rewards */
   [id*="block-views-redeem-points-block"]{
     .block-title{
@@ -5130,5 +5364,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .cart-total-block .points-balance span:first-child{
     width: 150px;
     text-align: left;
+  }
+}
+@media all and (max-width: 330px){
+  .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file div.image-widget-data .form-submit[value="Remove"], 
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file div.image-widget-data .form-submit[value="Remove"]{
+    right: 3px;
   }
 }
