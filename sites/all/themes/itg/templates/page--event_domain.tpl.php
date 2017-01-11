@@ -11,6 +11,11 @@ if (!empty($arg[1]) && is_numeric($arg[1])) {
 }elseif($arg[0] == 'event'){
   $path = drupal_lookup_path("source", $arg[0].'/'.$arg[1]);
   $host_node = menu_get_object("node", 1, $path);
+  if($arg[2] == 'registration' && empty($host_node)){ // unpublish condition
+    $nid = explode('/', $path);
+    $host_node = node_load($nid[1]);
+    
+  }
 }
 
 /*$host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
