@@ -7721,11 +7721,15 @@ footer{
         }
     }
     h1{
-        .disc-share{
-            a{
-                font-size: 20px;
-                color: #b6b6b6;
-            }
+        display: inline;
+    }
+    @include social-share; 
+    .social-share{
+        display: inline-block;
+        vertical-align: top;
+        padding-top: 15px;
+        i.fa-share-alt{
+            font-size: 20px;
         }
     }
     .budget-ad{

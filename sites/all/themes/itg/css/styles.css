@@ -9248,9 +9248,57 @@ footer .footer-copyright {
 .budget-page-layout .itg-715-layout .itg-widget-child .droppable {
   height: 343px;
 }
-.budget-page-layout h1 .disc-share a {
+.budget-page-layout h1 {
+  display: inline;
+}
+.budget-page-layout ul {
+  list-style-type: none;
+}
+.budget-page-layout ul li {
+  display: inline-block;
+  vertical-align: top;
+  padding-right: 8px;
+}
+.budget-page-layout ul li a {
+  background: #000;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  display: block;
+  color: #fff;
+  text-align: center;
+  line-height: 23px;
+  font-size: 15px;
+}
+@media screen and (min-width: 768px) {
+  .budget-page-layout ul li a {
+    width: 23px;
+    height: 23px;
+    line-height: 25px;
+  }
+}
+.budget-page-layout ul li a.share {
+  color: #d0d0d0;
+}
+.budget-page-layout ul li a.share, .budget-page-layout ul li a.google {
+  background: transparent;
+}
+.budget-page-layout ul li a.facebook {
+  background: #0b4887;
+}
+.budget-page-layout ul li a.twitter {
+  background: #05a3d2;
+}
+.budget-page-layout ul li a.google {
+  background: url(../images/google-icon.jpg) no-repeat center center;
+}
+.budget-page-layout .social-share {
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 15px;
+}
+.budget-page-layout .social-share i.fa-share-alt {
   font-size: 20px;
-  color: #b6b6b6;
 }
 .budget-page-layout .budget-ad {
   margin-top: 25px;
