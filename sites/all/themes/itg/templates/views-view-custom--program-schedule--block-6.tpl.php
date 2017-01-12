@@ -7,6 +7,7 @@
     print l($img, $row['php'].'/speaker-details', array('query' => array('speaker' => $row['nid']), 'html' => TRUE));
   }
   ?>
-  <?php print $row['title']; ?>
-  <?php print $row['field_story_new_title']; ?>
+    
+    <h4><?php print $row['title']; ?></h4>
+    <p><?php print $row['field_story_new_title']; ?></p>
 <?php endforeach; ?>

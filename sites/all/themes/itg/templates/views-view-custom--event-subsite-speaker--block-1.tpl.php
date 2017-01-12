@@ -10,6 +10,6 @@ foreach ($rows as $row): ?>
     print l($img, $baseurl . '/speaker-details', array('query' => array('speaker' => $row['nid']), 'html' => TRUE));
   }
   ?>
-  <?php print $row['title']; ?>
-  <?php print $row['field_story_new_title']; ?>
+  <div class="views-field-title"><?php print $row['title']; ?></div>
+    <div class="views-field-field-story-new-title"><?php print $row['field_story_new_title']; ?></div>
 <?php endforeach; ?>
