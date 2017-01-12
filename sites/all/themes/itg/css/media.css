@@ -610,7 +610,9 @@
   .itg-common-section .droppable, .sport-home-layout-page .itg-layout-615 .auto-block-1,
   .sport-home-layout-page .itg-layout-615 .auto-block-2, .sport-home-layout-page .itg-layout-615 .droppable,
   .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable, .tech-layout-page .itg-h396-section .droppable,
-  .tech-layout-page .itg-h385-section .droppable, .election-page .left-side .itg-photo .droppable {
+  .tech-layout-page .itg-h385-section .droppable, .election-page .left-side .itg-photo .droppable, .movie-layout-page .itg-h385-section .droppable,
+  .movie-layout-page .itg-h396-section .droppable, .movie-layout-page .itg-layout-580 .itg-widget-child .droppable, .movie-layout-page .itg-layout-580 .droppable,
+  .movie-layout-page .itg-layout-580 .droppable .auto-block-1, .movie-layout-page .itg-layout-580 .droppable .auto-block-2 {
     height: auto;
   }
 
@@ -1172,6 +1174,16 @@
   }
 
   /*poll css end*/
+  /*movie page css start*/
+  .movie-layout-page .itg-layout-580 .droppable .auto-block-1 {
+    border: none;
+  }
+
+  .movie-layout-page .itg-layout-580 .droppable .auto-block-1, .movie-layout-page .itg-layout-580 .droppable .auto-block-2 {
+    margin-bottom: 50px;
+  }
+
+  /*movie page css end*/
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/
