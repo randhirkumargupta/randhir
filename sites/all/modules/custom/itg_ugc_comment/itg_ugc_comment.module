@@ -77,8 +77,7 @@ function ugc_comment_form($form, &$form_state) {
     '#size' => 20,
     '#default_value' => $fname,
     '#maxlength' => 50,
-    //'#value' => $user_fields->field_first_name['und']['0']['value'],
-    '#prefix' => '<div id="user-name">',
+    '#prefix' => '<div class="comment-user-details"><div id="user-name">',
     '#suffix' => '</div>',
     '#attributes' => array(
       'placeholder' => 'Name',
@@ -91,7 +90,6 @@ function ugc_comment_form($form, &$form_state) {
     '#title' => t(''),
     '#size' => 20,
     '#default_value' => $user_fields->mail,
-    //'#value' => $user->mail,
     '#maxlength' => 50,
     '#prefix' => '<div id="user-email">',
     '#suffix' => '</div>',
@@ -117,6 +115,7 @@ function ugc_comment_form($form, &$form_state) {
   );
 
   $form['submit_button'] = array(
+    '#suffix' => '</div>',
     '#type' => 'submit',
     '#value' => t('Submit'),
   );

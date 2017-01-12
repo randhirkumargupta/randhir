@@ -21,14 +21,15 @@ if (!empty($content)):
     $type = $node->field_type['und']['0']['value'];
     if ($type == 'Live Blog' || $type == 'Breaking News') {
         $title = $node->title;
+        $share_title = $type.':'.$title;
         ?>
     <h1><span><?php print ($type) ?></span>: <?php print ($title) ?></h1>
     <p class="short-discription"> <?php print ($node->field_label['und']['0']['value'])?></p>
     <div class="social-share">
         <ul>
             <li><a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li>
-            <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop('<?php print $share_page_link; ?>', '<?php print $title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
-            <li><a title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup('<?php print urlencode($title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+            <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop('<?php print $share_page_link; ?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
+            <li><a title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup('<?php print urlencode($share_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
             <li><a title="share on google+" class="google def-cur-pointer" onclick="return googleplusbtn('<?php print $share_page_link; ?>')"></a></li>
             
         </ul>
