@@ -2915,7 +2915,33 @@ footer .footer-top ul li a:hover{
     color: #828282;
     text-align: right;
   }
-} 
+}
+
+/*other comment css start*/
+.comment-popup-wrapper {
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2147483647;
+}
+.comment-popup {
+    background-color: #fff;
+    bottom: 0;
+    height: 400px;
+    left: 0;
+    margin: auto;
+    max-width: 800px;
+    padding: 20px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+}
+/*other comment css end*/
+
 
 /* CSS To Add Zoom Effect on Images */
 

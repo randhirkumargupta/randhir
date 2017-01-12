@@ -7758,6 +7758,10 @@ footer .footer-copyright {
 }
 #block-views-event-subsite-speaker-block .views-row .view-content {
   zoom: 1;
+  width: 100%;
+  float: none;
+  text-align: center;
+  margin-bottom: 30px;
 }
 #block-views-event-subsite-speaker-block .views-row .view-content:before, #block-views-event-subsite-speaker-block .views-row .view-content:after {
   content: "";
@@ -7768,17 +7772,11 @@ footer .footer-copyright {
 #block-views-event-subsite-speaker-block .views-row .view-content:after {
   clear: both;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content .views-row {
-  width: 100%;
-  float: none;
-  text-align: center;
-  margin-bottom: 30px;
-}
-#block-views-event-subsite-speaker-block .views-row .view-content .views-row img {
+#block-views-event-subsite-speaker-block .views-row .view-content img {
   border-radius: 100%;
   border: 1px solid #ddd;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content .views-row .views-field-title, #block-views-event-subsite-speaker-block .views-row .view-content .views-row .views-field-field-story-new-title {
+#block-views-event-subsite-speaker-block .views-row .view-content .views-field-title, #block-views-event-subsite-speaker-block .views-row .view-content .views-field-field-story-new-title {
   font-size: 11px;
   font-weight: 700;
   font-family: roboto;
@@ -7786,9 +7784,12 @@ footer .footer-copyright {
   margin-top: 10px;
   text-transform: uppercase;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content .views-row .views-field-field-story-new-title {
+#block-views-event-subsite-speaker-block .views-row .view-content .views-field-field-story-new-title {
   color: #ef2a24;
   margin-top: 0;
+}
+#block-views-event-subsite-speaker-block .views-row:nth-child(3n+1) {
+  clear: left;
 }
 
 #block-itg-event-backend-post-event-block .top-tab {
@@ -7870,30 +7871,31 @@ footer .footer-copyright {
   text-transform: uppercase;
 }
 
-.speaker-detail-page .col-md-3, #block-views-event-subsite-speaker-block-3 .col-md-3 {
+.speaker-detail-page .col-md-3, #block-views-program-schedule-block-3 .col-md-3 {
   text-align: center;
 }
-.speaker-detail-page .col-md-3 h4, #block-views-event-subsite-speaker-block-3 .col-md-3 h4 {
+.speaker-detail-page .col-md-3 h4, #block-views-program-schedule-block-3 .col-md-3 h4 {
   font-size: 15px;
   margin: 10px 0 0 0;
-  color: #000000;
+  color: #000;
   text-transform: uppercase;
+  font-weight: 600;
 }
-.speaker-detail-page .col-md-3 p, #block-views-event-subsite-speaker-block-3 .col-md-3 p {
+.speaker-detail-page .col-md-3 p, #block-views-program-schedule-block-3 .col-md-3 p {
   text-transform: uppercase;
   color: #ef2a24;
   font-size: 12px;
 }
-.speaker-detail-page .col-md-3 img, #block-views-event-subsite-speaker-block-3 .col-md-3 img {
+.speaker-detail-page .col-md-3 img, #block-views-program-schedule-block-3 .col-md-3 img {
   border-radius: 100%;
   border: 1px solid #ddd;
 }
-.speaker-detail-page h3, #block-views-event-subsite-speaker-block-3 h3 {
+.speaker-detail-page h3, #block-views-program-schedule-block-3 h3 {
   font-family: roboto-slab;
   margin-bottom: 10px;
   text-transform: uppercase;
 }
-.speaker-detail-page .body-content, #block-views-event-subsite-speaker-block-3 .body-content {
+.speaker-detail-page .body-content, #block-views-program-schedule-block-3 .body-content {
   color: #888888;
 }
 
@@ -9246,9 +9248,57 @@ footer .footer-copyright {
 .budget-page-layout .itg-715-layout .itg-widget-child .droppable {
   height: 343px;
 }
-.budget-page-layout h1 .disc-share a {
+.budget-page-layout h1 {
+  display: inline;
+}
+.budget-page-layout ul {
+  list-style-type: none;
+}
+.budget-page-layout ul li {
+  display: inline-block;
+  vertical-align: top;
+  padding-right: 8px;
+}
+.budget-page-layout ul li a {
+  background: #000;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  display: block;
+  color: #fff;
+  text-align: center;
+  line-height: 23px;
+  font-size: 15px;
+}
+@media screen and (min-width: 768px) {
+  .budget-page-layout ul li a {
+    width: 23px;
+    height: 23px;
+    line-height: 25px;
+  }
+}
+.budget-page-layout ul li a.share {
+  color: #d0d0d0;
+}
+.budget-page-layout ul li a.share, .budget-page-layout ul li a.google {
+  background: transparent;
+}
+.budget-page-layout ul li a.facebook {
+  background: #0b4887;
+}
+.budget-page-layout ul li a.twitter {
+  background: #05a3d2;
+}
+.budget-page-layout ul li a.google {
+  background: url(../images/google-icon.jpg) no-repeat center center;
+}
+.budget-page-layout .social-share {
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 15px;
+}
+.budget-page-layout .social-share i.fa-share-alt {
   font-size: 20px;
-  color: #b6b6b6;
 }
 .budget-page-layout .budget-ad {
   margin-top: 25px;
