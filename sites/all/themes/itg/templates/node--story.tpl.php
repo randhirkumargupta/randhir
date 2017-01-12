@@ -243,7 +243,7 @@ if (!empty($content)):
                                             <?php print $read_later; ?>                                         
                                         <?php else: ?>
                                             <?php if (function_exists(itg_sso_url)): ?>
-                                                <?php print itg_sso_url('<i class="fa fa-bookmark"></i>READ LATER', 'READ LATER'); ?>
+                                                <?php print itg_sso_url('<i class="fa fa-bookmark"></i> <span>READ LATER</span>', 'READ LATER'); ?>
                                             <?php endif; ?>
 
         <?php endif; ?>
