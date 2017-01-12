@@ -1794,7 +1794,7 @@ footer{
                 @include display-inline;
                 a{
                     color: #989898;  
-                    padding: 10px;
+                    padding: 10px 8px;
                     display: block;
                     text-transform:uppercase;
                     i{
@@ -2315,17 +2315,22 @@ footer{
         .social-share-story{
             li{
                 @include display-inline;
+                @include text-align(center);
                 a{
                    padding: 0 15px;
                    display: block;
                    i{
                         @include font(24px);
-                        color:#c0c0c0;
+                        color:#c0c0c0;                       
                     }
                     &:hover{
                         i{
                          color:#1a3c8d;   
                         }                        
+                    }
+                    span{
+                        display: block;
+                        @include font(11px);
                     }
                 }                
             }

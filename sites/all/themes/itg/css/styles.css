@@ -2225,7 +2225,7 @@ footer .footer-copyright {
 }
 .story-section .comment-mobile ul li a {
   color: #989898;
-  padding: 10px;
+  padding: 10px 8px;
   display: block;
   text-transform: uppercase;
 }
@@ -2817,6 +2817,7 @@ footer .footer-copyright {
 .story-section .buzzfeed-byline .social-share-story li {
   display: inline-block;
   vertical-align: top;
+  text-align: center;
 }
 .story-section .buzzfeed-byline .social-share-story li a {
   padding: 0 15px;
@@ -2829,6 +2830,11 @@ footer .footer-copyright {
 }
 .story-section .buzzfeed-byline .social-share-story li a:hover i {
   color: #1a3c8d;
+}
+.story-section .buzzfeed-byline .social-share-story li a span {
+  display: block;
+  font-size: 11px;
+  font-size: 0.6875rem;
 }
 .story-section #videogallery-iframe {
   position: fixed;
