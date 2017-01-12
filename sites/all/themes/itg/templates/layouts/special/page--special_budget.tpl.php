@@ -7,7 +7,13 @@
  * @see https://drupal.org/node/1728148
  */
 //$preview = $widget_data['preview'];
-//p($widget_data);
+// configuration for social sharing
+$actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$search_title = preg_replace("/'/", "\\'", $widget_data['itg-block-2']['block_title']);
+$fb_share_title= htmlentities($search_title, ENT_QUOTES);    
+$short_url = shorten_url($actual_link, 'goo.gl');
+$share_desc = '';
+$src = '';
 ?>
 
 <?php
@@ -129,6 +135,8 @@ if (!empty($device[0])) {
                       </div>      
                   </div>    
                 <?php endif; ?>
+                <div class="row">
+                    <div class="col-md-12 budget-top-block">
                 <?php
                 $display_title = "";
                 if($widget_data['itg-block-2']['block_title'] == "")
@@ -136,9 +144,19 @@ if (!empty($device[0])) {
                     $display_title = 'style="display:none"';
                 }
                
-                  echo '<h1 '.$display_title.' id="display_tit"><span class="highlights-title">' . mb_strimwidth($widget_data['itg-block-2']['block_title'], 0, 90, "..") . '</span><span class="disc-share"><a href="#"><i class="fa fa-share-alt"></i></a></span></h1>';
+                  echo '<h1 '.$display_title.' id="display_tit"><span class="highlights-title">' . mb_strimwidth($widget_data['itg-block-2']['block_title'], 0, 90, "..") . '</span></h1>';
        
                 ?>
+                <div class="social-share">
+                    <ul>
+                        <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
+                        <li><a title="share on facebook" class= "facebook def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_share_title; ?>', '<?php print $share_desc; ?>', '<?php print $src; ?>')"><i class="fa fa-facebook"></i></a></li>
+                        <li><a title="share on twitter" class= "twitter def-cur-pointer" onclick="twitter_popup('<?php print urlencode($widget_data['itg-block-2']['block_title']);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                        <li><a title="share on google+" class= "google def-cur-pointer" onclick="return googleplusbtn('<?php print $actual_link; ?>')"></a></li>
+                    </ul>
+                </div>
+                        </div>
+                </div>
                 <div class="row itg-325-layout">
                     <?php if ($live_url != "" || !empty($highlights['node_data']->field_story_highlights['und']) || $theme == 'itgadmin') { ?>
                       <div class="col-md-4 mt-50">

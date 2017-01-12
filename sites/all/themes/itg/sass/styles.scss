@@ -1794,7 +1794,7 @@ footer{
                 @include display-inline;
                 a{
                     color: #989898;  
-                    padding: 10px;
+                    padding: 10px 8px;
                     display: block;
                     text-transform:uppercase;
                     i{
@@ -2315,17 +2315,22 @@ footer{
         .social-share-story{
             li{
                 @include display-inline;
+                @include text-align(center);
                 a{
                    padding: 0 15px;
                    display: block;
                    i{
                         @include font(24px);
-                        color:#c0c0c0;
+                        color:#c0c0c0;                       
                     }
                     &:hover{
                         i{
                          color:#1a3c8d;   
                         }                        
+                    }
+                    span{
+                        display: block;
+                        @include font(11px);
                     }
                 }                
             }
@@ -6167,29 +6172,30 @@ footer{
         @include calculate-width(3);
         @include float(left);
         .view-content{            
-            @include clearfix;
-            .views-row{                
-                @include calculate-width(1);
-                @include float(none);
-                @include text-align(center);
-                margin-bottom:30px;
-                img{
-                    border-radius: 100%;
-                    border: 1px solid #ddd;
-                }
-                .views-field-title, .views-field-field-story-new-title{
-                    font-size: 11px;
-                    font-weight: 700;
-                    font-family: roboto;
-                    color: #000;
-                    margin-top: 10px;
-                    text-transform: uppercase;
-                }
-                .views-field-field-story-new-title{
-                    color: #ef2a24;  
-                    margin-top:0; 
-                }
+            @include clearfix;                        
+            @include calculate-width(1);
+            @include float(none);
+            @include text-align(center);
+            margin-bottom:30px;
+            img{
+                border-radius: 100%;
+                border: 1px solid #ddd;
             }
+            .views-field-title, .views-field-field-story-new-title{
+                font-size: 11px;
+                font-weight: 700;
+                font-family: roboto;
+                color: #000;
+                margin-top: 10px;
+                text-transform: uppercase;
+            }
+            .views-field-field-story-new-title{
+                color: #ef2a24;  
+                margin-top:0; 
+            }
+        }        
+        &:nth-child(3n+1){
+            clear: left;
         }
     }
 }
@@ -6271,14 +6277,15 @@ footer{
         }
     }
 }
-.speaker-detail-page, #block-views-event-subsite-speaker-block-3{
+.speaker-detail-page, #block-views-program-schedule-block-3{
     .col-md-3{
         text-align: center;
         h4{
             font-size: 15px;
             margin: 10px 0 0 0;
-            color:#000000;
+            color:#000;
             text-transform: uppercase;
+            font-weight: 600;
         }
         p{
             text-transform: uppercase;
@@ -6676,7 +6683,13 @@ footer{
         }
         .itg-widget-child{
             .droppable {
-                height: 300px;                
+                height: 300px; 
+                .widget-wrapper {
+                    overflow: auto;
+                    .data-holder {
+                        height: initial;
+                    }
+                }
             }
         }
     }
@@ -7718,14 +7731,20 @@ footer{
             }    
         }
     }
-    h1{
-        .disc-share{
-            a{
-                font-size: 20px;
-                color: #b6b6b6;
-            }
+    .budget-top-block{
+        h1{
+        display: inline;
+    }
+    @include social-share; 
+    .social-share{
+        display: inline-block;
+        vertical-align: top;
+        padding-top: 15px;
+        i.fa-share-alt{
+            font-size: 20px;
         }
     }
+    }    
     .budget-ad{
         margin-top: 25px;
     }
@@ -7865,31 +7884,38 @@ footer{
 /*css end defalt image */
 
 /* CSS For Election Page */
-.election-page{  
-    h1{
+.election-page{     
+    .election-top-block{
         margin-top:60px;
         position: relative;
-        z-index: 10;
-        .disc-share{
-            a{
+        z-index: 10; 
+        h1{
+            display: inline;
+        }
+        @include social-share; 
+        .social-share{
+            display: inline-block;
+            vertical-align: top;
+            padding-top: 15px;
+            i.fa-share-alt{
                 font-size: 20px;
-                color: #b6b6b6;
             }
         }
-        div{
-            display: inline-block;
-            vertical-align: bottom;
-        }
-        @include social-share;
-    }
+    } 
     .election-graph-3{
         margin-top: -50px;
+        display: inline-block;
+        width: 100%;
     }
     .election-graph-4{
         margin-top: -100px;
+        display: inline-block;
+        width: 100%;
     }
     .election-graph-5{
         margin-top: -150px;
+        display: inline-block;
+        width: 100%;
     }
     .left-side{
         .itg-415-layout{
@@ -9596,10 +9622,10 @@ h1.about-us-heading{
         background:#000;        
         color:#fff;
         height: 33px;
-        line-height: 33px;
+        line-height: 35px;
         padding: 0 10px;        
         width: 10.3%;
-        font-size: 1.3vw;
+        font-size: 18px;
         font-weight:600;
         @include float(left);
         text-align: center;

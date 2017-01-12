@@ -2985,6 +2985,63 @@ footer .footer-top ul li a:hover {
   text-align: right;
 }
 
+/*other comment css start*/
+.comment-popup-wrapper {
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2147483647;
+}
+
+.comment-popup {
+  background-color: #fff;
+  bottom: 0;
+  height: 400px;
+  left: 0;
+  margin: auto;
+  max-width: 800px;
+  padding: 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+
+.comment-user-details {
+  padding: 20px 0 0;
+  text-align: right;
+}
+
+.comment-user-details > div {
+  display: inline-block;
+  margin-right: 7px;
+  vertical-align: top;
+  width: 200px;
+}
+
+.comment-user-details .form-text {
+  width: 100%;
+}
+
+.comment-user-details .form-submit {
+  background-color: #000;
+  border: 1px solid #000;
+  border-radius: 3px;
+  color: #fff;
+  display: inline-block;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 500;
+  height: 32px;
+  padding: 0 10px;
+  text-transform: uppercase;
+  vertical-align: top;
+}
+
+/*other comment css end*/
 /* CSS To Add Zoom Effect on Images */
 @media all and (min-width: 1025px) {
   .zoom-image, #block-itg-front-end-common-related-photo-block #related-photo ul li a,
@@ -3799,6 +3856,32 @@ footer .footer-top ul li a:hover {
 
 /* CSS For node-mega-review-critic */
 article.node-mega-review-critic header {
+  display: none;
+}
+article.node-mega-review-critic .comment-mobile {
+  background: #1c1c1c;
+  margin: -15px -15px 20px;
+  font-family: "Roboto", sans-serif;
+  text-align: right;
+}
+article.node-mega-review-critic .comment-mobile ul {
+  display: inline-block;
+  vertical-align: top;
+}
+article.node-mega-review-critic .comment-mobile ul li {
+  display: inline-block;
+  vertical-align: top;
+}
+article.node-mega-review-critic .comment-mobile ul li a {
+  color: #c0c0c0;
+  padding: 10px 8px;
+  display: block;
+  text-transform: uppercase;
+}
+article.node-mega-review-critic .comment-mobile ul li a i {
+  font-size: 16px;
+}
+article.node-mega-review-critic .comment-mobile ul.social-share {
   display: none;
 }
 article.node-mega-review-critic h1 {

@@ -562,3 +562,24 @@ function remove_extra_tag_in_body($story_body) {
 
   return preg_replace('#<(' . implode('|', $tags) . ')(?:[^>]+)?>.*?</\1>#s', '', $story_body);
 }
+
+/**
+ * Function to remove img tag from content.
+ * @param string $content
+ * @return string
+ */
+function remove_img_tags($content) {
+  return preg_replace("/<img[^>]+\>/i", " ", $content); 
+}
+
+/**
+ * Function used to replced defined char with replacement char.
+ * @param string $original_string
+ * @return string
+ */
+function replace_charcters_for_syndication_file($original_string) {
+  $some_special_chars = array("á", "é", "í", "ó", "ú", "Á", "É", "Í", "Ó", "Ú", "ñ", "Ñ");
+  $replacement_chars  = array("a", "e", "i", "o", "u", "A", "E", "I", "O", "U", "n", "N");
+  $replaced_string    = str_replace($some_special_chars, $replacement_chars, $original_string);
+  return $replaced_string;
+}

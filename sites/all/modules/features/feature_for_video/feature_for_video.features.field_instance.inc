@@ -970,6 +970,74 @@ function feature_for_video_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-videogallery-field_story_facebook_video'.
+  $field_instances['node-videogallery-field_story_facebook_video'] = array(
+    'bundle' => 'videogallery',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 44,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_facebook_video',
+    'label' => 'Facebook Video',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => 'smi_facebook_video',
+      'file_extensions' => 'mp4 avi flv mov wmv mkv',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'imce_filefield_on' => 0,
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 48,
+    ),
+  );
+
   // Exported field_instance: 'node-videogallery-field_story_itg_tags'.
   $field_instances['node-videogallery-field_story_itg_tags'] = array(
     'bundle' => 'videogallery',
@@ -1796,6 +1864,74 @@ function feature_for_video_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-videogallery-field_story_twitter_video'.
+  $field_instances['node-videogallery-field_story_twitter_video'] = array(
+    'bundle' => 'videogallery',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 45,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_twitter_video',
+    'label' => 'Twitter Video',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => 'smi_facebook_video',
+      'file_extensions' => 'mp4 avi flv mov wmv mkv',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'imce_filefield_on' => 0,
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 50,
+    ),
+  );
+
   // Exported field_instance: 'node-videogallery-field_story_ugc_source_id'.
   $field_instances['node-videogallery-field_story_ugc_source_id'] = array(
     'bundle' => 'videogallery',
@@ -2007,7 +2143,7 @@ function feature_for_video_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 39,
+      'weight' => 38,
     ),
   );
 
@@ -2072,6 +2208,7 @@ function feature_for_video_field_default_field_instances() {
   t('Extra large image 2');
   t('Extra small image');
   t('Facebook Narrative');
+  t('Facebook Video');
   t('Facebook image');
   t('Image Size (170 x 127)');
   t('Image Size (483 x 271)');
@@ -2097,6 +2234,7 @@ function feature_for_video_field_default_field_instances() {
   t('Tags');
   t('Tweet');
   t('Twitter Image');
+  t('Twitter Video');
   t('Twitter narrative');
   t('UGC Source ID');
   t('Upload Video');
