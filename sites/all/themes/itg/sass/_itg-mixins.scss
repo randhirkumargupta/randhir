@@ -337,7 +337,8 @@ $root-font-size: 16px;
                 display: block;
                 color: #fff;
                 text-align: center;
-                line-height: 23px;                
+                line-height: 23px;  
+                font-size: 15px;
                 @media screen and (min-width: $break-mobile) {
                     width: 23px;
                     height: 23px; 
@@ -493,7 +494,7 @@ $root-font-size: 16px;
     }
 }
 @mixin video-gallery-popup{
-        #videogallery-iframe{
+    #videogallery-iframe{
         position: fixed;
         top: 0;
         left: 0;
@@ -507,9 +508,9 @@ $root-font-size: 16px;
             top: 50%;
             left: 50%;
             width: 600px;
-            height: 350px;
+            height: 455px;
             margin-left: -300px;
-            margin-top: -175px;
+            margin-top: -227px;
         }
         #close-big-story{
             position: fixed;
@@ -542,9 +543,36 @@ $root-font-size: 16px;
             background: #171717;
             padding: 10px 0px;   
             height: inherit;
+            position: relative;
+            padding: 5px 20px;
+        }        
+        .slick-prev, .slick-next{
+            font: normal normal normal 14px/1 FontAwesome;
+            cursor: pointer;
+            width: 24px;            
+            left: 0px;
+            font-size: 0;
+            position: absolute;
+            top: 50%;
+            z-index: 9;
+            border: none;
+            margin-top: -6px;
+            background: transparent;
+            color: #fff;          
+            &:before{
+                content: '\f053';                
+                font-size: 20px;                
+            }
+        }
+        .slick-next{            
+            right: 0px;
+            left: auto;
+            &:before{
+                content: '\f054';
+            }
         }
         li{
-            padding: 0 5px;
+            padding-left: 5px;
             cursor: pointer;
             &:focus{
                 outline: none;

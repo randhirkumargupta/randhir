@@ -19,15 +19,15 @@
   $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
   
   // get global comment config
-    if (function_exists(global_comment_last_record)) {
+  if (function_exists('global_comment_last_record')) {      
     $last_record = $global_comment_last_record;
     $config_name = trim($last_record[0]->config_name);
-    }
+  }
     
-   // get facebook share count 
-    if (function_exists(itg_total_share_count)) {
+  // get facebook share count 
+  if (function_exists('itg_total_share_count')) {
     $tot_count = itg_total_share_count($actual_link);
-    }
+  }
 
 ?>
 <article class="node-<?php print $node->nid; ?> <?php print $classes; ?> clearfix"<?php print $attributes; ?>>
@@ -248,7 +248,7 @@
                   </div>
 
                   <div class="photo-date"><?php print $video_date ?></div>
-                  <div class="photo-title"><?php print $video_node->title; ?></div>
+                  <div class="photo-title"><?php print l($video_node->title, 'node/' . $video_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank'))); ?></div>
 
               </div>
 
@@ -277,7 +277,7 @@
                   </div>
   <?php $photo_date = format_date($photo_node->created, 'custom', 'D, d M, Y'); ?>
                   <div class="photo-date"><?php print $photo_date ?></div>
-                  <div class="photo-title"><?php print $photo_node->title; ?></div>
+                  <div class="photo-title"><?php print l($photo_node->title, 'node/' . $photo_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank'))); ?></div>
               </div>
 
 <?php endif; ?>

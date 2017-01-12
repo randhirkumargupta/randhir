@@ -1727,6 +1727,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         margin: 15px auto 0;
         display: inherit;
         font-size: 14px;
+        line-height: 32px;
         &:hover{
           box-shadow: 0 0 5px 0 #999;
         }
@@ -2914,7 +2915,33 @@ footer .footer-top ul li a:hover{
     color: #828282;
     text-align: right;
   }
-} 
+}
+
+/*other comment css start*/
+.comment-popup-wrapper {
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2147483647;
+}
+.comment-popup {
+    background-color: #fff;
+    bottom: 0;
+    height: 400px;
+    left: 0;
+    margin: auto;
+    max-width: 800px;
+    padding: 20px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+}
+/*other comment css end*/
+
 
 /* CSS To Add Zoom Effect on Images */
 
@@ -4473,6 +4500,13 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         font-size: 13px;
         color: #0db533;    
       }
+    }
+    span.error {
+        font-size: 12px;
+        position: absolute;
+        right: 5px;
+        top: 8px;
+        z-index: 9;
     }
   }
 

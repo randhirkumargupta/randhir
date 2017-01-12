@@ -4,60 +4,88 @@
  */
 Drupal.behaviors.itg_widgets = {
   attach: function (context, settings) {
-       //common function for popup video
-   function videoGallery(){          
-       jQuery ("#videogallery-iframe").show ();
-       jQuery('.big-story-col-1 .loading-popup').hide();      
-        jQuery('.videogallery-slider').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false,
-            fade: false,
-            asNavFor: '.video-slider-images ul'
-        });               
-            jQuery('.video-slider-images ul').slick({
-                slidesToShow: 7,
-                slidesToScroll: 1,
-                asNavFor: '.videogallery-slider',
-                dots: false,
-                centerMode: false,
-                arrows: true,
-                variableWidth: true,
-                focusOnSelect: true,
-                responsive: [
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: 7,
-                            slidesToScroll: 1,
-                            arrows: false
-                        }
-                    },
-                    {
-                        breakpoint: 600,
-                        settings: {
-                            slidesToShow: 4,
-                            arrows: false,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 480,
-                        settings: {
-                            slidesToShow: 3,
-                            arrows: false,
-                            slidesToScroll: 1
-                        }
-                    }
-                ]
-            });              
-        jQuery("#videogallery-iframe").on('click', '#close-big-story', function () {
-            jQuery("#videogallery-iframe").html(" ");
-            jQuery("#videogallery-iframe").hide();
-        }); 
-  
-   }
-      //alert('@@@');
+    jQuery ("div.big-news-content-videogallery a.has-ajax-big-story").click (function () {
+      jQuery ('.big-story-col-1 .loading-popup').show ();
+      var nid = jQuery (this).attr ("data-nid");
+      jQuery.get ("big-story-video-gallery/" + nid, function (data) {
+        // add new data data.
+        jQuery ("#videogallery-iframe").html (data);
+        videoGallery ();
+      });
+    });
+    //Prevent stop video if it is palyed previously.
+    jQuery ('body').on('click', '.slick-track img', function (e){
+      jQuery (".iframe-video-dailymotion").each (function () {
+        var url = jQuery (this).attr ("src");
+        jQuery (this).removeAttr("src");
+        var Updatedurl = updateQueryStringParameter (url, 'autoplay', '0');
+        jQuery (this).attr ('src', Updatedurl);
+      });
+    });
+
+    function updateQueryStringParameter (uri, key, value) {
+      var re = new RegExp ("([?&])" + key + "=.*?(&|$)", "i");
+      var separator = uri.indexOf ('?') !== -1 ? "&" : "?";
+      if (uri.match (re)) {
+        return uri.replace (re, '$1' + key + "=" + value + '$2');
+      } else {
+        return uri + separator + key + "=" + value;
+      }
+    }
+    //common function for popup video
+    function videoGallery () {
+      jQuery ("#videogallery-iframe").show ();
+      jQuery ('.big-story-col-1 .loading-popup').hide ();
+      jQuery ('.videogallery-slider').slick ({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: false,
+        asNavFor: '.video-slider-images ul'
+      });
+      jQuery ('.video-slider-images ul').slick ({
+        slidesToShow: 7,
+        slidesToScroll: 1,
+        asNavFor: '.videogallery-slider',
+        dots: false,
+        centerMode: false,
+        arrows: true,
+        variableWidth: true,
+        focusOnSelect: true,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 7,
+              slidesToScroll: 1,
+              arrows: false
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 4,
+              arrows: false,
+              slidesToScroll: 1
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 3,
+              arrows: false,
+              slidesToScroll: 1
+            }
+          }
+        ]
+      });
+      jQuery ("#videogallery-iframe").on ('click', '#close-big-story', function () {
+        jQuery ("#videogallery-iframe").html (" ");
+        jQuery ("#videogallery-iframe").hide ();
+      });
+
+    }
+    //alert('@@@');
 
     //        jQuery('#edit-actionitg-widget-categories-wise-node-group').click(function() {
     //            if (confirm('Are you sure?'))
@@ -77,26 +105,26 @@ Drupal.behaviors.itg_widgets = {
     //            // Prevent default action.
     //            return false;
     //        });
-    jQuery ('.associate-content-block').click (function () {        
-        var widgets_type = jQuery(this).attr('data-widget');        
-        var widgets_type_array = widgets_type.split("-");
-        var widgets_type = widgets_type_array[0];
-        var widgets_id = widgets_type_array[1];
+    jQuery ('.associate-content-block').click (function () {
+      var widgets_type = jQuery (this).attr ('data-widget');
+      var widgets_type_array = widgets_type.split ("-");
+      var widgets_type = widgets_type_array[0];
+      var widgets_id = widgets_type_array[1];
 
-        jQuery.ajax({
-                url: Drupal.settings.basePath + "associate-photo-video-content/"+widgets_type+"/"+widgets_id,
-                method: 'post',
-                //data: {status_val: 1, section_name: section_name, template_name: template_name, layout_type:layout_type},
-                beforeSend: function() {
-                   // $('.itg-ajax-loader').show();
-                },
-                success: function(data) {
-                   jQuery ("#videogallery-iframe").html (data);                   
-                   videoGallery();
-                }
-            });
+      jQuery.ajax ({
+        url: Drupal.settings.basePath + "associate-photo-video-content/" + widgets_type + "/" + widgets_id,
+        method: 'post',
+        //data: {status_val: 1, section_name: section_name, template_name: template_name, layout_type:layout_type},
+        beforeSend: function () {
+          // $('.itg-ajax-loader').show();
+        },
+        success: function (data) {
+          jQuery ("#videogallery-iframe").html (data);
+          videoGallery ();
+        }
+      });
     });
-    
+
     jQuery ('#edit-state1').change (function () {
       var getval = jQuery (this).val ();
       if (getval == 0)
@@ -377,19 +405,10 @@ jQuery (document).ready (function () {
   //            return false;
   //        }
   //    });
-  jQuery ("div.big-news-content-videogallery a.has-ajax-big-story").click (function () {
-    jQuery('.big-story-col-1 .loading-popup').show();
-    var nid = jQuery (this).attr ("data-nid");
-    jQuery.get ("big-story-video-gallery/" + nid, function (data) {      
-      // add new data data.
-        jQuery ("#videogallery-iframe").html (data);      
-        videoGallery();
-    });
-  });
-  
-  jQuery("select#fake-soruce-type").on("change",function(){
-    var soruce_type = jQuery(this).val();
-    jQuery("#edit-field-story-source-type-value").val(soruce_type);
+
+  jQuery ("select#fake-soruce-type").on ("change", function () {
+    var soruce_type = jQuery (this).val ();
+    jQuery ("#edit-field-story-source-type-value").val (soruce_type);
   });
 });
   

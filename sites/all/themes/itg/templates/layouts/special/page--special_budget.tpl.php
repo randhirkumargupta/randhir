@@ -130,10 +130,23 @@ if (!empty($device[0])) {
                   </div>    
                 <?php endif; ?>
                 <?php
-                if (!empty($highlights['node_data']->title)) {
-                  echo '<h1>' . mb_strimwidth($highlights['node_data']->title, 0, 90, "..") . '<span class="disc-share"><a href="#"><i class="fa fa-share-alt"></i></a></span></h1>';
+                $display_title = "";
+                if($widget_data['itg-block-2']['block_title'] == "")
+                {
+                    $display_title = 'style="display:none"';
                 }
+               
+                  echo '<h1 '.$display_title.' id="display_tit"><span class="highlights-title">' . mb_strimwidth($widget_data['itg-block-2']['block_title'], 0, 90, "..") . '</span></h1>';
+       
                 ?>
+                <div class="social-share">
+                    <ul>
+                        <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
+                        <li><a class="facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="javascript:void(0)" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li><a title="share on google+" href="#" class="google"></a></li>
+                    </ul>
+                </div>
                 <div class="row itg-325-layout">
                     <?php if ($live_url != "" || !empty($highlights['node_data']->field_story_highlights['und']) || $theme == 'itgadmin') { ?>
                       <div class="col-md-4 mt-50">

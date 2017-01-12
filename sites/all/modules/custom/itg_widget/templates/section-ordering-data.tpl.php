@@ -22,20 +22,20 @@ if ($widget_style == 'auto-road-trip') {
                         ?>
 
                         <?php if (!empty($extra_large_image_url)) { ?>
-                            <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                                <div class="pic  <?php echo $video_class; ?>">  <img  src="<?php print $extra_large_image_url ?>" /></div>
+                            <a class="pic <?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
+                                <img  src="<?php print $extra_large_image_url ?>" />
                             </a>
                             <?php
                         }
                         else {
                             ?>
-                            <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
+                            <a class="pic <?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                                 <img  height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
                             </a>
                         <?php }
                         ?>
 
-                        <span><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 55, ".."); ?></span></a>
+                     <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 55, ".."); ?></a>
                     </li>
                 <?php }
             } ?>

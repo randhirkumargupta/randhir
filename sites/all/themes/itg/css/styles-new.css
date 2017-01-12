@@ -1813,6 +1813,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   margin: 15px auto 0;
   display: inherit;
   font-size: 14px;
+  line-height: 32px;
 }
 .home_page_poll_widget_block .poll-data .poll-replace-id .form-submit:hover {
   box-shadow: 0 0 5px 0 #999;
@@ -2984,6 +2985,32 @@ footer .footer-top ul li a:hover {
   text-align: right;
 }
 
+/*other comment css start*/
+.comment-popup-wrapper {
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2147483647;
+}
+
+.comment-popup {
+  background-color: #fff;
+  bottom: 0;
+  height: 400px;
+  left: 0;
+  margin: auto;
+  max-width: 800px;
+  padding: 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+
+/*other comment css end*/
 /* CSS To Add Zoom Effect on Images */
 @media all and (min-width: 1025px) {
   .zoom-image, #block-itg-front-end-common-related-photo-block #related-photo ul li a,
@@ -4698,6 +4725,13 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   z-index: 9;
   font-size: 13px;
   color: #0db533;
+}
+[id*="itg-personalization-edit-profile-form"] span.error, [id*="itg-personalization-refer-a-friend-form"] span.error {
+  font-size: 12px;
+  position: absolute;
+  right: 5px;
+  top: 8px;
+  z-index: 9;
 }
 
 @media all and (min-width: 768px) {

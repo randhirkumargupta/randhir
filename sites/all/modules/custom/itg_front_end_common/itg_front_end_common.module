@@ -224,7 +224,9 @@ function _related_video_block_content() {
       $related_content = explode('_', $fn_result);
       $final_related [] = $related_content[1];
     }
+    if(!empty($final_related)) {
     $final_related = implode(' OR ', $final_related);
+    }
     $video_output.= views_embed_view('related_photo_video_content', 'page', $final_related);
     '</div>';
 
@@ -257,7 +259,9 @@ function _related_photo_block_content() {
       $related_content = explode('_', $fn_result);
       $final_related [] = $related_content[1];
     }
+    if(!empty($final_related)) {
     $final_related = implode(' OR ', $final_related);
+    }
     $photo_output.= views_embed_view('related_photo_video_content', 'page_1', $final_related);
     '</div>';
 

@@ -14,7 +14,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
   global $user, $base_url;
   
   // Load node so that we can provide default value if values already present.
-  $node = node_load($nid);
+  $node = node_load($nid); 
   $data = array();
   if (isset($node->field_story_social_media_integ['und']) && is_array($node->field_story_social_media_integ['und'])) {
     foreach ($node->field_story_social_media_integ['und'] as $option) {
@@ -136,13 +136,17 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
       ),
     ),
   );
-  
+  // If facebook narrative is not set then set default narrative.
+  $fb_nrr_default = '';
+  if (!empty($node->field_story_facebook_narrative['und'][0]['value'])) {
+    $fb_nrr_default = $node->field_story_facebook_narrative['und'][0]['value'];
+  }
   // Facebook Narrative.
   $form['fb_wrap']['itg_facebook_narrative'] = array(
     '#type' => 'textfield',
     '#title' => t('Narrative'),
     '#maxlength' => 255,
-    '#default_value' => $node->title,
+    '#default_value' => !empty($fb_nrr_default) ? $fb_nrr_default : $node->title,
     '#states' => array(
       'required' => array(
         ':input[name="itg_smi[facebook]"]' => array('checked' => TRUE),
@@ -246,13 +250,17 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
       ),
     ),
   );
-  
+  // If Twitter narrative is not set then default is node title.
+  $tweet_default = '';
+  if (!empty($node->field_story_tweet['und'][0]['value'])) {
+    $tweet_default = $node->field_story_tweet['und'][0]['value'];
+  }  
   // Twitter narrative.
   $form['twit_wrap']['itg_twitter_narrative'] = array(
     '#type' => 'textfield',
     '#title' => t('Narrative'),
     '#maxlength' => 126,
-    '#default_value' => $node->title,
+    '#default_value' => !empty($tweet_default) ? $tweet_default : $node->title,
     '#states' => array(
       'required' => array(
         ':input[name="itg_smi[twitter]"]' => array('checked' => TRUE),

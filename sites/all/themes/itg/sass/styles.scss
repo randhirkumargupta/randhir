@@ -2,6 +2,12 @@
 @import "itg-variables";
 @import "itg-mixins";
 /* Global CSS */
+*{
+    @extend .mr-0;
+    @extend .pd-0;
+    box-sizing: border-box;
+    word-break: break-word;
+}
 body{
     font: 400 14px/18px $itg-robotoslab;
     color: #333;
@@ -216,11 +222,6 @@ input[type="text"], select, input[type="password"]{
 }
 .form-required, .error{
     color: red;
-}
-*{
-    @extend .mr-0;
-    @extend .pd-0;
-    box-sizing: border-box;
 }
 .row{
     @include clearfix;
@@ -1236,7 +1237,7 @@ footer{
         height: 673px;
     }
     .itg-layout-container .top-colum-3 .droppable{
-        height: 276px;
+        height: 266px;
     }
     .itg-common-section{
         .droppable{
@@ -1406,7 +1407,9 @@ footer{
         padding:5px;
          a{
             display: block;
-            margin-bottom: 10px;
+            img{
+                margin-bottom: 10px;
+            }
             &:hover{
                 color:$blue-color;
             }
@@ -1418,6 +1421,11 @@ footer{
             @include float(none);
             @include calculate-width(1);
             margin-bottom: 10px;
+            a{
+                img{
+                    margin-bottom: 0;
+                }
+            }
         }
     }
 }
@@ -6159,29 +6167,30 @@ footer{
         @include calculate-width(3);
         @include float(left);
         .view-content{            
-            @include clearfix;
-            .views-row{                
-                @include calculate-width(1);
-                @include float(none);
-                @include text-align(center);
-                margin-bottom:30px;
-                img{
-                    border-radius: 100%;
-                    border: 1px solid #ddd;
-                }
-                .views-field-title, .views-field-field-story-new-title{
-                    font-size: 11px;
-                    font-weight: 700;
-                    font-family: roboto;
-                    color: #000;
-                    margin-top: 10px;
-                    text-transform: uppercase;
-                }
-                .views-field-field-story-new-title{
-                    color: #ef2a24;  
-                    margin-top:0; 
-                }
+            @include clearfix;                        
+            @include calculate-width(1);
+            @include float(none);
+            @include text-align(center);
+            margin-bottom:30px;
+            img{
+                border-radius: 100%;
+                border: 1px solid #ddd;
             }
+            .views-field-title, .views-field-field-story-new-title{
+                font-size: 11px;
+                font-weight: 700;
+                font-family: roboto;
+                color: #000;
+                margin-top: 10px;
+                text-transform: uppercase;
+            }
+            .views-field-field-story-new-title{
+                color: #ef2a24;  
+                margin-top:0; 
+            }
+        }        
+        &:nth-child(3n+1){
+            clear: left;
         }
     }
 }
@@ -6263,14 +6272,15 @@ footer{
         }
     }
 }
-.speaker-detail-page, #block-views-event-subsite-speaker-block-3{
+.speaker-detail-page, #block-views-program-schedule-block-3{
     .col-md-3{
         text-align: center;
         h4{
             font-size: 15px;
             margin: 10px 0 0 0;
-            color:#000000;
+            color:#000;
             text-transform: uppercase;
+            font-weight: 600;
         }
         p{
             text-transform: uppercase;
@@ -7085,9 +7095,11 @@ footer{
                         }
                     }
                     .featured-post{
-                        .no-result-image{
-                            height: 270px;
-                        }
+                        .featured-post-first{
+                            .no-result-image{
+                                height: 270px;
+                            }    
+                        }                        
                     }
                 }
             }
@@ -7237,7 +7249,7 @@ footer{
                 color: #fff;
                 text-transform: uppercase;
                 cursor: pointer;
-                padding: 12px;
+                padding: 0px;
                 font-size: 18px;
                 box-shadow: 4px 4px 0 #00b3e6;
             } 
@@ -7307,39 +7319,45 @@ footer{
                 float: left;
             }
             input[type="radio"] {
-    display:none;
-}
-input[type="radio"] + label {    
-    padding-left: 25px;
-    position: relative;
-}
-input[type="radio"] + label:before, input[type="radio"] + label:after{
-    display:inline-block;
-    width:15px;
-    height:15px;    
-    vertical-align:middle;
-    cursor:pointer;
-    -moz-border-radius:  50%;
-    border-radius:  50%;
-    position: absolute;
-    top:3px;
-    left: 0;
-    content: '';
-}
+                display:none;
+            }
+            input[type="radio"] + label {    
+                padding-left: 25px;
+                position: relative;
+            }
+            input[type="radio"] + label:before, input[type="radio"] + label:after{
+                display:inline-block;
+                width:15px;
+                height:15px;    
+                vertical-align:middle;
+                cursor:pointer;
+                -moz-border-radius:  50%;
+                border-radius:  50%;
+                position: absolute;
+                top:3px;
+                left: 0;
+                content: '';
+            }
 
-input[type="radio"] + label:before{
-     background-color:#c0c0c0;
-}
+            input[type="radio"] + label:before{
+                background-color:#c0c0c0;
+            }
 
-input[type="radio"]:checked + label:after{
-    background-color: #333;
-    width: 7px;
-    height: 7px;
-    top: 7px;
-    left: 4px;
-}
+            input[type="radio"]:checked + label:after{
+                background-color: #333;
+                width: 7px;
+                height: 7px;
+                top: 7px;
+                left: 4px;
+            }
         } 
-    }    
+    } 
+    .page-sports-video{
+        a{
+            margin-top: 10px;
+            display: block;
+        }
+    }
 }
 .live-scorecard{
         text-align: center;   
@@ -7603,6 +7621,7 @@ input[type="radio"]:checked + label:after{
     }
     img{
         padding-top: 10px;
+        max-height: 50px;
     }
     ul{        
         @extend .list-none;
@@ -7702,11 +7721,15 @@ input[type="radio"]:checked + label:after{
         }
     }
     h1{
-        .disc-share{
-            a{
-                font-size: 20px;
-                color: #b6b6b6;
-            }
+        display: inline;
+    }
+    @include social-share; 
+    .social-share{
+        display: inline-block;
+        vertical-align: top;
+        padding-top: 15px;
+        i.fa-share-alt{
+            font-size: 20px;
         }
     }
     .budget-ad{
@@ -8551,6 +8574,13 @@ h1.about-us-heading{
                     a{
                         padding: 10px 0 10px 35px;
                     }
+                    +li{
+                        border-top:none;
+                        a{
+                            padding-top: 5px;
+                            padding-bottom: 5px;
+                        } 
+                    } 
                 }
             }
         }
@@ -9522,13 +9552,21 @@ h1.about-us-heading{
                 left: auto;
                 margin: 10px 0;
             }
+            .captcha-lable{
+                width: 220px;
+                float: left;
+                padding-right: 20px;
+            }
         }
     }    
 .node-type-videogallery, .node-type-photogallery, .node-type-story{
-#cboxLoadedContent{        
+    #cboxLoadedContent{        
         background: url(../images/tab-loading.gif);
         background-position: center;
-        background-repeat: no-repeat;
+        background-repeat: no-repeat;        
+    }
+    #cboxTitle{
+        display: none !important;
     }
 }
 /*css end story page submit story */
