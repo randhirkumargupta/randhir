@@ -39,7 +39,7 @@
           </div>                      
           <div class="live-tv-link">
               <?php $live_tv_img = '<img src="'. $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/imgpsh_fullsize.png" alt="LiveTV" title="LiveTV">'; ?>
-              <?php print l($live_tv_img, 'livetv', array('html' => TRUE, 'attributes' => array('class' => array('live-tc-icon')))); ?>              
+              <?php print l($live_tv_img, 'livetv', array('html' => TRUE, 'attributes' => array('class' => array('live-tv-icon')))); ?>              
               <a href="javascript:void(0)" class="breaking-new-close">X</a>            
           </div>
           <div class="social-share">
