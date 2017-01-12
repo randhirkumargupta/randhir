@@ -742,7 +742,7 @@ Image Size (300 x 225)',
     'exclude_cv' => 0,
     'field_name' => 'field_print_magazine_issue_date',
     'label' => 'Print Issue Date',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'default_value' => 'now',
       'default_value2' => 'same',

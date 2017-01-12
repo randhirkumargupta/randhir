@@ -561,7 +561,7 @@ jQuery(document).ready(function () {
         jQuery(this).children().not(":first").hide();
     })
     jQuery('.social-share li').click(function () {
-        jQuery(this).nextAll('li').show();
+        jQuery(this).nextAll('li').toggle();
     });
 
     //vertical menu position      
