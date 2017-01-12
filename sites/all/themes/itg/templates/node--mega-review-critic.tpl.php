@@ -270,7 +270,7 @@
                   </div>
 
                   <div class="photo-date"><?php print $video_date ?></div>
-                  <div class="photo-title"><?php print $video_node->title; ?></div>
+                  <div class="photo-title"><?php print l($video_node->title, 'node/' . $video_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank'))); ?></div>
 
               </div>
 
@@ -299,7 +299,7 @@
                   </div>
   <?php $photo_date = format_date($photo_node->created, 'custom', 'D, d M, Y'); ?>
                   <div class="photo-date"><?php print $photo_date ?></div>
-                  <div class="photo-title"><?php print $photo_node->title; ?></div>
+                  <div class="photo-title"><?php print l($photo_node->title, 'node/' . $photo_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank'))); ?></div>
               </div>
 
 <?php endif; ?>
