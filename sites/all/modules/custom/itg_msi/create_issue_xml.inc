@@ -88,8 +88,7 @@ function _create_issue_process($fid, $node_info, $parent_node) {
 
 
     $issue_date_xml = str_replace('/', '-', trim($xml->IssueDate));
-    $issue_date = date('Y-m-d h:i:s', strtotime($issue_date_xml));
-
+    $issue_date = date('Y-m-d 00:00:00', strtotime($issue_date_xml));
     //Prepare body
     foreach ($xml_other['body']->p as $bodyTxt) {
       $body .= '<p>' . ucfirst(htmlentities($bodyTxt)) . '</p>';
@@ -110,7 +109,7 @@ function _create_issue_process($fid, $node_info, $parent_node) {
     $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim($headline) ? trim($headline) : 'NA';
     $node->body[$node->language][0]['value'] = $body ? $body : 'NA';
     $node->field_stroy_city[LANGUAGE_NONE][0]['tid'] = $city_tid; // 58: New Delhi
-    $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $issue_date ? $issue_date : date('Y-m-d h:i:s', time());
+    $node->field_story_issue_date[LANGUAGE_NONE][0]['value'] = $issue_date ? $issue_date : date('Y-m-d 00:00:00', time());
 
     //Issue, magazine and supplement
     $node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'] = 'magazine_issue_story';

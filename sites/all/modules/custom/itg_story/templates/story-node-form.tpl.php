@@ -24,7 +24,7 @@
             <h2 class="story-title"><?php print t('Templates'); ?></h2>
             <div class="itg-form-section hide">
                 <div class="templates-tab-wrapper">
-                  <?php print drupal_render($form['field_story_select_templates']); ?>
+                    <?php print drupal_render($form['field_story_select_templates']); ?>
                     <div class="listicle-tab-form tab-form">
                         <?php print drupal_render($form['field_story_templates']); ?>
                         <?php print drupal_render($form['field_story_template_guru']); ?>
@@ -61,7 +61,7 @@
             <div class="itg-form-section hide">
                 <?php print drupal_render($form['field_story_short_headline']); ?>
                 <?php print drupal_render($form['field_story_long_head_line']); ?>
-              <!--<div class="pre-desc"><?php //print t('This title shows on the section page');     ?></div> -->
+              <!--<div class="pre-desc"><?php //print t('This title shows on the section page');      ?></div> -->
                 <?php print drupal_render($form['field_story_rating']); ?>
                 <?php print drupal_render($form['field_story_new_title']); ?>
                 <?php print drupal_render($form['field_story_redirection_url_titl']); ?>
@@ -100,7 +100,6 @@
             <div id="Configuration" class="itg-sidebar-form-section">
                 <h2 class="story-title"><?php
                     print t('Configuration');
-                   
                     ?></h2>
                 <div class="itg-form-section hide">
                     <?php print drupal_render($form['field_story_configurations']); ?>
@@ -111,16 +110,16 @@
                     <?php print drupal_render($form['field_story_syndications_photo']); ?>
                     <?php print drupal_render($form['field_story_comment_question']); ?>
                     <?php print drupal_render($form['field_story_client_title']); ?>
-<?php print drupal_render($form['field_story_media_files_syndicat']); ?>
-<?php print drupal_render($form['field_common_related_content']); ?>
+                    <?php print drupal_render($form['field_story_media_files_syndicat']); ?>
+                    <?php print drupal_render($form['field_common_related_content']); ?>
                 </div>
             </div>
             <div id="DateTime" class="itg-sidebar-form-section">
                 <h2 class="story-title"><?php print t('Date & Time'); ?></h2>
                 <div class="itg-form-section hide">
                     <?php print drupal_render($form['field_story_schedule_date_time']); ?>
-<?php print drupal_render($form['field_story_expires']); ?> 
-<?php print drupal_render($form['field_story_expiry_date']); ?> 
+                    <?php print drupal_render($form['field_story_expires']); ?> 
+                    <?php print drupal_render($form['field_story_expiry_date']); ?> 
                 </div>
             </div>
             <div id="SocialMedia" class="itg-sidebar-form-section">
@@ -130,9 +129,7 @@
                     <!-- Facebook fields -->
                     <?php print drupal_render($form['field_story_facebook_narrative']); ?>
                     <?php print drupal_render($form['field_story_facebook_image']); ?>
-                    <?php print drupal_render($form['field_story_facebook_vdescripti']); ?>
-                    <?php print drupal_render($form['field_story_facebook_video']); ?>
-                    <!-- Facebook Instant Article -->
+                    <?php print drupal_render($form['field_story_facebook_video']); ?>                    <!-- Facebook Instant Article -->
                     <?php print drupal_render($form['field_facebook_audio_position']); ?>
                     <?php print drupal_render($form['field_facebook_instant_audio_url']); ?>
                     <?php print drupal_render($form['field_animated_image_position']); ?>
@@ -140,19 +137,18 @@
                     <?php print drupal_render($form['field_facebook_map_position']); ?>
                     <?php print drupal_render($form['field_map_embed_code']); ?>
                     <?php print drupal_render($form['field_facebook_gallery_associate']); ?>
-<?php print drupal_render($form['field_social_embed_code_position']); ?>
+                    <?php print drupal_render($form['field_social_embed_code_position']); ?>
                     <?php print drupal_render($form['field_social_embed_code']); ?>
 
                     <!-- Twitter fields -->
                     <?php print drupal_render($form['field_story_tweet']); ?>
-                    <?php print drupal_render($form['field_story_tweet_image']); ?>  
-<?php print drupal_render($form['field_story_twitter_video_desc']); ?>  
-<?php print drupal_render($form['field_story_twitter_video']); ?>  
+                    <?php print drupal_render($form['field_story_tweet_image']); ?>
+                    <?php print drupal_render($form['field_story_twitter_video']); ?>  
                 </div>
             </div>
             <div class="metatags-and-remarks">
                 <h2 id="title-metatags" class="story-title"><?php print t('Remarks'); ?></h2>
-<?php print drupal_render_children($form); ?>
+                <?php print drupal_render_children($form); ?>
             </div>
         </div>
     </div>
