@@ -1181,6 +1181,7 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
   $tid = isset($menu_data['db_data']['tid']) ? $menu_data['db_data']['tid'] : 0;
   $active_cls = $parent_class = "notactive";
   $icon_fid = (int) $menu_data['db_data']['menu_name'];
+  $display_icon_attribute = $display_icon;
   $sponser_logo_uri = !empty($menu_data['term_load']->field_sponser_logo['und'][0]['uri']) ? $menu_data['term_load']->field_sponser_logo['und'][0]['uri'] : 0;
   $vertical_menu_icon = "";
   // handel case for external menu.
@@ -1253,7 +1254,7 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
   $menu_link_data_array['active_cls'] = $active_cls;
   $menu_link_data_array['icon'] = $vertical_menu_icon;
   $menu_link_data_array['link_title_for_vertical'] = $link_title_for_vertical;
-  $menu_link_data_array['url_type'] = "url-type-" . $menu_data['db_data']['url_type'];
-  $menu_link_data_array['display_icon'] = $menu_data['db_data']['display_icon'];
+  $menu_link_data_array['url_type'] = "url-type-" . $url_type;
+  $menu_link_data_array['display_icon'] = $display_icon_attribute;
   return $menu_link_data_array;
 }

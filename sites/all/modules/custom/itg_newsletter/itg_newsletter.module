@@ -566,15 +566,17 @@ function itg_newsletter_node_validate($node, $form, &$form_state) {
     //Validate content id
     $i = 1;
     foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news) {
-      if ($news['field_news_type'][LANGUAGE_NONE][0]['value'] == 'internal' && !empty($news['field_news_type'][LANGUAGE_NONE][0]['value'])) {
-        $story_id = $news['field_news_cid'][LANGUAGE_NONE][0]['target_id'];
-        $story_status = itg_common_get_story_status($story_id);
-        if ($story_status != 'published' && $story_id != 'A') {
-          if (empty($story_id)) {
-            form_set_error('field_news_cid', t('Please enter valid and published Content ID for Title @titlenum.', array('@titlenum' => $i)));
-          }
-          else {
-            form_set_error('field_news_cid' . $story_id, t('Content Id <strong>@contentid</strong> is not published.', array('@contentid' => $story_id)));
+      if (isset($news['field_news_type'][LANGUAGE_NONE][0]['value'])) {
+        if ($news['field_news_type'][LANGUAGE_NONE][0]['value'] == 'internal' && !empty($news['field_news_type'][LANGUAGE_NONE][0]['value'])) {
+          $story_id = $news['field_news_cid'][LANGUAGE_NONE][0]['target_id'];
+          $story_status = itg_common_get_story_status($story_id);
+          if ($story_status != 'published' && $story_id != 'A') {
+            if (empty($story_id)) {
+              form_set_error('field_news_cid', t('Please enter valid and published Content ID for Title @titlenum.', array('@titlenum' => $i)));
+            }
+            else {
+              form_set_error('field_news_cid' . $story_id, t('Content Id <strong>@contentid</strong> is not published.', array('@contentid' => $story_id)));
+            }
           }
         }
       }
@@ -599,7 +601,7 @@ function itg_newsletter_check_existence_frequency($frequency, $newsletter_conten
       ->condition('nf.field_newsl_frequency_value', $frequency, '=')
       ->condition('nc.field_newsl_newsletter_content_value', $newsletter_content, '=');
   $result = $query->execute();
-  $nid = $result->fetchObject()->nid;
+  $nid = !empty($result->fetchObject()->nid) ? $result->fetchObject()->nid : FALSE;
 
   if ($nid) {
     return $nid;
