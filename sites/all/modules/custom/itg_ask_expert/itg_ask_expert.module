@@ -402,6 +402,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
     $askquestion = itg_custom_get_ask_quation_data($cat_id);
     $form['#prefix'] = '<div id="expert_global_config">';
     $form['#suffix'] = '</div>';
+    $form['#attributes'] = array('autocomplete' => 'off');
     $form['question'] = array(
         '#type' => 'textarea', //you can find a list of available types in the form api
         '#title' => t(''),
@@ -411,6 +412,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
         '#attributes' => array(
             'placeholder' => 'Ask your question here',
             'class' => array('charcount'),
+            'autocomplete' => 'off',
         ),
     );
     $form['askname'] = array(
@@ -421,6 +423,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
         //'#suffix' => '</div>',
         '#attributes' => array(
             'placeholder' => 'Name',
+            'autocomplete' => 'off',
         ),
     );
     $form['askemail'] = array(
@@ -431,6 +434,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
         '#suffix' => '</div>',
         '#attributes' => array(
             'placeholder' => 'Email',
+            'autocomplete' => 'off',
         ),
     );
     $form['cat_id'] = array(
@@ -443,6 +447,9 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
         $form['captcha'] = array(
             '#type' => 'captcha',
             '#captcha_type' => 'image_captcha/Image',
+            '#attributes' => array(
+            'autocomplete' => 'off',
+        ),
         );
     }
     $form['submit_button'] = array(
