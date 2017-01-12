@@ -7,7 +7,6 @@
  * @see https://drupal.org/node/1728148
  */
 //$preview = $widget_data['preview'];
-//p($widget_data);
 // configuration for social sharing
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $search_title = preg_replace("/'/", "\\'", $widget_data['itg-block-2']['block_title']);
