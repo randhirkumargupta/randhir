@@ -63,8 +63,8 @@ function itg_ugc_rules_action_info() {
  */
 function itg_ugc_send_follow_story_content_mail($node) {
   if ($node->type == 'story') {
-    $get_user_id = itg_get_follow_story_user($node->nid);
-
+    $get_user_id = itg_get_follow_story_user($node->nid, 1);
+    watchdog("follow_story", '<pre>' . print_r( $get_user_id, true) . '</pre>'); 
     foreach ($get_user_id as $follow_user) {
 
       module_load_include('inc', 'itg_ugc', 'include/itg_follow_story_mail');
@@ -92,21 +92,6 @@ function itg_ugc_send_follow_story_content_mail($node) {
   }
 }
 
-/**
- * Implements itg_get_follow_story_user
- * @param int $nid
- */
-function itg_get_follow_story_user($nid) {
-  $query = db_select('flagging', 'c');
-  $query->fields('c', array('uid'));
-  $query->condition('c.entity_id', $nid, '=');
-  $result = $query->execute();
-  while ($record = $result->fetchAssoc()) {
-    $options[] = $record['uid'];
-  }
-
-  return $options;
-}
 
 /**
  * Implements itg_get_user_email_by_id
@@ -304,14 +289,25 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   }
 
   if ($form_id == 'ugc_node_form') {
-   $user_fields = user_load($user->uid);
-  if ($user->uid != '1') {
+    //pr($form);
+    
+    $user_fields = user_load($user->uid);
+   
+   if ($user->uid != '1') {
       // hide source and type field from other users
       if ($form_id == 'ugc_node_form') {
         $form['field_story_source_type']['#access'] = FALSE;
         $form['field_source']['#access'] = FALSE;
       }
     }
+    
+    // Add label for captcha
+    if ($user->uid == 0) {
+      $form['captcha']['#prefix'] = '<div class="captcha-lable">Captcha</div>';
+      //$form['captcha']['#suffix'] = '</div>';
+    }
+
+    
     $type = "ugc";
     $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
     foreach ($tax as $key => $term) {
@@ -781,5 +777,5 @@ function itg_ugc_views_pre_render(&$view) {
  * Implements itg_ugc_thank_you
  */
 function itg_ugc_thank_you() {
- print '<div class="ugc-success">UGC content has been submitted successfully for further review and approval.</div>';
+ print '<div class="ugc-success" style="height: 100%; background: #fff;">UGC content has been submitted successfully for further review and approval.</div>';
 }

@@ -63,6 +63,10 @@
     line-height: 18px;
   }
 
+  .static-feedback-from h1, h1.about-us-heading {
+    font-size: 26px;
+  }
+
   #block-itg-layout-manager-header-block .top-nav .main-nav li a {
     padding: 0 15px;
     font-size: 20px;
@@ -277,6 +281,39 @@
   }
 
   /*story page css end*/
+  /*Election page css start*/
+  .election-page h1 {
+    margin-top: 20px;
+  }
+  .election-page .election-graph .col-el-5 {
+    width: 240px;
+  }
+
+  /*Election page css end*/
+  /*static pages start*/
+  .static-feedback-from .webform-submit-social, .static-feedback-from .form-actions, .static-feedback-from .or-share-detail {
+    padding-left: 0;
+  }
+
+  .static-feedback-from .name-email-continer > div.user-name label {
+    text-align: left;
+  }
+
+  .static-feedback-from .submit-feedback {
+    width: 100%;
+  }
+
+  .static-feedback-from .webform-submit-social a {
+    display: block;
+  }
+  .static-feedback-from .webform-submit-social a img {
+    max-width: 100px;
+  }
+  .static-feedback-from .webform-submit-social a img:first-child {
+    max-width: 90px;
+  }
+
+  /*static page end*/
 }
 @media only screen and (max-width: 991px) {
   /*CSS start education page special*/
@@ -342,17 +379,19 @@
     margin: 0;
   }
 
-  .page-sports-video .view-content .photo-list {
+  .sport-home-layout-page .page-sports-video .view-content .photo-list {
     white-space: nowrap;
     overflow: auto;
+    margin: 0 -6px;
   }
-  .page-sports-video .view-content .photo-list li {
+  .sport-home-layout-page .page-sports-video .view-content .photo-list li {
     float: none;
     display: inline-block;
-    width: 170px;
+    width: 156px;
     vertical-align: top;
+    padding: 15px 6px;
   }
-  .page-sports-video .view-content .photo-list li a {
+  .sport-home-layout-page .page-sports-video .view-content .photo-list li a {
     white-space: pre-wrap;
   }
 
@@ -570,7 +609,8 @@
   .itg-layout-container .top-colum-3 .droppable,
   .itg-common-section .droppable, .sport-home-layout-page .itg-layout-615 .auto-block-1,
   .sport-home-layout-page .itg-layout-615 .auto-block-2, .sport-home-layout-page .itg-layout-615 .droppable,
-  .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable {
+  .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable, .tech-layout-page .itg-h396-section .droppable,
+  .tech-layout-page .itg-h385-section .droppable, .election-page .left-side .itg-photo .droppable {
     height: auto;
   }
 
@@ -645,6 +685,10 @@
   }
 
   /*css end special event page for osscar*/
+  .static_page_menu {
+    margin-bottom: 40px;
+  }
+
   /*css start snappost page*/
   .page-snappost .spanpost-header .spost-left {
     width: 100%;
@@ -712,6 +756,9 @@
 
   /*css end side bar section for video and photo*/
   /*CSS Starts Photo landing page*/
+  .view-video-list-of-category .view-content .photo-list, .view-photo-list-of-category .view-content .photo-list, .view-so-sorry .view-content .photo-list, .view-programme-content .view-content .photo-list, .page-sports-video .view-content .photo-list, .page-sports-photo .view-content .photo-list, .view-programme-content-live-tv .view-content .photo-list {
+    margin: 0 -10px;
+  }
   .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li, .view-programme-content-live-tv .view-content .photo-list li {
     width: 33.33333%;
     padding: 15px 10px;
@@ -835,6 +882,8 @@
   .view-archive-story .archive-header {
     border: none;
     margin: 0 -15px;
+    padding-top: 35px;
+    position: relative;
   }
   .view-archive-story .archive-header #archive-story-date-slider, .view-archive-story .archive-header .archive-calender-custom {
     float: none;
@@ -842,6 +891,8 @@
   }
   .view-archive-story .archive-header .archive-calender-custom {
     text-align: right;
+    position: absolute;
+    top: -15px;
   }
   .view-archive-story .archive-header #archive-story-date-slider {
     border-top: 1px solid #ddd;
@@ -914,6 +965,7 @@
     color: #fff;
     text-align: center;
     line-height: 23px;
+    font-size: 15px;
   }
 }
 @media only screen and (max-width: 768px) and (min-width: 768px) {
@@ -1021,27 +1073,97 @@
   }
 
   /*story page comment section*/
-  #content .story-section #other-comment #comments .comment-form .form-item {
+  #content #other-comment #comments .comment-form .form-item {
     margin: 0;
     margin-bottom: 20px;
   }
-  #content .story-section #other-comment #comments .comment-form div.description, #content .story-section #other-comment #comments .comment-form .form-type-textarea > label + div, #content .story-section #other-comment #comments .comment-form .form-actions {
+  #content #other-comment #comments .comment-form div.description, #content #other-comment #comments .comment-form .form-type-textarea > label + div, #content #other-comment #comments .comment-form .form-actions {
     padding-left: 0;
   }
-  #content .story-section #other-comment #comments .comment ul.links {
+  #content #other-comment #comments .comment ul.links {
     position: inherit;
   }
 
   /*story page comment section end*/
   /*Home page css start*/
-  .home_page_poll_widget_block .poll-data, .sport-home-layout-page .poll-data {
+  .home_page_poll_widget_block .poll-wrapper .poll-data, .sport-home-layout-page .poll-wrapper .poll-data {
     padding: 0;
   }
-  .home_page_poll_widget_block .poll-data .poll-banner-image img, .sport-home-layout-page .poll-data .poll-banner-image img {
+  .home_page_poll_widget_block .poll-wrapper .poll-data .poll-banner-image, .sport-home-layout-page .poll-wrapper .poll-data .poll-banner-image {
+    max-width: 100%;
+  }
+  .home_page_poll_widget_block .poll-wrapper .poll-data .poll-banner-image img, .sport-home-layout-page .poll-wrapper .poll-data .poll-banner-image img {
     max-width: 100%;
   }
 
   /*Home page css end*/
+  /*side bar for all pages start*/
+  .sidebars .block-itg-widget span.no-result-found {
+    margin: 30px 0;
+    width: 290px;
+  }
+
+  /*side bar for all pages end*/
+  /*election page css start*/
+  .election-page {
+    margin: 0 0px 20px 0px;
+  }
+
+  .election-page .key-candidate .list-state {
+    white-space: nowrap;
+    overflow: auto;
+  }
+  .election-page .itg-most-popular .most_popular .col-md-3:nth-child(2n+1) {
+    clear: left;
+  }
+  .election-page .left-side .itg-325-layout .droppable, .election-page .left-side .itg-415-layout .droppable, .election-page .left-side .itg-map .droppable, .election-page .left-side .itg-most-popular .droppable, .election-page .left-side .itg-photo .droppable {
+    min-height: auto;
+    height: auto;
+  }
+  .election-page .right-side .key_candidate_extra_block .droppable {
+    min-height: auto;
+    height: auto;
+  }
+
+  /*election page css end*/
+  /*Start category wise content list css*/
+  .view-category-wise-content-list .catagory-grid .col-md-3:nth-child(4n+1) {
+    clear: none;
+  }
+  .view-category-wise-content-list .catagory-grid .col-md-3:nth-child(3n+1) {
+    clear: left;
+  }
+
+  /*end category wise content list css*/
+  /*pop up big story*/
+  #block-itg-widget-big-story-format .video-slider-images .slick-slider {
+    padding: 10px 45px;
+  }
+  #block-itg-widget-big-story-format .video-slider-images .slick-prev, #block-itg-widget-big-story-format .video-slider-images .slick-next {
+    background: transparent;
+    color: #fff;
+  }
+  #block-itg-widget-big-story-format .video-slider-images .slick-prev:hover, #block-itg-widget-big-story-format .video-slider-images .slick-next:hover {
+    background: transparent;
+  }
+
+  /*pop up big story end*/
+  /*static page css start*/
+  .static-feedback-from .name-email-continer input[type="text"] {
+    width: 260px;
+    height: 40px;
+  }
+
+  /*static page css end*/
+  /*poll css start*/
+  .home_page_poll_widget_block .poll-data form .form-radios {
+    text-align: left;
+  }
+  .home_page_poll_widget_block .poll-data form .form-radios .form-item {
+    display: block;
+  }
+
+  /*poll css end*/
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/
@@ -1308,6 +1430,23 @@
     padding-bottom: 10px;
     color: #d9d9d9;
   }
+
+  .tech-layout-page .techwatch.osscar-video ul .dont-miss-listing .dm-pic {
+    width: 124px;
+  }
+  .tech-layout-page .techwatch.osscar-video ul .dont-miss-listing .dm-detail {
+    overflow: initial;
+  }
+
+  /*Start category wise content list css*/
+  .view-category-wise-content-list .catagory-grid .col-md-3:nth-child(3n+1) {
+    clear: none;
+  }
+  .view-category-wise-content-list .catagory-grid .col-md-3:nth-child(2n+1) {
+    clear: left;
+  }
+
+  /*end category wise content list css*/
 }
 @media only screen and (max-width: 640px) {
   #block-views-anchor-landing-page-block .anchor-left {
@@ -1364,6 +1503,51 @@
   }
 
   /*story page css end*/
+  /*election page css end*/
+  .election-page h1 {
+    margin-top: 20px;
+  }
+  .election-page .election-graph {
+    margin-top: -50px;
+    padding-bottom: 50px;
+  }
+  .election-page .election-graph .col-el-5 {
+    width: 100%;
+  }
+  .election-page .col-el-5.mt-50 {
+    margin-top: 0;
+  }
+
+  /*election page css end*/
+  /*static page css start*/
+  .static-feedback-from .name-email-continer input[type="text"] {
+    width: 100%;
+  }
+
+  .static-feedback-from .webform-submit-social a img {
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 10px;
+  }
+
+  .static-feedback-from .form-submit {
+    height: 40px;
+    width: 140px;
+    font-size: 16px;
+    font-weight: 300;
+  }
+
+  .static-feedback-from h1 span {
+    float: none;
+    display: block;
+    font-size: 10px;
+  }
+
+  .static-feedback-from .webform-name-field.feedback .form-textarea-wrapper, .static-feedback-from .webform-name-field.feedback label {
+    width: 100%;
+  }
+
+  /*static page css end*/
 }
 /*Start header CSS Desktop version*/
 @media only screen and (min-width: 769px) {
@@ -1626,6 +1810,7 @@
     color: #fff;
     text-align: center;
     line-height: 23px;
+    font-size: 15px;
   }
 }
 @media only screen and (min-width: 769px) and (min-width: 768px) {
@@ -1885,6 +2070,16 @@
     font-size: 1.625rem;
     font-weight: 300;
   }
+  .view-so-sorry .video-slider-images .slick-slider {
+    padding: 10px 45px;
+  }
+  .view-so-sorry .video-slider-images .slick-prev, .view-so-sorry .video-slider-images .slick-next {
+    background: transparent;
+    color: #fff;
+  }
+  .view-so-sorry .video-slider-images .slick-prev:hover, .view-so-sorry .video-slider-images .slick-next:hover {
+    background: transparent;
+  }
 
   .view-display-id-so_sorry_page {
     margin: 0;
@@ -1893,6 +2088,11 @@
     font-size: 26px;
   }
 
+  #block-itg-widget-so-sorry-front-politoons .politoons-sosorry h2 {
+    font-size: 26px;
+    font-size: 1.625rem;
+    font-weight: 300;
+  }
   #block-itg-widget-so-sorry-front-politoons .politoons-sosorry .col-md-4:nth-child(3n+1) {
     clear: left;
   }
@@ -1933,6 +2133,7 @@
     float: left;
     width: 84.5%;
     padding: 10px;
+    border: 1px solid #242424;
   }
   #block-views-video-landing-header-block .video-header-left .social-likes {
     float: left;
@@ -1961,9 +2162,31 @@
   #block-views-video-landing-header-block .video-header-left .social-likes ul li + li a {
     border-top: 1px solid #000;
   }
+  #block-views-video-landing-header-block .video-header-left .slick-slider .slick-next, #block-views-video-landing-header-block .video-header-left .slick-slider .slick-prev {
+    width: 50px;
+    height: 100px;
+    margin-top: -50px;
+  }
+  #block-views-video-landing-header-block .video-header-left .slick-slider .slick-next:before, #block-views-video-landing-header-block .video-header-left .slick-slider .slick-prev:before {
+    top: 38px;
+    font-size: 30px;
+  }
+  #block-views-video-landing-header-block .video-header-left .video-slider-images .slick-slider {
+    padding: 10px 45px;
+  }
+  #block-views-video-landing-header-block .video-header-left .video-slider-images .slick-prev, #block-views-video-landing-header-block .video-header-left .video-slider-images .slick-next {
+    background: transparent;
+    color: #fff;
+  }
+  #block-views-video-landing-header-block .video-header-left .video-slider-images .slick-prev:hover, #block-views-video-landing-header-block .video-header-left .video-slider-images .slick-next:hover {
+    background: transparent;
+  }
   #block-views-video-landing-header-block .video-header-right {
     height: 474px;
     padding-bottom: 0px;
+  }
+  #block-views-video-landing-header-block .video-header-right p:first-child {
+    margin-top: 0px;
   }
   #block-views-video-landing-header-block h2 {
     font-size: 24px;
@@ -1972,23 +2195,23 @@
 
   /*CSS end program landing page*/
   /*css start for special auto page*/
+  .auto-layout-page .auto-block-1 {
+    border: 1px solid #ddd;
+  }
   .auto-layout-page .itg-top-section .top-colum-1 .droppable, .auto-layout-page .itg-top-section .top-colum-2 .droppable {
     height: 608px;
   }
   .auto-layout-page .itg-top-section .top-colum-3 .droppable {
     height: 247px;
   }
-  .auto-layout-page .itg-h450-section .col-md-4 .droppable {
-    padding: 10px;
-    background: #f3f3f3;
-  }
-  .auto-layout-page .itg-h450-section .col-md-4 .droppable .widget-wrapper {
-    overflow: auto;
-    height: auto;
-    max-height: 100%;
-  }
 
   /*css end for special auto page*/
+  /*css for tech page start*/
+  .tech-layout-page .auto-block-1 {
+    border: 1px solid #ddd;
+  }
+
+  /*css for tech page end*/
 }
 /*End CSS Desktop version*/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {

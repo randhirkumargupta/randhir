@@ -1,16 +1,20 @@
 <?php
-  global $base_url, $user;
+global $base_url, $user;
 if (!empty($data['itg_main_manu_header'])) {
-foreach ($data['itg_main_manu_header'] as $key => $val) {
-  if (isset($val['#localized_options']['attributes']['title']) && $val['#localized_options']['attributes']['title'] == 1) {
-    $data['itg_main_manu_header'][$key]['#attributes']['class'][] = 'sponser-link';
+  foreach ($data['itg_main_manu_header'] as $key => $val) {
+    if (isset($val['#localized_options']['attributes']['title']) && $val['#localized_options']['attributes']['title'] == 1) {
+      $data['itg_main_manu_header'][$key]['#attributes']['class'][] = 'sponser-link';
+    }
   }
-}
 }
 ?>
 <div class="header-ads mhide">
  <!--   <img src="<?php //print base_path()                  ?>sites/all/themes/itg/images/header-ads.png" alt="ads"> -->
-  <?php print ($data['itg_top']['200*200_header']); ?>
+ <?php
+  if (!empty($data['itg_top']['200*200_header'])) {
+    print $data['itg_top']['200*200_header'];
+  }
+ ?>
 </div>                               
 
 <div class="head-live-tv desktop-hide">
@@ -80,8 +84,9 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
                 $sponsored_class = $menu_link_data['sponsored_class'];
                 $parent_class = $menu_link_data['parent_class'];
                 $active_cls = $menu_link_data['active_cls'];
+                $url_type = $menu_link_data['url_type'];
           ?>
-        <li class="<?php print $image_class; ?>"><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class)))); ?></li>
+        <li class="<?php print $image_class; ?>"><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)))); ?></li>
         <?php 
            }
            endforeach;

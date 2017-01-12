@@ -46,7 +46,7 @@ function itg_preprocess_node(&$variables) {
     // Add new template variation.
     $variables['theme_hook_suggestions'][] = 'node__' . $title;
     $variables['static_page_menu'] = itg_block_render('menu', 'menu-about-us-page-menu');
-    if (function_exists(global_comment_last_record)) {
+    if (function_exists('global_comment_last_record')) {
       $variables['global_comment_last_record'] = global_comment_last_record();
     }
   }
@@ -80,7 +80,7 @@ function itg_block_render($module, $block_id) {
 function itg_preprocess_comment(&$variables) {
   $comment = $variables['elements']['#comment'];
   $node = $variables['elements']['#node'];
-  if ($node->type == 'story' || $node->type == 'blog') {
+  if ($node->type == 'story' || $node->type == 'blog' || $node->type == 'photogallery' || $node->type == 'videogallery') {
     $variables['created'] = format_date($comment->created, 'custom', 'D, d/m/Y h:i');
     $variables['changed'] = format_date($comment->changed, 'custom', 'D, d/m/Y h:i');
     if ($comment->uid != 0) {

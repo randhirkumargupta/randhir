@@ -14,10 +14,10 @@
  */
 function itg_users_user_presave(&$edit, $account, $category) {
 
-  if ($edit['field_first_name'][LANGUAGE_NONE][0]['value']) {
+  if (!empty($edit['field_first_name'][LANGUAGE_NONE][0]['value'])) {
     $edit['field_first_name'][LANGUAGE_NONE][0]['value'] = trim($edit['field_first_name'][LANGUAGE_NONE][0]['value'], '. ');
   }
-  if ($edit['field_last_name'][LANGUAGE_NONE][0]['value']) {
+  if (!empty($edit['field_last_name'][LANGUAGE_NONE][0]['value'])) {
     $edit['field_last_name'][LANGUAGE_NONE][0]['value'] = trim($edit['field_last_name'][LANGUAGE_NONE][0]['value'], '. ');
   }
 }
@@ -533,7 +533,7 @@ function itg_users_tokens($type, $tokens, array $data = array(), array $options 
 function itg_users_user_update(&$edit, $account, $category) {
 
   // send mail when password is changed
-  if ($account->field_notify_user_of_update_acco[LANGUAGE_NONE][0]['value'] == '1') {
+  if (!empty($account->field_notify_user_of_update_acco[LANGUAGE_NONE][0]['value']) && $account->field_notify_user_of_update_acco[LANGUAGE_NONE][0]['value'] == '1') {
     if (!empty($edit['pass'])) {
       $role = 'Your Password has been updated';
       $mail_content = itg_users_get_mail_content($role);
@@ -557,7 +557,7 @@ function itg_users_user_update(&$edit, $account, $category) {
   }
 
   // send mail whe role is changed
-  if ($account->field_notify_user_of_update_acco[LANGUAGE_NONE][0]['value'] == '1') {
+  if (!empty($account->field_notify_user_of_update_acco[LANGUAGE_NONE][0]['value']) && $account->field_notify_user_of_update_acco[LANGUAGE_NONE][0]['value'] == '1') {
 
     $user_intersec = array_diff_key($account->roles, $account->original->roles);
 
@@ -591,7 +591,7 @@ function itg_users_user_update(&$edit, $account, $category) {
   }
 
   // send mail when user select notification chekbox
-  if ($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == '1') {
+  if (!empty($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value']) && $account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == '1') {
 
     $news_info = 'You have sucessfully subscribed for India Today newsletters.';
     $mail_content = itg_users_get_mail_content($news_info);

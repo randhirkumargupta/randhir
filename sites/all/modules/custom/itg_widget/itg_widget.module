@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * itg_widget.module
@@ -309,9 +308,9 @@ function itg_widget_block_info() {
     'info' => t('Live Score')
   );
   $blocks['cheaper_dearer'] = array(
-   'info' => t('Widget : Cheaper Dearer from custom table')
-  ); 
-  
+    'info' => t('Widget : Cheaper Dearer from custom table')
+  );
+
   return $blocks;
 }
 
@@ -381,9 +380,6 @@ function itg_widget_block_view($delta = '') {
     // Top story ordering reordering widget case
     case 'top_stories_ordering':
 //      module_load_include('inc', 'itg_widget', 'includes/section-odering');
-//      $info['view_name'] = 'story_widget'; // view name
-//      $info['page'] = 'page_2'; // page name
-//      $info['nodequeue'] = 'top_stories';
       $info['widget'] = 'top_stories_widget';
       $info['max_limit'] = TOP_STORIES_LIMIT;
       $info['min_limit'] = TOP_STORIES_MIN_RANGE;
@@ -393,11 +389,6 @@ function itg_widget_block_view($delta = '') {
       break;
     // Top story ordering reordering widget case
     case 'most_popular':
-//     module_load_include('inc', 'itg_widget', 'includes/itg_widget_most_popular');
-//      $info['view_name'] = 'story_widget'; // view name
-//      $info['page'] = 'most_popular_widget'; // page name
-//      $info['nodequeue'] = 'most_popular';
-//      $data = itg_widget_most_popular_ordering_data($info);
       $info['widget'] = 'most_popular_widget';
       $info['order'] = 'ASC';
       $info['max_limit'] = MOST_POPULAR_MAX_RANGE;
@@ -407,7 +398,6 @@ function itg_widget_block_view($delta = '') {
       break;
     // Top story ordering reordering widget case
     case 'dont_miss':
-      //module_load_include('inc', 'itg_widget', 'includes/itg_widget_dont_miss');
       $info['widget'] = 'dont_miss_content_widget';
       $info['order'] = 'ASC';
       $info['max_limit'] = DONT_MISS_MAX_RANGE;
@@ -438,7 +428,6 @@ function itg_widget_block_view($delta = '') {
       break;
     // Trending videos ordering reordering widget case
     case 'trending_videos_widget':
-      //module_load_include('inc', 'itg_widget', 'includes/itg_widget_trending_videos_widget');
       $info['widget'] = 'trending_videos_widget';
       $info['order'] = 'ASC';
       $info['max_limit'] = TREANDING_VIDEO_MAX_RANGE;
@@ -884,7 +873,7 @@ function itg_widget_block_view($delta = '') {
 
       $block['content'] = theme("live_score_data", array("data" => $data));
       break;
-     case 'cheaper_dearer':
+    case 'cheaper_dearer':
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_budget_predictor');
       $data = itg_budget_predictor_cheaper_dearer_data();
       $block['content'] = $data;
@@ -996,15 +985,74 @@ function itg_widget_remove_unpublised_node() {
  * @return string $content
  */
 function itg_get_video_display_for_big_story($nid) {
-  $node = node_load($nid);
-  if (module_exists('itg_videogallery')) {
-    $fid = $node->field_upload_video['und'][0]['fid'];
-    $vid = itg_videogallery_get_videoid($fid);
+  print '<div class="big-story-popup"><span id="close-big-story"><a href="#">X</a></span>';
+  itg_widget_dailymotion_get_videogallery_slider($nid);
+  print '</div>';
+//  $node = node_load($nid);
+//  if (module_exists('itg_videogallery')) {
+//    $fid = $node->field_upload_video['und'][0]['fid'];
+//    $vid = itg_videogallery_get_videoid($fid);
+//  }
+//  $content = '<span id="close-big-story"><a href="#">X</a></span>
+//    <iframe frameborder="0"
+//            src="https://www.dailymotion.com/embed/video/' . $vid . '?autoplay=0&mute=1&ui-start-screen-info"
+//            allowfullscreen>
+//   </iframe>
+//  ';
+//  print $content;
+}
+
+/**
+ * Function returns videogallery iframe slider.
+ * @param int $nid
+ */
+
+function itg_widget_dailymotion_get_videogallery_slider($nid , $type = 'gallery') {
+  $videoids = "";
+  print '<div class="videogallery-slider slider-for-nid-'.$nid.'">';
+  if (function_exists('get_video_in_fieldcollection_by_nid')) {
+    $videoids = get_video_in_fieldcollection_by_nid($nid);
   }
-  $content = '<span id="close-big-story"><a href="#">X</a></span><iframe frameborder="0"
-            src="https://www.dailymotion.com/embed/video/' . $vid . '?autoplay=0&mute=1&ui-start-screen-info"
-            allowfullscreen></iframe>';
-  print $content;
+  if (!empty($videoids)) {
+    $hide_player = "";
+    $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images"><ul>';
+    foreach ($videoids as $keys => $video_value) {
+      if ($keys != 0) {
+        $hide_player = 'hide-player';
+      }
+      ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->video_id; ?>"><?php
+      if ($video_value->dailymotion_thumb_url != "") {
+        $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $video_value->dailymotion_thumb_url . '" height="66" width="88"></li>';
+      }
+      else {
+        $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/default_for_all.png" height="66" width="88"></li>';
+      }
+      $ads_flag = 0;
+      if ($video_value->field_include_ads_value == 'yes') {
+        $ads_flag = 1;
+      }
+      ?>
+        <div class="iframe-video">
+          <iframe class='iframe-video-dailymotion' frameborder="0"
+                  src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=0&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
+                  allowfullscreen></iframe>
+        </div>
+        <?php
+        if($type != 'video')
+        {
+               print ucfirst($video_value->field_videogallery_description_value);
+        }
+      ?>
+      </div>
+
+      <?php
+    }
+    $newimageds.='</ul></div></div></div>';
+  }
+  print '</div>';
+  if (count($videoids) > 1) {
+      print $newimageds;
+    }
 }
 
 /**
@@ -1121,25 +1169,24 @@ function itg_widget_get_required_node_data_for_widget($nid) {
  * @param string $widget_name
  * @param int $nid
  */
-function itg_widget_delete_data_from_widget($widget_name, $nid = 0 , $stateid = 0 , $cat_id = 0) {
+function itg_widget_delete_data_from_widget($widget_name, $nid = 0, $stateid = 0, $cat_id = 0) {
   try {
     $query = db_delete('itg_widget_order');
     $query->condition('widget', $widget_name);
-    
+
     if ($nid) {
       $query->condition('nid', $nid);
     }
-    
-    if($stateid) {
+
+    if ($stateid) {
       $query->condition('state', $stateid);
     }
-    
-    if($cat_id) {
+
+    if ($cat_id) {
       $query->condition('cat_id', $cat_id);
     }
-    
+
     $query->execute();
-    
   } catch (Exception $ex) {
     watchdog($widget_name, $ex->getMessage());
   }
@@ -1151,7 +1198,7 @@ function itg_widget_delete_data_from_widget($widget_name, $nid = 0 , $stateid = 
  * @param string $widget_name
  * @param string $category_tid
  */
-function itg_widget_insert_widget_data($node, $widget_name, $category_tid, $extra = NULL , $state = NULL) {
+function itg_widget_insert_widget_data($node, $widget_name, $category_tid, $extra = NULL, $state = NULL) {
   try {
     $max_weight = get_min_weight_for_special($widget_name);
     $node_load_data = itg_widget_get_required_node_data_for_widget($node);
@@ -1195,14 +1242,15 @@ function itg_widget_check_node_in_widget($nid, $widget) {
  * Implement function for get primary category
  * @param int $nid
  */
-function itg_widget_get_primary_cat($nid){
+function itg_widget_get_primary_cat($nid) {
   $query = db_select('field_data_field_primary_category', 'primary_cat');
-  $query ->fields('primary_cat', array('field_primary_category_value'));
-  $query -> condition('primary_cat.entity_id', $nid, '=');
-  $query -> condition('primary_cat.bundle', 'story', '=');
+  $query->fields('primary_cat', array('field_primary_category_value'));
+  $query->condition('primary_cat.entity_id', $nid, '=');
+  $query->condition('primary_cat.bundle', 'story', '=');
   $result = $query->execute()->fetchField();
   return $result;
 }
+
 /**
  * Function to delete nodes from widget and nodequeue.
  * @param int $nid
@@ -1308,10 +1356,16 @@ function itg_widget_insert_widget_data_by_min_weight($node, $widget_name, $categ
  * @param string $type
  * @return int
  */
-function get_min_weight_for_special($type) {
+function get_min_weight_for_special($type , $cat_id = 0 , $extra = 0) {
   $max_query = db_select('itg_widget_order');
   $max_query->addExpression('MIN(weight)');
   $max_query->condition('widget', $type);
+  if(is_numeric($cat_id) && $cat_id) {
+    $max_query->condition('cat_id', $cat_id);
+  }
+  if($extra!=0 && isset($extra)) {
+    $max_query->condition('extra', $extra);
+  }
   $max_result = $max_query->execute()->fetchField();
   return isset($max_result) ? $max_result : 1;
 }
@@ -1492,94 +1546,3 @@ function itg_widget_get_widget_data_data($info) {
 function itg_widget_form_views_form_section_wise_content_ordering_list_page_alter(&$form, &$form_state, $form_id) {
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data";
 }
-
-/**
- * Implements hook_form_FORM_ID_alter().
- *
- * {@inheritdoc}
- */
-//function itg_widget_form_views_form_story_widget_trending_videos_widget_alter(&$form, &$form_state, $form_id) {
-//  $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
-//}
-
-/**
- * Implements hook_form_FORM_ID_alter().
- *
- * {@inheritdoc}
- */
-//function itg_widget_form_views_form_story_widget_most_popular_widget_alter(&$form, &$form_state, $form_id) {
-//  $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
-//}
-
-/**
- * Implements hook_form_FORM_ID_alter().
- *
- * {@inheritdoc}
- */
-//function itg_widget_form_views_form_story_widget_top_takes_video_widget_alter(&$form, &$form_state, $form_id) {
-//  $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
-//}
-
-/**
- * Implements hook_form_FORM_ID_alter().
- *
- * {@inheritdoc}
- */
-//function itg_widget_form_views_form_story_widget_watch_right_now_widget_alter(&$form, &$form_state, $form_id) {
-//  $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
-//}
-
-/**
- * Implements hook_form_FORM_ID_alter().
- *
- * {@inheritdoc}
- */
-//function itg_widget_form_views_form_story_widget_page_2_alter(&$form, &$form_state, $form_id) {
-//  $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
-//}
-
-/**
- * Implements hook_form_FORM_ID_alter().
- *
- * {@inheritdoc}
- */
-//function itg_widget_form_views_form_home_page_feature_widget_page_2_alter(&$form, &$form_state, $form_id) {
-//  $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
-//}
-
-/**
- * Implements hook_form_FORM_ID_alter().
- *
- * {@inheritdoc}
- */
-//function itg_widget_form_views_form_photo_carousel_widget_photo_carousel_alter(&$form, &$form_state, $form_id) {
-//  $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
-//}
-
-/**
- * Implements hook_form_FORM_ID_alter().
- *
- * {@inheritdoc}
- */
-//function itg_widget_form_views_form_photo_carousel_widget_video_carousel_alter(&$form, &$form_state, $form_id) {
-//  $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
-//}
-
-/**
- * Implements hook_form_FORM_ID_alter().
- *
- * {@inheritdoc}
- */
-//function itg_widget_form_views_form_widget_anchors_listing_anchors_listing_widget_alter(&$form, &$form_state, $form_id) {
-//  $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
-//}
-
-/**
- * Implements hook_form_FORM_ID_alter().
- *
- * {@inheritdoc}
- */
-//function itg_widget_form_views_form_section_wise_content_ordering_list_we_may_suggest_widget_alter(&$form, &$form_state, $form_id) {
-//  $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_we_may_suggest";
-//}
-

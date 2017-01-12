@@ -142,7 +142,7 @@ function event_backend_strongarm() {
           'weight' => '15',
         ),
         'title' => array(
-          'weight' => '1',
+          'weight' => '33',
         ),
         'path' => array(
           'weight' => '16',
@@ -151,10 +151,10 @@ function event_backend_strongarm() {
           'weight' => '17',
         ),
         'domain' => array(
-          'weight' => '18',
+          'weight' => '8',
         ),
         'redirect' => array(
-          'weight' => '30',
+          'weight' => '9',
         ),
       ),
       'display' => array(

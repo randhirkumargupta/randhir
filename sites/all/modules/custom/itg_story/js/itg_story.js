@@ -8,6 +8,7 @@
         attach: function(context, settings) {
             var uid = settings.itg_story.settings.uid;
             $(".form-item-field-story-configurations-und-breaking-news").hide('');
+            $("label[for='edit-field-story-configurations-und-tv']").html("Associate Story with TV");
             // enable check box of developing story based on condition 
             var longheadline = $('#edit-title').val();
             
@@ -17,7 +18,8 @@
             
             $("#edit-title").on('keyup blur', function () {
                 if (this.value != '') {
-                   
+                    $('#edit-field-story-long-head-line-und-0-value').val(this.value);
+                    $('#edit-field-story-short-headline-und-0-value').val(this.value);
                     $('#breaking_text').removeAttr('disabled');
                 }
                 else {
@@ -159,17 +161,6 @@
                 }
             });
 
-            // code to copy story longheadline to story title
-            $('#edit-title').on('keyup keypress blur change', function(e) {
-                $('#edit-field-story-long-head-line-und-0-value').val($('#edit-title').val());
-            });
-
-            $('#edit-title').on('keyup keypress blur change', function(e) {
-                $('#edit-field-story-short-headline-und-0-value').val($('#edit-title').val());
-            });
-
-            $('#edit-field-story-long-head-line-und-0-value').val($('#edit-title').val());
-            $('#edit-field-story-short-headline-und-0-value').val($('#edit-title').val());
             $('#edit-field-facebook-gallery-associate-und-0-remove-button').hide();
 
             // Code issue date exit or not.

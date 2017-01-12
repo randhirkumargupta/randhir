@@ -533,7 +533,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     'views_form_section_wise_draggable_content_order_we_may_suggest_widget',
     'views_form_section_wise_draggable_content_order_page',
   );
-  
+
   if (in_array($form_id, $form_id_array_to_alter)) {
     $form['actions']['submit']['#value'] = t('Confirm');
   }
@@ -566,7 +566,8 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     drupal_add_css('.views-widget-filter-field_story_syndication_value_1 , .views-widget-filter-field_story_syndication_value {display:inline-block !important;}', array('type' => 'inline'));
 
     $url_chunk = explode("?", $_SERVER['REQUEST_URI']);
-    $url_without_query_string = end(explode('/', $url_chunk[0]));
+    $url_chunk_array = explode('/', $url_chunk[0]);
+    $url_without_query_string = end($url_chunk_array);
 
     $form['reset'] = array(
       '#type' => 'markup',
@@ -667,8 +668,8 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'page_node_form') {
     drupal_add_css("div.form-item-field-page-section-und {display:none}", 'inline');
   }
-  
-  if(in_array($form_id, itg_widget_order_reorder_form())) {
+
+  if (in_array($form_id, itg_widget_order_reorder_form())) {
     $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
   }
 // Assign deafult values in case of checkbox are checked.
@@ -706,34 +707,33 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
 // Form id which will use session value.
 // Session value is set by ajax.
 // Extra funtionality to display nodeid with cross.
-  $form_to_used_session_checked = forms_uses_checked_content_id();
-  if (in_array($form['#form_id'], $form_to_used_session_checked)) {
-// $form_state['selection'] value is set by bulk operation submit.
-// Only selected nodes are come in $form_state['selection'] array.
-// Here we are forcely changing the array.
-// for big story we are using single selection so skip for big story.
-    $form_state['selection'] = $_SESSION[$form['#form_id']];
-    $form_state['values']['views_bulk_operations'] = $form_state['selection'];
-    $form['actions']['submit']['#submit'][] = "itg_widget_custom_session_destory";
-    $end_value = end($_SESSION[$form['#form_id']]);
-    $form['views_bulk_operations'][] = array(
-      '#attributes' => array("class" => array('handle-unckeck-on-page')),
-      '#return_value' => end($_SESSION[$form['#form_id']]),
-      '#default_value' => !empty($end_value) ? $end_value : NULL,
-      '#type' => 'checkbox',
-      '#prefix' => '<div style=\'display:none\'>',
-      '#suffix' => '</div>',
-    );
-  }
-
+//  $form_to_used_session_checked = forms_uses_checked_content_id();
+//  if (in_array($form['#form_id'], $form_to_used_session_checked)) {
+//// $form_state['selection'] value is set by bulk operation submit.
+//// Only selected nodes are come in $form_state['selection'] array.
+//// Here we are forcely changing the array.
+//// for big story we are using single selection so skip for big story.
+//    $form_state['selection'] = $_SESSION[$form['#form_id']];
+//    $form_state['values']['views_bulk_operations'] = $form_state['selection'];
+//    $form['actions']['submit']['#submit'][] = "itg_widget_custom_session_destory";
+//    $end_value = end($_SESSION[$form['#form_id']]);
+//    $form['views_bulk_operations'][] = array(
+//      '#attributes' => array("class" => array('handle-unckeck-on-page')),
+//      '#return_value' => end($_SESSION[$form['#form_id']]),
+//      '#default_value' => !empty($end_value) ? $end_value : NULL,
+//      '#type' => 'checkbox',
+//      '#prefix' => '<div style=\'display:none\'>',
+//      '#suffix' => '</div>',
+//    );
+//  }
 // Add a node id contianer just below the bulk operation.
   if (isset($form['select']['action::nodequeue_add_action'])) {
-    $form['select']['action::nodequeue_add_action']['#suffix'] = '<div class="nodes_id_container" id="nodes_id_container"></div>';
+    //$form['select']['action::nodequeue_add_action']['#suffix'] = '<div class="nodes_id_container" id="nodes_id_container"></div>';
   }
 
   if (isset($form['select']['action::itg_widget_categories_wise_node_group'])) {
 
-    $form['select']['action::itg_widget_categories_wise_node_group']['#suffix'] = '<div class="nodes_id_container" id="nodes_id_container"></div>';
+    //$form['select']['action::itg_widget_categories_wise_node_group']['#suffix'] = '<div class="nodes_id_container" id="nodes_id_container"></div>';
 //    $form['select']['action::itg_widget_categories_wise_node_group']['#ajax'] = array(
 //      'callback' => "itg_widget_categories_wise_node_group_submit",
 //      'wrapper' => "edit-actionitg-widget-categories-wise-node-group",
@@ -823,25 +823,25 @@ function forms_uses_checked_content_id() {
  * @return array
  */
 function get_sessions_of_ticked_nodes(&$form) {
-  if (isset($form['views_bulk_operations'])) {
-    foreach ($form['views_bulk_operations'] as $key => $form_node_data) {
-      if (in_array($form_node_data['#return_value'], $_SESSION[$form['#form_id']])) {
-        $form['views_bulk_operations'][$key]['#attributes']['class'][] = 'custom-selected';
-        $form['views_bulk_operations'][$key]['#default_value'] = $form_node_data['#return_value'];
-      }
-    }
-    drupal_add_js('jQuery(window).load(function() {
-            var sessionids="' . implode($_SESSION[$form['#form_id']], ',') . '";
-                if(sessionids!="")
-                {
-                sessionids=sessionids.split(",");
-                }
-                jQuery.each(sessionids, function( index, value ) {
-                jQuery(".nodes_id_container").append("<span id=spn_"+value+" class=content-ids>"+value+"<a class=removeid cid="+value+" href=javascript:void(0)>X</a></span>");});
-                
-            });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-    );
-  }
+//  if (isset($form['views_bulk_operations'])) {
+//    foreach ($form['views_bulk_operations'] as $key => $form_node_data) {
+//      if (in_array($form_node_data['#return_value'], $_SESSION[$form['#form_id']])) {
+//        $form['views_bulk_operations'][$key]['#attributes']['class'][] = 'custom-selected';
+//        $form['views_bulk_operations'][$key]['#default_value'] = $form_node_data['#return_value'];
+//      }
+//    }
+//    drupal_add_js('jQuery(window).load(function() {
+//            var sessionids="' . implode($_SESSION[$form['#form_id']], ',') . '";
+//                if(sessionids!="")
+//                {
+//                sessionids=sessionids.split(",");
+//                }
+//                jQuery.each(sessionids, function( index, value ) {
+//                jQuery(".nodes_id_container").append("<span id=spn_"+value+" class=content-ids>"+value+"<a class=removeid cid="+value+" href=javascript:void(0)>X</a></span>");});
+//                
+//            });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+//    );
+//  }
 
   return $form;
 }
@@ -1254,7 +1254,6 @@ function autocomplete_for_year_end_widgets() {
   }
 }
 
-
 /**
  * Implements hook_views_api().
  *
@@ -1442,16 +1441,12 @@ function itg_widget_views_query_alter(&$view, &$query) {
   }
 
   if ($view->name == 'yearender_top_news_and_top_videos' && $view->current_display == 'yearend_left_widget_contents') {
-    if (!empty($_GET['nid']) && empty($_GET['title'])) {
-      $query->where[1]['conditions'][4]['value'] = variable_get('year_end_for_widget');
-    } if (empty($_GET['nid']) && !empty($_GET['title'])) {
-      $query->where[1]['conditions'][4]['value'] = variable_get('year_end_for_widget');
-    }
-    else if (!empty($_GET['nid']) && !empty($_GET['title'])) {
-      $query->where[1]['conditions'][5]['value'] = variable_get('year_end_for_widget');
-    }
-    else if (empty($_GET['nid']) && empty($_GET['title'])) {
-      $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+    if (!empty($query->where[1]['conditions'])) {
+      foreach ($query->where[1]['conditions'] as $key => $condition) {
+        if ($query->where[1]['conditions'][$key]['field'] == 'taxonomy_index.tid') {
+          $query->where[1]['conditions'][$key]['value'] = variable_get('year_end_for_widget');
+        }
+      }
     }
   }
   if ($view->name == 'key_candidate' && $view->current_display == 'special_key_candidate_widget_contents') {
@@ -1651,7 +1646,8 @@ function get_nodequeue_load_queue_by_name($qname) {
   try {
     $node_queue_object = nodequeue_load_queue_by_name($qname);
     return isset($node_queue_object->qid) ? $node_queue_object->qid : null;
-  } catch (Exception $e) {
+  }
+  catch (Exception $e) {
     watchdog('Node Queue Error/Warning', 'There is some error while accessing node queue');
   }
 }
@@ -2001,9 +1997,18 @@ function get_view_nodes_form_custom_table_for_widgets_by_category($widget_name, 
  * @return array
  */
 function get_view_nodes_form_custom_table_for_widgets_special($widget_name, $cat_id, $range_max, $range_min = 0, $order_by = 'ASC') {
-  $query = db_select('itg_widget_order', 'iwo');
+//  
+  $query = db_select('itg_widget_order', 'iwo'); //
   $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
   $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
+  //join  for field value
+  $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
+  $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
+  $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
+  $query->fields('si_file', array('uri'));
+  $query->fields('vd', array('field_video_duration_value'));
+  $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
+  //end
   $query->condition('iwo.widget', $widget_name)
       ->condition('n.status', 1)
       ->condition('tx.tid', $cat_id)
@@ -2012,26 +2017,7 @@ function get_view_nodes_form_custom_table_for_widgets_special($widget_name, $cat
       ->range($range_min, $range_max)
       ->fields('iwo', array('nid', 'extra', 'weight'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
-  $weight = 0;
-  foreach ($result as $data) {
-    $weight +=$data['weight'];
-  }
-  if ($weight > 0) {
-    return $result;
-  }
-  else {
-// Query for renctaly careated node if weight is not saved
-    $query = db_select('itg_widget_order', 'iwo');
-    $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
-    $query->condition('iwo.widget', $widget_name)
-        ->condition('n.status', 1)
-        ->orderBy('n.nid', 'DESC')
-        ->range($range_min, $range_max)
-        ->fields('iwo', array('nid', 'extra', 'weight'));
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    return $result;
-  }
+  return $result;
 }
 
 /**
@@ -2167,6 +2153,7 @@ function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name,
  * {@inheritdoc}
  */
 function itg_widget_block_view_alter(&$data, $block) {
+
   $item = menu_get_item();
   $flag_occupation = $story_category = $occupation = array();
   $ipl_category = array();
@@ -2333,12 +2320,19 @@ function itg_widget_so_sorry_content_nid($title) {
  */
 
 function get_homepage_current_poll_widget($content_type, $widget_name) {
+  $ctype = $content_type;
+  $cur_date = date('Y-m-d H:i:s');
   $nodes_already = db_select('itg_widget_order', 'iwo');
   $nodes_already->Join('node', 'n', 'iwo.nid=n.nid');
+  $nodes_already->leftjoin('field_data_field_"' . $ctype . '"_start_date', 'sd', 'n.nid = sd.entity_id');
+  $nodes_already->leftjoin('field_data_field_"' . $ctype . '"_end_date', 'ed', 'n.nid = ed.entity_id');
   $nodes_already->fields('iwo', array('nid'));
   $nodes_already->condition('iwo.content_type', $content_type)
       ->condition('iwo.widget', $widget_name)
       ->condition('n.status', 1);
+  $nodes_already->condition('sd.field_"' . $ctype . '"_start_date_value', $cur_date, '<=');
+  $nodes_already->condition(db_or()->isNull('ed.field_"' . $ctype . '"_end_date_value')->condition('ed.field_"' . $ctype . '"_end_date_value', $cur_date, '>='));
+
   $res = $nodes_already->execute()->fetch();
   if (isset($res->nid) && !empty($res->nid)) {
     return $res->nid;
@@ -2351,45 +2345,47 @@ function get_homepage_current_poll_widget($content_type, $widget_name) {
  * @param type $nid
  */
 function itg_poll_home_page_polls_select($nid) {
-  $node = node_load($nid);
-  $poll_banner_image = '';
-  $fieldcollect = array();
-  if (isset($node->field_poll_banner) && !empty($node->field_poll_banner)) {
-    $poll_banner_image = theme('image_style', array('style_name' => 'home_page_poll_images_style', 'path' => $node->field_poll_banner[$node->language][0]['uri']));
-  }
-  else {
+  if (isset($nid)) {
+    $node = node_load($nid);
     $poll_banner_image = '';
-  }
-
-  $poll_image_exist_class = '';
-  if (isset($node->field_poll_answer['und'])) {
-    foreach ($node->field_poll_answer['und'] as $row) {
-      $item_id[] = $row['value']; // fieldcollection id
-    }
-  }
-// instant or after complete
-  if (!empty($item_id) && isset($item_id)) {
-    $fieldcollect = entity_load('field_collection_item', $item_id);
-  }
-  if (is_array($fieldcollect) && count($fieldcollect) > 0) {
-    $temp_ent = array_shift(array_slice($fieldcollect, 0, 1));
-    $poll_answer_image = isset($temp_ent->field_poll_answer_image[LANGUAGE_NONE]) ? $temp_ent->field_poll_answer_image[LANGUAGE_NONE][0]['fid'] : '';
-    if (isset($poll_answer_image) && $poll_answer_image > 0) {
-      $poll_image_exist_class = 'poll-option-image';
+    $fieldcollect = array();
+    if (isset($node->field_poll_banner) && !empty($node->field_poll_banner)) {
+      $poll_banner_image = theme('image_style', array('style_name' => 'home_page_poll_images_style', 'path' => $node->field_poll_banner[$node->language][0]['uri']));
     }
     else {
-      $poll_image_exist_class = '';
+      $poll_banner_image = '';
     }
+
+    $poll_image_exist_class = '';
+    if (isset($node->field_poll_answer['und'])) {
+      foreach ($node->field_poll_answer['und'] as $row) {
+        $item_id[] = $row['value']; // fieldcollection id
+      }
+    }
+// instant or after complete
+    if (!empty($item_id) && isset($item_id)) {
+      $fieldcollect = entity_load('field_collection_item', $item_id);
+    }
+    if (!empty($fieldcollect) && is_array($fieldcollect) && count($fieldcollect) > 0) {
+      $temp_ent = array_shift(array_slice($fieldcollect, 0, 1));
+      $poll_answer_image = isset($temp_ent->field_poll_answer_image[LANGUAGE_NONE]) ? $temp_ent->field_poll_answer_image[LANGUAGE_NONE][0]['fid'] : '';
+      if (isset($poll_answer_image) && $poll_answer_image > 0) {
+        $poll_image_exist_class = 'poll-option-image';
+      }
+      else {
+        $poll_image_exist_class = '';
+      }
+    }
+    $polls_info['poll_banner_image'] = $poll_banner_image;
+    $polls_info['nid'] = isset($nid) ? $nid : "";
+    $polls_info['title'] = isset($node->title) ? t(substr(check_plain($node->title), 0, 65)) . '..' : "";
+    $polls_info['updated'] = isset($node->changed) ? t('Updated: ') . date('M d Y H:i', $node->changed) : "";
+    $polls_info['poll_image_exist_class'] = $poll_image_exist_class;
+    return theme('itg_poll_homepage_forms', array('data' => $polls_info));
   }
-
-
-  $polls_info['poll_banner_image'] = $poll_banner_image;
-  $polls_info['nid'] = isset($nid) ? $nid : "";
-  $polls_info['title'] = isset($node->title) ? $node->title : "";
-  $polls_info['updated'] = isset($node->changed) ? t('Updated: ') . date('M d Y H:i', $node->changed) : "";
-  $polls_info['poll_image_exist_class'] = $poll_image_exist_class;
-
-  return theme('itg_poll_homepage_forms', array('data' => $polls_info));
+  else {
+    return '<span class="no-result-found">' . t("Content Not Found") . '</span>';
+  }
 }
 
 /**
@@ -2683,8 +2679,6 @@ function insert_all_node_in_widegt_table() {
 //  } catch (Exception $ex) {
 //    drupal_set_message($ex->getMessage());
 //  }
-
-
 //    $nodes = db_select('node', 'n')
 //                    ->fields('n', array('nid'))
 //                    ->condition('n.type', array('story', 'photogallery', 'videogallery'), "IN")
@@ -2749,7 +2743,7 @@ function get_max_weight($tid, $type) {
   $max_query->condition('widget', 'section_wise_widget');
   $max_result = $max_query->execute()->fetchField();
   return $max_result;
-} 
+}
 
 /**
  * Function returns max weight of perticular content type.
@@ -2836,7 +2830,8 @@ function manage_widget_order_during_node_update($nid, $category_tid, $node_type)
             'extra' => "",
           ))
           ->execute();
-    } catch (Exception $ex) {
+    }
+    catch (Exception $ex) {
       drupal_set_message($ex->getMessage());
     }
   }
@@ -2977,6 +2972,7 @@ function itg_widget_get_site_hash_from_solr($site_prefix) {
     return isset($site_hash[$site_prefix]) ? $site_hash[strtolower($site_prefix)] : $site_hash['dev'];
   }
 }
+
 /**
  * Function to get data from solr.
  * @param int $entity_id

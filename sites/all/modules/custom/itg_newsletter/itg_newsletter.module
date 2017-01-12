@@ -94,7 +94,7 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id) {
 
   // Set destination for newsletter form
   if ($form_id == 'newsletter_node_form') {
-  
+
     // Modify content id(show content id only instead of title and content id)
     if (arg(0) == 'node' && arg(2) == 'edit') {
       for ($delta_counter = 0; $delta_counter <= $form['field_newsl_add_news']['und']['#max_delta']; $delta_counter++) {
@@ -114,7 +114,7 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => 21,
       '#value' => t('Cancel'),
     );
-    
+
     $form['actions']['submit']['#value'] = 'Publish';
     unset($form['title']);
     unset($form['field_newsl_website_name']);
@@ -309,37 +309,36 @@ function itg_newsletter_form_views_exposed_form_alter(&$form, &$form_state, $for
   }
 }
 
-
 /**
  * Function to validate expose form
  * {@inheritdoc}
  */
 function itg_newsletter_shedule_date_validate($form, &$form_state) {
-  
-  if($form['#id'] == 'views-exposed-form-manage-newsletter-page') {
+
+  if ($form['#id'] == 'views-exposed-form-manage-newsletter-page') {
     $min = $form_state['values']['date_filter']['min'];
     $max = $form_state['values']['date_filter']['max'];
-    
-    if(!empty($min) && empty($max)) {
+
+    if (!empty($min) && empty($max)) {
       form_set_error('date_filter', 'Please select End date.');
     }
-    
-    if(!empty($max) && empty($min)) {
+
+    if (!empty($max) && empty($min)) {
       form_set_error('date_filter', 'Please select Start date.');
     }
-    
-    if(!empty($min) && !empty($max) && (strtotime($min)> strtotime($max))) {
+
+    if (!empty($min) && !empty($max) && (strtotime($min) > strtotime($max))) {
       form_set_error('date_filter', 'Start date can\'t be greater then End date.');
     }
     // Reset button handling
-    if(!empty($form_state['clicked_button']['#value']) && $form_state['clicked_button']['#value'] == 'Reset') {
+    if (!empty($form_state['clicked_button']['#value']) && $form_state['clicked_button']['#value'] == 'Reset') {
       // Remove error message
       drupal_get_messages("error");
       drupal_goto('manage-newsletter');
     }
-    
   }
 }
+
 /**
  * Implementation of hook_node_presave
  * {@inheritdoc}
@@ -348,6 +347,19 @@ function itg_newsletter_node_presave($node) {
   if ($node->type == 'newsletter') {
     $template_title = itg_common_get_node_title($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
     $node->title = $template_title;
+    $arg = arg();
+    //field_newsl_schedule
+    if (($node->field_newsl_newsletter_type['und'][0]['value'] == 'automatic' || ($node->field_newsl_newsletter_type['und'][0]['value'] == 'manual' && $node->field_newsl_schedule['und'][0]['value'] == 'now')
+        ) && $arg[2] == 'edit') {
+      $date = date('Y-m-d 00:00:00');
+      $survery_date = $node->field_survey_start_date['und'][0]['value'];
+      // Survey start time is less then current date than update the time.
+      // Otherwise keep saved time.
+      if (strtotime($date) > strtotime($survery_date)) {
+        $node->field_survey_start_date['und'][0]['value'] = $date;
+        $node->field_survey_start_date['und'][0]['value2'] = $date;
+      }
+    }
   }
 }
 
@@ -530,12 +542,12 @@ function itg_newsletter_node_validate($node, $form, &$form_state) {
         $story_id = $news['field_news_cid'][LANGUAGE_NONE][0]['target_id'];
         $story_status = itg_common_get_story_status($story_id);
         if ($story_status != 'published' && $story_id != 'A') {
-          if(empty($story_id)) {
-              form_set_error('field_news_cid', t('Please enter valid and published Content ID for Title @titlenum.', array('@titlenum' => $i)));
-          } else {
-              form_set_error('field_news_cid' . $story_id, t('Content Id <strong>@contentid</strong> is not published.', array('@contentid' => $story_id)));
+          if (empty($story_id)) {
+            form_set_error('field_news_cid', t('Please enter valid and published Content ID for Title @titlenum.', array('@titlenum' => $i)));
           }
-        
+          else {
+            form_set_error('field_news_cid' . $story_id, t('Content Id <strong>@contentid</strong> is not published.', array('@contentid' => $story_id)));
+          }
         }
       }
       $i++;
@@ -632,7 +644,7 @@ function itg_newsletter_send_automatic_newsletter() {
   // Include newsletter mail file to send mail
   module_load_include('inc', 'itg_newsletter', 'includes/newsletter_mail');
 
-  // For manual
+  // For manual get ids of latter newsletter.
   $query = db_select('itg_cron_newsletter', 'cn');
   $query->fields('cn')
       ->condition('cn.status', 0, '=')
@@ -643,12 +655,13 @@ function itg_newsletter_send_automatic_newsletter() {
   while ($record = $result->fetchAssoc()) {
     $manual_nids[] = $record['nid'];
   }
-
-  // Send manual mail in case of later
+  // Send manual mail in case of later.
   if (!empty($manual_nids)) {
     foreach ($manual_nids as $nids) {
       $node = node_load($nids);
-      itg_send_mail_newsletter($node, 'automatically');
+      if (!empty($node)) {
+        itg_send_mail_newsletter($node, 'automatically');
+      }
     }
   }
 
@@ -668,7 +681,9 @@ function itg_newsletter_send_automatic_newsletter() {
   if (!empty($automatic_nids)) {
     foreach ($automatic_nids as $auto_nids) {
       $node_auto = node_load($auto_nids);
-      itg_send_mail_newsletter($node_auto, 'automatically', 'stories');
+      if (!empty($node_auto)) {
+        itg_send_mail_newsletter($node_auto, 'automatically', 'stories');
+      }
     }
   }
 }

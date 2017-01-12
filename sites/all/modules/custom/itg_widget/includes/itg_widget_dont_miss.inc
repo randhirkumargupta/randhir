@@ -26,22 +26,3 @@ function save_dont_miss_widget_data($dont_miss_content) {
     drupal_set_message(t("Nodes has been saved"));
   }
 }
-
-/**
- * Funtion to get block data.
- *
- * @param array $info
- * @return array
- */
-function itg_widget_dont_miss_ordering_data($info) {
-  $data = '';
-  if (!empty($info)) {
-    $widget_name = $info['widget_name'];
-    $result = get_view_nodes_form_custom_table_for_widgets($widget_name, DONT_MISS_MAX_RANGE, DONT_MISS_MIN_RANGE, 'ASC');
-    $entity_data = array();
-    foreach ($result as $entity_data_node) {
-      $entity_data[] = $entity_data_node;
-    }
-    return $entity_data;
-  }
-}

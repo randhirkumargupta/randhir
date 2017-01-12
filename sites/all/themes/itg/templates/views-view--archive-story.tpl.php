@@ -49,7 +49,14 @@
           <div id="archive-story-date-slider">
               <ul>
                   <?php for ($i = 30; $i >= 1; $i--) { ?>
-                    <li class="atleta"> <a href="<?php print date('Y-m-d', mktime(0, 0, 0, $month, ($day - $i), $year)); ?>">
+                    <?php
+                      $li_active_class = '';
+                      $current_filter_date = date('Y-m-d', mktime(0, 0, 0, $month, ($day - $i), $year));
+                      if ($current_filter_date == $_GET['ds_changed']['date']) {
+                        $li_active_class = 'active';                        
+                      }
+                    ?>
+                    <li class="atleta <?php print $li_active_class;?>"> <a href="<?php print date('Y-m-d', mktime(0, 0, 0, $month, ($day - $i), $year)); ?>">
 
                             <span><?php print date('d', mktime(0, 0, 0, $month, ($day - $i), $year)); ?></span>
                             <?php print date('M', mktime(0, 0, 0, $month, ($day - $i), $year)); ?>

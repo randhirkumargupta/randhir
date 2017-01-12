@@ -595,6 +595,30 @@ function features_for_story_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_listicle_color'.
+  $field_bases['field_listicle_color'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_listicle_color',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_map_embed_code'.
   $field_bases['field_map_embed_code'] = array(
     'active' => 1,
@@ -1168,30 +1192,6 @@ function features_for_story_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_story_facebook_vdescripti'.
-  $field_bases['field_story_facebook_vdescripti'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_story_facebook_vdescripti',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
-    'translatable' => 0,
-    'type' => 'text',
-  );
-
   // Exported field_base: 'field_story_facebook_video'.
   $field_bases['field_story_facebook_video'] = array(
     'active' => 1,
@@ -1453,35 +1453,6 @@ function features_for_story_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'field_collection',
-  );
-
-  // Exported field_base: 'field_story_listicle_color'.
-  $field_bases['field_story_listicle_color'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_story_listicle_color',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'rgb' => array(
-        0 => 'rgb',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'color_field',
-    'settings' => array(
-      'allow_empty' => 0,
-      'palette' => '',
-      'show_buttons' => 0,
-      'show_input' => 0,
-      'show_palette' => 0,
-      'show_palette_only' => 0,
-    ),
-    'translatable' => 0,
-    'type' => 'color_field_rgb',
   );
 
   // Exported field_base: 'field_story_listicle_description'.
@@ -1947,6 +1918,36 @@ function features_for_story_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field_story_select_templates'.
+  $field_bases['field_story_select_templates'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_story_select_templates',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'listicle' => 'Listicle',
+        'quote' => 'Quote',
+        'factoid' => 'Factoid',
+        'buzz' => 'Buzz',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_story_short_headline'.
@@ -2576,30 +2577,6 @@ function features_for_story_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'file',
-  );
-
-  // Exported field_base: 'field_story_twitter_video_desc'.
-  $field_bases['field_story_twitter_video_desc'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_story_twitter_video_desc',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
-    'translatable' => 0,
-    'type' => 'text',
   );
 
   // Exported field_base: 'field_story_ugc_source_id'.

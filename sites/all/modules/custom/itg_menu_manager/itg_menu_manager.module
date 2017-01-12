@@ -100,7 +100,8 @@ function itg_menu_manager_form($form, &$form_state) {
   $default_values = array();
   $edit_id = isset($_GET['edit_id']) ? intval(trim($_GET['edit_id'])) : FALSE;
   $term_id = isset($_GET['term_id']) ? intval(trim($_GET['term_id'])) : FALSE;
-  $doc_id = variable_get('document_variable_name');
+  //$doc_id = variable_get('document_variable_name');
+  $frist_section = FALSE;
   // condition to check operation
   if ($edit_id && $term_id) {
     $query = db_select('itg_menu_manager', 'imm')
@@ -108,13 +109,15 @@ function itg_menu_manager_form($form, &$form_state) {
         ->condition('imm.id', $edit_id);
     $default_values = $query->execute()->fetchAssoc();
   }
-  reset($options);
-  // Get only frist tid
-  $frist_section = key($options);
+  if (!empty($options)) {
+    reset($options);
+    // Get only frist tid
+    $frist_section = key($options);
+  }
 
   $section = isset($form_state['values']['sections']) ? $form_state['values']['sections'] : $frist_section;
 
-  $menu_level = $form_state['values']['menu_level'];
+  $menu_level = isset($form_state['values']['menu_level']) ? $form_state['values']['menu_level'] : "second";
   if ($menu_level == 'third') {
     drupal_add_css('#decided-section {display:inline-block !important;}', array('type' => 'inline'));
     $options = itg_menu_manager_get_taxonomy_term_options('category_management');
@@ -122,7 +125,6 @@ function itg_menu_manager_form($form, &$form_state) {
   else {
     $options = array(0 => "Home Page");
   }
-
   $form['url_type'] = array(
     '#type' => 'radios',
     '#title' => t('Menu Type'),
@@ -130,7 +132,8 @@ function itg_menu_manager_form($form, &$form_state) {
       'internal' => 'Internal',
       'external' => 'External',
     ),
-    '#default_value' => ($default_values['url_type']) ? $default_values['url_type'] : 'internal',
+    '#limit_validation_errors' => array(),
+    '#default_value' => isset($default_values['url_type']) ? $default_values['url_type'] : 'internal',
     '#ajax' => array(
       'callback' => 'add_or_remove_autocomplete',
       'wrapper' => 'entire_form',
@@ -143,28 +146,32 @@ function itg_menu_manager_form($form, &$form_state) {
     '#type' => 'select',
     '#title' => t('Menu Level'),
     '#options' => array(
+      '' => '--Select--',
       'second' => 'Second',
       'third' => 'Third',
       'vertical' => 'Vertical menu',
     ),
-    '#default_value' => ($default_values['menu_level']) ? $default_values['menu_level'] : "",
+    '#limit_validation_errors' => array(),
+    '#default_value' => isset($default_values['menu_level']) ? $default_values['menu_level'] : "",
     '#required' => TRUE,
     '#ajax' => array(
       'callback' => 'decide_section',
       'wrapper' => 'entire_form',
     ),
   );
+
   $form['sections'] = array(
     '#type' => 'select',
     '#title' => t('Section'),
+    '#limit_validation_errors' => array(),
     '#ajax' => array(
       'callback' => 'get_section_update',
       'wrapper' => 'entire_form',
     ),
-    '#options' => ($edit_id && $default_values['menu_level'] == 'third') ? itg_menu_manager_get_taxonomy_term_options('category_management') : $options,
+    '#options' => ($edit_id && (isset($default_values['menu_level']) && $default_values['menu_level'] == 'third')) ? itg_menu_manager_get_taxonomy_term_options('category_management') : $options,
     '#prefix' => '<div id="decided-section">',
     '#suffix' => '</div>',
-    '#default_value' => ($default_values['section_id']) ? $default_values['section_id'] : "",
+    '#default_value' => isset($default_values['section_id']) ? $default_values['section_id'] : "",
     '#validated' => TRUE
   );
 
@@ -177,10 +184,10 @@ function itg_menu_manager_form($form, &$form_state) {
       'callback' => 'get_url_of_current_term',
       'wrapper' => 'entire_form',
     ),
-    '#default_value' => ($default_values['title']) ? $default_values['title'] : "",
+    '#default_value' => isset($default_values['title']) ? $default_values['title'] : "",
     '#required' => TRUE,
   );
-  if ($menu_level == 'third' || $default_values['section_id']) {
+  if ($menu_level == 'third' || (isset($default_values['section_id']) && $default_values['section_id'])) {
     if (isset($default_values['section_id']) && $default_values['section_id']) {
       $section = $default_values['section_id'];
     }
@@ -196,7 +203,7 @@ function itg_menu_manager_form($form, &$form_state) {
     '#prefix' => '<div id="url-of-current-term">',
     '#suffix' => '</div>',
     '#required' => TRUE,
-    '#default_value' => ($default_values['url']) ? $default_values['url'] : "",
+    '#default_value' => isset($default_values['url']) ? $default_values['url'] : "",
   );
 
   $form['url_window'] = array(
@@ -207,7 +214,7 @@ function itg_menu_manager_form($form, &$form_state) {
       'new_window' => 'New Window',
     ),
     '#description' => t('Same window will open "MENU" in current tab and New window will open "MENU" in new tab'),
-    '#default_value' => ($default_values['target']) ? $default_values['target'] : "same_window",
+    '#default_value' => isset($default_values['target']) ? $default_values['target'] : "same_window",
     '#required' => TRUE,
   );
 
@@ -215,7 +222,7 @@ function itg_menu_manager_form($form, &$form_state) {
     '#title' => t('Sponsored category'),
     '#type' => 'checkboxes',
     '#description' => t('Sponsored category is applicable for only second level menu. Value saved for third level menu will not appear on front end.'),
-    '#default_value' => ($default_values['extra'] == "Yes") ? array("Yes") : array(),
+    '#default_value' => (isset($default_values['extra']) && ($default_values['extra'] == "Yes")) ? array("Yes") : array(),
     '#options' => array('Yes' => t('Yes')),
   );
 
@@ -232,11 +239,11 @@ function itg_menu_manager_form($form, &$form_state) {
     '#type' => 'managed_file',
     '#name' => 'category_icon',
     '#title' => t('Upload external menu icon'),
-    '#description' => t('Category icon applicable for <br/>only external link. For internal icon <br/>will come from category manager.'),
+    '#description' => t('Category icon applicable for <br/>only external link. For internal icon <br/>will come from category manager. <br/> Preferred image size 46x37.'),
     '#file_validate_extensions' => array(
       'png gif jpg jpeg'
     ),
-    '#default_value' => ((int) $default_values['menu_name']) ? $default_values['menu_name'] : NULL,
+    '#default_value' => (isset($default_values['menu_name']) && (int) $default_values['menu_name']) ? $default_values['menu_name'] : NULL,
     '#upload_location' => 'public://category_icon/',
   );
   // Submit Button
@@ -268,11 +275,11 @@ function itg_menu_manager_form($form, &$form_state) {
     drupal_add_js(drupal_get_path('module', 'itg_menu_manager') . '/js/itg_menu_manager.js', 'file');
   }
 
-  if ($form_state['values']['url_type'] == 'external' || $default_values['url_type'] == 'external') {
+  if ((isset($form_state['values']['url_type']) && $form_state['values']['url_type'] == 'external') || (isset($default_values['url_type']) && $default_values['url_type'] == 'external')) {
     unset($form['title']['#ajax']);
   }
 
-  if ($default_values['menu_level'] == 'second') {
+  if (isset($default_values['menu_level']) && ($default_values['menu_level'] == 'second')) {
     unset($form['title']['#autocomplete_path']);
   }
   drupal_add_js(drupal_get_path('module', 'itg_menu_manager') . '/js/itg-menu-main.js', 'file');
@@ -283,33 +290,46 @@ function itg_menu_manager_form($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_menu_manager_form_validate($form, &$form_state) {
-  $errors = array();
-  $values = $form_state['values'];
-  $url_type = $values['url_type'];
-  $url = $values['url'];
+  if (isset($form_state['clicked_button']) && $form_state['clicked_button']['#type'] == 'submit') {
+    $errors = array();
+    $values = $form_state['values'];
+    $triggering_element = $form_state['triggering_element'];
 
-  if ($url_type == 'external' && !empty($url)) {
-    if ((strpos($url, 'http') === 0) && filter_var($url, FILTER_VALIDATE_URL)) {
-      //watchdog("menu_manager", "Url validated in case of external");
-    }
-    else {
-      $errors[] = "Please enter valid external url  eg: http://www.example.com";
-    }
-  }
+    $url_type = $values['url_type'];
+    $url = $values['url'];
 
-  if ($url_type == 'internal' && !empty($url)) {
-    if (!drupal_valid_path($url)) {
-      // Not a system URL.
-      if (!drupal_lookup_path('source', $url)) {
-        $errors[] = "Please enter valid internal url";
+    if ($url_type == 'external' && !empty($url)) {
+      if ((strpos($url, 'http') === 0) && filter_var($url, FILTER_VALIDATE_URL)) {
+        //watchdog("menu_manager", "Url validated in case of external");
+      }
+      else {
+        $errors[] = "Please enter valid external url  eg: http://www.example.com";
       }
     }
-  }
 
-  if (!empty($errors)) {
-    drupal_set_message(implode("][", $errors), "error");
-    foreach ($errors as $error) {
-      form_set_error($error);
+    if ($url_type == 'internal' && !empty($url)) {
+      if (!drupal_valid_path($url)) {
+        // Not a system URL.
+        if (!drupal_lookup_path('source', $url)) {
+          $errors[] = "Please enter valid internal url";
+        }
+      }
+    }
+
+    if ($values['display_icon'] == 1 && $values['url_type'] == 'external' && $values['menu_level'] == 'vertical' && !$values['category_icon']) {
+      $errors[] = t("For external vertical menu category icon is required.");
+      drupal_add_css(".form-item-sections {display:none !important}", "inline");
+    }
+
+    if ($values['menu_level'] == '') {
+      $errors[] = "Please select menu level";
+    }
+
+    if (!empty($errors)) {
+      drupal_set_message(implode("][", $errors), "error");
+      foreach ($errors as $error) {
+        form_set_error($error);
+      }
     }
   }
 }
@@ -976,6 +996,7 @@ function itg_menu_manager_form_alter(&$form, &$form_state, $form_id) {
     $view = $form_state['view'];
     if ($view->name == "menu_manager" && $view->current_display == 'menu_manager_page') {
       drupal_add_css("#edit-section-id-wrapper {display:none}", "inline");
+      drupal_add_css("#draggableviews-table-menu-manager-menu-manager-page td img {max-width:48px; max-height:30px}", "inline");
       if (arg(1) == 'third') {
         drupal_add_js(drupal_get_path('module', 'itg_menu_manager') . '/js/itg_menu_manager.js', 'file');
         $options = itg_menu_manager_get_taxonomy_term_options('category_management');
@@ -1002,7 +1023,8 @@ function itg_menu_manager_form_alter(&$form, &$form_state, $form_id) {
       'effect' => 'fade',
     );
   }
-  if ($form_id == 'menu_edit_item' && arg(4) == 'menu-about-us-page-menu') {
+
+  if ($form_id == 'menu_edit_item' && (arg(4) == 'menu-about-us-page-menu' || arg(5) == 'edit')) {
     $form['actions']['submit']['#suffix'] = l("Cancel", "admin/structure/menu/manage/menu-about-us-page-menu", array("attributes" => array("class" => array("button"))));
     drupal_add_css(".form-item-expanded {display:block !important}", "inline");
   }
@@ -1110,6 +1132,7 @@ function itg_menu_manager_views_pre_render(&$view) {
     else {
       $count = $view->total_rows;
     }
+    $header_content = "";
     $header_content .= '<span class="count">Count (' . $count . ') </span>';
     $header_content .= l(t('Create Menu'), 'itg-menu-manager', array("query" => array("destination" => $arg[0] . "/" . $arg[1])));
     $view->attachment_before = $header_content;
@@ -1167,7 +1190,7 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
     if ($int_value) {
       $icon_object = file_load((int) $icon_fid);
       // Set icon for internal menu used for vertical menu.
-      $link_text = $vertical_menu_icon = "<img  src='" . file_create_url($icon_object->uri) . "' />"; //theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $icon_object->uri));
+      $link_text = $vertical_menu_icon = "<img title='".$link_title_for_vertical."'  src='" . file_create_url($icon_object->uri) . "' />"; //theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $icon_object->uri));
       if (!empty($icon_object->uri)) {
         $image_class = "has-image";
       }
@@ -1175,7 +1198,7 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
   }
   // Handle case for default image
   if ($url_type == 'external' && $display_icon && $icon_fid == "notFound") {
-    $link_text = $vertical_menu_icon = "<img  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all.png' />";
+    $link_text = $vertical_menu_icon = "<img  title='".$link_title_for_vertical."' src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all_110_37.jpeg' />";
   }
 
   if ($url_type == 'internal' && $display_icon) {
@@ -1210,8 +1233,12 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
     $arg1 = $argument[1];
     $urlalise = drupal_get_path_alias("node/$arg1");
     $real_path_alise = ($urlalise) ? $urlalise : "node/$arg1";
-    if (end(explode('/', $link_url)) == $real_path_alise) {
-      $active = 'active';
+    if (!empty($link_url)) {
+      $link_url_array = explode('/', $link_url);
+      $link_url_end = end($link_url_array); //shravan
+      if ($link_url_end == $real_path_alise) {
+        $active = 'active';
+      }
     }
   }
 
@@ -1226,6 +1253,7 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
   $menu_link_data_array['active_cls'] = $active_cls;
   $menu_link_data_array['icon'] = $vertical_menu_icon;
   $menu_link_data_array['link_title_for_vertical'] = $link_title_for_vertical;
-
+  $menu_link_data_array['url_type'] = "url-type-" . $menu_data['db_data']['url_type'];
+  $menu_link_data_array['display_icon'] = $menu_data['db_data']['display_icon'];
   return $menu_link_data_array;
 }

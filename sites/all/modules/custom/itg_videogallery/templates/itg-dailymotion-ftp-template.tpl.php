@@ -10,7 +10,9 @@ global $base_url;
     <div class="browse-ftp">
         <div id="itg_video_content">
             <div class="video-ftp active"><?php print t('FTP'); ?></div>
+             <?php if ($_GET['input_filed'] != 'ckeditor') { ?>
             <div class="video-local"><?php print t('Local Browse'); ?></div>
+             <?php } ?>
             <div id="loader-data"><img class="widget-loader" style="display: none" align="center" src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
 
             <div class="ftp-server">
@@ -34,8 +36,11 @@ global $base_url;
                             <option value="24"><?php print t("24 Hours"); ?></option>
                         </select>
                     </div>
-                    <div class="reset_video_filter" style="display:none">
-                        <span class="button reset_video_filters">Reset</span>
+                     <div class="apply_video_filter">
+                        <span class="btn-save apply_video_filters"><?php print t("Apply"); ?></span>
+                    </div>
+                    <div class="reset_video_filter">
+                        <span class="button reset_video_filters"><?php print t("Reset"); ?></span>
                     </div>
                 </div>
                 <div class="video-options-wrapper"></div>
@@ -43,7 +48,7 @@ global $base_url;
                     <a href="javascript:void(0)" class = "button asso-with-ckeditor"><?php print t('Associate Video'); ?></a>
                     <input type="hidden" id="single_add" name="single_add" value="0">
                 <?php }
-                else if ($_GET['field_name'] == 'field_story_facebook_video' || $_GET['field_name'] =='field_story_twitter_video') {
+                else if ($_GET['field_name'] == 'field_story_facebook_video' || $_GET['field_name'] =='field_story_twitter_video' || $_GET['field_name'] =='field_videogallery_video_upload') {
                     ?>
                     <input type="hidden" id="single_add" name="single_add" value="1">
                     <a href="javascript:void(0)" class = "button asso-filed_single" btn_name="<?php echo $_GET['btn_name'];?>" field_name="<?php echo $_GET['field_name'];?>"><?php print t('Associate Video'); ?></a>
@@ -60,15 +65,15 @@ global $base_url;
 
 <?php print drupal_render(drupal_get_form('videogallery_new_fileupload_form')); ?>
 
-<?php if ($_GET['field_name'] == 'field_story_facebook_video' || $_GET['field_name'] =='field_story_twitter_video') { ?>
-       <span class="button add-in-single-filed" btn_name="<?php echo $_GET['btn_name'];?>" field_name="<?php echo $_GET['field_name'];?>">
+<?php if ($_GET['field_name'] == 'field_story_facebook_video' || $_GET['field_name'] =='field_story_twitter_video' || $_GET['field_name'] =='field_videogallery_video_upload') { ?>
+       <span class="button browse-local" btn_name="<?php echo $_GET['btn_name'];?>" field_name="<?php echo $_GET['field_name'];?>">
                     <?php
                     print t('Upload Video');
                     ?>
 
                 </span>
 <?php } else { ?>
-       <span class="button browse-local">
+       <span class="button browse-local" btn_name="">
                     <?php
                     print t('Upload Video');
                     ?>

@@ -9,10 +9,7 @@
     jQuery('.image-preview img').live('click', function() {
         var imageid = jQuery(this).parent().next().find('input[type=hidden]').val();
         var fieldname = jQuery(this).parent().next().find('input[type=hidden]').attr('name');
-
         var fieldname = fieldname.split('[');
-
-
         jQuery.ajax({
             url: Drupal.settings.basePath + 'imagetagedit',
             type: 'post',
@@ -21,8 +18,6 @@
                 $.colorbox({html: "" + data + "", onComplete: function() {
                         $(this).colorbox.resize();
                     }});
-
-
             },
             error: function(xhr, desc, err) {
                 console.log(xhr);

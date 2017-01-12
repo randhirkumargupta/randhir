@@ -30,8 +30,10 @@
     h4{
         font-size: $mobile-h4-font-size;
         line-height: $h4-line-height;
-    }    
-
+    }
+    .static-feedback-from h1, h1.about-us-heading{
+        font-size: 26px;
+    }        
     #block-itg-layout-manager-header-block{ 
         .top-nav{ 
             .main-nav {
@@ -280,6 +282,41 @@
 }
 /*story page css end*/
 
+/*Election page css start*/
+.election-page{
+    h1 {
+        margin-top: 20px;
+    }
+    .election-graph{      
+        .col-el-5{
+            width: 240px;
+        }   
+    }    
+}
+/*Election page css end*/
+
+/*static pages start*/
+.static-feedback-from .webform-submit-social, .static-feedback-from .form-actions, .static-feedback-from .or-share-detail{
+    padding-left: 0;    
+}
+.static-feedback-from .name-email-continer > div.user-name label{
+    text-align: left;
+}
+.static-feedback-from .submit-feedback{
+    width: 100%;
+}
+.static-feedback-from .webform-submit-social{
+    a{
+        display:block;
+        img{
+            max-width: 100px;
+            &:first-child{
+                max-width:  90px;
+            }
+        }   
+    }    
+}
+/*static page end*/
 
 }   
 @media only screen and (max-width:991px){
@@ -346,21 +383,22 @@
     padding: 5px;
     margin: 0;
 }
-.page-sports-video .view-content .photo-list{
+.sport-home-layout-page .page-sports-video .view-content .photo-list{
     white-space: nowrap;
     overflow: auto;
+    margin:0 -6px;
     li{
-      float: none;
-      display: inline-block;
-      width: 170px;
-      vertical-align: top;
+        float: none;
+        display: inline-block;
+        width: 156px;
+        vertical-align: top;
+        padding: 15px 6px;
         a{
             white-space: pre-wrap;
         }
     }  
 }
 /*story page css end*/
-
 
 }
 
@@ -574,7 +612,8 @@
     .itg-layout-container .top-colum-3 .droppable,
     .itg-common-section .droppable, .sport-home-layout-page .itg-layout-615 .auto-block-1,
     .sport-home-layout-page .itg-layout-615 .auto-block-2, .sport-home-layout-page .itg-layout-615 .droppable,
-    .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable{
+    .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable, .tech-layout-page .itg-h396-section .droppable,
+    .tech-layout-page .itg-h385-section .droppable, .election-page .left-side .itg-photo .droppable{
         height: auto;        
     }
     
@@ -660,7 +699,9 @@
     }
 
     /*css end special event page for osscar*/
-
+    .static_page_menu {
+     margin-bottom: 40px;   
+    }
 
     /*css start snappost page*/
     .page-snappost{
@@ -745,6 +786,7 @@
     .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo, .view-programme-content-live-tv{
         .view-content{      
             .photo-list{
+                margin:0 -10px;
                 li{ 
                     @include calculate-width(3);
                     padding:15px 10px;
@@ -885,12 +927,16 @@
     .archive-header{
         border:none;
         margin: 0 -15px;
+        padding-top: 35px;
+        position: relative;
         #archive-story-date-slider, .archive-calender-custom{
             float: none;
             width: 100%;
         }
         .archive-calender-custom{
             text-align: right;
+            position: absolute;
+            top: -15px;
         }
         #archive-story-date-slider{
             border-top: 1px solid #ddd;
@@ -1049,8 +1095,7 @@
         
     }
 /*story page comment section*/
-#content{
-    .story-section{
+#content{    
         #other-comment{
             #comments{
                 .comment-form{
@@ -1068,23 +1113,118 @@
                     }
                 }
             }  
-        }   
-    }
+        }       
 }    
 /*story page comment section end*/
 
 /*Home page css start*/
 .home_page_poll_widget_block, .sport-home-layout-page{
-    .poll-data{
-        padding:0;
-        .poll-banner-image img{
-            max-width: 100%;
-        }
-    }  
+    .poll-wrapper{
+        .poll-data{
+            padding:0;
+            .poll-banner-image{
+                max-width: 100%;
+              img{
+                max-width: 100%;
+            }  
+            } 
+        } 
+    }
 } 
 /*Home page css end*/
 
+/*side bar for all pages start*/
+.sidebars .block-itg-widget{
+    span.no-result-found{        
+        margin: 30px 0;                
+        width: 290px;        
+    }
 }
+/*side bar for all pages end*/
+
+/*election page css start*/
+.election-page {
+    margin: 0 0px 20px 0px;
+    
+}
+.election-page{
+    .key-candidate .list-state {
+        white-space: nowrap;
+        overflow: auto;
+    }
+    .itg-most-popular .most_popular {
+        .col-md-3{
+            &:nth-child(2n+1){
+                clear:left;
+            }
+        }
+    }
+    .left-side{
+        .itg-325-layout, .itg-415-layout, .itg-map, .itg-most-popular, .itg-photo{
+            .droppable{
+               min-height: auto;
+               height: auto;
+            }
+        }                       
+    }
+    .right-side .key_candidate_extra_block .droppable{
+        min-height: auto;
+        height: auto;
+    }
+} 
+/*election page css end*/
+
+/*Start category wise content list css*/
+.view-category-wise-content-list{
+    .catagory-grid{                 
+        .col-md-3{            
+            &:nth-child(4n+1){
+                clear: none;
+            }
+            &:nth-child(3n+1){
+                clear: left;
+            }
+        }        
+    }
+}
+/*end category wise content list css*/
+
+/*pop up big story*/
+#block-itg-widget-big-story-format{
+    .video-slider-images{
+        .slick-slider{
+            padding: 10px 45px;   
+        }
+        .slick-prev, .slick-next{
+            background: transparent;                
+            color:#fff;
+            &:hover{
+                background: transparent;    
+            }
+        }
+    }
+}
+/*pop up big story end*/
+
+/*static page css start*/
+.static-feedback-from .name-email-continer input[type="text"] {
+    width: 260px;
+    height: 40px;
+}
+/*static page css end*/
+/*poll css start*/
+.home_page_poll_widget_block .poll-data form .form-radios{
+    text-align: left;
+    .form-item{
+        display: block;
+    }
+}
+/*poll css end*/
+
+
+
+}
+
 
 @media only screen and (max-width:680px){ 
     /*CSS start video landing page*/
@@ -1369,7 +1509,30 @@
         color: #d9d9d9;
     }
 } 
-
+.tech-layout-page{
+    .techwatch.osscar-video ul .dont-miss-listing{
+      .dm-pic{
+            width: 124px;
+        }
+        .dm-detail{
+            overflow: initial;
+        }  
+    } 
+}
+/*Start category wise content list css*/
+.view-category-wise-content-list{
+    .catagory-grid{                 
+        .col-md-3{                       
+            &:nth-child(3n+1){
+                clear: none;
+            }
+            &:nth-child(2n+1){
+                clear: left;
+            }
+        }        
+    }
+}
+/*end category wise content list css*/
 
 }
 @media only screen and (max-width:640px){
@@ -1436,6 +1599,55 @@
         margin: 0 auto;
     }
     /*story page css end*/
+    /*election page css end*/
+    .election-page{
+        h1 {
+            margin-top: 20px;
+        }
+        .election-graph{     
+            margin-top: -50px;
+            padding-bottom:50px;
+            .col-el-5{
+                width: 100%;
+            }
+        }
+        .col-el-5.mt-50 {
+            margin-top: 0;
+        }
+    }
+    /*election page css end*/
+    
+/*static page css start*/
+.static-feedback-from .name-email-continer input[type="text"]{
+    width: 100%;
+}
+.static-feedback-from .webform-submit-social{
+    a{        
+        img{
+            @include display-inline;
+            margin-bottom: 10px;
+        }   
+    }    
+}
+.static-feedback-from .form-submit{    
+    height: 40px;
+    width: 140px;    
+    font-size: 16px;    
+    font-weight: 300;
+}
+.static-feedback-from h1 span{
+    float: none;
+    display: block;
+    font-size: 10px;
+}
+
+.static-feedback-from .webform-name-field.feedback{
+    .form-textarea-wrapper, label{
+        width: 100%;
+    }    
+} 
+/*static page css end*/
+    
     
 }
 
@@ -1911,6 +2123,18 @@
         h2{
             @include font(26px,null,300);
         }
+        .video-slider-images{
+                .slick-slider{
+                    padding: 10px 45px;   
+                }
+                .slick-prev, .slick-next{
+                    background: transparent;                
+                    color:#fff;
+                    &:hover{
+                        background: transparent;    
+                    }
+                }
+            }
     }
     .view-display-id-so_sorry_page{
         margin:0;
@@ -1918,8 +2142,11 @@
             font-size: 26px;                        
         }
     }
-    #block-itg-widget-so-sorry-front-politoons{
+    #block-itg-widget-so-sorry-front-politoons{        
         .politoons-sosorry {
+            h2{
+                @include font(26px,null,300);   
+            }
             .col-md-4{
                 &:nth-child(3n+1){
                     clear: left;
@@ -1977,6 +2204,7 @@
                 @include float(left);
                 width: 84.5%;
                 padding: 10px;
+                border: 1px solid #242424;
             }
             .social-likes  {
                 @include float(left);
@@ -2005,10 +2233,36 @@
                     }
                 }
             }
+            .slick-slider .slick-next, .slick-slider .slick-prev{
+                width: 50px;
+                height: 100px;
+                margin-top: -50px;
+                &:before{
+                    top: 38px;
+                    font-size: 30px;
+                }
+            }  
+            .video-slider-images{
+                .slick-slider{
+                    padding: 10px 45px;   
+                }
+                .slick-prev, .slick-next{
+                    background: transparent;                
+                    color:#fff;
+                    &:hover{
+                        background: transparent;    
+                    }
+                }
+            }
         } 
         .video-header-right{
             height: 474px;
             padding-bottom:0px;
+            p{
+            &:first-child{
+                margin-top: 0px;
+            }
+        }
         }
         h2{
             @include font(24px);
@@ -2019,6 +2273,9 @@
 
     /*css start for special auto page*/
     .auto-layout-page{
+        .auto-block-1{
+            border: 1px solid #ddd;
+        }
         .itg-top-section{
             .top-colum-1, .top-colum-2{
                 .droppable{
@@ -2030,23 +2287,15 @@
                     height: 247px;               
                 }
             }
-        }
-        .itg-h450-section{        
-            .col-md-4{
-                .droppable{  
-                    padding: 10px;
-                    background: #f3f3f3;                   
-                    .widget-wrapper{
-                        overflow: auto;
-                        height: auto;
-                        max-height: 100%;
-                    }
-                }
-            }        
-        }
+        }        
     }
     /*css end for special auto page*/
-
+    
+/*css for tech page start*/
+.tech-layout-page .auto-block-1{
+    border: 1px solid #ddd;   
+}     
+/*css for tech page end*/
 
 }
 /*End CSS Desktop version*/

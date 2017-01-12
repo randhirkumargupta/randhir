@@ -72,14 +72,12 @@
   <?php print drupal_render($form['field_story_social_media_integ']); ?>
   <!-- Facebook fields -->
   <?php print drupal_render($form['field_story_facebook_narrative']); ?>
-  <?php print drupal_render($form['field_story_facebook_image']); ?>
-  <?php print drupal_render($form['field_story_facebook_vdescripti']); ?>
+  <?php print drupal_render($form['field_story_facebook_image']); ?>  
   <?php print drupal_render($form['field_story_facebook_video']); ?>
   
   <!-- Twitter Fields -->
   <?php print drupal_render($form['field_story_tweet']); ?>
-  <?php print drupal_render($form['field_story_tweet_image']); ?>  
-  <?php print drupal_render($form['field_story_twitter_video_desc']); ?>  
+  <?php print drupal_render($form['field_story_tweet_image']); ?>    
   <?php print drupal_render($form['field_story_twitter_video']); ?>  
   </div>
 </div>

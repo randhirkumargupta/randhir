@@ -142,11 +142,18 @@ function itg_story_ckeditor_plugin_alter(&$plugins) {
 function itg_story_form_alter(&$form, &$form_state, $form_id) {
     switch ($form_id) {
         case 'story_node_form':
-            $source_id = $form['#node']->field_story_source_id[LANGUAGE_NONE][0]['value'];
-            $source_type = trim($form['#node']->field_story_source_type[LANGUAGE_NONE][0]['value']);
-            if (empty($source_id) && empty($source_type)) {
-                $form['title']['#suffix'] = '<div class="breaking_class"><input type="checkbox" title="breaking_text" id="breaking_text"><span> Make it breaking news</span></div>';
+            if (!empty($form['#node']->field_story_source_id[LANGUAGE_NONE][0]['value'])) {
+              $source_id = $form['#node']->field_story_source_id[LANGUAGE_NONE][0]['value'];
             }
+            if (!empty($form['#node']->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
+              $source_type = trim($form['#node']->field_story_source_type[LANGUAGE_NONE][0]['value']);
+            }
+            
+            
+            if (empty($source_id) && empty($source_type)) {
+              $breaking_check = '<input type="checkbox" title="breaking_text" id="breaking_text"><span> Make it breaking news</span>';
+            }
+            $form['title']['#suffix'] = '<div class="breaking_class">'.$breaking_check.'</div>';    
             $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#title'] = '';
             $form['field_story_syndication'][LANGUAGE_NONE]['#options'] = array('Yes' => $form['field_story_syndication'][LANGUAGE_NONE]['#title']);
             $form['field_story_syndication'][LANGUAGE_NONE]['#title'] = "";
@@ -154,6 +161,7 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
             $form['field_story_syndications_photo'][LANGUAGE_NONE]['#title'] = "";
             unset($form['actions']['preview_changes']);
             unset($form['field_story_templates'][LANGUAGE_NONE]['#options']['_none']);
+            unset($form['field_story_select_templates'][LANGUAGE_NONE]['#options']['_none']);
             $form['#after_build'][] = 'itg_story_after_build';
             $form['actions']['submit']['#submit'][] = 'itg_story_form_custom_callback';
             break;
@@ -227,7 +235,7 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
 
         $source_type = "<select class='form-item form-type-select' id='fake-soruce-type'>";
         foreach ($option as $option_value => $option_element) {
-            if ($_GET['field_story_source_type_value'] == $option_value) {
+            if (!empty($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == $option_value) {
                 $select = "selected";
             }
             else {
@@ -278,22 +286,6 @@ function itg_story_node_validate($node, $form, &$form_state) {
 
         if (isset($expiry_date) && $schedule_date > $expiry_date) {
             form_set_error('field_story_expiry_date', t("Expiry date should be greater then schedule start date"));
-        }
-
-
-        // Code for social media validation
-        if (isset($node->field_story_social_media_integ[LANGUAGE_NONE])) {
-            foreach ($node->field_story_social_media_integ[LANGUAGE_NONE] as $key_media => $val_media) {
-                // Code for facebook narrative validation
-                if ($val_media['value'] == 'facebook' && empty($node->field_story_facebook_narrative[LANGUAGE_NONE][0]['value'])) {
-                    form_set_error('field_story_facebook_narrative', t("Facebook Narrative field is required."));
-                }
-
-                // Code for Twitter validation
-                if ($val_media['value'] == 'twitter' && empty($node->field_story_tweet[LANGUAGE_NONE][0]['value'])) {
-                    form_set_error('field_story_tweet', t("Twitter field is required."));
-                }
-            }
         }
 
         // Code for issue exit or not.
@@ -369,7 +361,7 @@ function itg_story_node_insert($node) {
     if ($node->type == 'story' && $node->workbench_moderation_state_new != 'draft' && isset($node->field_story_configurations[LANGUAGE_NONE])) {
         foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
             if ($val['value'] == 'breaking_news') {
-                itg_story_create_breaking_news($node);
+                //itg_story_create_breaking_news($node);
             }
         }
     }
@@ -385,7 +377,7 @@ function itg_story_node_update($node) {
             if ($val['value'] == 'breaking_news') {
                 $breaking_cond = get_breaking_id($node->nid);
                 if (!$breaking_cond) {
-                    itg_story_create_breaking_news($node);
+                    //itg_story_create_breaking_news($node);
                 }
             }
         }
@@ -403,7 +395,7 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
     $supplement_field = 'field_story_select_supplement';
     $tv_date_field = 'field_poll_start_date';
     $tv_time_field = 'field_story_tv_time';
-    if (function_exists(itg_common_dropdown_mazine)) {
+    if (function_exists('itg_common_dropdown_mazine')) {
         $opt = itg_common_dropdown_mazine();
         $form[$magazine_field]['#options'] = $opt;
     }
@@ -413,14 +405,14 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
         $magazine_id = $form[$magazine_field][LANGUAGE_NONE]['#default_value'][0];
     }
     else {
-        $magazine_id = $form_state['input'][$magazine_field][LANGUAGE_NONE];
+        $magazine_id = !empty($form_state['input'][$magazine_field][LANGUAGE_NONE]) ? $form_state['input'][$magazine_field][LANGUAGE_NONE] : '' ;
     }
 
     if (isset($form['#node']->field_poll_start_date[LANGUAGE_NONE][0]['value']) && !isset($form_state['triggering_element'])) {
         $date_val = $form['#node']->field_poll_start_date[LANGUAGE_NONE][0]['value'];
     }
     else {
-        $date_val = $form_state['input'][$tv_date_field][LANGUAGE_NONE][0]['value']['date'];
+        $date_val = !empty($form_state['input'][$tv_date_field][LANGUAGE_NONE][0]['value']['date']) ? $form_state['input'][$tv_date_field][LANGUAGE_NONE][0]['value']['date'] : '';
     }
 
     // add ajax on magazine field
@@ -451,7 +443,7 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
 
     if (function_exists('itg_common_tv_time')) {
         $form[$tv_time_field][LANGUAGE_NONE]['#options'] = itg_common_tv_time($date_val);
-        $form[$tv_time_field][LANGUAGE_NONE]['#default_value'] = $form['#node']->field_story_tv_time[LANGUAGE_NONE][0]['value'];
+        $form[$tv_time_field][LANGUAGE_NONE]['#default_value'] = !empty($form['#node']->field_story_tv_time[LANGUAGE_NONE][0]['value']) ? $form['#node']->field_story_tv_time[LANGUAGE_NONE][0]['value'] : '';
         // $form[$tv_time_field]['#validated'] = TRUE;
     }
 
@@ -638,16 +630,16 @@ function itg_get_video_display($nid) {
  * {@inheritdoc}
  */
 function itg_story_views_query_alter(&$view, &$query) {
-    if ($view->name == 'strory_menegment') {
-        if ($_GET['field_story_source_type_value'] == "story") {
-            foreach ($query->where[1]['conditions'] as $keys => $field) {
-                if ($field['field'] == 'field_data_field_story_source_type.field_story_source_type_value') {
-                    $query->where[1]['conditions'][$keys]['value'] = "";
-                    $query->where[1]['conditions'][$keys]['operator'] = "IS NULL";
-                }
-            }
+  if ($view->name == 'strory_menegment') {
+    if (!empty($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == "story") {
+      foreach ($query->where[1]['conditions'] as $keys => $field) {
+        if ($field['field'] == 'field_data_field_story_source_type.field_story_source_type_value') {
+          $query->where[1]['conditions'][$keys]['value'] = "";
+          $query->where[1]['conditions'][$keys]['operator'] = "IS NULL";
         }
+      }
     }
+  }
 }
 
 /**
@@ -658,4 +650,34 @@ function itg_story_node_presave($node) {
     if ($type == 'story' && !empty($node->field_story_magazine_story_issue['und'][0]['value'])) {
         $node->field_story_source_type['und'][0]['value'] = 'Magazine Story';
     }
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_story_node_view($node, $view_mode, $langcode) {
+  if ($node->type == 'story') {
+    global $user;
+    $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    if(function_exists('itg_get_related_content')) {
+      $node->content['related_content'] = itg_get_related_content(arg(1));
+    }
+    
+    if (function_exists('itg_total_share_count')) {
+      $node->content['total_share_count'] = itg_total_share_count($actual_link);
+    }
+    
+    if (function_exists('itg_msi_get_lock_story_status')) {
+      $node->content['develop_story_status'] = itg_msi_get_lock_story_status($node->nid, 'developing_story');
+    }
+    
+    if(function_exists('itg_get_front_activity_info')) {
+      $node->content['follow_status'] = itg_get_front_activity_info($node->nid, $node->type, $user->uid, 'follow_story', $status='');
+    }
+    
+    if(!empty($node->field_story_reporter[LANGUAGE_NONE][0]['target_id'])) {
+    $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+    $node->content['byline_node'] = node_load($byline_id);
+    }
+  }
 }

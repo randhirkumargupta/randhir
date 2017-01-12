@@ -19,15 +19,15 @@
   $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
   
   // get global comment config
-    if (function_exists(global_comment_last_record)) {
+  if (function_exists('global_comment_last_record')) {      
     $last_record = $global_comment_last_record;
     $config_name = trim($last_record[0]->config_name);
-    }
+  }
     
-   // get facebook share count 
-    if (function_exists(itg_total_share_count)) {
+  // get facebook share count 
+  if (function_exists('itg_total_share_count')) {
     $tot_count = itg_total_share_count($actual_link);
-    }
+  }
 
 ?>
 <article class="node-<?php print $node->nid; ?> <?php print $classes; ?> clearfix"<?php print $attributes; ?>>
@@ -76,13 +76,13 @@
                 SHARES
             </span> 
             <span>
-                <a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a>                
+                <a title="share on google+" class="def-cur-pointer" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a>                
             </span>
             <span>
-                <a href="javacript:void();" title ="share on facebook" onclick="fbpop('<?php print $actual_link;?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>', '<?php print $base_url; ?>', '<?php print $node->nid; ?>')"><i class="fa fa-facebook"></i></a>
+                <a class="def-cur-pointer" title ="share on facebook" onclick="fbpop('<?php print $actual_link;?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>', '<?php print $base_url; ?>', '<?php print $node->nid; ?>')"><i class="fa fa-facebook"></i></a>
             </span>
             <span>
-                <a href="javacript:void();" title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>                
+                <a class="def-cur-pointer" title="share on twitter" onclick="twitter_popup('<?php print urlencode($node->title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>                
             </span>            
             <span>
                 <?php
@@ -145,7 +145,8 @@
               <?php if ($reviews[$field_collection['value']]->field_story_review_type['und'][0]['value'] == 'external'): ?>
                 <?php print '<h2>' . t('Other Reviewers') . '</h2>'; ?>
               <?php endif; ?>
-              <h2><?php print $reviews[$field_collection['value']]->field_buzz_headline['und'][0]['value']; ?></h2>
+              
+              <h2><?php print l($reviews[$field_collection['value']]->field_buzz_headline['und'][0]['value'], $reviews[$field_collection['value']]->field_mega_review_url_link['und'][0]['value']); ?></h2>
               <div class="other-reviews-posted-on">
                   <!-- Byline reporter -->
                   <!-- Get Multiple reviewers name -->
@@ -247,7 +248,7 @@
                   </div>
 
                   <div class="photo-date"><?php print $video_date ?></div>
-                  <div class="photo-title"><?php print $video_node->title; ?></div>
+                  <div class="photo-title"><?php print l($video_node->title, 'node/' . $video_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank'))); ?></div>
 
               </div>
 
@@ -276,7 +277,7 @@
                   </div>
   <?php $photo_date = format_date($photo_node->created, 'custom', 'D, d M, Y'); ?>
                   <div class="photo-date"><?php print $photo_date ?></div>
-                  <div class="photo-title"><?php print $photo_node->title; ?></div>
+                  <div class="photo-title"><?php print l($photo_node->title, 'node/' . $photo_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank'))); ?></div>
               </div>
 
 <?php endif; ?>

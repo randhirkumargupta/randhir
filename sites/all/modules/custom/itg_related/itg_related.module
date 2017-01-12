@@ -66,16 +66,16 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'related_content_new') {
 
-    $form['keyword']['#attributes'] = array('placeholder' => array(t('Ex: Title / Kicker / Tag name')));
+    $form['keyword']['#attributes'] = array('placeholder' => array(t('Title / Kicker / Tag ')));
 
-    $bundle_name = array('Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery', 'Podcast' => 'Podcast');
-    $form['bundle_name']['#type'] = 'select';
-    $form['bundle_name']['#options'] = $bundle_name;
-    $form['bundle_name']['#size'] = 5;
-    $form['bundle_name']['#multiple'] = TRUE;
+    $bundle_name = array('story' => 'Story', 'blog' => 'Blog', 'photogallery' => 'Photogallery', 'videogallery' => 'Videogallery', 'podcast' => 'Podcast', 'breaking_news' => 'Live Blog');
+    $form['bundle']['#type'] = 'select';
+    $form['bundle']['#options'] = $bundle_name;
+    $form['bundle']['#size'] = 5;
+    $form['bundle']['#multiple'] = TRUE;
 
     //'iibckc' => 'Dev'
-    $hash = array('bw8w8n' => 'Ankush-localhost', '5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'e49it8' => 'Stage Server');
+    $hash = array('5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'e49it8' => 'Stage Server');
     $form['hash']['#type'] = 'select';
     $form['hash']['#options'] = $hash;
     $form['hash']['#size'] = 5;
@@ -85,7 +85,7 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
     $related_status = array('1' => 'Published', 'Unpublished' => 'Unpublished');
     $form['bs_status']['#type'] = 'select';
     $form['bs_status']['#options'] = $related_status;
-    $form['bs_status']['#size'] = 5;
+    $form['bs_status']['#size'] = 2;
     $form['bs_status']['#multiple'] = TRUE;
   }
 }
@@ -131,13 +131,18 @@ function itg_related_views_pre_render(&$view) {
     $settings['uid'] = $user->uid;
     drupal_add_js(array('itg_related' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_related') . '/js/itg_related.js', array('weight' => 1));
-
+    $titlename = '';
+    if(!empty($_GET['sname'])) {
+    $titlename = t('Search Name :');
+    $sname = '<span class="sname">'.$titlename. $_GET['sname'] . '&nbsp;</span>';
+    $view->attachment_before = $sname;
+    }
 
     foreach ($view->result as $related_result) {
       if ($related_result->bs_status == '1') {
         $related_result->bs_status = 'Published';
       }
-      
+
       if ($related_result->hash == '5fyeg7') {
         $related_result->site = 'DEV';
       }
@@ -150,7 +155,8 @@ function itg_related_views_pre_render(&$view) {
 //      $splittedsite = explode("/", $related_result->site);
 //      $explode_site = explode(".", $splittedsite[2]);
 //      $related_result->site = strtoupper($explode_site[0]);
-      
+      $related_result->sm_vid_Tags = implode(', ', $related_result->sm_vid_Tags);
+      $related_result->sm_vid_Category_Management = implode(', ', $related_result->sm_vid_Category_Management);
     }
   }
 }
@@ -216,7 +222,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       if ($i > 1) {
         $and = ' AND ';
       }
-      $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'site-search', 'ds_changed_max', 'custom_drp', 'exact_match', 'searchimage', 'online-archive-story', 'clone-story');
+      $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'site-search', 'ds_changed_max', 'custom_drp', 'exact_match', 'searchimage', 'online-archive-story', 'clone-story', 'sname');
 
       if (!empty($val) && $val != 'related-content' && $val != 'site-search' && $val != 'searchimage' && $val != 'online-archive-story' && $val != 'clone-story' && !in_array($key, $remove_key)) {
 
@@ -383,16 +389,18 @@ function itg_related_save_search() {
       ->execute();
 
 
-  print '<h3 class=rel-hed>My Saved Search</h3>';
-  print '<ul>';
+  $related_html = '<h3 class=rel-hed>My Saved Search</h3>';
+  $related_html.= '<ul>';
   while ($save_search_result_info = $save_search_result->fetchAssoc()) {
 
     $final_link = str_replace("&width=900&height=700&iframe=true", "", $save_search_result_info['search_path']);
 
-    print '<li><a oncontextmenu="return false;" href="' . $final_link . '&width=900&height=700&iframe=true" class="colorbox-load">' . $save_search_result_info['search_title'] . '</a></li>';
+    $related_html.= '<li><a oncontextmenu="return false;" href="' . $final_link . '&sname='.$save_search_result_info['search_title'].'&width=1000&height=700&iframe=true" class="colorbox-load">' . $save_search_result_info['search_title'] . '</a></li>';
   }
 
-  print '</ul>';
+  $related_html.= '</ul>';
+  
+  print $related_html;
 }
 
 /**

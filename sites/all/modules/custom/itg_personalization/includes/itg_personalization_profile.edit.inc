@@ -13,6 +13,7 @@
 function itg_personalization_edit_profile_form() {
   global $user;
   //prepare url for change mobile and email
+  $edit_email_url = $edit_email_link= $edit_mobile_url = $edit_mobile_link = '';
   if (strpos($user->name, '@') != false || is_numeric($user->name)) {
     $edit_email_url = 'http://' . PARENT_SSO . '/sso-user/email/' . base64_encode($user->name) . '/' . base64_encode($_SERVER['HTTP_HOST']);
     $edit_email_link = '<a href="javascript:void(0)"  onclick="CenterWindow(550, 200, 50, ' . "'" . $edit_email_url . "'" . ');">Edit</a>';
@@ -67,14 +68,24 @@ function itg_personalization_edit_profile_form() {
     '#suffix' => $edit_mobile_link . '</div>',
     '#default_value' => $mobile,
   );
+  $dob_default_value = '';
+  if (!empty($user_detail->field_story_issue_date['und'][0]['value'])) {
+    $dob_default_value = $user_detail->field_story_issue_date['und'][0]['value'];
+  }
   $form['dob'] = array(
     '#type' => 'date_popup',
     '#title' => t("DOB"),
-    '#date_format' => 'Y/m/d',
+    '#date_format' => 'd/m/Y',
     '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly'),
-    '#default_value' => $user_detail->field_story_issue_date['und'][0]['value'],
+    '#default_value' => $dob_default_value,
+    '#date_year_range' => '1900:+0d',
+    '#datepicker_options' => array('maxDate' => '+0d'),
     '#date_timezone' => date_default_timezone(),
   );
+  $gender_default_value = '';
+  if (!empty($user_detail->field_user_gender['und'][0]['value'])) {
+    $gender_default_value = $user_detail->field_user_gender['und'][0]['value'];
+  }
   $form['gender'] = array(
     '#title' => t('Gender'),
     '#type' => 'radios',
@@ -82,7 +93,7 @@ function itg_personalization_edit_profile_form() {
       'male' => 'Male',
       'female' => 'Female'
     ),
-    '#default_value' => $user_detail->field_user_gender['und'][0]['value'],
+    '#default_value' => $gender_default_value,
   );
   $form['profile_pic'] = array(
     '#title' => t('Profile Pic'),
@@ -103,11 +114,15 @@ function itg_personalization_edit_profile_form() {
   foreach ($itg_term as $term) {
     $options[$term->tid] = $term->name;
   }
+  $default_qualification = '';
+  if (!empty($user_detail->field_user_qualification['und'][0]['tid'])) {
+    $default_qualification = $user_detail->field_user_qualification['und'][0]['tid'];
+  }
   $form['qualification'] = array(
     '#title' => t('Qualification'),
     '#type' => 'select',
     '#options' => $options,
-    '#default_value' => $user_detail->field_user_qualification['und'][0]['tid'],
+    '#default_value' => $default_qualification,
   );
   $form['address'] = array(
     '#title' => t('Address'),

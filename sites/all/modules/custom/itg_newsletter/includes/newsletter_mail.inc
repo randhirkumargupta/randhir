@@ -33,7 +33,7 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
   );
 
   $mail = drupal_mail('itg_newsletter', 'send_newsletter', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
-
+  
   if ($mail['result']) {
     drupal_set_message(t('Newsletter has been sent successfully.'));
     if ($news_eng_type == 'automatically') {
@@ -194,7 +194,6 @@ function itg_get_newsletter_mail_content_stories($template_node) {
  * @param int $nid
  */
 function itg_update_newsletter_cron_tbl($nid) {
-
   $query = db_select('itg_cron_newsletter', 'nc')
     ->fields('nc', array('nid', 'type', 'scheduled_time', 'frequency'))
     ->condition('nc.nid', $nid);
@@ -234,6 +233,11 @@ function itg_update_newsletter_cron_tbl($nid) {
         'scheduled_time' => $scheduled_time,
       ))
       ->condition('nid', $nid, '=')
-      ->execute();
+      ->execute();   
+    //field_survey_start_date update after runing cron.
+    $node_load_data = node_load($nid);
+    $new_time_value = date('Y-m-d 00:00:00' , $scheduled_time);
+    $node_load_data->field_survey_start_date[LANGUAGE_NONE][0]['value'] = $new_time_value;
+    field_attach_update('node', $node_load_data);
   }
 }

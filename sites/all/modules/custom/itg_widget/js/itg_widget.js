@@ -4,6 +4,88 @@
  */
 Drupal.behaviors.itg_widgets = {
   attach: function (context, settings) {
+    jQuery ("div.big-news-content-videogallery a.has-ajax-big-story").click (function () {
+      jQuery ('.big-story-col-1 .loading-popup').show ();
+      var nid = jQuery (this).attr ("data-nid");
+      jQuery.get ("big-story-video-gallery/" + nid, function (data) {
+        // add new data data.
+        jQuery ("#videogallery-iframe").html (data);
+        videoGallery ();
+      });
+    });
+    //Prevent stop video if it is palyed previously.
+    jQuery ('body').on('click', '.slick-track img', function (e){
+      jQuery (".iframe-video-dailymotion").each (function () {
+        var url = jQuery (this).attr ("src");
+        jQuery (this).removeAttr("src");
+        var Updatedurl = updateQueryStringParameter (url, 'autoplay', '0');
+        jQuery (this).attr ('src', Updatedurl);
+      });
+    });
+
+    function updateQueryStringParameter (uri, key, value) {
+      var re = new RegExp ("([?&])" + key + "=.*?(&|$)", "i");
+      var separator = uri.indexOf ('?') !== -1 ? "&" : "?";
+      if (uri.match (re)) {
+        return uri.replace (re, '$1' + key + "=" + value + '$2');
+      } else {
+        return uri + separator + key + "=" + value;
+      }
+    }
+    //common function for popup video
+    function videoGallery () {
+      jQuery ("#videogallery-iframe").show ();
+      jQuery ('.big-story-col-1 .loading-popup').hide ();
+      jQuery ('.videogallery-slider').slick ({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: false,
+        asNavFor: '.video-slider-images ul'
+      });
+      jQuery ('.video-slider-images ul').slick ({
+        slidesToShow: 7,
+        slidesToScroll: 1,
+        asNavFor: '.videogallery-slider',
+        dots: false,
+        centerMode: false,
+        arrows: true,
+        variableWidth: true,
+        focusOnSelect: true,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 7,
+              slidesToScroll: 1,
+              arrows: false
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 4,
+              arrows: false,
+              slidesToScroll: 1
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 3,
+              arrows: false,
+              slidesToScroll: 1
+            }
+          }
+        ]
+      });
+      jQuery ("#videogallery-iframe").on ('click', '#close-big-story', function () {
+        jQuery ("#videogallery-iframe").html (" ");
+        jQuery ("#videogallery-iframe").hide ();
+      });
+
+    }
+    //alert('@@@');
 
     //        jQuery('#edit-actionitg-widget-categories-wise-node-group').click(function() {
     //            if (confirm('Are you sure?'))
@@ -23,6 +105,26 @@ Drupal.behaviors.itg_widgets = {
     //            // Prevent default action.
     //            return false;
     //        });
+    jQuery ('.associate-content-block').click (function () {
+      var widgets_type = jQuery (this).attr ('data-widget');
+      var widgets_type_array = widgets_type.split ("-");
+      var widgets_type = widgets_type_array[0];
+      var widgets_id = widgets_type_array[1];
+
+      jQuery.ajax ({
+        url: Drupal.settings.basePath + "associate-photo-video-content/" + widgets_type + "/" + widgets_id,
+        method: 'post',
+        //data: {status_val: 1, section_name: section_name, template_name: template_name, layout_type:layout_type},
+        beforeSend: function () {
+          // $('.itg-ajax-loader').show();
+        },
+        success: function (data) {
+          jQuery ("#videogallery-iframe").html (data);
+          videoGallery ();
+        }
+      });
+    });
+
     jQuery ('#edit-state1').change (function () {
       var getval = jQuery (this).val ();
       if (getval == 0)
@@ -109,142 +211,142 @@ Drupal.behaviors.itg_widgets = {
     });
 
     // This code use form check/uncheck all check box function
-    jQuery ('.widgets-view .vbo-table-select-all').click (function () {
-
-      var mainids = [];
-      var formid = jQuery ("input[name='form_id']").val ();
-      if (jQuery (this).is (':checked')) {
-        type = 'ADD';
-
-      } else {
-        type = 'REMOVE';
-      }
-
-      jQuery ('.vbo-select').each (function () {
-        var checkids = jQuery (this).val ();
-        mainids.push (jQuery (this).val ());
-        if (type == 'ADD') {
-          if (!jQuery (this).is (':checked')) {
-            jQuery ('.nodes_id_container').append ('<span id="spn_' + checkids + '" class="content-ids">' + checkids + '<a class="removeid" cid="' + checkids + '" href="javascript:void(0)">X</a></span>');
-          }
-        } else {
-          jQuery ('#spn_' + checkids).remove ();
-        }
-      })
-      jQuery.ajax ({
-        url: Drupal.settings.basePath + 'setids',
-        type: 'post',
-        beforeSend: function () {
-          jQuery ('#widget-ajex-loader').show ();
-
-        },
-        data: {
-          'checkid': mainids,
-          'formid': formid,
-          'type': type
-        },
-        success: function (data) {
-          setTimeout (function () {
-
-            jQuery ('#widget-ajex-loader').hide ();
-
-          }, 500);
-
-        },
-        error: function (xhr, desc, err) {
-          console.log (xhr);
-          console.log ("Details: " + desc + "\nError:" + err);
-        }
-      });
-    });
+//    jQuery ('.widgets-view .vbo-table-select-all').click (function () {
+//
+//      var mainids = [];
+//      var formid = jQuery ("input[name='form_id']").val ();
+//      if (jQuery (this).is (':checked')) {
+//        type = 'ADD';
+//
+//      } else {
+//        type = 'REMOVE';
+//      }
+//
+//      jQuery ('.vbo-select').each (function () {
+//        var checkids = jQuery (this).val ();
+//        mainids.push (jQuery (this).val ());
+//        if (type == 'ADD') {
+//          if (!jQuery (this).is (':checked')) {
+//            jQuery ('.nodes_id_container').append ('<span id="spn_' + checkids + '" class="content-ids">' + checkids + '<a class="removeid" cid="' + checkids + '" href="javascript:void(0)">X</a></span>');
+//          }
+//        } else {
+//          jQuery ('#spn_' + checkids).remove ();
+//        }
+//      })
+//      jQuery.ajax ({
+//        url: Drupal.settings.basePath + 'setids',
+//        type: 'post',
+//        beforeSend: function () {
+//         // jQuery ('#widget-ajex-loader').show ();
+//
+//        },
+//        data: {
+//          'checkid': mainids,
+//          'formid': formid,
+//          'type': type
+//        },
+//        success: function (data) {
+//          setTimeout (function () {
+//
+//           // jQuery ('#widget-ajex-loader').hide ();
+//
+//          }, 500);
+//
+//        },
+//        error: function (xhr, desc, err) {
+//          console.log (xhr);
+//          console.log ("Details: " + desc + "\nError:" + err);
+//        }
+//      });
+//    });
 
     //This code use remove ids functionality from top 
 
-    jQuery ('.widgets-view .removeid').live ('click', function () {
-      var getids = jQuery (this).attr ('cid');
-      jQuery (this).parent ().remove ();
-      jQuery ('.vbo-select').each (function () {
-        if (jQuery (this).val () == getids) {
-          jQuery (this).attr ('checked', false);
-
-        }
-
-      })
-      var formid = jQuery ("input[name='form_id']").val ();
-      var type = 'REMOVE';
-      jQuery.ajax ({
-        url: Drupal.settings.basePath + 'setids',
-        type: 'post',
-        beforeSend: function () {
-          jQuery ('#widget-ajex-loader').show ();
-          jQuery (".vbo-select").attr ("disabled", true);
-        },
-        data: {
-          'checkid': getids,
-          'formid': formid,
-          'type': type
-        },
-        success: function (data) {
-          console.log (data.length);
-          var json_obj = JSON.parse (data);
-          if (json_obj.length === 0) {
-            jQuery (".handle-unckeck-on-page").attr ('checked', false);
-          }
-          setTimeout (function () {
-
-            jQuery ('#widget-ajex-loader').hide ();
-            jQuery (".vbo-select").attr ("disabled", false);
-          }, 500);
-
-        },
-        error: function (xhr, desc, err) {
-          console.log (xhr);
-          console.log ("Details: " + desc + "\nError:" + err);
-        }
-      });
-
-    })
+//    jQuery ('.widgets-view .removeid').live ('click', function () {
+//      var getids = jQuery (this).attr ('cid');
+//      jQuery (this).parent ().remove ();
+//      jQuery ('.vbo-select').each (function () {
+//        if (jQuery (this).val () == getids) {
+//          jQuery (this).attr ('checked', false);
+//
+//        }
+//
+//      })
+//      var formid = jQuery ("input[name='form_id']").val ();
+//      var type = 'REMOVE';
+//      jQuery.ajax ({
+//        url: Drupal.settings.basePath + 'setids',
+//        type: 'post',
+//        beforeSend: function () {
+//        //  jQuery ('#widget-ajex-loader').show ();
+//          jQuery (".vbo-select").attr ("disabled", true);
+//        },
+//        data: {
+//          'checkid': getids,
+//          'formid': formid,
+//          'type': type
+//        },
+//        success: function (data) {
+//          console.log (data.length);
+//          var json_obj = JSON.parse (data);
+//          if (json_obj.length === 0) {
+//            jQuery (".handle-unckeck-on-page").attr ('checked', false);
+//          }
+//          setTimeout (function () {
+//
+//           // jQuery ('#widget-ajex-loader').hide ();
+//            jQuery (".vbo-select").attr ("disabled", false);
+//          }, 500);
+//
+//        },
+//        error: function (xhr, desc, err) {
+//          console.log (xhr);
+//          console.log ("Details: " + desc + "\nError:" + err);
+//        }
+//      });
+//
+//    })
 
     //This code use add ids functionality from top 
 
-    jQuery ('.widgets-view .vbo-select').unbind ().click (function () {
-      var formid = jQuery ("input[name='form_id']").val ();
-      var checkids = jQuery (this).val ();
-      if (jQuery (this).is (':checked')) {
-        type = 'ADD';
-        jQuery ('.nodes_id_container').append ('<span id="spn_' + checkids + '" class="content-ids">' + checkids + '<a class="removeid" cid="' + checkids + '" href="javascript:void(0)">X</a></span>');
-
-      } else {
-        type = 'REMOVE';
-        jQuery ('#spn_' + checkids).remove ();
-      }
-
-      jQuery.ajax ({
-        url: Drupal.settings.basePath + 'setids',
-        type: 'post',
-        beforeSend: function () {
-          jQuery ('#widget-ajex-loader').show ();
-          jQuery (".vbo-select").attr ("disabled", true);
-        },
-        data: {
-          'checkid': checkids,
-          'formid': formid,
-          'type': type
-        },
-        success: function (data) {
-          setTimeout (function () {
-
-            jQuery ('#widget-ajex-loader').hide ();
-            jQuery (".vbo-select").attr ("disabled", false);
-          }, 500);
-
-        },
-        error: function (xhr, desc, err) {
-          console.log (xhr);
-          console.log ("Details: " + desc + "\nError:" + err);
-        }
-      });
-    });
+//    jQuery ('.widgets-view .vbo-select').unbind ().click (function () {
+//      var formid = jQuery ("input[name='form_id']").val ();
+//      var checkids = jQuery (this).val ();
+//      if (jQuery (this).is (':checked')) {
+//        type = 'ADD';
+//        jQuery ('.nodes_id_container').append ('<span id="spn_' + checkids + '" class="content-ids">' + checkids + '<a class="removeid" cid="' + checkids + '" href="javascript:void(0)">X</a></span>');
+//
+//      } else {
+//        type = 'REMOVE';
+//        jQuery ('#spn_' + checkids).remove ();
+//      }
+//
+//      jQuery.ajax ({
+//        url: Drupal.settings.basePath + 'setids',
+//        type: 'post',
+//        beforeSend: function () {
+//          //jQuery ('#widget-ajex-loader').show ();
+//          jQuery (".vbo-select").attr ("disabled", true);
+//        },
+//        data: {
+//          'checkid': checkids,
+//          'formid': formid,
+//          'type': type
+//        },
+//        success: function (data) {
+//          setTimeout (function () {
+//
+//           // jQuery ('#widget-ajex-loader').hide ();
+//            jQuery (".vbo-select").attr ("disabled", false);
+//          }, 500);
+//
+//        },
+//        error: function (xhr, desc, err) {
+//          console.log (xhr);
+//          console.log ("Details: " + desc + "\nError:" + err);
+//        }
+//      });
+//    });
 
 
     jQuery (".widgets-view .view-link").parent ().attr ("target", "_blank");
@@ -303,30 +405,10 @@ jQuery (document).ready (function () {
   //            return false;
   //        }
   //    });
-  jQuery ("div.big-news-content-videogallery a.has-ajax-big-story").click (function () {
-      jQuery('.big-story-col-1 .loading-popup').show();
-    var nid = jQuery (this).attr ("data-nid");
-    jQuery.get ("big-story-video-gallery/" + nid, function (data) {
-      // remove previous data.
-//      jQuery ("#videogallery-iframe").html ("", function () {
-//        jQuery ("#videogallery-iframe").show ();        
-//        
-//      });
-      // add new data data.
-      jQuery ("#videogallery-iframe").html (data);
-       jQuery ("#videogallery-iframe").show ();
-       jQuery('.big-story-col-1 .loading-popup').hide();
 
-    });
-  });
-  jQuery ("#videogallery-iframe").on ('click','#close-big-story', function () {        
-        jQuery ("#videogallery-iframe").html(" ");
-        jQuery ("#videogallery-iframe").hide();
-      });
-  
-  jQuery("select#fake-soruce-type").on("change",function(){
-    var soruce_type = jQuery(this).val();
-    jQuery("#edit-field-story-source-type-value").val(soruce_type);
+  jQuery ("select#fake-soruce-type").on ("change", function () {
+    var soruce_type = jQuery (this).val ();
+    jQuery ("#edit-field-story-source-type-value").val (soruce_type);
   });
 });
   
