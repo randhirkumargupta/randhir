@@ -291,7 +291,7 @@ function get_layout_details($section_name, $template_name, $status) {
   }
   
   $itg_result = $itg_query->execute()->fetchAll();
-  
+  $data = array();
   foreach ($itg_result as $itg_val) {
     $filter_url = $itg_val->filter_url;
     // for widget display name
