@@ -80,7 +80,7 @@ function ugc_comment_form($form, &$form_state) {
     '#prefix' => '<div class="comment-user-details"><div id="user-name">',
     '#suffix' => '</div>',
     '#attributes' => array(
-      'placeholder' => 'Name',
+      'placeholder' => t('Name'),
     ),
     );
   
@@ -94,7 +94,7 @@ function ugc_comment_form($form, &$form_state) {
     '#prefix' => '<div id="user-email">',
     '#suffix' => '</div>',
     '#attributes' => array(
-      'placeholder' => 'Email',
+      'placeholder' => t('Email'),
     ),
     );
   
