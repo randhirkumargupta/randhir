@@ -355,23 +355,34 @@ function itg_newsletter_node_presave($node) {
       $day = $node->field_newsl_day['und'][0]['value'];
       $date = $node->field_newsl_date['und'][0]['value'];
       $time_rule = $node->field_newsl_time['und'][0]['value'] . ":00";
-      $actual_time = get_cron_time($frequency, $time_rule, $day, $date);
-      $scheduler_time = $actual_time['scheduler_time'];
-
+      if (function_exists('get_cron_time')) {
+        $actual_time = get_cron_time($frequency, $time_rule, $day, $date);
+        $scheduler_time = $actual_time['scheduler_time'];
+      }
       if ($frequency == 'Daily') {
-        $scheduler_time_up = strtotime('+1 day', $scheduler_time);
+        if (!empty($scheduler_time)) {
+          $scheduler_time_up = strtotime('+1 day', $scheduler_time);
+        }
       }
       elseif ($frequency == 'Weekly') {
-        $scheduler_time_up = strtotime('+7 days', $scheduler_time);
+        if (!empty($scheduler_time)) {
+          $scheduler_time_up = strtotime('+7 days', $scheduler_time);
+        }
       }
       else if ($frequency == 'Monthly') {
-        $scheduler_time_up = strtotime('+1 month', $scheduler_time);
+        if (!empty($scheduler_time)) {
+          $scheduler_time_up = strtotime('+1 month', $scheduler_time);
+        }
       }
-      $node_scheduler_time = date('Y-m-d h:i:s', $scheduler_time_up);
-      $node->field_survey_start_date['und'][0]['value'] = $node_scheduler_time;
-      $node->field_survey_start_date['und'][0]['value2'] = $node_scheduler_time;
+      if (!empty($scheduler_time_up)) {
+        $node_scheduler_time = date('Y-m-d h:i:s', $scheduler_time_up);
+      }
+      if (!empty($node_scheduler_time)) {
+        $node->field_survey_start_date['und'][0]['value'] = $node_scheduler_time;
+        $node->field_survey_start_date['und'][0]['value2'] = $node_scheduler_time;
+      }
     }
-    
+
     if (($node->field_newsl_newsletter_type['und'][0]['value'] == 'manual' && $node->field_newsl_schedule['und'][0]['value'] == 'now')) {
       $node_scheduler_time = date('Y-m-d h:i:s', time());
       $node->field_survey_start_date['und'][0]['value'] = $node_scheduler_time;
