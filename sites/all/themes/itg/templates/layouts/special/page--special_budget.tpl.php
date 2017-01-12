@@ -129,6 +129,8 @@ if (!empty($device[0])) {
                       </div>      
                   </div>    
                 <?php endif; ?>
+                <div class="row">
+                    <div class="col-md-12 budget-top-block">
                 <?php
                 $display_title = "";
                 if($widget_data['itg-block-2']['block_title'] == "")
@@ -146,6 +148,8 @@ if (!empty($device[0])) {
                         <li><a href="javascript:void(0)" class="twitter"><i class="fa fa-twitter"></i></a></li>
                         <li><a title="share on google+" href="#" class="google"></a></li>
                     </ul>
+                </div>
+                        </div>
                 </div>
                 <div class="row itg-325-layout">
                     <?php if ($live_url != "" || !empty($highlights['node_data']->field_story_highlights['und']) || $theme == 'itgadmin') { ?>
