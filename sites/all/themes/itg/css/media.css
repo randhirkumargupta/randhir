@@ -1108,7 +1108,6 @@
   .election-page {
     margin: 0 0px 20px 0px;
   }
-
   .election-page .key-candidate .list-state {
     white-space: nowrap;
     overflow: auto;
@@ -1123,6 +1122,15 @@
   .election-page .right-side .key_candidate_extra_block .droppable {
     min-height: auto;
     height: auto;
+  }
+  .election-page .election-top-block .social-share {
+    margin-top: 7px;
+  }
+  .election-page .election-top-block .social-share i.fa-share-alt {
+    font-size: 16px;
+  }
+  .election-page .election-top-block {
+    margin-top: 10px;
   }
 
   /*election page css end*/
