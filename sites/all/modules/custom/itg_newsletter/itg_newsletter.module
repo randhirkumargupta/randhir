@@ -206,6 +206,11 @@ function itg_newsletter_submit_handler_for_redirect($form, &$form_state) {
   drupal_set_message(t('@contenttype <strong>@title</strong> has been @operation', array('@contenttype' => $content_type, '@title' => $title, '@operation' => $op)));
 }
 
+/**
+ * Custom submit callback for save as draft submit.
+ * @param array $form
+ * @param array $form_state
+ */
 function itg_newsletter_form_save_as_draft_submit_callback(&$form, &$form_state) {
   $form_state['redirect'] = 'manage-draft-newsletter';
 }
