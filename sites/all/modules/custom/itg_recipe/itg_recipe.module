@@ -124,7 +124,6 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
     case 'survey_node_form':
     case 'quiz_node_form':
     case 'newsletter_node_form':
-    case 'podcast_node_form':
     case 'astro_node_form':
       itg_recepi_save_draft_button($form);
       break;
