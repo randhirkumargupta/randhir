@@ -114,6 +114,14 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => 21,
       '#value' => t('Cancel'),
     );
+    $form['actions']['itg_custom_button'] = array(
+        '#type' => 'submit',
+        '#value' => t('Save as Draft'),
+        '#submit' => array(
+            'node_form_submit',
+            'itg_newsletter_form_save_as_draft_submit_callback'
+        ),
+    );
 
     $form['actions']['submit']['#value'] = 'Publish';
     unset($form['title']);
@@ -143,7 +151,7 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id) {
 
     // Add submit handler for redirect form to their corresponding page after node has been created susccessfully.
     $form['actions']['submit']['#submit'][] = 'itg_newsletter_submit_handler_for_redirect';
-
+    
     // Call function after build
     $form['#after_build'][] = 'itg_newsletter_form_after_build';
   }
@@ -198,6 +206,9 @@ function itg_newsletter_submit_handler_for_redirect($form, &$form_state) {
   drupal_set_message(t('@contenttype <strong>@title</strong> has been @operation', array('@contenttype' => $content_type, '@title' => $title, '@operation' => $op)));
 }
 
+function itg_newsletter_form_save_as_draft_submit_callback(&$form, &$form_state) {
+  $form_state['redirect'] = 'manage-draft-newsletter';
+}
 /**
  * After build function for newsletter
  * {@inheritdoc}
