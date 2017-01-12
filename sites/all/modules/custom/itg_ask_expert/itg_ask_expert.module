@@ -410,7 +410,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
         '#suffix' => '<p class="chtr-limit"><span id="rest-char">160</span> out of 160 characters</p></div>',
         '#maxlength' => 160,
         '#attributes' => array(
-            'placeholder' => 'Ask your question here',
+            'placeholder' => t('Ask your question here'),
             'class' => array('charcount'),
             'autocomplete' => 'off',
         ),
@@ -422,7 +422,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
         '#prefix' => '<div id="askname" class="askname">',
         //'#suffix' => '</div>',
         '#attributes' => array(
-            'placeholder' => 'Name',
+            'placeholder' => t('Name'),
             'autocomplete' => 'off',
         ),
     );
@@ -433,7 +433,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
         //'#prefix' => '<div id="askemail">',
         '#suffix' => '</div>',
         '#attributes' => array(
-            'placeholder' => 'Email',
+            'placeholder' => t('Email'),
             'autocomplete' => 'off',
         ),
     );
