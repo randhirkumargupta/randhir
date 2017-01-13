@@ -102,7 +102,7 @@ function ads_features_strongarm() {
           'weight' => '1',
         ),
         'redirect' => array(
-          'weight' => '15',
+          'weight' => '13',
         ),
       ),
       'display' => array(),
