@@ -191,8 +191,11 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
 
   $syndication_mode = 'field_ads_placeholder';
   $syndication_rule_title = 'field_ads_template_selection';
-  $rule_title = $form[$syndication_rule_title][LANGUAGE_NONE]['#entity']->field_ads_template_selection[LANGUAGE_NONE][0]['value'];
-
+  $op = NULL;  // Initilization with null as default entry 
+  $rule_title = NULL; // Initilization with null as default entry
+  if (isset($form[$syndication_rule_title][LANGUAGE_NONE]['#entity']->field_ads_template_selection[LANGUAGE_NONE][0]['value'])) {
+    $rule_title = $form[$syndication_rule_title][LANGUAGE_NONE]['#entity']->field_ads_template_selection[LANGUAGE_NONE][0]['value'];
+  }
   $option_array = array(
       '_none' => '- Select a value -',
       'Home' => 'Home Page',
@@ -236,8 +239,10 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
       if ($key == 0) {
         unset($form['field_adds_code_holder'][LANGUAGE_NONE][$key]['remove_button']);
       }
-
-      $syndication_mode_value = $form['field_adds_code_holder'][LANGUAGE_NONE][$key]['#entity']->field_ads_placeholder[LANGUAGE_NONE][0]['value'];
+      $syndication_mode_value = NULL;
+      if (isset($form['field_adds_code_holder'][LANGUAGE_NONE][$key]['#entity']->field_ads_placeholder[LANGUAGE_NONE][0]['value'])) {
+        $syndication_mode_value = $form['field_adds_code_holder'][LANGUAGE_NONE][$key]['#entity']->field_ads_placeholder[LANGUAGE_NONE][0]['value'];
+      }
       $form['field_adds_code_holder'][LANGUAGE_NONE][$key][$syndication_mode][LANGUAGE_NONE]['#options'] = $op;
       if (isset($syndication_mode_value)) {
         $form['field_adds_code_holder'][LANGUAGE_NONE][$key][$syndication_mode][LANGUAGE_NONE]['#default_value'] = $syndication_mode_value;
