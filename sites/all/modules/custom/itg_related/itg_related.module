@@ -95,8 +95,6 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
  */
 function my_custom_ajax_callback() {
 
-  $data = array('######1', '######2');
-
   $combined_data = array('label' => $_POST['title'], 'bundle_name' => trim($_POST['bundle_name']), 'im_vid_4' => $_POST['section_id'], 'hash' => $_POST['hash']);
   //$output = serialize($combined_data);
   $check_title = check_search_title(trim($_POST['search_name']));
@@ -109,11 +107,15 @@ function my_custom_ajax_callback() {
         ->fields(array('search_title', 'search_path', 'ntype', 'uid', 'created', 'changed'))
         ->values(array($_POST['search_name'], $_POST['dta'], $_POST['ntype'], $_POST['uid'], REQUEST_TIME, REQUEST_TIME))
         ->execute();
+    $final_link = str_replace("&width=900&height=700&iframe=true", "", $_POST['dta']);
+    $final_with_title = $final_link . '&sname=' . $_POST['search_name'];
+    $related_res = '<li><a class= "def-cur-pointer" onclick="showrelatedpopup(' . "'" . $final_with_title . "'" . ')">' . $_POST['search_name'] . '</a></li>';
   }
 
 
   if ($result !== FALSE) {
-    return $data;
+    $response = array('msg' => 'success', 'lnk' => $related_res);
+    print json_encode($response);
   }
 }
 
@@ -133,7 +135,7 @@ function itg_related_views_pre_render(&$view) {
     drupal_add_js(drupal_get_path('module', 'itg_related') . '/js/itg_related.js', array('weight' => 1));
     $titlename = '';
     if(!empty($_GET['sname'])) {
-    $titlename = t('Search Name :');
+    $titlename = t('Search Name : ');
     $sname = '<span class="sname">'.$titlename. $_GET['sname'] . '&nbsp;</span>';
     $view->attachment_before = $sname;
     }
@@ -387,15 +389,14 @@ function itg_related_save_search() {
       ->orderBy('changed', 'DESC')//ORDER BY created
       ->range(0, 5)
       ->execute();
-
-
-  $related_html = '<h3 class=rel-hed>My Saved Search</h3>';
-  $related_html.= '<ul>';
+  
+  $related_html = '';
+  $related_html.= '<ul class="search-list">';
   while ($save_search_result_info = $save_search_result->fetchAssoc()) {
 
     $final_link = str_replace("&width=900&height=700&iframe=true", "", $save_search_result_info['search_path']);
-
     $related_html.= '<li><a oncontextmenu="return false;" href="' . $final_link . '&sname='.$save_search_result_info['search_title'].'&width=1000&height=700&iframe=true" class="colorbox-load">' . $save_search_result_info['search_title'] . '</a></li>';
+    
   }
 
   $related_html.= '</ul>';
