@@ -402,10 +402,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                 <div class="ad-widget droppable">
                                     <div class="sidebar-ad">
                                         <?php
-                                        if (!empty($itg_ad['200*200_right_bar_ad1'])) {
-                                            print $itg_ad['200*200_right_bar_ad1'];
-                                        }
-                                        ?></div>
+                                          $block = block_load('itg_ads', ADS_RHS1);   
+                                          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                          print render($render_array);
+                                         ?></div>
                                 </div>
                             </div>
                         </div> 
@@ -492,9 +492,9 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                 <div class="ad-widget droppable">
                                     <div class="sidebar-ad">
                                         <?php
-                                        if (!empty($itg_ad['200*200_right_bar_ad2'])) {
-                                            print $itg_ad['200*200_right_bar_ad2'];
-                                        }
+                                          $block = block_load('itg_ads', ADS_RHS2);   
+                                          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                          print render($render_array);
                                         ?>
                                     </div>
                                 </div>
