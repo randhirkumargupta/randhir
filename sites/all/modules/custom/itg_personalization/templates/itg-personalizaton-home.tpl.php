@@ -49,12 +49,16 @@
         </div>
         <div class="pregress-bar">            
             <span class="current-badge"><small><?php print $data['badge_detail']['earn']; ?></small>Current Level</span>
-            <span class="pregress-bar-active"></span>
+            <span class="pregress-bar-active progress-bar-<?php print $data['badge_detail']['earn']; ?>"></span>
+            <?php if ($data['badge_detail']['earn'] != 5): ?>
             <span class="next-badge"><small><?php print $data['badge_detail']['next']; ?></small>Next Level</span>
+            <?php endif; ?>
         </div>
+        <?php if ($data['badge_detail']['earn'] != 5): ?>
         <div class="points-to-go">
           <?php print '<span>'.$data['badge_detail']['points_to_go'] . '</span> ' . t('Points to go'); ?>
         </div>
+        <?php endif; ?>
       </div>
       <?php endif; ?>
   </div>
