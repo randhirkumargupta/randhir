@@ -44,8 +44,7 @@ define('EXTRA_SMALL_IMAGE_HEIGHT', 66);
 
 // set comment config in variable
 if (function_exists('global_comment_last_record')) {
-$comment = global_comment_last_record();
-variable_set('COMMENT_CONFIG', $comment);
+variable_set('COMMENT_CONFIG', global_comment_last_record());
 }
 
 
