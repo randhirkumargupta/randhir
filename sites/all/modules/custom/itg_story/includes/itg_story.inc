@@ -97,12 +97,12 @@ function associate_photo_video_content() {
     if (arg(1) == 'video') {
 
         if (function_exists('itg_widget_dailymotion_get_videogallery_slider')) {
-            print '<div class="big-story-popup"><span id="close-big-story"><a href="#">X</a></span>';
+            print '<div class="big-story-popup"><span id="close-big-story"><a href="javascript:void(0)">X</a></span>';
             print $videoids = itg_widget_dailymotion_get_videogallery_slider(arg(2), 'video');
             print '</div>';
         }
     } else if (arg(1) == 'gallery') {
-        print '<div class="big-story-popup"><span id="close-big-story"><a href="#">X</a></span>';
+        print '<div class="big-story-popup"><span id="close-big-story"><a href="javascript:void(0)">X</a></span>';
         print views_embed_view('photo_landing_slider', 'block_1', arg(2));
         print '</div>';
     }
