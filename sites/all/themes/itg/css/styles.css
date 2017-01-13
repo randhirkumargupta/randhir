@@ -1398,7 +1398,7 @@ footer .footer-copyright {
 }
 
 .itg-common-section .droppable {
-  height: 408px;
+  height: 398px;
 }
 .itg-common-section .home-page-poll-block-wrap .droppable {
   min-height: 408px;
@@ -1708,7 +1708,7 @@ footer .footer-copyright {
   display: block;
 }
 .section-ordering h3 {
-  padding: 15px 0;
+  padding: 10px 0;
   font-size: 20px;
   font-size: 1.25rem;
 }
@@ -9078,14 +9078,17 @@ footer .footer-copyright {
   padding-top: 20px;
 }
 .movie-layout-page .itg-h385-section .droppable {
-  height: 385px;
+  height: 396px;
 }
 .movie-layout-page .itg-h396-section .droppable {
-  height: 385px;
+  height: 408px;
 }
 .movie-layout-page .itg-h396-section .widget-title {
   top: 10px;
   left: 10px;
+}
+.movie-layout-page .itg-h396-section .tech-movie_latest .widget-title {
+  margin-bottom: 10px;
 }
 .movie-layout-page .tech-block_8 .widget-title {
   margin-bottom: 5px;
@@ -9446,7 +9449,7 @@ footer .footer-copyright {
 /*css end defalt image */
 /* CSS For Election Page */
 .election-page .election-top-block {
-  margin-top: 60px;
+  margin-top: 40px;
   position: relative;
   z-index: 10;
 }
