@@ -150,10 +150,12 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
          }
 
         // Prepare array of correct answers
-        foreach($ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE] as $currect_ans) {
-           if($currect_ans['value'] == 'Yes') {
-            $correct_ans_op[$num][] = $ans_option['value'];
-           }
+        if(!empty($ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE])) {
+          foreach ($ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE] as $currect_ans) {
+            if ($currect_ans['value'] == 'Yes') {
+              $correct_ans_op[$num][] = $ans_option['value'];
+            }
+          }
         }
       }
 
@@ -240,6 +242,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
               '#type' => $answer_type,
               '#options' => $all_ans_options[$num],
               '#suffix' => '</div>',
+              //'#suffix' => '</div><div id=answer_option' . $num.'><a href="javascript:void(0)" class="associate-content-block" data-widget="echo $associate_type;-echo $associate_id;">click here</a></div>',
           );
       }
       
