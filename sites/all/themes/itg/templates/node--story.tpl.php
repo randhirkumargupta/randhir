@@ -112,7 +112,7 @@ if (!empty($content)):
                             </div>
                             <div class="profile-detail">                  
                                 <ul>
-                                    <li class="title"><?php print $reporter_node->title; ?></li>
+                                    <li class="title"><?php print t($reporter_node->title); ?></li>
         <?php
         $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
         $twitter_handle = str_replace('@', '', $twitter_handle);
@@ -124,7 +124,7 @@ if (!empty($content)):
                                 <ul class="date-update">
                                     <li class="mailto mhide"><i class="fa fa-envelope-o"></i> &nbsp;<?php
                             $email = $reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
-                            print "<a title ='Mail To Author' href='mailto:support@indiatoday.in'>Mail To Author</a>";
+                            print "<a title ='Mail To Author' href='mailto:support@indiatoday.in'>".t('Mail To Author')."</a>";
                             ?></li>
                                     <li class="mhide"><span class="share-count"><?php if (!empty($tot_count)) {
                                 print $tot_count;
@@ -164,7 +164,7 @@ if (!empty($content)):
                         </div>
         <?php if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
                             <div class="briefcase mhide">
-                                <h4><?php print t('Briefcase'); ?></h4>
+                                <h4><?php print t('Highlights'); ?></h4>
                                 <ul>
                                     <?php
                                     foreach ($node->field_story_highlights['und'] as $high) {
@@ -243,7 +243,7 @@ if (!empty($content)):
                                             <?php print $read_later; ?>                                         
                                         <?php else: ?>
                                             <?php if (function_exists(itg_sso_url)): ?>
-                                                <?php print itg_sso_url('<i class="fa fa-bookmark"></i> <span>READ LATER</span>', 'READ LATER'); ?>
+                                                <?php print itg_sso_url('<i class="fa fa-bookmark"></i> <span>'.t('READ LATER').'</span>', t('READ LATER')); ?>
                                             <?php endif; ?>
 
         <?php endif; ?>

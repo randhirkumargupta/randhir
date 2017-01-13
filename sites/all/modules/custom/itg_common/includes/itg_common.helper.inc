@@ -48,6 +48,11 @@ define('ADS_HEADER', 'ads_super_banner_top_nav_728x90');
 
 
 
+// set comment config in variable
+if (function_exists('global_comment_last_record')) {
+variable_set('COMMENT_CONFIG', global_comment_last_record());
+}
+
 
 
 /**
