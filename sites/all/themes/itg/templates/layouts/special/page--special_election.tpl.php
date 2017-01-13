@@ -7,7 +7,12 @@
  * @see https://drupal.org/node/1728148
  */
 //$preview = $widget_data['preview'];
-//p($widget_data);
+$actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$search_title = preg_replace("/'/", "\\'", $widget_data['itg-block-4']['block_title']);
+$fb_share_title= htmlentities($search_title, ENT_QUOTES);    
+$short_url = shorten_url($actual_link, 'goo.gl');
+$share_desc = '';
+$src = '';
 ?>
 
 <?php
@@ -144,9 +149,9 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 echo '<div class="row"><div class="col-md-12 election-top-block"><h1 '.$display_title.' id="display_tit"><span class="highlights-title">' . mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, "..") . '</span></h1> <div class="social-share">
                     <ul>
                         <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                        <li><a class="facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="javascript:void(0)" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li><a title="share on google+" href="#" class="google"></a></li>
+                        <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fb_share_title . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $src . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+                        <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($search_title) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
+                        <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="google def-cur-pointer"></a></li>
                     </ul>
                 </div></div></div>';
 
