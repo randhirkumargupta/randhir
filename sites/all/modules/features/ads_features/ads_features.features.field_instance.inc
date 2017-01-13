@@ -481,11 +481,83 @@ function ads_features_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'taxonomy_term-ads_template_placeholder-field_ad_master_template_section'.
+  $field_instances['taxonomy_term-ads_template_placeholder-field_ad_master_template_section'] = array(
+    'bundle' => 'ads_template_placeholder',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ad_master_template_section',
+    'label' => 'Template section',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'taxonomy_term-ads_template_placeholder-field_ads_placeholder_values'.
+  $field_instances['taxonomy_term-ads_template_placeholder-field_ads_placeholder_values'] = array(
+    'bundle' => 'ads_template_placeholder',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ads_placeholder_values',
+    'label' => 'Ads Placeholder values',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 2,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Ad Code');
   t('Adds code holder');
   t('Ads Placeholder');
+  t('Ads Placeholder values');
   t('Body close');
   t('Body start');
   t('Code visibility flag');
@@ -494,6 +566,7 @@ function ads_features_field_default_field_instances() {
   t('Header script	');
   t('Start Date');
   t('Template Selection');
+  t('Template section');
 
   return $field_instances;
 }
