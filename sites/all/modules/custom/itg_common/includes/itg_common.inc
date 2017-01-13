@@ -441,3 +441,22 @@ function itg_sso_url($link_name, $link_title = NULL) {
     }
   }
 }
+
+/**
+ * Implements 'itg_common_only_text_string'.
+ * 
+ * This function return filtered plain text string.
+ * 
+ * @param string $str
+ *   String with html tags and special characters.
+ * @return type
+ *   Only text string.
+ */
+function itg_common_only_text_string($str) {
+  $data = strip_tags($str);
+  $data = preg_replace("/'/", "\\'", $data);
+  $data = htmlentities($data, ENT_QUOTES);
+  $data = trim(str_replace('&nbsp;', ' ', $data));
+  
+  return $data;
+}

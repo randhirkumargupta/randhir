@@ -198,7 +198,7 @@ function ads_features_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 12,
+      'weight' => 10,
     ),
   );
 
@@ -240,7 +240,7 @@ function ads_features_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 11,
+      'weight' => 9,
     ),
   );
 
@@ -298,12 +298,12 @@ function ads_features_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 14,
+      'weight' => 12,
     ),
   );
 
-  // Exported field_instance: 'node-ads_management-field_ads_header_script'.
-  $field_instances['node-ads_management-field_ads_header_script'] = array(
+  // Exported field_instance: 'node-ads_management-field_ads_headerscript'.
+  $field_instances['node-ads_management-field_ads_headerscript'] = array(
     'bundle' => 'ads_management',
     'default_value' => NULL,
     'deleted' => 0,
@@ -314,7 +314,7 @@ function ads_features_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 6,
+        'weight' => 17,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -325,8 +325,8 @@ function ads_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_ads_header_script',
-    'label' => 'Header script',
+    'field_name' => 'field_ads_headerscript',
+    'label' => 'Header script	',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -340,85 +340,6 @@ function ads_features_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 10,
-    ),
-  );
-
-  // Exported field_instance: 'node-ads_management-field_ads_section_selection'.
-  $field_instances['node-ads_management-field_ads_section_selection'] = array(
-    'bundle' => 'ads_management',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 9,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_ads_section_selection',
-    'label' => 'Section Template',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 7,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-ads_management-field_ads_select_secton_option'.
-  $field_instances['node-ads_management-field_ads_select_secton_option'] = array(
-    'bundle' => 'ads_management',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 11,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_ads_select_secton_option',
-    'label' => 'Section Selection',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
       'weight' => 8,
     ),
   );
@@ -477,7 +398,7 @@ function ads_features_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 13,
+      'weight' => 11,
     ),
   );
 
@@ -518,45 +439,6 @@ function ads_features_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_select',
       'weight' => 4,
-    ),
-  );
-
-  // Exported field_instance: 'node-ads_management-field_ads_template_variants'.
-  $field_instances['node-ads_management-field_ads_template_variants'] = array(
-    'bundle' => 'ads_management',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_plain',
-        'weight' => 3,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_ads_template_variants',
-    'label' => 'Template Variants',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 9,
     ),
   );
 
@@ -609,12 +491,9 @@ function ads_features_field_default_field_instances() {
   t('Code visibility flag');
   t('Device Selection');
   t('End Date');
-  t('Header script');
-  t('Section Selection');
-  t('Section Template');
+  t('Header script	');
   t('Start Date');
   t('Template Selection');
-  t('Template Variants');
 
   return $field_instances;
 }

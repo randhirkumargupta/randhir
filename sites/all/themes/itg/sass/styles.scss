@@ -1241,7 +1241,7 @@ footer{
     }
     .itg-common-section{
         .droppable{
-            height: 408px;
+            height: 398px;
         }
         .home-page-poll-block-wrap{
          .droppable{
@@ -1441,7 +1441,7 @@ footer{
         display: block;
     }
     h3{
-        padding: 15px 0;
+        padding: 10px 0;
         @include font(20px);
     }
     p{
@@ -7524,16 +7524,21 @@ footer{
     }
     .itg-h385-section{
         .droppable{
-            height: 385px;
+            height: 396px;
         }
     }
     .itg-h396-section{
         .droppable{
-            height: 385px;
+            height: 408px;
         }
         .widget-title{
             top:10px;
             left:10px;
+        }
+        .tech-movie_latest{
+            .widget-title{
+                margin-bottom: 10px;
+            }
         }
     }   
     .tech-block_8{        
@@ -7886,7 +7891,7 @@ footer{
 /* CSS For Election Page */
 .election-page{     
     .election-top-block{
-        margin-top:60px;
+        margin-top:40px;
         position: relative;
         z-index: 10; 
         h1{

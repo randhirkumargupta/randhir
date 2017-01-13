@@ -39,17 +39,13 @@
                         'type': 'POST',
                         'success': function (data)
                         {
-                            var tmp = data.split("######");
-
-                            //console.log(data);
-
-                            if (tmp[0])
-                            {
+                           
+                            var obj = jQuery.parseJSON(data);
+                            if (obj.msg == 'success') {
                                 $('.success').fadeIn(200).show(0).delay(2000).hide(1000);
-                                //$("#search-title").val('');
-                            }
-                            else
-                            {
+                                parent.jQuery('.search-list').prepend(obj.lnk);
+
+                            } else {
                                 $('.erro').fadeIn(200).show(0).delay(2000).hide(1000);
                             }
                         }
