@@ -5631,6 +5631,13 @@ div.node{
     }
   }
 }
+.category-manager-selection-details{
+  .field-name-field-cm-select-type{
+    .form-type-select > label:after{
+      @extend .astrick;
+    }
+  }
+}
 
 [id*="views-form-strory-menegment-page"]{
   .btn-generate-xml{
