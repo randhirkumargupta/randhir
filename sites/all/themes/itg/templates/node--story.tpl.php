@@ -92,8 +92,7 @@ if (!empty($content)):
                 $widget_data = $associate_type . '-' . $associate_id;
             }
             ?>
-    <!--           <a href="javascript:void(0)" class="associate-content-block" data-widget="<?php //echo $associate_type;?>-<?php // echo $associate_id;?>">click here</a>-->
-            <div id="videogallery-iframe"></div>
+    <!--           <a href="javascript:void(0)" class="associate-content-block" data-widget="<?php //echo $associate_type;?>-<?php // echo $associate_id;?>">click here</a>-->            
             <div class="story-left-section">
     <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_listicle[LANGUAGE_NONE])) { ?>
                     <div class="story-left">
@@ -261,7 +260,7 @@ if (!empty($content)):
                     echo 'listicle-page';
                 }
                 ?>">
-
+                    <div class="story-associate-content">
                     <?php
                     $clidk_class_slider = "";
                     $widget_data = '';
@@ -277,7 +276,9 @@ if (!empty($content)):
                             $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                             $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                             $file_uri = file_create_url($story_image);
-                            print '<img class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '" alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
+                            print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">        
+                    <i class="fa fa-play-circle"></i>
+                    <i class="fa fa-camera"></i></span></a>';
                             if (!empty($getimagetags)) {
                                 foreach ($getimagetags as $key => $tagval) {
                                     $urltags = addhttp($tagval->tag_url);
@@ -289,13 +290,16 @@ if (!empty($content)):
                             <?php
                         } else {
                             ?>
+                            
                             <div class="stryimg"><?php
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                     //print theme('image_style', array('style_name' => 'buzz_image', 'path' => $story_image));
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                     $file_uri = file_create_url($story_image);
-                    print '<img class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '" alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
+                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">        
+                    <i class="fa fa-play-circle"></i>
+                    <i class="fa fa-camera"></i></span></a>';
                     if (!empty($getimagetags)) {
                         foreach ($getimagetags as $key => $tagval) {
                             $urltags = addhttp($tagval->tag_url);
@@ -306,11 +310,17 @@ if (!empty($content)):
                             <?php } ?>
                             <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) { ?>
                                 <div class="photoby"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?></div>
-                            <?php } ?>
+                            <?php } ?>                            
                         </div>
                         <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'])) { ?>    
                             <div class="image-alt"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?></div>
                         <?php } ?>
+                            
+                            <div id="videogallery-iframe">
+                                <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/tab-loading.gif" alt="loading">
+                            </div>
+                            </div>
+                            
                         <?php
                         if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
                             if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) {
