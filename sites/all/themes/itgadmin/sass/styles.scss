@@ -2982,6 +2982,11 @@ fieldset#edit-select{
     a{
       @extend .btn-reset;
     }
+    .form-submit{
+      background-color: #ee4d4d;
+      border: 1px solid #ee4d4d;
+      box-shadow: 0 0 5px #ee4d4d;
+    }
   }
 }
 .user-configurations{
@@ -9455,7 +9460,7 @@ div.node{
     tr:first-child{display: block !important;}
   }
 }
-span.file a{pointer-events: none;}
+span.file a{pointer-events: none; color: #2f2f2f;}
 .node-photogallery-form [id*="field-gallery-image-values"] tbody tr.drag{
   td:nth-child(2){
     border-color: #1fb5ad;
@@ -9546,5 +9551,16 @@ span.file a{pointer-events: none;}
     overflow: hidden;
     padding: 0;
     position: relative;
+  }
+}
+.uploaded-video-view{
+  @extend .dib;
+  @extend .vtop;
+  @extend .full;
+  padding: 0 15px;
+  .view-item{
+    @extend .dib;
+    @extend .vtop;
+    padding: 15px;
   }
 }
