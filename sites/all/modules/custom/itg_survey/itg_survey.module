@@ -122,6 +122,7 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
     // After build and custom submit callback
     $form['#after_build'][] = 'itg_survey_form_after_build';
     $form['actions']['submit']['#submit'][] = 'itg_survey_form_custom_submit_callback';
+    $form['actions']['itg_custom_button']['#submit'][] = 'itg_survey_form_save_as_draft_submit_callback';
   }
 
   // Hide add token field from survey, quiz and poll form
@@ -157,6 +158,14 @@ function itg_survey_form_custom_submit_callback($form, &$form_state) {
   }
 }
 
+/**
+ * Custom function on submit of survey form
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_survey_form_save_as_draft_submit_callback(&$form, &$form_state) {
+  $form_state['redirect'] = 'manage-draft-survey';
+}
 /**
  * After build function for survey
  * @param array $form
@@ -232,7 +241,7 @@ function itg_survey_views_pre_render(&$view) {
  */
 function itg_survey_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
 
-  if ($form['#id'] == 'views-exposed-form-manage-survey-page') {
+  if ($form['#id'] == 'views-exposed-form-manage-survey-page' || $form['#id'] == 'views-exposed-form-manage-survey-page-1') {
 
     // Call function autocomplete to show matching titles
     $form['title']['#autocomplete_path'] = 'content-title-list/survey/autocomplete';
