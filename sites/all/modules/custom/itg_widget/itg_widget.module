@@ -1312,8 +1312,10 @@ function itg_widget_save_bulk_operation_widget_data($form_state, $widget_name) {
   $selected_node = $form_state['selection'];
   if (count($selected_node)) {
     foreach ($selected_node as $node) {
-      itg_widget_delete_data_from_widget($widget_name, $node);
-      itg_widget_insert_widget_data_by_min_weight($node, $widget_name, 0);
+      $is_node_in_widget = itg_widget_check_node_in_widget($node, $widget_name);
+      if (!$is_node_in_widget) {  
+        itg_widget_insert_widget_data($node, $widget_name, 0);
+      }
     }
     drupal_set_message(t("Nodes has been saved"));
   }
