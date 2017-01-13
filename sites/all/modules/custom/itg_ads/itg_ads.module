@@ -86,7 +86,7 @@ function itg_ads_block_view($delta = '') {
     case 'ads_super_banner_top_nav_728x90':
       $placeholder_name = t('Super Banner (Top Nav) 728x90');
       $ad_script = get_itg_page_name($placeholder_name);
-      $block['content'] = 'shravan';
+      $block['content'] = $ad_script;
       break;
 
     // For Super Banner (Bottom nav) 728x90
