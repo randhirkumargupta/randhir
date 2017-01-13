@@ -10,6 +10,31 @@
 function ads_features_field_default_field_bases() {
   $field_bases = array();
 
+  // Exported field_base: 'field_ad_master_template_section'.
+  $field_bases['field_ad_master_template_section'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_ad_master_template_section',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_adds_code_holder'.
   $field_bases['field_adds_code_holder'] = array(
     'active' => 1,
@@ -229,6 +254,30 @@ function ads_features_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_text',
+  );
+
+  // Exported field_base: 'field_ads_placeholder_values'.
+  $field_bases['field_ads_placeholder_values'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_ads_placeholder_values',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
   );
 
   // Exported field_base: 'field_ads_start_date'.
