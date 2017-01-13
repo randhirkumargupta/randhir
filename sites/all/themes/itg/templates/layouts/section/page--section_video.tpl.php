@@ -182,8 +182,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
               $itg_class = 'itg-front';
             }
             ?>
-            <div class="itg-layout-container <?php echo $itg_class; ?> default-video pos-rel">         
-            <?php print render($page['vertical_menu']); ?>
+            <div class="itg-layout-container <?php echo $itg_class; ?> default-video">
             <?php if ($theme == 'itgadmin') { ?>
                   <div class="row">
                       <div class="col-md-12">
