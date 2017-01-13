@@ -10,6 +10,9 @@
     #block-views-photo-landing-slider-block{
         width: 100%;
     }
+    ::-webkit-scrollbar {
+        display: none;
+    }
 } 
 
 @media only screen and (max-width:1024px){
@@ -1236,7 +1239,45 @@
     margin-bottom: 50px;
 }
 /*movie page css end*/
-
+/*Globle search page css start*/
+.view-front-end-global-search{
+    .views-exposed-widget .caln{
+        position: inherit;
+        right: auto;
+    }   
+}
+[id="views-exposed-form-front-end-global-search-page"]{
+    .views-exposed-form{
+        height:90px;
+        #edit-tm-vid-4-names-wrapper, #edit-sm-field-itg-common-by-line-name-wrapper, #edit-bundle-name-wrapper, #edit-hash-wrapper{
+            .views-widget{
+                display: none;
+                position: relative;
+                left: auto; 
+                top: auto;
+            }
+        }
+        .caln{
+            width: 100%;
+            padding:8px;
+            .date-padding{
+                width: 125px;
+            }
+            label{
+                display: block;
+                padding-top: 0;
+            }
+            .container-inline-date {            
+                margin-left: 10px; 
+                + .container-inline-date{
+                    display: block;
+                    vertical-align: top;
+                }
+            }
+        }
+    }
+}
+/*Globle search page css end*/
 }
 
 
@@ -1930,7 +1971,11 @@
                 @include font(30px);
             }        
         }
-    } 
+        .views-exposed-widget .caln{
+          position: inherit;
+          right: auto;
+        }
+    }     
     /*End css ITG globle search result page*/
 
 
