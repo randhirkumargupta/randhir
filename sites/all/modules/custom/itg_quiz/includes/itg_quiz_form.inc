@@ -240,6 +240,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
               '#type' => $answer_type,
               '#options' => $all_ans_options[$num],
               '#suffix' => '</div>',
+              //'#suffix' => '</div><div id=answer_option' . $num.'><a href="javascript:void(0)" class="associate-content-block" data-widget="echo $associate_type;-echo $associate_id;">click here</a></div>',
           );
       }
       
