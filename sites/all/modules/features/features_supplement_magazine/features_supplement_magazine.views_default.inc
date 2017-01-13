@@ -411,10 +411,6 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['relationships']['field_story_select_magazine_target_id']['id'] = 'field_story_select_magazine_target_id';
   $handler->display->display_options['relationships']['field_story_select_magazine_target_id']['table'] = 'field_data_field_story_select_magazine';
   $handler->display->display_options['relationships']['field_story_select_magazine_target_id']['field'] = 'field_story_select_magazine_target_id';
-  /* Relationship: Entity Reference: Referenced Entity */
-  $handler->display->display_options['relationships']['field_story_select_supplement_target_id']['id'] = 'field_story_select_supplement_target_id';
-  $handler->display->display_options['relationships']['field_story_select_supplement_target_id']['table'] = 'field_data_field_story_select_supplement';
-  $handler->display->display_options['relationships']['field_story_select_supplement_target_id']['field'] = 'field_story_select_supplement_target_id';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
@@ -443,13 +439,14 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['title_1']['relationship'] = 'field_story_select_magazine_target_id';
   $handler->display->display_options['fields']['title_1']['label'] = 'Magazine';
   $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title_2']['id'] = 'title_2';
-  $handler->display->display_options['fields']['title_2']['table'] = 'node';
-  $handler->display->display_options['fields']['title_2']['field'] = 'title';
-  $handler->display->display_options['fields']['title_2']['relationship'] = 'field_story_select_supplement_target_id';
-  $handler->display->display_options['fields']['title_2']['label'] = 'Supplement';
-  $handler->display->display_options['fields']['title_2']['link_to_node'] = FALSE;
+  /* Field: Content: Select supplement */
+  $handler->display->display_options['fields']['field_story_select_supplement']['id'] = 'field_story_select_supplement';
+  $handler->display->display_options['fields']['field_story_select_supplement']['table'] = 'field_data_field_story_select_supplement';
+  $handler->display->display_options['fields']['field_story_select_supplement']['field'] = 'field_story_select_supplement';
+  $handler->display->display_options['fields']['field_story_select_supplement']['label'] = 'Supplement';
+  $handler->display->display_options['fields']['field_story_select_supplement']['settings'] = array(
+    'link' => 0,
+  );
   /* Field: Content: Author uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
@@ -679,8 +676,7 @@ function features_supplement_magazine_views_default_views() {
     'type' => 'type',
     'field_issue_title' => 'field_issue_title',
     'title_1' => 'title_1',
-    'field_issue_magazine' => 'field_issue_magazine',
-    'title' => 'title',
+    'field_issue_supplement' => 'field_issue_supplement',
     'uid' => 'uid',
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
@@ -727,15 +723,8 @@ function features_supplement_magazine_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_issue_magazine' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'title' => array(
-      'sortable' => 1,
+    'field_issue_supplement' => array(
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -809,10 +798,6 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
-  /* Relationship: Entity Reference: Referenced Entity */
-  $handler->display->display_options['relationships']['field_issue_supplement_target_id']['id'] = 'field_issue_supplement_target_id';
-  $handler->display->display_options['relationships']['field_issue_supplement_target_id']['table'] = 'field_data_field_issue_supplement';
-  $handler->display->display_options['relationships']['field_issue_supplement_target_id']['field'] = 'field_issue_supplement_target_id';
   /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_issue_magazine_target_id']['id'] = 'field_issue_magazine_target_id';
   $handler->display->display_options['relationships']['field_issue_magazine_target_id']['table'] = 'field_data_field_issue_magazine';
@@ -1010,15 +995,13 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['title_1']['alter']['max_length'] = '30';
   $handler->display->display_options['fields']['title_1']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['relationship'] = 'field_issue_supplement_target_id';
-  $handler->display->display_options['fields']['title']['label'] = 'Supplement';
-  $handler->display->display_options['fields']['title']['alter']['max_length'] = '30';
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
-  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Supplement */
+  $handler->display->display_options['fields']['field_issue_supplement']['id'] = 'field_issue_supplement';
+  $handler->display->display_options['fields']['field_issue_supplement']['table'] = 'field_data_field_issue_supplement';
+  $handler->display->display_options['fields']['field_issue_supplement']['field'] = 'field_issue_supplement';
+  $handler->display->display_options['fields']['field_issue_supplement']['settings'] = array(
+    'link' => 0,
+  );
   /* Field: Content: Author uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
@@ -1060,7 +1043,11 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['php']['field'] = 'php';
   $handler->display->display_options['fields']['php']['label'] = 'View Stories';
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
-  $handler->display->display_options['fields']['php']['php_output'] = '<?php echo itg_msi_show_issue_mapped_stories($row); ?>';
+  $handler->display->display_options['fields']['php']['php_output'] = '<?php
+if(function_exists(\'itg_msi_show_issue_mapped_stories\')){
+  echo itg_msi_show_issue_mapped_stories($row);
+}
+?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
   /* Field: Content: Link */
@@ -1921,7 +1908,11 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['php']['field'] = 'php';
   $handler->display->display_options['fields']['php']['label'] = 'View Stories';
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
-  $handler->display->display_options['fields']['php']['php_output'] = '<?php echo itg_msi_show_mapped_stories($row); ?>';
+  $handler->display->display_options['fields']['php']['php_output'] = '<?php
+if(function_exists(\'itg_msi_show_mapped_stories\')){
+  echo itg_msi_show_mapped_stories($row);
+}
+?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
   /* Field: Content: Link */
@@ -2031,10 +2022,8 @@ function features_supplement_magazine_views_default_views() {
     'counter' => 'counter',
     'title' => 'title',
     'nid' => 'nid',
-    'field_story_select_magazine' => 'field_story_select_magazine',
     'title_2' => 'title_2',
     'title_1' => 'title_1',
-    'field_story_select_supplement' => 'field_story_select_supplement',
     'uid' => 'uid',
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
@@ -2066,13 +2055,6 @@ function features_supplement_magazine_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_story_select_magazine' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'title_2' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
@@ -2081,14 +2063,7 @@ function features_supplement_magazine_views_default_views() {
       'empty_column' => 0,
     ),
     'title_1' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_story_select_supplement' => array(
-      'sortable' => 1,
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',

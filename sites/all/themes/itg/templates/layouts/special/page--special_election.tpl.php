@@ -141,14 +141,14 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 {
                     $display_title = 'style="display:none"';
                 }
-                echo '<h1 '.$display_title.' id="display_tit"><span class="highlights-title">' . mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, "..") . '</span></h1><div class="social-share">
+                echo '<div class="row"><div class="col-md-12 election-top-block"><h1 '.$display_title.' id="display_tit"><span class="highlights-title">' . mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, "..") . '</span></h1> <div class="social-share">
                     <ul>
                         <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
                         <li><a class="facebook"><i class="fa fa-facebook"></i></a></li>
                         <li><a href="javascript:void(0)" class="twitter"><i class="fa fa-twitter"></i></a></li>
                         <li><a title="share on google+" href="#" class="google"></a></li>
                     </ul>
-                </div>';
+                </div></div></div>';
 
                 $graphdata = itg_widget_get_graph_data();
 

@@ -1398,7 +1398,7 @@ footer .footer-copyright {
 }
 
 .itg-common-section .droppable {
-  height: 408px;
+  height: 398px;
 }
 .itg-common-section .home-page-poll-block-wrap .droppable {
   min-height: 408px;
@@ -1708,7 +1708,7 @@ footer .footer-copyright {
   display: block;
 }
 .section-ordering h3 {
-  padding: 15px 0;
+  padding: 10px 0;
   font-size: 20px;
   font-size: 1.25rem;
 }
@@ -2225,7 +2225,7 @@ footer .footer-copyright {
 }
 .story-section .comment-mobile ul li a {
   color: #989898;
-  padding: 10px;
+  padding: 10px 8px;
   display: block;
   text-transform: uppercase;
 }
@@ -2817,6 +2817,7 @@ footer .footer-copyright {
 .story-section .buzzfeed-byline .social-share-story li {
   display: inline-block;
   vertical-align: top;
+  text-align: center;
 }
 .story-section .buzzfeed-byline .social-share-story li a {
   padding: 0 15px;
@@ -2829,6 +2830,11 @@ footer .footer-copyright {
 }
 .story-section .buzzfeed-byline .social-share-story li a:hover i {
   color: #1a3c8d;
+}
+.story-section .buzzfeed-byline .social-share-story li a span {
+  display: block;
+  font-size: 11px;
+  font-size: 0.6875rem;
 }
 .story-section #videogallery-iframe {
   position: fixed;
@@ -8234,6 +8240,12 @@ footer .footer-copyright {
 .education-layout-page .itg-layout-565 .itg-widget-child .droppable {
   height: 300px;
 }
+.education-layout-page .itg-layout-565 .itg-widget-child .droppable .widget-wrapper {
+  overflow: auto;
+}
+.education-layout-page .itg-layout-565 .itg-widget-child .droppable .widget-wrapper .data-holder {
+  height: initial;
+}
 .education-layout-page .itg-common-section .ad-widget {
   height: 382px;
 }
@@ -9066,14 +9078,17 @@ footer .footer-copyright {
   padding-top: 20px;
 }
 .movie-layout-page .itg-h385-section .droppable {
-  height: 385px;
+  height: 396px;
 }
 .movie-layout-page .itg-h396-section .droppable {
-  height: 385px;
+  height: 408px;
 }
 .movie-layout-page .itg-h396-section .widget-title {
   top: 10px;
   left: 10px;
+}
+.movie-layout-page .itg-h396-section .tech-movie_latest .widget-title {
+  margin-bottom: 10px;
 }
 .movie-layout-page .tech-block_8 .widget-title {
   margin-bottom: 5px;
@@ -9248,18 +9263,18 @@ footer .footer-copyright {
 .budget-page-layout .itg-715-layout .itg-widget-child .droppable {
   height: 343px;
 }
-.budget-page-layout h1 {
+.budget-page-layout .budget-top-block h1 {
   display: inline;
 }
-.budget-page-layout ul {
+.budget-page-layout .budget-top-block ul {
   list-style-type: none;
 }
-.budget-page-layout ul li {
+.budget-page-layout .budget-top-block ul li {
   display: inline-block;
   vertical-align: top;
   padding-right: 8px;
 }
-.budget-page-layout ul li a {
+.budget-page-layout .budget-top-block ul li a {
   background: #000;
   width: 20px;
   height: 20px;
@@ -9271,33 +9286,33 @@ footer .footer-copyright {
   font-size: 15px;
 }
 @media screen and (min-width: 768px) {
-  .budget-page-layout ul li a {
+  .budget-page-layout .budget-top-block ul li a {
     width: 23px;
     height: 23px;
     line-height: 25px;
   }
 }
-.budget-page-layout ul li a.share {
+.budget-page-layout .budget-top-block ul li a.share {
   color: #d0d0d0;
 }
-.budget-page-layout ul li a.share, .budget-page-layout ul li a.google {
+.budget-page-layout .budget-top-block ul li a.share, .budget-page-layout .budget-top-block ul li a.google {
   background: transparent;
 }
-.budget-page-layout ul li a.facebook {
+.budget-page-layout .budget-top-block ul li a.facebook {
   background: #0b4887;
 }
-.budget-page-layout ul li a.twitter {
+.budget-page-layout .budget-top-block ul li a.twitter {
   background: #05a3d2;
 }
-.budget-page-layout ul li a.google {
+.budget-page-layout .budget-top-block ul li a.google {
   background: url(../images/google-icon.jpg) no-repeat center center;
 }
-.budget-page-layout .social-share {
+.budget-page-layout .budget-top-block .social-share {
   display: inline-block;
   vertical-align: top;
   padding-top: 15px;
 }
-.budget-page-layout .social-share i.fa-share-alt {
+.budget-page-layout .budget-top-block .social-share i.fa-share-alt {
   font-size: 20px;
 }
 .budget-page-layout .budget-ad {
@@ -9433,28 +9448,23 @@ footer .footer-copyright {
 
 /*css end defalt image */
 /* CSS For Election Page */
-.election-page h1 {
-  margin-top: 60px;
+.election-page .election-top-block {
+  margin-top: 40px;
   position: relative;
   z-index: 10;
 }
-.election-page h1 .disc-share a {
-  font-size: 20px;
-  color: #b6b6b6;
+.election-page .election-top-block h1 {
+  display: inline;
 }
-.election-page h1 div {
-  display: inline-block;
-  vertical-align: bottom;
-}
-.election-page h1 ul {
+.election-page .election-top-block ul {
   list-style-type: none;
 }
-.election-page h1 ul li {
+.election-page .election-top-block ul li {
   display: inline-block;
   vertical-align: top;
   padding-right: 8px;
 }
-.election-page h1 ul li a {
+.election-page .election-top-block ul li a {
   background: #000;
   width: 20px;
   height: 20px;
@@ -9466,35 +9476,49 @@ footer .footer-copyright {
   font-size: 15px;
 }
 @media screen and (min-width: 768px) {
-  .election-page h1 ul li a {
+  .election-page .election-top-block ul li a {
     width: 23px;
     height: 23px;
     line-height: 25px;
   }
 }
-.election-page h1 ul li a.share {
+.election-page .election-top-block ul li a.share {
   color: #d0d0d0;
 }
-.election-page h1 ul li a.share, .election-page h1 ul li a.google {
+.election-page .election-top-block ul li a.share, .election-page .election-top-block ul li a.google {
   background: transparent;
 }
-.election-page h1 ul li a.facebook {
+.election-page .election-top-block ul li a.facebook {
   background: #0b4887;
 }
-.election-page h1 ul li a.twitter {
+.election-page .election-top-block ul li a.twitter {
   background: #05a3d2;
 }
-.election-page h1 ul li a.google {
+.election-page .election-top-block ul li a.google {
   background: url(../images/google-icon.jpg) no-repeat center center;
+}
+.election-page .election-top-block .social-share {
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 15px;
+}
+.election-page .election-top-block .social-share i.fa-share-alt {
+  font-size: 20px;
 }
 .election-page .election-graph-3 {
   margin-top: -50px;
+  display: inline-block;
+  width: 100%;
 }
 .election-page .election-graph-4 {
   margin-top: -100px;
+  display: inline-block;
+  width: 100%;
 }
 .election-page .election-graph-5 {
   margin-top: -150px;
+  display: inline-block;
+  width: 100%;
 }
 .election-page .left-side .itg-415-layout .droppable {
   min-height: 415px;
@@ -11486,10 +11510,10 @@ h1.about-us-heading + div p {
   background: #000;
   color: #fff;
   height: 33px;
-  line-height: 33px;
+  line-height: 35px;
   padding: 0 10px;
   width: 10.3%;
-  font-size: 1.3vw;
+  font-size: 18px;
   font-weight: 600;
   float: left;
   text-align: center;

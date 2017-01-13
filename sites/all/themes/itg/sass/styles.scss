@@ -1241,7 +1241,7 @@ footer{
     }
     .itg-common-section{
         .droppable{
-            height: 408px;
+            height: 398px;
         }
         .home-page-poll-block-wrap{
          .droppable{
@@ -1441,7 +1441,7 @@ footer{
         display: block;
     }
     h3{
-        padding: 15px 0;
+        padding: 10px 0;
         @include font(20px);
     }
     p{
@@ -1794,7 +1794,7 @@ footer{
                 @include display-inline;
                 a{
                     color: #989898;  
-                    padding: 10px;
+                    padding: 10px 8px;
                     display: block;
                     text-transform:uppercase;
                     i{
@@ -2315,17 +2315,22 @@ footer{
         .social-share-story{
             li{
                 @include display-inline;
+                @include text-align(center);
                 a{
                    padding: 0 15px;
                    display: block;
                    i{
                         @include font(24px);
-                        color:#c0c0c0;
+                        color:#c0c0c0;                       
                     }
                     &:hover{
                         i{
                          color:#1a3c8d;   
                         }                        
+                    }
+                    span{
+                        display: block;
+                        @include font(11px);
                     }
                 }                
             }
@@ -6678,7 +6683,13 @@ footer{
         }
         .itg-widget-child{
             .droppable {
-                height: 300px;                
+                height: 300px; 
+                .widget-wrapper {
+                    overflow: auto;
+                    .data-holder {
+                        height: initial;
+                    }
+                }
             }
         }
     }
@@ -7513,16 +7524,21 @@ footer{
     }
     .itg-h385-section{
         .droppable{
-            height: 385px;
+            height: 396px;
         }
     }
     .itg-h396-section{
         .droppable{
-            height: 385px;
+            height: 408px;
         }
         .widget-title{
             top:10px;
             left:10px;
+        }
+        .tech-movie_latest{
+            .widget-title{
+                margin-bottom: 10px;
+            }
         }
     }   
     .tech-block_8{        
@@ -7720,7 +7736,8 @@ footer{
             }    
         }
     }
-    h1{
+    .budget-top-block{
+        h1{
         display: inline;
     }
     @include social-share; 
@@ -7732,6 +7749,7 @@ footer{
             font-size: 20px;
         }
     }
+    }    
     .budget-ad{
         margin-top: 25px;
     }
@@ -7871,31 +7889,38 @@ footer{
 /*css end defalt image */
 
 /* CSS For Election Page */
-.election-page{  
-    h1{
-        margin-top:60px;
+.election-page{     
+    .election-top-block{
+        margin-top:40px;
         position: relative;
-        z-index: 10;
-        .disc-share{
-            a{
+        z-index: 10; 
+        h1{
+            display: inline;
+        }
+        @include social-share; 
+        .social-share{
+            display: inline-block;
+            vertical-align: top;
+            padding-top: 15px;
+            i.fa-share-alt{
                 font-size: 20px;
-                color: #b6b6b6;
             }
         }
-        div{
-            display: inline-block;
-            vertical-align: bottom;
-        }
-        @include social-share;
-    }
+    } 
     .election-graph-3{
         margin-top: -50px;
+        display: inline-block;
+        width: 100%;
     }
     .election-graph-4{
         margin-top: -100px;
+        display: inline-block;
+        width: 100%;
     }
     .election-graph-5{
         margin-top: -150px;
+        display: inline-block;
+        width: 100%;
     }
     .left-side{
         .itg-415-layout{
@@ -9602,10 +9627,10 @@ h1.about-us-heading{
         background:#000;        
         color:#fff;
         height: 33px;
-        line-height: 33px;
+        line-height: 35px;
         padding: 0 10px;        
         width: 10.3%;
-        font-size: 1.3vw;
+        font-size: 18px;
         font-weight:600;
         @include float(left);
         text-align: center;
