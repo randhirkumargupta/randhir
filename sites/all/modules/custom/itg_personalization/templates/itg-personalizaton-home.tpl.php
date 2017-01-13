@@ -36,7 +36,8 @@
         <i class="fa fa-user" aria-hidden="true"></i>
         <dfn>26</dfn>
       </span>
-    </div>      
+    </div>
+      <?php if ($data['badge_detail']['earn'] > 0): ?>
       <div class="total-point-wrapper">
         <!-- Total Points -->        
         <div class="total-points">
@@ -54,7 +55,8 @@
         <div class="points-to-go">
           <?php print '<span>'.$data['badge_detail']['points_to_go'] . '</span> ' . t('Points to go'); ?>
         </div>
-      </div>      
+      </div>
+      <?php endif; ?>
   </div>
  </div> 
 
