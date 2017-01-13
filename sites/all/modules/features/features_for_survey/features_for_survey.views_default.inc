@@ -209,7 +209,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['type']['table'] = 'node';
   $handler->display->display_options['fields']['type']['field'] = 'type';
   $handler->display->display_options['fields']['type']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -244,7 +244,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Posted By';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
-  /* Field: Content: Survey Start Date  */
+  /* Field: Content: Date */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -257,7 +257,7 @@ function features_for_survey_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Survey End Date */
+  /* Field: Content: Timeline */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
@@ -357,11 +357,13 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'survey' => 'survey',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
   $handler->display->display_options['filters']['title']['operator'] = 'allwords';
+  $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Survey Title';
@@ -394,6 +396,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['filters']['field_survey_category_tid']['table'] = 'field_data_field_survey_category';
   $handler->display->display_options['filters']['field_survey_category_tid']['field'] = 'field_survey_category_tid';
   $handler->display->display_options['filters']['field_survey_category_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_survey_category_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_survey_category_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_survey_category_tid']['expose']['operator_id'] = 'field_survey_category_tid_op';
   $handler->display->display_options['filters']['field_survey_category_tid']['expose']['label'] = 'Category';
@@ -422,9 +425,14 @@ function features_for_survey_views_default_views() {
   );
   $handler->display->display_options['filters']['field_survey_category_tid']['vocabulary'] = 'category_management';
   $handler->display->display_options['filters']['field_survey_category_tid']['error_message'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
+  /* Display: Published */
+  $handler = $view->new_display('page', 'Published', 'page');
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
@@ -450,7 +458,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['type']['table'] = 'node';
   $handler->display->display_options['fields']['type']['field'] = 'type';
   $handler->display->display_options['fields']['type']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -485,7 +493,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = 'Posted by';
-  /* Field: Content: Survey Start Date  */
+  /* Field: Content: Date */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -498,7 +506,7 @@ function features_for_survey_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Survey End Date */
+  /* Field: Content: Timeline */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
@@ -586,7 +594,177 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'survey' => 'survey',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
+  $handler->display->display_options['filters']['title']['group'] = 1;
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Survey Title';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+  );
+  /* Filter criterion: Content: Section (field_survey_category) */
+  $handler->display->display_options['filters']['field_survey_category_tid']['id'] = 'field_survey_category_tid';
+  $handler->display->display_options['filters']['field_survey_category_tid']['table'] = 'field_data_field_survey_category';
+  $handler->display->display_options['filters']['field_survey_category_tid']['field'] = 'field_survey_category_tid';
+  $handler->display->display_options['filters']['field_survey_category_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_survey_category_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_survey_category_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_survey_category_tid']['expose']['operator_id'] = 'field_survey_category_tid_op';
+  $handler->display->display_options['filters']['field_survey_category_tid']['expose']['label'] = 'Category';
+  $handler->display->display_options['filters']['field_survey_category_tid']['expose']['operator'] = 'field_survey_category_tid_op';
+  $handler->display->display_options['filters']['field_survey_category_tid']['expose']['identifier'] = 'field_survey_category_tid';
+  $handler->display->display_options['filters']['field_survey_category_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    10 => 0,
+    19 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+  );
+  $handler->display->display_options['filters']['field_survey_category_tid']['vocabulary'] = 'category_management';
+  $handler->display->display_options['filters']['field_survey_category_tid']['error_message'] = FALSE;
   $handler->display->display_options['path'] = 'manage-survey';
+
+  /* Display: Draft */
+  $handler = $view->new_display('page', 'Draft', 'page_1');
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'survey' => 'survey',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '0';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
+  $handler->display->display_options['filters']['title']['group'] = 1;
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Survey Title';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+  );
+  /* Filter criterion: Content: Section (field_survey_category) */
+  $handler->display->display_options['filters']['field_survey_category_tid']['id'] = 'field_survey_category_tid';
+  $handler->display->display_options['filters']['field_survey_category_tid']['table'] = 'field_data_field_survey_category';
+  $handler->display->display_options['filters']['field_survey_category_tid']['field'] = 'field_survey_category_tid';
+  $handler->display->display_options['filters']['field_survey_category_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_survey_category_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_survey_category_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_survey_category_tid']['expose']['operator_id'] = 'field_survey_category_tid_op';
+  $handler->display->display_options['filters']['field_survey_category_tid']['expose']['label'] = 'Category';
+  $handler->display->display_options['filters']['field_survey_category_tid']['expose']['operator'] = 'field_survey_category_tid_op';
+  $handler->display->display_options['filters']['field_survey_category_tid']['expose']['identifier'] = 'field_survey_category_tid';
+  $handler->display->display_options['filters']['field_survey_category_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    10 => 0,
+    19 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+  );
+  $handler->display->display_options['filters']['field_survey_category_tid']['vocabulary'] = 'category_management';
+  $handler->display->display_options['filters']['field_survey_category_tid']['error_message'] = FALSE;
+  $handler->display->display_options['path'] = 'manage-draft-survey';
   $export['manage_survey'] = $view;
 
   return $export;

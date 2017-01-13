@@ -307,7 +307,7 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_type']['table'] = 'field_data_field_type';
   $handler->display->display_options['fields']['field_type']['field'] = 'field_type';
   $handler->display->display_options['fields']['field_type']['element_label_colon'] = FALSE;
-  /* Field: Content: Activate Live TV */
+  /* Field: Content: Video expires */
   $handler->display->display_options['fields']['field_story_expires']['id'] = 'field_story_expires';
   $handler->display->display_options['fields']['field_story_expires']['table'] = 'field_data_field_story_expires';
   $handler->display->display_options['fields']['field_story_expires']['field'] = 'field_story_expires';
@@ -478,6 +478,42 @@ function feature_for_breaking_news_views_default_views() {
     12 => 0,
     15 => 0,
     18 => 0,
+  );
+  /* Filter criterion: Content: Nid */
+  $handler->display->display_options['filters']['nid']['id'] = 'nid';
+  $handler->display->display_options['filters']['nid']['table'] = 'node';
+  $handler->display->display_options['filters']['nid']['field'] = 'nid';
+  $handler->display->display_options['filters']['nid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['nid']['expose']['operator_id'] = 'nid_op';
+  $handler->display->display_options['filters']['nid']['expose']['label'] = 'Content Id';
+  $handler->display->display_options['filters']['nid']['expose']['operator'] = 'nid_op';
+  $handler->display->display_options['filters']['nid']['expose']['identifier'] = 'nid';
+  $handler->display->display_options['filters']['nid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   $handler->display->display_options['path'] = 'breaking-news';
 

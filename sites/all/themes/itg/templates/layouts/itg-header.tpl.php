@@ -11,9 +11,9 @@ if (!empty($data['itg_main_manu_header'])) {
 <div class="header-ads mhide">
  <!--   <img src="<?php //print base_path()                  ?>sites/all/themes/itg/images/header-ads.png" alt="ads"> -->
  <?php
-  if (!empty($data['itg_top']['200*200_header'])) {
-    print $data['itg_top']['200*200_header'];
-  }
+  $block = block_load('itg_ads', ADS_HEADER);   
+  $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+  print render($render_array);
  ?>
 </div>                               
 

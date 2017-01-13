@@ -2209,7 +2209,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_highlights',
-    'label' => 'Brief case',
+    'label' => 'Highlights',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -4665,7 +4665,6 @@ function features_for_story_field_default_field_instances() {
   t('Associate lead gallery/video');
   t('Audio Position');
   t('Audio URL');
-  t('Brief case');
   t('Buzz');
   t('Buzz Description');
   t('Byline');
@@ -4694,6 +4693,7 @@ function features_for_story_field_default_field_instances() {
   t('Gallery Associate');
   t('Gallery position');
   t('HeadLine');
+  t('Highlights');
   t('Image');
   t('Image Size (170 x 127)');
   t('Image Size (370 x 208)');

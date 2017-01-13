@@ -36,7 +36,8 @@
         <i class="fa fa-user" aria-hidden="true"></i>
         <dfn>26</dfn>
       </span>
-    </div>      
+    </div>
+      <?php if ($data['badge_detail']['earn'] > 0): ?>
       <div class="total-point-wrapper">
         <!-- Total Points -->        
         <div class="total-points">
@@ -47,14 +48,19 @@
           <?php print render($data['badge_detail']['badge_icon']); ?>
         </div>
         <div class="pregress-bar">            
-            <span class="current-badge"><small><?php print $data['badge_detail']['earn']; ?></small>Current Level</span>
-            <span class="pregress-bar-active"></span>
-            <span class="next-badge"><small><?php print $data['badge_detail']['next']; ?></small>Next Level</span>
+            <span class="current-badge"><small><?php print $data['badge_detail']['earn']; ?></small><?php echo t('Current Level'); ?></span>
+            <span class="pregress-bar-active progress-bar-<?php print $data['badge_detail']['earn']; ?>"></span>
+            <?php if ($data['badge_detail']['earn'] != 5): ?>
+            <span class="next-badge"><small><?php print $data['badge_detail']['next']; ?></small><?php echo t('Next Level'); ?></span>
+            <?php endif; ?>
         </div>
+        <?php if ($data['badge_detail']['earn'] != 5): ?>
         <div class="points-to-go">
           <?php print '<span>'.$data['badge_detail']['points_to_go'] . '</span> ' . t('Points to go'); ?>
         </div>
-      </div>      
+        <?php endif; ?>
+      </div>
+      <?php endif; ?>
   </div>
  </div> 
 

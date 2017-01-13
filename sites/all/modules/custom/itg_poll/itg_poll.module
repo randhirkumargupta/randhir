@@ -924,7 +924,7 @@ function itg_poll_form_home_page($form, &$form_state, $nid) {
 //    '#captcha_type' => 'recaptcha/reCAPTCHA',
 //    '#prefix' => '<span class="poll-ajax-error"></span>',
 //  );
-  if (isset($user->uid) && !empty($user->uid) && ($user->uid > 0)) {
+  //if (isset($user->uid) && !empty($user->uid) && ($user->uid > 0)) {
     $form['submit'] = array(
       '#type' => 'submit', 
       '#value' => 'Submit',
@@ -935,12 +935,12 @@ function itg_poll_form_home_page($form, &$form_state, $nid) {
         'validate_first' => TRUE,
       ),
     );
-  }
-  else {
-    if (function_exists(itg_sso_url)) {
-      print itg_sso_url('Submit');
-    }
-  }
+//  }
+//  else {
+//    if (function_exists(itg_sso_url)) {
+//      print itg_sso_url('Submit');
+//    }
+//  }
 
 
 
@@ -1026,8 +1026,12 @@ function total_poll_count_content($poll_id) {
 
 function itg_poll_node_view($node, $view_mode, $langcode) {
   if ($node->type == 'poll') {
-    $poll_count = total_poll_count_content($node->nid);
-    $node->content['poll_count'] = '<div class="field"><div class="field-label">' . t('Associate content count:') . '</div><div class="field-items">' . $poll_count . '</div></div><div class="field">' . l(t('Associate content view'), 'associate-content-poll/' . $node->nid) . '</div>';
+    if (empty($user->uid) || array_key_exists(AUTHOR_GUEST, $user->roles)) {
+      drupal_access_denied();
+    } else {
+      $poll_count = total_poll_count_content($node->nid);
+      $node->content['poll_count'] = '<div class="field"><div class="field-label">' . t('Associate content count:'). '</div><div class="field-items">'.$poll_count.'</div></div><div class="field">'.l(t('Associate content view'), 'associate-content-poll/'.$node->nid). '</div>';
+    }
   }
 }
 
