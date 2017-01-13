@@ -61,7 +61,14 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
   $widget_name = $form_state['input']['widget_name'];
   // Get selected nodes ids
   $selected_node_data = $form_state['selection'];
-  $cat_id = (isset($_GET['category_tid']) && ($_GET['category_tid'] == "All")) ? 0 : $_GET['category_tid'];
+  $get_category_id = -1;
+  if(isset($_GET['category_tid']) && $_GET['category_tid'] == "All") {
+    $get_category_id = 0;
+  }
+  else if (is_numeric($_GET['category_tid'])) {
+    $get_category_id = $_GET['category_tid'];
+  }
+  $cat_id = $get_category_id;
   $content_type = isset($_GET['type']) ? $_GET['type'] :  NULL;
   if ($current_display == 'big_story_format') {
     // All Code for big sotry.
