@@ -1052,14 +1052,15 @@ function get_desired_code_for_ads_placing($ad_value, $device) {
 }
 
 /*
- * This is the code that will return the header and body on the basis of section id
+ * This is the code that will return the header script and body script on the basisc of conditional section id as per business logic
  * @return array $adsheaderbody;
  */
 
 function get_header_body_start_end_code() {
 
-  $arg = arg();
-  $is_front_page = drupal_is_front_page();
+  $arg = arg();  // Getting all url arguments
+  $is_front_page = drupal_is_front_page(); // Checker whether user is on front page or not it returns the flag only
+  $page_name = NULL;  // Defining the page name as null 
 
   if (drupal_is_front_page()) {
     $page_name = t('Home');
@@ -1069,10 +1070,13 @@ function get_header_body_start_end_code() {
     $page_name = $terms[0]->tid;
   } else if ($arg[0] == 'node' && is_numeric($arg[1])) {
     $node_object = menu_get_object();
-    $tid = $node_object->field_primary_category[$node_object->language][0]['value'];
-    $taxonomy_array = taxonomy_get_parents_all($tid);
-    $terms = array_reverse($taxonomy_array);
-    $page_name = $terms[0]->tid;
+    $tid = isset($node_object->field_primary_category[$node_object->language][0]['value']) ? $node_object->field_primary_category[$node_object->language][0]['value'] : NULL;
+
+    if (isset($tid) && !empty($tid)) {
+      $taxonomy_array = taxonomy_get_parents_all($tid);
+      $terms = array_reverse($taxonomy_array);
+      $page_name = $terms[0]->tid;
+    }
   } else {
     $page_name = t('Rest');
   }
@@ -1085,22 +1089,24 @@ function get_header_body_start_end_code() {
 
     $ads_object = node_load($templatedata);
 
-    foreach ($ads_object->field_code_visibility_flag[$ads_object->language] as $ads_viaibility) {
+    if (isset($ads_object->field_code_visibility_flag[$ads_object->language])) {
+      foreach ($ads_object->field_code_visibility_flag[$ads_object->language] as $ads_viaibility) {
 
 
-      if ($ads_viaibility['value'] == 'header') {
-        foreach ($ads_object->field_ads_headerscript[$ads_object->language] as $header) {
-          $adsheaderbody['header'][] = $header['value'];
+        if ($ads_viaibility['value'] == 'header') {
+          foreach ($ads_object->field_ads_headerscript[$ads_object->language] as $header) {
+            $adsheaderbody['header'][] = $header['value'];
+          }
         }
-      }
-      if ($ads_viaibility['value'] == 'body_start') {
-        foreach ($ads_object->field_ads_body_start[$ads_object->language] as $bodystart) {
-          $adsheaderbody['body_start'][] = $bodystart['value'];
+        if ($ads_viaibility['value'] == 'body_start') {
+          foreach ($ads_object->field_ads_body_start[$ads_object->language] as $bodystart) {
+            $adsheaderbody['body_start'][] = $bodystart['value'];
+          }
         }
-      }
-      if ($ads_viaibility['value'] == 'body_close') {
-        foreach ($ads_object->field_ads_body_close[$ads_object->language] as $body_close) {
-          $adsheaderbody['body_close'][] = $body_close['value'];
+        if ($ads_viaibility['value'] == 'body_close') {
+          foreach ($ads_object->field_ads_body_close[$ads_object->language] as $body_close) {
+            $adsheaderbody['body_close'][] = $body_close['value'];
+          }
         }
       }
     }
