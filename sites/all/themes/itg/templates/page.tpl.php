@@ -102,6 +102,14 @@ window.addEventListener("message", function(ev) {
       <?php if ($action_links): ?>
         <ul class="action-links"><?php print render($action_links); ?></ul>
       <?php endif; ?>
+      <!-- Breaking news band -->    
+    <?php if (!empty($page['breaking_news'])): ?>
+    <div class="row">
+        <div class="col-md-12">
+          <?php print render($page['breaking_news']); ?>
+        </div>      
+    </div>    
+    <?php endif; ?>  
       <?php print render($page['content']); ?>
       <?php print render($page['content_bottom']); ?>
       <?php print render($page['personalization']); ?>
