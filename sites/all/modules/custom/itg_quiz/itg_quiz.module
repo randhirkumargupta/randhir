@@ -289,7 +289,7 @@ function itg_quiz_views_pre_render(&$view) {
  */
 function itg_quiz_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   
-   if ($form['#id'] == 'views-exposed-form-manage-quiz-page') {
+   if ($form['#id'] == 'views-exposed-form-manage-quiz-page' || $form['#id'] == 'views-exposed-form-manage-quiz-page-1') {
      
      // Call function autocomplete to show matching titles.
      $form['title']['#autocomplete_path'] = 'content-title-list/quiz/autocomplete';
