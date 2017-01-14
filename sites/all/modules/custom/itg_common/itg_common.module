@@ -517,8 +517,6 @@ function itg_content_inactive() {
     $node->status = 0;
     node_save($node);
     itg_widget_handle_unpublished_node($node->nid);
-  }
-  
-  watchdog("cron content expiry", '<pre>'. print_r($nodeid, TRUE) .'</pre>'); 
-  
+  }  
+  watchdog("cron content expiry", '<pre>'. print_r($nodeid, TRUE) .'</pre>');   
 }

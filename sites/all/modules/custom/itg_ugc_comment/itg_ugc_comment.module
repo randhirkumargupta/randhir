@@ -77,11 +77,10 @@ function ugc_comment_form($form, &$form_state) {
     '#size' => 20,
     '#default_value' => $fname,
     '#maxlength' => 50,
-    //'#value' => $user_fields->field_first_name['und']['0']['value'],
-    '#prefix' => '<div id="user-name">',
+    '#prefix' => '<div class="comment-user-details"><div id="user-name">',
     '#suffix' => '</div>',
     '#attributes' => array(
-      'placeholder' => 'Name',
+      'placeholder' => t('Name'),
     ),
     );
   
@@ -91,12 +90,11 @@ function ugc_comment_form($form, &$form_state) {
     '#title' => t(''),
     '#size' => 20,
     '#default_value' => $user_fields->mail,
-    //'#value' => $user->mail,
     '#maxlength' => 50,
     '#prefix' => '<div id="user-email">',
     '#suffix' => '</div>',
     '#attributes' => array(
-      'placeholder' => 'Email',
+      'placeholder' => t('Email'),
     ),
     );
   
@@ -117,6 +115,7 @@ function ugc_comment_form($form, &$form_state) {
   );
 
   $form['submit_button'] = array(
+    '#suffix' => '</div>',
     '#type' => 'submit',
     '#value' => t('Submit'),
   );
@@ -242,13 +241,13 @@ function getmycomments($data) {
   $reply_comment = $con->itgcms_comment;
   $reply_data = $reply_comment->find(array('parent_comment_id' => "$relation_id"));
   
-  $contect .= "<ul>";
+  $contect .= "<div class='inner-comment'>";
   
   foreach ($reply_data as $my_reply_data) {
    $contect .= getmycomments($my_reply_data);
   }
   
-  $contect .= "</ul></div>";
+  $contect .= "</div></div>";
   
   return $contect;
 }

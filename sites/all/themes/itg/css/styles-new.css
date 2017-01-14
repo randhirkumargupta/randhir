@@ -2986,6 +2986,16 @@ footer .footer-top ul li a:hover {
 }
 
 /*other comment css start*/
+#other-comment {
+  background: #f2f2f2;
+  padding: 20px;
+}
+#other-comment #total-comment {
+  font-size: 20px;
+  font-weight: 500;
+  padding-bottom: 10px;
+}
+
 .comment-popup-wrapper {
   background-color: rgba(0, 0, 0, 0.7);
   height: 100%;
@@ -2996,7 +3006,18 @@ footer .footer-top ul li a:hover {
   z-index: 2147483647;
 }
 
-.comment-popup {
+.ugc-comment-popup .close-comment-popup {
+  display: none;
+  color: #868686;
+  font-size: 20px;
+  height: 20px;
+  position: absolute;
+  right: 10px;
+  text-align: center;
+  top: 10px;
+  width: 20px;
+}
+.ugc-comment-popup.comment-popup {
   background-color: #fff;
   bottom: 0;
   height: 400px;
@@ -3008,6 +3029,73 @@ footer .footer-top ul li a:hover {
   right: 0;
   top: 0;
   width: 100%;
+}
+.ugc-comment-popup.comment-popup .close-comment-popup {
+  display: block;
+}
+
+.comment-user-details {
+  padding: 20px 0 0;
+  text-align: right;
+}
+
+.comment-user-details > div {
+  display: inline-block;
+  margin-right: 7px;
+  vertical-align: top;
+  width: 200px;
+}
+
+.comment-user-details .form-text {
+  width: 100%;
+}
+
+.comment-user-details .form-submit {
+  background-color: #000;
+  border: 1px solid #000;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 500;
+  height: 32px;
+  padding: 0 10px;
+  text-transform: uppercase;
+  vertical-align: top;
+}
+
+.itg-comment .comment-image {
+  float: left;
+  margin-right: 10px;
+  border: 1px solid #f2f2f2;
+}
+.itg-comment .comment-details {
+  overflow: hidden;
+  padding-bottom: 10px;
+}
+.itg-comment .comment-name {
+  font-weight: 600;
+  padding-bottom: 5px;
+}
+.itg-comment .comment-timestamp, .itg-comment a.reply {
+  font-size: 12px;
+  color: #989898;
+  display: inline-block;
+  vertical-align: middle;
+}
+.itg-comment .comment-timestamp:after {
+  content: '|';
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 2px 0 7px;
+}
+.itg-comment a.reply:hover {
+  color: #1a3c8d;
+}
+.itg-comment .inner-comment {
+  padding-left: 62px;
 }
 
 /*other comment css end*/
@@ -3825,6 +3913,32 @@ footer .footer-top ul li a:hover {
 
 /* CSS For node-mega-review-critic */
 article.node-mega-review-critic header {
+  display: none;
+}
+article.node-mega-review-critic .comment-mobile {
+  background: #1c1c1c;
+  margin: -15px -15px 20px;
+  font-family: "Roboto", sans-serif;
+  text-align: right;
+}
+article.node-mega-review-critic .comment-mobile ul {
+  display: inline-block;
+  vertical-align: top;
+}
+article.node-mega-review-critic .comment-mobile ul li {
+  display: inline-block;
+  vertical-align: top;
+}
+article.node-mega-review-critic .comment-mobile ul li a {
+  color: #c0c0c0;
+  padding: 10px 8px;
+  display: block;
+  text-transform: uppercase;
+}
+article.node-mega-review-critic .comment-mobile ul li a i {
+  font-size: 16px;
+}
+article.node-mega-review-critic .comment-mobile ul.social-share {
   display: none;
 }
 article.node-mega-review-critic h1 {
