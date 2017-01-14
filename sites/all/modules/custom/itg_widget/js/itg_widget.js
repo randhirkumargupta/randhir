@@ -18,10 +18,10 @@ Drupal.behaviors.itg_widgets = {
       });
     });
     //Prevent stop video if it is palyed previously.
-    jQuery ('body').on('click', '.slick-track img', function (e){
+    jQuery ('body').on ('click', '.slick-track img', function (e) {
       jQuery (".iframe-video-dailymotion").each (function () {
         var url = jQuery (this).attr ("src");
-        jQuery (this).removeAttr("src");
+        jQuery (this).removeAttr ("src");
         var Updatedurl = updateQueryStringParameter (url, 'autoplay', '0');
         jQuery (this).attr ('src', Updatedurl);
       });
@@ -420,5 +420,23 @@ jQuery (document).ready (function () {
     var soruce_type = jQuery (this).val ();
     jQuery ("#edit-field-story-source-type-value").val (soruce_type);
   });
+});
+
+jQuery (document).ajaxSuccess (function () {
+  var forms = [
+    'views-exposed-form-story-widget-page-1' 
+    , 'views-exposed-form-story-widget-top-takes-video'
+    , 'views-exposed-form-story-widget-trending-videos'
+    , 'views-exposed-form-story-widget-watch-right-now'
+    , 'views-exposed-form-highlights-widget-highlights-widget-conent'
+    , 'views-exposed-form-photo-carousel-widget-photo-carousel-list'
+    , 'views-exposed-form-photo-carousel-widget-video-carousel-list'
+    , 'views-exposed-form-home-page-feature-widget-page-1'
+  ];
+  console.log(forms);
+  for (i = 0; i < forms.length; i++) {
+    jQuery ('#' + forms[i] + ' #edit-field-story-category-tid-select-1 > option[value=0]').html ("- Any -");
+    jQuery ('#' + forms[i] + ' #edit-shs-term-node-tid-depth-select-1 > option[value=0]').html ("- Any -");
+  }
 });
   

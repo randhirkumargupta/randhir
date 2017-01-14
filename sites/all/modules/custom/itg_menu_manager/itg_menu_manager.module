@@ -570,6 +570,9 @@ function itg_menu_manager_form_submit($form, &$form_state) {
       if ($menu_level == 'second') {
         drupal_goto('menu-manager/second');
       }
+      else if ($menu_level == 'vertical') {
+        drupal_goto('menu-manager/vertical');
+      }
       else {
         $query = array("section_id" => $sections, "section_child" => $sections);
         drupal_goto('menu-manager/third', array("query" => $query));
