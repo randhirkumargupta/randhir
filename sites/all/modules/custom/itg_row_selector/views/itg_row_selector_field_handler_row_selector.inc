@@ -81,7 +81,7 @@ class itg_row_selector_field_handler_row_selector extends views_handler_field {
         );
         $form[$this->options['id'] . '_issue'] = array(
           '#type' => 'hidden',
-          '#default_value' => $_GET['issue'] != '_none' ? check_plain($_GET['issue']) : NULL,
+          '#default_value' => !empty($_GET['issue']) && $_GET['issue'] != '_none' ? check_plain($_GET['issue']) : NULL,
         );
       }      
     }
