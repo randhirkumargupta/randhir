@@ -745,7 +745,7 @@ function itg_event_backend_block_view($delta = '') {
       break;
     case 'ad_right_sidebar_event':
       $page_name = 'Rest';
-      $data['itg_ad'] = get_ad_script($page_name);
+      //$data['itg_ad'] = get_ad_script($page_name);
       $block['content'] = theme('ad_right_sidebar_block1', array('data' => $data));
       break;
     case 'tweet_right_sidebar_event':

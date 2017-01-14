@@ -454,6 +454,7 @@ function itg_syndication_node_view($node, $view_mode, $langcode) {
     if (!empty($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {
       $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = date('d/m/Y', strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']));
     }
+    
     if (empty($node->field_syndication_ftp_details)) {
       unset($node->content['field_syndication_ftp_details']);
     }
@@ -461,9 +462,19 @@ function itg_syndication_node_view($node, $view_mode, $langcode) {
     if (empty($node->field_service_fetch_link[LANGUAGE_NONE][0]['value'])) {
       unset($node->content['field_service_fetch_link']);
     }
-
-    $node->content['field_service_fetch_link'][0]['#markup'] = l('http://qa.indiatodayonline.in/syndication/feed/198708796aeeead156a8ecf3785907a577f4f784', 'http://qa.indiatodayonline.in/syndication/feed/198708796aeeead156a8ecf3785907a577f4f784');
-    //$node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = ;
+    // add link for mail
+    if (!empty($node->content['field_email_address'][0])) {
+      foreach ($node->content['field_email_address'] as $key => $val) {
+       if (is_numeric($key)) {
+         $node->content['field_email_address'][$key]['#markup'] = '<a href="mailto:'.$node->content['field_email_address'][$key]['#markup'].'">'.$node->content['field_email_address'][$key]['#markup'].'</a>';
+       }        
+      }
+    }
+    
+    if (!empty($node->content['field_service_fetch_link'][0]['#markup'])) {
+       $node->content['field_service_fetch_link'][0]['#markup'] = l('http://qa.indiatodayonline.in/syndication/feed/198708796aeeead156a8ecf3785907a577f4f784', 'http://qa.indiatodayonline.in/syndication/feed/198708796aeeead156a8ecf3785907a577f4f784');
+     }
+    
   }
 }
 

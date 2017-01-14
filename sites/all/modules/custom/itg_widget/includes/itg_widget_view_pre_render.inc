@@ -170,6 +170,10 @@ function itg_widget_views_pre_render(&$view) {
     $header_content = '<h1 class="category-heading">' . $term->name . '</h1>';
     $view->attachment_before = $header_content;
   }
+  elseif ($view->name == "podcasts_listing" && $view->current_display == 'page') {
+    $header_content = '<h1 class="category-heading">' . t('Podcasts') . '</h1>';
+    $view->attachment_before = $header_content;
+  }
   elseif ($view->name == "category_wise_content_list" && $view->current_display == 'section_wise_content_listing') {
     $arg = arg();
     $curentPath =  current_path();

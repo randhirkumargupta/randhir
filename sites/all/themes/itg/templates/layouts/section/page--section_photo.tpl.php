@@ -233,11 +233,11 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
                 <div class="itg-widget">
                     <div class="ad-widget">
                       <div class="sidebar-ad droppable">
-                        <?php
-                            if (!empty($itg_ad['200*200_section_photo_right_bar_ad1'])) {
-                            print $itg_ad['200*200_section_photo_right_bar_ad1'];
-                            }
-                          ?>
+                       <?php
+                          $block = block_load('itg_ads', 'ADS_RHS1');   
+                          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                          print render($render_array);
+                         ?>
                       </div>
                     </div>              
                   </div>
@@ -340,10 +340,10 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
                     <div class="ad-widget">
                       <div class="sidebar-ad droppable">
                         <?php
-                          if (!empty($itg_ad['200*200_section_photo_right_bar_ad2'])) {
-                            print $itg_ad['200*200_section_photo_right_bar_ad2'];
-                          }
-                          ?>
+                          $block = block_load('itg_ads', ADS_RHS2);   
+                          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                          print render($render_array);
+                        ?>
                       </div>
                     </div>              
                   </div>

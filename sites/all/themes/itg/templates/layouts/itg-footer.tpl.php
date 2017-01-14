@@ -27,10 +27,10 @@ global $base_url;
         <div class="container">
 <!--         <img src="<?php print base_path() ?>sites/all/themes/itg/images/header-ads.png" alt="ads">-->
         <?php
-          if (!empty($data['itg_top']['150*150_footer'])) {
-            print $data['itg_top']['150*150_footer'];
-          }
-        ?>
+          $block = block_load('itg_ads', ADS_FOOTER);   
+          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+          print render($render_array);
+         ?>
         </div>
  </section>
    <section class="footer-bottom">

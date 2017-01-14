@@ -346,8 +346,10 @@ function itg_ask_expert_block_view($delta = '') {
                 if ($vid == CATEGORY_MANAGMENT) {
                     $tid = $arg[2];
                     $block['subject'] = '<h3><span>ASK THE EXPERT</span></h3>';
-                    $block['content'] = drupal_render(user_details_for_section($arg, $tid));
-                    $block['content'] .= drupal_render(drupal_get_form('itg_custom_ask_an_expert_form', $tid));
+                    $user_detail = user_details_for_section($arg, $tid);
+                    $ask_expert_form = drupal_get_form('itg_custom_ask_an_expert_form', $tid);
+                    $block['content'] = drupal_render($user_detail);
+                    $block['content'] .= drupal_render($ask_expert_form);
                 }
             }
             elseif (isset($_GET['section']) && !empty($_GET['section'])) {
@@ -402,6 +404,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
     $askquestion = itg_custom_get_ask_quation_data($cat_id);
     $form['#prefix'] = '<div id="expert_global_config">';
     $form['#suffix'] = '</div>';
+    $form['#attributes'] = array('autocomplete' => 'off');
     $form['question'] = array(
         '#type' => 'textarea', //you can find a list of available types in the form api
         '#title' => t(''),
@@ -409,8 +412,9 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
         '#suffix' => '<p class="chtr-limit"><span id="rest-char">160</span> out of 160 characters</p></div>',
         '#maxlength' => 160,
         '#attributes' => array(
-            'placeholder' => 'Ask your question here',
+            'placeholder' => t('Ask your question here'),
             'class' => array('charcount'),
+            'autocomplete' => 'off',
         ),
     );
     $form['askname'] = array(
@@ -420,7 +424,8 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
         '#prefix' => '<div id="askname" class="askname">',
         //'#suffix' => '</div>',
         '#attributes' => array(
-            'placeholder' => 'Name',
+            'placeholder' => t('Name'),
+            'autocomplete' => 'off',
         ),
     );
     $form['askemail'] = array(
@@ -430,7 +435,8 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
         //'#prefix' => '<div id="askemail">',
         '#suffix' => '</div>',
         '#attributes' => array(
-            'placeholder' => 'Email',
+            'placeholder' => t('Email'),
+            'autocomplete' => 'off',
         ),
     );
     $form['cat_id'] = array(
@@ -443,6 +449,9 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
         $form['captcha'] = array(
             '#type' => 'captcha',
             '#captcha_type' => 'image_captcha/Image',
+            '#attributes' => array(
+            'autocomplete' => 'off',
+        ),
         );
     }
     $form['submit_button'] = array(
@@ -454,7 +463,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
             'callback' => 'expert_form_ajax_handler',
         ),
     );
-    if ($askquestion->title != "") {
+    if (!empty($askquestion->title)) {
         $form['html'] = array(
             '#type' => 'markup',
             '#markup' => '<div class="expert-question">' . ucfirst($askquestion->title) . '</div><div class="question-link">' . l('Click here to know the answer', $base_url . '/' . drupal_get_path_alias("ask-an-expert-question-answer/{$askquestion->field_user_source_term_id_value}")) . '</div>',

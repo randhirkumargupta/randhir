@@ -59,6 +59,28 @@
     hide($content['links']);
     //print render($content);    
     ?>
+<!--    mobile socila share-->
+<div class="comment-mobile desktop-hide">
+                <ul>
+                    <li class="mail-to-author"><a title ="Mail to author" href="mailto:support@indiatoday.in"><i class="fa fa-envelope"></i> <?php print t('Mail to author'); ?></a></li>
+                    <li><a href="#" title = "whatsapp"><i class="fa fa-whatsapp"></i></a></li>
+                    <?php
+                    if ($config_name == 'vukkul') {
+                        ?>
+                        <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+                    <?php } if ($config_name == 'other') { ?> 
+                        <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
+                    <?php } ?>
+                    <li><a href="#" title ="share" class="share-icon"><i class="fa fa-share-alt"></i></a>
+                </ul>
+                <ul class="social-share">
+                    <li><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
+                    <li><a title = "share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                    <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
+
+                </ul> 
+            </div>
+    
     <!-- Title -->
     <h1><?php print $node->title; ?></h1>
     <div class="movie-description">        
@@ -289,17 +311,34 @@
         print render($block['content']);
         ?>
     </div>
-    <div class="vukkul-comment">
-        <div id="vuukle-emote"></div>
-        <div id="vuukle_div"></div>
+     <?php
+     if ($config_name == 'vukkul')
+     {
+       ?>
+       <div class="vukkul-comment">
+           <div id="vuukle-emote"></div>
+           <div id="vuukle_div"></div>
 
-        <?php
-        if (function_exists('vukkul_view')) {
-          vukkul_view();
-        }
-        ?>
+           <?php
+           if (function_exists('vukkul_view'))
+           {
+             vukkul_view();
+           }
+           ?>
 
-    </div>
+       </div>
+       <?php
+     }
+     if ($config_name == 'other')
+     {
+       ?>
+       <div id="other-comment">
+           <?php
+           $block = module_invoke('itg_ugc_comment', 'block_view', 'ugc_form_comment_block');
+           print render($block['content']);
+           ?>
+       </div>
+<?php } ?>
 
 <?php print render($content['links']); ?>    
 <?php print render($content['comments']); ?>  

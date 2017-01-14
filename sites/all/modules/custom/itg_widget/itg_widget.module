@@ -165,7 +165,69 @@ function itg_widget_menu() {
     'access arguments' => array('administer nodequeue'),
   );
 
+  $items['site-map'] = array(
+    'page callback' => 'itg_widget_site_map',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+  );
+
   return $items;
+}
+
+/**
+ * function to get sitemap.
+ * @return type
+ */
+function itg_widget_site_map() {
+  $cat_name = 'category_management';  // The vocabulary name
+  $tree = taxonomy_get_tree(taxonomy_vocabulary_machine_name_load($cat_name)->vid); // $tree is an array of all the terms in the vocabulary
+  $term_tree = array();
+  $item_list = array();
+
+  // Here we restructure this a bit so we can work with array keys.  Only necessary to streamline the logic necessary in the recursive functions
+  foreach ($tree as $term) {
+    $status = 1;
+    if (function_exists('itg_category_manager_term_state')) {
+      $status = itg_category_manager_term_state($term->tid);
+    }
+    if ($status) {
+      $term_tree[$term->tid] = $term;
+    }
+  }
+  _construct_nested_taxonomy_array($term_tree); // takes the flat array of terms and nest terms underneath their parent items
+  $term_tree = array_reverse($term_tree);
+
+  _construct_nested_taxonomy_item_list($term_tree, $item_list); //generates the list items that are expected by theme_item_list (https://api.drupal.org/api/drupal/includes%21theme.inc/function/theme_item_list/7)
+
+  return theme('item_list', array('items' => $item_list));
+}
+
+/**
+ * function get nested array of terms.
+ * @param type $tree
+ */
+function _construct_nested_taxonomy_array(&$tree) {
+  foreach (array_reverse($tree) as $term) {
+    if (array_key_exists($term->parents[0], $tree)) {
+      $tree[$term->parents[0]]->children[$term->tid] = $term;
+      _construct_nested_taxonomy_array($tree[$term->parents[0]]->children);
+      unset($tree[$term->tid]);
+    }
+  }
+}
+
+/**
+ * Helper function for site map.
+ * @param type $tree
+ * @param type $item_list
+ */
+function _construct_nested_taxonomy_item_list(&$tree, &$item_list) {
+  foreach (array_reverse($tree) as $term) {
+    $item_list[$term->tid] = array('data' => l($term->name , "taxonomy/term/$term->tid"));
+    if (@$term->children) {
+      _construct_nested_taxonomy_item_list($term->children, $item_list[$term->tid]['children']);
+    }
+  }
 }
 
 /**
@@ -1006,10 +1068,9 @@ function itg_get_video_display_for_big_story($nid) {
  * Function returns videogallery iframe slider.
  * @param int $nid
  */
-
-function itg_widget_dailymotion_get_videogallery_slider($nid , $type = 'gallery') {
+function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery') {
   $videoids = "";
-  print '<div class="videogallery-slider slider-for-nid-'.$nid.'">';
+  print '<div class="videogallery-slider slider-for-nid-' . $nid . '">';
   if (function_exists('get_video_in_fieldcollection_by_nid')) {
     $videoids = get_video_in_fieldcollection_by_nid($nid);
   }
@@ -1038,11 +1099,10 @@ function itg_widget_dailymotion_get_videogallery_slider($nid , $type = 'gallery'
                   allowfullscreen></iframe>
         </div>
         <?php
-        if($type != 'video')
-        {
-               print ucfirst($video_value->field_videogallery_description_value);
+        if ($type != 'video') {
+          print ucfirst($video_value->field_videogallery_description_value);
         }
-      ?>
+        ?>
       </div>
 
       <?php
@@ -1051,8 +1111,8 @@ function itg_widget_dailymotion_get_videogallery_slider($nid , $type = 'gallery'
   }
   print '</div>';
   if (count($videoids) > 1) {
-      print $newimageds;
-    }
+    print $newimageds;
+  }
 }
 
 /**
@@ -1312,8 +1372,10 @@ function itg_widget_save_bulk_operation_widget_data($form_state, $widget_name) {
   $selected_node = $form_state['selection'];
   if (count($selected_node)) {
     foreach ($selected_node as $node) {
-      itg_widget_delete_data_from_widget($widget_name, $node);
-      itg_widget_insert_widget_data_by_min_weight($node, $widget_name, 0);
+      $is_node_in_widget = itg_widget_check_node_in_widget($node, $widget_name);
+      if (!$is_node_in_widget) {
+        itg_widget_insert_widget_data($node, $widget_name, 0);
+      }
     }
     drupal_set_message(t("Nodes has been saved"));
   }
@@ -1356,14 +1418,14 @@ function itg_widget_insert_widget_data_by_min_weight($node, $widget_name, $categ
  * @param string $type
  * @return int
  */
-function get_min_weight_for_special($type , $cat_id = 0 , $extra = 0) {
+function get_min_weight_for_special($type, $cat_id = 0, $extra = 0) {
   $max_query = db_select('itg_widget_order');
   $max_query->addExpression('MIN(weight)');
   $max_query->condition('widget', $type);
-  if(is_numeric($cat_id) && $cat_id) {
+  if (is_numeric($cat_id) && $cat_id) {
     $max_query->condition('cat_id', $cat_id);
   }
-  if($extra!=0 && isset($extra)) {
+  if ($extra != 0 && isset($extra)) {
     $max_query->condition('extra', $extra);
   }
   $max_result = $max_query->execute()->fetchField();
