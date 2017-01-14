@@ -390,7 +390,21 @@ function itg_story_node_update($node) {
  */
 function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
     global $user;
-
+    
+    // condition for first blank reporter field on edit
+    if ($form_id == 'story_node_form' && !empty($form['nid']['#value'])) {
+    $field_name = 'field_story_reporter';
+    if (empty($form[$field_name])) {
+      return;
+    }
+    $field_language = $form[$field_name]['#language'];
+    $max_delta = $form[$field_name][$field_language]['#max_delta'];
+    if ($max_delta <= 0) {
+      drupal_add_js('jQuery(document).ready(function() {
+            jQuery("#edit-field-story-reporter-und-0-remove-button").hide();              
+          });', array('type' => 'inline', 'scope' => 'footer'));
+    }
+    }
     $magazine_field = 'field_story_select_magazine';
     $supplement_field = 'field_story_select_supplement';
     $tv_date_field = 'field_poll_start_date';
