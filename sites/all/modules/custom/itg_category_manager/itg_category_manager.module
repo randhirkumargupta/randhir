@@ -1499,8 +1499,23 @@ function itg_category_manager_custom_submit($form, &$form_state) {
  * {@inheritdoc}. 
  */
 function itg_category_manager_views_query_alter(&$view, &$query) {
-  if (!empty($_GET['name']) && $view->name == 'category_manager') {
-    unset($query->where[1]['conditions'][2]);
+  if ($view->name == 'category_manager') {
+    // Alter term name filter.
+    if (!empty($_GET['name'])) {
+      $str = $query->where[1]['conditions'][0]['value'];
+      $str = str_replace('%', '', $str);
+      $str = trim($str);
+      $query->where[1]['conditions'][0]['value'] = $str;
+      $query->where[1]['conditions'][0]['operator'] = '=';
+      $condition_count = count($query->where[1]['conditions']);
+      unset($query->where[1]['conditions'][$condition_count - 1]);
+    }
+    
+    // Alter content type filter.
+    if (!empty($_GET['field_cm_select_type_value']) && $_GET['field_cm_select_type_value'] != 'All') {
+      $condition_count = count($query->where[1]['conditions']);
+      unset($query->where[1]['conditions'][$condition_count - 1]);
+    }        
   }
 }
 
