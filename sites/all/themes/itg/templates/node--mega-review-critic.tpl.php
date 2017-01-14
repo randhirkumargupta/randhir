@@ -311,17 +311,34 @@
         print render($block['content']);
         ?>
     </div>
-    <div class="vukkul-comment">
-        <div id="vuukle-emote"></div>
-        <div id="vuukle_div"></div>
+     <?php
+     if ($config_name == 'vukkul')
+     {
+       ?>
+       <div class="vukkul-comment">
+           <div id="vuukle-emote"></div>
+           <div id="vuukle_div"></div>
 
-        <?php
-        if (function_exists('vukkul_view')) {
-          vukkul_view();
-        }
-        ?>
+           <?php
+           if (function_exists('vukkul_view'))
+           {
+             vukkul_view();
+           }
+           ?>
 
-    </div>
+       </div>
+       <?php
+     }
+     if ($config_name == 'other')
+     {
+       ?>
+       <div id="other-comment">
+           <?php
+           $block = module_invoke('itg_ugc_comment', 'block_view', 'ugc_form_comment_block');
+           print render($block['content']);
+           ?>
+       </div>
+<?php } ?>
 
 <?php print render($content['links']); ?>    
 <?php print render($content['comments']); ?>  
