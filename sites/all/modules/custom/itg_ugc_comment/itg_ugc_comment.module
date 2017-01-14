@@ -241,13 +241,13 @@ function getmycomments($data) {
   $reply_comment = $con->itgcms_comment;
   $reply_data = $reply_comment->find(array('parent_comment_id' => "$relation_id"));
   
-  $contect .= "<ul>";
+  $contect .= "<div class='inner-comment'>";
   
   foreach ($reply_data as $my_reply_data) {
    $contect .= getmycomments($my_reply_data);
   }
   
-  $contect .= "</ul></div>";
+  $contect .= "</div></div>";
   
   return $contect;
 }

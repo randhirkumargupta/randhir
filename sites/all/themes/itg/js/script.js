@@ -492,11 +492,20 @@ jQuery(document).ready(function () {
 
 
 
-jQuery(document).ready(function () {
+    jQuery(document).ready(function () {
     var winWidth;
-    jQuery('.mobile-nav').click(function () {
-        jQuery('.navigation').slideToggle();
+    jQuery('.mobile-nav i.fa').click(function () {
+        if (jQuery(this).hasClass('fa-bars')) {
+            jQuery(this).addClass('fa-times').removeClass('fa-bars');
+            jQuery('.navigation').slideDown();
+
+        } else {
+            jQuery(this).addClass('fa-bars').removeClass('fa-times');
+            jQuery('.navigation').slideUp();
+        }
     });
+    
+    
     jQuery(document).on('click', '.all-menu', function () {
         jQuery('#newlist').slideToggle();
     });
@@ -561,7 +570,7 @@ jQuery(document).ready(function () {
         jQuery(this).children().not(":first").hide();
     })
     jQuery('.social-share li').click(function () {
-        jQuery(this).nextAll('li').show();
+        jQuery(this).find('.share').parents('li').nextAll('li').toggle();
     });
 
     //vertical menu position      

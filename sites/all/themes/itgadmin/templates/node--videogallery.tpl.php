@@ -40,30 +40,32 @@
             <?php if (!isset($node->op) && $node->op != 'Preview') { ?>
                 <div class="Story-details">
                     <h2><?php print t('Video Upload'); ?></h2>
-                    <div class="content-details">
+                    <div class="content-details uploaded-video-view">
                         <?php
                         
                         $items = field_get_items('node', $node, 'field_video_upload');
            
                         foreach ($items as $imagecollection):
-                           $video_fid_data = get_video_filed_collection_by_its_id($imagecollection['value']);
-                                
-                            if ($video_fid_data[0]->field_videogallery_video_upload_fid !="") {
-                                $video_data = itg_videogallery_get_videoid($video_fid_data[0]->field_videogallery_video_upload_fid);
-                            }
-   
-                            if (!empty($video_data)) {
-                                
-                                $output .= ' <iframe frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_data . '?autoplay=0&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
-                            }
+                          $output .="<div class='view-item'>";
+                          $video_fid_data = get_video_filed_collection_by_its_id($imagecollection['value']);
 
-                            if (isset($video_fid_data) && !empty($video_fid_data[0]->field_videogallery_description_value)) {
-                                $output .= '<div class="field-audio-image">Description:</div><div class="photo-title"><strong>' . $video_fid_data[0]->field_videogallery_description_value . '</strong></div>';
-                            }
-                            
-                              if (isset($video_fid_data) && !empty($video_fid_data[0]->field_include_ads_valu)) {
-                                $output .= '<div class="field-audio-image">Include Ads:</div><div class="photo-title"><strong>' .$video_fid_data[0]->field_videogallery_description_value . '</strong></div>';
-                            }
+                          if ($video_fid_data[0]->field_videogallery_video_upload_fid !="") {
+                              $video_data = itg_videogallery_get_videoid($video_fid_data[0]->field_videogallery_video_upload_fid);
+                          }
+
+                          if (!empty($video_data)) {
+
+                              $output .= ' <iframe frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_data . '?autoplay=0&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
+                          }
+
+                          if (isset($video_fid_data) && !empty($video_fid_data[0]->field_videogallery_description_value)) {
+                              $output .= '<p><strong>' . $video_fid_data[0]->field_videogallery_description_value . '</strong></p>';
+                          }
+
+                            if (isset($video_fid_data) && !empty($video_fid_data[0]->field_include_ads_valu)) {
+                              $output .= '<p><strong>' .$video_fid_data[0]->field_videogallery_description_value . '</strong></p>';
+                          }
+                          $output .="</div>";
                         endforeach;
                         ?>
                         <?php print $output; ?>
@@ -84,29 +86,27 @@
             <?php } else { ?>
                 <div class="Story-details">
                     <h2><?php print t('Video Upload'); ?></h2>
-                    <div class="content-details">
+                    <div class="content-details uploaded-video-view">
                         <?php
                         
                         $items = field_get_items('node', $node, 'field_video_upload');
                         foreach ($items as $imagecollection):
-                            $video_fid = $imagecollection['field_videogallery_video_upload'][LANGUAGE_NONE][0]['fid'];
-                            if ($video_fid != "") {
-                                $video_data = itg_videogallery_get_videoid($video_fid);
-                            }
+                          $output .="<div class='view-item'>";
+                          $video_fid = $imagecollection['field_videogallery_video_upload'][LANGUAGE_NONE][0]['fid'];
+                          if ($video_fid != "") {
+                              $video_data = itg_videogallery_get_videoid($video_fid);
+                          }
+                          if (!empty($video_data)) {
 
-                            if (!empty($video_data)) {
-
-                                $output .= ' <iframe frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_data . '?autoplay=0&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
-                            }
-                               
-                            if (isset($imagecollection['field_videogallery_description'][LANGUAGE_NONE]) && !empty($imagecollection['field_videogallery_description'][LANGUAGE_NONE][0]['value'])) {
-                                $output .= '<div class="field-audio-image">Description:</div><div class="photo-title"><strong>' . $imagecollection['field_videogallery_description'][LANGUAGE_NONE][0]['value'] . '</strong></div>';
-                            }
-                              if (isset($imagecollection['field_include_ads'][LANGUAGE_NONE]) && !empty($imagecollection['field_include_ads'][LANGUAGE_NONE][0]['value'])) {
-                                $output .= '<div class="field-audio-image">Include Ads:</div><div class="photo-title"><strong>' . $imagecollection['field_include_ads'][LANGUAGE_NONE][0]['value'] . '</strong></div>';
-                            }
-
-
+                              $output .= ' <iframe frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_data . '?autoplay=0&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
+                          }
+                          if (isset($imagecollection['field_videogallery_description'][LANGUAGE_NONE]) && !empty($imagecollection['field_videogallery_description'][LANGUAGE_NONE][0]['value'])) {
+                              $output .= '<p><strong>' . $imagecollection['field_videogallery_description'][LANGUAGE_NONE][0]['value'] . '</strong></p>';
+                          }
+                            if (isset($imagecollection['field_include_ads'][LANGUAGE_NONE]) && !empty($imagecollection['field_include_ads'][LANGUAGE_NONE][0]['value'])) {
+                              $output .= '<p><strong>' . $imagecollection['field_include_ads'][LANGUAGE_NONE][0]['value'] . '</strong></p>';
+                          }
+                          $output .="</div>";
                         endforeach;
                         ?>
                         <?php print $output; ?>
