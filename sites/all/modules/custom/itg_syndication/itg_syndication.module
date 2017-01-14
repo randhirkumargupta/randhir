@@ -472,7 +472,7 @@ function itg_syndication_node_view($node, $view_mode, $langcode) {
     }
     
     if (!empty($node->content['field_service_fetch_link'][0]['#markup'])) {
-       $node->content['field_service_fetch_link'][0]['#markup'] = l('http://qa.indiatodayonline.in/syndication/feed/198708796aeeead156a8ecf3785907a577f4f784', 'http://qa.indiatodayonline.in/syndication/feed/198708796aeeead156a8ecf3785907a577f4f784');
+       $node->content['field_service_fetch_link'][0]['#markup'] = l($node->content['field_service_fetch_link'][0]['#markup'], $node->content['field_service_fetch_link'][0]['#markup']);
      }
     
   }
