@@ -2954,10 +2954,11 @@ footer .footer-top ul li a:hover{
   &.comment-popup{
     background-color: #fff;
     bottom: 0;
-    height: 400px;
+    border-radius: 10px;
+    height: 300px;
     left: 0;
     margin: auto;
-    max-width: 800px;
+    max-width: 600px;
     padding: 50px 20px 20px;
     position: absolute;
     right: 0;
