@@ -25960,7 +25960,8 @@ event/*/sponsor-details',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'manage-event-backend
-manage-event-backend-type',
+manage-event-backend-type
+manage-event-backend-draft',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -25971,11 +25972,12 @@ manage-event-backend-type',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'manage-event-backend
-manage-event-backend-type',
+manage-event-backend-type
+manage-event-backend-draft',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -26004,7 +26006,8 @@ manage-event-backend-type',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'manage-event-backend
-manage-event-backend-type',
+manage-event-backend-type
+manage-event-backend-draft',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -26029,11 +26032,12 @@ manage-event-backend-type',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'manage-event-backend
-manage-event-backend-type',
+manage-event-backend-type
+manage-event-backend-draft',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -26058,11 +26062,12 @@ manage-event-backend-type',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'manage-event-backend
-manage-event-backend-type',
+manage-event-backend-type
+manage-event-backend-draft',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -26087,11 +26092,12 @@ manage-event-backend-type',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'manage-event-backend
-manage-event-backend-type',
+manage-event-backend-type
+manage-event-backend-draft',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -26116,11 +26122,12 @@ manage-event-backend-type',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'manage-event-backend
-manage-event-backend-type',
+manage-event-backend-type
+manage-event-backend-draft',
   'title' => '<none>',
   'cache' => -1,
 );
