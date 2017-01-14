@@ -11,6 +11,10 @@ Drupal.behaviors.itg_widgets = {
         // add new data data.
         jQuery ("#videogallery-iframe").html (data);
         videoGallery ();
+      jQuery ("#videogallery-iframe").on ('click', '#close-big-story', function () {
+        jQuery ("#videogallery-iframe").html (" ");
+        jQuery ("#videogallery-iframe").hide ();
+      });
       });
     });
     //Prevent stop video if it is palyed previously.
@@ -79,11 +83,6 @@ Drupal.behaviors.itg_widgets = {
           }
         ]
       });
-      jQuery ("#videogallery-iframe").on ('click', '#close-big-story', function () {
-        jQuery ("#videogallery-iframe").html (" ");
-        jQuery ("#videogallery-iframe").hide ();
-      });
-
     }
     //alert('@@@');
 
@@ -106,11 +105,14 @@ Drupal.behaviors.itg_widgets = {
     //            return false;
     //        });
     jQuery ('.associate-content-block').click (function () {
-      var widgets_type = jQuery (this).attr ('data-widget');
+      var widgets_type = jQuery (this).attr ('data-widget');      
       var widgets_type_array = widgets_type.split ("-");
       var widgets_type = widgets_type_array[0];
       var widgets_id = widgets_type_array[1];
-
+      jQuery ("#videogallery-iframe").append('<img class="loading-popup" src="http://qa.indiatodayonline.in/sites/all/themes/itg/images/tab-loading.gif" alt="loading">');
+      jQuery(this).parents('.stryimg').hide(700, function(){
+          jQuery('#videogallery-iframe').show(1000);          
+      });             
       jQuery.ajax ({
         url: Drupal.settings.basePath + "associate-photo-video-content/" + widgets_type + "/" + widgets_id,
         method: 'post',
@@ -121,8 +123,16 @@ Drupal.behaviors.itg_widgets = {
         success: function (data) {
           jQuery ("#videogallery-iframe").html (data);
           videoGallery ();
+          jQuery('.story-associate-content').css('height', 'auto');
         }
       });
+    });
+    jQuery (".story-associate-content #videogallery-iframe").on ('click', '#close-big-story', function () {       
+        jQuery('.story-associate-content').css('height', '340px'); 
+        jQuery('#videogallery-iframe').hide(700, function(){          
+            jQuery('.stryimg').show(1000);         
+            jQuery ("#videogallery-iframe").empty();
+      }); 
     });
 
     jQuery ('#edit-state1').change (function () {

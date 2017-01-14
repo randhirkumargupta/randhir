@@ -58,16 +58,6 @@ function itg_ads_block_info() {
       'cache' => DRUPAL_CACHE_GLOBAL,
   );
 
-// End code for newly added block configuration 
-//  $blocks['ad_right_sidebar_1'] = array(
-//      'info' => t('Ad right sidebar 1'),
-//      'cache' => DRUPAL_CACHE_GLOBAL,
-//  );
-//  $blocks['ad_right_sidebar_2'] = array(
-//      'info' => t('Ad right sidebar 2'),
-//      'cache' => DRUPAL_CACHE_GLOBAL,
-//  );
-
   return $blocks;
 }
 
@@ -79,66 +69,47 @@ function itg_ads_block_view($delta = '') {
   $block = array();
   switch ($delta) {
 
-
     case 'ads_page_pusher_1x1':
-
       $placeholder_name = t('Page pusher 1x1');
       $ad_script = get_itg_page_name($placeholder_name);
       $block['content'] = $ad_script;
       break;
 
-
-// For Overlay 1x1
-
+    // For Overlay 1x1
     case 'ads_overlay_1x1':
       $placeholder_name = t('Overlay 1x1');
       $ad_script = get_itg_page_name($placeholder_name);
       $block['content'] = $ad_script;
       break;
 
-
-// For Super Banner (Top Nav) 728x90
-
+    // For Super Banner (Top Nav) 728x90
     case 'ads_super_banner_top_nav_728x90':
       $placeholder_name = t('Super Banner (Top Nav) 728x90');
       $ad_script = get_itg_page_name($placeholder_name);
       $block['content'] = $ad_script;
       break;
 
-// For Super Banner (Bottom nav) 728x90  
-
+    // For Super Banner (Bottom nav) 728x90
     case 'ads_super_banner_bottomnav728x90':
       $placeholder_name = t('Super Banner (Bottom Nav) 728x90');
       $ad_script = get_itg_page_name($placeholder_name);
       $block['content'] = $ad_script;
       break;
 
-
-// Medium Rectangle-RHS1-300x250
+    // Medium Rectangle-RHS1-300x250
     case 'ads_medium_rectangl_rhs1_300x250':
       $placeholder_name = t('Medium Rectangle-RHS1-300x250');
       $ad_script = get_itg_page_name($placeholder_name);
       $block['content'] = $ad_script;
       break;
 
-// Medium Rectangle-RHS2-300x250
+    // Medium Rectangle-RHS2-300x250
     case 'ads_medium_rectangl_rhs2_300x250':
       $placeholder_name = t('Medium Rectangle-RHS2-300x250');
       $ad_script = get_itg_page_name($placeholder_name);
       $block['content'] = $ad_script;
       break;
 
-// Code end
-//    case 'ad_right_sidebar_1':
-//      $page_name = 'Rest';
-//      $data['itg_ad'] = get_ad_script($page_name);
-//      $block['content'] = theme('ad_right_sidebar_block1', array('data' => $data));
-//      break;
-//    case 'ad_right_sidebar_2':
-//      $page_name = 'Rest';
-//      $data['itg_ad'] = get_ad_script($page_name);
-//      $block['content'] = theme('ad_right_sidebar_block2', array('data' => $data));
-//      break;
   }
 
   return $block;
@@ -225,13 +196,12 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
       '_none' => '- Select a value -',
   );
 
-//Get mode 
+  //Get mode 
   if (isset($form_state['input'][$syndication_rule_title][LANGUAGE_NONE])) {
     $op = $option_array_ds + itg_ads_get_mode($form_state['input'][$syndication_rule_title][LANGUAGE_NONE]);
   } else if (isset($rule_title)) {
     $op = itg_ads_get_mode($rule_title);
   }
-
 
   foreach ($form['field_adds_code_holder'][LANGUAGE_NONE] as $key => $item) {
     if (is_numeric($key)) {
@@ -239,10 +209,13 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
       if ($key == 0) {
         unset($form['field_adds_code_holder'][LANGUAGE_NONE][$key]['remove_button']);
       }
+      
       $syndication_mode_value = NULL;
+      
       if (isset($form['field_adds_code_holder'][LANGUAGE_NONE][$key]['#entity']->field_ads_placeholder[LANGUAGE_NONE][0]['value'])) {
         $syndication_mode_value = $form['field_adds_code_holder'][LANGUAGE_NONE][$key]['#entity']->field_ads_placeholder[LANGUAGE_NONE][0]['value'];
       }
+      
       $form['field_adds_code_holder'][LANGUAGE_NONE][$key][$syndication_mode][LANGUAGE_NONE]['#options'] = $op;
       if (isset($syndication_mode_value)) {
         $form['field_adds_code_holder'][LANGUAGE_NONE][$key][$syndication_mode][LANGUAGE_NONE]['#default_value'] = $syndication_mode_value;
@@ -301,7 +274,7 @@ function itg_ads_value_ajaxs($form, $form_state) {
  * @param string $id
  * @return array $result
  */
-function itg_ads_placeholder_value($formdata, $id = '') {
+/*function itg_ads_placeholder_value($formdata, $id = '') {
 
   if ($id == 'Photo') {
     $section_name = t('page section photo');
@@ -370,7 +343,7 @@ function itg_ads_placeholder_value($formdata, $id = '') {
   }
 
   return $result;
-}
+}*/
 
 /**
  * Custom function to populate the second dropdown.
@@ -378,7 +351,7 @@ function itg_ads_placeholder_value($formdata, $id = '') {
  * @param string $id
  * @return array $result
  */
-function itg_ads_placeholder_values($formdata, $id = '') {
+/*function itg_ads_placeholder_values($formdata, $id = '') {
   if ($id == 'Home') {
     $template_name = t('page front');
   }
@@ -437,7 +410,7 @@ function itg_ads_placeholder_values($formdata, $id = '') {
     $result = array_diff($data[$id], $data1);
   }
   return $result;
-}
+}*/
 
 /**
  * Implements hook_form_views_exposed_form_alter.
@@ -517,74 +490,20 @@ function itg_ads_node_validate($node, $form, &$form_state) {
  * Show ad image using nid.
  * @return string
  */
-function itg_ads_show_ad_image() {
+/*function itg_ads_show_ad_image() {
   $node = node_load(arg(1));
 
   return theme('itg_ads', array('data' => $node));
-}
+}*/
 
-/**
- * Custom method to get ad script.
- * @param string $page_type
- * @return string
- */
-function get_ad_script($page_type) {
-//	$dev_info = get_device_info();
-//	$device = 'both';
-//	if ($dev_info == 'mobile') {
-//		$device = 'mobile';
-//	}
-//	if ($dev_info == 'website') {
-//		$device = 'website';
-//	}
-  $arr = array();
-//  if (($page_type == 'Home') || ($page_type == 'Rest')) {
-//    $current_date = date("Y-m-d H:i:s");
-//    $query = db_select('field_data_field_ads_ad_code', 'ac');
-//    $query->fields('ac', array('field_ads_ad_code_value'));
-//    $query->fields('f', array('field_ads_placeholder_value'));
-//    $query->join('field_data_field_ads_template_selection', 'ts', 'ac.entity_id = ts.entity_id');
-//    $query->join('field_data_field_ads_placeholder', 'f', 'ac.entity_id = f.entity_id');
-//    $query->join('field_data_field_ads_end_date', 'ed', 'ed.entity_id = ac.entity_id');
-//    $query->join('field_data_field_ads_start_date', 'sd', 'sd.entity_id = ac.entity_id');
-////		$query->join('field_data_field_ads_device_selection', 'ds', 'ds.entity_id = ac.entity_id');
-////		$query->condition('ds.field_data_field_ads_device_selection', $device, '=');
-//    $query->condition('ts.field_ads_template_selection_value', $page_type, '=');
-//    $query->condition('sd.field_ads_start_date_value', $current_date, '<=');
-//    $query->condition('ed.field_ads_end_date_value', $current_date, '>');
-//    $script_code = $query->execute()->fetchAll();
-//    foreach ($script_code as $row) {
-//      $arr[$row->field_ads_placeholder_value] = $row->field_ads_ad_code_value;
-//    }
-//  } else {
-//    $current_date = date("Y-m-d H:i:s");
-//    $query = db_select('field_data_field_ads_ad_code', 'ac');
-//    $query->fields('ac', array('field_ads_ad_code_value'));
-//    $query->fields('f', array('field_ads_placeholder_value'));
-//    $query->join('field_data_field_ads_select_secton_option', 'ts', 'ac.entity_id = ts.entity_id');
-//    $query->join('field_data_field_ads_placeholder', 'f', 'ac.entity_id = f.entity_id');
-//    $query->join('field_data_field_ads_end_date', 'ed', 'ed.entity_id = ac.entity_id');
-//    $query->join('field_data_field_ads_start_date', 'sd', 'sd.entity_id = ac.entity_id');
-////		$query->join('field_data_field_ads_device_selection', 'ds', 'ds.entity_id = ac.entity_id');
-////		$query->condition('ds.field_data_field_ads_device_selection', $device, '=');
-//    $query->condition('ts.field_ads_select_secton_option_value', $page_type, '=');
-//    $query->condition('sd.field_ads_start_date_value', $current_date, '<=');
-//    $query->condition('ed.field_ads_end_date_value', $current_date, '>');
-//    $script_code = $query->execute()->fetchAll();
-//    foreach ($script_code as $row) {
-//      $arr[$row->field_ads_placeholder_value] = $row->field_ads_ad_code_value;
-//    }
-//  }
 
-  return $arr;
-}
 
 /**
  * Custom function to get value of ads placeholder
  * @param int $nid
  * @return array
  */
-function itg_ads_get_prefilled_value($nid) {
+/*function itg_ads_get_prefilled_value($nid) {
   $query = db_select('field_data_field_ads_placeholder', 'a');
   $query->fields('a', array('field_ads_placeholder_value'));
   $query->condition('a.entity_id', $nid, '=');
@@ -594,14 +513,14 @@ function itg_ads_get_prefilled_value($nid) {
   }
 
   return $data2;
-}
+}*/
 
 /**
  * Custom function to get value of template selection
  * @param int $nid
  * @return array
  */
-function itg_ads_get_prefilled($nid) {
+/*function itg_ads_get_prefilled($nid) {
   $data3 = array();
   $query = db_select('field_data_field_ads_template_selection', 'b');
   $query->fields('b', array('field_ads_template_selection_value'));
@@ -612,14 +531,14 @@ function itg_ads_get_prefilled($nid) {
   }
 
   return $data3;
-}
+}*/
 
 /**
  * Custom function to get value of section selection
  * @param int $nid
  * @return array
  */
-function itg_ads_get_prefilled_section($nid) {
+/*function itg_ads_get_prefilled_section($nid) {
   $data3 = array();
   $query = db_select('field_data_field_ads_section_selection', 'b');
   $query->fields('b', array('field_ads_section_selection_value'));
@@ -630,7 +549,7 @@ function itg_ads_get_prefilled_section($nid) {
   }
 
   return $data3;
-}
+}*/
 
 /**
  * Custom function to populate the second dropdown.
@@ -638,7 +557,7 @@ function itg_ads_get_prefilled_section($nid) {
  * @param string $id
  * @return array $result
  */
-function itg_ads_placeholder($form, $id = '') {
+/*function itg_ads_placeholder($form, $id = '') {
   if ($id == 'Photo') {
     $temp_name = t('page--section_photo');
   }
@@ -664,7 +583,7 @@ function itg_ads_placeholder($form, $id = '') {
   $results = $data;
 
   return $results;
-}
+}*/
 
 function get_device_info() {
   $useragent = $_SERVER['HTTP_USER_AGENT'];
@@ -717,7 +636,6 @@ function itg_ads_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
     $combined_final_array = $option_array + get_all_list_of_section_page();
     $form['field_ad_master_template_section'][LANGUAGE_NONE]['#options'] = $combined_final_array;
 
-
     if (isset($form['#entity']->field_ad_master_template_section['und'][0]['value']) && !empty($form['#entity']->field_ad_master_template_section['und'][0]['value'])) {
       $form['field_ad_master_template_section'][LANGUAGE_NONE]['#default_value'] = $form['#entity']->field_ad_master_template_section['und'][0]['value'];
     }
@@ -733,7 +651,7 @@ function itg_ads_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
 function ads_form_validate_term_validate($form, &$form_state) {
 
 
-  if (isset($form_state['values']['field_ad_master_template_section']['und'][0]['value']) && !empty($form_state['values']['field_ad_master_template_section']['und'][0]['value'])) {
+ /* if (isset($form_state['values']['field_ad_master_template_section']['und'][0]['value']) && !empty($form_state['values']['field_ad_master_template_section']['und'][0]['value'])) {
     $check_ads_placeholder_existance = check_ads_placeholder_existance($form_state['values']['field_ad_master_template_section']['und'][0]['value']);
   }
 
@@ -747,7 +665,7 @@ function ads_form_validate_term_validate($form, &$form_state) {
     } else {
       form_set_error('field_ads_template_selection', t('OOPS! Already added place holder for selected template.If you want to edit selected templete please ' . l('click here!', 'taxonomy/term/' . $check_ads_placeholder_existance . '/edit')));
     }
-  }
+  }*/
 }
 
 /**
@@ -770,6 +688,7 @@ function itg_ads_get_mode($type) {
           ->condition('pf.field_ad_master_template_section_value', $type_array, 'IN')
           ->execute()
           ->fetchAll();
+  
   foreach ($all_names as $record) {
     $array[$record->field_ads_placeholder_values_value] = $record->field_ads_placeholder_values_value;
   }
@@ -876,10 +795,12 @@ function check_add_template_existance($template) {
     $query->condition('b.field_ads_template_selection_value', $template);
     $query->condition('b.bundle', 'ads_management');
     $query->fields('b', array('entity_id'));
+    
     $data = $query->execute()->fetchObject();
     if (isset($data->entity_id) && !empty($data->entity_id)) {
       return $data->entity_id;
     }
+    
     return NULL;
   }
 }
@@ -911,10 +832,6 @@ function check_add_template_final($placeholder, $page_name) {
 
       foreach ($res as $key => $placeholder_data) {
         $data[$placeholder_data->field_ads_placeholder_value][] = array('device' => $placeholder_data->field_ads_device_selection_value, 'code' => $placeholder_data->field_ads_ad_code_value);
-
-// $data[$key]['placeholder'] = $placeholder_data->field_ads_placeholder_value;
-// $data[$key]['device'] = $placeholder_data->field_ads_device_selection_value;
-// $data[$key]['code'] = $placeholder_data->field_ads_ad_code_value;
       }
 
 
@@ -970,19 +887,20 @@ function get_itg_page_name($placeholder_name) {
     $page_name = t('Rest');
   }
 
-///$default_ros_value = array('Page pusher 1x1' => array('device' => 'mobile', 'code' => 'shravan code'));
   $default_ros_value = drupal_json_decode(variable_get('itg_india_ros_default_val'));
 
   $ad_value_object = check_add_template_final($placeholder_name, $page_name);
+  
   $ad_value = $ad_value_object[$placeholder_name];
-
 
   if (empty($ad_value)) {
     $ad_value = $default_ros_value[$placeholder_name];
   }
 
   $device = get_device_info();
+  
   $code = get_desired_code_for_ads_placing($ad_value, $device);
+  
   return $code;
 }
 
@@ -994,17 +912,8 @@ function get_itg_page_name($placeholder_name) {
  */
 
 function get_ad_of_placeholder($placeholder_name, $page_name) {
-// die("$placeholder_name, $page_name");
-//  $page_final = array();
-//  if ($page_name == 'Home' || $page_name == 'Rest') {
-//    $page_final[] = $page_name;
-//  } else {
-//    $page_final[] = $page_name;
-//    $page_final[] = 'Rest';
-//  }
 
   $ad_nid = check_ads_placeholders($page_name);
-
 
   if (isset($template_id) && !empty($template_id)) {
     $node = node_load($template_id);
@@ -1015,6 +924,7 @@ function get_ad_of_placeholder($placeholder_name, $page_name) {
       if ($entity->field_ads_placeholder['und'][0]['value'] == $placeholder_name && ($entity->field_ads_device_selection['und'][0]['value'] == 'both' || $entity->field_ads_device_selection['und'][0]['value'] == $device)) {
         return $entity->field_ads_ad_code['und'][0]['value'];
       }
+      
     }
   }
 }
@@ -1032,6 +942,7 @@ function itg_ads_node_update($node) {
       $entity = entity_load('field_collection_item', array($chunks_data['value']))[$chunks_data['value']];
       $default_ros_value[$entity->field_ads_placeholder['und'][0]['value']][] = array('device' => $entity->field_ads_device_selection['und'][0]['value'], 'code' => $entity->field_ads_ad_code['und'][0]['value']);
     }
+    
     $default_ros_value_json = drupal_json_encode($default_ros_value);
     variable_set('itg_india_ros_default_val', $default_ros_value_json);
   }
@@ -1048,7 +959,6 @@ function get_desired_code_for_ads_placing($ad_value, $device) {
 
   $code = '';
   foreach ($ad_value as $chunk_values) {
-
     if ($chunk_values['device'] == $device || $chunk_values['device'] == 'both') {
       $code = $chunk_values['code'];
     }
@@ -1096,7 +1006,6 @@ function get_header_body_start_end_code() {
 
     if (isset($ads_object->field_code_visibility_flag[$ads_object->language])) {
       foreach ($ads_object->field_code_visibility_flag[$ads_object->language] as $ads_viaibility) {
-
 
         if ($ads_viaibility['value'] == 'header') {
           foreach ($ads_object->field_ads_headerscript[$ads_object->language] as $header) {

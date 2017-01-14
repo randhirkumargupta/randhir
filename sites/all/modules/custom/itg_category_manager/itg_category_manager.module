@@ -1488,8 +1488,8 @@ function itg_category_manager_custom_submit($form, &$form_state) {
  * {@inheritdoc}. 
  */
 function itg_category_manager_views_query_alter(&$view, &$query) {
-  if (isset($_GET['name']) && $_GET['name'] !== '' && $view->name == 'category_manager') {
-    unset($query->where[1]['conditions'][2]);
+  if (!empty($_GET['name']) && $view->name == 'category_manager') {
+    unset($query->where[1]['conditions'][2]);    
   }
 }
 
