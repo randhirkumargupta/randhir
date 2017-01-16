@@ -524,10 +524,12 @@ div.filefield-sources-list a.active {
   width: 12px;
 }
 
-.icon-add-more, [id*="field-task-task-idea-values"] + div.clearfix .form-submit, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table + .clearfix .field-add-more-submit, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-2 > div > div > .clearfix .form-submit, [id*="field-syndication-ftp-details-values"] + div.clearfix .form-submit {
+.icon-add-more, [id*="field-task-task-idea-values"] + div.clearfix .form-submit, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table + .clearfix .field-add-more-submit, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-2 > div > div > .clearfix .form-submit, [id*="field-syndication-ftp-details-values"] + div.clearfix .form-submit, .node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix .form-submit,
+.node-videogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix .form-submit,
+.node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix .form-submit {
   background: url("../images/add-item.png") no-repeat center center;
   border: none;
-  bottom: 10px;
+  /*bottom: 10px;*/
   box-shadow: none;
   display: inline-block;
   height: 28px;
@@ -538,10 +540,14 @@ div.filefield-sources-list a.active {
 }
 
 .icon-remove-item, [id*="field-task-task-idea-values"] > tbody > tr > td .form-submit, [id*="field-task-task-idea-values"] > tbody > tr > td > .ajax-new-content .form-submit, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) > .form-submit[value="Remove"], [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .ajax-new-content > .form-submit[value="Remove"], [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-2 table td > .ajax-new-content > .itg-fields-remove-button,
-[id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-2 table td > .itg-fields-remove-button, [id*="field-syndication-ftp-details-values"] tbody tr td > .form-submit, [id*="field-syndication-ftp-details-values"] tbody tr td > .ajax-new-content > .form-submit {
+[id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-2 table td > .itg-fields-remove-button, [id*="field-syndication-ftp-details-values"] tbody tr td > .form-submit, [id*="field-syndication-ftp-details-values"] tbody tr td > .ajax-new-content > .form-submit, .node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td > .form-submit[value="Remove"], .node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+.node-videogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td > .form-submit[value="Remove"],
+.node-videogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+.node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td > .form-submit[value="Remove"],
+.node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"] {
   background: url("../images/remove-item.png") no-repeat center center;
   border: none;
-  bottom: 10px;
+  /*bottom: 10px;*/
   box-shadow: none;
   display: inline-block;
   height: 28px;
@@ -562,7 +568,7 @@ a.ckeditor_links:hover {
   text-decoration: underline;
 }
 
-.astrick, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-1 .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-pti-words-limit .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-survey-end-date fieldset > legend:after, .category-manager-selection-details .field-name-field-cm-select-type .form-type-select > label:after, .edit-field-pti-magazine-kicker .form-type-textfield > label:after, .node-story-form .form-field-name-field-story-category .form-type-hierarchical-select > label:after, .node-story-form .form-field-name-field-story-issue-date .fieldset-legend:after {
+.astrick, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-1 .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-pti-words-limit .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-survey-end-date fieldset > legend:after, .edit-field-pti-magazine-kicker .form-type-textfield > label:after, .node-story-form .form-field-name-field-story-category .form-type-hierarchical-select > label:after, .node-story-form .form-field-name-field-story-issue-date .fieldset-legend:after {
   content: '*';
   color: red;
 }
@@ -2795,6 +2801,7 @@ div.image-widget-data .ajax-progress-throbber {
   line-height: 28px;
   font-size: 18px;
   margin: 15px 0;
+  font-weight: 500;
 }
 .node-category-form fieldset#edit-relations .form-type-hierarchical-select .discription, .node-category-form fieldset#edit-relations .form-type-hierarchical-select .description {
   padding-left: 220px;
@@ -5603,6 +5610,13 @@ div.node #comments h2 {
   margin-right: 10px;
 }
 
+/*.category-manager-selection-details{
+  .field-name-field-cm-select-type{
+    .form-type-select > label:after{
+      @extend .astrick;
+    }
+  }
+}*/
 [id*="views-form-strory-menegment-page"] .btn-generate-xml {
   margin: 10px 10px 0 0;
   height: 32px;
@@ -7361,7 +7375,13 @@ div.node #comments h2 {
 .node-category-form .form-type-checkboxes > label + div {
   padding-left: 200px;
 }
-.itg-node-form .form-type-textfield label + .form-text + span.error, .node-category-form .form-type-textfield label + .form-text + span.error,
+.itg-node-form .form-type-select label + .form-select + span.error, .node-category-form .form-type-select label + .form-select + span.error,
+.itg-node-form .form-type-select label + .form-select + .ajax-progress.ajax-progress-throbber + span.error,
+.node-category-form .form-type-select label + .form-select + .ajax-progress.ajax-progress-throbber + span.error,
+.itg-node-form .form-type-select label + .form-select + div.description + span.error,
+.node-category-form .form-type-select label + .form-select + div.description + span.error,
+.itg-node-form .form-type-textfield label + .form-text + span.error,
+.node-category-form .form-type-textfield label + .form-text + span.error,
 .itg-node-form .form-type-textfield label + #autocomplete + .form-text + span.error,
 .node-category-form .form-type-textfield label + #autocomplete + .form-text + span.error,
 .itg-node-form .form-type-textfield label + .form-text + div.description + span.error,
@@ -8126,36 +8146,12 @@ div.node #comments h2 {
   padding-right: 10px;
   margin: 0 0 10px;
 }
-.node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td > .form-submit[value="Remove"], .node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
-.node-videogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td > .form-submit[value="Remove"],
-.node-videogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
-.node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td > .form-submit[value="Remove"],
-.node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"] {
-  background: url(../images/remove-item.png) no-repeat;
-  border: none;
-  height: 18px;
-  margin: 5px 0 0 10px;
-  padding: 0;
-  text-indent: -9999px;
-  width: 18px;
-}
 .node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix,
 .node-videogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix,
 .node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix {
-  bottom: 15px;
+  bottom: 10px;
   position: absolute;
-  right: 35px;
-}
-.node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix .form-submit,
-.node-videogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix .form-submit,
-.node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix .form-submit {
-  background: url(../images/add-item.png) no-repeat;
-  border: medium none;
-  height: 18px;
-  margin: 0;
-  padding: 0;
-  text-indent: -9999px;
-  width: 18px;
+  right: 22px;
 }
 .node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-type-checkboxes,
 .node-videogallery-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-type-checkboxes,
