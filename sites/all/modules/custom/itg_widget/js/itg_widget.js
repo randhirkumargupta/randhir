@@ -407,19 +407,12 @@ jQuery (document).ready (function () {
   jQuery (".custom-weight-draggable input[type=number]").change (function () {
     jQuery (this).next ().children ().find ('option').remove ().end ().append ('<option value="' + jQuery (this).val () + '">' + jQuery (this).val () + '</option>').val (jQuery (this).val ());
   });
-  //    jQuery("#edit-actionitg-widget-categories-wise-node-group").click(function(e){
-  //        e.preventDefault();
-  //        if(confirm("Are you sure want to perform action.")) {
-  //            return ture;
-  //        } else {
-  //            return false;
-  //        }
-  //    });
-
   jQuery ("select#fake-soruce-type").on ("change", function () {
     var soruce_type = jQuery (this).val ();
     jQuery ("#edit-field-story-source-type-value").val (soruce_type);
   });
+  jQuery ('#views-exposed-form-most-read-widget-most-read-widget-contents #edit-category-tid > option[value=All]').html ("- Any -");
+  jQuery ('#views-exposed-form-most-read-widget-most-read-widget-list #edit-category-tid > option[value=All]').html ("- Any -");
 });
 
 jQuery (document).ajaxSuccess (function () {
@@ -432,11 +425,14 @@ jQuery (document).ajaxSuccess (function () {
     , 'views-exposed-form-photo-carousel-widget-photo-carousel-list'
     , 'views-exposed-form-photo-carousel-widget-video-carousel-list'
     , 'views-exposed-form-home-page-feature-widget-page-1'
+    , 'views-exposed-form-section-wise-draggable-content-order-dont-miss-content'
+    , 'views-exposed-form-section-wise-draggable-content-order-we-may-suggest-widget'
+    , 'views-exposed-form-most-read-widget-most-read-widget-contents'
   ];
-  console.log(forms);
   for (i = 0; i < forms.length; i++) {
     jQuery ('#' + forms[i] + ' #edit-field-story-category-tid-select-1 > option[value=0]').html ("- Any -");
     jQuery ('#' + forms[i] + ' #edit-shs-term-node-tid-depth-select-1 > option[value=0]').html ("- Any -");
+    jQuery ('#' + forms[i] + ' #edit-category-tid-select-1 > option[value=0]').html ("- Any -");
   }
 });
   

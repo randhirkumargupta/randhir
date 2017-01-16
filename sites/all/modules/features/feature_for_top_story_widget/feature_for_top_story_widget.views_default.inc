@@ -174,13 +174,13 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: Field: Day */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -923,13 +923,13 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: Field: Day */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -1212,13 +1212,13 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: Field: Day */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -1389,6 +1389,11 @@ function feature_for_top_story_widget_views_default_views() {
   );
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'category_management';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '0';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'trending-video-widget-list';
 
   /* Display: Trending Videos Order Reorder */
@@ -1579,13 +1584,13 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: Field: Day */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -1863,13 +1868,13 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: Field: Day */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -2232,13 +2237,13 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: Field: Day */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -2303,6 +2308,11 @@ print \'<a href="move-dont-miss-widget-node/most_popular_widget/\'.$_GET[\'type\
   $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'most_popular_widget';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'most-popular-widget-order-reorder';
 
   /* Display: Top Takes Videos */
@@ -2523,13 +2533,13 @@ print \'<a href="move-dont-miss-widget-node/most_popular_widget/\'.$_GET[\'type\
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: Field: Day */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -2700,6 +2710,11 @@ print \'<a href="move-dont-miss-widget-node/most_popular_widget/\'.$_GET[\'type\
   );
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'category_management';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '0';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'top-takes-videos-list';
 
   /* Display: Top Takes Videos Order Reorder */
@@ -2883,13 +2898,13 @@ print \'<a href="move-dont-miss-widget-node/most_popular_widget/\'.$_GET[\'type\
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: Field: Day */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -3184,13 +3199,13 @@ print \'<a href="move-dont-miss-widget-node/top_takes_video_widget/\'.$_GET[\'ty
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: Field: Day */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -3541,13 +3556,13 @@ print \'<a href="move-dont-miss-widget-node/top_takes_video_widget/\'.$_GET[\'ty
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: User: First name */
+  /* Field: Field: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: Field: Day */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -3600,6 +3615,11 @@ print \'<a href="move-dont-miss-widget-node/top_takes_video_widget/\'.$_GET[\'ty
   $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'watch_right_now_widget';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'watch-right-now-video-widget-order-reorder';
   $export['story_widget'] = $view;
 
