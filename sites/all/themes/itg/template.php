@@ -120,6 +120,7 @@ function itg_preprocess_page(&$variables) {
   if ($arg[0] == 'taxonomy' && $arg[1] == 'term') {
     $term = taxonomy_term_load($arg[2]);
     if ($term->vocabulary_machine_name = 'category_management') {
+        $variables['theme_hook_suggestions'][] = 'page__taxonomy_term';
       // remove the extra vocavolary information on page buttom.
       unset($variables['page']['content']['system_main']);
     }
