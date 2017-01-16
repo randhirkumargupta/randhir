@@ -41,7 +41,7 @@ else {
                 }
                 else {
                   ?>
-                  <a href="<?php print $base_url;?>/personalization/edit-profile/general-settings" class="mobile-user"><?php print $user_pic; ?></a>
+                  <a href="javascript:void(0)" class="mobile-user"><?php print $user_pic; ?></a>
                   <?php
                 }
               }
@@ -54,7 +54,7 @@ else {
                 }
                 else {
                   ?>
-                  <a href="<?php print $base_url;?>/personalization/edit-profile/general-settings" class="mobile-user"><?php print $user_pic; ?></a>
+                  <a href="javascript:void(0)" class="mobile-user"><?php print $user_pic; ?></a>
               <?php
             }
           }
