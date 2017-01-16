@@ -15,10 +15,6 @@ global $base_url;
 <?php endif; ?>
 
     <?php foreach ($rows as $id => $row): ?>
-  <?php
-//  echo "<pre>";
-//print_r($row);
-?>
         <div class="catagory-listing">
             <div class="pic">
                 <?php if ($row['field_story_small_image'] != ''): ?>
@@ -33,9 +29,9 @@ global $base_url;
                 <?php endif; ?>
 
             </div>
-            <div class="detail"><h3><?php print mb_strimwidth($row['title'], 0,114, '..')?></h3>
-                <?php if ($row['type'] == 'Story'): ?>
-                    <p><?php print mb_strimwidth($row['field_story_kicker_text'], 0,253, '..'); ?></p>
+            <div class="detail"><h3><?php print $row['title'];  ?></h3>
+                <?php if (strtolower($row['type']) == 'story'): ?>
+                    <p><?php print $row['field_story_kicker_text']; ?></p>
                 <?php elseif ($row['type'] == 'photogallery'): ?>
                     <p><?php print $row['field_gallery_kicer']; ?></p>
                 <?php elseif ($row['type'] == 'photogallery'): ?>
@@ -44,4 +40,3 @@ global $base_url;
             </div>
         </div>
 <?php endforeach; ?>
-<?php // die; ?>

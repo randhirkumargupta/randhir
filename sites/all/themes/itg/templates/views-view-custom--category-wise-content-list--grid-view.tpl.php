@@ -27,7 +27,7 @@ global $base_url;
 
             </div>
             <div class="detail"><h3><?php print $row['title']; ?></h3>
-                <?php if ($row['type'] == 'story'): ?>
+                <?php if (strtolower($row['type']) == 'story'): ?>
                     <p><?php print $row['field_story_kicker_text']; ?></p>
                 <?php elseif ($row['type'] == 'photogallery'): ?>
                     <p><?php print $row['field_gallery_kicer']; ?></p>

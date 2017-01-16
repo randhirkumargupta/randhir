@@ -184,7 +184,7 @@ function itg_widget_views_pre_render(&$view) {
     $taxonomy_url = $base_url."/taxonomy/term/$arg[2]";
     $term = taxonomy_term_load($arg[2]);
     $header_content = '<h1 class="category-heading">' . $term->name . '</h1>';
-    $header_content .= '<div class="list-grid"><i class="fa fa-list" aria-hidden="true"></i> ' .l('List',$taxonomy_url, array('query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span><i class="fa fa-th" aria-hidden="true"></i> '.l('Grid',$taxonomy_url ,array('query'=>array('view_type'=>'grid'))).'</div>';
+    $header_content .= '<div class="list-grid"><i class="fa fa-list" aria-hidden="true"></i> ' .l(t('List'),$taxonomy_url, array('query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span><i class="fa fa-th" aria-hidden="true"></i> '.l(t('Grid'),$taxonomy_url ,array('query'=>array('view_type'=>'grid'))).'</div>';
     $view->attachment_before = $header_content;
   }
   

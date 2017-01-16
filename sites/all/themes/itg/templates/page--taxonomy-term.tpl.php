@@ -111,6 +111,12 @@ window.addEventListener("message", function(ev) {
     </div>    
     <?php endif; ?>  
       <?php
+        global $base_url;
+        $taxonomy_url = $base_url."/taxonomy/term/$arg[2]";
+        $term = taxonomy_term_load($arg[2]);
+        $header_content = '<h1 class="category-heading">' . $term->name . '</h1>';
+        $header_content .= '<div class="list-grid"><i class="fa fa-list" aria-hidden="true"></i> ' .l(t('List'),$taxonomy_url, array('query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span><i class="fa fa-th" aria-hidden="true"></i> '.l(t('Grid'),$taxonomy_url ,array('query'=>array('view_type'=>'grid'))).'</div>';
+        print $header_content;
       if(!isset($_GET['view_type']) || (isset($_GET['view_type']) && $_GET['view_type'] == 'list')) {
         // show list view.
           print views_embed_view('category_wise_content_list', 'section_wise_content_listing' , arg(2));
