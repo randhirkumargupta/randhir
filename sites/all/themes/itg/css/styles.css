@@ -4292,6 +4292,16 @@ footer .footer-copyright {
   zoom: 1;
   border: 1px solid #dddddd;
   padding: 20px;
+  zoom: 1;
+}
+.poll-wrapper .poll-data:before, .poll-wrapper .poll-data:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.poll-wrapper .poll-data:after {
+  clear: both;
 }
 .poll-wrapper .poll-data:before, .poll-wrapper .poll-data:after {
   content: "";
@@ -4408,7 +4418,7 @@ footer .footer-copyright {
   display: inline-block;
   vertical-align: top;
 }
-.poll-wrapper .poll-data.relative-with-img {
+.poll-wrapper .poll-data .relative-with-img {
   width: 56%;
   float: left;
 }
@@ -9041,10 +9051,10 @@ footer .footer-copyright {
   margin-bottom: 0;
 }
 .movie-layout-page .itg-layout-580 .droppable {
-  height: 580px;
+  height: 650px;
 }
 .movie-layout-page .itg-layout-580 .droppable .auto-block-1, .movie-layout-page .itg-layout-580 .droppable .auto-block-2 {
-  height: 580px;
+  height: 650px;
   overflow: hidden;
 }
 .movie-layout-page .itg-layout-580 .droppable .auto-block-1 {
@@ -9439,7 +9449,7 @@ footer .footer-copyright {
   margin: 0 -15px;
 }
 .budget-page-layout .featured-news .featured-post {
-  padding: 10px 15px 0px 15px;
+  padding: 0px 15px 0px 15px;
 }
 .budget-page-layout .video-icon, .budget-page-layout .trending-videos li .pic, .trending-videos li .budget-page-layout .pic {
   display: block;
