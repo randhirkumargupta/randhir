@@ -115,12 +115,12 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id) {
       '#value' => t('Cancel'),
     );
     $form['actions']['itg_custom_button'] = array(
-        '#type' => 'submit',
-        '#value' => t('Save as Draft'),
-        '#submit' => array(
-            'node_form_submit',
-            'itg_newsletter_form_save_as_draft_submit_callback'
-        ),
+      '#type' => 'submit',
+      '#value' => t('Save as Draft'),
+      '#submit' => array(
+        'node_form_submit',
+        'itg_newsletter_form_save_as_draft_submit_callback'
+      ),
     );
 
     $form['actions']['submit']['#value'] = 'Publish';
@@ -151,7 +151,7 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id) {
 
     // Add submit handler for redirect form to their corresponding page after node has been created susccessfully.
     $form['actions']['submit']['#submit'][] = 'itg_newsletter_submit_handler_for_redirect';
-    
+
     // Call function after build
     $form['#after_build'][] = 'itg_newsletter_form_after_build';
   }
@@ -214,6 +214,7 @@ function itg_newsletter_submit_handler_for_redirect($form, &$form_state) {
 function itg_newsletter_form_save_as_draft_submit_callback(&$form, &$form_state) {
   $form_state['redirect'] = 'manage-draft-newsletter';
 }
+
 /**
  * After build function for newsletter
  * {@inheritdoc}
@@ -361,6 +362,7 @@ function itg_newsletter_shedule_date_validate($form, &$form_state) {
  */
 function itg_newsletter_node_presave($node) {
   if ($node->type == 'newsletter') {
+    $flag_change_date = TRUE;
     $template_title = itg_common_get_node_title($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
     $node->title = $template_title;
     // Handel automatic case. for daily weekly and monthly.
@@ -386,12 +388,27 @@ function itg_newsletter_node_presave($node) {
         }
       }
       else if ($frequency == 'Monthly') {
-        if (!empty($scheduler_time)) {
+        $frequency_month = date("m", $scheduler_time);
+        $selected_date = $date;
+        $current_date = date('d');
+        $custom_time = date('m') . "/" . $selected_date . "/" . date('Y') . " " . $time_rule;
+        if ($selected_date > $current_date) {
+          $flag_change_date = FALSE;
+        }
+        if((strtotime($custom_time) < strtotime(date('m/d/Y H:i')))) {
           $scheduler_time_up = strtotime('+1 month', $scheduler_time);
         }
+        if (!empty($scheduler_time) && $flag_change_date) {
+          if ($frequency_month > date('m')) {
+            $scheduler_time_up = strtotime('+1 month', $scheduler_time);
+          }
+        }
       }
-      if (!empty($scheduler_time_up)) {
-        $node_scheduler_time = date('Y-m-d h:i:s', $scheduler_time_up);
+      if (!empty($scheduler_time_up) && $flag_change_date) {
+        $node_scheduler_time = date('Y-m-d H:i', $scheduler_time_up);
+      }
+      else {
+        $node_scheduler_time = date('Y-m-d H:i', strtotime($custom_time));
       }
       if (!empty($node_scheduler_time)) {
         $node->field_survey_start_date['und'][0]['value'] = $node_scheduler_time;
