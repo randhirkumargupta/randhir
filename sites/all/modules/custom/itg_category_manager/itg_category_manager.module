@@ -329,15 +329,11 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
 //Non-editable fields in edit mode
       if (arg(3) == 'edit') {
         $form['name']['#attributes'] = array('readonly' => 'readonly');
-        $form['field_cm_redirection_url']['#disabled'] = TRUE;
-        if ($user->uid != 1) {
-          $form['field_cm_select_type']['#disabled'] = TRUE;
-        }
+        $form['field_cm_redirection_url']['#disabled'] = TRUE;        
         $form['field_cm_hide_cat_from_home']['#disabled'] = TRUE;
         $form['field_cm_hide_cat_from_search']['#disabled'] = TRUE;
         $form['field_cm_no_follow']['#disabled'] = TRUE;
-        $form['field_cm_sponsored_category']['#disabled'] = TRUE;
-        $form['relations']['#attributes'] = array('disabled' => TRUE);
+        $form['field_cm_sponsored_category']['#disabled'] = TRUE;        
       }
 // Taxonomy active deactive logic
       $form['term-state-wrap'] = array(
@@ -440,13 +436,6 @@ function taxonomy_get_children_all($tid, $vid = 0, $key = 'tid') {
  * @param array $form_state
  */
 function itg_category_manager_term_validate($form, &$form_state) {
-// Set published time same as parent term  
-  $termParent = $form_state['values']['parent'][0];
-  if ($termParent) {
-    $pTerm = taxonomy_term_load($termParent);
-    $form_state['values']['field_publish_time']['und'][0]['value'] = $pTerm->field_publish_time['und'][0]['value'];
-  }
-
 // Check status of the mode
   $mode_status = itg_category_manager_term_state($form_state['values']['tid']);
 
@@ -517,6 +506,8 @@ function itg_category_manager_term_validate($form, &$form_state) {
  * @return int
  */
 function itg_category_manager_add_form_after_build(&$form, &$form_state) {
+  global $user;
+  $arg = arg();
 //Add cancel link to add and edit form of category add form exit;
   $form['actions']['cancel'] = array(
     '#markup' => l(t('Cancel'), 'category-manager-listing', array('attributes' => array('class' => 'button'))),
@@ -531,6 +522,9 @@ function itg_category_manager_add_form_after_build(&$form, &$form_state) {
       ),
     ),
   );
+  if ($user->uid != 1 && $arg[3] == 'edit') {    
+    drupal_add_js('jQuery(document).ready(function () {jQuery("#edit-field-cm-select-type-und option:not(:selected)").attr("disabled", true);jQuery("#edit-relations option:not(:selected)").attr("disabled", true);});', 'inline');
+  }
 
   unset($form['description']['format']['format']);
 //Unset metatag description

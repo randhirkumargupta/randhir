@@ -5432,6 +5432,12 @@ footer{
             padding-top:0; 
             .trending-videos-list{
                 padding: 10px 0;
+                span{
+                    + span{
+                        display: block;
+                        overflow: hidden;  
+                    }
+                }
             }
         }
     }
@@ -5443,6 +5449,10 @@ footer{
                     float: left;                
                     margin-bottom: 0;
                     margin-right: 10px;
+                }
+                p{
+                display: block;
+                   overflow: hidden;
                 }
             }
         }
@@ -7462,6 +7472,9 @@ footer{
 
 /*CSS start for movie page*/
 .movie-layout-page{
+    ul{
+        @extend .list-none;
+    }
     .featured-post-first{
         h2{
             a{
@@ -7646,6 +7659,15 @@ footer{
                 + li{
                     padding: 15px 0;
                 }
+                p{
+                     overflow:hidden;
+                     display: block;
+                }
+                .col-md-6{
+                    + .col-md-6{
+                        margin-top:20px;
+                    }
+                }
             }
         }
     }
@@ -7741,7 +7763,7 @@ footer{
 /*css end taboola page*/
 
 /*Budget page css start*/
-.budget-page-layout{
+.budget-page-layout{   
     .droppable{
         overflow: hidden;
     }
@@ -7787,37 +7809,45 @@ footer{
     }
     .budget-top-block{
         h1{
-        display: inline;
-    }
-    @include social-share; 
-    .social-share{
-        display: inline-block;
-        vertical-align: top;
-        padding-top: 15px;
-        i.fa-share-alt{
-            font-size: 20px;
+            display: inline;
+        }    
+        @include social-share; 
+        .social-share{
+            display: inline-block;
+            vertical-align: top;
+            padding-top: 15px;
+            i.fa-share-alt{
+                font-size: 20px;
+            }
         }
-    }
     }    
     .budget-ad{
         margin-top: 25px;
     }
     iframe{
         width: 100%;
+        height: 285px;
     }
-    .highlight{
+    .common-highlights{
         overflow:auto;
+        height: 285px;
     }
     .special-top-bg{
         background: #fbfbfb;
         height: 530px;
     }
-    .itg-listing{
-        border: none;
-    }
+    .auto-block-2{        
+        height: 490px;
+        overflow: auto;
+        .special-top-news{                       
+            .itg-listing{
+               border: none;
+            }   
+        }       
+    }    
     .section_wise_order .widget-settings{
         @include pos(relative);
-    }
+    }    
     .trending-videos{
         padding: 0;
         border: none;

@@ -6,6 +6,9 @@
                 <?php
                 foreach ($rows as $index => $row) {
                     $desc = $row['title'];
+                    if (function_exists('itg_common_remove_extra_html')) {
+                        $desc = itg_common_remove_extra_html($desc);
+                    }
 
                     $video_class = "pic-no-icon";
                     if (strtolower($row['type']) == 'videogallery') {
@@ -19,8 +22,9 @@
                         </div>
 
                     <?php }
-                    else if ($index > 0 && $index <= 2) { ?>
-                <div class="featured-post"> <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}") ?>"><?php print $row['field_story_extra_large_image']; ?></a>
+                    else if ($index > 0 && $index <= 2) {
+                        ?>
+                        <div class="featured-post"> <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}") ?>"><?php print $row['field_story_extra_large_image']; ?></a>
                             <h3><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h3>
                         </div>
 
@@ -47,7 +51,7 @@
 
                         <?php } ?>
 
-                    <?php } ?>
+<?php } ?>
 
                 </ul>
 
