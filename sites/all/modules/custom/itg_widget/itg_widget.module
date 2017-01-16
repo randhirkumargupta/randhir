@@ -1450,10 +1450,12 @@ function itg_widget_update_weight_during_order_reorder($form, &$form_state) {
   if ($weightcount > 0) {
     foreach ($draggable_view_data as $key => $value) {
       try {
+        $weight = (int) $value['weight'];
+        $nid = (int) $value['id'];
         db_update('itg_widget_order')
-            ->fields(array('weight' => $value['weight']))
+            ->fields(array('weight' => $weight))
             ->condition('widget', $widget)
-            ->condition('nid', $value['id'])
+            ->condition('nid', $nid)
             ->execute();
       } catch (Exception $ex) {
         drupal_set_message($ex->getMessage());
@@ -1495,6 +1497,9 @@ function itg_widget_get_widget_name_from_views($view_name, $view_current_display
   }
   if ($view_name == 'widget_anchors_listing' && $view_current_display == 'anchors_listing_widget') {
     $widget_name = "anchors_listing_widget";
+  }
+  if ($view_name == 'section_wise_content_ordering_list' && $view_current_display == 'we_may_suggest_widget') {
+    $widget_name = "we_may_suggest_widget";
   }
   return $widget_name;
 }
@@ -1607,4 +1612,18 @@ function itg_widget_get_widget_data_data($info) {
  */
 function itg_widget_form_views_form_section_wise_content_ordering_list_page_alter(&$form, &$form_state, $form_id) {
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data";
+}
+
+
+/**
+ * Added a Query tag as  "query_poll_widget" in poll widget used in View : [poll_widget] [id:poll_widget_format]and written query tag alter as required
+ * Implements hook_query_TAG_alter()
+ */
+
+function itg_widget_query_poll_widget_alter_tag_alter(QueryAlterableInterface $query) {
+  $cur_date = date('Y-m-d H:i:s');
+  $query->leftjoin('field_data_field_poll_start_date', 'sd', 'node.nid = sd.entity_id');
+  $query->leftjoin('field_data_field_poll_end_date', 'ed', 'node.nid = ed.entity_id');
+  $query->condition('sd.field_poll_start_date_value', $cur_date, '<=');
+  $query->condition(db_or()->isNull('ed.field_poll_end_date_value')->condition('ed.field_poll_end_date_value', $cur_date, '>='));
 }

@@ -186,7 +186,7 @@ div.filefield-sources-list a.active{font-weight: 400;}
 .icon-add-more{
   background: url("../images/add-item.png") no-repeat center center;
   border: none;
-  bottom: 10px;
+  /*bottom: 10px;*/
   box-shadow: none;
   display: inline-block;
   height: 28px;
@@ -198,7 +198,7 @@ div.filefield-sources-list a.active{font-weight: 400;}
 .icon-remove-item{
   background: url("../images/remove-item.png") no-repeat center center;
   border: none;
-  bottom: 10px;
+  /*bottom: 10px;*/
   box-shadow: none;
   display: inline-block;
   height: 28px;
@@ -2518,6 +2518,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       line-height: 28px;
       font-size: 18px;
       margin: 15px 0;
+      font-weight: 500;
     }
     .form-type-hierarchical-select{
       .discription, .description{
@@ -5634,13 +5635,13 @@ div.node{
     }
   }
 }
-.category-manager-selection-details{
+/*.category-manager-selection-details{
   .field-name-field-cm-select-type{
     .form-type-select > label:after{
       @extend .astrick;
     }
   }
-}
+}*/
 
 [id*="views-form-strory-menegment-page"]{
   .btn-generate-xml{
@@ -7481,6 +7482,9 @@ div.node{
   .form-type-checkboxes > label + div{
     padding-left: 200px;
   }
+  .form-type-select label + .form-select + span.error,
+  .form-type-select label + .form-select + .ajax-progress.ajax-progress-throbber + span.error, 
+  .form-type-select label + .form-select + div.description + span.error,
   .form-type-textfield label + .form-text + span.error, 
   .form-type-textfield label + #autocomplete + .form-text + span.error, 
   .form-type-textfield label + .form-text + div.description + span.error{
@@ -7891,27 +7895,15 @@ div.node{
           margin: 0 0 10px;
         }
         > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
-          background: url(../images/remove-item.png) no-repeat;
-          border: none;
-          height: 18px;
-          margin: 5px 0 0 10px;
-          padding: 0;
-          text-indent: -9999px;
-          width: 18px;
+          @extend .icon-remove-item;
         }
       }
       & + div.clearfix{
-        bottom: 15px;
+        bottom: 10px;
         position: absolute;
-        right: 35px;
+        right: 22px;
         .form-submit{
-          background: url(../images/add-item.png) no-repeat;
-          border: medium none;
-          height: 18px;
-          margin: 0;
-          padding: 0;
-          text-indent: -9999px;
-          width: 18px;
+          @extend .icon-add-more;
         }
       }
     }
