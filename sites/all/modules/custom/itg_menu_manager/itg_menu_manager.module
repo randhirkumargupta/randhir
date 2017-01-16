@@ -294,32 +294,37 @@ function itg_menu_manager_form_validate($form, &$form_state) {
 
     $url_type = $values['url_type'];
     $url = $values['url'];
-
     if ($url_type == 'external' && !empty($url)) {
       if ((strpos($url, 'http') === 0) && filter_var($url, FILTER_VALIDATE_URL)) {
         //watchdog("menu_manager", "Url validated in case of external");
       }
       else {
-        $errors[] = "Please enter valid external url  eg: http://www.example.com";
+        $errors[] = t("Please enter valid external url  eg: http://www.example.com");
       }
     }
-
+  
     if ($url_type == 'internal' && !empty($url)) {
       if (!drupal_valid_path($url)) {
+         $errors[] = t("Please enter valid internal url");
         // Not a system URL.
         if (!drupal_lookup_path('source', $url)) {
-          $errors[] = "Please enter valid internal url";
+          $errors[] = t("Please enter valid internal url");
+        }
+      }
+      else {
+        $url_parse = parse_url($url);
+        if(!empty($url_parse['scheme'])) {
+          $errors[] = t("It seems you entered external url.");
         }
       }
     }
-
     if ($values['display_icon'] == 1 && $values['url_type'] == 'external' && $values['menu_level'] == 'vertical' && !$values['category_icon']) {
       $errors[] = t("For external vertical menu category icon is required.");
       drupal_add_css(".form-item-sections {display:none !important}", "inline");
     }
 
     if ($values['menu_level'] == '') {
-      $errors[] = "Please select menu level";
+      $errors[] = t("Please select menu level");
     }
 
     if (!empty($errors)) {
