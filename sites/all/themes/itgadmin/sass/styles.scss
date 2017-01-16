@@ -4082,6 +4082,31 @@ div.node{
     .ajax-progress{
       display: none;
     }
+    a.filefield-sources-imce-browse{
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 134px;
+      &:after{
+        background-color: #fff;
+        border: 1px solid #d9d9d9;
+        border-radius: 5px;
+        box-sizing: border-box;
+        color: #2f2f2f;
+        content: "Choose Your File";
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 300;
+        height: 28px;
+        left: 0;
+        line-height: 26px;
+        position: absolute;
+        text-align: center;
+        top: 0;
+        width: 134px;
+      }
+    }
   }
   .form-field-type-file{
     @extend .choose-audio-video-file;
@@ -7945,6 +7970,21 @@ div.node{
             }
           }*/
 /* End of CSS */
+        }
+      }
+      .form-field-name-field-poll-start-date{
+        padding-left: 20px;
+        fieldset.date-combo{
+          padding: 0;
+          > legend{width: 100%;}
+          .date-padding{
+            .form-type-textfield{
+              padding: 0 10px 0 0;
+              & + .form-type-textfield{
+                padding: 10px 10px 0 0;
+              }
+            }
+          }
         }
       }
     }
