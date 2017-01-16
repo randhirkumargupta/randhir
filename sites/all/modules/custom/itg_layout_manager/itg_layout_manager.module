@@ -477,6 +477,13 @@ function itg_layout_clean_url($string) {
 function itg_layout_gethomecarddata_new_pre($sectinno) {
     
   global $theme;
+
+ if($sectinno >= '25')
+ {
+     
+     $sectinno = $sectinno+1;
+ }
+
   $arg = arg();
   $widget_name1 = 'itg-block-' . ($sectinno);
   $widget_name2 = 'itg-block-' . ($sectinno + 1);
