@@ -6,6 +6,9 @@
     <?php
     foreach ($rows as $index => $row) {
         $desc = $row['title'];
+        if(function_exists('itg_common_remove_extra_html')) {
+            $desc = itg_common_remove_extra_html($desc);
+        }
         
         $video_class = "";
         if (strtolower($row['type']) == 'videogallery') {

@@ -321,6 +321,13 @@
 }
 /*static page end*/
 
+/*budget heading*/
+.budget-page-layout .budget-top-block .social-share{
+    padding-top: 8px;
+}
+/*budget heading end*/
+
+
 }   
 @media only screen and (max-width:991px){
     /*CSS start education page special*/
@@ -618,7 +625,7 @@
     .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable, .tech-layout-page .itg-h396-section .droppable,
     .tech-layout-page .itg-h385-section .droppable, .election-page .left-side .itg-photo .droppable, .movie-layout-page .itg-h385-section .droppable,
     .movie-layout-page .itg-h396-section .droppable, .movie-layout-page .itg-layout-580 .itg-widget-child .droppable, .movie-layout-page .itg-layout-580 .droppable,
-    .movie-layout-page .itg-layout-580 .droppable .auto-block-1, .movie-layout-page .itg-layout-580 .droppable .auto-block-2{
+    .movie-layout-page .itg-layout-580 .droppable .auto-block-1, .movie-layout-page .itg-layout-580 .droppable .auto-block-2, .education-layout-page .itg-layout-565 .droppable{
         height: auto;        
     }
     
@@ -632,6 +639,33 @@
         }
     }
     /*End CSS Top Block Grid Home Page*/  
+/*    budget page block height start*/
+    .budget-page-layout{
+        .auto-block-2, .slider-budget, .common-highlights{
+            height: auto;
+        }
+        .itg-325-layout, .itg-530-layout, .itg-370-layout, .itg-480-layout, .itg-715-layout{
+            .droppable{
+                height: auto;
+            }
+            .itg-widget-child, .itg-widget-parent{
+                .droppable{
+                    height: auto;
+                }    
+            }            
+        } 
+        .slider-budget .slick-dots{
+            margin:0;
+            padding:10px;
+            li button{
+                height: 10px;
+                width: 10px;
+                margin: 0 3px;
+            }  
+        } 
+    }
+/*    budget page block height end*/
+
     /*css start special event page for osscar*/
     .oscar-layout-page{
         .left-side{
@@ -1569,9 +1603,9 @@
       .dm-pic{
             width: 124px;
         }
-        .dm-detail{
+/*        .dm-detail{
             overflow: initial;
-        }  
+        }  */
     } 
 }
 /*Start category wise content list css*/
