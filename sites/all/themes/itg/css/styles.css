@@ -4292,6 +4292,16 @@ footer .footer-copyright {
   zoom: 1;
   border: 1px solid #dddddd;
   padding: 20px;
+  zoom: 1;
+}
+.poll-wrapper .poll-data:before, .poll-wrapper .poll-data:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.poll-wrapper .poll-data:after {
+  clear: both;
 }
 .poll-wrapper .poll-data:before, .poll-wrapper .poll-data:after {
   content: "";
@@ -4408,7 +4418,7 @@ footer .footer-copyright {
   display: inline-block;
   vertical-align: top;
 }
-.poll-wrapper .poll-data.relative-with-img {
+.poll-wrapper .poll-data .relative-with-img {
   width: 56%;
   float: left;
 }

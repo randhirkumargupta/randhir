@@ -3278,6 +3278,7 @@ footer{
         @include clearfix;
         border: 1px solid #dddddd;
         padding: 20px;
+        @include clearfix;
         .poll-replace-id{
             width: 100%;
             display: inline-block;
@@ -3389,9 +3390,9 @@ footer{
                 }
             }
         }
-        &.relative-with-img{
+        .relative-with-img{
             width: 56%;
-            float: left;
+            float: left;            
         }
     }
     .updated-msg{
