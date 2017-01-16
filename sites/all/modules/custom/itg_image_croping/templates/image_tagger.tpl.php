@@ -34,7 +34,17 @@ list($width, $height) = getimagesize($url);
         </ol>';
         if($content_name!="")
         {
-       print' <div class="image_info">'.$counter.' '. ucwords($imagename).' ('.$image_dim[$content_name][ $explodedata[1]]['width'].'x'.$image_dim[$content_name][ $explodedata[1]]['height'].')</div>';
+            $imagewidth = $image_dim[$content_name][ $explodedata[1]]['width'];
+            $imagehight = $image_dim[$content_name][ $explodedata[1]]['height'];
+            
+            if($imagewidth == "")
+            {
+             $imagewidth = EXTRA_LARGE_IMAGE_WIDTH;  
+            }
+            if($imagehight == "") {
+                $imagehight = EXTRA_LARGE_IMAGE_HEIGHT;
+            }
+       print' <div class="image_info">'.$counter.' '. ucwords($imagename).' ('.$imagewidth.'x'.$imagehight.')</div>';
         
         }
         if(strtolower($imagename)=='extra large image')

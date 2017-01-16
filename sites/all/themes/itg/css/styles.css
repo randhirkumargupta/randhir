@@ -85,7 +85,7 @@ h4.heading a {
   clear: both;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .dont-miss ul, #block-itg-widget-yearende-left-top-news .top-news ul, #block-itg-widget-yearende-left-top-videos .top-video ul, .osscar-video ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-event-subsite-speaker-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, #block-itg-menu-manager-third-level-menu ul, .election-page .key-candidate ul, #block-itg-live-tv-live-tv-video-page ul, #block-menu-menu-about-us-page-menu ul, #block-itg-front-end-common-related-photo-block #related-photo ul, #block-itg-front-end-common-related-video-block #related-photo ul {
+.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .dont-miss ul, #block-itg-widget-yearende-left-top-news .top-news ul, #block-itg-widget-yearende-left-top-videos .top-video ul, .osscar-video ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-event-subsite-speaker-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, .movie-layout-page ul, #block-itg-menu-manager-third-level-menu ul, .election-page .key-candidate ul, #block-itg-live-tv-live-tv-video-page ul, #block-menu-menu-about-us-page-menu ul, #block-itg-front-end-common-related-photo-block #related-photo ul, #block-itg-front-end-common-related-video-block #related-photo ul {
   list-style-type: none;
 }
 
@@ -7038,6 +7038,10 @@ footer .footer-copyright {
 .tech-layout-page .tech-trip .trending-videos .trending-videos-list {
   padding: 10px 0;
 }
+.tech-layout-page .tech-trip .trending-videos .trending-videos-list span + span {
+  display: block;
+  overflow: hidden;
+}
 .tech-layout-page .tech-in-depth ul li {
   overflow: hidden;
 }
@@ -7045,6 +7049,10 @@ footer .footer-copyright {
   float: left;
   margin-bottom: 0;
   margin-right: 10px;
+}
+.tech-layout-page .tech-in-depth ul li p {
+  display: block;
+  overflow: hidden;
 }
 .tech-layout-page .tech-block_8 .widget-title {
   margin-bottom: 5px;
@@ -9188,6 +9196,13 @@ footer .footer-copyright {
 .movie-layout-page .tech-in-depth ul li + li {
   padding: 15px 0;
 }
+.movie-layout-page .tech-in-depth ul li p {
+  overflow: hidden;
+  display: block;
+}
+.movie-layout-page .tech-in-depth ul li .col-md-6 + .col-md-6 {
+  margin-top: 20px;
+}
 .movie-layout-page .itg-h396-section .widget-wrapper {
   background: #f1f1f1;
   padding: 10px;
@@ -9369,15 +9384,21 @@ footer .footer-copyright {
 }
 .budget-page-layout iframe {
   width: 100%;
+  height: 285px;
 }
-.budget-page-layout .highlight {
+.budget-page-layout .common-highlights {
   overflow: auto;
+  height: 285px;
 }
 .budget-page-layout .special-top-bg {
   background: #fbfbfb;
   height: 530px;
 }
-.budget-page-layout .itg-listing {
+.budget-page-layout .auto-block-2 {
+  height: 490px;
+  overflow: auto;
+}
+.budget-page-layout .auto-block-2 .special-top-news .itg-listing {
   border: none;
 }
 .budget-page-layout .section_wise_order .widget-settings {
