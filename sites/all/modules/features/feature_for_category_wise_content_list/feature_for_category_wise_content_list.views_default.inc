@@ -24,16 +24,14 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Category wise content list';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
-  $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['row_plugin'] = 'fields';
-  $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'customstyle';
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
@@ -106,6 +104,8 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'story' => 'story',
+    'videogallery' => 'videogallery',
+    'photogallery' => 'photogallery',
   );
 
   /* Display: Page */
@@ -247,18 +247,12 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['fields']['field_story_kicker_text']['label'] = '';
   $handler->display->display_options['fields']['field_story_kicker_text']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_kicker_text']['element_label_colon'] = FALSE;
-  /* Field: Field: Short description */
+  /* Field: Field: iOS */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['label'] = '';
   $handler->display->display_options['fields']['field_story_expert_description']['element_label_colon'] = FALSE;
-  /* Field: Content: Gallery Slug */
-  $handler->display->display_options['fields']['field_gallery_kicer']['id'] = 'field_gallery_kicer';
-  $handler->display->display_options['fields']['field_gallery_kicer']['table'] = 'field_data_field_gallery_kicer';
-  $handler->display->display_options['fields']['field_gallery_kicer']['field'] = 'field_gallery_kicer';
-  $handler->display->display_options['fields']['field_gallery_kicer']['label'] = '';
-  $handler->display->display_options['fields']['field_gallery_kicer']['element_label_colon'] = FALSE;
   /* Field: Content: Type */
   $handler->display->display_options['fields']['type']['id'] = 'type';
   $handler->display->display_options['fields']['type']['table'] = 'node';
@@ -301,6 +295,117 @@ function feature_for_category_wise_content_list_views_default_views() {
     'photogallery' => 'photogallery',
   );
   $handler->display->display_options['block_description'] = 'Section Wise Content On Recency';
+
+  /* Display: Section Wise Content grid view */
+  $handler = $view->new_display('block', 'Section Wise Content grid view', 'grid_view');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Category wise content gird view';
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '9';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'customstyle';
+  $handler->display->display_options['style_options']['custom-class-firstlast'] = 1;
+  $handler->display->display_options['style_options']['custom-class-columncount'] = '0';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No Result Found !';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Extra large image */
+  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['empty'] = 'notFound';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['hide_alter_empty'] = FALSE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
+    'image_style' => 'widget_small',
+    'image_link' => '',
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['max_length'] = '72';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['strip_tags'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Field: Content: Kicker */
+  $handler->display->display_options['fields']['field_story_kicker_text']['id'] = 'field_story_kicker_text';
+  $handler->display->display_options['fields']['field_story_kicker_text']['table'] = 'field_data_field_story_kicker_text';
+  $handler->display->display_options['fields']['field_story_kicker_text']['field'] = 'field_story_kicker_text';
+  $handler->display->display_options['fields']['field_story_kicker_text']['label'] = '';
+  $handler->display->display_options['fields']['field_story_kicker_text']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_story_kicker_text']['element_label_colon'] = FALSE;
+  /* Field: Field: iOS */
+  $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
+  $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
+  $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
+  $handler->display->display_options['fields']['field_story_expert_description']['label'] = '';
+  $handler->display->display_options['fields']['field_story_expert_description']['element_label_colon'] = FALSE;
+  /* Field: Content: Type */
+  $handler->display->display_options['fields']['type']['id'] = 'type';
+  $handler->display->display_options['fields']['type']['table'] = 'node';
+  $handler->display->display_options['fields']['type']['field'] = 'type';
+  $handler->display->display_options['fields']['type']['label'] = '';
+  $handler->display->display_options['fields']['type']['element_label_colon'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Field: Small image */
+  $handler->display->display_options['fields']['field_story_small_image']['id'] = 'field_story_small_image';
+  $handler->display->display_options['fields']['field_story_small_image']['table'] = 'field_data_field_story_small_image';
+  $handler->display->display_options['fields']['field_story_small_image']['field'] = 'field_story_small_image';
+  $handler->display->display_options['fields']['field_story_small_image']['label'] = '';
+  $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
+    'image_style' => '',
+    'image_link' => '',
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'story' => 'story',
+    'videogallery' => 'videogallery',
+    'photogallery' => 'photogallery',
+  );
+  $handler->display->display_options['block_description'] = 'Section Wise Content On Recency grid view';
   $export['category_wise_content_list'] = $view;
 
   return $export;
