@@ -1450,10 +1450,12 @@ function itg_widget_update_weight_during_order_reorder($form, &$form_state) {
   if ($weightcount > 0) {
     foreach ($draggable_view_data as $key => $value) {
       try {
+        $weight = (int) $value['weight'];
+        $nid = (int) $value['id'];
         db_update('itg_widget_order')
-            ->fields(array('weight' => $value['weight']))
+            ->fields(array('weight' => $weight))
             ->condition('widget', $widget)
-            ->condition('nid', $value['id'])
+            ->condition('nid', $nid)
             ->execute();
       } catch (Exception $ex) {
         drupal_set_message($ex->getMessage());
@@ -1495,6 +1497,9 @@ function itg_widget_get_widget_name_from_views($view_name, $view_current_display
   }
   if ($view_name == 'widget_anchors_listing' && $view_current_display == 'anchors_listing_widget') {
     $widget_name = "anchors_listing_widget";
+  }
+  if ($view_name == 'section_wise_content_ordering_list' && $view_current_display == 'we_may_suggest_widget') {
+    $widget_name = "we_may_suggest_widget";
   }
   return $widget_name;
 }
