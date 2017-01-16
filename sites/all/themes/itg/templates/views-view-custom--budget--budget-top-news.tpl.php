@@ -31,7 +31,7 @@
         </div>    
     </div>
     <div class="col-md-6">
-        <h4 class="heading desktop-hide">OTHER NEWS</h4>
+        <h4 class="heading desktop-hide mt-50">OTHER NEWS</h4>
         <div class="auto-block-2">
             <div class="special-top-news special-top-bg">
 

@@ -596,6 +596,17 @@ function user_details_for_section($url, $tid) {
             if ($url[0] == 'ask-an-expert-question-answer-details' && is_numeric($url[2])) {
                 $ourExpert = '<h4>Our Expert</h4>';
             }
+            
+            if ($url[0] != 'ask-an-expert-question-answer-details') {
+                $block[] = array(
+                'details' => array(
+                    '#prefix' => '<div class="ask-user-detail">',
+                    '#type' => 'markup',
+                    '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '"/><div class="section-user-name">' . $userDetails->field_first_name['und'][0]['value'] . ' ' . $userDetails->field_last_name['und'][0]['value'] . '</div></div>',
+                    '#suffix' => '</div>',
+                ),
+            );
+            } else {
             $block[] = array(
                 'details' => array(
                     '#prefix' => '<div class="ask-user-detail">',
@@ -603,6 +614,7 @@ function user_details_for_section($url, $tid) {
                     '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '"/><div class="section-user-name">' . $userDetails->field_first_name['und'][0]['value'] . ' ' . $userDetails->field_last_name['und'][0]['value'] . '</div></div>',
                 ),
             );
+            }
             if ($url[0] == 'ask-an-expert-question-answer-details') {
                 $like = itg_flag_get_count($url[1], 'like_count');
                 $dislike = itg_flag_get_count($url[1], 'dislike_count');
