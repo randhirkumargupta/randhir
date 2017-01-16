@@ -471,7 +471,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-11" ><?php print $widget_data['itg-block-11']['widget']; ?> <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-11']['block_title']) && ($widget_data['itg-block-11']['widget_name'] != 'custom_html_widget')) { ?><span><?php print $widget_data['itg-block-11']['more_url']; ?></span> <?php } ?></div>
+                     <div class="data-holder" id="itg-block-11" ><?php print $widget_data['itg-block-11']['widget']; ?> <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-11']['block_title']) && ($widget_data['itg-block-11']['widget_name'] != 'custom_html_widget')) { ?><span class="more"><?php print $widget_data['itg-block-11']['more_url']; ?></span> <?php } ?></div>
                   </div>             
                 </div>               
             </div>
