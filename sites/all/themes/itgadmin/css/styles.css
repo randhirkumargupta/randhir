@@ -4283,6 +4283,31 @@ div.node #comments h2 {
 #SocialMedia .form-field-type-image .ajax-progress, #SocialMedia .form-field-type-file .ajax-progress {
   display: none;
 }
+#SocialMedia .form-field-type-image a.filefield-sources-imce-browse, #SocialMedia .form-field-type-file a.filefield-sources-imce-browse {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 134px;
+}
+#SocialMedia .form-field-type-image a.filefield-sources-imce-browse:after, #SocialMedia .form-field-type-file a.filefield-sources-imce-browse:after {
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: #2f2f2f;
+  content: "Choose Your File";
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 300;
+  height: 28px;
+  left: 0;
+  line-height: 26px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 134px;
+}
 #SocialMedia .form-field-type-file .form-type-managed-file > label {
   padding-top: 0;
 }
@@ -8200,6 +8225,31 @@ div.node #comments h2 {
 .node-photogallery-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured label {
   color: #1fb5ad;
   padding: 0;
+}
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-poll-start-date,
+.node-videogallery-form .itg-sidebar-form #Configuration .form-field-name-field-poll-start-date,
+.node-photogallery-form .itg-sidebar-form #Configuration .form-field-name-field-poll-start-date {
+  padding-left: 20px;
+}
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-poll-start-date fieldset.date-combo,
+.node-videogallery-form .itg-sidebar-form #Configuration .form-field-name-field-poll-start-date fieldset.date-combo,
+.node-photogallery-form .itg-sidebar-form #Configuration .form-field-name-field-poll-start-date fieldset.date-combo {
+  padding: 0;
+}
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-poll-start-date fieldset.date-combo > legend,
+.node-videogallery-form .itg-sidebar-form #Configuration .form-field-name-field-poll-start-date fieldset.date-combo > legend,
+.node-photogallery-form .itg-sidebar-form #Configuration .form-field-name-field-poll-start-date fieldset.date-combo > legend {
+  width: 100%;
+}
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-poll-start-date fieldset.date-combo .date-padding .form-type-textfield,
+.node-videogallery-form .itg-sidebar-form #Configuration .form-field-name-field-poll-start-date fieldset.date-combo .date-padding .form-type-textfield,
+.node-photogallery-form .itg-sidebar-form #Configuration .form-field-name-field-poll-start-date fieldset.date-combo .date-padding .form-type-textfield {
+  padding: 0 10px 0 0;
+}
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-poll-start-date fieldset.date-combo .date-padding .form-type-textfield + .form-type-textfield,
+.node-videogallery-form .itg-sidebar-form #Configuration .form-field-name-field-poll-start-date fieldset.date-combo .date-padding .form-type-textfield + .form-type-textfield,
+.node-photogallery-form .itg-sidebar-form #Configuration .form-field-name-field-poll-start-date fieldset.date-combo .date-padding .form-type-textfield + .form-type-textfield {
+  padding: 10px 10px 0 0;
 }
 .node-story-form .itg-sidebar-form #DateTime .form-field-name-field-story-expires .form-type-checkboxes > label,
 .node-videogallery-form .itg-sidebar-form #DateTime .form-field-name-field-story-expires .form-type-checkboxes > label,
