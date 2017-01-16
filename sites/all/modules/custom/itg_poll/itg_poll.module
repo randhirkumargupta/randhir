@@ -1025,6 +1025,7 @@ function total_poll_count_content($poll_id) {
 }
 
 function itg_poll_node_view($node, $view_mode, $langcode) {
+  global $user;
   if ($node->type == 'poll') {
     if (empty($user->uid) || array_key_exists(AUTHOR_GUEST, $user->roles)) {
       drupal_access_denied();
