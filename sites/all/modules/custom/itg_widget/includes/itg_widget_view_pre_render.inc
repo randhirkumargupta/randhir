@@ -178,7 +178,7 @@ function itg_widget_views_pre_render(&$view) {
     $header_content = '<h1 class="category-heading">' . t('Podcasts') . '</h1>';
     $view->attachment_before = $header_content;
   }
-  elseif ($view->name == "category_wise_content_list" && $view->current_display == 'section_wise_content_listing') {
+  /*elseif ($view->name == "category_wise_content_list" && $view->current_display == 'section_wise_content_listing') {
 
     $arg = arg();
     $taxonomy_url = $base_url."/taxonomy/term/$arg[2]";
@@ -187,6 +187,8 @@ function itg_widget_views_pre_render(&$view) {
     $header_content .= '<div class="list-grid"><i class="fa fa-list" aria-hidden="true"></i> ' .l(t('List'),$taxonomy_url, array('query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span><i class="fa fa-th" aria-hidden="true"></i> '.l(t('Grid'),$taxonomy_url ,array('query'=>array('view_type'=>'grid'))).'</div>';
     $view->attachment_before = $header_content;
   }
+   * 
+   */
   
   elseif ($view->name == "poll_widget" && $view->current_display == 'poll_widget_format') {
     if (!isset($_POST['views_bulk_operations'])) {
