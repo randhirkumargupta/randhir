@@ -39,6 +39,10 @@
   #block-views-photo-landing-slider-block {
     width: 100%;
   }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
 @media only screen and (max-width: 1024px) {
   h1 {
@@ -610,7 +614,9 @@
   .itg-common-section .droppable, .sport-home-layout-page .itg-layout-615 .auto-block-1,
   .sport-home-layout-page .itg-layout-615 .auto-block-2, .sport-home-layout-page .itg-layout-615 .droppable,
   .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable, .tech-layout-page .itg-h396-section .droppable,
-  .tech-layout-page .itg-h385-section .droppable, .election-page .left-side .itg-photo .droppable {
+  .tech-layout-page .itg-h385-section .droppable, .election-page .left-side .itg-photo .droppable, .movie-layout-page .itg-h385-section .droppable,
+  .movie-layout-page .itg-h396-section .droppable, .movie-layout-page .itg-layout-580 .itg-widget-child .droppable, .movie-layout-page .itg-layout-580 .droppable,
+  .movie-layout-page .itg-layout-580 .droppable .auto-block-1, .movie-layout-page .itg-layout-580 .droppable .auto-block-2 {
     height: auto;
   }
 
@@ -1108,7 +1114,6 @@
   .election-page {
     margin: 0 0px 20px 0px;
   }
-
   .election-page .key-candidate .list-state {
     white-space: nowrap;
     overflow: auto;
@@ -1123,6 +1128,15 @@
   .election-page .right-side .key_candidate_extra_block .droppable {
     min-height: auto;
     height: auto;
+  }
+  .election-page .election-top-block .social-share {
+    margin-top: 7px;
+  }
+  .election-page .election-top-block .social-share i.fa-share-alt {
+    font-size: 16px;
+  }
+  .election-page .election-top-block {
+    margin-top: 10px;
   }
 
   /*election page css end*/
@@ -1164,6 +1178,51 @@
   }
 
   /*poll css end*/
+  /*movie page css start*/
+  .movie-layout-page .itg-layout-580 .droppable .auto-block-1 {
+    border: none;
+  }
+
+  .movie-layout-page .itg-layout-580 .droppable .auto-block-1, .movie-layout-page .itg-layout-580 .droppable .auto-block-2 {
+    margin-bottom: 50px;
+  }
+
+  /*movie page css end*/
+  /*Globle search page css start*/
+  .view-front-end-global-search .views-exposed-widget .caln {
+    position: inherit;
+    right: auto;
+  }
+
+  [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form {
+    height: 90px;
+  }
+  [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper .views-widget {
+    display: none;
+    position: relative;
+    left: auto;
+    top: auto;
+  }
+  [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .caln {
+    width: 100%;
+    padding: 8px;
+  }
+  [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .caln .date-padding {
+    width: 125px;
+  }
+  [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .caln label {
+    display: block;
+    padding-top: 0;
+  }
+  [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .caln .container-inline-date {
+    margin-left: 10px;
+  }
+  [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .caln .container-inline-date + .container-inline-date {
+    display: block;
+    vertical-align: top;
+  }
+
+  /*Globle search page css end*/
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/
@@ -1848,6 +1907,10 @@
   .view-front-end-global-search .attachment .count {
     font-size: 30px;
     font-size: 1.875rem;
+  }
+  .view-front-end-global-search .views-exposed-widget .caln {
+    position: inherit;
+    right: auto;
   }
 
   /*End css ITG globle search result page*/

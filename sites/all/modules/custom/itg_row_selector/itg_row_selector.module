@@ -142,12 +142,12 @@ function itg_row_selector_permission() {
       'description' => t('Send e-mails to a list created with Views.'),
     ),
   );
-  if (views_row_selector_MIMEMAIL) {
-    $perms['attachments with views_row_selector'] = array(
-      'title' => t('Use attachments with Views Send'),
-      'description' => t('Attach files to e-mails sent with Views Send.'),
-    );
-  }
+//  if (views_row_selector_MIMEMAIL) {
+//    $perms['attachments with views_row_selector'] = array(
+//      'title' => t('Use attachments with Views Send'),
+//      'description' => t('Attach files to e-mails sent with Views Send.'),
+//    );
+//  }
   return $perms;
 }
 

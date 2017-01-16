@@ -114,6 +114,14 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => 21,
       '#value' => t('Cancel'),
     );
+    $form['actions']['itg_custom_button'] = array(
+        '#type' => 'submit',
+        '#value' => t('Save as Draft'),
+        '#submit' => array(
+            'node_form_submit',
+            'itg_newsletter_form_save_as_draft_submit_callback'
+        ),
+    );
 
     $form['actions']['submit']['#value'] = 'Publish';
     unset($form['title']);
@@ -143,7 +151,7 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id) {
 
     // Add submit handler for redirect form to their corresponding page after node has been created susccessfully.
     $form['actions']['submit']['#submit'][] = 'itg_newsletter_submit_handler_for_redirect';
-
+    
     // Call function after build
     $form['#after_build'][] = 'itg_newsletter_form_after_build';
   }
@@ -198,6 +206,14 @@ function itg_newsletter_submit_handler_for_redirect($form, &$form_state) {
   drupal_set_message(t('@contenttype <strong>@title</strong> has been @operation', array('@contenttype' => $content_type, '@title' => $title, '@operation' => $op)));
 }
 
+/**
+ * Custom submit callback for save as draft submit.
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_newsletter_form_save_as_draft_submit_callback(&$form, &$form_state) {
+  $form_state['redirect'] = 'manage-draft-newsletter';
+}
 /**
  * After build function for newsletter
  * {@inheritdoc}
@@ -347,18 +363,46 @@ function itg_newsletter_node_presave($node) {
   if ($node->type == 'newsletter') {
     $template_title = itg_common_get_node_title($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
     $node->title = $template_title;
-    $arg = arg();
-    //field_newsl_schedule
-    if (($node->field_newsl_newsletter_type['und'][0]['value'] == 'automatic' || ($node->field_newsl_newsletter_type['und'][0]['value'] == 'manual' && $node->field_newsl_schedule['und'][0]['value'] == 'now')
-        ) && $arg[2] == 'edit') {
-      $date = date('Y-m-d 00:00:00');
-      $survery_date = $node->field_survey_start_date['und'][0]['value'];
-      // Survey start time is less then current date than update the time.
-      // Otherwise keep saved time.
-      if (strtotime($date) > strtotime($survery_date)) {
-        $node->field_survey_start_date['und'][0]['value'] = $date;
-        $node->field_survey_start_date['und'][0]['value2'] = $date;
+    // Handel automatic case. for daily weekly and monthly.
+    if (($node->field_newsl_newsletter_type['und'][0]['value'] == 'automatic')) {
+      module_load_include('inc', 'itg_syndication', 'includes/itg_syndication.helper');
+      //field_newsl_schedule
+      $frequency = ucfirst($node->field_newsl_frequency['und'][0]['value']);
+      $day = $node->field_newsl_day['und'][0]['value'];
+      $date = $node->field_newsl_date['und'][0]['value'];
+      $time_rule = $node->field_newsl_time['und'][0]['value'] . ":00";
+      if (function_exists('get_cron_time')) {
+        $actual_time = get_cron_time($frequency, $time_rule, $day, $date);
+        $scheduler_time = $actual_time['scheduler_time'];
       }
+      if ($frequency == 'Daily') {
+        if (!empty($scheduler_time)) {
+          $scheduler_time_up = strtotime('+1 day', $scheduler_time);
+        }
+      }
+      elseif ($frequency == 'Weekly') {
+        if (!empty($scheduler_time)) {
+          $scheduler_time_up = strtotime('+7 days', $scheduler_time);
+        }
+      }
+      else if ($frequency == 'Monthly') {
+        if (!empty($scheduler_time)) {
+          $scheduler_time_up = strtotime('+1 month', $scheduler_time);
+        }
+      }
+      if (!empty($scheduler_time_up)) {
+        $node_scheduler_time = date('Y-m-d h:i:s', $scheduler_time_up);
+      }
+      if (!empty($node_scheduler_time)) {
+        $node->field_survey_start_date['und'][0]['value'] = $node_scheduler_time;
+        $node->field_survey_start_date['und'][0]['value2'] = $node_scheduler_time;
+      }
+    }
+
+    if (($node->field_newsl_newsletter_type['und'][0]['value'] == 'manual' && $node->field_newsl_schedule['und'][0]['value'] == 'now')) {
+      $node_scheduler_time = date('Y-m-d h:i:s', time());
+      $node->field_survey_start_date['und'][0]['value'] = $node_scheduler_time;
+      $node->field_survey_start_date['und'][0]['value2'] = $node_scheduler_time;
     }
   }
 }
@@ -538,15 +582,17 @@ function itg_newsletter_node_validate($node, $form, &$form_state) {
     //Validate content id
     $i = 1;
     foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news) {
-      if ($news['field_news_type'][LANGUAGE_NONE][0]['value'] == 'internal') {
-        $story_id = $news['field_news_cid'][LANGUAGE_NONE][0]['target_id'];
-        $story_status = itg_common_get_story_status($story_id);
-        if ($story_status != 'published' && $story_id != 'A') {
-          if (empty($story_id)) {
-            form_set_error('field_news_cid', t('Please enter valid and published Content ID for Title @titlenum.', array('@titlenum' => $i)));
-          }
-          else {
-            form_set_error('field_news_cid' . $story_id, t('Content Id <strong>@contentid</strong> is not published.', array('@contentid' => $story_id)));
+      if (isset($news['field_news_type'][LANGUAGE_NONE][0]['value'])) {
+        if ($news['field_news_type'][LANGUAGE_NONE][0]['value'] == 'internal' && !empty($news['field_news_type'][LANGUAGE_NONE][0]['value'])) {
+          $story_id = $news['field_news_cid'][LANGUAGE_NONE][0]['target_id'];
+          $story_status = itg_common_get_story_status($story_id);
+          if ($story_status != 'published' && $story_id != 'A') {
+            if (empty($story_id)) {
+              form_set_error('field_news_cid', t('Please enter valid and published Content ID for Title @titlenum.', array('@titlenum' => $i)));
+            }
+            else {
+              form_set_error('field_news_cid' . $story_id, t('Content Id <strong>@contentid</strong> is not published.', array('@contentid' => $story_id)));
+            }
           }
         }
       }
@@ -571,7 +617,7 @@ function itg_newsletter_check_existence_frequency($frequency, $newsletter_conten
       ->condition('nf.field_newsl_frequency_value', $frequency, '=')
       ->condition('nc.field_newsl_newsletter_content_value', $newsletter_content, '=');
   $result = $query->execute();
-  $nid = $result->fetchObject()->nid;
+  $nid = !empty($result->fetchObject()->nid) ? $result->fetchObject()->nid : FALSE;
 
   if ($nid) {
     return $nid;

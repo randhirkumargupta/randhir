@@ -1398,7 +1398,7 @@ footer .footer-copyright {
 }
 
 .itg-common-section .droppable {
-  height: 408px;
+  height: 398px;
 }
 .itg-common-section .home-page-poll-block-wrap .droppable {
   min-height: 408px;
@@ -1708,7 +1708,7 @@ footer .footer-copyright {
   display: block;
 }
 .section-ordering h3 {
-  padding: 15px 0;
+  padding: 10px 0;
   font-size: 20px;
   font-size: 1.25rem;
 }
@@ -2539,6 +2539,14 @@ footer .footer-copyright {
 .story-section .story-right .stryimg .tagview:hover .person {
   display: block;
 }
+.story-section .story-right .stryimg .story-photo-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+}
 .story-section .snap-post {
   padding: 20px 20px 20px 70px;
   border-top: 1px solid #e0e0e0;
@@ -2836,7 +2844,14 @@ footer .footer-copyright {
   font-size: 11px;
   font-size: 0.6875rem;
 }
-.story-section #videogallery-iframe {
+.story-section .story-associate-content {
+  height: 340px;
+  overflow: hidden;
+}
+.story-section .story-associate-content .associate-content-block {
+  cursor: pointer;
+}
+.story-section .story-associate-content #videogallery-iframe {
   position: fixed;
   top: 0;
   left: 0;
@@ -2846,7 +2861,7 @@ footer .footer-copyright {
   background: rgba(0, 0, 0, 0.76);
   display: none;
 }
-.story-section #videogallery-iframe .big-story-popup {
+.story-section .story-associate-content #videogallery-iframe .big-story-popup {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -2855,7 +2870,7 @@ footer .footer-copyright {
   margin-left: -300px;
   margin-top: -227px;
 }
-.story-section #videogallery-iframe #close-big-story {
+.story-section .story-associate-content #videogallery-iframe #close-big-story {
   position: fixed;
   right: 20px;
   top: 20px;
@@ -2870,22 +2885,23 @@ footer .footer-copyright {
   line-height: 30px;
   font-weight: 900;
   cursor: pointer;
+  box-shadow: 2px 2px 3px #484242;
 }
-.story-section #videogallery-iframe #close-big-story a {
+.story-section .story-associate-content #videogallery-iframe #close-big-story a {
   color: #000;
   font-family: roboto;
 }
-.story-section .videogallery-slider .slick-slide {
+.story-section .story-associate-content .videogallery-slider .slick-slide {
   width: 100%;
 }
-.story-section .video-slider-images .slick-slider {
+.story-section .story-associate-content .video-slider-images .slick-slider {
   background: #171717;
   padding: 10px 0px;
   height: inherit;
   position: relative;
   padding: 5px 20px;
 }
-.story-section .video-slider-images .slick-prev, .story-section .video-slider-images .slick-next {
+.story-section .story-associate-content .video-slider-images .slick-prev, .story-section .story-associate-content .video-slider-images .slick-next {
   font: normal normal normal 14px/1 FontAwesome;
   cursor: pointer;
   width: 24px;
@@ -2899,35 +2915,68 @@ footer .footer-copyright {
   background: transparent;
   color: #fff;
 }
-.story-section .video-slider-images .slick-prev:before, .story-section .video-slider-images .slick-next:before {
+.story-section .story-associate-content .video-slider-images .slick-prev:before, .story-section .story-associate-content .video-slider-images .slick-next:before {
   content: '\f053';
   font-size: 20px;
 }
-.story-section .video-slider-images .slick-next {
+.story-section .story-associate-content .video-slider-images .slick-next {
   right: 0px;
   left: auto;
 }
-.story-section .video-slider-images .slick-next:before {
+.story-section .story-associate-content .video-slider-images .slick-next:before {
   content: '\f054';
 }
-.story-section .video-slider-images li {
+.story-section .story-associate-content .video-slider-images li {
   padding-left: 5px;
   cursor: pointer;
 }
-.story-section .video-slider-images li:focus {
+.story-section .story-associate-content .video-slider-images li:focus {
   outline: none;
   border: none;
 }
-.story-section .video-slider-images li img {
+.story-section .story-associate-content .video-slider-images li img {
   border: 1px solid transparent;
   height: 66px;
   width: 88px;
 }
-.story-section .video-slider-images li.slick-current img {
+.story-section .story-associate-content .video-slider-images li.slick-current img {
   border: 1px solid #fff;
 }
-.story-section .iframe-video iframe {
+.story-section .story-associate-content .iframe-video iframe {
   border: 5px solid #171717;
+}
+.story-section .story-associate-content #videogallery-iframe {
+  position: relative;
+  top: auto;
+  left: auto;
+  width: 100%;
+  min-height: 100%;
+  z-index: inherit;
+  background: #000;
+}
+.story-section .story-associate-content #videogallery-iframe .big-story-popup {
+  position: relative;
+  top: auto;
+  left: auto;
+  width: 100%;
+  height: inherit;
+  margin-left: 0;
+  margin-top: 0;
+}
+.story-section .story-associate-content #videogallery-iframe #close-big-story {
+  position: absolute;
+}
+.story-section .story-associate-content #videogallery-iframe .loading-popup {
+  display: inline;
+  margin: 0 auto;
+  width: 30px;
+  display: block;
+  transform-style: inherit;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -15px;
+  margin-top: -15px;
 }
 
 .buzz-feedback {
@@ -9078,14 +9127,17 @@ footer .footer-copyright {
   padding-top: 20px;
 }
 .movie-layout-page .itg-h385-section .droppable {
-  height: 385px;
+  height: 396px;
 }
 .movie-layout-page .itg-h396-section .droppable {
-  height: 385px;
+  height: 408px;
 }
 .movie-layout-page .itg-h396-section .widget-title {
   top: 10px;
   left: 10px;
+}
+.movie-layout-page .itg-h396-section .tech-movie_latest .widget-title {
+  margin-bottom: 10px;
 }
 .movie-layout-page .tech-block_8 .widget-title {
   margin-bottom: 5px;
@@ -9446,7 +9498,7 @@ footer .footer-copyright {
 /*css end defalt image */
 /* CSS For Election Page */
 .election-page .election-top-block {
-  margin-top: 60px;
+  margin-top: 40px;
   position: relative;
   z-index: 10;
 }
@@ -11284,6 +11336,7 @@ h1.about-us-heading + div p {
   line-height: 30px;
   font-weight: 900;
   cursor: pointer;
+  box-shadow: 2px 2px 3px #484242;
 }
 #block-itg-widget-big-story-format #videogallery-iframe #close-big-story a {
   color: #000;

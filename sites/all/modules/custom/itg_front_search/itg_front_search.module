@@ -294,7 +294,8 @@ function itg_front_search_views_pre_render(&$view) {
        // pr($_GET);
         $url .= l($val, $search_url, array('query' => $_GET, 'attributes' => array('class' => $lnk_class))) . ' ';
       }
-      else {
+      else {        
+        unset($_GET['page']); //remove page no.
         $url .= l($key, $search_url, array('query' => $_GET, 'attributes' => array('class' => $lnk_class))) . ' ';
       }
     }

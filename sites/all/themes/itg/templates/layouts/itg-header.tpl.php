@@ -11,22 +11,50 @@ if (!empty($data['itg_main_manu_header'])) {
 <div class="header-ads mhide">
  <!--   <img src="<?php //print base_path()                  ?>sites/all/themes/itg/images/header-ads.png" alt="ads"> -->
  <?php
-  if (!empty($data['itg_top']['200*200_header'])) {
-    print $data['itg_top']['200*200_header'];
-  }
+  $block = block_load('itg_ads', ADS_HEADER);   
+  $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+  print render($render_array);
  ?>
 </div>                               
 
 <div class="head-live-tv desktop-hide">
   <ul>
       <li> 
-        <?php if ($user->uid == 0): ?>
-        <a href="<?php print $base_url . '/user/login'; ?>" ><i class="fa fa-user"></i></a>
-        <?php else: ?>        
-          <a href="javascript:void(0)" class="mobile-user"><i class="fa fa-user"></i></a>        
+        <?php if ($_GET['q'] != 'user') {
+            ?>
+            <?php if ($_SERVER['HTTP_HOST'] == PARENT_SSO) {
+              if ($user->uid == 0) { ?>
+                  
+                  <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="user-icon"><i class="fa fa-user"></i></a>
+                  <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/signup/domain_info', 'indiatoday');" class="register-icon" style="display:none;"><i class="fa fa-user"></i></a>
+
+                  <?php
+                }
+                else {
+                  ?>
+                  <a href="<?php print $base_url;?>/personalization/edit-profile/general-settings" class="user-icon"><?php print $user_pic; ?></a>
+                  <?php
+                }
+              }
+              else {
+                if ($user->uid == 0) {
+                  ?>
+                  <a onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')" class="user-icon"><i class="fa fa-user"></i></a>
+
+                  <?php
+                }
+                else {
+                  ?>
+                  <a href="<?php print $base_url;?>/personalization/edit-profile/general-settings" class="user-icon"><?php print $user_pic; ?></a>
+              <?php
+            }
+          }
+        } else {
+        ?>
+        <a href="javascript:void(0)" class="mobile-user"><i class="fa fa-user"></i></a>        
         <?php $block = module_invoke('system', 'block_view', 'user-menu'); ?>
         <?php print render($block['content']); ?> 
-        <?php endif; ?>
+        <?php } ?>
     </li>
     <li><a href="javascript:void(0)" class="search-icon" title=""><i class="fa fa-search"></i></a></li>
     <li><a href="javascript:void(0)" class="live-tv" title=""><img src="<?php print base_path() ?>sites/all/themes/itg/images/live-tv-icon.png" alt="Live Tv"></a></li> 
