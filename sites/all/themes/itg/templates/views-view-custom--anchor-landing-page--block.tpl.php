@@ -3,7 +3,7 @@ global $base_url;
 $anchor = $rows[0];
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $short_url = shorten_url($actual_link, 'goo.gl');
-$fb_title = strip_tags($anchor['title']);
+$fb_title = itg_common_only_text_string($anchor['title']);
 $src = '';
 ?>
 <div class="anchor-landing">
@@ -26,7 +26,7 @@ $src = '';
       <div class="less-content">
         <?php 
           echo mb_strimwidth(strip_tags($anchor['body']), 0, 245, ".."); 
-          $share_desc = trim(strip_tags($anchor['body']));
+          $share_desc = '';
         ?>
         <?php if (strlen($anchor['body']) > 245) { ?>
           <a href="javascript:void(0)" class="anchor-action read-more"> More[+]</a>

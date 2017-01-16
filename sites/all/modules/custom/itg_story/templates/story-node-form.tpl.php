@@ -92,7 +92,7 @@
     <div class="col-md-4">
         <div class="itg-sidebar-form">
             <div id="Briefcase" class="itg-sidebar-form-section">
-                <h2 class="story-title"><?php print t('Briefcase'); ?></h2>
+                <h2 class="story-title"><?php print t('Highlights'); ?></h2>
                 <div class="itg-form-section hide">
                     <?php print drupal_render($form['field_story_highlights']); ?>
                 </div>

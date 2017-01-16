@@ -1569,6 +1569,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 #block-menu-menu-print-team-menu,
 #block-menu-menu-videogallery-admin-menu,
 #block-menu-menu-event-backend,
+#block-menu-menu-manage-survey-tabs,
+#block-menu-menu-manage-quiz-tabs,
+#block-menu-menu-newsletter-manage-tabs,
 #block-menu-menu-story-content-admin-menu{
   @extend .content-block-menu;
 }
@@ -8344,9 +8347,36 @@ div.node{
 }
 .itg_menu_manager_form{
   @extend .node-form;
+  .form-item-category-icon{
+    .form-submit{
+      margin: 0;
+      @extend .btn-small;
+    }
+    span.file{
+      display: inline-block;
+      margin-right: 50px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      vertical-align: top;
+      white-space: nowrap;
+      max-width: 200px;
+      & + .form-submit{
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        color: red;
+        height: auto;
+        line-height: 20px;
+        margin: 0;
+        padding: 0;
+        text-transform: capitalize;
+      }
+    }
+  }
   .form-submit{
     margin-left: 250px;
   }
+  .ajax-progress{@extend .hide;}
 }
 .page-itg-menu-manager{
   #content{

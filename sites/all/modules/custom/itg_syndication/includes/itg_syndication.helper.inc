@@ -12,7 +12,7 @@
 function itg_syndication_get_mode($client_name) {
   
   $client = explode('-', $client_name);
-  $client_description = $client[1];
+  $client_description = !empty($client[1]) ? $client[1] : '';
   $client_title = $client[0];
   $itg_query = db_select('node', 'n');
   $itg_query->condition('n.title', $client_description)
@@ -26,16 +26,22 @@ function itg_syndication_get_mode($client_name) {
   $data['_none'] = '- None -';
   
   //Code for FTP
-  foreach ($node->field_syndication_ftp_details[LANGUAGE_NONE] as $key => $val) {   
-    $field_collection_item = entity_load('field_collection_item', array($val['value']));
-    $ftp_name = $field_collection_item[$val['value']]->field_syndication_ftp_name[LANGUAGE_NONE][0]['value'];
-    $data['FTP: '.$ftp_name] = $ftp_name;
+  if (!empty($node->field_syndication_ftp_details[LANGUAGE_NONE])) {
+   foreach ($node->field_syndication_ftp_details[LANGUAGE_NONE] as $key => $val) {   
+      $field_collection_item = entity_load('field_collection_item', array($val['value']));
+      $ftp_name = $field_collection_item[$val['value']]->field_syndication_ftp_name[LANGUAGE_NONE][0]['value'];
+      $data['FTP: '.$ftp_name] = $ftp_name;
+   } 
   }
   
+  
   //Code for Email id
-  foreach ($node->field_email_address[LANGUAGE_NONE] as $key => $val) {
-    $data['Email: '.$val['value']] = $val['value'];
+  if (!empty($node->field_email_address[LANGUAGE_NONE])) {
+    foreach ($node->field_email_address[LANGUAGE_NONE] as $key => $val) {
+      $data['Email: '.$val['value']] = $val['value'];
+    }
   }
+  
   
   //Code for Weburl
   if (!empty($node->field_service_fetch_link[LANGUAGE_NONE][0]['value'])) {
