@@ -32006,8 +32006,10 @@ if (arg(0) == \'node\' && is_numeric(arg(1)) && arg(2) == \'edit\' && $query[\'s
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'recipe-management
+ugc-published-recipe
+draft-recipe-management',
   'title' => '',
   'cache' => -1,
 );
@@ -32130,10 +32132,12 @@ if (arg(0) == \'node\' && is_numeric(arg(1)) && arg(2) == \'edit\' && $query[\'s
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'recipe-management
+ugc-published-recipe
+draft-recipe-management',
   'title' => '',
   'cache' => -1,
 );
@@ -32254,12 +32258,14 @@ if (arg(0) == \'node\' && is_numeric(arg(1)) && arg(2) == \'edit\' && $query[\'s
   'module' => 'menu',
   'delta' => 'menu-recipe-admin-menu',
   'theme' => 'itgadmin',
-  'status' => 0,
+  'status' => 1,
   'weight' => 0,
-  'region' => -1,
+  'region' => 'form_tab',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'recipe-management
+ugc-published-recipe
+draft-recipe-management',
   'title' => '',
   'cache' => -1,
 );
@@ -32382,10 +32388,12 @@ if (arg(0) == \'node\' && is_numeric(arg(1)) && arg(2) == \'edit\' && $query[\'s
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'recipe-management
+ugc-published-recipe
+draft-recipe-management',
   'title' => '',
   'cache' => -1,
 );
@@ -32508,10 +32516,12 @@ if (arg(0) == \'node\' && is_numeric(arg(1)) && arg(2) == \'edit\' && $query[\'s
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'recipe-management
+ugc-published-recipe
+draft-recipe-management',
   'title' => '',
   'cache' => -1,
 );
@@ -32634,10 +32644,12 @@ if (arg(0) == \'node\' && is_numeric(arg(1)) && arg(2) == \'edit\' && $query[\'s
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'recipe-management
+ugc-published-recipe
+draft-recipe-management',
   'title' => '',
   'cache' => -1,
 );
@@ -32760,10 +32772,12 @@ if (arg(0) == \'node\' && is_numeric(arg(1)) && arg(2) == \'edit\' && $query[\'s
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'recipe-management
+ugc-published-recipe
+draft-recipe-management',
   'title' => '',
   'cache' => -1,
 );
