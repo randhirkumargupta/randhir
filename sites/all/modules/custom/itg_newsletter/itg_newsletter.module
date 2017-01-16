@@ -392,9 +392,12 @@ function itg_newsletter_node_presave($node) {
         $selected_date = $date;
         $current_date = date('d');
         $custom_time = date('m') . "/" . $selected_date . "/" . date('Y') . " " . $time_rule;
+        // Handel future date case.
+        // IF uses selected future date in same month then no need to update.
         if ($selected_date > $current_date) {
           $flag_change_date = FALSE;
         }
+        // Handel case for time too. If date is same but time is less then current time then update.
         if((strtotime($custom_time) < strtotime(date('m/d/Y H:i')))) {
           $scheduler_time_up = strtotime('+1 month', $scheduler_time);
         }
