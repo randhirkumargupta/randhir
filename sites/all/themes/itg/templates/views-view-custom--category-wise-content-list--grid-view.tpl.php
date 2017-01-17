@@ -7,15 +7,12 @@ global $base_url;
  * @ingroup views_templates
  */
 ?>
-<?php
-
-?>
 <?php if (!empty($title)): ?>
     <h3><?php print $title; ?></h3>
 <?php endif; ?>
 
     <?php foreach ($rows as $id => $row): ?>
-        <div class="catagory-listing">
+        <div class="catagory-grid-view">
             <div class="pic">
                 <?php if ($row['field_story_small_image'] != ''): ?>
                     <?php print $row['field_story_small_image']; ?>
@@ -29,7 +26,7 @@ global $base_url;
                 <?php endif; ?>
 
             </div>
-            <div class="detail"><h3><?php print $row['title'];  ?></h3>
+            <div class="detail"><h3><?php print $row['title']; ?></h3>
                 <?php if (strtolower($row['type']) == 'story'): ?>
                     <p><?php print $row['field_story_kicker_text']; ?></p>
                 <?php elseif ($row['type'] == 'photogallery'): ?>

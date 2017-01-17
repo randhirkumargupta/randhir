@@ -335,8 +335,10 @@ function itg_ask_expert_block_view($delta = '') {
                     $tid = $node->field_primary_category['und'][0]['value'];
                     // if (isset($tid) && !empty($tid)) {
                     $block['subject'] = '<h3><span>ASK THE EXPERT</span></h3>';
-                    $block['content'] = drupal_render(user_details_for_section($arg, $tid));
-                    $block['content'] .= drupal_render(drupal_get_form('itg_custom_ask_an_expert_form', $tid));
+                    $user_details_section = user_details_for_section($arg, $tid);
+                    $block['content'] = drupal_render($user_details_section);
+                    $custom_expert_form = drupal_get_form('itg_custom_ask_an_expert_form', $tid);
+                    $block['content'] .= drupal_render($custom_expert_form);
                     // }
                 }
             }
@@ -616,8 +618,10 @@ function user_details_for_section($url, $tid) {
             );
             }
             if ($url[0] == 'ask-an-expert-question-answer-details') {
+              if (function_exists('itg_flag_get_count')) {
                 $like = itg_flag_get_count($url[1], 'like_count');
                 $dislike = itg_flag_get_count($url[1], 'dislike_count');
+              }
                 if (!empty($like)) {
                     $like_count = '(' . $like . ')';
                 }
