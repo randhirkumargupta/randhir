@@ -567,6 +567,9 @@ function itg_image_croping_crop_image_orignal() {
  */
 function mageimagedimesion() {
     $image_dim = array();
+    
+    $image_dim['magazine']['field_magazine_cover_photo']['width'] = 172;
+    $image_dim['magazine']['field_magazine_cover_photo']['height'] = 240;
     // Dimension for videogallery
     $image_dim['videogallery']['field_story_extra_large_image']['width'] = 647;
     $image_dim['videogallery']['field_story_extra_large_image']['height'] = 363;
