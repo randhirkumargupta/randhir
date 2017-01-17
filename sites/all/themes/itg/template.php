@@ -116,14 +116,7 @@ function itg_preprocess_field(&$vars) {
 function itg_preprocess_page(&$variables) {
   global $base_url;
   $base_root;
-  $arg = arg();
-  if ($arg[0] == 'taxonomy' && $arg[1] == 'term') {
-    $term = taxonomy_term_load($arg[2]);
-    if ($term->vocabulary_machine_name = 'category_management') {
-      // remove the extra vocavolary information on page buttom.
-      unset($variables['page']['content']['system_main']);
-    }
-  }
+  $arg = arg();  
 
   // add condition to hide header and footer for signup, forgot-password page
   if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
