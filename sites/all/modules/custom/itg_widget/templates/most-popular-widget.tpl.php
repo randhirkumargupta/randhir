@@ -5,7 +5,7 @@
       if (!empty($entity['title'])) :
         ?>
         <li class="<?php print $entity['title'] ?> most-popular-<?php print $entity['nid'] ?>">
-          <?php echo l(mb_strimwidth($entity['title'], 0, 110, ".."), $base_url . '/' . drupal_get_path_alias("node/" . $entity['nid'])); ?>
+          <?php echo l(mb_strimwidth($entity['title'], 0, 110, ".."), "node/" . $entity['nid']); ?>
         </li>
       <?php endif; ?>
     <?php } ?>
