@@ -199,7 +199,7 @@ function itg_widget_site_map() {
 
   _construct_nested_taxonomy_item_list($term_tree, $item_list); //generates the list items that are expected by theme_item_list (https://api.drupal.org/api/drupal/includes%21theme.inc/function/theme_item_list/7)
 
-  return theme('item_list', array('items' => $item_list));
+  return t("<h2>Site Map</h2>") . theme('item_list', array('items' => $item_list));
 }
 
 /**
