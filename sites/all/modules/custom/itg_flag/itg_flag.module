@@ -57,9 +57,10 @@ function itg_flag_details() {
     $response = array('error' => 'error', 'nd_id' => $nd_id);
     print json_encode($response);
   }
-  else
-  {
-  $pre_count = itg_flag_get_count($nd_id, $typ);
+  else {
+  if (function_exists('itg_flag_get_count')) {
+    $pre_count = itg_flag_get_count($nd_id, $typ);
+  }
   $nid = itg_flag_get_nid($nd_id);
   if (!empty($pre_count[$typ])) {
     $pre_count = $pre_count[$typ] + 1;
