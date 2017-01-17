@@ -9,7 +9,7 @@
         </a>
       <?php else : ?>
         <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[0]['nid']); ?>">
-          <img width="483" height="271" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+          <img width="483" height="271" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/dimage483x271.jpeg' ?>" />
         </a>
       <?php endif; ?>
 
@@ -21,13 +21,13 @@
     </div>
 
     <div class="featured-post">
-      <?php if (isset($data[1]['si_file_uri'])) : ?>
+      <?php if (!empty($data[1]['mi_file_uri'])) : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[1]['nid']); ?>">
-          <img src="<?php print image_style_url("home_page_feature_small", $data[1]['si_file_uri']); ?>" />
+          <img src="<?php print image_style_url("home_page_feature_small", $data[1]['mi_file_uri']); ?>" />
         </a>
       <?php else : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[1]['nid']); ?>">
-          <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+          <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/dimage237x133.jpeg" />
         </a>
       <?php endif; ?>
       <?php if (!empty($data[1]['title'])) : ?>
@@ -38,13 +38,13 @@
     </div>
 
     <div class="featured-post">
-      <?php if (isset($data[2]['si_file_uri'])) : ?>
+      <?php if (!empty($data[2]['mi_file_uri'])) : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[2]['nid']); ?>">
-          <img src="<?php print image_style_url("home_page_feature_small", $data[2]['si_file_uri']); ?>" />
+          <img src="<?php print image_style_url("home_page_feature_small", $data[2]['mi_file_uri']); ?>" />
         </a>
       <?php else : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[2]['nid']); ?>">
-          <img src="<?php print$base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+          <img src="<?php print$base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/dimage237x133.jpeg" />
         </a>
       <?php endif; ?>
       <?php if (!empty($data[2]['title'])) : ?>

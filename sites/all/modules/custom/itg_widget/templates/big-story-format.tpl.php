@@ -33,13 +33,12 @@ if (!empty($data)) :
           <div class='live-tv-big-story'> <?php print $data['live_tv']; ?> </div>
         <?php else : ?>
           <!-- EXTRA LARGE IMAGE IS PUT -->
-          <?php if (!empty($data['node_data']->field_story_extra_large_image['und'][0]['uri'])) {
-            ?>
+          <?php if (!empty($data['node_data']->field_story_extra_large_image['und'][0]['uri'])) { ?>
             <a href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>
               <img src="<?php print image_style_url("big_story_widget", $data['node_data']->field_story_extra_large_image['und'][0]['uri']); ?>" />
               <?php print $video_icon; ?>
               <?php print $photo_icon; ?>
-            </a>  
+            </a>
             <div class="story-tag"><?php print t("Big Story") ?></div>          
             <img class="loading-popup" src="<?php echo drupal_get_path('theme', 'itg') . '/images/tab-loading.gif' ?>" alt="loading">
             <?php
@@ -49,7 +48,7 @@ if (!empty($data)) :
           else {
             ?>
             <a href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>
-              <img src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+              <img width="647" height="363" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
             </a>  
             <div class="story-tag"><?php echo t("Big Story") ?></div>          
             <img class="loading-popup" src="<?php echo drupal_get_path('theme', 'itg') . '/images/tab-loading.gif' ?>" alt="loading">          
@@ -126,7 +125,7 @@ if (!empty($data)) :
                     <li class="follow-story"><a title = "Follow the Story" href="javascript:" id="user-activity" rel="<?php print $data['node_data']->nid; ?>" data-tag="<?php print $data['node_data']->type; ?>" data-activity="follow_story" data-status="1" class="def-cur-pointer"><?php print t('Follow the Story'); ?></a></li>
                   <?php endif;
                 else: ?>
-                  <li class="mhide"><?php if (function_exists(itg_sso_url)) {
+                  <li class="mhide"><?php if (function_exists('itg_sso_url')) {
             print itg_sso_url('Follow the Story');
           } ?></li>
             <?php endif; ?>
