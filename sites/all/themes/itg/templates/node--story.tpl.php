@@ -511,8 +511,10 @@ if (!empty($content)):
 
                 <?php
                 $get_val = '0' . arg(1);
-                $like = itg_flag_get_count($get_val, 'like_count');
-                $dislike = itg_flag_get_count($get_val, 'dislike_count');
+                if (function_exists('itg_flag_get_count')) {
+                  $like = itg_flag_get_count($get_val, 'like_count');
+                  $dislike = itg_flag_get_count($get_val, 'dislike_count');
+                }
                 if (!empty($like['like_count'])) {
                     $like_count = $like['like_count'];
                 }
