@@ -120,7 +120,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
         <label for="widget-order-reorder">' . t("Speaker Order/Reorder") . ' </label>
         ' . $link_text . '
      </div>';
-      drupal_add_css("a.anchor-order-reorder {text-decoration:underline !important}" ,"inline");
+      drupal_add_css("a.anchor-order-reorder {text-decoration:underline !important}", "inline");
       $form['field_e_associate_highlights']['#suffix'] = "<div class='form-wrapper speaker-order-reorder'>$link</div>";
     }
   }
@@ -241,37 +241,38 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   $registration_start = strtotime($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']);
 
   // node insert validation
-  if(arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'event-backend'){
-    if($current_date >= $start_date){
+  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'event-backend') {
+    if ($current_date >= $start_date) {
       form_set_error('field_event_start_date', t('Event start date must be greater than current date & time.'));
     }
-    if($current_date >= $end_date){
+    if ($current_date >= $end_date) {
       form_set_error('field_event_close_date', t('Event close date must be greater than current date & time.'));
     }
-    if($current_date >= $registration_start){
+    if ($current_date >= $registration_start) {
       form_set_error('field_story_expiry_date', t('Registration start date must be greater than current date & time.'));
     }
-    if($current_date >= $registration_close){
+    if ($current_date >= $registration_close) {
       form_set_error('field_registration_close_date', t('Registration close date must be greater than current date & time.'));
-    }
-  }elseif(arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit'){
-    $status = itg_event_backend_node_status(arg(1));
-    if($status != 1){
-      if($current_date >= $start_date){
-      form_set_error('field_event_start_date', t('Event start date must be greater than current date & time.'));
-    }
-    if($current_date >= $end_date){
-      form_set_error('field_event_close_date', t('Event close date must be greater than current date & time.'));
-    }
-    if($current_date >= $registration_start){
-      form_set_error('field_story_expiry_date', t('Registration start date must be greater than current date & time.'));
-    }
-    if($current_date >= $registration_close){
-      form_set_error('field_registration_close_date', t('Registration close date must be greater than current date & time.'));
-    }
     }
   }
-  
+  elseif (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit') {
+    $status = itg_event_backend_node_status(arg(1));
+    if ($status != 1) {
+      if ($current_date >= $start_date) {
+        form_set_error('field_event_start_date', t('Event start date must be greater than current date & time.'));
+      }
+      if ($current_date >= $end_date) {
+        form_set_error('field_event_close_date', t('Event close date must be greater than current date & time.'));
+      }
+      if ($current_date >= $registration_start) {
+        form_set_error('field_story_expiry_date', t('Registration start date must be greater than current date & time.'));
+      }
+      if ($current_date >= $registration_close) {
+        form_set_error('field_registration_close_date', t('Registration close date must be greater than current date & time.'));
+      }
+    }
+  }
+
   if ($registration_close <= $registration_start) {
     form_set_error('field_story_expiry_date', t('Registration start date must be less than registration close date.'));
   }
@@ -1000,7 +1001,7 @@ function itg_event_backend_get_speaker_details($spk_id) {
   $query->leftJoin('file_managed', 'fm', 'fm.fid = pic.field_story_extra_large_image_fid');
   $query->leftJoin('field_data_field_story_new_title', 'designation', 'n.nid = designation.entity_id');
   $query->condition('n.nid', $spk_id, '=');
- // $query->condition('designation.bundle', 'reporter', '=');
+  // $query->condition('designation.bundle', 'reporter', '=');
   $result = $query->execute()->fetchAll();
   return $result;
 }
@@ -1927,7 +1928,8 @@ function itg_event_save_initial_speaker_weight(&$form, $form_state) {
                 'weight' => --$weight_data,
                 'widget' => 'itg_event_speaker_widget',
               ))->execute();
-        } catch (Exception $ex) {
+        }
+        catch (Exception $ex) {
           drupal_set_message($ex->getMessage());
         }
       }
@@ -2041,7 +2043,8 @@ function update_itg_widget_order_table_data_for_speaker($form, &$form_state) {
                 'cat_id' => $cat_id,
               ))
               ->execute();
-        } catch (Exception $ex) {
+        }
+        catch (Exception $ex) {
           drupal_set_message($ex->getMessage());
         }
       }
@@ -2069,11 +2072,11 @@ function itg_event_backend_node_delete($node) {
 /**
  * Implements get node status
  */
-function itg_event_backend_node_status($nid){
+function itg_event_backend_node_status($nid) {
   $query = db_select('node', 'n');
-  $query ->fields('n', array('status'));
-  $query -> condition('n.status', 1, '=');
-  $query -> condition('n.nid', $nid, '=');
+  $query->fields('n', array('status'));
+  $query->condition('n.status', 1, '=');
+  $query->condition('n.nid', $nid, '=');
   $result = $query->execute()->fetchField();
   return $result;
 }
