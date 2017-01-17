@@ -41,7 +41,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
     array_unshift($form['#validate'], "itg_event_backend_node_form_validate");
     $form['actions']['cancel'] = array(
       '#markup' => l(t('Cancel'), 'manage-event-backend', array('attributes' => array('class' => 'button'))),
-      '#weight' => -10,
+      '#weight' => 20,
     );
 
     if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration')) {
@@ -82,7 +82,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       );
       drupal_add_css("input#edit-submit , input[data-id=edit-submit]{display:none !important}", 'inline');
     }
-    $form['actions']['cancel']['#weight'] = -10;
+    $form['actions']['cancel']['#weight'] = 20;
     if ((arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == "edit") && $form['#node']->status == 1) {
       $form['field_event_start_date']['#attributes']['class'][] = 'date-disabled';
       $form['field_event_close_date']['#attributes']['class'][] = 'date-disabled';

@@ -154,7 +154,7 @@ function itg_workflow_after_build($form, &$form_state) {
 
     if (!empty($submit_name)) {
         $form['actions']['submit_link'] = array(
-          '#markup' => '<a href="javascript:void(0)" id="story_submit_link" class="button' . $state_class . '">' . t($submit_name) . '</a>',
+          '#markup' => '<a href="javascript:void(0)" id="story_submit_link" class="btn-submit button' . $state_class . '">' . t($submit_name) . '</a>',
           '#weight' => 20,
         );
     }
