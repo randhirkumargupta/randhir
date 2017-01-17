@@ -368,13 +368,13 @@ function itg_workflow_node_insert($node) {
     global $user;
     
     if (!array_key_exists(COPY_EDITOR, $user->roles) 
-            && !array_key_exists(SECTION_EDITOR, $user->roles) 
+            && !array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) 
             && !array_key_exists(EDITOR, $user->roles) 
             && !array_key_exists(SITE_ADMIN, $user->roles) 
             && !($node->workbench_moderation_state_new == 'draft')) {
       
       //getting mail id's of high level users
-      $rid = array(COPY_EDITOR, SECTION_EDITOR, EDITOR);
+      $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
       $user_email = get_email_by_roll($rid);
 
       workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
@@ -471,17 +471,17 @@ function itg_workflow_node_update($node) {
       $itguser = user_load($node->uid);
       
       if (!array_key_exists(COPY_EDITOR, $itguser->roles) 
-            && !array_key_exists(SECTION_EDITOR, $itguser->roles) 
+            && !array_key_exists(SECTION_EDITOR_ANCHOR, $itguser->roles) 
             && !array_key_exists(EDITOR, $itguser->roles) 
             && !array_key_exists(SITE_ADMIN, $itguser->roles)) {
         
       }
       //getting mail id's of high level users
-      $rid = array(COPY_EDITOR, SECTION_EDITOR, EDITOR);
+      $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
       $user_email = get_email_by_roll($rid);
       $user_email[] = $itguser->mail;
 
-      workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
+      workflow_get_mail_content($node, 'update', $user_email, $node->name, $user->name);
     }
    }
 }
@@ -502,6 +502,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
     
     $content_type = $node->type;
     $review = $node->workbench_moderation_state_new;
+    
     if ($event == 'create') {
         $task_subject = 'A new '.$content_type.' has been submitted for your review, please find details below.';
         $submitted_by = 'Submitted By: '.$current_user_name;
