@@ -4,7 +4,10 @@
 <div class="featured-news">
 
     <?php
+global $base_url;
+
     foreach ($rows as $index => $row) {
+
         $desc = $row['title'];
         if(function_exists('itg_common_remove_extra_html')) {
             $desc = itg_common_remove_extra_html($desc);
@@ -17,14 +20,27 @@
         if ($index == 0) {
             ?>
             <div class="featured-post featured-post-first <?php echo $video_class; ?>">
-            <?php print $row['field_story_extra_large_image_1']; ?>    
+            <?php if($row['field_story_large_image'] != "") {
+                print $row['field_story_large_image'];
+            } else {
+                print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/dimage483x271.jpeg' />";
+            }
+                
+                ?> 
+                
                 <h2><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h2>           
             </div>
 
 
 
     <?php } else if ($index > 0 && $index <= 2) { ?>
-            <div class="featured-post <?php echo $video_class; ?>"><?php print $row['field_story_extra_large_image']; ?>
+            <div class="featured-post <?php echo $video_class; ?>">
+                <?php if($row['field_story_medium_image'] != "") {
+                print $row['field_story_medium_image'];
+            } else {
+                print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/dimage237x133.jpeg' />";
+            }
+               ?>
                 <h3><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h3>
             </div>
 

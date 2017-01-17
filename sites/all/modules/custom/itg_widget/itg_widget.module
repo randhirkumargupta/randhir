@@ -28,7 +28,11 @@ module_load_include('inc', 'itg_widget', 'itg_widget.helper');
 function itg_widget_init() {
 // Js for move funtionality.
 // This is use in case of nodequeue in case of custom table we calls a callback funtion.
-  drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', 'file');
+    global $base_url;
+    $settings = array();
+    $settings['base_url'] = $base_url;   
+    drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', 'file');
 }
 
 /**
@@ -179,55 +183,84 @@ function itg_widget_menu() {
  * @return type
  */
 function itg_widget_site_map() {
-  $cat_name = 'category_management';  // The vocabulary name
-  $tree = taxonomy_get_tree(taxonomy_vocabulary_machine_name_load($cat_name)->vid); // $tree is an array of all the terms in the vocabulary
-  $term_tree = array();
-  $item_list = array();
-
-  // Here we restructure this a bit so we can work with array keys.  Only necessary to streamline the logic necessary in the recursive functions
-  foreach ($tree as $term) {
-    $status = 1;
-    if (function_exists('itg_category_manager_term_state')) {
-      $status = itg_category_manager_term_state($term->tid);
+  $tree = extranet_get_nested_tree(CATEGORY_MANAGMENT);
+  $keys = array_keys($tree);
+  foreach ($keys as $index => $data) {
+    $term_array = array($keys[$index] => $tree[$keys[$index]]);
+    if ($index % 2 == 0) {
+      $left_tree .= extranet_output_nested_tree($term_array);
     }
-    if ($status) {
-      $term_tree[$term->tid] = $term;
+    else {
+      $right_tree .= extranet_output_nested_tree($term_array);
     }
   }
-  _construct_nested_taxonomy_array($term_tree); // takes the flat array of terms and nest terms underneath their parent items
-  $term_tree = array_reverse($term_tree);
-
-  _construct_nested_taxonomy_item_list($term_tree, $item_list); //generates the list items that are expected by theme_item_list (https://api.drupal.org/api/drupal/includes%21theme.inc/function/theme_item_list/7)
-
-  return theme('item_list', array('items' => $item_list));
+  $print_tree = '<div class="row"><div class="col-md-6">' . $left_tree . '</div> <div class="col-md-6">' . $right_tree . '</div></div>';
+  return t("<h2>Site Map</h2>") . $print_tree;
 }
 
 /**
- * function get nested array of terms.
- * @param type $tree
+ * Function create nested tree ul li for given array format.
+ * @param array $tree
+ * @return string
  */
-function _construct_nested_taxonomy_array(&$tree) {
-  foreach (array_reverse($tree) as $term) {
-    if (array_key_exists($term->parents[0], $tree)) {
-      $tree[$term->parents[0]]->children[$term->tid] = $term;
-      _construct_nested_taxonomy_array($tree[$term->parents[0]]->children);
-      unset($tree[$term->tid]);
+function extranet_output_nested_tree($tree) {
+  if (count($tree)) {
+    $output = '<ul class="nested-taxonomy-tree">';
+    foreach ($tree as $term) {
+      $output .= '<li class="taxonomy-term">';
+      $output .= l($term->name, "taxonomy/term/$term->tid");
+      if ($term->children) {
+        $output .= extranet_output_nested_tree($term->children);
+      }
+      $output .= '</li>';
     }
+    $output .= '</ul>';
   }
+  return $output;
 }
 
+
 /**
- * Helper function for site map.
- * @param type $tree
- * @param type $item_list
+ * Function to get array of active category tree array format.
+ * @param array $terms
+ * @param int $max_depth
+ * @param int $parent
+ * @param array $parents_index
+ * @param int $depth
+ * @return array
  */
-function _construct_nested_taxonomy_item_list(&$tree, &$item_list) {
-  foreach (array_reverse($tree) as $term) {
-    $item_list[$term->tid] = array('data' => l($term->name , "taxonomy/term/$term->tid"));
-    if (@$term->children) {
-      _construct_nested_taxonomy_item_list($term->children, $item_list[$term->tid]['children']);
+function extranet_get_nested_tree($terms = array(), $max_depth = NULL, $parent = 0, $parents_index = array(), $depth = 0) {
+  if (is_int($terms)) {
+    $terms = taxonomy_get_tree($terms);
+  }
+
+  foreach ($terms as $term) {
+    foreach ($term->parents as $term_parent) {
+      if ($term_parent == $parent) {
+        if (function_exists('itg_category_manager_term_state') && itg_category_manager_term_state($term->tid)) {
+          $return[$term->tid] = $term;
+        }
+        else {
+          $return[$term->tid] = $term;
+        }
+      }
+      else {
+        if (function_exists('itg_category_manager_term_state') && itg_category_manager_term_state($term->tid)) {
+          $parents_index[$term_parent][$term->tid] = $term;
+        }
+        else {
+          $parents_index[$term_parent][$term->tid] = $term;
+        }
+      }
     }
   }
+
+  foreach ($return as &$term) {
+    if (isset($parents_index[$term->tid]) && (is_null($max_depth) || $depth < $max_depth)) {
+      $term->children = extranet_get_nested_tree($parents_index[$term->tid], $max_depth, $term->tid, $parents_index, $depth + 1);
+    }
+  }
+  return $return;
 }
 
 /**
@@ -570,40 +603,42 @@ function itg_widget_block_view($delta = '') {
       break;
 
     case 'featured_photo_carousel_r':
-      global $base_url;
-      module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
-      drupal_add_js($base_url . '/sites/all/themes/itg/js/itg-photo-slider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
-      drupal_add_js($base_url . '/sites/all/themes/itg/js/jquery.mousewheel.min.js', array('type' => 'external', 'scope' => 'header', 'weight' => 5));
-
-      drupal_add_js("jQuery(document).ready(function () {
-            var winWidth = jQuery(window).width();            
-            console.log(winWidth);
-            if(winWidth > 1024){
-            jQuery('.carousel').carousel({
-                frontWidth: 645,
-                frontHeight: 365,
-                carouselWidth: 1170,
-                carouselHeight: 450,
-                buttonNav: 'none'
-              });
-            }else{
-                jQuery('.carousel .slides').slick({                    
-                    infinite: true,    
-                    autoplay:true,
-                    dots: true,
-                    prevArrow: false,
-                    nextArrow: false
-                });
-            }
-          });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-      );
-      $info['widget'] = 'photo_carousel_list_widget';
-      $info['order'] = 'ASC';
-      $info['max_limit'] = PHOTO_CAROUSEL_MAX_RANGE;
-      $info['min_limit'] = PHOTO_CAROUSEL_MIN_RANGE;
-      $result = itg_widget_get_widget_data_data($info);
-      $data = itg_widget_featured_photo_carousel_data_fetch($result, 'rolling');
-      $block['content'] = theme("featured_photo_carousel_rollingslider", array("data" => $data));
+      // As slider is not using to comment this code.
+//      global $base_url;
+//      module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
+//      //drupal_add_js(drupal_get_path('theme', 'itg'). "");
+//      drupal_add_js(drupal_get_path('theme', 'itg') . '/js/itg-photo-slider.js', array('type' => 'file'));
+//      drupal_add_js($base_url . '/sites/all/themes/itg/js/jquery.mousewheel.min.js', array('type' => 'external', 'scope' => 'header', 'weight' => 5));
+//
+//      drupal_add_js("jQuery(document).ready(function () {
+//            var winWidth = jQuery(window).width();            
+//            console.log(winWidth);
+//            if(winWidth > 1024){
+//            jQuery('.carousel').carousel({
+//                frontWidth: 645,
+//                frontHeight: 365,
+//                carouselWidth: 1170,
+//                carouselHeight: 450,
+//                buttonNav: 'none'
+//              });
+//            }else{
+//                jQuery('.carousel .slides').slick({                    
+//                    infinite: true,    
+//                    autoplay:true,
+//                    dots: true,
+//                    prevArrow: false,
+//                    nextArrow: false
+//                });
+//            }
+//          });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+//      );
+//      $info['widget'] = 'photo_carousel_list_widget';
+//      $info['order'] = 'ASC';
+//      $info['max_limit'] = PHOTO_CAROUSEL_MAX_RANGE;
+//      $info['min_limit'] = PHOTO_CAROUSEL_MIN_RANGE;
+//      $result = itg_widget_get_widget_data_data($info);
+//      $data = itg_widget_featured_photo_carousel_data_fetch($result, 'rolling');
+//      $block['content'] = theme("featured_photo_carousel_rollingslider", array("data" => $data));
       break;
 
     case 'featured_video_carousel':
@@ -1614,12 +1649,10 @@ function itg_widget_form_views_form_section_wise_content_ordering_list_page_alte
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data";
 }
 
-
 /**
  * Added a Query tag as  "query_poll_widget" in poll widget used in View : [poll_widget] [id:poll_widget_format]and written query tag alter as required
  * Implements hook_query_TAG_alter()
  */
-
 function itg_widget_query_poll_widget_alter_tag_alter(QueryAlterableInterface $query) {
   $cur_date = date('Y-m-d H:i:s');
   $query->leftjoin('field_data_field_poll_start_date', 'sd', 'node.nid = sd.entity_id');

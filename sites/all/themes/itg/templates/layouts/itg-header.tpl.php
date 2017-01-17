@@ -41,14 +41,14 @@ else {
                 }
                 else {
                   ?>
-                  <a href="javascript:void(0)" class="mobile-user"><?php print $user_pic; ?></a>
+                  <a href="javascript:void(0)" class="mobile-user sso-click"><?php print $user_pic; ?></a>
                   <?php
                 }
               }
               else {
                 if ($user->uid == 0) {
                   ?>
-                  <a onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')" class="mobile-user"><i class="fa fa-user"></i></a>
+                  <a onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')" class="mobile-user sso-click"><i class="fa fa-user"></i></a>
 
                   <?php
                 }
@@ -141,7 +141,7 @@ else {
             <?php if ($_SERVER['HTTP_HOST'] == PARENT_SSO) {
               if ($user->uid == 0) { ?>
                   
-                  <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="user-icon"><i class="fa fa-user"></i></a>
+                  <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="user-icon sso-click"><i class="fa fa-user"></i></a>
                   <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/signup/domain_info', 'indiatoday');" class="register-icon" style="display:none;"><i class="fa fa-user"></i></a>
 
                   <?php
@@ -155,7 +155,7 @@ else {
               else {
                 if ($user->uid == 0) {
                   ?>
-                  <a onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')" class="user-icon"><i class="fa fa-user"></i></a>
+                  <a onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')" class="user-icon sso-click"><i class="fa fa-user"></i></a>
 
                   <?php
                 }

@@ -120,9 +120,19 @@ function ugc_comment_form($form, &$form_state) {
     '#value' => t('Submit'),
   );
   
+  $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
+  $bad_word_term = taxonomy_get_tree($vocab_id->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+  
+  if(!empty($bad_word_term)) {
+  foreach ($bad_word_term as $key => $val) {
+    $op[$val->tid] = trim($val->name);
+  }
+  }
+  
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
+  $settings['bad_word'] = implode(',', $op);
   drupal_add_js(array('itg_ugc_comment' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_ugc_comment') . '/js/itg_ugc_comment.js');
   // Add js file to form.
@@ -221,17 +231,19 @@ function itg_ugc_comment_theme($existing, $type, $theme, $path) {
 * @param array $data
 */
 function getmycomments($data) {
-  global $base_url;
+  global $base_url, $user;
   
+  if (function_exists(itg_sso_url) && $user->uid == 0) {
+  //$comment_share = "<a class='def-cur-pointer comment-social-share'>".t('share')."</a>";
+  }    
   $image = $base_url.'/sites/all/themes/rubik/images/user-default.png';
-  
   $contect .= "<div class='itg-comment'>
                 <div class='comment-image'>
                 <img src= $image width='50' height='50'></div>
                 <div class='comment-details'><div class='comment-name'>" . $data['name'] . "</div>
                 <div class='comment-body'>" . $data['comment'] . "</div>
                 <span class='comment-timestamp'>" . $data['comment_date'] . "</span>
-                <a href='javascript:' class='reply' id='" . $data['_id'] . "'>Reply</a></div>";
+                <a href='javascript:' class='reply' id='" . $data['_id'] . "'>".t('Reply')."</a>".$comment_share."</div>";
   
   if (function_exists('mongodb')) {
     $con = mongodb();
@@ -265,21 +277,3 @@ function totalcomments($page_id) {
     return $count;
   }
 }
-
-/**
- * Implements ugc_comment_form_validate
- * @param array $form
- * @param array $form_state
- */
-//function ugc_comment_form_validate($form, &$form_state) {
-//  $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
-//  $tax = taxonomy_get_tree($vocab_id->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-//
-//  foreach ($tax as $key => $val) {
-//    $op[] = $val->name;
-//  }
-//  $bad_word_check = preg_grep('/^' . $form_state['values']['fmessage'] . ' (\w+)/i', $op);
-//  if (!empty($bad_word_check[0])) {
-//    form_set_error('fmessage', t('Please Remove bad word form description!'));
-//  }
-//}
