@@ -261,6 +261,9 @@ if (!empty($content)):
                 }
                 ?>">
                     <div class="story-associate-content">
+                        <div id="videogallery-iframe">
+                                <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading">
+                            </div>
                     <?php
                     $clidk_class_slider = "";
                     $widget_data = '';
@@ -314,11 +317,7 @@ if (!empty($content)):
                         </div>
                         <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'])) { ?>    
                             <div class="image-alt"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?></div>
-                        <?php } ?>
-                            
-                            <div id="videogallery-iframe">
-                                <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/tab-loading.gif" alt="loading">
-                            </div>
+                        <?php } ?>                            
                             </div>
                             
                         <?php
