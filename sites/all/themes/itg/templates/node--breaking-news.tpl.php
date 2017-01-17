@@ -126,7 +126,7 @@ if (!empty($content)):
                 $breaking_output.= '</div></div>';
                 }
             }
-            $breaking_output .= '<span class="no-record" style="display:none">No Record Found</span>';
+            $breaking_output .= '<span class="no-record" style="display:none">'.t('No Record Found').'</span>';
             print $breaking_output;
         }
     }
