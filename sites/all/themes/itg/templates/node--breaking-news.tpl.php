@@ -119,9 +119,12 @@ if (!empty($content)):
                 $pub_time = date("H:i", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
                 $pub_display_time = date("H:i A", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
                 $pub_time2 = str_replace(":","",$pub_time);
+                $current_time =  str_replace(":", "", date('H:i'));
+                if($pub_time2 < $current_time) {
                 $breaking_output.= '<div class="dwrap" timevalue="'.$pub_time2.'" tcount="'.count($field_collection_ids).'"><div class="breaking-date">' . $pub_display_time . ' PDT</div>';
                 $breaking_output.= '<div class="breaking-discription">' . $entity[$field_collection_id]->field_breaking_tile['und'][0]['value'] . '</div><div class="social-share"><ul><li><a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li><li><a title="share on facebook" onclick="fbpop('."'".$share_page_link."'".', '."'".  $fb_title."'".', '."'".  $share_desc."'".', '."'".  $share_image."'".')" class="facebook def-cur-pointer"><i class="fa fa-facebook"></i></a></li><li><a title="share on twitter" onclick="twitter_popup('."'".urlencode($fb_title)."'".', '."'".urlencode($short_url)."'".')" class="twitter def-cur-pointer"><i class="fa fa-twitter"></i></a></li><li><a title="share on google+" onclick="return googleplusbtn('."'".$share_page_link."'".')" class="google def-cur-pointer"></a></li></ul></div>';
                 $breaking_output.= '</div></div>';
+                }
             }
             $breaking_output .= '<span class="no-record" style="display:none">No Record Found</span>';
             print $breaking_output;
