@@ -276,12 +276,19 @@ if (!empty($content)):
                         // imgtags" img-fid="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];" use for image tagging
                         ?>
                         <div class="stryimg" ><?php
+                        
                             $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                             $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                             $file_uri = file_create_url($story_image);
-                            print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">        
-                    <i class="fa fa-play-circle"></i>
-                    <i class="fa fa-camera"></i></span></a>';
+                            print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">';?>        
+                    
+                        <?php if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') { ?>
+                            <i class="fa fa-play-circle"></i>
+                        <?php } else  if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {?>                    
+                            <i class="fa fa-camera"></i>
+                        <?php } print '</span></a>' ?>
+                            
+                    <?php
                             if (!empty($getimagetags)) {
                                 foreach ($getimagetags as $key => $tagval) {
                                     $urltags = addhttp($tagval->tag_url);

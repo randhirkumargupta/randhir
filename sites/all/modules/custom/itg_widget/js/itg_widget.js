@@ -4,6 +4,7 @@
  */
 Drupal.behaviors.itg_widgets = {
   attach: function (context, settings) {
+     var base_url = settings.itg_widget.settings.base_url;
     jQuery ("div.big-news-content-videogallery a.has-ajax-big-story").click (function () {
       jQuery ('.big-story-col-1 .loading-popup').show ();
       var nid = jQuery (this).attr ("data-nid");
@@ -111,8 +112,9 @@ Drupal.behaviors.itg_widgets = {
             var widgets_type = jQuery('.associate-content-block').attr ('data-widget');              
             var widgets_type_array = widgets_type.split ("-");
             var widgets_type = widgets_type_array[0];
-            var widgets_id = widgets_type_array[1];                
-            videoIframe.append('<img class="loading-popup" src="http://qa.indiatodayonline.in/sites/all/themes/itg/images/reload.gif" alt="loading">');      
+            var widgets_id = widgets_type_array[1];  
+            var imgurl = base_url+"/sites/all/themes/itg/images/reload.gif";            
+            videoIframe.append('<img class="loading-popup" src="'+imgurl+'" alt="loading image">');      
                 jQuery.ajax ({
                   url: Drupal.settings.basePath + "associate-photo-video-content/" + widgets_type + "/" + widgets_id,
                   method: 'post',

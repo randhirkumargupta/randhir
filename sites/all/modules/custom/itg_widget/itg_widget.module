@@ -28,7 +28,11 @@ module_load_include('inc', 'itg_widget', 'itg_widget.helper');
 function itg_widget_init() {
 // Js for move funtionality.
 // This is use in case of nodequeue in case of custom table we calls a callback funtion.
-  drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', 'file');
+    global $base_url;
+    $settings = array();
+    $settings['base_url'] = $base_url;   
+    drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', 'file');
 }
 
 /**
