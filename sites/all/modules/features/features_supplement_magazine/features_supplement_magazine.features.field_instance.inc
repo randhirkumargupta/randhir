@@ -598,7 +598,7 @@ Image Size (300 x 225)',
   $field_instances['node-magazine-field_magazine_cover_photo'] = array(
     'bundle' => 'magazine',
     'deleted' => 0,
-    'description' => 'Please upload a magazine cover photo.',
+    'description' => 'Image Size (647 x 363)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -978,6 +978,7 @@ Image Size (300 x 225)',
   // Translatables
   // Included for use with string extractors like potx.
   t('Comment');
+  t('Image Size (647 x 363)');
   t('Import Issue XML');
   t('Import XML');
   t('Issue');
@@ -990,7 +991,6 @@ Image Size (300 x 225)',
   t('Please select supplements.');
   t('Please select the date using date picker.
 ');
-  t('Please upload a magazine cover photo.');
   t('Please upload large cover image.<br/>
 Image Size (300 x 225)');
   t('Please upload small cover image.<br/>
