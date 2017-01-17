@@ -18,11 +18,11 @@ if (!empty($data)) :
   if ($data['node_data']->type == 'photogallery') {
     $photo_icon = "<i class='fa fa-camera'></i>";  
   }
-  ?>
-  <?php
+ 
   if ($is_videogallery) {
     print '<div id="videogallery-iframe"></div>';
   }
+  $fb_image = '';
   ?>
   <!-- Big news Block -->
   <div class="big-news big-news-content-<?php print $data['node_data']->type ?>">

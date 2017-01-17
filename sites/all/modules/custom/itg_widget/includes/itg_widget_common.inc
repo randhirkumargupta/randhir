@@ -2384,7 +2384,8 @@ function itg_poll_home_page_polls_select($nid) {
             $fieldcollect = entity_load('field_collection_item', $item_id);
         }
         if (!empty($fieldcollect) && is_array($fieldcollect) && count($fieldcollect) > 0) {
-            $temp_ent = array_shift(array_slice($fieldcollect, 0, 1));
+            $fieldcollect_array = array_slice($fieldcollect, 0, 1);
+            $temp_ent = array_shift($fieldcollect_array);
             $poll_answer_image = isset($temp_ent->field_poll_answer_image[LANGUAGE_NONE]) ? $temp_ent->field_poll_answer_image[LANGUAGE_NONE][0]['fid'] : '';
             if (isset($poll_answer_image) && $poll_answer_image > 0) {
                 $poll_image_exist_class = 'poll-option-image';

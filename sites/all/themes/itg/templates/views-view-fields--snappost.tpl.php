@@ -44,8 +44,11 @@ $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0][
     <div class="snap-post-btm">
         <div class="snap-button">
             
-            <?php $like = itg_flag_get_count($row->nid, 'like_count');
-                  $dislike = itg_flag_get_count($row->nid, 'dislike_count');
+                <?php 
+                  if (function_exists('itg_flag_get_count')) {
+                    $like = itg_flag_get_count($row->nid, 'like_count');
+                    $dislike = itg_flag_get_count($row->nid, 'dislike_count');
+                  }
                   if(!empty($like['like_count'])) {
                     $like_count = '('.$like['like_count'].')';
                   }
