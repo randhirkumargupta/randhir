@@ -705,7 +705,7 @@ else if ($widget_style == 'budget-decoded') {
                         $extra_large_image_url = image_style_url("anchors_landing", $entity['si_file_uri']);
                     }
                     else {
-                        $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/default_for_all.png";
+                        $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/dimage_370X208.jpg";
                     }
                     ?>
 
@@ -832,15 +832,16 @@ else if ($widget_style == 'talking-point') {
                 $video_class = 'video-icon';
             }
 
-            $desc = $entity->title;
+            $desc = $entity['title'];
+            $node_data = node_load($entity['nid']);
+
             ?>
                     <li class="trending-videos-list">
                     <?php
-                    if ((!empty($reporter->field_story_extra_large_image['und'][0]['uri']) && isset($reporter->field_story_extra_large_image['und'][0]['uri']))) {
-                        $extra_large_image_url = image_style_url("widget_very_small", $reporter->field_story_extra_large_image['und'][0]['uri']);
-                    }
-                    if ($entity->field_common_by_line_reporter_id['und'][0]['value'] != "") {
-                        $reporter = node_load($entity->field_common_by_line_reporter_id['und'][0]['value']);
+                  
+                    if ($node_data->field_common_by_line_reporter_id['und'][0]['value'] != "") {
+                        $reporter = node_load($node_data->field_common_by_line_reporter_id['und'][0]['value']);
+                     
                     }
 
                     if ((!empty($reporter->field_story_extra_large_image['und'][0]['uri']) && isset($reporter->field_story_extra_large_image['und'][0]['uri']))) {

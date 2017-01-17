@@ -420,20 +420,19 @@ function itg_image_croping_crop_image() {
         $image_name = time();
     }
     $image_name = $image_name . rand(111, 999);
-   $extendata=substr($image_data_url, 5, strpos($image_data_url, ';')-5);
-   $extention=end(explode('/', $extendata));
-   if($extention=="")
-   {
-       $extention='png';
-   }
+    $extendata = substr($image_data_url, 5, strpos($image_data_url, ';') - 5);
+    $extention = end(explode('/', $extendata));
+    if ($extention == "") {
+        $extention = 'png';
+    }
 
-    $image_data_url = str_replace('data:image/'.$extention.';base64,', '', $image_data_url);
+    $image_data_url = str_replace('data:image/' . $extention . ';base64,', '', $image_data_url);
 
     $imagedata = base64_decode($image_data_url);
     if (!file_exists(file_default_scheme() . '://crop_image')) {
         mkdir(file_default_scheme() . '://crop_image', 0777, TRUE);
     }
-    $file = file_save_data($imagedata, file_default_scheme() . '://crop_image/' . $image_name . '.'.$extention);
+    $file = file_save_data($imagedata, file_default_scheme() . '://crop_image/' . $image_name . '.' . $extention);
     file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
 
     $fileids['fid'][] = $file->fid . '#' . $_POST['field_name'];
@@ -443,8 +442,8 @@ function itg_image_croping_crop_image() {
             $filepath = file_default_scheme() . '://crop_image';
             $scaled = image_resize($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height']);
             $image_name = $fields_name . time();
-            $sav = image_save($image, $filepath . '/' . $image_name . '.'.$extention.'/');
-            $uri = $filepath . '/' . $image_name . '.'.$extention;
+            $sav = image_save($image, $filepath . '/' . $image_name . '.' . $extention . '/');
+            $uri = $filepath . '/' . $image_name . '.' . $extention;
             $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
             $file = new StdClass;
             $file->uid = $user->uid;
@@ -512,12 +511,12 @@ function itg_image_croping_crop_image_orignal() {
     $image_name = $image_name . rand(111, 999);
     $file_image = file_load($image_fiedlid);
     $image = image_load($file_image->uri);
-    $image_exten=end(explode('.', $file_image->uri));
+    $image_exten = end(explode('.', $file_image->uri));
     $filepath = file_default_scheme() . '://crop_image';
     $scaled = image_scale_and_crop($image, $img_dim[$content_type][$_POST['field_name']]['width'], $img_dim[$content_type][$_POST['field_name']]['height']);
     $image_name = $image_name . time();
-    $sav = image_save($image, $filepath . '/' . $image_name . '.'.$image_exten.'/');
-    $uri = $filepath . '/' . $image_name . '.'.$image_exten;
+    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten . '/');
+    $uri = $filepath . '/' . $image_name . '.' . $image_exten;
     $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
     $file = new StdClass;
     $file->uid = $user->uid;
@@ -540,8 +539,8 @@ function itg_image_croping_crop_image_orignal() {
 
             $scaled = image_scale_and_crop($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height']);
             $image_name = $fields_name . time();
-            $sav = image_save($image, $filepath . '/' . $image_name . '.'.$image_exten.'/');
-            $uri = $filepath . '/' . $image_name . '.'.$image_exten;
+            $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten . '/');
+            $uri = $filepath . '/' . $image_name . '.' . $image_exten;
             $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
             $file = new StdClass;
             $file->uid = $user->uid;
@@ -568,6 +567,9 @@ function itg_image_croping_crop_image_orignal() {
  */
 function mageimagedimesion() {
     $image_dim = array();
+    
+    $image_dim['magazine']['field_magazine_cover_photo']['width'] = 172;
+    $image_dim['magazine']['field_magazine_cover_photo']['height'] = 240;
     // Dimension for videogallery
     $image_dim['videogallery']['field_story_extra_large_image']['width'] = 647;
     $image_dim['videogallery']['field_story_extra_large_image']['height'] = 363;
@@ -591,6 +593,8 @@ function mageimagedimesion() {
     $image_dim['photogallery']['field_story_small_image']['height'] = 127;
     $image_dim['photogallery']['field_story_medium_image']['width'] = 370;
     $image_dim['photogallery']['field_story_medium_image']['height'] = 208;
+    $image_dim['photogallery']['field_story_extra_small_image']['width'] = 88;
+    $image_dim['photogallery']['field_story_extra_small_image']['height'] = 66;
 
     // Dimension for story
     $image_dim['story']['field_story_extra_large_image']['width'] = 647;
@@ -659,7 +663,7 @@ function mageimagedimesion() {
     $image_dim['cooking_tips']['field_story_small_image']['height'] = 127;
     $image_dim['cooking_tips']['field_recipe_writer_image']['width'] = 88;
     $image_dim['cooking_tips']['field_recipe_writer_image']['height'] = 66;
-    
+
     $image_dim['food_news']['field_story_extra_large_image']['width'] = 647;
     $image_dim['food_news']['field_story_extra_large_image']['height'] = 363;
     $image_dim['food_news']['field_story_large_image']['width'] = 483;
@@ -707,11 +711,18 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
         $largsize = '(' . $imgdim[$content_name]['field_story_large_image']['width'] . 'X' . $imgdim[$content_name]['field_story_large_image']['height'] . ')';
         $mediumsize = '(' . $imgdim[$content_name]['field_story_medium_image']['width'] . 'X' . $imgdim[$content_name]['field_story_medium_image']['height'] . ')';
         $extrasmallsize = '(' . $imgdim[$content_name]['field_story_extra_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_extra_small_image']['height'] . ')';
-       $writer_image= '(' . $imgdim[$content_name]['field_recipe_writer_image']['width'] . 'X' . $imgdim[$content_name]['field_recipe_writer_image']['height'] . ')';
+        $writer_image = '(' . $imgdim[$content_name]['field_recipe_writer_image']['width'] . 'X' . $imgdim[$content_name]['field_recipe_writer_image']['height'] . ')';
 
         $smallsize = '(' . $imgdim[$content_name]['field_story_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_small_image']['height'] . ')';
-        if ($content_name == 'photogallery' || $content_name == 'recipe') {
+        if ($content_name == 'photogallery') {
 
+            $checkoption = array(
+                'field_story_large_image' => t("Large Image  $largsize"),
+                'field_story_medium_image' => t("Medium Image $mediumsize"),
+                'field_story_small_image' => t("Small Image  $smallsize"),
+                'field_story_extra_small_image' => t("Extra Small Image $extrasmallsize"));
+        }
+        else if ($content_name == 'recipe') {
             $checkoption = array(
                 'field_story_large_image' => t("Large Image  $largsize"),
                 'field_story_medium_image' => t("Medium Image $mediumsize"),
