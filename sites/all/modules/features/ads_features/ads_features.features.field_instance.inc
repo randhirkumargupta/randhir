@@ -467,7 +467,7 @@ function ads_features_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_code_visibility_flag',
     'label' => 'Code visibility flag',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,

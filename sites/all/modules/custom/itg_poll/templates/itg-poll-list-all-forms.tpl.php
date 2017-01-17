@@ -66,11 +66,11 @@ $isCookies = itg_poll_isCookies($nid);
 $poll_uid = itg_poll_getcurrent_userpoll($nid, $user->uid);
 if (($isCookies != 'yes' && user_is_anonymous()) || (user_is_logged_in() && $poll_uid != $user->uid)) {
   if (isset($nid) && !empty($nid)) {
-    print '<div class="poll-data'.$related_stories_class. $no_image_class.'">' . $poll_banner_image.$title. '<div class="poll-replace-id '.$poll_image_exist_class.'">' . drupal_render(drupal_get_form('itg_poll_form_new', $nid)) . '</div></div>' . $related_stories;
+    print '<div class="poll-data"><div class="'.$related_stories_class. $no_image_class.'">' . $poll_banner_image.$title. '<div class="poll-replace-id '.$poll_image_exist_class.'">' . drupal_render(drupal_get_form('itg_poll_form_new', $nid)) . '</div></div>' . $related_stories.'</div>';
   }
 }
 else {
-  print  '<div class="poll-data'.$related_stories_class. $no_image_class.'">' . $poll_banner_image.$title . '<div class="poll-replace-id '.$poll_image_exist_class.'">' . itg_poll_get_past_data($nid) . '</div></div>' . $related_stories;
+  print  '<div class="poll-data"><div class="poll-data'.$related_stories_class. $no_image_class.'">' . $poll_banner_image.$title . '<div class="poll-replace-id '.$poll_image_exist_class.'">' . itg_poll_get_past_data($nid) . '</div></div>' . $related_stories.'</div>';
 }
 
 //print '<div class="poll-wrapper-next-navigator">' . $next . '</div>';

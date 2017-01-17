@@ -8571,8 +8571,9 @@ div.node{
     }
   }
   [id*="field-gallery-image-values"] .field-name-field-audio,
-  .form-field-name-field-common-audio, 
-  .form-field-name-field-common-audio-file{@extend .hide;}
+ {@extend .hide;}
+/*  .form-field-name-field-common-audio, 
+  .form-field-name-field-common-audio-file*/
 }
 .node-videogallery-form, .node-photogallery-form, .node-story-form{
   .browse-media-file{

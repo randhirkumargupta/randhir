@@ -1342,7 +1342,7 @@ footer{
                     @include display-inline;
                     cursor: pointer;
                 }
-                &:last-child{
+                &:nth-child(3){
                     a{
                         color: $yellow-color; 
                         border-right: none;
@@ -2344,8 +2344,7 @@ footer{
             }
         }
     } 
-    .story-associate-content{
-        height: 340px;
+    .story-associate-content{       
         overflow: hidden;
         .associate-content-block{
             cursor: pointer;
@@ -2353,12 +2352,13 @@ footer{
          @include video-gallery-popup;
          #videogallery-iframe{        
              position: relative;
+              height: 340px;
              top: auto;
              left: auto;
              width: 100%;
-             min-height: 100%;
              z-index: inherit;
              background: #000;
+             display:none;
              .big-story-popup {
                  position: relative;
                  top: auto;

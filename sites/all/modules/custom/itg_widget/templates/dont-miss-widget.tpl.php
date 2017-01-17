@@ -6,8 +6,8 @@
           <?php if (!empty($node_data['uri'])) { ?>
             <div class="dm-pic">
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $node_data['nid']) ?>">
-                <?php  $file_uri = file_create_url($node_data['si_file_uri']);?>
-                  <img src="<?php print $file_uri; ?>" />
+                <?php $file_uri = file_create_url($node_data['si_file_uri']); ?>
+                <img src="<?php print $file_uri; ?>" />
               </a>
             </div>
             <?php
@@ -16,7 +16,7 @@
             ?>
             <div class="dm-pic">
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $node_data['nid']) ?>">
-                  <img width="170" height="127" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                <img width="170" height="127" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
               </a>
             </div>
           <?php } ?>
@@ -29,7 +29,7 @@
 
             <?php if (!empty($node_data['title'])) : ?>    
               <p class="dont-miss-widget dont-miss-<?php echo $node_data['nid'] ?>">
-                <?php echo l(mb_strimwidth($node_data['title'], 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/" . $node_data['nid'])) ?>
+                <?php echo l(mb_strimwidth($node_data['title'], 0, 150, ".."), "node/" . $node_data['nid']) ?>
               </p>
             <?php endif; ?>
 
