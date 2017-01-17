@@ -64,6 +64,7 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id) {
     $destination = 'manage-magazines';
     $form['title']['#description'] = '<p>' . t('Please enter magazine title.') . '</p>';
     $form['actions']['submit']['#submit'][] = 'itg_msi_issue_form_custom_submit_callback';
+    $form['field_print_magazine_issue_date']['#access'] = false;
   }
 
   //Set destination for supplement form
