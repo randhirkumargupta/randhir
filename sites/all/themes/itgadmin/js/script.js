@@ -254,7 +254,7 @@ jQuery(document).ready(function() {
         });
         $('.itg-sub-sub-sub-category').click(function(e) {
             $(this).addClass('active').siblings().removeClass('active');
-            var el = $('.view-content > div > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .term-wrapper > .cmd-heading');
+            var el = $('.view-content > div > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .term-wrapper > .cmd-heading');
             el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
             el.parents('.item-list').removeClass('hide').prev().children('.cmd-heading').removeClass('active');
         });

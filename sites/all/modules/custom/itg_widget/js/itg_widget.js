@@ -4,6 +4,7 @@
  */
 Drupal.behaviors.itg_widgets = {
   attach: function (context, settings) {
+     var base_url = settings.itg_widget.settings.base_url;
     jQuery ("div.big-news-content-videogallery a.has-ajax-big-story").click (function () {
       jQuery ('.big-story-col-1 .loading-popup').show ();
       var nid = jQuery (this).attr ("data-nid");
@@ -104,35 +105,39 @@ Drupal.behaviors.itg_widgets = {
     //            // Prevent default action.
     //            return false;
     //        });
-    jQuery ('.associate-content-block').click (function () {
-      var widgets_type = jQuery (this).attr ('data-widget');      
-      var widgets_type_array = widgets_type.split ("-");
-      var widgets_type = widgets_type_array[0];
-      var widgets_id = widgets_type_array[1];
-      jQuery ("#videogallery-iframe").append('<img class="loading-popup" src="http://qa.indiatodayonline.in/sites/all/themes/itg/images/tab-loading.gif" alt="loading">');
-      jQuery(this).parents('.stryimg').hide(700, function(){
-          jQuery('#videogallery-iframe').show(1000);          
-      });             
-      jQuery.ajax ({
-        url: Drupal.settings.basePath + "associate-photo-video-content/" + widgets_type + "/" + widgets_id,
-        method: 'post',
-        //data: {status_val: 1, section_name: section_name, template_name: template_name, layout_type:layout_type},
-        beforeSend: function () {
-          // $('.itg-ajax-loader').show();
-        },
-        success: function (data) {
-          jQuery ("#videogallery-iframe").html (data);
-          videoGallery ();
-          jQuery('.story-associate-content').css('height', 'auto');
-        }
-      });
-    });
-    jQuery (".story-associate-content #videogallery-iframe").on ('click', '#close-big-story', function () {       
-        jQuery('.story-associate-content').css('height', '340px'); 
-        jQuery('#videogallery-iframe').hide(700, function(){          
-            jQuery('.stryimg').show(1000);         
-            jQuery ("#videogallery-iframe").empty();
-      }); 
+    var videoIframe = jQuery (".story-associate-content #videogallery-iframe");
+    var strImg = jQuery('.story-associate-content .stryimg');
+        strImg.click(function(){
+            videoIframe.show(1000, function(){            
+            var widgets_type = jQuery('.associate-content-block').attr ('data-widget');              
+            var widgets_type_array = widgets_type.split ("-");
+            var widgets_type = widgets_type_array[0];
+            var widgets_id = widgets_type_array[1];  
+            var imgurl = base_url+"/sites/all/themes/itg/images/reload.gif";            
+            videoIframe.append('<img class="loading-popup" src="'+imgurl+'" alt="loading image">');      
+                jQuery.ajax ({
+                  url: Drupal.settings.basePath + "associate-photo-video-content/" + widgets_type + "/" + widgets_id,
+                  method: 'post',
+                  //data: {status_val: 1, section_name: section_name, template_name: template_name, layout_type:layout_type},
+                  beforeSend: function () {
+                    // $('.itg-ajax-loader').show();
+                  },
+                  success: function (data) {
+                   videoIframe.html (data);
+                   videoGallery ();
+                    videoIframe.css('height', 'auto');
+                  }
+                });            
+            });     
+        strImg.hide(1000);                   
+    });    
+    
+    videoIframe.on ('click', '#close-big-story', function () {                      
+        videoIframe.hide(1000, function(){
+            videoIframe.empty();
+            videoIframe.css('height', '340px');
+        });   
+       strImg.show(1000);                                             
     });
 
     jQuery ('#edit-state1').change (function () {

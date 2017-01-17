@@ -745,6 +745,7 @@ function itg_event_backend_block_view($delta = '') {
       break;
     case 'ad_right_sidebar_event':
       $page_name = 'Rest';
+      $data = '';
       //$data['itg_ad'] = get_ad_script($page_name);
       $block['content'] = theme('ad_right_sidebar_block1', array('data' => $data));
       break;
@@ -1754,8 +1755,10 @@ function itg_event_backend_highlights_block_content() {
  * @return string
  */
 function itg_event_backend_highlights_like_dislike($unique_id) {
-  $like = itg_flag_get_count($unique_id, 'like_count');
-  $dislike = itg_flag_get_count($unique_id, 'dislike_count');
+  if (function_exists('itg_flag_get_count')) {
+    $like = itg_flag_get_count($unique_id, 'like_count');
+    $dislike = itg_flag_get_count($unique_id, 'dislike_count');
+  }
   if (!empty($like['like_count'])) {
     $like_count = '(' . $like['like_count'] . ')';
   }
