@@ -538,24 +538,33 @@ function itg_layout_manager_preprocess_page(&$vars) {
     $query->fields('tth', array('parent'));
     $query->join('taxonomy_term_data', 'ttd', 'ttd.tid = tth.tid');
     $query->condition('tth.tid', $arg[2]);
-    $query->condition('ttd.vid', 4);
+    $query->condition('ttd.vid', CATEGORY_MANAGMENT);
     $parent_id = $query->execute()->fetchField();
     if ($parent_id == 0) {
         $tpl_name = get_template_name_by_section_name($arg[2]);
+      
         $tid_val = $arg[2]; //section id
         /* if (!isset($tpl_name)) {
           $tid_val = '';
           $tpl_name = '';
           }
          */
-        if (isset($tpl_name)) {
+        if (!empty($tpl_name)) {
             drupal_set_title('');
             $data = get_layout_details($tid_val, $tpl_name, 'front');
             $vars['widget_data'] = $data;
             $tpl_name = str_replace('--', '__', $tpl_name);
             $vars['theme_hook_suggestions'][] = $tpl_name;
             //$vars['itg_ad'] = get_ad_script($tid_val);
+        } else {
+          $vars['theme_hook_suggestions'][] = 'page__taxonomy_term';
+          // remove the extra vocavolary information on page buttom.
+          unset($vars['page']['content']['system_main']);
         }
+   } else {
+      $vars['theme_hook_suggestions'][] = 'page__taxonomy_term';
+      // remove the extra vocavolary information on page buttom.
+      unset($vars['page']['content']['system_main']);
    }
   }
 }

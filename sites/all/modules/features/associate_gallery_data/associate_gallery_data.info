@@ -1,11 +1,9 @@
-name = Feature for budget
-description = Feature for budget
+name = Associate Gallery Data
 core = 7.x
 package = Features
-version = 7.x-1.3
+dependencies[] = entityreference
 dependencies[] = views
-dependencies[] = views_customstyle
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
-features[views_view][] = budget
+features[views_view][] = associate_gallery
 features_exclude[dependencies][ctools] = ctools

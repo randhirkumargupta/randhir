@@ -165,15 +165,16 @@ function feature_for_yearender_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Extra large image */
-  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
+  /* Field: Content: Medium image */
+  $handler->display->display_options['fields']['field_story_medium_image']['id'] = 'field_story_medium_image';
+  $handler->display->display_options['fields']['field_story_medium_image']['table'] = 'field_data_field_story_medium_image';
+  $handler->display->display_options['fields']['field_story_medium_image']['field'] = 'field_story_medium_image';
+  $handler->display->display_options['fields']['field_story_medium_image']['label'] = '';
+  $handler->display->display_options['fields']['field_story_medium_image']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_story_medium_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_medium_image']['empty'] = '<img  class="no-result-image" src="../sites/all/themes/itg/images/dimage_370X208.jpg">';
+  $handler->display->display_options['fields']['field_story_medium_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_story_medium_image']['settings'] = array(
     'image_style' => 'anchors_landing',
     'image_link' => 'content',
   );
@@ -201,7 +202,7 @@ function feature_for_yearender_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="section-ordering">
-                        <div class="pic">  [field_story_extra_large_image]
+                        <div class="pic">  [field_story_medium_image]
 <span><i class="fa fa-camera"></i> [delta] images</span>
 </div>
 
