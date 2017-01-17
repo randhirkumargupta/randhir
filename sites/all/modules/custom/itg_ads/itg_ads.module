@@ -878,10 +878,10 @@ function get_itg_page_name($placeholder_name) {
     $page_name = $terms[0]->tid;
   } else if ($arg[0] == 'node' && is_numeric($arg[1])) {
     $node_object = menu_get_object();
-    $tid = $node_object->field_primary_category[$node_object->language][0]['value'];
+    $tid = !empty($node_object->field_primary_category[$node_object->language][0]['value']) ? $node_object->field_primary_category[$node_object->language][0]['value'] : '';
     $taxonomy_array = taxonomy_get_parents_all($tid);
     $terms = array_reverse($taxonomy_array);
-    $page_name = $terms[0]->tid;
+    $page_name = !empty($terms[0]->tid) ? $terms[0]->tid : '';
   } else {
     $page_name = t('Rest');
   }
@@ -889,9 +889,12 @@ function get_itg_page_name($placeholder_name) {
   $default_ros_value = drupal_json_decode(variable_get('itg_india_ros_default_val'));
 
   $ad_value_object = check_add_template_final($placeholder_name, $page_name);
-  foreach ($ad_value_object as $chunk_ads_val) {
-    $ad_value = $chunk_ads_val;
+  if (!empty($ad_value_object)) {
+    foreach ($ad_value_object as $chunk_ads_val) {
+      $ad_value = $chunk_ads_val;
+    }          
   }
+  
   //$ad_value = $ad_value_object[$placeholder_name];
 
   if (empty($ad_value)) {
@@ -958,9 +961,11 @@ function itg_ads_node_update($node) {
 function get_desired_code_for_ads_placing($ad_value, $device) {
 
   $code = '';
-  foreach ($ad_value as $chunk_values) {
-    if ($chunk_values['device'] == $device || $chunk_values['device'] == 'both') {
-      $code = $chunk_values['code'];
+  if (!empty($ad_value)) {
+    foreach ($ad_value as $chunk_values) {
+      if ($chunk_values['device'] == $device || $chunk_values['device'] == 'both') {
+        $code = $chunk_values['code'];
+      }
     }
   }
   return $code;

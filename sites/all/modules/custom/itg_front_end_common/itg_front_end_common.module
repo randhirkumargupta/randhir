@@ -350,7 +350,7 @@ function itg_facebook_share_count($url) {
   $content = file_get_contents($run_url);
   $share_count = json_decode($content);
   if(isset($share_count->share->share_count)) {
-  return $share_count->share->share_count;
+    return $share_count->share->share_count;
   }
 }
 
