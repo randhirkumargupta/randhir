@@ -179,7 +179,7 @@ function itg_widget_menu() {
  * @return type
  */
 function itg_widget_site_map() {
-  $tree = extranet_get_nested_tree(4);
+  $tree = extranet_get_nested_tree(CATEGORY_MANAGMENT);
   $keys = array_keys($tree);
   foreach ($keys as $index => $data) {
     $term_array = array($keys[$index] => $tree[$keys[$index]]);
