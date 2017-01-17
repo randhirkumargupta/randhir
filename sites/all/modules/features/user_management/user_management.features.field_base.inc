@@ -173,7 +173,7 @@ function user_management_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_user_gender',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'value' => array(
@@ -226,7 +226,7 @@ function user_management_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_user_pincode',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(),
     'locked' => 0,
@@ -244,7 +244,7 @@ function user_management_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_user_qualification',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'tid' => array(

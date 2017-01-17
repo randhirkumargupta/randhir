@@ -613,18 +613,42 @@ $debug: "width:645px"; // TODO: move to _settings.scss
                 vertical-align: middle;
                 height: 6px;
                 border-radius: 10px;
-                position: relative;
+                position: relative;  
                 &:before{
                     position: absolute;
                     top: 0;
                     left: 0;
                     content: '';
                     height: 6px;
-                    background: #a00606;
-                    width: 10%;
+                    background: #a00606;                   
                     border-radius: 10px;
                 }
             }
+            .progress-bar-1{
+                 &:before{
+                     width: 20%;
+                 }
+            }
+            .progress-bar-2{
+                 &:before{
+                     width: 40%;
+                 }
+            }
+            .progress-bar-3{
+                 &:before{
+                     width: 60%;
+                 }
+            }
+            .progress-bar-4{
+                 &:before{
+                     width: 80%;
+                 }
+            }
+            .progress-bar-5{
+                 &:before{
+                     width: 100%;
+                 }
+            }            
             span.current-badge, span.next-badge{
                 display: inline-block;
                 /* vertical-align: middle; */
@@ -1727,7 +1751,8 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         margin: 15px auto 0;
         display: inherit;
         font-size: 14px;
-        line-height: 32px;
+        line-height: 34px;
+        padding: 0;
         &:hover{
           box-shadow: 0 0 5px 0 #999;
         }

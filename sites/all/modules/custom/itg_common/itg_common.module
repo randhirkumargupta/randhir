@@ -492,6 +492,17 @@ function itg_common_cronapi($op, $job = NULL) {
 }
 
 /**
+ * This function use for remove html special chars
+ */
+function itg_common_remove_extra_html($string) {
+    $return_data = "";
+    if(!empty($string)) {
+        $return_data = preg_replace("/&#?[a-z0-9]{2,8};/i","",$string); 
+    }
+    return $return_data;
+}
+
+/**
  * Implement cron callback for content inactive
  */
 function itg_content_inactive() {

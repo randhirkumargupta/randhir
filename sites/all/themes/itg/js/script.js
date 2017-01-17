@@ -599,7 +599,7 @@ jQuery(document).ready(function () {
       //var stickyHeight = el.height();
 
       jQuery(window).scroll(function(){ 
-         var limit = jQuery('footer').offset().top - totlHeight;                   
+         var limit = jQuery('footer').offset().top - totlHeight;
           var windowTop = jQuery(window).scrollTop();                     
           if(windowTop > 160 ){              
                 var finalWidth = (totlWidth - 1200) / 2 ;
@@ -617,7 +617,7 @@ jQuery(document).ready(function () {
                    'bottom': 'auto'
                });            
           }
-          if(windowTop > limit + 315){              
+          if(windowTop >= limit){              
               el.css({
                    'position': 'absolute',
                    'left': '-60px',
