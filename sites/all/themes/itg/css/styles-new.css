@@ -641,8 +641,22 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   content: '';
   height: 6px;
   background: #a00606;
-  width: 10%;
   border-radius: 10px;
+}
+.total-point-wrapper .pregress-bar .progress-bar-1:before {
+  width: 20%;
+}
+.total-point-wrapper .pregress-bar .progress-bar-2:before {
+  width: 40%;
+}
+.total-point-wrapper .pregress-bar .progress-bar-3:before {
+  width: 60%;
+}
+.total-point-wrapper .pregress-bar .progress-bar-4:before {
+  width: 80%;
+}
+.total-point-wrapper .pregress-bar .progress-bar-5:before {
+  width: 100%;
 }
 .total-point-wrapper .pregress-bar span.current-badge, .total-point-wrapper .pregress-bar span.next-badge {
   display: inline-block;
@@ -1813,7 +1827,8 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   margin: 15px auto 0;
   display: inherit;
   font-size: 14px;
-  line-height: 32px;
+  line-height: 34px;
+  padding: 0;
 }
 .home_page_poll_widget_block .poll-data .poll-replace-id .form-submit:hover {
   box-shadow: 0 0 5px 0 #999;

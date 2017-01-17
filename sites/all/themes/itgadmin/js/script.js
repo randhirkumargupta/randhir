@@ -252,6 +252,12 @@ jQuery(document).ready(function() {
             el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
             el.parents('.item-list').removeClass('hide').prev().children('.cmd-heading').removeClass('active');
         });
+        $('.itg-sub-sub-sub-category').click(function(e) {
+            $(this).addClass('active').siblings().removeClass('active');
+            var el = $('.view-content > div > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .term-wrapper > .cmd-heading');
+            el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
+            el.parents('.item-list').removeClass('hide').prev().children('.cmd-heading').removeClass('active');
+        });
         setTimeout(function() {
             $('.page-category-manager-listing').find('.itg-section').trigger('click');
         }, 10);
