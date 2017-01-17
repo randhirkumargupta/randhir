@@ -122,9 +122,11 @@ function ugc_comment_form($form, &$form_state) {
   
   $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
   $tax = taxonomy_get_tree($vocab_id->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-
+  
+  if(!empty($tax)) {
   foreach ($tax as $key => $val) {
     $op[$val->tid] = trim($val->name);
+  }
   }
   
   $settings = array();
