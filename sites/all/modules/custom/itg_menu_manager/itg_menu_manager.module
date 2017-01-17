@@ -305,7 +305,6 @@ function itg_menu_manager_form_validate($form, &$form_state) {
   
     if ($url_type == 'internal' && !empty($url)) {
       if (!drupal_valid_path($url)) {
-         $errors[] = t("Please enter valid internal url");
         // Not a system URL.
         if (!drupal_lookup_path('source', $url)) {
           $errors[] = t("Please enter valid internal url");

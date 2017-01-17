@@ -4,8 +4,8 @@
       <li class="<?php print $entity['type'] ?> trending-videos-list">
         <?php if (!empty($entity['esi_file_uri'])) { ?>            
           <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
-          <?php $file_uri = file_create_url($entity['esi_file_uri']); ?>
-                  <img src="<?php print $file_uri; ?>" />
+            <?php $file_uri = file_create_url($entity['esi_file_uri']); ?>
+            <img src="<?php print $file_uri; ?>" />
           </a>
           <?php
         }
@@ -16,7 +16,7 @@
           </a>
         <?php } ?>
         <?php if (!empty($entity['title'])) : ?>
-          <?php echo l(mb_strimwidth($entity['title'], 0, 120, ".."), $base_url . '/' . drupal_get_path_alias("node/" . $entity['nid'])) ?>
+          <?php echo l(mb_strimwidth($entity['title'], 0, 120, ".."), "node/" . $entity['nid']) ?>
         <?php endif; ?>
       </li>
     <?php } ?>
