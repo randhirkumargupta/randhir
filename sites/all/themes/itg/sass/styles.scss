@@ -2830,7 +2830,7 @@ h1.category-heading{
                 padding: 0 10px;
             }
         }
-.view-category-wise-content-list{    
+.view-category-wise-content-list, .view-blog-listing{    
     @include listing-with-image(catagory-listing,left,10px,pic,detail);
     .catagory-listing{
         padding: 20px 0;
@@ -2849,6 +2849,17 @@ h1.category-heading{
                 color: #696969;
                 display: none;
             }
+        }
+        span.blog-anchor{
+            a{
+                @include font(12px);
+                font-family: $itg-roboto;
+                color: #a00606;
+                line-height: 12px;
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 400;   
+            }            
         }
     }    
     .catagory-grid{  
@@ -9906,3 +9917,10 @@ h1.about-us-heading{
 }
 
 /*site map css end*/
+/*blog detail page css start*/
+.blog-detail-page{
+    h2, img{
+        margin-bottom: 20px;
+    }   
+}
+/*blog detail page css end*/
