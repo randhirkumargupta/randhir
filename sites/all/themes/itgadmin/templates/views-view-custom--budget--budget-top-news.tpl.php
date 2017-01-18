@@ -22,7 +22,7 @@
                                     print $row['field_story_medium_image'];
                                 }
                                 else {
-                                    print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/dimage_370X208.jpg' />";
+                                    print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/ditg_image370x208.jpg' />";
                                 }
                                 ?>    
 
@@ -41,7 +41,7 @@
                                     print $row['field_story_small_image'];
                                 }
                                 else {
-                                    print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/dimage_170X127.jpg' />";
+                                    print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' />";
                                 }
                                 ?>   
        </a>
