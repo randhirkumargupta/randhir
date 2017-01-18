@@ -48,7 +48,7 @@ if (!empty($data)) :
           else {
             ?>
             <a href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>
-              <img width="647" height="363" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+              <img width="647" height="363" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image647x363.jpg" />
             </a>  
             <div class="story-tag"><?php echo t("Big Story") ?></div>          
             <img class="loading-popup" src="<?php echo drupal_get_path('theme', 'itg') . '/images/tab-loading.gif' ?>" alt="loading">          
