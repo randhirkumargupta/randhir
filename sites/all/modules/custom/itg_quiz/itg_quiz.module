@@ -136,7 +136,7 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
       // Form fields treatment
       $form['title']['#title'] = 'Quiz Title';
       $form['title']['#description'] = '<p>' . t('Please enter quiz title.') . '</p>';
-      $form['actions']['submit']['#value'] = 'Publish';
+      $form['actions']['submit']['#value'] = t('Publish');
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
         '#weight' => 21,
