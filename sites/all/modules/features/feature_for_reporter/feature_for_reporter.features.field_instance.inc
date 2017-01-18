@@ -57,6 +57,84 @@ function feature_for_reporter_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-reporter-field_byline_company'.
+  $field_instances['node-reporter-field_byline_company'] = array(
+    'bundle' => 'reporter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_byline_company',
+    'label' => 'Company',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 31,
+    ),
+  );
+
+  // Exported field_instance: 'node-reporter-field_byline_department'.
+  $field_instances['node-reporter-field_byline_department'] = array(
+    'bundle' => 'reporter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 14,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_byline_department',
+    'label' => 'Department',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 32,
+    ),
+  );
+
   // Exported field_instance: 'node-reporter-field_celebrity_pro_occupation'.
   $field_instances['node-reporter-field_celebrity_pro_occupation'] = array(
     'bundle' => 'reporter',
@@ -177,84 +255,6 @@ function feature_for_reporter_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 8,
-    ),
-  );
-
-  // Exported field_instance: 'node-reporter-field_reporter_company'.
-  $field_instances['node-reporter-field_reporter_company'] = array(
-    'bundle' => 'reporter',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 12,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_reporter_company',
-    'label' => 'company',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 18,
-    ),
-  );
-
-  // Exported field_instance: 'node-reporter-field_reporter_department'.
-  $field_instances['node-reporter-field_reporter_department'] = array(
-    'bundle' => 'reporter',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 13,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_reporter_department',
-    'label' => 'Department',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 19,
     ),
   );
 
@@ -761,6 +761,7 @@ function feature_for_reporter_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('About');
+  t('Company');
   t('Constituancy');
   t('Department');
   t('Designation');
@@ -776,7 +777,6 @@ function feature_for_reporter_field_default_field_instances() {
   t('Profile type');
   t('Section');
   t('Twitter Handle');
-  t('company');
 
   return $field_instances;
 }

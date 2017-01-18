@@ -191,6 +191,8 @@ function itg_reporter_after_build($form, &$form_state) {
   $tid = array_pop($tem_tid)->tid;
   $tem_tid_poli = taxonomy_get_term_by_name('politician', NULL);
   $tid_poli = array_pop($tem_tid_poli)->tid;
+  $tem_tid_repo = taxonomy_get_term_by_name('reporter', NULL);
+  $tid_repo = array_pop($tem_tid_repo)->tid;
   // alter label name
   $form['title']['#title'] = t('Name');
 
@@ -199,10 +201,13 @@ function itg_reporter_after_build($form, &$form_state) {
   $settings['uid'] = $user->uid;
   $settings['politician'] = $tid_poli;
   $settings['anchor'] = $tid;
+  $settings['reporter'] = $tid_repo;
   $settings['ntype'] = $form['type']['#value'];
   drupal_add_js(array('itg_reporter' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_reporter') . '/js/itg_reporter.js');
-
+  $form['#attached']['js'] = array(
+    drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
+  );
   return $form;
 }
 
