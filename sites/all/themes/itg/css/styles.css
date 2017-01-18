@@ -11620,16 +11620,23 @@ h1.about-us-heading + div p {
   clear: both;
 }
 .breakingnew-home .new-detail .marquee {
-  width: 75%;
-  overflow: hidden;
+  width: 78%;
+  height: 33px;
+  position: relative;
   float: left;
+  overflow: hidden;
 }
 .breakingnew-home .new-detail .marquee .field-content {
+  cursor: pointer;
+  position: absolute;
+  left: 10px;
+  margin-right: 10px;
   display: inline-block;
   vertical-align: top;
+  top: 0px;
 }
 .breakingnew-home .new-detail .marquee .field-content a {
-  color: #000;
+  white-space: pre;
 }
 .breakingnew-home .new-detail .social-share {
   float: right;
@@ -11750,56 +11757,22 @@ h1.about-us-heading + div p {
 
 /*magzine lock icon end*/
 /*homepage marquee*/
+.marquee {
+  width: 78%;
+  height: 33px;
+  position: relative;
+}
 .marquee .field-content {
-  margin: 0 auto;
-  overflow: hidden;
-  white-space: nowrap;
-  box-sizing: border-box;
-  -moz-transform: translateX(100%);
-  -webkit-transform: translateX(100%);
-  transform: translateX(100%);
-  -moz-animation: marquee 30s linear infinite;
-  -webkit-animation: marquee 30s linear infinite;
-  animation: marquee 30s linear infinite;
+  cursor: pointer;
+  position: absolute;
+  left: 10px;
+  margin-right: 10px;
+  top: 0px;
+}
+.marquee .field-content a {
+  white-space: pre;
 }
 
-.marquee .field-content:hover {
-  animation-play-state: paused;
-}
-
-/* Move it (define the animation) */
-@-moz-keyframes marquee {
-  0% {
-    -moz-transform: translateX(100%);
-  }
-  100% {
-    -moz-transform: translateX(-100%);
-  }
-}
-@-webkit-keyframes marquee {
-  0% {
-    -webkit-transform: translateX(100%);
-  }
-  100% {
-    -webkit-transform: translateX(-100%);
-  }
-}
-@keyframes marquee {
-  0% {
-    -moz-transform: translateX(100%);
-    /* Firefox bug fix */
-    -webkit-transform: translateX(100%);
-    /* Firefox bug fix */
-    transform: translateX(100%);
-  }
-  100% {
-    -moz-transform: translateX(-100%);
-    /* Firefox bug fix */
-    -webkit-transform: translateX(-100%);
-    /* Firefox bug fix */
-    transform: translateX(-100%);
-  }
-}
 /*homepage marquee end*/
 /*other comment section start*/
 #content #other-comment {
