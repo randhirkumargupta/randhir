@@ -7,7 +7,7 @@ foreach ($rows as $index => $row): ?>
       <div class="blog-image blog-image-<?php print $key ?>">
         <?php if ($row['field_story_extra_large_image'] == 'notFound') : ?>
           <?php
-          $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all.png' />";
+          $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' />";
           print l($img, 'node/' . $row['nid'], array('html' => TRUE));
           ?>
         <?php else : ?>
