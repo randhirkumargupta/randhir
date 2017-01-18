@@ -2079,10 +2079,11 @@
         }
     }
     /*CSS end sidebar */
-    .view-category-wise-content-list{
-        h1{
+    /*start category wise content list css*/
+    h1.category-heading{
             @include font(32px,46px,400);                
-        }    
+        } 
+    .view-category-wise-content-list, .view-blog-listing{           
         .catagory-listing{        
             .pic{
                 width: 170px;           
