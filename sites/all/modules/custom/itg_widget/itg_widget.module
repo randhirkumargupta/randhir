@@ -194,8 +194,8 @@ function itg_widget_site_map() {
       $right_tree .= extranet_output_nested_tree($term_array);
     }
   }
-  $print_tree = '<div class="row"><div class="col-md-6">' . $left_tree . '</div> <div class="col-md-6">' . $right_tree . '</div></div>';
-  return t("<h2>Site Map</h2>") . $print_tree;
+  $print_tree = '<div class="row site-map"><div class="col-md-6">' . $left_tree . '</div> <div class="col-md-6">' . $right_tree . '</div></div>';
+  return  $print_tree;
 }
 
 /**

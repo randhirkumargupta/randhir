@@ -9945,3 +9945,10 @@ span.file a {
     padding-right: 12px;
     vertical-align: top;
 }*/
+.node-quiz-form #tab-quiz-publish-unpublish {
+  display: none;
+}
+
+.view .view-filters #views-exposed-form-section-wise-content-ordering-list-page .views-exposed-form .views-submit-button .form-submit {
+  height: 36px;
+}
