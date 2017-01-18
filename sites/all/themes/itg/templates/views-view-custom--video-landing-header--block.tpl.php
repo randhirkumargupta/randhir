@@ -42,7 +42,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                     $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $video_value->dailymotion_thumb_url . '" height="66" width="88"></li>';
                                 }
                                 else {
-                                    $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/default_for_all.png" height="66" width="88"></li>';
+                                    $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88"></li>';
                                 }
                                 $ads_flag = 0;
                                 if ($video_value->field_include_ads_value == 'yes') {

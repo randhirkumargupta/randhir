@@ -16,7 +16,7 @@
             ?>
             <div class="dm-pic">
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $node_data['nid']) ?>">
-                <img width="170" height="127" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                <img width="170" height="127" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg" />
               </a>
             </div>
           <?php } ?>

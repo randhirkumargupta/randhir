@@ -9,7 +9,7 @@
         </a>
       <?php else : ?>
         <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[0]['nid']); ?>">
-          <img width="483" height="271" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/dimage483x271.jpeg' ?>" />
+          <img width="483" height="271" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image483x271.jpg' ?>" />
         </a>
       <?php endif; ?>
 
@@ -27,7 +27,7 @@
         </a>
       <?php else : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[1]['nid']); ?>">
-          <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/dimage237x133.jpeg" />
+          <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image237x133.jpg" />
         </a>
       <?php endif; ?>
       <?php if (!empty($data[1]['title'])) : ?>
@@ -44,7 +44,7 @@
         </a>
       <?php else : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[2]['nid']); ?>">
-          <img src="<?php print$base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/dimage237x133.jpeg" />
+          <img src="<?php print$base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image237x133.jpg" />
         </a>
       <?php endif; ?>
       <?php if (!empty($data[2]['title'])) : ?>

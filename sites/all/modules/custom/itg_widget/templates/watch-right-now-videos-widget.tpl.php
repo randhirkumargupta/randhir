@@ -17,7 +17,7 @@
           else {
             ?>
             <a href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $video_data['nid']); ?>" class="pic">
-              <img alt="" width='170' height='127'  src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_video.jpg' />
+              <img alt="" width='170' height='127'  src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg' />
             </a>
           <?php } ?>
             <?php if (!empty($video_data['title'])) : ?>

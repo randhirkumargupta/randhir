@@ -26,7 +26,7 @@ global $base_url;
         <?php else : ?>
           <div class="pic">
             <?php
-            $img = "<img width='88' height='66'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_video.jpg' />";
+            $img = "<img width='88' height='66'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg' />";
             ?>
             <?php print l($img, 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>             
           </div>
