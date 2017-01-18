@@ -245,7 +245,6 @@ function features_for_photo_list_of_category_views_default_views() {
   $handler->display->display_options['fields']['field_story_small_image']['field'] = 'field_story_small_image';
   $handler->display->display_options['fields']['field_story_small_image']['label'] = '';
   $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_small_image']['empty'] = '<img src="../sites/all/themes/itg/images/dimage_170X127.jpg" width="170" height="127" class=\'no-result-image\'>';
   $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
     'image_style' => 'video_landing_page_170_x_127',
@@ -384,7 +383,6 @@ function features_for_photo_list_of_category_views_default_views() {
   $handler->display->display_options['fields']['field_story_small_image']['field'] = 'field_story_small_image';
   $handler->display->display_options['fields']['field_story_small_image']['label'] = '';
   $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_small_image']['empty'] = '<img src="../sites/all/themes/itg/images/dimage_170X127.jpg" width="170" height="127" class=\'no-result-image\'>';
   $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
     'image_style' => 'video_landing_page_170_x_127',
@@ -481,7 +479,6 @@ function features_for_photo_list_of_category_views_default_views() {
   $handler->display->display_options['fields']['field_story_small_image']['field'] = 'field_story_small_image';
   $handler->display->display_options['fields']['field_story_small_image']['label'] = '';
   $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_small_image']['empty'] = '<img src="../sites/all/themes/itg/images/dimage_170X127.jpg" width="170" height="127" class=\'no-result-image\'>';
   $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
     'image_style' => 'video_landing_page_170_x_127',
@@ -602,7 +599,6 @@ return $_GET[\'category\'];
   $handler->display->display_options['fields']['field_story_small_image']['field'] = 'field_story_small_image';
   $handler->display->display_options['fields']['field_story_small_image']['label'] = '';
   $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_small_image']['empty'] = '<img src="../sites/all/themes/itg/images/dimage_170X127.jpg" width="170" height="127" class=\'no-result-image\'>';
   $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
     'image_style' => 'video_landing_page_170_x_127',
@@ -859,7 +855,6 @@ return $_GET[\'category\'];
   $handler->display->display_options['fields']['field_story_small_image']['field'] = 'field_story_small_image';
   $handler->display->display_options['fields']['field_story_small_image']['label'] = '';
   $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_small_image']['empty'] = '<img src="../sites/all/themes/itg/images/dimage_170X127.jpg" width="170" height="127" class=\'no-result-image\'>';
   $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
     'image_style' => 'video_landing_page_170_x_127',
@@ -943,7 +938,6 @@ return $_GET[\'category\'];
   $handler->display->display_options['fields']['field_story_small_image']['field'] = 'field_story_small_image';
   $handler->display->display_options['fields']['field_story_small_image']['label'] = '';
   $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_small_image']['empty'] = '<img src="../sites/all/themes/itg/images/dimage_170X127.jpg" width="170" height="127" class=\'no-result-image\'>';
   $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
     'image_style' => 'video_landing_page_170_x_127',
@@ -1089,7 +1083,6 @@ return $_GET[\'category\'];
   $handler->display->display_options['fields']['field_story_small_image']['field'] = 'field_story_small_image';
   $handler->display->display_options['fields']['field_story_small_image']['label'] = '';
   $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_small_image']['empty'] = '<img src="../sites/all/themes/itg/images/dimage_170X127.jpg" width="170" height="127" class=\'no-result-image\'>';
   $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
     'image_style' => '',
@@ -1251,7 +1244,6 @@ return $_GET[\'category\'];
   $handler->display->display_options['fields']['field_story_small_image']['field'] = 'field_story_small_image';
   $handler->display->display_options['fields']['field_story_small_image']['label'] = '';
   $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_small_image']['empty'] = '<img src="../sites/all/themes/itg/images/dimage_170X127.jpg" width="170" height="127" class=\'no-result-image\'>';
   $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
     'image_style' => '',
