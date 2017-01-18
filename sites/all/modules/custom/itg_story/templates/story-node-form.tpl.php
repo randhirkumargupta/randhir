@@ -8,6 +8,8 @@
                 <?php print drupal_render($form['field_story_select_supplement']); ?>
                 <?php print drupal_render($form['field_story_issue_date']); ?>
                 <?php print drupal_render($form['title']); ?>
+                <?php print drupal_render($form['field_emoji']); ?>
+                <?php print drupal_render($form['field_emoji_position']); ?>
                 <?php print drupal_render($form['field_story_magazine_headline']); ?>
                 <?php print drupal_render($form['field_story_category']); ?>
                 <?php print drupal_render($form['field_primary_cat_data']); ?>

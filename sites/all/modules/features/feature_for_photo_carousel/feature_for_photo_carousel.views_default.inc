@@ -1263,7 +1263,7 @@ function feature_for_photo_carousel_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = ' | <span><a data-view="photo_carousel_widget" data-page="video_carousel" data-nid="[nid]" data-queueid=\'10\' class="remove_from_nodequeue_draggable_view" href="#"> <span class="move-link">Remove</span><a></span>';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = ' | <a href="move-dont-miss-widget-node/video_carousel_list_widget///[nid]"> <span class="move-link">Remove</span></a>';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Section wise ordering content: weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
