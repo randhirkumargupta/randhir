@@ -9865,3 +9865,41 @@ h1.about-us-heading{
     }
 }
 /*other comment section end*/
+
+/*site map css start*/
+.site-map{
+    ul{
+        @extend .list-none;       
+    }
+    .col-md-6{
+        > ul{            
+            > li{
+                font-size: 20px;
+                margin-bottom: 35px;
+                text-transform: uppercase;
+                color:#000;
+                font-weight:600;
+                font-family:$itg-roboto;
+                ul{
+                    margin-top: 20px;
+                    li{
+                        margin-bottom: 8px;
+                        a{
+                            color: #7e7e7e;
+                            font-size:14px;   
+                            text-transform: capitalize;
+                            font-weight:400;
+                            font-family:$itg-robotoslab;
+                        }                        
+                    }
+                    ul{
+                        padding-left: 25px;
+                        margin-top: 15px;
+                    }
+                }
+            }
+        }
+    }    
+}
+
+/*site map css end*/
