@@ -114,10 +114,10 @@
               </div>
               <?php } ?>
               
-              <?php if($node->field_ntf_assign_story[LANGUAGE_NONE][0]['value']) { ?>
+              <?php if($node->field_news_cid[LANGUAGE_NONE][0]['target_id']) { ?>
               <div class="field">
                 <div class="field-label">Assign Story:</div>
-                <div class="field-items"><?php print $node->field_ntf_assign_story[LANGUAGE_NONE][0]['value'] ? 'Yes' : 'No'; ?></div>
+                <div class="field-items"><?php print $node->field_news_cid['und'][0]['target_id']; ?></div>
               </div>
               <?php } ?>
             </div>
