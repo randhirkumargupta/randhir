@@ -542,13 +542,14 @@ function itg_layout_manager_preprocess_page(&$vars) {
     $parent_id = $query->execute()->fetchField();
     if ($parent_id == 0) {
         $tpl_name = get_template_name_by_section_name($arg[2]);
+      
         $tid_val = $arg[2]; //section id
         /* if (!isset($tpl_name)) {
           $tid_val = '';
           $tpl_name = '';
           }
          */
-        if (isset($tpl_name)) {
+        if (!empty($tpl_name)) {
             drupal_set_title('');
             $data = get_layout_details($tid_val, $tpl_name, 'front');
             $vars['widget_data'] = $data;
