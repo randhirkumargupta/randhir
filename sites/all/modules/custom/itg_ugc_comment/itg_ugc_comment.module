@@ -7,7 +7,7 @@
  * Contains functionality related to User Generated Comment.
  *
  */
-
+module_load_include('inc', 'itg_ugc_comment', 'includes/itg_comment_config');
 /**
  * Implements hook_menu().
  */
@@ -42,6 +42,15 @@ function itg_ugc_comment_menu() {
     'access callback' => TRUE,
     'file' => 'includes/ugc_comment_listing.inc',
   );
+  
+  $items['comment-global-config'] = array( //this creates a URL that will call this form at "examples/form-example"
+    'title' => 'Configuration Form', //page title
+    'description' => '',
+    'page callback' => 'drupal_get_form', //this is the function that will be called when the page is accessed.  for a form, use drupal_get_form
+    'page arguments' => array('comment_global_config'), //put the name of the form here
+    'access arguments' => array('access global comment configuration'),
+  );
+  
   return $items;
 }
 
@@ -156,7 +165,7 @@ function ugc_comment_form_submit($form, &$form_state) {
   $page_id = $form_state['values']['page_id'];
   $parent_id = $form_state['values']['parent_id'];
   $comment_date = date('d-m-Y');
-  $comment_date_time = date('d-m-Y h:i:s');
+  $comment_date_time = date('d-m-Y H:i:s');
   // drupal_set_message(t('The form has been submitted.'));
   if (function_exists('mongodb')) {
     $con = mongodb();
@@ -194,7 +203,7 @@ function itg_ugc_comment_block_view($delta = '') {
       }
       $page_id = arg(1);
       
-      $data = $people->find(array('page_id' => $page_id, 'parent_comment_id' => "0"));
+      $data = $people->find(array('page_id' => $page_id, 'parent_comment_id' => "0"))->sort(array('comment_date_time' => -1));
       foreach ($data as $my_data) {        
        $contect .= getmycomments($my_data);
       }
@@ -232,9 +241,8 @@ function itg_ugc_comment_theme($existing, $type, $theme, $path) {
 */
 function getmycomments($data) {
   global $base_url, $user;
-  
   if (function_exists(itg_sso_url) && $user->uid == 0) {
-  //$comment_share = "<a class='def-cur-pointer comment-social-share'>".t('share')."</a>";
+  $comment_share = "<a class='def-cur-pointer comment-social-share'>".t('share')."</a>";
   }    
   $image = $base_url.'/sites/all/themes/rubik/images/user-default.png';
   $contect .= "<div class='itg-comment'>
@@ -242,7 +250,7 @@ function getmycomments($data) {
                 <img src= $image width='50' height='50'></div>
                 <div class='comment-details'><div class='comment-name'>" . $data['name'] . "</div>
                 <div class='comment-body'>" . $data['comment'] . "</div>
-                <span class='comment-timestamp'>" . $data['comment_date'] . "</span>
+                <span class='comment-timestamp'>" .  format_interval((time() - strtotime($data['comment_date_time'])) , 2) . t(' ago') . "</span>
                 <a href='javascript:' class='reply' id='" . $data['_id'] . "'>".t('Reply')."</a>".$comment_share."</div>";
   
   if (function_exists('mongodb')) {
@@ -251,7 +259,8 @@ function getmycomments($data) {
 
   $relation_id = $data['_id'];
   $reply_comment = $con->itgcms_comment;
-  $reply_data = $reply_comment->find(array('parent_comment_id' => "$relation_id"));
+  $reply_data = $reply_comment->find(array('parent_comment_id' => "$relation_id"))->sort(array("comment_date_time"=> -1));
+  
   
   $contect .= "<div class='inner-comment'>";
   
