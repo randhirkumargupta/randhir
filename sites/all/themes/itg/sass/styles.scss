@@ -2810,12 +2810,27 @@ footer{
 } 
 /*End snap post css*/
 /*Start category wise content list css*/
-.view-category-wise-content-list{
-    h1{
+h1.category-heading{
         @include font(25px,40px,700);        
         border-top: 1px solid $border-color;
         border-bottom: 1px solid $border-color;
     }
+    .list-grid{
+            margin: 20px 0;
+            font-size: 18px;
+            font-family: $itg-roboto;
+            text-align: right;
+            font-weight:600;
+            a{                
+                &:hover{
+                    color:#a00606;
+                }
+            }
+            span.pipline {
+                padding: 0 10px;
+            }
+        }
+.view-category-wise-content-list{    
     @include listing-with-image(catagory-listing,left,10px,pic,detail);
     .catagory-listing{
         padding: 20px 0;
@@ -2835,28 +2850,16 @@ footer{
                 display: none;
             }
         }
-    }
-    .list-grid{
-            margin: 20px 0;
-            font-size: 16px;
-            font-family: roboto;
-            a{                
-                &:hover{
-                    color:#a00606;
-                }
-            }
-            span.pipline {
-                padding: 0 10px;
-            }
-        }
-    .catagory-grid{         
+    }    
+    .catagory-grid{  
+        @include clearfix;
         h3{
             font-size: 15px;
             line-height: 20px;
             margin-top: 5px;
         }
         p{
-            color: #777;
+            color: #696969;
             margin-top: 10px;
         }
         .col-md-3{
