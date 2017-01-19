@@ -158,7 +158,7 @@ if (!empty($content)):
                                               <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>
                                               <?php print '<li>'.$read_later.'</li>'; ?>                                         
                                             <?php else: ?>
-                                              <?php if (function_exists(itg_sso_url)): ?>
+                                              <?php if (function_exists('itg_sso_url')): ?>
                                                 <?php print '<li>'.itg_sso_url('<i class="fa fa-bookmark"></i>' . t('READ LATER') .'', t('READ LATER')).'</li>'; ?>
                                               <?php endif; ?>
 
