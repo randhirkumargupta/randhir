@@ -12,28 +12,35 @@
  * @return bool
  */
 function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
-
+  if (!empty($node->field_story_category[LANGUAGE_NONE])) {
+    foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $values) {
+      $cat_array[] = $values['tid'];
+    }
+  }
   $template_node = node_load($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
-  
+
   // TODO: Define globally
   $user_email_arr = itg_newslatter_get_subscribe_users_email();
   $user_email_str = implode(',', $user_email_arr);
-
   // Get Mail content
   if ($type == 'stories') {
-    $mail_content = itg_get_newsletter_mail_content_stories($template_node);
+    if (!empty($cat_array)) {
+      $mail_content = itg_get_newsletter_mail_content_stories($template_node, 'section', $cat_array);
+    }
+    else {
+      $mail_content = itg_get_newsletter_mail_content_stories($template_node);
+    }
   }
   else {
     $mail_content = itg_get_newsletter_mail_content($node, $template_node);
   }
-
   $params = array(
     'body' => $mail_content,
     'subject' => 'India Today Newsletter | ' . $template_node->field_news_title[LANGUAGE_NONE][0]['value'],
   );
 
   $mail = drupal_mail('itg_newsletter', 'send_newsletter', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
-  
+
   if ($mail['result']) {
     drupal_set_message(t('Newsletter has been sent successfully.'));
     if ($news_eng_type == 'automatically') {
@@ -73,7 +80,9 @@ function itg_get_newsletter_mail_content($node, $template_node) {
         <td colspan="2" style="padding: 10px 20px;">
           <table cellspacing="0" cellpadding="0" style="width: 100%;">';
 
+
   foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
+
     $news_detail = entity_load('field_collection_item', array($news_arr['value']));
     $title = $news_detail[$news_arr['value']]->field_news_title[LANGUAGE_NONE][0]['value'];
     $kicker = $news_detail[$news_arr['value']]->field_news_kicker[LANGUAGE_NONE][0]['value'];
@@ -111,7 +120,6 @@ function itg_get_newsletter_mail_content($node, $template_node) {
               </td></tr>';
     }
   }
-
   $content .= $news_content . '</table>
       </td>
     </tr><tr>
@@ -121,7 +129,6 @@ function itg_get_newsletter_mail_content($node, $template_node) {
     </tr>';
 
   $content .= '</table><p>&nbsp;</p><p>Thanks,</p><p>India Today Group</p></body></html>';
-
   return $content;
 }
 
@@ -131,11 +138,13 @@ function itg_get_newsletter_mail_content($node, $template_node) {
  * @param object $template_node
  * @return string
  */
-function itg_get_newsletter_mail_content_stories($template_node) {
+function itg_get_newsletter_mail_content_stories($template_node, $news_content = NULL, $section = array()) {
   global $base_url;
 
   $banner = $base_url . str_replace('public://', '/sites/default/files/', $template_node->field_newst_banner[LANGUAGE_NONE][0]['uri']);
-  $footer = $template_node->body[LANGUAGE_NONE][0]['value'];
+  $footerData = $template_node->body[LANGUAGE_NONE][0]['value'];
+  $footer = preg_replace("/[0-9]{4}/", date('Y'), $footerData);
+
 
   $content = '<!DOCTYPE html> 
   <html xmlns:v="urn:schemas-microsoft-com:vml">
@@ -149,9 +158,12 @@ function itg_get_newsletter_mail_content_stories($template_node) {
   $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">
           <table cellspacing="0" cellpadding="0" style="width: 100%;">';
-
-  $story_nodes = itg_newsletter_get_top_stories();
-
+  if ($news_content == 'section') {
+    $story_nodes = itg_newsletter_get_section_stories($section);
+  }
+  else {
+    $story_nodes = itg_newsletter_get_top_stories();
+  }
   foreach ($story_nodes as $news_array) {
     $news_detail = node_load($news_array);
 
@@ -167,15 +179,15 @@ function itg_get_newsletter_mail_content_stories($template_node) {
 
     $link = $base_url . '/node/' . $news_detail->nid;
 
-    $news_content = '<tr>
+    $content .= '<tr>
                <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
                 <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;">' . l($title, $link, array('attributes' => array('target' => '_blank'))) . '</h2>
                 <p style="margin: 0; font-size: 14px;">' . $kicker . '.</p>
               </td></tr>';
   }
-
-  $content .= $news_content . '</table>
+  $content .= '</table>
+    
       </td>
     </tr><tr>
       <td colspan="2">
@@ -184,9 +196,7 @@ function itg_get_newsletter_mail_content_stories($template_node) {
     </tr>';
 
   $content .= '</table><p>&nbsp;</p><p>Thanks,</p><p>India Today Group</p></body></html>';
-
   return $content;
-
 }
 
 /**
@@ -195,18 +205,18 @@ function itg_get_newsletter_mail_content_stories($template_node) {
  */
 function itg_update_newsletter_cron_tbl($nid) {
   $query = db_select('itg_cron_newsletter', 'nc')
-    ->fields('nc', array('nid', 'type', 'scheduled_time', 'frequency'))
-    ->condition('nc.nid', $nid);
+      ->fields('nc', array('nid', 'type', 'scheduled_time', 'frequency'))
+      ->condition('nc.nid', $nid);
   $result = $query->execute();
   $records = $result->fetchAssoc();
 
   if ($records['type'] == 'manual') {
     db_update('itg_cron_newsletter')
-      ->fields(array(
-        'status' => 1,
-      ))
-      ->condition('nid', $nid, '=')
-      ->execute();
+        ->fields(array(
+          'status' => 1,
+        ))
+        ->condition('nid', $nid, '=')
+        ->execute();
   }
   else {
 
@@ -229,14 +239,14 @@ function itg_update_newsletter_cron_tbl($nid) {
 
     // Update cron table scheduled time after sending mail
     db_update('itg_cron_newsletter')
-      ->fields(array(
-        'scheduled_time' => $scheduled_time,
-      ))
-      ->condition('nid', $nid, '=')
-      ->execute();   
+        ->fields(array(
+          'scheduled_time' => $scheduled_time,
+        ))
+        ->condition('nid', $nid, '=')
+        ->execute();
     //field_survey_start_date update after runing cron.
     $node_load_data = node_load($nid);
-    $new_time_value = date('Y-m-d 00:00:00' , $scheduled_time);
+    $new_time_value = date('Y-m-d 00:00:00', $scheduled_time);
     $node_load_data->field_survey_start_date[LANGUAGE_NONE][0]['value'] = $new_time_value;
     field_attach_update('node', $node_load_data);
   }
