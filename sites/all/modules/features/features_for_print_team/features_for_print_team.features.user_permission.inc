@@ -10,6 +10,35 @@
 function features_for_print_team_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'access PDF version'.
+  $permissions['access PDF version'] = array(
+    'name' => 'access PDF version',
+    'roles' => array(
+      'Co-ordinator' => 'Co-ordinator',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'print_pdf',
+  );
+
+  // Exported permission: 'access print'.
+  $permissions['access print'] = array(
+    'name' => 'access print',
+    'roles' => array(
+      'Co-ordinator' => 'Co-ordinator',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'print',
+  );
+
+  // Exported permission: 'administer print'.
+  $permissions['administer print'] = array(
+    'name' => 'administer print',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'print',
+  );
+
   // Exported permission: 'create print_team_integration content'.
   $permissions['create print_team_integration content'] = array(
     'name' => 'create print_team_integration content',
@@ -102,6 +131,15 @@ function features_for_print_team_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'actions_permissions',
+  );
+
+  // Exported permission: 'node-specific print configuration'.
+  $permissions['node-specific print configuration'] = array(
+    'name' => 'node-specific print configuration',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'print_ui',
   );
 
   // Exported permission: 'skip comment approval'.

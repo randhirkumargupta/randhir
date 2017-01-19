@@ -58,6 +58,15 @@ function itg_event_registration_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_event_registration.inc',
   );
+  $items['event-registration-config'] = array(
+    'title' => 'Registration Fields Configuration',
+    //'page callback' => 'itg_event_registration_fields_configuration',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_event_registration_fields_configuration_form'),    
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_event_registration_configuration.inc',
+  );
   return $items;
 }
 
@@ -522,4 +531,18 @@ function itg_event_registration_form_taxonomy_form_term_alter(&$form, &$form_sta
     }
   }
   
+}
+
+function itg_event_registration_fields_configuration_form_submit($form, &$form_state) {
+//  p($form_state['values']);
+//  db_merge('itg_event_registration_field_config')
+//      ->key(array('event_nid' => 524, 'field_machine_name' => $field_machine_name))
+//      ->fields(array(
+//        'event_nid' => $selection_id,
+//        'field_machine_name' => $primary_category,
+//        'field_label' => $widget,
+//        'visiblity' => $issue_date,
+//        'required' => --$min_weight,
+//      ))
+//      ->execute();
 }
