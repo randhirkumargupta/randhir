@@ -17,9 +17,11 @@ function itg_budget_predictor_get_taxonomy() {
   global $user, $base_url;
   $user_id = $user->uid;
   $arg = arg();
-  $section_id = isset($arg[1]) ? $arg[1] : '';
+  $section_id = isset($arg[2]) ? $arg[2] : '';
   $cookies_id = $_COOKIE['COOKIES_IT_' . $section_id];
-  if ($user_id && $cookies_id) {
+  $exist_predictor = check_exist_predictor($user_id, $section_id); 
+  
+  if(empty($exist_predictor) && $user_id && $cookies_id) {
     update_user_by_cookies($user_id, $section_id, $cookies_id);
   }
 
@@ -648,7 +650,6 @@ function itg_manage_budget() {
  */
 function itg_manage_budget_validate($form, &$form_state) {
   $budget_action = $form_state['values']['budget_action'];
-  //if (empty($budget_action)) {
   $budget_section = $form_state['values']['budget_section'];
   $query = db_select('itg_manage_budget', 'm');
   $query->condition('m.budget_section', $budget_section, '=');
@@ -661,7 +662,6 @@ function itg_manage_budget_validate($form, &$form_state) {
   if ($results->id) {
     form_set_error('field', t('Budget Predictor already exist.'));
   }
-  // }
 }
 
 /**
@@ -882,4 +882,20 @@ function update_user_by_cookies($user_id, $section_id, $cookies_id) {
       ->condition('cookies_id', $cookies_id, '=')
       ->condition('user_id', 0, '=')
       ->execute();
+}
+
+	/**
+ * check existing user play predictor widget. 
+ * @param int $user_id
+ * @param int $section_id
+ * @param string $cookies_id
+ * @return int
+ */
+function check_exist_predictor($user_id, $section_id) {
+    return db_select('itg_budget_predictor')
+          ->fields(NULL, array('user_id'))
+          ->condition('user_id', $user_id, '=')
+          ->condition('section_id', $section_id)
+          ->countQuery()->execute()
+          ->fetchField();
 }
