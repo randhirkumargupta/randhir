@@ -26,7 +26,10 @@ if (!empty($content)):
     // get global comment config    
 
     $config_name = trim($global_comment_last_record[0]->config_name);
-
+    
+    // get comment count
+    
+    $get_comment_count = $content['comment_count'];
 
     // get developing story status
 
@@ -583,7 +586,7 @@ if (!empty($content)):
                                 }
                                 ?></span></a></li>
     <?php } if ($config_name == 'other') { ?> 
-                                <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span><?php print $comment_count; ?></span></a></li>
+                                <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span><?php print $get_comment_count; ?></span></a></li>
                             <?php } ?>
                             <li class="mhide"><span class="share-count"><?php if (!empty($tot_count)) {
                             print $tot_count;
