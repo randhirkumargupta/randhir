@@ -11,8 +11,9 @@ global $base_url;
     <h3><?php print $title; ?></h3>
 <?php endif; ?>
 
+    <div class="row catagory-grid">
     <?php foreach ($rows as $id => $row): ?>
-        <div class="catagory-grid-view">
+        <div class="catagory-grid-view col-md-3 col-sm-4 col-xs-6">
             <div class="pic">
                 <?php if ($row['field_story_small_image'] != ''): ?>
                     <?php print $row['field_story_small_image']; ?>
@@ -37,3 +38,4 @@ global $base_url;
             </div>
         </div>
 <?php endforeach; ?>
+</div> 

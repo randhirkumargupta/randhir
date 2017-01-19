@@ -129,13 +129,14 @@ function itg_quiz_theme() {
 function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'quiz_node_form') {
-    
+      
       // Set Destination
       $destination = 'manage-quiz';
      
       // Form fields treatment
       $form['title']['#title'] = 'Quiz Title';
       $form['title']['#description'] = '<p>' . t('Please enter quiz title.') . '</p>';
+      $form['actions']['submit']['#value'] = t('Publish');
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
         '#weight' => 21,
@@ -310,6 +311,9 @@ function itg_quiz_node_presave($node){
   
   // Publish/unpublish functionality for quiz
   if ($node->type == 'quiz') {
+    if ($node->op == 'Publish') {
+      $node->field_quuiz_publish[LANGUAGE_NONE][0]['value'] = 1;
+    }
     if ($node->is_new == 1) {
       $node->status = $node->field_quuiz_publish[LANGUAGE_NONE][0]['value'] ? 1: 0;
     }

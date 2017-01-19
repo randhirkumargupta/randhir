@@ -115,7 +115,7 @@ window.addEventListener("message", function(ev) {
         $taxonomy_url = $base_url."/taxonomy/term/$arg[2]";
         $term = taxonomy_term_load($arg[2]);
         $header_content = '<h1 class="category-heading">' . $term->name . '</h1>';
-        $header_content .= '<div class="list-grid"><i class="fa fa-list" aria-hidden="true"></i> ' .l(t('List'),$taxonomy_url, array('query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span><i class="fa fa-th" aria-hidden="true"></i> '.l(t('Grid'),$taxonomy_url ,array('query'=>array('view_type'=>'grid'))).'</div>';
+        $header_content .= '<div class="list-grid">' .l(t('<i class="fa fa-list" aria-hidden="true"></i> List'),$taxonomy_url, array('html'=>true,'query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span>'.l(t('<i class="fa fa-th" aria-hidden="true"></i> Grid'),$taxonomy_url ,array('html'=>true,'query'=>array('view_type'=>'grid'))).'</div>';
         print $header_content;
       if(!isset($_GET['view_type']) || (isset($_GET['view_type']) && $_GET['view_type'] == 'list')) {
         // show list view.
