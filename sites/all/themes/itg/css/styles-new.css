@@ -5691,6 +5691,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .career-graph .career-graph-data img {
     max-width: 90px;
   }
+
+  .personal-list > li .personal-details .personal-pic {
+    height: auto;
+  }
 }
 @media all and (max-width: 480px) {
   .photos-videos-wrapper .movie-videos,
