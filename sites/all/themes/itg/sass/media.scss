@@ -330,6 +330,39 @@
     font-size: 15px;
 }
 
+/*event page css start*/
+.event-add-header{
+    display: none;
+}
+#block-menu-menu-event-menu{
+    ul{
+        li{
+            a{
+                padding: 0 8px;
+            }
+        }
+    }
+    .event-detail .event-vanue-detail-place{
+        width: 100%;
+        text-align: center;
+        padding: 0;
+    }
+}
+#block-itg-event-backend-post-event-block{
+    .content-detail .side-left{
+        padding-right: 15px;
+    }
+    .top-tab ul li{
+        padding: 5px;
+        width: 32.3%;
+        text-align: center;
+        span{
+            display: block;        
+            margin-bottom: 5px;
+        }
+    }
+} 
+/*event page css end*/
 
 }   
 @media only screen and (max-width:991px){
@@ -352,8 +385,7 @@
 #block-menu-menu-event-menu{
     .mobile-nav{
         color: #fff;
-        font-size: 30px;
-        padding: 0 15px;
+        font-size: 26px;        
         height: 40px;
         line-height: 40px;        
     }
@@ -366,7 +398,7 @@
                 line-height: 40px;
             }
         }
-    }
+    }   
 }
 /* end Event page mobile nav*/
 /*story page css*/
@@ -1335,6 +1367,20 @@
     }
 }
 /*ask an expret css end*/
+/*event page css start*/
+#block-menu-menu-event-menu{
+     .col-md-4{
+        background: #fff;
+        padding-top: 10px;
+    }
+    .event-detail .event-str-date{
+        font-size: 20px;
+    }
+}
+/*event page css end*/
+
+
+
 }
 
 
@@ -1676,7 +1722,22 @@
 }
 /*ask an expret css end*/
 
-
+/*event page css start*/
+#block-menu-menu-event-menu{
+     .col-md-4{
+        background: #fff;
+        padding-top: 10px;
+    }    
+}
+#block-itg-event-backend-program-tab-block .top-block-highlight{
+    .highlights-video{
+        margin-bottom: 50px;
+    }
+}
+#block-views-event-associate-video-block .video-list{
+    width: 140px;
+}
+/*event page css end*/
 
 
 
