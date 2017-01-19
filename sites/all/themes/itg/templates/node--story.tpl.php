@@ -154,13 +154,15 @@ if (!empty($content)):
                                         <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                                     <?php } ?>
 
-                                    <?php global $user; ?>
-                                    <?php if ($user->uid > 0): ?>
-                                        <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>                      
-                                        <li><?php print $read_later; ?></li>
-                                    <?php else: ?>
-            <?php print '<li>' . l('<i class="fa fa-bookmark"></i> READ LATER', 'user/login', array('html' => TRUE, 'attributes' => array('title' => 'READ LATER'))) . '</li>'; ?>
-        <?php endif; ?>                      
+                                            <?php if ($user->uid > 0): ?>
+                                              <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>
+                                              <?php print '<li>'.$read_later.'</li>'; ?>                                         
+                                            <?php else: ?>
+                                              <?php if (function_exists(itg_sso_url)): ?>
+                                                <?php print '<li>'.itg_sso_url('<i class="fa fa-bookmark"></i>' . t('READ LATER') .'', t('READ LATER')).'</li>'; ?>
+                                              <?php endif; ?>
+
+                                            <?php endif; ?>   
                                 </ul>
                             </div>
                         </div>
