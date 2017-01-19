@@ -4,15 +4,15 @@
       <li class="<?php print $entity['type'] ?> trending-videos-list">
         <?php if (!empty($entity['esi_file_uri'])) { ?>            
           <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
-            <?php $file_uri = file_create_url($entity['esi_file_uri']); ?>
-            <img src="<?php print $file_uri; ?>" />
+            <?php $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']); ?>
+            <img src="<?php print $extra_large_image_url; ?>" />
           </a>
           <?php
         }
         else {
           ?>
           <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $entity['nid']); ?>">
-            <img height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+            <img height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" />
           </a>
         <?php } ?>
         <?php if (!empty($entity['title'])) : ?>

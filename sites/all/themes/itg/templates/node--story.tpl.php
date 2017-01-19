@@ -26,7 +26,10 @@ if (!empty($content)):
     // get global comment config    
 
     $config_name = trim($global_comment_last_record[0]->config_name);
-
+    
+    // get comment count
+    
+    $get_comment_count = $content['comment_count'];
 
     // get developing story status
 
@@ -151,13 +154,15 @@ if (!empty($content)):
                                         <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                                     <?php } ?>
 
-                                    <?php global $user; ?>
-                                    <?php if ($user->uid > 0): ?>
-                                        <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>                      
-                                        <li><?php print $read_later; ?></li>
-                                    <?php else: ?>
-            <?php print '<li>' . l('<i class="fa fa-bookmark"></i> READ LATER', 'user/login', array('html' => TRUE, 'attributes' => array('title' => 'READ LATER'))) . '</li>'; ?>
-        <?php endif; ?>                      
+                                            <?php if ($user->uid > 0): ?>
+                                              <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>
+                                              <?php print '<li>'.$read_later.'</li>'; ?>                                         
+                                            <?php else: ?>
+                                              <?php if (function_exists('itg_sso_url')): ?>
+                                                <?php print '<li>'.itg_sso_url('<i class="fa fa-bookmark"></i>' . t('READ LATER') .'', t('READ LATER')).'</li>'; ?>
+                                              <?php endif; ?>
+
+                                            <?php endif; ?>   
                                 </ul>
                             </div>
                         </div>
@@ -583,7 +588,7 @@ if (!empty($content)):
                                 }
                                 ?></span></a></li>
     <?php } if ($config_name == 'other') { ?> 
-                                <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span><?php print $comment_count; ?></span></a></li>
+                                <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span><?php print $get_comment_count; ?></span></a></li>
                             <?php } ?>
                             <li class="mhide"><span class="share-count"><?php if (!empty($tot_count)) {
                             print $tot_count;

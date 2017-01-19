@@ -5,7 +5,7 @@
      if(!empty($row['field_story_extra_large_image'])){
       print $row['field_story_extra_large_image']; 
      }else{
-       print "<img width='170' height='170'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/speaker-detail-page.jpg' />";
+       print "<img width='170' height='170'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image170x170.jpg' />";
      }
      ?>
     <h4><?php print $row['title']; ?></h4>

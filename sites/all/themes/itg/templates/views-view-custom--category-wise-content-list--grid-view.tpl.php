@@ -11,16 +11,17 @@ global $base_url;
     <h3><?php print $title; ?></h3>
 <?php endif; ?>
 
+    <div class="row catagory-grid">
     <?php foreach ($rows as $id => $row): ?>
-        <div class="catagory-grid-view">
+        <div class="catagory-grid-view col-md-3 col-sm-4 col-xs-6">
             <div class="pic">
                 <?php if ($row['field_story_small_image'] != ''): ?>
                     <?php print $row['field_story_small_image']; ?>
                 <?php else: ?>
                     <?php if ($row['type'] == 'videogallery'): ?>
-                        <?php $image_link = "<img width='170' height='127'  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/default_video.jpg' />"; ?>
+                        <?php $image_link = "<img width='170' height='127'  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' />"; ?>
                     <?php else: ?>
-                        <?php $image_link = "<img width='170' height='127'  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/default_for_all.png' />"; ?>
+                        <?php $image_link = "<img width='170' height='127'  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' />"; ?>
                         <?php print l($image_link, "node/" . $row['nid'], array("html" => true)); ?>
                     <?php endif; ?>    
                 <?php endif; ?>
@@ -37,3 +38,4 @@ global $base_url;
             </div>
         </div>
 <?php endforeach; ?>
+</div> 

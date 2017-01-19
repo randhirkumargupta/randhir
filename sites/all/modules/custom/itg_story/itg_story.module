@@ -142,6 +142,7 @@ function itg_story_ckeditor_plugin_alter(&$plugins) {
 function itg_story_form_alter(&$form, &$form_state, $form_id) {
     switch ($form_id) {
         case 'story_node_form':
+          global $base_url;
             if (!empty($form['#node']->field_story_source_id[LANGUAGE_NONE][0]['value'])) {
               $source_id = $form['#node']->field_story_source_id[LANGUAGE_NONE][0]['value'];
             }
@@ -164,6 +165,8 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
             unset($form['field_story_select_templates'][LANGUAGE_NONE]['#options']['_none']);
             $form['#after_build'][] = 'itg_story_after_build';
             $form['actions']['submit']['#submit'][] = 'itg_story_form_custom_callback';
+            drupal_add_js(array('itg_common' => array('base_url' => $base_url)), 'setting');
+            drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.emoji.js', 'file');
             break;
     }
 
