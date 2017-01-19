@@ -130,11 +130,6 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
       if ($form['field_poll_itg_state']['und']['#default_value'] == 0) {
         itg_recepi_save_draft_button($form);
       }
-    case 'event_backend_node_form':
-      // Save as draft button
-      if ($form['field_step_completion']['und'][0]['value']['#default_value'] == '0') {
-        itg_recepi_save_draft_button($form);
-      }
       break;
   }
 }
