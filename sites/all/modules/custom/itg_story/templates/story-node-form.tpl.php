@@ -64,7 +64,7 @@
                 <?php print drupal_render($form['field_story_short_headline']); ?>
                 <?php print drupal_render($form['field_story_long_head_line']); ?>
               <!--<div class="pre-desc"><?php //print t('This title shows on the section page');      ?></div> -->
-                <?php print drupal_render($form['field_story_rating']); ?>
+                
                 <?php print drupal_render($form['field_story_new_title']); ?>
                 <?php print drupal_render($form['field_story_redirection_url_titl']); ?>
                 <?php print drupal_render($form['field_story_courtesy']); ?>
@@ -87,6 +87,16 @@
                 <?php //unset($form['revision_information']); ?>
             </div>
         </div>
+      
+       <div id="StoryMovie" class="itg-form-section-wrapper">
+            <h2 class="story-title"><?php print t('Story Movie'); ?></h2> 
+            <div class="itg-form-section hide">
+              <?php print drupal_render($form['field_story_rating']); ?>  
+            </div>
+        </div>
+      
+      
+      
         <div class="itg-form-action">
             <?php print drupal_render($form['actions']); ?>
         </div>

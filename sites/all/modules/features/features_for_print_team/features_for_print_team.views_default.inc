@@ -52,6 +52,7 @@ function features_for_print_team_views_default_views() {
   $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
+    'field_pti_magazine_1' => 'field_pti_magazine_1',
     'views_bulk_operations' => 'views_bulk_operations',
     'nid' => 'nid',
     'uid' => 'uid',
@@ -64,16 +65,26 @@ function features_for_print_team_views_default_views() {
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
     'nothing_1' => 'nothing_1',
-    'name' => 'name',
+    'name_1' => 'name_1',
     'field_pti_idea_status' => 'field_pti_idea_status',
+    'field_pti_idea_submit_status' => 'field_pti_idea_submit_status',
     'field_pti_mark_as_complete' => 'field_pti_mark_as_complete',
+    'php_3' => 'php_3',
     'view_node' => 'php',
     'edit_node' => 'php',
     'php_2' => 'php',
+    'nothing' => 'php',
     'php' => 'php',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
+    'field_pti_magazine_1' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'views_bulk_operations' => array(
       'align' => '',
       'separator' => '',
@@ -148,7 +159,7 @@ function features_for_print_team_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'name' => array(
+    'name_1' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -162,7 +173,19 @@ function features_for_print_team_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'field_pti_idea_submit_status' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'field_pti_mark_as_complete' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'php_3' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -182,9 +205,14 @@ function features_for_print_team_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'php' => array(
+    'nothing' => array(
       'align' => '',
       'separator' => '',
+      'empty_column' => 0,
+    ),
+    'php' => array(
+      'align' => '',
+      'separator' => ' | ',
       'empty_column' => 0,
     ),
   );
@@ -780,11 +808,22 @@ echo \'<span class ="views-action-separator"> | </span> <span class="edit-link">
   /* Display: Approved */
   $handler = $view->new_display('page', 'Approved', 'page_1');
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Magazine */
+  $handler->display->display_options['fields']['field_pti_magazine_1']['id'] = 'field_pti_magazine_1';
+  $handler->display->display_options['fields']['field_pti_magazine_1']['table'] = 'field_data_field_pti_magazine';
+  $handler->display->display_options['fields']['field_pti_magazine_1']['field'] = 'field_pti_magazine';
+  $handler->display->display_options['fields']['field_pti_magazine_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_pti_magazine_1']['settings'] = array(
+    'link' => 0,
+  );
   /* Field: Bulk operations: Content */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['label'] = '';
+  $handler->display->display_options['fields']['views_bulk_operations']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['views_bulk_operations']['alter']['text'] = '[views_bulk_operations]<div class="magazine-id">[field_pti_magazine_1]</div>';
+  $handler->display->display_options['fields']['views_bulk_operations']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '0';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['row_clickable'] = 1;
@@ -940,7 +979,7 @@ echo arg(0);
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class ="views-action-separator"> | </span> <span class="edit-link">[edit_node]</span>';
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
   $handler->display->display_options['fields']['edit_node']['text'] = 'Post Idea';
   /* Field: Global: PHP */
   $handler->display->display_options['fields']['php_2']['id'] = 'php_2';
@@ -957,11 +996,22 @@ $status = $data->_field_data[\'nid\'][\'entity\']->field_pti_idea_status[\'und\'
 if($status == \'Rejected\') {
 echo \'\';
 } else {
-echo \'<span class ="views-action-separator"> | </span> <span class="edit-link">Post Idea</span>\';
+echo \'<span class="edit-link">Post Idea</span>\';
 }
 ?>';
   $handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php_2']['php_click_sortable'] = '';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Download';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = 'Download';
+  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing']['alter']['path'] = 'printpdf/[nid]';
+  $handler->display->display_options['fields']['nothing']['alter']['path_case'] = 'lower';
+  $handler->display->display_options['fields']['nothing']['alter']['target'] = '_blank';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Field: Global: PHP */
   $handler->display->display_options['fields']['php']['id'] = 'php';
   $handler->display->display_options['fields']['php']['table'] = 'views';
