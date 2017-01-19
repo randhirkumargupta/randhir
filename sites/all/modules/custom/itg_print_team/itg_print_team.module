@@ -283,21 +283,11 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         else {
           $mark_task_comp_users_flag = FALSE;
         }
-      }
-
+      }      
       if ($idea_review_flag && $filtered_result) {
 
         // User should not be of mark as complete type
-        if (!$mark_task_comp_users_flag) {
-
-          // Disable idea's association option for all except "Approved"
-//          for ($bulk_op = 0; $bulk_op < $filtered_result; $bulk_op++) {
-//            $node_idea = node_load($form['views_bulk_operations'][$bulk_op]['#return_value']);
-//            if ($node_idea->field_pti_mark_as_complete[LANGUAGE_NONE][0]['value'] !== 'completed') {
-//              $form['views_bulk_operations'][$bulk_op]['#disabled'] = TRUE;
-//            }
-//          }
-
+        if ($mark_task_comp_users_flag) {          
           $magazine_options = itg_print_team_get_magazine_title();          
           $selected = isset($form_state['values']['pti_magazine']) ? $form_state['values']['pti_magazine'] : key($magazine_options);          
           
@@ -537,12 +527,13 @@ function itg_print_team_form_after_build($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_print_team') . '/js/itg_print_team.js', array('weight' => 1));
 
   // Unset SEF URL field
-  $form['path']['#access'] = FALSE;
-
+  $form['path']['#access'] = FALSE;  
+  $form['actions']['submit']['#value'] = t('Submit');
   // Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags'][LANGUAGE_NONE]['basic']['#title']);
   unset($form['metatags'][LANGUAGE_NONE]['basic']['#description']);
+  
   return $form;
 }
 
@@ -553,13 +544,26 @@ function itg_print_team_form_after_build($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_print_team_views_pre_render(&$view) {
-
-  global $base_url;
-
+  global $base_url, $user;
   // Add "Submit Idea" button on listing page of ideas
   if ($view->name == "manage_print_team") {
     $header_content_print_team = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-    $header_content_print_team .= l('Submit Idea', $base_url . '/submit-idea');
+    // These role can not submit the idea.
+    $restricted_roles = array(
+      'Photo Coordinator',
+      'Photo Head',
+      'Design Head',
+      'Copy Desk',
+      'Designer',
+      'Photographer',
+    );
+    // Current user has above role or not.
+    $matched_restricted_role = array_intersect($restricted_roles, $user->roles);
+    // If Current user does not have above role then print submit idea button.
+    $matched_restricted_role = array_filter($matched_restricted_role);
+    if (empty($matched_restricted_role)) {
+      $header_content_print_team .= l('Submit Idea', $base_url . '/submit-idea');
+    }    
     $view->attachment_before = $header_content_print_team;
   }
 }
@@ -1093,7 +1097,7 @@ function itg_print_team_check_mark_complete_users() {
  * @return array
  */
 function itg_print_team_mark_complete_users_arr() {
-  return array('Photo Coordinator', 'Photo Head', 'Design Head', 'Copy Desk', 'Designer', 'Photographer');
+  return array('Co-ordinator', 'Photo Coordinator', 'Photo Head', 'Design Head', 'Copy Desk', 'Designer', 'Photographer');
 }
 
 /**
