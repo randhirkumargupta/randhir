@@ -4025,6 +4025,12 @@ div.node{
       display: none;
     }
     .form-managed-file{
+      .form-file{
+        margin-top: 5px;
+        & + .form-submit{
+          @extend .btn-small;
+        }
+      }
       .file{
         @extend .fleft;
         max-width: 200px;
