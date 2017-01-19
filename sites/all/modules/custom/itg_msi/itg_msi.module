@@ -560,9 +560,9 @@ function itg_msi_node_validate($node, $form, &$form_state) {
 //        if (count($existing_xml) > 0) {
 //          form_set_error($field . '1' . $result['fid'], t('Sorry! <strong>@xmlfilename</strong> is a duplicate xml file. Please upload another one.', array('@xmlfilename' => $xml_file->filename)));
 //        }
-        if(empty($xml_supplement)) { // empty supplement in file
+        if(empty($xml_supplement) && ($node->type != 'issue')) { // empty supplement in file
            form_set_error($field . '10'. $result['fid'], 
-               t('No Supplement found in the file <strong>@xmlfilename</strong>  or Supplement is not exists. Please upload file with correct Supplement and try again.', 
+               t('No Supplement found in the file <strong>@xmlfilename</strong>. Please upload file with correct Supplement and try again.', 
                array('@xmlfilename' => $xml_file->filename)));
          }elseif((!empty($xml_supplement) && itg_msi_exist_supplement($xml_supplement) == 0) && ($node_supplement_name != $xml_supplement)) {
            form_set_error($field . '10'. $result['fid'], 
