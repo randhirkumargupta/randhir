@@ -554,7 +554,7 @@ function itg_common_get_smiley_title($nid , $min_limit = 0 , $max_limit = 255) {
   $query->condition('n.nid', $nid);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   if (count($result)) {
-    $titlte = mb_strimwidth($result[0]['title'], $min_limit, $max_limit, "..");
+    $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));
     $smilies = "";
     if (!empty($result[0]['field_emoji_value'])) {
       // Get all the smiley images.
