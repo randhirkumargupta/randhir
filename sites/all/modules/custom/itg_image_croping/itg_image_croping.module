@@ -152,8 +152,7 @@ function itg_image_croping_data_aspect_ratio($aspect_ratio, $image_height, $imag
  * This function use for load the croper according to size!
  */
 function itg_image_croping_ajax_make_ajax() {
-    $image_height = 363;  //set the inital height of croper
-    $image_width = 647;    //set the inital width of croper 
+
 
     $image_id = $_POST['imageId'];
     $field_name = $_POST['field_id'];
@@ -161,7 +160,17 @@ function itg_image_croping_ajax_make_ajax() {
         $image_height = trim($_POST['img_height']);
         $image_width = trim($_POST['img_width']);
     }
+
     $file = file_load($image_id);
+    if ($_POST['img_width'] != "" && $_POST['img_height'] == "") {
+        $imagedata_info = image_get_info($file->uri);
+        $image_height = $imagedata_info['height'];
+        $image_width = trim($_POST['img_width']);
+    }
+    if ($image_height == "" && $image_width == "") {
+        $image_height = EXTRA_LARGE_IMAGE_HEIGHT;  //set the inital height of croper
+        $image_width = EXTRA_LARGE_IMAGE_WIDTH;    //set the inital width of croper 
+    }
     if (empty($file)) {
         drupal_set_message(t('This image is not valid!'));
     }
@@ -508,12 +517,21 @@ function itg_image_croping_crop_image_orignal() {
     if ($image_name == "") {
         $image_name = time();
     }
+    $image_width = $img_dim[$content_type][$_POST['field_name']]['width'];
+     $image_height = $img_dim[$content_type][$_POST['field_name']]['height'];
+    
+    
+    if($image_width == "" && $image_height == "") {
+        $image_width = $_POST['resize_image_width'];
+        $image_height = $_POST['resize_image_height'];
+    }
+    
     $image_name = $image_name . rand(111, 999);
     $file_image = file_load($image_fiedlid);
     $image = image_load($file_image->uri);
     $image_exten = end(explode('.', $file_image->uri));
     $filepath = file_default_scheme() . '://crop_image';
-    $scaled = image_scale_and_crop($image, $img_dim[$content_type][$_POST['field_name']]['width'], $img_dim[$content_type][$_POST['field_name']]['height']);
+    $scaled =  	image_resize($image,$image_width ,$image_height);
     $image_name = $image_name . time();
     $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten . '/');
     $uri = $filepath . '/' . $image_name . '.' . $image_exten;

@@ -120,7 +120,7 @@ function feature_for_budget_views_default_views() {
   $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
-    'image_style' => 'home_page_feature_small',
+    'image_style' => 'video_landing_page_170_x_127',
     'image_link' => '',
   );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
