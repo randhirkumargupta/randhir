@@ -2457,12 +2457,15 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     }
   }
 }
-.ugc-action{
-  padding: 5px 30px;
-  strong{line-height: 30px; @extend .fleft; width: 220px;}
-  .approve-ugc{}
-  .reject-ugc, .manage-ugc{}
+div.node{
+ .ugc-action{
+    padding: 5px 30px;
+    strong{line-height: 36px; @extend .fleft; width: 220px;}
+    .approve-ugc{@extend .btn-submit;}
+    .reject-ugc, .manage-ugc{@extend .btn-reset; margin-right: 10px;}
+  } 
 }
+
 .field-name-field-mobile-subscribers{
   @extend .hide;
 }
@@ -3682,6 +3685,7 @@ div.node{
 .view-link, 
 .delete-link, 
 .move-link,
+.download-link,
 .edit-cm a{
   @extend .pos-rel;
   @extend .dib;
@@ -3704,7 +3708,8 @@ div.node{
 .view-link:after{content: '\f06e';}
 .delete-link:after{content: '\f1f8';}
 .move-link:after{content:'\f056';}
-
+.download-link{padding-left: 25px;}
+.download-link:after{content:'\f0ed'; top: -2px;}
 .sidebar-trigger{
   cursor: pointer;
   position: absolute;
@@ -5608,13 +5613,13 @@ div.node{
     }
   }
   #pti-container-data{
-    display: inline-block;
-    width: 82%;      
+    .form-item-pti-magazine{@extend .hide;}
   }
   .form-item-pti-magazine, .form-item-pti-issue, .form-item-pti-supplement, .form-item-story-rating{     
-    width: 300px;
+    width: 220px;
     float: left;
     padding-left:0;
+    padding-right: 10px;
     > label{
       float: none;
       margin-bottom: 10px;
@@ -5625,9 +5630,10 @@ div.node{
     }
   }
   .form-item-story-rating{      
-    width: 300px;
-    margin-top: 0;
+    width: 100px;
   }
+  .form-submit[value="Associate"]{margin-top: 40px !important;}
+  a.btn-save{@extend .btn-submit;}
 }
 
 [id*="itg-octopus-api-form"]{
@@ -6451,6 +6457,9 @@ div.node{
       margin: 0;
       padding: 0 20px 5px;
       border-bottom: 1px solid #d9d9d9;
+    }
+    h2.title.comment-form{
+      @extend .hide;
     }
     .comment-form .form-actions{
       background: none;
@@ -9699,4 +9708,13 @@ span.file a{pointer-events: none; color: #2f2f2f;}
 }
 .view .view-filters #views-exposed-form-section-wise-content-ordering-list-page .views-exposed-form .views-submit-button .form-submit{
     height: 36px;
+}
+.comment-view{
+  .publish-ugc-comments{@extend .btn-reset;@extend .btn-small;}
+}
+.view-manage-print-team{
+  .magazine-id{@extend .hide;}
+  table tr td:last-child{
+    text-align: center;
+  }
 }
