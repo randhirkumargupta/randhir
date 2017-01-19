@@ -3685,6 +3685,7 @@ div.node{
 .view-link, 
 .delete-link, 
 .move-link,
+.download-link,
 .edit-cm a{
   @extend .pos-rel;
   @extend .dib;
@@ -3707,7 +3708,8 @@ div.node{
 .view-link:after{content: '\f06e';}
 .delete-link:after{content: '\f1f8';}
 .move-link:after{content:'\f056';}
-
+.download-link{padding-left: 25px;}
+.download-link:after{content:'\f0ed'; top: -2px;}
 .sidebar-trigger{
   cursor: pointer;
   position: absolute;
@@ -5611,13 +5613,13 @@ div.node{
     }
   }
   #pti-container-data{
-    display: inline-block;
-    width: 82%;      
+    .form-item-pti-magazine{@extend .hide;}
   }
   .form-item-pti-magazine, .form-item-pti-issue, .form-item-pti-supplement, .form-item-story-rating{     
-    width: 300px;
+    width: 220px;
     float: left;
     padding-left:0;
+    padding-right: 10px;
     > label{
       float: none;
       margin-bottom: 10px;
@@ -5628,9 +5630,10 @@ div.node{
     }
   }
   .form-item-story-rating{      
-    width: 300px;
-    margin-top: 0;
+    width: 100px;
   }
+  .form-submit[value="Associate"]{margin-top: 40px !important;}
+  a.btn-save{@extend .btn-submit;}
 }
 
 [id*="itg-octopus-api-form"]{
@@ -9708,4 +9711,10 @@ span.file a{pointer-events: none; color: #2f2f2f;}
 }
 .comment-view{
   .publish-ugc-comments{@extend .btn-reset;@extend .btn-small;}
+}
+.view-manage-print-team{
+  .magazine-id{@extend .hide;}
+  table tr td:last-child{
+    text-align: center;
+  }
 }
