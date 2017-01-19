@@ -9739,19 +9739,19 @@ h1.about-us-heading{
         width:89.7%;
         @include float(left);
         font-size:20px;
-        .marquee {    
+        .marquee-container {    
             width: 78%;
             height: 33px;
             @include pos(relative);
             @include float(left);
             overflow:hidden;
+            .marquee,
+            *[class^="marquee"] {
+                display: inline-block;                                
+            }
             .field-content{      
-                cursor:pointer;        
-                position:absolute;
-                left:10px;
-                margin-right:10px;
-                @include display-inline;
-                top:0px;       
+                cursor:pointer;                        
+                @include display-inline;                
                 a{
                     white-space: pre;
                 }
@@ -9844,23 +9844,6 @@ h1.about-us-heading{
     }
 }
 /*magzine lock icon end*/
-/*homepage marquee*/
-.marquee {    
-    width: 78%;
-    height: 33px;
-    @include pos(relative);
-    .field-content{      
-        cursor:pointer;        
-        position:absolute;
-        left:10px;
-        margin-right:10px;
-        top:0px;       
-        a{
-            white-space: pre;
-        }
-    }
-}
- /*homepage marquee end*/
 
 /*other comment section start*/
 #content{    

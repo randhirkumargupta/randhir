@@ -11645,23 +11645,23 @@ h1.about-us-heading + div p {
 .breakingnew-home .new-detail:after {
   clear: both;
 }
-.breakingnew-home .new-detail .marquee {
+.breakingnew-home .new-detail .marquee-container {
   width: 78%;
   height: 33px;
   position: relative;
   float: left;
   overflow: hidden;
 }
-.breakingnew-home .new-detail .marquee .field-content {
+.breakingnew-home .new-detail .marquee-container .marquee,
+.breakingnew-home .new-detail .marquee-container *[class^="marquee"] {
+  display: inline-block;
+}
+.breakingnew-home .new-detail .marquee-container .field-content {
   cursor: pointer;
-  position: absolute;
-  left: 10px;
-  margin-right: 10px;
   display: inline-block;
   vertical-align: top;
-  top: 0px;
 }
-.breakingnew-home .new-detail .marquee .field-content a {
+.breakingnew-home .new-detail .marquee-container .field-content a {
   white-space: pre;
 }
 .breakingnew-home .new-detail .social-share {
@@ -11782,24 +11782,6 @@ h1.about-us-heading + div p {
 }
 
 /*magzine lock icon end*/
-/*homepage marquee*/
-.marquee {
-  width: 78%;
-  height: 33px;
-  position: relative;
-}
-.marquee .field-content {
-  cursor: pointer;
-  position: absolute;
-  left: 10px;
-  margin-right: 10px;
-  top: 0px;
-}
-.marquee .field-content a {
-  white-space: pre;
-}
-
-/*homepage marquee end*/
 /*other comment section start*/
 #content #other-comment {
   /*        #comments .comment-form .form-actions{

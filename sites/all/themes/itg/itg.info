@@ -74,6 +74,7 @@ stylesheets[all][] = css/media.css
 ; Optionally add some JavaScripts to your theme.
 
 scripts[] = js/slick.js
+scripts[] = js/marquee.js
 scripts[] = js/ripple.js
 scripts[] = js/script.js
 
