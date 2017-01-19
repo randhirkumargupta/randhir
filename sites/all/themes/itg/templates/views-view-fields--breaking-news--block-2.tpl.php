@@ -70,13 +70,13 @@
 <?php endforeach; ?>
 
 <script type="text/javascript">
-    jQuery(function (){						
-        createMarquee({
-            duration:30000, 
-            padding:20, 
-            marquee_class:'.marquee-child', 
-            container_class: '.marquee-container',             
-            hover: true
+    jQuery(document).ready(function(){
+        jQuery('.marquee-child').liMarquee({        
+            direction: 'left', 
+            scrolldelay: 0, 
+            scrollamount: 50,
+            circular: true, 
+            hoverstop: true
         });
     });
 </script>

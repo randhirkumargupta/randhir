@@ -11628,13 +11628,11 @@ h1.about-us-heading + div p {
 .breakingnew-home .new-detail {
   zoom: 1;
   background: #ffc106;
-  color: #000;
   height: 33px;
   line-height: 33px;
   padding: 0 10px;
   width: 89.7%;
   float: left;
-  font-size: 20px;
 }
 .breakingnew-home .new-detail:before, .breakingnew-home .new-detail:after {
   content: "";
@@ -11652,17 +11650,20 @@ h1.about-us-heading + div p {
   float: left;
   overflow: hidden;
 }
-.breakingnew-home .new-detail .marquee-container .marquee,
-.breakingnew-home .new-detail .marquee-container *[class^="marquee"] {
-  display: inline-block;
+.breakingnew-home .new-detail .marquee-container .marquee-child {
+  height: 33px;
+  line-height: 33px;
+  background: transparent;
+}
+.breakingnew-home .new-detail .marquee-container .marquee-child a {
+  font-size: 20px;
+  color: #000;
+  font-size: 18px;
 }
 .breakingnew-home .new-detail .marquee-container .field-content {
   cursor: pointer;
   display: inline-block;
   vertical-align: top;
-}
-.breakingnew-home .new-detail .marquee-container .field-content a {
-  white-space: pre;
 }
 .breakingnew-home .new-detail .social-share {
   float: right;

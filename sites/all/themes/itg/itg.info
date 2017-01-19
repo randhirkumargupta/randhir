@@ -52,6 +52,7 @@ stylesheets[all][] = system.theme.css
 ; Then we add our own stylesheet.
 stylesheets[all][] = css/layout.css
 stylesheets[all][] = css/font-awesome.css
+stylesheets[all][] = css/liMarquee.css
 stylesheets[all][] = css/slick.css
 stylesheets[all][] = css/itg-photo-slider.css
 stylesheets[all][] = css/layout.css
@@ -74,7 +75,7 @@ stylesheets[all][] = css/media.css
 ; Optionally add some JavaScripts to your theme.
 
 scripts[] = js/slick.js
-scripts[] = js/marquee.js
+scripts[] = js/jquery.liMarquee.js
 scripts[] = js/ripple.js
 scripts[] = js/script.js
 

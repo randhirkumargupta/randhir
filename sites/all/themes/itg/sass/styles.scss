@@ -9731,30 +9731,31 @@ h1.about-us-heading{
     }
     .new-detail{
         @include clearfix;        
-        background:#ffc106;        
-        color:#000;
+        background:#ffc106;                
         height: 33px;
         line-height: 33px;
         padding: 0 10px;
         width:89.7%;
-        @include float(left);
-        font-size:20px;
+        @include float(left);        
         .marquee-container {    
             width: 78%;
             height: 33px;
             @include pos(relative);
             @include float(left);
-            overflow:hidden;
-            .marquee,
-            *[class^="marquee"] {
-                display: inline-block;                                
+            overflow:hidden;    
+            .marquee-child{
+                height: 33px;
+                line-height: 33px;
+                background: transparent;
+                a{
+                    font-size:20px;
+                    color:#000;
+                    font-size: 18px;
+                }
             }
             .field-content{      
                 cursor:pointer;                        
-                @include display-inline;                
-                a{
-                    white-space: pre;
-                }
+                @include display-inline;                               
             }
         }
         .social-share{
