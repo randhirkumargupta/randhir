@@ -5618,6 +5618,11 @@ div.node #comments h2 {
 [id*="views-form-manage-print-team-page"] .form-item-pti-issue + .form-submit {
   margin: 30px;
 }
+[id*="views-form-manage-print-team-page"] #pti-container-data {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 50px;
+}
 [id*="views-form-manage-print-team-page"] .form-item-pti-magazine, [id*="views-form-manage-print-team-page"] .form-item-pti-issue, [id*="views-form-manage-print-team-page"] .form-item-pti-supplement, [id*="views-form-manage-print-team-page"] .form-item-story-rating {
   width: 220px;
   float: left;
