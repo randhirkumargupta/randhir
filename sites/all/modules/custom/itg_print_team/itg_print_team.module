@@ -375,7 +375,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
             '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:40px'),
           );
 
-          $form['extra_button']['download_csv'] = array(
+          $form['download_csv'] = array(
             '#markup' => l(t('Download CSV'), 'print-team-ideas/csv', array('attributes' => array('class' => 'btn-save', 'style' => 'margin-top:40px'))),
             '#weight' => 106,
             '#value' => t('Download CSV'),

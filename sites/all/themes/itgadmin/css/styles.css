@@ -9980,3 +9980,17 @@ span.file a {
 .view-manage-print-team table tr td:last-child {
   text-align: center;
 }
+
+/*print team approval view*/
+#views-form-manage-print-team-page-1 #edit-submit--2, #views-form-manage-print-team-page-1 #edit-submit-rating {
+  display: none;
+}
+#views-form-manage-print-team-page-1 #pti-container-data {
+  margin-right: 0;
+}
+#views-form-manage-print-team-page-1 .itg-associate {
+  margin: 44px 50px 0 0;
+}
+#views-form-manage-print-team-page-1 .itg-rating {
+  margin-top: 44px;
+}
