@@ -721,6 +721,13 @@ jQuery(document).ready(function () {
           el.closest('.personal-menu-tab-wrapper').find('.tab-text').attr('data-tab', get_class).text(get_text);
           el.parent().slideUp('fast');
         });
+        
+        // jQuery code for personalization saved item on mobile
+        jQuery('.personal-list').on('touch', 'li', function(){
+          jQuery(this).siblings().find('.personal-action').css('opacity', '0');
+          jQuery(this).find('.personal-action').css('opacity', '1');
+        });
+        
     }
     
     //story page social share for mobile
