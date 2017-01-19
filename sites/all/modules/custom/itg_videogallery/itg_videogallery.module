@@ -1536,7 +1536,7 @@ function get_video_filed_collection_by_its_id($entity_fid) {
 }
 
 /**
- * Implement cron function for add video thumb from dailymotion
+ * This is temp function use for test dailymotion video resploce no we will 
  */
 function itg_videogallery_video_bitrate() {
 
@@ -1554,9 +1554,9 @@ function itg_videogallery_video_bitrate() {
             $query->condition('field_video_upload_value', $val->entity_id);
             $result_video = $query->execute()->fetchAll();
             $thumb_url = $api->get(
-                    '/video/' . $val->video_id, array('fields' => array('live_video_bitrate'))
+                    '/video/' . $val->video_id, array('fields' => array('available_formats','live_video_bitrate','url'))
             );
-            pr($thumb_url);
+            p($thumb_url);
         }
     }
 }

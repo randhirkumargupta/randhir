@@ -588,6 +588,91 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_emoji'.
+  $field_instances['node-story-field_emoji'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 109,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_emoji',
+    'label' => 'Emoji',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 1,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 98,
+    ),
+  );
+
+  // Exported field_instance: 'node-story-field_emoji_position'.
+  $field_instances['node-story-field_emoji_position'] = array(
+    'bundle' => 'story',
+    'default_value' => array(
+      0 => array(
+        'value' => 'left',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 110,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_emoji_position',
+    'label' => 'Emoji position',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 99,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_facebook_animated_image'.
   $field_instances['node-story-field_facebook_animated_image'] = array(
     'bundle' => 'story',
@@ -1050,47 +1135,6 @@ function features_for_story_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 68,
-    ),
-  );
-
-  // Exported field_instance: 'node-story-field_primary_category_html'.
-  $field_instances['node-story-field_primary_category_html'] = array(
-    'bundle' => 'story',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 73,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_primary_category_html',
-    'label' => 'Primary category html',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 69,
     ),
   );
 
@@ -2030,6 +2074,48 @@ function features_for_story_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 33,
+    ),
+  );
+
+  // Exported field_instance: 'node-story-field_story_facebook_vdescripti'.
+  $field_instances['node-story-field_story_facebook_vdescripti'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 65,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_facebook_vdescripti',
+    'label' => 'Facebook Video Narrative',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 59,
     ),
   );
 
@@ -4530,6 +4616,48 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_story_twitter_video_desc'.
+  $field_instances['node-story-field_story_twitter_video_desc'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 67,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_twitter_video_desc',
+    'label' => 'Twitter Video Description',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 62,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_story_ugc_source_id'.
   $field_instances['node-story-field_story_ugc_source_id'] = array(
     'bundle' => 'story',
@@ -4676,6 +4804,8 @@ function features_for_story_field_default_field_instances() {
   t('Configurations');
   t('Courtesy');
   t('Date');
+  t('Emoji');
+  t('Emoji position');
   t('Expert Name');
   t('Expert description');
   t('Expert image');
@@ -4685,6 +4815,7 @@ function features_for_story_field_default_field_instances() {
   t('Extra small image');
   t('Facebook Narrative');
   t('Facebook Video');
+  t('Facebook Video Narrative');
   t('Facebook image');
   t('Facebook narrative');
   t('Factoids');
@@ -4718,7 +4849,6 @@ function features_for_story_field_default_field_instances() {
   t('Mosimage');
   t('New title');
   t('Node Identity');
-  t('Primary category html');
   t('Quote image');
   t('Quote title');
   t('Quotes');
@@ -4765,6 +4895,7 @@ function features_for_story_field_default_field_instances() {
   t('Tweet');
   t('Twitter Image');
   t('Twitter Video');
+  t('Twitter Video Description');
   t('Twitter narrative');
   t('UGC Source ID');
   t('common by line reporter id');

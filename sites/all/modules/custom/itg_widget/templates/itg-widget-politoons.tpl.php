@@ -22,7 +22,7 @@
       $image = "<img src='" . $url . "'>";
     }
     else {
-      $url = $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all.png";
+      $url = $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg";
       $image = "<img src='" . $url . "' width='88' height='88'>";
     }
     ?>
