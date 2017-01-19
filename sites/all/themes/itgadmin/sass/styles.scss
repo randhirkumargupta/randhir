@@ -5613,6 +5613,9 @@ div.node{
     }
   }
   #pti-container-data{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 50px;
     .form-item-pti-magazine{@extend .hide;}
   }
   .form-item-pti-magazine, .form-item-pti-issue, .form-item-pti-supplement, .form-item-story-rating{     
