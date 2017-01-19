@@ -4025,6 +4025,12 @@ div.node{
       display: none;
     }
     .form-managed-file{
+      .form-file{
+        margin-top: 5px;
+        & + .form-submit{
+          @extend .btn-small;
+        }
+      }
       .file{
         @extend .fleft;
         max-width: 200px;
@@ -8571,9 +8577,8 @@ div.node{
     }
   }
   [id*="field-gallery-image-values"] .field-name-field-audio,
- {@extend .hide;}
-/*  .form-field-name-field-common-audio, 
-  .form-field-name-field-common-audio-file*/
+  .form-field-name-field-common-audio, 
+  .form-field-name-field-common-audio-file{@extend .hide;}
 }
 .node-videogallery-form, .node-photogallery-form, .node-story-form{
   .browse-media-file{
