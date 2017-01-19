@@ -628,7 +628,10 @@
     .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable, .tech-layout-page .itg-h396-section .droppable,
     .tech-layout-page .itg-h385-section .droppable, .election-page .left-side .itg-photo .droppable, .movie-layout-page .itg-h385-section .droppable,
     .movie-layout-page .itg-h396-section .droppable, .movie-layout-page .itg-layout-580 .itg-widget-child .droppable, .movie-layout-page .itg-layout-580 .droppable,
-    .movie-layout-page .itg-layout-580 .droppable .auto-block-1, .movie-layout-page .itg-layout-580 .droppable .auto-block-2, .education-layout-page .itg-layout-565 .droppable{
+    .movie-layout-page .itg-layout-580 .droppable .auto-block-1, .movie-layout-page .itg-layout-580 .droppable .auto-block-2, .education-layout-page .itg-layout-565 .droppable,
+    .education-layout-page .itg-layout-672 .itg-widget-child .droppable, .education-layout-page .itg-295-layout .droppable, .education-layout-page .itg-325-layout .droppable,
+    .education-layout-page .itg-345-layout .droppable
+    {
         height: auto;        
     }
     
@@ -1316,6 +1319,22 @@
     }
 }
 /*Globle search page css end*/
+
+/*ask an expret css start*/
+.ask-an-expert-question-answer {
+    .view-header{
+        font-size: 20px;
+        height: 35px;
+        line-height: 35px;
+    }
+    .view-content{
+        margin: 20px 0;
+    }
+    .views-row {
+        padding: 10px 5px;
+    }
+}
+/*ask an expret css end*/
 }
 
 
@@ -1635,6 +1654,29 @@
 }
 
 /*movie page css end*/
+
+/*ask an expret css start*/
+#block-itg-ask-expert-ask-an-expert-details-page-block .question-form-title h3{
+    font-size: 16px;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block .ask-user-detail .section-user-details, #block-itg-ask-expert-ask-an-expert-details-page-block .ask-user-detail .ask-an-expert-like-dislike{
+    width: 100%;
+    float: none;
+    overflow: hidden;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block .ask-user-detail .ask-an-expert-like-dislike{
+    margin-top: 20px;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config #itg-custom-ask-an-expert-form .captcha{
+    width: 100%;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config #itg-custom-ask-an-expert-form .form-submit{
+    width: 50%;
+    margin-left: 0;
+}
+/*ask an expret css end*/
+
+
 
 
 
