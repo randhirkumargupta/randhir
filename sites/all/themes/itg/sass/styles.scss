@@ -1342,7 +1342,7 @@ footer{
                     @include display-inline;
                     cursor: pointer;
                 }
-                &:last-child{
+                &:nth-child(3){
                     a{
                         color: $yellow-color; 
                         border-right: none;
@@ -2344,8 +2344,7 @@ footer{
             }
         }
     } 
-    .story-associate-content{
-        height: 340px;
+    .story-associate-content{       
         overflow: hidden;
         .associate-content-block{
             cursor: pointer;
@@ -2353,12 +2352,13 @@ footer{
          @include video-gallery-popup;
          #videogallery-iframe{        
              position: relative;
+              height: 340px;
              top: auto;
              left: auto;
              width: 100%;
-             min-height: 100%;
              z-index: inherit;
              background: #000;
+             display:none;
              .big-story-popup {
                  position: relative;
                  top: auto;
@@ -2810,12 +2810,27 @@ footer{
 } 
 /*End snap post css*/
 /*Start category wise content list css*/
-.view-category-wise-content-list{
-    h1{
+h1.category-heading{
         @include font(25px,40px,700);        
         border-top: 1px solid $border-color;
         border-bottom: 1px solid $border-color;
     }
+    .list-grid{
+            margin: 20px 0;
+            font-size: 18px;
+            font-family: $itg-roboto;
+            text-align: right;
+            font-weight:600;
+            a{                
+                &:hover{
+                    color:#a00606;
+                }
+            }
+            span.pipline {
+                padding: 0 10px;
+            }
+        }
+.view-category-wise-content-list, .view-blog-listing{    
     @include listing-with-image(catagory-listing,left,10px,pic,detail);
     .catagory-listing{
         padding: 20px 0;
@@ -2835,28 +2850,27 @@ footer{
                 display: none;
             }
         }
-    }
-    .list-grid{
-            margin: 20px 0;
-            font-size: 16px;
-            font-family: roboto;
-            a{                
-                &:hover{
-                    color:#a00606;
-                }
-            }
-            span.pipline {
-                padding: 0 10px;
-            }
+        span.blog-anchor{
+            a{
+                @include font(12px);
+                font-family: $itg-roboto;
+                color: #a00606;
+                line-height: 12px;
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 400;   
+            }            
         }
-    .catagory-grid{         
+    }    
+    .catagory-grid{  
+        @include clearfix;
         h3{
             font-size: 15px;
             line-height: 20px;
             margin-top: 5px;
         }
         p{
-            color: #777;
+            color: #696969;
             margin-top: 10px;
         }
         .col-md-3{
@@ -3278,6 +3292,7 @@ footer{
         @include clearfix;
         border: 1px solid #dddddd;
         padding: 20px;
+        @include clearfix;
         .poll-replace-id{
             width: 100%;
             display: inline-block;
@@ -3389,9 +3404,9 @@ footer{
                 }
             }
         }
-        &.relative-with-img{
+        .relative-with-img{
             width: 56%;
-            float: left;
+            float: left;            
         }
     }
     .updated-msg{
@@ -7484,9 +7499,9 @@ footer{
     }
     .itg-layout-580{
         .droppable{
-            height: 580px;
+            height: 650px;
             .auto-block-1, .auto-block-2{
-                height: 580px;
+                height: 650px;
                 overflow: hidden;
             }
             .auto-block-1{
@@ -7886,7 +7901,7 @@ footer{
         border: none;
         margin: 0 -15px;
         .featured-post{
-            padding: 10px 15px 0px 15px;
+            padding: 0px 15px 0px 15px;
         }
     }
     .video-icon{
@@ -9724,14 +9739,21 @@ h1.about-us-heading{
         width:89.7%;
         @include float(left);
         font-size:20px;
-        .marquee{
-            width: 75%;
-            overflow: hidden;           
+        .marquee {    
+            width: 78%;
+            height: 33px;
+            @include pos(relative);
             @include float(left);
-            .field-content{                
-                @include display-inline;           
+            overflow:hidden;
+            .field-content{      
+                cursor:pointer;        
+                position:absolute;
+                left:10px;
+                margin-right:10px;
+                @include display-inline;
+                top:0px;       
                 a{
-                    color:#000;
+                    white-space: pre;
                 }
             }
         }
@@ -9823,40 +9845,19 @@ h1.about-us-heading{
 }
 /*magzine lock icon end*/
 /*homepage marquee*/
-.marquee .field-content {       
-    margin: 0 auto;
-    overflow: hidden;
-    white-space: nowrap;
-    box-sizing: border-box;    
-    -moz-transform:translateX(100%);
-    -webkit-transform:translateX(100%);	
-    transform:translateX(100%);
-    -moz-animation: marquee 30s linear infinite;
-    -webkit-animation: marquee 30s linear infinite;
-    animation: marquee 30s linear infinite;
-}
-.marquee .field-content:hover {
-    animation-play-state: paused
-}
-/* Move it (define the animation) */
-@-moz-keyframes marquee {
-    0%   { -moz-transform: translateX(100%); }
-    100% { -moz-transform: translateX(-100%); }
-}
-@-webkit-keyframes marquee {
-    0%   { -webkit-transform: translateX(100%); }
-    100% { -webkit-transform: translateX(-100%); }
-}
-@keyframes marquee {
-    0%   { 
-        -moz-transform: translateX(100%); /* Firefox bug fix */
-        -webkit-transform: translateX(100%); /* Firefox bug fix */
-        transform: translateX(100%); 		
-    }
-    100% { 
-        -moz-transform: translateX(-100%); /* Firefox bug fix */
-        -webkit-transform: translateX(-100%); /* Firefox bug fix */
-        transform: translateX(-100%); 
+.marquee {    
+    width: 78%;
+    height: 33px;
+    @include pos(relative);
+    .field-content{      
+        cursor:pointer;        
+        position:absolute;
+        left:10px;
+        margin-right:10px;
+        top:0px;       
+        a{
+            white-space: pre;
+        }
     }
 }
  /*homepage marquee end*/
@@ -9878,3 +9879,48 @@ h1.about-us-heading{
     }
 }
 /*other comment section end*/
+
+/*site map css start*/
+.site-map{
+    ul{
+        @extend .list-none;       
+    }
+    .col-md-6{
+        > ul{            
+            > li{
+                font-size: 20px;
+                margin-bottom: 35px;
+                text-transform: uppercase;
+                color:#000;
+                font-weight:600;
+                font-family:$itg-roboto;
+                ul{
+                    margin-top: 20px;
+                    li{
+                        margin-bottom: 8px;
+                        a{
+                            color: #7e7e7e;
+                            font-size:14px;   
+                            text-transform: capitalize;
+                            font-weight:400;
+                            font-family:$itg-robotoslab;
+                        }                        
+                    }
+                    ul{
+                        padding-left: 25px;
+                        margin-top: 15px;
+                    }
+                }
+            }
+        }
+    }    
+}
+
+/*site map css end*/
+/*blog detail page css start*/
+.blog-detail-page{
+    h2, img{
+        margin-bottom: 20px;
+    }   
+}
+/*blog detail page css end*/

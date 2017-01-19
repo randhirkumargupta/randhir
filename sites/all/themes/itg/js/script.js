@@ -730,17 +730,6 @@ jQuery(document).ready(function () {
         getclick.css({'display' : 'inline-block'});
     }, function(){
         getclick.css({'display' : 'none'});
-    });    
+    }); 
     
 });
-    
-
-  
-
-
-
-
-
-
-
-

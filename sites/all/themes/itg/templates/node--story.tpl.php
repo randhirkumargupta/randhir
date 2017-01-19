@@ -26,7 +26,10 @@ if (!empty($content)):
     // get global comment config    
 
     $config_name = trim($global_comment_last_record[0]->config_name);
-
+    
+    // get comment count
+    
+    $get_comment_count = $content['comment_count'];
 
     // get developing story status
 
@@ -261,6 +264,9 @@ if (!empty($content)):
                 }
                 ?>">
                     <div class="story-associate-content">
+                        <div id="videogallery-iframe">
+                                <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading">
+                            </div>
                     <?php
                     $clidk_class_slider = "";
                     $widget_data = '';
@@ -273,12 +279,19 @@ if (!empty($content)):
                         // imgtags" img-fid="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];" use for image tagging
                         ?>
                         <div class="stryimg" ><?php
+                        
                             $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                             $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                             $file_uri = file_create_url($story_image);
-                            print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">        
-                    <i class="fa fa-play-circle"></i>
-                    <i class="fa fa-camera"></i></span></a>';
+                            print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">';?>        
+                    
+                        <?php if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') { ?>
+                            <i class="fa fa-play-circle"></i>
+                        <?php } else  if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {?>                    
+                            <i class="fa fa-camera"></i>
+                        <?php } print '</span></a>' ?>
+                            
+                    <?php
                             if (!empty($getimagetags)) {
                                 foreach ($getimagetags as $key => $tagval) {
                                     $urltags = addhttp($tagval->tag_url);
@@ -314,11 +327,7 @@ if (!empty($content)):
                         </div>
                         <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'])) { ?>    
                             <div class="image-alt"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?></div>
-                        <?php } ?>
-                            
-                            <div id="videogallery-iframe">
-                                <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/tab-loading.gif" alt="loading">
-                            </div>
+                        <?php } ?>                            
                             </div>
                             
                         <?php
@@ -511,8 +520,10 @@ if (!empty($content)):
 
                 <?php
                 $get_val = '0' . arg(1);
-                $like = itg_flag_get_count($get_val, 'like_count');
-                $dislike = itg_flag_get_count($get_val, 'dislike_count');
+                if (function_exists('itg_flag_get_count')) {
+                  $like = itg_flag_get_count($get_val, 'like_count');
+                  $dislike = itg_flag_get_count($get_val, 'dislike_count');
+                }
                 if (!empty($like['like_count'])) {
                     $like_count = $like['like_count'];
                 }
@@ -575,7 +586,7 @@ if (!empty($content)):
                                 }
                                 ?></span></a></li>
     <?php } if ($config_name == 'other') { ?> 
-                                <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span><?php print $comment_count; ?></span></a></li>
+                                <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span><?php print $get_comment_count; ?></span></a></li>
                             <?php } ?>
                             <li class="mhide"><span class="share-count"><?php if (!empty($tot_count)) {
                             print $tot_count;

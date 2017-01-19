@@ -326,6 +326,9 @@
     padding-top: 8px;
 }
 /*budget heading end*/
+.breakingnew-home .title{
+    font-size: 15px;
+}
 
 
 }   
@@ -1116,6 +1119,7 @@
             float: none;
             .marquee{
                 width: 100%;
+                height: 23px;
             }
             .social-share{
                 display: none;
@@ -1623,6 +1627,17 @@
 }
 /*end category wise content list css*/
 
+/*movie page css start*/
+.budget-page-layout{
+    .osscar-video ul .dont-miss-listing .dm-pic{
+        width: 124px;
+    }    
+}
+
+/*movie page css end*/
+
+
+
 }
 @media only screen and (max-width:640px){
     #block-views-anchor-landing-page-block{
@@ -2064,10 +2079,11 @@
         }
     }
     /*CSS end sidebar */
-    .view-category-wise-content-list{
-        h1{
+    /*start category wise content list css*/
+    h1.category-heading{
             @include font(32px,46px,400);                
-        }    
+        } 
+    .view-category-wise-content-list, .view-blog-listing{           
         .catagory-listing{        
             .pic{
                 width: 170px;           

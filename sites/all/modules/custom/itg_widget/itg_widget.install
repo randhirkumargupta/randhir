@@ -51,18 +51,18 @@ function itg_widget_schema() {
         'not null' => FALSE,
       ),
       'constituency' => array(
-        'description' => 'TODO: please describe this field!',
+        'description' => 'constituency',
         'type' => 'varchar',
         'length' => '200',
         'not null' => FALSE,
       ),
       'state' => array(
-        'description' => 'TODO: please describe this field!',
+        'description' => 'state value',
         'type' => 'int',
         'not null' => FALSE,
       ),
       'id' => array(
-        'description' => 'TODO: please describe this field!',
+        'description' => 'table id',
         'type' => 'serial',
         'not null' => TRUE,
       ),
