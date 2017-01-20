@@ -1186,6 +1186,27 @@ function itg_menu_manager_views_pre_render(&$view) {
     $header_content .= '<span class="count">Count (' . $count . ') </span>';
     $header_content .= l(t('Create Menu'), 'itg-menu-manager', array("query" => array("destination" => $arg[0] . "/" . $arg[1])));
     $view->attachment_before = $header_content;
+
+    // Handel case for inactive category.
+    // Here altered result of $views->result i.e. skip rowa which have inactive tid.
+    $correct_view_result = array();
+    foreach ($view->result as $keys => $result) {
+      $tid = $result->tid;
+      // Procceed if tid is not timestamp.
+      // current unix timestamp 1484910494 for Jan 01 1970.
+      if ($tid < 1484910494) {
+        if (function_exists('itg_category_manager_term_state') && !itg_category_manager_term_state($tid)) {
+          continue;
+        }
+        else {
+          $correct_view_result[] = $view->result[$keys];
+        }
+      }
+      else {
+        $correct_view_result[] = $view->result[$keys];
+      }
+    }
+    $view->result = $correct_view_result;
   }
 }
 
