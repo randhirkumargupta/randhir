@@ -115,7 +115,12 @@ window.addEventListener("message", function(ev) {
         $taxonomy_url = $base_url."/taxonomy/term/$arg[2]";
         $term = taxonomy_term_load($arg[2]);
         $header_content = '<h1 class="category-heading">' . $term->name . '</h1>';
-        $header_content .= '<div class="list-grid">' .l(t('<i class="fa fa-list" aria-hidden="true"></i> List'),$taxonomy_url, array('html'=>true,'query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span>'.l(t('<i class="fa fa-th" aria-hidden="true"></i> Grid'),$taxonomy_url ,array('html'=>true,'query'=>array('view_type'=>'grid'))).'</div>';
+        $query = drupal_get_query_parameters();
+        if ($query['view_type'] == 'list') {
+        $header_content .= '<div class="list-grid">' .l(t('<i class="fa fa-list" aria-hidden="true"></i> List'),$taxonomy_url, array('attributes' => array('class' => 'active'),'html'=>true,'query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span>'.l(t('<i class="fa fa-th" aria-hidden="true"></i> Grid'),$taxonomy_url ,array('html'=>true,'query'=>array('view_type'=>'grid'))).'</div>';
+        } else {
+        $header_content .= '<div class="list-grid">' .l(t('<i class="fa fa-list" aria-hidden="true"></i> List'),$taxonomy_url, array('html'=>true,'query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span>'.l(t('<i class="fa fa-th" aria-hidden="true"></i> Grid'),$taxonomy_url ,array('attributes' => array('class' => 'active'),'html'=>true,'query'=>array('view_type'=>'grid'))).'</div>';    
+        }
         print $header_content;
       if(!isset($_GET['view_type']) || (isset($_GET['view_type']) && $_GET['view_type'] == 'list')) {
         // show list view.
