@@ -5613,6 +5613,9 @@ div.node{
     }
   }
   #pti-container-data{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 50px;
     .form-item-pti-magazine{@extend .hide;}
   }
   .form-item-pti-magazine, .form-item-pti-issue, .form-item-pti-supplement, .form-item-story-rating{     
@@ -9716,5 +9719,20 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   .magazine-id{@extend .hide;}
   table tr td:last-child{
     text-align: center;
+  }
+}
+/*print team approval view*/
+#views-form-manage-print-team-page-1{
+  #edit-submit--2,#edit-submit-rating{
+    display: none;
+  }
+  #pti-container-data{ 
+    margin-right:0;
+  }
+  .itg-associate{
+    margin:44px 50px 0 0;
+  }
+  .itg-rating{
+    margin-top:44px;
   }
 }
