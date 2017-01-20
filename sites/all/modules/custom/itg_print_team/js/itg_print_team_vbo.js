@@ -12,7 +12,17 @@ Drupal.behaviors.itg_print_vbo = {
             $('#edit-pti-magazine option:contains("' + magazine + '")').attr('selected', 'selected');
             $( "#edit-pti-magazine" ).trigger( "change" );
         }        
-    });    
+    }); 
+    
+    
+    $('.itg-associate').on('click', function(event) {
+        event.preventDefault();
+        $('#edit-submit--2').trigger('click');
+    });
+    $('.itg-rating').on('click', function(event) {
+        event.preventDefault();
+        $('#edit-submit-rating').trigger('click');
+    });
     // Module code ends here.
   }
 };

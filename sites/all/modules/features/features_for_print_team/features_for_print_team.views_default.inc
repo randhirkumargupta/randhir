@@ -387,7 +387,7 @@ echo arg(0);
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class ="views-action-separator"> | </span> <span class="edit-link">[edit_node]</span>';
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
   /* Field: Global: PHP */
   $handler->display->display_options['fields']['php_2']['id'] = 'php_2';
   $handler->display->display_options['fields']['php_2']['table'] = 'views';
@@ -403,7 +403,7 @@ $status = $data->_field_data[\'nid\'][\'entity\']->field_pti_idea_status[\'und\'
 if($status == \'Rejected\') {
 echo \'\';
 } else {
-echo \'<span class ="views-action-separator"> | </span> <span class="edit-link">edit</span>\';
+echo \'<span class="edit-link">edit</span>\';
 }
 ?>';
   $handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '0';
@@ -1688,7 +1688,7 @@ echo arg(0);
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class ="views-action-separator"> | </span> <span class="edit-link">[edit_node]</span>';
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
   /* Field: Global: PHP */
   $handler->display->display_options['fields']['php_2']['id'] = 'php_2';
   $handler->display->display_options['fields']['php_2']['table'] = 'views';
@@ -1704,7 +1704,7 @@ $status = $data->_field_data[\'nid\'][\'entity\']->field_pti_idea_status[\'und\'
 if($status == \'Rejected\') {
 echo \'\';
 } else {
-echo \'<span class ="views-action-separator"> | </span> <span class="edit-link">edit</span>\';
+echo \'<span class="edit-link">edit</span>\';
 }
 ?>';
   $handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '0';
