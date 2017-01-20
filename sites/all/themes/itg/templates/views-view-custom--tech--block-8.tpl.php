@@ -8,7 +8,7 @@
             }
             else {
                 global $base_url;
-                $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' />";
+                $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt='' />";
             }
     ?>
          <li class="dont-miss-listing">

@@ -6,7 +6,7 @@ foreach ($rows as $row): ?>
     print $row['field_story_extra_large_image'];
   }
   else {
-    $img = "<img width='72' height='72'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image72x72.jpg' />";
+    $img = "<img width='72' height='72'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image72x72.jpg' alt='' />";
     print l($img, $baseurl . '/speaker-details', array('query' => array('speaker' => $row['nid']), 'html' => TRUE));
   }
   ?>
