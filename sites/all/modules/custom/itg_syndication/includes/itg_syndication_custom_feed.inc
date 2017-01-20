@@ -603,7 +603,7 @@ function get_required_data_field_get_items($entity_type, $entity, $field_name) {
             }
           }
           else {
-            $required_value[] = "<![CDATA[ " . htmlspecialchars($body_field_value, ENT_XML1, 'UTF-8') . " ]]>";
+            $required_value[] = "<![CDATA[ " . htmlspecialchars($field_item[0]['value'], ENT_XML1, 'UTF-8') . " ]]>";
           }
           break;
       }

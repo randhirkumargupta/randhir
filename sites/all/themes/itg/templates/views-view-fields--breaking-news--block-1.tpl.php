@@ -44,8 +44,10 @@
   <div class="breakingnew-home">
       <div class="title">Breaking</div>    
       <div class="new-detail">  
-          <div class="marquee">
-          <?php print $field->content; ?>        
+          <div class="marquee-container">
+            <div class="marquee-child">
+                <?php print $field->content; ?>        
+            </div>
           </div>                      
           <div class="live-tv-link">
               <?php $live_tv_img = '<img src="'. $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/imgpsh_fullsize.png" alt="LiveTV" title="LiveTV">'; ?>
@@ -66,47 +68,13 @@
 <?php endforeach; ?>
 
 <script type="text/javascript">
-jQuery(document).ready(function(){
-    //commom marque function
-    function marquee(a, b) {
-    var width = b.width();
-    var start_pos = a.width();
-    var end_pos = -width;
-
-    function scroll() {
-        if (b.position().left <= -width) {
-            b.css('left', start_pos);
-            scroll();
-        }
-        else {
-            time = (parseInt(b.position().left, 10) - end_pos) *
-                (12000 / (start_pos - end_pos)); 
-            b.animate({
-                'left': -width
-            }, time, 'linear', function() {
-                scroll();
-            });
-        }
-    }
-
-    b.css({
-        'width': width,
-        'left': start_pos
+    jQuery(document).ready(function(){
+        jQuery('.marquee-child').liMarquee({        
+            direction: 'left', 
+            scrolldelay: 0, 
+            scrollamount: 50,
+            circular: true, 
+            hoverstop: true
+        });
     });
-    scroll(a, b);
-
-    b.mouseenter(function() {     
-        b.stop();                 
-        b.clearQueue();           
-    });                           
-    b.mouseleave(function() {     
-        scroll(a, b);             
-    });                           
-
-    }
-    
-    marquee(jQuery('.marquee'), jQuery('.marquee .field-content'));
-    
-});
-
 </script>
