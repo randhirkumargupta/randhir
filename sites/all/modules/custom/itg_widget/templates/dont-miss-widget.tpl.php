@@ -29,7 +29,13 @@
 
             <?php if (!empty($node_data['title'])) : ?>    
               <p class="dont-miss-widget dont-miss-<?php echo $node_data['nid'] ?>">
-                <?php echo l(mb_strimwidth($node_data['title'], 0, 150, ".."), "node/" . $node_data['nid']) ?>
+                <?php 
+                if(function_exists('itg_common_get_smiley_title')) {
+                  echo l(itg_common_get_smiley_title($node_data['nid'], 0, 150), "node/" . $node_data['nid'] , array('html' => TRUE));
+                } else {
+                  echo l(mb_strimwidth($node_data['title'], 0, 150, ".."), "node/" . $node_data['nid']);
+                }
+                ?>
               </p>
             <?php endif; ?>
 

@@ -35,7 +35,15 @@ if ($widget_style == 'auto-road-trip') {
                         <?php }
                         ?>
 
-                     <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 55, ".."); ?></a>
+                     
+                     <?php
+                      if (function_exists('itg_common_get_smiley_title')) {
+                        echo l(itg_common_get_smiley_title($nid, 0, 55), "node/" . $nid, array("html" => TRUE));
+                      }
+                      else {
+                        echo l(mb_strimwidth(strip_tags($desc), 0, 55, ".."), "node/" . $nid);
+                      }
+                    ?>
                     </li>
                 <?php }
             } ?>
