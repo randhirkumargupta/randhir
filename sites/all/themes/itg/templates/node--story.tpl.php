@@ -350,7 +350,38 @@ if (!empty($content)):
                             }
                         }
                         ?>
-
+                        
+                        <div class="story-movie">
+                            <?php if (!empty($node->field_story_rating)): ?>
+                               <div class="story-movie-rating">
+                                 <?php print $node->field_story_rating[LANGUAGE_NONE]['0']['value']; ?>
+                               </div>
+                            <?php endif; ?>
+                            <?php if (!empty($node->field_mega_review_cast)): ?>
+                               <div class="story-movie-cast">
+                                 <?php print t('Cast:'); ?>
+                                 <?php  
+                                  $cast_ref_id = $node->field_mega_review_cast[LANGUAGE_NONE]['0']['target_id']; 
+                                  $entity_obj = entity_load('node', array($cast_ref_id));
+                                  $cast = $entity_obj[$cast_ref_id]->title;
+                                  print $cast;
+                                 ?>
+                               </div>
+                            <?php endif; ?>
+                            <?php if (!empty($node->field_mega_review_director)): ?>
+                               <div class="story-movie-director">
+                                 <?php print t('Director:'); ?>
+                                 <?php print $node->field_mega_review_director[LANGUAGE_NONE]['0']['value']; ?>
+                               </div>
+                            <?php endif; ?>
+                            <?php if (!empty($node->field_mega_review_movie_plot)): ?>
+                               <div class="story-movie-plot">
+                                 <?php print t('Plot:'); ?>
+                                 <?php print $node->field_mega_review_movie_plot[LANGUAGE_NONE]['0']['value']; ?>
+                               </div>
+                            <?php endif; ?>
+                        </div>
+                        
                         <div class="description">
                             <?php
                             $story_body = $node->body['und'][0]['value'];
@@ -475,6 +506,7 @@ if (!empty($content)):
                             }
                             ?>
                         </div>
+                            
                     </div>
                 </div>
 
