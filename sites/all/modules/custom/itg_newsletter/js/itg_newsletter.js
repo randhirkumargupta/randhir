@@ -119,7 +119,24 @@
                     }
                 }
             });
-
+            
+            //Newsletter Content hide/show onclick for section select
+            var newsletter_content = $("input[name='field_newsl_newsletter_content[und]']:checked").val();
+                if (newsletter_content === 'select_section') {
+                    $('#edit-field-story-category').show();
+                } else  {
+                    $('#edit-field-story-category').hide();
+                }
+            $("input[name='field_newsl_newsletter_content[und]']").on("click", function () {
+                var newsletter_content = $(this).val();
+                if (newsletter_content === 'select_section') {
+                    $('#edit-field-story-category').show();
+                } else  {
+                    $('#edit-field-story-category').hide();
+                }
+                
+            });
+            
             //Day,date and time hide/show on click
             $("input[name='field_newsl_frequency[und]']").on("click", function () {
                 var check_radio_name = $(this).val();

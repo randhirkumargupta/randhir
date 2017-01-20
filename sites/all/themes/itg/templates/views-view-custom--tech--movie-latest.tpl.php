@@ -16,7 +16,7 @@
                                     print $row['field_story_extra_small_image'];
                                 }
                                 else {
-                                    print "<img width='88' height='66' src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg' />";
+                                    print "<img width='88' height='66' src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg' alt='' />";
                                 }
                                 ?>   
                   
