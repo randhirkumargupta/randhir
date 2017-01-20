@@ -61,7 +61,12 @@ if (!empty($data)) :
           <?php
           $red_dot_class = "";
           $red_dot_class = ($data['node_data']->type == 'breaking_news') ? 'breaking-news-red-dot' : "";
-          $node_title = mb_strimwidth($data['node_data']->title, 0, 65, "..");
+          if(function_exists('itg_common_get_smiley_title')) {
+            $node_title = itg_common_get_smiley_title($data['node_data']->nid, 0, 65);
+          }
+          else {
+            $node_title = mb_strimwidth($data['node_data']->title, 0, 65, "..");
+          }
           // get developing story status
           if (function_exists('itg_msi_get_lock_story_status') && $data['node_data']->type == 'story') {
             $get_develop_story_status = itg_msi_get_lock_story_status($data['node_data']->nid, 'developing_story');
