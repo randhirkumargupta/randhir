@@ -15,6 +15,15 @@
 function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
   // Form alter for event backend node
   if ($form_id == "event_backend_node_form") {
+    
+    if ($form['field_step_completion']['und'][0]['value']['#default_value'] == '0') {
+         $form['actions']['itg_custom_button'] = array(
+          '#type' => 'submit',
+          '#value' => t('Save as Draft'),
+          '#submit' => array('node_form_submit', 'itg_event_backend_save_as_draft_submit_callback'),
+          '#weight' => -8,
+         );
+      }
     $form['actions']['submit']['#submit'][] = 'itg_event_save_initial_speaker_weight';
     if (isset($_GET['button_action']) || $form_state['clicked_button']['#name'] == 'previous') {
       //Hijack our errors so they don't display normally.
@@ -152,6 +161,14 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
   $form['field_config_video']['#access'] = FALSE;
 }
 
+/**
+ * Implements itg_event_backend_save_as_draft_submit_callback
+ * @param type $form
+ * @param array $form_state
+ */
+function itg_event_backend_save_as_draft_submit_callback($form, &$form_state) {
+  $form_state['redirect'] = 'manage-event-backend-draft';
+}
 /**
  * Implements alter message function().
  * @param array $form

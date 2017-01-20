@@ -138,11 +138,12 @@
 
             }
         });
-
+ var resize_image_height = jQuery('#image_original_hight').val();
+ var resize_image_width = jQuery('#image_original_width').val();
         jQuery.ajax({
             url: Drupal.settings.basePath + 'savecropedimage_orignal',
             type: 'post',
-            data: {'image_fiedlid': image_fiedlid, 'content_name': content_type, 'field_name': field_name, 'image_fields': imagefield},
+            data: {'image_fiedlid': image_fiedlid, 'resize_image_width':resize_image_width , 'resize_image_height':resize_image_height, 'content_name': content_type, 'field_name': field_name, 'image_fields': imagefield},
             success: function(data) {
               
                 var image_fiedlid = data;
