@@ -430,11 +430,11 @@ function itg_menu_manager_get_child($tid, $string) {
  * @return array
  */
 function itg_menu_manager_taxonomy_get_children_all($tid, $vid = 0, $key = 'tid') {
-  $c = taxonomy_get_children($tid, $vid, $key);
+  $child = taxonomy_get_children($tid, $vid, $key);
   $result = array();
-  foreach ($c as $t => $d) {
-    $result[$t] = $d;
-    $below = itg_menu_manager_taxonomy_get_children_all($t, $vid, $key);
+  foreach ($child as $term_key => $data) {
+    $result[$term_key] = $data;
+    $below = itg_menu_manager_taxonomy_get_children_all($term_key, $vid, $key);
     if (!empty($below)) {
       foreach ($below as $nt => $nd) {
         $result[$nt] = $nd;
@@ -1172,9 +1172,9 @@ function itg_menu_manager_views_pre_render(&$view) {
     drupal_add_js('jQuery(document).ready(function(){jQuery("#edit-section-child").on(\'change\', function() {
                 var section_chlid = jQuery(this).val();
                 jQuery("#edit-section-id").val(section_chlid);
-            });});', 'inline');
+            });});', array('type' => 'inline' , 'scope' => 'footer'));
     $arg = arg();
-    $view->build_info['title'] = ucfirst(arg(1)) . " level menu ordering";
+    $view->build_info['title'] = ucfirst(arg(1)) . t(" level menu ordering");
     $count = 0;
     if ((arg(1) == 'third' && !isset($_GET['section_child'])) && $_GET['section_child'] == 0) {
       unset($view->result);
