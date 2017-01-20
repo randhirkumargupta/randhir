@@ -48,6 +48,7 @@ if (!empty($content)):
             <?php //pr($node);  ?> 
             <div class="comment-mobile desktop-hide">
                 <ul>
+                     <li><a title ="READ LATER" href="javascript:void(0)"><i class="fa fa-bookmark"></i></a></li>
                     <li class="mail-to-author"><a title ="Mail to author" href="mailto:support@indiatoday.in"><i class="fa fa-envelope"></i><?php print t('Mail to author'); ?></a></li>
                     <li><a href="#" title = "whatsapp"><i class="fa fa-whatsapp"></i></a></li>
                     <?php
@@ -249,7 +250,6 @@ if (!empty($content)):
                                             <?php if (function_exists(itg_sso_url)): ?>
                                                 <?php print itg_sso_url('<i class="fa fa-bookmark"></i> <span>'.t('READ LATER').'</span>', t('READ LATER')); ?>
                                             <?php endif; ?>
-
         <?php endif; ?>
                                     </li>
 

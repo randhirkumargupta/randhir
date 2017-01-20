@@ -32,7 +32,6 @@
 /* Global CSS */
 * {
   box-sizing: border-box;
-  word-break: break-word;
 }
 
 body {
@@ -3685,8 +3684,7 @@ h1.category-heading {
   padding: 20px 0;
 }
 .view-category-wise-content-list .catagory-listing .pic, .view-blog-listing .catagory-listing .pic {
-  width: 144px;
-  padding-right: 10px;
+  width: 124px;
 }
 .view-category-wise-content-list .catagory-listing .detail h3, .view-blog-listing .catagory-listing .detail h3 {
   margin-bottom: 10px;
@@ -4418,15 +4416,18 @@ h1.category-heading {
   width: 100%;
 }
 .poll-wrapper .poll-data .poll-replace-id.poll-option-image .form-item-pole-answer {
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   margin-right: 15px;
   margin-bottom: 20px;
   float: left;
   position: relative;
+  max-width: 124px;
+  width: 30%;
 }
 .poll-wrapper .poll-data .poll-replace-id.poll-option-image .form-item-pole-answer img {
-  width: 120px;
-  height: 93px;
+  width: 124px;
+  max-height: 93px;
+  margin-bottom: 10px;
 }
 .poll-wrapper .poll-data .poll-replace-id.poll-option-image .form-item-pole-answer .form-radio {
   position: absolute;
@@ -4435,8 +4436,11 @@ h1.category-heading {
   bottom: 0;
   margin: auto;
 }
+.poll-wrapper .poll-data .poll-replace-id.poll-option-image .form-item-pole-answer label {
+  font-size: 12px;
+}
 .poll-wrapper .poll-data .poll-replace-id.poll-option-image .form-item-pole-answer .poll-ans-caption {
-  padding: 10px 15px;
+  padding: 0px 0px 10px 0;
   display: inline-block;
 }
 .poll-wrapper .poll-data .poll-replace-id .form-radios .poll-ans-caption {
@@ -4452,6 +4456,7 @@ h1.category-heading {
   font-size: 12px;
   font-size: 0.75rem;
   color: #8a8a8a;
+  font-family: "Roboto", sans-serif;
 }
 .poll-wrapper .social-share {
   display: inline-block;
@@ -4513,7 +4518,7 @@ h1.category-heading {
   max-width: 170px;
 }
 .poll-wrapper .poll-replace-id .form-item-pole-answer {
-  padding: 0 0 12px;
+  padding: 0 0 5px;
 }
 .poll-wrapper .poll-replace-id .form-submit {
   background: #1a3c8d;
@@ -4523,6 +4528,7 @@ h1.category-heading {
   cursor: pointer;
   padding: 6px 5px 5px 5px;
   font-size: 12px;
+  margin-top: 10px;
 }
 .poll-wrapper .poll-replace-id .error {
   display: block;
@@ -4535,6 +4541,12 @@ h1.category-heading {
 .poll-wrapper .poll-replace-id.relative-with-img {
   float: left;
   width: 50%;
+}
+.poll-wrapper .poll-replace-id label {
+  color: #33363b;
+  font-family: roboto;
+  font-size: 14px;
+  text-transform: capitalize;
 }
 .poll-wrapper .related-story {
   min-height: 280px;
