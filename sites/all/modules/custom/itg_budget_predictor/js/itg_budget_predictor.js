@@ -8,12 +8,13 @@ Drupal.behaviors.itg_budget_predictor = {
         jQuery(function ()
         {   
             var section_id = Drupal.settings.itg_budget_predictor.settings.section_id;
+            var user_id = Drupal.settings.itg_budget_predictor.settings.user_id;
             var budget_predictor_cookies_id = Drupal.settings.itg_budget_predictor.settings.budget_predictor_cookies_id;
             var cookies_id = jQuery.cookie("COOKIES_IT_" + section_id);            
-            if (cookies_id === undefined || cookies_id == null || cookies_id.length <= 0) {
+            if ((cookies_id == null || user_id === undefined) && (cookies_id === undefined || cookies_id == null || cookies_id.length <= 0)) {    
                 jQuery.cookie("COOKIES_IT_" + section_id, budget_predictor_cookies_id, { expires: 90 }); // Sample 3
             }
-            
+
             if (Drupal.settings.itg_budget_predictor.settings.stopPredictor == 2) {
                 var isUpdated;
                
@@ -35,7 +36,7 @@ Drupal.behaviors.itg_budget_predictor = {
                                                             sort1: jQuery("#sortable1").sortable('serialize'),
                                                             sort2: jQuery("#sortable2").sortable('serialize'),
                                                             sort3: jQuery("#sortable3").sortable('serialize'),
-                                                            cookies_id: jQuery.cookie("COOKIES_IT_" + section_id),
+                                                            cookies_id: jQuery.cookie("COOKIES_IT_" + section_id)
                                                         },
                                                 success: function (html)
                                                 {

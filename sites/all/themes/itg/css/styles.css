@@ -11628,13 +11628,11 @@ h1.about-us-heading + div p {
 .breakingnew-home .new-detail {
   zoom: 1;
   background: #ffc106;
-  color: #000;
   height: 33px;
   line-height: 33px;
   padding: 0 10px;
   width: 89.7%;
   float: left;
-  font-size: 20px;
 }
 .breakingnew-home .new-detail:before, .breakingnew-home .new-detail:after {
   content: "";
@@ -11645,24 +11643,27 @@ h1.about-us-heading + div p {
 .breakingnew-home .new-detail:after {
   clear: both;
 }
-.breakingnew-home .new-detail .marquee {
+.breakingnew-home .new-detail .marquee-container {
   width: 78%;
   height: 33px;
   position: relative;
   float: left;
   overflow: hidden;
 }
-.breakingnew-home .new-detail .marquee .field-content {
+.breakingnew-home .new-detail .marquee-container .marquee-child {
+  height: 33px;
+  line-height: 33px;
+  background: transparent;
+}
+.breakingnew-home .new-detail .marquee-container .marquee-child a {
+  font-size: 20px;
+  color: #000;
+  font-size: 18px;
+}
+.breakingnew-home .new-detail .marquee-container .field-content {
   cursor: pointer;
-  position: absolute;
-  left: 10px;
-  margin-right: 10px;
   display: inline-block;
   vertical-align: top;
-  top: 0px;
-}
-.breakingnew-home .new-detail .marquee .field-content a {
-  white-space: pre;
 }
 .breakingnew-home .new-detail .social-share {
   float: right;
@@ -11782,24 +11783,6 @@ h1.about-us-heading + div p {
 }
 
 /*magzine lock icon end*/
-/*homepage marquee*/
-.marquee {
-  width: 78%;
-  height: 33px;
-  position: relative;
-}
-.marquee .field-content {
-  cursor: pointer;
-  position: absolute;
-  left: 10px;
-  margin-right: 10px;
-  top: 0px;
-}
-.marquee .field-content a {
-  white-space: pre;
-}
-
-/*homepage marquee end*/
 /*other comment section start*/
 #content #other-comment {
   /*        #comments .comment-form .form-actions{
