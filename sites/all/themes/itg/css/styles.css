@@ -3657,7 +3657,7 @@ h1.category-heading {
   text-align: right;
   font-weight: 600;
 }
-.list-grid a:hover {
+.list-grid a:hover, .list-grid a.active {
   color: #a00606;
 }
 .list-grid span.pipline {

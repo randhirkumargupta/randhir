@@ -2821,7 +2821,7 @@ h1.category-heading{
             text-align: right;
             font-weight:600;
             a{                
-                &:hover{
+                &:hover, &.active{
                     color:#a00606;
                 }
             }
