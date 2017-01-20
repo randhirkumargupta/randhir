@@ -2944,12 +2944,13 @@ footer .footer-top ul li a:hover{
 
 /*other comment css start*/
 #other-comment {
-  background: #f2f2f2;
-  padding: 20px;
   #total-comment{
     font-size: 20px;
     font-weight: 500;
-    padding-bottom: 10px;
+    padding: 10px 10px;
+    background-color: rgb(208, 11, 38);
+    color: #fff;
+    margin-bottom: 10px;
   }
   .error{
     font-size: 13px;
@@ -2965,6 +2966,8 @@ footer .footer-top ul li a:hover{
     z-index: 2147483647;
 }
 .ugc-comment-popup{
+  padding: 10px;
+  background-color: #f2f2f2;
   .close-comment-popup{
     display: none;
     color: #868686;
@@ -3024,6 +3027,7 @@ footer .footer-top ul li a:hover{
     vertical-align: top;
 }
 .itg-comment{
+  padding: 10px;
   .comment-image{
     float: left;
     margin-right: 10px;
@@ -3059,6 +3063,34 @@ footer .footer-top ul li a:hover{
   }
 }
 /*other comment css end*/
+
+#content [id*="ugc-node-form"].ugc-custom-wrapper{
+  .form-field-name-field-user-email, 
+  .form-field-name-field-section{
+    float: left;
+    width: 48%;
+    label{float: none; display: block;}
+  }
+  select{max-width: 100%;}
+  .form-field-name-field-user-name,
+  .form-item-title,
+  .form-field-name-field-user-city,
+  .field-type-text-with-summary{
+    float: left; width: 52%; padding-right: 2%;
+    label{float: none; display: block;}
+  }
+  .field-type-text-with-summary{
+    .form-type-textarea > label + div{padding: 0;}
+    .form-textarea{height: 100px;}
+  }
+  .captcha-lable{width: auto; float: none;}
+  .captcha{padding-left: 52%;}
+  .form-actions{
+    display: inline-block; vertical-align: top; width: 100%; padding: 0; text-align: right;
+    .form-submit{padding: 10px 30px;}
+  }
+  span.error{padding-left: 0;}
+}
 
 
 /* CSS To Add Zoom Effect on Images */
@@ -5472,16 +5504,24 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   /* End of Quiz And Survey */
   
   .total-point-wrapper{
-    display: block;
+    display: inline-block;
+    vertical-align: top;
     margin-top: 20px;
-    .pregress-bar .pregress-bar-active{
-      max-width: 60%;
+    max-width: 66%;
+    img{
+      width: 50px;
+      height: 50px;
     }
-    .pregress-bar span.current-badge{
-      left: 15px;
+    .total-point-value{
+      span{font-size: 32px;}
     }
-    .pregress-bar span.next-badge{
-      right: 15px;
+    .pregress-bar{
+      margin-top: 10px;
+      .pregress-bar-active{max-width: 80%;}
+      span.current-badge{left: 0; top: 0; text-align: left;}
+      span.next-badge{right: 0; top: 0; text-align: right;}
+      span.current-badge small, 
+      span.next-badge small{margin-bottom: 0;}
     }
     .points-to-go{
       padding-right: 15px;
@@ -5518,6 +5558,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       max-width: 90px;
     }
   }
+  .personal-list > li .personal-details .personal-pic{height: auto;}
 }
 @media all and (max-width: 480px){
   .photos-videos-wrapper .movie-videos, 

@@ -117,6 +117,7 @@ function features_for_print_team_user_default_permissions() {
       'Co-ordinator' => 'Co-ordinator',
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Photo Coordinator' => 'Photo Coordinator',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',

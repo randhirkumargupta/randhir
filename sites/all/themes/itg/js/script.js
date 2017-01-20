@@ -557,7 +557,7 @@ jQuery(document).ready(function () {
     var eventMenu = function () {
         winWidth = jQuery(window).width();
         if (winWidth < 1024) {
-            jQuery('#block-menu-menu-event-menu').prepend('<div><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></div>');
+            jQuery('#block-menu-menu-event-menu .col-md-8').prepend('<div><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></div>');
             jQuery('#block-menu-menu-event-menu a.mobile-nav').click(function () {
                 jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
             });
@@ -721,6 +721,13 @@ jQuery(document).ready(function () {
           el.closest('.personal-menu-tab-wrapper').find('.tab-text').attr('data-tab', get_class).text(get_text);
           el.parent().slideUp('fast');
         });
+        
+        // jQuery code for personalization saved item on mobile
+        jQuery('.personal-list').on('touch', 'li', function(){
+          jQuery(this).siblings().find('.personal-action').css('opacity', '0');
+          jQuery(this).find('.personal-action').css('opacity', '1');
+        });
+        
     }
     
     //story page social share for mobile
