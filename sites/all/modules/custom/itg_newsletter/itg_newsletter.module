@@ -120,7 +120,7 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id) {
       '#value' => t('Cancel'),
     );
 
-    $form['actions']['submit']['#value'] = 'Publish';
+    $form['actions']['submit']['#value'] = t('Publish');
     unset($form['title']);
     unset($form['field_newsl_website_name']);
 

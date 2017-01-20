@@ -52,12 +52,12 @@ function itg_newsletter_content_preview_data($node) {
     else {
       $thumbnail = $base_url . '/' . drupal_get_path('module', 'itg_newsletter') . '/image/no-image.png';
     }
-    $link = $base_url . '/node/' . $news_detail->nid;
+    $link = 'node/' . $news_detail->nid;
     $content .= '<tr>
                <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
                 <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;">' . l($title, $link, array('attributes' => array('target' => '_blank'))) . '</h2>
-                <p style="margin: 0; font-size: 14px;">' . $kicker . '.</p>
+                <p style="margin: 0; font-size: 14px;">' . t($kicker). '.</p>
               </td></tr>';
   }
   $content .= '</table>

@@ -234,7 +234,7 @@ function itgadmin_node_preview($variables) {
         $cat_array[] = $values['tid'];
       }
       $tid_val = implode(',', $cat_array);
-      $output .= l('Download HTML', 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $tid_val);
+      $output .= l(t('Download HTML'), 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $tid_val);
     }
   }
   else {

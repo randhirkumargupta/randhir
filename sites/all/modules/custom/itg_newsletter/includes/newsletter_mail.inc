@@ -36,7 +36,7 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
   }
   $params = array(
     'body' => $mail_content,
-    'subject' => 'India Today Newsletter | ' . $template_node->field_news_title[LANGUAGE_NONE][0]['value'],
+    'subject' => t('India Today Newsletter').' | ' . $template_node->field_news_title[LANGUAGE_NONE][0]['value'],
   );
 
   $mail = drupal_mail('itg_newsletter', 'send_newsletter', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
@@ -183,7 +183,7 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
                <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
                 <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;">' . l($title, $link, array('attributes' => array('target' => '_blank'))) . '</h2>
-                <p style="margin: 0; font-size: 14px;">' . $kicker . '.</p>
+                <p style="margin: 0; font-size: 14px;">' . t($kicker) . '.</p>
               </td></tr>';
   }
   $content .= '</table>
@@ -195,7 +195,7 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
       </td>
     </tr>';
 
-  $content .= '</table><p>&nbsp;</p><p>Thanks,</p><p>India Today Group</p></body></html>';
+  $content .= '</table><p>&nbsp;</p><p>'.t('Thanks').',</p><p>'.t('India Today Group').'</p></body></html>';
   return $content;
 }
 
