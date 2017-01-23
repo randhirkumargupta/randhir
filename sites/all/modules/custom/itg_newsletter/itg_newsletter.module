@@ -789,7 +789,6 @@ function itg_newslatter_register_form_validate($form, &$form_state) {
   if (!empty($email) && !valid_email_address($email)) {
     form_set_error('email', 'Invalid email address!');
   }
-
   if (!empty($email)) {
     $query = db_select('itg_newslatter_update_details', 'd')
         ->fields('d', array('id'));
