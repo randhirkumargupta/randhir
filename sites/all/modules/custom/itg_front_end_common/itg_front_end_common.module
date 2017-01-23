@@ -131,7 +131,7 @@ function _vukkul_block_content() {
   $page_id = arg(1);
   $node = node_load($page_id);
   $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
-  if (function_exists(itg_common_get_node_title)) {
+  if (function_exists('itg_common_get_node_title')) {
     $reporter_node = itg_common_get_node_title($byline_id);
   }
   $n_title = $node->title . " - India Today";
@@ -385,7 +385,7 @@ function _related_story_left_block_content() {
   global $base_url;
   
   $related_content = itg_get_related_content(arg(1));
-  if (function_exists(itg_get_related_story_id)) {
+  if (function_exists('itg_get_related_story_id')) {
     $related_result = itg_get_related_story_id($related_content);
   }
   
@@ -425,7 +425,7 @@ function _related_story_bottom_block_content() {
   global $base_url;
 
   $related_content = itg_get_related_content(arg(1));
-  if (function_exists(itg_get_related_story_id)) {
+  if (function_exists('itg_get_related_story_id')) {
     $related_result = itg_get_related_story_id($related_content);
   }
   $related_story = '<h3><span>Related</span></h3>';
@@ -461,13 +461,14 @@ function _related_podcast_bottom_block_content() {
   global $base_url;
 
   $related_content = itg_get_related_content(arg(1));
-  if (function_exists(itg_get_related_story_id)) {
+  if (function_exists('itg_get_related_story_id')) {
     $related_result = itg_get_related_story_id($related_content);
   }
  $related_story = '';
   if(count($related_story)>0) {
     $related_story = '<h3><span>'.t('Related').'</span></h3>';
   }
+  if(!empty($related_result)) {
   $related_story.= "<div class='row'><ul>";
   $i = 0;
   foreach ($related_result as $site_hash_key) {
@@ -491,5 +492,6 @@ function _related_podcast_bottom_block_content() {
       break;
   }
   $related_story.= "</ul></div>";
+  }
   return $related_story;
 }
