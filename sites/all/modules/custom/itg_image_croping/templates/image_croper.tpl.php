@@ -106,6 +106,8 @@ $image_exten = end(explode('.', $data->uri));
 ?>
 <input type="hidden" id="crop_image_url" value="<?php echo $url; ?>">
 <input type="hidden" id="image_fiedlid" value="<?php echo $data->fid; ?>">
+
+<input type="hidden" id="orig_image_fiedlid" value="<?php echo $data->fid; ?>">
 <input type="hidden" id="image_exten" value="<?php echo $image_exten; ?>">
 
 <div class="croper">
