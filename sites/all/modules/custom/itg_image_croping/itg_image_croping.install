@@ -71,6 +71,43 @@ function itg_image_croping_schema() {
                 'length' => '255',
                 'not null' => FALSE,
             ),
+            'image_keyword' => array(
+                'description' => t('Image keyword'),
+                'type' => 'varchar',
+                'length' => '255',
+                'not null' => FALSE,
+            ),
+            'image_tags' => array(
+                'description' => t('Image Tags'),
+                'type' => 'varchar',
+                'length' => '255',
+                'not null' => FALSE,
+            ),
+            'image_place' => array(
+                'description' => t('Image Place'),
+                'type' => 'varchar',
+                'length' => '255',
+                'not null' => FALSE,
+            ),
+            'image_photo_grapher' => array(
+                'description' => t('Image Photo Grapher'),
+                'type' => 'varchar',
+                'length' => '255',
+                'not null' => FALSE,
+            ),
+            'image_date' => array(
+                'description' => t('Image Date'),
+                'type' => 'varchar',
+                'mysql_type' => 'datetime',
+                'length' => '255',
+                'not null' => FALSE,
+            ),
+            'image_desc' => array(
+                'description' => t('Image Description'),
+                'type' => 'varchar',
+                'length' => '255',
+                'not null' => FALSE,
+            ),
             'image_syndicate' => array(
                 'description' => t('Image courtesy'),
                 'type' => 'varchar',

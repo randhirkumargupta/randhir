@@ -25,7 +25,7 @@ function itg_newsletter_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
-  
+
   $items['newsletter_data_preview'] = array(
     'title' => 'Download Newsletter Preview',
     'page callback' => 'itg_newsletter_content_preview_data',
@@ -686,7 +686,6 @@ function itg_newsletter_send_automatic_newsletter() {
   while ($record_auto = $result_auto->fetchAssoc()) {
     $automatic_nids[] = $record_auto['nid'];
   }
-
   // Send automatic mail
   if (!empty($automatic_nids)) {
     foreach ($automatic_nids as $auto_nids) {
@@ -732,6 +731,7 @@ function register_for_more_updates() {
  * Create register_for_more_updates form
  */
 function itg_newslatter_register_form() {
+  
   $form = array();
 
   $form['messages'] = array(
@@ -742,21 +742,26 @@ function itg_newslatter_register_form() {
   $form['name'] = array(
     '#type' => 'textfield',
     '#title' => 'Name',
-    '#attributes' => array('placeholder' => 'Name'),
+    '#attributes' => array('placeholder' => t('Name')),
     '#required' => TRUE,
   );
 
   $form['email'] = array(
     '#type' => 'textfield',
     '#title' => 'Email Id',
-    '#attributes' => array('placeholder' => 'Email Id'),
+    '#attributes' => array('placeholder' => t('Email Id')),
     '#required' => TRUE,
   );
   $form['mobile'] = array(
     '#type' => 'textfield',
     '#title' => 'Mobile No',
-    '#attributes' => array('placeholder' => 'Mobile No'),
+    '#attributes' => array('placeholder' => t('Mobile No')),
     '#required' => TRUE,
+  );
+  $form['page_name'] = array(
+    '#type' => 'hidden',
+    '#title' => 'page name',
+    '#default_value' => arg(2),
   );
 
   $form['submit'] = array(
@@ -767,8 +772,10 @@ function itg_newslatter_register_form() {
       'effect' => "fade",
     ),
   );
-
+  
   drupal_add_js("jQuery(document).ready(function(){ jQuery('#itg-newslatter-register-form label').hide(); });", 'inline');
+  drupal_add_js("jQuery(document).ajaxSuccess (function () { jQuery('#edit-email').val(''); 
+                 jQuery('#edit-name').val(''); jQuery('#edit-mobile').val(''); });", 'inline');
   return $form;
 }
 
@@ -784,12 +791,14 @@ function itg_newslatter_register_form_validate($form, &$form_state) {
     form_set_error('mobile', t('Your Mobile Numbers should contain 10 digits'));
   }
   if (!empty($email) && !valid_email_address($email)) {
-    form_set_error('email', 'Invalid email address!');
+    form_set_error('email', t('Invalid email address!'));
   }
-
   if (!empty($email)) {
-    $updates_check = itg_newslatter_register_more_updates_check($email);
-    if (!empty($updates_check) && $updates_check > 0) {
+    $query = db_select('itg_newslatter_update_details', 'd')
+        ->fields('d', array('id'));
+    $query->condition('email', $email, '=');
+    $result = $query->range(0, 1)->execute()->rowCount();
+    if (!empty($result) && $result > 0) {
       form_set_error('email', 'This email address is already registered!');
     }
   }
@@ -800,18 +809,20 @@ function itg_newslatter_register_form_validate($form, &$form_state) {
  * @param Array $form
  * @param Array $form_state
  */
-function itg_newslatter_register_form_submit($form, &$form_state) {
+function itg_newslatter_register_form_submit(&$form, &$form_state) {
+  
   $name = $form_state['values']['name'];
   $email = $form_state['values']['email'];
   $mobile = $form_state['values']['mobile'];
-
+  $page_name = $form_state['values']['page_name'];
+  
   // Insert data in to itg_newslatter_update_details table
   $query = db_insert('itg_newslatter_update_details');
   $query->fields(array(
     'name' => $name,
     'email' => $email,
     'mobile' => $mobile,
-    'section' => 'newslatter',
+    'section' => $page_name,
     'created' => time()
   ));
   $query->execute();
@@ -824,27 +835,13 @@ function itg_newslatter_register_form_submit($form, &$form_state) {
  * @param Array $form_state
  * @return Array
  */
-function itg_newslatter_register_custom_submit($form, &$form_state) {
-
+function itg_newslatter_register_custom_submit(&$form, &$form_state) {
   $commands = array();
   $commands[] = ajax_command_replace('#messages', '<div id="messages">' . theme('status_messages') . '</div>');
   return array(
     '#type' => 'ajax',
     '#commands' => $commands
   );
-}
-
-/**
- * Get check register more updates for mobile & email.
- * @param string $email
- * @param int $mobile
- * @return int
- */
-function itg_newslatter_register_more_updates_check($email) {
-  return $query = db_select('itg_newslatter_update_details', 'd')
-      ->fields('d', array('id'));
-  $query->condition('email', $email, '=');
-  $query->range(0, 1)->execute()->rowCount();
 }
 
 /**
@@ -860,6 +857,21 @@ function itg_newslatter_get_subscribe_users_email() {
     $user_emails[] = $records['mail'];
   }
   return $user_emails;
+}
+
+/**
+ * Get Email address of users who has subscribed for newsletter via education page
+ * @return array
+ */
+function itg_newslatter_get_subscribe_page_users_email($getsection) {
+  $query = db_select('itg_newslatter_update_details', 'nud');
+  $query->fields('nud', array('email'));
+  $query->condition('section', $getsection, '=');
+  $result = $query->execute();
+  while ($records = $result->fetchAssoc()) {
+    $useremails[] = $records['email'];
+  }
+  return $useremails;
 }
 
 /**

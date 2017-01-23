@@ -185,6 +185,16 @@ function itg_story_form_custom_callback($form, &$form_state) {
     $node_type = str_replace("_", " ", $node_type);
     $title = ucfirst($form_state['node']->title);
 
+     // code insert image in custom table
+    $node_id = $form_state['node']->nid;
+    if ($form_state['input']['original_image_fids'] != "") {
+        $image_ids = explode('#', $form_state['input']['original_image_fids']);
+
+        if (!empty($image_ids)) {
+            if (function_exists('itg_photogallery_insert_image_data'))
+                itg_photogallery_insert_image_data($image_ids, $node_id);
+        }
+    }
     if (isset($_SESSION['messages']['status'])) {
         unset($_SESSION['messages']['status']);
     }
@@ -316,6 +326,12 @@ function itg_story_node_validate($node, $form, &$form_state) {
 function itg_story_after_build($form, &$form_state) {
 
     global $user, $base_url;
+    
+    $form['original_image_fids'] = array(
+        '#type' => 'hidden',
+        '#value' => $form_state['input']['original_image_fids'],
+        '#attributes' => array('id' => 'original_image_fids', 'name' => 'original_image_fids'),
+    );
     drupal_add_js('jQuery(document).ready(function() {              
                   if (jQuery("#edit-path-pathauto").is(":checked")) {                
                     jQuery("#edit-path-alias").attr("readonly", "readonly");
