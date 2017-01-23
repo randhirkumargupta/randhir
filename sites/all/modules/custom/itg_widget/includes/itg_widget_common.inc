@@ -930,6 +930,9 @@ function itg_widget_theme() {
         'live_score_data' => array(
             'template' => 'templates/live-score-data',
         ),
+        'podcast_banner' => array(
+            'template' => 'templates/podcast-banner',
+        ),
     );
     return $themes;
 }
