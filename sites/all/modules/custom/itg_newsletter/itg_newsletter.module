@@ -742,20 +742,20 @@ function itg_newslatter_register_form() {
   $form['name'] = array(
     '#type' => 'textfield',
     '#title' => 'Name',
-    '#attributes' => array('placeholder' => 'Name'),
+    '#attributes' => array('placeholder' => t('Name')),
     '#required' => TRUE,
   );
 
   $form['email'] = array(
     '#type' => 'textfield',
     '#title' => 'Email Id',
-    '#attributes' => array('placeholder' => 'Email Id'),
+    '#attributes' => array('placeholder' => t('Email Id')),
     '#required' => TRUE,
   );
   $form['mobile'] = array(
     '#type' => 'textfield',
     '#title' => 'Mobile No',
-    '#attributes' => array('placeholder' => 'Mobile No'),
+    '#attributes' => array('placeholder' => t('Mobile No')),
     '#required' => TRUE,
   );
   $form['page_name'] = array(
@@ -772,8 +772,6 @@ function itg_newslatter_register_form() {
       'effect' => "fade",
     ),
   );
-  $form['#prefix'] = "<div id='rajveer-test'>";
-  $form['#suffix'] = "</div>";
   drupal_add_js("jQuery(document).ready(function(){ jQuery('#itg-newslatter-register-form label').hide(); });", 'inline');
   drupal_add_js("jQuery(document).ajaxSuccess (function () { jQuery('#edit-email').val(''); 
                  jQuery('#edit-name').val(''); jQuery('#edit-mobile').val(''); });", 'inline');
@@ -792,7 +790,7 @@ function itg_newslatter_register_form_validate($form, &$form_state) {
     form_set_error('mobile', t('Your Mobile Numbers should contain 10 digits'));
   }
   if (!empty($email) && !valid_email_address($email)) {
-    form_set_error('email', 'Invalid email address!');
+    form_set_error('email', t('Invalid email address!'));
   }
   if (!empty($email)) {
     $query = db_select('itg_newslatter_update_details', 'd')

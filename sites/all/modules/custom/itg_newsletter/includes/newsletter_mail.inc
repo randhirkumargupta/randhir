@@ -20,7 +20,7 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
   $template_node = node_load($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
 
   // TODO: Define globally
-  if (in_array(515, $cat_array))
+  if (in_array(NEWSLETTER_EDUCATION_TID, $cat_array))
   {
     $subscriberlist = itg_newslatter_get_subscribe_page_users_email(515);
   }
