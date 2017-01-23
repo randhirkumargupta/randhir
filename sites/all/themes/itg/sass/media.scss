@@ -294,8 +294,14 @@
         .col-el-5{
             width: 240px;
         }   
-    }    
+    }
+    .election-top-block{
+        .social-share{
+            padding-top: 0;
+        }
+    }
 }
+
 /*Election page css end*/
 
 /*static pages start*/
@@ -354,8 +360,10 @@
     }
     .top-tab ul li{
         padding: 5px;
-        width: 32.3%;
+        width: 33%;
         text-align: center;
+        border-right: 5px solid #f4f4f4;
+        margin-right: 0;
         span{
             display: block;        
             margin-bottom: 5px;
@@ -1370,20 +1378,6 @@
     }
 }
 /*ask an expret css end*/
-/*event page css start*/
-#block-menu-menu-event-menu{
-     .col-md-4{
-        background: #fff;
-        padding-top: 10px;
-    }
-    .event-detail .event-str-date{
-        font-size: 20px;
-    }
-}
-/*event page css end*/
-
-
-
 }
 
 
@@ -1731,6 +1725,31 @@
         background: #fff;
         padding-top: 10px;
     }    
+    .event-detail .event-str-date{
+        font-size: 20px;
+    }    
+    .wrap-mobile-social{
+        position: relative;
+        overflow: hidden;
+     .social-share{
+        float: right;
+            a{
+                line-height: 40px;
+                height: 40px;
+                padding: 0 5px;
+            }
+        }
+        .event-search{
+            position: absolute;            
+            top: 10px;
+            right: 20px;
+            input[type="text"]{
+                height: 25px;
+                border: none;
+                width: 0;
+            }
+        }
+    }
 }
 #block-itg-event-backend-program-tab-block .top-block-highlight{
     .highlights-video{
@@ -1741,8 +1760,6 @@
     width: 140px;
 }
 /*event page css end*/
-
-
 
 }
 @media only screen and (max-width:640px){
@@ -1759,6 +1776,9 @@
             background: transparent;
             height: 100%;
         }
+    }
+    .page-user .social-share a{
+       padding: 0 10px 0 45px;
     }
 }
 
@@ -1815,8 +1835,9 @@
             margin-top: 20px;
         }
         .election-graph{     
-            margin-top: -50px;
+            margin-top: -30px;
             padding-bottom:50px;
+            width:auto;
             .col-el-5{
                 width: 100%;
             }
