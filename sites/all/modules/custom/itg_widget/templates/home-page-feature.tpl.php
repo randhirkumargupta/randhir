@@ -15,7 +15,14 @@
 
       <?php if (!empty($data[0]['title'])) : ?>
         <h2 class="home-page-feature-<?php echo $data[0]['nid'] ?>">
-          <?php echo l(mb_strimwidth($data[0]['title'], 0, 90, ".."), "node/" . $data[0]['nid']); ?>
+          <?php
+          if (function_exists('itg_common_get_smiley_title')) {
+            echo l(itg_common_get_smiley_title($data[0]['nid'], 0, 90), "node/" . $data[0]['nid'], array('html' => TRUE));
+          }
+          else {
+            echo l(mb_strimwidth($data[0]['title'], 0, 90, ".."), "node/" . $data[0]['nid']);
+          }
+          ?>
         </h2>   
       <?php endif; ?>
     </div>
@@ -32,7 +39,14 @@
       <?php endif; ?>
       <?php if (!empty($data[1]['title'])) : ?>
         <h3 class="home-page-feature-small-<?php echo $data[1]['nid'] ?>">
-          <?php echo l(mb_strimwidth($data[1]['title'], 0, 150, ".."), "node/" . $data[1]['nid']) ?>
+          <?php
+          if (function_exists('itg_common_get_smiley_title')) {
+            echo l(itg_common_get_smiley_title($data[1]['nid'], 0, 150), "node/" . $data[1]['nid'], array('html' => TRUE));
+          }
+          else {
+            echo l(mb_strimwidth($data[1]['title'], 0, 90, ".."), "node/" . $data[1]['nid']);
+          }
+          ?>
         </h3>   
       <?php endif; ?>
     </div>
@@ -49,7 +63,14 @@
       <?php endif; ?>
       <?php if (!empty($data[2]['title'])) : ?>
         <h3 class="home-page-feature-small-<?php echo $data[2]['nid'] ?>">
-          <?php echo l(mb_strimwidth($data[2]['title'], 0, 150, ".."), "node/" . $data[2]['nid']) ?>
+          <?php
+          if (function_exists('itg_common_get_smiley_title')) {
+            echo l(itg_common_get_smiley_title($data[2]['nid'], 0, 150), "node/" . $data[2]['nid'], array('html' => TRUE));
+          }
+          else {
+            echo l(mb_strimwidth($data[2]['title'], 0, 90, ".."), "node/" . $data[2]['nid']);
+          }
+          ?>
         </h3>    
       <?php endif; ?>
     </div>

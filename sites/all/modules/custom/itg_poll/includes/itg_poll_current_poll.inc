@@ -120,7 +120,7 @@ function itg_poll_form_new($form, &$form_state, $nid) {
         $poll_answer[$key] = isset($poll_image) ? $poll_image : '';
       }
       else {
-        $poll_answer[$key] = isset($poll_answer_text) ? t($poll_answer_text) . '<br /><span class="poll-ans-caption">' . t($poll_caption_text) . '</span>' : '';
+        $poll_answer[$key] = isset($poll_answer_text) ? t($poll_answer_text) . '<span class="poll-ans-caption">' . t($poll_caption_text) . '</span>' : '';
       }
     }
   }

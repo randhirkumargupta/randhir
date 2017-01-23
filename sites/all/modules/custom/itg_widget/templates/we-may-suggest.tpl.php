@@ -21,7 +21,15 @@
           <?php } ?>
             <?php if (!empty($entity_info['title'])) : ?>
             <p class="title may-be-suggest-<?php echo $entity_info['nid'] ?>">
-            <?php echo l(mb_strimwidth($entity_info['title'], 0, 90, ".."), "node/" . $entity_info['nid']); ?>
+            <?php 
+            if(function_exists('itg_common_get_smiley_title')) {
+              echo l(itg_common_get_smiley_title($entity_info['nid'], 0, 90, ".."), "node/" . $entity_info['nid'] , array('html' => TRUE)); 
+            }
+            else {
+              echo l(mb_strimwidth($entity_info['title'], 0, 90, ".."), "node/" . $entity_info['nid']); 
+            }
+            
+            ?>
             </p>
         <?php endif; ?>
         </li>        

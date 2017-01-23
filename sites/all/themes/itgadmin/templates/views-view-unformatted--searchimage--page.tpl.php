@@ -13,14 +13,17 @@ if (!empty($title)):
     <?php endif; ?>
 <div class="search-img-list" id="easyPaginate">
     <?php foreach ($rows as $id => $row) {
-        if (trim($row) != "") {
-            ?>
-
-            <?php print $row; ?>
-
-
-        <?php
+       
+        $allimage=  explode(' ', $row);
+        if(!empty($allimage)) {
+            foreach ($allimage as $img) {
+                if(trim($img) !="") {
+                      print '<img  width="100" height="44" src="'. $img.'">'; 
+                }
+            
+            }
         }
+      
     }
 
     if (empty($rows)) {

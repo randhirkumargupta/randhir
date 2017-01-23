@@ -3002,11 +3002,38 @@ footer .footer-top ul li a:hover{
     text-align: right;
 }
 .comment-user-details > div {
-    display: inline-block;
-    margin-right: 7px;
-    vertical-align: top;
-    width: 200px;
-    text-align: left;
+  display: inline-block;
+  margin-right: 7px;
+  vertical-align: top;
+  width: 200px;
+  text-align: left;
+  .social-login{
+    text-align: right;
+    span {
+      display: inline-block;
+      vertical-align: top;
+      margin: 4px;
+      width: 24px;
+      height: 24px;
+      .fa {
+        font-size: 28px;
+        vertical-align: top;
+        line-height: 28px; 
+        &.fa-facebook-square{
+          color: #1a3c8d;
+        }
+        &.fa-twitter-square{
+          color: #1b95e0;
+        }
+        &.fa-google-plus-square{
+          color: #dd4a40;
+        }
+        &.fa-linkedin-square{
+          color: #0274B3;
+        }
+      }
+    }
+  }
 }
 .comment-user-details .form-text {
     width: 100%;
@@ -3063,6 +3090,34 @@ footer .footer-top ul li a:hover{
   }
 }
 /*other comment css end*/
+
+#content [id*="ugc-node-form"].ugc-custom-wrapper{
+  .form-field-name-field-user-email, 
+  .form-field-name-field-section{
+    float: left;
+    width: 48%;
+    label{float: none; display: block;}
+  }
+  select{max-width: 100%;}
+  .form-field-name-field-user-name,
+  .form-item-title,
+  .form-field-name-field-user-city,
+  .field-type-text-with-summary{
+    float: left; width: 52%; padding-right: 2%;
+    label{float: none; display: block;}
+  }
+  .field-type-text-with-summary{
+    .form-type-textarea > label + div{padding: 0;}
+    .form-textarea{height: 100px;}
+  }
+  .captcha-lable{width: auto; float: none;}
+  .captcha{padding-left: 52%;}
+  .form-actions{
+    display: inline-block; vertical-align: top; width: 100%; padding: 0; text-align: right;
+    .form-submit{padding: 10px 30px;}
+  }
+  span.error{padding-left: 0;}
+}
 
 
 /* CSS To Add Zoom Effect on Images */

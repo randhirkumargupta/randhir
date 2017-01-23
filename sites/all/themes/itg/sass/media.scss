@@ -330,6 +330,39 @@
     font-size: 15px;
 }
 
+/*event page css start*/
+.event-add-header{
+    display: none;
+}
+#block-menu-menu-event-menu{
+    ul{
+        li{
+            a{
+                padding: 0 8px;
+            }
+        }
+    }
+    .event-detail .event-vanue-detail-place{
+        width: 100%;
+        text-align: center;
+        padding: 0;
+    }
+}
+#block-itg-event-backend-post-event-block{
+    .content-detail .side-left{
+        padding-right: 15px;
+    }
+    .top-tab ul li{
+        padding: 5px;
+        width: 32.3%;
+        text-align: center;
+        span{
+            display: block;        
+            margin-bottom: 5px;
+        }
+    }
+} 
+/*event page css end*/
 
 }   
 @media only screen and (max-width:991px){
@@ -352,8 +385,7 @@
 #block-menu-menu-event-menu{
     .mobile-nav{
         color: #fff;
-        font-size: 30px;
-        padding: 0 15px;
+        font-size: 26px;        
         height: 40px;
         line-height: 40px;        
     }
@@ -366,7 +398,7 @@
                 line-height: 40px;
             }
         }
-    }
+    }   
 }
 /* end Event page mobile nav*/
 /*story page css*/
@@ -567,12 +599,13 @@
                         .menu{
                             position: absolute;
                             right: 0;
-                            top: 20px;
+                            top: 30px;
                             background: #a00606;
                             padding: 5px;
                             box-shadow: 0 0 3px #000;
                             display:none;
                             z-index:1;
+                            width:120px;
                             li{
                                 padding: 5px 0;                                
                             }
@@ -628,7 +661,9 @@
     .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable, .tech-layout-page .itg-h396-section .droppable,
     .tech-layout-page .itg-h385-section .droppable, .election-page .left-side .itg-photo .droppable, .movie-layout-page .itg-h385-section .droppable,
     .movie-layout-page .itg-h396-section .droppable, .movie-layout-page .itg-layout-580 .itg-widget-child .droppable, .movie-layout-page .itg-layout-580 .droppable,
-    .movie-layout-page .itg-layout-580 .droppable .auto-block-1, .movie-layout-page .itg-layout-580 .droppable .auto-block-2, .education-layout-page .itg-layout-565 .droppable{
+    .movie-layout-page .itg-layout-580 .droppable .auto-block-1, .movie-layout-page .itg-layout-580 .droppable .auto-block-2, .education-layout-page .itg-layout-565 .droppable,
+    .education-layout-page .itg-layout-672 .itg-widget-child .droppable, .education-layout-page .itg-295-layout .droppable, .education-layout-page .itg-325-layout .droppable,
+    .education-layout-page .itg-345-layout .droppable, .education-layout-page .itg-325-layout .ad-widget{
         height: auto;        
     }
     
@@ -1041,7 +1076,7 @@
                 margin-bottom: 10px;
             }
             .social-share{
-                display: inline-block;
+                display:block;
                 vertical-align: middle;
                 @include social-share;    
                 ul{
@@ -1051,6 +1086,9 @@
                 }
             }
         }
+    }
+    .poll-wrapper .poll-data .poll-replace-id.poll-option-image .form-item-pole-answer{
+        margin-right: 10px;
     }
     
     /*css end poll page*/  
@@ -1117,7 +1155,7 @@
             padding: 0;
             width: 100%;
             float: none;
-            .marquee{
+            .marquee-container{
                 width: 100%;
                 height: 23px;
             }
@@ -1316,6 +1354,36 @@
     }
 }
 /*Globle search page css end*/
+
+/*ask an expret css start*/
+.ask-an-expert-question-answer {
+    .view-header{
+        font-size: 20px;
+        height: 35px;
+        line-height: 35px;
+    }
+    .view-content{
+        margin: 20px 0;
+    }
+    .views-row {
+        padding: 10px 5px;
+    }
+}
+/*ask an expret css end*/
+/*event page css start*/
+#block-menu-menu-event-menu{
+     .col-md-4{
+        background: #fff;
+        padding-top: 10px;
+    }
+    .event-detail .event-str-date{
+        font-size: 20px;
+    }
+}
+/*event page css end*/
+
+
+
 }
 
 
@@ -1635,6 +1703,44 @@
 }
 
 /*movie page css end*/
+
+/*ask an expret css start*/
+#block-itg-ask-expert-ask-an-expert-details-page-block .question-form-title h3{
+    font-size: 16px;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block .ask-user-detail .section-user-details, #block-itg-ask-expert-ask-an-expert-details-page-block .ask-user-detail .ask-an-expert-like-dislike{
+    width: 100%;
+    float: none;
+    overflow: hidden;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block .ask-user-detail .ask-an-expert-like-dislike{
+    margin-top: 20px;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config #itg-custom-ask-an-expert-form .captcha{
+    width: 100%;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config #itg-custom-ask-an-expert-form .form-submit{
+    width: 50%;
+    margin-left: 0;
+}
+/*ask an expret css end*/
+
+/*event page css start*/
+#block-menu-menu-event-menu{
+     .col-md-4{
+        background: #fff;
+        padding-top: 10px;
+    }    
+}
+#block-itg-event-backend-program-tab-block .top-block-highlight{
+    .highlights-video{
+        margin-bottom: 50px;
+    }
+}
+#block-views-event-associate-video-block .video-list{
+    width: 140px;
+}
+/*event page css end*/
 
 
 
@@ -2086,7 +2192,8 @@
     .view-category-wise-content-list, .view-blog-listing{           
         .catagory-listing{        
             .pic{
-                width: 170px;           
+                width: 170px; 
+                margin-right: 20px;
             }
             .detail{
                 h3{                            

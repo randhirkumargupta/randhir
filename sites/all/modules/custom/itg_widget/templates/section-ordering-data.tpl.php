@@ -35,7 +35,15 @@ if ($widget_style == 'auto-road-trip') {
                         <?php }
                         ?>
 
-                     <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 55, ".."); ?></a>
+                     
+                     <?php
+                      if (function_exists('itg_common_get_smiley_title')) {
+                        echo l(itg_common_get_smiley_title($nid, 0, 55), "node/" . $nid, array("html" => TRUE));
+                      }
+                      else {
+                        echo l(mb_strimwidth(strip_tags($desc), 0, 55, ".."), "node/" . $nid);
+                      }
+                    ?>
                     </li>
                 <?php }
             } ?>
@@ -828,7 +836,7 @@ else if ($widget_style == 'talking-point') {
             $reporter = "";
             $extra_large_image_url = "";
             $video_class = "pic-no-icon";
-            if (strtolower($entity->type) == 'videogallery') {
+            if (isset($entity->type) && strtolower($entity->type) == 'videogallery') {
                 $video_class = 'video-icon';
             }
 
@@ -857,12 +865,12 @@ else if ($widget_style == 'talking-point') {
             }
             else {
                 ?>
-                            <span class="pic <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">   <img width="88" height="66" src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" /></a></span>
+                   <span class="pic <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">   <img width="88" height="66" src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" /></a></span>
 
                         <?php }
                         ?>
                         <?php
-                        if ($reporter->title != "") {
+                        if (isset($reporter->title) && $reporter->title != "") {
                             print '<h4>' . ucfirst(mb_strimwidth($reporter->title, 0, 50, "..")) . '</h4>';
                         }
                         ?>

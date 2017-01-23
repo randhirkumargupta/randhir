@@ -167,6 +167,7 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
             $form['actions']['submit']['#submit'][] = 'itg_story_form_custom_callback';
             drupal_add_js(array('itg_common' => array('base_url' => $base_url)), 'setting');
             drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.emoji.js', 'file');
+            $form['field_emoji']['und'][0]['#format'] = 'emoji';
             break;
     }
 
@@ -690,11 +691,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
     
     if(function_exists('itg_get_front_activity_info')) {
       $node->content['follow_status'] = itg_get_front_activity_info($node->nid, $node->type, $user->uid, 'follow_story', $status='');
-    }
+    }    
     
-    if(!empty($node->field_story_reporter[LANGUAGE_NONE][0]['target_id'])) {
-    $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
-    $node->content['byline_node'] = node_load($byline_id);
-    }
   }
 }

@@ -40,14 +40,18 @@ if (!empty($content)):
     $follow_status = $content["follow_status"];
 
     //get byline detail
-
-    $reporter_node = $content['byline_node'];
+    if(!empty($node->field_story_reporter[LANGUAGE_NONE][0]['target_id'])) {
+      $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+      $reporter_node = node_load($byline_id);
+    }
+    
     ?>
     <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle; ?>">
         <div class='<?php print $classes ?>'>
             <?php //pr($node);  ?> 
             <div class="comment-mobile desktop-hide">
                 <ul>
+                     <li><a title ="READ LATER" href="javascript:void(0)"><i class="fa fa-bookmark"></i></a></li>
                     <li class="mail-to-author"><a title ="Mail to author" href="mailto:support@indiatoday.in"><i class="fa fa-envelope"></i><?php print t('Mail to author'); ?></a></li>
                     <li><a href="#" title = "whatsapp"><i class="fa fa-whatsapp"></i></a></li>
                     <?php
@@ -249,7 +253,6 @@ if (!empty($content)):
                                             <?php if (function_exists(itg_sso_url)): ?>
                                                 <?php print itg_sso_url('<i class="fa fa-bookmark"></i> <span>'.t('READ LATER').'</span>', t('READ LATER')); ?>
                                             <?php endif; ?>
-
         <?php endif; ?>
                                     </li>
 
@@ -350,7 +353,38 @@ if (!empty($content)):
                             }
                         }
                         ?>
-
+                        
+                        <div class="story-movie">
+                            <?php if (!empty($node->field_story_rating)): ?>
+                               <div class="story-movie-rating">
+                                 <?php print $node->field_story_rating[LANGUAGE_NONE]['0']['value']; ?>
+                               </div>
+                            <?php endif; ?>
+                            <?php if (!empty($node->field_mega_review_cast)): ?>
+                               <div class="story-movie-cast">
+                                 <?php print t('Cast:'); ?>
+                                 <?php  
+                                  $cast_ref_id = $node->field_mega_review_cast[LANGUAGE_NONE]['0']['target_id']; 
+                                  $entity_obj = entity_load('node', array($cast_ref_id));
+                                  $cast = $entity_obj[$cast_ref_id]->title;
+                                  print $cast;
+                                 ?>
+                               </div>
+                            <?php endif; ?>
+                            <?php if (!empty($node->field_mega_review_director)): ?>
+                               <div class="story-movie-director">
+                                 <?php print t('Director:'); ?>
+                                 <?php print $node->field_mega_review_director[LANGUAGE_NONE]['0']['value']; ?>
+                               </div>
+                            <?php endif; ?>
+                            <?php if (!empty($node->field_mega_review_movie_plot)): ?>
+                               <div class="story-movie-plot">
+                                 <?php print t('Plot:'); ?>
+                                 <?php print $node->field_mega_review_movie_plot[LANGUAGE_NONE]['0']['value']; ?>
+                               </div>
+                            <?php endif; ?>
+                        </div>
+                        
                         <div class="description">
                             <?php
                             $story_body = $node->body['und'][0]['value'];
@@ -475,6 +509,7 @@ if (!empty($content)):
                             }
                             ?>
                         </div>
+                            
                     </div>
                 </div>
 
@@ -574,7 +609,7 @@ if (!empty($content)):
     <?php if ($user->uid > 0): ?>
                                 <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/personalization/my-content/<?php print $node->type; ?>"><i class="fa fa-share"></i></a> <span><a title = "Submit Your Story" class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/personalization/my-content/<?php print $node->type; ?>">Submit Your Story</a></span></li>
     <?php else: ?>
-                                <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $node->type; ?>"><i class="fa fa-share"></i></a> <span><a title = "Submit Your Story" class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $node->type; ?>">Submit Your Story</a></span></li>
+                                <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $node->type; ?>"><i class="fa fa-share"></i></a> <span><a title = "Submit Your Story" class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $node->type; ?>">Submit Your Story</a></span></li>
     <?php endif; ?>
                             <li class="mhide"><div id="fb-root"></div><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
                             <li class="mhide"><a title = "share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>

@@ -91,7 +91,10 @@
        <div id="StoryMovie" class="itg-form-section-wrapper">
             <h2 class="story-title"><?php print t('Story Movie'); ?></h2> 
             <div class="itg-form-section hide">
-              <?php print drupal_render($form['field_story_rating']); ?>  
+              <?php print drupal_render($form['field_story_rating']); ?>
+              <?php print drupal_render($form['field_mega_review_cast']); ?>
+              <?php print drupal_render($form['field_mega_review_director']); ?>
+              <?php print drupal_render($form['field_mega_review_movie_plot']); ?>
             </div>
         </div>
       

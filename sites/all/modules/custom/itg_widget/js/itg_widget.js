@@ -416,8 +416,11 @@ jQuery (document).ready (function () {
     var soruce_type = jQuery (this).val ();
     jQuery ("#edit-field-story-source-type-value").val (soruce_type);
   });
+  
   jQuery ('#views-exposed-form-most-read-widget-most-read-widget-contents #edit-category-tid > option[value=All]').html ("- Any -");
   jQuery ('#views-exposed-form-most-read-widget-most-read-widget-list #edit-category-tid > option[value=All]').html ("- Any -");
+  jQuery ('#views-exposed-form-special-how-i-made-it-special-how-made-it-widget-contents #edit-category-tid > option[value=All]').html ("- Any -");
+  jQuery ('#views-exposed-form-special-how-i-made-it-special-how-made-widget-list #edit-category-tid > option[value=All]').html ("- Any -");
 });
 
 jQuery (document).ajaxSuccess (function () {

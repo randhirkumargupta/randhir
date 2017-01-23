@@ -39,10 +39,10 @@ global $user;
         else {
           ?>
           <a onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')" class="user-icon">
-            <img   src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/twitter.png' />
-            <img  src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/facebook.png' />
-            <img   src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/google-plus.png' />
-            <img   src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/linked.png' />
+            <img   src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/twitter.png' alt='' />
+            <img  src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/facebook.png' alt='' />
+            <img   src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/google-plus.png' alt='' />
+            <img   src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/linked.png' alt='' />
           </a>
 
           <?php
