@@ -3007,7 +3007,7 @@ footer .footer-top ul li a:hover{
   vertical-align: top;
   width: 200px;
   text-align: left;
-  .social-login{
+  &.social-login{
     text-align: right;
     span {
       display: inline-block;
@@ -3918,34 +3918,7 @@ article.node-mega-review-critic{
     display: inline-block;
     vertical-align: top;
     width: 100%;
-    .movie-rating{
-        margin-top: 20px;
-      float: left;
-      width: 111px;
-      height: 60px;
-      padding: 20px 0;
-      position: relative;
-      background: url(../images/rating-grey.png) 0 20px no-repeat;
-      &:after{
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        background: url(../images/rating-red.png) 0 20px no-repeat;
-        height: 60px;
-        width: 0;
-      }
-    }
-    div[data-star-value="10%"]:after{width: 10px;}
-    div[data-star-value="20%"]:after{width: 22px;}
-    div[data-star-value="30%"]:after{width: 33px;}
-    div[data-star-value="40%"]:after{width: 46px;}
-    div[data-star-value="50%"]:after{width: 56px;}
-    div[data-star-value="60%"]:after{width: 68px;}
-    div[data-star-value="70%"]:after{width: 79px;}
-    div[data-star-value="80%"]:after{width: 90px;}
-    div[data-star-value="90%"]:after{width: 102px;}
-    div[data-star-value="100%"]:after{width: 111px;}
+    @include movie-rating;
     .social-info{
       float: left;   
       margin-top:20px;

@@ -53,7 +53,14 @@ list($width, $height) = getimagesize($url);
         }
        
         print' <input type="text" name="courtesy[]" placeholder="Courtesy"  value=""></br>
-                <div class="syndicate-lable"><input type="checkbox" name="syndicate_'.$explodedata[0].'" value="1"> Syndicate</div></div> </div> ';  
+                <div class="syndicate-lable"><input type="checkbox" name="syndicate_'.$explodedata[0].'" value="1"> Syndicate</div>'
+                . '<input type="text" name="keyword[]" placeholder="Keyword"  value=""></br>'
+                . '<input type="text" name="tags[]" placeholder="Tags"  value=""></br>'
+                . '<input type="text" name="place[]" placeholder="Place"  value=""></br>'
+                . '<input type="text" name="photo_grapher[]" placeholder="Photo grapher"  value=""></br>'
+                . '<input type="date" name="image_date[]" placeholder="Date (dd/mm/yyyy)"  value=""></br>'
+                 . '<input type="text" name="image_description[]" placeholder="Description"  value=""></br>'
+                . '</div> </div> ';  
        
        
         $counter++;

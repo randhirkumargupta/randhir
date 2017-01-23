@@ -552,18 +552,6 @@ jQuery(document).ready(function () {
     jQuery(document).on('click', '.all-menu', function (e) {
          e.stopPropagation();
     });
-    
-
-    var eventMenu = function () {
-        winWidth = jQuery(window).width();
-        if (winWidth < 1024) {
-            jQuery('#block-menu-menu-event-menu .col-md-8').prepend('<div><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></div>');
-            jQuery('#block-menu-menu-event-menu a.mobile-nav').click(function () {
-                jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
-            });
-        }
-    };
-    eventMenu();
 
     //social share animation effects   
     jQuery('.social-share ul').each(function () {
@@ -728,6 +716,10 @@ jQuery(document).ready(function () {
           jQuery(this).css('opacity', '1');
         });
         
+        //event page navigation
+        jQuery('#block-menu-menu-event-menu a.mobile-nav').click(function() {
+            jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
+        });        
     }
     
     //story page social share for mobile

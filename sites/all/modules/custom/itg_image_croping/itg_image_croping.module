@@ -205,14 +205,13 @@ function itg_image_croping_getimagetotag() {
     $original_img_id = $_POST['original_img_id'];
     if ($_POST['is_solr'] == 1) {
         $file = file_load($original_img_id);
-        $result = file_delete($file,TRUE);
-        
+        $result = file_delete($file, TRUE);
     }
 
     print theme('image_tagging', array('data' => $image_id, 'content_name' => $content_name,
         'field_name' => $_POST['field_name'],
         'original_img_id' => $original_img_id,
-        'is_solr' =>$_POST['is_solr'],
+        'is_solr' => $_POST['is_solr'],
     ));
 }
 
@@ -503,11 +502,22 @@ function itg_image_saveimage_info() {
             $fid = explode('#', $output_info['fids'][$i]);
             $syndicatin_name = 'syndicate_' . $fid[0];
             if ($output_info['courtesy'][$i] != "" || $output_info[$syndicatin_name] != "")
-                $inserted_data = db_insert('image_info')->fields(array(
-                            'fid' => $fid[0],
-                            'image_courtesy' => $output_info['courtesy'][$i],
-                            'image_syndicate' => $output_info[$syndicatin_name],
-                        ))->execute();
+                $image_date = "";
+            if ($output_info['image_date'][$i] != "") {
+                $imagedate = explode('/', $output_info['image_date'][$i]);
+                $image_date = $imagedate[2] . '-' . $imagedate[1] . '-' . $imagedate[0];
+            }
+            $inserted_data = db_insert('image_info')->fields(array(
+                        'fid' => $fid[0],
+                        'image_courtesy' => $output_info['courtesy'][$i],
+                        'image_keyword' => $output_info['keyword'][$i],
+                        'image_tags' => $output_info['tags'][$i],
+                        'image_place' => $output_info['place'][$i],
+                        'image_photo_grapher' => $output_info['photo_grapher'][$i],
+                        'image_date' => $image_date,
+                        'image_desc' => $output_info['image_description'][$i],
+                        'image_syndicate' => $output_info[$syndicatin_name],
+                    ))->execute();
         }
     }
     if ($inserted_data) {

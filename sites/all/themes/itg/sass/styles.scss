@@ -2384,7 +2384,32 @@ footer{
              }
          }
     }
-   
+    .story-movie{
+        @include movie-rating;   
+        .movie-rating{
+            float:none;
+            padding-bottom: 0; 
+            margin-top: 0;
+        }
+        .movie-detail{
+            div{
+                font-family:$itg-roboto;
+                color:#000;
+                + div{
+                  margin-top: 15px;  
+                }
+                .title{
+                    float: left;
+                    padding-right: 7px;
+                    width: 60px;
+                }
+                .detail{
+                    display: block;
+                    overflow: hidden;
+                }
+            }   
+        }
+    }       
 }
 .buzz-feedback{    
     @include calculate-width(1);
