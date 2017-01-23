@@ -8457,15 +8457,28 @@ div.node{
     .form-submit{
       margin: 0;
       @extend .btn-small;
+      &[value="Remove"]{
+        background: none;
+        border: medium none;
+        box-shadow: none;
+        color: red;
+        height: auto;
+        margin: 0 0 0 50px;
+        padding: 0;
+        text-transform: capitalize;
+      }
     }
     span.file{
       display: inline-block;
-      margin-right: 50px;
       overflow: hidden;
       text-overflow: ellipsis;
       vertical-align: top;
       white-space: nowrap;
-      max-width: 200px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      font-size: 13px;
+      max-width: 110px;
       & + .form-submit{
         background: transparent;
         border: none;
@@ -8483,6 +8496,21 @@ div.node{
     margin-left: 250px;
   }
   .ajax-progress{@extend .hide;}
+  [id*="edit-category-icon-ajax-wrapper"]{
+    .form-type-managed-file{
+      @extend .dib;
+      @extend .full;
+    }
+    #edit-category-icon-upload{
+      @extend .fleft;
+      padding-left: 0;
+      @extend .pos-rel;
+      .upload-preview {
+        float: left;
+        margin-bottom: 25px;
+      }
+    }
+  }
 }
 .page-itg-menu-manager{
   #content{
