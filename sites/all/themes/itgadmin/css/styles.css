@@ -5608,6 +5608,10 @@ div.node #comments h2 {
   border: 2px solid #d8d8d8;
   margin: 20px;
   min-height: 0;
+  height: calc(100% - 75px);
+  width: calc(100% - 40px);
+  position: absolute;
+  left: 0;
   padding: 0;
 }
 .itg_image_repository .dropzone.dz-clickable .dz-message {
@@ -5669,6 +5673,9 @@ div.node #comments h2 {
   top: 0;
   cursor: pointer;
 }
+.itg_image_repository .after-croper .dropzone {
+  position: relative;
+}
 .itg_image_repository #loader-data {
   position: fixed;
   top: 0;
@@ -5711,6 +5718,9 @@ div.node #comments h2 {
   display: inline-block;
   margin-top: 5px;
   vertical-align: top;
+}
+.itg_image_repository #preview-wrapper .tag-box-input input[type="text"] {
+  margin: 0 5px 10px;
 }
 
 /*itg_image_repository end*/

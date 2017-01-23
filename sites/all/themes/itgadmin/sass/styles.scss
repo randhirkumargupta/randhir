@@ -5527,6 +5527,10 @@ div.node{
     border: 2px solid #d8d8d8;
     margin: 20px;
     min-height: 0;
+    height: calc(100% - 75px);
+    width: calc(100% - 40px);
+    position: absolute;
+    left: 0;
     padding: 0;
     &.dz-clickable .dz-message{
       color: #d00b26;
@@ -5588,6 +5592,11 @@ div.node{
       }
     }
   }
+  .after-croper{
+    .dropzone{
+      position: relative;
+    }
+  }
   #loader-data {
     position: fixed;
     top: 0;
@@ -5630,6 +5639,7 @@ div.node{
         margin-top: 5px;
         vertical-align: top;
       }
+      input[type="text"]{margin: 0 5px 10px;}
     }
   }
 }
