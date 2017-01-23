@@ -292,6 +292,9 @@
   .election-page .election-graph .col-el-5 {
     width: 240px;
   }
+  .election-page .election-top-block .social-share {
+    padding-top: 0;
+  }
 
   /*Election page css end*/
   /*static pages start*/
@@ -1705,8 +1708,9 @@
     margin-top: 20px;
   }
   .election-page .election-graph {
-    margin-top: -50px;
+    margin-top: -30px;
     padding-bottom: 50px;
+    width: auto;
   }
   .election-page .election-graph .col-el-5 {
     width: 100%;
