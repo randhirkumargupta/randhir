@@ -836,7 +836,7 @@ else if ($widget_style == 'talking-point') {
             $reporter = "";
             $extra_large_image_url = "";
             $video_class = "pic-no-icon";
-            if (strtolower($entity->type) == 'videogallery') {
+            if (isset($entity->type) && strtolower($entity->type) == 'videogallery') {
                 $video_class = 'video-icon';
             }
 
@@ -865,12 +865,12 @@ else if ($widget_style == 'talking-point') {
             }
             else {
                 ?>
-                            <span class="pic <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">   <img width="88" height="66" src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" /></a></span>
+                   <span class="pic <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">   <img width="88" height="66" src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" /></a></span>
 
                         <?php }
                         ?>
                         <?php
-                        if ($reporter->title != "") {
+                        if (isset($reporter->title) && $reporter->title != "") {
                             print '<h4>' . ucfirst(mb_strimwidth($reporter->title, 0, 50, "..")) . '</h4>';
                         }
                         ?>
