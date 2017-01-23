@@ -772,6 +772,7 @@ function itg_newslatter_register_form() {
       'effect' => "fade",
     ),
   );
+  
   drupal_add_js("jQuery(document).ready(function(){ jQuery('#itg-newslatter-register-form label').hide(); });", 'inline');
   drupal_add_js("jQuery(document).ajaxSuccess (function () { jQuery('#edit-email').val(''); 
                  jQuery('#edit-name').val(''); jQuery('#edit-mobile').val(''); });", 'inline');
