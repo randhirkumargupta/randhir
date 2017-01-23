@@ -492,11 +492,20 @@ jQuery(document).ready(function () {
 
 
 
-jQuery(document).ready(function () {
+    jQuery(document).ready(function () {
     var winWidth;
-    jQuery('.mobile-nav').click(function () {
-        jQuery('.navigation').slideToggle();
+    jQuery('.mobile-nav i.fa').click(function () {
+        if (jQuery(this).hasClass('fa-bars')) {
+            jQuery(this).addClass('fa-times').removeClass('fa-bars');
+            jQuery('.navigation').slideDown();
+
+        } else {
+            jQuery(this).addClass('fa-bars').removeClass('fa-times');
+            jQuery('.navigation').slideUp();
+        }
     });
+    
+    
     jQuery(document).on('click', '.all-menu', function () {
         jQuery('#newlist').slideToggle();
     });
@@ -548,7 +557,7 @@ jQuery(document).ready(function () {
     var eventMenu = function () {
         winWidth = jQuery(window).width();
         if (winWidth < 1024) {
-            jQuery('#block-menu-menu-event-menu').prepend('<div><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></div>');
+            jQuery('#block-menu-menu-event-menu .col-md-8').prepend('<div><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></div>');
             jQuery('#block-menu-menu-event-menu a.mobile-nav').click(function () {
                 jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
             });
@@ -561,7 +570,7 @@ jQuery(document).ready(function () {
         jQuery(this).children().not(":first").hide();
     })
     jQuery('.social-share li').click(function () {
-        jQuery(this).nextAll('li').toggle();
+        jQuery(this).find('.share').parents('li').nextAll('li').toggle();
     });
 
     //vertical menu position      
@@ -590,7 +599,7 @@ jQuery(document).ready(function () {
       //var stickyHeight = el.height();
 
       jQuery(window).scroll(function(){ 
-         var limit = jQuery('footer').offset().top - totlHeight;                   
+         var limit = jQuery('footer').offset().top - totlHeight;
           var windowTop = jQuery(window).scrollTop();                     
           if(windowTop > 160 ){              
                 var finalWidth = (totlWidth - 1200) / 2 ;
@@ -608,7 +617,7 @@ jQuery(document).ready(function () {
                    'bottom': 'auto'
                });            
           }
-          if(windowTop > limit + 315){              
+          if(windowTop >= limit){              
               el.css({
                    'position': 'absolute',
                    'left': '-60px',
@@ -712,6 +721,13 @@ jQuery(document).ready(function () {
           el.closest('.personal-menu-tab-wrapper').find('.tab-text').attr('data-tab', get_class).text(get_text);
           el.parent().slideUp('fast');
         });
+        
+        // jQuery code for personalization saved item on mobile
+        jQuery('.personal-list').on('touch', 'li', function(){
+          jQuery(this).siblings().find('.personal-action').css('opacity', '0');
+          jQuery(this).find('.personal-action').css('opacity', '1');
+        });
+        
     }
     
     //story page social share for mobile
@@ -721,17 +737,6 @@ jQuery(document).ready(function () {
         getclick.css({'display' : 'inline-block'});
     }, function(){
         getclick.css({'display' : 'none'});
-    });    
+    }); 
     
 });
-    
-
-  
-
-
-
-
-
-
-
-

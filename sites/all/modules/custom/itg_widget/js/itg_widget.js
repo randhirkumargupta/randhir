@@ -4,6 +4,7 @@
  */
 Drupal.behaviors.itg_widgets = {
   attach: function (context, settings) {
+     var base_url = settings.itg_widget.settings.base_url;
     jQuery ("div.big-news-content-videogallery a.has-ajax-big-story").click (function () {
       jQuery ('.big-story-col-1 .loading-popup').show ();
       var nid = jQuery (this).attr ("data-nid");
@@ -11,13 +12,17 @@ Drupal.behaviors.itg_widgets = {
         // add new data data.
         jQuery ("#videogallery-iframe").html (data);
         videoGallery ();
+      jQuery ("#videogallery-iframe").on ('click', '#close-big-story', function () {
+        jQuery ("#videogallery-iframe").html (" ");
+        jQuery ("#videogallery-iframe").hide ();
+      });
       });
     });
     //Prevent stop video if it is palyed previously.
-    jQuery ('body').on('click', '.slick-track img', function (e){
+    jQuery ('body').on ('click', '.slick-track img', function (e) {
       jQuery (".iframe-video-dailymotion").each (function () {
         var url = jQuery (this).attr ("src");
-        jQuery (this).removeAttr("src");
+        jQuery (this).removeAttr ("src");
         var Updatedurl = updateQueryStringParameter (url, 'autoplay', '0');
         jQuery (this).attr ('src', Updatedurl);
       });
@@ -79,11 +84,6 @@ Drupal.behaviors.itg_widgets = {
           }
         ]
       });
-      jQuery ("#videogallery-iframe").on ('click', '#close-big-story', function () {
-        jQuery ("#videogallery-iframe").html (" ");
-        jQuery ("#videogallery-iframe").hide ();
-      });
-
     }
     //alert('@@@');
 
@@ -105,24 +105,39 @@ Drupal.behaviors.itg_widgets = {
     //            // Prevent default action.
     //            return false;
     //        });
-    jQuery ('.associate-content-block').click (function () {
-      var widgets_type = jQuery (this).attr ('data-widget');
-      var widgets_type_array = widgets_type.split ("-");
-      var widgets_type = widgets_type_array[0];
-      var widgets_id = widgets_type_array[1];
-
-      jQuery.ajax ({
-        url: Drupal.settings.basePath + "associate-photo-video-content/" + widgets_type + "/" + widgets_id,
-        method: 'post',
-        //data: {status_val: 1, section_name: section_name, template_name: template_name, layout_type:layout_type},
-        beforeSend: function () {
-          // $('.itg-ajax-loader').show();
-        },
-        success: function (data) {
-          jQuery ("#videogallery-iframe").html (data);
-          videoGallery ();
-        }
-      });
+    var videoIframe = jQuery (".story-associate-content #videogallery-iframe");
+    var strImg = jQuery('.story-associate-content .stryimg');
+        strImg.click(function(){
+            videoIframe.show(1000, function(){            
+            var widgets_type = jQuery('.associate-content-block').attr ('data-widget');              
+            var widgets_type_array = widgets_type.split ("-");
+            var widgets_type = widgets_type_array[0];
+            var widgets_id = widgets_type_array[1];  
+            var imgurl = base_url+"/sites/all/themes/itg/images/reload.gif";            
+            videoIframe.append('<img class="loading-popup" src="'+imgurl+'" alt="loading image">');      
+                jQuery.ajax ({
+                  url: Drupal.settings.basePath + "associate-photo-video-content/" + widgets_type + "/" + widgets_id,
+                  method: 'post',
+                  //data: {status_val: 1, section_name: section_name, template_name: template_name, layout_type:layout_type},
+                  beforeSend: function () {
+                    // $('.itg-ajax-loader').show();
+                  },
+                  success: function (data) {
+                   videoIframe.html (data);
+                   videoGallery ();
+                    videoIframe.css('height', 'auto');
+                  }
+                });            
+            });     
+        strImg.hide(1000);                   
+    });    
+    
+    videoIframe.on ('click', '#close-big-story', function () {                      
+        videoIframe.hide(1000, function(){
+            videoIframe.empty();
+            videoIframe.css('height', '340px');
+        });   
+       strImg.show(1000);                                             
     });
 
     jQuery ('#edit-state1').change (function () {
@@ -397,18 +412,35 @@ jQuery (document).ready (function () {
   jQuery (".custom-weight-draggable input[type=number]").change (function () {
     jQuery (this).next ().children ().find ('option').remove ().end ().append ('<option value="' + jQuery (this).val () + '">' + jQuery (this).val () + '</option>').val (jQuery (this).val ());
   });
-  //    jQuery("#edit-actionitg-widget-categories-wise-node-group").click(function(e){
-  //        e.preventDefault();
-  //        if(confirm("Are you sure want to perform action.")) {
-  //            return ture;
-  //        } else {
-  //            return false;
-  //        }
-  //    });
-
   jQuery ("select#fake-soruce-type").on ("change", function () {
     var soruce_type = jQuery (this).val ();
     jQuery ("#edit-field-story-source-type-value").val (soruce_type);
   });
+  
+  jQuery ('#views-exposed-form-most-read-widget-most-read-widget-contents #edit-category-tid > option[value=All]').html ("- Any -");
+  jQuery ('#views-exposed-form-most-read-widget-most-read-widget-list #edit-category-tid > option[value=All]').html ("- Any -");
+  jQuery ('#views-exposed-form-special-how-i-made-it-special-how-made-it-widget-contents #edit-category-tid > option[value=All]').html ("- Any -");
+  jQuery ('#views-exposed-form-special-how-i-made-it-special-how-made-widget-list #edit-category-tid > option[value=All]').html ("- Any -");
+});
+
+jQuery (document).ajaxSuccess (function () {
+  var forms = [
+    'views-exposed-form-story-widget-page-1' 
+    , 'views-exposed-form-story-widget-top-takes-video'
+    , 'views-exposed-form-story-widget-trending-videos'
+    , 'views-exposed-form-story-widget-watch-right-now'
+    , 'views-exposed-form-highlights-widget-highlights-widget-conent'
+    , 'views-exposed-form-photo-carousel-widget-photo-carousel-list'
+    , 'views-exposed-form-photo-carousel-widget-video-carousel-list'
+    , 'views-exposed-form-home-page-feature-widget-page-1'
+    , 'views-exposed-form-section-wise-draggable-content-order-dont-miss-content'
+    , 'views-exposed-form-section-wise-draggable-content-order-we-may-suggest-widget'
+    , 'views-exposed-form-most-read-widget-most-read-widget-contents'
+  ];
+  for (i = 0; i < forms.length; i++) {
+    jQuery ('#' + forms[i] + ' #edit-field-story-category-tid-select-1 > option[value=0]').html ("- Any -");
+    jQuery ('#' + forms[i] + ' #edit-shs-term-node-tid-depth-select-1 > option[value=0]').html ("- Any -");
+    jQuery ('#' + forms[i] + ' #edit-category-tid-select-1 > option[value=0]').html ("- Any -");
+  }
 });
   

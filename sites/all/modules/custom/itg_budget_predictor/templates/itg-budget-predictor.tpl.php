@@ -25,6 +25,7 @@ $user_id = $data['user_id'];
     background: transparent;
     border: none;
     text-align: center;}
+    #main-container-budget .col-list {min-height: 740px;}
     <?php if ($admin_user) { ?>
       #main-container-budget{width:100%;height:100%;display: inline-block;width: 100%;}
     <?php }
@@ -35,7 +36,7 @@ $user_id = $data['user_id'];
 </style>
 
 <?php if ($budget_exist == 1) { ?>    
-  <h1 class="budget-predictor-heading"><?php print t('Budget - Predictor'); ?></h1>
+  <h2 class="budget-predictor-heading"><?php print t('CHEAPER / DEARER'); ?></h2>
   <?php if(empty($user_id)) { ?>
     <h3 class="budget-predictor-msg"><?php print t('Please drag and drop images and please login if you know, your prediction will right or not.'); ?></h3>
   <?php } ?>

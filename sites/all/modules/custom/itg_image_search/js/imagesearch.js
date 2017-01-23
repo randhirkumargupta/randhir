@@ -57,7 +57,7 @@
                     jQuery.ajax({
                         url: Drupal.settings.basePath + 'getimagetocroper',
                         type: 'post',
-                        data: {'imageId': imageId, 'field_id': fieldname,'content_type':ctype, 'img_height': height, 'img_width': width},
+                        data: {'imageId': imageId,'solr':1, 'field_id': fieldname,'content_type':ctype, 'img_height': height, 'img_width': width},
                         success: function(data) {
                             //  itg_image_repository.processResponse
                             parent.jQuery('#search-preview').hide();

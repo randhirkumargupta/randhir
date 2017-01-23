@@ -132,11 +132,11 @@ if ($theme != 'itgadmin') {
                   <div class="itg-widget">
                     <div class="ad-widget">
                       <div class="sidebar-ad">
-                         <?php
-                          if (!empty($itg_ad['200*200_right_bar_ad1'])) {
-                            print $itg_ad['200*200_right_bar_ad1'];
-                          }
-                        ?>
+                        <?php
+                          $block = block_load('itg_ads', ADS_RHS1);   
+                          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                          print render($render_array);
+                         ?>
                       </div>
                     </div>
 
@@ -261,12 +261,8 @@ if ($theme != 'itgadmin') {
                 <div class="col-md-12 col-sm-6 col-xs-12">
                         <div class="itg-widget-child shadow-on">
                             <div class="droppable <?php print $gray_bg_layout; ?>">
-                                <div class="widget-wrapper <?php //print $widget_data['itg-block-19']['widget_name'] . $widget_data['itg-block-19']['widget_display_name']; ?>">
-                                    
-                                        <span class="widget-title">Ask a Question</span>
-                                
-                                   
-
+                                <div class="widget-wrapper <?php //print $widget_data['itg-block-19']['widget_name'] . $widget_data['itg-block-19']['widget_display_name']; ?>">                                    
+                                        <span class="widget-title">Ask a Question</span>                                
                                     <div class="data-holder ask-question" id="itg-block-19"><?php $block = module_invoke('itg_ask_expert', 'block_view', 'custom_ask_expert_form_block');
   print render($block['content']); ?></div>
                                 </div>             
@@ -413,9 +409,9 @@ if ($theme != 'itgadmin') {
                     <div class="ad-widget">
                       <div class="sidebar-ad">
                          <?php
-                          if (!empty($itg_ad['200*200_right_bar_ad2'])) {
-                            print $itg_ad['200*200_right_bar_ad2'];
-                          }
+                            $block = block_load('itg_ads', ADS_RHS2);   
+                            $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                            print render($render_array);
                           ?>
                       </div>
                     </div>
@@ -471,7 +467,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-11" ><?php print $widget_data['itg-block-11']['widget']; ?> <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-11']['block_title']) && ($widget_data['itg-block-11']['widget_name'] != 'custom_html_widget')) { ?><span><?php print $widget_data['itg-block-11']['more_url']; ?></span> <?php } ?></div>
+                     <div class="data-holder" id="itg-block-11" ><?php print $widget_data['itg-block-11']['widget']; ?> <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-11']['block_title']) && ($widget_data['itg-block-11']['widget_name'] != 'custom_html_widget')) { ?><span class="more"><?php print $widget_data['itg-block-11']['more_url']; ?></span> <?php } ?></div>
                   </div>             
                 </div>               
             </div>

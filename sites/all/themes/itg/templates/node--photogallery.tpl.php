@@ -30,7 +30,9 @@ if ($config_name == 'vukkul') {
 if ($config_name == 'other') {
   ?>
   <div id="other-comment">
-      <?php print render($content['comment_form']); ?>
-  <?php print render($content['comments']); ?>
+        <?php
+        $block = module_invoke('itg_ugc_comment', 'block_view', 'ugc_form_comment_block');
+        print render($block['content']);
+        ?>
   </div>
 <?php } ?>

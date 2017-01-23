@@ -11,43 +11,6 @@ function feature_category_management_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
-  // 'taxonomy_term-category_management-field_category_app_description'.
-  $field_instances['taxonomy_term-category_management-field_category_app_description'] = array(
-    'bundle' => 'category_management',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 20,
-      ),
-    ),
-    'entity_type' => 'taxonomy_term',
-    'exclude_cv' => 0,
-    'field_name' => 'field_category_app_description',
-    'label' => 'App description',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 24,
-    ),
-  );
-
-  // Exported field_instance:
   // 'taxonomy_term-category_management-field_category_section_flag'.
   $field_instances['taxonomy_term-category_management-field_category_section_flag'] = array(
     'bundle' => 'category_management',
@@ -534,43 +497,6 @@ function feature_category_management_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'taxonomy_term-category_management-field_description'.
-  $field_instances['taxonomy_term-category_management-field_description'] = array(
-    'bundle' => 'category_management',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 10,
-      ),
-    ),
-    'entity_type' => 'taxonomy_term',
-    'exclude_cv' => 0,
-    'field_name' => 'field_description',
-    'label' => 'Description',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 22,
-    ),
-  );
-
-  // Exported field_instance:
   // 'taxonomy_term-category_management-field_program_timing_in_days'.
   $field_instances['taxonomy_term-category_management-field_program_timing_in_days'] = array(
     'bundle' => 'category_management',
@@ -604,40 +530,6 @@ function feature_category_management_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 15,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'taxonomy_term-category_management-field_result_format'.
-  $field_instances['taxonomy_term-category_management-field_result_format'] = array(
-    'bundle' => 'category_management',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 16,
-      ),
-    ),
-    'entity_type' => 'taxonomy_term',
-    'exclude_cv' => 0,
-    'field_name' => 'field_result_format',
-    'label' => 'Result format',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 19,
     ),
   );
 
@@ -822,52 +714,13 @@ function feature_category_management_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance:
-  // 'taxonomy_term-category_management-field_user_name'.
-  $field_instances['taxonomy_term-category_management-field_user_name'] = array(
-    'bundle' => 'category_management',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'schedule duration',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 21,
-      ),
-    ),
-    'entity_type' => 'taxonomy_term',
-    'exclude_cv' => 0,
-    'field_name' => 'field_user_name',
-    'label' => 'Schedule duration',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 26,
-    ),
-  );
-
   // Translatables
   // Included for use with string extractors like potx.
   t(' Program Timing');
-  t('App description');
   t('Category Banner');
   t('Category Color');
   t('Category Icon');
   t('Content Type');
-  t('Description');
   t('Display Title');
   t('Hide Category form home');
   t('Hide Category from search');
@@ -882,8 +735,6 @@ function feature_category_management_field_default_field_instances() {
   t('Please select content type, this category will be associated to selected content types. You can associate one category with multiple content types.');
   t('Program timing in days');
   t('Redirection URL');
-  t('Result format');
-  t('Schedule duration');
   t('Section flag');
   t('Section type');
   t('Select template');
@@ -891,7 +742,6 @@ function feature_category_management_field_default_field_instances() {
   t('Set As Featured');
   t('Sponsored Category');
   t('Time Period');
-  t('schedule duration');
 
   return $field_instances;
 }

@@ -22,7 +22,7 @@ else
 ?></div>
 <div class="">
     <div class="ugc-comment-popup">
-    <a class="close-comment-popup" href="javascript:;">Close</a>
+    <a class="close-comment-popup" href="javascript:;"><i class="fa fa-times" aria-hidden="true"></i></a>
 <?php print drupal_render($variables['comment_form']); ?>
     </div>
 </div>

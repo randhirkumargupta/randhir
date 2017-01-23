@@ -458,7 +458,8 @@ function feature_category_management_views_default_views() {
   $handler->display->display_options['header']['area']['content'] = '<div class="itg-section">Section</div>
 <div class="itg-category">Category</div>
 <div class="itg-sub-category">Sub Category</div>
-<div class="itg-sub-sub-category">Sub Sub Category</div>';
+<div class="itg-sub-sub-category">Sub Sub Category</div>
+<div class="itg-sub-sub-sub-category">Sub Sub Sub Category</div>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Taxonomy term: Term ID */

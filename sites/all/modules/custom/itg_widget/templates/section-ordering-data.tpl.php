@@ -30,12 +30,20 @@ if ($widget_style == 'auto-road-trip') {
                         else {
                             ?>
                             <a class="pic <?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                                <img  height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                                <img  height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" />
                             </a>
                         <?php }
                         ?>
 
-                     <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 55, ".."); ?></a>
+                     
+                     <?php
+                      if (function_exists('itg_common_get_smiley_title')) {
+                        echo l(itg_common_get_smiley_title($nid, 0, 55), "node/" . $nid, array("html" => TRUE));
+                      }
+                      else {
+                        echo l(mb_strimwidth(strip_tags($desc), 0, 55, ".."), "node/" . $nid);
+                      }
+                    ?>
                     </li>
                 <?php }
             } ?>
@@ -93,7 +101,7 @@ else if ($widget_style == 'buying-guid') {
                         $extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
                     }
                     else {
-                        $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/dimage_370X208.jpg";
+                        $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg";
                     }
 
 
@@ -102,7 +110,7 @@ else if ($widget_style == 'buying-guid') {
 
                         <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><img src="<?php echo $extra_large_image_url; ?>">  </a>
 
-                        <h3><?php echo l(mb_strimwidth(ucfirst($desc), 0, 75, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?></h3>
+                        <h3><?php echo l(mb_strimwidth(ucfirst($desc), 0, 75, ".."), "node/".$nid); ?></h3>
                         <?php
                     }
                     else if ($count == 1) {
@@ -113,8 +121,8 @@ else if ($widget_style == 'buying-guid') {
                         ?>
                         <ul>
                             <li>
-                                <span class="title"><?php echo l(mb_strimwidth(ucfirst($title), 0, 55, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?></span>
-                                <p><?php echo l(mb_strimwidth(ucfirst($desc), 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?></p>
+                                <span class="title"><?php echo l(mb_strimwidth(ucfirst($title), 0, 55, ".."), "node/".$nid); ?></span>
+                                <p><?php echo l(mb_strimwidth(ucfirst($desc), 0, 100, ".."), "node/".$nid); ?></p>
                             </li>            
                         </ul>
                         <?php
@@ -142,8 +150,8 @@ else if ($widget_style == 'buying-guid') {
                             ?>
 
                             <li>
-                                <span class="title"><?php echo l(mb_strimwidth(ucfirst($title), 0, 55, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?></span>
-                                <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?></p>
+                                <span class="title"><?php echo l(mb_strimwidth(ucfirst($title), 0, 55, ".."), "node/".$nid); ?></span>
+                                <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), "node/".$nid); ?></p>
                             </li>   
                             <?php
                         }
@@ -180,13 +188,13 @@ else if ($widget_style == 'in-depth') {
                             $extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
                         }
                         else {
-                            $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/dimage_370X208.jpg";
+                            $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg";
                         }
                         ?>
 
                         <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><img src="<?php echo $extra_large_image_url; ?>"> </a></span>
 
-                        <h3><?php echo l(mb_strimwidth(ucfirst($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?></h3>
+                        <h3><?php echo l(mb_strimwidth(ucfirst($desc), 0, 70, ".."), "node/".$nid); ?></h3>
                         <?php
                     }
                     else if ($count == 1) {
@@ -194,7 +202,7 @@ else if ($widget_style == 'in-depth') {
                             $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
                         }
                         else {
-                            $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/default_for_all.png";
+                            $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg";
                         }
                         ?>
                         <ul>
@@ -203,7 +211,7 @@ else if ($widget_style == 'in-depth') {
                                         <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>">
                                     </a></span>
 
-                                <p><?php echo l(mb_strimwidth(ucfirst($desc), 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?></p>
+                                <p><?php echo l(mb_strimwidth(ucfirst($desc), 0, 100, ".."), "node/".$nid); ?></p>
                             </li>            
                         </ul>
                         <?php
@@ -228,7 +236,7 @@ else if ($widget_style == 'in-depth') {
                                 $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
                             }
                             else {
-                                $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/default_for_all.png";
+                                $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg";
                             }
                             ?>
 
@@ -237,7 +245,7 @@ else if ($widget_style == 'in-depth') {
                                         <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>">
                                     </a></span>  
 
-                                <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?></p>
+                                <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), "node/".$nid); ?></p>
                             </li>   
                             <?php
                         }
@@ -274,18 +282,18 @@ else if ($widget_style == 'movies-celebrities') {
                             $extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
                         }
                         else {
-                            $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/dimage_370X208.jpg";
+                            $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg";
                         }
                         ?>
 
                         <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><img src="<?php echo $extra_large_image_url; ?>"> </a></span>
 
-                        <h3><?php echo l(mb_strimwidth($desc, 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?></h3>
+                        <h3><?php echo l(mb_strimwidth($desc, 0, 70, ".."), "node/".$nid); ?></h3>
                         <?php
                     }
                     else if ($count == 1 || $count == 2) {
                         ?>
-                        <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?></p>
+                        <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), "node/".$nid); ?></p>
                         <?php
                     }
                 }
@@ -308,7 +316,7 @@ else if ($widget_style == 'movies-celebrities') {
                                 $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
                             }
                             else {
-                                $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/default_for_all.png";
+                                $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg";
                             }
                             ?>
 
@@ -317,7 +325,7 @@ else if ($widget_style == 'movies-celebrities') {
                                         <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>">
                                     </a></span>  
 
-                                <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?></p>
+                                <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), "node/".$nid); ?></p>
                             </li>   
                             <?php
                         }
@@ -354,19 +362,19 @@ else if ($widget_style == 'movies-lifestyle') {
                             $extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
                         }
                         else {
-                            $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/default_for_all.png";
+                            $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg";
                         }
                         ?>
 
                         <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><img src="<?php echo $extra_large_image_url; ?>"> </a></span>
 
-                        <h3><?php echo l(mb_strimwidth($desc, 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?></h3>
+                        <h3><?php echo l(mb_strimwidth($desc, 0, 70, ".."), "node/".$nid); ?></h3>
                         <?php
                     }
                     else if ($count == 1 || $count == 2) {
                         ?>
 
-                        <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?></p>
+                        <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), "node/".$nid); ?></p>
 
                         <?php
                     }
@@ -390,7 +398,7 @@ else if ($widget_style == 'movies-lifestyle') {
                                 $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
                             }
                             else {
-                                $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/default_for_all.png";
+                                $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg";
                             }
                             ?>
 
@@ -399,7 +407,7 @@ else if ($widget_style == 'movies-lifestyle') {
                                         <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>">
                                     </a></span>  
 
-                                <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?></p>
+                                <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), "node/".$nid); ?></p>
                             </li>   
                             <?php
                         }
@@ -435,14 +443,14 @@ else if ($widget_style == 'oscar-news') {
                             $extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
                         }
                         else {
-                            $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/dimage_370X208.jpg";
+                            $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg";
                         }
                         ?>
                         <div class="col-md-12">
                             <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                                 <span class="pic  <?php echo $video_class; ?>"><img src="<?php echo $extra_large_image_url; ?>"></span>
                             </a>
-                            <h3><?php echo l(mb_strimwidth($desc, 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?></h3>
+                            <h3><?php echo l(mb_strimwidth($desc, 0, 70, ".."), "node/".$nid); ?></h3>
                         </div>
                         <?php
                     }
@@ -451,7 +459,7 @@ else if ($widget_style == 'oscar-news') {
                             $extra_large_image_url = image_style_url("widget_small", $entity['si_file_uri']);
                         }
                         else {
-                            $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/default_for_all.png";
+                            $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg";
                         }
                         ?>
                         <div class="col-md-6 col-sm-6 col-xs-6">                   
@@ -459,7 +467,7 @@ else if ($widget_style == 'oscar-news') {
                                     <img  height="127" width="170" src="<?php echo $extra_large_image_url; ?>">
                                 </a></span>
 
-                            <p><?php echo l(mb_strimwidth($desc, 0, 60, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?></p>                      
+                            <p><?php echo l(mb_strimwidth($desc, 0, 60, ".."), "node/".$nid); ?></p>                      
                         </div>
                         <?php
                     }
@@ -494,7 +502,7 @@ else if ($widget_style == 'standpoint') {
                             $extra_large_image_url = image_style_url("section_ordering_widget", $entity['uri']);
                         }
                         else {
-                            $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/default_for_all.png";
+                            $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg";
                         }
         ?>
 
@@ -535,7 +543,7 @@ else if ($widget_style == 'oscar-features') {
                 $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
             }
             else {
-                $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/default_for_all.png";
+                $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg";
             }
             ?>
                 <div class="col-md-6">
@@ -543,7 +551,7 @@ else if ($widget_style == 'oscar-features') {
                             <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>">
                         </a></span>
 
-                    <p><?php echo l(mb_strimwidth($desc, 0, 80, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?></p>
+                    <p><?php echo l(mb_strimwidth($desc, 0, 80, ".."), "node/".$nid); ?></p>
                 </div>
             <?php
             $coun++;
@@ -579,7 +587,7 @@ else if ($widget_style == 'tech-tips' || $widget_style == 'india-inc-on-budget' 
                         $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
                     }
                     else {
-                        $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/default_for_all.png";
+                        $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg";
                     }
                     ?>
 
@@ -621,7 +629,7 @@ else if ($widget_style == 'home-shows') {
                         $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
                     }
                     else {
-                        $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/default_for_all.png";
+                        $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg";
                     }
                     ?>
 
@@ -664,7 +672,7 @@ else if ($widget_style == 'home-watch') {
                             $extra_large_image_url = image_style_url("widget_very_small", $entity['si_file_uri']);
                         }
                         else {
-                            $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/default_for_all.png";
+                            $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg";
                         }
                         ?>
 
@@ -705,7 +713,7 @@ else if ($widget_style == 'budget-decoded') {
                         $extra_large_image_url = image_style_url("anchors_landing", $entity['si_file_uri']);
                     }
                     else {
-                        $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/default_for_all.png";
+                        $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg";
                     }
                     ?>
 
@@ -756,7 +764,7 @@ else if ($widget_style == 'sport-column') {
             }
             else {
                 ?>
-                            <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  <img  height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png"  /> </a></span>
+                            <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  <img  height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg"  /> </a></span>
 
                         <?php }
                         ?>
@@ -799,11 +807,11 @@ else if ($widget_style == 'election-so-sorry') {
                     else {
                         ?>
                             <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                                <img  height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/dimage_370X208.jpg" />
+                                <img  height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" />
                             </a>
                     <?php } ?>
                         <h3 class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['title'] ?> ">
-                        <?php echo l(mb_strimwidth($entity['title'], 0, 55, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?>
+                        <?php echo l(mb_strimwidth($entity['title'], 0, 55, ".."), "node/".$nid); ?>
                         </h3>
                         <?php endif; ?>
 
@@ -828,19 +836,20 @@ else if ($widget_style == 'talking-point') {
             $reporter = "";
             $extra_large_image_url = "";
             $video_class = "pic-no-icon";
-            if (strtolower($entity->type) == 'videogallery') {
+            if (isset($entity->type) && strtolower($entity->type) == 'videogallery') {
                 $video_class = 'video-icon';
             }
 
-            $desc = $entity->title;
+            $desc = $entity['title'];
+            $node_data = node_load($entity['nid']);
+
             ?>
                     <li class="trending-videos-list">
                     <?php
-                    if ((!empty($reporter->field_story_extra_large_image['und'][0]['uri']) && isset($reporter->field_story_extra_large_image['und'][0]['uri']))) {
-                        $extra_large_image_url = image_style_url("widget_very_small", $reporter->field_story_extra_large_image['und'][0]['uri']);
-                    }
-                    if ($entity->field_common_by_line_reporter_id['und'][0]['value'] != "") {
-                        $reporter = node_load($entity->field_common_by_line_reporter_id['und'][0]['value']);
+                  
+                    if ($node_data->field_common_by_line_reporter_id['und'][0]['value'] != "") {
+                        $reporter = node_load($node_data->field_common_by_line_reporter_id['und'][0]['value']);
+                     
                     }
 
                     if ((!empty($reporter->field_story_extra_large_image['und'][0]['uri']) && isset($reporter->field_story_extra_large_image['und'][0]['uri']))) {
@@ -856,12 +865,12 @@ else if ($widget_style == 'talking-point') {
             }
             else {
                 ?>
-                            <span class="pic <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">   <img width="88" height="66" src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" /></a></span>
+                   <span class="pic <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">   <img width="88" height="66" src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" /></a></span>
 
                         <?php }
                         ?>
                         <?php
-                        if ($reporter->title != "") {
+                        if (isset($reporter->title) && $reporter->title != "") {
                             print '<h4>' . ucfirst(mb_strimwidth($reporter->title, 0, 50, "..")) . '</h4>';
                         }
                         ?>
@@ -904,16 +913,16 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
                     else {
                         ?>
                             <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                                <img height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/dimage_370X208.jpg" />
+                                <img height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" />
                             </a>
                     <?php } ?>
                         <h3 class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['type'] ?> ">
-                        <?php echo l(mb_strimwidth($entity['title'], 0, 55, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?>
+                        <?php echo l(mb_strimwidth($entity['title'], 0, 55, ".."), "node/".$nid); ?>
                         </h3>
                         <?php endif; ?>
                         <?php if ($count != 0) : ?>
                         <p class="<?php print $entity['type'] ?> section-order-<?php print $nid ?>">
-                        <?php echo l(mb_strimwidth($entity['title'], 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?>
+                        <?php echo l(mb_strimwidth($entity['title'], 0, 100, ".."), "node/".$nid); ?>
                         </p>
                         <?php endif; ?>
                     <?php }
@@ -937,7 +946,7 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
 
 
                     <p class="<?php print $entity['type'] ?> section-order-<?php print $entity['nid'] ?>">
-                <?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?>
+                <?php echo l(mb_strimwidth($desc, 0, 100, ".."), "node/".$nid); ?>
                     </p>
 
                     <?php }
@@ -982,12 +991,12 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
                     else {
                         ?>
                                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                                    <img class="defalt-placeholder-magazin"  height="140" width="100" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                                    <img class="defalt-placeholder-magazin"  height="140" width="100" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" />
                                 </a>
                     <?php } ?>
                             <div class="small-detail">
                                 <h3 class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['type'] ?> ">
-                            <?php echo l(mb_strimwidth($entity['title'], 0, 55, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?>
+                            <?php echo l(mb_strimwidth($entity['title'], 0, 55, ".."), "node/".$nid); ?>
                                 </h3>
                                 <p><?php echo mb_strimwidth($desc, 0, 55, ".."); ?> </p>
 
@@ -999,7 +1008,7 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
                 <?php endif; ?>
                 <?php if ($count != 0) : ?>
                         <p class="<?php print $entity['type'] ?> section-order-<?php print $nid ?>">
-                        <?php echo l(mb_strimwidth($entity['title'], 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?>
+                        <?php echo l(mb_strimwidth($entity['title'], 0, 100, ".."), "node/".$nid); ?>
                         </p>
                         <?php endif; ?>
                     <?php }
@@ -1037,16 +1046,16 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
                     else {
                         ?>
                             <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                                <img  height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/dimage_370X208.jpg" />
+                                <img  height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" />
                             </a>
                     <?php } ?>
                         <h3 class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['type'] ?> ">
-                        <?php echo l(mb_strimwidth($entity['title'], 0, 55, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?>
+                        <?php echo l(mb_strimwidth($entity['title'], 0, 55, ".."), "node/".$nid); ?>
                         </h3>
                         <?php endif; ?>
                         <?php if ($count != 0) : ?>
                         <p class="<?php print $entity['type'] ?> section-order-<?php print $nid ?>">
-                        <?php echo l(mb_strimwidth($entity['title'], 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?>
+                        <?php echo l(mb_strimwidth($entity['title'], 0, 100, ".."), "node/".$nid); ?>
                         </p>
                         <?php endif; ?>
                     <?php }

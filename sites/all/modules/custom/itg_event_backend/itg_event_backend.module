@@ -15,6 +15,15 @@
 function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
   // Form alter for event backend node
   if ($form_id == "event_backend_node_form") {
+    
+    if ($form['field_step_completion']['und'][0]['value']['#default_value'] == '0') {
+         $form['actions']['itg_custom_button'] = array(
+          '#type' => 'submit',
+          '#value' => t('Save as Draft'),
+          '#submit' => array('node_form_submit', 'itg_event_backend_save_as_draft_submit_callback'),
+          '#weight' => -8,
+         );
+      }
     $form['actions']['submit']['#submit'][] = 'itg_event_save_initial_speaker_weight';
     if (isset($_GET['button_action']) || $form_state['clicked_button']['#name'] == 'previous') {
       //Hijack our errors so they don't display normally.
@@ -41,7 +50,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
     array_unshift($form['#validate'], "itg_event_backend_node_form_validate");
     $form['actions']['cancel'] = array(
       '#markup' => l(t('Cancel'), 'manage-event-backend', array('attributes' => array('class' => 'button'))),
-      '#weight' => -10,
+      '#weight' => 20,
     );
 
     if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration')) {
@@ -82,7 +91,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       );
       drupal_add_css("input#edit-submit , input[data-id=edit-submit]{display:none !important}", 'inline');
     }
-    $form['actions']['cancel']['#weight'] = -10;
+    $form['actions']['cancel']['#weight'] = 20;
     if ((arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == "edit") && $form['#node']->status == 1) {
       $form['field_event_start_date']['#attributes']['class'][] = 'date-disabled';
       $form['field_event_close_date']['#attributes']['class'][] = 'date-disabled';
@@ -120,7 +129,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
         <label for="widget-order-reorder">' . t("Speaker Order/Reorder") . ' </label>
         ' . $link_text . '
      </div>';
-      drupal_add_css("a.anchor-order-reorder {text-decoration:underline !important}" ,"inline");
+      drupal_add_css("a.anchor-order-reorder {text-decoration:underline !important}", "inline");
       $form['field_e_associate_highlights']['#suffix'] = "<div class='form-wrapper speaker-order-reorder'>$link</div>";
     }
   }
@@ -152,6 +161,14 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
   $form['field_config_video']['#access'] = FALSE;
 }
 
+/**
+ * Implements itg_event_backend_save_as_draft_submit_callback
+ * @param type $form
+ * @param array $form_state
+ */
+function itg_event_backend_save_as_draft_submit_callback($form, &$form_state) {
+  $form_state['redirect'] = 'manage-event-backend-draft';
+}
 /**
  * Implements alter message function().
  * @param array $form
@@ -241,37 +258,38 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   $registration_start = strtotime($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']);
 
   // node insert validation
-  if(arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'event-backend'){
-    if($current_date >= $start_date){
+  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'event-backend') {
+    if ($current_date >= $start_date) {
       form_set_error('field_event_start_date', t('Event start date must be greater than current date & time.'));
     }
-    if($current_date >= $end_date){
+    if ($current_date >= $end_date) {
       form_set_error('field_event_close_date', t('Event close date must be greater than current date & time.'));
     }
-    if($current_date >= $registration_start){
+    if ($current_date >= $registration_start) {
       form_set_error('field_story_expiry_date', t('Registration start date must be greater than current date & time.'));
     }
-    if($current_date >= $registration_close){
+    if ($current_date >= $registration_close) {
       form_set_error('field_registration_close_date', t('Registration close date must be greater than current date & time.'));
-    }
-  }elseif(arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit'){
-    $status = itg_event_backend_node_status(arg(1));
-    if($status != 1){
-      if($current_date >= $start_date){
-      form_set_error('field_event_start_date', t('Event start date must be greater than current date & time.'));
-    }
-    if($current_date >= $end_date){
-      form_set_error('field_event_close_date', t('Event close date must be greater than current date & time.'));
-    }
-    if($current_date >= $registration_start){
-      form_set_error('field_story_expiry_date', t('Registration start date must be greater than current date & time.'));
-    }
-    if($current_date >= $registration_close){
-      form_set_error('field_registration_close_date', t('Registration close date must be greater than current date & time.'));
-    }
     }
   }
-  
+  elseif (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit') {
+    $status = itg_event_backend_node_status(arg(1));
+    if ($status != 1) {
+      if ($current_date >= $start_date) {
+        form_set_error('field_event_start_date', t('Event start date must be greater than current date & time.'));
+      }
+      if ($current_date >= $end_date) {
+        form_set_error('field_event_close_date', t('Event close date must be greater than current date & time.'));
+      }
+      if ($current_date >= $registration_start) {
+        form_set_error('field_story_expiry_date', t('Registration start date must be greater than current date & time.'));
+      }
+      if ($current_date >= $registration_close) {
+        form_set_error('field_registration_close_date', t('Registration close date must be greater than current date & time.'));
+      }
+    }
+  }
+
   if ($registration_close <= $registration_start) {
     form_set_error('field_story_expiry_date', t('Registration start date must be less than registration close date.'));
   }
@@ -745,7 +763,8 @@ function itg_event_backend_block_view($delta = '') {
       break;
     case 'ad_right_sidebar_event':
       $page_name = 'Rest';
-      $data['itg_ad'] = get_ad_script($page_name);
+      $data = '';
+      //$data['itg_ad'] = get_ad_script($page_name);
       $block['content'] = theme('ad_right_sidebar_block1', array('data' => $data));
       break;
     case 'tweet_right_sidebar_event':
@@ -999,7 +1018,7 @@ function itg_event_backend_get_speaker_details($spk_id) {
   $query->leftJoin('file_managed', 'fm', 'fm.fid = pic.field_story_extra_large_image_fid');
   $query->leftJoin('field_data_field_story_new_title', 'designation', 'n.nid = designation.entity_id');
   $query->condition('n.nid', $spk_id, '=');
- // $query->condition('designation.bundle', 'reporter', '=');
+  // $query->condition('designation.bundle', 'reporter', '=');
   $result = $query->execute()->fetchAll();
   return $result;
 }
@@ -1754,8 +1773,10 @@ function itg_event_backend_highlights_block_content() {
  * @return string
  */
 function itg_event_backend_highlights_like_dislike($unique_id) {
-  $like = itg_flag_get_count($unique_id, 'like_count');
-  $dislike = itg_flag_get_count($unique_id, 'dislike_count');
+  if (function_exists('itg_flag_get_count')) {
+    $like = itg_flag_get_count($unique_id, 'like_count');
+    $dislike = itg_flag_get_count($unique_id, 'dislike_count');
+  }
   if (!empty($like['like_count'])) {
     $like_count = '(' . $like['like_count'] . ')';
   }
@@ -1924,7 +1945,8 @@ function itg_event_save_initial_speaker_weight(&$form, $form_state) {
                 'weight' => --$weight_data,
                 'widget' => 'itg_event_speaker_widget',
               ))->execute();
-        } catch (Exception $ex) {
+        }
+        catch (Exception $ex) {
           drupal_set_message($ex->getMessage());
         }
       }
@@ -2038,7 +2060,8 @@ function update_itg_widget_order_table_data_for_speaker($form, &$form_state) {
                 'cat_id' => $cat_id,
               ))
               ->execute();
-        } catch (Exception $ex) {
+        }
+        catch (Exception $ex) {
           drupal_set_message($ex->getMessage());
         }
       }
@@ -2066,11 +2089,11 @@ function itg_event_backend_node_delete($node) {
 /**
  * Implements get node status
  */
-function itg_event_backend_node_status($nid){
+function itg_event_backend_node_status($nid) {
   $query = db_select('node', 'n');
-  $query ->fields('n', array('status'));
-  $query -> condition('n.status', 1, '=');
-  $query -> condition('n.nid', $nid, '=');
+  $query->fields('n', array('status'));
+  $query->condition('n.status', 1, '=');
+  $query->condition('n.nid', $nid, '=');
   $result = $query->execute()->fetchField();
   return $result;
 }

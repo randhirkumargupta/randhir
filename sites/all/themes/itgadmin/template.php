@@ -135,23 +135,23 @@
  */
 function itgadmin_preprocess_comment(&$vars) {
   // Remove comment title from display
-  
+
   $vars['title'] = '';
   $comment = $vars['elements']['#comment'];
   $node = $vars['elements']['#node'];
-  
+
   if ($node->type == 'story' || $node->type == 'blog') {
     $vars['created'] = format_date($comment->created, 'custom', 'D, d/m/Y h:i');
     $vars['changed'] = format_date($comment->changed, 'custom', 'D, d/m/Y h:i');
 
     $vars['submitted'] = t('Submitted by !username on !datetime', array('!username' => $vars['author'], '!datetime' => $vars['created']));
-  } else if ($node->type == 'task_idea_allocation_tracking') {
-      $vars['created'] = format_date($comment->created, 'custom', 'D, d/m/Y h:i');
-      $vars['changed'] = format_date($comment->changed, 'custom', 'D, d/m/Y h:i');
-      $vars['submitted'] = t('Commented by !username on !datetime', array('!username' => $vars['author'], '!datetime' => $vars['created']));
+  }
+  else if ($node->type == 'task_idea_allocation_tracking') {
+    $vars['created'] = format_date($comment->created, 'custom', 'D, d/m/Y h:i');
+    $vars['changed'] = format_date($comment->changed, 'custom', 'D, d/m/Y h:i');
+    $vars['submitted'] = t('Commented by !username on !datetime', array('!username' => $vars['author'], '!datetime' => $vars['created']));
   }
 }
-
 
 /**
  * Implements hook_preprocess_html().
@@ -165,6 +165,7 @@ function itgadmin_preprocess_html(&$variables) {
 //    $variables['head_title'] = "Test";
 //  }
 }
+
 /**
  * Preprocessor for theme('textfield').
  */
@@ -194,7 +195,7 @@ function itgadmin_menu_link(array $variables) {
   if ($element['#theme'] == 'menu_link__menu_menu_manager') {
     $element['#localized_options']['attributes']['class'][] = "colorbox-load";
   }
-  
+
   if ($element['#below']) {
     $sub_menu = drupal_render($element['#below']);
   }
@@ -208,12 +209,12 @@ function itgadmin_menu_link(array $variables) {
 }
 
 function itgadmin_node_preview($variables) {
+  global $base_url;
   $node = $variables['node'];
-
+// print  $node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id'];
+//  itg_newsletter_content_preview_data($node);
   $output = '<div class="preview-wrapper"><div class="preview">';
-
   $preview_trimmed_version = FALSE;
-
   $elements = node_view(clone $node, 'teaser');
   $trimmed = drupal_render($elements);
   $elements = node_view($node, 'full');
@@ -226,12 +227,20 @@ function itgadmin_node_preview($variables) {
     $output .= $trimmed;
     $output .= '<h3>' . t('Preview full version') . '</h3>';
     $output .= $full;
+    if ($node->type == 'newsletter') {
+      $selectedTemplatenid = $node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id'];
+      $newletterContents = $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];
+      foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $values) {
+        $cat_array[] = $values['tid'];
+      }
+      $tid_val = implode(',', $cat_array);
+      $output .= l(t('Download HTML'), 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $tid_val);
+    }
   }
   else {
     $output .= $full;
   }
   $output .= "</div></div>\n";
-
   return $output;
 }
 
@@ -377,39 +386,40 @@ function itgadmin_preprocess_page(&$vars) {
 
   // Add tpl for related content view page
   $page_url_except_header_footer = array(
-      'getimagetocroper'
-      , 'searchimage'
-      , 'imagetotag'
-      , 'imagetagedit'
-      , 'anchor-list-order-reorder'
-      , 'big-story-widget-list'
-      , 'highlights-widget-list'
-      , 'photo-list-widget-listing'
-      , 'home-page-feature-widget'
-      , 'we-may-suggest-content-ordering-list'
-      , 'story-list-widget-listing'
-      , 'top-takes-video-widget-order-reorder'
-      , 'trending-video-widget-order-reorder'
-      , 'watch-right-now-video-widget-order-reorder'
-      , 'so-sorry-video-widget-order-reorder'
-      , 'video-list-widget-listing'
-      , 'issue-magazin-widget-list'
-      , 'poll-format-widget-list'
-      , 'special-how-made-it-widget-list'
-      , 'video-status'
-      , 'related-content'
-      , 'feature-content-section-widget-list'
-      , 'most-read-widget-list'
-      , 'yearend-left-widget-list'
-      , 'special-auto-review-widget-lsit'
-      , 'issue-magazin-widget-list'
-      , 'special-key-candidate-widget-list'
-      , 'most-popular-widget-order-reorder'
-      , 'dont-miss-widget-list'
-      , 'dailymotion-ftp-template'
-      , 'issue-magazin-primary-cat-widget-list'
-      , 'supplement-base-magazin-widget-list'
-      , 'speaker-order-reorder'
+    'getimagetocroper'
+    , 'searchimage'
+    , 'imagetotag'
+    , 'imagetagedit'
+    , 'anchor-list-order-reorder'
+    , 'big-story-widget-list'
+    , 'highlights-widget-list'
+    , 'photo-list-widget-listing'
+    , 'home-page-feature-widget'
+    , 'we-may-suggest-content-ordering-list'
+    , 'story-list-widget-listing'
+    , 'top-takes-video-widget-order-reorder'
+    , 'trending-video-widget-order-reorder'
+    , 'watch-right-now-video-widget-order-reorder'
+    , 'so-sorry-video-widget-order-reorder'
+    , 'video-list-widget-listing'
+    , 'issue-magazin-widget-list'
+    , 'poll-format-widget-list'
+    , 'special-how-made-it-widget-list'
+    , 'video-status'
+    , 'related-content'
+    , 'feature-content-section-widget-list'
+    , 'most-read-widget-list'
+    , 'yearend-left-widget-list'
+    , 'special-auto-review-widget-lsit'
+    , 'issue-magazin-widget-list'
+    , 'special-key-candidate-widget-list'
+    , 'most-popular-widget-order-reorder'
+    , 'dont-miss-widget-list'
+    , 'dailymotion-ftp-template'
+    , 'issue-magazin-primary-cat-widget-list'
+    , 'supplement-base-magazin-widget-list'
+    , 'speaker-order-reorder'
+    , 'event-according-type'
   );
 
   if (in_array(arg(0), $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {
@@ -417,16 +427,10 @@ function itgadmin_preprocess_page(&$vars) {
   }
 
   //Add tpl for event registration view page
-  if ((!empty($vars['node']->type) && $vars['node']->type == 'event_registration') 
-          || $arg0 == 'comment_view' 
-          || $arg0 == 'event-users-list' 
-          || arg(1) == 'associate-with-story' 
-          || $arg0 == 'comment_edit' 
-          || $arg0 === 'social-media-logs' 
-          || (!empty($vars['node']->type) && $vars['node']->type == 'print_team_integration' && $_GET['type'] == 'commentform' )) {
+  if ((!empty($vars['node']->type) && $vars['node']->type == 'event_registration') || $arg0 == 'comment_view' || $arg0 == 'event-users-list' || arg(1) == 'associate-with-story' || $arg0 == 'comment_edit' || $arg0 === 'social-media-logs' || (!empty($vars['node']->type) && $vars['node']->type == 'print_team_integration' && $_GET['type'] == 'commentform' )) {
     $vars['theme_hook_suggestions'][] = 'page__event_registration';
   }
-  
+
 //  if ((isset($vars['node']->type) && $vars['node']->type == 'event_backend')) {
 //    $vars['theme_hook_suggestions'][] = 'page__event_domain';
 //  }

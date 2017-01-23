@@ -2459,7 +2459,7 @@ function domain_form_alter(&$form, &$form_state, $form_id) {
   //$seleted_domain_id = ltrim($form['#node']->domain_source, '-');
 
   $arg = arg();
-  if($arg[2] == 'edit') {
+  if(!empty($arg[2]) && $arg[2] == 'edit') {
     $except_this_node = 'node/'.$arg[1];
     $all_redirect_records = itg_event_backend_get_redirect_all_domains($except_this_node);
   }

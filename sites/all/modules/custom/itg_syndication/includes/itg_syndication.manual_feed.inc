@@ -37,6 +37,7 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
   // Add client dropdown to view
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_feed_generator') {
     global $user, $base_url;
+    $mag_option = '';
     // add js for issue dropdown ajax
     $settings = array();
     $settings['base_url'] = $base_url;
@@ -192,6 +193,7 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
   // Code to ristrict future date on client creation.
   if($form_id == 'views_form_syndication_feed_generator_page') {
    $form['client_delivery_mode']['#title'] = t("Select delivery end point");
+   $form['client_delivery_mode']['#prefix'] = '<div id="itg-cutom-pager">'.theme('pager').'</div>';
     drupal_add_js('
       jQuery(function() {
         jQuery( "#edit-changed-max-datepicker-popup-0 , #edit-changed-min-datepicker-popup-0" ).datepicker({  
@@ -202,6 +204,11 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
         });
       });
     ',"inline");
+    //code pager display
+    drupal_add_js('jQuery(document).ready(function() {              
+                   jQuery(".item-list").hide();
+                   jQuery("div").parents("#itg-cutom-pager").find(".item-list").show();                   
+                });', array('type' => 'inline', 'scope' => 'footer'));
   }
 }
 

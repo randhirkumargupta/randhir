@@ -157,6 +157,67 @@ if (!empty($device[0])) {
                 </div>
                         </div>
                 </div>
+                <!--budget predictor with first block-->  
+                <?php if($_GET['type'] == 'budget-predictor') { ?>
+                   <div class="row">  
+                     <div class="col-md-8 itg-h747-section">
+                      <?php
+                       $block = module_invoke('itg_budget_predictor', 'block_view', 'budget_pradictor');
+                       print render($block['content']);
+                       ?>
+                     </div>
+                     <div class="col-md-4">   
+                         <div class="row">
+                          <div class="col-md-12">
+                                                
+                                  <div class="itg-widget-parent">
+                                      <div class="itg-widget">
+                                          <div class="ad-widget budget-ad">
+                                              <div class="sidebar-ad">
+                                                 <?php
+                                                  $block = block_load('itg_ads', ADS_RHS1);   
+                                                  $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                                  print render($render_array);
+                                                 ?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>                    
+                             
+                          </div>
+                          <div class="col-md-12">
+                                <div class="itg-widget">
+                                    <div class="droppable <?php print $gray_bg_layout; ?>">
+                                        <div class="widget-wrapper <?php print $widget_data['itg-block-6']['widget_name']; ?>">
+                                            <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-6']['block_title'])) { ?>
+                                              <h4 class="heading"><?php print $widget_data['itg-block-6']['block_title']; ?></h4>
+                                            <?php } ?>
+                                            <!-- for admin  -->
+                                            <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                                              <div class="widget-settings">
+                                                  <div class="widget-title-wrapper">
+                                                      <?php if (isset($widget_data['itg-block-6']['block_title'])) { ?>
+                                                        <span class="widget-title" data-id="itg-block-6"><?php print $widget_data['itg-block-6']['block_title']; ?></span>
+                                                      <?php } ?>
+                                                      <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-6']['block_title']; ?>" name="itg-block-6" class="block_title_id" placeholder="Enter Title" />
+                                                  </div>
+                                                  <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                              </div>
+                                            <?php } ?>  
+
+                                            <div class="data-holder" id="itg-block-6"><?php $block = module_invoke('itg_widget', 'block_view', 'budget_tweets');
+                                          print render($block['content']);
+                                            ?></div>
+                                        </div>             
+                                    </div>
+                                </div>
+                           
+                          </div>
+                      </div>    
+                     </div>    
+                   </div>    
+                <?php } else { ?>
+                
                 <div class="row itg-325-layout">
                     <?php if ($live_url != "" || !empty($highlights['node_data']->field_story_highlights['und']) || $theme == 'itgadmin') { ?>
                       <div class="col-md-4 mt-50">
@@ -194,27 +255,7 @@ if (!empty($device[0])) {
                     </div>
                    <?php } ?>  
                 
-                                      <!-- for admin  -->
-                                       
-
-<!--                                      <div class="data-holder highlight" id="itg-block-2"> <div class="auto-block-2">
-                                              <div class="special-top-news">
-
-                                                  <ul class="itg-listing">   
-                                                      <?php
-                                                     // foreach ($highlights['node_data']->field_story_highlights['und'] as $index => $row) {
-
-                                                       // $desc = $row['value'];
-                                                        ?>
-                                                        <li><?php //echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/{$highlights['node_data']->nid}")) ?></li>
-
-                                                      <?php //} ?>
-
-                                                  </ul>
-
-                                              </div>
-
-                                          </div></div>-->
+                                    
 
                     <div class="data-holder" id="itg-block-2"><?php print $widget_data['itg-block-2']['widget']; ?></div>
                                   </div>             
@@ -227,10 +268,10 @@ if (!empty($device[0])) {
                                   <div class="ad-widget budget-ad">
                                       <div class="sidebar-ad">
                                          <?php
-                                        if (!empty($itg_ad['200*200_right_bar_ad1'])) {
-                                          print $itg_ad['200*200_right_bar_ad1'];
-                                        }
-                                        ?>
+                                          $block = block_load('itg_ads', ADS_RHS1);   
+                                          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                          print render($render_array);
+                                         ?>
                                       </div>
                                   </div>
                               </div>
@@ -239,8 +280,12 @@ if (!empty($device[0])) {
 
                     <?php } ?>
                 </div>
-
-                <div class="row itg-530-layout">
+                <?php } ?>
+                 <!--End budget predictor with first block--> 
+                
+                 <!--budget predictor with second block-->  
+                <?php if($_GET['type'] != 'budget-predictor') { ?>
+                  <div class="row itg-530-layout">
                     <?php if (isset($widget_data['itg-block-4']['widget_name']) || isset($widget_data['itg-block-5']['widget_name']) || isset($widget_data['itg-block-6']['widget_name']) || $theme == 'itgadmin') { ?>
                       <div class="col-md-8 mt-50">                                                 
                           <div class="itg-widget">
@@ -296,8 +341,10 @@ if (!empty($device[0])) {
                           </div>
                       </div>
 
-<?php } ?>
+                    <?php } ?>
                 </div>
+                <?php } ?>
+                 <!--End budget predictor with first block--> 
 
 
                 <div class="row itg-370-layout">
@@ -386,6 +433,7 @@ if (!empty($device[0])) {
 <?php if (isset($widget_data['itg-block-10']['widget_name']) || isset($widget_data['itg-block-11']['widget_name']) || isset($widget_data['itg-block-12']['widget_name']) || $theme == 'itgadmin') { ?>
                       <div class="col-md-8 mt-50">
                           <div class="row">
+                            <?php if($_GET['type'] != 'budget-predictor') { ?>  
                               <div class="col-md-12 m-bottom40">
                                   <div class="itg-widget itg-widget-parent">
                                       <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -411,7 +459,7 @@ if (!empty($device[0])) {
                                       </div>
                                   </div>
                               </div>
-
+                            <?php } ?>  
                               <div class="col-md-12">
                                   <div class="itg-widget itg-widget-child">
                                       <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -502,9 +550,9 @@ if (!empty($device[0])) {
                                           <div class="ad-widget">
                                               <div class="sidebar-ad">
                                                  <?php
-                                                  if (!empty($itg_ad['200*200_right_bar_ad2'])) {
-                                                    print $itg_ad['200*200_right_bar_ad2'];
-                                                  }
+                                                    $block = block_load('itg_ads', ADS_RHS2);   
+                                                    $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                                    print render($render_array);
                                                   ?>
                                               </div>
                                           </div>

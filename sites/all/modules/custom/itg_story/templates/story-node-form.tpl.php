@@ -8,6 +8,8 @@
                 <?php print drupal_render($form['field_story_select_supplement']); ?>
                 <?php print drupal_render($form['field_story_issue_date']); ?>
                 <?php print drupal_render($form['title']); ?>
+                <?php print drupal_render($form['field_emoji']); ?>
+                <?php print drupal_render($form['field_emoji_position']); ?>
                 <?php print drupal_render($form['field_story_magazine_headline']); ?>
                 <?php print drupal_render($form['field_story_category']); ?>
                 <?php print drupal_render($form['field_primary_cat_data']); ?>
@@ -62,7 +64,7 @@
                 <?php print drupal_render($form['field_story_short_headline']); ?>
                 <?php print drupal_render($form['field_story_long_head_line']); ?>
               <!--<div class="pre-desc"><?php //print t('This title shows on the section page');      ?></div> -->
-                <?php print drupal_render($form['field_story_rating']); ?>
+                
                 <?php print drupal_render($form['field_story_new_title']); ?>
                 <?php print drupal_render($form['field_story_redirection_url_titl']); ?>
                 <?php print drupal_render($form['field_story_courtesy']); ?>
@@ -85,6 +87,19 @@
                 <?php //unset($form['revision_information']); ?>
             </div>
         </div>
+      
+       <div id="StoryMovie" class="itg-form-section-wrapper">
+            <h2 class="story-title"><?php print t('Story Movie'); ?></h2> 
+            <div class="itg-form-section hide">
+              <?php print drupal_render($form['field_story_rating']); ?>
+              <?php print drupal_render($form['field_mega_review_cast']); ?>
+              <?php print drupal_render($form['field_mega_review_director']); ?>
+              <?php print drupal_render($form['field_mega_review_movie_plot']); ?>
+            </div>
+        </div>
+      
+      
+      
         <div class="itg-form-action">
             <?php print drupal_render($form['actions']); ?>
         </div>
@@ -92,7 +107,7 @@
     <div class="col-md-4">
         <div class="itg-sidebar-form">
             <div id="Briefcase" class="itg-sidebar-form-section">
-                <h2 class="story-title"><?php print t('Briefcase'); ?></h2>
+                <h2 class="story-title"><?php print t('Highlights'); ?></h2>
                 <div class="itg-form-section hide">
                     <?php print drupal_render($form['field_story_highlights']); ?>
                 </div>

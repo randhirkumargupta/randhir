@@ -641,8 +641,22 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   content: '';
   height: 6px;
   background: #a00606;
-  width: 10%;
   border-radius: 10px;
+}
+.total-point-wrapper .pregress-bar .progress-bar-1:before {
+  width: 20%;
+}
+.total-point-wrapper .pregress-bar .progress-bar-2:before {
+  width: 40%;
+}
+.total-point-wrapper .pregress-bar .progress-bar-3:before {
+  width: 60%;
+}
+.total-point-wrapper .pregress-bar .progress-bar-4:before {
+  width: 80%;
+}
+.total-point-wrapper .pregress-bar .progress-bar-5:before {
+  width: 100%;
 }
 .total-point-wrapper .pregress-bar span.current-badge, .total-point-wrapper .pregress-bar span.next-badge {
   display: inline-block;
@@ -1813,7 +1827,8 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   margin: 15px auto 0;
   display: inherit;
   font-size: 14px;
-  line-height: 32px;
+  line-height: 34px;
+  padding: 0;
 }
 .home_page_poll_widget_block .poll-data .poll-replace-id .form-submit:hover {
   box-shadow: 0 0 5px 0 #999;
@@ -2986,6 +3001,18 @@ footer .footer-top ul li a:hover {
 }
 
 /*other comment css start*/
+#other-comment #total-comment {
+  font-size: 20px;
+  font-weight: 500;
+  padding: 10px 10px;
+  background-color: #d00b26;
+  color: #fff;
+  margin-bottom: 10px;
+}
+#other-comment .error {
+  font-size: 13px;
+}
+
 .comment-popup-wrapper {
   background-color: rgba(0, 0, 0, 0.7);
   height: 100%;
@@ -2996,18 +3023,37 @@ footer .footer-top ul li a:hover {
   z-index: 2147483647;
 }
 
-.comment-popup {
+.ugc-comment-popup {
+  padding: 10px;
+  background-color: #f2f2f2;
+}
+.ugc-comment-popup .close-comment-popup {
+  display: none;
+  color: #868686;
+  font-size: 20px;
+  height: 20px;
+  position: absolute;
+  right: 10px;
+  text-align: center;
+  top: 10px;
+  width: 20px;
+}
+.ugc-comment-popup.comment-popup {
   background-color: #fff;
   bottom: 0;
-  height: 400px;
+  border-radius: 10px;
+  height: 300px;
   left: 0;
   margin: auto;
-  max-width: 800px;
-  padding: 20px;
+  max-width: 600px;
+  padding: 50px 20px 20px;
   position: absolute;
   right: 0;
   top: 0;
   width: 100%;
+}
+.ugc-comment-popup.comment-popup .close-comment-popup {
+  display: block;
 }
 
 .comment-user-details {
@@ -3020,6 +3066,34 @@ footer .footer-top ul li a:hover {
   margin-right: 7px;
   vertical-align: top;
   width: 200px;
+  text-align: left;
+}
+.comment-user-details > div .social-login {
+  text-align: right;
+}
+.comment-user-details > div .social-login span {
+  display: inline-block;
+  vertical-align: top;
+  margin: 4px;
+  width: 24px;
+  height: 24px;
+}
+.comment-user-details > div .social-login span .fa {
+  font-size: 28px;
+  vertical-align: top;
+  line-height: 28px;
+}
+.comment-user-details > div .social-login span .fa.fa-facebook-square {
+  color: #1a3c8d;
+}
+.comment-user-details > div .social-login span .fa.fa-twitter-square {
+  color: #1b95e0;
+}
+.comment-user-details > div .social-login span .fa.fa-google-plus-square {
+  color: #dd4a40;
+}
+.comment-user-details > div .social-login span .fa.fa-linkedin-square {
+  color: #0274B3;
 }
 
 .comment-user-details .form-text {
@@ -3031,6 +3105,7 @@ footer .footer-top ul li a:hover {
   border: 1px solid #000;
   border-radius: 3px;
   color: #fff;
+  cursor: pointer;
   display: inline-block;
   font-family: Roboto;
   font-size: 14px;
@@ -3041,7 +3116,97 @@ footer .footer-top ul li a:hover {
   vertical-align: top;
 }
 
+.itg-comment {
+  padding: 10px;
+}
+.itg-comment .comment-image {
+  float: left;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+}
+.itg-comment .comment-details {
+  overflow: hidden;
+  padding-bottom: 10px;
+}
+.itg-comment .comment-name {
+  font-weight: 600;
+  padding-bottom: 5px;
+}
+.itg-comment .comment-timestamp, .itg-comment a.reply {
+  font-size: 12px;
+  color: #989898;
+  display: inline-block;
+  vertical-align: middle;
+}
+.itg-comment .comment-timestamp:after {
+  content: '|';
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 2px 0 7px;
+}
+.itg-comment a.reply:hover {
+  color: #1a3c8d;
+}
+.itg-comment .inner-comment {
+  padding-left: 62px;
+}
+
 /*other comment css end*/
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-email,
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-section {
+  float: left;
+  width: 48%;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-email label,
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-section label {
+  float: none;
+  display: block;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper select {
+  max-width: 100%;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-name,
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-item-title,
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-city,
+#content [id*="ugc-node-form"].ugc-custom-wrapper .field-type-text-with-summary {
+  float: left;
+  width: 52%;
+  padding-right: 2%;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-name label,
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-item-title label,
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-city label,
+#content [id*="ugc-node-form"].ugc-custom-wrapper .field-type-text-with-summary label {
+  float: none;
+  display: block;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper .field-type-text-with-summary .form-type-textarea > label + div {
+  padding: 0;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper .field-type-text-with-summary .form-textarea {
+  height: 100px;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper .captcha-lable {
+  width: auto;
+  float: none;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper .captcha {
+  padding-left: 52%;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-actions {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  padding: 0;
+  text-align: right;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-actions .form-submit {
+  padding: 10px 30px;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper span.error {
+  padding-left: 0;
+}
+
 /* CSS To Add Zoom Effect on Images */
 @media all and (min-width: 1025px) {
   .zoom-image, #block-itg-front-end-common-related-photo-block #related-photo ul li a,
@@ -5544,17 +5709,37 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 
   /* End of Quiz And Survey */
   .total-point-wrapper {
-    display: block;
+    display: inline-block;
+    vertical-align: top;
     margin-top: 20px;
+    max-width: 66%;
+  }
+  .total-point-wrapper img {
+    width: 50px;
+    height: 50px;
+  }
+  .total-point-wrapper .total-point-value span {
+    font-size: 32px;
+  }
+  .total-point-wrapper .pregress-bar {
+    margin-top: 10px;
   }
   .total-point-wrapper .pregress-bar .pregress-bar-active {
-    max-width: 60%;
+    max-width: 80%;
   }
   .total-point-wrapper .pregress-bar span.current-badge {
-    left: 15px;
+    left: 0;
+    top: 0;
+    text-align: left;
   }
   .total-point-wrapper .pregress-bar span.next-badge {
-    right: 15px;
+    right: 0;
+    top: 0;
+    text-align: right;
+  }
+  .total-point-wrapper .pregress-bar span.current-badge small,
+  .total-point-wrapper .pregress-bar span.next-badge small {
+    margin-bottom: 0;
   }
   .total-point-wrapper .points-to-go {
     padding-right: 15px;
@@ -5607,6 +5792,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
   .career-graph .career-graph-data img {
     max-width: 90px;
+  }
+
+  .personal-list > li .personal-details .personal-pic {
+    height: auto;
   }
 }
 @media all and (max-width: 480px) {

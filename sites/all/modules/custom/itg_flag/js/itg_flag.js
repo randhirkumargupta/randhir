@@ -167,6 +167,13 @@ jQuery(document).ready(function () {
                  jQuery('#like_count,#dislike_count').prop('disabled', false);
             }
         });
+        
+        jQuery(document).click(function(){
+             jQuery("#sty-dv, #dsty-dv").hide();
+        });
+        jQuery("#sty-dv, #dsty-dv").click(function(e){
+              e.stopPropagation();
+        });
 
     });
 });

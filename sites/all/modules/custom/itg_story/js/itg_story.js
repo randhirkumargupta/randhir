@@ -64,6 +64,7 @@
                     $("#edit-field-story-select-magazine-und").val('_none');
                     $('[name="field_story_select_supplement[und]"]').val('_none');
                     $("#edit-field-story-issue-date-und-0-value-datepicker-popup-1").val('');
+                    $("#edit-field-story-issue-date-und-0-value-datepicker-popup-0").val('');
                 }
             });
 
@@ -235,3 +236,10 @@
 
     });
 });
+
+// open save search in popup
+function showrelatedpopup(iframeurl)
+{
+    jQuery.colorbox({href: iframeurl, iframe: true, width: "1030", height: "730", fixed: true});
+
+}

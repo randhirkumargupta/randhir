@@ -34,7 +34,17 @@ list($width, $height) = getimagesize($url);
         </ol>';
         if($content_name!="")
         {
-       print' <div class="image_info">'.$counter.' '. ucwords($imagename).' ('.$image_dim[$content_name][ $explodedata[1]]['width'].'x'.$image_dim[$content_name][ $explodedata[1]]['height'].')</div>';
+            $imagewidth = $image_dim[$content_name][ $explodedata[1]]['width'];
+            $imagehight = $image_dim[$content_name][ $explodedata[1]]['height'];
+            
+            if($imagewidth == "")
+            {
+             $imagewidth = EXTRA_LARGE_IMAGE_WIDTH;  
+            }
+            if($imagehight == "") {
+                $imagehight = EXTRA_LARGE_IMAGE_HEIGHT;
+            }
+       print' <div class="image_info">'.$counter.' '. ucwords($imagename).' ('.$imagewidth.'x'.$imagehight.')</div>';
         
         }
         if(strtolower($imagename)=='extra large image')
@@ -55,6 +65,8 @@ list($width, $height) = getimagesize($url);
     <input type="hidden" value="<?php echo $field_name; ?>" id="field_name">
     <input type="hidden" value="<?php echo $fidsformain; ?>" id="image_fiedlid">
     <input type="hidden" value="<?php echo $url; ?>" id="imcurl">
+    <input type="hidden" id="orig_image_fiedlid" value="<?php echo $original_img_id; ?>">
+    <input type="hidden" id="is_solr" value="<?php echo $is_solr; ?>">
     <input type="hidden" value="<?php echo $height; ?>" id="imcheigth">
     <input type="hidden" value="<?php echo $width; ?>" id="imcwidth">
 </div>

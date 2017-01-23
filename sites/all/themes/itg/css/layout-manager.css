@@ -2254,10 +2254,10 @@ img {
 /*CSS End sport home page*/
 /*CSS start for movie page*/
 .movie-layout-page .itg-layout-580 .droppable {
-  height: 580px;
+  height: 650px;
 }
 .movie-layout-page .itg-layout-580 .droppable .auto-block-1, .movie-layout-page .itg-layout-580 .droppable .auto-block-2 {
-  height: 580px;
+  height: 650px;
   overflow: hidden;
 }
 .movie-layout-page .itg-layout-580 .droppable .auto-block-1 {
