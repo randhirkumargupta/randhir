@@ -115,8 +115,8 @@ function itg_blog_after_build($form, &$form_state) {
     $settings['base_url'] = $base_url;
     $settings['uid'] = $user->uid;
 
-    drupal_add_js(array('itg_blog' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_blog') . '/js/itg_blog.js', array('weight' => 1));
+    drupal_add_js(array('itg_blog' => array('settings' => $settings)), array('type' => 'setting','scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_blog') . '/js/itg_blog.js', array('weight' => 1,'scope' => 'footer'));
 
     return $form;
 }
