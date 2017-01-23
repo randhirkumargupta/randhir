@@ -45,6 +45,7 @@ define('ADS_RHS1', 'ads_medium_rectangl_rhs1_300x250');
 define('ADS_RHS2', 'ads_medium_rectangl_rhs2_300x250');
 define('ADS_FOOTER', 'ads_super_banner_bottomnav728x90');
 define('ADS_HEADER', 'ads_super_banner_top_nav_728x90');
+define('NEWSLETTER_EDUCATION_TID', 515);
 
 
 

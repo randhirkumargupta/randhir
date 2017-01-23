@@ -27,7 +27,7 @@ $user_id = $data['user_id'];
     text-align: center;}
     #main-container-budget .col-list {min-height: 740px;}
     <?php if ($admin_user) { ?>
-      #main-container-budget{width:100%;height:100%;display: inline-block;width: 100%;}
+      #main-container-budget{width:70%;height:100%;display: inline-block;}
     <?php }
     else { ?>
       #main-container-budget{width:100%;height:600px;}
