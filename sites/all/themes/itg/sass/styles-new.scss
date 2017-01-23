@@ -3672,6 +3672,7 @@ footer .footer-top ul li a:hover{
                 .views-field-name{
                     padding-right: 75px;
                     font: 400 16px/20px Roboto;
+                    word-wrap: break-word;
                 }
                 .views-field-ops{
                     font: 400 14px/20px Roboto;
@@ -5164,7 +5165,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     }
   }  
   .page-personalization-my-following #block-views-follow-tags-block, 
-  .page-personalization-my-following #block-views-follow-tags-block-1{width: 50%; float: left; padding: 50px 0 0;}
+  .page-personalization-my-following #block-views-follow-tags-block-1{width: 100%; float: left; padding: 50px 0 0;}
   #block-itg-personalization-user-my-point{
     .header-point{
       padding: 20px 0;

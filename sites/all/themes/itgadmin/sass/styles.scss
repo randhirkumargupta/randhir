@@ -2279,7 +2279,8 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   .form-field-name-field-ads-body-close{
     @extend .pos-rel;
   }
-  .form-field-name-field-ads-body-close{
+  .form-field-name-field-ads-body-close, 
+  .form-field-name-field-ads-body-start{
     margin-top: 10px;
   }
   [id*="field-adds-code-holder-values"], 
@@ -2322,6 +2323,11 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       .form-submit{
         @extend .icon-add-more;
         margin: 0;
+      }
+      .ajax-progress{
+        position: absolute;
+        left: 100%;
+        top: -8px;
       }
     }
   }
@@ -9833,3 +9839,9 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     display: none;
   }
 }
+.download-html{
+  @extend .fright;
+  @extend .btn-submit;
+  margin-bottom: 10px;
+}
+#edit-field-primary-category-html-text-und-0-value{@extend .hide;}
