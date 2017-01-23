@@ -58,26 +58,6 @@ function itg_user_log_activities_to_mongodb($uid) {
     }
   }
 }
-/**
- * 
- * Function to insert data into userdetails collection .
- */
-//function user_data_select_in_mongodb($user_info) {
-//  if (function_exists('mongodb')) {
-//    $con = mongodb();
-//    if ($con) {
-//      $people = $con->usersdetails;
-//
-//      if (isset($user_info->field_mobile_number['und'][0]['value']) && !empty($user_info->field_mobile_number['und'][0]['value'])) {
-//        $mobile_no = $user_info->field_mobile_number['und'][0]['value'];
-//      }
-//      else {
-//        $mobile_no = '';
-//      }
-//      $count = $people->find(array("uuid" => $user_info->uid));
-//    }
-//  }
-//}
 
 /**
  * Implements function for active user listing

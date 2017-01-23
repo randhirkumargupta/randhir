@@ -77,14 +77,14 @@ function itg_user_log_get_count($uid, $createdDate = null, $startDate = null, $e
 /**
  * Implements hook to check the count value().
  *
- * {@inheritdoc}.
+ * 
  */
-function itg_logged_in_user_activity() {
-  $user_id = 291;
-  $startDate = strtotime('today midnight');
-  $endDate = '';
-  echo itg_user_log_get_count($user_id, $startDate, $endDate);
-}
+//function itg_logged_in_user_activity() {
+//  $user_id = 291;
+//  $startDate = strtotime('today midnight');
+//  $endDate = '';
+//  echo itg_user_log_get_count($user_id, $startDate, $endDate);
+//}
 
 /**
  * Implements hook_views_api().
