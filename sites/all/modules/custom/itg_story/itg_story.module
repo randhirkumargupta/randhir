@@ -691,11 +691,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
     
     if(function_exists('itg_get_front_activity_info')) {
       $node->content['follow_status'] = itg_get_front_activity_info($node->nid, $node->type, $user->uid, 'follow_story', $status='');
-    }
+    }    
     
-    if(!empty($node->field_story_reporter[LANGUAGE_NONE][0]['target_id'])) {
-    $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
-    $node->content['byline_node'] = node_load($byline_id);
-    }
   }
 }

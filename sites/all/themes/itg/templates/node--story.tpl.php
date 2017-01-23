@@ -40,8 +40,11 @@ if (!empty($content)):
     $follow_status = $content["follow_status"];
 
     //get byline detail
-
-    $reporter_node = $content['byline_node'];
+    if(!empty($node->field_story_reporter[LANGUAGE_NONE][0]['target_id'])) {
+      $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+      $reporter_node = node_load($byline_id);
+    }
+    
     ?>
     <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle; ?>">
         <div class='<?php print $classes ?>'>
