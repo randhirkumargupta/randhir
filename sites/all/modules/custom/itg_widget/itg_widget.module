@@ -28,11 +28,11 @@ module_load_include('inc', 'itg_widget', 'itg_widget.helper');
 function itg_widget_init() {
 // Js for move funtionality.
 // This is use in case of nodequeue in case of custom table we calls a callback funtion.
-    global $base_url;
-    $settings = array();
-    $settings['base_url'] = $base_url;   
-    drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', 'file');
+  global $base_url;
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file' , 'scope'=>'footer'));
 }
 
 /**
@@ -195,7 +195,7 @@ function itg_widget_site_map() {
     }
   }
   $print_tree = '<div class="row site-map"><div class="col-md-6">' . $left_tree . '</div> <div class="col-md-6">' . $right_tree . '</div></div>';
-  return  $print_tree;
+  return $print_tree;
 }
 
 /**
@@ -218,7 +218,6 @@ function extranet_output_nested_tree($tree) {
   }
   return $output;
 }
-
 
 /**
  * Function to get array of active category tree array format.
@@ -404,6 +403,10 @@ function itg_widget_block_info() {
   );
   $blocks['cheaper_dearer'] = array(
     'info' => t('Widget : Cheaper Dearer from custom table')
+  );
+
+  $blocks['podcast_header'] = array(
+    'info' => t('Podcast: Header for podcast.')
   );
 
   return $blocks;
@@ -607,7 +610,7 @@ function itg_widget_block_view($delta = '') {
       global $base_url;
       module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
       //drupal_add_js(drupal_get_path('theme', 'itg'). "");
-      drupal_add_js(drupal_get_path('theme', 'itg') . '/js/itg-photo-slider.js', array('type' => 'file' ,'scope' => 'footer'));
+      drupal_add_js(drupal_get_path('theme', 'itg') . '/js/itg-photo-slider.js', array('type' => 'file', 'scope' => 'footer'));
       drupal_add_js($base_url . '/sites/all/themes/itg/js/jquery.mousewheel.min.js', array('type' => 'external', 'scope' => 'header', 'weight' => 5));
 
       drupal_add_js("jQuery(document).ready(function () {
@@ -978,6 +981,24 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_budget_predictor');
       $data = itg_budget_predictor_cheaper_dearer_data();
       $block['content'] = $data;
+      break;
+
+    case 'podcast_header':
+      $menu_get_object = menu_get_object();
+      if ($menu_get_object->type == 'podcast') {
+        $entity_id = $menu_get_object->field_podcast_audio_upload['und'];
+        $podcast_title = $menu_get_object->title;
+        $podcast_banner_array = array();
+        foreach ($entity_id as $key => $val) {
+          $id = $val['value'];
+          $entity = entity_load('field_collection_item', array($id));
+          $audio_file_object = $entity[$id]->field_podcast_upload_audio_file['und'][0];
+          $description = $entity[$id]->field_podcast_description['und'][0]['value'];
+          $podcast_image = $entity[$id]->field_podcast_audio_image_upload['und'][0];
+          $podcast_banner_array[$key] = array("audio" => $audio_file_object, "desc" => $description, "image" => $podcast_image);
+        }
+        $block['content'] = theme("podcast_banner", array("podcast_banner_array" => $podcast_banner_array , "podcast_title" => $podcast_title));
+      }
       break;
   }
 
