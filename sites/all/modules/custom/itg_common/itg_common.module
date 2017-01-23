@@ -30,6 +30,21 @@ function itg_common_init() {
 }
 
 /**
+ * Implements hook_menu().
+ * @return array
+ */
+function itg_common_menu() {
+    $items['itg-custom-lock-delete'] = array(
+        'page callback' => 'itg_custom_lock_delete',
+        'access arguments' => array('access itg story'),
+        'type' => MENU_CALLBACK,
+        //'file' => 'includes/itg_story.inc',
+    );    
+
+    return $items;
+}
+
+/**
  * Implements hook_form_alter().
  * {@inheritdoc}
  */
@@ -258,6 +273,7 @@ function itg_common_form_field_ui_field_edit_form_alter(&$form, &$form_state, $f
  * @return array
  */
 function itg_common_cancel_button($form, &$form_state) {
+  
   $query_array = array();
   if (!isset($_REQUEST['destination'])) {
     $destination = '';
@@ -269,11 +285,17 @@ function itg_common_cancel_button($form, &$form_state) {
       $query_array = array("field_story_syndication_value_op" => "all");
     }
   }
-
-  $form['actions']['cancel'] = array(
-    '#markup' => l(t('Cancel'), $destination, array("query" => $query_array, 'attributes' => array('class' => 'button'))),
-    '#weight' => 20,
-  );
+  if (!empty($form['nid']['#value'])) {
+    $form['actions']['cancel'] = array(      
+        '#markup' => '<a id= "'.$destination.'" data-widget="'.arg(1).'" class="button cancle-itg-btn" href="javascript:void(0)">Cancel</a>',
+      '#weight' => 20,
+    );
+  } else {
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $destination, array("query" => $query_array, 'attributes' => array('class' => 'button', 'data-widget' =>arg(1)))),        
+        '#weight' => 20,
+    );
+  }
 
   return $form;
 }
@@ -571,5 +593,14 @@ function itg_common_get_smiley_title($nid , $min_limit = 0 , $max_limit = 255) {
       $titlte = $titlte . $smilies;
     }
     return $titlte;
+  }
+}
+
+/**
+ * Implement for lock delete on cancle button
+ */
+function itg_custom_lock_delete() {
+  if(!empty($_GET['nid'])) {
+    content_lock_release_own_item($_GET['nid'], TRUE, TRUE);
   }
 }

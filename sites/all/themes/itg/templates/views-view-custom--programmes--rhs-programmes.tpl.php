@@ -15,7 +15,7 @@
         $args = array($row['tid']);
         $view->preview('block', $args);
         $view_result = $view->result;
-        $recent_video_under_cat = $view_result[0]->nid;
+        $recent_video_under_cat = !empty($view_result[0]->nid) ? $view_result[0]->nid : '';
         ?>
         <li>
           <h4>
