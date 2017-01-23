@@ -686,7 +686,6 @@ function itg_newsletter_send_automatic_newsletter() {
   while ($record_auto = $result_auto->fetchAssoc()) {
     $automatic_nids[] = $record_auto['nid'];
   }
-
   // Send automatic mail
   if (!empty($automatic_nids)) {
     foreach ($automatic_nids as $auto_nids) {
@@ -732,6 +731,7 @@ function register_for_more_updates() {
  * Create register_for_more_updates form
  */
 function itg_newslatter_register_form() {
+  
   $form = array();
 
   $form['messages'] = array(
@@ -757,6 +757,11 @@ function itg_newslatter_register_form() {
     '#title' => 'Mobile No',
     '#attributes' => array('placeholder' => 'Mobile No'),
     '#required' => TRUE,
+  );
+  $form['page_name'] = array(
+    '#type' => 'hidden',
+    '#title' => 'page name',
+    '#default_value' => arg(2),
   );
 
   $form['submit'] = array(
@@ -806,16 +811,19 @@ function itg_newslatter_register_form_validate($form, &$form_state) {
  * @param Array $form_state
  */
 function itg_newslatter_register_form_submit(&$form, &$form_state) {
+  
   $name = $form_state['values']['name'];
   $email = $form_state['values']['email'];
   $mobile = $form_state['values']['mobile'];
+  $page_name = $form_state['values']['page_name'];
+  
   // Insert data in to itg_newslatter_update_details table
   $query = db_insert('itg_newslatter_update_details');
   $query->fields(array(
     'name' => $name,
     'email' => $email,
     'mobile' => $mobile,
-    'section' => 'newslatter',
+    'section' => $page_name,
     'created' => time()
   ));
   $query->execute();
@@ -850,6 +858,21 @@ function itg_newslatter_get_subscribe_users_email() {
     $user_emails[] = $records['mail'];
   }
   return $user_emails;
+}
+
+/**
+ * Get Email address of users who has subscribed for newsletter via education page
+ * @return array
+ */
+function itg_newslatter_get_subscribe_page_users_email($getsection) {
+  $query = db_select('itg_newslatter_update_details', 'nud');
+  $query->fields('nud', array('email'));
+  $query->condition('section', $getsection, '=');
+  $result = $query->execute();
+  while ($records = $result->fetchAssoc()) {
+    $useremails[] = $records['email'];
+  }
+  return $useremails;
 }
 
 /**
