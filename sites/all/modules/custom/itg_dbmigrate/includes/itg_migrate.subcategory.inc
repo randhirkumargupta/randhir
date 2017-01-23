@@ -81,7 +81,9 @@ class ItgSubCategoryMigration extends XMLMigration {
     $this->addFieldMapping('metatag_description', 'metadesc')->xpath('metadesc');
     $this->addFieldMapping('metatag_keywords', 'metakey')->xpath('metakey');
     $this->addFieldMapping('parent', 'category')->xpath('category');
-    $this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
+    //$this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
+    $this->addFieldMapping('pathauto')->defaultValue(0);
+    $this->addFieldMapping('path', 'sefurl')->xpath('sef_url');
     $this->addFieldMapping('field_cm_redirection_url', 'content_url')->xpath('content_url');
   }
   

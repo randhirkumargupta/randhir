@@ -94,12 +94,7 @@ class ItgBylineMigration extends XMLMigration {
     $this->addFieldMapping('changed', 'modified_datetime')->xpath('modified_datetime');    
     $this->addFieldMapping('status', 'published')->xpath('published');
     
-    $this->addFieldMapping('field_reporter_profile_type', 'profile_type')->xpath('profile_type');
-    $this->addFieldMapping('field_reporter_company', 'company')->xpath('company');
-    $this->addFieldMapping('field_reporter_department', 'department')->xpath('department'); 
-    
-    //$this->addFieldMapping('uid', 'created_by')->xpath('created_by');
-    
+    $this->addFieldMapping('field_reporter_profile_type', 'profile_type')->xpath('profile_type');   
     /*$this->addFieldMapping('field_story_expert_name', 'facebook_page')->xpath('facebook_page');
     $this->addFieldMapping('field_celebrity_pro_occupation', 'occupation')->xpath('occupation');
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
@@ -114,19 +109,30 @@ class ItgBylineMigration extends XMLMigration {
       $created_uid = (string) $row->xml->created_by;
       $orignal_crated_uid = get_itg_destination_id('migrate_map_itguser', $created_uid);
       $row->xml->created_by = $orignal_crated_uid;
-    }
-    // Manage department in byline
-    if (isset($row->xml->department) && !empty($row->xml->department)) {
-      $department_value = (string) $row->xml->department;
-      $department_option_value = itg_migrate_byline_department($department_value);
-      $row->xml->department = $department_option_value;
-    }
-    
+    }    
   }
   
   public function prepare($node, stdClass $row) {       
     $node->field_celebrity_pro_occupation[LANGUAGE_NONE][0]['tid'] = 403; // fix for reporter
     $node->uid = $row->xml->created_by;
+    // Manage department in byline
+    if (isset($row->xml->company) && !empty($row->xml->company)) {
+      $company_value = (string) $row->xml->company;
+      $vid = 42; // Company byline vocab
+      $company_option_value = itg_db_migrate_parent_term($company_value, $vid);
+        if(!empty($company_option_value)){
+          $node->field_byline_company[LANGUAGE_NONE][0]['tid'] = $company_option_value;
+        }
+    }
+    if (isset($row->xml->department) && !empty($row->xml->department)) {
+      $department_value = (string) $row->xml->department;
+      //$department_option_value = itg_migrate_byline_department($department_value);
+      $vid = 43; // Department byline vacab
+      $department_option_value = itg_db_migrate_parent_term($department_value, $vid);
+        if(!empty($department_option_value)){
+          $node->field_byline_department[LANGUAGE_NONE][0]['tid'] = $department_option_value;
+        }
+    }
   }
   
   public function complete($entity, $row) {

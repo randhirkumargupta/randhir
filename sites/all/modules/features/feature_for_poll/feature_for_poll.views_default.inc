@@ -181,7 +181,7 @@ function feature_for_poll_views_default_views() {
 			<h4>[title]</h4>
 			<div class="vota-time mhide">
 				<div class="vota">[php_1]</div>
-				<div class="time">Updated: [changed] <div class="social-share"><ul><li><a class="share" href="#"><i class="fa fa-share-alt"></i></a></li><li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li><li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li><li><a href="#" class="google"></a></li></ul></div>			</div>								
+				<div class="time">Updated: [changed] <div class="social-share"><ul><li><a class="share" href="javasrcipt:void(0)"><i class="fa fa-share-alt"></i></a></li><li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li><li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li><li><a href="#" class="google"></a></li></ul></div>			</div>								
 			</div>
 			
 			
@@ -191,7 +191,7 @@ function feature_for_poll_views_default_views() {
 				<div class="vota">[php_1] | </div>
 				<div class="time">Updated: [changed]</div>
 				
-				<div class="social-share"><ul><li><a class="share" href="#"><i class="fa fa-share-alt"></i></a></li><li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li><li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li><li><a href="#" class="google"></a></li></ul></div>			
+				<div class="social-share"><ul><li><a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li><li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li><li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li><li><a href="#" class="google"></a></li></ul></div>			
 				
 			</div>
 	<div class="voting-data">

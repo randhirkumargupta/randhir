@@ -1428,7 +1428,7 @@ function itg_category_manager_disable_manually_form_submit($form, &$form_state) 
   $is_child = taxonomy_get_tree('4', $current_term);
   if (count($is_child) > 0) {
     drupal_set_message(t('Category has child categories can not be inactivated.'), 'status');
-    p('have child');
+   // p('have child');
   }
   else {
     $all_term_count = count($parent_category);

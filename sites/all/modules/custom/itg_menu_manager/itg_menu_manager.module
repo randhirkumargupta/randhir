@@ -302,7 +302,7 @@ function itg_menu_manager_form_validate($form, &$form_state) {
         $errors[] = t("Please enter valid external url  eg: http://www.example.com");
       }
     }
-  
+
     if ($url_type == 'internal' && !empty($url)) {
       if (!drupal_valid_path($url)) {
         // Not a system URL.
@@ -312,7 +312,7 @@ function itg_menu_manager_form_validate($form, &$form_state) {
       }
       else {
         $url_parse = parse_url($url);
-        if(!empty($url_parse['scheme'])) {
+        if (!empty($url_parse['scheme'])) {
           $errors[] = t("It seems you entered external url.");
         }
       }
@@ -400,7 +400,7 @@ function itg_menu_manager_get_child($tid, $string) {
     $term = array();
     $children = array();
     // Get all child under the section.
-    $all_children = itg_menu_manager_taxonomy_get_children_all($tid , CATEGORY_MANAGMENT);
+    $all_children = itg_menu_manager_taxonomy_get_children_all($tid, CATEGORY_MANAGMENT);
     foreach ($all_children as $term_data) {
       $term[] = $term_data->tid;
     }
@@ -429,20 +429,21 @@ function itg_menu_manager_get_child($tid, $string) {
  * @param string $key
  * @return array
  */
-function itg_menu_manager_taxonomy_get_children_all($tid, $vid = 0, $key = 'tid'){
-    $c = taxonomy_get_children($tid, $vid, $key);
-    $result = array();
-    foreach ($c as $t => $d){
-        $result[$t] = $d;
-        $below = itg_menu_manager_taxonomy_get_children_all($t, $vid, $key);
-        if (!empty($below)) {
-            foreach ($below as $nt => $nd){
-                $result[$nt] = $nd;
-            }
-        }
+function itg_menu_manager_taxonomy_get_children_all($tid, $vid = 0, $key = 'tid') {
+  $child = taxonomy_get_children($tid, $vid, $key);
+  $result = array();
+  foreach ($child as $term_key => $data) {
+    $result[$term_key] = $data;
+    $below = itg_menu_manager_taxonomy_get_children_all($term_key, $vid, $key);
+    if (!empty($below)) {
+      foreach ($below as $nt => $nd) {
+        $result[$nt] = $nd;
+      }
     }
-    return $result;
+  }
+  return $result;
 }
+
 /**
  * Ajax callback funtion which replace tite field for autocomplete path.
  * @global array $messages
@@ -1171,9 +1172,9 @@ function itg_menu_manager_views_pre_render(&$view) {
     drupal_add_js('jQuery(document).ready(function(){jQuery("#edit-section-child").on(\'change\', function() {
                 var section_chlid = jQuery(this).val();
                 jQuery("#edit-section-id").val(section_chlid);
-            });});','inline');
+            });});', array('type' => 'inline' , 'scope' => 'footer'));
     $arg = arg();
-    $view->build_info['title'] = ucfirst(arg(1)) . " level menu ordering";
+    $view->build_info['title'] = ucfirst(arg(1)) . t(" level menu ordering");
     $count = 0;
     if ((arg(1) == 'third' && !isset($_GET['section_child'])) && $_GET['section_child'] == 0) {
       unset($view->result);
@@ -1185,6 +1186,27 @@ function itg_menu_manager_views_pre_render(&$view) {
     $header_content .= '<span class="count">Count (' . $count . ') </span>';
     $header_content .= l(t('Create Menu'), 'itg-menu-manager', array("query" => array("destination" => $arg[0] . "/" . $arg[1])));
     $view->attachment_before = $header_content;
+
+    // Handel case for inactive category.
+    // Here altered result of $views->result i.e. skip rowa which have inactive tid.
+    $correct_view_result = array();
+    foreach ($view->result as $keys => $result) {
+      $tid = $result->tid;
+      // Procceed if tid is not timestamp.
+      // current unix timestamp 1484910494 for Jan 01 1970.
+      if ($tid < 1484910494) {
+        if (function_exists('itg_category_manager_term_state') && !itg_category_manager_term_state($tid)) {
+          continue;
+        }
+        else {
+          $correct_view_result[] = $view->result[$keys];
+        }
+      }
+      else {
+        $correct_view_result[] = $view->result[$keys];
+      }
+    }
+    $view->result = $correct_view_result;
   }
 }
 
@@ -1306,4 +1328,17 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
   $menu_link_data_array['url_type'] = "url-type-" . $url_type;
   $menu_link_data_array['display_icon'] = $display_icon_attribute;
   return $menu_link_data_array;
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_menu_manager_taxonomy_term_delete($term) {
+  try {
+    db_delete('itg_menu_manager')
+        ->condition('tid', $term->tid)
+        ->execute();
+  } catch (Exception $ex) {
+    drupal_set_message($ex->getMessage());
+  }
 }

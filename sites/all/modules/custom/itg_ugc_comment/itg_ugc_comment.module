@@ -86,7 +86,7 @@ function ugc_comment_form($form, &$form_state) {
     '#size' => 20,
     '#default_value' => $fname,
     '#maxlength' => 50,
-    '#prefix' => '<div class="comment-user-details"><div id="user-name">',
+    '#prefix' => '<div class="comment-user-details"><div class="social-login"><span><i class="fa fa-facebook-square" aria-hidden="true"></i></span><span><i class="fa fa-twitter-square" aria-hidden="true"></i></span><span><i class="fa fa-google-plus-square" aria-hidden="true"></i></span><span><i class="fa fa-linkedin-square" aria-hidden="true"></i></span></div><div id="user-name">',
     '#suffix' => '</div>',
     '#attributes' => array(
       'placeholder' => t('Name'),

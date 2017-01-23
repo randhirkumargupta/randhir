@@ -16,7 +16,7 @@ if (!in_array(variable_get('ipl_for_widget'), $category)) {
                     }
                     else {
                         global $base_url;
-                        $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' />";
+                        $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt='' />";
                     }
                     ?>
     <?php print l($img, 'node/' . $row['nid_1'], array('html' => TRUE)); ?>
