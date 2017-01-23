@@ -5,12 +5,11 @@
 *{
     @extend .mr-0;
     @extend .pd-0;
-    box-sizing: border-box;
-    word-break: break-word;
+    box-sizing: border-box;   
 }
 body{
     font: 400 14px/18px $itg-robotoslab;
-    color: #333;
+    color: #333;   
 }
 h1, h2, h3, h4{@include itg-font($itg-roboto,$itg-font-medium);}
 h1{    
@@ -2822,7 +2821,7 @@ h1.category-heading{
             text-align: right;
             font-weight:600;
             a{                
-                &:hover{
+                &:hover, &.active{
                     color:#a00606;
                 }
             }
@@ -2835,8 +2834,7 @@ h1.category-heading{
     .catagory-listing{
         padding: 20px 0;
         .pic{
-            width: 144px;
-            padding-right: 10px;
+            width: 124px;            
         }
         .detail{
             h3{
@@ -3375,14 +3373,17 @@ h1.category-heading{
                     width: 100%;
                 }
                 .form-item-pole-answer{
-                    padding-bottom: 20px;
+                    padding-bottom: 10px;
                     margin-right: 15px;
                     margin-bottom: 20px;
                     float: left;
-                    position: relative;
+                    position: relative;                    
+                    max-width: 124px;
+                    width:30%;                    
                     img{
-                        width: 120px;
-                        height: 93px;
+                        width: 124px;
+                        max-height: 93px;
+                        margin-bottom: 10px;
                     }
                     .form-radio{
                         position: absolute;
@@ -3391,8 +3392,11 @@ h1.category-heading{
                         bottom: 0;
                         margin: auto;
                     }
+                    label{
+                        font-size: 12px;
+                    }
                     .poll-ans-caption{
-                        padding: 10px 15px;
+                        padding: 0px 0px 10px 0;
                         display: inline-block;
                     }
                 }
@@ -3412,6 +3416,7 @@ h1.category-heading{
     .updated-msg{
         @include font(12px);
         color: #8a8a8a;
+        font-family: $itg-roboto;
     }
     .social-share{
         display: inline-block;
@@ -3439,7 +3444,7 @@ h1.category-heading{
     }
     .poll-replace-id{
         .form-item-pole-answer{
-            padding: 0 0 12px;
+            padding: 0 0 5px;
         }
         .form-submit{            
             background: #1a3c8d;
@@ -3449,6 +3454,7 @@ h1.category-heading{
             cursor: pointer;
             padding: 6px 5px 5px 5px;            
             font-size: 12px;
+            margin-top: 10px; 
         }
         .error{
             display: block;
@@ -3461,6 +3467,12 @@ h1.category-heading{
         &.relative-with-img{
             @include float(left);
             @include calculate-width(2);
+        }
+        label{
+            color: #33363b;
+            font-family: roboto;
+            font-size: 14px;
+            text-transform: capitalize;
         }
     }
     .related-story{   

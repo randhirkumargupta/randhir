@@ -244,6 +244,19 @@
             success: function(data) {
 
                 var getbame = jQuery('#btn_name').val();
+                var original_img_id = jQuery('#orig_image_fiedlid').val();
+                var exist_original_id = parent.jQuery('#original_image_fids').val();
+                var is_solr = jQuery('#is_solr').val();
+
+                if (original_img_id != "" && is_solr != '1') {
+                    if (exist_original_id == "") {
+                        parent.jQuery('#original_image_fids').val(original_img_id);
+                    } else {
+                        original_img_id = exist_original_id + '#' + original_img_id
+                        parent.jQuery('#original_image_fids').val(original_img_id);
+                    }
+                }
+                parent.jQuery('#')
                 if (jQuery('#ckeditor_yes').val() == 1)
                 {
                     var imagename = jQuery('#imcurl').val();
@@ -292,13 +305,13 @@
                                     if (image_title != "")
                                     {
                                         parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
-                                         parent.jQuery('[name="' + replaced + '[alt]"]').val(image_alttext);
+                                        parent.jQuery('[name="' + replaced + '[alt]"]').val(image_alttext);
 
                                     }
                                     if (image_alttext != "")
                                     {
                                         parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
-                                         parent.jQuery('[name="' + replaced + '[title]"]').val(image_title);
+                                        parent.jQuery('[name="' + replaced + '[title]"]').val(image_title);
 
                                     }
 

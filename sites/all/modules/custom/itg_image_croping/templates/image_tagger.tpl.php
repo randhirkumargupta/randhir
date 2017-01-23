@@ -65,6 +65,8 @@ list($width, $height) = getimagesize($url);
     <input type="hidden" value="<?php echo $field_name; ?>" id="field_name">
     <input type="hidden" value="<?php echo $fidsformain; ?>" id="image_fiedlid">
     <input type="hidden" value="<?php echo $url; ?>" id="imcurl">
+    <input type="hidden" id="orig_image_fiedlid" value="<?php echo $original_img_id; ?>">
+    <input type="hidden" id="is_solr" value="<?php echo $is_solr; ?>">
     <input type="hidden" value="<?php echo $height; ?>" id="imcheigth">
     <input type="hidden" value="<?php echo $width; ?>" id="imcwidth">
 </div>

@@ -599,12 +599,13 @@
                         .menu{
                             position: absolute;
                             right: 0;
-                            top: 20px;
+                            top: 30px;
                             background: #a00606;
                             padding: 5px;
                             box-shadow: 0 0 3px #000;
                             display:none;
                             z-index:1;
+                            width:120px;
                             li{
                                 padding: 5px 0;                                
                             }
@@ -662,8 +663,7 @@
     .movie-layout-page .itg-h396-section .droppable, .movie-layout-page .itg-layout-580 .itg-widget-child .droppable, .movie-layout-page .itg-layout-580 .droppable,
     .movie-layout-page .itg-layout-580 .droppable .auto-block-1, .movie-layout-page .itg-layout-580 .droppable .auto-block-2, .education-layout-page .itg-layout-565 .droppable,
     .education-layout-page .itg-layout-672 .itg-widget-child .droppable, .education-layout-page .itg-295-layout .droppable, .education-layout-page .itg-325-layout .droppable,
-    .education-layout-page .itg-345-layout .droppable
-    {
+    .education-layout-page .itg-345-layout .droppable, .education-layout-page .itg-325-layout .ad-widget{
         height: auto;        
     }
     
@@ -1076,7 +1076,7 @@
                 margin-bottom: 10px;
             }
             .social-share{
-                display: inline-block;
+                display:block;
                 vertical-align: middle;
                 @include social-share;    
                 ul{
@@ -1086,6 +1086,9 @@
                 }
             }
         }
+    }
+    .poll-wrapper .poll-data .poll-replace-id.poll-option-image .form-item-pole-answer{
+        margin-right: 10px;
     }
     
     /*css end poll page*/  
@@ -2189,7 +2192,8 @@
     .view-category-wise-content-list, .view-blog-listing{           
         .catagory-listing{        
             .pic{
-                width: 170px;           
+                width: 170px; 
+                margin-right: 20px;
             }
             .detail{
                 h3{                            

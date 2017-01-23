@@ -47,8 +47,10 @@
     <div class="breakingnew-home">
       <div class="title">Breaking</div>    
       <div class="new-detail">  
-          <div class="marquee">
-          <?php print $field->content; ?>        
+          <div class="marquee-container">
+         <div class="marquee-child">
+                <?php print $field->content; ?>        
+            </div>   
           </div>
                   
           <div class="live-tv-link">
