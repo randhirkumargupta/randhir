@@ -5,6 +5,12 @@
  */
 function itg_budget_predictor_menu() {
   $items = array();
+  $items['budget/predictor/%'] = array(
+    'page callback' => 'itg_budget_predictor_custom',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('administer itg_term settings'),
+  );
+  
   $items['ajax/budget-ranking/%'] = array(
     'page callback' => 'itg_budget_predictor_update_budget',
     'type' => MENU_CALLBACK,
@@ -138,6 +144,7 @@ function itg_budget_predictor_views_pre_render(&$view) {
  * @param array reference $form_state
  * Hiding taxonomy term description field
  */
+
 function itg_budget_predictor_form_taxonomy_form_term_alter(&$form, &$form_state) {
   if (is_array($form['#term']) && count($form['#term']) > 0) {
     if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'cheaper_dearer') {
@@ -181,10 +188,9 @@ function itg_budget_predictor_block_view($delta = '') {
       $data = itg_budget_predictor_custom();
       $block['content'] = $data;
       break;
-    
   }
   return $block;
-}  
+}
 
 /**
  * Implementation of hook_form_views_exposed_form_alter().
