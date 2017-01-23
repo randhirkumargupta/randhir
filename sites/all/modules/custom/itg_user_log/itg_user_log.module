@@ -1,0 +1,176 @@
+<?php
+
+/**
+ * @file
+ * The ITG USER module.
+ *
+ * Contains functionality for User.
+ */
+
+/**
+ * Tmplements hook_user_log()
+ */
+function itg_user_log_user_login(&$edit, $account) {
+  module_load_include('inc', 'itg_user_log', 'includes/user_info_count_update');
+  if ($account->status) {
+    user_data_insert_in_mongodb($account);    
+  }
+}
+
+/**
+ * hooke menu to check the count in URL
+ */
+function itg_user_log_menu() {
+  $items['count'] = array(
+    'page callback' => 'itg_logged_in_user_activity',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  $items['active-users'] = array(
+    'page callback' => 'itg_logged_in_user_active_user',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/user_info_count_update.inc',
+  );
+  return $items;
+}
+
+/**
+ * function write for the count value and also added for condtion when the user make it filter.  itg_user_log_get_count()
+ */
+function itg_user_log_get_count($uid, $createdDate = null, $startDate = null, $endDate = null) {
+
+  if (function_exists('mongodb')) {
+
+    $con = mongodb();
+    if ($con) {
+      try {
+      $people = $con->userslog;
+
+        if (is_null($startDate) && is_null($endDate) && !is_null($createdDate)) {
+          // no filter
+          return $people->count(array('uuid' => $uid, 'login_time' => array('$gte' => $createdDate)));
+        }
+        elseif (!is_null($startDate) && !is_null($endDate) && is_null($createdDate)) {
+          // start -end filter
+          return $people->count(array('uuid' => $uid, 'login_time' => array('$gte' => $startDate, '$lte' => $endDate)));
+        }
+        elseif (!is_null($startDate) && is_null($endDate) && is_null($createdDate)) {
+          // only from
+          return $people->count(array('uuid' => $uid, 'login_time' => array('$gte' => $startDate)));
+        }
+        elseif (is_null($startDate) && !is_null($endDate) && is_null($createdDate)) {
+          // only end
+          return $people->count(array('uuid' => $uid, 'login_time' => array('$lte' => $endDate)));
+        }
+        else {
+          throw new Exception('Login/logout date range missing...!');
+        }
+      }
+      catch (Exception $e) {
+        drupal_set_message($e->getMessage() , 'error');
+      }
+      return $count;
+    }
+  }
+}
+/**
+ * Implements hook to check the count value().
+ *
+ * 
+ */
+//function itg_logged_in_user_activity() {
+//  $user_id = 291;
+//  $startDate = strtotime('today midnight');
+//  $endDate = '';
+//  echo itg_user_log_get_count($user_id, $startDate, $endDate);
+//}
+
+/**
+ * Implements hook_views_api().
+ *
+ * {@inheritdoc}.
+ */
+function itg_user_log_views_api() {
+  return array(
+    'api' => 3,
+  );
+}
+
+/**
+ * Implements hook_form().
+ * {@inheritdoc}
+ */
+function itg_user_log_api_form($form, &$form_state) {
+  $form = array();
+  $form['title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Name'),
+    '#maxlength' => 255,
+    '#size' => 30,
+    '#default_value' => isset($_GET['title']) ? $_GET['title'] : "",
+  );
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Email'),
+    '#maxlength' => 255,
+    '#size' => 30,
+    '#default_value' => isset($_GET['email']) ? $_GET['email']:"",
+  );
+  $form['#info']['filter-created']['label'] = '';
+  $form['edit-min-datepicker-popup-1']['min'] = array(
+    '#type' => 'date_popup',
+    '#title' => t('From'),
+    '#date_format' => 'd/m/Y',
+    //'#date_year_range' => '-10 + 10',
+    '#default_value' => ($_GET['From']) ? $_GET['From'] : 10,
+    '#attributes' => array(
+      'readonly' => 'readonly'
+    ),
+  );
+
+  $form['edit-max-datepicker-popup-1']['max'] = array(
+    '#type' => 'date_popup',
+    '#title' => t('To'),
+    '#date_format' => 'd/m/Y',
+    //'#date_year_range' => '-10:+10',
+    '#default_value' => isset($_GET['To']) ? $_GET['To'] : 10,
+    '#attributes' => array(
+      'readonly' => 'readonly'
+    ),
+  );
+  $form['items_per_page'] = array(
+    '#type' => 'select',
+    '#title' => 'Items per page',
+    '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
+    '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
+  );
+  $form['submit'] = array(
+    '#value' => 'Apply',
+    '#type' => 'submit',
+    '#attributes' => array('class' => array('user-log-apply')),
+    '#prefix' => '<div class = "user-log-filter-btn">',
+    '#suffix' => '<a class="user-log-reset" href="' . base_path() . 'active/users">Reset</a></div>',
+  );
+
+  return $form;
+}
+
+/**
+ * Implements hook_submit()
+ * {@inheritdoc}
+ */
+function itg_user_log_api_form_submit($form, &$form_state) {
+  $form_state['redirect'] = array(
+    'active-users',
+    array(
+      'query' => array(
+        'title' => $form_state['values']['title'],      
+        'email' => $form_state['values']['email'],
+        'items_per_page' => $form_state['values']['items_per_page'],
+        'From' => $form_state['values']['min'],
+        'To' => $form_state['values']['max'],
+      ),
+    ),
+  );
+}
