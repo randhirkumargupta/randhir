@@ -466,7 +466,7 @@ function _related_podcast_bottom_block_content() {
   }
  $related_story = '';
   if(count($related_story)>0) {
-    $related_story = '<h3><span>Related</span></h3>';
+    $related_story = '<h3><span>'.t('Related').'</span></h3>';
   }
   $related_story.= "<div class='row'><ul>";
   $i = 0;
