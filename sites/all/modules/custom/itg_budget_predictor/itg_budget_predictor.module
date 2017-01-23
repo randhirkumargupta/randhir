@@ -5,6 +5,12 @@
  */
 function itg_budget_predictor_menu() {
   $items = array();
+  $items['budget/predictor/%'] = array(
+    'page callback' => 'itg_budget_predictor_custom',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('administer itg_term settings'),
+  );
+  
   $items['ajax/budget-ranking/%'] = array(
     'page callback' => 'itg_budget_predictor_update_budget',
     'type' => MENU_CALLBACK,
