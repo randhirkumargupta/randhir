@@ -734,8 +734,11 @@ function itg_ugc_node_view($node, $view_mode, $langcode) {
 function itg_ugc_node_insert($node) {
   if ($node->type == 'story' || $node->type == 'blog' || $node->type == 'recipe' || $node->type == 'photogallery' || $node->type == 'videogallery' || $node->type == 'podcast') {
     $title = $node->title;
-
+    
+    if(!empty($node->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
     $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
+    }
+    
     if ($node->type == 'story' || $node->type == 'videogallery' || $node->type = 'podcast') {
       $source_id = $node->field_story_ugc_source_id[LANGUAGE_NONE][0]['value'];
     }
