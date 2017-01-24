@@ -98,7 +98,14 @@
             </div>
         </div>
       
-      
+         <div id="StoryTech" class="itg-form-section-wrapper">
+            <h2 class="story-title"><?php print t('Story Technology'); ?></h2> 
+            <div class="itg-form-section hide">
+              <?php print drupal_render($form['field_story_technology']); ?>
+              <?php print drupal_render($form['field_story_technology_rating']); ?>
+              <?php print drupal_render($form['field_story_tech_review_chunk']); ?>
+            </div>
+        </div>
       
         <div class="itg-form-action">
             <?php print drupal_render($form['actions']); ?>
