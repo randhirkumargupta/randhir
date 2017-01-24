@@ -10,7 +10,7 @@
  * Defining table structure to store file information associated with a node
  * @return array
  */
-function itg_miscellaneous_schema() {
+function itg_reporter_schema() {
   $schema['itg_multi_byline_info'] = array(
     'description' => 'Table for store information related to multiple byline.',
     'fields' => array(
