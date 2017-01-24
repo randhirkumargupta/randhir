@@ -90,12 +90,11 @@
         var timeout;
         var datathis = jQuery(this);
         var getimageurl = datathis.attr('src');
-        //alert(getimageurl);
         var altdata = jQuery(this).attr('alt');
         var titledata = jQuery(this).attr('title');
         var fieldname = parent.jQuery('#field_name').val();
-        parent.jQuery('#img_alttext').val(altdata);
-        parent.jQuery('#img_title').val(titledata);
+//        parent.jQuery('#img_alttext').val(altdata);
+//        parent.jQuery('#img_title').val(titledata);
         timeout = setTimeout(function() {
             jQuery.ajax({
                 url: Drupal.settings.basePath + 'get_dimension',
