@@ -5748,12 +5748,12 @@ h1.category-heading{
 /*CSS start for event page index*/
 .event-sidebar {
     .header-top{               
-        .event-header-banner{            
+        .event-header-banner{   
+            height: 185px;
             @include pos(relative);
             text-align: center;
-            .event-add-header{
-                position: absolute;
-                top: 45px;
+            .event-add-header{                
+                padding-top: 45px;
                 width: 100%;
             }
         }        
@@ -6161,6 +6161,11 @@ h1.category-heading{
               }
           }
       }
+    }
+    .wrap-mobile-social{ 
+        .mobile-nav, .social-share{
+            display: none;           
+        }        
     }
     .event-detail{
         background: #ef3c24;

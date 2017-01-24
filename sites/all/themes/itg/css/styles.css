@@ -7362,12 +7362,12 @@ h1.category-heading {
 /* End of CSS */
 /*CSS start for event page index*/
 .event-sidebar .header-top .event-header-banner {
+  height: 185px;
   position: relative;
   text-align: center;
 }
 .event-sidebar .header-top .event-header-banner .event-add-header {
-  position: absolute;
-  top: 45px;
+  padding-top: 45px;
   width: 100%;
 }
 
@@ -7796,6 +7796,9 @@ h1.category-heading {
 }
 #block-menu-menu-event-menu ul li:hover ul {
   display: block;
+}
+#block-menu-menu-event-menu .wrap-mobile-social .mobile-nav, #block-menu-menu-event-menu .wrap-mobile-social .social-share {
+  display: none;
 }
 #block-menu-menu-event-menu .event-detail {
   background: #ef3c24;
