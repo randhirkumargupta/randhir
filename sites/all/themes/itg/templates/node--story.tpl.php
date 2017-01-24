@@ -518,20 +518,18 @@ if (!empty($content)):
                             ?>
                         </div>
                         <!-- render story technology chunk -->
+                        <?php
+                        if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])) {
+                        ?>
                         <div class="story-tech-chunk">
+                          <?php if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
                             <span class="tech-rating">
-                              <?php 
-                                if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) {
-                                  print $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'];
-                                }
-                              ?>
+                              <?php print $node->field_story_technology_rating[LANGUAGE_NONE][0]['value']; ?>
                             </span>
-                            <?php 
-                              if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])) {
-                                print $node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'];
-                              }
-                            ?>
+                            <?php } ?>
+                            <?php print $node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value']; ?>
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
 
