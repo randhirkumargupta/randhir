@@ -84,26 +84,8 @@
                         return true;
                     }
                 }
-            };
-
-            // Clear fb fields based on checkbox.
-            $('input[name="itg_smi[facebook]"]').click(function () {
-                if (!$(this).is(':checked')) {
-                    FormValidation.clear_form_elements('social-fb-block');
-                    jQuery('.form-item-itg-fb-img .ajax-processed').mousedown();
-                    jQuery('.form-item-itg-fb-video .ajax-processed').mousedown();
-                }
-            });
-
-            // Clear twitter fields
-            $('input[name="itg_smi[twitter]"]').click(function () {
-                if (!$(this).is(':checked')) {
-                    FormValidation.clear_form_elements('social-twitter-block');
-                    jQuery('.form-item-itg-twitter-img .ajax-processed').mousedown();
-                    jQuery('.form-item-itg-twit-video .ajax-processed').mousedown();
-                }
-            });
-            // clear form end here.
+            };            
+            
 
             // Add placeholder to scheduler fields
             var date_holder = moment().format('DD/MM/YYYY');
