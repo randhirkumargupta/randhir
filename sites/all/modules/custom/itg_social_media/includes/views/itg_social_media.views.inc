@@ -18,6 +18,8 @@ function itg_social_media_views_data() {
     ),
   );
   
+   
+   
   $data['itg_social_media_logs']['nid'] = array(
     'title' => t('Node id of the story'),
     'help' => t('Each nid reference to a full story.'),    
@@ -35,6 +37,23 @@ function itg_social_media_views_data() {
   $data['itg_social_media_logs']['node_title'] = array(
     'title' => t('Node title'),
     'help' => t('Title of the story posted to social media'),
+    'field' => array(
+      'handler' => 'views_handler_field',
+      'click sortable' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_string',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_string',
+    ),
+  );
+  $data['itg_social_media_logs']['nid'] = array(
+    'title' => t('nid'),
+    'help' => t('nid of the content posted to social media'),
     'field' => array(
       'handler' => 'views_handler_field',
       'click sortable' => TRUE,
@@ -133,4 +152,43 @@ function itg_social_media_views_data() {
   );
   
   return $data;
+}
+
+/**
+ * Views field handler for current path.
+ *
+ * @ingroup views_field_handlers
+ */
+class itg_social_media_views_handler extends views_handler_field {
+
+  /**
+   * {@inheritdoc}
+   */
+  function query() {
+    // Do nothing -- to override the parent query.
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  function option_definition() {
+    $options = parent::option_definition();
+    return $options;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  function options_form(&$form, &$form_state) {
+    parent::options_form($form, $form_state);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  function render($values) {
+      p($values);
+   itg_last_node_published_on($row['nid'] , 1);
+  }
+
 }
