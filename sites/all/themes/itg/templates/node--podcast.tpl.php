@@ -1,7 +1,6 @@
 <?php
 global $base_url;
 ?>
-<h3><?php print t("OTHER PODCASTS") ?></h3>
 <?php print views_embed_view('podcasts_listing', 'block'); ?>
 <?php
 $config_name = trim($global_comment_last_record[0]->config_name);
