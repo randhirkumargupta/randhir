@@ -96,7 +96,11 @@ function itg_menu_manager_permission() {
  * {@inheritdoc}
  */
 function itg_menu_manager_form($form, &$form_state) {
-
+  // Change title during edit operation.
+  if(isset($_GET['edit_id'])) {
+    drupal_set_title("Edit menu");
+  }
+  
   $default_values = array();
   $edit_id = isset($_GET['edit_id']) ? intval(trim($_GET['edit_id'])) : FALSE;
   $term_id = isset($_GET['term_id']) ? intval(trim($_GET['term_id'])) : FALSE;

@@ -615,7 +615,7 @@ function itg_survey_node_access($node, $op, $account) {
       }
 
       // If condition is true, user doesn't allow to see node
-      if (($node_edit && $op == 'update') || user_is_anonymous()) {
+      if (($node_edit && $op == 'update' && $node->status == 1) || user_is_anonymous() || ($op == 'update' && $node->uid != $user->uid)) {
         return NODE_ACCESS_DENY;
       }
     }

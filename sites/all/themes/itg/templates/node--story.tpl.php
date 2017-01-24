@@ -3,7 +3,7 @@ if (!empty($content)):
     global $base_url, $user;
     // get related content associated with story
     $related_content = $content['related_content'];
-
+    // condition for buzz
     if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
         $class_buzz = 'buzz-feedback';
     }
@@ -459,7 +459,14 @@ if (!empty($content)):
                                     $story_body = str_replace('[ITG:EXPERT-CHUNK]', '', $story_body);
                                 }
                             }
-
+                            $movie_html = itg_story_movie_image_plugin_data($node->nid);
+                            if (strpos($story_body, '[ITG:MOVIE-IMAGE]')) {
+                              if (!empty($node->field_story_technology['und'])) {
+                                    $story_body = str_replace('[ITG:MOVIE-IMAGE]', $movie_html, $story_body);
+                                } else {
+                                    $story_body = str_replace('[ITG:MOVIE-IMAGE]', '', $story_body);
+                                }
+                            }
                             if ($node->field_story_template_guru[LANGUAGE_NONE][0]['value']) {
                                 print '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
                             }
@@ -510,7 +517,19 @@ if (!empty($content)):
                             }
                             ?>
                         </div>
-                            
+                        <!-- render story technology chunk -->
+                        <?php
+                        if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])) {
+                        ?>
+                        <div class="story-tech-chunk">
+                          <?php if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
+                            <span class="tech-rating">
+                              <?php print $node->field_story_technology_rating[LANGUAGE_NONE][0]['value']; ?>
+                            </span>
+                            <?php } ?>
+                            <?php print $node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value']; ?>
+                        </div>
+                        <?php } ?>
                     </div>
                 </div>
 

@@ -62,7 +62,7 @@ window.addEventListener("message", function(ev) {
   
   <main id="main" class="container pos-rel">
     <?php
-      if(!empty($node->type) && ($node->type == "videogallery" || $node->type == "photogallery")) {
+      if(!empty($node->type) && ($node->type == "videogallery" || $node->type == "podcast" || $node->type == "photogallery")) {
         $page['vertical_menu'] = array();
       }
       print render($page['vertical_menu']);
