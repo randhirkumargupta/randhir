@@ -9121,7 +9121,7 @@ h1.about-us-heading{
 /*CSS End ask an expert detail*/
 
 /*css start related content*/
-#block-itg-front-end-common-related-photo-block, #block-itg-front-end-common-related-video-block, #block-itg-front-end-common-related-podcast-block{
+#block-itg-front-end-common-related-photo-block, #block-itg-front-end-common-related-video-block{
     @include sidebar-heading;
     h3{
         display: block;
@@ -9178,14 +9178,14 @@ h1.about-us-heading{
         width: 25px;
         z-index: 1;
     }
-    .slick-next{
-        right: 0;
-        left: auto;
-    }
-    .slick-prev{
-        right: auto;
-        left: 0;
-    }
+        .slick-next{
+            right: 0;
+            left: auto;
+        }
+        .slick-prev{
+            right: auto;
+            left: 0;
+        }
     }
 }
 /*css end related content*/
@@ -9997,9 +9997,12 @@ h1.about-us-heading{
             }
         }    
         .podcast-header-bottom{
-            padding: 15px;
+            padding: 15px 0;
             border: 1px solid #212121;           
-            .other-list{                     
+            .other-list{  
+                img{
+                    padding:0 7px;
+                }
             }
         }        
     }
@@ -10011,3 +10014,30 @@ h1.about-us-heading{
         }
 }
 /*css end Podcast page*/
+
+/*css start related-podcast-block*/
+#block-itg-front-end-common-related-podcast-block{
+    @include sidebar-heading;
+    h3{
+        display: block;
+        padding-left: 0;
+        margin-bottom: 20px;
+        padding-top: 0;
+        span{
+            padding-left: 0;
+        }
+    }
+    ul{
+        list-style-type: none;
+    }
+    span.tile{
+        margin-top: 10px;
+        display: block;
+    }
+    .slick-slider{
+      .slick-next, .slick-prev{
+        display: none;
+       }   
+    }   
+}
+/*css end related-podcast-block*/

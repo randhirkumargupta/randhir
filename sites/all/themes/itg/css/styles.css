@@ -84,7 +84,7 @@ h4.heading a {
   clear: both;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .dont-miss ul, #block-itg-widget-yearende-left-top-news .top-news ul, #block-itg-widget-yearende-left-top-videos .top-video ul, .osscar-video ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-event-subsite-speaker-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, .movie-layout-page ul, #block-itg-menu-manager-third-level-menu ul, .election-page .key-candidate ul, #block-itg-live-tv-live-tv-video-page ul, #block-menu-menu-about-us-page-menu ul, #block-itg-front-end-common-related-photo-block #related-photo ul, #block-itg-front-end-common-related-video-block #related-photo ul, #block-itg-front-end-common-related-podcast-block #related-photo ul, .site-map ul {
+.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .dont-miss ul, #block-itg-widget-yearende-left-top-news .top-news ul, #block-itg-widget-yearende-left-top-videos .top-video ul, .osscar-video ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-event-subsite-speaker-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, .movie-layout-page ul, #block-itg-menu-manager-third-level-menu ul, .election-page .key-candidate ul, #block-itg-live-tv-live-tv-video-page ul, #block-menu-menu-about-us-page-menu ul, #block-itg-front-end-common-related-photo-block #related-photo ul, #block-itg-front-end-common-related-video-block #related-photo ul, .site-map ul {
   list-style-type: none;
 }
 
@@ -10834,14 +10834,14 @@ h1.about-us-heading + div p {
 
 /*CSS End ask an expert detail*/
 /*css start related content*/
-#block-itg-front-end-common-related-photo-block h3, #block-itg-front-end-common-related-video-block h3, #block-itg-front-end-common-related-podcast-block h3 {
+#block-itg-front-end-common-related-photo-block h3, #block-itg-front-end-common-related-video-block h3 {
   text-transform: uppercase;
   font-weight: 700;
   color: #bb0a0a;
   display: none;
   position: relative;
 }
-#block-itg-front-end-common-related-photo-block h3 span, #block-itg-front-end-common-related-video-block h3 span, #block-itg-front-end-common-related-podcast-block h3 span {
+#block-itg-front-end-common-related-photo-block h3 span, #block-itg-front-end-common-related-video-block h3 span {
   background: #fff;
   z-index: 1;
   position: relative;
@@ -10849,7 +10849,7 @@ h1.about-us-heading + div p {
   padding: 45px 20px 10px 10px;
   display: inline-block;
 }
-#block-itg-front-end-common-related-photo-block h3:before, #block-itg-front-end-common-related-video-block h3:before, #block-itg-front-end-common-related-podcast-block h3:before {
+#block-itg-front-end-common-related-photo-block h3:before, #block-itg-front-end-common-related-video-block h3:before {
   content: '';
   position: absolute;
   left: 0;
@@ -10859,55 +10859,55 @@ h1.about-us-heading + div p {
   margin-top: -2px;
   background: #ddd;
 }
-#block-itg-front-end-common-related-photo-block h3, #block-itg-front-end-common-related-video-block h3, #block-itg-front-end-common-related-podcast-block h3 {
+#block-itg-front-end-common-related-photo-block h3, #block-itg-front-end-common-related-video-block h3 {
   display: block;
   padding-left: 0;
   margin-bottom: 20px;
   padding-top: 0;
 }
-#block-itg-front-end-common-related-photo-block h3 span, #block-itg-front-end-common-related-video-block h3 span, #block-itg-front-end-common-related-podcast-block h3 span {
+#block-itg-front-end-common-related-photo-block h3 span, #block-itg-front-end-common-related-video-block h3 span {
   padding-left: 0;
 }
-#block-itg-front-end-common-related-photo-block #related-photo .row, #block-itg-front-end-common-related-video-block #related-photo .row, #block-itg-front-end-common-related-podcast-block #related-photo .row {
+#block-itg-front-end-common-related-photo-block #related-photo .row, #block-itg-front-end-common-related-video-block #related-photo .row {
   margin: 0;
 }
-#block-itg-front-end-common-related-photo-block #related-photo .col-md-3, #block-itg-front-end-common-related-video-block #related-photo .col-md-3, #block-itg-front-end-common-related-podcast-block #related-photo .col-md-3 {
+#block-itg-front-end-common-related-photo-block #related-photo .col-md-3, #block-itg-front-end-common-related-video-block #related-photo .col-md-3 {
   width: 200px;
 }
-#block-itg-front-end-common-related-photo-block #related-photo .col-md-3 span, #block-itg-front-end-common-related-video-block #related-photo .col-md-3 span, #block-itg-front-end-common-related-podcast-block #related-photo .col-md-3 span {
+#block-itg-front-end-common-related-photo-block #related-photo .col-md-3 span, #block-itg-front-end-common-related-video-block #related-photo .col-md-3 span {
   padding-right: 30px;
   display: block;
 }
-#block-itg-front-end-common-related-photo-block #related-photo ul, #block-itg-front-end-common-related-video-block #related-photo ul, #block-itg-front-end-common-related-podcast-block #related-photo ul {
+#block-itg-front-end-common-related-photo-block #related-photo ul, #block-itg-front-end-common-related-video-block #related-photo ul {
   zoom: 1;
 }
-#block-itg-front-end-common-related-photo-block #related-photo ul:before, #block-itg-front-end-common-related-photo-block #related-photo ul:after, #block-itg-front-end-common-related-video-block #related-photo ul:before, #block-itg-front-end-common-related-video-block #related-photo ul:after, #block-itg-front-end-common-related-podcast-block #related-photo ul:before, #block-itg-front-end-common-related-podcast-block #related-photo ul:after {
+#block-itg-front-end-common-related-photo-block #related-photo ul:before, #block-itg-front-end-common-related-photo-block #related-photo ul:after, #block-itg-front-end-common-related-video-block #related-photo ul:before, #block-itg-front-end-common-related-video-block #related-photo ul:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-#block-itg-front-end-common-related-photo-block #related-photo ul:after, #block-itg-front-end-common-related-video-block #related-photo ul:after, #block-itg-front-end-common-related-podcast-block #related-photo ul:after {
+#block-itg-front-end-common-related-photo-block #related-photo ul:after, #block-itg-front-end-common-related-video-block #related-photo ul:after {
   clear: both;
 }
-#block-itg-front-end-common-related-photo-block #related-photo ul li, #block-itg-front-end-common-related-video-block #related-photo ul li, #block-itg-front-end-common-related-podcast-block #related-photo ul li {
+#block-itg-front-end-common-related-photo-block #related-photo ul li, #block-itg-front-end-common-related-video-block #related-photo ul li {
   padding-right: 0px;
   padding-left: 0px;
   /*            &:nth-child(4n+1){
                   clear:left;
               }*/
 }
-#block-itg-front-end-common-related-photo-block #related-photo ul li a, #block-itg-front-end-common-related-video-block #related-photo ul li a, #block-itg-front-end-common-related-podcast-block #related-photo ul li a {
+#block-itg-front-end-common-related-photo-block #related-photo ul li a, #block-itg-front-end-common-related-video-block #related-photo ul li a {
   display: block;
   overflow: hidden;
 }
-#block-itg-front-end-common-related-photo-block #related-photo .views-field-ds-changed, #block-itg-front-end-common-related-video-block #related-photo .views-field-ds-changed, #block-itg-front-end-common-related-podcast-block #related-photo .views-field-ds-changed {
+#block-itg-front-end-common-related-photo-block #related-photo .views-field-ds-changed, #block-itg-front-end-common-related-video-block #related-photo .views-field-ds-changed {
   display: block;
   font-size: 12px;
   color: #b1b1b1;
   padding: 8px 0 5px;
 }
-#block-itg-front-end-common-related-photo-block #related-photo .slick-next, #block-itg-front-end-common-related-photo-block #related-photo .slick-prev, #block-itg-front-end-common-related-video-block #related-photo .slick-next, #block-itg-front-end-common-related-video-block #related-photo .slick-prev, #block-itg-front-end-common-related-podcast-block #related-photo .slick-next, #block-itg-front-end-common-related-podcast-block #related-photo .slick-prev {
+#block-itg-front-end-common-related-photo-block #related-photo .slick-next, #block-itg-front-end-common-related-photo-block #related-photo .slick-prev, #block-itg-front-end-common-related-video-block #related-photo .slick-next, #block-itg-front-end-common-related-video-block #related-photo .slick-prev {
   background: #000 none repeat scroll 0 0;
   color: #fff;
   cursor: pointer;
@@ -10921,11 +10921,11 @@ h1.about-us-heading + div p {
   width: 25px;
   z-index: 1;
 }
-#block-itg-front-end-common-related-photo-block #related-photo .slick-next, #block-itg-front-end-common-related-video-block #related-photo .slick-next, #block-itg-front-end-common-related-podcast-block #related-photo .slick-next {
+#block-itg-front-end-common-related-photo-block #related-photo .slick-next, #block-itg-front-end-common-related-video-block #related-photo .slick-next {
   right: 0;
   left: auto;
 }
-#block-itg-front-end-common-related-photo-block #related-photo .slick-prev, #block-itg-front-end-common-related-video-block #related-photo .slick-prev, #block-itg-front-end-common-related-podcast-block #related-photo .slick-prev {
+#block-itg-front-end-common-related-photo-block #related-photo .slick-prev, #block-itg-front-end-common-related-video-block #related-photo .slick-prev {
   right: auto;
   left: 0;
 }
@@ -11966,8 +11966,11 @@ h1.about-us-heading + div p {
   margin-top: 20px;
 }
 #block-itg-widget-podcast-header .podcast-header-container .podcast-header-bottom {
-  padding: 15px;
+  padding: 15px 0;
   border: 1px solid #212121;
+}
+#block-itg-widget-podcast-header .podcast-header-container .podcast-header-bottom .other-list img {
+  padding: 0 7px;
 }
 #block-itg-widget-podcast-header .itg-adds {
   width: 300px;
@@ -11977,3 +11980,50 @@ h1.about-us-heading + div p {
 }
 
 /*css end Podcast page*/
+/*css start related-podcast-block*/
+#block-itg-front-end-common-related-podcast-block h3 {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #bb0a0a;
+  display: none;
+  position: relative;
+}
+#block-itg-front-end-common-related-podcast-block h3 span {
+  background: #fff;
+  z-index: 1;
+  position: relative;
+  /* padding-left: 10px; */
+  padding: 45px 20px 10px 10px;
+  display: inline-block;
+}
+#block-itg-front-end-common-related-podcast-block h3:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 20px;
+  height: 5px;
+  margin-top: -2px;
+  background: #ddd;
+}
+#block-itg-front-end-common-related-podcast-block h3 {
+  display: block;
+  padding-left: 0;
+  margin-bottom: 20px;
+  padding-top: 0;
+}
+#block-itg-front-end-common-related-podcast-block h3 span {
+  padding-left: 0;
+}
+#block-itg-front-end-common-related-podcast-block ul {
+  list-style-type: none;
+}
+#block-itg-front-end-common-related-podcast-block span.tile {
+  margin-top: 10px;
+  display: block;
+}
+#block-itg-front-end-common-related-podcast-block .slick-slider .slick-next, #block-itg-front-end-common-related-podcast-block .slick-slider .slick-prev {
+  display: none;
+}
+
+/*css end related-podcast-block*/
