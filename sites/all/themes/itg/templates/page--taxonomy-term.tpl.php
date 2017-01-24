@@ -120,7 +120,7 @@ window.addEventListener("message", function(ev) {
         $header_content .= '<div class="list-grid">' .l('<i class="fa fa-list" aria-hidden="true"></i>'.t('List'),$taxonomy_url, array('attributes' => array('class' => 'active'),'html'=>true,'query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span>'.l('<i class="fa fa-th" aria-hidden="true"></i>'.t(' Grid'),$taxonomy_url ,array('html'=>true,'query'=>array('view_type'=>'grid'))).'</div>';
         } elseif ($query['view_type'] == 'grid')   {
         $header_content .= '<div class="list-grid">' .l('<i class="fa fa-list" aria-hidden="true"></i>'.t('List'),$taxonomy_url, array('html'=>true,'query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span>'.l('<i class="fa fa-th" aria-hidden="true"></i>'.t('Grid'),$taxonomy_url ,array('attributes' => array('class' => 'active'),'html'=>true,'query'=>array('view_type'=>'grid'))).'</div>';    
-        }else {
+        } else {
         $header_content .= '<div class="list-grid">' .l('<i class="fa fa-list" aria-hidden="true"></i>'.t('List'),$taxonomy_url, array('attributes' => array('class' => 'active'),'html'=>true,'query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span>'.l('<i class="fa fa-th" aria-hidden="true"></i>'.t(' Grid'),$taxonomy_url ,array('html'=>true,'query'=>array('view_type'=>'grid'))).'</div>';
         }
         
