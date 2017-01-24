@@ -3069,6 +3069,9 @@ footer .footer-top ul li a:hover {
 .ugc-comment-popup.comment-popup .close-comment-popup {
   display: block;
 }
+.ugc-comment-popup.comment-popup .social-login {
+  display: none;
+}
 
 .comment-user-details {
   padding: 20px 0 0;
@@ -3146,19 +3149,25 @@ footer .footer-top ul li a:hover {
   font-weight: 600;
   padding-bottom: 5px;
 }
-.itg-comment .comment-timestamp, .itg-comment a.reply {
+.itg-comment .comment-timestamp, .itg-comment a.reply, .itg-comment a.comment-social-share {
   font-size: 12px;
   color: #989898;
   display: inline-block;
   vertical-align: middle;
 }
-.itg-comment .comment-timestamp:after {
+.itg-comment .comment-timestamp:after, .itg-comment a.reply {
   content: '|';
   display: inline-block;
   vertical-align: top;
   margin: 0 2px 0 7px;
 }
 .itg-comment a.reply:hover {
+  color: #1a3c8d;
+}
+.itg-comment a.reply:after {
+  margin-right: 7px;
+}
+.itg-comment a.comment-social-share:hover {
   color: #1a3c8d;
 }
 .itg-comment .inner-comment {

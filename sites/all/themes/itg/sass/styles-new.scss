@@ -3004,6 +3004,7 @@ footer .footer-top ul li a:hover{
     .close-comment-popup{
       display: block;
     }
+    .social-login{display: none;}
   }
 }
 .comment-user-details {
@@ -3077,19 +3078,27 @@ footer .footer-top ul li a:hover{
     font-weight: 600;
     padding-bottom: 5px;
   }
-  .comment-timestamp, a.reply{
+  .comment-timestamp, a.reply, a.comment-social-share{
     font-size: 12px;
     color: #989898;
     display: inline-block;
     vertical-align: middle;
   }
-  .comment-timestamp:after{
+  .comment-timestamp:after, a.reply{
     content: '|';
     display: inline-block;
     vertical-align: top;
     margin: 0 2px 0 7px;
   }
   a.reply{
+    &:hover{
+      color: #1a3c8d;
+    }
+    &:after{
+      margin-right: 7px;
+    }
+  }
+  a.comment-social-share{
     &:hover{
       color: #1a3c8d;
     }
