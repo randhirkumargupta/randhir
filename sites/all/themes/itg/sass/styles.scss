@@ -2854,7 +2854,7 @@ h1.category-heading{
                 padding: 0 10px;
             }
         }
-.view-category-wise-content-list, .view-blog-listing{    
+.view-category-wise-content-list, .view-blog-listing, .view-podcasts-listing{    
     @include listing-with-image(catagory-listing,left,10px,pic,detail);
     .catagory-listing{
         padding: 20px 0;
@@ -4081,7 +4081,7 @@ h1.category-heading{
 /*video and photo rolling slider end*/
 
 /*CCS start Photo landing Page*/
-#block-views-photo-list-of-category-block-2, .view-photo-list-of-category{
+#block-views-photo-list-of-category-block-2, .view-photo-list-of-category, .view-podcasts-listing{
     @include sidebar-heading;
     h3{
         display: block;
@@ -9121,7 +9121,7 @@ h1.about-us-heading{
 /*CSS End ask an expert detail*/
 
 /*css start related content*/
-#block-itg-front-end-common-related-photo-block, #block-itg-front-end-common-related-video-block{
+#block-itg-front-end-common-related-photo-block, #block-itg-front-end-common-related-video-block, #block-itg-front-end-common-related-podcast-block{
     @include sidebar-heading;
     h3{
         display: block;
@@ -9950,3 +9950,64 @@ h1.about-us-heading{
     }   
 }
 /*blog detail page css end*/
+
+
+/*css start Podcast page*/
+.view-podcasts-listing{
+    .podcast-left{
+        @include pos(relative);
+        span{
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            padding: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 12px;
+            font-family: Roboto;
+            i{
+                font-size: 14px;
+            }
+        }
+    }
+}
+#block-itg-widget-podcast-header{
+    .podcast-header-container{    
+        h1{
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .podcast-header-top{
+            background: #141414;
+            padding: 12px;
+            @include clearfix;
+            .pic{
+                @include float(left);
+                margin-right: 20px;
+            }
+            .podcast-detail{
+                display: block;
+                overflow: hidden;
+                p{
+                    font-size: 13px;
+                    color:#bfbfbf;
+                    margin-top: 20px;
+                }
+            }
+        }    
+        .podcast-header-bottom{
+            padding: 15px;
+            border: 1px solid #212121;           
+            .other-list{                     
+            }
+        }        
+    }
+    .itg-adds{
+            width: 300px;
+            height: 250px;
+            background: #363636;
+            margin: 0 auto;
+        }
+}
+/*css end Podcast page*/
