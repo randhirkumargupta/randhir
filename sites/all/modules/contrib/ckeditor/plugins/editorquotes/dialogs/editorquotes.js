@@ -14,7 +14,7 @@ CKEDITOR.dialog.add( 'editorquotesDialog', function( editor ) {
 	return {
 
 		// Basic properties of the dialog window: title, minimum size.
-		title: 'ediot Quotes Properties',
+		title: 'Quotes Properties',
 		minWidth: 400,
 		minHeight: 200,
 
