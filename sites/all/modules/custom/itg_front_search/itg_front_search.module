@@ -401,10 +401,14 @@ function itg_front_search_node_presave($node) {
     }
   }
 
-  if ($node->type == 'photogallery') {
-    $photo_by_id = $node->field_photo_by[LANGUAGE_NONE][0]['target_id'];
-    $reporter_node = node_load($photo_by_id);
-    $node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'] = strtolower($reporter_node->title);
+  if ($node->type == 'photogallery')
+  {
+    if (!empty($node->field_photo_by[LANGUAGE_NONE][0]['target_id']))
+    {
+      $photo_by_id = $node->field_photo_by[LANGUAGE_NONE][0]['target_id'];
+      $reporter_node = node_load($photo_by_id);
+      $node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'] = strtolower($reporter_node->title);
+    }
   }
 }
 
