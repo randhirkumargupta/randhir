@@ -711,9 +711,9 @@ jQuery(document).ready(function () {
         });
         
         // jQuery code for personalization saved item on mobile
-        jQuery('.personal-list').on('touch', 'li', function(){
-          jQuery(this).siblings().find('.personal-action').css('opacity', '0');
-          jQuery(this).find('.personal-action').css('opacity', '1');
+        jQuery('body').on('touchend', '.personal-action', function(){
+          jQuery(this).parent().parent().siblings().find('.personal-action').css('opacity', '0');
+          jQuery(this).css('opacity', '1');
         });
         
         //event page navigation
