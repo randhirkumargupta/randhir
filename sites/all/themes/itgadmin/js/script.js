@@ -750,6 +750,16 @@ jQuery(document).ready(function() {
         alert('Changes made successfully');
     });
     // end of code
+    
+    // byline order reorder
+    jQuery('body').on('click', '.save-byline', function () {
+        var item = [];
+        jQuery(this).closest('.byline-list').find('.byline-ul li').each(function (i) {
+            item.push(jQuery(this).find('.byline_publish').val());
+        });
+        jQuery('#edit-field-reporter-publish-id-und-0-value').val(item);
+        alert('Changes made successfully');
+    });
 
     // jQuery code for Loader
     jQuery(document).ajaxStart(function() {

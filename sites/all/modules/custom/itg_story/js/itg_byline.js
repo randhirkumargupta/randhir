@@ -11,13 +11,11 @@
             jQuery('body').find(".byline-ul").sortable();
             jQuery('body').find(".byline-ul").disableSelection();
             var listLength = jQuery('.byline-ul li').length;
-            console.log(listLength);
             if (listLength <= 1) {
                 jQuery('.save-byline').hide();
             }
             // jquery for front user activity
             $('.multi-byline').click(function (event) {
-                console.log(jQuery(this).val());
                 var nd_id = jQuery('#edit-field-story-reporter-und-0-target-id').val();
                 var unique_id = jQuery('#edit-field-reporter-unique-id-und-0-value').val();
                 byline_event = 'unpublish';
@@ -40,7 +38,6 @@
                             jQuery('#edit-field-story-reporter-und-0-target-id').val('');
                             var listLength = jQuery('.byline-ul').find('li').length;
                             if (listLength > 0) {
-                                console.log('add' + listLength);
                                 jQuery('.save-byline').show();
                             }
                             else
@@ -96,7 +93,6 @@
 
             // code for remove byline
             $('body').on('click', '.remove-byline', function (event) {
-                console.log(jQuery(this).attr('data-tag'));
                 var nd_id = jQuery(this).attr('data-tag');
                 var byline_nid = jQuery(this).attr('data-val');
                 byline_event = 'remove';
@@ -115,13 +111,11 @@
                     {
                         var obj = jQuery.parseJSON(result);
                         if (obj.msg == 'delete') {
-                            console.log(obj.byline);
                             jQuery('#' + obj.byline).remove();
                         }
                         var listLength = jQuery('.byline-ul').find('li').length;
 
                         if (listLength > 0) {
-                            console.log('remove' + listLength);
                             jQuery('.save-byline').show();
                         }
                         else
@@ -142,15 +136,3 @@
 
     };
 })(jQuery, Drupal, this, this.document);
-
-// byline order reorder
-jQuery('body').on('click', '.save-byline', function () {
-    console.log('click');
-    var item = [];
-
-    jQuery(this).closest('.byline-list').find('.byline-ul li').each(function (i) {
-        item.push(jQuery(this).find('.byline_publish').val());
-    });
-    jQuery('#edit-field-reporter-publish-id-und-0-value').val(item);
-    alert('Changes made successfully');
-});
