@@ -34,14 +34,14 @@ function itg_common_init() {
  * @return array
  */
 function itg_common_menu() {
-    $items['itg-custom-lock-delete'] = array(
-        'page callback' => 'itg_custom_lock_delete',
-        'access arguments' => array('access itg story'),
-        'type' => MENU_CALLBACK,
-        //'file' => 'includes/itg_story.inc',
-    );    
+  $items['itg-custom-lock-delete'] = array(
+    'page callback' => 'itg_custom_lock_delete',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+      //'file' => 'includes/itg_story.inc',
+  );
 
-    return $items;
+  return $items;
 }
 
 /**
@@ -273,7 +273,7 @@ function itg_common_form_field_ui_field_edit_form_alter(&$form, &$form_state, $f
  * @return array
  */
 function itg_common_cancel_button($form, &$form_state) {
-  
+
   $query_array = array();
   if (!isset($_REQUEST['destination'])) {
     $destination = '';
@@ -286,14 +286,15 @@ function itg_common_cancel_button($form, &$form_state) {
     }
   }
   if (!empty($form['nid']['#value'])) {
-    $form['actions']['cancel'] = array(      
-        '#markup' => '<a id= "'.$destination.'" data-widget="'.arg(1).'" class="button cancle-itg-btn" href="javascript:void(0)">Cancel</a>',
+    $form['actions']['cancel'] = array(
+      '#markup' => '<a id= "' . $destination . '" data-widget="' . arg(1) . '" class="button cancle-itg-btn" href="javascript:void(0)">Cancel</a>',
       '#weight' => 20,
     );
-  } else {
-      $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), $destination, array("query" => $query_array, 'attributes' => array('class' => 'button', 'data-widget' =>arg(1)))),        
-        '#weight' => 20,
+  }
+  else {
+    $form['actions']['cancel'] = array(
+      '#markup' => l(t('Cancel'), $destination, array("query" => $query_array, 'attributes' => array('class' => 'button', 'data-widget' => arg(1)))),
+      '#weight' => 20,
     );
   }
 
@@ -565,7 +566,7 @@ function itg_content_inactive() {
  * @return string
  *   Returns node title.
  */
-function itg_common_get_smiley_title($nid , $min_limit = 0 , $max_limit = 255) {
+function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255) {
   $titlte = "";
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_emoji', 'emoji', 'emoji.entity_id=n.nid');
@@ -586,11 +587,11 @@ function itg_common_get_smiley_title($nid , $min_limit = 0 , $max_limit = 255) {
     }
     if ($result[0]['field_emoji_position_value'] == 'left') {
       // Add smiley to left;
-      $titlte = $smilies . $titlte;
+      $titlte = '<span class="smilies-title">' . $smilies . '</span>' . $titlte;
     }
     else {
       // Add smiley to right;
-      $titlte = $titlte . $smilies;
+      $titlte = $titlte . '<span class="smilies-title">' . $smilies . '<span>';
     }
     return $titlte;
   }
@@ -600,7 +601,7 @@ function itg_common_get_smiley_title($nid , $min_limit = 0 , $max_limit = 255) {
  * Implement for lock delete on cancle button
  */
 function itg_custom_lock_delete() {
-  if(!empty($_GET['nid'])) {
+  if (!empty($_GET['nid'])) {
     content_lock_release_own_item($_GET['nid'], TRUE, TRUE);
   }
 }
