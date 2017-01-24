@@ -3,7 +3,7 @@ if (!empty($content)):
     global $base_url, $user;
     // get related content associated with story
     $related_content = $content['related_content'];
-
+    // condition for buzz
     if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
         $class_buzz = 'buzz-feedback';
     }
