@@ -38,7 +38,7 @@ if (!empty($node) && ($node->type == 'event_backend')) {//shravan
             <div class="social-share">
                 <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
+                <a href="#" class="event-search-icon"><i class="fa fa-search" aria-hidden="true"></i></a>
                 <div class="event-search"><input type="text" placeholder="Search" value=""></div>
             </div>                           
         </div>
