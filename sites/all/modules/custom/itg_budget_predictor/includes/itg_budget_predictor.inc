@@ -167,7 +167,7 @@ function itg_budget_predictor_update_budget() {
   parse_str($_POST['sort1'], $sort1);
   parse_str($_POST['sort2'], $sort2);
   parse_str($_POST['sort3'], $sort3);
-  $cookies_id = $_POST['cookies_id'];
+  $cookies_id = ($_POST['cookies_id']) ? $_POST['cookies_id'] : 'static';
   if (!empty($sort1['entry'])) {
     //parse_str($_POST['sort4'], $sort4);
     foreach ($sort1['entry'] as $key => $value) {
