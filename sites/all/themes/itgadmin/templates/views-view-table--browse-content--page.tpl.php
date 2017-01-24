@@ -38,13 +38,13 @@ global $base_url;
   <tbody>
     <?php foreach ($rows as $row_count => $row): 
       
-    if(function_exists('itg_last_node_published_on')) {
-        $pub_date = itg_last_node_published_on($row['nid'] , 1);
-        if(!empty($pub_date)) {
-            
-             $row['created'] = date('d/m/Y H:i',$pub_date[0]->stamp);
-        }
-    }
+//    if(function_exists('itg_last_node_published_on')) {
+//        $pub_date = itg_last_node_published_on($row['nid'] , 1);
+//        if(!empty($pub_date)) {
+//            
+//             $row['created'] = date('d/m/Y H:i',$pub_date[0]->stamp);
+//        }
+//    }
       if(function_exists('itg_social_media_check_node_exist')) {
           $exist = itg_social_media_check_node_exist($row['nid']);
           if(!empty($exist)) {
