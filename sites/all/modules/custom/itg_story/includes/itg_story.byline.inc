@@ -2,6 +2,7 @@
 
 /**
  * Implements itg_story_byline().
+ * @param string $title
  */
 function itg_story_byline($title) {
   $options = '';
@@ -60,12 +61,12 @@ function itg_story_byline_save() {
             'created' => REQUEST_TIME
           ))
           ->execute();
-      $remove = '<a href="javascript:void(0)" data-val="' . $byline_nid . '" data-tag="' . $qry . '" class="remove-byline">Remove</a>';
+      $remove = '<a href="javascript:void(0)" data-val="' . $byline_nid . '" data-tag="' . $qry . '" class="remove-byline">'.t('Remove').'</a>';
       if (!empty($byline_type))
       {
         $byline_type = '<span>' . $byline_type . '</span>';
       }
-      $byline_res = '<li id="' . $qry . '"><input type="checkbox" name="bylinepublish" data-tag="' . $qry . '" value="' . $byline_nid . '" class="byline_publish"><span>Publish</span><span>' . $byline_name . '</span>' . $byline_type . '<span>' . $remove . '</span></li>';
+      $byline_res = '<li id="' . $qry . '"><input type="checkbox" name="bylinepublish" data-tag="' . $qry . '" value="' . $byline_nid . '" class="byline_publish"><span>'.t('Publish').'</span><span>' . $byline_name . '</span>' . $byline_type . '<span>' . $remove . '</span></li>';
       $response = array('msg' => 'success', 'lnk' => $byline_res);
       print json_encode($response);
     }
@@ -113,6 +114,7 @@ function itg_story_byline_save() {
 
 /**
  * Implements itg_byline_info().
+ * @param int $reporter_id
  */
 function itg_byline_info($reporter_id) {
   $val = '';
@@ -131,14 +133,14 @@ function itg_byline_info($reporter_id) {
       {
         $byline_type = '<span>' . $byline_type . '</span>';
       }
-      $remove = '<a href="javascript:void(0)" data-val="' . $record['byline_id'] . '" data-tag="' . $record['id'] . '" class="remove-byline">Remove</a>';
+      $remove = '<a href="javascript:void(0)" data-val="' . $record['byline_id'] . '" data-tag="' . $record['id'] . '" class="remove-byline">'.t('Remove').'</a>';
       if ($record['publish_status'] == 1)
       {
-        $val .= '<li id="' . $record['id'] . '"><input type="checkbox" name="bylinepublish" data-tag="' . $record['id'] . '" value="' . $record['byline_id'] . '" class="byline_publish" checked><span>Publish</span><span>' . $byline_name . '</span>' . $byline_type . '<span>' . $remove . '</span></li>';
+        $val .= '<li id="' . $record['id'] . '"><input type="checkbox" name="bylinepublish" data-tag="' . $record['id'] . '" value="' . $record['byline_id'] . '" class="byline_publish" checked><span>'.t('Publish').'</span><span>' . $byline_name . '</span>' . $byline_type . '<span>' . $remove . '</span></li>';
       }
       else
       {
-        $val .= '<li id="' . $record['id'] . '"><input type="checkbox" name="bylinepublish" data-tag="' . $record['id'] . '" value="' . $record['byline_id'] . '" class="byline_publish"><span>Publish</span><span>' . $byline_name . '</span>' . $byline_type . '<span>' . $remove . '</span></li>';
+        $val .= '<li id="' . $record['id'] . '"><input type="checkbox" name="bylinepublish" data-tag="' . $record['id'] . '" value="' . $record['byline_id'] . '" class="byline_publish"><span>'.t('Publish').'</span><span>' . $byline_name . '</span>' . $byline_type . '<span>' . $remove . '</span></li>';
       }
     }
     return $val;
@@ -147,6 +149,7 @@ function itg_byline_info($reporter_id) {
 
 /**
  * Implements itg_miscellaneous_byline().
+ * @param int $nid
  */
 function itg_get_byline_detail($nid) {
 
@@ -166,6 +169,8 @@ function itg_get_byline_detail($nid) {
 
 /**
  * Implements itg_miscellaneous_byline().
+ * @param string $unique_id
+ * @param int $nid
  */
 function itg_get_previous_byline_detail($unique_id, $nid) {
 
@@ -183,6 +188,7 @@ function itg_get_previous_byline_detail($unique_id, $nid) {
 
 /**
  * Implements itg_get_byline_row().
+ * @param string $uniqueid
  */
 function itg_get_byline_row($uniqueid) {
 
@@ -249,7 +255,8 @@ function itg_story_node_update($node) {
 
 /**
  * Implements itg_byline_order_update
- * {@inheritdoc}
+ * @param string $byline
+ * @param int $nid
  */
 function itg_byline_order_update($byline, $nid) {
   $byline_arr = explode(',', $byline);
