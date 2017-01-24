@@ -116,11 +116,15 @@ window.addEventListener("message", function(ev) {
         $term = taxonomy_term_load($arg[2]);
         $header_content = '<h1 class="category-heading">' . $term->name . '</h1>';
         $query = drupal_get_query_parameters();
-        if ($query['view_type'] == 'list') {
+        if ($query['view_type'] == 'list')  {
         $header_content .= '<div class="list-grid">' .l('<i class="fa fa-list" aria-hidden="true"></i>'.t('List'),$taxonomy_url, array('attributes' => array('class' => 'active'),'html'=>true,'query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span>'.l('<i class="fa fa-th" aria-hidden="true"></i>'.t(' Grid'),$taxonomy_url ,array('html'=>true,'query'=>array('view_type'=>'grid'))).'</div>';
-        } else {
+        } elseif ($query['view_type'] == 'grid')   {
         $header_content .= '<div class="list-grid">' .l('<i class="fa fa-list" aria-hidden="true"></i>'.t('List'),$taxonomy_url, array('html'=>true,'query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span>'.l('<i class="fa fa-th" aria-hidden="true"></i>'.t('Grid'),$taxonomy_url ,array('attributes' => array('class' => 'active'),'html'=>true,'query'=>array('view_type'=>'grid'))).'</div>';    
+        } else {
+        $header_content .= '<div class="list-grid">' .l('<i class="fa fa-list" aria-hidden="true"></i>'.t('List'),$taxonomy_url, array('attributes' => array('class' => 'active'),'html'=>true,'query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span>'.l('<i class="fa fa-th" aria-hidden="true"></i>'.t(' Grid'),$taxonomy_url ,array('html'=>true,'query'=>array('view_type'=>'grid'))).'</div>';
         }
+        
+        
         print $header_content;
       if(!isset($_GET['view_type']) || (isset($_GET['view_type']) && $_GET['view_type'] == 'list')) {
         // show list view.

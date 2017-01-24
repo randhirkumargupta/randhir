@@ -1,5 +1,5 @@
 (function($) {
-    
+
     var timer;
     jQuery('#edit-terms').live('keyup', function() {
         window.clearTimeout(timer);
@@ -48,7 +48,7 @@
                 var imageId = objdata.fid;
                 var height = parent.jQuery('#image_height').val();
                 var width = parent.jQuery('#image_width').val();
-                var ctype=parent.jQuery('#content_type').val();
+                var ctype = parent.jQuery('#content_type').val();
 
                 if (imageId != "")
                 {
@@ -57,10 +57,13 @@
                     jQuery.ajax({
                         url: Drupal.settings.basePath + 'getimagetocroper',
                         type: 'post',
-                        data: {'imageId': imageId,'solr':1, 'field_id': fieldname,'content_type':ctype, 'img_height': height, 'img_width': width},
+                        data: {'imageId': imageId, 'solr': 1, 'field_id': fieldname, 'content_type': ctype, 'img_height': height, 'img_width': width},
                         success: function(data) {
                             //  itg_image_repository.processResponse
                             parent.jQuery('#search-preview').hide();
+                            if (!jQuery('#itg_image_repository-content').hasClass('after-croper')) {
+                                jQuery('#itg_image_repository-content').addClass('after-croper');
+                            }
                             parent.jQuery('#file-preview').show().html(data);
                             parent.jQuery('#loader-data').hide();
                         },
@@ -87,12 +90,11 @@
         var timeout;
         var datathis = jQuery(this);
         var getimageurl = datathis.attr('src');
-        //alert(getimageurl);
         var altdata = jQuery(this).attr('alt');
         var titledata = jQuery(this).attr('title');
         var fieldname = parent.jQuery('#field_name').val();
-        parent.jQuery('#img_alttext').val(altdata);
-        parent.jQuery('#img_title').val(titledata);
+//        parent.jQuery('#img_alttext').val(altdata);
+//        parent.jQuery('#img_title').val(titledata);
         timeout = setTimeout(function() {
             jQuery.ajax({
                 url: Drupal.settings.basePath + 'get_dimension',
