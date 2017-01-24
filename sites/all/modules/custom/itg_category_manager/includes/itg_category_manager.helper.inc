@@ -19,9 +19,9 @@ function itg_category_manager_hierarchical_select_root_level($params,$dropbox = 
       $node = node_load(arg(1));
       $type = $node->type;
   }
-  elseif(!empty ($_POST['form_node']))
+  elseif(!empty ($_POST['cat_node_type']))
   {
-     $type = $_POST['form_node']; 
+     $type = $_POST['cat_node_type']; 
   }
 
   $terms = _hs_taxonomy_hierarchical_select_get_tree($params['vid'], 0, -1, 1);
