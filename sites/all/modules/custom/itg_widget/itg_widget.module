@@ -207,7 +207,17 @@ function extranet_output_nested_tree($tree) {
   if (count($tree)) {
     $output = '<ul class="nested-taxonomy-tree">';
     foreach ($tree as $term) {
-      if (!itg_category_manager_term_state($term->tid)) {
+      if(function_exists('itg_category_manager_term_state')) {
+          if (itg_category_manager_term_state($term->tid)) {
+          $output .= '<li class="taxonomy-term">';
+          $output .= l($term->name, "taxonomy/term/$term->tid");
+          if ($term->children) {
+            $output .= extranet_output_nested_tree($term->children);
+          }
+          $output .= '</li>';
+        }
+      }
+      else {
         $output .= '<li class="taxonomy-term">';
         $output .= l($term->name, "taxonomy/term/$term->tid");
         if ($term->children) {
