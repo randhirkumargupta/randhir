@@ -36,6 +36,11 @@ input[type="text"]:focus, textarea:focus {
   border-color: #026bc5;
 }
 
+input[type="file"], input[type="submit"], input[type="text"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-keyword-wrapper {
   width: 100%;
   padding: 0;
@@ -112,7 +117,7 @@ input[type="text"]:focus, textarea:focus {
 }
 
 .region-top {
-  background-color: #171717;
+  background-color: #000;
   padding: 20px 0 0 0;
   margin-top: -15px;
 }
@@ -1214,7 +1219,15 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 .page-personalization #block-formblock-ugc .node-ugc-form .captcha {
   max-width: 100%;
   margin-left: 0;
-  border: 1px solid #e0e0e0;
+}
+.page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response label {
+  width: 220px;
+}
+.page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response .form-text {
+  padding-left: 230px;
+}
+.page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response div.description {
+  display: none;
 }
 .page-personalization #block-formblock-ugc [id*="field-ugc-personalization-photo-add-more-wrapper"] > .form-item {
   margin-left: 0;
@@ -3761,6 +3774,7 @@ footer .footer-top ul li a:hover {
 .page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-name {
   padding-right: 75px;
   font: 400 16px/20px Roboto;
+  word-wrap: break-word;
 }
 .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row .views-field-ops,
 .page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-ops {
@@ -5036,10 +5050,14 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     padding-left: 0;
     position: static;
     width: 100%;
-    height: 805px;
   }
   .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textarea .form-textarea-wrapper > .cke {
     border: none;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textarea .form-textarea-wrapper span.error {
+    padding-left: 0;
+    text-align: right;
+    padding: 5px;
   }
   .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textarea .form-textarea {
     border: none;
@@ -5050,7 +5068,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file label, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file label {
     width: 115px;
     padding: 0 8px;
-    height: 200px;
+    height: 235px;
   }
   .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file div.image-widget-data, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file div.image-widget-data {
     float: none;
@@ -5061,7 +5079,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file div.image-widget-data .form-type-textfield .form-text, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file div.image-widget-data .form-type-textfield .form-text {
     border: 1px solid #ddd;
     height: 28px;
-    padding: 5px;
+    padding: 0 5px;
+    line-height: 26px;
     position: static;
     width: 100%;
   }
@@ -5176,7 +5195,15 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .page-personalization #block-formblock-ugc .node-ugc-form .captcha {
     max-width: 100%;
     margin-left: 0;
-    border: 1px solid #e0e0e0;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response {
+    margin-top: 10px !important;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response label {
+    width: 195px;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response .form-text {
+    padding-left: 200px;
   }
   .page-personalization #block-formblock-ugc [id*="field-ugc-personalization-photo-add-more-wrapper"] > .form-item {
     margin-left: 0;
@@ -5322,11 +5349,12 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     display: inline-block;
     vertical-align: top;
     margin-right: 2px;
+    max-width: 96px;
   }
   .block-itg-personalization .profile-edit-tab li a {
     padding: 10px;
     display: block;
-    background: #f8f8f8;
+    background: #fff;
     border-radius: 10px 10px 0 0;
   }
 
@@ -5397,7 +5425,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 
   .page-personalization-my-following #block-views-follow-tags-block,
   .page-personalization-my-following #block-views-follow-tags-block-1 {
-    width: 50%;
+    width: 100%;
     float: left;
     padding: 50px 0 0;
   }
@@ -5595,6 +5623,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     z-index: 9;
     font-size: 13px;
     color: #0db533;
+  }
+
+  .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child {
+    margin-left: 175px;
   }
 }
 @media all and (max-width: 767px) {
@@ -5815,6 +5847,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   article.node-mega-review-critic .other-reviews .other-reviews-posted-on .other-reviews-by {
     display: block;
     padding-right: 0;
+  }
+
+  .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child {
+    margin-left: 125px;
   }
 }
 @media all and (max-width: 360px) {

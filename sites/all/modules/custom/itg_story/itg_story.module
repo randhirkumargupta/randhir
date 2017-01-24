@@ -8,7 +8,7 @@
  *
  */
 module_load_include('inc', 'itg_story', 'includes/itg_story.helper');
-
+module_load_include('inc', 'itg_story', 'includes/itg_story.byline');
 /**
  * Implements hook_menu().
  * @return array
@@ -55,6 +55,18 @@ function itg_story_menu() {
         'access arguments' => array('access itg story'),
         'type' => MENU_CALLBACK,
         'file' => 'includes/itg_story.helper.inc',
+    );
+    
+    $items['byline/autocomplete'] = array(
+    'page callback' => 'itg_story_byline',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    );
+
+    $items['multibyline-save'] = array(
+    'page callback' => 'itg_story_byline_save',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
     );
 
     return $items;
@@ -140,38 +152,62 @@ function itg_story_ckeditor_plugin_alter(&$plugins) {
  * {@inheritdoc}
  */
 function itg_story_form_alter(&$form, &$form_state, $form_id) {
-    switch ($form_id) {
-        case 'story_node_form':
-          global $base_url;
-            if (!empty($form['#node']->field_story_source_id[LANGUAGE_NONE][0]['value'])) {
-              $source_id = $form['#node']->field_story_source_id[LANGUAGE_NONE][0]['value'];
-            }
-            if (!empty($form['#node']->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
-              $source_type = trim($form['#node']->field_story_source_type[LANGUAGE_NONE][0]['value']);
-            }
-            
-            
-            if (empty($source_id) && empty($source_type)) {
-              $breaking_check = '<input type="checkbox" title="breaking_text" id="breaking_text"><span> Make it breaking news</span>';
-            }
-            $form['title']['#suffix'] = '<div class="breaking_class">'.$breaking_check.'</div>';    
-            $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#title'] = '';
-            $form['field_story_syndication'][LANGUAGE_NONE]['#options'] = array('Yes' => $form['field_story_syndication'][LANGUAGE_NONE]['#title']);
-            $form['field_story_syndication'][LANGUAGE_NONE]['#title'] = "";
-            $form['field_story_syndications_photo'][LANGUAGE_NONE]['#options'] = array('Yes' => $form['field_story_syndications_photo'][LANGUAGE_NONE]['#title']);
-            $form['field_story_syndications_photo'][LANGUAGE_NONE]['#title'] = "";
-            unset($form['actions']['preview_changes']);
-            unset($form['field_story_templates'][LANGUAGE_NONE]['#options']['_none']);
-            unset($form['field_story_select_templates'][LANGUAGE_NONE]['#options']['_none']);
-            $form['#after_build'][] = 'itg_story_after_build';
-            $form['actions']['submit']['#submit'][] = 'itg_story_form_custom_callback';
-            drupal_add_js(array('itg_common' => array('base_url' => $base_url)), 'setting');
-            drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.emoji.js', 'file');
-            $form['field_emoji']['und'][0]['#format'] = 'emoji';
-            break;
-    }
+  switch ($form_id) {
+    case 'story_node_form':
+      global $base_url, $user;
+      // code for multiple byline
+      if (empty($form['#node']->nid))
+      {
+        if (!empty($_SESSION['unique']))
+        {
+          $reporter_id = $_SESSION['unique'];
+        }
+        else
+        {
+          $unique = 'byline_' . uniqid();
+          $_SESSION['unique'] = $unique;
+          $reporter_id = $_SESSION['unique'];
+        }
 
-    $form['field_story_category']['und']['#config']['module'] = 'itg_category_manager';
+        $form['field_reporter_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $reporter_id;
+      }
+      
+      $form['field_reporter_publish_id']['#attributes']['class'][] = 'element-hidden';
+      $form['field_reporter_unique_id']['#attributes']['class'][] = 'element-hidden';
+      $form['field_story_reporter']['und'][0]['target_id']['#autocomplete_path'] = 'byline/autocomplete';
+      
+      if (!empty($form['#node']->field_story_source_id[LANGUAGE_NONE][0]['value']))
+      {
+        $source_id = $form['#node']->field_story_source_id[LANGUAGE_NONE][0]['value'];
+      }
+      if (!empty($form['#node']->field_story_source_type[LANGUAGE_NONE][0]['value']))
+      {
+        $source_type = trim($form['#node']->field_story_source_type[LANGUAGE_NONE][0]['value']);
+      }
+
+
+      if (empty($source_id) && empty($source_type))
+      {
+        $breaking_check = '<input type="checkbox" title="breaking_text" id="breaking_text"><span> Make it breaking news</span>';
+      }
+      $form['title']['#suffix'] = '<div class="breaking_class">' . $breaking_check . '</div>';
+      $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#title'] = '';
+      $form['field_story_syndication'][LANGUAGE_NONE]['#options'] = array('Yes' => $form['field_story_syndication'][LANGUAGE_NONE]['#title']);
+      $form['field_story_syndication'][LANGUAGE_NONE]['#title'] = "";
+      $form['field_story_syndications_photo'][LANGUAGE_NONE]['#options'] = array('Yes' => $form['field_story_syndications_photo'][LANGUAGE_NONE]['#title']);
+      $form['field_story_syndications_photo'][LANGUAGE_NONE]['#title'] = "";
+      unset($form['actions']['preview_changes']);
+      unset($form['field_story_templates'][LANGUAGE_NONE]['#options']['_none']);
+      unset($form['field_story_select_templates'][LANGUAGE_NONE]['#options']['_none']);
+      $form['#after_build'][] = 'itg_story_after_build';
+      $form['actions']['submit']['#submit'][] = 'itg_story_form_custom_callback';
+      drupal_add_js(array('itg_common' => array('base_url' => $base_url)), 'setting');
+      drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.emoji.js', 'file');
+      $form['field_emoji']['und'][0]['#format'] = 'emoji';
+      break;
+  }
+
+  $form['field_story_category']['und']['#config']['module'] = 'itg_category_manager';
 }
 
 /**
@@ -326,8 +362,19 @@ function itg_story_node_validate($node, $form, &$form_state) {
 function itg_story_after_build($form, &$form_state) {
 
     global $user, $base_url;
-    
-    $form['original_image_fids'] = array(
+    // code for multiple byline
+    if (empty($form['#node']->nid))
+  {
+    $reporter_id = $form_state['input']['field_reporter_unique_id']['und'][0]['value'];
+  }
+  else
+  {
+    $reporter_id = $form['#node']->field_reporter_unique_id[LANGUAGE_NONE][0]['value'];
+  }
+  $form['field_story_reporter']['#prefix'] = '<div class="multi_reporter">';
+  $form['field_story_reporter']['#suffix'] = '<a class="multi-byline" data-tag="save">'.t('Add').'</a></div><div class="byline-list"><ul class="byline-ul">'.itg_byline_info($reporter_id).'</ul><span class="add-more save-byline">'.t('Save').'</span></div>';
+  
+  $form['original_image_fids'] = array(
         '#type' => 'hidden',
         '#value' => $form_state['input']['original_image_fids'],
         '#attributes' => array('id' => 'original_image_fids', 'name' => 'original_image_fids'),
@@ -369,39 +416,11 @@ function itg_story_after_build($form, &$form_state) {
 
     drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story.js', array('weight' => 1));
-
+    
+    // ADD js for multiple byline
+    drupal_add_js(array('itg_byline' => array('settings' => $settings)), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_byline.js');
     return $form;
-}
-
-/**
- * Implements hook_node_insert
- * {@inheritdoc}
- */
-function itg_story_node_insert($node) {
-    if ($node->type == 'story' && $node->workbench_moderation_state_new != 'draft' && isset($node->field_story_configurations[LANGUAGE_NONE])) {
-        foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
-            if ($val['value'] == 'breaking_news') {
-                //itg_story_create_breaking_news($node);
-            }
-        }
-    }
-}
-
-/**
- * Implements hook_node_update
- * {@inheritdoc}
- */
-function itg_story_node_update($node) {
-    if ($node->type == 'story' && $node->workbench_moderation_state_new != 'draft' && $node->op == 'Save') {
-        foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
-            if ($val['value'] == 'breaking_news') {
-                $breaking_cond = get_breaking_id($node->nid);
-                if (!$breaking_cond) {
-                    //itg_story_create_breaking_news($node);
-                }
-            }
-        }
-    }
 }
 
 /**
@@ -709,5 +728,40 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       $node->content['follow_status'] = itg_get_front_activity_info($node->nid, $node->type, $user->uid, 'follow_story', $status='');
     }    
     
+  }
+}
+
+/**
+ * Implements itg_story_movie_image_plugin_data()
+ * @param type $node_id
+ */
+function itg_story_movie_image_plugin_data($node_id = '') {
+  //Store the node id of the story from the argument
+  $story_nid = $node_id;
+  if (!empty($story_nid)) {
+    $node_obj = node_load($story_nid);
+    //store entity id of multi value field collection field
+    $technology_entity = $node_obj->field_story_technology[LANGUAGE_NONE];
+    
+    $html = '';
+    $html .= '<div class="row">';
+
+    foreach ($technology_entity as $key => $val) {
+      $entity = entity_load('field_collection_item', array($val['value']));
+      // store the actual image path
+      $sample_img_path = $entity[$val['value']]->field_technology_sample_photo['und'][0]['uri'];
+      $sample_img = image_style_url('video_landing_page_170_x_127', $sample_img_path);
+      // store image title
+      $sample_title = $entity[$val['value']]->field_technology_photo_title[LANGUAGE][0]['value'];
+      // generate html 
+      $html .= '<div class="col-md-3 col-sm-4 col-xs-6">';
+      $html .= '<img src="' . $sample_img . '"  alt=""/>';
+      $html .= '<p>' . $sample_title . '</p>';
+      $html .= '</div>';
+    }
+    $html .= '</div>';
+    return $html;
+  } else {
+    return 'No content id found';
   }
 }
