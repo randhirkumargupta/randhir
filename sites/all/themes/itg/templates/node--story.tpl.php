@@ -458,7 +458,14 @@ if (!empty($content)):
                                     $story_body = str_replace('[ITG:EXPERT-CHUNK]', '', $story_body);
                                 }
                             }
-
+                            $movie_html = itg_story_movie_image_plugin_data($node->nid);
+                            if (strpos($story_body, '[ITG:MOVIE-IMAGE]')) {
+                              if (!empty($node->field_story_technology['und'])) {
+                                    $story_body = str_replace('[ITG:MOVIE-IMAGE]', $movie_html, $story_body);
+                                } else {
+                                    $story_body = str_replace('[ITG:MOVIE-IMAGE]', '', $story_body);
+                                }
+                            }
                             if ($node->field_story_template_guru[LANGUAGE_NONE][0]['value']) {
                                 print '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
                             }
