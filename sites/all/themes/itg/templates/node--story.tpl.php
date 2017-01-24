@@ -365,10 +365,16 @@ if (!empty($content)):
                                <div class="cast">
                                 <span class="title"> <?php print t('Cast:'); ?></span>
                                 <span class="detail"> <?php  
-                                  $cast_ref_id = $node->field_mega_review_cast[LANGUAGE_NONE]['0']['target_id']; 
-                                  $entity_obj = entity_load('node', array($cast_ref_id));
-                                  $cast = $entity_obj[$cast_ref_id]->title;
-                                  print $cast;
+                                  $cast_ref_id = $node->field_mega_review_cast[LANGUAGE_NONE];
+                                  $count = sizeof($cast_ref_id);
+                                  for ($i = 0; $i < $count; $i++) {
+                                    $entity_obj = entity_load('node', array($cast_ref_id[$i]['value']));
+                                    $cast = $entity_obj[$cast_ref_id]->title;
+                                    print $cast;
+                                    if ($i < ($count - 1)) {
+                                      echo ', ';
+                                    }
+                                  }
                                   ?></span>
                                </div>
                             <?php endif; ?>
