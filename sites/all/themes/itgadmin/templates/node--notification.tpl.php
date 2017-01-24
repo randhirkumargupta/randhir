@@ -66,7 +66,7 @@
   <?php if (!empty($title) && !$page): ?>
     <h2 <?php if (!empty($title_attributes)) print $title_attributes ?>>
       <?php if (!empty($new)): ?><span class='new'><?php print $new ?></span><?php endif; ?>
-      <a href="<?php print $node_url ?>"><?php print $title ?></a>
+      <?php print $title ?>
     </h2>
   <?php endif; ?>
 

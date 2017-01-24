@@ -130,7 +130,7 @@
                 $(document).on('click', function () {
                     $('.globle-search').css('width', '0px');
                 });
-                $(document).on('tap', function () {
+                $(document).on('touchstart', function () {
                     $('.globle-search').css('width', '0px');
                 });
                 $('.search-icon, .globle-search').click(function (e) {
@@ -151,7 +151,7 @@
                 $(this).addClass('active').siblings().removeClass('active');
                 $(this).parent().parent().find(dataID).show().siblings('.tab-data').hide();
             });
-            $('.tab-buttons').on('click', 'span a', function (e) {
+            $('.tab-buttons').on('click', 'span a', function(e){
                 e.preventDefault();
             });
             // jQuery Code for tabbing End
@@ -719,6 +719,15 @@ jQuery(document).ready(function () {
         //event page navigation
         jQuery('#block-menu-menu-event-menu a.mobile-nav').click(function() {
             jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
+        });   
+        jQuery('.event-search-icon').click(function(){
+            jQuery('.event-search input').css('width','180px');
+        });        
+        jQuery(document).on('click touchstart', function () {
+            jQuery('.event-search input').css('width', '0px');
+        });
+        jQuery('.event-search-icon, .event-search input').click(function (e) {
+            e.stopPropagation();
         });        
     }
     
