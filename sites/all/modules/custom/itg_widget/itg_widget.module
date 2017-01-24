@@ -32,7 +32,7 @@ function itg_widget_init() {
   $settings = array();
   $settings['base_url'] = $base_url;
   drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file' , 'scope'=>'footer'));
+  drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));
 }
 
 /**
@@ -207,12 +207,24 @@ function extranet_output_nested_tree($tree) {
   if (count($tree)) {
     $output = '<ul class="nested-taxonomy-tree">';
     foreach ($tree as $term) {
-      $output .= '<li class="taxonomy-term">';
-      $output .= l($term->name, "taxonomy/term/$term->tid");
-      if ($term->children) {
-        $output .= extranet_output_nested_tree($term->children);
+      if(function_exists('itg_category_manager_term_state')) {
+          if (itg_category_manager_term_state($term->tid)) {
+          $output .= '<li class="taxonomy-term">';
+          $output .= l($term->name, "taxonomy/term/$term->tid");
+          if ($term->children) {
+            $output .= extranet_output_nested_tree($term->children);
+          }
+          $output .= '</li>';
+        }
       }
-      $output .= '</li>';
+      else {
+        $output .= '<li class="taxonomy-term">';
+        $output .= l($term->name, "taxonomy/term/$term->tid");
+        if ($term->children) {
+          $output .= extranet_output_nested_tree($term->children);
+        }
+        $output .= '</li>';
+      }
     }
     $output .= '</ul>';
   }
@@ -997,7 +1009,7 @@ function itg_widget_block_view($delta = '') {
           $podcast_image = $entity[$id]->field_podcast_audio_image_upload['und'][0];
           $podcast_banner_array[$key] = array("audio" => $audio_file_object, "desc" => $description, "image" => $podcast_image);
         }
-        $block['content'] = theme("podcast_banner", array("podcast_banner_array" => $podcast_banner_array , "podcast_title" => $podcast_title));
+        $block['content'] = theme("podcast_banner", array("podcast_banner_array" => $podcast_banner_array, "podcast_title" => $podcast_title));
       }
       break;
   }

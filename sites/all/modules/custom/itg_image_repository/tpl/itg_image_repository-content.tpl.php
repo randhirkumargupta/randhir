@@ -27,7 +27,7 @@ global $base_url;
 //--><!]]>
 </script>
 
-<div id="itg_image_repository-content">
+<div id="itg_image_repository-content" class="">
 
     <div id="message-box"></div>
     <div class="list-head image_repository">

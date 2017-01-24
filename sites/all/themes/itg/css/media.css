@@ -1308,6 +1308,26 @@
   }
 
   /*ask an expret css end*/
+  /*start event page css*/
+  #block-menu-menu-event-menu .wrap-mobile-social .mobile-nav {
+    display: block;
+  }
+
+  .event-sidebar .header-top .event-header-banner {
+    height: 150px;
+  }
+
+  #block-itg-event-backend-program-tab-block .top-block-highlight .highlights-container .wrap-listing {
+    max-height: 345px;
+    height: auto;
+  }
+
+  #block-itg-event-backend-program-tab-block .top-tab ul {
+    overflow: auto;
+    white-space: nowrap;
+  }
+
+  /*end event page css*/
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/
@@ -1415,6 +1435,31 @@
     margin-bottom: 15px;
   }
 
+  #block-views-program-schedule-block-3 .views-row:nth-child(3n+1) {
+    clear: none;
+  }
+  #block-views-program-schedule-block-3 .views-row:nth-child(2n+1) {
+    clear: left;
+  }
+
+  .event-sidebar .header-top .event-header-banner {
+    height: 112px;
+  }
+
+  #block-menu-menu-event-menu .wrap-mobile-social .mobile-nav, #block-menu-menu-event-menu .wrap-mobile-social .social-share {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  #block-itg-event-backend-program-tab-block .program-sub-title {
+    font-size: 17px;
+    padding: 10px;
+  }
+
+  #block-itg-event-backend-program-tab-block .top-block-highlight .highlights-video .live-event-video {
+    height: 250px;
+  }
+
   /*End event page*/
   /*Home page start css*/
   .big-news .big-story-col-1, .big-news .big-story-col-2 {
@@ -1436,15 +1481,6 @@
   }
 
   /*Home page end css*/
-  /*start event page*/
-  #block-views-program-schedule-block-3 .views-row:nth-child(3n+1) {
-    clear: none;
-  }
-  #block-views-program-schedule-block-3 .views-row:nth-child(2n+1) {
-    clear: left;
-  }
-
-  /*end event page*/
   /*css start live tv page*/
   #block-itg-live-tv-live-tv-video-page .latest-livetv-video .photo-list li {
     padding: 10px;
@@ -1638,11 +1674,14 @@
   }
   #block-menu-menu-event-menu .wrap-mobile-social .social-share {
     float: right;
+    width: 200px;
+    text-align: right;
   }
   #block-menu-menu-event-menu .wrap-mobile-social .social-share a {
     line-height: 40px;
     height: 40px;
     padding: 0 5px;
+    color: #dfdfdf;
   }
   #block-menu-menu-event-menu .wrap-mobile-social .event-search {
     position: absolute;
@@ -1653,6 +1692,7 @@
     height: 25px;
     border: none;
     width: 0;
+    padding: 0;
   }
 
   #block-itg-event-backend-program-tab-block .top-block-highlight .highlights-video {
