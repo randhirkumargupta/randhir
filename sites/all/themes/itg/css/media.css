@@ -292,6 +292,9 @@
   .election-page .election-graph .col-el-5 {
     width: 240px;
   }
+  .election-page .election-top-block .social-share {
+    padding-top: 0;
+  }
 
   /*Election page css end*/
   /*static pages start*/
@@ -347,8 +350,10 @@
   }
   #block-itg-event-backend-post-event-block .top-tab ul li {
     padding: 5px;
-    width: 32.3%;
+    width: 33%;
     text-align: center;
+    border-right: 5px solid #f4f4f4;
+    margin-right: 0;
   }
   #block-itg-event-backend-post-event-block .top-tab ul li span {
     display: block;
@@ -1303,16 +1308,6 @@
   }
 
   /*ask an expret css end*/
-  /*event page css start*/
-  #block-menu-menu-event-menu .col-md-4 {
-    background: #fff;
-    padding-top: 10px;
-  }
-  #block-menu-menu-event-menu .event-detail .event-str-date {
-    font-size: 20px;
-  }
-
-  /*event page css end*/
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/
@@ -1634,6 +1629,31 @@
     background: #fff;
     padding-top: 10px;
   }
+  #block-menu-menu-event-menu .event-detail .event-str-date {
+    font-size: 20px;
+  }
+  #block-menu-menu-event-menu .wrap-mobile-social {
+    position: relative;
+    overflow: hidden;
+  }
+  #block-menu-menu-event-menu .wrap-mobile-social .social-share {
+    float: right;
+  }
+  #block-menu-menu-event-menu .wrap-mobile-social .social-share a {
+    line-height: 40px;
+    height: 40px;
+    padding: 0 5px;
+  }
+  #block-menu-menu-event-menu .wrap-mobile-social .event-search {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+  }
+  #block-menu-menu-event-menu .wrap-mobile-social .event-search input[type="text"] {
+    height: 25px;
+    border: none;
+    width: 0;
+  }
 
   #block-itg-event-backend-program-tab-block .top-block-highlight .highlights-video {
     margin-bottom: 50px;
@@ -1658,6 +1678,10 @@
   .itg-layout-container .ad-widget .sidebar-ad {
     background: transparent;
     height: 100%;
+  }
+
+  .page-user .social-share a {
+    padding: 0 10px 0 45px;
   }
 }
 @media only screen and (max-width: 560px) {
@@ -1705,8 +1729,9 @@
     margin-top: 20px;
   }
   .election-page .election-graph {
-    margin-top: -50px;
+    margin-top: -30px;
     padding-bottom: 50px;
+    width: auto;
   }
   .election-page .election-graph .col-el-5 {
     width: 100%;

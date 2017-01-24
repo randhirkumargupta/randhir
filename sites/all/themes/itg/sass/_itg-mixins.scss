@@ -595,3 +595,34 @@ $root-font-size: 16px;
         border: 5px solid #171717;
     }
 }
+
+@mixin movie-rating{
+    .movie-rating{
+            margin-top: 20px;
+            float: left;
+            width: 111px;
+            height: 60px;
+            padding: 20px 0;
+            position: relative;
+            background: url(../images/rating-grey.png) 0 20px no-repeat;
+        &:after{
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: url(../images/rating-red.png) 0 20px no-repeat;
+            height: 60px;
+            width: 0;
+        }
+    }    
+    div[data-star-value="10%"]:after{width: 10%;}    
+    div[data-star-value="20%"]:after{width: 20%;}    
+    div[data-star-value="30%"]:after{width: 30%;}    
+    div[data-star-value="40%"]:after{width: 40%;}    
+    div[data-star-value="50%"]:after{width: 50%;}    
+    div[data-star-value="60%"]:after{width: 60%;}    
+    div[data-star-value="70%"]:after{width: 70%;}    
+    div[data-star-value="80%"]:after{width: 80%;}    
+    div[data-star-value="90%"]:after{width: 90%;}    
+    div[data-star-value="100%"]:after{width: 100%;}
+}

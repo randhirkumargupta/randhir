@@ -121,7 +121,7 @@ function itg_budget_predictor_get_taxonomy() {
     $budget_data['column2'] = $column2;
     $budget_data['column3'] = $column3;
     $budget_data['column4'] = $column4;
-    $budget_data['actual_link'] = $base_url . '/budget-predictor/' . $section_id;
+    $budget_data['actual_link'] = $base_url . $_SERVER['REQUEST_URI']; 
     $budget_data['exist'] = 1;
     $budget_data['file_names'] = $file_name;
 
@@ -167,7 +167,7 @@ function itg_budget_predictor_update_budget() {
   parse_str($_POST['sort1'], $sort1);
   parse_str($_POST['sort2'], $sort2);
   parse_str($_POST['sort3'], $sort3);
-  $cookies_id = $_POST['cookies_id'];
+  $cookies_id = ($_POST['cookies_id']) ? $_POST['cookies_id'] : 'static';
   if (!empty($sort1['entry'])) {
     //parse_str($_POST['sort4'], $sort4);
     foreach ($sort1['entry'] as $key => $value) {
@@ -483,7 +483,7 @@ function itg_budget_manage_list() {
   $build = array();
 
   $query = db_select('itg_manage_budget', 'm')->extend('PagerDefault');
-  $query->fields('m', array('id', 'budget_title', 'budget_description', 'budget_section', 'status'))
+  $query->fields('m', array('id', 'budget_title', 'budget_description', 'budget_section', 'budget_section', 'status'))
       ->orderBy('id', 'DESC')
       ->limit(10);
   # execute the query
@@ -508,13 +508,14 @@ function itg_budget_manage_list() {
       $budget_description = $row->budget_description;
       $budget_section = taxonomy_term_load($row->budget_section)->name;
       $status = $row->status;
-      $action = l(t('Edit Budget'), 'manage-budget-predictor/edit/' . $budget_id, array('query' => array('destination' => 'manage-budget-list')));
+      $play_link = l(t('Final Play'), 'budget/predictor/' . $row->budget_section);
+      $action = l(t('Edit'), 'manage-budget-predictor/edit/' . $budget_id, array('query' => array('destination' => 'manage-budget-list')));
       $rows[] = array($i,
         $budget_title,
         $budget_description,
         $budget_section,
         $status,
-        $action
+        $action . " | " . $play_link,
       );
       $i++;
     }

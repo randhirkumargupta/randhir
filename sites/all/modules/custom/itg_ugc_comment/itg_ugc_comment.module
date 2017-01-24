@@ -244,7 +244,7 @@ function getmycomments($data) {
   if (function_exists(itg_sso_url) && $user->uid == 0) {
   $comment_share = "<a class='def-cur-pointer comment-social-share'>".t('share')."</a>";
   }    
-  $image = $base_url.'/sites/all/themes/rubik/images/user-default.png';
+  $image = $base_url.'/sites/all/themes/itg/images/user-default.png';
   $contect .= "<div class='itg-comment'>
                 <div class='comment-image'>
                 <img src= $image width='50' height='50'></div>
