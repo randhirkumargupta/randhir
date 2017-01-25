@@ -739,54 +739,6 @@ function features_for_story_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_reporter_publish_id'.
-  $field_bases['field_reporter_publish_id'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_reporter_publish_id',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
-    'translatable' => 0,
-    'type' => 'text',
-  );
-
-  // Exported field_base: 'field_reporter_unique_id'.
-  $field_bases['field_reporter_unique_id'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_reporter_unique_id',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
-    'translatable' => 0,
-    'type' => 'text',
-  );
-
   // Exported field_base: 'field_social_embed_code'.
   $field_bases['field_social_embed_code'] = array(
     'active' => 1,
@@ -1882,7 +1834,7 @@ function features_for_story_field_default_field_bases() {
   // Exported field_base: 'field_story_reporter'.
   $field_bases['field_story_reporter'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_reporter',
@@ -2430,7 +2382,7 @@ function features_for_story_field_default_field_bases() {
   // Exported field_base: 'field_story_technology'.
   $field_bases['field_story_technology'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_technology',
@@ -2839,6 +2791,9 @@ function features_for_story_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_technology_sample_photo',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'fid' => array(
         0 => 'fid',
