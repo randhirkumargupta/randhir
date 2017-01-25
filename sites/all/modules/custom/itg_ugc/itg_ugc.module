@@ -294,7 +294,11 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'ugc_node_form') {
     //pr($form);
-    
+    $form['field_user_name'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('Name'));
+    $form['field_user_email'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('Email'));
+    $form['field_user_city'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('City'));
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+    $form['field_user_message']['#attributes'] = array('placeholder' => t('Description'));
     $user_fields = user_load($user->uid);
    
    if ($user->uid != '1') {
