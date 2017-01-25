@@ -93,6 +93,8 @@ function feature_for_podcast_front_end_views_default_views() {
 
   /* Display: Other podcasts */
   $handler = $view->new_display('block', 'Other podcasts', 'block');
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'podcast-detail-page';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '16';
