@@ -86,7 +86,9 @@ class ItgCategoryMigration extends XMLMigration {
     $this->addFieldMapping('metatag_description', 'metadesc')->xpath('metadesc');
     $this->addFieldMapping('metatag_keywords', 'metakey')->xpath('metakey');
     $this->addFieldMapping('field_cm_select_template_type', 'template_name')->xpath('template_name');
-    $this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
+    //$this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
+    $this->addFieldMapping('pathauto')->defaultValue(0);
+    $this->addFieldMapping('path', 'sefurl')->xpath('sef_url');
     $this->addFieldMapping('field_user_city', 'programme_schedule')->xpath('programme_schedule');
     $this->addFieldMapping('field_user_name', 'schedule_duration')->xpath('schedule_duration');
     $this->addFieldMapping('field_category_app_description', 'app_description')->xpath('app_description');

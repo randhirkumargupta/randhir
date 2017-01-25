@@ -9,13 +9,20 @@
         </a>
       <?php else : ?>
         <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[0]['nid']); ?>">
-          <img width="483" height="271" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/dimage483x271.jpeg' ?>" />
+          <img width="483" height="271" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image483x271.jpg' ?>" />
         </a>
       <?php endif; ?>
 
       <?php if (!empty($data[0]['title'])) : ?>
         <h2 class="home-page-feature-<?php echo $data[0]['nid'] ?>">
-          <?php echo l(mb_strimwidth($data[0]['title'], 0, 90, ".."), "node/" . $data[0]['nid']); ?>
+          <?php
+          if (function_exists('itg_common_get_smiley_title')) {
+            echo l(itg_common_get_smiley_title($data[0]['nid'], 0, 90), "node/" . $data[0]['nid'], array('html' => TRUE));
+          }
+          else {
+            echo l(mb_strimwidth($data[0]['title'], 0, 90, ".."), "node/" . $data[0]['nid']);
+          }
+          ?>
         </h2>   
       <?php endif; ?>
     </div>
@@ -27,12 +34,19 @@
         </a>
       <?php else : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[1]['nid']); ?>">
-          <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/dimage237x133.jpeg" />
+          <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image237x133.jpg" />
         </a>
       <?php endif; ?>
       <?php if (!empty($data[1]['title'])) : ?>
         <h3 class="home-page-feature-small-<?php echo $data[1]['nid'] ?>">
-          <?php echo l(mb_strimwidth($data[1]['title'], 0, 150, ".."), "node/" . $data[1]['nid']) ?>
+          <?php
+          if (function_exists('itg_common_get_smiley_title')) {
+            echo l(itg_common_get_smiley_title($data[1]['nid'], 0, 150), "node/" . $data[1]['nid'], array('html' => TRUE));
+          }
+          else {
+            echo l(mb_strimwidth($data[1]['title'], 0, 90, ".."), "node/" . $data[1]['nid']);
+          }
+          ?>
         </h3>   
       <?php endif; ?>
     </div>
@@ -44,12 +58,19 @@
         </a>
       <?php else : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[2]['nid']); ?>">
-          <img src="<?php print$base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/dimage237x133.jpeg" />
+          <img src="<?php print$base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image237x133.jpg" />
         </a>
       <?php endif; ?>
       <?php if (!empty($data[2]['title'])) : ?>
         <h3 class="home-page-feature-small-<?php echo $data[2]['nid'] ?>">
-          <?php echo l(mb_strimwidth($data[2]['title'], 0, 150, ".."), "node/" . $data[2]['nid']) ?>
+          <?php
+          if (function_exists('itg_common_get_smiley_title')) {
+            echo l(itg_common_get_smiley_title($data[2]['nid'], 0, 150), "node/" . $data[2]['nid'], array('html' => TRUE));
+          }
+          else {
+            echo l(mb_strimwidth($data[2]['title'], 0, 90, ".."), "node/" . $data[2]['nid']);
+          }
+          ?>
         </h3>    
       <?php endif; ?>
     </div>

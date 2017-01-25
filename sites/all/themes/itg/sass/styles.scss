@@ -5,12 +5,11 @@
 *{
     @extend .mr-0;
     @extend .pd-0;
-    box-sizing: border-box;
-    word-break: break-word;
+    box-sizing: border-box;   
 }
 body{
     font: 400 14px/18px $itg-robotoslab;
-    color: #333;
+    color: #333;   
 }
 h1, h2, h3, h4{@include itg-font($itg-roboto,$itg-font-medium);}
 h1{    
@@ -2385,7 +2384,32 @@ footer{
              }
          }
     }
-   
+    .story-movie{
+        @include movie-rating;   
+        .movie-rating{
+            float:none;
+            padding-bottom: 0; 
+            margin-top: 0;
+        }
+        .movie-detail{
+            div{
+                font-family:$itg-roboto;
+                color:#000;
+                + div{
+                  margin-top: 15px;  
+                }
+                .title{
+                    float: left;
+                    padding-right: 7px;
+                    width: 60px;
+                }
+                .detail{
+                    display: block;
+                    overflow: hidden;
+                }
+            }   
+        }
+    }       
 }
 .buzz-feedback{    
     @include calculate-width(1);
@@ -2810,18 +2834,32 @@ footer{
 } 
 /*End snap post css*/
 /*Start category wise content list css*/
-.view-category-wise-content-list{
-    h1{
+h1.category-heading{
         @include font(25px,40px,700);        
         border-top: 1px solid $border-color;
         border-bottom: 1px solid $border-color;
     }
+    .list-grid{
+            margin: 20px 0;
+            font-size: 18px;
+            font-family: $itg-roboto;
+            text-align: right;
+            font-weight:600;
+            a{                
+                &:hover, &.active{
+                    color:#a00606;
+                }
+            }
+            span.pipline {
+                padding: 0 10px;
+            }
+        }
+.view-category-wise-content-list, .view-blog-listing, .page-podcasts-listing .view-podcasts-listing{    
     @include listing-with-image(catagory-listing,left,10px,pic,detail);
     .catagory-listing{
         padding: 20px 0;
         .pic{
-            width: 144px;
-            padding-right: 10px;
+            width: 124px;            
         }
         .detail{
             h3{
@@ -2835,28 +2873,27 @@ footer{
                 display: none;
             }
         }
-    }
-    .list-grid{
-            margin: 20px 0;
-            font-size: 16px;
-            font-family: roboto;
-            a{                
-                &:hover{
-                    color:#a00606;
-                }
-            }
-            span.pipline {
-                padding: 0 10px;
-            }
+        span.blog-anchor{
+            a{
+                @include font(12px);
+                font-family: $itg-roboto;
+                color: #a00606;
+                line-height: 12px;
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 400;   
+            }            
         }
-    .catagory-grid{         
+    }    
+    .catagory-grid{  
+        @include clearfix;
         h3{
             font-size: 15px;
             line-height: 20px;
             margin-top: 5px;
         }
         p{
-            color: #777;
+            color: #696969;
             margin-top: 10px;
         }
         .col-md-3{
@@ -3361,14 +3398,17 @@ footer{
                     width: 100%;
                 }
                 .form-item-pole-answer{
-                    padding-bottom: 20px;
+                    padding-bottom: 10px;
                     margin-right: 15px;
                     margin-bottom: 20px;
                     float: left;
-                    position: relative;
+                    position: relative;                    
+                    max-width: 124px;
+                    width:30%;                    
                     img{
-                        width: 120px;
-                        height: 93px;
+                        width: 124px;
+                        max-height: 93px;
+                        margin-bottom: 10px;
                     }
                     .form-radio{
                         position: absolute;
@@ -3377,8 +3417,11 @@ footer{
                         bottom: 0;
                         margin: auto;
                     }
+                    label{
+                        font-size: 12px;
+                    }
                     .poll-ans-caption{
-                        padding: 10px 15px;
+                        padding: 0px 0px 10px 0;
                         display: inline-block;
                     }
                 }
@@ -3398,6 +3441,7 @@ footer{
     .updated-msg{
         @include font(12px);
         color: #8a8a8a;
+        font-family: $itg-roboto;
     }
     .social-share{
         display: inline-block;
@@ -3425,7 +3469,7 @@ footer{
     }
     .poll-replace-id{
         .form-item-pole-answer{
-            padding: 0 0 12px;
+            padding: 0 0 5px;
         }
         .form-submit{            
             background: #1a3c8d;
@@ -3435,6 +3479,7 @@ footer{
             cursor: pointer;
             padding: 6px 5px 5px 5px;            
             font-size: 12px;
+            margin-top: 10px; 
         }
         .error{
             display: block;
@@ -3447,6 +3492,12 @@ footer{
         &.relative-with-img{
             @include float(left);
             @include calculate-width(2);
+        }
+        label{
+            color: #33363b;
+            font-family: roboto;
+            font-size: 14px;
+            text-transform: capitalize;
         }
     }
     .related-story{   
@@ -4030,7 +4081,7 @@ footer{
 /*video and photo rolling slider end*/
 
 /*CCS start Photo landing Page*/
-#block-views-photo-list-of-category-block-2, .view-photo-list-of-category{
+#block-views-photo-list-of-category-block-2, .view-photo-list-of-category, .view-podcasts-listing.podcast-detail-page{
     @include sidebar-heading;
     h3{
         display: block;
@@ -5697,12 +5748,12 @@ footer{
 /*CSS start for event page index*/
 .event-sidebar {
     .header-top{               
-        .event-header-banner{            
+        .event-header-banner{   
+            height: 185px;
             @include pos(relative);
             text-align: center;
-            .event-add-header{
-                position: absolute;
-                top: 45px;
+            .event-add-header{                
+                padding-top: 45px;
                 width: 100%;
             }
         }        
@@ -6110,6 +6161,11 @@ footer{
               }
           }
       }
+    }
+    .wrap-mobile-social{ 
+        .mobile-nav, .social-share{
+            display: none;           
+        }        
     }
     .event-detail{
         background: #ef3c24;
@@ -9122,14 +9178,14 @@ h1.about-us-heading{
         width: 25px;
         z-index: 1;
     }
-    .slick-next{
-        right: 0;
-        left: auto;
-    }
-    .slick-prev{
-        right: auto;
-        left: 0;
-    }
+        .slick-next{
+            right: 0;
+            left: auto;
+        }
+        .slick-prev{
+            right: auto;
+            left: 0;
+        }
     }
 }
 /*css end related content*/
@@ -9717,23 +9773,31 @@ h1.about-us-heading{
     }
     .new-detail{
         @include clearfix;        
-        background:#ffc106;        
-        color:#000;
+        background:#ffc106;                
         height: 33px;
         line-height: 33px;
         padding: 0 10px;
         width:89.7%;
-        @include float(left);
-        font-size:20px;
-        .marquee{
-            width: 75%;
-            overflow: hidden;           
+        @include float(left);        
+        .marquee-container {    
+            width: 78%;
+            height: 33px;
+            @include pos(relative);
             @include float(left);
-            .field-content{                
-                @include display-inline;           
+            overflow:hidden;    
+            .marquee-child{
+                height: 33px;
+                line-height: 33px;
+                background: transparent;
                 a{
+                    font-size:20px;
                     color:#000;
+                    font-size: 18px;
                 }
+            }
+            .field-content{      
+                cursor:pointer;                        
+                @include display-inline;                               
             }
         }
         .social-share{
@@ -9823,44 +9887,6 @@ h1.about-us-heading{
     }
 }
 /*magzine lock icon end*/
-/*homepage marquee*/
-.marquee .field-content {       
-    margin: 0 auto;
-    overflow: hidden;
-    white-space: nowrap;
-    box-sizing: border-box;    
-    -moz-transform:translateX(100%);
-    -webkit-transform:translateX(100%);	
-    transform:translateX(100%);
-    -moz-animation: marquee 30s linear infinite;
-    -webkit-animation: marquee 30s linear infinite;
-    animation: marquee 30s linear infinite;
-}
-.marquee .field-content:hover {
-    animation-play-state: paused
-}
-/* Move it (define the animation) */
-@-moz-keyframes marquee {
-    0%   { -moz-transform: translateX(100%); }
-    100% { -moz-transform: translateX(-100%); }
-}
-@-webkit-keyframes marquee {
-    0%   { -webkit-transform: translateX(100%); }
-    100% { -webkit-transform: translateX(-100%); }
-}
-@keyframes marquee {
-    0%   { 
-        -moz-transform: translateX(100%); /* Firefox bug fix */
-        -webkit-transform: translateX(100%); /* Firefox bug fix */
-        transform: translateX(100%); 		
-    }
-    100% { 
-        -moz-transform: translateX(-100%); /* Firefox bug fix */
-        -webkit-transform: translateX(-100%); /* Firefox bug fix */
-        transform: translateX(-100%); 
-    }
-}
- /*homepage marquee end*/
 
 /*other comment section start*/
 #content{    
@@ -9879,3 +9905,197 @@ h1.about-us-heading{
     }
 }
 /*other comment section end*/
+
+/*site map css start*/
+.site-map{
+    ul{
+        @extend .list-none;       
+    }
+    .col-md-6{
+        > ul{            
+            > li{
+                font-size: 20px;
+                margin-bottom: 35px;
+                text-transform: uppercase;
+                color:#000;
+                font-weight:600;
+                font-family:$itg-roboto;
+                ul{
+                    margin-top: 20px;
+                    li{
+                        margin-bottom: 8px;
+                        a{
+                            color: #7e7e7e;
+                            font-size:14px;   
+                            text-transform: capitalize;
+                            font-weight:400;
+                            font-family:$itg-robotoslab;
+                        }                        
+                    }
+                    ul{
+                        padding-left: 25px;
+                        margin-top: 15px;
+                    }
+                }
+            }
+        }
+    }    
+}
+
+/*site map css end*/
+/*blog detail page css start*/
+.blog-detail-page{
+    h2, img{
+        margin-bottom: 20px;
+    }   
+}
+/*blog detail page css end*/
+
+
+/*css start Podcast page*/
+.page-podcasts-listing .view-podcasts-listing{
+    .podcast-left{
+        @include pos(relative);
+        span{
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            padding: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 12px;
+            font-family: Roboto;
+            i{
+                font-size: 14px;
+            }
+        }
+    }
+}
+#block-itg-widget-podcast-header{
+    .podcast-header-container{    
+        h1{
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .podcast-header-top{
+            background: #141414;
+            padding: 12px;
+            @include clearfix;
+            .pic{
+                @include float(left);
+                margin-right: 20px;
+            }
+            .podcast-detail{
+                display: block;
+                overflow: hidden;
+                p{
+                    font-size: 13px;
+                    color:#bfbfbf;
+                    margin-top: 20px;
+                }
+            }
+        }    
+        .podcast-header-bottom{
+            padding: 15px 0;
+            border: 1px solid #212121;           
+            .other-list{  
+                img{
+                    padding:0 7px;
+                }
+            }
+        }        
+    }
+    .itg-adds{
+            width: 300px;
+            height: 250px;
+            background: #363636;
+            margin: 0 auto;
+        }
+}
+/*css end Podcast page*/
+
+/*css start related-podcast-block*/
+#block-itg-front-end-common-related-podcast-block{
+    @include sidebar-heading;
+    h3{
+        display: block;
+        padding-left: 0;
+        margin-bottom: 20px;
+        padding-top: 0;
+        span{
+            padding-left: 0;
+        }
+    }
+    ul{
+        list-style-type: none;
+    }
+    span.tile{
+        margin-top: 10px;
+        display: block;
+    }
+    .slick-slider{
+      .slick-next, .slick-prev{
+        display: none;
+       }   
+    }   
+}
+/*css end related-podcast-block*/
+span.smilies-title {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* css for story-photo-list starts here */
+.story-photo-list-wrapper{
+    @include sidebar-heading;
+    .story-photo-list-heading{
+        display: block;
+        &:before{
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+        span{
+            padding: 20px 20px 20px 0;
+        }
+    }
+    .story-photo-list-item{
+        p{
+                line-height: 18px;
+                padding: 5px 0;
+        }
+        &.slick-slide{
+            padding: 0 11px;
+            width: 192px;
+        }
+    }
+    .slick-arrow{
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        z-index: 999;
+        border: none;
+        background-color: #000;
+        top: 45px;
+        cursor: pointer;
+        opacity: .7;
+        &.slick-disabled{
+            opacity: .3;
+        }
+        .fa{
+            font-size: 42px;
+            color: #fff;
+        }
+    }
+    .slick-prev{
+        left: -10px;
+    }
+    .slick-next{
+        right: -10px;
+    }
+}
+/* css for story-photo-list ends here */

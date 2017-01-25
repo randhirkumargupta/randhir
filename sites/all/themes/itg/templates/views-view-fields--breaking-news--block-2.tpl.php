@@ -47,8 +47,10 @@
     <div class="breakingnew-home">
       <div class="title">Breaking</div>    
       <div class="new-detail">  
-          <div class="marquee">
-          <?php print $field->content; ?>        
+          <div class="marquee-container">
+         <div class="marquee-child">
+                <?php print $field->content; ?>        
+            </div>   
           </div>
                   
           <div class="live-tv-link">
@@ -68,3 +70,15 @@
   </div>    
   <?php print $field->wrapper_suffix; ?>
 <?php endforeach; ?>
+
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery('.marquee-child').liMarquee({        
+            direction: 'left', 
+            scrolldelay: 0, 
+            scrollamount: 50,
+            circular: true, 
+            hoverstop: true
+        });
+    });
+</script>

@@ -47,13 +47,20 @@ list($width, $height) = getimagesize($url);
        print' <div class="image_info">'.$counter.' '. ucwords($imagename).' ('.$imagewidth.'x'.$imagehight.')</div>';
         
         }
+        print ' <div class="syndicate-lable"><input type="checkbox" name="syndicate_'.$explodedata[0].'" value="1"> Syndicate</div>';
         if(strtolower($imagename)=='extra large image')
         {
             print '<input type="text" name="image_alt" placeholder="Alt Text" id="alt_text_image"  value=""></br><input type="text" name="image_title" placeholder="Title" id="image_title_exta"  value=""></br>';
         }
        
-        print' <input type="text" name="courtesy[]" placeholder="Courtesy"  value=""></br>
-                <div class="syndicate-lable"><input type="checkbox" name="syndicate_'.$explodedata[0].'" value="1"> Syndicate</div></div> </div> ';  
+        print'<input type="text" name="courtesy[]" placeholder="Courtesy"  value=""></br>'
+                . '<input type="text" name="keyword[]" placeholder="Keyword"  value=""></br>'
+                . '<input type="text" name="tags[]" placeholder="Tags"  value=""></br>'
+                . '<input type="text" name="place[]" placeholder="Place"  value=""></br>'
+                . '<input type="text" name="photo_grapher[]" placeholder="Photo grapher"  value=""></br>'
+                . '<input type="text" name="image_date[]" placeholder="Date (dd/mm/yyyy)"  value=""></br>'
+                 . '<input type="text" name="image_description[]" placeholder="Description"  value=""></br>'
+                . '</div> </div> ';  
        
        
         $counter++;
@@ -65,6 +72,8 @@ list($width, $height) = getimagesize($url);
     <input type="hidden" value="<?php echo $field_name; ?>" id="field_name">
     <input type="hidden" value="<?php echo $fidsformain; ?>" id="image_fiedlid">
     <input type="hidden" value="<?php echo $url; ?>" id="imcurl">
+    <input type="hidden" id="orig_image_fiedlid" value="<?php echo $original_img_id; ?>">
+    <input type="hidden" id="is_solr" value="<?php echo $is_solr; ?>">
     <input type="hidden" value="<?php echo $height; ?>" id="imcheigth">
     <input type="hidden" value="<?php echo $width; ?>" id="imcwidth">
 </div>

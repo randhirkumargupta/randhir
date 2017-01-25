@@ -16,14 +16,14 @@
 function itg_theme() {
   $items = array();
   $items['user_login'] = array(
-      'render element' => 'form',
-      'path' => drupal_get_path('theme', 'itg') . '/templates',
-      'template' => 'user-login',
+    'render element' => 'form',
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'user-login',
   );
   $items['user_pass'] = array(
-      'render element' => 'form',
-      'path' => drupal_get_path('theme', 'itg') . '/templates',
-      'template' => 'user-pass',
+    'render element' => 'form',
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'user-pass',
   );
   return $items;
 }
@@ -33,6 +33,7 @@ function itg_theme() {
  * {@inheritdoc}
  */
 function itg_preprocess_node(&$variables) {
+  $node = $variables['node'];
   unset($variables['content']['links']['node']['#links']['node-readmore']);
   // Inclue pathauto module
   module_load_all_includes('inc', 'pathauto', 'pathauto');
@@ -86,10 +87,12 @@ function itg_preprocess_comment(&$variables) {
       $user = user_load($comment->uid);
       if (!empty($user->field_first_name[LANGUAGE_NONE][0]['value'])) {
         $submit_name = $user->field_first_name[LANGUAGE_NONE][0]['value'];
-      } else {
+      }
+      else {
         $submit_name = $variables['author'];
       }
-    } else {
+    }
+    else {
       $submit_name = $variables['author'];
     }
     $variables['submitted'] = t('Submitted by !username on !datetime', array('!username' => $submit_name, '!datetime' => $variables['created']));
@@ -116,7 +119,7 @@ function itg_preprocess_field(&$vars) {
 function itg_preprocess_page(&$variables) {
   global $base_url;
   $base_root;
-  $arg = arg();  
+  $arg = arg();
 
   // add condition to hide header and footer for signup, forgot-password page
   if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
@@ -151,18 +154,6 @@ function itg_preprocess_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__event_domain';
   }
 
-
-  // Code started for adding header , body start , body close for ads module
-  $ads_code = get_header_body_start_end_code();
-  foreach ($ads_code as $ads_key => $ads_chunk) {
-    $code = implode(' ', $ads_chunk);
-    $script_code = array(
-        '#type' => 'markup',
-        '#markup' => $code,
-    );
-    drupal_add_html_head($script_code, $ads_key);
-  }
-  // Code ends for adding header, body start, body close for ads module
 }
 
 /**
@@ -183,9 +174,29 @@ function itg_breadcrumb($variables) {
       }
 
       $crumbs .= '<li>Search</li>' . $keyword . '</li></ul></div>';
-    } else {
+    }
+    else {
       $crumbs .= '<li>' . drupal_get_title() . '</li></ul></div>';
     }
   }
   return $crumbs;
+}
+
+
+/**
+ * {@inheritdoc}
+ */
+
+function itg_preprocess_html($param) {
+  // Code started for adding header , body start , body close for ads module
+  $ads_code = get_header_body_start_end_code();
+  foreach ($ads_code as $ads_key => $ads_chunk) {
+    $code = implode(' ', $ads_chunk);
+    $script_code = array(
+      '#type' => 'markup',
+      '#markup' => $code,
+    );
+    drupal_add_html_head($script_code, $ads_key);
+  }
+  // Code ends for adding header, body start, body close for ads module
 }

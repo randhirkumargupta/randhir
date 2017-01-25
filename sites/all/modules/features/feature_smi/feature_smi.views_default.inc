@@ -286,6 +286,10 @@ function feature_smi_views_default_views() {
   $handler->display->display_options['fields']['counter']['label'] = 'S No.';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -305,37 +309,18 @@ function feature_smi_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['label'] = 'Category';
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
-  /* Field: Content: Post date */
-  $handler->display->display_options['fields']['created']['id'] = 'created';
-  $handler->display->display_options['fields']['created']['table'] = 'node';
-  $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['label'] = 'Published On';
-  $handler->display->display_options['fields']['created']['date_format'] = 'custom_date_d_m_y_';
-  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Field: Content: Nid */
-  $handler->display->display_options['fields']['nid']['id'] = 'nid';
-  $handler->display->display_options['fields']['nid']['table'] = 'node';
-  $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
-  /* Field: Global: Custom text */
-  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = 'Logs';
-  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['nothing']['alter']['path'] = 'social-media-logs/[nid]?width=800&height=500&iframe=true';
-  $handler->display->display_options['fields']['nothing']['alter']['path_case'] = 'lower';
-  $handler->display->display_options['fields']['nothing']['alter']['link_class'] = 'colorbox-load';
-  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Field: Social Media Logs: node publish on */
+  $handler->display->display_options['fields']['node_publish_on']['id'] = 'node_publish_on';
+  $handler->display->display_options['fields']['node_publish_on']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['fields']['node_publish_on']['field'] = 'node_publish_on';
+  $handler->display->display_options['fields']['node_publish_on']['label'] = 'Published On';
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['label'] = 'Actions';
   $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]</span> | [nothing]';
+  $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]</span>';
   $handler->display->display_options['fields']['view_node']['text'] = 'Promote';
   $handler->display->display_options['path'] = 'browse-content';
   $export['browse_content'] = $view;
@@ -390,7 +375,7 @@ function feature_smi_views_default_views() {
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
   $handler->display->display_options['empty']['area']['content'] = 'No result found!';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
-  /* Relationship: Social Media Logs: relate a node to social media post */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';
   $handler->display->display_options['relationships']['nid']['table'] = 'itg_social_media_logs';
   $handler->display->display_options['relationships']['nid']['field'] = 'nid';

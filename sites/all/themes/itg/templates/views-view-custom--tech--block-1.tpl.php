@@ -5,6 +5,7 @@
 
     <?php
 global $base_url;
+
     foreach ($rows as $index => $row) {
 
         $desc = $row['title'];
@@ -22,7 +23,7 @@ global $base_url;
             <?php if($row['field_story_large_image'] != "") {
                 print $row['field_story_large_image'];
             } else {
-                print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/dimage483x271.jpeg' />";
+                print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image483x271.jpg' alt='' />";
             }
                 
                 ?> 
@@ -37,7 +38,7 @@ global $base_url;
                 <?php if($row['field_story_medium_image'] != "") {
                 print $row['field_story_medium_image'];
             } else {
-                print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/dimage237x133.jpeg' />";
+                print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image237x133.jpg' alt='' />";
             }
                ?>
                 <h3><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h3>

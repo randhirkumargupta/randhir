@@ -83,6 +83,14 @@ function itg_layout_list_delete() {
  * @return array $output
  */
 function itg_layout_delete() {
+  phpinfo();
+//  $module_list = module_disable();
+//  echo '@@@';
+//  p($module_list);
+////  $module_list = module_list();
+//  foreach ($module_list as $key => $val) {
+//    echo $val.'</br>';
+//  }
   //SELECT * FROM `itg_layout_manager` WHERE widget_name = '';
   //db_delete('itg_layout_manager')->condition('widget_name', '')->execute();
   //exit;

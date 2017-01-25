@@ -294,7 +294,11 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'ugc_node_form') {
     //pr($form);
-    
+    $form['field_user_name'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('Name'));
+    $form['field_user_email'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('Email'));
+    $form['field_user_city'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('City'));
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+    $form['field_user_message']['#attributes'] = array('placeholder' => t('Description'));
     $user_fields = user_load($user->uid);
    
    if ($user->uid != '1') {
@@ -732,17 +736,27 @@ function itg_ugc_node_view($node, $view_mode, $langcode) {
  * @param type $node
  */
 function itg_ugc_node_insert($node) {
-  if ($node->type == 'story' || $node->type == 'blog' || $node->type == 'recipe' || $node->type == 'photogallery' || $node->type == 'videogallery' || $node->type == 'podcast') {
+  if ($node->type == 'story' || $node->type == 'blog' || $node->type == 'recipe' || $node->type == 'photogallery' || $node->type == 'videogallery' || $node->type == 'podcast')
+  {
     $title = $node->title;
-
-    $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
-    if ($node->type == 'story' || $node->type == 'videogallery' || $node->type = 'podcast') {
-      $source_id = $node->field_story_ugc_source_id[LANGUAGE_NONE][0]['value'];
+    $source_type = '';
+    if (!empty($node->field_story_source_type[LANGUAGE_NONE][0]['value']))
+    {
+      $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
     }
-    else {
-      $source_id = $node->field_story_source_id[LANGUAGE_NONE][0]['value'];
+    if (!empty($node->field_story_ugc_source_id[LANGUAGE_NONE][0]['value']))
+    {
+      if ($node->type == 'story' || $node->type == 'videogallery' || $node->type = 'podcast')
+      {
+        $source_id = $node->field_story_ugc_source_id[LANGUAGE_NONE][0]['value'];
+      }
+      else
+      {
+        $source_id = $node->field_story_source_id[LANGUAGE_NONE][0]['value'];
+      }
     }
-    if ($source_type == 'UGC' && !empty($source_id)) {
+    if ($source_type == 'UGC' && !empty($source_id))
+    {
       itg_ugc_node_status_update($source_id, $title);
     }
   }

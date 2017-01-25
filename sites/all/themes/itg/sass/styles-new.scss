@@ -14,6 +14,10 @@ input[type="text"], textarea{
     border-color: #026bc5;
   }
 }
+input[type="file"], input[type="submit"], input[type="text"]{
+  -webkit-appearance: none;
+  appearance: none;
+}
 
 [id="views-exposed-form-front-end-global-search-page"]{
     .views-exposed-form{
@@ -87,7 +91,7 @@ input[type="text"], textarea{
     }
 }
 .region-top{
-    background-color: #171717;
+    background-color: #000;
     padding: 20px 0 0 0;    
     margin-top: -15px;
 }
@@ -410,9 +414,10 @@ input[type="text"], textarea{
     }
 }
 
-.view-photo-list-of-category{
+.view-photo-list-of-category, .view-podcasts-listing.podcast-detail-page{
     .view-content{      
         .photo-list{
+            list-style-type: none;
             margin: 0 -15px;
             list-style: none;
             overflow: hidden;
@@ -1202,7 +1207,11 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       .captcha{
         max-width: 100%;
         margin-left: 0;
-        border: 1px solid #e0e0e0;
+        .form-item-captcha-response{
+          label{width: 220px;}
+          .form-text{padding-left: 230px;}
+          div.description{display: none;}
+        }
       }
     }
     [id*="field-ugc-personalization-photo-add-more-wrapper"]{
@@ -2944,12 +2953,13 @@ footer .footer-top ul li a:hover{
 
 /*other comment css start*/
 #other-comment {
-  background: #f2f2f2;
-  padding: 20px;
   #total-comment{
     font-size: 20px;
     font-weight: 500;
-    padding-bottom: 10px;
+    padding: 10px 10px;
+    background-color: rgb(208, 11, 38);
+    color: #fff;
+    margin-bottom: 10px;
   }
   .error{
     font-size: 13px;
@@ -2965,6 +2975,8 @@ footer .footer-top ul li a:hover{
     z-index: 2147483647;
 }
 .ugc-comment-popup{
+  padding: 10px;
+  background-color: #f2f2f2;
   .close-comment-popup{
     display: none;
     color: #868686;
@@ -2992,6 +3004,7 @@ footer .footer-top ul li a:hover{
     .close-comment-popup{
       display: block;
     }
+    .social-login{display: none;}
   }
 }
 .comment-user-details {
@@ -2999,11 +3012,38 @@ footer .footer-top ul li a:hover{
     text-align: right;
 }
 .comment-user-details > div {
-    display: inline-block;
-    margin-right: 7px;
-    vertical-align: top;
-    width: 200px;
-    text-align: left;
+  display: inline-block;
+  margin-right: 7px;
+  vertical-align: top;
+  width: 200px;
+  text-align: left;
+  &.social-login{
+    text-align: right;
+    span {
+      display: inline-block;
+      vertical-align: top;
+      margin: 4px;
+      width: 24px;
+      height: 24px;
+      .fa {
+        font-size: 28px;
+        vertical-align: top;
+        line-height: 28px; 
+        &.fa-facebook-square{
+          color: #1a3c8d;
+        }
+        &.fa-twitter-square{
+          color: #1b95e0;
+        }
+        &.fa-google-plus-square{
+          color: #dd4a40;
+        }
+        &.fa-linkedin-square{
+          color: #0274B3;
+        }
+      }
+    }
+  }
 }
 .comment-user-details .form-text {
     width: 100%;
@@ -3024,6 +3064,7 @@ footer .footer-top ul li a:hover{
     vertical-align: top;
 }
 .itg-comment{
+  padding: 10px;
   .comment-image{
     float: left;
     margin-right: 10px;
@@ -3037,13 +3078,13 @@ footer .footer-top ul li a:hover{
     font-weight: 600;
     padding-bottom: 5px;
   }
-  .comment-timestamp, a.reply{
+  .comment-timestamp, a.reply, a.comment-social-share{
     font-size: 12px;
     color: #989898;
     display: inline-block;
     vertical-align: middle;
   }
-  .comment-timestamp:after{
+  .comment-timestamp:after, a.reply{
     content: '|';
     display: inline-block;
     vertical-align: top;
@@ -3053,12 +3094,48 @@ footer .footer-top ul li a:hover{
     &:hover{
       color: #1a3c8d;
     }
+    &:after{
+      margin-right: 7px;
+    }
+  }
+  a.comment-social-share{
+    &:hover{
+      color: #1a3c8d;
+    }
   }
   .inner-comment {
     padding-left: 62px;
   }
 }
 /*other comment css end*/
+
+#content [id*="ugc-node-form"].ugc-custom-wrapper{
+  .form-field-name-field-user-email, 
+  .form-field-name-field-section{
+    float: left;
+    width: 48%;
+    label{float: none; display: block;}
+  }
+  select{max-width: 100%;}
+  .form-field-name-field-user-name,
+  .form-item-title,
+  .form-field-name-field-user-city,
+  .field-type-text-with-summary{
+    float: left; width: 52%; padding-right: 2%;
+    label{float: none; display: block;}
+  }
+  .field-type-text-with-summary{
+    .form-type-textarea > label + div{padding: 0;}
+    .form-textarea{height: 100px;}
+  }
+  .captcha-lable{width: auto; float: none;}
+  .captcha{padding-left: 52%;}
+  .form-actions{
+    display: inline-block; vertical-align: top; width: 100%; padding: 0; text-align: right;
+    .form-submit{padding: 10px 30px;}
+  }
+  span.error{padding-left: 0;}
+}
 
 
 /* CSS To Add Zoom Effect on Images */
@@ -3613,6 +3690,7 @@ footer .footer-top ul li a:hover{
                 .views-field-name{
                     padding-right: 75px;
                     font: 400 16px/20px Roboto;
+                    word-wrap: break-word;
                 }
                 .views-field-ops{
                     font: 400 14px/20px Roboto;
@@ -3858,34 +3936,7 @@ article.node-mega-review-critic{
     display: inline-block;
     vertical-align: top;
     width: 100%;
-    .movie-rating{
-        margin-top: 20px;
-      float: left;
-      width: 111px;
-      height: 60px;
-      padding: 20px 0;
-      position: relative;
-      background: url(../images/rating-grey.png) 0 20px no-repeat;
-      &:after{
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        background: url(../images/rating-red.png) 0 20px no-repeat;
-        height: 60px;
-        width: 0;
-      }
-    }
-    div[data-star-value="10%"]:after{width: 10px;}
-    div[data-star-value="20%"]:after{width: 22px;}
-    div[data-star-value="30%"]:after{width: 33px;}
-    div[data-star-value="40%"]:after{width: 46px;}
-    div[data-star-value="50%"]:after{width: 56px;}
-    div[data-star-value="60%"]:after{width: 68px;}
-    div[data-star-value="70%"]:after{width: 79px;}
-    div[data-star-value="80%"]:after{width: 90px;}
-    div[data-star-value="90%"]:after{width: 102px;}
-    div[data-star-value="100%"]:after{width: 111px;}
+    @include movie-rating;
     .social-info{
       float: left;   
       margin-top:20px;
@@ -4731,10 +4782,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             padding-left: 0;
             position: static;
             width: 100%;
-            height: 805px;
             > .cke{
               border: none;
             }
+            span.error{padding-left: 0; text-align: right; padding: 5px;}
           }
           .form-textarea{
             border: none;
@@ -4748,7 +4799,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             label{
               width: 115px;
               padding: 0 8px;
-              height: 200px;
+              height: 235px;
             }
             div.image-widget-data{
               float: none;
@@ -4757,7 +4808,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                 .form-text{
                   border: 1px solid #ddd;
                   height: 28px;
-                  padding: 5px;
+                  padding: 0 5px;
+                  line-height: 26px;
                   position: static;
                   width: 100%;
                 }
@@ -4884,7 +4936,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         .captcha{
           max-width: 100%;
           margin-left: 0;
-          border: 1px solid #e0e0e0;
+          .form-item-captcha-response{
+            margin-top: 10px !important;
+            label{width: 195px;}
+            .form-text{padding-left: 200px;}
+          }
         }
       }
       [id*="field-ugc-personalization-photo-add-more-wrapper"]{
@@ -4910,9 +4966,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             .user-pic{
               width: 50px;
               height: 50px;
+              margin-top: 20px;
             }
             .user-name{
-              font-size: 14px;
+              font-size: 15px;
               line-height: 18px;
             }
          } 
@@ -4924,7 +4981,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             span{
               padding: 0 3px;
               width: 36px;
-              dfn{font-size: 12px;}
+              dfn{font-size: 10px; margin-top: 20px;}
+              .fa{font-size: 17px;}
             }
          }
       }
@@ -4942,16 +5000,15 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       background-color: #e7e5e6;
       color: #4f4f4f;
       cursor: pointer;
-      font: 300 18px/40px Roboto;
       text-align: left;
       position: relative;
       .tab-text{
         display: block;
         color: #4f4f4f;
-        font: 300 18px/18px Roboto;
-        padding: 10px 8px;
+        font: 400 14px/18px Roboto;
+        padding: 8px 8px;
         background-color: #e7e5e6;
-        height: 40px;
+        height: 36px;
         
         &:before{
           display: inline-block;
@@ -4983,7 +5040,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         background-color: #828282;
         position: absolute;
         right: 15px;
-        width: 30px;
+        width: 25px;
         top: 0;
         bottom: 0;
         margin: auto 0;
@@ -4992,7 +5049,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           background-color: #828282;
           content: '';
           position: absolute;
-          width: 30px;
+          width: 25px;
           height: 3px;
           left: 0;
           top: -7px;
@@ -5001,7 +5058,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           background-color: #828282;
           content: '';
           position: absolute;
-          width: 30px;
+          width: 25px;
           height: 3px;
           left: 0;
           top: 7px;
@@ -5018,6 +5075,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         border-top: 1px solid #c6c6c6;
         a{
           padding: 10px 15px;
+          font-size: 14px;
+          font-weight: 400;
           &.active{
             background-color: #f6f6f7;
           }
@@ -5035,10 +5094,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         display: inline-block;
         vertical-align: top;
         margin-right: 2px;
+        max-width: 96px;
         a{
           padding: 10px;
           display: block;
-          background: #f8f8f8;
+          background: #fff;
           border-radius: 10px 10px 0 0;
         }
       }
@@ -5089,7 +5149,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           }
         }
         .form-type-slider{
-          min-width: 180px;
+          min-width: 160px;
           .sliderfield-display-values-field{
             font-size: 13px;
           }
@@ -5105,7 +5165,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     }
   }  
   .page-personalization-my-following #block-views-follow-tags-block, 
-  .page-personalization-my-following #block-views-follow-tags-block-1{width: 50%; float: left; padding: 50px 0 0;}
+  .page-personalization-my-following #block-views-follow-tags-block-1{width: 100%; float: left; padding: 50px 0 0;}
   #block-itg-personalization-user-my-point{
     .header-point{
       padding: 20px 0;
@@ -5217,13 +5277,19 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           font-size: 13px;
           position: absolute;
           left: 110px;
-          top: 80px;
+          bottom: 10px;
           width: 130px;
           img{display: none;}
           a{
             font: 400 13px/18px Roboto;
             color: #323232;
             pointer-events: none;
+          }
+          & + #edit-profile-pic-remove-button{
+            color: red;
+            background: none;
+            border: none;
+            margin-left: 10px;
           }
         }
       }
@@ -5331,7 +5397,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       }
     }
   }
-  
+  .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child{margin-left: 175px;}
 }
 @media all and(max-width: 767px){
   
@@ -5472,19 +5538,35 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   /* End of Quiz And Survey */
   
   .total-point-wrapper{
-    display: block;
-    margin-top: 20px;
-    .pregress-bar .pregress-bar-active{
-      max-width: 60%;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 15px;
+    max-width: 66%;
+    img{
+      width: 50px;
+      height: 50px;
     }
-    .pregress-bar span.current-badge{
-      left: 15px;
+    .total-point-value{
+      span{font-size: 24px; margin-top: 0; line-height: 18px;}
     }
-    .pregress-bar span.next-badge{
-      right: 15px;
+    .pregress-bar{
+      margin-top: 5px;
+      .pregress-bar-active{
+        max-width: 88%;
+        height: 2px;
+        &:before{
+          height: 2px;
+        }
+      }
+      span.current-badge, span.next-badge{font-size: 10px; line-height: 16px;}
+      span.current-badge{left: 0; top: 0; text-align: left;}
+      span.next-badge{right: 0; top: 0; text-align: right;}
+      span.current-badge small, 
+      span.next-badge small{margin-bottom: 0; font-size: 12px;}
     }
     .points-to-go{
-      padding-right: 15px;
+      padding-right: 0;
+      font-size: 10px;
     }
   }
   .quotes {
@@ -5518,6 +5600,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       max-width: 90px;
     }
   }
+  .personal-list > li .personal-details .personal-pic{height: auto;}
 }
 @media all and (max-width: 480px){
   .photos-videos-wrapper .movie-videos, 
@@ -5534,6 +5617,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     display: block;
     padding-right: 0;
   }
+  .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child{margin-left: 125px;}
 }
 @media all and (max-width: 360px){
   .cart-total-block .points-balance span:first-child{

@@ -736,6 +736,45 @@ function features_for_newsletter_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-newsletter-field_story_category'.
+  $field_instances['node-newsletter-field_story_category'] = array(
+    'bundle' => 'newsletter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 15,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_category',
+    'label' => 'Section',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'hs_taxonomy',
+      'settings' => array(),
+      'type' => 'taxonomy_hs',
+      'weight' => 12,
+    ),
+  );
+
   // Exported field_instance: 'node-newsletter-field_survey_start_date'.
   $field_instances['node-newsletter-field_survey_start_date'] = array(
     'bundle' => 'newsletter',
@@ -1159,6 +1198,7 @@ function features_for_newsletter_field_default_field_instances() {
   t('Please select website name.');
   t('Property (Website Name)');
   t('Schedule');
+  t('Section');
   t('Select Template');
   t('Subject Line');
   t('Thumbnail');

@@ -5,11 +5,12 @@
  */
 function itg_budget_predictor_menu() {
   $items = array();
-  $items['budget-predictor/%/%'] = array(
+  $items['budget/predictor/%'] = array(
     'page callback' => 'itg_budget_predictor_custom',
     'type' => MENU_CALLBACK,
-    'access arguments' => array('access content'),
+    'access arguments' => array('administer itg_term settings'),
   );
+  
   $items['ajax/budget-ranking/%'] = array(
     'page callback' => 'itg_budget_predictor_update_budget',
     'type' => MENU_CALLBACK,
@@ -69,7 +70,7 @@ function itg_budget_predictor_custom() {
   $user_id = $user->uid;
   $allowed_roles = array('Editor', 'Site Admin', 'administrator');
   $arg = arg();
-  $section_id = isset($arg[1]) ? $arg[1] : '';
+  $section_id = isset($arg[2]) ? $arg[2] : '';
   $budget_status = check_budget($section_id);
   $data = itg_budget_predictor_get_taxonomy();
   $settings = array();
@@ -94,6 +95,7 @@ function itg_budget_predictor_custom() {
   /* JS library  added to Cheaper dearer */
   $settings['basePath'] = $base_url;
   $settings['section_id'] = $section_id;
+  $settings['user_id'] = $user_id;
   if (count(array_intersect($user->roles, $allowed_roles)) > 0) {
     $data['admin_user'] = 1;
   }
@@ -142,6 +144,7 @@ function itg_budget_predictor_views_pre_render(&$view) {
  * @param array reference $form_state
  * Hiding taxonomy term description field
  */
+
 function itg_budget_predictor_form_taxonomy_form_term_alter(&$form, &$form_state) {
   if (is_array($form['#term']) && count($form['#term']) > 0) {
     if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'cheaper_dearer') {
@@ -161,6 +164,32 @@ function itg_budget_predictor_form_taxonomy_form_term_alter(&$form, &$form_state
       $form['relations']['#access'] = FALSE;
     }
   }
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_budget_predictor_block_info() {
+  $blocks = array();
+  $blocks['budget_pradictor'] = array(
+    'info' => t('Widget: Budget Predictor'),
+  );
+  return $blocks;
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_budget_predictor_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'budget_pradictor':
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_budget_predictor');
+      $data = itg_budget_predictor_custom();
+      $block['content'] = $data;
+      break;
+  }
+  return $block;
 }
 
 /**

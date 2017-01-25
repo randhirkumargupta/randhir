@@ -244,6 +244,19 @@
             success: function(data) {
 
                 var getbame = jQuery('#btn_name').val();
+                var original_img_id = jQuery('#orig_image_fiedlid').val();
+                var exist_original_id = parent.jQuery('#original_image_fids').val();
+                var is_solr = jQuery('#is_solr').val();
+
+                if (original_img_id != "" && is_solr != '1') {
+                    if (exist_original_id == "") {
+                        parent.jQuery('#original_image_fids').val(original_img_id);
+                    } else {
+                        original_img_id = exist_original_id + '#' + original_img_id
+                        parent.jQuery('#original_image_fids').val(original_img_id);
+                    }
+                }
+                parent.jQuery('#')
                 if (jQuery('#ckeditor_yes').val() == 1)
                 {
                     var imagename = jQuery('#imcurl').val();
@@ -285,20 +298,20 @@
                                     image_title = image_title.substr(0, image_title.lastIndexOf('.'));
                                 }
 
-                                var image_title = jQuery('#alt_text_image').val();
-                                var image_alttext = jQuery('#image_title_exta').val();
+                                var image_alttext = jQuery('#alt_text_image').val();
+                                var image_title = jQuery('#image_title_exta').val();
 
                                 setTimeout(function() {
-                                    if (image_title != "")
-                                    {
-                                        parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
-                                         parent.jQuery('[name="' + replaced + '[alt]"]').val(image_alttext);
-
-                                    }
                                     if (image_alttext != "")
                                     {
+                                        parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
+                                        parent.jQuery('[name="' + replaced + '[alt]"]').val(image_alttext);
+
+                                    }
+                                    if (image_title != "")
+                                    {
                                         parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
-                                         parent.jQuery('[name="' + replaced + '[title]"]').val(image_title);
+                                        parent.jQuery('[name="' + replaced + '[title]"]').val(image_title);
 
                                     }
 

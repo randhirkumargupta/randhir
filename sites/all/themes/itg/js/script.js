@@ -130,7 +130,7 @@
                 $(document).on('click', function () {
                     $('.globle-search').css('width', '0px');
                 });
-                $(document).on('tap', function () {
+                $(document).on('touchstart', function () {
                     $('.globle-search').css('width', '0px');
                 });
                 $('.search-icon, .globle-search').click(function (e) {
@@ -151,7 +151,7 @@
                 $(this).addClass('active').siblings().removeClass('active');
                 $(this).parent().parent().find(dataID).show().siblings('.tab-data').hide();
             });
-            $('.tab-buttons').on('click', 'span a', function (e) {
+            $('.tab-buttons').on('click', 'span a', function(e){
                 e.preventDefault();
             });
             // jQuery Code for tabbing End
@@ -392,6 +392,32 @@ jQuery(document).ready(function () {
             }
         ]
     });
+    
+    //jQuery code to set slider for story photo list
+    jQuery('.story-photo-list').slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        infinite: false,
+        variableWidth: true,
+        prevArrow: "<button class = 'slick-prev'><i class = 'fa fa-angle-left'></i></button>",
+        nextArrow: "<button class = 'slick-next'><i class = 'fa fa-angle-right'></i></button>",
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2,
+                    centerPadding: '10px'
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    centerPadding: '10px'
+                }
+            }
+        ]
+    });
 
     var arrayOne = [];
     jQuery('.factoids-slider li').each(function () {
@@ -552,18 +578,6 @@ jQuery(document).ready(function () {
     jQuery(document).on('click', '.all-menu', function (e) {
          e.stopPropagation();
     });
-    
-
-    var eventMenu = function () {
-        winWidth = jQuery(window).width();
-        if (winWidth < 1024) {
-            jQuery('#block-menu-menu-event-menu').prepend('<div><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></div>');
-            jQuery('#block-menu-menu-event-menu a.mobile-nav').click(function () {
-                jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
-            });
-        }
-    };
-    eventMenu();
 
     //social share animation effects   
     jQuery('.social-share ul').each(function () {
@@ -721,6 +735,26 @@ jQuery(document).ready(function () {
           el.closest('.personal-menu-tab-wrapper').find('.tab-text').attr('data-tab', get_class).text(get_text);
           el.parent().slideUp('fast');
         });
+        
+        // jQuery code for personalization saved item on mobile
+        jQuery('body').on('touchend', '.personal-action', function(){
+          jQuery(this).parent().parent().siblings().find('.personal-action').css('opacity', '0');
+          jQuery(this).css('opacity', '1');
+        });
+        
+        //event page navigation
+        jQuery('#block-menu-menu-event-menu a.mobile-nav').click(function() {
+            jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
+        });   
+        jQuery('.event-search-icon').click(function(){
+            jQuery('.event-search input').css('width','180px');
+        });        
+        jQuery(document).on('click touchstart', function () {             
+            jQuery('.event-search input').css('width', '0px');
+        });
+        jQuery('.event-search-icon, .event-search input').click(function (e) {
+            e.stopPropagation();
+        });        
     }
     
     //story page social share for mobile
@@ -730,17 +764,6 @@ jQuery(document).ready(function () {
         getclick.css({'display' : 'inline-block'});
     }, function(){
         getclick.css({'display' : 'none'});
-    });    
+    }); 
     
 });
-    
-
-  
-
-
-
-
-
-
-
-

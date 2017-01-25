@@ -17,9 +17,11 @@ function itg_budget_predictor_get_taxonomy() {
   global $user, $base_url;
   $user_id = $user->uid;
   $arg = arg();
-  $section_id = isset($arg[1]) ? $arg[1] : '';
+  $section_id = isset($arg[2]) ? $arg[2] : '';
   $cookies_id = $_COOKIE['COOKIES_IT_' . $section_id];
-  if ($user_id && $cookies_id) {
+  $exist_predictor = check_exist_predictor($user_id, $section_id);
+
+  if (empty($exist_predictor) && $user_id && $cookies_id) {
     update_user_by_cookies($user_id, $section_id, $cookies_id);
   }
 
@@ -119,7 +121,7 @@ function itg_budget_predictor_get_taxonomy() {
     $budget_data['column2'] = $column2;
     $budget_data['column3'] = $column3;
     $budget_data['column4'] = $column4;
-    $budget_data['actual_link'] = $base_url . '/budget-predictor/' . $section_id;
+    $budget_data['actual_link'] = $base_url . $_SERVER['REQUEST_URI'];
     $budget_data['exist'] = 1;
     $budget_data['file_names'] = $file_name;
 
@@ -165,7 +167,7 @@ function itg_budget_predictor_update_budget() {
   parse_str($_POST['sort1'], $sort1);
   parse_str($_POST['sort2'], $sort2);
   parse_str($_POST['sort3'], $sort3);
-  $cookies_id = $_POST['cookies_id'];
+  $cookies_id = ($_POST['cookies_id']) ? $_POST['cookies_id'] : 'static';
   if (!empty($sort1['entry'])) {
     //parse_str($_POST['sort4'], $sort4);
     foreach ($sort1['entry'] as $key => $value) {
@@ -481,9 +483,15 @@ function itg_budget_manage_list() {
   $build = array();
 
   $query = db_select('itg_manage_budget', 'm')->extend('PagerDefault');
-  $query->fields('m', array('id', 'budget_title', 'budget_description', 'budget_section', 'status'))
-      ->orderBy('id', 'DESC')
-      ->limit(10);
+  $query->fields('m', array('id', 'budget_title', 'budget_description', 'budget_section', 'budget_section', 'status'));
+
+  if (!empty($_GET['section_id'])) {
+    $query->condition('m.budget_section', $_GET['section_id']);
+  }
+  if (!empty($_GET['status'])) {
+    $query->condition('m.status', $_GET['status']);
+  }
+  $query->orderBy('id', 'DESC')->limit(10);
   # execute the query
   $results = $query->execute();
 
@@ -506,27 +514,30 @@ function itg_budget_manage_list() {
       $budget_description = $row->budget_description;
       $budget_section = taxonomy_term_load($row->budget_section)->name;
       $status = $row->status;
-      $action = l(t('Edit Budget'), 'manage-budget-predictor/edit/' . $budget_id, array('query' => array('destination' => 'manage-budget-list')));
+      $play_link = l(t('Final Play'), 'budget/predictor/' . $row->budget_section);
+      $action = l(t('Edit'), 'manage-budget-predictor/edit/' . $budget_id, array('query' => array('destination' => 'manage-budget-list')));
       $rows[] = array($i,
         $budget_title,
         $budget_description,
         $budget_section,
         $status,
-        $action
+        $action . " | " . $play_link,
       );
       $i++;
     }
-  }
+  } 
   $caption_table_edit = l(t('Add Budget'), 'manage-budget-predictor') . "&nbsp;&nbsp;";
   $caption_table_edit .= l(t('List Of Budget User'), 'budget-predictor-list');
   // Format and print out the table.
   $output = theme('table', array('header' => $header,
     'rows' => $rows,
+    'empty' => t('Empty List'),
     // table caption will be in $caption_edit_table
     'caption' => $caption_table_edit,
     'attributes' => array('class' => array('views-table'))));
 
   $build['content'] = array(
+    'itg_budget_predictor_search' => drupal_get_form('itg_budget_predictor_search_user_form'),
     'itg_budget_predictor_content' => array(
       '#markup' => $output,
     ),
@@ -539,6 +550,59 @@ function itg_budget_manage_list() {
   );
 
   return $build;
+}
+
+/**
+ * 
+ * @global string $base_url
+ * @param array $form
+ * @param array $form_state
+ * @return type
+ */
+function itg_budget_predictor_search_user_form($form, &$form_state) {
+  global $base_url;
+  $form = array();
+  $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+  $op = array("" => "-- Section --");
+  foreach ($tax as $key => $val) {
+    if (itg_category_manager_term_state($val->tid)) {
+      $op[$val->tid] = $val->name;
+    }
+  }
+
+  $status_arr = array("" => t("-- Select --"), '1' => t('Active'), '2' => t('In-Active'));
+
+  $form['#method'] = 'get';
+  $form['section_id'] = array(
+    '#type' => 'select',
+    '#title' => t('Select Section'),
+    '#options' => $op,
+    '#default_value' => isset($_GET['section_id']) ? $_GET['section_id'] : '',
+  );
+
+  $form['status'] = array(
+    '#type' => 'select',
+    '#title' => t('Status'),
+    '#options' => $status_arr,
+    '#default_value' => isset($_GET['status']) ? $_GET['status'] : '',
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
+
+  $url = $base_url . '/manage-budget-list';
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Reset'), $url, array(
+      'attributes' => array(
+        'class' => 'button custom-url-search'
+      )
+    )),
+    '#weight' => 9,
+    '#value' => t('Reset')
+  );
+  return $form;
 }
 
 /**
@@ -648,7 +712,6 @@ function itg_manage_budget() {
  */
 function itg_manage_budget_validate($form, &$form_state) {
   $budget_action = $form_state['values']['budget_action'];
-  //if (empty($budget_action)) {
   $budget_section = $form_state['values']['budget_section'];
   $query = db_select('itg_manage_budget', 'm');
   $query->condition('m.budget_section', $budget_section, '=');
@@ -661,7 +724,6 @@ function itg_manage_budget_validate($form, &$form_state) {
   if ($results->id) {
     form_set_error('field', t('Budget Predictor already exist.'));
   }
-  // }
 }
 
 /**
@@ -882,4 +944,20 @@ function update_user_by_cookies($user_id, $section_id, $cookies_id) {
       ->condition('cookies_id', $cookies_id, '=')
       ->condition('user_id', 0, '=')
       ->execute();
+}
+
+/**
+ * check existing user play predictor widget. 
+ * @param int $user_id
+ * @param int $section_id
+ * @param string $cookies_id
+ * @return int
+ */
+function check_exist_predictor($user_id, $section_id) {
+  return db_select('itg_budget_predictor')
+          ->fields(NULL, array('user_id'))
+          ->condition('user_id', $user_id, '=')
+          ->condition('section_id', $section_id)
+          ->countQuery()->execute()
+          ->fetchField();
 }

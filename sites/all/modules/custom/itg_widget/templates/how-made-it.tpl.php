@@ -1,15 +1,15 @@
 <?php if (!empty($data)) : global $base_url; ?>
   <div class="how-made-it">
     <ul>
-      <?php foreach ($data as $key => $entity) { 
-          ?>
+      <?php foreach ($data as $key => $entity) {
+        ?>
         <li class="" id="dont-miss-<?php print $key ?>">
           <?php if (!empty($entity['esi_file_uri'])) { ?>
             <span class="dm-pic">
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$entity['nid']}") ?>">
                 <?php $file_uri = file_create_url($entity['esi_file_uri']); ?>
-                  <img src="<?php print $file_uri; ?>" />
-                  </a>
+                <img src="<?php print $file_uri; ?>" />
+              </a>
             </span>
             <?php
           }
@@ -17,33 +17,39 @@
             ?>
             <span class="dm-pic">
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$entity['nid']}") ?>">
-                 <img height="66" width="88" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                <img height="66" width="88" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" />
               </a>
             </span>
           <?php } ?>
 
           <span class="dm-detail">
 
-              <?php if (!empty($entity['custom_label'])) : ?>
+            <?php if (!empty($entity['custom_label'])) : ?>
               <p class="title"><?php print $entity['custom_label']; ?></p>
             <?php endif; ?>
 
-          <?php if (!empty($entity['title'])) : ?> 
-             
-              <p><?php 
-                $desc=$entity['title'];
-                     echo l(mb_strimwidth($desc, 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$entity['nid']}")) ?>
-                  </p>           
+            <?php if (!empty($entity['title'])) : ?> 
+
+              <p>
+                <?php
+                $desc = $entity['title'];
+                if (function_exists('itg_common_get_smiley_title')) {
+                  echo l(itg_common_get_smiley_title($entity['nid'], 0, 70), "node/" . $entity['nid'], array('html' => TRUE));
+                }
+                else {
+                  echo l(mb_strimwidth($desc, 0, 70, ".."), "node/" . $entity['nid']);
+                }
+                ?>
+              </p>           
             <?php endif; ?>
-             
 
           </span>
-            <span class="more"><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$entity['nid']}") ?>">More[+]</a></span>
+          <span class="more"><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$entity['nid']}") ?>">More[+]</a></span>
         </li>
       <?php } ?>
     </ul>
   </div>
 <?php else : ?>
   <span class="no-result-found"><?php print t("Content Not Found") ?></span>
-  
+
 <?php endif; ?>

@@ -1,7 +1,7 @@
 name = feature_for_searchimage
 core = 7.x
 package = Features
-version = 7.x-1.0-beta1
+version = 7.x-1.0-beta4
 dependencies[] = apachesolr_multisitesearch
 dependencies[] = views
 features[ctools][] = views:views_default:3.0

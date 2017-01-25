@@ -80,6 +80,9 @@ if ($theme != 'itgadmin') {
         <?php if ($title): ?>
           <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
         <?php endif; ?>
+          <div class="front-end-breadcrumb">
+            <?php print render($page['front_end_breadcrumb']);?>
+          </div>
         <?php print render($title_suffix); ?>
         <?php print $messages; ?>
         <?php print render($tabs); ?>
@@ -251,8 +254,8 @@ if ($theme != 'itgadmin') {
                                         </div>
                                     <?php } ?>  
 
-                                    <div class="data-holder itg-newaletter" id="itg-block-6"><?php// $block = module_invoke('itg_newsletter', 'block_view', 'register_for_more_updates');
-  //print render($block['content']); ?></div>
+                                    <div class="data-holder itg-newaletter" id="itg-block-6"><?php $block = module_invoke('itg_newsletter', 'block_view', 'register_for_more_updates');
+  print render($block['content']); ?></div>
                                 </div>             
                             </div>               
                         </div>

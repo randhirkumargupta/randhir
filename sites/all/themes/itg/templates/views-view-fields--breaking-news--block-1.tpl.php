@@ -44,11 +44,13 @@
   <div class="breakingnew-home">
       <div class="title">Breaking</div>    
       <div class="new-detail">  
-          <div class="marquee">
-          <?php print $field->content; ?>        
+          <div class="marquee-container">
+            <div class="marquee-child">
+                <?php print $field->content; ?>        
+            </div>
           </div>                      
           <div class="live-tv-link">
-              <?php $live_tv_img = '<img src="'. $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/imgpsh_fullsize.png" alt="LiveTV" title="LiveTV">'; ?>
+              <?php $live_tv_img = '<img src="'. $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/imgpsh_fullsize.png" alt="LiveTV" title="LiveTV" alt="">'; ?>
               <?php print l($live_tv_img, 'livetv', array('html' => TRUE, 'attributes' => array('class' => array('live-tv-icon')))); ?>              
               <a href="javascript:void(0)" class="breaking-new-close">X</a>            
           </div>
@@ -64,3 +66,15 @@
   </div>  
   <?php print $field->wrapper_suffix; ?>
 <?php endforeach; ?>
+
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery('.marquee-child').liMarquee({        
+            direction: 'left', 
+            scrolldelay: 0, 
+            scrollamount: 50,
+            circular: true, 
+            hoverstop: true
+        });
+    });
+</script>

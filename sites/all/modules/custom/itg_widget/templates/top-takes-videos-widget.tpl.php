@@ -9,15 +9,15 @@
         <li id="top-takes-<?php echo $video_data['nid'] ?>" class="top-takes-video top-takes-list top-takes-<?php echo $video_key ?>"">
             <?php if (!empty($video_data['esi_file_uri'])) { ?>
             <a href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $video_data['nid']); ?>" class="pic">         
-      <?php $file_uri = file_create_url($video_data['esi_file_uri']); ?>
-              <img src="<?php print $file_uri; ?>" />
+              <?php $extra_large_image_url = image_style_url("widget_very_small", $video_data['esi_file_uri']); ?>
+              <img src="<?php print $extra_large_image_url; ?>" />
             </a>
             <?php
           }
           else {
             ?>
             <a href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $video_data['nid']); ?>" class="pic">
-              <img height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+              <img height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" />
             </a>
           <?php } ?>
             <?php if (!empty($video_data['title'])) : ?>

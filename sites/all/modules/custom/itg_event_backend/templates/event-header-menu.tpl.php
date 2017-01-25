@@ -32,7 +32,16 @@ if (!empty($node) && ($node->type == 'event_backend')) {//shravan
 
 <div id="block-menu-menu-event-menu" class="container event-header-menu-container">
   <div class="row">
-    <div class="col-md-8" style="color:<?php print $menu_font_color; ?>">
+    <div class="col-md-8 col-sm-8" style="color:<?php print $menu_font_color; ?>">
+        <div class="wrap-mobile-social">
+            <a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a>
+            <div class="social-share">
+                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                <a href="#" class="event-search-icon"><i class="fa fa-search" aria-hidden="true"></i></a>
+                <div class="event-search"><input type="text" placeholder="Search" value=""></div>
+            </div>                           
+        </div>
       <ul class="menu">
           <?php 
             if ($event_config_home) {
@@ -68,7 +77,7 @@ if (!empty($node) && ($node->type == 'event_backend')) {//shravan
           ?>
       </ul>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 col-sm-4">
       <div class="event-detail" style="text-align: center; color:#FFF">
         <span class="event-str-date"><?php print $event_start_date; ?> </span>
         <span class="event-vanue-detail-place" ><?php print $event_location; ?></span>                

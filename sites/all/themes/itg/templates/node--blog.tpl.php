@@ -80,7 +80,7 @@
  */
 $config_name = trim($global_comment_last_record[0]->config_name);
 ?>
-<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+<div id="node-<?php print $node->nid; ?>" class="blog-detail-page <?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
   <?php print $user_picture; ?>
 
@@ -93,7 +93,7 @@ $config_name = trim($global_comment_last_record[0]->config_name);
   <?php if (!empty($node->field_story_extra_large_image['und'][0]['uri'])) : ?>
     <?php
     $path = $node->field_story_extra_large_image['und'][0]['uri'];
-    $src = image_style_url('photgallery_landing_slider_753x543', $path);
+    $src = image_style_url('blog_landing_image', $path);
     $alt = $node->field_story_extra_large_image['und'][0]['alt'];
     print "<img src='" . $src . "'>";
     if (!empty($alt)) {
