@@ -247,6 +247,24 @@ function itg_last_node_published_user($uid, $publish_id) {
     return $last_publish_record_info;
 }
 
+
+/**
+ * Get Last node published by user using workflow.
+ * @param int $uid
+ * @param int $publish_id
+ * @return array $last_publish_record_info
+ */
+function itg_last_node_published_on($nid, $publish_id) {
+    $query = db_select('workbench_moderation_node_history', 'w')
+            ->fields('w')
+            ->condition('nid', $nid, '=')
+            ->condition('state', 'published', '=')
+            ->orderBy('stamp', 'ASC')//ORDER BY created
+            ->range(0, 1);
+      
+    $result = $query->execute()->fetchall();
+    return $result;
+}
 /**
  * Get Role create permission.
  * @param int $rid
