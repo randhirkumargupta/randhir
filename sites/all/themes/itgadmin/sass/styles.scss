@@ -9904,3 +9904,15 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     right: 140px;
   }
 }
+.view-clients-details{
+  .views-submit-button{
+    #custom-expire-type{
+      float: left;
+      width: 140px;
+    }
+    #edit-submit-clients-details{
+      float: right; 
+      margin: 28px 0 0 10px;
+    }
+  }
+}

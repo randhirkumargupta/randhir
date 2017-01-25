@@ -109,6 +109,9 @@ if (!empty($device[0])) {
               <?php if ($title): ?>
                 <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
               <?php endif; ?>
+                <div class="front-end-breadcrumb">
+                <?php print render($page['front_end_breadcrumb']);?>
+                </div>
               <?php print render($title_suffix); ?>
               <?php print $messages; ?>
               <?php print render($tabs); ?>
