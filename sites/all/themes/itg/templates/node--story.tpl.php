@@ -554,7 +554,7 @@ if (!empty($content)):
                         <div class="story-tech-chunk">
                 <?php if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
                               <span class="tech-rating">
-                  <?php print $node->field_story_technology_rating[LANGUAGE_NONE][0]['value']; ?>
+                  <?php echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10'; ?>
                               </span>
                 <?php } ?>
                 <?php print $node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value']; ?>
