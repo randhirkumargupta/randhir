@@ -2409,7 +2409,7 @@ footer{
                 }
             }   
         }
-    }       
+    } 
 }
 .buzz-feedback{    
     @include calculate-width(1);
@@ -6023,6 +6023,7 @@ h1.category-heading{
     .video-list{
         @include pos(relative);
         margin-bottom:20px;
+        max-width: 154px;
         .field-content{
              border: 7px solid #e9e9e9; 
             &:before{
@@ -6261,6 +6262,9 @@ h1.category-heading{
         span{
             color: #ef3c24;
         }
+        ul{
+            list-style-position: inside;
+        }
     }
 }
 #block-views-program-schedule-block-7{
@@ -6336,6 +6340,9 @@ h1.category-heading{
                     font-weight: 900;
                     font-size: 16px;
                     border-radius: 3px;                   
+                }
+                i{
+                    font-style: normal;
                 }
                 &.active{
                     background: #fff !important;   

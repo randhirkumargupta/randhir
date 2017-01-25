@@ -7648,6 +7648,7 @@ h1.category-heading {
 #block-views-event-associate-video-block .video-list {
   position: relative;
   margin-bottom: 20px;
+  max-width: 154px;
 }
 #block-views-event-associate-video-block .video-list .field-content {
   border: 7px solid #e9e9e9;
@@ -7896,6 +7897,9 @@ h1.category-heading {
 #block-itg-event-backend-event-registration .tc-txt span {
   color: #ef3c24;
 }
+#block-itg-event-backend-event-registration .tc-txt ul {
+  list-style-position: inside;
+}
 
 #block-views-program-schedule-block-7 {
   font-weight: 600;
@@ -7995,6 +7999,9 @@ h1.category-heading {
   font-weight: 900;
   font-size: 16px;
   border-radius: 3px;
+}
+#block-itg-event-backend-post-event-block .top-tab ul li i {
+  font-style: normal;
 }
 #block-itg-event-backend-post-event-block .top-tab ul li.active {
   background: #fff !important;
