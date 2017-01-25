@@ -749,7 +749,7 @@ jQuery(document).ready(function () {
         jQuery('.event-search-icon').click(function(){
             jQuery('.event-search input').css('width','180px');
         });        
-        jQuery(document).on('click touchstart', function () {
+        jQuery(document).on('click touchstart', function () {             
             jQuery('.event-search input').css('width', '0px');
         });
         jQuery('.event-search-icon, .event-search input').click(function (e) {

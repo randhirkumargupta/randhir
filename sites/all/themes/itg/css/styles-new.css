@@ -431,21 +431,21 @@ input[type="file"], input[type="submit"], input[type="text"] {
   right: 0;
 }
 
-.view-photo-list-of-category .view-content .photo-list, .view-podcasts-listing .view-content .photo-list {
-  display: none;
+.view-photo-list-of-category .view-content .photo-list, .view-podcasts-listing.podcast-detail-page .view-content .photo-list {
+  list-style-type: none;
   margin: 0 -15px;
   list-style: none;
   overflow: hidden;
 }
-.view-photo-list-of-category .view-content .photo-list li, .view-podcasts-listing .view-content .photo-list li {
+.view-photo-list-of-category .view-content .photo-list li, .view-podcasts-listing.podcast-detail-page .view-content .photo-list li {
   padding: 15px 15px;
   float: left;
 }
-.view-photo-list-of-category .view-content .photo-list li .tile figure, .view-podcasts-listing .view-content .photo-list li .tile figure {
+.view-photo-list-of-category .view-content .photo-list li .tile figure, .view-podcasts-listing.podcast-detail-page .view-content .photo-list li .tile figure {
   overflow: hidden;
   position: relative;
 }
-.view-photo-list-of-category .view-content .photo-list li .tile figure figcaption, .view-podcasts-listing .view-content .photo-list li .tile figure figcaption {
+.view-photo-list-of-category .view-content .photo-list li .tile figure figcaption, .view-podcasts-listing.podcast-detail-page .view-content .photo-list li .tile figure figcaption {
   bottom: 0;
   left: 0;
   position: absolute;
@@ -455,22 +455,22 @@ input[type="file"], input[type="submit"], input[type="text"] {
   font-size: 12px;
   font-family: Roboto;
 }
-.view-photo-list-of-category .view-content .photo-list li .tile figure figcaption .fa, .view-podcasts-listing .view-content .photo-list li .tile figure figcaption .fa {
+.view-photo-list-of-category .view-content .photo-list li .tile figure figcaption .fa, .view-podcasts-listing.podcast-detail-page .view-content .photo-list li .tile figure figcaption .fa {
   font-size: 14px;
   margin-right: 5px;
 }
-.view-photo-list-of-category .view-content .photo-list li .tile .posted-on, .view-podcasts-listing .view-content .photo-list li .tile .posted-on {
+.view-photo-list-of-category .view-content .photo-list li .tile .posted-on, .view-podcasts-listing.podcast-detail-page .view-content .photo-list li .tile .posted-on {
   display: block;
   font-size: 12px;
   color: #b1b1b1;
   padding: 8px 0 5px;
   font-family: "Roboto Slab";
 }
-.view-photo-list-of-category .view-content .photo-list li .tile a, .view-podcasts-listing .view-content .photo-list li .tile a {
+.view-photo-list-of-category .view-content .photo-list li .tile a, .view-podcasts-listing.podcast-detail-page .view-content .photo-list li .tile a {
   color: #494949;
   font-family: "Roboto Slab";
 }
-.view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-podcasts-listing .view-content .photo-list li:nth-child(4n+1) {
+.view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-podcasts-listing.podcast-detail-page .view-content .photo-list li:nth-child(4n+1) {
   clear: left;
 }
 
