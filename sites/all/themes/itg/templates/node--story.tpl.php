@@ -387,7 +387,7 @@ if (!empty($content)):
                                         $cast_ref_id = $node->field_mega_review_cast[LANGUAGE_NONE];
                                         $count = sizeof($cast_ref_id);
                                         for ($i = 0; $i < $count; $i++) {
-                                          $entity_obj = entity_load('node', array($cast_ref_id[$i]['value']));
+                                          $entity_obj = entity_load('node', array($cast_ref_id[$i]['target_id']));
                                           $cast = $entity_obj[$cast_ref_id]->title;
                                           print $cast;
                                           if ($i < ($count - 1)) {
