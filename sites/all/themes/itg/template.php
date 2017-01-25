@@ -154,18 +154,6 @@ function itg_preprocess_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__event_domain';
   }
 
-
-  // Code started for adding header , body start , body close for ads module
-  $ads_code = get_header_body_start_end_code();
-  foreach ($ads_code as $ads_key => $ads_chunk) {
-    $code = implode(' ', $ads_chunk);
-    $script_code = array(
-      '#type' => 'markup',
-      '#markup' => $code,
-    );
-    drupal_add_html_head($script_code, $ads_key);
-  }
-  // Code ends for adding header, body start, body close for ads module
 }
 
 /**
@@ -192,4 +180,23 @@ function itg_breadcrumb($variables) {
     }
   }
   return $crumbs;
+}
+
+
+/**
+ * {@inheritdoc}
+ */
+
+function itg_preprocess_html($param) {
+  // Code started for adding header , body start , body close for ads module
+  $ads_code = get_header_body_start_end_code();
+  foreach ($ads_code as $ads_key => $ads_chunk) {
+    $code = implode(' ', $ads_chunk);
+    $script_code = array(
+      '#type' => 'markup',
+      '#markup' => $code,
+    );
+    drupal_add_html_head($script_code, $ads_key);
+  }
+  // Code ends for adding header, body start, body close for ads module
 }
