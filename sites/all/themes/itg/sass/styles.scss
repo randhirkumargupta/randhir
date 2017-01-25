@@ -10041,3 +10041,61 @@ h1.about-us-heading{
     }   
 }
 /*css end related-podcast-block*/
+span.smilies-title {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* css for story-photo-list starts here */
+.story-photo-list-wrapper{
+    @include sidebar-heading;
+    .story-photo-list-heading{
+        display: block;
+        &:before{
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+        span{
+            padding: 20px 20px 20px 0;
+        }
+    }
+    .story-photo-list-item{
+        p{
+                line-height: 18px;
+                padding: 5px 0;
+        }
+        &.slick-slide{
+            padding: 0 11px;
+            width: 192px;
+        }
+    }
+    .slick-arrow{
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        z-index: 999;
+        border: none;
+        background-color: #000;
+        top: 45px;
+        cursor: pointer;
+        opacity: .7;
+        &.slick-disabled{
+            opacity: .3;
+        }
+        .fa{
+            font-size: 42px;
+            color: #fff;
+        }
+    }
+    .slick-prev{
+        left: -10px;
+    }
+    .slick-next{
+        right: -10px;
+    }
+}
+/* css for story-photo-list ends here */
