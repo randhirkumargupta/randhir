@@ -2854,7 +2854,7 @@ h1.category-heading{
                 padding: 0 10px;
             }
         }
-.view-category-wise-content-list, .view-blog-listing, .view-podcasts-listing{    
+.view-category-wise-content-list, .view-blog-listing, .page-podcasts-listing .view-podcasts-listing{    
     @include listing-with-image(catagory-listing,left,10px,pic,detail);
     .catagory-listing{
         padding: 20px 0;
@@ -4081,7 +4081,7 @@ h1.category-heading{
 /*video and photo rolling slider end*/
 
 /*CCS start Photo landing Page*/
-#block-views-photo-list-of-category-block-2, .view-photo-list-of-category, .view-podcasts-listing{
+#block-views-photo-list-of-category-block-2, .view-photo-list-of-category, .view-podcasts-listing.podcast-detail-page{
     @include sidebar-heading;
     h3{
         display: block;
@@ -9953,7 +9953,7 @@ h1.about-us-heading{
 
 
 /*css start Podcast page*/
-.view-podcasts-listing{
+.page-podcasts-listing .view-podcasts-listing{
     .podcast-left{
         @include pos(relative);
         span{
