@@ -3230,6 +3230,18 @@ footer .footer-top ul li a:hover {
   padding-left: 0;
 }
 
+.region-front-end-breadcrumb {
+  color: #a1a1a1;
+  margin-bottom: 5px;
+  font: 400 14px/18px Roboto;
+}
+.region-front-end-breadcrumb a {
+  color: #a1a1a1;
+}
+.region-front-end-breadcrumb a:hover {
+  color: #1a3c8d;
+}
+
 /* CSS To Add Zoom Effect on Images */
 @media all and (min-width: 1025px) {
   .zoom-image, #block-itg-front-end-common-related-photo-block #related-photo ul li a,
@@ -3762,16 +3774,20 @@ footer .footer-top ul li a:hover {
 }
 .page-personalization-my-following #block-views-follow-tags-block,
 .page-personalization-my-following #block-views-follow-tags-block-1 {
+  background-color: #f2f2f2;
+  margin: 20px 10px 0;
   display: inline-block;
   vertical-align: top;
   width: 400px;
-  padding: 50px 0;
+  padding: 15px;
 }
 .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row,
 .page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row {
   padding: 10px;
   text-align: left;
   border: 1px solid #d9d9d9;
+  background-color: #fff;
+  transition: all 300ms;
   position: relative;
   margin: 15px;
   border-radius: 5px;
@@ -5443,7 +5459,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .page-personalization-my-following #block-views-follow-tags-block-1 {
     width: 100%;
     float: left;
-    padding: 50px 0 0;
+    margin: 20px 0 0;
+    padding: 15px 0;
   }
 
   #block-itg-personalization-user-my-point .header-point {
