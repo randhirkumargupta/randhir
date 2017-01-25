@@ -1,0 +1,215 @@
+<?php
+
+/**
+ * @file
+ * ITG Coupons module.
+ *
+ * Provides customizations and functions for Coupons .
+ */
+
+/**
+ * Implements hook_form_alter().
+ * @param array $form
+ * @param array $form_state
+ * @param string $form_id
+ */
+function itg_coupon_form_alter(&$form, &$form_state, $form_id) {
+
+  switch ($form_id) {
+
+    case 'coupon_node_form':
+
+      unset($form['actions']['preview_changes']);
+      $form['#validate'][] = 'itg_coupon_custom_validate';
+      $form['actions']['cancel'] = array(
+          '#markup' => l(t('Cancel'), 'manage-coupon', array('attributes' => array('class' => 'button'))),
+          '#weight' => 20,
+      );
+
+      // For third party coupons
+      $form['field_coupon_third_party_coupon']['und']['#states'] = array(
+          'visible' => array(
+              ':input[name="field_coupon_type[und]"]' => array('value' => 'upload_third_party_coupon')
+      ));
+
+
+      // Email / Mobile / Login specific Promo Code
+
+      $form['field_coupon_email']['und'][0]['value']['#states'] = array(
+          'visible' => array(
+              ':input[name="field_coupon_type[und]"]' => array('value' => 'email_mobile_login_specific_promocode')
+      ));
+
+
+      $form['field_coupon_mobile']['und'][0]['value']['#states'] = array(
+          'visible' => array(
+              ':input[name="field_coupon_type[und]"]' => array('value' => 'email_mobile_login_specific_promocode')
+      ));
+
+
+      // Bank Specific Coupons
+
+      $form['field_coupon_bank_type']['und']['#states'] = array(
+          'visible' => array(
+              ':input[name="field_coupon_type[und]"]' => array('value' => 'bank_specific_coupon')
+      ));
+
+      // Payment mode specific coupons
+
+      $form['field_coupon_gateway_type']['und']['#states'] = array(
+          'visible' => array(
+              ':input[name="field_coupon_type[und]"]' => array('value' => 'payment_mode_specific_coupan')
+      ));
+
+
+
+      // Code start for discout type
+      $form['field_coupon_discount_type']['und']['#states'] = array(
+          'visible' => array(
+              array(
+                  ':input[name="field_coupon_type[und]"]' => array(
+                      array("value" => 'coupan_dc'),
+                      array("value" => 'payment_mode_specific_coupan'),
+                      array("value" => 'bank_specific_coupon'),
+                      array("value" => 'email_mobile_login_specific_promocode'),
+                      array("value" => 'upload_third_party_coupon'),
+                  ),
+              ),
+          ),
+      );
+
+
+      // Code end for discount type 
+      // 
+      // Code start for discounted value
+
+      $form['field_coupon_discounted_value']['und']['#states'] = array(
+          'visible' => array(
+              array(
+                  ':input[name="field_coupon_type[und]"]' => array(
+                      array("value" => 'coupan_dc'),
+                      array("value" => 'payment_mode_specific_coupan'),
+                      array("value" => 'bank_specific_coupon'),
+                      array("value" => 'email_mobile_login_specific_promocode'),
+                      array("value" => 'upload_third_party_coupon'),
+                  ),
+              ),
+          ),
+      );
+
+      // Code end for discounted value
+      // Code started for Allow minimum cart amount 
+
+
+      $form['field_coupon_allow_min_cart_amt']['und']['#states'] = array(
+          'visible' => array(
+              array(
+                  ':input[name="field_coupon_type[und]"]' => array(
+                      array("value" => 'coupan_dc'),
+                      array("value" => 'payment_mode_specific_coupan'),
+                      array("value" => 'bank_specific_coupon'),
+                      array("value" => 'email_mobile_login_specific_promocode'),
+                      array("value" => 'upload_third_party_coupon'),
+                  ),
+              ),
+          ),
+      );
+
+      // Code end for the Allow minimum cart amount 
+      // Start code for discounted value 
+
+      $form['field_coupon_discounted_value']['und'][0]['value']['#states'] = array(
+          'visible' => array(
+              array(
+                  ':input[name="field_coupon_type[und]"]' => array(
+                      array("value" => 'coupan_dc'),
+                      array("value" => 'payment_mode_specific_coupan'),
+                      array("value" => 'bank_specific_coupon'),
+                      array("value" => 'email_mobile_login_specific_promocode'),
+                      array("value" => 'upload_third_party_coupon'),
+                  ),
+              ),
+          ),
+      );
+
+      // End code for discounted  value   
+      // Code started for Minimum cart amount 
+
+      $form['field_coupon_minimum_cart_amount']['und'][0]['value']['#states'] = array(
+          'visible' => array(
+              array(
+                  ':input[name="field_coupon_type[und]"]' => array(
+                      array("value" => 'coupan_dc'),
+                      array("value" => 'free_product'),
+                      array("value" => 'payment_mode_specific_coupan'),
+                      array("value" => 'bank_specific_coupon'),
+                      array("value" => 'email_mobile_login_specific_promocode'),
+                      array("value" => 'upload_third_party_coupon'),
+                  ),
+              ),
+          ),
+      );
+
+
+
+      // Code end for Minimum cart amount
+// Code started for Coupon uses limit
+      $form['field_coupon_uses_limit']['und'][0]['value']['#states'] = array(
+          'visible' => array(
+              array(
+                  ':input[name="field_coupon_type[und]"]' => array(
+                      array("value" => 'coupan_dc'),
+                      array("value" => 'free_product'),
+                      array("value" => 'payment_mode_specific_coupan'),
+                      array("value" => 'bank_specific_coupon'),
+                      array("value" => 'email_mobile_login_specific_promocode'),
+                      array("value" => 'upload_third_party_coupon'),
+                  ),
+              ),
+          ),
+      );
+      // Code end for Coupon uses limit
+      // Code started for Coupon current uses
+      $form['field_coupon_current_uses']['und'][0]['value']['#states'] = array(
+          'visible' => array(
+              array(
+                  ':input[name="field_coupon_type[und]"]' => array(
+                      array("value" => 'coupan_dc'),
+                      array("value" => 'free_product'),
+                      array("value" => 'payment_mode_specific_coupan'),
+                      array("value" => 'bank_specific_coupon'),
+                      array("value" => 'email_mobile_login_specific_promocode'),
+                      array("value" => 'upload_third_party_coupon'),
+                  ),
+              ),
+          ),
+      );
+
+
+      // Code end for Coupon current uses
+
+
+
+      $form['actions']['submit']['#submit'][] = 'itg_coupon_custom_submit';
+
+      break;
+  }
+}
+
+/**
+ * Implements custom submit for coupons form.
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_coupon_custom_submit($form, &$form_state) {
+  
+}
+
+/**
+ * Implements function for custom validate.
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_coupon_custom_validate($form, &$form_state) {
+  
+}
