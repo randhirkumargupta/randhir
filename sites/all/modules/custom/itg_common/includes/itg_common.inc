@@ -478,3 +478,25 @@ function itg_common_only_text_string($str) {
   
   return $data;
 }
+
+
+/**
+ * Implements 'itg_common_get_latest_byline'.
+ * @param int $nid
+ * @param string $status
+ */
+function itg_common_get_latest_byline($nid, $status) {
+  $query = db_select('itg_multi_byline_info', 's');
+  $query->fields('s', array('byline_id'))
+        ->condition('s.nid', $nid, '=')
+        ->condition('s.publish_status', $status, '=');
+  $query->orderBy("byline_weight", "ASC");
+  $query->range(0,1);
+  $result = $query->execute();
+  $byline_id = $result->fetchField();
+  if($byline_id) {
+    return $byline_id; 
+  } else {
+    return FALSE;
+  }
+}
