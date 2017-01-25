@@ -2909,9 +2909,17 @@ div.node{
             }
           }
           #{$social}-img-remove-button {
-            position: absolute;
-            top: 0;
+            background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+            border: medium none;
+            box-shadow: none;
+            color: red;
+            height: auto;
             left: 200px;
+            padding: 0;
+            position: absolute;
+            line-height: 18px;
+            text-transform: capitalize;
+            top: 0;
             &+.ajax-progress-throbber{
               display: none;
             }
@@ -9914,5 +9922,11 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       float: right; 
       margin: 28px 0 0 10px;
     }
+  }
+}
+.itg-smi{
+  .data-popup-link{
+    @extend .btn-submit;
+    @extend .btn-small;
   }
 }
