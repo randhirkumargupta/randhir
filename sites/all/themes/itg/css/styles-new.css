@@ -5235,9 +5235,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .page-personalization .personalized-wrapper .personalized-user-area .personalized-user .user-pic {
     width: 50px;
     height: 50px;
+    margin-top: 20px;
   }
   .page-personalization .personalized-wrapper .personalized-user-area .personalized-user .user-name {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 18px;
   }
   .page-personalization .personalized-wrapper .personalized-user-area .personalized-user-info {
@@ -5251,7 +5252,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     width: 36px;
   }
   .page-personalization .personalized-wrapper .personalized-user-area .personalized-user-info span dfn {
-    font-size: 12px;
+    font-size: 10px;
+    margin-top: 20px;
+  }
+  .page-personalization .personalized-wrapper .personalized-user-area .personalized-user-info span .fa {
+    font-size: 17px;
   }
   .page-personalization .personalized-wrapper .personalized-user-info span {
     padding: 0 12px;
@@ -5267,17 +5272,16 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     background-color: #e7e5e6;
     color: #4f4f4f;
     cursor: pointer;
-    font: 300 18px/40px Roboto;
     text-align: left;
     position: relative;
   }
   .block-itg-personalization .personal-menu-tab-mobile .tab-text {
     display: block;
     color: #4f4f4f;
-    font: 300 18px/18px Roboto;
-    padding: 10px 8px;
+    font: 400 14px/18px Roboto;
+    padding: 8px 8px;
     background-color: #e7e5e6;
-    height: 40px;
+    height: 36px;
   }
   .block-itg-personalization .personal-menu-tab-mobile .tab-text:before {
     display: inline-block;
@@ -5307,7 +5311,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     background-color: #828282;
     position: absolute;
     right: 15px;
-    width: 30px;
+    width: 25px;
     top: 0;
     bottom: 0;
     margin: auto 0;
@@ -5317,7 +5321,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     background-color: #828282;
     content: '';
     position: absolute;
-    width: 30px;
+    width: 25px;
     height: 3px;
     left: 0;
     top: -7px;
@@ -5326,7 +5330,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     background-color: #828282;
     content: '';
     position: absolute;
-    width: 30px;
+    width: 25px;
     height: 3px;
     left: 0;
     top: 7px;
@@ -5343,6 +5347,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
   .block-itg-personalization .personal-menu-tab li a {
     padding: 10px 15px;
+    font-size: 14px;
+    font-weight: 400;
   }
   .block-itg-personalization .personal-menu-tab li a.active {
     background-color: #f6f6f7;
@@ -5759,7 +5765,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .total-point-wrapper {
     display: inline-block;
     vertical-align: top;
-    margin-top: 20px;
+    margin-top: 15px;
     max-width: 66%;
   }
   .total-point-wrapper img {
@@ -5767,13 +5773,23 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     height: 50px;
   }
   .total-point-wrapper .total-point-value span {
-    font-size: 32px;
+    font-size: 24px;
+    margin-top: 0;
+    line-height: 18px;
   }
   .total-point-wrapper .pregress-bar {
-    margin-top: 10px;
+    margin-top: 5px;
   }
   .total-point-wrapper .pregress-bar .pregress-bar-active {
-    max-width: 80%;
+    max-width: 88%;
+    height: 2px;
+  }
+  .total-point-wrapper .pregress-bar .pregress-bar-active:before {
+    height: 2px;
+  }
+  .total-point-wrapper .pregress-bar span.current-badge, .total-point-wrapper .pregress-bar span.next-badge {
+    font-size: 10px;
+    line-height: 16px;
   }
   .total-point-wrapper .pregress-bar span.current-badge {
     left: 0;
@@ -5788,9 +5804,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .total-point-wrapper .pregress-bar span.current-badge small,
   .total-point-wrapper .pregress-bar span.next-badge small {
     margin-bottom: 0;
+    font-size: 12px;
   }
   .total-point-wrapper .points-to-go {
-    padding-right: 15px;
+    padding-right: 0;
+    font-size: 10px;
   }
 
   .quotes {

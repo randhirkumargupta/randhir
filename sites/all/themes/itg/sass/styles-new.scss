@@ -4966,9 +4966,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             .user-pic{
               width: 50px;
               height: 50px;
+              margin-top: 20px;
             }
             .user-name{
-              font-size: 14px;
+              font-size: 15px;
               line-height: 18px;
             }
          } 
@@ -4980,7 +4981,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             span{
               padding: 0 3px;
               width: 36px;
-              dfn{font-size: 12px;}
+              dfn{font-size: 10px; margin-top: 20px;}
+              .fa{font-size: 17px;}
             }
          }
       }
@@ -4998,16 +5000,15 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       background-color: #e7e5e6;
       color: #4f4f4f;
       cursor: pointer;
-      font: 300 18px/40px Roboto;
       text-align: left;
       position: relative;
       .tab-text{
         display: block;
         color: #4f4f4f;
-        font: 300 18px/18px Roboto;
-        padding: 10px 8px;
+        font: 400 14px/18px Roboto;
+        padding: 8px 8px;
         background-color: #e7e5e6;
-        height: 40px;
+        height: 36px;
         
         &:before{
           display: inline-block;
@@ -5039,7 +5040,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         background-color: #828282;
         position: absolute;
         right: 15px;
-        width: 30px;
+        width: 25px;
         top: 0;
         bottom: 0;
         margin: auto 0;
@@ -5048,7 +5049,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           background-color: #828282;
           content: '';
           position: absolute;
-          width: 30px;
+          width: 25px;
           height: 3px;
           left: 0;
           top: -7px;
@@ -5057,7 +5058,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           background-color: #828282;
           content: '';
           position: absolute;
-          width: 30px;
+          width: 25px;
           height: 3px;
           left: 0;
           top: 7px;
@@ -5074,6 +5075,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         border-top: 1px solid #c6c6c6;
         a{
           padding: 10px 15px;
+          font-size: 14px;
+          font-weight: 400;
           &.active{
             background-color: #f6f6f7;
           }
@@ -5537,25 +5540,33 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .total-point-wrapper{
     display: inline-block;
     vertical-align: top;
-    margin-top: 20px;
+    margin-top: 15px;
     max-width: 66%;
     img{
       width: 50px;
       height: 50px;
     }
     .total-point-value{
-      span{font-size: 32px;}
+      span{font-size: 24px; margin-top: 0; line-height: 18px;}
     }
     .pregress-bar{
-      margin-top: 10px;
-      .pregress-bar-active{max-width: 80%;}
+      margin-top: 5px;
+      .pregress-bar-active{
+        max-width: 88%;
+        height: 2px;
+        &:before{
+          height: 2px;
+        }
+      }
+      span.current-badge, span.next-badge{font-size: 10px; line-height: 16px;}
       span.current-badge{left: 0; top: 0; text-align: left;}
       span.next-badge{right: 0; top: 0; text-align: right;}
       span.current-badge small, 
-      span.next-badge small{margin-bottom: 0;}
+      span.next-badge small{margin-bottom: 0; font-size: 12px;}
     }
     .points-to-go{
-      padding-right: 15px;
+      padding-right: 0;
+      font-size: 10px;
     }
   }
   .quotes {

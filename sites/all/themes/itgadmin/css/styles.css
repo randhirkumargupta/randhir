@@ -10200,3 +10200,12 @@ span.file a {
   position: absolute;
   right: 140px;
 }
+
+.view-clients-details .views-submit-button #custom-expire-type {
+  float: left;
+  width: 140px;
+}
+.view-clients-details .views-submit-button #edit-submit-clients-details {
+  float: right;
+  margin: 28px 0 0 10px;
+}
