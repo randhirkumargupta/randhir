@@ -106,9 +106,6 @@ function features_for_story_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
-      'print' => array(
-        'custom_settings' => FALSE,
-      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -131,20 +128,7 @@ function features_for_story_strongarm() {
           'weight' => '32',
         ),
       ),
-      'display' => array(
-        'domain' => array(
-          'default' => array(
-            'weight' => '1',
-            'visible' => TRUE,
-          ),
-        ),
-        'flag_my_saved_content' => array(
-          'default' => array(
-            'weight' => '10',
-            'visible' => TRUE,
-          ),
-        ),
-      ),
+      'display' => array(),
     ),
   );
   $export['field_bundle_settings_node__story'] = $strongarm;
