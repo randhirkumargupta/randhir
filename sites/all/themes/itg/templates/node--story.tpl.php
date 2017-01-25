@@ -387,8 +387,8 @@ if (!empty($content)):
                                         $cast_ref_id = $node->field_mega_review_cast[LANGUAGE_NONE];
                                         $count = sizeof($cast_ref_id);
                                         for ($i = 0; $i < $count; $i++) {
-                                          $entity_obj = entity_load('node', array($cast_ref_id[$i]['value']));
-                                          $cast = $entity_obj[$cast_ref_id]->title;
+                                          $entity_obj = entity_load('node', array($cast_ref_id[$i]['target_id']));
+                                          $cast = $entity_obj[$cast_ref_id[$i]['target_id']]->title;
                                           print $cast;
                                           if ($i < ($count - 1)) {
                                             echo ', ';
@@ -554,7 +554,7 @@ if (!empty($content)):
                         <div class="story-tech-chunk">
                 <?php if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
                               <span class="tech-rating">
-                  <?php print $node->field_story_technology_rating[LANGUAGE_NONE][0]['value']; ?>
+                  <?php echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10'; ?>
                               </span>
                 <?php } ?>
                 <?php print $node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value']; ?>
