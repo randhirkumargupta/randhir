@@ -3054,16 +3054,17 @@ footer .footer-top ul li a:hover {
 }
 .ugc-comment-popup.comment-popup {
   background-color: #fff;
-  bottom: 0;
   border-radius: 10px;
-  height: 300px;
   left: 0;
-  margin: auto;
+  margin: 0 auto;
+  max-height: 80%;
+  overflow-y: auto;
   max-width: 600px;
   padding: 50px 20px 20px;
   position: absolute;
   right: 0;
-  top: 0;
+  top: 50%;
+  transform: translateY(-50%);
   width: 100%;
 }
 .ugc-comment-popup.comment-popup .close-comment-popup {
@@ -3087,6 +3088,7 @@ footer .footer-top ul li a:hover {
 }
 .comment-user-details > div.social-login {
   text-align: right;
+  width: auto;
 }
 .comment-user-details > div.social-login span {
   display: inline-block;
@@ -5674,6 +5676,17 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
 }
 @media all and (max-width: 767px) {
+  .comment-user-details {
+    text-align: left;
+  }
+  .comment-user-details > div {
+    margin: 0 0 10px 0;
+    width: 100%;
+  }
+  .comment-user-details > div.social-login {
+    text-align: left;
+  }
+
   /* Responsive CSS For Loyalty and Rewards */
   [id*="block-views-redeem-points-block"] .block-title {
     font: 500 18px/24px Roboto;
