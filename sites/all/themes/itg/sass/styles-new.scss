@@ -3114,22 +3114,30 @@ footer .footer-top ul li a:hover{
   .form-field-name-field-section{
     float: left;
     width: 48%;
-    label{float: none; display: block;}
+    label{float: none; display: none;}
   }
   select{max-width: 100%;}
   .form-field-name-field-user-name,
-  .form-item-title,
-  .form-field-name-field-user-city,
-  .field-type-text-with-summary{
+  .form-field-name-field-user-city{
     float: left; width: 52%; padding-right: 2%;
-    label{float: none; display: block;}
+    label{float: none; display: none;}
   }
-  .field-type-text-with-summary{
-    .form-type-textarea > label + div{padding: 0;}
-    .form-textarea{height: 100px;}
+  .form-item-title,
+  #edit-field-user-message{
+    float: left;
+    width: 100%;
+    label{float: none; display: none;}
   }
-  .captcha-lable{width: auto; float: none;}
-  .captcha{padding-left: 52%;}
+  #edit-field-user-message{
+    .form-type-textarea > label + div{
+      padding-left: 0;
+      .form-textarea{height: 100px;}
+    }
+  }
+  .form-item-title{
+    .form-text{width: 100%;}
+  }
+  .captcha{padding-left: 220px;}
   .form-actions{
     display: inline-block; vertical-align: top; width: 100%; padding: 0; text-align: right;
     .form-submit{padding: 10px 30px;}

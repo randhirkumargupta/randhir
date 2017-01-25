@@ -3183,38 +3183,43 @@ footer .footer-top ul li a:hover {
 #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-email label,
 #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-section label {
   float: none;
-  display: block;
+  display: none;
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper select {
   max-width: 100%;
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-name,
-#content [id*="ugc-node-form"].ugc-custom-wrapper .form-item-title,
-#content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-city,
-#content [id*="ugc-node-form"].ugc-custom-wrapper .field-type-text-with-summary {
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-city {
   float: left;
   width: 52%;
   padding-right: 2%;
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-name label,
-#content [id*="ugc-node-form"].ugc-custom-wrapper .form-item-title label,
-#content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-city label,
-#content [id*="ugc-node-form"].ugc-custom-wrapper .field-type-text-with-summary label {
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-city label {
   float: none;
-  display: block;
+  display: none;
 }
-#content [id*="ugc-node-form"].ugc-custom-wrapper .field-type-text-with-summary .form-type-textarea > label + div {
-  padding: 0;
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-item-title,
+#content [id*="ugc-node-form"].ugc-custom-wrapper #edit-field-user-message {
+  float: left;
+  width: 100%;
 }
-#content [id*="ugc-node-form"].ugc-custom-wrapper .field-type-text-with-summary .form-textarea {
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-item-title label,
+#content [id*="ugc-node-form"].ugc-custom-wrapper #edit-field-user-message label {
+  float: none;
+  display: none;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper #edit-field-user-message .form-type-textarea > label + div {
+  padding-left: 0;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper #edit-field-user-message .form-type-textarea > label + div .form-textarea {
   height: 100px;
 }
-#content [id*="ugc-node-form"].ugc-custom-wrapper .captcha-lable {
-  width: auto;
-  float: none;
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-item-title .form-text {
+  width: 100%;
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper .captcha {
-  padding-left: 52%;
+  padding-left: 220px;
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper .form-actions {
   display: inline-block;
