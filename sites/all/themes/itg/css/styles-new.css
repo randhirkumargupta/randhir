@@ -431,20 +431,21 @@ input[type="file"], input[type="submit"], input[type="text"] {
   right: 0;
 }
 
-.view-photo-list-of-category .view-content .photo-list {
+.view-photo-list-of-category .view-content .photo-list, .view-podcasts-listing .view-content .photo-list {
+  display: none;
   margin: 0 -15px;
   list-style: none;
   overflow: hidden;
 }
-.view-photo-list-of-category .view-content .photo-list li {
+.view-photo-list-of-category .view-content .photo-list li, .view-podcasts-listing .view-content .photo-list li {
   padding: 15px 15px;
   float: left;
 }
-.view-photo-list-of-category .view-content .photo-list li .tile figure {
+.view-photo-list-of-category .view-content .photo-list li .tile figure, .view-podcasts-listing .view-content .photo-list li .tile figure {
   overflow: hidden;
   position: relative;
 }
-.view-photo-list-of-category .view-content .photo-list li .tile figure figcaption {
+.view-photo-list-of-category .view-content .photo-list li .tile figure figcaption, .view-podcasts-listing .view-content .photo-list li .tile figure figcaption {
   bottom: 0;
   left: 0;
   position: absolute;
@@ -454,22 +455,22 @@ input[type="file"], input[type="submit"], input[type="text"] {
   font-size: 12px;
   font-family: Roboto;
 }
-.view-photo-list-of-category .view-content .photo-list li .tile figure figcaption .fa {
+.view-photo-list-of-category .view-content .photo-list li .tile figure figcaption .fa, .view-podcasts-listing .view-content .photo-list li .tile figure figcaption .fa {
   font-size: 14px;
   margin-right: 5px;
 }
-.view-photo-list-of-category .view-content .photo-list li .tile .posted-on {
+.view-photo-list-of-category .view-content .photo-list li .tile .posted-on, .view-podcasts-listing .view-content .photo-list li .tile .posted-on {
   display: block;
   font-size: 12px;
   color: #b1b1b1;
   padding: 8px 0 5px;
   font-family: "Roboto Slab";
 }
-.view-photo-list-of-category .view-content .photo-list li .tile a {
+.view-photo-list-of-category .view-content .photo-list li .tile a, .view-podcasts-listing .view-content .photo-list li .tile a {
   color: #494949;
   font-family: "Roboto Slab";
 }
-.view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1) {
+.view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-podcasts-listing .view-content .photo-list li:nth-child(4n+1) {
   clear: left;
 }
 
@@ -3068,6 +3069,9 @@ footer .footer-top ul li a:hover {
 .ugc-comment-popup.comment-popup .close-comment-popup {
   display: block;
 }
+.ugc-comment-popup.comment-popup .social-login {
+  display: none;
+}
 
 .comment-user-details {
   padding: 20px 0 0;
@@ -3145,19 +3149,25 @@ footer .footer-top ul li a:hover {
   font-weight: 600;
   padding-bottom: 5px;
 }
-.itg-comment .comment-timestamp, .itg-comment a.reply {
+.itg-comment .comment-timestamp, .itg-comment a.reply, .itg-comment a.comment-social-share {
   font-size: 12px;
   color: #989898;
   display: inline-block;
   vertical-align: middle;
 }
-.itg-comment .comment-timestamp:after {
+.itg-comment .comment-timestamp:after, .itg-comment a.reply {
   content: '|';
   display: inline-block;
   vertical-align: top;
   margin: 0 2px 0 7px;
 }
 .itg-comment a.reply:hover {
+  color: #1a3c8d;
+}
+.itg-comment a.reply:after {
+  margin-right: 7px;
+}
+.itg-comment a.comment-social-share:hover {
   color: #1a3c8d;
 }
 .itg-comment .inner-comment {
@@ -5412,7 +5422,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     font-size: 13px;
   }
   .view-personalization-my-preferences #views-form-personalization-my-preferences-block table .form-type-slider {
-    min-width: 180px;
+    min-width: 160px;
   }
   .view-personalization-my-preferences #views-form-personalization-my-preferences-block table .form-type-slider .sliderfield-display-values-field {
     font-size: 13px;
@@ -5515,7 +5525,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     font-size: 13px;
     position: absolute;
     left: 110px;
-    top: 80px;
+    bottom: 10px;
     width: 130px;
   }
   [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file img, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file span.file img {
@@ -5525,6 +5535,12 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     font: 400 13px/18px Roboto;
     color: #323232;
     pointer-events: none;
+  }
+  [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file + #edit-profile-pic-remove-button, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file span.file + #edit-profile-pic-remove-button {
+    color: red;
+    background: none;
+    border: none;
+    margin-left: 10px;
   }
   [id*="itg-personalization-edit-profile-form"] > div div.image-widget-data, [id*="itg-personalization-refer-a-friend-form"] > div div.image-widget-data {
     float: none;

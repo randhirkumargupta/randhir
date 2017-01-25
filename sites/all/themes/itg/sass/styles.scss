@@ -2854,7 +2854,7 @@ h1.category-heading{
                 padding: 0 10px;
             }
         }
-.view-category-wise-content-list, .view-blog-listing{    
+.view-category-wise-content-list, .view-blog-listing, .view-podcasts-listing{    
     @include listing-with-image(catagory-listing,left,10px,pic,detail);
     .catagory-listing{
         padding: 20px 0;
@@ -4081,7 +4081,7 @@ h1.category-heading{
 /*video and photo rolling slider end*/
 
 /*CCS start Photo landing Page*/
-#block-views-photo-list-of-category-block-2, .view-photo-list-of-category{
+#block-views-photo-list-of-category-block-2, .view-photo-list-of-category, .view-podcasts-listing{
     @include sidebar-heading;
     h3{
         display: block;
@@ -9178,14 +9178,14 @@ h1.about-us-heading{
         width: 25px;
         z-index: 1;
     }
-    .slick-next{
-        right: 0;
-        left: auto;
-    }
-    .slick-prev{
-        right: auto;
-        left: 0;
-    }
+        .slick-next{
+            right: 0;
+            left: auto;
+        }
+        .slick-prev{
+            right: auto;
+            left: 0;
+        }
     }
 }
 /*css end related content*/
@@ -9950,3 +9950,152 @@ h1.about-us-heading{
     }   
 }
 /*blog detail page css end*/
+
+
+/*css start Podcast page*/
+.view-podcasts-listing{
+    .podcast-left{
+        @include pos(relative);
+        span{
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            padding: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 12px;
+            font-family: Roboto;
+            i{
+                font-size: 14px;
+            }
+        }
+    }
+}
+#block-itg-widget-podcast-header{
+    .podcast-header-container{    
+        h1{
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .podcast-header-top{
+            background: #141414;
+            padding: 12px;
+            @include clearfix;
+            .pic{
+                @include float(left);
+                margin-right: 20px;
+            }
+            .podcast-detail{
+                display: block;
+                overflow: hidden;
+                p{
+                    font-size: 13px;
+                    color:#bfbfbf;
+                    margin-top: 20px;
+                }
+            }
+        }    
+        .podcast-header-bottom{
+            padding: 15px 0;
+            border: 1px solid #212121;           
+            .other-list{  
+                img{
+                    padding:0 7px;
+                }
+            }
+        }        
+    }
+    .itg-adds{
+            width: 300px;
+            height: 250px;
+            background: #363636;
+            margin: 0 auto;
+        }
+}
+/*css end Podcast page*/
+
+/*css start related-podcast-block*/
+#block-itg-front-end-common-related-podcast-block{
+    @include sidebar-heading;
+    h3{
+        display: block;
+        padding-left: 0;
+        margin-bottom: 20px;
+        padding-top: 0;
+        span{
+            padding-left: 0;
+        }
+    }
+    ul{
+        list-style-type: none;
+    }
+    span.tile{
+        margin-top: 10px;
+        display: block;
+    }
+    .slick-slider{
+      .slick-next, .slick-prev{
+        display: none;
+       }   
+    }   
+}
+/*css end related-podcast-block*/
+span.smilies-title {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* css for story-photo-list starts here */
+.story-photo-list-wrapper{
+    @include sidebar-heading;
+    .story-photo-list-heading{
+        display: block;
+        &:before{
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+        span{
+            padding: 20px 20px 20px 0;
+        }
+    }
+    .story-photo-list-item{
+        p{
+                line-height: 18px;
+                padding: 5px 0;
+        }
+        &.slick-slide{
+            padding: 0 11px;
+            width: 192px;
+        }
+    }
+    .slick-arrow{
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        z-index: 999;
+        border: none;
+        background-color: #000;
+        top: 45px;
+        cursor: pointer;
+        opacity: .7;
+        &.slick-disabled{
+            opacity: .3;
+        }
+        .fa{
+            font-size: 42px;
+            color: #fff;
+        }
+    }
+    .slick-prev{
+        left: -10px;
+    }
+    .slick-next{
+        right: -10px;
+    }
+}
+/* css for story-photo-list ends here */

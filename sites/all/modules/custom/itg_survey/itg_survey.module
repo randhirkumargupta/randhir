@@ -263,7 +263,10 @@ function itg_survey_form_views_exposed_form_alter(&$form, &$form_state, $form_id
  * {@inheritdoc}
  */
 function itg_survey_node_presave($node) {
-
+  
+//  if($node->op == 'Publish') {
+//    $node->field_supp_publish[LANGUAGE_NONE][0]['value'] = 1;
+//  }
   // Publish/unpublish functionality for survey
   if ($node->type == 'survey') {
     if ($node->is_new == 1) {
