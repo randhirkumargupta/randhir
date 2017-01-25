@@ -38,10 +38,13 @@ if (!empty($content)):
   //get follow story status
 
   $follow_status = $content["follow_status"];
+  
+  //get byline id based on order reorder
+
+  $byline_id = $content["byline_id"];
 
   //get byline detail
-  if (!empty($node->field_story_reporter[LANGUAGE_NONE][0]['target_id'])) {
-    $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+  if (!empty($byline_id)) {
     $reporter_node = node_load($byline_id);
   }
   ?>
