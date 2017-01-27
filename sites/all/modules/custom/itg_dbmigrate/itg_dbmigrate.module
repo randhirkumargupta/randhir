@@ -120,3 +120,17 @@ function ordering_set_for_byline($nid, $weight) {
     $result = $query->execute()->fetchField();
     return $result;
   }
+  
+  /**
+ * implement function to get category table
+ */
+function itg_migrate_category_table($level){
+  $table = array(
+    '1' => 'migrate_map_itgsection',
+    '2' => 'migrate_map_itgcategory',
+    '3' => 'migrate_map_itgsubcategory',
+    '4' => 'migrate_map_itgsubsubcategory',
+  );
+  
+  return $table[$level];
+}
