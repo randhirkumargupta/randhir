@@ -132,6 +132,7 @@ function op_third_party_coupons($csvdata, &$context) {
 
     $node->field_coupon_third_party_coupon[LANGUAGE_NONE][0]['value'] = isset($csvdata[5]) ? $csvdata[5] : "";
     $node->field_coupon_uses_limit[LANGUAGE_NONE][0]['value'] = isset($csvdata[6]) ? (int) $csvdata[6] : "";
+    $node->field_coupon_status[LANGUAGE_NONE][0]['value'] = 'Active';
     $node->status = 1;
     $node->uid = $user->uid;
     try {
