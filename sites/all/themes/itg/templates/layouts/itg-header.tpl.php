@@ -18,7 +18,7 @@ else {
   $user_pic = "<img src=$file width='30' height='30' alt='user-image'>";
 }
 ?>
-<div class="header-ads mhide">
+<div class="header-ads">
   <?php
   $block = block_load('itg_ads', ADS_HEADER);
   $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
