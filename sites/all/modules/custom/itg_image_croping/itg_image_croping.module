@@ -496,6 +496,7 @@ function itg_image_saveimage_info() {
 
     $imageino = $_POST['form_value'];
     parse_str($imageino, $output_info);
+    
     if (!empty($output_info['fids'])) {
         for ($i = 0; $i < count($output_info['fids']); $i++) {
             $fid = explode('#', $output_info['fids'][$i]);
