@@ -275,6 +275,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
             });
               
            });', array('type' => 'inline', 'scope' => 'footer'));
+   unset($form['field_cm_select_type'][LANGUAGE_NONE]['#options']['_none']);
   }
 
 // Delete category functionality.
