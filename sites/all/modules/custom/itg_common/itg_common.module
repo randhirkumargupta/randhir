@@ -194,7 +194,6 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     $emoji1_src = $base_url . "/" . drupal_get_path('theme', 'itgadmin') . "/images/highlights_icons/Good.png";
     $emoji2_src = $base_url . "/" . drupal_get_path('theme', 'itgadmin') . "/images/highlights_icons/Bad.png";
     $emoji3_src = $base_url . "/" . drupal_get_path('theme', 'itgadmin') . "/images/highlights_icons/WGMF.png";
-    $number_reactions = count($form['field_highlights']['und']);
     foreach($form['field_highlights']['und'] as $key => $value){
       if(is_numeric($key)){
         $form['field_highlights']['und'][$key]['field_field_emoji_highlights_1']['und']['#title'] = "<img title='Oh No!' src='" . $emoji1_src . "'>";
