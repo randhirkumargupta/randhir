@@ -1429,6 +1429,11 @@ footer{
                 }
             }
         }
+        span.smilies-title{
+             img{
+                width: inherit;
+            }
+        }
     }
 }
 /*End CSS Featured New Home page*/
@@ -10142,10 +10147,10 @@ h1.about-us-heading{
 }
 /*css end related-podcast-block*/
 span.smilies-title {
-    width: 20px;
-    height: 20px;
+    width: auto;
+    height: auto;
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: middle;   
 }
 
 /* css for story-photo-list starts here */

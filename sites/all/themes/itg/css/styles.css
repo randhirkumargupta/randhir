@@ -1700,6 +1700,9 @@ footer .footer-copyright {
 .featured-news .featured-post.featured-post-first a img {
   margin-bottom: 0;
 }
+.featured-news .featured-post span.smilies-title img {
+  width: inherit;
+}
 
 /*End CSS Featured New Home page*/
 /*Start CSS section story Home page*/
@@ -12150,8 +12153,8 @@ h1.about-us-heading + div p {
 
 /*css end related-podcast-block*/
 span.smilies-title {
-  width: 20px;
-  height: 20px;
+  width: auto;
+  height: auto;
   display: inline-block;
   vertical-align: middle;
 }
