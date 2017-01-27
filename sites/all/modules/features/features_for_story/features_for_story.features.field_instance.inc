@@ -196,17 +196,32 @@ function features_for_story_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'imagefield_crop',
+      'module' => 'image',
       'settings' => array(
         'collapsible' => 2,
         'croparea' => '500x500',
         'enforce_minimum' => 1,
         'enforce_ratio' => 1,
+        'filefield_sources' => array(
+          'filefield_sources' => array(),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+          ),
+        ),
+        'imce_filefield_on' => 0,
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
         'resolution' => '200x150',
       ),
-      'type' => 'imagefield_crop_widget',
+      'type' => 'image_image',
       'weight' => 1,
     ),
   );
