@@ -641,25 +641,22 @@ function get_highlights_widget($nid) {
       if (!empty($highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_1[LANGUAGE_NONE][0]['value']) && $highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_1[LANGUAGE_NONE][0]['value'] == 1) {
         $emoji1_src = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/highlights_icons/Good.png";
         $emoji1_title = $highlights_detail[$highlights_arr['value']]->field_field_emoji1_title[LANGUAGE_NONE][0]['value'];
-        $emoji_reaction .= '<a title = "'.$emoji1_title.'" rel="'.$highlights_arr['value'].'-field_field_emoji_highlights_1" data-tag="All"  data-activity="hightlights_emoji" data-status="1" class="def-cur-pointer user-activity">';
-        $emoji_reaction .= "<img src='".$emoji1_src."' title= '".$emoji1_title."'>";
-        $emoji_reaction .= "</a>";
+        $emoji_image = "<img src='".$emoji1_src."' title= '".$emoji1_title."'>";
+        $emoji_reaction .= l($emoji_image , 'javascript:' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $highlights_arr['value'].'-field_field_emoji_highlights_1' , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "class" => array("def-cur-pointer" , "user-activity"))));
       }
 
       if (!empty($highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_2[LANGUAGE_NONE][0]['value']) && $highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_2[LANGUAGE_NONE][0]['value'] == 1) {
         $emoji2_src = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/highlights_icons/Bad.png";
         $emoji2_title = $highlights_detail[$highlights_arr['value']]->field_field_emoji2_title[LANGUAGE_NONE][0]['value'];
-        $emoji_reaction .= '<a title = "'.$emoji1_title.'" rel="'.$highlights_arr['value'].'-field_field_emoji_highlights_2" data-tag="All"  data-activity="hightlights_emoji" data-status="1" class="def-cur-pointer user-activity">';
-        $emoji_reaction .= "<img src='".$emoji2_src."' title= '".$emoji2_title."'>";
-        $emoji_reaction .= "</a>";
+        $emoji_image = "<img src='".$emoji2_src."' title= '".$emoji2_title."'>";
+        $emoji_reaction .= l($emoji_image , 'javascript:' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $highlights_arr['value'].'-field_field_emoji_highlights_2' , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "class" => array("def-cur-pointer" , "user-activity"))));
       }
 
       if (!empty($highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_3[LANGUAGE_NONE][0]['value']) && $highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_3[LANGUAGE_NONE][0]['value'] == 1) {
         $emoji3_src = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/highlights_icons/WGMF.png";
         $emoji3_title = $highlights_detail[$highlights_arr['value']]->field_field_emoji3_title[LANGUAGE_NONE][0]['value'];
-        $emoji_reaction .= '<a title = "'.$emoji1_title.'"  rel="'.$highlights_arr['value'].'-field_field_emoji_highlights_3" data-tag="All"  data-activity="hightlights_emoji" data-status="1" class="def-cur-pointer user-activity">';
-        $emoji_reaction .= "<img src='".$emoji3_src."' title= '".$emoji3_title."'>";
-        $emoji_reaction .= "</a>";
+        $emoji_image = "<img src='".$emoji3_src."' title= '".$emoji3_title."'>";
+        $emoji_reaction .= l($emoji_image , 'javascript:' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $highlights_arr['value'].'-field_field_emoji_highlights_3' , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "class" => array("def-cur-pointer" , "user-activity"))));
       }
       
       $emoji_reaction .= '</span><p class="hightlights_emoji_msg_'.$highlights_arr['value'].'"></p>';
