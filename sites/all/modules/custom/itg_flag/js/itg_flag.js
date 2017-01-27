@@ -11,7 +11,7 @@
             //alert(base_url);
             
             // jquery for front user activity
-            $('#user-activity').click(function (event) {
+            $('#user-activity,.user-activity').click(function (event) {
 
                 var nd_id = jQuery(this).attr('rel');
                 var dtag = jQuery(this).attr('data-tag');
@@ -44,6 +44,12 @@
                                 'data-status': 1,
                                 title: 'Follow the Story'
                             }).html('Follow the Story');
+                        }
+                        if (obj.ok == 'hightlights_emoji_true') {
+                          
+                        }
+                        if (obj.ok == 'error') {
+                           
                         }
                         if (obj.error == 'error') {
 

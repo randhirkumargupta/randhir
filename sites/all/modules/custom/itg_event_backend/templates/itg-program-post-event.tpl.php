@@ -47,7 +47,7 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
       $event_date_timestamp = strtotime($event_day_dat[1]);
       $event_final_date = date('D M d, Y', $event_date_timestamp);
       $word_key = itg_event_backend_convert_number_to_words($key);
-      $tabs .= '<li data-tag="Day-' . $key . '" class="event-program-tabs Day-' . $key . '"><span style="background: ' . $tab_highlighted_color . '">Day ' . t(ucfirst($word_key)) . '</span> ' . $event_final_date . '</li>';
+      $tabs .= '<li data-tag="Day-' . $key . '" class="event-program-tabs Day-' . $key . '"><span style="background: ' . $tab_highlighted_color . '">Day ' . t(ucfirst($word_key)) . '</span><i class="date"> ' . $event_final_date . '</i></li>';
 
       $count++;
     }
@@ -126,12 +126,12 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
           if (!empty($output_story_title)) {
             ?>
             <div class="content-detail">
+                 <div class="side-left"><?php print $output_story_img; ?></div>
               <div class="side-right"><p class="small-title"><?php print $program["session_title"]; ?></p><div class="title"><?php print $output_story_title; ?></div> 
                 <div class="listing-detail"><div class="section-part"><?php print $output_story_kicker . ' <div class="bottom-links">' . $output_media . '</div>'; ?></div>
 
                 </div>
-              </div> 
-              <div class="side-left"><?php print $output_story_img; ?></div>
+              </div>              
             </div>
             <?php
           }

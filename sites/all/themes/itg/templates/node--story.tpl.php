@@ -279,7 +279,8 @@ if (!empty($content)):
                 </div>
 
   <?php } ?>
-
+              <!-- Check the story type whether it is a photo story or not-->
+              <?php if (!empty($node->field_story_type) && $node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story') { ?>
               <div class="story-right <?php
   if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
     echo 'listicle-page';
@@ -557,12 +558,31 @@ if (!empty($content)):
                   <?php echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10'; ?>
                               </span>
                 <?php } ?>
-                <?php print $node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value']; ?>
+                <?php print render($content['field_story_tech_review_chunk']); ?>
                         </div>
               <?php } ?>
                   </div>
               </div>
-
+              <?php } else { ?>
+              <div class="story-right <?php
+                if (!empty($node->field_story_type[LANGUAGE_NONE])) {
+                  echo 'photo-story';
+                }
+              ?>">
+              <?php 
+                if (!empty($node->field_photo_story)) {
+                  $photo_story = $node->field_photo_story[LANGUAGE_NONE];
+                  $photo_story_count = sizeof($photo_story);
+                  for ($i = 0; $i < $photo_story_count; $i++) {
+                    $entity_obj = entity_load('field_collection_item', array($photo_story[$i]['value']));
+                    $photo_story_img_path = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['uri'];
+                    $photo_story_img = image_style_url('', $photo_story_img_path);
+                    $photo_story_desc = $entity_obj[$photo_story[$i]['value']]->field_photo_story_description['und'][0]['value'];
+                  }
+                }
+              ?>
+              </div>
+              <?php } ?>
               <!-- condition for buzz  -->
 
               <?php
