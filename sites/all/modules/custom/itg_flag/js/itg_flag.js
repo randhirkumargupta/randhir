@@ -175,6 +175,7 @@ jQuery(document).ready(function () {
 
                 }
                 if (obj.ok == 'hightlights_emoji_true') {
+                    jQuery("."+obj.rel).html("(" + obj.count + ")");
                     jQuery(".hightlights_emoji_msg_" + obj.nd_id).html('Success').show(0).delay(2000).hide(1000);
                 }
                 if (obj.ok == 'error') {
