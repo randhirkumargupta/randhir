@@ -153,7 +153,7 @@ function feature_for_podcast_field_default_field_instances() {
       'exclude_cv' => FALSE,
       'file_directory' => 'podcast_audio_dir',
       'file_extensions' => 'mp3',
-      'max_filesize' => '',
+      'max_filesize' => '10MB',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -166,6 +166,7 @@ function feature_for_podcast_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 0,
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 'upload',
