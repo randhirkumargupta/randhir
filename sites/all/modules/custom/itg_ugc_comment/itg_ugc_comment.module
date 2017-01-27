@@ -8,49 +8,50 @@
  *
  */
 module_load_include('inc', 'itg_ugc_comment', 'includes/itg_comment_config');
+
 /**
  * Implements hook_menu().
  */
 function itg_ugc_comment_menu() {
   $items['ugc-comment-listing'] = array(
-      'title' => 'UGC Comment Listing',
-      'page callback' => 'ugc_comment_listing',
-      'access callback' => TRUE,
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/ugc_comment_listing.inc',
+    'title' => 'UGC Comment Listing',
+    'page callback' => 'ugc_comment_listing',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/ugc_comment_listing.inc',
   );
-  
-  
+
+
   $items['ugc-comment-reject-listing'] = array(
-      'title' => 'UGC Reject Comment Listing',
-      'page callback' => 'ugc_comment_reject_listing',
-      'access callback' => TRUE,
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/ugc_comment_listing.inc',
+    'title' => 'UGC Reject Comment Listing',
+    'page callback' => 'ugc_comment_reject_listing',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/ugc_comment_listing.inc',
   );
-  
+
   $items['ugccommentview/%'] = array(
     'page callback' => 'ugc_comment_view',
     'page arguments' => array(1),
     'access callback' => TRUE,
     'file' => 'includes/ugc_comment_listing.inc',
   );
-  
+
   $items['ugccommentapprove/%'] = array(
     'page callback' => 'ugc_comment_approve',
     'page arguments' => array(1),
     'access callback' => TRUE,
     'file' => 'includes/ugc_comment_listing.inc',
   );
-  
-  $items['comment-global-config'] = array( //this creates a URL that will call this form at "examples/form-example"
+
+  $items['comment-global-config'] = array(//this creates a URL that will call this form at "examples/form-example"
     'title' => 'Configuration Form', //page title
     'description' => '',
     'page callback' => 'drupal_get_form', //this is the function that will be called when the page is accessed.  for a form, use drupal_get_form
     'page arguments' => array('comment_global_config'), //put the name of the form here
     'access arguments' => array('access global comment configuration'),
   );
-  
+
   return $items;
 }
 
@@ -60,17 +61,19 @@ function itg_ugc_comment_menu() {
  * @param array $form_state
  */
 function ugc_comment_form($form, &$form_state) {
-  
+
   global $user, $base_url;
   $user_fields = user_load($user->uid);
   $page_id = arg(1);
-  if(function_exists('itg_sso_url')) {
-  $social = itg_sso_url('<span><i class="fa fa-facebook-square" aria-hidden="true"></i></span><span><i class="fa fa-twitter-square" aria-hidden="true"></i></span><span><i class="fa fa-google-plus-square" aria-hidden="true"></i></span><span><i class="fa fa-linkedin-square" aria-hidden="true"></i></span>', 'social-share');
+  if (function_exists('itg_sso_url'))
+  {
+    $social = itg_sso_url('<span><i class="fa fa-facebook-square" aria-hidden="true"></i></span><span><i class="fa fa-twitter-square" aria-hidden="true"></i></span><span><i class="fa fa-google-plus-square" aria-hidden="true"></i></span><span><i class="fa fa-linkedin-square" aria-hidden="true"></i></span>', 'social-share');
   }
-    $fname = '';
-    if(!empty($user_fields->field_first_name['und']['0']['value'])) {
-      $fname = $user_fields->field_first_name['und']['0']['value'];
-    }
+  $fname = '';
+  if (!empty($user_fields->field_first_name['und']['0']['value']))
+  {
+    $fname = $user_fields->field_first_name['und']['0']['value'];
+  }
   $form['fmessage'] = array(
     '#type' => 'textarea', //you can find a list of available types in the form api
     '#title' => t(''),
@@ -80,22 +83,22 @@ function ugc_comment_form($form, &$form_state) {
     '#attributes' => array(
       'placeholder' => 'What is your opinion?',
     ),
-    );
-  
+  );
+
   $form['fname'] = array(
     '#type' => 'textfield', //you can find a list of available types in the form api
     '#title' => t(''),
     '#size' => 20,
     '#default_value' => $fname,
     '#maxlength' => 50,
-    '#prefix' => '<div class="comment-user-details"><div class="social-login">'.$social.'</div><div id="user-name">',
+    '#prefix' => '<div class="comment-user-details"><div class="social-login">' . $social . '</div><div id="user-name">',
     '#suffix' => '</div>',
     '#attributes' => array(
       'placeholder' => t('Name'),
     ),
-    );
-  
-  
+  );
+
+
   $form['femail'] = array(
     '#type' => 'textfield', //you can find a list of available types in the form api
     '#title' => t(''),
@@ -107,16 +110,16 @@ function ugc_comment_form($form, &$form_state) {
     '#attributes' => array(
       'placeholder' => t('Email'),
     ),
-    );
-  
+  );
+
   $form['page_id'] = array(
     '#type' => 'hidden', //you can find a list of available types in the form api
     '#title' => t('page id'),
     '#value' => $page_id,
     '#maxlength' => 20,
-    );
-  
-    $form['parent_id'] = array(
+  );
+
+  $form['parent_id'] = array(
     '#type' => 'hidden', //you can find a list of available types in the form api
     '#title' => t('parent id'),
     '#default_value' => 0,
@@ -130,16 +133,17 @@ function ugc_comment_form($form, &$form_state) {
     '#type' => 'submit',
     '#value' => t('Submit'),
   );
-  
+
   $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
   $bad_word_term = taxonomy_get_tree($vocab_id->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-  
-  if(!empty($bad_word_term)) {
-  foreach ($bad_word_term as $key => $val) {
-    $op[$val->tid] = trim($val->name);
+
+  if (!empty($bad_word_term))
+  {
+    foreach ($bad_word_term as $key => $val) {
+      $op[$val->tid] = trim($val->name);
+    }
   }
-  }
-  
+
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
@@ -150,7 +154,7 @@ function ugc_comment_form($form, &$form_state) {
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
   );
-  
+
   return $form;
 }
 
@@ -169,7 +173,8 @@ function ugc_comment_form_submit($form, &$form_state) {
   $comment_date = date('d-m-Y');
   $comment_date_time = date('d-m-Y H:i:s');
   // drupal_set_message(t('The form has been submitted.'));
-  if (function_exists('mongodb')) {
+  if (function_exists('mongodb'))
+  {
     $con = mongodb();
     $people = $con->itgcms_comment;
     $qry = array("page_id" => $page_id, "email" => $femail, "name" => $fname, "comment" => $fmessage, "parent_comment_id" => $parent_id, "comment_date" => $comment_date, "comment_date_time" => $comment_date_time, "property" => 'India Today', "content_type" => 'story', "status" => 0);
@@ -180,8 +185,8 @@ function ugc_comment_form_submit($form, &$form_state) {
 }
 
 /**
-* Implements hook_block_info().
-*/
+ * Implements hook_block_info().
+ */
 function itg_ugc_comment_block_info() {
   $blocks = array();
   $blocks['ugc_form_comment_block'] = array(
@@ -192,31 +197,34 @@ function itg_ugc_comment_block_info() {
 }
 
 /**
-* Implements hook_block_view().
-*/
+ * Implements hook_block_view().
+ */
 function itg_ugc_comment_block_view($delta = '') {
   $block = array();
   switch ($delta) {
     case 'ugc_form_comment_block':
-      
-      if (function_exists('mongodb')) {
+
+      if (function_exists('mongodb'))
+      {
         $con = mongodb();
         $people = $con->itgcms_comment;
+        $page_id = arg(1);
+
+        $data = $people->find(array('page_id' => $page_id, 'parent_comment_id' => "0"))->sort(array('comment_date_time' => -1));
+        foreach ($data as $my_data) {
+          $contect .= getmycomments($my_data);
+        }
+        $total_comments = totalcomments($page_id);
+        $block['content'] = theme('itg_comment_block', array('comment_data' => $contect, 'total_comments' => $total_comments, 'comment_form' => drupal_get_form('ugc_comment_form')));
       }
-      $page_id = arg(1);
-      
-      $data = $people->find(array('page_id' => $page_id, 'parent_comment_id' => "0"))->sort(array('comment_date_time' => -1));
-      foreach ($data as $my_data) {        
-       $contect .= getmycomments($my_data);
+      else
+      {
+        $block['content'] = t('Please enable mongodb');
       }
-      $total_comments = totalcomments($page_id);
-      $block['content'] = theme('itg_comment_block', array('comment_data' => $contect, 'total_comments' => $total_comments, 'comment_form' => drupal_get_form('ugc_comment_form')));
       break;
   }
   return $block;
 }
-
-
 
 /**
  * Implements hook_theme().
@@ -231,55 +239,55 @@ function itg_ugc_comment_theme($existing, $type, $theme, $path) {
       'template' => 'ugc-comment-template',
       'path' => drupal_get_path('module', 'itg_ugc_comment') . '/templates',
       'variables' => array('comment_data' => NULL, 'comment_form' => NULL, 'total_comments' => NULL),
-      )
+    )
   );
   return $themes;
 }
-  
 
 /**
-* Implements getmycomments()
-* @param array $data
-*/
+ * Implements getmycomments()
+ * @param array $data
+ */
 function getmycomments($data) {
   global $base_url, $user;
-    
-  $image = $base_url.'/sites/all/themes/itg/images/user-default.png';
+
+  $image = $base_url . '/sites/all/themes/itg/images/user-default.png';
   $contect .= "<div class='itg-comment'>
                 <div class='comment-image'>
                 <img src= $image width='50' height='50'></div>
                 <div class='comment-details'><div class='comment-name'>" . $data['name'] . "</div>
                 <div class='comment-body'>" . $data['comment'] . "</div>
-                <span class='comment-timestamp'>" .  format_interval((time() - strtotime($data['comment_date_time'])) , 2) . t(' ago') . "</span>
-                <a href='javascript:' class='reply' id='" . $data['_id'] . "'>".t('Reply')."</a></div>";
-  
-  if (function_exists('mongodb')) {
+                <span class='comment-timestamp'>" . format_interval((time() - strtotime($data['comment_date_time'])), 2) . t(' ago') . "</span>
+                <a href='javascript:' class='reply' id='" . $data['_id'] . "'>" . t('Reply') . "</a></div>";
+
+  if (function_exists('mongodb'))
+  {
     $con = mongodb();
   }
 
   $relation_id = $data['_id'];
   $reply_comment = $con->itgcms_comment;
-  $reply_data = $reply_comment->find(array('parent_comment_id' => "$relation_id"))->sort(array("comment_date_time"=> -1));
-  
-  
+  $reply_data = $reply_comment->find(array('parent_comment_id' => "$relation_id"))->sort(array("comment_date_time" => -1));
+
+
   $contect .= "<div class='inner-comment'>";
-  
+
   foreach ($reply_data as $my_reply_data) {
-   $contect .= getmycomments($my_reply_data);
+    $contect .= getmycomments($my_reply_data);
   }
-  
+
   $contect .= "</div></div>";
-  
+
   return $contect;
 }
 
-
 /**
-* Implements totalcomments()
-* @param array $page_id
-*/
+ * Implements totalcomments()
+ * @param array $page_id
+ */
 function totalcomments($page_id) {
-  if (function_exists('mongodb')) {
+  if (function_exists('mongodb'))
+  {
     $con = mongodb();
     $reply_comment = $con->itgcms_comment;
     $count = $reply_comment->count(array('page_id' => "$page_id"));

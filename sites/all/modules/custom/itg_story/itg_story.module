@@ -769,3 +769,34 @@ function itg_story_movie_image_plugin_data($node_id = '') {
     return 'No content id found';
   }
 }
+
+/**
+ * 
+ * @param type $node_id
+ */
+function itg_story_photo_story($node_id) {
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_story_type', 's', 's.entity_id = n.nid');
+  $query->fields('n', array('nid'));
+  $query->condition('n.type', 'story');
+  $query->condition('s.field_story_type_value', 'photo_story');
+  $query->condition('n.nid', $node_id, '<');
+  $query->range(0, 1);
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+/**
+ * Implements itg_story_photo_story_current_nid
+ * @param type $node_id
+ */
+function itg_story_photo_story_current_nid($node_id) {
+  $query = db_select('node');
+  $query->join('field_data_field_story_type', 's', 's.entity_id = n.nid');
+  $query->fields('n', array('nid'));
+  $query->condition('n.type', 'story');
+  $query->condition('s.field_story_type_value', 'photo_story');
+  $query->condition('n.nid', $node_id);
+  $result = $query->execute()->fetchAll();
+  return $result;
+}

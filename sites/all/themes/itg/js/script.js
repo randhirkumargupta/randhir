@@ -766,4 +766,10 @@ jQuery(document).ready(function () {
         getclick.css({'display' : 'none'});
     }); 
     
+    // jQuery code to add Light off/on effect 
+    jQuery('body').on('click', '.light-off-on-tab', function(){
+      jQuery('body').toggleClass('light-off-overlay');
+      jQuery('.program-livetv').toggleClass('effect-added');
+    });
+    
 });

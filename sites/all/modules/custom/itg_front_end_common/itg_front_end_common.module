@@ -15,6 +15,10 @@ function itg_front_end_common_block_info() {
     'info' => t('Taboola Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['may_be_recommend_block'] = array(
+    'info' => t('May we recommend'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   $blocks['vukkul_block'] = array(
     'info' => t('vukkul Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -57,6 +61,10 @@ function itg_front_end_common_block_view($delta = '') {
   switch ($delta) {
     case 'taboola_block':
       $block['content'] = _taboola_block_content();
+      break;
+    
+    case 'may_be_recommend_block':
+      $block['content'] = _may_be_recommend_block_content();
       break;
 
     case 'vukkul_block':
@@ -124,6 +132,24 @@ return $output;
 }
 
 /**
+ * Implements May be recommend block content
+ */
+function _may_be_recommend_block_content() {
+  $output = "<div class='may-be-recommend'>
+        <div id='taboola-right-rail-thumbnails-2nd'></div>
+<script type='text/javascript'>
+window._taboola = window._taboola || [];
+_taboola.push(
+{ mode: 'organic-thumbnails-rr', container: 'taboola-right-rail-thumbnails-2nd', placement: 'Right Rail Article Thumbnails 2nd', target_type: 'mix' }
+
+);
+</script>
+</div>
+";
+  return $output;
+}
+
+/**
  * Implements vukkul block content
  */
 function _vukkul_block_content() {
@@ -180,6 +206,16 @@ function taboola_view() {
   $block = module_invoke('itg_front_end_common', 'block_view', 'taboola_block');
   print render($block['content']);
 }
+
+/**
+ * Implements May be recommend view
+ */
+function may_be_recommend_view() {
+
+  $block = module_invoke('itg_front_end_common', 'block_view', 'may_be_recommend_block');
+  print render($block['content']);
+}
+
 
 
 /**
@@ -400,7 +436,7 @@ function _related_story_left_block_content() {
       $related_image = $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
 
       if (empty($related_image)) {
-        $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
+        $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
         $related_story.= "<li class='col-md-12'><a href='$related_data->url' target='_blank' title='$related_title'><img src='$img_url' class='related-default'></img></a>";
         $related_story.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
       }
@@ -438,7 +474,7 @@ function _related_story_bottom_block_content() {
       $related_title = mb_strimwidth($related_data->label, 0, 200, "..");
       $related_image = $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
       if (empty($related_image)) {
-        $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
+        $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
         $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$related_data->url' target='_blank' title='$related_title'><img src='$img_url' class='related-default'></img></a>";
         $related_story.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
       }
