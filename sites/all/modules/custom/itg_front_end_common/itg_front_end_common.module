@@ -135,8 +135,16 @@ return $output;
  * Implements May be recommend block content
  */
 function _may_be_recommend_block_content() {
-  $output = "<div class='may-be-recommend'>
-        <div id='taboola-right-rail-thumbnails-2nd'></div>
+  $output = "<div class='may-be-recommend'><h3><span>May be recommend</span></h3>
+        <script type='text/javascript'>
+window._taboola = window._taboola || [];
+_taboola.push({article:'auto'});
+!function (e, f, u) {
+e.async = 1;
+e.src = u;
+f.parentNode.insertBefore(e, f);
+}(document.createElement('script'), document.getElementsByTagName('script')[0], 'http://cdn.taboola.com/libtrc/indiatoday-indiatoday/loader.js');
+</script><div id='taboola-right-rail-thumbnails-2nd'></div>
 <script type='text/javascript'>
 window._taboola = window._taboola || [];
 _taboola.push(

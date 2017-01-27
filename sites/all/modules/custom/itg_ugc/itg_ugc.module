@@ -311,7 +311,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     
     // Add label for captcha
     if ($user->uid == 0) {
-      $form['captcha']['#prefix'] = '<div class="captcha-lable">Captcha</div>';
+      //$form['captcha']['#prefix'] = '<div class="captcha-lable">Captcha</div>';
       //$form['captcha']['#suffix'] = '</div>';
     }
 
