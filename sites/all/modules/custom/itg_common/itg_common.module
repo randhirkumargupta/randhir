@@ -49,7 +49,7 @@ function itg_common_menu() {
  * {@inheritdoc}
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
-  global $user;
+  global $user, $base_url;
 
   if (arg(0) == 'user' && empty($user->uid)) {
     drupal_add_js('jQuery(document).ready(function() {
@@ -189,6 +189,17 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == "itg_celebrity_profile_node_form") {
     $form['#validate'][] = 'itg_common_managesite_validate';
     $form['actions']['submit']['#submit'][] = 'itg_site_setting_form_custom_callback';
+  }
+  if ($form_id == 'heighlights_node_form') {
+    $emoji1_src = $base_url . "/" . drupal_get_path('theme', 'itgadmin') . "/images/highlights_icons/Good.png";
+    $emoji2_src = $base_url . "/" . drupal_get_path('theme', 'itgadmin') . "/images/highlights_icons/Bad.png";
+    $emoji3_src = $base_url . "/" . drupal_get_path('theme', 'itgadmin') . "/images/highlights_icons/WGMF.png";
+    $number_reactions = count($form['field_highlights']['und']);
+    for ($i = 0; $i <= $number_reactions; $i++) {
+      $form['field_highlights']['und'][$i]['field_field_emoji_highlights_1']['und']['#title'] = "<img title='Oh Nice!' src='" . $emoji1_src . "'>";
+      $form['field_highlights']['und'][$i]['field_field_emoji_highlights_2']['und']['#title'] = "<img title='Oh No!' src='" . $emoji2_src . "'>";
+      $form['field_highlights']['und'][$i]['field_field_emoji_highlights_3']['und']['#title'] = "<img title='Whatever!' src='" . $emoji3_src . "'>";
+    }
   }
   $form['#after_build'][] = 'itg_common_add_js_top_btn';
 }
@@ -591,7 +602,7 @@ function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255) {
     }
     else {
       // Add smiley to right;
-      $titlte = $titlte . '<span class="smilies-title">' . $smilies . '<span>';
+      $titlte = $titlte . '<span class="smilies-title">' . $smilies . '</span>';
     }
     return $titlte;
   }
