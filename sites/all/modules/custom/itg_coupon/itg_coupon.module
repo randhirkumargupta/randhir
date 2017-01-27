@@ -1,0 +1,483 @@
+<?php
+
+/**
+ * @file
+ * ITG Coupons module.
+ *
+ * Provides customizations and functions for Coupons .
+ */
+define('THIRD_PARTY_COUPONS_LINE_MAX', 1000);
+
+/**
+ * Implements hook_form_alter().
+ * @param array $form
+ * @param array $form_state
+ * @param string $form_id
+ */
+function itg_coupon_form_alter(&$form, &$form_state, $form_id) {
+
+  switch ($form_id) {
+
+    case 'coupon_node_form':
+      
+      unset($form['actions']['preview_changes']);
+      $form['#validate'][] = 'itg_coupon_custom_validate';
+      $form['actions']['cancel'] = array(
+          '#markup' => l(t('Cancel'), 'manage-coupons', array('attributes' => array('class' => 'button'))),
+          '#weight' => 20,
+      );
+
+      // Code staretd for handling the title
+
+      $form['title']['#states'] = array(
+          'visible' => array(
+              array(
+                  ':input[name="field_coupon_type[und]"]' => array(
+                      array("value" => 'coupan_dc'),
+                      array("value" => 'free_product'),
+                      array("value" => 'payment_mode_specific_coupan'),
+                      array("value" => 'bank_specific_coupon'),
+                      array("value" => 'email_mobile_login_specific_promocode'),
+                      array("value" => 'upload_third_party_coupon'),
+                  ),
+              ),
+          ),
+      );
+
+      // Code end for handling the title
+      // For third party coupons
+      $form['field_coupon_third_party_coupon']['und']['#states'] = array(
+          'visible' => array(
+              ':input[name="field_coupon_type[und]"]' => array('value' => 'upload_third_party_coupon')
+      ));
+
+
+      // Email / Mobile / Login specific Promo Code
+//      $form['field_coupon_email']['und'][0]['value']['#states'] = array(
+//          'visible' => array(
+//              ':input[name="field_coupon_choose_email_mobile[und]"]' => array('value' => 'email_mobile_login_specific_promocode')
+//      ));
+
+
+      $form['field_coupon_choose_email_mobile']['und']['#states'] = array(
+          'visible' => array(
+              ':input[name="field_coupon_type[und]"]' => array('value' => 'email_mobile_login_specific_promocode')
+      ));
+
+
+      // Code start for discout type
+      $form['field_coupon_email']['und'][0]['value']['#states'] = array(
+          'visible' => array(
+              array(
+                  ':input[name="field_coupon_choose_email_mobile[und]"]' => array(
+                      array("value" => 'email'),
+                      array("value" => 'mobile'),
+                  ),
+              ),
+          ),
+      );
+
+
+      // Bank Specific Coupons
+
+      $form['field_coupon_bank_type']['und']['#states'] = array(
+          'visible' => array(
+              ':input[name="field_coupon_type[und]"]' => array('value' => 'bank_specific_coupon')
+      ));
+
+      // Payment mode specific coupons
+
+      $form['field_coupon_gateway_type']['und']['#states'] = array(
+          'visible' => array(
+              ':input[name="field_coupon_type[und]"]' => array('value' => 'payment_mode_specific_coupan')
+      ));
+
+
+
+      // Code start for discout type
+      $form['field_coupon_discount_type']['und']['#states'] = array(
+          'visible' => array(
+              array(
+                  ':input[name="field_coupon_type[und]"]' => array(
+                      array("value" => 'coupan_dc'),
+                      array("value" => 'payment_mode_specific_coupan'),
+                      array("value" => 'bank_specific_coupon'),
+                      array("value" => 'email_mobile_login_specific_promocode'),
+                      array("value" => 'upload_third_party_coupon'),
+                  ),
+              ),
+          ),
+      );
+
+
+      // Code end for discount type 
+      // 
+      // Code start for discounted value
+
+      $form['field_coupon_discounted_value']['und']['#states'] = array(
+          'visible' => array(
+              array(
+                  ':input[name="field_coupon_type[und]"]' => array(
+                      array("value" => 'coupan_dc'),
+                      array("value" => 'payment_mode_specific_coupan'),
+                      array("value" => 'bank_specific_coupon'),
+                      array("value" => 'email_mobile_login_specific_promocode'),
+                      array("value" => 'upload_third_party_coupon'),
+                  ),
+              ),
+          ),
+      );
+
+      // Code end for discounted value
+      // Code started for Allow minimum cart amount 
+
+
+      $form['field_coupon_allow_min_cart_amt']['und']['#states'] = array(
+          'visible' => array(
+              array(
+                  ':input[name="field_coupon_type[und]"]' => array(
+                      array("value" => 'coupan_dc'),
+                      array("value" => 'payment_mode_specific_coupan'),
+                      array("value" => 'bank_specific_coupon'),
+                      array("value" => 'email_mobile_login_specific_promocode'),
+                      array("value" => 'upload_third_party_coupon'),
+                  ),
+              ),
+          ),
+      );
+
+      // Code end for the Allow minimum cart amount 
+      // Start code for discounted value 
+
+      $form['field_coupon_discounted_value']['und'][0]['value']['#states'] = array(
+          'visible' => array(
+              array(
+                  ':input[name="field_coupon_type[und]"]' => array(
+                      array("value" => 'coupan_dc'),
+                      array("value" => 'payment_mode_specific_coupan'),
+                      array("value" => 'bank_specific_coupon'),
+                      array("value" => 'email_mobile_login_specific_promocode'),
+                      array("value" => 'upload_third_party_coupon'),
+                  ),
+              ),
+          ),
+      );
+
+      // End code for discounted  value   
+      // Code started for Minimum cart amount 
+
+      $form['field_coupon_minimum_cart_amount']['und'][0]['value']['#states'] = array(
+          'visible' => array(
+              array(
+                  ':input[name="field_coupon_type[und]"]' => array(
+                      array("value" => 'coupan_dc'),
+                      array("value" => 'free_product'),
+                      array("value" => 'payment_mode_specific_coupan'),
+                      array("value" => 'bank_specific_coupon'),
+                      array("value" => 'email_mobile_login_specific_promocode'),
+                      array("value" => 'upload_third_party_coupon'),
+                  ),
+              ),
+          ),
+      );
+
+
+
+      // Code end for Minimum cart amount
+// Code started for Coupon uses limit
+      $form['field_coupon_uses_limit']['und'][0]['value']['#states'] = array(
+          'visible' => array(
+              array(
+                  ':input[name="field_coupon_type[und]"]' => array(
+                      array("value" => 'coupan_dc'),
+                      array("value" => 'free_product'),
+                      array("value" => 'payment_mode_specific_coupan'),
+                      array("value" => 'bank_specific_coupon'),
+                      array("value" => 'email_mobile_login_specific_promocode'),
+                      array("value" => 'upload_third_party_coupon'),
+                  ),
+              ),
+          ),
+      );
+      // Code end for Coupon uses limit
+      // Code started for Coupon current uses
+      $form['field_coupon_current_uses']['und'][0]['value']['#states'] = array(
+          'visible' => array(
+              array(
+                  ':input[name="field_coupon_type[und]"]' => array(
+                      array("value" => 'coupan_dc'),
+                      array("value" => 'free_product'),
+                      array("value" => 'payment_mode_specific_coupan'),
+                      array("value" => 'bank_specific_coupon'),
+                      array("value" => 'email_mobile_login_specific_promocode'),
+                      array("value" => 'upload_third_party_coupon'),
+                  ),
+              ),
+          ),
+      );
+
+
+
+
+      $form['field_coupon_minimum_cart_amount']['und'][0]['value']['#states'] = array(
+          'visible' => array(
+              ':input[name="field_coupon_allow_min_cart_amt[und]"]' => array('checked' => true)
+      ));
+
+
+      // Code end for Coupon current uses
+
+
+
+      $form['actions']['submit']['#submit'][] = 'itg_coupon_custom_submit';
+
+      break;
+  }
+}
+
+/**
+ * Implements custom submit for coupons form.
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_coupon_custom_submit($form, &$form_state) {
+  
+}
+
+/**
+ * Implements function for custom validate.
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_coupon_custom_validate($form, &$form_state) {
+
+  $coupon_type = $form_state['values']['field_coupon_type'][LANGUAGE_NONE][0]['value'] ? $form_state['values']['field_coupon_type'][LANGUAGE_NONE][0]['value'] : NULL;
+
+  switch ($coupon_type) {
+    case "coupan_dc":
+
+      $discount_type = isset($form_state['values']['field_coupon_discount_type'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_discount_type'][LANGUAGE_NONE][0]['value'] : NULL;
+      if (empty($discount_type)) {
+        form_set_error('field_coupon_discount_type', t('Coupon Discount Type field is required'));
+      }
+
+      $discounted_value = isset($form_state['values']['field_coupon_discounted_value'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_discounted_value'][LANGUAGE_NONE][0]['value'] : NULL;
+
+      if (!empty($discount_type) && empty($discounted_value)) {
+        form_set_error('field_coupon_discounted_value', t('Discounted Value field is required'));
+      }
+
+      if (!empty($discount_type) && !empty($discounted_value) && $discount_type == '% discount' && (int) $discounted_value > 100) {
+        form_set_error('field_coupon_discounted_value', t('Discounted Value should be less then or equal to 100'));
+      }
+
+      $allow_min_cart_amt = isset($form_state['values']['field_coupon_allow_min_cart_amt'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_allow_min_cart_amt'][LANGUAGE_NONE][0]['value'] : NULL;
+      $minimum_cart_amount = isset($form_state['values']['field_coupon_minimum_cart_amount'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_minimum_cart_amount'][LANGUAGE_NONE][0]['value'] : NULL;
+      if (!empty($allow_min_cart_amt) && empty($minimum_cart_amount)) {
+        form_set_error('field_coupon_minimum_cart_amount', t('Minimum Cart amount field is required'));
+      }
+
+
+      break;
+
+    case "free_product":
+
+      break;
+
+    case "payment_mode_specific_coupan":
+      $discount_type = isset($form_state['values']['field_coupon_discount_type'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_discount_type'][LANGUAGE_NONE][0]['value'] : NULL;
+      if (empty($discount_type)) {
+        form_set_error('field_coupon_discount_type', t('Coupon Discount Type field is required'));
+      }
+
+      $discounted_value = isset($form_state['values']['field_coupon_discounted_value'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_discounted_value'][LANGUAGE_NONE][0]['value'] : NULL;
+
+      if (!empty($discount_type) && empty($discounted_value)) {
+        form_set_error('field_coupon_discounted_value', t('Discounted Value field is required'));
+      }
+
+      if (!empty($discount_type) && !empty($discounted_value) && $discount_type == '% discount' && (int) $discounted_value > 100) {
+        form_set_error('field_coupon_discounted_value', t('Discounted Value should be less then or equal to 100'));
+      }
+
+      $allow_min_cart_amt = isset($form_state['values']['field_coupon_allow_min_cart_amt'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_allow_min_cart_amt'][LANGUAGE_NONE][0]['value'] : NULL;
+      $minimum_cart_amount = isset($form_state['values']['field_coupon_minimum_cart_amount'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_minimum_cart_amount'][LANGUAGE_NONE][0]['value'] : NULL;
+      if (!empty($allow_min_cart_amt) && empty($minimum_cart_amount)) {
+        form_set_error('field_coupon_minimum_cart_amount', t('Minimum Cart amount field is required'));
+      }
+
+      $gateway_type = isset($form_state['values']['field_coupon_gateway_type'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_gateway_type'][LANGUAGE_NONE][0]['value'] : NULL;
+      if (empty($gateway_type)) {
+        form_set_error('field_coupon_gateway_type', t('Gateway Type field is required'));
+      }
+
+
+      break;
+
+    case "bank_specific_coupon":
+      $discount_type = isset($form_state['values']['field_coupon_discount_type'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_discount_type'][LANGUAGE_NONE][0]['value'] : NULL;
+      if (empty($discount_type)) {
+        form_set_error('field_coupon_discount_type', t('Coupon Discount Type field is required'));
+      }
+
+      $discounted_value = isset($form_state['values']['field_coupon_discounted_value'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_discounted_value'][LANGUAGE_NONE][0]['value'] : NULL;
+
+      if (!empty($discount_type) && empty($discounted_value)) {
+        form_set_error('field_coupon_discounted_value', t('Discounted Value field is required'));
+      }
+
+      if (!empty($discount_type) && !empty($discounted_value) && $discount_type == '% discount' && (int) $discounted_value > 100) {
+        form_set_error('field_coupon_discounted_value', t('Discounted Value should be less then or equal to 100'));
+      }
+
+      $allow_min_cart_amt = isset($form_state['values']['field_coupon_allow_min_cart_amt'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_allow_min_cart_amt'][LANGUAGE_NONE][0]['value'] : NULL;
+      $minimum_cart_amount = isset($form_state['values']['field_coupon_minimum_cart_amount'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_minimum_cart_amount'][LANGUAGE_NONE][0]['value'] : NULL;
+      if (!empty($allow_min_cart_amt) && empty($minimum_cart_amount)) {
+        form_set_error('field_coupon_minimum_cart_amount', t('Minimum Cart amount field is required'));
+      }
+
+      $gateway_type = isset($form_state['values']['field_coupon_bank_type'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_bank_type'][LANGUAGE_NONE][0]['value'] : NULL;
+      if (empty($gateway_type)) {
+        form_set_error('field_coupon_bank_type', t('Bank Type field is required'));
+      }
+
+      break;
+
+    case "email_mobile_login_specific_promocode":
+
+      $discount_type = isset($form_state['values']['field_coupon_discount_type'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_discount_type'][LANGUAGE_NONE][0]['value'] : NULL;
+      if (empty($discount_type)) {
+        form_set_error('field_coupon_discount_type', t('Coupon Discount Type  field is required'));
+      }
+
+      $discounted_value = isset($form_state['values']['field_coupon_discounted_value'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_discounted_value'][LANGUAGE_NONE][0]['value'] : NULL;
+
+      if (!empty($discount_type) && empty($discounted_value)) {
+        form_set_error('field_coupon_discounted_value', t('Discounted Value field is required'));
+      }
+
+      if (!empty($discount_type) && !empty($discounted_value) && $discount_type == '% discount' && (int) $discounted_value > 100) {
+        form_set_error('field_coupon_discounted_value', t('Discounted Value should be less then or equal to 100'));
+      }
+
+      $allow_min_cart_amt = isset($form_state['values']['field_coupon_allow_min_cart_amt'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_allow_min_cart_amt'][LANGUAGE_NONE][0]['value'] : NULL;
+      $minimum_cart_amount = isset($form_state['values']['field_coupon_minimum_cart_amount'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_minimum_cart_amount'][LANGUAGE_NONE][0]['value'] : NULL;
+      if (!empty($allow_min_cart_amt) && empty($minimum_cart_amount)) {
+        form_set_error('field_coupon_minimum_cart_amount', t('Minimum Cart amount field is required'));
+      }
+
+      if (empty($form_state['values']['field_coupon_choose_email_mobile'][LANGUAGE_NONE][0]['value'])) {
+        $choose_email_mobile = $form_state['values']['field_coupon_choose_email_mobile'][LANGUAGE_NONE][0]['value'];
+        form_set_error('field_coupon_choose_email_mobile', t('Choose Email or mobile field is required'));
+      }
+
+
+      $email = $form_state['values']['field_coupon_email'][LANGUAGE_NONE][0]['value'];
+
+      if (!empty($form_state['values']['field_coupon_choose_email_mobile'][LANGUAGE_NONE][0]['value']) && empty($email)) {
+        form_set_error('field_coupon_email', t('E-mail Or Mobile field is required'));
+      }
+
+
+
+      if ($form_state['values']['field_coupon_choose_email_mobile'][LANGUAGE_NONE][0]['value'] == 'email' && !empty($form_state['values']['field_coupon_email'][LANGUAGE_NONE][0]['value']) && !valid_email_address($form_state['values']['field_coupon_email'][LANGUAGE_NONE][0]['value'])) {
+        form_set_error('field_coupon_email', t('The email address appears to be invalid.'));
+      }
+
+      if ($form_state['values']['field_coupon_choose_email_mobile'][LANGUAGE_NONE][0]['value'] == 'mobile' && !empty($form_state['values']['field_coupon_email'][LANGUAGE_NONE][0]['value'])) {
+        if (!preg_match('/^[0-9]{10}+$/', $form_state['values']['field_coupon_email'][LANGUAGE_NONE][0]['value'])) {
+          form_set_error('field_coupon_email', t('The mobile number appears to be invalid.'));
+        }
+      }
+
+      break;
+
+    case "upload_third_party_coupon":
+
+      $discount_type = isset($form_state['values']['field_coupon_discount_type'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_discount_type'][LANGUAGE_NONE][0]['value'] : NULL;
+      if (empty($discount_type)) {
+        form_set_error('field_coupon_discount_type', t('Coupon Discount Type field is required'));
+      }
+
+      $discounted_value = isset($form_state['values']['field_coupon_discounted_value'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_discounted_value'][LANGUAGE_NONE][0]['value'] : NULL;
+
+      if (!empty($discount_type) && empty($discounted_value)) {
+        form_set_error('field_coupon_discounted_value', t('Discounted Value field is required'));
+      }
+
+      if (!empty($discount_type) && !empty($discounted_value) && $discount_type == '% discount' && (int) $discounted_value > 100) {
+        form_set_error('field_coupon_discounted_value', t('Discounted Value should be less then or equal to 100'));
+      }
+
+      $allow_min_cart_amt = isset($form_state['values']['field_coupon_allow_min_cart_amt'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_allow_min_cart_amt'][LANGUAGE_NONE][0]['value'] : NULL;
+      $minimum_cart_amount = isset($form_state['values']['field_coupon_minimum_cart_amount'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_minimum_cart_amount'][LANGUAGE_NONE][0]['value'] : NULL;
+      if (!empty($allow_min_cart_amt) && empty($minimum_cart_amount)) {
+        form_set_error('field_coupon_minimum_cart_amount', t('Minimum Cart amount field is required'));
+      }
+
+      $email = isset($form_state['values']['field_coupon_third_party_coupon'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_third_party_coupon'][LANGUAGE_NONE][0]['value'] : NULL;
+      if (empty($email)) {
+        form_set_error('field_coupon_third_party_coupon', t('Third party Coupon Type field is required'));
+      }
+
+
+      break;
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function itg_coupon_menu() {
+  $items['upload-third-party-coupon'] = array(
+      'title' => 'Upload third party Coupon',
+      'description' => 'Upload third party Coupon',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('third_party_coupon_form'),
+      'file' => 'includes/itg_coupon.inc',
+      'access arguments' => array('upload third party coupon'),
+      'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function itg_coupon_permission() {
+  return array(
+      'upload third party coupon' => array(
+          'title' => t('Access to upload third party coupon'),
+      )
+  );
+}
+
+/**
+ * Implements hook_views_pre_render.
+ * {@inheritdoc}
+ */
+
+
+function itg_coupon_views_pre_render(&$view) {
+  if ($view->name == "manage_coupons") {
+    global $user;
+    $header_content = '';
+    if (in_array('Marketing Manager', $user->roles) || in_array('Site Admin', $user->roles)) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Create Coupon'), 'node/add/coupon', array('query' => array('destination' => arg(0))));
+    }
+    $view->attachment_before = $header_content;
+  }
+}
+
+/**
+ * Implements hook_form_views_exposed_form_alter.
+ * {@inheritdoc}
+ */
+function itg_coupon_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  if ($form["#id"] == 'views-exposed-form-manage-coupons-page') {
+    $form['title']['#autocomplete_path'] = 'content-title-list/coupon/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Coupon Title'));
+  }
+}

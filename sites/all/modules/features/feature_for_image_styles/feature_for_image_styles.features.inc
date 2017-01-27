@@ -25,5 +25,20 @@ function feature_for_image_styles_image_default_styles() {
     ),
   );
 
+  // Exported image style: photo_story_small_88x66.
+  $styles['photo_story_small_88x66'] = array(
+    'label' => 'photo story small',
+    'effects' => array(
+      15 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 88,
+          'height' => 66,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   return $styles;
 }
