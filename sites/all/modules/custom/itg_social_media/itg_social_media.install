@@ -33,7 +33,14 @@ function itg_social_media_schema() {
         'length' => 128,
         'not null' => TRUE,
         'default' => '',
-      ),      
+      ),  
+        'post_id' => array(
+        'description' => 'The post id.',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => false,
+        'default' => '',
+      ),  
       'username' => array(
         'description' => 'Username of the user who have promoted the content.',
         'type' => 'varchar',
