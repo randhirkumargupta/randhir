@@ -392,6 +392,32 @@ jQuery(document).ready(function () {
             }
         ]
     });
+    
+    //jQuery code to set slider for story photo list
+    jQuery('.story-photo-list').slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        infinite: false,
+        variableWidth: true,
+        prevArrow: "<button class = 'slick-prev'><i class = 'fa fa-angle-left'></i></button>",
+        nextArrow: "<button class = 'slick-next'><i class = 'fa fa-angle-right'></i></button>",
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2,
+                    centerPadding: '10px'
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    centerPadding: '10px'
+                }
+            }
+        ]
+    });
 
     var arrayOne = [];
     jQuery('.factoids-slider li').each(function () {
@@ -723,7 +749,7 @@ jQuery(document).ready(function () {
         jQuery('.event-search-icon').click(function(){
             jQuery('.event-search input').css('width','180px');
         });        
-        jQuery(document).on('click touchstart', function () {
+        jQuery(document).on('click touchstart', function () {             
             jQuery('.event-search input').css('width', '0px');
         });
         jQuery('.event-search-icon, .event-search input').click(function (e) {

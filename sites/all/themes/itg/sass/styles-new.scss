@@ -414,9 +414,10 @@ input[type="file"], input[type="submit"], input[type="text"]{
     }
 }
 
-.view-photo-list-of-category{
+.view-photo-list-of-category, .view-podcasts-listing.podcast-detail-page{
     .view-content{      
         .photo-list{
+            list-style-type: none;
             margin: 0 -15px;
             list-style: none;
             overflow: hidden;
@@ -2989,20 +2990,22 @@ footer .footer-top ul li a:hover{
   }
   &.comment-popup{
     background-color: #fff;
-    bottom: 0;
     border-radius: 10px;
-    height: 300px;
     left: 0;
-    margin: auto;
+    margin: 0 auto;
+    max-height: 80%;
+    overflow-y: auto;
     max-width: 600px;
     padding: 50px 20px 20px;
     position: absolute;
     right: 0;
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
     width: 100%;
     .close-comment-popup{
       display: block;
     }
+    .social-login{display: none;}
   }
 }
 .comment-user-details {
@@ -3017,6 +3020,7 @@ footer .footer-top ul li a:hover{
   text-align: left;
   &.social-login{
     text-align: right;
+    width: auto;
     span {
       display: inline-block;
       vertical-align: top;
@@ -3076,19 +3080,27 @@ footer .footer-top ul li a:hover{
     font-weight: 600;
     padding-bottom: 5px;
   }
-  .comment-timestamp, a.reply{
+  .comment-timestamp, a.reply, a.comment-social-share{
     font-size: 12px;
     color: #989898;
     display: inline-block;
     vertical-align: middle;
   }
-  .comment-timestamp:after{
+  .comment-timestamp:after, a.reply{
     content: '|';
     display: inline-block;
     vertical-align: top;
     margin: 0 2px 0 7px;
   }
   a.reply{
+    &:hover{
+      color: #1a3c8d;
+    }
+    &:after{
+      margin-right: 7px;
+    }
+  }
+  a.comment-social-share{
     &:hover{
       color: #1a3c8d;
     }
@@ -3104,29 +3116,47 @@ footer .footer-top ul li a:hover{
   .form-field-name-field-section{
     float: left;
     width: 48%;
-    label{float: none; display: block;}
+    label{float: none; display: none;}
   }
   select{max-width: 100%;}
   .form-field-name-field-user-name,
-  .form-item-title,
-  .form-field-name-field-user-city,
-  .field-type-text-with-summary{
+  .form-field-name-field-user-city{
     float: left; width: 52%; padding-right: 2%;
-    label{float: none; display: block;}
+    label{float: none; display: none;}
   }
-  .field-type-text-with-summary{
-    .form-type-textarea > label + div{padding: 0;}
-    .form-textarea{height: 100px;}
+  .form-item-title,
+  #edit-field-user-message{
+    float: left;
+    width: 100%;
+    label{float: none; display: none;}
   }
-  .captcha-lable{width: auto; float: none;}
-  .captcha{padding-left: 52%;}
+  #edit-field-user-message{
+    .form-type-textarea > label + div{
+      padding-left: 0;
+      .form-textarea{height: 100px;}
+    }
+  }
+  .form-item-title{
+    .form-text{width: 100%;}
+  }
+  .captcha{padding-left: 220px;}
   .form-actions{
     display: inline-block; vertical-align: top; width: 100%; padding: 0; text-align: right;
     .form-submit{padding: 10px 30px;}
   }
   span.error{padding-left: 0;}
 }
-
+.region-front-end-breadcrumb {
+    color: #a1a1a1;
+    margin-bottom: 5px;
+    font: 400 14px/18px Roboto;
+    a{
+      color: #a1a1a1;
+      &:hover{
+        color: #1a3c8d;
+      }
+    }
+}
 
 /* CSS To Add Zoom Effect on Images */
 
@@ -3662,15 +3692,19 @@ footer .footer-top ul li a:hover{
     .region-personalization{text-align: center;}
     #block-views-follow-tags-block,
     #block-views-follow-tags-block-1{
+        background-color: #f2f2f2;
+        margin: 20px 10px 0;
         display: inline-block;
         vertical-align: top;
         width: 400px;
-        padding: 50px 0;
+        padding: 15px;
         .view-follow-tags{
             .views-row{
                 padding:10px;
                 text-align: left;
                 border: 1px solid #d9d9d9;
+                background-color: #fff;
+                transition: all 300ms;
                 position: relative;
                 margin: 15px;
                 border-radius: 5px;
@@ -4956,9 +4990,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             .user-pic{
               width: 50px;
               height: 50px;
+              margin-top: 20px;
             }
             .user-name{
-              font-size: 14px;
+              font-size: 15px;
               line-height: 18px;
             }
          } 
@@ -4970,7 +5005,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             span{
               padding: 0 3px;
               width: 36px;
-              dfn{font-size: 12px;}
+              dfn{font-size: 10px; margin-top: 5px;}
+              .fa{font-size: 17px;}
             }
          }
       }
@@ -4988,16 +5024,15 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       background-color: #e7e5e6;
       color: #4f4f4f;
       cursor: pointer;
-      font: 300 18px/40px Roboto;
       text-align: left;
       position: relative;
       .tab-text{
         display: block;
         color: #4f4f4f;
-        font: 300 18px/18px Roboto;
-        padding: 10px 8px;
+        font: 400 14px/18px Roboto;
+        padding: 8px 8px;
         background-color: #e7e5e6;
-        height: 40px;
+        height: 36px;
         
         &:before{
           display: inline-block;
@@ -5029,7 +5064,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         background-color: #828282;
         position: absolute;
         right: 15px;
-        width: 30px;
+        width: 25px;
         top: 0;
         bottom: 0;
         margin: auto 0;
@@ -5038,7 +5073,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           background-color: #828282;
           content: '';
           position: absolute;
-          width: 30px;
+          width: 25px;
           height: 3px;
           left: 0;
           top: -7px;
@@ -5047,7 +5082,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           background-color: #828282;
           content: '';
           position: absolute;
-          width: 30px;
+          width: 25px;
           height: 3px;
           left: 0;
           top: 7px;
@@ -5064,6 +5099,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         border-top: 1px solid #c6c6c6;
         a{
           padding: 10px 15px;
+          font-size: 14px;
+          font-weight: 400;
           &.active{
             background-color: #f6f6f7;
           }
@@ -5136,7 +5173,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           }
         }
         .form-type-slider{
-          min-width: 180px;
+          min-width: 160px;
           .sliderfield-display-values-field{
             font-size: 13px;
           }
@@ -5152,7 +5189,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     }
   }  
   .page-personalization-my-following #block-views-follow-tags-block, 
-  .page-personalization-my-following #block-views-follow-tags-block-1{width: 100%; float: left; padding: 50px 0 0;}
+  .page-personalization-my-following #block-views-follow-tags-block-1{width: 100%; float: left; margin: 20px 0 0; padding: 15px 0;}
   #block-itg-personalization-user-my-point{
     .header-point{
       padding: 20px 0;
@@ -5264,13 +5301,19 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           font-size: 13px;
           position: absolute;
           left: 110px;
-          top: 80px;
+          bottom: 10px;
           width: 130px;
           img{display: none;}
           a{
             font: 400 13px/18px Roboto;
             color: #323232;
             pointer-events: none;
+          }
+          & + #edit-profile-pic-remove-button{
+            color: red;
+            background: none;
+            border: none;
+            margin-left: 10px;
           }
         }
       }
@@ -5381,6 +5424,17 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child{margin-left: 175px;}
 }
 @media all and(max-width: 767px){
+  
+  .comment-user-details{
+    text-align: left;
+    > div {
+      margin: 0 0 10px 0;
+      width: 100%;
+      &.social-login{
+        text-align: left;
+      }
+    }
+  }
   
   /* Responsive CSS For Loyalty and Rewards */
   [id*="block-views-redeem-points-block"]{
@@ -5521,25 +5575,33 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .total-point-wrapper{
     display: inline-block;
     vertical-align: top;
-    margin-top: 20px;
+    margin-top: 15px;
     max-width: 66%;
     img{
       width: 50px;
       height: 50px;
     }
     .total-point-value{
-      span{font-size: 32px;}
+      span{font-size: 24px; margin-top: 0; line-height: 18px;}
     }
     .pregress-bar{
-      margin-top: 10px;
-      .pregress-bar-active{max-width: 80%;}
+      margin-top: 5px;
+      .pregress-bar-active{
+        max-width: 88%;
+        height: 2px;
+        &:before{
+          height: 2px;
+        }
+      }
+      span.current-badge, span.next-badge{font-size: 10px; line-height: 16px;}
       span.current-badge{left: 0; top: 0; text-align: left;}
       span.next-badge{right: 0; top: 0; text-align: right;}
       span.current-badge small, 
-      span.next-badge small{margin-bottom: 0;}
+      span.next-badge small{margin-bottom: 0; font-size: 12px;}
     }
     .points-to-go{
-      padding-right: 15px;
+      padding-right: 0;
+      font-size: 10px;
     }
   }
   .quotes {

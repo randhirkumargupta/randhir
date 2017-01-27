@@ -46,15 +46,6 @@
         <a href="?podcast_id=<?php print $bottom_keys; ?>">
           <img src="<?php print $extra_large_image_url; ?>">
         </a>
-      <a href="?podcast_id=<?php print $bottom_keys; ?>">
-          <img src="<?php print $extra_large_image_url; ?>">
-        </a>
-          <a href="?podcast_id=<?php print $bottom_keys; ?>">
-          <img src="<?php print $extra_large_image_url; ?>">
-        </a>
-          <a href="?podcast_id=<?php print $bottom_keys; ?>">
-          <img src="<?php print $extra_large_image_url; ?>">
-        </a>
           
     <?php } ?>
           </div>

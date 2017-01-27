@@ -93,8 +93,8 @@ window.addEventListener("message", function(ev) {
       <?php endif; ?>
         
       <div class="front-end-breadcrumb">
-            <?php print render($page['front_end_breadcrumb']); ?>
-      </div>  
+            <?php print render($page['front_end_breadcrumb']);?>
+      </div>
       <?php print render($title_suffix); ?>
       <?php print $messages; ?>
       <?php print render($tabs); ?>

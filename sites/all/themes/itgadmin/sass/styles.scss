@@ -2015,6 +2015,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-story-reporter-values"],
 [id*="field-story-template-guru-values"],
 [id*="field-video-anchor-values"],
+[id*="field-story-technology-values"],
 [id*="field-story-listicle-values"]{
   @extend .itg-add-another-item;
 }
@@ -2909,9 +2910,17 @@ div.node{
             }
           }
           #{$social}-img-remove-button {
-            position: absolute;
-            top: 0;
+            background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+            border: medium none;
+            box-shadow: none;
+            color: red;
+            height: auto;
             left: 200px;
+            padding: 0;
+            position: absolute;
+            line-height: 18px;
+            text-transform: capitalize;
+            top: 0;
             &+.ajax-progress-throbber{
               display: none;
             }
@@ -8656,6 +8665,76 @@ div.node{
         @extend .astrick;
     }
   }
+  .form-field-name-field-story-technology{
+    padding: 10px 0;
+    margin: 10px;
+    background-color: #f2f2f2;
+    [id*="field-story-technology-values"]{
+      thead{
+        width: 210px;
+        padding: 0 10px;
+      }
+      tbody tr{
+        td{
+          @extend .pos-rel;
+          padding-top: 10px;
+          border: none;
+          .field-name-field-technology-sample-photo{
+            .form-type-managed-file{
+              padding: 0;
+              margin-top: 0;
+              > label{
+                width: 140px;
+                & + div{
+                  padding-left: 140px;
+                }
+              }
+              .image-widget-data{
+                input[type="file"]{
+                  width: 257px;
+                  margin-top: 3px;
+                  & + .form-submit{
+                    @extend .btn-small;
+                  }
+                }
+              }
+            }
+          }
+          .field-name-field-technology-photo-title{
+            .form-type-textfield{
+              padding: 0;
+              margin: 0;
+              > label{
+                width: 140px;
+                & + div{
+                  padding-left: 140px;
+                }
+              }
+            }
+          }
+          > .form-submit{
+            @extend .icon-remove-item;
+            margin: 0;
+            position: absolute;
+            right: -28px;
+            bottom: 20px;
+          }
+        }
+        &:first-child{
+          td{padding: 0;}
+        }
+      }
+      & + div.clearfix{
+        position: absolute;
+        right: 10px;
+        bottom: 30px;
+        .form-submit{
+          @extend .icon-add-more;
+          margin: 0;
+        }
+      }
+    }
+  }
 }
 
 .node-photogallery-form{
@@ -9837,6 +9916,10 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   }
 }
 .form-field-name-field-emoji{
+  width: 572px;
+  @extend .dib;
+  @extend .vtop;
+  .ckeditor_links{display: none;}
   .cke_top{
     height: 34px !important;
     overflow: visible;
@@ -9855,3 +9938,70 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   margin-bottom: 10px;
 }
 #edit-field-primary-category-html-text-und-0-value{@extend .hide;}
+.multi_reporter {
+  position: relative;
+  .multi-byline {
+    @extend .btn-submit;
+    @extend .btn-small;
+    position: absolute;
+    right: 146px;
+    top: 0;
+  }
+}
+.byline-list {
+  padding: 0 10px 0 220px;
+  position: relative;
+  .byline-ul {
+    display: inline-block;
+    list-style: outside none none;
+    vertical-align: top;
+    width: 332px;
+    li {
+      background-color: #e5e5e5;
+      border-top: 1px solid #fff;
+      padding: 10px;
+      cursor: move;
+      min-height: 38px;
+      position: relative;
+      .byline_publish {
+        float: left;
+        margin: 2px 5px;
+      }
+      span {
+        display: inline-block;
+        margin-right: 10px;
+        vertical-align: top;
+        .remove-byline {
+          color: red;
+          position: absolute;
+          right: 10px;
+        }
+      }
+    }
+  }
+  .save-byline {
+    @extend .btn-submit;
+    @extend .btn-small;
+    bottom: 1px;
+    position: absolute;
+    right: 140px;
+  }
+}
+.view-clients-details{
+  .views-submit-button{
+    #custom-expire-type{
+      float: left;
+      width: 140px;
+    }
+    #edit-submit-clients-details{
+      float: right; 
+      margin: 28px 0 0 10px;
+    }
+  }
+}
+.itg-smi{
+  .data-popup-link{
+    @extend .btn-submit;
+    @extend .btn-small;
+  }
+}

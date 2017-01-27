@@ -247,6 +247,24 @@ function itg_last_node_published_user($uid, $publish_id) {
     return $last_publish_record_info;
 }
 
+
+/**
+ * Get Last node published by user using workflow.
+ * @param int $uid
+ * @param int $publish_id
+ * @return array $last_publish_record_info
+ */
+function itg_last_node_published_on($nid, $publish_id) {
+    $query = db_select('workbench_moderation_node_history', 'w')
+            ->fields('w')
+            ->condition('nid', $nid, '=')
+            ->condition('state', 'published', '=')
+            ->orderBy('stamp', 'ASC')//ORDER BY created
+            ->range(0, 1);
+      
+    $result = $query->execute()->fetchall();
+    return $result;
+}
 /**
  * Get Role create permission.
  * @param int $rid
@@ -459,4 +477,26 @@ function itg_common_only_text_string($str) {
   $data = trim(str_replace('&nbsp;', ' ', $data));
   
   return $data;
+}
+
+
+/**
+ * Implements 'itg_common_get_latest_byline'.
+ * @param int $nid
+ * @param string $status
+ */
+function itg_common_get_latest_byline($nid, $status) {
+  $query = db_select('itg_multi_byline_info', 's');
+  $query->fields('s', array('byline_id'))
+        ->condition('s.nid', $nid, '=')
+        ->condition('s.publish_status', $status, '=');
+  $query->orderBy("byline_weight", "ASC");
+  $query->range(0,1);
+  $result = $query->execute();
+  $byline_id = $result->fetchField();
+  if($byline_id) {
+    return $byline_id; 
+  } else {
+    return FALSE;
+  }
 }

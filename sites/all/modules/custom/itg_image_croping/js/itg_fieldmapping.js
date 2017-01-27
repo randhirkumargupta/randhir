@@ -298,17 +298,17 @@
                                     image_title = image_title.substr(0, image_title.lastIndexOf('.'));
                                 }
 
-                                var image_title = jQuery('#alt_text_image').val();
-                                var image_alttext = jQuery('#image_title_exta').val();
+                                var image_alttext = jQuery('#alt_text_image').val();
+                                var image_title = jQuery('#image_title_exta').val();
 
                                 setTimeout(function() {
-                                    if (image_title != "")
+                                    if (image_alttext != "")
                                     {
                                         parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
                                         parent.jQuery('[name="' + replaced + '[alt]"]').val(image_alttext);
 
                                     }
-                                    if (image_alttext != "")
+                                    if (image_title != "")
                                     {
                                         parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
                                         parent.jQuery('[name="' + replaced + '[title]"]').val(image_title);

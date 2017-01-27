@@ -121,6 +121,97 @@ function features_for_story_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'field_collection_item-field_photo_story-field_photo_story_description'.
+  $field_instances['field_collection_item-field_photo_story-field_photo_story_description'] = array(
+    'bundle' => 'field_photo_story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_photo_story_description',
+    'label' => 'photo story description',
+    'required' => 0,
+    'settings' => array(
+      'display_summary' => 0,
+      'exclude_cv' => FALSE,
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 20,
+        'summary_rows' => 5,
+      ),
+      'type' => 'text_textarea_with_summary',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_photo_story-field_photo_story_image'.
+  $field_instances['field_collection_item-field_photo_story-field_photo_story_image'] = array(
+    'bundle' => 'field_photo_story',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_photo_story_image',
+    'label' => 'photo story image',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'imagefield_crop',
+      'settings' => array(
+        'collapsible' => 2,
+        'croparea' => '500x500',
+        'enforce_minimum' => 1,
+        'enforce_ratio' => 1,
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+        'resolution' => '200x150',
+      ),
+      'type' => 'imagefield_crop_widget',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_story_listicle-field_listicle_color'.
   $field_instances['field_collection_item-field_story_listicle-field_listicle_color'] = array(
     'bundle' => 'field_story_listicle',
@@ -1261,6 +1352,51 @@ function features_for_story_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 103,
+    ),
+  );
+
+  // Exported field_instance: 'node-story-field_photo_story'.
+  $field_instances['node-story-field_photo_story'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 120,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_photo_story',
+    'label' => 'Photo story',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 112,
     ),
   );
 
@@ -5012,6 +5148,45 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_story_type'.
+  $field_instances['node-story-field_story_type'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 119,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_type',
+    'label' => 'Story type',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 111,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_story_ugc_source_id'.
   $field_instances['node-story-field_story_ugc_source_id'] = array(
     'bundle' => 'story',
@@ -5205,6 +5380,7 @@ function features_for_story_field_default_field_instances() {
   t('Movie Plot');
   t('New title');
   t('Node Identity');
+  t('Photo story');
   t('Publish id');
   t('Quote image');
   t('Quote title');
@@ -5237,6 +5413,7 @@ function features_for_story_field_default_field_instances() {
   t('Story kicker');
   t('Story rating');
   t('Story title');
+  t('Story type');
   t('Strap headline');
   t('Syndication');
   t('Syndications photo');
@@ -5262,6 +5439,8 @@ function features_for_story_field_default_field_instances() {
   t('Unique id');
   t('common by line reporter id');
   t('common by line twitter');
+  t('photo story description');
+  t('photo story image');
   t('primary category');
   t('short introtext');
 
