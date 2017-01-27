@@ -506,7 +506,7 @@ function itg_term_form_views_exposed_form_alter(&$form, &$form_state) {
 
     $form['created']['min'] = array(
       '#type' => 'date_popup',
-      '#title' => t('From'),
+      '#title' => t('Created From'),
       '#date_format' => 'd/m/Y',
       '#date_year_range' => '-1:+1',
       '#attributes' => array(
