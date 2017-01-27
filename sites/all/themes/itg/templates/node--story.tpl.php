@@ -573,12 +573,39 @@ if (!empty($content)):
                 if (!empty($node->field_photo_story)) {
                   $photo_story = $node->field_photo_story[LANGUAGE_NONE];
                   $photo_story_count = sizeof($photo_story);
+                  $html = '';
+                  $html .= '<div class="photo-story-img multiple-photo">';
                   for ($i = 0; $i < $photo_story_count; $i++) {
                     $entity_obj = entity_load('field_collection_item', array($photo_story[$i]['value']));
                     $photo_story_img_path = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['uri'];
                     $photo_story_img = image_style_url('', $photo_story_img_path);
                     $photo_story_desc = $entity_obj[$photo_story[$i]['value']]->field_photo_story_description['und'][0]['value'];
+                    $html .= '<div class="photo-slider">';
+                    $html .= '<img src="' . $photo_story_img . '" title="" alt="" />';
+                    $html .= '<div class="description"><p>' . $photo_story_desc . '</p></div>';
+                    $html .= '</div>';
                   }
+                  $html .= '</div>';
+                  print $html;
+                }
+              ?>
+                  <!-- for smaller photo story slider, loop has been repeated again -->
+                  <?php 
+                if (!empty($node->field_photo_story)) {
+                  $photo_story = $node->field_photo_story[LANGUAGE_NONE];
+                  $photo_story_count = sizeof($photo_story);
+                  $html = '';
+                  $html .= '<div class="photo-story-img multiple-photo">';
+                  for ($i = 0; $i < $photo_story_count; $i++) {
+                    $entity_obj = entity_load('field_collection_item', array($photo_story[$i]['value']));
+                    $photo_story_img_path = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['uri'];
+                    $photo_story_img = image_style_url('', $photo_story_img_path);
+                    $html .= '<div class="photo-slider">';
+                    $html .= '<img src="' . $photo_story_img . '" title="" alt="" />';
+                    $html .= '</div>';
+                  }
+                  $html .= '</div>';
+                  print $html;
                 }
               ?>
               </div>
