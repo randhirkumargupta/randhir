@@ -10199,3 +10199,9 @@ span.smilies-title {
     }
 }
 /* css for story-photo-list ends here */
+
+/*css start for podcast*/
+.view-podcasts-listing.podcast-detail-page{
+    @include pager;
+}
+/*css end for podcast*/
