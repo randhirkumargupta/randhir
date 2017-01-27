@@ -4,7 +4,7 @@
   <div class="col-md-8">
       <div class="podcast-header-container">
           <div class="podcast-header-top">
-  <h1><?php print $podcast_title ?></h1>
+            <h1 title="<?php print $podcast_title ?>"><?php print  mb_strimwidth($podcast_title, 0, 65, "..")?></h1>
   <script src="<?php print $base_url . '/' . drupal_get_path('module', 'itg_podcast'); ?>/jwplayer/jwplayer.js"></script>
   <script>jwplayer.key = "Cbz5fuKQAlYHtZgBSR0G/4GgYFO7YTb0k8Ankg==";</script>
   <?php
@@ -23,7 +23,7 @@
       var playerInstance = jwplayer ("podcast-<?php print $podcast_id; ?>");
       playerInstance.setup ({
         file: "<?php print file_create_url($podcast_banner_array[$podcast_id]['audio']['uri']); ?>",
-        width: 640,
+        width: 440,
         height: 40
       });
     </script>
@@ -33,38 +33,28 @@
       <?php endif; ?>
     </div>
     </div>
-  <div class="podcast-header-bottom">
-      <div class="other-list">
-    <?php
-    unset($podcast_banner_array[$podcast_id]);
-    foreach ($podcast_banner_array as $bottom_keys => $bottem_podcast) {
-      $podcast_bottem_image = $bottem_podcast['image']['uri'];
-      $bottem_description = $bottem_podcast['desc'];
-      $extra_large_image_url = image_style_url("widget_very_small", $podcast_bottem_image);
-      ?>
-      
-        <a href="?podcast_id=<?php print $bottom_keys; ?>">
-          <img src="<?php print $extra_large_image_url; ?>">
-        </a>
-          
-    <?php } ?>
+    <div class="podcast-header-bottom">
+        <div class="other-list">
+            <?php
+            foreach ($podcast_banner_array as $bottom_keys => $bottem_podcast) {
+              $podcast_bottem_image = $bottem_podcast['image']['uri'];
+              $bottem_description = $bottem_podcast['desc'];
+              $extra_large_image_url = image_style_url("widget_very_small", $podcast_bottem_image);
+              ?>
+
+                <a href="?podcast_id=<?php print $bottom_keys; ?>">
+                  <img src="<?php print $extra_large_image_url; ?>">
+                </a>
+
+            <?php } ?>
           </div>
-  </div>
+    </div>
     </div>
     </div>
     <div class="col-md-4">
-        <div class="itg-adds"></div>
+      <div class="itg-adds">
         
+      </div>
     </div>
 </div>
 </div>
-<script>
-jQuery(document).ready(function(){    
-    jQuery('.other-list').slick({
-        slidesToShow: 7,
-        slidesToScroll: 1,
-        arrows: true,    
-    });    
-});
-
-</script>

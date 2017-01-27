@@ -35,7 +35,15 @@
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/".$node_data["nid"]); ?>">
               <p class="dont-miss-widget dont-miss-<?php echo $node_data['nid'] ?>">
                
-                   <?php echo mb_strimwidth($node_data['title'], 0, 110, "..");?>
+                <?php //echo mb_strimwidth($node_data['title'], 0, 110, "..");?>
+                <?php
+                if(function_exists('itg_common_get_smiley_title')) {
+                  echo itg_common_get_smiley_title($node_data['nid'], 0, 100);
+                }
+                else {
+                  echo mb_strimwidth($node_data['title'], 0, 110, "..");
+                }
+                ?>
                    </p></a>
               <?php  
              endif; 
