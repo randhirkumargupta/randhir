@@ -638,22 +638,28 @@ function get_highlights_widget($nid) {
       
       $emoji_reaction = '<span class="emoji-container">';
       $anchor_pointer_class = "def-cur-pointer";
+      // Possible cookie for same line emoji on hightlight.
       $cookie_array = array(
         'hightlights_emoji_'.$highlights_arr['value'].'-field_field_emoji_highlights_1',
         'hightlights_emoji_'.$highlights_arr['value'].'-field_field_emoji_highlights_2',
         'hightlights_emoji_'.$highlights_arr['value'].'-field_field_emoji_highlights_3',
       );
+      // Make emoji disable if cookie cookie is Set.
       if(isset($_COOKIE[$cookie_array[0]]) || isset($_COOKIE[$cookie_array[1]]) || isset($_COOKIE[$cookie_array[2]])) {
         $anchor_pointer_class = "def-cur-none";
       }
+      // First emoji logic.
       if (!empty($highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_1[LANGUAGE_NONE][0]['value']) && $highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_1[LANGUAGE_NONE][0]['value'] == 1) {
         $emoji1_src = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/highlights_icons/Good.png";
         $emoji1_title = $highlights_detail[$highlights_arr['value']]->field_field_emoji1_title[LANGUAGE_NONE][0]['value'];
+        $field_class = $highlights_arr['value'].'-field_field_emoji_highlights_1';
+        // Count user click from mongodb.
         if(function_exists('itg_common_mongo_activity_count')) {
-          $emoji_count = itg_common_mongo_activity_count($highlights_arr['value'].'-field_field_emoji_highlights_1', 'front_user_activity');
+          $emoji_count = itg_common_mongo_activity_count($field_class, 'front_user_activity');
         }
         $emoji_image = "<img src='".$emoji1_src."' title= '".$emoji1_title."'>";
-        $count_message = '<span class="'.$highlights_arr['value'].'-field_field_emoji_highlights_1'.'">('.$emoji_count.')</span>';
+        $count_message = '<span class="'.$field_class.'">('.$emoji_count.')</span>';
+        // Prepare reaction link.
         $emoji_reaction .= l($emoji_image , 'javascript:' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $highlights_arr['value'].'-field_field_emoji_highlights_1' , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "class" => array($anchor_pointer_class , "user-activity"))));
         $emoji_reaction .= $count_message;
       }
@@ -661,29 +667,31 @@ function get_highlights_widget($nid) {
       if (!empty($highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_2[LANGUAGE_NONE][0]['value']) && $highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_2[LANGUAGE_NONE][0]['value'] == 1) {
         $emoji2_src = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/highlights_icons/Bad.png";
         $emoji2_title = $highlights_detail[$highlights_arr['value']]->field_field_emoji2_title[LANGUAGE_NONE][0]['value'];
+        $field_class = $highlights_arr['value'].'-field_field_emoji_highlights_2';
         if(function_exists('itg_common_mongo_activity_count')) {
-          $emoji_count = itg_common_mongo_activity_count($highlights_arr['value'].'-field_field_emoji_highlights_2', 'front_user_activity');
+          $emoji_count = itg_common_mongo_activity_count($field_class, 'front_user_activity');
         }
         $emoji_image = "<img src='".$emoji2_src."' title= '".$emoji2_title."'>";
         $emoji_reaction .= l($emoji_image , 'javascript:' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $highlights_arr['value'].'-field_field_emoji_highlights_2' , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "class" => array($anchor_pointer_class , "user-activity"))));
-        $count_message = '<span class="'.$highlights_arr['value'].'-field_field_emoji_highlights_2'.'">('.$emoji_count.')</span>';
+        $count_message = '<span class="'.$field_class.'">('.$emoji_count.')</span>';
         $emoji_reaction .= $count_message;
       }
 
       if (!empty($highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_3[LANGUAGE_NONE][0]['value']) && $highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_3[LANGUAGE_NONE][0]['value'] == 1) {
         $emoji3_src = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/highlights_icons/WGMF.png";
         $emoji3_title = $highlights_detail[$highlights_arr['value']]->field_field_emoji3_title[LANGUAGE_NONE][0]['value'];
+        $field_class = $highlights_arr['value'].'-field_field_emoji_highlights_3';
         if(function_exists('itg_common_mongo_activity_count')) {
-          $emoji_count = itg_common_mongo_activity_count($highlights_arr['value'].'-field_field_emoji_highlights_3', 'front_user_activity');
+          $emoji_count = itg_common_mongo_activity_count($field_class, 'front_user_activity');
         }
         $emoji_image = "<img src='".$emoji3_src."' title= '".$emoji3_title."'>";
         $emoji_reaction .= l($emoji_image , 'javascript:' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $highlights_arr['value'].'-field_field_emoji_highlights_3' , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "class" => array($anchor_pointer_class , "user-activity"))));
-        $count_message = '<span class="'.$highlights_arr['value'].'-field_field_emoji_highlights_3'.'">('.$emoji_count.')</span>';
+        $count_message = '<span class="'.$field_class.'">('.$emoji_count.')</span>';
         $emoji_reaction .= $count_message;
       }
-      
+      // Add span for for vote messsage.
       $emoji_reaction .= '</span><p class="hightlights_emoji_msg_'.$highlights_arr['value'].'"></p>';
-      
+      // Prepare link dislike and emoji.
       $text .= '<div class="h-list">' . $highlight_title . $like_dislike . $emoji_reaction . '</div>';      
 
     }

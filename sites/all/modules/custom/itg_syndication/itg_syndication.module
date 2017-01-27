@@ -583,7 +583,7 @@ function remove_extra_tag_in_body($story_body) {
  * @return string
  */
 function remove_img_tags($content) {
-  return preg_replace("/<img[^>]+\>/i", " ", $content); 
+  return preg_replace("/<img data-syndication='no'[^>]+\>/i", " ", $content); 
 }
 
 /**
