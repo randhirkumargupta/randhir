@@ -343,13 +343,13 @@ function itg_front_end_common_views_pre_render(&$view) {
         }
         else {
           $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-          $related_result->sm_thumb_video_landing_page_170_x_127_story_small_image[0] = "<img src='$img_url' width='170' height='127' />";
+          $related_result->sm_thumb_video_landing_page_170_x_127_story_small_image[0] = "<img src='$img_url'/>";
         }
       }
 
       if (empty($image)) {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-        $related_result->sm_thumb_video_landing_page_170_x_127_story_small_image[0] = "<img src='$img_url' width='170' height='127' />";
+        $related_result->sm_thumb_video_landing_page_170_x_127_story_small_image[0] = "<img src='$img_url'/>";
       }
     }
   }
@@ -368,13 +368,13 @@ function itg_front_end_common_views_pre_render(&$view) {
         }
         else {
           $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-          $related_story_result->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0] = "<img src='$img_url' class='related-default' width='170' height='127' />";
+          $related_story_result->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0] = "<img src='$img_url' class='related-default'/>";
         }
       }
 
       if (empty($image)) {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-        $related_story_result->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0] = "<img src='$img_url' class='related-default' width='170' height='127' />";
+        $related_story_result->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0] = "<img src='$img_url' class='related-default'/>";
       }
     }
   }
