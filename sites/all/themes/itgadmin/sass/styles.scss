@@ -8698,6 +8698,9 @@ div.node{
                   }
                 }
               }
+              .image-preview + .image-widget-data{
+                .form-submit{left: 20px;}
+              }
             }
           }
           .field-name-field-technology-photo-title{
@@ -8712,12 +8715,12 @@ div.node{
               }
             }
           }
-          > .form-submit{
+          > .form-submit, .ajax-new-content > .form-submit{
             @extend .icon-remove-item;
             margin: 0;
             position: absolute;
             right: -28px;
-            bottom: 20px;
+            bottom: 0;
           }
         }
         &:first-child{
@@ -8727,7 +8730,7 @@ div.node{
       & + div.clearfix{
         position: absolute;
         right: 10px;
-        bottom: 30px;
+        bottom: 10px;
         .form-submit{
           @extend .icon-add-more;
           margin: 0;

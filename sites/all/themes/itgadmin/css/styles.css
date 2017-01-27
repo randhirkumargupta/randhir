@@ -580,7 +580,7 @@ div.filefield-sources-list a.active {
 .node-videogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td > .form-submit[value="Remove"],
 .node-videogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 .node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td > .form-submit[value="Remove"],
-.node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td > .form-submit {
+.node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td > .form-submit, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .ajax-new-content > .form-submit {
   background: url("../images/remove-item.png") no-repeat center center;
   border: none;
   /*bottom: 10px;*/
@@ -9092,6 +9092,9 @@ div.node #comments h2 {
   width: 257px;
   margin-top: 3px;
 }
+.node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .field-name-field-technology-sample-photo .form-type-managed-file .image-preview + .image-widget-data .form-submit {
+  left: 20px;
+}
 .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .field-name-field-technology-photo-title .form-type-textfield {
   padding: 0;
   margin: 0;
@@ -9102,11 +9105,11 @@ div.node #comments h2 {
 .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .field-name-field-technology-photo-title .form-type-textfield > label + div {
   padding-left: 140px;
 }
-.node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td > .form-submit {
+.node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td > .form-submit, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .ajax-new-content > .form-submit {
   margin: 0;
   position: absolute;
   right: -28px;
-  bottom: 20px;
+  bottom: 0;
 }
 .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr:first-child td {
   padding: 0;
@@ -9114,7 +9117,7 @@ div.node #comments h2 {
 .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] + div.clearfix {
   position: absolute;
   right: 10px;
-  bottom: 30px;
+  bottom: 10px;
 }
 .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] + div.clearfix .form-submit {
   margin: 0;
