@@ -22,7 +22,7 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
   // TODO: Define globally
   if (in_array(NEWSLETTER_EDUCATION_TID, $cat_array))
   {
-    $subscriberlist = itg_newslatter_get_subscribe_page_users_email(515);
+    $subscriberlist = itg_newslatter_get_subscribe_page_users_email(NEWSLETTER_EDUCATION_TID);
   }
   $user_email_arr = itg_newslatter_get_subscribe_users_email();
   $user_email_str = implode(',', $user_email_arr);
