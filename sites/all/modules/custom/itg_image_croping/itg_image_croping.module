@@ -507,6 +507,9 @@ function itg_image_saveimage_info() {
                 $imagedate = explode('/', $output_info['image_date'][$i]);
                 $image_date = $imagedate[2] . '-' . $imagedate[1] . '-' . $imagedate[0];
             }
+            if($image_date == "") {
+                $image_date = date('Y-m-d');
+            }
             $inserted_data = db_insert('image_info')->fields(array(
                         'fid' => $fid[0],
                         'image_courtesy' => $output_info['courtesy'][$i],
