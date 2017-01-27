@@ -586,6 +586,7 @@ if (!empty($content)):
                     $html .= '</div>';
                   }
                   $html .= '</div>';
+                  print $html;
                 }
               ?>
                   <!-- for smaller photo story slider, loop has been repeated again -->
@@ -604,6 +605,7 @@ if (!empty($content)):
                     $html .= '</div>';
                   }
                   $html .= '</div>';
+                  print $html;
                 }
               ?>
               </div>
