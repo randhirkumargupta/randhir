@@ -183,6 +183,7 @@ function itg_widget_menu() {
  * @return type
  */
 function itg_widget_site_map() {
+  drupal_add_css(".nested-taxonomy-tree a:hover {color: #a00606 !important}" , array("type" => "inline" ,"scope" => "footer"));
   $tree = extranet_get_nested_tree(CATEGORY_MANAGMENT);
   $keys = array_keys($tree);
   foreach ($keys as $index => $data) {
