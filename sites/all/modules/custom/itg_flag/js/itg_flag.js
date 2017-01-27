@@ -180,8 +180,6 @@ jQuery(document).ready(function () {
                 if (obj.ok == 'error') {
                     jQuery(".hightlights_emoji_msg_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
                 }
-                //jQuery(this).parent().find('.emoji-container a').prop('disabled', true);
-                //jQuery(this).siblings().removeClass('def-cur-pointer').addClass('def-cur-none');
                 
             }
         });
