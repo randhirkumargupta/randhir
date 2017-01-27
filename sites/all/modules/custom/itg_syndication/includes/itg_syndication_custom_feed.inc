@@ -594,6 +594,7 @@ function get_required_data_field_get_items($entity_type, $entity, $field_name) {
             $required_value['field_video_upload'] = $temp_requred_value_1;
           }
           elseif ($field_name == 'body') {
+            // Function to remove image have data-syndication='no' image.
             $body_field_value = remove_img_tags($field_item[0]['value']);
             if (function_exists('remove_extra_tag_in_body')) {
               $required_value[] = "<![CDATA[ " . remove_extra_tag_in_body(htmlspecialchars($body_field_value, ENT_XML1, 'UTF-8')) . " ]]>";
