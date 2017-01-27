@@ -68,19 +68,19 @@ function coupon_features_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'domain' => array(
-          'weight' => '1',
-        ),
-        'metatags' => array(
-          'weight' => '4',
-        ),
-        'title' => array(
           'weight' => '0',
         ),
+        'metatags' => array(
+          'weight' => '3',
+        ),
+        'title' => array(
+          'weight' => '5',
+        ),
         'path' => array(
-          'weight' => '2',
+          'weight' => '1',
         ),
         'redirect' => array(
-          'weight' => '3',
+          'weight' => '2',
         ),
       ),
       'display' => array(),

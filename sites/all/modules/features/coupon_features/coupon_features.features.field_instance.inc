@@ -94,6 +94,45 @@ function coupon_features_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-coupon-field_coupon_choose_email_mobile'.
+  $field_instances['node-coupon-field_coupon_choose_email_mobile'] = array(
+    'bundle' => 'coupon',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 14,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_coupon_choose_email_mobile',
+    'label' => 'Choose Email or mobile',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 12,
+    ),
+  );
+
   // Exported field_instance: 'node-coupon-field_coupon_current_uses'.
   $field_instances['node-coupon-field_coupon_current_uses'] = array(
     'bundle' => 'coupon',
@@ -142,7 +181,7 @@ function coupon_features_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 16,
+      'weight' => 17,
     ),
   );
 
@@ -257,7 +296,7 @@ function coupon_features_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_coupon_email',
-    'label' => 'Email',
+    'label' => 'Email Or Mobile',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -271,7 +310,7 @@ function coupon_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -362,8 +401,8 @@ function coupon_features_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-coupon-field_coupon_mobile'.
-  $field_instances['node-coupon-field_coupon_mobile'] = array(
+  // Exported field_instance: 'node-coupon-field_coupon_status'.
+  $field_instances['node-coupon-field_coupon_status'] = array(
     'bundle' => 'coupon',
     'default_value' => NULL,
     'deleted' => 0,
@@ -371,10 +410,10 @@ function coupon_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 8,
+        'type' => 'list_default',
+        'weight' => 15,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -385,22 +424,19 @@ function coupon_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_coupon_mobile',
-    'label' => 'Mobile',
-    'required' => 0,
+    'field_name' => 'field_coupon_status',
+    'label' => 'Coupon Status',
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 13,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 18,
     ),
   );
 
@@ -439,7 +475,7 @@ function coupon_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -478,7 +514,7 @@ function coupon_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -530,7 +566,7 @@ function coupon_features_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
@@ -538,17 +574,18 @@ function coupon_features_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Allow Min Cart amount');
   t('Bank Type');
+  t('Choose Email or mobile');
   t('Coupon Discount Type');
+  t('Coupon Status');
   t('Coupon Type');
   t('Coupon current uses');
   t('Coupon used limit means how many users used this coupon!');
   t('Coupon uses limit');
   t('Discounted Value');
-  t('Email');
+  t('Email Or Mobile');
   t('Gateway Type');
   t('It can be % discount  or fix amount discount as per Coupon Discount Type selection.');
   t('Minimum Cart amount');
-  t('Mobile');
   t('Third party Coupon Type');
   t('This field will be used for third party coupon bulk import!');
 

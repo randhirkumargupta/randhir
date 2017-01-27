@@ -69,6 +69,34 @@ function coupon_features_field_default_field_bases() {
     'type' => 'list_text',
   );
 
+  // Exported field_base: 'field_coupon_choose_email_mobile'.
+  $field_bases['field_coupon_choose_email_mobile'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_coupon_choose_email_mobile',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'email' => 'Email',
+        'mobile' => 'Mobile',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_coupon_current_uses'.
   $field_bases['field_coupon_current_uses'] = array(
     'active' => 1,
@@ -205,28 +233,32 @@ function coupon_features_field_default_field_bases() {
     'type' => 'number_integer',
   );
 
-  // Exported field_base: 'field_coupon_mobile'.
-  $field_bases['field_coupon_mobile'] = array(
+  // Exported field_base: 'field_coupon_status'.
+  $field_bases['field_coupon_status'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_coupon_mobile',
+    'field_name' => 'field_coupon_status',
     'field_permissions' => array(
       'type' => 0,
     ),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'value' => array(
+        0 => 'value',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'list',
     'settings' => array(
-      'max_length' => 255,
+      'allowed_values' => array(
+        'Active' => 'Active',
+        'Inactive' => 'Inactive',
+      ),
+      'allowed_values_function' => '',
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_coupon_third_party_coupon'.

@@ -23,7 +23,7 @@ function coupon_features_node_info() {
       'base' => 'node_content',
       'description' => t('This is to add Coupon!'),
       'has_title' => '1',
-      'title_label' => t('Coupon'),
+      'title_label' => t('Enter Coupon name'),
       'help' => '',
     ),
   );
