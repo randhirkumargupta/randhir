@@ -2990,16 +2990,17 @@ footer .footer-top ul li a:hover{
   }
   &.comment-popup{
     background-color: #fff;
-    bottom: 0;
     border-radius: 10px;
-    height: 300px;
     left: 0;
-    margin: auto;
+    margin: 0 auto;
+    max-height: 80%;
+    overflow-y: auto;
     max-width: 600px;
     padding: 50px 20px 20px;
     position: absolute;
     right: 0;
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
     width: 100%;
     .close-comment-popup{
       display: block;
@@ -3019,6 +3020,7 @@ footer .footer-top ul li a:hover{
   text-align: left;
   &.social-login{
     text-align: right;
+    width: auto;
     span {
       display: inline-block;
       vertical-align: top;
@@ -3114,29 +3116,47 @@ footer .footer-top ul li a:hover{
   .form-field-name-field-section{
     float: left;
     width: 48%;
-    label{float: none; display: block;}
+    label{float: none; display: none;}
   }
   select{max-width: 100%;}
   .form-field-name-field-user-name,
-  .form-item-title,
-  .form-field-name-field-user-city,
-  .field-type-text-with-summary{
+  .form-field-name-field-user-city{
     float: left; width: 52%; padding-right: 2%;
-    label{float: none; display: block;}
+    label{float: none; display: none;}
   }
-  .field-type-text-with-summary{
-    .form-type-textarea > label + div{padding: 0;}
-    .form-textarea{height: 100px;}
+  .form-item-title,
+  #edit-field-user-message{
+    float: left;
+    width: 100%;
+    label{float: none; display: none;}
   }
-  .captcha-lable{width: auto; float: none;}
-  .captcha{padding-left: 52%;}
+  #edit-field-user-message{
+    .form-type-textarea > label + div{
+      padding-left: 0;
+      .form-textarea{height: 100px;}
+    }
+  }
+  .form-item-title{
+    .form-text{width: 100%;}
+  }
+  .captcha{padding-left: 220px;}
   .form-actions{
     display: inline-block; vertical-align: top; width: 100%; padding: 0; text-align: right;
     .form-submit{padding: 10px 30px;}
   }
   span.error{padding-left: 0;}
 }
-
+.region-front-end-breadcrumb {
+    color: #a1a1a1;
+    margin-bottom: 5px;
+    font: 400 14px/18px Roboto;
+    a{
+      color: #a1a1a1;
+      &:hover{
+        color: #1a3c8d;
+      }
+    }
+}
 
 /* CSS To Add Zoom Effect on Images */
 
@@ -3672,15 +3692,19 @@ footer .footer-top ul li a:hover{
     .region-personalization{text-align: center;}
     #block-views-follow-tags-block,
     #block-views-follow-tags-block-1{
+        background-color: #f2f2f2;
+        margin: 20px 10px 0;
         display: inline-block;
         vertical-align: top;
         width: 400px;
-        padding: 50px 0;
+        padding: 15px;
         .view-follow-tags{
             .views-row{
                 padding:10px;
                 text-align: left;
                 border: 1px solid #d9d9d9;
+                background-color: #fff;
+                transition: all 300ms;
                 position: relative;
                 margin: 15px;
                 border-radius: 5px;
@@ -4981,7 +5005,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             span{
               padding: 0 3px;
               width: 36px;
-              dfn{font-size: 10px; margin-top: 20px;}
+              dfn{font-size: 10px; margin-top: 5px;}
               .fa{font-size: 17px;}
             }
          }
@@ -5165,7 +5189,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     }
   }  
   .page-personalization-my-following #block-views-follow-tags-block, 
-  .page-personalization-my-following #block-views-follow-tags-block-1{width: 100%; float: left; padding: 50px 0 0;}
+  .page-personalization-my-following #block-views-follow-tags-block-1{width: 100%; float: left; margin: 20px 0 0; padding: 15px 0;}
   #block-itg-personalization-user-my-point{
     .header-point{
       padding: 20px 0;
@@ -5400,6 +5424,17 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child{margin-left: 175px;}
 }
 @media all and(max-width: 767px){
+  
+  .comment-user-details{
+    text-align: left;
+    > div {
+      margin: 0 0 10px 0;
+      width: 100%;
+      &.social-login{
+        text-align: left;
+      }
+    }
+  }
   
   /* Responsive CSS For Loyalty and Rewards */
   [id*="block-views-redeem-points-block"]{
