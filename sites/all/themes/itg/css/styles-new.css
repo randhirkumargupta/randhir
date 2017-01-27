@@ -3249,6 +3249,38 @@ footer .footer-top ul li a:hover {
   color: #1a3c8d;
 }
 
+body {
+  position: relative;
+}
+body.light-off-overlay {
+  overflow: hidden;
+}
+body.light-off-overlay:after {
+  content: "";
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 1000ms;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+}
+body .program-livetv .light-on-text {
+  display: none;
+}
+body .program-livetv.effect-added {
+  position: relative;
+  z-index: 99999;
+  box-shadow: 0 0 20px 0 #fff;
+}
+body .program-livetv.effect-added .light-off-text {
+  display: none;
+}
+body .program-livetv.effect-added .light-on-text {
+  display: inline;
+}
+
 /* CSS To Add Zoom Effect on Images */
 @media all and (min-width: 1025px) {
   .zoom-image, #block-itg-front-end-common-related-photo-block #related-photo ul li a,
@@ -5276,7 +5308,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
   .page-personalization .personalized-wrapper .personalized-user-area .personalized-user-info span dfn {
     font-size: 10px;
-    margin-top: 20px;
+    margin-top: 5px;
   }
   .page-personalization .personalized-wrapper .personalized-user-area .personalized-user-info span .fa {
     font-size: 17px;
