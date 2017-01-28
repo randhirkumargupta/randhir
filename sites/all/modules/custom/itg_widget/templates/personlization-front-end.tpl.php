@@ -27,7 +27,7 @@
             else {
               $height_width = ($frist_key == 0) ? 'width="370" height="208"' : 'width="170" height="127"';
               ?>
-              <img <?php print $height_width; ?> src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" />
+              <img <?php print $height_width; ?> src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" alt="" />
             <?php } ?>
           </a>
         </div>
@@ -68,7 +68,7 @@
               }
               else {
                 ?>
-                <img width="170" height="127" src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg" />
+                <img width="170" height="127" src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg" alt="" />
               <?php } ?>
             </a>
           </div>

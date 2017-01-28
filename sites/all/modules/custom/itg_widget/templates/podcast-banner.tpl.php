@@ -14,7 +14,7 @@
   $description = $podcast_banner_array[$podcast_id]['desc'];
   ?>
   <div class="pic">
-    <img src="<?php print image_style_url("widget_small", $podcast_image); ?>" />
+    <img src="<?php print image_style_url("widget_small", $podcast_image); ?>" alt="" />
   </div>
   <div class="podcast-detail">      
   <?php if (!empty($podcast_banner_array[$podcast_id]['audio']['uri'])) : ?>
@@ -43,7 +43,7 @@
               ?>
 
                 <a href="?podcast_id=<?php print $bottom_keys; ?>">
-                  <img src="<?php print $extra_large_image_url; ?>">
+                  <img src="<?php print $extra_large_image_url; ?>" alt="" />
                 </a>
 
             <?php } ?>
