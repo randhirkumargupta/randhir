@@ -41,9 +41,14 @@ function itg_social_media_menu() {
     );
     $items['itg-social-log/%'] = array(
         'page callback' => 'itg_social_media_log_listing',
-        'access arguments' => array('administer itg_social_media edit_content settings'),
+        'access arguments' => array('access content'),
         'page arguments' => array(2),
-         'title' => 'ITG Social Media Log',
+        'title' => 'ITG Social Media Log',
+        'type' => MENU_CALLBACK,
+    );
+    $items['facebook_count'] = array(
+        'page callback' => 'get_shares_count_from_post_for_showing',
+        'access arguments' => array('access content'),
         'type' => MENU_CALLBACK,
     );
     $items['twitter/oauth'] = array(
@@ -107,13 +112,13 @@ function itg_social_media_menu() {
 function itg_social_media_log_listing() {
     # configure the table header columns
     $header = array(
-        array('data' => t('Node title')),
+        array('data' => t('Title')),
         array('data' => t('Twitter Count ')),
         array('data' => t('Facebook Count')),
         array('data' => t('Last Promoted on ')),
     );
 
-$nid = arg(1);
+    $nid = arg(1);
     $query = db_select('itg_social_media_logs', 'isml')
                     ->fields('isml')
                     ->condition('nid', $nid, '=')
@@ -124,7 +129,7 @@ $nid = arg(1);
 
 
     $result = $query->execute()->fetchall();
-    
+
 
     $twitter_count = itg_social_media_count_log('Twitter', $nid);
     $facebook_count = itg_social_media_count_log('facebook', $nid);
@@ -136,18 +141,58 @@ $nid = arg(1);
         array('data' => $twitter_count),
         array('data' => $facebook_count),
         array('data' => format_date($result[0]->scheduled_time, $type = 'itg_date_with_time', $format = '', $timezone = NULL, $langcode = NULL)),
-     
     );
 
-
-
-    $output = render(drupal_get_form('itg_octopus_api_form'));
     $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
 
-    # add the pager
- 
+    // set facebook table
+    $header = array(
+        array('data' => t('Like Count')),
+        array('data' => t('Share Count ')),
+        array('data' => t('Comment Count')),
+      
+    );
 
-    return $output;
+    $nid = arg(1);
+
+    $fecebook_detaila = itg_social_media_facebook_activity($nid);
+    $rows = array();
+
+    $rows[] = array(
+        array('data' => $fecebook_detaila['like']),
+        array('data' => $fecebook_detaila['share']),
+        array('data' => $fecebook_detaila['comment']),
+      
+    );
+
+    $output_1 .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
+$graph_data = "['Share',     ".$fecebook_detaila['share']."],
+          ['Comment',      ".$fecebook_detaila['comment']."],
+          ['Like',  ".$fecebook_detaila['like']."]"; 
+
+$facebook_graph_flag = 0;
+if ($fecebook_detaila['share'] > 0 || $fecebook_detaila['comment'] > 0 || $fecebook_detaila['like'] > 0) {
+    $facebook_graph_flag = 1;
+}
+    # add the pager
+    return theme('itg_twitter_social', array('data' => $output, 'facebook_details' => $output_1,'fb_graph_details'=>$graph_data , 'is_fb_graph' =>$facebook_graph_flag));
+
+    //return $output;
+}
+
+/**
+ * Implements hook_theme().
+ * {@inheritdoc}
+ */
+function itg_social_media_theme($existing, $type, $theme, $path) {
+    $themes = array(
+        'itg_twitter_social' => array(
+            'template' => 'itg-social-media-twitter',
+            'path' => drupal_get_path('module', 'itg_social_media') . '/templates',
+            'variables' => array('data' => NULL),
+        ),
+    );
+    return $themes;
 }
 
 /**
@@ -173,11 +218,11 @@ function itg_social_media_count_log($share_on = null, $nid) {
  * @param type $nid
  * @return type int 
  */
-function itg_social_media_check_node_exist( $nid) {
+function itg_social_media_check_node_exist($nid) {
     $query = db_select('itg_social_media_logs', 'isml')
             ->fields('isml')
             ->condition('nid', $nid, '=');
-          
+
     $result = $query->execute()->fetchall();
     return count($result);
 }
@@ -187,47 +232,47 @@ function itg_social_media_check_node_exist( $nid) {
  * {@inheritdoc}
  */
 function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
- switch ($form['#id']) {
-    case 'views-exposed-form-social-media-logs-page':
-      $form['created']['min'] = array(
-        '#type' => 'date_popup',
-        '#date_format' => 'd/m/Y',
-        '#date_year_range' => '-3:+3',
-        '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date')),
-      );
-      $form['created']['max'] = array(
-        '#type' => 'date_popup',
-        '#date_format' => 'd/m/Y',
-        '#date_year_range' => '-3:+3',
-        '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date')),
-      );
-      // Autocomplete node title
-      $form['node_title']['#autocomplete_path'] = 'itg-social_media/title-autocomplete/node_title';
-      $form['social_media']['#autocomplete_path'] = 'itg-social_media/title-autocomplete/social_media';
-      $form['username']['#autocomplete_path'] = 'itg-social_media/title-autocomplete/username';
-      $form['status']['#options'][1] = 'Published';
-      $form['status']['#options'][0] = 'Unpublished';
+    switch ($form['#id']) {
+        case 'views-exposed-form-social-media-logs-page':
+            $form['created']['min'] = array(
+                '#type' => 'date_popup',
+                '#date_format' => 'd/m/Y',
+                '#date_year_range' => '-3:+3',
+                '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date')),
+            );
+            $form['created']['max'] = array(
+                '#type' => 'date_popup',
+                '#date_format' => 'd/m/Y',
+                '#date_year_range' => '-3:+3',
+                '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date')),
+            );
+            // Autocomplete node title
+            $form['node_title']['#autocomplete_path'] = 'itg-social_media/title-autocomplete/node_title';
+            $form['social_media']['#autocomplete_path'] = 'itg-social_media/title-autocomplete/social_media';
+            $form['username']['#autocomplete_path'] = 'itg-social_media/title-autocomplete/username';
+            $form['status']['#options'][1] = 'Published';
+            $form['status']['#options'][0] = 'Unpublished';
 
-      break;
-    case 'views-exposed-form-sold-item-history-page':
-      $form['status']['#options'][1] = t('Complete');
-      $form['status']['#options'][0] = t('Pending');
-    case 'views-exposed-form-browse-content-page':      
-      $form['date_filter']['min']['#attributes'] = array(
-        'autocomplete' => 'off',
-        'readonly' => 'readonly',
-        'placeholder' => t('Start Date'),
-      );
-      $form['date_filter']['min']['#datepicker_options'] = array('maxDate' => '+0d');
-      $form['date_filter']['max']['#datepicker_options'] = array('maxDate' => '+0d');
-      $form['date_filter']['max']['#attributes'] = array(
-        'autocomplete' => 'off',
-        'readonly' => 'readonly',
-        'placeholder' => t('End Date')
-      );
+            break;
+        case 'views-exposed-form-sold-item-history-page':
+            $form['status']['#options'][1] = t('Complete');
+            $form['status']['#options'][0] = t('Pending');
+        case 'views-exposed-form-browse-content-page':
+            $form['date_filter']['min']['#attributes'] = array(
+                'autocomplete' => 'off',
+                'readonly' => 'readonly',
+                'placeholder' => t('Start Date'),
+            );
+            $form['date_filter']['min']['#datepicker_options'] = array('maxDate' => '+0d');
+            $form['date_filter']['max']['#datepicker_options'] = array('maxDate' => '+0d');
+            $form['date_filter']['max']['#attributes'] = array(
+                'autocomplete' => 'off',
+                'readonly' => 'readonly',
+                'placeholder' => t('End Date')
+            );
 
-      break;
-  }
+            break;
+    }
 }
 
 /**
@@ -371,8 +416,10 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
 
             break;
     }
+
     try {
         $response = $fb->post('/' . $page_id . '/' . $type, $data, $token);
+        $graph_node_res = $response->getGraphNode();
     } catch (Facebook\Exceptions\FacebookResponseException $e) {
         // When Graph returns an error
         drupal_set_message(t('Graph returned an error: @egetMessage', array('@egetMessage' => $e->getMessage())), 'error');
@@ -389,6 +436,7 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
         $pre_save['nid'] = $node->nid;
         $pre_save['node_title'] = $node->title;
         $pre_save['username'] = $user->name;
+        $pre_save['post_id'] = $graph_node_res['post_id'];
         $pre_save['social_media'] = 'facebook ' . $type;
         $pre_save['status'] = 1;
         $mtype = $type == 'photos' ? 'Image' : 'Video';
@@ -398,6 +446,38 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
 
         drupal_set_message(t('@mtype has been posted on social media - Facebook', array('@mtype' => $mtype)), 'status');
     }
+}
+
+function itg_social_media_facebook_activity($nid) {
+    global $user_access_token;
+    $page_id = variable_get('facebook_page_id', '');
+    $token = variable_get('access_token_one') . variable_get('access_token_two');
+    $like = 0;
+    $share = 0;
+    $comment = 0;
+    $share_on = 'facebook';
+    $query = db_select('itg_social_media_logs', 'isml')
+            ->fields('isml')
+            ->condition('nid', $nid, '=')
+            ->condition('social_media', '%' . db_like($share_on) . '%', 'LIKE');
+
+
+    $result = $query->execute()->fetchall();
+    
+    foreach ($result as $result_d) {
+        $current_post_id = $result_d->post_id;
+        $current_url = 'https://graph.facebook.com/v2.2/' . $current_post_id;
+        $current_url .= '?access_token=' . $token;
+        $current_url .= '&fields=likes.summary(true),comments.summary(true),shares';
+        $json = file_get_contents($current_url);
+        $data = json_decode($json, true);
+        $like = $like + $data['likes']['summary']['total_count'];
+        $comment = $comment + $data['comments']['summary']['total_count'];
+        $share = $comment + $data['shares']['count'];
+    }
+    $return_array = array('share' => $share, 'like' => $like, 'comment' => $comment);
+
+    return $return_array;
 }
 
 /**
