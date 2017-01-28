@@ -3070,9 +3070,6 @@ footer .footer-top ul li a:hover {
 .ugc-comment-popup.comment-popup .close-comment-popup {
   display: block;
 }
-.ugc-comment-popup.comment-popup .social-login {
-  display: none;
-}
 
 .comment-user-details {
   padding: 20px 0 0;
@@ -3216,12 +3213,22 @@ footer .footer-top ul li a:hover {
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper #edit-field-user-message .form-type-textarea > label + div .form-textarea {
   height: 100px;
+  width: 100%;
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper .form-item-title .form-text {
   width: 100%;
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper .captcha {
+  padding-left: 0;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper .captcha .form-item-captcha-response > label {
+  padding: 7px 10px 7px 0;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper .captcha .form-item-captcha-response div.description, #content [id*="ugc-node-form"].ugc-custom-wrapper .captcha .form-item-captcha-response span.error {
   padding-left: 220px;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper .captcha img {
+  margin: 0 0 5px 220px;
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper .form-actions {
   display: inline-block;

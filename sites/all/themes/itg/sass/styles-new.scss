@@ -3005,7 +3005,6 @@ footer .footer-top ul li a:hover{
     .close-comment-popup{
       display: block;
     }
-    .social-login{display: none;}
   }
 }
 .comment-user-details {
@@ -3133,13 +3132,24 @@ footer .footer-top ul li a:hover{
   #edit-field-user-message{
     .form-type-textarea > label + div{
       padding-left: 0;
-      .form-textarea{height: 100px;}
+      .form-textarea{height: 100px; width: 100%;}
     }
   }
   .form-item-title{
     .form-text{width: 100%;}
   }
-  .captcha{padding-left: 220px;}
+  .captcha{
+    padding-left: 0;
+    .form-item-captcha-response{
+      > label{padding: 7px 10px 7px 0;}
+      div.description, span.error{
+        padding-left: 220px;
+      }
+    }
+    img{
+      margin: 0 0 5px 220px;
+    }
+  }
   .form-actions{
     display: inline-block; vertical-align: top; width: 100%; padding: 0; text-align: right;
     .form-submit{padding: 10px 30px;}
