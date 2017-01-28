@@ -97,7 +97,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'print_team_integration_node_form') {
     //code by shravan
     $magazine_field = 'field_pti_magazine';
-    $supplement_field = 'field_pti_issue';
+    $pti_issue_field = 'field_pti_issue';
     
     if (isset($form[$magazine_field][LANGUAGE_NONE]['#default_value'][0]) && !isset($form_state['triggering_element'])) {
         $magazine_id = $form[$magazine_field][LANGUAGE_NONE]['#default_value'][0];
@@ -110,15 +110,15 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
     $form[$magazine_field][LANGUAGE_NONE]['#ajax'] = array(
         'event' => 'change',
         'callback' => 'itg_magazine_ajax_callback',
-        'wrapper' => $supplement_field . '_replace',
+        'wrapper' => $pti_issue_field . '_replace',
     );
     
     // Setup supplement select
-    $form[$supplement_field][LANGUAGE_NONE]['#prefix'] = '<div id="' . $supplement_field . '_replace">';
-    $form[$supplement_field][LANGUAGE_NONE]['#suffix'] = '</div>';
+    $form[$pti_issue_field][LANGUAGE_NONE]['#prefix'] = '<div id="' . $pti_issue_field . '_replace">';
+    $form[$pti_issue_field][LANGUAGE_NONE]['#suffix'] = '</div>';
 
     if (function_exists('get_issue_by_magazine')) {
-        $form[$supplement_field][LANGUAGE_NONE]['#options'] = get_issue_by_magazine($magazine_id);
+        $form[$pti_issue_field][LANGUAGE_NONE]['#options'] = get_issue_by_magazine($magazine_id);
     }
     //end
     
