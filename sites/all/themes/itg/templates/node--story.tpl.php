@@ -295,7 +295,7 @@ if (!empty($content)):
   ?>">
                   <div class="story-associate-content">
                       <div id="videogallery-iframe">
-                          <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading">
+                          <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading" />
                       </div>
                       <?php
                       $clidk_class_slider = "";
@@ -481,7 +481,7 @@ if (!empty($content)):
                                 $expertDetailsImage = $base_url . '/sites/all/themes/itg/images/user-default-expert.jpg';
                               }
                             }
-                            $expertDetails .= '<div class="right-side col-md-4 col-sm-4 col-xs-4"><img src="' . $expertDetailsImage . '"></div></div>';
+                            $expertDetails .= '<div class="right-side col-md-4 col-sm-4 col-xs-4"><img src="' . $expertDetailsImage . '" alt="" /></div></div>';
                             if (!empty($node->field_story_expert_description)) {
                               $expertDetails .= '<h2>' . $node->field_story_expert_description['und'][0]['value'] . '</h2>';
                             }
@@ -631,7 +631,7 @@ if (!empty($content)):
                   $file = file_load($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
                   $share_uri = $file->uri;
                   $share_image = file_create_url($share_uri);
-                  $img = '<img title="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '">';
+                  $img = '<img title="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '" alt="" />';
                   if (!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
                     $buzz_output.= '<h1><span>' . $buzz . '</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
                     if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
