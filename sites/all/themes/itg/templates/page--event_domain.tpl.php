@@ -38,7 +38,7 @@ $menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['r
     <header class="header" id="header" role="banner">
             <section class="header-top">
                 <div class="event-header-banner" style="background: url(<?php echo $banner_image; ?>) no-repeat center top">
-<!--                <img src="<?php //echo $banner_image; ?>" alt="">-->
+<!--                <img src="<?php //echo $banner_image; ?>" alt="" />-->
               <div class="event-add-header">
                 
               <?php 
@@ -150,7 +150,7 @@ $menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['r
 <?php print render($page['bottom']); ?>
 <?php global $base_url; ?>
 <div id="widget-ajex-loader" style="display: none">
-    <img class="widget-loader" align="center" src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itgadmin') . '/images/loader.svg'; ?>" alt="Loading..." />
+    <img class="widget-loader" src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itgadmin') . '/images/loader.svg'; ?>" alt="Loading..." />
 </div>
 <?php
 drupal_add_js("jQuery(document).ready(function(){

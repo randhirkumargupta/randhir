@@ -111,7 +111,7 @@ jQuery.ajax({type: "GET",url: feedURL,dataType: "jsonp", cache: "true",crossDoma
 	},
             error: function (e, ts, et)
 		{ 
-		console.log(ts + e + et + consID)
+//		console.log(ts + e + et + consID);
 			}
      });
 }
@@ -128,11 +128,11 @@ jQuery.ajax({type: "GET",url: feedURL,dataType: "jsonp", cache: "true",crossDoma
     $("#cons"+consID).attr('onclick',"getJSONFeedDetails('"+conurl+"','"+consID+"')");
 
 	var tr;
-  tr = "<tr><td colspan = '4' style='position:relative'><div class='p_head'>"+data.loksabha.cName+"</div><div style='position: absolute;right:0px;top: 0px;'><img src='http://media2.intoday.in/indiatoday/election2014/live-poll/close.gif' style = 'cursor:pointer;' onclick = 'tabclose();'/></div></td></tr>";
+  tr = "<tr><td colspan = '4' style='position:relative'><div class='p_head'>"+data.loksabha.cName+"</div><div style='position: absolute;right:0px;top: 0px;'><img src='http://media2.intoday.in/indiatoday/election2014/live-poll/close.gif' style = 'cursor:pointer;' onclick = 'tabclose();' alt='' /></div></td></tr>";
 	var itemsArray = data.loksabha.items; 
 	  for(var i = 0;i<itemsArray.length;i++)
 	  {
-	     tr += "<tr><td><div class='p_cname'><img width='60' height='60' style='float:left; margin-right:5px;' src = '"+itemsArray[i].candImage+"' />"+itemsArray[i].candName+" <div class='p_pname'>Party: "+itemsArray[i].pName+"</div></div></td></tr>";   
+	     tr += "<tr><td><div class='p_cname'><img width='60' height='60' style='float:left; margin-right:5px;' src = '"+itemsArray[i].candImage+"' alt='' />"+itemsArray[i].candName+" <div class='p_pname'>Party: "+itemsArray[i].pName+"</div></div></td></tr>";   
 
 	   	   var candProfileURL;
        if(document.domain == "aajtak.intoday.in")
@@ -162,11 +162,11 @@ jQuery.ajax({type: "GET",url: feedURL,dataType: "jsonp", cache: "true",crossDoma
 	{
 
 	var tr;
-  tr = "<tr><td colspan = '4' style='position:relative'><div class='p_head'>"+data.loksabha.cName+"</div><div style='position: absolute;right:0px;top: 0px;'><img src='http://media2.intoday.in/indiatoday/election_delhi_2015/live-poll/close.gif' style = 'cursor:pointer;' onclick = 'tabclose();'/></div></td></tr>";
+  tr = "<tr><td colspan = '4' style='position:relative'><div class='p_head'>"+data.loksabha.cName+"</div><div style='position: absolute;right:0px;top: 0px;'><img src='http://media2.intoday.in/indiatoday/election_delhi_2015/live-poll/close.gif' style = 'cursor:pointer;' onclick = 'tabclose();' alt='' /></div></td></tr>";
 	var itemsArray = data.loksabha.items; 
 	  for(var i = 0;i<itemsArray.length;i++)
 	  {
-	   tr += "<tr><td><div class='p_cname'><img width='60' height='60' style='float:left; margin-right:5px;' src = '"+itemsArray[i].candImage+"' />"+itemsArray[i].candName+" <div class='p_pname'>Party: "+itemsArray[i].pName+"</div><div class='p_status'>Result: "+itemsArray[i].Status+"</div></div></td></tr>";  
+	   tr += "<tr><td><div class='p_cname'><img width='60' height='60' style='float:left; margin-right:5px;' src = '"+itemsArray[i].candImage+"' alt='' />"+itemsArray[i].candName+" <div class='p_pname'>Party: "+itemsArray[i].pName+"</div><div class='p_status'>Result: "+itemsArray[i].Status+"</div></div></td></tr>";  
 
 	   var candProfileURL;
        if(document.domain == "aajtak.intoday.in")
