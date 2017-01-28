@@ -34,7 +34,15 @@
 
             <?php if (!empty($title)) : ?>    
               <p class="dont-miss-widget dont-miss-<?php echo $node_data['nid'] ?>">
-                <?php echo l(mb_strimwidth($title, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['nid']}")) ?>
+                <?php //echo l(mb_strimwidth($title, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['nid']}")) ?>
+              <?php
+            if (function_exists('itg_common_get_smiley_title')) {
+              echo l(itg_common_get_smiley_title($node_data['nid'], 0, 90), "node/" . $node_data['nid'], array("html" => TRUE));
+            }
+            else {
+              echo l(mb_strimwidth(strip_tags($title), 0, 100, ".."), "node/" . $node_data['nid']);
+            }
+            ?>
               </p>
                
             <?php endif; ?>

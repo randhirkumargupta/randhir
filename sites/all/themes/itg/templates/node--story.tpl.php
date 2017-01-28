@@ -89,7 +89,14 @@ if (!empty($content)):
             <h1><?php print $node->title . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
           <?php }
           else { ?>
-            <h1><?php print $node->title . $pipelinetext; ?></h1>
+            <h1><?php 
+            if(function_exists('itg_common_get_smiley_title')) {
+              print itg_common_get_smiley_title($node->nid , 0, 255) . $pipelinetext;
+            }
+            else {
+              print $node->title . $pipelinetext;
+            }
+            ?></h1>
           <?php } ?>
           <?php
           $associate_type = '';
