@@ -20,7 +20,7 @@
             jQuery('.add-more-block-front').live('click', function () {
                 var section_ids = "";
                 var elementobj = jQuery(this);
-                jQuery(this).parent('.load-more-wrapper-front').addClass('new-load').html('<img src="./sites/all/themes/itg/images/tab-loading.gif"/>')
+                jQuery(this).parent('.load-more-wrapper-front').addClass('new-load').html('<img src="./sites/all/themes/itg/images/tab-loading.gif" alt="" />')
                 //jQuery(this).remove();
                 jQuery('.sectioncart').each(function () {
                     section_ids = jQuery(this).attr('id');

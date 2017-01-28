@@ -254,7 +254,7 @@ function getmycomments($data) {
   $image = $base_url . '/sites/all/themes/itg/images/user-default.png';
   $contect .= "<div class='itg-comment'>
                 <div class='comment-image'>
-                <img src= $image width='50' height='50'></div>
+                <img src= $image width='50' height='50' alt='' /></div>
                 <div class='comment-details'><div class='comment-name'>" . $data['name'] . "</div>
                 <div class='comment-body'>" . $data['comment'] . "</div>
                 <span class='comment-timestamp'>" . format_interval((time() - strtotime($data['comment_date_time'])), 2) . t(' ago') . "</span>

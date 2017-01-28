@@ -295,7 +295,7 @@ if (!empty($content)):
   ?>">
                   <div class="story-associate-content">
                       <div id="videogallery-iframe">
-                          <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading">
+                          <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading" />
                       </div>
                       <?php
                       $clidk_class_slider = "";
@@ -481,7 +481,7 @@ if (!empty($content)):
                                 $expertDetailsImage = $base_url . '/sites/all/themes/itg/images/user-default-expert.jpg';
                               }
                             }
-                            $expertDetails .= '<div class="right-side col-md-4 col-sm-4 col-xs-4"><img src="' . $expertDetailsImage . '"></div></div>';
+                            $expertDetails .= '<div class="right-side col-md-4 col-sm-4 col-xs-4"><img src="' . $expertDetailsImage . '" alt="" /></div></div>';
                             if (!empty($node->field_story_expert_description)) {
                               $expertDetails .= '<h2>' . $node->field_story_expert_description['und'][0]['value'] . '</h2>';
                             }
@@ -585,7 +585,7 @@ if (!empty($content)):
                   for ($i = 0; $i < $photo_story_count; $i++) {
                     $entity_obj = entity_load('field_collection_item', array($photo_story[$i]['value']));
                     $photo_story_img_path = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['uri'];
-                    $photo_story_img = image_style_url('', $photo_story_img_path);
+                    $photo_story_img = image_style_url('photo_story', $photo_story_img_path);
                     $photo_story_desc = $entity_obj[$photo_story[$i]['value']]->field_photo_story_description['und'][0]['value'];
                     $html .= '<div class="photo-slider">';
                     $html .= '<img src="' . $photo_story_img . '" title="" alt="" />';
@@ -596,17 +596,17 @@ if (!empty($content)):
                   print $html;
                 }
               ?>
-                  <!-- for smaller photo story slider, loop has been repeated again -->
+                  <!-- for photo story bottom slider, loop has been repeated again -->
                   <?php 
                 if (!empty($node->field_photo_story)) {
                   $photo_story = $node->field_photo_story[LANGUAGE_NONE];
                   $photo_story_count = sizeof($photo_story);
                   $html = '';
-                  $html .= '<div class="photo-story-img multiple-photo">';
+                  $html .= '<div class="photo-story-img multiple-photo common-photo">';
                   for ($i = 0; $i < $photo_story_count; $i++) {
                     $entity_obj = entity_load('field_collection_item', array($photo_story[$i]['value']));
                     $photo_story_img_path = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['uri'];
-                    $photo_story_img = image_style_url('', $photo_story_img_path);
+                    $photo_story_img = image_style_url('photo_story_small_88x66', $photo_story_img_path);
                     $html .= '<div class="photo-slider">';
                     $html .= '<img src="' . $photo_story_img . '" title="" alt="" />';
                     $html .= '</div>';
@@ -631,7 +631,7 @@ if (!empty($content)):
                   $file = file_load($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
                   $share_uri = $file->uri;
                   $share_image = file_create_url($share_uri);
-                  $img = '<img title="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '">';
+                  $img = '<img title="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '" alt="" />';
                   if (!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
                     $buzz_output.= '<h1><span>' . $buzz . '</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
                     if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {

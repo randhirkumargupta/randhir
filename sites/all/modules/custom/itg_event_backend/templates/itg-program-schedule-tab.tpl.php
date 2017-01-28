@@ -108,9 +108,9 @@ foreach ($data as $key => $value) {
               //$spk_title = '<div class="speaker-title"><a href="'.$baseurl.'node/'.$spk_detail[0]->nid.'" target="_blank" style="color:'.$content_font_color.'">'.$spk_detail[0]->title.'</a></div>';
               $spk_title = '<div class="speaker-title">'.l(t($spk_detail[0]->title), $baseurl.'speaker-details', array('attributes' => array('style' => 'color:'.$content_font_color),'query' => array('speaker' => $spk_detail[0]->nid))).'</div>';
               if(!empty($spk_detail[0]->uri)){
-                $img = '<img src=' . image_style_url("event_speaker_program_72x72", $spk_detail[0]->uri) . '/>';
+                $img = '<img src=' . image_style_url("event_speaker_program_72x72", $spk_detail[0]->uri) . ' alt="" />';
               }else{
-                $img = "<img width='72' height='72'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/program-speaker.jpg' />";
+                $img = "<img width='72' height='72'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/program-speaker.jpg' alt='' />";
               }
               //print '<div class="speaker-image"><a href="'.$baseurl.'node/'.$spk_detail[0]->nid.'" target="_blank">'.$img.'</a></div>';
               print '<div class="speaker-image">'. l($img, $baseurl.'speaker-details', array('query' => array('speaker' => $spk_detail[0]->nid), 'html' => TRUE)).'</div>';

@@ -23,14 +23,14 @@ if ($widget_style == 'auto-road-trip') {
 
             <?php if (!empty($extra_large_image_url)) { ?>
               <a class="pic <?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                <img  src="<?php print $extra_large_image_url ?>" />
+                <img  src="<?php print $extra_large_image_url ?>" alt="" />
               </a>
               <?php
             }
             else {
               ?>
               <a class="pic <?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                <img  height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" />
+                <img  height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" alt="" />
               </a>
             <?php }
             ?>
@@ -121,7 +121,7 @@ else if ($widget_style == 'buying-guid') {
             ?>
 
             <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-              <img src="<?php echo $extra_large_image_url; ?>">
+              <img src="<?php echo $extra_large_image_url; ?>" alt="" />
             </a>
             <h3>
               <?php
@@ -226,7 +226,7 @@ else if ($widget_style == 'in-depth') {
             }
             ?>
 
-            <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><img src="<?php echo $extra_large_image_url; ?>"> </a></span>
+            <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><img src="<?php echo $extra_large_image_url; ?>" alt="" /> </a></span>
 
             <h3>
               <?php //echo l(mb_strimwidth(ucfirst($desc), 0, 70, ".."), "node/" . $nid); ?>
@@ -252,7 +252,7 @@ else if ($widget_style == 'in-depth') {
             <ul>
               <li>
                 <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                    <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>">
+                    <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>" alt="" />
                   </a></span>
 
                 <p>
@@ -296,7 +296,7 @@ else if ($widget_style == 'in-depth') {
 
               <li>
                 <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                    <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>">
+                    <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>" alt="" />
                   </a></span>  
 
                 <p>
@@ -350,7 +350,7 @@ else if ($widget_style == 'movies-celebrities') {
             }
             ?>
 
-            <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><img src="<?php echo $extra_large_image_url; ?>"> </a></span>
+            <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><img src="<?php echo $extra_large_image_url; ?>" alt="" /> </a></span>
 
             <h3>
               <?php //echo l(mb_strimwidth($desc, 0, 70, ".."), "node/" . $nid); ?>
@@ -405,7 +405,7 @@ else if ($widget_style == 'movies-celebrities') {
 
               <li>
                 <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                    <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>">
+                    <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>" alt="" />
                   </a></span>  
 
                 <p>
@@ -458,7 +458,7 @@ else if ($widget_style == 'movies-lifestyle') {
             }
             ?>
 
-            <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><img src="<?php echo $extra_large_image_url; ?>"> </a></span>
+            <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><img src="<?php echo $extra_large_image_url; ?>" alt="" /> </a></span>
 
             <h3>
               <?php
@@ -514,7 +514,7 @@ else if ($widget_style == 'movies-lifestyle') {
 
               <li>
                 <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                    <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>">
+                    <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>" alt="" />
                   </a></span>  
 
                 <p>
@@ -567,7 +567,7 @@ else if ($widget_style == 'oscar-news') {
             ?>
             <div class="col-md-12">
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                <span class="pic  <?php echo $video_class; ?>"><img src="<?php echo $extra_large_image_url; ?>"></span>
+                <span class="pic  <?php echo $video_class; ?>"><img src="<?php echo $extra_large_image_url; ?>" alt="" /></span>
               </a>
               <h3>
                 <?php
@@ -592,7 +592,7 @@ else if ($widget_style == 'oscar-news') {
             ?>
             <div class="col-md-6 col-sm-6 col-xs-6">                   
               <span class="pic  <?php echo $video_class; ?>"> <a class="pic  <?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                  <img  height="127" width="170" src="<?php echo $extra_large_image_url; ?>">
+                  <img  height="127" width="170" src="<?php echo $extra_large_image_url; ?>" alt="" />
                 </a></span>
 
               <p>
@@ -643,7 +643,7 @@ else if ($widget_style == 'standpoint') {
     }
     ?>
 
-    <li> <img  src="<?php echo $extra_large_image_url; ?>">
+    <li> <img  src="<?php echo $extra_large_image_url; ?>" alt="" />
 
       <div class="detail">
         <p class="flex-caption">
@@ -693,7 +693,7 @@ else if ($widget_style == 'oscar-features') {
         ?>
         <div class="col-md-6">
           <span> <a <?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-              <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>">
+              <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>" alt="" />
             </a></span>
 
           <p>
@@ -747,7 +747,7 @@ else if ($widget_style == 'tech-tips' || $widget_style == 'india-inc-on-budget' 
 
       <?php if (!empty($extra_large_image_url)) { ?>
 
-              <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  <img  height="66" width="88"  src="<?php print $extra_large_image_url ?>" /> </a></span>
+              <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  <img  height="66" width="88"  src="<?php print $extra_large_image_url ?>" alt="" /> </a></span>
 
             <?php }
             ?>
@@ -799,7 +799,7 @@ else if ($widget_style == 'home-shows') {
 
       <?php if (!empty($extra_large_image_url)) { ?>
 
-              <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  <img  height="66" width="88" src="<?php print $extra_large_image_url ?>" /> </a></span>
+              <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  <img  height="66" width="88" src="<?php print $extra_large_image_url ?>" alt="" /> </a></span>
 
       <?php }
       ?>
@@ -852,7 +852,7 @@ else if ($widget_style == 'home-watch') {
 
               <?php if (!empty($extra_large_image_url)) { ?>
 
-                <span class="dm-pic"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  <img  src="<?php print $extra_large_image_url ?>" /> </a> <span><i class="fa fa-play-circle"></i> <?php echo $entity['field_video_duration_value']; ?></span></span>
+                <span class="dm-pic"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  <img  src="<?php print $extra_large_image_url ?>" alt="" /> </a> <span><i class="fa fa-play-circle"></i> <?php echo $entity['field_video_duration_value']; ?></span></span>
 
       <?php }
       ?>
@@ -903,7 +903,7 @@ else if ($widget_style == 'budget-decoded') {
 
             <?php if (!empty($extra_large_image_url)) { ?>
 
-              <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  <img  src="<?php print $extra_large_image_url ?>" /></a>
+              <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  <img  src="<?php print $extra_large_image_url ?>" alt="" /></a>
 
           <?php }
           ?>
@@ -952,13 +952,13 @@ else if ($widget_style == 'sport-column') {
 
             <?php if (!empty($extra_large_image_url)) { ?>
 
-              <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  <img  src="<?php print $extra_large_image_url ?>" /> </a></span>
+              <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  <img  src="<?php print $extra_large_image_url ?>" alt="" /> </a></span>
 
               <?php
             }
             else {
               ?>
-              <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  <img  height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg"  /> </a></span>
+              <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  <img  height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" alt="" /> </a></span>
 
           <?php }
           ?>
@@ -1004,14 +1004,14 @@ else if ($widget_style == 'sport-column') {
           <?php if ($count == 0) : ?>
             <?php if (!empty($extra_large_image_url)) { ?>
               <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                <img  src="<?php print $extra_large_image_url ?>" />
+                <img  src="<?php print $extra_large_image_url ?>" alt="" />
               </a>
               <?php
             }
             else {
               ?>
               <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                <img  height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" />
+                <img  height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" alt="" />
               </a>
             <?php } ?>
             <h3 class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['title'] ?> ">
@@ -1068,13 +1068,13 @@ else if ($widget_style == 'sport-column') {
 
             <?php if (!empty($extra_large_image_url)) { ?>
 
-              <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>"> <img  src="<?php print $extra_large_image_url ?>" /> </a></span>
+              <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>"> <img  src="<?php print $extra_large_image_url ?>" alt="" /> </a></span>
 
         <?php
       }
       else {
         ?>
-              <span class="pic <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">   <img width="88" height="66" src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" /></a></span>
+              <span class="pic <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">   <img width="88" height="66" src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" alt="" /></a></span>
 
             <?php }
             ?>
@@ -1125,14 +1125,14 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
           <?php if ($count == 0) : ?>
             <?php if (!empty($extra_large_image_url)) { ?>
               <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                <img  src="<?php print $extra_large_image_url ?>" />
+                <img  src="<?php print $extra_large_image_url ?>" alt="" />
               </a>
             <?php
           }
           else {
             ?>
               <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                <img height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" />
+                <img height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" alt="" />
               </a>
             <?php } ?>
             <h3 class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['type'] ?> ">
@@ -1212,14 +1212,14 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
 
               <?php if (!empty($extra_large_image_url)) { ?>
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                  <img  src="<?php print $extra_large_image_url ?>" />
+                  <img  src="<?php print $extra_large_image_url ?>" alt="" />
                 </a>
                 <?php
               }
               else {
                 ?>
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                  <img class="defalt-placeholder-magazin"  height="140" width="100" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" />
+                  <img class="defalt-placeholder-magazin"  height="140" width="100" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" alt="" />
                 </a>
           <?php } ?>
               <div class="small-detail">
@@ -1291,14 +1291,14 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
           <?php if ($count == 0) : ?>
           <?php if (!empty($extra_large_image_url)) { ?>
               <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                <img  src="<?php print $extra_large_image_url ?>" />
+                <img  src="<?php print $extra_large_image_url ?>" alt="" />
               </a>
                 <?php
               }
               else {
                 ?>
               <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                <img  height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" />
+                <img  height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" alt="" />
               </a>
             <?php } ?>
             <h3 class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['type'] ?> ">

@@ -95,7 +95,7 @@ $config_name = trim($global_comment_last_record[0]->config_name);
     $path = $node->field_story_extra_large_image['und'][0]['uri'];
     $src = image_style_url('blog_landing_image', $path);
     $alt = $node->field_story_extra_large_image['und'][0]['alt'];
-    print "<img src='" . $src . "'>";
+    print "<img src='" . $src . "' alt='' />";
     if (!empty($alt)) {
       print $alt;
     }

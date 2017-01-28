@@ -31,7 +31,7 @@
         //Check if icon found empty.
         if (empty($icon)) {
           $image_url = $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all_48_32.jpeg";
-          $icon = "<img src='" . $image_url . "'>";
+          $icon = "<img src='" . $image_url . "' alt='' />";
         }
         if ($display_icon == 1) {
           $link_title_display = $icon;

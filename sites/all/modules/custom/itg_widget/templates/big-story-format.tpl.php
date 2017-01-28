@@ -6,7 +6,7 @@ if (!empty($data)) :
   $data_nid = "";
   $has_ajax = "";
   $photo_icon = "";
-  $image = "<img src='" . $base_url . drupal_get_path('theme', 'itg') . "/images/default_for_all.png />";
+  $image = "<img src='" . $base_url . drupal_get_path('theme', 'itg') . "/images/default_for_all.png' alt='' />";
   $share_desc = $share_desc_fb = "";
   if ($data['node_data']->type == 'videogallery') {
     $is_videogallery = TRUE;
@@ -35,12 +35,12 @@ if (!empty($data)) :
           <!-- EXTRA LARGE IMAGE IS PUT -->
           <?php if (!empty($data['node_data']->field_story_extra_large_image['und'][0]['uri'])) { ?>
             <a href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>
-              <img src="<?php print image_style_url("big_story_widget", $data['node_data']->field_story_extra_large_image['und'][0]['uri']); ?>" />
+              <img src="<?php print image_style_url("big_story_widget", $data['node_data']->field_story_extra_large_image['und'][0]['uri']); ?>" alt="" />
               <?php print $video_icon; ?>
               <?php print $photo_icon; ?>
             </a>
             <div class="story-tag"><?php print t("Big Story") ?></div>          
-            <img class="loading-popup" src="<?php echo drupal_get_path('theme', 'itg') . '/images/tab-loading.gif' ?>" alt="loading">
+            <img class="loading-popup" src="<?php echo drupal_get_path('theme', 'itg') . '/images/tab-loading.gif' ?>" alt="loading" />
             <?php
             // prepare configuration for sharing
             $fb_image = file_create_url($data['node_data']->field_story_extra_large_image['und'][0]['uri']);
@@ -48,10 +48,10 @@ if (!empty($data)) :
           else {
             ?>
             <a href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>
-              <img width="647" height="363" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image647x363.jpg" />
+              <img width="647" height="363" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image647x363.jpg" alt="" />
             </a>  
             <div class="story-tag"><?php echo t("Big Story") ?></div>          
-            <img class="loading-popup" src="<?php echo drupal_get_path('theme', 'itg') . '/images/tab-loading.gif' ?>" alt="loading">          
+            <img class="loading-popup" src="<?php echo drupal_get_path('theme', 'itg') . '/images/tab-loading.gif' ?>" alt="loading" />          
           <?php } ?>
           <!-- END EXTRA LARGE IMAGE --> 
         <?php endif; ?>

@@ -657,7 +657,7 @@ function get_highlights_widget($nid) {
         if(function_exists('itg_common_mongo_activity_count')) {
           $emoji_count = itg_common_mongo_activity_count($field_class, 'front_user_activity');
         }
-        $emoji_image = "<img src='".$emoji1_src."' title= '".$emoji1_title."'>";
+        $emoji_image = "<img src='".$emoji1_src."' title= '".$emoji1_title."' alt='' />";
         $count_message = '<span class="'.$field_class.'">('.$emoji_count.')</span>';
         // Prepare reaction link.
         $emoji_reaction .= l($emoji_image , 'javascript:' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $highlights_arr['value'].'-field_field_emoji_highlights_1' , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "class" => array($anchor_pointer_class , "user-activity"))));
@@ -671,7 +671,7 @@ function get_highlights_widget($nid) {
         if(function_exists('itg_common_mongo_activity_count')) {
           $emoji_count = itg_common_mongo_activity_count($field_class, 'front_user_activity');
         }
-        $emoji_image = "<img src='".$emoji2_src."' title= '".$emoji2_title."'>";
+        $emoji_image = "<img src='".$emoji2_src."' title= '".$emoji2_title."' alt='' />";
         $emoji_reaction .= l($emoji_image , 'javascript:' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $highlights_arr['value'].'-field_field_emoji_highlights_2' , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "class" => array($anchor_pointer_class , "user-activity"))));
         $count_message = '<span class="'.$field_class.'">('.$emoji_count.')</span>';
         $emoji_reaction .= $count_message;
@@ -684,7 +684,7 @@ function get_highlights_widget($nid) {
         if(function_exists('itg_common_mongo_activity_count')) {
           $emoji_count = itg_common_mongo_activity_count($field_class, 'front_user_activity');
         }
-        $emoji_image = "<img src='".$emoji3_src."' title= '".$emoji3_title."'>";
+        $emoji_image = "<img src='".$emoji3_src."' title= '".$emoji3_title."' alt='' />";
         $emoji_reaction .= l($emoji_image , 'javascript:' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $highlights_arr['value'].'-field_field_emoji_highlights_3' , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "class" => array($anchor_pointer_class , "user-activity"))));
         $count_message = '<span class="'.$field_class.'">('.$emoji_count.')</span>';
         $emoji_reaction .= $count_message;
