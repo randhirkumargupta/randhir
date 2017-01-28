@@ -95,6 +95,33 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
   global $base_url, $user;
 
   if ($form_id == 'print_team_integration_node_form') {
+    //code by shravan
+    $magazine_field = 'field_pti_magazine';
+    $pti_issue_field = 'field_pti_issue';
+    
+    if (isset($form[$magazine_field][LANGUAGE_NONE]['#default_value'][0]) && !isset($form_state['triggering_element'])) {
+        $magazine_id = $form[$magazine_field][LANGUAGE_NONE]['#default_value'][0];
+    }
+    else {
+        $magazine_id = !empty($form_state['input'][$magazine_field][LANGUAGE_NONE]) ? $form_state['input'][$magazine_field][LANGUAGE_NONE] : '' ;
+    }
+    
+    // add ajax on magazine field
+    $form[$magazine_field][LANGUAGE_NONE]['#ajax'] = array(
+        'event' => 'change',
+        'callback' => 'itg_magazine_ajax_callback',
+        'wrapper' => $pti_issue_field . '_replace',
+    );
+    
+    // Setup supplement select
+    $form[$pti_issue_field][LANGUAGE_NONE]['#prefix'] = '<div id="' . $pti_issue_field . '_replace">';
+    $form[$pti_issue_field][LANGUAGE_NONE]['#suffix'] = '</div>';
+
+    if (function_exists('get_issue_by_magazine')) {
+        $form[$pti_issue_field][LANGUAGE_NONE]['#options'] = get_issue_by_magazine($magazine_id);
+    }
+    //end
+    
     // Change page title
     drupal_set_title(t('Submit Your Idea'));
     // Add cancel button
@@ -117,7 +144,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
     );
 
     // Hide issue and magazine form edit page
-    $form['field_pti_issue']['#access'] = FALSE;
+    //$form['field_pti_issue']['#access'] = FALSE;
     //$form['field_pti_magazine']['#access'] = FALSE;
     $form['field_pti_supplement']['#access'] = FALSE;
     //$form['actions']['submit']['#value'] = 'Submit';
@@ -140,7 +167,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
           $form['field_story_category']['#access'] = FALSE;
           $form['field_primary_cat_data']['#access'] = FALSE;
           unset($form['field_pti_print_media']);
-          $form['field_pti_issue']['#access'] = FALSE;
+          //$form['field_pti_issue']['#access'] = FALSE;
           //$form['field_pti_magazine']['#access'] = FALSE;
           $form['field_pti_supplement']['#access'] = FALSE;
           $form['field_story_rating']['#access'] = FALSE;
@@ -158,7 +185,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         $form['field_pti_idea_status']['#access'] = FALSE;
         $form['field_pti_words_limit']['#access'] = FALSE;
         $form['field_survey_end_date']['#access'] = FALSE;
-        $form['field_pti_issue']['#access'] = FALSE;
+        //$form['field_pti_issue']['#access'] = FALSE;
         //$form['field_pti_magazine']['#access'] = FALSE;
         $form['field_pti_supplement']['#access'] = FALSE;
         $form['field_story_rating']['#access'] = FALSE;
@@ -226,7 +253,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       $form['field_pti_words_limit']['#access'] = FALSE;
       $form['field_survey_end_date']['#access'] = FALSE;
       $form['field_pti_idea_status']['#access'] = FALSE;
-      $form['field_pti_issue']['#access'] = FALSE;
+      //$form['field_pti_issue']['#access'] = FALSE;
       //$form['field_pti_magazine']['#access'] = FALSE;
       $form['field_pti_supplement']['#access'] = FALSE;
       $form['field_story_rating']['#access'] = FALSE;
@@ -299,7 +326,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
             '#weight' => 98,
           );
 
-          $form['pti_container']['pti_magazine'] = array(
+          /*$form['pti_container']['pti_magazine'] = array(
             '#type' => 'select',
             '#title' => 'Magazine',
             '#options' => $magazine_options,
@@ -337,12 +364,12 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
             '#value' => t('Associate'),
             '#weight' => 102,
             '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:70px'),
-          );
+          );*/
 
           $field_rating_info = field_info_field('field_story_rating');
           $field_rating_values = $field_rating_info['settings']['allowed_values'];
           $form['pti_rating'] = array(
-            '#prefix' => l('ASSOCIATE', '#', array('attributes' => array('class' =>array('btn-save', 'itg-associate')))),
+            //'#prefix' => l('ASSOCIATE', '#', array('attributes' => array('class' =>array('btn-save', 'itg-associate')))),
             '#type' => 'container',
             '#attributes' => array(
               'id' => 'pti-container-data',
@@ -1172,4 +1199,44 @@ function itg_print_team_form_comment_form_alter(&$form, &$form_state, $form_id) 
      });', array('type' => 'inline', 'scope' => 'footer'));
       break;
   }
+}
+
+/**
+ * Ajax callback for Event roles dropdown
+ * @param array $form
+ * @param array $form_state
+ * @return int
+ */
+function itg_magazine_ajax_callback($form, $form_state) {
+    return $form['field_pti_issue'];
+}
+
+/**
+ * Fetch issue list using magazine
+ * @param int $id
+ * @return array
+ */
+function get_issue_by_magazine($id = '') {
+
+  $options['_none'] = '-Select Issue-';
+  $query = db_select('field_data_field_issue_magazine', 'm');
+  $query->join('node', 'n', 'm.entity_id = n.nid');
+  $query->fields('m', array('entity_id'));
+  $query->fields('n', array('title'));
+  $query->condition('field_issue_magazine_target_id', $id, '=');
+  $query->condition('n.status', 1, '=');
+
+  $result = $query->execute();
+  while ($record = $result->fetchAssoc()) {
+    /*
+      $issue_month = explode('-', $val->title);
+      $month_before_curr = date('m') - 1;
+
+      if ($issue_month[1] >= $month_before_curr) {
+      $options[$record['entity_id']] = date('d/m/Y', strtotime($record['title']));
+      } */
+    $options[$record['entity_id']] = $record['title'];
+  }
+
+  return $options;
 }

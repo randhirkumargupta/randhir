@@ -23,7 +23,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
       'extrasmallimage' => t('extrasmallimage'),
       'extra_small_alt' => t('extra_small_alt'),
       'extra_small_title' => t('extra_small_title'),
-      'largeimage' => t('largeimage'),
+      'large_image' => t('large_image'),
       'large_title' => t('large_title'),
       'large_alt' => t('large_alt'),
       'mediumimage' => t('mediumimage'),
@@ -132,7 +132,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
     $this->addFieldMapping('field_story_extra_large_image:alt', 'extra_large_alt')->xpath('extra_large_alt');
     $this->addFieldMapping('field_story_extra_large_image:title', 'extra_large_title')->xpath('extra_large_title');
     
-    $this->addFieldMapping('field_story_large_image', 'largeimage')->xpath('largeimage');
+    $this->addFieldMapping('field_story_large_image', 'largeimage')->xpath('large_image');
     $this->addFieldMapping('field_story_large_image:alt', 'large_alt')->xpath('large_alt');
     $this->addFieldMapping('field_story_large_image:title', 'large_title')->xpath('large_title');
     
@@ -154,7 +154,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
     $this->addFieldMapping('created', 'createddate')->xpath('createddate');    
     $this->addFieldMapping('changed', 'modifieddate')->xpath('modifieddate');
     $this->addFieldMapping('field_story_schedule_date_time', 'publisheddate')->xpath('publisheddate');
-     $this->addFieldMapping('status', 'published')->xpath('published');
+    //$this->addFieldMapping('status', 'published')->xpath('published');
     $this->addFieldMapping('field_story_expires', 'storyexpires')->xpath('storyexpires');
     $this->addFieldMapping('field_story_expiry_date', 'storyexpirydate')->xpath('storyexpirydate');
     
@@ -301,23 +301,26 @@ class ItgPhotogalleryMigration extends XMLMigration {
     if ((string) $row->xml->commonaudio == 'yes') {
       $row->xml->commonaudio = 1;
     }
-    if ((string) $row->xml->syndication == 'yes') {
-      $row->xml->syndication = 'Yes';
+//    if ((string) $row->xml->syndication == 'yes') {
+//      $row->xml->syndication = 'Yes';
+//    }
+    if (((string) $row->xml->featured == 1 ) && !empty($row->xml->featured)) {
+      $row->xml->featured = 'yes';
     }
     
     // Related content
-    if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
-      foreach ($row->xml->relatedcontents->relatedcontent as $related) {
-        $related_content .= (string) $related . ', ';
-      }
-      $final_related_content = rtrim($related_content, ', ');
-      $row->xml->relatedcontents = $final_related_content;
-    }
-    
+//    if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
+//      foreach ($row->xml->relatedcontents->relatedcontent as $related) {
+//        $related_content .= (string) $related . ', ';
+//      }
+//      $final_related_content = rtrim($related_content, ', ');
+//      $row->xml->relatedcontents = $final_related_content;
+//    }
     return TRUE;
   }
 
   public function prepare($node, stdClass $row) {
+    //drupal_set_message('<pre>'.print_r($row->xml->workbench_moderation_state_new, 1).'<pre>');
     $node->teaser = (string) $row->xml->description;
 
     if (!empty($row->category_new)) {
@@ -329,10 +332,6 @@ class ItgPhotogalleryMigration extends XMLMigration {
     if (!empty($row->final_social_checkbox)) {
       $node->field_story_social_media_integ[LANGUAGE_NONE] = $row->final_social_checkbox;
     }
-    // for byline
-    /*$old_byline = (string) $row->xml->byline;
-    $new_byline = get_itg_destination_id('migrate_map_itgbyline', $old_byline);*/
-    //$node->field_photo_by[LANGUAGE_NONE][]['target_id'] = $new_byline;
 
      // manage created user
     if (isset($row->xml->created_by) && !empty($row->xml->created_by)) {
@@ -354,17 +353,6 @@ class ItgPhotogalleryMigration extends XMLMigration {
         $caption = (string) $value->caption;
         $credit = (string) $value->credit;
         $strap_headline = (string) $value->strap_headline;
-       // $weight = (string) $value->ordering - 1;
-        
-        /*$data_byline = '';
-        if (isset($row->xml->gallery->image_details->bylines->byline) && !empty($row->xml->gallery->image_details->bylines->byline)) {
-          foreach ($row->xml->gallery->image_details->bylines->byline as $final_byline) {
-            $source_bid = (string) $final_byline;
-            $orignal_byline = get_itg_destination_id('migrate_map_itgbyline', $source_bid);
-            $data_byline[]['target_id'] = $orignal_byline;
-          }
-          $data_byline = array(LANGUAGE_NONE => $data_byline);
-        }*/
         
         // photoby
         $data_byline = '';
@@ -377,6 +365,9 @@ class ItgPhotogalleryMigration extends XMLMigration {
         //$photo_by = (string) $value->photo_by;
         $audio = (string) $value->audio;
         $syndication = (string) $value->syndication;
+        if(!empty($syndication)){
+          $syndication = 'yes';
+        }
         $file = file_save_data(file_get_contents($image_url), file_default_scheme() . '://' . basename($image_url), FILE_EXISTS_RENAME);
         $file->status = 1;
         $file->alt = (string) $value->gallery_alt;
@@ -404,20 +395,31 @@ class ItgPhotogalleryMigration extends XMLMigration {
     }
     
     //code for order set
-   if (isset($row->xml->ordering)) {
+   if (isset($row->xml->ordering) && !empty($row->xml->ordering)) {
      ordering_set_of_content($node, $row->xml->ordering);
    }
    //code for like and dislike
    if (isset($row->xml->like_dislike->like) || isset($row->xml->like_dislike->dislike)) {
      itg_flag_insert_like_dislike($node->nid, $row->xml->like_dislike->like, $row->xml->like_dislike->dislike);
    }
-//   $node->workbench_moderation['current']->stamp = (string) $row->xml->created;
-//   $node->workbench_moderation['current']->timestamp = (string) $row->xml->created;
-//   $node->workbench_moderation['published']->stamp = (string) $row->xml->created;
-//   $node->workbench_moderation['published']->timestamp = (string) $row->xml->created;
-//   $node->workbench_moderation['my_revision']->timestamp = (string) $row->xml->created;
-//   $node->workbench_moderation['my_revision']->stamp = (string) $row->xml->created;
-   drupal_set_message('<pre>'.print_r($node, 1).'<pre>');
+   // Related content save in db
+    if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
+     //$arr = array();
+      foreach ($row->xml->relatedcontents->relatedcontent as $value) {
+        $chk_variable = (string) $value;
+        if(!empty($chk_variable)){
+          db_insert('itg_dbmigrate_related_content')
+                            ->fields(array(
+                                'migrated_nid' => $node->nid,
+                                'source_id' => (string) $value,
+                                'type' => (string) $value->attributes()->type,
+                                'migration_node_type' => 'photogallery',
+                                'xml_id' => (string) $row->xml->id,
+                            ))
+                            ->execute();
+        }
+      }
+    }
   }
 
 }

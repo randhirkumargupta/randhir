@@ -194,11 +194,12 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     $emoji1_src = $base_url . "/" . drupal_get_path('theme', 'itgadmin') . "/images/highlights_icons/Good.png";
     $emoji2_src = $base_url . "/" . drupal_get_path('theme', 'itgadmin') . "/images/highlights_icons/Bad.png";
     $emoji3_src = $base_url . "/" . drupal_get_path('theme', 'itgadmin') . "/images/highlights_icons/WGMF.png";
-    $number_reactions = count($form['field_highlights']['und']);
-    for ($i = 0; $i <= $number_reactions; $i++) {
-      $form['field_highlights']['und'][$i]['field_field_emoji_highlights_1']['und']['#title'] = "<img title='Oh Nice!' src='" . $emoji1_src . "'>";
-      $form['field_highlights']['und'][$i]['field_field_emoji_highlights_2']['und']['#title'] = "<img title='Oh No!' src='" . $emoji2_src . "'>";
-      $form['field_highlights']['und'][$i]['field_field_emoji_highlights_3']['und']['#title'] = "<img title='Whatever!' src='" . $emoji3_src . "'>";
+    foreach($form['field_highlights']['und'] as $key => $value){
+      if(is_numeric($key)){
+        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_1']['und']['#title'] = "<img title='Oh No!' src='" . $emoji1_src . "'>";
+        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_2']['und']['#title'] = "<img title='Oh No!' src='" . $emoji2_src . "'>";
+        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_3']['und']['#title'] = "<img title='Oh No!' src='" . $emoji3_src . "'>";
+      }
     }
   }
   $form['#after_build'][] = 'itg_common_add_js_top_btn';

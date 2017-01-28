@@ -715,7 +715,7 @@ class ItgStoryMigration extends XMLMigration {
 
 /**
  * implement function to get category table
- */
+ *//*
 function itg_migrate_category_table($level){
   $table = array(
     '1' => 'migrate_map_itgsection',
@@ -725,4 +725,4 @@ function itg_migrate_category_table($level){
   );
   
   return $table[$level];
-}
+}*/

@@ -135,8 +135,16 @@ return $output;
  * Implements May be recommend block content
  */
 function _may_be_recommend_block_content() {
-  $output = "<div class='may-be-recommend'>
-        <div id='taboola-right-rail-thumbnails-2nd'></div>
+  $output = "<div class='may-be-recommend'><h3><span>".t('May be recommend')."</span></h3>
+        <script type='text/javascript'>
+window._taboola = window._taboola || [];
+_taboola.push({article:'auto'});
+!function (e, f, u) {
+e.async = 1;
+e.src = u;
+f.parentNode.insertBefore(e, f);
+}(document.createElement('script'), document.getElementsByTagName('script')[0], 'http://cdn.taboola.com/libtrc/indiatoday-indiatoday/loader.js');
+</script><div id='taboola-right-rail-thumbnails-2nd'></div>
 <script type='text/javascript'>
 window._taboola = window._taboola || [];
 _taboola.push(
@@ -334,14 +342,14 @@ function itg_front_end_common_views_pre_render(&$view) {
           $related_result->sm_thumb_video_landing_page_170_x_127_story_small_image[0] = $related_result->sm_thumb_video_landing_page_170_x_127_story_small_image[0];
         }
         else {
-          $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
-          $related_result->sm_thumb_video_landing_page_170_x_127_story_small_image[0] = "<img src='$img_url' width='170' height='127' />";
+          $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
+          $related_result->sm_thumb_video_landing_page_170_x_127_story_small_image[0] = "<img src='$img_url'/>";
         }
       }
 
       if (empty($image)) {
-        $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
-        $related_result->sm_thumb_video_landing_page_170_x_127_story_small_image[0] = "<img src='$img_url' width='170' height='127' />";
+        $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
+        $related_result->sm_thumb_video_landing_page_170_x_127_story_small_image[0] = "<img src='$img_url'/>";
       }
     }
   }
@@ -359,14 +367,14 @@ function itg_front_end_common_views_pre_render(&$view) {
           $related_story_result->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0] = $related_story_result->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
         }
         else {
-          $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
-          $related_story_result->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0] = "<img src='$img_url' class='related-default' width='170' height='127' />";
+          $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
+          $related_story_result->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0] = "<img src='$img_url' class='related-default'/>";
         }
       }
 
       if (empty($image)) {
-        $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
-        $related_story_result->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0] = "<img src='$img_url' class='related-default' width='170' height='127' />";
+        $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
+        $related_story_result->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0] = "<img src='$img_url' class='related-default'/>";
       }
     }
   }
@@ -501,7 +509,8 @@ function _related_podcast_bottom_block_content() {
     $related_result = itg_get_related_story_id($related_content);
   }
  $related_story = '';
-  if(count($related_story)>0) {
+ // Fix for related label on front end.
+  if(!empty($related_result[0])) {
     $related_story = '<h3><span>'.t('Related').'</span></h3>';
   }
   if(!empty($related_result)) {

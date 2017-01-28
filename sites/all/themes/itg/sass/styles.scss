@@ -63,6 +63,9 @@ img{
 .def-cur-pointer{
     cursor: pointer;
 }
+.def-cur-none{
+    cursor: none;
+}
 .mr-0{
     margin: 0;
 }
@@ -1426,6 +1429,11 @@ footer{
                 }
             }
         }
+        span.smilies-title{
+             img{
+                width: inherit;
+            }
+        }
     }
 }
 /*End CSS Featured New Home page*/
@@ -2057,6 +2065,51 @@ footer{
                 cursor: pointer;
             }
         }
+        &.photo-story{
+            .fa-chevron-left, .fa-chevron-right{                
+                background: rgba(0, 0, 0, 0.6);
+                border: none;
+                width: 45px;
+                height: 66px;
+                border-radius: 0 7px 7px 0;
+                color: #fff;
+                position: absolute;
+                top: 138px;
+                z-index: 1;                
+                font-size: 28px;
+                text-align: center;
+                line-height: 70px;
+                cursor: pointer;
+            }
+            .fa-chevron-left{
+                left: 0;                
+            }
+            .fa-chevron-right{
+                right: 0;     
+                border-radius: 7px 0px 0px 7px;
+            }
+            .multiple-photo{
+                padding: 0 50px;                
+                .slick-prev, .slick-next{
+                    background: transparent;
+                    border: none;
+                    position: absolute;
+                    top: 50%;
+                    z-index: 1;
+                    left: 0;
+                    margin-top: -7px;
+                    font-family: $itg-robotoslab;
+                    font-size: 12px;
+                    color:#959595;
+                    text-transform: uppercase;
+                    cursor:pointer;
+                }
+                .slick-next{
+                    left: auto;
+                    right: 0;
+                }                
+            }
+        }
     }
     .snap-post{        
         padding: 20px 20px 20px 70px;
@@ -2447,6 +2500,8 @@ footer{
     }    
     .buzz-section{
         margin:60px 0;
+        padding-left:15px;
+        padding-right:15px;
         > *{
             margin-bottom: 15px;
         }
@@ -2611,6 +2666,11 @@ footer{
     @include sidebar-heading;
 }
 /*End May we suggest End*/
+/*Css start may-be-suggest-container*/
+.may-be-suggest-container{
+    @include sidebar-heading;
+}
+/*Css end may-be-suggest-container*/
 
 /*Start top-takes-video suggest css*/
 .top_takes_videos_widget{
@@ -10014,6 +10074,9 @@ h1.about-us-heading{
             .podcast-detail{
                 display: block;
                 overflow: hidden;
+                .jwplayer{
+                    width: 100% !important;
+                }
                 p{
                     font-size: 13px;
                     color:#bfbfbf;
@@ -10027,6 +10090,23 @@ h1.about-us-heading{
             .other-list{  
                 img{
                     padding:0 7px;
+                }
+                .slick-prev, .slick-next{                    
+                    background: rgba(0, 0, 0, 0.8);
+                    border: none;
+                    color: #fff;
+                    position: absolute;
+                    top: 50%;
+                    margin-top: -12px;
+                    z-index: 1;
+                    padding: 5px 5px;
+                    cursor: pointer;
+                }
+                .slick-prev{ 
+                    left: 0;
+                }
+                .slick-next{ 
+                    right: 0;
                 }
             }
         }        
@@ -10067,10 +10147,10 @@ h1.about-us-heading{
 }
 /*css end related-podcast-block*/
 span.smilies-title {
-    width: 20px;
-    height: 20px;
+    width: auto;
+    height: auto;
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: middle;   
 }
 
 /* css for story-photo-list starts here */
@@ -10124,3 +10204,9 @@ span.smilies-title {
     }
 }
 /* css for story-photo-list ends here */
+
+/*css start for podcast*/
+.view-podcasts-listing.podcast-detail-page{
+    @include pager;
+}
+/*css end for podcast*/

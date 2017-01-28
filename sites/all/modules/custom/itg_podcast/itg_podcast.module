@@ -71,6 +71,7 @@ function itg_podcast_form_alter(&$form, &$form_state, $form_id) {
     switch ($form_id) {
 
         case 'podcast_node_form':
+            $arg = arg();
             unset($form['actions']['preview_changes']);
             $form['#after_build'][] = 'itg_podcast_after_build';
             $form['#validate'][] = 'itg_podcast_custom_validate';
@@ -93,6 +94,7 @@ function itg_podcast_form_alter(&$form, &$form_state, $form_id) {
             }
             $form['actions']['submit']['#submit'][] = 'itg_podcast_submit_status_message';
             $form['actions']['submit']['#submit'][] = 'itg_podcast_custom_submit';
+            drupal_add_css("#field-primary-category-html-text-add-more-wrapper, #edit-field-story-category .description {display:none !important}" , array("type" => "inline" , "scope"=> "footer"));
             break;
     }
 }

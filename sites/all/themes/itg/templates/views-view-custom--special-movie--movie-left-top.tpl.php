@@ -18,14 +18,34 @@
             ?>
             <div class="featured-post featured-post-first <?php echo $video_class; ?>">
             <?php print $row['field_story_extra_large_image_1']; ?>    
-                <h2><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h2>           
+                <h2>
+                  <?php //echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
+                  <?php
+                  if (function_exists('itg_common_get_smiley_title')) {
+                    echo l(itg_common_get_smiley_title($row['nid'], 0, 60), "node/" . $row['nid'], array("html" => TRUE));
+                  }
+                  else {
+                    echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), "node/" . $row['nid']);
+                  }
+                  ?>
+                </h2>           
             </div>
 
 
 
     <?php } else if ($index > 0 && $index <= 2) { ?>
             <div class="featured-post <?php echo $video_class; ?>"><?php print $row['field_story_extra_large_image']; ?>
-                <h3><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h3>
+                <h3>
+                  <?php //echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
+                  <?php
+                  if (function_exists('itg_common_get_smiley_title')) {
+                    echo l(itg_common_get_smiley_title($row['nid'], 0, 60), "node/" . $row['nid'], array("html" => TRUE));
+                  }
+                  else {
+                    echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), "node/" . $row['nid']);
+                  }
+                  ?>
+                </h3>
             </div>
 
     <?php } ?>
@@ -51,7 +71,17 @@ foreach ($rows as $index => $row) {
     if ($index > 2) {
     
         ?>
-    <li><?php echo l(mb_strimwidth(strip_tags($desc), 0, 140, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></li>
+    <li>
+      <?php //echo l(mb_strimwidth(strip_tags($desc), 0, 140, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
+    <?php
+        if (function_exists('itg_common_get_smiley_title')) {
+          echo l(itg_common_get_smiley_title($row['nid'], 0, 130), "node/" . $row['nid'], array("html" => TRUE));
+        }
+        else {
+          echo l(mb_strimwidth(strip_tags($desc), 0, 140, ".."), "node/" . $row['nid']);
+        }
+    ?>
+    </li>
 
 
      <?php } ?>

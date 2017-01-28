@@ -24,7 +24,7 @@ global $base_url;
     </div>
 </section>
 <section class="footer-toggle">
- <section class="footer-mid mhide">
+ <section class="footer-mid">
         <div class="container">
 <!--         <img src="<?php print base_path() ?>sites/all/themes/itg/images/header-ads.png" alt="ads">-->
         <?php
