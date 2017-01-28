@@ -16,7 +16,7 @@ if (strpos($actor[$key]['pic_uri'], 'public://') !== false) {
   );  
 }
 else {
-  $actor_pic = '<img src="'. $actor[$key]['pic_uri'] .'">';
+  $actor_pic = '<img src="'. $actor[$key]['pic_uri'] .'" alt="" />';
 }
 
   

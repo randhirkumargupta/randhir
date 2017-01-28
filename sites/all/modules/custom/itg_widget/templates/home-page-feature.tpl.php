@@ -5,11 +5,11 @@
         <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[0]['nid']); ?>">
           <?php $extra_large_image_url = file_create_url($data[0]['li_file_uri']);
           ?>
-          <img src="<?php print $extra_large_image_url; ?>"  />
+          <img src="<?php print $extra_large_image_url; ?>" alt="" />
         </a>
       <?php else : ?>
         <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[0]['nid']); ?>">
-          <img width="483" height="271" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image483x271.jpg' ?>" />
+          <img width="483" height="271" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image483x271.jpg' ?>" alt="" />
         </a>
       <?php endif; ?>
 
@@ -30,11 +30,11 @@
     <div class="featured-post">
       <?php if (!empty($data[1]['mi_file_uri'])) : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[1]['nid']); ?>">
-          <img src="<?php print image_style_url("home_page_feature_small", $data[1]['mi_file_uri']); ?>" />
+          <img src="<?php print image_style_url("home_page_feature_small", $data[1]['mi_file_uri']); ?>" alt="" />
         </a>
       <?php else : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[1]['nid']); ?>">
-          <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image237x133.jpg" />
+          <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image237x133.jpg" alt="" />
         </a>
       <?php endif; ?>
       <?php if (!empty($data[1]['title'])) : ?>
@@ -54,11 +54,11 @@
     <div class="featured-post">
       <?php if (!empty($data[2]['mi_file_uri'])) : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[2]['nid']); ?>">
-          <img src="<?php print image_style_url("home_page_feature_small", $data[2]['mi_file_uri']); ?>" />
+          <img src="<?php print image_style_url("home_page_feature_small", $data[2]['mi_file_uri']); ?>" alt="" />
         </a>
       <?php else : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[2]['nid']); ?>">
-          <img src="<?php print$base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image237x133.jpg" />
+          <img src="<?php print$base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image237x133.jpg" alt="" />
         </a>
       <?php endif; ?>
       <?php if (!empty($data[2]['title'])) : ?>

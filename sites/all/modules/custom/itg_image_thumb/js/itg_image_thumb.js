@@ -26,7 +26,7 @@
                     'type': 'POST',
                     success: function(data) {
                         jQuery('#edit-field-story-large-image .filefield-source-imce').hide();
-                        jQuery('#edit-field-story-large-image').append('<div><img width="100" height="75" alt="" src="http://localhost/itgcms/sites/default/files/styles/thumbnail/public/IMG_2507.JPG?itok=_FLApB6s" typeof="foaf:Image"></div><div>remove</div>');
+                        jQuery('#edit-field-story-large-image').append('<div><img width="100" height="75" alt="" src="http://localhost/itgcms/sites/default/files/styles/thumbnail/public/IMG_2507.JPG?itok=_FLApB6s" typeof="foaf:Image" /></div><div>remove</div>');
                         
 
                     }
