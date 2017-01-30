@@ -797,10 +797,13 @@ function itg_story_photo_story_redirect($node_id, $type) {
   foreach ($result as $val) {
     $nid = $val->nid;
   }
+  if (!empty($nid)) {
   // stores node redirect path 
   $redirect = $base_url . '/' . drupal_get_path_alias('node/' . $nid);
   $redirect = (string) $redirect;
-  
+  } else {
+    $redirect = '';
+  }
   return $redirect;
 }
 
