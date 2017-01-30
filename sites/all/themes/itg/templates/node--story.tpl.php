@@ -287,7 +287,7 @@ if (!empty($content)):
 
   <?php } ?>
               <!-- Check the story type whether it is a photo story or not-->
-              <?php if (!empty($node->field_story_type) && $node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story') { ?>
+               <?php if ((!empty($node->field_story_type) && $node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story') || (empty($node->field_story_type))) { ?>
               <div class="story-right <?php
   if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
     echo 'listicle-page';

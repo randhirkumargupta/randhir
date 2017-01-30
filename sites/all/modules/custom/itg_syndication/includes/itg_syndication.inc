@@ -265,12 +265,14 @@ function get_syndication_feed_byurl() {
   $itg_query->condition('feed.client_feed_url', $url);
   $itg_result = $itg_query->execute()->fetchAll();
   
-  foreach ($itg_result as $itg_val) {    
-    $realpath = file_create_url($itg_val->xml_name);    
-    $xml_date = date('d/m/Y',$itg_val->created_date);
-    // $file_url = $itg_val->xml_name;
-    echo 'Click to Download. <a href="'.$realpath.'" download>'.$xml_date.'</a>';
-    echo '</br>';    
+  if (!empty($itg_result)) {
+    foreach ($itg_result as $itg_val) {    
+      $realpath = file_create_url($itg_val->xml_name);    
+      $xml_date = date('d/m/Y',$itg_val->created_date);
+      // $file_url = $itg_val->xml_name;
+      echo 'Click to Download. <a href="'.$realpath.'" download>'.$xml_date.'</a>';
+      echo '</br>';    
+    }
   }
   exit;
  
