@@ -1158,7 +1158,7 @@ footer{
         .cell{
             padding: 0 15px;                       
             @include float(left);
-            @include calculate-width(6);
+            width: 200px;
             margin-bottom: 0;
             ul{
                 margin-bottom: 20px;  
@@ -1191,6 +1191,27 @@ footer{
         @include text-align(center);
         @include font(12px);        
         border-top: 1px solid $footer-border-color;
+    }
+    .multiple-items-footer{
+    i {
+        position: absolute;
+        top: 50%;
+        background: #8e8c8d;
+        width: 20px;
+        height: 40px;
+        border-radius: 40px 0 0 40px;
+        line-height: 40px;
+        color: #fff;
+        text-align: center;
+        margin-top:-20px;
+        cursor:pointer;
+        &.slick-prev{
+            left: -10px;
+        }
+        &.slick-next{
+            right: 15px;
+        }
+    }    
     }
 }
 /*End CSS footer section*/

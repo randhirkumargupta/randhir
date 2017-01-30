@@ -641,15 +641,19 @@
   }
 
   /*footer*/
+  footer {
+    /*        .footer-bottom{
+                .cell{
+                    width: 50%;
+                    margin-bottom: 20px;
+                    &:nth-child(2n+1){
+                        clear: left;
+                    }
+                }
+            }*/
+  }
   footer .footer-top .footer-top-link {
     float: none;
-  }
-  footer .footer-bottom .cell {
-    width: 50%;
-    margin-bottom: 20px;
-  }
-  footer .footer-bottom .cell:nth-child(2n+1) {
-    clear: left;
   }
 
   /*Start CSS Top Block Grid Home Page*/

@@ -1327,7 +1327,7 @@ footer .footer-bottom ul li {
 footer .footer-bottom .cell {
   padding: 0 15px;
   float: left;
-  width: 16.66667%;
+  width: 200px;
   margin-bottom: 0;
 }
 footer .footer-bottom .cell ul {
@@ -1348,6 +1348,25 @@ footer .footer-copyright {
   font-size: 12px;
   font-size: 0.75rem;
   border-top: 1px solid #111111;
+}
+footer .multiple-items-footer i {
+  position: absolute;
+  top: 50%;
+  background: #8e8c8d;
+  width: 20px;
+  height: 40px;
+  border-radius: 40px 0 0 40px;
+  line-height: 40px;
+  color: #fff;
+  text-align: center;
+  margin-top: -20px;
+  cursor: pointer;
+}
+footer .multiple-items-footer i.slick-prev {
+  left: -10px;
+}
+footer .multiple-items-footer i.slick-next {
+  right: 15px;
 }
 
 /*End CSS footer section*/
