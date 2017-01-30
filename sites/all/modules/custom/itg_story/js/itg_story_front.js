@@ -6,8 +6,17 @@
 (function($) {
   Drupal.behaviors.itg_story_front = {
       attach: function(context, settings) {
-        var previous = Drupal.settings.itg_story.previous;
-        var next = Drupal.settings.itg_story.next;
+        if (Drupal.settings.itg_story_front.previous) {
+          var previous = Drupal.settings.itg_story_front.previous;
+        } else {
+          $(".multiple-photo-disc i.fa-chevron-left").addClass("hide");
+        }
+        if (Drupal.settings.itg_story_front.next) {
+          var next = Drupal.settings.itg_story_front.next;
+        }else{
+            $(".multiple-photo-disc i.fa-chevron-right").addClass("hide");
+        }
+        
         $('.multiple-photo-disc').slick({
           infinite: false,
           slidesToShow: 1,
