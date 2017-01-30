@@ -1442,6 +1442,14 @@
 }
 /*end event page css*/
 
+/*css start video landing page like dislike*/
+#block-views-photo-landing-slider-block .section-like-dislike .agbutton, #block-views-video-landing-header-block .section-like-dislike .agbutton{
+    margin: 8px 0;
+}
+/*css end video landing page like dislike*/
+
+
+
 
 }
 
@@ -1953,6 +1961,37 @@ footer .footer-top .footer-social-link{
 }
 /*footer css end */
 
+/*css start custom form for video an photo*/
+.ugc-top-heading h2{
+    padding-bottom: 5px;    
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper{
+    margin:0 -15px;
+    .captcha{
+        .form-item-captcha-response div.description{
+        padding-left: 0px;    
+        }
+        img{
+            margin: 0 0 5px 0px;
+        }
+    }
+    .form-actions{
+        text-align: left;
+    }
+    .form-type-managed-file > label + div.form-managed-file{
+        input[type="file"]{
+            width: 200px;
+        }
+        padding-left: 0;    
+    }
+    .form-type-managed-file > label{
+        margin-bottom: 10px;
+    }
+} 
+/*css end custom form for video an photo*/
+
 
 }
 @media only screen and (max-width:640px){
@@ -2151,7 +2190,7 @@ footer .footer-top .footer-social-link{
                 }
                 .profile-detail {
                     width: auto;
-                    margin: 0px 0 0 10px;
+                    margin: 0;
                     ul {
                         li{ 
                             @include float(none);
@@ -2248,6 +2287,11 @@ footer .footer-top .footer-social-link{
                 float: right;
             }
         }
+        &.photo-story-section{
+            .story-right{
+                width: 77%; 
+            }   
+        }        
     }
 .buzz-feedback{
     .story-right{
