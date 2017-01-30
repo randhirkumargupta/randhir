@@ -295,11 +295,12 @@ function itg_common_cancel_button($form, &$form_state) {
     $destination = $destination_array[0];
     if ($destination == 'published-story' || $destination == 'published-video') {
       $query_array = array("field_story_syndication_value_op" => "all");
+      $query_str = 'field_story_syndication_value_op=all';
     }
   }
   if (!empty($form['nid']['#value'])) {
     $form['actions']['cancel'] = array(
-      '#markup' => '<a id= "' . $destination . '" data-widget="' . arg(1) . '" class="button cancle-itg-btn" href="javascript:void(0)">Cancel</a>',
+      '#markup' => '<a data-dest="'.$destination.'?'.$query_str.'" data-widget="' . arg(1) . '" class="button cancle-itg-btn" href="javascript:void(0)">Cancel</a>',
       '#weight' => 20,
     );
   }
@@ -614,6 +615,11 @@ function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255) {
  */
 function itg_custom_lock_delete() {
   if (!empty($_GET['nid'])) {
-    content_lock_release_own_item($_GET['nid'], TRUE, TRUE);
+    if (function_exists('content_lock_release')) {
+      content_lock_release($_GET['nid'], $user->uid);
+    }
+    
+    //content_lock_release_own_item($_GET['nid'], FALSE, TRUE);
   }
+  exit;
 }
