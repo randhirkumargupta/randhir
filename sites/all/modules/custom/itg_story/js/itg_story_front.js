@@ -6,7 +6,8 @@
 (function($) {
   Drupal.behaviors.itg_story_front = {
       attach: function(context, settings) {
-        //var uid = settings.itg_story.settings.uid;
+        var previous = Drupal.settings.itg_story.previous;
+        var next = Drupal.settings.itg_story.next;
         $('.multiple-photo-disc').slick({
           infinite: false,
           slidesToShow: 1,
@@ -26,13 +27,16 @@
         var maxValueInArray = $('.multiple-photo-disc .photo-slider').length;         
         $('.multiple-photo-disc').on('afterChange', function(event, slick, currentSlide){               
             if(currentSlide === maxValueInArray-1){
-                window.location.href = 'http://www.google.com';
+              window.location.href = next;
+            }
+            if(currentSlide === 0){
+              window.location.href = previous;
             }
         });             
         var maxValueInArray = $('.multiple-photo .photo-slider').length;         
         $('.multiple-photo').on('afterChange', function(event, slick, currentSlide) {               
             if(currentSlide === maxValueInArray-1){
-                window.location.href = 'https://in.yahoo.com/';
+              window.location.href = next;
             }
         });  
         $('.multiple-photo .slick-prev').text("Prev");
