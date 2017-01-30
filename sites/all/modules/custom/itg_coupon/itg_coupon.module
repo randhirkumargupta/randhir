@@ -7,6 +7,8 @@
  * Provides customizations and functions for Coupons .
  */
 define('THIRD_PARTY_COUPONS_LINE_MAX', 1000);
+module_load_include('inc', 'itg_coupon', 'includes/custom_coupons_handler');
+
 
 /**
  * Implements hook_form_alter().
@@ -227,6 +229,13 @@ function itg_coupon_form_alter(&$form, &$form_state, $form_id) {
 
       // Code end for Coupon current uses
 
+      
+      // Start code for hiding some field 
+      
+      $form['field_coupon_current_uses']['und']['#access'] = FALSE;
+      $form['field_coupon_status']['und']['#access'] = FALSE;
+      
+      // End code for hiding  some field
 
 
       $form['actions']['submit']['#submit'][] = 'itg_coupon_custom_submit';
@@ -480,4 +489,25 @@ function itg_coupon_form_views_exposed_form_alter(&$form, &$form_state, $form_id
     $form['title']['#autocomplete_path'] = 'content-title-list/coupon/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Coupon Title'));
   }
+}
+
+/**
+ * Implements hook_views_data().
+ */
+ function itg_coupon_views_data() {
+   $data['custom_coupons_rest_uses']['table']['group'] = t('Custom');
+   $data['custom_coupons_rest_uses']['table']['join'] = array(
+     // #global is a special flag which let's a table appear all the time.
+     '#global' => array(),
+   );
+
+   $data['custom_coupons_rest_uses']['custom_handler'] = array(
+     'title' => t('Coupons rest uses'),
+     'help' => t('Custom coupons rest uses'),
+     'field' => array(
+       'handler' => 'views_handler_custom_coupons_handler',
+     ),
+   );
+
+   return $data;
 }
