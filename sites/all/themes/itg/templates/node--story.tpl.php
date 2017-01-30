@@ -287,7 +287,7 @@ if (!empty($content)):
 
   <?php } ?>
               <!-- Check the story type whether it is a photo story or not-->
-              <?php if (!empty($node->field_story_type) && $node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story') { ?>
+               <?php if ((!empty($node->field_story_type) && $node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story') || (empty($node->field_story_type))) { ?>
               <div class="story-right <?php
   if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
     echo 'listicle-page';
@@ -578,41 +578,15 @@ if (!empty($content)):
               ?>">
               <?php 
                 if (!empty($node->field_photo_story)) {
-                  $photo_story = $node->field_photo_story[LANGUAGE_NONE];
-                  $photo_story_count = sizeof($photo_story);
-                  $html = '';
-                  $html .= '<div class="photo-story-img multiple-photo">';
-                  for ($i = 0; $i < $photo_story_count; $i++) {
-                    $entity_obj = entity_load('field_collection_item', array($photo_story[$i]['value']));
-                    $photo_story_img_path = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['uri'];
-                    $photo_story_img = image_style_url('photo_story', $photo_story_img_path);
-                    $photo_story_desc = $entity_obj[$photo_story[$i]['value']]->field_photo_story_description['und'][0]['value'];
-                    $html .= '<div class="photo-slider">';
-                    $html .= '<img src="' . $photo_story_img . '" title="" alt="" />';
-                    $html .= '<div class="description"><p>' . $photo_story_desc . '</p></div>';
-                    $html .= '</div>';
-                  }
-                  $html .= '</div>';
-                  print $html;
+                  $output = itg_story_photo_story_html($node->nid);
+                  print $output;
                 }
               ?>
                   <!-- for photo story bottom slider, loop has been repeated again -->
                   <?php 
                 if (!empty($node->field_photo_story)) {
-                  $photo_story = $node->field_photo_story[LANGUAGE_NONE];
-                  $photo_story_count = sizeof($photo_story);
-                  $html = '';
-                  $html .= '<div class="photo-story-img multiple-photo common-photo">';
-                  for ($i = 0; $i < $photo_story_count; $i++) {
-                    $entity_obj = entity_load('field_collection_item', array($photo_story[$i]['value']));
-                    $photo_story_img_path = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['uri'];
-                    $photo_story_img = image_style_url('photo_story_small_88x66', $photo_story_img_path);
-                    $html .= '<div class="photo-slider">';
-                    $html .= '<img src="' . $photo_story_img . '" title="" alt="" />';
-                    $html .= '</div>';
-                  }
-                  $html .= '</div>';
-                  print $html;
+                  $html_output = itg_story_photo_story_bottom_html($node->nid);
+                  print $html_output;
                 }
               ?>
               </div>

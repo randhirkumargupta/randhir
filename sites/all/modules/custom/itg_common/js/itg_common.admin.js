@@ -18,7 +18,7 @@
         $('.cancle-itg-btn').click(function() {
             var base_url = settings.itg_story.settings.base_url;
             var nid = $(this).attr('data-widget');
-            var itgurl = $(this).attr('id');
+            var itgurl = $(this).attr('data-dest');
             
             $.ajax({
                 url: base_url + "/itg-custom-lock-delete",

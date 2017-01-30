@@ -286,7 +286,7 @@ function itg_layout_manager_block_view($delta = '') {
         $widgets_type = 'section_wise_order';
       }
       if (!empty($_GET['section']) && !empty($_GET['template_name'])) {
-        $data['widgets_list'] = display_section_widgets_list($sectiontpl, $template_nametpl, $widgets_type);
+        $data['widgets_list'] = display_section_widgets_list($_GET['section'], $_GET['template_name'], $widgets_type);
       }    
 
       $block['content'] = theme('layout_section_widgets_block', array('data' => $data));
