@@ -200,3 +200,10 @@ function itg_preprocess_html($param) {
   }
   // Code ends for adding header, body start, body close for ads module
 }
+
+/**
+ * page head alter for update the meta keywords
+ */
+function itg_html_head_alter(&$head_elements) {
+  $head_elements['metatag_keywords_0']['#name'] = 'news_keyword';
+}
