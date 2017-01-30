@@ -159,13 +159,42 @@ function coupon_features_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'itg_date_with_time';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Content: Link */
-  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
-  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
-  $handler->display->display_options['fields']['view_node']['label'] = 'View';
-  $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node] </span>';
+  /* Field: Content: Coupon Discount Type */
+  $handler->display->display_options['fields']['field_coupon_discount_type']['id'] = 'field_coupon_discount_type';
+  $handler->display->display_options['fields']['field_coupon_discount_type']['table'] = 'field_data_field_coupon_discount_type';
+  $handler->display->display_options['fields']['field_coupon_discount_type']['field'] = 'field_coupon_discount_type';
+  /* Field: Content: Discounted Value */
+  $handler->display->display_options['fields']['field_coupon_discounted_value']['id'] = 'field_coupon_discounted_value';
+  $handler->display->display_options['fields']['field_coupon_discounted_value']['table'] = 'field_data_field_coupon_discounted_value';
+  $handler->display->display_options['fields']['field_coupon_discounted_value']['field'] = 'field_coupon_discounted_value';
+  $handler->display->display_options['fields']['field_coupon_discounted_value']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Coupon uses limit */
+  $handler->display->display_options['fields']['field_coupon_uses_limit']['id'] = 'field_coupon_uses_limit';
+  $handler->display->display_options['fields']['field_coupon_uses_limit']['table'] = 'field_data_field_coupon_uses_limit';
+  $handler->display->display_options['fields']['field_coupon_uses_limit']['field'] = 'field_coupon_uses_limit';
+  $handler->display->display_options['fields']['field_coupon_uses_limit']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Coupon current uses */
+  $handler->display->display_options['fields']['field_coupon_current_uses']['id'] = 'field_coupon_current_uses';
+  $handler->display->display_options['fields']['field_coupon_current_uses']['table'] = 'field_data_field_coupon_current_uses';
+  $handler->display->display_options['fields']['field_coupon_current_uses']['field'] = 'field_coupon_current_uses';
+  $handler->display->display_options['fields']['field_coupon_current_uses']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Custom: Coupons rest uses */
+  $handler->display->display_options['fields']['custom_handler']['id'] = 'custom_handler';
+  $handler->display->display_options['fields']['custom_handler']['table'] = 'custom_coupons_rest_uses';
+  $handler->display->display_options['fields']['custom_handler']['field'] = 'custom_handler';
+  /* Field: Content: Coupon Status */
+  $handler->display->display_options['fields']['field_coupon_status']['id'] = 'field_coupon_status';
+  $handler->display->display_options['fields']['field_coupon_status']['table'] = 'field_data_field_coupon_status';
+  $handler->display->display_options['fields']['field_coupon_status']['field'] = 'field_coupon_status';
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -173,13 +202,6 @@ function coupon_features_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node] </span>';
-  /* Field: Content: Delete link */
-  $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
-  $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
-  $handler->display->display_options['fields']['delete_node']['label'] = 'Delete';
-  $handler->display->display_options['fields']['delete_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['delete_node']['alter']['text'] = '<span class="delete-link">[delete_node]</span>';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
