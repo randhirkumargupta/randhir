@@ -28,7 +28,8 @@ function itg_syndication_menu() {
 
   $items['syndication/feed/%'] = array(
     'page callback' => 'get_syndication_feed_byurl',
-    'access arguments' => array('access itg story'),
+    'access callback' => TRUE,
+    //'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
   );
 

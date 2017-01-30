@@ -47,8 +47,8 @@
                         // content block id for display content widget
                         var block_name = $(this).find('.data-holder').attr('id');
                         //  content block style for display content widget
-                        var wid_name=widget_name;
-                        var splitewidgitname=widget_name.split('#');
+                        var wid_name = widget_name;
+                        var splitewidgitname = widget_name.split('#');
                         if(splitewidgitname[0]=='section_wise_order') {
                             var widget_style = $(this).find('.data-holder').attr('widget-style');
                             if(widget_style != "" && widget_style != "undefined") {
@@ -91,10 +91,16 @@
                               $('#' + content_place).html('<div class="widget-loader-wrapper"><img class="widget-loader" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>');
                             },
                             success: function(data) {
-                                      var splitewigitinfo= widget_info.split('|');
-                                      if(splitewigitinfo[1] !="") {
-                                         wid_name=wid_name+'-'+ splitewigitinfo[1];
-                                      }
+                                //code for already configured section
+                                if (data == 'already_configured_section') {
+                                  alert('You have already configured this section on this page.');
+                                  $('#' + content_place).html('');
+                                  return false;
+                                }
+                                var splitewigitinfo= widget_info.split('|');
+                                if(splitewigitinfo[1] !="") {
+                                   wid_name=wid_name+'-'+ splitewigitinfo[1];
+                                }
                                 // for category tab widget
                                 $('input[name = ' + block_name + ']').val(category_name_tab);
                                 $('.widget-title[data-id="' + block_name + '"]').html(category_name_tab);
@@ -103,7 +109,7 @@
                                   $('#display_tit').show();
                                 }
                                 
-                                  if(block_name == 'itg-block-4' && splitewidgitname[0] == 'highlights' && template_name == 'page--special_election') {
+                                if(block_name == 'itg-block-4' && splitewidgitname[0] == 'highlights' && template_name == 'page--special_election') {
                                     $('.highlights-title').html(category_name_tab);
                                     $('#display_tit').show();
                                 }
