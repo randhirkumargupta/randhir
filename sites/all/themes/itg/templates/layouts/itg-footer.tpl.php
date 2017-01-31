@@ -36,7 +36,7 @@ global $base_url;
  </section>
    <section class="footer-bottom">
        <div class="container">
-           <div class="row">
+           <div class="row multiple-items-footer">
                <div class="cell">
                    <h4>Publications:</h4>
                    <?php print drupal_render($data['publications_footer']); ?>
@@ -84,3 +84,38 @@ global $base_url;
     <img class="widget-loader" src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itgadmin') . '/images/loader.svg'; ?>" alt="Loading..." />
 </div>
 <div id="iframe-display" style="display: none"></div>
+
+
+<script>
+jQuery(document).ready(function(){    
+    jQuery('.multiple-items-footer').slick({
+        infinite: false,
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        variableWidth: true,
+        prevArrow: '<i class="fa fa-chevron-left slick-prev" aria-hidden="true"></i>',
+        nextArrow: '<i class="fa fa-chevron-right slick-next" aria-hidden="true"></i>',
+        responsive: [            
+            {
+            breakpoint: 1024,
+                settings: {            
+                slidesToShow: 4
+                }
+            },
+            {
+            breakpoint: 680,
+                settings: {            
+                slidesToShow: 3
+                }
+            },
+            {
+            breakpoint: 480,
+                settings: {            
+                slidesToShow: 2
+                }
+            }
+        ]
+    });
+});
+
+</script>
