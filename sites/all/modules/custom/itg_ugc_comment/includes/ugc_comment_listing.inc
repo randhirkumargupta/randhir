@@ -129,17 +129,22 @@ function ugc_comment_user_listing() {
       $sl_no = 1;
       
       foreach ($userData as $row) {
-        if($row['status'] == 1) {
-        $block_check = '<input type="checkbox" class="block-user-id" name="block_user[]" value="'.$row['email'].'">';
-        } else {
+        if ($row['status'] == 1)
+        {
+          $block_check = '<input type="checkbox" class="block-user-id" name="block_user[]" value="' . $row['email'] . '">';
+          $status = 'Active';
+        }
+        else
+        {
           $block_check = '';
+          $status = 'Blocked';
         }
         //get the value in table
         $rows[] = array(
           array('data' => $block_check),
           array('data' => $sl_no),
           array('data' => $row['email']),
-          array('data' => $row['status']),
+          array('data' => $status),
         );
         $sl_no = $sl_no + 1;
       } // end foreach
