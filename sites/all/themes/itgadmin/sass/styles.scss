@@ -9769,9 +9769,6 @@ div.node{
     display: block;
   }
 } 
-[id*="field-highlights-values"]{
-  @extend .itg-add-another-item;
-}
 .messages em{font-weight: 600;}
 .node-type-videogallery [id*="field-video-upload-values"]{
   tbody{
@@ -10007,5 +10004,18 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   .data-popup-link{
     @extend .btn-submit;
     @extend .btn-small;
+  }
+}
+.node-heighlights-form{
+  [id*="field-highlights-values"]{
+    @extend .itg-add-another-item;
+    tbody{
+      tr{
+        td:nth-child(2){
+          margin-bottom: 10px;
+          float: left;
+        }
+      }
+    } 
   }
 }

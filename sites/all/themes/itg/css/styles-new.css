@@ -3470,6 +3470,7 @@ body .program-livetv.effect-added .light-on-text {
   box-shadow: 0 0 15px #999;
   left: 0;
   top: 30px;
+  text-align: left;
   padding: 15px 15px 10px;
   position: absolute;
   transform: translateX(-50%);
@@ -5538,6 +5539,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     left: auto;
     right: -5px;
     width: 300px;
+    transform: translateX(0);
   }
 
   [id*="itg-personalization-edit-profile-form"] > div .form-field-name-field-ugc-ctype, [id*="itg-personalization-refer-a-friend-form"] > div .form-field-name-field-ugc-ctype {
