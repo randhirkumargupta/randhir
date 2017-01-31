@@ -93,7 +93,7 @@ function ugc_comment_user_listing() {
   # configure the table header columns
   $header = array(
     array('data' => t('')),
-    array('data' => t('Sl no.')),
+    array('data' => t('S. No')),
     array('data' => t('E-mail')),
     array('data' => t('Status')),
   );
