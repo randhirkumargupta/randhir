@@ -171,9 +171,15 @@ function itg_additional_settings_element_hide($form, &$form_state, $form_id) {
  * @param text $type
  * @param object $entity_object
  */
-function frontend_breadcrumb_display($id, $entity_object = NULL) {
+function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_url = NULL) {
 
   $section_link = l('News', '<front>');
+  //for Magazine Story
+  if (!empty($entity_object->type) 
+          && $entity_object->type == 'story' 
+          && !empty($entity_object->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'])) {
+    $section_link .= ' / ' . l('Magazine', 'calendar/0/0/magazine.html');    
+  }
 
   if (!empty($id)) {
     $section_tids = taxonomy_get_parents_all($id);
@@ -189,10 +195,18 @@ function frontend_breadcrumb_display($id, $entity_object = NULL) {
     $section_link .= ' / Video > ' . t($entity_object->title);
   } else if (!empty($entity_object->type) && $entity_object->type == 'photo') {
     $section_link .= ' / Gallery > ' . t($entity_object->title);
+  } else if (!empty($entity_object->type) && $entity_object->type == 'podcast') {
+    $section_link .= ' / '.l("Podcast", "podcasts-listing").' > ' . t($entity_object->title);
   } else if (!empty($entity_object->type) && $entity_object->type == 'poll') {
     $section_link .= ' / Poll';
   } else if (!empty($entity_object->type) && $entity_object->type == 'blog') {
     $section_link .= ' / Blog > ' . t($entity_object->title);
+  } else if (!empty($entity_object->type) && $entity_object->type == 'reporter') {
+    $section_link .= ' / '.l("Anchors", "anchors-list").' > ' . t($entity_object->title);
+  } else if (!empty($entity_object->type)) {
+      $section_link .= ' / ' . t($entity_object->title);
+  } else if (!empty($single_url)) {
+      $section_link .= ' / ' . t($single_url);
   }
 
   return $section_link;
