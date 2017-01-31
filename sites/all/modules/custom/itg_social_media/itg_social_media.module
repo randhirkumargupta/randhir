@@ -8,6 +8,7 @@
 require 'vendor/autoload.php';
 module_load_include('inc', 'itg_social_media', 'includes/itg_social_media.form');
 module_load_include('inc', 'itg_social_media', 'includes/itg_social_media.settings');
+module_load_include('inc', 'itg_social_media', 'includes/itg_social_media_tweet');
 
 /**
  * Implement hook_permissions()
@@ -147,35 +148,39 @@ function itg_social_media_log_listing() {
 
     // set facebook table
     $header = array(
-        array('data' => t('Like Count')),
-        array('data' => t('Share Count ')),
-        array('data' => t('Comment Count')),
-      
+        array('data' => t('Facebook Like Count')),
+        array('data' => t('Facebook Share Count ')),
+        array('data' => t('Facebook Comment Count')),
+        array('data' => t('Retweets Count')),
+        array('data' => t('Twitter Likes Count')),
     );
 
     $nid = arg(1);
 
-    $fecebook_detaila = itg_social_media_facebook_activity($nid);
+    $fecebook_detaila = itg_social_media_activity($nid);
     $rows = array();
 
     $rows[] = array(
-        array('data' => $fecebook_detaila['like']),
-        array('data' => $fecebook_detaila['share']),
-        array('data' => $fecebook_detaila['comment']),
-      
+        array('data' => $fecebook_detaila['facebook']['like']),
+        array('data' => $fecebook_detaila['facebook']['share']),
+        array('data' => $fecebook_detaila['facebook']['comment']),
+        array('data' => $fecebook_detaila['twitter']['share']),
+        array('data' => $fecebook_detaila['twitter']['like']),
     );
 
     $output_1 .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
-$graph_data = "['Share',     ".$fecebook_detaila['share']."],
-          ['Comment',      ".$fecebook_detaila['comment']."],
-          ['Like',  ".$fecebook_detaila['like']."]"; 
+    $graph_data = "['Facebook Share',     " . $fecebook_detaila['facebook']['share'] . "],
+          ['Facebook Comment',      " . $fecebook_detaila['facebook']['comment'] . "],
+          ['Facebook Like',  " . $fecebook_detaila['facebook']['like'] . "],
+          ['Twitter Retweets',  " . $fecebook_detaila['twitter']['share'] . "],
+          ['Twitter Like',  " . $fecebook_detaila['twitter']['like'] . "]";
 
-$facebook_graph_flag = 0;
-if ($fecebook_detaila['share'] > 0 || $fecebook_detaila['comment'] > 0 || $fecebook_detaila['like'] > 0) {
-    $facebook_graph_flag = 1;
-}
+    $facebook_graph_flag = 0;
+    if ($fecebook_detaila['facebook']['share'] > 0 || $fecebook_detaila['facebook']['comment'] > 0 || $fecebook_detaila['facebook']['like'] > 0 || $fecebook_detaila['twitter']['like'] > 0 || $fecebook_detaila['twitter']['share'] > 0) {
+        $facebook_graph_flag = 1;
+    }
     # add the pager
-    return theme('itg_twitter_social', array('data' => $output, 'facebook_details' => $output_1,'fb_graph_details'=>$graph_data , 'is_fb_graph' =>$facebook_graph_flag));
+    return theme('itg_twitter_social', array('data' => $output, 'facebook_details' => $output_1, 'fb_graph_details' => $graph_data, 'is_fb_graph' => $facebook_graph_flag));
 
     //return $output;
 }
@@ -448,13 +453,19 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
     }
 }
 
-function itg_social_media_facebook_activity($nid) {
+function itg_social_media_activity($nid) {
     global $user_access_token;
+
+
+
     $page_id = variable_get('facebook_page_id', '');
     $token = variable_get('access_token_one') . variable_get('access_token_two');
     $like = 0;
     $share = 0;
     $comment = 0;
+    $twitter_like = 0;
+    $twitter_share = 0;
+
     $share_on = 'facebook';
     $query = db_select('itg_social_media_logs', 'isml')
             ->fields('isml')
@@ -463,7 +474,9 @@ function itg_social_media_facebook_activity($nid) {
 
 
     $result = $query->execute()->fetchall();
-    
+
+
+
     foreach ($result as $result_d) {
         $current_post_id = $result_d->post_id;
         $current_url = 'https://graph.facebook.com/v2.2/' . $current_post_id;
@@ -475,9 +488,49 @@ function itg_social_media_facebook_activity($nid) {
         $comment = $comment + $data['comments']['summary']['total_count'];
         $share = $comment + $data['shares']['count'];
     }
-    $return_array = array('share' => $share, 'like' => $like, 'comment' => $comment);
+    $twitter_result = itg_social_media_twitter_promote_by_nid($nid);
+    if (!empty($twitter_result)) {
+        foreach ($twitter_result as $twitter_result) {
+            $social_counter_settings = array(
+                //twitter       
+                'twitter_user' => 'itechbrij',
+                'consumer_key' => variable_get('twitter_app_key'),
+                'consumer_secret' => variable_get('twitter_app_secret'),
+                'oauth_access_token' => variable_get('oauth_token', ''),
+                'oauth_access_token_secret' => variable_get('oauth_token_secret', ''),
+            );
+            $settings = $social_counter_settings;
+            $apiUrl = "https://api.twitter.com/1.1/statuses/show/" . $twitter_result->post_id . ".json";
+            $requestMethod = 'GET';
+            $twitter = new TwitterAPIExchange($settings);
+            $response = $twitter->setGetfield($getField)->buildOauth($apiUrl, $requestMethod)->performRequest();
+            $followers = json_decode($response);
+
+            $follow_count = $followers->favorite_count;
+            $retweet_count = $followers->retweet_count;
+            $twitter_like = $twitter_like + $follow_count;
+
+            $twitter_share = $twitter_share + $retweet_count;
+        }
+    }
+    $return_array = array('facebook' => array('share' => $share, 'like' => $like, 'comment' => $comment), 'twitter' => array('share' => $twitter_share, 'like' => $twitter_like));
 
     return $return_array;
+}
+
+/**
+ * This function use for get promlote node on twitter
+ * 
+ */
+function itg_social_media_twitter_promote_by_nid($nid) {
+    $query = db_select('itg_social_media_logs', 'isml')
+            ->fields('isml')
+            ->condition('nid', $nid, '=')
+            ->condition('social_media', '%' . db_like('Twitter') . '%', 'LIKE');
+
+
+    $result = $query->execute()->fetchall();
+    return $result;
 }
 
 /**
@@ -613,12 +666,14 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node, $is_scheduled_i
         'status' => $desc . ' ' . $short_url,
         'media_ids' => $media_id
     ]);
+
     watchdog('twitter image', '<pre>' . print_r($reply, TRUE) . '</pre>');
     if (isset($reply->id) && $is_scheduled_id === NULL) {
         $pre_save = array(
             'nid' => $node->nid,
             'node_title' => $node->title,
             'username' => $user->name,
+            'post_id' => $reply->id,
             'social_media' => 'Twitter Image',
             'created' => REQUEST_TIME,
             'scheduled_time' => REQUEST_TIME,
@@ -717,12 +772,14 @@ function itg_social_media_tvideo_post($fid, $desc, $node, $is_scheduled_id = NUL
         'status' => $desc . ' ' . $short_url,
         'media_ids' => $media_id
     ]);
+
     watchdog('twitter video', '<pre>' . print_r($reply, TRUE) . '</pre>');
     if (isset($reply->id) && $is_scheduled === NULL) {
         $pre_save = array(
             'nid' => $node->nid,
             'node_title' => $node->title,
             'username' => $user->name,
+            'post_id' => $reply->id,
             'social_media' => 'Twitter Video',
             'created' => REQUEST_TIME,
             'status' => 1,
