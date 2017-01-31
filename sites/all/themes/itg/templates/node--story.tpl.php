@@ -65,7 +65,7 @@ if (!empty($content)):
                       <?php print '<li>' . itg_sso_url('<i class="fa fa-bookmark"></i>', t('READ LATER')) . '</li>'; ?>
                     <?php endif; ?>
                   <?php endif; ?>
-                  <li class="mail-to-author"><a title ="Mail to author" href="mailto:support@indiatoday.in"><i class="fa fa-envelope"></i><?php print t('Mail to author'); ?></a></li>
+                  <li class="mail-to-author"><a title ="Mail to author" href="mailto:support@indiatoday.in"><i class="fa fa-envelope"></i><?php //print t('Mail to author'); ?></a></li>
                   <li><a href="#" title = "whatsapp"><i class="fa fa-whatsapp"></i></a></li>
                   <?php
                   if ($config_name == 'vukkul') {
@@ -74,7 +74,7 @@ if (!empty($content)):
                   <?php } if ($config_name == 'other') { ?> 
                     <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                   <?php } ?>
-                  <li><a href="#" title ="share" class="share-icon"><i class="fa fa-share-alt"></i></a>
+                  <li><a href="javascript:void(0)" title ="share" class="share-icon"><i class="fa fa-share-alt"></i></a>
               </ul>
               <ul class="social-share">
                   <li><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>

@@ -85,6 +85,29 @@ global $base_url;
 </div>
 <div id="iframe-display" style="display: none"></div>
 
+<!--animation emoji for hightlight-->
+<div id="smily">
+     <div class="face1 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'; ?>" alt="" /></div>    
+    <div class="face2 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'; ?>" alt="" /></div>    
+    <div class="face3 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'; ?>" alt="" /></div>    
+    <div class="face4 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'; ?>" alt="" /></div>       
+  </div>
+  <div id="smilysad">
+   <div class="face1 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'; ?>" alt="" /></div>
+    <div class="face2 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'; ?>" alt="" /></div>
+    <div class="face3 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'; ?>" alt="" /></div>
+    <div class="face4 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'; ?>" alt="" /></div>  
+  </div>
+  <div id="wgmf">
+    <div class="face1 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" /></div>
+    <div class="face2 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" /></div>
+    <div class="face3 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" /></div>
+    <div class="face4 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" /></div>
+  </div>
+<!--animation emoji for hightlight end-->
+
+
+
 
 <script>
 jQuery(document).ready(function(){    
@@ -115,7 +138,41 @@ jQuery(document).ready(function(){
                 }
             }
         ]
-    });
+    });      
 });
 
+
+jQuery(window).load(function() {
+//emoji animation
+     jQuery('.emoji-container a').click(function(){           
+         var datavalue = jQuery(this).attr('data-click');
+         if(datavalue === 'nice'){
+            smilyanimation('smily');
+         } else if(datavalue === 'no'){
+             smilyanimation('smilysad');
+         } else if(datavalue === 'whatever'){
+             smilyanimation('wgmf');
+         }                                 
+     });
+     
+     function smilyanimation(facetype){
+            var faceone = jQuery('#'+facetype+' .face1');
+            var facetwo = jQuery('#'+facetype+' .face2');
+            var facethree = jQuery('#'+facetype+' .face3');
+            var facefour = jQuery('#'+facetype+' .face4');
+            jQuery('#'+facetype).fadeIn(function(){                                                              
+               faceone.animate({top: '100px', left: '800px'}, 3000);
+               facetwo.animate({top:'300px', left:'600px'}, 3000);
+               facethree.animate({top:'600px', right:'800px'}, 3000);
+               facefour.animate({top:'400px', right:'400px'}, 3000, function(){
+                   jQuery('#'+facetype).fadeOut(500, function(){
+                       faceone.css({top: '500px', left: '400px'});
+                       facetwo.css({top:'0px', left:'200px'});
+                       facethree.css({top:'0px', right:'200px'});
+                       facefour.css({top:'100px', right:'600px'});
+                   });
+               });                            
+            }); 
+         }          
+});
 </script>

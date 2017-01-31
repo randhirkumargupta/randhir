@@ -12325,3 +12325,45 @@ span.smilies-title {
 }
 
 /*css end for podcast*/
+/*css for emoji*/
+.emoji-container {
+  display: inline-block;
+  vertical-align: top;
+}
+.emoji-container span {
+  vertical-align: bottom;
+}
+.emoji-container a {
+  display: inline-block;
+}
+
+#smily, #smilysad, #wgmf {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+#smily .face, #smilysad .face, #wgmf .face {
+  position: fixed;
+  z-index: 9999;
+}
+#smily .face.face1, #smilysad .face.face1, #wgmf .face.face1 {
+  left: 400px;
+  top: 500px;
+}
+#smily .face.face2, #smilysad .face.face2, #wgmf .face.face2 {
+  left: 200px;
+  top: 0;
+}
+#smily .face.face3, #smilysad .face.face3, #wgmf .face.face3 {
+  top: 0;
+  right: 200px;
+}
+#smily .face.face4, #smilysad .face.face4, #wgmf .face.face4 {
+  right: 600px;
+  top: 100px;
+}
+
+/*css end for emoji*/
