@@ -595,6 +595,7 @@ if (!empty($content)):
               ?>
               </div>
               <?php } ?>
+              <div class="clearfix"></div>
               <!-- condition for buzz  -->
 
               <?php
