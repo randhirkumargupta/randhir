@@ -85,3 +85,86 @@ function ugc_comment_approve($id) {
   drupal_set_message('Comment Approved Sucessfully');
   drupal_goto('ugc-comment-listing');
 }
+
+/**
+ * Implements ugc_comment_user_listing().
+ */
+function ugc_comment_user_listing() {
+  # configure the table header columns
+  $header = array(
+    array('data' => t('')),
+    array('data' => t('Sl no.')),
+    array('data' => t('E-mail')),
+    array('data' => t('Status')),
+  );
+  if (function_exists('mongodb'))
+  {
+    $con = mongodb();
+    if ($con)
+    {
+      $people = $con->itgcms_comment_user;
+      $query = array();
+      $limit = 0;
+      if (!empty($_GET['items_per_page']))
+      {
+        $limit = $_GET['items_per_page'];
+      }
+
+      if (!empty($_GET['email']))
+      {
+        $query['email'] = trim($_GET['email']);
+      }
+
+      if (is_array($query) && empty($query))
+      {
+
+        $userData = $people->find(array("email" => array('$ne' => null)))->limit($limit);
+      }
+      else
+      {
+        $userData = $people->find($query)->limit($limit);
+      }
+
+      $rows = array();
+      $sl_no = 1;
+
+      foreach ($userData as $row) {
+        $block_check = '<input type="checkbox" class="block-user-id" name="block_user[]" value="'.$row['email'].'">';
+        //get the value in table
+        $rows[] = array(
+          array('data' => $block_check),
+          array('data' => $sl_no),
+          array('data' => $row['email']),
+          array('data' => $row['status']),
+        );
+        $sl_no = $sl_no + 1;
+      } // end foreach
+    }
+  }
+  //get the header in table
+  $output = render(drupal_get_form('itg_user_block_api_form'));
+  $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => t('No results found')));
+
+  # add the pager
+  $output .= theme('pager');
+  return $output;
+}
+
+/**
+ * Implements ugc_comment_user_block().
+ */
+function ugc_comment_user_block() {
+  $email = $_POST['email'];
+  if (function_exists('mongodb') && !empty($email))
+  {
+    $con = mongodb();
+    $final_email = explode(',', $email);
+    foreach ($final_email as $value) {
+      $people = $con->itgcms_comment_user;
+      $newdata = array('$set' => array('status' => 0));
+      $people->update(array("email" => trim($value)), $newdata);
+    }
+    $response = array('success' => 'true');
+    print json_encode($response);
+  }
+}
