@@ -2685,7 +2685,7 @@
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
   .widget-wrapper.top_stories_ordering .data-holder .block-itg-widget {
     overflow: scroll;
-    height: 663px;
+    max-height: 663px;
   }
 
   #block-itg-layout-manager-header-sosorry-block .sosory-header .sosorryitg {

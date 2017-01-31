@@ -1207,9 +1207,10 @@ footer{
         cursor:pointer;
         &.slick-prev{
             left: -10px;
+            visibility: hidden;
         }
         &.slick-next{
-            right: 15px;
+            right: 0px;
         }
     }    
     }

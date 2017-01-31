@@ -1364,9 +1364,10 @@ footer .multiple-items-footer i {
 }
 footer .multiple-items-footer i.slick-prev {
   left: -10px;
+  visibility: hidden;
 }
 footer .multiple-items-footer i.slick-next {
-  right: 15px;
+  right: 0px;
 }
 
 /*End CSS footer section*/
