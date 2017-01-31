@@ -177,10 +177,11 @@ function frontend_breadcrumb_display($id, $entity_object = NULL) {
 
   if (!empty($id)) {
     $section_tids = taxonomy_get_parents_all($id);
+    $section_tids = array_reverse($section_tids); 
     foreach ($section_tids as $chunks) {
       $section_link .= ' / ' . l($chunks->name, drupal_get_path_alias('taxonomy/term/' . $chunks->tid));
     }
-  }
+  }  
 
   if (!empty($entity_object->type) && $entity_object->type == 'story') {
     $section_link .= ' / ' . t($entity_object->title);
