@@ -775,6 +775,7 @@ function itg_story_movie_image_plugin_data($node_id = '') {
  * @param type $node_id
  */
 function itg_story_photo_story_previous($node_id) {
+  global $base_url;
   /*
    * query to fetch the previous content id of the id received from the argument
    */
@@ -792,9 +793,9 @@ function itg_story_photo_story_previous($node_id) {
     $nid = $val->nid;
   }
   // stores node redirect path 
-  $redirect = drupal_get_path_alias('node/' . $nid);
+  $redirect = $base_url . '/' . drupal_get_path_alias('node/' . $nid);
   // send redirect path for previous content to itg_story_front.js file
-  drupal_add_js(array('itg_story_front' => array('previous' => $redirect)), 'setting');
+  drupal_add_js(array('itg_story' => array('previous' => $redirect)), 'setting');
   drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story_front.js');
   
   return $redirect;
@@ -805,6 +806,7 @@ function itg_story_photo_story_previous($node_id) {
  * @param type $node_id
  */
 function itg_story_photo_story_next($node_id) {
+  global $base_url;
   /*
    * query to fetch the next content id of the id received from the argument
    */
@@ -822,10 +824,62 @@ function itg_story_photo_story_next($node_id) {
     $nid = $val->nid;
   }
   // stores node redirect path 
-  $redirect = drupal_get_path_alias('node/' . $nid);
+  $redirect = $base_url . '/' . drupal_get_path_alias('node/' . $nid);
   // send redirect path for the next content to itg_story_front.js file
-  drupal_add_js(array('itg_story_front' => array('next' => $redirect)), 'setting');
+  drupal_add_js(array('itg_story' => array('next' => $redirect)), 'setting');
   drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story_front.js');
   
   return $redirect;
+}
+
+/**
+ * 
+ * @param type $node_id
+ * @return string
+ */
+function itg_story_photo_story_html($node_id) {
+  // generate the html for photo story top slider
+  if (!empty($node_id)) {
+    $node = node_load($node_id);
+    $photo_story = $node->field_photo_story[LANGUAGE_NONE];
+      $html = '';
+      $html .= '<div class="photo-story-img multiple-photo-disc">';
+      foreach ($photo_story as $key => $val) {
+        $entity_obj = entity_load('field_collection_item', array($val['value']));
+        $photo_story_img_path = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['uri'];
+        $photo_story_img = image_style_url('photo_story_771x432', $photo_story_img_path);
+        $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
+        $html .= '<div class="photo-slider">';
+        $html .= '<img src="' . $photo_story_img . '" title="" alt="photo_story_img" />';
+        $html .= '<div class="description"><p>' . $photo_story_desc . '</p></div>';
+        $html .= '</div>';
+      }
+      $html .= '</div>';
+      return $html;
+  }
+}
+
+/**
+ * 
+ * @param type $node_id
+ * @return string
+ */
+function itg_story_photo_story_bottom_html($node_id) {
+  // generate the html for photo story bottom slider
+  if (!empty($node_id)) {
+    $node = node_load($node_id);
+    $photo_story = $node->field_photo_story[LANGUAGE_NONE];
+      $html = '';
+      $html .= '<div class="photo-story-img multiple-photo common-photo">';
+      foreach ($photo_story as $key => $val) {
+        $entity_obj = entity_load('field_collection_item', array($val['value']));
+        $photo_story_img_path = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['uri'];
+        $photo_story_img = image_style_url('photo_story_small_88x66', $photo_story_img_path);
+        $html .= '<div class="photo-slider">';
+        $html .= '<img src="' . $photo_story_img . '" title="" alt="photo_story" />';
+        $html .= '</div>';
+      }
+      $html .= '</div>';
+      return $html;
+  }
 }
