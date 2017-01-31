@@ -204,7 +204,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
           $form['media' . $num] = array(
               '#type' => 'markup',
               '#prefix' => '<div>',
-              '#markup' => '<img src="'.$media_path.'" width="740"/>',
+              '#markup' => '<img src="'.$media_path.'" width="740" alt="" />',
               '#suffix' => '</div>',
           );
         } else {

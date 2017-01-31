@@ -13,7 +13,7 @@ global $base_url;
              <?php if ($_GET['input_filed'] != 'ckeditor') { ?>
             <div class="video-local"><?php print t('Local Browse'); ?></div>
              <?php } ?>
-            <div id="loader-data"><img class="widget-loader" style="display: none" align="center" src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
+            <div id="loader-data"><img class="widget-loader" style="display: none" src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
 
             <div class="ftp-server">
                 <div class="video_filters">

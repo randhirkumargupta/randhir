@@ -11,7 +11,7 @@
           <?php if (!empty($node_data['uri'])) { ?>
             <div class="dm-pic">
               <a class="<?php echo $video_class;?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['nid']}") ?>">
-                <img src="<?php print image_style_url("widget_small", $node_data['uri']); ?>" />
+                <img src="<?php print image_style_url("widget_small", $node_data['uri']); ?>" alt="" />
               </a>
             </div>
             <?php
@@ -20,7 +20,7 @@
             ?>
             <div class="dm-pic">
               <a class="<?php echo $video_class;?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['nid']}") ?>">
-                <img src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg" />
+                <img src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg" alt="" />
               </a>
             </div>
           <?php } ?>

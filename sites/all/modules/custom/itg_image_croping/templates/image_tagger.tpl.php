@@ -25,7 +25,7 @@ list($width, $height) = getimagesize($url);
         $imagename=  str_replace('_', ' ', $imagename);
         $url = file_create_url($file->uri);
         print '<div id="imgtag' . $key . '" class="multipal-crop-images"> 
-        <img id="" src="' . $url . '" /> 
+        <img id="" src="' . $url . '" alt="" /> 
         <div id="tagbox' . $key . '">
         </div>
         <input type="hidden" name="fids[]" class="imagefid" value="' . $fids . '">

@@ -137,8 +137,7 @@ jQuery(document).ready(function () {
 
 
     // jquery for front user activity
-    jQuery('#user-activity, .user-activity').click(function (event) {
-        console.log(jQuery(this).attr('rel'));
+    jQuery('#user-activity, .user-activity').click(function (event) {        
         var nd_id = jQuery(this).attr('rel');
         var dtag = jQuery(this).attr('data-tag');
         var dstatus = jQuery(this).attr('data-status');

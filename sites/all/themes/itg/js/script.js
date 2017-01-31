@@ -20,7 +20,7 @@
             jQuery('.add-more-block-front').live('click', function () {
                 var section_ids = "";
                 var elementobj = jQuery(this);
-                jQuery(this).parent('.load-more-wrapper-front').addClass('new-load').html('<img src="./sites/all/themes/itg/images/tab-loading.gif"/>')
+                jQuery(this).parent('.load-more-wrapper-front').addClass('new-load').html('<img src="./sites/all/themes/itg/images/tab-loading.gif" alt="" />')
                 //jQuery(this).remove();
                 jQuery('.sectioncart').each(function () {
                     section_ids = jQuery(this).attr('id');
@@ -754,7 +754,12 @@ jQuery(document).ready(function () {
         });
         jQuery('.event-search-icon, .event-search input').click(function (e) {
             e.stopPropagation();
-        });        
+        });
+        
+        //for iphone zoom page
+        document.addEventListener('gesturestart', function (e) {
+            e.preventDefault();
+        });
     }
     
     //story page social share for mobile
@@ -770,6 +775,5 @@ jQuery(document).ready(function () {
     jQuery('body').on('click', '.light-off-on-tab', function(){
       jQuery('body').toggleClass('light-off-overlay');
       jQuery('.program-livetv').toggleClass('effect-added');
-    });
-    
+    });           
 });

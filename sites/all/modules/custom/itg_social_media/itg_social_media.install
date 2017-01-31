@@ -41,6 +41,36 @@ function itg_social_media_schema() {
         'not null' => false,
         'default' => '',
       ),  
+        'fb_likes' => array(
+        'description' => 'The Fecebook Like Count.',
+        'type' => 'int',
+        'not null' => false,
+        'default' => '',
+      ),  
+        'fb_comment' => array(
+        'description' => 'The Fecebook Comment Count.',
+        'type' => 'int',
+        'not null' => false,
+        'default' => '',
+      ),  
+        'fb_shares' => array(
+        'description' => 'The Fecebook Shares Count.',
+        'type' => 'int',
+        'not null' => false,
+        'default' => '',
+      ),  
+        'twitter_retweet' => array(
+        'description' => 'The Twitter retweet Count.',
+        'type' => 'int',
+        'not null' => false,
+        'default' => '',
+      ),  
+        'twitter_likes' => array(
+        'description' => 'The Twitter likes Count.',
+        'type' => 'int',
+        'not null' => false,
+        'default' => '',
+      ),  
       'username' => array(
         'description' => 'Username of the user who have promoted the content.',
         'type' => 'varchar',

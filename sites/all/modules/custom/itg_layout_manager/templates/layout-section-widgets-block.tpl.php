@@ -4,11 +4,10 @@
   print $data['section_widgets_form'];
 ?>
 <div id="section_widgets_list">
-  <?php 
+  <?php  
     if (!empty($data['widgets_list'])) {
       print $data['widgets_list'];
-    }
-    
-    ?>
+    }    
+  ?>
 </div>
 </div>

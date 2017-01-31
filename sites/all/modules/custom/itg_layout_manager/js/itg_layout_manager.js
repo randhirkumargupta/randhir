@@ -47,8 +47,8 @@
                         // content block id for display content widget
                         var block_name = $(this).find('.data-holder').attr('id');
                         //  content block style for display content widget
-                        var wid_name=widget_name;
-                        var splitewidgitname=widget_name.split('#');
+                        var wid_name = widget_name;
+                        var splitewidgitname = widget_name.split('#');
                         if(splitewidgitname[0]=='section_wise_order') {
                             var widget_style = $(this).find('.data-holder').attr('widget-style');
                             if(widget_style != "" && widget_style != "undefined") {
@@ -88,13 +88,19 @@
                             method: 'post',
                             data: {block_name: block_name, widget_name: widget_name, section_name: section_name, template_name: template_name, layout_type:layout_type, block_title: category_name_tab, widget_info:widget_info},
                             beforeSend: function() {
-                              $('#' + content_place).html('<div class="widget-loader-wrapper"><img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>');
+                              $('#' + content_place).html('<div class="widget-loader-wrapper"><img class="widget-loader" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>');
                             },
                             success: function(data) {
-                                      var splitewigitinfo= widget_info.split('|');
-                                      if(splitewigitinfo[1] !="") {
-                                         wid_name=wid_name+'-'+ splitewigitinfo[1];
-                                      }
+                                //code for already configured section
+                                if (data == 'already_configured_section') {
+                                  alert('You have already configured this section on this page.');
+                                  $('#' + content_place).html('');
+                                  return false;
+                                }
+                                var splitewigitinfo= widget_info.split('|');
+                                if(splitewigitinfo[1] !="") {
+                                   wid_name=wid_name+'-'+ splitewigitinfo[1];
+                                }
                                 // for category tab widget
                                 $('input[name = ' + block_name + ']').val(category_name_tab);
                                 $('.widget-title[data-id="' + block_name + '"]').html(category_name_tab);
@@ -103,7 +109,7 @@
                                   $('#display_tit').show();
                                 }
                                 
-                                  if(block_name == 'itg-block-4' && splitewidgitname[0] == 'highlights' && template_name == 'page--special_election') {
+                                if(block_name == 'itg-block-4' && splitewidgitname[0] == 'highlights' && template_name == 'page--special_election') {
                                     $('.highlights-title').html(category_name_tab);
                                     $('#display_tit').show();
                                 }
@@ -236,7 +242,7 @@
                         method: 'post',
                         data: {cid: 1, section_name: section_name, template_name: template_name, layout_type:layout_type, category_name: category_name, widgets_type: widgets_type},
                         beforeSend: function() {
-                            $('#section_widgets_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                            $('#section_widgets_list').html('<img class="widget-loader" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
                         },
                         success: function(data) {
                             // display category list in block
@@ -267,7 +273,7 @@
                         method: 'post',
                         data: {cid: 1, section_name: section_name, template_name: template_name, layout_type:layout_type, category_name: category_name, widgets_type: widgets_type},
                         beforeSend: function() {
-                            $('#section_widget2_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                            $('#section_widget2_list').html('<img class="widget-loader" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
                         },
                         success: function(data) {
                             // display category list in block
@@ -292,7 +298,7 @@
                     method: 'post',
                     data: {id: widget_id, section_name: section_name, template_name: template_name, layout_type:layout_type },
                     beforeSend: function() {
-                        $('#section_widgets_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                        $('#section_widgets_list').html('<img class="widget-loader" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
                     },
                     success: function(data) {
                         $('#section_widgets_list').html(data);
@@ -313,7 +319,7 @@
                     method: 'post',
                     data: {id: widget_id, section_name: section_name, template_name: template_name, layout_type:layout_type },
                     beforeSend: function() {
-                        $('#section_widget2_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                        $('#section_widget2_list').html('<img class="widget-loader" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
                     },
                     success: function(data) {
                         $('#section_widget2_list').html(data);
@@ -410,7 +416,7 @@
                         method: 'post',
                         data: {html_title: html_title},
                         beforeSend: function() {
-                           // $('#section_widgets_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                           // $('#section_widgets_list').html('<img class="widget-loader" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
                         },
                         success: function(data) {
                             // display category list in block
@@ -432,7 +438,7 @@
                         method: 'post',
                         data: {html_title: highlights_title},
                         beforeSend: function() {
-                           // $('#section_widgets_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                           // $('#section_widgets_list').html('<img class="widget-loader" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
                         },
                         success: function(data) {
                             // display category list in block
