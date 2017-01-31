@@ -104,7 +104,6 @@
             function validate_email_block(value, element) {
                 var email_to = $('#edit-femail').val();
                 if (email_result.indexOf(email_to) !== -1) {
-                    console.log('yes');
                     return false;
                 }
 
