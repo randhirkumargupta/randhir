@@ -10009,11 +10009,13 @@ span.file a{pointer-events: none; color: #2f2f2f;}
 .node-heighlights-form{
   [id*="field-highlights-values"]{
     @extend .itg-add-another-item;
-    tbody tr{
-      td:nth-child(2){
-        margin-bottom: 10px;
-        @extend .fleft;
+    tbody{
+      tr{
+        td:nth-child(2){
+          margin-bottom: 10px;
+          float: left;
+        }
       }
-    }
+    } 
   }
 }
