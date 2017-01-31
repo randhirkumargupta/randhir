@@ -48,7 +48,11 @@ if (!empty($content)):
     $reporter_node = node_load($byline_id);
   }
   ?>
-  <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle; ?>">
+  <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle;
+                if (!empty($node->field_story_type[LANGUAGE_NONE])) {
+                  echo ' photo-story-section';
+                }
+              ?>">
       <div class='<?php print $classes ?>'>
           <?php //pr($node);   ?> 
           <div class="comment-mobile desktop-hide">

@@ -290,7 +290,12 @@
                 <h2><?php print t('photo story'); ?></h2>
                     <div class="content-details">
                     <?php print render($content['field_story_type']); ?>
-                    <?php print render($content['field_photo_story']); ?>
+                    <?php 
+                      if (!empty($node->field_photo_story)) {
+                        $output = itg_story_photo_story_html($node->nid);
+                        print $output;
+                      }
+                    ?>
                 </div>
         </div>
       <?php endif; // end of view mode full condition ?></div>
