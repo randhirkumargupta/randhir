@@ -5655,7 +5655,7 @@ div.node{
 }
 
 /*itg_image_repository end*/
-
+.form-field-name-field-pti-print-media{@extend .pos-rel;}
 [id*="field-pti-print-media-values"]{
   @extend .itg-add-another-item;
   tbody{
@@ -5667,6 +5667,9 @@ div.node{
       td{
         @extend .fleft;
         @extend .full;
+        padding: 10px;
+        background-color: #f2f2f2;
+        border: none;
         .field-name-field-pti-upload-video{
           .form-type-managed-file{
             @extend .choose-audio-video-file;
@@ -5675,14 +5678,51 @@ div.node{
             }
           }
         }
+        .field-name-field-pti-upload-image{
+          .form-type-managed-file{
+            margin: 0;
+            padding: 0;
+            .form-managed-file{
+              float: left;
+              min-width: 135px;
+              min-height: 29px;
+              & + div.description{
+                left: 150px;
+                top: 15px;
+              }
+            }
+            > label{
+              @extend .hide;
+              & + div{
+                padding-left: 0;
+              }
+            }
+          }
+          & + .form-submit{
+            @extend .icon-remove-item;
+            position: absolute;
+            right: 38px;
+            bottom: 10px;
+            margin: 0;
+          }
+        }
       }
       &+ tr{
         td{margin-top: 10px;}
       }
     }
-  } 
-  .form-managed-file .image-widget-data .form-submit[value="Remove"]{
-    left: 580px;
+  }
+  & + div.clearfix{
+    .form-submit{
+      @extend .icon-add-more;
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      margin: 0;
+    }
+    .ajax-progress-throbber{
+      @extend .hide;
+    }
   }
 }
 [id*="views-form-manage-print-team-page"]{
