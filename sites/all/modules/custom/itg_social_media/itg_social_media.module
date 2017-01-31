@@ -48,7 +48,7 @@ function itg_social_media_menu() {
         'type' => MENU_CALLBACK,
     );
     $items['facebook_count'] = array(
-        'page callback' => 'get_shares_count_from_post_for_showing',
+        'page callback' => 'itg_social_media_social_media_activity_update',
         'access arguments' => array('access content'),
         'type' => MENU_CALLBACK,
     );
@@ -223,6 +223,23 @@ function itg_social_media_count_log($share_on = null, $nid) {
  * @param type $nid
  * @return type int 
  */
+function itg_social_media_get_data_by_nid($share_on = null, $nid) {
+    $query = db_select('itg_social_media_logs', 'isml')
+            ->fields('isml')
+            ->condition('nid', $nid, '=')
+            ->condition('social_media', '%' . db_like($share_on) . '%', 'LIKE');
+
+
+    $result = $query->execute()->fetchall();
+    return $result;
+}
+
+/**
+ * 
+ * @param type $share_on
+ * @param type $nid
+ * @return type int 
+ */
 function itg_social_media_check_node_exist($nid) {
     $query = db_select('itg_social_media_logs', 'isml')
             ->fields('isml')
@@ -275,6 +292,26 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
                 'readonly' => 'readonly',
                 'placeholder' => t('End Date')
             );
+
+            break;
+
+        case 'views-exposed-form-social-media-report-social-media-report':
+            $form['scheduled_time']['min']['#attributes'] = array(
+                'autocomplete' => 'off',
+                'readonly' => 'readonly',
+                'placeholder' => t('Start Date'),
+            );
+            $form['scheduled_time']['min']['#type'] = 'date_popup';
+            $form['scheduled_time']['min']['#date_format'] = 'Y-m-d';
+            $form['scheduled_time']['min']['#datepicker_options'] = array('maxDate' => '+0d');
+            $form['scheduled_time']['max']['#datepicker_options'] = array('maxDate' => '+0d');
+            $form['scheduled_time']['max']['#attributes'] = array(
+                'autocomplete' => 'off',
+                'readonly' => 'readonly',
+                'placeholder' => t('End Date')
+            );
+            $form['scheduled_time']['max']['#type'] = 'date_popup';
+            $form['scheduled_time']['max']['#date_format'] = 'Y-m-d';
 
             break;
     }
@@ -453,10 +490,14 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
     }
 }
 
+/**
+ * Social medial activity log 
+ * @global type $user_access_token
+ * @param type $nid
+ * @return array
+ */
 function itg_social_media_activity($nid) {
     global $user_access_token;
-
-
 
     $page_id = variable_get('facebook_page_id', '');
     $token = variable_get('access_token_one') . variable_get('access_token_two');
@@ -478,36 +519,43 @@ function itg_social_media_activity($nid) {
 
 
     foreach ($result as $result_d) {
-        $current_post_id = $result_d->post_id;
-        $current_url = 'https://graph.facebook.com/v2.2/' . $current_post_id;
-        $current_url .= '?access_token=' . $token;
-        $current_url .= '&fields=likes.summary(true),comments.summary(true),shares';
-        $json = file_get_contents($current_url);
-        $data = json_decode($json, true);
-        $like = $like + $data['likes']['summary']['total_count'];
-        $comment = $comment + $data['comments']['summary']['total_count'];
-        $share = $comment + $data['shares']['count'];
+      
+//        $current_post_id = $result_d->post_id;
+//        $current_url = 'https://graph.facebook.com/v2.2/' . $current_post_id;
+//        $current_url .= '?access_token=' . $token;
+//        $current_url .= '&fields=likes.summary(true),comments.summary(true),shares';
+//        $json = file_get_contents($current_url);
+//        $data = json_decode($json, true);
+//        $like = $like + $data['likes']['summary']['total_count'];
+//        $comment = $comment + $data['comments']['summary']['total_count'];
+//        $share = $comment + $data['shares']['count'];
+
+        $like = $like + $result_d->fb_likes;
+        $comment = $comment + $result_d->fb_comment;
+        $share = $comment + $result_d->fb_shares;
     }
     $twitter_result = itg_social_media_twitter_promote_by_nid($nid);
     if (!empty($twitter_result)) {
         foreach ($twitter_result as $twitter_result) {
-            $social_counter_settings = array(
-                //twitter       
-                'twitter_user' => 'itechbrij',
-                'consumer_key' => variable_get('twitter_app_key'),
-                'consumer_secret' => variable_get('twitter_app_secret'),
-                'oauth_access_token' => variable_get('oauth_token', ''),
-                'oauth_access_token_secret' => variable_get('oauth_token_secret', ''),
-            );
-            $settings = $social_counter_settings;
-            $apiUrl = "https://api.twitter.com/1.1/statuses/show/" . $twitter_result->post_id . ".json";
-            $requestMethod = 'GET';
-            $twitter = new TwitterAPIExchange($settings);
-            $response = $twitter->setGetfield($getField)->buildOauth($apiUrl, $requestMethod)->performRequest();
-            $followers = json_decode($response);
-
-            $follow_count = $followers->favorite_count;
-            $retweet_count = $followers->retweet_count;
+            
+//            $social_counter_settings = array(
+//                //twitter       
+//                'twitter_user' => 'itechbrij',
+//                'consumer_key' => variable_get('twitter_app_key'),
+//                'consumer_secret' => variable_get('twitter_app_secret'),
+//                'oauth_access_token' => variable_get('oauth_token', ''),
+//                'oauth_access_token_secret' => variable_get('oauth_token_secret', ''),
+//            );
+//            $settings = $social_counter_settings;
+//            $apiUrl = "https://api.twitter.com/1.1/statuses/show/" . $twitter_result->post_id . ".json";
+//            $requestMethod = 'GET';
+//            $twitter = new TwitterAPIExchange($settings);
+//            $response = $twitter->setGetfield($getField)->buildOauth($apiUrl, $requestMethod)->performRequest();
+//            $followers = json_decode($response);
+//            $follow_count = $followers->favorite_count;
+//            $retweet_count = $followers->retweet_count;
+            $follow_count = $twitter_result->twitter_likes;
+            $retweet_count = $twitter_result->twitter_retweet;
             $twitter_like = $twitter_like + $follow_count;
 
             $twitter_share = $twitter_share + $retweet_count;
@@ -825,7 +873,8 @@ function itg_social_media_views_api() {
  * @param stdObject $query
  */
 function itg_social_media_views_query_alter(&$view, &$query) {
-    if ($view->name === 'browse_content') {
+    if ($view->name === 'browse_content' || $view->name === 'social_media_report') {
+
         $type = !empty($_GET['type']) ? check_plain($_GET['type']) : '';
         foreach ($query->where[1]['conditions'] as $key => $condition) {
             if (isset($condition['value'][':field_data_field_story_schedule_date_time_field_story_schedule_date_time_value']) && $type !== 'story') {
@@ -893,8 +942,82 @@ function itg_social_media_cronapi($op, $job = NULL) {
         'description' => 'Publish twitter post on twitter',
         'callback' => 'itg_social_media_publish_on_twitter',
     );
+    $items['itg_social_media_social_media_activity_update_cron'] = array(
+        'description' => 'Socail Media Activity Update',
+        'callback' => 'itg_social_media_social_media_activity_update',
+    );
 
     return $items;
+}
+
+/**
+ * Implement callback function for social media activity update 
+ */
+function itg_social_media_social_media_activity_update() {
+
+    $itg_query = db_select('itg_social_media_logs', 'itg');
+    $itg_query->fields('itg', array('id', 'post_id', 'social_media'))
+            ->condition('status', 1);
+
+    $itg_result = $itg_query->execute()->fetchAll();
+
+    if (!empty($itg_result)) {
+        foreach ($itg_result as $result_data) {
+
+            if ($result_data->post_id != "") {
+
+                if (strpos($result_data->social_media, 'facebook') !== FALSE) {
+                    $token = variable_get('access_token_one') . variable_get('access_token_two');
+                    $current_url = 'https://graph.facebook.com/v2.2/' . $result_data->post_id;
+                    $current_url .= '?access_token=' . $token;
+                    $current_url .= '&fields=likes.summary(true),comments.summary(true),shares';
+                    $json = file_get_contents($current_url);
+                    $data = json_decode($json, true);
+
+                    $like = $data['likes']['summary']['total_count'];
+                    $comment = $data['comments']['summary']['total_count'];
+                    $share = $data['shares']['count'];
+                    $update_field = array(
+                        'fb_likes' => $like,
+                        'fb_comment' => $comment,
+                        'fb_shares' => $share
+                    );
+                    $query = db_update('itg_social_media_logs');
+                    $query->condition('id', $result_data->id)
+                            ->fields($update_field)
+                            ->execute();
+                }
+                if (strpos($result_data->social_media, 'Twitter') !== FALSE) {
+                    $social_counter_settings = array(
+                        //twitter       
+                        'twitter_user' => '',
+                        'consumer_key' => variable_get('twitter_app_key'),
+                        'consumer_secret' => variable_get('twitter_app_secret'),
+                        'oauth_access_token' => variable_get('oauth_token', ''),
+                        'oauth_access_token_secret' => variable_get('oauth_token_secret', ''),
+                    );
+                    $settings = $social_counter_settings;
+                    $apiUrl = "https://api.twitter.com/1.1/statuses/show/" . $result_data->post_id . ".json";
+                    $requestMethod = 'GET';
+                    $twitter = new TwitterAPIExchange($settings);
+                    $response = $twitter->setGetfield($getField)->buildOauth($apiUrl, $requestMethod)->performRequest();
+                    $followers = json_decode($response);
+
+                    $follow_count = $followers->favorite_count;
+                    $retweet_count = $followers->retweet_count;
+
+                    $update_field = array(
+                        'twitter_retweet' => $retweet_count,
+                        'twitter_likes' => $follow_count,
+                    );
+                    $query = db_update('itg_social_media_logs');
+                    $query->condition('id', $result_data->id)
+                            ->fields($update_field)
+                            ->execute();
+                }
+            }
+        }
+    }
 }
 
 /**
