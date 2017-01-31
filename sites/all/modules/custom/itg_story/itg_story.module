@@ -730,8 +730,13 @@ function itg_story_node_view($node, $view_mode, $langcode) {
     
     if(function_exists('itg_common_get_latest_byline')) {
       $node->content['byline_id'] = itg_common_get_latest_byline($node->nid, '1');
-    }    
-    drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story_front.js');
+    }
+    if ($node->field_story_type['und'][0]['value'] == 'photo_story') {
+      $next = itg_story_photo_story_redirect($node->nid, '>');
+      $previous = itg_story_photo_story_redirect($node->nid, '<');
+      drupal_add_js(array('itg_story_front' => array('next' => $next, 'previous' => $previous)), 'setting');
+      drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story_front.js');
+    }
   }
 }
 
@@ -774,7 +779,7 @@ function itg_story_movie_image_plugin_data($node_id = '') {
  * Implements itg_story_photo_story_previous()
  * @param type $node_id
  */
-function itg_story_photo_story_previous($node_id) {
+function itg_story_photo_story_redirect($node_id, $type) {
   global $base_url;
   /*
    * query to fetch the previous content id of the id received from the argument
@@ -784,7 +789,7 @@ function itg_story_photo_story_previous($node_id) {
   $query->fields('n', array('nid'));
   $query->condition('n.type', 'story');
   $query->condition('s.field_story_type_value', 'photo_story');
-  $query->condition('n.nid', $node_id, '<');
+  $query->condition('n.nid', $node_id, $type);
   $query->range(0, 1);
   $result = $query->execute()->fetchAll();
   
@@ -792,43 +797,13 @@ function itg_story_photo_story_previous($node_id) {
   foreach ($result as $val) {
     $nid = $val->nid;
   }
+  if (!empty($nid)) {
   // stores node redirect path 
   $redirect = $base_url . '/' . drupal_get_path_alias('node/' . $nid);
-  // send redirect path for previous content to itg_story_front.js file
-  drupal_add_js(array('itg_story' => array('previous' => $redirect)), 'setting');
-  drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story_front.js');
-  
-  return $redirect;
-}
-
-/**
- * Implements itg_story_photo_story_next()
- * @param type $node_id
- */
-function itg_story_photo_story_next($node_id) {
-  global $base_url;
-  /*
-   * query to fetch the next content id of the id received from the argument
-   */
-  $query = db_select('node', 'n');
-  $query->join('field_data_field_story_type', 's', 's.entity_id = n.nid');
-  $query->fields('n', array('nid'));
-  $query->condition('n.type', 'story');
-  $query->condition('s.field_story_type_value', 'photo_story');
-  $query->condition('n.nid', $node_id, '>');
-  $query->range(0, 1);
-  $result = $query->execute()->fetchAll();
-  
-  $nid = '';
-  foreach ($result as $val) {
-    $nid = $val->nid;
+  $redirect = (string) $redirect;
+  } else {
+    $redirect = '';
   }
-  // stores node redirect path 
-  $redirect = $base_url . '/' . drupal_get_path_alias('node/' . $nid);
-  // send redirect path for the next content to itg_story_front.js file
-  drupal_add_js(array('itg_story' => array('next' => $redirect)), 'setting');
-  drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story_front.js');
-  
   return $redirect;
 }
 

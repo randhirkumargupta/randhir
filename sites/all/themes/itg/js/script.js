@@ -754,7 +754,12 @@ jQuery(document).ready(function () {
         });
         jQuery('.event-search-icon, .event-search input').click(function (e) {
             e.stopPropagation();
-        });        
+        });
+        
+        //for iphone zoom page
+        document.addEventListener('gesturestart', function (e) {
+            e.preventDefault();
+        });
     }
     
     //story page social share for mobile
@@ -770,6 +775,5 @@ jQuery(document).ready(function () {
     jQuery('body').on('click', '.light-off-on-tab', function(){
       jQuery('body').toggleClass('light-off-overlay');
       jQuery('.program-livetv').toggleClass('effect-added');
-    });
-    
+    });           
 });
