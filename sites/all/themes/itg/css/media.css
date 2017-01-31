@@ -1387,6 +1387,9 @@
   }
 
   /*css end video landing page like dislike*/
+  .may-be-recommend {
+    padding: 10px 24px 10px 0px;
+  }
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/
