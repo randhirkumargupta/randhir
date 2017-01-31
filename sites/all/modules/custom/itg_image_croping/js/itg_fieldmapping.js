@@ -260,12 +260,12 @@
                 if (jQuery('#ckeditor_yes').val() == 1)
                 {
                     if(jQuery('.is_synd').is(':checked')) {
-                        var synd_class = "data-syndication='no' and data-syndication='yes'";
+                        var synd_class = "data-syndication='yes'";
                     } else {
-                        synd_class = "";
+                        synd_class = "data-syndication='no'";
                     }
                     var imagename = jQuery('#imcurl').val();
-                    var getimagename = '<img src="' + imagename + '" '+synd_class+' alt="" />';
+                    var getimagename = '<img '+synd_class+' src="' + imagename + '"  alt="" />';
                     parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text').val(getimagename);
 //
 //                    parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(0)').val(jQuery('#imcurl').val());
