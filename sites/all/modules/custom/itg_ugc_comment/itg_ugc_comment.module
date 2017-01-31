@@ -338,6 +338,7 @@ function totalcomments($page_id) {
  * {@inheritdoc}
  */
 function itg_user_block_api_form($form, &$form_state) {
+  global $base_url;
   $form = array();
   $form['email'] = array(
     '#type' => 'textfield',
@@ -359,14 +360,9 @@ function itg_user_block_api_form($form, &$form_state) {
     '#type' => 'submit',
     '#attributes' => array('class' => array('user-block-apply')),
     '#prefix' => '<div class = "user-log-filter-btn">',
-    '#suffix' => '<a class="user-log-reset form-submit" href="' . base_path() . 'ugc-comment-user">Reset</a></div>',
+    '#suffix' => '<a class="user-log-reset form-submit" href="' . base_path() . 'ugc-comment-user">Reset</a><a href="javascript:void(0)" id="comment-user-block" class="form-submit">'.t('Block User').'</a><p class="block_success"></p></div>',
   );
   
-  $form['display_button'] = array(
-    '#prefix' => '<div class="submit">',
-    '#suffix' => '<a href="javascript:void(0)" class="comment-user-block">'.t('Block User').'</a></div">',
-  );
-
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;

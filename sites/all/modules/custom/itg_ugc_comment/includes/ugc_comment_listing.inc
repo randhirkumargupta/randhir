@@ -129,7 +129,9 @@ function ugc_comment_user_listing() {
       $sl_no = 1;
 
       foreach ($userData as $row) {
+        //if($row['status'] == 1) {
         $block_check = '<input type="checkbox" class="block-user-id" name="block_user[]" value="'.$row['email'].'">';
+        //}
         //get the value in table
         $rows[] = array(
           array('data' => $block_check),
