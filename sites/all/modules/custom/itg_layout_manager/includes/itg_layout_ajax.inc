@@ -16,7 +16,7 @@ function insert_layout_setting_ajax() {
   //code for If already a section is dragged while configuration and 
   //if same section is being dragged again on default,photo and video page then system should show an ALERT
   
-    $widget_check = explode('#', $_GET['widget_name']);
+    /*$widget_check = explode('#', $_GET['widget_name']);
     if (!empty($widget_check[0]) 
             && ($widget_check[0] == 'photo_list_of_category' 
                     || $widget_check[0] == 'video_list_of_category' 
@@ -26,7 +26,7 @@ function insert_layout_setting_ajax() {
         echo 'already_configured_section';        
         exit;
       }    
-    }
+    }*/
     
   // code end
       
@@ -224,29 +224,3 @@ function get_layout_block_details($layout_id, $id) {
   return $data_array;
 }
 
-/**
- * Get map category id with tpl
- * @param int $layout_id
- * @param string $block_name 
- * @return array $data_array
- */
-function get_use_category_on_tpl($section_id, $cate_id) {
-  
-  $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
-  $itg_query->fields('layout_manager', array('filter_url'));  
-  $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');  
-  $itg_query->condition('layout_tpl.section_name', $section_id);    
-  $itg_query->condition('layout_manager.filter_url', $cate_id);
-  $itg_query->orderBy('layout_tpl.id', 'DESC');
-  $itg_query->range(0,1);
-  $id = $itg_query->execute()->fetchField();
-  
-  
-//  $query = db_select('itg_layout_manager', 'layout');
-//  $query->fields('layout', array('id'));  
-//  $query->condition('layout_id', $layout_id)
-//        ->condition('block_name', $block_name);  
-//  $id = $query->execute()->fetchField();
-//  
-  return $id;
-}
