@@ -162,7 +162,7 @@ function itg_reports_block_view($delta = '') {
 
           // Add missing year.
           itg_reports_missing_year($chart_data['graph']);
-
+    
           $chart['career'] = array(
             '#type' => 'chart_data',
             '#data' => $chart_data['graph'],
