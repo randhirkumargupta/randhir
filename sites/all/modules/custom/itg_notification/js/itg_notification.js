@@ -40,6 +40,12 @@
                 });
             });
         }
+        else if(!jQuery (this).is (":checked") && jQuery(this).val() == 'all') {
+            checked_devices = [];
+            $(".form-item-field-ntf-select-device-und input[type=checkbox]").each(function(){
+              jQuery (this).prop ('checked', false);
+            });
+        }
         else {
           checked_devices = [];
         }
@@ -52,7 +58,6 @@
         if(checked_devices.length<=2) {
           $(".form-item-field-ntf-select-device-und-all [type=checkbox]").prop('checked', false);
         }
-        console.log(checked_devices.length);
       });
       
       

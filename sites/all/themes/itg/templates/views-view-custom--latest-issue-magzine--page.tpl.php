@@ -137,9 +137,9 @@
       }
       if ($key == 0) {
          if(!empty($s_value->uri)) {
-          $supp_img_url = '<img src="' . image_style_url($style_name, $s_value->uri) . '"/>';
+          $supp_img_url = '<img src="' . image_style_url($style_name, $s_value->uri) . '" alt="" />';
         }else{
-          $supp_img_url = "<img src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg' />";
+          $supp_img_url = "<img src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg' alt='' />";
         }
         if (!empty($lock_story)) {
           $supp_img = l($supp_img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));

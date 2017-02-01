@@ -36,6 +36,11 @@ input[type="text"]:focus, textarea:focus {
   border-color: #026bc5;
 }
 
+input[type="file"], input[type="submit"], input[type="text"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-keyword-wrapper {
   width: 100%;
   padding: 0;
@@ -112,7 +117,7 @@ input[type="text"]:focus, textarea:focus {
 }
 
 .region-top {
-  background-color: #171717;
+  background-color: #000;
   padding: 20px 0 0 0;
   margin-top: -15px;
 }
@@ -426,20 +431,21 @@ input[type="text"]:focus, textarea:focus {
   right: 0;
 }
 
-.view-photo-list-of-category .view-content .photo-list {
+.view-photo-list-of-category .view-content .photo-list, .view-podcasts-listing.podcast-detail-page .view-content .photo-list {
+  list-style-type: none;
   margin: 0 -15px;
   list-style: none;
   overflow: hidden;
 }
-.view-photo-list-of-category .view-content .photo-list li {
+.view-photo-list-of-category .view-content .photo-list li, .view-podcasts-listing.podcast-detail-page .view-content .photo-list li {
   padding: 15px 15px;
   float: left;
 }
-.view-photo-list-of-category .view-content .photo-list li .tile figure {
+.view-photo-list-of-category .view-content .photo-list li .tile figure, .view-podcasts-listing.podcast-detail-page .view-content .photo-list li .tile figure {
   overflow: hidden;
   position: relative;
 }
-.view-photo-list-of-category .view-content .photo-list li .tile figure figcaption {
+.view-photo-list-of-category .view-content .photo-list li .tile figure figcaption, .view-podcasts-listing.podcast-detail-page .view-content .photo-list li .tile figure figcaption {
   bottom: 0;
   left: 0;
   position: absolute;
@@ -449,22 +455,22 @@ input[type="text"]:focus, textarea:focus {
   font-size: 12px;
   font-family: Roboto;
 }
-.view-photo-list-of-category .view-content .photo-list li .tile figure figcaption .fa {
+.view-photo-list-of-category .view-content .photo-list li .tile figure figcaption .fa, .view-podcasts-listing.podcast-detail-page .view-content .photo-list li .tile figure figcaption .fa {
   font-size: 14px;
   margin-right: 5px;
 }
-.view-photo-list-of-category .view-content .photo-list li .tile .posted-on {
+.view-photo-list-of-category .view-content .photo-list li .tile .posted-on, .view-podcasts-listing.podcast-detail-page .view-content .photo-list li .tile .posted-on {
   display: block;
   font-size: 12px;
   color: #b1b1b1;
   padding: 8px 0 5px;
   font-family: "Roboto Slab";
 }
-.view-photo-list-of-category .view-content .photo-list li .tile a {
+.view-photo-list-of-category .view-content .photo-list li .tile a, .view-podcasts-listing.podcast-detail-page .view-content .photo-list li .tile a {
   color: #494949;
   font-family: "Roboto Slab";
 }
-.view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1) {
+.view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-podcasts-listing.podcast-detail-page .view-content .photo-list li:nth-child(4n+1) {
   clear: left;
 }
 
@@ -1214,7 +1220,15 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 .page-personalization #block-formblock-ugc .node-ugc-form .captcha {
   max-width: 100%;
   margin-left: 0;
-  border: 1px solid #e0e0e0;
+}
+.page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response label {
+  width: 220px;
+}
+.page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response .form-text {
+  padding-left: 230px;
+}
+.page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response div.description {
+  display: none;
 }
 .page-personalization #block-formblock-ugc [id*="field-ugc-personalization-photo-add-more-wrapper"] > .form-item {
   margin-left: 0;
@@ -3040,16 +3054,17 @@ footer .footer-top ul li a:hover {
 }
 .ugc-comment-popup.comment-popup {
   background-color: #fff;
-  bottom: 0;
   border-radius: 10px;
-  height: 300px;
   left: 0;
-  margin: auto;
+  margin: 0 auto;
+  max-height: 80%;
+  overflow-y: auto;
   max-width: 600px;
   padding: 50px 20px 20px;
   position: absolute;
   right: 0;
-  top: 0;
+  top: 50%;
+  transform: translateY(-50%);
   width: 100%;
 }
 .ugc-comment-popup.comment-popup .close-comment-popup {
@@ -3068,31 +3083,32 @@ footer .footer-top ul li a:hover {
   width: 200px;
   text-align: left;
 }
-.comment-user-details > div .social-login {
+.comment-user-details > div.social-login {
   text-align: right;
+  width: auto;
 }
-.comment-user-details > div .social-login span {
+.comment-user-details > div.social-login span {
   display: inline-block;
   vertical-align: top;
   margin: 4px;
   width: 24px;
   height: 24px;
 }
-.comment-user-details > div .social-login span .fa {
+.comment-user-details > div.social-login span .fa {
   font-size: 28px;
   vertical-align: top;
   line-height: 28px;
 }
-.comment-user-details > div .social-login span .fa.fa-facebook-square {
+.comment-user-details > div.social-login span .fa.fa-facebook-square {
   color: #1a3c8d;
 }
-.comment-user-details > div .social-login span .fa.fa-twitter-square {
+.comment-user-details > div.social-login span .fa.fa-twitter-square {
   color: #1b95e0;
 }
-.comment-user-details > div .social-login span .fa.fa-google-plus-square {
+.comment-user-details > div.social-login span .fa.fa-google-plus-square {
   color: #dd4a40;
 }
-.comment-user-details > div .social-login span .fa.fa-linkedin-square {
+.comment-user-details > div.social-login span .fa.fa-linkedin-square {
   color: #0274B3;
 }
 
@@ -3132,19 +3148,25 @@ footer .footer-top ul li a:hover {
   font-weight: 600;
   padding-bottom: 5px;
 }
-.itg-comment .comment-timestamp, .itg-comment a.reply {
+.itg-comment .comment-timestamp, .itg-comment a.reply, .itg-comment a.comment-social-share {
   font-size: 12px;
   color: #989898;
   display: inline-block;
   vertical-align: middle;
 }
-.itg-comment .comment-timestamp:after {
+.itg-comment .comment-timestamp:after, .itg-comment a.reply {
   content: '|';
   display: inline-block;
   vertical-align: top;
   margin: 0 2px 0 7px;
 }
 .itg-comment a.reply:hover {
+  color: #1a3c8d;
+}
+.itg-comment a.reply:after {
+  margin-right: 7px;
+}
+.itg-comment a.comment-social-share:hover {
   color: #1a3c8d;
 }
 .itg-comment .inner-comment {
@@ -3160,38 +3182,53 @@ footer .footer-top ul li a:hover {
 #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-email label,
 #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-section label {
   float: none;
-  display: block;
+  display: none;
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper select {
   max-width: 100%;
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-name,
-#content [id*="ugc-node-form"].ugc-custom-wrapper .form-item-title,
-#content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-city,
-#content [id*="ugc-node-form"].ugc-custom-wrapper .field-type-text-with-summary {
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-city {
   float: left;
   width: 52%;
   padding-right: 2%;
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-name label,
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-city label {
+  float: none;
+  display: none;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-item-title,
+#content [id*="ugc-node-form"].ugc-custom-wrapper #edit-field-user-message {
+  float: left;
+  width: 100%;
+}
 #content [id*="ugc-node-form"].ugc-custom-wrapper .form-item-title label,
-#content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-city label,
-#content [id*="ugc-node-form"].ugc-custom-wrapper .field-type-text-with-summary label {
+#content [id*="ugc-node-form"].ugc-custom-wrapper #edit-field-user-message label {
   float: none;
-  display: block;
+  display: none;
 }
-#content [id*="ugc-node-form"].ugc-custom-wrapper .field-type-text-with-summary .form-type-textarea > label + div {
-  padding: 0;
+#content [id*="ugc-node-form"].ugc-custom-wrapper #edit-field-user-message .form-type-textarea > label + div {
+  padding-left: 0;
 }
-#content [id*="ugc-node-form"].ugc-custom-wrapper .field-type-text-with-summary .form-textarea {
+#content [id*="ugc-node-form"].ugc-custom-wrapper #edit-field-user-message .form-type-textarea > label + div .form-textarea {
   height: 100px;
+  width: 100%;
 }
-#content [id*="ugc-node-form"].ugc-custom-wrapper .captcha-lable {
-  width: auto;
-  float: none;
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-item-title .form-text {
+  width: 100%;
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper .captcha {
-  padding-left: 52%;
+  padding-left: 0;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper .captcha .form-item-captcha-response > label {
+  padding: 7px 10px 7px 0;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper .captcha .form-item-captcha-response div.description, #content [id*="ugc-node-form"].ugc-custom-wrapper .captcha .form-item-captcha-response span.error {
+  padding-left: 220px;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper .captcha img {
+  margin: 0 0 5px 220px;
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper .form-actions {
   display: inline-block;
@@ -3205,6 +3242,79 @@ footer .footer-top ul li a:hover {
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper span.error {
   padding-left: 0;
+}
+
+.region-front-end-breadcrumb {
+  color: #a1a1a1;
+  margin-bottom: 5px;
+  font: 400 14px/18px Roboto;
+}
+.region-front-end-breadcrumb a {
+  color: #a1a1a1;
+}
+.region-front-end-breadcrumb a:hover {
+  color: #1a3c8d;
+}
+
+body {
+  position: relative;
+}
+body.light-off-overlay {
+  overflow: hidden;
+}
+body.light-off-overlay:after {
+  content: "";
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 1000ms;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+}
+body .program-livetv .light-on-text {
+  display: none;
+}
+body .program-livetv.effect-added {
+  position: relative;
+  z-index: 99999;
+  box-shadow: 0 0 20px 0 #fff;
+}
+body .program-livetv.effect-added .light-off-text {
+  display: none;
+}
+body .program-livetv.effect-added .light-on-text {
+  display: inline;
+}
+
+.shopping-cart .cart-checkout-list, .order-summary .cart-checkout-list {
+  padding: 15px;
+  border-top: none;
+}
+.shopping-cart .cart-checkout-list:first-child, .order-summary .cart-checkout-list:first-child {
+  border-top: 1px solid #dbdbdb;
+}
+.shopping-cart .cart-checkout-list .cart-image, .order-summary .cart-checkout-list .cart-image {
+  float: left;
+  max-width: 104px;
+  margin-right: 20px;
+}
+.shopping-cart .cart-checkout-list .product-details, .order-summary .cart-checkout-list .product-details {
+  float: left;
+}
+.shopping-cart .cart-checkout-list .product-details > div, .order-summary .cart-checkout-list .product-details > div {
+  padding-bottom: 5px;
+}
+.shopping-cart .cart-checkout-list .product-details > div span, .order-summary .cart-checkout-list .product-details > div span {
+  width: 90px;
+  padding-right: 10px;
+}
+.shopping-cart .cart-checkout-list .cart-action, .order-summary .cart-checkout-list .cart-action {
+  float: right;
+}
+.shopping-cart .cart-total-block, .order-summary .cart-total-block {
+  margin-top: 24px;
 }
 
 /* CSS To Add Zoom Effect on Images */
@@ -3389,6 +3499,7 @@ footer .footer-top ul li a:hover {
   box-shadow: 0 0 15px #999;
   left: 0;
   top: 30px;
+  text-align: left;
   padding: 15px 15px 10px;
   position: absolute;
   transform: translateX(-50%);
@@ -3465,7 +3576,7 @@ footer .footer-top ul li a:hover {
   margin: 0;
 }
 .page-order-confirmation #main {
-  padding: 50px 0;
+  padding: 30px 15px;
 }
 .page-order-confirmation .thankyou-block {
   text-align: center;
@@ -3542,18 +3653,25 @@ footer .footer-top ul li a:hover {
   text-align: right;
 }
 
+.page-order-summary {
+  /*  .cart-total-block{
+      background-color: #fff;
+      border: 1px solid #dedede;
+      margin-bottom: 30px;    
+    }*/
+}
 .page-order-summary header {
   margin: 0;
 }
 .page-order-summary #main {
-  padding: 50px 0;
+  padding: 30px 15px;
 }
 .page-order-summary #main > row {
   margin: 0;
 }
 .page-order-summary .rhs-address {
   border: 1px solid #ddd;
-  margin-bottom: 35px;
+  margin: 24px 0;
 }
 .page-order-summary .order-address-wrapper {
   background-color: #ededed;
@@ -3600,11 +3718,6 @@ footer .footer-top ul li a:hover {
   border: 1px solid #dedede;
   text-align: center;
 }
-.page-order-summary .cart-total-block {
-  background-color: #fff;
-  border: 1px solid #dedede;
-  margin-bottom: 30px;
-}
 .page-order-summary .cart-checkout-list .cart-image {
   float: left;
   margin-right: 20px;
@@ -3612,14 +3725,10 @@ footer .footer-top ul li a:hover {
 }
 .page-order-summary .cart-checkout-list .prd-title {
   font: 500 18px/24px Roboto;
+  float: left;
 }
-.page-order-summary .lhs-redeem-point .cart-total-inner {
-  max-width: 100%;
-  text-align: left;
-}
-.page-order-summary .lhs-redeem-point .cart-total-inner .checkout {
-  display: inline-block;
-  vertical-align: top;
+.page-order-summary .lhs-redeem-point {
+  margin-bottom: 24px;
 }
 
 #change-address-popup {
@@ -3633,7 +3742,7 @@ footer .footer-top ul li a:hover {
   z-index: 99999;
 }
 #change-address-popup .popup-inner {
-  width: 100%;
+  width: 96%;
   max-width: 370px;
   border-radius: 5px;
   box-shadow: 0 0 10px #000;
@@ -3650,6 +3759,7 @@ footer .footer-top ul li a:hover {
   color: #474747;
   font: normal 400 23px/18px Roboto;
   background-color: #ececec;
+  border-radius: 5px 5px 0 0;
   padding: 13px;
 }
 #change-address-popup .close-popup {
@@ -3739,16 +3849,20 @@ footer .footer-top ul li a:hover {
 }
 .page-personalization-my-following #block-views-follow-tags-block,
 .page-personalization-my-following #block-views-follow-tags-block-1 {
+  background-color: #f2f2f2;
+  margin: 20px 10px 0;
   display: inline-block;
   vertical-align: top;
   width: 400px;
-  padding: 50px 0;
+  padding: 15px;
 }
 .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row,
 .page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row {
   padding: 10px;
   text-align: left;
   border: 1px solid #d9d9d9;
+  background-color: #fff;
+  transition: all 300ms;
   position: relative;
   margin: 15px;
   border-radius: 5px;
@@ -3761,6 +3875,7 @@ footer .footer-top ul li a:hover {
 .page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-name {
   padding-right: 75px;
   font: 400 16px/20px Roboto;
+  word-wrap: break-word;
 }
 .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row .views-field-ops,
 .page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-ops {
@@ -4077,34 +4192,34 @@ article.node-mega-review-critic .rating-and-social-wrapper .movie-rating:after {
   width: 0;
 }
 article.node-mega-review-critic .rating-and-social-wrapper div[data-star-value="10%"]:after {
-  width: 10px;
+  width: 10%;
 }
 article.node-mega-review-critic .rating-and-social-wrapper div[data-star-value="20%"]:after {
-  width: 22px;
+  width: 20%;
 }
 article.node-mega-review-critic .rating-and-social-wrapper div[data-star-value="30%"]:after {
-  width: 33px;
+  width: 30%;
 }
 article.node-mega-review-critic .rating-and-social-wrapper div[data-star-value="40%"]:after {
-  width: 46px;
+  width: 40%;
 }
 article.node-mega-review-critic .rating-and-social-wrapper div[data-star-value="50%"]:after {
-  width: 56px;
+  width: 50%;
 }
 article.node-mega-review-critic .rating-and-social-wrapper div[data-star-value="60%"]:after {
-  width: 68px;
+  width: 60%;
 }
 article.node-mega-review-critic .rating-and-social-wrapper div[data-star-value="70%"]:after {
-  width: 79px;
+  width: 70%;
 }
 article.node-mega-review-critic .rating-and-social-wrapper div[data-star-value="80%"]:after {
-  width: 90px;
+  width: 80%;
 }
 article.node-mega-review-critic .rating-and-social-wrapper div[data-star-value="90%"]:after {
-  width: 102px;
+  width: 90%;
 }
 article.node-mega-review-critic .rating-and-social-wrapper div[data-star-value="100%"]:after {
-  width: 111px;
+  width: 100%;
 }
 article.node-mega-review-critic .rating-and-social-wrapper .social-info {
   float: left;
@@ -4956,6 +5071,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   z-index: 9;
 }
 
+.block-itg-ads iframe {
+  max-width: 100%;
+  overflow: hidden;
+}
+
 @media all and (min-width: 768px) {
   .block-itg-personalization .personal-menu-tab, .block-itg-personalization .saved-item-tab {
     display: inline-block !important;
@@ -5036,10 +5156,14 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     padding-left: 0;
     position: static;
     width: 100%;
-    height: 805px;
   }
   .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textarea .form-textarea-wrapper > .cke {
     border: none;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textarea .form-textarea-wrapper span.error {
+    padding-left: 0;
+    text-align: right;
+    padding: 5px;
   }
   .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textarea .form-textarea {
     border: none;
@@ -5050,7 +5174,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file label, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file label {
     width: 115px;
     padding: 0 8px;
-    height: 200px;
+    height: 235px;
   }
   .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file div.image-widget-data, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file div.image-widget-data {
     float: none;
@@ -5061,7 +5185,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file div.image-widget-data .form-type-textfield .form-text, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file div.image-widget-data .form-type-textfield .form-text {
     border: 1px solid #ddd;
     height: 28px;
-    padding: 5px;
+    padding: 0 5px;
+    line-height: 26px;
     position: static;
     width: 100%;
   }
@@ -5176,7 +5301,15 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .page-personalization #block-formblock-ugc .node-ugc-form .captcha {
     max-width: 100%;
     margin-left: 0;
-    border: 1px solid #e0e0e0;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response {
+    margin-top: 10px !important;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response label {
+    width: 195px;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response .form-text {
+    padding-left: 200px;
   }
   .page-personalization #block-formblock-ugc [id*="field-ugc-personalization-photo-add-more-wrapper"] > .form-item {
     margin-left: 0;
@@ -5198,9 +5331,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .page-personalization .personalized-wrapper .personalized-user-area .personalized-user .user-pic {
     width: 50px;
     height: 50px;
+    margin-top: 20px;
   }
   .page-personalization .personalized-wrapper .personalized-user-area .personalized-user .user-name {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 18px;
   }
   .page-personalization .personalized-wrapper .personalized-user-area .personalized-user-info {
@@ -5214,7 +5348,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     width: 36px;
   }
   .page-personalization .personalized-wrapper .personalized-user-area .personalized-user-info span dfn {
-    font-size: 12px;
+    font-size: 10px;
+    margin-top: 5px;
+  }
+  .page-personalization .personalized-wrapper .personalized-user-area .personalized-user-info span .fa {
+    font-size: 17px;
   }
   .page-personalization .personalized-wrapper .personalized-user-info span {
     padding: 0 12px;
@@ -5230,17 +5368,16 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     background-color: #e7e5e6;
     color: #4f4f4f;
     cursor: pointer;
-    font: 300 18px/40px Roboto;
     text-align: left;
     position: relative;
   }
   .block-itg-personalization .personal-menu-tab-mobile .tab-text {
     display: block;
     color: #4f4f4f;
-    font: 300 18px/18px Roboto;
-    padding: 10px 8px;
+    font: 400 14px/18px Roboto;
+    padding: 8px 8px;
     background-color: #e7e5e6;
-    height: 40px;
+    height: 36px;
   }
   .block-itg-personalization .personal-menu-tab-mobile .tab-text:before {
     display: inline-block;
@@ -5270,7 +5407,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     background-color: #828282;
     position: absolute;
     right: 15px;
-    width: 30px;
+    width: 25px;
     top: 0;
     bottom: 0;
     margin: auto 0;
@@ -5280,7 +5417,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     background-color: #828282;
     content: '';
     position: absolute;
-    width: 30px;
+    width: 25px;
     height: 3px;
     left: 0;
     top: -7px;
@@ -5289,7 +5426,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     background-color: #828282;
     content: '';
     position: absolute;
-    width: 30px;
+    width: 25px;
     height: 3px;
     left: 0;
     top: 7px;
@@ -5306,6 +5443,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
   .block-itg-personalization .personal-menu-tab li a {
     padding: 10px 15px;
+    font-size: 14px;
+    font-weight: 400;
   }
   .block-itg-personalization .personal-menu-tab li a.active {
     background-color: #f6f6f7;
@@ -5322,11 +5461,12 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     display: inline-block;
     vertical-align: top;
     margin-right: 2px;
+    max-width: 96px;
   }
   .block-itg-personalization .profile-edit-tab li a {
     padding: 10px;
     display: block;
-    background: #f8f8f8;
+    background: #fff;
     border-radius: 10px 10px 0 0;
   }
 
@@ -5384,7 +5524,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     font-size: 13px;
   }
   .view-personalization-my-preferences #views-form-personalization-my-preferences-block table .form-type-slider {
-    min-width: 180px;
+    min-width: 160px;
   }
   .view-personalization-my-preferences #views-form-personalization-my-preferences-block table .form-type-slider .sliderfield-display-values-field {
     font-size: 13px;
@@ -5397,9 +5537,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 
   .page-personalization-my-following #block-views-follow-tags-block,
   .page-personalization-my-following #block-views-follow-tags-block-1 {
-    width: 50%;
+    width: 100%;
     float: left;
-    padding: 50px 0 0;
+    margin: 20px 0 0;
+    padding: 15px 0;
   }
 
   #block-itg-personalization-user-my-point .header-point {
@@ -5431,6 +5572,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     left: auto;
     right: -5px;
     width: 300px;
+    transform: translateX(0);
   }
 
   [id*="itg-personalization-edit-profile-form"] > div .form-field-name-field-ugc-ctype, [id*="itg-personalization-refer-a-friend-form"] > div .form-field-name-field-ugc-ctype {
@@ -5487,7 +5629,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     font-size: 13px;
     position: absolute;
     left: 110px;
-    top: 80px;
+    bottom: 10px;
     width: 130px;
   }
   [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file img, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file span.file img {
@@ -5497,6 +5639,12 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     font: 400 13px/18px Roboto;
     color: #323232;
     pointer-events: none;
+  }
+  [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file + #edit-profile-pic-remove-button, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file span.file + #edit-profile-pic-remove-button {
+    color: red;
+    background: none;
+    border: none;
+    margin-left: 10px;
   }
   [id*="itg-personalization-edit-profile-form"] > div div.image-widget-data, [id*="itg-personalization-refer-a-friend-form"] > div div.image-widget-data {
     float: none;
@@ -5596,8 +5744,23 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     font-size: 13px;
     color: #0db533;
   }
+
+  .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child {
+    margin-left: 175px;
+  }
 }
 @media all and (max-width: 767px) {
+  .comment-user-details {
+    text-align: left;
+  }
+  .comment-user-details > div {
+    margin: 0 0 10px 0;
+    width: 100%;
+  }
+  .comment-user-details > div.social-login {
+    text-align: left;
+  }
+
   /* Responsive CSS For Loyalty and Rewards */
   [id*="block-views-redeem-points-block"] .block-title {
     font: 500 18px/24px Roboto;
@@ -5711,7 +5874,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .total-point-wrapper {
     display: inline-block;
     vertical-align: top;
-    margin-top: 20px;
+    margin-top: 15px;
     max-width: 66%;
   }
   .total-point-wrapper img {
@@ -5719,13 +5882,23 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     height: 50px;
   }
   .total-point-wrapper .total-point-value span {
-    font-size: 32px;
+    font-size: 24px;
+    margin-top: 0;
+    line-height: 18px;
   }
   .total-point-wrapper .pregress-bar {
-    margin-top: 10px;
+    margin-top: 5px;
   }
   .total-point-wrapper .pregress-bar .pregress-bar-active {
-    max-width: 80%;
+    max-width: 88%;
+    height: 2px;
+  }
+  .total-point-wrapper .pregress-bar .pregress-bar-active:before {
+    height: 2px;
+  }
+  .total-point-wrapper .pregress-bar span.current-badge, .total-point-wrapper .pregress-bar span.next-badge {
+    font-size: 10px;
+    line-height: 16px;
   }
   .total-point-wrapper .pregress-bar span.current-badge {
     left: 0;
@@ -5740,9 +5913,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .total-point-wrapper .pregress-bar span.current-badge small,
   .total-point-wrapper .pregress-bar span.next-badge small {
     margin-bottom: 0;
+    font-size: 12px;
   }
   .total-point-wrapper .points-to-go {
-    padding-right: 15px;
+    padding-right: 0;
+    font-size: 10px;
   }
 
   .quotes {
@@ -5797,6 +5972,83 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .personal-list > li .personal-details .personal-pic {
     height: auto;
   }
+
+  .page-cart #page-title, .page-order-summary #page-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .page-order-summary #main, .page-order-confirmation #main {
+    padding-bottom: 0;
+  }
+
+  .page-order-confirmation .cart-checkout-list .delivery-by {
+    padding-top: 10px;
+    font-size: 14px;
+  }
+
+  .shopping-cart .cart-checkout-list, .order-summary .cart-checkout-list {
+    border: none;
+    padding: 15px 10px;
+  }
+  .shopping-cart .cart-checkout-list:first-child, .order-summary .cart-checkout-list:first-child {
+    border: none;
+  }
+  .shopping-cart .cart-checkout-list:nth-child(odd), .order-summary .cart-checkout-list:nth-child(odd) {
+    background-color: #efefef;
+  }
+  .shopping-cart .cart-checkout-list .cart-image, .order-summary .cart-checkout-list .cart-image {
+    max-width: 77px;
+    margin-right: 15px;
+  }
+  .shopping-cart .cart-checkout-list .product-details, .order-summary .cart-checkout-list .product-details {
+    float: none;
+    font: 400 12px/14px Roboto;
+  }
+  .shopping-cart .cart-checkout-list .product-details > div span, .order-summary .cart-checkout-list .product-details > div span {
+    color: #6c6c6c;
+  }
+  .shopping-cart .cart-checkout-list .product-details > div strong, .order-summary .cart-checkout-list .product-details > div strong {
+    color: #464646;
+    font-weight: 400;
+  }
+  .shopping-cart .cart-checkout-list .cart-action, .order-summary .cart-checkout-list .cart-action {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .shopping-cart .cart-checkout-list .cart-action > div, .order-summary .cart-checkout-list .cart-action > div {
+    font-size: 12px;
+    text-transform: uppercase;
+    float: left;
+  }
+  .shopping-cart .cart-checkout-list .cart-action > div.points, .order-summary .cart-checkout-list .cart-action > div.points {
+    font-size: 14px;
+    max-width: 100px;
+    margin-left: 10px;
+    margin-top: 0;
+    background-color: #fff;
+    padding: 0;
+    height: 30px;
+    line-height: 30px;
+  }
+  .shopping-cart .cart-checkout-list .cart-action .cart-action-links, .order-summary .cart-checkout-list .cart-action .cart-action-links {
+    line-height: 30px;
+  }
+  .shopping-cart .cart-checkout-list .cart-action .cart-action-links span:after, .order-summary .cart-checkout-list .cart-action .cart-action-links span:after {
+    display: none;
+  }
+  .shopping-cart .cart-checkout-list .cart-action .cart-action-links .itg-remove-product, .order-summary .cart-checkout-list .cart-action .cart-action-links .itg-remove-product {
+    margin-left: 10px;
+  }
+
+  .cart-total-block .points-balance span {
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .cart-total-block .points-balance span:first-child {
+    max-width: 100px;
+  }
 }
 @media all and (max-width: 480px) {
   .photos-videos-wrapper .movie-videos,
@@ -5815,6 +6067,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   article.node-mega-review-critic .other-reviews .other-reviews-posted-on .other-reviews-by {
     display: block;
     padding-right: 0;
+  }
+
+  .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child {
+    margin-left: 125px;
   }
 }
 @media all and (max-width: 360px) {

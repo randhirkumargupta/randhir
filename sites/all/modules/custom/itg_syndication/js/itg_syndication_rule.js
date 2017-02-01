@@ -23,7 +23,7 @@ function syndication_rules_show_filed (number_of_tr) {
     if (field_syndication_frequency == "Monthly") {
       jQuery ('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-syndication-set-day-month\"]').parent ().parent ().show ();
     }
-    console.log (field_syndication_frequency);
+    
   }
 }
 

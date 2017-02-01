@@ -127,6 +127,14 @@ function itg_widgets_custom_variables() {
         '#description' => t("Ex: dev|eoshds,stage|asdasd"),
         '#default_value' => variable_get('apache_solr_sites_prefix_values'),
     );
+    $form['itg_newsletter_education_id'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Enter education tid'),
+        '#default_value' => variable_get('itg_newsletter_education_id'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 20,
+    );
     return system_settings_form($form);
 }
 
@@ -929,6 +937,9 @@ function itg_widget_theme() {
         ),
         'live_score_data' => array(
             'template' => 'templates/live-score-data',
+        ),
+        'podcast_banner' => array(
+            'template' => 'templates/podcast-banner',
         ),
     );
     return $themes;

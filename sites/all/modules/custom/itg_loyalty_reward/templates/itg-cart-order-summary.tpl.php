@@ -9,14 +9,12 @@
   <div class="col-md-8">
     
   
-<div class="cart-detail">
+<div class="cart-detail order-summary">
     <?php if (count($data['product_detail']) > 0): ?>
       <?php $cart_total = 0; ?>
-  <div class="cart-row">
       <?php foreach ($data['product_detail'] as $key => $cart_detail): ?>    
         
         <div class="cart-checkout-list">
-            <div class="col-md-8 col-sm-8">
               <div class="cart-image">
                 <?php
                 $product_pic = theme(
@@ -28,9 +26,8 @@
                 print $product_pic;
                 ?>
               </div>
-              <div class="prd-title"><?php print $cart_detail['product']['title']; ?></div>   
-            </div>
-            <div class="cart-action col-md-4 col-sm-4">
+              <div class="prd-title"><?php print $cart_detail['product']['title']; ?></div> 
+            <div class="cart-action">
                 <?php $item_total = $cart_detail['product']['points'] * $cart_detail['quantity']; ?>
                 <div class="cart-action-links">
                     <span>Item (<?php print $cart_detail['quantity']; ?>)</span>
@@ -45,9 +42,6 @@
         
         <?php $cart_total += $item_total; ?> 
       <?php endforeach; ?>
-          </div>
-  
-      
     
     <?php else: ?>
       <?php print t('There are no items in this cart.') ?>

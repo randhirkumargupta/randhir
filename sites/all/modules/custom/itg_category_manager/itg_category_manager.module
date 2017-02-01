@@ -275,6 +275,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
             });
               
            });', array('type' => 'inline', 'scope' => 'footer'));
+   unset($form['field_cm_select_type'][LANGUAGE_NONE]['#options']['_none']);
   }
 
 // Delete category functionality.
@@ -366,7 +367,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
                 ':input[name="term_state"]' => array('checked' => FALSE),
               ),
             ),
-            '#suffix' => '<div class="term-spinner"><img src="' . $base_url . '/' . drupal_get_path('module', 'views') . '/images/status-active.gif" /></div>',
+            '#suffix' => '<div class="term-spinner"><img src="' . $base_url . '/' . drupal_get_path('module', 'views') . '/images/status-active.gif" alt="" /></div>',
           );
         }
         else {
@@ -1082,6 +1083,11 @@ function itg_categor_form_edit_category_radio($form, &$form_state) {
     $node = node_load(arg(1));
     $type = $node->type;
   }
+  $form['cat_node_type'] = array(
+        '#type' => 'hidden',
+        '#value' => $type,
+        '#attributes' => array( 'name' => 'cat_node_type'),
+    );
   $editid = 0;
   if (!empty($form_state['input']['field_primary_category'])) {
     $editid_new = $form_state['input']['field_primary_category'][LANGUAGE_NONE][0]['value'];

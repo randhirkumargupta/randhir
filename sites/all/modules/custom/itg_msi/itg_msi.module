@@ -63,7 +63,7 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'magazine_node_form') {
     $destination = 'manage-magazines';
     $form['title']['#description'] = '<p>' . t('Please enter magazine title.') . '</p>';
-    $form['actions']['submit']['#submit'][] = 'itg_msi_issue_form_custom_submit_callback';
+    $form['actions']['submit']['#submit'][] = 'itg_msi_issue_form_custom_submit';
     $form['field_print_magazine_issue_date']['#access'] = false;
   }
 
@@ -106,6 +106,41 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id) {
 /**
  * Custom submit callback for redirecting breaking news form.
  */
+function itg_msi_issue_form_custom_submit($form, &$form_state) {
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+ // code insert image in custom table
+    $node_id = $form_state['node']->nid;
+    if ($form_state['input']['original_image_fids'] != "") {
+        $image_ids = explode('#', $form_state['input']['original_image_fids']);
+
+        if (!empty($image_ids)) {
+            if (function_exists('itg_photogallery_insert_image_data'))
+                itg_photogallery_insert_image_data($image_ids, $node_id);
+        }
+    }
+  if (arg(2) == 'edit') {
+    $op = 'updated.';
+  }
+  else {
+    $op = 'created.';
+  }
+
+  if ($form_state['node']->type == 'issue') {
+
+    $title = date('d/m/Y', strtotime($form_state['node']->field_issue_title[LANGUAGE_NONE][0]['value']));
+  }
+  else {
+    $title = $form_state['node']->title;
+  }
+  $content_type = ucwords($form_state['node']->type);
+  drupal_set_message(t($content_type . ' <strong>' . $title . '</strong> has been ' . $op));
+}
+
+/**
+ * Custom submit callback for redirecting breaking news form.
+ */
 function itg_msi_issue_form_custom_submit_callback($form, &$form_state) {
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
@@ -137,7 +172,11 @@ function itg_msi_issue_form_custom_submit_callback($form, &$form_state) {
  */
 function itg_msi_form_after_build($form, &$form_state) {
   global $user, $base_url;
-
+  $form['original_image_fids'] = array(
+        '#type' => 'hidden',
+        '#value' => $form_state['input']['original_image_fids'],
+        '#attributes' => array('id' => 'original_image_fids', 'name' => 'original_image_fids'),
+    );
   //Extract type of node
   if (arg(0) == 'node') {
     if (arg(1) == 'add') {

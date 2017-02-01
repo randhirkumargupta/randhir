@@ -18,10 +18,18 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
     }
   }
   $template_node = node_load($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
-
+  $education_tid = !empty(variable_get('itg_newsletter_education_id'))? variable_get('itg_newsletter_education_id') : NEWSLETTER_EDUCATION_TID;
   // TODO: Define globally
+  if (in_array($education_tid, $cat_array))
+  {
+    $subscriberlist = itg_newslatter_get_subscribe_page_users_email($education_tid);
+  }
   $user_email_arr = itg_newslatter_get_subscribe_users_email();
   $user_email_str = implode(',', $user_email_arr);
+  if(isset($subscriberlist) && !empty($subscriberlist)){
+    $users_email_cron = array_merge($user_email_arr,$subscriberlist);
+    $user_email_str = implode(',', $users_email_cron);
+  }
   // Get Mail content
   if ($type == 'stories') {
     if (!empty($cat_array)) {

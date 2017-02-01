@@ -82,10 +82,10 @@ function itg_image_search_saveimage() {
     $image_name = end(explode('/', $image_url));
     
     $imagedata = file_get_contents($image_url);
-    if (!file_exists(file_default_scheme() . '://crop_image4')) {
-        mkdir(file_default_scheme() . '://crop_image4', 0777, TRUE);
+    if (!file_exists(file_default_scheme() . '://crop_image')) {
+        mkdir(file_default_scheme() . '://crop_image', 0777, TRUE);
     }
-    $file = file_save_data($imagedata, file_default_scheme() . '://crop_image4/' .$image_name);
+    $file = file_save_data($imagedata, file_default_scheme() . '://crop_image/' .$image_name);
     file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
     (array) $file;
     print json_encode($file);

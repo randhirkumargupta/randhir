@@ -60,6 +60,7 @@ features[field_instance][] = node-newsletter-field_newsl_schedule
 features[field_instance][] = node-newsletter-field_newsl_select_template
 features[field_instance][] = node-newsletter-field_newsl_time
 features[field_instance][] = node-newsletter-field_newsl_website_name
+features[field_instance][] = node-newsletter-field_story_category
 features[field_instance][] = node-newsletter-field_survey_start_date
 features[field_instance][] = node-newsletter_templates-body
 features[field_instance][] = node-newsletter_templates-field_news_title

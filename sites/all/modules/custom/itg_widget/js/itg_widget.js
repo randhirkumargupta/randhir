@@ -114,7 +114,7 @@ Drupal.behaviors.itg_widgets = {
             var widgets_type = widgets_type_array[0];
             var widgets_id = widgets_type_array[1];  
             var imgurl = base_url+"/sites/all/themes/itg/images/reload.gif";            
-            videoIframe.append('<img class="loading-popup" src="'+imgurl+'" alt="loading image">');      
+            videoIframe.append('<img class="loading-popup" src="'+imgurl+'" alt="loading image" />');      
                 jQuery.ajax ({
                   url: Drupal.settings.basePath + "associate-photo-video-content/" + widgets_type + "/" + widgets_id,
                   method: 'post',
