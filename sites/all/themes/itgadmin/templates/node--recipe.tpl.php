@@ -24,31 +24,18 @@
         <div class='column-main'><div class='column-wrapper'>
             <?php endif; ?>
             <?php if (!empty($content)): ?>
-                <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
+                <?php $promote_class = ""; if (!isset($node->op) && in_array('Social Media', $user->roles)){
+                  $promote_class = 'promote-content';
+                }
+                ?>
+                <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?> <?php echo $promote_class;?>'>
                     <?php //print render($content)  ?>            
                     <?php if ($view_mode == 'full'): ?>
                         <div class="content-node-view">                                      
                             <?php
                             // Load custom block for social media integration
                             global $user;
-                            if (!isset($node->op) && in_array('Social Media', $user->roles)):
-                                $block = module_invoke('itg_social_media', 'block_view', 'social_media_form');
-                                ?>
-                                <div class="itg-smi">
-                                    <button data-id="smi-popup" class="btn data-popup-link">Promote Content</button>
-                                </div>
-                                <div id="smi-popup" class="itg-popup">
-                                    <div class="popup-content">
-                                        <div class="popup-head">
-                                            <div class="popup-title">&nbsp;</div>
-                                            <a class="itg-close-popup" href="javascript:;"> Close </a>
-                                        </div>
-                                        <div class="popup-body">
-                                            <?php print render($block['content']); ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endif; ?>
+                            ?>
                             <h2><?php print t('Basic Details'); ?></h2>
                             <div class="content-details">
                                 <div class="field">
@@ -310,6 +297,15 @@
                     ?>
 
                 </div>
+            
+            <?php if (!isset($node->op) && in_array('Social Media', $user->roles)):
+            $block = module_invoke('itg_social_media', 'block_view', 'social_media_form');
+            ?>
+            <div class="promote-sidebar">
+                <?php print render($block['content']); ?>
+            </div>
+            <?php endif; ?>
+            
             <?php endif; ?>
 
     <?php if ($layout): ?>
