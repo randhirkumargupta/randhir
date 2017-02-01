@@ -87,18 +87,22 @@ function itg_layout_manager_page_setting_form_validate($form, &$form_state) {
  */
 function itg_layout_manager_filter_form($form, &$form_state) {
   $form = array();
-  $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);  
+  //$tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);  
   
-  $op = array("_none" => "-- All --");
-  foreach ($tax as $key => $val) {
-    $op[$val->tid] = $val->name;
-  }  
+  
+//  foreach ($tax as $key => $val) {
+//    $op[$val->tid] = $val->name;
+//  } 
+  if(!empty(arg(1))) {
+    $op = get_all_section_of_tpl(arg(1));
+  }
+  
   
   $form['section'] = array(
     '#type' => 'select',
     '#title' => t('Select Section'),
     '#options' => $op,
-    '#required' => TRUE,
+    //'#required' => TRUE,
     '#default_value' => isset($_GET['section']) ? $_GET['section'] : "",       
   );
   
@@ -243,4 +247,27 @@ function html_widgets_search_form($form, &$form_state) {
   );  
 
   return $form;
+}
+
+/**
+ * get all selected section of tpl
+ * {@inheritdoc}
+ */
+function get_all_section_of_tpl($type) {
+  $data = array("_none" => "-- All --");
+  $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
+  $itg_query->fields('layout_tpl', array('section_name'));  
+  $itg_query->join('taxonomy_term_data', 'ttd', 'ttd.tid = layout_tpl.section_name');
+  $itg_query->fields('ttd', array('name'));
+  $itg_query->groupBy('layout_tpl.section_name');
+  $itg_query->condition('layout_tpl.layout_type', $type);
+  $itg_query->condition('layout_tpl.section_name', 'home_page', '!=');
+  
+  $itg_result = $itg_query->execute()->fetchAll();
+  
+  $rows = array();
+  foreach ($itg_result as $row) {
+    $data[$row->section_name] = $row->name;
+  }
+  return $data;
 }
