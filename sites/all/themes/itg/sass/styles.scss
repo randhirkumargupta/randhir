@@ -10254,3 +10254,43 @@ span.smilies-title {
     @include pager;
 }
 /*css end for podcast*/
+/*css for emoji*/
+.emoji-container{
+    @include display-inline;
+    span{
+        vertical-align: bottom;
+    }
+    a{
+        display: inline-block;
+    }
+}
+#smily, #smilysad, #wgmf{
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display:none;
+    .face{
+     position: fixed;   
+     z-index: 9999;
+        &.face1{
+           left: 400px;
+           top: 500px;
+        }
+        &.face2{
+           left: 200px;
+           top:0;
+        }
+        &.face3{
+           top:0;
+           right: 200px;
+        }
+        &.face4{
+           right: 600px;
+           top: 100px;
+        }
+    }
+    
+}
+/*css end for emoji*/

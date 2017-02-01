@@ -1,5 +1,5 @@
 /*
- * @file itg_ugc.js
+ * @file itg_ugc_comment.js
  * Contains all functionality User Generated Content
  */
 
@@ -8,7 +8,10 @@
         attach: function (context, settings) {
             var uid = settings.itg_ugc_comment.settings.uid;
             var bad_word = settings.itg_ugc_comment.settings.bad_word;
+            var block_email = settings.itg_ugc_comment.settings.block_email;
+            var email_result = block_email.split(',');
             var result = bad_word.split(',');
+            
 
             $(function () {
                 $("a.reply").click(function () {
@@ -55,7 +58,8 @@
                     },
                     'femail': {
                         required: true,
-                        email: true
+                        email: true,
+                        validateblockemail: true,
                     },
                     'fmessage': {
                         required: true,
@@ -80,12 +84,26 @@
             jQuery.validator.addMethod("validatebadword", function (value, element) {
                 return validate_bad_word(value, element);
             }, "You cannot post this comment, please remove abusive word and try again.");
+            
+            jQuery.validator.addMethod("validateblockemail", function (value, element) {
+                return validate_email_block(value, element);
+            }, "You cannot post this comment, your email is blocked.");
 
             // Validate date difference.
             function validate_bad_word(value, element) {
                 var description = $('#edit-fmessage').val();
                 var final = containsAny(description, result);
                 if (final) {
+                    return false;
+                }
+
+                return true;
+            }
+            
+            // Validate email block.
+            function validate_email_block(value, element) {
+                var email_to = $('#edit-femail').val();
+                if (email_result.indexOf(email_to) !== -1) {
                     return false;
                 }
 

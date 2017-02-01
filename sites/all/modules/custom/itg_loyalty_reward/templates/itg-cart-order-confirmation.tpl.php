@@ -19,7 +19,7 @@
             <?php $cart_total = 0; ?>
             <?php foreach ($_SESSION['placed-item'] as $cart_detail): ?>
                 <div class="cart-checkout-list">
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-xs-12">
                     <div class="cart-image">
                         <?php
                         $product_pic = theme(
@@ -36,12 +36,12 @@
                         <span>Quantity (<?php print $cart_detail['quantity']; ?>)</span>       
                     </div>
                   </div>
-                  <div class="col-md-5">
+                  <div class="col-md-5 col-xs-12">
                     <div class="delivery-by">Standard delivery time is 5-7 business days.</div>
                   </div>  
                     <?php $item_total = $cart_detail['product']['points'] * $cart_detail['quantity']; ?>
                     <?php $cart_total += $item_total; ?>
-                  <div class="col-md-3">
+                  <div class="col-md-3 col-xs-12">
                     <div class="total-points"><?php echo number_format($item_total) . t(' Points'); ?></div>
                   </div>
                 </div>
