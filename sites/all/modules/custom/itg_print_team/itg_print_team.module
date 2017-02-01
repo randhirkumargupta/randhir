@@ -185,7 +185,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         $form['field_pti_idea_status']['#access'] = FALSE;
         $form['field_pti_words_limit']['#access'] = FALSE;
         $form['field_survey_end_date']['#access'] = FALSE;
-        //$form['field_pti_issue']['#access'] = FALSE;
+        $form['field_pti_issue']['#access'] = FALSE;
         //$form['field_pti_magazine']['#access'] = FALSE;
         $form['field_pti_supplement']['#access'] = FALSE;
         $form['field_story_rating']['#access'] = FALSE;
@@ -194,6 +194,14 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       // Disable change status radio button if status is "Approved" OR "Rejected"
       if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved' || $form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Rejected') {
         $form['field_pti_idea_status']['#disabled'] = TRUE;
+        if (!array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) 
+                && !array_key_exists(EDITOR, $user->roles) 
+                && !array_key_exists(CO_ORDINATOR, $user->roles) 
+                && !array_key_exists(SITE_ADMIN, $user->roles)) {
+          $form['field_pti_issue']['#access'] = TRUE;
+          $form['field_pti_issue']['#disabled'] = TRUE;
+          $form['field_pti_magazine']['#disabled'] = TRUE;
+        }
       }
 
       // Get mark as completed type users arr
@@ -212,6 +220,8 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         $form['field_pti_words_limit']['#disabled'] = TRUE;
         $form['field_survey_end_date']['#disabled'] = TRUE;
         $form['field_pti_magazine_kicker']['#disabled'] = TRUE;
+        $form['field_pti_issue']['#disabled'] = TRUE;
+        $form['field_pti_magazine']['#disabled'] = TRUE;
         $form['body']['#attributes'] = array('class' => array('itg-disabled-radio'));
         $form['field_story_category']['#attributes'] = array('class' => array('itg-disabled-radio'));
         $form['field_primary_cat_data']['#attributes'] = array('class' => array('itg-disabled-radio'));
@@ -253,7 +263,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       $form['field_pti_words_limit']['#access'] = FALSE;
       $form['field_survey_end_date']['#access'] = FALSE;
       $form['field_pti_idea_status']['#access'] = FALSE;
-      //$form['field_pti_issue']['#access'] = FALSE;
+      $form['field_pti_issue']['#access'] = FALSE;
       //$form['field_pti_magazine']['#access'] = FALSE;
       $form['field_pti_supplement']['#access'] = FALSE;
       $form['field_story_rating']['#access'] = FALSE;
@@ -1235,7 +1245,7 @@ function get_issue_by_magazine($id = '') {
       if ($issue_month[1] >= $month_before_curr) {
       $options[$record['entity_id']] = date('d/m/Y', strtotime($record['title']));
       } */
-    $options[$record['entity_id']] = $record['title'];
+    $options[$record['entity_id']] = date('d/m/Y', strtotime($record['title']));
   }
 
   return $options;

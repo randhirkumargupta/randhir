@@ -2,7 +2,7 @@
 print $data;
 ?>
 <br>
-<h3>Facebook </h3>
+<h3>Social Medial Activity </h3>
 <?php 
 
 print $facebook_details;
@@ -23,7 +23,7 @@ print $facebook_details;
         ]);
 
         var options = {
-          title: 'Facebook Activity'
+          title: 'Social Medial Activity Graph'
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
