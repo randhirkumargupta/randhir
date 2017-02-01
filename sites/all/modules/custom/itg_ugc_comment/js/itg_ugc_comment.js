@@ -8,9 +8,14 @@
         attach: function (context, settings) {
             var uid = settings.itg_ugc_comment.settings.uid;
             var bad_word = settings.itg_ugc_comment.settings.bad_word;
+            if (bad_word) {
+                var result = bad_word.split(',');
+            }
             var block_email = settings.itg_ugc_comment.settings.block_email;
-            var email_result = block_email.split(',');
-            var result = bad_word.split(',');
+            if (block_email) {
+                var email_result = block_email.split(',');
+            }
+            
             
 
             $(function () {
