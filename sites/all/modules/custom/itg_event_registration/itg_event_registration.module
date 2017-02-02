@@ -241,20 +241,51 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
  * Implement hook_validate()
  * {@inheritdoc}
  */
-function itg_event_registration_form_event_validate($form, &$form_state){ // config
+function itg_event_registration_form_event_validate($form, &$form_state) { // config
   $data = itg_event_registration_config_field($_SESSION['current_event_id']);
-   foreach($form['field_erf_registration_fee'][LANGUAGE_NONE] as $key => $field_collection_reg) {
-      if(is_numeric($key)){
-        foreach($data['show'] as $field_keys) {
-          if(strlen($field_keys['required']) > 1){
-            $f_keys = explode('@', $field_keys['required']);
-            if ($form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key][$f_keys[0]][LANGUAGE_NONE][0]['value'] == '') {
-              form_set_error('field_erf_registration_fee][' . LANGUAGE_NONE . '][' . $key . ']['.$f_keys[0], t($f_keys[1].' is required.'));
-            }
+  foreach ($form['field_erf_registration_fee'][LANGUAGE_NONE] as $key => $field_collection_reg) {
+    if (is_numeric($key)) {
+      // Validate by configuration
+      foreach ($data['show'] as $field_keys) {
+        if (strlen($field_keys['required']) > 1) {
+          $f_keys = explode('@', $field_keys['required']);
+          if ($form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key][$f_keys[0]][LANGUAGE_NONE][0]['value'] == '') {
+            form_set_error('field_erf_registration_fee][' . LANGUAGE_NONE . '][' . $key . '][' . $f_keys[0], t($f_keys[1] . ' is required for Member @member.', array('@member' => $key + 1)));
           }
         }
       }
+
+      // Validate Name field
+      if (empty($form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_name'][LANGUAGE_NONE][0]['value'])) {
+        form_set_error('field_erf_registration_fee][' . LANGUAGE_NONE . '][' . $key . '][field_erf_name', t('Name field is required for Member @member.', array('@member' => $key + 1)));
+      }
+      else {
+        if (!preg_match("/^[a-zA-Z ]*$/", $form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_name'][LANGUAGE_NONE][0]['value']) && !empty($form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_name'][LANGUAGE_NONE][0]['value'])) {
+          form_set_error('field_erf_registration_fee][' . LANGUAGE_NONE . '][' . $key . '][field_erf_name', t('Name <strong>@name</strong> must be alphabetic for Member @member.', array('@name' => $form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_name'][LANGUAGE_NONE][0]['value'], '@member' => $key + 1)));
+        }
+      }
+
+      // Validate Mobile field
+
+      if (!preg_match("/^[0-9]{10}$/", $form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_mobile'][LANGUAGE_NONE][0]['value']) && $form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_mobile'][LANGUAGE_NONE][0]['value'] != 'A' && !empty($form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_mobile'][LANGUAGE_NONE][0]['value'])) {
+        form_set_error('field_erf_registration_fee][' . LANGUAGE_NONE . '][' . $key . '][field_erf_mobile', t('Mobile number <strong>@mobile</strong> must be 10 digit numeric value for Member @member.', array('@mobile' => $form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_mobile'][LANGUAGE_NONE][0]['value'], '@member' => $key + 1)));
+      }
+      if (substr($form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_mobile'][LANGUAGE_NONE][0]['value'], 0, -8) == '000' && $form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_mobile'][LANGUAGE_NONE][0]['value'] != 'A' && !empty($form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_mobile'][LANGUAGE_NONE][0]['value'])) {
+        form_set_error('field_erf_registration_fee][' . LANGUAGE_NONE . '][' . $key . '][field_erf_mobile', t('Mobile number <strong>@mobile</strong> is not a valid mobile number for Member @member.', array('@mobile' => $form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_mobile'][LANGUAGE_NONE][0]['value'], '@member' => $key + 1)));
+      }
+
+
+      // Validate Email field
+      if (!valid_email_address($form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_email'][LANGUAGE_NONE][0]['value']) && $form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_email'][LANGUAGE_NONE][0]['value'] != 'A' && !empty($form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_email'][LANGUAGE_NONE][0]['value'])) {
+        form_set_error('field_erf_registration_fee][' . LANGUAGE_NONE . '][' . $key . '][field_erf_email', t('Email <strong>@email</strong> is not a valid email for Member @member.', array('@email' => $form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_email'][LANGUAGE_NONE][0]['value'], '@member' => $key + 1)));
+      }
+
+      // Validate Pincode
+      if (!empty($form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_postal_code'][LANGUAGE_NONE][0]['value']) && $form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_postal_code'][LANGUAGE_NONE][0]['value'] == '000000' && $form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_postal_code'][LANGUAGE_NONE][0]['value'] != 'A') {
+        form_set_error('field_erf_registration_fee][' . LANGUAGE_NONE . '][' . $key . '][field_erf_postal_code', t('Pincode <strong>@pincode</strong> is not a valid pincode for Member @member.', array('@pincode' => $form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_postal_code'][LANGUAGE_NONE][0]['value'], '@member' => $key + 1)));
+      }
     }
+  }
 }
 
 /**
@@ -299,7 +330,6 @@ function itg_event_registration_form_after_build($form, &$form_state) {
 //
 //  $total_registered_users = itg_event_registration_get_total_registration($current_event_nid);
 //  $tickets_available = $no_of_tickets - $total_registered_users;
-
   return $form;
 }
 
@@ -589,6 +619,7 @@ function itg_event_registration_fields_configuration_form_submit($form, &$form_s
       ))
       ->execute();
   }
+  drupal_set_message(t('Configuration settings has been saved.'), 'status');
 }
 
 function itg_event_registration_config_field($event_nid){
