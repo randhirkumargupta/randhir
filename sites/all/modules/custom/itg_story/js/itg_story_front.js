@@ -30,24 +30,29 @@
             if(currentSlide === maxValueInArray) {
                 if (Drupal.settings.itg_story_front.next) {
                     var next = Drupal.settings.itg_story_front.next;
+                    window.location.href = next;
                   } else {
                     $(".multiple-photo-disc i.fa-chevron-right").css("visibility","hidden").addClass("hide");
                 }
-              window.location.href = next;
             }
             if (currentSlide === 0) {
                 if (Drupal.settings.itg_story_front.previous) {
                     var previous = Drupal.settings.itg_story_front.previous;
+                    window.location.href = previous;
                   } else {
                     $(".multiple-photo-disc i.fa-chevron-left").css("visibility","hidden").addClass("hide");
                 }
-              window.location.href = previous;
             }
         });             
         var maxValueInArray = $('.multiple-photo .photo-slider').length;         
         $('.multiple-photo').on('afterChange', function(event, slick, currentSlide) {               
             if(currentSlide === maxValueInArray-1){
-              window.location.href = next;
+              if (Drupal.settings.itg_story_front.next) {
+                    var next = Drupal.settings.itg_story_front.next;
+                    window.location.href = next;
+                  } else {
+                    $(".multiple-photo-disc i.fa-chevron-right").css("visibility","hidden").addClass("hide");
+                }
             }
         });  
         $('.multiple-photo .slick-prev').text("Prev");
