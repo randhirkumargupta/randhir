@@ -4536,7 +4536,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_tech_review_chunk',
-    'label' => 'Tech Review Chunk',
+    'label' => 'Tech Review Widget',
     'required' => 0,
     'settings' => array(
       'display_summary' => 0,
@@ -5433,7 +5433,7 @@ function features_for_story_field_default_field_instances() {
   t('Syndication');
   t('Syndications photo');
   t('Tags');
-  t('Tech Review Chunk');
+  t('Tech Review Widget');
   t('Technology cons');
   t('Technology image gallery');
   t('Technology pros');
