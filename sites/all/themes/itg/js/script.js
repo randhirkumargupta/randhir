@@ -584,7 +584,7 @@ jQuery(document).ready(function () {
         jQuery(this).children().not(":first").hide();
     })
     jQuery('.social-share li').click(function () {
-        jQuery(this).find('.share').parents('li').nextAll('li').toggle();
+        jQuery(this).find('.share').parent('li').nextAll('li').toggle();
     });
 
     //vertical menu position      
