@@ -31,10 +31,11 @@ if (function_exists(itg_story_clone_data))
   $emoji_image = $clone_arr_response->sm_field_custom_emoji[0];
   preg_match_all('/<img[^>]*>/s', $emoji_image, $images);
   $smilies = implode("", $images[0]);
+  $label = html_entity_decode($clone_arr_response->label, ENT_QUOTES);
 }
 if(!empty($position) && $position == 'left') {
   ?>
-<div class="n-title"><div class="smily-im"><?php print $smilies; ?></div><h2><?php print l(mb_strimwidth($clone_arr_response->label, 0, 65, ".."), $clone_arr_response->url, array("attributes" => array("target" => "_blank", "title" => $clone_arr_response->label))); ?></h2></div>
+<div class="n-title"><div class="smily-im"><?php print $smilies; ?></div><h2><?php print l(mb_strimwidth($label, 0, 65, ".."), $clone_arr_response->url, array("attributes" => array("target" => "_blank", "title" => $clone_arr_response->label))); ?></h2></div>
 <?php } else { ?>
-<div class="n-title"><h2><?php print l(mb_strimwidth($clone_arr_response->label, 0, 65, ".."), $clone_arr_response->url, array("attributes" => array("target" => "_blank", "title" => $clone_arr_response->label))); ?></h2><div class="smily-im"><?php print $smilies; ?></div></div>
+<div class="n-title"><h2><?php print l(mb_strimwidth($label, 0, 65, ".."), $clone_arr_response->url, array("attributes" => array("target" => "_blank", "title" => $clone_arr_response->label))); ?></h2><div class="smily-im"><?php print $smilies; ?></div></div>
 <?php } ?>
