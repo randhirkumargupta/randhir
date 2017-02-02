@@ -822,10 +822,11 @@ function itg_story_photo_story_html($node_id) {
       foreach ($photo_story as $key => $val) {
         $entity_obj = entity_load('field_collection_item', array($val['value']));
         $photo_story_img_path = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['uri'];
+        $photo_story_file_name = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['filename'];
         $photo_story_img = image_style_url('photo_story_771x432', $photo_story_img_path);
         $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
         $html .= '<div class="photo-slider">';
-        $html .= '<img src="' . $photo_story_img . '" title="" alt="photo_story_img" />';
+        $html .= '<img src="' . $photo_story_img . '" title="' . $photo_story_file_name . '" alt="photo_story_img" />';
         $html .= '<div class="description"><p>' . $photo_story_desc . '</p></div>';
         $html .= '</div>';
       }
