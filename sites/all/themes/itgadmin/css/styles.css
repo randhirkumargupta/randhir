@@ -9213,6 +9213,10 @@ div.node #comments h2 {
 .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td {
   padding-top: 10px;
   border: none;
+  padding-bottom: 0;
+  border-top: 1px solid #ccc;
+  margin-top: 10px;
+  float: left;
 }
 .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .field-name-field-technology-sample-photo .form-type-managed-file {
   padding: 0;
@@ -9249,6 +9253,8 @@ div.node #comments h2 {
 }
 .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr:first-child td {
   padding: 0;
+  margin: 0;
+  border: none;
 }
 .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] + div.clearfix {
   position: absolute;
