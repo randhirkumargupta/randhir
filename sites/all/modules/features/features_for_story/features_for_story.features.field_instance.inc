@@ -335,43 +335,6 @@ function features_for_story_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'field_collection_item-field_story_technology-field_technology_photo_title'.
-  $field_instances['field_collection_item-field_story_technology-field_technology_photo_title'] = array(
-    'bundle' => 'field_story_technology',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 1,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_technology_photo_title',
-    'label' => 'Sample Photo Title',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance:
   // 'field_collection_item-field_story_technology-field_technology_sample_photo'.
   $field_instances['field_collection_item-field_story_technology-field_technology_sample_photo'] = array(
     'bundle' => 'field_story_technology',
@@ -403,7 +366,7 @@ function features_for_story_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -5414,7 +5377,6 @@ function features_for_story_field_default_field_instances() {
   t('Redirection URL');
   t('Related Content');
   t('Sample Photo');
-  t('Sample Photo Title');
   t('Schedule date & time');
   t('Section');
   t('Select State');
