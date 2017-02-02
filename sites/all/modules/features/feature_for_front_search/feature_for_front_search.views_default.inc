@@ -118,8 +118,6 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['fields']['label']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['label']['field'] = 'label';
   $handler->display->display_options['fields']['label']['label'] = '';
-  $handler->display->display_options['fields']['label']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['label']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['label']['alter']['text'] = '<a href="[url] " target="_blank">[label]</a>';
   $handler->display->display_options['fields']['label']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['label']['element_wrapper_type'] = 'div';
@@ -156,7 +154,6 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="search-detail">
-<h2>[label]</h2>
 <p>[content]</p>
 <div class="other-info">Updated : [ds_changed]</div>
 </div>';
