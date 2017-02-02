@@ -4838,11 +4838,14 @@ h1.category-heading{
 }
 /*End start magazins*/
 /*CSS Start RHS add block*/
-[id*="block-itg-ads-ad-right-sidebar"]{
+section.sidebar{
+  .block-itg-ads{
     @include display-inline;
      padding: 30px 34px;
     border-bottom: 1px solid $border-color;   
+  }
 }
+
 /*CSS End RHS add block*/
 /*CSS Start So sorry page*/
 #block-itg-layout-manager-header-sosorry-block{
