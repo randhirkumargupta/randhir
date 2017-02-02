@@ -75,6 +75,13 @@ function itg_layout_manager_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_layout_autocomplete.inc',
   );
+  
+  $items['pre-layout-drag-widgets'] = array(
+    'page callback' => 'pre_layout_drag_widgets',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_layout_manager.inc',
+  );
 
   return $items;
 }

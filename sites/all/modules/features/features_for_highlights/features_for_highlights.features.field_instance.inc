@@ -11,6 +11,44 @@ function features_for_highlights_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
+  // 'field_collection_item-field_highlights-field_emoji_condition'.
+  $field_instances['field_collection_item-field_highlights-field_emoji_condition'] = array(
+    'bundle' => 'field_highlights',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 8,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_emoji_condition',
+    'label' => 'Associate Emoji',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_highlights-field_field_emoji1_title'.
   $field_instances['field_collection_item-field_highlights-field_field_emoji1_title'] = array(
     'bundle' => 'field_highlights',
@@ -33,7 +71,7 @@ function features_for_highlights_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_field_emoji1_title',
-    'label' => 'Title',
+    'label' => 'Emoji title',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -74,7 +112,7 @@ function features_for_highlights_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_field_emoji2_title',
-    'label' => 'Title',
+    'label' => 'Emoji title',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -115,7 +153,7 @@ function features_for_highlights_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_field_emoji3_title',
-    'label' => 'Title',
+    'label' => 'Emoji title',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -368,10 +406,11 @@ function features_for_highlights_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Associate Emoji');
+  t('Emoji title');
   t('Example: http://example.com');
   t('Highlights');
   t('Text');
-  t('Title');
   t('URL');
   t('field_emoji_highlights_1');
   t('field_emoji_highlights_2');
