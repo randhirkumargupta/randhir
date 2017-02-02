@@ -9,6 +9,226 @@
  */
 
 /**
+ * Implements hook_menu().
+ * @return array $items
+ */
+function itg_workflow_menu() {
+
+  $items['preview-content-logs-report'] = array(
+    'title' => "Audit Logs",
+    'page callback' => 'itg_workflow_logs_detailis',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['preview-content-logs-report/nid/autocomplete'] = array(
+    'page callback' => 'itg_workflow_content_nid',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK
+  );
+
+  $items['preview-content-logs-report/title/autocomplete'] = array(
+    'page callback' => 'itg_workflow_content_title',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK
+  );
+
+  return $items;
+}
+
+/**
+ * Autocomplete for node id.
+ * @param int $nid
+ */
+function itg_workflow_content_nid($nid) {
+  $matches = array();
+  $content_type = itg_workflow_valid_content_type();
+  $return = db_select("node", "n")
+      ->fields('n', array('nid'))
+      ->condition('n.nid', '%' . db_like($nid) . '%', 'LIKE')
+      ->condition('n.type', array($content_type), 'IN')
+      ->range(0, 50)
+      ->execute(); 
+  foreach ($return as $row) {
+    $matches[$row->nid] = check_plain($row->nid);
+  }
+
+  drupal_json_output($matches);
+}
+
+/**
+ * Autocompelte helper for title.
+ * @param title $title
+ */
+function itg_workflow_content_title($title) {
+  $matches = array();
+  $content_type = itg_workflow_valid_content_type();
+  $return = db_select("node", "n")
+      ->fields('n', array('title'))
+      ->condition('n.title', '%' . db_like($title) . '%', 'LIKE')
+      ->condition('n.type', array($content_type), 'IN')
+      ->range(0, 50)
+      ->execute(); 
+  foreach ($return as $row) {
+    $matches[$row->title] = check_plain($row->title);
+  }
+
+  drupal_json_output($matches);
+}
+
+/**
+ * function which gives valid content type for workflow.
+ * @return array
+ */
+function itg_workflow_valid_content_type () {
+  return array("blog" ,"story","videogallery","photogallery","podcast");
+}
+
+/**
+ * Implements hook_form().
+ * {@inheritdoc}
+ */
+function itg_workflow_preview_log_filter_form($form, &$form_state) {
+  $form = array();
+
+  $form['nid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Node Id'),
+    '#default_value' => isset($_GET['nid']) ? $_GET['nid'] : "",
+    '#autocomplete_path' => 'preview-content-logs-report/nid/autocomplete',
+  );
+
+  $form['title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Title'),
+    '#default_value' => isset($_GET['title']) ? $_GET['title'] : "",
+    '#autocomplete_path' => 'preview-content-logs-report/title/autocomplete',
+  );
+
+  $form['type'] = array(
+    '#type' => 'select',
+    '#title' => t('Content type'),
+    '#options' => array("All" => "All", "blog" => "Blog", "story" => "Story", "videogallery" => "Videogallery", "photogallery" => "Photogallery", "podcast" => "Podcast"),
+    '#default_value' => isset($_GET['type']) ? $_GET['type'] : "",
+  );
+
+  $form['items_per_page'] = array(
+    '#type' => 'select',
+    '#title' => t('Items per page'),
+    '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
+    '#default_value' => isset($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
+  );
+
+  $form['submit'] = array(
+    '#value' => 'Apply',
+    '#type' => 'submit',
+    '#attributes' => array('class' => array('layout-apply')),
+    '#prefix' => '<div class = "layout-filter-btn">',
+    '#suffix' => '<a class="layout-reset btn btn-submit" href="' . base_path() . 'preview-content-logs-report">Reset</a></div>',
+  );
+
+  return $form;
+}
+
+/**
+ * Implements hook_submit()
+ * {@inheritdoc}
+ */
+function itg_workflow_preview_log_filter_form_submit($form, &$form_state) {
+  $item_per_page = $form_state['values']['items_per_page'];
+  $nid = $form_state['values']['nid'];
+  $title = $form_state['values']['title'];
+  $type = $form_state['values']['type'];
+  $form_state['redirect'] = array(
+    'preview-content-logs-report',
+    array(
+      'query' => array(
+        'nid' => $nid,
+        'title' => $title,
+        'type' => $type,
+        'items_per_page' => $item_per_page,
+      ),
+    ),
+  );
+}
+
+/**
+ *  Give output of audit log.
+ * @return string
+ */
+function itg_workflow_logs_detailis() {
+  // configure the table header columns
+  $header = array(
+    array('data' => t('ID')),
+    array('data' => t('Nid')),
+    array('data' => t('Title')),
+    array('data' => t('User')),
+    array('data' => t('Type')),
+    array('data' => t('Action')),
+  );
+
+  if (isset($_GET['items_per_page'])) {
+    $items_per_page = $_GET['items_per_page'];
+  }
+  else {
+    $items_per_page = 20;
+  }
+
+  $itg_query = db_select('node', 'n')->extend('PagerDefault')->limit($items_per_page);
+  $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
+  $itg_query->leftJoin('users', 'user', 'user.uid=n.uid');
+
+  if (!isset($_GET['type']) || (isset($_GET['type']) && $_GET['type'] == "All")) {
+    $itg_query->condition("n.type", array("story", "videogallery", "blog", "photogallery"), "IN");
+  }
+  else {
+    $itg_query->condition("n.type", $_GET['type']);
+  }
+
+  if (isset($_GET['nid']) && !empty($_GET['nid'])) {
+    $itg_query->condition("n.nid", $_GET['nid']);
+  }
+
+  if (isset($_GET['title']) && !empty($_GET['title'])) {
+    $title_chunk_array = explode(" ", $_GET['title']);
+    foreach ($title_chunk_array as $title_chunk) {
+      $itg_query->condition('title', '%' . db_like($title_chunk) . '%', 'LIKE');
+    }
+  }
+  
+  $itg_query->fields('n', array('nid', 'title', 'uid', 'type'));
+  $itg_query->fields('user', array('name'));
+  $itg_query->fields('iwf', array('nid'));
+  $itg_query->isNull('iwf.nid');
+  $itg_query->orderBy('n.nid', "DESC");
+  $itg_result = $itg_query->execute()->fetchAll();
+  $rows = array();
+  $count = 0;
+
+  foreach ($itg_result as $row) {
+    $rows[] = array(
+      array('data' => $count + 1),
+      array('data' => $row->nid),
+      array('data' => $row->title),
+      array('data' => l($row->name, "user/$row->uid")),
+      array('data' => $row->type),
+      array('data' => l("<span class='view-link'>View</span>", "node/$row->nid", array("html" => TRUE, "attributes" => array("target" => "_blank")))),
+    );
+    $count++;
+  }
+
+  $filter_form = drupal_get_form('itg_workflow_preview_log_filter_form');
+  $output = render($filter_form);
+//  $output .= '<div class="view"><div class="attachment"><span class="count">Count (' .$total_items . ') </span>';
+//  $output .= '</div></div>';
+  $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
+
+  // add the pager
+  $output .= theme('pager');
+
+  return $output;
+}
+/**
  * Implements hook_form_alter().
  * {@inheritdoc}
  */
@@ -289,12 +509,11 @@ function itg_workflow_views_query_alter(&$view, &$query) {
       unset($view->query->where[1]['conditions'][4]);
     }
   }
-  
+
   if ($view->name == 'preview_content_report' && $view->current_display == 'page') {
-    $query->add_where(1,'itg_workflow_preview_log.nid', NULL);   
+    $query->add_where(1, 'itg_workflow_preview_log.nid', NULL);
   }
 }
-
 
 function itg_workflow_views_pre_render(&$view) {
 
@@ -303,6 +522,7 @@ function itg_workflow_views_pre_render(&$view) {
     $view->attachment_before = $header_content;
   }
 }
+
 /**
  * Implementation of hook_query_alte
  * {@inheritdoc} 
