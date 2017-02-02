@@ -22,7 +22,7 @@
  * the view is modified.
  */
 ?>
-<?php 
+<?php
 if (function_exists(itg_story_clone_data))
 {
   
