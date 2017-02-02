@@ -534,7 +534,7 @@ div.filefield-sources-list a.active {
   box-shadow: 0 0 2px #ee4d4d;
 }
 
-.btn-small, [id*="itg-social-media-form"] > div fieldset .form-submit, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .form-file + .form-submit, .save-checklist-ordre .save-checklist, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .form-file + .form-submit, [id*="loyality-reward-points-configuration-form"] .form-type-managed-file .form-managed-file .form-file + .form-submit, #itg_video_content .ftp-server .video_filters > div.apply_video_filter span, #itg_video_content .ftp-server .video_filters > div.reset_video_filter span, .itg_menu_manager_form .form-item-category-icon .form-submit, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .field-name-field-technology-sample-photo .form-type-managed-file .image-widget-data input[type="file"] + .form-submit, [id*="itg-manage-budget"] .form-managed-file #edit-budget-image-upload-button, #itg-budget-predictor-search-form .form-submit, #itg-budget-predictor-search-form .custom-url-search, .page-admin-structure-taxonomy-cheaper-dearer .form-file + .form-submit, .comment-view .publish-ugc-comments, .multi_reporter .multi-byline, .byline-list .save-byline, .itg-smi .data-popup-link {
+.btn-small, [id*="itg-social-media-form"] > div fieldset .form-submit, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .form-file + .form-submit, .save-checklist-ordre .save-checklist, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .form-file + .form-submit, [id*="loyality-reward-points-configuration-form"] .form-type-managed-file .form-managed-file .form-file + .form-submit, #itg_video_content .ftp-server .video_filters > div.apply_video_filter span, #itg_video_content .ftp-server .video_filters > div.reset_video_filter span, .itg_menu_manager_form .form-item-category-icon .form-submit, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .field-name-field-technology-sample-photo .form-type-managed-file .image-widget-data input[type="file"] + .form-submit, [id*="itg-manage-budget"] .form-managed-file #edit-budget-image-upload-button, #itg-budget-predictor-search-form .form-submit, #itg-budget-predictor-search-form .custom-url-search, #itg-budget-predictor-search-user-form .form-submit, #itg-budget-predictor-search-user-form .custom-url-search, .page-admin-structure-taxonomy-cheaper-dearer .form-file + .form-submit, .comment-view .publish-ugc-comments, .multi_reporter .multi-byline, .byline-list .save-byline, .itg-smi .data-popup-link {
   height: 28px;
   line-height: 26px;
   padding: 0 10px;
@@ -9739,19 +9739,19 @@ div.node #comments h2 {
 }
 
 /*budget predictor css end*/
-#itg-budget-predictor-search-form .form-type-select {
+#itg-budget-predictor-search-form .form-type-select, #itg-budget-predictor-search-user-form .form-type-select {
   padding: 0 10px 0 0;
   margin: 0;
   display: inline-block;
   vertical-align: top;
 }
-#itg-budget-predictor-search-form .form-type-select > label {
+#itg-budget-predictor-search-form .form-type-select > label, #itg-budget-predictor-search-user-form .form-type-select > label {
   width: 100%;
 }
-#itg-budget-predictor-search-form .form-type-select .form-select {
+#itg-budget-predictor-search-form .form-type-select .form-select, #itg-budget-predictor-search-user-form .form-type-select .form-select {
   width: 100%;
 }
-#itg-budget-predictor-search-form .form-submit, #itg-budget-predictor-search-form .custom-url-search {
+#itg-budget-predictor-search-form .form-submit, #itg-budget-predictor-search-form .custom-url-search, #itg-budget-predictor-search-user-form .form-submit, #itg-budget-predictor-search-user-form .custom-url-search {
   margin-top: 28px;
 }
 
