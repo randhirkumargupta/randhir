@@ -9,7 +9,7 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
     case 'story_node_form':
       // code for clone story start here
       if (!empty($_GET['clone_id'])) {
-        $clone_arr = itg_story_clone_data($_GET['clone_id']);
+        $clone_arr = itg_story_clone_data($_GET['clone_id'], 'story');
         $clone_arr_response = $clone_arr->response->docs[0];
         $label = html_entity_decode($clone_arr_response->label, ENT_QUOTES);
         $kicker = html_entity_decode($clone_arr_response->sm_field_story_kicker_text[0], ENT_QUOTES);
@@ -61,8 +61,10 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
 
 /**
  * Implement itg_clone_story_data
+ * @param int $keyword
+ * @param string $type
  */
-function itg_story_clone_data($keyword) {
+function itg_story_clone_data($keyword, $type) {
 
   // apachesolr_site_hash();
   if (!empty($keyword)) {
@@ -71,7 +73,9 @@ function itg_story_clone_data($keyword) {
     $query->addParam('rows', '10'); // How many rows of result to display default it is 10.
     $query->addParam('qf', 'entity_id'); // Only search in title
     //The bundle which you want to search
+    if(!empty($type)) {
     $query->addFilter("bundle", "story");
+    }
     $query->setSolrsort('sort_label', 'asc');
     $resp_search = $query->search();
     return $resp_search;
