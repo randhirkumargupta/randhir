@@ -9,7 +9,6 @@
 define('THIRD_PARTY_COUPONS_LINE_MAX', 1000);
 module_load_include('inc', 'itg_coupon', 'includes/custom_coupons_handler');
 
-
 /**
  * Implements hook_form_alter().
  * @param array $form
@@ -21,13 +20,16 @@ function itg_coupon_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
 
     case 'coupon_node_form':
-      
+
       unset($form['actions']['preview_changes']);
       $form['#validate'][] = 'itg_coupon_custom_validate';
       $form['actions']['cancel'] = array(
           '#markup' => l(t('Cancel'), 'manage-coupons', array('attributes' => array('class' => 'button'))),
           '#weight' => 20,
       );
+
+      $form['field_coupon_discount_type']['und']['#options'] = array('% discount' => '% discount', 'fix amount discount' => 'fix amount discount');
+      $form['field_coupon_choose_email_mobile']['und']['#options'] = array('email' => 'E-mail', 'mobile' => 'Mobile');
 
       // Code staretd for handling the title
 
@@ -228,15 +230,14 @@ function itg_coupon_form_alter(&$form, &$form_state, $form_id) {
 
 
       // Code end for Coupon current uses
-
-      
       // Start code for hiding some field 
-      
-      $form['field_coupon_current_uses']['und']['#access'] = FALSE;
-      $form['field_coupon_status']['und']['#access'] = FALSE;
-      
-      // End code for hiding  some field
 
+      $form['field_coupon_current_uses']['und']['#access'] = FALSE;
+      if (empty($form['nid']['#value'])) {
+        $form['field_coupon_status']['und']['#access'] = FALSE;
+      }
+
+      // End code for hiding  some field
 
       $form['actions']['submit']['#submit'][] = 'itg_coupon_custom_submit';
 
@@ -432,6 +433,15 @@ function itg_coupon_custom_validate($form, &$form_state) {
 
       break;
   }
+
+  // Checking whether coupons is alrady exist or not in active status only
+
+  $itg_coupon_check_coupon = itg_coupon_check_coupon($form_state['values']['title']);
+  if (isset($itg_coupon_check_coupon) && !empty($itg_coupon_check_coupon)) {
+    if ($itg_coupon_check_coupon != $form_state['values']['nid']) {
+      form_set_error('title', t('OOPS! Coupons is already exist, please try with another name or click ' . l('here', 'node/' . $itg_coupon_check_coupon . '/edit') . ' to edit existing'));
+    }
+  }
 }
 
 /**
@@ -466,8 +476,6 @@ function itg_coupon_permission() {
  * Implements hook_views_pre_render.
  * {@inheritdoc}
  */
-
-
 function itg_coupon_views_pre_render(&$view) {
   if ($view->name == "manage_coupons") {
     global $user;
@@ -475,6 +483,7 @@ function itg_coupon_views_pre_render(&$view) {
     if (in_array('Marketing Manager', $user->roles) || in_array('Site Admin', $user->roles)) {
       $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Create Coupon'), 'node/add/coupon', array('query' => array('destination' => arg(0))));
+      $header_content .= l(t('Upload third party coupons'), 'upload-third-party-coupon', array('query' => array('destination' => arg(0))));
     }
     $view->attachment_before = $header_content;
   }
@@ -494,20 +503,34 @@ function itg_coupon_form_views_exposed_form_alter(&$form, &$form_state, $form_id
 /**
  * Implements hook_views_data().
  */
- function itg_coupon_views_data() {
-   $data['custom_coupons_rest_uses']['table']['group'] = t('Custom');
-   $data['custom_coupons_rest_uses']['table']['join'] = array(
-     // #global is a special flag which let's a table appear all the time.
-     '#global' => array(),
-   );
+function itg_coupon_views_data() {
+  $data['custom_coupons_rest_uses']['table']['group'] = t('Custom');
+  $data['custom_coupons_rest_uses']['table']['join'] = array(
+      // #global is a special flag which let's a table appear all the time.
+      '#global' => array(),
+  );
 
-   $data['custom_coupons_rest_uses']['custom_handler'] = array(
-     'title' => t('Coupons rest uses'),
-     'help' => t('Custom coupons rest uses'),
-     'field' => array(
-       'handler' => 'views_handler_custom_coupons_handler',
-     ),
-   );
+  $data['custom_coupons_rest_uses']['custom_handler'] = array(
+      'title' => t('Coupons rest uses'),
+      'help' => t('Custom coupons rest uses'),
+      'field' => array(
+          'handler' => 'views_handler_custom_coupons_handler',
+      ),
+  );
 
-   return $data;
+  return $data;
+}
+
+/**
+ * Check whether coupons is already exist or not
+ * @param type $coupon_name
+ */
+function itg_coupon_check_coupon($coupon_name) {
+  $query = db_select('field_data_field_coupon_status', 's');
+  $query->join('node', 'n', 's.entity_id=n.nid');
+  $query->condition('s.field_coupon_status_value', 'Active');
+  $query->condition('n.title', $coupon_name);
+  $query->fields('s', array('entity_id'));
+  $result = $query->execute()->fetchObject();
+  return isset($result->entity_id) ? $result->entity_id : NULL;
 }
