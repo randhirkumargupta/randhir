@@ -139,3 +139,96 @@ function itg_logged_in_user_active_user() {
   $output .= theme('pager');
   return $output;
 }
+
+/**
+ * Implements function for visited user listing
+ */
+function itg_logged_in_user_visited_node() {
+  //print_r($node);
+  # configure the table header columns
+  $header = array(
+    array('data' => t('S No')),
+    array('data' => t('N ID')),
+    array('data' => t('Title ')),
+    array('data' => t('URL')),
+    array('data' => t('No of Users Visited')),
+  );
+    if (function_exists('mongodb')) {
+    $con = mongodb();
+    if ($con) {
+      $people = $con->pagedetails;
+      $query =  array();
+      $limit = 0;
+      if (!empty($_GET['items_per_page'])) {
+        $limit = $_GET['items_per_page'];
+      }      
+       if (!empty($_GET['title'])) {
+        $query['name'] = $_GET['title'];
+      }            
+      if (!empty($_GET['url'])) {
+        $query['email'] = $_GET['url'];
+      }      
+      if(is_array($query) && empty($query)){
+        $userData = $people->find()->limit($limit);
+      }else{
+        $userData = $people->find($query)->limit($limit);
+      }
+      
+      $rows_temp = array();
+      $i = 1;
+      $count= array();
+      foreach ($userData as $row) {
+        
+        if(!isset($count[$row['nid']])) {
+          
+          $count[$row['nid']]=0;
+          $i++;
+        }
+         $rows_temp[$row['nid']] = array(
+          
+          'nid' => $row['nid'],
+          'title' => $row['title'],
+          'url' => $row['url'],
+       'count' => ++$count[$row['nid']],
+        );
+         
+      }
+      $cou=1;
+      foreach ($rows_temp as $row) {
+         $rows[] = array(
+          array('data' => $cou),
+          array('data' => $row['nid']),
+          array('data' => $row['title']),
+          array('data' => $row['url']),
+        array('data' => $row['count']),
+        );
+         $cou++;
+      }
+  }
+  }
+  //get the header in table
+  //$output = render(drupal_get_form('itg_user_log_api_form'));
+  $output .= theme('table', array(
+      'header' => $header, 'rows' => $rows,
+      'attributes' => array('class' => array('views-table')),
+      'empty' => t('No results found')));
+  $output = render(drupal_get_form('itg_user_log_api_form_visited'));
+  $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => t('No results found')));
+
+  # add the pager
+  $output .= theme('pager');
+  return $output;
+}
+
+function itg_logged_in_user_node_insert_data($node){
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    if ($con) {
+      $people = $con->pagedetails;
+      $query =  array();
+      $qry = array("nid" => $node->nid, "title" => $node->title,"url" => drupal_get_path_alias('node/'.$node->nid));
+      $people->insert($qry);
+  }
+  
+  }
+}

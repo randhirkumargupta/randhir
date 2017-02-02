@@ -92,19 +92,6 @@
     </script>
 <div id="piechart" style="width: 900px; height: 500px;"></div>
 
-    <script type="text/javascript">
-        jQuery("#btnPrint").live("click", function () {
-            var divContents = jQuery(".view-content").html();
-            var printWindow = window.open('', '', 'height=1,width=1');
-            printWindow.document.write('<html><head>');
-            printWindow.document.write('</head><body >');
-            printWindow.document.write(divContents);
-            printWindow.document.write('</body></html>');
-            printWindow.document.close();
-            printWindow.print();
-            printWindow.close();
-        });
-    </script>
      <input type="button" value="Print Div Contents" id="btnPrint" />
      <style>@media print {
   

@@ -156,7 +156,7 @@ function ads_features_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -438,7 +438,7 @@ function ads_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -477,7 +477,46 @@ function ads_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 6,
+      'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance: 'node-ads_management-field_select_template_type'.
+  $field_instances['node-ads_management-field_select_template_type'] = array(
+    'bundle' => 'ads_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 18,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_select_template_type',
+    'label' => 'Select template type',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 4,
     ),
   );
 
@@ -564,6 +603,7 @@ function ads_features_field_default_field_instances() {
   t('Device Selection');
   t('End Date');
   t('Header script	');
+  t('Select template type');
   t('Start Date');
   t('Template Selection');
   t('Template section');
