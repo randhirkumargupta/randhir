@@ -117,7 +117,7 @@ function itg_workflow_after_build($form, &$form_state) {
               jQuery("#edit-field-story-archive").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
 
-  if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(EDITOR, $user->roles) || array_key_exists(UGC_MODERATOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles)) {
+  if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(EDITOR, $user->roles) || array_key_exists(UGC_MODERATOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(INTERN, $user->roles)) {
     if (!isset($form['#node']->workbench_moderation['current'])) {
       $state_class = ' published';
       $submit_name = 'Publish';

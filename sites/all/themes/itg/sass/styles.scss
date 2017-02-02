@@ -2512,7 +2512,7 @@ footer{
             box-shadow: 0px 0 10px #ddd;
             margin: 5px;
             margin-top: 0;
-            padding: 0 10px;
+            padding:10px;
         }
     }
 }
@@ -9862,23 +9862,32 @@ h1.about-us-heading{
 /*css end story page submit story */
 
 /*css start common highlight */
-.common-highlights{
-            .h-list{
-                border-bottom: 1px solid #ccc;
-                padding: 10px 0;
-            }
-            button{
-                background: transparent;
-                border: none;
-                margin: 10px 0 5px 0;
-                margin-right: 20px;
-                cursor: pointer;
-                i{
-                    font-size: 24px;
-                    font-weight: normal;
-                    color: #464646;
-                }
-            }
+.common-highlights{    
+    .h-list{
+        border-bottom: 1px solid #ccc;
+        padding: 10px 0;
+        > a{
+            display:block;
+        }
+    }
+    button{
+        background: transparent;
+        border: none;
+        margin: 10px 0 0px 0;
+        margin-right: 20px;
+        cursor: pointer;
+        i{
+            font-size: 24px;
+            font-weight: normal;
+            color: #464646;
+        }
+    }
+    .agbutton, .emoji-container{
+        @include display-inline;
+    }
+    .emoji-container{        
+        margin: 10px 0 0px 0;
+    }
 }            
 /*css End common highlight */            
 
