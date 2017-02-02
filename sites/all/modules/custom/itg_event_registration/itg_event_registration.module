@@ -212,10 +212,49 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
 
     // After build and validate function 
     $form['#after_build'][] = 'itg_event_registration_form_after_build';
+    
 
     // Call custom summit callback
+    $form['#validate'][] = 'itg_event_registration_form_event_validate';
     $form['actions']['submit']['#submit'][] = 'itg_event_registration_form_custom_submit_callback';
+    $data = itg_event_registration_config_field($_SESSION['current_event_id']);
+    // event registration form field show and hide by configuration
+    foreach($form['field_erf_registration_fee'][LANGUAGE_NONE] as $key => $field_collection_reg) {
+      if(is_numeric($key)){
+        foreach($data['unset'] as $field_key) {
+          $form['field_erf_registration_fee'][LANGUAGE_NONE][$key][$field_key]['#access'] = FALSE;
+        }
+        
+        // *required fields
+        foreach($data['show'] as $field_keys) {
+          if(strlen($field_keys['required']) > 1){
+            $f_keys = explode('@', $field_keys['required']);
+            $form['field_erf_registration_fee'][LANGUAGE_NONE][$key][$f_keys[0]][LANGUAGE_NONE][0]['value']['#title'] = $form['field_erf_registration_fee'][LANGUAGE_NONE][$key][$f_keys[0]][LANGUAGE_NONE][0]['value']['#title'].'<span class="form-required">*</span>';
+          }
+        }
+      }
+    }
   }
+}
+
+/**
+ * Implement hook_validate()
+ * {@inheritdoc}
+ */
+function itg_event_registration_form_event_validate($form, &$form_state){ // config
+  $data = itg_event_registration_config_field($_SESSION['current_event_id']);
+   foreach($form['field_erf_registration_fee'][LANGUAGE_NONE] as $key => $field_collection_reg) {
+      if(is_numeric($key)){
+        foreach($data['show'] as $field_keys) {
+          if(strlen($field_keys['required']) > 1){
+            $f_keys = explode('@', $field_keys['required']);
+            if ($form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key][$f_keys[0]][LANGUAGE_NONE][0]['value'] == '') {
+              form_set_error('field_erf_registration_fee][' . LANGUAGE_NONE . '][' . $key . ']['.$f_keys[0], t($f_keys[1].' is required.'));
+            }
+          }
+        }
+      }
+    }
 }
 
 /**
@@ -341,13 +380,13 @@ function itg_event_registration_node_validate($node) {
     foreach ($node->field_erf_registration_fee[LANGUAGE_NONE] as $regdata) {
       
       // Validate Ticket type field
-      if (empty($regdata['field_erf_ticket_type'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_ticket_type'][LANGUAGE_NONE][0]['value'] != 'A') {
+      /*if (empty($regdata['field_erf_ticket_type'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_ticket_type'][LANGUAGE_NONE][0]['value'] != 'A') {
         form_set_error('field_erf_ticket_type'.$member, t('Ticket type field is required for Member @member', array('@member' => $member)));
-      }
+      }*/
       
       // Validate Name field
       if (empty($regdata['field_erf_name'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_name'][LANGUAGE_NONE][0]['value'] != 'A') {
-        form_set_error('field_erf_name'.$member, t('Name field is required for Member @member', array('@member' => $member)));
+        //form_set_error('field_erf_name'.$member, t('Name field is required for Member @member', array('@member' => $member)));
       } else {
         if (!preg_match("/^[a-zA-Z ]*$/", $regdata['field_erf_name'][LANGUAGE_NONE][0]['value'])) {
           form_set_error('field_erf_name'.$member, t('Name <strong>@name</strong> must be alphabetic for Member @member', array('@name' => $regdata['field_erf_name'][LANGUAGE_NONE][0]['value'], '@member' => $member)));
@@ -356,7 +395,7 @@ function itg_event_registration_node_validate($node) {
       
       // Validate Mobile field
       if (empty($regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'] != 'A') {
-        form_set_error('field_erf_mobile' . $member, t('Mobile field is required for Member @member', array('@member' => $member)));
+        //form_set_error('field_erf_mobile' . $member, t('Mobile field is required for Member @member', array('@member' => $member)));
       } else {
         if (!preg_match("/^[0-9]{10}$/", $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'] != 'A') {
           form_set_error('field_erf_mobile'.$member, t('Mobile number <strong>@mobile</strong> must be 10 digit numeric value for Member @member', array('@mobile' => $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'], '@member' => $member)));
@@ -368,7 +407,7 @@ function itg_event_registration_node_validate($node) {
       
       // Validate Email field
       if (empty($regdata['field_erf_email'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_email'][LANGUAGE_NONE][0]['value'] != 'A') {
-        form_set_error('field_erf_email'.$member, t('Email field is required for Member @member', array('@member' => $member)));
+        //form_set_error('field_erf_email'.$member, t('Email field is required for Member @member', array('@member' => $member)));
       } else {
         if (!valid_email_address($regdata['field_erf_email'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_email'][LANGUAGE_NONE][0]['value'] != 'A') {
           form_set_error('field_erf_email'.$member, t('Email <strong>@email</strong> is not a valid email for Member @member', array('@email' => $regdata['field_erf_email'][LANGUAGE_NONE][0]['value'], '@member' => $member)));
@@ -534,15 +573,42 @@ function itg_event_registration_form_taxonomy_form_term_alter(&$form, &$form_sta
 }
 
 function itg_event_registration_fields_configuration_form_submit($form, &$form_state) {
-//  p($form_state['values']);
-//  db_merge('itg_event_registration_field_config')
-//      ->key(array('event_nid' => 524, 'field_machine_name' => $field_machine_name))
-//      ->fields(array(
-//        'event_nid' => $selection_id,
-//        'field_machine_name' => $primary_category,
-//        'field_label' => $widget,
-//        'visiblity' => $issue_date,
-//        'required' => --$min_weight,
-//      ))
-//      ->execute();
+  foreach($form_state['values']['display'] as $key => $value){
+    $final_data_display[$key] = $value;
+  }
+  foreach($form_state['values']['requied_field'] as $key => $value){
+      $key_val = explode('@', $key); 
+      db_merge('itg_event_registration_field_config')
+      ->key(array('event_nid' => $form_state['values']['event_nid'], 'field_machine_name' => $key_val[0]))
+      ->fields(array(
+        'event_nid' => $form_state['values']['event_nid'],
+        'field_machine_name' => $key_val[0],
+        'field_label' => $key_val[1],
+        'visiblity' => $final_data_display[$key_val[0]],
+        'required' => $value,
+      ))
+      ->execute();
+  }
+}
+
+function itg_event_registration_config_field($event_nid){
+  $query = db_select('itg_event_registration_field_config', 'itg_event_config');
+  $query->fields('itg_event_config', array('visiblity','required', 'field_label', 'field_machine_name'));
+  $query->condition('event_nid', $event_nid, '=');
+  $result = $query->execute();
+  $count = 0;
+  foreach($result as $rel) {
+    if((strlen($rel->visiblity) > 1 && strlen($rel->required) > 1) || (strlen($rel->visiblity) > 1 && strlen($rel->required) == 1)) {
+      $value[$count]['display'] =  $rel->visiblity;
+      $value[$count]['required'] =  $rel->required;
+      $value[$count]['label'] =  $rel->field_label;
+      $value[$count]['machine_name'] =  $rel->field_machine_name;
+    } else {
+      $unset_field[] = $rel->field_machine_name;
+    }
+   $count++;
+  }
+   $final_value['unset'] = $unset_field;
+   $final_value['show'] = $value;
+  return $final_value;
 }
