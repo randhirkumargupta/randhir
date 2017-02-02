@@ -2722,6 +2722,26 @@ div.node{
 
 [id*="itg-social-media-form"]{
   > div{
+    .form-type-textfield, 
+    .form-type-password, 
+    .form-type-select, 
+    .form-type-managed-file, 
+    .form-type-checkboxes, 
+    .form-type-radios, 
+    .form-type-autocomplete-deluxe, 
+    .date-combo, 
+    .form-type-hierarchical-select, 
+    .form-type-textarea{
+      margin: 10px 0; 
+      padding: 0 10px;
+      > label{
+        width: 120px;
+        & + div{padding-left: 120px;}
+      }
+    }
+    input[type="text"]{
+      max-width: 260px;
+    }
     .form-item-itg-smi{
       margin-top: 0;
       @extend .full;
@@ -2733,6 +2753,8 @@ div.node{
       }
       > label{
         padding: 5px 0;
+        width: 180px;
+        & + div{padding-left: 180px;}
       }
       .form-item{
         @extend .pos-rel;
@@ -2799,23 +2821,26 @@ div.node{
         padding: 8px 20px;
         line-height: 28px;
         font-size: 18px;
-        margin: 15px 0;
         @extend .full;
       }
       .container-inline-date{
-        margin: 30px 0;
-        padding: 0 30px;
+        margin: 20px 0;
+        padding: 0 10px;
         .form-type-date-popup{
           label{
-            width: 220px;
+            width: 120px;
             float: left;
-            padding: 0 20px 0 0;
+            padding: 5px 20px 5px 0;
           }
         }
         .date-padding{
           .form-type-textfield{
+            margin: 0;
+            padding: 0;
+            width: 120px;
             label{@extend .hide;}
             &:first-child{
+              margin-right: 10px;
               .form-text + div.description{
                 left: 175px;
               } 
@@ -2825,6 +2850,7 @@ div.node{
                 left: 140px;
               } 
             }
+            input[type="text"]{width: 100%;}
           }
         }
       }
@@ -2851,23 +2877,32 @@ div.node{
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            max-width: 200px;
+            max-width: 150px;
           }
         }
       }
       .form-type-managed-file .form-managed-file + div.description{
         left: 580px;
       }
+      .form-submit{
+        position: absolute;
+        right: 0;
+        @extend .btn-small;
+      }
     }
     .form-type-managed-file{
       position: relative;
+      min-height: 30px;
+      @extend .dib;
+      @extend .vtop;
+      @extend .full;
       .pseudo-link{
         position: absolute;
         height: 28px;
         width: 134px;
         top: 1px;
         z-index: 99;
-        left: 250px;
+        left: 130px;
         &:after{
           background-color: #fff;
           border: 1px solid #d9d9d9;
@@ -2910,12 +2945,12 @@ div.node{
             }
           }
           #{$social}-img-remove-button {
-            background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-            border: medium none;
+            background: none;
+            border: none;
             box-shadow: none;
             color: red;
             height: auto;
-            left: 200px;
+            left: 100px;
             padding: 0;
             position: absolute;
             line-height: 18px;
@@ -2929,7 +2964,17 @@ div.node{
         #{$social}-video-upload {
           @extend .pos-rel;
           #{$social}-video-remove-button {
-            margin-left: 30px;
+            background: none;
+            border: none;
+            box-shadow: none;
+            color: red;
+            height: auto;
+            left: 100px;
+            padding: 0;
+            position: absolute;
+            line-height: 18px;
+            text-transform: capitalize;
+            top: 0;
             &+.ajax-progress-throbber{
               display: none;
             }
@@ -2937,11 +2982,8 @@ div.node{
         }
       }
     }
-  }
-  .form-submit{
-    margin-right: 10px;
-    &#edit-submit{
-      margin-left: 250px;
+    > .form-submit{
+      margin: 20px 0 0 130px;
     }
   }
 }
@@ -3973,7 +4015,7 @@ div.node{
           line-height: 26px;
           padding: 0 10px;
           position: absolute;
-          top: 76px;
+          top: 38px;
           z-index: 999;
           &.inactive{
             pointer-events: none;
@@ -5655,7 +5697,7 @@ div.node{
 }
 
 /*itg_image_repository end*/
-
+.form-field-name-field-pti-print-media{@extend .pos-rel;}
 [id*="field-pti-print-media-values"]{
   @extend .itg-add-another-item;
   tbody{
@@ -5667,6 +5709,9 @@ div.node{
       td{
         @extend .fleft;
         @extend .full;
+        padding: 10px;
+        background-color: #f2f2f2;
+        border: none;
         .field-name-field-pti-upload-video{
           .form-type-managed-file{
             @extend .choose-audio-video-file;
@@ -5675,14 +5720,51 @@ div.node{
             }
           }
         }
+        .field-name-field-pti-upload-image{
+          .form-type-managed-file{
+            margin: 0;
+            padding: 0;
+            .form-managed-file{
+              float: left;
+              min-width: 135px;
+              min-height: 29px;
+              & + div.description{
+                left: 150px;
+                top: 15px;
+              }
+            }
+            > label{
+              @extend .hide;
+              & + div{
+                padding-left: 0;
+              }
+            }
+          }
+          & + .form-submit{
+            @extend .icon-remove-item;
+            position: absolute;
+            right: 38px;
+            bottom: 10px;
+            margin: 0;
+          }
+        }
       }
       &+ tr{
         td{margin-top: 10px;}
       }
     }
-  } 
-  .form-managed-file .image-widget-data .form-submit[value="Remove"]{
-    left: 580px;
+  }
+  & + div.clearfix{
+    .form-submit{
+      @extend .icon-add-more;
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      margin: 0;
+    }
+    .ajax-progress-throbber{
+      @extend .hide;
+    }
   }
 }
 [id*="views-form-manage-print-team-page"]{
@@ -8512,7 +8594,7 @@ div.node{
         color: red;
         height: auto;
         line-height: 20px;
-        margin: 0;
+        margin: 0 0 0 50px;
         padding: 0;
         text-transform: capitalize;
       }
@@ -9769,9 +9851,6 @@ div.node{
     display: block;
   }
 } 
-[id*="field-highlights-values"]{
-  @extend .itg-add-another-item;
-}
 .messages em{font-weight: 600;}
 .node-type-videogallery [id*="field-video-upload-values"]{
   tbody{
@@ -10008,4 +10087,28 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     @extend .btn-submit;
     @extend .btn-small;
   }
+}
+.node-heighlights-form{
+  [id*="field-highlights-values"]{
+    @extend .itg-add-another-item;
+    tbody{
+      tr{
+        td:nth-child(2){
+          margin-bottom: 10px;
+          float: left;
+        }
+      }
+    } 
+  }
+}
+.promote-content {
+  float: left;
+  width: 60%;
+}
+.promote-sidebar {
+  float: left;
+  width: 38%;
+  margin-left: 2%;
+  background-color: #f2f2f2;
+  padding: 10px;
 }

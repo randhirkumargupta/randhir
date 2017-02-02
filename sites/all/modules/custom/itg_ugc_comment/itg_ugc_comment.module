@@ -51,6 +51,24 @@ function itg_ugc_comment_menu() {
     'page arguments' => array('comment_global_config'), //put the name of the form here
     'access arguments' => array('access global comment configuration'),
   );
+  
+  $items['ugc-comment-user'] = array(
+    'title' => 'UGC Comment User',
+    'page callback' => 'ugc_comment_user_listing',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/ugc_comment_listing.inc',
+  );
+  
+  $items['user-block-ugc'] = array(
+    'title' => 'UGC Comment User Block',
+    'page callback' => 'ugc_comment_user_block',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/ugc_comment_listing.inc',
+  );
+
+  
 
   return $items;
 }
@@ -134,6 +152,7 @@ function ugc_comment_form($form, &$form_state) {
     '#value' => t('Submit'),
   );
 
+  // get bad word value
   $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
   $bad_word_term = taxonomy_get_tree($vocab_id->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
 
@@ -143,11 +162,24 @@ function ugc_comment_form($form, &$form_state) {
       $op[$val->tid] = trim($val->name);
     }
   }
-
+  
+  // get block user array
+  if (function_exists('mongodb'))
+  {
+    $con = mongodb();
+    $final_email = explode(',', $email);
+    $people = $con->itgcms_comment_user;
+    $cursor = $people->find(array('status' => 0));
+    foreach ($cursor as $id => $value) {
+      $em[$value['email']] = trim($value['email']);
+    }
+  }
+  
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
   $settings['bad_word'] = implode(',', $op);
+  $settings['block_email'] = implode(',', $em);
   drupal_add_js(array('itg_ugc_comment' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_ugc_comment') . '/js/itg_ugc_comment.js');
   // Add js file to form.
@@ -177,9 +209,15 @@ function ugc_comment_form_submit($form, &$form_state) {
   {
     $con = mongodb();
     $people = $con->itgcms_comment;
-    $qry = array("page_id" => $page_id, "email" => $femail, "name" => $fname, "comment" => $fmessage, "parent_comment_id" => $parent_id, "comment_date" => $comment_date, "comment_date_time" => $comment_date_time, "property" => 'India Today', "content_type" => 'story', "status" => 0);
+    $comment_user = $con->itgcms_comment_user;
+    $qry = array("page_id" => $page_id, "email" => $femail, "name" => $fname, "comment" => $fmessage, "parent_comment_id" => $parent_id, "comment_date" => $comment_date, "comment_date_time" => $comment_date_time, "property" => 'India Today', "content_type" => 'story', "status" => 1);
     $result = $people->insert($qry);
-
+    $check_user_existance = ugc_comment_user_status($femail);
+    if(empty($check_user_existance['email'])) {
+    $user_email_query = array("email" => $femail, "status" => 1);
+    $comment_user_result = $comment_user->insert($user_email_query);
+    }
+    
     $_SESSION['msg'] = '<div class="messages--status messages status">Comment Submitted Sucessfully</div>';
   }
 }
@@ -292,5 +330,83 @@ function totalcomments($page_id) {
     $reply_comment = $con->itgcms_comment;
     $count = $reply_comment->count(array('page_id' => "$page_id"));
     return $count;
+  }
+}
+
+/**
+ * Implements hook_form().
+ * {@inheritdoc}
+ */
+function itg_user_block_api_form($form, &$form_state) {
+  global $base_url;
+  $form = array();
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Email'),
+    '#maxlength' => 255,
+    '#size' => 30,
+    '#attributes' => array('placeholder' => t('Email'), 'autocomplete' => 'off'),
+    '#default_value' => isset($_GET['email']) ? $_GET['email']:"",
+  );
+  
+  $form['items_per_page'] = array(
+    '#type' => 'select',
+    '#title' => 'Items per page',
+    '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60, 100 => 100, 500 => 500, 1000 => 1000),
+    '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
+  );
+  $form['submit'] = array(
+    '#value' => 'Apply',
+    '#type' => 'submit',
+    '#attributes' => array('class' => array('user-block-apply')),
+    '#prefix' => '<div class = "user-log-filter-btn">',
+    '#suffix' => '<a class="user-log-reset form-submit" href="' . base_path() . 'ugc-comment-user">Reset</a><a href="javascript:void(0)" id="comment-user-block" class="form-submit">'.t('Block User').'</a><a href="javascript:void(0)" id="comment-user-unblock" class="form-submit">'.t('Unblock User').'</a><p class="block_success"></p></div>',
+  );
+  
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+  drupal_add_js(array('itg_ugc_user_block' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_ugc_comment') . '/js/itg_ugc_user_block.js');
+  
+  return $form;
+}
+
+/**
+ * Implements hook_submit()
+ * {@inheritdoc}
+ */
+function itg_user_block_api_form_submit($form, &$form_state) {
+  $form_state['redirect'] = array(
+    'ugc-comment-user',
+    array(
+      'query' => array(
+        'email' => $form_state['values']['email'],
+        'items_per_page' => $form_state['values']['items_per_page'],
+      ),
+    ),
+  );
+}
+
+
+/**
+ * Implements ugc_comment_user_status().
+ * @param string email
+ * 
+ * @return array $data
+ *   return whether email exist or not.
+ */
+function ugc_comment_user_status($email) {
+  $data = '';
+  if (function_exists('mongodb') && !empty($email))
+  {
+    $con = mongodb();
+    $people = $con->itgcms_comment_user;
+    $cond = array('email' => $email);
+    $cursor = $people->find($cond);
+    foreach ($cursor as $document) {
+      $data['email'] = $document['email'];
+    }
+    return $data;
   }
 }

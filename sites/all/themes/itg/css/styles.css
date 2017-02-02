@@ -1327,7 +1327,7 @@ footer .footer-bottom ul li {
 footer .footer-bottom .cell {
   padding: 0 15px;
   float: left;
-  width: 16.66667%;
+  width: 200px;
   margin-bottom: 0;
 }
 footer .footer-bottom .cell ul {
@@ -1348,6 +1348,26 @@ footer .footer-copyright {
   font-size: 12px;
   font-size: 0.75rem;
   border-top: 1px solid #111111;
+}
+footer .multiple-items-footer i {
+  position: absolute;
+  top: 50%;
+  background: #8e8c8d;
+  width: 20px;
+  height: 40px;
+  border-radius: 40px 0 0 40px;
+  line-height: 40px;
+  color: #fff;
+  text-align: center;
+  margin-top: -20px;
+  cursor: pointer;
+}
+footer .multiple-items-footer i.slick-prev {
+  left: -10px;
+  visibility: hidden;
+}
+footer .multiple-items-footer i.slick-next {
+  right: 0px;
 }
 
 /*End CSS footer section*/
@@ -2242,7 +2262,6 @@ footer .footer-copyright {
   display: none;
 }
 .story-section .story-left-section {
-  margin: 0 -15px;
   zoom: 1;
   margin-top: 20px;
 }
@@ -3083,6 +3102,16 @@ footer .footer-copyright {
 .story-section .story-movie .movie-detail div {
   font-family: "Roboto", sans-serif;
   color: #000;
+  zoom: 1;
+}
+.story-section .story-movie .movie-detail div:before, .story-section .story-movie .movie-detail div:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.story-section .story-movie .movie-detail div:after {
+  clear: both;
 }
 .story-section .story-movie .movie-detail div + div {
   margin-top: 15px;
@@ -3113,6 +3142,16 @@ footer .footer-copyright {
   text-align: center;
   line-height: 33px;
   font-weight: 700;
+}
+.story-section.photo-story-section .story-left {
+  background: #f3f3f3;
+  padding-top: 15px;
+}
+.story-section.photo-story-section .story-right {
+  box-shadow: 0px 0 10px #ddd;
+  margin: 5px;
+  margin-top: 0;
+  padding: 10px;
 }
 
 .buzz-feedback {
@@ -3371,15 +3410,18 @@ footer .footer-copyright {
 }
 
 /*End May we suggest End*/
-/*Css start may-be-suggest-container*/
-.may-be-suggest-container h3 {
+/*Css start may-be-recommend*/
+.may-be-recommend {
+  padding: 10px 24px 10px 30px;
+}
+.may-be-recommend h3 {
   text-transform: uppercase;
   font-weight: 700;
   color: #bb0a0a;
   display: none;
   position: relative;
 }
-.may-be-suggest-container h3 span {
+.may-be-recommend h3 span {
   background: #fff;
   z-index: 1;
   position: relative;
@@ -3387,7 +3429,7 @@ footer .footer-copyright {
   padding: 45px 20px 10px 10px;
   display: inline-block;
 }
-.may-be-suggest-container h3:before {
+.may-be-recommend h3:before {
   content: '';
   position: absolute;
   left: 0;
@@ -3397,8 +3439,14 @@ footer .footer-copyright {
   margin-top: -2px;
   background: #ddd;
 }
+.may-be-recommend h3 {
+  display: block;
+}
+.may-be-recommend h3 span {
+  padding-left: 0;
+}
 
-/*Css end may-be-suggest-container*/
+/*Css end may-be-recommend*/
 /*Start top-takes-video suggest css*/
 .top_takes_videos_widget .widget-title {
   position: relative;
@@ -5235,7 +5283,7 @@ h1.category-heading {
 /*video and photo menu*/
 #block-itg-videogallery-videogallery-menu-video-block, #block-itg-photogallery-photo-menu-landing-block {
   /* border-bottom: 1px solid #d9d9d9;    */
-  margin-bottom: 30px;
+  /*    margin-bottom: 30px;*/
   margin-top: 30px;
 }
 #block-itg-videogallery-videogallery-menu-video-block ul, #block-itg-photogallery-photo-menu-landing-block ul {
@@ -6701,6 +6749,7 @@ h1.category-heading {
   left: 0;
   width: 100%;
   height: 100%;
+  overflow: auto;
 }
 
 /*CSS End video setting Ifram*/
@@ -11328,6 +11377,7 @@ h1.about-us-heading + div p {
   border-top: 1px solid #ddd;
   padding-top: 20px;
   padding-left: 30px;
+  word-wrap: break-word;
 }
 [id*="block-itg-ask-expert-custom-ask-expert-form-block"] .expert-question:before, .ask-question-sidebar .expert-question:before {
   content: 'Q';
@@ -11677,6 +11727,7 @@ h1.about-us-heading + div p {
   color: #13d21a;
   margin-top: 10px;
   text-align: left;
+  display: none;
 }
 #block-views-photo-landing-slider-block .social-icon a.unflag-action, #block-views-video-landing-header-block .social-icon a.unflag-action {
   position: relative;
@@ -11772,10 +11823,13 @@ h1.about-us-heading + div p {
   border-bottom: 1px solid #ccc;
   padding: 10px 0;
 }
+.common-highlights .h-list > a {
+  display: block;
+}
 .common-highlights button {
   background: transparent;
   border: none;
-  margin: 10px 0 5px 0;
+  margin: 10px 0 0px 0;
   margin-right: 20px;
   cursor: pointer;
 }
@@ -11783,6 +11837,13 @@ h1.about-us-heading + div p {
   font-size: 24px;
   font-weight: normal;
   color: #464646;
+}
+.common-highlights .agbutton, .common-highlights .emoji-container {
+  display: inline-block;
+  vertical-align: top;
+}
+.common-highlights .emoji-container {
+  margin: 10px 0 0px 0;
 }
 
 /*css End common highlight */
@@ -12274,3 +12335,45 @@ span.smilies-title {
 }
 
 /*css end for podcast*/
+/*css for emoji*/
+.emoji-container {
+  display: inline-block;
+  vertical-align: top;
+}
+.emoji-container span {
+  vertical-align: bottom;
+}
+.emoji-container a {
+  display: inline-block;
+}
+
+#smily, #smilysad, #wgmf {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+#smily .face, #smilysad .face, #wgmf .face {
+  position: fixed;
+  z-index: 9999;
+}
+#smily .face.face1, #smilysad .face.face1, #wgmf .face.face1 {
+  left: 400px;
+  top: 500px;
+}
+#smily .face.face2, #smilysad .face.face2, #wgmf .face.face2 {
+  left: 200px;
+  top: 0;
+}
+#smily .face.face3, #smilysad .face.face3, #wgmf .face.face3 {
+  top: 0;
+  right: 200px;
+}
+#smily .face.face4, #smilysad .face.face4, #wgmf .face.face4 {
+  right: 600px;
+  top: 100px;
+}
+
+/*css end for emoji*/
