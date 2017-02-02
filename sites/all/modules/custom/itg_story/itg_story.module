@@ -840,6 +840,7 @@ function itg_story_photo_story_html($node_id) {
  * @return string
  */
 function itg_story_photo_story_bottom_html($node_id) {
+  $current_url = $_SERVER['REQUEST_URI'];
   // generate the html for photo story bottom slider
   if (!empty($node_id)) {
     $node = node_load($node_id);
@@ -849,9 +850,10 @@ function itg_story_photo_story_bottom_html($node_id) {
       foreach ($photo_story as $key => $val) {
         $entity_obj = entity_load('field_collection_item', array($val['value']));
         $photo_story_img_path = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['uri'];
+        $photo_story_file_name = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['filename'];
         $photo_story_img = image_style_url('photo_story_small_88x66', $photo_story_img_path);
         $html .= '<div class="photo-slider">';
-        $html .= '<img src="' . $photo_story_img . '" title="" alt="photo_story" />';
+        $html .= '<img src="' . $photo_story_img . '" title="' . $photo_story_file_name . '" alt="photo_story" />';
         $html .= '</div>';
       }
       $html .= '</div>';
