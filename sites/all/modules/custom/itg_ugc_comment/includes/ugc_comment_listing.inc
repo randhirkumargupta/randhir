@@ -129,14 +129,13 @@ function ugc_comment_user_listing() {
       $sl_no = 1;
       
       foreach ($userData as $row) {
+        $block_check = '<input type="checkbox" class="block-user-id" name="block_user[]" value="' . $row['email'] . '">';
         if ($row['status'] == 1)
         {
-          $block_check = '<input type="checkbox" class="block-user-id" name="block_user[]" value="' . $row['email'] . '">';
           $status = 'Active';
         }
         else
         {
-          $block_check = '';
           $status = 'Blocked';
         }
         //get the value in table
@@ -164,16 +163,27 @@ function ugc_comment_user_listing() {
  */
 function ugc_comment_user_block() {
   $email = $_POST['email'];
+  $event = $_POST['event'];
   if (function_exists('mongodb') && !empty($email))
   {
     $con = mongodb();
     $final_email = explode(',', $email);
     foreach ($final_email as $value) {
       $people = $con->itgcms_comment_user;
+      if($event == 'comment-user-block') {
       $newdata = array('$set' => array('status' => 0));
+      }
+      if($event == 'comment-user-unblock') {
+      $newdata = array('$set' => array('status' => 1));
+      }
       $people->update(array("email" => trim($value)), $newdata);
     }
-    $response = array('success' => 'true');
+    if($event == 'comment-user-unblock') {
+    $response = array('success' => 'unblock', 'ok' => 'true');
+    }
+    if($event == 'comment-user-block') {
+    $response = array('success' => 'block', 'ok' => 'true');
+    }
     print json_encode($response);
   }
 }

@@ -16,11 +16,25 @@ function itg_user_log_user_login(&$edit, $account) {
     user_data_insert_in_mongodb($account);    
   }
 }
+/**
+ * Tmplements hook_node_view()
+ * use for the insert data in mongoDB when user click for view
+ */
+function itg_user_log_node_view($node, $view_mode, $langcode, $view_mode) {
+    module_load_include('inc', 'itg_user_log', 'includes/user_info_count_update');
+     global $theme;      
+     if($theme == 'itg' && $node->type == 'story' && $view_mode == 'full') {
+          itg_logged_in_user_node_insert_data($node);//funstion written for insert the value in mongodb 
+     }
+
+}
+
 
 /**
  * hooke menu to check the count in URL
  */
 function itg_user_log_menu() {
+  // temp code 
   $items['count'] = array(
     'page callback' => 'itg_logged_in_user_activity',
     'access callback' => TRUE,
@@ -28,6 +42,13 @@ function itg_user_log_menu() {
   );
   $items['active-users'] = array(
     'page callback' => 'itg_logged_in_user_active_user',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/user_info_count_update.inc',
+  );
+
+   $items['visited-users'] = array(
+    'page callback' => 'itg_logged_in_user_visited_node',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
     'file' => 'includes/user_info_count_update.inc',
@@ -125,6 +146,83 @@ function itg_user_log_api_form($form, &$form_state) {
     //'#date_year_range' => '-10 + 10',
     '#default_value' => ($_GET['From']) ? $_GET['From'] : 10,
     '#attributes' => array(
+    'readonly' => 'readonly'
+    ),
+  );
+
+  $form['edit-max-datepicker-popup-1']['max'] = array(
+    '#type' => 'date_popup',
+    '#title' => t('To'),
+    '#date_format' => 'd/m/Y',
+    //'#date_year_range' => '-10:+10',
+    '#default_value' => isset($_GET['To']) ? $_GET['To'] : 10,
+    '#attributes' => array(
+      'readonly' => 'readonly'
+    ),
+  );
+  $form['items_per_page'] = array(
+    '#type' => 'select',
+    '#title' => 'Items per page',
+    '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
+    '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
+  );
+  $form['submit'] = array(
+    '#value' => 'Apply',
+    '#type' => 'submit',
+    '#attributes' => array('class' => array('user-log-apply')),
+    '#prefix' => '<div class = "user-log-filter-btn">',
+    '#suffix' => '<a class="user-log-reset" href="' . base_path() . 'active/users">Reset</a></div>',
+  );  
+
+  return $form;
+}
+
+/**
+ * Implements hook_submit()
+ * {@inheritdoc}
+ */
+function itg_user_log_api_form_submit($form, &$form_state) {
+  $form_state['redirect'] = array(
+    'active-users',
+    array(
+      'query' => array(
+        'title' => $form_state['values']['title'],      
+        'email' => $form_state['values']['email'],
+        'items_per_page' => $form_state['values']['items_per_page'],
+        'From' => $form_state['values']['min'],
+        'To' => $form_state['values']['max'],
+      ),
+    ),
+  );
+}
+/**
+ * Implements hook_form().
+ * add expose filter to visited content
+ */
+function itg_user_log_api_form_visited($form, &$form_state) {
+  $form = array();
+  $form['title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Searc By Name'),
+    '#maxlength' => 255,
+    '#size' => 30,
+    '#default_value' => isset($_GET['title']) ? $_GET['title'] : "",
+  );
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Search By Email'),
+    '#maxlength' => 255,
+    '#size' => 30,
+    '#default_value' => isset($_GET['email']) ? $_GET['email']:"",
+  );
+  $form['#info']['filter-created']['label'] = '';
+  $form['edit-min-datepicker-popup-1']['min'] = array(
+    '#type' => 'date_popup',
+    '#title' => t('From'),
+    '#date_format' => 'd/m/Y',
+    //'#date_year_range' => '-10 + 10',
+    '#default_value' => ($_GET['From']) ? $_GET['From'] : 10,
+    '#attributes' => array(
       'readonly' => 'readonly'
     ),
   );
@@ -151,18 +249,17 @@ function itg_user_log_api_form($form, &$form_state) {
     '#attributes' => array('class' => array('user-log-apply')),
     '#prefix' => '<div class = "user-log-filter-btn">',
     '#suffix' => '<a class="user-log-reset" href="' . base_path() . 'active/users">Reset</a></div>',
-  );
+  ); 
 
   return $form;
 }
-
-/**
- * Implements hook_submit()
- * {@inheritdoc}
- */
-function itg_user_log_api_form_submit($form, &$form_state) {
+/*
+ *Hook_submit for content visiter 
+ * 
+ *  */
+function itg_user_log_visited_user_form_submit($form, &$form_state) {
   $form_state['redirect'] = array(
-    'active-users',
+    'visited-users',
     array(
       'query' => array(
         'title' => $form_state['values']['title'],      

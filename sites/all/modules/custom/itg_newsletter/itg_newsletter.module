@@ -524,12 +524,12 @@ function itg_newsletter_node_validate($node, $form, &$form_state) {
     if ($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'automatic') {
       $frequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
       $newsletter_content = $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];
-      $check_existence = itg_newsletter_check_existence_frequency($frequency, $newsletter_content);
+      // $check_existence = itg_newsletter_check_existence_frequency($frequency, $newsletter_content);
 
       // If record already exist for this frequency through an error
-      if (isset($check_existence) && arg(1) != $check_existence) {
-        form_set_error('field_newsl_newsletter_content', t('Newsletter content <strong>@newslettercontent</strong> is already assigned for the frequency <strong>@frequency</strong> ' . l(t('Click here'), 'node/' . $check_existence . '/edit', array('attributes' => array('target' => '_blank'))) . ' to see existing newsletter.', array('@newslettercontent' => ucfirst(str_replace('_', ' ', $newsletter_content)) . ' news', '@frequency' => $frequency)));
-      }
+//      if (isset($check_existence) && arg(1) != $check_existence) {
+//        form_set_error('field_newsl_newsletter_content', t('Newsletter content <strong>@newslettercontent</strong> is already assigned for the frequency <strong>@frequency</strong> ' . l(t('Click here'), 'node/' . $check_existence . '/edit', array('attributes' => array('target' => '_blank'))) . ' to see existing newsletter.', array('@newslettercontent' => ucfirst(str_replace('_', ' ', $newsletter_content)) . ' news', '@frequency' => $frequency)));
+//      }
     }
     else {
       if ($node->field_newsl_schedule[LANGUAGE_NONE][0]['value'] == 'later') {
@@ -878,13 +878,14 @@ function itg_newslatter_get_subscribe_page_users_email($getsection) {
  * Get top 20 stories
  * @return array
  */
-function itg_newsletter_get_section_stories($section) {
+function itg_newsletter_get_section_stories($section, $totaltime, $previoustime) {
   $query = db_select('node', 'n');
   $query->leftjoin('field_data_field_story_category', 'fsc', 'n.nid = fsc.entity_id');
   $query->condition('n.status', 1, '=');
   $query->fields('n');
   $query->condition('n.type', 'story', '=');
   $query->condition('fsc.field_story_category_tid', $section, 'IN');
+  $query->condition('changed', array($previoustime, $totaltime), 'BETWEEN');
   $query->orderBy('n.nid', 'DESC');
   $query->range(0, 20);
   $result = $query->execute();
