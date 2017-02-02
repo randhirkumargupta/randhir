@@ -561,7 +561,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 </div>               
             </div>          
         </div>
-      <div class="load-more-wrapper"><a href="javascript:void(0)" class="add-more-block">Load More</a></div>
+      <div class="load-more-wrapper"><a href="javascript:void(0)" class="add-more-block"><?php echo t('Load More');?></a></div>
     </div>
 <?php } ?>
   <!--Common section add more strat here-->
