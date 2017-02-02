@@ -584,7 +584,7 @@ jQuery(document).ready(function () {
         jQuery(this).children().not(":first").hide();
     })
     jQuery('.social-share li').click(function () {
-        jQuery(this).find('.share').parents('li').nextAll('li').toggle();
+        jQuery(this).find('.share').parent('li').nextAll('li').toggle();
     });
 
     //vertical menu position      
@@ -775,5 +775,67 @@ jQuery(document).ready(function () {
     jQuery('body').on('click', '.light-off-on-tab', function(){
       jQuery('body').toggleClass('light-off-overlay');
       jQuery('.program-livetv').toggleClass('effect-added');
-    });           
+    });
+    
+    //footer css slider start
+        jQuery('.multiple-items-footer').slick({
+        infinite: false,
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        variableWidth: true,
+        prevArrow: '<i class="fa fa-chevron-left slick-prev" aria-hidden="true"></i>',
+        nextArrow: '<i class="fa fa-chevron-right slick-next" aria-hidden="true"></i>',
+        responsive: [            
+            {
+            breakpoint: 1024,
+                settings: {            
+                slidesToShow: 4
+                }
+            },
+            {
+            breakpoint: 680,
+                settings: {            
+                slidesToShow: 3
+                }
+            },
+            {
+            breakpoint: 480,
+                settings: {            
+                slidesToShow: 2
+                }
+            }
+        ]
+    }); 
+    //footer css slider end
+    jQuery('.emoji-container a').click(function(){         
+        var datavalue = jQuery(this).attr('data-click');
+        if(datavalue === 'nice'){
+           smilyanimation('smily');
+        } else if(datavalue === 'no'){
+            smilyanimation('smilysad');
+        } else if(datavalue === 'whatever'){
+            smilyanimation('wgmf');
+        }                                 
+    });
 });
+
+//emoji animation     
+function smilyanimation(facetype){
+    var faceone = jQuery('#'+facetype+' .face1');
+    var facetwo = jQuery('#'+facetype+' .face2');
+    var facethree = jQuery('#'+facetype+' .face3');
+    var facefour = jQuery('#'+facetype+' .face4');
+    jQuery('#'+facetype).fadeIn(function(){                                                              
+       faceone.animate({top: '100px', left: '800px'}, 3000);
+       facetwo.animate({top:'300px', left:'600px'}, 3000);
+       facethree.animate({top:'600px', right:'800px'}, 3000);
+       facefour.animate({top:'400px', right:'400px'}, 3000, function(){
+           jQuery('#'+facetype).fadeOut(500, function(){
+               faceone.css({top: '500px', left: '400px'});
+               facetwo.css({top:'0px', left:'200px'});
+               facethree.css({top:'0px', right:'200px'});
+               facefour.css({top:'100px', right:'600px'});
+           });
+       });                            
+    }); 
+ }          

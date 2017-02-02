@@ -3151,7 +3151,7 @@ footer .multiple-items-footer i.slick-next {
   box-shadow: 0px 0 10px #ddd;
   margin: 5px;
   margin-top: 0;
-  padding: 0 10px;
+  padding: 10px;
 }
 
 .buzz-feedback {
@@ -11823,10 +11823,13 @@ h1.about-us-heading + div p {
   border-bottom: 1px solid #ccc;
   padding: 10px 0;
 }
+.common-highlights .h-list > a {
+  display: block;
+}
 .common-highlights button {
   background: transparent;
   border: none;
-  margin: 10px 0 5px 0;
+  margin: 10px 0 0px 0;
   margin-right: 20px;
   cursor: pointer;
 }
@@ -11834,6 +11837,13 @@ h1.about-us-heading + div p {
   font-size: 24px;
   font-weight: normal;
   color: #464646;
+}
+.common-highlights .agbutton, .common-highlights .emoji-container {
+  display: inline-block;
+  vertical-align: top;
+}
+.common-highlights .emoji-container {
+  margin: 10px 0 0px 0;
 }
 
 /*css End common highlight */
