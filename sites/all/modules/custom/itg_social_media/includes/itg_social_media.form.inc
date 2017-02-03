@@ -59,6 +59,20 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#options' => array('Image', 'Video'),
     '#default_value' => 'Image',    
   );
+  $fb_image_id = 0;
+  if(isset($node->field_story_extra_large_image['und'][0]['fid'])) {
+      $fb_image_id = $node->field_story_extra_large_image['und'][0]['fid'];
+  } 
+   if(isset($node->field_story_facebook_image['und'][0]['fid'])) {
+      $fb_image_id = $node->field_story_facebook_image['und'][0]['fid'];
+  } 
+  $twitter_image_id = 0;
+  if(isset($node->field_story_extra_large_image['und'][0]['fid'])) {
+      $twitter_image_id = $node->field_story_extra_large_image['und'][0]['fid'];
+  } 
+   if(isset($node->field_story_tweet_image['und'][0]['fid'])) {
+      $twitter_image_id = $node->field_story_tweet_image['und'][0]['fid'];
+  } 
     
   // Facebook Image.
   $form['fb_wrap']['itg_fb_img'] = array(
@@ -66,7 +80,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#type' => 'managed_file',
     '#description' => t('The uploaded image will be displayed on this page using the image style choosen below.'),
     '#upload_location' => 'public://itg_fb_img/',
-    '#default_value' => isset($node->field_story_extra_large_image['und'][0]['fid']) ? $node->field_story_extra_large_image['und'][0]['fid'] : 0,
+    '#default_value' => $fb_image_id,
     '#widget' => 'imce',
     '#description' => 'Files must be less than<strong>5 MB</strong>.<br>Allowed file types:<strong>gif jpeg </strong>',
     '#preview' => TRUE,
@@ -146,6 +160,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#type' => 'textfield',
     '#title' => t('Narrative'),
     '#maxlength' => 255,
+      '#suffix' => '<p><span id="fb_chars">255</span> characters remaining</p>',
     '#default_value' => !empty($fb_nrr_default) ? $fb_nrr_default : $node->title,
     '#states' => array(
       'required' => array(
@@ -179,7 +194,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#title' => t('Image'),
     '#type' => 'managed_file',
     '#description' => t('The uploaded image will be displayed on this page using the image style choosen below.'),
-    '#default_value' => isset($node->field_story_extra_large_image['und'][0]['fid']) ? $node->field_story_extra_large_image['und'][0]['fid'] : 0,
+    '#default_value' => $twitter_image_id,
     '#upload_location' => 'public://itg_twitter_img/',
     '#widget' => 'imce',
     '#description' => 'Files must be less than<strong>5 MB</strong>.<br>Allowed file types:<strong>gif jpeg</strong>',
@@ -260,6 +275,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#type' => 'textfield',
     '#title' => t('Narrative'),
     '#maxlength' => 126,
+   '#suffix' => '<p><span id="twitt_chars">126</span> characters remaining</p>',
     '#default_value' => !empty($tweet_default) ? $tweet_default : $node->title,
     '#states' => array(
       'required' => array(
