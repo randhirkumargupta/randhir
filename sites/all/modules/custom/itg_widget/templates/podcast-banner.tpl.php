@@ -16,7 +16,7 @@
               $podcast_image = $podcast_banner_array[$podcast_id]['image']['uri'];
               $description = $podcast_banner_array[$podcast_id]['desc'];
               ?>
-              <div class="slide-<?php print $podcast_id ?>">
+              <div class="podcast-slide">
                 <div class="pic">
                   <img src="<?php print image_style_url("widget_small", $podcast_image); ?>" alt="" />
                 </div>
@@ -41,7 +41,7 @@
               <?php
               $extra_large_image_url = image_style_url("widget_very_small", $podcast_image);
               $very_small_image = '<img src="' . $extra_large_image_url . '" alt="" />';
-              $podcast_thumbnail .= "<li class='slide-" . $podcast_id . "'> $very_small_image </li>";
+              $podcast_thumbnail .= "<div class='podcast-nav-item'> $very_small_image </div>";
             }
             endif;
             $podcast_thumbnail .= "";
