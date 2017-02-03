@@ -49,7 +49,7 @@ function itg_layout_manager_menu() {
   );
 
   // Autocomplete callback for category name
-  $items['itg_category_autocomplete_list/%'] = array(
+  $items['itg_category_autocomplete_list/%/%'] = array(
     'page callback' => 'itg_category_autocomplete_list',
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,

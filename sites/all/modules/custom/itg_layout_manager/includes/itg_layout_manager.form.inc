@@ -161,13 +161,33 @@ function layout_section_widgets_search_form($form, &$form_state) {
     $widgets_type = 'section_wise_order';
   }
   
+  if (arg(1) != 'home') {
+    $form['all_section'] = array(
+      '#type' =>'checkbox',
+      '#title' => t('All section'),
+    );
+
+    $form['section_name_all'] = array(
+      '#type' => 'textfield',
+      '#size' => 60,
+      '#attributes' => array('placeholder' => t('Search')),
+      '#autocomplete_path' => 'itg_category_autocomplete_list/all/'.$arg,
+      '#maxlength' => 128,
+    );
+    $custom_url = 'itg_category_autocomplete_list/section/'.$arg;
+  } else {
+      $custom_url = 'itg_category_autocomplete_list/all/home';
+  }
+  
   $form['section_name'] = array(
     '#type' => 'textfield',
     '#size' => 60,
     '#attributes' => array('placeholder' => t('Search')),
-    '#autocomplete_path' => 'itg_category_autocomplete_list/'.$arg,
+    '#autocomplete_path' => $custom_url,
     '#maxlength' => 128,
-  );  
+  );
+  
+  
   
   $form['section_save'] = array(
     '#markup' => '<a data-tabwidget='.$widgets_type.' class="btn btn-save" href="javascript:void(0)" id="layout-section-save">+</a>',
