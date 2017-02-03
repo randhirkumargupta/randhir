@@ -17,7 +17,6 @@ module_load_include('inc', 'itg_common', 'includes/itg_common');
  * {@inheritdoc}
  */
 function itg_common_init() {
-
   global $user, $base_url, $theme;
 
   if ($theme == 'itgadmin') {
@@ -368,6 +367,10 @@ function itg_common_node_presave($node) {
       elseif ($node->op == 'Save as Draft' || $node->status == 0) {
         $node->status = 0;
       }
+        
+  }
+  if($node->type == 'photogallery' || $node->type == 'story' || $node->type == 'videogallery'){
+      return __itg_custompath_load($node);
   }
 }
 
