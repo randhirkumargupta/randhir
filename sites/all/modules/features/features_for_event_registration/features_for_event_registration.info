@@ -1,7 +1,7 @@
 name = Features for Event Registration
 core = 7.x
 package = Features
-version = 7.x-1.3
+version = 7.x-1.5
 dependencies[] = date
 dependencies[] = feature_for_mobile_services
 dependencies[] = features_for_story
@@ -56,6 +56,7 @@ features[msnf_step][] = step_erf_order_summary|node|event_registration
 features[msnf_step][] = step_erf_registration_fee|node|event_registration
 features[node][] = event_registration
 features[taxonomy][] = country
+features[taxonomy][] = event_registration_configuration
 features[taxonomy][] = itg_city
 features[taxonomy][] = state
 features[user_permission][] = create event_registration content

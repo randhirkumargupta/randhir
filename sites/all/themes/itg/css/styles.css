@@ -6423,7 +6423,7 @@ h1.category-heading {
 
 /*End start magazins*/
 /*CSS Start RHS add block*/
-[id*="block-itg-ads-ad-right-sidebar"] {
+section.sidebar .block-itg-ads {
   display: inline-block;
   vertical-align: top;
   padding: 30px 34px;

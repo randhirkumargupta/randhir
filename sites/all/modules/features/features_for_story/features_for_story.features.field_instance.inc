@@ -390,11 +390,12 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
     'field_name' => 'field_technology_sample_photo',
     'label' => 'Sample Photo',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -402,14 +403,23 @@ function features_for_story_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'image',
       'settings' => array(
         'filefield_sources' => array(
-          'filefield_sources' => array(),
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 'upload',
+          ),
           'source_attach' => array(
             'absolute' => 0,
             'attach_mode' => 'move',
@@ -420,6 +430,7 @@ function features_for_story_field_default_field_instances() {
           ),
           'source_reference' => array(
             'autocomplete' => 0,
+            'search_all_fields' => 0,
           ),
         ),
         'imce_filefield_on' => 0,
@@ -4536,7 +4547,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_tech_review_chunk',
-    'label' => 'Tech Review Chunk',
+    'label' => 'Tech Review Widget',
     'required' => 0,
     'settings' => array(
       'display_summary' => 0,
@@ -5433,7 +5444,7 @@ function features_for_story_field_default_field_instances() {
   t('Syndication');
   t('Syndications photo');
   t('Tags');
-  t('Tech Review Chunk');
+  t('Tech Review Widget');
   t('Technology cons');
   t('Technology image gallery');
   t('Technology pros');
