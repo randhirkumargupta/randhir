@@ -404,7 +404,11 @@ function coupon_features_field_default_field_instances() {
   // Exported field_instance: 'node-coupon-field_coupon_status'.
   $field_instances['node-coupon-field_coupon_status'] = array(
     'bundle' => 'coupon',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 'Active',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -426,7 +430,7 @@ function coupon_features_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_coupon_status',
     'label' => 'Coupon Status',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,

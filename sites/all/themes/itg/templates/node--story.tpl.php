@@ -347,8 +347,8 @@ if (!empty($content)):
                                 $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                                 $file_uri = file_create_url($story_image);
                                 print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">        
-                    <i class="fa fa-play-circle"></i>
-                    <i class="fa fa-camera"></i></span></a>';
+                                    <i class="fa fa-play-circle"></i>
+                                    <i class="fa fa-camera"></i></span></a>';
                                 if (!empty($getimagetags)) {
                                   foreach ($getimagetags as $key => $tagval) {
                                     $urltags = addhttp($tagval->tag_url);
@@ -356,10 +356,20 @@ if (!empty($content)):
                                   }
                                 }
                                 ?>
-                      <?php } ?>
+                              <?php } ?>
+                                <div class="stry-img-rating">
                       <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) { ?>
                                 <div class="photoby"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?></div>
-                      <?php } ?>                            
+                      <?php } ?>     
+                               
+                            <?php 
+                            // added technology rating field value for story technology
+                              if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) {
+                                $tech_rating = $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'];
+                                echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10';
+                              } 
+                            ?>
+                            </div>
                           </div>
   <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'])) { ?>    
                             <div class="image-alt"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?></div>
@@ -499,12 +509,12 @@ if (!empty($content)):
                             }
                           }
                           $movie_html = itg_story_movie_image_plugin_data($node->nid);
-                          if (strpos($story_body, '[ITG:MOVIE-IMAGE]')) {
+                          if (strpos($story_body, '[ITG:TECH-PHOTOS]')) {
                             if (!empty($node->field_story_technology['und'])) {
-                              $story_body = str_replace('[ITG:MOVIE-IMAGE]', $movie_html, $story_body);
+                              $story_body = str_replace('[ITG:TECH-PHOTOS]', $movie_html, $story_body);
                             }
                             else {
-                              $story_body = str_replace('[ITG:MOVIE-IMAGE]', '', $story_body);
+                              $story_body = str_replace('[ITG:TECH-PHOTOS]', '', $story_body);
                             }
                           }
                           if ($node->field_story_template_guru[LANGUAGE_NONE][0]['value']) {

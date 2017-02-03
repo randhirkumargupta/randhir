@@ -1016,7 +1016,7 @@ function itg_widget_block_view($delta = '') {
         slidesToScroll: 1,
         arrows: true, 
         prevArrow: '<i class=\"fa fa-chevron-left slick-prev\" aria-hidden=\"true\"></i>',
-        nextArrow: '<i class=\"fa fa-chevron-right slick-prev\" aria-hidden=\"true\"></i>'
+        nextArrow: '<i class=\"fa fa-chevron-right slick-next\" aria-hidden=\"true\"></i>'
     });    
 });",array("type" => "inline" ,"scope" => "footer"));
         $block['content'] = theme("podcast_banner", array("podcast_banner_array" => $podcast_banner_array, "podcast_title" => $podcast_title));

@@ -15,12 +15,12 @@ CKEDITOR.plugins.add( 'movieimage', {
    editor.addCommand( 'movieimage_command', {
     exec : function( editor ) {
      //here is where we tell CKEditor what to do.
-     editor.insertHtml( '[ITG:MOVIE-IMAGE]' );
+     editor.insertHtml( '[ITG:TECH-PHOTOS]' );
     }
    });
    
    editor.ui.addButton( 'movieimage_button', {
-    label: 'Insert Movie Image', //this is the tooltip text for the button
+    label: 'Tech Sample Photos', //this is the tooltip text for the button
     command: 'movieimage_command',
     icon: this.path + 'icons/movie.png'
    });

@@ -3614,7 +3614,7 @@ body .program-livetv.effect-added .light-on-text {
 .page-order-confirmation section.sidebar {
   border: none;
 }
-.page-order-confirmation section.sidebar #block-itg-ads-ad-right-sidebar-1 {
+.page-order-confirmation section.sidebar .block-itg-ads {
   border: 1px solid #ddd;
   padding: 30px;
   width: 100%;
@@ -4054,10 +4054,11 @@ body .program-livetv.effect-added .light-on-text {
   font-weight: 500;
 }
 
-.page-cart #block-itg-ads-ad-right-sidebar-1, .page-order #block-itg-ads-ad-right-sidebar-1 {
-  border: 1px solid #dddddd;
-  margin-top: 30px;
-  width: 100%;
+.page-cart section.sidebar .block-itg-ads, .page-order section.sidebar .block-itg-ads {
+  display: inline-block;
+  vertical-align: top;
+  padding: 30px 34px;
+  border-bottom: 1px solid #dddddd;
 }
 
 .page-order h1 {
