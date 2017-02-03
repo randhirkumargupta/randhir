@@ -46,6 +46,11 @@ define('ADS_RHS2', 'ads_medium_rectangl_rhs2_300x250');
 define('ADS_FOOTER', 'ads_super_banner_bottomnav728x90');
 define('ADS_HEADER', 'ads_super_banner_top_nav_728x90');
 define('NEWSLETTER_EDUCATION_TID', 522);
+define('FRONT_URL', 'http://itgd-mum-lb-dev-frontend-app-1144451114.ap-south-1.elb.amazonaws.com');
+define('BACKEND_URL', 'http://itgd-mum-lb-dev-backend-app-678057722.ap-south-1.elb.amazonaws.com');
+//define('FRONT_URL', 'http://localhost/itg-cms');
+//define('BACKEND_URL', 'http://192.168.14.45/itg-cms');
+
 
 
 

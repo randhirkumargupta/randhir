@@ -1,5 +1,6 @@
 <?php
 global $base_url;
+if ($base_url != BACKEND_URL) {
 ?>
 <section class="footer-top">
     <div class="container">
@@ -105,4 +106,5 @@ global $base_url;
     <div class="face4 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" /></div>
   </div>
 <!--animation emoji for hightlight end-->
+<?php } ?>
 
