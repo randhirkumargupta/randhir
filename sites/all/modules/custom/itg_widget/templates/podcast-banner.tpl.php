@@ -11,6 +11,7 @@
             <!-- Header slider -->
             <?php
             $podcast_thumbnail = "";
+            if(!empty($podcast_banner_array)) :
             foreach ($podcast_banner_array as $podcast_id => $podcast_array) {
               $podcast_image = $podcast_banner_array[$podcast_id]['image']['uri'];
               $description = $podcast_banner_array[$podcast_id]['desc'];
@@ -42,6 +43,7 @@
               $very_small_image = '<img src="' . $extra_large_image_url . '" alt="" />';
               $podcast_thumbnail .= "<li class='slide-" . $podcast_id . "'> $very_small_image </li>";
             }
+            endif;
             $podcast_thumbnail .= "";
             ?>
           </div>
