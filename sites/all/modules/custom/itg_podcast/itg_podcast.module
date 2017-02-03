@@ -155,6 +155,24 @@ function itg_audio_check_exist_file($filename) {
  * @param array $form_state
  */
 function itg_podcast_custom_submit($form, &$form_state) {
+  module_load_include('php', 'itg_podcast', 'includes/getid3/getid3');
+  
+  // Set audio length.
+ // if ($node->type == "podcast") {
+//  p(';');
+//  p($form_state['values']['field_podcast_audio_upload']['und']);
+//    foreach ($form_state['values']['field_podcast_audio_upload']['und'] as $audio_key => $audio_files_data) {
+//      $fid = $audio_files_data['field_podcast_upload_audio_file']['und'][0]['fid'];
+//      $file_data = file_load($fid);
+//      $file_url = drupal_realpath($file_data->uri);
+//      $getID3 = new getID3;
+//      //$head = array_change_key_case(get_headers($file_url, TRUE));
+//      $meta = $getID3->analyze($file_url);
+//      $duration = $meta['playtime_string'];
+//      $form_state['values']['field_podcast_audio_upload']['und'][$audio_key]['field_podcast_audio_length']['und'][0]['value'] = "11:00";
+//    }
+ // }
+  
   // code insert image in custom table
   $node_id = $form_state['node']->nid;
   if ($form_state['input']['original_image_fids'] != "") {
@@ -407,10 +425,14 @@ function itg_podcast_node_presave($node) {
       //$head = array_change_key_case(get_headers($file_url, TRUE));
       $meta = $getID3->analyze($file_url);
       $duration = $meta['playtime_string'];
-      //$node->field_podcast_audio_upload['und'][$audio_key]['field_podcast_audio_length']['und'][0]['value'] = "11:00";
+      // Handel field collection.
+      $node->field_podcast_audio_upload['und'][$audio_key]['field_podcast_audio_length']['und'][0]['value'] = $duration;
+      $node->field_podcast_audio_upload['und'][$audio_key]['field_podcast_audio_length']['und'][0]['value']['#default_value'] = $duration;
+      $node->field_podcast_audio_upload['und'][$audio_key]['field_podcast_audio_length']['und'][0]['value']['#value'] = $duration;
+      $node->field_podcast_audio_upload['und'][$audio_key]['entity']->field_podcast_audio_length['und'][0]['value'] = $duration;
+      $node->field_podcast_audio_upload['und'][$audio_key]['entity']->field_podcast_audio_length['und'][0]['value']['#default_value'] = $duration;
     }
   }
-  //p($node);
 }
 
 
