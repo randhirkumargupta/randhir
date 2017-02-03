@@ -12380,3 +12380,7 @@ span.smilies-title {
 }
 
 /*css end for emoji*/
+.front-end-breadcrumb {
+  position: relative;
+  z-index: 9999;
+}
