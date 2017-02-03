@@ -1,0 +1,5 @@
+name = ITG Coupons
+description = "ITG Coupons"
+core = 7.x
+package = ITG
+files[] = itg_coupon.module

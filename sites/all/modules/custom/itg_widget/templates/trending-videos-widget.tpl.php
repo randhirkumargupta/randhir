@@ -5,14 +5,14 @@
         <?php if (!empty($entity['esi_file_uri'])) { ?>            
           <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/".$entity['nid']); ?>">
             <?php $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']); ?>
-            <img src="<?php print $extra_large_image_url; ?>" />
+            <img src="<?php print $extra_large_image_url; ?>" alt="" />
           </a>
           <?php
         }
         else {
           ?>
           <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $entity['nid']); ?>">
-            <img height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" />
+            <img height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" alt="" />
           </a>
         <?php } ?>
         <?php if (!empty($entity['title'])) : ?>

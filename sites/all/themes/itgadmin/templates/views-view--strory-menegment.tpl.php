@@ -47,6 +47,13 @@
       <?php print $exposed; ?>
     </div>
     <div class="attachment">
+      <?php
+     
+//        if (arg(0) == 'published-story') {
+//          $query_array = "&field_story_syndication_value_op=all";         
+//        }
+       
+      ?>
       <span class="count"><?php print 'Count ('.$view->total_rows.')'; ?></span>
       <?php print l('Create Story', 'node/add/story', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0)))); ?>
     </div>

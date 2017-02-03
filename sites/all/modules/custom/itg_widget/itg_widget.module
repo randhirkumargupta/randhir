@@ -183,6 +183,7 @@ function itg_widget_menu() {
  * @return type
  */
 function itg_widget_site_map() {
+  drupal_add_css(".nested-taxonomy-tree a:hover {color: #a00606 !important}" , array("type" => "inline" ,"scope" => "footer"));
   $tree = extranet_get_nested_tree(CATEGORY_MANAGMENT);
   $keys = array_keys($tree);
   foreach ($keys as $index => $data) {
@@ -1009,6 +1010,24 @@ function itg_widget_block_view($delta = '') {
           $podcast_image = $entity[$id]->field_podcast_audio_image_upload['und'][0];
           $podcast_banner_array[$key] = array("audio" => $audio_file_object, "desc" => $description, "image" => $podcast_image);
         }
+        drupal_add_js("jQuery(document).ready(function(){    
+          jQuery('.slider-header').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            fade: true,
+            asNavFor: '.other-list'
+          });
+          jQuery('.other-list').slick({
+            slidesToShow: 7,
+            slidesToScroll: 1,
+            arrows: true, 
+            prevArrow: '<i class=\"fa fa-chevron-left slick-prev\" aria-hidden=\"true\"></i>',
+            nextArrow: '<i class=\"fa fa-chevron-right slick-next\" aria-hidden=\"true\"></i>',
+            asNavFor: '.slider-header',
+            focusOnSelect: true
+          });   
+});",array("type" => "inline" ,"scope" => "footer"));
         $block['content'] = theme("podcast_banner", array("podcast_banner_array" => $podcast_banner_array, "podcast_title" => $podcast_title));
       }
       break;
@@ -1155,10 +1174,10 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
       }
       ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->video_id; ?>"><?php
       if ($video_value->dailymotion_thumb_url != "") {
-        $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $video_value->dailymotion_thumb_url . '" height="66" width="88"></li>';
+        $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $video_value->dailymotion_thumb_url . '" height="66" width="88" alt="" /></li>';
       }
       else {
-        $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/default_for_all.png" height="66" width="88"></li>';
+        $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/default_for_all.png" height="66" width="88" alt="" /></li>';
       }
       $ads_flag = 0;
       if ($video_value->field_include_ads_value == 'yes') {

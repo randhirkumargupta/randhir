@@ -112,7 +112,7 @@ function features_for_event_registration_field_default_field_instances() {
     'label' => 'Date of Birth',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -127,7 +127,7 @@ function features_for_event_registration_field_default_field_instances() {
         'increment' => 15,
         'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
-        'label_position' => 'above',
+        'label_position' => 'within',
         'no_fieldset' => 0,
         'text_parts' => array(),
         'year_range' => '1950:+0',
@@ -194,7 +194,7 @@ function features_for_event_registration_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_erf_email',
     'label' => 'Email',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -268,7 +268,7 @@ function features_for_event_registration_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_erf_mobile',
     'label' => 'Mobile',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,

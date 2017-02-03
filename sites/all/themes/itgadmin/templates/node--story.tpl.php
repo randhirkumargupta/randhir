@@ -1,33 +1,17 @@
 <?php if (!empty($content)): ?>
   <div class='<?php print $classes ?>'>
+    <?php $promote_class = ""; if (!isset($node->op) && in_array('Social Media', $user->roles)){
+      $promote_class = 'promote-content';
+    }
+    ?>
+    <div class='<?php echo $promote_class;?>'>
       <?php if ($view_mode == 'full'): ?>
       <?php print render($content['links']['flag']); ?>
         <a href="javascript:;" class="close-preview">&nbsp;</a>
         <?php
         // Load custom block for social media integration 
         global $user;    
-        if (!isset($node->op) && in_array('Social Media', $user->roles)):
-            
-          $block = module_invoke('itg_social_media', 'block_view', 'social_media_form');
-        
-          ?>
-          <div class="itg-smi">
-              <button data-id="smi-popup" class="btn data-popup-link">Promote Content</button>
-          </div>
-          <div id="smi-popup" class="itg-popup">
-              <div class="popup-content">
-                <div class="popup-head">
-                    <div class="popup-title">&nbsp;</div>
-                    <a class="itg-close-popup" href="javascript:;"> Close </a>
-                </div>
-                <div class="popup-body">
-                    <?php print render($block['content']); 
-                   
-                    ?>
-                </div>
-              </div>
-          </div>
-        <?php endif; ?>        
+        ?>        
         <div class="basic-details content-box">
             <h2><?php $termdata="";
             if ($node->field_primary_category['und'][0]['value'] != "" && isset($node->field_primary_category['und'])) {
@@ -285,7 +269,31 @@
                     <?php print render($content['field_story_tech_review_chunk']); ?>
                 </div>
         </div>
-      <?php endif; // end of view mode full condition ?></div>
+        <!-- render photo story fields -->
+        <div class="photo-story-details content-box">
+                <h2><?php print t('photo story'); ?></h2>
+                    <div class="content-details">
+                    <?php print render($content['field_story_type']); ?>
+                    <?php 
+                      if (!empty($node->field_photo_story)) {
+                        $output = itg_story_photo_story_html($node->nid);
+                        print $output;
+                      }
+                    ?>
+                </div>
+        </div>
+      <?php endif; // end of view mode full condition ?>
+  </div>
+    <?php if (!isset($node->op) && in_array('Social Media', $user->roles)):
+  $block = module_invoke('itg_social_media', 'block_view', 'social_media_form');
+  ?>
+  <div class="promote-sidebar">
+      <?php print render($block['content']); ?>
+  </div>
+  <?php endif; ?>
+  </div>
+  
+
   <?php
   // code for comment hide and show based on condition
   if ($node->field_story_configurations[LANGUAGE_NONE][0]['value'] == 'comment') {

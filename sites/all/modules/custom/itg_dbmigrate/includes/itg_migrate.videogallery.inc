@@ -1,23 +1,29 @@
 <?php
+
 //pending
 
 /**
  * ItgVideogalleryMigration extends XMLMigration 
  */
 class ItgVideogalleryMigration extends XMLMigration {
+
   public function __construct($arguments) {
     parent::__construct($arguments);
     $this->description = t('XML feed (multi items) of content (Videogallery)');
 
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
-      'long_headline' => t('longheadline'),
-      'shortheadline' => t('shortheadline'),
-      'video' => t('Video'),
-      'city' => t('city'),
-      'courtesy' => t('courtesy'),
+      'multibitrate_flag' => t('multibitrate_flag'),
+      'multipart_flag' => t('multipart_flag'),
+      'state' => t('state'),
       'anchor' => t('anchor'),
-      'categories' => t('categories'),//multi
+      'bylines' => t('bylines'),
+      'createddate' => t('createddate'),
+      'publisheddate' => t('publisheddate'),
+      'modifieddate' => t('modifieddate'),
+      'createdby' => t('createdby'),
+      'modifiedby' => t('modifiedby'),
+      'courtesy' => t('courtesy'),
       'primarycategory' => t('primarycategory'),
       'extralargeimage' => t('extralargeimage'),
       'extra_large_alt' => t('extra_large_alt'),
@@ -34,9 +40,17 @@ class ItgVideogalleryMigration extends XMLMigration {
       'extrasmallimage' => t('extrasmallimage'),
       'extra_small_alt' => t('extra_small_alt'),
       'extra_small_title' => t('extra_small_title'),
-      'tags' => t('tags'),//multi
-      'courtesy' => t('courtesy'),
-      'socialmediaintegration' => t('socialmediaintegration'),//checkbox
+      'bigimage' => t('bigimage'),
+      'syndications' => t('syndications'),
+      'multi_bitrates' => t('multi_bitrates'), //multi
+      'cities' => t('cities'), //multi
+      'categories' => t('categories'), //multi
+      'ordering' => t('ordering'),
+      'tags' => t('tags'), //multi
+      'title' => t('title'),
+      'longheadline' => t('longheadline'),
+      'like-dislike' => t('like-dislike'),
+      'socialmediaintegration' => t('socialmediaintegration'), //checkbox
       'facebooknarrative' => t('facebooknarrative'),
       'facebookimage' => t('facebookimage'),
       'facebookimage_alt' => t('facebookimage_alt'),
@@ -47,33 +61,38 @@ class ItgVideogalleryMigration extends XMLMigration {
       'twitterimage_title' => t('twitterimage_title'),
       'shortdescription' => t('shortdescription'),
       'longdescription' => t('longdescription'),
-      'syndication' => t('syndication'),
+      'syndications_photo' => t('syndications_photo'),
+      'noindex_nofollow' => t('noindex_nofollow'),
+      'weburl' => t('weburl'),
       'archive' => t('archive'),
-      'video_duration' => t('video_duration'),
-      'primarycategory' => t('primarycategory'),
-      'configurations' => t('configurations'),//checkbox
+      //'video_duration' => t('video_duration'),
+      'configurations' => t('configurations'), //checkbox
+      'googlestandout' => t('googlestandout'),
+      'comment' => t('comment'),
+      'commentbox' => t('commentbox'),
       'commentquestion' => t('commentquestion'),
-      'relatedcontents' => t('relatedcontents'),//multi
-      'expirydate' => t('expirydate'),
-      'scheduledatetime' => t('scheduledatetime'),
+      'videoparts' => t('videoparts'), // MUltiple videos URL
+      'relatedcontents' => t('relatedcontents'), //multi
+//      'expirydate' => t('expirydate'),
+//      'scheduledatetime' => t('scheduledatetime'),
       'sefurl' => t('Sefurl'),
       'pagetitle' => t('Page title'),
       'description' => t('Description'),
       'keywords' => t('Keywords'),
     );
 
-    
+
     // This can also be an URL instead of a local file path.
     $file_path = drupal_realpath('public://');
-    
+
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
-    
+
     $items_url = $xml_folder . 'videogallery.xml';
-    
+
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
-    $item_xpath = '/videogallery';
-    
+    $item_xpath = '/data/videogallery';
+
     // This is the xpath relative to the individual items - thus the full xpath
     // of an ID will be /story/item/id.
     $item_ID_xpath = 'id';
@@ -85,17 +104,15 @@ class ItgVideogalleryMigration extends XMLMigration {
 
     // The source ID here is the one retrieved from each data item in the XML
     // file, and used to identify specific items
-    $this->map = new MigrateSQLMap($this->machineName,
-      array(
-        'id' => array(
-          'type' => 'int',
-          'unsigned' => TRUE,
-          'not null' => TRUE,
-        )
-      ),
-      MigrateDestinationNode::getKeySchema()
+    $this->map = new MigrateSQLMap($this->machineName, array(
+      'id' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      )
+        ), MigrateDestinationNode::getKeySchema()
     );
-    
+
     // TIP: Note that for XML sources, in addition to the source field passed to
     // addFieldMapping (the name under which it will be saved in the data row
     // passed through the migration process) we specify the Xpath used to
@@ -104,16 +121,16 @@ class ItgVideogalleryMigration extends XMLMigration {
     // item xpath since each item xml chunk is processed individually.
     // (ex. xpath=name is equivalent to a full xpath of
     // /categories/category/name).
-    $this->addFieldMapping('title', 'long_headline')->xpath('long_headline');
-    $this->addFieldMapping('field_story_short_headline', 'shortheadline')->xpath('shortheadline');
+    $this->addFieldMapping('title', 'longheadline')->xpath('longheadline');
+    $this->addFieldMapping('field_story_short_headline', 'title')->xpath('title');
     //$this->addFieldMapping('field_story_reporter', 'byline')->xpath('byline');
     // Byline mapped in prepare
-    $this->addFieldMapping('field_stroy_city', 'city')->xpath('city');
+    //$this->addFieldMapping('field_stroy_city', 'city')->xpath('city');
     $this->addFieldMapping('field_story_courtesy', 'courtesy')->xpath('courtesy');
     $this->addFieldMapping('field_video_anchor', 'anchor')->xpath('anchor');
     // configuration mapped in prepare
     $this->addFieldMapping('field_story_comment_question', 'commentquestion')->xpath('commentquestion');
-    $this->addFieldMapping('field_story_schedule_date_time', 'scheduledatetime')->xpath('scheduledatetime');
+    $this->addFieldMapping('field_story_schedule_date_time', 'publisheddate')->xpath('publisheddate'); // published date
     $this->addFieldMapping('field_story_expiry_date', 'expirydate')->xpath('expirydate');
     $this->addFieldMapping('field_story_expires', 'videoexpires')->xpath('videoexpires');
     // Image field 
@@ -132,10 +149,11 @@ class ItgVideogalleryMigration extends XMLMigration {
     $this->addFieldMapping('field_story_extra_small_image', 'extrasmallimage')->xpath('extrasmallimage');
     $this->addFieldMapping('field_story_extra_small_image:alt', 'extra_small_alt')->xpath('extra_small_alt');
     $this->addFieldMapping('field_story_extra_small_image:title', 'extra_small_title')->xpath('extra_small_title');
-    
-    // Tags mapped in prepare
-    // Social media integration mapped in prepare
-    
+
+    // source migrated
+    $this->addFieldMapping('field_story_source_type')
+        ->defaultValue('migrated');
+
     // Facebook and twitter image
     $this->addFieldMapping('field_story_facebook_narrative', 'facebooknarrative')->xpath('facebooknarrative');
     $this->addFieldMapping('field_story_facebook_image', 'facebookimage')->xpath('facebookimage');
@@ -145,40 +163,79 @@ class ItgVideogalleryMigration extends XMLMigration {
     $this->addFieldMapping('field_story_tweet_image', 'twitterimage')->xpath('twitterimage');
     $this->addFieldMapping('field_story_tweet_image:alt', 'twitterimage_alt')->xpath('twitterimage_alt');
     $this->addFieldMapping('field_story_tweet_image:title', 'twitterimage_title')->xpath('twitterimage_title');
-    
+
     // Video migrate
     // $this->addFieldMapping('field_upload_video', 'video')->xpath('video');
-   
+
     $this->addFieldMapping('field_story_expert_name', 'shortdescription')->xpath('shortdescription');
     $this->addFieldMapping('field_story_expert_description', 'longdescription')->xpath('longdescription');
-    
+
     // Section mapped in prepare
-    
-    $this->addFieldMapping('field_story_syndication', 'syndication')->xpath('syndication');
-    
+
+    $this->addFieldMapping('field_story_syndication', 'syndications')->xpath('syndications');
+
     // Dailymotion playlist pending only one category save
-    
+
     $this->addFieldMapping('field_story_archive', 'archive')->xpath('archive');
-    
+
     //video duration
-    $this->addFieldMapping('field_video_duration', 'video_duration')->xpath('video_duration');
+    // $this->addFieldMapping('field_video_duration', 'video_duration')->xpath('video_duration');
     $this->addFieldMapping('field_primary_category', 'primarycategory')->xpath('primarycategory');
-    $this->addFieldMapping('field_common_related_content', 'relatedcontent')->xpath('relatedcontent');
-    
+    //$this->addFieldMapping('field_common_related_content', 'relatedcontent')->xpath('relatedcontent');
+    $this->addFieldMapping('pathauto')->defaultValue(0);
+    $this->addFieldMapping('path', 'sefurl')->xpath('metatags/sefurl');
+    $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
+    $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
+    $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
+    $this->addFieldMapping('workbench_moderation_state_new', 'workbench_moderation_state_new')->xpath('workbench_moderation_state_new');
+    $this->addFieldMapping('created', 'createddate')->xpath('createddate');
+    $this->addFieldMapping('changed', 'modifieddate')->xpath('modifieddate');
   }
-  
-   public function prepareRow($row) {
+
+  public function prepareRow($row) {
+    //Workbench 
+    if ((string) $row->xml->state == '1') {
+      $row->xml->workbench_moderation_state_new = 'published';
+    }
+    else {
+      $row->xml->workbench_moderation_state_new = 'draft';
+    }
+
+    //syndication
+    if ((string) $row->xml->syndications == '1') {
+      $row->xml->syndications = 'Yes';
+    }
+    else {
+      $row->xml->syndications = '';
+    }
+
     // Category migrate
     $data_category = '';
 
     if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {
       foreach ($row->xml->categories->category as $final_category) {
-        $source_cid = (string) $final_category;
-        $orignal_category = get_itg_destination_id('migrate_map_itgcategory', $source_cid);
+        $category_array = explode('#', $final_category);
+        $array_count = count($category_array);
+        $table_name = itg_migrate_category_table($array_count);
+        $last_value = end($category_array);
+        $source_cid = (string) $last_value;
+        $orignal_category = get_itg_destination_id($table_name, $source_cid);
         $data_category[]['tid'] = $orignal_category;
       }
     }
     $row->category_new = $data_category;
+
+    // Primary category
+    if (isset($row->xml->primarycategory) && !empty($row->xml->primarycategory)) {
+      $source_cid = (string) $row->xml->primarycategory;
+      $pcategory_array = explode('#', $source_cid);
+      $parray_count = count($pcategory_array);
+      $table_name = itg_migrate_category_table($parray_count);
+      $last_value = end($pcategory_array);
+      $source_cid = (string) $last_value;
+      $orignal_pcategory = get_itg_destination_id($table_name, $source_cid);
+      $row->xml->primarycategory = $orignal_pcategory;
+    }
 
     // Story tags migration
     $data_tags = '';
@@ -220,25 +277,21 @@ class ItgVideogalleryMigration extends XMLMigration {
     }
     $row->final_config_option = $final_option;
 
-    // Primary category
-    if (isset($row->xml->primarycategory) && !empty($row->xml->primarycategory)) {
-      $source_cid = (string) $row->xml->primarycategory;
-      $orignal_pcategory = get_itg_destination_id('migrate_map_itgcategory', $source_cid);
-      $row->xml->primarycategory = $orignal_pcategory;
+    // City migrate
+    $data_city = '';
+    if (isset($row->xml->cities->city) && !empty($row->xml->cities->city)) {
+      foreach ($row->xml->cities->city as $final_city) {
+        $source_city = (string) $final_city;
+        $orignal_city = get_itg_destination_id('migrate_map_itgcity', $source_city);
+        $data_city[]['tid'] = $orignal_city;
+      }
     }
+    $row->city_new = $data_city;
 
-    // Videogallery Date
-    if (isset($row->xml->storyexpirydate) && !empty($row->xml->storyexpirydate)) {
-      $expire_time = (string) $row->xml->storyexpirydate;
-      $expire_date_time = date('m/d/Y H:i', $expire_time);
-      $row->xml->storyexpirydate = $expire_date_time;
-    }
-    if (isset($row->xml->scheduledatetime) && !empty($row->xml->scheduledatetime)) {
-      $schedule_time = (string) $row->xml->scheduledatetime;
-      $schedule_date_time = date('m/d/Y H:i', $schedule_time);
-      $row->xml->scheduledatetime = $schedule_date_time;
-    }
-    
+    // Videogallery Date 
+    $row->xml->expirydate = '4325600812';
+
+
     //Byline associate with story
     $data_byline = '';
     if (isset($row->xml->bylines->byline) && !empty($row->xml->bylines->byline)) {
@@ -249,13 +302,22 @@ class ItgVideogalleryMigration extends XMLMigration {
       }
     }
     $row->byline_new = $data_byline;
-      // Related content
-    if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
-      foreach($row->xml->relatedcontents->relatedcontent as $related){
-        $related_content .= (string) $related.', ';
-      }
-      $final_related_content = rtrim($related_content, ', ');
-      $row->xml->relatedcontents = $final_related_content;
+    // Related content
+//    if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
+//      foreach($row->xml->relatedcontents->relatedcontent as $related){
+//        $related_content .= (string) $related.', ';
+//      }
+//      $final_related_content = rtrim($related_content, ', ');
+//      $row->xml->relatedcontents = $final_related_content;
+//    }
+    // manage created user
+    if (isset($row->xml->createdby) && !empty($row->xml->createdby)) {
+      $created_uid = (string) $row->xml->createdby;
+      $orignal_crated_uid = get_itg_destination_id('migrate_map_itguser', $created_uid);
+      $row->xml->createdby = $orignal_crated_uid;
+    }
+    else {
+      $row->xml->createdby = 1;
     }
 
     return TRUE;
@@ -278,11 +340,25 @@ class ItgVideogalleryMigration extends XMLMigration {
     if (!empty($row->byline_new)) {
       $node->field_story_reporter[LANGUAGE_NONE] = $row->byline_new;
     }
-    if(!empty($row->city)){
-      $node->field_stroy_city[LANGUAGE_NONE][0]['tid'] = (string) $row->city;
+    if (!empty($row->city_new)) {
+      $node->field_stroy_city[LANGUAGE_NONE] = $row->city_new;
     }
-  
-    $node->uid = 291;
+    $node->uid = $row->xml->createdby;
+  }
+
+  public function complete($entity, $row) {
+    $node = node_load($entity->nid);
+
+    //code for like and dislike
+    if (isset($row->xml->like_dislike->like) || isset($row->xml->like_dislike->dislike)) {
+      itg_flag_insert_like_dislike($node->nid, $row->xml->like_dislike->like, $row->xml->like_dislike->dislike);
+    }
+
+
+    //code for order set
+    if (isset($row->xml->ordering)) {
+      ordering_set_of_content($node, $row->xml->ordering);
+    }
   }
 
 }

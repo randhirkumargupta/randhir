@@ -149,3 +149,22 @@ function itg_flag_get_nid($nid) {
     return $data;
   }
 }
+
+
+/**
+ * Get count value by passing nid.
+ * @param int $nid
+ * @param string $collection
+ */
+function itg_common_mongo_activity_count($nid, $collection) {
+  if (function_exists('mongodb') && !empty($nid)) {
+    $con = mongodb();
+    $people = $con->$collection;
+    $cond = array('nid' => $nid);
+    $cursor = $people->count($cond);
+    return $cursor;
+  } else {
+    return 0;
+  }
+  
+}

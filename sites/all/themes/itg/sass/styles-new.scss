@@ -2990,21 +2990,21 @@ footer .footer-top ul li a:hover{
   }
   &.comment-popup{
     background-color: #fff;
-    bottom: 0;
     border-radius: 10px;
-    height: 300px;
     left: 0;
-    margin: auto;
+    margin: 0 auto;
+    max-height: 80%;
+    overflow-y: auto;
     max-width: 600px;
     padding: 50px 20px 20px;
     position: absolute;
     right: 0;
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
     width: 100%;
     .close-comment-popup{
       display: block;
     }
-    .social-login{display: none;}
   }
 }
 .comment-user-details {
@@ -3019,6 +3019,7 @@ footer .footer-top ul li a:hover{
   text-align: left;
   &.social-login{
     text-align: right;
+    width: auto;
     span {
       display: inline-block;
       vertical-align: top;
@@ -3114,28 +3115,118 @@ footer .footer-top ul li a:hover{
   .form-field-name-field-section{
     float: left;
     width: 48%;
-    label{float: none; display: block;}
+    label{float: none; display: none;}
   }
   select{max-width: 100%;}
   .form-field-name-field-user-name,
-  .form-item-title,
-  .form-field-name-field-user-city,
-  .field-type-text-with-summary{
+  .form-field-name-field-user-city{
     float: left; width: 52%; padding-right: 2%;
-    label{float: none; display: block;}
+    label{float: none; display: none;}
   }
-  .field-type-text-with-summary{
-    .form-type-textarea > label + div{padding: 0;}
-    .form-textarea{height: 100px;}
+  .form-item-title,
+  #edit-field-user-message{
+    float: left;
+    width: 100%;
+    label{float: none; display: none;}
   }
-  .captcha-lable{width: auto; float: none;}
-  .captcha{padding-left: 52%;}
+  #edit-field-user-message{
+    .form-type-textarea > label + div{
+      padding-left: 0;
+      .form-textarea{height: 100px; width: 100%;}
+    }
+  }
+  .form-item-title{
+    .form-text{width: 100%;}
+  }
+  .captcha{
+    padding-left: 0;
+    .form-item-captcha-response{
+      > label{padding: 7px 10px 7px 0;}
+      div.description, span.error{
+        padding-left: 220px;
+      }
+    }
+    img{
+      margin: 0 0 5px 220px;
+    }
+  }
   .form-actions{
     display: inline-block; vertical-align: top; width: 100%; padding: 0; text-align: right;
     .form-submit{padding: 10px 30px;}
   }
   span.error{padding-left: 0;}
 }
+.region-front-end-breadcrumb {
+    color: #a1a1a1;
+    margin-bottom: 5px;
+    font: 400 14px/18px Roboto;
+    a{
+      color: #a1a1a1;
+      &:hover{
+        color: #1a3c8d;
+      }
+    }
+}
+body{
+  position: relative;
+  &.light-off-overlay{
+    overflow: hidden;
+    &:after{
+      content:"";
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      transition: all 1000ms;
+      background-color: rgba(0,0,0,.9);
+      z-index: 9999;
+    }
+  }
+  .program-livetv{
+    .light-on-text{display: none;}
+    &.effect-added{
+      position: relative;
+      z-index: 99999;
+      box-shadow: 0 0 20px 0 #fff;
+      .light-off-text{
+        display: none;
+      }
+      .light-on-text{
+        display: inline;
+      }
+    }
+  }
+}
+.shopping-cart, .order-summary{
+  .cart-checkout-list{
+    padding: 15px;
+    border-top: none;
+    &:first-child{border-top: 1px solid #dbdbdb;}
+    .cart-image{
+      float: left;
+      max-width: 104px;
+      margin-right: 20px;
+    }
+    .product-details{
+      float: left;
+      > div{
+        padding-bottom: 5px;
+        span{
+          width: 90px; 
+          padding-right: 10px;
+        }
+      }
+    }
+    .cart-action{
+      float: right;
+    }
+  }
+  .cart-total-block{margin-top: 24px;}
+}
+
+
+
 
 
 /* CSS To Add Zoom Effect on Images */
@@ -3314,6 +3405,7 @@ footer .footer-top ul li a:hover{
   box-shadow: 0 0 15px #999;
   left: 0;
   top: 30px;
+  text-align: left;
   padding: 15px 15px 10px;
   position: absolute;
   transform: translateX(-50%);
@@ -3393,7 +3485,7 @@ footer .footer-top ul li a:hover{
     margin: 0;
   }
   #main{
-    padding: 50px 0;
+    padding: 30px 15px;
   }
   .thankyou-block{
     text-align: center;
@@ -3430,7 +3522,7 @@ footer .footer-top ul li a:hover{
   }
   section.sidebar{
     border: none;
-    #block-itg-ads-ad-right-sidebar-1 {
+    .block-itg-ads {
       border: 1px solid #ddd;
       padding: 30px;
       width: 100%;
@@ -3476,12 +3568,12 @@ footer .footer-top ul li a:hover{
     margin: 0;
   }
   #main{
-    padding: 50px 0;
+    padding: 30px 15px;
     > row{margin: 0;}
   }
   .rhs-address{
     border: 1px solid #ddd;
-    margin-bottom: 35px;
+    margin: 24px 0;
   }
   .order-address-wrapper{
     background-color: #ededed;
@@ -3528,11 +3620,11 @@ footer .footer-top ul li a:hover{
     border: 1px solid #dedede;
     text-align: center;
   }
-  .cart-total-block{
+/*  .cart-total-block{
     background-color: #fff;
     border: 1px solid #dedede;
     margin-bottom: 30px;    
-  }
+  }*/
   .cart-checkout-list{
     .cart-image {
       float: left;
@@ -3541,17 +3633,11 @@ footer .footer-top ul li a:hover{
     }
     .prd-title {
       font: 500 18px/24px Roboto;
+      float: left;
     }
   }
   .lhs-redeem-point{
-      .cart-total-inner{
-          max-width: 100%;
-          text-align: left;
-          .checkout{
-            display: inline-block;
-            vertical-align: top;
-          }
-      }
+      margin-bottom: 24px;
   }
 }
 #change-address-popup{
@@ -3564,7 +3650,7 @@ footer .footer-top ul li a:hover{
   width: 100%;
   z-index: 99999;
   .popup-inner{
-    width: 100%;
+    width: 96%;
     max-width: 370px;
     border-radius: 5px;
     box-shadow: 0 0 10px #000;
@@ -3580,6 +3666,7 @@ footer .footer-top ul li a:hover{
       color: #474747;
       font: normal 400 23px/18px Roboto;
       background-color: #ececec;
+      border-radius: 5px 5px 0 0;
       padding: 13px;
     }
   }
@@ -3672,15 +3759,19 @@ footer .footer-top ul li a:hover{
     .region-personalization{text-align: center;}
     #block-views-follow-tags-block,
     #block-views-follow-tags-block-1{
+        background-color: #f2f2f2;
+        margin: 20px 10px 0;
         display: inline-block;
         vertical-align: top;
         width: 400px;
-        padding: 50px 0;
+        padding: 15px;
         .view-follow-tags{
             .views-row{
                 padding:10px;
                 text-align: left;
                 border: 1px solid #d9d9d9;
+                background-color: #fff;
+                transition: all 300ms;
                 position: relative;
                 margin: 15px;
                 border-radius: 5px;
@@ -3818,10 +3909,12 @@ footer .footer-top ul li a:hover{
   }
 }
 .page-cart, .page-order{
-  #block-itg-ads-ad-right-sidebar-1{
-    border: 1px solid #dddddd;
-    margin-top: 30px;
-    width: 100%;
+  section.sidebar{
+    .block-itg-ads{
+      @include display-inline;
+      padding: 30px 34px;
+      border-bottom: 1px solid $border-color;   
+    }
   }
 }
 .page-order{
@@ -4702,6 +4795,14 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         z-index: 9;
     }
   }
+  .block-itg-ads{
+    iframe{
+      max-width: 100%;
+      overflow: hidden;
+    }
+  }
+  
+  
 
 
 
@@ -4981,7 +5082,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             span{
               padding: 0 3px;
               width: 36px;
-              dfn{font-size: 10px; margin-top: 20px;}
+              dfn{font-size: 10px; margin-top: 5px;}
               .fa{font-size: 17px;}
             }
          }
@@ -5165,7 +5266,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     }
   }  
   .page-personalization-my-following #block-views-follow-tags-block, 
-  .page-personalization-my-following #block-views-follow-tags-block-1{width: 100%; float: left; padding: 50px 0 0;}
+  .page-personalization-my-following #block-views-follow-tags-block-1{width: 100%; float: left; margin: 20px 0 0; padding: 15px 0;}
   #block-itg-personalization-user-my-point{
     .header-point{
       padding: 20px 0;
@@ -5188,6 +5289,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     left: auto;
     right: -5px;
     width: 300px;
+    transform: translateX(0);
   }
   
   [id*="itg-personalization-edit-profile-form"], [id*="itg-personalization-refer-a-friend-form"]{
@@ -5401,6 +5503,17 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 }
 @media all and(max-width: 767px){
   
+  .comment-user-details{
+    text-align: left;
+    > div {
+      margin: 0 0 10px 0;
+      width: 100%;
+      &.social-login{
+        text-align: left;
+      }
+    }
+  }
+  
   /* Responsive CSS For Loyalty and Rewards */
   [id*="block-views-redeem-points-block"]{
     .block-title{
@@ -5601,6 +5714,54 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     }
   }
   .personal-list > li .personal-details .personal-pic{height: auto;}
+  .page-cart, .page-order-summary{
+    #page-title{font-size: 18px; margin-bottom: 10px;}
+  } 
+  .page-order-summary #main, .page-order-confirmation #main{padding-bottom: 0;}
+  .page-order-confirmation .cart-checkout-list .delivery-by{padding-top: 10px; font-size: 14px;}
+  .shopping-cart, .order-summary{
+    .cart-checkout-list{
+      border: none;
+      padding: 15px 10px;
+      &:first-child{border: none;}
+      &:nth-child(odd){background-color: #efefef;}
+      .cart-image{max-width: 77px; margin-right: 15px;}
+      .product-details{
+        float: none; 
+        font: 400 12px/14px Roboto;
+        > div{
+          span{color: #6c6c6c;}
+          strong{color: #464646; font-weight: 400;}
+        }
+      }
+      .cart-action{
+        width: 100%; 
+        margin-top: 10px;
+        > div{
+          font-size: 12px; 
+          text-transform: uppercase;
+          float: left;
+          &.points{
+            font-size: 14px;
+            max-width: 100px;
+            margin-left: 10px;
+            margin-top: 0;
+            background-color: #fff;
+            padding: 0;
+            height: 30px;
+            line-height: 30px;
+          }
+        }
+        .cart-action-links{
+          line-height: 30px;
+          span:after{display: none;}
+          .itg-remove-product{margin-left: 10px;}
+        }
+      }
+    }
+  }
+  .cart-total-block .points-balance span{font-size: 13px; font-weight: 500;}
+  .cart-total-block .points-balance span:first-child{max-width: 100px;}
 }
 @media all and (max-width: 480px){
   .photos-videos-wrapper .movie-videos, 

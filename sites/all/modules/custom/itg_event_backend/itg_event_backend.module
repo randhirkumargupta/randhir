@@ -159,6 +159,19 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
   }
   $form['field_config_photo']['#access'] = FALSE;
   $form['field_config_video']['#access'] = FALSE;
+  $color_box_query_config = array("width" => "900", "height" => "600", "iframe" => "true");
+  $color_box_class_config = array("class" => array("colorbox-load anchor-order-reorder"));
+  $link_text_config = l(t('Click here'), "event-registration-config/" . arg(1), array('query' => $color_box_query_config, 'attributes' => $color_box_class_config));
+  if (isset($_GET['step']) && $_GET['step'] == 'step_second' && is_numeric(arg(1))) {
+    $form['registration_config'] = array(
+      '#type' => 'item',
+      '#title' => t('Registration form configuration'),
+      '#markup' => $link_text_config,
+      '#weight' => 10,
+    );
+    $form['#steps']['step_second']->children[] = 'registration_config';
+    $form['#step_children']['registration_config'] = 'step_second';
+  }
 }
 
 /**

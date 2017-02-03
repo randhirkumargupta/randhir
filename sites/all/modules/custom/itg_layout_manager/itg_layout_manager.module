@@ -49,7 +49,7 @@ function itg_layout_manager_menu() {
   );
 
   // Autocomplete callback for category name
-  $items['itg_category_autocomplete_list/%'] = array(
+  $items['itg_category_autocomplete_list/%/%'] = array(
     'page callback' => 'itg_category_autocomplete_list',
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
@@ -74,6 +74,13 @@ function itg_layout_manager_menu() {
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_layout_autocomplete.inc',
+  );
+  
+  $items['pre-layout-drag-widgets'] = array(
+    'page callback' => 'pre_layout_drag_widgets',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_layout_manager.inc',
   );
 
   return $items;
@@ -286,7 +293,7 @@ function itg_layout_manager_block_view($delta = '') {
         $widgets_type = 'section_wise_order';
       }
       if (!empty($_GET['section']) && !empty($_GET['template_name'])) {
-        $data['widgets_list'] = display_section_widgets_list($sectiontpl, $template_nametpl, $widgets_type);
+        $data['widgets_list'] = display_section_widgets_list($_GET['section'], $_GET['template_name'], $widgets_type);
       }    
 
       $block['content'] = theme('layout_section_widgets_block', array('data' => $data));
@@ -339,13 +346,30 @@ function itg_layout_manager_block_view($delta = '') {
           if (function_exists('frontend_breadcrumb_display')) {
             $breadcrumb = frontend_breadcrumb_display($id, $entity_object);
           } 
+        } else {
+            if (function_exists('frontend_breadcrumb_display')) {
+              $breadcrumb = frontend_breadcrumb_display('', $entity_object);
+            }
         }
                
       } else if (arg(0) == 'taxonomy' && arg(1) == 'term' && arg(2)) {
-        $id = arg(2);
-        if (function_exists('frontend_breadcrumb_display')) {
-          $breadcrumb = frontend_breadcrumb_display($id);
-        }
+          $id = arg(2);
+          if (function_exists('frontend_breadcrumb_display')) {
+            $breadcrumb = frontend_breadcrumb_display($id);
+          }
+      } else {
+          $array_url = array('livetv' => 'Live TV',
+              'itg_active_polls' => 'Poll',
+              'anchors-list' => 'Anchors',
+              'blog-listing' => 'Blog',
+              'podcasts-listing' => 'Podcast',
+              'programmes' => 'Programmes');
+          if (function_exists('frontend_breadcrumb_display')) {
+            $arg0 = arg(0);
+            if (!empty($array_url[$arg0])) {
+              $breadcrumb = frontend_breadcrumb_display('', '', $array_url[$arg0]);
+            }
+          }
       }
 
       $block['content'] = theme('frontend_breadcrumb_display_block', array('data' => $breadcrumb));

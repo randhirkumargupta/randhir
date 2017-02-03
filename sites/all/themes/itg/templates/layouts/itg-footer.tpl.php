@@ -7,13 +7,14 @@ global $base_url;
             <?php print drupal_render($data['footer-top-menu']); ?>
         </div>
         
-        <div class="footer-social-link mhide">
+        <div class="footer-social-link">
             <ul>
                 <li><a href="#" title=""><i class="fa fa-facebook"></i></a></li>
                 <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
                 <li><a href="#" title=""><i class="fa fa-google-plus"></i></a></li>
                 <li><a href="#" title=""><i class="fa fa-rss"></i></a></li>                
                 <li><a href="javascript:void(0)" class="search-icon" title=""><i class="fa fa-search"></i></a></li>
+                <li class="footer-expand-icon"></li>
             </ul>
             <div class="globle-search">
                 <input class="search-text" placeholder="Type here" type="text" value="">
@@ -23,7 +24,7 @@ global $base_url;
     </div>
 </section>
 <section class="footer-toggle">
- <section class="footer-mid mhide">
+ <section class="footer-mid">
         <div class="container">
 <!--         <img src="<?php print base_path() ?>sites/all/themes/itg/images/header-ads.png" alt="ads">-->
         <?php
@@ -35,7 +36,7 @@ global $base_url;
  </section>
    <section class="footer-bottom">
        <div class="container">
-           <div class="row">
+           <div class="row multiple-items-footer">
                <div class="cell">
                    <h4>Publications:</h4>
                    <?php print drupal_render($data['publications_footer']); ?>
@@ -80,6 +81,28 @@ global $base_url;
     </section>
 </section>
 <div id="widget-ajex-loader" style="display: none">
-    <img class="widget-loader" align="center" src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itgadmin') . '/images/loader.svg'; ?>" alt="Loading..." />
+    <img class="widget-loader" src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itgadmin') . '/images/loader.svg'; ?>" alt="Loading..." />
 </div>
 <div id="iframe-display" style="display: none"></div>
+
+<!--animation emoji for hightlight-->
+<div id="smily">
+     <div class="face1 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'; ?>" alt="" /></div>    
+    <div class="face2 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'; ?>" alt="" /></div>    
+    <div class="face3 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'; ?>" alt="" /></div>    
+    <div class="face4 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'; ?>" alt="" /></div>       
+  </div>
+  <div id="smilysad">
+   <div class="face1 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'; ?>" alt="" /></div>
+    <div class="face2 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'; ?>" alt="" /></div>
+    <div class="face3 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'; ?>" alt="" /></div>
+    <div class="face4 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'; ?>" alt="" /></div>  
+  </div>
+  <div id="wgmf">
+    <div class="face1 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" /></div>
+    <div class="face2 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" /></div>
+    <div class="face3 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" /></div>
+    <div class="face4 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" /></div>
+  </div>
+<!--animation emoji for hightlight end-->
+

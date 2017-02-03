@@ -48,7 +48,11 @@ if (!empty($content)):
     $reporter_node = node_load($byline_id);
   }
   ?>
-  <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle; ?>">
+  <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle;
+                if (!empty($node->field_story_type[LANGUAGE_NONE])) {
+                  echo ' photo-story-section';
+                }
+              ?>">
       <div class='<?php print $classes ?>'>
           <?php //pr($node);   ?> 
           <div class="comment-mobile desktop-hide">
@@ -61,7 +65,7 @@ if (!empty($content)):
                       <?php print '<li>' . itg_sso_url('<i class="fa fa-bookmark"></i>', t('READ LATER')) . '</li>'; ?>
                     <?php endif; ?>
                   <?php endif; ?>
-                  <li class="mail-to-author"><a title ="Mail to author" href="mailto:support@indiatoday.in"><i class="fa fa-envelope"></i><?php print t('Mail to author'); ?></a></li>
+                  <li class="mail-to-author"><a title ="Mail to author" href="mailto:support@indiatoday.in"><i class="fa fa-envelope"></i><?php //print t('Mail to author'); ?></a></li>
                   <li><a href="#" title = "whatsapp"><i class="fa fa-whatsapp"></i></a></li>
                   <?php
                   if ($config_name == 'vukkul') {
@@ -70,7 +74,7 @@ if (!empty($content)):
                   <?php } if ($config_name == 'other') { ?> 
                     <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                   <?php } ?>
-                  <li><a href="#" title ="share" class="share-icon"><i class="fa fa-share-alt"></i></a>
+                  <li><a href="javascript:void(0)" title ="share" class="share-icon"><i class="fa fa-share-alt"></i></a>
               </ul>
               <ul class="social-share">
                   <li><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
@@ -89,7 +93,14 @@ if (!empty($content)):
             <h1><?php print $node->title . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
           <?php }
           else { ?>
-            <h1><?php print $node->title . $pipelinetext; ?></h1>
+            <h1><?php 
+            if(function_exists('itg_common_get_smiley_title')) {
+              print itg_common_get_smiley_title($node->nid , 0, 255) . $pipelinetext;
+            }
+            else {
+              print $node->title . $pipelinetext;
+            }
+            ?></h1>
           <?php } ?>
           <?php
           $associate_type = '';
@@ -279,7 +290,8 @@ if (!empty($content)):
                 </div>
 
   <?php } ?>
-
+              <!-- Check the story type whether it is a photo story or not-->
+               <?php if ((!empty($node->field_story_type) && $node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story') || (empty($node->field_story_type))) { ?>
               <div class="story-right <?php
   if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
     echo 'listicle-page';
@@ -287,7 +299,7 @@ if (!empty($content)):
   ?>">
                   <div class="story-associate-content">
                       <div id="videogallery-iframe">
-                          <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading">
+                          <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading" />
                       </div>
                       <?php
                       $clidk_class_slider = "";
@@ -335,8 +347,8 @@ if (!empty($content)):
                                 $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                                 $file_uri = file_create_url($story_image);
                                 print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">        
-                    <i class="fa fa-play-circle"></i>
-                    <i class="fa fa-camera"></i></span></a>';
+                                    <i class="fa fa-play-circle"></i>
+                                    <i class="fa fa-camera"></i></span></a>';
                                 if (!empty($getimagetags)) {
                                   foreach ($getimagetags as $key => $tagval) {
                                     $urltags = addhttp($tagval->tag_url);
@@ -344,10 +356,20 @@ if (!empty($content)):
                                   }
                                 }
                                 ?>
-                      <?php } ?>
+                              <?php } ?>
+                                <div class="stry-img-rating">
                       <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) { ?>
                                 <div class="photoby"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?></div>
-                      <?php } ?>                            
+                      <?php } ?>     
+                               
+                            <?php 
+                            // added technology rating field value for story technology
+                              if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) {
+                                $tech_rating = $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'];
+                                echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10';
+                              } 
+                            ?>
+                            </div>
                           </div>
   <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'])) { ?>    
                             <div class="image-alt"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?></div>
@@ -387,8 +409,8 @@ if (!empty($content)):
                                         $cast_ref_id = $node->field_mega_review_cast[LANGUAGE_NONE];
                                         $count = sizeof($cast_ref_id);
                                         for ($i = 0; $i < $count; $i++) {
-                                          $entity_obj = entity_load('node', array($cast_ref_id[$i]['value']));
-                                          $cast = $entity_obj[$cast_ref_id]->title;
+                                          $entity_obj = entity_load('node', array($cast_ref_id[$i]['target_id']));
+                                          $cast = $entity_obj[$cast_ref_id[$i]['target_id']]->title;
                                           print $cast;
                                           if ($i < ($count - 1)) {
                                             echo ', ';
@@ -473,7 +495,7 @@ if (!empty($content)):
                                 $expertDetailsImage = $base_url . '/sites/all/themes/itg/images/user-default-expert.jpg';
                               }
                             }
-                            $expertDetails .= '<div class="right-side col-md-4 col-sm-4 col-xs-4"><img src="' . $expertDetailsImage . '"></div></div>';
+                            $expertDetails .= '<div class="right-side col-md-4 col-sm-4 col-xs-4"><img src="' . $expertDetailsImage . '" alt="" /></div></div>';
                             if (!empty($node->field_story_expert_description)) {
                               $expertDetails .= '<h2>' . $node->field_story_expert_description['und'][0]['value'] . '</h2>';
                             }
@@ -487,12 +509,12 @@ if (!empty($content)):
                             }
                           }
                           $movie_html = itg_story_movie_image_plugin_data($node->nid);
-                          if (strpos($story_body, '[ITG:MOVIE-IMAGE]')) {
+                          if (strpos($story_body, '[ITG:TECH-PHOTOS]')) {
                             if (!empty($node->field_story_technology['und'])) {
-                              $story_body = str_replace('[ITG:MOVIE-IMAGE]', $movie_html, $story_body);
+                              $story_body = str_replace('[ITG:TECH-PHOTOS]', $movie_html, $story_body);
                             }
                             else {
-                              $story_body = str_replace('[ITG:MOVIE-IMAGE]', '', $story_body);
+                              $story_body = str_replace('[ITG:TECH-PHOTOS]', '', $story_body);
                             }
                           }
                           if ($node->field_story_template_guru[LANGUAGE_NONE][0]['value']) {
@@ -554,15 +576,36 @@ if (!empty($content)):
                         <div class="story-tech-chunk">
                 <?php if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
                               <span class="tech-rating">
-                  <?php print $node->field_story_technology_rating[LANGUAGE_NONE][0]['value']; ?>
+                  <?php echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10'; ?>
                               </span>
                 <?php } ?>
-                <?php print $node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value']; ?>
+                <?php print render($content['field_story_tech_review_chunk']); ?>
                         </div>
               <?php } ?>
                   </div>
               </div>
-
+              <?php } else { ?>
+              <div class="story-right <?php
+                if (!empty($node->field_story_type[LANGUAGE_NONE])) {
+                  echo 'photo-story';
+                }
+              ?>">
+              <?php 
+                if (!empty($node->field_photo_story)) {
+                  $output = itg_story_photo_story_html($node->nid);
+                  print $output;
+                }
+              ?>
+                  <!-- for photo story bottom slider, loop has been repeated again -->
+                  <?php 
+                if (!empty($node->field_photo_story)) {
+                  $html_output = itg_story_photo_story_bottom_html($node->nid);
+                  print $html_output;
+                }
+              ?>
+              </div>
+              <?php } ?>
+              <div class="clearfix"></div>
               <!-- condition for buzz  -->
 
               <?php
@@ -577,7 +620,7 @@ if (!empty($content)):
                   $file = file_load($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
                   $share_uri = $file->uri;
                   $share_image = file_create_url($share_uri);
-                  $img = '<img title="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '">';
+                  $img = '<img title="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '" alt="" />';
                   if (!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
                     $buzz_output.= '<h1><span>' . $buzz . '</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
                     if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
@@ -657,9 +700,9 @@ if (!empty($content)):
                   <div class="social-list">
                       <ul>
                                       <?php if ($user->uid > 0): ?>
-                            <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/personalization/my-content/<?php print $node->type; ?>"><i class="fa fa-share"></i></a> <span><a title = "Submit Your Story" class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/personalization/my-content/<?php print $node->type; ?>">Submit Your Story</a></span></li>
+                            <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/personalization/my-content/<?php print $node->type; ?>"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
                           <?php else: ?>
-                            <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $node->type; ?>"><i class="fa fa-share"></i></a> <span><a title = "Submit Your Story" class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $node->type; ?>">Submit Your Story</a></span></li>
+                            <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $node->type; ?>"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
                           <?php endif; ?>
                           <li class="mhide"><div id="fb-root"></div><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
                           <li class="mhide"><a title = "share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>

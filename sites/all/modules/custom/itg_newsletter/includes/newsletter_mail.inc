@@ -12,17 +12,45 @@
  * @return bool
  */
 function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
+    
+    
+   // Mail Content Frequency
+   $newsfrequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
+    if(!empty($newsfrequency) && ($newsfrequency == 'daily')){
+        $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
+        $totaltimestamp = strtotime(date('D-m-Y ') . $gettime . ':00');
+        $previoustimestamp = strtotime(date('D-m-Y ') . $gettime . ':00'. ' -1 day');
+    } else if(!empty($newsfrequency) && ($newsfrequency == 'weekly')){
+        $getweekday = $node->field_newsl_day[LANGUAGE_NONE][0]['value'];
+        $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
+        $currentday = date('l');
+        if($getweekday == $currentday){
+          $totaltimestamp = strtotime(date('D-m-Y ') . $gettime . ':00');
+          $previoustimestamp = strtotime(date('D-m-Y ') . $gettime . ':00'. ' -7 days');
+        }
+    } elseif(!empty($newsfrequency) && ($newsfrequency == 'monthly')){
+        $getmonthdate = $node->field_newsl_date[LANGUAGE_NONE][0]['value'];
+        $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
+        $currentdate = date('j');
+        if($getmonthdate == $currentdate){
+          $totaltimestamp = strtotime(date('D-m-Y ') . $gettime . ':00');
+          $previoustimestamp = strtotime(date('D-m-Y ') . $gettime . ':00'. ' -1 month');
+        }
+    }
+
+  // Mail Content Section
   if (!empty($node->field_story_category[LANGUAGE_NONE])) {
     foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $values) {
       $cat_array[] = $values['tid'];
     }
   }
+  
   $template_node = node_load($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
-
+  $education_tid = !empty(variable_get('itg_newsletter_education_id'))? variable_get('itg_newsletter_education_id') : NEWSLETTER_EDUCATION_TID;
   // TODO: Define globally
-  if (in_array(NEWSLETTER_EDUCATION_TID, $cat_array))
+  if (in_array($education_tid, $cat_array))
   {
-    $subscriberlist = itg_newslatter_get_subscribe_page_users_email(515);
+    $subscriberlist = itg_newslatter_get_subscribe_page_users_email($education_tid);
   }
   $user_email_arr = itg_newslatter_get_subscribe_users_email();
   $user_email_str = implode(',', $user_email_arr);
@@ -33,7 +61,7 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
   // Get Mail content
   if ($type == 'stories') {
     if (!empty($cat_array)) {
-      $mail_content = itg_get_newsletter_mail_content_stories($template_node, 'section', $cat_array);
+      $mail_content = itg_get_newsletter_mail_content_stories($template_node, 'section', $cat_array, $totaltimestamp, $previoustimestamp);
     }
     else {
       $mail_content = itg_get_newsletter_mail_content_stories($template_node);
@@ -146,7 +174,7 @@ function itg_get_newsletter_mail_content($node, $template_node) {
  * @param object $template_node
  * @return string
  */
-function itg_get_newsletter_mail_content_stories($template_node, $news_content = NULL, $section = array()) {
+function itg_get_newsletter_mail_content_stories($template_node, $news_content = NULL, $section = array(), $totaltime, $previoustime) {
   global $base_url;
 
   $banner = $base_url . str_replace('public://', '/sites/default/files/', $template_node->field_newst_banner[LANGUAGE_NONE][0]['uri']);
@@ -167,7 +195,8 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
         <td colspan="2" style="padding: 10px 20px;">
           <table cellspacing="0" cellpadding="0" style="width: 100%;">';
   if ($news_content == 'section') {
-    $story_nodes = itg_newsletter_get_section_stories($section);
+
+    $story_nodes = itg_newsletter_get_section_stories($section, $totaltime, $previoustime);
   }
   else {
     $story_nodes = itg_newsletter_get_top_stories();

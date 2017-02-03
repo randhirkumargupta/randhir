@@ -27,7 +27,17 @@ global $base_url;
                 <?php endif; ?>
 
             </div>
-            <div class="detail"><h3><?php print $row['title']; ?></h3>
+            <div class="detail">
+              <h3>
+                <?php 
+                if(function_exists('itg_common_get_smiley_title')) {
+                  print itg_common_get_smiley_title($row['nid'] , 0, 127);
+                }
+                else {
+                  print $row['title'];
+                }
+                ?>
+              </h3>
                 <?php if (strtolower($row['type']) == 'story'): ?>
                     <p><?php print $row['field_story_kicker_text']; ?></p>
                 <?php elseif ($row['type'] == 'photogallery'): ?>

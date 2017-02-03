@@ -7,7 +7,7 @@
             <div class="dm-pic">
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $node_data['nid']) ?>">
                 <?php $file_uri = file_create_url($node_data['si_file_uri']); ?>
-                <img src="<?php print $file_uri; ?>" />
+                <img src="<?php print $file_uri; ?>" alt="" />
               </a>
             </div>
             <?php
@@ -16,7 +16,7 @@
             ?>
             <div class="dm-pic">
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $node_data['nid']) ?>">
-                <img width="170" height="127" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg" />
+                <img width="170" height="127" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg" alt="" />
               </a>
             </div>
           <?php } ?>

@@ -1,0 +1,9 @@
+name = feature for image styles
+core = 7.x
+package = Features
+version = 7.x-1.3
+dependencies[] = image
+features[features_api][] = api:2
+features[image][] = photo_story_771x432
+features[image][] = photo_story_small_88x66
+project path = sites/all/modules/features
