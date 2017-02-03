@@ -88,19 +88,19 @@
 
 
             // Add placeholder to scheduler fields
-            var date_holder = moment().format('DD/MM/YYYY');
-            var time_holder = moment().format('H:mm');
-            jQuery('input[name="img_schedule_time[date]"]').attr('placeholder', date_holder);
-            jQuery('input[name="img_schedule_time[time]"]').attr('placeholder', time_holder);
-
-            jQuery('input[name="video_schedule_time[date]"]').attr('placeholder', date_holder);
-            jQuery('input[name="video_schedule_time[time]"]').attr('placeholder', time_holder);
-
-            jQuery('input[name="tw_img_schedule_time[date]"]').attr('placeholder', date_holder);
-            jQuery('input[name="tw_img_schedule_time[time]"]').attr('placeholder', time_holder);
-
-            jQuery('input[name="tw_vid_schedule_time[date]"]').attr('placeholder', date_holder);
-            jQuery('input[name="tw_vid_schedule_time[time]"]').attr('placeholder', time_holder);
+//            var date_holder = moment().format('DD/MM/YYYY');
+//            var time_holder = moment().format('H:mm');
+//            jQuery('input[name="img_schedule_time[date]"]').attr('placeholder', date_holder);
+//            jQuery('input[name="img_schedule_time[time]"]').attr('placeholder', time_holder);
+//
+//            jQuery('input[name="video_schedule_time[date]"]').attr('placeholder', date_holder);
+//            jQuery('input[name="video_schedule_time[time]"]').attr('placeholder', time_holder);
+//
+//            jQuery('input[name="tw_img_schedule_time[date]"]').attr('placeholder', date_holder);
+//            jQuery('input[name="tw_img_schedule_time[time]"]').attr('placeholder', time_holder);
+//
+//            jQuery('input[name="tw_vid_schedule_time[date]"]').attr('placeholder', date_holder);
+//            jQuery('input[name="tw_vid_schedule_time[time]"]').attr('placeholder', time_holder);
 
             // Twitter field validation.
             $("#itg-social-media-form").validate({

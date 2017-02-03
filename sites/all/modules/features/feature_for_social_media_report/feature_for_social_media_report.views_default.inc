@@ -360,7 +360,7 @@ function feature_for_social_media_report_views_default_views() {
   $handler->display->display_options['fields']['count_fb_like']['id'] = 'count_fb_like';
   $handler->display->display_options['fields']['count_fb_like']['table'] = 'itg_social_media_logs';
   $handler->display->display_options['fields']['count_fb_like']['field'] = 'count_fb_like';
-  $handler->display->display_options['fields']['count_fb_like']['label'] = 'FB Like';
+  $handler->display->display_options['fields']['count_fb_like']['label'] = 'FB Likes';
   /* Field: Social Media Logs: Count facebook Share */
   $handler->display->display_options['fields']['count_fb_share']['id'] = 'count_fb_share';
   $handler->display->display_options['fields']['count_fb_share']['table'] = 'itg_social_media_logs';
@@ -425,7 +425,7 @@ function feature_for_social_media_report_views_default_views() {
   $handler->display->display_options['fields']['count_fb_like']['id'] = 'count_fb_like';
   $handler->display->display_options['fields']['count_fb_like']['table'] = 'itg_social_media_logs';
   $handler->display->display_options['fields']['count_fb_like']['field'] = 'count_fb_like';
-  $handler->display->display_options['fields']['count_fb_like']['label'] = 'FB Like';
+  $handler->display->display_options['fields']['count_fb_like']['label'] = 'FB Likes';
   /* Field: Social Media Logs: Count facebook Share */
   $handler->display->display_options['fields']['count_fb_share']['id'] = 'count_fb_share';
   $handler->display->display_options['fields']['count_fb_share']['table'] = 'itg_social_media_logs';
@@ -494,7 +494,7 @@ function feature_for_social_media_report_views_default_views() {
   $handler->display->display_options['fields']['count_fb_like']['id'] = 'count_fb_like';
   $handler->display->display_options['fields']['count_fb_like']['table'] = 'itg_social_media_logs';
   $handler->display->display_options['fields']['count_fb_like']['field'] = 'count_fb_like';
-  $handler->display->display_options['fields']['count_fb_like']['label'] = 'FB Like';
+  $handler->display->display_options['fields']['count_fb_like']['label'] = 'FB Likes';
   /* Field: Social Media Logs: Count facebook Share */
   $handler->display->display_options['fields']['count_fb_share']['id'] = 'count_fb_share';
   $handler->display->display_options['fields']['count_fb_share']['table'] = 'itg_social_media_logs';
