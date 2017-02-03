@@ -210,6 +210,7 @@ function itg_social_media_count_log($share_on = null, $nid) {
     $query = db_select('itg_social_media_logs', 'isml')
             ->fields('isml')
             ->condition('nid', $nid, '=')
+             ->condition('status', 1, '=')
             ->condition('social_media', '%' . db_like($share_on) . '%', 'LIKE');
 
 
@@ -227,6 +228,7 @@ function itg_social_media_get_data_by_nid($share_on = null, $nid) {
     $query = db_select('itg_social_media_logs', 'isml')
             ->fields('isml')
             ->condition('nid', $nid, '=')
+             ->condition('status', 1, '=')
             ->condition('social_media', '%' . db_like($share_on) . '%', 'LIKE');
 
 
@@ -243,6 +245,7 @@ function itg_social_media_get_data_by_nid($share_on = null, $nid) {
 function itg_social_media_check_node_exist($nid) {
     $query = db_select('itg_social_media_logs', 'isml')
             ->fields('isml')
+             ->condition('status', 1, '=')
             ->condition('nid', $nid, '=');
 
     $result = $query->execute()->fetchall();
@@ -479,7 +482,7 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
         $graph_node_res = $response->getGraphNode();
     } catch (Facebook\Exceptions\FacebookResponseException $e) {
         // When Graph returns an error
-        drupal_set_message(t('Graph returned an error: @egetMessage', array('@egetMessage' => $e->getMessage())), 'error');
+        drupal_set_message(t('Content not promoted on facebook error: @egetMessage', array('@egetMessage' => $e->getMessage())), 'error');
         drupal_goto('/browse-content');
     } catch (Facebook\Exceptions\FacebookSDKException $e) {
         // When validation fails or other local issues
@@ -589,6 +592,7 @@ function itg_social_media_twitter_promote_by_nid($nid) {
     $query = db_select('itg_social_media_logs', 'isml')
             ->fields('isml')
             ->condition('nid', $nid, '=')
+             ->condition('status', 1, '=')
             ->condition('social_media', '%' . db_like('Twitter') . '%', 'LIKE');
 
 
@@ -648,6 +652,7 @@ function itg_social_media_form_submit($form, &$form_state) {
         // Twitter image
         if ($form_state['values']['itg_twitter_img'] > 0 && $form_state['values']['itg_twitter_condition'] == 0) {
             $stime = $form_state['values']['tw_img_schedule_time'] != NULL ? strtotime($form_state['values']['tw_img_schedule_time']) : NULL;
+          
             $desc = $form_state['values']['itg_twitter_narrative'];
             $fid = $form_state['values']['itg_twitter_img'];
             $node->field_story_tweet['und'][0]['value'] = $form_state['values']['itg_twitter_narrative'];
@@ -671,6 +676,7 @@ function itg_social_media_form_submit($form, &$form_state) {
                 'description' => ''
             );
             $node->field_story_tweet['und'][0]['value'] = $desc;
+            
             if ($stime != NULL) {
                 itg_social_media_save_scheduled_post($node, 'Twitter Video', $stime);
             }
