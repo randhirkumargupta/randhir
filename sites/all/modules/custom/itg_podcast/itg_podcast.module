@@ -426,6 +426,7 @@ function itg_podcast_node_presave($node) {
       $meta = $getID3->analyze($file_url);
       $duration = $meta['playtime_string'];
       // Handel field collection.
+      // Add value in entity fieldcollection too.
       $node->field_podcast_audio_upload['und'][$audio_key]['field_podcast_audio_length']['und'][0]['value'] = $duration;
       $node->field_podcast_audio_upload['und'][$audio_key]['field_podcast_audio_length']['und'][0]['value']['#default_value'] = $duration;
       $node->field_podcast_audio_upload['und'][$audio_key]['field_podcast_audio_length']['und'][0]['value']['#value'] = $duration;
