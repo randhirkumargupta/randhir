@@ -122,9 +122,9 @@ function itg_workflow_preview_log_filter_form($form, &$form_state) {
   $form['submit'] = array(
     '#value' => 'Apply',
     '#type' => 'submit',
-    '#attributes' => array('class' => array('layout-apply')),
+    '#attributes' => array('class' => array(' layout-apply',' btn-small'.' form-submit')),
     '#prefix' => '<div class = "layout-filter-btn">',
-    '#suffix' => '<a class="layout-reset btn btn-submit" href="' . base_path() . 'preview-content-logs-report">Reset</a></div>',
+    '#suffix' => '<a class="layout-reset btn-small btn-reset" href="' . base_path() . 'preview-content-logs-report">Reset</a></div>',
   );
 
   return $form;
