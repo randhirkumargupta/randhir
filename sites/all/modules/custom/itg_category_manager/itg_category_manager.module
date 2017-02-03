@@ -1318,6 +1318,9 @@ function itg_category_manager_disable_forcefully() {
             ->condition('tid', $current_term)
             ->execute();
         drupal_set_message(t('Category has been disabled succesfully and all contents have been mapped with parent category.'), 'status');
+        if(function_exists('_delete_term_from_menu_manager')) {
+           _delete_term_from_menu_manager($current_term);
+        }
       }
       else {
         db_update('itg_category_manager')
@@ -1325,6 +1328,9 @@ function itg_category_manager_disable_forcefully() {
             ->condition('tid', $current_term)
             ->execute();
         drupal_set_message(t('Category has been disabled succesfully.'), 'status');
+        if(function_exists('_delete_term_from_menu_manager')) {
+           _delete_term_from_menu_manager($current_term);
+        }
       }
     }
     else {
@@ -1343,6 +1349,9 @@ function itg_category_manager_disable_forcefully() {
             ->condition('tid', $current_term)
             ->execute();
         drupal_set_message(t('Section has been disabled succesfully.'), 'status');
+        if(function_exists('_delete_term_from_menu_manager')) {
+           _delete_term_from_menu_manager($current_term);
+        }
       }
     }
   }
@@ -1464,6 +1473,9 @@ function itg_category_manager_disable_manually_form_submit($form, &$form_state) 
           ->condition('tid', $current_term)
           ->execute();
       drupal_set_message(t('Category has been disabled.'), 'status');
+      if(function_exists('_delete_term_from_menu_manager')) {
+           _delete_term_from_menu_manager($current_term);
+        }
     }
   }
   drupal_goto('category-manager-listing');
