@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ * Install file for preview log.
+ */
+
+/**
+ * Implementation of hook_schema
+ * 
+ * @access public
+ * @return array
+ */
+function itg_miscellaneous_schema() {
+  $schema = array();
+  $schema['itg_workflow_preview_log'] = array(
+    'description' => 'Preview logs',
+    'fields' => array(
+      'tid' => array(
+        'description' => 'parimary key',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'node id',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'preview_id' => array(
+        'description' => 'Preview id',
+        'type' => 'varchar',
+        'length' => '100',
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'user id',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('tid'),
+  );
+  return $schema;
+}

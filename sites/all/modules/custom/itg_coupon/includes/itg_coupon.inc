@@ -102,7 +102,7 @@ function third_party_coupon_form_submit($form, &$form_state) {
 
   // Set the batch operation.
   batch_set($batch);
-  batch_process('upload-third-party-coupon'); // The path to redirect to when done.
+  batch_process('manage-coupons'); // The path to redirect to when done.
 }
 
 /**
@@ -113,32 +113,37 @@ function third_party_coupon_form_submit($form, &$form_state) {
 function op_third_party_coupons($csvdata, &$context) {
   global $user;
   if (isset($csvdata) && !empty($csvdata)) {
+    $itg_coupon_check_coupon = itg_coupon_check_coupon($csvdata[0]);
+    if (isset($itg_coupon_check_coupon) && !empty($itg_coupon_check_coupon)) {
+      drupal_set_message(t('OOPS! Coupon "'.$csvdata[0].'" is already exist, please try with another name or click ' . l('here', 'node/' . $itg_coupon_check_coupon . '/edit') . ' to edit existing'),'error');
+    } else {
+      $node = new stdClass();
+      $node->type = 'coupon';
+      $node->language = LANGUAGE_NONE;
+      node_object_prepare($node);
 
-    $node = new stdClass();
-    $node->type = 'coupon';
-    $node->language = LANGUAGE_NONE;
-    node_object_prepare($node);
+      $node->title = isset($csvdata[0]) ? $csvdata[0] : "";
 
-    $node->title = isset($csvdata[0]) ? $csvdata[0] : "";
+      $node->field_coupon_type[LANGUAGE_NONE][0]['value'] = 'upload_third_party_coupon';
+      $node->field_coupon_discount_type[LANGUAGE_NONE][0]['value'] = isset($csvdata[1]) ? $csvdata[1] : "";
+      $node->field_coupon_discounted_value[LANGUAGE_NONE][0]['value'] = isset($csvdata[2]) ? $csvdata[2] : "";
 
-    $node->field_coupon_type[LANGUAGE_NONE][0]['value'] = 'upload_third_party_coupon';
-    $node->field_coupon_discount_type[LANGUAGE_NONE][0]['value'] = isset($csvdata[1]) ? $csvdata[1] : "";
-    $node->field_coupon_discounted_value[LANGUAGE_NONE][0]['value'] = isset($csvdata[2]) ? $csvdata[2] : "";
+      if (isset($csvdata[3]) && !empty($csvdata[3]) && $csvdata[3] == 1) {
+        $node->field_coupon_allow_min_cart_amt[LANGUAGE_NONE][0]['value'] = isset($csvdata[3]) ? $csvdata[3] : "";
+        $node->field_coupon_minimum_cart_amount[LANGUAGE_NONE][0]['value'] = isset($csvdata[4]) ? $csvdata[4] : "";
+      }
 
-    if (isset($csvdata[3]) && !empty($csvdata[3]) && $csvdata[3] == 1) {
-      $node->field_coupon_allow_min_cart_amt[LANGUAGE_NONE][0]['value'] = isset($csvdata[3]) ? $csvdata[3] : "";
-      $node->field_coupon_minimum_cart_amount[LANGUAGE_NONE][0]['value'] = isset($csvdata[4]) ? $csvdata[4] : "";
-    }
-
-    $node->field_coupon_third_party_coupon[LANGUAGE_NONE][0]['value'] = isset($csvdata[5]) ? $csvdata[5] : "";
-    $node->field_coupon_uses_limit[LANGUAGE_NONE][0]['value'] = isset($csvdata[6]) ? (int) $csvdata[6] : "";
-    $node->field_coupon_status[LANGUAGE_NONE][0]['value'] = 'Active';
-    $node->status = 1;
-    $node->uid = $user->uid;
-    try {
-      node_save($node);
-    } catch (Exception $e) {
-      drupal_set_message("Unable to save coupon for " . $csvdata[0]);
+      $node->field_coupon_third_party_coupon[LANGUAGE_NONE][0]['value'] = isset($csvdata[5]) ? $csvdata[5] : "";
+      $node->field_coupon_uses_limit[LANGUAGE_NONE][0]['value'] = isset($csvdata[6]) ? (int) $csvdata[6] : "";
+      $node->field_coupon_status[LANGUAGE_NONE][0]['value'] = 'Active';
+      $node->status = 1;
+      $node->uid = $user->uid;
+      try {
+        node_save($node);
+        drupal_set_message(t('Coupon created successfully for "'.$csvdata[0].'"'));
+      } catch (Exception $e) {
+        drupal_set_message(t("Unable to save coupon for " . $csvdata[0]));
+      }
     }
   }
 }
