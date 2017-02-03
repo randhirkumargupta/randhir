@@ -682,7 +682,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'podcast',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Tags',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',

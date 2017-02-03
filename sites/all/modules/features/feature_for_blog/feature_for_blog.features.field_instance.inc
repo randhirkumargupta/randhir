@@ -285,7 +285,7 @@ function feature_for_blog_field_default_field_instances() {
     'label' => 'Image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -293,7 +293,7 @@ function feature_for_blog_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -306,6 +306,7 @@ function feature_for_blog_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
