@@ -547,7 +547,7 @@ function itg_social_media_activity($nid) {
 
         $like = $like + $result_d->fb_likes;
         $comment = $comment + $result_d->fb_comment;
-        $share = $comment + $result_d->fb_shares;
+        $share = $share + $result_d->fb_shares;
     }
     $twitter_result = itg_social_media_twitter_promote_by_nid($nid);
     if (!empty($twitter_result)) {

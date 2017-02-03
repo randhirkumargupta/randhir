@@ -432,9 +432,9 @@ function itgadmin_preprocess_page(&$vars) {
     $vars['theme_hook_suggestions'][] = 'page__event_registration';
   }
 
-//  if ((isset($vars['node']->type) && $vars['node']->type == 'event_backend')) {
-//    $vars['theme_hook_suggestions'][] = 'page__event_domain';
-//  }
+  if (arg(0) == 'event-registration-config' && is_numeric(arg(1))) {
+    $vars['theme_hook_suggestions'][] = 'page__registration_config';
+  }
 }
 
 /**

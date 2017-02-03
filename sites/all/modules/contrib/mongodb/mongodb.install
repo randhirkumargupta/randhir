@@ -8,7 +8,8 @@ function mongodb_requirements($phase) {
   // Ensure translations don't break at install time
   $t = get_t();
 
-  if (!extension_loaded('mongo')) {
+// Patched by Mahesh Salaria <mahesh.salaria@kelltontech.com>
+  if (!extension_loaded('mongodb')) {
     $requirements['mongodb'] = array(
       'title' => $t('Mongodb'),
       'value' => $t('Not found'),

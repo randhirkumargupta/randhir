@@ -3522,7 +3522,7 @@ body{
   }
   section.sidebar{
     border: none;
-    #block-itg-ads-ad-right-sidebar-1 {
+    .block-itg-ads {
       border: 1px solid #ddd;
       padding: 30px;
       width: 100%;
@@ -3909,10 +3909,12 @@ body{
   }
 }
 .page-cart, .page-order{
-  #block-itg-ads-ad-right-sidebar-1{
-    border: 1px solid #dddddd;
-    margin-top: 30px;
-    width: 100%;
+  section.sidebar{
+    .block-itg-ads{
+      @include display-inline;
+      padding: 30px 34px;
+      border-bottom: 1px solid $border-color;   
+    }
   }
 }
 .page-order{
