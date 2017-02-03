@@ -690,7 +690,7 @@ function itg_videogallery_after_build($form, &$form_state) {
 
     global $user, $base_url;
    
-    if($form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value']=='migrated') {
+    if($form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] != 'migrated') {
         foreach ($form['field_video_upload']['und'] as $delta => $field) {
         if (is_numeric($delta)) {
 
