@@ -10129,3 +10129,55 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     .layout-apply, .layout-reset{margin-top: 38px;}
   }
 }
+[id*="field-photo-story-values"]{
+  thead{@extend .hide;}
+  tbody{
+    overflow: visible;
+    padding: 10px;
+    tr{
+      display: block;
+      td{
+        border: none;
+        margin-bottom: 10px;
+        @extend .fleft;
+        @extend .full;
+        background-color: #f2f2f2;
+        .form-type-managed-file{
+          padding: 0 10px;
+          > label{
+            width: 200px;
+            & + div{
+              padding-left: 200px;
+            }
+          }
+          .image-widget-data{
+            input[type="file"]{
+              width: 240px; 
+              overflow: hidden; 
+              text-overflow: ellipsis; 
+              margin-top: 2px;
+              & + .form-submit{
+                @extend .btn-small;
+              }
+            }
+          }
+        }
+        .form-type-textarea{
+          padding: 0 10px;
+          > label{
+            width: 200px;
+            & + div{
+              padding-left: 200px;
+            }
+          }
+        }
+        > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+          margin-left: 210px;
+        }
+      }
+    }
+  }
+  & + .clearfix .field-add-more-submit{
+    margin: 0 0 10px 220px !important;
+  }
+}

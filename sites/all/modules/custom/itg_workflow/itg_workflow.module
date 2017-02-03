@@ -240,6 +240,7 @@ function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
     case 'blog_node_form':
     case 'podcast_node_form':
     case 'videogallery_node_form':
+      $form['field_preview_unique_id']['#attributes']['class'][] = 'hide';
       module_load_include('inc', 'itg_workflow', 'includes/itg_workflow_preview_log');
       $preview_id = _get_unique_id_for_node_field($form['#node']->nid);
       if ($preview_id != FALSE) {

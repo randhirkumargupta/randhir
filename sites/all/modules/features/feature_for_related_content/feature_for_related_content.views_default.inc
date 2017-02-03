@@ -178,11 +178,6 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['fields']['label']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['label']['alter']['path'] = '[url]';
   $handler->display->display_options['fields']['label']['alter']['target'] = '_blank';
-  /* Field: Apache Solr: sm_field_story_kicker_text */
-  $handler->display->display_options['fields']['sm_field_story_kicker_text']['id'] = 'sm_field_story_kicker_text';
-  $handler->display->display_options['fields']['sm_field_story_kicker_text']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['fields']['sm_field_story_kicker_text']['field'] = 'sm_field_story_kicker_text';
-  $handler->display->display_options['fields']['sm_field_story_kicker_text']['label'] = 'Kicker text';
   /* Field: Apache Solr: bundle_name */
   $handler->display->display_options['fields']['bundle_name']['id'] = 'bundle_name';
   $handler->display->display_options['fields']['bundle_name']['table'] = 'apachesolr__solr';
@@ -227,11 +222,6 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['fields']['tm_vid_1_names']['field'] = 'tm_vid_1_names';
   $handler->display->display_options['fields']['tm_vid_1_names']['label'] = 'Tag name';
   $handler->display->display_options['fields']['tm_vid_1_names']['exclude'] = TRUE;
-  /* Field: Apache Solr: sm_vid_Tags */
-  $handler->display->display_options['fields']['sm_vid_Tags']['id'] = 'sm_vid_Tags';
-  $handler->display->display_options['fields']['sm_vid_Tags']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['fields']['sm_vid_Tags']['field'] = 'sm_vid_Tags';
-  $handler->display->display_options['fields']['sm_vid_Tags']['label'] = 'Tags';
   /* Field: Apache Solr: bs_status */
   $handler->display->display_options['fields']['bs_status']['id'] = 'bs_status';
   $handler->display->display_options['fields']['bs_status']['table'] = 'apachesolr__solr';
