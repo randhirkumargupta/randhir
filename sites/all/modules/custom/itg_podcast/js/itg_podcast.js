@@ -17,7 +17,7 @@
                 $('#podcast-node-form').ajaxComplete(function(event, request, settings) {  
                     if (jQuery('input[name="files[field_podcast_audio_upload_und_0_field_podcast_upload_audio_file_und_0]"]').val() == 0) {
                         jQuery('.field-multiple-table tbody tr:first .cancel').mousedown();
-                        jQuery( this ).off( event );
+                        jQuery( this ).off( event );                      
                     }
 
                 });
