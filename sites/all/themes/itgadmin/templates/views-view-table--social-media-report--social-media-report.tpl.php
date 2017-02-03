@@ -92,7 +92,7 @@
     </script>
 <div id="piechart" style="width: 900px; height: 500px;"></div>
 
-     <input type="button" value="Print Div Contents" id="btnPrint" />
+     <input type="button" value="PDF" id="btnPrint" />
      <style>@media print {
   
   #btnPrint{
