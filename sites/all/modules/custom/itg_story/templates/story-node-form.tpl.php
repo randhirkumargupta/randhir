@@ -3,6 +3,7 @@
         <div id="BasicDetails" class="itg-form-section-wrapper">
             <h2 class="story-title active"><?php print t('Quick File'); ?></h2>
             <div class="itg-form-section">
+                <?php print drupal_render($form['field_story_type']); ?>
                 <?php print drupal_render($form['field_story_magazine_story_issue']); ?>
                 <?php print drupal_render($form['field_story_select_magazine']); ?>
                 <?php print drupal_render($form['field_story_select_supplement']); ?>
@@ -110,7 +111,6 @@
         <div id="StoryPhoto" class="itg-form-section-wrapper">
             <h2 class="story-title"><?php print t('Photo Story'); ?></h2> 
             <div class="itg-form-section hide">
-              <?php print drupal_render($form['field_story_type']); ?>
               <?php print drupal_render($form['field_photo_story']); ?>
             </div>
         </div>
