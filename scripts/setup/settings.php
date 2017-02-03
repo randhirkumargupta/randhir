@@ -241,7 +241,7 @@ $databases['default']['autoslave'] = array(
 );
 
 // Use locking that supports force master
-$conf['lock_inc'] = 'sites/all/modules/autoslave/lock.inc';
+$conf['lock_inc'] = 'sites/all/modules/contrib/autoslave/lock.inc';
 
 // Workaround for Drush (Drush doesn't support non-pdo database drivers).
 // Workaround for update.php (similar problem as Drush).
