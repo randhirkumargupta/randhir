@@ -99,22 +99,17 @@ function feature_for_reporter_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_reporter_movie_name',
-    'label' => 'Movie name',
+    'label' => 'Movie Name',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
+      'active' => 0,
       'module' => 'taxonomy',
       'settings' => array(
-        'autocomplete_deluxe_path' => 'autocomplete_deluxe/taxonomy',
         'autocomplete_path' => 'taxonomy/autocomplete',
-        'delimiter' => '',
-        'limit' => 10,
-        'min_length' => 0,
-        'not_found_message' => 'The term \'@term\' will be added.',
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
@@ -147,7 +142,7 @@ function feature_for_reporter_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_reporter_movie_year',
-    'label' => 'Movie year',
+    'label' => 'Movie Year',
     'required' => 0,
     'settings' => array(
       'default_value' => 'now',
@@ -1016,7 +1011,8 @@ function feature_for_reporter_field_default_field_instances() {
   t('Email id');
   t('Facebook id');
   t('Facebook page');
-  t('Movie name');
+  t('Movie Name');
+  t('Movie Year');
   t('Movie year');
   t('Occupation');
   t('Party Name');
