@@ -125,17 +125,13 @@
                 //var logotxt = $('.container.header-logo').html();
                 $('.container.header-logo').prependTo('.itg-logo-container');
                 $('.search-icon').click(function () {
-                    $(this).parents('div').find('.globle-search').css('width', '255px');
+                    $(this).parents('div').find('.globle-search').css('width', '255px').find('.search-text').focus();
+                    
                 });                
-                $(document).on('click', function () {
+                $('.globle-search').on('blur', '.search-text',  function () {
                     $('.globle-search').css('width', '0px');
                 });
-                $(document).on('touchstart', function () {
-                    $('.globle-search').css('width', '0px');
-                });
-                $('.search-icon, .globle-search').click(function (e) {
-                    e.stopPropagation();
-                });
+                
                 
                 $('#block-itg-layout-manager-header-block .menu-login .user-menu').hover(function(){                    
                     $('#newlist').hide();
