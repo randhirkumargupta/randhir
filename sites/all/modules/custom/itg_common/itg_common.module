@@ -369,9 +369,13 @@ function itg_common_node_presave($node) {
       }
         
   }
-  if($node->type == 'photogallery' || $node->type == 'story' || $node->type == 'videogallery'){
-      return __itg_custompath_load($node);
-  }
+  if(
+    $node->type == 'photogallery' || 
+    $node->type == 'story' || 
+    $node->type == 'videogallery')
+    {
+        return __itg_custompath_load($node);
+    }
 }
 
 /**
