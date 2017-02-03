@@ -54,7 +54,12 @@ function itg_users_menu() {
  * Implements hook_form_alter().
  */
 function itg_users_form_alter(&$form, &$form_state, $form_id) {  
-  global $user;
+  global $user, $base_url;
+  //code for multidomain
+  if ($form_id == 'user_login' && $base_url == BACKEND_URL) {    
+    $form['#validate'][] = 'itg_users_backend_validate';
+  }
+  
   if ($form_id == 'user_register_form' || $form_id == 'user_profile_form') {
     // hide subscribe checkbox from user page
      if(!in_array(FRONT_USER, $user->roles)) {
@@ -785,4 +790,19 @@ function itg_users_cronapi($op, $job = NULL) {
   );
 
   return $items;
+}
+
+/**
+ * user validation for backend
+ * @param array $form
+ * @param array $form_state
+ * 
+ */
+function itg_users_backend_validate(&$form, &$form_state) {
+  $user_info = user_load_by_name($form_state['values']['name']);
+ 
+  if (array_key_exists(FRONT_USER, $user_info->roles)) {
+    form_set_error(t('User dose not exit.'));
+  }
+ 
 }
