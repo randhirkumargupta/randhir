@@ -59,6 +59,7 @@ features[field_instance][] = node-photogallery-field_itg_common_by_line_name
 features[field_instance][] = node-photogallery-field_itg_common_by_line_twitter
 features[field_instance][] = node-photogallery-field_people_tag
 features[field_instance][] = node-photogallery-field_photo_by
+features[field_instance][] = node-photogallery-field_preview_unique_id
 features[field_instance][] = node-photogallery-field_primary_category
 features[field_instance][] = node-photogallery-field_story_archive
 features[field_instance][] = node-photogallery-field_story_category

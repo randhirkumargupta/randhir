@@ -12138,6 +12138,9 @@ h1.about-us-heading + div p {
   padding: 15px 0;
   border: 1px solid #212121;
 }
+#block-itg-widget-podcast-header .podcast-header-container .podcast-header-bottom .other-list {
+  padding: 0 20px;
+}
 #block-itg-widget-podcast-header .podcast-header-container .podcast-header-bottom .other-list img {
   padding: 0 7px;
 }
@@ -12377,3 +12380,7 @@ span.smilies-title {
 }
 
 /*css end for emoji*/
+.front-end-breadcrumb {
+  position: relative;
+  z-index: 9999;
+}

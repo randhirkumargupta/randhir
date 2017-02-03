@@ -98,6 +98,12 @@ function feature_for_podcast_strongarm() {
         'path' => array(
           'weight' => '1',
         ),
+        'domain' => array(
+          'weight' => '1',
+        ),
+        'redirect' => array(
+          'weight' => '30',
+        ),
       ),
       'display' => array(),
     ),
