@@ -2399,6 +2399,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   .field-type-file{
     @extend .hide;
   }
+  tbody{
+    overflow: visible;
+  }
   > tbody > tr{
     @extend .fleft;
     @extend .full;
@@ -2988,6 +2991,7 @@ div.node{
   }
 }
 [id*="field-program-schedule-values"]{
+  tbody{overflow: visible;}
   > tbody > tr{
     @extend .fleft;
     @extend .full;
@@ -8790,16 +8794,13 @@ div.node{
             }
           }
           .field-name-field-technology-photo-title{
-            display: none;
+            @extend .dib;
+            @extend .vtop;
+            @extend .full;
+            margin-top: 10px;
             .form-type-textfield{
               padding: 0;
               margin: 0;
-              > label{
-                width: 140px;
-                & + div{
-                  padding-left: 140px;
-                }
-              }
             }
           }
           > .form-submit, .ajax-new-content > .form-submit{
@@ -9887,9 +9888,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   }
 }
 
-.node-blog-form{
-  .form-managed-file .image-widget-data .form-submit[value="Remove"]{left: 0;}
-}
+
 .node-service_creation-form{
   .form-field-type-xml-field-xml{
     .form-type-xml-codemirror{
@@ -10112,4 +10111,20 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   margin-left: 2%;
   background-color: #f2f2f2;
   padding: 10px;
+}
+[id*="itg-workflow-preview-log-filter-form"]{
+  .form-item {
+    float: left;
+    width: 150px;
+    padding: 0 10px 0 0;
+    & .form-type-textfield {
+      width: 300px;
+    }
+    .form-text, .form-select{
+      width: 100%;
+    }
+  }
+  .layout-filter-btn{
+    .layout-apply, .layout-reset{margin-top: 38px;}
+  }
 }
