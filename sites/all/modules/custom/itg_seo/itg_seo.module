@@ -8,13 +8,13 @@
 function itg_seo_menu() {
   $items['itg-access-denied'] = array(
       'title' => t('Access Denied'),
-      'page callback' => 'itg_seo_access_denied',
+      'page callback' => 'itg_access_denied',
       'access callback' => TRUE,
       'type' => MENU_CALLBACK,
   );
   $items['itg-not-found'] = array(
       'title' => t('Not Found'),
-      'page callback' => 'itg_seo_not_found',
+      'page callback' => 'itg_not_found',
       'access callback' => TRUE,
       'type' => MENU_CALLBACK,
   );
@@ -27,9 +27,9 @@ function itg_seo_menu() {
  * 
  * @return array
  */
-function itg_seo_access_denied() {
+function itg_access_denied() {
 
-  return theme('itg_seo_access_denied');
+  return theme('itg_access_denied');
 }
 
 /**
@@ -37,11 +37,11 @@ function itg_seo_access_denied() {
  * 
  * @return array
  */
-function itg_seo_not_found() {
+function itg_not_found() {
   if (function_exists(itg_seo_latest_headlines)) {
     $latest_headlines = itg_seo_latest_headlines();
   }
-  return theme('itg_seo_not_found', array('data' => $latest_headlines));
+  return theme('itg_not_found', array('data' => $latest_headlines));
 }
 
 /**
@@ -51,11 +51,11 @@ function itg_seo_not_found() {
  */
 function itg_seo_theme() {
   $themes = array(
-      'itg_seo_access_denied' => array(
+      'itg_access_denied' => array(
           'template' => 'itg-seo-access-denied',
           'path' => drupal_get_path('module', 'itg_seo') . '/templates',
       ),
-      'itg_seo_not_found' => array(
+      'itg_not_found' => array(
           'template' => 'itg-seo-not-found',
           'path' => drupal_get_path('module', 'itg_seo') . '/templates',
           'variables' => array('data' => NULL),
