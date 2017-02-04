@@ -124,13 +124,23 @@
             function headerMain() {
                 //var logotxt = $('.container.header-logo').html();
                 $('.container.header-logo').prependTo('.itg-logo-container');
+                
+                var mouse_is_inside = false;
+                $('.globle-search').hover(function(){ 
+                    mouse_is_inside=true; 
+                }, function(){ 
+                    mouse_is_inside=false; 
+                });
+
+                $("body").mouseup(function(){ 
+                    if(! mouse_is_inside) $('.globle-search').css('width', '0px');
+                });
+                
                 $('.search-icon').click(function () {
                     $(this).parents('div').find('.globle-search').css('width', '255px').find('.search-text').focus();
                     
                 });                
-                $('.globle-search').on('blur', '.search-text',  function () {
-                    $('.globle-search').css('width', '0px');
-                });
+
                 
                 
                 $('#block-itg-layout-manager-header-block .menu-login .user-menu').hover(function(){                    
@@ -802,7 +812,8 @@ function smilyanimation(facetype){
  
  var menuBuilder = function () {
         var menuWidth, Totalwidth, liLength, clickHere;
-        menuWidth = jQuery('.second-level-menu.menu').outerWidth(true);
+        menuWidth = jQuery('.second-level-menu.menu').width() - 46;
+        console.log("menuWidth = " + menuWidth);
         Totalwidth = jQuery('.all-menu').outerWidth(true);
         clickHere = 0;
         if (jQuery('#newlist').length > 0) {
@@ -811,7 +822,9 @@ function smilyanimation(facetype){
         jQuery('.all-menu').remove();
         jQuery('.second-level-menu.menu li').each(function () {
             liLength = jQuery(this).outerWidth(true);
+            console.log("Totalwidth = " + Totalwidth);
             Totalwidth = Totalwidth + liLength;
+            console.log("Totalwidth + liLength = " + Totalwidth);
             if (Totalwidth <= menuWidth) {
                 jQuery(this).removeClass('hide');
             } else {
