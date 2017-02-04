@@ -369,12 +369,14 @@ function itg_common_node_presave($node) {
       }
         
   }
+  
+  // custom alias cnditions
   if(
     $node->type == 'photogallery' || 
     $node->type == 'story' || 
     $node->type == 'videogallery')
     {
-        return __itg_custompath_load($node);
+        return itg_common_custompath_load($node);
     }
 }
 
