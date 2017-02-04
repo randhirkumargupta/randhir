@@ -68,8 +68,19 @@ function itg_reports_theme($existing, $type, $theme, $path) {
  * {@inheritdoc}.
  */
 function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+
     switch ($form['#id']) {
+
         case 'views-exposed-form-report-filed-content-page':
+            // remove archive and unpublish on list
+            $option = array();
+            foreach ($form['state']['#options'] as $key => $option_val) {
+                
+                if ($key != 'un_published' && $key != 'archive' ) {
+                    $option[$key] = $option_val;
+                }  
+            }
+            $form['state']['#options'] = $option;
             $form['field_story_category_tid']['#attributes'] = array('placeholder' => 'Search by section name');
             $form['uid']['#attributes'] = array('placeholder' => 'Search by user name');
             $form['mail']['#attributes'] = array('placeholder' => 'Search by user email');
@@ -148,7 +159,6 @@ function itg_reports_block_view($delta = '') {
 
             $errors = array_filter($data);
             if (!empty($errors)) {
-               
                 foreach ($data as $key => $chart_data) {
                     $errors = array_filter($chart_data['graph']);
                     if (empty($errors)) {
@@ -161,12 +171,10 @@ function itg_reports_block_view($delta = '') {
                         '#legend' => FALSE,
                     );
 
-                    // Add missing year.
-                    //itg_reports_missing_year($chart_data['graph']);
                     $chart_data_all = itg_reports_missing_year($chart_data['graph']);
-                   
+
                     foreach ($chart_data_all as $keys => $graph_data) {
-                        
+
                         $chart[$keys] = array(
                             '#type' => 'chart_data',
                             '#data' => $graph_data,
@@ -215,24 +223,13 @@ function itg_report_get_graph_data() {
     $arg = arg();
     $chart_data = array();
     $node = node_load($arg[1]);
-
     foreach ($node->field_mega_review_career_graph['und'] as $field_collection) {
         $data = array();
         $actor_data = array();
-
-        // $items = field_get_items('node', $field_collection['entity'], 'field_reporter_career_graph');
-
-        foreach ($field_collection['entity']->field_reporter_career_graph['und'] as $key => $field_value) {
-            $entity_id = $field_value['value'];
-            $field_data_all = entity_load('field_collection_item', array($entity_id));
-          $field_data = $field_data_all[$entity_id];
-       
-            $tid = $field_data->field_reporter_movie_name['und'][0]['tid'];
-           
-            $movie_details = taxonomy_term_load($tid);
-           
+        foreach ($field_collection['entity']->field_reporter_movie_name['und'] as $key => $tids) {
+            $movie_details = taxonomy_term_load($tids['tid']);
             $movie_name = $movie_details->name;
-            $timestamp = $field_data->field_reporter_movie_year['und'][0]['value'];
+            $timestamp = $movie_details->field_reporter_movie_year['und'][0]['value'];
             $movie_year = format_date($timestamp, 'custom', 'Y');
             $actor_pic_uri = $field_collection['entity']->field_story_extra_large_image['und'][0]['uri'];
             if (empty($actor_pic_uri)) {
@@ -248,7 +245,7 @@ function itg_report_get_graph_data() {
             );
             $data[] = array(
                 (int) $movie_year,
-                (int) $field_data->field_reporter_earning['und'][0]['value'],
+                (int) $movie_details->field_movie_earning['und'][0]['value'],
                 $movie_name
             );
         }
@@ -261,6 +258,47 @@ function itg_report_get_graph_data() {
     return $chart_data;
 }
 
+/**
+ * Ad missing year to the chart data.
+ *
+ * @param array $chart_data
+ *   Array containing year wise data of celebrity career graph.
+ *
+ * @return array
+ *   Sorted array with missing intervals.
+ */
+//function itg_reports_missing_year(&$chart_data) {
+//  $data = array();
+//  array_multisort($chart_data);
+//  $temp = NULL;
+//  foreach ($chart_data as $value) {
+//    if (!empty($temp) && ($temp + 1) != $value[0]) {
+//      ++$temp;
+//      while ($temp < $value[0]) {
+//        $data[] = array(
+//          $temp++,
+//          NULL
+//        );
+//      }
+//    }
+//    $temp = $value[0];
+//  }
+//  $chart_data = array_merge($chart_data, $data);
+//  array_multisort($chart_data);
+//  $min_step = count($chart_data);
+//  $data = array();
+//  if ($min_step < 6) {
+//    while ($min_step <= 6) {
+//      $data[] = array(
+//        $temp++,
+//        NULL
+//      );
+//      ++$min_step;
+//    }
+//    $chart_data = array_merge($chart_data, $data);
+//    array_multisort($chart_data);
+//  }
+//}
 /**
  * Ad missing year to the chart data.
  *
@@ -293,7 +331,6 @@ function itg_reports_missing_year(&$chart_data) {
 
     return $data;
 }
-
 
 /**
  * Get node edit count from revision table.

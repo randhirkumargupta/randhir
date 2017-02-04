@@ -2,11 +2,11 @@
  * @file
  * A JavaScript file for reports view. 
  */
-(function ($, Drupal, window, document, undefined) {
+(function($, Drupal, window, document, undefined) {
     Drupal.behaviors.my_custom_behavior = {
-        attach: function (context, settings) {
+        attach: function(context, settings) {
             // Module code start here.
-            
+
             // Disable future date from date popup.
             function itg_report_disable_future_date() {
                 $("#edit-date-filter-min-datepicker-popup-0").datepicker({
@@ -15,7 +15,7 @@
                     changeMonth: true,
                     changeYear: true,
                     dateFormat: 'yy-mm-dd',
-                    onSelect: function (selected) {
+                    onSelect: function(selected) {
                         var dt = new Date(selected);
                         dt.setDate(dt.getDate() + 1);
                         $("#edit-date-filter-max-datepicker-popup-0").datepicker("option", "minDate", dt);
@@ -27,16 +27,16 @@
                     changeMonth: true,
                     changeYear: true,
                     dateFormat: 'yy-mm-dd',
-                    onSelect: function (selected) {
+                    onSelect: function(selected) {
                         var dt = new Date(selected);
                         dt.setDate(dt.getDate() - 1);
                         $("#edit-date-filter-min-datepicker-popup-0").datepicker("option", "maxDate", dt);
                     }
                 });
             }
-            
+
             // Set moderation filter option based on yes or no.
-            $('#edit-moderation').on('change', function () {
+            $('#edit-moderation').on('change', function() {
                 var moderation = $('#edit-moderation').find(":selected").text();
                 if (moderation === 'No') {
                     $('select[name="from_state"]').find('option[value="draft"]').attr("selected", true);
@@ -47,9 +47,9 @@
                     $('select[name="from_state"]').find('option[value="All"]').attr("selected", true);
                     $("#edit-state option:selected").removeAttr("selected");
                     var values = "needs_review,rejected";
-                    $.each(values.split(","), function (i, e) {
+                    $.each(values.split(","), function(i, e) {
                         $("#edit-state option[value='" + e + "']").prop("selected", true);
-                    });                   
+                    });
                     $('#edit-state').css('pointer-events', 'none');
                 } else {
                     $('select[name="from_state"]').find('option[value="All"]').attr("selected", true);
@@ -58,6 +58,24 @@
                 }
 
             });
+
+//            $('#edit-state').on('change', function() {
+//                var getvalue = $(this).val();
+//                var flag = 0;
+//                i = 0, size = getvalue.length;
+//                for (i; i < size; i++) {
+//                   if(getvalue[i]=='archive') {
+//                       flag = 1;
+//                   }
+//                }
+//                if(flag == 1) {
+//                   
+//                    $('#edit-field-story-archive-value').val('Yes').change();;
+//                } else {
+//                    $('#edit-field-story-archive-value').val('All').change();;
+//                }
+//
+//            });
 
             // Copy Moderation dropdown under actual moderation field.
             if ($('body').hasClass('page-report-filed-content')) {
@@ -69,8 +87,8 @@
                 itg_report_disable_future_date();
                 $('.views-field-workbench-moderation-history-link').find('a').attr('target', '_blank');
                 $('.view-empty').parent().find('.feed-icon').hide();
-            }            
-            
+            }
+
             if ($('body').hasClass('page-comparative-report-list')) {
                 itg_report_disable_future_date();
                 $('.view-empty').parent().find('.feed-icon').hide();
@@ -79,3 +97,10 @@
         }
     };
 })(jQuery, Drupal, this, this.document);
+jQuery( document ).ready(function() {
+   
+    if(jQuery('#edit-field-story-archive-value').val() == 'Yes') {
+       
+        jQuery('.view-id-report_filed_content .views-field-status').text('Archive');
+    }
+});
