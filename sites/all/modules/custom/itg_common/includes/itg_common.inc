@@ -503,10 +503,12 @@ function itg_common_get_latest_byline($nid, $status) {
 
 
 /** 
+ * Implementing 'itg_common_custompath_load'.
+ * @param $node object
  * Creating Custom path alias for story, photogallery and videogallery
  */
 
-function __itg_custompath_load($node) {
+function itg_common_custompath_load($node) {
     $getsection = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
     $parents = taxonomy_get_parents_all($getsection);
     if(isset($parents) && !empty($parents)){
@@ -515,8 +517,8 @@ function __itg_custompath_load($node) {
         }
     }
     $set_hierarchy = array_reverse($section_hierarchy);
-    $pathdata = strtolower(implode("/", $set_hierarchy)) . '/' . $node->title. '.html';
-    $newpath = __itg_custompath_val($pathdata);
+    $pathdata = strtolower(implode("/", $set_hierarchy)) . '/' . trim($node->title). '.html';
+    $newpath = itg_common_custompath_val($pathdata);
     $conditions = array('source' => 'node/' . $node->nid);
     $criteria = path_load($conditions);
     $criteria = array('pid' => $criteria);
@@ -524,15 +526,21 @@ function __itg_custompath_load($node) {
     $node->path = array('alias' => $newpath, 'pathauto' => FALSE);
 }
 
-function __itg_custompath_val($path) {
+/** 
+ * Implementing 'itg_common_custompath_val'.
+ * @param $pathdata path alias content
+ * Creating custom path alias 
+ */
 
-    if (preg_match("![^a-z0-9]!i", $path)) {
-        $path = preg_replace('/[^a-zA-Z0-9\/\\.\']/', '-', $path);
-        while (preg_match('/--/', $path)) {
-            $path = preg_replace('/--/', '-', $path);
+function itg_common_custompath_val($pathdata) {
+
+    if (preg_match("![^a-z0-9]!i", $pathdata)) {
+        $pathdata = preg_replace('/[^a-zA-Z0-9\/\\.\']/', '-', $pathdata);
+        while (preg_match('/--/', $pathdata)) {
+            $pathdata = preg_replace('/--/', '-', $pathdata);
         }
-        $path = rtrim($path, "-");
-        $path = strtolower($path);
+        $pathdata = rtrim($pathdata, "-");
+        $pathdata = strtolower($pathdata);
     }
-    return $path;
+    return $pathdata;
 }
