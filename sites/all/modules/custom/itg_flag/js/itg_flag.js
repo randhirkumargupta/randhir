@@ -140,10 +140,12 @@ jQuery(document).ready(function () {
     jQuery('#user-activity, .user-activity').click(function (event) {        
         var nd_id = jQuery(this).attr('rel');
         var dtag = jQuery(this).attr('data-tag');
+        var nodeId = jQuery(this).attr('data-nodeid');
         var dstatus = jQuery(this).attr('data-status');
         var data_activity = jQuery(this).attr('data-activity');
         var post_data = "&nd_id=" + nd_id + "&dtag=" + dtag + "&data_activity=" + data_activity + "&dstatus=" + dstatus;
-        jQuery(this).closest(".emoji-container").find("a").removeClass("def-cur-pointer").addClass("def-cur-none");
+        jQuery(this).closest(".emoji-container").find("a").removeClass("def-cur-pointer").addClass("def-cur-none-pointer");
+        if(!jQuery(this).closest(".emoji-container").find("a").hasClass('def-cur-none-pointer')) {
         jQuery.ajax({
             'url': Drupal.settings.baseUrl.baseUrl + '/user-activity-front-end',
             'data': post_data,
@@ -183,6 +185,9 @@ jQuery(document).ready(function () {
                 
             }
         });
+      } else {
+                jQuery(".hightlights_emoji_msg_" +nodeId).html('You have already voted').show(0).delay(2000).hide(1000);
+      }
 
     });
 

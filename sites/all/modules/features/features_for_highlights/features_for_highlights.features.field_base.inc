@@ -29,8 +29,9 @@ function features_for_highlights_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        1 => 'Yes',
-        0 => 'No',
+        1 => 'Emoji',
+        0 => 'Thumb',
+        'none' => 'None',
       ),
       'allowed_values_function' => '',
     ),
@@ -130,6 +131,7 @@ function features_for_highlights_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         1 => 'Yes',
+        0 => 'No',
       ),
       'allowed_values_function' => '',
     ),
@@ -157,6 +159,7 @@ function features_for_highlights_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         1 => 'Yes',
+        0 => 'No',
       ),
       'allowed_values_function' => '',
     ),
@@ -184,6 +187,7 @@ function features_for_highlights_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         1 => 'Yes',
+        0 => 'No',
       ),
       'allowed_values_function' => '',
     ),
