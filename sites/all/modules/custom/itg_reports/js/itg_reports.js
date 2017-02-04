@@ -101,6 +101,6 @@ jQuery( document ).ready(function() {
    
     if(jQuery('#edit-field-story-archive-value').val() == 'Yes') {
        
-        jQuery('.view-id-report_filed_content .views-field-status').text('Archive');
+        jQuery('.view-id-report_filed_content td.views-field-status').text('Archive');
     }
 });
