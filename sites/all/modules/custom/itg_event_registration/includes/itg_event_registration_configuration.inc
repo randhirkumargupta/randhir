@@ -10,9 +10,10 @@
  */
 function itg_event_registration_fields_configuration_form($form, &$form_state) {
   $arg = arg();
+  $vid = itg_event_registration_vocab_id('event_registration_configuration');
   $query = db_select('taxonomy_term_data', 'ttd');
   $query->fields('ttd', array('name', 'description'));
-  $query->condition('ttd.vid', 41, '=');
+  $query->condition('ttd.vid', $vid, '=');
   $result = $query->execute();
   foreach ($result as $rel) {
     $value[$rel->name . '@' . $rel->description] = 'Required';
@@ -64,4 +65,17 @@ function itg_event_registration_default_value($e_nid, $type) {
     }
   }
   return $rel;
+}
+
+/**
+ * Implement function for return vocab id.
+ * @param str $vocab_name
+ * @return
+ */
+function itg_event_registration_vocab_id($vocab_name) {
+  $query = db_select('taxonomy_vocabulary', 'tv');
+  $query->fields('tv', array('vid'));
+  $query->condition('tv.machine_name', $vocab_name, '=');
+  $result = $query->execute()->fetchField();
+  return $result;
 }
