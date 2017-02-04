@@ -506,7 +506,6 @@ function itg_common_get_latest_byline($nid, $status) {
  * Creating Custom path alias for story, photogallery and videogallery
  */
 
-
 function __itg_custompath_load($node) {
     $getsection = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
     $parents = taxonomy_get_parents_all($getsection);
