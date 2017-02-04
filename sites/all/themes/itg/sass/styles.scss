@@ -363,8 +363,9 @@ header{
                 @include pos(relative);
             }
             .menu{
-                padding-left:135px;
-                padding-right:50px;
+                margin-left:135px;
+                margin-right:50px;
+                max-width: 985px;
                 li{
                     @include float(left);
                     a{
@@ -428,6 +429,7 @@ header{
               }  
             }
             .all-menu{
+                width: 46px;
                 cursor: pointer;
                 i{
                     font-size: 7px;
@@ -1987,11 +1989,23 @@ footer{
             .photoby{
                 @include pos(absolute,null,null,0,0);
                 width: 100%;
-                background: #222222;
-                color: #aeaeae;
-                @include font(13px);
-                @include itg-font($itg-roboto);
-                padding: 3px 10px;
+                .story-img-rating {
+                  background: #b00808;
+                  display: inline-block;
+                  vertical-align: top;
+                  padding: 5px 20px;
+                  font-size: 28px;
+                  font-weight: 700;
+                  color: #fff;
+                  line-height: 28px;
+                }
+                .photoby-text {
+                  color: #aeaeae;
+                  @include font(13px);
+                  @include itg-font($itg-roboto);
+                  background-color: #222;
+                  padding: 3px 10px;
+                }
             }
         }
         .image-alt{
