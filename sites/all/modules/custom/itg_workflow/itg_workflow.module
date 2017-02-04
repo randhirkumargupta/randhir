@@ -739,7 +739,10 @@ function itg_workflow_node_update($node) {
   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
 
     global $user;
-
+    
+    if ($node->workbench_moderation_state_current == 'published') {
+      //workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name); 
+    }
     if ($node->workbench_moderation_state_new != 'draft') {
       $itguser = user_load($node->uid);
 

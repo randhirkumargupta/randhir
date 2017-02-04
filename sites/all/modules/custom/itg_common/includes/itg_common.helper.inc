@@ -96,8 +96,8 @@ define('FRONT_THEME_NAME', 'itg');
 define('EXTRA_SECTION_CARDS', 21);
 define('SECTION_TAB', 20);
 
-define('NEWSLETTER_EDUCATION_TID', 522);
-define('CATEGORY_MANAGMENT', 4);
+define('CATEGORY_MANAGMENT', variable_get('category_manager_vid'));
+define('NEWSLETTER_EDUCATION_TID', variable_get('newslater_education_tid'));
 
 define('PARENT_SSO', 'dev.indiatodayonline.in');
 define('FRONT_URL', 'http://itgd-mum-lb-dev-frontend-app-1144451114.ap-south-1.elb.amazonaws.com');
