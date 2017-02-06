@@ -357,19 +357,24 @@ if (!empty($content)):
                                 }
                                 ?>
                               <?php } ?>
-                                <div class="stry-img-rating">
+                                
                       <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) { ?>
-                                <div class="photoby"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?></div>
+                                <div class="photoby">
+                                  <div class="story-img-rating">
+                                    <?php 
+                                    // added technology rating field value for story technology
+                                      if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) {
+                                        $tech_rating = $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'];
+                                        echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10';
+                                      } 
+                                    ?>
+                                  </div>
+                                  <div class="photoby-text"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?></div>
+                                </div>
                       <?php } ?>     
                                
-                            <?php 
-                            // added technology rating field value for story technology
-                              if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) {
-                                $tech_rating = $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'];
-                                echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10';
-                              } 
-                            ?>
-                            </div>
+                            
+                           
                           </div>
   <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'])) { ?>    
                             <div class="image-alt"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?></div>

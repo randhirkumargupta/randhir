@@ -195,9 +195,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     $emoji3_src = $base_url . "/" . drupal_get_path('theme', 'itgadmin') . "/images/highlights_icons/WGMF.png";
     foreach($form['field_highlights']['und'] as $key => $value){
       if(is_numeric($key)){
-        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_1']['und']['#title'] = "<img title='Oh No!' src='" . $emoji1_src . "' alt='' />";
-        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_2']['und']['#title'] = "<img title='Oh No!' src='" . $emoji2_src . "' alt='' >";
-        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_3']['und']['#title'] = "<img title='Oh No!' src='" . $emoji3_src . "' alt='' >";
+        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_1']['und']['#title'] = "<img  src='" . $emoji1_src . "' alt='' />";
+        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_2']['und']['#title'] = "<img  src='" . $emoji2_src . "' alt='' >";
+        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_3']['und']['#title'] = "<img  src='" . $emoji3_src . "' alt='' >";
       }
     }
   }
