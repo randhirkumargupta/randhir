@@ -9,6 +9,8 @@ require 'vendor/autoload.php';
 module_load_include('inc', 'itg_social_media', 'includes/itg_social_media.form');
 module_load_include('inc', 'itg_social_media', 'includes/itg_social_media.settings');
 module_load_include('inc', 'itg_social_media', 'includes/itg_social_media_tweet');
+require_once('vendor/lib_tcpdf/config/lang/eng.php');
+require_once('vendor/lib_tcpdf/tcpdf.php');
 
 /**
  * Implement hook_permissions()
@@ -49,6 +51,11 @@ function itg_social_media_menu() {
     );
     $items['facebook_count'] = array(
         'page callback' => 'itg_social_media_social_media_activity_update',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+    $items['download-pdf'] = array(
+        'page callback' => 'itg_social_media_download_pdf',
         'access arguments' => array('access content'),
         'type' => MENU_CALLBACK,
     );
@@ -104,6 +111,104 @@ function itg_social_media_menu() {
     );
 
     return $items;
+}
+
+function itg_social_media_download_pdf($rows_result) {
+//p($rows_result);
+    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    $pdf->SetCreator(PDF_CREATOR);
+    $pdf->SetAuthor('Indiatoday');
+    $pdf->SetTitle('Indiatoday');
+    $pdf->SetSubject('Indiatoday');
+    $pdf->SetKeywords('TCPDF, PDF, Indiatoday, Indiatoday, guide');
+
+// set default header data
+    $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE . ' ', PDF_HEADER_STRING);
+
+// set header and footer fonts
+    $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+    $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+
+// set default monospaced font
+    $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+//set margins
+    $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+    $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+    $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+
+//set auto page breaks
+    $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+//set image scale factor
+    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+//set some language-dependent strings
+    $pdf->setLanguageArray($l);
+
+// ---------------------------------------------------------
+// set font
+    $pdf->SetFont('helvetica', '', 5);
+
+// add a page
+    $pdf->AddPage();
+
+//Column titles
+    $header = array('Sno.', ' Content ID ', 'Title', 'Content Type', 'Promoted By', 'FB Promote', 'Twitter Promote', 'FB Commnet', 'FB Likes', 'FB Share', 'Twitter Likes', 'Twitter Retweet');
+
+//Data loading
+    $data = array();
+// print colored table
+    ColoredTable($header, $rows_result, $pdf);
+
+// ---------------------------------------------------------
+//Close and output PDF document
+    $pdf->Output('socialmedia_report.pdf', 'D');
+    exit();
+}
+
+// Colored table
+function ColoredTable($header, $data, $pdf) {
+    // Colors, line width and bold font
+
+    $pdf->SetFillColor(224, 235, 255);
+    $pdf->SetTextColor(0);
+    $pdf->SetDrawColor(224, 235, 255);
+    $pdf->SetLineWidth(0.3);
+    $pdf->SetFont('', 'B');
+    // Header
+    $w = array(7, 15, 25, 15, 17, 17, 20, 20, 15, 12, 15, 20);
+    $num_headers = count($header);
+    for ($i = 0; $i < $num_headers; ++$i) {
+        $pdf->Cell($w[$i], 7, $header[$i], 1, 0, 'C', 1);
+    }
+    $pdf->Ln();
+    // Color and font restoration
+    $pdf->SetFillColor(224, 235, 255);
+    $pdf->SetTextColor(0);
+    $pdf->SetFont('');
+    // Data
+    $fill = 0;
+    $i = 1;
+    foreach ($data as $row) {
+
+        $pdf->Cell($w[0], 10, $i, 0, 0, 'C', $fill);
+        $pdf->Cell($w[1], 10, $row['nid_1'], 0, 0, 'C', $fill);
+        $pdf->Cell($w[2], 10, $row['title'], 0, 0, 'C', $fill);
+        $pdf->Cell($w[3], 10, $row['type'], 0, 0, 'C', $fill);
+        $pdf->Cell($w[4], 10, $row['username'], 0, 0, 'C', $fill);
+        $pdf->Cell($w[5], 10, $row['count_fb_promote'], 0, 0, 'C', $fill);
+        $pdf->Cell($w[6], 10, $row['count_twitter_promote'], 0, 0, 'C', $fill);
+        $pdf->Cell($w[7], 10, $row['count_fb_comment'], 0, 0, 'C', $fill);
+        $pdf->Cell($w[8], 10, $row['count_fb_like'], 0, 0, 'C', $fill);
+        $pdf->Cell($w[9], 10, $row['count_fb_share'], 0, 0, 'C', $fill);
+        $pdf->Cell($w[10], 10, $row['count_twitter_like'], 0, 0, 'C', $fill);
+        $pdf->Cell($w[11], 10, $row['count_twitter_retweet'], 0, 0, 'C', $fill);
+        $pdf->Ln();
+        $fill = !$fill;
+        $i++;
+    }
+    $pdf->Cell(array_sum($w), 0, '', 'T');
 }
 
 /*
@@ -210,7 +315,7 @@ function itg_social_media_count_log($share_on = null, $nid) {
     $query = db_select('itg_social_media_logs', 'isml')
             ->fields('isml')
             ->condition('nid', $nid, '=')
-             ->condition('status', 1, '=')
+            ->condition('status', 1, '=')
             ->condition('social_media', '%' . db_like($share_on) . '%', 'LIKE');
 
 
@@ -228,7 +333,7 @@ function itg_social_media_get_data_by_nid($share_on = null, $nid) {
     $query = db_select('itg_social_media_logs', 'isml')
             ->fields('isml')
             ->condition('nid', $nid, '=')
-             ->condition('status', 1, '=')
+            ->condition('status', 1, '=')
             ->condition('social_media', '%' . db_like($share_on) . '%', 'LIKE');
 
 
@@ -245,7 +350,7 @@ function itg_social_media_get_data_by_nid($share_on = null, $nid) {
 function itg_social_media_check_node_exist($nid) {
     $query = db_select('itg_social_media_logs', 'isml')
             ->fields('isml')
-             ->condition('status', 1, '=')
+            ->condition('status', 1, '=')
             ->condition('nid', $nid, '=');
 
     $result = $query->execute()->fetchall();
@@ -328,7 +433,6 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
         });', array(
                 'type' => 'inline',
                 'scope' => 'footer',
-                
             ));
 
             break;
@@ -592,7 +696,7 @@ function itg_social_media_twitter_promote_by_nid($nid) {
     $query = db_select('itg_social_media_logs', 'isml')
             ->fields('isml')
             ->condition('nid', $nid, '=')
-             ->condition('status', 1, '=')
+            ->condition('status', 1, '=')
             ->condition('social_media', '%' . db_like('Twitter') . '%', 'LIKE');
 
 
@@ -652,7 +756,7 @@ function itg_social_media_form_submit($form, &$form_state) {
         // Twitter image
         if ($form_state['values']['itg_twitter_img'] > 0 && $form_state['values']['itg_twitter_condition'] == 0) {
             $stime = $form_state['values']['tw_img_schedule_time'] != NULL ? strtotime($form_state['values']['tw_img_schedule_time']) : NULL;
-          
+
             $desc = $form_state['values']['itg_twitter_narrative'];
             $fid = $form_state['values']['itg_twitter_img'];
             $node->field_story_tweet['und'][0]['value'] = $form_state['values']['itg_twitter_narrative'];
@@ -676,7 +780,7 @@ function itg_social_media_form_submit($form, &$form_state) {
                 'description' => ''
             );
             $node->field_story_tweet['und'][0]['value'] = $desc;
-            
+
             if ($stime != NULL) {
                 itg_social_media_save_scheduled_post($node, 'Twitter Video', $stime);
             }

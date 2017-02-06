@@ -515,6 +515,85 @@ function feature_for_social_media_report_views_default_views() {
     'social_media_report' => 'social_media_report',
     'default' => 0,
   );
+
+  /* Display: PDF */
+  $handler = $view->new_display('page', 'PDF', 'social_media_report_pdf');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Social Media Report PDF';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = 'S No.';
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
+  $handler->display->display_options['fields']['counter']['reverse'] = 0;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid_1']['id'] = 'nid_1';
+  $handler->display->display_options['fields']['nid_1']['table'] = 'node';
+  $handler->display->display_options['fields']['nid_1']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid_1']['label'] = 'Content ID';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['group_type'] = 'count_distinct';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Type */
+  $handler->display->display_options['fields']['type']['id'] = 'type';
+  $handler->display->display_options['fields']['type']['table'] = 'node';
+  $handler->display->display_options['fields']['type']['field'] = 'type';
+  $handler->display->display_options['fields']['type']['label'] = 'Content Type';
+  /* Field: Social Media Logs: Username */
+  $handler->display->display_options['fields']['username']['id'] = 'username';
+  $handler->display->display_options['fields']['username']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['fields']['username']['field'] = 'username';
+  $handler->display->display_options['fields']['username']['label'] = 'Promoted By';
+  /* Field: Social Media Logs: Count Facebook Promote */
+  $handler->display->display_options['fields']['count_fb_promote']['id'] = 'count_fb_promote';
+  $handler->display->display_options['fields']['count_fb_promote']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['fields']['count_fb_promote']['field'] = 'count_fb_promote';
+  $handler->display->display_options['fields']['count_fb_promote']['label'] = 'FB Promote';
+  /* Field: Social Media Logs: Count Twitter Promote */
+  $handler->display->display_options['fields']['count_twitter_promote']['id'] = 'count_twitter_promote';
+  $handler->display->display_options['fields']['count_twitter_promote']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['fields']['count_twitter_promote']['field'] = 'count_twitter_promote';
+  $handler->display->display_options['fields']['count_twitter_promote']['label'] = 'Twitter Promote';
+  /* Field: Social Media Logs: Count facebook commnet */
+  $handler->display->display_options['fields']['count_fb_comment']['id'] = 'count_fb_comment';
+  $handler->display->display_options['fields']['count_fb_comment']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['fields']['count_fb_comment']['field'] = 'count_fb_comment';
+  $handler->display->display_options['fields']['count_fb_comment']['label'] = 'FB Commnet';
+  /* Field: Social Media Logs: Count facebook like */
+  $handler->display->display_options['fields']['count_fb_like']['id'] = 'count_fb_like';
+  $handler->display->display_options['fields']['count_fb_like']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['fields']['count_fb_like']['field'] = 'count_fb_like';
+  $handler->display->display_options['fields']['count_fb_like']['label'] = 'FB Likes';
+  /* Field: Social Media Logs: Count facebook Share */
+  $handler->display->display_options['fields']['count_fb_share']['id'] = 'count_fb_share';
+  $handler->display->display_options['fields']['count_fb_share']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['fields']['count_fb_share']['field'] = 'count_fb_share';
+  $handler->display->display_options['fields']['count_fb_share']['label'] = 'FB Share';
+  /* Field: Social Media Logs: Count Twitter like */
+  $handler->display->display_options['fields']['count_twitter_like']['id'] = 'count_twitter_like';
+  $handler->display->display_options['fields']['count_twitter_like']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['fields']['count_twitter_like']['field'] = 'count_twitter_like';
+  $handler->display->display_options['fields']['count_twitter_like']['label'] = 'Twitter Likes';
+  /* Field: Social Media Logs: Count Twitter retweet */
+  $handler->display->display_options['fields']['count_twitter_retweet']['id'] = 'count_twitter_retweet';
+  $handler->display->display_options['fields']['count_twitter_retweet']['table'] = 'itg_social_media_logs';
+  $handler->display->display_options['fields']['count_twitter_retweet']['field'] = 'count_twitter_retweet';
+  $handler->display->display_options['fields']['count_twitter_retweet']['label'] = 'Twitter Retweet';
+  $handler->display->display_options['path'] = 'social-media-report-pdf';
   $export['social_media_report'] = $view;
 
   return $export;
