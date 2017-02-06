@@ -128,12 +128,12 @@ function itg_widgets_custom_variables() {
         '#default_value' => variable_get('apache_solr_sites_prefix_values'),
     );
    $form['newslater_education_tid'] = array(
-        '#type' => 'textarea',
+        '#type' => 'textfield',
         '#title' => t('Newslater Eduction Tid'),
         '#default_value' => variable_get('newslater_education_tid'),
     );
    $form['category_manager_vid'] = array(
-        '#type' => 'textarea',
+        '#type' => 'textfield',
         '#title' => t('Category Manager Vid'),
         '#default_value' => variable_get('category_manager_vid'),
     );
@@ -141,7 +141,6 @@ function itg_widgets_custom_variables() {
         '#type' => 'textfield',
         '#title' => t('Enter education tid'),
         '#default_value' => variable_get('itg_newsletter_education_id'),
-        '#required' => TRUE,
         '#size' => 20,
         '#maxlength' => 20,
     );
