@@ -1222,9 +1222,3 @@ function itg_survey_get_publish_status($nid) {
   }
   return $result;
 }
-
-//function itg_survey_init() {
-//  global $user;
-//  $a = (array_key_exists(10, $user->roles) == FALSE);
-//  var_dump($a);
-//}
