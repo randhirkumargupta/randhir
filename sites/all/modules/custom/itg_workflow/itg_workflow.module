@@ -693,7 +693,8 @@ function itg_workflow_node_insert($node) {
  * @param object $node
  */
 function itg_workflow_node_update($node) {
-  /* if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
+
+    /* if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
     global $user;
     $current = $user->uid;
     $node_id = $node->nid;
@@ -736,6 +737,9 @@ function itg_workflow_node_update($node) {
 
     workflow_get_mail_content($node, 'update', $high_level_user, $node->name, $current_user_name);
     } */
+//    echo "<pre>";
+//    print_r($node);
+//    die;
   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
 
     global $user;
