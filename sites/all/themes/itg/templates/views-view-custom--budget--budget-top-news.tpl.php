@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-6 col-sm-6">
+    <div class="col-md-6">
         <div class="auto-block-1">
             <div class="featured-news">
 
@@ -73,7 +73,7 @@
             </div>
         </div>    
     </div>
-    <div class="col-md-6 col-sm-6">
+    <div class="col-md-6 other-news">
         <h4 class="heading desktop-hide">OTHER NEWS</h4>
         <div class="auto-block-2">
             <div class="special-top-news special-top-bg">
