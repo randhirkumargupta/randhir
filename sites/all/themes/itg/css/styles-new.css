@@ -115,6 +115,11 @@ input[type="file"], input[type="submit"], input[type="text"] {
   margin-bottom: 5px;
   margin-right: 0;
 }
+[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget .form-item-custom-drp label {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 6px;
+}
 
 .region-top {
   background-color: #000;
@@ -6049,6 +6054,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 
   .cart-total-block .points-balance span:first-child {
     max-width: 100px;
+  }
+
+  [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .form-select {
+    height: 32px;
   }
 }
 @media all and (max-width: 480px) {

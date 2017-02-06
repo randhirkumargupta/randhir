@@ -205,5 +205,13 @@ function itg_preprocess_html($param) {
  * page head alter for update the meta keywords
  */
 function itg_html_head_alter(&$head_elements) {
-  $head_elements['metatag_keywords_0']['#name'] = 'news_keyword';
+    global $base_path;
+    $arg_data = node_load(arg(1));
+    if(is_array($arg_data->field_story_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_story_configurations[LANGUAGE_NONE])){
+        if($arg_data->field_story_configurations[LANGUAGE_NONE][0]['value'] == 'google_standout'){
+            $standout_path = $base_path . $arg_data->path['alias'];
+            print '<link rel="standout" href="'.$standout_path.'"/>';
+        }
+    }
+    $head_elements['metatag_keywords_0']['#name'] = 'news_keyword';
 }

@@ -148,7 +148,7 @@
                         if (splitewigitinfo[1] !="") {
                            wid_name = wid_name+'-'+ splitewigitinfo[1];
                         }
-                        
+                        var splitewidgitname = widget_name.split('#');
                         // for category tab widget
                         $('input[name = ' + block_name + ']').val(category_name_tab);
                         $('.widget-title[data-id="' + block_name + '"]').html(category_name_tab);

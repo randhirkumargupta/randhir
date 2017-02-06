@@ -392,6 +392,87 @@ function feature_for_video_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-videogallery-field_multi_bitrate'.
+  $field_instances['node-videogallery-field_multi_bitrate'] = array(
+    'bundle' => 'videogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 50,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_multi_bitrate',
+    'label' => 'Multi Bitrate',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 57,
+    ),
+  );
+
+  // Exported field_instance: 'node-videogallery-field_noindex_nofollow'.
+  $field_instances['node-videogallery-field_noindex_nofollow'] = array(
+    'bundle' => 'videogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 49,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_noindex_nofollow',
+    'label' => 'Noindex Nofollow',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 56,
+    ),
+  );
+
   // Exported field_instance: 'node-videogallery-field_preview_unique_id'.
   $field_instances['node-videogallery-field_preview_unique_id'] = array(
     'bundle' => 'videogallery',
@@ -2382,7 +2463,9 @@ function feature_for_video_field_default_field_instances() {
   t('Long Description');
   t('Medium image');
   t('Migrated Video');
+  t('Multi Bitrate');
   t('Node Identity');
+  t('Noindex Nofollow');
   t('Preview_unique_id');
   t('Redirection URL');
   t('Related Content');
