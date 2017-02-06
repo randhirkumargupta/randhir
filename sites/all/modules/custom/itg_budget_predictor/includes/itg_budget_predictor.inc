@@ -18,7 +18,7 @@ function itg_budget_predictor_get_taxonomy() {
   $user_id = $user->uid;
   $arg = arg();
   $section_id = isset($arg[2]) ? $arg[2] : '';
-  $cookies_id = $_COOKIE['COOKIES_IT_' . $section_id];
+  $cookies_id = $_SESSION['pre_budget'];
   $exist_predictor = check_exist_predictor($user_id, $section_id);
 
   if (empty($exist_predictor) && $user_id && $cookies_id) {
@@ -26,7 +26,7 @@ function itg_budget_predictor_get_taxonomy() {
   }
 
   $check_budget_status = check_budget_status($section_id);
-  $check_budget_status_front_user = check_budget_status_front_user($section_id);
+  $check_budget_status_front_user = check_budget_status_front_user($section_id, $cookies_id);
   $check_budget = check_budget($section_id);
 
   if (!empty($check_budget['status'])) {
@@ -393,6 +393,7 @@ function itg_budget_predictor_list() {
   }
 
   $caption_table_edit = l(t('List Of Budget'), 'manage-budget-list') . "&nbsp;" . l(t('Download Excel'), 'budget-download-excel', array('query' => array('section_id' => $_GET['section_id'], 'user_type' => $_GET['user_type'])));
+  
   // Format and print out the table.
   $output = theme('table', array('header' => $header, 'rows' => $rows, 'caption' => $caption_table_edit, 'attributes' => array('class' => array('views-table'))));
 
@@ -513,7 +514,12 @@ function itg_budget_manage_list() {
       $budget_title = $row->budget_title;
       $budget_description = $row->budget_description;
       $budget_section = taxonomy_term_load($row->budget_section)->name;
-      $status = $row->status;
+      if ($row->status == 1) {
+        $status = 'Active';
+      }
+      elseif ($row->status == 2) {
+        $status = 'Inactive';
+      }
       $play_link = l(t('Final Play'), 'budget/predictor/' . $row->budget_section);
       $action = l(t('Edit'), 'manage-budget-predictor/edit/' . $budget_id, array('query' => array('destination' => 'manage-budget-list')));
       $rows[] = array($i,
@@ -525,9 +531,10 @@ function itg_budget_manage_list() {
       );
       $i++;
     }
-  } 
+  }
   $caption_table_edit = l(t('Add Budget'), 'manage-budget-predictor') . "&nbsp;&nbsp;";
-  $caption_table_edit .= l(t('List Of Budget User'), 'budget-predictor-list');
+  $caption_table_edit .= l(t('List Of Budget User'), 'budget-predictor-list') . "&nbsp;&nbsp;";
+  $caption_table_edit .= l(t('Master of Budget Predictor'), 'budget-predictor-image');
   // Format and print out the table.
   $output = theme('table', array('header' => $header,
     'rows' => $rows,
@@ -677,11 +684,11 @@ function itg_manage_budget() {
     '#upload_location' => 'public://budget/',
     '#required' => TRUE
   );
-
+  
   $form['budget_status'] = array(
     '#type' => 'radios',
     '#title' => t('Budget status'),
-    '#options' => array(1 => "Show", 2 => "Off"),
+    '#options' => array(1 => "Yes", 2 => "No"),
     '#default_value' => ($results->status) ? $results->status : 2,
     '#required' => TRUE
   );
@@ -711,7 +718,7 @@ function itg_manage_budget() {
  * {@inheritdoc}
  */
 function itg_manage_budget_validate($form, &$form_state) {
-  $budget_action = $form_state['values']['budget_action'];
+  $budget_action = $form_state['input']['budget_action'];
   $budget_section = $form_state['values']['budget_section'];
   $query = db_select('itg_manage_budget', 'm');
   $query->condition('m.budget_section', $budget_section, '=');
@@ -805,8 +812,6 @@ function itg_budget_crop_image() {
 
     $file_name = 'budget/' . $file;
     $uri = substr($data, strpos($data, ",") + 1);
-    // save to file
-    file_put_contents('public://budget/' . $file, base64_decode($uri));
 
     $num_updated = db_update('itg_budget_predictor')
         ->fields(array('file_name' => $file_name))
@@ -815,7 +820,15 @@ function itg_budget_crop_image() {
         ->execute();
 
     if (!$num_updated) {
+      // Remove all error messages
+      drupal_get_messages('error');
+      // Get the array of errors and reset them
+      $errors = &drupal_static("form_set_error", array());
       drupal_set_message('Please Drag and Drop Images.', 'error');
+    }
+    else {
+      // save to file
+      file_put_contents('public://budget/' . $file, base64_decode($uri));
     }
   }
 }
@@ -874,7 +887,7 @@ function check_budget_status($section_id) {
  * @param string $timestamp
  * @return int
  */
-function check_budget_status_front_user($section_id) {
+function check_budget_status_front_user($section_id, $cookies_id) {
   global $user;
   $user_id = $user->uid;
   $query = db_select('itg_budget_predictor', 'p');
@@ -924,7 +937,6 @@ function itg_budget_download_excel() {
   echo "Mail";
   echo "\015\012";
   foreach ($result as $row) {
-    pr($row);
     $mail = !empty($row->user_id) ? user_load($row->user_id)->mail : t('Anonymous user');
     echo $mail;
     echo "\015\012";
@@ -960,4 +972,20 @@ function check_exist_predictor($user_id, $section_id) {
           ->condition('section_id', $section_id)
           ->countQuery()->execute()
           ->fetchField();
+}
+
+/**
+ * Reset final result for admin user.
+ * @global array $user
+ */
+function itg_budget_reset_image() {
+  $arg = arg();
+  $section_id = isset($arg[2]) ? $arg[2] : '';
+  if (isset($arg[1]) && $arg[1] == 'reset-budget-data' && !empty($section_id)) {
+    db_update('itg_budget_predictor')
+        ->fields(array('file_name' => ''))
+        ->condition('section_id', $section_id)
+        ->condition('status', 2, '=')
+        ->execute();
+  }
 }

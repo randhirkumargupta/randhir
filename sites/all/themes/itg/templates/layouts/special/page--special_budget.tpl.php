@@ -146,9 +146,9 @@ if (!empty($device[0])) {
                 {
                     $display_title = 'style="display:none"';
                 }
-               
+                if($_GET['type'] != 'budget-predictor') { 
                   echo '<h1 '.$display_title.' id="display_tit"><span class="highlights-title">' . mb_strimwidth($widget_data['itg-block-2']['block_title'], 0, 90, "..") . '</span></h1>';
-       
+                  
                 ?>
                 <div class="social-share">
                     <ul>
@@ -158,6 +158,7 @@ if (!empty($device[0])) {
                         <li><a title="share on google+" class= "google def-cur-pointer" onclick="return googleplusbtn('<?php print $actual_link; ?>')"></a></li>
                     </ul>
                 </div>
+                <?php } ?>          
                         </div>
                 </div>
                 <!--budget predictor with first block-->  
