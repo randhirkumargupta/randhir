@@ -113,8 +113,13 @@ function itg_social_media_menu() {
     return $items;
 }
 
+/**
+ * function use for social media report download pdf
+ * 
+ * @param array $rows_result
+ */
 function itg_social_media_download_pdf($rows_result) {
-//p($rows_result);
+
     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
     $pdf->SetCreator(PDF_CREATOR);
     $pdf->SetAuthor('Indiatoday');
@@ -167,7 +172,12 @@ function itg_social_media_download_pdf($rows_result) {
     exit();
 }
 
-// Colored table
+/**
+ * Function use for create table for pdf
+ * @param type $header
+ * @param type $data
+ * @param type $pdf
+ */
 function ColoredTable($header, $data, $pdf) {
     // Colors, line width and bold font
 
