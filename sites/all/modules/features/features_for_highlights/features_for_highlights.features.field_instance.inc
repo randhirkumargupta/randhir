@@ -27,13 +27,13 @@ function features_for_highlights_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 8,
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_emoji_condition',
-    'label' => 'Associate Emoji',
+    'label' => 'Display',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -65,7 +65,7 @@ function features_for_highlights_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -106,7 +106,7 @@ function features_for_highlights_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 5,
+        'weight' => 6,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -147,7 +147,7 @@ function features_for_highlights_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 7,
+        'weight' => 8,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -188,14 +188,14 @@ function features_for_highlights_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 2,
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_field_emoji_highlights_1',
     'label' => 'field_emoji_highlights_1',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -226,14 +226,14 @@ function features_for_highlights_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 4,
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_field_emoji_highlights_2',
     'label' => 'field_emoji_highlights_2',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -264,14 +264,14 @@ function features_for_highlights_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 6,
+        'weight' => 7,
       ),
     ),
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_field_emoji_highlights_3',
     'label' => 'field_emoji_highlights_3',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -318,7 +318,7 @@ function features_for_highlights_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 0,
     ),
   );
 
@@ -355,7 +355,7 @@ function features_for_highlights_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
@@ -406,7 +406,7 @@ function features_for_highlights_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Associate Emoji');
+  t('Display');
   t('Emoji title');
   t('Example: http://example.com');
   t('Highlights');

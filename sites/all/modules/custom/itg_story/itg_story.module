@@ -846,15 +846,18 @@ function itg_story_photo_story_bottom_html($node_id) {
   if (!empty($node_id)) {
     $node = node_load($node_id);
     $photo_story = $node->field_photo_story[LANGUAGE_NONE];
+    $count = sizeof($photo_story);
       $html = '';
       $html .= '<div class="photo-story-img multiple-photo common-photo">';
-      foreach ($photo_story as $key => $val) {
-        $entity_obj = entity_load('field_collection_item', array($val['value']));
-        $photo_story_img_path = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['uri'];
-        $photo_story_file_name = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['filename'];
+//      foreach ($photo_story as $key => $val) {
+      for ($i = 0; $i < $count; $i++) {
+        $entity_obj = entity_load('field_collection_item', array($photo_story[$i]['value']));
+        $photo_story_img_path = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['uri'];
+        $photo_story_file_name = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['filename'];
         $photo_story_img = image_style_url('photo_story_small_88x66', $photo_story_img_path);
         $html .= '<div class="photo-slider">';
         $html .= '<img src="' . $photo_story_img . '" title="' . $photo_story_file_name . '" alt="photo_story" />';
+        $html .= '<span>' . $i+1 . '</span>';
         $html .= '</div>';
       }
       $html .= '</div>';
