@@ -95,13 +95,6 @@ global $base_url;
 <?php $query_parameters = $_SERVER['QUERY_STRING'];
 ?>
 <!--     <input type="button" value="PDF" id="btnPrint" />-->
-<a href="<?php echo $base_url.'/social-media-report-pdf?'.$query_parameters.'';?>">Download PDF</a>
-     <style>@media print {
+<a href="<?php echo $base_url.'/social-media-report-pdf?'.$query_parameters.'';?>" class="btn-submit social-media-pdf-btn">Download PDF</a>
+     
   
-  #btnPrint{
-    visibility: hidden;
-  }
- 
-}
-         
-     </style>
