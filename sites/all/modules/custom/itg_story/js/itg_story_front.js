@@ -26,7 +26,8 @@
         
         
         var maxValueInArray = $('.multiple-photo-disc .photo-slider').length;         
-        $('.multiple-photo-disc').on('afterChange', function(event, slick, currentSlide){               
+        $('.multiple-photo-disc').on('afterChange', function(event, slick, currentSlide){
+          $(this).find('.slick-current a').trigger('click');
             if(currentSlide === maxValueInArray) {
                 if (Drupal.settings.itg_story_front.next) {
                     var next = Drupal.settings.itg_story_front.next;
