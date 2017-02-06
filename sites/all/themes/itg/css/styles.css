@@ -9670,9 +9670,19 @@ section.sidebar .block-itg-ads {
 .budget-page-layout .budget-ad {
   margin-top: 25px;
 }
-.budget-page-layout iframe {
-  width: 100%;
-  height: 285px;
+.budget-page-layout .video-wrapper {
+  position: relative;
+  padding-bottom: 74.75%;
+  /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+}
+.budget-page-layout .video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
 }
 .budget-page-layout .common-highlights {
   overflow: auto;
@@ -11853,8 +11863,7 @@ h1.about-us-heading + div p {
   color: #464646;
 }
 .common-highlights .agbutton, .common-highlights .emoji-container {
-  display: inline-block;
-  vertical-align: top;
+  display: block;
 }
 .common-highlights .emoji-container {
   margin: 10px 0 0px 0;
@@ -12397,4 +12406,8 @@ span.smilies-title {
 .front-end-breadcrumb {
   position: relative;
   z-index: 9999;
+}
+
+iframe[id*="twitter-widget"] {
+  width: 100% !important;
 }
