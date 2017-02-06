@@ -8025,10 +8025,7 @@ section.sidebar{
     .budget-ad{
         margin-top: 25px;
     }
-    iframe{
-        width: 100%;
-        height: 285px;
-    }
+    @include video-block(video-wrapper);
     .common-highlights{
         overflow:auto;
         height: 285px;
@@ -9900,7 +9897,7 @@ h1.about-us-heading{
         }
     }
     .agbutton, .emoji-container{
-        @include display-inline;
+        display: block;
     }
     .emoji-container{        
         margin: 10px 0 0px 0;
@@ -10325,4 +10322,9 @@ span.smilies-title {
 .front-end-breadcrumb{
   position: relative;
   z-index: 9999;
+}
+iframe{
+  &[id*="twitter-widget"]{
+    width: 100% !important;
+  }
 }
