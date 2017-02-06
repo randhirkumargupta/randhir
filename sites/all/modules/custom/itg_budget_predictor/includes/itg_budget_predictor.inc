@@ -936,10 +936,12 @@ function itg_budget_download_excel() {
   header("Expires: 0");
   echo "Mail";
   echo "\015\012";
-  foreach ($result as $row) {
-    $mail = !empty($row->user_id) ? user_load($row->user_id)->mail : t('Anonymous user');
-    echo $mail;
-    echo "\015\012";
+  if(is_array($result) && count($result) > 0) {
+      foreach ($result as $row) {
+        $mail = !empty($row->user_id) ? user_load($row->user_id)->mail : t('Anonymous user');
+        echo $mail;
+        echo "\015\012";
+      }
   }
 }
 

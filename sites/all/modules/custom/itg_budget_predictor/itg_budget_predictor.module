@@ -80,13 +80,12 @@ function itg_budget_predictor_custom() {
   $budget_status = check_budget($section_id);
   $settings = array();
 
-  if ($user_id) {
-    if ($_SESSION['present_budget']) {
+  if (!empty($user_id)) {
+    if (!empty($_SESSION['present_budget'])) {
       unset($_SESSION['present_budget']);
     }
   }
   else {
-    session_start();
     if (empty($_SESSION['pre_budget'])) {
       $budget_predictor_cookies_id = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz"), 0, 2) . time();
       $settings['budget_predictor_cookies_id'] = $budget_predictor_cookies_id;
