@@ -206,15 +206,21 @@ function itg_preprocess_html($param) {
  */
 function itg_html_head_alter(&$head_elements) {
     global $base_url;
+    
     if (!empty(arg(1)) && is_numeric(arg(1))) {
       $arg_data = node_load(arg(1));
       if(is_array($arg_data->field_story_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_story_configurations[LANGUAGE_NONE])){
           if($arg_data->field_story_configurations[LANGUAGE_NONE][0]['value'] == 'google_standout'){
               $standout_path = $base_url .'/'. $arg_data->path['alias'];
-              print '<link rel="standout" href="'.$standout_path.'"/>';
+              //print '<link rel="standout" href="'.$standout_path.'"/>';
+              $head_elements['google_standout'] = array(
+                '#type' => 'html_tag',
+                '#tag' => 'link',
+                '#attributes' => array('rel'=>'standout', 'href' => $standout_path),
+              );
           }
       }
     }
-    
+     
     $head_elements['metatag_keywords_0']['#name'] = 'news_keyword';
 }
