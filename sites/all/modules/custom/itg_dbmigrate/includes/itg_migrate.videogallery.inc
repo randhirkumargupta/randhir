@@ -173,26 +173,23 @@ class ItgVideogalleryMigration extends XMLMigration {
     // Section mapped in prepare
 
     $this->addFieldMapping('field_story_syndication', 'syndications')->xpath('syndications');
-
-    // Dailymotion playlist pending only one category save
-
     $this->addFieldMapping('field_story_archive', 'archive')->xpath('archive');
-
-    //video duration
-    // $this->addFieldMapping('field_video_duration', 'video_duration')->xpath('video_duration');
     $this->addFieldMapping('field_primary_category', 'primarycategory')->xpath('primarycategory');
-    //$this->addFieldMapping('field_common_related_content', 'relatedcontent')->xpath('relatedcontent');
-    $this->addFieldMapping('pathauto')->defaultValue(0);
-    $this->addFieldMapping('path', 'sefurl')->xpath('metatags/sefurl');
+//    $this->addFieldMapping('pathauto')->defaultValue(0);
+//    $this->addFieldMapping('path', 'sefurl')->xpath('metatags/sefurl');
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
     $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
     $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
     $this->addFieldMapping('workbench_moderation_state_new', 'workbench_moderation_state_new')->xpath('workbench_moderation_state_new');
     $this->addFieldMapping('created', 'createddate')->xpath('createddate');
     $this->addFieldMapping('changed', 'modifieddate')->xpath('modifieddate');
+    $this->addFieldMapping('field_noindex_nofollow', 'noindex_nofollow')->xpath('noindex_nofollow');
   }
 
   public function prepareRow($row) {
+    if((string) $row->xml->longheadline){
+      $row->xml->longheadline = trim((string) $row->xml->longheadline);
+    }
     //Workbench 
     if ((string) $row->xml->state == '1') {
       $row->xml->workbench_moderation_state_new = 'published';
@@ -275,8 +272,23 @@ class ItgVideogalleryMigration extends XMLMigration {
         }
       }
     }
+    if(!empty($row->xml->commentbox) && (string) $row->xml->commentbox == 1){
+      $final_option[]['value'] = 'comment_box';
+    }
+    // No follo no index
+    if ((string) $row->xml->noindex_nofollow == 1) {
+      $row->xml->noindex_nofollow = 'noindex_nofollow';
+    }
     $row->final_config_option = $final_option;
-
+    
+    // Multipart and bitrate flags
+    if(!empty($row->xml->multibitrate_flag) && (string) $row->xml->multibitrate_flag == 1){
+      $multipart[]['value'] = 'multipart_flag';
+    }
+    if(!empty($row->xml->multipart_flag) && (string) $row->xml->multipart_flag == 1){
+      $multipart[]['value'] = 'multibitrate_flag';
+    }
+    $row->multipart_bitrate = $multipart;
     // City migrate
     $data_city = '';
     if (isset($row->xml->cities->city) && !empty($row->xml->cities->city)) {
@@ -288,7 +300,7 @@ class ItgVideogalleryMigration extends XMLMigration {
     }
     $row->city_new = $data_city;
 
-    // Videogallery Date 
+    // Videogallery Date 2106
     $row->xml->expirydate = '4325600812';
 
 
@@ -302,14 +314,22 @@ class ItgVideogalleryMigration extends XMLMigration {
       }
     }
     $row->byline_new = $data_byline;
-    // Related content
-//    if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
-//      foreach($row->xml->relatedcontents->relatedcontent as $related){
-//        $related_content .= (string) $related.', ';
-//      }
-//      $final_related_content = rtrim($related_content, ', ');
-//      $row->xml->relatedcontents = $final_related_content;
-//    }
+    
+    //multi bitrates
+    $row->bitrates = '';
+    if (isset($row->xml->multi_bitrates) && !empty($row->xml->multi_bitrates)) {
+     //$arr = array();
+      foreach ($row->xml->multi_bitrates->bitrate as $value) {
+        $chk_variable = (string) $value;
+        if(!empty($chk_variable)){
+          $type = (string) $value->attributes()->type;
+          $bitrate_id = (string) $value;
+          $data_bitrate[]['value'] = $type.'@'.$bitrate_id;
+        }
+      }
+    }
+    $row->bitrates = $data_bitrate;
+    
     // manage created user
     if (isset($row->xml->createdby) && !empty($row->xml->createdby)) {
       $created_uid = (string) $row->xml->createdby;
@@ -343,12 +363,42 @@ class ItgVideogalleryMigration extends XMLMigration {
     if (!empty($row->city_new)) {
       $node->field_stroy_city[LANGUAGE_NONE] = $row->city_new;
     }
+    // Multi part flag
+    if (!empty($row->multipart_bitrate)) {
+      $node->field_video_flags[LANGUAGE_NONE] = $row->multipart_bitrate;
+    }
+    // Bitrate and type save in node
+    if(!empty($row->bitrates)) {
+      $node->field_multi_bitrate[LANGUAGE_NONE] = $row->bitrates;
+    }
     $node->uid = $row->xml->createdby;
   }
 
   public function complete($entity, $row) {
     $node = node_load($entity->nid);
 
+    //Video url migrate
+    if (isset($row->xml->videoparts) && !empty($row->xml->videoparts)) {
+      $key = 0;
+      foreach ($row->xml->videoparts->part as $value) {
+        $new_value = (string) $value;
+        if(!empty($new_value)){
+          $video_url = (string) $value;
+          $values = array(
+            'field_name' => 'field_video_upload',
+            'field_migrated_video_url' => array(LANGUAGE_NONE => array(array('value' => $video_url))),
+          );
+
+          $field_collection_item = entity_create('field_collection_item', $values);
+          $field_collection_item->setHostEntity('node', $node);
+          $field_collection_item->save(TRUE);
+          $node->field_video_upload[LANGUAGE_NONE][$key]['value'] = $field_collection_item->item_id;
+          $key++;
+        }
+      }
+      field_attach_update('node', $node);
+    }
+    
     //code for like and dislike
     if (isset($row->xml->like_dislike->like) || isset($row->xml->like_dislike->dislike)) {
       itg_flag_insert_like_dislike($node->nid, $row->xml->like_dislike->like, $row->xml->like_dislike->dislike);
@@ -358,6 +408,24 @@ class ItgVideogalleryMigration extends XMLMigration {
     //code for order set
     if (isset($row->xml->ordering)) {
       ordering_set_of_content($node, $row->xml->ordering);
+    }
+    // Related content save in db
+    if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
+     //$arr = array();
+      foreach ($row->xml->relatedcontents->relatedcontent as $value) {
+        $chk_variable = (string) $value;
+        if(!empty($chk_variable)){
+          db_insert('itg_dbmigrate_related_content')
+                            ->fields(array(
+                                'migrated_nid' => $node->nid,
+                                'source_id' => (string) $value,
+                                'type' => (string) $value->attributes()->type,
+                                'migration_node_type' => 'videogallery',
+                                'xml_id' => (string) $row->xml->id,
+                            ))
+                            ->execute();
+        }
+      }
     }
   }
 

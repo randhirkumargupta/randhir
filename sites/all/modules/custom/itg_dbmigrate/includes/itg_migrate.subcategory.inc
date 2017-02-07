@@ -34,7 +34,7 @@ class ItgSubCategoryMigration extends XMLMigration {
 
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
-    $items_url = $xml_folder . 'subcategory.xml';
+    $items_url = $xml_folder . 'subcategories-master.xml';
 
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -94,6 +94,9 @@ class ItgSubCategoryMigration extends XMLMigration {
       $source_cid = (string) $row->xml->category;
       $orignal_category = get_itg_destination_id('migrate_map_itgcategory', $source_cid);
       $row->xml->category = $orignal_category;
+       //sef url
+      $sef_path = itg_db_migrate_term_sef('taxonomy/term/'.$orignal_category);
+      $row->xml->sef_url = $sef_path.'/'.$row->xml->sef_url;
     }
     else {
       $row->xml->category = '';
