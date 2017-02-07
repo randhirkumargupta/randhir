@@ -182,7 +182,7 @@ function itg_social_media_download_pdf($rows_result) {
     }
 // ---------------------------------------------------------
 //Close and output PDF document
-    $pdf->Output('socialmedia_report.pdf', 'I');
+    $pdf->Output('socialmedia_report.pdf', 'D');
     exit();
 }
 
