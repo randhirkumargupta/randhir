@@ -64,8 +64,26 @@ function itg_quiz_menu() {
       'type' => MENU_CALLBACK,
 
   );
+ // hook menu for lallan top quiz
+ $items['quiz-response'] = array(
+      'title' => t('Quiz Response'),
+      'page callback' => 'itg_quiz_response',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+
+  );
+ $items['quiz-response-checkbox'] = array(
+      'title' => t('Quiz Response'),
+      'page callback' => 'show_answer',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+
+  );
+ 
   return $items;
 }
+
+
 
 /**
  * Implements hook_block_info().
@@ -308,7 +326,6 @@ function itg_quiz_form_views_exposed_form_alter(&$form, &$form_state, $form_id) 
  * {@inheritdoc}
  */
 function itg_quiz_node_presave($node){
-  
   // Publish/unpublish functionality for quiz
   if ($node->type == 'quiz') {
     if ($node->op == 'Publish') {
@@ -611,6 +628,7 @@ function itg_quiz_get_total_score($nid, $unique_key){
  * @return int
  */
 function itg_quiz_winners_list($nid, $range){
+
     if (!empty($range)) {
     $result = db_select('itg_quiz_detail', 'qd')
             ->fields('qd')
@@ -938,3 +956,148 @@ function quiz_form_ajax_handler(&$form, &$form_state){
       '#commands' => $commands
   );
 }
+
+// Quiz answer response for Sigle Correct Answer
+
+global $ans_value;
+function itg_quiz_response(){
+
+     $nid= $_GET['nid'];
+     $ans= $_GET['ans_val'];
+     
+     
+     $ans_value= explode("-",$ans);
+    $query="select f3.field_quiz_correct_answer_value as correct_answer from  node as n
+inner join field_data_field_quiz_add_questions as f1  on f1.entity_id = n.nid
+inner join field_data_field_quiz_options_answer as f2  on f2.entity_id = f1.field_quiz_add_questions_value
+inner join field_data_field_quiz_correct_answer as f3  on f3.entity_id = f2.field_quiz_options_answer_value
+where 
+f3.entity_type = 'field_collection_item'
+ and f3.bundle = 'field_quiz_options_answer' 
+ and  n.nid = $nid
+ and  f3.entity_id = $ans_value[0]";
+$result=db_query($query);
+
+$record = $result->fetchObject();  
+
+$record->correct_answer;
+    
+    if ($record->correct_answer=='Yes'){
+        $choice  = 'correct';
+        $query =db_select('taxonomy_term_data', 't');
+        $query->join('field_data_field_radio_button', 'r', 'r.entity_id = t.tid');
+        $query->fields('t', array('name'));
+        $query->condition('r.field_radio_button_value', $choice, '=');
+        $query->condition('t.vid', '41', '=');
+        $res = $query->execute();        
+	$result = $res->fetchAll();
+        if(is_array($result) && !empty($result)){
+          shuffle($result);
+        }        
+        print $result[0]->name.'-Correct';
+        //print 'Correct';
+    }         
+        else { 
+        $choice  = 'incorrect';
+        $query =db_select('taxonomy_term_data', 't');
+        $query->join('field_data_field_radio_button', 'r', 'r.entity_id = t.tid');
+        $query->fields('t', array('name'));
+        $query->condition('r.field_radio_button_value', $choice, '=');
+        $query->condition('t.vid', '41', '=');
+        $res = $query->execute();        
+	$result = $res->fetchAll();
+        if(is_array($result) && !empty($result)){
+          shuffle($result);
+        }        
+        print $result[0]->name.'-Incorrect';
+        //print 'Incorrect';
+    }
+     
+    }
+    
+    // Quiz answer response for Multiple Correct Answer
+    
+  function show_answer() {
+    $nid = $_GET['nid'];
+    $ans = json_decode(stripslashes($_GET['ans_val']));
+    $not_selected = json_decode(stripslashes($_GET['not_select']));
+      foreach($not_selected as $key=>$value) {
+       $ansval = explode("-",$value);
+        $query="select f3.field_quiz_correct_answer_value as correct_answer from  node as n
+	inner join field_data_field_quiz_add_questions as f1  on f1.entity_id = n.nid
+	inner join field_data_field_quiz_options_answer as f2  on f2.entity_id = f1.field_quiz_add_questions_value
+	inner join field_data_field_quiz_correct_answer as f3  on f3.entity_id = f2.field_quiz_options_answer_value
+	where 
+	f3.entity_type = 'field_collection_item'
+	 and f3.bundle = 'field_quiz_options_answer' 
+	 and  n.nid = $nid
+	 and  f3.entity_id = $ansval[0]";
+    $result=db_query($query);
+
+    $record = $result->fetchObject();  
+    $answer[] = $record->correct_answer;
+  }
+  if(in_array('Yes', $answer)) {
+   	$choice  = 'incorrect';
+	$query =db_select('taxonomy_term_data', 't');
+	$query->join('field_data_field_radio_button', 'r', 'r.entity_id = t.tid');
+	$query->fields('t', array('name'));
+	$query->condition('r.field_radio_button_value', $choice, '=');
+	$query->condition('t.vid', '41', '=');
+	$res = $query->execute();        
+	$result = $res->fetchAll();
+	if(is_array($result) && !empty($result)){
+	  shuffle($result);
+	}        
+	print $result[0]->name.'-incorrect';
+  } else {
+	  foreach($ans as $key=>$value) {
+	    $ansval = explode("-",$value);
+	    $query="select f3.field_quiz_correct_answer_value as correct_answer from  node as n
+		inner join field_data_field_quiz_add_questions as f1  on f1.entity_id = n.nid
+		inner join field_data_field_quiz_options_answer as f2  on f2.entity_id = f1.field_quiz_add_questions_value
+		inner join field_data_field_quiz_correct_answer as f3  on f3.entity_id = f2.field_quiz_options_answer_value
+		where 
+		f3.entity_type = 'field_collection_item'
+		 and f3.bundle = 'field_quiz_options_answer' 
+		 and  n.nid = $nid
+		 and  f3.entity_id = $ansval[0]";
+	    $result=db_query($query);
+
+	    $record = $result->fetchObject();
+            $answer_checked[] = $record->correct_answer;            	    
+	  }
+          if(in_array('', $answer_checked)) {
+	        $choice  = 'incorrect';
+		$query =db_select('taxonomy_term_data', 't');
+		$query->join('field_data_field_radio_button', 'r', 'r.entity_id = t.tid');
+		$query->fields('t', array('name'));
+		$query->condition('r.field_radio_button_value', $choice, '=');
+		$query->condition('t.vid', '41', '=');
+		$res = $query->execute();        
+		$result = $res->fetchAll();
+		if(is_array($result) && !empty($result)){
+		  shuffle($result);
+		}        
+		print $result[0]->name.'-incorrect';
+	    } else {
+                $choice  = 'correct';
+		$query =db_select('taxonomy_term_data', 't');
+		$query->join('field_data_field_radio_button', 'r', 'r.entity_id = t.tid');
+		$query->fields('t', array('name'));
+		$query->condition('r.field_radio_button_value', $choice, '=');
+		$query->condition('t.vid', '41', '=');
+		$res = $query->execute();        
+		$result = $res->fetchAll();
+		if(is_array($result) && !empty($result)){
+		  shuffle($result);
+		}        
+		print $result[0]->name.'-correct';
+            }
+  }
+}
+
+    
+    
+    
+    

@@ -221,12 +221,26 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
           );
          }
       }
+      
+       $items = field_get_items('node', $node, 'field_quiz_add_questions');
+	foreach ($items as $item) {
+	  $fc = field_collection_field_get_entity($item);
+      }
 
       // Answer Section
-      $form['answer' . $num] = array(
-          '#type' => 'markup',
-          '#prefix' => '<div id="answer-container-'.$num.'" class="answer-container">',
-      );
+      if($node->field_quiz_immediate_result[LANGUAGE_NONE][0]['value'] == 'qwr' && $fc->field_quiz_answer_type[LANGUAGE_NONE][0]['value'] == 'multiple_correct') {
+              $form['answer' . $num] = array(
+		  '#type' => 'markup',
+		  '#prefix' => '<div id="answer-container-'.$num.'" class="answer-container">',
+		  '#suffix' => '<div id="answer-response-'.$question_arr['value'].'" class="answer-container-actual"></div><button id="show_answer">Show answer</button>',
+	      );
+      } else {
+	      $form['answer' . $num] = array(
+		  '#type' => 'markup',
+		  '#prefix' => '<div id="answer-container-'.$num.'" class="answer-container">',
+		  '#suffix' => '<div id="answer-response-'.$question_arr['value'].'" class="answer-container-actual"></div>',
+	      );
+      }
 
       if ($answer_option == 'Photo' || $answer_option == 'Video') {
           $form['answer_option' . $num] = array(
