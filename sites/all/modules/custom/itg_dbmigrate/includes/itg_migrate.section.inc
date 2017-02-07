@@ -34,7 +34,7 @@ class ItgSectionMigration extends XMLMigration {
     
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
     
-    $items_url = $xml_folder . 'section.xml';
+    $items_url = $xml_folder . 'sections-master.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.

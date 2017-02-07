@@ -43,7 +43,7 @@ class ItgBylineMigration extends XMLMigration {
     
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
     
-    $items_url = $xml_folder . 'byline.xml';
+    $items_url = $xml_folder . 'byline-master.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
