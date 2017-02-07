@@ -90,7 +90,9 @@ class ItgSectionMigration extends XMLMigration {
     $this->addFieldMapping('field_cm_redirection_url', 'content_url')->xpath('content_url');
     $this->addFieldMapping('field_cm_category_color', 'content_display_color')->xpath('header_image');
     $this->addFieldMapping('weight', 'ordering')->xpath('ordering');
-    $this->addFieldMapping('field_category_section_type', 'section_type')->xpath('section_type');       
+    $this->addFieldMapping('field_category_section_type', 'section_type')->xpath('section_type'); 
+    // Redirect
+    $this->addFieldMapping('migrate_redirects', 'content_url')->xpath('content_url');
     //<issue_free>0</issue_free> (not clear)
     //$this->addFieldMapping('metatag_abstract', 'nodeword_abstract');    
     //$this->addFieldMapping('metatag_robots', 'nodeword_robots');

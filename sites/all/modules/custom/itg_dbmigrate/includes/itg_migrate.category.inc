@@ -96,7 +96,8 @@ class ItgCategoryMigration extends XMLMigration {
     $this->addFieldMapping('field_cm_redirection_url', 'content_url')->xpath('content_url');
     //$this->addFieldMapping('field_category_section_type', 'section_type')->xpath('section_type');
     $this->addFieldMapping('field_cm_category_color', 'content_display_color')->xpath('content_display_color');
-
+    // Redirect
+    $this->addFieldMapping('migrate_redirects', 'content_url')->xpath('content_url');
     //<simply_flag>0</simply_flag>(not clear)
     //<params>(not clear)
     //<schedule_duration>(not clear)

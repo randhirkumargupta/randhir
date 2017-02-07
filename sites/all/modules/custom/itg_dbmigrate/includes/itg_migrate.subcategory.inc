@@ -85,6 +85,8 @@ class ItgSubCategoryMigration extends XMLMigration {
     $this->addFieldMapping('pathauto')->defaultValue(0);
     $this->addFieldMapping('path', 'sefurl')->xpath('sef_url');
     $this->addFieldMapping('field_cm_redirection_url', 'content_url')->xpath('content_url');
+    // Redirect
+    $this->addFieldMapping('migrate_redirects', 'content_url')->xpath('content_url');
   }
   
   
