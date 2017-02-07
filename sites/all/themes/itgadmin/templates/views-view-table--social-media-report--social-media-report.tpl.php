@@ -1,4 +1,5 @@
 <?php
+global $base_url;
 /**
  * @file
  * Template to display a view as a table.
@@ -91,14 +92,9 @@
       }
     </script>
 <div id="piechart" style="width: 900px; height: 500px;"></div>
-
-     <input type="button" value="PDF" id="btnPrint" />
-     <style>@media print {
+<?php $query_parameters = $_SERVER['QUERY_STRING'];
+?>
+<!--     <input type="button" value="PDF" id="btnPrint" />-->
+<a href="<?php echo $base_url.'/social-media-report-pdf?'.$query_parameters.'';?>" class="btn-submit social-media-pdf-btn">Download PDF</a>
+     
   
-  #btnPrint{
-    visibility: hidden;
-  }
- 
-}
-         
-     </style>

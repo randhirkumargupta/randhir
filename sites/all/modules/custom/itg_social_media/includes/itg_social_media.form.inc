@@ -76,7 +76,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     
   // Facebook Image.
   $form['fb_wrap']['itg_fb_img'] = array(
-    '#title' => t('Image'),
+    '#title' => t('Image').'<span class="form-required"> *</span>',
     '#type' => 'managed_file',
     '#description' => t('The uploaded image will be displayed on this page using the image style choosen below.'),
     '#upload_location' => 'public://itg_fb_img/',
@@ -115,7 +115,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
   
   // Facebook Video.
   $form['fb_wrap']['itg_fb_video'] = array(
-    '#title' => t('Video'),
+    '#title' => t('Video').'<span class="form-required"> *</span>',
     '#type' => 'managed_file',
     '#upload_location' => 'public://facebook_video/',
     '#default_value' => isset($node->field_story_facebook_video['und'][0]['fid']) ? $node->field_story_facebook_video['und'][0]['fid'] : 0,
