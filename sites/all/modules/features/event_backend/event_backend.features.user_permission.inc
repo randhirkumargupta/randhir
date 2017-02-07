@@ -10,17 +10,6 @@
 function event_backend_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: 'administer domains'.
-  $permissions['administer domains'] = array(
-    'name' => 'administer domains',
-    'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'domain',
-  );
-
   // Exported permission: 'create event_backend content'.
   $permissions['create event_backend content'] = array(
     'name' => 'create event_backend content',
@@ -157,17 +146,6 @@ function event_backend_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'scheduler',
-  );
-
-  // Exported permission: 'set domain access'.
-  $permissions['set domain access'] = array(
-    'name' => 'set domain access',
-    'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'domain',
   );
 
   return $permissions;

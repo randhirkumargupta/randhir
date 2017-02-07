@@ -263,7 +263,10 @@ function itg_survey_form_views_exposed_form_alter(&$form, &$form_state, $form_id
  * {@inheritdoc}
  */
 function itg_survey_node_presave($node) {
-
+  
+//  if($node->op == 'Publish') {
+//    $node->field_supp_publish[LANGUAGE_NONE][0]['value'] = 1;
+//  }
   // Publish/unpublish functionality for survey
   if ($node->type == 'survey') {
     if ($node->is_new == 1) {
@@ -615,7 +618,7 @@ function itg_survey_node_access($node, $op, $account) {
       }
 
       // If condition is true, user doesn't allow to see node
-      if (($node_edit && $op == 'update') || user_is_anonymous()) {
+      if (($node_edit && $op == 'update' && $node->status == 1) || user_is_anonymous() || ($op == 'update' && $node->uid != $user->uid)) {
         return NODE_ACCESS_DENY;
       }
     }

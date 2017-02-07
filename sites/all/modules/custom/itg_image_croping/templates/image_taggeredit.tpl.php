@@ -8,7 +8,7 @@
 <div id="container">
     <div id="imgtag"> 
 
-        <img id="" src="<?php echo $url;?>" /> 
+        <img id="" src="<?php echo $url;?>" alt="" /> 
         <div id="tagbox">
         </div>
     </div> 
@@ -19,7 +19,7 @@
     
 </div>
      <input type="hidden" value="<?php echo $data->fid; ?>" id="image_fiedlid">
-<div id="loader-data" style="display: none"><img class="widget-loader" align="center" src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
+<div id="loader-data" style="display: none"><img class="widget-loader" src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
 
 
 <?php

@@ -8,52 +8,8 @@
         attach: function (context, settings) {
             var uid = settings.itg_flag.settings.uid;
             var base_url = settings.itg_flag.settings.base_url;
-            //alert(base_url);
-            
-            // jquery for front user activity
-            $('#user-activity').click(function (event) {
 
-                var nd_id = jQuery(this).attr('rel');
-                var dtag = jQuery(this).attr('data-tag');
-                var dstatus = jQuery(this).attr('data-status');
-                var data_activity = jQuery(this).attr('data-activity');
-                var post_data = "&nd_id=" + nd_id + "&dtag=" + dtag + "&data_activity=" + data_activity + "&dstatus=" + dstatus;
 
-                $.ajax({
-                    'url': base_url + '/user-activity-front-end',
-                    'data': post_data,
-                    'cache': false,
-                    'type': 'POST',
-                    // dataType: 'json',
-                    beforeSend: function () {
-
-                    },
-                    'success': function (result)
-                    {
-                        var obj = jQuery.parseJSON(result);
-                        if (obj.success == 1) {
-                            console.log('create');
-                            $(".follow-story a").attr({
-                                'data-status': 0,
-                                title: 'Unfollow story'
-                            }).html('Unfollow story');
-                        }
-                        if (obj.success == 0) {
-                            console.log('update');
-                             $(".follow-story a").attr({
-                                'data-status': 1,
-                                title: 'Follow the Story'
-                            }).html('Follow the Story');
-                        }
-                        if (obj.error == 'error') {
-
-                        }
-                    }
-                });
-
-            });
-            
-            // end here
         }
 
     };
@@ -66,7 +22,7 @@
         return;
     js = d.createElement(s);
     js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";    
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
@@ -83,7 +39,7 @@ function fbpop(linkurl, title, desc, image, base_url, node_id) {
             jQuery.ajax({
                 url: base_url + '/earn-loyalty-point/' + node_id + '/share',
                 type: 'POST',
-                dataType: 'JSON',                
+                dataType: 'JSON',
             });
         }
     });
@@ -164,16 +120,76 @@ jQuery(document).ready(function () {
 
                     jQuery("#voted_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
                 }
-                 jQuery('#like_count,#dislike_count').prop('disabled', false);
+                jQuery('#like_count,#dislike_count').prop('disabled', false);
             }
         });
-        
-        jQuery(document).click(function(){
-             jQuery("#sty-dv, #dsty-dv").hide();
+
+        jQuery(document).click(function () {
+            jQuery("#sty-dv, #dsty-dv").hide();
         });
-        jQuery("#sty-dv, #dsty-dv").click(function(e){
-              e.stopPropagation();
+        jQuery("#sty-dv, #dsty-dv").click(function (e) {
+            e.stopPropagation();
         });
 
     });
+
+    // emoji and follow story
+
+
+    // jquery for front user activity
+    jQuery('#user-activity, .user-activity').click(function (event) {        
+        var nd_id = jQuery(this).attr('rel');
+        var dtag = jQuery(this).attr('data-tag');
+        var nodeId = jQuery(this).attr('data-nodeid');
+        var dstatus = jQuery(this).attr('data-status');
+        var data_activity = jQuery(this).attr('data-activity');
+        var post_data = "&nd_id=" + nd_id + "&dtag=" + dtag + "&data_activity=" + data_activity + "&dstatus=" + dstatus;
+        jQuery(this).closest(".emoji-container").find("a").removeClass("def-cur-pointer").addClass("def-cur-none-pointer");
+        if(!jQuery(this).closest(".emoji-container").find("a").hasClass('def-cur-none-pointer')) {
+        jQuery.ajax({
+            'url': Drupal.settings.baseUrl.baseUrl + '/user-activity-front-end',
+            'data': post_data,
+            'cache': false,
+            'type': 'POST',
+            // dataType: 'json',
+            beforeSend: function () {
+
+            },
+            'success': function (result)
+            {
+                var obj = jQuery.parseJSON(result);
+                if (obj.success == 1) {
+                    console.log('create');
+                    jQuery(".follow-story a").attr({
+                        'data-status': 0,
+                        title: 'Unfollow story'
+                    }).html('Unfollow story');
+                }
+                if (obj.success == 0) {
+                    console.log('update');
+                    jQuery(".follow-story a").attr({
+                        'data-status': 1,
+                        title: 'Follow the Story'
+                    }).html('Follow the Story');
+                }
+                if (obj.error == 'error') {
+
+                }
+                if (obj.ok == 'hightlights_emoji_true') {
+                    jQuery("."+obj.rel).html("(" + obj.count + ")");
+                    jQuery(".hightlights_emoji_msg_" + obj.nd_id).html('Success').show(0).delay(2000).hide(1000);
+                }
+                if (obj.ok == 'error') {
+                    jQuery(".hightlights_emoji_msg_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
+                }
+                
+            }
+        });
+      } else {
+                jQuery(".hightlights_emoji_msg_" +nodeId).html('You have already voted').show(0).delay(2000).hide(1000);
+      }
+
+    });
+
+    // end here
 });

@@ -8,7 +8,7 @@
             <span class="dm-pic">
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$entity['nid']}") ?>">
                 <?php $file_uri = file_create_url($entity['esi_file_uri']); ?>
-                <img src="<?php print $file_uri; ?>" />
+                <img src="<?php print $file_uri; ?>" alt="" />
               </a>
             </span>
             <?php
@@ -17,7 +17,7 @@
             ?>
             <span class="dm-pic">
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$entity['nid']}") ?>">
-                <img height="66" width="88" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" />
+                <img height="66" width="88" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" alt="" />
               </a>
             </span>
           <?php } ?>

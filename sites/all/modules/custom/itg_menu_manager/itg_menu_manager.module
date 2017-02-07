@@ -96,7 +96,11 @@ function itg_menu_manager_permission() {
  * {@inheritdoc}
  */
 function itg_menu_manager_form($form, &$form_state) {
-
+  // Change title during edit operation.
+  if(isset($_GET['edit_id'])) {
+    drupal_set_title("Edit menu");
+  }
+  
   $default_values = array();
   $edit_id = isset($_GET['edit_id']) ? intval(trim($_GET['edit_id'])) : FALSE;
   $term_id = isset($_GET['term_id']) ? intval(trim($_GET['term_id'])) : FALSE;
@@ -1262,7 +1266,7 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
     if ($int_value) {
       $icon_object = file_load((int) $icon_fid);
       // Set icon for internal menu used for vertical menu.
-      $link_text = $vertical_menu_icon = "<img title='" . $link_title_for_vertical . "'  src='" . file_create_url($icon_object->uri) . "' />"; //theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $icon_object->uri));
+      $link_text = $vertical_menu_icon = "<img title='" . $link_title_for_vertical . "'  src='" . file_create_url($icon_object->uri) . "' alt='' />"; //theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $icon_object->uri));
       if (!empty($icon_object->uri)) {
         $image_class = "has-image";
       }
@@ -1270,12 +1274,12 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
   }
   // Handle case for default image
   if ($url_type == 'external' && $display_icon && $icon_fid == "notFound") {
-    $link_text = $vertical_menu_icon = "<img  title='" . $link_title_for_vertical . "' src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all_110_37.jpeg' />";
+    $link_text = $vertical_menu_icon = "<img  title='" . $link_title_for_vertical . "' src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all_110_37.jpeg' alt='' />";
   }
 
   if ($url_type == 'internal' && $display_icon) {
     if (is_string($sponser_logo_uri) && !empty($sponser_logo_uri)) {
-      $link_text = $vertical_menu_icon = "<img  src='" . file_create_url($sponser_logo_uri) . "' />"; //theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $sponser_logo_uri));
+      $link_text = $vertical_menu_icon = "<img  src='" . file_create_url($sponser_logo_uri) . "' alt='' />"; //theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $sponser_logo_uri));
       $image_class = "has-image";
     }
   }
@@ -1334,9 +1338,14 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
  * {@inheritdoc}
  */
 function itg_menu_manager_taxonomy_term_delete($term) {
+  _delete_term_from_menu_manager($tid);
+}
+
+
+function _delete_term_from_menu_manager($tid) {
   try {
     db_delete('itg_menu_manager')
-        ->condition('tid', $term->tid)
+        ->condition('tid', $tid)
         ->execute();
   } catch (Exception $ex) {
     drupal_set_message($ex->getMessage());

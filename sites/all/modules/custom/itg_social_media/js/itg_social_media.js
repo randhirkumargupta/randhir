@@ -1,13 +1,13 @@
-(function ($, Drupal, window, document, undefined) {
+(function($, Drupal, window, document, undefined) {
     Drupal.behaviors.itg_social_media = {
-        attach: function (context, settings) {
+        attach: function(context, settings) {
 
             // Module code start
 
             // Callback function for custom methods.
             var FormValidation = {
                 // Validate Social Media Integration checkboxes.
-                validate_smi: function (value, element) {
+                validate_smi: function(value, element) {
                     var smi_fb = $('input[name="itg_smi[facebook]"]').is(':checked');
                     var smi_instant_article = $('input[name="itg_smi[facebook_instant_article]"]').is(':checked');
                     var smi_twitter = $('input[name="itg_smi[twitter]"]').is(':checked');
@@ -20,8 +20,8 @@
                     }
                 },
                 // Common function to reset all values
-                clear_form_elements: function (class_name) {
-                    jQuery("." + class_name).find(':input').each(function () {
+                clear_form_elements: function(class_name) {
+                    jQuery("." + class_name).find(':input').each(function() {
                         switch (this.type) {
                             case 'text':
                             case 'textarea':
@@ -33,83 +33,83 @@
                         }
                     });
                 },
-                fb_image: function (value, element) {
+                fb_image: function(value, element) {
                     // Validate for facebook.
-                    var facebook_condition = $('input[name="itg_facebook_condition"]:checked').val();                    
+                    var facebook_condition = $('input[name="itg_facebook_condition"]:checked').val();
                     var smi_fb = $('input[name="itg_smi[facebook]"]').is(':checked');
                     // Validate Image condion.
-                    if (facebook_condition == 0 && value == 0 && smi_fb) {                        
-                        return false;                     
+                    if (facebook_condition == 0 && value == 0 && smi_fb) {
+                        return false;
                     }
                     else {
                         return true;
-                    }                    
+                    }
                 },
-                fb_video: function (value, element) {
+                fb_video: function(value, element) {
                     // Validate for facebook.
-                    var facebook_condition = $('input[name="itg_facebook_condition"]:checked').val();                    
+                    var facebook_condition = $('input[name="itg_facebook_condition"]:checked').val();
                     var smi_fb = $('input[name="itg_smi[facebook]"]').is(':checked');
                     // Validate video condition.
-                    if (facebook_condition == 1 && value == 0 && smi_fb) {                        
-                        return false;                                                
+                    if (facebook_condition == 1 && value == 0 && smi_fb) {
+                        return false;
                     }
                     else {
                         return true;
                     }
                 },
-                twitter_video: function (value, element) {
+                twitter_video: function(value, element) {
                     // Validate for facebook.
-                    var twitter_condition = $('input[name="itg_twitter_condition"]:checked').val();                    
-                    var smi_twitter = $('input[name="itg_smi[twitter]"]').is(':checked');                    
+                    var twitter_condition = $('input[name="itg_twitter_condition"]:checked').val();
+                    var smi_twitter = $('input[name="itg_smi[twitter]"]').is(':checked');
                     // Validate video condition.
                     if (twitter_condition == 1 && value == 0 && smi_twitter) {
                         console.log('video case');
                         console.log('video fid: ' + value);
-                        return false;                                                
+                        return false;
                     }
                     else {
                         return true;
                     }
                 },
-                twitter_image: function (value, element) {
+                twitter_image: function(value, element) {
                     // Validate for facebook.
-                    var twitter_condition = $('input[name="itg_twitter_condition"]:checked').val();                    
+                    var twitter_condition = $('input[name="itg_twitter_condition"]:checked').val();
                     var smi_twitter = $('input[name="itg_smi[twitter]"]').is(':checked');
-                    
+
                     // Validate video condition.
                     if (twitter_condition == 0 && value == 0 && smi_twitter) {
-                        return false;                                                
+                        return false;
                     }
                     else {
                         return true;
                     }
                 }
-            };            
-            
+            };
+
 
             // Add placeholder to scheduler fields
-            var date_holder = moment().format('DD/MM/YYYY');
-            var time_holder = moment().format('H:mm');
-            jQuery('input[name="img_schedule_time[date]"]').attr('placeholder', date_holder);
-            jQuery('input[name="img_schedule_time[time]"]').attr('placeholder', time_holder);
-
-            jQuery('input[name="video_schedule_time[date]"]').attr('placeholder', date_holder);
-            jQuery('input[name="video_schedule_time[time]"]').attr('placeholder', time_holder);
-
-            jQuery('input[name="tw_img_schedule_time[date]"]').attr('placeholder', date_holder);
-            jQuery('input[name="tw_img_schedule_time[time]"]').attr('placeholder', time_holder);
-
-            jQuery('input[name="tw_vid_schedule_time[date]"]').attr('placeholder', date_holder);
-            jQuery('input[name="tw_vid_schedule_time[time]"]').attr('placeholder', time_holder);
+//            var date_holder = moment().format('DD/MM/YYYY');
+//            var time_holder = moment().format('H:mm');
+//            jQuery('input[name="img_schedule_time[date]"]').attr('placeholder', date_holder);
+//            jQuery('input[name="img_schedule_time[time]"]').attr('placeholder', time_holder);
+//
+//            jQuery('input[name="video_schedule_time[date]"]').attr('placeholder', date_holder);
+//            jQuery('input[name="video_schedule_time[time]"]').attr('placeholder', time_holder);
+//
+//            jQuery('input[name="tw_img_schedule_time[date]"]').attr('placeholder', date_holder);
+//            jQuery('input[name="tw_img_schedule_time[time]"]').attr('placeholder', time_holder);
+//
+//            jQuery('input[name="tw_vid_schedule_time[date]"]').attr('placeholder', date_holder);
+//            jQuery('input[name="tw_vid_schedule_time[time]"]').attr('placeholder', time_holder);
 
             // Twitter field validation.
             $("#itg-social-media-form").validate({
-                onfocusout: function (element) {
+                onfocusout: function(element) {
                     $(element).valid();
                 },
                 ignore: '',
                 errorElement: 'span',
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     var elementName = element.attr('name');
                     var errorPlaceHolder = '';
                     switch (elementName) {
@@ -121,7 +121,7 @@
                 rules: {
                     'itg_facebook_narrative': {
                         required: {
-                            depends: function () {
+                            depends: function() {
                                 if ($('#edit-itg-smi-facebook').is(":checked")) {
                                     return true;
                                 }
@@ -136,7 +136,7 @@
                     },
                     'itg_twitter_narrative': {
                         required: {
-                            depends: function () {
+                            depends: function() {
                                 if ($('#edit-itg-smi-twitter').is(':checked')) {
                                     return true;
                                 }
@@ -172,19 +172,43 @@
                     }
                 }
             });
-            jQuery.validator.addMethod("fb_image", function (value, element) {
+            jQuery.validator.addMethod("fb_image", function(value, element) {
                 return FormValidation.fb_image(value, element);
             }, "Facebook image is required.");
-            jQuery.validator.addMethod("fb_video", function (value, element) {
+            jQuery.validator.addMethod("fb_video", function(value, element) {
                 return FormValidation.fb_video(value, element);
             }, "Facebook video is required.");
-            jQuery.validator.addMethod("twitter_image", function (value, element) {
+            jQuery.validator.addMethod("twitter_image", function(value, element) {
                 return FormValidation.twitter_image(value, element);
             }, "Twitter image is required.");
-            jQuery.validator.addMethod("twitter_video", function (value, element) {
+            jQuery.validator.addMethod("twitter_video", function(value, element) {
                 return FormValidation.twitter_video(value, element);
             }, "Twitter video is required.");
             // Moduel code end.      
         }
     };
 })(jQuery, Drupal, this, this.document);
+
+jQuery(document).ready(function() {
+    var current_langth = jQuery('#edit-itg-twitter-narrative').val().length; 
+     var maxLength = jQuery('#edit-itg-twitter-narrative').attr('maxlength'); 
+    var count_li = maxLength-current_langth;
+    jQuery('#twitt_chars').text(count_li);
+    jQuery('#edit-itg-twitter-narrative').on('keyup',function() {
+      
+        var length = jQuery(this).val().length;
+        var length = maxLength - length;
+        jQuery('#twitt_chars').text(length);
+    });
+    
+    var fbcurrent_langth = jQuery('#edit-itg-facebook-narrative').val().length; 
+     var fb_maxLength = jQuery('#edit-itg-facebook-narrative').attr('maxlength'); 
+    var fb_count_li = fb_maxLength-fbcurrent_langth;
+    jQuery('#fb_chars').text(fb_count_li);
+    jQuery('#edit-itg-facebook-narrative').on('keyup',function() {
+      
+        var length = jQuery(this).val().length;
+        var length = fb_maxLength - length;
+        jQuery('#fb_chars').text(length);
+    });
+});

@@ -162,10 +162,19 @@
             margin: 0 auto;
             float: none; 
             padding-right:0; 
+            padding-bottom: 10px;
             .globle-search{
                 right: 50px;
             }
-        }  
+        }
+        div.footer-expand-icon{
+            display: none;
+        }
+        .footer-expand-icon{
+            top: auto;
+            right: auto;
+            position: absolute;
+        }
     } 
     /*end css footer*/
     /*start css home page*/   
@@ -441,17 +450,14 @@
     overflow: auto;
     margin:0 -6px;
     li{
-        float: none;
-        display: inline-block;
-        width: 156px;
-        vertical-align: top;
-        padding: 15px 6px;
         a{
             white-space: pre-wrap;
         }
     }  
 }
 /*story page css end*/
+.budget-page-layout .video-wrapper{padding-bottom: 56.25%;}
+.other-news{margin-top: 50px;}
 
 }
 
@@ -642,7 +648,7 @@
                 float: none;        
             }
         }
-        .footer-bottom{
+/*        .footer-bottom{
             .cell{
                 width: 50%;
                 margin-bottom: 20px;
@@ -650,7 +656,7 @@
                     clear: left;
                 }
             }
-        }
+        }*/
     }
     /*Start CSS Top Block Grid Home Page*/  
     .top-block{
@@ -659,20 +665,36 @@
             @include calculate-width(1);        
         }       
     }
-    .itg-layout-container .itg-h450-section .droppable,  .itg-layout-container .itg-h321-section .droppable, 
+    .itg-layout-container .itg-h450-section .droppable,  
+    .itg-layout-container .itg-h321-section .droppable, 
     .itg-layout-container .top-colum-3 .itg-widget-parent .droppable,
     .itg-layout-container .itg-top-section .top-colum-2 .droppable,
     .itg-layout-container .itg-top-section .top-colum-1 .droppable,
     .itg-layout-container .top-colum-3 .droppable,
-    .itg-common-section .droppable, .sport-home-layout-page .itg-layout-615 .auto-block-1,
-    .sport-home-layout-page .itg-layout-615 .auto-block-2, .sport-home-layout-page .itg-layout-615 .droppable,
-    .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable, .tech-layout-page .itg-h396-section .droppable,
-    .tech-layout-page .itg-h385-section .droppable, .election-page .left-side .itg-photo .droppable, .movie-layout-page .itg-h385-section .droppable,
-    .movie-layout-page .itg-h396-section .droppable, .movie-layout-page .itg-layout-580 .itg-widget-child .droppable, .movie-layout-page .itg-layout-580 .droppable,
-    .movie-layout-page .itg-layout-580 .droppable .auto-block-1, .movie-layout-page .itg-layout-580 .droppable .auto-block-2, .education-layout-page .itg-layout-565 .droppable,
-    .education-layout-page .itg-layout-672 .itg-widget-child .droppable, .education-layout-page .itg-295-layout .droppable, .education-layout-page .itg-325-layout .droppable,
-    .education-layout-page .itg-345-layout .droppable, .education-layout-page .itg-325-layout .ad-widget{
-        height: auto;        
+    .itg-common-section .droppable, 
+    .sport-home-layout-page .itg-layout-615 .auto-block-1,
+    .sport-home-layout-page .itg-layout-375 .droppable,
+    .sport-home-layout-page .itg-layout-615 .auto-block-2, 
+    .sport-home-layout-page .itg-layout-615 .droppable,
+    .sport-home-layout-page .itg-layout-225 .droppable, 
+    .sport-home-layout-page .itg-layout-485 .droppable, 
+    .tech-layout-page .itg-h396-section .droppable,
+    .tech-layout-page .itg-h385-section .droppable, 
+    .election-page .left-side .itg-photo .droppable, 
+    .movie-layout-page .itg-h385-section .droppable,
+    .movie-layout-page .itg-h396-section .droppable, 
+    .movie-layout-page .itg-layout-580 .itg-widget-child .droppable, 
+    .movie-layout-page .itg-layout-580 .droppable,
+    .movie-layout-page .itg-layout-580 .droppable .auto-block-1, 
+    .movie-layout-page .itg-layout-580 .droppable .auto-block-2, 
+    .education-layout-page .itg-layout-565 .droppable,
+    .education-layout-page .itg-layout-672 .itg-widget-child .droppable, 
+    .education-layout-page .itg-295-layout .droppable, 
+    .education-layout-page .itg-325-layout .droppable,
+    .education-layout-page .itg-345-layout .droppable, 
+    .education-layout-page .itg-325-layout .ad-widget{
+        height: auto;  
+        min-height: auto;
     }
     
     .itg-layout-container{
@@ -872,15 +894,7 @@
         .view-content{      
             .photo-list{
                 margin:0 -10px;
-                li{ 
-                    @include calculate-width(3);
-                    padding:15px 10px;
-                    &:nth-child(4n+1){
-                        clear: none;
-                    }
-                    &:nth-child(3n+1){
-                        clear: left;
-                    }
+                li{
                 }
             }
         }
@@ -917,7 +931,7 @@
 /*css end sport page*/
 
 /*start event page*/
-#block-views-program-schedule-block-3 .views-row{
+#block-views-program-schedule-block-3 .col-md-3{
     &:nth-child(4n+1){
         clear: none;    
     }    
@@ -1378,6 +1392,72 @@
     }
 }
 /*ask an expret css end*/
+
+/*start event page css*/
+#block-menu-menu-event-menu{
+    .wrap-mobile-social{ 
+        .mobile-nav{
+            display: block;   
+        }        
+    }
+     ul li ul{
+        position: relative;
+        display: block;
+        left: inherit;
+        top: 0;
+        margin: 0;
+        padding-left: 15px;
+        width: 100%;
+        background: transparent;
+    }
+}
+.event-sidebar .header-top .event-header-banner{
+    height: 150px;
+}
+#block-itg-event-backend-program-tab-block .top-block-highlight{
+    .highlights-container .wrap-listing{
+        max-height: 345px;
+        height: auto;
+    }      
+} 
+#block-itg-event-backend-program-tab-block .top-tab ul {
+    overflow: auto;
+    white-space: nowrap;
+}
+#block-itg-event-backend-program-tab-block .top-block-highlight{
+    .highlights-video{
+        margin-bottom: 50px;
+    }
+}
+.event-sidebar .region-sidebar-second-event{
+    @include clearfix;
+    > div{
+        width: 48.5%;
+        float: left;
+        &:nth-child(odd){
+            margin-right: 10px;
+        }
+        &:nth-child(even){
+            margin-left: 10px;
+        }
+    }
+    div#block-views-event-associate-video-block{
+        clear:left;
+    }
+}
+/*end event page css*/
+
+/*css start video landing page like dislike*/
+#block-views-photo-landing-slider-block .section-like-dislike .agbutton, #block-views-video-landing-header-block .section-like-dislike .agbutton{
+    margin: 8px 0;
+}
+/*css end video landing page like dislike*/
+
+.may-be-recommend {
+    padding: 10px 24px 10px 0px;
+}
+
+
 }
 
 
@@ -1445,7 +1525,14 @@
                    @include calculate-width(1);
                    margin-bottom: 10px;
                    a{
-                       width: 49%;
+                       width: 100%;
+                   }
+                   p{
+                       +a{
+                           +a{
+                                margin-top: 10px;   
+                           }                           
+                       }
                    }
                 }
                 .profile-detail{
@@ -1454,8 +1541,19 @@
                    .profile-loop{
                        padding-left: 0;
                        border-left:none;
+                       position: relative;
+                       margin-top:20px;
                        &:before{
                            display: none;
+                       }
+                       label{
+                        color: #ef2a24;
+                        position: absolute;
+                        left: 86px;
+                        top: 0;
+                       }
+                       .speaker-designation{
+                           margin-top: 10px;
                        }
                    }
                 }
@@ -1472,7 +1570,6 @@
                     width: 28%;
                     padding-top: 15px;
                     font-size: 12px;
-
                 }
                 &:nth-child(2){
                     width: 26%;
@@ -1504,6 +1601,33 @@
         margin-bottom: 15px;
     }
 }
+#block-views-program-schedule-block-3 .col-md-3{
+    &:nth-child(3n+1){
+        clear: none;    
+    }    
+    &:nth-child(2n+1){
+        clear: left;
+    }
+}
+.event-sidebar .header-top .event-header-banner{
+    height: 112px;
+}
+#block-menu-menu-event-menu{
+    .wrap-mobile-social{ 
+        .mobile-nav, .social-share{
+            @include display-inline;   
+        }        
+    }
+}
+#block-itg-event-backend-program-tab-block .program-sub-title{
+    font-size: 17px;
+    padding: 10px;
+}
+#block-itg-event-backend-program-tab-block .top-block-highlight{    
+    .highlights-video .live-event-video{
+        height: 250px;
+    }
+} 
 /*End event page*/
 /*Home page start css*/
 .big-news .big-story-col-1, .big-news .big-story-col-2{
@@ -1525,16 +1649,6 @@
 }
 
 /*Home page end css*/
-/*start event page*/
-#block-views-program-schedule-block-3 .views-row{
-    &:nth-child(3n+1){
-        clear: none;    
-    }    
-    &:nth-child(2n+1){
-        clear: left;
-    }
-}
-/*end event page*/
 /*css start live tv page*/
 #block-itg-live-tv-live-tv-video-page{
     .latest-livetv-video .photo-list{    
@@ -1733,10 +1847,13 @@
         overflow: hidden;
      .social-share{
         float: right;
+        width:200px;
+        text-align:right;
             a{
                 line-height: 40px;
                 height: 40px;
                 padding: 0 5px;
+                color:#dfdfdf;
             }
         }
         .event-search{
@@ -1747,19 +1864,141 @@
                 height: 25px;
                 border: none;
                 width: 0;
+                padding:0;
             }
         }
-    }
-}
-#block-itg-event-backend-program-tab-block .top-block-highlight{
-    .highlights-video{
-        margin-bottom: 50px;
-    }
+    }   
 }
 #block-views-event-associate-video-block .video-list{
     width: 140px;
 }
+.speaker-detail-page{
+    h3{
+        display: none;
+    }
+    .col-md-9{
+        margin-top: 20px;
+    }
+} 
+#block-itg-event-backend-event-registration{
+  h2 span{
+      display: none;
+    }  
+} 
+#content{
+    .node-event_registration-form span.error {
+        padding-left: 0;
+    }
+    [id*='event-registration-node-form']{
+        .form-text, .form-textarea, .mandatory-message, [id*='field-erf-registration-fee-values'] div.form-type-radios label{
+            width: 100%;
+        }
+        [id*='field-erf-registration-fee-values'] {
+            .date-box-wrapper .date-combo.form-wrapper{
+                width: 100%;
+            }
+            .event-registration-form-content{
+                padding: 5px 5px 30px 5px;
+            }
+            div.form-type-radios label + div > div{
+                width: 49.2%;
+                margin-top: 10px !important;
+            }
+        }       
+    } 
+} 
+#block-itg-event-backend-post-event-block .event-listing .content-detail{
+  .side-right, .side-left{
+        width: 100%;
+        border: none;
+        padding: 0;
+   }
+   .side-left{
+       margin-bottom: 10px;
+   }
+   .side-right{
+       .listing-detail{
+        margin-bottom: 0;   
+       }       
+   }
+}
+#block-itg-event-backend-post-event-block{
+    .top-tab ul {        
+        li {
+            width:110px;
+            float:none;
+            i{
+            display: none;
+         }  
+        }
+    }
+}
+.event-sidebar .region-sidebar-second-event{
+    @include clearfix;
+    > div{
+        width: 100%;
+        float: none;
+        &:nth-child(odd){
+            margin-right: 0px;
+        }
+        &:nth-child(even){
+            margin-left: 0px;
+        }
+    }
+}
+#block-itg-event-backend-ad-right-sidebar-event{
+    padding: 0px;
+    border: none; 
+    background: transparent; 
+    margin-bottom: 30px;
+}
 /*event page css end*/
+/*footer css start */
+div.footer-expand-icon{
+    display: block;
+}
+footer .footer-top div.footer-expand-icon{
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 15px;
+}
+footer .footer-top .footer-social-link{
+    display: none;
+}
+/*footer css end */
+
+/*css start custom form for video an photo*/
+.ugc-top-heading h2{
+    padding-bottom: 5px;    
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper{
+    margin:0 -15px;
+    .captcha{
+        .form-item-captcha-response div.description{
+        padding-left: 0px;    
+        }
+        img{
+            margin: 0 0 5px 0px;
+        }
+    }
+    .form-actions{
+        text-align: left;
+    }
+    .form-type-managed-file > label + div.form-managed-file{
+        input[type="file"]{
+            width: 200px;
+        }
+        padding-left: 0;    
+    }
+    .form-type-managed-file > label{
+        margin-bottom: 10px;
+    }
+} 
+/*css end custom form for video an photo*/
+
 
 }
 @media only screen and (max-width:640px){
@@ -1812,14 +2051,14 @@
         }
     }
     /*start event page*/
-    #block-views-program-schedule-block-3 .views-row{
+/*    #block-views-program-schedule-block-3 .col-md-3{
         &:nth-child(2n+1){
             clear: none;    
         }    
         &:nth-child(1n+1){
             clear: left;
         }
-    }
+    }*/
     /*end event page*/
     /*story page css*/
     .story-section .story-expert-opinion{    
@@ -1958,7 +2197,7 @@
                 }
                 .profile-detail {
                     width: auto;
-                    margin: 0px 0 0 10px;
+                    margin: 0;
                     ul {
                         li{ 
                             @include float(none);
@@ -2055,10 +2294,21 @@
                 float: right;
             }
         }
+        &.photo-story-section{
+            .story-right{
+                width: 77%; 
+            }   
+        }        
+        &.buzz-feedback{
+            .story-right{
+                width: 100%; 
+            }   
+        }        
     }
 .buzz-feedback{
     .story-right{
-        width: 100%
+        width: 100%;
+        float: none; 
     }
     .buzz-section{
         h1{
@@ -2210,7 +2460,7 @@
     h1.category-heading{
             @include font(32px,46px,400);                
         } 
-    .view-category-wise-content-list, .view-blog-listing{           
+    .view-category-wise-content-list, .view-blog-listing, .page-podcasts-listing .view-podcasts-listing{           
         .catagory-listing{        
             .pic{
                 width: 170px; 
@@ -2541,7 +2791,7 @@
 @media only screen and (min-width:768px) and (max-width:1200px){       
     .widget-wrapper.top_stories_ordering .data-holder .block-itg-widget{
         overflow: scroll;
-        height: 663px;
+        max-height: 663px;
     }
     #block-itg-layout-manager-header-sosorry-block{
         .sosory-header .sosorryitg{

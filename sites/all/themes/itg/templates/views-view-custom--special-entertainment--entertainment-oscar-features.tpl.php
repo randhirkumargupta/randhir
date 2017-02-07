@@ -16,7 +16,16 @@
     ?>
   
        <div class="first-oscar-block <?php echo $video_class;?>"><?php print $row['field_story_extra_large_image'];?></div>
-       <div><?php echo l(mb_strimwidth(strip_tags($desc), 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></div>
+       <div>
+         <?php 
+          if (function_exists('itg_common_get_smiley_title')) {
+            echo l(itg_common_get_smiley_title($row['nid'], 0, 140), "node/" . $row['nid'], array("html" => TRUE ));
+          }
+          else {
+           echo l(mb_strimwidth(strip_tags($desc), 0, 150, ".."), "node/" . $row['nid']);
+          }
+        ?>
+       </div>
    
 
 

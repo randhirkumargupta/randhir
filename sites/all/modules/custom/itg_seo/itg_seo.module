@@ -8,13 +8,13 @@
 function itg_seo_menu() {
   $items['itg-access-denied'] = array(
       'title' => t('Access Denied'),
-      'page callback' => 'itg_seo_access_denied',
+      'page callback' => 'itg_access_denied',
       'access callback' => TRUE,
       'type' => MENU_CALLBACK,
   );
   $items['itg-not-found'] = array(
       'title' => t('Not Found'),
-      'page callback' => 'itg_seo_not_found',
+      'page callback' => 'itg_not_found',
       'access callback' => TRUE,
       'type' => MENU_CALLBACK,
   );
@@ -27,9 +27,9 @@ function itg_seo_menu() {
  * 
  * @return array
  */
-function itg_seo_access_denied() {
+function itg_access_denied() {
 
-  return theme('itg_seo_access_denied');
+  return theme('itg_access_denied');
 }
 
 /**
@@ -37,11 +37,11 @@ function itg_seo_access_denied() {
  * 
  * @return array
  */
-function itg_seo_not_found() {
+function itg_not_found() {
   if (function_exists(itg_seo_latest_headlines)) {
     $latest_headlines = itg_seo_latest_headlines();
   }
-  return theme('itg_seo_not_found', array('data' => $latest_headlines));
+  return theme('itg_not_found', array('data' => $latest_headlines));
 }
 
 /**
@@ -51,11 +51,11 @@ function itg_seo_not_found() {
  */
 function itg_seo_theme() {
   $themes = array(
-      'itg_seo_access_denied' => array(
+      'itg_access_denied' => array(
           'template' => 'itg-seo-access-denied',
           'path' => drupal_get_path('module', 'itg_seo') . '/templates',
       ),
-      'itg_seo_not_found' => array(
+      'itg_not_found' => array(
           'template' => 'itg-seo-not-found',
           'path' => drupal_get_path('module', 'itg_seo') . '/templates',
           'variables' => array('data' => NULL),
@@ -171,27 +171,42 @@ function itg_additional_settings_element_hide($form, &$form_state, $form_id) {
  * @param text $type
  * @param object $entity_object
  */
-function frontend_breadcrumb_display($id, $entity_object = NULL) {
+function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_url = NULL) {
 
   $section_link = l('News', '<front>');
+  //for Magazine Story
+  if (!empty($entity_object->type) 
+          && $entity_object->type == 'story' 
+          && !empty($entity_object->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'])) {
+    $section_link .= ' / ' . l('Magazine', 'calendar/0/0/magazine.html');    
+  }
 
   if (!empty($id)) {
     $section_tids = taxonomy_get_parents_all($id);
+    $section_tids = array_reverse($section_tids); 
     foreach ($section_tids as $chunks) {
-      $section_link .= ' > ' . l($chunks->name, drupal_get_path_alias('taxonomy/term/' . $chunks->tid));
+      $section_link .= ' / ' . l($chunks->name, drupal_get_path_alias('taxonomy/term/' . $chunks->tid));
     }
-  }
+  }  
 
   if (!empty($entity_object->type) && $entity_object->type == 'story') {
-    $section_link .= ' > ' . t($entity_object->title);
+    $section_link .= ' / ' . t($entity_object->title);
   } else if (!empty($entity_object->type) && $entity_object->type == 'videogallery') {
-    $section_link .= ' > Video > ' . t($entity_object->title);
+    $section_link .= ' / Video > ' . t($entity_object->title);
   } else if (!empty($entity_object->type) && $entity_object->type == 'photo') {
-    $section_link .= ' > Gallery > ' . t($entity_object->title);
+    $section_link .= ' / Gallery > ' . t($entity_object->title);
+  } else if (!empty($entity_object->type) && $entity_object->type == 'podcast') {
+    $section_link .= ' / '.l("Podcast", "podcasts-listing").' > ' . t($entity_object->title);
   } else if (!empty($entity_object->type) && $entity_object->type == 'poll') {
-    $section_link .= ' > Poll';
+    $section_link .= ' / Poll';
   } else if (!empty($entity_object->type) && $entity_object->type == 'blog') {
-    $section_link .= ' > Blog > ' . t($entity_object->title);
+    $section_link .= ' / Blog > ' . t($entity_object->title);
+  } else if (!empty($entity_object->type) && $entity_object->type == 'reporter') {
+    $section_link .= ' / '.l("Anchors", "anchors-list").' > ' . t($entity_object->title);
+  } else if (!empty($entity_object->type)) {
+      $section_link .= ' / ' . t($entity_object->title);
+  } else if (!empty($single_url)) {
+      $section_link .= ' / ' . t($single_url);
   }
 
   return $section_link;

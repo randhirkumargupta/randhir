@@ -153,7 +153,7 @@ function feature_for_podcast_field_default_field_instances() {
       'exclude_cv' => FALSE,
       'file_directory' => 'podcast_audio_dir',
       'file_extensions' => 'mp3',
-      'max_filesize' => '',
+      'max_filesize' => '10MB',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -166,6 +166,7 @@ function feature_for_podcast_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 0,
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 'upload',
@@ -317,6 +318,48 @@ function feature_for_podcast_field_default_field_instances() {
       ),
       'type' => 'text_textarea',
       'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'node-podcast-field_preview_unique_id'.
+  $field_instances['node-podcast-field_preview_unique_id'] = array(
+    'bundle' => 'podcast',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 23,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_preview_unique_id',
+    'label' => 'Preview_unique_id',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 32,
     ),
   );
 
@@ -681,7 +724,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'podcast',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Tags',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1144,6 +1187,7 @@ function feature_for_podcast_field_default_field_instances() {
   t('Large image');
   t('Medium image');
   t('Node Identity');
+  t('Preview_unique_id');
   t('Primary category html');
   t('Primary category textarea');
   t('Related Content');

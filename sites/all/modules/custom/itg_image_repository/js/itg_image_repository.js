@@ -638,7 +638,7 @@ resMsgs: function (msgs) {
 
 //return img markup
 imgHtml: function (fid, width, height) {
-  return '<img src="'+ itg_image_repository.getURL(fid) +'" width="'+ width +'" height="'+ height +'" alt="'+ itg_image_repository.decodePlain(fid) +'">';
+  return '<img src="'+ itg_image_repository.getURL(fid) +'" width="'+ width +'" height="'+ height +'" alt="'+ itg_image_repository.decodePlain(fid) +'" />';
 },
 
 //check if the file is an image

@@ -259,8 +259,13 @@
                 parent.jQuery('#')
                 if (jQuery('#ckeditor_yes').val() == 1)
                 {
+                    if(jQuery('.is_synd').is(':checked')) {
+                        var synd_class = "data-syndication='yes'";
+                    } else {
+                        synd_class = "data-syndication='no'";
+                    }
                     var imagename = jQuery('#imcurl').val();
-                    var getimagename = '<img src="' + imagename + '">';
+                    var getimagename = '<img '+synd_class+' src="' + imagename + '"  alt="" />';
                     parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text').val(getimagename);
 //
 //                    parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(0)').val(jQuery('#imcurl').val());
@@ -298,17 +303,17 @@
                                     image_title = image_title.substr(0, image_title.lastIndexOf('.'));
                                 }
 
-                                var image_title = jQuery('#alt_text_image').val();
-                                var image_alttext = jQuery('#image_title_exta').val();
+                                var image_alttext = jQuery('#alt_text_image').val();
+                                var image_title = jQuery('#image_title_exta').val();
 
                                 setTimeout(function() {
-                                    if (image_title != "")
+                                    if (image_alttext != "")
                                     {
                                         parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
                                         parent.jQuery('[name="' + replaced + '[alt]"]').val(image_alttext);
 
                                     }
-                                    if (image_alttext != "")
+                                    if (image_title != "")
                                     {
                                         parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
                                         parent.jQuery('[name="' + replaced + '[title]"]').val(image_title);

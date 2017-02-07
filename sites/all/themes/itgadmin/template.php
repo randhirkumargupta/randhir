@@ -420,6 +420,7 @@ function itgadmin_preprocess_page(&$vars) {
     , 'supplement-base-magazin-widget-list'
     , 'speaker-order-reorder'
     , 'event-according-type'
+     , 'itg-social-log'
   );
 
   if (in_array(arg(0), $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {
@@ -431,9 +432,9 @@ function itgadmin_preprocess_page(&$vars) {
     $vars['theme_hook_suggestions'][] = 'page__event_registration';
   }
 
-//  if ((isset($vars['node']->type) && $vars['node']->type == 'event_backend')) {
-//    $vars['theme_hook_suggestions'][] = 'page__event_domain';
-//  }
+  if (arg(0) == 'event-registration-config' && is_numeric(arg(1))) {
+    $vars['theme_hook_suggestions'][] = 'page__registration_config';
+  }
 }
 
 /**

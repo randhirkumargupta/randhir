@@ -22,10 +22,10 @@ function itg_personalization_refer_a_friend_form($form, &$form_state) {
   $output = '<div class="social-edit">';
   $output .= '<ul>';
   $output .= '<li>Via Social</li>';
-  $output .= '<li><img alt="" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/facebook-edit.png"></li>';
-  $output .= '<li><img alt="" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/edit-twitter.png"></li>';
-  $output .= '<li><img alt="" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/google-plus-edit.png"></li>';       
-  $output .= '<li><img alt="" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/linkedin-edit.png"></li>';
+  $output .= '<li><img alt="" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/facebook-edit.png" /></li>';
+  $output .= '<li><img alt="" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/edit-twitter.png" /></li>';
+  $output .= '<li><img alt="" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/google-plus-edit.png" /></li>';       
+  $output .= '<li><img alt="" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/linkedin-edit.png" /></li>';
   $output .= '</ul>';
   $output .= '<div class="more-option"> OR </div>';
   $output .= '<div>';

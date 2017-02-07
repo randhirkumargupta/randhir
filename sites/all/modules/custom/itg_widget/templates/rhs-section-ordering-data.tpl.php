@@ -8,14 +8,14 @@
 
           <?php if (!empty($entity['uri'])) { ?>
             <a class="pic" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $entity['nid']); ?>">
-              <img  src="<?php print image_style_url("widget_very_small", $entity['uri']); ?>" />
+              <img  src="<?php print image_style_url("widget_very_small", $entity['uri']); ?>" alt="" />
             </a>
             <?php
           }
           else {
             ?>
             <a class="pic" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $entity['nid']); ?>">
-              <img  height="66" width="88"  src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" />
+              <img  height="66" width="88"  src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" alt="" />
             </a>
           <?php } ?>
 

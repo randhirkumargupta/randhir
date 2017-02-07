@@ -2015,6 +2015,8 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-story-reporter-values"],
 [id*="field-story-template-guru-values"],
 [id*="field-video-anchor-values"],
+[id*="field-story-technology-values"],
+[id*="field-photo-story-values"],
 [id*="field-story-listicle-values"]{
   @extend .itg-add-another-item;
 }
@@ -2398,6 +2400,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   .field-type-file{
     @extend .hide;
   }
+  tbody{
+    overflow: visible;
+  }
   > tbody > tr{
     @extend .fleft;
     @extend .full;
@@ -2721,6 +2726,26 @@ div.node{
 
 [id*="itg-social-media-form"]{
   > div{
+    .form-type-textfield, 
+    .form-type-password, 
+    .form-type-select, 
+    .form-type-managed-file, 
+    .form-type-checkboxes, 
+    .form-type-radios, 
+    .form-type-autocomplete-deluxe, 
+    .date-combo, 
+    .form-type-hierarchical-select, 
+    .form-type-textarea{
+      margin: 10px 0; 
+      padding: 0 10px;
+      > label{
+        width: 120px;
+        & + div{padding-left: 120px;}
+      }
+    }
+    input[type="text"]{
+      max-width: 260px;
+    }
     .form-item-itg-smi{
       margin-top: 0;
       @extend .full;
@@ -2732,6 +2757,8 @@ div.node{
       }
       > label{
         padding: 5px 0;
+        width: 180px;
+        & + div{padding-left: 180px;}
       }
       .form-item{
         @extend .pos-rel;
@@ -2798,23 +2825,26 @@ div.node{
         padding: 8px 20px;
         line-height: 28px;
         font-size: 18px;
-        margin: 15px 0;
         @extend .full;
       }
       .container-inline-date{
-        margin: 30px 0;
-        padding: 0 30px;
+        margin: 20px 0;
+        padding: 0 10px;
         .form-type-date-popup{
           label{
-            width: 220px;
+            width: 120px;
             float: left;
-            padding: 0 20px 0 0;
+            padding: 5px 20px 5px 0;
           }
         }
         .date-padding{
           .form-type-textfield{
+            margin: 0;
+            padding: 0;
+            width: 120px;
             label{@extend .hide;}
             &:first-child{
+              margin-right: 10px;
               .form-text + div.description{
                 left: 175px;
               } 
@@ -2824,6 +2854,7 @@ div.node{
                 left: 140px;
               } 
             }
+            input[type="text"]{width: 100%;}
           }
         }
       }
@@ -2850,23 +2881,32 @@ div.node{
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            max-width: 200px;
+            max-width: 150px;
           }
         }
       }
       .form-type-managed-file .form-managed-file + div.description{
         left: 580px;
       }
+      .form-submit{
+        position: absolute;
+        right: 0;
+        @extend .btn-small;
+      }
     }
     .form-type-managed-file{
       position: relative;
+      min-height: 30px;
+      @extend .dib;
+      @extend .vtop;
+      @extend .full;
       .pseudo-link{
         position: absolute;
         height: 28px;
         width: 134px;
         top: 1px;
         z-index: 99;
-        left: 250px;
+        left: 130px;
         &:after{
           background-color: #fff;
           border: 1px solid #d9d9d9;
@@ -2909,9 +2949,17 @@ div.node{
             }
           }
           #{$social}-img-remove-button {
+            background: none;
+            border: none;
+            box-shadow: none;
+            color: red;
+            height: auto;
+            left: 100px;
+            padding: 0;
             position: absolute;
+            line-height: 18px;
+            text-transform: capitalize;
             top: 0;
-            left: 200px;
             &+.ajax-progress-throbber{
               display: none;
             }
@@ -2920,7 +2968,17 @@ div.node{
         #{$social}-video-upload {
           @extend .pos-rel;
           #{$social}-video-remove-button {
-            margin-left: 30px;
+            background: none;
+            border: none;
+            box-shadow: none;
+            color: red;
+            height: auto;
+            left: 100px;
+            padding: 0;
+            position: absolute;
+            line-height: 18px;
+            text-transform: capitalize;
+            top: 0;
             &+.ajax-progress-throbber{
               display: none;
             }
@@ -2928,15 +2986,13 @@ div.node{
         }
       }
     }
-  }
-  .form-submit{
-    margin-right: 10px;
-    &#edit-submit{
-      margin-left: 250px;
+    > .form-submit{
+      margin: 20px 0 0 130px;
     }
   }
 }
 [id*="field-program-schedule-values"]{
+  tbody{overflow: visible;}
   > tbody > tr{
     @extend .fleft;
     @extend .full;
@@ -3964,7 +4020,7 @@ div.node{
           line-height: 26px;
           padding: 0 10px;
           position: absolute;
-          top: 76px;
+          top: 38px;
           z-index: 999;
           &.inactive{
             pointer-events: none;
@@ -5493,6 +5549,7 @@ div.node{
       margin-right: 5px;
     }
   }
+  .form-field-name-field-primary-category-html-text{@extend .hide;}
 }
 
 /*itg_image_repository start*/ 
@@ -5645,7 +5702,7 @@ div.node{
 }
 
 /*itg_image_repository end*/
-
+.form-field-name-field-pti-print-media{@extend .pos-rel;}
 [id*="field-pti-print-media-values"]{
   @extend .itg-add-another-item;
   tbody{
@@ -5657,6 +5714,9 @@ div.node{
       td{
         @extend .fleft;
         @extend .full;
+        padding: 10px;
+        background-color: #f2f2f2;
+        border: none;
         .field-name-field-pti-upload-video{
           .form-type-managed-file{
             @extend .choose-audio-video-file;
@@ -5665,14 +5725,51 @@ div.node{
             }
           }
         }
+        .field-name-field-pti-upload-image{
+          .form-type-managed-file{
+            margin: 0;
+            padding: 0;
+            .form-managed-file{
+              float: left;
+              min-width: 135px;
+              min-height: 29px;
+              & + div.description{
+                left: 150px;
+                top: 15px;
+              }
+            }
+            > label{
+              @extend .hide;
+              & + div{
+                padding-left: 0;
+              }
+            }
+          }
+          & + .form-submit{
+            @extend .icon-remove-item;
+            position: absolute;
+            right: 38px;
+            bottom: 10px;
+            margin: 0;
+          }
+        }
       }
       &+ tr{
         td{margin-top: 10px;}
       }
     }
-  } 
-  .form-managed-file .image-widget-data .form-submit[value="Remove"]{
-    left: 580px;
+  }
+  & + div.clearfix{
+    .form-submit{
+      @extend .icon-add-more;
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      margin: 0;
+    }
+    .ajax-progress-throbber{
+      @extend .hide;
+    }
   }
 }
 [id*="views-form-manage-print-team-page"]{
@@ -5969,12 +6066,13 @@ div.node{
     }
   }
   #layout-section-save{
-    font-size: 34px;
-    height: 37px;
-    line-height: 32px;
+    @extend .btn-submit;
+    font-size: 32px;
+    height: 28px;
+    line-height: 24px;
     padding: 0;
     text-align: center;
-    width: 37px;
+    width: 28px;
   }
 }
 #itg-layout-manager-page-setting-form{
@@ -8502,7 +8600,7 @@ div.node{
         color: red;
         height: auto;
         line-height: 20px;
-        margin: 0;
+        margin: 0 0 0 50px;
         padding: 0;
         text-transform: capitalize;
       }
@@ -8654,6 +8752,77 @@ div.node{
   .form-field-name-field-story-issue-date{
     .fieldset-legend:after{
         @extend .astrick;
+    }
+  }
+  .form-field-name-field-story-technology{
+    margin: 0 10px;   
+    [id*="field-story-technology-values"]{
+      thead{
+        display: none;
+        width: 210px;
+        padding: 0 10px;
+      }
+      tbody{overflow: visible;}
+      tbody tr{
+        width: 100%;
+        display: inline-block;
+        vertical-align: top;
+        td{
+          @extend .pos-rel;
+          padding: 10px !important;
+          border: none;
+          margin-top: 10px;
+          width: 100%;
+          background-color: #f2f2f2;
+          float: left;
+          .field-name-field-technology-sample-photo{
+            @extend .fleft;
+            .form-type-managed-file{
+              margin: 0;
+              padding: 0;
+              .image-widget-data{
+                input[type="file"]{
+                  width: 257px;
+                  margin-top: 3px;
+                  & + .form-submit{
+                    @extend .btn-small;
+                  }
+                }
+              }
+              .image-preview + .image-widget-data{
+                .form-submit{left: 280px;}
+              }
+              .form-managed-file + div.description{left: 555px; width: 210px;}
+            }
+          }
+          .field-name-field-technology-photo-title{
+            @extend .dib;
+            @extend .vtop;
+            @extend .full;
+            margin-top: 10px;
+            .form-type-textfield{
+              padding: 0;
+              margin: 0;
+            }
+          }
+          > .form-submit, .ajax-new-content > .form-submit{
+            @extend .icon-remove-item;
+            margin: 0;
+            position: absolute;
+            right: 38px;
+            bottom: 10px;
+          }
+        }
+      }
+      & + div.clearfix{
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        .form-submit{
+          @extend .icon-add-more;
+          margin: 0;
+        }
+      }
     }
   }
 }
@@ -9149,7 +9318,7 @@ div.node{
   }
 }
 /*budget predictor css end*/
-#itg-budget-predictor-search-form{
+#itg-budget-predictor-search-form, #itg-budget-predictor-search-user-form{
   .form-type-select{
     > label{
       width: 100%;
@@ -9686,9 +9855,6 @@ div.node{
     display: block;
   }
 } 
-[id*="field-highlights-values"]{
-  @extend .itg-add-another-item;
-}
 .messages em{font-weight: 600;}
 .node-type-videogallery [id*="field-video-upload-values"]{
   tbody{
@@ -9724,9 +9890,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   }
 }
 
-.node-blog-form{
-  .form-managed-file .image-widget-data .form-submit[value="Remove"]{left: 0;}
-}
+
 .node-service_creation-form{
   .form-field-type-xml-field-xml{
     .form-type-xml-codemirror{
@@ -9837,6 +10001,10 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   }
 }
 .form-field-name-field-emoji{
+  width: 572px;
+  @extend .dib;
+  @extend .vtop;
+  .ckeditor_links{display: none;}
   .cke_top{
     height: 34px !important;
     overflow: visible;
@@ -9855,3 +10023,162 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   margin-bottom: 10px;
 }
 #edit-field-primary-category-html-text-und-0-value{@extend .hide;}
+.multi_reporter {
+  position: relative;
+  .multi-byline {
+    @extend .btn-submit;
+    @extend .btn-small;
+    position: absolute;
+    right: 146px;
+    top: 0;
+  }
+}
+.byline-list {
+  padding: 0 10px 0 220px;
+  position: relative;
+  .byline-ul {
+    display: inline-block;
+    list-style: outside none none;
+    vertical-align: top;
+    width: 332px;
+    li {
+      background-color: #e5e5e5;
+      border-top: 1px solid #fff;
+      padding: 10px;
+      cursor: move;
+      min-height: 38px;
+      position: relative;
+      .byline_publish {
+        float: left;
+        margin: 2px 5px;
+      }
+      span {
+        display: inline-block;
+        margin-right: 10px;
+        vertical-align: top;
+        .remove-byline {
+          color: red;
+          position: absolute;
+          right: 10px;
+        }
+      }
+    }
+  }
+  .save-byline {
+    @extend .btn-submit;
+    @extend .btn-small;
+    bottom: 1px;
+    position: absolute;
+    right: 140px;
+  }
+}
+.view-clients-details{
+  .views-submit-button{
+    #custom-expire-type{
+      float: left;
+      width: 140px;
+    }
+    #edit-submit-clients-details{
+      float: right; 
+      margin: 28px 0 0 10px;
+    }
+  }
+}
+.itg-smi{
+  .data-popup-link{
+    @extend .btn-submit;
+    @extend .btn-small;
+  }
+}
+.node-heighlights-form{
+  [id*="field-highlights-values"]{
+    @extend .itg-add-another-item;
+    tbody{
+      tr{
+        td:nth-child(2){
+          margin-bottom: 10px;
+          float: left;
+        }
+      }
+    } 
+  }
+}
+.promote-content {
+  float: left;
+  width: 60%;
+}
+.promote-sidebar {
+  float: left;
+  width: 38%;
+  margin-left: 2%;
+  background-color: #f2f2f2;
+  padding: 10px;
+}
+[id*="itg-workflow-preview-log-filter-form"]{
+  .form-item {
+    float: left;
+    width: 150px;
+    padding: 0 10px 0 0;
+    & .form-type-textfield {
+      width: 300px;
+    }
+    .form-text, .form-select{
+      width: 100%;
+    }
+  }
+  .layout-filter-btn{
+    .layout-apply, .layout-reset{margin-top: 38px;}
+  }
+}
+[id*="field-photo-story-values"]{
+  thead{@extend .hide;}
+  tbody{
+    overflow: visible;
+    padding: 10px;
+    tr{
+      display: block;
+      td{
+        border: none;
+        margin-bottom: 10px;
+        @extend .fleft;
+        @extend .full;
+        background-color: #f2f2f2;
+        .form-type-managed-file{
+          padding: 0 10px;
+          > label{
+            width: 200px;
+            & + div{
+              padding-left: 200px;
+            }
+          }
+          .image-widget-data{
+            input[type="file"]{
+              width: 240px; 
+              overflow: hidden; 
+              text-overflow: ellipsis; 
+              margin-top: 2px;
+              & + .form-submit{
+                @extend .btn-small;
+              }
+            }
+          }
+        }
+        .form-type-textarea{
+          padding: 0 10px;
+          > label{
+            width: 200px;
+            & + div{
+              padding-left: 200px;
+            }
+          }
+        }
+        > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+          margin-left: 210px;
+        }
+      }
+    }
+  }
+  & + .clearfix .field-add-more-submit{
+    margin: 0 0 10px 220px !important;
+  }
+}

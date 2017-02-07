@@ -3,6 +3,7 @@
         <div id="BasicDetails" class="itg-form-section-wrapper">
             <h2 class="story-title active"><?php print t('Quick File'); ?></h2>
             <div class="itg-form-section">
+                <?php print drupal_render($form['field_story_type']); ?>
                 <?php print drupal_render($form['field_story_magazine_story_issue']); ?>
                 <?php print drupal_render($form['field_story_select_magazine']); ?>
                 <?php print drupal_render($form['field_story_select_supplement']); ?>
@@ -98,7 +99,21 @@
             </div>
         </div>
       
-      
+         <div id="StoryTech" class="itg-form-section-wrapper">
+            <h2 class="story-title"><?php print t('Story Technology'); ?></h2> 
+            <div class="itg-form-section hide">
+              <?php print drupal_render($form['field_story_technology']); ?>
+              <?php print drupal_render($form['field_story_technology_rating']); ?>
+              <?php print drupal_render($form['field_story_tech_review_chunk']); ?>
+            </div>
+        </div>
+        
+        <div id="StoryPhoto" class="itg-form-section-wrapper">
+            <h2 class="story-title"><?php print t('Photo Story'); ?></h2> 
+            <div class="itg-form-section hide">
+              <?php print drupal_render($form['field_photo_story']); ?>
+            </div>
+        </div>
       
         <div class="itg-form-action">
             <?php print drupal_render($form['actions']); ?>

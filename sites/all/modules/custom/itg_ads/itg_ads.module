@@ -181,6 +181,8 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
       'wrapper' => $syndication_mode . '_replace',
   );
 
+  $form['field_ads_template_selection']['#prefix'] = '<div id="itg_ads_ttype_replace">';
+  $form['field_ads_template_selection']['#suffix'] = '</div>';
 
   $form['field_adds_code_holder']['#prefix'] = '<div id="' . $syndication_mode . '_replace">';
   $form['field_adds_code_holder']['#suffix'] = '</div>';
@@ -219,6 +221,7 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
   }
 
   $form['#validate'][] = 'itg_ads_rule_after_build_validate';
+  $form['#after_build'][] = 'itg_ads_after_build';
 }
 
 /**
@@ -726,7 +729,8 @@ function get_desired_code_for_ads_placing($ad_value, $device) {
   return $code;
 }
 
-/*
+/**
+ * Implements get_header_body_start_end_code()
  * This is the code that will return the header script and body script on the basisc of conditional section id as per business logic
  * @return array $adsheaderbody;
  */
@@ -757,6 +761,12 @@ function get_header_body_start_end_code() {
   }
 
   $templatedata = check_add_template_existance($page_name);
+
+  // Checking if Template is not available then rendering default template
+  if (empty($templatedata)) {
+    $templatedata = check_add_template_existance('Rest');
+  }
+
   $adsheaderbody = array();
 
 
@@ -787,4 +797,16 @@ function get_header_body_start_end_code() {
   }
 
   return $adsheaderbody;
+}
+
+/*
+ * Implements itg_ads_after_build()
+ * @param array $form
+ * @param array $form_state
+ * @return array $form;
+ */
+
+function itg_ads_after_build($form, &$form_state) {
+  drupal_add_js(drupal_get_path('module', 'itg_ads') . '/js/itg_ads.js', array('weight' => 1, 'scope' => 'footer'));
+  return $form;
 }

@@ -8,6 +8,22 @@
         attach: function(context, settings) {
             var layout_type = settings.itg_story.settings.layout_type;
             
+            //section card
+            
+            $('#edit-section-name-all').hide();
+            $('#edit-all-section').click(function() {                 
+                var section_check = $(this).is(':checked');
+                if (section_check == true) {
+                  $('#edit-section-name-all').show();
+                  $('#edit-section-name').hide();
+                  $('#edit-section-name').val('');
+                } else {
+                    $('#edit-section-name-all').hide();
+                    $('#edit-section-name-all').val('');
+                    $('#edit-section-name').show();
+                }
+            });
+            
             // after error display
             if ($('.messages--error').html() != null) {
                 return false;
@@ -35,7 +51,7 @@
                     
                     hoverClass: "drop-hover",
                     drop: function(event, ui) {
-                        
+                        var base_url = settings.itg_story.settings.base_url;
                         var ad_class = $(this).attr('class');
 
                         if (ad_class == 'sidebar-ad droppable ui-droppable') { // code change by avanish
@@ -47,8 +63,8 @@
                         // content block id for display content widget
                         var block_name = $(this).find('.data-holder').attr('id');
                         //  content block style for display content widget
-                        var wid_name=widget_name;
-                        var splitewidgitname=widget_name.split('#');
+                        var wid_name = widget_name;
+                        var splitewidgitname = widget_name.split('#');
                         if(splitewidgitname[0]=='section_wise_order') {
                             var widget_style = $(this).find('.data-holder').attr('widget-style');
                             if(widget_style != "" && widget_style != "undefined") {
@@ -57,11 +73,12 @@
                             else {
                               widget_info = 'custom|common-category-style';  
                             }
-                            wid_name = 'section_wise_order';
+                            var wid_name = 'section_wise_order';
                         }
                         
                         // tamplate section value
                         var section_name = $('#edit-section').val();
+                        
                         // template name
                         var template_name = $('#edit-template-name').val();
 
@@ -82,68 +99,107 @@
                             var content_place = block_name;
                         }
                         
-                        var base_url = settings.itg_story.settings.base_url;
-                        $.ajax({
-                            url: base_url + "/insert-layout-setting-ajax/layout",
-                            method: 'post',
-                            data: {block_name: block_name, widget_name: widget_name, section_name: section_name, template_name: template_name, layout_type:layout_type, block_title: category_name_tab, widget_info:widget_info},
-                            beforeSend: function() {
-                              $('#' + content_place).html('<div class="widget-loader-wrapper"><img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>');
-                            },
-                            success: function(data) {
-                                      var splitewigitinfo= widget_info.split('|');
-                                      if(splitewigitinfo[1] !="") {
-                                         wid_name=wid_name+'-'+ splitewigitinfo[1];
-                                      }
-                                // for category tab widget
-                                $('input[name = ' + block_name + ']').val(category_name_tab);
-                                $('.widget-title[data-id="' + block_name + '"]').html(category_name_tab);
-                                if(block_name == 'itg-block-2' && splitewidgitname[0] == 'highlights' && template_name == 'page--special_budget') {
-                                  $('.highlights-title').html(category_name_tab);
-                                  $('#display_tit').show();
-                                }
-                                
-                                  if(block_name == 'itg-block-4' && splitewidgitname[0] == 'highlights' && template_name == 'page--special_election') {
-                                    $('.highlights-title').html(category_name_tab);
-                                    $('#display_tit').show();
-                                }
-                                $('.tab-buttons span[data-class="' + block_name + '"]').html(category_name_tab);
-                                
-                                if(wid_name == 'sport_poll_widget_block'){
-                                  $('#' + block_name).closest('.widget-wrapper').attr('class', 'widget-wrapper ' + wid_name);
-                                }
-                                if(wid_name == 'home_page_poll_widget_block'){
-                                  $('#section-cart-' + block_name).addClass('home-page-poll-block-wrap');                                    
-                                }
+                        //code for already configured section
                         
+                        if (splitewidgitname[0] == 'photo_list_of_category' 
+                                || splitewidgitname[0] == 'video_list_of_category' 
+                                || splitewidgitname[0] == 'section_wise_order') {
+                            
+                            $.ajax({
+                                url: base_url + "/pre-layout-drag-widgets",
+                                method: 'post',
+                                data: {category: splitewidgitname[1], section_name: section_name},
                                 
-                                if (display_area) {
-                                    $('#' + block_name).html(category_name_tab);
+                                success: function(data) {
+                                    //code for already configured section
+                                    if (data == 'yes') {
+                                        if (!confirm('You have already configured this section on this page.')) {
+                                          return false;
+                                        } else {
+                                            save_widget_for_layout(block_name, widget_name, section_name, template_name, layout_type, category_name_tab, widget_info, base_url, content_place, wid_name, display_area, widget_style);
+                                        }
+                                    } else {
+                                        save_widget_for_layout(block_name, widget_name, section_name, template_name, layout_type, category_name_tab, widget_info, base_url, content_place, wid_name, display_area, widget_style);
+                                    }
                                 }
-                                console.log("blockname"+ block_name);
-                                $('#' + content_place).html(data);
-                                //code by sunil                                
-                                jQuery('#auto-new-block .widget-settings, #tech-new-block .widget-settings, #education-new-block .widget-settings, #movie-new-block .widget-settings, #defalt-section-top-block .widget-settings').prependTo('.auto-block-2 .special-top-news');
-                                //code by avanish   
-                                if (widget_name == 'featured_photo_carousel' || splitewigitinfo[1]== 'block_5' || widget_style=='standpoint') {
-                                    jQuery(".flexslider").flexslider({
-                                        animation: "slide",
-                                        prevText: "",
-                                        nextText: "",
-                                    });
-                                }
-                                jQuery('.year-slider').slick({
-                                    slidesToShow: 1,
-                                    slidesToScroll: 1,
-                                    arrows: true,
-                                    fade: false         
-                                });  
-                            }
-                        });
+                            });
+                            
+                        } else {
+                            save_widget_for_layout(block_name, widget_name, section_name, template_name, layout_type, category_name_tab, widget_info, base_url, content_place, wid_name, display_area, widget_style);
+                        }
+                        
                     }
                 });
             }
+            
+            //function for widget save 
+            function save_widget_for_layout(block_name, widget_name, section_name, template_name, layout_type, category_name_tab, widget_info, base_url, content_place, wid_name, display_area, widget_style) {
+                $.ajax({
+                    url: base_url + "/insert-layout-setting-ajax/layout",
+                    method: 'post',
+                    data: {block_name: block_name, widget_name: widget_name, section_name: section_name, template_name: template_name, layout_type:layout_type, block_title:category_name_tab, widget_info:widget_info},
+                    beforeSend: function() {
+                      $('#' + content_place).html('<div class="widget-loader-wrapper"><img class="widget-loader" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>');
+                    },
+                    success: function(data) {
 
+                        var splitewigitinfo= widget_info.split('|');
+                        
+                        if (splitewigitinfo[1] !="") {
+                           wid_name = wid_name+'-'+ splitewigitinfo[1];
+                        }
+                        var splitewidgitname = widget_name.split('#');
+                        // for category tab widget
+                        $('input[name = ' + block_name + ']').val(category_name_tab);
+                        $('.widget-title[data-id="' + block_name + '"]').html(category_name_tab);
+                        
+                        if(block_name == 'itg-block-2' && splitewidgitname[0] == 'highlights' && template_name == 'page--special_budget') {
+                          $('.highlights-title').html(category_name_tab);
+                          $('#display_tit').show();
+                        }
+
+                        if(block_name == 'itg-block-4' && splitewidgitname[0] == 'highlights' && template_name == 'page--special_election') {
+                            $('.highlights-title').html(category_name_tab);
+                            $('#display_tit').show();
+                        }
+                        
+                        $('.tab-buttons span[data-class="' + block_name + '"]').html(category_name_tab);
+
+                        if(wid_name == 'sport_poll_widget_block'){
+                          $('#' + block_name).closest('.widget-wrapper').attr('class', 'widget-wrapper ' + wid_name);
+                        }
+                        
+                        if(wid_name == 'home_page_poll_widget_block'){
+                          $('#section-cart-' + block_name).addClass('home-page-poll-block-wrap');                                    
+                        }
+
+                        if (display_area) {
+                            $('#' + block_name).html(category_name_tab);
+                        }
+                        
+                        $('#' + content_place).html(data);
+                        
+                        //code by sunil                                
+                        jQuery('#auto-new-block .widget-settings, #tech-new-block .widget-settings, #education-new-block .widget-settings, #movie-new-block .widget-settings, #defalt-section-top-block .widget-settings').prependTo('.auto-block-2 .special-top-news');
+                        
+                        //code by avanish   
+                        if (widget_name == 'featured_photo_carousel' || splitewigitinfo[1]== 'block_5' || widget_style=='standpoint') {
+                            jQuery(".flexslider").flexslider({
+                                animation: "slide",
+                                prevText: "",
+                                nextText: "",
+                            });
+                        }
+                        jQuery('.year-slider').slick({
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            arrows: true,
+                            fade: false         
+                        });  
+                    }
+                });                
+            }
+            
             $('#layout-button-save').click(function() {
 
                 var base_url = settings.itg_story.settings.base_url;
@@ -220,9 +276,17 @@
             });
             // for section cards
             $('#layout-section-save').click(function() {
+                
                 var base_url = settings.itg_story.settings.base_url;
+                                 
+                var section_check = $('#edit-all-section').is(':checked');
                 // category value
-                var category_name = $('#edit-section-name').val();
+                if (section_check) {                    
+                   var category_name = $('#edit-section-name-all').val();
+                } else {
+                   var category_name = $('#edit-section-name').val(); 
+                }
+                
                 // tamplate section value
                 var section_name = $('#edit-section').val();
                 // tamplate name
@@ -236,7 +300,7 @@
                         method: 'post',
                         data: {cid: 1, section_name: section_name, template_name: template_name, layout_type:layout_type, category_name: category_name, widgets_type: widgets_type},
                         beforeSend: function() {
-                            $('#section_widgets_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                            $('#section_widgets_list').html('<img class="widget-loader" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
                         },
                         success: function(data) {
                             // display category list in block
@@ -267,7 +331,7 @@
                         method: 'post',
                         data: {cid: 1, section_name: section_name, template_name: template_name, layout_type:layout_type, category_name: category_name, widgets_type: widgets_type},
                         beforeSend: function() {
-                            $('#section_widget2_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                            $('#section_widget2_list').html('<img class="widget-loader" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
                         },
                         success: function(data) {
                             // display category list in block
@@ -292,7 +356,7 @@
                     method: 'post',
                     data: {id: widget_id, section_name: section_name, template_name: template_name, layout_type:layout_type },
                     beforeSend: function() {
-                        $('#section_widgets_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                        $('#section_widgets_list').html('<img class="widget-loader" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
                     },
                     success: function(data) {
                         $('#section_widgets_list').html(data);
@@ -313,7 +377,7 @@
                     method: 'post',
                     data: {id: widget_id, section_name: section_name, template_name: template_name, layout_type:layout_type },
                     beforeSend: function() {
-                        $('#section_widget2_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                        $('#section_widget2_list').html('<img class="widget-loader" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
                     },
                     success: function(data) {
                         $('#section_widget2_list').html(data);
@@ -410,7 +474,7 @@
                         method: 'post',
                         data: {html_title: html_title},
                         beforeSend: function() {
-                           // $('#section_widgets_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                           // $('#section_widgets_list').html('<img class="widget-loader" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
                         },
                         success: function(data) {
                             // display category list in block
@@ -432,7 +496,7 @@
                         method: 'post',
                         data: {html_title: highlights_title},
                         beforeSend: function() {
-                           // $('#section_widgets_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                           // $('#section_widgets_list').html('<img class="widget-loader" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
                         },
                         success: function(data) {
                             // display category list in block

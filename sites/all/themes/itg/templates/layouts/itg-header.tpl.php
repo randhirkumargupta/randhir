@@ -1,5 +1,6 @@
 <?php
 global $base_url, $user;
+if ($base_url != BACKEND_URL) {
 if (!empty($data['itg_main_manu_header'])) {
   foreach ($data['itg_main_manu_header'] as $key => $val) {
     if (isset($val['#localized_options']['attributes']['title']) && $val['#localized_options']['attributes']['title'] == 1) {
@@ -15,10 +16,10 @@ if (!empty($get_user_detail->field_user_picture[LANGUAGE_NONE][0]['uri'])) {
 }
 else {
   $file = $base_url . '/sites/all/themes/itg/images/default-user.png';
-  $user_pic = "<img src=$file width='30' height='30' alt='user-image'>";
+  $user_pic = "<img src=$file width='30' height='30' alt='user-image' />";
 }
 ?>
-<div class="header-ads mhide">
+<div class="header-ads">
   <?php
   $block = block_load('itg_ads', ADS_HEADER);
   $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
@@ -64,7 +65,7 @@ else {
       <?php print render($block['content']); ?> 
     </li>
     <li><a href="javascript:void(0)" class="search-icon" title=""><i class="fa fa-search"></i></a></li>
-    <li><a href="javascript:void(0)" class="live-tv" title=""><img src="<?php print base_path() ?>sites/all/themes/itg/images/live-tv-icon.png" alt="Live Tv"></a></li> 
+    <li><a href="javascript:void(0)" class="live-tv" title=""><img src="<?php print base_path() ?>sites/all/themes/itg/images/live-tv-icon.png" alt="Live Tv" /></a></li> 
   </ul>
   <div class="globle-search">
     <input class="search-text" placeholder="Type here" type="text" value=""></div>
@@ -186,3 +187,4 @@ else {
   </div>
 
 </div>
+<?php } ?>

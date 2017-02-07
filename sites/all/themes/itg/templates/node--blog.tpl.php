@@ -1,4 +1,5 @@
 <?php
+global $base_url;
 /**
  * @file
  * Default theme implementation to display a node.
@@ -95,13 +96,12 @@ $config_name = trim($global_comment_last_record[0]->config_name);
     $path = $node->field_story_extra_large_image['und'][0]['uri'];
     $src = image_style_url('blog_landing_image', $path);
     $alt = $node->field_story_extra_large_image['und'][0]['alt'];
-    print "<img src='" . $src . "'>";
-    if (!empty($alt)) {
-      print $alt;
-    }
+    print "<img src='" . $src . "' alt='".$alt."' />";
     ?>
+  <?php else : ?>
+    <img src="<?php print $base_url. "/" . drupal_get_path('theme', 'itg') . "/images/itg_image647x363.jpg" ?>">
   <?php endif; ?>
-
+  
   <!-- Long description -->
   <?php if (!empty($node->field_blog_long_description['und'][0]['value'])) : ?>
     <div class="blog-description">
