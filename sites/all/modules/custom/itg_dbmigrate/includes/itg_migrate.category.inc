@@ -34,7 +34,7 @@ class ItgCategoryMigration extends XMLMigration {
 
 
     // This can also be an URL instead of a local file path.
-    $file_path = drupal_realpath('public://');
+    $file_path = 'sites/default/files';
 
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
