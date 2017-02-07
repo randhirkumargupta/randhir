@@ -35,12 +35,16 @@ function itg_custom_widget_menu() {
   );
   $items['custom_widget_name_list/%'] = array(
     'page callback' => 'itg_custom_widget_name_list',
-    'page arguments' => array(1, 2),
+    'page arguments' => array(1),
     'access arguments' => array('administer itg custom widget'),
   );
   return $items;
 }
 
+/**
+ * Function gives widget title json.
+ * @param string $widget_title
+ */
 function itg_custom_widget_name_list($widget_title) {
   
   $query = db_select('itg_custom_widgets_data', 'n');
@@ -75,14 +79,7 @@ function remove_from_custom_widget($widget, $nid) {
 }
 
 /**
- * @file
- * itg_widget_actions_bulk_operation.inc
- *
  * This file provide an extra action bulk operation to add nodes into our custom table.
- *
- */
-
-/**
  * {@inheritdoc}
  */
 function itg_custom_widget_action_info() {
@@ -111,6 +108,9 @@ function itg_custom_widget_categories_wise_node_group_form($form, &$form_state) 
   return $form;
 }
 
+/**
+ * {@inheritdoc}
+ */
 function itg_custom_widget_form_views_form_itg_custom_widget_page_alter(&$form, &$form_state, $form_id) {
   $form['widget_name'] = array(
     '#type' => 'textfield',
@@ -234,6 +234,9 @@ function itg_custom_widget_submit($form, &$form_state) {
   }
 }
 
+/**
+ * {@inheritdoc}
+ */
 function itg_custom_widget_views_pre_render(&$view) {
   $color_box_query = array("widget_name_delete" => "true");
   $color_box_class = array("id" => array("create-view-custom-widget"));
