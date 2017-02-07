@@ -338,8 +338,11 @@ function itg_term_batch_alter(&$batch) {
  * @param array reference $form_state
  */
 function term_redirect_handler($form, &$form_state) {
-  //$term = trim($form_state['values']['name']);
-  $form_state['redirect'] = 'tags-management';
+   if(!is_object($form['#term']) && $form['#term']['vocabulary_machine_name'] == 'tags') {
+     $form_state['redirect'] = 'tags-management';
+   } else if(!is_object($form['#term']) && $form['#term']['vocabulary_machine_name'] == 'cheaper_dearer') {
+     $form_state['redirect'] = 'budget-predictor-image';
+   }
 }
 
 /**

@@ -487,8 +487,9 @@ header {
   position: relative;
 }
 #block-itg-layout-manager-header-block .navigation .menu {
-  padding-left: 135px;
-  padding-right: 50px;
+  margin-left: 135px;
+  margin-right: 50px;
+  max-width: 985px;
 }
 #block-itg-layout-manager-header-block .navigation .menu li {
   float: left;
@@ -541,6 +542,7 @@ header {
   color: #323232;
 }
 #block-itg-layout-manager-header-block .navigation .all-menu {
+  width: 46px;
   cursor: pointer;
 }
 #block-itg-layout-manager-header-block .navigation .all-menu i {
@@ -2464,11 +2466,23 @@ footer .multiple-items-footer i.slick-next {
   bottom: 0;
   left: 0;
   width: 100%;
-  background: #222222;
+}
+.story-section .story-right .stryimg .photoby .story-img-rating {
+  background: #b00808;
+  display: inline-block;
+  vertical-align: top;
+  padding: 5px 20px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 28px;
+}
+.story-section .story-right .stryimg .photoby .photoby-text {
   color: #aeaeae;
   font-size: 13px;
   font-size: 0.8125rem;
   font-family: "Roboto", sans-serif;
+  background-color: #222;
   padding: 3px 10px;
 }
 .story-section .story-right .image-alt {
@@ -9656,9 +9670,19 @@ section.sidebar .block-itg-ads {
 .budget-page-layout .budget-ad {
   margin-top: 25px;
 }
-.budget-page-layout iframe {
-  width: 100%;
-  height: 285px;
+.budget-page-layout .video-wrapper {
+  position: relative;
+  padding-bottom: 74.75%;
+  /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+}
+.budget-page-layout .video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
 }
 .budget-page-layout .common-highlights {
   overflow: auto;
@@ -11839,8 +11863,7 @@ h1.about-us-heading + div p {
   color: #464646;
 }
 .common-highlights .agbutton, .common-highlights .emoji-container {
-  display: inline-block;
-  vertical-align: top;
+  display: block;
 }
 .common-highlights .emoji-container {
   margin: 10px 0 0px 0;
@@ -12383,4 +12406,8 @@ span.smilies-title {
 .front-end-breadcrumb {
   position: relative;
   z-index: 9999;
+}
+
+iframe[id*="twitter-widget"] {
+  width: 100% !important;
 }
