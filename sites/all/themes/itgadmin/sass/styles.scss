@@ -3462,6 +3462,18 @@ fieldset#edit-select{
       span.error{padding-left: 231px;}
     }
   }
+  [id*="edit-registration-config"]{
+    padding: 0 30px;
+    > label{ 
+      float: left;
+      padding: 5px 0;
+      width: 220px;
+    }
+    .anchor-order-reorder{
+      @extend .btn-submit;
+      @extend .btn-small;
+    }
+  }
 }
 .form-select[name="field_ugc_ctype[und]"]{
   text-transform: capitalize;
@@ -10205,4 +10217,18 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     }
   }
   .feed-icon{margin-top: 5px;}
+}
+[id*="itg-event-registration-fields-configuration-form"]{
+  margin-top: 30px;
+  #edit-display{margin-right: 3%;}
+  #edit-display, #edit-requied-field{
+    display: inline-block;
+    vertical-align: top;
+    width: 48%;
+    padding: 10px 15px;
+    border: 1px solid #d8d8d8;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    .form-type-checkbox{margin: 5px 0;}
+  }
 }
