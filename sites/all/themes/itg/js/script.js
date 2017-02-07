@@ -813,7 +813,6 @@ function smilyanimation(facetype){
  var menuBuilder = function () {
         var menuWidth, Totalwidth, liLength, clickHere;
         menuWidth = jQuery('.second-level-menu.menu').width() - 46;
-        console.log("menuWidth = " + menuWidth);
         Totalwidth = jQuery('.all-menu').outerWidth(true);
         clickHere = 0;
         if (jQuery('#newlist').length > 0) {
@@ -822,9 +821,7 @@ function smilyanimation(facetype){
         jQuery('.all-menu').remove();
         jQuery('.second-level-menu.menu li').each(function () {
             liLength = jQuery(this).outerWidth(true);
-            console.log("Totalwidth = " + Totalwidth);
             Totalwidth = Totalwidth + liLength;
-            console.log("Totalwidth + liLength = " + Totalwidth);
             if (Totalwidth <= menuWidth) {
                 jQuery(this).removeClass('hide');
             } else {

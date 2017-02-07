@@ -134,3 +134,17 @@ function itg_migrate_category_table($level){
   
   return $table[$level];
 }
+
+/**
+   * Implements function for get term sef
+   * @param str $url
+   * @return
+   */
+  function itg_db_migrate_term_sef($url){
+   $query = db_select('url_alias', 'ul');
+   $query = $query->fields('ul',array('alias'));
+   $query = $query->condition('source', $url, '=');
+   $query->condition('source', '%' . db_like($url), LIKE);
+   $result = $query->execute()->fetchField();
+   return $result;
+  }

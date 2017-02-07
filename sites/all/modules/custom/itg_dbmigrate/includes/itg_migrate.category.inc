@@ -38,7 +38,7 @@ class ItgCategoryMigration extends XMLMigration {
 
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
-    $items_url = $xml_folder . 'category.xml';
+    $items_url = $xml_folder . 'categories-master.xml';
 
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -96,7 +96,8 @@ class ItgCategoryMigration extends XMLMigration {
     $this->addFieldMapping('field_cm_redirection_url', 'content_url')->xpath('content_url');
     //$this->addFieldMapping('field_category_section_type', 'section_type')->xpath('section_type');
     $this->addFieldMapping('field_cm_category_color', 'content_display_color')->xpath('content_display_color');
-
+    // Redirect
+    $this->addFieldMapping('migrate_redirects', 'content_url')->xpath('content_url');
     //<simply_flag>0</simply_flag>(not clear)
     //<params>(not clear)
     //<schedule_duration>(not clear)
@@ -110,6 +111,10 @@ class ItgCategoryMigration extends XMLMigration {
       $source_cid = (string) $row->xml->section;
       $orignal_category = get_itg_destination_id('migrate_map_itgsection', $source_cid);
       $row->xml->section = $orignal_category;
+      
+      //sef url
+      $sef_path = itg_db_migrate_term_sef('taxonomy/term/'.$orignal_category);
+      $row->xml->sef_url = $sef_path.'/'.$row->xml->sef_url;
     }
     else {
       $row->xml->section = '';
