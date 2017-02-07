@@ -155,6 +155,7 @@ function itg_audio_check_exist_file($filename) {
  * @param array $form_state
  */
 function itg_podcast_custom_submit($form, &$form_state) {
+  module_load_include('php', 'itg_podcast', 'includes/getid3/getid3');
   // code insert image in custom table
   $node_id = $form_state['node']->nid;
   if ($form_state['input']['original_image_fids'] != "") {
@@ -407,14 +408,13 @@ function itg_podcast_node_presave($node) {
       //$head = array_change_key_case(get_headers($file_url, TRUE));
       $meta = $getID3->analyze($file_url);
       $duration = $meta['playtime_string'];
-      //$node->field_podcast_audio_upload['und'][$audio_key]['field_podcast_audio_length']['und'][0]['value'] = "11:00";
+      // Handel field collection.
+      // Add value in entity fieldcollection too.
+      $node->field_podcast_audio_upload['und'][$audio_key]['field_podcast_audio_length']['und'][0]['value'] = $duration;
+      $node->field_podcast_audio_upload['und'][$audio_key]['field_podcast_audio_length']['und'][0]['value']['#default_value'] = $duration;
+      $node->field_podcast_audio_upload['und'][$audio_key]['field_podcast_audio_length']['und'][0]['value']['#value'] = $duration;
+      $node->field_podcast_audio_upload['und'][$audio_key]['entity']->field_podcast_audio_length['und'][0]['value'] = $duration;
+      $node->field_podcast_audio_upload['und'][$audio_key]['entity']->field_podcast_audio_length['und'][0]['value']['#default_value'] = $duration;
     }
   }
-  //p($node);
-}
-
-
-
-function itg_podcast_field_collection_item_presave(FieldCollectionItemEntity $field_collection_item) {
-  //p($field_collection_item);
 }

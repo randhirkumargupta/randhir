@@ -32,7 +32,7 @@ class ItgSubSubCategoryMigration extends XMLMigration {
     
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
     
-    $items_url = $xml_folder . 'subsubcategory.xml';
+    $items_url = $xml_folder . 'sub_subcategories-master.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -85,6 +85,8 @@ class ItgSubSubCategoryMigration extends XMLMigration {
     $this->addFieldMapping('pathauto')->defaultValue(0);
     $this->addFieldMapping('path', 'sefurl')->xpath('sef_url');
     $this->addFieldMapping('field_cm_redirection_url', 'content_url')->xpath('content_url');
+    // Redirect
+    $this->addFieldMapping('migrate_redirects', 'content_url')->xpath('content_url');
   }
   
   public function prepareRow($row) {
@@ -93,6 +95,9 @@ class ItgSubSubCategoryMigration extends XMLMigration {
       $source_cid = (string) $row->xml->category;
       $orignal_category = get_itg_destination_id('migrate_map_itgsubcategory', $source_cid);
       $row->xml->sub_category = $orignal_category;
+       //sef url
+      $sef_path = itg_db_migrate_term_sef('taxonomy/term/'.$orignal_category);
+      $row->xml->sef_url = $sef_path.'/'.$row->xml->sef_url;
     }
     else {
       $row->xml->sub_category = '';

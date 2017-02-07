@@ -2016,6 +2016,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-story-template-guru-values"],
 [id*="field-video-anchor-values"],
 [id*="field-story-technology-values"],
+[id*="field-photo-story-values"],
 [id*="field-story-listicle-values"]{
   @extend .itg-add-another-item;
 }
@@ -2398,6 +2399,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-event-media-values"]{
   .field-type-file{
     @extend .hide;
+  }
+  tbody{
+    overflow: visible;
   }
   > tbody > tr{
     @extend .fleft;
@@ -2988,6 +2992,7 @@ div.node{
   }
 }
 [id*="field-program-schedule-values"]{
+  tbody{overflow: visible;}
   > tbody > tr{
     @extend .fleft;
     @extend .full;
@@ -6061,12 +6066,13 @@ div.node{
     }
   }
   #layout-section-save{
-    font-size: 34px;
-    height: 37px;
-    line-height: 32px;
+    @extend .btn-submit;
+    font-size: 32px;
+    height: 28px;
+    line-height: 24px;
     padding: 0;
     text-align: center;
-    width: 37px;
+    width: 28px;
   }
 }
 #itg-layout-manager-page-setting-form{
@@ -8790,16 +8796,13 @@ div.node{
             }
           }
           .field-name-field-technology-photo-title{
-            display: none;
+            @extend .dib;
+            @extend .vtop;
+            @extend .full;
+            margin-top: 10px;
             .form-type-textfield{
               padding: 0;
               margin: 0;
-              > label{
-                width: 140px;
-                & + div{
-                  padding-left: 140px;
-                }
-              }
             }
           }
           > .form-submit, .ajax-new-content > .form-submit{
@@ -9887,9 +9890,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   }
 }
 
-.node-blog-form{
-  .form-managed-file .image-widget-data .form-submit[value="Remove"]{left: 0;}
-}
+
 .node-service_creation-form{
   .form-field-type-xml-field-xml{
     .form-type-xml-codemirror{
@@ -10112,4 +10113,72 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   margin-left: 2%;
   background-color: #f2f2f2;
   padding: 10px;
+}
+[id*="itg-workflow-preview-log-filter-form"]{
+  .form-item {
+    float: left;
+    width: 150px;
+    padding: 0 10px 0 0;
+    & .form-type-textfield {
+      width: 300px;
+    }
+    .form-text, .form-select{
+      width: 100%;
+    }
+  }
+  .layout-filter-btn{
+    .layout-apply, .layout-reset{margin-top: 38px;}
+  }
+}
+[id*="field-photo-story-values"]{
+  thead{@extend .hide;}
+  tbody{
+    overflow: visible;
+    padding: 10px;
+    tr{
+      display: block;
+      td{
+        border: none;
+        margin-bottom: 10px;
+        @extend .fleft;
+        @extend .full;
+        background-color: #f2f2f2;
+        .form-type-managed-file{
+          padding: 0 10px;
+          > label{
+            width: 200px;
+            & + div{
+              padding-left: 200px;
+            }
+          }
+          .image-widget-data{
+            input[type="file"]{
+              width: 240px; 
+              overflow: hidden; 
+              text-overflow: ellipsis; 
+              margin-top: 2px;
+              & + .form-submit{
+                @extend .btn-small;
+              }
+            }
+          }
+        }
+        .form-type-textarea{
+          padding: 0 10px;
+          > label{
+            width: 200px;
+            & + div{
+              padding-left: 200px;
+            }
+          }
+        }
+        > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+          margin-left: 210px;
+        }
+      }
+    }
+  }
+  & + .clearfix .field-add-more-submit{
+    margin: 0 0 10px 220px !important;
+  }
 }

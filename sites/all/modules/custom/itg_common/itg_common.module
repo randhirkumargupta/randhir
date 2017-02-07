@@ -17,7 +17,6 @@ module_load_include('inc', 'itg_common', 'includes/itg_common');
  * {@inheritdoc}
  */
 function itg_common_init() {
-
   global $user, $base_url, $theme;
 
   if ($theme == 'itgadmin') {
@@ -196,9 +195,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     $emoji3_src = $base_url . "/" . drupal_get_path('theme', 'itgadmin') . "/images/highlights_icons/WGMF.png";
     foreach($form['field_highlights']['und'] as $key => $value){
       if(is_numeric($key)){
-        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_1']['und']['#title'] = "<img title='Oh No!' src='" . $emoji1_src . "' alt='' />";
-        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_2']['und']['#title'] = "<img title='Oh No!' src='" . $emoji2_src . "' alt='' >";
-        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_3']['und']['#title'] = "<img title='Oh No!' src='" . $emoji3_src . "' alt='' >";
+        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_1']['und']['#title'] = "<img  src='" . $emoji1_src . "' alt='' />";
+        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_2']['und']['#title'] = "<img  src='" . $emoji2_src . "' alt='' >";
+        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_3']['und']['#title'] = "<img  src='" . $emoji3_src . "' alt='' >";
       }
     }
   }
@@ -368,7 +367,17 @@ function itg_common_node_presave($node) {
       elseif ($node->op == 'Save as Draft' || $node->status == 0) {
         $node->status = 0;
       }
+        
   }
+  
+  // custom alias cnditions
+  if(
+    $node->type == 'photogallery' || 
+    $node->type == 'story' || 
+    $node->type == 'videogallery')
+    {
+        return itg_common_custompath_load($node);
+    }
 }
 
 /**

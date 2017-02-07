@@ -8,6 +8,22 @@
         attach: function(context, settings) {
             var layout_type = settings.itg_story.settings.layout_type;
             
+            //section card
+            
+            $('#edit-section-name-all').hide();
+            $('#edit-all-section').click(function() {                 
+                var section_check = $(this).is(':checked');
+                if (section_check == true) {
+                  $('#edit-section-name-all').show();
+                  $('#edit-section-name').hide();
+                  $('#edit-section-name').val('');
+                } else {
+                    $('#edit-section-name-all').hide();
+                    $('#edit-section-name-all').val('');
+                    $('#edit-section-name').show();
+                }
+            });
+            
             // after error display
             if ($('.messages--error').html() != null) {
                 return false;
@@ -132,7 +148,7 @@
                         if (splitewigitinfo[1] !="") {
                            wid_name = wid_name+'-'+ splitewigitinfo[1];
                         }
-                        
+                        var splitewidgitname = widget_name.split('#');
                         // for category tab widget
                         $('input[name = ' + block_name + ']').val(category_name_tab);
                         $('.widget-title[data-id="' + block_name + '"]').html(category_name_tab);
@@ -260,9 +276,17 @@
             });
             // for section cards
             $('#layout-section-save').click(function() {
+                
                 var base_url = settings.itg_story.settings.base_url;
+                                 
+                var section_check = $('#edit-all-section').is(':checked');
                 // category value
-                var category_name = $('#edit-section-name').val();
+                if (section_check) {                    
+                   var category_name = $('#edit-section-name-all').val();
+                } else {
+                   var category_name = $('#edit-section-name').val(); 
+                }
+                
                 // tamplate section value
                 var section_name = $('#edit-section').val();
                 // tamplate name

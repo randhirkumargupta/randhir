@@ -1485,6 +1485,48 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_preview_unique_id'.
+  $field_instances['node-story-field_preview_unique_id'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 121,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_preview_unique_id',
+    'label' => 'Preview_unique_id',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 113,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_primary_category'.
   $field_instances['node-story-field_primary_category'] = array(
     'bundle' => 'story',
@@ -5407,6 +5449,7 @@ function features_for_story_field_default_field_instances() {
   t('New title');
   t('Node Identity');
   t('Photo story');
+  t('Preview_unique_id');
   t('Publish id');
   t('Quote image');
   t('Quote title');

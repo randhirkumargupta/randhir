@@ -43,7 +43,7 @@ class ItgBylineMigration extends XMLMigration {
     
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
     
-    $items_url = $xml_folder . 'byline.xml';
+    $items_url = $xml_folder . 'byline-master.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -118,7 +118,7 @@ class ItgBylineMigration extends XMLMigration {
     // Manage department in byline
     if (isset($row->xml->company) && !empty($row->xml->company)) {
       $company_value = (string) $row->xml->company;
-      $vid = 42; // Company byline vocab
+      $vid = itg_db_migrate_vocab_id('byline_company'); // Company byline vocab
       $company_option_value = itg_db_migrate_parent_term($company_value, $vid);
         if(!empty($company_option_value)){
           $node->field_byline_company[LANGUAGE_NONE][0]['tid'] = $company_option_value;
@@ -127,7 +127,7 @@ class ItgBylineMigration extends XMLMigration {
     if (isset($row->xml->department) && !empty($row->xml->department)) {
       $department_value = (string) $row->xml->department;
       //$department_option_value = itg_migrate_byline_department($department_value);
-      $vid = 43; // Department byline vacab
+      $vid = itg_db_migrate_vocab_id('byline_department'); // Department byline vacab
       $department_option_value = itg_db_migrate_parent_term($department_value, $vid);
         if(!empty($department_option_value)){
           $node->field_byline_department[LANGUAGE_NONE][0]['tid'] = $department_option_value;

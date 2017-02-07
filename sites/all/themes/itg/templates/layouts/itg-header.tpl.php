@@ -1,5 +1,6 @@
 <?php
 global $base_url, $user;
+if ($base_url != BACKEND_URL) {
 if (!empty($data['itg_main_manu_header'])) {
   foreach ($data['itg_main_manu_header'] as $key => $val) {
     if (isset($val['#localized_options']['attributes']['title']) && $val['#localized_options']['attributes']['title'] == 1) {
@@ -186,3 +187,4 @@ else {
   </div>
 
 </div>
+<?php } ?>

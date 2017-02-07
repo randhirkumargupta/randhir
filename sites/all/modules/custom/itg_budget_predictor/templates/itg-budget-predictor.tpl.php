@@ -36,7 +36,7 @@ $user_id = $data['user_id'];
 </style>
 
 <?php if ($budget_exist == 1) { ?>    
-  <h2 class="budget-predictor-heading"><?php print t('CHEAPER / DEARER'); ?></h2>
+  <h1 class="budget-predictor-heading"><?php print t('CHEAPER / DEARER'); ?></h1>
   <?php if(empty($user_id)) { ?>
     <h3 class="budget-predictor-msg"><?php print t('Please drag and drop images and please login if you know, your prediction will right or not.'); ?></h3>
   <?php } ?>
@@ -68,6 +68,9 @@ $user_id = $data['user_id'];
               <?php
                   if ($budget_message_flag) {
                      print '<p class="success">'.$budget_message.'</p>';
+                     if($admin_user) { ?>
+                       <button class="btn btn-save" type="button" onclick="reset_budget(<?php print $section_id; ?>)"><?php print t('Reset'); ?></button>
+                     <?php }
                   }
                   elseif ($budget_message_front_flag) {
                     print '<p class="success">'.$budget_social_message.'</p>';

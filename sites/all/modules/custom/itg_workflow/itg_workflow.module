@@ -43,12 +43,14 @@ function itg_workflow_menu() {
 function itg_workflow_content_nid($nid) {
   $matches = array();
   $content_type = itg_workflow_valid_content_type();
-  $return = db_select("node", "n")
-      ->fields('n', array('nid'))
-      ->condition('n.nid', '%' . db_like($nid) . '%', 'LIKE')
-      ->condition('n.type', array($content_type), 'IN')
-      ->range(0, 50)
-      ->execute(); 
+  $itg_query = db_select("node", "n");
+  $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
+  $itg_query->fields('n', array('nid'));
+  $itg_query->condition('n.nid', '%' . db_like($nid) . '%', 'LIKE');
+  $itg_query->condition('n.type', array($content_type), 'IN');
+  $itg_query->isNull('iwf.nid');
+  $itg_query->range(0, 50);
+  $return = $itg_query->execute();
   foreach ($return as $row) {
     $matches[$row->nid] = check_plain($row->nid);
   }
@@ -63,12 +65,14 @@ function itg_workflow_content_nid($nid) {
 function itg_workflow_content_title($title) {
   $matches = array();
   $content_type = itg_workflow_valid_content_type();
-  $return = db_select("node", "n")
-      ->fields('n', array('title'))
-      ->condition('n.title', '%' . db_like($title) . '%', 'LIKE')
-      ->condition('n.type', array($content_type), 'IN')
-      ->range(0, 50)
-      ->execute(); 
+  $itg_query = db_select("node", "n");
+  $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
+  $itg_query->fields('n', array('title'));
+  $itg_query->condition('n.title', '%' . db_like($title) . '%', 'LIKE');
+  $itg_query->condition('n.type', array($content_type), 'IN');
+  $itg_query->isNull('iwf.nid');
+  $itg_query->range(0, 50);
+  $return = $itg_query->execute();
   foreach ($return as $row) {
     $matches[$row->title] = check_plain($row->title);
   }
@@ -122,9 +126,9 @@ function itg_workflow_preview_log_filter_form($form, &$form_state) {
   $form['submit'] = array(
     '#value' => 'Apply',
     '#type' => 'submit',
-    '#attributes' => array('class' => array('layout-apply')),
+    '#attributes' => array('class' => array(' layout-apply',' btn-small'.' form-submit')),
     '#prefix' => '<div class = "layout-filter-btn">',
-    '#suffix' => '<a class="layout-reset btn btn-submit" href="' . base_path() . 'preview-content-logs-report">Reset</a></div>',
+    '#suffix' => '<a class="layout-reset btn-small btn-reset" href="' . base_path() . 'preview-content-logs-report">Reset</a></div>',
   );
 
   return $form;
@@ -195,7 +199,7 @@ function itg_workflow_logs_detailis() {
       $itg_query->condition('title', '%' . db_like($title_chunk) . '%', 'LIKE');
     }
   }
-  
+  $itg_query->condition('n.status',1);
   $itg_query->fields('n', array('nid', 'title', 'uid', 'type'));
   $itg_query->fields('user', array('name'));
   $itg_query->fields('iwf', array('nid'));
@@ -221,7 +225,7 @@ function itg_workflow_logs_detailis() {
   $output = render($filter_form);
 //  $output .= '<div class="view"><div class="attachment"><span class="count">Count (' .$total_items . ') </span>';
 //  $output .= '</div></div>';
-  $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
+  $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No result found.'));
 
   // add the pager
   $output .= theme('pager');
@@ -240,11 +244,10 @@ function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
     case 'blog_node_form':
     case 'podcast_node_form':
     case 'videogallery_node_form':
+      $form['field_preview_unique_id']['#attributes']['class'][] = 'hide';
       module_load_include('inc', 'itg_workflow', 'includes/itg_workflow_preview_log');
-      $preview_id = _get_unique_id_for_node_field($form['#node']->nid);
-      if ($preview_id != FALSE) {
-        $form['field_preview_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $preview_id;
-      }
+      $preview_id = _get_unique_id_for_node_field();
+      $form['field_preview_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $preview_id;
       //$form['actions']['submit']['#submit'][] = 'itg_workflow_preview_log_submit';
       $form['actions']['preview']['#submit'][] = 'itg_workflow_preview_log_submit';
       $form['#after_build'][] = 'itg_workflow_after_build';
@@ -261,10 +264,10 @@ function itg_workflow_preview_log_submit($form, $form_state) {
   $preview_unique_id = $form_state['values']['field_preview_unique_id']['und'][0]['value'];
   $user_id = $user->uid;
   $arg = arg();
-  if ($arg[0] == 'node' && $arg[1] == 'add') {
+  //if ($arg[0] == 'node' && $arg[1] == 'add') {
     // Give nid default value 0.
     itg_workflow_preview_db_merge($preview_unique_id, $user_id, 0);
-  }
+  //}
 }
 
 /**
@@ -738,7 +741,13 @@ function itg_workflow_node_update($node) {
   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
 
     global $user;
-
+    
+    $preview_unique_id = $node->field_preview_unique_id['und'][0]['value'];
+    
+    if ($node->workbench_moderation_state_current == 'published') {
+      workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name); 
+    }
+    
     if ($node->workbench_moderation_state_new != 'draft') {
       $itguser = user_load($node->uid);
 
@@ -749,7 +758,34 @@ function itg_workflow_node_update($node) {
       $rid = array(COPY_EDITOR, SECTION_EDITOR, EDITOR);
       $user_email = get_email_by_roll($rid);
       $user_email[] = $itguser->mail;
-
+      
+      // Delete first if user has already created log.
+      try {
+      // Condition to delete 0 nid and previous added nid logs value.
+      $or = db_or()->condition('nid', $node->nid)->condition('nid', 0);
+      db_delete('itg_workflow_preview_log')
+            ->condition($or)
+            ->condition('uid', $node->uid)
+            ->execute();
+      } catch (Exception $ex) {
+          drupal_set_message($ex->getMessage());
+      }
+      
+      try {
+        db_insert('itg_workflow_preview_log')
+            ->fields(array(
+              'nid' => $node->nid,
+              'preview_id' => $preview_unique_id,
+              'uid' => $node->uid,
+            ))
+            ->execute();
+      }
+      catch (Exception $ex) {
+        drupal_set_message($ex->getMessage());
+      }
+      
+      unset($_SESSION['node_preview_unique']);
+      
       workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
     }
   }
