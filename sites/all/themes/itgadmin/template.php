@@ -234,7 +234,7 @@ function itgadmin_node_preview($variables) {
         $cat_array[] = $values['tid'];
       }
       $tid_val = implode(',', $cat_array);
-      $output .= l(t('Download HTML'), 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $tid_val, array('attributes' => array('class' =>'download-html'),'html' => true));
+      $output .= l(t('Download HTML'), 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $tid_val, array('attributes' => array('class' => 'download-html'), 'html' => true));
     }
   }
   else {
@@ -420,7 +420,9 @@ function itgadmin_preprocess_page(&$vars) {
     , 'supplement-base-magazin-widget-list'
     , 'speaker-order-reorder'
     , 'event-according-type'
-     , 'itg-social-log'
+    , 'itg-social-log'
+    , 'itg-custom-widget-content'
+    , 'itg-custom-widget-content-order'
   );
 
   if (in_array(arg(0), $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {
