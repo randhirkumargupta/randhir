@@ -59,6 +59,11 @@ function itg_social_media_menu() {
         'access arguments' => array('access content'),
         'type' => MENU_CALLBACK,
     );
+    $items['set_svg_in_session'] = array(
+        'page callback' => 'itg_social_media_set_svg_in_session',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
     $items['twitter/oauth'] = array(
         'page callback' => 'itg_social_media_twitter_callback',
         'access arguments' => array('administer itg_social_media edit_content settings'),
@@ -113,6 +118,11 @@ function itg_social_media_menu() {
     return $items;
 }
 
+function itg_social_media_set_svg_in_session() {
+
+    $_SESSION['svg_data'] = $_GET['svg_data'];
+}
+
 /**
  * function use for social media report download pdf
  * 
@@ -159,16 +169,20 @@ function itg_social_media_download_pdf($rows_result) {
     $pdf->AddPage();
 
 //Column titles
-    $header = array('Sno.', ' Content ID ', 'Title', 'Content Type', 'Promoted By', 'FB Promote', 'Twitter Promote', 'FB Commnet', 'FB Likes', 'FB Share', 'Twitter Likes', 'Twitter Retweet');
+    $header = array('Sno.', ' Content ID ', 'Title', 'Content Type', 'Promoted By', 'FB Promote', 'Twitter Promote', 'FB Comment', 'FB Likes', 'FB Share', 'Twitter Likes', 'Twitter Retweet');
 
 //Data loading
     $data = array();
 // print colored table
     ColoredTable($header, $rows_result, $pdf);
 
+    if ($_SESSION['svg_data'] != "") {
+        $svgString = '<svg width="900" height="500" style="overflow: hidden;" aria-label="A chart.">' . $_SESSION['svg_data'] . '</svg>';
+        $pdf->ImageSVG('@' . $svgString, $x = 10, $y = 150, $w = '', $h = '100', $link = '', $align = '', $palign = '', $border = 0, $fitonpage = true);
+    }
 // ---------------------------------------------------------
 //Close and output PDF document
-    $pdf->Output('socialmedia_report.pdf', 'D');
+    $pdf->Output('socialmedia_report.pdf', 'I');
     exit();
 }
 
@@ -207,8 +221,8 @@ function ColoredTable($header, $data, $pdf) {
         $pdf->Cell($w[2], 10, $row['title'], 0, 0, 'C', $fill);
         $pdf->Cell($w[3], 10, $row['type'], 0, 0, 'C', $fill);
         $pdf->Cell($w[4], 10, $row['username'], 0, 0, 'C', $fill);
-        $pdf->Cell($w[5], 10, $row['count_fb_promote'], 0, 0, 'C', $fill);
-        $pdf->Cell($w[6], 10, $row['count_twitter_promote'], 0, 0, 'C', $fill);
+        $pdf->writeHTMLCell(20, 10, '', '', $row['count_fb_promote'], 0, 0, $fill, 0, 0);
+        $pdf->writeHTMLCell(20, 10, '', '', $row['count_twitter_promote'], 0, 0, $fill, 0, 0);
         $pdf->Cell($w[7], 10, $row['count_fb_comment'], 0, 0, 'C', $fill);
         $pdf->Cell($w[8], 10, $row['count_fb_like'], 0, 0, 'C', $fill);
         $pdf->Cell($w[9], 10, $row['count_fb_share'], 0, 0, 'C', $fill);
@@ -218,7 +232,9 @@ function ColoredTable($header, $data, $pdf) {
         $fill = !$fill;
         $i++;
     }
+
     $pdf->Cell(array_sum($w), 0, '', 'T');
+    $pdf->WriteHTML($htmlcontent2, true, 0, true, 0);
 }
 
 /*
@@ -327,8 +343,6 @@ function itg_social_media_count_log($share_on = null, $nid) {
             ->condition('nid', $nid, '=')
             ->condition('status', 1, '=')
             ->condition('social_media', '%' . db_like($share_on) . '%', 'LIKE');
-
-
     $result = $query->execute()->fetchall();
     return count($result);
 }
@@ -344,9 +358,8 @@ function itg_social_media_get_data_by_nid($share_on = null, $nid) {
             ->fields('isml')
             ->condition('nid', $nid, '=')
             ->condition('status', 1, '=')
-            ->condition('social_media', '%' . db_like($share_on) . '%', 'LIKE');
-
-
+            ->condition('social_media', '%' . db_like($share_on) . '%', 'LIKE')
+            ->orderBy('id', 'DESC');
     $result = $query->execute()->fetchall();
     return $result;
 }
@@ -430,20 +443,29 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
             );
             $form['scheduled_time']['max']['#type'] = 'date_popup';
             $form['scheduled_time']['max']['#date_format'] = 'Y-m-d';
-//            drupal_add_js('jQuery("#btnPrint").live("click", function () {
-//            var divContents = jQuery(".view-content").html();
-//            var printWindow = window.open("", "", "height=1,width=1");
-//            printWindow.document.write("<html><head>");
-//            printWindow.document.write("</head><body >");
-//            printWindow.document.write(divContents);
-//            printWindow.document.write("</body></html>");
-//            printWindow.document.close();
-//            printWindow.print();
-//            printWindow.close();
-//        });', array(
-//                'type' => 'inline',
-//                'scope' => 'footer',
-//            ));
+            drupal_add_js('jQuery("#download-pdf-sm").live("click", function () {
+           jQuery("#download-pdf-sm").live("click", function () {
+            var gersvg = jQuery("svg").html();
+             var geturl = jQuery(this).attr("href-data");
+            jQuery.ajax({
+            url: Drupal.settings.basePath + "set_svg_in_session",
+            type: "get",
+            data: {"svg_data": gersvg},
+            success: function(data) {
+             
+     window.location.href = geturl;
+            },
+            error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Details: " + desc + "\nError:" + err);
+            }
+        });
+            
+});
+        });', array(
+                'type' => 'inline',
+                'scope' => 'footer',
+            ));
 
             break;
     }
@@ -645,22 +667,9 @@ function itg_social_media_activity($nid) {
             ->condition('nid', $nid, '=')
             ->condition('social_media', '%' . db_like($share_on) . '%', 'LIKE');
 
-
     $result = $query->execute()->fetchall();
 
-
-
     foreach ($result as $result_d) {
-
-//        $current_post_id = $result_d->post_id;
-//        $current_url = 'https://graph.facebook.com/v2.2/' . $current_post_id;
-//        $current_url .= '?access_token=' . $token;
-//        $current_url .= '&fields=likes.summary(true),comments.summary(true),shares';
-//        $json = file_get_contents($current_url);
-//        $data = json_decode($json, true);
-//        $like = $like + $data['likes']['summary']['total_count'];
-//        $comment = $comment + $data['comments']['summary']['total_count'];
-//        $share = $comment + $data['shares']['count'];
 
         $like = $like + $result_d->fb_likes;
         $comment = $comment + $result_d->fb_comment;
@@ -670,22 +679,6 @@ function itg_social_media_activity($nid) {
     if (!empty($twitter_result)) {
         foreach ($twitter_result as $twitter_result) {
 
-//            $social_counter_settings = array(
-//                //twitter       
-//                'twitter_user' => 'itechbrij',
-//                'consumer_key' => variable_get('twitter_app_key'),
-//                'consumer_secret' => variable_get('twitter_app_secret'),
-//                'oauth_access_token' => variable_get('oauth_token', ''),
-//                'oauth_access_token_secret' => variable_get('oauth_token_secret', ''),
-//            );
-//            $settings = $social_counter_settings;
-//            $apiUrl = "https://api.twitter.com/1.1/statuses/show/" . $twitter_result->post_id . ".json";
-//            $requestMethod = 'GET';
-//            $twitter = new TwitterAPIExchange($settings);
-//            $response = $twitter->setGetfield($getField)->buildOauth($apiUrl, $requestMethod)->performRequest();
-//            $followers = json_decode($response);
-//            $follow_count = $followers->favorite_count;
-//            $retweet_count = $followers->retweet_count;
             $follow_count = $twitter_result->twitter_likes;
             $retweet_count = $twitter_result->twitter_retweet;
             $twitter_like = $twitter_like + $follow_count;
