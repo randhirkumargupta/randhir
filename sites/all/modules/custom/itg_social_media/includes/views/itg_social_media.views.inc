@@ -307,7 +307,13 @@ class itg_social_media_count_fb_views_handler extends views_handler_field {
      */
     function render($values) {
         $count = itg_social_media_count_log('facebook', $values->nid);
-        return $count;
+        $last_date = itg_social_media_get_data_by_nid('facebook', $values->nid);
+       if(!empty($last_date)) {
+         return $count.'</br> ('.date('d/m/Y H:i', $last_date[0]->scheduled_time).')';  
+       } else {
+           return $count;
+       }
+        
     }
 
 }
@@ -343,7 +349,12 @@ class itg_social_media_count_twiteer_views_handler extends views_handler_field {
      */
     function render($values) {
         $count = itg_social_media_count_log('twitter', $values->nid);
-        return $count;
+        $last_date = itg_social_media_get_data_by_nid('twitter', $values->nid);
+       if(!empty($last_date)) {
+         return $count.'</br> ('.date('d/m/Y H:i', $last_date[0]->scheduled_time).')';  
+       } else {
+           return $count;
+       }
     }
 
 }
