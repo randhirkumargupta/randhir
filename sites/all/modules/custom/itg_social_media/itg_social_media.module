@@ -443,16 +443,17 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
             );
             $form['scheduled_time']['max']['#type'] = 'date_popup';
             $form['scheduled_time']['max']['#date_format'] = 'Y-m-d';
-            drupal_add_js('jQuery("#download-pdf-sm").live("click", function () {
+            drupal_add_js('
            jQuery("#download-pdf-sm").live("click", function () {
             var gersvg = jQuery("svg").html();
+            jQuery(this).addClass("overlay");
              var geturl = jQuery(this).attr("href-data");
             jQuery.ajax({
             url: Drupal.settings.basePath + "set_svg_in_session",
             type: "get",
             data: {"svg_data": gersvg},
             success: function(data) {
-             
+             jQuery("#download-pdf-sm").removeClass("overlay");
      window.location.href = geturl;
             },
             error: function(xhr, desc, err) {
@@ -461,7 +462,7 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
             }
         });
             
-});
+
         });', array(
                 'type' => 'inline',
                 'scope' => 'footer',
