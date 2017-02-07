@@ -263,10 +263,6 @@ function itg_coupon_custom_validate($form, &$form_state) {
 
   $coupon_type = $form_state['values']['field_coupon_type'][LANGUAGE_NONE][0]['value'] ? $form_state['values']['field_coupon_type'][LANGUAGE_NONE][0]['value'] : NULL;
 
-  if ($coupon_type == 'upload_third_party_coupon') {
-    form_set_error('upload_third_party_coupon', t('You can not add/update coupon for this coupon type'));
-  }
-
   switch ($coupon_type) {
     case "coupan_dc":
 
@@ -459,16 +455,6 @@ function itg_coupon_menu() {
       'page arguments' => array('third_party_coupon_form'),
       'file' => 'includes/itg_coupon.inc',
       'access arguments' => array('upload third party coupon'),
-      'type' => MENU_NORMAL_ITEM,
-  );
-
-  $items['testing-coupons'] = array(
-      'title' => 'Testing coupons',
-      'description' => 'Upload third party Coupon',
-      'page callback' => 'drupal_get_form',
-      'page arguments' => array('coupons_apply_form'),
-      'file' => 'includes/itg_coupon.inc',
-      'access callback' => TRUE,
       'type' => MENU_NORMAL_ITEM,
   );
 
