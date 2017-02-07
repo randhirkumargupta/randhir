@@ -428,6 +428,10 @@ function itgadmin_preprocess_page(&$vars) {
   if (in_array(arg(0), $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {
     $vars['theme_hook_suggestions'][] = 'page__relatedcontent';
   }
+  
+  if(arg(0) == "itg-custom-widget-content" && isset($_REQUEST['widget_name_delete']) && !empty($_SESSION['widget_name'])) {
+    unset($_SESSION['widget_name']);
+  }
 
   //Add tpl for event registration view page
   if ((!empty($vars['node']->type) && $vars['node']->type == 'event_registration') || $arg0 == 'comment_view' || $arg0 == 'event-users-list' || arg(1) == 'associate-with-story' || $arg0 == 'comment_edit' || $arg0 === 'social-media-logs' || (!empty($vars['node']->type) && $vars['node']->type == 'print_team_integration' && $_GET['type'] == 'commentform' )) {

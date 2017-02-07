@@ -13,7 +13,13 @@ function feature_for_custom_widget_user_default_permissions() {
   // Exported permission: 'administer itg custom widget'.
   $permissions['administer itg custom widget'] = array(
     'name' => 'administer itg custom widget',
-    'roles' => array(),
+    'roles' => array(
+      'Copy Editor' => 'Copy Editor',
+      'Editor' => 'Editor',
+      'SEO' => 'SEO',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
+    ),
     'module' => 'itg_custom_widget',
   );
 
