@@ -836,7 +836,7 @@ function itg_category_manager_taxonomy_term_insert($term) {
  *   An object of type term.
  */
 function itg_category_manager_taxonomy_term_presave($term) {
-  if ($term->tid !== NULL && $term->path['pathauto'] == 0) {
+  if (!empty($term->tid) && $term->tid !== NULL && $term->path['pathauto'] == 0) {
     global $user;
     $term->path['alias'] = rtrim($term->path['alias'], '/');
     $data = array();

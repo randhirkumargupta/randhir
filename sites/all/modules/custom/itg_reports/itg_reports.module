@@ -75,10 +75,10 @@ function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_i
             // remove archive and unpublish on list
             $option = array();
             foreach ($form['state']['#options'] as $key => $option_val) {
-                
-                if ($key != 'un_published' && $key != 'archive' ) {
+
+                if ($key != 'un_published' && $key != 'archive') {
                     $option[$key] = $option_val;
-                }  
+                }
             }
             $form['state']['#options'] = $option;
             $form['field_story_category_tid']['#attributes'] = array('placeholder' => 'Search by section name');
@@ -171,21 +171,20 @@ function itg_reports_block_view($delta = '') {
                         '#legend' => FALSE,
                     );
 
-                    $chart_data_all = itg_reports_missing_year($chart_data['graph']);
-
-                    foreach ($chart_data_all as $keys => $graph_data) {
-
-                        $chart[$keys] = array(
-                            '#type' => 'chart_data',
-                            '#data' => $graph_data,
-                            '#title' => $keys,
-                        );
+                    // Add missing year.
+                    itg_reports_missing_year($chart_data['graph']);
+                    if (!empty($chart_data['graph'])) {
+                        foreach ($chart_data['graph'] as $g_data) {
+                            
+                            $graph_d[$g_data[0]] = $g_data;
+                        }
                     }
-//                    $chart['career'] = array(
-//                        '#type' => 'chart_data',
-//                        '#data' => $chart_data['graph'],
-//                        '#title' => t($chart_data['actor'][$key]['actor_name']),
-//                    );
+                    
+                    $chart['career'] = array(
+                        '#type' => 'chart_data',
+                        '#data' => $graph_d,
+                        '#title' => t($chart_data['actor'][$key]['actor_name']),
+                    );
                     $chart['xaxis'] = array(
                         '#type' => 'chart_xaxis',
                         '#title' => t('Year'),
@@ -197,6 +196,7 @@ function itg_reports_block_view($delta = '') {
                         '#title' => t('Earning'),
                     );
                     $career_graph['chart'] = $chart;
+                    
                     $output[] = $career_graph;
                     $actor_info[] = array(
                         'name' => $chart_data['actor'][0]['actor_name'],
@@ -310,26 +310,35 @@ function itg_report_get_graph_data() {
  */
 function itg_reports_missing_year(&$chart_data) {
     $data = array();
-    $all_year = array();
-    if (!empty($chart_data)) {
-        foreach ($chart_data as $movie_data) {
-            $all_year[] = $movie_data[0];
-        }
-    }
-    $start = min($all_year);
-    $end = max($all_year);
-    foreach ($chart_data as $movie_data) {
-
-        for ($i = $start - 3; $i <= $end; $i++) {
-            $movie_rating = 0;
-            if ($i == $movie_data[0]) {
-                $movie_rating = $movie_data[1];
+    array_multisort($chart_data);
+    $temp = NULL;
+    foreach ($chart_data as $value) {
+        if (!empty($temp) && ($temp + 1) != $value[0]) {
+            ++$temp;
+            while ($temp < $value[0]) {
+                $data[] = array(
+                    $temp++,
+                    NULL
+                );
             }
-            $data[$movie_data[2]][] = array($i, $movie_rating);
         }
+        $temp = $value[0];
     }
-
-    return $data;
+    $chart_data = array_merge($chart_data, $data);
+    array_multisort($chart_data);
+    $min_step = count($chart_data);
+    $data = array();
+    if ($min_step < 6) {
+        while ($min_step <= 6) {
+            $data[] = array(
+                $temp++,
+                NULL
+            );
+            ++$min_step;
+        }
+        $chart_data = array_merge($chart_data, $data);
+        array_multisort($chart_data);
+    }
 }
 
 /**
