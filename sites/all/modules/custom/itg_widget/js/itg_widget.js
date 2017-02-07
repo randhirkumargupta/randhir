@@ -108,7 +108,7 @@ Drupal.behaviors.itg_widgets = {
     var videoIframe = jQuery (".story-associate-content #videogallery-iframe");
     var strImg = jQuery('.story-associate-content .stryimg');
         strImg.click(function(){
-            videoIframe.show(1000, function(){            
+            videoIframe.show(1000, function(){             
             var widgets_type = jQuery('.associate-content-block').attr ('data-widget');              
             var widgets_type_array = widgets_type.split ("-");
             var widgets_type = widgets_type_array[0];
@@ -127,7 +127,7 @@ Drupal.behaviors.itg_widgets = {
                    videoGallery ();
                     videoIframe.css('height', 'auto');
                   }
-                });            
+                });               
             });     
         strImg.hide(1000);                   
     });    
