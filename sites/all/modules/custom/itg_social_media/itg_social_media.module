@@ -430,20 +430,20 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
             );
             $form['scheduled_time']['max']['#type'] = 'date_popup';
             $form['scheduled_time']['max']['#date_format'] = 'Y-m-d';
-            drupal_add_js('jQuery("#btnPrint").live("click", function () {
-            var divContents = jQuery(".view-content").html();
-            var printWindow = window.open("", "", "height=1,width=1");
-            printWindow.document.write("<html><head>");
-            printWindow.document.write("</head><body >");
-            printWindow.document.write(divContents);
-            printWindow.document.write("</body></html>");
-            printWindow.document.close();
-            printWindow.print();
-            printWindow.close();
-        });', array(
-                'type' => 'inline',
-                'scope' => 'footer',
-            ));
+//            drupal_add_js('jQuery("#btnPrint").live("click", function () {
+//            var divContents = jQuery(".view-content").html();
+//            var printWindow = window.open("", "", "height=1,width=1");
+//            printWindow.document.write("<html><head>");
+//            printWindow.document.write("</head><body >");
+//            printWindow.document.write(divContents);
+//            printWindow.document.write("</body></html>");
+//            printWindow.document.close();
+//            printWindow.print();
+//            printWindow.close();
+//        });', array(
+//                'type' => 'inline',
+//                'scope' => 'footer',
+//            ));
 
             break;
     }
