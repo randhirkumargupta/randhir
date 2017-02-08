@@ -18,7 +18,12 @@ module_load_include('inc', 'itg_common', 'includes/itg_common');
  */
 function itg_common_init() {
   global $user, $base_url, $theme;
-
+  
+  //code for multidomain
+  if (arg(0) != 'user' && $base_url == BACKEND_URL && ($user->uid == 0 || array_key_exists(FRONT_USER, $user->roles))) {    
+    drupal_goto('user');
+  }
+  
   if ($theme == 'itgadmin') {
     $settings = array();
     $settings['base_url'] = $base_url;
@@ -371,13 +376,11 @@ function itg_common_node_presave($node) {
   }
   
   // custom alias cnditions
-  if(
-    $node->type == 'photogallery' || 
-    $node->type == 'story' || 
-    $node->type == 'videogallery')
-    {
-        return itg_common_custompath_load($node);
-    }
+//  if ($node->type == 'photogallery' 
+//          || $node->type == 'story' 
+//          || $node->type == 'videogallery'){
+//    return itg_common_custompath_load($node);
+//  }
 }
 
 /**

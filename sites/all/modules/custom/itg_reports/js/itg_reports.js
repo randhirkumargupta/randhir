@@ -59,23 +59,17 @@
 
             });
 
-//            $('#edit-state').on('change', function() {
-//                var getvalue = $(this).val();
-//                var flag = 0;
-//                i = 0, size = getvalue.length;
-//                for (i; i < size; i++) {
-//                   if(getvalue[i]=='archive') {
-//                       flag = 1;
-//                   }
-//                }
-//                if(flag == 1) {
-//                   
-//                    $('#edit-field-story-archive-value').val('Yes').change();;
-//                } else {
-//                    $('#edit-field-story-archive-value').val('All').change();;
-//                }
-//
-//            });
+            $('#edit-node-status').on('change', function() {
+                var getvalue = $("#edit-node-status option:selected").text();
+
+                if(getvalue == 'Archive') {
+                   
+                    $('#edit-field-story-archive-value').val('Yes').change();;
+                } else {
+                    $('#edit-field-story-archive-value').val('All').change();;
+                }
+
+            });
 
             // Copy Moderation dropdown under actual moderation field.
             if ($('body').hasClass('page-report-filed-content')) {
@@ -98,7 +92,7 @@
     };
 })(jQuery, Drupal, this, this.document);
 jQuery( document ).ready(function() {
-   
+   jQuery('#edit-field-story-archive-value-wrapper').hide();
     if(jQuery('#edit-field-story-archive-value').val() == 'Yes') {
        
         jQuery('.view-id-report_filed_content td.views-field-status').text('Archive');

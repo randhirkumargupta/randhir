@@ -1,0 +1,39 @@
+<?php
+
+function itg_custom_widget_schema() {
+  $schema = array();
+  $schema['itg_custom_widgets_data'] = array(
+    'description' => 'table holdes custom widget data',
+    'fields' => array(
+      'tid' => array(
+        'description' => 'primary key',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'nodeid',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'widget' => array(
+        'description' => 'name of widget',
+        'type' => 'varchar',
+        'length' => '100',
+        'not null' => TRUE,
+      ),
+      'weight' => array(
+        'description' => 'weight of nid under widget',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'extra' => array(
+        'description' => 'extra field',
+        'type' => 'varchar',
+        'length' => '22',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('tid'),
+  );
+  return $schema;
+}

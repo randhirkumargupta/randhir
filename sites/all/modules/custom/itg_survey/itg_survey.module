@@ -91,7 +91,16 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
   // Set destination for survey form
   if ($form_id == 'survey_node_form') {
     $form['field_survey_category']['und']['#config']['module'] = 'itg_category_manager';
-
+    unset($form['field_supp_publish']['und']['#options']['_none']);
+    if (is_numeric(arg(1))) {
+      $publish_value = itg_survey_get_publish_status(arg(1));
+    }
+    if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'survey' || $publish_value == 0) {
+      unset($form['field_supp_publish']['und']['#options'][2]);
+    }
+    if ($publish_value == 1 || $publish_value == 2) {
+      unset($form['field_supp_publish']['und']['#options'][0]);
+    }
     // Set Destination
     $destination = 'manage-survey';
 
@@ -249,7 +258,7 @@ function itg_survey_views_pre_render(&$view) {
  */
 function itg_survey_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
 
-  if ($form['#id'] == 'views-exposed-form-manage-survey-page' || $form['#id'] == 'views-exposed-form-manage-survey-page-1') {
+  if ($form['#id'] == 'views-exposed-form-manage-survey-page' || $form['#id'] == 'views-exposed-form-manage-survey-page-1'  || $form['#id'] == 'views-exposed-form-manage-survey-page-2') {
 
     // Call function autocomplete to show matching titles
     $form['title']['#autocomplete_path'] = 'content-title-list/survey/autocomplete';
@@ -263,19 +272,23 @@ function itg_survey_form_views_exposed_form_alter(&$form, &$form_state, $form_id
  * {@inheritdoc}
  */
 function itg_survey_node_presave($node) {
-  
-//  if($node->op == 'Publish') {
-//    $node->field_supp_publish[LANGUAGE_NONE][0]['value'] = 1;
-//  }
-  // Publish/unpublish functionality for survey
-  if ($node->type == 'survey') {
-    if ($node->is_new == 1) {
-      $node->status = $node->field_supp_publish[LANGUAGE_NONE][0]['value'];
-    }
-    else {
-      $publish = $node->field_supp_publish[LANGUAGE_NONE][0]['value'] ? 1 : 0;
-      $node->status = $publish;
-      field_attach_update('node', $node);
+// code modified on 6thfeb,2017
+  /*
+   * field_supp_publish can have 3 values
+   * '0' for save as draft
+   * '1' for publish and '2' for unpublish
+   */
+  if ($node->type == 'survey' && isset($node->field_supp_publish)) {
+    switch ($node->field_supp_publish[LANGUAGE_NONE][0]['value']) {
+      case '0':
+        $node->status = 0;
+        break;
+      case '1':
+        $node->status = 1;
+        break;
+      default :
+        $node->status = 0;
+        break;
     }
   }
 }
@@ -616,9 +629,9 @@ function itg_survey_node_access($node, $op, $account) {
       if (($curr_time >= $survey_start_date) || ($curr_time > $survey_end_date)) {
         $node_edit = TRUE;
       }
-
+      $condition = ($node->field_supp_publish[LANGUAGE_NONE][0]['value'] == 2 || $node->field_supp_publish[LANGUAGE_NONE][0]['value'] == 1) ;
       // If condition is true, user doesn't allow to see node
-      if (($node_edit && $op == 'update' && $node->status == 1) || user_is_anonymous() || ($op == 'update' && $node->uid != $user->uid)) {
+      if (($node_edit && $op == 'update' && !(array_key_exists(10, $account->roles)) && $condition) || user_is_anonymous() || ($op == 'update' && $node->uid != $user->uid)) {
         return NODE_ACCESS_DENY;
       }
     }
@@ -1192,4 +1205,20 @@ function survey_form_ajax_handler(&$form, &$form_state) {
   return array(
     '#type' => 'ajax',
     '#commands' => $commands);
+}
+
+/**
+ * Implements itg_survey_get_publish_status()
+ * @param type $nid
+ */
+function itg_survey_get_publish_status($nid) {
+  $query = db_select('field_data_field_supp_publish', 'p')
+    ->fields('p', array('field_supp_publish_value'))
+    ->condition('p.entity_id', $nid, '=')
+    ->execute();
+  $result = $query->fetchField();
+  if ($result == 0 || $result == '') {
+    $result = 0;
+  }
+  return $result;
 }
