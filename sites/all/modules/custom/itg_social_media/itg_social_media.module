@@ -628,6 +628,10 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
     }
     // get response
     $graphNode = $response->isError();
+    $post_id = $graph_node_res['post_id'];
+    if ($graph_node_res['post_id'] == "") {
+        $post_id = variable_get('facebook_page_id', '') . '_' . $graph_node_res['id'];
+    }
 
     if (!$graphNode) {
         $pre_save['nid'] = $node->nid;
@@ -1102,7 +1106,6 @@ function itg_social_media_social_media_activity_update() {
                     $current_url .= '&fields=likes.summary(true),comments.summary(true),shares';
                     $json = file_get_contents($current_url);
                     $data = json_decode($json, true);
-
                     $like = $data['likes']['summary']['total_count'];
                     $comment = $data['comments']['summary']['total_count'];
                     $share = $data['shares']['count'];
@@ -1115,6 +1118,8 @@ function itg_social_media_social_media_activity_update() {
                     $query->condition('id', $result_data->id)
                             ->fields($update_field)
                             ->execute();
+
+                    itg_social_media_update_fb_click_video_play($result_data->post_id, $result_data->id);
                 }
                 if (strpos($result_data->social_media, 'Twitter') !== FALSE) {
                     $social_counter_settings = array(
@@ -1147,6 +1152,66 @@ function itg_social_media_social_media_activity_update() {
             }
         }
     }
+}
+
+/**
+ * Implement callback function for social media activity update 
+ */
+function itg_social_media_update_fb_click_video_play($post_id, $social_media_log_id) {
+    $fb = itg_social_media_fb_connection();
+    $token = variable_get('access_token_one') . variable_get('access_token_two');
+
+    // video or photo click count here
+    $current_url = 'https://graph.facebook.com/v2.5/' . $post_id . '/insights/post_consumptions_by_type_unique/lifetime/';
+    $current_url .= '?access_token=' . $token;
+    $json = file_get_contents($current_url);
+    $data = json_decode($json, true);
+    if (isset($data["data"][0]["values"][0]["value"]["video play"]) && !empty($data["data"][0]["values"][0]["value"]["video play"])) {
+        $fb_views = $data["data"][0]["values"][0]["value"]["video play"];
+    }
+    if (isset($data["data"][0]["values"][0]["value"]["photo view"]) && !empty($data["data"][0]["values"][0]["value"]["photo view"])) {
+        $fb_photo_views = $data["data"][0]["values"][0]["value"]["photo view"];
+    }
+
+// fans reach to post here
+    $current_url_fan = 'https://graph.facebook.com/v2.5/' . $post_id . '/insights/post_fan_reach/lifetime/';
+    $current_url_fan .= '?access_token=' . $token;
+    $json_fan = file_get_contents($current_url_fan);
+    $data_fan = json_decode($json_fan, true);
+
+    if (!empty($data_fan["data"][0]["values"][0]["value"])) {
+        $fb_reach = $data_fan["data"][0]["values"][0]["value"];
+    }
+    // post total click here
+    $current_url_all_click = 'https://graph.facebook.com/v2.5/' . $post_id . '/insights/post_consumptions/lifetime/';
+    $current_url_all_click .= '?access_token=' . $token;
+    $json_all_click = file_get_contents($current_url_all_click);
+    $data_all_click = json_decode($json_all_click, true);
+
+    if (!empty($data_all_click["data"][0]["values"][0]["value"])) {
+        $fb_click = $data_all_click["data"][0]["values"][0]["value"];
+    }
+    // post impression here
+    $current_url_impression = 'https://graph.facebook.com/v2.5/' . $post_id . '/insights/post_impressions_organic/lifetime/';
+    $current_url_impression .= '?access_token=' . $token;
+    $json_all_impression = file_get_contents($current_url_impression);
+    $data_all_impression = json_decode($json_all_impression, true);
+
+    if (!empty($data_all_impression["data"][0]["values"][0]["value"])) {
+        $fb_impressions = $data_all_impression["data"][0]["values"][0]["value"];
+    }
+    $update_field = array(
+        'click_on_post' => $fb_click,
+        'video_views' => $fb_views,
+        'photo_views' => $fb_photo_views,
+        'fan_reach' => $fb_reach,
+        'impressions' => $fb_impressions
+    );
+
+    $query = db_update('itg_social_media_logs');
+    $query->condition('id', $social_media_log_id)
+            ->fields($update_field)
+            ->execute();
 }
 
 /**

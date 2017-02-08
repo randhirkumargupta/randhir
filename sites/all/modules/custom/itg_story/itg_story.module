@@ -793,6 +793,7 @@ function itg_story_photo_story_redirect($node_id, $type) {
   $query->join('field_data_field_story_type', 's', 's.entity_id = n.nid');
   $query->fields('n', array('nid'));
   $query->condition('n.type', 'story');
+  $query->condition('n.status', 1, '=');
   $query->condition('s.field_story_type_value', 'photo_story');
   $query->condition('n.nid', $node_id, $type);
   $query->range(0, 1);
@@ -862,7 +863,7 @@ function itg_story_photo_story_bottom_html($node_id) {
         $photo_story_img = image_style_url('photo_story_small_88x66', $photo_story_img_path);
         $html .= '<div class="photo-slider">';
         $html .= '<span class="img-wrapper"><img src="' . $photo_story_img . '" title="' . $photo_story_file_name . '" alt="photo_story" />';
-        $html .= '<span class="photo-count">' . $i+1 . '</span></span>';
+        $html .= '<em class="photo-count">' . ($i+1) . '</em></span>';
         $html .= '</div>';
       }
       $html .= '</div>';

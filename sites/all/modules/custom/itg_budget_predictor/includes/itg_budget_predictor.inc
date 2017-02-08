@@ -337,7 +337,7 @@ function get_ranking_fid($tid, $section_id) {
 }
 
 /**
- * function for list of budget 
+ * function for list of budget
  * @global string $base_url
  * @return string
  */
@@ -393,7 +393,7 @@ function itg_budget_predictor_list() {
   }
 
   $caption_table_edit = l(t('List Of Budget'), 'manage-budget-list') . "&nbsp;" . l(t('Download Excel'), 'budget-download-excel', array('query' => array('section_id' => $_GET['section_id'], 'user_type' => $_GET['user_type'])));
-  
+
   // Format and print out the table.
   $output = theme('table', array('header' => $header, 'rows' => $rows, 'caption' => $caption_table_edit, 'attributes' => array('class' => array('views-table'))));
 
@@ -413,7 +413,7 @@ function itg_budget_predictor_list() {
 }
 
 /**
- * 
+ *
  * @global string $base_url
  * @param array $form
  * @param array $form_state
@@ -422,14 +422,7 @@ function itg_budget_predictor_list() {
 function itg_budget_predictor_search_form($form, &$form_state) {
   global $base_url;
   $form = array();
-  $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-  $op = array("" => "-- Section --");
-  foreach ($tax as $key => $val) {
-    if (itg_category_manager_term_state($val->tid)) {
-      $op[$val->tid] = $val->name;
-    }
-  }
-
+  $op = budget_tid_by_content_type();
   $user_arr = array("" => t("-- Section --"), '1' => t('Anonymous user'), '2' => t('Authenticated user'));
 
   $form['#method'] = 'get';
@@ -466,7 +459,7 @@ function itg_budget_predictor_search_form($form, &$form_state) {
 }
 
 /**
- * 
+ *
  * @param type $form
  * @param array $form_state
  */
@@ -475,14 +468,14 @@ function itg_budget_predictor_search_form_submit($form, &$form_state) {
 }
 
 /**
- * function for list of manage budget 
+ * function for list of manage budget
  * @global string $base_url
  * @return string
  */
 function itg_budget_manage_list() {
   global $base_url;
   $build = array();
-
+  drupal_set_title(t('Manage Budget Predictor'));
   $query = db_select('itg_manage_budget', 'm')->extend('PagerDefault');
   $query->fields('m', array('id', 'budget_title', 'budget_description', 'budget_section', 'budget_section', 'status'));
 
@@ -560,7 +553,7 @@ function itg_budget_manage_list() {
 }
 
 /**
- * 
+ *
  * @global string $base_url
  * @param array $form
  * @param array $form_state
@@ -569,17 +562,11 @@ function itg_budget_manage_list() {
 function itg_budget_predictor_search_user_form($form, &$form_state) {
   global $base_url;
   $form = array();
-  $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-  $op = array("" => "-- Section --");
-  foreach ($tax as $key => $val) {
-    if (itg_category_manager_term_state($val->tid)) {
-      $op[$val->tid] = $val->name;
-    }
-  }
-
-  $status_arr = array("" => t("-- Select --"), '1' => t('Active'), '2' => t('In-Active'));
+  $op = budget_tid_by_content_type();
+  $status_arr = array("" => t("-- Select --"), '1' => t('Active'), '2' => t('Inactive'));
 
   $form['#method'] = 'get';
+
   $form['section_id'] = array(
     '#type' => 'select',
     '#title' => t('Select Section'),
@@ -619,6 +606,7 @@ function itg_budget_predictor_search_user_form($form, &$form_state) {
 function itg_manage_budget() {
   $arg = arg();
   if (isset($arg) && $arg[1] == 'edit') {
+    drupal_set_title(t('Edit Budget Predictor'));
     $action = $arg[2];
     $query = db_select('itg_manage_budget', 'm');
     $query->condition('m.id', $action, '=');
@@ -628,19 +616,13 @@ function itg_manage_budget() {
     $results = $query->execute()->fetchObject();
   }
   else {
+    drupal_set_title(t('Add Budget Predictor'));
     $action = '';
   }
 
   $form = array();
-  $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-  $op = array("" => "-- Section --");
-  foreach ($tax as $key => $val) {
-
-    if (itg_category_manager_term_state($val->tid)) {
-      $op[$val->tid] = $val->name;
-    }
-  }
-
+  module_load_include('inc', 'itg_layout_manager', 'includes/itg_layout_autocomplete');
+  $op = budget_tid_by_content_type();
   $form['budget_section'] = array(
     '#type' => 'select',
     '#title' => t('Select Section'),
@@ -684,12 +666,13 @@ function itg_manage_budget() {
     '#upload_location' => 'public://budget/',
     '#required' => TRUE
   );
-  
+
+
   $form['budget_status'] = array(
     '#type' => 'radios',
     '#title' => t('Budget status'),
-    '#options' => array(1 => "Yes", 2 => "No"),
-    '#default_value' => ($results->status) ? $results->status : 2,
+    '#options' => array(1 => "Active", 2 => "Inactive"),
+    '#default_value' => ($results->status) ? $results->status : 1,
     '#required' => TRUE
   );
 
@@ -747,15 +730,19 @@ function itg_manage_budget_submit($form, &$form_state) {
   $budget_year = $form_state['values']['budget_year'];
   $budget_status = $form_state['values']['budget_status'];
   $budget_action = $form_state['input']['budget_action'];
+  $budget_image = $form_state['values']['budget_image'];
 
-  $file_id = $form_state['input']['budget_image']['fid'];
-  $file = file_load($form_state['values']['budget_image']);
-
-  if ($file) {
+  if ($budget_image != 0) {
+    // Upload and save file.
+    $file = file_load($budget_image);
     $file->status = FILE_STATUS_PERMANENT;
-    file_save($file);
-    file_usage_add($file, 'user', 'user', $user->uid);
+    $file_saved = file_save($file);
+    // Record that the module is using the file.
+    // If we dont do , then file will remove if a cron run.
+    file_usage_add($file_saved, 'itg_manage_budget', 'file_id', $file_saved->fid);
+    $file_id = $file_saved->fid;
   }
+
 
 
   if (isset($budget_action) && $budget_action > 0) {
@@ -961,7 +948,7 @@ function update_user_by_cookies($user_id, $section_id, $cookies_id) {
 }
 
 /**
- * check existing user play predictor widget. 
+ * check existing user play predictor widget.
  * @param int $user_id
  * @param int $section_id
  * @param string $cookies_id
@@ -991,3 +978,20 @@ function itg_budget_reset_image() {
         ->execute();
   }
 }
+
+function budget_tid_by_content_type() {
+  $query = db_select('field_data_field_cm_select_type', 's');
+      $query->fields('s',array(entity_id));
+      $query->fields('t',array(name));
+      $query->leftJoin('taxonomy_term_data', 't', 's.entity_id=t.tid');
+      $query->condition('s.field_cm_select_type_value', 'manage-budget-predictor');
+      $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+      $op = array("" => "-- Section --");
+      if(is_array($result) && count($result) > 0) {
+        foreach ($result as $key => $value) {
+          $op[$value['entity_id']] = $value['name'];
+        }
+      }
+    return $op;
+}
+

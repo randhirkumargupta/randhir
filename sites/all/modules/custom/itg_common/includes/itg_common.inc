@@ -509,17 +509,22 @@ function itg_common_get_latest_byline($nid, $status) {
  */
 
 function itg_common_custompath_load($node) {
-    
+
     global $edited_sef_url;
     if (!empty($node->path['alias'])) {
-      $node_sef = $node->path['alias'];
+      $path_data = explode("/", $node->path['alias']);
+      $set_hierarchy = array_reverse($path_data);
+      $node_sef = $set_hierarchy[0];
     } else if(!empty ($edited_sef_url)){
       $node_sef = $edited_sef_url;
     } else {
       $node_sef = $node->title;
     }
-
-    $published_date = date('Y-m-d', $node->workbench_moderation['published']->timestamp);
+    if(is_array($node->workbench_moderation) && !empty($node->workbench_moderation)){
+        $published_date = date('Y-m-d', $node->workbench_moderation['published']->timestamp);
+    } else {
+        $published_date = date('Y-m-d', $node->created);
+    }
     $getsection = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
     $parents = taxonomy_get_parents_all($getsection);
     if (isset($parents) && !empty($parents)) {

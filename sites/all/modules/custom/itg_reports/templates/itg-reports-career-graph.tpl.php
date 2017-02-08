@@ -29,6 +29,7 @@
     ksort($graph_data_all);
     $earning = "";
     $moviename = array();
+    $year = array();
     foreach ($graph_data_all as $g_key => $graph_data) {
         $year[] = $g_key;
         if ($graph_data[1] == "") {
@@ -38,6 +39,7 @@
         if (isset($graph_data[2]) && !empty($graph_data[2])) {
             $moviename[$g_key] = $graph_data[2];
         }
+        
     }
     ?>
     <script type="text/javascript">
@@ -85,7 +87,7 @@
                     formatter: function() {
                         var xcod = this.x;
 
-                        return 'Earning for ' + this.x + '</b> is <b>' + this.y + '</b>, for Movie: ' + moviename[xcod];
+                        return moviename[xcod]+', <b>' + this.y + ' Cr </b> ,' + this.x ;
 
                     },
                 },

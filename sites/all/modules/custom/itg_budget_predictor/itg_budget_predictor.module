@@ -36,6 +36,7 @@ function itg_budget_predictor_menu() {
     'access callback' => 'user_is_logged_in',
   );
   $items['budget-predictor-list'] = array(
+    'title' => t('Budget Users List'),
     'page callback' => 'itg_budget_predictor_list',
     'access arguments' => array('administer itg_term settings'),
     'type' => MENU_CALLBACK,
@@ -54,7 +55,6 @@ function itg_budget_predictor_menu() {
     'file' => 'includes/itg_budget_predictor.inc',
   );
   $items['manage-budget-predictor'] = array(
-    'title' => 'Manage Budget Predictor',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_manage_budget'),
     'access arguments' => array('administer itg_term settings'),
