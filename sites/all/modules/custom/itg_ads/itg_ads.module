@@ -443,12 +443,17 @@ function itg_ads_get_mode($type) {
 function itg_ads_rule_after_build_validate($form, &$form_state) {
 
   $check_add_template_existance = check_add_template_existance($form_state['values']['field_ads_template_selection']['und'][0]['value']);
-
+  $node_path = $_GET['q'];
+  $node_path_array = explode('/', $_GET['q']);
   if (isset($form_state['values']['nid']) && !empty($form_state['values']['nid']) && $form_state['values']['nid'] != $check_add_template_existance) {
     form_set_error('field_ads_template_selection', t('OOPS! Already added place holder for selected template.If you want to edit selected templete please ' . l('click here!', 'node/' . $check_add_template_existance . '/edit')));
   } elseif (isset($_GET['q']) && !empty($_GET['q']) && $_GET['q'] == 'node/add/ads-management') {
     if (isset($check_add_template_existance) && !empty($check_add_template_existance)) {
       form_set_error('field_ads_template_selection', t('OOPS! Already added place holder for selected template.If you want to edit selected templete please ' . l('click here!', 'node/' . $check_add_template_existance . '/edit')));
+    } elseif ($node_path_array[0] == 'node' && $node_path_array[2] == 'edit') {
+      if ($node_path_array[1] != $check_add_template_existance) {
+        form_set_error('field_ads_template_selection', t('OOPS! Already added place holder for selected template.If you want to edit selected templete please ' . l('click here!', 'node/' . $check_add_template_existance . '/edit')));
+      }
     }
   }
 
@@ -734,7 +739,6 @@ function get_desired_code_for_ads_placing($ad_value, $device) {
  * This is the code that will return the header script and body script on the basisc of conditional section id as per business logic
  * @return array $adsheaderbody;
  */
-
 function get_header_body_start_end_code() {
 
   $arg = arg();  // Getting all url arguments
