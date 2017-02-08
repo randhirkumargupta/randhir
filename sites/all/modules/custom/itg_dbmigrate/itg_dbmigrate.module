@@ -134,3 +134,30 @@ function itg_migrate_category_table($level){
   
   return $table[$level];
 }
+
+/**
+   * Implements function for get term sef
+   * @param str $url
+   * @return
+   */
+  function itg_db_migrate_term_sef($url){
+   $query = db_select('url_alias', 'ul');
+   $query = $query->fields('ul',array('alias'));
+   $query = $query->condition('source', $url, '=');
+   $query->condition('source', '%' . db_like($url), LIKE);
+   $result = $query->execute()->fetchField();
+   return $result;
+  }
+  
+/**
+ * Implement function for return vocab id.
+ * @param str $vocab_name
+ * @return
+ */
+function itg_db_migrate_vocab_id($vocab_name) {
+  $query = db_select('taxonomy_vocabulary', 'tv');
+  $query->fields('tv', array('vid'));
+  $query->condition('tv.machine_name', $vocab_name, '=');
+  $result = $query->execute()->fetchField();
+  return $result;
+}

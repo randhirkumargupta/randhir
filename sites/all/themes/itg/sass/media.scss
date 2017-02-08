@@ -450,17 +450,14 @@
     overflow: auto;
     margin:0 -6px;
     li{
-        float: none;
-        display: inline-block;
-        width: 156px;
-        vertical-align: top;
-        padding: 15px 6px;
         a{
             white-space: pre-wrap;
         }
     }  
 }
 /*story page css end*/
+.budget-page-layout .video-wrapper{padding-bottom: 56.25%;}
+.other-news{margin-top: 50px;}
 
 }
 
@@ -668,20 +665,36 @@
             @include calculate-width(1);        
         }       
     }
-    .itg-layout-container .itg-h450-section .droppable,  .itg-layout-container .itg-h321-section .droppable, 
+    .itg-layout-container .itg-h450-section .droppable,  
+    .itg-layout-container .itg-h321-section .droppable, 
     .itg-layout-container .top-colum-3 .itg-widget-parent .droppable,
     .itg-layout-container .itg-top-section .top-colum-2 .droppable,
     .itg-layout-container .itg-top-section .top-colum-1 .droppable,
     .itg-layout-container .top-colum-3 .droppable,
-    .itg-common-section .droppable, .sport-home-layout-page .itg-layout-615 .auto-block-1,
-    .sport-home-layout-page .itg-layout-615 .auto-block-2, .sport-home-layout-page .itg-layout-615 .droppable,
-    .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable, .tech-layout-page .itg-h396-section .droppable,
-    .tech-layout-page .itg-h385-section .droppable, .election-page .left-side .itg-photo .droppable, .movie-layout-page .itg-h385-section .droppable,
-    .movie-layout-page .itg-h396-section .droppable, .movie-layout-page .itg-layout-580 .itg-widget-child .droppable, .movie-layout-page .itg-layout-580 .droppable,
-    .movie-layout-page .itg-layout-580 .droppable .auto-block-1, .movie-layout-page .itg-layout-580 .droppable .auto-block-2, .education-layout-page .itg-layout-565 .droppable,
-    .education-layout-page .itg-layout-672 .itg-widget-child .droppable, .education-layout-page .itg-295-layout .droppable, .education-layout-page .itg-325-layout .droppable,
-    .education-layout-page .itg-345-layout .droppable, .education-layout-page .itg-325-layout .ad-widget{
-        height: auto;        
+    .itg-common-section .droppable, 
+    .sport-home-layout-page .itg-layout-615 .auto-block-1,
+    .sport-home-layout-page .itg-layout-375 .droppable,
+    .sport-home-layout-page .itg-layout-615 .auto-block-2, 
+    .sport-home-layout-page .itg-layout-615 .droppable,
+    .sport-home-layout-page .itg-layout-225 .droppable, 
+    .sport-home-layout-page .itg-layout-485 .droppable, 
+    .tech-layout-page .itg-h396-section .droppable,
+    .tech-layout-page .itg-h385-section .droppable, 
+    .election-page .left-side .itg-photo .droppable, 
+    .movie-layout-page .itg-h385-section .droppable,
+    .movie-layout-page .itg-h396-section .droppable, 
+    .movie-layout-page .itg-layout-580 .itg-widget-child .droppable, 
+    .movie-layout-page .itg-layout-580 .droppable,
+    .movie-layout-page .itg-layout-580 .droppable .auto-block-1, 
+    .movie-layout-page .itg-layout-580 .droppable .auto-block-2, 
+    .education-layout-page .itg-layout-565 .droppable,
+    .education-layout-page .itg-layout-672 .itg-widget-child .droppable, 
+    .education-layout-page .itg-295-layout .droppable, 
+    .education-layout-page .itg-325-layout .droppable,
+    .education-layout-page .itg-345-layout .droppable, 
+    .education-layout-page .itg-325-layout .ad-widget{
+        height: auto;  
+        min-height: auto;
     }
     
     .itg-layout-container{
@@ -881,15 +894,7 @@
         .view-content{      
             .photo-list{
                 margin:0 -10px;
-                li{ 
-                    @include calculate-width(3);
-                    padding:15px 10px;
-                    &:nth-child(4n+1){
-                        clear: none;
-                    }
-                    &:nth-child(3n+1){
-                        clear: left;
-                    }
+                li{
                 }
             }
         }
@@ -2117,7 +2122,7 @@ footer .footer-top .footer-social-link{
 }
 
 /*Start header CSS Desktop version*/
-@media only screen and (min-width:769px){        
+@media only screen and (min-width:768px){        
     .list-none{
         list-style-type: none;
     }
@@ -2292,6 +2297,11 @@ footer .footer-top .footer-social-link{
         &.photo-story-section{
             .story-right{
                 width: 77%; 
+            }   
+        }        
+        &.buzz-feedback{
+            .story-right{
+                width: 100%; 
             }   
         }        
     }

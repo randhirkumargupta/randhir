@@ -121,7 +121,7 @@ function itg_image_repository_admin_form($form, &$form_state) {
  */
 function itg_image_repository_admin_theme($variables) {
   $form = $variables['form'];
-  $profile1 = itg_image_repository_user1_profile();
+  $profile = itg_image_repository_user_profile();
   $header = array(t('User role'));
   $rows = array(array(t('Site maintenance account')));
   $keys = array('name');
@@ -129,7 +129,7 @@ function itg_image_repository_admin_theme($variables) {
   $swrappers = file_get_stream_wrappers(STREAM_WRAPPERS_VISIBLE);
   foreach ($swrappers as $scheme => $info) {
     $header[] = l($info['name'], 'itg_image_repository/' . $scheme);
-    $rows[0][] = check_plain($profile1['name']);
+    $rows[0][] = check_plain($profile['name']);
     $keys[] = $scheme . '_pid';
   }
 
