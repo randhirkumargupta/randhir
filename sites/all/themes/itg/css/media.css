@@ -45,6 +45,13 @@
   }
 }
 @media only screen and (max-width: 1024px) {
+  .row {
+    margin: 0;
+  }
+  .row .row {
+    margin: 0;
+  }
+
   h1 {
     font-size: 26px;
     line-height: 32px;
@@ -439,18 +446,18 @@
     overflow: auto;
     margin: 0 -6px;
   }
-  .sport-home-layout-page .page-sports-video .view-content .photo-list li {
-    float: none;
-    display: inline-block;
-    width: 156px;
-    vertical-align: top;
-    padding: 15px 6px;
-  }
   .sport-home-layout-page .page-sports-video .view-content .photo-list li a {
     white-space: pre-wrap;
   }
 
   /*story page css end*/
+  .budget-page-layout .video-wrapper {
+    padding-bottom: 56.25%;
+  }
+
+  .other-news {
+    margin-top: 50px;
+  }
 }
 @media only screen and (max-width: 768px) {
   header {
@@ -662,20 +669,36 @@
     width: 100%;
   }
 
-  .itg-layout-container .itg-h450-section .droppable, .itg-layout-container .itg-h321-section .droppable,
+  .itg-layout-container .itg-h450-section .droppable,
+  .itg-layout-container .itg-h321-section .droppable,
   .itg-layout-container .top-colum-3 .itg-widget-parent .droppable,
   .itg-layout-container .itg-top-section .top-colum-2 .droppable,
   .itg-layout-container .itg-top-section .top-colum-1 .droppable,
   .itg-layout-container .top-colum-3 .droppable,
-  .itg-common-section .droppable, .sport-home-layout-page .itg-layout-615 .auto-block-1,
-  .sport-home-layout-page .itg-layout-615 .auto-block-2, .sport-home-layout-page .itg-layout-615 .droppable,
-  .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable, .tech-layout-page .itg-h396-section .droppable,
-  .tech-layout-page .itg-h385-section .droppable, .election-page .left-side .itg-photo .droppable, .movie-layout-page .itg-h385-section .droppable,
-  .movie-layout-page .itg-h396-section .droppable, .movie-layout-page .itg-layout-580 .itg-widget-child .droppable, .movie-layout-page .itg-layout-580 .droppable,
-  .movie-layout-page .itg-layout-580 .droppable .auto-block-1, .movie-layout-page .itg-layout-580 .droppable .auto-block-2, .education-layout-page .itg-layout-565 .droppable,
-  .education-layout-page .itg-layout-672 .itg-widget-child .droppable, .education-layout-page .itg-295-layout .droppable, .education-layout-page .itg-325-layout .droppable,
-  .education-layout-page .itg-345-layout .droppable, .education-layout-page .itg-325-layout .ad-widget {
+  .itg-common-section .droppable,
+  .sport-home-layout-page .itg-layout-615 .auto-block-1,
+  .sport-home-layout-page .itg-layout-375 .droppable,
+  .sport-home-layout-page .itg-layout-615 .auto-block-2,
+  .sport-home-layout-page .itg-layout-615 .droppable,
+  .sport-home-layout-page .itg-layout-225 .droppable,
+  .sport-home-layout-page .itg-layout-485 .droppable,
+  .tech-layout-page .itg-h396-section .droppable,
+  .tech-layout-page .itg-h385-section .droppable,
+  .election-page .left-side .itg-photo .droppable,
+  .movie-layout-page .itg-h385-section .droppable,
+  .movie-layout-page .itg-h396-section .droppable,
+  .movie-layout-page .itg-layout-580 .itg-widget-child .droppable,
+  .movie-layout-page .itg-layout-580 .droppable,
+  .movie-layout-page .itg-layout-580 .droppable .auto-block-1,
+  .movie-layout-page .itg-layout-580 .droppable .auto-block-2,
+  .education-layout-page .itg-layout-565 .droppable,
+  .education-layout-page .itg-layout-672 .itg-widget-child .droppable,
+  .education-layout-page .itg-295-layout .droppable,
+  .education-layout-page .itg-325-layout .droppable,
+  .education-layout-page .itg-345-layout .droppable,
+  .education-layout-page .itg-325-layout .ad-widget {
     height: auto;
+    min-height: auto;
   }
 
   .itg-layout-container .itg-common-section .home-page-poll-block-wrap .droppable {
@@ -843,16 +866,6 @@
   /*CSS Starts Photo landing page*/
   .view-video-list-of-category .view-content .photo-list, .view-photo-list-of-category .view-content .photo-list, .view-so-sorry .view-content .photo-list, .view-programme-content .view-content .photo-list, .page-sports-video .view-content .photo-list, .page-sports-photo .view-content .photo-list, .view-programme-content-live-tv .view-content .photo-list {
     margin: 0 -10px;
-  }
-  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li, .view-programme-content-live-tv .view-content .photo-list li {
-    width: 33.33333%;
-    padding: 15px 10px;
-  }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-so-sorry .view-content .photo-list li:nth-child(4n+1), .view-programme-content .view-content .photo-list li:nth-child(4n+1), .page-sports-video .view-content .photo-list li:nth-child(4n+1), .page-sports-photo .view-content .photo-list li:nth-child(4n+1), .view-programme-content-live-tv .view-content .photo-list li:nth-child(4n+1) {
-    clear: none;
-  }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-so-sorry .view-content .photo-list li:nth-child(3n+1), .view-programme-content .view-content .photo-list li:nth-child(3n+1), .page-sports-video .view-content .photo-list li:nth-child(3n+1), .page-sports-photo .view-content .photo-list li:nth-child(3n+1), .view-programme-content-live-tv .view-content .photo-list li:nth-child(3n+1) {
-    clear: left;
   }
 
   /*CSS End Photo landing page*/
@@ -2010,7 +2023,7 @@
   /*static page css end*/
 }
 /*Start header CSS Desktop version*/
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .list-none {
     list-style-type: none;
   }
@@ -2184,6 +2197,9 @@
   .story-section.photo-story-section .story-right {
     width: 77%;
   }
+  .story-section.buzz-feedback .story-right {
+    width: 100%;
+  }
 
   .buzz-feedback .story-right {
     width: 100%;
@@ -2277,14 +2293,14 @@
     font-size: 15px;
   }
 }
-@media only screen and (min-width: 769px) and (min-width: 768px) {
+@media only screen and (min-width: 768px) and (min-width: 768px) {
   .view-front-end-global-search .view-content .social-share ul li a {
     width: 23px;
     height: 23px;
     line-height: 25px;
   }
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .view-front-end-global-search .view-content .social-share ul li a.share {
     color: #d0d0d0;
   }
