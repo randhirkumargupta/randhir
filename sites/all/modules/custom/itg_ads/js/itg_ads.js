@@ -44,7 +44,7 @@
       });
 
 
-    
+
     }
 
   };
@@ -84,14 +84,14 @@ jQuery(document).ready(function() {
 
 
   });
-  
-    try {
-        if (jQuery('[name="field_select_template_type[und]"]:checked').val() == "Section") {
-          jQuery('#itg_ads_ttype_replace').show();
-        }
-      }
-      catch (e) {
 
-      }
+  try {
+    if (jQuery('[name="field_select_template_type[und]"]:checked').val() == "Section") {
+      jQuery('#itg_ads_ttype_replace').show();
+    }
+  }
+  catch (e) {
+
+  }
 
 });
