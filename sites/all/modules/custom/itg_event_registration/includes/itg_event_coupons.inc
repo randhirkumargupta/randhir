@@ -86,10 +86,18 @@ function itg_event_check_coupon_auth($param) {
                 $mapped_email = $coupons_data->field_coupon_email[$coupons_data->language][0]['value'];
                 if ($mapped_email == $c_email) {
                   $discounted_value = get_discunted_value_for_coupon($coupon_discount_type, $coupon_discounted_value, $total_fee);
-                
+
+                  // Start code for handling if discounted value is greater then the actual amount
+                  if ($discounted_value['final_discounted_total_fee'] <= 0) {   // If discounted value is a negetive number then discounted value will be total fee
+                    $discounted_value['discounted_value'] = $total_fee;
+                    $discounted_value['final_discounted_total_fee'] = 0;
+                  }
+                  // End code for handling if discounted value is greater then the actual amount
+
+
                   $return = array(
                       'expired' => 0,
-                      'discounted_value' => $discounted_value['discounted_value'],
+                      'discounted_value' => $discounted_value['final_discounted_total_fee'],
                       'total_fee' => $total_fee,
                       'success' => 1,
                       'success_message' => t('Congrates! Coupon has been successfully redeemed for Rs. ' . $discounted_value['discounted_value']),
@@ -111,15 +119,15 @@ function itg_event_check_coupon_auth($param) {
 
 
                   // Start code for handling if discounted value is greater then the actual amount
-                  if ($discounted_value['discounted_value'] <= 0) {   // If discounted value is a negetive number then discounted value will be total fee
+                  if ($discounted_value['final_discounted_total_fee'] <= 0) {   // If discounted value is a negetive number then discounted value will be total fee
                     $discounted_value['discounted_value'] = $total_fee;
-                    $discounted_value['final_discounted_total_fee'] = $total_fee;
+                    $discounted_value['final_discounted_total_fee'] = 0;
                   }
                   // End code for handling if discounted value is greater then the actual amount
 
                   $return = array(
                       'expired' => 0,
-                      'discounted_value' => $discounted_value['discounted_value'],
+                      'discounted_value' => $discounted_value['final_discounted_total_fee'],
                       'total_fee' => $total_fee,
                       'success' => 1,
                       'success_message' => t('Congrates! Coupon has been successfully redeemed for Rs. ' . $discounted_value['discounted_value']),
@@ -146,16 +154,16 @@ function itg_event_check_coupon_auth($param) {
               $discounted_value = get_discunted_value_for_coupon($coupon_discount_type, $coupon_discounted_value, $total_fee);
 
               // Start code for handling if discounted value is greater then the actual amount
-              if ($discounted_value['discounted_value'] <= 0) {   // If discounted value is a negetive number then discounted value will be total fee
+              if ($discounted_value['final_discounted_total_fee'] <= 0) {   // If discounted value is a negetive number then discounted value will be total fee
                 $discounted_value['discounted_value'] = $total_fee;
-                $discounted_value['final_discounted_total_fee'] = $total_fee;
+                $discounted_value['final_discounted_total_fee'] = 0;
               }
               // End code for handling if discounted value is greater then the actual amount
 
 
               $return = array(
                   'expired' => 0,
-                  'discounted_value' => $discounted_value['discounted_value'],
+                  'discounted_value' => $discounted_value['final_discounted_total_fee'],
                   'total_fee' => $total_fee,
                   'success' => 1,
                   'success_message' => t('Congrates! Coupon has been successfully redeemed for Rs. ' . $discounted_value['discounted_value']),
@@ -178,20 +186,18 @@ function itg_event_check_coupon_auth($param) {
           case 'coupan_dc':
           case 'upload_third_party_coupon':
 
-
-
             $discounted_value = get_discunted_value_for_coupon($coupon_discount_type, $coupon_discounted_value, $total_fee);
 
             // Start code for handling if discounted value is greater then the actual amount
-            if ($discounted_value['discounted_value'] <= 0) {   // If discounted value is a negetive number then discounted value will be total fee
+            if ($discounted_value['final_discounted_total_fee'] <= 0) {   // If discounted value is a negetive number then discounted value will be total fee
               $discounted_value['discounted_value'] = $total_fee;
-              $discounted_value['final_discounted_total_fee'] = $total_fee;
+              $discounted_value['final_discounted_total_fee'] = 0;
             }
             // End code for handling if discounted value is greater then the actual amount
 
             $return = array(
                 'expired' => 0,
-                'discounted_value' => $discounted_value['discounted_value'],
+                'discounted_value' => $discounted_value['final_discounted_total_fee'],
                 'total_fee' => $total_fee,
                 'success' => 1,
                 'success_message' => t('Congrates! Coupon has been successfully redeemed for Rs. ' . $discounted_value['discounted_value']),
@@ -255,7 +261,7 @@ function get_discunted_value_for_coupon($coupon_discount_type, $coupon_discounte
         $coupon_dis_holder['final_discounted_total_fee'] = $total_fee - $discounted_value;
         break;
       case 'fix amount discount':
-        $discounted_value = $total_fee - $coupon_discounted_value;
+        $discounted_value = $coupon_discounted_value;
         $coupon_dis_holder['discounted_value'] = $discounted_value;
         $coupon_dis_holder['total_fee'] = $total_fee;
         $coupon_dis_holder['final_discounted_total_fee'] = $total_fee - $discounted_value;
