@@ -8,6 +8,7 @@
  *
  */
 module_load_include('inc', 'itg_ugc_comment', 'includes/itg_comment_config');
+module_load_include('inc', 'itg_ugc_comment', 'includes/ugc_comment_listing');
 
 /**
  * Implements hook_menu().
