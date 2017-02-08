@@ -235,7 +235,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
               $form['answer' . $num] = array(
 		  '#type' => 'markup',
 		  '#prefix' => '<div id="answer-container-'.$num.'" class="answer-container">',
-		  '#suffix' => '<div id="answer-response-'.$question_arr['value'].'" class="answer-container-actual"></div><button id="show_answer">Show answer</button>',
+		  '#suffix' => '<div id="answer-response-'.$question_arr['value'].'" class="answer-container-actual"></div><button id="show_answer" class="answer' . $num.'">Show answer</button>',
 	      );
       } else {
 	      $form['answer' . $num] = array(

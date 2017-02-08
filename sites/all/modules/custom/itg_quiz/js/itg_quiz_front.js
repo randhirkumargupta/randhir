@@ -49,7 +49,9 @@ $(this).parent().parent().parent().parent().find('.answer-container-actual').htm
             }    
       
   });
-    $('body').on('click', '#show_answer', function() {
+  
+ /*       
+        $('body').on('click', '#show_answer', function() {
         
 	   $(this).closest('.answer-container').find('.form-checkbox').attr('disabled', true);
       var qnid = $("input[name='nid']").val();
@@ -68,8 +70,40 @@ $(this).parent().parent().parent().parent().find('.answer-container-actual').htm
                     data: {nid:qnid, ans_val:JSON.stringify(selected), not_select:JSON.stringify(not_selected)},
                     url: Drupal.settings.basePath+"quiz-response-checkbox",
                     success: function(data) {
+                        console.log(data);
+                        ansvalue = data.split('-');
                       
-                      $('.answer-container-actual').html(data);
+                      $('.answer-container-actual').html(ansvalue[0]+'<br/>'+ansvalue[1]);
+
+                    }
+               });
+      return false;
+    });
+    */
+   $=jQuery
+   $('body').on('click', '#show_answer', function() {
+       buttonClass = $(this).attr('class');
+	   $(this).closest('.answer-container').find('.form-checkbox').attr('disabled', true);
+      var qnid = $("input[name='nid']").val();
+      var selected = [];
+	$('.form-checkboxes input:checked').each(function() {
+	    selected.push($(this).val());
+	});
+      var not_selected = [];
+	$('.form-checkboxes input:checkbox:not(:checked)').each(function() {
+	    not_selected.push($(this).val());
+	});
+     
+      jQuery.ajax({      
+                    method:"post",
+                    //data: "{'nid':'" + qnid+ "', 'value':'" + val+ "'}",
+                    data: {nid:qnid, ans_val:JSON.stringify(selected), not_select:JSON.stringify(not_selected)},
+                    url: Drupal.settings.basePath+"quiz-response-checkbox",
+                    success: function(data) {
+                        //console.log(data);
+                        ansvalue = data.split('-');
+                      
+$('.'+buttonClass).siblings('.answer-container-actual').html(ansvalue[0]+'<br/>'+ansvalue[1]);
 
                     }
                });
