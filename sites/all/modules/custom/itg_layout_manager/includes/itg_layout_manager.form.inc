@@ -164,7 +164,7 @@ function layout_section_widgets_search_form($form, &$form_state) {
   if (arg(1) != 'home') {
     $form['all_section'] = array(
       '#type' =>'checkbox',
-      '#title' => t('All section'),
+      '#title' => t('All Categories'),
     );
 
     $form['section_name_all'] = array(
