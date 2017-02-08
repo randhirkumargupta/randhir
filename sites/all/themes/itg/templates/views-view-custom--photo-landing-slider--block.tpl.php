@@ -161,7 +161,12 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
         </div>
         
         
-        <div class="photo-ad">       
+        <div class="photo-ad">
+           <?php
+                          $block = block_load('itg_ads', ADS_RHS1);
+                          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                          print render($render_array);
+                         ?>
         </div>
         
     </div>
