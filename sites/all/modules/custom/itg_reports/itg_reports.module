@@ -74,12 +74,14 @@ function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_i
         case 'views-exposed-form-report-filed-content-page':
             // remove archive and unpublish on list
             $option = array();
+          
             foreach ($form['state']['#options'] as $key => $option_val) {
 
                 if ($key != 'un_published' && $key != 'archive') {
                     $option[$key] = $option_val;
                 }
             }
+            $form['node_status']['#options'] = $form['node_status']['#options'] + array("" => 'Archive');
             $form['state']['#options'] = $option;
             $form['field_story_category_tid']['#attributes'] = array('placeholder' => 'Search by section name');
             $form['uid']['#attributes'] = array('placeholder' => 'Search by user name');

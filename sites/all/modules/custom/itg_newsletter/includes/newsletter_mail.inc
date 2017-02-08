@@ -12,33 +12,36 @@
  * @return bool
  */
 function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
-    
-    
-   // Mail Content Frequency
+
+// Mail Content Frequency
+   $current_date = time();
    $newsfrequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
     if(!empty($newsfrequency) && ($newsfrequency == 'daily')){
         $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
-        $totaltimestamp = strtotime(date('D-m-Y ') . $gettime . ':00');
+        $cron_time = date('m/d/Y', $current_date).' '.$gettime . ':00';
+        $scheduled_time = strtotime($cron_time);
         $previoustimestamp = strtotime(date('D-m-Y ') . $gettime . ':00'. ' -1 day');
     } else if(!empty($newsfrequency) && ($newsfrequency == 'weekly')){
         $getweekday = $node->field_newsl_day[LANGUAGE_NONE][0]['value'];
         $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
+        $cron_time = date('m/d/Y', $current_date).' '.$gettime . ':00';
         $currentday = date('l');
         if($getweekday == $currentday){
-          $totaltimestamp = strtotime(date('D-m-Y ') . $gettime . ':00');
+          $scheduled_time = strtotime($cron_time);
           $previoustimestamp = strtotime(date('D-m-Y ') . $gettime . ':00'. ' -7 days');
         }
     } elseif(!empty($newsfrequency) && ($newsfrequency == 'monthly')){
         $getmonthdate = $node->field_newsl_date[LANGUAGE_NONE][0]['value'];
         $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
+        $cron_time = date('m/d/Y', $current_date).' '.$gettime . ':00';
         $currentdate = date('j');
         if($getmonthdate == $currentdate){
-          $totaltimestamp = strtotime(date('D-m-Y ') . $gettime . ':00');
+          $scheduled_time = strtotime($cron_time);
           $previoustimestamp = strtotime(date('D-m-Y ') . $gettime . ':00'. ' -1 month');
         }
     }
-
-  // Mail Content Section
+    
+// Mail Content Section
   if (!empty($node->field_story_category[LANGUAGE_NONE])) {
     foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $values) {
       $cat_array[] = $values['tid'];
@@ -61,7 +64,7 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
   // Get Mail content
   if ($type == 'stories') {
     if (!empty($cat_array)) {
-      $mail_content = itg_get_newsletter_mail_content_stories($template_node, 'section', $cat_array, $totaltimestamp, $previoustimestamp);
+      $mail_content = itg_get_newsletter_mail_content_stories($template_node, 'section', $cat_array, $scheduled_time, $previoustimestamp);
     }
     else {
       $mail_content = itg_get_newsletter_mail_content_stories($template_node);
