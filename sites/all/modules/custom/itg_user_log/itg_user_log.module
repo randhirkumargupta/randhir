@@ -20,7 +20,7 @@ function itg_user_log_user_login(&$edit, $account) {
  * Tmplements hook_node_view()
  * use for the insert data in mongoDB when user click for view
  */
-function itg_user_log_node_view($node, $view_mode, $langcode, $view_mode) {
+function itg_user_log_node_view($node, $view_mode, $langcode) {
     module_load_include('inc', 'itg_user_log', 'includes/user_info_count_update');
      global $theme;      
      if($theme == 'itg' && $node->type == 'story' && $view_mode == 'full') {
