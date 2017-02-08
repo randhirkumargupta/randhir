@@ -561,7 +561,7 @@ function itg_common_custompath_val($pathdata) {
 
 
 /** 
- * Implementing 'itg_common_custompath_load'.
+ * Implementing 'itg_common_custompath_insert_load'.
  * @param $node object
  * Creating Custom path alias for story, photogallery and videogallery
  */
@@ -600,7 +600,7 @@ function itg_common_custompath_insert_load($node) {
 }
 
 /** 
- * Implementing 'itg_common_custompath_val'.
+ * Implementing 'itg_common_custompath_insert_val'.
  * @param $pathdata path alias content
  * Creating custom path alias 
  */
