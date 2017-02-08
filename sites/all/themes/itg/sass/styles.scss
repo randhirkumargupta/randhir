@@ -2446,7 +2446,8 @@ footer{
         }
     } 
     .story-associate-content{       
-        overflow: hidden;
+        @include clearfix;
+/*        overflow: hidden;*/
         .associate-content-block{
             cursor: pointer;
         }
@@ -2459,7 +2460,8 @@ footer{
              width: 100%;
              z-index: inherit;
              background: #000;
-             display:none;
+             display:none; 
+             overflow: visible !important;
              .big-story-popup {
                  position: relative;
                  top: auto;
@@ -2470,7 +2472,18 @@ footer{
                  margin-top: 0;
              }
              #close-big-story{
-                 @include pos(absolute);
+                @include pos(absolute);                 
+                right: 0;
+                top: -20px;    
+                width: 20px;
+                height: 20px;    
+                line-height: 20px;    
+                border-radius: 3px 3px 0 0;                
+                box-shadow: none;
+                background: #bb0a0a;                
+                a{
+                    color: #fff;
+                }
              }
              .loading-popup{
                  display: inline;
@@ -5163,8 +5176,7 @@ section.sidebar{
     position: relative;
     padding-bottom: 50%;
     padding-top: 30px;
-    height: 0;
-    overflow: auto; 
+    height: 0;   
     -webkit-overflow-scrolling:touch;    
     iframe{
         position: absolute;
@@ -9756,7 +9768,9 @@ h1.about-us-heading{
 /*css end big story format*/
 /*like dislike photo page start*/
 #block-views-photo-landing-slider-block, #block-views-video-landing-header-block{
-    .section-like-dislike{        
+    .section-like-dislike{       
+        @include display-inline;
+        width:100%;
         .agbutton{
             margin-top:20px;            
             a{
@@ -10216,6 +10230,11 @@ h1.about-us-heading{
     }
     ul{
         list-style-type: none;
+        li{
+            a{
+            display: block;
+            }
+        }
     }
     span.tile{
         margin-top: 10px;
@@ -10261,21 +10280,18 @@ span.smilies-title {
     }
     .slick-arrow{
         position: absolute;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
         z-index: 999;
         border: none;
-        background-color: #000;
+        background: none;
         top: 45px;
         cursor: pointer;
-        opacity: .7;
+        opacity: 1;
         &.slick-disabled{
             opacity: .3;
         }
         .fa{
             font-size: 42px;
-            color: #fff;
+            color: #000;
         }
     }
     .slick-prev{
