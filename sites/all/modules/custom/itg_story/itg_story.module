@@ -793,6 +793,7 @@ function itg_story_photo_story_redirect($node_id, $type) {
   $query->join('field_data_field_story_type', 's', 's.entity_id = n.nid');
   $query->fields('n', array('nid'));
   $query->condition('n.type', 'story');
+  $query->condition('n.status', 1, '=');
   $query->condition('s.field_story_type_value', 'photo_story');
   $query->condition('n.nid', $node_id, $type);
   $query->range(0, 1);
