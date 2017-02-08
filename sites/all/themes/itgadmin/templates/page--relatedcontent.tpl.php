@@ -1,4 +1,5 @@
 <?php
+global $base_url;
 /**
  * @file
  * Returns the HTML for a single Drupal page.
@@ -15,7 +16,9 @@
   <main id="main">
     
     <section id="content" class="container" role="main">
-      
+      <div id="widget-ajex-loader" style="display: none">
+    <img class="widget-loader" align="center" src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />
+</div>
       <?php print render($page['content']); ?>
       
     </section>

@@ -437,7 +437,7 @@ function features_for_survey_field_default_field_instances() {
     'bundle' => 'survey',
     'default_value' => array(
       0 => array(
-        'value' => 1,
+        'value' => 0,
       ),
     ),
     'deleted' => 0,
@@ -470,7 +470,7 @@ function features_for_survey_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(),
-      'type' => 'options_buttons',
+      'type' => 'options_select',
       'weight' => 6,
     ),
   );
