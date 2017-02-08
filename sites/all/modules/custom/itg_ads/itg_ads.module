@@ -94,14 +94,24 @@ function itg_ads_block_view($delta = '') {
 
     // Medium Rectangle-RHS1-300x250
     case 'ads_medium_rectangl_rhs1_300x250':
-      $ad_script = get_itg_page_name('Medium Rectangle-RHS1-300x250');
-      $block['content'] = $ad_script;
+      $status = drupal_get_http_header("status");
+      if ($status == '404 Not Found' || $status == '403 Forbidden' || current_path() == 'user/login' || current_path() == 'user/registration' || current_path() == 'user') {
+        $block['content'] = '';
+      } else {
+        $ad_script = get_itg_page_name('Medium Rectangle-RHS1-300x250');
+        $block['content'] = $ad_script;
+      }
       break;
 
     // Medium Rectangle-RHS2-300x250
     case 'ads_medium_rectangl_rhs2_300x250':
-      $ad_script = get_itg_page_name('Medium Rectangle-RHS2-300x250');
-      $block['content'] = $ad_script;
+      $status = drupal_get_http_header("status");
+      if ($status == '404 Not Found' || $status == '403 Forbidden' || current_path() == 'user/login' || current_path() == 'user/registration' || current_path() == 'user') {
+        $block['content'] = '';
+      } else {
+        $ad_script = get_itg_page_name('Medium Rectangle-RHS2-300x250');
+        $block['content'] = $ad_script;
+      }
       break;
   }
 
