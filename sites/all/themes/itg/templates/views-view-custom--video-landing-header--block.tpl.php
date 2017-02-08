@@ -74,11 +74,37 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                              print $like_count['like_count'];
                                         }
                                         ?></span></a></li>
-                            <li><?php print $row['ops']; ?></li>
-                            <li><a class="def-cur-pointer" title ="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i> <span>Share</span></a></li>
-                            <li><a class="def-cur-pointer" title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($video_node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i> <span>Twitter</span></a></li>
-                            <li><a href="mailto:?body=<?php print urlencode($actual_link); ?>" title="Email"><i class="fa fa-envelope"></i> <span>Email</span></a></li>
-                            <li><a href="#" title="Embed"><i class="fa fa-link"></i> <span>Embed</span></a></li>
+                            <?php
+                                          if ($user->uid > 0)
+                                          {
+                                            if (function_exists(itg_get_front_activity_info))
+                                            {
+                                              $opt = itg_get_front_activity_info($video_node->nid, $video_node->type, $user->uid, 'read_later', $status = '');
+                                            }
+                                            
+                                            if (empty($opt['status']) || $opt['status'] == 0)
+                                            {
+                                              ?> 
+                                          <li><a title = "Save" href="javascript:" class="user-activity" rel="<?php print $video_node->nid; ?>" data-tag="<?php print $video_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-clock-o"></i><span><?php print t('Watch Later'); ?></span></a></li>
+                                            <?php }
+                                            else
+                                            { ?>
+                                          <li><a title = "Save" href="javascript:" class="def-cur-pointer active"><i class="fa fa-clock-o"></i><span><?php print t('Watch Later'); ?></span></a></li>
+                                            <?php
+                                            }
+                                          }
+                                          else
+                                          {
+                                            if (function_exists(itg_sso_url))
+                                            {
+                                              print '<li>'.itg_sso_url('<i class="fa fa-clock-o"></i> <span>' . t('Watch Later') . '</span>', t('Save')).'</li>';
+                                            }
+                                          }
+                                          ?>
+                            <li><a class="def-cur-pointer" title ="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i> <span><?php print t('Share'); ?></span></a></li>
+                            <li><a class="def-cur-pointer" title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($video_node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i> <span><?php print t('Twitter'); ?></span></a></li>
+                            <li><a href="mailto:?body=<?php print urlencode($actual_link); ?>" title="Email"><i class="fa fa-envelope"></i> <span><?php print t('Email'); ?></span></a></li>
+                            <li><a href="#" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a></li>
                             <?php
                             if (function_exists(global_comment_last_record)) {
                                 $last_record = global_comment_last_record();
@@ -154,7 +180,13 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                         </div>
 
                     </div>
-                    <div class="ads mhide"></div>
+                    <div class="ads">
+                         <?php
+                          $block = block_load('itg_ads', ADS_RHS1);
+                          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                          print render($render_array);
+                          ?>
+                    </div>
                 </div>
             </div>
         </div>
