@@ -39,7 +39,9 @@ $(this).parent().parent().parent().parent().find('.answer-container-actual').htm
                     data: {nid:qnid, ans_val:ans_val},
                     url: Drupal.settings.basePath+"quiz-response",
                     success: function(data) {
-                      ansvalue = data.split('-');
+                      console.log(data);
+                        ansvalue = data.split('-');
+                      
                       $('#answer-container-'+anslastid+' .answer-container-actual').html(ansvalue[0]+'<br/>'+ansvalue[1]);
 
                     }
@@ -48,6 +50,7 @@ $(this).parent().parent().parent().parent().find('.answer-container-actual').htm
       
   });
     $('body').on('click', '#show_answer', function() {
+        
 	   $(this).closest('.answer-container').find('.form-checkbox').attr('disabled', true);
       var qnid = $("input[name='nid']").val();
       var selected = [];

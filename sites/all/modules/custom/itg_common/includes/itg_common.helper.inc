@@ -68,6 +68,7 @@ define('SOCIAL_MEDIA', $role_array['Social Media']);
 define('MARKETING_MANAGER', $role_array['Marketing Manager']);
 define('FRONT_USER', $role_array['Front User']);
 define('KNOWLEDGE_CENTRE', $role_array['Knowledge Centre']);
+define('TAXONOMY_VID', 41);
 
 /**
  * value define for image.
