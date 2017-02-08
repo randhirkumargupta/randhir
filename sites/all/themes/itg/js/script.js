@@ -810,8 +810,6 @@ function smilyanimation(facetype){
     }); 
  }   
  
- alert(jQuery(window).width());
- 
  var menuBuilder = function () {
         var menuWidth, Totalwidth, liLength, clickHere;
         menuWidth = jQuery('.second-level-menu.menu').width() - 46;
