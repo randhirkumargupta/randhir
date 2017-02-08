@@ -361,7 +361,7 @@ function itg_user_block_api_form($form, &$form_state) {
     '#type' => 'submit',
     '#attributes' => array('class' => array('user-block-apply')),
     '#prefix' => '<div class = "user-log-filter-btn">',
-    '#suffix' => '<a class="user-log-reset form-submit" href="' . base_path() . 'ugc-comment-user">Reset</a></div><div class="right-button"><a href="javascript:void(0)" id="comment-user-block" class="form-submit">'.t('Block User').'</a><a href="javascript:void(0)" id="comment-user-unblock" class="form-submit">'.t('Unblock User').'</a><p class="block_success"></p></div>',
+    '#suffix' => '<a class="user-log-reset form-submit" href="' . base_path() . 'ugc-comment-user">'.t('Reset').'</a></div><div class="right-button"><a href="javascript:void(0)" id="comment-user-block" class="form-submit">'.t('Block User').'</a><a href="javascript:void(0)" id="comment-user-unblock" class="form-submit">'.t('Unblock User').'</a><p class="block_success"></p></div>',
   );
   
   $settings = array();
