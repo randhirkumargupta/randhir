@@ -509,22 +509,26 @@ function itg_common_get_latest_byline($nid, $status) {
  */
 
 function itg_common_custompath_load($node) {
- 
+    
+    global $edited_sef_url;
     if (!empty($node->path['alias'])) {
       $node_sef = $node->path['alias'];
+    } else if(!empty ($edited_sef_url)){
+      $node_sef = $edited_sef_url;
     } else {
-        $node_sef = $node->title;
+      $node_sef = $node->title;
     }
-    
+
+    $published_date = date('Y-m-d', $node->workbench_moderation['published']->timestamp);
     $getsection = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
     $parents = taxonomy_get_parents_all($getsection);
-    if (isset($parents) && !empty($parents)){
+    if (isset($parents) && !empty($parents)) {
         foreach ($parents as $key => $val) {
             $section_hierarchy[] = $val->name;
         }
     }
     $set_hierarchy = array_reverse($section_hierarchy);
-    $pathdata = strtolower(implode("/", $set_hierarchy)) . '/' . trim($node_sef). '.html';
+    $pathdata = strtolower(implode("/", $set_hierarchy)) . '/'. $node->type . '/' . trim($node_sef). '-'. $node->nid .'-'. $published_date;
     $newpath = itg_common_custompath_val($pathdata);
     $conditions = array('source' => 'node/' . $node->nid);
     $criteria = path_load($conditions);
@@ -540,6 +544,68 @@ function itg_common_custompath_load($node) {
  */
 
 function itg_common_custompath_val($pathdata) {
+
+    if (preg_match("![^a-z0-9]!i", $pathdata)) {
+        $pathdata = preg_replace('/[^a-zA-Z0-9\/\\.\']/', '-', $pathdata);
+        while (preg_match('/--/', $pathdata)) {
+            $pathdata = preg_replace('/--/', '-', $pathdata);
+        }
+        $pathdata = rtrim($pathdata, "-");
+        $pathdata = strtolower($pathdata);
+    }
+    return $pathdata;
+}
+
+
+
+
+
+/** 
+ * Implementing 'itg_common_custompath_load'.
+ * @param $node object
+ * Creating Custom path alias for story, photogallery and videogallery
+ */
+
+function itg_common_custompath_insert_load($node) {
+
+    if (!empty($node->path['alias'])) {
+        $path_data = explode("/", $node->path['alias']);
+        $set_hierarchy = array_reverse($path_data);
+        $alias_set = preg_replace("/[0-9]{4}/", "key-year", $set_hierarchy[0]);
+        $sefurl = explode("key-year", $alias_set);
+        $node_sef = rtrim($sefurl[0],'-');
+    } else {
+        $node_sef = $node->title;
+    }
+
+    if ($node->workbench_moderation_state_new == 'draft' || $node->workbench_moderation_state_new == 'published'){
+        $published_date = date('Y-m-d', $node->created);
+    }
+    
+    $getsection = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+    $parents = taxonomy_get_parents_all($getsection);
+    if (isset($parents) && !empty($parents)) {
+        foreach ($parents as $key => $val) {
+            $section_hierarchy[] = $val->name;
+        }
+    }
+    $set_hierarchy = array_reverse($section_hierarchy);
+    $pathdata = strtolower(implode("/", $set_hierarchy)) . '/'. $node->type . '/' . trim($node_sef). '-'. $node->nid .'-'. $published_date;
+    $newpath = itg_common_custompath_insert_val($pathdata);
+    $conditions = array('source' => 'node/' . $node->nid);
+    $criteria = path_load($conditions);
+    $criteria = array('pid' => $criteria);
+    path_delete($criteria);
+    $node->path = array('alias' => $newpath, 'pathauto' => FALSE);
+}
+
+/** 
+ * Implementing 'itg_common_custompath_val'.
+ * @param $pathdata path alias content
+ * Creating custom path alias 
+ */
+
+function itg_common_custompath_insert_val($pathdata) {
 
     if (preg_match("![^a-z0-9]!i", $pathdata)) {
         $pathdata = preg_replace('/[^a-zA-Z0-9\/\\.\']/', '-', $pathdata);

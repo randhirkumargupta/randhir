@@ -106,6 +106,7 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
  */
 
 function itg_meta_tags_alias_set($form, &$form_state) {
+    
     global $edited_sef_url;
     $nodeid = arg(1);
     if(isset($form['path']) && !empty($form['path'])){
