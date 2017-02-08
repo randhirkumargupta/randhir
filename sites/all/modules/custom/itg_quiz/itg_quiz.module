@@ -989,7 +989,7 @@ $record->correct_answer;
         $query->join('field_data_field_radio_button', 'r', 'r.entity_id = t.tid');
         $query->fields('t', array('name'));
         $query->condition('r.field_radio_button_value', $choice, '=');
-        $query->condition('t.vid',TAXONOMY_VID, '=');
+        $query->condition('t.vid',QUIZ_TAXONOMY_TID, '=');
         $res = $query->execute();        
 	$result = $res->fetchAll();
         if(is_array($result) && !empty($result)){
@@ -1004,7 +1004,7 @@ $record->correct_answer;
         $query->join('field_data_field_radio_button', 'r', 'r.entity_id = t.tid');
         $query->fields('t', array('name'));
         $query->condition('r.field_radio_button_value', $choice, '=');
-        $query->condition('t.vid',TAXONOMY_VID, '=');
+        $query->condition('t.vid',QUIZ_TAXONOMY_TID, '=');
         $res = $query->execute();        
 	$result = $res->fetchAll();
         if(is_array($result) && !empty($result)){
@@ -1044,7 +1044,7 @@ $record->correct_answer;
 	$query->join('field_data_field_radio_button', 'r', 'r.entity_id = t.tid');
 	$query->fields('t', array('name'));
 	$query->condition('r.field_radio_button_value', $choice, '=');
-	$query->condition('t.vid',TAXONOMY_VID, '=');
+	$query->condition('t.vid',QUIZ_TAXONOMY_TID, '=');
 	$res = $query->execute();        
 	$result = $res->fetchAll();
 	if(is_array($result) && !empty($result)){
@@ -1074,7 +1074,7 @@ $record->correct_answer;
 		$query->join('field_data_field_radio_button', 'r', 'r.entity_id = t.tid');
 		$query->fields('t', array('name'));
 		$query->condition('r.field_radio_button_value', $choice, '=');
-		$query->condition('t.vid',TAXONOMY_VID, '=');
+		$query->condition('t.vid',QUIZ_TAXONOMY_TID, '=');
 		$res = $query->execute();        
 		$result = $res->fetchAll();
 		if(is_array($result) && !empty($result)){
@@ -1087,7 +1087,7 @@ $record->correct_answer;
 		$query->join('field_data_field_radio_button', 'r', 'r.entity_id = t.tid');
 		$query->fields('t', array('name'));
 		$query->condition('r.field_radio_button_value', $choice, '=');
-		$query->condition('t.vid',TAXONOMY_VID, '=');
+		$query->condition('t.vid',QUIZ_TAXONOMY_TID, '=');
 		$res = $query->execute();        
 		$result = $res->fetchAll();
 		if(is_array($result) && !empty($result)){
