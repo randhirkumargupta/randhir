@@ -918,7 +918,8 @@ function itg_event_backend_node_access($node, $op, $account) {
   }
 
   if (isset($node->type) && ($node->type == 'event_backend') && $node_edit) {
-    if ($op == 'update' && !(array_key_exists(10, $account->roles))) {
+
+      if ($op == 'update' && !(SITE_ADMIN)) {
       return NODE_ACCESS_DENY;
     }
   }

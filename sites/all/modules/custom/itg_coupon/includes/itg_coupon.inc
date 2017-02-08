@@ -115,7 +115,7 @@ function op_third_party_coupons($csvdata, &$context) {
   if (isset($csvdata) && !empty($csvdata)) {
     $itg_coupon_check_coupon = itg_coupon_check_coupon($csvdata[0]);
     if (isset($itg_coupon_check_coupon) && !empty($itg_coupon_check_coupon)) {
-      drupal_set_message(t('OOPS! Coupon "'.$csvdata[0].'" is already exist, please try with another name or click ' . l('here', 'node/' . $itg_coupon_check_coupon . '/edit') . ' to edit existing'),'error');
+      drupal_set_message(t('OOPS! Coupon "' . $csvdata[0] . '" is already exist, please try with another name or click ' . l('here', 'node/' . $itg_coupon_check_coupon . '/edit') . ' to edit existing'), 'error');
     } else {
       $node = new stdClass();
       $node->type = 'coupon';
@@ -140,7 +140,7 @@ function op_third_party_coupons($csvdata, &$context) {
       $node->uid = $user->uid;
       try {
         node_save($node);
-        drupal_set_message(t('Coupon created successfully for "'.$csvdata[0].'"'));
+        drupal_set_message(t('Coupon created successfully for "' . $csvdata[0] . '"'));
       } catch (Exception $e) {
         drupal_set_message(t("Unable to save coupon for " . $csvdata[0]));
       }
@@ -164,4 +164,46 @@ function op_third_party_coupons_finished($success, $results, $operations) {
     $error_operation = reset($operations);
     drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
   }
+}
+
+/**
+ * Implements third_party_coupon_form
+ * @param array $form
+ * @param array $form_state
+ */
+function coupons_apply_form($form, &$form_state) {
+  global $base_url;
+  $form['coupon_holder'] = array(
+      '#type' => 'fieldset',
+      '#description' => t("Coupons Apply form"),
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE,
+  );
+
+  $form['coupon_holder']['total_amount'] = array(
+      '#type' => 'textfield',
+      '#title' => t('total Amount'),
+  );
+    
+      $form['coupon_holder']['gateway_type'] = array(
+      '#type' => 'radios',
+      '#title' => t('Gateway Type'),
+      '#options' => array('Amex','Paytm','ICICI','BillDEsk'),
+  );
+  
+       $form['coupon_holder']['coupon_code'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Coupons code'),
+      '#description' => t('Please enter valid coupon code')
+  );
+  
+
+  $form['coupon_holder']['submit_button'] = array(
+      '#type' => 'submit',
+      '#value' => t('Apply'),
+      '#attributes' => array('class' => array('use-ajax-submit')),
+
+      );
+
+  return $form;
 }

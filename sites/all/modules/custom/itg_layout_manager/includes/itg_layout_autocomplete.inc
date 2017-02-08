@@ -157,11 +157,11 @@ function custom_taxonomy_get_tree($string, $vid, $parent = 0, $max_depth = NULL,
       ->orderBy('t.name')
       ->execute();
 
-    foreach ($result as $term) {
+    foreach ($result as $term) {      
       $children[$vid][$term->parent][] = $term->tid;
       $parents[$vid][$term->tid][] = $term->parent;
       $terms[$vid][$term->tid] = $term;
-    }
+    }    
   }
 
   // Load full entities, if necessary. The entity controller statically
@@ -224,6 +224,10 @@ function custom_taxonomy_get_tree($string, $vid, $parent = 0, $max_depth = NULL,
         reset($children[$vid][$parent]);
       }
     }
+  }
+  //for section
+  if(!empty($terms[$vid][$parent])) {
+    $tree[] = $terms[$vid][$parent];
   }
 
   return $tree;

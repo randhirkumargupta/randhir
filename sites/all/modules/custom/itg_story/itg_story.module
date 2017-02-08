@@ -204,6 +204,11 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
       drupal_add_js(array('itg_common' => array('base_url' => $base_url)), 'setting');
       drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.emoji.js', 'file');
       $form['field_emoji']['und'][0]['#format'] = 'emoji';
+      // hide remove button of field collection if there is only single instance of it within the form
+      if (isset($form['field_photo_story']['und']['#max_delta']) && $form['your_field']['und']['#max_delta'] == 0) {
+        $form['field_photo_story']['und'][0]['remove_button']['#prefix'] = '<div style="display:none;"';
+        $form['field_photo_story']['und'][0]['remove_button']['#suffix'] = '</div>';    
+      }
       break;
   }
 
@@ -856,8 +861,8 @@ function itg_story_photo_story_bottom_html($node_id) {
         $photo_story_file_name = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['filename'];
         $photo_story_img = image_style_url('photo_story_small_88x66', $photo_story_img_path);
         $html .= '<div class="photo-slider">';
-        $html .= '<img src="' . $photo_story_img . '" title="' . $photo_story_file_name . '" alt="photo_story" />';
-        $html .= '<span>' . $i+1 . '</span>';
+        $html .= '<span class="img-wrapper"><img src="' . $photo_story_img . '" title="' . $photo_story_file_name . '" alt="photo_story" />';
+        $html .= '<span class="photo-count">' . $i+1 . '</span></span>';
         $html .= '</div>';
       }
       $html .= '</div>';
