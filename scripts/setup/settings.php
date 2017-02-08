@@ -619,3 +619,11 @@ $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
  * Remove the leading hash sign to enable.
  */
 # $conf['theme_debug'] = TRUE;
+
+/**
+ * Include a local settings file if it exists.
+ */
+$local_settings = dirname(__FILE__) . '/local.settings.php';
+if (file_exists($local_settings)) {
+  include $local_settings;
+}

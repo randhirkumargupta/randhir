@@ -46,6 +46,7 @@ function coupon_features_user_default_permissions() {
     'roles' => array(
       'Marketing Manager' => 'Marketing Manager',
       'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'itg_coupon',
   );

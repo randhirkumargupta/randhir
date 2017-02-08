@@ -51,7 +51,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                 ?>
                                     <div class="iframe-video">
                                         <iframe frameborder="0" scrolling="no"
-                                                src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=0&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
+                                                src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=0&ui-logo=1&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
                                                 allowfullscreen></iframe></div>
 
                                 </div>

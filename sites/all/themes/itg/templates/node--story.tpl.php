@@ -49,7 +49,7 @@ if (!empty($content)):
   }
   ?>
   <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle;
-                if (!empty($node->field_story_type[LANGUAGE_NONE])) {
+                if ($node->field_story_type[LANGUAGE_NONE][0]['value'] == 'photo_story') {
                   echo ' photo-story-section';
                 }
               ?>">
