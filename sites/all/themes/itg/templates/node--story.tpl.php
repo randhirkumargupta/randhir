@@ -183,17 +183,32 @@ if (!empty($content)):
                                   <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
                                 <?php } if ($config_name == 'other') { ?> 
                                   <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
-                                <?php } ?>
-
-                                <?php if ($user->uid > 0): ?>
-                                  <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>
-                                  <?php print '<li>' . $read_later . '</li>'; ?>                                         
-    <?php else: ?>
-      <?php if (function_exists('itg_sso_url')): ?>
-                        <?php print '<li>' . itg_sso_url('<i class="fa fa-bookmark"></i>' . t('READ LATER') . '', t('READ LATER')) . '</li>'; ?>
-                      <?php endif; ?>
-
-    <?php endif; ?>   
+                                <?php } 
+                                if ($user->uid > 0)
+                                          {
+                                            if (function_exists(itg_get_front_activity_info))
+                                            {
+                                              $opt = itg_get_front_activity_info($node->nid, $node->type, $user->uid, 'read_later', $status = '');
+                                            }
+                                            
+                                            if (empty($opt['status']) || $opt['status'] == 0)
+                                            {
+                                              ?> 
+                                  <li><span> <a title = "Read Later" href="javascript:" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><?php print t('READ LATER'); ?></a><span class="flag-throbber">&nbsp;</span></span></li>
+                                            <?php }
+                                            else
+                                            { ?>
+                                  <li><span> <a title = "Read Later" href="javascript:" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><?php print t('READ LATER'); ?></a><span class="flag-throbber">&nbsp;</span></span></li>
+                                            <?php
+                                            }
+                                          }
+                                          else
+                                          {
+                                            if (function_exists(itg_sso_url))
+                                            {
+                                              print '<li>'.itg_sso_url('<i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span>', t('READ LATER')).'</li>';
+                                            }
+                                          } ?>
                             </ul>
                         </div>
                     </div>
@@ -273,16 +288,35 @@ if (!empty($content)):
                                   <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                                     <?php endif; ?>
 
-                                <li>
-                                    <?php if ($user->uid > 0): ?>
-      <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>
-      <?php print $read_later; ?>                                         
-    <?php else: ?>
-      <?php if (function_exists(itg_sso_url)): ?>
-        <?php print itg_sso_url('<i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span>', t('READ LATER')); ?>
-      <?php endif; ?>
-                <?php endif; ?>
-                                </li>
+                                <li class="read-later">
+                                          <?php
+                                          if ($user->uid > 0)
+                                          {
+                                            if (function_exists(itg_get_front_activity_info))
+                                            {
+                                              $opt = itg_get_front_activity_info($node->nid, $node->type, $user->uid, 'read_later', $status = '');
+                                            }
+                                            
+                                            if (empty($opt['status']) || $opt['status'] == 0)
+                                            {
+                                              ?> 
+                                              <a title = "Read Later" href="javascript:" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
+                                            <?php }
+                                            else
+                                            { ?>
+                                              <a title = "Read Later" href="javascript:" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
+                                            <?php
+                                            }
+                                          }
+                                          else
+                                          {
+                                            if (function_exists(itg_sso_url))
+                                            {
+                                              print itg_sso_url('<i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span>', t('READ LATER'));
+                                            }
+                                          }
+                                          ?>
+                                      </li>
 
                             </ul>
                         </div>

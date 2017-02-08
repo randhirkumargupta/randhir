@@ -822,7 +822,7 @@ function itg_category_manager_taxonomy_term_insert($term) {
     'uid' => $user->uid,
     'changed' => time(),
   );
-  if ($term->path['alias'] != NULL) {
+  if (!empty($term->path['alias'])) {
     $term->path['alias'] = rtrim($term->path['alias'], '/');
     $data['sef_url'] = $term->path['alias'];
   }

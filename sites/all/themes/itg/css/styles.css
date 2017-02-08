@@ -2630,9 +2630,16 @@ footer .multiple-items-footer i.slick-next {
   right: 0;
 }
 .story-section .story-right.photo-story .multiple-photo .img-wrapper {
+  display: inline-block;
+  vertical-align: top;
   position: relative;
 }
+.story-section .story-right.photo-story .multiple-photo .img-wrapper img {
+  width: 120px;
+  height: 90px;
+}
 .story-section .story-right.photo-story .multiple-photo .img-wrapper .photo-count {
+  font-style: normal;
   position: absolute;
   left: 0;
   top: 0;
@@ -2641,7 +2648,7 @@ footer .multiple-items-footer i.slick-next {
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
   text-align: center;
-  padding-top: 45%;
+  line-height: 90px;
 }
 .story-section .snap-post {
   padding: 20px 20px 20px 70px;

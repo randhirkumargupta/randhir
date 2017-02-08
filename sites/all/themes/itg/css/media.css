@@ -45,13 +45,6 @@
   }
 }
 @media only screen and (max-width: 1024px) {
-  .row {
-    margin: 0;
-  }
-  .row .row {
-    margin: 0;
-  }
-
   h1 {
     font-size: 26px;
     line-height: 32px;
