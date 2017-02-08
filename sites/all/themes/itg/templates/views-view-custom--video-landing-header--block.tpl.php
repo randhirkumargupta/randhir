@@ -154,7 +154,13 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                         </div>
 
                     </div>
-                    <div class="ads mhide"></div>
+                    <div class="ads">
+                         <?php
+                          $block = block_load('itg_ads', ADS_RHS1);
+                          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                          print render($render_array);
+                          ?>
+                    </div>
                 </div>
             </div>
         </div>
