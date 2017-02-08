@@ -13,15 +13,16 @@ class ItgCityMigration extends XMLMigration {
     $fields = array(
       'city' => t('city name'),
       'state_id' => t('state_id'),     
+      'sef_url' => t('sef_url'),     
     );
 
     
     // This can also be an URL instead of a local file path.
-    $file_path = drupal_realpath('public://');
+    $file_path = 'sites/default/files';
     
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
     
-    $items_url = $xml_folder . 'city.xml';
+    $items_url = $xml_folder . 'city_master.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -63,9 +64,9 @@ class ItgCityMigration extends XMLMigration {
     
     $this->addFieldMapping('name', 'name')->xpath('city'); 
     $this->addFieldMapping('field_city_states', 'state_id')->xpath('state_id');
-    //$this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
-//    $this->addFieldMapping('pathauto')->defaultValue(0);
-//    $this->addFieldMapping('path', 'sef_url')->xpath('sef_url');
+   // $this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
+    $this->addFieldMapping('pathauto')->defaultValue(0);
+    $this->addFieldMapping('path', 'sef_url')->xpath('sef_url');
 //    $this->addFieldMapping('metatag_title', 'metatitle')->xpath('metatitle');
 //    $this->addFieldMapping('metatag_description', 'metadesc')->xpath('metadesc');
 //    $this->addFieldMapping('metatag_keywords', 'metakey')->xpath('metakey');
@@ -79,6 +80,11 @@ class ItgCityMigration extends XMLMigration {
         $source_tags = (string) $row->xml->state_id;
         $orignal_tag = get_itg_destination_id('migrate_map_itgstate', $source_tags);
         $final_term_name = itg_db_migrate_term_name($orignal_tag);
+         //sef url
+      $sef_path = itg_db_migrate_term_sef('taxonomy/term/'.$orignal_tag);
+      $city_name = trim((string) $row->xml->city);
+      $c_name = str_replace(' ', '-', $city_name);
+      $row->xml->sef_url = $sef_path.'/'.  strtolower($c_name);
     }
     $row->xml->state_id = $final_term_name;
   }
