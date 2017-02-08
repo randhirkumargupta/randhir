@@ -862,7 +862,7 @@ function itg_story_photo_story_bottom_html($node_id) {
         $photo_story_img = image_style_url('photo_story_small_88x66', $photo_story_img_path);
         $html .= '<div class="photo-slider">';
         $html .= '<span class="img-wrapper"><img src="' . $photo_story_img . '" title="' . $photo_story_file_name . '" alt="photo_story" />';
-        $html .= '<span class="photo-count">' . $i+1 . '</span></span>';
+        $html .= '<em class="photo-count">' . ($i+1) . '</em></span>';
         $html .= '</div>';
       }
       $html .= '</div>';
