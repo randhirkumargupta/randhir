@@ -381,11 +381,14 @@ function itg_common_node_presave($node) {
       }
         
   }
-  
   // custom alias cnditions
   if ($node->type == 'photogallery' 
           || $node->type == 'story' 
-          || $node->type == 'videogallery'){
+          || $node->type == 'videogallery'
+          || $node->type == 'podcast'
+          || $node->type == 'food_news'
+          || $node->type == 'cooking_tips'
+          || $node->type == 'recipe'){
     return itg_common_custompath_load($node);
   }
 }
@@ -396,13 +399,14 @@ function itg_common_node_presave($node) {
  * @param object $node
  */
 function itg_common_node_insert($node) {
-
   // custom alias cnditions
-  if(
-    $node->type == 'photogallery' || 
-    $node->type == 'story' || 
-    $node->type == 'videogallery')
-    {
+  if($node->type == 'photogallery' 
+          || $node->type == 'story' 
+          || $node->type == 'videogallery'
+          || $node->type == 'podcast'
+          || $node->type == 'food_news'
+          || $node->type == 'cooking_tips'
+          || $node->type == 'recipe'){
         return itg_common_custompath_insert_load($node);
     }
 }
@@ -413,11 +417,13 @@ function itg_common_node_insert($node) {
  */
 function itg_common_node_update($node) {
   // custom alias cnditions
-  if(
-    $node->type == 'photogallery' || 
-    $node->type == 'story' || 
-    $node->type == 'videogallery')
-    {
+  if($node->type == 'photogallery' 
+          || $node->type == 'story' 
+          || $node->type == 'videogallery'
+          || $node->type == 'podcast'
+          || $node->type == 'food_news'
+          || $node->type == 'cooking_tips'
+          || $node->type == 'recipe'){
         return itg_common_custompath_insert_load($node);
     }
 }
