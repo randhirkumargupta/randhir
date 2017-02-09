@@ -193,7 +193,7 @@ function itg_custom_widget_form_views_form_itg_custom_widget_page_alter(&$form, 
     '#weight' => -2,
   );
 
-  if (!empty($_GET['widget_name'])) {
+  if (!empty($_GET['widget_name']) || !empty($_POST['widget_name'])) {
     $form['widget_name']['#prefix'] = "<div style='display:none'>";
     $form['widget_name']['#suffix'] = "</div>";
   }
