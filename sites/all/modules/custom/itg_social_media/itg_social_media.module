@@ -279,9 +279,14 @@ function itg_social_media_log_listing() {
 
     // set facebook table
     $header = array(
-        array('data' => t('Facebook Like Count')),
-        array('data' => t('Facebook Share Count ')),
-        array('data' => t('Facebook Comment Count')),
+        array('data' => t('FB Like Count')),
+        array('data' => t('FB Share Count ')),
+        array('data' => t('FB Comment Count')),
+        array('data' => t('FB Click')),
+        array('data' => t('FB Video Views')),
+        array('data' => t('FB Photo Views')),
+        array('data' => t('FB Fans Reach')),
+        array('data' => t('FB Impressions')),
         array('data' => t('Retweets Count')),
         array('data' => t('Twitter Likes Count')),
     );
@@ -295,19 +300,29 @@ function itg_social_media_log_listing() {
         array('data' => $fecebook_detaila['facebook']['like']),
         array('data' => $fecebook_detaila['facebook']['share']),
         array('data' => $fecebook_detaila['facebook']['comment']),
+        array('data' => $fecebook_detaila['facebook']['click_on_post']),
+        array('data' => $fecebook_detaila['facebook']['video_views']),
+        array('data' => $fecebook_detaila['facebook']['photo_views']),
+        array('data' => $fecebook_detaila['facebook']['fan_reach']),
+        array('data' => $fecebook_detaila['facebook']['impressions']),
         array('data' => $fecebook_detaila['twitter']['share']),
         array('data' => $fecebook_detaila['twitter']['like']),
     );
 
     $output_1 .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
-    $graph_data = "['Facebook Share',     " . $fecebook_detaila['facebook']['share'] . "],
-          ['Facebook Comment',      " . $fecebook_detaila['facebook']['comment'] . "],
+    $graph_data = "['Facebook Share', " . $fecebook_detaila['facebook']['share'] . "],
+          ['Facebook Comment', " . $fecebook_detaila['facebook']['comment'] . "],
+          ['Facebook Click', " . $fecebook_detaila['facebook']['click_on_post'] . "],
+          ['Facebook Video Views', " . $fecebook_detaila['facebook']['video_views'] . "],
+          ['Facebook Photo Views', " . $fecebook_detaila['facebook']['photo_views'] . "],
+          ['Facebook Fans Reach',  " . $fecebook_detaila['facebook']['fan_reach'] . "],
+          ['Facebook Impressions', " . $fecebook_detaila['facebook']['impressions'] . "],
           ['Facebook Like',  " . $fecebook_detaila['facebook']['like'] . "],
           ['Twitter Retweets',  " . $fecebook_detaila['twitter']['share'] . "],
           ['Twitter Like',  " . $fecebook_detaila['twitter']['like'] . "]";
 
     $facebook_graph_flag = 0;
-    if ($fecebook_detaila['facebook']['share'] > 0 || $fecebook_detaila['facebook']['comment'] > 0 || $fecebook_detaila['facebook']['like'] > 0 || $fecebook_detaila['twitter']['like'] > 0 || $fecebook_detaila['twitter']['share'] > 0) {
+    if ($fecebook_detaila['facebook']['click_on_post'] > 0 || $fecebook_detaila['facebook']['video_views'] > 0 || $fecebook_detaila['facebook']['photo_views'] > 0 || $fecebook_detaila['facebook']['fan_reach'] > 0 || $fecebook_detaila['facebook']['impressions'] > 0 || $fecebook_detaila['facebook']['share'] > 0 || $fecebook_detaila['facebook']['comment'] > 0 || $fecebook_detaila['facebook']['like'] > 0 || $fecebook_detaila['twitter']['like'] > 0 || $fecebook_detaila['twitter']['share'] > 0) {
         $facebook_graph_flag = 1;
     }
     # add the pager
@@ -637,7 +652,7 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
         $pre_save['nid'] = $node->nid;
         $pre_save['node_title'] = $node->title;
         $pre_save['username'] = $user->name;
-        $pre_save['post_id'] = $graph_node_res['post_id'];
+        $pre_save['post_id'] = $post_id;
         $pre_save['social_media'] = 'facebook ' . $type;
         $pre_save['status'] = 1;
         $mtype = $type == 'photos' ? 'Image' : 'Video';
@@ -665,6 +680,12 @@ function itg_social_media_activity($nid) {
     $comment = 0;
     $twitter_like = 0;
     $twitter_share = 0;
+    $fb_click_on_post = 0;
+    $fb_video_views = 0;
+    $fb_photo_views = 0;
+    $fb_photo_views = 0;
+    $fb_fan_reach = 0;
+    $fb_impressions = 0;
 
     $share_on = 'facebook';
     $query = db_select('itg_social_media_logs', 'isml')
@@ -679,6 +700,11 @@ function itg_social_media_activity($nid) {
         $like = $like + $result_d->fb_likes;
         $comment = $comment + $result_d->fb_comment;
         $share = $share + $result_d->fb_shares;
+        $fb_click_on_post = $fb_click_on_post + $result_d->click_on_post;
+        $fb_video_views = $fb_video_views + $result_d->video_views;
+        $fb_photo_views = $fb_photo_views + $result_d->photo_views;
+        $fb_fan_reach = $fb_fan_reach + $result_d->fan_reach;
+        $fb_impressions = $fb_impressions + $result_d->impressions;
     }
     $twitter_result = itg_social_media_twitter_promote_by_nid($nid);
     if (!empty($twitter_result)) {
@@ -691,7 +717,7 @@ function itg_social_media_activity($nid) {
             $twitter_share = $twitter_share + $retweet_count;
         }
     }
-    $return_array = array('facebook' => array('share' => $share, 'like' => $like, 'comment' => $comment), 'twitter' => array('share' => $twitter_share, 'like' => $twitter_like));
+    $return_array = array('facebook' => array('share' => $share, 'like' => $like, 'comment' => $comment, 'click_on_post' => $fb_click_on_post, 'video_views' => $fb_video_views, 'photo_views' => $fb_photo_views, 'fan_reach' => $fb_fan_reach, 'impressions' => $fb_impressions), 'twitter' => array('share' => $twitter_share, 'like' => $twitter_like));
 
     return $return_array;
 }
