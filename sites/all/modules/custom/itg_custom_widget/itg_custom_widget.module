@@ -42,14 +42,88 @@ function itg_custom_widget_menu() {
 }
 
 /**
+ * {@inheritdoc}
+ */
+function itg_custom_widget_block_info() {
+  $blocks['custom_content_widget'] = array(
+    'info' => t('Widget: Custom content widget'),
+  );
+  return $blocks;
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_custom_widget_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    // section ordering reordering widget case
+    case 'custom_content_widget':
+      $data = itg_custom_widget_ordering_data_from_title("asd12312312");
+      $block['content'] = theme("itg_custom_widget_ordering_data", array("data" => $data));
+      break;
+  }
+  return $block;
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_custom_widget_theme() {
+
+    return array(
+        'itg_custom_widget_ordering_data' => array(
+            'template' => 'templates/itg-custom-widget-ordering-data',
+        ),
+    );
+}
+
+/**
+ * Function to return custom content widget array.
+ * 
+ * @param string $title
+ * @return array
+ */
+function itg_custom_widget_ordering_data_from_title($title) {
+  if (!empty($title)) {
+
+    $query = db_select('itg_custom_widgets_data', 'icw');
+    $query->leftJoin('node', 'n', 'n.nid=icw.nid');
+    //join  for field value
+    $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+    $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
+    $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
+    $query->fields('eli_file', array('uri'));
+    $query->fields('kt', array('field_story_kicker_text_value'));
+    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
+    //end
+    $query->fields('icw', array('nid', 'weight'))
+        ->condition('icw.widget', $title)
+        ->condition('n.status', '1')
+        ->orderBy('icw.weight', 'DESC')
+        ->orderBy('n.nid', 'DESC')
+        ->groupBy('icw.nid')
+        ->range(0, 3);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $entity_data = array();
+    foreach ($result as $entity_data_node) {
+      $entity_data[] = $entity_data_node;
+    }
+
+    return $entity_data;
+  }
+  return array();
+}
+
+/**
  * Function gives widget title json.
  * @param string $widget_title
  */
 function itg_custom_widget_name_list($widget_title) {
-  
+
   $query = db_select('itg_custom_widgets_data', 'n');
   $query->condition('widget', $widget_title);
-  $query->fields('n' , array('widget'));
+  $query->fields('n', array('widget'));
   $query->distinct();
   $result = $query->execute();
 
@@ -119,7 +193,7 @@ function itg_custom_widget_form_views_form_itg_custom_widget_page_alter(&$form, 
     '#weight' => -2,
   );
 
-  if (!empty($_GET['widget_name'])) {
+  if (!empty($_GET['widget_name']) || !empty($_POST['widget_name'])) {
     $form['widget_name']['#prefix'] = "<div style='display:none'>";
     $form['widget_name']['#suffix'] = "</div>";
   }
@@ -138,7 +212,6 @@ function itg_custom_widget_categories_wise_node_group_validate($form, &$form_sta
 function itg_custom_widget_categories_wise_node_group_submit($form, &$form_state) {
   $selected_nodes = $form_state['selection'];
   $custom_widget_name = $form_state['values']['widget_name'];
-
   foreach ($selected_nodes as $nid) {
     // Merge table with condition NID and WIDGET NAME , As node already saved then skip.
     try {

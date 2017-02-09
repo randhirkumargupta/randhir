@@ -365,6 +365,13 @@ function itgadmin_breadcrumb($vars) {
  * Preprocessor for theme('page').
  */
 function itgadmin_preprocess_page(&$vars) {
+  global $base_url;
+  // Handel theme for custom widget batch processing.
+  $referal_page = $_SERVER['HTTP_REFERER'];
+  $pos = strpos($referal_page, "itg-custom-widget-content");
+  if(isset($_GET['op']) && isset($_GET['id']) && $pos !== false) {
+    $vars['theme_hook_suggestions'][] = 'page__relatedcontent';
+  }
   // Change create category page title.
   $arg0 = arg(0);
   if (arg(2) == 'taxonomy' && arg(3) == 'category_management' && arg(4) == 'add') {

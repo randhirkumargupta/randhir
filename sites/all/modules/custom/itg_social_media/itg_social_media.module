@@ -279,9 +279,14 @@ function itg_social_media_log_listing() {
 
     // set facebook table
     $header = array(
-        array('data' => t('Facebook Like Count')),
-        array('data' => t('Facebook Share Count ')),
-        array('data' => t('Facebook Comment Count')),
+        array('data' => t('FB Like Count')),
+        array('data' => t('FB Share Count ')),
+        array('data' => t('FB Comment Count')),
+        array('data' => t('FB Click')),
+        array('data' => t('FB Video Views')),
+        array('data' => t('FB Photo Views')),
+        array('data' => t('FB Fans Reach')),
+        array('data' => t('FB Impressions')),
         array('data' => t('Retweets Count')),
         array('data' => t('Twitter Likes Count')),
     );
@@ -295,19 +300,29 @@ function itg_social_media_log_listing() {
         array('data' => $fecebook_detaila['facebook']['like']),
         array('data' => $fecebook_detaila['facebook']['share']),
         array('data' => $fecebook_detaila['facebook']['comment']),
+        array('data' => $fecebook_detaila['facebook']['click_on_post']),
+        array('data' => $fecebook_detaila['facebook']['video_views']),
+        array('data' => $fecebook_detaila['facebook']['photo_views']),
+        array('data' => $fecebook_detaila['facebook']['fan_reach']),
+        array('data' => $fecebook_detaila['facebook']['impressions']),
         array('data' => $fecebook_detaila['twitter']['share']),
         array('data' => $fecebook_detaila['twitter']['like']),
     );
 
     $output_1 .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
-    $graph_data = "['Facebook Share',     " . $fecebook_detaila['facebook']['share'] . "],
-          ['Facebook Comment',      " . $fecebook_detaila['facebook']['comment'] . "],
+    $graph_data = "['Facebook Share', " . $fecebook_detaila['facebook']['share'] . "],
+          ['Facebook Comment', " . $fecebook_detaila['facebook']['comment'] . "],
+          ['Facebook Click', " . $fecebook_detaila['facebook']['click_on_post'] . "],
+          ['Facebook Video Views', " . $fecebook_detaila['facebook']['video_views'] . "],
+          ['Facebook Photo Views', " . $fecebook_detaila['facebook']['photo_views'] . "],
+          ['Facebook Fans Reach',  " . $fecebook_detaila['facebook']['fan_reach'] . "],
+          ['Facebook Impressions', " . $fecebook_detaila['facebook']['impressions'] . "],
           ['Facebook Like',  " . $fecebook_detaila['facebook']['like'] . "],
           ['Twitter Retweets',  " . $fecebook_detaila['twitter']['share'] . "],
           ['Twitter Like',  " . $fecebook_detaila['twitter']['like'] . "]";
 
     $facebook_graph_flag = 0;
-    if ($fecebook_detaila['facebook']['share'] > 0 || $fecebook_detaila['facebook']['comment'] > 0 || $fecebook_detaila['facebook']['like'] > 0 || $fecebook_detaila['twitter']['like'] > 0 || $fecebook_detaila['twitter']['share'] > 0) {
+    if ($fecebook_detaila['facebook']['click_on_post'] > 0 || $fecebook_detaila['facebook']['video_views'] > 0 || $fecebook_detaila['facebook']['photo_views'] > 0 || $fecebook_detaila['facebook']['fan_reach'] > 0 || $fecebook_detaila['facebook']['impressions'] > 0 || $fecebook_detaila['facebook']['share'] > 0 || $fecebook_detaila['facebook']['comment'] > 0 || $fecebook_detaila['facebook']['like'] > 0 || $fecebook_detaila['twitter']['like'] > 0 || $fecebook_detaila['twitter']['share'] > 0) {
         $facebook_graph_flag = 1;
     }
     # add the pager
@@ -628,12 +643,16 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
     }
     // get response
     $graphNode = $response->isError();
+    $post_id = $graph_node_res['post_id'];
+    if ($graph_node_res['post_id'] == "") {
+        $post_id = variable_get('facebook_page_id', '') . '_' . $graph_node_res['id'];
+    }
 
     if (!$graphNode) {
         $pre_save['nid'] = $node->nid;
         $pre_save['node_title'] = $node->title;
         $pre_save['username'] = $user->name;
-        $pre_save['post_id'] = $graph_node_res['post_id'];
+        $pre_save['post_id'] = $post_id;
         $pre_save['social_media'] = 'facebook ' . $type;
         $pre_save['status'] = 1;
         $mtype = $type == 'photos' ? 'Image' : 'Video';
@@ -661,6 +680,12 @@ function itg_social_media_activity($nid) {
     $comment = 0;
     $twitter_like = 0;
     $twitter_share = 0;
+    $fb_click_on_post = 0;
+    $fb_video_views = 0;
+    $fb_photo_views = 0;
+    $fb_photo_views = 0;
+    $fb_fan_reach = 0;
+    $fb_impressions = 0;
 
     $share_on = 'facebook';
     $query = db_select('itg_social_media_logs', 'isml')
@@ -675,6 +700,11 @@ function itg_social_media_activity($nid) {
         $like = $like + $result_d->fb_likes;
         $comment = $comment + $result_d->fb_comment;
         $share = $share + $result_d->fb_shares;
+        $fb_click_on_post = $fb_click_on_post + $result_d->click_on_post;
+        $fb_video_views = $fb_video_views + $result_d->video_views;
+        $fb_photo_views = $fb_photo_views + $result_d->photo_views;
+        $fb_fan_reach = $fb_fan_reach + $result_d->fan_reach;
+        $fb_impressions = $fb_impressions + $result_d->impressions;
     }
     $twitter_result = itg_social_media_twitter_promote_by_nid($nid);
     if (!empty($twitter_result)) {
@@ -687,7 +717,7 @@ function itg_social_media_activity($nid) {
             $twitter_share = $twitter_share + $retweet_count;
         }
     }
-    $return_array = array('facebook' => array('share' => $share, 'like' => $like, 'comment' => $comment), 'twitter' => array('share' => $twitter_share, 'like' => $twitter_like));
+    $return_array = array('facebook' => array('share' => $share, 'like' => $like, 'comment' => $comment, 'click_on_post' => $fb_click_on_post, 'video_views' => $fb_video_views, 'photo_views' => $fb_photo_views, 'fan_reach' => $fb_fan_reach, 'impressions' => $fb_impressions), 'twitter' => array('share' => $twitter_share, 'like' => $twitter_like));
 
     return $return_array;
 }
@@ -1102,7 +1132,6 @@ function itg_social_media_social_media_activity_update() {
                     $current_url .= '&fields=likes.summary(true),comments.summary(true),shares';
                     $json = file_get_contents($current_url);
                     $data = json_decode($json, true);
-
                     $like = $data['likes']['summary']['total_count'];
                     $comment = $data['comments']['summary']['total_count'];
                     $share = $data['shares']['count'];
@@ -1115,6 +1144,8 @@ function itg_social_media_social_media_activity_update() {
                     $query->condition('id', $result_data->id)
                             ->fields($update_field)
                             ->execute();
+
+                    itg_social_media_update_fb_click_video_play($result_data->post_id, $result_data->id);
                 }
                 if (strpos($result_data->social_media, 'Twitter') !== FALSE) {
                     $social_counter_settings = array(
@@ -1147,6 +1178,66 @@ function itg_social_media_social_media_activity_update() {
             }
         }
     }
+}
+
+/**
+ * Implement callback function for social media activity update 
+ */
+function itg_social_media_update_fb_click_video_play($post_id, $social_media_log_id) {
+    $fb = itg_social_media_fb_connection();
+    $token = variable_get('access_token_one') . variable_get('access_token_two');
+
+    // video or photo click count here
+    $current_url = 'https://graph.facebook.com/v2.5/' . $post_id . '/insights/post_consumptions_by_type_unique/lifetime/';
+    $current_url .= '?access_token=' . $token;
+    $json = file_get_contents($current_url);
+    $data = json_decode($json, true);
+    if (isset($data["data"][0]["values"][0]["value"]["video play"]) && !empty($data["data"][0]["values"][0]["value"]["video play"])) {
+        $fb_views = $data["data"][0]["values"][0]["value"]["video play"];
+    }
+    if (isset($data["data"][0]["values"][0]["value"]["photo view"]) && !empty($data["data"][0]["values"][0]["value"]["photo view"])) {
+        $fb_photo_views = $data["data"][0]["values"][0]["value"]["photo view"];
+    }
+
+// fans reach to post here
+    $current_url_fan = 'https://graph.facebook.com/v2.5/' . $post_id . '/insights/post_fan_reach/lifetime/';
+    $current_url_fan .= '?access_token=' . $token;
+    $json_fan = file_get_contents($current_url_fan);
+    $data_fan = json_decode($json_fan, true);
+
+    if (!empty($data_fan["data"][0]["values"][0]["value"])) {
+        $fb_reach = $data_fan["data"][0]["values"][0]["value"];
+    }
+    // post total click here
+    $current_url_all_click = 'https://graph.facebook.com/v2.5/' . $post_id . '/insights/post_consumptions/lifetime/';
+    $current_url_all_click .= '?access_token=' . $token;
+    $json_all_click = file_get_contents($current_url_all_click);
+    $data_all_click = json_decode($json_all_click, true);
+
+    if (!empty($data_all_click["data"][0]["values"][0]["value"])) {
+        $fb_click = $data_all_click["data"][0]["values"][0]["value"];
+    }
+    // post impression here
+    $current_url_impression = 'https://graph.facebook.com/v2.5/' . $post_id . '/insights/post_impressions_organic/lifetime/';
+    $current_url_impression .= '?access_token=' . $token;
+    $json_all_impression = file_get_contents($current_url_impression);
+    $data_all_impression = json_decode($json_all_impression, true);
+
+    if (!empty($data_all_impression["data"][0]["values"][0]["value"])) {
+        $fb_impressions = $data_all_impression["data"][0]["values"][0]["value"];
+    }
+    $update_field = array(
+        'click_on_post' => $fb_click,
+        'video_views' => $fb_views,
+        'photo_views' => $fb_photo_views,
+        'fan_reach' => $fb_reach,
+        'impressions' => $fb_impressions
+    );
+
+    $query = db_update('itg_social_media_logs');
+    $query->condition('id', $social_media_log_id)
+            ->fields($update_field)
+            ->execute();
 }
 
 /**

@@ -224,8 +224,10 @@ function itg_story_node_insert($node) {
           ->condition('id', $id, '=')
           ->execute();
     }
-
+    
+    if(!empty($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'])) {
     itg_byline_order_update($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'], $nid);
+    }
 
     unset($_SESSION['unique']);
   }
@@ -249,7 +251,10 @@ function itg_story_node_update($node) {
           ->condition('id', $id, '=')
           ->execute();
     }
+    
+    if(!empty($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'])) {
     itg_byline_order_update($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'], $nid);
+    }
   }
 }
 
@@ -261,14 +266,17 @@ function itg_story_node_update($node) {
 function itg_byline_order_update($byline, $nid) {
   $byline_arr = explode(',', $byline);
   $i = 0;
-  foreach ($byline_arr as $value) {
-    db_update('itg_multi_byline_info')
-        ->fields(array(
-          'byline_weight' => $i,
-        ))
-        ->condition('byline_id', $value, '=')
-        ->condition('nid', $nid, '=')
-        ->execute();
-    $i++;
+  if (!empty($byline_arr))
+  {
+    foreach ($byline_arr as $value) {
+      db_update('itg_multi_byline_info')
+          ->fields(array(
+            'byline_weight' => $i,
+          ))
+          ->condition('byline_id', $value, '=')
+          ->condition('nid', $nid, '=')
+          ->execute();
+      $i++;
+    }
   }
 }
