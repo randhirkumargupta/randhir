@@ -2144,8 +2144,15 @@ footer{
                     right: 0;
                 }
                 .img-wrapper{
+                  display: inline-block;
+                  vertical-align: top;
                   position: relative;
+                  img{
+                    width: 120px; 
+                    height: 90px;
+                  }
                   .photo-count{
+                    font-style: normal;
                     position: absolute;
                     left: 0;
                     top: 0;
@@ -2154,7 +2161,7 @@ footer{
                     background-color: rgba(0,0,0,.5);
                     color: #fff;
                     text-align: center;
-                    padding-top: 45%;
+                    line-height: 90px;
                   }
                 }
             }
