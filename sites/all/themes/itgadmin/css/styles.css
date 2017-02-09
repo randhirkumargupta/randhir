@@ -10662,3 +10662,8 @@ span.file a {
 .view-manage-users .view-filters .views-exposed-form .views-widget-filter-date_filter div.description {
   display: none;
 }
+
+.cheaper-deaper-action {
+  margin: 10px;
+  text-align: center;
+}
