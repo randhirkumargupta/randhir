@@ -9405,7 +9405,7 @@ div.node{
 .form-field-name-field-story-quote-image{
   @extend .Browse-upload;
 }
-[id="taxonomy-form-term"]{
+#taxonomy-form-term{
   .fieldset-wrapper{
     display: block !important;
   }
@@ -9419,6 +9419,10 @@ div.node{
     .fieldset-wrapper{
       padding-left: 0;    
     }
+  }
+  @extend .image-repo-browse;
+  .field-name-field-story-small-image{
+    .form-managed-file{display: inline-block; vertical-align: top; padding: 0;}
   }
 }
 
@@ -10230,5 +10234,67 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     margin-bottom: 20px;
     border-radius: 5px;
     .form-type-checkbox{margin: 5px 0;}
+  }
+}
+#itg-user-log-api-form, #itg-user-log-api-form-visited{
+  margin-bottom: 10px;
+  @extend .dib;
+  @extend .vtop;
+  @extend .full;
+  > div > div{
+    float: left;
+    width: 100px;
+    clear: none;
+    margin: 0 10px 0 0;
+    padding: 0;
+    .form-text{width: 100%;}
+    &.form-item-title, &.form-item-email{
+      width: 300px;
+    }
+    &.container-inline-date{
+      width: 100px;
+      > .form-item{
+        margin: 0;
+        > label{display: none;}
+      }
+    } 
+    &.form-item-items-per-page{
+      .form-select{
+        width: 100px;
+      }
+    }
+    label{
+      float: none;
+      width: auto;
+      display: block;
+    }
+    &.user-log-filter-btn{
+      width: 150px;
+      margin-top: 28px;
+      .form-submit{
+        @extend .btn-small;
+      }
+      a{
+        @extend .btn-reset;
+        @extend .btn-small;
+      }
+    }
+  }
+  div.description{display: none;}
+}
+.view-manage-users{
+  .view-filters .views-exposed-form .views-widget-filter-date_filter{
+    width: 300px;
+    > label{display: none;}
+    .views-widget{
+      > div{
+        float: left;
+        width: 141px;
+        &:first-child{
+          margin-right: 10px;
+        }
+      }
+    }
+    div.description{display: none;}
   }
 }
