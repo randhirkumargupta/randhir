@@ -176,7 +176,7 @@ jQuery(document).ready(function () {
                 }
                 // end here
                 // case for read later
-                    if (obj.success && obj.activity == 'read_later') {
+                    if (obj.success == '1' && obj.activity == 'read_later') {
                         if (obj.type == 'photogallery') {
                             jQuery('.later').html('<a href="javascript:void(0)" title="save" class="def-cur-pointer active"><i class="fa fa-bookmark"></i></a>');
                         }
@@ -194,6 +194,10 @@ jQuery(document).ready(function () {
                             jQuery('.saved-photogallery').remove();
                         }, 3000);
 
+                    }
+                    
+                    if (obj.success == '0' && obj.activity == 'read_later') {
+                      window.location.reload(true);
                     }
                 
             }
