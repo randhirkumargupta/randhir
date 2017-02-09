@@ -536,7 +536,7 @@ function _personalization_show_content() {
     $output = '';
 
     foreach ($cursor as $id => $value) {
-      if (function_exists(itg_get_front_activity_info))
+      if (function_exists('itg_get_front_activity_info'))
       {
         $opt = itg_get_front_activity_info($value['nid'], $value['ntype'], $user->uid, 'read_later', $status = '');
       }
