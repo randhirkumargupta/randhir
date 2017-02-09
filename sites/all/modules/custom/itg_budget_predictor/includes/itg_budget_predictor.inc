@@ -659,15 +659,14 @@ function itg_manage_budget() {
   );
 
   $form['budget_image'] = array(
-    '#title' => t('Budget Image'),
+    '#title' => t('Budget Image').'<span class="form-required"> *</span>',
     '#type' => 'managed_file',
-    '#upload_validators' => array('file_validate_extensions' => array('jpeg jpg png gif')),
-    '#default_value' => ($results->file_id) ? $results->file_id : '',
+    '#file_validate_extensions' => array('png gif jpg jpeg'),
+    '#default_value' => isset($results->file_id) ? $results->file_id : NULL,
     '#upload_location' => 'public://budget/',
-    '#required' => TRUE
   );
-
-
+  
+ 
   $form['budget_status'] = array(
     '#type' => 'radios',
     '#title' => t('Budget status'),
@@ -713,6 +712,10 @@ function itg_manage_budget_validate($form, &$form_state) {
   $results = $query->execute()->fetchObject();
   if ($results->id) {
     form_set_error('field', t('Budget Predictor already exist.'));
+  }
+  
+  if($form_state['values']['budget_image'] == 0) {
+    form_set_error('budget_image', t('Budget image field is required.'));
   }
 }
 
