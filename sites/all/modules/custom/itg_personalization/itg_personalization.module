@@ -504,7 +504,7 @@ function itg_personalization_reddem_referfriend($key) {
  * Implements _personalization_show_content().
  */
 function _personalization_show_content() {
-  global $user;
+  global $user, $base_url;
   $arg = arg();
   if (function_exists('mongodb'))
   {
