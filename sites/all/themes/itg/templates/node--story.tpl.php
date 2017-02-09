@@ -47,7 +47,12 @@ if (!empty($content)):
   if (!empty($byline_id)) {
     $reporter_node = node_load($byline_id);
   }
-  ?>
+  
+  if (function_exists(itg_get_front_activity_info))
+  {
+    $opt = itg_get_front_activity_info($node->nid, $node->type, $user->uid, 'read_later', $status = '');
+  }
+?>
   <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle;
                 if ($node->field_story_type[LANGUAGE_NONE][0]['value'] == 'photo_story') {
                   echo ' photo-story-section';
@@ -57,14 +62,30 @@ if (!empty($content)):
           <?php //pr($node);   ?> 
           <div class="comment-mobile desktop-hide">
               <ul>
-                  <?php if ($user->uid > 0): ?>
-                    <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>
-                    <?php print '<li>' . $read_later . '</li>'; ?>                                         
-                  <?php else: ?>
-                    <?php if (function_exists('itg_sso_url')): ?>
-                      <?php print '<li>' . itg_sso_url('<i class="fa fa-bookmark"></i>', t('READ LATER')) . '</li>'; ?>
-                    <?php endif; ?>
-                  <?php endif; ?>
+                  <li class="later">
+                                          <?php
+                                          if ($user->uid > 0)
+                                          {
+                                           if (empty($opt['status']) || $opt['status'] == 0)
+                                            {
+                                              ?> 
+                                              <a title = "Read Later" href="javascript:void(0)" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
+                                            <?php }
+                                            else
+                                            { ?>
+                                              <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
+                                            <?php
+                                            }
+                                          }
+                                          else
+                                          {
+                                            if (function_exists(itg_sso_url))
+                                            {
+                                              print itg_sso_url('<i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span>', t('READ LATER'));
+                                            }
+                                          }
+                                          ?>
+                                      </li>
                   <li class="mail-to-author"><a title ="Mail to author" href="mailto:support@indiatoday.in"><i class="fa fa-envelope"></i><?php //print t('Mail to author'); ?></a></li>
                   <li><a href="#" title = "whatsapp"><i class="fa fa-whatsapp"></i></a></li>
                   <?php
@@ -186,11 +207,6 @@ if (!empty($content)):
                                 <?php } 
                                 if ($user->uid > 0)
                                           {
-                                            if (function_exists(itg_get_front_activity_info))
-                                            {
-                                              $opt = itg_get_front_activity_info($node->nid, $node->type, $user->uid, 'read_later', $status = '');
-                                            }
-                                            
                                             if (empty($opt['status']) || $opt['status'] == 0)
                                             {
                                               ?> 
@@ -292,11 +308,6 @@ if (!empty($content)):
                                           <?php
                                           if ($user->uid > 0)
                                           {
-                                            if (function_exists(itg_get_front_activity_info))
-                                            {
-                                              $opt = itg_get_front_activity_info($node->nid, $node->type, $user->uid, 'read_later', $status = '');
-                                            }
-                                            
                                             if (empty($opt['status']) || $opt['status'] == 0)
                                             {
                                               ?> 
