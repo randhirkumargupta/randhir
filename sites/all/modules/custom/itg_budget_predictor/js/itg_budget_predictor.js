@@ -6,41 +6,42 @@
 Drupal.behaviors.itg_budget_predictor = {
     attach: function (context, settings) {
         jQuery(function ()
-        {   
-            
+        {
+
             var section_id = Drupal.settings.itg_budget_predictor.settings.section_id;
             var user_id = Drupal.settings.itg_budget_predictor.settings.user_id;
             var budget_predictor_cookies_id = Drupal.settings.itg_budget_predictor.settings.budget_predictor_cookies_id;
             var admin_user = Drupal.settings.itg_budget_predictor.settings.admin_user;
             var cookies_name = Drupal.settings.itg_budget_predictor.settings.cookies_name;
-            
+
             var pre_budget = Drupal.settings.itg_budget_predictor.settings.pre_budget;
             var present_budget = Drupal.settings.itg_budget_predictor.settings.present_budget;
-            
+
             var cookies_id = jQuery.cookie("COOKIES_IT_" + section_id);
             jQuery.removeCookie("COOKIES_IT_" + section_id);
             if(user_id == 0 && pre_budget != '') {
                 var date = new Date();
                 var minutes = 30;
                 date.setTime(date.getTime() + (minutes * 60 * 1000));
-                jQuery.cookie("COOKIES_IT_" + section_id, budget_predictor_cookies_id, { expires: date }); // Sample 3     
+                jQuery.cookie("COOKIES_IT_" + section_id, budget_predictor_cookies_id, { expires: date }); // Sample 3
             } else if(present_budget != ''){
                 jQuery.removeCookie("COOKIES_IT_" + section_id);
                 var date = new Date();
                 var minutes = 30;
                 date.setTime(date.getTime() + (minutes * 60 * 1000));
-                jQuery.cookie("COOKIES_IT_" + section_id, budget_predictor_cookies_id, { expires: date }); // Sample 3     
+                jQuery.cookie("COOKIES_IT_" + section_id, budget_predictor_cookies_id, { expires: date }); // Sample 3
             }
 
             if (Drupal.settings.itg_budget_predictor.settings.stopPredictor == 2) {
                 var isUpdated;
-                if (admin_user == null || admin_user === undefined) {        
-                    jQuery("#sortable1, #sortable2, #sortable3").sortable( {
+
+                if (admin_user == null || admin_user === undefined) {
+                    jQuery("#final-sortable").sortable( {
                         containment: "parent",
                     });
                 }
-              
-                jQuery("#sortable1, #sortable2, #sortable3, #sortable4").sortable(
+
+                jQuery("#sortable1, #sortable2, #sortable3, #sortable4, #final-sortable").sortable(
                         {
                             connectWith: '.connectedSortable',
                             update: function (event, ui) {

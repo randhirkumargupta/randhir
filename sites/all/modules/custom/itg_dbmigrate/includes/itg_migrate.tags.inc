@@ -20,11 +20,11 @@ class ItgTagsMigration extends XMLMigration {
 
     
     // This can also be an URL instead of a local file path.
-    $file_path = drupal_realpath('public://');
+    $file_path = 'sites/default/files';
     
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
     
-    $items_url = $xml_folder . 'tags.xml';
+    $items_url = $xml_folder . 'tags-master.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -65,16 +65,5 @@ class ItgTagsMigration extends XMLMigration {
     // /categories/category/name).
     
     $this->addFieldMapping('name', 'metatag')->xpath('metatag'); 
-    /*$this->addFieldMapping('field_tags_display', 'tags_display')->xpath('tags_display');
-    $this->addFieldMapping('field_tags_status', 'tags_status')->xpath('tags_status');
-    $this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
-    $this->addFieldMapping('metatag_title', 'metatitle')->xpath('metatitle');
-    $this->addFieldMapping('metatag_description', 'metadesc')->xpath('metadesc');
-    $this->addFieldMapping('metatag_keywords', 'metakey')->xpath('metakey');*/
-    
-    
-    //$this->addFieldMapping('metatag_abstract', 'nodeword_abstract');    
-    //$this->addFieldMapping('metatag_robots', 'nodeword_robots');
-
   }
 }

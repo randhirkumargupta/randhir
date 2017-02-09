@@ -137,7 +137,7 @@ jQuery(document).ready(function () {
 
 
     // jquery for front user activity
-    jQuery('#user-activity, .user-activity').click(function (event) {        
+    jQuery('#user-activity, .user-activity').click(function (event) {
         var nd_id = jQuery(this).attr('rel');
         var dtag = jQuery(this).attr('data-tag');
         var nodeId = jQuery(this).attr('data-nodeid');
@@ -145,7 +145,7 @@ jQuery(document).ready(function () {
         var data_activity = jQuery(this).attr('data-activity');
         var post_data = "&nd_id=" + nd_id + "&dtag=" + dtag + "&data_activity=" + data_activity + "&dstatus=" + dstatus;
         jQuery(this).closest(".emoji-container").find("a").removeClass("def-cur-pointer").addClass("def-cur-none-pointer");
-        if(!jQuery(this).closest(".emoji-container").find("a").hasClass('def-cur-none-pointer')) {
+        if(jQuery(this).attr('data-activity') != 'undefined') {
         jQuery.ajax({
             'url': Drupal.settings.baseUrl.baseUrl + '/user-activity-front-end',
             'data': post_data,
@@ -158,15 +158,14 @@ jQuery(document).ready(function () {
             'success': function (result)
             {
                 var obj = jQuery.parseJSON(result);
-                if (obj.success == 1) {
-                    console.log('create');
+                // case for follow story
+                if (obj.success == 1 && obj.activity == 'follow_story') {
                     jQuery(".follow-story a").attr({
                         'data-status': 0,
                         title: 'Unfollow story'
                     }).html('Unfollow story');
                 }
-                if (obj.success == 0) {
-                    console.log('update');
+                if (obj.success == 0 && obj.activity == 'follow_story') {
                     jQuery(".follow-story a").attr({
                         'data-status': 1,
                         title: 'Follow the Story'
@@ -175,20 +174,53 @@ jQuery(document).ready(function () {
                 if (obj.error == 'error') {
 
                 }
-                if (obj.ok == 'hightlights_emoji_true') {
-                    jQuery("."+obj.rel).html("(" + obj.count + ")");
-                    jQuery(".hightlights_emoji_msg_" + obj.nd_id).html('Success').show(0).delay(2000).hide(1000);
-                }
-                if (obj.ok == 'error') {
-                    jQuery(".hightlights_emoji_msg_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
+                // end here
+                // case for read later
+                if (obj.success && obj.activity == 'read_later') {
+                    
+                    window.location.reload('true');
                 }
                 
             }
         });
-      } else {
-                jQuery(".hightlights_emoji_msg_" +nodeId).html('You have already voted').show(0).delay(2000).hide(1000);
-      }
+      } 
+    });
+    
+     jQuery('.user-activity-highlight').click(function (event) {
+        var nd_id = jQuery(this).attr('rel');
+        var dtag = jQuery(this).attr('data-tag');
+        var nodeId = jQuery(this).attr('data-nodeid');
+        var dstatus = jQuery(this).attr('data-status');
+        var data_activity = jQuery(this).attr('data-activity');
+        var post_data = "&nd_id=" + nd_id + "&dtag=" + dtag + "&data_activity=" + data_activity + "&dstatus=" + dstatus;
+        if(!jQuery(this).closest(".emoji-container").find("a").hasClass('def-cur-none-pointer')) {
+            jQuery(this).closest(".emoji-container").find("a").removeClass("def-cur-pointer").addClass("def-cur-none-pointer");
+            jQuery.ajax({
+                'url': Drupal.settings.baseUrl.baseUrl + '/user-activity-front-highlight',
+                'data': post_data,
+                'cache': false,
+                'type': 'POST',
+                // dataType: 'json',
+                beforeSend: function () {
 
+                },
+                'success': function (result)
+                {
+                    var obj = jQuery.parseJSON(result);
+                    if (obj.ok == 'hightlights_emoji_true') {
+                        jQuery("."+obj.rel).html("(" + obj.count + ")");
+                        jQuery(".hightlights_emoji_msg_" + obj.nd_id).html('Success').show(0).delay(2000).hide(1000);
+                    }
+                    if (obj.ok == 'error') {
+                        jQuery(".hightlights_emoji_msg_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
+                    }
+
+                }
+            });
+        }
+       else {
+           jQuery(this).closest(".emoji-container").next("p").html('You have already voted').show(0).delay(2000).hide(0);
+       }
     });
 
     // end here

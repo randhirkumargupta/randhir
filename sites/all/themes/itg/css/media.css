@@ -2016,7 +2016,7 @@
   /*static page css end*/
 }
 /*Start header CSS Desktop version*/
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .list-none {
     list-style-type: none;
   }
@@ -2286,14 +2286,14 @@
     font-size: 15px;
   }
 }
-@media only screen and (min-width: 769px) and (min-width: 768px) {
+@media only screen and (min-width: 768px) and (min-width: 768px) {
   .view-front-end-global-search .view-content .social-share ul li a {
     width: 23px;
     height: 23px;
     line-height: 25px;
   }
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .view-front-end-global-search .view-content .social-share ul li a.share {
     color: #d0d0d0;
   }

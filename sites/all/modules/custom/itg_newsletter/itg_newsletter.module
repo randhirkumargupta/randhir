@@ -878,14 +878,15 @@ function itg_newslatter_get_subscribe_page_users_email($getsection) {
  * Get top 20 stories
  * @return array
  */
-function itg_newsletter_get_section_stories($section, $totaltime, $previoustime) {
+function itg_newsletter_get_section_stories($section, $crontime, $previoustime) {
+    
   $query = db_select('node', 'n');
   $query->leftjoin('field_data_field_story_category', 'fsc', 'n.nid = fsc.entity_id');
   $query->condition('n.status', 1, '=');
   $query->fields('n');
   $query->condition('n.type', 'story', '=');
   $query->condition('fsc.field_story_category_tid', $section, 'IN');
-  $query->condition('changed', array($previoustime, $totaltime), 'BETWEEN');
+  $query->condition('changed', $previoustime, '>=');
   $query->orderBy('n.nid', 'DESC');
   $query->range(0, 20);
   $result = $query->execute();

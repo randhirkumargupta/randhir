@@ -35,35 +35,37 @@ $user_id = $data['user_id'];
 
 </style>
 
-<?php if ($budget_exist == 1) { ?>    
+<?php if ($budget_exist == 1) { ?>
   <h1 class="budget-predictor-heading"><?php print t('CHEAPER / DEARER'); ?></h1>
   <?php if(empty($user_id)) { ?>
     <h3 class="budget-predictor-msg"><?php print t('Please drag and drop images and please login if you know, your prediction will right or not.'); ?></h3>
   <?php } ?>
   <div id="main-container-budget">
       <div class="top-side-block">
-          <div id="ranking-content" class="col-md-2 col-list col-list-1">
-              <span id="ranking-label" class="title"><?php print t('Cheaper'); ?></span>        
-              <ul id="sortable1" class="connectedSortable">
-                  <?php echo $column1; ?>
-              </ul>
-          </div>
-          <div id="ranking-content" class="col-md-2 col-list col-list-2">
-              <span id="ranking-label" class="title"><?php print t('Dearer'); ?></span>    
-              <ul id="sortable2" class="connectedSortable">
-                  <?php echo $column2; ?>
-              </ul>
-          </div>
-          <div id="ranking-content" class="col-md-2 col-list col-list-3">
-              <span id="ranking-label" class="title"><?php print t('Same'); ?></span>    
-              <ul id="sortable3" class="connectedSortable">
-                  <?php echo $column3; ?>
-              </ul>
-          </div>
+           <div id="final-sortable">
+              <div id="ranking-content" class="col-md-2 col-list col-list-1">
+                  <span id="ranking-label" class="title"><?php print t('Cheaper'); ?></span>
+                  <ul id="sortable1" class="connectedSortable">
+                      <?php echo $column1; ?>
+                  </ul>
+              </div>
+              <div id="ranking-content" class="col-md-2 col-list col-list-2">
+                  <span id="ranking-label" class="title"><?php print t('Dearer'); ?></span>
+                  <ul id="sortable2" class="connectedSortable">
+                      <?php echo $column2; ?>
+                  </ul>
+              </div>
+              <div id="ranking-content" class="col-md-2 col-list col-list-3">
+                  <span id="ranking-label" class="title"><?php print t('Same'); ?></span>
+                  <ul id="sortable3" class="connectedSortable">
+                      <?php echo $column3; ?>
+                  </ul>
+              </div>
+           </div>
           <div id="ranking-content-main" class="col-md-6 col-list col-list-4">
-              <span id="ranking-label" class="title"><?php print t('Items'); ?></span>    
-              <ul id="sortable4" class="connectedSortable">
-                  <?php echo $column4; ?>                  
+              <span id="ranking-label" class="title"><?php print t('Items'); ?></span>
+              <ul id="sortable4" class="connectedSortable1">
+                  <?php echo $column4; ?>
               </ul>
               <?php
                   if ($budget_message_flag) {
@@ -74,14 +76,14 @@ $user_id = $data['user_id'];
                   }
                   elseif ($budget_message_front_flag) {
                     print '<p class="success">'.$budget_social_message.'</p>';
-                    ?>      
+                    ?>
                     <div class="budget-predictor-block">
                         <div class="budget-predictor-social-share">
                             <div class="share-msg"><?php print 'SHARE YOUR PREDICTION'; ?></div>
-                            <ul>                                
+                            <ul>
                                 <li><div id="fb-root"></div><a class="facebook" href="javascript:void(0)" onclick="badget_fb_share('<?php print $actual_link; ?>', '<?php print $budget_title; ?>', '<?php print $budget_social_message; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="javascript:void(0)" class="twitter" onclick="badget_twitter_share('<?php print urlencode($budget_title); ?>', '<?php print urlencode($actual_link); ?>')"><i class="fa fa-twitter"></i></a></li>
-                                <li><a title="share on google+" class="google" href="javascript:void(0)" onclick="return badget_google_plus_share('<?php print $actual_link; ?>')"></a></li>                                           
+                                <li><a title="share on google+" class="google" href="javascript:void(0)" onclick="return badget_google_plus_share('<?php print $actual_link; ?>')"></a></li>
                             </ul>
                         </div>
                     </div>
@@ -91,9 +93,9 @@ $user_id = $data['user_id'];
                 <?php if(empty($user_id)) { ?>
                   <button class="btn btn-save" type="button" onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')"><?php print t('Submit'); ?></button>
                 <?php } else { ?>
-                  <button class="btn btn-save" type="button" onclick="captureCurrentDiv(<?php print $section_id; ?>)"><?php print t('Submit'); ?></button> 
+                  <button class="btn btn-save" type="button" onclick="captureCurrentDiv(<?php print $section_id; ?>)"><?php print t('Submit'); ?></button>
                 <?php } ?>
-                
+
                 <?php
               }
             }
@@ -106,7 +108,7 @@ $user_id = $data['user_id'];
 
 
         </div>
-    </div>    
+    </div>
 
 </div>
 
