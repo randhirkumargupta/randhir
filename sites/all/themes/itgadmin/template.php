@@ -370,9 +370,7 @@ function itgadmin_preprocess_page(&$vars) {
   $referal_page = $_SERVER['HTTP_REFERER'];
   $pos = strpos($referal_page, "itg-custom-widget-content");
   if(isset($_GET['op']) && isset($_GET['id']) && $pos !== false) {
-    drupal_add_css("header {display:none !important}" ,"inline");
-    drupal_add_css("#navigation {display:none !important}" ,"inline");
-    drupal_add_css(".breadcrumb {display:none !important}" ,"inline");
+    $vars['theme_hook_suggestions'][] = 'page__relatedcontent';
   }
   // Change create category page title.
   $arg0 = arg(0);

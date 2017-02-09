@@ -165,7 +165,7 @@ function ads_features_field_default_field_instances() {
     'bundle' => 'ads_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please enter script code with Javascript <b>script</b> tag.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -207,7 +207,7 @@ function ads_features_field_default_field_instances() {
     'bundle' => 'ads_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please enter script code with Javascript <b>script</b> tag.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -307,7 +307,7 @@ function ads_features_field_default_field_instances() {
     'bundle' => 'ads_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please enter script code with Javascript <b>script</b> tag.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -327,7 +327,7 @@ function ads_features_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_ads_headerscript',
     'label' => 'Header script	',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -603,6 +603,7 @@ function ads_features_field_default_field_instances() {
   t('Device Selection');
   t('End Date');
   t('Header script	');
+  t('Please enter script code with Javascript <b>script</b> tag.');
   t('Select template type');
   t('Start Date');
   t('Template Selection');
