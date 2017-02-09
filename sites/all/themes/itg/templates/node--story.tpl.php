@@ -48,7 +48,7 @@ if (!empty($content)):
     $reporter_node = node_load($byline_id);
   }
   
-  if (function_exists(itg_get_front_activity_info))
+  if (function_exists('itg_get_front_activity_info'))
   {
     $opt = itg_get_front_activity_info($node->nid, $node->type, $user->uid, 'read_later', $status = '');
   }
