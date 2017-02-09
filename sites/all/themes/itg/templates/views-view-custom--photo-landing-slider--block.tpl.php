@@ -36,12 +36,32 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                   <?php endif; ?>
                 <!--<li class="mhide"><a href="#" title="post content"><i class="fa fa-share"></i></a></li>-->
                 <?php global $user; ?>
-                  <?php if ($user->uid > 0): ?>
-                     <?php $read_later = flag_create_link('my_saved_content', arg(1)); ?>                      
-                     <li><?php print $read_later; ?></li>
-                  <?php else: ?>
-                     <?php print '<li>' . itg_sso_url('<i class="fa fa-bookmark"></i>', 'Save') . '</li>'; ?>
-                <?php endif; ?>                  
+                  <?php
+                    if ($user->uid > 0)
+                                          {
+                                            if (function_exists(itg_get_front_activity_info))
+                                            {
+                                              $opt = itg_get_front_activity_info($photo_node->nid, $photo_node->type, $user->uid, 'read_later', $status = '');
+                                            }
+                                            
+                                            if (empty($opt['status']) || $opt['status'] == 0)
+                                            {
+                                              ?> 
+                                          <li><a title = "Save" href="javascript:" class="user-activity" rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i></a></li>
+                                            <?php }
+                                            else
+                                            { ?>
+                                          <li><a title = "Save" href="javascript:" class="def-cur-pointer active"><i class="fa fa-bookmark"></i></a></li>
+                                            <?php
+                                            }
+                                          }
+                                          else
+                                          {
+                                            if (function_exists(itg_sso_url))
+                                            {
+                                              print '<li>'.itg_sso_url('<i class="fa fa-bookmark"></i> <span>' . t('') . '</span>', t('Save')).'</li>';
+                                            }
+                                          }    ?>             
             </ul>
         </div>
     </div>
@@ -130,11 +150,33 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                   <li class="mhide"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                   <?php endif; ?>
                 <?php global $user; ?>
-                  <?php if ($user->uid > 0): ?>                     
-                     <li><?php print $read_later; ?></li>
-                  <?php else: ?>
-                     <?php print '<li>' . itg_sso_url('<i class="fa fa-bookmark"></i>', 'Save') . '</li>'; ?>
-                <?php endif; ?>
+                  <?php
+                                          if ($user->uid > 0)
+                                          {
+                                            if (function_exists(itg_get_front_activity_info))
+                                            {
+                                              $opt = itg_get_front_activity_info($photo_node->nid, $photo_node->type, $user->uid, 'read_later', $status = '');
+                                            }
+                                            
+                                            if (empty($opt['status']) || $opt['status'] == 0)
+                                            {
+                                              ?> 
+                                          <li><a title = "Save" href="javascript:" class="user-activity" rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i></a></li>
+                                            <?php }
+                                            else
+                                            { ?>
+                                          <li><a title = "Save" href="javascript:" class="def-cur-pointer active"><i class="fa fa-bookmark"></i></a></li>
+                                            <?php
+                                            }
+                                          }
+                                          else
+                                          {
+                                            if (function_exists(itg_sso_url))
+                                            {
+                                              print '<li>'.itg_sso_url('<i class="fa fa-bookmark"></i> <span>' . t('') . '</span>', t('Save')).'</li>';
+                                            }
+                                          }
+                                          ?>
             </ul>
         </div>
         

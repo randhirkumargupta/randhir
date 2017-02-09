@@ -344,6 +344,9 @@ jQuery("#edit-widget-name").on("keyup", function () {
                     jQuery(".form-item-widget-name").append("<div class='messages error error-message-widget'><ul><li>Widget <b>"+widget_name+"</b> already exists in database. Please change it or new content will add in <b>"+widget_name+"</b> widget..</li></ul></div>");
                     //console.log(data.length);
                 }
+                else {
+                    jQuery(".error-message-widget").remove();
+                }
                // console.log(data);
             }
         });

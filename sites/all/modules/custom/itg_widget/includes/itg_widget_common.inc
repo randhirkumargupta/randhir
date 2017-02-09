@@ -17,7 +17,6 @@ function itg_widgets_custom_variables() {
         '#type' => 'textfield',
         '#title' => t('Enter Program Category Id'),
         '#default_value' => variable_get('program_category_id_for_programmes'),
-        '#required' => TRUE,
         '#size' => 20,
         '#maxlength' => 20,
     );
@@ -25,7 +24,6 @@ function itg_widgets_custom_variables() {
         '#type' => 'textfield',
         '#title' => t('Enter So Sorry Category Id'),
         '#default_value' => variable_get('so_sorry_category_id_for_widget'),
-        '#required' => TRUE,
         '#size' => 20,
         '#maxlength' => 20,
     );
@@ -141,6 +139,13 @@ function itg_widgets_custom_variables() {
         '#type' => 'textfield',
         '#title' => t('Enter education tid'),
         '#default_value' => variable_get('itg_newsletter_education_id'),
+        '#size' => 20,
+        '#maxlength' => 20,
+    );
+    $form['quiz_taxonomy_tid'] = array(
+        '#type' => 'textfield',
+        '#title' => t('quiz_taxonomy_tid'),
+        '#default_value' => variable_get('quiz_taxonomy_tid'),
         '#size' => 20,
         '#maxlength' => 20,
     );

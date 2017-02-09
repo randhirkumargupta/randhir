@@ -218,9 +218,9 @@ jQuery(document).ready(function () {
                 }
             });
         }
-        else {
-            jQuery(this).closest(".emoji-container").next("p").html('You have already voted').show(0).delay(2000).hide(0);
-        }
+       else {
+           jQuery(this).closest(".emoji-container").next("p").html('You have already voted').show(0).delay(2000).hide(0);
+       }
     });
 
     // end here

@@ -31,6 +31,7 @@
             window.location.hash = "#" + hash_text;
             if(currentSlide === maxValueInArray) {
                 if (Drupal.settings.itg_story_front.next) {
+                    $(".multiple-photo-disc i.fa-chevron-right").css("visibility","visible").removeClass("hide")
                     var next = Drupal.settings.itg_story_front.next;
                     window.location.href = next;
                   } else {
@@ -39,6 +40,7 @@
             }
             if (currentSlide === 0) {
                 if (Drupal.settings.itg_story_front.previous) {
+                    $(".multiple-photo-disc i.fa-chevron-left").css("visibility","visible").removeClass("hide");
                     var previous = Drupal.settings.itg_story_front.previous;
                     window.location.href = previous;
                   } else {
@@ -50,6 +52,7 @@
         $('.multiple-photo').on('afterChange', function(event, slick, currentSlide) {               
             if(currentSlide === maxValueInArray-1){
               if (Drupal.settings.itg_story_front.next) {
+                  $(".multiple-photo-disc i.fa-chevron-right").css("visibility","visible").removeClass("hide");
                     var next = Drupal.settings.itg_story_front.next;
                     window.location.href = next;
                   } else {
