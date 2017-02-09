@@ -101,6 +101,7 @@ function itg_fields_remove_button_field_widget_form_alter(&$element, &$form_stat
             || $form_state['node']->type == 'survey' 
             || $form_state['node']->type == 'quiz' 
             || $form_state['node']->type == 'breaking_news'
+            || $form_state['node']->type == 'ads_management'
             || $form_state['node']->type == 'syndication_rule')) 
             && $context['field']['cardinality'] == FIELD_CARDINALITY_UNLIMITED && in_array($context['instance']['widget']['type'], $fieldwidgets)) {
 

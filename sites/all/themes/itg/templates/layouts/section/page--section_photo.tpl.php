@@ -237,7 +237,7 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
                     <div class="ad-widget">
                       <div class="sidebar-ad droppable">
                        <?php
-                          $block = block_load('itg_ads', 'ADS_RHS1');   
+                          $block = block_load('itg_ads', ADS_RHS1);
                           $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                           print render($render_array);
                          ?>

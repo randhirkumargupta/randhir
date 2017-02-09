@@ -74,6 +74,36 @@ function itg_social_media_schema() {
         'not null' => false,
         'default' => 0,
       ),  
+        'click_on_post' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => false,
+        'default' => 0,
+      ),  
+        'video_views' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => false,
+        'default' => 0,
+      ),  
+        'photo_views' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => false,
+        'default' => 0,
+      ),  
+        'fan_reach' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => false,
+        'default' => 0,
+      ),  
+        'impressions' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => false,
+        'default' => 0,
+      ),  
       'username' => array(
         'description' => 'Username of the user who have promoted the content.',
         'type' => 'varchar',

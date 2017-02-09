@@ -43,6 +43,8 @@
         }
       });
 
+
+
     }
 
   };
@@ -54,7 +56,7 @@ jQuery(document).ready(function() {
 
 
   jQuery('[name="field_select_template_type[und]"]').on('click', function() {
-    
+
     switch (jQuery(this).val()) {
       case 'Home':
         var home_option = "<option value='Home'>Home</option>";
@@ -82,5 +84,14 @@ jQuery(document).ready(function() {
 
 
   });
+
+  try {
+    if (jQuery('[name="field_select_template_type[und]"]:checked').val() == "Section") {
+      jQuery('#itg_ads_ttype_replace').show();
+    }
+  }
+  catch (e) {
+
+  }
 
 });
