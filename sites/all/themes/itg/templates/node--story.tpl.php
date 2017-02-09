@@ -342,10 +342,19 @@ if (!empty($content)):
     echo 'listicle-page';
   }
   ?>">
-                  <div class="story-associate-content">
-                      <div id="videogallery-iframe">
+                  <?php
+                  if(!empty($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'])) {
+                      $class = 'story-associate-content';
+                  }
+                  ?>
+                  <div class="<?php echo $class; ?>">
+                      <?php
+                  if(!empty($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'])) {?>
+                    <div id="videogallery-iframe">
                           <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading" />
                       </div>
+                  <?php }
+                  ?>                      
                       <?php
                       $clidk_class_slider = "";
                       $widget_data = '';
