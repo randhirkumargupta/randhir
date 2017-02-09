@@ -194,11 +194,11 @@ if (!empty($content)):
                                             if (empty($opt['status']) || $opt['status'] == 0)
                                             {
                                               ?> 
-                                  <li><span> <a title = "Read Later" href="javascript:" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><?php print t('READ LATER'); ?></a><span class="flag-throbber">&nbsp;</span></span></li>
+                                  <li class="left-later"><span> <a title = "Read Later" href="javascript:void(0)" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><?php print t('READ LATER'); ?></a><span class="flag-throbber">&nbsp;</span></span></li>
                                             <?php }
                                             else
                                             { ?>
-                                  <li><span> <a title = "Read Later" href="javascript:" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><?php print t('READ LATER'); ?></a><span class="flag-throbber">&nbsp;</span></span></li>
+                                  <li><span> <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><?php print t('READ LATER'); ?></a><span class="flag-throbber">&nbsp;</span></span></li>
                                             <?php
                                             }
                                           }
@@ -288,7 +288,7 @@ if (!empty($content)):
                                   <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                                     <?php endif; ?>
 
-                                <li class="read-later">
+                                <li class="later">
                                           <?php
                                           if ($user->uid > 0)
                                           {
@@ -300,11 +300,11 @@ if (!empty($content)):
                                             if (empty($opt['status']) || $opt['status'] == 0)
                                             {
                                               ?> 
-                                              <a title = "Read Later" href="javascript:" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
+                                              <a title = "Read Later" href="javascript:void(0)" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
                                             <?php }
                                             else
                                             { ?>
-                                              <a title = "Read Later" href="javascript:" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
+                                              <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
                                             <?php
                                             }
                                           }

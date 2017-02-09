@@ -130,7 +130,7 @@ function itg_user_activity_front() {
         $path = $actual_data->path['source'];
         $qry = array("nid" => $nd_id, "uid" => $user->uid, "title" => $actual_data->title, "path" => $path, "image" => $extra_image, "primary_category_id" => $primary_cat_id, "primary_category_name" => $primary_cat_name->name, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus);
         $result = $people->insert($qry);
-        $response = array('success' => $dstatus, 'activity' => $user_activity);
+        $response = array('success' => $dstatus, 'activity' => $user_activity, 'type' => $dtag);
         print json_encode($response);
       }
       else
@@ -138,7 +138,7 @@ function itg_user_activity_front() {
         try {
           $newdata = array('$set' => array("status" => $dstatus, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time));
           $people->update(array("nid" => $nd_id), $newdata);
-          $response = array("success" => $dstatus, 'activity' => $user_activity);
+          $response = array("success" => $dstatus, 'activity' => $user_activity, 'type' => $dtag);
           print json_encode($response);
         }
         catch (Exception $e) {
