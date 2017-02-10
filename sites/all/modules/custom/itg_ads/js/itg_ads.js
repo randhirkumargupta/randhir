@@ -8,8 +8,8 @@
     attach: function(context) {
 
       // Disable edit mode of date fields
-      $('input[name="field_ads_start_date[und][0][value][date]"]').keydown(false);
-      $('input[name="field_ads_end_date[und][0][value][date]"]').keydown(false);
+     $('input[name="field_ads_start_date[und][0][value][date]"]').keydown(false);
+     // $('input[name="field_ads_end_date[und][0][value][date]"]').keydown(false);
       // Module code end
       $('#edit-field-ads-template-selection-und').change(function() {
 

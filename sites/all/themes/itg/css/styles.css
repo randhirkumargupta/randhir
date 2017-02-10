@@ -12338,6 +12338,9 @@ span.smilies-title {
   display: inline-block;
   vertical-align: middle;
 }
+span.smilies-title img {
+  display: inline;
+}
 
 /* css for story-photo-list starts here */
 .story-photo-list-wrapper h3 {

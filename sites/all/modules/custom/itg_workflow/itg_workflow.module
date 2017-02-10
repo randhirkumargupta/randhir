@@ -743,14 +743,23 @@ function itg_workflow_node_update($node) {
 
     workflow_get_mail_content($node, 'update', $high_level_user, $node->name, $current_user_name);
     } */
-//    echo "<pre>";
-//    print_r($node);
-//    die;
+    if($node->type == 'story'){
+        if ($node->workbench_moderation_state_new == 'published'){
+          $itguser = user_load($node->uid);
+          $rid = array(COPY_EDITOR, SECTION_EDITOR, EDITOR, SEO);
+          $user_email = get_email_by_roll($rid);
+          $user_email[] = $itguser->mail;
+          workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
+        }
+    }
   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
 
     global $user;
     
     $preview_unique_id = $node->field_preview_unique_id['und'][0]['value'];
+    
+    
+    
     
     if ($node->workbench_moderation_state_current == 'published') {
       workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name); 
@@ -796,6 +805,9 @@ function itg_workflow_node_update($node) {
       
       workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
     }
+    
+
+
   }
 }
 
@@ -910,8 +922,7 @@ function get_email_by_roll($id) {
   foreach ($result as $val) {
     $value[] = $val->mail;
   }
-
-  return $value;
+ return $value;
 }
 
 /**
