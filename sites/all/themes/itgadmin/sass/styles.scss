@@ -10302,3 +10302,8 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   margin: 10px;
   text-align: center;
 }
+[id*="views-form-itg-custom-widget-page"]{
+  .form-type-textfield{
+    padding: 0;
+  }
+}

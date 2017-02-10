@@ -10667,3 +10667,7 @@ span.file a {
   margin: 10px;
   text-align: center;
 }
+
+[id*="views-form-itg-custom-widget-page"] .form-type-textfield {
+  padding: 0;
+}
