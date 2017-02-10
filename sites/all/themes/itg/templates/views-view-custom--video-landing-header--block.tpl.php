@@ -85,7 +85,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                             if (empty($opt['status']) || $opt['status'] == 0)
                                             {
                                               ?> 
-                                          <li><a title = "Save" href="javascript:" class="user-activity" rel="<?php print $video_node->nid; ?>" data-tag="<?php print $video_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-clock-o"></i><span><?php print t('Watch Later'); ?></span></a></li>
+                                          <li class="later"><a title = "Save" href="javascript:void(0)" class="user-activity" rel="<?php print $video_node->nid; ?>" data-tag="<?php print $video_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-clock-o"></i><span><?php print t('Watch Later'); ?></span></a></li>
                                             <?php }
                                             else
                                             { ?>
