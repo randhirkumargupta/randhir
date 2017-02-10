@@ -4,7 +4,6 @@
  *   Career graph page template.
  */
 ?>
-<script src="https://code.highcharts.com/highcharts.js"></script>
 <?php foreach ($output as $key => $value): ?>
     <?php
     if (strpos($actor[$key]['pic_uri'], 'public://') !== false) {
