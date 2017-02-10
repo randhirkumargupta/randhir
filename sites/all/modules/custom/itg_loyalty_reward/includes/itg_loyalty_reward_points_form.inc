@@ -79,7 +79,7 @@ function loyality_reward_points_configuration_form() {
         '#type' => 'textfield',
         '#title' => t('Points required for one Gold Star'),
         '#maxlength' => 6,
-        '#suffix' => '<div class="poll-form div_lrp_gold_star_one_icon"><a href="javascript:void(0)" onclick="' . $link_first_image . '">Browse Image</a></div>,
+        '#suffix' => '<div class="poll-form div_lrp_gold_star_one_icon"><a href="javascript:void(0)" onclick="' . $link_first_image . '">Browse Image</a></div>',
         '#default_value' => variable_get('lrp_gold_star_one'),
     );
 
