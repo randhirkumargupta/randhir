@@ -5169,9 +5169,6 @@ h1.category-heading {
 #block-views-video-landing-header-block .video-header-left .social-likes ul li .flag-throbber {
   display: none;
 }
-#block-views-video-landing-header-block .video-header-left .iframe-video {
-  padding-bottom: 69%;
-}
 #block-views-video-landing-header-block .video-header-left .slick-slider {
   padding: 10px;
   background: #000;
@@ -5272,6 +5269,37 @@ h1.category-heading {
   position: relative;
   padding-bottom: 15px;
 }
+#block-views-video-landing-header-block .video-header-right .social-likes {
+  float: right;
+  width: 100%;
+  background: #1a1a1a;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(170, 169, 169, 0.31);
+}
+#block-views-video-landing-header-block .video-header-right .social-likes ul {
+  display: inline-flex;
+}
+#block-views-video-landing-header-block .video-header-right .social-likes ul li a {
+  display: block;
+  color: #aaa9a9;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  padding: 10px;
+}
+#block-views-video-landing-header-block .video-header-right .social-likes ul li a i {
+  font-size: 18px;
+  vertical-align: middle;
+}
+#block-views-video-landing-header-block .video-header-right .social-likes ul li a span {
+  display: none;
+}
+#block-views-video-landing-header-block .video-header-right .social-likes ul li a:hover {
+  background: #363636;
+  color: #fff;
+}
+#block-views-video-landing-header-block .video-header-right .social-likes ul li .flag-throbber {
+  display: none;
+}
 #block-views-video-landing-header-block .video-header-right p:first-child {
   margin-top: 15px;
 }
@@ -5288,6 +5316,18 @@ h1.category-heading {
   margin: 40px 20px 0;
   position: absolute;
   bottom: 0;
+}
+#block-views-video-landing-header-block .video-header-right .video-slider-description {
+  zoom: 1;
+}
+#block-views-video-landing-header-block .video-header-right .video-slider-description:before, #block-views-video-landing-header-block .video-header-right .video-slider-description:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+#block-views-video-landing-header-block .video-header-right .video-slider-description:after {
+  clear: both;
 }
 
 #block-views-video-landing-header-block-1 {
@@ -11886,6 +11926,9 @@ h1.about-us-heading + div p {
 }
 .node-type-videogallery #cboxTitle, .node-type-photogallery #cboxTitle, .node-type-story #cboxTitle {
   display: none !important;
+}
+.node-type-videogallery .region-top, .node-type-photogallery .region-top, .node-type-story .region-top {
+  background: #171717;
 }
 
 /*css end story page submit story */

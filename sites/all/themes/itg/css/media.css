@@ -43,6 +43,10 @@
   ::-webkit-scrollbar {
     display: none;
   }
+
+  #block-views-video-landing-header-block .video-header-right .ads {
+    position: relative;
+  }
 }
 @media only screen and (max-width: 1024px) {
   h1 {
@@ -370,6 +374,33 @@
   }
 
   /*event page css end*/
+  #block-views-video-landing-header-block .video-header-right {
+    height: auto !important;
+    width: 100%;
+    zoom: 1;
+  }
+  #block-views-video-landing-header-block .video-header-right:before, #block-views-video-landing-header-block .video-header-right:after {
+    content: "";
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+  #block-views-video-landing-header-block .video-header-right:after {
+    clear: both;
+  }
+  #block-views-video-landing-header-block .video-header-right .top-section {
+    float: left;
+    width: 55%;
+  }
+  #block-views-video-landing-header-block .video-header-right .ads {
+    margin: 0;
+    float: right;
+    margin-top: 15px;
+  }
+
+  #block-views-video-landing-header-block .video-header-left .social-likes {
+    height: auto !important;
+  }
 }
 @media only screen and (max-width: 991px) {
   /*CSS start education page special*/
@@ -451,6 +482,17 @@
   .other-news {
     margin-top: 50px;
   }
+
+  /*CSS Starts Photo landing page*/
+  .view-video-list-of-category .view-content .photo-list, .view-photo-list-of-category .view-content .photo-list, .view-so-sorry .view-content .photo-list, .view-programme-content .view-content .photo-list, .page-sports-video .view-content .photo-list, .page-sports-photo .view-content .photo-list, .view-programme-content-live-tv .view-content .photo-list {
+    margin: 0 -10px;
+  }
+  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li, .view-programme-content-live-tv .view-content .photo-list li {
+    padding: 15px 10px;
+    width: 25%;
+  }
+
+  /*CSS End Photo landing page*/
 }
 @media only screen and (max-width: 768px) {
   header {
@@ -856,12 +898,6 @@
   }
 
   /*css end side bar section for video and photo*/
-  /*CSS Starts Photo landing page*/
-  .view-video-list-of-category .view-content .photo-list, .view-photo-list-of-category .view-content .photo-list, .view-so-sorry .view-content .photo-list, .view-programme-content .view-content .photo-list, .page-sports-video .view-content .photo-list, .page-sports-photo .view-content .photo-list, .view-programme-content-live-tv .view-content .photo-list {
-    margin: 0 -10px;
-  }
-
-  /*CSS End Photo landing page*/
   /*css starts sport page*/
   .sport-home-layout-page .itg-layout-615 .auto-block-1 {
     margin-bottom: 50px;
@@ -1187,9 +1223,11 @@
   }
   .home_page_poll_widget_block .poll-wrapper .poll-data .poll-banner-image, .sport-home-layout-page .poll-wrapper .poll-data .poll-banner-image {
     max-width: 100%;
+    height: auto;
   }
   .home_page_poll_widget_block .poll-wrapper .poll-data .poll-banner-image img, .sport-home-layout-page .poll-wrapper .poll-data .poll-banner-image img {
     max-width: 100%;
+    height: auto;
   }
 
   /*Home page css end*/
@@ -1395,6 +1433,14 @@
   /*css end video landing page like dislike*/
   .may-be-recommend {
     padding: 10px 24px 10px 0px;
+  }
+
+  .sidebar-second .may-be-suggest-container ul li, .sidebar-second .top-takes-video-container ul li, .sidebar-second .watch-right-now-video ul li {
+    padding: 10px 24px 10px 0px;
+  }
+
+  #block-views-video-landing-header-block .video-header-right .social-likes ul li a {
+    padding: 10px 20px;
   }
 }
 @media only screen and (max-width: 680px) {
@@ -1908,7 +1954,7 @@
 
   /*css end custom form for video an photo*/
 }
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 680px) {
   #block-views-anchor-landing-page-block .anchor-left {
     width: 50%;
   }
@@ -1926,20 +1972,32 @@
   .page-user .social-share a {
     padding: 0 10px 0 45px;
   }
-}
-@media only screen and (max-width: 560px) {
+
   /*CSS Starts Photo landing page*/
   .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li, .view-programme-content-live-tv .view-content .photo-list li {
-    width: 50%;
+    width: 33.33333%;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-so-sorry .view-content .photo-list li:nth-child(3n+1), .view-programme-content .view-content .photo-list li:nth-child(3n+1), .page-sports-video .view-content .photo-list li:nth-child(3n+1), .page-sports-photo .view-content .photo-list li:nth-child(3n+1), .view-programme-content-live-tv .view-content .photo-list li:nth-child(3n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-so-sorry .view-content .photo-list li:nth-child(4n+1), .view-programme-content .view-content .photo-list li:nth-child(4n+1), .page-sports-video .view-content .photo-list li:nth-child(4n+1), .page-sports-photo .view-content .photo-list li:nth-child(4n+1), .view-programme-content-live-tv .view-content .photo-list li:nth-child(4n+1) {
     clear: none;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-so-sorry .view-content .photo-list li:nth-child(2n+1), .view-programme-content .view-content .photo-list li:nth-child(2n+1), .page-sports-video .view-content .photo-list li:nth-child(2n+1), .page-sports-photo .view-content .photo-list li:nth-child(2n+1), .view-programme-content-live-tv .view-content .photo-list li:nth-child(2n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-so-sorry .view-content .photo-list li:nth-child(3n+1), .view-programme-content .view-content .photo-list li:nth-child(3n+1), .page-sports-video .view-content .photo-list li:nth-child(3n+1), .page-sports-photo .view-content .photo-list li:nth-child(3n+1), .view-programme-content-live-tv .view-content .photo-list li:nth-child(3n+1) {
     clear: left;
   }
 
   /*CSS End Photo landing page*/
+  #block-views-video-landing-header-block .video-header-right .top-section {
+    width: 100%;
+    float: none;
+  }
+
+  #block-views-video-landing-header-block .video-header-right .social-likes ul li a {
+    padding: 5px 10px;
+  }
+
+  #block-views-video-landing-header-block .video-header-right .ads {
+    margin: 10px 0;
+    float: none;
+  }
 }
 @media only screen and (max-width: 480px) {
   #block-views-anchor-landing-page-block .anchor-left {
@@ -2014,9 +2072,22 @@
   }
 
   /*static page css end*/
+  /*CSS Starts Photo landing page*/
+  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li, .view-programme-content-live-tv .view-content .photo-list li {
+    width: 50%;
+    max-width: none;
+  }
+  .view-video-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-so-sorry .view-content .photo-list li:nth-child(3n+1), .view-programme-content .view-content .photo-list li:nth-child(3n+1), .page-sports-video .view-content .photo-list li:nth-child(3n+1), .page-sports-photo .view-content .photo-list li:nth-child(3n+1), .view-programme-content-live-tv .view-content .photo-list li:nth-child(3n+1) {
+    clear: none;
+  }
+  .view-video-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-so-sorry .view-content .photo-list li:nth-child(2n+1), .view-programme-content .view-content .photo-list li:nth-child(2n+1), .page-sports-video .view-content .photo-list li:nth-child(2n+1), .page-sports-photo .view-content .photo-list li:nth-child(2n+1), .view-programme-content-live-tv .view-content .photo-list li:nth-child(2n+1) {
+    clear: left;
+  }
+
+  /*CSS End Photo landing page*/
 }
 /*Start header CSS Desktop version*/
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 769px) {
   .list-none {
     list-style-type: none;
   }
@@ -2286,14 +2357,14 @@
     font-size: 15px;
   }
 }
-@media only screen and (min-width: 768px) and (min-width: 768px) {
+@media only screen and (min-width: 769px) and (min-width: 768px) {
   .view-front-end-global-search .view-content .social-share ul li a {
     width: 23px;
     height: 23px;
     line-height: 25px;
   }
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 769px) {
   .view-front-end-global-search .view-content .social-share ul li a.share {
     color: #d0d0d0;
   }

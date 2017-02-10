@@ -3883,44 +3883,8 @@ h1.category-heading{
             @include calculate-width(1);
             padding: 0px;
             border:1px solid #242424;
-        }
-        .social-likes{
-            @include float(right);
-            @include calculate-width(1);
-            background: #1a1a1a;   
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(170, 169, 169, 0.31);            
-            ul{
-                display: inline-flex;
-                li{                    
-                    a{
-                        display: block;                        
-                        color: #aaa9a9;
-                        font-family:$itg-roboto;
-                        font-size:12px;
-                        padding:10px;
-                        i{
-                            font-size: 18px;
-                            vertical-align: middle;                                                     
-                        }
-                        span{
-                            display: none;
-                        }
-                        &:hover{
-                            background: #363636;
-                            color: $white-color;
-                        }
-                    }
-                    .flag-throbber{
-                        display: none;
-                    }                                        
-                }
-            }
-        }
-        .iframe-video{
-            padding-bottom: 69%;
-        }
-        
+        }         
+        @include video-detail-page-sociallike;
         .slick-slider{
             padding: 10px;
             background: #000;
@@ -4027,6 +3991,7 @@ h1.category-heading{
     .video-header-right{
         position: relative; 
         padding-bottom:15px;
+        @include video-detail-page-sociallike;
         p{
             &:first-child{
                 margin-top: 15px;
@@ -4045,6 +4010,9 @@ h1.category-heading{
             margin: 40px 20px 0;
             position: absolute;
             bottom: 0;
+        }
+        .video-slider-description{
+            @include clearfix;
         }
     }    
 
@@ -9906,6 +9874,9 @@ h1.about-us-heading{
     }
     #cboxTitle{
         display: none !important;
+    }
+    .region-top{
+        background: #171717;
     }
 }
 /*css end story page submit story */
