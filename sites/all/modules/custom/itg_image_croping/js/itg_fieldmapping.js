@@ -244,6 +244,7 @@
             success: function(data) {
 
                 var getbame = jQuery('#btn_name').val();
+                var getis_custom_form = jQuery('#is_custom_form').val();
                 var original_img_id = jQuery('#orig_image_fiedlid').val();
                 var exist_original_id = parent.jQuery('#original_image_fids').val();
                 var is_solr = jQuery('#is_solr').val();
@@ -259,13 +260,13 @@
                 parent.jQuery('#')
                 if (jQuery('#ckeditor_yes').val() == 1)
                 {
-                    if(jQuery('.is_synd').is(':checked')) {
+                    if (jQuery('.is_synd').is(':checked')) {
                         var synd_class = "data-syndication='yes'";
                     } else {
                         synd_class = "data-syndication='no'";
                     }
                     var imagename = jQuery('#imcurl').val();
-                    var getimagename = '<img '+synd_class+' src="' + imagename + '"  alt="" />';
+                    var getimagename = '<img ' + synd_class + ' src="' + imagename + '"  alt="" />';
                     parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text').val(getimagename);
 //
 //                    parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(0)').val(jQuery('#imcurl').val());
@@ -280,6 +281,13 @@
                         var newbname = getbame;
                         var replaced = newbname.substring(newbname.indexOf("[") + 1);
                         replaced = getvalue[1] + '[' + replaced;
+                        var field_name = jQuery('#field_name').val();
+
+                        if (getis_custom_form == 1) {
+                            parent.jQuery('[name="' + field_name + '[fid]"]').val(image_fiedlid);
+                            parent.jQuery('.div_' + field_name).hide();
+                            parent.jQuery("body").find("input[name='" + getbame).trigger('mousedown');
+                        }
                         parent.jQuery('[name="' + replaced + '[fid]"]').val(getvalue[0]);
                         parent.jQuery("body").find("input[name='" + replaced + "[filefield_itg_image_repository][button]").trigger('mousedown');
                         parent.jQuery('[name="' + getbame + '[fid]"]').val(image_fiedlid);
@@ -325,7 +333,13 @@
                                     captionid = captionid.replace('[field_images][und][0]', "");
                                     var captionid1 = getbame + '[field_credit][und][0][value]';
                                     captionid1 = captionid1.replace('[field_images][und][0]', "");
+                                    
+                                     var syndi = getbame + '[field_image_syndication][und][yes]';
+                                    syndi = syndi.replace('[field_images][und][0]', "");
                                     //  parent.jQuery('[name="' + captionid + '"]').val(image_title);
+                                     if (jQuery('.is_synd').is(':checked')) {
+                                       parent.jQuery('[name="' + syndi + '"]').prop('checked',true);
+                                     }
                                     parent.jQuery('[name="' + captionid1 + '"]').val(credit);
                                     hideloader();
                                     parent.jQuery.colorbox.close();
