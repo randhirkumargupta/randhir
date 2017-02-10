@@ -3883,7 +3883,10 @@ h1.category-heading{
             @include calculate-width(1);
             padding: 0px;
             border:1px solid #242424;
-        }         
+        }
+        .iframe-video{
+            padding-bottom: 59.9%;
+        }
         @include video-detail-page-sociallike;
         .slick-slider{
             padding: 10px;
@@ -5084,7 +5087,7 @@ section.sidebar{
         .col-md-4{
             margin-bottom:20px;
             text-align: center;          
-            &:nth-child(2n+1){
+            &:nth-child(3n+1){
                 clear: left;
             }
         }

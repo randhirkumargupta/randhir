@@ -390,6 +390,7 @@
     .top-section{
         float: left;
         width: 55%;
+        margin-top: 15px;
     }
     .ads{
         margin: 0;
@@ -397,9 +398,15 @@
         margin-top: 15px;
     }
 }
-#block-views-video-landing-header-block .video-header-left .social-likes{
+/*#block-views-video-landing-header-block .video-header-left .social-likes{
     height: auto !important;
+}*/
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
+        height: 223px;
 }
+
+
+
 
 }   
 @media only screen and (max-width:991px){
@@ -1488,7 +1495,25 @@
 #block-views-video-landing-header-block .video-header-right .social-likes ul li a{
     padding: 10px 20px;
 }
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
+        height: 261px;
+}
 
+/*sosory page css start*/
+#block-views-so-sorry-the-remix{
+display: inline-block;
+width: 49%;
+vertical-align: top;
+padding-right: 10px;
+}
+#block-itg-widget-so-sorry-front-politoons{
+    display: inline-block;
+    width: 50%;
+    vertical-align: top;
+    margin-top: 50px;
+    padding-left: 20px;
+}
+/*sosory page css end*/
 
 
 }
@@ -2084,6 +2109,14 @@ footer .footer-top .footer-social-link{
         margin: 10px 0;    
         float:none;
     }
+    
+/*    sosory css start */
+#block-views-so-sorry-the-remix, #block-itg-widget-so-sorry-front-politoons{
+    width: 100%;
+    padding: 0;
+    display: block;
+}
+/*    sosory css end */
     
 }
 
@@ -2696,15 +2729,7 @@ footer .footer-top .footer-social-link{
         .politoons-sosorry {
             h2{
                 @include font(26px,null,300);   
-            }
-            .col-md-4{
-                &:nth-child(3n+1){
-                    clear: left;
-                }   
-                &:nth-child(2n+1){
-                    clear: none;
-                }
-            }
+            }            
         }
     }
     /*CSS End So sorry page*/
@@ -2758,8 +2783,7 @@ footer .footer-top .footer-social-link{
             }
             .social-likes  {
                 @include float(left);
-                width: 15.5%;
-                height:474px;
+                width: 15.5%;                
                 overflow: hidden;
                 padding: 0;
                 border-bottom: none;

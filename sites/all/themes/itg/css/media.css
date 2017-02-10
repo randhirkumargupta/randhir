@@ -391,6 +391,7 @@
   #block-views-video-landing-header-block .video-header-right .top-section {
     float: left;
     width: 55%;
+    margin-top: 15px;
   }
   #block-views-video-landing-header-block .video-header-right .ads {
     margin: 0;
@@ -398,8 +399,11 @@
     margin-top: 15px;
   }
 
-  #block-views-video-landing-header-block .video-header-left .social-likes {
-    height: auto !important;
+  /*#block-views-video-landing-header-block .video-header-left .social-likes{
+      height: auto !important;
+  }*/
+  article.node-mega-review-critic .movie-review-wrapper .movie-review-text {
+    height: 223px;
   }
 }
 @media only screen and (max-width: 991px) {
@@ -1442,6 +1446,28 @@
   #block-views-video-landing-header-block .video-header-right .social-likes ul li a {
     padding: 10px 20px;
   }
+
+  article.node-mega-review-critic .movie-review-wrapper .movie-review-text {
+    height: 261px;
+  }
+
+  /*sosory page css start*/
+  #block-views-so-sorry-the-remix {
+    display: inline-block;
+    width: 49%;
+    vertical-align: top;
+    padding-right: 10px;
+  }
+
+  #block-itg-widget-so-sorry-front-politoons {
+    display: inline-block;
+    width: 50%;
+    vertical-align: top;
+    margin-top: 50px;
+    padding-left: 20px;
+  }
+
+  /*sosory page css end*/
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/
@@ -1998,6 +2024,15 @@
     margin: 10px 0;
     float: none;
   }
+
+  /*    sosory css start */
+  #block-views-so-sorry-the-remix, #block-itg-widget-so-sorry-front-politoons {
+    width: 100%;
+    padding: 0;
+    display: block;
+  }
+
+  /*    sosory css end */
 }
 @media only screen and (max-width: 480px) {
   #block-views-anchor-landing-page-block .anchor-left {
@@ -2644,12 +2679,6 @@
     font-size: 1.625rem;
     font-weight: 300;
   }
-  #block-itg-widget-so-sorry-front-politoons .politoons-sosorry .col-md-4:nth-child(3n+1) {
-    clear: left;
-  }
-  #block-itg-widget-so-sorry-front-politoons .politoons-sosorry .col-md-4:nth-child(2n+1) {
-    clear: none;
-  }
 
   /*CSS End So sorry page*/
   /*CSS Start RHS add block*/
@@ -2689,7 +2718,6 @@
   #block-views-video-landing-header-block .video-header-left .social-likes {
     float: left;
     width: 15.5%;
-    height: 474px;
     overflow: hidden;
     padding: 0;
     border-bottom: none;

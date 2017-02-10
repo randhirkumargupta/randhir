@@ -5138,8 +5138,11 @@ h1.category-heading {
   padding: 0px;
   border: 1px solid #242424;
 }
+#block-views-video-landing-header-block .video-header-left .iframe-video {
+  padding-bottom: 59.9%;
+}
 #block-views-video-landing-header-block .video-header-left .social-likes {
-  float: right;
+  float: none;
   width: 100%;
   background: #1a1a1a;
   padding: 10px 0;
@@ -5270,7 +5273,7 @@ h1.category-heading {
   padding-bottom: 15px;
 }
 #block-views-video-landing-header-block .video-header-right .social-likes {
-  float: right;
+  float: none;
   width: 100%;
   background: #1a1a1a;
   padding: 10px 0;
@@ -6772,7 +6775,7 @@ section.sidebar .block-itg-ads {
   margin-bottom: 20px;
   text-align: center;
 }
-#block-itg-widget-so-sorry-front-politoons .politoons-sosorry .col-md-4:nth-child(2n+1) {
+#block-itg-widget-so-sorry-front-politoons .politoons-sosorry .col-md-4:nth-child(3n+1) {
   clear: left;
 }
 
