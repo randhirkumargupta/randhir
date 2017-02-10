@@ -31,6 +31,35 @@ function itg_dbmigrate_migrate_api() {
 //  $ignore_mapping = new MigrateFieldMapping('migrate_example_beer_styles:ignore_case', NULL);
 //  $ignore_mapping->defaultValue(1);
 
+  $disable_hooks = array(
+    'entity_insert' => array(
+      'metatag',
+      'og',
+      'registration',
+    ),
+    'entity_presave' => array(
+      'pathauto',
+    ),
+    'entity_update' => array(
+      'metatag',
+      'og',
+      'registration',
+    ),
+    
+    'taxonomy_term_insert' => array(
+      'metatag',
+      'pathauto',
+      'shs',
+      'taxonomy_menu',
+    ),
+    'taxonomy_term_update' => array(
+      'pathauto',
+      'shs',
+      'taxonomy_menu',
+    ),
+
+  );
+  
   $api = array(
     // Required - tells the Migrate module that you are implementing version 2
     // of the Migrate API.
@@ -60,6 +89,7 @@ function itg_dbmigrate_migrate_api() {
       ),
       'itg_tags' => array(
         'title' => t('Itg tags Imports'),
+        'disable_hooks' => $disable_hooks,
       ),
       'itg_photogallery' => array(
         'title' => t('Itg Photogallery Imports'),

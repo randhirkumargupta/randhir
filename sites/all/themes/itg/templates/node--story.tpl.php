@@ -47,7 +47,12 @@ if (!empty($content)):
   if (!empty($byline_id)) {
     $reporter_node = node_load($byline_id);
   }
-  ?>
+  
+  if (function_exists('itg_get_front_activity_info'))
+  {
+    $opt = itg_get_front_activity_info($node->nid, $node->type, $user->uid, 'read_later', $status = '');
+  }
+?>
   <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle;
                 if ($node->field_story_type[LANGUAGE_NONE][0]['value'] == 'photo_story') {
                   echo ' photo-story-section';
@@ -57,14 +62,30 @@ if (!empty($content)):
           <?php //pr($node);   ?> 
           <div class="comment-mobile desktop-hide">
               <ul>
-                  <?php if ($user->uid > 0): ?>
-                    <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>
-                    <?php print '<li>' . $read_later . '</li>'; ?>                                         
-                  <?php else: ?>
-                    <?php if (function_exists('itg_sso_url')): ?>
-                      <?php print '<li>' . itg_sso_url('<i class="fa fa-bookmark"></i>', t('READ LATER')) . '</li>'; ?>
-                    <?php endif; ?>
-                  <?php endif; ?>
+                  <li class="later">
+                                          <?php
+                                          if ($user->uid > 0)
+                                          {
+                                           if (empty($opt['status']) || $opt['status'] == 0)
+                                            {
+                                              ?> 
+                                              <a title = "Read Later" href="javascript:void(0)" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
+                                            <?php }
+                                            else
+                                            { ?>
+                                              <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
+                                            <?php
+                                            }
+                                          }
+                                          else
+                                          {
+                                            if (function_exists(itg_sso_url))
+                                            {
+                                              print itg_sso_url('<i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span>', t('READ LATER'));
+                                            }
+                                          }
+                                          ?>
+                                      </li>
                   <li class="mail-to-author"><a title ="Mail to author" href="mailto:support@indiatoday.in"><i class="fa fa-envelope"></i><?php //print t('Mail to author'); ?></a></li>
                   <li><a href="#" title = "whatsapp"><i class="fa fa-whatsapp"></i></a></li>
                   <?php
@@ -186,19 +207,14 @@ if (!empty($content)):
                                 <?php } 
                                 if ($user->uid > 0)
                                           {
-                                            if (function_exists(itg_get_front_activity_info))
-                                            {
-                                              $opt = itg_get_front_activity_info($node->nid, $node->type, $user->uid, 'read_later', $status = '');
-                                            }
-                                            
                                             if (empty($opt['status']) || $opt['status'] == 0)
                                             {
                                               ?> 
-                                  <li><span> <a title = "Read Later" href="javascript:" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><?php print t('READ LATER'); ?></a><span class="flag-throbber">&nbsp;</span></span></li>
+                                  <li class="left-later"><span> <a title = "Read Later" href="javascript:void(0)" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><?php print t('READ LATER'); ?></a><span class="flag-throbber">&nbsp;</span></span></li>
                                             <?php }
                                             else
                                             { ?>
-                                  <li><span> <a title = "Read Later" href="javascript:" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><?php print t('READ LATER'); ?></a><span class="flag-throbber">&nbsp;</span></span></li>
+                                  <li><span> <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><?php print t('READ LATER'); ?></a><span class="flag-throbber">&nbsp;</span></span></li>
                                             <?php
                                             }
                                           }
@@ -288,23 +304,18 @@ if (!empty($content)):
                                   <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                                     <?php endif; ?>
 
-                                <li class="read-later">
+                                <li class="later">
                                           <?php
                                           if ($user->uid > 0)
                                           {
-                                            if (function_exists(itg_get_front_activity_info))
-                                            {
-                                              $opt = itg_get_front_activity_info($node->nid, $node->type, $user->uid, 'read_later', $status = '');
-                                            }
-                                            
                                             if (empty($opt['status']) || $opt['status'] == 0)
                                             {
                                               ?> 
-                                              <a title = "Read Later" href="javascript:" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
+                                              <a title = "Read Later" href="javascript:void(0)" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
                                             <?php }
                                             else
                                             { ?>
-                                              <a title = "Read Later" href="javascript:" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
+                                              <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
                                             <?php
                                             }
                                           }
@@ -331,10 +342,19 @@ if (!empty($content)):
     echo 'listicle-page';
   }
   ?>">
-                  <div class="story-associate-content">
-                      <div id="videogallery-iframe">
+                  <?php
+                  if(!empty($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'])) {
+                      $class = 'story-associate-content';
+                  }
+                  ?>
+                  <div class="<?php echo $class; ?>">
+                      <?php
+                  if(!empty($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'])) {?>
+                    <div id="videogallery-iframe">
                           <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading" />
                       </div>
+                  <?php }
+                  ?>                      
                       <?php
                       $clidk_class_slider = "";
                       $widget_data = '';
@@ -394,16 +414,18 @@ if (!empty($content)):
                                 
                       <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) { ?>
                                 <div class="photoby">
+                                  <?php if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
                                   <div class="story-img-rating">
                                     <?php 
                                     // added technology rating field value for story technology
-                                      if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) {
-                                        $tech_rating = $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'];
-                                        echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10';
-                                      } 
+                                      $tech_rating = $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'];
+                                      echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10'; 
                                     ?>
                                   </div>
+                                  <?php } ?>
+                                  <?php if (!empty($node->$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'])) { ?>
                                   <div class="photoby-text"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?></div>
+                                  <?php } ?>
                                 </div>
                       <?php } ?>     
                                
