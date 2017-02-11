@@ -130,8 +130,11 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                         print $newimageds;
                     }
                     ?>
-
-                    <div class="social-likes desktop-hide">
+                </div>
+                <?php //$row['field_story_expert_description'];?>
+                <div class="col-md-4 video-header-right">
+                    <div class="top-section">
+                     <div class="social-likes desktop-hide">
                         <ul>
                             <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span><?php
                                         if (function_exists(itg_flag_get_count)) {
@@ -163,11 +166,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
             <!--<li class="mhide"><a href="#" title="Submit Video"><i class="fa fa-share"></i> <span>Submit Video</span></a></li>-->
                         </ul>
                     </div>
-
-
-                </div>
-                <?php //$row['field_story_expert_description'];?>
-                <div class="col-md-4 video-header-right"><?php print $description_slider; ?>
+                    <?php print $description_slider; ?>
                     <p class="upload-date"><?php print $row['timestamp']; ?></p>
                     <div class="section-like-dislike">
                         <div id="btn-div">
@@ -180,6 +179,8 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                         </div>
 
                     </div>
+                    </div>
+                    
                     <div class="ads">
                          <?php
                           $block = block_load('itg_ads', ADS_RHS1);
@@ -206,6 +207,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
             slidesToShow: 1,
             slidesToScroll: 1,
             arrows: false,
+            variableWidth: true,
             fade: true,
             asNavFor: '.video-header-left .video-slider-images ul, .video-header-left .video'
         });
