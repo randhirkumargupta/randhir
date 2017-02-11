@@ -188,7 +188,7 @@ input[type="file"], input[type="submit"], input[type="text"]{
     }
     .slick-thumbs{
         .slick-thumbs-slider{
-            padding: 0 45px 10px;            
+            padding: 0 45px 5px;            
             li{
                 padding: 0 5px;
                 cursor: pointer;
@@ -296,8 +296,12 @@ input[type="file"], input[type="submit"], input[type="text"]{
         .photo-by{
             font-size: 14px;
             color: #626262;
+            font-family: roboto;
         }
-        
+        .photo-by-slider{
+            background: transparent;
+            padding: 5px 0;
+        }        
         .saved-photogallery{
             position: absolute;
             background: #fff;
@@ -430,7 +434,8 @@ input[type="file"], input[type="submit"], input[type="text"]{
             overflow: hidden;
             li{
                 padding: 15px 15px;
-                float: left;                                
+                float: left; 
+                max-width:200px;
                 .tile{
                     figure{                        
                         overflow: hidden;

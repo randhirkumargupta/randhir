@@ -8,8 +8,8 @@
     attach: function(context) {
 
       // Disable edit mode of date fields
-     $('input[name="field_ads_start_date[und][0][value][date]"]').keydown(false);
-     // $('input[name="field_ads_end_date[und][0][value][date]"]').keydown(false);
+      $('input[name="field_ads_start_date[und][0][value][date]"]').keydown(false);
+      // $('input[name="field_ads_end_date[und][0][value][date]"]').keydown(false);
       // Module code end
       $('#edit-field-ads-template-selection-und').change(function() {
 
@@ -44,6 +44,12 @@
       });
 
 
+      $('select[name="field_ads_placeholder[und]"]').html();
+
+      // This is for hiding some default values
+      jQuery('[name="field_ads_ex_headerscript_und_0_remove_button"]').hide();
+      jQuery('[name="field_ads_ex_body_start_und_0_remove_button"]').hide();
+      jQuery('[name="field_ads_ex_body_close_und_0_remove_button"]').hide();
 
     }
 
@@ -93,5 +99,8 @@ jQuery(document).ready(function() {
   catch (e) {
 
   }
+
+
+
 
 });

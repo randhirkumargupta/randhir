@@ -675,3 +675,17 @@ function itg_custom_lock_delete() {
   }
   exit;
 }
+
+/**
+ * Implements itg_apache_solr_get_site_hash();
+ */
+function itg_apache_solr_get_site_hash() {
+  $var_hash = explode(',', variable_get('apache_solr_sites_prefix_values'));
+  foreach($var_hash as $key => $value) {
+   $ex_hash = explode('|', $value);
+   $key = trim($ex_hash[0]);
+   $sitehash[$key] = trim($ex_hash[1]);
+  }
+  
+  return $sitehash;
+}

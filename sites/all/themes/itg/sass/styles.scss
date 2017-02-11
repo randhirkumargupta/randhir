@@ -3884,43 +3884,10 @@ h1.category-heading{
             padding: 0px;
             border:1px solid #242424;
         }
-        .social-likes{
-            @include float(right);
-            @include calculate-width(1);
-            background: #1a1a1a;   
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(170, 169, 169, 0.31);            
-            ul{
-                display: inline-flex;
-                li{                    
-                    a{
-                        display: block;                        
-                        color: #aaa9a9;
-                        font-family:$itg-roboto;
-                        font-size:12px;
-                        padding:10px;
-                        i{
-                            font-size: 18px;
-                            vertical-align: middle;                                                     
-                        }
-                        span{
-                            display: none;
-                        }
-                        &:hover{
-                            background: #363636;
-                            color: $white-color;
-                        }
-                    }
-                    .flag-throbber{
-                        display: none;
-                    }                                        
-                }
-            }
-        }
         .iframe-video{
-            padding-bottom: 69%;
+            padding-bottom: 59.9%;
         }
-        
+        @include video-detail-page-sociallike;
         .slick-slider{
             padding: 10px;
             background: #000;
@@ -4027,6 +3994,7 @@ h1.category-heading{
     .video-header-right{
         position: relative; 
         padding-bottom:15px;
+        @include video-detail-page-sociallike;
         p{
             &:first-child{
                 margin-top: 15px;
@@ -4045,6 +4013,9 @@ h1.category-heading{
             margin: 40px 20px 0;
             position: absolute;
             bottom: 0;
+        }
+        .video-slider-description{
+            @include clearfix;
         }
     }    
 
@@ -5116,7 +5087,7 @@ section.sidebar{
         .col-md-4{
             margin-bottom:20px;
             text-align: center;          
-            &:nth-child(2n+1){
+            &:nth-child(3n+1){
                 clear: left;
             }
         }
@@ -5761,6 +5732,9 @@ section.sidebar{
             &:nth-child(n+3){
                 margin-top: 30px;
             }
+            &:nth-child(2n+1){
+                clear:left;
+            }            
             span{
                 @include display-inline;
                 float: left;
@@ -5821,6 +5795,9 @@ section.sidebar{
         }
         .bottom-slider { 
             background: #171717;
+            ul{
+                list-style-type: none;
+            }
             li{                
                 background: #171717;
                 padding: 25px 10px;
@@ -9907,6 +9884,9 @@ h1.about-us-heading{
     #cboxTitle{
         display: none !important;
     }
+    .region-top{
+        background: #171717;
+    }
 }
 /*css end story page submit story */
 
@@ -10259,7 +10239,11 @@ span.smilies-title {
     height: auto;
     display: inline-block;
     vertical-align: middle;   
-    img{display: inline;}
+    img{
+        display: inline;
+        max-width: inherit;
+        width: auto;
+    }
 }
 
 /* css for story-photo-list starts here */

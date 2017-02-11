@@ -467,7 +467,7 @@ div.filefield-sources-list a.active {
 #views-form-most-read-widget-most-read-widget-contents .form-actions a,
 #views-form-highlights-widget-highlights-widget-conent .form-actions a,
 [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions a, [id*="views-form-photo-gallery-management-page"] .form-actions a, .cancel-image, .block-itg-layout-manager .layout-filter-btn .layout-reset, #itg-layout-manager-filter-form .layout-filter-btn .layout-reset, #block-itg-layout-manager-layout-button-block .layout-button .btn-cancel, [id*="itg-manage-budget"] #edit-budget-submit + a, .comment-view .publish-ugc-comments, #itg-user-log-api-form > div > div.user-log-filter-btn a, #itg-user-log-api-form-visited > div > div.user-log-filter-btn a {
+#views-form-photo-carousel-widget-video-carousel-list .form-actions a, [id*="views-form-photo-gallery-management-page"] .form-actions a, .cancel-image, .block-itg-layout-manager .layout-filter-btn .layout-reset, #itg-layout-manager-filter-form .layout-filter-btn .layout-reset, #block-itg-layout-manager-layout-button-block .layout-button .btn-cancel, [id*="itg-manage-budget"] #edit-budget-submit + a, .comment-view .publish-ugc-comments, #itg-user-log-api-form > div > div.user-log-filter-btn a, #itg-user-log-api-form-visited > div > div.user-log-filter-btn a, [id*="views-form-itg-custom-widget-page"] .form-actions a {
   border-radius: 1px;
   border: 1px solid #ee4d4d;
   background-color: #ee4d4d;
@@ -498,7 +498,7 @@ div.filefield-sources-list a.active {
 #views-form-most-read-widget-most-read-widget-contents .form-actions a:hover,
 #views-form-highlights-widget-highlights-widget-conent .form-actions a:hover,
 [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a:hover,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions a:hover, [id*="views-form-photo-gallery-management-page"] .form-actions a:hover, .cancel-image:hover, .block-itg-layout-manager .layout-filter-btn .layout-reset:hover, #itg-layout-manager-filter-form .layout-filter-btn .layout-reset:hover, #block-itg-layout-manager-layout-button-block .layout-button .btn-cancel:hover, [id*="itg-manage-budget"] #edit-budget-submit + a:hover, .comment-view .publish-ugc-comments:hover, #itg-user-log-api-form > div > div.user-log-filter-btn a:hover, #itg-user-log-api-form-visited > div > div.user-log-filter-btn a:hover {
+#views-form-photo-carousel-widget-video-carousel-list .form-actions a:hover, [id*="views-form-photo-gallery-management-page"] .form-actions a:hover, .cancel-image:hover, .block-itg-layout-manager .layout-filter-btn .layout-reset:hover, #itg-layout-manager-filter-form .layout-filter-btn .layout-reset:hover, #block-itg-layout-manager-layout-button-block .layout-button .btn-cancel:hover, [id*="itg-manage-budget"] #edit-budget-submit + a:hover, .comment-view .publish-ugc-comments:hover, #itg-user-log-api-form > div > div.user-log-filter-btn a:hover, #itg-user-log-api-form-visited > div > div.user-log-filter-btn a:hover, [id*="views-form-itg-custom-widget-page"] .form-actions a:hover {
   box-shadow: 0 0 2px #ee4d4d;
 }
 
@@ -10670,4 +10670,7 @@ span.file a {
 
 [id*="views-form-itg-custom-widget-page"] .form-type-textfield {
   padding: 0;
+}
+[id*="views-form-itg-custom-widget-page"] .form-actions {
+  margin-top: 20px;
 }
