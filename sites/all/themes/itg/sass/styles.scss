@@ -5732,6 +5732,9 @@ section.sidebar{
             &:nth-child(n+3){
                 margin-top: 30px;
             }
+            &:nth-child(2n+1){
+                clear:left;
+            }            
             span{
                 @include display-inline;
                 float: left;

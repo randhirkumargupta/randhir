@@ -405,10 +405,17 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
         height: 223px;
 }
 
-
+/*oscar page css start*/
+.oscar-layout-page .oscor-photo .col-md-6 .title h3{
+    padding: 10px;
+    font-size: 17px;
+}
+/*oscar page css end*/
 
 
 }   
+
+
 @media only screen and (max-width:991px){
     /*CSS start education page special*/
     .education-layout-page .itg-layout-672 .droppable, .education-layout-page .itg-layout-672 .droppable .auto-block-1, .education-layout-page .itg-layout-672 .droppable .auto-block-2{
@@ -499,6 +506,19 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
         }
     }
     /*CSS End Photo landing page*/
+    
+/*    oscar page css start*/
+.oscar-layout-page .oscar-news  {
+    .col-md-6:nth-child(3n+1){
+        clear: none;   
+    }    
+    .col-md-6:nth-child(n+4) {
+        margin-top: 0px;
+    }
+}
+
+
+/*    oscar page css end*/
 
 }
 
@@ -805,45 +825,20 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
                 padding: 0;
                 .title{                    
                     h3{
-                        min-height: 60px;
-                        white-space: pre-wrap;
+                        min-height: 60px;                        
                         font-size: 16px;
                         line-height: 22px;
                         padding: 10px;
+                        a{
+                            white-space: pre-wrap;
+                        }
                     }
                 }
                 &:nth-child(n+3){
                     margin-top: 0;
                 }
             }
-        }
-        .oscar-slider{
-            .bottom-slider{
-                padding-bottom:20px;
-                li{
-                    padding: 10px; 
-                    width:100% !important;
-                    height: auto;
-                    a.video-icon{
-                        @include float(left);
-                    }
-                    img{
-                        float: left;
-                        margin-right: 10px;
-                        width: 145px;
-                    }
-                    p{
-                        margin-top:0;
-                    }
-                }
-                i{
-                    color: #ccc;
-                    font-size: 25px;
-                    text-align: center;
-                    width: 100%;
-                }
-            }
-        }
+        }        
     }
 
     /*css end special event page for osscar*/
@@ -1519,6 +1514,28 @@ padding-right: 10px;
 }
 
 
+@media only screen and (max-width:767px){
+    .oscar-layout-page .oscar-news {
+        .col-md-6:nth-child(3n+1){
+            clear: left;   
+        }    
+        .col-md-6:nth-child(n+4) {
+            margin-top: 30px;
+        }
+    }
+    .oscar-layout-page{
+        .oscar-features{
+            .col-md-6{
+                &:nth-child(2n+1){
+                    clear:none;
+                }
+            }
+        }   
+    }    
+}
+
+
+
 @media only screen and (max-width:680px){ 
     /*CSS start video landing page*/
     #block-views-video-landing-header-block-1{
@@ -2057,6 +2074,37 @@ footer .footer-top .footer-social-link{
 } 
 /*css end custom form for video an photo*/
 
+/*oscar page css start*/
+.oscar-layout-page {
+ .oscar-slider{
+    .bottom-slider{
+        padding-bottom:20px;
+        li{
+            padding: 10px; 
+            width:100% !important;
+            height: auto;
+            a.video-icon{
+                @include float(left);
+            }
+            img{
+                float: left;
+                margin-right: 10px;
+                width: 145px;
+            }
+            p{
+                margin-top:0;
+            }
+        }
+        i{
+            color: #ccc;
+            font-size: 25px;
+            text-align: center;
+            width: 100%;
+        }
+    }
+}   
+}
+/*oscar page css end*/
 
 
 

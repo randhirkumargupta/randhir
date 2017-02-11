@@ -7462,6 +7462,9 @@ section.sidebar .block-itg-ads {
 .oscar-layout-page .oscar-features .col-md-6:nth-child(n+3) {
   margin-top: 30px;
 }
+.oscar-layout-page .oscar-features .col-md-6:nth-child(2n+1) {
+  clear: left;
+}
 .oscar-layout-page .oscar-features .col-md-6 span {
   display: inline-block;
   vertical-align: top;
