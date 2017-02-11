@@ -149,6 +149,11 @@ function itg_widgets_custom_variables() {
         '#size' => 20,
         '#maxlength' => 20,
     );
+    $form['city_manager_vid'] = array(
+        '#type' => 'textfield',
+        '#title' => t('City Management Vid'),
+        '#default_value' => variable_get('city_manager_vid'),
+    );
     return system_settings_form($form);
 }
 
