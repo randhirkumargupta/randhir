@@ -67,7 +67,6 @@ function feature_category_management_field_group_info() {
       1 => 'field_cm_select_template',
       2 => 'field_cm_select_template_type',
       3 => 'field_set_as_featured_cate',
-      4 => 'field_description',
     ),
     'format_type' => 'div',
     'format_settings' => array(
