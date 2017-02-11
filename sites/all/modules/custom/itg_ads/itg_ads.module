@@ -68,35 +68,60 @@ function itg_ads_block_info() {
  */
 function itg_ads_block_view($delta = '') {
   $block = array();
+  $current_path = current_path();
+  if (isset($current_path) && !empty($current_path)) {
+    $current_path_array = explode('/', $current_path);
+  }
   switch ($delta) {
 
     case 'ads_page_pusher_1x1':
-      $ad_script = get_itg_page_name('Page pusher 1x1');
-      $block['content'] = $ad_script;
+      $current_path_final = isset($current_path_array[0]) ? $current_path_array[0] : '';
+      if ($current_path_final == 'user' || $current_path_final == 'personalization') {
+        $block['content'] = '';
+      } else {
+        $ad_script = get_itg_page_name('Page pusher 1x1');
+        $block['content'] = $ad_script;
+      }
       break;
 
     // For Overlay 1x1
     case 'ads_overlay_1x1':
-      $ad_script = get_itg_page_name('Overlay 1x1');
-      $block['content'] = $ad_script;
+      $current_path_final = isset($current_path_array[0]) ? $current_path_array[0] : '';
+      if ($current_path_final == 'user' || $current_path_final == 'personalization') {
+        $block['content'] = '';
+      } else {
+        $ad_script = get_itg_page_name('Overlay 1x1');
+        $block['content'] = $ad_script;
+      }
       break;
 
     // For Super Banner (Top Nav) 728x90
     case 'ads_super_banner_top_nav_728x90':
-      $ad_script = get_itg_page_name('Super Banner (Top Nav) 728x90');
-      $block['content'] = $ad_script;
+      $current_path_final = isset($current_path_array[0]) ? $current_path_array[0] : '';
+      if ($current_path_final == 'user' || $current_path_final == 'personalization') {
+        $block['content'] = '';
+      } else {
+        $ad_script = get_itg_page_name('Super Banner (Top Nav) 728x90');
+        $block['content'] = $ad_script;
+      }
       break;
 
     // For Super Banner (Bottom nav) 728x90
     case 'ads_super_banner_bottomnav728x90':
-      $ad_script = get_itg_page_name('Super Banner (Bottom nav) 728x90');
-      $block['content'] = $ad_script;
-      break;
+      $current_path_final = isset($current_path_array[0]) ? $current_path_array[0] : '';
+      if ($current_path_final == 'user' || $current_path_final == 'personalization') {
+        $block['content'] = '';
+      } else {
+        $ad_script = get_itg_page_name('Super Banner (Bottom nav) 728x90');
+        $block['content'] = $ad_script;
+      }break;
 
     // Medium Rectangle-RHS1-300x250
     case 'ads_medium_rectangl_rhs1_300x250':
       $status = drupal_get_http_header("status");
-      if ($status == '404 Not Found' || $status == '403 Forbidden' || current_path() == 'user/login' || current_path() == 'user/registration' || current_path() == 'user') {
+
+      $current_path_final = isset($current_path_array[0]) ? $current_path_array[0] : '';
+      if ($status == '404 Not Found' || $status == '403 Forbidden' || current_path() == 'user/login' || current_path() == 'user/registration' || current_path() == 'user' || $current_path_final == 'user' || $current_path_final == 'personalization') {
         $block['content'] = '';
       } else {
         $ad_script = get_itg_page_name('Medium Rectangle-RHS1-300x250');
@@ -107,7 +132,8 @@ function itg_ads_block_view($delta = '') {
     // Medium Rectangle-RHS2-300x250
     case 'ads_medium_rectangl_rhs2_300x250':
       $status = drupal_get_http_header("status");
-      if ($status == '404 Not Found' || $status == '403 Forbidden' || current_path() == 'user/login' || current_path() == 'user/registration' || current_path() == 'user') {
+      $current_path_final = isset($current_path_array[0]) ? $current_path_array[0] : '';
+      if ($status == '404 Not Found' || $status == '403 Forbidden' || current_path() == 'user/login' || current_path() == 'user/registration' || current_path() == 'user' || $current_path_final == 'user' || $current_path_final == 'personalization') {
         $block['content'] = '';
       } else {
         $ad_script = get_itg_page_name('Medium Rectangle-RHS2-300x250');
@@ -780,6 +806,26 @@ function itg_ads_node_update($node) {
 }
 
 /*
+ * Implementation of hook_node_insert()
+ * Inserting ROS for default configuration
+ */
+
+function itg_ads_node_insert($node) {
+  if (isset($node->type) && !empty($node->type) && $node->type == 'ads_management' && $node->field_ads_template_selection['und'][0]['value'] == 'Rest') {
+    $default_ros_value_json = NULL;
+
+    foreach ($node->field_adds_code_holder[$node->language] as $chunks_data) {
+      $entity = entity_load('field_collection_item', array($chunks_data['value']))[$chunks_data['value']];
+      $default_ros_value[$entity->field_ads_placeholder['und'][0]['value']][] = array('device' => $entity->field_ads_device_selection['und'][0]['value'], 'code' => $entity->field_ads_ad_code['und'][0]['value']);
+    }
+    $default_ros_value['ros_date_range_filter']['field_ads_start_date'] = $node->field_ads_start_date[$node->language][0]['value'];
+    $default_ros_value['ros_date_range_filter']['field_ads_end_date'] = $node->field_ads_end_date[$node->language][0]['value'];
+    $default_ros_value_json = drupal_json_encode($default_ros_value);
+    variable_set('itg_india_ros_default_val', $default_ros_value_json);
+  }
+}
+
+/*
  * Getting ads code by using ad_value and device(device can be mobile and website)
  * @param string $ad_value
  * @param string $device
@@ -809,13 +855,15 @@ function get_header_body_start_end_code() {
   $arg = arg();  // Getting all url arguments
   $is_front_page = drupal_is_front_page(); // Checker whether user is on front page or not it returns the flag only
   $page_name = NULL;  // Defining the page name as null 
-
+  $show_external_flag = 0;
   if (drupal_is_front_page()) {
     $page_name = t('Home');
+    $show_external_flag = 1;
   } else if ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) {
     $taxonomy_array = taxonomy_get_parents_all($arg[2]);
     $terms = array_reverse($taxonomy_array);
     $page_name = $terms[0]->tid;
+    $show_external_flag = 1;
   } else if ($arg[0] == 'node' && is_numeric($arg[1])) {
     $node_object = menu_get_object();
     $tid = isset($node_object->field_primary_category[$node_object->language][0]['value']) ? $node_object->field_primary_category[$node_object->language][0]['value'] : NULL;
@@ -825,8 +873,11 @@ function get_header_body_start_end_code() {
       $terms = array_reverse($taxonomy_array);
       $page_name = $terms[0]->tid;
     }
+    $show_external_flag = 0;
+    
   } else {
     $page_name = t('Rest');
+    $show_external_flag = 0;
   }
 
   $templatedata = check_add_template_existance($page_name);
@@ -843,26 +894,75 @@ function get_header_body_start_end_code() {
 
     $ads_object = node_load($templatedata);
 
-    if (isset($ads_object->field_code_visibility_flag[$ads_object->language])) {
-      foreach ($ads_object->field_code_visibility_flag[$ads_object->language] as $ads_viaibility) {
+    // Code start for internal script 
 
-        if ($ads_viaibility['value'] == 'header') {
-          foreach ($ads_object->field_ads_headerscript[$ads_object->language] as $header) {
-            $adsheaderbody['header'][] = $header['value'];
+
+    foreach ($ads_object->field_ads_headerscript[$ads_object->language] as $header) {
+      $adsheaderbody['header'][] = $header['value'];
+    }
+
+
+    foreach ($ads_object->field_ads_body_start[$ads_object->language] as $bodystart) {
+      $adsheaderbody['body_start'][] = $bodystart['value'];
+    }
+
+
+
+    foreach ($ads_object->field_ads_body_close[$ads_object->language] as $body_close) {
+      $adsheaderbody['body_close'][] = $body_close['value'];
+    }
+
+
+    // Code ends for internal script 
+    // Code start for external script  
+    // Checking $show_external_flag and rendering data on the basis of its value
+
+    if ($show_external_flag == 1) {
+
+      foreach ($ads_object->field_code_visibility_flag[$ads_object->language] as $ads_viaibility) {
+        $ads_viaibility['ads_viaibility_flag_external'] = $ads_viaibility['value'];
+      }
+
+      foreach ($ads_object->field_ads_ex_headerscript[$ads_object->language] as $header) {
+        $adsheaderbody['ex_header'][] = $header['value'];
+      }
+
+      foreach ($ads_object->field_ads_ex_body_start[$ads_object->language] as $bodystart) {
+        $adsheaderbody['ex_body_start'][] = $bodystart['value'];
+      }
+
+      foreach ($ads_object->field_ads_ex_body_close[$ads_object->language] as $body_close) {
+        $adsheaderbody['ex_body_close'][] = $body_close['value'];
+      }
+    }
+
+    if ($show_external_flag == 0) {
+
+      if (isset($ads_object->field_code_visibility_flag[$ads_object->language])) {
+        foreach ($ads_object->field_code_visibility_flag[$ads_object->language] as $ads_viaibility) {
+
+          if ($ads_viaibility['value'] == 'header') {
+            foreach ($ads_object->field_ads_ex_headerscript[$ads_object->language] as $header) {
+              $adsheaderbody['ex_header'][] = $header['value'];
+            }
           }
-        }
-        if ($ads_viaibility['value'] == 'body_start') {
-          foreach ($ads_object->field_ads_body_start[$ads_object->language] as $bodystart) {
-            $adsheaderbody['body_start'][] = $bodystart['value'];
+
+          if ($ads_viaibility['value'] == 'body_start') {
+            foreach ($ads_object->field_ads_ex_body_start[$ads_object->language] as $bodystart) {
+              $adsheaderbody['ex_body_start'][] = $bodystart['value'];
+            }
           }
-        }
-        if ($ads_viaibility['value'] == 'body_close') {
-          foreach ($ads_object->field_ads_body_close[$ads_object->language] as $body_close) {
-            $adsheaderbody['body_close'][] = $body_close['value'];
+
+          if ($ads_viaibility['value'] == 'body_close') {
+            foreach ($ads_object->field_ads_ex_body_close[$ads_object->language] as $body_close) {
+              $adsheaderbody['ex_body_close'][] = $body_close['value'];
+            }
           }
         }
       }
     }
+
+    // Code end for external script    
   }
 
   return $adsheaderbody;
