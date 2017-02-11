@@ -85,7 +85,7 @@ function ads_features_field_default_field_bases() {
   // Exported field_base: 'field_ads_body_close'.
   $field_bases['field_ads_body_close'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_ads_body_close',
@@ -107,7 +107,7 @@ function ads_features_field_default_field_bases() {
   // Exported field_base: 'field_ads_body_start'.
   $field_bases['field_ads_body_start'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_ads_body_start',
@@ -187,6 +187,72 @@ function ads_features_field_default_field_bases() {
     'type' => 'datetime',
   );
 
+  // Exported field_base: 'field_ads_ex_body_close'.
+  $field_bases['field_ads_ex_body_close'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_ads_ex_body_close',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
+  // Exported field_base: 'field_ads_ex_body_start'.
+  $field_bases['field_ads_ex_body_start'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_ads_ex_body_start',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
+  // Exported field_base: 'field_ads_ex_headerscript'.
+  $field_bases['field_ads_ex_headerscript'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_ads_ex_headerscript',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
   // Exported field_base: 'field_ads_header_script'.
   $field_bases['field_ads_header_script'] = array(
     'active' => 1,
@@ -212,7 +278,7 @@ function ads_features_field_default_field_bases() {
   // Exported field_base: 'field_ads_headerscript'.
   $field_bases['field_ads_headerscript'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_ads_headerscript',
