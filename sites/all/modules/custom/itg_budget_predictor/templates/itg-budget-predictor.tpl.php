@@ -71,7 +71,7 @@ $user_id = $data['user_id'];
                   if ($budget_message_flag) {
                      print '<p class="success">'.$budget_message.'</p>';
                      if($admin_user) { ?>
-                       <button class="btn btn-save" type="button" onclick="reset_budget(<?php print $section_id; ?>)"><?php print t('Reset'); ?></button>
+                      <div class="cheaper-deaper-action"><button class="btn-reset" type="button" onclick="reset_budget(<?php print $section_id; ?>)"><?php print t('Reset'); ?></button></div>
                      <?php }
                   }
                   elseif ($budget_message_front_flag) {
@@ -91,9 +91,9 @@ $user_id = $data['user_id'];
 
               <?php if (empty($file_name) && empty($budget_message_flag)) { ?>
                 <?php if(empty($user_id)) { ?>
-                  <button class="btn btn-save" type="button" onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')"><?php print t('Submit'); ?></button>
+                      <div class="cheaper-deaper-action"><button class="btn-submit" type="button" onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')"><?php print t('Submit'); ?></button></div>
                 <?php } else { ?>
-                  <button class="btn btn-save" type="button" onclick="captureCurrentDiv(<?php print $section_id; ?>)"><?php print t('Submit'); ?></button>
+                      <div class="cheaper-deaper-action"><button class="btn-submit" type="button" onclick="captureCurrentDiv(<?php print $section_id; ?>)"><?php print t('Submit'); ?></button></div>
                 <?php } ?>
 
                 <?php
