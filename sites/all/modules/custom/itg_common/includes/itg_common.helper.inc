@@ -98,6 +98,7 @@ define('EXTRA_SECTION_CARDS', 21);
 define('SECTION_TAB', 20);
 
 define('CATEGORY_MANAGMENT', variable_get('category_manager_vid'));
+define('CITY_MANAGMENT', variable_get('city_manager_vid'));
 define('NEWSLETTER_EDUCATION_TID', variable_get('newsletter_education_tid'));
 define('PARENT_SSO', 'dev.indiatodayonline.in');
 define('FRONT_URL', 'http://itgd-mum-lb-dev-frontend-app-1144451114.ap-south-1.elb.amazonaws.com');
