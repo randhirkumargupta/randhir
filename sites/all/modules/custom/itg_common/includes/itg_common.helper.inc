@@ -97,7 +97,7 @@ define('FRONT_THEME_NAME', 'itg');
 define('EXTRA_SECTION_CARDS', 21);
 define('SECTION_TAB', 20);
 
-define('CATEGORY_MANAGMENT', variable_get('category_manager_vid'));
+define('CATEGORY_MANAGMENT', 4);
 define('NEWSLETTER_EDUCATION_TID', variable_get('newsletter_education_tid'));
 
 define('PARENT_SSO', 'dev.indiatodayonline.in');

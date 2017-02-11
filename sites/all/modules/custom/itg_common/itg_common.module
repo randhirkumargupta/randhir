@@ -54,7 +54,12 @@ function itg_common_menu() {
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
-
+  
+  //code for preview_changes button remove
+  if (!empty($form['actions']['preview_changes'])) {
+    unset($form['actions']['preview_changes']);
+  }
+  
   if (arg(0) == 'user' && empty($user->uid)) {
     drupal_add_js('jQuery(document).ready(function() {
                           jQuery("#skip-link").hide();                                      
