@@ -82,7 +82,10 @@ class ItgUserMigration extends XMLMigration {
   public function prepareRow($row) {
     // manage parent id
     if (isset($row->xml->usertype) && !empty($row->xml->usertype)) {
-      $row->xml->usertype = 12;
+      $row->xml->usertype = 6;
+    }
+    if(empty($row->xml->lastvisitDate)){
+      $row->xml->lastvisitDate = 0;
     }
   }
 
