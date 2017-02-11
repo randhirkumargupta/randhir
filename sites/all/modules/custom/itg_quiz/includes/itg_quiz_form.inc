@@ -125,9 +125,20 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
       foreach($question_detail[$question_arr['value']]->field_quiz_options_answer[LANGUAGE_NONE] as $ans_option) {
         $ans_option_arr = entity_load('field_collection_item', array($ans_option['value']));
         
+        // Prepare array of correct answers
+        $option_class = 'wrong-answer';
+        if(!empty($ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE])) {
+              foreach ($ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE] as $currect_ans) {
+                if ($currect_ans['value'] == 'Yes') {
+                  $option_class = 'right-answer';
+                  $correct_ans_op[$num][] = $ans_option['value'];
+                }
+              }
+         }
+        
         // Prepare array of answer options
         foreach ($ans_option_arr[$ans_option['value']]->field_quiz_answer_text[LANGUAGE_NONE] as $final_ans_op) {
-           $all_ans_options[$num][$ans_option['value'] . '-' . $final_ans_op['value']] = $final_ans_op['value'];
+           $all_ans_options[$num][$ans_option['value'] . '-' . $final_ans_op['value']] = "<span class='".$option_class."'>".$final_ans_op['value'].'</span>';
          }
 
          // Photo options
@@ -148,15 +159,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
                </video></div>';
            }
          }
-
-        // Prepare array of correct answers
-        if(!empty($ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE])) {
-          foreach ($ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE] as $currect_ans) {
-            if ($currect_ans['value'] == 'Yes') {
-              $correct_ans_op[$num][] = $ans_option['value'];
-            }
-          }
-        }
+        
       }
 
       //Media information
@@ -231,7 +234,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
 
       // Answer Section
       
-      if($node->field_quiz_immediate_result[LANGUAGE_NONE][0]['value'] == 'qwr' && $fc->field_quiz_answer_type[LANGUAGE_NONE][0]['value'] == 'multiple_correct') {
+           if($node->field_quiz_immediate_result[LANGUAGE_NONE][0]['value'] == 'qwr' && $fc->field_quiz_answer_type[LANGUAGE_NONE][0]['value'] == 'multiple_correct') {
               $form['answer' . $num] = array(
 		  '#type' => 'markup',
 		  '#prefix' => '<div id="answer-container-'.$num.'" class="answer-container">',
@@ -244,7 +247,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
 		  '#suffix' => '<div id="answer-response-'.$question_arr['value'].'" class="answer-container-actual"></div>',
 	      );
       }
-
+ 
       if ($answer_option == 'Photo' || $answer_option == 'Video') {
           $form['answer_option' . $num] = array(
               '#prefix' => '<div class="quiz-media-container">' . $all_ans_options_media . '</div>',
@@ -258,10 +261,13 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
               '#title' => t(''),
               '#type' => $answer_type,
               '#options' => $all_ans_options[$num],
-              '#suffix' => '</div>',
+              '#suffix' => '<span class="sss"></span></div>',
               //'#suffix' => '</div><div id=answer_option' . $num.'><a href="javascript:void(0)" class="associate-content-block" data-widget="echo $associate_type;-echo $associate_id;">click here</a></div>',
           );
       }
+      
+      
+
       
       $form['correct_answer' . $num] = array(
             '#type' => 'hidden',
