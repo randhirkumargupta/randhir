@@ -222,7 +222,7 @@ function itg_image_croping_getimagetotag() {
 function itg_image_croping_imagetagedit() {
     $image_id = $_POST['fid'];
     $file = file_load($image_id);
-    print theme('image_taggingedit', array('data' => $file,
+    return theme('image_taggingedit', array('data' => $file,
         'field_name' => $_POST['field_name']
     ));
 }

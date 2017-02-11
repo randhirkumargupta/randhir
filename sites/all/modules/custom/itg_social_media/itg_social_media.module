@@ -118,6 +118,41 @@ function itg_social_media_menu() {
     return $items;
 }
 
+/**
+ * This function use for entry user on social media lock table 
+ */
+function itg_social_media_enter_in_lock($nid) {
+    global $user;
+    $query = db_delete('itg_social_media_node_lock');
+    $query->condition('uid', $user->uid);
+    $query->condition('nid', $nid)->execute();
+    ;
+    $fieldsave = array(
+        'nid' => $nid,
+        'uid' => $user->uid,
+        'lock_time' => date('Y-m-d H:i:s'),
+    );
+    $itg_query = db_insert('itg_social_media_node_lock');
+    $itg_query->fields($fieldsave)
+            ->execute();
+}
+
+/**
+ * This function use for entry user on social media lock table 
+ */
+function itg_social_media_check_node_exist_lock($nid) {
+    $expire_stamp = date('Y-m-d H:i:s', strtotime("-15 min"));
+    $query = db_select('itg_social_media_node_lock', 'isml')
+            ->fields('isml')
+            ->condition("isml.lock_time", $expire_stamp, ">=")
+            ->condition('nid', $nid, '=');
+    $result = $query->execute()->fetchall();
+    return $result;
+}
+
+/**
+ * This fucntion use for store svg data to session
+ */
 function itg_social_media_set_svg_in_session() {
 
     $_SESSION['svg_data'] = $_GET['svg_data'];

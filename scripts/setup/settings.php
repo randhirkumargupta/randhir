@@ -627,3 +627,5 @@ $local_settings = dirname(__FILE__) . '/local.settings.php';
 if (file_exists($local_settings)) {
   include $local_settings;
 }
+
+$conf['image_allow_insecure_derivatives'] = TRUE;
