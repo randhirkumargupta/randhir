@@ -234,11 +234,7 @@ function features_for_story_field_default_field_instances() {
   // 'field_collection_item-field_story_listicle-field_listicle_color'.
   $field_instances['field_collection_item-field_story_listicle-field_listicle_color'] = array(
     'bundle' => 'field_story_listicle',
-    'default_value' => array(
-      0 => array(
-        'value' => '#060606',
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => 'Please Provide Value like :  #060606',
     'display' => array(
