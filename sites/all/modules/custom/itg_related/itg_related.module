@@ -152,8 +152,7 @@ function itg_related_views_pre_render(&$view) {
       if ($related_result->bs_status == '1') {
         $related_result->bs_status = 'Published';
       }
-      
-      
+     
       $key = $related_result->hash;
       $related_result->site = $hash[$key];
 
