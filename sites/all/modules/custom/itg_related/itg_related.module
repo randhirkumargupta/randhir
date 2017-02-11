@@ -65,7 +65,12 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
 
 
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'related_content_new') {
-
+    
+   if (function_exists('itg_apache_solr_get_site_hash'))
+    {
+      $hash = itg_apache_solr_get_site_hash();
+    }
+    
     $form['keyword']['#attributes'] = array('placeholder' => array(t('Title / Kicker / Tag ')));
 
     $bundle_name = array('story' => 'Story', 'blog' => 'Blog', 'photogallery' => 'Photogallery', 'videogallery' => 'Videogallery', 'podcast' => 'Podcast', 'breaking_news' => 'Live Blog');
@@ -74,8 +79,6 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
     $form['bundle']['#size'] = 5;
     $form['bundle']['#multiple'] = TRUE;
 
-    //'iibckc' => 'Dev'
-    $hash = array('5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'e49it8' => 'Stage Server');
     $form['hash']['#type'] = 'select';
     $form['hash']['#options'] = $hash;
     $form['hash']['#size'] = 5;
@@ -139,24 +142,21 @@ function itg_related_views_pre_render(&$view) {
     $sname = '<span class="sname">'.$titlename. $_GET['sname'] . '&nbsp;</span>';
     $view->attachment_before = $sname;
     }
-
+    // get solr site hash
+    if (function_exists('itg_apache_solr_get_site_hash'))
+    {
+      $hash = itg_apache_solr_get_site_hash();
+    }
+    
     foreach ($view->result as $related_result) {
       if ($related_result->bs_status == '1') {
         $related_result->bs_status = 'Published';
       }
+      
+      
+      $key = $related_result->hash;
+      $related_result->site = $hash[$key];
 
-      if ($related_result->hash == '5fyeg7') {
-        $related_result->site = 'DEV';
-      }
-      elseif ($related_result->hash == '2e1u4m') {
-        $related_result->site = 'QA';
-      }
-      elseif ($related_result->hash == 'e49it8') {
-        $related_result->site = 'STAGE';
-      }
-//      $splittedsite = explode("/", $related_result->site);
-//      $explode_site = explode(".", $splittedsite[2]);
-//      $related_result->site = strtoupper($explode_site[0]);
       $related_result->sm_vid_Tags = implode(', ', $related_result->sm_vid_Tags);
       $related_result->sm_vid_Category_Management = implode(', ', $related_result->sm_vid_Category_Management);
     }
