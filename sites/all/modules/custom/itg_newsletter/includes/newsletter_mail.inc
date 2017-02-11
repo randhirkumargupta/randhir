@@ -199,7 +199,7 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
           <table cellspacing="0" cellpadding="0" style="width: 100%;">';
   if ($news_content == 'section') {
 
-    $story_nodes = itg_newsletter_get_section_stories($section, $totaltime, $previoustime);
+    $story_nodes = itg_newsletter_get_section_stories($section, $crontime, $previoustime);
   }
   else {
     $story_nodes = itg_newsletter_get_top_stories();
