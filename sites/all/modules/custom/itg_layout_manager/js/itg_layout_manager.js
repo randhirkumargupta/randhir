@@ -485,6 +485,29 @@
                 }
             });
             
+            // for html widgets
+            $('#content_widget_submit').click(function() {
+                var base_url = settings.itg_story.settings.base_url;
+                // html widget value
+                var content_title = $('#edit-custom-content-title').val();                
+
+                if (html_title) {
+                    $.ajax({
+                        url: base_url + "/custom-content-widgets",
+                        method: 'post',
+                        data: {content_title: content_title},
+                        beforeSend: function() {
+                           // $('#section_widgets_list').html('<img class="widget-loader" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                        },
+                        success: function(data) {
+                            // display category list in block
+                           $('#templates-widgets-custom-content').html(data);
+                           draggable_widgets();
+                        }
+                    });
+                }
+            });
+            
              // for highlights widgets
             $('#layout-highlights-submit').click(function() {                
                 var base_url = settings.itg_story.settings.base_url;
