@@ -274,8 +274,8 @@ function ads_features_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_ads_end_date',
-    'label' => 'End Date',
-    'required' => 1,
+    'label' => 'Expiry Date',
+    'required' => 0,
     'settings' => array(
       'default_value' => 'blank',
       'default_value2' => 'same',
@@ -601,7 +601,7 @@ function ads_features_field_default_field_instances() {
   t('Body start');
   t('Code visibility flag');
   t('Device Selection');
-  t('End Date');
+  t('Expiry Date');
   t('Header script	');
   t('Please enter script code with Javascript <b>script</b> tag.');
   t('Select template type');
