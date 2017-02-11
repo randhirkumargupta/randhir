@@ -2514,6 +2514,7 @@ footer .footer-top .footer-social-link{
                 h2{
                     @include font(22px,28px); 
                     margin-top:-5px;
+                    word-wrap: break-word;
                     a{
                         @include font(22px,28px); 
                     }

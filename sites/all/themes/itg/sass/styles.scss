@@ -5795,6 +5795,9 @@ section.sidebar{
         }
         .bottom-slider { 
             background: #171717;
+            ul{
+                list-style-type: none;
+            }
             li{                
                 background: #171717;
                 padding: 25px 10px;
@@ -10236,7 +10239,11 @@ span.smilies-title {
     height: auto;
     display: inline-block;
     vertical-align: middle;   
-    img{display: inline;}
+    img{
+        display: inline;
+        max-width: inherit;
+        width: auto;
+    }
 }
 
 /* css for story-photo-list starts here */

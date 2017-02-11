@@ -7517,6 +7517,9 @@ section.sidebar .block-itg-ads {
 .oscar-layout-page .oscar-slider .bottom-slider {
   background: #171717;
 }
+.oscar-layout-page .oscar-slider .bottom-slider ul {
+  list-style-type: none;
+}
 .oscar-layout-page .oscar-slider .bottom-slider li {
   background: #171717;
   padding: 25px 10px;
@@ -12346,6 +12349,8 @@ span.smilies-title {
 }
 span.smilies-title img {
   display: inline;
+  max-width: inherit;
+  width: auto;
 }
 
 /* css for story-photo-list starts here */
