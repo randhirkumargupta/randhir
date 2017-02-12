@@ -680,9 +680,9 @@ function itg_custom_lock_delete() {
  * Implement hook_mail_alter()
  * @param array $message
  */
-function itg_custom_mail_alter(&$message) {
-    $message['send'] = FALSE;
-}
+//function itg_custom_mail_alter(&$message) {
+//    $message['send'] = FALSE;
+//}
 
 /** Implements itg_apache_solr_get_site_hash();
  */
