@@ -680,7 +680,7 @@ function itg_newsletter_send_automatic_newsletter() {
   $query_auto->fields('cn')
       ->condition('cn.status', 0, '=')
       ->condition('cn.type', 'automatic', '=')
-      ->condition('cn.scheduled_time', time(), '<=');
+      ->condition('cn.scheduled_time', time(), '>=');
   $result_auto = $query_auto->execute();
 
   while ($record_auto = $result_auto->fetchAssoc()) {
@@ -881,7 +881,7 @@ function itg_newslatter_get_subscribe_page_users_email($getsection) {
 function itg_newsletter_get_section_stories($section, $crontime, $previoustime) {
     
   $query = db_select('node', 'n');
-  $query->leftjoin('field_data_field_story_category', 'fsc', 'n.nid = fsc.entity_id');
+  $query->join('field_data_field_story_category', 'fsc', 'n.nid = fsc.entity_id');
   $query->condition('n.status', 1, '=');
   $query->fields('n');
   $query->condition('n.type', 'story', '=');

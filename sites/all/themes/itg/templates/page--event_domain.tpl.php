@@ -42,7 +42,11 @@ $menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['r
               <div class="event-add-header">
                 
               <?php 
-                print itg_event_backend_header_add_block();
+                //print itg_event_backend_header_add_block();
+               $block = block_load('itg_ads', ADS_HEADER);
+               $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+               print render($render_array);
+                                      
               ?>
               </div>   
               </div>
@@ -137,7 +141,21 @@ $menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['r
     <?php if ($sidebar_first || $sidebar_second): ?>
       <aside class="sidebars col-md-4">
         <?php print $sidebar_first; ?>
+         <?php 
+                //print itg_event_backend_header_add_block();
+               $block = block_load('itg_ads', ADS_RHS1);
+               $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+               print render($render_array);
+                                      
+              ?>
         <?php print $sidebar_second; ?>
+         <?php 
+                //print itg_event_backend_header_add_block();
+               $block = block_load('itg_ads', ADS_RHS2);
+               $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+               print render($render_array);
+                                      
+              ?>
       </aside>
     <?php endif; ?>
     </div>

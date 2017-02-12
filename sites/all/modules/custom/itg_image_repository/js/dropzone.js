@@ -369,10 +369,10 @@
        // var imageobj=jQuery.parseJSON(obj.data.added);
        // alert(imageobj.name)
       //console.log(file.previewElement.idList)
-
+var base_url = Drupal.settings.baseUrl.baseUrl;
         if (file.previewElement) {
             file.previewElement.getElementsByTagName('img')[0].style.display = "block";
-            file.previewElement.getElementsByTagName('img')[0].src=Drupal.settings.basePath+'sites/default/files/gallery/'+filename;
+            file.previewElement.getElementsByTagName('img')[0].src=base_url+'/sites/default/files/gallery/'+filename;
              file.previewElement.getElementsByTagName('img')[0].setAttribute("imageid",imageId);
              file.previewElement.getElementsByTagName('img')[0].setAttribute("imgname",filename);
 
