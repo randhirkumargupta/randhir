@@ -520,7 +520,7 @@ function itg_common_custompath_load($node) {
     } else {
       $node_sef = $node->title;
     }
-    if(is_array($node->workbench_moderation) && !empty($node->workbench_moderation)){
+    if(!empty($node->workbench_moderation) && is_array($node->workbench_moderation)){
         $published_date = date('Y-m-d', $node->workbench_moderation['published']->timestamp);
     } else {
         $published_date = date('Y-m-d', $node->created);
