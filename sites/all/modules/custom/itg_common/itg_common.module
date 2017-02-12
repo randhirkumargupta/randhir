@@ -677,7 +677,14 @@ function itg_custom_lock_delete() {
 }
 
 /**
- * Implements itg_apache_solr_get_site_hash();
+ * Implement hook_mail_alter()
+ * @param array $message
+ */
+function itg_custom_mail_alter(&$message) {
+    $message['send'] = FALSE;
+}
+
+/** Implements itg_apache_solr_get_site_hash();
  */
 function itg_apache_solr_get_site_hash() {
   $var_hash = explode(',', variable_get('apache_solr_sites_prefix_values'));
