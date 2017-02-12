@@ -460,7 +460,7 @@ function itg_image_croping_crop_image() {
     file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
     $image = image_load($file->uri);
     $fileids['fid'][] = $file->fid . '#' . $_POST['field_name'];
-    if (!empty($image_fields)) {
+    if (!empty($image_fields) && !empty($image)) {
         foreach ($image_fields as $fields_name) {
 
             $filepath = file_default_scheme() . '://crop_image';
@@ -561,6 +561,7 @@ function itg_image_croping_crop_image_orignal() {
     $image_exten = end(explode('.', $file_image->uri));
     $filepath = file_default_scheme() . '://crop_image';
     $scaled = image_resize($image, $image_width, $image_height);
+
     $image_name = $image_name . time();
     $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten . '/');
     $uri = $filepath . '/' . $image_name . '.' . $image_exten;
@@ -579,29 +580,31 @@ function itg_image_croping_crop_image_orignal() {
     $fileids['fid'][] = $file->fid . '#' . $fields_name;
     $image = image_load($file->uri);
 
-    if (!empty($image_fields)) {
+    if (!empty($image_fields) && !empty($image)) {
         foreach ($image_fields as $fields_name) {
 
             $filepath = file_default_scheme() . '://crop_image';
 
             $scaled = image_scale_and_crop($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height']);
-            $image_name = $fields_name . time();
-            $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten . '/');
-            $uri = $filepath . '/' . $image_name . '.' . $image_exten;
-            $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
-            $file = new StdClass;
-            $file->uid = $user->uid;
-            $file->filename = basename($uri);
-            $file->uri = $uri;
-            $file->filemime = file_get_mimetype($uri);
-            $file->filesize = @filesize($uri);
-            $file->timestamp = REQUEST_TIME;
-            // $file->status = FILE_STATUS_PERMANENT;
-            $file->is_new = TRUE;
-            $file->status = FILE_STATUS_PERMANENT;
-            $file = file_save($file);
-            file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
-            $fileids['fid'][] = $file->fid . '#' . $fields_name;
+            if ($scaled) {
+                $image_name = $fields_name . time();
+                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten . '/');
+                $uri = $filepath . '/' . $image_name . '.' . $image_exten;
+                $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
+                $file = new StdClass;
+                $file->uid = $user->uid;
+                $file->filename = basename($uri);
+                $file->uri = $uri;
+                $file->filemime = file_get_mimetype($uri);
+                $file->filesize = @filesize($uri);
+                $file->timestamp = REQUEST_TIME;
+                // $file->status = FILE_STATUS_PERMANENT;
+                $file->is_new = TRUE;
+                $file->status = FILE_STATUS_PERMANENT;
+                $file = file_save($file);
+                file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
+                $fileids['fid'][] = $file->fid . '#' . $fields_name;
+            }
         }
     }
 
