@@ -18,9 +18,7 @@ module_load_include('inc', 'itg_common', 'includes/itg_common');
  */
 function itg_common_init() {
   global $user, $base_url, $theme;
-  pr(FRONT_URL) ;
-  echo '==';
-  pr(BACKEND_URL);
+  
   //code for multidomain
   if (arg(0) != 'user' && $base_url == BACKEND_URL && ($user->uid == 0 || array_key_exists(FRONT_USER, $user->roles))) {    
     drupal_goto('user');
