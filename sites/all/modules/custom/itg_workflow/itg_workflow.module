@@ -632,8 +632,13 @@ function itg_workflow_bulk_opration_related($field1, $field2) {
  * @param object $node
  */
 function itg_workflow_node_insert($node) {
-  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
-    global $user;
+  global $user;
+  
+  if ($node->type == 'story' 
+          || $node->type == 'photogallery' 
+          || $node->type == 'blog' 
+          || $node->type == 'podcast' 
+          || $node->type == 'videogallery') {    
 
     /*if (!array_key_exists(COPY_EDITOR, $user->roles) &&
             !array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) &&
@@ -688,9 +693,11 @@ function itg_workflow_node_update($node) {
       $itguser = user_load($node->uid);
       //getting mail id's of high level users
       if($node->type == 'story' && $node->workbench_moderation_state_new == 'published') {       
-        $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR, SEO);               
+        //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR, SEO);
+        $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, SEO);
       } else {
-        $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
+        $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR);
+        //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
       }
       
       $user_email = get_email_by_roll($rid);
