@@ -31,6 +31,20 @@ function itg_coupon_form_alter(&$form, &$form_state, $form_id) {
       $form['field_coupon_discount_type']['und']['#options'] = array('% discount' => '% discount', 'fix amount discount' => 'fix amount discount');
       $form['field_coupon_choose_email_mobile']['und']['#options'] = array('email' => 'E-mail', 'mobile' => 'Mobile');
 
+
+      $current_path = current_path();
+      if ($current_path == 'node/add/coupon') {
+        $coupon_type_array = $form['field_coupon_type']['und']['#options'];
+        unset($coupon_type_array['upload_third_party_coupon']);  // Removing the third party coupon
+        unset($coupon_type_array['bank_specific_coupon']); // Removing bank specific coupon
+        $form['field_coupon_type']['und']['#options'] = $coupon_type_array;
+      }
+      if (arg(0) == 'node' && arg(2) == 'edit') {
+        $coupon_type_array = $form['field_coupon_type']['und']['#options'];
+        unset($coupon_type_array['bank_specific_coupon']); // Removing bank specific coupon
+        $form['field_coupon_type']['und']['#options'] = $coupon_type_array;
+      }
+
       // Code staretd for handling the title
 
       $form['title']['#states'] = array(
@@ -261,6 +275,15 @@ function itg_coupon_custom_submit($form, &$form_state) {
  */
 function itg_coupon_custom_validate($form, &$form_state) {
 
+  $title = isset($form_state['values']['title'])?$form_state['values']['title']:'';
+  
+  if(is_numeric($title)){
+    $title = (int)$title;
+    if($title == 0){
+      form_set_error('title',t('Please enter valid coupon name!'));
+    }
+  }
+  
   $coupon_type = $form_state['values']['field_coupon_type'][LANGUAGE_NONE][0]['value'] ? $form_state['values']['field_coupon_type'][LANGUAGE_NONE][0]['value'] : NULL;
 
   if ($coupon_type == 'upload_third_party_coupon') {
