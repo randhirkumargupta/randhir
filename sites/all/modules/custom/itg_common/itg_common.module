@@ -18,7 +18,9 @@ module_load_include('inc', 'itg_common', 'includes/itg_common');
  */
 function itg_common_init() {
   global $user, $base_url, $theme;
-  
+  pr(FRONT_URL) ;
+  echo '==';
+  pr(BACKEND_URL);
   //code for multidomain
   if (arg(0) != 'user' && $base_url == BACKEND_URL && ($user->uid == 0 || array_key_exists(FRONT_USER, $user->roles))) {    
     drupal_goto('user');
@@ -54,7 +56,12 @@ function itg_common_menu() {
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
-
+  
+  //code for preview_changes button remove
+  if (!empty($form['actions']['preview_changes'])) {
+    unset($form['actions']['preview_changes']);
+  }
+  
   if (arg(0) == 'user' && empty($user->uid)) {
     drupal_add_js('jQuery(document).ready(function() {
                           jQuery("#skip-link").hide();                                      
@@ -695,4 +702,18 @@ function itg_apache_solr_get_site_hash() {
   }
   
   return $sitehash;
+}
+
+/**
+ * Implements hook_mail_alter.
+ * {@inheritdoc}
+ */
+function itg_common_mail_alter(&$message) {
+  
+  global $user, $base_url;  
+ 
+  //if (FRONT_URL == $base_url || BACKEND_URL == $base_url) {
+    $message['send'] = FALSE;
+  //}
+  
 }

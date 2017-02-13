@@ -356,7 +356,7 @@ function itg_layout_manager_block_view($delta = '') {
     break;
     
     case 'front_end_breadcrumb':
-      
+      $breadcrumb = '';
       if (arg(0) == 'node' && arg(1)) {
         $entity_object = menu_get_object();
         if (isset($entity_object->field_primary_category['und'][0]['value'])) {          
