@@ -227,7 +227,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
         $form['have_a_coupon_code'] = array(
             '#prefix' => '<div class= "have-a-coupon-code">',
             '#type' => 'item',
-            '#markup' => '<span class="event-number-of-members">Have a Coupon Code?</span> <a class="have-a-coupon-code-link" href="javascript:">Apply</a>',
+            '#markup' => '<span class="event-number-of-members">Have a Coupon Code?</span> <a class="have-a-coupon-code-link" href="javascript:">Apply</a>&nbsp;<a class="event-coupon-reset" href="javascript:void(0);">Reset</a>',
             '#suffix' => '</div>',
             '#weight' => 12
         );
