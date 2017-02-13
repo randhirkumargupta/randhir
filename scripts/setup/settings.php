@@ -243,6 +243,24 @@ $databases['default']['autoslave'] = array(
 // Use locking that supports force master
 $conf['lock_inc'] = 'sites/all/modules/contrib/autoslave/lock.inc';
 
+/*
+$databases = array (
+  'default' => 
+  array (
+    'default' => 
+    array (
+      'database' => 'indiatoday',
+      'username' => 'itgd_it_write',
+      'password' => '!tgd@!t@wr!te@101',
+      'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
+      'port' => '',
+      'driver' => 'mysql',
+      'prefix' => '',
+    ),
+  ),
+);
+*/
+
 // Workaround for Drush (Drush doesn't support non-pdo database drivers).
 // Workaround for update.php (similar problem as Drush).
 if (drupal_is_cli() || basename($_SERVER['PHP_SELF']) == 'update.php') {
@@ -627,3 +645,5 @@ $local_settings = dirname(__FILE__) . '/local.settings.php';
 if (file_exists($local_settings)) {
   include $local_settings;
 }
+
+$conf['image_allow_insecure_derivatives'] = TRUE;

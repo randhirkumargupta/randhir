@@ -526,6 +526,9 @@ jQuery(document).ready(function() {
         $('body').on('click', '.itg-close-popup', function() {
             $(this).closest('.itg-popup').hide();
         });
+          $('body').on('click', '.itg-close-popup_new', function() {
+            $(this).closest('.itg-popup').remove();
+        });
 
         $('body').find('.image-preview').parent().addClass('has-image-preview');
         $('body').find('.image-preview').parent().parent().addClass('has-image-parent');

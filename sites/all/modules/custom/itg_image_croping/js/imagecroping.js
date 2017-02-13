@@ -15,9 +15,41 @@
             type: 'post',
             data: {'fid': imageid, 'field_name': fieldname},
             success: function(data) {
-                $.colorbox({html: "" + data + "", onComplete: function() {
-                        $(this).colorbox.resize();
-                    }});
+                var appenddata = '<div id="smi-popup" class="itg-popup">';
+                appenddata += '<div class="popup-content">';
+                appenddata += '<div class="popup-head">';
+                appenddata += '<div class="popup-title">&nbsp;</div>';
+                appenddata += '<a class="itg-close-popup_new" href="javascript:;"> Close </a>';
+                appenddata += '</div>';
+                appenddata += '<div class="popup-body">';
+                appenddata += data;
+                appenddata += '</div></div> </div>';
+
+                $('#page').append(appenddata);
+                $('#smi-popup').show();
+            },
+            error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Details: " + desc + "\nError:" + err);
+            }
+        });
+        jQuery.ajax({
+            url: Drupal.settings.basePath + 'imagetagedit',
+            type: 'post',
+            data: {'fid': imageid, 'field_name': fieldname},
+            success: function(data) {
+                var appenddata = '<div id="smi-popup" class="itg-popup">';
+                appenddata += '<div class="popup-content">';
+                appenddata += '<div class="popup-head">';
+                appenddata += '<div class="popup-title">&nbsp;</div>';
+                appenddata += '<a class="itg-close-popup_new" href="javascript:;"> Close </a>';
+                appenddata += '</div>';
+                appenddata += '<div class="popup-body">';
+                appenddata += data;
+                appenddata += '</div></div> </div>';
+
+                $('#page').append(appenddata);
+                $('#smi-popup').show();
             },
             error: function(xhr, desc, err) {
                 console.log(xhr);

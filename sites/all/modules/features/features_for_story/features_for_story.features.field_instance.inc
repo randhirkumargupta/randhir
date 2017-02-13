@@ -236,7 +236,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'field_story_listicle',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please Provide Value like :  #060606',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -5457,6 +5457,7 @@ function features_for_story_field_default_field_instances() {
   t('New title');
   t('Node Identity');
   t('Photo story');
+  t('Please Provide Value like :  #060606');
   t('Preview_unique_id');
   t('Publish id');
   t('Quote image');
