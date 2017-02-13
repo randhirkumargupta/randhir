@@ -1047,7 +1047,7 @@
     vertical-align: top;
     padding-right: 8px;
   }
-  .poll-banner .vota-time.desktop-hide .social-share ul li a {
+  .poll-banner .vota-time.desktop-hide .social-share ul li a, .poll-banner .vota-time.desktop-hide .social-share ul li span {
     background: #000;
     width: 20px;
     height: 20px;
@@ -1060,26 +1060,26 @@
   }
 }
 @media only screen and (max-width: 768px) and (min-width: 768px) {
-  .poll-banner .vota-time.desktop-hide .social-share ul li a {
+  .poll-banner .vota-time.desktop-hide .social-share ul li a, .poll-banner .vota-time.desktop-hide .social-share ul li span {
     width: 23px;
     height: 23px;
     line-height: 25px;
   }
 }
 @media only screen and (max-width: 768px) {
-  .poll-banner .vota-time.desktop-hide .social-share ul li a.share {
+  .poll-banner .vota-time.desktop-hide .social-share ul li a.share, .poll-banner .vota-time.desktop-hide .social-share ul li span.share {
     color: #d0d0d0;
   }
-  .poll-banner .vota-time.desktop-hide .social-share ul li a.share, .poll-banner .vota-time.desktop-hide .social-share ul li a.google {
+  .poll-banner .vota-time.desktop-hide .social-share ul li a.share, .poll-banner .vota-time.desktop-hide .social-share ul li a.google, .poll-banner .vota-time.desktop-hide .social-share ul li span.share, .poll-banner .vota-time.desktop-hide .social-share ul li span.google {
     background: transparent;
   }
-  .poll-banner .vota-time.desktop-hide .social-share ul li a.facebook {
+  .poll-banner .vota-time.desktop-hide .social-share ul li a.facebook, .poll-banner .vota-time.desktop-hide .social-share ul li span.facebook {
     background: #0b4887;
   }
-  .poll-banner .vota-time.desktop-hide .social-share ul li a.twitter {
+  .poll-banner .vota-time.desktop-hide .social-share ul li a.twitter, .poll-banner .vota-time.desktop-hide .social-share ul li span.twitter {
     background: #05a3d2;
   }
-  .poll-banner .vota-time.desktop-hide .social-share ul li a.google {
+  .poll-banner .vota-time.desktop-hide .social-share ul li a.google, .poll-banner .vota-time.desktop-hide .social-share ul li span.google {
     background: url(../images/google-icon.jpg) no-repeat center center;
   }
   .poll-banner .vota-time.desktop-hide .social-share ul li {
@@ -2274,7 +2274,7 @@
     vertical-align: top;
     padding-right: 8px;
   }
-  .view-front-end-global-search .view-content .social-share ul li a {
+  .view-front-end-global-search .view-content .social-share ul li a, .view-front-end-global-search .view-content .social-share ul li span {
     background: #000;
     width: 20px;
     height: 20px;
@@ -2287,26 +2287,26 @@
   }
 }
 @media only screen and (min-width: 768px) and (min-width: 768px) {
-  .view-front-end-global-search .view-content .social-share ul li a {
+  .view-front-end-global-search .view-content .social-share ul li a, .view-front-end-global-search .view-content .social-share ul li span {
     width: 23px;
     height: 23px;
     line-height: 25px;
   }
 }
 @media only screen and (min-width: 768px) {
-  .view-front-end-global-search .view-content .social-share ul li a.share {
+  .view-front-end-global-search .view-content .social-share ul li a.share, .view-front-end-global-search .view-content .social-share ul li span.share {
     color: #d0d0d0;
   }
-  .view-front-end-global-search .view-content .social-share ul li a.share, .view-front-end-global-search .view-content .social-share ul li a.google {
+  .view-front-end-global-search .view-content .social-share ul li a.share, .view-front-end-global-search .view-content .social-share ul li a.google, .view-front-end-global-search .view-content .social-share ul li span.share, .view-front-end-global-search .view-content .social-share ul li span.google {
     background: transparent;
   }
-  .view-front-end-global-search .view-content .social-share ul li a.facebook {
+  .view-front-end-global-search .view-content .social-share ul li a.facebook, .view-front-end-global-search .view-content .social-share ul li span.facebook {
     background: #0b4887;
   }
-  .view-front-end-global-search .view-content .social-share ul li a.twitter {
+  .view-front-end-global-search .view-content .social-share ul li a.twitter, .view-front-end-global-search .view-content .social-share ul li span.twitter {
     background: #05a3d2;
   }
-  .view-front-end-global-search .view-content .social-share ul li a.google {
+  .view-front-end-global-search .view-content .social-share ul li a.google, .view-front-end-global-search .view-content .social-share ul li span.google {
     background: url(../images/google-icon.jpg) no-repeat center center;
   }
   .view-front-end-global-search .view-content .other-info {
