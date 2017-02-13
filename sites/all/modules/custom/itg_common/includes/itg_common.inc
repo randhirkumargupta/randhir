@@ -525,21 +525,23 @@ function itg_common_custompath_load($node) {
     } else {
         $published_date = date('Y-m-d', $node->created);
     }
-    $getsection = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
-    $parents = taxonomy_get_parents_all($getsection);
-    if (isset($parents) && !empty($parents)) {
-        foreach ($parents as $key => $val) {
-            $section_hierarchy[] = $val->name;
-        }
+    $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
+    if (!empty($getsection)) {
+      $parents = taxonomy_get_parents_all($getsection);
+      if (isset($parents) && !empty($parents)) {
+          foreach ($parents as $key => $val) {
+              $section_hierarchy[] = $val->name;
+          }
+      }
+      $set_hierarchy = array_reverse($section_hierarchy);
+      $pathdata = strtolower(implode("/", $set_hierarchy)) . '/'. $node->type . '/' . trim($node_sef). '-'. $node->nid .'-'. $published_date;
+      $newpath = itg_common_custompath_val($pathdata);
+      $conditions = array('source' => 'node/' . $node->nid);
+      $criteria = path_load($conditions);
+      $criteria = array('pid' => $criteria);
+      path_delete($criteria);
+      $node->path = array('alias' => $newpath, 'pathauto' => FALSE);
     }
-    $set_hierarchy = array_reverse($section_hierarchy);
-    $pathdata = strtolower(implode("/", $set_hierarchy)) . '/'. $node->type . '/' . trim($node_sef). '-'. $node->nid .'-'. $published_date;
-    $newpath = itg_common_custompath_val($pathdata);
-    $conditions = array('source' => 'node/' . $node->nid);
-    $criteria = path_load($conditions);
-    $criteria = array('pid' => $criteria);
-    path_delete($criteria);
-    $node->path = array('alias' => $newpath, 'pathauto' => FALSE);
 }
 
 /** 
@@ -587,21 +589,23 @@ function itg_common_custompath_insert_load($node) {
         $published_date = date('Y-m-d', $node->created);
     }
     
-    $getsection = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
-    $parents = taxonomy_get_parents_all($getsection);
-    if (isset($parents) && !empty($parents)) {
-        foreach ($parents as $key => $val) {
-            $section_hierarchy[] = $val->name;
-        }
+    $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
+    if (!empty($getsection)) {
+      $parents = taxonomy_get_parents_all($getsection);
+      if (isset($parents) && !empty($parents)) {
+          foreach ($parents as $key => $val) {
+              $section_hierarchy[] = $val->name;
+          }
+      }
+      $set_hierarchy = array_reverse($section_hierarchy);
+      $pathdata = strtolower(implode("/", $set_hierarchy)) . '/'. $node->type . '/' . trim($node_sef). '-'. $node->nid .'-'. $published_date;
+      $newpath = itg_common_custompath_insert_val($pathdata);
+      $conditions = array('source' => 'node/' . $node->nid);
+      $criteria = path_load($conditions);
+      $criteria = array('pid' => $criteria);
+      path_delete($criteria);
+      $node->path = array('alias' => $newpath, 'pathauto' => FALSE);
     }
-    $set_hierarchy = array_reverse($section_hierarchy);
-    $pathdata = strtolower(implode("/", $set_hierarchy)) . '/'. $node->type . '/' . trim($node_sef). '-'. $node->nid .'-'. $published_date;
-    $newpath = itg_common_custompath_insert_val($pathdata);
-    $conditions = array('source' => 'node/' . $node->nid);
-    $criteria = path_load($conditions);
-    $criteria = array('pid' => $criteria);
-    path_delete($criteria);
-    $node->path = array('alias' => $newpath, 'pathauto' => FALSE);
 }
 
 /** 

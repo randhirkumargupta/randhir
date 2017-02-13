@@ -103,8 +103,12 @@ define('CITY_MANAGMENT', variable_get('city_manager_vid'));
 define('NEWSLETTER_EDUCATION_TID', variable_get('newsletter_education_tid'));
 
 define('PARENT_SSO', 'dev.indiatodayonline.in');
-define('FRONT_URL', 'http://itgd-mum-lb-dev-frontend-app-1144451114.ap-south-1.elb.amazonaws.com');
-define('BACKEND_URL', 'http://itgd-mum-lb-dev-backend-app-678057722.ap-south-1.elb.amazonaws.com');
+
+define('FRONT_URL', 'http://uat-it.indiatodayonline.in');
+define('BACKEND_URL', 'http://uat-it-backend.indiatodayonline.in');
+
+//define('FRONT_URL', 'http://itgd-mum-lb-dev-frontend-app-1144451114.ap-south-1.elb.amazonaws.com');
+//define('BACKEND_URL', 'http://itgd-mum-lb-dev-backend-app-678057722.ap-south-1.elb.amazonaws.com');
 //define('FRONT_URL', 'http://localhost/itg-cms');
 //define('BACKEND_URL', 'http://192.168.14.45/itg-cms');
 
