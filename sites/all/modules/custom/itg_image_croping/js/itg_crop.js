@@ -16,9 +16,10 @@
         initialZoom: 'image',
         maxZoom: 10,
         quality: 1,
+         crossDomain:true,
         minZoom: 'fill',
         smallImage: 'stretch',
-        imageBackground: true
+        imageBackground: true,
 
     });
     jQuery('form').submit(function() {

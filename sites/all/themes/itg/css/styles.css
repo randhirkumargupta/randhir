@@ -5138,8 +5138,11 @@ h1.category-heading {
   padding: 0px;
   border: 1px solid #242424;
 }
+#block-views-video-landing-header-block .video-header-left .iframe-video {
+  padding-bottom: 59.9%;
+}
 #block-views-video-landing-header-block .video-header-left .social-likes {
-  float: right;
+  float: none;
   width: 100%;
   background: #1a1a1a;
   padding: 10px 0;
@@ -5168,9 +5171,6 @@ h1.category-heading {
 }
 #block-views-video-landing-header-block .video-header-left .social-likes ul li .flag-throbber {
   display: none;
-}
-#block-views-video-landing-header-block .video-header-left .iframe-video {
-  padding-bottom: 69%;
 }
 #block-views-video-landing-header-block .video-header-left .slick-slider {
   padding: 10px;
@@ -5272,6 +5272,37 @@ h1.category-heading {
   position: relative;
   padding-bottom: 15px;
 }
+#block-views-video-landing-header-block .video-header-right .social-likes {
+  float: none;
+  width: 100%;
+  background: #1a1a1a;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(170, 169, 169, 0.31);
+}
+#block-views-video-landing-header-block .video-header-right .social-likes ul {
+  display: inline-flex;
+}
+#block-views-video-landing-header-block .video-header-right .social-likes ul li a {
+  display: block;
+  color: #aaa9a9;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  padding: 10px;
+}
+#block-views-video-landing-header-block .video-header-right .social-likes ul li a i {
+  font-size: 18px;
+  vertical-align: middle;
+}
+#block-views-video-landing-header-block .video-header-right .social-likes ul li a span {
+  display: none;
+}
+#block-views-video-landing-header-block .video-header-right .social-likes ul li a:hover {
+  background: #363636;
+  color: #fff;
+}
+#block-views-video-landing-header-block .video-header-right .social-likes ul li .flag-throbber {
+  display: none;
+}
 #block-views-video-landing-header-block .video-header-right p:first-child {
   margin-top: 15px;
 }
@@ -5288,6 +5319,18 @@ h1.category-heading {
   margin: 40px 20px 0;
   position: absolute;
   bottom: 0;
+}
+#block-views-video-landing-header-block .video-header-right .video-slider-description {
+  zoom: 1;
+}
+#block-views-video-landing-header-block .video-header-right .video-slider-description:before, #block-views-video-landing-header-block .video-header-right .video-slider-description:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+#block-views-video-landing-header-block .video-header-right .video-slider-description:after {
+  clear: both;
 }
 
 #block-views-video-landing-header-block-1 {
@@ -6732,7 +6775,7 @@ section.sidebar .block-itg-ads {
   margin-bottom: 20px;
   text-align: center;
 }
-#block-itg-widget-so-sorry-front-politoons .politoons-sosorry .col-md-4:nth-child(2n+1) {
+#block-itg-widget-so-sorry-front-politoons .politoons-sosorry .col-md-4:nth-child(3n+1) {
   clear: left;
 }
 
@@ -7419,6 +7462,9 @@ section.sidebar .block-itg-ads {
 .oscar-layout-page .oscar-features .col-md-6:nth-child(n+3) {
   margin-top: 30px;
 }
+.oscar-layout-page .oscar-features .col-md-6:nth-child(2n+1) {
+  clear: left;
+}
 .oscar-layout-page .oscar-features .col-md-6 span {
   display: inline-block;
   vertical-align: top;
@@ -7470,6 +7516,9 @@ section.sidebar .block-itg-ads {
 }
 .oscar-layout-page .oscar-slider .bottom-slider {
   background: #171717;
+}
+.oscar-layout-page .oscar-slider .bottom-slider ul {
+  list-style-type: none;
 }
 .oscar-layout-page .oscar-slider .bottom-slider li {
   background: #171717;
@@ -11887,6 +11936,9 @@ h1.about-us-heading + div p {
 .node-type-videogallery #cboxTitle, .node-type-photogallery #cboxTitle, .node-type-story #cboxTitle {
   display: none !important;
 }
+.node-type-videogallery .region-top, .node-type-photogallery .region-top, .node-type-story .region-top {
+  background: #171717;
+}
 
 /*css end story page submit story */
 /*css start common highlight */
@@ -12294,6 +12346,11 @@ span.smilies-title {
   height: auto;
   display: inline-block;
   vertical-align: middle;
+}
+span.smilies-title img {
+  display: inline;
+  max-width: inherit;
+  width: auto;
 }
 
 /* css for story-photo-list starts here */

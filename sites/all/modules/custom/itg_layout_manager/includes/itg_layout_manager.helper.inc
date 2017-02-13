@@ -365,6 +365,7 @@ function display_section_widgets_list($section_name, $template_name, $widget_typ
   $itg_query->condition('layout_tpl.template_section_name', $section_name);
   $itg_query->condition('layout_tpl.template_name', $template_name);
   $itg_query->condition('layout_tpl.widget_type', $widget_type);
+  $itg_query->orderBy('id', 'DESC');
   $itg_result = $itg_query->execute()->fetchAll();
   
   $content = category_widget_list($itg_result, $widget_type);

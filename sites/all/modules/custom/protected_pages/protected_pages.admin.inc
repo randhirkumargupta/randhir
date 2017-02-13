@@ -17,12 +17,12 @@ function protected_pages_configure($form, &$form_state) {
     '#suffix' => '</div>',
     '#description' => t('Please enter the relative path and its corresponding
     password. When user opens this url, they will asked to enter password to
-    view this page. For example, "node/5", "new-events" etc.'),
+    view this page.'),
   );
   $form['rules_list']['path'] = array(
     '#type' => 'textfield',
     '#title' => t('Relative Path'),
-    '#description' => t('Enter relative drupal path. For example, "node/5", "new-events" etc.'),
+    '#description' => t('Enter relative drupal path. For example'),
     '#required' => TRUE,
   );
   $form['rules_list']['password'] = array(
@@ -52,18 +52,20 @@ function protected_pages_configure($form, &$form_state) {
  * Callback to generate list of protected pages.
  */
 function protected_pages_get_pages_list() {
-
+  // changes by arun.kumarmishra@intoday.com
   $header = array(
     array(
-      'data' => t('#'),
+      'data' => t('S. No.'),
       'width' => '10%',
+      'field' => 'pp.pid'
     ),
     array(
       'data' => t('Relative Path'),
       'width' => '60%',
+      'field' => 'pp.path'
     ),
     array(
-      'data' => t('Operations'),
+      'data' => t('Action'),
       'colspan' => 3,
       'width' => '30%',
     ),
@@ -76,6 +78,7 @@ function protected_pages_get_pages_list() {
       ->orderByHeader($header);
 
   $result = $query->execute();
+
 
   $rows = array();
   $count = 1;
@@ -121,6 +124,10 @@ function protected_pages_configure_validate($form, &$form_state) {
   $path_alias = drupal_strtolower(drupal_get_path_alias($form_state['values']['path']));
   if (!drupal_valid_path($form_state['normal_path'])) {
     form_set_error('path', t('Please enter a correct path!'));
+  }
+  // changes by arun.kumarmishra@intoday.com
+  if (strlen($form_state['values']['rules_list']['password']) < 4){
+    form_set_error('password', 'Password must be grater than 3 characters');
   }
 
   $pid = db_select('protected_pages')
@@ -177,18 +184,19 @@ function protected_pages_edit($form, &$form_state, $pid) {
     '#suffix' => '</div>',
     '#description' => t('Please enter the relative path and its corresponding
     password. When user opens this url, they will assked to enter password to
-    view this page. For example, "node/5", "new-events" etc.'),
+    view this page. For example'),
   );
   $form['rules_list']['path'] = array(
     '#type' => 'textfield',
     '#title' => t('Relative Path'),
-    '#description' => t('Enter relative drupal path. For example, "node/5", "new-events" etc.'),
+    '#description' => t('Enter relative drupal path.'),
     '#required' => TRUE,
     '#default_value' => $protected_page->path,
   );
   $form['rules_list']['password'] = array(
     '#type' => 'password_confirm',
     '#size' => 25,
+    '#required' => TRUE,
   );
   $form['rules_list']['pid'] = array(
     '#type' => 'hidden',
@@ -210,6 +218,11 @@ function protected_pages_edit_validate($form, &$form_state) {
   if (!drupal_valid_path($form_state['normal_path'])) {
     form_set_error('path', t('Please enter a correct path!'));
   }
+  // changes by arun.kumarmishra@intoday.com
+  if (strlen($form_state['values']['rules_list']['password']) < 4){
+    form_set_error('password', 'Password must be grater than 3 characters');
+  }
+
 
   $pid = db_select('protected_pages')
       ->fields('protected_pages', array('pid'))
@@ -312,7 +325,7 @@ function protected_pages_send_email($form, &$form_state, $pid) {
     '#title' => t('Email Body'),
     '#rows' => 15,
     '#default_value' => variable_get('protected_pages_email_body', protected_pages_email_body()),
-    '#description' => t('Enter the body of the email. Only [protected-page-url] and [site-name] tokens are available. 
+    '#description' => t('Enter the body of the email. Only [protected-page-url] and [site-name] tokens are available.
       Since password is encrypted, therefore we can not provide it by token.'),
     '#required' => TRUE,
   );
@@ -408,16 +421,16 @@ function protected_pages_settings() {
   $form['protected_pages_password_fieldset']['protected_pages_global_password_field'] = array(
     '#type' => 'password_confirm',
     '#title' => t('Global Password'),
-    '#description' => t('The default password for all protected pages. This 
-      password is necessary if you select the previous checkbox "Allow per page 
+    '#description' => t('The default password for all protected pages. This
+      password is necessary if you select the previous checkbox "Allow per page
       password or Global password" or "Allow Only Global" options above.'),
   );
   $form['protected_pages_password_fieldset']['protected_pages_session_expire_time'] = array(
     '#type' => 'textfield',
     '#title' => t('Session Expire Time'),
-    '#description' => t('When user enters password a session is created. 
-      The node will be accessible until session expire. Once session expires, 
-      user will need to enter password again. The default session expire time 
+    '#description' => t('When user enters password a session is created.
+      The node will be accessible until session expire. Once session expires,
+      user will need to enter password again. The default session expire time
       is 0 (unlimited).'),
     '#default_value' => variable_get('protected_pages_session_expire_time', 0),
     '#required' => TRUE,
@@ -446,7 +459,7 @@ function protected_pages_settings() {
     '#title' => t('Email content'),
     '#rows' => 15,
     '#default_value' => variable_get('protected_pages_email_body', protected_pages_email_body()),
-    '#description' => t('Enter the body of the email. Only [protected-page-url] and [site-name] tokens are available. 
+    '#description' => t('Enter the body of the email. Only [protected-page-url] and [site-name] tokens are available.
       Since password is encrypted, therefore we can not provide it by token.'),
   );
 
@@ -505,7 +518,7 @@ function protected_pages_validate_integer_positive($element, &$form_state) {
 }
 
 /**
- * Custom submit function encrypt password and deleting non-useful variable. 
+ * Custom submit function encrypt password and deleting non-useful variable.
  */
 function _protected_pages_settings_submit($form, &$form_state) {
   $passwd = $form_state['values']['protected_pages_global_password_field'];

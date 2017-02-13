@@ -176,12 +176,12 @@ jQuery(document).ready(function () {
                 }
                 // end here
                 // case for read later
-                    if (obj.success && obj.activity == 'read_later') {
+                    if (obj.success == '1' && obj.activity == 'read_later') {
                         if (obj.type == 'photogallery') {
                             jQuery('.later').html('<a href="javascript:void(0)" title="save" class="def-cur-pointer active"><i class="fa fa-bookmark"></i></a>');
                         }
                         if (obj.type == 'videogallery') {
-                            jQuery('.later').html('<a title = "Save" href="javascript:" class="def-cur-pointer active"><i class="fa fa-clock-o"></i><span>Watch Later</span></a>');
+                            jQuery('.later').html('<a title = "Save" href="javascript:" class="def-cur-pointer active"><i class="fa fa-clock-o"></i><span>Watch Later</span><span class="video-msg"></span></a>');
                         }
                         if (obj.type == 'story') {
                             jQuery('.later').html('<a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><span>READ LATER</span></a>');
@@ -189,11 +189,16 @@ jQuery(document).ready(function () {
                         }
                         jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">Saved</div>');
                         jQuery(".video-landing-header .slick-track li").append('<div class="saved-photogallery">Saved</div>');
-                        jQuery('.stryimg').prepend('<div class="saved-photogallery">Saved</div>');
+                        jQuery('.video-msg').html('<div class="saved-video">Saved</div>');
                         setTimeout(function () {
                             jQuery('.saved-photogallery').remove();
+                            jQuery('.saved-video').remove();
                         }, 3000);
 
+                    }
+                    
+                    if (obj.success == '0' && obj.activity == 'read_later') {
+                      window.location.reload(true);
                     }
                 
             }
@@ -239,4 +244,19 @@ jQuery(document).ready(function () {
     });
 
     // end here
+    
+    // alert on ugc reject link click
+    jQuery(document).ready(function () {
+        jQuery(".ugc-reject").click(function () {
+            var reject_status = "reject";
+            if (reject_status == "reject") {
+                var msg = confirm("Are you sure you want to reject this content?");
+                if (msg == true) {
+                    return true;
+                }
+                return false;
+            }
+            return true;
+        });
+    });
 });

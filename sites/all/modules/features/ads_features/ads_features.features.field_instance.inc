@@ -184,7 +184,7 @@ function ads_features_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_ads_body_close',
-    'label' => 'Body close',
+    'label' => 'Internal Body close script',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -198,7 +198,7 @@ function ads_features_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 10,
+      'weight' => 9,
     ),
   );
 
@@ -226,7 +226,7 @@ function ads_features_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_ads_body_start',
-    'label' => 'Body start',
+    'label' => 'Internal Body start script',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -240,7 +240,7 @@ function ads_features_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -274,8 +274,8 @@ function ads_features_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_ads_end_date',
-    'label' => 'End Date',
-    'required' => 1,
+    'label' => 'Expiry Date',
+    'required' => 0,
     'settings' => array(
       'default_value' => 'blank',
       'default_value2' => 'same',
@@ -298,7 +298,133 @@ function ads_features_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
+      'weight' => 15,
+    ),
+  );
+
+  // Exported field_instance: 'node-ads_management-field_ads_ex_body_close'.
+  $field_instances['node-ads_management-field_ads_ex_body_close'] = array(
+    'bundle' => 'ads_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 21,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ads_ex_body_close',
+    'label' => 'External Body close script',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 13,
+    ),
+  );
+
+  // Exported field_instance: 'node-ads_management-field_ads_ex_body_start'.
+  $field_instances['node-ads_management-field_ads_ex_body_start'] = array(
+    'bundle' => 'ads_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 20,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ads_ex_body_start',
+    'label' => 'External Body start script',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
       'weight' => 12,
+    ),
+  );
+
+  // Exported field_instance: 'node-ads_management-field_ads_ex_headerscript'.
+  $field_instances['node-ads_management-field_ads_ex_headerscript'] = array(
+    'bundle' => 'ads_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 19,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ads_ex_headerscript',
+    'label' => 'External Header script',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 11,
     ),
   );
 
@@ -326,7 +452,7 @@ function ads_features_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_ads_headerscript',
-    'label' => 'Header script	',
+    'label' => 'Internal Header script	',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -340,7 +466,7 @@ function ads_features_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 8,
+      'weight' => 7,
     ),
   );
 
@@ -398,7 +524,7 @@ function ads_features_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 11,
+      'weight' => 14,
     ),
   );
 
@@ -466,7 +592,7 @@ function ads_features_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_code_visibility_flag',
-    'label' => 'Code visibility flag',
+    'label' => 'Code visibility flag for external script',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -477,7 +603,7 @@ function ads_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 7,
+      'weight' => 10,
     ),
   );
 
@@ -597,12 +723,15 @@ function ads_features_field_default_field_instances() {
   t('Adds code holder');
   t('Ads Placeholder');
   t('Ads Placeholder values');
-  t('Body close');
-  t('Body start');
-  t('Code visibility flag');
+  t('Code visibility flag for external script');
   t('Device Selection');
-  t('End Date');
-  t('Header script	');
+  t('Expiry Date');
+  t('External Body close script');
+  t('External Body start script');
+  t('External Header script');
+  t('Internal Body close script');
+  t('Internal Body start script');
+  t('Internal Header script	');
   t('Please enter script code with Javascript <b>script</b> tag.');
   t('Select template type');
   t('Start Date');

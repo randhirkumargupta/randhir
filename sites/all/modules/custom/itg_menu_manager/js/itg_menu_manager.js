@@ -5,7 +5,7 @@
  */
 
 
-jQuery(".itg_menu_manager_form").ajaxSuccess(function(event, xhr, settings) {
+jQuery(".itg_menu_manager_form").ajaxSuccess(function (event, xhr, settings) {
     var menu_level_val = jQuery("select[name=menu_level]").val();
     var section_value = jQuery("select[name=sections]").val();
     var url_type = jQuery("input[name=url_type]").val();
@@ -24,4 +24,14 @@ jQuery(".itg_menu_manager_form").ajaxSuccess(function(event, xhr, settings) {
     if (url_type == 'internal' && menu_level_val.length <= 0) {
         jQuery("#itg-menu-manager-form input[type=text]").attr("disabled", "disabled");
     }
+});
+
+
+jQuery(document).ready(function () {
+    jQuery("#edit-section-child").on('change', function () {
+        var section_chlid = jQuery(this).val();
+        jQuery("#edit-section-id").attr("value", section_chlid);
+        jQuery("#views-exposed-form-menu-manager-menu-manager-page").submit();
+        jQuery("#widget-ajex-loader").show();
+    });
 });

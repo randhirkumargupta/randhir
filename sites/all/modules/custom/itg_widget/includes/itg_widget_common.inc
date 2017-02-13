@@ -125,10 +125,10 @@ function itg_widgets_custom_variables() {
         '#description' => t("Ex: dev|eoshds,stage|asdasd"),
         '#default_value' => variable_get('apache_solr_sites_prefix_values'),
     );
-   $form['newslater_education_tid'] = array(
+   $form['newsletter_education_tid'] = array(
         '#type' => 'textfield',
-        '#title' => t('Newslater Eduction Tid'),
-        '#default_value' => variable_get('newslater_education_tid'),
+        '#title' => t('Newsletter Eduction Tid'),
+        '#default_value' => variable_get('newsletter_education_tid'),
     );
    $form['category_manager_vid'] = array(
         '#type' => 'textfield',
@@ -148,6 +148,12 @@ function itg_widgets_custom_variables() {
         '#default_value' => variable_get('quiz_taxonomy_tid'),
         '#size' => 20,
         '#maxlength' => 20,
+    );
+    $form['city_manager_vid'] = array(
+        '#type' => 'textfield',
+        '#title' => t('City Management Vid'),
+        '#default_value' => variable_get('city_manager_vid'),
+        '#size' => 20,
     );
     return system_settings_form($form);
 }

@@ -42,7 +42,7 @@ $user_id = $data['user_id'];
   <?php } ?>
   <div id="main-container-budget">
       <div class="top-side-block">
-           <div id="final-sortable">
+           
               <div id="ranking-content" class="col-md-2 col-list col-list-1">
                   <span id="ranking-label" class="title"><?php print t('Cheaper'); ?></span>
                   <ul id="sortable1" class="connectedSortable">
@@ -61,17 +61,18 @@ $user_id = $data['user_id'];
                       <?php echo $column3; ?>
                   </ul>
               </div>
-           </div>
+          
           <div id="ranking-content-main" class="col-md-6 col-list col-list-4">
               <span id="ranking-label" class="title"><?php print t('Items'); ?></span>
-              <ul id="sortable4" class="connectedSortable1">
+              <ul id="sortable4" class="connectedSortable">
                   <?php echo $column4; ?>
+                  <div id="loader-data"><img class="widget-loader" style="display: none" src="<?php echo base_path(); ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
               </ul>
               <?php
                   if ($budget_message_flag) {
                      print '<p class="success">'.$budget_message.'</p>';
                      if($admin_user) { ?>
-                       <button class="btn btn-save" type="button" onclick="reset_budget(<?php print $section_id; ?>)"><?php print t('Reset'); ?></button>
+                      <div class="cheaper-deaper-action"><button class="btn-reset" type="button" onclick="reset_budget(<?php print $section_id; ?>)"><?php print t('Reset'); ?></button></div>
                      <?php }
                   }
                   elseif ($budget_message_front_flag) {
@@ -91,9 +92,9 @@ $user_id = $data['user_id'];
 
               <?php if (empty($file_name) && empty($budget_message_flag)) { ?>
                 <?php if(empty($user_id)) { ?>
-                  <button class="btn btn-save" type="button" onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')"><?php print t('Submit'); ?></button>
+                      <div class="cheaper-deaper-action"><button class="btn-submit" type="button" onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')"><?php print t('Submit'); ?></button></div>
                 <?php } else { ?>
-                  <button class="btn btn-save" type="button" onclick="captureCurrentDiv(<?php print $section_id; ?>)"><?php print t('Submit'); ?></button>
+                      <div class="cheaper-deaper-action"><button class="btn-submit" type="button" onclick="captureCurrentDiv(<?php print $section_id; ?>)"><?php print t('Submit'); ?></button></div>
                 <?php } ?>
 
                 <?php

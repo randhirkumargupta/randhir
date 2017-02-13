@@ -169,7 +169,7 @@ function ads_features_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: End Date */
+  /* Field: Content: Expiry Date */
   $handler->display->display_options['fields']['field_ads_end_date']['id'] = 'field_ads_end_date';
   $handler->display->display_options['fields']['field_ads_end_date']['table'] = 'field_data_field_ads_end_date';
   $handler->display->display_options['fields']['field_ads_end_date']['field'] = 'field_ads_end_date';
@@ -181,6 +181,10 @@ function ads_features_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
+  /* Field: Custom: Status */
+  $handler->display->display_options['fields']['custom_handler']['id'] = 'custom_handler';
+  $handler->display->display_options['fields']['custom_handler']['table'] = 'custom_ads_expiry_status';
+  $handler->display->display_options['fields']['custom_handler']['field'] = 'custom_handler';
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
@@ -325,7 +329,7 @@ function ads_features_views_default_views() {
     25 => 0,
     26 => 0,
   );
-  /* Filter criterion: Content: End Date (field_ads_end_date) */
+  /* Filter criterion: Content: Expiry Date (field_ads_end_date) */
   $handler->display->display_options['filters']['field_ads_end_date_value']['id'] = 'field_ads_end_date_value';
   $handler->display->display_options['filters']['field_ads_end_date_value']['table'] = 'field_data_field_ads_end_date';
   $handler->display->display_options['filters']['field_ads_end_date_value']['field'] = 'field_ads_end_date_value';
