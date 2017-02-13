@@ -7,6 +7,7 @@
 module_load_all_includes('inc', 'includes/itg_personalization.helper');
 module_load_all_includes('inc', 'includes/itg_personalization_profile.edit');
 module_load_all_includes('inc', 'includes/itg_personalization_refer.friend');
+module_load_all_includes('inc', 'includes/personalization_content_list');
 
 /**
  * Implements hook_permission().
@@ -18,6 +19,10 @@ function itg_personalization_permission() {
     'view personalized content' => array(
       'title' => t('View personalized user content'),
       'description' => t('This permission grant user to view personalized content.'),
+    ),
+    'access personalization all content link' => array(
+      'title' => t('Personalization all content link'),
+      'description' => t('pesonalization all content link'),
     ),
   );
 }
@@ -44,6 +49,20 @@ function itg_personalization_menu() {
   $items['itg-validate-by-usermail'] = array(
     'page callback' => 'itg_personalization_validate_by_usermail',
     'access arguments' => array('view personalized content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['personalization-all-content'] = array(
+    'title' => '',
+    'page callback' => 'itg_personalization_all_content_display',
+    'access arguments' => array('access personalization all content link'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/personalization_content_list.inc',
+  );
+  $items['personalization-del-content/%/%'] = array(
+    'title' => '',
+    'page callback' => 'itg_mongo_delete_ugc_content',
+    'page arguments' => array(1,2),
+    'access arguments' => array('access personalization all content link'),
     'type' => MENU_CALLBACK,
   );
 
@@ -166,6 +185,10 @@ function itg_personalization_block_info() {
     'info' => t('Personalized Show Content'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['personalization_all_content'] = array(
+    'info' => t('Personalized All Content'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -236,6 +259,9 @@ function itg_personalization_block_view($delta = '') {
       break;
     case 'personalization_show_content':
       $block['content'] = _personalization_show_content();
+      break;
+    case 'personalization_all_content':
+      $block['content'] = _personalization_all_content();
       break;
     case 'user_saved_content':
       $block['content'] = '<div id="target"></div>';
