@@ -56,7 +56,7 @@ function itg_personalization_all_content_form_submit($form, &$form_state) {
 }
 
 /**
- * Implements itg_ugc_inqueue_content().
+ * Implements itg_personalization_all_content_display().
  */
 function itg_personalization_all_content_display() {
   global $base_url, $user;
