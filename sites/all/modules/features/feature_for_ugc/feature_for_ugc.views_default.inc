@@ -208,7 +208,7 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['field_ugc_ctype']['id'] = 'field_ugc_ctype';
   $handler->display->display_options['fields']['field_ugc_ctype']['table'] = 'field_data_field_ugc_ctype';
   $handler->display->display_options['fields']['field_ugc_ctype']['field'] = 'field_ugc_ctype';
-  /* Field: Content: Name */
+  /* Field: Field: Name */
   $handler->display->display_options['fields']['field_user_name']['id'] = 'field_user_name';
   $handler->display->display_options['fields']['field_user_name']['table'] = 'field_data_field_user_name';
   $handler->display->display_options['fields']['field_user_name']['field'] = 'field_user_name';
@@ -230,7 +230,7 @@ function feature_for_ugc_views_default_views() {
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
-  /* Field: Content: Description */
+  /* Field: Content: Answer */
   $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
@@ -533,7 +533,7 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['field_ugc_ctype']['id'] = 'field_ugc_ctype';
   $handler->display->display_options['fields']['field_ugc_ctype']['table'] = 'field_data_field_ugc_ctype';
   $handler->display->display_options['fields']['field_ugc_ctype']['field'] = 'field_ugc_ctype';
-  /* Field: Content: Name */
+  /* Field: Field: Name */
   $handler->display->display_options['fields']['field_user_name']['id'] = 'field_user_name';
   $handler->display->display_options['fields']['field_user_name']['table'] = 'field_data_field_user_name';
   $handler->display->display_options['fields']['field_user_name']['field'] = 'field_user_name';
@@ -555,7 +555,7 @@ function feature_for_ugc_views_default_views() {
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
-  /* Field: Content: Description */
+  /* Field: Content: Answer */
   $handler->display->display_options['fields']['field_user_message']['id'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
@@ -585,7 +585,7 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['changed']['label'] = 'Rejected date';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom_date_d_m_y_';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Field: source */
+  /* Field: Field: Kicker Text */
   $handler->display->display_options['fields']['field_source']['id'] = 'field_source';
   $handler->display->display_options['fields']['field_source']['table'] = 'field_data_field_source';
   $handler->display->display_options['fields']['field_source']['field'] = 'field_source';

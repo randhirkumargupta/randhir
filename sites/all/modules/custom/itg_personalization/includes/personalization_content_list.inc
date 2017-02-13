@@ -13,13 +13,13 @@ function itg_personalization_all_content_form($form, &$form_state) {
   global $base_url;
   $form = array();
   $form['heading'] = array(
-        '#prefix' => '<h2>'.t('Here you can view all the content submitted by you'),
-        '#markup' => '</h2>',
-      );
+    '#prefix' => '<h2>' . t('Here you can view all the content submitted by you'),
+    '#markup' => '</h2>',
+  );
   $form['status'] = array(
     '#type' => 'select',
     '#title' => 'Status',
-    '#options' => array('_none' => 'select', 'review' => 'Review', 'approve' => 'Approve', 'reject' => 'Reject'),
+    '#options' => array('_none' => 'Select', 'review' => 'Under Review', 'approve' => 'Approved', 'reject' => 'Rejected'),
     '#default_value' => ($_GET['status']) ? $_GET['status'] : '_none',
   );
   $form['items_per_page'] = array(

@@ -22,7 +22,7 @@ function itg_personalization_permission() {
     ),
     'access personalization all content link' => array(
       'title' => t('Personalization all content link'),
-      'description' => t('pesonalization all content link'),
+      'description' => t('personalization all content link'),
     ),
   );
 }
@@ -347,8 +347,8 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
     $form['field_user_city']['#prefix'] = '<div style="display: none;">';
     $form['field_user_city']['#suffix'] = '</div>';
     // Hide section field.    
-    $form['field_section']['#prefix'] = '<div style="display: none;">';
-    $form['field_section']['#suffix'] = '</div>';
+//    $form['field_section']['#prefix'] = '<div style="display: none;">';
+//    $form['field_section']['#suffix'] = '</div>';
     $form['field_ugc_ctype']['#prefix'] = '<div class="per-icon">' . $content_type_for_icon . '</div><div style="display: none;">';
     $form['field_ugc_ctype']['#suffix'] = '</div>';
     // Set field visibility for category field.
