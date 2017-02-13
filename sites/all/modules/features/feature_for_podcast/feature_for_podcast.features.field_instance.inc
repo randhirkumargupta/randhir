@@ -279,6 +279,45 @@ function feature_for_podcast_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-podcast-field_podcast_configuration'.
+  $field_instances['node-podcast-field_podcast_configuration'] = array(
+    'bundle' => 'podcast',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 25,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_podcast_configuration',
+    'label' => 'Configuration',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 34,
+    ),
+  );
+
   // Exported field_instance: 'node-podcast-field_podcast_kicker_message'.
   $field_instances['node-podcast-field_podcast_kicker_message'] = array(
     'bundle' => 'podcast',
@@ -1174,6 +1213,7 @@ function feature_for_podcast_field_default_field_instances() {
   t('Audio Image Upload');
   t('Audio Upload');
   t('Category');
+  t('Configuration');
   t('Description');
   t('Extra large image');
   t('Extra small image');

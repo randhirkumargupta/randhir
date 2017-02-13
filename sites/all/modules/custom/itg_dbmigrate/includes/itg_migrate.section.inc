@@ -26,7 +26,8 @@ class ItgSectionMigration extends XMLMigration {
       'section_flag' => t('section_flag'),      
       'section_type' => t('section_type'),    
       'content_url' => t('content_url'),      
-      'content_display_color' => t('content_display_color'), 
+      'content_display_color' => t('content_display_color'),
+      'issue_free' => t('issue_free'),
     );
 
     // This can also be an URL instead of a local file path.
@@ -93,6 +94,8 @@ class ItgSectionMigration extends XMLMigration {
     $this->addFieldMapping('field_category_section_type', 'section_type')->xpath('section_type'); 
     // Redirect
     $this->addFieldMapping('migrate_redirects', 'content_url')->xpath('content_url');
+    $this->addFieldMapping('field_issue_free', 'issue_free')->xpath('issue_free');
+    
     //<issue_free>0</issue_free> (not clear)
     //$this->addFieldMapping('metatag_abstract', 'nodeword_abstract');    
     //$this->addFieldMapping('metatag_robots', 'nodeword_robots');

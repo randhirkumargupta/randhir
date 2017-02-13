@@ -82,7 +82,20 @@ function itg_layout_manager_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_layout_manager.inc',
   );
-
+  
+  $items['custom-content-widgets/autocomplete'] = array(
+        'page callback' => 'content_custom_widgets_title',
+        'access arguments' => array('access itg story'),
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_layout_autocomplete.inc',
+    );
+  
+  $items['custom-content-widgets'] = array(
+    'page callback' => 'custom_content_widgets',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_layout_autocomplete.inc',
+  );
   return $items;
 }
 
@@ -154,6 +167,11 @@ function itg_layout_manager_block_info() {
 
     $blocks['front_end_breadcrumb'] = array(
         'info' => t('Front end breadcrumb'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
+    
+    $blocks['custom_content_widget_block'] = array(
+        'info' => t('Custom content widget block'),
         'cache' => DRUPAL_CACHE_GLOBAL,
     );
 
@@ -338,7 +356,7 @@ function itg_layout_manager_block_view($delta = '') {
     break;
     
     case 'front_end_breadcrumb':
-      
+      $breadcrumb = '';
       if (arg(0) == 'node' && arg(1)) {
         $entity_object = menu_get_object();
         if (isset($entity_object->field_primary_category['und'][0]['value'])) {          
@@ -363,9 +381,21 @@ function itg_layout_manager_block_view($delta = '') {
               'anchors-list' => 'Anchors',
               'blog-listing' => 'Blog',
               'podcasts-listing' => 'Podcast',
-              'programmes' => 'Programmes');
+              'programmes' => 'Programmes',
+              'snappost' => 'Snappost', 
+              'itg-quiz' => 'Quiz',
+              'itg-survey' => 'Survey',
+              'online-archive-story' => 'Online Story Archive',
+              'photo-list' => 'IPl Photo',
+              'video-list' => 'IPl Video',
+              'calendar/0/0/magazine.html' => 'Magazine',);
           if (function_exists('frontend_breadcrumb_display')) {
-            $arg0 = arg(0);
+            if (arg(0) == 'calendar') {
+              $arg0 = 'calendar/0/0/magazine.html';
+            } else {
+                $arg0 = arg(0);
+            }
+            
             if (!empty($array_url[$arg0])) {
               $breadcrumb = frontend_breadcrumb_display('', '', $array_url[$arg0]);
             }
@@ -373,6 +403,11 @@ function itg_layout_manager_block_view($delta = '') {
       }
 
       $block['content'] = theme('frontend_breadcrumb_display_block', array('data' => $breadcrumb));
+    break;
+    case 'custom_content_widget_block':
+      $content_widgets_form = drupal_get_form('content_widgets_search_form');
+      $widget_array['content_widgets_form'] = drupal_render($content_widgets_form);      
+      $block['content'] = theme('layout_content_custom_widgets_list_block', array('data' => $widget_array));
     break;
   }
 
@@ -473,6 +508,11 @@ function itg_layout_manager_theme($existing, $type, $theme, $path) {
     'frontend_breadcrumb_display_block' => array(
         'arguments' => array('form' => NULL),
         'template' => 'frontend-breadcrumb-display',
+        'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+    ),
+    'layout_content_custom_widgets_list_block' => array(
+        'arguments' => array('form' => NULL),
+        'template' => 'layout-content-custom-widgets-list-block',
         'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
     ),
       

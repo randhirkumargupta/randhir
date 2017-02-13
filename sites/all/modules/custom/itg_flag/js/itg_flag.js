@@ -244,4 +244,19 @@ jQuery(document).ready(function () {
     });
 
     // end here
+    
+    // alert on ugc reject link click
+    jQuery(document).ready(function () {
+        jQuery(".ugc-reject").click(function () {
+            var reject_status = "reject";
+            if (reject_status == "reject") {
+                var msg = confirm("Are you sure you want to reject this content?");
+                if (msg == true) {
+                    return true;
+                }
+                return false;
+            }
+            return true;
+        });
+    });
 });

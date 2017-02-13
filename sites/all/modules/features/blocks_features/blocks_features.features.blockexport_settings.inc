@@ -28540,8 +28540,9 @@ itg-layout-manager/special',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
-user/login
-user/password',
+user/*
+personalization
+personalization/*',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -28953,8 +28954,9 @@ itg-layout-manager/special',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
-user/login
-user/password',
+user/*
+personalization
+personalization/*',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -29404,12 +29406,13 @@ itg-layout-manager/special',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
-user/login
-user/password',
+user/*
+personalization
+personalization/*',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -29877,8 +29880,9 @@ itg-layout-manager/special',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
-user/login
-user/password',
+user/*
+personalization
+personalization/*',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -30371,12 +30375,13 @@ itg-layout-manager/special',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
-user/login
-user/password',
+user/*
+personalization
+personalization/*',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -30888,8 +30893,9 @@ itg-layout-manager/special',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
-user/login
-user/password',
+user/*
+personalization
+personalization/*',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -31401,8 +31407,9 @@ itg-layout-manager/special',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
-user/login
-user/password',
+user/*
+personalization
+personalization/*',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -34742,6 +34749,20 @@ personalization/saved-items/videos
 personalization/saved-items/photogalleries',
   'title' => '',
   'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2412,
+  'module' => 'itg_custom_widget',
+  'delta' => 'custom_content_widget',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
 );
   $export['block_custom'][] = array(
   'bid' => 1,

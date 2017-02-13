@@ -74,7 +74,7 @@ function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_i
         case 'views-exposed-form-report-filed-content-page':
             // remove archive and unpublish on list
             $option = array();
-          
+
             foreach ($form['state']['#options'] as $key => $option_val) {
 
                 if ($key != 'un_published' && $key != 'archive') {
@@ -158,7 +158,7 @@ function itg_reports_block_view($delta = '') {
         case 'itg_report_career_graph':
             $output = array();
             $data = itg_report_get_graph_data();
-
+            drupal_add_js(drupal_get_path('module', 'itg_reports') . '/js/canvasjs.min.js');
             $errors = array_filter($data);
             if (!empty($errors)) {
                 foreach ($data as $key => $chart_data) {
@@ -177,14 +177,14 @@ function itg_reports_block_view($delta = '') {
                     itg_reports_missing_year($chart_data['graph']);
                     if (!empty($chart_data['graph'])) {
                         foreach ($chart_data['graph'] as $g_data) {
-                            
+
                             $graph_d[$g_data[0]] = $g_data;
                         }
                     }
-                    
+
                     $chart['career'] = array(
                         '#type' => 'chart_data',
-                        '#data' => $graph_d,
+                        '#data' => $chart_data['graph'],
                         '#title' => t($chart_data['actor'][$key]['actor_name']),
                     );
                     $chart['xaxis'] = array(
@@ -198,7 +198,7 @@ function itg_reports_block_view($delta = '') {
                         '#title' => t('Earning'),
                     );
                     $career_graph['chart'] = $chart;
-                    
+
                     $output[] = $career_graph;
                     $actor_info[] = array(
                         'name' => $chart_data['actor'][0]['actor_name'],
