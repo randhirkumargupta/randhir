@@ -710,8 +710,8 @@ function itg_common_mail_alter(&$message) {
   
   global $user, $base_url;  
  
-  //if (FRONT_URL == $base_url || BACKEND_URL == $base_url) {
+  if (FRONT_URL == $base_url || BACKEND_URL == $base_url) {
     $message['send'] = FALSE;
-  //}
+  }
   
 }
