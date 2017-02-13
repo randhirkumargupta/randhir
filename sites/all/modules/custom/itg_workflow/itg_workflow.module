@@ -635,14 +635,17 @@ function itg_workflow_node_insert($node) {
   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
     global $user;
 
-    if (!array_key_exists(COPY_EDITOR, $user->roles) && !array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) && !array_key_exists(EDITOR, $user->roles) && !array_key_exists(SITE_ADMIN, $user->roles) && !($node->workbench_moderation_state_new == 'draft')) {
+    /*if (!array_key_exists(COPY_EDITOR, $user->roles) &&
+            !array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) &&
+            !array_key_exists(EDITOR, $user->roles) &&
+            !array_key_exists(SITE_ADMIN, $user->roles) &&
+            !($node->workbench_moderation_state_new == 'draft')) {
 
       //getting mail id's of high level users
       $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
       $user_email = get_email_by_roll($rid);
-
-      //workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
-    }
+      workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
+     }*/
 
     $preview_unique_id = $node->field_preview_unique_id['und'][0]['value'];
     $user_id = $user->uid;
@@ -671,38 +674,25 @@ function itg_workflow_node_insert($node) {
  * @param object $node
  */
 function itg_workflow_node_update($node) {
-
-    
-    if($node->type == 'story'){
-        if ($node->workbench_moderation_state_new == 'published'){
-          $itguser = user_load($node->uid);
-          $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR, SEO);
-          $user_email = get_email_by_roll($rid);
-          $user_email[] = $itguser->mail;
-          //workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
-        }
-    }
-  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
-
-    global $user;
+  global $user;   
+  
+  if ($node->type == 'story' 
+          || $node->type == 'photogallery' 
+          || $node->type == 'blog' 
+          || $node->type == 'podcast' 
+          || $node->type == 'videogallery') {
     
     $preview_unique_id = $node->field_preview_unique_id['und'][0]['value'];
     
-    
-    
-    
-    if ($node->workbench_moderation_state_current == 'published') {
-      //workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name); 
-    }
-    
     if ($node->workbench_moderation_state_new != 'draft') {
       $itguser = user_load($node->uid);
-
-      if (!array_key_exists(COPY_EDITOR, $itguser->roles) && !array_key_exists(SECTION_EDITOR_ANCHOR, $itguser->roles) && !array_key_exists(EDITOR, $itguser->roles) && !array_key_exists(SITE_ADMIN, $itguser->roles)) {
-        
-      }
       //getting mail id's of high level users
-      $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
+      if($node->type == 'story' && $node->workbench_moderation_state_new == 'published') {       
+        $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR, SEO);               
+      } else {
+        $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
+      }
+      
       $user_email = get_email_by_roll($rid);
       $user_email[] = $itguser->mail;
       
@@ -733,7 +723,7 @@ function itg_workflow_node_update($node) {
       
       unset($_SESSION['node_preview_unique']);
       
-      //workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
+      workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
     }
     
 

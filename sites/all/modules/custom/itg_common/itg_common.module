@@ -18,7 +18,9 @@ module_load_include('inc', 'itg_common', 'includes/itg_common');
  */
 function itg_common_init() {
   global $user, $base_url, $theme;
-  
+  pr(FRONT_URL) ;
+  echo '==';
+  pr(BACKEND_URL);
   //code for multidomain
   if (arg(0) != 'user' && $base_url == BACKEND_URL && ($user->uid == 0 || array_key_exists(FRONT_USER, $user->roles))) {    
     drupal_goto('user');
@@ -703,15 +705,15 @@ function itg_apache_solr_get_site_hash() {
 }
 
 /**
- * Implements hook_init.
+ * Implements hook_mail_alter.
  * {@inheritdoc}
  */
 function itg_common_mail_alter(&$message) {
   
   global $user, $base_url;  
  
-  if (FRONT_URL == $base_url || BACKEND_URL == $base_url) {
+  //if (FRONT_URL == $base_url || BACKEND_URL == $base_url) {
     $message['send'] = FALSE;
-  }
+  //}
   
 }
