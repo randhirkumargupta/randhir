@@ -34,14 +34,12 @@ Drupal.behaviors.itg_budget_predictor = {
 
             if (Drupal.settings.itg_budget_predictor.settings.stopPredictor == 2) {
                 var isUpdated;
-
-                if (admin_user == null || admin_user === undefined) {
-                    jQuery("#final-sortable").sortable( {
-                        containment: "parent",
-                    });
-                }
-
-                jQuery("#sortable1, #sortable2, #sortable3, #sortable4, #final-sortable").sortable(
+                jQuery('#ranking-content ul li, #ranking-content-main ul li').mouseover(function () {
+                    var ranking_column_id = jQuery(this).data("id");
+                    var str = jQuery(this).attr("id");
+                    var entity_id = str.split("_");
+                    
+                     jQuery("#sortable1, #sortable2, #sortable3, #sortable4").sortable(
                         {
                             connectWith: '.connectedSortable',
                             update: function (event, ui) {
@@ -54,21 +52,33 @@ Drupal.behaviors.itg_budget_predictor = {
                                             {
                                                 type: "POST",
                                                 url: Drupal.settings.itg_budget_predictor.settings.basePath + '/ajax/budget-ranking/' + section_id,
-                                                data:
+                                                beforeSend: function() {
+                                                                jQuery('#loader-data img').show();
+                                                            },
+                                                        data:
                                                         {
                                                             sort1: jQuery("#sortable1").sortable('serialize'),
                                                             sort2: jQuery("#sortable2").sortable('serialize'),
                                                             sort3: jQuery("#sortable3").sortable('serialize'),
-                                                            cookies_id: jQuery.cookie("COOKIES_IT_" + section_id)
+                                                            sort4: jQuery("#sortable4").sortable('serialize'),
+                                                            cookies_id: jQuery.cookie("COOKIES_IT_" + section_id),
+                                                            eid: entity_id[1],
+                                                            ranking_column_id: ranking_column_id,
                                                         },
                                                 success: function (html)
                                                 {
                                                     jQuery('.success').fadeIn(500);
+                                                    jQuery('#loader-data img').hide();
+
                                                 }
                                             });
                                 }
                             }
                         }).disableSelection();
+                    
+                });
+
+               
             }
 
         });
