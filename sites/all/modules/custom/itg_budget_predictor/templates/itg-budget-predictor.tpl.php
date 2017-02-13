@@ -42,7 +42,7 @@ $user_id = $data['user_id'];
   <?php } ?>
   <div id="main-container-budget">
       <div class="top-side-block">
-           <div id="final-sortable">
+           
               <div id="ranking-content" class="col-md-2 col-list col-list-1">
                   <span id="ranking-label" class="title"><?php print t('Cheaper'); ?></span>
                   <ul id="sortable1" class="connectedSortable">
@@ -61,11 +61,12 @@ $user_id = $data['user_id'];
                       <?php echo $column3; ?>
                   </ul>
               </div>
-           </div>
+          
           <div id="ranking-content-main" class="col-md-6 col-list col-list-4">
               <span id="ranking-label" class="title"><?php print t('Items'); ?></span>
-              <ul id="sortable4" class="connectedSortable1">
+              <ul id="sortable4" class="connectedSortable">
                   <?php echo $column4; ?>
+                  <div id="loader-data"><img class="widget-loader" style="display: none" src="<?php echo base_path(); ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
               </ul>
               <?php
                   if ($budget_message_flag) {
