@@ -20,8 +20,8 @@ function itg_coupon_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
 
     case 'coupon_node_form':
-
       unset($form['actions']['preview_changes']);
+      unset($form['actions']['preview']);
       $form['#validate'][] = 'itg_coupon_custom_validate';
       $form['actions']['cancel'] = array(
           '#markup' => l(t('Cancel'), 'manage-coupons', array('attributes' => array('class' => 'button'))),
