@@ -279,6 +279,8 @@ function features_for_story_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
+        'newsletter' => 'Newsletter',
+        'breaking-news' => 'Breaking News',
         'magazine' => 'Magazine',
         'story' => 'Story',
         'supplement' => 'Supplement',
@@ -295,7 +297,7 @@ function features_for_story_field_default_field_bases() {
         'food-news' => 'food-news',
         'quiz' => 'quiz',
         'ugc' => 'ugc',
-        'breaking_news' => 'Breaking News',
+        'manage-budget-predictor' => 'Budget-Predictor',
       ),
       'allowed_values_function' => '',
     ),
@@ -1667,17 +1669,15 @@ function features_for_story_field_default_field_bases() {
     ),
     'locked' => 0,
     'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
+    'settings' => array(),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'text_long',
   );
 
   // Exported field_base: 'field_story_listicle_type'.
   $field_bases['field_story_listicle_type'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_listicle_type',
@@ -1693,7 +1693,8 @@ function features_for_story_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'yes' => 'yes',
+        'exclusive' => 'Exclusive',
+        'live' => 'Live',
       ),
       'allowed_values_function' => '',
     ),

@@ -177,7 +177,7 @@ function itg_get_newsletter_mail_content($node, $template_node) {
  * @param object $template_node
  * @return string
  */
-function itg_get_newsletter_mail_content_stories($template_node, $news_content = NULL, $section = array(), $totaltime, $previoustime) {
+function itg_get_newsletter_mail_content_stories($template_node, $news_content = NULL, $section = array(), $crontime, $previoustime) {
   global $base_url;
 
   $banner = $base_url . str_replace('public://', '/sites/default/files/', $template_node->field_newst_banner[LANGUAGE_NONE][0]['uri']);
@@ -199,7 +199,7 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
           <table cellspacing="0" cellpadding="0" style="width: 100%;">';
   if ($news_content == 'section') {
 
-    $story_nodes = itg_newsletter_get_section_stories($section, $totaltime, $previoustime);
+    $story_nodes = itg_newsletter_get_section_stories($section, $crontime, $previoustime);
   }
   else {
     $story_nodes = itg_newsletter_get_top_stories();

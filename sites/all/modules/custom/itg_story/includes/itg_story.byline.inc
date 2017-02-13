@@ -216,6 +216,7 @@ function itg_story_node_insert($node) {
     $nid = $node->nid;
     $unique_id = $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'];
     $row_count = itg_get_byline_row($unique_id);
+    if(!empty($row_count)) {
     foreach ($row_count as $id) {
       db_update('itg_multi_byline_info')
           ->fields(array(
@@ -224,7 +225,7 @@ function itg_story_node_insert($node) {
           ->condition('id', $id, '=')
           ->execute();
     }
-    
+    }
     if(!empty($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'])) {
     itg_byline_order_update($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'], $nid);
     }
@@ -243,6 +244,7 @@ function itg_story_node_update($node) {
     $nid = $node->nid;
     $unique_id = $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'];
     $row_count = itg_get_byline_row($unique_id);
+    if(!empty($row_count)) {
     foreach ($row_count as $id) {
       db_update('itg_multi_byline_info')
           ->fields(array(
@@ -250,6 +252,7 @@ function itg_story_node_update($node) {
           ))
           ->condition('id', $id, '=')
           ->execute();
+    }
     }
     
     if(!empty($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'])) {

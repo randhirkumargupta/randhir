@@ -73,18 +73,27 @@ function loyality_reward_points_configuration_form() {
         '#type' => 'item',
         '#markup' => '<div class="itg-group-field"><h2>' . t('Point configuration for Badges') . '</h2></div>',
     );
-    $url_first = url('file/itg_image_repository/node/story/field_story_extra_large_image', array('query' => array('app' => 'lrp_gold_star_one_icon' . '|url@' . $filepath_id, 'field_name' => 'lrp_gold_star_one_icon', 'height' => 66, 'width' => 88, 'custom_form' => 1, 'btn_name' => 'lrp_gold_star_one_icon_upload_button')));
-    $link_first_image = "showimagerepopopu('" . $url_first . "')";
     $form['lrp_gold_star_one'] = array(
         '#type' => 'textfield',
         '#title' => t('Points required for one Gold Star'),
         '#maxlength' => 6,
-        '#suffix' => '<div class="poll-form div_lrp_gold_star_one_icon"><a href="javascript:void(0)" onclick="' . $link_first_image . '">Browse Image</a></div>,
         '#default_value' => variable_get('lrp_gold_star_one'),
     );
 
+    $url_first = url('file/itg_image_repository/node/story/field_story_extra_large_image', array('query' => array('app' => 'lrp_gold_star_one_icon' . '|url@' . $filepath_id, 'field_name' => 'lrp_gold_star_one_icon', 'height' => 66, 'width' => 88, 'custom_form' => 1, 'btn_name' => 'lrp_gold_star_one_icon_upload_button')));
+    $link_first_image = "showimagerepopopu('" . $url_first . "')";
+    $form['lrp_gold_star_one_icon_fieldset'] = array(
+        '#type' => 'fieldset',
+        '#collapsible' => TRUE, // Added
+        '#collapsed' => FALSE, // Added
+    );
 
-    $form['lrp_gold_star_one_icon'] = array(
+    $form['lrp_gold_star_one_icon_fieldset']['markup'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div class="poll-form div_lrp_gold_star_one_icon"><a href="javascript:void(0)" onclick="' . $link_first_image . '">Browse Image</a></div>',
+    );
+
+    $form['lrp_gold_star_one_icon_fieldset']['lrp_gold_star_one_icon'] = array(
         '#type' => 'managed_file',
         '#title' => t('Badge Icon'),
         '#default_value' => variable_get('badge_1', ''),
@@ -100,10 +109,21 @@ function loyality_reward_points_configuration_form() {
         '#type' => 'textfield',
         '#title' => t('Points required for two Gold Star'),
         '#maxlength' => 6,
-        '#suffix' => '<div class="poll-form div_lrp_gold_star_two_icon"><a href="javascript:void(0)" onclick="' . $link_second_image . '">Browse Image</a></div>',
         '#default_value' => variable_get('lrp_gold_star_two'),
     );
-    $form['lrp_gold_star_two_icon'] = array(
+
+    $form['lrp_gold_star_two_icon_fieldset'] = array(
+        '#type' => 'fieldset',
+        '#collapsible' => TRUE, // Added
+        '#collapsed' => FALSE, // Added
+    );
+
+    $form['lrp_gold_star_two_icon_fieldset']['markup'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div class="poll-form div_lrp_gold_star_two_icon"><a href="javascript:void(0)" onclick="' . $link_second_image . '">Browse Image</a></div>',
+    );
+
+    $form['lrp_gold_star_two_icon_fieldset']['lrp_gold_star_two_icon'] = array(
         '#type' => 'managed_file',
         '#title' => t('Badge Icon'),
         '#default_value' => variable_get('badge_2', ''),
@@ -119,10 +139,19 @@ function loyality_reward_points_configuration_form() {
         '#type' => 'textfield',
         '#title' => t('Points required for three Gold Star'),
         '#maxlength' => 6,
-        '#suffix' => '<div class="poll-form div_lrp_gold_star_three_icon"><a href="javascript:void(0)" onclick="' . $link_three_image . '">Browse Image</a></div>',
         '#default_value' => variable_get('lrp_gold_star_three'),
     );
-    $form['lrp_gold_star_three_icon'] = array(
+    $form['lrp_gold_star_three_icon_fieldset'] = array(
+        '#type' => 'fieldset',
+        '#collapsible' => TRUE, // Added
+        '#collapsed' => FALSE, // Added
+    );
+
+    $form['lrp_gold_star_three_icon_fieldset']['markup'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div class="poll-form div_lrp_gold_star_three_icon"><a href="javascript:void(0)" onclick="' . $link_three_image . '">Browse Image</a></div>',
+    );
+    $form['lrp_gold_star_three_icon_fieldset']['lrp_gold_star_three_icon'] = array(
         '#type' => 'managed_file',
         '#title' => t('Badge Icon'),
         '#default_value' => variable_get('badge_3', ''),
@@ -137,10 +166,20 @@ function loyality_reward_points_configuration_form() {
         '#type' => 'textfield',
         '#title' => t('Points required for four Gold Star'),
         '#maxlength' => 6,
-        '#suffix' => '<div class="poll-form div_lrp_gold_star_four_icon"><a href="javascript:void(0)" onclick="' . $link_four_image . '">Browse Image</a></div>',
         '#default_value' => variable_get('lrp_gold_star_four'),
     );
-    $form['lrp_gold_star_four_icon'] = array(
+
+    $form['lrp_gold_star_four_icon_fieldset'] = array(
+        '#type' => 'fieldset',
+        '#collapsible' => TRUE, // Added
+        '#collapsed' => FALSE, // Added
+    );
+
+    $form['lrp_gold_star_four_icon_fieldset']['markup'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div class="poll-form div_lrp_gold_star_four_icon"><a href="javascript:void(0)" onclick="' . $link_four_image . '">Browse Image</a></div>',
+    );
+    $form['lrp_gold_star_four_icon_fieldset']['lrp_gold_star_four_icon'] = array(
         '#type' => 'managed_file',
         '#title' => t('Badge Icon'),
         '#default_value' => variable_get('badge_4', ''),
@@ -155,10 +194,20 @@ function loyality_reward_points_configuration_form() {
         '#type' => 'textfield',
         '#title' => t('Points required for five Gold Star'),
         '#maxlength' => 6,
-        '#suffix' => '<div class="poll-form div_lrp_gold_star_five_icon"><a href="javascript:void(0)" onclick="' . $link_five_image . '">Browse Image</a></div>',
         '#default_value' => variable_get('lrp_gold_star_five'),
     );
-    $form['lrp_gold_star_five_icon'] = array(
+    
+     $form['lrp_gold_star_five_icon_fieldset'] = array(
+        '#type' => 'fieldset',
+        '#collapsible' => TRUE, // Added
+        '#collapsed' => FALSE, // Added
+    );
+
+    $form['lrp_gold_star_five_icon_fieldset']['markup'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div class="poll-form div_lrp_gold_star_five_icon"><a href="javascript:void(0)" onclick="' . $link_five_image . '">Browse Image</a></div>',
+    );
+    $form['lrp_gold_star_five_icon_fieldset']['lrp_gold_star_five_icon'] = array(
         '#type' => 'managed_file',
         '#title' => t('Badge Icon'),
         '#default_value' => variable_get('badge_5', ''),

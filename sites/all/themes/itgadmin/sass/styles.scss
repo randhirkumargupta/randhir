@@ -10306,4 +10306,10 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   .form-type-textfield{
     padding: 0;
   }
+  .form-actions{
+    margin-top: 20px;
+    a{
+      @extend .btn-reset;
+    }
+  }
 }

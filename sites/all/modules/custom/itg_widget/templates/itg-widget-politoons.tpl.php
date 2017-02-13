@@ -10,7 +10,7 @@
   <div class="row">
     <?php foreach ($data as $key => $taxonomy) :
       ?>
-      <div class="col-md-4 col-xs-6 politoons-<?php echo $key; ?>">
+      <div class="col-md-4 col-sm-4 col-xs-4 politoons-<?php echo $key; ?>">
         <?php
         $title = $taxonomy['title'];
         $tid = $taxonomy['term_id'];

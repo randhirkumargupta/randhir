@@ -88,5 +88,8 @@ function hightlights_show_fields (number_of_tr) {
     if (field_highlights == 0) {
       jQuery('input[name="field_highlights[und][' + i + '][field_emoji_condition][und]"]').parent().parent().parent().parent().nextAll("div").hide();
     }
+    if (field_highlights == "none") {
+        jQuery('input[name="field_highlights[und][' + i + '][field_emoji_condition][und]"]').parent().parent().parent().parent().nextAll("div").hide();
+    }
   }
 }

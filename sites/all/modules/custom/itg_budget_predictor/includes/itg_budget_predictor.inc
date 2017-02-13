@@ -95,7 +95,7 @@ function itg_budget_predictor_get_taxonomy() {
         $file = file_load($fid);
         $uri = $file->uri;
         if ($tid) {
-          $column4 .= '<li id="entry_' . $tid . '" class="ui-state-default"><img src="' . image_style_url("thumbnail", $uri) . '" title="' . $name . '" alt="" /></li>';
+          $column4 .= '<li id="entry_' . $tid . '" class="ui-state-default" data-id="4"><img src="' . image_style_url("thumbnail", $uri) . '" title="' . $name . '" alt="" /></li>';
         }
       }
     }
@@ -106,13 +106,13 @@ function itg_budget_predictor_get_taxonomy() {
         $file = file_load($fid);
         $uri = $file->uri;
         if ($values['ranking_column'] == '1') {
-          $column1 .= '<li id="entry_' . $entity_id . '" class="ui-state-default"><img src="' . image_style_url("thumbnail", $uri) . '" alt="" /></li>';
+          $column1 .= '<li id="entry_' . $entity_id . '" class="ui-state-default" data-id="1"><img src="' . image_style_url("thumbnail", $uri) . '" alt="" /></li>';
         }
         if ($values['ranking_column'] == '2') {
-          $column2 .= '<li id="entry_' . $entity_id . '" class="ui-state-default"><img src="' . image_style_url("thumbnail", $uri) . '" alt="" /></li>';
+          $column2 .= '<li id="entry_' . $entity_id . '" class="ui-state-default" data-id="2"><img src="' . image_style_url("thumbnail", $uri) . '" alt="" /></li>';
         }
         if ($values['ranking_column'] == '3') {
-          $column3 .= '<li id="entry_' . $entity_id . '" class="ui-state-default"><img src="' . image_style_url("thumbnail", $uri) . '" alt="" /></li>';
+          $column3 .= '<li id="entry_' . $entity_id . '" class="ui-state-default" data-id="3"><img src="' . image_style_url("thumbnail", $uri) . '" alt="" /></li>';
         }
       }
     }
@@ -162,11 +162,11 @@ function itg_budget_predictor_update_budget() {
   $sort2 = '';
   $sort3 = '';
   $sort4 = '';
-
   // PARSES THE POSTS FROM EACH COLUMN INTO AN ARRAY
   parse_str($_POST['sort1'], $sort1);
   parse_str($_POST['sort2'], $sort2);
   parse_str($_POST['sort3'], $sort3);
+  parse_str($_POST['sort4'], $sort4);
   $cookies_id = ($_POST['cookies_id']) ? $_POST['cookies_id'] : 'static';
   if (!empty($sort1['entry'])) {
     //parse_str($_POST['sort4'], $sort4);
@@ -190,6 +190,7 @@ function itg_budget_predictor_update_budget() {
             ->execute();
       }
       else {
+        $or = db_or()->condition('user_id', $user_id)->condition('cookies_id', $cookies_id);
         db_update('itg_budget_predictor')
             ->fields(array(
               'ranking_value' => $key,
@@ -197,8 +198,7 @@ function itg_budget_predictor_update_budget() {
               'ip_address' => $ip_address,
             ))
             ->condition('entity_id', $value, '=')
-            ->condition('user_id', $user_id, '=')
-            ->execute();
+            ->condition($or)->execute();
       }
     }
   }
@@ -224,6 +224,7 @@ function itg_budget_predictor_update_budget() {
             ->execute();
       }
       else {
+        $or = db_or()->condition('user_id', $user_id)->condition('cookies_id', $cookies_id);
         db_update('itg_budget_predictor')
             ->fields(array(
               'ranking_value' => $key,
@@ -231,8 +232,7 @@ function itg_budget_predictor_update_budget() {
               'ip_address' => $ip_address,
             ))
             ->condition('entity_id', $value, '=')
-            ->condition('user_id', $user_id, '=')
-            ->execute();
+            ->condition($or)->execute();
       }
     }
   }
@@ -258,6 +258,7 @@ function itg_budget_predictor_update_budget() {
             ->execute();
       }
       else {
+        $or = db_or()->condition('user_id', $user_id)->condition('cookies_id', $cookies_id);
         db_update('itg_budget_predictor')
             ->fields(array(
               'ranking_value' => $key,
@@ -265,9 +266,16 @@ function itg_budget_predictor_update_budget() {
               'ip_address' => $ip_address,
             ))
             ->condition('entity_id', $value, '=')
-            ->condition('user_id', $user_id, '=')
-            ->execute();
+            ->condition($or)->execute();
       }
+    }
+  }
+  
+  if (!empty($sort4['entry'])) {
+    $ranking_column_id = ($_POST['ranking_column_id']) ? $_POST['ranking_column_id'] : '';
+    $eid = ($_POST['eid']) ? $_POST['eid'] : '';
+    foreach ($sort4['entry'] as $key => $value) {
+        delete_budget_predictor($ranking_column_id, $eid, $user_id, $cookies_id);
     }
   }
 }
@@ -659,15 +667,14 @@ function itg_manage_budget() {
   );
 
   $form['budget_image'] = array(
-    '#title' => t('Budget Image'),
+    '#title' => t('Budget Image').'<span class="form-required"> *</span>',
     '#type' => 'managed_file',
-    '#upload_validators' => array('file_validate_extensions' => array('jpeg jpg png gif')),
-    '#default_value' => ($results->file_id) ? $results->file_id : '',
+    '#file_validate_extensions' => array('png gif jpg jpeg'),
+    '#default_value' => isset($results->file_id) ? $results->file_id : NULL,
     '#upload_location' => 'public://budget/',
-    '#required' => TRUE
   );
-
-
+  
+ 
   $form['budget_status'] = array(
     '#type' => 'radios',
     '#title' => t('Budget status'),
@@ -713,6 +720,10 @@ function itg_manage_budget_validate($form, &$form_state) {
   $results = $query->execute()->fetchObject();
   if ($results->id) {
     form_set_error('field', t('Budget Predictor already exist.'));
+  }
+  
+  if($form_state['values']['budget_image'] == 0) {
+    form_set_error('budget_image', t('Budget image field is required.'));
   }
 }
 
@@ -979,6 +990,10 @@ function itg_budget_reset_image() {
   }
 }
 
+/**
+ * Option value set by section for budget predictor form.
+ * @return type
+ */
 function budget_tid_by_content_type() {
   $query = db_select('field_data_field_cm_select_type', 's');
       $query->fields('s',array(entity_id));
@@ -995,3 +1010,17 @@ function budget_tid_by_content_type() {
     return $op;
 }
 
+/**
+ * Delete data from budget predictor
+ * @param int $ranking_column_id
+ * @param int $eid
+ * @param int $user_id
+ * @param string $cookies_id
+ */
+function delete_budget_predictor($ranking_column_id, $eid, $user_id, $cookies_id) {
+  $or = db_or()->condition('user_id', $user_id)->condition('cookies_id', $cookies_id);
+  $q = db_delete('itg_budget_predictor')
+            ->condition('entity_id', $eid)
+            ->condition('ranking_column', $ranking_column_id)
+            ->condition($or)->execute();
+}
