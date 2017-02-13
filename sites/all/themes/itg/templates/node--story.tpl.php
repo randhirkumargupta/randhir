@@ -423,7 +423,7 @@ if (!empty($content)):
                                     ?>
                                   </div>
                                   <?php } ?>
-                                  <?php if (!empty($node->$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'])) { ?>
+                                  <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'])) { ?>
                                   <div class="photoby-text"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?></div>
                                   <?php } ?>
                                 </div>
