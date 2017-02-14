@@ -59,11 +59,18 @@ foreach ($output as $key => $value) {
                 title: {
                     text: ""
                 },
+                toolTip:{   
+			content: '{movie_name},{y} cr in year {x}',  
+                        
+		},
                 axisX: {
                     interval: 1,
+                     valueFormatString: "####", //try
                 },
                 data: [{
-                        type: "line",
+                        type: "line", 
+                        xValueFormatString: "Year ####",
+                        
                         toolTipContent: '{movie_name},{y} cr in year {x}',
                         connectNullData: true,
                         dataPoints: [
