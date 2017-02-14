@@ -2320,7 +2320,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       bottom: 0;
       height: 28px;
       position: absolute;
-      right: 532px;
+      right: 532px; 
       width: 28px;
       .form-submit{
         @extend .icon-add-more;
@@ -8463,18 +8463,35 @@ div.node{
       .form-type-radio, .form-type-checkbox{
         position: relative;
         > label{
-          padding: 10px;
-          border: 1px solid #e1e1e1;
           display: block;
           width: calc(100% - 30px);
           color: #777;
+          span{
+            border: 1px solid #e1e1e1;
+            padding: 10px;
+            display: block;
+            &.rightbg{
+              background-color: #1ECE1E !important;
+            }
+            &.wrongbg{
+              background-color: #ff1f1f !important;
+            }
+          }
+          &:hover{
+            span{
+              background-color: #ffc106;
+            }
+          }
         }
         .form-radio, .form-checkbox{
           position: absolute;
           opacity: 0;
-          &:checked + label{
-            background-color: #f6e90b;
-            color: #000;
+          &:checked + label{            
+            color: #000;   
+            padding:0;
+            span{
+              background-color: #ffc106;
+            }
           }
         }
       }
@@ -10310,6 +10327,56 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     margin-top: 20px;
     a{
       @extend .btn-reset;
+    }
+  }
+}
+.form-field-name-field-ads-ex-headerscript,
+.form-field-name-field-ads-ex-body-start,
+.form-field-name-field-ads-ex-body-close{
+  @extend .pos-rel;
+  margin: 10px 0;
+}
+[id*="field-ads-ex-body-start-values"], 
+[id*="field-ads-ex-body-close-values"], 
+[id*="field-ads-ex-headerscript-values"]{
+  @extend .itg-add-another-item;
+  tbody{
+    tr{
+      td{
+        border: none;
+        @extend .pos-rel;
+        padding: 10px 0 0;
+        .form-type-textarea{
+          margin: 0;
+          padding: 0;
+        }
+        > .form-submit, .ajax-new-content > .form-submit{
+          @extend .icon-remove-item;
+          margin: 0 !important;
+          position: absolute; 
+          left: 100%;
+          bottom: 0;
+        }
+      }
+      &:first-child td{
+        padding-top: 0;
+      }
+    }
+  }
+  & + div.clearfix{
+    bottom: 0;
+    height: 28px;
+    position: absolute;
+    right: 532px; 
+    width: 28px;
+    .form-submit{
+      @extend .icon-add-more;
+      margin: 0;
+    }
+    .ajax-progress{
+      position: absolute;
+      left: 100%;
+      top: -8px;
     }
   }
 }

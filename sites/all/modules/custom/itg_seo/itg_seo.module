@@ -89,8 +89,16 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
   }
 
 
-  if ($form_id == 'syndication_client_node_form' || $form_id == 'syndication_rule_node_form' || $form_id == 'syndication_feed_from_pattern_node_form' || $form_id == 'ads_management_node_form' || $form_id == 'task_idea_allocation_tracking_node_form' || $form_id == 'ugc_node_form' || $form_id == 'notification_node_form'
-  ) {
+  if ($form_id == 'syndication_client_node_form'
+          || $form_id == 'syndication_rule_node_form' 
+          || $form_id == 'syndication_feed_from_pattern_node_form'
+          || $form_id == 'ads_management_node_form'
+          || $form_id == 'task_idea_allocation_tracking_node_form'
+          || $form_id == 'ugc_node_form' 
+          || $form_id == 'notification_node_form'
+          || $form_id == 'coupon_node_form'
+
+          ) {
     //$form['additional_settings']['#access'] = FALSE;
     $form['#after_build'][] = 'itg_additional_settings_element_hide';
   }

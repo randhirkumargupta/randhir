@@ -172,7 +172,8 @@ function itg_related_form_views_exposed_form_alter(&$form, &$form_state, $form_i
   //Get the Form Id
   if ($form["#id"] == 'views-exposed-form-related-content-new-page') {
     $form['sm_vid_Tags']['#autocomplete_path'] = 'tag-list/1/autocomplete';
-    $form['tm_vid_4_names']['#autocomplete_path'] = 'tag-list/4/autocomplete';
+    $form['tm_vid_4_names']['#autocomplete_path'] = 'tag-list/'.CATEGORY_MANAGMENT.'/autocomplete';
+    $form['tm_vid_14_names']['#autocomplete_path'] = 'tag-list/'.CATEGORY_MANAGMENT.'/autocomplete';
     $form['sm_field_itg_common_by_line_name']['#autocomplete_path'] = 'reporter-list/autocomplete';
     $form['sm_field_itg_common_by_line_twit']['#autocomplete_path'] = 'twitter-handle/autocomplete';
   }
