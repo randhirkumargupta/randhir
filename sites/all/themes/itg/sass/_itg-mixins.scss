@@ -329,7 +329,7 @@ $root-font-size: 16px;
         li{
             @include display-inline;
             padding-right: 8px;
-            a{
+            a, span{
                 background: #000;
                 width: 20px;
                 height: 20px;                       
