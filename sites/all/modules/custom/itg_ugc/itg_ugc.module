@@ -963,11 +963,11 @@ function itg_ugc_view_content($unique_id) {
 
         foreach ($userData as $final_view) {
           $user_message = itg_ugc_bad_words($final_view['description']);
-          $output.= 'Content Type : ' . $final_view['content_type'] . '<br/>';
-          $output.= 'Name : ' . $final_view['name'] . '<br/>';
-          $output.= 'Email : ' . $final_view['email'] . '<br/>';
-          $output.= 'Description : ' . $user_message;
-          $output.= 'City : ' . $final_view['city'] . '<br/>';
+          $output.= t('Content Type : ') . $final_view['content_type'] . '<br/>';
+          $output.= t('Name : ') . $final_view['name'] . '<br/>';
+          $output.= t('Email : ') . $final_view['email'] . '<br/>';
+          $output.= t('Description : ') . $user_message;
+          $output.= t('City : ') . $final_view['city'] . '<br/>';
           if(!empty($final_view['image'])) {
           $file = file_load($final_view['image']);
           $output.= 'Image : <img src="'.file_create_url($file->uri).'" alt="'.  file_create_url($file->uri).'"/><br/>';
