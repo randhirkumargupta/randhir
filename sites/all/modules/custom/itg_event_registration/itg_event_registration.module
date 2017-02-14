@@ -130,7 +130,6 @@ function itg_event_registration_theme() {
 function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'event_registration_node_form') {
-
     /*    $form['field_no_of_members']= array(
       '#prefix' => '<div class= "event-member-container">',
       '#title' => 'No. Of Memebers',
@@ -139,6 +138,8 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
       '#suffix'=> '</div>'
       ); */
     $current_event_nid_old = itg_event_registration_get_event_nid();
+
+
     if (!empty($current_event_nid_old)) {
       $_SESSION['current_event_id'] = $current_event_nid_old;
     }
@@ -227,7 +228,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
         $form['have_a_coupon_code'] = array(
             '#prefix' => '<div class= "have-a-coupon-code">',
             '#type' => 'item',
-            '#markup' => '<span class="event-number-of-members">Have a Coupon Code?</span> <a class="have-a-coupon-code-link" href="javascript:">Apply</a>',
+            '#markup' => '<span class="event-number-of-members">Have a Coupon Code?</span> <a class="have-a-coupon-code-link" href="javascript:">Apply</a>&nbsp;<a class="event-coupon-reset" href="javascript:void(0);">Reset</a>',
             '#suffix' => '</div>',
             '#weight' => 12
         );
@@ -262,7 +263,14 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
         }
       }
     }
-  }
+
+    $form['field_preview_unique_id']['#attributes']['class'][] = 'hide';
+    //$event_registration_unique = _get_unique_id_for_registration_unique_field();
+    //$form['field_preview_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $event_registration_unique;
+    $_REQUEST['destination'] = 'itg-payment-checkout';
+    
+    
+          }
 }
 
 /**
@@ -387,10 +395,13 @@ function itg_event_registration_form_custom_submit_callback($form, &$form_state)
   }
 
   $current_event_nid = itg_event_registration_get_event_nid();
-  $form_state['redirect'] = $baseurl . '/registration';
+  
+  //$form_state['redirect'] = $baseurl . '/registration';
   $event_name = itg_common_get_node_title($current_event_nid);
   drupal_set_message(t('Congratulations! You have successfully registered yourself for the event <strong>@eventname</strong>.', array('@eventname' => $event_name)));
-}
+  $form_state['redirect'] = 'itg-payment-checkout';  
+  
+  }
 
 /**
  * Implementation of hook_views_pre_render
@@ -675,24 +686,43 @@ function itg_event_registration_config_field($event_nid) {
  * Implements hook_node_insert()
  */
 function itg_event_registration_node_insert($node) {
-  
+
   if ($node->type == 'event_registration') {
-    try{
-    $qry =     db_insert('coupons_activity_details')
-                ->fields(array('coupon_code', 'event_id', 'reg_id', 'total_payment','redeemed_payment','status','created','changed'))
-                ->values(array(
-                    'coupon_code' => $node->coupon_code,
-                    'event_id' => itg_event_registration_get_event_nid(),
-                    'reg_id' => $node->nid,
-                    'total_payment' => $node->total_value,
-                    'redeemed_payment' => $node->discounted_value,
-                    'status' => 0,
-                    'created' => REQUEST_TIME,
-                    'changed' => REQUEST_TIME,
-                ))
-                ->execute();
-    } catch(Exception $e){
+    try {
+      $coupon_values  = array(
+                  'coupon_code' => $node->coupon_code,
+                  'event_id' => itg_event_registration_get_event_nid(),
+                  'reg_id' => $node->nid,
+                  'total_payment' => $node->total_value,
+                  'redeemed_payment' => $node->discounted_value,
+                  'status' => 0,
+                  'created' => REQUEST_TIME,
+                  'changed' => REQUEST_TIME,
+              );
+      
+      //$_SESSION['coupon_values_json']['data'] = $coupon_values_json;
+      $_SESSION['event_key'] = _get_unique_id_for_registration_unique_field();
+      $qry = db_insert('coupons_activity_details')
+              ->fields(array('coupon_code', 'event_id', 'reg_id', 'total_payment', 'redeemed_payment', 'status', 'created', 'changed'))
+              ->values($coupon_values)
+              ->execute();
+    } catch (Exception $e) {
       //die('ERROR:'.$e->getMessage());
     }
   }
+}
+
+function _get_unique_id_for_registration_unique_field() {
+  if (!empty($_SESSION['registration_unique'])) {
+    $reporter_id = $_SESSION['registration_unique'];
+  } else {
+    // format uniqueid time node add
+    // format uniqueid time nodeid edit
+    // So in future we can track from which opration this entry is made.
+
+    $unique = 'preview_' . uniqid() . time();
+    $_SESSION['registration_unique'] = $unique;
+    $reporter_id = $_SESSION['registration_unique'];
+  }
+  return $reporter_id;
 }

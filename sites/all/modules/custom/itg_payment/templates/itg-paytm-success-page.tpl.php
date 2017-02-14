@@ -1,0 +1,1 @@
+<h1><?php print t("Payment Success") ?></h1>

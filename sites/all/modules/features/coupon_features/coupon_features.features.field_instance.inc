@@ -166,7 +166,7 @@ function coupon_features_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_coupon_current_uses',
-    'label' => 'Coupon current uses',
+    'label' => 'Used coupons',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -582,7 +582,6 @@ function coupon_features_field_default_field_instances() {
   t('Coupon Discount Type');
   t('Coupon Status');
   t('Coupon Type');
-  t('Coupon current uses');
   t('Coupon used limit means how many users used this coupon!');
   t('Coupon uses limit');
   t('Discounted Value');
@@ -592,6 +591,7 @@ function coupon_features_field_default_field_instances() {
   t('Minimum Cart amount');
   t('Third party Coupon Type');
   t('This field will be used for third party coupon bulk import!');
+  t('Used coupons');
 
   return $field_instances;
 }
