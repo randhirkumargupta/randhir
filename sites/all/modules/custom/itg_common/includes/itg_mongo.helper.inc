@@ -170,6 +170,30 @@ function itg_common_mongo_activity_count($nid, $collection) {
 }
 
 /**
+ * Implements itg_common_mongo_activity_user_count().
+ * @param int $uid
+ * @param string $collection
+ * @param string $event
+ * @param int $status
+ */
+function itg_common_mongo_activity_user_count($uid, $collection, $event = NULL, $status = NULL) {
+  if (function_exists('mongodb') && !empty($uid)) {
+    $con = mongodb();
+    $people = $con->$collection;
+    if(empty($event) && empty($status)) {
+    $cond = array('uid' => $uid);
+    } else {
+    $cond = array('uid' => $uid, 'activity' => $event, 'status' => $status);
+    }
+    $cursor = $people->count($cond);
+    return $cursor;
+  } else {
+    return 0;
+  }
+  
+}
+
+/**
  * Implements itg_mongo_delete_ugc_content().
  * @param string $id
  * @param string $collection

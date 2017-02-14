@@ -1,9 +1,17 @@
 <?php
-
+global $user;
 /* 
  * @file
  *   Template file for personalized content home page.
  */
+// get ugc content count based on id
+if (function_exists('itg_common_mongo_activity_user_count'))
+{
+  $submit_ugc_content = itg_common_mongo_activity_user_count($user->uid, 'ugc_details');
+  $follow_ugc_content = itg_common_mongo_activity_user_count($user->uid, 'front_user_activity', 'follow_story', '1');
+  $read_later_content = itg_common_mongo_activity_user_count($user->uid, 'front_user_activity', 'read_later', '1');
+  $comment_count = itg_common_mongo_activity_user_count($user->uid, 'itgcms_comment', 'comment', 1);
+}
 ?>
 <div class="personalized-wrapper">
   <div class="personalized-user-area">
@@ -18,7 +26,7 @@
     <div class="personalized-user-info">
       <span>
         <i class="fa fa-share" aria-hidden="true"></i>
-        <dfn>235</dfn>
+        <dfn><?php print $submit_ugc_content; ?></dfn>
       </span>
       <span>
         <i class="fa fa-share-alt" aria-hidden="true"></i>
@@ -26,15 +34,15 @@
       </span>
       <span>
         <i class="fa fa-comment" aria-hidden="true"></i>
-        <dfn>852</dfn>
+        <dfn><?php print $comment_count; ?></dfn>
       </span>
       <span>
         <i class="fa fa-bookmark" aria-hidden="true"></i>
-        <dfn>55</dfn>
+        <dfn><?php print $read_later_content;?></dfn>
       </span>
       <span>
         <i class="fa fa-user" aria-hidden="true"></i>
-        <dfn>26</dfn>
+        <dfn><?php print $follow_ugc_content; ?></dfn>
       </span>
     </div>
       <?php if ($data['badge_detail']['earn'] > 0): ?>

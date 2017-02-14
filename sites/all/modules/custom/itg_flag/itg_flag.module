@@ -137,7 +137,7 @@ function itg_user_activity_front() {
       {
         try {
           $newdata = array('$set' => array("status" => $dstatus, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time));
-          $people->update(array("nid" => $nd_id), $newdata);
+          $people->update(array("nid" => $nd_id, "activity" => $user_activity, "uid" => $user->uid), $newdata);
           $response = array("success" => $dstatus, 'activity' => $user_activity, 'type' => $dtag);
           print json_encode($response);
         }
