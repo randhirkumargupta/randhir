@@ -3328,6 +3328,28 @@ body .program-livetv.effect-added .light-on-text {
   margin-top: 24px;
 }
 
+.podcast-slide .jw-controlbar-center-group .jw-slider-horizontal {
+  height: 39px;
+}
+.podcast-slide .jw-controlbar-center-group .jw-slider-container {
+  height: 39px;
+}
+.podcast-slide .jw-controlbar-center-group .jw-slider-horizontal .jw-buffer,
+.podcast-slide .jw-controlbar-center-group .jw-slider-horizontal .jw-progress {
+  height: 39px;
+  background: url(../images/podcast_audio_yellow.png) 0 center/348px 35px no-repeat;
+}
+.podcast-slide .jw-controlbar-center-group .jw-slider-horizontal .jw-rail {
+  height: 39px;
+  background: url(../images/podcast_audio_grey.png) 0 center/348px 35px no-repeat;
+}
+.podcast-slide .jw-controlbar-center-group .jw-slider-horizontal .jw-knob {
+  top: 0;
+  margin-left: 0;
+  bottom: 0;
+  margin: auto;
+}
+
 /* CSS To Add Zoom Effect on Images */
 @media all and (min-width: 1025px) {
   .zoom-image, #block-itg-front-end-common-related-photo-block #related-photo ul li a,
