@@ -120,7 +120,7 @@ img {
 .node-photogallery-form .form-field-name-field-common-audio-file, .node-cooking_tips-form [id*="field-story-reporter-values"] tbody tr td .ajax-progress,
 .node-cooking_tips-form [id*="field-story-reporter-values"] + div.clearfix .ajax-progress, .node-food_news-form [id*="field-story-reporter-values"] tbody tr td .ajax-progress,
 .node-food_news-form [id*="field-story-reporter-values"] + div.clearfix .ajax-progress, .node-recipe-form [id*="field-story-reporter-values"] tbody tr td .ajax-progress,
-.node-recipe-form [id*="field-story-reporter-values"] + div.clearfix .ajax-progress, .view-manage-print-team .magazine-id, #edit-field-primary-category-html-text-und-0-value, [id*="field-photo-story-values"] thead, .grippie {
+.node-recipe-form [id*="field-story-reporter-values"] + div.clearfix .ajax-progress, .view-manage-print-team .magazine-id, #edit-field-primary-category-html-text-und-0-value, [id*="field-photo-story-values"] thead, #edit-lrp-gold-star-one-icon-fieldset #edit-lrp-gold-star-one-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-file, #edit-lrp-gold-star-one-icon-fieldset #edit-lrp-gold-star-one-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-submit[value="Upload"], #edit-lrp-gold-star-two-icon-fieldset #edit-lrp-gold-star-two-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-file, #edit-lrp-gold-star-two-icon-fieldset #edit-lrp-gold-star-two-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-submit[value="Upload"], #edit-lrp-gold-star-three-icon-fieldset #edit-lrp-gold-star-three-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-file, #edit-lrp-gold-star-three-icon-fieldset #edit-lrp-gold-star-three-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-submit[value="Upload"], #edit-lrp-gold-star-four-icon-fieldset #edit-lrp-gold-star-four-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-file, #edit-lrp-gold-star-four-icon-fieldset #edit-lrp-gold-star-four-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-submit[value="Upload"], #edit-lrp-gold-star-five-icon-fieldset #edit-lrp-gold-star-five-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-file, #edit-lrp-gold-star-five-icon-fieldset #edit-lrp-gold-star-five-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-submit[value="Upload"], #edit-lrp-gold-star-six-icon-fieldset #edit-lrp-gold-star-six-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-file, #edit-lrp-gold-star-six-icon-fieldset #edit-lrp-gold-star-six-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-submit[value="Upload"], .grippie {
   display: none;
 }
 
@@ -391,7 +391,7 @@ img {
 .node-videogallery-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file,
 .node-photogallery-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file, .itg_menu_manager_form [id*="edit-category-icon-ajax-wrapper"] #edit-category-icon-upload, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget, .form-field-name-field-ads-ex-headerscript,
 .form-field-name-field-ads-ex-body-start,
-.form-field-name-field-ads-ex-body-close {
+.form-field-name-field-ads-ex-body-close, #edit-lrp-gold-star-one-icon-fieldset, #edit-lrp-gold-star-two-icon-fieldset, #edit-lrp-gold-star-three-icon-fieldset, #edit-lrp-gold-star-four-icon-fieldset, #edit-lrp-gold-star-five-icon-fieldset, #edit-lrp-gold-star-six-icon-fieldset {
   position: relative;
 }
 
@@ -3804,7 +3804,7 @@ fieldset#edit-select .form-submit {
 .node-photogallery-form .form-field-name-field-common-audio-file, .node-cooking_tips-form [id*="field-story-reporter-values"] tbody tr td .ajax-progress,
 .node-cooking_tips-form [id*="field-story-reporter-values"] + div.clearfix .ajax-progress, .node-food_news-form [id*="field-story-reporter-values"] tbody tr td .ajax-progress,
 .node-food_news-form [id*="field-story-reporter-values"] + div.clearfix .ajax-progress, .node-recipe-form [id*="field-story-reporter-values"] tbody tr td .ajax-progress,
-.node-recipe-form [id*="field-story-reporter-values"] + div.clearfix .ajax-progress, .view-manage-print-team .magazine-id, #edit-field-primary-category-html-text-und-0-value, [id*="field-photo-story-values"] thead {
+.node-recipe-form [id*="field-story-reporter-values"] + div.clearfix .ajax-progress, .view-manage-print-team .magazine-id, #edit-field-primary-category-html-text-und-0-value, [id*="field-photo-story-values"] thead, #edit-lrp-gold-star-one-icon-fieldset #edit-lrp-gold-star-one-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-file, #edit-lrp-gold-star-one-icon-fieldset #edit-lrp-gold-star-one-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-submit[value="Upload"], #edit-lrp-gold-star-two-icon-fieldset #edit-lrp-gold-star-two-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-file, #edit-lrp-gold-star-two-icon-fieldset #edit-lrp-gold-star-two-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-submit[value="Upload"], #edit-lrp-gold-star-three-icon-fieldset #edit-lrp-gold-star-three-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-file, #edit-lrp-gold-star-three-icon-fieldset #edit-lrp-gold-star-three-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-submit[value="Upload"], #edit-lrp-gold-star-four-icon-fieldset #edit-lrp-gold-star-four-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-file, #edit-lrp-gold-star-four-icon-fieldset #edit-lrp-gold-star-four-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-submit[value="Upload"], #edit-lrp-gold-star-five-icon-fieldset #edit-lrp-gold-star-five-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-file, #edit-lrp-gold-star-five-icon-fieldset #edit-lrp-gold-star-five-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-submit[value="Upload"], #edit-lrp-gold-star-six-icon-fieldset #edit-lrp-gold-star-six-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-file, #edit-lrp-gold-star-six-icon-fieldset #edit-lrp-gold-star-six-icon-ajax-wrapper .form-type-managed-file .form-managed-file .form-submit[value="Upload"] {
   display: none;
 }
 
@@ -10771,4 +10771,154 @@ span.file a {
   position: absolute;
   left: 100%;
   top: -8px;
+}
+
+#edit-lrp-gold-star-one-icon-fieldset {
+  border: none;
+}
+#edit-lrp-gold-star-one-icon-fieldset .div_lrp_gold_star_one_icon {
+  position: absolute;
+  bottom: 5px;
+  left: 330px;
+  z-index: 9;
+}
+#edit-lrp-gold-star-one-icon-fieldset .div_lrp_gold_star_one_icon a {
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  color: #2f2f2f;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 300;
+  height: 28px;
+  line-height: 26px;
+  text-align: center;
+  width: 134px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#edit-lrp-gold-star-two-icon-fieldset {
+  border: none;
+}
+#edit-lrp-gold-star-two-icon-fieldset .div_lrp_gold_star_two_icon {
+  position: absolute;
+  bottom: 5px;
+  left: 330px;
+  z-index: 9;
+}
+#edit-lrp-gold-star-two-icon-fieldset .div_lrp_gold_star_two_icon a {
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  color: #2f2f2f;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 300;
+  height: 28px;
+  line-height: 26px;
+  text-align: center;
+  width: 134px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#edit-lrp-gold-star-three-icon-fieldset {
+  border: none;
+}
+#edit-lrp-gold-star-three-icon-fieldset .div_lrp_gold_star_three_icon {
+  position: absolute;
+  bottom: 5px;
+  left: 330px;
+  z-index: 9;
+}
+#edit-lrp-gold-star-three-icon-fieldset .div_lrp_gold_star_three_icon a {
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  color: #2f2f2f;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 300;
+  height: 28px;
+  line-height: 26px;
+  text-align: center;
+  width: 134px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#edit-lrp-gold-star-four-icon-fieldset {
+  border: none;
+}
+#edit-lrp-gold-star-four-icon-fieldset .div_lrp_gold_star_four_icon {
+  position: absolute;
+  bottom: 5px;
+  left: 330px;
+  z-index: 9;
+}
+#edit-lrp-gold-star-four-icon-fieldset .div_lrp_gold_star_four_icon a {
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  color: #2f2f2f;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 300;
+  height: 28px;
+  line-height: 26px;
+  text-align: center;
+  width: 134px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#edit-lrp-gold-star-five-icon-fieldset {
+  border: none;
+}
+#edit-lrp-gold-star-five-icon-fieldset .div_lrp_gold_star_five_icon {
+  position: absolute;
+  bottom: 5px;
+  left: 330px;
+  z-index: 9;
+}
+#edit-lrp-gold-star-five-icon-fieldset .div_lrp_gold_star_five_icon a {
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  color: #2f2f2f;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 300;
+  height: 28px;
+  line-height: 26px;
+  text-align: center;
+  width: 134px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#edit-lrp-gold-star-six-icon-fieldset {
+  border: none;
+}
+#edit-lrp-gold-star-six-icon-fieldset .div_lrp_gold_star_six_icon {
+  position: absolute;
+  bottom: 5px;
+  left: 330px;
+  z-index: 9;
+}
+#edit-lrp-gold-star-six-icon-fieldset .div_lrp_gold_star_six_icon a {
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  color: #2f2f2f;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 300;
+  height: 28px;
+  line-height: 26px;
+  text-align: center;
+  width: 134px;
+  display: inline-block;
+  vertical-align: top;
 }
