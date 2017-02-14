@@ -22,7 +22,7 @@ function coupon_features_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Manage Ads';
+  $handler->display->display_options['title'] = 'Manage Coupons';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -179,7 +179,7 @@ function coupon_features_views_default_views() {
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
-  /* Field: Content: Coupon current uses */
+  /* Field: Content: Used coupons */
   $handler->display->display_options['fields']['field_coupon_current_uses']['id'] = 'field_coupon_current_uses';
   $handler->display->display_options['fields']['field_coupon_current_uses']['table'] = 'field_data_field_coupon_current_uses';
   $handler->display->display_options['fields']['field_coupon_current_uses']['field'] = 'field_coupon_current_uses';

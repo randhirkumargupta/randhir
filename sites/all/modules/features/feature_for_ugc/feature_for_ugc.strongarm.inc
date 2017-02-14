@@ -98,6 +98,12 @@ function feature_for_ugc_strongarm() {
         'metatags' => array(
           'weight' => '14',
         ),
+        'domain' => array(
+          'weight' => '1',
+        ),
+        'redirect' => array(
+          'weight' => '30',
+        ),
       ),
       'display' => array(),
     ),

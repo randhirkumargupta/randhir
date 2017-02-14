@@ -212,37 +212,38 @@
  *   );
  * @endcode
  */
-//$databases['default']['default'] = array(
-//  'driver' => 'autoslave',
-//  'master' => 'master', // optional, defaults to 'master'
-//  'slave' => 'autoslave', // optional, defaults to 'autoslave'
-//// Always use "master" for tables "semaphore" and "sessions"
-//  'tables' => array('sessions', 'semaphore', 'watchdog'), // optional, defaults to array('sessions', 'semaphore', 'watchdog')
-//);
+$databases['default']['default'] = array(
+  'driver' => 'autoslave',
+  'master' => 'master', // optional, defaults to 'master'
+  'slave' => 'autoslave', // optional, defaults to 'autoslave'
+// Always use "master" for tables "semaphore" and "sessions"
+  'tables' => array('sessions', 'semaphore', 'watchdog'), // optional, defaults to array('sessions', 'semaphore', 'watchdog')
+);
 
-//$databases['default']['master'] = array(
-//  'database' => 'indiatoday',
-//  'username' => 'itgd_it_write',
-//  'password' => '!tgd@!t@wr!te@101',
-//  'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-//  'port' => '3306',
-//  'driver' => 'mysql',
-//  'prefix' => '',
-//);
+$databases['default']['master'] = array(
+  'database' => 'indiatoday',
+  'username' => 'itgd_it_write',
+  'password' => '!tgd@!t@wr!te@101',
+  'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
+  'port' => '3306',
+  'driver' => 'mysql',
+  'prefix' => '',
+);
 
-// $databases['default']['autoslave'] = array(
-//  'database' => 'indiatoday',
-//  'username' => 'itgd_it_read',
-//  'password' => '!tgd@!t@re@d@102',
-//  'host' => 'itgd-drupal-db-dev-replica.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-//  'port' => '3306',
-//  'driver' => 'mysql',
-//  'prefix' => '',
-//);
+$databases['default']['autoslave'] = array(
+  'database' => 'indiatoday',
+  'username' => 'itgd_it_read',
+  'password' => '!tgd@!t@re@d@102',
+  'host' => 'itgd-drupal-db-dev-replica.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
+  'port' => '3306',
+  'driver' => 'mysql',
+  'prefix' => '',
+);
 
 // Use locking that supports force master
-// $conf['lock_inc'] = 'sites/all/modules/contrib/autoslave/lock.inc';
+$conf['lock_inc'] = 'sites/all/modules/contrib/autoslave/lock.inc';
 
+/*
 $databases = array (
   'default' => 
   array (
@@ -258,6 +259,7 @@ $databases = array (
     ),
   ),
 );
+*/
 
 // Workaround for Drush (Drush doesn't support non-pdo database drivers).
 // Workaround for update.php (similar problem as Drush).
