@@ -583,10 +583,37 @@ function hs_taxonomy_hierarchical_select_root_level($params) {
   if (!isset($params['vid'])) {
     return array();
   }
+  
   // TODO: support multiple parents, i.e. support "save lineage".
   $vocabulary = taxonomy_vocabulary_load($params['vid']);
   $terms = _hs_taxonomy_hierarchical_select_get_tree($params['vid'], 0, -1, 1);
-
+  
+  //section display according to content type @ added by shravan
+  $arg = arg();
+  if ($arg[0] == 'node' && $arg[1] == 'add') {
+    $type = $arg[2];
+  } else if($arg[0] == 'node' && is_numeric($arg[1]) && $arg[2] == 'edit'){
+      $query = db_select('node', 'n');
+      $query->fields('n', array('type'));      
+      $query->condition('n.nid', $arg[1], '=');
+      $type = $query->execute()->fetchField();
+  }
+  else if (!empty ($_POST['cat_node_type'])) {
+    $type = $_POST['cat_node_type']; 
+  }  
+  
+  foreach ($terms as $key => $term) {    
+    if (!itg_category_manager_term_state($term->tid)) {
+      unset($terms[$key]);
+    }
+    if (!empty($type)) {
+      if(!itg_category_manager_term_state_content($type,$term->tid)) {
+        unset($terms[$key]);
+      }
+    }
+  }
+  
+  // end
   // If the root_term parameter is enabled, then prepend a fake "<root>" term.
   if (isset($params['root_term']) && $params['root_term'] === TRUE) {
     $root_term = new StdClass();

@@ -212,7 +212,7 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
       break;
   }
 
-  $form['field_story_category']['und']['#config']['module'] = 'itg_category_manager';
+  //$form['field_story_category']['und']['#config']['module'] = 'itg_category_manager';
 }
 
 /**
