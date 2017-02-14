@@ -389,7 +389,9 @@ img {
 .download-link,
 .edit-cm a, [id*="field-newsl-add-news-values"] fieldset legend .fieldset-title, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper, .newsletter-templates .newsletter-header, [id*="field-service-content-values"] .field-name-field-service-content-date, .form-field-name-field-syndication-ftp-details, .user-profile-div, .block-itg-related .rel-link, .main-cont, .node-videogallery-form #Imageupload .form-field-type-image .image-widget-data, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2), [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2), [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .form-field-name-field-pti-print-media, [id*="edit-field-story-highlights"], .itg-region ul, .view-photo-list-of-category .view-content .photo-list li .tile figure, .view-video-list-of-category .view-content .photo-list li .tile figure, .node-story-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file,
 .node-videogallery-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file,
-.node-photogallery-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file, .itg_menu_manager_form [id*="edit-category-icon-ajax-wrapper"] #edit-category-icon-upload, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget {
+.node-photogallery-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file, .itg_menu_manager_form [id*="edit-category-icon-ajax-wrapper"] #edit-category-icon-upload, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget, .form-field-name-field-ads-ex-headerscript,
+.form-field-name-field-ads-ex-body-start,
+.form-field-name-field-ads-ex-body-close {
   position: relative;
 }
 
@@ -568,7 +570,9 @@ div.filefield-sources-list a.active {
 .node-ads_management-form [id*="field-ads-body-close-values"] + div.clearfix .form-submit,
 .node-ads_management-form [id*="field-ads-headerscript-values"] + div.clearfix .form-submit, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-2 > div > div > .clearfix .form-submit, [id*="field-syndication-ftp-details-values"] + div.clearfix .form-submit, [id*="field-pti-print-media-values"] + div.clearfix .form-submit, .node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix .form-submit,
 .node-videogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix .form-submit,
-.node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix .form-submit, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] + div.clearfix .form-submit {
+.node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix .form-submit, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] + div.clearfix .form-submit, [id*="field-ads-ex-body-start-values"] + div.clearfix .form-submit,
+[id*="field-ads-ex-body-close-values"] + div.clearfix .form-submit,
+[id*="field-ads-ex-headerscript-values"] + div.clearfix .form-submit {
   background: url("../images/add-item.png") no-repeat center center;
   border: none;
   /*bottom: 10px;*/
@@ -592,7 +596,11 @@ div.filefield-sources-list a.active {
 .node-videogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td > .form-submit[value="Remove"],
 .node-videogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 .node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td > .form-submit[value="Remove"],
-.node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td > .form-submit, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .ajax-new-content > .form-submit {
+.node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td > .form-submit, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .ajax-new-content > .form-submit, [id*="field-ads-ex-body-start-values"] tbody tr td > .form-submit, [id*="field-ads-ex-body-start-values"] tbody tr td .ajax-new-content > .form-submit,
+[id*="field-ads-ex-body-close-values"] tbody tr td > .form-submit,
+[id*="field-ads-ex-body-close-values"] tbody tr td .ajax-new-content > .form-submit,
+[id*="field-ads-ex-headerscript-values"] tbody tr td > .form-submit,
+[id*="field-ads-ex-headerscript-values"] tbody tr td .ajax-new-content > .form-submit {
   background: url("../images/remove-item.png") no-repeat center center;
   border: none;
   /*bottom: 10px;*/
@@ -10710,22 +10718,57 @@ span.file a {
   margin-top: 20px;
 }
 
+.form-field-name-field-ads-ex-headerscript,
+.form-field-name-field-ads-ex-body-start,
+.form-field-name-field-ads-ex-body-close {
+  margin: 10px 0;
+}
+
 [id*="field-ads-ex-body-start-values"] tbody tr td,
 [id*="field-ads-ex-body-close-values"] tbody tr td,
 [id*="field-ads-ex-headerscript-values"] tbody tr td {
   border: none;
-  float: left;
-  margin: 0 0 10px;
-  padding: 0;
+  padding: 10px 0 0;
 }
 [id*="field-ads-ex-body-start-values"] tbody tr td .form-type-textarea,
 [id*="field-ads-ex-body-close-values"] tbody tr td .form-type-textarea,
 [id*="field-ads-ex-headerscript-values"] tbody tr td .form-type-textarea {
-  padding: 0;
   margin: 0;
+  padding: 0;
+}
+[id*="field-ads-ex-body-start-values"] tbody tr td > .form-submit, [id*="field-ads-ex-body-start-values"] tbody tr td .ajax-new-content > .form-submit,
+[id*="field-ads-ex-body-close-values"] tbody tr td > .form-submit,
+[id*="field-ads-ex-body-close-values"] tbody tr td .ajax-new-content > .form-submit,
+[id*="field-ads-ex-headerscript-values"] tbody tr td > .form-submit,
+[id*="field-ads-ex-headerscript-values"] tbody tr td .ajax-new-content > .form-submit {
+  margin: 0 !important;
+  position: absolute;
+  left: 100%;
+  bottom: 0;
+}
+[id*="field-ads-ex-body-start-values"] tbody tr:first-child td,
+[id*="field-ads-ex-body-close-values"] tbody tr:first-child td,
+[id*="field-ads-ex-headerscript-values"] tbody tr:first-child td {
+  padding-top: 0;
 }
 [id*="field-ads-ex-body-start-values"] + div.clearfix,
 [id*="field-ads-ex-body-close-values"] + div.clearfix,
 [id*="field-ads-ex-headerscript-values"] + div.clearfix {
-  margin-bottom: 10px;
+  bottom: 0;
+  height: 28px;
+  position: absolute;
+  right: 532px;
+  width: 28px;
+}
+[id*="field-ads-ex-body-start-values"] + div.clearfix .form-submit,
+[id*="field-ads-ex-body-close-values"] + div.clearfix .form-submit,
+[id*="field-ads-ex-headerscript-values"] + div.clearfix .form-submit {
+  margin: 0;
+}
+[id*="field-ads-ex-body-start-values"] + div.clearfix .ajax-progress,
+[id*="field-ads-ex-body-close-values"] + div.clearfix .ajax-progress,
+[id*="field-ads-ex-headerscript-values"] + div.clearfix .ajax-progress {
+  position: absolute;
+  left: 100%;
+  top: -8px;
 }
