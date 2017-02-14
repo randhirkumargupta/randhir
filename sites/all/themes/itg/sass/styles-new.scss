@@ -3236,6 +3236,28 @@ body{
   }
   .cart-total-block{margin-top: 24px;}
 }
+.podcast-slide{
+  .jw-controlbar-center-group{ 
+    .jw-slider-horizontal{height: 39px;}
+    .jw-slider-container{height: 39px;}
+    .jw-slider-horizontal .jw-buffer,
+    .jw-slider-horizontal .jw-progress{
+      height: 39px;
+      background: url(../images/podcast_audio_yellow.png) 0 center /348px 35px no-repeat;
+    } 
+    .jw-slider-horizontal .jw-rail{
+      height: 39px;
+      background: url(../images/podcast_audio_grey.png) 0 center /348px 35px no-repeat;
+    }
+    .jw-slider-horizontal .jw-knob{
+      top: 0;
+      margin-left: 0;
+      bottom: 0;
+      margin: auto;
+    }
+  }
+}
+
 
 
 
