@@ -67,13 +67,51 @@
         }
     } 
 
-    /*    special event page css start here*/
+    .itg-layout-container .itg-h450-section .droppable{
+        height: auto;
+    }
+    .auto-layout-page .itg-h450-section .col-md-4 .droppable{
+     height: 420px;   
+    }
+    
+/*defalt add for special pages START*/
+    .itg-layout-container .ad-widget{
+        height: 295px;
+        padding: 20px;
+    }
+/*defalt add for special pages END*/
+    
+ /* css for dont miss*/
+ .itg-h321-section .tech_reviews, .itg-h321-section .auto_reviews, .itg-h321-section .dont_miss{
+         padding: 5px 10px 8px;
+ }
+ .dont-miss ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic, .osscar-video ul .dont-miss-listing .dm-pic{
+    width: 140px;
+ }
+ /* css for dont miss*/
+    /*    special auto page css start here*/
+       .auto-layout-page{
+        .itg-h321-section{
+             .droppable{
+             height:auto;
+            }   
+        }  
+    } 
     .tech-layout-page, .auto-layout-page{
         .auto-block-1, .auto-block-2{
-            height: auto; 
+            height: 520px;
             margin-bottom: 50px;
         }
+        .auto-block-2{
+            .special-top-news{
+                overflow: auto;
+            }
+        }
         .auto-block-3{
+            .ad-widget{
+                height: 245px;
+                padding:10px;
+            }
             .itg-widget-child{
                 .droppable {
                     height: auto;                
@@ -81,7 +119,7 @@
             }
         }
     }
-    /*special event page css start here*/  
+    /*special auto page css start here*/  
     /*css start snappost page*/
     .page-snappost .view-content .views-row .snap-post-btm{
         .snap-button{        
@@ -127,22 +165,6 @@
         }
     }    
 /*Css end year end page*/   
-/*Start Dont miss Home page css*/
-    .dont-miss{            
-        ul{
-            .dont-miss-listing{
-               .dm-pic{
-                    width: 124px;                
-                }                
-                @include calculate-width(1);
-                padding: 0px 0px 20px 0;  
-                &:nth-child(3){
-                    padding-bottom: 20px;
-                }
-            }
-        }
-    }
-    /*End Dont miss Home page css*/
     /*start Event page registration*/
     #block-itg-event-backend-event-registration, #block-itg-event-backend-event-sign-and-win{
         h1{
@@ -431,6 +453,14 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
         margin: 0;
     }
     /*CSS end education page special*/  
+    
+    
+/*    SPECILA AUTO PAGE START*/
+.auto-layout-page .itg-h450-section .col-md-4 .droppable{
+    height: auto;
+}
+/*    SPECILA AUTO PAGE END*/
+    
     
 /* start Event page mobile nav*/
 #block-menu-menu-event-menu{
@@ -745,7 +775,9 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
     .education-layout-page .itg-295-layout .droppable, 
     .education-layout-page .itg-325-layout .droppable,
     .education-layout-page .itg-345-layout .droppable, 
-    .education-layout-page .itg-325-layout .ad-widget{
+    .education-layout-page .itg-325-layout .ad-widget,
+    .auto-layout-page .auto-block-1
+    {
         height: auto;  
         min-height: auto;
     }
@@ -760,6 +792,22 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
         }
     }
     /*End CSS Top Block Grid Home Page*/  
+    /*Start Dont miss Home page css*/
+    .dont-miss{            
+        ul{
+            .dont-miss-listing{
+               .dm-pic{
+                    width: 124px;                
+                }                
+                @include calculate-width(1);
+                padding: 0px 0px 20px 0;  
+                &:nth-child(3){
+                    padding-bottom: 20px;
+                }
+            }
+        }
+    }
+    /*End Dont miss Home page css*/
 /*    budget page block height start*/
     .budget-page-layout{
         .auto-block-2, .slider-budget, .common-highlights{
@@ -2108,7 +2156,7 @@ footer .footer-top .footer-social-link{
             @include calculate-width(2);
         }   
     }
-    .itg-layout-container .ad-widget{
+/*    .itg-layout-container .ad-widget{
         border: none;
         height: auto; 
         padding: 0; 
@@ -2116,7 +2164,7 @@ footer .footer-top .footer-social-link{
             background: transparent;
             height: 100%;
         }
-    }
+    }*/
     .page-user .social-share a{
        padding: 0 10px 0 45px;
     }
