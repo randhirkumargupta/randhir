@@ -163,6 +163,9 @@ function itg_payment_order_form_response_url() {
   drupal_goto('itg_payment_success');
 }
 
+/**
+ * {@inheritdoc}
+ */
 function itg_payment_merchant_form() {
   $form = array();
   $form['markup'] = array(
@@ -171,6 +174,9 @@ function itg_payment_merchant_form() {
   return $form;
 }
 
+/**
+ * {@inheritdoc}
+ */
 function itg_payment_order_form_validate($form, &$form_state) {
   $session_value_array = drupal_json_decode($_SESSION['event_registration_payment']['event_key']);
   if ($session_value_array['redeemed_payment'] !== $form_state['values']['TXN_AMOUNT']) {
@@ -189,6 +195,13 @@ function itg_payment_order_form_validate($form, &$form_state) {
   }
 }
 
+/**
+ * Submit form for paytm checkout page.
+ * @global array $user
+ * @param array $form
+ * @param array $form_state
+ * @param array $args
+ */
 function itg_payment_order_form_submit($form, &$form_state, $args) {
   global $user;
 
@@ -307,6 +320,10 @@ function itg_payment_response_info_update($data) {
   unset($_SESSION['event_registration_payment']);
 }
 
+/**
+ * Function which gives respective form according to payment mode.
+ * @return array
+ */
 function itg_payment_checkout() {
 
   $payment_type = 'paytm';
@@ -319,6 +336,7 @@ function itg_payment_checkout() {
       }
       //Prevent direct access the checkout url, if user is not procced the payment button.
       drupal_set_message(t("Something went wrong"), 'error');
+      drupal_goto('<front>');
       break;
 
     case 'billdesk':
@@ -335,14 +353,29 @@ function itg_payment_checkout() {
   }
 }
 
+/**
+ * Function returns json array
+ * @param array $array
+ * @return array
+ */
 function itg_payment_encode_data($array) {
   return drupal_json_encode($array);
 }
 
+/**
+ * Function returns json array
+ * @param array $array
+ * @return array
+ */
 function itg_payment_decode_data($array) {
   return drupal_json_decode($array);
 }
 
+/**
+ * Function returns json of coupon details.
+ * @param array $array
+ * @return array
+ */
 function itg_payment_get_coupon_details_json($coupon_code) {
   module_load_include('inc', 'itg_event_registration', 'includes/itg_event_coupons');
   if (get_coupondetail_by_coupon_code($coupon_code) != NULL) {
