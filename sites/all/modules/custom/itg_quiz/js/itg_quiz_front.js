@@ -69,17 +69,32 @@ $(this).parent().parent().parent().parent().find('.answer-container-actual').htm
                     //data: "{'nid':'" + qnid+ "', 'value':'" + val+ "'}",
                     data: {nid:qnid, ans_val:JSON.stringify(selected), not_select:JSON.stringify(not_selected)},
                     url: Drupal.settings.basePath+"quiz-response-checkbox",
-                    success: function(data) {
+                    success: function(data) {                     
                         //console.log(data);
-                        ansvalue = data.split('-');
-                      
-$('.'+buttonClass).siblings('.answer-container-actual').html(ansvalue[0]+'<br/>'+ansvalue[1]);
-
+                        ansvalue = data.split('-');                      
+                        $('.'+buttonClass).siblings('.answer-container-actual').html(ansvalue[0]+'<br/>'+ansvalue[1]);
                     }
                });
       return false;
     });
+    
+//    chnage position of show answer button
+      var prthis;
+      jQuery('.question-container').each(function () {
+        prthis = jQuery(this).find('.answer-container');        
+        jQuery(this).find('#show_answer, .answer-container-actual').appendTo(prthis);
+      });
+  
+      $('.question-container').on('click', '#show_answer', function(){
+        $(this).closest('.answer-container').find('span.right-checked').addClass('rightbg');
+        $(this).closest('.answer-container').find('span.wrong-checked').addClass('wrongbg');
+      });
       
+      $('.answer-container').on('click', 'label', function(){
+        $(this).find('span.right-answer').toggleClass('right-checked');
+        $(this).find('span.wrong-answer').toggleClass('wrong-checked');
+      });
+
     }
   };
 })(jQuery, Drupal, this, this.document);

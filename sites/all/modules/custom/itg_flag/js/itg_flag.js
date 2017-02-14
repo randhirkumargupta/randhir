@@ -259,4 +259,19 @@ jQuery(document).ready(function () {
             return true;
         });
     });
+    
+    // alert on ugc delete content
+    jQuery(document).ready(function () {
+        jQuery(".user-con-delete").click(function () {
+            var reject_status = "delete";
+            if (reject_status == "delete") {
+                var msg = confirm("Are you sure you want to Delete this content?");
+                if (msg == true) {
+                    return true;
+                }
+                return false;
+            }
+            return true;
+        });
+    });
 });

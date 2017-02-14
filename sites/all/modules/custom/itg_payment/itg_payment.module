@@ -1,0 +1,289 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+module_load_include('inc', 'itg_payment', 'includes/itg_paytm.helper');
+
+function itg_payment_menu() {
+  $items = array();
+  // Start Form For Payment.
+  $items['itg_payment_order_paytm_form'] = array(
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('itg_payment_order_form'),
+      'access arguments' => array('access content'),
+  );
+
+
+  $items['itg-payment-checkout'] = array(
+      'title' => t('Payment Checkout'),
+      'description' => t('Payment Checkout'),
+      'page callback' => 'itg_payment_checkout',
+      'access callback' => TRUE,
+  );
+
+  $items['itg_payment_success'] = array(
+      'title' => 'Payment success',
+      'page callback' => 'itg_payment_success_page',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+  );
+
+  // Order payment request url
+  $items['itg_payment_order_form_request_url'] = array(
+      'page callback' => 'itg_payment_order_form_request_url',
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
+  // Order payment response url
+  $items['itg_payment_order_form_response_url'] = array(
+      'page callback' => 'itg_payment_order_form_response_url',
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
+  return $items;
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_payment_theme() {
+  return array(
+      'itg_payment_order_form' => array(
+          'render element' => 'form',
+          'template' => 'templates/itg-paytm-order-form',
+      ),
+      'itg_payment_merchant_form' => array(
+          'render element' => 'form',
+          'template' => 'templates/itg-paytm-merchant-form',
+      ),
+      'itg_payment_success_page' => array(
+          'render element' => 'form',
+          'template' => 'templates/itg-paytm-success-page',
+      ),
+  );
+}
+
+function itg_payment_success_page() {
+  return theme("itg_payment_success_page");
+}
+
+/**
+ * Form for order process.
+ * @return type
+ */
+function itg_payment_order_form($form, &$form_state,  $args) {
+  
+   pr($args);
+  $form['ORDER_ID'] = array(
+      "#type" => "textfield",
+      "#title" => t("Order Id"),
+      "#value" => "ODR-" . time() . "-" . uniqid(),
+  );
+  $form['CUST_ID'] = array(
+      "#type" => "textfield",
+      "#title" => t("Customer Id"),
+      "#value" => "CUS-" . time() . "-" . uniqid(),
+  );
+  $form['INDUSTRY_TYPE_ID'] = array(
+      "#type" => "textfield",
+      "#value" => INDUSTRY_TYPE_ID,
+  );
+  $form['CHANNEL_ID'] = array(
+      "#type" => "textfield",
+      "#value" => CHANNEL_ID,
+  );
+  $form['CALLBACK_URL'] = array(
+      "#type" => "textfield",
+      "#value" => PAYTM_CALLBACK_URL,
+  );
+  $form['TXN_AMOUNT'] = array(
+      "#type" => "textfield",
+      "#title" => t("Final Amount to pay.")
+  );
+  $form['SUBMIT'] = array(
+      "#type" => "submit",
+      "#value" => t("Submit"),
+  );
+  return $form;
+}
+
+/**
+ * Function which is called after response from paytm.
+ */
+function itg_payment_order_form_response_url() {
+  // Prepare data.
+  $data = array();
+  $param_list = array();
+  module_load_include('php', 'itg_payment', 'lib/encdec_paytm');
+  $paytm_check_sum = "";
+  $is_valid_checksum = "FALSE";
+
+  $param_list = $_POST;
+  $paytm_check_sum = isset($_POST["CHECKSUMHASH"]) ? $_POST["CHECKSUMHASH"] : "";
+
+  $transaction_id = $_POST['TXNID'];
+  $data['transaction_history'] = serialize($_POST);
+  $transaction_status = 0;
+
+
+  if ($_POST["STATUS"] == "TXN_SUCCESS") {
+    $transaction_status = PAYTM_TXN_SUCCESS_STATUS;
+    $data['order_status'] = PAYTM_ORDER_SUCCESS_STATUS;
+  }
+
+  $data['order_id'] = $_POST['ORDERID'];
+  $data['transaction_id'] = $_POST['TXNID'];
+  $data['transaction_status'] = $transaction_status;
+
+  // Update order after response.
+  itg_payment_response_info_update($data);
+
+  drupal_goto('itg_payment_success');
+//  if (isset($_POST) && count($_POST) > 0) {
+//    foreach ($_POST as $param_name => $param_value) {
+//      echo "<br/>" . $param_name . " = " . $param_value;
+//    }
+//  }
+}
+
+function itg_payment_merchant_form() {
+  $form = array();
+  $form['markup'] = array(
+      '#markup' => t("Merchant Check Out Page"),
+  );
+  return $form;
+}
+
+function itg_payment_order_form_submit($form, &$form_state, $args) {
+  
+ 
+  $db_data = array();
+
+  module_load_include('php', 'itg_payment', 'lib/encdec_paytm');
+  // Get required form value.
+  $order_id = $form_state['values']['ORDER_ID'];
+  $customer_id = $form_state['values']['CUST_ID'];
+  $industry_type = $form_state['values']['INDUSTRY_TYPE_ID'];
+  $channel_id = $form_state['values']['CHANNEL_ID'];
+  $callback_url = $form_state['values']['CALLBACK_URL'];
+  $final_amount = $form_state['values']['TXN_AMOUNT'];
+
+  // Create an array having all required parameters for creating checksum.
+  // Array prepare for paytm.
+  $param_list["MID"] = PAYTM_MERCHANT_MID;
+  $param_list["ORDER_ID"] = $db_data["ORDER_ID"] = $order_id;
+  $param_list["CUST_ID"] = $db_data['CUST_ID'] = $customer_id;
+  $param_list["INDUSTRY_TYPE_ID"] = $industry_type;
+  $param_list["CHANNEL_ID"] = $channel_id;
+  $param_list["WEBSITE"] = PAYTM_MERCHANT_WEBSITE;
+  $param_list["CALLBACK_URL"] = $callback_url;
+  $param_list["TXN_AMOUNT"] = $final_amount;
+
+  // handel coupon details for database.
+  if (!empty($form_state['values']['COUPON_ID'])) {
+    $db_data["COUPON_ID"] = "Coupon-1";
+    $db_data["COUPON_AMOUNT"] = floatval(10);
+    $db_data["COUPON_DETAIL"] = serialize("coupon_details");
+  }
+
+  $db_data["USER_TYPE"] = "USER_TYPE";
+  $db_data["REGISTRATION_ID"] = "USER_TYPE";
+  $db_data["PAYMENT_GATEWAY"] = PAYTM_PAYMENT_GATEWAY_NAME;
+  $db_data["PAYMENT_GATEWAY_STATUS"] = PAYTM_TRANSACTION_PENDING_STATUS;
+  $db_data["TRANSACTION_ID"] = PAYTM_STARTUP_TRANSACTION_ID;
+  $db_data["ORDER_STATUS"] = PAYTM_ORDER_PAYMENT_PENDING_STATUS;
+  $db_data["TRANSACTION_HISTORY"] = serialize(PAYTM_TRANSACTION_HISTORY);
+  $db_data["PAYMENT_GATEWAY_HISTORY"] = serialize(PAYMENT_GATEWAY_HISTORY);
+  $db_data["TOTAL_AMOUNT"] = floatval($param_list["TXN_AMOUNT"]);
+  $db_data["DESCOUNTED_AMOUNT"] = floatval(11);
+
+  itg_payment_initial_info_update($db_data);
+
+  $merchant_checkout_form = drupal_get_form('itg_payment_merchant_form');
+
+  $check_sum = getChecksumFromArray($param_list, PAYTM_MERCHANT_KEY);
+
+  echo theme('itg_payment_merchant_form', array(
+      'param_list' => $param_list,
+      'check_sum' => $check_sum,
+      'form_data' => $merchant_checkout_form,
+  ));
+  drupal_exit();
+}
+
+/**
+ * Function which process to insert data in first step.
+ * @param array $data
+ */
+function itg_payment_initial_info_update($data) {
+  try {
+    db_insert('itg_payment_order_details')
+            ->fields(array(
+                'order_id' => isset($data['ORDER_ID']) ? $data['ORDER_ID'] : "",
+                'event_id' => isset($data['EVENT_ID']) ? $data['EVENT_ID'] : "event_id",
+                'total_amount' => 1.0, //isset($data['TOTAL_AMOUNT']) ? $data['TOTAL_AMOUNT'] : "",
+                'discount_amount' => 1.0, //isset($data['DESCOUNTED_AMOUNT']) ? $data['DESCOUNTED_AMOUNT'] : "",
+                'total_order_amount' => 1.0, //isset($data['TXN_AMOUNT']) ? $data['TXN_AMOUNT'] : "",
+                'coupon_id' => isset($data['COUPON_ID']) ? $data['COUPON_ID'] : "",
+                'coupon_amount' => 1.0, //isset($data['COUPON_AMOUNT']) ? $data['COUPON_AMOUNT'] : "",
+                'coupon_detail' => isset($data['COUPON_DETAIL']) ? $data['COUPON_DETAIL'] : "",
+                'user_type' => isset($data['USER_TYPE']) ? $data['USER_TYPE'] : "",
+                'registration_id' => isset($data['REGISTRATION_ID']) ? $data['REGISTRATION_ID'] : "",
+                'user_id' => isset($data['CUST_ID']) ? $data['CUST_ID'] : "",
+                'payment_gateway' => PAYTM_PAYMENT_GATEWAY_NAME,
+                'transaction_id' => isset($data['TRANSACTION_ID']) ? $data['TRANSACTION_ID'] : "",
+                'order_status' => PAYTM_ORDER_PAYMENT_PENDING_STATUS,
+                'transaction_history' => isset($data['TRANSACTION_HISTORY']) ? $data['TRANSACTION_HISTORY'] : "",
+                'payment_gateway_status' => isset($data['PAYMENT_GATEWAY_STATUS']) ? $data['PAYMENT_GATEWAY_STATUS'] : "",
+                'payment_gateway_history' => isset($data['PAYMENT_GATEWAY_HISTORY']) ? $data['PAYMENT_GATEWAY_HISTORY'] : "",
+            ))->execute();
+  } catch (Exception $ex) {
+    drupal_set_message($ex->getMessage(), 'error');
+  }
+}
+
+/**
+ * Function which process to insert data in first step.
+ * @param array $data
+ */
+function itg_payment_response_info_update($data) {
+
+  try {
+    db_merge('itg_payment_order_details')
+            ->key(array("order_id" => $data['order_id']))
+            ->fields(array(
+                'transaction_history' => $data['transaction_history'],
+                'transaction_id' => $data['transaction_id'],
+                'payment_gateway_status' => $data['transaction_status'],
+            ))->execute();
+  } catch (Exception $ex) {
+    drupal_set_message($ex->getMessage(), 'error');
+  }
+}
+
+function itg_payment_checkout() {
+
+  $payment_type = 'paytm';
+  switch ($payment_type) {
+
+    case 'paytm':
+      $args = array('hhh' => 'hsgdashjs');
+      return drupal_render(drupal_get_form('itg_payment_order_form', $args));
+      break;
+
+    case 'billdesk':
+    
+      break;
+
+    case 'icici':
+
+      break;
+
+    case 'amex':
+
+      break;
+  }
+}

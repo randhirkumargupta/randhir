@@ -145,7 +145,8 @@ jQuery(document).ready(function() {
         url: Drupal.settings.basePath + "itg-event-coupon-check-auth",
         data: itg_coupons_vals,
         dataType: "text",
-        success: function(resultData) { console.log(resultData);
+        success: function(resultData) {
+          console.log(resultData);
           var obj_success = jQuery.parseJSON(resultData);
           if (obj_success['success'] == 0) {
             jQuery('.coupon_code_message').html('<span class="error" style="display: block;">' + obj_success['success_message'] + '</span>');
@@ -165,6 +166,26 @@ jQuery(document).ready(function() {
 
   });
 
+
+  // Code End for Coupon code  
+
+
+  // Code start for coupon reset
+  
+  jQuery('#event-registration-node-form .event-coupon-reset').click(function() {
+    if (jQuery('#edit-coupon-code').val().length <= 0) {
+      jQuery('.coupon_code_message').html('<span class="error" style="display: block;">Coupon code field is required.</span>');
+    } else {
+      jQuery('input[name="coupon_code"]').val('');
+      jQuery('input[name="discounted_value"]').val(jQuery('input[name="total_value"]').val());
+      jQuery('.event-fees-amount').html('Rs ' + jQuery('input[name="total_value"]').val());
+      jQuery('[name="coupon_code"]').attr('readonly', false);
+      jQuery('.coupon_code_message').html('');
+    }
+
+  });
+
+  // Code end for coupon reset
 
   jQuery('#event-registration-node-form #edit-coupon-code').on('keyup keypress blur change', function(e) {
     if (jQuery('#edit-coupon-code').val().length <= 0) {
