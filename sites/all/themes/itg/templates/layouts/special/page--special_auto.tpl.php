@@ -147,7 +147,7 @@ if ($theme != 'itgadmin') {
                         <?php
                           $block = block_load('itg_ads', ADS_RHS1);   
                           $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-                          print render($render_array);
+                          //print render($render_array);
                          ?>
                       </div>
                     </div>

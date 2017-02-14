@@ -8036,17 +8036,20 @@ section.sidebar{
         margin-top: 25px;
     }
     @include video-block(video-wrapper);
+    .video-wrapper{
+     padding-bottom: 70%;   
+    }
     .common-highlights{
         overflow:auto;
         height: 285px;
     }
     .special-top-bg{
         background: #fbfbfb;
-        height: 530px;
+        overflow: auto;
+        height: 100%;
     }
     .auto-block-2{        
-        height: 490px;
-        overflow: auto;
+        height: 490px;        
         .special-top-news{                       
             .itg-listing{
                border: none;

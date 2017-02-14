@@ -9775,17 +9775,20 @@ section.sidebar .block-itg-ads {
   width: 100% !important;
   height: 100% !important;
 }
+.budget-page-layout .video-wrapper {
+  padding-bottom: 70%;
+}
 .budget-page-layout .common-highlights {
   overflow: auto;
   height: 285px;
 }
 .budget-page-layout .special-top-bg {
   background: #fbfbfb;
-  height: 530px;
+  overflow: auto;
+  height: 100%;
 }
 .budget-page-layout .auto-block-2 {
   height: 490px;
-  overflow: auto;
 }
 .budget-page-layout .auto-block-2 .special-top-news .itg-listing {
   border: none;
