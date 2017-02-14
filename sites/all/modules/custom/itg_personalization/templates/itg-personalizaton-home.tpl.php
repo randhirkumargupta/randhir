@@ -4,20 +4,12 @@ global $user;
  * @file
  *   Template file for personalized content home page.
  */
-// get ugc submit content count based on id
-if(function_exists('itg_common_mongo_activity_user_count')) {
+// get ugc content count based on id
+if (function_exists('itg_common_mongo_activity_user_count'))
+{
   $submit_ugc_content = itg_common_mongo_activity_user_count($user->uid, 'ugc_details');
-}
-// get follow story count
-if(function_exists('itg_common_mongo_activity_user_count')) {
   $follow_ugc_content = itg_common_mongo_activity_user_count($user->uid, 'front_user_activity', 'follow_story', '1');
-}
-// get read later count
-if(function_exists('itg_common_mongo_activity_user_count')) {
   $read_later_content = itg_common_mongo_activity_user_count($user->uid, 'front_user_activity', 'read_later', '1');
-}
-// get Comment count
-if(function_exists('itg_common_mongo_activity_user_count')) {
   $comment_count = itg_common_mongo_activity_user_count($user->uid, 'itgcms_comment', 'comment', 1);
 }
 ?>
