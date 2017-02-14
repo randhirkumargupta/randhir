@@ -10330,3 +10330,25 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     }
   }
 }
+[id*="field-ads-ex-body-start-values"], 
+[id*="field-ads-ex-body-close-values"], 
+[id*="field-ads-ex-headerscript-values"]{
+  @extend .itg-add-another-item;
+  tbody{
+    tr{
+      td{
+        border: none;
+        float: left;
+        margin: 0 0 10px;
+        padding: 0;
+        .form-type-textarea{
+          padding: 0;
+          margin: 0;
+        }
+      }
+    }
+  }
+  & + div.clearfix{
+    margin-bottom: 10px;
+  }
+}
