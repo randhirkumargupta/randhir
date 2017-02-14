@@ -10416,3 +10416,25 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     }
   }
 }
+[id*="itg-user-block-api-form"]{
+  @extend .dib;
+  @extend .vtop;
+  @extend .full;
+  .form-item-email, .form-item-items-per-page{
+    float: left;
+    margin: 0 10px 0 0;
+    padding: 0;
+    .form-text, .form-select{width: 100%;}
+    > label{float: none; display: block; width: auto;}
+  }
+  .form-item-email{width: 300px;}
+  .form-item-items-per-page{width: 100px;}
+  .user-log-filter-btn{
+    display: inline-block; 
+    vertical-align: top; 
+    margin-top: 28px;
+    .user-block-apply{@extend .btn-small;}
+    .user-log-reset{@extend .btn-reset; @extend .btn-small;}
+  }
+  .right-button{text-align: right;}
+}
