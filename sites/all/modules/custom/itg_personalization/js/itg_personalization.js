@@ -7,9 +7,11 @@ jQuery(document).ready(function () {
     var ctype = jQuery("select[name='field_ugc_ctype[und]']").find('option:selected').val();
     if (ctype == '_none') {
         jQuery('#block-views-c3b0c328c45542af0b403435a6097179').show();
+        jQuery('#block-itg-personalization-personalization-all-content').show();
         jQuery('.form-field-name-field-user-message').hide();
     } else {
         jQuery('#block-views-c3b0c328c45542af0b403435a6097179').hide();
+        jQuery('#block-itg-personalization-personalization-all-content').hide();
     }
     if (ctype == 'blog') {
         jQuery('.form-field-name-field-user-message').show();
@@ -20,9 +22,11 @@ jQuery(document).ready(function () {
         // Show hide content listing block.
         if (ctype == '_none') {
             jQuery('#block-views-c3b0c328c45542af0b403435a6097179').show();
+            jQuery('#block-itg-personalization-personalization-all-content').show();
             jQuery('#block-formblock-ugc .captcha').hide();
         } else {
             jQuery('#block-views-c3b0c328c45542af0b403435a6097179').hide();
+            jQuery('#block-itg-personalization-personalization-all-content').hide();
             jQuery('#block-formblock-ugc .captcha').show();
         }
 
