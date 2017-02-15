@@ -209,7 +209,7 @@ function itg_newsletter_submit_handler_for_redirect($form, &$form_state) {
  */
 function itg_newsletter_form_after_build($form, &$form_state) {
 
-  global $user, $base_url;
+    global $user, $base_url;
 
   // Hide default level and add dynamic label
   if ($form_state['node']->type == 'newsletter') {
@@ -597,15 +597,13 @@ function itg_newsletter_check_existence_frequency($frequency, $newsletter_conten
  */
 function itg_newsletter_content_data() {
   $node = node_load($_POST['content_id']);
-
   if ($node->type == 'story') {
     $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
   }
   else {
     $kicker = '';
   }
-
-  echo drupal_json_encode(array('title' => $node->title, 'kicker' => $kicker, 'uri' => $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']));
+  echo drupal_json_encode(array('title' => $node->title, 'kicker' => $kicker, 'fid' => $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']));
   exit;
 }
 
