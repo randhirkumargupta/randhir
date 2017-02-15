@@ -10966,3 +10966,30 @@ span.file a {
 [id*="itg-user-block-api-form"] .right-button {
   text-align: right;
 }
+
+.photo-story-img.multiple-photo-disc {
+  padding: 10px 35px 0;
+  position: relative;
+}
+.photo-story-img.multiple-photo-disc .slick-arrow {
+  position: absolute;
+  top: 40%;
+  font-size: 32px;
+}
+.photo-story-img.multiple-photo-disc .slick-arrow.fa-chevron-left {
+  left: 0%;
+}
+.photo-story-img.multiple-photo-disc .slick-arrow.fa-chevron-right {
+  right: 0%;
+}
+.photo-story-img.multiple-photo-disc div.description {
+  padding-top: 10px;
+  font-size: 14px;
+  word-wrap: break-word;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  position: static;
+  max-width: 100%;
+  color: #000;
+}
