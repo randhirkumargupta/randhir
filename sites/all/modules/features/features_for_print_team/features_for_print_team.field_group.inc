@@ -89,7 +89,7 @@ function features_for_print_team_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Image Section',
-    'weight' => '3',
+    'weight' => '2',
     'children' => array(
       0 => 'field_pti_print_media',
     ),
@@ -122,7 +122,7 @@ function features_for_print_team_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Settings',
-    'weight' => '4',
+    'weight' => '3',
     'children' => array(
       0 => 'field_pti_idea_status',
       1 => 'field_pti_words_limit',

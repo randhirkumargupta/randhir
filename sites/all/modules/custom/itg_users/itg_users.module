@@ -54,8 +54,17 @@ function itg_users_menu() {
  * Implements hook_form_alter().
  */
 function itg_users_form_alter(&$form, &$form_state, $form_id) {  
-  global $user;
+  global $user, $base_url;
+  //code for multidomain
+  if ($form_id == 'user_login') {    
+    $form['#validate'][] = 'itg_users_backend_validate';
+  }
+  
   if ($form_id == 'user_register_form' || $form_id == 'user_profile_form') {
+    // hide subscribe checkbox from user page
+     if(!in_array(FRONT_USER, $user->roles)) {
+       $form['field_subscribe_for_newsletter']['#attributes']['class'][] = 'element-hidden';
+    }
     // Sort roles in alphabetical order.
     $edrole = $form['account']['roles']['#options'];
     asort($edrole);
@@ -371,7 +380,7 @@ function itg_users_role_delegation($role_array) {
   global $user;
 
   if (array_key_exists(EDITOR, $user->roles)) {
-    $user_array = array(AUTHOR_GUEST => 'Author/Guest', COPY_EDITOR => 'Copy Editor', INTERN => 'Intern', SECTION_EDITOR_ANCHOR => 'Section Editor/Anchor', SUBEDITOR_SR_SUB => 'Subeditor/Sr.Sub');
+    $user_array = array(AUTHOR_GUEST => 'Author/Guest', COPY_EDITOR => 'Copy Editor', INTERN => 'Intern', SECTION_EDITOR_ANCHOR => 'Section Editor/Anchor', SUBEDITOR_SR_SUB => 'Subeditor/Sr.Sub', CO_ORDINATOR => 'Co-ordinator', COPY_DESK => 'Copy Desk', CORRESPONDENT=>'Correspondent', DESIGN_HEAD=>'Design Head', DESIGNER => 'Designer');
   }
   else if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
     $user_array = array(AUTHOR_GUEST => 'Author/Guest', COPY_EDITOR => 'Copy Editor', INTERN => 'Intern', SUBEDITOR_SR_SUB => 'Subeditor/Sr.Sub');
@@ -401,7 +410,7 @@ function itg_users_role_delegation_uid() {
   global $user;
 
   if (array_key_exists(EDITOR, $user->roles)) {
-    $user_array = array(SECTION_EDITOR_ANCHOR => SECTION_EDITOR_ANCHOR, COPY_EDITOR => COPY_EDITOR, SUBEDITOR_SR_SUB => SUBEDITOR_SR_SUB, INTERN => INTERN, AUTHOR_GUEST => AUTHOR_GUEST);
+    $user_array = array(SECTION_EDITOR_ANCHOR => SECTION_EDITOR_ANCHOR, COPY_EDITOR => COPY_EDITOR, SUBEDITOR_SR_SUB => SUBEDITOR_SR_SUB, INTERN => INTERN, AUTHOR_GUEST => AUTHOR_GUEST, CO_ORDINATOR => CO_ORDINATOR, COPY_DESK => COPY_DESK, CORRESPONDENT => CORRESPONDENT, DESIGN_HEAD => DESIGN_HEAD, DESIGNER => DESIGNER);
   }
   else if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
     $user_array = array(COPY_EDITOR => COPY_EDITOR, SUBEDITOR_SR_SUB => SUBEDITOR_SR_SUB, INTERN => INTERN, AUTHOR_GUEST => AUTHOR_GUEST);
@@ -533,7 +542,7 @@ function itg_users_tokens($type, $tokens, array $data = array(), array $options 
 function itg_users_user_update(&$edit, $account, $category) {
 
   // send mail when password is changed
-  if ($account->field_notify_user_of_update_acco[LANGUAGE_NONE][0]['value'] == '1') {
+  if (!empty($account->field_notify_user_of_update_acco[LANGUAGE_NONE][0]['value']) && $account->field_notify_user_of_update_acco[LANGUAGE_NONE][0]['value'] == '1') {
     if (!empty($edit['pass'])) {
       $role = 'Your Password has been updated';
       $mail_content = itg_users_get_mail_content($role);
@@ -557,7 +566,7 @@ function itg_users_user_update(&$edit, $account, $category) {
   }
 
   // send mail whe role is changed
-  if ($account->field_notify_user_of_update_acco[LANGUAGE_NONE][0]['value'] == '1') {
+  if (!empty($account->field_notify_user_of_update_acco[LANGUAGE_NONE][0]['value']) && $account->field_notify_user_of_update_acco[LANGUAGE_NONE][0]['value'] == '1') {
 
     $user_intersec = array_diff_key($account->roles, $account->original->roles);
 
@@ -781,4 +790,23 @@ function itg_users_cronapi($op, $job = NULL) {
   );
 
   return $items;
+}
+
+/**
+ * user validation for backend
+ * @param array $form
+ * @param array $form_state
+ * 
+ */
+function itg_users_backend_validate(&$form, &$form_state) {
+  global $base_url;
+  
+  $user_info = user_load_by_name($form_state['values']['name']);
+ 
+  if (array_key_exists(FRONT_USER, $user_info->roles) && $base_url == BACKEND_URL) {
+    form_set_error(t('User dose not exit.'));
+  } else if (!array_key_exists(FRONT_USER, $user_info->roles) && $base_url == FRONT_URL) {    
+      form_set_error(t('User dose not exit.'));
+  }
+ 
 }

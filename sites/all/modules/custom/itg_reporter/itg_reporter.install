@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * @file
+ * Install functions for flag table.
+ */
+
+/**
+ * Implements hook_schema()
+ * Defining table structure to store file information associated with a node
+ * @return array
+ */
+function itg_reporter_schema() {
+  $schema['itg_multi_byline_info'] = array(
+    'description' => 'Table for store information related to multiple byline.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for a table.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'Node id',
+        'type' => 'int',
+        'null' => TRUE,
+        'default' => 0,
+      ),
+      'uniqueid' => array(
+        'description' => 'Unique id',
+        'type' => 'varchar',
+        'length' => '225',
+        'null' => TRUE,
+      ),
+      'byline_id' => array(
+        'description' => 'Byline id',
+        'type' => 'int',
+        'null' => TRUE,
+        'default' => 0,
+      ),
+      'publish_status' => array(
+        'description' => 'Publish Status',
+        'type' => 'int',
+        'null' => TRUE,
+        'default' => 0,
+      ),
+      'byline_weight' => array(
+        'description' => 'Byline Weight',
+        'type' => 'int',
+        'null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => t('Created date'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}

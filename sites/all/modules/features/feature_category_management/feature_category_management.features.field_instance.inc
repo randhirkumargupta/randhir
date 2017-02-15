@@ -571,6 +571,40 @@ function feature_category_management_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'taxonomy_term-category_management-field_issue_free'.
+  $field_instances['taxonomy_term-category_management-field_issue_free'] = array(
+    'bundle' => 'category_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 20,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_issue_free',
+    'label' => 'Issue free',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 24,
+    ),
+  );
+
+  // Exported field_instance:
   // 'taxonomy_term-category_management-field_program_timing_in_days'.
   $field_instances['taxonomy_term-category_management-field_program_timing_in_days'] = array(
     'bundle' => 'category_management',
@@ -875,6 +909,7 @@ function feature_category_management_field_default_field_instances() {
   t('If you checked this option, category name will not appear on front end navigation.');
   t('If you checked this option, category will be marked as sponsored and will appear in the category listing page with special flag "Sponsored". ');
   t('If you checked this option, then this category would not be able to search in google search.');
+  t('Issue free');
   t('No Follow');
   t('Please enter display title, it will appear on the front end if user has entered.');
   t('Please enter the redirection URL (http://example.com). Reader will be redirected to the respective URL by clicking on the category name.

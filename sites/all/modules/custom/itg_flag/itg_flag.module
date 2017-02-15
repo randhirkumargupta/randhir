@@ -40,6 +40,11 @@ function itg_flag_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  $items['user-activity-front-highlight'] = array(
+    'page callback' => 'itg_user_activity_front_highlight',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -49,6 +54,7 @@ function itg_flag_menu() {
  */
 function itg_flag_details() {
   global $user;
+  
   $nd_id = $_POST['nd_id'];
   $typ = $_POST['typ'];
   $dtag = $_POST['dtag'];
@@ -56,12 +62,13 @@ function itg_flag_details() {
     $response = array('error' => 'error', 'nd_id' => $nd_id);
     print json_encode($response);
   }
-  else
-  {
-  $pre_count = itg_flag_get_count($nd_id, $typ);
+  else {
+  if (function_exists('itg_flag_get_count')) {
+    $pre_count = itg_flag_get_count($nd_id, $typ);
+  }
   $nid = itg_flag_get_nid($nd_id);
-  if (!empty($pre_count)) {
-    $pre_count = $pre_count + 1;
+  if (!empty($pre_count[$typ])) {
+    $pre_count = $pre_count[$typ] + 1;
   }
   else {
     $pre_count = 1;
@@ -94,141 +101,93 @@ function itg_flag_details() {
 }
 
 /**
- * Get count value by passing nid.
- * @param int $nid
- * @param string $type
- */
-function itg_flag_get_count($nid, $type) {
-  $flag_check = db_select('itg_custom_flag_count', 'fg')->fields('fg', array($type));
-  $flag_check->condition('nid',$nid ,'=');
-  $flag_check->orderBy('id', 'DESC');//ORDER BY created
-  $flag_check ->range(0,1);  
-  $result = $flag_check->execute()->fetchfield();
-  return $result;
-}
-
-/**
- * insert value of flag count in db.
- * @param int $nid
- * @param string $type
- * @param string $val
- */
-function itg_flag_insert_count($nid, $type, $val) {
-  $active = db_insert('itg_custom_flag_count')
-      ->fields(array(
-        'nid' => $nid,
-        $type => $val,
-        'created' => date('Y-m-d G:i:s'),
-      ))
-      ->execute();
-  $expire=time()+60*60*24*30;
-  setcookie("likeDislike"."_".$nid, "likeDislike"."_".$nid, $expire);
-}
-
-
-/**
- * Implement itg_flag_upd_count
- * @param int $nid
- * @param string $type
- * @param string $val
- */
-function itg_flag_upd_count($nid, $type, $val) {
-
-    $flag_upd = db_update('itg_custom_flag_count');
-    $flag_upd->condition('nid', $nid, '=');
-    $flag_upd ->fields(array(
-      $type => $val,
-      'created' => date('Y-m-d G:i:s'),
-    ));
-    
-    $flag_upd->execute();
-    
-    $expire=time()+60*60*24*30;
-    setcookie("likeDislike"."_".$nid, "likeDislike"."_".$nid, $expire);
-}
-
-
-/**
- * Get nid value by passing id.
- * @param int $nid
- * @param string $type
- */
-function itg_flag_get_nid($nid) {
-  $nid_check = db_select('itg_custom_flag_count', 'fg')->fields('fg', array('nid'));
-  $nid_check->condition('nid',$nid ,'=');
-  $nid_check->orderBy('id', 'DESC');//ORDER BY created
-  $nid_check ->range(0,1);  
-  $result = $nid_check->execute()->fetchfield();
-  return $result;
-}
-
-/** code for front user activity  **/
-
-/**
  * Implements itg_user_activity_front
  */
 function itg_user_activity_front() {
   global $user;
+
+  $nd_id = $_POST['nd_id'];
+  $emoji_id = explode('-', $nd_id);
+  $dtag = $_POST['dtag'];
+  $dstatus = $_POST['dstatus'];
+  $user_activity = $_POST['data_activity'];
+  $activity_date = date('d-m-Y');
+  $activity_date_time = date('d-m-Y h:i:s');
+
+  if (function_exists('mongodb'))
+  {
+    $con = mongodb();
+    if ($con)
+    {
+      $people = $con->front_user_activity;
+      $get_previous_info = itg_get_front_activity_info($nd_id, $dtag, $user->uid, $user_activity, $status = '');
+      if (empty($get_previous_info['nid']))
+      {
+        $actual_data = node_load($nd_id);
+        $primary_cat_id = $actual_data->field_primary_category[LANGUAGE_NONE][0]['value'];
+        $primary_cat_name = taxonomy_term_load($actual_data->field_primary_category[LANGUAGE_NONE][0]['value']);
+        $extra_image = $actual_data->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+        $path = $actual_data->path['source'];
+        $qry = array("nid" => $nd_id, "uid" => $user->uid, "title" => $actual_data->title, "path" => $path, "image" => $extra_image, "primary_category_id" => $primary_cat_id, "primary_category_name" => $primary_cat_name->name, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus);
+        $result = $people->insert($qry);
+        $response = array('success' => $dstatus, 'activity' => $user_activity, 'type' => $dtag);
+        print json_encode($response);
+      }
+      else
+      {
+        try {
+          $newdata = array('$set' => array("status" => $dstatus, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time));
+          $people->update(array("nid" => $nd_id, "activity" => $user_activity, "uid" => $user->uid), $newdata);
+          $response = array("success" => $dstatus, 'activity' => $user_activity, 'type' => $dtag);
+          print json_encode($response);
+        }
+        catch (Exception $e) {
+          print $e->getMessage() . $nd_id;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implement itg_user_activity_front_highlight().
+ */
+function itg_user_activity_front_highlight() {
   
   $nd_id = $_POST['nd_id'];
+  $emoji_id = explode('-', $nd_id);
   $dtag = $_POST['dtag'];
   $dstatus = $_POST['dstatus'];
   $user_activity = $_POST['data_activity'];
   $activity_date = date('d-m-Y');
   $activity_date_time = date('d-m-Y h:i:s');
   
-  if (function_exists('mongodb')) {
-    $con = mongodb();
-    if ($con) {
-      $people = $con->front_user_activity;
-      $get_previous_info = itg_get_front_activity_info($nd_id, $dtag, $user->uid, $user_activity, $status='');
-      if(empty($get_previous_info['nid'])) {
-      $qry = array("nid" => $nd_id, "uid" => $user->uid, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus);
-      $result = $people->insert($qry);
-      $response = array('success' => $dstatus);
-      print json_encode($response);
-      }
-      else {
-        try {
-        $newdata = array('$set' => array("status" => $dstatus, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time));
-        $people->update(array("nid" => $nd_id), $newdata);
-        $response = array("success" => $dstatus);
-        print json_encode($response);
+  
+  if (isset($_COOKIE['hightlights_emoji' . "_" . $nd_id])) {
+    $response = array('ok' => 'error', 'nd_id' => $emoji_id[0]);
+    print json_encode($response);
+  }
+  else {
+    if (function_exists('mongodb')) {
+      $con = mongodb();
+      if ($con) {
+        $people = $con->front_user_activity_highlight;
+        if (!empty($nd_id)) {
+          $emoji_count = itg_common_mongo_activity_count($nd_id, 'front_user_activity_highlight');
+          if (!empty($emoji_count)) {
+            $pre_count = $emoji_count + 1;
+          }
+          else {
+            $pre_count = 1;
+          }
+          $qry = array("nid" => $nd_id, "uid" => $user->uid, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus);
+          $result = $people->insert($qry);
+          $expire = time() + 60 * 60 * 24 * 30;
+          setcookie("hightlights_emoji" . "_" . $nd_id, $expire);
+          $response = array('ok' => 'hightlights_emoji_true', 'nd_id' => $emoji_id[0], 'count' => $pre_count, 'rel' => $nd_id);
+          print json_encode($response);
         }
-        catch (Exception $e){
-          print $e->getMessage().$nd_id;
-        }
       }
-     
     }
   }
-}
-
-
-/**
- * Helper function to get previous insert record.
- * @param int $nid
- * @param string $ntype
- * @param int $uid
- * @param string $activity
- * @param string $status
- */
-function itg_get_front_activity_info($nid, $ntype, $uid, $activity, $status) {
-  $data = '';
-  if (function_exists('mongodb')) {
-    $con = mongodb();
-    $people = $con->front_user_activity;
-    if(!empty($status)) {
-    $cond = array('nid' => $nid, 'ntype' => $ntype, 'uid' => $uid, 'activity' => $activity, 'status' => $status);
-    }
-    else {
-     $cond = array('nid' => $nid, 'ntype' => $ntype, 'uid' => $uid, 'activity' => $activity); 
-    }
-    $cursor = $people->find($cond);
-    foreach ($cursor as $document) {
-      $data['nid'] = $document['nid'];
-      $data['status'] = $document['status'];
-    }
-    return $data;
-  } 
 }

@@ -23,11 +23,11 @@ class ItgUserMigration extends XMLMigration {
     );
 
     // This can also be an URL instead of a local file path.
-    $file_path = drupal_realpath('public://');
+    $file_path = 'sites/default/files';
 
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
-    $items_url = $xml_folder . 'user.xml';
+    $items_url = $xml_folder . 'users-master.xml';
 
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -82,7 +82,10 @@ class ItgUserMigration extends XMLMigration {
   public function prepareRow($row) {
     // manage parent id
     if (isset($row->xml->usertype) && !empty($row->xml->usertype)) {
-      $row->xml->usertype = 10;
+      $row->xml->usertype = 6;
+    }
+    if(empty($row->xml->lastvisitDate)){
+      $row->xml->lastvisitDate = 0;
     }
   }
 

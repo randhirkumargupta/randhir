@@ -657,7 +657,7 @@ function itg_service_content_after_build($form, &$form_state) {
       $zodiac_name = itg_astro_zodiac_thumbnail();
       $cnt = isset($form['nid']['#value']) ? 0 : 1;
       for ($i = 0; $i <= 12; $i++) {
-        $form['field_service_content'][LANGUAGE_NONE][$cnt]['field_story_expert_description']['#prefix'] = '<div class="itg-astro-image"><img src="' . image_style_url("thumbnail", $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['uri']) . '" alt="' . $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['alt'] . '" title="' . $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['title'] . '"></div>';
+        $form['field_service_content'][LANGUAGE_NONE][$cnt]['field_story_expert_description']['#prefix'] = '<div class="itg-astro-image"><img src="' . image_style_url("thumbnail", $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['uri']) . '" alt="' . $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['alt'] . '" title="' . $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['title'] . '" /></div>';
         $cnt++;
       }
       $settings['astro_service'] = TRUE;
@@ -1087,6 +1087,14 @@ function itg_mobile_services_form_views_exposed_form_alter(&$form, &$form_state,
         'placeholder' => t('Title')
       );
       $form['title']['#autocomplete_path'] = 'content-title-list/service_creation/autocomplete';
+      $form['expire_type'] = array(
+        '#type' => 'select',
+        '#title' => t('Expire Type'),
+        '#options' => array('0' => t('--SELECT--'), 'expired' => t('Expired'), 'live' => t('Live')),
+        '#prefix' => '<div id="custom-expire-type">',
+        '#suffix' => '</div>'
+      );
+      //drupal_add_js("jQuery(document).ready(function() { jQuery('#custom-expire-type').width('125'); });", 'inline');
       break;
     case 'views-exposed-form-clients-details-page-3':
       $form['field_service_title_value']['#attributes'] = array(
@@ -1161,6 +1169,44 @@ function itg_mobile_services_views_query_alter(&$view, &$query) {
   if ((isset($view->name) && $view->name === 'clients_details' && $view->current_display == 'page_3')) {
       unset($_SESSION['service_title_id']);
       unset($_SESSION['service_frequency_id']);
+  }
+  if ((isset($view->name) && $view->name === 'clients_details' && $view->current_display == 'page_1')) {
+       if (isset($_GET['expire_type']) && $_GET['expire_type'] == 'live') {
+         
+          $joins = new views_join;
+          $joins->construct('field_data_field_story_expiry_date', 'node', // left table
+              'nid', // left field
+              'entity_id', // field
+              '', 'LEFT'
+          );
+          // Add join to query; 'node' is the left table name
+          $view->query->add_relationship('field_data_field_story_expiry_date', $joins, 'node');
+          $today_date = date("Y-m-d H:i:s");
+          $service_expire_where_condition = array(
+            'field' => "field_data_field_story_expiry_date.field_story_expiry_date_value",
+            'value' => $today_date,
+            'operator' => '>=',
+          );
+          array_push($query->where[1]['conditions'], $service_expire_where_condition);
+      } else if (isset($_GET['expire_type']) && $_GET['expire_type'] == 'expired') {
+        
+          $joins = new views_join;
+          $joins->construct('field_data_field_story_expiry_date', 'node', // left table
+              'nid', // left field
+              'entity_id', // field
+              '', 'LEFT'
+          );
+          // Add join to query; 'node' is the left table name
+          $view->query->add_relationship('field_data_field_story_expiry_date', $joins, 'node');
+          $today_date = date("Y-m-d H:i:s");
+          $service_expire_where_condition = array(
+            'field' => "field_data_field_story_expiry_date.field_story_expiry_date_value",
+            'value' => $today_date,
+            'operator' => '<=',
+          );
+          array_push($query->where[1]['conditions'], $service_expire_where_condition); 
+        
+      }
   }
 }
 

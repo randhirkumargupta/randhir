@@ -58,20 +58,28 @@ $field_cm_category_color = isset($section_banner_data->field_cm_category_color['
   <div class="menu-wrapper" style="background: <?php print $field_cm_category_color; ?>">
     <div class="container">
       <div class="row">
-        <div class="col-md-4 col-sm-4 col-xs-4">
+        <div class="col-md-3 col-sm-3 col-xs-6">
           <?php
           if (!empty($src) && isset($uri)) {
-            print "<img src='" . $src . "'>";
+            print "<img src='" . $src . "' alt='' />";
           }
           ?>
         </div>
-        <div class="col-md-8 col-sm-8 col-xs-8">
+        <div class="col-md-9 col-sm-9 col-xs-6">
           <?php if (!empty($data)) : ?>
-            <div class="select-menu">Section</div>
+            <div class="select-menu"><?php echo t("Section") ?></div>
             <ul class="third-level-menu">
               <?php foreach ($data as $key => $menu_data) : ?>
                 <?php
                 if (function_exists('itg_menu_manager_get_menu')) {
+                  // Logic to exclude inactive category.
+                  if (!empty($menu_data['term_load'])) {
+                    $category_manager_tid = $menu_data['term_load']->tid;
+                    $term_state = itg_category_manager_term_state($category_manager_tid);
+                    if ($term_state == 0) {
+                      continue;
+                    }
+                  }
                   $menu_link_data = itg_menu_manager_get_menu($menu_data, arg());
                   $image_class = $menu_link_data['image_class'];
                   $link_text = $menu_link_data['link_text'];
@@ -80,7 +88,7 @@ $field_cm_category_color = isset($section_banner_data->field_cm_category_color['
                   $active = $menu_link_data['active'];
                   $url_type = $menu_link_data['url_type'];
                   ?>
-                  <li class="<?php print $image_class; ?>"><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("third-level-child", "third-level-child-$key", $active, $image_class , $url_type)))); ?></li>
+                  <li class="<?php print $image_class; ?>"><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("third-level-child", "third-level-child-$key", $active, $image_class, $url_type)))); ?></li>
                   <?php
                 }
               endforeach;

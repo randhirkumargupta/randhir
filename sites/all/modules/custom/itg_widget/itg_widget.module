@@ -28,7 +28,11 @@ module_load_include('inc', 'itg_widget', 'itg_widget.helper');
 function itg_widget_init() {
 // Js for move funtionality.
 // This is use in case of nodequeue in case of custom table we calls a callback funtion.
-  drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', 'file');
+  global $base_url;
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));
 }
 
 /**
@@ -165,7 +169,110 @@ function itg_widget_menu() {
     'access arguments' => array('administer nodequeue'),
   );
 
+  $items['site-map'] = array(
+    'page callback' => 'itg_widget_site_map',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+  );
+
   return $items;
+}
+
+/**
+ * function to get sitemap.
+ * @return type
+ */
+function itg_widget_site_map() {
+  drupal_add_css(".nested-taxonomy-tree a:hover {color: #a00606 !important}" , array("type" => "inline" ,"scope" => "footer"));
+  $tree = extranet_get_nested_tree(CATEGORY_MANAGMENT);
+  $keys = array_keys($tree);
+  foreach ($keys as $index => $data) {
+    $term_array = array($keys[$index] => $tree[$keys[$index]]);
+    if ($index % 2 == 0) {
+      $left_tree .= extranet_output_nested_tree($term_array);
+    }
+    else {
+      $right_tree .= extranet_output_nested_tree($term_array);
+    }
+  }
+  $print_tree = '<div class="row site-map"><div class="col-md-6">' . $left_tree . '</div> <div class="col-md-6">' . $right_tree . '</div></div>';
+  return $print_tree;
+}
+
+/**
+ * Function create nested tree ul li for given array format.
+ * @param array $tree
+ * @return string
+ */
+function extranet_output_nested_tree($tree) {
+  if (count($tree)) {
+    $output = '<ul class="nested-taxonomy-tree">';
+    foreach ($tree as $term) {
+      if(function_exists('itg_category_manager_term_state')) {
+          if (itg_category_manager_term_state($term->tid)) {
+          $output .= '<li class="taxonomy-term">';
+          $output .= l($term->name, "taxonomy/term/$term->tid");
+          if ($term->children) {
+            $output .= extranet_output_nested_tree($term->children);
+          }
+          $output .= '</li>';
+        }
+      }
+      else {
+        $output .= '<li class="taxonomy-term">';
+        $output .= l($term->name, "taxonomy/term/$term->tid");
+        if ($term->children) {
+          $output .= extranet_output_nested_tree($term->children);
+        }
+        $output .= '</li>';
+      }
+    }
+    $output .= '</ul>';
+  }
+  return $output;
+}
+
+/**
+ * Function to get array of active category tree array format.
+ * @param array $terms
+ * @param int $max_depth
+ * @param int $parent
+ * @param array $parents_index
+ * @param int $depth
+ * @return array
+ */
+function extranet_get_nested_tree($terms = array(), $max_depth = NULL, $parent = 0, $parents_index = array(), $depth = 0) {
+  if (is_int($terms)) {
+    $terms = taxonomy_get_tree($terms);
+  }
+
+  foreach ($terms as $term) {
+    foreach ($term->parents as $term_parent) {
+      if ($term_parent == $parent) {
+        if (function_exists('itg_category_manager_term_state') && itg_category_manager_term_state($term->tid)) {
+          $return[$term->tid] = $term;
+        }
+        else {
+          $return[$term->tid] = $term;
+        }
+      }
+      else {
+        if (function_exists('itg_category_manager_term_state') && itg_category_manager_term_state($term->tid)) {
+          $parents_index[$term_parent][$term->tid] = $term;
+        }
+        else {
+          $parents_index[$term_parent][$term->tid] = $term;
+        }
+      }
+    }
+  }
+
+  foreach ($return as &$term) {
+    if (isset($parents_index[$term->tid]) && (is_null($max_depth) || $depth < $max_depth)) {
+      $term->children = extranet_get_nested_tree($parents_index[$term->tid], $max_depth, $term->tid, $parents_index, $depth + 1);
+    }
+  }
+  return $return;
 }
 
 /**
@@ -309,6 +416,10 @@ function itg_widget_block_info() {
   );
   $blocks['cheaper_dearer'] = array(
     'info' => t('Widget : Cheaper Dearer from custom table')
+  );
+
+  $blocks['podcast_header'] = array(
+    'info' => t('Podcast: Header for podcast.')
   );
 
   return $blocks;
@@ -508,9 +619,11 @@ function itg_widget_block_view($delta = '') {
       break;
 
     case 'featured_photo_carousel_r':
+      // As slider is not using to comment this code.
       global $base_url;
       module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
-      drupal_add_js($base_url . '/sites/all/themes/itg/js/itg-photo-slider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
+      //drupal_add_js(drupal_get_path('theme', 'itg'). "");
+      drupal_add_js(drupal_get_path('theme', 'itg') . '/js/itg-photo-slider.js', array('type' => 'file', 'scope' => 'footer'));
       drupal_add_js($base_url . '/sites/all/themes/itg/js/jquery.mousewheel.min.js', array('type' => 'external', 'scope' => 'header', 'weight' => 5));
 
       drupal_add_js("jQuery(document).ready(function () {
@@ -569,9 +682,11 @@ function itg_widget_block_view($delta = '') {
             }', 'inline');
 
 
-      $info['view_name'] = 'photo_carousel_widget'; // view name
-      $info['page'] = 'video_carousel'; // page name
-      $info['nodequeue'] = 'video_carousel';
+      module_load_include('inc', 'itg_widget', 'includes/featured_video_carousel');
+      $info['widget'] = 'video_carousel_list_widget';
+      $info['order'] = 'ASC';
+      $info['max_limit'] = VIDEO_CAROUSEL_MAX_RANGE;
+      $info['min_limit'] = VIDEO_CAROUSEL_MIN_RANGE;
       $data = itg_widget_featured_video_carousel_data($info, 'flexslider');
       $block['content'] = theme("featured_video_carousel", array("data" => $data));
       break;
@@ -618,8 +733,10 @@ function itg_widget_block_view($delta = '') {
         );
         drupal_add_js('misc/jquery.js'); */
       module_load_include('inc', 'itg_widget', 'includes/featured_video_carousel');
-      $info['view_name'] = 'photo_carousel_widget'; // view name
-      $info['page'] = 'video_carousel'; // page name
+      $info['widget'] = 'video_carousel_list_widget';
+      $info['order'] = 'ASC';
+      $info['max_limit'] = VIDEO_CAROUSEL_MAX_RANGE;
+      $info['min_limit'] = VIDEO_CAROUSEL_MIN_RANGE;
       $data = itg_widget_featured_video_carousel_data($info, 'rolling');
       $block['content'] = theme("featured_video_carousel_rollingslider", array("data" => $data));
       break;
@@ -878,6 +995,42 @@ function itg_widget_block_view($delta = '') {
       $data = itg_budget_predictor_cheaper_dearer_data();
       $block['content'] = $data;
       break;
+
+    case 'podcast_header':
+      $menu_get_object = menu_get_object();
+      if ($menu_get_object->type == 'podcast') {
+        $entity_id = $menu_get_object->field_podcast_audio_upload['und'];
+        $podcast_title = $menu_get_object->title;
+        $podcast_banner_array = array();
+        foreach ($entity_id as $key => $val) {
+          $id = $val['value'];
+          $entity = entity_load('field_collection_item', array($id));
+          $audio_file_object = $entity[$id]->field_podcast_upload_audio_file['und'][0];
+          $description = $entity[$id]->field_podcast_description['und'][0]['value'];
+          $podcast_image = $entity[$id]->field_podcast_audio_image_upload['und'][0];
+          $podcast_banner_array[$key] = array("audio" => $audio_file_object, "desc" => $description, "image" => $podcast_image);
+        }
+        drupal_add_js("jQuery(document).ready(function(){    
+          jQuery('.slider-header').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            fade: true,
+            asNavFor: '.other-list'
+          });
+          jQuery('.other-list').slick({
+            slidesToShow: 7,
+            slidesToScroll: 1,
+            arrows: true, 
+            prevArrow: '<i class=\"fa fa-chevron-left slick-prev\" aria-hidden=\"true\"></i>',
+            nextArrow: '<i class=\"fa fa-chevron-right slick-next\" aria-hidden=\"true\"></i>',
+            asNavFor: '.slider-header',
+            focusOnSelect: true
+          });   
+});",array("type" => "inline" ,"scope" => "footer"));
+        $block['content'] = theme("podcast_banner", array("podcast_banner_array" => $podcast_banner_array, "podcast_title" => $podcast_title));
+      }
+      break;
   }
 
 
@@ -1006,10 +1159,9 @@ function itg_get_video_display_for_big_story($nid) {
  * Function returns videogallery iframe slider.
  * @param int $nid
  */
-function itg_widget_dailymotion_get_videogallery_slider($nid) {
+function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery') {
   $videoids = "";
-
-  print '<div class="videogallery-slider">';
+  print '<div class="videogallery-slider slider-for-nid-' . $nid . '">';
   if (function_exists('get_video_in_fieldcollection_by_nid')) {
     $videoids = get_video_in_fieldcollection_by_nid($nid);
   }
@@ -1022,10 +1174,10 @@ function itg_widget_dailymotion_get_videogallery_slider($nid) {
       }
       ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->video_id; ?>"><?php
       if ($video_value->dailymotion_thumb_url != "") {
-        $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $video_value->dailymotion_thumb_url . '" height="66" width="88"></li>';
+        $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $video_value->dailymotion_thumb_url . '" height="66" width="88" alt="" /></li>';
       }
       else {
-        $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/default_for_all.png" height="66" width="88"></li>';
+        $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/default_for_all.png" height="66" width="88" alt="" /></li>';
       }
       $ads_flag = 0;
       if ($video_value->field_include_ads_value == 'yes') {
@@ -1033,11 +1185,15 @@ function itg_widget_dailymotion_get_videogallery_slider($nid) {
       }
       ?>
         <div class="iframe-video">
-          <iframe frameborder="0"
+          <iframe class='iframe-video-dailymotion' frameborder="0"
                   src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=0&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
                   allowfullscreen></iframe>
         </div>
-        <?php print ucfirst($video_value->field_videogallery_description_value) ?>
+        <?php
+        if ($type != 'video') {
+          print ucfirst($video_value->field_videogallery_description_value);
+        }
+        ?>
       </div>
 
       <?php
@@ -1046,8 +1202,8 @@ function itg_widget_dailymotion_get_videogallery_slider($nid) {
   }
   print '</div>';
   if (count($videoids) > 1) {
-      print $newimageds;
-    }
+    print $newimageds;
+  }
 }
 
 /**
@@ -1307,8 +1463,10 @@ function itg_widget_save_bulk_operation_widget_data($form_state, $widget_name) {
   $selected_node = $form_state['selection'];
   if (count($selected_node)) {
     foreach ($selected_node as $node) {
-      itg_widget_delete_data_from_widget($widget_name, $node);
-      itg_widget_insert_widget_data_by_min_weight($node, $widget_name, 0);
+      $is_node_in_widget = itg_widget_check_node_in_widget($node, $widget_name);
+      if (!$is_node_in_widget) {
+        itg_widget_insert_widget_data($node, $widget_name, 0);
+      }
     }
     drupal_set_message(t("Nodes has been saved"));
   }
@@ -1351,14 +1509,14 @@ function itg_widget_insert_widget_data_by_min_weight($node, $widget_name, $categ
  * @param string $type
  * @return int
  */
-function get_min_weight_for_special($type , $cat_id = 0 , $extra = 0) {
+function get_min_weight_for_special($type, $cat_id = 0, $extra = 0) {
   $max_query = db_select('itg_widget_order');
   $max_query->addExpression('MIN(weight)');
   $max_query->condition('widget', $type);
-  if(is_numeric($cat_id) && $cat_id) {
+  if (is_numeric($cat_id) && $cat_id) {
     $max_query->condition('cat_id', $cat_id);
   }
-  if($extra!=0 && isset($extra)) {
+  if ($extra != 0 && isset($extra)) {
     $max_query->condition('extra', $extra);
   }
   $max_result = $max_query->execute()->fetchField();
@@ -1383,10 +1541,12 @@ function itg_widget_update_weight_during_order_reorder($form, &$form_state) {
   if ($weightcount > 0) {
     foreach ($draggable_view_data as $key => $value) {
       try {
+        $weight = (int) $value['weight'];
+        $nid = (int) $value['id'];
         db_update('itg_widget_order')
-            ->fields(array('weight' => $value['weight']))
+            ->fields(array('weight' => $weight))
             ->condition('widget', $widget)
-            ->condition('nid', $value['id'])
+            ->condition('nid', $nid)
             ->execute();
       } catch (Exception $ex) {
         drupal_set_message($ex->getMessage());
@@ -1428,6 +1588,9 @@ function itg_widget_get_widget_name_from_views($view_name, $view_current_display
   }
   if ($view_name == 'widget_anchors_listing' && $view_current_display == 'anchors_listing_widget') {
     $widget_name = "anchors_listing_widget";
+  }
+  if ($view_name == 'section_wise_content_ordering_list' && $view_current_display == 'we_may_suggest_widget') {
+    $widget_name = "we_may_suggest_widget";
   }
   return $widget_name;
 }
@@ -1540,4 +1703,16 @@ function itg_widget_get_widget_data_data($info) {
  */
 function itg_widget_form_views_form_section_wise_content_ordering_list_page_alter(&$form, &$form_state, $form_id) {
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data";
+}
+
+/**
+ * Added a Query tag as  "query_poll_widget" in poll widget used in View : [poll_widget] [id:poll_widget_format]and written query tag alter as required
+ * Implements hook_query_TAG_alter()
+ */
+function itg_widget_query_poll_widget_alter_tag_alter(QueryAlterableInterface $query) {
+  $cur_date = date('Y-m-d H:i:s');
+  $query->leftjoin('field_data_field_poll_start_date', 'sd', 'node.nid = sd.entity_id');
+  $query->leftjoin('field_data_field_poll_end_date', 'ed', 'node.nid = ed.entity_id');
+  $query->condition('sd.field_poll_start_date_value', $cur_date, '<=');
+  $query->condition(db_or()->isNull('ed.field_poll_end_date_value')->condition('ed.field_poll_end_date_value', $cur_date, '>='));
 }

@@ -1389,6 +1389,11 @@ function feature_for_top_story_widget_views_default_views() {
   );
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'category_management';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '0';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'trending-video-widget-list';
 
   /* Display: Trending Videos Order Reorder */
@@ -1625,7 +1630,7 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = ' | <span><a data-view="story_widget" data-page="trending_videos_widget" data-nid="[nid]" data-queueid=\'4\' class="remove_from_nodequeue_draggable_view" href="#"><span class="move-link">Remove</span><a></span>';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '| <a href="move-dont-miss-widget-node/trending_videos_widget///[nid]"> <span class="move-link">Remove</span></a>';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Section wise ordering content: weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
@@ -2303,6 +2308,11 @@ print \'<a href="move-dont-miss-widget-node/most_popular_widget/\'.$_GET[\'type\
   $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'most_popular_widget';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'most-popular-widget-order-reorder';
 
   /* Display: Top Takes Videos */
@@ -2700,6 +2710,11 @@ print \'<a href="move-dont-miss-widget-node/most_popular_widget/\'.$_GET[\'type\
   );
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'category_management';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '0';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'top-takes-videos-list';
 
   /* Display: Top Takes Videos Order Reorder */
@@ -3600,6 +3615,11 @@ print \'<a href="move-dont-miss-widget-node/top_takes_video_widget/\'.$_GET[\'ty
   $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'watch_right_now_widget';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'watch-right-now-video-widget-order-reorder';
   $export['story_widget'] = $view;
 

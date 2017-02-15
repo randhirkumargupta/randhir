@@ -12,7 +12,7 @@
 function itg_syndication_get_mode($client_name) {
   
   $client = explode('-', $client_name);
-  $client_description = $client[1];
+  $client_description = !empty($client[1]) ? $client[1] : '';
   $client_title = $client[0];
   $itg_query = db_select('node', 'n');
   $itg_query->condition('n.title', $client_description)
@@ -26,16 +26,22 @@ function itg_syndication_get_mode($client_name) {
   $data['_none'] = '- None -';
   
   //Code for FTP
-  foreach ($node->field_syndication_ftp_details[LANGUAGE_NONE] as $key => $val) {   
-    $field_collection_item = entity_load('field_collection_item', array($val['value']));
-    $ftp_name = $field_collection_item[$val['value']]->field_syndication_ftp_name[LANGUAGE_NONE][0]['value'];
-    $data['FTP: '.$ftp_name] = $ftp_name;
+  if (!empty($node->field_syndication_ftp_details[LANGUAGE_NONE])) {
+   foreach ($node->field_syndication_ftp_details[LANGUAGE_NONE] as $key => $val) {   
+      $field_collection_item = entity_load('field_collection_item', array($val['value']));
+      $ftp_name = $field_collection_item[$val['value']]->field_syndication_ftp_name[LANGUAGE_NONE][0]['value'];
+      $data['FTP: '.$ftp_name] = $ftp_name;
+   } 
   }
   
+  
   //Code for Email id
-  foreach ($node->field_email_address[LANGUAGE_NONE] as $key => $val) {
-    $data['Email: '.$val['value']] = $val['value'];
+  if (!empty($node->field_email_address[LANGUAGE_NONE])) {
+    foreach ($node->field_email_address[LANGUAGE_NONE] as $key => $val) {
+      $data['Email: '.$val['value']] = $val['value'];
+    }
   }
+  
   
   //Code for Weburl
   if (!empty($node->field_service_fetch_link[LANGUAGE_NONE][0]['value'])) {
@@ -157,7 +163,12 @@ function get_content_id_for_syndication($data, $created_date) {
   $itg_query->condition('n.created', $created_date, '>');
   $itg_query->condition('n.type',$data['content_type']);
   $itg_query->condition('syndication.field_story_syndication_value','Yes');  
-  $itg_query->condition('cat.field_story_category_tid',$data['section_id']);
+  $itg_query->condition('cat.field_story_category_tid',$data['section_id'], 'IN');//for multi section
+  
+  $delivery_mode_array = explode(': ', $data['delivery_mode']);  
+  if ($delivery_mode_array[0] == 'Weburl') {
+    $itg_query->range(0, 30);  
+  } 
   
   $itg_result = $itg_query->execute()->fetchAll();
   
@@ -195,8 +206,13 @@ function save_cron_details_of_syndication($node) {
   foreach($node->field_syndication_rule_details[LANGUAGE_NONE] as $key => $val ) {
       
     $field_collection_item = entity_load('field_collection_item', array($val['value']));
-
-    $section_id = $field_collection_item[$val['value']]->field_syndication_select_section[LANGUAGE_NONE][0]['tid'];
+    //add code for multi section
+    $section_array = $field_collection_item[$val['value']]->field_syndication_select_section[LANGUAGE_NONE];
+    foreach($section_array as $section_key => $section_val) {
+      $section_id[] = $section_val['tid'];
+    }
+    //end
+    //$section_id = $field_collection_item[$val['value']]->field_syndication_select_section[LANGUAGE_NONE][0]['tid'];
     $feed_type = $field_collection_item[$val['value']]->field_syndication_feed_type[LANGUAGE_NONE][0]['value'];
     $syndication_mode = $field_collection_item[$val['value']]->field_syndication_mode[LANGUAGE_NONE][0]['value'];
     $content_type = $field_collection_item[$val['value']]->field_syndication_content_type[LANGUAGE_NONE][0]['value'];

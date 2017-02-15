@@ -252,6 +252,12 @@ jQuery(document).ready(function() {
             el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
             el.parents('.item-list').removeClass('hide').prev().children('.cmd-heading').removeClass('active');
         });
+        $('.itg-sub-sub-sub-category').click(function(e) {
+            $(this).addClass('active').siblings().removeClass('active');
+            var el = $('.view-content > div > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .term-wrapper > .cmd-heading');
+            el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
+            el.parents('.item-list').removeClass('hide').prev().children('.cmd-heading').removeClass('active');
+        });
         setTimeout(function() {
             $('.page-category-manager-listing').find('.itg-section').trigger('click');
         }, 10);
@@ -520,6 +526,9 @@ jQuery(document).ready(function() {
         $('body').on('click', '.itg-close-popup', function() {
             $(this).closest('.itg-popup').hide();
         });
+          $('body').on('click', '.itg-close-popup_new', function() {
+            $(this).closest('.itg-popup').remove();
+        });
 
         $('body').find('.image-preview').parent().addClass('has-image-preview');
         $('body').find('.image-preview').parent().parent().addClass('has-image-parent');
@@ -744,6 +753,16 @@ jQuery(document).ready(function() {
         alert('Changes made successfully');
     });
     // end of code
+    
+    // byline order reorder
+    jQuery('body').on('click', '.save-byline', function () {
+        var item = [];
+        jQuery(this).closest('.byline-list').find('.byline-ul li').each(function (i) {
+            item.push(jQuery(this).find('.byline_publish').val());
+        });
+        jQuery('#edit-field-reporter-publish-id-und-0-value').val(item);
+        alert('Changes made successfully');
+    });
 
     // jQuery code for Loader
     jQuery(document).ajaxStart(function() {
@@ -902,11 +921,11 @@ jQuery(document).ready(function () {
     get_value = jQuery(this).val(), 
     set_class = '.' + get_value + "-tab-form", 
     siblings = jQuery(this).closest('.templates-tab-wrapper').find(set_class).siblings('.tab-form');
-    if(get_value){
-      siblings.find('input[type=text], textarea').val(''),
-      siblings.find('input[type=radio], input[type=checkbox]').removeAttr('checked'),
-      siblings.find('.image-widget-data input[value="Remove"]').trigger('mousedown');
-    }
+//    if(get_value){
+//      siblings.find('input[type=text], textarea').val(''),
+//      siblings.find('input[type=radio], input[type=checkbox]').removeAttr('checked'),
+//      siblings.find('.image-widget-data input[value="Remove"]').trigger('mousedown');
+//    }
     jQuery(this).closest('.templates-tab-wrapper').find(set_class).show().siblings('.tab-form').hide();
   });   
      

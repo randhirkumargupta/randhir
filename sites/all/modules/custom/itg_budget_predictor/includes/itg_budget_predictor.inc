@@ -17,14 +17,16 @@ function itg_budget_predictor_get_taxonomy() {
   global $user, $base_url;
   $user_id = $user->uid;
   $arg = arg();
-  $section_id = isset($arg[1]) ? $arg[1] : '';
-  $cookies_id = $_COOKIE['COOKIES_IT_' . $section_id];
-  if($user_id && $cookies_id) {
+  $section_id = isset($arg[2]) ? $arg[2] : '';
+  $cookies_id = $_SESSION['pre_budget'];
+  $exist_predictor = check_exist_predictor($user_id, $section_id);
+
+  if (empty($exist_predictor) && $user_id && $cookies_id) {
     update_user_by_cookies($user_id, $section_id, $cookies_id);
   }
 
   $check_budget_status = check_budget_status($section_id);
-  $check_budget_status_front_user = check_budget_status_front_user($section_id);
+  $check_budget_status_front_user = check_budget_status_front_user($section_id, $cookies_id);
   $check_budget = check_budget($section_id);
 
   if (!empty($check_budget['status'])) {
@@ -85,38 +87,41 @@ function itg_budget_predictor_get_taxonomy() {
 
     $column4 = '';
     $user_id = $user->uid;
-    foreach ($entity_data as $key => $node_data) {
-      $tid = $node_data['tid'];
-      $name = $node_data['name'];
-      $fid = $node_data['image'];
-      $file = file_load($fid);
-      $uri = $file->uri;
-      if ($tid) {
-        $column4 .= '<li id="entry_' . $tid . '" class="ui-state-default"><img src="' . image_style_url("thumbnail", $uri) . '" title="' . $name . '"></li>';
+    if (!empty($entity_data)) {
+      foreach ($entity_data as $key => $node_data) {
+        $tid = $node_data['tid'];
+        $name = $node_data['name'];
+        $fid = $node_data['image'];
+        $file = file_load($fid);
+        $uri = $file->uri;
+        if ($tid) {
+          $column4 .= '<li id="entry_' . $tid . '" class="ui-state-default" data-id="4"><img src="' . image_style_url("thumbnail", $uri) . '" title="' . $name . '" alt="" /></li>';
+        }
       }
     }
-    foreach ($entity_data['ranking'] as $keys => $values) {
-      $entity_id = $values['entity_id'];
-      $fid = get_ranking_fid($entity_id, $section_id);
-      $file = file_load($fid);
-      $uri = $file->uri;
-      if ($values['ranking_column'] == '1') {
-        $column1 .= '<li id="entry_' . $entity_id . '" class="ui-state-default"><img src="' . image_style_url("thumbnail", $uri) . '"></li>';
-      }
-      if ($values['ranking_column'] == '2') {
-        $column2 .= '<li id="entry_' . $entity_id . '" class="ui-state-default"><img src="' . image_style_url("thumbnail", $uri) . '"></li>';
-      }
-      if ($values['ranking_column'] == '3') {
-        $column3 .= '<li id="entry_' . $entity_id . '" class="ui-state-default"><img src="' . image_style_url("thumbnail", $uri) . '"></li>';
+    if (!empty($entity_data['ranking'])) {
+      foreach ($entity_data['ranking'] as $keys => $values) {
+        $entity_id = $values['entity_id'];
+        $fid = get_ranking_fid($entity_id, $section_id);
+        $file = file_load($fid);
+        $uri = $file->uri;
+        if ($values['ranking_column'] == '1') {
+          $column1 .= '<li id="entry_' . $entity_id . '" class="ui-state-default" data-id="1"><img src="' . image_style_url("thumbnail", $uri) . '" alt="" /></li>';
+        }
+        if ($values['ranking_column'] == '2') {
+          $column2 .= '<li id="entry_' . $entity_id . '" class="ui-state-default" data-id="2"><img src="' . image_style_url("thumbnail", $uri) . '" alt="" /></li>';
+        }
+        if ($values['ranking_column'] == '3') {
+          $column3 .= '<li id="entry_' . $entity_id . '" class="ui-state-default" data-id="3"><img src="' . image_style_url("thumbnail", $uri) . '" alt="" /></li>';
+        }
       }
     }
-
 
     $budget_data['column1'] = $column1;
     $budget_data['column2'] = $column2;
     $budget_data['column3'] = $column3;
     $budget_data['column4'] = $column4;
-    $budget_data['actual_link'] = $base_url . '/budget-predictor/' . $section_id;
+    $budget_data['actual_link'] = $base_url . $_SERVER['REQUEST_URI'];
     $budget_data['exist'] = 1;
     $budget_data['file_names'] = $file_name;
 
@@ -157,107 +162,120 @@ function itg_budget_predictor_update_budget() {
   $sort2 = '';
   $sort3 = '';
   $sort4 = '';
-
   // PARSES THE POSTS FROM EACH COLUMN INTO AN ARRAY
   parse_str($_POST['sort1'], $sort1);
   parse_str($_POST['sort2'], $sort2);
   parse_str($_POST['sort3'], $sort3);
-  $cookies_id = $_POST['cookies_id'];
-  //parse_str($_POST['sort4'], $sort4);
-  foreach ($sort1['entry'] as $key => $value) {
-    $count = itg_budget_predictor_check_ranking($value, $section_id, $cookies_id);
-    if ($count < 1) {
-      $nid = db_insert('itg_budget_predictor')
-          ->fields(array(
-            'entity_id' => $value,
-            'ranking_value' => $key,
-            'ranking_column' => 1,
-            'budget_type' => $budget_type,
-            'user_id' => $user_id,
-            'cookies_id' => $cookies_id,
-            'section_id' => $section_id,
-            'file_name' => '',
-            'status' => $budget_status,
-            'timestamp' => REQUEST_TIME,
-            'ip_address' => $ip_address,
-          ))
-          ->execute();
+  parse_str($_POST['sort4'], $sort4);
+  $cookies_id = ($_POST['cookies_id']) ? $_POST['cookies_id'] : 'static';
+  if (!empty($sort1['entry'])) {
+    //parse_str($_POST['sort4'], $sort4);
+    foreach ($sort1['entry'] as $key => $value) {
+      $count = itg_budget_predictor_check_ranking($value, $section_id, $cookies_id);
+      if ($count < 1) {
+        $nid = db_insert('itg_budget_predictor')
+            ->fields(array(
+              'entity_id' => $value,
+              'ranking_value' => $key,
+              'ranking_column' => 1,
+              'budget_type' => $budget_type,
+              'user_id' => $user_id,
+              'cookies_id' => $cookies_id,
+              'section_id' => $section_id,
+              'file_name' => '',
+              'status' => $budget_status,
+              'timestamp' => REQUEST_TIME,
+              'ip_address' => $ip_address,
+            ))
+            ->execute();
+      }
+      else {
+        $or = db_or()->condition('user_id', $user_id)->condition('cookies_id', $cookies_id);
+        db_update('itg_budget_predictor')
+            ->fields(array(
+              'ranking_value' => $key,
+              'ranking_column' => 1,
+              'ip_address' => $ip_address,
+            ))
+            ->condition('entity_id', $value, '=')
+            ->condition($or)->execute();
+      }
     }
-    else {
-      db_update('itg_budget_predictor')
-          ->fields(array(
-            'ranking_value' => $key,
-            'ranking_column' => 1,
-            'ip_address' => $ip_address,
-          ))
-          ->condition('entity_id', $value, '=')
-          ->condition('user_id', $user_id, '=')
-          ->execute();
+  }
+
+  if (!empty($sort2['entry'])) {
+    foreach ($sort2['entry'] as $key => $value) {
+      $count = itg_budget_predictor_check_ranking($value, $section_id, $cookies_id);
+      if ($count < 1) {
+        $nid = db_insert('itg_budget_predictor')
+            ->fields(array(
+              'entity_id' => $value,
+              'ranking_value' => $key,
+              'ranking_column' => 2,
+              'budget_type' => $budget_type,
+              'user_id' => $user_id,
+              'cookies_id' => $cookies_id,
+              'section_id' => $section_id,
+              'file_name' => '',
+              'status' => $budget_status,
+              'timestamp' => REQUEST_TIME,
+              'ip_address' => $ip_address,
+            ))
+            ->execute();
+      }
+      else {
+        $or = db_or()->condition('user_id', $user_id)->condition('cookies_id', $cookies_id);
+        db_update('itg_budget_predictor')
+            ->fields(array(
+              'ranking_value' => $key,
+              'ranking_column' => 2,
+              'ip_address' => $ip_address,
+            ))
+            ->condition('entity_id', $value, '=')
+            ->condition($or)->execute();
+      }
     }
   }
 
-
-
-  foreach ($sort2['entry'] as $key => $value) {
-    $count = itg_budget_predictor_check_ranking($value, $section_id, $cookies_id);
-    if ($count < 1) {
-      $nid = db_insert('itg_budget_predictor')
-          ->fields(array(
-            'entity_id' => $value,
-            'ranking_value' => $key,
-            'ranking_column' => 2,
-            'budget_type' => $budget_type,
-            'user_id' => $user_id,
-            'cookies_id' => $cookies_id,
-            'section_id' => $section_id,
-            'file_name' => '',
-            'status' => $budget_status,
-            'timestamp' => REQUEST_TIME,
-            'ip_address' => $ip_address,
-          ))
-          ->execute();
-    }
-    else {
-      db_update('itg_budget_predictor')
-          ->fields(array(
-            'ranking_value' => $key,
-            'ranking_column' => 2,
-            'ip_address' => $ip_address,
-          ))
-          ->condition('entity_id', $value, '=')
-          ->condition('user_id', $user_id, '=')
-          ->execute();
+  if (!empty($sort3['entry'])) {
+    foreach ($sort3['entry'] as $key => $value) {
+      $count = itg_budget_predictor_check_ranking($value, $section_id, $cookies_id);
+      if ($count < 1) {
+        $nid = db_insert('itg_budget_predictor')
+            ->fields(array(
+              'entity_id' => $value,
+              'ranking_value' => $key,
+              'ranking_column' => 3,
+              'budget_type' => $budget_type,
+              'user_id' => $user_id,
+              'cookies_id' => $cookies_id,
+              'section_id' => $section_id,
+              'file_name' => '',
+              'status' => $budget_status,
+              'timestamp' => REQUEST_TIME,
+              'ip_address' => $ip_address,
+            ))
+            ->execute();
+      }
+      else {
+        $or = db_or()->condition('user_id', $user_id)->condition('cookies_id', $cookies_id);
+        db_update('itg_budget_predictor')
+            ->fields(array(
+              'ranking_value' => $key,
+              'ranking_column' => 3,
+              'ip_address' => $ip_address,
+            ))
+            ->condition('entity_id', $value, '=')
+            ->condition($or)->execute();
+      }
     }
   }
-  foreach ($sort3['entry'] as $key => $value) {
-    $count = itg_budget_predictor_check_ranking($value, $section_id, $cookies_id);
-    if ($count < 1) {
-      $nid = db_insert('itg_budget_predictor')
-          ->fields(array(
-            'entity_id' => $value,
-            'ranking_value' => $key,
-            'ranking_column' => 3,
-            'budget_type' => $budget_type,
-            'user_id' => $user_id,
-            'cookies_id' => $cookies_id,
-            'section_id' => $section_id,
-            'file_name' => '',
-            'status' => $budget_status,
-            'timestamp' => REQUEST_TIME,
-            'ip_address' => $ip_address,
-          ))
-          ->execute();
-    }
-    else {
-      db_update('itg_budget_predictor')
-          ->fields(array(
-            'ranking_value' => $key,
-            'ranking_column' => 3,
-            'ip_address' => $ip_address,
-          ))
-          ->condition('entity_id', $value, '=')
-          ->condition('user_id', $user_id, '=')
-          ->execute();
+  
+  if (!empty($sort4['entry'])) {
+    $ranking_column_id = ($_POST['ranking_column_id']) ? $_POST['ranking_column_id'] : '';
+    $eid = ($_POST['eid']) ? $_POST['eid'] : '';
+    foreach ($sort4['entry'] as $key => $value) {
+        delete_budget_predictor($ranking_column_id, $eid, $user_id, $cookies_id);
     }
   }
 }
@@ -327,7 +345,7 @@ function get_ranking_fid($tid, $section_id) {
 }
 
 /**
- * function for list of budget 
+ * function for list of budget
  * @global string $base_url
  * @return string
  */
@@ -366,20 +384,24 @@ function itg_budget_predictor_list() {
   # build the table fields
   $rows = array();
   $i = 1;
-  foreach ($results as $row) {
-    $name = !empty($row->user_id) ? user_load($row->user_id)->name : t('Anonymous user');
-    $email = user_load($row->user_id)->mail;
-    $created_date = isset($row->timestamp) ? date('d/m/Y H:i:s', ($row->timestamp)) : '';
 
-    $rows[] = array($i,
-      $name,
-      $email,
-      $created_date
-    );
-    $i++;
+  if (!empty($results)) {
+    foreach ($results as $row) {
+      $name = !empty($row->user_id) ? user_load($row->user_id)->name : t('Anonymous user');
+      $email = user_load($row->user_id)->mail;
+      $created_date = isset($row->timestamp) ? date('d/m/Y H:i:s', ($row->timestamp)) : '';
+
+      $rows[] = array($i,
+        $name,
+        $email,
+        $created_date
+      );
+      $i++;
+    }
   }
 
   $caption_table_edit = l(t('List Of Budget'), 'manage-budget-list') . "&nbsp;" . l(t('Download Excel'), 'budget-download-excel', array('query' => array('section_id' => $_GET['section_id'], 'user_type' => $_GET['user_type'])));
+
   // Format and print out the table.
   $output = theme('table', array('header' => $header, 'rows' => $rows, 'caption' => $caption_table_edit, 'attributes' => array('class' => array('views-table'))));
 
@@ -399,7 +421,7 @@ function itg_budget_predictor_list() {
 }
 
 /**
- * 
+ *
  * @global string $base_url
  * @param array $form
  * @param array $form_state
@@ -408,12 +430,7 @@ function itg_budget_predictor_list() {
 function itg_budget_predictor_search_form($form, &$form_state) {
   global $base_url;
   $form = array();
-  $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-  $op = array("" => "-- Section --");
-  foreach ($tax as $key => $val) {
-    $op[$val->tid] = $val->name;
-  }
-
+  $op = budget_tid_by_content_type();
   $user_arr = array("" => t("-- Section --"), '1' => t('Anonymous user'), '2' => t('Authenticated user'));
 
   $form['#method'] = 'get';
@@ -450,7 +467,7 @@ function itg_budget_predictor_search_form($form, &$form_state) {
 }
 
 /**
- * 
+ *
  * @param type $form
  * @param array $form_state
  */
@@ -459,18 +476,24 @@ function itg_budget_predictor_search_form_submit($form, &$form_state) {
 }
 
 /**
- * function for list of manage budget 
+ * function for list of manage budget
  * @global string $base_url
  * @return string
  */
 function itg_budget_manage_list() {
   global $base_url;
   $build = array();
-
+  drupal_set_title(t('Manage Budget Predictor'));
   $query = db_select('itg_manage_budget', 'm')->extend('PagerDefault');
-  $query->fields('m', array('id', 'budget_title', 'budget_description', 'budget_section', 'status'))
-      ->orderBy('id', 'DESC')
-      ->limit(10);
+  $query->fields('m', array('id', 'budget_title', 'budget_description', 'budget_section', 'budget_section', 'status'));
+
+  if (!empty($_GET['section_id'])) {
+    $query->condition('m.budget_section', $_GET['section_id']);
+  }
+  if (!empty($_GET['status'])) {
+    $query->condition('m.status', $_GET['status']);
+  }
+  $query->orderBy('id', 'DESC')->limit(10);
   # execute the query
   $results = $query->execute();
 
@@ -486,33 +509,43 @@ function itg_budget_manage_list() {
   $rows = array();
   $i = 1;
 
-  foreach ($results as $row) {
-    $budget_id = $row->id;
-    $budget_title = $row->budget_title;
-    $budget_description = $row->budget_description;
-    $budget_section = taxonomy_term_load($row->budget_section)->name;
-    $status = $row->status;
-    $action = l(t('Edit Budget'), 'manage-budget-predictor/edit/' . $budget_id, array('query' => array('destination' => 'manage-budget-list')));
-    $rows[] = array($i,
-      $budget_title,
-      $budget_description,
-      $budget_section,
-      $status,
-      $action
-    );
-    $i++;
+  if (!empty($results)) {
+    foreach ($results as $row) {
+      $budget_id = $row->id;
+      $budget_title = $row->budget_title;
+      $budget_description = $row->budget_description;
+      $budget_section = taxonomy_term_load($row->budget_section)->name;
+      if ($row->status == 1) {
+        $status = 'Active';
+      }
+      elseif ($row->status == 2) {
+        $status = 'Inactive';
+      }
+      $play_link = l(t('Final Play'), 'budget/predictor/' . $row->budget_section);
+      $action = l(t('Edit'), 'manage-budget-predictor/edit/' . $budget_id, array('query' => array('destination' => 'manage-budget-list')));
+      $rows[] = array($i,
+        $budget_title,
+        $budget_description,
+        $budget_section,
+        $status,
+        $action . " | " . $play_link,
+      );
+      $i++;
+    }
   }
-
   $caption_table_edit = l(t('Add Budget'), 'manage-budget-predictor') . "&nbsp;&nbsp;";
-  $caption_table_edit .= l(t('List Of Budget User'), 'budget-predictor-list');
+  $caption_table_edit .= l(t('List Of Budget User'), 'budget-predictor-list') . "&nbsp;&nbsp;";
+  $caption_table_edit .= l(t('Master of Budget Predictor'), 'budget-predictor-image');
   // Format and print out the table.
   $output = theme('table', array('header' => $header,
     'rows' => $rows,
+    'empty' => t('Empty List'),
     // table caption will be in $caption_edit_table
     'caption' => $caption_table_edit,
     'attributes' => array('class' => array('views-table'))));
 
   $build['content'] = array(
+    'itg_budget_predictor_search' => drupal_get_form('itg_budget_predictor_search_user_form'),
     'itg_budget_predictor_content' => array(
       '#markup' => $output,
     ),
@@ -528,12 +561,60 @@ function itg_budget_manage_list() {
 }
 
 /**
+ *
+ * @global string $base_url
+ * @param array $form
+ * @param array $form_state
+ * @return type
+ */
+function itg_budget_predictor_search_user_form($form, &$form_state) {
+  global $base_url;
+  $form = array();
+  $op = budget_tid_by_content_type();
+  $status_arr = array("" => t("-- Select --"), '1' => t('Active'), '2' => t('Inactive'));
+
+  $form['#method'] = 'get';
+
+  $form['section_id'] = array(
+    '#type' => 'select',
+    '#title' => t('Select Section'),
+    '#options' => $op,
+    '#default_value' => isset($_GET['section_id']) ? $_GET['section_id'] : '',
+  );
+
+  $form['status'] = array(
+    '#type' => 'select',
+    '#title' => t('Status'),
+    '#options' => $status_arr,
+    '#default_value' => isset($_GET['status']) ? $_GET['status'] : '',
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
+
+  $url = $base_url . '/manage-budget-list';
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Reset'), $url, array(
+      'attributes' => array(
+        'class' => 'button custom-url-search'
+      )
+    )),
+    '#weight' => 9,
+    '#value' => t('Reset')
+  );
+  return $form;
+}
+
+/**
  * This function is used to manage budget form
  * @return string
  */
 function itg_manage_budget() {
   $arg = arg();
   if (isset($arg) && $arg[1] == 'edit') {
+    drupal_set_title(t('Edit Budget Predictor'));
     $action = $arg[2];
     $query = db_select('itg_manage_budget', 'm');
     $query->condition('m.id', $action, '=');
@@ -543,16 +624,13 @@ function itg_manage_budget() {
     $results = $query->execute()->fetchObject();
   }
   else {
+    drupal_set_title(t('Add Budget Predictor'));
     $action = '';
   }
 
   $form = array();
-  $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-  $op = array("" => "-- Section --");
-  foreach ($tax as $key => $val) {
-    $op[$val->tid] = $val->name;
-  }
-
+  module_load_include('inc', 'itg_layout_manager', 'includes/itg_layout_autocomplete');
+  $op = budget_tid_by_content_type();
   $form['budget_section'] = array(
     '#type' => 'select',
     '#title' => t('Select Section'),
@@ -589,19 +667,19 @@ function itg_manage_budget() {
   );
 
   $form['budget_image'] = array(
-    '#title' => t('Budget Image'),
+    '#title' => t('Budget Image').'<span class="form-required"> *</span>',
     '#type' => 'managed_file',
-    '#upload_validators' => array('file_validate_extensions' => array('jpeg jpg png gif')),
-    '#default_value' => ($results->file_id) ? $results->file_id : '',
+    '#file_validate_extensions' => array('png gif jpg jpeg'),
+    '#default_value' => isset($results->file_id) ? $results->file_id : NULL,
     '#upload_location' => 'public://budget/',
-    '#required' => TRUE
   );
-
+  
+ 
   $form['budget_status'] = array(
     '#type' => 'radios',
     '#title' => t('Budget status'),
-    '#options' => array(1 => "Show", 2 => "Off"),
-    '#default_value' => ($results->status) ? $results->status : 2,
+    '#options' => array(1 => "Active", 2 => "Inactive"),
+    '#default_value' => ($results->status) ? $results->status : 1,
     '#required' => TRUE
   );
 
@@ -630,21 +708,23 @@ function itg_manage_budget() {
  * {@inheritdoc}
  */
 function itg_manage_budget_validate($form, &$form_state) {
-  $budget_action = $form_state['values']['budget_action'];
-  //if (empty($budget_action)) {
-    $budget_section = $form_state['values']['budget_section'];
-    $query = db_select('itg_manage_budget', 'm');
-    $query->condition('m.budget_section', $budget_section, '=');
-    if($budget_action) {
-       $query->condition('m.id', $budget_action, '<>');
-    }
-    $query->fields('m', array('id'));
-    # execute the query
-    $results = $query->execute()->fetchObject();
-    if ($results->id) {
-      form_set_error('field', t('Budget Predictor already exist.'));
-    }
- // }
+  $budget_action = $form_state['input']['budget_action'];
+  $budget_section = $form_state['values']['budget_section'];
+  $query = db_select('itg_manage_budget', 'm');
+  $query->condition('m.budget_section', $budget_section, '=');
+  if ($budget_action) {
+    $query->condition('m.id', $budget_action, '<>');
+  }
+  $query->fields('m', array('id'));
+  # execute the query
+  $results = $query->execute()->fetchObject();
+  if ($results->id) {
+    form_set_error('field', t('Budget Predictor already exist.'));
+  }
+  
+  if($form_state['values']['budget_image'] == 0) {
+    form_set_error('budget_image', t('Budget image field is required.'));
+  }
 }
 
 /**
@@ -661,15 +741,19 @@ function itg_manage_budget_submit($form, &$form_state) {
   $budget_year = $form_state['values']['budget_year'];
   $budget_status = $form_state['values']['budget_status'];
   $budget_action = $form_state['input']['budget_action'];
+  $budget_image = $form_state['values']['budget_image'];
 
-  $file_id = $form_state['input']['budget_image']['fid'];
-  $file = file_load($form_state['values']['budget_image']);
-
-  if ($file) {
+  if ($budget_image != 0) {
+    // Upload and save file.
+    $file = file_load($budget_image);
     $file->status = FILE_STATUS_PERMANENT;
-    file_save($file);
-    file_usage_add($file, 'user', 'user', $user->uid);
+    $file_saved = file_save($file);
+    // Record that the module is using the file.
+    // If we dont do , then file will remove if a cron run.
+    file_usage_add($file_saved, 'itg_manage_budget', 'file_id', $file_saved->fid);
+    $file_id = $file_saved->fid;
   }
+
 
 
   if (isset($budget_action) && $budget_action > 0) {
@@ -726,17 +810,23 @@ function itg_budget_crop_image() {
 
     $file_name = 'budget/' . $file;
     $uri = substr($data, strpos($data, ",") + 1);
-    // save to file
-    file_put_contents('public://budget/' . $file, base64_decode($uri));
 
-      $num_updated = db_update('itg_budget_predictor')
-          ->fields(array('file_name' => $file_name))
-          ->condition('section_id', $section_id)
-          ->condition('user_id', $user->uid, '=')
-          ->execute();
-   
+    $num_updated = db_update('itg_budget_predictor')
+        ->fields(array('file_name' => $file_name))
+        ->condition('section_id', $section_id)
+        ->condition('user_id', $user->uid, '=')
+        ->execute();
+
     if (!$num_updated) {
+      // Remove all error messages
+      drupal_get_messages('error');
+      // Get the array of errors and reset them
+      $errors = &drupal_static("form_set_error", array());
       drupal_set_message('Please Drag and Drop Images.', 'error');
+    }
+    else {
+      // save to file
+      file_put_contents('public://budget/' . $file, base64_decode($uri));
     }
   }
 }
@@ -795,7 +885,7 @@ function check_budget_status($section_id) {
  * @param string $timestamp
  * @return int
  */
-function check_budget_status_front_user($section_id) {
+function check_budget_status_front_user($section_id, $cookies_id) {
   global $user;
   $user_id = $user->uid;
   $query = db_select('itg_budget_predictor', 'p');
@@ -844,11 +934,12 @@ function itg_budget_download_excel() {
   header("Expires: 0");
   echo "Mail";
   echo "\015\012";
-  foreach ($result as $row) {
-    pr($row);
-    $mail = !empty($row->user_id) ? user_load($row->user_id)->mail : t('Anonymous user');
-    echo $mail;
-    echo "\015\012";
+  if(is_array($result) && count($result) > 0) {
+      foreach ($result as $row) {
+        $mail = !empty($row->user_id) ? user_load($row->user_id)->mail : t('Anonymous user');
+        echo $mail;
+        echo "\015\012";
+      }
   }
 }
 
@@ -860,9 +951,76 @@ function itg_budget_download_excel() {
  */
 function update_user_by_cookies($user_id, $section_id, $cookies_id) {
   db_update('itg_budget_predictor')
-          ->fields(array('user_id' => $user_id))
+      ->fields(array('user_id' => $user_id))
+      ->condition('section_id', $section_id)
+      ->condition('cookies_id', $cookies_id, '=')
+      ->condition('user_id', 0, '=')
+      ->execute();
+}
+
+/**
+ * check existing user play predictor widget.
+ * @param int $user_id
+ * @param int $section_id
+ * @param string $cookies_id
+ * @return int
+ */
+function check_exist_predictor($user_id, $section_id) {
+  return db_select('itg_budget_predictor')
+          ->fields(NULL, array('user_id'))
+          ->condition('user_id', $user_id, '=')
           ->condition('section_id', $section_id)
-          ->condition('cookies_id', $cookies_id, '=')
-          ->condition('user_id', 0, '=')
-          ->execute();
+          ->countQuery()->execute()
+          ->fetchField();
+}
+
+/**
+ * Reset final result for admin user.
+ * @global array $user
+ */
+function itg_budget_reset_image() {
+  $arg = arg();
+  $section_id = isset($arg[2]) ? $arg[2] : '';
+  if (isset($arg[1]) && $arg[1] == 'reset-budget-data' && !empty($section_id)) {
+    db_update('itg_budget_predictor')
+        ->fields(array('file_name' => ''))
+        ->condition('section_id', $section_id)
+        ->condition('status', 2, '=')
+        ->execute();
+  }
+}
+
+/**
+ * Option value set by section for budget predictor form.
+ * @return type
+ */
+function budget_tid_by_content_type() {
+  $query = db_select('field_data_field_cm_select_type', 's');
+      $query->fields('s',array(entity_id));
+      $query->fields('t',array(name));
+      $query->leftJoin('taxonomy_term_data', 't', 's.entity_id=t.tid');
+      $query->condition('s.field_cm_select_type_value', 'manage-budget-predictor');
+      $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+      $op = array("" => "-- Section --");
+      if(is_array($result) && count($result) > 0) {
+        foreach ($result as $key => $value) {
+          $op[$value['entity_id']] = $value['name'];
+        }
+      }
+    return $op;
+}
+
+/**
+ * Delete data from budget predictor
+ * @param int $ranking_column_id
+ * @param int $eid
+ * @param int $user_id
+ * @param string $cookies_id
+ */
+function delete_budget_predictor($ranking_column_id, $eid, $user_id, $cookies_id) {
+  $or = db_or()->condition('user_id', $user_id)->condition('cookies_id', $cookies_id);
+  $q = db_delete('itg_budget_predictor')
+            ->condition('entity_id', $eid)
+            ->condition('ranking_column', $ranking_column_id)
+            ->condition($or)->execute();
 }

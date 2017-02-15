@@ -168,6 +168,7 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
       ),
     );
     $form['field_astro_type']['und']['#title'] = t('Astro Type <span class="form-required" title="This field is required."> *</span>');
+    $form['field_astro_type']['und']['#options']['_none'] = t('- Select -');
     $form['field_story_category']['und']['#title'] = t('Select Program <span class="form-required" title="This field is required."> *</span>');
 
     if (!empty($_REQUEST['destination'])) {
@@ -199,17 +200,20 @@ function itg_astro_form_alter(&$form, &$form_state, $form_id) {
  *   Return new altered form array.
  */
 function itg_astro_after_build($form, &$form_state) {
+  // Initialize globals.
+  global $user, $base_url;
   // Pass sign name to js file.
   drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/itg_astro.js');
   drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/moment.js');
   drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js');
 
   // Add description of audi/video field to their placeholder.
-  $desc = $form['field_astro_video'][LANGUAGE_NONE][0]['description']['#description'];
-  $form['field_astro_video'][LANGUAGE_NONE][0]['description']['#attributes'] = array('placeholder' => $desc);
-  unset($form['field_astro_video'][LANGUAGE_NONE][0]['description']['#description']);
-  // Initialize globals.
-  global $user, $base_url;
+  if (!empty($form['field_astro_video'][LANGUAGE_NONE][0]['description']['#description'])) {
+    $desc = $form['field_astro_video'][LANGUAGE_NONE][0]['description']['#description'];
+    $form['field_astro_video'][LANGUAGE_NONE][0]['description']['#attributes'] = array('placeholder' => $desc);
+    unset($form['field_astro_video'][LANGUAGE_NONE][0]['description']['#description']);
+  }
+  
   // Set field visibility for collective video field.
   $form['field_astro_video']['#states'] = array(
     'visible' => array(
@@ -384,7 +388,7 @@ function itg_astro_menu_alter(&$item) {
  * @param stdObject $view
  */
 function itg_astro_views_pre_render(&$view) {
-   
+
   switch ($view->name) {
     case 'associated_content':
       $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
@@ -396,7 +400,7 @@ function itg_astro_views_pre_render(&$view) {
       $header_content_astro .= l(t('File Astro'), 'node/add/astro', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0))));
       $view->attachment_before = $header_content_astro;
       break;
-   case 'state_manager':
+    case 'state_manager':
       $header_content_astro = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
       $header_content_astro .= l(t('Add State'), 'admin/structure/taxonomy/state_managment/add', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0))));
       $view->attachment_before = $header_content_astro;

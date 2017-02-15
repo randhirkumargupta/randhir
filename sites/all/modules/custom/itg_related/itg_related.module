@@ -65,17 +65,20 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
 
 
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'related_content_new') {
-
+    
+   if (function_exists('itg_apache_solr_get_site_hash'))
+    {
+      $hash = itg_apache_solr_get_site_hash();
+    }
+    
     $form['keyword']['#attributes'] = array('placeholder' => array(t('Title / Kicker / Tag ')));
 
-    $bundle_name = array('story' => 'Story', 'blog' => 'Blog', 'photogallery' => 'Photogallery', 'videogallery' => 'Videogallery', 'podcast' => 'Podcast', 'breaking_news' => 'Breaking News');
+    $bundle_name = array('story' => 'Story', 'blog' => 'Blog', 'photogallery' => 'Photogallery', 'videogallery' => 'Videogallery', 'podcast' => 'Podcast', 'breaking_news' => 'Live Blog');
     $form['bundle']['#type'] = 'select';
     $form['bundle']['#options'] = $bundle_name;
     $form['bundle']['#size'] = 5;
     $form['bundle']['#multiple'] = TRUE;
 
-    //'iibckc' => 'Dev'
-    $hash = array('5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'e49it8' => 'Stage Server');
     $form['hash']['#type'] = 'select';
     $form['hash']['#options'] = $hash;
     $form['hash']['#size'] = 5;
@@ -95,8 +98,6 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
  */
 function my_custom_ajax_callback() {
 
-  $data = array('######1', '######2');
-
   $combined_data = array('label' => $_POST['title'], 'bundle_name' => trim($_POST['bundle_name']), 'im_vid_4' => $_POST['section_id'], 'hash' => $_POST['hash']);
   //$output = serialize($combined_data);
   $check_title = check_search_title(trim($_POST['search_name']));
@@ -109,11 +110,15 @@ function my_custom_ajax_callback() {
         ->fields(array('search_title', 'search_path', 'ntype', 'uid', 'created', 'changed'))
         ->values(array($_POST['search_name'], $_POST['dta'], $_POST['ntype'], $_POST['uid'], REQUEST_TIME, REQUEST_TIME))
         ->execute();
+    $final_link = str_replace("&width=900&height=700&iframe=true", "", $_POST['dta']);
+    $final_with_title = $final_link . '&sname=' . $_POST['search_name'];
+    $related_res = '<li><a class= "def-cur-pointer" onclick="showrelatedpopup(' . "'" . $final_with_title . "'" . ')">' . $_POST['search_name'] . '</a></li>';
   }
 
 
   if ($result !== FALSE) {
-    return $data;
+    $response = array('msg' => 'success', 'lnk' => $related_res);
+    print json_encode($response);
   }
 }
 
@@ -131,25 +136,26 @@ function itg_related_views_pre_render(&$view) {
     $settings['uid'] = $user->uid;
     drupal_add_js(array('itg_related' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_related') . '/js/itg_related.js', array('weight' => 1));
-
-
+    $titlename = '';
+    if(!empty($_GET['sname'])) {
+    $titlename = t('Search Name : ');
+    $sname = '<span class="sname">'.$titlename. $_GET['sname'] . '&nbsp;</span>';
+    $view->attachment_before = $sname;
+    }
+    // get solr site hash
+    if (function_exists('itg_apache_solr_get_site_hash'))
+    {
+      $hash = itg_apache_solr_get_site_hash();
+    }
+    
     foreach ($view->result as $related_result) {
       if ($related_result->bs_status == '1') {
         $related_result->bs_status = 'Published';
       }
+     
+      $key = $related_result->hash;
+      $related_result->site = $hash[$key];
 
-      if ($related_result->hash == '5fyeg7') {
-        $related_result->site = 'DEV';
-      }
-      elseif ($related_result->hash == '2e1u4m') {
-        $related_result->site = 'QA';
-      }
-      elseif ($related_result->hash == 'e49it8') {
-        $related_result->site = 'STAGE';
-      }
-//      $splittedsite = explode("/", $related_result->site);
-//      $explode_site = explode(".", $splittedsite[2]);
-//      $related_result->site = strtoupper($explode_site[0]);
       $related_result->sm_vid_Tags = implode(', ', $related_result->sm_vid_Tags);
       $related_result->sm_vid_Category_Management = implode(', ', $related_result->sm_vid_Category_Management);
     }
@@ -166,7 +172,8 @@ function itg_related_form_views_exposed_form_alter(&$form, &$form_state, $form_i
   //Get the Form Id
   if ($form["#id"] == 'views-exposed-form-related-content-new-page') {
     $form['sm_vid_Tags']['#autocomplete_path'] = 'tag-list/1/autocomplete';
-    $form['tm_vid_4_names']['#autocomplete_path'] = 'tag-list/4/autocomplete';
+    $form['tm_vid_4_names']['#autocomplete_path'] = 'tag-list/'.CATEGORY_MANAGMENT.'/autocomplete';
+    $form['tm_vid_14_names']['#autocomplete_path'] = 'tag-list/'.CATEGORY_MANAGMENT.'/autocomplete';
     $form['sm_field_itg_common_by_line_name']['#autocomplete_path'] = 'reporter-list/autocomplete';
     $form['sm_field_itg_common_by_line_twit']['#autocomplete_path'] = 'twitter-handle/autocomplete';
   }
@@ -217,7 +224,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       if ($i > 1) {
         $and = ' AND ';
       }
-      $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'site-search', 'ds_changed_max', 'custom_drp', 'exact_match', 'searchimage', 'online-archive-story', 'clone-story');
+      $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'site-search', 'ds_changed_max', 'custom_drp', 'exact_match', 'searchimage', 'online-archive-story', 'clone-story', 'sname');
 
       if (!empty($val) && $val != 'related-content' && $val != 'site-search' && $val != 'searchimage' && $val != 'online-archive-story' && $val != 'clone-story' && !in_array($key, $remove_key)) {
 
@@ -382,15 +389,14 @@ function itg_related_save_search() {
       ->orderBy('changed', 'DESC')//ORDER BY created
       ->range(0, 5)
       ->execute();
-
-
-  $related_html = '<h3 class=rel-hed>My Saved Search</h3>';
-  $related_html.= '<ul>';
+  
+  $related_html = '';
+  $related_html.= '<ul class="search-list">';
   while ($save_search_result_info = $save_search_result->fetchAssoc()) {
 
     $final_link = str_replace("&width=900&height=700&iframe=true", "", $save_search_result_info['search_path']);
-
-    $related_html.= '<li><a oncontextmenu="return false;" href="' . $final_link . '&width=900&height=700&iframe=true" class="colorbox-load">' . $save_search_result_info['search_title'] . '</a></li>';
+    $related_html.= '<li><a oncontextmenu="return false;" href="' . $final_link . '&sname='.$save_search_result_info['search_title'].'&width=1000&height=700&iframe=true" class="colorbox-load">' . $save_search_result_info['search_title'] . '</a></li>';
+    
   }
 
   $related_html.= '</ul>';

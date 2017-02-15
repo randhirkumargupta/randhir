@@ -146,7 +146,7 @@ function features_for_print_team_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'body',
     'label' => 'Idea Brief',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'display_summary' => 1,
       'exclude_cv' => FALSE,
@@ -203,49 +203,7 @@ function features_for_print_team_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-print_team_integration-field_primary_category_html_text'.
-  $field_instances['node-print_team_integration-field_primary_category_html_text'] = array(
-    'bundle' => 'print_team_integration',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 15,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_primary_category_html_text',
-    'label' => 'Primary category textarea',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 12,
+      'weight' => 10,
     ),
   );
 
@@ -333,7 +291,7 @@ function features_for_print_team_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 10,
+      'weight' => 9,
     ),
   );
 
@@ -381,7 +339,11 @@ function features_for_print_team_field_default_field_instances() {
   // Exported field_instance: 'node-print_team_integration-field_pti_magazine'.
   $field_instances['node-print_team_integration-field_pti_magazine'] = array(
     'bundle' => 'print_team_integration',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'target_id' => 210,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -415,7 +377,7 @@ function features_for_print_team_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 4,
     ),
   );
 
@@ -586,7 +548,7 @@ function features_for_print_team_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 
@@ -781,7 +743,6 @@ function features_for_print_team_field_default_field_instances() {
   t('Magazine Kicker');
   t('Mark as Complete');
   t('Please mark as complete, if item has been sold out.');
-  t('Primary category textarea');
   t('Rating');
   t('Select Section');
   t('Supplement');

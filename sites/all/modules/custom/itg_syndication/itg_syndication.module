@@ -28,7 +28,8 @@ function itg_syndication_menu() {
 
   $items['syndication/feed/%'] = array(
     'page callback' => 'get_syndication_feed_byurl',
-    'access arguments' => array('access itg story'),
+    'access callback' => TRUE,
+    //'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
   );
 
@@ -241,7 +242,7 @@ function itg_syndication_form_syndication_rule_node_form_alter(&$form, &$form_st
   foreach ($form['field_syndication_rule_details'][LANGUAGE_NONE] as $key => $item) {
     if (is_numeric($key)) {
 
-      if ($key == 0) {
+      if ($key == 0 && (arg(0) == 'node' && arg(1) == 'add')) {
         unset($form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['remove_button']);
       }
 
@@ -289,10 +290,13 @@ function itg_syndication_rule_after_build($form, &$form_state) {
     '#markup' => l(t('Cancel'), 'syndication-rule-listing', array('attributes' => array('class' => 'button'))),
     '#weight' => 20,
   );
-
-  drupal_add_js('jQuery(document).ready(function() {              
-              jQuery("#edit-field-syndication-rule-details-und-0-remove-button").hide();
-            });', array('type' => 'inline', 'scope' => 'footer'));
+  
+  if (arg(0) == 'node' && arg(1) == 'add') {    
+//    drupal_add_js('jQuery(document).ready(function() {              
+//              jQuery("#edit-field-syndication-rule-details-und-0-remove-button").hide();
+//            });', array('type' => 'inline', 'scope' => 'footer'));
+  }
+  
 
   return $form;
 }
@@ -454,6 +458,7 @@ function itg_syndication_node_view($node, $view_mode, $langcode) {
     if (!empty($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {
       $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = date('d/m/Y', strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']));
     }
+    
     if (empty($node->field_syndication_ftp_details)) {
       unset($node->content['field_syndication_ftp_details']);
     }
@@ -461,9 +466,19 @@ function itg_syndication_node_view($node, $view_mode, $langcode) {
     if (empty($node->field_service_fetch_link[LANGUAGE_NONE][0]['value'])) {
       unset($node->content['field_service_fetch_link']);
     }
-
-    $node->content['field_service_fetch_link'][0]['#markup'] = l('http://qa.indiatodayonline.in/syndication/feed/198708796aeeead156a8ecf3785907a577f4f784', 'http://qa.indiatodayonline.in/syndication/feed/198708796aeeead156a8ecf3785907a577f4f784');
-    //$node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = ;
+    // add link for mail
+    if (!empty($node->content['field_email_address'][0])) {
+      foreach ($node->content['field_email_address'] as $key => $val) {
+       if (is_numeric($key)) {
+         $node->content['field_email_address'][$key]['#markup'] = '<a href="mailto:'.$node->content['field_email_address'][$key]['#markup'].'">'.$node->content['field_email_address'][$key]['#markup'].'</a>';
+       }        
+      }
+    }
+    
+    if (!empty($node->content['field_service_fetch_link'][0]['#markup'])) {
+       $node->content['field_service_fetch_link'][0]['#markup'] = l($node->content['field_service_fetch_link'][0]['#markup'], $node->content['field_service_fetch_link'][0]['#markup']);
+     }
+    
   }
 }
 
@@ -561,4 +576,25 @@ function remove_extra_tag_in_body($story_body) {
   $tags = array("table", "div");
 
   return preg_replace('#<(' . implode('|', $tags) . ')(?:[^>]+)?>.*?</\1>#s', '', $story_body);
+}
+
+/**
+ * Function to remove img tag from content.
+ * @param string $content
+ * @return string
+ */
+function remove_img_tags($content) {
+  return preg_replace('/<img alt="" data-syndication="no"[^>]+\>/i', " ", $content); 
+}
+
+/**
+ * Function used to replced defined char with replacement char.
+ * @param string $original_string
+ * @return string
+ */
+function replace_charcters_for_syndication_file($original_string) {
+  $some_special_chars = array("á", "é", "í", "ó", "ú", "Á", "É", "Í", "Ó", "Ú", "ñ", "Ñ");
+  $replacement_chars  = array("a", "e", "i", "o", "u", "A", "E", "I", "O", "U", "n", "N");
+  $replaced_string    = str_replace($some_special_chars, $replacement_chars, $original_string);
+  return $replaced_string;
 }

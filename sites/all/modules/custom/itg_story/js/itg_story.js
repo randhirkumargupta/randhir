@@ -8,6 +8,7 @@
         attach: function(context, settings) {
             var uid = settings.itg_story.settings.uid;
             $(".form-item-field-story-configurations-und-breaking-news").hide('');
+            $("label[for='edit-field-story-configurations-und-tv']").html("Associate Story with TV");
             // enable check box of developing story based on condition 
             var longheadline = $('#edit-title').val();
             
@@ -17,7 +18,8 @@
             
             $("#edit-title").on('keyup blur', function () {
                 if (this.value != '') {
-                   
+                    $('#edit-field-story-long-head-line-und-0-value').val(this.value);
+                    $('#edit-field-story-short-headline-und-0-value').val(this.value);
                     $('#breaking_text').removeAttr('disabled');
                 }
                 else {
@@ -62,6 +64,7 @@
                     $("#edit-field-story-select-magazine-und").val('_none');
                     $('[name="field_story_select_supplement[und]"]').val('_none');
                     $("#edit-field-story-issue-date-und-0-value-datepicker-popup-1").val('');
+                    $("#edit-field-story-issue-date-und-0-value-datepicker-popup-0").val('');
                 }
             });
 
@@ -159,13 +162,6 @@
                 }
             });
 
-            // code to copy story longheadline to story title
-            $('#edit-title').on('blur', function() {
-                var long_headline = $('#edit-title').val();
-                $('#edit-field-story-long-head-line-und-0-value').val(long_headline);
-                $('#edit-field-story-short-headline-und-0-value').val(long_headline);
-            });
-
             $('#edit-field-facebook-gallery-associate-und-0-remove-button').hide();
 
             // Code issue date exit or not.
@@ -240,3 +236,10 @@
 
     });
 });
+
+// open save search in popup
+function showrelatedpopup(iframeurl)
+{
+    jQuery.colorbox({href: iframeurl, iframe: true, width: "1030", height: "730", fixed: true});
+
+}

@@ -43,17 +43,16 @@ function itg_layout_list() {
     $items_per_page = $_GET['items_per_page'];
   }
   else {
-    $items_per_page = 10;
+    $items_per_page = 20;
   }
   
-  $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
+  $itg_query = db_select('itg_layout_tpl', 'layout_tpl')->extend('PagerDefault')->limit($items_per_page);
   $itg_query->fields('layout_tpl', array('id','section_name', 'template_name', 'layout_type', 'status', 'created_date'));  
   $itg_query->join('taxonomy_term_data', 'ttd', 'ttd.tid = layout_tpl.section_name');
   $itg_query->fields('ttd', array('name'));
   $itg_query->groupBy('layout_tpl.section_name');
-  $itg_query->extend('PagerDefault')->limit($items_per_page);
   $itg_query->condition('layout_tpl.layout_type', arg(1));
-  if (!empty($_GET['section'])) {
+  if (!empty($_GET['section']) && $_GET['section'] != '_none') {
     $itg_query->condition('layout_tpl.section_name', $_GET['section']);
   }
 //  else {
@@ -258,10 +257,9 @@ function itg_layout_gethomecarddata_new($sectinno) {
     }
 
     print '<div class="data-holder" id="' . $widget_name3 . '">' . $widget_data[$widget_name3]['widget'] . '</div></div></div></div></div>';
-     if ($nextdata != 0 && $sectinno+3 < 40) {
-         
+     if ($nextdata != 0 && $sectinno+3 < 40) {       
        print '<div class="load-more-wrapper-front">
-              <a href="javascript:void(0)" class="add-more-block-front">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)" class="add-more-block-front">'.t("Load More").' <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
               </div>';       
     }
     print'</div>';
@@ -273,4 +271,50 @@ function itg_layout_gethomecarddata_new($sectinno) {
   exit();
 }
 
+
+/**
+ * Callback of pre-layout-drag-widgets
+ * {@inheritdoc}
+ */
+function pre_layout_drag_widgets() {
+  
+  //code for If already a section is dragged while configuration and 
+  //if same section is being dragged again on default,photo and video page then system should show an ALERT
+  
+    $check_drag_tid = get_use_category_on_tpl($_GET['section_name'], $_GET['category']);
+    if (!empty($check_drag_tid)) {
+      echo 'yes';        
+      exit;
+    }
+    
+  // code end
+  
+}
+
+/**
+ * Get map category id with tpl
+ * @param int $layout_id
+ * @param string $block_name 
+ * @return array $data_array
+ */
+function get_use_category_on_tpl($section_id, $cate_id) {
+  
+  $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
+  $itg_query->fields('layout_manager', array('filter_url'));  
+  $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');  
+  $itg_query->condition('layout_tpl.section_name', $section_id);    
+  $itg_query->condition('layout_manager.filter_url', $cate_id);
+  $itg_query->orderBy('layout_tpl.id', 'DESC');
+  $itg_query->range(0,1);
+  $id = $itg_query->execute()->fetchField();
+  
+  
+//  $query = db_select('itg_layout_manager', 'layout');
+//  $query->fields('layout', array('id'));  
+//  $query->condition('layout_id', $layout_id)
+//        ->condition('block_name', $block_name);  
+//  $id = $query->execute()->fetchField();
+//  
+  return $id;
+}
 

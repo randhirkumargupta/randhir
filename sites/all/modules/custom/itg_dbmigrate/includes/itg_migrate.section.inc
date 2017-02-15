@@ -26,15 +26,16 @@ class ItgSectionMigration extends XMLMigration {
       'section_flag' => t('section_flag'),      
       'section_type' => t('section_type'),    
       'content_url' => t('content_url'),      
-      'content_display_color' => t('content_display_color'), 
+      'content_display_color' => t('content_display_color'),
+      'issue_free' => t('issue_free'),
     );
 
     // This can also be an URL instead of a local file path.
-    $file_path = drupal_realpath('public://');
-    
+   // $file_path = drupal_realpath('public://');
+    $file_path = 'sites/default/files';
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
     
-    $items_url = $xml_folder . 'section.xml';
+    $items_url = $xml_folder . 'sections-master.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -83,13 +84,18 @@ class ItgSectionMigration extends XMLMigration {
     $this->addFieldMapping('metatag_description', 'metadesc')->xpath('metadesc');
     $this->addFieldMapping('metatag_keywords', 'metakey')->xpath('metakey');
     $this->addFieldMapping('field_cm_select_template_type', 'template_name')->xpath('template_name');
-    $this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
+    $this->addFieldMapping('pathauto')->defaultValue(0);
+    $this->addFieldMapping('path', 'sefurl')->xpath('sef_url');
     $this->addFieldMapping('field_cm_select_type', 'content_type')->xpath('content_type');
     $this->addFieldMapping('field_cm_category_banner', 'header_image')->xpath('header_image');
     $this->addFieldMapping('field_cm_redirection_url', 'content_url')->xpath('content_url');
     $this->addFieldMapping('field_cm_category_color', 'content_display_color')->xpath('header_image');
     $this->addFieldMapping('weight', 'ordering')->xpath('ordering');
-    $this->addFieldMapping('field_category_section_type', 'section_type')->xpath('section_type');       
+    $this->addFieldMapping('field_category_section_type', 'section_type')->xpath('section_type'); 
+    // Redirect
+    $this->addFieldMapping('migrate_redirects', 'content_url')->xpath('content_url');
+    $this->addFieldMapping('field_issue_free', 'issue_free')->xpath('issue_free');
+    
     //<issue_free>0</issue_free> (not clear)
     //$this->addFieldMapping('metatag_abstract', 'nodeword_abstract');    
     //$this->addFieldMapping('metatag_robots', 'nodeword_robots');

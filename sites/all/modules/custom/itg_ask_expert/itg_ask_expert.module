@@ -335,8 +335,10 @@ function itg_ask_expert_block_view($delta = '') {
                     $tid = $node->field_primary_category['und'][0]['value'];
                     // if (isset($tid) && !empty($tid)) {
                     $block['subject'] = '<h3><span>ASK THE EXPERT</span></h3>';
-                    $block['content'] = drupal_render(user_details_for_section($arg, $tid));
-                    $block['content'] .= drupal_render(drupal_get_form('itg_custom_ask_an_expert_form', $tid));
+                    $user_details_section = user_details_for_section($arg, $tid);
+                    $block['content'] = drupal_render($user_details_section);
+                    $custom_expert_form = drupal_get_form('itg_custom_ask_an_expert_form', $tid);
+                    $block['content'] .= drupal_render($custom_expert_form);
                     // }
                 }
             }
@@ -346,8 +348,10 @@ function itg_ask_expert_block_view($delta = '') {
                 if ($vid == CATEGORY_MANAGMENT) {
                     $tid = $arg[2];
                     $block['subject'] = '<h3><span>ASK THE EXPERT</span></h3>';
-                    $block['content'] = drupal_render(user_details_for_section($arg, $tid));
-                    $block['content'] .= drupal_render(drupal_get_form('itg_custom_ask_an_expert_form', $tid));
+                    $user_detail = user_details_for_section($arg, $tid);
+                    $ask_expert_form = drupal_get_form('itg_custom_ask_an_expert_form', $tid);
+                    $block['content'] = drupal_render($user_detail);
+                    $block['content'] .= drupal_render($ask_expert_form);
                 }
             }
             elseif (isset($_GET['section']) && !empty($_GET['section'])) {
@@ -402,6 +406,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
     $askquestion = itg_custom_get_ask_quation_data($cat_id);
     $form['#prefix'] = '<div id="expert_global_config">';
     $form['#suffix'] = '</div>';
+    $form['#attributes'] = array('autocomplete' => 'off');
     $form['question'] = array(
         '#type' => 'textarea', //you can find a list of available types in the form api
         '#title' => t(''),
@@ -409,28 +414,31 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
         '#suffix' => '<p class="chtr-limit"><span id="rest-char">160</span> out of 160 characters</p></div>',
         '#maxlength' => 160,
         '#attributes' => array(
-            'placeholder' => 'Ask your question here',
+            'placeholder' => t('Ask your question here'),
             'class' => array('charcount'),
+            'autocomplete' => 'off',
         ),
     );
     $form['askname'] = array(
         '#type' => 'textfield', //you can find a list of available types in the form api
         '#title' => t(''),
-        '#value' => $fname,
+        '#default_value' => $fname,
         '#prefix' => '<div id="askname" class="askname">',
         //'#suffix' => '</div>',
         '#attributes' => array(
-            'placeholder' => 'Name',
+            'placeholder' => t('Name'),
+            'autocomplete' => 'off',
         ),
     );
     $form['askemail'] = array(
         '#type' => 'textfield', //you can find a list of available types in the form api
         '#title' => t(''),
-        '#value' => $user_fields->mail,
+        '#default_value' => $user_fields->mail,
         //'#prefix' => '<div id="askemail">',
         '#suffix' => '</div>',
         '#attributes' => array(
-            'placeholder' => 'Email',
+            'placeholder' => t('Email'),
+            'autocomplete' => 'off',
         ),
     );
     $form['cat_id'] = array(
@@ -443,6 +451,9 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
         $form['captcha'] = array(
             '#type' => 'captcha',
             '#captcha_type' => 'image_captcha/Image',
+            '#attributes' => array(
+            'autocomplete' => 'off',
+        ),
         );
     }
     $form['submit_button'] = array(
@@ -454,7 +465,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
             'callback' => 'expert_form_ajax_handler',
         ),
     );
-    if ($askquestion->title != "") {
+    if (!empty($askquestion->title)) {
         $form['html'] = array(
             '#type' => 'markup',
             '#markup' => '<div class="expert-question">' . ucfirst($askquestion->title) . '</div><div class="question-link">' . l('Click here to know the answer', $base_url . '/' . drupal_get_path_alias("ask-an-expert-question-answer/{$askquestion->field_user_source_term_id_value}")) . '</div>',
@@ -492,6 +503,7 @@ function itg_custom_get_ask_quation_data($cat_id) {
  * {@inheritdoc}
  */
 function itg_custom_ask_an_expert_form_validate($form, &$form_state) {
+  watchdog('expert', '<pre>'.print_r($form_state['values'],true).'</pre>');
     $askname = $form_state['values']['askname'];
     $askemail = $form_state['values']['askemail'];
     $question = $form_state['values']['question'];
@@ -586,16 +598,30 @@ function user_details_for_section($url, $tid) {
             if ($url[0] == 'ask-an-expert-question-answer-details' && is_numeric($url[2])) {
                 $ourExpert = '<h4>Our Expert</h4>';
             }
+            
+            if ($url[0] != 'ask-an-expert-question-answer-details') {
+                $block[] = array(
+                'details' => array(
+                    '#prefix' => '<div class="ask-user-detail">',
+                    '#type' => 'markup',
+                    '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '" alt="" /><div class="section-user-name">' . $userDetails->field_first_name['und'][0]['value'] . ' ' . $userDetails->field_last_name['und'][0]['value'] . '</div></div>',
+                    '#suffix' => '</div>',
+                ),
+            );
+            } else {
             $block[] = array(
                 'details' => array(
                     '#prefix' => '<div class="ask-user-detail">',
                     '#type' => 'markup',
-                    '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '"/><div class="section-user-name">' . $userDetails->field_first_name['und'][0]['value'] . ' ' . $userDetails->field_last_name['und'][0]['value'] . '</div></div>',
+                    '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '" alt="" /><div class="section-user-name">' . $userDetails->field_first_name['und'][0]['value'] . ' ' . $userDetails->field_last_name['und'][0]['value'] . '</div></div>',
                 ),
             );
+            }
             if ($url[0] == 'ask-an-expert-question-answer-details') {
+              if (function_exists('itg_flag_get_count')) {
                 $like = itg_flag_get_count($url[1], 'like_count');
                 $dislike = itg_flag_get_count($url[1], 'dislike_count');
+              }
                 if (!empty($like)) {
                     $like_count = '(' . $like . ')';
                 }

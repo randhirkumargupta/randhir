@@ -1,0 +1,3 @@
+name = Payment Intergration
+description = ITG Payment gateway intergration
+core = 7.x

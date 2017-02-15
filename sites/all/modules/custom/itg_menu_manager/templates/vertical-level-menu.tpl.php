@@ -5,6 +5,14 @@
       $load_parent = (null != arg(2)) ? taxonomy_get_parents(arg(2)) : array();
       $parent_key_of_third_level = isset(array_keys($load_parent)[0]) ? array_keys($load_parent)[0] : 0;
       foreach ($data as $key => $menu_data) :
+        // Logic to exclude inactive category.
+        if (!empty($menu_data['term_load'])) {
+          $category_manager_tid = $menu_data['term_load']->tid;
+          $term_state = itg_category_manager_term_state($category_manager_tid);
+          if ($term_state == 0) {
+            continue;
+          }
+        }
         ?>
         <?php
         $menu_link_data = itg_menu_manager_get_menu($menu_data, arg(), $load_parent);
@@ -21,16 +29,15 @@
         $icon = $menu_link_data['icon'];
         $url_type = $menu_link_data['url_type'];
         //Check if icon found empty.
-        if(empty($icon)) {
-          $image_url = $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all.png";
-          $icon = "<img src='".$image_url."'>";
+        if (empty($icon)) {
+          $image_url = $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all_48_32.jpeg";
+          $icon = "<img src='" . $image_url . "' alt='' />";
         }
-        if($display_icon == 1) {
+        if ($display_icon == 1) {
           $link_title_display = $icon;
         }
-        
         ?>
-        <li><?php print l($link_title_display, $link_url, array("html" => true, 'attributes' => array('target' => $target, 'title'=> $menu_link_data['link_title_for_vertical'] , 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)))); ?></li>
+        <li><?php print l($link_title_display, $link_url, array("html" => true, 'attributes' => array('target' => $target, 'title' => $menu_link_data['link_title_for_vertical'], 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)))); ?></li>
         <?php
       endforeach;
       ?>

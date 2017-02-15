@@ -81,6 +81,9 @@ if ($theme != 'itgadmin') {
         <?php if ($title): ?>
           <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
         <?php endif; ?>
+          <div class="front-end-breadcrumb">
+            <?php print render($page['front_end_breadcrumb']);?>
+          </div>
         <?php print render($title_suffix); ?>
         <?php print $messages; ?>
         <?php print render($tabs); ?>
@@ -143,11 +146,11 @@ if ($theme != 'itgadmin') {
                   <div class="itg-widget">
                     <div class="ad-widget">
                       <div class="sidebar-ad">
-                         <?php
-                          if (!empty($itg_ad['200*200_right_bar_ad1'])) {
-                            print $itg_ad['200*200_right_bar_ad1'];
-                          }
-                        ?></div>
+                            <?php
+                             $block = block_load('itg_ads', ADS_RHS1);   
+                             $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                             print render($render_array);
+                            ?></div>
                     </div>
 <!--                    <div class="droppable <?php //print $gray_bg_layout; ?>">
                       <div class="widget-wrapper <?php //print $widget_data['itg-block-4']['widget_name']; ?>">
@@ -186,7 +189,7 @@ if ($theme != 'itgadmin') {
                                   <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                 </div>  
                               <?php } ?>                   
-                            <div class="data-holder" widget-style="auto-road-trip" id="itg-block-3"><?php print $widget_data['itg-block-3']['widget']; ?></div>
+                            <div class="data-holder"  id="itg-block-3"><?php print $widget_data['itg-block-3']['widget']; ?></div>
                           </div>
                         </div>
                       </div>
@@ -391,9 +394,9 @@ if ($theme != 'itgadmin') {
               <div class="ad-widget">
                       <div class="sidebar-ad">
                          <?php
-                        if (!empty($itg_ad['200*200_right_bar_ad2'])) {
-                          print $itg_ad['200*200_right_bar_ad2'];
-                        }
+                          $block = block_load('itg_ads', ADS_RHS2);   
+                          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                          print render($render_array);
                         ?></div>
                     </div>
             </div>  

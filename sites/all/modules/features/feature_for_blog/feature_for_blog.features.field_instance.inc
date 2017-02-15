@@ -178,6 +178,48 @@ function feature_for_blog_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-blog-field_preview_unique_id'.
+  $field_instances['node-blog-field_preview_unique_id'] = array(
+    'bundle' => 'blog',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 16,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_preview_unique_id',
+    'label' => 'Preview_unique_id',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 34,
+    ),
+  );
+
   // Exported field_instance: 'node-blog-field_story_archive'.
   $field_instances['node-blog-field_story_archive'] = array(
     'bundle' => 'blog',
@@ -285,7 +327,7 @@ function feature_for_blog_field_default_field_instances() {
     'label' => 'Image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -293,7 +335,7 @@ function feature_for_blog_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -306,6 +348,7 @@ function feature_for_blog_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -383,6 +426,7 @@ function feature_for_blog_field_default_field_instances() {
   t('Node Identity');
   t('Please enter Short description.');
   t('Please enter bloggers name (e.g. Ankush, Sumit etc.)');
+  t('Preview_unique_id');
   t('Related Content');
   t('Section');
   t('Short description');

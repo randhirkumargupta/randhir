@@ -7,17 +7,18 @@
  */
 
 function _create_issue_using_xmlfile($node, $op) {
-  
   //Add check for supplement and issue
   if ($node->type == 'supplement') {
     $magazine = $node->field_supp_select_magazine[LANGUAGE_NONE][0]['target_id'];
     $supplement = $node->nid;
     $file = $node->field_supp_import_xml[LANGUAGE_NONE];
+    $issue_date = $node->field_supp_issue[LANGUAGE_NONE][0]['value'];
   }
   if ($node->type == 'issue') {
     $magazine = $node->field_issue_magazine[LANGUAGE_NONE][0]['target_id'];
     $supplement = $node->field_issue_supplement[LANGUAGE_NONE][0]['target_id'];
     $file = $node->field_field_issue_import_xml[LANGUAGE_NONE];
+    $issue_date = $node->field_issue_title[LANGUAGE_NONE][0]['value'];
   }
 
   //Parent node(issue/supplement) info
@@ -26,7 +27,8 @@ function _create_issue_using_xmlfile($node, $op) {
       'source_title' => $node->title,
       'source_type' => $node->type,
       'magazine' => $magazine,
-      'supplement' => $supplement
+      'supplement' => $supplement,
+      'issue_date' => $issue_date
   );
 
   //Segregation update and insert case
@@ -88,8 +90,13 @@ function _create_issue_process($fid, $node_info, $parent_node) {
 
 
     $issue_date_xml = str_replace('/', '-', trim($xml->IssueDate));
-    $issue_date = date('Y-m-d h:i:s', strtotime($issue_date_xml));
-
+    if(!empty($issue_date_xml)){
+      $issue_date = date('Y-m-d 00:00:00', strtotime($issue_date_xml));
+    }
+    if(!empty($node_info['issue_date'])){
+      $node_issue_date = date('Y-m-d 00:00:00', strtotime($node_info['issue_date']));
+      
+    }
     //Prepare body
     foreach ($xml_other['body']->p as $bodyTxt) {
       $body .= '<p>' . ucfirst(htmlentities($bodyTxt)) . '</p>';
@@ -110,8 +117,7 @@ function _create_issue_process($fid, $node_info, $parent_node) {
     $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim($headline) ? trim($headline) : 'NA';
     $node->body[$node->language][0]['value'] = $body ? $body : 'NA';
     $node->field_stroy_city[LANGUAGE_NONE][0]['tid'] = $city_tid; // 58: New Delhi
-    $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $issue_date ? $issue_date : date('Y-m-d h:i:s', time());
-
+    $node->field_story_issue_date[LANGUAGE_NONE][0]['value'] = !empty($issue_date) ? $issue_date : $node_issue_date;
     //Issue, magazine and supplement
     $node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'] = 'magazine_issue_story';
     if ($node_info['magazine']) {

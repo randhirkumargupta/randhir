@@ -120,3 +120,44 @@ function ordering_set_for_byline($nid, $weight) {
     $result = $query->execute()->fetchField();
     return $result;
   }
+  
+  /**
+ * implement function to get category table
+ */
+function itg_migrate_category_table($level){
+  $table = array(
+    '1' => 'migrate_map_itgsection',
+    '2' => 'migrate_map_itgcategory',
+    '3' => 'migrate_map_itgsubcategory',
+    '4' => 'migrate_map_itgsubsubcategory',
+  );
+  
+  return $table[$level];
+}
+
+/**
+   * Implements function for get term sef
+   * @param str $url
+   * @return
+   */
+  function itg_db_migrate_term_sef($url){
+   $query = db_select('url_alias', 'ul');
+   $query = $query->fields('ul',array('alias'));
+   $query = $query->condition('source', $url, '=');
+   $query->condition('source', '%' . db_like($url), LIKE);
+   $result = $query->execute()->fetchField();
+   return $result;
+  }
+  
+/**
+ * Implement function for return vocab id.
+ * @param str $vocab_name
+ * @return
+ */
+function itg_db_migrate_vocab_id($vocab_name) {
+  $query = db_select('taxonomy_vocabulary', 'tv');
+  $query->fields('tv', array('vid'));
+  $query->condition('tv.machine_name', $vocab_name, '=');
+  $result = $query->execute()->fetchField();
+  return $result;
+}

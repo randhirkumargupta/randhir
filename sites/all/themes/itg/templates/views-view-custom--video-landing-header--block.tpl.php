@@ -39,10 +39,10 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                     $vid = itg_videogallery_get_videoid($row['fid']);
                                 }
                                 if ($video_value->dailymotion_thumb_url != "") {
-                                    $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $video_value->dailymotion_thumb_url . '" height="66" width="88"></li>';
+                                    $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $video_value->dailymotion_thumb_url . '" height="66" width="88" alt=""></li>';
                                 }
                                 else {
-                                    $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/default_for_all.png" height="66" width="88"></li>';
+                                    $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt=""></li>';
                                 }
                                 $ads_flag = 0;
                                 if ($video_value->field_include_ads_value == 'yes') {
@@ -51,7 +51,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                 ?>
                                     <div class="iframe-video">
                                         <iframe frameborder="0" scrolling="no"
-                                                src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=0&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
+                                                src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=0&ui-logo=1&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
                                                 allowfullscreen></iframe></div>
 
                                 </div>
@@ -70,14 +70,41 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                         <ul>
                             <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span><?php
                                         if (function_exists(itg_flag_get_count)) {
-                                            print $like_count = itg_flag_get_count(arg(1), 'like_count');
+                                             $like_count = itg_flag_get_count(arg(1), 'like_count');
+                                             print $like_count['like_count'];
                                         }
                                         ?></span></a></li>
-                            <li><?php print $row['ops']; ?></li>
-                            <li><a class="def-cur-pointer" title ="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i> <span>Share</span></a></li>
-                            <li><a class="def-cur-pointer" title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($video_node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i> <span>Twitter</span></a></li>
-                            <li><a href="mailto:?body=<?php print urlencode($actual_link); ?>" title="Email"><i class="fa fa-envelope"></i> <span>Email</span></a></li>
-                            <li><a href="#" title="Embed"><i class="fa fa-link"></i> <span>Embed</span></a></li>
+                            <?php
+                                          if ($user->uid > 0)
+                                          {
+                                            if (function_exists(itg_get_front_activity_info))
+                                            {
+                                              $opt = itg_get_front_activity_info($video_node->nid, $video_node->type, $user->uid, 'read_later', $status = '');
+                                            }
+                                            
+                                            if (empty($opt['status']) || $opt['status'] == 0)
+                                            {
+                                              ?> 
+                                          <li class="later"><a title = "Save" href="javascript:void(0)" class="user-activity" rel="<?php print $video_node->nid; ?>" data-tag="<?php print $video_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-clock-o"></i><span><?php print t('Watch Later'); ?></span></a></li>
+                                            <?php }
+                                            else
+                                            { ?>
+                                          <li><a title = "Save" href="javascript:" class="def-cur-pointer active"><i class="fa fa-clock-o"></i><span><?php print t('Watch Later'); ?></span></a></li>
+                                            <?php
+                                            }
+                                          }
+                                          else
+                                          {
+                                            if (function_exists(itg_sso_url))
+                                            {
+                                              print '<li>'.itg_sso_url('<i class="fa fa-clock-o"></i> <span>' . t('Watch Later') . '</span>', t('Save')).'</li>';
+                                            }
+                                          }
+                                          ?>
+                            <li><a class="def-cur-pointer" title ="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i> <span><?php print t('Share'); ?></span></a></li>
+                            <li><a class="def-cur-pointer" title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($video_node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i> <span><?php print t('Twitter'); ?></span></a></li>
+                            <li><a href="mailto:?body=<?php print urlencode($actual_link); ?>" title="Email"><i class="fa fa-envelope"></i> <span><?php print t('Email'); ?></span></a></li>
+                            <li><a href="#" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a></li>
                             <?php
                             if (function_exists(global_comment_last_record)) {
                                 $last_record = global_comment_last_record();
@@ -103,12 +130,16 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                         print $newimageds;
                     }
                     ?>
-
-                    <div class="social-likes desktop-hide">
+                </div>
+                <?php //$row['field_story_expert_description'];?>
+                <div class="col-md-4 video-header-right">
+                    <div class="top-section">
+                     <div class="social-likes desktop-hide">
                         <ul>
                             <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span><?php
                                         if (function_exists(itg_flag_get_count)) {
-                                            print $like_count = itg_flag_get_count(arg(1), 'like_count');
+                                             $like_count = itg_flag_get_count(arg(1), 'like_count');
+                                              print $like_count['like_count'];
                                         }
                                         ?></span></a></li>
                             <li><?php print $row['ops']; ?></li>
@@ -135,11 +166,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
             <!--<li class="mhide"><a href="#" title="Submit Video"><i class="fa fa-share"></i> <span>Submit Video</span></a></li>-->
                         </ul>
                     </div>
-
-
-                </div>
-                <?php //$row['field_story_expert_description'];?>
-                <div class="col-md-4 video-header-right"><?php print $description_slider; ?>
+                    <?php print $description_slider; ?>
                     <p class="upload-date"><?php print $row['timestamp']; ?></p>
                     <div class="section-like-dislike">
                         <div id="btn-div">
@@ -152,7 +179,15 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                         </div>
 
                     </div>
-                    <div class="ads mhide"></div>
+                    </div>
+                    
+                    <div class="ads">
+                         <?php
+                          $block = block_load('itg_ads', ADS_RHS1);
+                          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                          print render($render_array);
+                          ?>
+                    </div>
                 </div>
             </div>
         </div>
@@ -172,6 +207,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
             slidesToShow: 1,
             slidesToScroll: 1,
             arrows: false,
+            variableWidth: true,
             fade: true,
             asNavFor: '.video-header-left .video-slider-images ul, .video-header-left .video'
         });

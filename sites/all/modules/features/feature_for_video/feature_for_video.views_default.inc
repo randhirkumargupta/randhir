@@ -878,7 +878,7 @@ src="https://www.dailymotion.com/embed/video/<?php print $vid; ?>?autoplay=0&mut
 allowfullscreen></iframe>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
-  /* Field: Field: Long Description */
+  /* Field: Field: Short description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -944,7 +944,7 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Field: Long Description */
+  /* Field: Field: Short description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -962,18 +962,8 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['timestamp']['exclude'] = TRUE;
   $handler->display->display_options['fields']['timestamp']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['timestamp']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['timestamp']['custom_date_format'] = 'M d, Y  h:i a';
+  $handler->display->display_options['fields']['timestamp']['custom_date_format'] = 'M d, Y,  h:i a';
   $handler->display->display_options['fields']['timestamp']['second_date_format'] = 'long';
-  /* Field: Global: Custom text */
-  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<i class="fa fa-clock-o"></i> <span>Watch Later</span>';
-  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['nothing']['alter']['path'] = 'user/login';
-  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Field: Flags: Flag link */
   $handler->display->display_options['fields']['ops']['id'] = 'ops';
   $handler->display->display_options['fields']['ops']['table'] = 'flagging';
@@ -982,7 +972,7 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['ops']['label'] = '';
   $handler->display->display_options['fields']['ops']['exclude'] = TRUE;
   $handler->display->display_options['fields']['ops']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['ops']['empty'] = '[nothing] ';
+  $handler->display->display_options['fields']['ops']['empty'] = 'ITG';
   $handler->display->display_options['fields']['ops']['link_type'] = 'normal';
 
   /* Display: video landing page header scroll */
@@ -1151,7 +1141,7 @@ return variable_get(\'ipl_for_widget\');
       'empty_column' => 0,
     ),
   );
-  /* Relationship: : field_upload_video (field_upload_video:fid) */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['field_upload_video_fid']['id'] = 'field_upload_video_fid';
   $handler->display->display_options['relationships']['field_upload_video_fid']['table'] = 'field_data_field_upload_video';
   $handler->display->display_options['relationships']['field_upload_video_fid']['field'] = 'field_upload_video_fid';

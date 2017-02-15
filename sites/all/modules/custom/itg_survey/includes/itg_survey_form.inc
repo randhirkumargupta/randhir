@@ -239,7 +239,7 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
           $form['media' . $num] = array(
               '#type' => 'markup',
               '#prefix' => '<div class="survey-media">',
-              '#markup' => '<img src="' . $media_path . '" height="100" width="130"/>',
+              '#markup' => '<img src="' . $media_path . '" height="100" width="130" alt="" />',
               '#suffix' => '</div>',
           );
         }

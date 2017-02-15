@@ -247,6 +247,24 @@ function itg_last_node_published_user($uid, $publish_id) {
     return $last_publish_record_info;
 }
 
+
+/**
+ * Get Last node published by user using workflow.
+ * @param int $uid
+ * @param int $publish_id
+ * @return array $last_publish_record_info
+ */
+function itg_last_node_published_on($nid, $publish_id) {
+    $query = db_select('workbench_moderation_node_history', 'w')
+            ->fields('w')
+            ->condition('nid', $nid, '=')
+            ->condition('state', 'published', '=')
+            ->orderBy('stamp', 'ASC')//ORDER BY created
+            ->range(0, 1);
+      
+    $result = $query->execute()->fetchall();
+    return $result;
+}
 /**
  * Get Role create permission.
  * @param int $rid
@@ -408,23 +426,203 @@ function itg_get_related_story_id($related_content) {
 /** 
  * Implements itg_sso_url
  * @param string $link_name
+ *   Link text.
+ * @param string $link_title
+ *   In case link text is an Icon.
  */
 
-function itg_sso_url($link_name) {
+function itg_sso_url($link_name, $link_title = NULL) {
   global $user;
   $site = 'indiatoday';
   if ($_SERVER['HTTP_HOST'] == PARENT_SSO) {
     if ($user->uid == 0) {
       $url = 'http://' . PARENT_SSO . '/saml_login/other/domain_info';
-      return '<a title ="'.$link_name.'" href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, ' . "'" . $url . "'" . ', ' . "'" . $site . "'" . ')">' . $link_name . '</a>';
+      if ($link_title !== NULL) {
+        return '<a title ="'.$link_title.'" href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, ' . "'" . $url . "'" . ', ' . "'" . $site . "'" . ')">' . $link_name . '</a>';
+      }
+      else {
+        return '<a title ="'.$link_name.'" href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, ' . "'" . $url . "'" . ', ' . "'" . $site . "'" . ')">' . $link_name . '</a>';
+      }      
     }
   }
   else {
     if ($user->uid == 0) {
       $url = PARENT_SSO;
       $sam_param = '/saml_login/other';
-      return '<a title ="'.$link_name.'" href="javascript:void(0)" onclick="Go (550, 500, 50, ' . "'" . $site . "'" . ', ' . "'" . $site . "'" . ', ' . "'" . $url . "'" . ', ' . "'" . $sam_param . "'" . ')">'. $link_name .'</a>';
+      if ($link_title !== NULL) {
+        return '<a title ="'.$link_title.'" href="javascript:void(0)" onclick="Go (550, 500, 50, ' . "'" . $site . "'" . ', ' . "'" . $site . "'" . ', ' . "'" . $url . "'" . ', ' . "'" . $sam_param . "'" . ')">'. $link_name .'</a>';
+      }
+      else {
+        return '<a title ="'.$link_name.'" href="javascript:void(0)" onclick="Go (550, 500, 50, ' . "'" . $site . "'" . ', ' . "'" . $site . "'" . ', ' . "'" . $url . "'" . ', ' . "'" . $sam_param . "'" . ')">'. $link_name .'</a>';
+      }
      
     }
   }
+}
+
+/**
+ * Implements 'itg_common_only_text_string'.
+ * 
+ * This function return filtered plain text string.
+ * 
+ * @param string $str
+ *   String with html tags and special characters.
+ * @return type
+ *   Only text string.
+ */
+function itg_common_only_text_string($str) {
+  $data = strip_tags($str);
+  $data = preg_replace("/'/", "\\'", $data);
+  $data = htmlentities($data, ENT_QUOTES);
+  $data = trim(str_replace('&nbsp;', ' ', $data));
+  
+  return $data;
+}
+
+
+/**
+ * Implements 'itg_common_get_latest_byline'.
+ * @param int $nid
+ * @param string $status
+ */
+function itg_common_get_latest_byline($nid, $status) {
+  $query = db_select('itg_multi_byline_info', 's');
+  $query->fields('s', array('byline_id'))
+        ->condition('s.nid', $nid, '=')
+        ->condition('s.publish_status', $status, '=');
+  $query->orderBy("byline_weight", "ASC");
+  $query->range(0,1);
+  $result = $query->execute();
+  $byline_id = $result->fetchField();
+  if($byline_id) {
+    return $byline_id; 
+  } else {
+    return FALSE;
+  }
+}
+
+
+/** 
+ * Implementing 'itg_common_custompath_load'.
+ * @param $node object
+ * Creating Custom path alias for story, photogallery and videogallery
+ */
+
+function itg_common_custompath_load($node) {
+
+    global $edited_sef_url;
+    if (!empty($node->path['alias'])) {
+      $path_data = explode("/", $node->path['alias']);
+      $set_hierarchy = array_reverse($path_data);
+      $node_sef = $set_hierarchy[0];
+    } else if(!empty ($edited_sef_url)){
+      $node_sef = $edited_sef_url;
+    } else {
+      $node_sef = $node->title;
+    }
+    if(!empty($node->workbench_moderation) && is_array($node->workbench_moderation)){
+        $published_date = date('Y-m-d', $node->workbench_moderation['published']->timestamp);
+    } else {
+        $published_date = date('Y-m-d', $node->created);
+    }
+    $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
+    if (!empty($getsection)) {
+      $parents = taxonomy_get_parents_all($getsection);
+      if (isset($parents) && !empty($parents)) {
+          foreach ($parents as $key => $val) {
+              $section_hierarchy[] = $val->name;
+          }
+      }
+      $set_hierarchy = array_reverse($section_hierarchy);
+      $pathdata = strtolower(implode("/", $set_hierarchy)) . '/'. $node->type . '/' . trim($node_sef). '-'. $node->nid .'-'. $published_date;
+      $newpath = itg_common_custompath_val($pathdata);
+      $conditions = array('source' => 'node/' . $node->nid);
+      $criteria = path_load($conditions);
+      $criteria = array('pid' => $criteria);
+      path_delete($criteria);
+      $node->path = array('alias' => $newpath, 'pathauto' => FALSE);
+    }
+}
+
+/** 
+ * Implementing 'itg_common_custompath_val'.
+ * @param $pathdata path alias content
+ * Creating custom path alias 
+ */
+
+function itg_common_custompath_val($pathdata) {
+
+    if (preg_match("![^a-z0-9]!i", $pathdata)) {
+        $pathdata = preg_replace('/[^a-zA-Z0-9\/\\.\']/', '-', $pathdata);
+        while (preg_match('/--/', $pathdata)) {
+            $pathdata = preg_replace('/--/', '-', $pathdata);
+        }
+        $pathdata = rtrim($pathdata, "-");
+        $pathdata = strtolower($pathdata);
+    }
+    return $pathdata;
+}
+
+
+
+
+
+/** 
+ * Implementing 'itg_common_custompath_insert_load'.
+ * @param $node object
+ * Creating Custom path alias for story, photogallery and videogallery
+ */
+
+function itg_common_custompath_insert_load($node) {
+
+    if (!empty($node->path['alias'])) {
+        $path_data = explode("/", $node->path['alias']);
+        $set_hierarchy = array_reverse($path_data);
+        $alias_set = preg_replace("/[0-9]{4}/", "key-year", $set_hierarchy[0]);
+        $sefurl = explode("key-year", $alias_set);
+        $node_sef = rtrim($sefurl[0],'-');
+    } else {
+        $node_sef = $node->title;
+    }
+
+    if ($node->workbench_moderation_state_new == 'draft' || $node->workbench_moderation_state_new == 'published'){
+        $published_date = date('Y-m-d', $node->created);
+    }
+    
+    $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
+    if (!empty($getsection)) {
+      $parents = taxonomy_get_parents_all($getsection);
+      if (isset($parents) && !empty($parents)) {
+          foreach ($parents as $key => $val) {
+              $section_hierarchy[] = $val->name;
+          }
+      }
+      $set_hierarchy = array_reverse($section_hierarchy);
+      $pathdata = strtolower(implode("/", $set_hierarchy)) . '/'. $node->type . '/' . trim($node_sef). '-'. $node->nid .'-'. $published_date;
+      $newpath = itg_common_custompath_insert_val($pathdata);
+      $conditions = array('source' => 'node/' . $node->nid);
+      $criteria = path_load($conditions);
+      $criteria = array('pid' => $criteria);
+      path_delete($criteria);
+      $node->path = array('alias' => $newpath, 'pathauto' => FALSE);
+    }
+}
+
+/** 
+ * Implementing 'itg_common_custompath_insert_val'.
+ * @param $pathdata path alias content
+ * Creating custom path alias 
+ */
+
+function itg_common_custompath_insert_val($pathdata) {
+
+    if (preg_match("![^a-z0-9]!i", $pathdata)) {
+        $pathdata = preg_replace('/[^a-zA-Z0-9\/\\.\']/', '-', $pathdata);
+        while (preg_match('/--/', $pathdata)) {
+            $pathdata = preg_replace('/--/', '-', $pathdata);
+        }
+        $pathdata = rtrim($pathdata, "-");
+        $pathdata = strtolower($pathdata);
+    }
+    return $pathdata;
 }

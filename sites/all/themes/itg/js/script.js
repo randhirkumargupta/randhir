@@ -20,7 +20,7 @@
             jQuery('.add-more-block-front').live('click', function () {
                 var section_ids = "";
                 var elementobj = jQuery(this);
-                jQuery(this).parent('.load-more-wrapper-front').addClass('new-load').html('<img src="./sites/all/themes/itg/images/tab-loading.gif"/>')
+                jQuery(this).parent('.load-more-wrapper-front').addClass('new-load').html('<img src="./sites/all/themes/itg/images/tab-loading.gif" alt="" />')
                 //jQuery(this).remove();
                 jQuery('.sectioncart').each(function () {
                     section_ids = jQuery(this).attr('id');
@@ -124,18 +124,24 @@
             function headerMain() {
                 //var logotxt = $('.container.header-logo').html();
                 $('.container.header-logo').prependTo('.itg-logo-container');
+                
+                var mouse_is_inside = false;
+                $('.globle-search').hover(function(){ 
+                    mouse_is_inside=true; 
+                }, function(){ 
+                    mouse_is_inside=false; 
+                });
+
+                $("body").mouseup(function(){ 
+                    if(! mouse_is_inside) $('.globle-search').css('width', '0px');
+                });
+                
                 $('.search-icon').click(function () {
-                    $(this).parents('div').find('.globle-search').css('width', '255px');
+                    $(this).parents('div').find('.globle-search').css('width', '255px').find('.search-text').focus();
+                    
                 });                
-                $(document).on('click', function () {
-                    $('.globle-search').css('width', '0px');
-                });
-                $(document).on('tap', function () {
-                    $('.globle-search').css('width', '0px');
-                });
-                $('.search-icon, .globle-search').click(function (e) {
-                    e.stopPropagation();
-                });
+
+                
                 
                 $('#block-itg-layout-manager-header-block .menu-login .user-menu').hover(function(){                    
                     $('#newlist').hide();
@@ -150,6 +156,9 @@
                 var dataID = '.' + $(this).attr('data-id');
                 $(this).addClass('active').siblings().removeClass('active');
                 $(this).parent().parent().find(dataID).show().siblings('.tab-data').hide();
+            });
+            $('.tab-buttons').on('click', 'span a', function(e){
+                e.preventDefault();
             });
             // jQuery Code for tabbing End
 
@@ -389,6 +398,32 @@ jQuery(document).ready(function () {
             }
         ]
     });
+    
+    //jQuery code to set slider for story photo list
+    jQuery('.story-photo-list').slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        infinite: false,
+        variableWidth: true,
+        prevArrow: "<button class = 'slick-prev'><i class = 'fa fa-angle-left'></i></button>",
+        nextArrow: "<button class = 'slick-next'><i class = 'fa fa-angle-right'></i></button>",
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2,
+                    centerPadding: '10px'
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    centerPadding: '10px'
+                }
+            }
+        ]
+    });
 
     var arrayOne = [];
     jQuery('.factoids-slider li').each(function () {
@@ -489,76 +524,37 @@ jQuery(document).ready(function () {
 
 
 
-jQuery(document).ready(function () {
+    jQuery(document).ready(function () {
     var winWidth;
-    jQuery('.mobile-nav').click(function () {
-        jQuery('.navigation').slideToggle();
+    jQuery('.mobile-nav i.fa').click(function () {
+        if (jQuery(this).hasClass('fa-bars')) {
+            jQuery(this).addClass('fa-times').removeClass('fa-bars');
+            jQuery('.navigation').slideDown();
+
+        } else {
+            jQuery(this).addClass('fa-bars').removeClass('fa-times');
+            jQuery('.navigation').slideUp();
+        }
     });
+    
+    
     jQuery(document).on('click', '.all-menu', function () {
         jQuery('#newlist').slideToggle();
     });
-    var menuBuilder = function () {
-        var menuWidth, Totalwidth, liLength, clickHere;
-        menuWidth = jQuery('.second-level-menu.menu').width() - 10;
-        Totalwidth = jQuery('.all-menu').outerWidth();
-        clickHere = 0;
-        if (jQuery('#newlist').length > 0) {
-            jQuery('#newlist').html('');
-        }
-        jQuery('.all-menu').remove();
-        jQuery('.second-level-menu.menu li').each(function () {
-            liLength = jQuery(this).outerWidth(true);
-            Totalwidth = Totalwidth + liLength;
-            if (Totalwidth <= menuWidth) {
-                jQuery(this).removeClass('hide');
-            } else {
-                if (jQuery('.all-menu').length === 0) {
-                    jQuery(this).after('<li class="all-menu"><a class="" href="javascript:void(0)"><i class="fa fa-circle"></i> <i class="fa fa-circle"></i> <i class="fa fa-circle"></i></li>');
-                    clickHere = 1;
-                }
-                if (jQuery('#newlist').length === 0) {
-                    jQuery('.navigation .container').append('<ul id="newlist" class="menu"></ul>');
-                }
-                var html = '<li>' + jQuery(this).html() + '</li>';
-                jQuery('#newlist').append(html);
-                jQuery(this).addClass('hide');
-                //postion
-                var posAllmenu = jQuery('.all-menu').position();
-                jQuery('body').find('#newlist').css('left', posAllmenu.left - 39 + 'px');
-            }
-        });
-
-    };
-    winWidth = jQuery(window).width();
-    if (winWidth > 770) {
-        jQuery(window).resize(menuBuilder);
-        menuBuilder();
-    }    
+        
     jQuery(document).on('click', function () {
         jQuery('#newlist').slideUp();
     });
     jQuery(document).on('click', '.all-menu', function (e) {
          e.stopPropagation();
     });
-    
-
-    var eventMenu = function () {
-        winWidth = jQuery(window).width();
-        if (winWidth < 1024) {
-            jQuery('#block-menu-menu-event-menu').prepend('<div><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></div>');
-            jQuery('#block-menu-menu-event-menu a.mobile-nav').click(function () {
-                jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
-            });
-        }
-    };
-    eventMenu();
 
     //social share animation effects   
     jQuery('.social-share ul').each(function () {
         jQuery(this).children().not(":first").hide();
     })
     jQuery('.social-share li').click(function () {
-        jQuery(this).nextAll('li').show();
+        jQuery(this).find('.share').parent('li').nextAll('li').toggle();
     });
 
     //vertical menu position      
@@ -587,7 +583,7 @@ jQuery(document).ready(function () {
       //var stickyHeight = el.height();
 
       jQuery(window).scroll(function(){ 
-         var limit = jQuery('footer').offset().top - totlHeight;                   
+         var limit = jQuery('footer').offset().top - totlHeight;
           var windowTop = jQuery(window).scrollTop();                     
           if(windowTop > 160 ){              
                 var finalWidth = (totlWidth - 1200) / 2 ;
@@ -605,7 +601,7 @@ jQuery(document).ready(function () {
                    'bottom': 'auto'
                });            
           }
-          if(windowTop > limit + 315){              
+          if(windowTop >= limit){              
               el.css({
                    'position': 'absolute',
                    'left': '-60px',
@@ -700,14 +696,39 @@ jQuery(document).ready(function () {
         });
         
         // jQuery code to set personalization tab in mobile
-        $('body').on('click', '.personal-menu-tab-mobile', function(){
-          $(this).next().slideToggle();
+        jQuery('body').on('click', '.personal-menu-tab-mobile', function(){
+          jQuery(this).next().slideToggle();
         });
-        $('.personal-menu-tab').on('click', 'li', function(){
+        jQuery('.personal-menu-tab').on('click', 'li', function(){
           var el = $(this);
           var get_class = el.attr('class'), get_text = el.find('a').text();
           el.closest('.personal-menu-tab-wrapper').find('.tab-text').attr('data-tab', get_class).text(get_text);
           el.parent().slideUp('fast');
+        });
+        
+        // jQuery code for personalization saved item on mobile
+        jQuery('body').on('touchend', '.personal-action', function(){
+          jQuery(this).parent().parent().siblings().find('.personal-action').css('opacity', '0');
+          jQuery(this).css('opacity', '1');
+        });
+        
+        //event page navigation
+        jQuery('#block-menu-menu-event-menu a.mobile-nav').click(function() {
+            jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
+        });   
+        jQuery('.event-search-icon').click(function(){
+            jQuery('.event-search input').css('width','180px');
+        });        
+        jQuery(document).on('click touchstart', function () {             
+            jQuery('.event-search input').css('width', '0px');
+        });
+        jQuery('.event-search-icon, .event-search input').click(function (e) {
+            e.stopPropagation();
+        });
+        
+        //for iphone zoom page
+        document.addEventListener('gesturestart', function (e) {
+            e.preventDefault();
         });
     }
     
@@ -718,17 +739,115 @@ jQuery(document).ready(function () {
         getclick.css({'display' : 'inline-block'});
     }, function(){
         getclick.css({'display' : 'none'});
-    });    
+    }); 
     
+    // jQuery code to add Light off/on effect 
+    jQuery('body').on('click', '.light-off-on-tab', function(){
+      jQuery('body').toggleClass('light-off-overlay');
+      jQuery('.program-livetv').toggleClass('effect-added');
+    });
+    
+    //footer css slider start
+        jQuery('.multiple-items-footer').slick({
+        infinite: false,
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        variableWidth: true,
+        prevArrow: '<i class="fa fa-chevron-left slick-prev" aria-hidden="true"></i>',
+        nextArrow: '<i class="fa fa-chevron-right slick-next" aria-hidden="true"></i>',
+        responsive: [            
+            {
+            breakpoint: 1024,
+                settings: {            
+                slidesToShow: 4
+                }
+            },
+            {
+            breakpoint: 680,
+                settings: {            
+                slidesToShow: 3
+                }
+            },
+            {
+            breakpoint: 480,
+                settings: {            
+                slidesToShow: 2
+                }
+            }
+        ]
+    }); 
+    //footer css slider end
+    jQuery('.emoji-container a').click(function(){         
+        var datavalue = jQuery(this).attr('data-click');
+        if(datavalue === 'nice'){
+           smilyanimation('smily');
+        } else if(datavalue === 'no'){
+            smilyanimation('smilysad');
+        } else if(datavalue === 'whatever'){
+            smilyanimation('wgmf');
+        }                                 
+    });
 });
+
+//emoji animation     
+function smilyanimation(facetype){
+    var faceone = jQuery('#'+facetype+' .face1');
+    var facetwo = jQuery('#'+facetype+' .face2');
+    var facethree = jQuery('#'+facetype+' .face3');
+    var facefour = jQuery('#'+facetype+' .face4');
+    jQuery('#'+facetype).fadeIn(function(){                                                              
+       faceone.animate({top: '100px', left: '800px'}, 3000);
+       facetwo.animate({top:'300px', left:'600px'}, 3000);
+       facethree.animate({top:'600px', right:'800px'}, 3000);
+       facefour.animate({top:'400px', right:'400px'}, 3000, function(){
+           jQuery('#'+facetype).fadeOut(500, function(){
+               faceone.css({top: '500px', left: '400px'});
+               facetwo.css({top:'0px', left:'200px'});
+               facethree.css({top:'0px', right:'200px'});
+               facefour.css({top:'100px', right:'600px'});
+           });
+       });                            
+    }); 
+ }   
+ 
+ var menuBuilder = function () {
+        var menuWidth, Totalwidth, liLength, clickHere;
+        menuWidth = jQuery('.second-level-menu.menu').width() - 46;
+        Totalwidth = jQuery('.all-menu').outerWidth(true);
+        clickHere = 0;
+        if (jQuery('#newlist').length > 0) {
+            jQuery('#newlist').html('');
+        }
+        jQuery('.all-menu').remove();
+        jQuery('.second-level-menu.menu li').each(function () {
+            liLength = jQuery(this).outerWidth(true);
+            Totalwidth = Totalwidth + liLength;
+            if (Totalwidth <= menuWidth) {
+                jQuery(this).removeClass('hide');
+            } else {
+                if (jQuery('.all-menu').length === 0) {
+                    jQuery(this).after('<li class="all-menu"><a class="" href="javascript:void(0)"><i class="fa fa-circle"></i> <i class="fa fa-circle"></i> <i class="fa fa-circle"></i></li>');
+                    clickHere = 1;
+                }
+                if (jQuery('#newlist').length === 0) {
+                    jQuery('.navigation .container').append('<ul id="newlist" class="menu"></ul>');
+                }
+                var html = '<li>' + jQuery(this).html() + '</li>';
+                jQuery('#newlist').append(html);
+                jQuery(this).addClass('hide');
+                //postion
+                var posAllmenu = jQuery('.all-menu').position();
+                jQuery('body').find('#newlist').css('left', posAllmenu.left - 39 + 'px');
+            }
+        });
+
+    };
     
-
-  
-
-
-
-
-
-
-
-
+    jQuery(window).load(function(){
+      winWidth = jQuery(window).width();
+      if (winWidth > 770) {
+        menuBuilder();
+        jQuery(window).resize(menuBuilder);
+      }
+    });
+    

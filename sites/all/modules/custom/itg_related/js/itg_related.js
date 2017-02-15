@@ -39,18 +39,14 @@
                         'type': 'POST',
                         'success': function (data)
                         {
-                            var tmp = data.split("######");
+                           
+                            var obj = jQuery.parseJSON(data);
+                            if (obj.msg == 'success') {
+                                $('.success').fadeIn(200).show(0).delay(2000).hide(1000);
+                                parent.jQuery('.search-list').prepend(obj.lnk);
 
-                            //console.log(data);
-
-                            if (tmp[0])
-                            {
-                                $('.success').fadeIn(200).show();
-                                //$("#search-title").val('');
-                            }
-                            else
-                            {
-                                $('.erro').fadeIn(200).show();
+                            } else {
+                                $('.erro').fadeIn(200).show(0).delay(2000).hide(1000);
                             }
                         }
                     });
@@ -71,7 +67,8 @@ jQuery(document).ready(function(){
    // var itemString = parent.jQuery('#edit-field-story-kicker-text-und-0-value').val();
     var itemString = parent.jQuery('#edit-field-common-related-content-und-0-value').val();
     var insvalue = '';
-    jQuery('#insvalue').val(itemString);  
+    jQuery('#insvalue').val(itemString);
+    jQuery('#insvalue').attr('title', itemString);
     var insvalue = jQuery('#insvalue').val();
     var item = [];
     if(insvalue){
@@ -95,6 +92,7 @@ jQuery(document).ready(function(){
             item.splice(hasurl, 1);
         }
         jQuery('#insvalue').val(item);
+        jQuery('#insvalue').attr('title', item);
         //console.log("hasurl index = " + item);
     });
 

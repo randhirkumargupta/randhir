@@ -30,11 +30,11 @@ class ItgSubCategoryMigration extends XMLMigration {
 
 
     // This can also be an URL instead of a local file path.
-    $file_path = drupal_realpath('public://');
+    $file_path = 'sites/default/files';
 
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
-    $items_url = $xml_folder . 'subcategory.xml';
+    $items_url = $xml_folder . 'subcategories-master.xml';
 
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -81,8 +81,12 @@ class ItgSubCategoryMigration extends XMLMigration {
     $this->addFieldMapping('metatag_description', 'metadesc')->xpath('metadesc');
     $this->addFieldMapping('metatag_keywords', 'metakey')->xpath('metakey');
     $this->addFieldMapping('parent', 'category')->xpath('category');
-    $this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
+    //$this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
+    $this->addFieldMapping('pathauto')->defaultValue(0);
+    $this->addFieldMapping('path', 'sefurl')->xpath('sef_url');
     $this->addFieldMapping('field_cm_redirection_url', 'content_url')->xpath('content_url');
+    // Redirect
+    $this->addFieldMapping('migrate_redirects', 'content_url')->xpath('content_url');
   }
   
   
@@ -92,6 +96,9 @@ class ItgSubCategoryMigration extends XMLMigration {
       $source_cid = (string) $row->xml->category;
       $orignal_category = get_itg_destination_id('migrate_map_itgcategory', $source_cid);
       $row->xml->category = $orignal_category;
+       //sef url
+      $sef_path = itg_db_migrate_term_sef('taxonomy/term/'.$orignal_category);
+      $row->xml->sef_url = $sef_path.'/'.$row->xml->sef_url;
     }
     else {
       $row->xml->category = '';

@@ -66,7 +66,7 @@
   <?php if (!empty($title) && !$page): ?>
     <h2 <?php if (!empty($title_attributes)) print $title_attributes ?>>
       <?php if (!empty($new)): ?><span class='new'><?php print $new ?></span><?php endif; ?>
-      <a href="<?php print $node_url ?>"><?php print $title ?></a>
+      <?php print $title ?>
     </h2>
   <?php endif; ?>
 
@@ -79,7 +79,7 @@
             <h2><?php echo t('Notification Details'); ?></h2>
             <div class="content-details">
               <div class="field">
-                <div class="field-label">Select Device:</div>
+                <div class="field-label"><?php print t('Select Device:'); ?></div>
                 <div class="field-items"><?php
                     foreach ($node->field_ntf_select_device[LANGUAGE_NONE] as $device_arr) {
                       $device_name .= $device_arr['value'] . ', ';
@@ -91,33 +91,33 @@
               </div>
 
               <div class="field">
-                <div class="field-label">Schedule: </div>
+                <div class="field-label"><?php print t('Schedule:'); ?></div>
                 <div class="field-items"><?php print date('d/m/Y h:i', strtotime($node->field_ntf_schedule[LANGUAGE_NONE][0]['value'])); ?></div>
               </div>
 
               <div class="field">
-                <div class="field-label">Message Title:</div>
+                <div class="field-label"><?php print t('Message Title:'); ?></div>
                 <div class="field-items"><?php print ucwords($node->title); ?></div>
               </div>
 
               <?php if ($node->field_cm_redirection_url[LANGUAGE_NONE][0]['value']) { ?>
                 <div class="field">
-                  <div class="field-label">Message URL:</div>
+                  <div class="field-label"><?php print t('Message URL:') ?></div>
                   <div class="field-items"><?php print $node->field_cm_redirection_url[LANGUAGE_NONE][0]['value']; ?></div>
                 </div>
               <?php } ?>
               
               <?php if($node->body[LANGUAGE_NONE][0]['value']) { ?>
               <div class="field">
-                <div class="field-label">Custom Data:</div>
+                <div class="field-label"><?php print t('Custom Data:'); ?></div>
                 <div class="field-items"><?php print ucfirst($node->body[LANGUAGE_NONE][0]['value']); ?></div>
               </div>
               <?php } ?>
               
-              <?php if($node->field_ntf_assign_story[LANGUAGE_NONE][0]['value']) { ?>
+              <?php if($node->field_news_cid[LANGUAGE_NONE][0]['target_id']) { ?>
               <div class="field">
-                <div class="field-label">Assign Story:</div>
-                <div class="field-items"><?php print $node->field_ntf_assign_story[LANGUAGE_NONE][0]['value'] ? 'Yes' : 'No'; ?></div>
+                <div class="field-label"><?php print t('Assign Story:'); ?></div>
+                <div class="field-items"><?php print $node->field_news_cid['und'][0]['target_id']; ?></div>
               </div>
               <?php } ?>
             </div>
@@ -130,35 +130,35 @@
               
               <?php if($node->field_survey_question[LANGUAGE_NONE][0]['value']) { ?>
               <div class="field">
-                <div class="field-label">Android Header:</div>
+                <div class="field-label"><?php print t('Android Header:'); ?></div>
                 <div class="field-items"><?php print ucwords($node->field_survey_question[LANGUAGE_NONE][0]['value']); ?></div>
               </div>
               <?php } ?>
               
               <?php if($node->field_ntf_android_vibration[LANGUAGE_NONE][0]['value']) { ?>
               <div class="field">
-                <div class="field-label">Android Force Vibration:</div>
+                <div class="field-label"><?php print t('Android Force Vibration:'); ?></div>
                 <div class="field-items"><?php print $node->field_ntf_android_vibration[LANGUAGE_NONE][0]['value'] ? 'Yes' : 'No'; ?></div>
               </div>
               <?php } ?>
               
               <?php if($node->field_ntf_android_sound[LANGUAGE_NONE][0]['value']) { ?>
               <div class="field">
-                <div class="field-label">Android Sound:</div>
+                <div class="field-label"><?php print t('Android Sound:'); ?></div>
                 <div class="field-items"><?php print ucwords($node->field_ntf_android_sound[LANGUAGE_NONE][0]['value']); ?></div>
               </div>
               <?php } ?>
               
               <?php if($node->field_news_thumbnail[LANGUAGE_NONE][0]['fid']) { ?>
               <div class="field">
-                <div class="field-label">Android Custom Icon:</div>
+                <div class="field-label"><?php print t('Android Custom Icon:'); ?></div>
                 <div class="field-items"><img src="<?php print image_style_url("thumbnail", $node->field_news_thumbnail[LANGUAGE_NONE][0]['uri']); ?>" /></div>
               </div>
               <?php } ?>
               
               <?php if($node->field_newst_banner[LANGUAGE_NONE][0]['fid']) { ?> 
               <div class="field">
-                <div class="field-label">Custom Banner:</div>
+                <div class="field-label"><?php print t('Custom Banner:'); ?></div>
                 <div class="field-items"><img src="<?php print image_style_url("thumbnail", $node->field_newst_banner[LANGUAGE_NONE][0]['uri']); ?>" /></div>
               </div>
               <?php } ?>

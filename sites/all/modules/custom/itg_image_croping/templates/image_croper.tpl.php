@@ -98,13 +98,18 @@
 </style>
 
 <?php
+
 drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_crop.js', array('
   type' => 'file', 'scope' => 'content'));
 $imagedata = base64_encode(file_get_contents($data->uri));
 $url = file_create_url($data->uri);
+$image_exten = end(explode('.', $data->uri));
 ?>
 <input type="hidden" id="crop_image_url" value="<?php echo $url; ?>">
 <input type="hidden" id="image_fiedlid" value="<?php echo $data->fid; ?>">
+
+<input type="hidden" id="orig_image_fiedlid" value="<?php echo $data->fid; ?>">
+<input type="hidden" id="image_exten" value="<?php echo $image_exten; ?>">
 
 <div class="croper">
     <div class="first-resize">

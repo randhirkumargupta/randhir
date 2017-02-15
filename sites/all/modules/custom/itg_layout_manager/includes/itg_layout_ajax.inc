@@ -12,6 +12,23 @@ function insert_layout_setting_ajax() {
   
   global $user;  
   $arg = arg();
+  
+  //code for If already a section is dragged while configuration and 
+  //if same section is being dragged again on default,photo and video page then system should show an ALERT
+  
+    /*$widget_check = explode('#', $_GET['widget_name']);
+    if (!empty($widget_check[0]) 
+            && ($widget_check[0] == 'photo_list_of_category' 
+                    || $widget_check[0] == 'video_list_of_category' 
+                    || $widget_check[0] == 'section_wise_order')) {
+      $check_drag_tid = get_use_category_on_tpl($_GET['section_name'], $widget_check[1]);
+      if (!empty($check_drag_tid)) {
+        echo 'already_configured_section';        
+        exit;
+      }    
+    }*/
+    
+  // code end
       
   // Get tpl id by section_name and template_name
   $tpl_id_array = get_template_id($_GET['section_name'], $_GET['template_name']);
@@ -206,3 +223,4 @@ function get_layout_block_details($layout_id, $id) {
   
   return $data_array;
 }
+

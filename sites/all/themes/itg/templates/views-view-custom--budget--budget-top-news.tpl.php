@@ -4,6 +4,7 @@
             <div class="featured-news">
 
                 <?php
+                    global $base_url;
                 foreach ($rows as $index => $row) {
                     $desc = $row['title'];
 
@@ -14,23 +15,66 @@
                     if ($index == 0) {
                         ?>
                         <div class="featured-post featured-post-first">
-                            <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}") ?>"><?php print $row['field_story_extra_large_image_1']; ?>    </a>
-                            <h3><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h3>           
+                            <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}") ?>">
+
+                                <?php
+                                if ($row['field_story_medium_image'] != "") {
+                                    print $row['field_story_medium_image'];
+                                }
+                                else {
+                                    print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg' alt=''/>";
+                                }
+                                ?>    
+
+
+                            </a>
+                            <h3>
+                              <?php // echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
+                            <?php
+                              if (function_exists('itg_common_get_smiley_title')) {
+                                echo l(itg_common_get_smiley_title($row['nid'], 0, 60), "node/" . $row['nid'], array("html" => TRUE));
+                              }
+                              else {
+                                echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), "node/" . $row['nid']);
+                              }
+                            ?>
+                            </h3>           
                         </div>
 
-                    <?php } else if ($index > 0 && $index <= 2) {
-                        ?>
-                        <div class="featured-post"> <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}") ?>"><?php print $row['field_story_extra_large_image']; ?></a>
-                            <p><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></p>
+    <?php }
+    else if ($index > 0 && $index <= 2) {
+        ?>
+                        <div class="featured-post"> <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}") ?>">
+                             <?php
+                                if ($row['field_story_small_image'] != "") {
+                                    print $row['field_story_small_image'];
+                                }
+                                else {
+                                    print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt='' />";
+                                }
+                                ?>   
+                          </a>
+                            <p>
+                              <?php // echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
+                              <?php
+                              if (function_exists('itg_common_get_smiley_title')) {
+                                echo l(itg_common_get_smiley_title($row['nid'], 0, 60), "node/" . $row['nid'], array("html" => TRUE));
+                              }
+                              else {
+                                echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), "node/" . $row['nid']);
+                              }
+                              ?>
+                            </p>
                         </div>
 
-                    <?php } ?>
+    <?php } ?>
 
-                <?php } ?>
+<?php } ?>
             </div>
         </div>    
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 other-news">
+        <h4 class="heading desktop-hide">OTHER NEWS</h4>
         <div class="auto-block-2">
             <div class="special-top-news special-top-bg">
 
@@ -42,12 +86,22 @@
 
                         if ($index > 2) {
                             ?>
-                            <li><?php echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></li>
+                            <li>
+                              <?php //echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
+                            <?php
+                              if (function_exists('itg_common_get_smiley_title')) {
+                                echo l(itg_common_get_smiley_title($row['nid'], 0, 75), "node/" . $row['nid'], array("html" => TRUE));
+                              }
+                              else {
+                                echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), "node/" . $row['nid']);
+                              }
+                            ?>
+                            </li>
 
 
-                        <?php } ?>
+    <?php } ?>
 
-                    <?php } ?>
+<?php } ?>
 
                 </ul>
 
