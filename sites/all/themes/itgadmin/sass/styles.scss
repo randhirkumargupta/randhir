@@ -8755,7 +8755,7 @@ div.node{
     } 
   }
 }
-
+.page-menu-manager-third .view .view-filters .views-exposed-form .views-exposed-widget{width: auto; padding-right: 0;}
 [id*="views-exposed-form-menu-manager-menu-manager-page"]{
   .views-submit-button{
     .form-type-select{
@@ -8767,6 +8767,11 @@ div.node{
       margin-top: 26px !important;
     }
   }
+  .third-label-menu-section, .third-label-menu-term{
+    @extend .fleft;
+    width: 200px;
+  }
+  .third-label-menu-section{margin-right: 10px;}
 }
 [id*="comment-global-config"]{
   .form-submit{
@@ -9389,6 +9394,7 @@ div.node{
   thead{
     display: none;        
   }
+  tbody{overflow: visible;}
   + div.clearfix{
     bottom: 10px;
     right: 20px;    
@@ -9399,7 +9405,9 @@ div.node{
     margin: 10px 10px 0;
     &:first-child{margin-top: 0;}
     td:nth-child(2){
-      display: block;
+      overflow: visible;
+      display: inline-block;
+      vertical-align: top;
       border:none;
       @extend .of-hide;
       padding-bottom: 0;
