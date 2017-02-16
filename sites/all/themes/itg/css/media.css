@@ -260,31 +260,6 @@
   }
 
   /*sider bar css end*/
-  /*css start poll page*/
-  .poll-banner .detail {
-    width: auto;
-    display: block;
-    overflow: hidden;
-    float: none;
-    padding-right: 0px;
-  }
-  .poll-banner .detail .detail-content h4 {
-    font-size: 15px;
-    font-size: 0.9375rem;
-    line-height: 20px;
-  }
-  .poll-banner .poll-list .pic {
-    width: 145px;
-    margin-right: 10px;
-  }
-  .poll-banner .poll-list .voting-data {
-    float: none;
-    width: 100%;
-    overflow: hidden;
-    padding-top: 15px;
-  }
-
-  /*css end poll page*/
   /*css start osscar page */
   .oscar-layout-page .osscar-video ul .dont-miss-listing .dm-pic {
     width: 124px;
@@ -436,6 +411,15 @@
   }
 
   /*oscar page css end*/
+  /*poll page css start*/
+  .poll-banner .detail {
+    width: 33%;
+  }
+  .poll-banner .poll-list .voting-data {
+    width: 41%;
+  }
+
+  /*poll page css end*/
 }
 @media only screen and (max-width: 991px) {
   /*CSS start education page special*/
@@ -543,6 +527,15 @@
   }
 
   /*    oscar page css end*/
+  /*poll page css start*/
+  .poll-banner .detail {
+    width: 40%;
+  }
+  .poll-banner .poll-list .voting-data {
+    width: 35%;
+  }
+
+  /*poll page css end*/
 }
 @media only screen and (max-width: 768px) {
   header {
@@ -1088,6 +1081,9 @@
     font-size: 0.9375rem;
     line-height: 20px;
   }
+  .poll-banner .detail .detail-content .vota-time.mhide {
+    display: block;
+  }
   .poll-banner .vota-time.desktop-hide {
     width: 100%;
     color: #8a8a8a;
@@ -1095,6 +1091,7 @@
     clear: both;
     width: 100%;
     padding-top: 15px;
+    display: none;
   }
   .poll-banner .vota-time.desktop-hide div {
     display: inline-block;
@@ -1496,6 +1493,7 @@
   /*sosory page css end*/
 }
 @media only screen and (max-width: 767px) {
+  /*css start oscar-layout-page */
   .oscar-layout-page .oscar-news .col-md-6:nth-child(3n+1) {
     clear: left;
   }
@@ -1506,6 +1504,39 @@
   .oscar-layout-page .oscar-features .col-md-6:nth-child(2n+1) {
     clear: none;
   }
+
+  /*css end oscar-layout-page */
+  /*css start poll page*/
+  .poll-banner .detail {
+    width: auto;
+    display: block;
+    overflow: hidden;
+    float: none;
+    padding-right: 0px;
+  }
+  .poll-banner .detail .detail-content h4 {
+    font-size: 15px;
+    font-size: 0.9375rem;
+    line-height: 20px;
+  }
+  .poll-banner .detail .detail-content .vota-time.mhide {
+    display: none;
+  }
+  .poll-banner .poll-list .pic {
+    width: 145px;
+    margin-right: 10px;
+  }
+  .poll-banner .poll-list .voting-data {
+    float: none;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 15px;
+  }
+  .poll-banner .poll-list .vota-time.desktop-hide {
+    display: block;
+  }
+
+  /*css end poll page*/
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/
