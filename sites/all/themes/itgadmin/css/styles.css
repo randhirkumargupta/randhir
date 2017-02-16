@@ -10993,3 +10993,28 @@ span.file a {
   max-width: 100%;
   color: #000;
 }
+
+[id*="third-party-coupon-form"] fieldset {
+  border: none;
+  padding: 10px 30px;
+}
+[id*="third-party-coupon-form"] .form-type-file {
+  margin: 10px 0;
+}
+[id*="third-party-coupon-form"] .form-type-file > label {
+  width: 220px;
+  float: left;
+  padding: 5px 0;
+}
+[id*="third-party-coupon-form"] [id*="edit-submit-button"] {
+  margin-left: 220px;
+}
+
+.node-coupon-form .form-field-name-field-coupon-allow-min-cart-amt .form-type-checkbox {
+  margin: 10px 0;
+  padding: 0 30px;
+}
+.node-coupon-form .form-field-name-field-coupon-allow-min-cart-amt .form-type-checkbox > label {
+  float: left;
+  width: 220px;
+}
