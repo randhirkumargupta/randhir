@@ -2124,7 +2124,11 @@ footer{
                 border-radius: 7px 0px 0px 7px;
             }
             .multiple-photo{
-                padding: 0 50px;                
+                padding: 0 50px; 
+                .photo-slider{
+                    padding: 0 5px;
+                    cursor: pointer;
+                }
                 .slick-prev, .slick-next{
                     background: transparent;
                     border: none;
@@ -2147,10 +2151,7 @@ footer{
                   display: inline-block;
                   vertical-align: top;
                   position: relative;
-                  img{
-                    width: 120px; 
-                    height: 90px;
-                  }
+                  border: 1px solid transparent;
                   .photo-count{
                     font-style: normal;
                     position: absolute;
@@ -2161,8 +2162,13 @@ footer{
                     background-color: rgba(0,0,0,.5);
                     color: #fff;
                     text-align: center;
-                    line-height: 90px;
+                    line-height: 64px;
                   }
+                }
+                .slick-current{
+                    .img-wrapper{
+                        border: 1px solid #ffc106;
+                    }
                 }
             }
         }
@@ -4442,6 +4448,7 @@ h1.category-heading{
             h2{
                 @include font(15px,20px);
                 margin-bottom:10px;
+                word-wrap: break-word;
                 a{
                     @include font(15px,20px,$itg-font-medium);   
                 }
