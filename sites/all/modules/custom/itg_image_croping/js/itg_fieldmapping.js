@@ -343,7 +343,7 @@
                                     parent.jQuery('[name="' + captionid1 + '"]').val(credit);
                                     hideloader();
                                     parent.jQuery.colorbox.close();
-                                }, 500);
+                                }, 2000);
                             }
 
 
