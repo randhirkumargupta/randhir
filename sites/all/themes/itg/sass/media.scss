@@ -248,37 +248,7 @@
         padding: 0;
     }
     /*sider bar css end*/
-    
-    /*css start poll page*/
-    .poll-banner{
-        .detail {
-            width: auto;
-            display: block;
-            overflow: hidden;
-            float: none;
-            padding-right: 0px; 
-            .detail-content{
-                h4{
-                    @include font(15px,20px);
-                }
-            }
-        }
-        .poll-list{
-            .pic{
-                width: 145px; 
-                margin-right: 10px;
-            }
-            .voting-data{                
-                float: none;
-                @include calculate-width(1);
-                overflow: hidden;
-                padding-top: 15px;
-            }            
-        }                
-    }
-    
-    /*css end poll page*/    
-    
+        
 /*css start osscar page */
     .oscar-layout-page{
         .osscar-video{
@@ -434,6 +404,16 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
 }
 /*oscar page css end*/
 
+/*poll page css start*/
+.poll-banner{
+    .detail{
+        width: 33%
+    }
+    .poll-list .voting-data{
+        width: 41%;
+    }
+} 
+/*poll page css end*/
 
 }   
 
@@ -546,9 +526,17 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
         margin-top: 0px;
     }
 }
-
-
 /*    oscar page css end*/
+/*poll page css start*/
+.poll-banner{
+    .detail{
+        width: 40%
+    }
+    .poll-list .voting-data{
+        width: 35%;
+    }
+} 
+/*poll page css end*/
 
 }
 
@@ -1140,6 +1128,9 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
                 h4{
                     @include font(15px,20px);
                 }
+                .vota-time.mhide{
+                    display: block;
+                }
             }
         }
         .poll-list{
@@ -1157,6 +1148,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
             clear:both;
             @include calculate-width(1);
             padding-top: 15px;
+            display:none;
             div{
                 @include display-inline;   
                 margin-bottom: 10px;
@@ -1555,6 +1547,7 @@ padding-right: 10px;
 
 
 @media only screen and (max-width:767px){
+ /*css start oscar-layout-page */
     .oscar-layout-page .oscar-news {
         .col-md-6:nth-child(3n+1){
             clear: left;   
@@ -1571,7 +1564,42 @@ padding-right: 10px;
                 }
             }
         }   
+    }
+ /*css end oscar-layout-page */
+ /*css start poll page*/
+    .poll-banner{
+        .detail {
+            width: auto;
+            display: block;
+            overflow: hidden;
+            float: none;
+            padding-right: 0px; 
+            .detail-content{
+                h4{
+                    @include font(15px,20px);
+                }
+                .vota-time.mhide{
+                    display: none;
+                }
+            }
+        }
+        .poll-list{
+            .pic{
+                width: 145px; 
+                margin-right: 10px;
+            }
+            .voting-data{                
+                float: none;
+                @include calculate-width(1);
+                overflow: hidden;
+                padding-top: 15px;                                
+            }
+            .vota-time.desktop-hide{
+                display: block;
+            }
+        }                
     }    
+    /*css end poll page*/        
 }
 
 
