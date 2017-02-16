@@ -536,6 +536,12 @@
   }
 
   /*poll page css end*/
+  /*budget page css start*/
+  .budget-page-layout .itg-715-layout .ipad-space {
+    margin-top: 0;
+  }
+
+  /*budget page css end*/
 }
 @media only screen and (max-width: 768px) {
   header {
@@ -764,7 +770,8 @@
   .education-layout-page .itg-325-layout .droppable,
   .education-layout-page .itg-345-layout .droppable,
   .education-layout-page .itg-325-layout .ad-widget,
-  .auto-layout-page .auto-block-1 {
+  .auto-layout-page .auto-block-1,
+  .election-page .right-side .itg-484 .droppable {
     height: auto;
     min-height: auto;
   }
@@ -788,7 +795,7 @@
 
   /*End Dont miss Home page css*/
   /*    budget page block height start*/
-  .budget-page-layout .auto-block-2, .budget-page-layout .slider-budget, .budget-page-layout .common-highlights {
+  .budget-page-layout .auto-block-2, .budget-page-layout .slider-budget {
     height: auto;
   }
   .budget-page-layout .itg-325-layout .droppable, .budget-page-layout .itg-530-layout .droppable, .budget-page-layout .itg-370-layout .droppable, .budget-page-layout .itg-480-layout .droppable, .budget-page-layout .itg-715-layout .droppable {
@@ -1273,9 +1280,6 @@
     white-space: nowrap;
     overflow: auto;
   }
-  .election-page .itg-most-popular .most_popular .col-md-3:nth-child(2n+1) {
-    clear: left;
-  }
   .election-page .left-side .itg-325-layout .droppable, .election-page .left-side .itg-415-layout .droppable, .election-page .left-side .itg-map .droppable, .election-page .left-side .itg-most-popular .droppable, .election-page .left-side .itg-photo .droppable {
     min-height: auto;
     height: auto;
@@ -1537,6 +1541,21 @@
   }
 
   /*css end poll page*/
+  /*budget page css start*/
+  .budget-page-layout .itg-715-layout .ipad-space {
+    margin-top: 50px;
+  }
+  .budget-page-layout .latest .col-md-3:nth-child(2n+1) {
+    clear: left;
+  }
+
+  /*budget page css end*/
+  /*election page css start*/
+  .election-page .itg-most-popular .most_popular .col-md-3:nth-child(2n+1) {
+    clear: left;
+  }
+
+  /*election page css end*/
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/
@@ -2076,6 +2095,23 @@
   }
 
   /*oscar page css end*/
+  /*election page css start*/
+  .election-page .key-candidate .key-candidate-detail ul li .status span {
+    font-size: 12px;
+  }
+
+  /*election page css end*/
+  .sign-in-link .signup-link {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+
+  .sign-in-link a {
+    display: block;
+    text-align: left;
+    margin-bottom: 10px;
+  }
 }
 @media only screen and (max-width: 680px) {
   #block-views-anchor-landing-page-block .anchor-left {
