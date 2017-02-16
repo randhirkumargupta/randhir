@@ -85,8 +85,8 @@ else {
   <div class="container top-nav">                  
     <div class="social-nav mhide">
       <ul class="social-nav mhide">
-        <li><a href="#" title=""><i class="fa fa-facebook"></i></a></li>
-        <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://www.facebook.com/IndiaToday/" class="user-activity def-cur-pointer" rel="1" data-tag="homepage" data-activity="fb_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="https://twitter.com/indiatoday" class="user-activity def-cur-pointer" rel="1" data-tag="homepage" data-activity="twitter_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-twitter"></i></a></li>
         <li><a href="#" title=""><i class="fa fa-google-plus"></i></a></li>
         <li><a href="#" title=""><i class="fa fa-rss"></i></a></li>
         <li><a href="#" title=""><i class="fa fa-mobile"></i></a></li>
