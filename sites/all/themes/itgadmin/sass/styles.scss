@@ -9910,9 +9910,9 @@ div.node{
   }
 } 
 .messages em{font-weight: 600;}
-.node-type-videogallery [id*="field-video-upload-values"]{
+.page-node-add-videogallery [id*="field-video-upload-values"]{
   tbody{
-    tr:first-child{display: block !important;}
+    tr:first-child{display: none !important;}
   }
 }
 span.file a{pointer-events: none; color: #2f2f2f;}

@@ -10343,8 +10343,8 @@ div.node #comments h2 {
   font-weight: 600;
 }
 
-.node-type-videogallery [id*="field-video-upload-values"] tbody tr:first-child {
-  display: block !important;
+.page-node-add-videogallery [id*="field-video-upload-values"] tbody tr:first-child {
+  display: none !important;
 }
 
 span.file a {
