@@ -681,6 +681,47 @@ jQuery(document).ready(function() {
             $(this).prev().toggleClass('active');
             $(this).prev('.widget-title-wrapper.active').find('input[type="text"]').focus();
         });
+        var badge_one = 'lrp_gold_star_one_icon[fid]';
+        var badge_two = 'lrp_gold_star_two_icon[fid]';
+        var badge_three = 'lrp_gold_star_three_icon[fid]';
+        var badge_four = 'lrp_gold_star_four_icon[fid]';
+        var badge_five = 'lrp_gold_star_five_icon[fid]';
+        var badge_one_val = $('input[name="' + badge_one + '"]').val();
+        var badge_two_val = $('input[name="' + badge_two + '"]').val();
+        var badge_three_val = $('input[name="' + badge_three + '"]').val();
+        var badge_four_val = $('input[name="' + badge_four + '"]').val();
+        var badge_five_val = $('input[name="' + badge_five + '"]').val();
+        if(badge_one_val > 0){
+          $('body').find('.div_lrp_gold_star_one_icon').hide();
+        }
+        else{
+          $('body').find('.div_lrp_gold_star_one_icon').show();
+        }
+        if(badge_two_val > 0){
+          $('body').find('.div_lrp_gold_star_two_icon').hide();
+        }
+        else{
+          $('body').find('.div_lrp_gold_star_two_icon').show();
+        }
+        if(badge_three_val > 0){
+          $('body').find('.div_lrp_gold_star_three_icon').hide();
+        }
+        else{
+          $('body').find('.div_lrp_gold_star_three_icon').show();
+        }
+        if(badge_four_val > 0){
+          $('body').find('.div_lrp_gold_star_four_icon').hide();
+        }
+        else{
+          $('body').find('.div_lrp_gold_star_four_icon').show();
+        }
+        if(badge_five_val > 0){
+          $('body').find('.div_lrp_gold_star_five_icon').hide();
+        }
+        else{
+          $('body').find('.div_lrp_gold_star_five_icon').show();
+        }
+          
 
     };
 })(jQuery);
