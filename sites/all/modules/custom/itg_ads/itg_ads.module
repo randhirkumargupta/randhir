@@ -895,9 +895,7 @@ function get_header_body_start_end_code() {
           $show_external_flag = 1;
     } else {
           $show_external_flag = 0;
-
     }
-    
   }
   else if ($arg[0] == 'node' && is_numeric($arg[1])) {
     $node_object = menu_get_object();
