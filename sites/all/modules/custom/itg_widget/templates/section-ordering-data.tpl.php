@@ -752,7 +752,7 @@ else if ($widget_style == 'tech-tips' || $widget_style == 'india-inc-on-budget' 
             <?php }
             ?>
 
-              <span>
+              <span class="detail">
                 <?php
               if (function_exists('itg_common_get_smiley_title')) {
                 echo l(itg_common_get_smiley_title($nid, 0, 90), "node/" . $nid, array("html" => TRUE ));
