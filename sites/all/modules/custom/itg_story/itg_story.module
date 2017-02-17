@@ -152,6 +152,7 @@ function itg_story_ckeditor_plugin_alter(&$plugins) {
  * {@inheritdoc}
  */
 function itg_story_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
   switch ($form_id) {
     case 'story_node_form':
       global $base_url, $user;
@@ -171,9 +172,11 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
 
         $form['field_reporter_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $reporter_id;
       }
-      
-      $form['field_reporter_publish_id']['#attributes']['class'][] = 'element-hidden';
-      $form['field_reporter_unique_id']['#attributes']['class'][] = 'element-hidden';
+      if ($user->uid != 1)
+      {
+        $form['field_reporter_publish_id']['#attributes']['class'][] = 'element-hidden';
+        $form['field_reporter_unique_id']['#attributes']['class'][] = 'element-hidden';
+      }
       $form['field_story_reporter']['und'][0]['target_id']['#autocomplete_path'] = 'byline/autocomplete';
       
       if (!empty($form['#node']->field_story_source_id[LANGUAGE_NONE][0]['value']))

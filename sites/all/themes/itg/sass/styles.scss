@@ -1509,6 +1509,10 @@ footer{
         &+li{
             border-top: 1px solid $border-color;
         }
+        .detail{
+            overflow: hidden;
+            display: block;
+        }
     }
 }
 /*End CSS trending-videos Home  page*/
@@ -10351,10 +10355,24 @@ span.smilies-title {
 }
 /*css end for emoji*/
 
-.front-end-breadcrumb{
+/*css breadcrumb start*/
+#block-itg-layout-manager-front-end-breadcrumb{
   position: relative;
-  z-index: 9999;
+  z-index: 9999;  
+  color: #a1a1a1;
+  font-family: roboto;
+  padding-top:15px;
+  a{    
+    color: #a1a1a1;
+    font-family: roboto;
+  }
 }
+.node-type-photogallery, .node-type-videogallery, .node-type-podcast, .section-videos{
+    #block-itg-layout-manager-front-end-breadcrumb{
+        background: #171717;   
+    }    
+}
+/*css breadcrumb end*/
 iframe{
   &[id*="twitter-widget"]{
     width: 100% !important;
