@@ -450,9 +450,11 @@ function itg_workflow_after_build($form, &$form_state) {
  * @param object $node
  */
 function itg_workflow_node_presave($node) {
-  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
-    if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
-      $node->workbench_moderation_state_new = 'published';
+  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+    if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
+      if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
+        $node->workbench_moderation_state_new = 'published';
+      }
     }
   }
 }
@@ -633,43 +635,44 @@ function itg_workflow_bulk_opration_related($field1, $field2) {
  */
 function itg_workflow_node_insert($node) {
   global $user;
-  
-  if ($node->type == 'story' 
-          || $node->type == 'photogallery' 
-          || $node->type == 'blog' 
-          || $node->type == 'podcast' 
-          || $node->type == 'videogallery') {    
+  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+    if ($node->type == 'story' 
+            || $node->type == 'photogallery' 
+            || $node->type == 'blog' 
+            || $node->type == 'podcast' 
+            || $node->type == 'videogallery') {    
 
-    /*if (!array_key_exists(COPY_EDITOR, $user->roles) &&
-            !array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) &&
-            !array_key_exists(EDITOR, $user->roles) &&
-            !array_key_exists(SITE_ADMIN, $user->roles) &&
-            !($node->workbench_moderation_state_new == 'draft')) {
+      /*if (!array_key_exists(COPY_EDITOR, $user->roles) &&
+              !array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) &&
+              !array_key_exists(EDITOR, $user->roles) &&
+              !array_key_exists(SITE_ADMIN, $user->roles) &&
+              !($node->workbench_moderation_state_new == 'draft')) {
 
-      //getting mail id's of high level users
-      $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
-      $user_email = get_email_by_roll($rid);
-      workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
-     }*/
+        //getting mail id's of high level users
+        $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
+        $user_email = get_email_by_roll($rid);
+        workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
+       }*/
 
-    $preview_unique_id = $node->field_preview_unique_id['und'][0]['value'];
-    $user_id = $user->uid;
-    $node_id = $node->nid;
+      $preview_unique_id = $node->field_preview_unique_id['und'][0]['value'];
+      $user_id = $user->uid;
+      $node_id = $node->nid;
 
-    try {
-      db_update('itg_workflow_preview_log')
-          ->fields(array(
-            'nid' => $node_id,
-            'preview_id' => $preview_unique_id,
-            'uid' => $user_id,
-          ))
-          ->condition('preview_id', $preview_unique_id)
-          ->condition('uid', $user_id)
-          ->execute();
-    } catch (Exception $ex) {
-      drupal_set_message($ex->getMessage());
+      try {
+        db_update('itg_workflow_preview_log')
+            ->fields(array(
+              'nid' => $node_id,
+              'preview_id' => $preview_unique_id,
+              'uid' => $user_id,
+            ))
+            ->condition('preview_id', $preview_unique_id)
+            ->condition('uid', $user_id)
+            ->execute();
+      } catch (Exception $ex) {
+        drupal_set_message($ex->getMessage());
+      }
+      unset($_SESSION['node_preview_unique']);
     }
-    unset($_SESSION['node_preview_unique']);
   }
 
 }
@@ -680,61 +683,60 @@ function itg_workflow_node_insert($node) {
  */
 function itg_workflow_node_update($node) {
   global $user;   
-  
+  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
   if ($node->type == 'story' 
           || $node->type == 'photogallery' 
           || $node->type == 'blog' 
           || $node->type == 'podcast' 
           || $node->type == 'videogallery') {
     
-    $preview_unique_id = $node->field_preview_unique_id['und'][0]['value'];
-    
-    if ($node->workbench_moderation_state_new != 'draft') {
-      $itguser = user_load($node->uid);
-      //getting mail id's of high level users
-      if($node->type == 'story' && $node->workbench_moderation_state_new == 'published') {       
-        //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR, SEO);
-        $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, SEO);
-      } else {
-        $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR);
-        //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
-      }
-      
-      $user_email = get_email_by_roll($rid);
-      $user_email[] = $itguser->mail;
-      
-      // Delete first if user has already created log.
-      try {
-      // Condition to delete 0 nid and previous added nid logs value.
-      $or = db_or()->condition('nid', $node->nid)->condition('nid', 0);
-      db_delete('itg_workflow_preview_log')
-            ->condition($or)
-            ->condition('uid', $node->uid)
-            ->execute();
-      } catch (Exception $ex) {
+      $preview_unique_id = $node->field_preview_unique_id['und'][0]['value'];
+
+      if ($node->workbench_moderation_state_new != 'draft') {
+        $itguser = user_load($node->uid);
+        //getting mail id's of high level users
+        if($node->type == 'story' && $node->workbench_moderation_state_new == 'published') {       
+          //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR, SEO);
+          $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, SEO);
+        } else {
+          $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR);
+          //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
+        }
+
+        $user_email = get_email_by_roll($rid);
+        $user_email[] = $itguser->mail;
+
+        // Delete first if user has already created log.
+        try {
+        // Condition to delete 0 nid and previous added nid logs value.
+        $or = db_or()->condition('nid', $node->nid)->condition('nid', 0);
+        db_delete('itg_workflow_preview_log')
+              ->condition($or)
+              ->condition('uid', $node->uid)
+              ->execute();
+        } catch (Exception $ex) {
+            drupal_set_message($ex->getMessage());
+        }
+
+        try {
+          db_insert('itg_workflow_preview_log')
+              ->fields(array(
+                'nid' => $node->nid,
+                'preview_id' => $preview_unique_id,
+                'uid' => $node->uid,
+              ))
+              ->execute();
+        }
+        catch (Exception $ex) {
           drupal_set_message($ex->getMessage());
+        }
+
+        unset($_SESSION['node_preview_unique']);
+
+        workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
       }
-      
-      try {
-        db_insert('itg_workflow_preview_log')
-            ->fields(array(
-              'nid' => $node->nid,
-              'preview_id' => $preview_unique_id,
-              'uid' => $node->uid,
-            ))
-            ->execute();
-      }
-      catch (Exception $ex) {
-        drupal_set_message($ex->getMessage());
-      }
-      
-      unset($_SESSION['node_preview_unique']);
-      
-      workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
+
     }
-    
-
-
   }
 }
 

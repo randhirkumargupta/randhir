@@ -373,8 +373,8 @@ function itg_common_date_popup_process_alter(&$element, &$form_state, &$context)
 
 
 function itg_common_node_presave($node) {
-  global $ctype_array;
-  $ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
+  //global $ctype_array;
+  //$ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
   switch ($node->type) {
     case 'astro':
     case 'recipe':
@@ -383,12 +383,15 @@ function itg_common_node_presave($node) {
     case 'survey':
     case 'quiz':
     case 'newsletter':
-      if ($node->op == 'Publish') {
-        $node->status = 1;
+      if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+        if ($node->op == 'Publish') {
+          $node->status = 1;
+        }
+        elseif ($node->op == 'Save as Draft' || $node->status == 0) {
+          $node->status = 0;
+        }
       }
-      elseif ($node->op == 'Save as Draft' || $node->status == 0) {
-        $node->status = 0;
-      }
+      
         
   }
 
@@ -401,9 +404,9 @@ function itg_common_node_presave($node) {
  */
 function itg_common_node_insert($node) {
     
-  global $ctype_array;
+  $ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
   // custom alias cnditions
-  if (in_array($node->type, $ctype_array)){
+  if (in_array($node->type, $ctype_array)) {
      itg_common_custompath_insert_load($node);
   }
 }
@@ -413,13 +416,13 @@ function itg_common_node_insert($node) {
  * @param object $node
  */
 function itg_common_node_update($node) {
-    
-  global $ctype_array;
-  // custom alias cnditions
-  if (in_array($node->type, $ctype_array)){
-     itg_common_custompath_insert_load($node);
+  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {  
+    $ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
+    // custom alias cnditions
+    if (in_array($node->type, $ctype_array)){
+       itg_common_custompath_insert_load($node);
+    }
   }
-
 }
 
 

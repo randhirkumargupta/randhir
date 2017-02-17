@@ -13,11 +13,10 @@
  * @param Array $node
  */
 function itg_recipe_node_presave($node) {
-
+  
   if ($node->type == 'recipe') {
     $node->title = trim($node->title);
-  }
-  if ($node->type == 'recipe') {
+    
     if ($node->field_recipe_content_type[LANGUAGE_NONE][0]['value'] == 'Text') {
       $node->field_recipe_audio = '';
       $node->field_recipe_video = '';
