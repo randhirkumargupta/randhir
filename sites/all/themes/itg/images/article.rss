@@ -1,0 +1,667 @@
+<rss version="2.0"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>News Publisher</title>
+        <link>http://www.example.com/</link>
+        <description>
+            Read our awesome news, every day.
+        </description>
+        <language>en-us</language>
+        <lastBuildDate>2014-12-11T04:44:16Z</lastBuildDate>
+        <item>
+            <title>This is an Instant Article1</title>
+            <link>http://example.com/article.html</link>
+            <guid>2fd4e1c67a2d28fced849ee1bb76e7391b93eb12</guid>
+            <pubDate>2014-12-11T04:44:16Z</pubDate>
+            <author>Mr. Author</author>
+            <description>This is my first Instant Article. How awesome is this?</description>
+            <content:encoded>
+        <![CDATA[
+        <!doctype html>
+        <html lang="en" prefix="op: http://media.facebook.com/op#">
+          <head>
+            <meta charset="utf-8">
+            <link rel="canonical" href="http://example.com/article.html">
+            <meta property="op:markup_version" content="v1.0">
+          </head>
+          <body>
+            <article>
+              <header>
+                <!— Article header goes here -->
+                <!-- The header image shown inside your article --> 
+      <figure data-mode=aspect-fit>
+      <video loop>
+        
+        <source src="http://fb.me/ia-video-ia_b_roll.mov" type="video/mov" />
+     
+        </video>
+      </figure>
+      
+      <!-- The title and subtitle shown in your article -->
+      <h1> Instant Articles </h1>
+       <h2>Get familiar with your new storytelling tools. Make your media come alive, and keep readers coming back for more</h2>
+
+      <!-- A kicker for your article -->
+      <h3 class="op-kicker">
+        Introduction
+      </h3>
+
+      <!-- The author of your article -->
+      <address>
+        Instant Articles Team
+      </address>
+
+      <!-- The published and last modified time stamps -->
+       <time class="op-published" dateTime="2016-2-04T08:00">February 4th 2016, 8:00 AM</time>
+      <time class="op-modified" dateTime="2016-2-04T08:00">February 4th 2016, 8:00 AM</time>
+              </header>
+
+              <!— Article body goes here -->
+<figure class="op-slideshow">
+
+
+<figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-townhouses.jpg"/>
+    <figcaption class="op-vertical-bottom">
+      <h1 class="op-vertical-bottom"> 1/5 </h1> This caption becomes visible once you enter the slideshow by tapping the first image. 
+    <cite class="op-vertical-bottom">Kimson Doan/Unsplash</cite> </figcaption>
+
+ </figure>
+  
+  <figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-grafitti.jpg" />
+    <figcaption class="op-vertical-bottom">
+      <h1 class=op-vertical-bottom> 2/5 </h1> Each photo in a slideshow can have its own caption.
+                <cite class="op-vertical-bottom">Peter Dargatz/Pixabay</cite>
+                </figcaption>
+  </figure>
+  
+  <figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-dancer.jpg" />
+    <figcaption class="op-vertical-bottom">
+      <h1 class="op-vertical-bottom"> 3/5 </h1> This is the third photo of the slideshow.  
+                <cite class="op-vertical-bottom">blanaru/iStock</cite>
+                </figcaption>
+                </figure>
+ <figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-subway_orange.jpg" />
+    <figcaption class="op-vertical-bottom">
+   <h1 class=op-vertical-bottom> 4/5 </h1> The fourth photo of the slideshow.
+                <cite class="op-vertical-bottom">Christian Beirle González/Getty Images </cite>
+            </figcaption>
+  </figure>
+
+  <figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-subway_yellow.jpg" />
+   <figcaption class="op-vertical-bottom">
+      <h1 class=op-vertical-bottom> 5/5 </h1> The fifth photo of the slideshow.
+                <cite class="op-vertical-bottom">Ole Spata/EyeEm</cite>
+                </figcaption>
+  </figure>
+   
+
+  <figcaption>
+    <h1>Slideshow  Example</h1>
+The slideshow caption is visible in-line in the main body of the story. You can also add individual captions for each image in the gallery, which become visible only after entering the slideshow. Tap on the first image to open it.
+  </figcaption>
+
+  </figure>
+  <!-- A map within your article -->
+
+    <figure class="op-map">
+    <figcaption><h1>Map Example</h1>The pin on this map designates Facebook Media Central’s offices in New York City.
+            
+            </figcaption>
+      <script type="application/json" class="op-geotag">  
+        {
+          "type": "Feature",
+          "geometry": 
+            {
+              "type": "Point",
+              "coordinates": [ [40.730852, -73.991364], [40.730852, -73.991364] ]    
+            },    
+          "properties": 
+            {      
+              "title": "770 Broadway, Manhattan, New York",      
+              "radius": 100000,      
+              "pivot": true,      
+              "style": "satellite",
+            }
+        }  
+      </script>
+    </figure>
+              <footer>
+                <!— Article footer goes here -->
+              </footer>
+            </article>
+          </body>
+        </html>
+        ]]>
+            </content:encoded>
+        </item>
+        <item>
+            <title>This is an Instant Article2</title>
+            <link>http://example.com/article.html</link>
+            <guid>2fd4e1c67a2d28fced849ee1bb76e7391b93eb12</guid>
+            <pubDate>2014-12-11T04:44:16Z</pubDate>
+            <author>Mr. Author</author>
+            <description>This is my first Instant Article. How awesome is this?</description>
+            <content:encoded>
+        <![CDATA[
+        <!doctype html>
+        <html lang="en" prefix="op: http://media.facebook.com/op#">
+          <head>
+            <meta charset="utf-8">
+            <link rel="canonical" href="http://example.com/article.html">
+            <meta property="op:markup_version" content="v1.0">
+          </head>
+          <body>
+            <article>
+              <header>
+                <!— Article header goes here -->
+                <!-- The header image shown inside your article --> 
+      <figure data-mode=aspect-fit>
+      <video loop>
+        
+        <source src="http://fb.me/ia-video-ia_b_roll.mov" type="video/mov" />
+     
+        </video>
+      </figure>
+      
+      <!-- The title and subtitle shown in your article -->
+      <h1> Instant Articles </h1>
+       <h2>Get familiar with your new storytelling tools. Make your media come alive, and keep readers coming back for more</h2>
+
+      <!-- A kicker for your article -->
+      <h3 class="op-kicker">
+        Introduction
+      </h3>
+
+      <!-- The author of your article -->
+      <address>
+        Instant Articles Team
+      </address>
+
+      <!-- The published and last modified time stamps -->
+       <time class="op-published" dateTime="2016-2-04T08:00">February 4th 2016, 8:00 AM</time>
+      <time class="op-modified" dateTime="2016-2-04T08:00">February 4th 2016, 8:00 AM</time>
+              </header>
+
+              <!— Article body goes here -->
+<figure class="op-slideshow">
+
+
+<figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-townhouses.jpg"/>
+    <figcaption class="op-vertical-bottom">
+      <h1 class="op-vertical-bottom"> 1/5 </h1> This caption becomes visible once you enter the slideshow by tapping the first image. 
+    <cite class="op-vertical-bottom">Kimson Doan/Unsplash</cite> </figcaption>
+
+ </figure>
+  
+  <figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-grafitti.jpg" />
+    <figcaption class="op-vertical-bottom">
+      <h1 class=op-vertical-bottom> 2/5 </h1> Each photo in a slideshow can have its own caption.
+                <cite class="op-vertical-bottom">Peter Dargatz/Pixabay</cite>
+                </figcaption>
+  </figure>
+  
+  <figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-dancer.jpg" />
+    <figcaption class="op-vertical-bottom">
+      <h1 class="op-vertical-bottom"> 3/5 </h1> This is the third photo of the slideshow.  
+                <cite class="op-vertical-bottom">blanaru/iStock</cite>
+                </figcaption>
+                </figure>
+ <figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-subway_orange.jpg" />
+    <figcaption class="op-vertical-bottom">
+   <h1 class=op-vertical-bottom> 4/5 </h1> The fourth photo of the slideshow.
+                <cite class="op-vertical-bottom">Christian Beirle González/Getty Images </cite>
+            </figcaption>
+  </figure>
+
+  <figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-subway_yellow.jpg" />
+   <figcaption class="op-vertical-bottom">
+      <h1 class=op-vertical-bottom> 5/5 </h1> The fifth photo of the slideshow.
+                <cite class="op-vertical-bottom">Ole Spata/EyeEm</cite>
+                </figcaption>
+  </figure>
+   
+
+  <figcaption>
+    <h1>Slideshow  Example</h1>
+The slideshow caption is visible in-line in the main body of the story. You can also add individual captions for each image in the gallery, which become visible only after entering the slideshow. Tap on the first image to open it.
+  </figcaption>
+
+  </figure>
+  <!-- A map within your article -->
+
+    <figure class="op-map">
+    <figcaption><h1>Map Example</h1>The pin on this map designates Facebook Media Central’s offices in New York City.
+            
+            </figcaption>
+      <script type="application/json" class="op-geotag">  
+        {
+          "type": "Feature",
+          "geometry": 
+            {
+              "type": "Point",
+              "coordinates": [ [40.730852, -73.991364], [40.730852, -73.991364] ]    
+            },    
+          "properties": 
+            {      
+              "title": "770 Broadway, Manhattan, New York",      
+              "radius": 100000,      
+              "pivot": true,      
+              "style": "satellite",
+            }
+        }  
+      </script>
+    </figure>
+              <footer>
+                <!— Article footer goes here -->
+              </footer>
+            </article>
+          </body>
+        </html>
+        ]]>
+            </content:encoded>
+        </item>
+        <item>
+            <title>This is an Instant Article3</title>
+            <link>http://example.com/article.html</link>
+            <guid>2fd4e1c67a2d28fced849ee1bb76e7391b93eb12</guid>
+            <pubDate>2014-12-11T04:44:16Z</pubDate>
+            <author>Mr. Author</author>
+            <description>This is my first Instant Article. How awesome is this?</description>
+            <content:encoded>
+        <![CDATA[
+        <!doctype html>
+        <html lang="en" prefix="op: http://media.facebook.com/op#">
+          <head>
+            <meta charset="utf-8">
+            <link rel="canonical" href="http://example.com/article.html">
+            <meta property="op:markup_version" content="v1.0">
+          </head>
+          <body>
+            <article>
+              <header>
+                <!— Article header goes here -->
+                <!-- The header image shown inside your article --> 
+      <figure data-mode=aspect-fit>
+      <video loop>
+        
+        <source src="http://fb.me/ia-video-ia_b_roll.mov" type="video/mov" />
+     
+        </video>
+      </figure>
+      
+      <!-- The title and subtitle shown in your article -->
+      <h1> Instant Articles </h1>
+       <h2>Get familiar with your new storytelling tools. Make your media come alive, and keep readers coming back for more</h2>
+
+      <!-- A kicker for your article -->
+      <h3 class="op-kicker">
+        Introduction
+      </h3>
+
+      <!-- The author of your article -->
+      <address>
+        Instant Articles Team
+      </address>
+
+      <!-- The published and last modified time stamps -->
+       <time class="op-published" dateTime="2016-2-04T08:00">February 4th 2016, 8:00 AM</time>
+      <time class="op-modified" dateTime="2016-2-04T08:00">February 4th 2016, 8:00 AM</time>
+              </header>
+
+              <!— Article body goes here -->
+<figure class="op-slideshow">
+
+
+<figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-townhouses.jpg"/>
+    <figcaption class="op-vertical-bottom">
+      <h1 class="op-vertical-bottom"> 1/5 </h1> This caption becomes visible once you enter the slideshow by tapping the first image. 
+    <cite class="op-vertical-bottom">Kimson Doan/Unsplash</cite> </figcaption>
+
+ </figure>
+  
+  <figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-grafitti.jpg" />
+    <figcaption class="op-vertical-bottom">
+      <h1 class=op-vertical-bottom> 2/5 </h1> Each photo in a slideshow can have its own caption.
+                <cite class="op-vertical-bottom">Peter Dargatz/Pixabay</cite>
+                </figcaption>
+  </figure>
+  
+  <figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-dancer.jpg" />
+    <figcaption class="op-vertical-bottom">
+      <h1 class="op-vertical-bottom"> 3/5 </h1> This is the third photo of the slideshow.  
+                <cite class="op-vertical-bottom">blanaru/iStock</cite>
+                </figcaption>
+                </figure>
+ <figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-subway_orange.jpg" />
+    <figcaption class="op-vertical-bottom">
+   <h1 class=op-vertical-bottom> 4/5 </h1> The fourth photo of the slideshow.
+                <cite class="op-vertical-bottom">Christian Beirle González/Getty Images </cite>
+            </figcaption>
+  </figure>
+
+  <figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-subway_yellow.jpg" />
+   <figcaption class="op-vertical-bottom">
+      <h1 class=op-vertical-bottom> 5/5 </h1> The fifth photo of the slideshow.
+                <cite class="op-vertical-bottom">Ole Spata/EyeEm</cite>
+                </figcaption>
+  </figure>
+   
+
+  <figcaption>
+    <h1>Slideshow  Example</h1>
+The slideshow caption is visible in-line in the main body of the story. You can also add individual captions for each image in the gallery, which become visible only after entering the slideshow. Tap on the first image to open it.
+  </figcaption>
+
+  </figure>
+  <!-- A map within your article -->
+
+    <figure class="op-map">
+    <figcaption><h1>Map Example</h1>The pin on this map designates Facebook Media Central’s offices in New York City.
+            
+            </figcaption>
+      <script type="application/json" class="op-geotag">  
+        {
+          "type": "Feature",
+          "geometry": 
+            {
+              "type": "Point",
+              "coordinates": [ [40.730852, -73.991364], [40.730852, -73.991364] ]    
+            },    
+          "properties": 
+            {      
+              "title": "770 Broadway, Manhattan, New York",      
+              "radius": 100000,      
+              "pivot": true,      
+              "style": "satellite",
+            }
+        }  
+      </script>
+    </figure>
+              <footer>
+                <!— Article footer goes here -->
+              </footer>
+            </article>
+          </body>
+        </html>
+        ]]>
+            </content:encoded>
+        </item>
+        <item>
+            <title>This is an Instant Article4</title>
+            <link>http://example.com/article.html</link>
+            <guid>2fd4e1c67a2d28fced849ee1bb76e7391b93eb12</guid>
+            <pubDate>2014-12-11T04:44:16Z</pubDate>
+            <author>Mr. Author</author>
+            <description>This is my first Instant Article. How awesome is this?</description>
+            <content:encoded>
+        <![CDATA[
+        <!doctype html>
+        <html lang="en" prefix="op: http://media.facebook.com/op#">
+          <head>
+            <meta charset="utf-8">
+            <link rel="canonical" href="http://example.com/article.html">
+            <meta property="op:markup_version" content="v1.0">
+          </head>
+          <body>
+            <article>
+              <header>
+                <!— Article header goes here -->
+                <!-- The header image shown inside your article --> 
+      <figure data-mode=aspect-fit>
+      <video loop>
+        
+        <source src="http://fb.me/ia-video-ia_b_roll.mov" type="video/mov" />
+     
+        </video>
+      </figure>
+      
+      <!-- The title and subtitle shown in your article -->
+      <h1> Instant Articles </h1>
+       <h2>Get familiar with your new storytelling tools. Make your media come alive, and keep readers coming back for more</h2>
+
+      <!-- A kicker for your article -->
+      <h3 class="op-kicker">
+        Introduction
+      </h3>
+
+      <!-- The author of your article -->
+      <address>
+        Instant Articles Team
+      </address>
+
+      <!-- The published and last modified time stamps -->
+       <time class="op-published" dateTime="2016-2-04T08:00">February 4th 2016, 8:00 AM</time>
+      <time class="op-modified" dateTime="2016-2-04T08:00">February 4th 2016, 8:00 AM</time>
+              </header>
+
+              <!— Article body goes here -->
+<figure class="op-slideshow">
+
+
+<figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-townhouses.jpg"/>
+    <figcaption class="op-vertical-bottom">
+      <h1 class="op-vertical-bottom"> 1/5 </h1> This caption becomes visible once you enter the slideshow by tapping the first image. 
+    <cite class="op-vertical-bottom">Kimson Doan/Unsplash</cite> </figcaption>
+
+ </figure>
+  
+  <figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-grafitti.jpg" />
+    <figcaption class="op-vertical-bottom">
+      <h1 class=op-vertical-bottom> 2/5 </h1> Each photo in a slideshow can have its own caption.
+                <cite class="op-vertical-bottom">Peter Dargatz/Pixabay</cite>
+                </figcaption>
+  </figure>
+  
+  <figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-dancer.jpg" />
+    <figcaption class="op-vertical-bottom">
+      <h1 class="op-vertical-bottom"> 3/5 </h1> This is the third photo of the slideshow.  
+                <cite class="op-vertical-bottom">blanaru/iStock</cite>
+                </figcaption>
+                </figure>
+ <figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-subway_orange.jpg" />
+    <figcaption class="op-vertical-bottom">
+   <h1 class=op-vertical-bottom> 4/5 </h1> The fourth photo of the slideshow.
+                <cite class="op-vertical-bottom">Christian Beirle González/Getty Images </cite>
+            </figcaption>
+  </figure>
+
+  <figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-subway_yellow.jpg" />
+   <figcaption class="op-vertical-bottom">
+      <h1 class=op-vertical-bottom> 5/5 </h1> The fifth photo of the slideshow.
+                <cite class="op-vertical-bottom">Ole Spata/EyeEm</cite>
+                </figcaption>
+  </figure>
+   
+
+  <figcaption>
+    <h1>Slideshow  Example</h1>
+The slideshow caption is visible in-line in the main body of the story. You can also add individual captions for each image in the gallery, which become visible only after entering the slideshow. Tap on the first image to open it.
+  </figcaption>
+
+  </figure>
+  <!-- A map within your article -->
+
+    <figure class="op-map">
+    <figcaption><h1>Map Example</h1>The pin on this map designates Facebook Media Central’s offices in New York City.
+            
+            </figcaption>
+      <script type="application/json" class="op-geotag">  
+        {
+          "type": "Feature",
+          "geometry": 
+            {
+              "type": "Point",
+              "coordinates": [ [40.730852, -73.991364], [40.730852, -73.991364] ]    
+            },    
+          "properties": 
+            {      
+              "title": "770 Broadway, Manhattan, New York",      
+              "radius": 100000,      
+              "pivot": true,      
+              "style": "satellite",
+            }
+        }  
+      </script>
+    </figure>
+              <footer>
+                <!— Article footer goes here -->
+              </footer>
+            </article>
+          </body>
+        </html>
+        ]]>
+            </content:encoded>
+        </item>
+        <item>
+            <title>This is an Instant Article5</title>
+            <link>http://example.com/article.html</link>
+            <guid>2fd4e1c67a2d28fced849ee1bb76e7391b93eb12</guid>
+            <pubDate>2014-12-11T04:44:16Z</pubDate>
+            <author>Mr. Author</author>
+            <description>This is my first Instant Article. How awesome is this?</description>
+            <content:encoded>
+        <![CDATA[
+        <!doctype html>
+        <html lang="en" prefix="op: http://media.facebook.com/op#">
+          <head>
+            <meta charset="utf-8">
+            <link rel="canonical" href="http://example.com/article.html">
+            <meta property="op:markup_version" content="v1.0">
+          </head>
+          <body>
+            <article>
+              <header>
+                <!— Article header goes here -->
+                <!-- The header image shown inside your article --> 
+      <figure data-mode=aspect-fit>
+      <video loop>
+        
+        <source src="http://fb.me/ia-video-ia_b_roll.mov" type="video/mov" />
+     
+        </video>
+      </figure>
+      
+      <!-- The title and subtitle shown in your article -->
+      <h1> Instant Articles </h1>
+       <h2>Get familiar with your new storytelling tools. Make your media come alive, and keep readers coming back for more</h2>
+
+      <!-- A kicker for your article -->
+      <h3 class="op-kicker">
+        Introduction
+      </h3>
+
+      <!-- The author of your article -->
+      <address>
+        Instant Articles Team
+      </address>
+
+      <!-- The published and last modified time stamps -->
+       <time class="op-published" dateTime="2016-2-04T08:00">February 4th 2016, 8:00 AM</time>
+      <time class="op-modified" dateTime="2016-2-04T08:00">February 4th 2016, 8:00 AM</time>
+              </header>
+
+              <!— Article body goes here -->
+<figure class="op-slideshow">
+
+
+<figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-townhouses.jpg"/>
+    <figcaption class="op-vertical-bottom">
+      <h1 class="op-vertical-bottom"> 1/5 </h1> This caption becomes visible once you enter the slideshow by tapping the first image. 
+    <cite class="op-vertical-bottom">Kimson Doan/Unsplash</cite> </figcaption>
+
+ </figure>
+  
+  <figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-grafitti.jpg" />
+    <figcaption class="op-vertical-bottom">
+      <h1 class=op-vertical-bottom> 2/5 </h1> Each photo in a slideshow can have its own caption.
+                <cite class="op-vertical-bottom">Peter Dargatz/Pixabay</cite>
+                </figcaption>
+  </figure>
+  
+  <figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-dancer.jpg" />
+    <figcaption class="op-vertical-bottom">
+      <h1 class="op-vertical-bottom"> 3/5 </h1> This is the third photo of the slideshow.  
+                <cite class="op-vertical-bottom">blanaru/iStock</cite>
+                </figcaption>
+                </figure>
+ <figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-subway_orange.jpg" />
+    <figcaption class="op-vertical-bottom">
+   <h1 class=op-vertical-bottom> 4/5 </h1> The fourth photo of the slideshow.
+                <cite class="op-vertical-bottom">Christian Beirle González/Getty Images </cite>
+            </figcaption>
+  </figure>
+
+  <figure data-feedback="fb:likes,fb:comments">
+    <img src="http://fb.me/ia-img-subway_yellow.jpg" />
+   <figcaption class="op-vertical-bottom">
+      <h1 class=op-vertical-bottom> 5/5 </h1> The fifth photo of the slideshow.
+                <cite class="op-vertical-bottom">Ole Spata/EyeEm</cite>
+                </figcaption>
+  </figure>
+   
+
+  <figcaption>
+    <h1>Slideshow  Example</h1>
+The slideshow caption is visible in-line in the main body of the story. You can also add individual captions for each image in the gallery, which become visible only after entering the slideshow. Tap on the first image to open it.
+  </figcaption>
+
+  </figure>
+  <!-- A map within your article -->
+
+    <figure class="op-map">
+    <figcaption><h1>Map Example</h1>The pin on this map designates Facebook Media Central’s offices in New York City.
+            
+            </figcaption>
+      <script type="application/json" class="op-geotag">  
+        {
+          "type": "Feature",
+          "geometry": 
+            {
+              "type": "Point",
+              "coordinates": [ [40.730852, -73.991364], [40.730852, -73.991364] ]    
+            },    
+          "properties": 
+            {      
+              "title": "770 Broadway, Manhattan, New York",      
+              "radius": 100000,      
+              "pivot": true,      
+              "style": "satellite",
+            }
+        }  
+      </script>
+    </figure>
+              <footer>
+                <!— Article footer goes here -->
+              </footer>
+            </article>
+          </body>
+        </html>
+        ]]>
+            </content:encoded>
+        </item>
+    </channel>
+</rss>

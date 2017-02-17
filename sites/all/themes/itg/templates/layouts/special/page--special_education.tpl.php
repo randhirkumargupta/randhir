@@ -104,7 +104,7 @@ if ($theme != 'itgadmin') {
         </div>      
     </div>    
     <?php endif; ?>
-    <div class="row itg-top-section itg-layout-672 ">
+    <div class="row itg-top-section itg-layout-672 here ">
         <div class="top-block">
         <div class="col-md-8">
             <div class="">

@@ -163,12 +163,27 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
  * @param Array $view
  */
 function itg_front_search_views_pre_render(&$view) {
-  global $base_url;
+ 
+  
   // Add "Create Breaking news" on listing page of Breaking news
   if (isset($view->name) && ($view->name == "front_end_global_search" || $view->name == "archive_story")) {
 
     global $user, $base_url;
-
+    
+    if (isset($view->name) && ($view->name == "front_end_global_search")) {
+      $target = $base_url.'/'.current_path().'?keyword={'.$_GET['keyword'].'}';
+      $markup = array(
+          '#type' => 'markup',
+          '#markup' => '<script type="application/ld+json"> {'
+          . '    "@context": "http://schema.org",    "@type": "WebSite",    "url": "'.$base_url.'",    '
+          . '"potentialAction": {      "@type": "SearchAction",      '
+          . '"target": "'.$target.'",      '
+          . '"query-input": "required name='.$_GET['keyword'].'"    } } '
+          . '</script>',
+      );
+      drupal_add_html_head($markup, 'sd_json');
+    }    
+    
     $settings = array();
     $settings['base_url'] = $base_url;
     $settings['uid'] = $user->uid;

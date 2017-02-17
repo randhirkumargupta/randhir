@@ -568,20 +568,23 @@ function itg_common_custompath_val($pathdata) {
 
 
 
-/** 
+/**
  * Implementing 'itg_common_custompath_insert_load'.
  * @param $node object
  * Creating Custom path alias for story, photogallery and videogallery
  */
 
 function itg_common_custompath_insert_load($node) {
-
+    global $edited_sef_url;
+    
     if (!empty($node->path['alias'])) {
         $path_data = explode("/", $node->path['alias']);
         $set_hierarchy = array_reverse($path_data);
         $alias_set = preg_replace("/[0-9]{4}/", "key-year", $set_hierarchy[0]);
         $sefurl = explode("key-year", $alias_set);
         $node_sef = rtrim($sefurl[0],'-');
+    } else if(!empty ($edited_sef_url)) {
+        $node_sef = $edited_sef_url;
     } else {
         $node_sef = $node->title;
     }
@@ -601,10 +604,6 @@ function itg_common_custompath_insert_load($node) {
       $set_hierarchy = array_reverse($section_hierarchy);
       $pathdata = strtolower(implode("/", $set_hierarchy)) . '/'. $node->type . '/' . trim($node_sef). '-'. $node->nid .'-'. $published_date;
       $newpath = itg_common_custompath_insert_val($pathdata);
-      $conditions = array('source' => 'node/' . $node->nid);
-      $criteria = path_load($conditions);
-      $criteria = array('pid' => $criteria);
-      path_delete($criteria);
       $node->path = array('alias' => $newpath, 'pathauto' => FALSE);
     }
 }

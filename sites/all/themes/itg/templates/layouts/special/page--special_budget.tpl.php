@@ -352,8 +352,8 @@ if (!empty($device[0])) {
 
 
                 <div class="row itg-370-layout">
-<?php if (isset($widget_data['itg-block-7']['widget_name']) || isset($widget_data['itg-block-8']['widget_name']) || isset($widget_data['itg-block-9']['widget_name']) || $theme == 'itgadmin') { ?>
-                      <div class="col-md-4 col-sm-4 mt-50">
+                <?php if (isset($widget_data['itg-block-7']['widget_name']) || isset($widget_data['itg-block-8']['widget_name']) || isset($widget_data['itg-block-9']['widget_name']) || $theme == 'itgadmin') { ?>
+                      <div class="col-md-4 col-sm-6 col-xs-12 mt-50">
                           <div class="itg-widget">
                               <div class="droppable <?php print $gray_bg_layout; ?>">
                                   <div class="widget-wrapper <?php print $widget_data['itg-block-7']['widget_name']; ?>">
@@ -378,7 +378,7 @@ if (!empty($device[0])) {
                               </div>
                           </div>
                       </div>
-                      <div class="col-md-4 col-sm-4 mt-50">
+                      <div class="col-md-4 col-sm-6 col-xs-12 mt-50">
                           <div class="itg-widget">
                               <div class="droppable <?php print $gray_bg_layout; ?>">
                                   <div class="widget-wrapper <?php print $widget_data['itg-block-8']['widget_name']; ?>">
@@ -403,7 +403,7 @@ if (!empty($device[0])) {
                               </div>
                           </div>
                       </div>
-                      <div class="col-md-4 col-sm-4 mt-50">
+                      <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
                           <div class="itg-widget">
                               <div class="droppable <?php print $gray_bg_layout; ?>">
                                   <div class="widget-wrapper <?php print $widget_data['itg-block-9']['widget_name']; ?>">
@@ -428,8 +428,7 @@ if (!empty($device[0])) {
                               </div>
                           </div>
                       </div>
-
-<?php } ?>
+                <?php } ?>
                 </div>
 
 
@@ -438,7 +437,7 @@ if (!empty($device[0])) {
                       <div class="col-md-8 mt-50">
                           <div class="row">
                             <?php if($_GET['type'] != 'budget-predictor') { ?>  
-                              <div class="col-md-12 m-bottom40">
+                              <div class="col-md-12 col-sm-6 col-xs-12 m-bottom40">
                                   <div class="itg-widget itg-widget-parent">
                                       <div class="droppable <?php print $gray_bg_layout; ?>">
                                           <div class="widget-wrapper <?php print $widget_data['itg-block-10']['widget_name']; ?>">
@@ -464,7 +463,7 @@ if (!empty($device[0])) {
                                   </div>
                               </div>
                             <?php } ?>  
-                              <div class="col-md-12">
+                              <div class="col-md-12 col-sm-6 col-xs-12">
                                   <div class="itg-widget itg-widget-child">
                                       <div class="droppable <?php print $gray_bg_layout; ?>">
                                           <div class="widget-wrapper <?php print $widget_data['itg-block-11']['widget_name']; ?>">
@@ -548,7 +547,7 @@ if (!empty($device[0])) {
                       <div class="col-md-4 mt-50">
 
                           <div class="row">
-                              <div class="col-md-12">                    
+                              <div class="col-md-12 col-sm-6 col-xs-12">                    
                                   <div class="itg-widget-parent">
                                       <div class="itg-widget">
                                           <div class="ad-widget">
@@ -564,7 +563,7 @@ if (!empty($device[0])) {
                                   </div>                    
                               </div>
 
-                              <div class="col-md-12 mt-50">
+                              <div class="col-md-12 col-sm-6 col-xs-12 mt-50 ipad-space">
                                   <div class="itg-widget itg-widget-child">
                                       <div class="droppable <?php print $gray_bg_layout; ?>">
                                           <div class="widget-wrapper <?php print $widget_data['itg-block-15']['widget_name']; ?>">

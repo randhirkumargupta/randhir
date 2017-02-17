@@ -1798,6 +1798,10 @@ footer .multiple-items-footer i.slick-next {
 .trending-videos li + li {
   border-top: 1px solid #dddddd;
 }
+.trending-videos li .detail {
+  overflow: hidden;
+  display: block;
+}
 
 /*End CSS trending-videos Home  page*/
 /*Start Search page css*/
@@ -2611,6 +2615,10 @@ footer .multiple-items-footer i.slick-next {
 .story-section .story-right.photo-story .multiple-photo {
   padding: 0 50px;
 }
+.story-section .story-right.photo-story .multiple-photo .photo-slider {
+  padding: 0 5px;
+  cursor: pointer;
+}
 .story-section .story-right.photo-story .multiple-photo .slick-prev, .story-section .story-right.photo-story .multiple-photo .slick-next {
   background: transparent;
   border: none;
@@ -2633,10 +2641,7 @@ footer .multiple-items-footer i.slick-next {
   display: inline-block;
   vertical-align: top;
   position: relative;
-}
-.story-section .story-right.photo-story .multiple-photo .img-wrapper img {
-  width: 120px;
-  height: 90px;
+  border: 1px solid transparent;
 }
 .story-section .story-right.photo-story .multiple-photo .img-wrapper .photo-count {
   font-style: normal;
@@ -2648,7 +2653,10 @@ footer .multiple-items-footer i.slick-next {
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
   text-align: center;
-  line-height: 90px;
+  line-height: 64px;
+}
+.story-section .story-right.photo-story .multiple-photo .slick-current .img-wrapper {
+  border: 1px solid #ffc106;
 }
 .story-section .snap-post {
   padding: 20px 20px 20px 70px;
@@ -5867,6 +5875,7 @@ h1.category-heading {
   font-size: 0.9375rem;
   line-height: 20px;
   margin-bottom: 10px;
+  word-wrap: break-word;
 }
 .view-archive-story .view-content .search-detail h2 a {
   font-size: 15px;
@@ -9775,17 +9784,20 @@ section.sidebar .block-itg-ads {
   width: 100% !important;
   height: 100% !important;
 }
+.budget-page-layout .video-wrapper {
+  padding-bottom: 70%;
+}
 .budget-page-layout .common-highlights {
   overflow: auto;
   height: 285px;
 }
 .budget-page-layout .special-top-bg {
   background: #fbfbfb;
-  height: 530px;
+  overflow: auto;
+  height: 100%;
 }
 .budget-page-layout .auto-block-2 {
   height: 490px;
-  overflow: auto;
 }
 .budget-page-layout .auto-block-2 .special-top-news .itg-listing {
   border: none;
@@ -12507,11 +12519,24 @@ span.smilies-title img {
 }
 
 /*css end for emoji*/
-.front-end-breadcrumb {
+/*css breadcrumb start*/
+#block-itg-layout-manager-front-end-breadcrumb {
   position: relative;
   z-index: 9999;
+  color: #a1a1a1;
+  font-family: roboto;
+  padding-top: 15px;
+}
+#block-itg-layout-manager-front-end-breadcrumb a {
+  color: #a1a1a1;
+  font-family: roboto;
 }
 
+.node-type-photogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-videogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-podcast #block-itg-layout-manager-front-end-breadcrumb, .section-videos #block-itg-layout-manager-front-end-breadcrumb {
+  background: #171717;
+}
+
+/*css breadcrumb end*/
 iframe[id*="twitter-widget"] {
   width: 100% !important;
 }
