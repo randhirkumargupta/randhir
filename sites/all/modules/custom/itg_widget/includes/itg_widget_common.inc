@@ -155,6 +155,18 @@ function itg_widgets_custom_variables() {
         '#default_value' => variable_get('city_manager_vid'),
         '#size' => 20,
     );
+    $form['reporter_tid'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Reporter Vid'),
+        '#default_value' => variable_get('reporter_tid'),
+        '#size' => 20,
+    );
+    $form['anchor_tid'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Anchor Vid'),
+        '#default_value' => variable_get('anchor_tid'),
+        '#size' => 20,
+    );
     return system_settings_form($form);
 }
 

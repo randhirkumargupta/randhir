@@ -345,8 +345,7 @@ ul.pager{
     @extend .vtop;
     margin: 0 5px;
     &.pager-current{
-      height: 20px;
-      width: 20px;
+      padding: 0 5px;
       border: 1px solid #1fb5ad;
       background-color: #1fb5ad;
       color: #fff;
@@ -355,8 +354,7 @@ ul.pager{
       a{
         border: 1px solid #1fb5ad;
         display: block;
-        height: 20px;
-        width: 20px;
+        padding: 0 5px;
         color: #1fb5ad;
         &:hover{
           background-color: #1fb5ad;
@@ -8755,7 +8753,7 @@ div.node{
     } 
   }
 }
-
+.page-menu-manager-third .view .view-filters .views-exposed-form .views-exposed-widget{width: auto; padding-right: 0;}
 [id*="views-exposed-form-menu-manager-menu-manager-page"]{
   .views-submit-button{
     .form-type-select{
@@ -8767,6 +8765,11 @@ div.node{
       margin-top: 26px !important;
     }
   }
+  .third-label-menu-section, .third-label-menu-term{
+    @extend .fleft;
+    width: 200px;
+  }
+  .third-label-menu-section{margin-right: 10px;}
 }
 [id*="comment-global-config"]{
   .form-submit{
@@ -9389,6 +9392,7 @@ div.node{
   thead{
     display: none;        
   }
+  tbody{overflow: visible;}
   + div.clearfix{
     bottom: 10px;
     right: 20px;    
@@ -9399,7 +9403,9 @@ div.node{
     margin: 10px 10px 0;
     &:first-child{margin-top: 0;}
     td:nth-child(2){
-      display: block;
+      overflow: visible;
+      display: inline-block;
+      vertical-align: top;
       border:none;
       @extend .of-hide;
       padding-bottom: 0;
@@ -9902,9 +9908,9 @@ div.node{
   }
 } 
 .messages em{font-weight: 600;}
-.node-type-videogallery [id*="field-video-upload-values"]{
+.page-node-add-videogallery [id*="field-video-upload-values"]{
   tbody{
-    tr:first-child{display: block !important;}
+    tr:first-child{display: none !important;}
   }
 }
 span.file a{pointer-events: none; color: #2f2f2f;}
@@ -10377,6 +10383,114 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       position: absolute;
       left: 100%;
       top: -8px;
+    }
+  }
+}
+@each $num in one, two, three, four, five, six {
+  #edit-lrp-gold-star-#{$num}-icon-fieldset{
+    @extend .pos-rel;
+    border: none;
+    #edit-lrp-gold-star-#{$num}-icon-ajax-wrapper{
+      .form-type-managed-file{
+        .form-managed-file{
+          .form-file, .form-submit[value="Upload"]{
+            @extend .hide;
+          }
+        }
+      }
+    }
+    .div_lrp_gold_star_#{$num}_icon{
+      position: absolute;
+      bottom: 5px;
+      left: 330px;
+      z-index: 9;
+      a{
+        background-color: #fff;
+        border: 1px solid #d9d9d9;
+        border-radius: 5px;
+        color: #2f2f2f;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 300;
+        height: 28px;
+        line-height: 26px;
+        text-align: center;
+        width: 134px;
+        display: inline-block;
+        vertical-align: top;
+      }
+    }
+  }
+}
+[id*="itg-user-block-api-form"]{
+  @extend .dib;
+  @extend .vtop;
+  @extend .full;
+  .form-item-email, .form-item-items-per-page{
+    float: left;
+    margin: 0 10px 0 0;
+    padding: 0;
+    .form-text, .form-select{width: 100%;}
+    > label{float: none; display: block; width: auto;}
+  }
+  .form-item-email{width: 300px;}
+  .form-item-items-per-page{width: 100px;}
+  .user-log-filter-btn{
+    display: inline-block; 
+    vertical-align: top; 
+    margin-top: 28px;
+    .user-block-apply{@extend .btn-small;}
+    .user-log-reset{@extend .btn-reset; @extend .btn-small;}
+  }
+  .right-button{text-align: right;}
+}
+.photo-story-img.multiple-photo-disc{
+    padding: 10px 35px 0;
+    position: relative;
+    .slick-arrow{
+      position: absolute;
+      top: 40%;
+      font-size: 32px;
+      &.fa-chevron-left{
+        left: 0%;
+      }
+      &.fa-chevron-right{
+        right: 0%;
+      }
+    }
+    div.description{
+      padding-top: 10px;
+      font-size: 14px;
+      word-wrap: break-word;
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
+      position: static;
+      max-width: 100%;
+      color: #000;
+    }
+}
+[id*="third-party-coupon-form"]{
+  fieldset{border: none; padding: 10px 30px;}
+  .form-type-file{
+    margin: 10px 0;
+    > label{
+      width: 220px;
+      float: left;
+      padding: 5px 0;
+    }
+  }
+  [id*="edit-submit-button"]{margin-left: 220px;}
+}
+.node-coupon-form{
+  .form-field-name-field-coupon-allow-min-cart-amt{
+    .form-type-checkbox{
+      margin: 10px 0;
+      padding: 0 30px;
+      > label{
+        float: left;
+        width: 220px;
+      }
     }
   }
 }

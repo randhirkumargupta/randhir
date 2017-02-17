@@ -55,15 +55,17 @@
                                 print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image237x133.jpg' alt='' />";
                             }
                             ?>
-                            <h3><?php //echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h3>
-                            <?php
-                            if (function_exists('itg_common_get_smiley_title')) {
-                                echo l(itg_common_get_smiley_title($row['nid'], 0, 60), "node/" . $row['nid'], array("html" => TRUE));
-                            }
-                            else {
-                                echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), "node/" . $row['nid']);
-                            }
-                            ?>
+                            <h3>
+                                <?php //echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
+                                <?php
+                                    if (function_exists('itg_common_get_smiley_title')) {
+                                        echo l(itg_common_get_smiley_title($row['nid'], 0, 60), "node/" . $row['nid'], array("html" => TRUE));
+                                    }
+                                    else {
+                                        echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), "node/" . $row['nid']);
+                                    }
+                                ?>
+                            </h3>                            
                         </div>
 
     <?php } ?>
