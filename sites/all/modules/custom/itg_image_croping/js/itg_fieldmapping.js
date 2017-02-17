@@ -1,5 +1,3 @@
-
-
 /*
  * @file itg_field_mapping.js
  * Contains all the functionality of mapping image to field 
