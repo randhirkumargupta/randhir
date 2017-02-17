@@ -3278,7 +3278,7 @@ body{
   }
   #block-itg-front-end-common-related-photo-block #related-photo ul li a, 
   #block-itg-front-end-common-related-video-block #related-photo ul li a,
-  .featured-news .featured-post a, 
+  .featured-news .featured-post > a, 
   .dm-pic a,
   .top-takes-list a,
   .trending-videos-list a,
@@ -3286,7 +3286,7 @@ body{
   .may-we-suggest > a,
   .watch-right-now-list > a,
   .recom-listing .pic a,
-  .section-ordering a{
+  .section-ordering > a{
     @extend .zoom-image;
   }
   .social-nav li{

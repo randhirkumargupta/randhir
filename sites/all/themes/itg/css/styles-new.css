@@ -3354,7 +3354,7 @@ body .program-livetv.effect-added .light-on-text {
 @media all and (min-width: 1025px) {
   .zoom-image, #block-itg-front-end-common-related-photo-block #related-photo ul li a,
   #block-itg-front-end-common-related-video-block #related-photo ul li a,
-  .featured-news .featured-post a,
+  .featured-news .featured-post > a,
   .dm-pic a,
   .top-takes-list a,
   .trending-videos-list a,
@@ -3362,13 +3362,13 @@ body .program-livetv.effect-added .light-on-text {
   .may-we-suggest > a,
   .watch-right-now-list > a,
   .recom-listing .pic a,
-  .section-ordering a {
+  .section-ordering > a {
     overflow: hidden;
     display: block;
   }
   .zoom-image img, #block-itg-front-end-common-related-photo-block #related-photo ul li a img,
   #block-itg-front-end-common-related-video-block #related-photo ul li a img,
-  .featured-news .featured-post a img,
+  .featured-news .featured-post > a img,
   .dm-pic a img,
   .top-takes-list a img,
   .trending-videos-list a img,
@@ -3376,12 +3376,12 @@ body .program-livetv.effect-added .light-on-text {
   .may-we-suggest > a img,
   .watch-right-now-list > a img,
   .recom-listing .pic a img,
-  .section-ordering a img {
+  .section-ordering > a img {
     transition: all 500ms ease 0s;
   }
   .zoom-image img:hover, #block-itg-front-end-common-related-photo-block #related-photo ul li a img:hover,
   #block-itg-front-end-common-related-video-block #related-photo ul li a img:hover,
-  .featured-news .featured-post a img:hover,
+  .featured-news .featured-post > a img:hover,
   .dm-pic a img:hover,
   .top-takes-list a img:hover,
   .trending-videos-list a img:hover,
@@ -3389,7 +3389,7 @@ body .program-livetv.effect-added .light-on-text {
   .may-we-suggest > a img:hover,
   .watch-right-now-list > a img:hover,
   .recom-listing .pic a img:hover,
-  .section-ordering a img:hover {
+  .section-ordering > a img:hover {
     transform: scale(1.2);
   }
 

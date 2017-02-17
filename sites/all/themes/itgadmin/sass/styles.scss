@@ -2772,26 +2772,37 @@ div.node{
         .fa{
           font-size: 34px;
           line-height: 36px;
-          opacity: .7;
           cursor: pointer;
         }
         .form-checkbox{
           opacity: 0;
           &+label{
-            .fa-facebook-square{
-              color: #3b5998;
+            .fa-facebook-square, .fa-twitter-square, .fa-instagram{
+              color: #888;
+              text-shadow: 0px 1px 1px #666;
             }
-            .fa-twitter-square{
-              color: #1da1f2;
-            }
-            .fa-instagram-square{
-              color: #000;
+            &:hover{
+              .fa-facebook-square{
+                color: #3b5998;
+              }
+              .fa-twitter-square{
+                color: #1da1f2;
+              }
+              .fa-instagram{
+                color: #000;
+              }
             }
           }
           &:checked{
             &+label{
-              .fa{
-                opacity: 1;
+              .fa-facebook-square{
+                color: #3b5998;
+              }
+              .fa-twitter-square{
+                color: #1da1f2;
+              }
+              .fa-instagram{
+                color: #000;
               }
             }
           }
@@ -8753,7 +8764,7 @@ div.node{
     } 
   }
 }
-.page-menu-manager-third .view .view-filters .views-exposed-form .views-exposed-widget{width: auto; padding-right: 0;}
+.page-menu-manager-third .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-tid{width: auto; padding-right: 0;}
 [id*="views-exposed-form-menu-manager-menu-manager-page"]{
   .views-submit-button{
     .form-type-select{
@@ -9406,6 +9417,7 @@ div.node{
       overflow: visible;
       display: inline-block;
       vertical-align: top;
+      width: 100%;
       border:none;
       @extend .of-hide;
       padding-bottom: 0;
