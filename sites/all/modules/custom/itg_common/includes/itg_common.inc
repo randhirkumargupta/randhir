@@ -509,7 +509,7 @@ function itg_common_get_latest_byline($nid, $status) {
  */
 
 function itg_common_custompath_load($node) {
-
+if(!empty($node->nid)){
     global $edited_sef_url;
     if (!empty($node->path['alias'])) {
       $path_data = explode("/", $node->path['alias']);
@@ -542,6 +542,7 @@ function itg_common_custompath_load($node) {
       path_delete($criteria);
       $node->path = array('alias' => $newpath, 'pathauto' => FALSE);
     }
+}
 }
 
 /** 

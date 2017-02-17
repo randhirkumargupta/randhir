@@ -210,9 +210,12 @@ function itg_get_byline_row($uniqueid) {
  * {@inheritdoc}
  */
 function itg_story_node_insert($node) {
-  if ($node->type == 'story') {
+  if ($node->type == 'story' && !empty($node->type)) {
     $nid = $node->nid;
-    $unique_id = $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'];
+    $unique_id = '';
+    if(!empty($node->field_reporter_unique_id[LANGUAGE_NONE])){
+      $unique_id = $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'];
+    }
     $row_count = itg_get_byline_row($unique_id);
     if (!empty($row_count)) {
       foreach ($row_count as $id) {
@@ -228,7 +231,7 @@ function itg_story_node_insert($node) {
       itg_byline_order_update($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'], $nid);
     }
 
-    unset($_SESSION['unique']);
+    //unset($_SESSION['unique']);
   }
 }
 
