@@ -913,8 +913,7 @@ ul.pager li {
   margin: 0 5px;
 }
 ul.pager li.pager-current {
-  height: 20px;
-  width: 20px;
+  padding: 0 5px;
   border: 1px solid #1fb5ad;
   background-color: #1fb5ad;
   color: #fff;
@@ -922,8 +921,7 @@ ul.pager li.pager-current {
 ul.pager li.pager-item a {
   border: 1px solid #1fb5ad;
   display: block;
-  height: 20px;
-  width: 20px;
+  padding: 0 5px;
   color: #1fb5ad;
 }
 ul.pager li.pager-item a:hover {
@@ -10343,8 +10341,8 @@ div.node #comments h2 {
   font-weight: 600;
 }
 
-.node-type-videogallery [id*="field-video-upload-values"] tbody tr:first-child {
-  display: block !important;
+.page-node-add-videogallery [id*="field-video-upload-values"] tbody tr:first-child {
+  display: none !important;
 }
 
 span.file a {
@@ -10992,4 +10990,29 @@ span.file a {
   position: static;
   max-width: 100%;
   color: #000;
+}
+
+[id*="third-party-coupon-form"] fieldset {
+  border: none;
+  padding: 10px 30px;
+}
+[id*="third-party-coupon-form"] .form-type-file {
+  margin: 10px 0;
+}
+[id*="third-party-coupon-form"] .form-type-file > label {
+  width: 220px;
+  float: left;
+  padding: 5px 0;
+}
+[id*="third-party-coupon-form"] [id*="edit-submit-button"] {
+  margin-left: 220px;
+}
+
+.node-coupon-form .form-field-name-field-coupon-allow-min-cart-amt .form-type-checkbox {
+  margin: 10px 0;
+  padding: 0 30px;
+}
+.node-coupon-form .form-field-name-field-coupon-allow-min-cart-amt .form-type-checkbox > label {
+  float: left;
+  width: 220px;
 }

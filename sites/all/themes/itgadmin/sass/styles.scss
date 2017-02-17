@@ -345,8 +345,7 @@ ul.pager{
     @extend .vtop;
     margin: 0 5px;
     &.pager-current{
-      height: 20px;
-      width: 20px;
+      padding: 0 5px;
       border: 1px solid #1fb5ad;
       background-color: #1fb5ad;
       color: #fff;
@@ -355,8 +354,7 @@ ul.pager{
       a{
         border: 1px solid #1fb5ad;
         display: block;
-        height: 20px;
-        width: 20px;
+        padding: 0 5px;
         color: #1fb5ad;
         &:hover{
           background-color: #1fb5ad;
@@ -9910,9 +9908,9 @@ div.node{
   }
 } 
 .messages em{font-weight: 600;}
-.node-type-videogallery [id*="field-video-upload-values"]{
+.page-node-add-videogallery [id*="field-video-upload-values"]{
   tbody{
-    tr:first-child{display: block !important;}
+    tr:first-child{display: none !important;}
   }
 }
 span.file a{pointer-events: none; color: #2f2f2f;}
@@ -10471,4 +10469,28 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       max-width: 100%;
       color: #000;
     }
+}
+[id*="third-party-coupon-form"]{
+  fieldset{border: none; padding: 10px 30px;}
+  .form-type-file{
+    margin: 10px 0;
+    > label{
+      width: 220px;
+      float: left;
+      padding: 5px 0;
+    }
+  }
+  [id*="edit-submit-button"]{margin-left: 220px;}
+}
+.node-coupon-form{
+  .form-field-name-field-coupon-allow-min-cart-amt{
+    .form-type-checkbox{
+      margin: 10px 0;
+      padding: 0 30px;
+      > label{
+        float: left;
+        width: 220px;
+      }
+    }
+  }
 }
