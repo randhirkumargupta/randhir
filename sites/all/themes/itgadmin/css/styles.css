@@ -11026,3 +11026,7 @@ span.file a {
   float: left;
   width: 220px;
 }
+
+.widget-wrapper .data-holder .block-itg-widget > div.flexslider {
+  overflow: visible !important;
+}
