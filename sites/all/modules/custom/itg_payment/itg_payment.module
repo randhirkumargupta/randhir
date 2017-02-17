@@ -359,7 +359,7 @@ function itg_payment_checkout() {
       break;
 
     case 'billdesk':
-        return drupal_get_form('itg_payment_billdesk_order_form');
+      return drupal_get_form('itg_payment_billdesk_order_form');
       break;
 
     case 'icici':
@@ -408,26 +408,36 @@ function itg_payment_get_coupon_details_json($coupon_code) {
   }
 }
 
-
 /**
  * Ask for Billdesk redirect form.
  */
 function itg_payment_billdesk_order_form($form, &$form_state) {
   global $base_url;
-  $amount = 100.00;
+  $amount = 2.00;
   $amount = number_format($amount, 2, '.', '');
   // Build the data array that will be translated into hidden form values.
   $merchant_id = ITG_BILLDESK_MERCHANT_ID;
   $checksumkey = ITG_BILLDESK_CHECKSUM;
   $security_id = ITG_BILLDESK_SECURITY_KEY;
   $bdposturl = ITG_BILLDESK_POST_URL;
-  $order_id = "ODR-" . time() . rand(0,100);
-  $value = $merchant_id . '|100000009|NA|' . $amount . '|NA|NA|NA|INR|NA|R|' . $security_id . '|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . $base_url . '/itg_billdesk_payment_success/' . $order_id;
+  $order_id = "ODR-" . time() . rand(0, 100);
+  //$value = $merchant_id . '|100000009|NA|' . $amount . '|NA|NA|NA|INR|NA|R|' . $security_id . '|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . $base_url . '/itg_billdesk_payment_success/' . $order_id;
   // Generate Checksum.
-  $newdatawithchecksumkey = $value . "|" . $checksumkey;
-  $checksum = crc32($newdatawithchecksumkey);
+
+  $value = $merchant_id . '|100000009|NA|' . $amount . '|NA|NA|NA|INR|NA|R|' . $security_id . '|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . $base_url . '/itg_billdesk_payment_success';
+
+//  $newdatawithchecksumkey = $value . "|" . $checksumkey;
+//  $checksum = crc32($newdatawithchecksumkey);
+//  $datawithchecksumvalue = $value . "|" . $checksum;
+//  $msg = $datawithchecksumvalue;
+  $common_string = $security_id;
+
+  $string_new = $value . "|" . $common_string;
+  $checksum = crc32($string_new);
   $datawithchecksumvalue = $value . "|" . $checksum;
   $msg = $datawithchecksumvalue;
+
+
   // Put the msg on a form.
   $form['msg'] = array(
     '#type' => 'hidden',
@@ -466,11 +476,12 @@ function itg_billdesk_payment_success_page() {
     }
     // Payment Success transactions for BillDesk.
     elseif (($values['24'] == 'Completed successfully.') || ($values['24'] == 'PGS10001-Success') || ($values[14] == '0300')) {
-    // payment success code needs to put here for database update.
+      // payment success code needs to put here for database update.
       drupal_set_message(t('Transaction successfully Completed'), 'success');
     }
   }
 }
+
 
 function itg_payment_response_fail() {
   return theme("itg_payment_response_fail");
