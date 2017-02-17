@@ -47,24 +47,31 @@ jQuery (document).ready (function () {
   var get_id = jQuery(this).attr("id");
   var n = get_id.indexOf("emoji-condition-und");
   if(n>0) {
-    var radioButtonValue = jQuery(this).filter(":checked  ").val();
+    var radioButtonValue = jQuery(this).filter(":checked").val();
       if(radioButtonValue == 1) {
         jQuery(this).parent().parent().parent().parent().nextAll("div").show();
       }
       if(radioButtonValue == 0) {
         jQuery(this).parent().parent().parent().parent().nextAll("div").hide();
       }
+      if(radioButtonValue == "none") {
+        jQuery(this).parent().parent().parent().parent().nextAll("div").hide();
+      }
   }
   });
+  
   jQuery(".form-radio").each( function(){
   var get_id = jQuery(this).attr("id");
   var n = get_id.indexOf("emoji-condition-und");
   if(n>0) {
-    var radioButtonValue = jQuery(this).filter(":checked  ").val();
+      var radioButtonValue = jQuery(this).filter(":checked").val();
       if(radioButtonValue == 1) {
         jQuery(this).parent().parent().parent().parent().nextAll("div").show();
       }
       if(radioButtonValue == 0) {
+        jQuery(this).parent().parent().parent().parent().nextAll("div").hide();
+      }
+      if(radioButtonValue == "none") {
         jQuery(this).parent().parent().parent().parent().nextAll("div").hide();
       }
   }
@@ -80,6 +87,9 @@ function hightlights_show_fields (number_of_tr) {
     }
     if (field_highlights == 0) {
       jQuery('input[name="field_highlights[und][' + i + '][field_emoji_condition][und]"]').parent().parent().parent().parent().nextAll("div").hide();
+    }
+    if (field_highlights == "none") {
+        jQuery('input[name="field_highlights[und][' + i + '][field_emoji_condition][und]"]').parent().parent().parent().parent().nextAll("div").hide();
     }
   }
 }

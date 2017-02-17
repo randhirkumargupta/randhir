@@ -65,7 +65,7 @@ else {
       <?php print render($block['content']); ?> 
     </li>
     <li><a href="javascript:void(0)" class="search-icon" title=""><i class="fa fa-search"></i></a></li>
-    <li><a href="javascript:void(0)" class="live-tv" title=""><img src="<?php print base_path() ?>sites/all/themes/itg/images/live-tv-icon.png" alt="Live Tv" /></a></li> 
+    <li><a href="<?php print base_path() ?>livetv" class="live-tv" title=""><img src="<?php print base_path() ?>sites/all/themes/itg/images/live-tv-icon.png" alt="Live Tv" /></a></li> 
   </ul>
   <div class="globle-search">
     <input class="search-text" placeholder="Type here" type="text" value=""></div>
@@ -85,8 +85,8 @@ else {
   <div class="container top-nav">                  
     <div class="social-nav mhide">
       <ul class="social-nav mhide">
-        <li><a href="#" title=""><i class="fa fa-facebook"></i></a></li>
-        <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://www.facebook.com/IndiaToday/" class="user-activity def-cur-pointer" rel="1" data-tag="homepage" data-activity="fb_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="https://twitter.com/indiatoday" class="user-activity def-cur-pointer" rel="1" data-tag="homepage" data-activity="twitter_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-twitter"></i></a></li>
         <li><a href="#" title=""><i class="fa fa-google-plus"></i></a></li>
         <li><a href="#" title=""><i class="fa fa-rss"></i></a></li>
         <li><a href="#" title=""><i class="fa fa-mobile"></i></a></li>
@@ -104,37 +104,37 @@ else {
     <div class="container">
       <ul class="second-level-menu menu">
         <?php
-        $menu_manager = $data['menu_manager'];
+        $menu_manager = !empty($data['menu_manager']) ? $data['menu_manager'] : '';
         // Contion to check fucntion isset.
         $load_parent = (null != arg(2)) ? taxonomy_get_parents(arg(2)) : array();
-        foreach ($menu_manager as $key => $menu_data) :
-          ?>
-          <?php
-          if (function_exists('itg_menu_manager_get_menu')) {
-            // Logic to exclude inactive category.
-            if (!empty($menu_data['term_load'])) {
-              $category_manager_tid = $menu_data['term_load']->tid;
-              $term_state = itg_category_manager_term_state($category_manager_tid);
-              if($term_state == 0) {
-                continue;
+        if (!empty($menu_manager)) {
+          foreach ($menu_manager as $key => $menu_data) :         
+            if (function_exists('itg_menu_manager_get_menu')) {
+              // Logic to exclude inactive category.
+              if (!empty($menu_data['term_load'])) {
+                $category_manager_tid = $menu_data['term_load']->tid;
+                $term_state = itg_category_manager_term_state($category_manager_tid);
+                if($term_state == 0) {
+                  continue;
+                }
               }
+
+              $menu_link_data = itg_menu_manager_get_menu($menu_data, arg(), $load_parent);
+              $image_class = $menu_link_data['image_class'];
+              $link_text = $menu_link_data['link_text'];
+              $link_url = $menu_link_data['link_url'];
+              $target = $menu_link_data['target'];
+              $active = $menu_link_data['active'];
+              $sponsored_class = $menu_link_data['sponsored_class'];
+              $parent_class = $menu_link_data['parent_class'];
+              $active_cls = $menu_link_data['active_cls'];
+              $url_type = $menu_link_data['url_type'];
+              ?>
+              <li class="<?php print $image_class; ?>"><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)))); ?></li>
+              <?php
             }
-            
-            $menu_link_data = itg_menu_manager_get_menu($menu_data, arg(), $load_parent);
-            $image_class = $menu_link_data['image_class'];
-            $link_text = $menu_link_data['link_text'];
-            $link_url = $menu_link_data['link_url'];
-            $target = $menu_link_data['target'];
-            $active = $menu_link_data['active'];
-            $sponsored_class = $menu_link_data['sponsored_class'];
-            $parent_class = $menu_link_data['parent_class'];
-            $active_cls = $menu_link_data['active_cls'];
-            $url_type = $menu_link_data['url_type'];
-            ?>
-            <li class="<?php print $image_class; ?>"><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)))); ?></li>
-            <?php
-          }
-        endforeach;
+          endforeach;
+        }
         ?>
       </ul>
       <?php //print drupal_render($data['itg_main_manu_header']);    ?>            

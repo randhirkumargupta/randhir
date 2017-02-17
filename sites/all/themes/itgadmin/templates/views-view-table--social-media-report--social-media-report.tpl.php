@@ -1,4 +1,5 @@
 <?php
+global $base_url;
 /**
  * @file
  * Template to display a view as a table.
@@ -86,19 +87,14 @@
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
         chart.draw(data, options);
       }
+     
     </script>
 <div id="piechart" style="width: 900px; height: 500px;"></div>
-
-     <input type="button" value="Print Div Contents" id="btnPrint" />
-     <style>@media print {
+<?php $query_parameters = $_SERVER['QUERY_STRING'];
+?>
+<!--     <input type="button" value="PDF" id="btnPrint" />-->
+<a href="javascript:void(0)" href-data="<?php echo $base_url.'/social-media-report-pdf?'.$query_parameters.'';?>" id="download-pdf-sm" class="btn-submit social-media-pdf-btn">Download PDF</a>
+     
   
-  #btnPrint{
-    visibility: hidden;
-  }
- 
-}
-         
-     </style>

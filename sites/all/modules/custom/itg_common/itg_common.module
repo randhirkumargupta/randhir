@@ -16,15 +16,14 @@ module_load_include('inc', 'itg_common', 'includes/itg_common');
  * Implements hook_init.
  * {@inheritdoc}
  */
-function itg_common_init() {  
-
+function itg_common_init() {
   global $user, $base_url, $theme;
   
   //code for multidomain
   if (arg(0) != 'user' && $base_url == BACKEND_URL && ($user->uid == 0 || array_key_exists(FRONT_USER, $user->roles))) {    
     drupal_goto('user');
   }
-
+  
   if ($theme == 'itgadmin') {
     $settings = array();
     $settings['base_url'] = $base_url;
@@ -55,7 +54,12 @@ function itg_common_menu() {
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
-
+  
+  //code for preview_changes button remove
+  if (!empty($form['actions']['preview_changes'])) {
+    unset($form['actions']['preview_changes']);
+  }
+  
   if (arg(0) == 'user' && empty($user->uid)) {
     drupal_add_js('jQuery(document).ready(function() {
                           jQuery("#skip-link").hide();                                      
@@ -201,9 +205,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     $emoji3_src = $base_url . "/" . drupal_get_path('theme', 'itgadmin') . "/images/highlights_icons/WGMF.png";
     foreach($form['field_highlights']['und'] as $key => $value){
       if(is_numeric($key)){
-        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_1']['und']['#title'] = "<img title='Oh No!' src='" . $emoji1_src . "' alt='' />";
-        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_2']['und']['#title'] = "<img title='Oh No!' src='" . $emoji2_src . "' alt='' >";
-        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_3']['und']['#title'] = "<img title='Oh No!' src='" . $emoji3_src . "' alt='' >";
+        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_1']['und']['#title'] = "<img  src='" . $emoji1_src . "' alt='' />";
+        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_2']['und']['#title'] = "<img  src='" . $emoji2_src . "' alt='' >";
+        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_3']['und']['#title'] = "<img  src='" . $emoji3_src . "' alt='' >";
       }
     }
   }
@@ -354,11 +358,23 @@ function itg_common_date_popup_process_alter(&$element, &$form_state, &$context)
   }
 }
 
+
+
+
+
+
+
+
 /**
  * Implementation of hook_node_presave().
  * @param object $node
  */
+
+
+
 function itg_common_node_presave($node) {
+  global $ctype_array;
+  $ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
   switch ($node->type) {
     case 'astro':
     case 'recipe':
@@ -373,8 +389,40 @@ function itg_common_node_presave($node) {
       elseif ($node->op == 'Save as Draft' || $node->status == 0) {
         $node->status = 0;
       }
+        
+  }
+
+}
+
+
+/**
+ * Implementation of hook_node_insert().
+ * @param object $node
+ */
+function itg_common_node_insert($node) {
+    
+  global $ctype_array;
+  // custom alias cnditions
+  if (in_array($node->type, $ctype_array)){
+     itg_common_custompath_insert_load($node);
   }
 }
+
+/**
+ * Implementation of hook_node_update().
+ * @param object $node
+ */
+function itg_common_node_update($node) {
+    
+  global $ctype_array;
+  // custom alias cnditions
+  if (in_array($node->type, $ctype_array)){
+     itg_common_custompath_insert_load($node);
+  }
+
+}
+
+
 
 /**
  * Implements hook_form_FORMID_alter().
@@ -627,4 +675,39 @@ function itg_custom_lock_delete() {
     //content_lock_release_own_item($_GET['nid'], FALSE, TRUE);
   }
   exit;
+}
+
+/**
+ * Implement hook_mail_alter()
+ * @param array $message
+ */
+//function itg_custom_mail_alter(&$message) {
+//    $message['send'] = FALSE;
+//}
+
+/** Implements itg_apache_solr_get_site_hash();
+ */
+function itg_apache_solr_get_site_hash() {
+  $var_hash = explode(',', variable_get('apache_solr_sites_prefix_values'));
+  foreach($var_hash as $key => $value) {
+   $ex_hash = explode('|', $value);
+   $key = trim($ex_hash[0]);
+   $sitehash[$key] = trim($ex_hash[1]);
+  }
+  
+  return $sitehash;
+}
+
+/**
+ * Implements hook_mail_alter.
+ * {@inheritdoc}
+ */
+function itg_common_mail_alter(&$message) {
+  
+  global $user, $base_url;  
+ 
+  if (FRONT_URL == $base_url || BACKEND_URL == $base_url) {
+    $message['send'] = FALSE;
+  }
+  
 }

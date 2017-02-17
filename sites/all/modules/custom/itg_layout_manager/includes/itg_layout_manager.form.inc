@@ -164,7 +164,7 @@ function layout_section_widgets_search_form($form, &$form_state) {
   if (arg(1) != 'home') {
     $form['all_section'] = array(
       '#type' =>'checkbox',
-      '#title' => t('All section'),
+      '#title' => t('All Categories'),
     );
 
     $form['section_name_all'] = array(
@@ -290,4 +290,27 @@ function get_all_section_of_tpl($type) {
     $data[$row->section_name] = $row->name;
   }
   return $data;
+}
+
+
+/**
+ * Implementation of hook_form for html widgets
+ * {@inheritdoc}
+ */
+function content_widgets_search_form($form, &$form_state) {  
+    
+  $form['custom_content_title'] = array(
+    '#type' => 'textfield',
+    '#size' => 60,
+    '#attributes' => array('placeholder' => t('Search')),
+    '#autocomplete_path' => 'custom-content-widgets/autocomplete',
+    '#maxlength' => 128,
+  );  
+  
+  $form['content_widget_submit'] = array(
+    '#markup' => '<div class="go-btn-div"><a class="fright" href="javascript:void(0)" id="layout-content-submit">Go</a></div>',
+    '#weight' => 20,
+  );  
+
+  return $form;
 }

@@ -47,9 +47,14 @@ if (!empty($content)):
   if (!empty($byline_id)) {
     $reporter_node = node_load($byline_id);
   }
-  ?>
+  
+  if (function_exists('itg_get_front_activity_info'))
+  {
+    $opt = itg_get_front_activity_info($node->nid, $node->type, $user->uid, 'read_later', $status = '');
+  }
+?>
   <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle;
-                if (!empty($node->field_story_type[LANGUAGE_NONE])) {
+                if ($node->field_story_type[LANGUAGE_NONE][0]['value'] == 'photo_story') {
                   echo ' photo-story-section';
                 }
               ?>">
@@ -57,14 +62,30 @@ if (!empty($content)):
           <?php //pr($node);   ?> 
           <div class="comment-mobile desktop-hide">
               <ul>
-                  <?php if ($user->uid > 0): ?>
-                    <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>
-                    <?php print '<li>' . $read_later . '</li>'; ?>                                         
-                  <?php else: ?>
-                    <?php if (function_exists('itg_sso_url')): ?>
-                      <?php print '<li>' . itg_sso_url('<i class="fa fa-bookmark"></i>', t('READ LATER')) . '</li>'; ?>
-                    <?php endif; ?>
-                  <?php endif; ?>
+                  <li class="later">
+                                          <?php
+                                          if ($user->uid > 0)
+                                          {
+                                           if (empty($opt['status']) || $opt['status'] == 0)
+                                            {
+                                              ?> 
+                                              <a title = "Read Later" href="javascript:void(0)" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
+                                            <?php }
+                                            else
+                                            { ?>
+                                              <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
+                                            <?php
+                                            }
+                                          }
+                                          else
+                                          {
+                                            if (function_exists(itg_sso_url))
+                                            {
+                                              print itg_sso_url('<i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span>', t('READ LATER'));
+                                            }
+                                          }
+                                          ?>
+                                      </li>
                   <li class="mail-to-author"><a title ="Mail to author" href="mailto:support@indiatoday.in"><i class="fa fa-envelope"></i><?php //print t('Mail to author'); ?></a></li>
                   <li><a href="#" title = "whatsapp"><i class="fa fa-whatsapp"></i></a></li>
                   <?php
@@ -78,8 +99,8 @@ if (!empty($content)):
               </ul>
               <ul class="social-share">
                   <li><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
-                  <li><a title = "share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-                  <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
+                  <li><a title = "share on twitter" href="javascript:void(0)" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                  <li><a title="share on google+" href="javascript:void(0)" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
 
               </ul> 
           </div>
@@ -174,26 +195,36 @@ if (!empty($content)):
                                 <?php } ?>
                             </ul>
                             <ul class="social-links mhide">
-                                <li><a title = "share on facebook" href="javascript:" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
-                                <li><a title = "share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-                                <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a title = "share on facebook" href="javascript:void(0)"  onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
+                                <li><a title = "share on twitter" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                                <li><a title="share on google+" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
                                 <?php
                                 if ($config_name == 'vukkul') {
                                   ?>
                                   <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
                                 <?php } if ($config_name == 'other') { ?> 
                                   <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
-                                <?php } ?>
-
-                                <?php if ($user->uid > 0): ?>
-                                  <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>
-                                  <?php print '<li>' . $read_later . '</li>'; ?>                                         
-    <?php else: ?>
-      <?php if (function_exists('itg_sso_url')): ?>
-                        <?php print '<li>' . itg_sso_url('<i class="fa fa-bookmark"></i>' . t('READ LATER') . '', t('READ LATER')) . '</li>'; ?>
-                      <?php endif; ?>
-
-    <?php endif; ?>   
+                                <?php } 
+                                if ($user->uid > 0)
+                                          {
+                                            if (empty($opt['status']) || $opt['status'] == 0)
+                                            {
+                                              ?> 
+                                  <li class="left-later"><span> <a title = "Read Later" href="javascript:void(0)" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><?php print t('READ LATER'); ?></a><span class="flag-throbber">&nbsp;</span></span></li>
+                                            <?php }
+                                            else
+                                            { ?>
+                                  <li><span> <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><?php print t('READ LATER'); ?></a><span class="flag-throbber">&nbsp;</span></span></li>
+                                            <?php
+                                            }
+                                          }
+                                          else
+                                          {
+                                            if (function_exists(itg_sso_url))
+                                            {
+                                              print '<li>'.itg_sso_url('<i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span>', t('READ LATER')).'</li>';
+                                            }
+                                          } ?>
                             </ul>
                         </div>
                     </div>
@@ -264,8 +295,8 @@ if (!empty($content)):
                         <div class="social-share-story">
                             <ul class="">
                                 <li><div id="fb-root"></div><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
-                                <li><a title = "share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-                                <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a title = "share on twitter" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                                <li><a title="share on google+" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
                                     <?php if ($config_name == 'vukkul'): ?>
                                   <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
                                     <?php endif; ?>
@@ -273,16 +304,30 @@ if (!empty($content)):
                                   <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                                     <?php endif; ?>
 
-                                <li>
-                                    <?php if ($user->uid > 0): ?>
-      <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>
-      <?php print $read_later; ?>                                         
-    <?php else: ?>
-      <?php if (function_exists(itg_sso_url)): ?>
-        <?php print itg_sso_url('<i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span>', t('READ LATER')); ?>
-      <?php endif; ?>
-                <?php endif; ?>
-                                </li>
+                                <li class="later">
+                                          <?php
+                                          if ($user->uid > 0)
+                                          {
+                                            if (empty($opt['status']) || $opt['status'] == 0)
+                                            {
+                                              ?> 
+                                              <a title = "Read Later" href="javascript:void(0)" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
+                                            <?php }
+                                            else
+                                            { ?>
+                                              <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
+                                            <?php
+                                            }
+                                          }
+                                          else
+                                          {
+                                            if (function_exists(itg_sso_url))
+                                            {
+                                              print itg_sso_url('<i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span>', t('READ LATER'));
+                                            }
+                                          }
+                                          ?>
+                                      </li>
 
                             </ul>
                         </div>
@@ -297,10 +342,19 @@ if (!empty($content)):
     echo 'listicle-page';
   }
   ?>">
-                  <div class="story-associate-content">
-                      <div id="videogallery-iframe">
+                  <?php
+                  if(!empty($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'])) {
+                      $class = 'story-associate-content';
+                  }
+                  ?>
+                  <div class="<?php echo $class; ?>">
+                      <?php
+                  if(!empty($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'])) {?>
+                    <div id="videogallery-iframe">
                           <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading" />
                       </div>
+                  <?php }
+                  ?>                      
                       <?php
                       $clidk_class_slider = "";
                       $widget_data = '';
@@ -357,19 +411,26 @@ if (!empty($content)):
                                 }
                                 ?>
                               <?php } ?>
-                                <div class="stry-img-rating">
+                                
                       <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) { ?>
-                                <div class="photoby"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?></div>
+                                <div class="photoby">
+                                  <?php if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
+                                  <div class="story-img-rating">
+                                    <?php 
+                                    // added technology rating field value for story technology
+                                      $tech_rating = $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'];
+                                      echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10'; 
+                                    ?>
+                                  </div>
+                                  <?php } ?>
+                                  <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'])) { ?>
+                                  <div class="photoby-text"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?></div>
+                                  <?php } ?>
+                                </div>
                       <?php } ?>     
                                
-                            <?php 
-                            // added technology rating field value for story technology
-                              if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) {
-                                $tech_rating = $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'];
-                                echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10';
-                              } 
-                            ?>
-                            </div>
+                            
+                           
                           </div>
   <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'])) { ?>    
                             <div class="image-alt"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?></div>
@@ -465,8 +526,8 @@ if (!empty($content)):
                                  <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div><div class="social-share"><ul>     
                                  <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
                                  <li><a title = "share on facebook" class="facebook" href="javascript:void(0)" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $factoidsSocial_share_title . "'" . ', ' . "'" . $factoidsSocialShare['share_desc'] . "'" . ', ' . "'" . $image . "'" . ')"><i class="fa fa-facebook"></i></a></li>
-                                 <li><a title = "share on twitter" class="twitter" href="javascript:" onclick="twitter_popup(\'' . urlencode($factoidsSocialShare['share_desc']) . ',' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a></li>
-                                 <li><a class="google" title="share on google+" href="javascript:void(0)" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')"></a></li>
+                                 <li><a title = "share on twitter" rel="'.$node->nid.'" data-tag="'.$node->type.'" data-activity="twitter_share" data-status="1" class="user-activity twitter" href="javascript:" onclick="twitter_popup(\'' . urlencode($factoidsSocialShare['share_desc']) . ',' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a></li>
+                                 <li><a class="user-activity google" rel="'.$node->nid.'" data-tag="'.$node->type.'" data-activity="google_share" data-status="1" title="share on google+" href="javascript:void(0)" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')"></a></li>
                                  </ul></div></div>';
                               $factoidsSocialShare['slider'] = '<div class="factoids-slider"><ul>';
                               foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {
@@ -630,8 +691,8 @@ if (!empty($content)):
               <ul>
               <li><a title = "share" href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
               <li><a title = "share on facebook" class= "facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $buzz_title_share . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $share_image . "'" . ', ' . "'" . $base_url . "'" . ', ' . "'" . $nid . "'" . ')" class="facebook"><i class="fa fa-facebook"></i></a></li>
-              <li><a title = "share on twitter" href="javascript:" onclick="twitter_popup(' . "'" . urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')" class="twitter"><i class="fa fa-twitter"></i></a></li>
-              <li><a title="share on google+" href="#" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="google"><i class="fa fa-google-plus"></i></a></li>
+              <li><a title = "share on twitter" rel="'.$node->nid.'" data-tag="'.$node->type.'" data-activity="twitter_share" data-status="1" href="javascript:" onclick="twitter_popup(' . "'" . urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')" class="user-activity twitter"><i class="fa fa-twitter"></i></a></li>
+              <li><a title="share on google+" href="javascript:" rel="'.$node->nid.'" data-tag="'.$node->type.'" data-activity="google_share" data-status="1" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="user-activity google"><i class="fa fa-google-plus"></i></a></li>
               </ul>
           </div>' . $img . '</div><div class="photoby">' . $entity[$field_collection_id]->field_buzz_image['und'][0]['alt'] . '</div><div class="image-alt">' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '</div>';
                     }
@@ -668,8 +729,8 @@ if (!empty($content)):
                   <div id="name-dv"><?php print t('Do You Like This Story'); ?>
                       <span id="lky"><button title="Like" id="like_count" rel="<?php print $get_val; ?>" data-tag="sty"><i class="fa fa-thumbs-o-up"></i> <span id="<?php print $like; ?>"><?php print $like_count; ?></span> </button>
                           <span id="sty-dv" style="display:none">Awesome! </br> Now share the story </br> <a title="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a> 
-                              <a title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>
-                              <a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a>
+                              <a title="share on twitter" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>
+                              <a title="share on google+" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a>
                           <?php
                           if ($config_name == 'vukkul') {
                             ?>
@@ -705,8 +766,8 @@ if (!empty($content)):
                             <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $node->type; ?>"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
                           <?php endif; ?>
                           <li class="mhide"><div id="fb-root"></div><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
-                          <li class="mhide"><a title = "share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-                          <li class="mhide"><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
+                          <li class="mhide"><a title = "share on twitter" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                          <li class="mhide"><a title="share on google+" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
                                   <?php
                                   if ($config_name == 'vukkul') {
                                     ?>

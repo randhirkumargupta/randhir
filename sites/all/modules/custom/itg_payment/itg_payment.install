@@ -1,0 +1,123 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+function itg_payment_schema() {
+  $schema = array();
+  $schema['itg_payment_order_details'] = array(
+    'description' => 'indiatoday payment details table',
+    'fields' => array(
+      'tid' => array(
+        'description' => 'table id primary key',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'order_id' => array(
+        'description' => 'Order id',
+        'type' => 'varchar',
+        'length' => '50',
+        'not null' => TRUE,
+      ),
+      'event_id' => array(
+        'description' => 'Event ID',
+        'type' => 'varchar',
+        'length' => '50',
+        'not null' => TRUE,
+      ),
+      'total_amount' => array(
+        'description' => 'Amount of event',
+        'type' => 'float',
+        'not null' => TRUE,
+      ),
+      'discount_amount' => array(
+        'description' => 'discounted amount by coupon',
+        'type' => 'float',
+        'not null' => TRUE,
+      ),
+      'total_order_amount' => array(
+        'description' => 'redmeed amount after coupon apply which will proceed for payment.',
+        'type' => 'float',
+        'not null' => TRUE,
+      ),
+      'coupon_id' => array(
+        'description' => 'Coupon Id',
+        'type' => 'varchar',
+        'length' => '50',
+        'not null' => TRUE,
+      ),
+      'coupon_amount' => array(
+        'description' => 'Coupon amount which sould be deducted',
+        'type' => 'float',
+        'not null' => TRUE,
+      ),
+      'coupon_detail' => array(
+        'description' => 'full copun details after node load',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'user_type' => array(
+        'description' => 'user is logged in or not',
+        'type' => 'varchar',
+        'length' => '50',
+        'not null' => TRUE,
+      ),
+      'registration_id' => array(
+        'description' => 'event registration id',
+        'type' => 'varchar',
+        'length' => '50',
+        'not null' => TRUE,
+      ),
+      'user_id' => array(
+        'description' => 'if loogedin user then uid or 0',
+        'type' => 'varchar',
+        'length' => '55',
+        'not null' => FALSE,
+      ),
+      'order_created_on' => array(
+        'description' => 'The Unix timestamp when the order was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'payment_gateway' => array(
+        'description' => 'from which gateway payment is done',
+        'type' => 'varchar',
+        'length' => '50',
+        'not null' => TRUE,
+      ),
+      'transaction_id' => array(
+        'description' => 'transaction id',
+        'type' => 'varchar',
+        'length' => '50',
+        'not null' => TRUE,
+      ),
+      'order_status' => array(
+        'description' => 'order status 1 or 0',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'transaction_history' => array(
+        'description' => 'serialise data of transaction',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'payment_gateway_status' => array(
+        'description' => 'Status return by payment gateway',
+        'type' => 'varchar',
+        'length' => '55',
+        'not null' => TRUE,
+      ),
+      'payment_gateway_history' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('tid'),
+  );
+  return $schema;
+}

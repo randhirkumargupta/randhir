@@ -121,12 +121,25 @@
             });
             
             //Newsletter Content hide/show onclick for section select
-            var newsletter_content = $("input[name='field_newsl_newsletter_content[und]']:checked").val();
-                if (newsletter_content === 'select_section') {
-                    $('#edit-field-story-category').show();
-                } else  {
+            
+            $("input[name='field_newsl_newsletter_type[und]']").on("click", function () {
+                var newsletter_type = $(this).val();
+                if (newsletter_type === 'manual') {
                     $('#edit-field-story-category').hide();
-                }
+                } 
+                 if (newsletter_type === 'automatic') {
+                    $('#edit-field-story-category').show();
+                    $("input[name='field_newsl_newsletter_content[und]']:checked").trigger('click');
+                 } 
+             });
+            
+            var newsletter_content = $("input[name='field_newsl_newsletter_content[und]']:checked").val();
+            if (newsletter_content === 'select_section') {
+                $('#edit-field-story-category').show();
+            } else  {
+                $('#edit-field-story-category').hide();
+            }
+            
             $("input[name='field_newsl_newsletter_content[und]']").on("click", function () {
                 var newsletter_content = $(this).val();
                 if (newsletter_content === 'select_section') {
@@ -136,6 +149,8 @@
                 }
                 
             });
+            //Aautomatic and manual hide/show onclick for section select
+
             
             //Day,date and time hide/show on click
             $("input[name='field_newsl_frequency[und]']").on("click", function () {

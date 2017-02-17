@@ -209,7 +209,7 @@ function itg_newsletter_submit_handler_for_redirect($form, &$form_state) {
  */
 function itg_newsletter_form_after_build($form, &$form_state) {
 
-  global $user, $base_url;
+    global $user, $base_url;
 
   // Hide default level and add dynamic label
   if ($form_state['node']->type == 'newsletter') {
@@ -597,15 +597,13 @@ function itg_newsletter_check_existence_frequency($frequency, $newsletter_conten
  */
 function itg_newsletter_content_data() {
   $node = node_load($_POST['content_id']);
-
   if ($node->type == 'story') {
     $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
   }
   else {
     $kicker = '';
   }
-
-  echo drupal_json_encode(array('title' => $node->title, 'kicker' => $kicker, 'uri' => $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']));
+  echo drupal_json_encode(array('title' => $node->title, 'kicker' => $kicker, 'fid' => $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']));
   exit;
 }
 
@@ -680,7 +678,7 @@ function itg_newsletter_send_automatic_newsletter() {
   $query_auto->fields('cn')
       ->condition('cn.status', 0, '=')
       ->condition('cn.type', 'automatic', '=')
-      ->condition('cn.scheduled_time', time(), '<=');
+      ->condition('cn.scheduled_time', time(), '>=');
   $result_auto = $query_auto->execute();
 
   while ($record_auto = $result_auto->fetchAssoc()) {
@@ -878,14 +876,15 @@ function itg_newslatter_get_subscribe_page_users_email($getsection) {
  * Get top 20 stories
  * @return array
  */
-function itg_newsletter_get_section_stories($section, $totaltime, $previoustime) {
+function itg_newsletter_get_section_stories($section, $crontime, $previoustime) {
+    
   $query = db_select('node', 'n');
-  $query->leftjoin('field_data_field_story_category', 'fsc', 'n.nid = fsc.entity_id');
+  $query->join('field_data_field_story_category', 'fsc', 'n.nid = fsc.entity_id');
   $query->condition('n.status', 1, '=');
   $query->fields('n');
   $query->condition('n.type', 'story', '=');
   $query->condition('fsc.field_story_category_tid', $section, 'IN');
-  $query->condition('changed', array($previoustime, $totaltime), 'BETWEEN');
+  $query->condition('changed', $previoustime, '>=');
   $query->orderBy('n.nid', 'DESC');
   $query->range(0, 20);
   $result = $query->execute();

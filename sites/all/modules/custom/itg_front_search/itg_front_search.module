@@ -50,8 +50,11 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
     $form['bundle_name']['#size'] = 5;
     $form['bundle_name']['#multiple'] = TRUE;
 
+    if (function_exists('itg_apache_solr_get_site_hash'))
+    {
+      $hash = itg_apache_solr_get_site_hash();
+    }
     //'iibckc' => 'Dev', bw8w8n => 'Ankush-localhost'
-    $hash = array('5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'e49it8' => 'Stage Server');
     $form['hash']['#type'] = 'select';
     $form['hash']['#options'] = $hash;
     $form['hash']['#size'] = 5;
@@ -104,7 +107,10 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
     $form['bundle_name']['#multiple'] = TRUE;
 
 
-    $hash = array('5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'e49it8' => 'Stage Server');
+    if (function_exists('itg_apache_solr_get_site_hash'))
+    {
+      $hash = itg_apache_solr_get_site_hash();
+    }
     $form['hash']['#type'] = 'select';
     $form['hash']['#title'] = 'Property';
     $form['hash']['#options'] = $hash;
@@ -157,12 +163,27 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
  * @param Array $view
  */
 function itg_front_search_views_pre_render(&$view) {
-  global $base_url;
+ 
+  
   // Add "Create Breaking news" on listing page of Breaking news
   if (isset($view->name) && ($view->name == "front_end_global_search" || $view->name == "archive_story")) {
 
     global $user, $base_url;
-
+    
+    if (isset($view->name) && ($view->name == "front_end_global_search")) {
+      $target = $base_url.'/'.current_path().'?keyword={'.$_GET['keyword'].'}';
+      $markup = array(
+          '#type' => 'markup',
+          '#markup' => '<script type="application/ld+json"> {'
+          . '    "@context": "http://schema.org",    "@type": "WebSite",    "url": "'.$base_url.'",    '
+          . '"potentialAction": {      "@type": "SearchAction",      '
+          . '"target": "'.$target.'",      '
+          . '"query-input": "required name='.$_GET['keyword'].'"    } } '
+          . '</script>',
+      );
+      drupal_add_html_head($markup, 'sd_json');
+    }    
+    
     $settings = array();
     $settings['base_url'] = $base_url;
     $settings['uid'] = $user->uid;
@@ -384,20 +405,20 @@ function itg_front_search_node_presave($node) {
         $reporter_arr_value[] = strtolower($reporter_id);
         $common_by_line_name[] = strtolower($reporter_node_id->title);
         $common_by_line_twitter[] = strtolower($reporter_node_id->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']);
-        // print $high['target_id'];
+        
       }
-
-      $final_repoter_nid_list = implode(',', $reporter_arr_value);
-
-      $final_by_line_name = implode(',', $common_by_line_name);
-
-      $final_by_line_twitter = implode(',', $common_by_line_twitter);
-
-      //$reporter_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
-      //$reporter_node_id = node_load($reporter_id);
-      $node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'] = $final_by_line_name;
-      $node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'] = $final_by_line_twitter;
-      $node->field_common_by_line_reporter_id[LANGUAGE_NONE][0]['value'] = $final_repoter_nid_list;
+      if (!empty($reporter_arr_value)) {
+        $final_repoter_nid_list = implode(',', $reporter_arr_value);
+        $node->field_common_by_line_reporter_id[LANGUAGE_NONE][0]['value'] = $final_repoter_nid_list;
+      }      
+      if (!empty($common_by_line_name)) {
+        $final_by_line_name = implode(',', $common_by_line_name);
+        $node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'] = $final_by_line_name;
+      }
+      if (!empty($common_by_line_twitter)) {
+        $final_by_line_twitter = implode(',', $common_by_line_twitter);
+        $node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'] = $final_by_line_twitter;
+      }
     }
   }
 

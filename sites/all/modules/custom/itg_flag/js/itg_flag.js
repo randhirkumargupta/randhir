@@ -137,13 +137,15 @@ jQuery(document).ready(function () {
 
 
     // jquery for front user activity
-    jQuery('#user-activity, .user-activity').click(function (event) {        
+    jQuery('#user-activity, .user-activity').click(function (event) {
         var nd_id = jQuery(this).attr('rel');
         var dtag = jQuery(this).attr('data-tag');
+        var nodeId = jQuery(this).attr('data-nodeid');
         var dstatus = jQuery(this).attr('data-status');
         var data_activity = jQuery(this).attr('data-activity');
         var post_data = "&nd_id=" + nd_id + "&dtag=" + dtag + "&data_activity=" + data_activity + "&dstatus=" + dstatus;
-        jQuery(this).closest(".emoji-container").find("a").removeClass("def-cur-pointer").addClass("def-cur-none");
+        jQuery(this).closest(".emoji-container").find("a").removeClass("def-cur-pointer").addClass("def-cur-none-pointer");
+        if(jQuery(this).attr('data-activity') != 'undefined') {
         jQuery.ajax({
             'url': Drupal.settings.baseUrl.baseUrl + '/user-activity-front-end',
             'data': post_data,
@@ -156,15 +158,14 @@ jQuery(document).ready(function () {
             'success': function (result)
             {
                 var obj = jQuery.parseJSON(result);
-                if (obj.success == 1) {
-                    console.log('create');
+                // case for follow story
+                if (obj.success == 1 && obj.activity == 'follow_story') {
                     jQuery(".follow-story a").attr({
                         'data-status': 0,
                         title: 'Unfollow story'
                     }).html('Unfollow story');
                 }
-                if (obj.success == 0) {
-                    console.log('update');
+                if (obj.success == 0 && obj.activity == 'follow_story') {
                     jQuery(".follow-story a").attr({
                         'data-status': 1,
                         title: 'Follow the Story'
@@ -173,18 +174,104 @@ jQuery(document).ready(function () {
                 if (obj.error == 'error') {
 
                 }
-                if (obj.ok == 'hightlights_emoji_true') {
-                    jQuery("."+obj.rel).html("(" + obj.count + ")");
-                    jQuery(".hightlights_emoji_msg_" + obj.nd_id).html('Success').show(0).delay(2000).hide(1000);
-                }
-                if (obj.ok == 'error') {
-                    jQuery(".hightlights_emoji_msg_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
-                }
+                // end here
+                // case for read later
+                    if (obj.success == '1' && obj.activity == 'read_later') {
+                        if (obj.type == 'photogallery') {
+                            jQuery('.later').html('<a href="javascript:void(0)" title="save" class="def-cur-pointer active"><i class="fa fa-bookmark"></i></a>');
+                        }
+                        if (obj.type == 'videogallery') {
+                            jQuery('.later').html('<a title = "Save" href="javascript:" class="def-cur-pointer active"><i class="fa fa-clock-o"></i><span>Watch Later</span><span class="video-msg"></span></a>');
+                        }
+                        if (obj.type == 'story') {
+                            jQuery('.later').html('<a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><span>READ LATER</span></a>');
+                            jQuery('.left-later').html('<span> <a title = "Read Later" class="def-cur-pointer active"><i class="fa fa-bookmark"></i>READ LATER</a><span class="flag-throbber">&nbsp;</span></span>');
+                        }
+                        jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">Saved</div>');
+                        jQuery(".video-landing-header .slick-track li").append('<div class="saved-photogallery">Saved</div>');
+                        jQuery('.video-msg').html('<div class="saved-video">Saved</div>');
+                        setTimeout(function () {
+                            jQuery('.saved-photogallery').remove();
+                            jQuery('.saved-video').remove();
+                        }, 3000);
+
+                    }
+                    
+                    if (obj.success == '0' && obj.activity == 'read_later') {
+                      window.location.reload(true);
+                    }
                 
             }
         });
+      } 
+    });
+    
+     jQuery('.user-activity-highlight').click(function (event) {
+        var nd_id = jQuery(this).attr('rel');
+        var dtag = jQuery(this).attr('data-tag');
+        var nodeId = jQuery(this).attr('data-nodeid');
+        var dstatus = jQuery(this).attr('data-status');
+        var data_activity = jQuery(this).attr('data-activity');
+        var post_data = "&nd_id=" + nd_id + "&dtag=" + dtag + "&data_activity=" + data_activity + "&dstatus=" + dstatus;
+        if(!jQuery(this).closest(".emoji-container").find("a").hasClass('def-cur-none-pointer')) {
+            jQuery(this).closest(".emoji-container").find("a").removeClass("def-cur-pointer").addClass("def-cur-none-pointer");
+            jQuery.ajax({
+                'url': Drupal.settings.baseUrl.baseUrl + '/user-activity-front-highlight',
+                'data': post_data,
+                'cache': false,
+                'type': 'POST',
+                // dataType: 'json',
+                beforeSend: function () {
 
+                },
+                'success': function (result)
+                {
+                    var obj = jQuery.parseJSON(result);
+                    if (obj.ok == 'hightlights_emoji_true') {
+                        jQuery("."+obj.rel).html("(" + obj.count + ")");
+                        jQuery(".hightlights_emoji_msg_" + obj.nd_id).html('Success').show(0).delay(2000).hide(1000);
+                    }
+                    if (obj.ok == 'error') {
+                        jQuery(".hightlights_emoji_msg_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
+                    }
+
+                }
+            });
+        }
+       else {
+           jQuery(this).closest(".emoji-container").next("p").html('You have already voted').show(0).delay(2000).hide(0);
+       }
     });
 
     // end here
+    
+    // alert on ugc reject link click
+    jQuery(document).ready(function () {
+        jQuery(".ugc-reject").click(function () {
+            var reject_status = "reject";
+            if (reject_status == "reject") {
+                var msg = confirm("Are you sure you want to reject this content?");
+                if (msg == true) {
+                    return true;
+                }
+                return false;
+            }
+            return true;
+        });
+    });
+    
+    // alert on ugc delete content
+    jQuery(document).ready(function () {
+        jQuery(".user-con-delete").click(function () {
+            var reject_status = "delete";
+            if (reject_status == "delete") {
+                var msg = confirm("Are you sure you want to Delete this content?");
+                if (msg == true) {
+                    return true;
+                }
+                return false;
+            }
+            return true;
+        });
+    });
 });

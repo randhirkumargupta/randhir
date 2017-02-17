@@ -363,8 +363,9 @@ header{
                 @include pos(relative);
             }
             .menu{
-                padding-left:135px;
-                padding-right:50px;
+                margin-left:135px;
+                margin-right:50px;
+                max-width: 985px;
                 li{
                     @include float(left);
                     a{
@@ -428,6 +429,7 @@ header{
               }  
             }
             .all-menu{
+                width: 46px;
                 cursor: pointer;
                 i{
                     font-size: 7px;
@@ -1507,6 +1509,10 @@ footer{
         &+li{
             border-top: 1px solid $border-color;
         }
+        .detail{
+            overflow: hidden;
+            display: block;
+        }
     }
 }
 /*End CSS trending-videos Home  page*/
@@ -1987,11 +1993,23 @@ footer{
             .photoby{
                 @include pos(absolute,null,null,0,0);
                 width: 100%;
-                background: #222222;
-                color: #aeaeae;
-                @include font(13px);
-                @include itg-font($itg-roboto);
-                padding: 3px 10px;
+                .story-img-rating {
+                  background: #b00808;
+                  display: inline-block;
+                  vertical-align: top;
+                  padding: 5px 20px;
+                  font-size: 28px;
+                  font-weight: 700;
+                  color: #fff;
+                  line-height: 28px;
+                }
+                .photoby-text {
+                  color: #aeaeae;
+                  @include font(13px);
+                  @include itg-font($itg-roboto);
+                  background-color: #222;
+                  padding: 3px 10px;
+                }
             }
         }
         .image-alt{
@@ -2110,7 +2128,11 @@ footer{
                 border-radius: 7px 0px 0px 7px;
             }
             .multiple-photo{
-                padding: 0 50px;                
+                padding: 0 50px; 
+                .photo-slider{
+                    padding: 0 5px;
+                    cursor: pointer;
+                }
                 .slick-prev, .slick-next{
                     background: transparent;
                     border: none;
@@ -2128,7 +2150,30 @@ footer{
                 .slick-next{
                     left: auto;
                     right: 0;
-                }                
+                }
+                .img-wrapper{
+                  display: inline-block;
+                  vertical-align: top;
+                  position: relative;
+                  border: 1px solid transparent;
+                  .photo-count{
+                    font-style: normal;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0,0,0,.5);
+                    color: #fff;
+                    text-align: center;
+                    line-height: 64px;
+                  }
+                }
+                .slick-current{
+                    .img-wrapper{
+                        border: 1px solid #ffc106;
+                    }
+                }
             }
         }
     }
@@ -2418,7 +2463,8 @@ footer{
         }
     } 
     .story-associate-content{       
-        overflow: hidden;
+        @include clearfix;
+/*        overflow: hidden;*/
         .associate-content-block{
             cursor: pointer;
         }
@@ -2431,7 +2477,8 @@ footer{
              width: 100%;
              z-index: inherit;
              background: #000;
-             display:none;
+             display:none; 
+             overflow: visible !important;
              .big-story-popup {
                  position: relative;
                  top: auto;
@@ -2442,7 +2489,18 @@ footer{
                  margin-top: 0;
              }
              #close-big-story{
-                 @include pos(absolute);
+                @include pos(absolute);                 
+                right: 0;
+                top: -20px;    
+                width: 20px;
+                height: 20px;    
+                line-height: 20px;    
+                border-radius: 3px 3px 0 0;                
+                box-shadow: none;
+                background: #bb0a0a;                
+                a{
+                    color: #fff;
+                }
              }
              .loading-popup{
                  display: inline;
@@ -3836,43 +3894,10 @@ h1.category-heading{
             padding: 0px;
             border:1px solid #242424;
         }
-        .social-likes{
-            @include float(right);
-            @include calculate-width(1);
-            background: #1a1a1a;   
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(170, 169, 169, 0.31);            
-            ul{
-                display: inline-flex;
-                li{                    
-                    a{
-                        display: block;                        
-                        color: #aaa9a9;
-                        font-family:$itg-roboto;
-                        font-size:12px;
-                        padding:10px;
-                        i{
-                            font-size: 18px;
-                            vertical-align: middle;                                                     
-                        }
-                        span{
-                            display: none;
-                        }
-                        &:hover{
-                            background: #363636;
-                            color: $white-color;
-                        }
-                    }
-                    .flag-throbber{
-                        display: none;
-                    }                                        
-                }
-            }
-        }
         .iframe-video{
-            padding-bottom: 69%;
+            padding-bottom: 59.9%;
         }
-        
+        @include video-detail-page-sociallike;
         .slick-slider{
             padding: 10px;
             background: #000;
@@ -3979,6 +4004,7 @@ h1.category-heading{
     .video-header-right{
         position: relative; 
         padding-bottom:15px;
+        @include video-detail-page-sociallike;
         p{
             &:first-child{
                 margin-top: 15px;
@@ -3997,6 +4023,9 @@ h1.category-heading{
             margin: 40px 20px 0;
             position: absolute;
             bottom: 0;
+        }
+        .video-slider-description{
+            @include clearfix;
         }
     }    
 
@@ -4423,6 +4452,7 @@ h1.category-heading{
             h2{
                 @include font(15px,20px);
                 margin-bottom:10px;
+                word-wrap: break-word;
                 a{
                     @include font(15px,20px,$itg-font-medium);   
                 }
@@ -5068,7 +5098,7 @@ section.sidebar{
         .col-md-4{
             margin-bottom:20px;
             text-align: center;          
-            &:nth-child(2n+1){
+            &:nth-child(3n+1){
                 clear: left;
             }
         }
@@ -5135,8 +5165,7 @@ section.sidebar{
     position: relative;
     padding-bottom: 50%;
     padding-top: 30px;
-    height: 0;
-    overflow: auto; 
+    height: 0;   
     -webkit-overflow-scrolling:touch;    
     iframe{
         position: absolute;
@@ -5714,6 +5743,9 @@ section.sidebar{
             &:nth-child(n+3){
                 margin-top: 30px;
             }
+            &:nth-child(2n+1){
+                clear:left;
+            }            
             span{
                 @include display-inline;
                 float: left;
@@ -5774,6 +5806,9 @@ section.sidebar{
         }
         .bottom-slider { 
             background: #171717;
+            ul{
+                list-style-type: none;
+            }
             li{                
                 background: #171717;
                 padding: 25px 10px;
@@ -8011,9 +8046,9 @@ section.sidebar{
     .budget-ad{
         margin-top: 25px;
     }
-    iframe{
-        width: 100%;
-        height: 285px;
+    @include video-block(video-wrapper);
+    .video-wrapper{
+     padding-bottom: 70%;   
     }
     .common-highlights{
         overflow:auto;
@@ -8021,11 +8056,11 @@ section.sidebar{
     }
     .special-top-bg{
         background: #fbfbfb;
-        height: 530px;
+        overflow: auto;
+        height: 100%;
     }
     .auto-block-2{        
-        height: 490px;
-        overflow: auto;
+        height: 490px;        
         .special-top-news{                       
             .itg-listing{
                border: none;
@@ -9731,7 +9766,9 @@ h1.about-us-heading{
 /*css end big story format*/
 /*like dislike photo page start*/
 #block-views-photo-landing-slider-block, #block-views-video-landing-header-block{
-    .section-like-dislike{        
+    .section-like-dislike{       
+        @include display-inline;
+        width:100%;
         .agbutton{
             margin-top:20px;            
             a{
@@ -9861,6 +9898,9 @@ h1.about-us-heading{
     #cboxTitle{
         display: none !important;
     }
+    .region-top{
+        background: #171717;
+    }
 }
 /*css end story page submit story */
 
@@ -9886,7 +9926,7 @@ h1.about-us-heading{
         }
     }
     .agbutton, .emoji-container{
-        @include display-inline;
+        display: block;
     }
     .emoji-container{        
         margin: 10px 0 0px 0;
@@ -10191,6 +10231,11 @@ h1.about-us-heading{
     }
     ul{
         list-style-type: none;
+        li{
+            a{
+            display: block;
+            }
+        }
     }
     span.tile{
         margin-top: 10px;
@@ -10208,6 +10253,11 @@ span.smilies-title {
     height: auto;
     display: inline-block;
     vertical-align: middle;   
+    img{
+        display: inline;
+        max-width: inherit;
+        width: auto;
+    }
 }
 
 /* css for story-photo-list starts here */
@@ -10236,21 +10286,18 @@ span.smilies-title {
     }
     .slick-arrow{
         position: absolute;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
         z-index: 999;
         border: none;
-        background-color: #000;
+        background: none;
         top: 45px;
         cursor: pointer;
-        opacity: .7;
+        opacity: 1;
         &.slick-disabled{
             opacity: .3;
         }
         .fa{
             font-size: 42px;
-            color: #fff;
+            color: #000;
         }
     }
     .slick-prev{
@@ -10308,7 +10355,26 @@ span.smilies-title {
 }
 /*css end for emoji*/
 
-.front-end-breadcrumb{
+/*css breadcrumb start*/
+#block-itg-layout-manager-front-end-breadcrumb{
   position: relative;
-  z-index: 9999;
+  z-index: 9999;  
+  color: #a1a1a1;
+  font-family: roboto;
+  padding-top:15px;
+  a{    
+    color: #a1a1a1;
+    font-family: roboto;
+  }
+}
+.node-type-photogallery, .node-type-videogallery, .node-type-podcast, .section-videos{
+    #block-itg-layout-manager-front-end-breadcrumb{
+        background: #171717;   
+    }    
+}
+/*css breadcrumb end*/
+iframe{
+  &[id*="twitter-widget"]{
+    width: 100% !important;
+  }
 }

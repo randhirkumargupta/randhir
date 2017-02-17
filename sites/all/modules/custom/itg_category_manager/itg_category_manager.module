@@ -822,7 +822,7 @@ function itg_category_manager_taxonomy_term_insert($term) {
     'uid' => $user->uid,
     'changed' => time(),
   );
-  if ($term->path['alias'] != NULL) {
+  if (!empty($term->path['alias'])) {
     $term->path['alias'] = rtrim($term->path['alias'], '/');
     $data['sef_url'] = $term->path['alias'];
   }
@@ -836,7 +836,7 @@ function itg_category_manager_taxonomy_term_insert($term) {
  *   An object of type term.
  */
 function itg_category_manager_taxonomy_term_presave($term) {
-  if ($term->tid !== NULL && $term->path['pathauto'] == 0) {
+  if (!empty($term->tid) && $term->tid !== NULL && $term->path['pathauto'] == 0) {
     global $user;
     $term->path['alias'] = rtrim($term->path['alias'], '/');
     $data = array();
@@ -1518,6 +1518,14 @@ function itg_category_manager_custom_submit($form, &$form_state) {
  */
 function itg_category_manager_views_query_alter(&$view, &$query) {
   if ($view->name == 'category_manager') {
+    //add category id for filter
+    if (!empty($query->where[1]['conditions'])) {
+      foreach ($query->where[1]['conditions'] as $tkey => $tval) {
+        if ($tval['field'] == 'taxonomy_term_data_itg_category_manager.vid') {
+          $query->where[1]['conditions'][$tkey]['value'][0] = CATEGORY_MANAGMENT;
+        }
+      }
+    }
     // Alter term name filter.
     if (!empty($_GET['name'])) {
       $str = $query->where[1]['conditions'][0]['value'];

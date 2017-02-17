@@ -55,6 +55,7 @@
                         $byline_id = $mega_item['field_story_reporter']['und'][0]['target_id'];
                         $reporter_node = node_load($byline_id);
                         $mega_output.= '<div class="buzz-section">';
+                        $mega_output.= '<div class="field"><div class="field-label">' . t('Review type:') . '</div><div class="field-items">' . $mega_item['field_story_review_type'][LANGUAGE_NONE][0]['value'] . '</div></div>';
                         $mega_output.= '<div class="field"><div class="field-label">' . t('Headline:') . '</div><div class="field-items">' . $mega_item['field_buzz_headline'][LANGUAGE_NONE][0]['value'] . '</div></div>';
                         $mega_output.= '<div class="field"><div class="field-label">' . t('Reviewer:') . '</div><div class="field-items">' . $reporter_node->title . '</div></div>';
                         $mega_output.= '<div class="field"><div class="field-label">' . t('Review URL Link:') . '</div><div class="field-items">' . $mega_item['field_mega_review_url_link'][LANGUAGE_NONE][0]['value'] . '</div></div>';
@@ -80,10 +81,11 @@
                       $mega_output.= '';
                       foreach ($node->field_mega_review_review['und'] as $mega_item):
                         $ans_detail = entity_load('field_collection_item', array($mega_item['value']));
-
+                        
                         $byline_id = $ans_detail[$mega_item['value']]->field_story_reporter['und'][0]['target_id'];
                         $reporter_node = node_load($byline_id);
                         $mega_output.= '<div class="buzz-section">';
+                        $mega_output.= '<div class="field"><div class="field-label">' . t('Review type:') . '</div><div class="field-items">' . $ans_detail[$mega_item['value']]->field_story_review_type[LANGUAGE_NONE][0]['value'] . '</div></div>';
                         $mega_output.= '<div class="field"><div class="field-label">' . t('Headline:') . '</div><div class="field-items">' . $ans_detail[$mega_item['value']]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</div></div>';
                         $mega_output.= '<div class="field"><div class="field-label">' . t('Reviewer:') . '</div><div class="field-items">' . $reporter_node->title . '</div></div>';
                         $mega_output.= '<div class="field"><div class="field-label">' . t('Review URL Link:') . '</div><div class="field-items">' . $ans_detail[$mega_item['value']]->field_mega_review_url_link[LANGUAGE_NONE][0]['value'] . '</div></div>';

@@ -9,7 +9,7 @@
 
       // Disable edit mode of date fields
       $('input[name="field_ads_start_date[und][0][value][date]"]').keydown(false);
-      $('input[name="field_ads_end_date[und][0][value][date]"]').keydown(false);
+      // $('input[name="field_ads_end_date[und][0][value][date]"]').keydown(false);
       // Module code end
       $('#edit-field-ads-template-selection-und').change(function() {
 
@@ -43,6 +43,14 @@
         }
       });
 
+
+      $('select[name="field_ads_placeholder[und]"]').html();
+
+      // This is for hiding some default values
+      jQuery('[name="field_ads_ex_headerscript_und_0_remove_button"]').hide();
+      jQuery('[name="field_ads_ex_body_start_und_0_remove_button"]').hide();
+      jQuery('[name="field_ads_ex_body_close_und_0_remove_button"]').hide();
+
     }
 
   };
@@ -54,7 +62,7 @@ jQuery(document).ready(function() {
 
 
   jQuery('[name="field_select_template_type[und]"]').on('click', function() {
-    
+
     switch (jQuery(this).val()) {
       case 'Home':
         var home_option = "<option value='Home'>Home</option>";
@@ -82,5 +90,17 @@ jQuery(document).ready(function() {
 
 
   });
+
+  try {
+    if (jQuery('[name="field_select_template_type[und]"]:checked').val() == "Section") {
+      jQuery('#itg_ads_ttype_replace').show();
+    }
+  }
+  catch (e) {
+
+  }
+
+
+
 
 });

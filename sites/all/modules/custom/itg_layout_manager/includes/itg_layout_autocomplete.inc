@@ -157,11 +157,11 @@ function custom_taxonomy_get_tree($string, $vid, $parent = 0, $max_depth = NULL,
       ->orderBy('t.name')
       ->execute();
 
-    foreach ($result as $term) {
+    foreach ($result as $term) {      
       $children[$vid][$term->parent][] = $term->tid;
       $parents[$vid][$term->tid][] = $term->parent;
       $terms[$vid][$term->tid] = $term;
-    }
+    }    
   }
 
   // Load full entities, if necessary. The entity controller statically
@@ -225,6 +225,55 @@ function custom_taxonomy_get_tree($string, $vid, $parent = 0, $max_depth = NULL,
       }
     }
   }
+  //for section
+  if(!empty($terms[$vid][$parent])) {
+    $tree[] = $terms[$vid][$parent];
+  }
 
   return $tree;
 }
+
+/**
+ * callback for all the story of title
+ * @param $title
+ */
+function content_custom_widgets_title($title) {
+
+    if (strlen(trim($title)) > 0) {
+        $options = '';
+        $title = strtolower(trim($title));
+        $query = db_select('itg_custom_widgets_data', 'icw');
+        $query->fields('icw', array('widget'));
+        $query->condition('widget', '%' . $title . '%', 'LIKE');
+        $query->range(0, 20);
+
+        $result = $query->execute();
+
+        while ($record = $result->fetchAssoc()) {
+            $options[$record['widget']] = $record['widget'];
+        }
+
+        drupal_json_output($options);
+    }
+}
+
+/**
+ * Implements page callback for layout-search-widgets-list.
+ * @return 
+ */
+function custom_content_widgets() {
+  $query = db_select('itg_custom_widgets_data', 'icw');
+        $query->fields('icw', array('widget'));
+        $query->condition('title', $_GET['content_title']);
+  $itg_result = $query->execute()->fetchAll();
+  
+  foreach ($itg_result as $key => $val) {
+    $content .= '<li id="'.$val->widget.'" data-widget="'.arg(1).'#'.$val->nid.'" data-widget-info="">
+    <span>'.$val->widget.'</span></li>';
+  }
+  
+  echo $content;
+  exit;
+}
+
+

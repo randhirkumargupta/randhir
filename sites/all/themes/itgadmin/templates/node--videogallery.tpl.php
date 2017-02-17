@@ -211,11 +211,23 @@
     </div>
     <?php
     if (!isset($node->op) && in_array('Social Media', $user->roles)):
-      $block = module_invoke('itg_social_media', 'block_view', 'social_media_form');
-      ?>
-      <div class="promote-sidebar">
-      <?php print render($block['content']); ?>
-      </div>
+     $block = module_invoke('itg_social_media', 'block_view', 'social_media_form');
+        $data_in = itg_social_media_check_node_exist_lock($node->nid);
+        global $user;
+        if ($data_in[0]->uid == $user->uid || empty($data_in)) {
+
+            itg_social_media_enter_in_lock($node->nid);
+            ?>
+            <div class="promote-sidebar">
+                <?php print render($block['content']); ?>
+            </div>
+        <?php }
+        else { ?>
+            <div class="promote-sidebar">
+                <div class="promote-lock">Someone  is already working on this</div>
+            </div> 
+        <?php }
+        ?>
   <?php endif; ?>
   </div>
   <?php

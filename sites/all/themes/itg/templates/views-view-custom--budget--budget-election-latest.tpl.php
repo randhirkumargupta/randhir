@@ -10,7 +10,7 @@
                 $video_class = 'video-icon';
             }
             ?>
-            <div class="col-md-3">
+            <div class="col-md-3 col-sm-3 col-xs-6">
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}") ?>">
                     <?php
                     if ($row['field_story_small_image'] != "") {

@@ -329,7 +329,7 @@ $root-font-size: 16px;
         li{
             @include display-inline;
             padding-right: 8px;
-            a{
+            a, span{
                 background: #000;
                 width: 20px;
                 height: 20px;                       
@@ -626,3 +626,54 @@ $root-font-size: 16px;
     div[data-star-value="90%"]:after{width: 90%;}    
     div[data-star-value="100%"]:after{width: 100%;}
 }
+
+@mixin video-block($wrapper-class){
+  .#{$wrapper-class}{
+      position: relative;
+      padding-bottom: 74.75%; /* 16:9 */
+      padding-top: 25px;
+      height: 0;
+      iframe{
+        position: absolute;
+	top: 0;
+	left: 0;
+	width: 100% !important;
+	height: 100% !important;
+      }
+    }
+}
+@mixin video-detail-page-sociallike {
+    .social-likes{
+        @include float(none);
+        @include calculate-width(1);
+        background: #1a1a1a;   
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(170, 169, 169, 0.31);            
+        ul{
+            display: inline-flex;
+            li{                    
+                a{
+                    display: block;                        
+                    color: #aaa9a9;
+                    font-family:$itg-roboto;
+                    font-size:12px;
+                    padding:10px;
+                    i{
+                        font-size: 18px;
+                        vertical-align: middle;                                                     
+                    }
+                    span{
+                        display: none;
+                    }
+                    &:hover{
+                        background: #363636;
+                        color: $white-color;
+                    }
+                }
+                .flag-throbber{
+                    display: none;
+                }                                        
+            }
+        }
+    }
+} 

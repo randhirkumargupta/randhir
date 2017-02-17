@@ -18,67 +18,61 @@ $admin_user = $data['admin_user'];
 $section_id = $data['section_id'];
 $user_id = $data['user_id'];
 ?>
-
-<style>
-    #sortable1, #sortable2, #sortable3, #sortable4 { width:100%; min-height:400px; cursor: move;}
-    #sortable1 li, #sortable2 li, #sortable3 li, #sortable4 li { display:block;cursor:move; margin: 10px 0px;
-    background: transparent;
-    border: none;
-    text-align: center;}
-    #main-container-budget .col-list {min-height: 740px;}
-    <?php if ($admin_user) { ?>
-      #main-container-budget{width:70%;height:100%;display: inline-block;}
-    <?php }
-    else { ?>
-      #main-container-budget{width:100%;height:600px;}
-    <?php } ?>
-
-</style>
-
-<?php if ($budget_exist == 1) { ?>    
-  <h2 class="budget-predictor-heading"><?php print t('CHEAPER / DEARER'); ?></h2>
+<?php if ($budget_exist == 1) { ?>
+  <h1 class="budget-predictor-heading"><?php print t('CHEAPER / DEARER'); ?></h1>
   <?php if(empty($user_id)) { ?>
     <h3 class="budget-predictor-msg"><?php print t('Please drag and drop images and please login if you know, your prediction will right or not.'); ?></h3>
   <?php } ?>
   <div id="main-container-budget">
-      <div class="top-side-block">
-          <div id="ranking-content" class="col-md-2 col-list col-list-1">
-              <span id="ranking-label" class="title"><?php print t('Cheaper'); ?></span>        
+    
+    <table class="budget-predictor-table">
+        <thead>
+          <tr>
+            <th class="title"><?php print t('Cheaper'); ?></th>
+            <th class="title"><?php print t('Dearer'); ?></th>
+            <th class="title"><?php print t('Same'); ?></th>
+            <th class="title"><?php print t('Items'); ?></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="ranking-content cheaper">
               <ul id="sortable1" class="connectedSortable">
-                  <?php echo $column1; ?>
+                <?php echo $column1; ?>
               </ul>
-          </div>
-          <div id="ranking-content" class="col-md-2 col-list col-list-2">
-              <span id="ranking-label" class="title"><?php print t('Dearer'); ?></span>    
+            </td>
+            <td class="ranking-content deaper">
               <ul id="sortable2" class="connectedSortable">
-                  <?php echo $column2; ?>
+                <?php echo $column2; ?>
               </ul>
-          </div>
-          <div id="ranking-content" class="col-md-2 col-list col-list-3">
-              <span id="ranking-label" class="title"><?php print t('Same'); ?></span>    
+            </td>
+            <td class="ranking-content same">
               <ul id="sortable3" class="connectedSortable">
-                  <?php echo $column3; ?>
+                <?php echo $column3; ?>
               </ul>
-          </div>
-          <div id="ranking-content-main" class="col-md-6 col-list col-list-4">
-              <span id="ranking-label" class="title"><?php print t('Items'); ?></span>    
+            </td>
+            <td class="ranking-content bp-items">
               <ul id="sortable4" class="connectedSortable">
-                  <?php echo $column4; ?>                  
+                <?php echo $column4; ?>
+                <div id="loader-data"><img class="widget-loader" style="display: none" src="<?php echo base_path(); ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
               </ul>
               <?php
                   if ($budget_message_flag) {
                      print '<p class="success">'.$budget_message.'</p>';
+                     if($admin_user) { ?>
+                      <div class="cheaper-deaper-action"><button class="btn-reset" type="button" onclick="reset_budget(<?php print $section_id; ?>)"><?php print t('Reset'); ?></button></div>
+                     <?php }
                   }
                   elseif ($budget_message_front_flag) {
                     print '<p class="success">'.$budget_social_message.'</p>';
-                    ?>      
+                    ?>
                     <div class="budget-predictor-block">
                         <div class="budget-predictor-social-share">
                             <div class="share-msg"><?php print 'SHARE YOUR PREDICTION'; ?></div>
-                            <ul>                                
+                            <ul>
                                 <li><div id="fb-root"></div><a class="facebook" href="javascript:void(0)" onclick="badget_fb_share('<?php print $actual_link; ?>', '<?php print $budget_title; ?>', '<?php print $budget_social_message; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="javascript:void(0)" class="twitter" onclick="badget_twitter_share('<?php print urlencode($budget_title); ?>', '<?php print urlencode($actual_link); ?>')"><i class="fa fa-twitter"></i></a></li>
-                                <li><a title="share on google+" class="google" href="javascript:void(0)" onclick="return badget_google_plus_share('<?php print $actual_link; ?>')"></a></li>                                           
+                                <li><a title="share on google+" class="google" href="javascript:void(0)" onclick="return badget_google_plus_share('<?php print $actual_link; ?>')"></a></li>
                             </ul>
                         </div>
                     </div>
@@ -86,11 +80,11 @@ $user_id = $data['user_id'];
 
               <?php if (empty($file_name) && empty($budget_message_flag)) { ?>
                 <?php if(empty($user_id)) { ?>
-                  <button class="btn btn-save" type="button" onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')"><?php print t('Submit'); ?></button>
+                      <div class="cheaper-deaper-action"><button class="btn-submit" type="button" onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')"><?php print t('Submit'); ?></button></div>
                 <?php } else { ?>
-                  <button class="btn btn-save" type="button" onclick="captureCurrentDiv(<?php print $section_id; ?>)"><?php print t('Submit'); ?></button> 
+                      <div class="cheaper-deaper-action"><button class="btn-submit" type="button" onclick="captureCurrentDiv(<?php print $section_id; ?>)"><?php print t('Submit'); ?></button></div>
                 <?php } ?>
-                
+
                 <?php
               }
             }
@@ -100,10 +94,15 @@ $user_id = $data['user_id'];
               <?php
             }
             ?>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-
-        </div>
-    </div>    
-
-</div>
+  </div>  
+    
+    
+    
+    
+  
 

@@ -90,6 +90,57 @@ function feature_for_video_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_multi_bitrate'.
+  $field_bases['field_multi_bitrate'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_multi_bitrate',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_noindex_nofollow'.
+  $field_bases['field_noindex_nofollow'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_noindex_nofollow',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'noindex_nofollow' => 'No Index No Follow',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_story_player_image'.
   $field_bases['field_story_player_image'] = array(
     'active' => 1,
@@ -172,6 +223,7 @@ function feature_for_video_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         'google_standout' => 'Google Standout',
+        'comment_box' => 'Comment Box',
         'comment' => 'Comment',
       ),
       'allowed_values_function' => '',

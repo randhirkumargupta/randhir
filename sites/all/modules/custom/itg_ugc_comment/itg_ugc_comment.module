@@ -8,6 +8,7 @@
  *
  */
 module_load_include('inc', 'itg_ugc_comment', 'includes/itg_comment_config');
+module_load_include('inc', 'itg_ugc_comment', 'includes/ugc_comment_listing');
 
 /**
  * Implements hook_menu().
@@ -196,7 +197,7 @@ function ugc_comment_form($form, &$form_state) {
  * @param array $form_state
  */
 function ugc_comment_form_submit($form, &$form_state) {
-
+  global $user;
   $fname = $form_state['values']['fname'];
   $femail = $form_state['values']['femail'];
   $fmessage = $form_state['values']['fmessage'];
@@ -210,7 +211,7 @@ function ugc_comment_form_submit($form, &$form_state) {
     $con = mongodb();
     $people = $con->itgcms_comment;
     $comment_user = $con->itgcms_comment_user;
-    $qry = array("page_id" => $page_id, "email" => $femail, "name" => $fname, "comment" => $fmessage, "parent_comment_id" => $parent_id, "comment_date" => $comment_date, "comment_date_time" => $comment_date_time, "property" => 'India Today', "content_type" => 'story', "status" => 1);
+    $qry = array("page_id" => $page_id, "email" => $femail, "name" => $fname, "comment" => $fmessage, "parent_comment_id" => $parent_id, "comment_date" => $comment_date, "comment_date_time" => $comment_date_time, "property" => 'India Today', "content_type" => 'story', "activity" => "comment", "status" => 1, "uid" => $user->uid);
     $result = $people->insert($qry);
     $check_user_existance = ugc_comment_user_status($femail);
     if(empty($check_user_existance['email'])) {
@@ -360,7 +361,7 @@ function itg_user_block_api_form($form, &$form_state) {
     '#type' => 'submit',
     '#attributes' => array('class' => array('user-block-apply')),
     '#prefix' => '<div class = "user-log-filter-btn">',
-    '#suffix' => '<a class="user-log-reset form-submit" href="' . base_path() . 'ugc-comment-user">Reset</a><a href="javascript:void(0)" id="comment-user-block" class="form-submit">'.t('Block User').'</a><a href="javascript:void(0)" id="comment-user-unblock" class="form-submit">'.t('Unblock User').'</a><p class="block_success"></p></div>',
+    '#suffix' => '<a class="user-log-reset form-submit" href="' . base_path() . 'ugc-comment-user">'.t('Reset').'</a></div><div class="right-button"><a href="javascript:void(0)" id="comment-user-block" class="form-submit">'.t('Block User').'</a><a href="javascript:void(0)" id="comment-user-unblock" class="form-submit">'.t('Unblock User').'</a><p class="block_success"></p></div>',
   );
   
   $settings = array();

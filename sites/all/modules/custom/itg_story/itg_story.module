@@ -152,6 +152,7 @@ function itg_story_ckeditor_plugin_alter(&$plugins) {
  * {@inheritdoc}
  */
 function itg_story_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
   switch ($form_id) {
     case 'story_node_form':
       global $base_url, $user;
@@ -171,9 +172,11 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
 
         $form['field_reporter_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $reporter_id;
       }
-      
-      $form['field_reporter_publish_id']['#attributes']['class'][] = 'element-hidden';
-      $form['field_reporter_unique_id']['#attributes']['class'][] = 'element-hidden';
+      if ($user->uid != 1)
+      {
+        $form['field_reporter_publish_id']['#attributes']['class'][] = 'element-hidden';
+        $form['field_reporter_unique_id']['#attributes']['class'][] = 'element-hidden';
+      }
       $form['field_story_reporter']['und'][0]['target_id']['#autocomplete_path'] = 'byline/autocomplete';
       
       if (!empty($form['#node']->field_story_source_id[LANGUAGE_NONE][0]['value']))
@@ -204,10 +207,15 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
       drupal_add_js(array('itg_common' => array('base_url' => $base_url)), 'setting');
       drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.emoji.js', 'file');
       $form['field_emoji']['und'][0]['#format'] = 'emoji';
+      // hide remove button of field collection if there is only single instance of it within the form
+      if (isset($form['field_photo_story']['und']['#max_delta']) && isset($form['your_field']['und']['#max_delta']) && $form['your_field']['und']['#max_delta'] == 0) {
+        $form['field_photo_story']['und'][0]['remove_button']['#prefix'] = '<div style="display:none;"';
+        $form['field_photo_story']['und'][0]['remove_button']['#suffix'] = '</div>';    
+      }
       break;
   }
 
-  $form['field_story_category']['und']['#config']['module'] = 'itg_category_manager';
+  //$form['field_story_category']['und']['#config']['module'] = 'itg_category_manager';
 }
 
 /**
@@ -361,66 +369,64 @@ function itg_story_node_validate($node, $form, &$form_state) {
  */
 function itg_story_after_build($form, &$form_state) {
 
-    global $user, $base_url;
-    // code for multiple byline
-    if (empty($form['#node']->nid))
-  {
-    $reporter_id = $form_state['input']['field_reporter_unique_id']['und'][0]['value'];
-  }
-  else
-  {
+  global $user, $base_url;
+  // code for multiple byline
+  if (empty($form['#node']->nid)) {
+    $reporter_id = !empty($form_state['input']['field_reporter_unique_id'][LANGUAGE_NONE][0]['value']) ? $form_state['input']['field_reporter_unique_id'][LANGUAGE_NONE][0]['value'] : '';
+  } 
+  else {
     $reporter_id = $form['#node']->field_reporter_unique_id[LANGUAGE_NONE][0]['value'];
   }
   $form['field_story_reporter']['#prefix'] = '<div class="multi_reporter">';
   $form['field_story_reporter']['#suffix'] = '<a class="multi-byline" data-tag="save">'.t('Add').'</a></div><div class="byline-list"><ul class="byline-ul">'.itg_byline_info($reporter_id).'</ul><span class="add-more save-byline">'.t('Save').'</span></div>';
-  
+
   $form['original_image_fids'] = array(
         '#type' => 'hidden',
-        '#value' => $form_state['input']['original_image_fids'],
+        '#value' => !empty($form_state['input']['original_image_fids']) ? $form_state['input']['original_image_fids'] : '',
         '#attributes' => array('id' => 'original_image_fids', 'name' => 'original_image_fids'),
     );
-    drupal_add_js('jQuery(document).ready(function() {              
-                  if (jQuery("#edit-path-pathauto").is(":checked")) {                
-                    jQuery("#edit-path-alias").attr("readonly", "readonly");
-                  } else {                
-                    jQuery("#edit-path-alias").removeAttr("readonly");
-                  }              
-                });', array('type' => 'inline', 'scope' => 'footer'));
+  drupal_add_js('jQuery(document).ready(function() {              
+                if (jQuery("#edit-path-pathauto").is(":checked")) {                
+                  jQuery("#edit-path-alias").attr("readonly", "readonly");
+                } else {                
+                  jQuery("#edit-path-alias").removeAttr("readonly");
+                }              
+              });', array('type' => 'inline', 'scope' => 'footer'));
 
-    if (!isset($form['#node']->nid)) {
-        // hide remove button of first field on add form
-        drupal_add_js('jQuery(document).ready(function() {
-            jQuery("#edit-field-story-highlights-und-0-remove-button").hide();
-            jQuery("#edit-field-story-template-buzz-und-0-remove-button").hide();
-            jQuery("#edit-field-story-template-guru-und-0-remove-button").hide();
-            jQuery("#edit-field-story-template-quotes-und-0-remove-button").hide();
-            jQuery("#edit-field-story-template-factoids-und-0-remove-button").hide();
-            jQuery("#edit-field-story-reporter-und-0-remove-button").hide();              
-          });', array('type' => 'inline', 'scope' => 'footer'));
-    }
+  if (!isset($form['#node']->nid)) {
+      // hide remove button of first field on add form
+      drupal_add_js('jQuery(document).ready(function() {
+          jQuery("#edit-field-story-highlights-und-0-remove-button").hide();
+          jQuery("#edit-field-story-template-buzz-und-0-remove-button").hide();
+          jQuery("#edit-field-story-template-guru-und-0-remove-button").hide();
+          jQuery("#edit-field-story-template-quotes-und-0-remove-button").hide();
+          jQuery("#edit-field-story-template-factoids-und-0-remove-button").hide();
+          jQuery("#edit-field-story-reporter-und-0-remove-button").hide();              
+        });', array('type' => 'inline', 'scope' => 'footer'));
+  }
 
-    // checked autoalias checkbox on node edit form
-    if (isset($form['#node']->nid)) {
-        drupal_add_js('jQuery(document).ready(function() {
-            jQuery("#edit-path-pathauto").attr("checked", true);            
-          });', array('type' => 'inline', 'scope' => 'footer'));
-    }
+  // checked autoalias checkbox on node edit form
+  if (isset($form['#node']->nid)) {
+      drupal_add_js('jQuery(document).ready(function() {
+          jQuery("#edit-path-pathauto").attr("checked", true);            
+        });', array('type' => 'inline', 'scope' => 'footer'));
+  }
 
-    unset($form['field_story_associate_lead'][LANGUAGE_NONE]['_none']);
+  unset($form['field_story_associate_lead'][LANGUAGE_NONE]['_none']);
 
-    $form['field_story_select_magazine']['und']['#title'] = t('Select magazine') . '<span class="form-required" title="This field is required."> *</span>';
-    $form['field_story_magazine_kicker_text']['und']['#title'] = t('Magazine kicker') . '<span class="form-required" title="This field is required."> *</span>';
+  $form['field_story_select_magazine']['und']['#title'] = t('Select magazine') . '<span class="form-required" title="This field is required."> *</span>';
+  $form['field_story_magazine_kicker_text']['und']['#title'] = t('Magazine kicker') . '<span class="form-required" title="This field is required."> *</span>';
 
-    $settings['base_url'] = $base_url;
-    $settings['uid'] = $user->uid;
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
 
-    drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story.js', array('weight' => 1));
-    
-    // ADD js for multiple byline
-    drupal_add_js(array('itg_byline' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_byline.js');
-    return $form;
+  drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story.js', array('weight' => 1));
+
+  // ADD js for multiple byline
+  drupal_add_js(array('itg_byline' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_byline.js');
+  return $form;
 }
 
 /**
@@ -788,6 +794,7 @@ function itg_story_photo_story_redirect($node_id, $type) {
   $query->join('field_data_field_story_type', 's', 's.entity_id = n.nid');
   $query->fields('n', array('nid'));
   $query->condition('n.type', 'story');
+  $query->condition('n.status', 1, '=');
   $query->condition('s.field_story_type_value', 'photo_story');
   $query->condition('n.nid', $node_id, $type);
   $query->range(0, 1);
@@ -846,15 +853,18 @@ function itg_story_photo_story_bottom_html($node_id) {
   if (!empty($node_id)) {
     $node = node_load($node_id);
     $photo_story = $node->field_photo_story[LANGUAGE_NONE];
+    $count = sizeof($photo_story);
       $html = '';
       $html .= '<div class="photo-story-img multiple-photo common-photo">';
-      foreach ($photo_story as $key => $val) {
-        $entity_obj = entity_load('field_collection_item', array($val['value']));
-        $photo_story_img_path = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['uri'];
-        $photo_story_file_name = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['filename'];
+//      foreach ($photo_story as $key => $val) {
+      for ($i = 0; $i < $count; $i++) {
+        $entity_obj = entity_load('field_collection_item', array($photo_story[$i]['value']));
+        $photo_story_img_path = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['uri'];
+        $photo_story_file_name = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['filename'];
         $photo_story_img = image_style_url('photo_story_small_88x66', $photo_story_img_path);
         $html .= '<div class="photo-slider">';
-        $html .= '<img src="' . $photo_story_img . '" title="' . $photo_story_file_name . '" alt="photo_story" />';
+        $html .= '<span class="img-wrapper"><img src="' . $photo_story_img . '" title="' . $photo_story_file_name . '" alt="photo_story" />';
+        $html .= '<em class="photo-count">' . ($i+1) . '</em></span>';
         $html .= '</div>';
       }
       $html .= '</div>';

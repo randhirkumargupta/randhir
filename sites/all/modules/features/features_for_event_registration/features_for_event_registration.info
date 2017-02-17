@@ -47,6 +47,7 @@ features[field_instance][] = field_collection_item-field_erf_registration_fee-fi
 features[field_instance][] = node-event_registration-field_erf_payment_gateway
 features[field_instance][] = node-event_registration-field_erf_registration_fee
 features[field_instance][] = node-event_registration-field_erf_total_fee
+features[field_instance][] = node-event_registration-field_preview_unique_id
 features[field_instance][] = node-event_registration-field_story_source_id
 features[field_instance][] = taxonomy_term-itg_city-field_city_state
 features[field_instance][] = taxonomy_term-state-field_state_county

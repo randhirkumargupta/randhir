@@ -13,6 +13,9 @@
     ::-webkit-scrollbar {
         display: none;
     }
+    #block-views-video-landing-header-block .video-header-right .ads{
+        position: relative;
+    }
 } 
 
 @media only screen and (max-width:1024px){
@@ -64,13 +67,51 @@
         }
     } 
 
-    /*    special event page css start here*/
+    .itg-layout-container .itg-h450-section .droppable{
+        height: auto;
+    }
+    .auto-layout-page .itg-h450-section .col-md-4 .droppable{
+     height: 420px;   
+    }
+    
+/*defalt add for special pages START*/
+    .itg-layout-container .ad-widget{
+        height: 295px;
+        padding: 20px;
+    }
+/*defalt add for special pages END*/
+    
+ /* css for dont miss*/
+ .itg-h321-section .tech_reviews, .itg-h321-section .auto_reviews, .itg-h321-section .dont_miss{
+         padding: 5px 10px 8px;
+ }
+ .dont-miss ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic, .osscar-video ul .dont-miss-listing .dm-pic{
+    width: 140px;
+ }
+ /* css for dont miss*/
+    /*    special auto page css start here*/
+       .auto-layout-page{
+        .itg-h321-section{
+             .droppable{
+             height:auto;
+            }   
+        }  
+    } 
     .tech-layout-page, .auto-layout-page{
         .auto-block-1, .auto-block-2{
-            height: auto; 
+            height: 520px;
             margin-bottom: 50px;
         }
+        .auto-block-2{
+            .special-top-news{
+                overflow: auto;
+            }
+        }
         .auto-block-3{
+            .ad-widget{
+                height: 245px;
+                padding:10px;
+            }
             .itg-widget-child{
                 .droppable {
                     height: auto;                
@@ -78,7 +119,7 @@
             }
         }
     }
-    /*special event page css start here*/  
+    /*special auto page css start here*/  
     /*css start snappost page*/
     .page-snappost .view-content .views-row .snap-post-btm{
         .snap-button{        
@@ -124,22 +165,6 @@
         }
     }    
 /*Css end year end page*/   
-/*Start Dont miss Home page css*/
-    .dont-miss{            
-        ul{
-            .dont-miss-listing{
-               .dm-pic{
-                    width: 124px;                
-                }                
-                @include calculate-width(1);
-                padding: 0px 0px 20px 0;  
-                &:nth-child(3){
-                    padding-bottom: 20px;
-                }
-            }
-        }
-    }
-    /*End Dont miss Home page css*/
     /*start Event page registration*/
     #block-itg-event-backend-event-registration, #block-itg-event-backend-event-sign-and-win{
         h1{
@@ -223,37 +248,7 @@
         padding: 0;
     }
     /*sider bar css end*/
-    
-    /*css start poll page*/
-    .poll-banner{
-        .detail {
-            width: auto;
-            display: block;
-            overflow: hidden;
-            float: none;
-            padding-right: 0px; 
-            .detail-content{
-                h4{
-                    @include font(15px,20px);
-                }
-            }
-        }
-        .poll-list{
-            .pic{
-                width: 145px; 
-                margin-right: 10px;
-            }
-            .voting-data{                
-                float: none;
-                @include calculate-width(1);
-                overflow: hidden;
-                padding-top: 15px;
-            }            
-        }                
-    }
-    
-    /*css end poll page*/    
-    
+        
 /*css start osscar page */
     .oscar-layout-page{
         .osscar-video{
@@ -380,8 +375,49 @@
     }
 } 
 /*event page css end*/
+#block-views-video-landing-header-block .video-header-right{
+    height: auto !important;
+    @include calculate-width(1);
+    @include clearfix;
+    .top-section{
+        float: left;
+        width: 55%;
+        margin-top: 15px;
+    }
+    .ads{
+        margin: 0;
+        float: right;
+        margin-top: 15px;
+    }
+}
+/*#block-views-video-landing-header-block .video-header-left .social-likes{
+    height: auto !important;
+}*/
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
+        height: 223px;
+}
+
+/*oscar page css start*/
+.oscar-layout-page .oscor-photo .col-md-6 .title h3{
+    padding: 10px;
+    font-size: 17px;
+}
+/*oscar page css end*/
+
+/*poll page css start*/
+.poll-banner{
+    .detail{
+        width: 33%
+    }
+    .poll-list .voting-data{
+        width: 41%;
+    }
+} 
+/*poll page css end*/
 
 }   
+
+
 @media only screen and (max-width:991px){
     /*CSS start education page special*/
     .education-layout-page .itg-layout-672 .droppable, .education-layout-page .itg-layout-672 .droppable .auto-block-1, .education-layout-page .itg-layout-672 .droppable .auto-block-2{
@@ -397,6 +433,14 @@
         margin: 0;
     }
     /*CSS end education page special*/  
+    
+    
+/*    SPECILA AUTO PAGE START*/
+.auto-layout-page .itg-h450-section .col-md-4 .droppable{
+    height: auto;
+}
+/*    SPECILA AUTO PAGE END*/
+    
     
 /* start Event page mobile nav*/
 #block-menu-menu-event-menu{
@@ -450,17 +494,61 @@
     overflow: auto;
     margin:0 -6px;
     li{
-        float: none;
-        display: inline-block;
-        width: 156px;
-        vertical-align: top;
-        padding: 15px 6px;
         a{
             white-space: pre-wrap;
         }
     }  
 }
 /*story page css end*/
+.budget-page-layout .video-wrapper{padding-bottom: 56.25%;}
+.other-news{margin-top: 50px;}
+
+  /*CSS Starts Photo landing page*/
+    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo, .view-programme-content-live-tv{
+        .view-content{      
+            .photo-list{
+                margin:0 -10px;
+                li{
+                    padding: 15px 10px;                    
+                    width: 25%;
+                }
+            }
+        }
+    }
+    /*CSS End Photo landing page*/
+    
+/*    oscar page css start*/
+.oscar-layout-page .oscar-news  {
+    .col-md-6:nth-child(3n+1){
+        clear: none;   
+    }    
+    .col-md-6:nth-child(n+4) {
+        margin-top: 0px;
+    }
+}
+/*    oscar page css end*/
+/*poll page css start*/
+.poll-banner{
+    .detail{
+        width: 40%
+    }
+    .poll-list .voting-data{
+        width: 35%;
+    }
+} 
+/*poll page css end*/
+
+/*budget page css start*/
+.budget-page-layout {
+    .itg-715-layout{
+        .ipad-space{
+            margin-top: 0;
+        }
+    }
+}
+/*budget page css end*/
+
+
 
 }
 
@@ -651,15 +739,7 @@
                 float: none;        
             }
         }
-/*        .footer-bottom{
-            .cell{
-                width: 50%;
-                margin-bottom: 20px;
-                &:nth-child(2n+1){
-                    clear: left;
-                }
-            }
-        }*/
+
     }
     /*Start CSS Top Block Grid Home Page*/  
     .top-block{
@@ -668,20 +748,39 @@
             @include calculate-width(1);        
         }       
     }
-    .itg-layout-container .itg-h450-section .droppable,  .itg-layout-container .itg-h321-section .droppable, 
+    .itg-layout-container .itg-h450-section .droppable,  
+    .itg-layout-container .itg-h321-section .droppable, 
     .itg-layout-container .top-colum-3 .itg-widget-parent .droppable,
     .itg-layout-container .itg-top-section .top-colum-2 .droppable,
     .itg-layout-container .itg-top-section .top-colum-1 .droppable,
     .itg-layout-container .top-colum-3 .droppable,
-    .itg-common-section .droppable, .sport-home-layout-page .itg-layout-615 .auto-block-1,
-    .sport-home-layout-page .itg-layout-615 .auto-block-2, .sport-home-layout-page .itg-layout-615 .droppable,
-    .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable, .tech-layout-page .itg-h396-section .droppable,
-    .tech-layout-page .itg-h385-section .droppable, .election-page .left-side .itg-photo .droppable, .movie-layout-page .itg-h385-section .droppable,
-    .movie-layout-page .itg-h396-section .droppable, .movie-layout-page .itg-layout-580 .itg-widget-child .droppable, .movie-layout-page .itg-layout-580 .droppable,
-    .movie-layout-page .itg-layout-580 .droppable .auto-block-1, .movie-layout-page .itg-layout-580 .droppable .auto-block-2, .education-layout-page .itg-layout-565 .droppable,
-    .education-layout-page .itg-layout-672 .itg-widget-child .droppable, .education-layout-page .itg-295-layout .droppable, .education-layout-page .itg-325-layout .droppable,
-    .education-layout-page .itg-345-layout .droppable, .education-layout-page .itg-325-layout .ad-widget{
-        height: auto;        
+    .itg-common-section .droppable, 
+    .sport-home-layout-page .itg-layout-615 .auto-block-1,
+    .sport-home-layout-page .itg-layout-375 .droppable,
+    .sport-home-layout-page .itg-layout-615 .auto-block-2, 
+    .sport-home-layout-page .itg-layout-615 .droppable,
+    .sport-home-layout-page .itg-layout-225 .droppable, 
+    .sport-home-layout-page .itg-layout-485 .droppable, 
+    .tech-layout-page .itg-h396-section .droppable,
+    .tech-layout-page .itg-h385-section .droppable, 
+    .election-page .left-side .itg-photo .droppable, 
+    .movie-layout-page .itg-h385-section .droppable,
+    .movie-layout-page .itg-h396-section .droppable, 
+    .movie-layout-page .itg-layout-580 .itg-widget-child .droppable, 
+    .movie-layout-page .itg-layout-580 .droppable,
+    .movie-layout-page .itg-layout-580 .droppable .auto-block-1, 
+    .movie-layout-page .itg-layout-580 .droppable .auto-block-2, 
+    .education-layout-page .itg-layout-565 .droppable,
+    .education-layout-page .itg-layout-672 .itg-widget-child .droppable, 
+    .education-layout-page .itg-295-layout .droppable, 
+    .education-layout-page .itg-325-layout .droppable,
+    .education-layout-page .itg-345-layout .droppable, 
+    .education-layout-page .itg-325-layout .ad-widget,
+    .auto-layout-page .auto-block-1,
+    .election-page .right-side .itg-484 .droppable
+    {
+        height: auto;  
+        min-height: auto;
     }
     
     .itg-layout-container{
@@ -694,9 +793,25 @@
         }
     }
     /*End CSS Top Block Grid Home Page*/  
+    /*Start Dont miss Home page css*/
+    .dont-miss{            
+        ul{
+            .dont-miss-listing{
+               .dm-pic{
+                    width: 124px;                
+                }                
+                @include calculate-width(1);
+                padding: 0px 0px 20px 0;  
+                &:nth-child(3){
+                    padding-bottom: 20px;
+                }
+            }
+        }
+    }
+    /*End Dont miss Home page css*/
 /*    budget page block height start*/
     .budget-page-layout{
-        .auto-block-2, .slider-budget, .common-highlights{
+        .auto-block-2, .slider-budget{
             height: auto;
         }
         .itg-325-layout, .itg-530-layout, .itg-370-layout, .itg-480-layout, .itg-715-layout{
@@ -751,45 +866,20 @@
                 padding: 0;
                 .title{                    
                     h3{
-                        min-height: 60px;
-                        white-space: pre-wrap;
+                        min-height: 60px;                        
                         font-size: 16px;
                         line-height: 22px;
                         padding: 10px;
+                        a{
+                            white-space: pre-wrap;
+                        }
                     }
                 }
                 &:nth-child(n+3){
                     margin-top: 0;
                 }
             }
-        }
-        .oscar-slider{
-            .bottom-slider{
-                padding-bottom:20px;
-                li{
-                    padding: 10px; 
-                    width:100% !important;
-                    height: auto;
-                    a.video-icon{
-                        @include float(left);
-                    }
-                    img{
-                        float: left;
-                        margin-right: 10px;
-                        width: 145px;
-                    }
-                    p{
-                        margin-top:0;
-                    }
-                }
-                i{
-                    color: #ccc;
-                    font-size: 25px;
-                    text-align: center;
-                    width: 100%;
-                }
-            }
-        }
+        }        
     }
 
     /*css end special event page for osscar*/
@@ -875,26 +965,6 @@
         border: none;   
     }
     /*css end side bar section for video and photo*/
-
-    /*CSS Starts Photo landing page*/
-    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo, .view-programme-content-live-tv{
-        .view-content{      
-            .photo-list{
-                margin:0 -10px;
-                li{ 
-                    @include calculate-width(3);
-                    padding:15px 10px;
-                    &:nth-child(4n+1){
-                        clear: none;
-                    }
-                    &:nth-child(3n+1){
-                        clear: left;
-                    }
-                }
-            }
-        }
-    }
-    /*CSS End Photo landing page*/
 
 /*css starts sport page*/
 .sport-home-layout-page .itg-layout-615 .auto-block-1{
@@ -1071,6 +1141,9 @@
                 h4{
                     @include font(15px,20px);
                 }
+                .vota-time.mhide{
+                    display: block;
+                }
             }
         }
         .poll-list{
@@ -1088,6 +1161,7 @@
             clear:both;
             @include calculate-width(1);
             padding-top: 15px;
+            display:none;
             div{
                 @include display-inline;   
                 margin-bottom: 10px;
@@ -1222,8 +1296,10 @@
             padding:0;
             .poll-banner-image{
                 max-width: 100%;
+                height:auto;
               img{
                 max-width: 100%;
+                height:auto;
             }  
             } 
         } 
@@ -1246,14 +1322,7 @@
     .key-candidate .list-state {
         white-space: nowrap;
         overflow: auto;
-    }
-    .itg-most-popular .most_popular {
-        .col-md-3{
-            &:nth-child(2n+1){
-                clear:left;
-            }
-        }
-    }
+    }    
     .left-side{
         .itg-325-layout, .itg-415-layout, .itg-map, .itg-most-popular, .itg-photo{
             .droppable{
@@ -1452,8 +1521,119 @@
     padding: 10px 24px 10px 0px;
 }
 
+.sidebar-second .may-be-suggest-container ul li, .sidebar-second .top-takes-video-container ul li, .sidebar-second .watch-right-now-video ul li {
+    padding: 10px 24px 10px 0px;
+}
+
+#block-views-video-landing-header-block .video-header-right .social-likes ul li a{
+    padding: 10px 20px;
+}
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
+        height: 261px;
+}
+
+/*sosory page css start*/
+#block-views-so-sorry-the-remix{
+display: inline-block;
+width: 49%;
+vertical-align: top;
+padding-right: 10px;
+}
+#block-itg-widget-so-sorry-front-politoons{
+    display: inline-block;
+    width: 50%;
+    vertical-align: top;
+    margin-top: 50px;
+    padding-left: 20px;
+}
+/*sosory page css end*/
+
 
 }
+
+
+@media only screen and (max-width:767px){
+ /*css start oscar-layout-page */
+    .oscar-layout-page .oscar-news {
+        .col-md-6:nth-child(3n+1){
+            clear: left;   
+        }    
+        .col-md-6:nth-child(n+4) {
+            margin-top: 30px;
+        }
+    }
+    .oscar-layout-page{
+        .oscar-features{
+            .col-md-6{
+                &:nth-child(2n+1){
+                    clear:none;
+                }
+            }
+        }   
+    }
+ /*css end oscar-layout-page */
+ /*css start poll page*/
+    .poll-banner{
+        .detail {
+            width: auto;
+            display: block;
+            overflow: hidden;
+            float: none;
+            padding-right: 0px; 
+            .detail-content{
+                h4{
+                    @include font(15px,20px);
+                }
+                .vota-time.mhide{
+                    display: none;
+                }
+            }
+        }
+        .poll-list{
+            .pic{
+                width: 145px; 
+                margin-right: 10px;
+            }
+            .voting-data{                
+                float: none;
+                @include calculate-width(1);
+                overflow: hidden;
+                padding-top: 15px;                                
+            }
+            .vota-time.desktop-hide{
+                display: block;
+            }
+        }                
+    }    
+    /*css end poll page*/    
+/*budget page css start*/
+.budget-page-layout {
+    .itg-715-layout{
+        .ipad-space{
+            margin-top:50px;
+        }
+    }
+    .latest .col-md-3:nth-child(2n+1) {
+        clear: left;
+    }
+}
+/*budget page css end*/    
+
+/*election page css start*/
+.election-page{
+    .itg-most-popular .most_popular {
+        .col-md-3{
+            &:nth-child(2n+1){
+                clear:left;
+            }
+        }
+    }   
+}
+/*election page css end*/
+
+
+}
+
 
 
 @media only screen and (max-width:680px){ 
@@ -1765,7 +1945,7 @@
         background: #111;
     }
 }
-#block-views-video-landing-header-block .video-header-right{
+#block-views-video-landing-header-block .video-header-right{    
     padding-bottom: 0px;
     p.upload-date{
         border-bottom: 1px solid rgba(170, 169, 169, 0.2);
@@ -1994,15 +2174,64 @@ footer .footer-top .footer-social-link{
 } 
 /*css end custom form for video an photo*/
 
+/*oscar page css start*/
+.oscar-layout-page {
+ .oscar-slider{
+    .bottom-slider{
+        padding-bottom:20px;
+        li{
+            padding: 10px; 
+            width:100% !important;
+            height: auto;
+            a.video-icon{
+                @include float(left);
+            }
+            img{
+                float: left;
+                margin-right: 10px;
+                width: 145px;
+            }
+            p{
+                margin-top:0;
+            }
+        }
+        i{
+            color: #ccc;
+            font-size: 25px;
+            text-align: center;
+            width: 100%;
+        }
+    }
+}   
+}
+/*oscar page css end*/
+
+/*election page css start*/
+.election-page .key-candidate .key-candidate-detail ul li .status span{
+    font-size: 12px;
+}
+/*election page css end*/
+
+.sign-in-link .signup-link {
+    float: none;
+    display: block;
+    text-align: left;
+}
+.sign-in-link a{
+    display: block;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
 
 }
-@media only screen and (max-width:640px){
+@media only screen and (max-width:680px){
     #block-views-anchor-landing-page-block{
         .anchor-left{
             @include calculate-width(2);
         }   
     }
-    .itg-layout-container .ad-widget{
+/*    .itg-layout-container .ad-widget{
         border: none;
         height: auto; 
         padding: 0; 
@@ -2010,23 +2239,21 @@ footer .footer-top .footer-social-link{
             background: transparent;
             height: 100%;
         }
-    }
+    }*/
     .page-user .social-share a{
        padding: 0 10px 0 45px;
     }
-}
-
-@media only screen and (max-width:560px){ 
-    /*CSS Starts Photo landing page*/
+    
+     /*CSS Starts Photo landing page*/
     .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo, .view-programme-content-live-tv{
         .view-content{      
             .photo-list{
                 li{       
-                    @include calculate-width(2);
-                    &:nth-child(3n+1){
+                    @include calculate-width(3);
+                    &:nth-child(4n+1){
                         clear: none;
                     }
-                    &:nth-child(2n+1){
+                    &:nth-child(3n+1){
                         clear: left;
                     }
                 }
@@ -2034,6 +2261,26 @@ footer .footer-top .footer-social-link{
         }
     }
     /*CSS End Photo landing page*/
+    #block-views-video-landing-header-block .video-header-right .top-section{
+        width: 100%;
+        float: none;
+    }
+    #block-views-video-landing-header-block .video-header-right .social-likes ul li a{
+        padding: 5px 10px;       
+    }
+    #block-views-video-landing-header-block .video-header-right .ads{
+        margin: 10px 0;    
+        float:none;
+    }
+    
+/*    sosory css start */
+#block-views-so-sorry-the-remix, #block-itg-widget-so-sorry-front-politoons{
+    width: 100%;
+    padding: 0;
+    display: block;
+}
+/*    sosory css end */
+    
 }
 
 @media only screen and (max-width:480px){
@@ -2112,7 +2359,24 @@ footer .footer-top .footer-social-link{
     }    
 } 
 /*static page css end*/
-    
+  /*CSS Starts Photo landing page*/
+    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo, .view-programme-content-live-tv{
+        .view-content{      
+            .photo-list{
+                li{       
+                    @include calculate-width(2);
+                    max-width:none;
+                    &:nth-child(3n+1){
+                        clear: none;
+                    }
+                    &:nth-child(2n+1){
+                        clear: left;
+                    }
+                }
+            }
+        }
+    }
+    /*CSS End Photo landing page*/   
     
 }
 
@@ -2294,6 +2558,11 @@ footer .footer-top .footer-social-link{
                 width: 77%; 
             }   
         }        
+        &.buzz-feedback{
+            .story-right{
+                width: 100%; 
+            }   
+        }        
     }
 .buzz-feedback{
     .story-right{
@@ -2360,6 +2629,7 @@ footer .footer-top .footer-social-link{
                 h2{
                     @include font(22px,28px); 
                     margin-top:-5px;
+                    word-wrap: break-word;
                     a{
                         @include font(22px,28px); 
                     }
@@ -2623,15 +2893,7 @@ footer .footer-top .footer-social-link{
         .politoons-sosorry {
             h2{
                 @include font(26px,null,300);   
-            }
-            .col-md-4{
-                &:nth-child(3n+1){
-                    clear: left;
-                }   
-                &:nth-child(2n+1){
-                    clear: none;
-                }
-            }
+            }            
         }
     }
     /*CSS End So sorry page*/
@@ -2685,8 +2947,7 @@ footer .footer-top .footer-social-link{
             }
             .social-likes  {
                 @include float(left);
-                width: 15.5%;
-                height:474px;
+                width: 15.5%;                
                 overflow: hidden;
                 padding: 0;
                 border-bottom: none;
@@ -2795,7 +3056,6 @@ footer .footer-top .footer-social-link{
             } 
         } 
     }   
-
 
     #block-views-video-landing-header-block{
         .video-header-left, .social-likes{

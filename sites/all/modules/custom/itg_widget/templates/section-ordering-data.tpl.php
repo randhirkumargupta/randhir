@@ -590,7 +590,7 @@ else if ($widget_style == 'oscar-news') {
               $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg";
             }
             ?>
-            <div class="col-md-6 col-sm-6 col-xs-6">                   
+            <div class="col-md-6 col-sm-3 col-xs-6">                   
               <span class="pic  <?php echo $video_class; ?>"> <a class="pic  <?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                   <img  height="127" width="170" src="<?php echo $extra_large_image_url; ?>" alt="" />
                 </a></span>
@@ -691,7 +691,7 @@ else if ($widget_style == 'oscar-features') {
           $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg";
         }
         ?>
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6 col-xs-12">
           <span> <a <?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
               <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>" alt="" />
             </a></span>
@@ -752,7 +752,7 @@ else if ($widget_style == 'tech-tips' || $widget_style == 'india-inc-on-budget' 
             <?php }
             ?>
 
-              <span>
+              <span class="detail">
                 <?php
               if (function_exists('itg_common_get_smiley_title')) {
                 echo l(itg_common_get_smiley_title($nid, 0, 90), "node/" . $nid, array("html" => TRUE ));

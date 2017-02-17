@@ -17,7 +17,6 @@ function itg_widgets_custom_variables() {
         '#type' => 'textfield',
         '#title' => t('Enter Program Category Id'),
         '#default_value' => variable_get('program_category_id_for_programmes'),
-        '#required' => TRUE,
         '#size' => 20,
         '#maxlength' => 20,
     );
@@ -25,7 +24,6 @@ function itg_widgets_custom_variables() {
         '#type' => 'textfield',
         '#title' => t('Enter So Sorry Category Id'),
         '#default_value' => variable_get('so_sorry_category_id_for_widget'),
-        '#required' => TRUE,
         '#size' => 20,
         '#maxlength' => 20,
     );
@@ -127,13 +125,47 @@ function itg_widgets_custom_variables() {
         '#description' => t("Ex: dev|eoshds,stage|asdasd"),
         '#default_value' => variable_get('apache_solr_sites_prefix_values'),
     );
+   $form['newsletter_education_tid'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Newsletter Eduction Tid'),
+        '#default_value' => variable_get('newsletter_education_tid'),
+    );
+   $form['category_manager_vid'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Category Manager Vid'),
+        '#default_value' => variable_get('category_manager_vid'),
+    );
     $form['itg_newsletter_education_id'] = array(
         '#type' => 'textfield',
         '#title' => t('Enter education tid'),
         '#default_value' => variable_get('itg_newsletter_education_id'),
-        '#required' => TRUE,
         '#size' => 20,
         '#maxlength' => 20,
+    );
+    $form['quiz_taxonomy_tid'] = array(
+        '#type' => 'textfield',
+        '#title' => t('quiz_taxonomy_tid'),
+        '#default_value' => variable_get('quiz_taxonomy_tid'),
+        '#size' => 20,
+        '#maxlength' => 20,
+    );
+    $form['city_manager_vid'] = array(
+        '#type' => 'textfield',
+        '#title' => t('City Management Vid'),
+        '#default_value' => variable_get('city_manager_vid'),
+        '#size' => 20,
+    );
+    $form['reporter_tid'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Reporter Vid'),
+        '#default_value' => variable_get('reporter_tid'),
+        '#size' => 20,
+    );
+    $form['anchor_tid'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Anchor Vid'),
+        '#default_value' => variable_get('anchor_tid'),
+        '#size' => 20,
     );
     return system_settings_form($form);
 }
