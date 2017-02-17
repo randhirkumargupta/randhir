@@ -128,7 +128,7 @@ function itg_user_activity_front() {
        $response = array('success' => $dstatus, 'activity' => $user_activity, 'type' => $dtag);
        print json_encode($response);
        } else {
-         $response = array('success' => $dstatus, 'activity' => $user_activity, 'type' => $dtag);
+         $response = array('success' => 'anonymous', 'activity' => $user_activity, 'type' => $dtag);
          print json_encode($response);
        }
       }
