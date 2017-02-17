@@ -3155,23 +3155,32 @@ div.node .ugc-action .reject-ugc, div.node .ugc-action .manage-ugc {
 [id*="itg-social-media-form"] > div .form-item-itg-smi .form-item .fa {
   font-size: 34px;
   line-height: 36px;
-  opacity: .7;
   cursor: pointer;
 }
 [id*="itg-social-media-form"] > div .form-item-itg-smi .form-item .form-checkbox {
   opacity: 0;
 }
-[id*="itg-social-media-form"] > div .form-item-itg-smi .form-item .form-checkbox + label .fa-facebook-square {
+[id*="itg-social-media-form"] > div .form-item-itg-smi .form-item .form-checkbox + label .fa-facebook-square, [id*="itg-social-media-form"] > div .form-item-itg-smi .form-item .form-checkbox + label .fa-twitter-square, [id*="itg-social-media-form"] > div .form-item-itg-smi .form-item .form-checkbox + label .fa-instagram {
+  color: #888;
+  text-shadow: 0px 1px 1px #666;
+}
+[id*="itg-social-media-form"] > div .form-item-itg-smi .form-item .form-checkbox + label:hover .fa-facebook-square {
   color: #3b5998;
 }
-[id*="itg-social-media-form"] > div .form-item-itg-smi .form-item .form-checkbox + label .fa-twitter-square {
+[id*="itg-social-media-form"] > div .form-item-itg-smi .form-item .form-checkbox + label:hover .fa-twitter-square {
   color: #1da1f2;
 }
-[id*="itg-social-media-form"] > div .form-item-itg-smi .form-item .form-checkbox + label .fa-instagram-square {
+[id*="itg-social-media-form"] > div .form-item-itg-smi .form-item .form-checkbox + label:hover .fa-instagram {
   color: #000;
 }
-[id*="itg-social-media-form"] > div .form-item-itg-smi .form-item .form-checkbox:checked + label .fa {
-  opacity: 1;
+[id*="itg-social-media-form"] > div .form-item-itg-smi .form-item .form-checkbox:checked + label .fa-facebook-square {
+  color: #3b5998;
+}
+[id*="itg-social-media-form"] > div .form-item-itg-smi .form-item .form-checkbox:checked + label .fa-twitter-square {
+  color: #1da1f2;
+}
+[id*="itg-social-media-form"] > div .form-item-itg-smi .form-item .form-checkbox:checked + label .fa-instagram {
+  color: #000;
 }
 [id*="itg-social-media-form"] > div .form-item-itg-smi .form-item label {
   position: absolute;
@@ -9255,7 +9264,7 @@ div.node #comments h2 {
   margin-top: -15px;
 }
 
-.page-menu-manager-third .view .view-filters .views-exposed-form .views-exposed-widget {
+.page-menu-manager-third .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-tid {
   width: auto;
   padding-right: 0;
 }
@@ -9871,6 +9880,7 @@ div.node #comments h2 {
   overflow: visible;
   display: inline-block;
   vertical-align: top;
+  width: 100%;
   border: none;
   padding-bottom: 0;
 }
@@ -11015,4 +11025,8 @@ span.file a {
 .node-coupon-form .form-field-name-field-coupon-allow-min-cart-amt .form-type-checkbox > label {
   float: left;
   width: 220px;
+}
+
+.widget-wrapper .data-holder .block-itg-widget > div.flexslider {
+  overflow: visible !important;
 }
