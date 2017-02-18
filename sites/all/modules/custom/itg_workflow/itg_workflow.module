@@ -450,7 +450,7 @@ function itg_workflow_after_build($form, &$form_state) {
  * @param object $node
  */
 function itg_workflow_node_presave($node) {
-  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+  if ((isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') || (empty($node->field_story_source_type[LANGUAGE_NONE][0]['value']))) {
     if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
       if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
         $node->workbench_moderation_state_new = 'published';
@@ -635,7 +635,7 @@ function itg_workflow_bulk_opration_related($field1, $field2) {
  */
 function itg_workflow_node_insert($node) {
   global $user;
-  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+  if ((isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') || (empty($node->field_story_source_type[LANGUAGE_NONE][0]['value']))) {
     if ($node->type == 'story' 
             || $node->type == 'photogallery' 
             || $node->type == 'blog' 

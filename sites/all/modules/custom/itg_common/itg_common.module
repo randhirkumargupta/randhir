@@ -60,7 +60,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     unset($form['actions']['preview_changes']);
   }
   
-  if (arg(0) == 'user' && empty($user->uid)) {
+  if (arg(0) == 'user') {
     drupal_add_js('jQuery(document).ready(function() {
                           jQuery("#skip-link").hide();                                      
           });', array('type' => 'inline', 'scope' => 'footer'));
@@ -212,6 +212,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     }
   }
   $form['#after_build'][] = 'itg_common_add_js_top_btn';
+  $form['actions']['submit']['#submit'][] = 'itg_draft_form_custom_callback';
 }
 
 /**
@@ -450,14 +451,13 @@ function itg_common_form_node_delete_confirm_alter(&$form, &$form_state, $form_i
  * @param string $title
  * @param string $destination
  */
-function itg_custom_message($type, $workbench_current_state, $case, $title, $destination) {
+function itg_custom_message($type, $workbench_current_state, $case, $title, $destination, $action = NULL) {
 
   if ($case == 'add') {
-
     if ($workbench_current_state == 'published') {
       $op = 'published';
       drupal_set_message(t($type . ' <b>' . $title . '</b> has been ' . $op . ' successfully.'));
-    }
+    } 
     else {
       $op = 'created';
       drupal_set_message(t($type . ' <b>' . $title . '</b> has been ' . $op . ' successfully and submitted for further review and approval.'));
@@ -711,6 +711,22 @@ function itg_common_mail_alter(&$message) {
  
   if (FRONT_URL == $base_url || BACKEND_URL == $base_url) {
     $message['send'] = FALSE;
+  }
+  
+}
+
+/**
+ * After submit callback for draft
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_draft_form_custom_callback($form, &$form_state) {
+  
+  if ($form_state['input']['op'] == 'Save as Draft') {
+    $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination='.$_GET['destination'];
+    $op = 'save';
+    drupal_set_message(t($form_state['values']['type'] . ' <b>' . $form_state['values']['title'] . '</b> has been ' . $op . ' successfully.'));
+    $_GET['destination'] = $redirect_path;    
   }
   
 }
