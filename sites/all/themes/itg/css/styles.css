@@ -12358,6 +12358,8 @@ span.smilies-title {
   height: auto;
   display: inline-block;
   vertical-align: middle;
+  float: none !important;
+  margin: 0 !important;
 }
 span.smilies-title img {
   display: inline;
