@@ -235,7 +235,7 @@ function itg_last_node_published_user($uid, $publish_id) {
             ->fields('w', array('nid', 'vid'))
             ->condition('uid', $uid, '=')
             ->condition('published', $publish_id, '=')
-            ->orderBy('stamp', 'DESC')//ORDER BY created
+           // ->orderBy('stamp', 'ASC')//ORDER BY created
             ->range(0, 1)
             ->execute();
 

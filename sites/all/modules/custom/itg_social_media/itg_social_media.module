@@ -461,18 +461,18 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
             $form['status']['#options'][1] = t('Complete');
             $form['status']['#options'][0] = t('Pending');
         case 'views-exposed-form-browse-content-page':
-//            $form['publish_on']['min'] = array(
-//                '#type' => 'date_popup',
-//                '#date_format' => 'd/m/Y',
-//                '#date_year_range' => '-3:+3',
-//                '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date')),
-//            );
-//            $form['publish_on']['max'] = array(
-//                '#type' => 'date_popup',
-//                '#date_format' => 'd/m/Y',
-//                '#date_year_range' => '-3:+3',
-//                '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date')),
-//            );
+            $form['changed']['min'] = array(
+                '#type' => 'date_popup',
+                '#date_format' => 'd/m/Y',
+                '#date_year_range' => '-3:+3',
+                '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date')),
+            );
+            $form['changed']['max'] = array(
+                '#type' => 'date_popup',
+                '#date_format' => 'd/m/Y',
+                '#date_year_range' => '-3:+3',
+                '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date')),
+            );
 
             break;
 
