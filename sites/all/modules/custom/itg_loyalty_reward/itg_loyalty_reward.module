@@ -362,6 +362,7 @@ function itg_loyalty_reward_node_update($node) {
                     ))
                     ->condition('nid', $node->nid, '=')
                     ->execute();
+        break;
     }
 }
 

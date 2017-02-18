@@ -1,6 +1,6 @@
 <?php
 global $base_url, $user;
-if ($base_url != BACKEND_URL) {
+
 if (!empty($data['itg_main_manu_header'])) {
   foreach ($data['itg_main_manu_header'] as $key => $val) {
     if (isset($val['#localized_options']['attributes']['title']) && $val['#localized_options']['attributes']['title'] == 1) {
@@ -8,8 +8,9 @@ if (!empty($data['itg_main_manu_header'])) {
     }
   }
 }
-
-$get_user_detail = user_load($user->uid);
+if (isset($user->uid)) {
+  $get_user_detail = user_load($user->uid);
+}
 
 if (!empty($get_user_detail->field_user_picture[LANGUAGE_NONE][0]['uri'])) {
   $user_pic = theme('image_style', array('style_name' => 'user_header_image_30x30', 'path' => $get_user_detail->field_user_picture[LANGUAGE_NONE][0]['uri']));
@@ -187,4 +188,4 @@ else {
   </div>
 
 </div>
-<?php } ?>
+

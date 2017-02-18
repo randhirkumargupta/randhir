@@ -120,6 +120,9 @@ input[type="file"], input[type="submit"], input[type="text"] {
   vertical-align: top;
   margin-top: 6px;
 }
+[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget .form-item-custom-drp label + select {
+  height: 32px;
+}
 
 .region-top {
   background-color: #000;
@@ -489,9 +492,15 @@ input[type="file"], input[type="submit"], input[type="text"] {
   margin: 20px 0;
 }
 
+.featured-news .featured-post h2 {
+  margin-top: 5px;
+}
+
 .featured-news .featured-post h3 {
   max-height: 96px;
   overflow: hidden;
+  margin-top: 5px;
+  line-height: 22px;
 }
 
 .itg-widget .tab-buttons span {
@@ -3334,14 +3343,17 @@ body .program-livetv.effect-added .light-on-text {
 .podcast-slide .jw-controlbar-center-group .jw-slider-container {
   height: 39px;
 }
-.podcast-slide .jw-controlbar-center-group .jw-slider-horizontal .jw-buffer,
+.podcast-slide .jw-controlbar-center-group .jw-slider-horizontal .jw-buffer {
+  height: 39px;
+  background: url(../images/podcast_audio_white.png) -5px center/348px 35px no-repeat;
+}
 .podcast-slide .jw-controlbar-center-group .jw-slider-horizontal .jw-progress {
   height: 39px;
-  background: url(../images/podcast_audio_yellow.png) 0 center/348px 35px no-repeat;
+  background: url(../images/podcast_audio_yellow.png) -5px center/348px 35px no-repeat;
 }
 .podcast-slide .jw-controlbar-center-group .jw-slider-horizontal .jw-rail {
   height: 39px;
-  background: url(../images/podcast_audio_grey.png) 0 center/348px 35px no-repeat;
+  background: url(../images/podcast_audio_grey.png) -5px center/348px 35px no-repeat;
 }
 .podcast-slide .jw-controlbar-center-group .jw-slider-horizontal .jw-knob {
   top: 0;
@@ -6151,8 +6163,18 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     max-width: 100px;
   }
 
-  [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .form-select {
-    height: 32px;
+  #block-itg-widget-podcast-header .podcast-header-container .podcast-header-top .pic {
+    width: 54px;
+    height: 40px;
+    margin-right: 0;
+    overflow: hidden;
+  }
+  #block-itg-widget-podcast-header .podcast-header-container .podcast-header-top .pic img {
+    max-width: 100%;
+  }
+
+  .podcast-detail .jw-controlbar {
+    padding: 0;
   }
 }
 @media all and (max-width: 480px) {

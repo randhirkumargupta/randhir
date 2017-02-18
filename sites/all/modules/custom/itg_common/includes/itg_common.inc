@@ -235,7 +235,7 @@ function itg_last_node_published_user($uid, $publish_id) {
             ->fields('w', array('nid', 'vid'))
             ->condition('uid', $uid, '=')
             ->condition('published', $publish_id, '=')
-            ->orderBy('stamp', 'DESC')//ORDER BY created
+           // ->orderBy('stamp', 'ASC')//ORDER BY created
             ->range(0, 1)
             ->execute();
 
@@ -588,10 +588,11 @@ function itg_common_custompath_insert_load($node) {
     } else {
         $node_sef = $node->title;
     }
-
-    if ($node->workbench_moderation_state_new == 'draft' || $node->workbench_moderation_state_new == 'published'){
-        $published_date = date('Y-m-d', $node->created);
-    }
+    if(!empty($node->workbench_moderation_state_new)){
+      if ($node->workbench_moderation_state_new == 'draft' || $node->workbench_moderation_state_new == 'published'){
+          $published_date = date('Y-m-d', $node->created);
+      }
+    
     
     $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
     if (!empty($getsection)) {
@@ -605,6 +606,7 @@ function itg_common_custompath_insert_load($node) {
       $pathdata = strtolower(implode("/", $set_hierarchy)) . '/'. $node->type . '/' . trim($node_sef). '-'. $node->nid .'-'. $published_date;
       $newpath = itg_common_custompath_insert_val($pathdata);
       $node->path = array('alias' => $newpath, 'pathauto' => FALSE);
+    }
     }
 }
 
