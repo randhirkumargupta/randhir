@@ -414,17 +414,34 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
     }
 } 
 /*poll page css end*/
-
+/*education page css start*/
+.education-layout-page .auto-block-2 .special-top-news {
+    overflow: scroll;    
+}
+/*education page css end*/
+/*for all special pages start*/
+.widget-wrapper {
+    max-height: 100%;
+    overflow: auto;
+    height: auto;
+}
+/*for all special pages end*/
 }   
 
 
 @media only screen and (max-width:991px){
     /*CSS start education page special*/
-    .education-layout-page .itg-layout-672 .droppable, .education-layout-page .itg-layout-672 .droppable .auto-block-1, .education-layout-page .itg-layout-672 .droppable .auto-block-2{
+    .education-layout-page .itg-layout-672 .droppable, .education-layout-page .itg-layout-672 .droppable .auto-block-1{
         height: auto;
     }
     .education-layout-page .itg-layout-672 .droppable .auto-block-1, .education-layout-page .itg-layout-672 .droppable .auto-block-2{
         margin-bottom: 50px;
+    }
+    .education-layout-page .itg-layout-672 .droppable .auto-block-1{
+        border:none;
+    }
+    .education-layout-page .featured-news{
+        margin: 0 -5px
     }
     .education-layout-page .auto-block-3 .m-bottom40{
         margin-bottom: 0;
@@ -769,13 +786,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
     .movie-layout-page .itg-layout-580 .itg-widget-child .droppable, 
     .movie-layout-page .itg-layout-580 .droppable,
     .movie-layout-page .itg-layout-580 .droppable .auto-block-1, 
-    .movie-layout-page .itg-layout-580 .droppable .auto-block-2, 
-    .education-layout-page .itg-layout-565 .droppable,
-    .education-layout-page .itg-layout-672 .itg-widget-child .droppable, 
-    .education-layout-page .itg-295-layout .droppable, 
-    .education-layout-page .itg-325-layout .droppable,
-    .education-layout-page .itg-345-layout .droppable, 
-    .education-layout-page .itg-325-layout .ad-widget,
+    .movie-layout-page .itg-layout-580 .droppable .auto-block-2,     
     .auto-layout-page .auto-block-1,
     .election-page .right-side .itg-484 .droppable
     {
@@ -799,12 +810,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
             .dont-miss-listing{
                .dm-pic{
                     width: 124px;                
-                }                
-                @include calculate-width(1);
-                padding: 0px 0px 20px 0;  
-                &:nth-child(3){
-                    padding-bottom: 20px;
-                }
+                }                               
             }
         }
     }
@@ -958,6 +964,12 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
     .education-layout-page .auto-block-3 .m-bottom40{
         margin-bottom: 40px;
     }
+    .education-layout-page .itg-layout-565 .itg-widget-parent .droppable{
+        height: 300px;
+        &.m-bottom40{
+            margin-bottom: 0;
+        }
+    }
     /*CSS end education page special*/
 
     /*css start side bar section for video and photo*/
@@ -973,6 +985,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
 .sport-home-layout-page{  
 .right-side{
     .col-md-12{
+        min-height: 260px;
         .ad-widget{
             margin-top: 40px;
         }
@@ -1400,6 +1413,9 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
 .movie-layout-page .itg-layout-580 .droppable .auto-block-1, .movie-layout-page .itg-layout-580 .droppable .auto-block-2{
     margin-bottom: 50px;
 }
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-caption a{
+    font-size: 16px;
+}
 /*movie page css end*/
 /*Globle search page css start*/
 .view-front-end-global-search{
@@ -1630,6 +1646,43 @@ padding-right: 10px;
     }   
 }
 /*election page css end*/
+
+    /*Start Dont miss Home page css*/
+    .dont-miss{            
+        ul{
+            .dont-miss-listing{
+               .dm-pic{
+                    width: 124px;                
+                }                
+                @include calculate-width(1);
+                padding: 0px 0px 20px 0;  
+                &:nth-child(3){
+                    padding-bottom: 20px;
+                }
+            }
+        }
+    }
+    /*End Dont miss Home page css*/
+/*education page css start*/
+.education-layout-page .itg-layout-565 .droppable,
+    .education-layout-page .itg-layout-672 .itg-widget-child .droppable, 
+    .education-layout-page .itg-295-layout .droppable, 
+    .education-layout-page .itg-325-layout .droppable,
+    .education-layout-page .itg-345-layout .droppable, 
+    .education-layout-page .itg-325-layout .ad-widget{
+        height: auto;
+    }
+/*education page css end*/
+
+/*Globe change for don't miss start*/
+.dont-miss ul .dont-miss-listing .dm-detail,
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-detail,
+#block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-detail, 
+.osscar-video ul .dont-miss-listing .dm-detail{
+        overflow: initial;
+}
+/*Globe change for don't miss end*/
+
 
 
 }
