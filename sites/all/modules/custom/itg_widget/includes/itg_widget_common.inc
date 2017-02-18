@@ -526,7 +526,7 @@ function itg_widget_keycandidate_form($form, $form_state) {
  * this function use for get section list
  */
 function getsaction_list() {
-    $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+    $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
     // override taxonomy.
     $tax = itg_widget_get_active_taxonomy($tax);
     $op = array("All" => " - None -");
@@ -659,14 +659,14 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
 
     if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_auto_review_widget' && ($form_state['view']->current_display == 'special_auto_review_widget_contents' || $form_state['view']->current_display == 'special_auto_review_widget_list')) {
 
-        $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+        $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
 
         // override taxonomy.
         $tax = itg_widget_get_active_taxonomy($tax);
     }
 
     if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'most_read_widget' && ($form_state['view']->current_display == 'most_read_widget_contents' || $form_state['view']->current_display == 'most_read_widget_list')) {
-        $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+        $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
         // override taxonomy.
         $tax = itg_widget_get_active_taxonomy($tax);
         $op = array("All" => " - None -");
@@ -679,7 +679,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
 
 
     if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_how_i_made_it' && ($form_state['view']->current_display == 'special_how_made_it_widget_contents' || $form_state['view']->current_display == 'special_how_made_widget_list')) {
-        $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+        $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
         // override taxonomy.
         $tax = itg_widget_get_active_taxonomy($tax);
         $op = array("All" => " - None -");
@@ -693,7 +693,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
 
     if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_how_i_made_it' && ($form_state['view']->current_display == 'special_how_made_it_widget_contents' || $form_state['view']->current_display == 'special_how_made_widget_list')) {
 
-        $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+        $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
         // override taxonomy.
         $tax = itg_widget_get_active_taxonomy($tax);
 
