@@ -6537,6 +6537,7 @@ section.sidebar .block-itg-ads {
   vertical-align: top;
   padding: 30px 34px;
   border-bottom: 1px solid #dddddd;
+  width: 100%;
 }
 
 /*CSS End RHS add block*/
@@ -12533,6 +12534,10 @@ span.smilies-title img {
   color: #a1a1a1;
   font-family: roboto;
 }
+#block-itg-layout-manager-front-end-breadcrumb .container div.lft {
+  display: inline-block;
+  vertical-align: top;
+}
 
 .node-type-photogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-videogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-podcast #block-itg-layout-manager-front-end-breadcrumb, .section-videos #block-itg-layout-manager-front-end-breadcrumb {
   background: #171717;
@@ -12541,4 +12546,16 @@ span.smilies-title img {
 /*css breadcrumb end*/
 iframe[id*="twitter-widget"] {
   width: 100% !important;
+}
+
+.photo-heading {
+  font-size: 32px;
+  margin-bottom: 25px;
+  color: #fff;
+}
+
+.video-heading {
+  color: #fff;
+  font-size: 24px;
+  margin-bottom: 10px;
 }

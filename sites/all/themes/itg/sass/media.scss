@@ -426,6 +426,12 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
     height: auto;
 }
 /*for all special pages end*/
+/*search page css start */
+[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget {
+    padding-right: 10px;
+    font-size: 11px;
+}
+/*search page css end */
 }   
 
 
@@ -1489,6 +1495,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
         padding-left: 15px;
         width: 100%;
         background: transparent;
+        display: none;
     }
 }
 .event-sidebar .header-top .event-header-banner{
@@ -1683,6 +1690,21 @@ padding-right: 10px;
 }
 /*Globe change for don't miss end*/
 
+/*event page css start*/
+#block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider li{
+    width: 100%;
+}
+#block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider {
+    .slick-prev, .slick-next{
+        display: none;
+    }
+}
+/*event page css end*/
+.video-heading, .photo-heading{
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 10px;
+}
 
 
 }
