@@ -553,7 +553,7 @@ function ads_features_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_ads_template_selection',
-    'label' => 'Template Selection',
+    'label' => 'Select Section',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -734,9 +734,9 @@ function ads_features_field_default_field_instances() {
   t('Internal Body start script');
   t('Internal Header script	');
   t('Please enter script code with Javascript <b>script</b> tag.');
+  t('Select Section');
   t('Select template type');
   t('Start Date');
-  t('Template Selection');
   t('Template section');
 
   return $field_instances;

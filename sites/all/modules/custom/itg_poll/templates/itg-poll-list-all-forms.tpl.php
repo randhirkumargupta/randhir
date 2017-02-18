@@ -20,12 +20,16 @@ $fb_share_desc = '';
 $fb_share_image = '';
 // end here
 // Related node
-
-if (isset($data['related_nodes']) && !empty($data['related_nodes'])) {
+$related_content = $data['related_content'];
+if (isset($related_content) && !empty($related_content)) {
   $related_stories = '<div class="related-story relative-active"><span>' . t('RELATED STORY') . '</span><ul class="related-stories">';
 
-  foreach ($data['related_nodes'] as $related_stories_data) {
-    $related_stories .= '<li>' . $related_stories_data . '</li>';
+  foreach ($related_content as $related_stories_data) {
+    if(function_exists('itg_get_related_story_content')) {
+    $related_data = itg_get_related_story_content($related_stories_data);
+    $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
+    }
+    $related_stories .= '<li>' . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . '</li>';
   }
   $related_stories .= '</ul></div>';
   $related_stories_class = ' relative-with-img';
