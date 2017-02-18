@@ -449,7 +449,16 @@ function itg_image_croping_crop_image() {
     if ($extention == "") {
         $extention = 'png';
     }
+//Load orignal image 
+    if (!empty($_POST['original_img_id'])) {
+        $orignal_img = file_load($_POST['original_img_id']);
 
+        $orignal_file_name = $orignal_img->filename;
+        $orignal_file_name = substr($orignal_file_name, 0, (strrpos($orignal_file_name, ".")));
+    }
+    if ($orignal_file_name != "") {
+        $image_name = $orignal_file_name;
+    }
     $image_data_url = str_replace('data:image/' . $extention . ';base64,', '', $image_data_url);
     $imagedata = base64_decode($image_data_url);
     if (!file_exists(file_default_scheme() . '://crop_image')) {
@@ -459,19 +468,24 @@ function itg_image_croping_crop_image() {
     file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
     $image = image_load($file->uri);
 
+
     $fileids['fid'][] = $file->fid . '#' . $_POST['field_name'];
     if (!empty($image_fields) && !empty($image)) {
         foreach ($image_fields as $fields_name) {
             $file = array();
             if (!file_exists(file_default_scheme() . '://crop_image')) {
                 mkdir(file_default_scheme() . '://crop_image', 0777, TRUE);
-            } 
-           // echo is_writable(file_default_scheme() . '://crop_image');
+            }
+            // echo is_writable(file_default_scheme() . '://crop_image');
             $filepath = file_default_scheme() . '://crop_image';
             $scaled = image_resize($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height']);
             if ($scaled) {
                 $image_name = $fields_name . time();
-                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $extention );
+                if ($orignal_file_name != "") {
+                    $image_name = $orignal_file_name . rand(111, 9999) . time();
+                }
+
+                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $extention);
                 $uri = $filepath . '/' . $image_name . '.' . $extention;
                 $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
                 $file = new StdClass;
@@ -549,9 +563,7 @@ function itg_image_croping_crop_image_orignal() {
     $image_fields = $_POST['image_fields'];
     $fileids = array();
     $img_dim = mageimagedimesion();
-    if ($image_name == "") {
-        $image_name = time();
-    }
+
     $image_width = $img_dim[$content_type][$_POST['field_name']]['width'];
     $image_height = $img_dim[$content_type][$_POST['field_name']]['height'];
 
@@ -561,15 +573,18 @@ function itg_image_croping_crop_image_orignal() {
         $image_height = $_POST['resize_image_height'];
     }
 
-    $image_name = $image_name . rand(111, 999);
+
+
+
     $file_image = file_load($image_fiedlid);
     $image = image_load($file_image->uri);
     $image_exten = end(explode('.', $file_image->uri));
     $filepath = file_default_scheme() . '://crop_image';
     $scaled = image_resize($image, $image_width, $image_height);
-
-    $image_name = $image_name . time();
-    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten );
+    $image_name_orignal = $file_image->filename;
+    $image_name_orignal = substr($image_name_orignal, 0, (strrpos($image_name_orignal, ".")));
+    $image_name = $image_name_orignal . rand(111, 999) . time();
+    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten);
     $uri = $filepath . '/' . $image_name . '.' . $image_exten;
     $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
     $file = new StdClass;
@@ -592,8 +607,8 @@ function itg_image_croping_crop_image_orignal() {
             $filepath = file_default_scheme() . '://crop_image';
             $scaled = image_scale_and_crop($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height']);
             if ($scaled) {
-                $image_name = $fields_name . time();
-                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten );
+                $image_name = $image_name_orignal . rand(111, 999) . time();
+                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten);
                 $uri = $filepath . '/' . $image_name . '.' . $image_exten;
                 $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
                 $file = new StdClass;
@@ -976,17 +991,17 @@ class resize {
 
     private function getSizeByAuto($newWidth, $newHeight) {
         if ($this->height < $this->width) {
-        // *** Image to be resized is wider (landscape)
+            // *** Image to be resized is wider (landscape)
             $optimalWidth = $newWidth;
             $optimalHeight = $this->getSizeByFixedWidth($newWidth);
         }
         elseif ($this->height > $this->width) {
-        // *** Image to be resized is taller (portrait)
+            // *** Image to be resized is taller (portrait)
             $optimalWidth = $this->getSizeByFixedHeight($newHeight);
             $optimalHeight = $newHeight;
         }
         else {
-        // *** Image to be resizerd is a square
+            // *** Image to be resizerd is a square
             if ($newHeight < $newWidth) {
                 $optimalWidth = $newWidth;
                 $optimalHeight = $this->getSizeByFixedWidth($newWidth);
