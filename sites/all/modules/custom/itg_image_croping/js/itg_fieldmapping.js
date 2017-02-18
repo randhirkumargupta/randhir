@@ -1,5 +1,3 @@
-
-
 /*
  * @file itg_field_mapping.js
  * Contains all the functionality of mapping image to field 
@@ -333,17 +331,17 @@
                                     captionid = captionid.replace('[field_images][und][0]', "");
                                     var captionid1 = getbame + '[field_credit][und][0][value]';
                                     captionid1 = captionid1.replace('[field_images][und][0]', "");
-                                    
-                                     var syndi = getbame + '[field_image_syndication][und][yes]';
+
+                                    var syndi = getbame + '[field_image_syndication][und][yes]';
                                     syndi = syndi.replace('[field_images][und][0]', "");
                                     //  parent.jQuery('[name="' + captionid + '"]').val(image_title);
-                                     if (jQuery('.is_synd').is(':checked')) {
-                                       parent.jQuery('[name="' + syndi + '"]').prop('checked',true);
-                                     }
+                                    if (jQuery('.is_synd').is(':checked')) {
+                                        parent.jQuery('[name="' + syndi + '"]').prop('checked', true);
+                                    }
                                     parent.jQuery('[name="' + captionid1 + '"]').val(credit);
                                     hideloader();
                                     parent.jQuery.colorbox.close();
-                                }, 500);
+                                }, 2000);
                             }
 
 

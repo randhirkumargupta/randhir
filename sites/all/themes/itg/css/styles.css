@@ -343,7 +343,7 @@ p {
 header {
   margin-bottom: 30px;
   position: relative;
-  z-index: 10;
+  z-index: 99999;
 }
 
 #block-itg-layout-manager-header-block {

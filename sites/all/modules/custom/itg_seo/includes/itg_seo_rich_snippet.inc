@@ -17,7 +17,7 @@ function itg_seo_node_data($node) {
       $publisheddate = date('Y-m-d\Th:i:s+5:30', $node->changed);
     }
     $modified_date = date('Y-m-d\Th:i:s+5:30', $node->changed);
-    $description = strip_tags($node->body[LANGUAGE_NONE][0]['value']);
+    $description = strip_tags(substr($node->body[LANGUAGE_NONE][0]['value'],0,120));
     $get_author_name = user_load($node->uid);
     $auth_name = $get_author_name->name;
 
@@ -27,7 +27,7 @@ function itg_seo_node_data($node) {
 
     $markup = array(
         '#type' => 'markup',
-        '#markup' => '<script type="application/ld+jsoasdasdn"> {  {
+        '#markup' => '<script type="application/ld+json"> {  
                     "@context": "http://schema.org",
 
                     "@type": "NewsArticle",
@@ -56,7 +56,7 @@ function itg_seo_node_data($node) {
                     "width": 647,
                     "height": 363
                     }
-                    } } </script>',
+                    }  </script>',
     );
 
     drupal_add_html_head($markup, 'sd_json');
