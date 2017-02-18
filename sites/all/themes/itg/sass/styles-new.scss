@@ -3248,14 +3248,17 @@ body{
   .jw-controlbar-center-group{ 
     .jw-slider-horizontal{height: 39px;}
     .jw-slider-container{height: 39px;}
-    .jw-slider-horizontal .jw-buffer,
+    .jw-slider-horizontal .jw-buffer{
+      height: 39px;
+      background: url(../images/podcast_audio_white.png) -5px center /348px 35px no-repeat;
+    }
     .jw-slider-horizontal .jw-progress{
       height: 39px;
-      background: url(../images/podcast_audio_yellow.png) 0 center /348px 35px no-repeat;
+      background: url(../images/podcast_audio_yellow.png) -5px center /348px 35px no-repeat;
     } 
     .jw-slider-horizontal .jw-rail{
       height: 39px;
-      background: url(../images/podcast_audio_grey.png) 0 center /348px 35px no-repeat;
+      background: url(../images/podcast_audio_grey.png) -5px center /348px 35px no-repeat;
     }
     .jw-slider-horizontal .jw-knob{
       top: 0;
@@ -5859,6 +5862,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
   .cart-total-block .points-balance span{font-size: 13px; font-weight: 500;}
   .cart-total-block .points-balance span:first-child{max-width: 100px;} 
+  #block-itg-widget-podcast-header .podcast-header-container .podcast-header-top .pic{
+    width: 54px; height: 40px; margin-right: 0; overflow: hidden;
+    img{max-width: 100%;}
+  }
+  .podcast-detail .jw-controlbar{padding: 0;}
 }
 @media all and (max-width: 480px){
   .photos-videos-wrapper .movie-videos, 
