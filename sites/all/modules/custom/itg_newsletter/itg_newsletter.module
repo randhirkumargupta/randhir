@@ -120,6 +120,13 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id) {
       '#value' => t('Cancel'),
     );
 
+    $form['actions']['itg_custom_button'] = array(
+     '#type' => 'submit',
+     '#value' => t('Save as Draft'),
+     '#submit' => array('node_form_submit'),
+     '#weight' => -8,
+    );
+      
     $form['actions']['submit']['#value'] = t('Publish');
     unset($form['title']);
     unset($form['field_newsl_website_name']);
@@ -678,7 +685,7 @@ function itg_newsletter_send_automatic_newsletter() {
   $query_auto->fields('cn')
       ->condition('cn.status', 0, '=')
       ->condition('cn.type', 'automatic', '=')
-      ->condition('cn.scheduled_time', time(), '>=');
+      ->condition('cn.scheduled_time', time(), '<=');
   $result_auto = $query_auto->execute();
 
   while ($record_auto = $result_auto->fetchAssoc()) {

@@ -8,6 +8,7 @@ function itg_seo_node_data($node) {
   global $base_url, $theme_key;
   // Rich Snippet for Story
   if ($node->type == 'story') {
+    p($node);
 
     $mainEntityOfPage = $base_url . '/' . $node->path['alias'];
     $headline = $node->field_story_short_headline[LANGUAGE_NONE][0]['value'];
@@ -18,8 +19,9 @@ function itg_seo_node_data($node) {
     }
     $modified_date = date('Y-m-d\Th:i:s+5:30', $node->changed);
     $description = strip_tags(substr($node->body[LANGUAGE_NONE][0]['value'],0,120));
-    $get_author_name = user_load($node->uid);
-    $auth_name = $get_author_name->name;
+    $get_author_name = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id']; // user_load($node->uid);
+    $load_auth = node_load($get_author_name);
+    $auth_name = $load_auth->title;
 
     $logo = $base_url . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
     $imgarray = explode('//', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
