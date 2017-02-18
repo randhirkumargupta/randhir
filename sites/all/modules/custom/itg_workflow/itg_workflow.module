@@ -635,25 +635,25 @@ function itg_workflow_bulk_opration_related($field1, $field2) {
  */
 function itg_workflow_node_insert($node) {
   global $user;
-  if ((isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') || (empty($node->field_story_source_type[LANGUAGE_NONE][0]['value']))) {
-    if ($node->type == 'story' 
-            || $node->type == 'photogallery' 
-            || $node->type == 'blog' 
-            || $node->type == 'podcast' 
-            || $node->type == 'videogallery') {    
+  
+  if ($node->type == 'story' 
+          || $node->type == 'photogallery' 
+          || $node->type == 'blog' 
+          || $node->type == 'podcast' 
+          || $node->type == 'videogallery') {    
 
-      /*if (!array_key_exists(COPY_EDITOR, $user->roles) &&
-              !array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) &&
-              !array_key_exists(EDITOR, $user->roles) &&
-              !array_key_exists(SITE_ADMIN, $user->roles) &&
-              !($node->workbench_moderation_state_new == 'draft')) {
+    /*if (!array_key_exists(COPY_EDITOR, $user->roles) &&
+            !array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) &&
+            !array_key_exists(EDITOR, $user->roles) &&
+            !array_key_exists(SITE_ADMIN, $user->roles) &&
+            !($node->workbench_moderation_state_new == 'draft')) {
 
-        //getting mail id's of high level users
-        $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
-        $user_email = get_email_by_roll($rid);
-        workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
-       }*/
-
+      //getting mail id's of high level users
+      $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
+      $user_email = get_email_by_roll($rid);
+      workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
+     }*/
+    if (!empty($node->field_preview_unique_id['und'])) {
       $preview_unique_id = $node->field_preview_unique_id['und'][0]['value'];
       $user_id = $user->uid;
       $node_id = $node->nid;
@@ -672,8 +672,8 @@ function itg_workflow_node_insert($node) {
         drupal_set_message($ex->getMessage());
       }
       unset($_SESSION['node_preview_unique']);
-    }
-  }
+   }
+ }
 
 }
 

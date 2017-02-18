@@ -70,6 +70,12 @@ function itg_category_manager_menu() {
     'access arguments' => array('administer taxonomy'),
     'type' => MENU_CALLBACK
   );
+  // Autocomplete callback for category name
+  $items['itg_category_manager_autocomplete_tid'] = array(
+    'page callback' => 'itg_category_manager_autocomplete_tid',
+    'access arguments' => array('administer taxonomy'),
+    'type' => MENU_CALLBACK
+  );
 // Category disable menus
   $items['category-management/disable-forcefully'] = array(
     'page callback' => 'itg_category_manager_disable_forcefully',
@@ -1062,6 +1068,7 @@ function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
     drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/clipboard.min.js', 'file');
     drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js', 'file');
     $form['name']['#autocomplete_path'] = 'itg_category_manager_autocomplete';
+    $form['tid_raw']['#autocomplete_path'] = 'itg_category_manager_autocomplete_tid';
     $form['status']['#options'][1] = t('Active');
     $form['status']['#options'][0] = t('Inactive');
     $form['field_cm_select_type_value']['#options']['All'] = t('All');
@@ -1289,6 +1296,24 @@ function itg_category_manager_autocomplete_name($string) {
   $result = array();
   foreach ($itg_result as $value) {
     $result[$value->name] = $value->name;
+  }
+  return drupal_json_output($result);
+}
+
+/**
+ * Callback function for category name autocomplete.
+ * 
+ * @param string $string keyword for auto suggest.
+ * @return json Autocomplete callback for category manager view
+ */
+function itg_category_manager_autocomplete_tid($string) {
+  $itg_query = db_select('taxonomy_term_data', 'itg');
+  $itg_query->condition('tid', $string . '%', 'LIKE')
+      ->fields('itg', array('tid'));
+  $itg_result = $itg_query->execute();
+  $result = array();
+  foreach ($itg_result as $value) {
+    $result[$value->tid] = $value->tid;
   }
   return drupal_json_output($result);
 }

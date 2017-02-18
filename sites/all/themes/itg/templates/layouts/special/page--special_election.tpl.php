@@ -34,9 +34,7 @@ if (!empty($device[0])) {
     }
 }
 
-if ($highlights['node_data']->field_story_expires[LANGUAGE_NONE][0]['value'] != 'Yes') {
-    $live_url = '';
-}
+
 if ($theme == 'itgadmin' && !isset($preview)) {
     $gray_bg_layout = 'gray-bg-layout';
 }
@@ -490,9 +488,9 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                             <?php } ?>  
 
                                         <div class="data-holder" id="itg-block-11"><?php
-                                            $block = module_invoke('itg_widget', 'block_view', 'budget_tweets');
-                                            print render($block['content']);
-                                            ?></div>
+                                           // $block = module_invoke('itg_widget', 'block_view', 'budget_tweets');
+                                          //  print render($block['content']);
+                                            ?>><?php print $widget_data['itg-block-11']['widget']; ?></div>
                                     </div>             
                                 </div>               
                             </div> 
