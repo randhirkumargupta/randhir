@@ -372,8 +372,9 @@ function itg_podcast_submit_status_message(&$form, $form_state) {
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
   }
-
-  itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $_REQUEST['destination']);
+  if ($form_state['input']['op'] != 'Save as Draft') {
+    itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $_REQUEST['destination']);
+  }
 }
 
 /**
@@ -395,11 +396,12 @@ function itg_podcast_node_validate($node, $form, &$form_state) {
  * Implements hook_node_presave()
  * {@inheritdoc}
  */
-function itg_podcast_node_presave($node) {
-  module_load_include('php', 'itg_podcast', 'includes/getid3/getid3');
+function itg_podcast_node_presave($node) {  
   
   // Set audio length.
   if ($node->type == "podcast") {
+    module_load_include('php', 'itg_podcast', 'includes/getid3/getid3');
+    
     foreach ($node->field_podcast_audio_upload['und'] as $audio_key => $audio_files_data) {
       $fid = $audio_files_data['field_podcast_upload_audio_file']['und'][0]['fid'];
       $file_data = file_load($fid);

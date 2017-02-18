@@ -397,7 +397,7 @@ function highlight($text, $words, $color = 'yellow', $case = '1') {
 function itg_front_search_node_presave($node) {
 
   //if ($node->type == 'story' || $node->type == 'recipe' || $node->type == 'cooking_tips' || $node->type == 'videogallery' || $node->type == 'food_news') {
-  if ($node->type == 'story' || $node->type == 'videogallery') {
+  if ($node->type == 'videogallery') {
     if (isset($node->field_story_reporter['und'])) {
       foreach ($node->field_story_reporter['und'] as $high) {
         $reporter_id = $high['target_id'];
@@ -420,12 +420,8 @@ function itg_front_search_node_presave($node) {
         $node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'] = $final_by_line_twitter;
       }
     }
-  }
-
-  if ($node->type == 'photogallery')
-  {
-    if (!empty($node->field_photo_by[LANGUAGE_NONE][0]['target_id']))
-    {
+  } else if ($node->type == 'photogallery') {
+    if (!empty($node->field_photo_by[LANGUAGE_NONE][0]['target_id'])) {
       $photo_by_id = $node->field_photo_by[LANGUAGE_NONE][0]['target_id'];
       $reporter_node = node_load($photo_by_id);
       $node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'] = strtolower($reporter_node->title);

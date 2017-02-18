@@ -814,8 +814,10 @@ function itg_videogallery_submit_status_message(&$form, $form_state) {
     if ($request_destination == 'published-video') {
         $redirect_path .= "?field_story_syndication_value_op=all";
     }
-
-    itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path);
+    
+    if ($form_state['input']['op'] != 'Save as Draft') {
+      itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path);
+    }
 }
 
 /**

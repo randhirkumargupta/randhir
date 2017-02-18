@@ -249,9 +249,11 @@ function itg_story_form_custom_callback($form, &$form_state) {
     if ($request_destination == 'published-story') {
         $redirect_path .= "?field_story_syndication_value_op=all";
     }
-
-    if (function_exists('itg_custom_message')) {
-        itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path);
+    
+    if ($form_state['input']['op'] != 'Save as Draft') {        
+      if (function_exists('itg_custom_message')) {
+        itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path, $action);
+      }
     }
 }
 
@@ -707,7 +709,9 @@ function itg_story_views_query_alter(&$view, &$query) {
 function itg_story_node_presave($node) {
     $type = $node->type;
     if ($type == 'story' && !empty($node->field_story_magazine_story_issue['und'][0]['value'])) {
+      if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
         $node->field_story_source_type['und'][0]['value'] = 'Magazine Story';
+      }        
     }
 }
 
