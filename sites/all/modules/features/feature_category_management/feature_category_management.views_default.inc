@@ -479,6 +479,7 @@ function feature_category_management_views_default_views() {
   $handler->display->display_options['filters']['name']['field'] = 'name';
   $handler->display->display_options['filters']['name']['relationship'] = 'tid';
   $handler->display->display_options['filters']['name']['operator'] = 'contains';
+  $handler->display->display_options['filters']['name']['group'] = 1;
   $handler->display->display_options['filters']['name']['exposed'] = TRUE;
   $handler->display->display_options['filters']['name']['expose']['operator_id'] = 'name_op';
   $handler->display->display_options['filters']['name']['expose']['label'] = 'keyword';
@@ -506,6 +507,44 @@ function feature_category_management_views_default_views() {
     15 => 0,
     18 => 0,
   );
+  /* Filter criterion: Taxonomy term: Term ID */
+  $handler->display->display_options['filters']['tid_raw']['id'] = 'tid_raw';
+  $handler->display->display_options['filters']['tid_raw']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['tid_raw']['field'] = 'tid_raw';
+  $handler->display->display_options['filters']['tid_raw']['relationship'] = 'tid';
+  $handler->display->display_options['filters']['tid_raw']['group'] = 1;
+  $handler->display->display_options['filters']['tid_raw']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['tid_raw']['expose']['operator_id'] = 'tid_raw_op';
+  $handler->display->display_options['filters']['tid_raw']['expose']['label'] = 'Category Id';
+  $handler->display->display_options['filters']['tid_raw']['expose']['operator'] = 'tid_raw_op';
+  $handler->display->display_options['filters']['tid_raw']['expose']['identifier'] = 'tid_raw';
+  $handler->display->display_options['filters']['tid_raw']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
   /* Filter criterion: Taxonomy term: Vocabulary */
   $handler->display->display_options['filters']['vid']['id'] = 'vid';
   $handler->display->display_options['filters']['vid']['table'] = 'taxonomy_term_data';
@@ -514,11 +553,13 @@ function feature_category_management_views_default_views() {
   $handler->display->display_options['filters']['vid']['value'] = array(
     4 => '4',
   );
+  $handler->display->display_options['filters']['vid']['group'] = 1;
   /* Filter criterion: Taxonomy term: Content Type (field_cm_select_type) */
   $handler->display->display_options['filters']['field_cm_select_type_value']['id'] = 'field_cm_select_type_value';
   $handler->display->display_options['filters']['field_cm_select_type_value']['table'] = 'field_data_field_cm_select_type';
   $handler->display->display_options['filters']['field_cm_select_type_value']['field'] = 'field_cm_select_type_value';
   $handler->display->display_options['filters']['field_cm_select_type_value']['relationship'] = 'tid';
+  $handler->display->display_options['filters']['field_cm_select_type_value']['group'] = 1;
   $handler->display->display_options['filters']['field_cm_select_type_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_cm_select_type_value']['expose']['operator_id'] = 'field_cm_select_type_value_op';
   $handler->display->display_options['filters']['field_cm_select_type_value']['expose']['label'] = 'Content Type';
@@ -552,6 +593,7 @@ function feature_category_management_views_default_views() {
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['operator'] = 'in';
   $handler->display->display_options['filters']['status']['value'] = array();
+  $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['exposed'] = TRUE;
   $handler->display->display_options['filters']['status']['expose']['operator_id'] = 'status_op';
   $handler->display->display_options['filters']['status']['expose']['label'] = 'Status';
@@ -585,6 +627,7 @@ function feature_category_management_views_default_views() {
   $handler->display->display_options['filters']['parent']['field'] = 'parent';
   $handler->display->display_options['filters']['parent']['relationship'] = 'tid';
   $handler->display->display_options['filters']['parent']['value']['value'] = '0';
+  $handler->display->display_options['filters']['parent']['group'] = 1;
   $handler->display->display_options['path'] = 'category-manager-listing';
   $export['category_manager'] = $view;
 
