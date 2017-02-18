@@ -22,8 +22,8 @@ class ItgTagsMigration extends XMLMigration {
     
     // This can also be an URL instead of a local file path.
     $file_path = 'sites/default/files';
-    $xml_path = $file_path . '/migrate/xml_file';
-    $xml_folder = $file_path . '/' . 'migrate/xml_file/';
+    //$xml_path = $file_path . '/migrate/xml_file';
+    $xml_folder = $file_path . '/' . 'migrate/xml_file/tags_chunk/';
     
     $items_url = $xml_folder . 'tags-master.xml';
     
@@ -67,5 +67,9 @@ class ItgTagsMigration extends XMLMigration {
     // /categories/category/name).
     
     $this->addFieldMapping('name', 'metatag')->xpath('metatag');
+    $this->addUnmigratedDestinations(array('path', 'description', 'format', 'weight', 'parent', 'parent_name'));
+  }
+  public function prepareRow($row) {
+    print $row->xml->id . ' ';
   }
 }

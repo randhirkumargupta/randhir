@@ -895,7 +895,9 @@ function itg_ugc_node_insert($node) {
     }
     else
     {
+      if(!empty($node->field_story_source_id[LANGUAGE_NONE])){
       $source_id = $node->field_story_source_id[LANGUAGE_NONE][0]['value'];
+      }
     }
     if ($source_type == 'UGC' && !empty($source_id))
     {

@@ -26,6 +26,7 @@ function itg_social_media_views_data() {
             'handler' => 'itg_social_media_views_handler',
             'click sortable' => TRUE,
         ),
+        
     );
 
     $data['itg_social_media_logs']['count_fb_promote'] = array(

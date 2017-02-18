@@ -1114,8 +1114,10 @@ function associate_content_poll() {
  * {@inheritdoc}
  */
 function itg_poll_node_insert($node) {
-  if ($node->type == 'story') {
-    poll_count_of_content($node->body['und'][0]['value'], $node, 'insert');
+  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+    if ($node->type == 'story') {
+      poll_count_of_content($node->body['und'][0]['value'], $node, 'insert');
+    }
   }
 }
 
@@ -1124,8 +1126,10 @@ function itg_poll_node_insert($node) {
  * {@inheritdoc}
  */
 function itg_poll_node_update($node) {
-  if ($node->type == 'story') {
-    poll_count_of_content($node->body['und'][0]['value'], $node, 'update');
+  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+    if ($node->type == 'story') {
+      poll_count_of_content($node->body['und'][0]['value'], $node, 'update');
+    }
   }
 }
 

@@ -10,7 +10,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
 ?>
 <div class="row">
     <div class="col-md-12">
-        <h2><?php print $rows[0]['title']; ?></h2>    
+        <h1 class="photo-heading"><?php print $rows[0]['title']; ?></h1>    
         <div class="social-icon desktop-hide">
             <ul>
                 <li><a title="share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>

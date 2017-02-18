@@ -53,7 +53,9 @@
 
   <div class="category-manager-thead">
       <div class="cmt-title">Category Name</div>
+     
       <div class="cmt-other">SEF URL</div>
+       <div class="cmt-other">Category Id</div>
       <div class="cmt-other">Created Date</div>
       <div class="cmt-other">Modified on</div>
       <div class="cmt-other">Status</div>
