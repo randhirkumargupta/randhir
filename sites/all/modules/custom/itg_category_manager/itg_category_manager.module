@@ -1323,7 +1323,7 @@ function itg_category_manager_autocomplete_tid($string) {
  */
 function itg_category_manager_disable_forcefully() {
   $current_term = check_plain($_POST['tid']);
-  $is_child = taxonomy_get_tree(4, $current_term);
+  $is_child = taxonomy_get_tree(CATEGORY_MANAGMENT, $current_term);
   if (count($is_child) > 0) {
     drupal_set_message(t('Category has child categories can not be inactivated.'), 'error');
   }
@@ -1465,10 +1465,10 @@ function itg_category_manager_disable_manually_form_validate($form, &$form_state
 function itg_category_manager_disable_manually_form_submit($form, &$form_state) {
   $parent_category = $form_state['values']['itg_categories'];
   $current_term = check_plain($form_state['values']['tid']);
-  $is_child = taxonomy_get_tree('4', $current_term);
+  $is_child = taxonomy_get_tree(CATEGORY_MANAGMENT, $current_term);
   if (count($is_child) > 0) {
     drupal_set_message(t('Category has child categories can not be inactivated.'), 'status');
-   // p('have child');
+
   }
   else {
     $all_term_count = count($parent_category);
@@ -1565,7 +1565,7 @@ function itg_category_manager_views_query_alter(&$view, &$query) {
     // Alter content type filter.
     if (!empty($_GET['field_cm_select_type_value']) && $_GET['field_cm_select_type_value'] != 'All') {
       $condition_count = count($query->where[1]['conditions']);
-      unset($query->where[1]['conditions'][$condition_count - 1]);
+      //unset($query->where[1]['conditions'][$condition_count - 1]);
     }        
   }
 }
