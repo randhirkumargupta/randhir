@@ -20,9 +20,9 @@ function itg_common_init() {
   global $user, $base_url, $theme;
   
   //code for multidomain
-  if (arg(0) != 'user' && $base_url == BACKEND_URL && ($user->uid == 0 || array_key_exists(FRONT_USER, $user->roles))) {    
-    drupal_goto('user');
-  }
+//  if (arg(0) != 'user' && $base_url == BACKEND_URL && ($user->uid == 0 || array_key_exists(FRONT_USER, $user->roles))) {    
+//    drupal_goto('user');
+//  }
   
   if ($theme == 'itgadmin') {
     $settings = array();
@@ -212,7 +212,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     }
   }
   $form['#after_build'][] = 'itg_common_add_js_top_btn';
-  $form['actions']['submit']['#submit'][] = 'itg_draft_form_custom_callback';
+  if (!empty($form_state['node']->type)) {
+    $form['actions']['submit']['#submit'][] = 'itg_draft_form_custom_callback';
+  }
 }
 
 /**
