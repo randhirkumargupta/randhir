@@ -122,6 +122,7 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
       break;
     case 'survey_node_form':
     case 'astro_node_form':
+    case 'newsletter_node_form':
       itg_recepi_save_draft_button($form);
       break;
     case 'poll_node_form':
@@ -145,7 +146,7 @@ function itg_recepi_save_draft_button(&$form) {
         '#type' => 'submit',
         '#value' => t('Save as Draft'),
         '#submit' => array(
-            'node_form_submit'
+            'node_form_submit','itg_save_draft_form_custom_callback'
         ),
     );
 
@@ -482,4 +483,17 @@ function itg_recipe_form_views_exposed_form_alter(&$form, &$form_state, $form_id
     $form['title']['#autocomplete_path'] = 'content-title-list/food_news/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
+}
+
+/**
+ * After submit callback for draft
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_save_draft_form_custom_callback($form, &$form_state) {  
+  
+    $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination='.$_GET['destination'];    
+    //drupal_set_message(t($form_state['values']['type'] . ' <b>' . $form_state['values']['title'] . '</b> has been save successfully.'));
+    $_GET['destination'] = $redirect_path;
+  
 }

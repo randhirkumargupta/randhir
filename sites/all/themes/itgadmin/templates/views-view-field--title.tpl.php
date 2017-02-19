@@ -27,8 +27,10 @@
 if ($row->_field_data['nid']['entity']->type == 'event_backend') {
   print $output;
 } else {
-    //print l($output, 'node/'.$row->nid, array('attributes' => array('target' => '_blank')));
-        print l($output, 'node/'.$row->nid, array('attributes' => array('class' => 'colorbox-load'))); 
+    //$color_box_query = array("width" => "900", "height" => "600", "iframe" => "true");
+    //$color_box_class = array("class" => array("colorbox-load"));
+    print l($output, 'node/'.$row->nid, array('attributes' => array('target' => '_blank')));
+    //print l($output, 'node/'.$row->nid, array('query' => $color_box_query, 'attributes' => $color_box_class)); 
 }
   
 ?>
