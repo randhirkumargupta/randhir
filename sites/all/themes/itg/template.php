@@ -188,8 +188,8 @@ function itg_breadcrumb($variables) {
  */
 
 function itg_preprocess_html(&$vars) {
-  global $base_url;
-  if ($base_url == BACKEND_URL) {
+  global $base_url, $user;
+  if ($base_url == BACKEND_URL && !empty($user->uid)) {
     $vars['classes_array'][] = 'pointer-event-none';
   }
   // Code started for adding header , body start , body close for ads module
