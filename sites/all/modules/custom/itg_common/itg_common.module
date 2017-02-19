@@ -212,7 +212,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     }
   }
   $form['#after_build'][] = 'itg_common_add_js_top_btn';
-  $form['actions']['submit']['#submit'][] = 'itg_draft_form_custom_callback';
+  if (!empty($form_state['node']->type)) {
+    $form['actions']['submit']['#submit'][] = 'itg_draft_form_custom_callback';
+  }
 }
 
 /**
