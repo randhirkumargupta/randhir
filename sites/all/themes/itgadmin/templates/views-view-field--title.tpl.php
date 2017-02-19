@@ -27,7 +27,8 @@
 if ($row->_field_data['nid']['entity']->type == 'event_backend') {
   print $output;
 } else {
-    print l($output, 'node/'.$row->nid, array('attributes' => array('target' => '_blank'))); 
+    //print l($output, 'node/'.$row->nid, array('attributes' => array('target' => '_blank')));
+        print l($output, 'node/'.$row->nid, array('attributes' => array('class' => 'colorbox-load'))); 
 }
   
 ?>
