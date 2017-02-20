@@ -350,6 +350,7 @@ function itg_front_search_form_views_exposed_form_alter(&$form, &$form_state, $f
   if ($form["#id"] == 'views-exposed-form-searchimage-page') {
 
     $form['tm_vid_4_names']['#autocomplete_path'] = 'tag-list/' . CATEGORY_MANAGMENT . '/autocomplete';
+    $form['tm_vid_14_names']['#autocomplete_path'] = 'tag-list/' . CATEGORY_MANAGMENT . '/autocomplete';
   }
 }
 
