@@ -119,13 +119,6 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => 21,
       '#value' => t('Cancel'),
     );
-
-    $form['actions']['itg_custom_button'] = array(
-     '#type' => 'submit',
-     '#value' => t('Save as Draft'),
-     '#submit' => array('node_form_submit'),
-     '#weight' => -8,
-    );
       
     $form['actions']['submit']['#value'] = t('Publish');
     unset($form['title']);
@@ -175,6 +168,7 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id) {
     $form['actions']['submit']['#submit'][] = 'itg_newsletter_submit_handler_for_redirect';
   }
 }
+
 
 /**
  * Custom submit callback for alter message after operation.
