@@ -3353,7 +3353,7 @@ function features_for_story_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 98,
+        'weight' => 122,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3376,10 +3376,10 @@ function features_for_story_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'size' => 60,
+        'rows' => 5,
       ),
-      'type' => 'text_textfield',
-      'weight' => 88,
+      'type' => 'text_textarea',
+      'weight' => 114,
     ),
   );
 
