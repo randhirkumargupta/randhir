@@ -62,6 +62,12 @@ function itg_menu_manager_schema() {
               'length' => '255',
               'not null' => TRUE,
           ),
+          'display_icon' => array(
+              'description' => 'display icon',
+              'type' => 'varchar',
+              'length' => '255',
+              'not null' => TRUE,
+          ),
           'weight' => array(
               'description' => 'weight of menu',
               'type' => 'int',
@@ -83,5 +89,32 @@ function itg_menu_manager_schema() {
       'primary key' => array('id'),
   );
 
+  $schema['itg_workflow_preview_log'] = array(
+    'description' => 'Preview logs',
+    'fields' => array(
+      'tid' => array(
+        'description' => 'parimary key',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'node id',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'preview_id' => array(
+        'description' => 'Preview id',
+        'type' => 'varchar',
+        'length' => '100',
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'user id',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('tid'),
+  );
   return $schema;
 }
