@@ -13,7 +13,8 @@ if (function_exists('itg_common_mongo_activity_user_count'))
   $comment_count = itg_common_mongo_activity_user_count($user->uid, 'itgcms_comment', 'comment', 1);
   $google_share_count = itg_common_mongo_activity_user_count($user->uid, 'front_user_activity', 'google_share', '1');
   $twitter_share_count = itg_common_mongo_activity_user_count($user->uid, 'front_user_activity', 'twitter_share', '1');
-  $tot_count = $google_share_count + $twitter_share_count;
+  $facebook_share_count = itg_user_fb_share_count($user->uid, 'Content Share');
+  $tot_count = $google_share_count + $twitter_share_count + $facebook_share_count;
 }
 ?>
 <div class="personalized-wrapper">
