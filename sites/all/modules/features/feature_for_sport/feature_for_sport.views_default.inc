@@ -112,16 +112,6 @@ function feature_for_sport_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Contextual filter: Content: section (field_page_section) */
-  $handler->display->display_options['arguments']['field_page_section_tid']['id'] = 'field_page_section_tid';
-  $handler->display->display_options['arguments']['field_page_section_tid']['table'] = 'field_data_field_page_section';
-  $handler->display->display_options['arguments']['field_page_section_tid']['field'] = 'field_page_section_tid';
-  $handler->display->display_options['arguments']['field_page_section_tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_page_section_tid']['default_argument_type'] = 'php';
-  $handler->display->display_options['arguments']['field_page_section_tid']['default_argument_options']['code'] = 'return arg(1);';
-  $handler->display->display_options['arguments']['field_page_section_tid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['field_page_section_tid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['field_page_section_tid']['summary_options']['items_per_page'] = '25';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -134,7 +124,7 @@ function feature_for_sport_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'page' => 'page',
+    'sport_static_page' => 'sport_static_page',
   );
 
   /* Display: Page */
