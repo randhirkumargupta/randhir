@@ -69,7 +69,11 @@ function itg_ugc_comment_menu() {
     'file' => 'includes/ugc_comment_listing.inc',
   );
 
-  
+  $items['user-email-list'] = array(
+    'page callback' => 'itg_ugc_get_user_email',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -362,6 +366,7 @@ function itg_user_block_api_form($form, &$form_state) {
     '#maxlength' => 255,
     '#size' => 30,
     '#attributes' => array('placeholder' => t('Email'), 'autocomplete' => 'off'),
+    '#autocomplete_path' => 'user-email-list',
     '#default_value' => isset($_GET['email']) ? $_GET['email']:"",
   );
   
@@ -439,5 +444,25 @@ function itg_get_user_image($uid) {
             ->condition('uf.entity_id', $uid);
 
     return $query->execute()->fetchField();
+  }
+}
+
+/**
+ * Helper function to get user email
+ * @param string $text
+ */
+function itg_ugc_get_user_email($text) {
+  $data = '';
+  if (function_exists('mongodb')) {
+    $db = mongodb();
+    $people = $db->itgcms_comment;
+    $regex = new MongoRegex("/^$text/i");
+    $cond = array('email' => $regex);
+    $cursor = $people->find($cond);
+    $data = '';
+    foreach ($cursor as $document) {
+      $data[$document['email']] = trim($document['email']);
+    }
+    drupal_json_output($data);
   }
 }
