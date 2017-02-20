@@ -75,6 +75,10 @@ function itg_payment_theme() {
       'render element' => 'form',
       'template' => 'templates/itg-payment-response-fail',
     ),
+    'itg_icici_merchant_form' => array(
+      'render element' => 'form',
+      'template' => 'templates/itg-icici-merchant-form',
+    ),
   );
 }
 
@@ -365,7 +369,7 @@ function itg_payment_checkout() {
     case 'icici':
       if (isset($_SESSION['event_registration_payment']['event_key'])) {
         $args = itg_payment_decode_data($_SESSION['event_registration_payment']['event_key']);
-        return drupal_render(drupal_get_form('itg_payment_order_form', $args));
+        return drupal_render(drupal_get_form('itg_icici_order_form', $args));
       }
       //Prevent direct access the checkout url, if user is not procced the payment button.
       drupal_set_message(t("Something went wrong"), 'error');
