@@ -44,10 +44,10 @@
                             var obj = jQuery.parseJSON(result);
                             if (obj.ok == 'true') {
                                 if (obj.success == 'block') {
-                                    jQuery('.block_success').html('Email ' + email.join(", ") + ' Blocked Sucessfully').show();
+                                    //jQuery('.block_success').html('Email ' + email.join(", ") + ' Blocked Sucessfully').show();
                                 }
                                 if (obj.success == 'unblock') {
-                                    jQuery('.block_success').html('Email ' + email.join(", ") + ' Unblocked Sucessfully').show();
+                                    //jQuery('.block_success').html('Email ' + email.join(", ") + ' Unblocked Sucessfully').show();
                                 }
                                 jQuery('#itg-user-block-api-form')[0].reset();
                                 window.location.reload('true');
