@@ -3690,6 +3690,7 @@ fieldset#edit-select .form-submit {
 .view-category-manager .cmd-heading .fa {
   float: left;
   margin: 5px 10px 0 0;
+  cursor: pointer;
 }
 .view-category-manager .cmd-heading p {
   overflow: hidden;
@@ -3706,7 +3707,7 @@ fieldset#edit-select .form-submit {
   width: 30%;
 }
 .view-category-manager .view-content .item-list ul li .term-wrapper .term-detail:nth-child(2) {
-  width: 30%;
+  width: 20%;
 }
 .view-category-manager .view-content .item-list ul li .term-wrapper .term-detail a {
   color: #1fb5ad;
@@ -3758,13 +3759,13 @@ fieldset#edit-select .form-submit {
   padding: 8px 5px;
 }
 .category-manager-thead div.cmt-title {
-  width: 35%;
+  width: 30%;
 }
 .category-manager-thead div.cmt-other {
   width: 10%;
 }
 .category-manager-thead div.cmt-other:nth-child(2) {
-  width: 25%;
+  width: 20%;
 }
 
 .details-parent {
