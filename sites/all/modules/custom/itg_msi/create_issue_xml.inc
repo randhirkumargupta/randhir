@@ -59,8 +59,8 @@ function _create_issue_using_xmlfile($node, $op) {
 function _create_issue_process($fid, $node_info, $parent_node) {
   global $user;
   $xml_file = file_load($fid);
-  $xml_file_path = str_replace('public://', 'sites/default/files/', $xml_file->uri);
-  $xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
+  $fileuri = file_create_url($xml_file->uri);
+  $xml = simplexml_load_file($fileuri, 'SimpleXMLElement', LIBXML_NOCDATA);
 
   if (!empty($xml)) {
     //Get XML unique UID
