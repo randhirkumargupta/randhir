@@ -77,7 +77,7 @@ function feature_for_live_tv_integration_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_ads_header_script',
-    'label' => 'Web Mobil',
+    'label' => 'Web Mobile',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -267,7 +267,7 @@ function feature_for_live_tv_integration_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Android');
   t('Web');
-  t('Web Mobil');
+  t('Web Mobile');
   t('Window');
   t('device');
   t('iOS');

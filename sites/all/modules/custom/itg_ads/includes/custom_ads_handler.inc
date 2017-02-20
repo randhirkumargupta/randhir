@@ -41,7 +41,7 @@ class views_handler_custom_ads_ex_status extends views_handler_field {
       if ($startdate <= $now && $now <= $enddate) {
         return 'Active';
       } else {
-        return 'Expired';
+        return 'Inactive';
       }
     }
     else if (isset($startdate) && !empty($startdate) && !isset($enddate) && empty($enddate)) {

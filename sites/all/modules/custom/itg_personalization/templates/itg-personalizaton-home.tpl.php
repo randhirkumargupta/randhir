@@ -11,6 +11,9 @@ if (function_exists('itg_common_mongo_activity_user_count'))
   $follow_ugc_content = itg_common_mongo_activity_user_count($user->uid, 'front_user_activity', 'follow_story', '1');
   $read_later_content = itg_common_mongo_activity_user_count($user->uid, 'front_user_activity', 'read_later', '1');
   $comment_count = itg_common_mongo_activity_user_count($user->uid, 'itgcms_comment', 'comment', 1);
+  $google_share_count = itg_common_mongo_activity_user_count($user->uid, 'front_user_activity', 'google_share', '1');
+  $twitter_share_count = itg_common_mongo_activity_user_count($user->uid, 'front_user_activity', 'twitter_share', '1');
+  $tot_count = $google_share_count + $twitter_share_count;
 }
 ?>
 <div class="personalized-wrapper">
@@ -30,7 +33,7 @@ if (function_exists('itg_common_mongo_activity_user_count'))
       </span>
       <span>
         <i class="fa fa-share-alt" aria-hidden="true"></i>
-        <dfn>2536</dfn>
+        <dfn><?php print $tot_count; ?></dfn>
       </span>
       <span>
         <i class="fa fa-comment" aria-hidden="true"></i>

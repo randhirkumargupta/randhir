@@ -292,7 +292,7 @@ function ads_features_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Content: Template Selection (field_ads_template_selection) */
+  /* Filter criterion: Content: Select Section (field_ads_template_selection) */
   $handler->display->display_options['filters']['field_ads_template_selection_value']['id'] = 'field_ads_template_selection_value';
   $handler->display->display_options['filters']['field_ads_template_selection_value']['table'] = 'field_data_field_ads_template_selection';
   $handler->display->display_options['filters']['field_ads_template_selection_value']['field'] = 'field_ads_template_selection_value';

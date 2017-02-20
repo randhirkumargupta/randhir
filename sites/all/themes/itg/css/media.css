@@ -260,31 +260,6 @@
   }
 
   /*sider bar css end*/
-  /*css start poll page*/
-  .poll-banner .detail {
-    width: auto;
-    display: block;
-    overflow: hidden;
-    float: none;
-    padding-right: 0px;
-  }
-  .poll-banner .detail .detail-content h4 {
-    font-size: 15px;
-    font-size: 0.9375rem;
-    line-height: 20px;
-  }
-  .poll-banner .poll-list .pic {
-    width: 145px;
-    margin-right: 10px;
-  }
-  .poll-banner .poll-list .voting-data {
-    float: none;
-    width: 100%;
-    overflow: hidden;
-    padding-top: 15px;
-  }
-
-  /*css end poll page*/
   /*css start osscar page */
   .oscar-layout-page .osscar-video ul .dont-miss-listing .dm-pic {
     width: 124px;
@@ -436,15 +411,53 @@
   }
 
   /*oscar page css end*/
+  /*poll page css start*/
+  .poll-banner .detail {
+    width: 33%;
+  }
+  .poll-banner .poll-list .voting-data {
+    width: 41%;
+  }
+
+  /*poll page css end*/
+  /*education page css start*/
+  .education-layout-page .auto-block-2 .special-top-news {
+    overflow: scroll;
+  }
+
+  /*education page css end*/
+  /*for all special pages start*/
+  .widget-wrapper {
+    max-height: 100%;
+    overflow: auto;
+    height: auto;
+  }
+
+  /*for all special pages end*/
+  /*search page css start */
+  [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget {
+    padding-right: 10px;
+    font-size: 11px;
+  }
+
+  /*search page css end */
 }
 @media only screen and (max-width: 991px) {
   /*CSS start education page special*/
-  .education-layout-page .itg-layout-672 .droppable, .education-layout-page .itg-layout-672 .droppable .auto-block-1, .education-layout-page .itg-layout-672 .droppable .auto-block-2 {
+  .education-layout-page .itg-layout-672 .droppable, .education-layout-page .itg-layout-672 .droppable .auto-block-1 {
     height: auto;
   }
 
   .education-layout-page .itg-layout-672 .droppable .auto-block-1, .education-layout-page .itg-layout-672 .droppable .auto-block-2 {
     margin-bottom: 50px;
+  }
+
+  .education-layout-page .itg-layout-672 .droppable .auto-block-1 {
+    border: none;
+  }
+
+  .education-layout-page .featured-news {
+    margin: 0 -5px;
   }
 
   .education-layout-page .auto-block-3 .m-bottom40 {
@@ -543,6 +556,21 @@
   }
 
   /*    oscar page css end*/
+  /*poll page css start*/
+  .poll-banner .detail {
+    width: 40%;
+  }
+  .poll-banner .poll-list .voting-data {
+    width: 35%;
+  }
+
+  /*poll page css end*/
+  /*budget page css start*/
+  .budget-page-layout .itg-715-layout .ipad-space {
+    margin-top: 0;
+  }
+
+  /*budget page css end*/
 }
 @media only screen and (max-width: 768px) {
   header {
@@ -765,13 +793,8 @@
   .movie-layout-page .itg-layout-580 .droppable,
   .movie-layout-page .itg-layout-580 .droppable .auto-block-1,
   .movie-layout-page .itg-layout-580 .droppable .auto-block-2,
-  .education-layout-page .itg-layout-565 .droppable,
-  .education-layout-page .itg-layout-672 .itg-widget-child .droppable,
-  .education-layout-page .itg-295-layout .droppable,
-  .education-layout-page .itg-325-layout .droppable,
-  .education-layout-page .itg-345-layout .droppable,
-  .education-layout-page .itg-325-layout .ad-widget,
-  .auto-layout-page .auto-block-1 {
+  .auto-layout-page .auto-block-1,
+  .election-page .right-side .itg-484 .droppable {
     height: auto;
     min-height: auto;
   }
@@ -782,20 +805,13 @@
 
   /*End CSS Top Block Grid Home Page*/
   /*Start Dont miss Home page css*/
-  .dont-miss ul .dont-miss-listing {
-    width: 100%;
-    padding: 0px 0px 20px 0;
-  }
   .dont-miss ul .dont-miss-listing .dm-pic {
     width: 124px;
-  }
-  .dont-miss ul .dont-miss-listing:nth-child(3) {
-    padding-bottom: 20px;
   }
 
   /*End Dont miss Home page css*/
   /*    budget page block height start*/
-  .budget-page-layout .auto-block-2, .budget-page-layout .slider-budget, .budget-page-layout .common-highlights {
+  .budget-page-layout .auto-block-2, .budget-page-layout .slider-budget {
     height: auto;
   }
   .budget-page-layout .itg-325-layout .droppable, .budget-page-layout .itg-530-layout .droppable, .budget-page-layout .itg-370-layout .droppable, .budget-page-layout .itg-480-layout .droppable, .budget-page-layout .itg-715-layout .droppable {
@@ -921,6 +937,13 @@
     margin-bottom: 40px;
   }
 
+  .education-layout-page .itg-layout-565 .itg-widget-parent .droppable {
+    height: 300px;
+  }
+  .education-layout-page .itg-layout-565 .itg-widget-parent .droppable.m-bottom40 {
+    margin-bottom: 0;
+  }
+
   /*CSS end education page special*/
   /*css start side bar section for video and photo*/
   .default-video .sidebar-section-photo, .default-photo .sidebar-section-photo {
@@ -933,6 +956,9 @@
     margin-bottom: 50px;
   }
 
+  .sport-home-layout-page .right-side .col-md-12 {
+    min-height: 260px;
+  }
   .sport-home-layout-page .right-side .col-md-12 .ad-widget {
     margin-top: 40px;
   }
@@ -1088,6 +1114,9 @@
     font-size: 0.9375rem;
     line-height: 20px;
   }
+  .poll-banner .detail .detail-content .vota-time.mhide {
+    display: block;
+  }
   .poll-banner .vota-time.desktop-hide {
     width: 100%;
     color: #8a8a8a;
@@ -1095,6 +1124,7 @@
     clear: both;
     width: 100%;
     padding-top: 15px;
+    display: none;
   }
   .poll-banner .vota-time.desktop-hide div {
     display: inline-block;
@@ -1276,9 +1306,6 @@
     white-space: nowrap;
     overflow: auto;
   }
-  .election-page .itg-most-popular .most_popular .col-md-3:nth-child(2n+1) {
-    clear: left;
-  }
   .election-page .left-side .itg-325-layout .droppable, .election-page .left-side .itg-415-layout .droppable, .election-page .left-side .itg-map .droppable, .election-page .left-side .itg-most-popular .droppable, .election-page .left-side .itg-photo .droppable {
     min-height: auto;
     height: auto;
@@ -1345,6 +1372,10 @@
     margin-bottom: 50px;
   }
 
+  .movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-caption a {
+    font-size: 16px;
+  }
+
   /*movie page css end*/
   /*Globle search page css start*/
   .view-front-end-global-search .views-exposed-widget .caln {
@@ -1408,6 +1439,7 @@
     padding-left: 15px;
     width: 100%;
     background: transparent;
+    display: none;
   }
 
   .event-sidebar .header-top .event-header-banner {
@@ -1496,6 +1528,7 @@
   /*sosory page css end*/
 }
 @media only screen and (max-width: 767px) {
+  /*css start oscar-layout-page */
   .oscar-layout-page .oscar-news .col-md-6:nth-child(3n+1) {
     clear: left;
   }
@@ -1505,6 +1538,102 @@
 
   .oscar-layout-page .oscar-features .col-md-6:nth-child(2n+1) {
     clear: none;
+  }
+
+  /*css end oscar-layout-page */
+  /*css start poll page*/
+  .poll-banner .detail {
+    width: auto;
+    display: block;
+    overflow: hidden;
+    float: none;
+    padding-right: 0px;
+  }
+  .poll-banner .detail .detail-content h4 {
+    font-size: 15px;
+    font-size: 0.9375rem;
+    line-height: 20px;
+  }
+  .poll-banner .detail .detail-content .vota-time.mhide {
+    display: none;
+  }
+  .poll-banner .poll-list .pic {
+    width: 145px;
+    margin-right: 10px;
+  }
+  .poll-banner .poll-list .voting-data {
+    float: none;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 15px;
+  }
+  .poll-banner .poll-list .vota-time.desktop-hide {
+    display: block;
+  }
+
+  /*css end poll page*/
+  /*budget page css start*/
+  .budget-page-layout .itg-715-layout .ipad-space {
+    margin-top: 50px;
+  }
+  .budget-page-layout .latest .col-md-3:nth-child(2n+1) {
+    clear: left;
+  }
+
+  /*budget page css end*/
+  /*election page css start*/
+  .election-page .itg-most-popular .most_popular .col-md-3:nth-child(2n+1) {
+    clear: left;
+  }
+
+  /*election page css end*/
+  /*Start Dont miss Home page css*/
+  .dont-miss ul .dont-miss-listing {
+    width: 100%;
+    padding: 0px 0px 20px 0;
+  }
+  .dont-miss ul .dont-miss-listing .dm-pic {
+    width: 124px;
+  }
+  .dont-miss ul .dont-miss-listing:nth-child(3) {
+    padding-bottom: 20px;
+  }
+
+  /*End Dont miss Home page css*/
+  /*education page css start*/
+  .education-layout-page .itg-layout-565 .droppable,
+  .education-layout-page .itg-layout-672 .itg-widget-child .droppable,
+  .education-layout-page .itg-295-layout .droppable,
+  .education-layout-page .itg-325-layout .droppable,
+  .education-layout-page .itg-345-layout .droppable,
+  .education-layout-page .itg-325-layout .ad-widget {
+    height: auto;
+  }
+
+  /*education page css end*/
+  /*Globe change for don't miss start*/
+  .dont-miss ul .dont-miss-listing .dm-detail,
+  #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-detail,
+  #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-detail,
+  .osscar-video ul .dont-miss-listing .dm-detail {
+    overflow: initial;
+  }
+
+  /*Globe change for don't miss end*/
+  /*event page css start*/
+  #block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider li {
+    width: 100%;
+  }
+
+  #block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider .slick-prev, #block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider .slick-next {
+    display: none;
+  }
+
+  /*event page css end*/
+  .video-heading, .photo-heading {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 10px;
   }
 }
 @media only screen and (max-width: 680px) {
@@ -2045,6 +2174,23 @@
   }
 
   /*oscar page css end*/
+  /*election page css start*/
+  .election-page .key-candidate .key-candidate-detail ul li .status span {
+    font-size: 12px;
+  }
+
+  /*election page css end*/
+  .sign-in-link .signup-link {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+
+  .sign-in-link a {
+    display: block;
+    text-align: left;
+    margin-bottom: 10px;
+  }
 }
 @media only screen and (max-width: 680px) {
   #block-views-anchor-landing-page-block .anchor-left {

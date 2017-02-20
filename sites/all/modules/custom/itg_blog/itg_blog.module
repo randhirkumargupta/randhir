@@ -92,8 +92,10 @@ function itg_blog_form_custom_callback($form, &$form_state) {
     if (isset($_SESSION['messages']['status'])) {
         unset($_SESSION['messages']['status']);
     }
-
-    itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $_REQUEST['destination']);
+    
+    if ($form_state['input']['op'] != 'Save as Draft') {
+      itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $_REQUEST['destination']);
+    }
 }
 
 /**

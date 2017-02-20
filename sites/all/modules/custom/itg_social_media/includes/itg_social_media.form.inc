@@ -79,7 +79,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#title' => t('Image').'<span class="form-required"> *</span>',
     '#type' => 'managed_file',
     '#description' => t('The uploaded image will be displayed on this page using the image style choosen below.'),
-    '#upload_location' => 'public://itg_fb_img/',
+    '#upload_location' => file_default_scheme().'://itg_fb_img/',
     '#default_value' => $fb_image_id,
     '#widget' => 'imce',
     '#description' => 'Files must be less than<strong>5 MB</strong>.<br>Allowed file types:<strong>gif jpeg </strong>',
@@ -103,6 +103,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#type' => 'date_popup',
     '#title' => t("Schedule Time"),
     '#date_format' => 'd/m/Y H:i',
+    '#date_year_range' => '-3:+3',
     '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly'),
     '#default_value' => format_date(REQUEST_TIME, 'custom', 'd/m/Y H:i'),
     '#date_timezone' => date_default_timezone(),
@@ -157,9 +158,9 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
   }
   // Facebook Narrative.
   $form['fb_wrap']['itg_facebook_narrative'] = array(
-    '#type' => 'textfield',
+    '#type' => 'textarea',
     '#title' => t('Narrative'),
-    '#maxlength' => 255,
+   '#attributes' => array('maxlength' => 255),
       '#suffix' => '<p><span id="fb_chars">255</span> characters remaining</p>',
     '#default_value' => !empty($fb_nrr_default) ? $fb_nrr_default : $node->title,
     '#states' => array(
@@ -195,7 +196,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#type' => 'managed_file',
     '#description' => t('The uploaded image will be displayed on this page using the image style choosen below.'),
     '#default_value' => $twitter_image_id,
-    '#upload_location' => 'public://itg_twitter_img/',
+    '#upload_location' => file_default_scheme().'://itg_twitter_img/',
     '#widget' => 'imce',
     '#description' => 'Files must be less than<strong>5 MB</strong>.<br>Allowed file types:<strong>gif jpeg</strong>',
     '#preview' => TRUE,
@@ -232,7 +233,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
   $form['twit_wrap']['itg_twit_video'] = array(
     '#title' => t('Video'),
     '#type' => 'managed_file',
-    '#upload_location' => 'public://twitter_video/',
+    '#upload_location' => file_default_scheme.'://twitter_video/',
     '#default_value' => isset($node->field_story_twitter_video['und'][0]['fid']) ? $node->field_story_twitter_video['und'][0]['fid'] : 0,
     '#widget' => 'imce',
     '#preview' => TRUE,
@@ -272,9 +273,9 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
   }  
   // Twitter narrative.
   $form['twit_wrap']['itg_twitter_narrative'] = array(
-    '#type' => 'textfield',
+    '#type' => 'textarea',
     '#title' => t('Narrative'),
-    '#maxlength' => 126,
+      '#attributes' => array('maxlength' => 126),
    '#suffix' => '<p><span id="twitt_chars">126</span> characters remaining</p>',
     '#default_value' => !empty($tweet_default) ? $tweet_default : $node->title,
     '#states' => array(

@@ -34,7 +34,7 @@ Drupal.behaviors.itg_budget_predictor = {
 
             if (Drupal.settings.itg_budget_predictor.settings.stopPredictor == 2) {
                 var isUpdated;
-                jQuery('#ranking-content ul li, #ranking-content-main ul li').mouseover(function () {
+                jQuery('#ranking-content ul li, #ranking-content-main ul li, .ranking-content ul li').mouseover(function () {
                     var ranking_column_id = jQuery(this).data("id");
                     var str = jQuery(this).attr("id");
                     var entity_id = str.split("_");

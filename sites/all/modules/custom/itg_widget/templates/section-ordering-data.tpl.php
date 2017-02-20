@@ -330,7 +330,7 @@ else if ($widget_style == 'in-depth') {
 else if ($widget_style == 'movies-celebrities') {
   ?>
   <div class="row buying-guides tech-in-depth">
-    <div class="col-md-6 section-ordering">
+    <div class="col-md-6 col-sm-6 section-ordering">
       <?php
       if (!empty($data)) {
         foreach ($data as $count => $entity) {
@@ -385,7 +385,7 @@ else if ($widget_style == 'movies-celebrities') {
 
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 col-sm-6">
 
       <ul>
 
@@ -438,7 +438,7 @@ else if ($widget_style == 'movies-celebrities') {
 else if ($widget_style == 'movies-lifestyle') {
   ?>
   <div class="row buying-guides tech-in-depth">
-    <div class="col-md-6 section-ordering">
+    <div class="col-md-6 col-sm-6 section-ordering">
       <?php
       if (!empty($data)) {
         foreach ($data as $count => $entity) {
@@ -494,7 +494,7 @@ else if ($widget_style == 'movies-lifestyle') {
 
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 col-sm-6">
 
       <ul>
 
@@ -752,7 +752,7 @@ else if ($widget_style == 'tech-tips' || $widget_style == 'india-inc-on-budget' 
             <?php }
             ?>
 
-              <span>
+              <span class="detail">
                 <?php
               if (function_exists('itg_common_get_smiley_title')) {
                 echo l(itg_common_get_smiley_title($nid, 0, 90), "node/" . $nid, array("html" => TRUE ));

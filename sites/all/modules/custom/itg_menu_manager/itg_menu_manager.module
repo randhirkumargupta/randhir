@@ -1059,9 +1059,9 @@ function itg_menu_manager_form_alter(&$form, &$form_state, $form_id) {
 //          '#options' => $options,
 //          '#weight' => -99,
 //        );
-        $new_select = '<label for="edit-section-child">Section </label><select id="edit-section-child" name="section_child" class="form-select valid">';
+        $new_select = '<div class="third-label-menu-section"><label for="edit-section-child">Section </label><select id="edit-section-child" name="section_child" class="form-select valid">';
         foreach ($options as $key => $value) {
-          if($_GET['section_child'] == $key) {
+          if(isset($_GET['section_child']) && $_GET['section_child'] == $key) {
             $selcted = "selected='selected'";
           }
           else {
@@ -1069,16 +1069,18 @@ function itg_menu_manager_form_alter(&$form, &$form_state, $form_id) {
           }
           $new_select .='<option value="' . $key . '" '.$selcted.'>' . $value . '</option>';
         }
-        $new_select .= '</select>';
-        $auto_complete_label = '<label for="edit-edit-tid">'.t("Term Id").'</label>';
-        //pr($form['tid']);
+        $new_select .= '</select></div>';
+        
+        $auto_complete_label = '<div class="third-label-menu-term"><label for="edit-edit-tid">'.t("Term Id").'</label>';
+
         if(!isset($_GET['section_child']) || $_GET['section_child'] == "0") {
           $form['tid']['#attributes']['class'] = array('hide');
-          $auto_complete_label = "";
+          $auto_complete_label = '<div class="third-label-menu-term">';
         }
         
         $new_select .= $auto_complete_label;
         $form['tid']['#prefix'] = $new_select;
+        $form['tid']['#suffix'] = "</div>";
       }
     }
   }
@@ -1251,8 +1253,10 @@ function itg_menu_manager_form_views_exposed_form_alter(&$form, &$form_state, $f
         $form['tid']['#autocomplete_path'] = 'itg-menu-manager-search-second/autocomplete';
       }
       else {
-        $section_id = $_GET['section_id'];
-        $form['tid']['#autocomplete_path'] = "itg-menu-manager-search-third/$section_id/autocomplete";
+        if(isset($_GET['section_id'])) {
+          $section_id = $_GET['section_id'];
+          $form['tid']['#autocomplete_path'] = "itg-menu-manager-search-third/$section_id/autocomplete";
+        }
       }
       break;
   }

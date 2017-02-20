@@ -116,7 +116,7 @@ function ordering_set_for_byline($nid, $weight) {
     $query = db_select('taxonomy_term_data', 'ttd');
     $query -> fields('ttd', array('tid'));
     $query -> condition('vid', $vid, '=');
-    $query -> condition('name', $term_name, '=');
+    $query -> condition('name', '%' . db_like($term_name), LIKE);
     $result = $query->execute()->fetchField();
     return $result;
   }
@@ -160,4 +160,39 @@ function itg_db_migrate_vocab_id($vocab_name) {
   $query->condition('tv.machine_name', $vocab_name, '=');
   $result = $query->execute()->fetchField();
   return $result;
+}
+
+/**
+ * Implement function for migrate bylines
+ */
+function itg_db_migrate_bylines($byline_nid, $story_nid){
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid', 'status'));
+  $query->condition('type', 'reporter', '=');
+  $query->condition('nid', $byline_nid, '=');
+  $result = $query->execute()->fetchAll();
+  db_insert('itg_multi_byline_info')
+          ->fields(array(
+            'byline_id' => $byline_nid,
+            'uniqueid' => 'migrated-'.$story_nid,
+            'created' => REQUEST_TIME,
+            'nid' => $story_nid,
+           'publish_status' => $result[0]->status,
+          ))
+          ->execute();
+}
+
+
+/**
+ * {@inheritdoc}
+ */
+function itg_dbmigrate_menu() {
+  $items['itg-clean-story'] = array(
+    'title' => 'api callback menu',
+    'page callback' => '_aviationweekly_pluck_author_xml_create',
+    'access callback' => TRUE,
+    //'access arguments' => array('access rundown content'),
+    'file' => 'scripts/clean_userxml.inc',
+  );
+  return $items;
 }

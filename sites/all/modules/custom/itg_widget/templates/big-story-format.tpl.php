@@ -114,8 +114,8 @@ if (!empty($data)) :
         <?php if (!empty($data['node_data']->nid)) : ?>
           <div class="share-new">
             <ul>
-              <li><a onclick="fbpop ('<?php print $actual_link; ?>', '<?php print $bigstory_fb_share; ?>', '<?php print $share_desc_fb; ?>', '<?php print $fb_image; ?>')"><i class="fa fa-facebook"></i></a></li>
-              <li><a href="javascript:" onclick="twitter_popup ('<?php print urlencode($share_title); ?>', '<?php print $short_url; ?>')"><i class="fa fa-twitter"></i></a></li>
+              <li><a title="share on facebook" onclick="fbpop ('<?php print $actual_link; ?>', '<?php print $bigstory_fb_share; ?>', '<?php print $share_desc_fb; ?>', '<?php print $fb_image; ?>')"><i class="fa fa-facebook"></i></a></li>
+              <li><a title="share on twitter" class="user-activity def-cur-pointer" rel="<?php print $data['node_data']->nid; ?>" data-tag="<?php print $data['node_data']->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:" onclick="twitter_popup ('<?php print urlencode($share_title); ?>', '<?php print $short_url; ?>')"><i class="fa fa-twitter"></i></a></li>
 
               <?php
               if (!empty($data['node_data']->type) && $data['node_data']->type == 'story') :

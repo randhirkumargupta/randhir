@@ -158,7 +158,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
        '#markup' => '<div class="ugc-top-heading"><h2>Post Your Content</h2></div>');
       $form['field_ugc_ctype'][LANGUAGE_NONE]['#default_value'] = $_GET['type'];
     }
-
+    $form['field_section']['#weight'] = 3;
     $form['#attributes']['class'][] = 'ugc-custom-wrapper';
   }
 
@@ -895,7 +895,9 @@ function itg_ugc_node_insert($node) {
     }
     else
     {
+      if(!empty($node->field_story_source_id[LANGUAGE_NONE])){
       $source_id = $node->field_story_source_id[LANGUAGE_NONE][0]['value'];
+      }
     }
     if ($source_type == 'UGC' && !empty($source_id))
     {

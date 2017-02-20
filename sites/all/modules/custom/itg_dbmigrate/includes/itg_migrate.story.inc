@@ -19,9 +19,9 @@ class ItgStoryMigration extends XMLMigration {
       'select_supplement' => t('select_supplement'),
       'issue_date' => t('issue_date'),
       'longheadline' => t('longheadline'),
-      'byline' => t('byline'),
-      'city' => t('city'),
-      'categories' => t('categories'), //multi
+      //'byline' => t('byline'),
+     // 'city' => t('city'),
+      //'categories' => t('categories'), //multi
       'primarycategory' => t('primarycategory'),
       'extralargeimage' => t('extralargeimage'),
       'extra_large_alt' => t('extra_large_alt'),
@@ -42,7 +42,7 @@ class ItgStoryMigration extends XMLMigration {
       'storybody' => t('storybody'),
       'magazinekicker' => t('magazinekicker'),
       'magazineheadline' => t('magazineheadline'),
-      'tags' => t('tags'), //multi
+      //'tags' => t('tags'), //multi
       'shortheadline' => t('shortheadline'),
       'storytitle' => t('storytitle'),
       'storyrating' => t('storyrating'),
@@ -50,7 +50,7 @@ class ItgStoryMigration extends XMLMigration {
       'redirectionurl' => t('redirectionurl'),
       'courtesy' => t('courtesy'),
       'snappost' => t('snappost'),
-      'socialmediaintegration' => t('socialmediaintegration'), //checkbox
+      //'socialmediaintegration' => t('socialmediaintegration'), //checkbox
       'facebooknarrative' => t('facebooknarrative'),
       'facebookimage' => t('facebookimage'),
       'facebookimage_alt' => t('facebookimage_alt'),
@@ -66,29 +66,29 @@ class ItgStoryMigration extends XMLMigration {
       'syndication' => t('syndication'),
       'mediafiles' => t('mediafiles'),
       'client_title' => t('client_title'),
-      'configurations' => t('configurations'), //checkbox
+      //'configurations' => t('configurations'), //checkbox
       'commentquestion' => t('commentquestion'),
       'featuredname' => t('featuredname'), //id
-      'relatedcontents' => t('relatedcontents'), //multi
-      'scheduledatetime' => t('scheduledatetime'),
+      //'relatedcontents' => t('relatedcontents'), //multi
+      //'scheduledatetime' => t('scheduledatetime'),
       'storyexpires' => t('storyexpires'),
       'storyexpirydate' => t('storyexpirydate'),
       'selectlisticletemplates' => t('selectlisticletemplates'),
-      'listicle_content' => t('listicle_content'), //multi
-      'quotes' => t('quotes'), //multi
-      'factoids_content' => t('factoids_content'), //multi
-      'buzz_content' => t('buzz_content'), //fieldcollection
-      'briefcase_content' => t('briefcase_content'), //multi
+      //'listicle_content' => t('listicle_content'), //multi
+      //'quotes' => t('quotes'), //multi
+      //'factoids_content' => t('factoids_content'), //multi
+      //'buzz_content' => t('buzz_content'), //fieldcollection
+      //'briefcase_content' => t('briefcase_content'), //multi
       'expertname' => t('expertname'),
       'expertimage' => t('expertimage'),
       'expert_alt' => t('expert_alt'),
       'expert_title' => t('expert_title'),
       'expertdescription' => t('expertdescription'),
       'archive' => t('archive'),
-      'common_by_line_name' => t('common_by_line_name'),
-      'common_by_line_twitter' => t('common_by_line_twitter'),
+      //'common_by_line_name' => t('common_by_line_name'),
+      //'common_by_line_twitter' => t('common_by_line_twitter'),
       'associatetvdate' => t('associatetvdate'),
-      'field_story_syndications_photo' => t('field_story_syndications_photo'),
+      //'field_story_syndications_photo' => t('field_story_syndications_photo'),
       'kicker_image_caption' => t('kicker_image_caption'),
       'short_introtext' => t('short_introtext'),
       'listicle_title' => t('listicle_title'),
@@ -112,11 +112,20 @@ class ItgStoryMigration extends XMLMigration {
       'map_embed_code' => t('map_embed_code'),
       'social_embed_code_position' => t('social_embed_code_position'),
       'social_embed_code' => t('social_embed_code'),
+      // warnings msg
+      'format' => t('format'),
+      'modifieddate' => t('modifieddate'),
+      'createddate' => t('createddate'),
+      'publisheddate' => t('publisheddate'),
+      'strapheadline' => t('strapheadline'),
+      'image' => t('image'),
+      'state' => t('state'),
+      'syndications_photo' => t('syndications_photo'),
     );
 
 
     // This can also be an URL instead of a local file path.
-    $file_path = drupal_realpath('public://');
+    $file_path = 'sites/default/files';
 
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
@@ -132,6 +141,7 @@ class ItgStoryMigration extends XMLMigration {
 
     $items_class = new MigrateItemsXML($items_url, $item_xpath, $item_ID_xpath);
     $this->source = new MigrateSourceMultiItems($items_class, $fields);
+    //$this->source = new MigrateSourceXML($items_url, $item_xpath, $item_ID_xpath, $fields);
 
     $this->destination = new MigrateDestinationNode('story');
 
@@ -183,7 +193,7 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('body', 'storybody')->xpath('storybody');
     $this->addFieldMapping('body:format', 'format')
          ->defaultValue('full_html');
-    $this->addFieldMapping('workbench_moderation_state_new', 'workbench_moderation_state_new')->xpath('workbench_moderation_state_new');
+    //$this->addFieldMapping('workbench_moderation_state_new', 'workbench_moderation_state_new')->xpath('workbench_moderation_state_new');
 //    $this->addFieldMapping('workbench_moderation_state_new', 'workbench_moderation_state_new')
 //      ->defaultValue('published');
 //    $this->addFieldMapping('workbench_moderation_state_current', 'workbench_moderation_state_new')
@@ -242,7 +252,6 @@ class ItgStoryMigration extends XMLMigration {
 
     $this->addFieldMapping('field_story_comment_question', 'commentquestion')->xpath('commentquestion');
     $this->addFieldMapping('field_story_featured_name', 'featuredname')->xpath('featuredname'); //id
-    $this->addFieldMapping('field_common_related_content', 'relatedcontents')->xpath('relatedcontents');
     
     $this->addFieldMapping('field_story_templates', 'selectlisticletemplates')->xpath('selectlisticletemplates');
     $this->addFieldMapping('field_story_expert_name', 'expertname')->xpath('expertname');
@@ -284,6 +293,218 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('field_social_embed_code', 'social_embed_code')->xpath('facebook_instant_article_integration/social_embed_code');
     $this->addFieldMapping('field_social_embed_code_position', 'social_embed_code_position')->xpath('facebook_instant_article_integration/social_embed_code_position');
     //$this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
+    $this->addFieldMapping('migrate_redirects', 'redirectionurl')->xpath('redirectionurl');
+    // source migrated
+    $this->addFieldMapping('field_story_source_type')
+        ->defaultValue('migrated');
+    $this->addUnmigratedDestinations(array('uid', 'promote', 'sticky', 'revision', 'log', 'language', 'tnid', 'translate', 'revision_uid', 'is_new', 'body:summary', 'field_common_by_line_reporter_id', 'field_common_related_content', 'field_emoji', 'field_emoji:format', 'field_emoji_position', 'field_facebook_animated_image:file_class', 'field_facebook_animated_image:preserve_files',
+      'field_facebook_animated_image:destination_dir',
+      'field_facebook_animated_image:destination_file',
+      'field_facebook_animated_image:file_replace',
+      'field_facebook_animated_image:source_dir',
+      'field_facebook_animated_image:urlencode',
+      'field_facebook_animated_image:alt',
+      'field_facebook_animated_image:title',
+      'field_facebook_gallery_associate',
+      'field_facebook_gallery_associate:revision_id',
+      'field_itg_common_by_line_name',
+      'field_itg_common_by_line_twitter',
+      'field_photo_story',
+      'field_photo_story:revision_id',
+      'field_reporter_publish_id',
+      'field_reporter_unique_id',
+      'field_story_associate_lead',
+      'field_story_category',
+      'field_story_category:source_type',
+      'field_story_category:create_term',
+      'field_story_category:ignore_case',
+      'field_story_configurations',
+      'field_story_expert_image:file_class',
+      'field_story_expert_image:preserve_files',
+      'field_story_expert_image:destination_dir',
+      'field_story_expert_image:destination_file',
+      'field_story_expert_image:file_replace',
+      'field_story_expert_image:source_dir',
+      'field_story_expert_image:urlencode',
+      'field_story_expertise',
+      'field_story_expiry_date:timezone',
+      'field_story_expiry_date:rrule',
+      'field_story_expiry_date:to',
+      'field_story_extra_large_image:file_class',
+      'field_story_extra_large_image:preserve_files',
+      'field_story_extra_large_image:destination_dir',
+      'field_story_extra_large_image:destination_file',
+      'field_story_extra_large_image:file_replace',
+      'field_story_extra_large_image:source_dir',
+      'field_story_extra_large_image:urlencode',
+      'field_story_extra_small_image:file_class',
+      'field_story_extra_small_image:preserve_files',
+      'field_story_extra_small_image:destination_dir',
+      'field_story_extra_small_image:destination_file',
+      'field_story_extra_small_image:file_replace',
+      'field_story_extra_small_image:source_dir',
+      'field_story_extra_small_image:urlencode',
+      'field_story_facebook_image:file_class',
+      'field_story_facebook_image:preserve_files',
+      'field_story_facebook_image:destination_dir',
+      'field_story_facebook_image:destination_file',
+      'field_story_facebook_image:file_replace',
+      'field_story_facebook_image:source_dir',
+      'field_story_facebook_image:urlencode',
+      'field_story_facebook_video:file_class',
+      'field_story_facebook_video:preserve_files',
+      'field_story_facebook_video:destination_dir',
+      'field_story_facebook_video:destination_file',
+      'field_story_facebook_video:file_replace',
+      'field_story_facebook_video:source_dir',
+      'field_story_facebook_video:urlencode',
+      'field_story_facebook_video:description',
+      'field_story_facebook_video:display',
+      'field_story_featured_name:source_type',
+      'field_story_featured_name:create_term',
+      'field_story_featured_name:ignore_case',
+      'field_story_highlights',
+      'field_story_issue_date:timezone',
+      'field_story_issue_date:rrule',
+      'field_story_issue_date:to',
+      'field_story_itg_tags',
+      'field_story_itg_tags:source_type',
+      'field_story_itg_tags:create_term',
+      'field_story_itg_tags:ignore_case',
+      'field_story_large_image:file_class',
+      'field_story_large_image:preserve_files',
+      'field_story_large_image:destination_dir',
+      'field_story_large_image:destination_file',
+      'field_story_large_image:file_replace',
+      'field_story_large_image:source_dir',
+      'field_story_large_image:urlencode',
+      'field_story_listicle',
+      'field_story_listicle:revision_id',
+      'field_story_medium_image:file_class',
+      'field_story_medium_image:preserve_files',
+      'field_story_medium_image:destination_dir ',
+      'field_story_medium_image:destination_file',
+      'field_story_medium_image:file_replace',
+      'field_story_medium_image:source_dir',
+      'field_story_medium_image:urlencode',
+      'field_story_mosimage',
+      'field_story_node_identity',
+      'field_story_quote_image:file_class',
+      'field_story_quote_image:preserve_files',
+      'field_story_quote_image:destination_dir',
+      'field_story_quote_image:destination_file',
+      'field_story_quote_image:file_replace',
+      'field_story_quote_image:source_dir',
+      'field_story_quote_image:urlencode',
+      'field_story_quote_image:alt',
+      'field_story_quote_image:title',
+      'field_story_reporter',
+      'field_story_schedule_date_time:timezone',
+      'field_story_schedule_date_time:rrule',
+      'field_story_schedule_date_time:to',
+      'field_story_select_templates',
+      'field_story_small_image:file_class',
+      'field_story_small_image:preserve_files',
+      'field_story_small_image:destination_dir',
+      'field_story_small_image:destination_file',
+      'field_story_small_image:file_replace',
+      'field_story_small_image:source_dir',
+      'field_story_small_image:urlencode',
+      'field_story_social_media_integ',
+      'field_story_source_id',
+      'field_story_tech_image_gallery:file_class',
+      'field_story_tech_image_gallery:preserve_files',
+      'field_story_tech_image_gallery:destination_dir',
+      'field_story_tech_image_gallery:destination_file',
+      'field_story_tech_image_gallery:file_replace',
+      'field_story_tech_image_gallery:source_dir',
+      'field_story_tech_image_gallery:urlencode',
+      'field_story_tech_image_gallery:alt',
+      'field_story_tech_image_gallery:title',
+      'field_story_tech_pros_cons_image:file_class',
+      'field_story_tech_pros_cons_image:preserve_files',
+      'field_story_tech_pros_cons_image:destination_dir',
+      'field_story_tech_pros_cons_image:destination_file',
+      'field_story_tech_pros_cons_image:file_replace',
+      'field_story_tech_pros_cons_image:source_dir',
+      'field_story_tech_pros_cons_image:urlencode',
+      'field_story_tech_pros_cons_image:alt',
+      'field_story_tech_pros_cons_image:title',
+      'field_story_tech_review_chunk',
+      'field_story_tech_review_chunk:summary',
+      'field_story_tech_review_chunk:format',
+      'field_story_technology',
+      'field_story_technology:revision_id',
+      'field_story_technology_rating',
+      'field_story_template_buzz',
+      'field_story_template_buzz:revision_id',
+      'field_story_template_factoids',
+      'field_story_template_quotes',
+      'field_story_tv_time',
+      'field_story_tweet_image:file_class',
+      'field_story_tweet_image:preserve_files',
+      'field_story_tweet_image:destination_dir',
+      'field_story_tweet_image:destination_file',
+      'field_story_tweet_image:file_replace',
+      'field_story_tweet_image:source_dir',
+      'field_story_tweet_image:urlencode',
+      'field_story_twitter_video:file_class',
+      'field_story_twitter_video:preserve_files',
+      'field_story_twitter_video:destination_dir',
+      'field_story_twitter_video:destination_file',
+      'field_story_twitter_video:file_replace',
+      'field_story_twitter_video:source_dir',
+      'field_story_twitter_video:urlencode',
+      'field_story_twitter_video:description',
+      'field_story_twitter_video:display',
+      'field_story_type',
+      'field_story_ugc_source_id',
+      'field_stroy_city',
+      'field_stroy_city:source_type',
+      'field_stroy_city:create_term',
+      'field_stroy_city:ignore_case',
+      'field_associate_photo_gallery',
+      'field_mega_review_cast',
+      'field_mega_review_director',
+      'field_mega_review_movie_plot',
+      'field_poll_start_date:timezone',
+      'field_poll_start_date:rrule',
+      'field_poll_start_date:to',
+      'field_preview_unique_id',
+      'field_story_associate_video',
+      'migrate_redirects_language',
+      'metatag_abstract',
+      'metatag_robots',
+      'metatag_news_keywords',
+      'metatag_standout',
+      'metatag_rating',
+      'metatag_referrer',
+      'metatag_generator',
+      'metatag_rights',
+      'metatag_image_src',
+      'metatag_canonical',
+      'metatag_shortlink',
+      'metatag_publisher',
+      'metatag_author',
+      'metatag_original-source',
+      'metatag_prev',
+      'metatag_next',
+      'metatag_content-language',
+      'metatag_geo.position',
+      'metatag_geo.placename',
+      'metatag_geo.region',
+      'metatag_icbm',
+      'metatag_refresh',
+      'metatag_revisit-after',
+      'metatag_pragma',
+      'metatag_cache-control',
+      'metatag_expires',
+      'comment',
+      'totalcount',
+      'daycount',
+      'timestamp',
+      'field_story_medium_image:destination_dir',
+      ));
   }
 
   public function prepareRow($row) {
@@ -294,15 +515,15 @@ class ItgStoryMigration extends XMLMigration {
       $row->xml->syndication = '';
     }
     //Workbench 
-    if ((string) $row->xml->state == '1') {
+    /*if ((string) $row->xml->state == '1') {
       $row->xml->workbench_moderation_state_new = 'published';
     }
     else {
       $row->xml->workbench_moderation_state_new = 'draft';
-    }
+    }*/
     
     // Mosimage in body
-    if(!empty($row->xml->mosimage)){
+   /* if(!empty($row->xml->mosimage)){
       $mos_count= array();
       $cap=0;
       foreach($row->xml->mosimage->image as $images){
@@ -373,7 +594,7 @@ class ItgStoryMigration extends XMLMigration {
         $string = (string)$body_string;
       }
       $row->xml->storybody = $string;
-    }
+    }*/
     // prepare row for quote
     $data_quotes = '';
     if (isset($row->xml->fulltext_conclaveformat->quotes->quote) && !empty($row->xml->fulltext_conclaveformat->quotes->quote)) {
@@ -409,7 +630,7 @@ class ItgStoryMigration extends XMLMigration {
     $row->category_new = $data_category;
     // End category migrate
     // Story tags migration
-    $data_tags = '';
+    /*$data_tags = '';
 
     if (isset($row->xml->tags->tag) && !empty($row->xml->tags->tag)) {
       foreach ($row->xml->tags->tag as $final_tags) {
@@ -418,7 +639,7 @@ class ItgStoryMigration extends XMLMigration {
         $data_tags[]['tid'] = $orignal_tag;
       }
     }
-    $row->tag_new = $data_tags;
+    $row->tag_new = $data_tags;*/
     // End story tags migration
     
     // Story city migration
@@ -554,24 +775,16 @@ class ItgStoryMigration extends XMLMigration {
     //End story date
     
     //Byline associate with story
-    $data_byline = '';
-    if (isset($row->xml->bylines->byline) && !empty($row->xml->bylines->byline)) {
-      foreach ($row->xml->bylines->byline as $final_byline) {
-        $source_bid = (string) $final_byline;
-        $orignal_byline = get_itg_destination_id('migrate_map_itgbyline', $source_bid);
-        $data_byline[]['target_id'] = $orignal_byline;
-      }
-    }
-    $row->byline_new = $data_byline;
-    
-      // Related content
-    if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
-      foreach($row->xml->relatedcontents->relatedcontent as $related){
-        $related_content .= (string) $related.', ';
-      }
-      $final_related_content = rtrim($related_content, ', ');
-      $row->xml->relatedcontents = $final_related_content;
-    }
+//    $data_byline = '';
+//    if (isset($row->xml->bylines->byline) && !empty($row->xml->bylines->byline)) {
+//      foreach ($row->xml->bylines->byline as $final_byline) {
+//        $source_bid = (string) $final_byline;
+//        $orignal_byline = get_itg_destination_id('migrate_map_itgbyline', $source_bid);
+//        //$data_byline[]['target_id'] = $orignal_byline;
+//        itg_db_migrate_bylines($orignal_byline);
+//      }
+//    }
+    //$row->byline_new = $data_byline;
     
      // manage created user
     if (isset($row->xml->createdby) && !empty($row->xml->createdby)) {
@@ -602,9 +815,9 @@ class ItgStoryMigration extends XMLMigration {
     if (!empty($row->category_new)) {
       $node->field_story_category[LANGUAGE_NONE] = $row->category_new;
     }
-    if (!empty($row->tag_new)) {
+    /*if (!empty($row->tag_new)) {
       $node->field_story_itg_tags[LANGUAGE_NONE] = $row->tag_new;
-    }
+    }*/
     
     if (!empty($row->city_new)) {
       $node->field_stroy_city[LANGUAGE_NONE] = $row->city_new;
@@ -615,9 +828,9 @@ class ItgStoryMigration extends XMLMigration {
     if (!empty($row->final_social_checkbox)) {
       $node->field_story_social_media_integ[LANGUAGE_NONE] = $row->final_social_checkbox;
     }
-    if (!empty($row->byline_new)) {
+   /* if (!empty($row->byline_new)) {
       $node->field_story_reporter[LANGUAGE_NONE] = $row->byline_new;
-    }
+    }*/
     if(!empty($row->featuredname)){
       $node->field_story_featured_name[LANGUAGE_NONE][0]['tid'] = (string) $row->featuredname;
     }  
@@ -625,6 +838,7 @@ class ItgStoryMigration extends XMLMigration {
   }
 
   public function complete($entity, $row) {
+  print $row->xml->id.' ';
     $node = node_load($entity->nid);
     
     if (isset($row->xml->buzz_content->buzz) && (!empty($row->xml->buzz_content->buzz->headline) || !empty($row->xml->buzz_content->buzz->image) || !empty($row->xml->buzz_content->buzz->description))) {
@@ -695,8 +909,7 @@ class ItgStoryMigration extends XMLMigration {
     }
 
    if (isset($row->xml->buzz_content->buzz) || isset($row->xml->fulltext_conclaveformat->listicle_content->listicle) || (isset($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate) && !empty($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate))) {
-     
-    field_attach_update('node', $node);
+      $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'] = 'migrate-'.$node->nid;
    }
    //code for like and dislike
    if (isset($row->xml->like_dislike->like) || isset($row->xml->like_dislike->dislike)) {
@@ -708,6 +921,36 @@ class ItgStoryMigration extends XMLMigration {
    if (isset($row->xml->ordering)) {
      ordering_set_of_content($node, $row->xml->ordering);
    }
+   
+   // Related content save in db
+     if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
+     //$arr = array();
+      foreach ($row->xml->relatedcontents->relatedcontent as $value) {
+        $chk_variable = (string) $value;
+        if(!empty($chk_variable)){
+          db_insert('itg_dbmigrate_related_content')
+                            ->fields(array(
+                                'migrated_nid' => $node->nid,
+                                'source_id' => (string) $value,
+                                'type' => (string) $value->attributes()->type,
+                                'migration_node_type' => 'story',
+                                'xml_id' => (string) $row->xml->id,
+                            ))
+                            ->execute();
+        }
+      }
+    }
+     if (isset($row->xml->bylines->byline) && !empty($row->xml->bylines->byline)) {
+       
+      foreach ($row->xml->bylines->byline as $final_byline) {
+       
+        $source_bid = (string) $final_byline;
+         if(!empty($source_bid)){
+          $orignal_byline = get_itg_destination_id('migrate_map_itgbyline', $source_bid);
+          $value = itg_db_migrate_bylines($orignal_byline, $node->nid);
+         }
+      }
+    }
    
   }
 
