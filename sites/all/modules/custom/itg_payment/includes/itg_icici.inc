@@ -157,7 +157,7 @@ function itg_icici_order_form_submit($form, &$form_state, $args) {
   $CT = floatval($final_amount);
   
   $hash = createHash($CT,"356",$storename,$sharedsecret);  
-
+  
   $pay_data['timezone'] = array('size' => '', 'val' => 'IST');
   $pay_data['authenticateTransaction'] = array('size' => '', 'val' => 'true');
   $pay_data['txntype'] = array('size' => 50, 'val' => ICICI_TXNTYPE);
@@ -172,11 +172,11 @@ function itg_icici_order_form_submit($form, &$form_state, $args) {
   $pay_data['responseFailURL'] = array('size' => '', 'val' => $responseFailURL);
   $pay_data['hash_algorithm'] = array('size' => '', 'val' => 'SHA1');
 
-  theme('itg_payment_merchant_form', array(
+  theme('itg_icici_merchant_form', array(
       'param_list' => $pay_data,
-      'form_id' => '',
-      'form_data' => '',
+      'form_id' => ICICI_FORM_ID,
+      'form_action' => ICICI_ACTION_URL,
     ));
-  //itg_payment_icici($db_data);
+  
   drupal_exit();
 }
