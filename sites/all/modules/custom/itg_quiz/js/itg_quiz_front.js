@@ -49,7 +49,7 @@ $(this).parent().parent().parent().parent().find('.answer-container-actual').htm
             }    
       
   });
-  
+ 
  
    $('body').on('click', '#show_answer', function() {
        buttonClass = $(this).attr('class');
