@@ -603,3 +603,21 @@ function _personalization_show_content() {
     
   }
 }
+
+/**
+ * Helper function to get facebook share count
+ * @param int $uid
+ * @param string $type
+ */
+function itg_user_fb_share_count($uid, $type) {
+  if (!empty($uid) && !empty($type))
+  {
+    $result = db_select('itg_lrp_loyalty_points', 'fs')
+        ->fields('fs')
+        ->condition('uid', $uid)
+        ->condition('loyalty_type', $type)
+        ->execute();
+    $num_of_results = $result->rowCount();
+    return $num_of_results;
+  }
+}
