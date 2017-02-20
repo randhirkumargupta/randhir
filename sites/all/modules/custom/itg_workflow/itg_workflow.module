@@ -380,7 +380,7 @@ function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
       module_load_include('inc', 'itg_workflow', 'includes/itg_workflow_preview_log');
       $preview_id = _get_unique_id_for_node_field();
       $form['field_preview_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $preview_id;
-
+      // Condition to check valid user to perform preview log submit.
       if (_is_preview_log_submit_true($user)) {
         $form['actions']['submit']['#submit'][] = 'itg_workflow_preview_log_submit';
         $form['actions']['preview']['#submit'][] = 'itg_workflow_preview_log_submit';
@@ -394,7 +394,14 @@ function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
+/**
+ * function return flag for user have preview log functionality.
+ * 
+ * @param array $user
+ * @return boolean
+ */
 function _is_preview_log_submit_true($user) {
+  $access_log_submit = FALSE;
   $access_users_roles = array(
     'administrator',
     'Site Admin',
@@ -402,7 +409,6 @@ function _is_preview_log_submit_true($user) {
     'Copy Editor',
     'Editor'
   );
-  $access_log_submit = FALSE;
   $current_user_roles_array = array_values($user->roles);
   foreach ($current_user_roles_array as $role) {
     if (in_array($role, $access_users_roles)) {
@@ -412,13 +418,16 @@ function _is_preview_log_submit_true($user) {
   return $access_log_submit;
 }
 
+/**
+ *{@inheritdoc}
+ */
 function itg_workflow_preview_log_submit($form, $form_state) {
   global $user;
-  watchdog("preview_log", $form_state['values']['op']);
+//  watchdog("preview_log", $form_state['values']['op']);
+  // validation for preview button only.
   if ($form_state['values']['op'] == 'Preview') {
     $preview_unique_id = $form_state['values']['field_preview_unique_id']['und'][0]['value'];
     $user_id = $user->uid;
-    $arg = arg();
     //if ($arg[0] == 'node' && $arg[1] == 'add') {
     // Give nid default value 0.
     itg_workflow_preview_db_merge($preview_unique_id, $user_id, 0);
@@ -790,7 +799,7 @@ function itg_workflow_node_insert($node) {
   global $user;
 
   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
-    // drupal_set_message("under itg_workflow_node_insert");
+    //drupal_set_message("under itg_workflow_node_insert");
     /* if (!array_key_exists(COPY_EDITOR, $user->roles) &&
       !array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) &&
       !array_key_exists(EDITOR, $user->roles) &&
@@ -802,6 +811,9 @@ function itg_workflow_node_insert($node) {
       $user_email = get_email_by_roll($rid);
       workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
       } */
+ //   drupal_set_message("unser node insert");
+    //unset session if exists during node insert.
+    unset($_SESSION['node_preview_unique']);
   }
 }
 
@@ -814,11 +826,12 @@ function itg_workflow_node_update($node) {
 
   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
     //drupal_set_message("under itg_workflow_node_update");
+    // get preview log ID.
     $preview_unique_id = $node->field_preview_unique_id['und'][0]['value'];
     $user_id = $user->uid;
     $node_id = $node->nid;
     if (_is_preview_log_submit_true($user)) {
-      // Delete entry if previously user is previwed the node.
+      // Delete entry of node if user is previously previewed the node.
       try {
         db_delete('itg_workflow_preview_log')
             ->condition('nid', $node_id)
@@ -848,6 +861,7 @@ function itg_workflow_node_update($node) {
       }
     }
     unset($_SESSION['node_preview_unique']);
+    
     if ($node->workbench_moderation_state_new != 'draft') {
       $itguser = user_load($node->uid);
       //getting mail id's of high level users
@@ -892,7 +906,9 @@ function itg_workflow_node_update($node) {
         }
       }
     }
-  }
+    
+    
+  } 
 }
   /**
    * Get Mail content
