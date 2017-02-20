@@ -77,7 +77,6 @@ function itg_loyalty_reward_share_point($user, $type, $nid = NULL) {
       }
       $itg_query->condition('loyalty_type', $dedicated_point['label']);
   $itg_result = $itg_query->execute()->fetchField();
-  // If newsletter subscription is first time then earn point else not.
   
     if (!empty($itg_result)) {
       return TRUE;
