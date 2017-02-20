@@ -561,7 +561,7 @@ function _personalization_show_content() {
     }
 
     $output = '';
-
+    $output.= '<ul class="personal-list">';
     foreach ($cursor as $id => $value) {
       if (function_exists('itg_get_front_activity_info'))
       {
@@ -578,7 +578,7 @@ function _personalization_show_content() {
         $type_image = '<img src="' . $file . '" alt="itg_image370x208.jpg"/>';
       }
       $n_url = url($value['path'], array('absolute' => TRUE));
-      $output.= '<ul class="personal-list"><li class="col-md-4">  
+      $output.= '<li class="col-md-4">  
           <div class="personal-details">
           <div class="personal-pic">' . $type_image . '</div>
           <div class="personal-caption">' . $value['primary_category_name'] . '</div>
@@ -590,10 +590,9 @@ function _personalization_show_content() {
       }
 
       $output.= '</span><a href="javascript:" class="personal-share"><i class="fa fa-share-alt" aria-hidden="true"></i></a></div></div>
-      <a href="' . $n_url . '">' . $value['title'] . '</a>  </li></ul>
-      </ul>';
+      <a href="' . $n_url . '">' . $value['title'] . '</a>  </li>';
     }
-    
+    $output.= '</ul>';
     if(!empty($value['title'])) {
       return $output;
     }
