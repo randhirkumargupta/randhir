@@ -120,12 +120,13 @@ function itg_user_activity_front() {
     // check connection
     if ($con)
     {
-      if($user_activity == 'twitter_share' || $user_activity == 'google_share' || $user_activity == 'fb_follow' || $user_activity == 'twitter_follow') {
+      if($user_activity == 'twitter_share' || $user_activity == 'google_share' || $user_activity == 'fb_follow' || $user_activity == 'twitter_follow' || $user_activity == 'google_follow') {
        if($user->uid) { 
        $people = $con->front_user_activity;
        $qry = array("nid" => $nd_id, "uid" => $user->uid, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus);
        $result = $people->insert($qry);
        $response = array('success' => $dstatus, 'activity' => $user_activity, 'type' => $dtag);
+       itg_loyalty_reward_earnpoint($nd_id, $user_activity, $user->uid);
        print json_encode($response);
        } else {
          $response = array('success' => 'anonymous', 'activity' => $user_activity, 'type' => $dtag);
