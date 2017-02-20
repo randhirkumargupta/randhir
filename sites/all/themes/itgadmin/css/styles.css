@@ -11034,3 +11034,7 @@ span.file a {
 .widget-wrapper .data-holder .block-itg-widget > div.flexslider {
   overflow: visible !important;
 }
+
+.success-byline {
+  padding: 5px 0 0 220px;
+}
