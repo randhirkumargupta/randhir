@@ -706,7 +706,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     }
 // Hiding section filed from basic page (Static page node form)
     if ($form_id == 'page_node_form') {
-        drupal_add_css("div.form-item-field-page-section-und {display:none}", 'inline');
+     //   drupal_add_css("div.form-item-field-page-section-und {display:none}", 'inline');
     }
 
     if (in_array($form_id, itg_widget_order_reorder_form())) {

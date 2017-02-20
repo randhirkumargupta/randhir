@@ -33,14 +33,6 @@ function feature_for_sport_node_info() {
       'title_label' => t('Title'),
       'help' => '',
     ),
-    'sport_static_page' => array(
-      'name' => t('Sport Static Page'),
-      'base' => 'node_content',
-      'description' => '',
-      'has_title' => '1',
-      'title_label' => t('Title'),
-      'help' => '',
-    ),
   );
   drupal_alter('node_info', $items);
   return $items;
