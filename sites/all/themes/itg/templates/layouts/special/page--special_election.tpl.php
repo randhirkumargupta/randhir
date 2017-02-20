@@ -405,7 +405,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                         ?>
                         <div class="row">
                         
-                        <div class="<?php echo $adsclass; ?> col-md-12 col-sm-6">
+                        <div class="<?php echo $adsclass; ?> col-md-12 col-sm-6 mt-50">
                             <div class="itg-widget election-topadd">
                                 <div class="ad-widget droppable">
                                     <div class="sidebar-ad">
