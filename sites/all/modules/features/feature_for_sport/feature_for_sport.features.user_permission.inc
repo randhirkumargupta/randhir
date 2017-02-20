@@ -24,8 +24,7 @@ function feature_for_sport_user_default_permissions() {
   $permissions['create sport_static_page content on assigned domains'] = array(
     'name' => 'create sport_static_page content on assigned domains',
     'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'domain',
   );
@@ -54,8 +53,7 @@ function feature_for_sport_user_default_permissions() {
   $permissions['delete sport_static_page content on assigned domains'] = array(
     'name' => 'delete sport_static_page content on assigned domains',
     'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'domain',
   );
@@ -84,8 +82,7 @@ function feature_for_sport_user_default_permissions() {
   $permissions['update sport_static_page content on assigned domains'] = array(
     'name' => 'update sport_static_page content on assigned domains',
     'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'domain',
   );
