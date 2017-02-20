@@ -125,8 +125,9 @@ function protected_pages_configure_validate($form, &$form_state) {
   if (!drupal_valid_path($form_state['normal_path'])) {
     form_set_error('path', t('Please enter a correct path!'));
   }
+  
   // changes by arun.kumarmishra@intoday.com
-  if (strlen($form_state['values']['rules_list']['password']) < 4){
+  if (strlen($form_state['values']['password']) < 4){
     form_set_error('password', 'Password must be grater than 3 characters');
   }
 
@@ -219,7 +220,7 @@ function protected_pages_edit_validate($form, &$form_state) {
     form_set_error('path', t('Please enter a correct path!'));
   }
   // changes by arun.kumarmishra@intoday.com
-  if (strlen($form_state['values']['rules_list']['password']) < 4){
+  if (strlen($form_state['values']['password']) < 4){
     form_set_error('password', 'Password must be grater than 3 characters');
   }
 

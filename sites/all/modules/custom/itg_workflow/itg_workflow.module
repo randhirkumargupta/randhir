@@ -9,6 +9,22 @@
  */
 
 /**
+ * Implements hook_permissions().
+ *
+ * Set access permission on ITG Autosave settings form.
+ *
+ * {@inheridoc}.
+ */
+function itg_workflow_permission() {
+  return array(
+    'administer itg_preview_log settings' => array(
+      'title' => t('administer itg_preview_log settings'),
+      'description' => t('administer itg_preview_log settings'),
+    ),
+  );
+}
+
+/**
  * Implements hook_menu().
  * @return array $items
  */
@@ -17,19 +33,31 @@ function itg_workflow_menu() {
   $items['preview-content-logs-report'] = array(
     'title' => "Audit Logs",
     'page callback' => 'itg_workflow_logs_detailis',
-    'access arguments' => array('access itg story'),
+    'access arguments' => array('administer itg_preview_log settings'),
     'type' => MENU_CALLBACK,
   );
 
   $items['preview-content-logs-report/nid/autocomplete'] = array(
     'page callback' => 'itg_workflow_content_nid',
-    'access arguments' => array('access itg story'),
+    'access arguments' => array('administer itg_preview_log settings'),
     'type' => MENU_CALLBACK
   );
 
   $items['preview-content-logs-report/title/autocomplete'] = array(
     'page callback' => 'itg_workflow_content_title',
-    'access arguments' => array('access itg story'),
+    'access arguments' => array('administer itg_preview_log settings'),
+    'type' => MENU_CALLBACK
+  );
+
+  $items['preview-content-logs-report/username/autocomplete'] = array(
+    'page callback' => 'itg_workflow_content_username',
+    'access arguments' => array('administer itg_preview_log settings'),
+    'type' => MENU_CALLBACK
+  );
+
+  $items['preview-content-logs-report/email/autocomplete'] = array(
+    'page callback' => 'itg_workflow_content_email',
+    'access arguments' => array('administer itg_preview_log settings'),
     'type' => MENU_CALLBACK
   );
 
@@ -81,11 +109,57 @@ function itg_workflow_content_title($title) {
 }
 
 /**
+ * Autocompelte helper for title.
+ * @param string $username
+ */
+function itg_workflow_content_username($username) {
+  $matches = array();
+  $content_type = itg_workflow_valid_content_type();
+  $itg_query = db_select("node", "n");
+  $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
+  $itg_query->leftJoin('users', 'u', 'u.uid=n.uid');
+  $itg_query->fields('u', array('name'));
+  $itg_query->condition('u.name', '%' . db_like($username) . '%', 'LIKE');
+  $itg_query->condition('n.type', array($content_type), 'IN');
+  $itg_query->isNull('iwf.nid');
+  $itg_query->range(0, 50);
+  $return = $itg_query->execute();
+  foreach ($return as $row) {
+    $matches[$row->name] = check_plain($row->name);
+  }
+
+  drupal_json_output($matches);
+}
+
+/**
+ * Autocompelte helper for email.
+ * @param title $email.
+ */
+function itg_workflow_content_email($email) {
+  $matches = array();
+  $content_type = itg_workflow_valid_content_type();
+  $itg_query = db_select("node", "n");
+  $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
+  $itg_query->leftJoin('users', 'u', 'u.uid=n.uid');
+  $itg_query->fields('u', array('mail'));
+  $itg_query->condition('u.mail', '%' . db_like($email) . '%', 'LIKE');
+  $itg_query->condition('n.type', array($content_type), 'IN');
+  $itg_query->isNull('iwf.nid');
+  $itg_query->range(0, 50);
+  $return = $itg_query->execute();
+  foreach ($return as $row) {
+    $matches[$row->mail] = check_plain($row->mail);
+  }
+
+  drupal_json_output($matches);
+}
+
+/**
  * function which gives valid content type for workflow.
  * @return array
  */
-function itg_workflow_valid_content_type () {
-  return array("blog" ,"story","videogallery","photogallery","podcast");
+function itg_workflow_valid_content_type() {
+  return array("blog", "story", "videogallery", "photogallery", "podcast");
 }
 
 /**
@@ -97,16 +171,34 @@ function itg_workflow_preview_log_filter_form($form, &$form_state) {
 
   $form['nid'] = array(
     '#type' => 'textfield',
-    '#title' => t('Node Id'),
+    '#title' => t('Content Id'),
     '#default_value' => isset($_GET['nid']) ? $_GET['nid'] : "",
     '#autocomplete_path' => 'preview-content-logs-report/nid/autocomplete',
+    '#attributes' => array('placeholder' => array("Enter Content ID"))
   );
 
   $form['title'] = array(
     '#type' => 'textfield',
-    '#title' => t('Title'),
+    '#title' => t('Content Title'),
     '#default_value' => isset($_GET['title']) ? $_GET['title'] : "",
     '#autocomplete_path' => 'preview-content-logs-report/title/autocomplete',
+    '#attributes' => array('placeholder' => array("Enter Content Title"))
+  );
+
+  $form['username'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Username'),
+    '#default_value' => isset($_GET['username']) ? $_GET['username'] : "",
+    '#autocomplete_path' => 'preview-content-logs-report/username/autocomplete',
+    '#attributes' => array('placeholder' => array("Enter Username"))
+  );
+
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Email'),
+    '#default_value' => isset($_GET['email']) ? $_GET['email'] : "",
+    '#autocomplete_path' => 'preview-content-logs-report/email/autocomplete',
+    '#attributes' => array('placeholder' => array("Enter Email"))
   );
 
   $form['type'] = array(
@@ -126,7 +218,7 @@ function itg_workflow_preview_log_filter_form($form, &$form_state) {
   $form['submit'] = array(
     '#value' => 'Apply',
     '#type' => 'submit',
-    '#attributes' => array('class' => array(' layout-apply',' btn-small'.' form-submit')),
+    '#attributes' => array('class' => array(' layout-apply', ' btn-small' . ' form-submit')),
     '#prefix' => '<div class = "layout-filter-btn">',
     '#suffix' => '<a class="layout-reset btn-small btn-reset" href="' . base_path() . 'preview-content-logs-report">Reset</a></div>',
   );
@@ -143,6 +235,8 @@ function itg_workflow_preview_log_filter_form_submit($form, &$form_state) {
   $nid = $form_state['values']['nid'];
   $title = $form_state['values']['title'];
   $type = $form_state['values']['type'];
+  $username = $form_state['values']['username'];
+  $email = $form_state['values']['email'];
   $form_state['redirect'] = array(
     'preview-content-logs-report',
     array(
@@ -150,6 +244,8 @@ function itg_workflow_preview_log_filter_form_submit($form, &$form_state) {
         'nid' => $nid,
         'title' => $title,
         'type' => $type,
+        'username' => $username,
+        'email' => $email,
         'items_per_page' => $item_per_page,
       ),
     ),
@@ -166,78 +262,114 @@ function itg_workflow_logs_detailis() {
     array('data' => t('ID')),
     array('data' => t('Nid')),
     array('data' => t('Title')),
-    array('data' => t('User')),
+    array('data' => t('Created By')),
+    array('data' => t('Modified By')),
     array('data' => t('Type')),
+    array('data' => t('Created Date')),
+    array('data' => t('Modified Date')),
     array('data' => t('Action')),
   );
-
-  if (isset($_GET['items_per_page'])) {
-    $items_per_page = $_GET['items_per_page'];
-  }
-  else {
-    $items_per_page = 20;
-  }
-
-  $itg_query = db_select('node', 'n')->extend('PagerDefault')->limit($items_per_page);
-  $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
-  $itg_query->leftJoin('users', 'user', 'user.uid=n.uid');
-
-  if (!isset($_GET['type']) || (isset($_GET['type']) && $_GET['type'] == "All")) {
-    $itg_query->condition("n.type", array("story", "videogallery", "blog", "photogallery"), "IN");
-  }
-  else {
-    $itg_query->condition("n.type", $_GET['type']);
-  }
-
-  if (isset($_GET['nid']) && !empty($_GET['nid'])) {
-    $itg_query->condition("n.nid", $_GET['nid']);
-  }
-
-  if (isset($_GET['title']) && !empty($_GET['title'])) {
-    $title_chunk_array = explode(" ", $_GET['title']);
-    foreach ($title_chunk_array as $title_chunk) {
-      $itg_query->condition('title', '%' . db_like($title_chunk) . '%', 'LIKE');
+  if (!empty($_GET['items_per_page']) && (!empty($_GET['username'] || !empty($_GET['email'])))) {
+    if (isset($_GET['items_per_page'])) {
+      $items_per_page = $_GET['items_per_page'];
     }
+    else {
+      $items_per_page = 20;
+    }
+
+    $itg_query = db_select('node', 'n')->extend('PagerDefault')->limit($items_per_page);
+    $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
+    $itg_query->leftJoin('workbench_moderation_node_history', 'wbh', 'wbh.nid=n.nid');
+    $itg_query->leftJoin('users', 'user', 'user.uid=n.uid');
+    $itg_query->leftJoin('users', 'wbh_user', 'wbh_user.uid=wbh.uid');
+    $itg_query->condition("wbh.published", 1);
+    $itg_query->condition("wbh.is_current", 1);
+    $itg_query->condition("wbh.state", "published");
+
+    if (!isset($_GET['type']) || (isset($_GET['type']) && $_GET['type'] == "All")) {
+      $itg_query->condition("n.type", array("story", "videogallery", "blog", "photogallery"), "IN");
+    }
+    else {
+      $itg_query->condition("n.type", $_GET['type']);
+    }
+
+    if (isset($_GET['nid']) && !empty($_GET['nid'])) {
+      $itg_query->condition("n.nid", $_GET['nid']);
+    }
+
+    if (isset($_GET['username']) && !empty($_GET['username'])) {
+      $or = db_or()->condition("wbh_user.name", $_GET['username'])->condition("user.name", $_GET['username']);
+      $itg_query->condition($or);
+    }
+
+    if (isset($_GET['email']) && !empty($_GET['email'])) {
+      $itg_query->condition("user.mail", $_GET['email']);
+    }
+
+    if (isset($_GET['title']) && !empty($_GET['title'])) {
+      $title_chunk_array = explode(" ", $_GET['title']);
+      foreach ($title_chunk_array as $title_chunk) {
+        $itg_query->condition('title', '%' . db_like($title_chunk) . '%', 'LIKE');
+      }
+    }
+    $itg_query->condition('n.status', 1);
+    $itg_query->fields('n', array('nid', 'title', 'uid', 'type', 'created', 'changed'));
+    $itg_query->fields('user', array('name'));
+    $itg_query->fields('wbh_user', array('name'));
+    $itg_query->fields('wbh', array('uid'));
+    $itg_query->fields('iwf', array('nid'));
+    $itg_query->isNull('iwf.nid');
+    $itg_query->orderBy('n.nid', "DESC");
+    $itg_result = $itg_query->execute()->fetchAll();
+
+    $rows = array();
+    $count = 0;
+    foreach ($itg_result as $row) {
+      $rows[] = array(
+        array('data' => $count + 1),
+        array('data' => $row->nid),
+        array('data' => $row->title),
+        array('data' => l($row->name, "user/$row->uid")),
+        array('data' => l($row->wbh_user_name, "user/$row->wbh_uid")),
+        array('data' => $row->type),
+        array('data' => date('d/m/Y', $row->created)),
+        array('data' => date('d/m/Y', $row->changed)),
+        array('data' => l("<span class='view-link'>View</span>", "node/$row->nid", array("html" => TRUE, "attributes" => array("target" => "_blank")))),
+      );
+      $count++;
+    }
+    $filter_form = drupal_get_form('itg_workflow_preview_log_filter_form');
+    $output = render($filter_form);
+    $output .= '<div class="view"><div class="attachment"><span class="count">Count (' . count($itg_result) . ') </span>';
+    $output .= '</div></div>';
+    $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table', 'preview-log-table')), 'empty' => 'No result found.'));
+
+    // add the pager
+    $output .= theme('pager');
   }
-  $itg_query->condition('n.status',1);
-  $itg_query->fields('n', array('nid', 'title', 'uid', 'type'));
-  $itg_query->fields('user', array('name'));
-  $itg_query->fields('iwf', array('nid'));
-  $itg_query->isNull('iwf.nid');
-  $itg_query->orderBy('n.nid', "DESC");
-  $itg_result = $itg_query->execute()->fetchAll();
-  $rows = array();
-  $count = 0;
-
-  foreach ($itg_result as $row) {
-    $rows[] = array(
-      array('data' => $count + 1),
-      array('data' => $row->nid),
-      array('data' => $row->title),
-      array('data' => l($row->name, "user/$row->uid")),
-      array('data' => $row->type),
-      array('data' => l("<span class='view-link'>View</span>", "node/$row->nid", array("html" => TRUE, "attributes" => array("target" => "_blank")))),
-    );
-    $count++;
+  else {
+    $filter_form = drupal_get_form('itg_workflow_preview_log_filter_form');
+    $output .= render($filter_form);
+    $output .= '<div class="view-content">
+      <table class="">
+      <tbody>
+        <tr>
+          <td>' . t("Please select Username or Email filter first.") . '</td>
+        </tr>
+      </tbody>
+      </table>
+      </div>';
   }
-
-  $filter_form = drupal_get_form('itg_workflow_preview_log_filter_form');
-  $output = render($filter_form);
-//  $output .= '<div class="view"><div class="attachment"><span class="count">Count (' .$total_items . ') </span>';
-//  $output .= '</div></div>';
-  $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No result found.'));
-
-  // add the pager
-  $output .= theme('pager');
 
   return $output;
 }
+
 /**
  * Implements hook_form_alter().
  * {@inheritdoc}
  */
 function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
-
+  global $user;
   switch ($form_id) {
     case 'story_node_form':
     case 'photogallery_node_form':
@@ -248,8 +380,11 @@ function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
       module_load_include('inc', 'itg_workflow', 'includes/itg_workflow_preview_log');
       $preview_id = _get_unique_id_for_node_field();
       $form['field_preview_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $preview_id;
-      $form['actions']['submit']['#submit'][] = 'itg_workflow_preview_log_submit';
-      $form['actions']['preview']['#submit'][] = 'itg_workflow_preview_log_submit';
+      // Condition to check valid user to perform preview log submit.
+      if (_is_preview_log_submit_true($user)) {
+        $form['actions']['submit']['#submit'][] = 'itg_workflow_preview_log_submit';
+        $form['actions']['preview']['#submit'][] = 'itg_workflow_preview_log_submit';
+      }
       $form['#after_build'][] = 'itg_workflow_after_build';
       break;
 
@@ -259,15 +394,45 @@ function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
+/**
+ * function return flag for user have preview log functionality.
+ * 
+ * @param array $user
+ * @return boolean
+ */
+function _is_preview_log_submit_true($user) {
+  $access_log_submit = FALSE;
+  $access_users_roles = array(
+    'administrator',
+    'Site Admin',
+    'Section Editor/Anchor',
+    'Copy Editor',
+    'Editor'
+  );
+  $current_user_roles_array = array_values($user->roles);
+  foreach ($current_user_roles_array as $role) {
+    if (in_array($role, $access_users_roles)) {
+      $access_log_submit = TRUE;
+    }
+  }
+  return $access_log_submit;
+}
+
+/**
+ *{@inheritdoc}
+ */
 function itg_workflow_preview_log_submit($form, $form_state) {
   global $user;
-  $preview_unique_id = $form_state['values']['field_preview_unique_id']['und'][0]['value'];
-  $user_id = $user->uid;
-  $arg = arg();
-  //if ($arg[0] == 'node' && $arg[1] == 'add') {
+//  watchdog("preview_log", $form_state['values']['op']);
+  // validation for preview button only.
+  if ($form_state['values']['op'] == 'Preview') {
+    $preview_unique_id = $form_state['values']['field_preview_unique_id']['und'][0]['value'];
+    $user_id = $user->uid;
+    //if ($arg[0] == 'node' && $arg[1] == 'add') {
     // Give nid default value 0.
     itg_workflow_preview_db_merge($preview_unique_id, $user_id, 0);
-  //}
+    //}
+  }
 }
 
 /**
@@ -289,7 +454,8 @@ function itg_workflow_preview_db_merge($preview_unique_id, $user_id, $nid = 0) {
           'uid' => $user_id,
           'nid' => $nid,
         ))->execute();
-  } catch (Exception $ex) {
+  }
+  catch (Exception $ex) {
     drupal_set_message($ex->getMessage(), 'error');
   }
 }
@@ -340,11 +506,7 @@ function itg_workflow_after_build($form, &$form_state) {
               jQuery("#edit-field-story-archive").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
 
-  if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) 
-          || array_key_exists(COPY_EDITOR, $user->roles) 
-          || array_key_exists(EDITOR, $user->roles) 
-          || array_key_exists(UGC_MODERATOR, $user->roles) 
-          || array_key_exists(SITE_ADMIN, $user->roles)) {
+  if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(EDITOR, $user->roles) || array_key_exists(UGC_MODERATOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles)) {
     if (!isset($form['#node']->workbench_moderation['current'])) {
       $state_class = ' published';
       $submit_name = 'Publish';
@@ -450,9 +612,11 @@ function itg_workflow_after_build($form, &$form_state) {
  * @param object $node
  */
 function itg_workflow_node_presave($node) {
-  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
-    if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
-      $node->workbench_moderation_state_new = 'published';
+  if ((isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') || (empty($node->field_story_source_type[LANGUAGE_NONE][0]['value']))) {
+    if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
+      if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
+        $node->workbench_moderation_state_new = 'published';
+      }
     }
   }
 }
@@ -633,45 +797,24 @@ function itg_workflow_bulk_opration_related($field1, $field2) {
  */
 function itg_workflow_node_insert($node) {
   global $user;
-  
-  if ($node->type == 'story' 
-          || $node->type == 'photogallery' 
-          || $node->type == 'blog' 
-          || $node->type == 'podcast' 
-          || $node->type == 'videogallery') {    
 
-    /*if (!array_key_exists(COPY_EDITOR, $user->roles) &&
-            !array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) &&
-            !array_key_exists(EDITOR, $user->roles) &&
-            !array_key_exists(SITE_ADMIN, $user->roles) &&
-            !($node->workbench_moderation_state_new == 'draft')) {
+  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
+    //drupal_set_message("under itg_workflow_node_insert");
+    /* if (!array_key_exists(COPY_EDITOR, $user->roles) &&
+      !array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) &&
+      !array_key_exists(EDITOR, $user->roles) &&
+      !array_key_exists(SITE_ADMIN, $user->roles) &&
+      !($node->workbench_moderation_state_new == 'draft')) {
 
       //getting mail id's of high level users
       $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
       $user_email = get_email_by_roll($rid);
       workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
-     }*/
-
-    $preview_unique_id = $node->field_preview_unique_id['und'][0]['value'];
-    $user_id = $user->uid;
-    $node_id = $node->nid;
-
-    try {
-      db_update('itg_workflow_preview_log')
-          ->fields(array(
-            'nid' => $node_id,
-            'preview_id' => $preview_unique_id,
-            'uid' => $user_id,
-          ))
-          ->condition('preview_id', $preview_unique_id)
-          ->condition('uid', $user_id)
-          ->execute();
-    } catch (Exception $ex) {
-      drupal_set_message($ex->getMessage());
-    }
+      } */
+ //   drupal_set_message("unser node insert");
+    //unset session if exists during node insert.
     unset($_SESSION['node_preview_unique']);
   }
-
 }
 
 /**
@@ -679,190 +822,220 @@ function itg_workflow_node_insert($node) {
  * @param object $node
  */
 function itg_workflow_node_update($node) {
-  global $user;   
-  
-  if ($node->type == 'story' 
-          || $node->type == 'photogallery' 
-          || $node->type == 'blog' 
-          || $node->type == 'podcast' 
-          || $node->type == 'videogallery') {
-    
+  global $user;
+
+  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
+    //drupal_set_message("under itg_workflow_node_update");
+    // get preview log ID.
     $preview_unique_id = $node->field_preview_unique_id['und'][0]['value'];
+    $user_id = $user->uid;
+    $node_id = $node->nid;
+    if (_is_preview_log_submit_true($user)) {
+      // Delete entry of node if user is previously previewed the node.
+      try {
+        db_delete('itg_workflow_preview_log')
+            ->condition('nid', $node_id)
+            ->condition('uid', $user_id)
+            ->condition('preview_id', $preview_unique_id, "!=")
+            ->execute();
+      }
+      catch (Exception $ex) {
+        //drupal_set_message("Direct published node cache block");
+        drupal_set_message($ex->getMessage());
+      }
+
+      try {
+        db_update('itg_workflow_preview_log')
+            ->fields(array(
+              'nid' => $node_id,
+              'preview_id' => $preview_unique_id,
+              'uid' => $user_id,
+            ))
+            ->condition('preview_id', $preview_unique_id)
+            ->condition('uid', $user_id)
+            ->execute();
+      }
+      catch (Exception $ex) {
+        //drupal_set_message("Direct published node cache block");
+        drupal_set_message($ex->getMessage());
+      }
+    }
+    unset($_SESSION['node_preview_unique']);
     
     if ($node->workbench_moderation_state_new != 'draft') {
       $itguser = user_load($node->uid);
       //getting mail id's of high level users
-      if($node->type == 'story' && $node->workbench_moderation_state_new == 'published') {       
+      if ($node->type == 'story' && $node->workbench_moderation_state_new == 'published') {
         //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR, SEO);
         $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, SEO);
-      } else {
+      }
+      else {
         $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR);
         //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
       }
-      
+
       $user_email = get_email_by_roll($rid);
       $user_email[] = $itguser->mail;
-      
-      // Delete first if user has already created log.
-      try {
-      // Condition to delete 0 nid and previous added nid logs value.
-      $or = db_or()->condition('nid', $node->nid)->condition('nid', 0);
-      db_delete('itg_workflow_preview_log')
-            ->condition($or)
-            ->condition('uid', $node->uid)
-            ->execute();
-      } catch (Exception $ex) {
-          drupal_set_message($ex->getMessage());
-      }
-      
-      try {
-        db_insert('itg_workflow_preview_log')
-            ->fields(array(
-              'nid' => $node->nid,
-              'preview_id' => $preview_unique_id,
-              'uid' => $node->uid,
-            ))
-            ->execute();
-      }
-      catch (Exception $ex) {
-        drupal_set_message($ex->getMessage());
-      }
-      
-      unset($_SESSION['node_preview_unique']);
+
       
       workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
+      if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+        if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
+
+          $preview_unique_id = $node->field_preview_unique_id['und'][0]['value'];
+
+          if ($node->workbench_moderation_state_new != 'draft') {
+            $itguser = user_load($node->uid);
+            //getting mail id's of high level users
+            if ($node->type == 'story' && $node->workbench_moderation_state_new == 'published') {
+              //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR, SEO);
+              $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, SEO);
+            }
+            else {
+              $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR);
+              //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
+            }
+
+            $user_email = get_email_by_roll($rid);
+            $user_email[] = $itguser->mail;
+
+            unset($_SESSION['node_preview_unique']);
+
+            workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
+          }
+        }
+      }
     }
     
-
-
-  }
+    
+  } 
 }
+  /**
+   * Get Mail content
+   * @global String $base_url
+   * @param object $node
+   * @param string $event
+   * @param string $to
+   * @param string $user_name
+   * @param string $current_user_name
+   * @return 
+   */
+  function workflow_get_mail_content($node, $event, $to, $user_name, $current_user_name) {
 
-/**
- * Get Mail content
- * @global String $base_url
- * @param object $node
- * @param string $event
- * @param string $to
- * @param string $user_name
- * @param string $current_user_name
- * @return 
- */
-function workflow_get_mail_content($node, $event, $to, $user_name, $current_user_name) {
+    global $base_url;
 
-  global $base_url;
-
-  $content_type = $node->type;
-  $review = $node->workbench_moderation_state_new;
-  if ($event == 'create') {
-    $task_subject = 'A new ' . $content_type . ' has been submitted for your review, please find details below.';
-    $submitted_by = 'Submitted By: ' . $current_user_name;
-    $subject = ucfirst($content_type) . ' Submitted ' . $node->title;
-  }
-  elseif ($event == 'update') {
-    if ($review == 'needs_review') {
-      $task_subject = 'A new ' . $content_type . ' has been updated and submitted for your review, please find details below.';
+    $content_type = $node->type;
+    $review = $node->workbench_moderation_state_new;
+    if ($event == 'create') {
+      $task_subject = 'A new ' . $content_type . ' has been submitted for your review, please find details below.';
+      $submitted_by = 'Submitted By: ' . $current_user_name;
+      $subject = ucfirst($content_type) . ' Submitted ' . $node->title;
     }
-    else if ($review == 'rejected') {
-      $task_subject = 'Your ' . $content_type . ' has been rejected, please find details below.';
-    }
-    else if ($review == 'needs_modification') {
-      $task_subject = 'Your ' . $content_type . ' has been required some modification, please find details below.';
-    }
-    else if ($review == 'published') {
-      $task_subject = 'Your ' . $content_type . ' has been published, please find details below.';
+    elseif ($event == 'update') {
+      if ($review == 'needs_review') {
+        $task_subject = 'A new ' . $content_type . ' has been updated and submitted for your review, please find details below.';
+      }
+      else if ($review == 'rejected') {
+        $task_subject = 'Your ' . $content_type . ' has been rejected, please find details below.';
+      }
+      else if ($review == 'needs_modification') {
+        $task_subject = 'Your ' . $content_type . ' has been required some modification, please find details below.';
+      }
+      else if ($review == 'published') {
+        $task_subject = 'Your ' . $content_type . ' has been published, please find details below.';
+      }
+
+      $submitted_by = 'Updated By: ' . $current_user_name;
+      $subject = ucfirst($content_type) . ' Updation ' . $node->title;
     }
 
-    $submitted_by = 'Updated By: ' . $current_user_name;
-    $subject = ucfirst($content_type) . ' Updation ' . $node->title;
-  }
-
-  $node_url = $base_url . '/node/' . $node->nid;
-  $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+    $node_url = $base_url . '/node/' . $node->nid;
+    $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
               <html xmlns:v="urn:schemas-microsoft-com:vml">
                 <head><title></title></head>
                 <body style="margin:0; padding:0;">';
-  $content .= 'Dear Team,';
-  $content .= '<br /><br />' . $task_subject;
-  $content .= '<br /><br />' . ucfirst($content_type) . ' Title: ' . $node->title;
-  $content .= '<br />URL: ' . $node_url;
-  $content .= '<br />' . $submitted_by;
-  $content .= '<br /><br /><br />Thanks,<br>ITG Team';
-  $content .= '</body>';
-  $content .= '</html>';
+    $content .= 'Dear Team,';
+    $content .= '<br /><br />' . $task_subject;
+    $content .= '<br /><br />' . ucfirst($content_type) . ' Title: ' . $node->title;
+    $content .= '<br />URL: ' . $node_url;
+    $content .= '<br />' . $submitted_by;
+    $content .= '<br /><br /><br />Thanks,<br>ITG Team';
+    $content .= '</body>';
+    $content .= '</html>';
 
 
-  $params = array(
-    'body' => $content,
-    'subject' => $subject,
-  );
+    $params = array(
+      'body' => $content,
+      'subject' => $subject,
+    );
 
-  $mail = drupal_mail('itg_workflow', 'send_mail_to_task', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
-  if ($mail['result']) {
-    return TRUE;
+    $mail = drupal_mail('itg_workflow', 'send_mail_to_task', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    if ($mail['result']) {
+      return TRUE;
+    }
+    else {
+      $error_msg = 'Failed to send the email!';
+      watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+      return FALSE;
+    }
   }
-  else {
-    $error_msg = 'Failed to send the email!';
-    watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
-    return FALSE;
+
+  /**
+   * Implements hook_mail
+   * @param string $key
+   * @param string $message
+   * @param array $params
+   */
+  function itg_workflow_mail($key, &$message, $params) {
+    switch ($key) {
+      case 'send_mail_to_task':
+        $headers = array(
+          'MIME-Version' => '1.0',
+          'Content-Type' => 'text/html; charset=iso-8859-1;',
+          'Content-Transfer-Encoding' => '8Bit',
+          'X-Mailer' => 'Drupal'
+        );
+
+        $message['subject'] = $params['subject'];
+        $message['body'][] = $params['body'];
+        foreach ($headers as $key => $value) {
+          $message['headers'][$key] = $value;
+        }
+        break;
+    }
   }
-}
 
-/**
- * Implements hook_mail
- * @param string $key
- * @param string $message
- * @param array $params
- */
-function itg_workflow_mail($key, &$message, $params) {
-  switch ($key) {
-    case 'send_mail_to_task':
-      $headers = array(
-        'MIME-Version' => '1.0',
-        'Content-Type' => 'text/html; charset=iso-8859-1;',
-        'Content-Transfer-Encoding' => '8Bit',
-        'X-Mailer' => 'Drupal'
-      );
+  /**
+   * Get email by roll
+   * @param string $key
+   * @param string $message
+   * @param array $params
+   */
+  function get_email_by_roll($id) {
+    $query = db_select('users', 'u');
+    $query->fields('u', array('mail'));
+    $query->join('users_roles', 'ur', 'ur.uid = u.uid');
+    $query->condition('ur.rid', $id, IN);
+    $result = $query->execute();
 
-      $message['subject'] = $params['subject'];
-      $message['body'][] = $params['body'];
-      foreach ($headers as $key => $value) {
-        $message['headers'][$key] = $value;
-      }
-      break;
+    foreach ($result as $val) {
+      $value[] = $val->mail;
+    }
+    return $value;
   }
-}
 
-/**
- * Get email by roll
- * @param string $key
- * @param string $message
- * @param array $params
- */
-function get_email_by_roll($id) {
-  $query = db_select('users', 'u');
-  $query->fields('u', array('mail'));
-  $query->join('users_roles', 'ur', 'ur.uid = u.uid');
-  $query->condition('ur.rid', $id, IN);
-  $result = $query->execute();
-
-  foreach ($result as $val) {
-    $value[] = $val->mail;
+  /**
+   * Implements hook_views_api().
+   *
+   * This tells drupal that there is Views integration file named
+   * itg_social_media.views.inc.
+   *
+   * {@inheritdoc}
+   */
+  function itg_workflow_views_api() {
+    return array(
+      'api' => 3,
+      'path' => drupal_get_path('module', 'itg_workflow') . '/includes/views',
+    );
   }
- return $value;
-}
-
-/**
- * Implements hook_views_api().
- *
- * This tells drupal that there is Views integration file named
- * itg_social_media.views.inc.
- *
- * {@inheritdoc}
- */
-function itg_workflow_views_api() {
-  return array(
-    'api' => 3,
-    'path' => drupal_get_path('module', 'itg_workflow') . '/includes/views',
-  );
-}
+  

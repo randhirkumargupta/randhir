@@ -66,6 +66,9 @@ img{
 .def-cur-none{
     cursor: none;
 }
+.pointer-event-none{
+    pointer-events: none;
+}
 .mr-0{
     margin: 0;
 }
@@ -236,7 +239,7 @@ p{
 header{
     margin-bottom: 30px;
     position: relative;
-    z-index: 10;
+    z-index: 99999;
 }
 #block-itg-layout-manager-header-block{    
     padding-top: 20px;
@@ -1509,6 +1512,10 @@ footer{
         &+li{
             border-top: 1px solid $border-color;
         }
+        .detail{
+            overflow: hidden;
+            display: block;
+        }
     }
 }
 /*End CSS trending-videos Home  page*/
@@ -2124,7 +2131,11 @@ footer{
                 border-radius: 7px 0px 0px 7px;
             }
             .multiple-photo{
-                padding: 0 50px;                
+                padding: 0 50px; 
+                .photo-slider{
+                    padding: 0 5px;
+                    cursor: pointer;
+                }
                 .slick-prev, .slick-next{
                     background: transparent;
                     border: none;
@@ -2147,10 +2158,7 @@ footer{
                   display: inline-block;
                   vertical-align: top;
                   position: relative;
-                  img{
-                    width: 120px; 
-                    height: 90px;
-                  }
+                  border: 1px solid transparent;
                   .photo-count{
                     font-style: normal;
                     position: absolute;
@@ -2161,8 +2169,13 @@ footer{
                     background-color: rgba(0,0,0,.5);
                     color: #fff;
                     text-align: center;
-                    line-height: 90px;
+                    line-height: 64px;
                   }
+                }
+                .slick-current{
+                    .img-wrapper{
+                        border: 1px solid #ffc106;
+                    }
                 }
             }
         }
@@ -4442,6 +4455,7 @@ h1.category-heading{
             h2{
                 @include font(15px,20px);
                 margin-bottom:10px;
+                word-wrap: break-word;
                 a{
                     @include font(15px,20px,$itg-font-medium);   
                 }
@@ -4860,8 +4874,9 @@ h1.category-heading{
 section.sidebar{
   .block-itg-ads{
     @include display-inline;
-     padding: 30px 34px;
+    padding: 30px 34px;
     border-bottom: 1px solid $border-color;   
+    width: 100%;
   }
 }
 
@@ -5102,6 +5117,7 @@ section.sidebar{
     .menu-login{
         .user-menu{
             @include pos(relative);
+            z-index: -99999;
             a{
                 cursor: pointer;
                 &.user-icon{
@@ -8036,17 +8052,20 @@ section.sidebar{
         margin-top: 25px;
     }
     @include video-block(video-wrapper);
+    .video-wrapper{
+     padding-bottom: 70%;   
+    }
     .common-highlights{
         overflow:auto;
         height: 285px;
     }
     .special-top-bg{
         background: #fbfbfb;
-        height: 530px;
+        overflow: auto;
+        height: 100%;
     }
     .auto-block-2{        
-        height: 490px;
-        overflow: auto;
+        height: 490px;        
         .special-top-news{                       
             .itg-listing{
                border: none;
@@ -10239,6 +10258,8 @@ span.smilies-title {
     height: auto;
     display: inline-block;
     vertical-align: middle;   
+    float: none !important;
+    margin: 0 !important;
     img{
         display: inline;
         max-width: inherit;
@@ -10341,12 +10362,41 @@ span.smilies-title {
 }
 /*css end for emoji*/
 
-.front-end-breadcrumb{
+/*css breadcrumb start*/
+#block-itg-layout-manager-front-end-breadcrumb{
   position: relative;
-  z-index: 9999;
+  z-index: 9999;  
+  color: #a1a1a1;
+  font-family: roboto;
+  padding-top:15px;
+  a{    
+    color: #a1a1a1;
+    font-family: roboto;
+  }
+    .container{
+      div.lft{
+        @include display-inline;
+    }   
+  } 
 }
+.node-type-photogallery, .node-type-videogallery, .node-type-podcast, .section-videos{
+    #block-itg-layout-manager-front-end-breadcrumb{
+        background: #171717;   
+    }    
+}
+/*css breadcrumb end*/
 iframe{
   &[id*="twitter-widget"]{
     width: 100% !important;
   }
+}
+.photo-heading{
+    font-size: 32px;
+    margin-bottom: 25px;
+    color:#fff;
+}
+.video-heading{
+    color: #fff;    
+    font-size: 24px;
+    margin-bottom: 10px;
 }

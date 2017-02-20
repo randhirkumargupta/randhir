@@ -433,7 +433,7 @@ function itg_image_croping_theme($existing, $type, $theme, $path) {
  * This function use for save croped image by form the image dataurl (base64)!
  */
 function itg_image_croping_crop_image() {
-
+    global $user;
     $image_data_url = $_POST['image_data'];
     $image_name = $_POST['field_name'];
     $content_type = $_POST['content_name'];
@@ -449,9 +449,17 @@ function itg_image_croping_crop_image() {
     if ($extention == "") {
         $extention = 'png';
     }
+//Load orignal image 
+    if (!empty($_POST['original_img_id'])) {
+        $orignal_img = file_load($_POST['original_img_id']);
 
+        $orignal_file_name = $orignal_img->filename;
+        $orignal_file_name = substr($orignal_file_name, 0, (strrpos($orignal_file_name, ".")));
+    }
+    if ($orignal_file_name != "") {
+        $image_name = $orignal_file_name;
+    }
     $image_data_url = str_replace('data:image/' . $extention . ';base64,', '', $image_data_url);
-
     $imagedata = base64_decode($image_data_url);
     if (!file_exists(file_default_scheme() . '://crop_image')) {
         mkdir(file_default_scheme() . '://crop_image', 0777, TRUE);
@@ -460,14 +468,24 @@ function itg_image_croping_crop_image() {
     file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
     $image = image_load($file->uri);
 
+
     $fileids['fid'][] = $file->fid . '#' . $_POST['field_name'];
     if (!empty($image_fields) && !empty($image)) {
         foreach ($image_fields as $fields_name) {
+            $file = array();
+            if (!file_exists(file_default_scheme() . '://crop_image')) {
+                mkdir(file_default_scheme() . '://crop_image', 0777, TRUE);
+            }
+            // echo is_writable(file_default_scheme() . '://crop_image');
             $filepath = file_default_scheme() . '://crop_image';
             $scaled = image_resize($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height']);
             if ($scaled) {
                 $image_name = $fields_name . time();
-                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $extention . '/');
+                if ($orignal_file_name != "") {
+                    $image_name = $orignal_file_name . rand(111, 9999) . time();
+                }
+
+                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $extention);
                 $uri = $filepath . '/' . $image_name . '.' . $extention;
                 $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
                 $file = new StdClass;
@@ -545,9 +563,7 @@ function itg_image_croping_crop_image_orignal() {
     $image_fields = $_POST['image_fields'];
     $fileids = array();
     $img_dim = mageimagedimesion();
-    if ($image_name == "") {
-        $image_name = time();
-    }
+
     $image_width = $img_dim[$content_type][$_POST['field_name']]['width'];
     $image_height = $img_dim[$content_type][$_POST['field_name']]['height'];
 
@@ -557,15 +573,18 @@ function itg_image_croping_crop_image_orignal() {
         $image_height = $_POST['resize_image_height'];
     }
 
-    $image_name = $image_name . rand(111, 999);
+
+
+
     $file_image = file_load($image_fiedlid);
     $image = image_load($file_image->uri);
     $image_exten = end(explode('.', $file_image->uri));
     $filepath = file_default_scheme() . '://crop_image';
     $scaled = image_resize($image, $image_width, $image_height);
-
-    $image_name = $image_name . time();
-    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten . '/');
+    $image_name_orignal = $file_image->filename;
+    $image_name_orignal = substr($image_name_orignal, 0, (strrpos($image_name_orignal, ".")));
+    $image_name = $image_name_orignal . rand(111, 999) . time();
+    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten);
     $uri = $filepath . '/' . $image_name . '.' . $image_exten;
     $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
     $file = new StdClass;
@@ -586,11 +605,10 @@ function itg_image_croping_crop_image_orignal() {
         foreach ($image_fields as $fields_name) {
 
             $filepath = file_default_scheme() . '://crop_image';
-
             $scaled = image_scale_and_crop($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height']);
             if ($scaled) {
-                $image_name = $fields_name . time();
-                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten . '/');
+                $image_name = $image_name_orignal . rand(111, 999) . time();
+                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten);
                 $uri = $filepath . '/' . $image_name . '.' . $image_exten;
                 $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
                 $file = new StdClass;
@@ -727,7 +745,14 @@ function mageimagedimesion() {
     $image_dim['food_news']['field_recipe_writer_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
     $image_dim['food_news']['field_recipe_writer_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
 
-
+    $image_dim['issue']['field_issue_large_cover_image']['width'] = ISSUE_LARGE_IMAGE_WIDTH;
+    $image_dim['issue']['field_issue_large_cover_image']['height'] = ISSUE_LARGE_IMAGE_HEIGHT;
+    $image_dim['issue']['field_issue_small_cover_image']['width'] = ISSUE_SMALL_WIDTH;
+    $image_dim['issue']['field_issue_small_cover_image']['height'] = ISSUE_SMALL_HEIGHT;
+    $image_dim['issue']['field_issue_supp_large_image']['width'] = ISSUE_LARGE_IMAGE_WIDTH;
+    $image_dim['issue']['field_issue_supp_large_image']['height'] = ISSUE_LARGE_IMAGE_HEIGHT;
+    $image_dim['issue']['field_issue_supp_small_image']['width'] = ISSUE_SMALL_WIDTH;
+    $image_dim['issue']['field_issue_supp_small_image']['height'] = ISSUE_SMALL_HEIGHT;
 
     return $image_dim;
 }
@@ -759,12 +784,12 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
         </div>',
     );
 
-    if (($content_name == 'photogallery' || $content_name == 'videogallery' || $content_name == 'food_news' || $content_name == 'cooking_tips' || $content_name == 'recipe' || $content_name == 'podcast' || $content_name == 'mega_review_critic' || $content_name == 'breaking_news' || $content_name == 'story') && $field_name == 'field_story_extra_large_image') {
+    if (($content_name == 'photogallery' || $content_name == 'videogallery' || $content_name == 'food_news' || $content_name == 'cooking_tips' || $content_name == 'recipe' || $content_name == 'podcast' || $content_name == 'mega_review_critic' || $content_name == 'breaking_news' || $content_name == 'story') && ($field_name == 'field_story_extra_large_image') || ($field_name == 'field_issue_large_cover_image' || $field_name == 'field_issue_supp_large_image' )) {
         $largsize = '(' . $imgdim[$content_name]['field_story_large_image']['width'] . 'X' . $imgdim[$content_name]['field_story_large_image']['height'] . ')';
         $mediumsize = '(' . $imgdim[$content_name]['field_story_medium_image']['width'] . 'X' . $imgdim[$content_name]['field_story_medium_image']['height'] . ')';
         $extrasmallsize = '(' . $imgdim[$content_name]['field_story_extra_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_extra_small_image']['height'] . ')';
         $writer_image = '(' . $imgdim[$content_name]['field_recipe_writer_image']['width'] . 'X' . $imgdim[$content_name]['field_recipe_writer_image']['height'] . ')';
-
+        $issue_img_size = '(' . $imgdim[$content_name]['field_issue_small_cover_image']['width'] . 'X' . $imgdim[$content_name]['field_issue_small_cover_image']['height'] . ')'; 
         $smallsize = '(' . $imgdim[$content_name]['field_story_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_small_image']['height'] . ')';
         if ($content_name == 'photogallery') {
 
@@ -774,7 +799,19 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
                 'field_story_small_image' => t("Small Image  $smallsize"),
                 'field_story_extra_small_image' => t("Extra Small Image $extrasmallsize"));
         }
-        else if ($content_name == 'recipe') {
+        else if ($content_name == 'issue') {
+            if($field_name == 'field_issue_large_cover_image') {
+            $checkoption = array(
+                'field_issue_small_cover_image' => t("Issue Cover Small Image  $issue_img_size"));
+               
+            }
+             if($field_name == 'field_issue_supp_large_image') {
+            $checkoption = array(
+                'field_issue_supp_small_image' => t("Supplement Cover Small Image  $issue_img_size"));
+               
+            }
+        }
+         else if ($content_name == 'recipe') {
             $checkoption = array(
                 'field_story_large_image' => t("Large Image  $largsize"),
                 'field_story_medium_image' => t("Medium Image $mediumsize"),
@@ -866,3 +903,4 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
 
     return $form;
 }
+

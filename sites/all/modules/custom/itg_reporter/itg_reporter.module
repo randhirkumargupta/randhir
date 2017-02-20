@@ -186,16 +186,11 @@ function itg_reporter_after_build($form, &$form_state) {
   global $user, $base_url;
 
   // get anchor id based on category name
-
-  $tem_tid = taxonomy_get_term_by_name('anchor', NULL);
-  $tid = array_pop($tem_tid)->tid;
-  $tem_tid_poli = taxonomy_get_term_by_name('politician', NULL);
-  $tid_poli = array_pop($tem_tid_poli)->tid;
-  $tem_tid_repo = taxonomy_get_term_by_name('reporter', NULL);
-  $tid_repo = array_pop($tem_tid_repo)->tid;
+  $tid = ANCHOR_TID;
+  $tid_poli = POLITICIAN_TID;
+  $tid_repo = REPORTER_TID;
   // alter label name
   $form['title']['#title'] = t('Name');
-
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;

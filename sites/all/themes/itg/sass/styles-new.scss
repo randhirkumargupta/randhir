@@ -92,6 +92,9 @@ input[type="file"], input[type="submit"], input[type="text"]{
               display: inline-block;
               vertical-align: top;
               margin-top: 6px;
+              & + select{
+                height: 32px;
+              }
             }
           }
         }
@@ -477,9 +480,14 @@ input[type="file"], input[type="submit"], input[type="text"]{
 .region-content{
     margin: 20px 0;
 }
+.featured-news .featured-post h2{
+    margin-top: 5px;
+}
 .featured-news .featured-post h3{
     max-height: 96px;
     overflow: hidden;
+    margin-top: 5px;
+    line-height: 22px;
 }
 .itg-widget .tab-buttons span{  
     padding: 0 3px;
@@ -3236,6 +3244,31 @@ body{
   }
   .cart-total-block{margin-top: 24px;}
 }
+.podcast-slide{
+  .jw-controlbar-center-group{ 
+    .jw-slider-horizontal{height: 39px;}
+    .jw-slider-container{height: 39px;}
+    .jw-slider-horizontal .jw-buffer{
+      height: 39px;
+      background: url(../images/podcast_audio_white.png) -5px center /348px 35px no-repeat;
+    }
+    .jw-slider-horizontal .jw-progress{
+      height: 39px;
+      background: url(../images/podcast_audio_yellow.png) -5px center /348px 35px no-repeat;
+    } 
+    .jw-slider-horizontal .jw-rail{
+      height: 39px;
+      background: url(../images/podcast_audio_grey.png) -5px center /348px 35px no-repeat;
+    }
+    .jw-slider-horizontal .jw-knob{
+      top: 0;
+      margin-left: 0;
+      bottom: 0;
+      margin: auto;
+    }
+  }
+}
+
 
 
 
@@ -3256,15 +3289,15 @@ body{
   }
   #block-itg-front-end-common-related-photo-block #related-photo ul li a, 
   #block-itg-front-end-common-related-video-block #related-photo ul li a,
-  .featured-news .featured-post a, 
+  .featured-news .featured-post > a, 
   .dm-pic a,
   .top-takes-list a,
-  .trending-videos-list a,
+  .trending-videos-list .pic a,
   .big-story-col-1 a,
   .may-we-suggest > a,
   .watch-right-now-list > a,
   .recom-listing .pic a,
-  .section-ordering a{
+  .section-ordering > a{
     @extend .zoom-image;
   }
   .social-nav li{
@@ -4814,6 +4847,61 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     }
   }
   
+  /* CSS For Budget Predictor */
+  #main-container-budget{overflow-y: auto;}
+  .budget-predictor-table{
+    border-collapse: collapse;
+    border: 5px solid #fff;
+    width: 100%;
+    th.title{
+      border: 5px solid #fff;
+      font-size: 20px;
+      font-weight: 400;
+      padding: 10px;
+      background: #09619f;
+      color: #fff;
+      border-bottom: 5px solid #fff;
+      font-family: roboto;
+      min-width: 124px;
+      max-width: 124px;
+      text-align: left;
+      &:last-child{
+        text-align: center;
+        max-width: none;
+      }
+    }
+    td{
+      border: 5px solid #fff;
+      padding: 10px;
+      &.cheaper{
+        background-color: #ffb7bf;
+        ul{max-width: 104px;}
+      }
+      &.deaper{
+        background-color: #9cd2ed;
+        ul{max-width: 104px;}
+      }
+      &.same{
+        background-color: #bae6b5;
+        ul{max-width: 104px;}
+      }
+      &.bp-items{
+        background-color: #f0f0f0;
+      }
+      #sortable1, #sortable2, #sortable3, #sortable4{min-height:647px; cursor: move;}
+    }
+    .cheaper-deaper-action{
+      text-align: center;
+      button{
+        padding: 5px 10px;
+        border: 1px solid #193984;
+        background-color: #193984;
+        border-radius: 3px;
+        color: #fff;
+      }
+    }
+  }
+  
   
 
 
@@ -5773,10 +5861,12 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     }
   }
   .cart-total-block .points-balance span{font-size: 13px; font-weight: 500;}
-  .cart-total-block .points-balance span:first-child{max-width: 100px;}
-  [id="views-exposed-form-front-end-global-search-page"]{
-    .views-exposed-form .form-select{height: 32px;}
+  .cart-total-block .points-balance span:first-child{max-width: 100px;} 
+  #block-itg-widget-podcast-header .podcast-header-container .podcast-header-top .pic{
+    width: 54px; height: 40px; margin-right: 0; overflow: hidden;
+    img{max-width: 100%;}
   }
+  .podcast-detail .jw-controlbar{padding: 0;}
 }
 @media all and (max-width: 480px){
   .photos-videos-wrapper .movie-videos, 

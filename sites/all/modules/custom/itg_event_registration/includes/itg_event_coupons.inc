@@ -70,7 +70,7 @@ function itg_event_check_coupon_auth($param) {
                 'discounted_value' => 0,
                 'total_fee' => $total_fee,
                 'success' => 1,
-                'success_message' => t('Congrates! Coupon has been successfully redeemed for Rs. ' . ($total_fee) . ' because you have used free coupon'),
+                'success_message' => t('Congratulations! Coupon has been successfully redeemed for Rs. ' . ($total_fee) . ' because you have used free coupon'),
             );
             print json_encode($return);
             drupal_exit();
@@ -100,7 +100,7 @@ function itg_event_check_coupon_auth($param) {
                       'discounted_value' => $discounted_value['final_discounted_total_fee'],
                       'total_fee' => $total_fee,
                       'success' => 1,
-                      'success_message' => t('Congrates! Coupon has been successfully redeemed for Rs. ' . $discounted_value['discounted_value']),
+                      'success_message' => t('Congratulations! Coupon has been successfully redeemed for Rs. ' . $discounted_value['discounted_value']),
                   );
                   print json_encode($return);
                   drupal_exit();
@@ -130,7 +130,7 @@ function itg_event_check_coupon_auth($param) {
                       'discounted_value' => $discounted_value['final_discounted_total_fee'],
                       'total_fee' => $total_fee,
                       'success' => 1,
-                      'success_message' => t('Congrates! Coupon has been successfully redeemed for Rs. ' . $discounted_value['discounted_value']),
+                      'success_message' => t('Congratulations! Coupon has been successfully redeemed for Rs. ' . $discounted_value['discounted_value']),
                   );
                   print json_encode($return);
                   drupal_exit();
@@ -166,7 +166,7 @@ function itg_event_check_coupon_auth($param) {
                   'discounted_value' => $discounted_value['final_discounted_total_fee'],
                   'total_fee' => $total_fee,
                   'success' => 1,
-                  'success_message' => t('Congrates! Coupon has been successfully redeemed for Rs. ' . $discounted_value['discounted_value']),
+                  'success_message' => t('Congratulations! Coupon has been successfully redeemed for Rs. ' . $discounted_value['discounted_value']),
               );
               print json_encode($return);
               drupal_exit();
@@ -200,7 +200,7 @@ function itg_event_check_coupon_auth($param) {
                 'discounted_value' => $discounted_value['final_discounted_total_fee'],
                 'total_fee' => $total_fee,
                 'success' => 1,
-                'success_message' => t('Congrates! Coupon has been successfully redeemed for Rs. ' . $discounted_value['discounted_value']),
+                'success_message' => t('Congratulations! Coupon has been successfully redeemed for Rs. ' . $discounted_value['discounted_value']),
             );
             print json_encode($return);
             drupal_exit();

@@ -111,6 +111,10 @@ img {
   cursor: none;
 }
 
+.pointer-event-none {
+  pointer-events: none;
+}
+
 .mr-0, *, #block-formblock-ask-an-expert .form-item .form-item {
   margin: 0;
 }
@@ -343,7 +347,7 @@ p {
 header {
   margin-bottom: 30px;
   position: relative;
-  z-index: 10;
+  z-index: 99999;
 }
 
 #block-itg-layout-manager-header-block {
@@ -1798,6 +1802,10 @@ footer .multiple-items-footer i.slick-next {
 .trending-videos li + li {
   border-top: 1px solid #dddddd;
 }
+.trending-videos li .detail {
+  overflow: hidden;
+  display: block;
+}
 
 /*End CSS trending-videos Home  page*/
 /*Start Search page css*/
@@ -1967,7 +1975,7 @@ footer .multiple-items-footer i.slick-next {
   vertical-align: top;
   padding-right: 8px;
 }
-.view-front-end-global-search .view-content .social-share ul li a {
+.view-front-end-global-search .view-content .social-share ul li a, .view-front-end-global-search .view-content .social-share ul li span {
   background: #000;
   width: 20px;
   height: 20px;
@@ -1979,25 +1987,25 @@ footer .multiple-items-footer i.slick-next {
   font-size: 15px;
 }
 @media screen and (min-width: 768px) {
-  .view-front-end-global-search .view-content .social-share ul li a {
+  .view-front-end-global-search .view-content .social-share ul li a, .view-front-end-global-search .view-content .social-share ul li span {
     width: 23px;
     height: 23px;
     line-height: 25px;
   }
 }
-.view-front-end-global-search .view-content .social-share ul li a.share {
+.view-front-end-global-search .view-content .social-share ul li a.share, .view-front-end-global-search .view-content .social-share ul li span.share {
   color: #d0d0d0;
 }
-.view-front-end-global-search .view-content .social-share ul li a.share, .view-front-end-global-search .view-content .social-share ul li a.google {
+.view-front-end-global-search .view-content .social-share ul li a.share, .view-front-end-global-search .view-content .social-share ul li a.google, .view-front-end-global-search .view-content .social-share ul li span.share, .view-front-end-global-search .view-content .social-share ul li span.google {
   background: transparent;
 }
-.view-front-end-global-search .view-content .social-share ul li a.facebook {
+.view-front-end-global-search .view-content .social-share ul li a.facebook, .view-front-end-global-search .view-content .social-share ul li span.facebook {
   background: #0b4887;
 }
-.view-front-end-global-search .view-content .social-share ul li a.twitter {
+.view-front-end-global-search .view-content .social-share ul li a.twitter, .view-front-end-global-search .view-content .social-share ul li span.twitter {
   background: #05a3d2;
 }
-.view-front-end-global-search .view-content .social-share ul li a.google {
+.view-front-end-global-search .view-content .social-share ul li a.google, .view-front-end-global-search .view-content .social-share ul li span.google {
   background: url(../images/google-icon.jpg) no-repeat center center;
 }
 .view-front-end-global-search .view-content .social-share ul li {
@@ -2611,6 +2619,10 @@ footer .multiple-items-footer i.slick-next {
 .story-section .story-right.photo-story .multiple-photo {
   padding: 0 50px;
 }
+.story-section .story-right.photo-story .multiple-photo .photo-slider {
+  padding: 0 5px;
+  cursor: pointer;
+}
 .story-section .story-right.photo-story .multiple-photo .slick-prev, .story-section .story-right.photo-story .multiple-photo .slick-next {
   background: transparent;
   border: none;
@@ -2633,10 +2645,7 @@ footer .multiple-items-footer i.slick-next {
   display: inline-block;
   vertical-align: top;
   position: relative;
-}
-.story-section .story-right.photo-story .multiple-photo .img-wrapper img {
-  width: 120px;
-  height: 90px;
+  border: 1px solid transparent;
 }
 .story-section .story-right.photo-story .multiple-photo .img-wrapper .photo-count {
   font-style: normal;
@@ -2648,7 +2657,10 @@ footer .multiple-items-footer i.slick-next {
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
   text-align: center;
-  line-height: 90px;
+  line-height: 64px;
+}
+.story-section .story-right.photo-story .multiple-photo .slick-current .img-wrapper {
+  border: 1px solid #ffc106;
 }
 .story-section .snap-post {
   padding: 20px 20px 20px 70px;
@@ -4229,7 +4241,7 @@ h1.category-heading {
   vertical-align: top;
   padding-right: 8px;
 }
-.live-block > .social-share ul li a {
+.live-block > .social-share ul li a, .live-block > .social-share ul li span {
   background: #000;
   width: 20px;
   height: 20px;
@@ -4241,25 +4253,25 @@ h1.category-heading {
   font-size: 15px;
 }
 @media screen and (min-width: 768px) {
-  .live-block > .social-share ul li a {
+  .live-block > .social-share ul li a, .live-block > .social-share ul li span {
     width: 23px;
     height: 23px;
     line-height: 25px;
   }
 }
-.live-block > .social-share ul li a.share {
+.live-block > .social-share ul li a.share, .live-block > .social-share ul li span.share {
   color: #d0d0d0;
 }
-.live-block > .social-share ul li a.share, .live-block > .social-share ul li a.google {
+.live-block > .social-share ul li a.share, .live-block > .social-share ul li a.google, .live-block > .social-share ul li span.share, .live-block > .social-share ul li span.google {
   background: transparent;
 }
-.live-block > .social-share ul li a.facebook {
+.live-block > .social-share ul li a.facebook, .live-block > .social-share ul li span.facebook {
   background: #0b4887;
 }
-.live-block > .social-share ul li a.twitter {
+.live-block > .social-share ul li a.twitter, .live-block > .social-share ul li span.twitter {
   background: #05a3d2;
 }
-.live-block > .social-share ul li a.google {
+.live-block > .social-share ul li a.google, .live-block > .social-share ul li span.google {
   background: url(../images/google-icon.jpg) no-repeat center center;
 }
 .live-block .disc-share a {
@@ -4297,7 +4309,7 @@ h1.category-heading {
   vertical-align: top;
   padding-right: 8px;
 }
-.live-block .breaking-section .social-share ul li a {
+.live-block .breaking-section .social-share ul li a, .live-block .breaking-section .social-share ul li span {
   background: #000;
   width: 20px;
   height: 20px;
@@ -4309,25 +4321,25 @@ h1.category-heading {
   font-size: 15px;
 }
 @media screen and (min-width: 768px) {
-  .live-block .breaking-section .social-share ul li a {
+  .live-block .breaking-section .social-share ul li a, .live-block .breaking-section .social-share ul li span {
     width: 23px;
     height: 23px;
     line-height: 25px;
   }
 }
-.live-block .breaking-section .social-share ul li a.share {
+.live-block .breaking-section .social-share ul li a.share, .live-block .breaking-section .social-share ul li span.share {
   color: #d0d0d0;
 }
-.live-block .breaking-section .social-share ul li a.share, .live-block .breaking-section .social-share ul li a.google {
+.live-block .breaking-section .social-share ul li a.share, .live-block .breaking-section .social-share ul li a.google, .live-block .breaking-section .social-share ul li span.share, .live-block .breaking-section .social-share ul li span.google {
   background: transparent;
 }
-.live-block .breaking-section .social-share ul li a.facebook {
+.live-block .breaking-section .social-share ul li a.facebook, .live-block .breaking-section .social-share ul li span.facebook {
   background: #0b4887;
 }
-.live-block .breaking-section .social-share ul li a.twitter {
+.live-block .breaking-section .social-share ul li a.twitter, .live-block .breaking-section .social-share ul li span.twitter {
   background: #05a3d2;
 }
-.live-block .breaking-section .social-share ul li a.google {
+.live-block .breaking-section .social-share ul li a.google, .live-block .breaking-section .social-share ul li span.google {
   background: url(../images/google-icon.jpg) no-repeat center center;
 }
 .live-block #slider-range {
@@ -4742,7 +4754,7 @@ h1.category-heading {
   vertical-align: top;
   padding-right: 8px;
 }
-.poll-wrapper .social-share ul li a {
+.poll-wrapper .social-share ul li a, .poll-wrapper .social-share ul li span {
   background: #000;
   width: 20px;
   height: 20px;
@@ -4754,25 +4766,25 @@ h1.category-heading {
   font-size: 15px;
 }
 @media screen and (min-width: 768px) {
-  .poll-wrapper .social-share ul li a {
+  .poll-wrapper .social-share ul li a, .poll-wrapper .social-share ul li span {
     width: 23px;
     height: 23px;
     line-height: 25px;
   }
 }
-.poll-wrapper .social-share ul li a.share {
+.poll-wrapper .social-share ul li a.share, .poll-wrapper .social-share ul li span.share {
   color: #d0d0d0;
 }
-.poll-wrapper .social-share ul li a.share, .poll-wrapper .social-share ul li a.google {
+.poll-wrapper .social-share ul li a.share, .poll-wrapper .social-share ul li a.google, .poll-wrapper .social-share ul li span.share, .poll-wrapper .social-share ul li span.google {
   background: transparent;
 }
-.poll-wrapper .social-share ul li a.facebook {
+.poll-wrapper .social-share ul li a.facebook, .poll-wrapper .social-share ul li span.facebook {
   background: #0b4887;
 }
-.poll-wrapper .social-share ul li a.twitter {
+.poll-wrapper .social-share ul li a.twitter, .poll-wrapper .social-share ul li span.twitter {
   background: #05a3d2;
 }
-.poll-wrapper .social-share ul li a.google {
+.poll-wrapper .social-share ul li a.google, .poll-wrapper .social-share ul li span.google {
   background: url(../images/google-icon.jpg) no-repeat center center;
 }
 .poll-wrapper .social-share ul li {
@@ -4982,7 +4994,7 @@ h1.category-heading {
   vertical-align: top;
   padding-right: 8px;
 }
-.poll-banner .detail .social-share ul li a {
+.poll-banner .detail .social-share ul li a, .poll-banner .detail .social-share ul li span {
   background: #000;
   width: 20px;
   height: 20px;
@@ -4994,25 +5006,25 @@ h1.category-heading {
   font-size: 15px;
 }
 @media screen and (min-width: 768px) {
-  .poll-banner .detail .social-share ul li a {
+  .poll-banner .detail .social-share ul li a, .poll-banner .detail .social-share ul li span {
     width: 23px;
     height: 23px;
     line-height: 25px;
   }
 }
-.poll-banner .detail .social-share ul li a.share {
+.poll-banner .detail .social-share ul li a.share, .poll-banner .detail .social-share ul li span.share {
   color: #d0d0d0;
 }
-.poll-banner .detail .social-share ul li a.share, .poll-banner .detail .social-share ul li a.google {
+.poll-banner .detail .social-share ul li a.share, .poll-banner .detail .social-share ul li a.google, .poll-banner .detail .social-share ul li span.share, .poll-banner .detail .social-share ul li span.google {
   background: transparent;
 }
-.poll-banner .detail .social-share ul li a.facebook {
+.poll-banner .detail .social-share ul li a.facebook, .poll-banner .detail .social-share ul li span.facebook {
   background: #0b4887;
 }
-.poll-banner .detail .social-share ul li a.twitter {
+.poll-banner .detail .social-share ul li a.twitter, .poll-banner .detail .social-share ul li span.twitter {
   background: #05a3d2;
 }
-.poll-banner .detail .social-share ul li a.google {
+.poll-banner .detail .social-share ul li a.google, .poll-banner .detail .social-share ul li span.google {
   background: url(../images/google-icon.jpg) no-repeat center center;
 }
 .poll-banner .detail .social-share ul li {
@@ -5867,6 +5879,7 @@ h1.category-heading {
   font-size: 0.9375rem;
   line-height: 20px;
   margin-bottom: 10px;
+  word-wrap: break-word;
 }
 .view-archive-story .view-content .search-detail h2 a {
   font-size: 15px;
@@ -5889,7 +5902,7 @@ h1.category-heading {
   vertical-align: top;
   padding-right: 8px;
 }
-.view-archive-story .view-content .social-share ul li a {
+.view-archive-story .view-content .social-share ul li a, .view-archive-story .view-content .social-share ul li span {
   background: #000;
   width: 20px;
   height: 20px;
@@ -5901,25 +5914,25 @@ h1.category-heading {
   font-size: 15px;
 }
 @media screen and (min-width: 768px) {
-  .view-archive-story .view-content .social-share ul li a {
+  .view-archive-story .view-content .social-share ul li a, .view-archive-story .view-content .social-share ul li span {
     width: 23px;
     height: 23px;
     line-height: 25px;
   }
 }
-.view-archive-story .view-content .social-share ul li a.share {
+.view-archive-story .view-content .social-share ul li a.share, .view-archive-story .view-content .social-share ul li span.share {
   color: #d0d0d0;
 }
-.view-archive-story .view-content .social-share ul li a.share, .view-archive-story .view-content .social-share ul li a.google {
+.view-archive-story .view-content .social-share ul li a.share, .view-archive-story .view-content .social-share ul li a.google, .view-archive-story .view-content .social-share ul li span.share, .view-archive-story .view-content .social-share ul li span.google {
   background: transparent;
 }
-.view-archive-story .view-content .social-share ul li a.facebook {
+.view-archive-story .view-content .social-share ul li a.facebook, .view-archive-story .view-content .social-share ul li span.facebook {
   background: #0b4887;
 }
-.view-archive-story .view-content .social-share ul li a.twitter {
+.view-archive-story .view-content .social-share ul li a.twitter, .view-archive-story .view-content .social-share ul li span.twitter {
   background: #05a3d2;
 }
-.view-archive-story .view-content .social-share ul li a.google {
+.view-archive-story .view-content .social-share ul li a.google, .view-archive-story .view-content .social-share ul li span.google {
   background: url(../images/google-icon.jpg) no-repeat center center;
 }
 .view-archive-story .view-content .other-info {
@@ -6528,6 +6541,7 @@ section.sidebar .block-itg-ads {
   vertical-align: top;
   padding: 30px 34px;
   border-bottom: 1px solid #dddddd;
+  width: 100%;
 }
 
 /*CSS End RHS add block*/
@@ -6795,6 +6809,7 @@ section.sidebar .block-itg-ads {
 }
 #block-itg-layout-manager-header-block .menu-login .user-menu {
   position: relative;
+  z-index: -99999;
 }
 #block-itg-layout-manager-header-block .menu-login .user-menu a {
   cursor: pointer;
@@ -9717,7 +9732,7 @@ section.sidebar .block-itg-ads {
   vertical-align: top;
   padding-right: 8px;
 }
-.budget-page-layout .budget-top-block ul li a {
+.budget-page-layout .budget-top-block ul li a, .budget-page-layout .budget-top-block ul li span {
   background: #000;
   width: 20px;
   height: 20px;
@@ -9729,25 +9744,25 @@ section.sidebar .block-itg-ads {
   font-size: 15px;
 }
 @media screen and (min-width: 768px) {
-  .budget-page-layout .budget-top-block ul li a {
+  .budget-page-layout .budget-top-block ul li a, .budget-page-layout .budget-top-block ul li span {
     width: 23px;
     height: 23px;
     line-height: 25px;
   }
 }
-.budget-page-layout .budget-top-block ul li a.share {
+.budget-page-layout .budget-top-block ul li a.share, .budget-page-layout .budget-top-block ul li span.share {
   color: #d0d0d0;
 }
-.budget-page-layout .budget-top-block ul li a.share, .budget-page-layout .budget-top-block ul li a.google {
+.budget-page-layout .budget-top-block ul li a.share, .budget-page-layout .budget-top-block ul li a.google, .budget-page-layout .budget-top-block ul li span.share, .budget-page-layout .budget-top-block ul li span.google {
   background: transparent;
 }
-.budget-page-layout .budget-top-block ul li a.facebook {
+.budget-page-layout .budget-top-block ul li a.facebook, .budget-page-layout .budget-top-block ul li span.facebook {
   background: #0b4887;
 }
-.budget-page-layout .budget-top-block ul li a.twitter {
+.budget-page-layout .budget-top-block ul li a.twitter, .budget-page-layout .budget-top-block ul li span.twitter {
   background: #05a3d2;
 }
-.budget-page-layout .budget-top-block ul li a.google {
+.budget-page-layout .budget-top-block ul li a.google, .budget-page-layout .budget-top-block ul li span.google {
   background: url(../images/google-icon.jpg) no-repeat center center;
 }
 .budget-page-layout .budget-top-block .social-share {
@@ -9775,17 +9790,20 @@ section.sidebar .block-itg-ads {
   width: 100% !important;
   height: 100% !important;
 }
+.budget-page-layout .video-wrapper {
+  padding-bottom: 70%;
+}
 .budget-page-layout .common-highlights {
   overflow: auto;
   height: 285px;
 }
 .budget-page-layout .special-top-bg {
   background: #fbfbfb;
-  height: 530px;
+  overflow: auto;
+  height: 100%;
 }
 .budget-page-layout .auto-block-2 {
   height: 490px;
-  overflow: auto;
 }
 .budget-page-layout .auto-block-2 .special-top-news .itg-listing {
   border: none;
@@ -9923,7 +9941,7 @@ section.sidebar .block-itg-ads {
   vertical-align: top;
   padding-right: 8px;
 }
-.election-page .election-top-block ul li a {
+.election-page .election-top-block ul li a, .election-page .election-top-block ul li span {
   background: #000;
   width: 20px;
   height: 20px;
@@ -9935,25 +9953,25 @@ section.sidebar .block-itg-ads {
   font-size: 15px;
 }
 @media screen and (min-width: 768px) {
-  .election-page .election-top-block ul li a {
+  .election-page .election-top-block ul li a, .election-page .election-top-block ul li span {
     width: 23px;
     height: 23px;
     line-height: 25px;
   }
 }
-.election-page .election-top-block ul li a.share {
+.election-page .election-top-block ul li a.share, .election-page .election-top-block ul li span.share {
   color: #d0d0d0;
 }
-.election-page .election-top-block ul li a.share, .election-page .election-top-block ul li a.google {
+.election-page .election-top-block ul li a.share, .election-page .election-top-block ul li a.google, .election-page .election-top-block ul li span.share, .election-page .election-top-block ul li span.google {
   background: transparent;
 }
-.election-page .election-top-block ul li a.facebook {
+.election-page .election-top-block ul li a.facebook, .election-page .election-top-block ul li span.facebook {
   background: #0b4887;
 }
-.election-page .election-top-block ul li a.twitter {
+.election-page .election-top-block ul li a.twitter, .election-page .election-top-block ul li span.twitter {
   background: #05a3d2;
 }
-.election-page .election-top-block ul li a.google {
+.election-page .election-top-block ul li a.google, .election-page .election-top-block ul li span.google {
   background: url(../images/google-icon.jpg) no-repeat center center;
 }
 .election-page .election-top-block .social-share {
@@ -11212,7 +11230,7 @@ h1.about-us-heading + div p {
   vertical-align: top;
   padding-right: 8px;
 }
-.factoids-page ul li a {
+.factoids-page ul li a, .factoids-page ul li span {
   background: #000;
   width: 20px;
   height: 20px;
@@ -11224,25 +11242,25 @@ h1.about-us-heading + div p {
   font-size: 15px;
 }
 @media screen and (min-width: 768px) {
-  .factoids-page ul li a {
+  .factoids-page ul li a, .factoids-page ul li span {
     width: 23px;
     height: 23px;
     line-height: 25px;
   }
 }
-.factoids-page ul li a.share {
+.factoids-page ul li a.share, .factoids-page ul li span.share {
   color: #d0d0d0;
 }
-.factoids-page ul li a.share, .factoids-page ul li a.google {
+.factoids-page ul li a.share, .factoids-page ul li a.google, .factoids-page ul li span.share, .factoids-page ul li span.google {
   background: transparent;
 }
-.factoids-page ul li a.facebook {
+.factoids-page ul li a.facebook, .factoids-page ul li span.facebook {
   background: #0b4887;
 }
-.factoids-page ul li a.twitter {
+.factoids-page ul li a.twitter, .factoids-page ul li span.twitter {
   background: #05a3d2;
 }
-.factoids-page ul li a.google {
+.factoids-page ul li a.google, .factoids-page ul li span.google {
   background: url(../images/google-icon.jpg) no-repeat center center;
 }
 .factoids-page .fun-facts, .factoids-page .social-share {
@@ -11677,7 +11695,7 @@ h1.about-us-heading + div p {
   vertical-align: top;
   padding-right: 8px;
 }
-#main-container-budget ul li a {
+#main-container-budget ul li a, #main-container-budget ul li span {
   background: #000;
   width: 20px;
   height: 20px;
@@ -11689,25 +11707,25 @@ h1.about-us-heading + div p {
   font-size: 15px;
 }
 @media screen and (min-width: 768px) {
-  #main-container-budget ul li a {
+  #main-container-budget ul li a, #main-container-budget ul li span {
     width: 23px;
     height: 23px;
     line-height: 25px;
   }
 }
-#main-container-budget ul li a.share {
+#main-container-budget ul li a.share, #main-container-budget ul li span.share {
   color: #d0d0d0;
 }
-#main-container-budget ul li a.share, #main-container-budget ul li a.google {
+#main-container-budget ul li a.share, #main-container-budget ul li a.google, #main-container-budget ul li span.share, #main-container-budget ul li span.google {
   background: transparent;
 }
-#main-container-budget ul li a.facebook {
+#main-container-budget ul li a.facebook, #main-container-budget ul li span.facebook {
   background: #0b4887;
 }
-#main-container-budget ul li a.twitter {
+#main-container-budget ul li a.twitter, #main-container-budget ul li span.twitter {
   background: #05a3d2;
 }
-#main-container-budget ul li a.google {
+#main-container-budget ul li a.google, #main-container-budget ul li span.google {
   background: url(../images/google-icon.jpg) no-repeat center center;
 }
 
@@ -12049,7 +12067,7 @@ h1.about-us-heading + div p {
   vertical-align: top;
   padding-right: 8px;
 }
-.breakingnew-home .new-detail .social-share ul li a {
+.breakingnew-home .new-detail .social-share ul li a, .breakingnew-home .new-detail .social-share ul li span {
   background: #000;
   width: 20px;
   height: 20px;
@@ -12061,25 +12079,25 @@ h1.about-us-heading + div p {
   font-size: 15px;
 }
 @media screen and (min-width: 768px) {
-  .breakingnew-home .new-detail .social-share ul li a {
+  .breakingnew-home .new-detail .social-share ul li a, .breakingnew-home .new-detail .social-share ul li span {
     width: 23px;
     height: 23px;
     line-height: 25px;
   }
 }
-.breakingnew-home .new-detail .social-share ul li a.share {
+.breakingnew-home .new-detail .social-share ul li a.share, .breakingnew-home .new-detail .social-share ul li span.share {
   color: #d0d0d0;
 }
-.breakingnew-home .new-detail .social-share ul li a.share, .breakingnew-home .new-detail .social-share ul li a.google {
+.breakingnew-home .new-detail .social-share ul li a.share, .breakingnew-home .new-detail .social-share ul li a.google, .breakingnew-home .new-detail .social-share ul li span.share, .breakingnew-home .new-detail .social-share ul li span.google {
   background: transparent;
 }
-.breakingnew-home .new-detail .social-share ul li a.facebook {
+.breakingnew-home .new-detail .social-share ul li a.facebook, .breakingnew-home .new-detail .social-share ul li span.facebook {
   background: #0b4887;
 }
-.breakingnew-home .new-detail .social-share ul li a.twitter {
+.breakingnew-home .new-detail .social-share ul li a.twitter, .breakingnew-home .new-detail .social-share ul li span.twitter {
   background: #05a3d2;
 }
-.breakingnew-home .new-detail .social-share ul li a.google {
+.breakingnew-home .new-detail .social-share ul li a.google, .breakingnew-home .new-detail .social-share ul li span.google {
   background: url(../images/google-icon.jpg) no-repeat center center;
 }
 .breakingnew-home .new-detail .social-share ul li {
@@ -12346,6 +12364,8 @@ span.smilies-title {
   height: auto;
   display: inline-block;
   vertical-align: middle;
+  float: none !important;
+  margin: 0 !important;
 }
 span.smilies-title img {
   display: inline;
@@ -12507,11 +12527,40 @@ span.smilies-title img {
 }
 
 /*css end for emoji*/
-.front-end-breadcrumb {
+/*css breadcrumb start*/
+#block-itg-layout-manager-front-end-breadcrumb {
   position: relative;
   z-index: 9999;
+  color: #a1a1a1;
+  font-family: roboto;
+  padding-top: 15px;
+}
+#block-itg-layout-manager-front-end-breadcrumb a {
+  color: #a1a1a1;
+  font-family: roboto;
+}
+#block-itg-layout-manager-front-end-breadcrumb .container div.lft {
+  display: inline-block;
+  vertical-align: top;
 }
 
+.node-type-photogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-videogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-podcast #block-itg-layout-manager-front-end-breadcrumb, .section-videos #block-itg-layout-manager-front-end-breadcrumb {
+  background: #171717;
+}
+
+/*css breadcrumb end*/
 iframe[id*="twitter-widget"] {
   width: 100% !important;
+}
+
+.photo-heading {
+  font-size: 32px;
+  margin-bottom: 25px;
+  color: #fff;
+}
+
+.video-heading {
+  color: #fff;
+  font-size: 24px;
+  margin-bottom: 10px;
 }

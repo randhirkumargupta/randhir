@@ -187,7 +187,11 @@ function itg_breadcrumb($variables) {
  * {@inheritdoc}
  */
 
-function itg_preprocess_html($param) {
+function itg_preprocess_html(&$vars) {
+  global $base_url, $user;
+  if ($base_url == BACKEND_URL && !empty($user->uid)) {
+    $vars['classes_array'][] = 'pointer-event-none';
+  }
   // Code started for adding header , body start , body close for ads module
   $ads_code = get_header_body_start_end_code();
   foreach ($ads_code as $ads_key => $ads_chunk) {
@@ -198,6 +202,7 @@ function itg_preprocess_html($param) {
     );
     drupal_add_html_head($script_code, $ads_key);
   }
+  
   // Code ends for adding header, body start, body close for ads module
 }
 

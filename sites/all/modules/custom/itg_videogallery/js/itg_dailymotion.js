@@ -29,7 +29,7 @@
                     jQuery('#loader-data img').show().parent().addClass('loader_overlay');
                     var getbtnmane = $(this).attr('btn_name');
                     parent.jQuery('[name="' + getbtnmane + '[fid]"]').val(selected_check_boxes_index);
-                    parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_repository][button]").trigger('mousedown');
+                    parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_video][button]").trigger('mousedown');
 
                     //parent.jQuery("#" + video_field_id + "-button").mousedown();
                     parent.jQuery('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
@@ -248,7 +248,7 @@ jQuery('document').ready(function() {
             var getbtnmane = jQuery(this).attr('btn_name');
             if (getbtnmane != "") {
                 parent.jQuery('[name="' + getbtnmane + '[fid]"]').val(videogallery_new_file_hold);
-                parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_repository][button]").trigger('mousedown');
+                parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_video][button]").trigger('mousedown');
                 parent.jQuery('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
 
                     parent.jQuery.colorbox.close();
@@ -276,7 +276,7 @@ jQuery('document').ready(function() {
         if (parseInt(jQuery('input[name="videogallery_new_file[fid]"]').val()) != 0) {
             var getbtnmane = $(this).attr('btn_name');
             parent.jQuery('[name="' + getbtnmane + '[fid]"]').val(videogallery_new_file_hold);
-            parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_repository][button]").trigger('mousedown');
+            parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_video][button]").trigger('mousedown');
             $('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
 
                 parent.jQuery.colorbox.close();
@@ -334,4 +334,3 @@ function videosearch() {
 //        }
 //    });
 }
-

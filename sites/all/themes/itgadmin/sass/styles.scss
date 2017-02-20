@@ -345,8 +345,7 @@ ul.pager{
     @extend .vtop;
     margin: 0 5px;
     &.pager-current{
-      height: 20px;
-      width: 20px;
+      padding: 0 5px;
       border: 1px solid #1fb5ad;
       background-color: #1fb5ad;
       color: #fff;
@@ -355,8 +354,7 @@ ul.pager{
       a{
         border: 1px solid #1fb5ad;
         display: block;
-        height: 20px;
-        width: 20px;
+        padding: 0 5px;
         color: #1fb5ad;
         &:hover{
           background-color: #1fb5ad;
@@ -2320,7 +2318,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       bottom: 0;
       height: 28px;
       position: absolute;
-      right: 532px;
+      right: 532px; 
       width: 28px;
       .form-submit{
         @extend .icon-add-more;
@@ -2400,17 +2398,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   .field-type-file{
     @extend .hide;
   }
-  tbody{
-    overflow: visible;
-  }
   > tbody > tr{
     @extend .fleft;
     @extend .full;
-    > td{
-      @extend .fleft;
-      width: 100%;
-      margin-bottom: 20px;
-    }
   } 
   .field-name-field-poll-question-video, 
   .field-name-field-audio{
@@ -2774,26 +2764,37 @@ div.node{
         .fa{
           font-size: 34px;
           line-height: 36px;
-          opacity: .7;
           cursor: pointer;
         }
         .form-checkbox{
           opacity: 0;
           &+label{
-            .fa-facebook-square{
-              color: #3b5998;
+            .fa-facebook-square, .fa-twitter-square, .fa-instagram{
+              color: #888;
+              text-shadow: 0px 1px 1px #666;
             }
-            .fa-twitter-square{
-              color: #1da1f2;
-            }
-            .fa-instagram-square{
-              color: #000;
+            &:hover{
+              .fa-facebook-square{
+                color: #3b5998;
+              }
+              .fa-twitter-square{
+                color: #1da1f2;
+              }
+              .fa-instagram{
+                color: #000;
+              }
             }
           }
           &:checked{
             &+label{
-              .fa{
-                opacity: 1;
+              .fa-facebook-square{
+                color: #3b5998;
+              }
+              .fa-twitter-square{
+                color: #1da1f2;
+              }
+              .fa-instagram{
+                color: #000;
               }
             }
           }
@@ -3004,15 +3005,20 @@ div.node{
     }
   }
 }
+[id*="field-program-schedule-values"],
+[id*="field-event-media-values"],
+[id*="field-event-highlights-values"],
+[id*="field-associate-sponsors-values"]{
+  tbody{overflow: visible;float: left;width: 800px;}
+  > tbody > tr > td{margin-bottom: 10px;float: left;}
+}
 [id*="field-program-schedule-values"]{
-  tbody{overflow: visible;}
   > tbody > tr{
     @extend .fleft;
     @extend .full;
     > td{
       @extend .fleft;
       min-width: 620px;
-      margin-bottom: 20px;
     }
   }
   .field-name-field-start-time{
@@ -3187,6 +3193,7 @@ fieldset#edit-select{
     .fa{
       float: left;
       margin: 5px 10px 0 0;
+      cursor: pointer;
     }
     p{
       overflow: hidden;
@@ -3210,7 +3217,7 @@ fieldset#edit-select{
                 width: 30%;
               }
               &:nth-child(2){
-                width: 30%;
+                width: 20%;
               }
               a{color: #1fb5ad;}
             }
@@ -3262,11 +3269,11 @@ fieldset#edit-select{
     height: 34px;
     padding: 8px 5px;
     &.cmt-title{
-      width: 35%;
+      width: 30%;
     }
     &.cmt-other{
       &:nth-child(2){
-        width: 25%;
+        width: 20%;
       }
       width: 10%;
 
@@ -3402,6 +3409,7 @@ fieldset#edit-select{
 }
 
 .node-event_backend-form{
+  @extend .image-repo-browse;
   .vertical-tabs{
     .container-inline-date{
       .form-item-publish-on{
@@ -3469,10 +3477,11 @@ fieldset#edit-select{
       padding: 5px 0;
       width: 220px;
     }
-    .anchor-order-reorder{
-      @extend .btn-submit;
-      @extend .btn-small;
-    }
+  }
+  .anchor-order-reorder{
+    @extend .btn-submit;
+    @extend .btn-small;
+    text-decoration: none;
   }
 }
 .form-select[name="field_ugc_ctype[und]"]{
@@ -4659,9 +4668,6 @@ div.node{
   a{
     color: #1fb5ad;
   }
-}
-[id*="field-event-highlights-values"] tbody{
-  overflow: visible;
 }
 .block-itg-related{
   .rel-link{
@@ -8463,18 +8469,35 @@ div.node{
       .form-type-radio, .form-type-checkbox{
         position: relative;
         > label{
-          padding: 10px;
-          border: 1px solid #e1e1e1;
           display: block;
           width: calc(100% - 30px);
           color: #777;
+          span{
+            border: 1px solid #e1e1e1;
+            padding: 10px;
+            display: block;
+            &.rightbg{
+              background-color: #1ECE1E !important;
+            }
+            &.wrongbg{
+              background-color: #ff1f1f !important;
+            }
+          }
+          &:hover{
+            span{
+              background-color: #ffc106;
+            }
+          }
         }
         .form-radio, .form-checkbox{
           position: absolute;
           opacity: 0;
-          &:checked + label{
-            background-color: #f6e90b;
-            color: #000;
+          &:checked + label{            
+            color: #000;   
+            padding:0;
+            span{
+              background-color: #ffc106;
+            }
           }
         }
       }
@@ -8738,7 +8761,7 @@ div.node{
     } 
   }
 }
-
+.page-menu-manager-third .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-tid{width: auto; padding-right: 0;}
 [id*="views-exposed-form-menu-manager-menu-manager-page"]{
   .views-submit-button{
     .form-type-select{
@@ -8750,6 +8773,11 @@ div.node{
       margin-top: 26px !important;
     }
   }
+  .third-label-menu-section, .third-label-menu-term{
+    @extend .fleft;
+    width: 200px;
+  }
+  .third-label-menu-section{margin-right: 10px;}
 }
 [id*="comment-global-config"]{
   .form-submit{
@@ -9372,6 +9400,7 @@ div.node{
   thead{
     display: none;        
   }
+  tbody{overflow: visible;}
   + div.clearfix{
     bottom: 10px;
     right: 20px;    
@@ -9382,7 +9411,10 @@ div.node{
     margin: 10px 10px 0;
     &:first-child{margin-top: 0;}
     td:nth-child(2){
-      display: block;
+      overflow: visible;
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
       border:none;
       @extend .of-hide;
       padding-bottom: 0;
@@ -9885,9 +9917,9 @@ div.node{
   }
 } 
 .messages em{font-weight: 600;}
-.node-type-videogallery [id*="field-video-upload-values"]{
+.page-node-add-videogallery [id*="field-video-upload-values"]{
   tbody{
-    tr:first-child{display: block !important;}
+    tr:first-child{display: none !important;}
   }
 }
 span.file a{pointer-events: none; color: #2f2f2f;}
@@ -10313,3 +10345,162 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     }
   }
 }
+.form-field-name-field-ads-ex-headerscript,
+.form-field-name-field-ads-ex-body-start,
+.form-field-name-field-ads-ex-body-close{
+  @extend .pos-rel;
+  margin: 10px 0;
+}
+[id*="field-ads-ex-body-start-values"], 
+[id*="field-ads-ex-body-close-values"], 
+[id*="field-ads-ex-headerscript-values"]{
+  @extend .itg-add-another-item;
+  tbody{
+    tr{
+      td{
+        border: none;
+        @extend .pos-rel;
+        padding: 10px 0 0;
+        .form-type-textarea{
+          margin: 0;
+          padding: 0;
+        }
+        > .form-submit, .ajax-new-content > .form-submit{
+          @extend .icon-remove-item;
+          margin: 0 !important;
+          position: absolute; 
+          left: 100%;
+          bottom: 0;
+        }
+      }
+      &:first-child td{
+        padding-top: 0;
+      }
+    }
+  }
+  & + div.clearfix{
+    bottom: 0;
+    height: 28px;
+    position: absolute;
+    right: 532px; 
+    width: 28px;
+    .form-submit{
+      @extend .icon-add-more;
+      margin: 0;
+    }
+    .ajax-progress{
+      position: absolute;
+      left: 100%;
+      top: -8px;
+    }
+  }
+}
+@each $num in one, two, three, four, five, six {
+  #edit-lrp-gold-star-#{$num}-icon-fieldset{
+    @extend .pos-rel;
+    border: none;
+    #edit-lrp-gold-star-#{$num}-icon-ajax-wrapper{
+      .form-type-managed-file{
+        .form-managed-file{
+          .form-file, .form-submit[value="Upload"]{
+            @extend .hide;
+          }
+        }
+      }
+    }
+    .div_lrp_gold_star_#{$num}_icon{
+      position: absolute;
+      bottom: 5px;
+      left: 330px;
+      z-index: 9;
+      a{
+        background-color: #fff;
+        border: 1px solid #d9d9d9;
+        border-radius: 5px;
+        color: #2f2f2f;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 300;
+        height: 28px;
+        line-height: 26px;
+        text-align: center;
+        width: 134px;
+        display: inline-block;
+        vertical-align: top;
+      }
+    }
+  }
+}
+[id*="itg-user-block-api-form"]{
+  @extend .dib;
+  @extend .vtop;
+  @extend .full;
+  .form-item-email, .form-item-items-per-page{
+    float: left;
+    margin: 0 10px 0 0;
+    padding: 0;
+    .form-text, .form-select{width: 100%;}
+    > label{float: none; display: block; width: auto;}
+  }
+  .form-item-email{width: 300px;}
+  .form-item-items-per-page{width: 100px;}
+  .user-log-filter-btn{
+    display: inline-block; 
+    vertical-align: top; 
+    margin-top: 28px;
+    .user-block-apply{@extend .btn-small;}
+    .user-log-reset{@extend .btn-reset; @extend .btn-small;}
+  }
+  .right-button{text-align: right;}
+}
+.photo-story-img.multiple-photo-disc{
+    padding: 10px 35px 0;
+    position: relative;
+    .slick-arrow{
+      position: absolute;
+      top: 40%;
+      font-size: 32px;
+      &.fa-chevron-left{
+        left: 0%;
+      }
+      &.fa-chevron-right{
+        right: 0%;
+      }
+    }
+    div.description{
+      padding-top: 10px;
+      font-size: 14px;
+      word-wrap: break-word;
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
+      position: static;
+      max-width: 100%;
+      color: #000;
+    }
+}
+[id*="third-party-coupon-form"]{
+  fieldset{border: none; padding: 10px 30px;}
+  .form-type-file{
+    margin: 10px 0;
+    > label{
+      width: 220px;
+      float: left;
+      padding: 5px 0;
+    }
+  }
+  [id*="edit-submit-button"]{margin-left: 220px;}
+}
+.node-coupon-form{
+  .form-field-name-field-coupon-allow-min-cart-amt{
+    .form-type-checkbox{
+      margin: 10px 0;
+      padding: 0 30px;
+      > label{
+        float: left;
+        width: 220px;
+      }
+    }
+  }
+}
+.widget-wrapper .data-holder .block-itg-widget > div.flexslider{overflow: visible !important;}
