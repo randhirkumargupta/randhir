@@ -36,7 +36,7 @@ function itg_loyalty_reward_testpoints() {
 }
 
 /**
- * Validate news letter points.\
+ * Validate news letter points.
  *
  * @param int $user
  * @param string $type
@@ -58,6 +58,34 @@ function itg_loyalty_reward_newsletter_point($user, $type, $news_letter) {
     }
   }
 }
+/**
+ * Validate fb and twitter points.
+ *
+ * @param int $user
+ * @param string $type
+ * @param int $nid
+ * @return boolean
+ */
+function itg_loyalty_reward_share_point($user, $type, $nid = NULL) {
+  $itg_result = '';
+  $dedicated_point = itg_loyalty_reward_dedicated_point($type);
+  $itg_query = db_select('itg_lrp_loyalty_points', 'p')
+      ->fields('p', array('id'))
+      ->condition('uid', $user);
+      if(!empty($nid)) {
+      $itg_query->condition('node_id', $nid);
+      }
+      $itg_query->condition('loyalty_type', $dedicated_point['label']);
+  $itg_result = $itg_query->execute()->fetchField();
+  // If newsletter subscription is first time then earn point else not.
+  
+    if (!empty($itg_result)) {
+      return TRUE;
+    }
+  
+}
+
+
 
 /**
  * Implements callback function for points earning.
@@ -80,6 +108,43 @@ function itg_loyalty_reward_earnpoint($nid = NULL, $type = NULL, $uid = NULL, $n
         if ($ns_validate) {
           return;
         }
+        break;
+        case 'twitter_share':
+        $ns_validate = itg_loyalty_reward_share_point($uid, $type, $nid);
+        if ($ns_validate) {
+          return;
+        }
+        break;
+        case 'google_share':
+        $ns_validate = itg_loyalty_reward_share_point($uid, $type, $nid);
+        if ($ns_validate) {
+          return;
+        }
+        break;
+        case 'share':
+        $ns_validate = itg_loyalty_reward_share_point($uid, $type, $nid);
+        if ($ns_validate) {
+          return;
+        }
+        break;
+        case 'twitter_follow':
+        $ns_validate = itg_loyalty_reward_share_point($uid, $type);
+        if ($ns_validate) {
+          return;
+        }
+        break;
+        case 'fb_follow':
+        $ns_validate = itg_loyalty_reward_share_point($uid, $type);
+        if ($ns_validate) {
+          return;
+        }
+        break;
+        case 'google_follow':
+        $ns_validate = itg_loyalty_reward_share_point($uid, $type);
+        if ($ns_validate) {
+          return;
+        }
+        
     }
   } else {
     $user_id = $user->uid;
@@ -185,6 +250,14 @@ function itg_loyalty_reward_dedicated_point($type) {
       'label' => 'Content Share',
       'point' => variable_get('lrp_content_share'),
     ),
+    'google_share' => array(
+      'label' => 'Google Share',
+      'point' => variable_get('lrp_content_share'),
+    ),
+    'twitter_share' => array(
+      'label' => 'Twitter Share',
+      'point' => variable_get('lrp_content_share'),
+    ),
     'like' => array(
       'label' => 'Content Like',
       'point' => variable_get('lrp_content_like'),
@@ -195,6 +268,18 @@ function itg_loyalty_reward_dedicated_point($type) {
     ),
     'follow' => array(
       'label' => 'Content Follow',
+      'point' => variable_get('lrp_follow_itg_on_social_sites'),
+    ),
+    'fb_follow' => array(
+      'label' => 'Facebook Follow',
+      'point' => variable_get('lrp_follow_itg_on_social_sites'),
+    ),
+    'twitter_follow' => array(
+      'label' => 'Twitter Follow',
+      'point' => variable_get('lrp_follow_itg_on_social_sites'),
+    ),
+    'google_follow' => array(
+      'label' => 'Google Follow',
       'point' => variable_get('lrp_follow_itg_on_social_sites'),
     ),
     'ns' => array(
