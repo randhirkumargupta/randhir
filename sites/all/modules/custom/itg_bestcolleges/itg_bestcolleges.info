@@ -1,0 +1,8 @@
+name = ITG Best Colleges
+description = "ITG Best CollegesModule"
+core = 7.x
+package = ITG
+
+files[] = itg_bestcolleges.module
+
+

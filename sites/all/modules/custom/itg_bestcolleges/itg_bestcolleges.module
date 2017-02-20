@@ -1,0 +1,78 @@
+<?php
+
+/**
+ * @file
+ * The ITG Best College module.
+ *
+ * Contains functionality for best college.
+ */
+
+/**
+ * Implements hook_menu().
+ * @return array $items
+ */
+function itg_bestcolleges_menu() {
+  $items['bestcolleges/ranks/%'] = array(
+    'page callback' => 'itg_bestcolleges_deatils',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+   return $items;
+}
+
+/*
+ * Returns custom content to Drupal
+ */
+function itg_bestcolleges_deatils(){
+    // Call theme() function, so that Drupal includes the custom-page.tpl.php template
+    return theme('itg_bestcolleges_template');
+}
+
+/*
+* Implement hook_theme().
+*/
+function itg_bestcolleges_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'itg_bestcolleges_template' => array(
+      'template' => 'itg-bestcolleges-template',
+      'path' => drupal_get_path('module', 'itg_bestcolleges') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+  );
+  return $themes;
+}
+
+/**
+ * Implement hook_views_pre_render
+ * @param object $view
+ */
+function itg_bestcolleges_views_pre_render(&$view) {
+  if (isset($view->name) && $view->name == "best_college_image_slider") {
+    if (isset($view->current_display) && $view->current_display == "page_1") {
+      $header_content_client = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+      $header_content_client .= l(t('Create Bestcolleges'), 'node/add/bestcolleges', array('query' => array('destination' => 'best-college-list')));
+    }
+    if (isset($header_content_client)) {
+      $view->attachment_before = $header_content_client;
+    }
+  }
+}
+
+/**
+ * Implementation of hook_form_views_exposed_form_alter().
+ * {@inheritdoc}
+ */
+function itg_bestcolleges_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form['#id']) {
+    case 'views-exposed-form-best-college-image-slider-page-1':
+       $form['title']['#attributes'] = array(
+        'placeholder' => t('College Name')
+      );
+      $form['title']['#autocomplete_path'] = 'content-title-list/bestcolleges/autocomplete';
+      break;
+  }
+
+}
+
+
+
