@@ -2173,6 +2173,9 @@ footer{
                   }
                 }
                 .slick-current{
+                    .photo-count{
+                         background-color: rgba(0,0,0,.2);
+                    }
                     .img-wrapper{
                         border: 1px solid #ffc106;
                     }
@@ -8299,7 +8302,7 @@ section.sidebar{
         .election-topadd{
             .ad-widget{
                 margin-top: 0;
-                margin-bottom: 8px
+                margin-bottom: 4px
             }
         }
     }
