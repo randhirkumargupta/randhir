@@ -461,13 +461,13 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
             $form['status']['#options'][1] = t('Complete');
             $form['status']['#options'][0] = t('Pending');
         case 'views-exposed-form-browse-content-page':
-            $form['changed']['min'] = array(
+             $form['created']['min'] = array(
                 '#type' => 'date_popup',
                 '#date_format' => 'd/m/Y',
                 '#date_year_range' => '-3:+3',
                 '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date')),
             );
-            $form['changed']['max'] = array(
+            $form['created']['max'] = array(
                 '#type' => 'date_popup',
                 '#date_format' => 'd/m/Y',
                 '#date_year_range' => '-3:+3',
