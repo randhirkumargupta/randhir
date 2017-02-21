@@ -10521,6 +10521,18 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   }
   .ads-header-code-holder-device{padding: 10px;}
 }
+.node-heighlights-div{
+  .field-group{
+    @extend .dib;
+    @extend .full;
+    @extend .vtop;
+    .field{
+      padding: 10px 0;
+      border-top: 1px solid #ddd;
+      &:first-child{padding-top: 0; border-top: none;}
+    }
+  }
+}
 .page-node-add-story #colorbox iframe{
   background: url(../images/loading_animation.gif) no-repeat center center;
 }
