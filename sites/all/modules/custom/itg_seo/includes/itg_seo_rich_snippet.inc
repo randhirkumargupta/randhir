@@ -3,11 +3,6 @@
 /*
  * Updating rich snippet for node type story, videogallery and mega review critic
  */
-
-
-
-
-
 function itg_seo_node_data($node) {
   global $base_url, $theme_key;
   
@@ -29,13 +24,10 @@ function itg_seo_node_data($node) {
       }
     }
   } 
-
   drupal_add_html_head($element, 'robots');
-
   
   // Rich Snippet for Story
   if ($node->type == 'story') {
-
     $mainEntityOfPage = $base_url . '/' . $node->path['alias'];
     $headline = $node->field_story_short_headline[LANGUAGE_NONE][0]['value'];
     if (is_array($node->workbench_moderation) && !empty($node->workbench_moderation) && $node->workbench_moderation['current']->state == 'published') {
@@ -47,12 +39,11 @@ function itg_seo_node_data($node) {
     $description = strip_tags(substr($node->body[LANGUAGE_NONE][0]['value'],0,120));
     $get_author_name = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
     if(!empty($get_author_name) && ($get_author_name > 0)){
-      $load_auth = node_load($get_author_name);
-      $auth_name = $load_auth->title;
+      $auth_name = itg_get_story_author_name($get_author_name);
+      p($auth_name);
     } else {
       $auth_name = '';
     }
-
     $logo = $base_url . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
     $imgarray = explode('//', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
     $largimage = $base_url . '/' . 'sites/default/files/' . $imgarray[1];
@@ -96,7 +87,6 @@ function itg_seo_node_data($node) {
 
   // Rich Snippet for Movie Review
   if ($node->type == 'mega_review_critic') {
-
     $pathalias = drupal_get_path_alias('node/' . $node->nid);
     $pageurl = $base_url . '/' . $pathalias;
     $megreview_value = $node->field_mega_review_review[LANGUAGE_NONE];
@@ -105,7 +95,6 @@ function itg_seo_node_data($node) {
       $reviewtype[] = $fc_value->field_story_review_type[LANGUAGE_NONE][0]['value'];
       $rating[] = $fc_value->field_story_rating[LANGUAGE_NONE][0]['value'];
     }
-
     $element_key = array_search("internal", $reviewtype);
     if ($reviewtype[$element_key] == 'internal') {
       $internal_fcid = $megreview_value[$element_key]['value'];
@@ -115,7 +104,6 @@ function itg_seo_node_data($node) {
       $bestrate = max($rating);
       $avaragrate = number_format(array_sum($rating) / sizeof($rating), 1);
     }
-
     $fieldcollections = $node->field_mega_review_review[LANGUAGE_NONE];
     $moviename = $node->title;
     $review_item_type = $node->field_mega_review_type[LANGUAGE_NONE][0]['taxonomy_term']->name;
@@ -124,7 +112,6 @@ function itg_seo_node_data($node) {
     $publisheddate = date('Y-m-d\Th:i:s+5:30', $node->changed);
     $directorname = $node->field_mega_review_director[LANGUAGE_NONE][0]['value'];
     $moviedescription = $node->field_story_movie_description[LANGUAGE_NONE][0]['value'];
-
     $markup = array(
         '#type' => 'markup',
         '#markup' => '<script type="application/ld+json">
@@ -148,7 +135,6 @@ function itg_seo_node_data($node) {
 
   // Rich Snippet for Videos Rich Snippet
   if ($node->type == 'videogallery') {
-
     $video_time = explode(':', $node->field_video_duration[LANGUAGE_NONE][0]['value']);
     $video_duration = t("PT" . $video_time[0] . "M" . $video_time[1] . "S");
     $name = $node->field_story_short_headline[LANGUAGE_NONE][0]['value'];
@@ -162,7 +148,6 @@ function itg_seo_node_data($node) {
     $contenturl = $base_url . '/' . $node->path['alias'];
     $imgarray = explode('//', $node->field_story_extra_small_image[LANGUAGE_NONE][0]['uri']);
     $thumbnail_url = $base_url . '/' . 'sites/default/files/' . $imgarray[1];
-
     $markup = array(
         '#type' => 'markup',
         '#markup' => '<script type="application/ld+json">
@@ -204,7 +189,15 @@ function itg_seo_node_data($node) {
  
         </script>  ',
     );
-
     drupal_add_html_head($markup, 'sd_json');
   }
+}
+
+/*
+ * Returns Story Author Name for story rich snippett
+ */
+function itg_get_story_author_name($auth_id){
+  $author_name = db_query("SELECT title from {node} WHERE nid = :nid ", array(":nid" => $auth_id))->fetchField();
+  return $author_name;
+  
 }
