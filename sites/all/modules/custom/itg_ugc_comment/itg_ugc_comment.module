@@ -69,7 +69,11 @@ function itg_ugc_comment_menu() {
     'file' => 'includes/ugc_comment_listing.inc',
   );
 
-  
+  $items['user-email-list'] = array(
+    'page callback' => 'itg_ugc_get_user_email',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -160,7 +164,7 @@ function ugc_comment_form($form, &$form_state) {
   if (!empty($bad_word_term))
   {
     foreach ($bad_word_term as $key => $val) {
-      $op[$val->tid] = trim($val->name);
+      $op[$val->tid] = strtolower(trim($val->name));
     }
   }
   
@@ -289,11 +293,26 @@ function itg_ugc_comment_theme($existing, $type, $theme, $path) {
  */
 function getmycomments($data) {
   global $base_url, $user;
-
+  
+  if ($data['uid'] > 0)
+  {
+    $get_user_detail = itg_get_user_image($data['uid']);
+    $get_user_detail = file_load($get_user_detail);
+    
+  }
+  if (!empty($get_user_detail->uri))
+  {
+    $user_pic = theme('image_style', array('style_name' => 'user_front_image_50x50', 'path' => $get_user_detail->uri));
+  }
+  else
+  {
+    $image = $base_url . '/sites/all/themes/itg/images/user-default.png';
+    $user_pic = "<img src=$image width='50' height='50' alt='user-image' />";
+  }
   $image = $base_url . '/sites/all/themes/itg/images/user-default.png';
   $contect .= "<div class='itg-comment'>
-                <div class='comment-image'>
-                <img src= $image width='50' height='50' alt='' /></div>
+                <div class='comment-image'>".$user_pic."
+                </div>
                 <div class='comment-details'><div class='comment-name'>" . $data['name'] . "</div>
                 <div class='comment-body'>" . $data['comment'] . "</div>
                 <span class='comment-timestamp'>" . format_interval((time() - strtotime($data['comment_date_time'])), 2) . t(' ago') . "</span>
@@ -347,6 +366,7 @@ function itg_user_block_api_form($form, &$form_state) {
     '#maxlength' => 255,
     '#size' => 30,
     '#attributes' => array('placeholder' => t('Email'), 'autocomplete' => 'off'),
+    '#autocomplete_path' => 'user-email-list',
     '#default_value' => isset($_GET['email']) ? $_GET['email']:"",
   );
   
@@ -409,5 +429,40 @@ function ugc_comment_user_status($email) {
       $data['email'] = $document['email'];
     }
     return $data;
+  }
+}
+
+/**
+ * Get user image by uid
+ * @param $uid
+ */
+function itg_get_user_image($uid) {
+  if(!empty($uid)) {
+    $query = db_select('field_data_field_user_picture', 'uf')
+            ->fields('uf', array('field_user_picture_fid'))
+            ->condition('uf.bundle', 'user')
+            ->condition('uf.entity_id', $uid);
+
+    return $query->execute()->fetchField();
+  }
+}
+
+/**
+ * Helper function to get user email
+ * @param string $text
+ */
+function itg_ugc_get_user_email($text) {
+  $data = '';
+  if (function_exists('mongodb')) {
+    $db = mongodb();
+    $people = $db->itgcms_comment;
+    $regex = new MongoRegex("/^$text/i");
+    $cond = array('email' => $regex);
+    $cursor = $people->find($cond);
+    $data = '';
+    foreach ($cursor as $document) {
+      $data[$document['email']] = trim($document['email']);
+    }
+    drupal_json_output($data);
   }
 }

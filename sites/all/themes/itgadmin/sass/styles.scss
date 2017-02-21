@@ -3193,6 +3193,7 @@ fieldset#edit-select{
     .fa{
       float: left;
       margin: 5px 10px 0 0;
+      cursor: pointer;
     }
     p{
       overflow: hidden;
@@ -3216,7 +3217,7 @@ fieldset#edit-select{
                 width: 30%;
               }
               &:nth-child(2){
-                width: 30%;
+                width: 20%;
               }
               a{color: #1fb5ad;}
             }
@@ -3268,11 +3269,11 @@ fieldset#edit-select{
     height: 34px;
     padding: 8px 5px;
     &.cmt-title{
-      width: 35%;
+      width: 30%;
     }
     &.cmt-other{
       &:nth-child(2){
-        width: 25%;
+        width: 20%;
       }
       width: 10%;
 
@@ -10503,3 +10504,17 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   }
 }
 .widget-wrapper .data-holder .block-itg-widget > div.flexslider{overflow: visible !important;}
+.success-byline{padding: 5px 0 0 220px;}
+.ads-preview-data{
+  max-height: 600px;
+  overflow: auto;
+  text-align: center;
+  .ads-title{margin-bottom: 20px; text-align: left;}
+  .ads-bottom, ads-top{@extend .dib;@extend .full;@extend .vtop;}
+  .ads-rhs2, .ads-rhs1 {
+    clear: right;
+    float: right;
+    padding-right: 20px;
+  }
+  .ads-header-code-holder-device{padding: 10px;}
+}

@@ -8,6 +8,7 @@
     background: -moz-linear-gradient($color1, $color2); /* For Firefox */
     background: linear-gradient($color1, $color2); /* Standard syntax */
 }
+body, html, #page{height: 100%;}
 input[type="text"], textarea{
   transition: all 300ms;
   &:focus{
@@ -845,6 +846,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 }
 .personal-list{
+  text-align: left;
   list-style: none;
   > li{
       padding-bottom: 30px;
@@ -4909,7 +4911,57 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 @media all and (min-width: 768px){
   .block-itg-personalization .personal-menu-tab, .block-itg-personalization .saved-item-tab{display: inline-block !important;}
   .personal-menu-tab-mobile{display: none;}
-  
+  .page-personalization #main{min-height: calc(100% - 212px);}
+}
+
+@media all and (max-width: 1024px) and (min-width: 768px){
+  .page-personalization{
+    .personalized-wrapper{
+      .personalized-user-area {
+        display: inline-block;
+        height: auto; 
+        vertical-align: top;
+        .personalized-user{
+          float: left;
+          height: 180px;
+          width: 30%;
+          padding: 0 10px;
+          .user-name{font-size: 18px;}
+        } 
+        .personalized-user-info, .total-point-wrapper{
+          width: 35%;
+          float: left;
+          height: 180px;
+        }
+        .personalized-user-info{
+          padding: 60px 0;
+          span{
+            padding: 0 10px;
+          }
+        }
+        .total-point-wrapper{
+          .pregress-bar{
+            .pregress-bar-active{
+              width: 80%;
+            }
+            span.current-badge{
+              left: 10px;
+            }
+            span.next-badge{
+              right: 15px;
+            }
+            span.current-badge, span.next-badge{
+              top: -15px;
+              small{
+                margin-bottom: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .personal-menu-tab li a{font-size: 16px;}
 }
 
 /* Responsive CSS */

@@ -5117,6 +5117,7 @@ section.sidebar{
     .menu-login{
         .user-menu{
             @include pos(relative);
+            z-index: -99999;
             a{
                 cursor: pointer;
                 &.user-icon{
@@ -8234,10 +8235,11 @@ section.sidebar{
             }
         }
         .itg-325-layout{
-            .droppable, iframe{
+            .droppable{
                 height: 325px;
-            }
+            }            
             iframe{
+                height: 286px;
                 @include calculate-width(1);
             }
         }
@@ -8296,7 +8298,8 @@ section.sidebar{
     .ads-after-two{
         .election-topadd{
             .ad-widget{
-                margin-top: 15px;
+                margin-top: 0;
+                margin-bottom: 8px
             }
         }
     }
@@ -8304,7 +8307,7 @@ section.sidebar{
   .itg-listing {
     border: none;
 }
-.highlight {
+.highlights .common-highlights {
     overflow: auto;
     max-height: 282px;
 }
@@ -10259,10 +10262,12 @@ span.smilies-title {
     vertical-align: middle;   
     float: none !important;
     margin: 0 !important;
+    line-height:0;
     img{
         display: inline;
         max-width: inherit;
         width: auto;
+        margin: 0 !important;
     }
 }
 

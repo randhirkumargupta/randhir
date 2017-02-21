@@ -469,8 +469,7 @@ function itg_survey_vote_percentage($nid, $ques_id, $answer) {
         ->condition('su.answer', $answer, '=')
         ->condition('su.survey_info', 1, '=')
         ->execute();
-    $total_answwer_for_ques = $result->rowCount();
-
+  $total_answwer_for_ques = $result->rowCount();
     $vote_percentage = ($total_answwer_for_ques / $total_vote_on_question) * 100;
     return round($vote_percentage, 2) . '%';
   }
@@ -503,6 +502,36 @@ function itg_survey_vote_percentage_user($nid, $ques_id, $answer, $user_type) {
     $total_answwer_for_ques_user = $result->rowCount();
     $vote_percentage = ($total_answwer_for_ques_user / $total_vote_on_question_user) * 100;
     return round($vote_percentage, 2) . '%';
+  }
+}
+// For survey rating value
+
+function itg_survey_vote_percentage_user_rating($nid, $ques_id, $answer,$rating) {
+   
+            
+  $total_vote_on_question_user = itg_survey_get_total_vote_question($nid, $ques_id, $answer,$rating);
+  
+  if (!$total_vote_on_question_user) {
+    return '0%';
+  }
+  else {
+
+     $itg_query = db_select('itg_survey_detail', 'su')
+      ->fields('su')
+             ->condition('su.ques_id', $ques_id, '=')
+        ->condition('su.nid', $nid, '=')
+        ->condition('su.answer', $answer, '=')
+        ->condition('su.survey_info', 1, '=')
+             ->groupBy('su.rating_value');
+  $itg_query->addExpression('COUNT(su.rating_value)', 'user');
+  $total_answwer_for_ques_user = $itg_query->execute()->fetchAll();   
+   
+return $total_answwer_for_ques_user;
+    
+ //  $total_answwer_for_ques_user = $result->rowCount();
+   
+    //$vote_percentage = ($total_answwer_for_ques_user / $total_vote_on_question_user) * 100;
+    //return round($vote_percentage, 2) . '%';
   }
 }
 
@@ -1045,7 +1074,7 @@ function itg_survey_survey_form_submit($form, &$form_state) {
       // Insert for radio button type answer
       if ($form_state['values']['question_type' . $ques_num] == 'radios') {
 
-        db_insert('itg_survey_detail')
+       db_insert('itg_survey_detail')
             ->fields(array(
               'nid' => $form_state['values']['nid'],
               'uid' => $user->uid,
@@ -1119,22 +1148,34 @@ function itg_survey_survey_form_submit($form, &$form_state) {
         for ($rating_field = 0; $rating_field < $form_detail['rating_total_count']; $rating_field++) {
           for ($rating_field_val = 1; $rating_field_val <= 5; $rating_field_val++) {
             if ($form_detail['answer_option' . $ques_num . '_' . $rating_field][$rating_field_val] == 1) {
+              $ans_data = 0;
+                if(!empty($form_state['values']['answer_option0_0'])) {
+                  
+                  foreach ($form_state['values']['answer_option0_0'] as $ans_data) {
+                      if($ans_data != 0) {
+                           $rating = $ans_data;
+                      }
+                     
+                  }
+              }
+           
               db_insert('itg_survey_detail')
-                  ->fields(array(
-                    'nid' => $form_state['values']['nid'],
-                    'uid' => $user->uid,
-                    'ques_id' => $form_state['values']['question_id' . $ques_num],
-                    'question' => $form_state['values']['question' . $ques_num],
-                    'answer' => $form_detail['answer_option' . $ques_num . '_' . $rating_field . '_name'] ? strtolower($form_detail['answer_option' . $ques_num . '_' . $rating_field . '_name']) : $form_state['values']['question' . $ques_num],
-                    'ans_type' => $form_state['values']['question_type' . $ques_num],
-                    'user_type' => $user_type,
-                    'page_url' => $form_state['values']['survey_url'],
-                    'survey_title' => $form_state['values']['survey_title'],
-                    'survey_key' => $_SESSION['survey_unique_key'],
-                    'survey_info' => 0,
-                    'created' => time(),
-                  ))
-                  ->execute();
+                ->fields(array(
+                  'nid' => $form_state['values']['nid'],
+                  'uid' => $user->uid,
+                  'ques_id' => $form_state['values']['question_id' . $ques_num],
+                 'question' => $form_state['values']['question' . $ques_num],
+                 'answer' => $form_detail['answer_option' . $ques_num . '_' . $rating_field . '_name'] ? strtolower($form_detail['answer_option' . $ques_num . '_' . $rating_field . '_name']) : $form_state['values']['question' . $ques_num],
+                 'ans_type' => $form_state['values']['question_type' . $ques_num],
+                  'user_type' => $user_type,
+                   'page_url' => $form_state['values']['survey_url'],
+                   'survey_title' => $form_state['values']['survey_title'],
+                   'survey_key' => $_SESSION['survey_unique_key'],
+                   'rating_value' => $rating,
+                   'survey_info' => 0,
+                  'created' => time(),
+                 ))
+                 ->execute();
             }
           }
         }
@@ -1200,6 +1241,8 @@ function itg_survey_survey_form_submit($form, &$form_state) {
  * @return array
  */
 function survey_form_ajax_handler(&$form, &$form_state) {
+   
+    
   $commands = array();
   $commands[] = ajax_command_replace('#messages', '<div id="messages">' . theme('status_messages') . '</div>');
   return array(
