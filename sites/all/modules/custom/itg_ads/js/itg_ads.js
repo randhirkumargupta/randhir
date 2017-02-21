@@ -107,8 +107,8 @@ jQuery(document).ready(function() {
     jQuery.colorbox({
       open: true,
       scrolling: false,
-      innerWidth: '900',
-      innerHeight: '900',
+      innerWidth: '800',
+      innerHeight: '600',
       href: Drupal.settings.basePath + "itg-ads-preview-ads",
       data: jQuery("#ads-management-node-form").serializeArray(),
       onClosed: function() {
