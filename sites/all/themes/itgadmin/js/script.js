@@ -802,7 +802,7 @@ jQuery(document).ready(function() {
             item.push(jQuery(this).find('.byline_publish').val());
         });
         jQuery('#edit-field-reporter-publish-id-und-0-value').val(item);
-        alert('Changes made successfully');
+        jQuery('.success-byline').html('Changes made successfully').show(0).delay(2000).hide(1000);
     });
 
     // jQuery code for Loader

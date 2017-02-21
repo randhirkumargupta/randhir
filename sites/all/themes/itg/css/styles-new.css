@@ -29,6 +29,10 @@
 /*mixin for listing with image*/
 /*mixin for pager*/
 /*CSS For Search Page*/
+body, html, #page {
+  height: 100%;
+}
+
 input[type="text"], textarea {
   transition: all 300ms;
 }
@@ -835,6 +839,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 
 .personal-list {
+  text-align: left;
   list-style: none;
 }
 .personal-list > li {
@@ -5196,6 +5201,56 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 
   .personal-menu-tab-mobile {
     display: none;
+  }
+
+  .page-personalization #main {
+    min-height: calc(100% - 212px);
+  }
+}
+@media all and (max-width: 1024px) and (min-width: 768px) {
+  .page-personalization .personalized-wrapper .personalized-user-area {
+    display: inline-block;
+    height: auto;
+    vertical-align: top;
+  }
+  .page-personalization .personalized-wrapper .personalized-user-area .personalized-user {
+    float: left;
+    height: 180px;
+    width: 30%;
+    padding: 0 10px;
+  }
+  .page-personalization .personalized-wrapper .personalized-user-area .personalized-user .user-name {
+    font-size: 18px;
+  }
+  .page-personalization .personalized-wrapper .personalized-user-area .personalized-user-info, .page-personalization .personalized-wrapper .personalized-user-area .total-point-wrapper {
+    width: 35%;
+    float: left;
+    height: 180px;
+  }
+  .page-personalization .personalized-wrapper .personalized-user-area .personalized-user-info {
+    padding: 60px 0;
+  }
+  .page-personalization .personalized-wrapper .personalized-user-area .personalized-user-info span {
+    padding: 0 10px;
+  }
+  .page-personalization .personalized-wrapper .personalized-user-area .total-point-wrapper .pregress-bar .pregress-bar-active {
+    width: 80%;
+  }
+  .page-personalization .personalized-wrapper .personalized-user-area .total-point-wrapper .pregress-bar span.current-badge {
+    left: 10px;
+  }
+  .page-personalization .personalized-wrapper .personalized-user-area .total-point-wrapper .pregress-bar span.next-badge {
+    right: 15px;
+  }
+  .page-personalization .personalized-wrapper .personalized-user-area .total-point-wrapper .pregress-bar span.current-badge, .page-personalization .personalized-wrapper .personalized-user-area .total-point-wrapper .pregress-bar span.next-badge {
+    top: -15px;
+  }
+  .page-personalization .personalized-wrapper .personalized-user-area .total-point-wrapper .pregress-bar span.current-badge small, .page-personalization .personalized-wrapper .personalized-user-area .total-point-wrapper .pregress-bar span.next-badge small {
+    margin-bottom: 10px;
+  }
+
+  .personal-menu-tab li a {
+    font-size: 16px;
   }
 }
 /* Responsive CSS */
