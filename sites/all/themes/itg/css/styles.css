@@ -6809,6 +6809,7 @@ section.sidebar .block-itg-ads {
 }
 #block-itg-layout-manager-header-block .menu-login .user-menu {
   position: relative;
+  z-index: -99999;
 }
 #block-itg-layout-manager-header-block .menu-login .user-menu a {
   cursor: pointer;

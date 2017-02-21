@@ -25,7 +25,7 @@ function itg_personalization_all_content_form($form, &$form_state) {
   $form['items_per_page'] = array(
     '#type' => 'select',
     '#title' => 'Items per page',
-    '#options' => array(1 => 1, 5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60, 100 => 100, 500 => 500, 1000 => 1000),
+    '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60, 100 => 100, 500 => 500, 1000 => 1000),
     '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
   );
   $form['submit'] = array(
