@@ -247,11 +247,14 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
     // Call custom summit callback
     $form['#validate'][] = 'itg_event_registration_form_event_validate';
     $form['actions']['submit']['#submit'][] = 'itg_event_registration_form_custom_submit_callback';
+   
     $data = itg_event_registration_config_field($_SESSION['current_event_id']);
+   
     // event registration form field show and hide by configuration
     foreach ($form['field_erf_registration_fee'][LANGUAGE_NONE] as $key => $field_collection_reg) {
       if (is_numeric($key)) {
         foreach ($data['unset'] as $field_key) {
+           
           $form['field_erf_registration_fee'][LANGUAGE_NONE][$key][$field_key]['#access'] = FALSE;
         }
 
@@ -685,6 +688,7 @@ function itg_event_registration_config_field($event_nid) {
   }
   $final_value['unset'] = $unset_field;
   $final_value['show'] = $value;
+  
   return $final_value;
 }
 
