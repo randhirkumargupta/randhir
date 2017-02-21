@@ -180,7 +180,9 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
  * @param array $form_state
  */
 function itg_event_backend_save_as_draft_submit_callback($form, &$form_state) {
-  $form_state['redirect'] = 'manage-event-backend-draft';
+  $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination='.$_GET['destination'];
+  $_GET['destination'] = $redirect_path;
+  //$form_state['redirect'] = 'manage-event-backend-draft';
 }
 /**
  * Implements alter message function().

@@ -158,9 +158,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
   // Button name change some content
   if ($form_id == 'mega_review_critic_node_form' && (empty($form['#node']->nid) || (!empty($form['#node']->nid) && $form['#node']->status == 0))) {
-    $form['actions']['itg_custom_button'] = array('#type' => 'submit',
-      '#value' => t('Save as Draft'),//
-      '#submit' => array('node_form_submit'));
+//    $form['actions']['itg_custom_button'] = array('#type' => 'submit',
+//      '#value' => t('Save as Draft'),//
+//      '#submit' => array('node_form_submit'));
     $form['actions']['submit']['#value'] = t('Publish');
   }
 
