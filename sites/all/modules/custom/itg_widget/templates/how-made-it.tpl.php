@@ -2,6 +2,7 @@
   <div class="how-made-it">
     <ul>
       <?php foreach ($data as $key => $entity) {
+         
         ?>
         <li class="" id="dont-miss-<?php print $key ?>">
           <?php if (!empty($entity['esi_file_uri'])) { ?>
@@ -24,8 +25,8 @@
 
           <span class="dm-detail">
 
-            <?php if (!empty($entity['custom_label'])) : ?>
-              <p class="title"><?php print $entity['custom_label']; ?></p>
+            <?php if (!empty($entity['extra'])) : ?>
+              <p class="title"><?php print $entity['extra']; ?></p>
             <?php endif; ?>
 
             <?php if (!empty($entity['title'])) : ?> 

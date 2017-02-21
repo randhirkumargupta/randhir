@@ -415,16 +415,19 @@ if (count($graphdata) > 2) {
 ?>
                         <div class="row">
 
-                            <div class="<?php echo $adsclass; ?> col-md-12 col-sm-6">
-                                <div class="itg-widget election-topadd">
-                                    <div class="ad-widget droppable">
-                                        <div class="sidebar-ad">
-<?php
-$block = block_load('itg_ads', ADS_RHS1);
-$render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-print render($render_array);
-?></div>
+                        
+                        <div class="<?php echo $adsclass; ?> col-md-12 col-sm-6 mt-50">
+                            <div class="itg-widget election-topadd">
+                                <div class="ad-widget droppable">
+                                    <div class="sidebar-ad">
+                                        <?php
+                                          $block = block_load('itg_ads', ADS_RHS1);   
+                                          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                          print render($render_array);
+                                         ?></div>
+
                                     </div>
+
                                 </div>
                             </div> 
 

@@ -294,10 +294,44 @@ function itg_menu_manager_form_validate($form, &$form_state) {
   if (isset($form_state['clicked_button']) && $form_state['clicked_button']['#type'] == 'submit') {
     $errors = array();
     $values = $form_state['values'];
-    $triggering_element = $form_state['triggering_element'];
-
+    // Section id.
+    $section_id = $values['sections'];
+    $menu_level = $values['menu_level'];
     $url_type = $values['url_type'];
+    // Validate here for dublicasy.
     $url = $values['url'];
+
+    // Validation for dublicate menu and sub menu.
+    if ($url_type == 'internal') {
+      // get values beween squre breaket.
+      preg_match_all("/\[([^\]]*)\]/", $values['title'], $matches);
+      // get tid
+      $term_tid_array = explode("tid:", $matches[1][0]);
+      // In case of external url we didnt got tid so mannualy give a tid.
+      $term_id = ($term_tid_array[1]) ? trim($term_tid_array[1]) : time();
+      
+      $count = _get_itg_menu_data($menu_level, $section_id, $url_type, $term_id);
+
+      if ($count) {
+        $display_message = "";
+        if ($menu_level == 'third') {
+          $section_link = l("Click here", "menu-manager/third", array("attributes" => array("target" => array("_blank")), "query" => array("section_child" => $section_id, "tid" => "", "section_id" => $section_id)));
+          $taxonomy_term_data = taxonomy_term_load($section_id);
+          $display_message = "Under <b> $taxonomy_term_data->name </b> Section. $section_link";
+        }
+        else if ($menu_level == 'second') {
+          $section_link = l("Click Here", "menu-manager/second", array("attributes" => array("target" => array("_blank"))));
+          $display_message = $section_link;
+        }
+        else if ($menu_level == 'vertical') {
+          drupal_add_css("#decided-section {display:none !important}", "inline");
+          $section_link = l("Click Here", "menu-manager/vertical", array("attributes" => array("target" => array("_blank"))));
+          $display_message = $section_link;
+        }
+        $errors[] = t("Menu <b>" . $values['title'] . "</b> Already Exists. $display_message");
+      }
+    }
+    
     if ($url_type == 'external' && !empty($url)) {
       if ((strpos($url, 'http') === 0) && filter_var($url, FILTER_VALIDATE_URL)) {
         //watchdog("menu_manager", "Url validated in case of external");
@@ -321,6 +355,7 @@ function itg_menu_manager_form_validate($form, &$form_state) {
         }
       }
     }
+
     if ($values['display_icon'] == 1 && $values['url_type'] == 'external' && $values['menu_level'] == 'vertical' && !$values['category_icon']) {
       $errors[] = t("For external vertical menu category icon is required.");
       drupal_add_css(".form-item-sections {display:none !important}", "inline");
@@ -1061,23 +1096,23 @@ function itg_menu_manager_form_alter(&$form, &$form_state, $form_id) {
 //        );
         $new_select = '<div class="third-label-menu-section"><label for="edit-section-child">Section </label><select id="edit-section-child" name="section_child" class="form-select valid">';
         foreach ($options as $key => $value) {
-          if(isset($_GET['section_child']) && $_GET['section_child'] == $key) {
+          if (isset($_GET['section_child']) && $_GET['section_child'] == $key) {
             $selcted = "selected='selected'";
           }
           else {
             $selcted = "";
           }
-          $new_select .='<option value="' . $key . '" '.$selcted.'>' . $value . '</option>';
+          $new_select .= '<option value="' . $key . '" ' . $selcted . '>' . $value . '</option>';
         }
         $new_select .= '</select></div>';
-        
-        $auto_complete_label = '<div class="third-label-menu-term"><label for="edit-edit-tid">'.t("Term Id").'</label>';
 
-        if(!isset($_GET['section_child']) || $_GET['section_child'] == "0") {
+        $auto_complete_label = '<div class="third-label-menu-term"><label for="edit-edit-tid">' . t("Term Id") . '</label>';
+
+        if (!isset($_GET['section_child']) || $_GET['section_child'] == "0") {
           $form['tid']['#attributes']['class'] = array('hide');
           $auto_complete_label = '<div class="third-label-menu-term">';
         }
-        
+
         $new_select .= $auto_complete_label;
         $form['tid']['#prefix'] = $new_select;
         $form['tid']['#suffix'] = "</div>";
@@ -1253,7 +1288,7 @@ function itg_menu_manager_form_views_exposed_form_alter(&$form, &$form_state, $f
         $form['tid']['#autocomplete_path'] = 'itg-menu-manager-search-second/autocomplete';
       }
       else {
-        if(isset($_GET['section_id'])) {
+        if (isset($_GET['section_id'])) {
           $section_id = $_GET['section_id'];
           $form['tid']['#autocomplete_path'] = "itg-menu-manager-search-third/$section_id/autocomplete";
         }
@@ -1379,4 +1414,24 @@ function _delete_term_from_menu_manager($tid) {
   catch (Exception $ex) {
     drupal_set_message($ex->getMessage());
   }
+}
+
+/**
+ * Function which returns count of rows w.r.t menu_manager data.
+ * 
+ * @param string $menu_level
+ * @param int $section_id
+ * @param string $url_type
+ * @param string $term_id
+ * @return int
+ */
+function _get_itg_menu_data($menu_level, $section_id, $url_type, $term_id) {
+  $db_query = db_select('itg_menu_manager', 'imm')
+      ->fields('imm', array('tid'))
+      ->condition('imm.menu_level', $menu_level)
+      ->condition('imm.section_id', $section_id)
+      ->condition('imm.url_type', $url_type)
+      ->condition('imm.tid', $term_id);
+  $result = $db_query->execute()->rowCount();
+  return $result;
 }
