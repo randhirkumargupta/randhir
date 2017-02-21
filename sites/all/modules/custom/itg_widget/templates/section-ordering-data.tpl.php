@@ -64,6 +64,7 @@ else if ($widget_style == 'auto-tips-and-tricks' || $widget_style == 'edu-tips-a
           if (strtolower($entity['type']) == 'videogallery') {
             $video_class = 'video-icon';
           }
+          $desc = "";
           $nid = $entity['nid'];
 
           if (!empty($entity['field_story_kicker_text_value'])) {
@@ -1242,10 +1243,10 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
                   <?php //echo mb_strimwidth($desc, 0, 55, ".."); ?> 
                 <?php 
                   if (function_exists('itg_common_get_smiley_title')) {
-                    echo l(itg_common_get_smiley_title($nid, 0, 45), "node/" . $nid, array("html" => TRUE ));
+                    echo l(itg_common_get_smiley_title($nid, 0, 70), "node/" . $nid, array("html" => TRUE ));
                   }
                   else {
-                   echo l(mb_strimwidth($desc, 0, 55, ".."), "node/" . $nid);
+                   echo l(mb_strimwidth($desc, 0, 80, ".."), "node/" . $nid);
                   }
                 ?>
                 </p>
@@ -1258,10 +1259,10 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
             <?php //echo l(mb_strimwidth($entity['title'], 0, 100, ".."), "node/" . $nid); ?>
               <?php 
               if (function_exists('itg_common_get_smiley_title')) {
-                echo l(itg_common_get_smiley_title($nid, 0, 90), "node/" . $nid, array("html" => TRUE ));
+                echo l(itg_common_get_smiley_title($nid, 0, 25), "node/" . $nid, array("html" => TRUE ));
               }
               else {
-               echo l(mb_strimwidth($entity['title'], 0, 100, ".."), "node/" . $nid);
+               echo l(mb_strimwidth($entity['title'], 0, 55, ".."), "node/" . $nid);
               }
             ?>
             </p>
