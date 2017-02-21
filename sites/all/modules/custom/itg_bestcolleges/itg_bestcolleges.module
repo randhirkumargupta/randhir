@@ -17,6 +17,21 @@ function itg_bestcolleges_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
+  $items['bestcolleges/%/emerging/%'] = array(
+    'page callback' => 'itg_bestcollege_emerging',
+        'page arguments' => array(1, 2, 3),
+        'access callback' => TRUE,
+    );
+    $items['bestcolleges/%/stream-comparecollege/%/%'] = array(
+        'page callback' => 'itg_bestcollege_streamcompare',
+        'page arguments' => array(1, 2, 3, 4),
+        'access callback' => TRUE,
+    );
+    $items['bestcolleges/%/%/year-comparecollege/%'] = array(
+        'page callback' => 'itg_bestcollege_yearcompare',
+        'page arguments' => array(1, 2, 3, 4),
+        'access callback' => TRUE,
+    );
    return $items;
 }
 
@@ -38,6 +53,16 @@ function itg_bestcolleges_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'itg_bestcolleges') . '/templates',
       'variables' => array('data' => NULL),
     ),
+    'itg_bestcollege_streamwise' => array(
+        'variable' => array('data' => NULL),
+        'template' => 'itg-bestcollege-streamwise',
+        'path' => drupal_get_path('module', 'itg_bestcolleges') . '/templates',
+    ),
+    'itg_bestcollege_yearwise' => array(
+        'variable' => array('data' => NULL),
+        'template' => 'itg-bestcollege-yearwise',
+        'path' => drupal_get_path('module', 'itg_bestcolleges') . '/templates',
+    )
   );
   return $themes;
 }
@@ -71,8 +96,123 @@ function itg_bestcolleges_form_views_exposed_form_alter(&$form, &$form_state, $f
       $form['title']['#autocomplete_path'] = 'content-title-list/bestcolleges/autocomplete';
       break;
   }
-
 }
+
+/**
+ * Function used to show Emerging Best Colleges List:
+ * @param int $year
+ * @param string $type
+ * @param string $stream
+ */
+function itg_bestcollege_emerging($year, $type, $stream) {
+  drupal_set_title(t('EMERGING COLLEGES RANKING: BEST '.drupal_strtoupper($stream).' COLLEGES'));
+  $result_data = itg_bestcollege_getData($type, $year, $stream);
+  $data = array();
+  foreach($result_data as $result_data_key => $result_data_val) {
+    $clgname_city = $result_data_val->collegename.', '.$result_data_val->city;
+    $data[] = array($result_data_val->overall_rank, $clgname_city, $result_data_val->reputation, $result_data_val->academic_input, $result_data_val->studentcare,$result_data_val->infrastructure, $result_data_val->placement,$result_data_val->preceptual_rank,$result_data_val->factual_rank);
+  }
+  $header = array(t('Rank'), t('NAME OF THE COLLEGE'), t('Reputation'), t('Academic Input'), t('Student Care'), t('Infra'), t('Placement'), t('Perceptual Rank'), t('Factual Rank'));
+  $output = theme('table', array(
+      'header' => $header, 
+      'rows' => $data,
+      'attributes' => array(
+        'class' => array('table')
+        )
+    )
+  );
+  return $output;
+}
+
+/**
+ * Function used to show Colleges List on behalf of Stream. 
+ * @param int $year
+ * @param string $type
+ * @param string $stream1
+ * @param string $stream2
+ */
+function itg_bestcollege_streamcompare($year, $type, $stream1, $stream2) {
+  drupal_set_title(t($year.' '.drupal_strtoupper($stream1).' Vs '. drupal_strtoupper($stream2)));
+  $result_data = array();
+  $result_data_stream1 = itg_bestcollege_getData($type, $year, $stream1);
+  $result_data_stream2 = itg_bestcollege_getData($type, $year, $stream2);
+  
+  $data = array();
+  foreach($result_data_stream1 as $result_data_stream1_key => $result_data_stream1_val) {
+    $clgname_city = $result_data_stream1_val->collegename.', '.$result_data_stream1_val->city;
+    $data[$stream1][] = array('rank' => $result_data_stream1_val->rank, 'college_name' => $clgname_city);
+  }
+  foreach($result_data_stream2 as $result_data_stream2_key => $result_data_stream2_val) {
+    $clgname_city2 = $result_data_stream2_val->collegename.', '.$result_data_stream2_val->city;
+    $data[$stream2][] = array('rank' => $result_data_stream2_val->rank, 'college_name' => $clgname_city2);
+  }
+  $output = theme('itg_bestcollege_streamwise', array('data' => $data));
+  return $output;
+}
+
+/**
+ * Function used to show Colleges List on behalf of Year. 
+ * @param int $year
+ * @param string $type
+ * @param string $stream1
+ * @param string $stream2
+ */
+function itg_bestcollege_yearcompare($frmyear, $toyear, $type, $stream) {
+  drupal_set_title(t($stream.' '.$frmyear.' Vs '. $toyear));
+  $result_data = array();
+  $result_data_yr1 = itg_bestcollege_getData($type, $frmyear, $stream);
+  $result_data_yr2 = itg_bestcollege_getData($type, $toyear, $stream);
+   
+  $data = array();
+  foreach($result_data_yr1 as $result_data_stream1_key => $result_data_stream1_val) {
+    $clgname_city = $result_data_stream1_val->collegename.', '.$result_data_stream1_val->city;
+    $data[$frmyear][] = array('rank' => $result_data_stream1_val->rank, 'college_name' => $clgname_city);
+  }
+  foreach($result_data_stream2 as $result_data_stream2_key => $result_data_stream2_val) {
+    $clgname_city2 = $result_data_stream2_val->collegename.', '.$result_data_stream2_val->city;
+    $data[$toyear][] = array('rank' => $result_data_stream2_val->rank, 'college_name' => $clgname_city2);
+  }
+  $output = theme('itg_bestcollege_yearwise', array('data' => $data));
+  return $output;
+}
+
+/*
+ * Common function to get data of bestcolleges:
+ * @param int $year
+ * @param string $stream
+ * 
+ */
+function itg_bestcollege_getData($type, $byear, $bstream) {
+  $itg_result = array();
+  // Need to change below query once bestcollege migrate:
+  if ($type == 'emerging') {
+    $itg_query = db_select('bestcolleges_master', 'n');
+    $itg_query->join('bestcolleges_emergingranking', 'bce', 'n.collegeid = bce.collegeid');
+    $itg_query->fields('bce', array('id', 'year', 'overall_rank', 'stream', 'reputation', 'academic_input', 'studentcare', 'infrastructure', 'placement', 'preceptual_rank', 'factual_rank'));
+    $itg_query->fields('n', array('collegename', 'city'))
+        ->condition('bce.year', $byear, '=')
+        ->condition('bce.stream', $bstream, '=')
+        ->condition('bce.published', 1)
+        ->orderBy('bce.overall_rank', 'ASC');
+    $itg_result = $itg_query->execute()->fetchAll();
+    return $itg_result;
+  }
+  if ($type == 'stream-comparecollege' || $type == 'year-comparecollege') {
+    // Query to find result of first stream:
+    $itg_query = db_select('bestcolleges_master', 'n');
+    $itg_query->join('bestcolleges_ranking', 'bcr', 'n.collegeid = bcr.collegeid');
+    $itg_query->fields('bcr', array('id', 'year', 'rank', 'stream'));
+    $itg_query->fields('n', array('collegename', 'city'))
+        ->condition('bcr.year', $byear, '=')
+        ->condition('bcr.stream', $bstream, '=')
+        ->condition('bcr.published', 1)
+        ->condition('bcr.rank', 0, '!=')
+        ->orderBy('bcr.rank', 'ASC');
+    $itg_result = $itg_query->execute()->fetchAll();
+    return $itg_result;
+  }
+}
+
 
 
 

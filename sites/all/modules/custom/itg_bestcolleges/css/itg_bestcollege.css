@@ -1,0 +1,36 @@
+.main-streamwisecompare .streamcontainer, .main-streamwisecompare .streamcontainer1 {
+  float:left;
+  width:48%;
+}
+.main-streamwisecompare .streamcontainer1 {
+  margin-left:2%;
+}
+.main-streamwisecompare .stream_header, .main-streamwisecompare .stream_label {
+  float:left;
+  width:100%;
+  font-weight: bold;
+}
+.main-streamwisecompare .stream_header {
+  background-color:#d72a3e;
+  padding: 5px 4px 5px 10px;
+  color: #fff;
+  text-align:center;
+}
+.main-streamwisecompare .stream_label {
+  color: #fff;
+  background-color:#4688ac;
+  padding: 5px 4px 5px 10px;
+}
+.main-streamwisecompare .stream_rank {
+  float:left;
+  width:20%;
+  text-align:center;
+}
+.main-streamwisecompare .stream_value {
+   border-bottom: 1px solid gray;
+}
+.main-streamwisecompare .stream_clgname {
+  float:left;
+  width:80%;
+  padding: 5px 4px 5px 10px;
+}

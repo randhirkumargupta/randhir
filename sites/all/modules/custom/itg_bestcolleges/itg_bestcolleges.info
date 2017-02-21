@@ -1,8 +1,8 @@
 name = ITG Best Colleges
-description = "ITG Best CollegesModule"
+description = "ITG BestCollege module is used to implement features to show Best Colleges on behalf of their ranking."
 core = 7.x
 package = ITG
 
-files[] = itg_bestcolleges.module
+stylesheets[all][] = css/itg_bestcollege.css
 
 
