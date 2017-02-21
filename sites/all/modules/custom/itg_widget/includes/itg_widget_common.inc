@@ -1399,7 +1399,11 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
 
     if ($view->name == 'so_sorry' && $view->current_display == 'so_sorry_videos') {
-        $query->where[1]['conditions'][1]['value'] = variable_get('so_sorry_category_id_for_widget');
+      foreach($query->where[1]['conditions'] as $keys=>$conditions) {
+        if(is_string($conditions['field']) && $conditions['field'] == 'taxonomy_index.tid') {
+           $query->where[1]['conditions'][$keys]['value'] = variable_get('so_sorry_category_id_for_widget');
+        }
+      }
     }
 
     if ($view->name == 'so_sorry' && $view->current_display == 'so_sorry_videos_widget') {
