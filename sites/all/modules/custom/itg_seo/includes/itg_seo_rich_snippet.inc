@@ -40,7 +40,6 @@ function itg_seo_node_data($node) {
     $get_author_name = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
     if(!empty($get_author_name) && ($get_author_name > 0)){
       $auth_name = itg_get_story_author_name($get_author_name);
-      p($auth_name);
     } else {
       $auth_name = '';
     }
