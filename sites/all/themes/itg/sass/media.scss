@@ -294,16 +294,20 @@
     h1 {
         margin-top: 20px;
     }
-    .election-graph{      
-        .col-el-5{
-            width: 240px;
-        }   
+    .election-graph table{
+        font-size: 12px;
     }
     .election-top-block{
         .social-share{
             padding-top: 0;
         }
     }
+    .col-el-5 .graph-design .highcharts-title tspan{
+        font-size: 16px;
+        &:nth-child(1){
+            font-size: 16px;    
+        }
+    }    
 }
 
 /*Election page css end*/
@@ -1570,7 +1574,11 @@ padding-right: 10px;
     padding-left: 20px;
 }
 /*sosory page css end*/
-
+/*election page css start*/
+.election-page .election-graph .col-el-5{
+    width: 245px;
+}
+/*election page css end*/
 
 }
 

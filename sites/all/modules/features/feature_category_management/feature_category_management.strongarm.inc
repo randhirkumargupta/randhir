@@ -19,10 +19,10 @@ function feature_category_management_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '18',
+          'weight' => '10',
         ),
         'path' => array(
-          'weight' => '17',
+          'weight' => '9',
         ),
         'name' => array(
           'weight' => '9',

@@ -2659,6 +2659,9 @@ footer .multiple-items-footer i.slick-next {
   text-align: center;
   line-height: 64px;
 }
+.story-section .story-right.photo-story .multiple-photo .slick-current .photo-count {
+  background-color: rgba(0, 0, 0, 0.2);
+}
 .story-section .story-right.photo-story .multiple-photo .slick-current .img-wrapper {
   border: 1px solid #ffc106;
 }
@@ -10000,10 +10003,11 @@ section.sidebar .block-itg-ads {
 .election-page .left-side .itg-415-layout .droppable {
   min-height: 415px;
 }
-.election-page .left-side .itg-325-layout .droppable, .election-page .left-side .itg-325-layout iframe {
+.election-page .left-side .itg-325-layout .droppable {
   height: 325px;
 }
 .election-page .left-side .itg-325-layout iframe {
+  height: 286px;
   width: 100%;
 }
 .election-page .left-side .itg-map .droppable {
@@ -10045,12 +10049,13 @@ section.sidebar .block-itg-ads {
   margin-bottom: 90px;
 }
 .election-page .right-side .ads-after-two .election-topadd .ad-widget {
-  margin-top: 15px;
+  margin-top: 0;
+  margin-bottom: 4px;
 }
 .election-page .itg-listing {
   border: none;
 }
-.election-page .highlight {
+.election-page .highlights .common-highlights {
   overflow: auto;
   max-height: 282px;
 }
@@ -12366,11 +12371,13 @@ span.smilies-title {
   vertical-align: middle;
   float: none !important;
   margin: 0 !important;
+  line-height: 0;
 }
 span.smilies-title img {
   display: inline;
   max-width: inherit;
   width: auto;
+  margin: 0 !important;
 }
 
 /* css for story-photo-list starts here */

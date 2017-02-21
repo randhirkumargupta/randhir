@@ -21,7 +21,7 @@
     <div class="career-graph-data">
         <div class="gray-bg"><?php print t('Career Graph'); ?></div>
         <div class="black-bg"><?php print $actor[$key]['name']; ?></div>
-        <?php //print $actor_pic;  ?>
+        <?php print $actor_pic;  ?>
     </div>  <?php
     
     ?>

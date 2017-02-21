@@ -244,6 +244,17 @@ function itg_category_manager_js_alter(&$javascript) {
 function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
   global $user;
   global $base_url;
+  
+   if ($form['#vocabulary']->machine_name == 'state_manager') {
+    $form['#attributes']['class'][] = 'node-form node-category-form';
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js',
+    );
+    $form['field_user_city'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('HH:MM');
+    $form['relations']['parent']['#config']['module'] = 'itg_category_manager';
+    $form['relations']['parent']['#weight'] = -1;
+    $form['#submit'][] = 'itg_category_manager_custom_submit';
+  }
 // Add js to category management form
   if ($form['#vocabulary']->machine_name == 'category_management') {
     $form['#attributes']['class'][] = 'node-form node-category-form';
@@ -252,6 +263,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     );
     $form['field_user_city'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('HH:MM');
     $form['relations']['parent']['#config']['module'] = 'itg_category_manager';
+    $form['relations']['parent']['#weight'] = -1;
     $form['#submit'][] = 'itg_category_manager_custom_submit';
   }
   if ($form_id == 'taxonomy_form_term') {
@@ -332,6 +344,8 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       $form['relations']['parent']['#title'] = t('Select Section');
       $form['relations']['parent']['#description'] = '<p>' . t('Please select &#60;root&#62; for section.') . '</p>';
       $form['relations']['#collapsible'] = 0;
+       $form['relations']['#weight'] = 5;
+     
       unset($form['relations']['weight']);
 //Non-editable fields in edit mode
       if (arg(3) == 'edit') {
