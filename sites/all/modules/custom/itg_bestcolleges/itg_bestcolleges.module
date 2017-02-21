@@ -2,14 +2,14 @@
 
 /**
  * @file
- * The ITG Best College module.
+ * The ITG Best Colleges module.
  *
  * Contains functionality for best college.
  */
 
 /**
  * Implements hook_menu().
- * @return array $items
+ * {@inheritdoc}
  */
 function itg_bestcolleges_menu() {
   $items['bestcolleges/ranks/%'] = array(
@@ -19,33 +19,34 @@ function itg_bestcolleges_menu() {
   );
   $items['bestcolleges/%/emerging/%'] = array(
     'page callback' => 'itg_bestcollege_emerging',
-        'page arguments' => array(1, 2, 3),
-        'access callback' => TRUE,
-    );
-    $items['bestcolleges/%/stream-comparecollege/%/%'] = array(
-        'page callback' => 'itg_bestcollege_streamcompare',
-        'page arguments' => array(1, 2, 3, 4),
-        'access callback' => TRUE,
-    );
-    $items['bestcolleges/%/%/year-comparecollege/%'] = array(
-        'page callback' => 'itg_bestcollege_yearcompare',
-        'page arguments' => array(1, 2, 3, 4),
-        'access callback' => TRUE,
-    );
-   return $items;
+    'page arguments' => array(1, 2, 3),
+    'access callback' => TRUE,
+  );
+  $items['bestcolleges/%/stream-comparecollege/%/%'] = array(
+    'page callback' => 'itg_bestcollege_streamcompare',
+    'page arguments' => array(1, 2, 3, 4),
+    'access callback' => TRUE,
+  );
+  $items['bestcolleges/%/%/year-comparecollege/%'] = array(
+    'page callback' => 'itg_bestcollege_yearcompare',
+    'page arguments' => array(1, 2, 3, 4),
+    'access callback' => TRUE,
+  );
+  return $items;
 }
 
-/*
+/**
  * Returns custom content to Drupal
+ * @return type
  */
-function itg_bestcolleges_deatils(){
-    // Call theme() function, so that Drupal includes the custom-page.tpl.php template
-    return theme('itg_bestcolleges_template');
+function itg_bestcolleges_deatils() {
+  return theme('itg_bestcolleges_template');
 }
 
-/*
-* Implement hook_theme().
-*/
+/**
+ * Implements hook_menu().
+ * {@inheritdoc}
+ */
 function itg_bestcolleges_theme($existing, $type, $theme, $path) {
   $themes = array(
     'itg_bestcolleges_template' => array(
@@ -54,14 +55,14 @@ function itg_bestcolleges_theme($existing, $type, $theme, $path) {
       'variables' => array('data' => NULL),
     ),
     'itg_bestcollege_streamwise' => array(
-        'variable' => array('data' => NULL),
-        'template' => 'itg-bestcollege-streamwise',
-        'path' => drupal_get_path('module', 'itg_bestcolleges') . '/templates',
+      'variable' => array('data' => NULL),
+      'template' => 'itg-bestcollege-streamwise',
+      'path' => drupal_get_path('module', 'itg_bestcolleges') . '/templates',
     ),
     'itg_bestcollege_yearwise' => array(
-        'variable' => array('data' => NULL),
-        'template' => 'itg-bestcollege-yearwise',
-        'path' => drupal_get_path('module', 'itg_bestcolleges') . '/templates',
+      'variable' => array('data' => NULL),
+      'template' => 'itg-bestcollege-yearwise',
+      'path' => drupal_get_path('module', 'itg_bestcolleges') . '/templates',
     )
   );
   return $themes;
@@ -70,6 +71,7 @@ function itg_bestcolleges_theme($existing, $type, $theme, $path) {
 /**
  * Implement hook_views_pre_render
  * @param object $view
+ * {@inheritdoc}
  */
 function itg_bestcolleges_views_pre_render(&$view) {
   if (isset($view->name) && $view->name == "best_college_image_slider") {
@@ -90,7 +92,7 @@ function itg_bestcolleges_views_pre_render(&$view) {
 function itg_bestcolleges_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   switch ($form['#id']) {
     case 'views-exposed-form-best-college-image-slider-page-1':
-       $form['title']['#attributes'] = array(
+      $form['title']['#attributes'] = array(
         'placeholder' => t('College Name')
       );
       $form['title']['#autocomplete_path'] = 'content-title-list/bestcolleges/autocomplete';
@@ -103,47 +105,49 @@ function itg_bestcolleges_form_views_exposed_form_alter(&$form, &$form_state, $f
  * @param int $year
  * @param string $type
  * @param string $stream
+ * @return string
  */
 function itg_bestcollege_emerging($year, $type, $stream) {
-  drupal_set_title(t('EMERGING COLLEGES RANKING: BEST '.drupal_strtoupper($stream).' COLLEGES'));
+  drupal_set_title(t('EMERGING COLLEGES RANKING: BEST ' . drupal_strtoupper($stream) . ' COLLEGES'));
   $result_data = itg_bestcollege_getData($type, $year, $stream);
   $data = array();
-  foreach($result_data as $result_data_key => $result_data_val) {
-    $clgname_city = $result_data_val->collegename.', '.$result_data_val->city;
-    $data[] = array($result_data_val->overall_rank, $clgname_city, $result_data_val->reputation, $result_data_val->academic_input, $result_data_val->studentcare,$result_data_val->infrastructure, $result_data_val->placement,$result_data_val->preceptual_rank,$result_data_val->factual_rank);
+  foreach ($result_data as $result_data_key => $result_data_val) {
+    $clgname_city = $result_data_val->collegename . ', ' . $result_data_val->city;
+    $data[] = array($result_data_val->overall_rank, $clgname_city, $result_data_val->reputation, $result_data_val->academic_input, $result_data_val->studentcare, $result_data_val->infrastructure, $result_data_val->placement, $result_data_val->preceptual_rank, $result_data_val->factual_rank);
   }
   $header = array(t('Rank'), t('NAME OF THE COLLEGE'), t('Reputation'), t('Academic Input'), t('Student Care'), t('Infra'), t('Placement'), t('Perceptual Rank'), t('Factual Rank'));
   $output = theme('table', array(
-      'header' => $header, 
-      'rows' => $data,
-      'attributes' => array(
-        'class' => array('table')
-        )
+    'header' => $header,
+    'rows' => $data,
+    'attributes' => array(
+      'class' => array('table')
     )
+      )
   );
   return $output;
 }
 
 /**
- * Function used to show Colleges List on behalf of Stream. 
+ * Function used to show Colleges List on behalf of Stream.
  * @param int $year
  * @param string $type
  * @param string $stream1
  * @param string $stream2
+ * @return string
  */
 function itg_bestcollege_streamcompare($year, $type, $stream1, $stream2) {
-  drupal_set_title(t($year.' '.drupal_strtoupper($stream1).' Vs '. drupal_strtoupper($stream2)));
+  drupal_set_title(t($year . ' ' . drupal_strtoupper($stream1) . ' Vs ' . drupal_strtoupper($stream2)));
   $result_data = array();
   $result_data_stream1 = itg_bestcollege_getData($type, $year, $stream1);
   $result_data_stream2 = itg_bestcollege_getData($type, $year, $stream2);
-  
+
   $data = array();
-  foreach($result_data_stream1 as $result_data_stream1_key => $result_data_stream1_val) {
-    $clgname_city = $result_data_stream1_val->collegename.', '.$result_data_stream1_val->city;
+  foreach ($result_data_stream1 as $result_data_stream1_key => $result_data_stream1_val) {
+    $clgname_city = $result_data_stream1_val->collegename . ', ' . $result_data_stream1_val->city;
     $data[$stream1][] = array('rank' => $result_data_stream1_val->rank, 'college_name' => $clgname_city);
   }
-  foreach($result_data_stream2 as $result_data_stream2_key => $result_data_stream2_val) {
-    $clgname_city2 = $result_data_stream2_val->collegename.', '.$result_data_stream2_val->city;
+  foreach ($result_data_stream2 as $result_data_stream2_key => $result_data_stream2_val) {
+    $clgname_city2 = $result_data_stream2_val->collegename . ', ' . $result_data_stream2_val->city;
     $data[$stream2][] = array('rank' => $result_data_stream2_val->rank, 'college_name' => $clgname_city2);
   }
   $output = theme('itg_bestcollege_streamwise', array('data' => $data));
@@ -151,36 +155,38 @@ function itg_bestcollege_streamcompare($year, $type, $stream1, $stream2) {
 }
 
 /**
- * Function used to show Colleges List on behalf of Year. 
- * @param int $year
+ * Function used to show Colleges List on behalf of Year.
+ * @param int $frmyear
+ * @param int $toyear
  * @param string $type
- * @param string $stream1
- * @param string $stream2
+ * @param string $stream
+ * @return string
  */
 function itg_bestcollege_yearcompare($frmyear, $toyear, $type, $stream) {
-  drupal_set_title(t($stream.' '.$frmyear.' Vs '. $toyear));
+  drupal_set_title(t($stream . ' ' . $frmyear . ' Vs ' . $toyear));
   $result_data = array();
   $result_data_yr1 = itg_bestcollege_getData($type, $frmyear, $stream);
   $result_data_yr2 = itg_bestcollege_getData($type, $toyear, $stream);
-   
+
   $data = array();
-  foreach($result_data_yr1 as $result_data_stream1_key => $result_data_stream1_val) {
-    $clgname_city = $result_data_stream1_val->collegename.', '.$result_data_stream1_val->city;
+  foreach ($result_data_yr1 as $result_data_stream1_key => $result_data_stream1_val) {
+    $clgname_city = $result_data_stream1_val->collegename . ', ' . $result_data_stream1_val->city;
     $data[$frmyear][] = array('rank' => $result_data_stream1_val->rank, 'college_name' => $clgname_city);
   }
-  foreach($result_data_stream2 as $result_data_stream2_key => $result_data_stream2_val) {
-    $clgname_city2 = $result_data_stream2_val->collegename.', '.$result_data_stream2_val->city;
+  foreach ($result_data_stream2 as $result_data_stream2_key => $result_data_stream2_val) {
+    $clgname_city2 = $result_data_stream2_val->collegename . ', ' . $result_data_stream2_val->city;
     $data[$toyear][] = array('rank' => $result_data_stream2_val->rank, 'college_name' => $clgname_city2);
   }
   $output = theme('itg_bestcollege_yearwise', array('data' => $data));
   return $output;
 }
 
-/*
+/**
  * Common function to get data of bestcolleges:
- * @param int $year
- * @param string $stream
- * 
+ * @param int $type
+ * @param int $byear
+ * @param string $bstream
+ * @return string
  */
 function itg_bestcollege_getData($type, $byear, $bstream) {
   $itg_result = array();
@@ -212,7 +218,3 @@ function itg_bestcollege_getData($type, $byear, $bstream) {
     return $itg_result;
   }
 }
-
-
-
-
