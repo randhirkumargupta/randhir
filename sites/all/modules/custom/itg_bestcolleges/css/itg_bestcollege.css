@@ -5,18 +5,18 @@
 .main-streamwisecompare .streamcontainer1 {
   margin-left:2%;
 }
-.main-streamwisecompare .stream_header, .main-streamwisecompare .stream_label {
+.main-streamwisecompare .stream_header, .main-streamwisecompare .stream_label, .main-bestzonewisecompare .bestzone_label {
   float:left;
   width:100%;
   font-weight: bold;
 }
-.main-streamwisecompare .stream_header {
+.main-streamwisecompare .stream_header, .main-ready-directory .ready-directory-header {
   background-color:#d72a3e;
   padding: 5px 4px 5px 10px;
   color: #fff;
   text-align:center;
 }
-.main-streamwisecompare .stream_label {
+.main-streamwisecompare .stream_label, .main-ready-directory .ready-directory-label, .main-bestzonewisecompare .bestzone_label {
   color: #fff;
   background-color:#4688ac;
   padding: 5px 4px 5px 10px;
@@ -33,4 +33,33 @@
   float:left;
   width:80%;
   padding: 5px 4px 5px 10px;
+}
+/**CSS for Ready Directory Page**/
+.main-ready-directory{
+    width: 100%;
+}
+.main-ready-directory .ready-directory-header, .main-ready-directory .ready-directory-label, .main-ready-directory .ready-directory-value, .main-bestzonewisecompare .bestzone_label, .main-bestzonewisecompare .bestzone_value{
+    float: left;
+    width: 100%;
+}
+.main-ready-directory .directory-cell {
+  float: left;
+  padding: 5px 4px 5px 10px;
+  width: 12%;  
+}
+.main-bestzonewisecompare .zonecell {
+  float: left;
+  padding: 5px 4px 5px 10px; 
+}
+.main-bestzonewisecompare .bestzone_rank {
+    width: 10%;
+}
+.main-bestzonewisecompare .bestzone_clgname {
+    width: 50%;
+}  
+.main-bestzonewisecompare .bestzone_zone {
+    width: 15%;
+}
+.main-bestzonewisecompare .bestzone_stream {
+    width: 18%;
 }
