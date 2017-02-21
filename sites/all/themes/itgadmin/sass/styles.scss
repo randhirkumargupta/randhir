@@ -6297,6 +6297,13 @@ div.node{
       left: 400px;
     }
   } 
+  #custom_another_item{
+    text-align: right;
+    padding-bottom: 10px;
+    #custom_add_another_item{
+      @extend .btn-submit;
+    }
+  }
 }
 
 
@@ -10533,6 +10540,19 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     }
   }
 }
-.page-node-add-story #colorbox iframe{
+.page-node-add-story #colorbox iframe, 
+.page-node-add-podcast #colorbox iframe, 
+.page-node-add-photogallery #colorbox iframe, 
+.page-node-add-videogallery #colorbox iframe, 
+.page-node-add-blog #colorbox iframe, 
+.page-node-add-poll #colorbox iframe, 
+.page-node-add-breaking-news #colorbox iframe, 
+.node-type-blog #colorbox iframe,
+.node-type-poll #colorbox iframe,
+.node-type-breaking-news #colorbox iframe,
+.node-type-podcast #colorbox iframe,
+.node-type-photogallery #colorbox iframe,
+.node-type-videogallery #colorbox iframe,
+.node-type-story #colorbox iframe{
   background: url(../images/loading_animation.gif) no-repeat center center;
 }
