@@ -217,6 +217,7 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
               '#type' => 'checkboxes',
               '#options' => $arr,
               '#attributes' => array('class' => array('rating'))
+               
           );
           $form['answer_option' . $num . '_' . $rating_num.'_name'] = array(
               '#type' => 'hidden',
