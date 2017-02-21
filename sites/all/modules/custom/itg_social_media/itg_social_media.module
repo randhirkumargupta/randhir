@@ -488,7 +488,6 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
       );
 
       break;
-
     case 'views-exposed-form-social-media-report-social-media-report':
       $form['scheduled_time']['min']['#attributes'] = array(
         'autocomplete' => 'off',
