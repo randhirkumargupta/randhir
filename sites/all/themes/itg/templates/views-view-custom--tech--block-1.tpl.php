@@ -4,27 +4,71 @@
             <div class="featured-news">
 
                 <?php
-                foreach ($rows as $index => $row) {
-                    $desc = $row['title'];
+                global $base_url;
 
-                    $video_class = "pic-no-icon";
+                foreach ($rows as $index => $row) {
+
+                    $desc = $row['title'];
+                    if (function_exists('itg_common_remove_extra_html')) {
+                        $desc = itg_common_remove_extra_html($desc);
+                    }
+
+                    $video_class = "";
                     if (strtolower($row['type']) == 'videogallery') {
                         $video_class = 'video-icon';
                     }
                     if ($index == 0) {
                         ?>
-                        <div class="featured-post featured-post-first">
-                            <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}") ?>"><?php print $row['field_story_large_image']; ?>    </a>
-                            <h2><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h2>           
+                        <div class="featured-post featured-post-first <?php echo $video_class; ?>">
+                            <?php
+                            if ($row['field_story_large_image'] != "") {
+                                print $row['field_story_large_image'];
+                            }
+                            else {
+                                print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image483x271.jpg' alt='' />";
+                            }
+                            ?> 
+
+                            <h2>
+                                <?php //echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
+                                <?php
+                                if (function_exists('itg_common_get_smiley_title')) {
+                                    echo l(itg_common_get_smiley_title($row['nid'], 0, 60), "node/" . $row['nid'], array("html" => TRUE));
+                                }
+                                else {
+                                    echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), "node/" . $row['nid']);
+                                }
+                                ?>
+                            </h2>
                         </div>
 
-                    <?php }
-                    else if ($index > 0 && $index <= 2) { ?>
-                <div class="featured-post"> <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}") ?>"><?php print $row['field_story_extra_large_image']; ?></a>
-                            <h3><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h3>
+
+
+                        <?php }
+                        else if ($index > 0 && $index <= 2) { ?>
+                        <div class="featured-post <?php echo $video_class; ?>">
+                            <?php
+                            if ($row['field_story_medium_image'] != "") {
+                                print $row['field_story_medium_image'];
+                            }
+                            else {
+                                print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image237x133.jpg' alt='' />";
+                            }
+                            ?>
+                            <h3>
+                                <?php //echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
+                                <?php
+                                    if (function_exists('itg_common_get_smiley_title')) {
+                                        echo l(itg_common_get_smiley_title($row['nid'], 0, 60), "node/" . $row['nid'], array("html" => TRUE));
+                                    }
+                                    else {
+                                        echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), "node/" . $row['nid']);
+                                    }
+                                ?>
+                            </h3>                            
                         </div>
 
-                    <?php } ?>
+    <?php } ?>
 
 <?php } ?>
             </div>
@@ -42,12 +86,19 @@
 
                         if ($index > 2) {
                             ?>
-                            <li><?php echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></li>
+                            <li><?php
+                                if (function_exists('itg_common_get_smiley_title')) {
+                                    echo l(itg_common_get_smiley_title($row['nid'], 0, 75), "node/" . $row['nid'], array("html" => TRUE));
+                                }
+                                else {
+                                    echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), "node/" . $row['nid']);
+                                }
+                                ?></li>
 
 
                         <?php } ?>
 
-                    <?php } ?>
+<?php } ?>
 
                 </ul>
 

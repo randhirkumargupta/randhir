@@ -7,6 +7,7 @@
 module_load_all_includes('inc', 'includes/itg_personalization.helper');
 module_load_all_includes('inc', 'includes/itg_personalization_profile.edit');
 module_load_all_includes('inc', 'includes/itg_personalization_refer.friend');
+module_load_all_includes('inc', 'includes/personalization_content_list');
 
 /**
  * Implements hook_permission().
@@ -18,6 +19,10 @@ function itg_personalization_permission() {
     'view personalized content' => array(
       'title' => t('View personalized user content'),
       'description' => t('This permission grant user to view personalized content.'),
+    ),
+    'access personalization all content link' => array(
+      'title' => t('Personalization all content link'),
+      'description' => t('personalization all content link'),
     ),
   );
 }
@@ -44,6 +49,20 @@ function itg_personalization_menu() {
   $items['itg-validate-by-usermail'] = array(
     'page callback' => 'itg_personalization_validate_by_usermail',
     'access arguments' => array('view personalized content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['personalization-all-content'] = array(
+    'title' => '',
+    'page callback' => 'itg_personalization_all_content_display',
+    'access arguments' => array('access personalization all content link'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/personalization_content_list.inc',
+  );
+  $items['personalization-del-content/%/%'] = array(
+    'title' => '',
+    'page callback' => 'itg_mongo_delete_ugc_content',
+    'page arguments' => array(1,2),
+    'access arguments' => array('access personalization all content link'),
     'type' => MENU_CALLBACK,
   );
 
@@ -78,9 +97,10 @@ function itg_personalization_home_page() {
   $f_name = $user_fields->field_first_name['und'][0]['value'];
   $l_name = $user_fields->field_last_name['und'][0]['value'];
   $data['full_name'] = $f_name . ' ' . $l_name;
-  $data['badge_detail'] = itg_personalization_badge($user->uid);  
+  $data['badge_detail'] = itg_personalization_badge($user->uid); 
+  
   // Load badge icon.
-  if (!empty($data['badge_detail']['earn'])) {
+  if (!empty($data['badge_detail']['earn']) && $data['badge_detail']['earn'] > 0) {    
     $file = file_load(variable_get('badge_' . $data['badge_detail']['earn'], ''));
     // Render badge icone.
     $data['badge_detail']['badge_icon'] = theme(
@@ -161,8 +181,48 @@ function itg_personalization_block_info() {
     'info' => t('Refer a friend'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['personalization_show_content'] = array(
+    'info' => t('Personalized Show Content'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['personalization_all_content'] = array(
+    'info' => t('Personalized All Content'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
+}
+
+/**
+ * Get menu text and class for mobile view.
+ *
+ * @return array
+ *   Name of the menu and menu class.
+ */
+function itg_personalization_getmenu_title() {
+  $arg = arg();
+  $sticky_title = '';
+  $data_tab = '';
+  if (!empty($arg[1])) {
+    switch ($arg[1]) {
+      case 'my-preferences':
+      case 'my-content':
+      case 'my-credits':
+      case 'edit-profile':
+      case 'saved-items':      
+        $title = str_replace('-', ' ', $arg[1]);
+        $sticky_title = t(ucwords($title));
+        $data_tab = $arg[1];
+        break;
+      case 'my-following':        
+        $sticky_title = t('Following');
+        $data_tab = $arg[1];
+    }
+    $data['menu_title'] = $sticky_title;
+    $data['data_tab'] = $data_tab;
+  }
+  
+  return $data;
 }
 
 /**
@@ -173,6 +233,7 @@ function itg_personalization_block_info() {
 function itg_personalization_block_view($delta = '') {
   global $user;
   // create url for edit profile
+  $change_pass_url = '';
   if ($delta == 'personalization_edit_profile') {
     $change_pass_url = 'http://' . PARENT_SSO . '/sso/change-password/' . base64_encode($_SERVER['HTTP_HOST']);
   }
@@ -189,11 +250,18 @@ function itg_personalization_block_view($delta = '') {
   switch ($delta) {
     // Load personalized menu tab.
     case 'personalized_content_menu_tab':
-      $block['content'] = theme('personalization_menu_tab');
+      $data = itg_personalization_getmenu_title();      
+      $block['content'] = theme('personalization_menu_tab', array('data' => $data));
       break;
     // Load personalized saved content menu tab.
     case 'personalized_saved_content':
       $block['content'] = theme('personalization_saved_content_tab');
+      break;
+    case 'personalization_show_content':
+      $block['content'] = _personalization_show_content();
+      break;
+    case 'personalization_all_content':
+      $block['content'] = _personalization_all_content();
       break;
     case 'user_saved_content':
       $block['content'] = '<div id="target"></div>';
@@ -279,8 +347,8 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
     $form['field_user_city']['#prefix'] = '<div style="display: none;">';
     $form['field_user_city']['#suffix'] = '</div>';
     // Hide section field.    
-    $form['field_section']['#prefix'] = '<div style="display: none;">';
-    $form['field_section']['#suffix'] = '</div>';
+//    $form['field_section']['#prefix'] = '<div style="display: none;">';
+//    $form['field_section']['#suffix'] = '</div>';
     $form['field_ugc_ctype']['#prefix'] = '<div class="per-icon">' . $content_type_for_icon . '</div><div style="display: none;">';
     $form['field_ugc_ctype']['#suffix'] = '</div>';
     // Set field visibility for category field.
@@ -456,5 +524,99 @@ function itg_personalization_reddem_referfriend($key) {
     if ($itg_result) {
       itg_loyalty_reward_earnpoint(0, 'raf', $itg_result);
     }
+  }
+}
+
+/**
+ * Implements _personalization_show_content().
+ */
+function _personalization_show_content() {
+  global $user, $base_url;
+  $arg = arg();
+  if (function_exists('mongodb'))
+  {
+    $url_arg = array('articles', 'videos', 'photogalleries');
+    $con = mongodb();
+    $people = $con->front_user_activity;
+
+    if (in_array($arg[2], $url_arg))
+    {
+      if ($arg[2] == 'articles')
+      {
+        $ntype = 'story';
+      }
+      if ($arg[2] == 'videos')
+      {
+        $ntype = 'videogallery';
+      }
+      if ($arg[2] == 'photogalleries')
+      {
+        $ntype = 'photogallery';
+      }
+      $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'ntype' => $ntype, 'activity' => 'read_later'));
+    }
+    else
+    {
+      $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'activity' => 'read_later'));
+    }
+
+    $output = '';
+    $output.= '<ul class="personal-list">';
+    foreach ($cursor as $id => $value) {
+      if (function_exists('itg_get_front_activity_info'))
+      {
+        $opt = itg_get_front_activity_info($value['nid'], $value['ntype'], $user->uid, 'read_later', $status = '');
+      }
+
+      if (!empty($value['image']))
+      {
+        $type_image = theme('image_style', array('style_name' => 'anchors_landing', 'path' => $value['image'], 'alt' => $value['image']));
+      }
+      else
+      {
+        $file = $base_url . '/sites/all/themes/itg/images/itg_image370x208.jpg';
+        $type_image = '<img src="' . $file . '" alt="itg_image370x208.jpg"/>';
+      }
+      $n_url = url($value['path'], array('absolute' => TRUE));
+      $output.= '<li class="col-md-4">  
+          <div class="personal-details">
+          <div class="personal-pic">' . $type_image . '</div>
+          <div class="personal-caption">' . $value['primary_category_name'] . '</div>
+          <div class="personal-action"><span class="flag-wrapper flag-my-saved-content flag-my-saved-content-2474">';
+
+      if (($opt['status'] == '1'))
+      {
+        $output.= '<a title = "Unflag" href="javascript:" class="user-activity" rel="' . $value['nid'] . '" data-tag="' . $value['ntype'] . '" data-activity="read_later" data-status="0" class="def-cur-pointer"><i class="fa fa-times" aria-hidden="true"></i><span class="flag-throbber"></span></a>';
+      }
+
+      $output.= '</span><a href="javascript:" class="personal-share"><i class="fa fa-share-alt" aria-hidden="true"></i></a></div></div>
+      <a href="' . $n_url . '">' . $value['title'] . '</a>  </li>';
+    }
+    $output.= '</ul>';
+    if(!empty($value['title'])) {
+      return $output;
+    }
+    else {
+      return t('No Record found!');
+    }
+    
+  }
+}
+
+/**
+ * Helper function to get facebook share count
+ * @param int $uid
+ * @param string $type
+ */
+function itg_user_fb_share_count($uid, $type) {
+  if (!empty($uid) && !empty($type))
+  {
+    $result = db_select('itg_lrp_loyalty_points', 'fs')
+        ->fields('fs')
+        ->condition('uid', $uid)
+        ->condition('loyalty_type', $type)
+        ->execute();
+    $num_of_results = $result->rowCount();
+    return $num_of_results;
   }
 }

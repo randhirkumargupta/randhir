@@ -112,7 +112,7 @@ function features_for_event_registration_field_default_field_instances() {
     'label' => 'Date of Birth',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -127,7 +127,7 @@ function features_for_event_registration_field_default_field_instances() {
         'increment' => 15,
         'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
-        'label_position' => 'above',
+        'label_position' => 'within',
         'no_fieldset' => 0,
         'text_parts' => array(),
         'year_range' => '1950:+0',
@@ -305,7 +305,7 @@ function features_for_event_registration_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_erf_name',
     'label' => 'Name',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -572,6 +572,48 @@ function features_for_event_registration_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-event_registration-field_preview_unique_id'.
+  $field_instances['node-event_registration-field_preview_unique_id'] = array(
+    'bundle' => 'event_registration',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 14,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_preview_unique_id',
+    'label' => 'Preview_unique_id',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 10,
+    ),
+  );
+
   // Exported field_instance: 'node-event_registration-field_story_source_id'.
   $field_instances['node-event_registration-field_story_source_id'] = array(
     'bundle' => 'event_registration',
@@ -706,6 +748,7 @@ function features_for_event_registration_field_default_field_instances() {
   t('Pincode');
   t('Please select country for this state.');
   t('Please select state for this city.');
+  t('Preview_unique_id');
   t('Registration Fee');
   t('Select County');
   t('Select State');

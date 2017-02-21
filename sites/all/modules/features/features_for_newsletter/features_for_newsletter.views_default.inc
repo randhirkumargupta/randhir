@@ -285,8 +285,8 @@ function features_for_newsletter_views_default_views() {
     22 => 0,
   );
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
+  /* Display: Published */
+  $handler = $view->new_display('page', 'Published', 'page');
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
@@ -347,7 +347,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Content: Survey Start Date  */
+  /* Field: Content: Date */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -471,6 +471,101 @@ function features_for_newsletter_views_default_views() {
   );
   $handler->display->display_options['filters']['date_filter']['date_method'] = 'AND';
   $handler->display->display_options['path'] = 'manage-newsletter';
+
+  /* Display: Draft */
+  $handler = $view->new_display('page', 'Draft', 'page_1');
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '0';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'newsletter' => 'newsletter',
+  );
+  /* Filter criterion: Content: Newsletter Type (field_newsl_newsletter_type) */
+  $handler->display->display_options['filters']['field_newsl_newsletter_type_value']['id'] = 'field_newsl_newsletter_type_value';
+  $handler->display->display_options['filters']['field_newsl_newsletter_type_value']['table'] = 'field_data_field_newsl_newsletter_type';
+  $handler->display->display_options['filters']['field_newsl_newsletter_type_value']['field'] = 'field_newsl_newsletter_type_value';
+  $handler->display->display_options['filters']['field_newsl_newsletter_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_newsl_newsletter_type_value']['expose']['operator_id'] = 'field_newsl_newsletter_type_value_op';
+  $handler->display->display_options['filters']['field_newsl_newsletter_type_value']['expose']['label'] = 'Newsletter Type';
+  $handler->display->display_options['filters']['field_newsl_newsletter_type_value']['expose']['operator'] = 'field_newsl_newsletter_type_value_op';
+  $handler->display->display_options['filters']['field_newsl_newsletter_type_value']['expose']['identifier'] = 'field_newsl_newsletter_type_value';
+  $handler->display->display_options['filters']['field_newsl_newsletter_type_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    19 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+  );
+  /* Filter criterion: Date: Date (node) */
+  $handler->display->display_options['filters']['date_filter']['id'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter']['table'] = 'node';
+  $handler->display->display_options['filters']['date_filter']['field'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter']['operator'] = 'between';
+  $handler->display->display_options['filters']['date_filter']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['date_filter']['expose']['operator_id'] = 'date_filter_op';
+  $handler->display->display_options['filters']['date_filter']['expose']['label'] = 'Shedule Date';
+  $handler->display->display_options['filters']['date_filter']['expose']['operator'] = 'date_filter_op';
+  $handler->display->display_options['filters']['date_filter']['expose']['identifier'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
+  $handler->display->display_options['filters']['date_filter']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['date_filter']['date_fields'] = array(
+    'field_data_field_survey_start_date.field_survey_start_date_value' => 'field_data_field_survey_start_date.field_survey_start_date_value',
+  );
+  $handler->display->display_options['filters']['date_filter']['date_method'] = 'AND';
+  $handler->display->display_options['path'] = 'manage-draft-newsletter';
   $export['manage_newsletter'] = $view;
 
   $view = new view();

@@ -131,9 +131,9 @@ function itg_notification_form_views_exposed_form_alter(&$form, &$form_state, $f
  * {@inheritdoc}
  */
 function itg_notification_node_validate($node, $form, &$form_state) {
-  $message_url = $node->field_cm_redirection_url[LANGUAGE_NONE][0]['value'];
-  if (!empty($message_url)) {
-    if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $message_url)) {
+  if (!empty($node->field_cm_redirection_url[LANGUAGE_NONE][0]['value'])) {
+    $message_url = $node->field_cm_redirection_url[LANGUAGE_NONE][0]['value'];
+    if (!preg_match("/^(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]$/i", $message_url)) {
       form_set_error('field_cm_redirection_url', t('Please enter a valid message URL.'));
     }
   }

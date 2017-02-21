@@ -7,7 +7,7 @@
                     <?php if (!empty($node_data['si_file_uri'])) { ?>
                         <div class="dm-pic">
                             <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['nid']}") ?>">
-                                <img src="<?php print image_style_url("widget_small", $node_data['si_file_uri']); ?>" />
+                                <img src="<?php print image_style_url("widget_small", $node_data['si_file_uri']); ?>" alt="" />
                             </a>
                         </div>
                         <?php
@@ -16,7 +16,7 @@
                         ?>
                         <div class="dm-pic">
                             <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['nid']}") ?>">
-                                <img width='170' height='127'  src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_video.jpg' />
+                                <img width='170' height='127'  src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg' alt="" />
                             </a>
                         </div>
                     <?php } ?>
@@ -31,17 +31,15 @@
 
                         <?php if (!empty($title)) : ?>    
                             <p class="dont-miss-widget dont-miss-<?php echo $node_data['nid'] ?>">
-                                <?php echo l(mb_strimwidth($title, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['nid']}")) ?>
+                                <?php
+                                  if (function_exists('itg_common_get_smiley_title')) {
+                                    echo l(itg_common_get_smiley_title($node_data['nid'], 0, 100), "node/" . $node_data['nid'], array("html" => TRUE));
+                                  }
+                                  else {
+                                    echo l(mb_strimwidth($title, 0, 100, ".."), "node/" . $node_data['nid']);
+                                  }
+                                ?>
                             </p>
-                            <?php
-//                $desc=$node_data['node_load_data']->field_story_kicker_text['und'][0]['value'];
-//                            if($desc=="")
-//                            {
-//                                $desc=$node_data['node_load_data']->body['und'][0]['value'];
-//                            }
-//                                
-//                            echo mb_strimwidth($desc, 0, 70, "..") ;
-                            ?>
         <?php endif; ?>
 
                     </div>

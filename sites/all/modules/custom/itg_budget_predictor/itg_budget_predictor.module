@@ -5,11 +5,12 @@
  */
 function itg_budget_predictor_menu() {
   $items = array();
-  $items['budget-predictor/%/%'] = array(
+  $items['budget/predictor/%'] = array(
     'page callback' => 'itg_budget_predictor_custom',
     'type' => MENU_CALLBACK,
-    'access arguments' => array('access content'),
+    'access arguments' => array('administer itg_term settings'),
   );
+
   $items['ajax/budget-ranking/%'] = array(
     'page callback' => 'itg_budget_predictor_update_budget',
     'type' => MENU_CALLBACK,
@@ -22,6 +23,12 @@ function itg_budget_predictor_menu() {
     'file' => 'includes/itg_budget_predictor.inc',
     'access callback' => 'user_is_logged_in',
   );
+  $items['ajax/reset-budget-data/%'] = array(
+    'page callback' => 'itg_budget_reset_image',
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_budget_predictor.inc',
+    'access callback' => 'user_is_logged_in',
+  );
   $items['budget-download'] = array(
     'page callback' => 'itg_budget_download_image',
     'type' => MENU_CALLBACK,
@@ -29,6 +36,7 @@ function itg_budget_predictor_menu() {
     'access callback' => 'user_is_logged_in',
   );
   $items['budget-predictor-list'] = array(
+    'title' => t('Budget Users List'),
     'page callback' => 'itg_budget_predictor_list',
     'access arguments' => array('administer itg_term settings'),
     'type' => MENU_CALLBACK,
@@ -47,7 +55,6 @@ function itg_budget_predictor_menu() {
     'file' => 'includes/itg_budget_predictor.inc',
   );
   $items['manage-budget-predictor'] = array(
-    'title' => 'Manage Budget Predictor',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_manage_budget'),
     'access arguments' => array('administer itg_term settings'),
@@ -69,16 +76,42 @@ function itg_budget_predictor_custom() {
   $user_id = $user->uid;
   $allowed_roles = array('Editor', 'Site Admin', 'administrator');
   $arg = arg();
-  $section_id = isset($arg[1]) ? $arg[1] : '';
+  $section_id = isset($arg[2]) ? $arg[2] : '';
   $budget_status = check_budget($section_id);
-  $data = itg_budget_predictor_get_taxonomy();
   $settings = array();
-  $settings['stopPredictor'] = '1';
 
-  if (empty($user_id)) {
-    $budget_predictor_cookies_id = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz"), 0, 2) . time();
-    $settings['budget_predictor_cookies_id'] = $budget_predictor_cookies_id;
+  if (!empty($user_id)) {
+    if (!empty($_SESSION['present_budget'])) {
+      unset($_SESSION['present_budget']);
+    }
   }
+  else {
+    if (empty($_SESSION['pre_budget'])) {
+      $budget_predictor_cookies_id = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz"), 0, 2) . time();
+      $settings['budget_predictor_cookies_id'] = $budget_predictor_cookies_id;
+
+      $_SESSION['pre_budget'] = $budget_predictor_cookies_id;
+      $_SESSION['present_budget'] = $budget_predictor_cookies_id;
+      $settings['pre_budget'] = $budget_predictor_cookies_id;
+    }
+    elseif (empty($_SESSION['present_budget'])) {
+      $budget_predictor_cookies_id = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz"), 0, 2) . time();
+      $settings['budget_predictor_cookies_id'] = $budget_predictor_cookies_id;
+      unset($_SESSION['pre_budget']);
+      unset($_SESSION['present_budget']);
+      $_SESSION['pre_budget'] = $budget_predictor_cookies_id;
+      $_SESSION['present_budget'] = $budget_predictor_cookies_id;
+      $settings['present_budget'] = $budget_predictor_cookies_id;
+    }
+    elseif (!empty($_SESSION['pre_budget']) && !empty($_SESSION['present_budget'])) {
+      $settings['budget_predictor_cookies_id'] = $_SESSION['pre_budget'];
+      $settings['pre_budget'] = $_SESSION['pre_budget'];
+      $settings['present_budget'] = $_SESSION['present_budget'];
+    }
+  }
+
+  $data = itg_budget_predictor_get_taxonomy();
+  $settings['stopPredictor'] = '1';
 
   if ($budget_status['status'] == 1 && empty($data['file_names']) && (empty($user->uid) || empty($cookies_id))) {
     $settings['stopPredictor'] = '2';
@@ -90,13 +123,17 @@ function itg_budget_predictor_custom() {
   else {
     $data['file_name'] = $base_url . '/sites/default/files/' . $data['file_names'];
   }
-
+  $cookies_name = "COOKIES_IT_" . $section_id;
   /* JS library  added to Cheaper dearer */
   $settings['basePath'] = $base_url;
   $settings['section_id'] = $section_id;
+  $settings['user_id'] = $user_id;
   if (count(array_intersect($user->roles, $allowed_roles)) > 0) {
     $data['admin_user'] = 1;
+    $settings['admin_user'] = 1;
+    $settings['cookies_name'] = $_COOKIE[$cookies_name];
   }
+
 
   $data['user_id'] = $user_id;
   drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', external);
@@ -142,6 +179,7 @@ function itg_budget_predictor_views_pre_render(&$view) {
  * @param array reference $form_state
  * Hiding taxonomy term description field
  */
+
 function itg_budget_predictor_form_taxonomy_form_term_alter(&$form, &$form_state) {
   if (is_array($form['#term']) && count($form['#term']) > 0) {
     if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'cheaper_dearer') {
@@ -161,6 +199,32 @@ function itg_budget_predictor_form_taxonomy_form_term_alter(&$form, &$form_state
       $form['relations']['#access'] = FALSE;
     }
   }
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_budget_predictor_block_info() {
+  $blocks = array();
+  $blocks['budget_pradictor'] = array(
+    'info' => t('Widget: Budget Predictor'),
+  );
+  return $blocks;
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_budget_predictor_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'budget_pradictor':
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_budget_predictor');
+      $data = itg_budget_predictor_custom();
+      $block['content'] = $data;
+      break;
+  }
+  return $block;
 }
 
 /**

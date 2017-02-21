@@ -6,18 +6,40 @@
 Drupal.behaviors.itg_budget_predictor = {
     attach: function (context, settings) {
         jQuery(function ()
-        {   
+        {
+
             var section_id = Drupal.settings.itg_budget_predictor.settings.section_id;
+            var user_id = Drupal.settings.itg_budget_predictor.settings.user_id;
             var budget_predictor_cookies_id = Drupal.settings.itg_budget_predictor.settings.budget_predictor_cookies_id;
-            var cookies_id = jQuery.cookie("COOKIES_IT_" + section_id);            
-            if (cookies_id === undefined || cookies_id == null || cookies_id.length <= 0) {
-                jQuery.cookie("COOKIES_IT_" + section_id, budget_predictor_cookies_id, { expires: 90 }); // Sample 3
+            var admin_user = Drupal.settings.itg_budget_predictor.settings.admin_user;
+            var cookies_name = Drupal.settings.itg_budget_predictor.settings.cookies_name;
+
+            var pre_budget = Drupal.settings.itg_budget_predictor.settings.pre_budget;
+            var present_budget = Drupal.settings.itg_budget_predictor.settings.present_budget;
+
+            var cookies_id = jQuery.cookie("COOKIES_IT_" + section_id);
+            jQuery.removeCookie("COOKIES_IT_" + section_id);
+            if(user_id == 0 && pre_budget != '') {
+                var date = new Date();
+                var minutes = 30;
+                date.setTime(date.getTime() + (minutes * 60 * 1000));
+                jQuery.cookie("COOKIES_IT_" + section_id, budget_predictor_cookies_id, { expires: date }); // Sample 3
+            } else if(present_budget != ''){
+                jQuery.removeCookie("COOKIES_IT_" + section_id);
+                var date = new Date();
+                var minutes = 30;
+                date.setTime(date.getTime() + (minutes * 60 * 1000));
+                jQuery.cookie("COOKIES_IT_" + section_id, budget_predictor_cookies_id, { expires: date }); // Sample 3
             }
-            
+
             if (Drupal.settings.itg_budget_predictor.settings.stopPredictor == 2) {
                 var isUpdated;
-               
-                jQuery("#sortable1, #sortable2, #sortable3, #sortable4").sortable(
+                jQuery('#ranking-content ul li, #ranking-content-main ul li, .ranking-content ul li').mouseover(function () {
+                    var ranking_column_id = jQuery(this).data("id");
+                    var str = jQuery(this).attr("id");
+                    var entity_id = str.split("_");
+                    
+                     jQuery("#sortable1, #sortable2, #sortable3, #sortable4").sortable(
                         {
                             connectWith: '.connectedSortable',
                             update: function (event, ui) {
@@ -30,21 +52,33 @@ Drupal.behaviors.itg_budget_predictor = {
                                             {
                                                 type: "POST",
                                                 url: Drupal.settings.itg_budget_predictor.settings.basePath + '/ajax/budget-ranking/' + section_id,
-                                                data:
+                                                beforeSend: function() {
+                                                                jQuery('#loader-data img').show();
+                                                            },
+                                                        data:
                                                         {
                                                             sort1: jQuery("#sortable1").sortable('serialize'),
                                                             sort2: jQuery("#sortable2").sortable('serialize'),
                                                             sort3: jQuery("#sortable3").sortable('serialize'),
+                                                            sort4: jQuery("#sortable4").sortable('serialize'),
                                                             cookies_id: jQuery.cookie("COOKIES_IT_" + section_id),
+                                                            eid: entity_id[1],
+                                                            ranking_column_id: ranking_column_id,
                                                         },
                                                 success: function (html)
                                                 {
                                                     jQuery('.success').fadeIn(500);
+                                                    jQuery('#loader-data img').hide();
+
                                                 }
                                             });
                                 }
                             }
                         }).disableSelection();
+                    
+                });
+
+               
             }
 
         });
@@ -109,4 +143,11 @@ function captureCurrentDiv(section_id)
             });
         }
     });
+}
+
+
+function reset_budget(section_id) {
+    jQuery.post('/ajax/reset-budget-data/' + section_id, {status: 2}, function (file) {
+                window.location.reload();
+            });
 }

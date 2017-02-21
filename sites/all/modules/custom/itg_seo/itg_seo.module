@@ -5,21 +5,24 @@
  * 
  * {@inheritdoc}
  */
-function itg_seo_menu() {  
-  $items['itg-access-denied'] = array(
-    'title' => t('Access Denied'),
-    'page callback' => 'itg_seo_access_denied',
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-  );
-  $items['itg-not-found'] = array(
-    'title' => t('Not Found'),
-    'page callback' => 'itg_seo_not_found',
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-  );
-  
-  return $items;
+module_load_include('inc', 'itg_seo', 'includes/itg_seo_rich_snippet');
+
+function itg_seo_menu() {
+    $items['itg-access-denied'] = array(
+        'title' => t('Access Denied'),
+        'page callback' => 'itg_access_denied',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+    $items['itg-not-found'] = array(
+        'title' => t('Not Found'),
+        'page callback' => 'itg_not_found',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+
+
+    return $items;
 }
 
 /**
@@ -27,9 +30,8 @@ function itg_seo_menu() {
  * 
  * @return array
  */
-function itg_seo_access_denied() {
-  
-  return theme('itg_seo_access_denied');
+function itg_access_denied() {
+  return theme('itg_access_denied');
 }
 
 /**
@@ -37,11 +39,11 @@ function itg_seo_access_denied() {
  * 
  * @return array
  */
-function itg_seo_not_found() {
-  if(function_exists(itg_seo_latest_headlines)) { 
-   $latest_headlines =  itg_seo_latest_headlines();
+function itg_not_found() {
+  if (function_exists(itg_seo_latest_headlines)) {
+    $latest_headlines = itg_seo_latest_headlines();
   }
-  return theme('itg_seo_not_found', array('data' => $latest_headlines));
+  return theme('itg_not_found', array('data' => $latest_headlines));
 }
 
 /**
@@ -51,15 +53,15 @@ function itg_seo_not_found() {
  */
 function itg_seo_theme() {
   $themes = array(
-    'itg_seo_access_denied' => array(
-      'template' => 'itg-seo-access-denied',
-      'path' => drupal_get_path('module', 'itg_seo') . '/templates',
-    ),
-    'itg_seo_not_found' => array(
-      'template' => 'itg-seo-not-found',
-      'path' => drupal_get_path('module', 'itg_seo') . '/templates',
-      'variables' => array('data' => NULL),
-    ),
+      'itg_access_denied' => array(
+          'template' => 'itg-seo-access-denied',
+          'path' => drupal_get_path('module', 'itg_seo') . '/templates',
+      ),
+      'itg_not_found' => array(
+          'template' => 'itg-seo-not-found',
+          'path' => drupal_get_path('module', 'itg_seo') . '/templates',
+          'variables' => array('data' => NULL),
+      ),
   );
 
   return $themes;
@@ -70,48 +72,46 @@ function itg_seo_theme() {
  * {@inheritdoc}
  */
 function itg_seo_form_alter(&$form, &$form_state, $form_id) {
-  
+  global $user;
   // Extra meta tags element hide from form
   if ($form_id == 'mega_review_critic_node_form' 
-      || $form_id == 'story_node_form' 
-      || $form_id == 'itg_celebrity_profile_node_form' 
-      || $form_id == 'blog_node_form' 
-      || $form_id == 'podcast_node_form' 
-      || $form_id == 'videogallery_node_form' 
-      || $form_id == 'photogallery_node_form' 
-      || $form_id == 'breaking_news_node_form' 
-      || $form_id == 'reporter_node_form' 
-      || $form_id == 'recipe_node_form' 
-      || $form_id == 'cooking_tips_node_form' 
-      || $form_id == 'food_news_node_form' 
-      || $form_id == 'astro_node_form' 
-      || $form_id == 'live_tv_integration_node_form' 
-      || $form_id == 'ask_an_expert_node_form' 
-      || $form_id == 'event_configurations_node_form' 
-      || $form_id == 'event_backend_node_form' 
-      || $form_id == 'issue_node_form' 
-      || $form_id == 'supplement_node_form'
-      || $form_id == 'newsletter_node_form'    
-      || $form_id == 'magazine_node_form' 
-      || $form_id == 'heighlights_node_form'
-      || $form_id == 'survey_node_form'
-      || $form_id == 'quiz_node_form'
-      || $form_id == 'page_node_form'      
-      || $form_id == 'poll_node_form'
-      || $form_id == 'sponsor_node_form'
-  ) {
-    if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
-
-      $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
-    }
+          || $form_id == 'story_node_form' 
+          || $form_id == 'itg_celebrity_profile_node_form' 
+          || $form_id == 'blog_node_form' 
+          || $form_id == 'podcast_node_form' 
+          || $form_id == 'videogallery_node_form' 
+          || $form_id == 'photogallery_node_form' 
+          || $form_id == 'breaking_news_node_form' 
+          || $form_id == 'reporter_node_form' 
+          || $form_id == 'recipe_node_form' 
+          || $form_id == 'cooking_tips_node_form' 
+          || $form_id == 'food_news_node_form' 
+          || $form_id == 'astro_node_form' 
+          || $form_id == 'live_tv_integration_node_form' 
+          || $form_id == 'ask_an_expert_node_form' 
+          || $form_id == 'event_configurations_node_form' 
+          || $form_id == 'event_backend_node_form' 
+          || $form_id == 'issue_node_form' 
+          || $form_id == 'supplement_node_form' 
+          || $form_id == 'newsletter_node_form' 
+          || $form_id == 'magazine_node_form' 
+          || $form_id == 'heighlights_node_form' 
+          || $form_id == 'survey_node_form' 
+          || $form_id == 'quiz_node_form' 
+          || $form_id == 'page_node_form' 
+          || $form_id == 'poll_node_form' 
+          || $form_id == 'sponsor_node_form') {
+      if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
+          $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
+      }
   }
   // Hide extra metatags on taxonomies.
-  if ($form_id == 'taxonomy_form_term' && 
-      ($form['#vocabulary']->machine_name == 'category_management'  || 
-      $form['#vocabulary']->machine_name == 'movies')) {
-    if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
-      $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
-    }
+  if ($form_id == 'taxonomy_form_term' &&
+          ($form['#vocabulary']->machine_name == 'category_management' ||
+          $form['#vocabulary']->machine_name == 'movies')) {
+      if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
+          $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
+      }
   }
 
 
@@ -121,12 +121,23 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
           || $form_id == 'ads_management_node_form' 
           || $form_id == 'task_idea_allocation_tracking_node_form' 
           || $form_id == 'ugc_node_form' 
-          || $form_id == 'notification_node_form'
-          ) {
-    //$form['additional_settings']['#access'] = FALSE;
-    $form['#after_build'][] = 'itg_additional_settings_element_hide';
-     
+          || $form_id == 'notification_node_form' 
+          || $form_id == 'coupon_node_form') {
+      //$form['additional_settings']['#access'] = FALSE;
+      $form['#after_build'][] = 'itg_additional_settings_element_hide';
   }
+
+  $node_form_array = array('photogallery_node_form',
+      'story_node_form',
+      'videogallery_node_form',
+      'podcast_node_form',
+      'food_news_node_form',
+      'cooking_tips_node_form',
+      'recipe_node_form');
+  if (in_array($form['#form_id'], $node_form_array)) {
+    $form['#after_build'][] = 'itg_meta_tags_alias_set';
+  }
+    
 }
 
 /**
@@ -135,12 +146,34 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
  * @param array $form_state
  * @return array
  */
-function itg_meta_tags_extra_element_hide($form, &$form_state, $form_id) {
+function itg_meta_tags_alias_set($form, &$form_state) {
+  global $edited_sef_url;
+  $nodeid = arg(1);
+  if (isset($form['path']) && !empty($form['path'])) {
+      $path_alias_set = $form['path']['alias']['#value'];
+      $path_data = explode("/", $path_alias_set);
+      $set_hierarchy = array_reverse($path_data);
+      $seftitle = $set_hierarchy[0];
+      $sef_url = explode($nodeid, $seftitle);
+      $edited_sef_url = rtrim($sef_url[0], '-');
+      $form['path']['alias']['#value'] = $edited_sef_url;
+  }
+  return $form;
+}
+
+/**
+ * Extra meta tags element hide from form
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_meta_tags_extra_element_hide($form, &$form_state) {
+
   if (isset($form['#vocabulary']->machine_name) && $form['#vocabulary']->machine_name == 'movies') {
-    unset($form['relations']['#title']);
-    unset($form['metatags']['#title']);
-    unset($form['metatags']['#title']);
-  }  
+      unset($form['relations']['#title']);
+      unset($form['metatags']['#title']);
+      unset($form['metatags']['#title']);
+  }
   drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_metatags.js');
   unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
   unset($form['metatags']['intro_text']['#markup']);
@@ -153,7 +186,7 @@ function itg_meta_tags_extra_element_hide($form, &$form_state, $form_id) {
 
   $arr_seo_heading_not_req = array('event_backend_node_form', 'issue_node_form', 'supplement_node_form', 'magazine_node_form', 'survey_node_form', 'quiz_node_form');
   if (!in_array($form['#form_id'], $arr_seo_heading_not_req)) {
-    $form['path']['#prefix'] = '<h2 class="story-title">' . t('SEO Meta Tags') . '</h2>';
+      $form['path']['#prefix'] = '<h2 class="story-title">' . t('SEO Meta Tags') . '</h2>';
   }
 
   return $form;
@@ -165,11 +198,11 @@ function itg_meta_tags_extra_element_hide($form, &$form_state, $form_id) {
  */
 function itg_seo_latest_headlines() {
     $query = db_select('node', 'n')
-        ->fields('n', array('title', 'nid'))
-        ->condition('n.status', 1)
-        ->condition('n.type', 'story')
-        ->range(0,4)
-        ->orderBy('n.created', 'DESC');
+            ->fields('n', array('title', 'nid'))
+            ->condition('n.status', 1)
+            ->condition('n.type', 'story')
+            ->range(0, 4)
+            ->orderBy('n.created', 'DESC');
     $result = $query->execute()->fetchAll();
     $headlines = array();
     foreach ($result as $key => $val) {
@@ -185,14 +218,73 @@ function itg_seo_latest_headlines() {
  * @return array
  */
 function itg_additional_settings_element_hide($form, &$form_state, $form_id) {
-  global $user;
-  if ($user->uid != '1') {
-    drupal_add_js('jQuery(document).ready(function() {
+    global $user;
+    if ($user->uid != '1') {
+        drupal_add_js('jQuery(document).ready(function() {              
               jQuery(".vertical-tabs-list").hide();
               jQuery(".form-item-menu-enabled").hide();
               jQuery(".form-item-path-alias").hide();              
               jQuery(".form-item-path-pathauto").hide();  
             });', array('type' => 'inline', 'scope' => 'footer'));
-  }
-  return $form;
+    }
+    return $form;
+}
+
+/**
+ * Returms a front end breadcrumb view 
+ * @param int $id
+ * @param text $entity_type
+ * @param text $type
+ * @param object $entity_object
+ */
+function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_url = NULL) {
+    
+    $str_breadcrumb = 'http://data-vocabulary.org/Breadcrumb';
+    
+    $node_title = '<div itemscope itemtype="'.$str_breadcrumb.'" class="lft pathtwo">'.l('<span itemprop="title">'.t($entity_object->title), 'node/'.$entity_object->nid, array('html'=>TRUE, 'attributes' => array('itemprop' => 'url'))).'</span>';
+    
+    $section_link = '<div itemscope itemtype="'.$str_breadcrumb.'" class="lft pathone">'
+        .l('<span itemprop="title">News</span>', '<front>', array('html'=>TRUE, 'attributes' => array('itemprop' => 'url'))).'</div>';
+    
+    //for Magazine Story
+    if (!empty($entity_object->type) && $entity_object->type == 'story' && !empty($entity_object->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'])) {
+        $section_link .= ' / ' . l('Magazine', 'calendar/0/0/magazine.html');
+    }
+
+    if (!empty($id)) {
+        $section_tids = taxonomy_get_parents_all($id);
+        $section_tids = array_reverse($section_tids);
+        foreach ($section_tids as $chunks) {
+          $section_link .= '<div itemscope itemtype="'.$str_breadcrumb.'" class="lft pathone"> /'
+                    . l('<span itemprop="title">'.$chunks->name.'</span>', drupal_get_path_alias('taxonomy/term/' . $chunks->tid), array('html'=>TRUE, 'attributes' => array('itemprop' => 'url'))).'</div>';            
+        }
+    }
+    if (!empty($entity_object->type) && $entity_object->type == 'story') {
+        $section_link .= ' / ' . $node_title;
+    } else if (!empty($entity_object->type) && $entity_object->type == 'videogallery') {
+        $section_link .= ' / Video / ' . $node_title;
+    } else if (!empty($entity_object->type) && $entity_object->type == 'photo') {
+        $section_link .= ' / Gallery / ' . $node_title;
+    } else if (!empty($entity_object->type) && $entity_object->type == 'podcast') {
+        $section_link .= ' / ' . l("Podcast", "podcasts-listing") . ' / ' . $node_title;
+    } else if (!empty($entity_object->type) && $entity_object->type == 'poll') {
+        $section_link .= ' / Poll';
+    } else if (!empty($entity_object->type) && $entity_object->type == 'blog') {
+        $section_link .= ' / Blog / ' . $node_title;
+    } else if (!empty($entity_object->type) && $entity_object->type == 'reporter') {
+        $section_link .= ' / ' . l("Anchors", "anchors-list") . ' / ' .$node_title;
+    } else if (!empty($entity_object->type)) {
+        $section_link .= ' / ' . $node_title;
+    } else if (!empty($single_url)) {
+        $section_link .= ' / ' . t($single_url);
+    }
+    return $section_link;
+}
+
+/*
+ * Implements hook_node_view
+ */
+
+function itg_seo_node_view($node, $view_mode, $langcode) {
+  itg_seo_node_data($node);
 }

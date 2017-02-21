@@ -10,6 +10,15 @@
 function feature_for_ugc_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'access personalization all content link'.
+  $permissions['access personalization all content link'] = array(
+    'name' => 'access personalization all content link',
+    'roles' => array(
+      'Front User' => 'Front User',
+    ),
+    'module' => 'itg_personalization',
+  );
+
   // Exported permission: 'access reject ugc content link'.
   $permissions['access reject ugc content link'] = array(
     'name' => 'access reject ugc content link',
@@ -20,6 +29,15 @@ function feature_for_ugc_user_default_permissions() {
       'Site Admin' => 'Site Admin',
       'UGC Moderator' => 'UGC Moderator',
       'administrator' => 'administrator',
+    ),
+    'module' => 'itg_ugc',
+  );
+
+  // Exported permission: 'access ugc list link'.
+  $permissions['access ugc list link'] = array(
+    'name' => 'access ugc list link',
+    'roles' => array(
+      'Editor' => 'Editor',
     ),
     'module' => 'itg_ugc',
   );

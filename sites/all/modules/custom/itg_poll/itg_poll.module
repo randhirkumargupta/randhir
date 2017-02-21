@@ -13,7 +13,11 @@
  * {@inheritdoc}
  */
 function itg_poll_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
   if ($form_id == "poll_node_form") {
+    if($user->uid != 1) {
+    $form['field_common_related_content']['#attributes']['class'][] = 'element-hidden';
+    }
     $form['actions']['submit']['#submit'][] = 'alter_submit_status_message';
     $form['field_poll_question_text']['#states'] = array(
       'visible' => array(
@@ -438,7 +442,7 @@ function itg_poll_block_info() {
     'info' => t('poll Form Tab Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  
+
   return $blocks;
 }
 
@@ -453,12 +457,10 @@ function itg_poll_block_view($delta = '') {
     case 'poll_tab_form_block':
       $block['content'] = theme('itg_poll_tab_form_display_block', array('data' => $data));
       break;
-  
-    
   }
-  
-  
-  
+
+
+
 
   // Disable form tab from delete page
   if (arg(0) == 'node' && arg(2) == 'delete') {
@@ -467,7 +469,6 @@ function itg_poll_block_view($delta = '') {
 
   return $block;
 }
-
 
 /**
  * Implements hook_theme().
@@ -748,15 +749,16 @@ function itg_poll_get_past_data($nid) {
     }
   }
   //pr(date('Y-m-d H:i:s'));
- 
-if($node->field_display_result[LANGUAGE_NONE][0]['value']==1)
-{
-  return '<ul class="past-poll">' . $outputnew . '</ul>';
-}else if($node->field_display_result[LANGUAGE_NONE][0]['value']==2 && $node->field_poll_end_date[LANGUAGE_NONE][0]['value']<= date('Y-m-d H:i:s')){
-      return '<ul class="past-poll">' . $outputnew . '</ul>';
-}else{
-   return '<p class="get-result">You will get the result after poll compilation</p>';   
-}
+
+  if ($node->field_display_result[LANGUAGE_NONE][0]['value'] == 1) {
+    return '<ul class="past-poll">' . $outputnew . '</ul>';
+  }
+  else if ($node->field_display_result[LANGUAGE_NONE][0]['value'] == 2 && $node->field_poll_end_date[LANGUAGE_NONE][0]['value'] <= date('Y-m-d H:i:s')) {
+    return '<ul class="past-poll">' . $outputnew . '</ul>';
+  }
+  else {
+    return '<p class="get-result">You will get the result after poll compilation</p>';
+  }
 }
 
 /**
@@ -770,9 +772,9 @@ function itg_poll_menu() {
     'access callback' => TRUE,
   );
   $items['associate-content-poll'] = array(
-        'page callback' => 'associate_content_poll',
-        'access arguments' => array('access itg story'),
-        'type' => MENU_CALLBACK,        
+    'page callback' => 'associate_content_poll',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
   );
 
   return $items;
@@ -846,8 +848,6 @@ function itg_poll_form_new_ajax_submit($form, &$form_state) {
   return array('#type' => 'ajax', '#commands' => $commands);
 }
 
-
-
 /**
  * Implementation of hook_form().
  * @param array $form
@@ -856,6 +856,7 @@ function itg_poll_form_new_ajax_submit($form, &$form_state) {
  * @return array
  */
 function itg_poll_form_home_page($form, &$form_state, $nid) {
+  global $user;
   $form = array();
   $form['#id'] = 'subspollformhomepage';
   $form["wrapper"] = array(
@@ -923,16 +924,24 @@ function itg_poll_form_home_page($form, &$form_state, $nid) {
 //    '#captcha_type' => 'recaptcha/reCAPTCHA',
 //    '#prefix' => '<span class="poll-ajax-error"></span>',
 //  );
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => 'Submit',
-    '#ajax' => array(
-      'callback' => 'itg_poll_form_home_page_ajax_submit',
-      'effect' => 'fade',
-      'progress' => array('type' => 'throbber', 'message' => ''),
-      'validate_first' => TRUE,
-    ),
-  );
+  //if (isset($user->uid) && !empty($user->uid) && ($user->uid > 0)) {
+    $form['submit'] = array(
+      '#type' => 'submit', 
+      '#value' => 'Submit',
+      '#ajax' => array(
+        'callback' => 'itg_poll_form_home_page_ajax_submit',
+        'effect' => 'fade',
+        'progress' => array('type' => 'throbber', 'message' => ''),
+        'validate_first' => TRUE,
+      ),
+    );
+//  }
+//  else {
+//    if (function_exists(itg_sso_url)) {
+//      print itg_sso_url('Submit');
+//    }
+//  }
+
 
 
   return $form;
@@ -1016,9 +1025,14 @@ function total_poll_count_content($poll_id) {
 }
 
 function itg_poll_node_view($node, $view_mode, $langcode) {
+  global $user;
   if ($node->type == 'poll') {
-    $poll_count = total_poll_count_content($node->nid);
-    $node->content['poll_count'] = '<div class="field"><div class="field-label">' . t('Associate content count:'). '</div><div class="field-items">'.$poll_count.'</div></div><div class="field">'.l(t('Associate content view'), 'associate-content-poll/'.$node->nid). '</div>';
+    if (empty($user->uid) || array_key_exists(FRONT_USER, $user->roles)) {
+      drupal_access_denied();
+    } else {
+      $poll_count = total_poll_count_content($node->nid);
+      $node->content['poll_count'] = '<div class="field"><div class="field-label">' . t('Associate content count:'). '</div><div class="field-items">'.$poll_count.'</div></div><div class="field">'.l(t('Associate content view'), 'associate-content-poll/'.$node->nid). '</div>';
+    }
   }
 }
 
@@ -1033,10 +1047,10 @@ function associate_content_poll() {
     array('data' => t('Title')),
     array('data' => t('ID')),
     array('data' => t('Status')),
-    array('data' => t('Content type')),    
+    array('data' => t('Content type')),
     array('data' => t('Action')),
   );
-  
+
   if ($_GET['items_per_page']) {
     $items_per_page = $_GET['items_per_page'];
   }
@@ -1044,74 +1058,78 @@ function associate_content_poll() {
     $items_per_page = 10;
   }
   $current_time = date("Y-m-d H:i:s");
-  
+
   $itg_query = db_select('itg_poll_count_content', 'p');
-  $itg_query->fields('p', array('content_id', 'content_type'));  
+  $itg_query->fields('p', array('content_id', 'content_type'));
   $itg_query->join('node', 'n', 'n.nid = p.content_id');
   $itg_query->join('workbench_moderation_node_history', 'w', 'w.nid = n.nid');
-  $itg_query->leftJoin('field_data_field_story_expiry_date', 'expiry', 'n.nid = expiry.entity_id'); 
+  $itg_query->leftJoin('field_data_field_story_expiry_date', 'expiry', 'n.nid = expiry.entity_id');
   $itg_query->fields('n', array('title', 'status'));
   $itg_query->fields('expiry', array('field_story_expiry_date_value'));
   $itg_query->fields('w', array('state'));
   $itg_query->extend('PagerDefault')->limit($items_per_page);
   $itg_query->condition('p.poll_id', arg(1));
   $itg_query->condition('w.is_current', 1);
-  
+
   $itg_result = $itg_query->execute()->fetchAll();
-  
+
   $rows = array();
-  
+
   $count = 0;
-  
+
   foreach ($itg_result as $row) {
     if (empty($row->field_story_expiry_date_value) || ($row->field_story_expiry_date_value >= $current_time)) {
-      $action_link = l(t('Edit'), 'node/'.$row->content_id.'/edit');
+      $action_link = l(t('Edit'), 'node/' . $row->content_id . '/edit');
       $status = $row->state;
-    } else {
+    }
+    else {
       $action_link = '';
       $status = 'Expired';
     }
-    
+
     $rows[] = array(
-      array('data' => $count+1),
+      array('data' => $count + 1),
       array('data' => $row->title),
       array('data' => $row->content_id),
       array('data' => $status),
       array('data' => $row->content_type),
       array('data' => $action_link),
-      //array('data' => l(t('Edit'), 'itg-layout-manager/'.  arg(1), array('query' => array('section' => $row->section_name, 'template_name' => $row->template_name)))),
+        //array('data' => l(t('Edit'), 'itg-layout-manager/'.  arg(1), array('query' => array('section' => $row->section_name, 'template_name' => $row->template_name)))),
     );
     $count++;
   }
-  
-  
-  $output = '<div class="view"><div class="attachment"><span class="count">Count (' . $count . ') </span>';    
+
+
+  $output = '<div class="view"><div class="attachment"><span class="count">Count (' . $count . ') </span>';
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
 
   // add the pager
   $output .= theme('pager');
 
   return $output;
- 
 }
 
 /**
  * Implements hook_node_insert
  * {@inheritdoc}
  */
-function itg_poll_node_insert($node) {  
-  if ($node->type == 'story') {
-    poll_count_of_content($node->body['und'][0]['value'], $node, 'insert');
-  }  
+function itg_poll_node_insert($node) {
+  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+    if ($node->type == 'story') {
+      poll_count_of_content($node->body['und'][0]['value'], $node, 'insert');
+    }
+  }
 }
 
 /**
  * Implements hook_node_update
  * {@inheritdoc}
  */
-function itg_poll_node_update($node) {  
-  if ($node->type == 'story') {
-    poll_count_of_content($node->body['und'][0]['value'], $node, 'update');
+function itg_poll_node_update($node) {
+  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+    if ($node->type == 'story') {
+      poll_count_of_content($node->body['und'][0]['value'], $node, 'update');
+    }
   }
 }
 
@@ -1121,30 +1139,28 @@ function itg_poll_node_update($node) {
  * @param array $node
  * @return //2464
  */
-
 function poll_count_of_content($desc, $node, $action) {
   if ($action == 'update') {
     //row delete
     db_delete('itg_poll_count_content')->condition('content_id', $node->nid)->execute();
   }
-        
-  if (strpos($desc,'[ITG:POLL:')) {
-    if (preg_match_all ('/ITG:POLL:([0-9]+)/', $desc, $matches_poll)) {
+
+  if (strpos($desc, '[ITG:POLL:')) {
+    if (preg_match_all('/ITG:POLL:([0-9]+)/', $desc, $matches_poll)) {
 
       $poll_nid = $matches_poll[1];
-      
-      if (isset($poll_nid)) {       
+
+      if (isset($poll_nid)) {
         //row insert
-        foreach ($poll_nid as  $key => $val) {
+        foreach ($poll_nid as $key => $val) {
           $query = db_insert('itg_poll_count_content');
           $query->fields(array(
-             'content_id' => $node->nid,
-             'poll_id' => $val,
-             'content_type' => $node->type,                 
-           ));          
+            'content_id' => $node->nid,
+            'poll_id' => $val,
+            'content_type' => $node->type,
+          ));
           $query->execute();
         }
-        
       }
     }
   }

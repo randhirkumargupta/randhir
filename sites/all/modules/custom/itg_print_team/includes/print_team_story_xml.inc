@@ -90,7 +90,10 @@ function itg_print_team_association_update($node_info, $issue_nid, $magazine, $a
     $node = node_load($node_info);
     $node->field_pti_issue[LANGUAGE_NONE][0]['target_id'] = $issue_nid;
     $node->field_pti_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
-    $node->field_pti_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
+    if ($supplement != '_none') {
+      $node->field_pti_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
+    }
+    
     field_attach_update('node', $node);
     
     // Update story node with selected issue and magazine
@@ -99,7 +102,9 @@ function itg_print_team_association_update($node_info, $issue_nid, $magazine, $a
     $story_node->type = 'story';
     $story_node->field_story_issue_date[LANGUAGE_NONE][0]['value'] = itg_common_get_node_title($issue_nid);
     $story_node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
-    $story_node->field_story_select_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
+    if ($supplement != '_none') {
+      $story_node->field_story_select_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
+    }    
     field_attach_update('node', $story_node);
   }
   else {

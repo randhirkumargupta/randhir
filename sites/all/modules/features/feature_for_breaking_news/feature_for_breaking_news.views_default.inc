@@ -297,6 +297,11 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'Content Id';
   /* Field: Content: Type */
   $handler->display->display_options['fields']['field_type']['id'] = 'field_type';
   $handler->display->display_options['fields']['field_type']['table'] = 'field_data_field_type';
@@ -306,7 +311,6 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_story_expires']['id'] = 'field_story_expires';
   $handler->display->display_options['fields']['field_story_expires']['table'] = 'field_data_field_story_expires';
   $handler->display->display_options['fields']['field_story_expires']['field'] = 'field_story_expires';
-  $handler->display->display_options['fields']['field_story_expires']['label'] = 'Activate Live TV';
   $handler->display->display_options['fields']['field_story_expires']['type'] = 'list_key';
   $handler->display->display_options['fields']['field_story_expires']['delta_offset'] = '0';
   /* Field: Content: Display on */
@@ -314,11 +318,6 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_display_on']['table'] = 'field_data_field_display_on';
   $handler->display->display_options['fields']['field_display_on']['field'] = 'field_display_on';
   $handler->display->display_options['fields']['field_display_on']['element_label_colon'] = FALSE;
-  /* Field: Content: Content Type */
-  $handler->display->display_options['fields']['field_content_type']['id'] = 'field_content_type';
-  $handler->display->display_options['fields']['field_content_type']['table'] = 'field_data_field_content_type';
-  $handler->display->display_options['fields']['field_content_type']['field'] = 'field_content_type';
-  $handler->display->display_options['fields']['field_content_type']['element_label_colon'] = FALSE;
   /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
@@ -416,38 +415,6 @@ function feature_for_breaking_news_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Content: Content Type (field_content_type) */
-  $handler->display->display_options['filters']['field_content_type_value']['id'] = 'field_content_type_value';
-  $handler->display->display_options['filters']['field_content_type_value']['table'] = 'field_data_field_content_type';
-  $handler->display->display_options['filters']['field_content_type_value']['field'] = 'field_content_type_value';
-  $handler->display->display_options['filters']['field_content_type_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_content_type_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_content_type_value']['expose']['operator_id'] = 'field_content_type_value_op';
-  $handler->display->display_options['filters']['field_content_type_value']['expose']['label'] = 'Content Type';
-  $handler->display->display_options['filters']['field_content_type_value']['expose']['operator'] = 'field_content_type_value_op';
-  $handler->display->display_options['filters']['field_content_type_value']['expose']['identifier'] = 'field_content_type_value';
-  $handler->display->display_options['filters']['field_content_type_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    7 => 0,
-    9 => 0,
-    5 => 0,
-    8 => 0,
-    20 => 0,
-    6 => 0,
-    10 => 0,
-    19 => 0,
-    13 => 0,
-    11 => 0,
-    16 => 0,
-    17 => 0,
-    14 => 0,
-    12 => 0,
-    15 => 0,
-    18 => 0,
-  );
   /* Filter criterion: Content: Type (field_type) */
   $handler->display->display_options['filters']['field_type_value']['id'] = 'field_type_value';
   $handler->display->display_options['filters']['field_type_value']['table'] = 'field_data_field_type';
@@ -512,6 +479,42 @@ function feature_for_breaking_news_views_default_views() {
     15 => 0,
     18 => 0,
   );
+  /* Filter criterion: Content: Nid */
+  $handler->display->display_options['filters']['nid']['id'] = 'nid';
+  $handler->display->display_options['filters']['nid']['table'] = 'node';
+  $handler->display->display_options['filters']['nid']['field'] = 'nid';
+  $handler->display->display_options['filters']['nid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['nid']['expose']['operator_id'] = 'nid_op';
+  $handler->display->display_options['filters']['nid']['expose']['label'] = 'Content Id';
+  $handler->display->display_options['filters']['nid']['expose']['operator'] = 'nid_op';
+  $handler->display->display_options['filters']['nid']['expose']['identifier'] = 'nid';
+  $handler->display->display_options['filters']['nid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
   $handler->display->display_options['path'] = 'breaking-news';
 
   /* Display: Breaking News Band */
@@ -551,8 +554,22 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_breaking_tile']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['field_breaking_tile']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['field_breaking_tile']['alter']['max_length'] = '100';
-  $handler->display->display_options['fields']['field_breaking_tile']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['field_breaking_tile']['element_label_colon'] = FALSE;
+  /* Field: Content: Extra large image */
+  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['text'] = '[field_story_extra_large_image-fid]';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['empty'] = '0';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
+    'image_style' => '',
+    'image_link' => '',
+  );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -630,8 +647,21 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_breaking_tile']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['field_breaking_tile']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['field_breaking_tile']['alter']['max_length'] = '100';
-  $handler->display->display_options['fields']['field_breaking_tile']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['field_breaking_tile']['element_label_colon'] = FALSE;
+  /* Field: Content: Extra large image */
+  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['text'] = '[field_story_extra_large_image-fid]';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
+    'image_style' => '',
+    'image_link' => '',
+  );
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Section (field_section) */
   $handler->display->display_options['arguments']['field_section_tid']['id'] = 'field_section_tid';

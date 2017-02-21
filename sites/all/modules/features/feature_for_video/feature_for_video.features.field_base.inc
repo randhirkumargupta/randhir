@@ -66,6 +66,81 @@ function feature_for_video_field_default_field_bases() {
     'type' => 'list_text',
   );
 
+  // Exported field_base: 'field_migrated_video_url'.
+  $field_bases['field_migrated_video_url'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_migrated_video_url',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_multi_bitrate'.
+  $field_bases['field_multi_bitrate'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_multi_bitrate',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_noindex_nofollow'.
+  $field_bases['field_noindex_nofollow'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_noindex_nofollow',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'noindex_nofollow' => 'No Index No Follow',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_story_player_image'.
   $field_bases['field_story_player_image'] = array(
     'active' => 1,
@@ -94,7 +169,7 @@ function feature_for_video_field_default_field_bases() {
   // Exported field_base: 'field_video_anchor'.
   $field_bases['field_video_anchor'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_video_anchor',
@@ -148,6 +223,7 @@ function feature_for_video_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         'google_standout' => 'Google Standout',
+        'comment_box' => 'Comment Box',
         'comment' => 'Comment',
       ),
       'allowed_values_function' => '',
@@ -178,6 +254,34 @@ function feature_for_video_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
+  );
+
+  // Exported field_base: 'field_video_flags'.
+  $field_bases['field_video_flags'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_video_flags',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'multipart_flag' => 'Multipart Flag',
+        'multibitrate_flag' => 'Multibitrate Flag',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_video_upload'.

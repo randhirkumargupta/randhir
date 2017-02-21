@@ -41,7 +41,7 @@ function event_backend_msnf_step_info() {
       17 => 'field_e_tab_color',
       18 => 'field_story_expert_description',
       19 => 'field_e_associate_highlights',
-      20 => 'domain',
+      20 => 'field_event_twitter',
       21 => 'metatags',
       22 => 'path',
       23 => 'additional_settings',
@@ -84,7 +84,8 @@ function event_backend_msnf_step_info() {
       4 => 'field_registration_close_date',
       5 => 'field_story_expiry_date',
       6 => 'field_story_kicker_text',
-      7 => 'title',
+      7 => 'field_event_types',
+      8 => 'title',
     ),
     'format_type' => 'default',
     'format_settings' => array(

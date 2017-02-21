@@ -1,11 +1,19 @@
 <?php
 
 
-global $base_url;
+/*global $base_url; me
 $host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
 $host_node_arr = explode('/', $host_detail['source']);
-$host_node = node_load($host_node_arr[1]);
+$host_node = node_load($host_node_arr[1]);*/
 
+global $base_url;
+$arg = arg();
+if (!empty($arg1) && is_numeric($arg1)) {
+  $host_node = node_load($arg1);
+}elseif($arg[0] == 'event'){
+  $path = drupal_lookup_path("source", $arg[0].'/'.$arg[1]);
+  $host_node = menu_get_object("node", 1, $path);
+}
 // Css variables
 $heading_background_color = $host_node->	field_e_heading_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->	field_e_heading_bck_color[LANGUAGE_NONE][0]['rgb'] : '#eee';
 $font_color = $host_node->field_e_highlighted_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_highlighted_font_color[LANGUAGE_NONE][0]['rgb'] : '#ef2a24';

@@ -15,7 +15,7 @@
         $args = array($row['tid']);
         $view->preview('block', $args);
         $view_result = $view->result;
-        $recent_video_under_cat = $view_result[0]->nid;
+        $recent_video_under_cat = !empty($view_result[0]->nid) ? $view_result[0]->nid : '';
         ?>
         <li>
           <h4>
@@ -49,7 +49,7 @@
                 <?php print l($img, 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
               <?php else : ?>
                 <?php
-                $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all.png' />";
+                $img = "<img width='88' height='66'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg' alt='' />";
                 ?>
                 <?php print l($img, 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
 

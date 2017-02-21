@@ -8,7 +8,7 @@
                     <?php if (!empty($node_data['si_file_uri'])) { ?>            
                         <div class="dm-pic">
                             <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $node_data['nid']); ?>">
-                                <img src="<?php print image_style_url("widget_small", $node_data['si_file_uri']); ?>" />
+                                <img src="<?php print image_style_url("widget_small", $node_data['si_file_uri']); ?>" alt="" />
                             </a>
                             <span><i class="fa fa-play-circle"></i> <?php echo $node_data['field_video_duration_value']; ?></span>
                         </div>
@@ -18,7 +18,7 @@
                         ?>
                         <div class="dm-pic">
                             <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $node_data['nid']); ?>">
-                                <img width='170' height='127'  src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_video.jpg' />
+                                <img width='170' height='127'  src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg' alt="" />
                             </a>                            
                         </div>
                         <?php } ?>

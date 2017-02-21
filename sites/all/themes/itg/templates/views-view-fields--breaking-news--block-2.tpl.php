@@ -25,6 +25,17 @@
  */
 ?>
 <?php global $base_url; ?>
+<?php
+  $actual_link = $base_url . '/node/' . $row->nid;
+  $short_url = shorten_url($actual_link, 'goo.gl');
+  $fb_title = itg_common_only_text_string($row->field_field_breaking_tile[0]['rendered']['#markup']);  
+  $image = '';
+  $share_desc = '';
+  if (!empty($row->field_field_story_extra_large_image[0]['raw']['uri'])) {
+    $image = file_create_url($row->field_field_story_extra_large_image[0]['raw']['uri']);
+  }
+?>
+
 <?php foreach ($fields as $id => $field): ?>
   <?php if (!empty($field->separator)): ?>
     <?php print $field->separator; ?>
@@ -36,23 +47,38 @@
     <div class="breakingnew-home">
       <div class="title">Breaking</div>    
       <div class="new-detail">  
-          <div class="marquee">
-          <?php print $field->content; ?>        
+          <div class="marquee-container">
+         <div class="marquee-child">
+                <?php print $field->content; ?>        
+            </div>   
           </div>
                   
           <div class="live-tv-link">
-              <a href="#"><img src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/imgpsh_fullsize.png'; ?>"</a>
+              <?php $live_tv_img = '<img src="'. $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/imgpsh_fullsize.png" alt="LiveTV" title="LiveTV" />'; ?>
+              <?php print l($live_tv_img, 'livetv', array('html' => TRUE, 'attributes' => array('class' => array('live-tv-icon')))); ?>
               <a href="javascript:void(0)" class="breaking-new-close">X</a>            
           </div>
           <div class="social-share">
               <ul>
-                  <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                  <li><a  class="facebook"><i class="fa fa-facebook"></i></a></li>
-                  <li><a href="javascript:"  class="twitter"><i class="fa fa-twitter"></i></a></li>
-                  <li><a title="share on google+" href="#"  class="google"></a></li>
+                  <li><a href="javascript:;" class="share"><i class="fa fa-share-alt"></i></a></li>
+                  <li><a href="javascript:;" title = "share on facebook" class="def-cur-pointer facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $row->nid; ?>')"><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="javascript:;" title = "share on twitter" class="twitter" onclick="twitter_popup('<?php print urlencode($fb_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="javascript:;" title="share on google+" class="google" onclick="return googleplusbtn('<?php print $actual_link; ?>')"></a></li>                  
               </ul>
           </div>
       </div>
   </div>    
   <?php print $field->wrapper_suffix; ?>
 <?php endforeach; ?>
+
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery('.marquee-child').liMarquee({        
+            direction: 'left', 
+            scrolldelay: 0, 
+            scrollamount: 50,
+            circular: true, 
+            hoverstop: true
+        });
+    });
+</script>

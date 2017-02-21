@@ -385,6 +385,33 @@ function feature_category_management_field_default_field_bases() {
     'type' => 'text_long',
   );
 
+  // Exported field_base: 'field_issue_free'.
+  $field_bases['field_issue_free'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_issue_free',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        1 => 'Issue free',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_integer',
+  );
+
   // Exported field_base: 'field_program_timing_in_days'.
   $field_bases['field_program_timing_in_days'] = array(
     'active' => 1,

@@ -10,7 +10,7 @@
 
 global $theme, $user;
 $preview = NULL;
-
+$arg = arg();
 if (arg(2) == 'preview') {
   $preview = 'preview';  
 }
@@ -93,9 +93,8 @@ if ($theme != 'itgadmin') {
  
 
 <div class="itg-layout-container <?php echo $itg_class; ?>">    
-    <!-- Breaking news band --> 
-    <?php //p($page); ?>
-    <?php if (!empty($page['breaking_news'])): ?>
+    <!-- Breaking news band -->         
+    <?php if (!empty($page['breaking_news'])): ?>    
     <div class="row">
         <div class="col-md-12">
           <?php print render($page['breaking_news']); ?>
@@ -187,7 +186,13 @@ if ($theme != 'itgadmin') {
                 <div class="itg-widget-parent m-bottom40">
                   <div class="itg-widget">
                     <div class="ad-widget droppable">
-                      <div class="sidebar-ad"><?php print ($itg_ad['200*200_right_bar_ad1']);?></div>
+                      <div class="sidebar-ad">
+                        <?php
+                          $block = block_load('itg_ads', ADS_RHS1);   
+                          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                          print render($render_array);
+                         ?>
+                      </div>
                     </div>
 <!--                    <div class="droppable <?php //print $gray_bg_layout; ?>">
                       <div class="widget-wrapper <?php //print $widget_data['itg-block-4']['widget_name']; ?>">
@@ -266,7 +271,7 @@ if ($theme != 'itgadmin') {
       </section>
     </main>
       
-      <?php if (!empty($user->uid)) {?>
+      <?php if (!empty($user->uid) && $arg[0] != "itg-layout-manager") {?>
         <section class="recommended-for-you">
          <div class="container"><span class="widget-title">RECOMMENDED FOR YOU</span> <?php print $widget_data['personlization']?></div>
         </section>
@@ -466,7 +471,13 @@ if ($theme != 'itgadmin') {
          <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
             <div class="itg-widget">
               <div class="ad-widget">
-                      <div class="sidebar-ad"><?php print $itg_ad['200*200_right_bar_ad2'];?></div>
+                      <div class="sidebar-ad">
+                       <?php
+                          $block = block_load('itg_ads', ADS_RHS2);   
+                          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                          print render($render_array);
+                         ?>
+                      </div>
                     </div>
 <!--              <div class="droppable <?php //print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php //print $widget_data['itg-block-11']['widget_name']; ?>">

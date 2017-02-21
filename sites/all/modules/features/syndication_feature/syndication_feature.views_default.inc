@@ -685,6 +685,7 @@ function syndication_feature_views_default_views() {
     'magazine' => 'magazine',
     'recipe' => 'recipe',
     'story' => 'story',
+    'videogallery' => 'videogallery',
     'photogallery' => 'photogallery',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
@@ -715,8 +716,11 @@ function syndication_feature_views_default_views() {
     12 => 0,
     15 => 0,
     18 => 0,
-    22 => 0,
     23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
   /* Filter criterion: Field: DOB (field_story_issue_date) */
@@ -1194,7 +1198,7 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['fields']['field_syndication_feed_clients']['table'] = 'field_data_field_syndication_feed_clients';
   $handler->display->display_options['fields']['field_syndication_feed_clients']['field'] = 'field_syndication_feed_clients';
   $handler->display->display_options['fields']['field_syndication_feed_clients']['label'] = 'Syndication Clients';
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';

@@ -24,31 +24,20 @@
         <div class='column-main'><div class='column-wrapper'>
             <?php endif; ?>
             <?php if (!empty($content)): ?>
-                <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
-                    <?php //print render($content)  ?>            
-                    <?php if ($view_mode == 'full'): ?>
+                <?php
+                $promote_class = "";
+                if (!isset($node->op) && in_array('Social Media', $user->roles)) {
+                    $promote_class = 'promote-content';
+                }
+                ?>
+                <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?> <?php echo $promote_class; ?>'>
+                        <?php //print render($content)   ?>            
+                        <?php if ($view_mode == 'full'): ?>
                         <div class="content-node-view">                                      
                             <?php
                             // Load custom block for social media integration
                             global $user;
-                            if (!isset($node->op) && in_array('Social Media', $user->roles)):
-                                $block = module_invoke('itg_social_media', 'block_view', 'social_media_form');
-                                ?>
-                                <div class="itg-smi">
-                                    <button data-id="smi-popup" class="btn data-popup-link">Promote Content</button>
-                                </div>
-                                <div id="smi-popup" class="itg-popup">
-                                    <div class="popup-content">
-                                        <div class="popup-head">
-                                            <div class="popup-title">&nbsp;</div>
-                                            <a class="itg-close-popup" href="javascript:;"> Close </a>
-                                        </div>
-                                        <div class="popup-body">
-                                            <?php print render($block['content']); ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endif; ?>
+                            ?>
                             <h2><?php print t('Basic Details'); ?></h2>
                             <div class="content-details">
                                 <div class="field">
@@ -123,7 +112,7 @@
                                 if (!empty($photo_gallery)):
                                     print render($content['field_associate_photo_gallery']);
                                     ?> 
-                                <?php endif; ?>
+        <?php endif; ?>
                             </div>
                         </div>
 
@@ -183,7 +172,7 @@
                                 if (!empty($description)):
                                     print render($content['field_recipe_description']);
                                     ?>
-                                <?php endif; ?>
+        <?php endif; ?>
                             </div>
                         </div>
 
@@ -195,7 +184,7 @@
                                 <div class="content-node-view">
                                     <h2><?php print t('Browse Media'); ?></h2>
                                     <div class="content-details">
-                <?php print render($content['field_story_extra_large_image']); ?>
+                                <?php print render($content['field_story_extra_large_image']); ?>
                                     </div>
                                 </div>
                                 <?php
@@ -214,12 +203,13 @@
                                         <?php print render($content['field_story_extra_large_image']); ?>
                                         <?php print render($content['field_story_large_image']); ?>
                                         <?php print render($content['field_story_medium_image']); ?>
-                                        <?php print render($content['field_story_small_image']); ?>
-                <?php print render($content['field_recipe_writer_image']); ?>
+                <?php print render($content['field_story_small_image']); ?>
+                                <?php print render($content['field_recipe_writer_image']); ?>
                                     </div>
                                 </div>
                             <?php endif;
-                        } ?>
+                        }
+                        ?>
 
                         <?php
                         $social_media = render($content['field_story_social_media_integ']);
@@ -238,8 +228,8 @@
 
                                 <div class="content-details">
                                     <?php print render($content['field_story_facebook_narrative']); ?>
-                                    <?php print render($content['field_story_facebook_image']); ?>
-            <?php print render($content['field_story_facebook_vdescripti']); ?>
+            <?php print render($content['field_story_facebook_image']); ?>
+                            <?php print render($content['field_story_facebook_vdescripti']); ?>
                             <?php print render($content['field_story_facebook_video']); ?>                              
                                 </div>
                             </div>
@@ -253,12 +243,12 @@
                             <?php print render($content['field_story_tweet']); ?>
                                 </div>
                             </div>
-            <?php $tweet_img = render($content['field_story_tweet_image']); ?>
+                                    <?php $tweet_img = render($content['field_story_tweet_image']); ?>
                                     <?php if (!empty($tweet_img)): ?>
                                 <div class="Twitter content-box">                          
                                     <div class="content-details">
-                                        <?php print render($content['field_story_tweet_image']); ?>
-                <?php print render($content['field_story_twitter_video_desc']); ?>
+                <?php print render($content['field_story_tweet_image']); ?>
+                                <?php print render($content['field_story_twitter_video_desc']); ?>
                                 <?php print render($content['field_story_twitter_video']); ?>
                                     </div>
                                 </div>
@@ -281,18 +271,18 @@
                                                     <div class="field-items"><?php print ('yes'); ?></div>
                                                 </div>
                                             </div>
-            <?php endif; ?>
+                            <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
-        <?php endif; ?>
+                                <?php endif; ?>
                         <div class="content-node-view">
                             <h2><?php print t('Recipe Section'); ?></h2>
                             <div class="content-details">
                                 <?php
                                 $termdata = "";
 
-                                 if ($node->field_primary_category['und'][0]['value'] != "" && isset($node->field_primary_category['und'])) {
+                                if ($node->field_primary_category['und'][0]['value'] != "" && isset($node->field_primary_category['und'])) {
                                     $termdata = itg_videogallery_get_term_name($node->field_primary_category['und'][0]['value']);
                                 }
                                 $section = render($content['field_story_category']);
@@ -310,9 +300,32 @@
                     ?>
 
                 </div>
-            <?php endif; ?>
 
-    <?php if ($layout): ?>
+                <?php
+                if (!isset($node->op) && in_array('Social Media', $user->roles)):
+                    $block = module_invoke('itg_social_media', 'block_view', 'social_media_form');
+                    $data_in = itg_social_media_check_node_exist_lock($node->nid);
+                    global $user;
+                    if ($data_in[0]->uid == $user->uid || empty($data_in)) {
+
+                        itg_social_media_enter_in_lock($node->nid);
+                        ?>
+                        <div class="promote-sidebar">
+            <?php print render($block['content']); ?>
+                        </div>
+                    <?php }
+                    else {
+                        ?>
+                        <div class="promote-sidebar">
+                            <div class="promote-lock">Someone  is already working on this</div>
+                        </div> 
+                    <?php }
+                    ?>
+        <?php endif; ?>
+
+<?php endif; ?>
+
+<?php if ($layout): ?>
             </div></div>
 <?php endif; ?>
 </div>

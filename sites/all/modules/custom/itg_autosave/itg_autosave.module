@@ -153,22 +153,24 @@ function itg_autosave_retrieve_uniqueid($nid, $c_type) {
  */
 function itg_autosave_node_insert($node) {  
   // Get Node identity field value.
-  $node_identity = $node->field_story_node_identity['und'][0]['value'];
-  // Fetch another node id with same node identity
-  $itg_query = db_select('itg_autosave_node_data', 'itg');
-  $itg_query->fields('itg', array('nid'))
-      ->condition('itg_identity', $node_identity)
-      ->condition('nid', $node->nid, '!=');
-  $itg_result = $itg_query->execute()->fetchObject();
-  // Delete node if found duplicate node identity node id.
-  if ($itg_result->nid > 0) {
-    node_delete($itg_result->nid);
-    // Update nid referenced to old node id
-    $itg_query = db_update('itg_autosave_node_data');
-    $itg_query->condition('nid', $itg_result->nid)
-      ->fields(array('nid' => $node->nid))
-      ->execute();
-  } 
+  if(!empty($node->field_story_node_identity['und'])){
+    $node_identity = $node->field_story_node_identity['und'][0]['value'];
+    // Fetch another node id with same node identity
+    $itg_query = db_select('itg_autosave_node_data', 'itg');
+    $itg_query->fields('itg', array('nid'))
+        ->condition('itg_identity', $node_identity)
+        ->condition('nid', $node->nid, '!=');
+    $itg_result = $itg_query->execute()->fetchObject();
+    // Delete node if found duplicate node identity node id.
+    if ($itg_result->nid > 0) {
+      node_delete($itg_result->nid);
+      // Update nid referenced to old node id
+      $itg_query = db_update('itg_autosave_node_data');
+      $itg_query->condition('nid', $itg_result->nid)
+        ->fields(array('nid' => $node->nid))
+        ->execute();
+    } 
+  }
 }
 
 /**

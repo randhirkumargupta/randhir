@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Associate Gallery Data feature.
+ */
+
+include_once 'associate_gallery_data.features.inc';

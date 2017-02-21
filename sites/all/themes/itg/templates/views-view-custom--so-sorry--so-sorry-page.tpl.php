@@ -1,45 +1,71 @@
 <?php
+
 /**
  * @file
  * Default simple view template to display a list of rows.
  *
  * @ingroup views_templates
  */
-
+$arg = arg(1);
+if (is_numeric($arg[1]) && isset($arg[1])) {
+  $nid = arg(1);
+}
 // Logic for default feature video on sosorry page if feature is not selected in widget.
-$node_data = array();
-$nid = get_recent_created_node_for_sosorry();
-$node_data = node_load($nid);
-$video_fid = itg_videogallery_get_videoid($node_data->field_upload_video['und'][0]['fid']);
-?>
-<?php foreach ($rows as $id => $row): ?>
-  <?php
-  if (isset($row['fid']) && !empty($row['fid'])) {
-    $video_fid = $row['fid'];
-  }
-  ?>
-  <?php
-  if (isset($row['title']) && !empty($row['title'])) {
-    $video_title = $row['title'];
-  }
-  else {
-    $video_title = $node_data->title;
-  }
-  ?>
-<?php endforeach; ?>
-
-<?php
-$arg = arg();
-$autoplay = 0;
-if (isset($arg[1])) {
-  $autoplay = 1;
+if(function_exists('get_feature_nid_in_sosorry')){
+  $nid = get_feature_nid_in_sosorry();
+}
+if (function_exists('get_recent_created_node_for_sosorry') && empty($nid)) {
+  $nid = get_recent_created_node_for_sosorry();
+}
+if (function_exists('itg_widget_dailymotion_get_videogallery_slider')) {
+    itg_widget_dailymotion_get_videogallery_slider($nid);
 }
 ?>
 
-<div class="sosory-video iframe-video">
-  <iframe frameborder="0"             
-          src="https://www.dailymotion.com/embed/video/<?php print $video_fid; ?>?autoplay=<?php print $autoplay; ?>&mute=1&ui-start-screen-info"
-          allowfullscreen>
-  </iframe>
-</div>
-<h1> <?php print $video_title; ?> </h1>
+<script>   
+   jQuery(document).ready(function() {
+        jQuery('.videogallery-slider').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            fade: false,
+            asNavFor: '.video-slider-images ul'
+        });               
+        jQuery('.video-slider-images ul').slick({
+            slidesToShow: 7,
+            slidesToScroll: 1,
+            asNavFor: '.videogallery-slider',
+            dots: false,
+            centerMode: false,
+            arrows: true,
+            variableWidth: true,
+            focusOnSelect: true,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 7,
+                        slidesToScroll: 1,
+                        arrows: false
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 4,
+                        arrows: false,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 3,
+                        arrows: false,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+    });   
+</script>

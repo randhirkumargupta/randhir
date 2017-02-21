@@ -61,8 +61,15 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
   $widget_name = $form_state['input']['widget_name'];
   // Get selected nodes ids
   $selected_node_data = $form_state['selection'];
-  $cat_id = ($_GET['category_tid'] == "All") ? 0 : $_GET['category_tid'];
-  $content_type = $_GET['type'];
+  $get_category_id = -1;
+  if(isset($_GET['category_tid']) && $_GET['category_tid'] == "All") {
+    $get_category_id = 0;
+  }
+  else if (is_numeric($_GET['category_tid'])) {
+    $get_category_id = $_GET['category_tid'];
+  }
+  $cat_id = $get_category_id;
+  $content_type = isset($_GET['type']) ? $_GET['type'] :  NULL;
   if ($current_display == 'big_story_format') {
     // All Code for big sotry.
     module_load_include('inc', 'itg_widget', 'includes/itg_widget_big_story');
@@ -94,7 +101,7 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
   elseif ($widget_name == "video_carousel_list_widget" && $current_display == "video_carousel_list") {
    itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
   }
-  elseif ($widget_name == "we_may_suggest_widget" && $current_display == "photo_carousel_list") {
+  elseif ($widget_name == "we_may_suggest_widget" && $current_display == "we_may_suggest_widget") {
    itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
   }
   elseif ($widget_name == "anchors_listing_widget" && $current_display == "anchors_listing_page") {
@@ -118,11 +125,11 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
     save_yearender_left_widget_data($form_state);
   }
-  elseif ($current_display == 'we_may_suggest_widget') {
-    module_load_include('inc', 'itg_widget', 'includes/we-may-suggest');
-    $we_may_suggest_content = $form_state;
-    save_we_may_suggest_widget_data($we_may_suggest_content);
-  }
+//  elseif ($current_display == 'we_may_suggest_widget') {
+//    module_load_include('inc', 'itg_widget', 'includes/we-may-suggest');
+//    $we_may_suggest_content = $form_state;
+//    save_we_may_suggest_widget_data($we_may_suggest_content);
+//  }
   elseif ($current_display == 'so_sorry_videos') {
     module_load_include('inc', 'itg_widget', 'includes/itg_widget_so_sorry');
     save_so_sorry_widget_data($form_state);

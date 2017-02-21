@@ -78,6 +78,9 @@ if ($theme != 'itgadmin') {
                 <?php if ($title): ?>
                     <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
                 <?php endif; ?>
+                 <div class="front-end-breadcrumb">
+                    <?php print render($page['front_end_breadcrumb']);?>
+                 </div>
                 <?php print render($title_suffix); ?>
                 <?php print $messages; ?>
                 <?php print render($tabs); ?>
@@ -167,7 +170,7 @@ if ($theme != 'itgadmin') {
                         <?php if (isset($widget_data['itg-block-3']['widget_name']) || isset($widget_data['itg-block-4']['widget_name']) || $theme == 'itgadmin') { ?>   
 
                             <div class="row itg-layout-300">
-                                <div class="col-md-6 mt-50">
+                                <div class="col-md-6 col-sm-6 mt-50">
                                     <div class="">
                                         <div class="itg-widget">
                                             <div class="droppable itg-layout-605 <?php print $gray_bg_layout; ?>">
@@ -191,7 +194,7 @@ if ($theme != 'itgadmin') {
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 mt-50">
+                                <div class="col-md-6 col-sm-6 mt-50">
                                     <div class="">
                                         <div class="itg-widget">
                                             <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -250,17 +253,23 @@ if ($theme != 'itgadmin') {
                     <div class="col-md-4 col-sm-12 col-xs-12 right-side">
 <?php //if (isset($widget_data['itg-block-6']['widget_name']) || isset($widget_data['itg-block-7']['widget_name']) || isset($widget_data['itg-block-8']['widget_name']) || isset($widget_data['itg-block-9']['widget_name']) || isset($widget_data['itg-block-10']['widget_name']) || $theme == 'itgadmin') { ?>
                             <div class="row">
-                                <div class="col-md-12">                    
+                                <div class="col-md-12 col-sm-6">                    
                                     <div class="itg-widget-parent">
                                         <div class="itg-widget">
                                             <div class="ad-widget">
-                                                <div class="sidebar-ad"><?php print ($itg_ad['200*200_right_bar_ad1']); ?></div>
+                                                <div class="sidebar-ad">
+                                                   <?php
+                                                      $block = block_load('itg_ads', ADS_RHS1);   
+                                                      $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                                      print render($render_array);
+                                                     ?>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>                    
                                 </div>
 
-                                <div class="col-md-12 itg-layout-195">
+                                <div class="col-md-12 col-sm-6 itg-layout-195">
                                     <div class="itg-widget">
                                         <div class="droppable <?php print $gray_bg_layout; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-6']['widget_name'] . $widget_data['itg-block-6']['widget_display_name']; ?>">
@@ -277,8 +286,9 @@ if ($theme != 'itgadmin') {
                                         </div>               
                                     </div>  
                                 </div>
-
-                                <div class="col-md-12 itg-layout-260">
+                            </div>
+                              <div class="row">
+                                <div class="col-md-12 col-sm-6 itg-layout-260">
                                     <div class="itg-widget">
                                         <div class="droppable <?php print $gray_bg_layout; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-7']['widget_name'] . $widget_data['itg-block-7']['widget_display_name']; ?>">
@@ -306,7 +316,7 @@ if ($theme != 'itgadmin') {
                                 </div>
 
 
-                                <div class="col-md-12 itg-layout-375">
+                                <div class="col-md-12 col-sm-6 itg-layout-375">
                                     <div class="itg-widget">
                                         <div class="droppable <?php print $gray_bg_layout; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-8']['widget_name'] . $widget_data['itg-block-8']['widget_display_name']; ?>">
@@ -325,47 +335,16 @@ if ($theme != 'itgadmin') {
     <?php } ?>  
 
                                                 <div class="data-holder" id="itg-block-8"><?php print views_embed_view('sport_ipl','top_performers',""); ?>
-<!--                                                 <table style="width: 100%; text-align: center; margin-top: 10px;">
-                                                        <tr>
-                                                            <td style="color:#d71920; padding-bottom: 10px;">Teams</td>
-                                                            <td style="color:#d71920; padding-bottom: 10px;">Points</td>
-                                                            <td style="color:#d71920; padding-bottom: 10px;">Net Run Rate</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="padding-bottom: 10px;">England</td>
-                                                            <td style="padding-bottom: 10px;">15</td>
-                                                            <td style="padding-bottom: 10px;">+0.223</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="padding-bottom: 10px;">England</td>
-                                                            <td style="padding-bottom: 10px;">15</td>
-                                                            <td style="padding-bottom: 10px;">+0.223</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="padding-bottom: 10px;">England</td>
-                                                            <td style="padding-bottom: 10px;">15</td>
-                                                            <td style="padding-bottom: 10px;">+0.223</td>
-                                                        </tr>  
-                                                        <tr>
-                                                            <td style="padding-bottom: 10px;">England</td>
-                                                            <td style="padding-bottom: 10px;">15</td>
-                                                            <td style="padding-bottom: 10px;">+0.223</td>
-                                                        </tr> 
-                                                        <tr>
-                                                            <td style="padding-bottom: 10px;">England</td>
-                                                            <td style="padding-bottom: 10px;">15</td>
-                                                            <td style="padding-bottom: 10px;">+0.223</td>
-                                                        </tr> 
-                                                    </table>-->
+
                                                 </div>
                                             </div>             
                                         </div>               
                                     </div>  
                                 </div>
-
-
-
-                                <div class="col-md-12 itg-layout-315">
+                              </div>
+                            
+                              <div class="row">  
+                                <div class="col-md-12 col-sm-6 itg-layout-315">
                                     <div class="itg-widget">
                                         <div class="droppable <?php print $gray_bg_layout; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-9']['widget_name'] . $widget_data['itg-block-9']['widget_display_name']; ?>">
@@ -389,7 +368,7 @@ if ($theme != 'itgadmin') {
                                     </div>  
                                 </div>
 
-                                <div class="col-md-12 itg-layout-340">
+                                <div class="col-md-12 col-sm-6 itg-layout-340">
                                     <div class="itg-widget">
                                         <div class="droppable <?php print $gray_bg_layout; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-10']['widget_name'] . $widget_data['itg-block-10']['widget_display_name']; ?>">

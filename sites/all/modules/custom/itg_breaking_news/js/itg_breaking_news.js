@@ -12,7 +12,14 @@
     attach: function (context, settings) {
       var uid = settings.itg_breaking_news.settings.uid;
       var type = $('#edit-field-type-und').val();
-
+      
+       $('#custom_add_another_item').click(function() {         
+         //edit-field-breaking-content-details
+         //ajax-new-content
+         $('input[name="field_breaking_content_details_add_more"]').mousedown();
+       })
+      
+      
       // type check for add form
       $("#edit-field-type-und").change(function () {
         

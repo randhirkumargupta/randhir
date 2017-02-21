@@ -97,9 +97,9 @@ function itg_task_allocation_views_pre_render(&$view) {
  * @param type $form_id  
  */
 function itg_task_allocation_form_task_idea_allocation_tracking_node_form_alter(&$form, &$form_state, $form_id) {
-  $uid = $form['field_task_team_member'][LANGUAGE_NONE][0]['target_id']['#entity']->field_task_team_member[LANGUAGE_NONE][0]['target_id'];
-  $user = user_load($uid);
-  if (isset($user->mail)) {
+  if (isset($form['field_task_team_member'][LANGUAGE_NONE][0]['target_id']['#entity']->field_task_team_member[LANGUAGE_NONE][0]['target_id'])) {
+    $uid = $form['field_task_team_member'][LANGUAGE_NONE][0]['target_id']['#entity']->field_task_team_member[LANGUAGE_NONE][0]['target_id'];
+    $user = user_load($uid);  
     $form['field_task_team_member'][LANGUAGE_NONE][0]['target_id']['#default_value'] = $user->mail . ' (' . $uid . ')';
   }
   $form['#after_build'][] = 'itg_task_allocation_form_after_build';
@@ -173,7 +173,7 @@ function itg_task_allocation_form_views_exposed_form_alter(&$form, &$form_state,
     $form['#info']['filter-created']['label'] = '';
     $form['created']['min'] = array(
       '#type' => 'date_popup',
-      '#title' => t('Calender From'),
+      '#title' => t('Created From'),
       '#date_format' => 'd/m/Y',
       '#date_year_range' => '-1:' . (date('Y')),
       '#datepicker_options' => array(

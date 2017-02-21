@@ -39,11 +39,11 @@ class ItgBylineMigration extends XMLMigration {
     );
     
     // This can also be an URL instead of a local file path.
-    $file_path = drupal_realpath('public://');
+    $file_path = 'sites/default/files';
     
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
     
-    $items_url = $xml_folder . 'byline.xml';
+    $items_url = $xml_folder . 'byline-master.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -53,8 +53,9 @@ class ItgBylineMigration extends XMLMigration {
     // of an ID will be /story/item/id.
     $item_ID_xpath = 'id';
 
-    $items_class = new MigrateItemsXML($items_url, $item_xpath, $item_ID_xpath);
-    $this->source = new MigrateSourceMultiItems($items_class, $fields);
+    //$items_class = new MigrateItemsXML($items_url, $item_xpath, $item_ID_xpath);
+    //$this->source = new MigrateSourceMultiItems($items_class, $fields);
+    $this->source = new MigrateSourceXML($items_url, $item_xpath, $item_ID_xpath, $fields);
 
     $this->destination = new MigrateDestinationNode('reporter');
 
@@ -94,12 +95,7 @@ class ItgBylineMigration extends XMLMigration {
     $this->addFieldMapping('changed', 'modified_datetime')->xpath('modified_datetime');    
     $this->addFieldMapping('status', 'published')->xpath('published');
     
-    $this->addFieldMapping('field_reporter_profile_type', 'profile_type')->xpath('profile_type');
-    $this->addFieldMapping('field_reporter_company', 'company')->xpath('company');
-    $this->addFieldMapping('field_reporter_department', 'department')->xpath('department'); 
-    
-    //$this->addFieldMapping('uid', 'created_by')->xpath('created_by');
-    
+    $this->addFieldMapping('field_reporter_profile_type', 'profile_type')->xpath('profile_type');   
     /*$this->addFieldMapping('field_story_expert_name', 'facebook_page')->xpath('facebook_page');
     $this->addFieldMapping('field_celebrity_pro_occupation', 'occupation')->xpath('occupation');
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
@@ -114,22 +110,33 @@ class ItgBylineMigration extends XMLMigration {
       $created_uid = (string) $row->xml->created_by;
       $orignal_crated_uid = get_itg_destination_id('migrate_map_itguser', $created_uid);
       $row->xml->created_by = $orignal_crated_uid;
-    }
-    // Manage department in byline
-    if (isset($row->xml->department) && !empty($row->xml->department)) {
-      $department_value = (string) $row->xml->department;
-      $department_option_value = itg_migrate_byline_department($department_value);
-      $row->xml->department = $department_option_value;
-    }
-    
+    }    
   }
   
   public function prepare($node, stdClass $row) {       
-    $node->field_celebrity_pro_occupation[LANGUAGE_NONE][0]['tid'] = 403; // fix for reporter
+    $node->field_celebrity_pro_occupation[LANGUAGE_NONE][0]['tid'] = 285750; // fix for reporter
     $node->uid = $row->xml->created_by;
+    // Manage department in byline
+    if (isset($row->xml->company) && !empty($row->xml->company)) {
+      $company_value = (string) $row->xml->company;
+      $vid = itg_db_migrate_vocab_id('byline_company'); // Company byline vocab
+      $company_option_value = itg_db_migrate_parent_term($company_value, $vid);
+        if(!empty($company_option_value)){
+          $node->field_byline_company[LANGUAGE_NONE][0]['tid'] = $company_option_value;
+        }
+    }
+    if (isset($row->xml->department) && !empty($row->xml->department)) {
+      $department_value = (string) $row->xml->department;
+      $vid = itg_db_migrate_vocab_id('byline_department'); // Department byline vacab
+      $department_option_value = itg_db_migrate_parent_term($department_value, $vid);
+      $row->depart_value = $department_option_value;
+        if(!empty($department_option_value)){
+          $node->field_byline_department[LANGUAGE_NONE][0]['tid'] = $department_option_value;
+        }
+    }
   }
   
-  public function complete($entity, $row) {
+  public function complete($entity, $row) {    
     print (string) $row->xml->id.' - ';
    //code for order set
    if (!empty($row->xml->ordering)) {    
@@ -138,39 +145,3 @@ class ItgBylineMigration extends XMLMigration {
    
   }
 }
-
- function itg_migrate_byline_department($key){
-   $department = array(
-     'Mail Today Editorial' => 'mail_today_editorial',
-     'Auto Shows - Magazine' => 'auto_shows_magazine',
-     'Business Today Editorial' => 'business_today_editorial',
-     'Consumer and Personal Finance' => 'consumer_and_personal_finance',
-     'Corporate' => 'Corporate',
-     'Cosmopolitan' => 'Cosmopolitan',
-     'Editorial AT' => 'Editorial_AT',
-     'Editorial DAT' => 'Editorial_DAT',
-     'Editorial HLT' => 'Editorial_HLT',
-     'Editorial India Today TV' => 'editorial_india_today_TV',
-     'Editorial TVTN' => 'Editorial_TVTN',
-     'Good Housekeeping' => 'good_housekeeping',
-     "Harper's Bazaar" => 'harper_s_bazaar',
-     "Harper's Bazaar Bride" => 'harper_s_bazaar_bride',
-     'Impact' => 'Impact',
-     'INDIA TODAY - SUPPLEMENTS' => 'INDIA_TODAY_SUPPLEMENTS',
-     'ITE Editorial' => 'ITE_editorial',
-     'ITGD - Editorial' => 'ITGD_editorial',
-     'ITH Editorial' => 'ITH_editorial',
-     'Mail Today S&D' => 'mail_today_S&D',
-     "Reader's Digest Editorial" => 'reader_s_digest_editorial',
-     'Robb Report Editorial' => 'robb_report_editorial',
-     'SIMPLY' => 'simply',
-     'Social Media & Content Services' => 'social_media_content_services',
-     'Spice' => 'spice',
-     'Technology-Development' => 'technology_development',
-     'Woman' => 'Woman',
-     "Men's Health" => 'men_s_health',
-     
-     
-   );
-   return $department[$key];
- }

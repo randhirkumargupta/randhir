@@ -628,7 +628,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'description' => ' Please select cast name',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'entityreference',
         'settings' => array(
           'link' => FALSE,
@@ -674,7 +674,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'description' => 'Director',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -717,7 +717,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'description' => 'Movie Plot',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -921,7 +921,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_mega_review_youtube_url',
     'label' => 'Youtube url',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -986,10 +986,10 @@ function mega_review_critic_features_field_default_field_instances() {
   $field_instances['node-mega_review_critic-field_story_extra_large_image'] = array(
     'bundle' => 'mega_review_critic',
     'deleted' => 0,
-    'description' => 'Extra large image',
+    'description' => 'Image Size (647 x 363)',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
@@ -1063,10 +1063,10 @@ function mega_review_critic_features_field_default_field_instances() {
   $field_instances['node-mega_review_critic-field_story_extra_small_image'] = array(
     'bundle' => 'mega_review_critic',
     'deleted' => 0,
-    'description' => 'Extra small image',
+    'description' => 'Image Size (88 x 66)',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
@@ -1139,10 +1139,10 @@ function mega_review_critic_features_field_default_field_instances() {
   $field_instances['node-mega_review_critic-field_story_large_image'] = array(
     'bundle' => 'mega_review_critic',
     'deleted' => 0,
-    'description' => 'Large image',
+    'description' => 'Image Size (483 x 271)',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
@@ -1216,10 +1216,10 @@ function mega_review_critic_features_field_default_field_instances() {
   $field_instances['node-mega_review_critic-field_story_medium_image'] = array(
     'bundle' => 'mega_review_critic',
     'deleted' => 0,
-    'description' => 'Medium image',
+    'description' => 'Image Size (370 x 208)',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
@@ -1378,7 +1378,7 @@ function mega_review_critic_features_field_default_field_instances() {
   $field_instances['node-mega_review_critic-field_story_small_image'] = array(
     'bundle' => 'mega_review_critic',
     'deleted' => 0,
-    'description' => 'Small image',
+    'description' => 'Image Size (170 x 127)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1465,6 +1465,11 @@ function mega_review_critic_features_field_default_field_instances() {
   t('Extra small image');
   t('Facebook profile');
   t('HeadLine');
+  t('Image Size (170 x 127)');
+  t('Image Size (370 x 208)');
+  t('Image Size (483 x 271)');
+  t('Image Size (647 x 363)');
+  t('Image Size (88 x 66)');
   t('Large image');
   t('Medium image');
   t('Mega Review Type');

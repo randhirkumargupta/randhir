@@ -169,7 +169,7 @@ function ads_features_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: End Date */
+  /* Field: Content: Expiry Date */
   $handler->display->display_options['fields']['field_ads_end_date']['id'] = 'field_ads_end_date';
   $handler->display->display_options['fields']['field_ads_end_date']['table'] = 'field_data_field_ads_end_date';
   $handler->display->display_options['fields']['field_ads_end_date']['field'] = 'field_ads_end_date';
@@ -181,6 +181,10 @@ function ads_features_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
+  /* Field: Custom: Status */
+  $handler->display->display_options['fields']['custom_handler']['id'] = 'custom_handler';
+  $handler->display->display_options['fields']['custom_handler']['table'] = 'custom_ads_expiry_status';
+  $handler->display->display_options['fields']['custom_handler']['field'] = 'custom_handler';
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
@@ -207,11 +211,11 @@ function ads_features_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Content: Updated date */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'node';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -254,11 +258,13 @@ function ads_features_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'ads_management' => 'ads_management',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
   $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Placeholder Title';
@@ -286,18 +292,14 @@ function ads_features_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Content: Template Selection (field_ads_template_selection) */
+  /* Filter criterion: Content: Select Section (field_ads_template_selection) */
   $handler->display->display_options['filters']['field_ads_template_selection_value']['id'] = 'field_ads_template_selection_value';
   $handler->display->display_options['filters']['field_ads_template_selection_value']['table'] = 'field_data_field_ads_template_selection';
   $handler->display->display_options['filters']['field_ads_template_selection_value']['field'] = 'field_ads_template_selection_value';
-  $handler->display->display_options['filters']['field_ads_template_selection_value']['value'] = array(
-    'Section' => 'Section',
-    'Home' => 'Home',
-    'Rest' => 'Rest',
-  );
+  $handler->display->display_options['filters']['field_ads_template_selection_value']['group'] = 1;
   $handler->display->display_options['filters']['field_ads_template_selection_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_ads_template_selection_value']['expose']['operator_id'] = 'field_ads_template_selection_value_op';
-  $handler->display->display_options['filters']['field_ads_template_selection_value']['expose']['label'] = 'Template Selection ';
+  $handler->display->display_options['filters']['field_ads_template_selection_value']['expose']['label'] = 'Template Selection';
   $handler->display->display_options['filters']['field_ads_template_selection_value']['expose']['operator'] = 'field_ads_template_selection_value_op';
   $handler->display->display_options['filters']['field_ads_template_selection_value']['expose']['identifier'] = 'field_ads_template_selection_value';
   $handler->display->display_options['filters']['field_ads_template_selection_value']['expose']['remember_roles'] = array(
@@ -325,12 +327,13 @@ function ads_features_views_default_views() {
     22 => 0,
     24 => 0,
     25 => 0,
+    26 => 0,
   );
-  $handler->display->display_options['filters']['field_ads_template_selection_value']['expose']['reduce'] = TRUE;
-  /* Filter criterion: Content: End Date (field_ads_end_date) */
+  /* Filter criterion: Content: Expiry Date (field_ads_end_date) */
   $handler->display->display_options['filters']['field_ads_end_date_value']['id'] = 'field_ads_end_date_value';
   $handler->display->display_options['filters']['field_ads_end_date_value']['table'] = 'field_data_field_ads_end_date';
   $handler->display->display_options['filters']['field_ads_end_date_value']['field'] = 'field_ads_end_date_value';
+  $handler->display->display_options['filters']['field_ads_end_date_value']['group'] = 1;
   $handler->display->display_options['filters']['field_ads_end_date_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_ads_end_date_value']['expose']['operator_id'] = 'field_ads_end_date_value_op';
   $handler->display->display_options['filters']['field_ads_end_date_value']['expose']['label'] = 'Expiry date';

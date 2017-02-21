@@ -12,60 +12,76 @@
  * @return array
  */
 function itg_widget_schema() {
-    $schema = array();
-    $schema['itg_widget_order'] = array(
-        'description' => 'Table to save custom order of nodes',
-        'fields' => array(
-            'nid' => array(
-                'description' => t('node id'),
-                'type' => 'int',
-                'not null' => FALSE,
-            ),
-            'cat_id' => array(
-                'description' => t('catgegory tid'),
-                'type' => 'int',
-                'not null' => FALSE,
-            ),
-            'content_type' => array(
-                'description' => t('content type'),
-                'type' => 'varchar',
-                'length' => '100',
-                'not null' => FALSE,
-            ),
-            'widget' => array(
-                'description' => t('widget name'),
-                'type' => 'varchar',
-                'length' => '100',
-                'not null' => TRUE,
-            ),
-            'weight' => array(
-                'description' => t('weight'),
-                'type' => 'int',
-                'not null' => FALSE,
-                'default' => 0,
-            ),
-            'extra' => array(
-                'description' => t('Extra content if required'),
-                'type' => 'varchar',
-                'length' => '255',
-                'not null' => FALSE,
-            ),
-        ),
-    );
-
-    return $schema;
+  $schema = array();
+  $schema['itg_widget_order'] = array(
+    'description' => 'Table to save custom order of nodes',
+    'fields' => array(
+      'nid' => array(
+        'description' => 'node id',
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+      'cat_id' => array(
+        'description' => 'catgegory tid',
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+      'content_type' => array(
+        'description' => 'content type',
+        'type' => 'varchar',
+        'length' => '100',
+        'not null' => FALSE,
+      ),
+      'widget' => array(
+        'description' => 'widget name',
+        'type' => 'varchar',
+        'length' => '100',
+        'not null' => TRUE,
+      ),
+      'weight' => array(
+        'description' => 'weight',
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => 0,
+      ),
+      'extra' => array(
+        'description' => 'Extra content if required',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'constituency' => array(
+        'description' => 'constituency',
+        'type' => 'varchar',
+        'length' => '200',
+        'not null' => FALSE,
+      ),
+      'state' => array(
+        'description' => 'state value',
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+      'id' => array(
+        'description' => 'table id',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  return $schema;
 }
 
 /**
  * Implements hook_uninstall().
  */
 function itg_widget_uninstall() {
-    drupal_uninstall_schema('itg_widget_order');
+  drupal_uninstall_schema('itg_widget_order');
 }
 
 /**
  * Clear menu cache to match new configuration place
  */
 function itg_widget_update_7001() {
-    cache_clear_all(NULL, 'cache_menu');
+  cache_clear_all(NULL, 'cache_menu');
 }

@@ -23,7 +23,7 @@ function itg_budget_predictor_cheaper_dearer_data() {
     $fid = $record['file_id'];
     $file = file_load($fid);
     $uri = $file->uri;
-    $links = $base_url . '/budget-predictor/' .$section_id . $_SERVER['REQUEST_URI'];
+    $links = $base_url . $_SERVER['REQUEST_URI'];
     $variables = array(
       'path' => $uri, 
       'alt' => $budget_title,
@@ -32,6 +32,6 @@ function itg_budget_predictor_cheaper_dearer_data() {
       'height' => '100%',
       'attributes' => array('class' => 'budget-predictor-img', 'id' => 'budget-predictor-img'),
       );
-    return $html = l(theme('image', $variables), $links, array('html' => TRUE, 'attributes' => array('target' => '_blank'))); 
+    return $html = l(theme('image', $variables), $links, array('query' => array('type' => 'budget-predictor'), 'html' => TRUE, 'attributes' => array('target' => '_blank'))); 
   }
 }

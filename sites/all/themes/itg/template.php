@@ -33,6 +33,7 @@ function itg_theme() {
  * {@inheritdoc}
  */
 function itg_preprocess_node(&$variables) {
+  $node = $variables['node'];
   unset($variables['content']['links']['node']['#links']['node-readmore']);
   // Inclue pathauto module
   module_load_all_includes('inc', 'pathauto', 'pathauto');
@@ -46,7 +47,7 @@ function itg_preprocess_node(&$variables) {
     // Add new template variation.
     $variables['theme_hook_suggestions'][] = 'node__' . $title;
     $variables['static_page_menu'] = itg_block_render('menu', 'menu-about-us-page-menu');
-    if (function_exists(global_comment_last_record)) {
+    if (function_exists('global_comment_last_record')) {
       $variables['global_comment_last_record'] = global_comment_last_record();
     }
   }
@@ -55,7 +56,6 @@ function itg_preprocess_node(&$variables) {
     unset($variables['submitted']);
     //$variables['submitted'] = t('Submitted by !username on !datetime', array('!username' => $variables['name'], '!datetime' => $variables['date']));
   }
-  
 }
 
 /**
@@ -65,7 +65,7 @@ function itg_preprocess_node(&$variables) {
  * @return array
  */
 function itg_block_render($module, $block_id) {
-  $block = block_load($module, $block_id); 
+  $block = block_load($module, $block_id);
   $block_content = _block_render_blocks(array($block));
   unset($block_content['menu_menu-about-us-page-menu']->subject);
   $build = _block_get_renderable_array($block_content);
@@ -80,7 +80,7 @@ function itg_block_render($module, $block_id) {
 function itg_preprocess_comment(&$variables) {
   $comment = $variables['elements']['#comment'];
   $node = $variables['elements']['#node'];
-  if ($node->type == 'story' || $node->type == 'blog') {
+  if ($node->type == 'story' || $node->type == 'blog' || $node->type == 'photogallery' || $node->type == 'videogallery') {
     $variables['created'] = format_date($comment->created, 'custom', 'D, d/m/Y h:i');
     $variables['changed'] = format_date($comment->changed, 'custom', 'D, d/m/Y h:i');
     if ($comment->uid != 0) {
@@ -120,27 +120,13 @@ function itg_preprocess_page(&$variables) {
   global $base_url;
   $base_root;
   $arg = arg();
-  if ($arg[0] == 'taxonomy' && $arg[1] == 'term') {
-    $term = taxonomy_term_load($arg[2]);
-    if ($term->vocabulary_machine_name = 'category_management') {
-      // remove the extra vocavolary information on page buttom.
-      unset($variables['page']['content']['system_main']);
-    }
-  }
 
   // add condition to hide header and footer for signup, forgot-password page
   if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
-  
-  if ((!empty($arg[2]) && $arg[2] == 'ugc') 
-          ||$arg[0] == 'signup' 
-          || $arg[0] == 'forgot-password' 
-          || $arg[0] == 'sso-user' 
-          || $arg[0] == 'sso'
-          || $arg[0] == 'password-success' 
-          || $arg[0] == 'complete-page'          
-          || $arg[0] == 'associate-photo-video-content') {
+
+  if ((!empty($arg[2]) && $arg[2] == 'ugc') || $arg[0] == 'signup' || $arg[0] == 'forgot-password' || $arg[0] == 'sso-user' || $arg[0] == 'sso' || $arg[0] == 'password-success' || $arg[0] == 'complete-page' || $arg[0] == 'associate-photo-video-content') {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
 
@@ -161,12 +147,13 @@ function itg_preprocess_page(&$variables) {
       $variables['theme_hook_suggestions'][] = 'page__event_domain';
     }
   }
-  
+
 
   // Call Event Parent TPL
   if (!empty($variables['node']->type) && $variables['node']->type == 'event_backend' || $arg[0] == 'event') {
     $variables['theme_hook_suggestions'][] = 'page__event_domain';
   }
+
 }
 
 /**
@@ -193,4 +180,86 @@ function itg_breadcrumb($variables) {
     }
   }
   return $crumbs;
+}
+
+
+/**
+ * {@inheritdoc}
+ */
+
+function itg_preprocess_html(&$vars) {
+  global $base_url, $user;
+  if ($base_url == BACKEND_URL && !empty($user->uid)) {
+    $vars['classes_array'][] = 'pointer-event-none';
+  }
+  // Code started for adding header , body start , body close for ads module
+  $ads_code = get_header_body_start_end_code();
+  foreach ($ads_code as $ads_key => $ads_chunk) {
+    $code = implode(' ', $ads_chunk);
+    $script_code = array(
+      '#type' => 'markup',
+      '#markup' => $code,
+    );
+    drupal_add_html_head($script_code, $ads_key);
+  }
+  
+  // Code ends for adding header, body start, body close for ads module
+}
+
+/**
+ * page head alter for update the meta keywords
+ */
+function itg_html_head_alter(&$head_elements) {
+    global $base_url;
+    
+    if (!empty(arg(1)) && is_numeric(arg(1))) {
+      $arg_data = node_load(arg(1));
+      if ($arg_data->type == 'videogallery') {
+        if(is_array($arg_data->field_video_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_video_configurations[LANGUAGE_NONE])){
+            if($arg_data->field_video_configurations[LANGUAGE_NONE][0]['value'] == 'google_standout'){
+                $standout_path = $base_url .'/'. $arg_data->path['alias'];
+                $head_elements['google_standout'] = array(
+                  '#type' => 'html_tag',
+                  '#tag' => 'link',
+                  '#attributes' => array('rel'=>'standout', 'href' => $standout_path),
+                );
+            }
+        }
+      } else if($arg_data->type == 'photogallery') {
+        if(is_array($arg_data->field_photogallery_configuration[LANGUAGE_NONE]) && !empty($arg_data->field_photogallery_configuration[LANGUAGE_NONE])){
+            if($arg_data->field_photogallery_configuration[LANGUAGE_NONE][0]['value'] == 'google_standout'){
+                $standout_path = $base_url .'/'. $arg_data->path['alias'];
+                $head_elements['google_standout'] = array(
+                  '#type' => 'html_tag',
+                  '#tag' => 'link',
+                  '#attributes' => array('rel'=>'standout', 'href' => $standout_path),
+                );
+            }
+        }
+      } else if($arg_data->type == 'podcast') {
+        if(is_array($arg_data->field_podcast_configuration[LANGUAGE_NONE]) && !empty($arg_data->field_podcast_configuration[LANGUAGE_NONE])){
+            if($arg_data->field_podcast_configuration[LANGUAGE_NONE][0]['value'] == 'google_standout'){
+                $standout_path = $base_url .'/'. $arg_data->path['alias'];
+                $head_elements['google_standout'] = array(
+                  '#type' => 'html_tag',
+                  '#tag' => 'link',
+                  '#attributes' => array('rel'=>'standout', 'href' => $standout_path),
+                );
+            }
+        }
+      } else if($arg_data->type == 'story') {
+        if(is_array($arg_data->field_story_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_story_configurations[LANGUAGE_NONE])){
+            if($arg_data->field_story_configurations[LANGUAGE_NONE][0]['value'] == 'google_standout'){
+                $standout_path = $base_url .'/'. $arg_data->path['alias'];
+                $head_elements['google_standout'] = array(
+                  '#type' => 'html_tag',
+                  '#tag' => 'link',
+                  '#attributes' => array('rel'=>'standout', 'href' => $standout_path),
+                );
+            }
+        }
+      }
+    }
+     
+    $head_elements['metatag_keywords_0']['#name'] = 'news_keyword';
 }

@@ -2,7 +2,7 @@
 <?php if (!empty($pre_object)) print render($pre_object) ?>
 
 <div class='<?php print $classes ?> clearfix' <?php print ($attributes) ?>>
-    <?php if ($layout && (!empty($submitted) || !empty($links))): ?>
+    <?php if (!empty($layout) && (!empty($submitted) || !empty($links))): ?>
       <div class='column-side'><div class='column-wrapper'>
             <?php endif; ?>
 
@@ -16,11 +16,11 @@
               </div>
             <?php endif; ?>
 
-            <?php if ($layout && (!empty($submitted) || !empty($links))): ?>
+            <?php if (!empty($layout) && (!empty($submitted) || !empty($links))): ?>
           </div></div>
     <?php endif; ?>
 
-    <?php if ($layout): ?>
+    <?php if (!empty($layout)): ?>
       <div class='column-main'><div class='column-wrapper'>
             <?php endif; ?>
 
@@ -29,7 +29,7 @@
             <?php if (!empty($title_suffix)) print render($title_suffix); ?>
 
             <?php if (!empty($content)): ?>
-              <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
+              <div class='<?php print !empty($hook) ? $hook : ''; ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
 
                   <!--      for preview-->
                   <?php if ($view_mode == 'full') { ?>
@@ -48,12 +48,14 @@
 
                     <?php print render($content['field_mega_review_video']); ?>
                     <?php
+                    $mega_output = '';
                     if (isset($node->op) && $node->op == 'Preview') {
                       $mega_output.= '';
                       foreach ($node->field_mega_review_review['und'] as $mega_item):
                         $byline_id = $mega_item['field_story_reporter']['und'][0]['target_id'];
                         $reporter_node = node_load($byline_id);
                         $mega_output.= '<div class="buzz-section">';
+                        $mega_output.= '<div class="field"><div class="field-label">' . t('Review type:') . '</div><div class="field-items">' . $mega_item['field_story_review_type'][LANGUAGE_NONE][0]['value'] . '</div></div>';
                         $mega_output.= '<div class="field"><div class="field-label">' . t('Headline:') . '</div><div class="field-items">' . $mega_item['field_buzz_headline'][LANGUAGE_NONE][0]['value'] . '</div></div>';
                         $mega_output.= '<div class="field"><div class="field-label">' . t('Reviewer:') . '</div><div class="field-items">' . $reporter_node->title . '</div></div>';
                         $mega_output.= '<div class="field"><div class="field-label">' . t('Review URL Link:') . '</div><div class="field-items">' . $mega_item['field_mega_review_url_link'][LANGUAGE_NONE][0]['value'] . '</div></div>';
@@ -79,10 +81,11 @@
                       $mega_output.= '';
                       foreach ($node->field_mega_review_review['und'] as $mega_item):
                         $ans_detail = entity_load('field_collection_item', array($mega_item['value']));
-
+                        
                         $byline_id = $ans_detail[$mega_item['value']]->field_story_reporter['und'][0]['target_id'];
                         $reporter_node = node_load($byline_id);
                         $mega_output.= '<div class="buzz-section">';
+                        $mega_output.= '<div class="field"><div class="field-label">' . t('Review type:') . '</div><div class="field-items">' . $ans_detail[$mega_item['value']]->field_story_review_type[LANGUAGE_NONE][0]['value'] . '</div></div>';
                         $mega_output.= '<div class="field"><div class="field-label">' . t('Headline:') . '</div><div class="field-items">' . $ans_detail[$mega_item['value']]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</div></div>';
                         $mega_output.= '<div class="field"><div class="field-label">' . t('Reviewer:') . '</div><div class="field-items">' . $reporter_node->title . '</div></div>';
                         $mega_output.= '<div class="field"><div class="field-label">' . t('Review URL Link:') . '</div><div class="field-items">' . $ans_detail[$mega_item['value']]->field_mega_review_url_link[LANGUAGE_NONE][0]['value'] . '</div></div>';
@@ -93,7 +96,7 @@
                       endforeach;
                     }
 
-                    if (!empty($ans_detail[$mega_item['value']]->field_buzz_headline['und'][0]['value'])) {
+                    if (!empty($mega_output)) {
                       ?>
                       <div class="Templates-buzz">
                           <h2><?php print t('Movie Review'); ?></h2>
@@ -110,7 +113,7 @@
               </div>
 <?php endif; ?>
 
-            <?php if ($layout): ?>
+            <?php if (!empty($layout)): ?>
           </div></div>
             <?php endif; ?>
 </div>

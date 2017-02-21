@@ -291,7 +291,7 @@ function get_layout_details($section_name, $template_name, $status) {
   }
   
   $itg_result = $itg_query->execute()->fetchAll();
-  
+  $data = array();
   foreach ($itg_result as $itg_val) {
     $filter_url = $itg_val->filter_url;
     // for widget display name
@@ -365,6 +365,7 @@ function display_section_widgets_list($section_name, $template_name, $widget_typ
   $itg_query->condition('layout_tpl.template_section_name', $section_name);
   $itg_query->condition('layout_tpl.template_name', $template_name);
   $itg_query->condition('layout_tpl.widget_type', $widget_type);
+  $itg_query->orderBy('id', 'DESC');
   $itg_result = $itg_query->execute()->fetchAll();
   
   $content = category_widget_list($itg_result, $widget_type);
@@ -435,7 +436,7 @@ function get_section_widgets_id($cid, $section, $widget_type) {
  * @return array
  */
 function get_widgets_poll_list() {
-  
+  $widget_type = '';
   $date = date('Y-m-d H:i:s');
   //echo $date;
   $query = db_select('node', 'n');
@@ -610,7 +611,7 @@ function get_html_custom_widget($nid) {
  * @return theme
  */
 function get_highlights_widget($nid) {  
-    global $theme;
+    global $theme , $base_url;
     $highlights_node = node_load($nid);
     
     $output = '';
@@ -619,20 +620,98 @@ function get_highlights_widget($nid) {
     foreach ($highlights_node->field_highlights[LANGUAGE_NONE] as $highlights_arr) {
       $highlights_detail = entity_load('field_collection_item', array($highlights_arr['value']));
       
+      
       if(!empty($highlights_detail[$highlights_arr['value']]->field_highlights_url[LANGUAGE_NONE][0]['value'])) {
         $highlight_title = l($highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'], $highlights_detail[$highlights_arr['value']]->field_highlights_url[LANGUAGE_NONE][0]['value'], array('attributes' => array('target' => '_blank')));
-      } else {
+      }
+      
+      else {
           $highlight_title = $highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'];
       }
       
       $like_dislike = '';
-      if (function_exists('itg_event_backend_highlights_like_dislike')) {
-        if ($theme != 'itgadmin') {
-          $like_dislike = itg_event_backend_highlights_like_dislike($highlights_arr['value']);
+      
+      $associate_emoji = $highlights_detail[$highlights_arr['value']]->field_emoji_condition['und'][0]['value'];
+      
+      //If none is deifne then not show any emoji or thumb.
+      
+      if($associate_emoji != "none") {
+        
+        //Show only like displike.
+        
+        if($associate_emoji == 0) {
+          if (function_exists('itg_event_backend_highlights_like_dislike')) {
+            if ($theme != 'itgadmin') {
+              $like_dislike = itg_event_backend_highlights_like_dislike($highlights_arr['value']);
+            }
+          }
+        }
+
+
+        $emoji_reaction = '<span class="emoji-container">';
+        $anchor_pointer_class = "def-cur-pointer";
+        // Handel No case start.
+        // IF associate emoji is No then dont show otherwise display on front end.
+
+        if($associate_emoji == 1) {
+          // Possible cookie for same line emoji on hightlight.
+          $cookie_array = array(
+            'hightlights_emoji_'.$highlights_arr['value'].'-field_field_emoji_highlights_1',
+            'hightlights_emoji_'.$highlights_arr['value'].'-field_field_emoji_highlights_2',
+            'hightlights_emoji_'.$highlights_arr['value'].'-field_field_emoji_highlights_3',
+          );
+          // Make emoji disable if cookie cookie is Set.
+          if(isset($_COOKIE[$cookie_array[0]]) || isset($_COOKIE[$cookie_array[1]]) || isset($_COOKIE[$cookie_array[2]])) {
+            $anchor_pointer_class = "def-cur-none-pointer";
+          }
+          // First emoji logic.
+          if (!empty($highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_1[LANGUAGE_NONE][0]['value']) && $highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_1[LANGUAGE_NONE][0]['value'] == 1) {
+            $emoji1_src = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/highlights_icons/Good.png";
+            $emoji1_title = $highlights_detail[$highlights_arr['value']]->field_field_emoji1_title[LANGUAGE_NONE][0]['value'];
+            $field_class = $highlights_arr['value'].'-field_field_emoji_highlights_1';
+            // Count user click from mongodb.
+            if(function_exists('itg_common_mongo_activity_count')) {
+              $emoji_count = itg_common_mongo_activity_count($field_class, 'front_user_activity_highlight');
+            }
+            $emoji_image = "<img src='".$emoji1_src."' title= '".$emoji1_title."' alt='' /> ";
+            $count_message = ' <span class="'.$field_class.'">('.$emoji_count.')</span> ';
+            // Prepare reaction link.
+            $emoji_reaction .= l($emoji_image , 'javascript:void(0)' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $field_class , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "data-click" => "nice" , "data-nodeid" => $highlights_arr['value'] , "class" => array($anchor_pointer_class ,  "user-activity-highlight"))));
+            $emoji_reaction .= $count_message;
+          }
+
+          if (!empty($highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_2[LANGUAGE_NONE][0]['value']) && $highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_2[LANGUAGE_NONE][0]['value'] == 1) {
+            $emoji2_src = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/highlights_icons/Bad.png";
+            $emoji2_title = $highlights_detail[$highlights_arr['value']]->field_field_emoji2_title[LANGUAGE_NONE][0]['value'];
+            $field_class = $highlights_arr['value'].'-field_field_emoji_highlights_2';
+            if(function_exists('itg_common_mongo_activity_count')) {
+              $emoji_count = itg_common_mongo_activity_count($field_class, 'front_user_activity_highlight');
+            }
+            $emoji_image = "<img src='".$emoji2_src."' title= '".$emoji2_title."' alt='' /> ";
+            $emoji_reaction .= l($emoji_image , 'javascript:void(0)' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $field_class , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "data-click" => "no", "data-nodeid" => $highlights_arr['value'], "class" => array($anchor_pointer_class ,  "user-activity-highlight"))));
+            $count_message = ' <span class="'.$field_class.'">('.$emoji_count.')</span> ';
+            $emoji_reaction .= $count_message;
+          }
+
+          if (!empty($highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_3[LANGUAGE_NONE][0]['value']) && $highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_3[LANGUAGE_NONE][0]['value'] == 1) {
+            $emoji3_src = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/highlights_icons/WGMF.png";
+            $emoji3_title = $highlights_detail[$highlights_arr['value']]->field_field_emoji3_title[LANGUAGE_NONE][0]['value'];
+            $field_class = $highlights_arr['value'].'-field_field_emoji_highlights_3';
+            if(function_exists('itg_common_mongo_activity_count')) {
+              $emoji_count = itg_common_mongo_activity_count($field_class, 'front_user_activity_highlight');
+            }
+            $emoji_image = "<img src='".$emoji3_src."' title= '".$emoji3_title."' alt='' />";
+            $emoji_reaction .= l($emoji_image , 'javascript:void(0)' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $field_class , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji", "data-click" => "whatever" ,"data-nodeid" => $highlights_arr['value'], "class" => array($anchor_pointer_class ,  "user-activity-highlight"))));
+            $count_message = ' <span class="'.$field_class.'">('.$emoji_count.')</span>';
+            $emoji_reaction .= $count_message;
+          }
+          // Add span for for vote messsage.
+          $emoji_reaction .= '</span><p class="hightlights_emoji_msg_'.$highlights_arr['value'].'"></p>';
         }
       }
-      
-      $text .= '<div class="h-list">' . $highlight_title . $like_dislike . '</div>';      
+      // Handel No case END.
+      // Prepare link dislike and emoji.
+      $text .= '<div class="h-list">' . $highlight_title . $like_dislike . $emoji_reaction . '</div>';      
 
     }
 

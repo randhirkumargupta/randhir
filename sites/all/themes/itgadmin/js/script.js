@@ -252,6 +252,12 @@ jQuery(document).ready(function() {
             el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
             el.parents('.item-list').removeClass('hide').prev().children('.cmd-heading').removeClass('active');
         });
+        $('.itg-sub-sub-sub-category').click(function(e) {
+            $(this).addClass('active').siblings().removeClass('active');
+            var el = $('.view-content > div > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .term-wrapper > .cmd-heading');
+            el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
+            el.parents('.item-list').removeClass('hide').prev().children('.cmd-heading').removeClass('active');
+        });
         setTimeout(function() {
             $('.page-category-manager-listing').find('.itg-section').trigger('click');
         }, 10);
@@ -381,7 +387,10 @@ jQuery(document).ready(function() {
         if (!$('.img-crt').parent().hasClass('.generate-image')) {
             $('.img-crt, .pre-desc').wrapAll('<div class="generate-image"></div>');
         }
-        $('.form-field-name-field-credit-to-all, .form-field-name-field-credit-name').wrapAll('<div class="credit-to-all"></div>');
+        var get_parent_for_credit = jQuery('.form-field-name-field-credit-to-all, .form-field-name-field-credit-name').parent().attr('class');
+        if(get_parent_for_credit != "credit-to-all"){
+          jQuery('.form-field-name-field-credit-to-all, .form-field-name-field-credit-name').wrapAll('<div class="credit-to-all"></div>');
+        }
         
         
           $('.image-widget').each(function() {
@@ -516,6 +525,9 @@ jQuery(document).ready(function() {
         });
         $('body').on('click', '.itg-close-popup', function() {
             $(this).closest('.itg-popup').hide();
+        });
+          $('body').on('click', '.itg-close-popup_new', function() {
+            $(this).closest('.itg-popup').remove();
         });
 
         $('body').find('.image-preview').parent().addClass('has-image-preview');
@@ -669,6 +681,47 @@ jQuery(document).ready(function() {
             $(this).prev().toggleClass('active');
             $(this).prev('.widget-title-wrapper.active').find('input[type="text"]').focus();
         });
+        var badge_one = 'lrp_gold_star_one_icon[fid]';
+        var badge_two = 'lrp_gold_star_two_icon[fid]';
+        var badge_three = 'lrp_gold_star_three_icon[fid]';
+        var badge_four = 'lrp_gold_star_four_icon[fid]';
+        var badge_five = 'lrp_gold_star_five_icon[fid]';
+        var badge_one_val = $('input[name="' + badge_one + '"]').val();
+        var badge_two_val = $('input[name="' + badge_two + '"]').val();
+        var badge_three_val = $('input[name="' + badge_three + '"]').val();
+        var badge_four_val = $('input[name="' + badge_four + '"]').val();
+        var badge_five_val = $('input[name="' + badge_five + '"]').val();
+        if(badge_one_val > 0){
+          $('body').find('.div_lrp_gold_star_one_icon').hide();
+        }
+        else{
+          $('body').find('.div_lrp_gold_star_one_icon').show();
+        }
+        if(badge_two_val > 0){
+          $('body').find('.div_lrp_gold_star_two_icon').hide();
+        }
+        else{
+          $('body').find('.div_lrp_gold_star_two_icon').show();
+        }
+        if(badge_three_val > 0){
+          $('body').find('.div_lrp_gold_star_three_icon').hide();
+        }
+        else{
+          $('body').find('.div_lrp_gold_star_three_icon').show();
+        }
+        if(badge_four_val > 0){
+          $('body').find('.div_lrp_gold_star_four_icon').hide();
+        }
+        else{
+          $('body').find('.div_lrp_gold_star_four_icon').show();
+        }
+        if(badge_five_val > 0){
+          $('body').find('.div_lrp_gold_star_five_icon').hide();
+        }
+        else{
+          $('body').find('.div_lrp_gold_star_five_icon').show();
+        }
+          
 
     };
 })(jQuery);
@@ -741,6 +794,16 @@ jQuery(document).ready(function() {
         alert('Changes made successfully');
     });
     // end of code
+    
+    // byline order reorder
+    jQuery('body').on('click', '.save-byline', function () {
+        var item = [];
+        jQuery(this).closest('.byline-list').find('.byline-ul li').each(function (i) {
+            item.push(jQuery(this).find('.byline_publish').val());
+        });
+        jQuery('#edit-field-reporter-publish-id-und-0-value').val(item);
+        jQuery('.success-byline').html('Changes made successfully').show(0).delay(2000).hide(1000);
+    });
 
     // jQuery code for Loader
     jQuery(document).ajaxStart(function() {
@@ -892,10 +955,19 @@ jQuery(document).ready(function () {
   });
      
   // jQuery code for story form templates-tab   
-  jQuery('.templates-tab').on('click', 'span', function(){
-    var get_attr = jQuery(this).attr('data-ripple'), set_class = '.' + get_attr + "-form";
-    console.log(set_class);
-    jQuery(this).addClass('active').siblings().removeClass('active'), jQuery('.tab-form').hide(), jQuery(set_class).show();
+  var get_temp = jQuery('.form-field-name-field-story-select-templates .form-radio:checked').val(), 
+  set_temp = '.' + get_temp + "-tab-form";
+  jQuery(set_temp).removeClass('hide').siblings('.tab-form').addClass('hide');
+  jQuery('.form-field-name-field-story-select-templates').on('change', '.form-radio', function(){
+    get_value = jQuery(this).val(), 
+    set_class = '.' + get_value + "-tab-form", 
+    siblings = jQuery(this).closest('.templates-tab-wrapper').find(set_class).siblings('.tab-form');
+//    if(get_value){
+//      siblings.find('input[type=text], textarea').val(''),
+//      siblings.find('input[type=radio], input[type=checkbox]').removeAttr('checked'),
+//      siblings.find('.image-widget-data input[value="Remove"]').trigger('mousedown');
+//    }
+    jQuery(this).closest('.templates-tab-wrapper').find(set_class).show().siblings('.tab-form').hide();
   });   
      
 });

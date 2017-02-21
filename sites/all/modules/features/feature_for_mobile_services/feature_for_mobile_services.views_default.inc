@@ -45,6 +45,7 @@ function feature_for_mobile_services_views_default_views() {
     'counter' => 'counter',
     'title' => 'title',
     'field_service_delivery_mode' => 'field_service_delivery_mode',
+    'field_story_expiry_date' => 'field_story_expiry_date',
     'created' => 'created',
     'changed' => 'changed',
     'view_node' => 'nothing',
@@ -67,6 +68,13 @@ function feature_for_mobile_services_views_default_views() {
       'empty_column' => 0,
     ),
     'field_service_delivery_mode' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_story_expiry_date' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -500,6 +508,18 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['field_service_delivery_mode']['id'] = 'field_service_delivery_mode';
   $handler->display->display_options['fields']['field_service_delivery_mode']['table'] = 'field_data_field_service_delivery_mode';
   $handler->display->display_options['fields']['field_service_delivery_mode']['field'] = 'field_service_delivery_mode';
+  /* Field: Field: Expiry Date */
+  $handler->display->display_options['fields']['field_story_expiry_date']['id'] = 'field_story_expiry_date';
+  $handler->display->display_options['fields']['field_story_expiry_date']['table'] = 'field_data_field_story_expiry_date';
+  $handler->display->display_options['fields']['field_story_expiry_date']['field'] = 'field_story_expiry_date';
+  $handler->display->display_options['fields']['field_story_expiry_date']['settings'] = array(
+    'format_type' => 'custom_date_d_m_y_',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';

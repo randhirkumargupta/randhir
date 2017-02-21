@@ -165,6 +165,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
               <?php if ($title): ?>
                   <!--<h1 class="page__title title" id="page-title"><?php //print $title;  ?></h1>-->
               <?php endif; ?>
+                  <div class="front-end-breadcrumb">
+                  <?php print render($page['front_end_breadcrumb']); ?>
+                  </div> 
+              
               <?php print render($title_suffix); ?>
               <?php print $messages; ?>
               <?php print render($tabs); ?>
@@ -182,8 +186,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
               $itg_class = 'itg-front';
             }
             ?>
-            <div class="itg-layout-container <?php echo $itg_class; ?> default-video pos-rel">         
-            <?php print render($page['vertical_menu']); ?>
+            <div class="itg-layout-container <?php echo $itg_class; ?> default-video">
             <?php if ($theme == 'itgadmin') { ?>
                   <div class="row">
                       <div class="col-md-12">
@@ -234,7 +237,13 @@ else {
                         <div class="sidebar-section-photo">
                             <div class="itg-widget">
                                 <div class="ad-widget">
-                                    <div class="sidebar-ad droppable"><?php print $itg_ad['200*200_section_video_right_bar_ad1']; ?></div>
+                                    <div class="sidebar-ad droppable">
+                                     <?php
+                                        $block = block_load('itg_ads', ADS_RHS1);   
+                                        $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                        print render($render_array);
+                                       ?>
+                                    </div>
                                 </div>              
                             </div>
                             <div class="itg-widget">
@@ -335,7 +344,13 @@ else {
                             <?php } ?>
                             <div class="itg-widget">
                                 <div class="ad-widget">
-                                    <div class="sidebar-ad droppable"><?php print $itg_ad['200*200_section_video_right_bar_ad2']; ?></div>
+                                    <div class="sidebar-ad droppable">
+                                     <?php
+                                        $block = block_load('itg_ads', ADS_RHS2);   
+                                        $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                        print render($render_array);
+                                      ?>
+                                    </div>
                                 </div>              
                             </div>
                         </div>

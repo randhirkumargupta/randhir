@@ -217,6 +217,7 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
               '#type' => 'checkboxes',
               '#options' => $arr,
               '#attributes' => array('class' => array('rating'))
+               
           );
           $form['answer_option' . $num . '_' . $rating_num.'_name'] = array(
               '#type' => 'hidden',
@@ -239,7 +240,7 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
           $form['media' . $num] = array(
               '#type' => 'markup',
               '#prefix' => '<div class="survey-media">',
-              '#markup' => '<img src="' . $media_path . '" height="100" width="130"/>',
+              '#markup' => '<img src="' . $media_path . '" height="100" width="130" alt="" />',
               '#suffix' => '</div>',
           );
         }

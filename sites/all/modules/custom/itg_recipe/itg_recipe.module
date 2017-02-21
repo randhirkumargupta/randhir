@@ -13,11 +13,10 @@
  * @param Array $node
  */
 function itg_recipe_node_presave($node) {
-
+  
   if ($node->type == 'recipe') {
     $node->title = trim($node->title);
-  }
-  if ($node->type == 'recipe') {
+    
     if ($node->field_recipe_content_type[LANGUAGE_NONE][0]['value'] == 'Text') {
       $node->field_recipe_audio = '';
       $node->field_recipe_video = '';
@@ -122,20 +121,14 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
       itg_recipe_smi_hideshow($form);
       break;
     case 'survey_node_form':
-    case 'quiz_node_form':
-    case 'newsletter_node_form':
-    case 'podcast_node_form':
     case 'astro_node_form':
+    case 'newsletter_node_form':
+    case 'mega_review_critic_node_form':      
       itg_recepi_save_draft_button($form);
       break;
     case 'poll_node_form':
       // Save as draft button
       if ($form['field_poll_itg_state']['und']['#default_value'] == 0) {
-        itg_recepi_save_draft_button($form);
-      }
-    case 'event_backend_node_form':
-      // Save as draft button
-      if ($form['field_step_completion']['und'][0]['value']['#default_value'] == '0') {
         itg_recepi_save_draft_button($form);
       }
       break;
@@ -154,7 +147,7 @@ function itg_recepi_save_draft_button(&$form) {
         '#type' => 'submit',
         '#value' => t('Save as Draft'),
         '#submit' => array(
-            'node_form_submit'
+            'node_form_submit','itg_save_draft_form_custom_callback'
         ),
     );
 
@@ -176,13 +169,6 @@ function itg_recipe_smi_hideshow(&$form) {
           ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
       ),
       'required' => array(
-          ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
-      )
-  );
-
-  // facebook video narrative
-  $form['field_story_facebook_vdescripti']['#states'] = array(
-      'visible' => array(
           ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
       )
   );
@@ -211,14 +197,7 @@ function itg_recipe_smi_hideshow(&$form) {
       ),
   );
 
-  // Twitter video narrative
-  $form['field_story_twitter_video_desc']['#states'] = array(
-      'visible' => array(
-          ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
-      ),
-  );
-
-  // Facebook video
+  // Twitter video
   $form['field_story_twitter_video']['#states'] = array(
       'visible' => array(
           ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
@@ -505,4 +484,14 @@ function itg_recipe_form_views_exposed_form_alter(&$form, &$form_state, $form_id
     $form['title']['#autocomplete_path'] = 'content-title-list/food_news/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
+}
+
+/**
+ * After submit callback for draft
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_save_draft_form_custom_callback($form, &$form_state) {
+  $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination='.$_GET['destination'];
+  $_GET['destination'] = $redirect_path;  
 }

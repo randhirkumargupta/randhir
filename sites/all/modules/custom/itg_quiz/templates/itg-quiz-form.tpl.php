@@ -19,6 +19,15 @@ if($form['question_format']['#value'] == 'All questions at a time') {
 else {
   $form_class = 'survey-form-wrapper-one';
 }
+
+$actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$search_title = preg_replace("/'/", "\\'", $node->title);
+$fb_share_title= 'Quiz: '.htmlentities($search_title, ENT_QUOTES);    
+$short_url = shorten_url($actual_link, 'goo.gl');
+$share_desc = '';
+$src = '';
+$comment_value = variable_get('COMMENT_CONFIG');
+$config_name = $comment_value[0]->config_name;
 ?>
 <div class="survey-form-main-container" style="margin:10px 0px 10px 0px;">
   <h1 class="survey-title"><?php echo 'Quiz: '. $node->title; ?></h1>
@@ -29,7 +38,7 @@ else {
     </div>
     <div class="profile-detail">
       <ul>
-        <li class="title" style="line-height: 15px"><?php echo $byline_name; ?> |</li>
+        <li class="title" style="line-height: 15px"><?php echo $byline_name; ?></li>
          <?php
           $twitter_handle = str_replace('@', '', $byline_twitter_handler);
           if (!empty($twitter_handle)) {
@@ -44,21 +53,24 @@ else {
     </div>
     <div class="social-info">
       <span>
-        <i class="fa fa-facebook" aria-hidden="true"></i>
-        <dfn>1522</dfn>
+          <a title="share on facebook" class= "facebook def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_share_title; ?>', '<?php print $share_desc; ?>', '<?php print $src; ?>')"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+        <!--<dfn>1522</dfn>-->
       </span>
       <span>
-        <i class="fa fa-twitter" aria-hidden="true"></i>
-        <dfn>1522</dfn>
+          <a title="share on twitter" class= "twitter def-cur-pointer" onclick="twitter_popup('<?php print 'Quiz :'.urlencode($node->title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter" aria-hidden="true"></i></a>
       </span>
       <span>
-        <i class="fa fa-google-plus" aria-hidden="true"></i>
-        <dfn>1522</dfn>
+          <a title="share on google+" class= "google def-cur-pointer" onclick="return googleplusbtn('<?php print $actual_link; ?>')"> <i class="fa fa-google-plus" aria-hidden="true"></i></a>
       </span>
       <span>
-        <i class="fa fa-comment" aria-hidden="true"></i>
-        <dfn>1522</dfn>
-      </span>
+          <?php
+          if ($config_name == 'vukkul') {
+            ?> 
+            <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>
+          <?php } if ($config_name == 'other') { ?> 
+            <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>
+          <?php } ?>
+     </span>
       
     </div>
   </div>
@@ -74,5 +86,29 @@ else {
       taboola_view();
     }
   }
-  ?>
+  
+  if ($config_name == 'vukkul') {
+    ?>
+    <div class="vukkul-comment">
+        <div id="vuukle-emote"></div>
+        <div id="vuukle_div"></div>
+
+        <?php
+        if (function_exists('vukkul_view')) {
+          vukkul_view();
+        }
+        ?>
+
+    </div>
+    <?php
+  }
+  if ($config_name == 'other') {
+    ?>
+    <div id="other-comment">
+        <?php
+        $block = module_invoke('itg_ugc_comment', 'block_view', 'ugc_form_comment_block');
+        print render($block['content']);
+        ?>
+    </div>
+  <?php } ?>
 </div>

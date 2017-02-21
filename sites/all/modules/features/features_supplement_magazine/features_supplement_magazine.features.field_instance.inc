@@ -119,12 +119,13 @@ function features_supplement_magazine_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
+            'imce' => 0,
             'itg_image_repository' => 0,
+            'itg_image_video' => 0,
             'plupload' => 'plupload',
             'reference' => 0,
             'remote' => 0,
-            'upload' => 0,
+            'upload' => 'upload',
           ),
           'source_attach' => array(
             'absolute' => 0,
@@ -598,7 +599,7 @@ Image Size (300 x 225)',
   $field_instances['node-magazine-field_magazine_cover_photo'] = array(
     'bundle' => 'magazine',
     'deleted' => 0,
-    'description' => 'Please upload a magazine cover photo.',
+    'description' => 'Image Size (172 x 240)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -742,7 +743,7 @@ Image Size (300 x 225)',
     'exclude_cv' => 0,
     'field_name' => 'field_print_magazine_issue_date',
     'label' => 'Print Issue Date',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'default_value' => 'now',
       'default_value2' => 'same',
@@ -810,11 +811,13 @@ Image Size (300 x 225)',
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
+            'imce' => 0,
+            'itg_image_repository' => 0,
+            'itg_image_video' => 0,
             'plupload' => 'plupload',
             'reference' => 0,
             'remote' => 0,
-            'upload' => 0,
+            'upload' => 'upload',
           ),
           'source_attach' => array(
             'absolute' => 0,
@@ -978,6 +981,7 @@ Image Size (300 x 225)',
   // Translatables
   // Included for use with string extractors like potx.
   t('Comment');
+  t('Image Size (172 x 240)');
   t('Import Issue XML');
   t('Import XML');
   t('Issue');
@@ -990,7 +994,6 @@ Image Size (300 x 225)',
   t('Please select supplements.');
   t('Please select the date using date picker.
 ');
-  t('Please upload a magazine cover photo.');
   t('Please upload large cover image.<br/>
 Image Size (300 x 225)');
   t('Please upload small cover image.<br/>

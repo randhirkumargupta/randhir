@@ -9,10 +9,10 @@
         }
         else {
           global $base_url;
-          $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_video.jpg' />";
+          $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt='' />";
         }
         ?>
-        <li class="col-md-3">
+        <li class="col-md-3 col-sm-3">
           <span class="tile">
             <figure>
               <?php print $img; ?> <figcaption><i class="fa fa-play-circle"></i><?php echo $row['field_video_duration']; ?></figcaption>
