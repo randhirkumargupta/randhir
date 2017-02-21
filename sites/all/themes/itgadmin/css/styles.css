@@ -10379,6 +10379,9 @@ span.file a {
   vertical-align: top;
 }
 
+.page-related-content {
+  background-color: #fff;
+}
 .page-related-content #main {
   min-height: 0 !important;
 }
@@ -11055,4 +11058,8 @@ span.file a {
 }
 .ads-preview-data .ads-header-code-holder-device {
   padding: 10px;
+}
+
+.page-node-add-story #colorbox iframe {
+  background: url(../images/loading_animation.gif) no-repeat center center;
 }

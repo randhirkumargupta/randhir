@@ -9937,7 +9937,10 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   display: inline-block;
   vertical-align: top;
 }
-.page-related-content #main{min-height: 0 !important;}
+.page-related-content{
+  background-color: #fff;
+  #main{min-height: 0 !important;}
+} 
 .primary_category_radio{float: left; margin: 2px 5px;}
 .node-category-form .metatags-form > legend{display: none;}
 .node-videogallery-form #BasicDetails.itg-form-section-wrapper .itg-form-section{
@@ -10517,4 +10520,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     padding-right: 20px;
   }
   .ads-header-code-holder-device{padding: 10px;}
+}
+.page-node-add-story #colorbox iframe{
+  background: url(../images/loading_animation.gif) no-repeat center center;
 }
