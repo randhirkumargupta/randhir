@@ -527,15 +527,15 @@ function itg_common_custompath_insert_load($node) {
     if (!empty($getsection)) {
       $parents = taxonomy_get_parents_all($getsection);
       if (isset($parents) && !empty($parents)) {
-          foreach ($parents as $key => $val) {
-              $section_hierarchy[] = $val->name;
-          }
+        foreach ($parents as $key => $val) {
+          $section_hierarchy[] = $val->name;
+        }
       }
-      $set_hierarchy = array_reverse($section_hierarchy);
-      $pathdata = strtolower(implode("/", $set_hierarchy)) . '/'. $node->type . '/' . trim($node_sef). '-'. $node->nid .'-'. $published_date;
-      $newpath = itg_common_custompath_insert_val($pathdata);
-      $node->path = array('alias' => $newpath, 'pathauto' => FALSE);
     }
+    $set_hierarchy = array_reverse($section_hierarchy);
+    $pathdata = strtolower(implode("/", $set_hierarchy)) . '/'. $node->type . '/' . trim($node_sef). '-'. $node->nid .'-'. $published_date;
+    $newpath = itg_common_custompath_insert_val($pathdata);
+    $node->path = array('alias' => $newpath, 'pathauto' => FALSE);
 }
 
 /** 
