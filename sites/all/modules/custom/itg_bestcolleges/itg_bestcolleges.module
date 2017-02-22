@@ -93,7 +93,12 @@ function itg_bestcolleges_theme($existing, $type, $theme, $path) {
       'variable' => array('data' => NULL),
       'template' => 'itg-campus-wise-list',
       'path' => drupal_get_path('module', 'itg_bestcolleges') . '/templates',
-    )
+    ),
+    'bestcollege_rhssearch' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'bestcollege-rhssearch-form-block',
+      'path' => drupal_get_path('module', 'itg_bestcolleges') . '/templates',
+    ),
   );
   return $themes;
 }
@@ -128,6 +133,35 @@ function itg_bestcolleges_form_views_exposed_form_alter(&$form, &$form_state, $f
       $form['title']['#autocomplete_path'] = 'content-title-list/bestcolleges/autocomplete';
       break;
   }
+}
+
+/**
+ * Implements hook_block_info().
+ * @return array $blocks
+ */
+function itg_bestcolleges_block_info() {
+  $blocks['bestcollege_rhssearch'] = array(
+    'info' => t('Best College RHS Search Form'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view()
+ * @return array $blocks
+ */
+function itg_bestcolleges_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'bestcollege_rhssearch':
+    module_load_include('inc', 'itg_bestcolleges', 'includes/itg_bestcolleges');
+    $clgsearch_form = drupal_get_form('bestcollege_rhssearch_form');
+    $data['clgsearch_form'] = drupal_render($clgsearch_form);
+    $block['content'] = theme('bestcollege_rhssearch', array('data' => $data));
+    break;
+  }
+  return $block;
 }
 
 /**
@@ -273,7 +307,7 @@ function itg_campus_wise_list($year, $type, $stream) {
 
 /**
  * Common function to get data of Best colleges:
- * @param int $type
+ * @param String $type
  * @param int $byear
  * @param string $bstream
  * @return string
@@ -352,5 +386,74 @@ function itg_bestcollege_getData($type, $byear, $bstream) {
         ->orderBy('bcz.stream', 'ASC');
     $itg_result = $itg_query->execute()->fetchAll();
     return $itg_result;
+  }
+}
+
+/**
+ * Common function to get stream from year:
+ * @param String $type
+ * @param int $byear
+ * @param string $bstream
+ * @return string
+ */
+function itg_bestcollege_getStreamYear($type, $byear) {
+  $results = array();
+  $data = array();
+  // Need to change below query once bestcollege migrate:
+  if ($type == 'emerging') {
+    $query = db_select('bestcolleges_master', 'n');
+    $query->join('bestcolleges_emergingranking', 'bce', 'n.collegeid = bce.collegeid');
+    $query->distinct();
+    $query->fields('bce', array('stream'))
+        ->condition('bce.published', 1)
+        ->orderBy('bce.stream', 'ASC');
+    $results = $query->execute()->fetchAll();
+    
+    foreach($results as $results_key => $results_val) {
+      $data[drupal_strtolower($results_val->stream)] = $results_val->stream;
+    }
+    return $data;
+  }
+  if ($type == 'year-comparecollege') {
+    // Query to find year
+    $query = db_select('bestcolleges_master', 'n');
+    $query->join('bestcolleges_ranking', 'bcr', 'n.collegeid = bcr.collegeid');
+    $query->distinct();
+    $query->fields('bcr', array('year'))
+        ->condition('bcr.published', 1)
+        ->condition('bcr.rank', 0, '!=')
+        ->orderBy('bcr.year', 'DESC');
+    $results = $query->execute()->fetchAll();
+    foreach($results as $results_key => $results_val) {
+      $data['year'][drupal_strtolower($results_val->year)] = $results_val->year;
+    }
+    // Query to find stream
+    $query1 = db_select('bestcolleges_master', 'n');
+    $query1->join('bestcolleges_ranking', 'bcr', 'n.collegeid = bcr.collegeid');
+    $query1->distinct();
+    $query1->fields('bcr', array('stream'))
+        ->condition('bcr.published', 1)
+        ->condition('bcr.rank', 0, '!=')
+        ->orderBy('bcr.stream', 'ASC');
+    $results1 = $query1->execute()->fetchAll();
+    foreach($results1 as $results1_key => $results1_val) {
+      $data['stream'][drupal_strtolower($results1_val->stream)] = $results1_val->stream;
+    }
+    return $data;
+  }
+  if ($type == 'readyrecnor-directory-list') {
+    // Query to find result of on behalf of stream & year:
+    $query = db_select('bestcolleges_readyrecnor_directory_list', 'brd');
+    $query->distinct();
+    $query->fields('brd', array('stream'))
+        ->condition('brd.year', $byear, '=')
+        ->condition('brd.published', 1)
+        ->condition('brd.rank', 0, '!=')
+        ->orderBy('brd.stream', 'ASC');
+    $results = $query->execute()->fetchAll();
+    foreach($results as $results_key => $results_val) {
+      $data[drupal_strtolower($results_val->stream)] = $results_val->stream;
+    }
+    return $data;
   }
 }
