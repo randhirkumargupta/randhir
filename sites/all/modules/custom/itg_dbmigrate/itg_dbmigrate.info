@@ -28,3 +28,4 @@ files[] = includes/itg_migrate.subsubcategory.inc
 files[] = includes/itg_migrate.country.inc
 files[] = includes/itg_migrate.state.inc
 files[] = includes/itg_migrate.photosection.inc
+files[] = includes/itg_migrate.bestcolleges.inc
