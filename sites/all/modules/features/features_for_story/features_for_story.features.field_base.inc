@@ -1886,7 +1886,7 @@ function features_for_story_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_story_mosimage',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'format' => array(
