@@ -123,6 +123,8 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
     case 'survey_node_form':
     case 'astro_node_form':
     case 'newsletter_node_form':
+    case 'mega_review_critic_node_form':
+    case 'quiz_node_form':
       itg_recepi_save_draft_button($form);
       break;
     case 'poll_node_form':
@@ -490,10 +492,7 @@ function itg_recipe_form_views_exposed_form_alter(&$form, &$form_state, $form_id
  * @param array $form
  * @param array $form_state
  */
-function itg_save_draft_form_custom_callback($form, &$form_state) {  
-  
-    $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination='.$_GET['destination'];    
-    //drupal_set_message(t($form_state['values']['type'] . ' <b>' . $form_state['values']['title'] . '</b> has been save successfully.'));
-    $_GET['destination'] = $redirect_path;
-  
+function itg_save_draft_form_custom_callback($form, &$form_state) {
+  $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination='.$_GET['destination'];
+  $_GET['destination'] = $redirect_path;  
 }

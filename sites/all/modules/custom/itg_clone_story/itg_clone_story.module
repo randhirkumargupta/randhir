@@ -51,7 +51,10 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
     $form['bundle_name']['#value'] = 'Story';
     $form['bundle_name']['#attributes']['class'][] = 'element-hidden';
     //'iibckc' => 'Dev'
-    $hash = array('5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'e49it8' => 'Stage Server');
+    if (function_exists('itg_apache_solr_get_site_hash'))
+    {
+      $hash = itg_apache_solr_get_site_hash();
+    }
     $form['hash']['#type'] = 'select';
     $form['hash']['#options'] = $hash;
     $form['hash']['#size'] = 5;

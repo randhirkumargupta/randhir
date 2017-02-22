@@ -129,6 +129,10 @@ function itg_preprocess_page(&$variables) {
   if ((!empty($arg[2]) && $arg[2] == 'ugc') || $arg[0] == 'signup' || $arg[0] == 'forgot-password' || $arg[0] == 'sso-user' || $arg[0] == 'sso' || $arg[0] == 'password-success' || $arg[0] == 'complete-page' || $arg[0] == 'associate-photo-video-content') {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
+  
+  if ($arg[0] == 'photogallery-embed' || $arg[0] == 'videogallery-embed') {
+    $variables['theme_hook_suggestions'][] = 'page__itgembed';
+  }
 
   // Access domain
   if (function_exists('domain_select_format')) {
