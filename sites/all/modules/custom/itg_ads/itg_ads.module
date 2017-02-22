@@ -121,7 +121,7 @@ function itg_ads_block_view($delta = '') {
       $status = drupal_get_http_header("status");
 
       $current_path_final = isset($current_path_array[0]) ? $current_path_array[0] : '';
-      if ($status == '404 Not Found' || $status == '403 Forbidden' || current_path() == 'user/login' || current_path() == 'user/registration' || current_path() == 'user' || $current_path_final == 'user' || $current_path_final == 'personalization' || $current_path_final == 'tv-show') {
+      if ($status == '404 Not Found' || $status == '403 Forbidden' || current_path() == 'user/login' || current_path() == 'user/registration' || current_path() == 'user' || $current_path_final == 'user' || $current_path_final == 'personalization' || $current_path_final == 'tv-show' || $current_path_final == 'product' || $current_path_final == 'cart' || $current_path_final == 'order-summary' || $current_path_final == 'order-confirmation' || $current_path_final == 'order') {
         $block['content'] = '';
       } else {
         $ad_script = get_itg_page_name('Medium Rectangle-RHS1-300x250');
@@ -133,7 +133,7 @@ function itg_ads_block_view($delta = '') {
     case 'ads_medium_rectangl_rhs2_300x250':
       $status = drupal_get_http_header("status");
       $current_path_final = isset($current_path_array[0]) ? $current_path_array[0] : '';
-      if ($status == '404 Not Found' || $status == '403 Forbidden' || current_path() == 'user/login' || current_path() == 'user/registration' || current_path() == 'user' || $current_path_final == 'user' || $current_path_final == 'personalization' || $current_path_final == 'tv-show') {
+      if ($status == '404 Not Found' || $status == '403 Forbidden' || current_path() == 'user/login' || current_path() == 'user/registration' || current_path() == 'user' || $current_path_final == 'user' || $current_path_final == 'personalization' || $current_path_final == 'tv-show' || $current_path_final == 'product' || $current_path_final == 'cart' || $current_path_final == 'order-summary' || $current_path_final == 'order-confirmation' || $current_path_final == 'order') {
         $block['content'] = '';
       } else {
         $ad_script = get_itg_page_name('Medium Rectangle-RHS2-300x250');
@@ -154,6 +154,13 @@ function itg_ads_menu() {
   $items['itg-ads/%'] = array(
       'title' => t('Ads'),
       'page callback' => 'itg_ads_show_ad_image',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+  );
+
+  $items['itg-ads-preview-ads'] = array(
+      'title' => t('Ads'),
+      'page callback' => 'itg_ads_preview_ads',
       'access callback' => TRUE,
       'type' => MENU_CALLBACK,
   );
@@ -181,6 +188,11 @@ function itg_ads_theme($existing, $type, $theme, $path) {
           'path' => drupal_get_path('module', 'itg_ads') . '/templates',
           'variables' => array('data' => NULL),
       ),
+      'itg_ads_preview' => array(
+          'template' => 'itg-ads-preview',
+          'path' => drupal_get_path('module', 'itg_ads') . '/templates',
+          'variables' => array('data' => NULL),
+      ),
   );
 }
 
@@ -193,6 +205,12 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
   $form['actions']['cancel'] = array(
       '#markup' => l(t('Cancel'), 'manage-ads', array('attributes' => array('class' => 'button'))),
       '#weight' => 20,
+  );
+
+
+  $form['actions']['preview_ads'] = array(
+      '#markup' => l(t('Preview Ads'), 'itg-ads-preview-ads', array('attributes' => array('class' => 'form-submit itg-ads-preview-ads'))),
+      '#weight' => 19,
   );
 
   $syndication_mode = 'field_ads_placeholder';
@@ -240,10 +258,18 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
     $op = itg_ads_get_mode($rule_title);
   }
 
+  // Getting total count of field collection   
+  $total_count = 0;
+  foreach ($form['field_adds_code_holder'][LANGUAGE_NONE] as $key => $item) {
+    if (is_numeric($key)) {
+      $total_count++;
+    }
+  }
+
   foreach ($form['field_adds_code_holder'][LANGUAGE_NONE] as $key => $item) {
     if (is_numeric($key)) {
 
-      if ($key == 0) {
+      if ($key == 0 && $total_count <= 1) {
         unset($form['field_adds_code_holder'][LANGUAGE_NONE][$key]['remove_button']);
       }
 
@@ -863,7 +889,11 @@ function get_header_body_start_end_code() {
     $taxonomy_array = taxonomy_get_parents_all($arg[2]);
     $terms = array_reverse($taxonomy_array);
     $page_name = $terms[0]->tid;
-    $show_external_flag = 1;
+    if ($arg[2] == $page_name) {
+      $show_external_flag = 1;
+    } else {
+      $show_external_flag = 0;
+    }
   } else if ($arg[0] == 'node' && is_numeric($arg[1])) {
     $node_object = menu_get_object();
     $tid = isset($node_object->field_primary_category[$node_object->language][0]['value']) ? $node_object->field_primary_category[$node_object->language][0]['value'] : NULL;
@@ -874,7 +904,6 @@ function get_header_body_start_end_code() {
       $page_name = $terms[0]->tid;
     }
     $show_external_flag = 0;
-    
   } else {
     $page_name = t('Rest');
     $show_external_flag = 0;
@@ -1006,4 +1035,30 @@ function itg_ads_views_data() {
   );
 
   return $data;
+}
+
+/**
+ * Implements itg_ads_preview_ads()
+ */
+function itg_ads_preview_ads($arg) {
+  $renderabledata = itg_ads_get_renderable_prev_data($_REQUEST);
+  echo "<div class='ads-preview-data'>";
+  print $renderabledata['header_script'];
+  print theme('itg_ads_preview', array('data' => $renderabledata));
+  echo '</div>';
+  drupal_exit();
+}
+
+/**
+ * Implements itg_ads_get_renderable_prev_data()
+ */
+function itg_ads_get_renderable_prev_data($prev_raw_data) {
+  $renderable_data = array();
+  $renderable_data['title'] = $prev_raw_data['title'];
+  $renderable_data['header_script'] = $prev_raw_data['field_ads_headerscript'][LANGUAGE_NONE][0]['value'];
+  // Adding code for ads 
+  foreach ($prev_raw_data['field_adds_code_holder'][LANGUAGE_NONE] as $key => $chunks_data) {
+    $renderable_data['code'][$chunks_data['field_ads_placeholder'][LANGUAGE_NONE]][] = array('device' => $chunks_data['field_ads_device_selection'][LANGUAGE_NONE], 'code' => $chunks_data['field_ads_ad_code'][LANGUAGE_NONE][0]['value']);
+  }
+  return $renderable_data;
 }

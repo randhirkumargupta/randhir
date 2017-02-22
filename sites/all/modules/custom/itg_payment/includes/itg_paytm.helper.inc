@@ -17,8 +17,15 @@ define('PAYTM_STARTUP_TRANSACTION_ID', "null");
 define('PAYTM_PAYMENT_GATEWAY_NAME', 'paytm');
 define('PAYTM_TXN_FAIL_STATUS', 2);
 define('PAYTM_ORDER_SUCCESS_STATUS', 1);
+define('ITG_BILLDESK_SECURITY_KEY', '5n9wh8T0a3fw');
+define('ITG_BILLDESK_CHECKSUM' ,'3712345678');
+define('ITG_BILLDESK_MERCHANT_ID' ,'INDIATODAY');
+define('ITG_BILLDESK_POST_URL' , 'https://www.billdesk.com/pgidsk/pgmerc/INDIATODAYPaymentoption_UAT.jsp');
 define('PAYTM_CALLBACK_URL', $base_url . '/itg_payment_order_form_response_url');
-
+define('BILLDESK_LABELS', 'MerchantID|CustomerID|TxnReferenceNo|BankReferenceNo|TxnAmount|' .
+                          'BankID|BankMerchantID|TxnType|CurrencyName|ItemCode|SecurityType|' . 
+                          'SecurityID|SecurityPassword|TxnDate|AuthStatus|SettlementType|' . 
+                          'ErrorStatus|ErrorDescription|CheckSum');
 $PAYTM_DOMAIN = "pguat.paytm.com";
 if (PAYTM_ENVIRONMENT == 'PROD') {
   $PAYTM_DOMAIN = 'secure.paytm.in';

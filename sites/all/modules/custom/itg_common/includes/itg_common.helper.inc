@@ -83,6 +83,10 @@ define('SMALL_IMAGE_WIDTH', 170);
 define('SMALL_IMAGE_HEIGHT', 127);
 define('EXTRA_SMALL_IMAGE_WIDTH', 88);
 define('EXTRA_SMALL_IMAGE_HEIGHT', 66);
+define('ISSUE_LARGE_IMAGE_WIDTH', 300);
+define('ISSUE_LARGE_IMAGE_HEIGHT', 225);
+define('ISSUE_SMALL_WIDTH', 210);
+define('ISSUE_SMALL_HEIGHT', 145);
 
 /**
  * value define for Ad.
@@ -99,6 +103,9 @@ define('SECTION_TAB', 20);
 //define('CATEGORY_MANAGMENT', 4);
 define('CATEGORY_MANAGMENT', variable_get('category_manager_vid'));
 define('CITY_MANAGMENT', variable_get('city_manager_vid'));
+define('POLITICIAN_TID', variable_get('tid_politician'));
+define('ANCHOR_TID', variable_get('anchor_tid'));
+define('REPORTER_TID', variable_get('reporter_tid'));
 
 define('NEWSLETTER_EDUCATION_TID', variable_get('newsletter_education_tid'));
 

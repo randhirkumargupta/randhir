@@ -299,6 +299,49 @@ function syndication_feature_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'field_collection_item-field_syndication_rule_details-field_syndication_num_of_feeds'.
+  $field_instances['field_collection_item-field_syndication_rule_details-field_syndication_num_of_feeds'] = array(
+    'bundle' => 'field_syndication_rule_details',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 9,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_syndication_num_of_feeds',
+    'label' => 'Number of feeds',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 8,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_syndication_rule_details-field_syndication_select_section'.
   $field_instances['field_collection_item-field_syndication_rule_details-field_syndication_select_section'] = array(
     'bundle' => 'field_syndication_rule_details',
@@ -967,6 +1010,7 @@ function syndication_feature_field_default_field_instances() {
   t('FTP Password');
   t('FTP URL');
   t('FTP Username');
+  t('Number of feeds');
   t('Select Client title');
   t('Select Content Type');
   t('Select Delivery End Point');

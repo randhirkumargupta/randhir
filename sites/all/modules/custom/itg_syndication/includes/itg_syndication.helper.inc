@@ -166,9 +166,9 @@ function get_content_id_for_syndication($data, $created_date) {
   $itg_query->condition('cat.field_story_category_tid',$data['section_id'], 'IN');//for multi section
   
   $delivery_mode_array = explode(': ', $data['delivery_mode']);  
-  if ($delivery_mode_array[0] == 'Weburl') {
-    $itg_query->range(0, 30);  
-  } 
+  //if ($delivery_mode_array[0] == 'Weburl') {
+    $itg_query->range(0, $data['num_of_feeds']);  
+  //} 
   
   $itg_result = $itg_query->execute()->fetchAll();
   
@@ -222,7 +222,7 @@ function save_cron_details_of_syndication($node) {
     $time_rule = $field_collection_item[$val['value']]->field_syndication_time[LANGUAGE_NONE][0]['value'];      
     $day = $field_collection_item[$val['value']]->field_syndication_set_day[LANGUAGE_NONE][0]['value'];
     $dt = $field_collection_item[$val['value']]->field_syndication_set_day_month[LANGUAGE_NONE][0]['value'];    
-    
+    $num_of_feeds = $field_collection_item[$val['value']]->field_syndication_num_of_feeds[LANGUAGE_NONE][0]['value'];
     //get cron time
     $cron_time_array = get_cron_time($frequency, $time_rule, $day, $dt);
     $previous_time = $cron_time_array['previous_time'];
@@ -236,8 +236,9 @@ function save_cron_details_of_syndication($node) {
                              'frequency' => $frequency, 
                              'time_rule' => $time_rule, 
                              'day_name' => $day, 
-                             'date' => $dt);
-
+                             'date' => $dt,
+                             'num_of_feeds' => $num_of_feeds);
+    
     $details = serialize($details_array);
     $expiry_date = get_client_expiry_date($client_name);
     $query = db_insert('itg_cron_time_scheduler');

@@ -12,11 +12,13 @@ module_load_include('inc', 'itg_common', 'includes/itg_mongo.helper');
 module_load_include('inc', 'itg_common', 'includes/itg_common_mail');
 module_load_include('inc', 'itg_common', 'includes/itg_common');
 
+
 /**
  * Implements hook_init.
  * {@inheritdoc}
  */
 function itg_common_init() {
+  
   global $user, $base_url, $theme;
   
   //code for multidomain
@@ -44,6 +46,18 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
       //'file' => 'includes/itg_story.inc',
   );
+  
+  $items['photogallery-embed'] = array(
+    'page callback' => 'itg_photogallery_embed',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['videogallery-embed'] = array(
+    'page callback' => 'itg_videogallery_embed',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -60,7 +74,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     unset($form['actions']['preview_changes']);
   }
   
-  if (arg(0) == 'user' && empty($user->uid)) {
+  if (arg(0) == 'user') {
     drupal_add_js('jQuery(document).ready(function() {
                           jQuery("#skip-link").hide();                                      
           });', array('type' => 'inline', 'scope' => 'footer'));
@@ -144,9 +158,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
   // Button name change some content
   if ($form_id == 'mega_review_critic_node_form' && (empty($form['#node']->nid) || (!empty($form['#node']->nid) && $form['#node']->status == 0))) {
-    $form['actions']['itg_custom_button'] = array('#type' => 'submit',
-      '#value' => t('Save as Draft'),
-      '#submit' => array('node_form_submit'));
+//    $form['actions']['itg_custom_button'] = array('#type' => 'submit',
+//      '#value' => t('Save as Draft'),//
+//      '#submit' => array('node_form_submit'));
     $form['actions']['submit']['#value'] = t('Publish');
   }
 
@@ -212,6 +226,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     }
   }
   $form['#after_build'][] = 'itg_common_add_js_top_btn';
+  if (!empty($form_state['node']->type)) {
+    $form['actions']['submit']['#submit'][] = 'itg_draft_form_custom_callback';
+  }
 }
 
 /**
@@ -373,8 +390,8 @@ function itg_common_date_popup_process_alter(&$element, &$form_state, &$context)
 
 
 function itg_common_node_presave($node) {
-  global $ctype_array;
-  $ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
+  //global $ctype_array;
+  //$ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
   switch ($node->type) {
     case 'astro':
     case 'recipe':
@@ -383,17 +400,16 @@ function itg_common_node_presave($node) {
     case 'survey':
     case 'quiz':
     case 'newsletter':
-      if ($node->op == 'Publish') {
-        $node->status = 1;
+      if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+        if ($node->op == 'Publish') {
+          $node->status = 1;
+        }
+        elseif ($node->op == 'Save as Draft' || $node->status == 0) {
+          $node->status = 0;
+        }
       }
-      elseif ($node->op == 'Save as Draft' || $node->status == 0) {
-        $node->status = 0;
-      }
+      
         
-  }
-  // custom alias cnditions
-  if (in_array($node->type, $ctype_array)){
-     return itg_common_custompath_load($node);
   }
 
 }
@@ -405,10 +421,10 @@ function itg_common_node_presave($node) {
  */
 function itg_common_node_insert($node) {
     
-  global $ctype_array;
+  $ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
   // custom alias cnditions
-  if (in_array($node->type, $ctype_array)){
-     return itg_common_custompath_insert_load($node);
+  if (in_array($node->type, $ctype_array)) {
+     itg_common_custompath_insert_load($node);
   }
 }
 
@@ -417,13 +433,13 @@ function itg_common_node_insert($node) {
  * @param object $node
  */
 function itg_common_node_update($node) {
-    
-  global $ctype_array;
-  // custom alias cnditions
-  if (in_array($node->type, $ctype_array)){
-     return itg_common_custompath_insert_load($node);
+  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {  
+    $ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
+    // custom alias cnditions
+    if (in_array($node->type, $ctype_array)){
+       itg_common_custompath_insert_load($node);
+    }
   }
-
 }
 
 
@@ -451,14 +467,13 @@ function itg_common_form_node_delete_confirm_alter(&$form, &$form_state, $form_i
  * @param string $title
  * @param string $destination
  */
-function itg_custom_message($type, $workbench_current_state, $case, $title, $destination) {
+function itg_custom_message($type, $workbench_current_state, $case, $title, $destination, $action = NULL) {
 
   if ($case == 'add') {
-
     if ($workbench_current_state == 'published') {
       $op = 'published';
       drupal_set_message(t($type . ' <b>' . $title . '</b> has been ' . $op . ' successfully.'));
-    }
+    } 
     else {
       $op = 'created';
       drupal_set_message(t($type . ' <b>' . $title . '</b> has been ' . $op . ' successfully and submitted for further review and approval.'));
@@ -563,6 +578,16 @@ function itg_common_theme() {
     ),
     'itg_loyalty_point_notification' => array(
       'template' => 'itg-loyalty-point-notification-mail',
+      'path' => drupal_get_path('module', 'itg_common') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'itg_photogallery_embed' => array(
+      'template' => 'itg-photogallery-embed',
+      'path' => drupal_get_path('module', 'itg_common') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'itg_videogallery_embed' => array(
+      'template' => 'itg-videogallery-embed',
       'path' => drupal_get_path('module', 'itg_common') . '/templates',
       'variables' => array('data' => NULL),
     ),
@@ -714,4 +739,44 @@ function itg_common_mail_alter(&$message) {
     $message['send'] = FALSE;
   }
   
+}
+
+/**
+ * After submit callback for draft
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_draft_form_custom_callback($form, &$form_state) {
+  
+  if ($form_state['node']->workbench_moderation_state_new == 'draft') {    
+    $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination='.$_GET['destination'];    
+    drupal_set_message(t($form_state['values']['type'] . ' <b>' . $form_state['values']['title'] . '</b> has been save successfully.'));
+    $_GET['destination'] = $redirect_path;    
+  }
+  
+}
+
+/**
+ * Helper function to get photogallery.
+ */
+function itg_photogallery_embed() {
+  if (!empty($_GET['gid']))
+  {
+    $data = node_load($_GET['gid']);
+    return theme('itg_photogallery_embed', array('data' => $data));
+  }
+}
+
+/**
+ * Helper function to get videogallery.
+ */
+function itg_videogallery_embed() {
+  if (!empty($_GET['gid']))
+  {
+   if (function_exists('get_video_in_fieldcollection_by_nid'))
+    {
+      $videoids = get_video_in_fieldcollection_by_nid($_GET['gid']);
+    }
+    return theme('itg_videogallery_embed', array('data' => $videoids));
+  }
 }

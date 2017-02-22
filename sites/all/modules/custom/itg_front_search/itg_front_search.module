@@ -163,12 +163,27 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
  * @param Array $view
  */
 function itg_front_search_views_pre_render(&$view) {
-  global $base_url;
+ 
+  
   // Add "Create Breaking news" on listing page of Breaking news
   if (isset($view->name) && ($view->name == "front_end_global_search" || $view->name == "archive_story")) {
 
     global $user, $base_url;
-
+    
+    if (isset($view->name) && ($view->name == "front_end_global_search")) {
+      $target = $base_url.'/'.current_path().'?keyword={'.$_GET['keyword'].'}';
+      $markup = array(
+          '#type' => 'markup',
+          '#markup' => '<script type="application/ld+json"> {'
+          . '    "@context": "http://schema.org",    "@type": "WebSite",    "url": "'.$base_url.'",    '
+          . '"potentialAction": {      "@type": "SearchAction",      '
+          . '"target": "'.$target.'",      '
+          . '"query-input": "required name='.$_GET['keyword'].'"    } } '
+          . '</script>',
+      );
+      drupal_add_html_head($markup, 'sd_json');
+    }    
+    
     $settings = array();
     $settings['base_url'] = $base_url;
     $settings['uid'] = $user->uid;
@@ -329,11 +344,13 @@ function itg_front_search_form_views_exposed_form_alter(&$form, &$form_state, $f
   if ($form["#id"] == 'views-exposed-form-front-end-global-search-page') {
 
     $form['tm_vid_4_names']['#autocomplete_path'] = 'tag-list/' . CATEGORY_MANAGMENT . '/autocomplete';
+    $form['tm_vid_14_names']['#autocomplete_path'] = 'tag-list/' . CATEGORY_MANAGMENT . '/autocomplete';
     $form['sm_field_itg_common_by_line_name']['#autocomplete_path'] = 'reporter-list/autocomplete';
   }
   if ($form["#id"] == 'views-exposed-form-searchimage-page') {
 
     $form['tm_vid_4_names']['#autocomplete_path'] = 'tag-list/' . CATEGORY_MANAGMENT . '/autocomplete';
+    $form['tm_vid_14_names']['#autocomplete_path'] = 'tag-list/' . CATEGORY_MANAGMENT . '/autocomplete';
   }
 }
 
@@ -382,7 +399,7 @@ function highlight($text, $words, $color = 'yellow', $case = '1') {
 function itg_front_search_node_presave($node) {
 
   //if ($node->type == 'story' || $node->type == 'recipe' || $node->type == 'cooking_tips' || $node->type == 'videogallery' || $node->type == 'food_news') {
-  if ($node->type == 'story' || $node->type == 'videogallery') {
+  if ($node->type == 'videogallery') {
     if (isset($node->field_story_reporter['und'])) {
       foreach ($node->field_story_reporter['und'] as $high) {
         $reporter_id = $high['target_id'];
@@ -405,12 +422,8 @@ function itg_front_search_node_presave($node) {
         $node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'] = $final_by_line_twitter;
       }
     }
-  }
-
-  if ($node->type == 'photogallery')
-  {
-    if (!empty($node->field_photo_by[LANGUAGE_NONE][0]['target_id']))
-    {
+  } else if ($node->type == 'photogallery') {
+    if (!empty($node->field_photo_by[LANGUAGE_NONE][0]['target_id'])) {
       $photo_by_id = $node->field_photo_by[LANGUAGE_NONE][0]['target_id'];
       $reporter_node = node_load($photo_by_id);
       $node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'] = strtolower($reporter_node->title);

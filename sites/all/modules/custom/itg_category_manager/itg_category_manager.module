@@ -70,6 +70,12 @@ function itg_category_manager_menu() {
     'access arguments' => array('administer taxonomy'),
     'type' => MENU_CALLBACK
   );
+  // Autocomplete callback for category name
+  $items['itg_category_manager_autocomplete_tid'] = array(
+    'page callback' => 'itg_category_manager_autocomplete_tid',
+    'access arguments' => array('administer taxonomy'),
+    'type' => MENU_CALLBACK
+  );
 // Category disable menus
   $items['category-management/disable-forcefully'] = array(
     'page callback' => 'itg_category_manager_disable_forcefully',
@@ -238,6 +244,17 @@ function itg_category_manager_js_alter(&$javascript) {
 function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
   global $user;
   global $base_url;
+  
+   if ($form['#vocabulary']->machine_name == 'state_manager') {
+    $form['#attributes']['class'][] = 'node-form node-category-form';
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js',
+    );
+    $form['field_user_city'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('HH:MM');
+    $form['relations']['parent']['#config']['module'] = 'itg_category_manager';
+    $form['relations']['parent']['#weight'] = -1;
+    $form['#submit'][] = 'itg_category_manager_custom_submit';
+  }
 // Add js to category management form
   if ($form['#vocabulary']->machine_name == 'category_management') {
     $form['#attributes']['class'][] = 'node-form node-category-form';
@@ -246,6 +263,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     );
     $form['field_user_city'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('HH:MM');
     $form['relations']['parent']['#config']['module'] = 'itg_category_manager';
+    $form['relations']['parent']['#weight'] = -1;
     $form['#submit'][] = 'itg_category_manager_custom_submit';
   }
   if ($form_id == 'taxonomy_form_term') {
@@ -326,6 +344,8 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       $form['relations']['parent']['#title'] = t('Select Section');
       $form['relations']['parent']['#description'] = '<p>' . t('Please select &#60;root&#62; for section.') . '</p>';
       $form['relations']['#collapsible'] = 0;
+       $form['relations']['#weight'] = 5;
+     
       unset($form['relations']['weight']);
 //Non-editable fields in edit mode
       if (arg(3) == 'edit') {
@@ -1062,6 +1082,7 @@ function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
     drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/clipboard.min.js', 'file');
     drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js', 'file');
     $form['name']['#autocomplete_path'] = 'itg_category_manager_autocomplete';
+    $form['tid_raw']['#autocomplete_path'] = 'itg_category_manager_autocomplete_tid';
     $form['status']['#options'][1] = t('Active');
     $form['status']['#options'][0] = t('Inactive');
     $form['field_cm_select_type_value']['#options']['All'] = t('All');
@@ -1294,11 +1315,29 @@ function itg_category_manager_autocomplete_name($string) {
 }
 
 /**
+ * Callback function for category name autocomplete.
+ * 
+ * @param string $string keyword for auto suggest.
+ * @return json Autocomplete callback for category manager view
+ */
+function itg_category_manager_autocomplete_tid($string) {
+  $itg_query = db_select('taxonomy_term_data', 'itg');
+  $itg_query->condition('tid', $string . '%', 'LIKE')
+      ->fields('itg', array('tid'));
+  $itg_result = $itg_query->execute();
+  $result = array();
+  foreach ($itg_result as $value) {
+    $result[$value->tid] = $value->tid;
+  }
+  return drupal_json_output($result);
+}
+
+/**
  * Callback function for category disabling forcefully. 
  */
 function itg_category_manager_disable_forcefully() {
   $current_term = check_plain($_POST['tid']);
-  $is_child = taxonomy_get_tree(4, $current_term);
+  $is_child = taxonomy_get_tree(CATEGORY_MANAGMENT, $current_term);
   if (count($is_child) > 0) {
     drupal_set_message(t('Category has child categories can not be inactivated.'), 'error');
   }
@@ -1440,10 +1479,10 @@ function itg_category_manager_disable_manually_form_validate($form, &$form_state
 function itg_category_manager_disable_manually_form_submit($form, &$form_state) {
   $parent_category = $form_state['values']['itg_categories'];
   $current_term = check_plain($form_state['values']['tid']);
-  $is_child = taxonomy_get_tree('4', $current_term);
+  $is_child = taxonomy_get_tree(CATEGORY_MANAGMENT, $current_term);
   if (count($is_child) > 0) {
     drupal_set_message(t('Category has child categories can not be inactivated.'), 'status');
-   // p('have child');
+
   }
   else {
     $all_term_count = count($parent_category);
@@ -1522,7 +1561,7 @@ function itg_category_manager_views_query_alter(&$view, &$query) {
     if (!empty($query->where[1]['conditions'])) {
       foreach ($query->where[1]['conditions'] as $tkey => $tval) {
         if ($tval['field'] == 'taxonomy_term_data_itg_category_manager.vid') {
-          $tval['value'][0] = CATEGORY_MANAGMENT;
+          $query->where[1]['conditions'][$tkey]['value'][0] = CATEGORY_MANAGMENT;
         }
       }
     }
@@ -1540,7 +1579,7 @@ function itg_category_manager_views_query_alter(&$view, &$query) {
     // Alter content type filter.
     if (!empty($_GET['field_cm_select_type_value']) && $_GET['field_cm_select_type_value'] != 'All') {
       $condition_count = count($query->where[1]['conditions']);
-      unset($query->where[1]['conditions'][$condition_count - 1]);
+      //unset($query->where[1]['conditions'][$condition_count - 1]);
     }        
   }
 }

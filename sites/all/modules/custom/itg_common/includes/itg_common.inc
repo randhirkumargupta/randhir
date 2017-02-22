@@ -235,7 +235,7 @@ function itg_last_node_published_user($uid, $publish_id) {
             ->fields('w', array('nid', 'vid'))
             ->condition('uid', $uid, '=')
             ->condition('published', $publish_id, '=')
-            ->orderBy('stamp', 'DESC')//ORDER BY created
+           // ->orderBy('stamp', 'ASC')//ORDER BY created
             ->range(0, 1)
             ->execute();
 
@@ -509,7 +509,7 @@ function itg_common_get_latest_byline($nid, $status) {
  */
 
 function itg_common_custompath_load($node) {
-
+if(!empty($node->nid)){
     global $edited_sef_url;
     if (!empty($node->path['alias'])) {
       $path_data = explode("/", $node->path['alias']);
@@ -543,6 +543,7 @@ function itg_common_custompath_load($node) {
       $node->path = array('alias' => $newpath, 'pathauto' => FALSE);
     }
 }
+}
 
 /** 
  * Implementing 'itg_common_custompath_val'.
@@ -567,27 +568,24 @@ function itg_common_custompath_val($pathdata) {
 
 
 
-/** 
+/**
  * Implementing 'itg_common_custompath_insert_load'.
  * @param $node object
  * Creating Custom path alias for story, photogallery and videogallery
  */
 
 function itg_common_custompath_insert_load($node) {
-
-    if (!empty($node->path['alias'])) {
-        $path_data = explode("/", $node->path['alias']);
-        $set_hierarchy = array_reverse($path_data);
-        $alias_set = preg_replace("/[0-9]{4}/", "key-year", $set_hierarchy[0]);
-        $sefurl = explode("key-year", $alias_set);
-        $node_sef = rtrim($sefurl[0],'-');
+    global $edited_sef_url;
+    if(!empty ($edited_sef_url)) {
+        $node_sef = $edited_sef_url;
     } else {
         $node_sef = $node->title;
     }
-
-    if ($node->workbench_moderation_state_new == 'draft' || $node->workbench_moderation_state_new == 'published'){
-        $published_date = date('Y-m-d', $node->created);
-    }
+    if(!empty($node->workbench_moderation_state_new)){
+      if ($node->workbench_moderation_state_new == 'draft' || $node->workbench_moderation_state_new == 'published'){
+          $published_date = date('Y-m-d', $node->created);
+      }
+    
     
     $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
     if (!empty($getsection)) {
@@ -600,11 +598,8 @@ function itg_common_custompath_insert_load($node) {
       $set_hierarchy = array_reverse($section_hierarchy);
       $pathdata = strtolower(implode("/", $set_hierarchy)) . '/'. $node->type . '/' . trim($node_sef). '-'. $node->nid .'-'. $published_date;
       $newpath = itg_common_custompath_insert_val($pathdata);
-      $conditions = array('source' => 'node/' . $node->nid);
-      $criteria = path_load($conditions);
-      $criteria = array('pid' => $criteria);
-      path_delete($criteria);
       $node->path = array('alias' => $newpath, 'pathauto' => FALSE);
+    }
     }
 }
 

@@ -14,7 +14,7 @@ function itg_api_mail_today_content() {
     $op[$val->tid] = $val->name;
   }
 
-  $direc = get_dir_content($file_path . '/gallery/mailtoday/');
+  $direc = get_dir_content($file_path . '/feeds/mailtoday/');
 
   foreach ($direc as $xm_file) {
 
@@ -35,9 +35,9 @@ function itg_api_mail_today_content() {
           $category_name = 'Mail Today';
         }
 
-        $term_id = itg_api_get_term_id($category_name);
+        $term_id = itg_api_get_term_id($category_name, CATEGORY_MANAGMENT);
         if (empty($term_id)) {
-          $term_id = itg_api_get_term_id('Mail Today');
+          $term_id = itg_api_get_term_id('Mail Today', CATEGORY_MANAGMENT);
         }
 
         $title = itg_api_check_title($headline);
@@ -74,11 +74,15 @@ function itg_api_mail_today_content() {
           $publish_date = date('Y-m-d', $publish_date_timestamp);
 
           // create expiry date based on publish date 
-          $exp_date = strtotime('+90 years', strtotime($publish_date));
+          $exp_date = strtotime('+10 years', strtotime($publish_date));
           $exp_date = date('Y-m-d', $exp_date);
 
           // get byline id based on name 
           $by_line = itg_api_get_nid('mail today', 'reporter');
+          $uniqueid = 'byline_'. uniqid();
+          if(function_exists('itg_custom_byline_create')) {
+          itg_custom_byline_create($uniqueid, $by_line);
+          }
 
           $exp_description = strtolower($description);
           $exp_description = explode(" ", $exp_description);
@@ -100,9 +104,13 @@ function itg_api_mail_today_content() {
           $node->metatags[LANGUAGE_NONE]['keywords']['value'] = $meta_keyword;
           $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'Mail Today';
           $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = $by_line;
+          if(!empty($term_id)) {
           $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $term_id;
+          }
           $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $publish_date ? $publish_date : date('Y-m-d', time());
           $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
+          $node->field_story_type[LANGUAGE_NONE][0]['value'] = 'other_story';
+          $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'] = trim($uniqueid);
           if (array_intersect($op, $exp_description)) {
             $node->log = 'State Changed to Review';
             $node->workbench_moderation_state_new = workbench_moderation_state_review();
@@ -121,7 +129,7 @@ function itg_api_mail_today_content() {
           print '<br/>';
         }
 
-        if ($i == 2)
+        if ($i == 1)
           break;
         $i++;
       }

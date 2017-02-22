@@ -340,7 +340,7 @@ function ads_features_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 13,
+      'weight' => 12,
     ),
   );
 
@@ -382,7 +382,7 @@ function ads_features_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 12,
+      'weight' => 11,
     ),
   );
 
@@ -424,7 +424,7 @@ function ads_features_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 11,
+      'weight' => 10,
     ),
   );
 
@@ -553,7 +553,7 @@ function ads_features_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_ads_template_selection',
-    'label' => 'Template Selection',
+    'label' => 'Select Section',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -573,7 +573,7 @@ function ads_features_field_default_field_instances() {
     'bundle' => 'ads_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'If you want to include external script on Category Listing Page and Node Detail Page, please check <b>visibility flag  for external script</b>.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -603,7 +603,7 @@ function ads_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 10,
+      'weight' => 13,
     ),
   );
 
@@ -729,13 +729,14 @@ function ads_features_field_default_field_instances() {
   t('External Body close script');
   t('External Body start script');
   t('External Header script');
+  t('If you want to include external script on Category Listing Page and Node Detail Page, please check <b>visibility flag  for external script</b>.');
   t('Internal Body close script');
   t('Internal Body start script');
   t('Internal Header script	');
   t('Please enter script code with Javascript <b>script</b> tag.');
+  t('Select Section');
   t('Select template type');
   t('Start Date');
-  t('Template Selection');
   t('Template section');
 
   return $field_instances;

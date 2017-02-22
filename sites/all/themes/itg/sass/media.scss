@@ -248,37 +248,7 @@
         padding: 0;
     }
     /*sider bar css end*/
-    
-    /*css start poll page*/
-    .poll-banner{
-        .detail {
-            width: auto;
-            display: block;
-            overflow: hidden;
-            float: none;
-            padding-right: 0px; 
-            .detail-content{
-                h4{
-                    @include font(15px,20px);
-                }
-            }
-        }
-        .poll-list{
-            .pic{
-                width: 145px; 
-                margin-right: 10px;
-            }
-            .voting-data{                
-                float: none;
-                @include calculate-width(1);
-                overflow: hidden;
-                padding-top: 15px;
-            }            
-        }                
-    }
-    
-    /*css end poll page*/    
-    
+        
 /*css start osscar page */
     .oscar-layout-page{
         .osscar-video{
@@ -324,16 +294,20 @@
     h1 {
         margin-top: 20px;
     }
-    .election-graph{      
-        .col-el-5{
-            width: 240px;
-        }   
+    .election-graph table{
+        font-size: 12px;
     }
     .election-top-block{
         .social-share{
             padding-top: 0;
         }
     }
+    .col-el-5 .graph-design .highcharts-title tspan{
+        font-size: 16px;
+        &:nth-child(1){
+            font-size: 16px;    
+        }
+    }    
 }
 
 /*Election page css end*/
@@ -434,17 +408,50 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
 }
 /*oscar page css end*/
 
-
+/*poll page css start*/
+.poll-banner{
+    .detail{
+        width: 33%
+    }
+    .poll-list .voting-data{
+        width: 41%;
+    }
+} 
+/*poll page css end*/
+/*education page css start*/
+.education-layout-page .auto-block-2 .special-top-news {
+    overflow: scroll;    
+}
+/*education page css end*/
+/*for all special pages start*/
+.widget-wrapper {
+    max-height: 100%;
+    overflow: auto;
+    height: auto;
+}
+/*for all special pages end*/
+/*search page css start */
+[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget {
+    padding-right: 10px;
+    font-size: 11px;
+}
+/*search page css end */
 }   
 
 
 @media only screen and (max-width:991px){
     /*CSS start education page special*/
-    .education-layout-page .itg-layout-672 .droppable, .education-layout-page .itg-layout-672 .droppable .auto-block-1, .education-layout-page .itg-layout-672 .droppable .auto-block-2{
+    .education-layout-page .itg-layout-672 .droppable, .education-layout-page .itg-layout-672 .droppable .auto-block-1{
         height: auto;
     }
     .education-layout-page .itg-layout-672 .droppable .auto-block-1, .education-layout-page .itg-layout-672 .droppable .auto-block-2{
         margin-bottom: 50px;
+    }
+    .education-layout-page .itg-layout-672 .droppable .auto-block-1{
+        border:none;
+    }
+    .education-layout-page .featured-news{
+        margin: 0 -5px
     }
     .education-layout-page .auto-block-3 .m-bottom40{
         margin-bottom: 0;
@@ -546,9 +553,29 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
         margin-top: 0px;
     }
 }
-
-
 /*    oscar page css end*/
+/*poll page css start*/
+.poll-banner{
+    .detail{
+        width: 40%
+    }
+    .poll-list .voting-data{
+        width: 35%;
+    }
+} 
+/*poll page css end*/
+
+/*budget page css start*/
+.budget-page-layout {
+    .itg-715-layout{
+        .ipad-space{
+            margin-top: 0;
+        }
+    }
+}
+/*budget page css end*/
+
+
 
 }
 
@@ -769,14 +796,9 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
     .movie-layout-page .itg-layout-580 .itg-widget-child .droppable, 
     .movie-layout-page .itg-layout-580 .droppable,
     .movie-layout-page .itg-layout-580 .droppable .auto-block-1, 
-    .movie-layout-page .itg-layout-580 .droppable .auto-block-2, 
-    .education-layout-page .itg-layout-565 .droppable,
-    .education-layout-page .itg-layout-672 .itg-widget-child .droppable, 
-    .education-layout-page .itg-295-layout .droppable, 
-    .education-layout-page .itg-325-layout .droppable,
-    .education-layout-page .itg-345-layout .droppable, 
-    .education-layout-page .itg-325-layout .ad-widget,
-    .auto-layout-page .auto-block-1
+    .movie-layout-page .itg-layout-580 .droppable .auto-block-2,     
+    .auto-layout-page .auto-block-1,
+    .election-page .right-side .itg-484 .droppable
     {
         height: auto;  
         min-height: auto;
@@ -798,19 +820,14 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
             .dont-miss-listing{
                .dm-pic{
                     width: 124px;                
-                }                
-                @include calculate-width(1);
-                padding: 0px 0px 20px 0;  
-                &:nth-child(3){
-                    padding-bottom: 20px;
-                }
+                }                               
             }
         }
     }
     /*End Dont miss Home page css*/
 /*    budget page block height start*/
     .budget-page-layout{
-        .auto-block-2, .slider-budget, .common-highlights{
+        .auto-block-2, .slider-budget{
             height: auto;
         }
         .itg-325-layout, .itg-530-layout, .itg-370-layout, .itg-480-layout, .itg-715-layout{
@@ -957,6 +974,12 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
     .education-layout-page .auto-block-3 .m-bottom40{
         margin-bottom: 40px;
     }
+    .education-layout-page .itg-layout-565 .itg-widget-parent .droppable{
+        height: 300px;
+        &.m-bottom40{
+            margin-bottom: 0;
+        }
+    }
     /*CSS end education page special*/
 
     /*css start side bar section for video and photo*/
@@ -972,6 +995,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
 .sport-home-layout-page{  
 .right-side{
     .col-md-12{
+        min-height: 260px;
         .ad-widget{
             margin-top: 40px;
         }
@@ -1140,6 +1164,9 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
                 h4{
                     @include font(15px,20px);
                 }
+                .vota-time.mhide{
+                    display: block;
+                }
             }
         }
         .poll-list{
@@ -1157,6 +1184,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
             clear:both;
             @include calculate-width(1);
             padding-top: 15px;
+            display:none;
             div{
                 @include display-inline;   
                 margin-bottom: 10px;
@@ -1317,14 +1345,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
     .key-candidate .list-state {
         white-space: nowrap;
         overflow: auto;
-    }
-    .itg-most-popular .most_popular {
-        .col-md-3{
-            &:nth-child(2n+1){
-                clear:left;
-            }
-        }
-    }
+    }    
     .left-side{
         .itg-325-layout, .itg-415-layout, .itg-map, .itg-most-popular, .itg-photo{
             .droppable{
@@ -1402,6 +1423,9 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
 .movie-layout-page .itg-layout-580 .droppable .auto-block-1, .movie-layout-page .itg-layout-580 .droppable .auto-block-2{
     margin-bottom: 50px;
 }
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-caption a{
+    font-size: 16px;
+}
 /*movie page css end*/
 /*Globle search page css start*/
 .view-front-end-global-search{
@@ -1475,6 +1499,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
         padding-left: 15px;
         width: 100%;
         background: transparent;
+        display: none;
     }
 }
 .event-sidebar .header-top .event-header-banner{
@@ -1549,12 +1574,17 @@ padding-right: 10px;
     padding-left: 20px;
 }
 /*sosory page css end*/
-
+/*election page css start*/
+.election-page .election-graph .col-el-5{
+    width: 245px;
+}
+/*election page css end*/
 
 }
 
 
 @media only screen and (max-width:767px){
+ /*css start oscar-layout-page */
     .oscar-layout-page .oscar-news {
         .col-md-6:nth-child(3n+1){
             clear: left;   
@@ -1571,7 +1601,120 @@ padding-right: 10px;
                 }
             }
         }   
+    }
+ /*css end oscar-layout-page */
+ /*css start poll page*/
+    .poll-banner{
+        .detail {
+            width: auto;
+            display: block;
+            overflow: hidden;
+            float: none;
+            padding-right: 0px; 
+            .detail-content{
+                h4{
+                    @include font(15px,20px);
+                }
+                .vota-time.mhide{
+                    display: none;
+                }
+            }
+        }
+        .poll-list{
+            .pic{
+                width: 145px; 
+                margin-right: 10px;
+            }
+            .voting-data{                
+                float: none;
+                @include calculate-width(1);
+                overflow: hidden;
+                padding-top: 15px;                                
+            }
+            .vota-time.desktop-hide{
+                display: block;
+            }
+        }                
     }    
+    /*css end poll page*/    
+/*budget page css start*/
+.budget-page-layout {
+    .itg-715-layout{
+        .ipad-space{
+            margin-top:50px;
+        }
+    }
+    .latest .col-md-3:nth-child(2n+1) {
+        clear: left;
+    }
+}
+/*budget page css end*/    
+
+/*election page css start*/
+.election-page{
+    .itg-most-popular .most_popular {
+        .col-md-3{
+            &:nth-child(2n+1){
+                clear:left;
+            }
+        }
+    }   
+}
+/*election page css end*/
+
+    /*Start Dont miss Home page css*/
+    .dont-miss{            
+        ul{
+            .dont-miss-listing{
+               .dm-pic{
+                    width: 124px;                
+                }                
+                @include calculate-width(1);
+                padding: 0px 0px 20px 0;  
+                &:nth-child(3){
+                    padding-bottom: 20px;
+                }
+            }
+        }
+    }
+    /*End Dont miss Home page css*/
+/*education page css start*/
+.education-layout-page .itg-layout-565 .droppable,
+    .education-layout-page .itg-layout-672 .itg-widget-child .droppable, 
+    .education-layout-page .itg-295-layout .droppable, 
+    .education-layout-page .itg-325-layout .droppable,
+    .education-layout-page .itg-345-layout .droppable, 
+    .education-layout-page .itg-325-layout .ad-widget{
+        height: auto;
+    }
+/*education page css end*/
+
+/*Globe change for don't miss start*/
+.dont-miss ul .dont-miss-listing .dm-detail,
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-detail,
+#block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-detail, 
+.osscar-video ul .dont-miss-listing .dm-detail{
+        overflow: initial;
+}
+/*Globe change for don't miss end*/
+
+/*event page css start*/
+#block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider li{
+    width: 100%;
+}
+#block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider {
+    .slick-prev, .slick-next{
+        display: none;
+    }
+}
+/*event page css end*/
+.video-heading, .photo-heading{
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 10px;
+}
+
+
 }
 
 
@@ -2146,7 +2289,22 @@ footer .footer-top .footer-social-link{
 }
 /*oscar page css end*/
 
+/*election page css start*/
+.election-page .key-candidate .key-candidate-detail ul li .status span{
+    font-size: 12px;
+}
+/*election page css end*/
 
+.sign-in-link .signup-link {
+    float: none;
+    display: block;
+    text-align: left;
+}
+.sign-in-link a{
+    display: block;
+    text-align: left;
+    margin-bottom: 10px;
+}
 
 
 }

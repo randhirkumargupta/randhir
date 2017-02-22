@@ -3081,7 +3081,7 @@ echo $base_url;
   $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
   $handler->display->display_options['fields']['field_story_extra_large_image']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_extra_large_image']['empty'] = '<img width=\'170\' height=\'127\'  src=\'[php]/sites/all/themes/itg/images/default_video.jpg\' />';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['empty'] = '<img width=\'170\' height=\'127\'  src=\'[php]/sites/all/themes/itg/images/itg_image170x127.jpg\' />';
   $handler->display->display_options['fields']['field_story_extra_large_image']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(

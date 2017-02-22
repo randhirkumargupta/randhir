@@ -648,6 +648,38 @@ function features_for_story_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_itg_content_publish_date'.
+  $field_bases['field_itg_content_publish_date'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_itg_content_publish_date',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'date',
+    'settings' => array(
+      'cache_count' => 4,
+      'cache_enabled' => 0,
+      'granularity' => array(
+        'day' => 'day',
+        'hour' => 'hour',
+        'minute' => 'minute',
+        'month' => 'month',
+        'second' => 0,
+        'year' => 'year',
+      ),
+      'timezone_db' => 'UTC',
+      'todate' => '',
+      'tz_handling' => 'site',
+    ),
+    'translatable' => 0,
+    'type' => 'datetime',
+  );
+
   // Exported field_base: 'field_listicle_color'.
   $field_bases['field_listicle_color'] = array(
     'active' => 1,
@@ -1004,6 +1036,28 @@ function features_for_story_field_default_field_bases() {
     'type' => 'list_text',
   );
 
+  // Exported field_base: 'field_story_big_image'.
+  $field_bases['field_story_big_image'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_story_big_image',
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'image',
+    'settings' => array(
+      'default_image' => 0,
+      'uri_scheme' => 'public',
+    ),
+    'translatable' => 0,
+    'type' => 'image',
+  );
+
   // Exported field_base: 'field_story_category'.
   $field_bases['field_story_category'] = array(
     'active' => 1,
@@ -1104,7 +1158,8 @@ function features_for_story_field_default_field_bases() {
         'display_lock' => 'Display Lock',
         'set_as_featured' => 'Set As Featured',
         'tv' => 'Associate Tv',
-        'noindex_nofollow' => 'Noindex & No follow',
+        'noindex_nofollow' => 'No index',
+        'nofollow' => 'No follow',
         'lock_story' => 'Lock Story',
         'developing_story' => 'Developing Story',
       ),
@@ -1826,12 +1881,12 @@ function features_for_story_field_default_field_bases() {
   // Exported field_base: 'field_story_mosimage'.
   $field_bases['field_story_mosimage'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_mosimage',
     'field_permissions' => array(
-      'type' => 2,
+      'type' => 0,
     ),
     'indexes' => array(
       'format' => array(
@@ -1840,11 +1895,9 @@ function features_for_story_field_default_field_bases() {
     ),
     'locked' => 0,
     'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
+    'settings' => array(),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'text_long',
   );
 
   // Exported field_base: 'field_story_new_title'.

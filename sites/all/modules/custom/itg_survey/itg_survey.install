@@ -142,6 +142,13 @@ function itg_survey_schema() {
               'not null' => TRUE,
               'default' => '',
           ),
+        'rating_value' => array(
+            'description' => 'rating value.',
+             'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
           'created' => array(
               'type' => 'int',
               'not null' => TRUE,
@@ -192,3 +199,4 @@ function itg_survey_schema() {
 
   return $schema;
 }
+

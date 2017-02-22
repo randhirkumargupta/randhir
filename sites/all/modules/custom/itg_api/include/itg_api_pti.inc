@@ -12,14 +12,13 @@ function itg_pti_content() {
   $tax = taxonomy_get_tree($vocab_id->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
 
   foreach ($tax as $key => $val) {
-    $op[$val->tid] = $val->name;
+    $op[$val->tid] = strtolower($val->name);
   }
-
-  $direc = get_dir_content($file_path . '/gallery/pti/');
+ 
+  $direc = get_dir_content($file_path . '/feeds/pti/');
 
   foreach ($direc as $xm_file) {
-
-    $xml_file_path = $xm_file;
+   $xml_file_path = $xm_file;
     $xml_filename = basename($xml_file_path);
     $pti_xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
     if (!empty($pti_xml)) {
@@ -39,12 +38,12 @@ function itg_pti_content() {
           $category_name = 'PTI';
         }
 
-        $term_id = itg_api_get_term_id($category_name);
+        $term_id = itg_api_get_term_id($category_name, CATEGORY_MANAGMENT);
 
         if (empty($term_id)) {
-          $term_id = itg_api_get_term_id('PTI');
+          $term_id = itg_api_get_term_id('PTI', CATEGORY_MANAGMENT);
         }
-
+        
         $title = itg_api_check_title($headline);
 
         if (!$title) {
@@ -61,13 +60,11 @@ function itg_pti_content() {
           }
           $meta_keyword = implode(", ", $final_keyword);
           $description = $pti_value->description;
-          $description = strip_tags($description, '<p>');
-          $description = trim($description);
+          $description = trim(strip_tags($description, '<p>'));
           $kicker = substr($description, 0, 200);
-          $kicker = strip_tags($kicker);
-          $kicker = trim($kicker);
+          $kicker = trim(strip_tags($kicker));
           $kicker1 = substr($description, 200);
-          $kicker1 = strip_tags($kicker1);
+          $kicker1 = trim(strip_tags($kicker1));
           $pre_final_kicker = preg_split('/(?<!\d)\.(?!\d)/', $kicker1);
           $final_kicker = $kicker . ' ' . $pre_final_kicker[0];
           $final_kicker = str_replace(array('\'', '"'), '', $final_kicker);
@@ -81,13 +78,16 @@ function itg_pti_content() {
           $publish_date = date('Y-m-d', $publish_date_timestamp);
 
           // create expiry date based on publish date 
-          $exp_date = strtotime('+90 years', strtotime($publish_date));
+          $exp_date = strtotime('+10 years', strtotime($publish_date));
           $exp_date = date('Y-m-d', $exp_date);
 
           // get byline id based on name 
           $by_line = itg_api_get_nid('PTI', 'reporter');
-
-          //Set values to node l54,s130
+          $uniqueid = 'byline_'. uniqid();
+          if(function_exists('itg_custom_byline_create')) {
+          itg_custom_byline_create($uniqueid, $by_line);
+          }
+          //Set values to node
           $node = new stdClass();
           $node->title = trim($headline);
           $node->type = "story";
@@ -103,14 +103,26 @@ function itg_pti_content() {
           $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim($headline);
           $node->metatags[LANGUAGE_NONE]['keywords']['value'] = $meta_keyword;
           $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'PTI';
-          $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = $by_line; //54
+          if(!empty($term_id)) {
           $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $term_id;
+          }
           $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $publish_date ? $publish_date : date('Y-m-d', time());
           $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
+          $node->field_story_type[LANGUAGE_NONE][0]['value'] = 'other_story';
+          $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'] = trim($uniqueid);
           $exp_description = strtolower($description);
           $exp_description = explode(" ", $exp_description);
-
+          $exclude_word = array('embargoed', 'ap', 'afp', 'dpa');
           if (array_intersect($op, $exp_description)) {
+            $node->log = 'State Changed to Review';
+            $node->workbench_moderation_state_new = workbench_moderation_state_review();
+          } else if(array_intersect($exclude_word, $exp_description)) {
+            $node->log = 'State Changed to Review';
+            $node->workbench_moderation_state_new = workbench_moderation_state_review();
+          } else if(preg_match('/embargoed/',$headline)) {
+            $node->log = 'State Changed to Review';
+            $node->workbench_moderation_state_new = workbench_moderation_state_review();
+          } else if(preg_match('/pwr/',$xml_filename)) {
             $node->log = 'State Changed to Review';
             $node->workbench_moderation_state_new = workbench_moderation_state_review();
           }
@@ -143,3 +155,4 @@ function itg_pti_content() {
     }
   }
 }
+

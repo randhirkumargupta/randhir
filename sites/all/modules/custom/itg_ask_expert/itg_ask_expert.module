@@ -31,7 +31,20 @@ function itg_ask_expert_theme($existing, $type, $theme, $path) {
 function itg_ask_expert_form_alter(&$form, &$form_state, $form_id) {
     global $user;
     $user_fields = user_load($user->uid);
-    if ($form_id == 'ask_an_expert_node_form') {
+    // SHOW only section in dropdown expert user selection
+    if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'user_selection')
+  {
+    $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+    $op = array("_none" => "Select Category");
+    foreach ($tax as $key => $val) {
+      $op[$val->tid] = $val->name;
+    }
+
+    // assign array value to taxonomy field
+    $form['field_user_section_tid']['#options'] = $op;
+    
+  }
+  if ($form_id == 'ask_an_expert_node_form') {
 
         // code to hide source field
         if ($user->uid != '1') {
