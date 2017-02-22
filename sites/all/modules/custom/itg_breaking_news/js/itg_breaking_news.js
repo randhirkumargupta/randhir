@@ -105,6 +105,15 @@
     }
   });
   $('#edit-field-section > .form-type-select > label').html('Section<span class="form-required">*</span>');
+  
+  
+  $( 'input[name="field_breaking_content_details_add_more"]' ).ajaxComplete(function() {
+    var offSet = 200;
+    var dataOffset = $(this).offset().top;
+    var targetOffset = dataOffset - offSet;
+    alert(dataOffset + ' == ' + targetOffset);
+    $("body, html").animate({scrollTop: targetOffset}, 300);
+  });
 
 
     }
