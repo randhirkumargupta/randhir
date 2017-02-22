@@ -10,6 +10,15 @@
 function feature_for_top_story_widget_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'administer itg analytics widget'.
+  $permissions['administer itg analytics widget'] = array(
+    'name' => 'administer itg analytics widget',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'itg_analytics',
+  );
+
   // Exported permission: 'administer nodequeue'.
   $permissions['administer nodequeue'] = array(
     'name' => 'administer nodequeue',
