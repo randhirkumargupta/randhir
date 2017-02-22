@@ -68,19 +68,19 @@ function funalytics_features_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'domain' => array(
-          'weight' => '2',
+          'weight' => '1',
         ),
         'metatags' => array(
-          'weight' => '5',
+          'weight' => '40',
         ),
         'title' => array(
-          'weight' => '0',
+          'weight' => '-5',
         ),
         'path' => array(
-          'weight' => '3',
+          'weight' => '30',
         ),
         'redirect' => array(
-          'weight' => '4',
+          'weight' => '30',
         ),
       ),
       'display' => array(),

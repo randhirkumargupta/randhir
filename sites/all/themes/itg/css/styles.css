@@ -2659,6 +2659,9 @@ footer .multiple-items-footer i.slick-next {
   text-align: center;
   line-height: 64px;
 }
+.story-section .story-right.photo-story .multiple-photo .slick-current .photo-count {
+  background-color: rgba(0, 0, 0, 0.2);
+}
 .story-section .story-right.photo-story .multiple-photo .slick-current .img-wrapper {
   border: 1px solid #ffc106;
 }
@@ -10047,7 +10050,7 @@ section.sidebar .block-itg-ads {
 }
 .election-page .right-side .ads-after-two .election-topadd .ad-widget {
   margin-top: 0;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 .election-page .itg-listing {
   border: none;
