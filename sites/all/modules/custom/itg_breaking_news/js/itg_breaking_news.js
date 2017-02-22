@@ -12,7 +12,14 @@
     attach: function (context, settings) {
       var uid = settings.itg_breaking_news.settings.uid;
       var type = $('#edit-field-type-und').val();
-
+      
+       $('#custom_add_another_item').click(function() {         
+         //edit-field-breaking-content-details
+         //ajax-new-content
+         $('input[name="field_breaking_content_details_add_more"]').mousedown();
+       })
+      
+      
       // type check for add form
       $("#edit-field-type-und").change(function () {
         
@@ -98,6 +105,15 @@
     }
   });
   $('#edit-field-section > .form-type-select > label').html('Section<span class="form-required">*</span>');
+  
+  
+  $( 'input[name="field_breaking_content_details_add_more"]' ).ajaxComplete(function() {
+    var offSet = 200;
+    var dataOffset = $(this).offset().top;
+    var targetOffset = dataOffset - offSet;
+    alert(dataOffset + ' == ' + targetOffset);
+    $("body, html").animate({scrollTop: targetOffset}, 300);
+  });
 
 
     }

@@ -11,6 +11,43 @@ function features_for_event_registration_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
+  // 'field_collection_item-field_erf_registration_fee-field_comments_remarks_'.
+  $field_instances['field_collection_item-field_erf_registration_fee-field_comments_remarks_'] = array(
+    'bundle' => 'field_erf_registration_fee',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 19,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_comments_remarks_',
+    'label' => 'Comments',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 13,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_erf_registration_fee-field_erf_city'.
   $field_instances['field_collection_item-field_erf_registration_fee-field_erf_city'] = array(
     'bundle' => 'field_erf_registration_fee',
@@ -43,7 +80,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -80,7 +117,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -133,7 +170,7 @@ function features_for_event_registration_field_default_field_instances() {
         'year_range' => '1950:+0',
       ),
       'type' => 'date_select',
-      'weight' => 10,
+      'weight' => 12,
     ),
   );
 
@@ -170,7 +207,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -207,7 +244,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -244,7 +281,7 @@ function features_for_event_registration_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -281,7 +318,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -318,7 +355,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -355,7 +392,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 11,
     ),
   );
 
@@ -392,7 +429,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -427,6 +464,74 @@ function features_for_event_registration_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 0,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_erf_registration_fee-field_event_country'.
+  $field_instances['field_collection_item-field_erf_registration_fee-field_event_country'] = array(
+    'bundle' => 'field_erf_registration_fee',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 20,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_event_country',
+    'label' => 'Country',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 10,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_erf_registration_fee-field_event_name_title'.
+  $field_instances['field_collection_item-field_erf_registration_fee-field_event_name_title'] = array(
+    'bundle' => 'field_erf_registration_fee',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 18,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_event_name_title',
+    'label' => 'Title',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 1,
     ),
   );
 
@@ -738,7 +843,9 @@ function features_for_event_registration_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Address');
   t('City');
+  t('Comments');
   t('Company Name');
+  t('Country');
   t('Date of Birth');
   t('Designation');
   t('Email');
@@ -755,6 +862,7 @@ function features_for_event_registration_field_default_field_instances() {
   t('Source id');
   t('State');
   t('Ticket Type');
+  t('Title');
   t('Total Fee');
 
   return $field_instances;
