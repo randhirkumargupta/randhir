@@ -31,10 +31,8 @@ function itg_ask_expert_theme($existing, $type, $theme, $path) {
 function itg_ask_expert_form_alter(&$form, &$form_state, $form_id) {
     global $user;
     
-    $user_fields = user_load($user->uid);
-   
     if ($form_id == 'ask_an_expert_node_form') {
-
+        $user_fields = user_load($user->uid);
         // code to hide source field
         if ($user->uid != '1') {
             $form['field_user_source_term_id']['#access'] = FALSE;
