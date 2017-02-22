@@ -32,6 +32,21 @@ function itg_bestcolleges_menu() {
     'page arguments' => array(1, 2, 3, 4),
     'access callback' => TRUE,
   );
+  $items['bestcolleges/%/readyrecnor-directory-list/%'] = array(
+    'page callback' => 'itg_readyrecnor_directory_list',
+    'page arguments' => array(1, 2, 3),
+    'access callback' => TRUE,
+  );
+  $items['bestcolleges/%/zone-wise-list/%'] = array(
+    'page callback' => 'itg_zone_wise_list',
+    'page arguments' => array(1, 2, 3),
+    'access callback' => TRUE,
+  );
+  $items['bestcolleges/%/campus-wise-list'] = array(
+    'page callback' => 'itg_campus_wise_list',
+    'page arguments' => array(1, 2),
+    'access callback' => TRUE,
+  );
   return $items;
 }
 
@@ -62,6 +77,21 @@ function itg_bestcolleges_theme($existing, $type, $theme, $path) {
     'itg_bestcollege_yearwise' => array(
       'variable' => array('data' => NULL),
       'template' => 'itg-bestcollege-yearwise',
+      'path' => drupal_get_path('module', 'itg_bestcolleges') . '/templates',
+    ),
+    'itg_readyrecnor_directory' => array(
+      'variable' => array('data' => NULL),
+      'template' => 'itg-readyrecnor-directory-listing',
+      'path' => drupal_get_path('module', 'itg_bestcolleges') . '/templates',
+    ),
+    'itg_zone_wise_list' => array(
+      'variable' => array('data' => NULL),
+      'template' => 'itg-zone-wise-list',
+      'path' => drupal_get_path('module', 'itg_bestcolleges') . '/templates',
+    ),
+    'itg_campus_wise_list' => array(
+      'variable' => array('data' => NULL),
+      'template' => 'itg-campus-wise-list',
       'path' => drupal_get_path('module', 'itg_bestcolleges') . '/templates',
     )
   );
@@ -163,26 +193,86 @@ function itg_bestcollege_streamcompare($year, $type, $stream1, $stream2) {
  * @return string
  */
 function itg_bestcollege_yearcompare($frmyear, $toyear, $type, $stream) {
-  drupal_set_title(t($stream . ' ' . $frmyear . ' Vs ' . $toyear));
+  drupal_set_title(t(drupal_ucfirst($stream) . ' ' . $frmyear . ' Vs ' . $toyear));
   $result_data = array();
   $result_data_yr1 = itg_bestcollege_getData($type, $frmyear, $stream);
   $result_data_yr2 = itg_bestcollege_getData($type, $toyear, $stream);
-
+  
   $data = array();
-  foreach ($result_data_yr1 as $result_data_stream1_key => $result_data_stream1_val) {
-    $clgname_city = $result_data_stream1_val->collegename . ', ' . $result_data_stream1_val->city;
-    $data[$frmyear][] = array('rank' => $result_data_stream1_val->rank, 'college_name' => $clgname_city);
+  foreach ($result_data_yr1 as $result_data_yr1_key => $result_data_yr1_val) {
+    $clgname_city = $result_data_yr1_val->collegename . ', ' . $result_data_yr1_val->city;
+    $data[$frmyear][] = array('rank' => $result_data_yr1_val->rank, 'college_name' => $clgname_city);
   }
-  foreach ($result_data_stream2 as $result_data_stream2_key => $result_data_stream2_val) {
-    $clgname_city2 = $result_data_stream2_val->collegename . ', ' . $result_data_stream2_val->city;
-    $data[$toyear][] = array('rank' => $result_data_stream2_val->rank, 'college_name' => $clgname_city2);
+  foreach ($result_data_yr2 as $result_data_yr2_key => $result_data_yr2_val) {
+    $clgname_city2 = $result_data_yr2_val->collegename . ', ' . $result_data_yr2_val->city;
+    $data[$toyear][] = array('rank' => $result_data_yr2_val->rank, 'college_name' => $clgname_city2);
   }
   $output = theme('itg_bestcollege_yearwise', array('data' => $data));
   return $output;
 }
 
 /**
- * Common function to get data of bestcolleges:
+ * Function used to show Readyrecnor directory list Colleges List:
+ * @param int $year
+ * @param string $type
+ * @param string $stream
+ * @return string
+ */
+function itg_readyrecnor_directory_list($year, $type, $stream) {
+  drupal_set_title(t('DIRECTORY OF BEST COLLEGES ' . $year.': '.drupal_strtoupper($stream)));
+  $result_data = itg_bestcollege_getData($type, $year, $stream);
+  $data = array();
+  foreach ($result_data as $result_data_key => $result_data_val) {
+    $data[$stream][] = array($result_data_val->rank, $result_data_val->collegename, $result_data_val->address, $result_data_val->phone, $result_data_val->websiteurl, $result_data_val->established, $result_data_val->seats, $result_data_val->cutoff);
+  }
+  return theme('itg_readyrecnor_directory', array('data' => $data));
+}
+
+/**
+ * Function used to show Best Colleges List on behalf of zone:
+ * @param int $year
+ * @param string $type
+ * @param string $stream
+ * @return string
+ */
+function itg_zone_wise_list($year, $type, $stream) {
+  drupal_set_title(t('ZONEWISE RANKING: BEST ' . drupal_strtoupper($stream).' COLLEGES'));
+  $result_data = itg_bestcollege_getData($type, $year, $stream);
+  $data = array();
+  foreach ($result_data as $result_data_key => $result_data_val) {
+    $data[$stream][] = array($result_data_val->rank, $result_data_val->city, $result_data_val->collegename);
+  }
+  return theme('itg_zone_wise_list', array('data' => $data));
+}
+
+/**
+ * Function used to show Best Colleges List on behalf of zone:
+ * @param int $year
+ * @param string $type
+ * @param string $stream
+ * @return string
+ */
+function itg_campus_wise_list($year, $type, $stream) {
+  drupal_set_title(t('CAMPUSWISE RANKING: BEST GOVT. & PRIVATE COLLEGES'));
+  $result_data_eng = itg_bestcollege_getData($type, $year, 'eng');
+  $result_data_law = itg_bestcollege_getData($type, $year, 'law');
+  $result_data_medical = itg_bestcollege_getData($type, $year, 'medical');
+  
+  $data = array();
+  foreach ($result_data_eng as $result_data_eng_key => $result_data_eng_val) {
+    $data['eng'][] = array($result_data_eng_val->rank, $result_data_eng_val->collegename, $result_data_eng_val->city, $result_data_eng_val->stream);
+  }
+  foreach ($result_data_law as $result_data_law_key => $result_data_law_val) {
+    $data['law'][] = array($result_data_law_val->rank, $result_data_law_val->collegename, $result_data_law_val->city, $result_data_law_val->stream);
+  }
+  foreach ($result_data_medical as $result_data_medical_key => $result_data_medical_val) {
+    $data['medical'][] = array($result_data_medical_val->rank, $result_data_medical_val->collegename, $result_data_medical_val->city, $result_data_medical_val->stream);
+  }
+  return theme('itg_campus_wise_list', array('data' => $data));
+}
+
+/**
+ * Common function to get data of Best colleges:
  * @param int $type
  * @param int $byear
  * @param string $bstream
@@ -204,7 +294,6 @@ function itg_bestcollege_getData($type, $byear, $bstream) {
     return $itg_result;
   }
   if ($type == 'stream-comparecollege' || $type == 'year-comparecollege') {
-    // Query to find result of first stream:
     $itg_query = db_select('bestcolleges_master', 'n');
     $itg_query->join('bestcolleges_ranking', 'bcr', 'n.collegeid = bcr.collegeid');
     $itg_query->fields('bcr', array('id', 'year', 'rank', 'stream'));
@@ -214,6 +303,53 @@ function itg_bestcollege_getData($type, $byear, $bstream) {
         ->condition('bcr.published', 1)
         ->condition('bcr.rank', 0, '!=')
         ->orderBy('bcr.rank', 'ASC');
+    $itg_result = $itg_query->execute()->fetchAll();
+    return $itg_result;
+  }
+  if ($type == 'readyrecnor-directory-list') {
+    // Query to find result of on behalf of stream & year:
+    $itg_query = db_select('bestcolleges_readyrecnor_directory_list', 'brd');
+    $itg_query->fields('brd', array('rank', 'collegename', 'address', 'phone', 'websiteurl', 'established', 'seats', 'cutoff'))
+        ->condition('brd.year', $byear, '=')
+        ->condition('brd.stream', $bstream, '=')
+        ->condition('brd.published', 1)
+        ->condition('brd.rank', 0, '!=')
+        ->orderBy('brd.rank', 'ASC');
+    $itg_result = $itg_query->execute()->fetchAll();
+    return $itg_result;
+  }
+  if ($type == 'zone-wise-list') {
+    // Query to find result of best colleges with zone on behalf of stream & year:
+    $itg_query = db_select('bestcolleges_zonecampuswiseranking', 'bcz');
+    $itg_query->fields('bcz', array('rank', 'city', 'collegename'))
+        ->condition('bcz.year', $byear, '=')
+        ->condition('bcz.stream', $bstream, '=')
+        ->condition('bcz.city', array('North', 'South', 'East', 'West'), 'IN')
+        ->condition('bcz.published', 1)
+        ->condition('bcz.rank', 0, '!=')
+        ->orderBy('bcz.city', 'ASC');
+    $itg_result = $itg_query->execute()->fetchAll();
+    return $itg_result;
+  }
+  if ($type == 'campus-wise-list') {
+    $tech_stream = array();
+    if ($bstream == 'eng') {
+      $tech_stream = array('Govt Eng College', 'Pvt Eng College');
+    }
+    elseif ($bstream == 'law') {
+      $tech_stream = array('Govt Law College', 'Pvt Law College');
+    }
+    elseif ($bstream == 'medical') {
+      $tech_stream = array('Govt Medical College', 'Pvt Medical College');
+    }
+    // Query to find result of Pvt & Govt colleges with zone on behalf of stream & year:
+    $itg_query = db_select('bestcolleges_zonecampuswiseranking', 'bcz');
+    $itg_query->fields('bcz', array('rank', 'collegename', 'city', 'stream'))
+        ->condition('bcz.year', $byear, '=')
+        ->condition('bcz.stream', $tech_stream, 'IN')
+        ->condition('bcz.published', 1)
+        ->condition('bcz.rank', 0, '!=')
+        ->orderBy('bcz.stream', 'ASC');
     $itg_result = $itg_query->execute()->fetchAll();
     return $itg_result;
   }
