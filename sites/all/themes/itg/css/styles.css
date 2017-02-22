@@ -6812,7 +6812,7 @@ section.sidebar .block-itg-ads {
 }
 #block-itg-layout-manager-header-block .menu-login .user-menu {
   position: relative;
-  z-index: -99999;
+  z-index: 99999;
 }
 #block-itg-layout-manager-header-block .menu-login .user-menu a {
   cursor: pointer;
@@ -12545,6 +12545,9 @@ span.smilies-title img {
 #block-itg-layout-manager-front-end-breadcrumb a {
   color: #a1a1a1;
   font-family: roboto;
+}
+#block-itg-layout-manager-front-end-breadcrumb a:hover {
+  text-decoration: underline;
 }
 #block-itg-layout-manager-front-end-breadcrumb .container div.lft {
   display: inline-block;

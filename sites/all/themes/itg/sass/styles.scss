@@ -5120,7 +5120,7 @@ section.sidebar{
     .menu-login{
         .user-menu{
             @include pos(relative);
-            z-index: -99999;
+            z-index: 99999;
             a{
                 cursor: pointer;
                 &.user-icon{
@@ -10379,6 +10379,7 @@ span.smilies-title {
   a{    
     color: #a1a1a1;
     font-family: roboto;
+    &:hover{text-decoration: underline;}
   }
     .container{
       div.lft{
