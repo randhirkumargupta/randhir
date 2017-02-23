@@ -2738,6 +2738,7 @@ footer .footer-top .footer-social-link{
             }        
             .count{
                 @include font(30px);
+                line-height: 36px;
             }        
         }
         .views-exposed-widget .caln{
