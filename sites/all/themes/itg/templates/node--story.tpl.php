@@ -185,7 +185,7 @@ if (!empty($content)):
                                         }
                                         ?></span><?php print t('SHARES'); ?></li>
                                 <li><?php print date('F j, Y', $node->created); ?>   </li>
-                                <li>UPDATED <?php print date('H:i', $node->changed);
+                                <li><?php print t('UPDATED');?> <?php print date('H:i', $node->changed);
                                 print t(' IST');
                                         ?></li>
     <?php if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
