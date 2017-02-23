@@ -13,7 +13,9 @@ function itg_event_registration_form($form, &$form_state) {
   $event_id = itg_event_registration_get_event_nid();
   if ($arg[0] == 'event') {
     $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
-    $node = menu_get_object("node", 1, $path);
+    $event_nid = explode('/', $path);
+    $node = node_load($event_nid[1]);
+    //$node = menu_get_object("node", 1, $path);
 
   } elseif (is_numeric($arg[1])) {
     $node = node_load($arg[1]);

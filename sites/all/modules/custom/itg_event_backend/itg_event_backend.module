@@ -1319,7 +1319,8 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
     if (!empty($whole_node)) {
       if ($arg[0] == 'event') {
         $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
-        $node = menu_get_object("node", 1, $path);
+        $event_nid = explode('/', $path);
+        $node = node_load($event_nid[1]);
       }
       elseif (!empty($arg[1]) && is_numeric($arg[1])) {
         $node = node_load($arg[1]);
@@ -1334,7 +1335,8 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
     else {
       if ($arg[0] == 'event') {
         $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
-        $node = menu_get_object("node", 1, $path);
+        $event_nid = explode('/', $path);
+        $node = node_load($event_nid[1]);
         return $node->nid;
       }
       elseif (!empty($arg[1]) && is_numeric($arg[1])) {//shravan
@@ -1397,20 +1399,20 @@ function itg_event_get_host_name_for_all_events($nid = NULL) {
  * Get domain using domain id
  * @return boolean
  */
-function itg_event_backend_get_domain($domain_id) {
-  if (module_exists('domain') && !empty($domain_id)) {
-    $query = db_select('domain', 'd');
-    $query->fields('d', array('subdomain'));
-    $query->condition('d.domain_id', $domain_id, '=');
-    $result = $query->execute()->fetchField();
-    if ($result) {
-      return $result;
-    }
-    else {
-      return FALSE;
-    }
-  }
-}
+//function itg_event_backend_get_domain($domain_id) {
+//  if (module_exists('domain') && !empty($domain_id)) {
+//    $query = db_select('domain', 'd');
+//    $query->fields('d', array('subdomain'));
+//    $query->condition('d.domain_id', $domain_id, '=');
+//    $result = $query->execute()->fetchField();
+//    if ($result) {
+//      return $result;
+//    }
+//    else {
+//      return FALSE;
+//    }
+//  }
+//}
 
 /**
  * Get redirect table value
@@ -1495,38 +1497,38 @@ function itg_event_backend_vukkul_content($nid) {
  */
 function itg_event_backend_insert_into_redirect($node) {
 
-  global $user;
-  $domain = itg_event_backend_get_domain($node->domains);
-
-  if ($domain) {
-    $path = 'http://' . $domain;
-
-    // Prepare for redirect table
-    $redirect = new stdClass();
-    redirect_object_prepare($redirect);
-    $redirect->source = 'node/' . $node->nid;
-    $redirect->redirect = $path;
-    $redirect->language = 'und';
-    $hash = redirect_hash($redirect);
-    $redirect->hash = $hash;
-    $redirect->uid = $user->uid;
-    $redirect->type = 'redirect';
-    $redirect->access = time();
-    $redirect->count = 1;
-    $redirect->status = 1;
-
-    // Prepare for domain source table
-    $domain_source = new stdClass();
-    redirect_object_prepare($domain_source);
-    $domain_source->nid = $node->nid;
-    $domain_source->domain_id = '-' . $node->domains;
-
-    $existing = itg_event_backend_check_old_rec($node->nid);
-    if (!$existing) {
-      drupal_write_record('redirect', $redirect);
-      drupal_write_record('domain_source', $domain_source);
-    }
-  }
+//  global $user;
+//  $domain = itg_event_backend_get_domain($node->domains);
+//
+//  if ($domain) {
+//    $path = 'http://' . $domain;
+//
+//    // Prepare for redirect table
+//    $redirect = new stdClass();
+//    redirect_object_prepare($redirect);
+//    $redirect->source = 'node/' . $node->nid;
+//    $redirect->redirect = $path;
+//    $redirect->language = 'und';
+//    $hash = redirect_hash($redirect);
+//    $redirect->hash = $hash;
+//    $redirect->uid = $user->uid;
+//    $redirect->type = 'redirect';
+//    $redirect->access = time();
+//    $redirect->count = 1;
+//    $redirect->status = 1;
+//
+//    // Prepare for domain source table
+//    $domain_source = new stdClass();
+//    redirect_object_prepare($domain_source);
+//    $domain_source->nid = $node->nid;
+//    $domain_source->domain_id = '-' . $node->domains;
+//
+//    $existing = itg_event_backend_check_old_rec($node->nid);
+//    if (!$existing) {
+//      drupal_write_record('redirect', $redirect);
+//      //drupal_write_record('domain_source', $domain_source);
+//    }
+//  }
 }
 
 /**

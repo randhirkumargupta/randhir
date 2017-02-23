@@ -247,9 +247,27 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
     // Call custom summit callback
     $form['#validate'][] = 'itg_event_registration_form_event_validate';
     $form['actions']['submit']['#submit'][] = 'itg_event_registration_form_custom_submit_callback';
-   
+    
+    $fresh_event_data = itg_event_registration_fresh_event($_SESSION['current_event_id']);
+    if(empty($fresh_event_data)){ // if fresh event not configure registration field.
+      $vocab_id = itg_event_registration_vocab_id('event_registration_configuration');
+      $query = db_select('taxonomy_term_data', 'ttd');
+      $query->fields('ttd', array('name'));
+      $query->condition('ttd.vid', $vocab_id, '=');
+      $result = $query->execute();
+      foreach($result as $value){
+        $hide_field[] = $value->name;
+      }
+      foreach ($form['field_erf_registration_fee'][LANGUAGE_NONE] as $key => $field_collection_reg) {
+      if (is_numeric($key)) {
+        foreach ($hide_field as $field_key) {
+           
+          $form['field_erf_registration_fee'][LANGUAGE_NONE][$key][$field_key]['#access'] = FALSE;
+        }
+      }
+     }
+    }else {
     $data = itg_event_registration_config_field($_SESSION['current_event_id']);
-   
     // event registration form field show and hide by configuration
     foreach ($form['field_erf_registration_fee'][LANGUAGE_NONE] as $key => $field_collection_reg) {
       if (is_numeric($key)) {
@@ -267,7 +285,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
         }
       }
     }
-
+    }
     $form['field_preview_unique_id']['#attributes']['class'][] = 'hide';
     $event_registration_unique = _get_unique_id_for_registration_unique_field();
     $form['field_preview_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $event_registration_unique;
@@ -585,7 +603,9 @@ function itg_event_registration_get_event_nid() {
   $arg = arg();
   if ($arg[0] == 'event') {
     $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
-    $node = menu_get_object("node", 1, $path);
+    //$node = menu_get_object("node", 1, $path);
+    $event_nid = explode('/', $path);
+    $node = node_load($event_nid[1]);
     return $node->nid;
   }
   elseif (is_numeric($arg[1])) {
@@ -692,6 +712,30 @@ function itg_event_registration_config_field($event_nid) {
   $final_value['show'] = $value;
   
   return $final_value;
+}
+
+/**
+ * Implement function for check fresh event registration
+ */
+function itg_event_registration_fresh_event($event_nid) {
+  $query = db_select('itg_event_registration_field_config', 'itg_event_config');
+  $query->fields('itg_event_config', array('visiblity', 'required', 'field_label', 'field_machine_name'));
+  $query->condition('event_nid', $event_nid, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+/**
+ * Implement function for return vocab id.
+ * @param str $vocab_name
+ * @return
+ */
+function itg_event_registration_vocab_id($vocab_name) {
+  $query = db_select('taxonomy_vocabulary', 'tv');
+  $query->fields('tv', array('vid'));
+  $query->condition('tv.machine_name', $vocab_name, '=');
+  $result = $query->execute()->fetchField();
+  return $result;
 }
 
 /**
