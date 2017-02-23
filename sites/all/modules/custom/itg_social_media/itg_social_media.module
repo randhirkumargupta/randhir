@@ -462,27 +462,32 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
       $form['status']['#options'][0] = t('Pending');
       $form['created']['min'] = array(
         '#type' => 'date_popup',
+          '#title' => 'From',
         '#date_format' => 'd/m/Y',
         '#date_year_range' => '-3:+3',
         '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date')),
       );
       $form['created']['max'] = array(
         '#type' => 'date_popup',
+          '#title' => 'To',
         '#date_format' => 'd/m/Y',
         '#date_year_range' => '-3:+3',
         '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date')),
       );
       break;
     case 'views-exposed-form-browse-content-page':
-      $form['changed']['min'] = array(
+      $form['field_itg_content_publish_date_value']['min'] = array(
         '#type' => 'date_popup',
-        '#date_format' => 'd/m/Y',
+          '#title' => 'From',
+        '#date_format' => 'Y-m-d',
         '#date_year_range' => '-3:+3',
         '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date')),
       );
-      $form['changed']['max'] = array(
+        
+      $form['field_itg_content_publish_date_value']['max'] = array(
         '#type' => 'date_popup',
-        '#date_format' => 'd/m/Y',
+          '#title' => 'To',
+        '#date_format' => 'Y-m-d',
         '#date_year_range' => '-3:+3',
         '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date')),
       );

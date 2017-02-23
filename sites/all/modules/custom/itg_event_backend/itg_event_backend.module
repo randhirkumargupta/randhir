@@ -476,7 +476,7 @@ function itg_event_backend_after_build($form, &$form_state) {
   // event media
   foreach ($form['field_event_media'][LANGUAGE_NONE] as $key => $program) {
     if (is_numeric($key)) {
-      $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] . '<span title="This field is required." class="form-required">*</span>';
+      $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] . '<span title="This field is required." class="form-required"></span>';
       if (isset($form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
         $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
         $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
@@ -486,6 +486,22 @@ function itg_event_backend_after_build($form, &$form_state) {
       $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated'] = TRUE;
     }
   }
+  
+  // event sponsors Daywise
+  
+  foreach ($form['field_associate_sponsors'][LANGUAGE_NONE] as $key => $program) {
+    if (is_numeric($key)) {
+      $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] . '<span title="This field is required." class="form-required"></span>';
+      if (isset($form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+        $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+        $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+      }
+
+      $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $media_options;
+      $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated'] = TRUE;
+    }
+  }
+ 
   // Next and Save button access according steps step_configuration
   if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration')) {
     $form['actions']['submit2']['#access'] = FALSE;
@@ -1063,6 +1079,30 @@ function itg_event_backend_get_session_photo_video($daywise) {
     if ($daywise_detail[$value->field_event_media_value]->field_event_audio) {
       $session['audio'][] = $daywise_detail[$value->field_event_media_value]->field_event_audio[LANGUAGE_NONE][0]['target_id'];
     }
+  }
+  return $session;
+}
+
+/**
+ * Implement function for get session video photo
+ * @param str $daywise
+ * @return array
+ */
+function itg_event_backend_get_session_sponsor($daywise) {
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_associate_sponsors', 'media', 'n.nid = media.entity_id');
+  $query->join('field_data_field_daywise_event', 'daywise', 'daywise.entity_id = media.field_associate_sponsors_value');
+  $query->fields('daywise', array('field_daywise_event_value'));
+  $query->fields('media', array('field_associate_sponsors_value'));
+  $query->condition('daywise.field_daywise_event_value', $daywise, '=');
+  $result = $query->execute();
+  foreach ($result as $value) {
+
+    $daywise_detail = entity_load('field_collection_item', array($value->field_associate_sponsors_value));
+    if (!empty($daywise_detail[$value->field_associate_sponsors_value]->field_choose_sponsor)) {
+      $session['sponsor'] = $daywise_detail[$value->field_associate_sponsors_value]->field_choose_sponsor[LANGUAGE_NONE][0]['target_id'];
+    }
+   
   }
   return $session;
 }

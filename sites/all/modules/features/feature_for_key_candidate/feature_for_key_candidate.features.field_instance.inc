@@ -10,6 +10,39 @@
 function feature_for_key_candidate_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'taxonomy_term-state_managment-field_section'.
+  $field_instances['taxonomy_term-state_managment-field_section'] = array(
+    'bundle' => 'state_managment',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_section',
+    'label' => 'Category',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 45,
+    ),
+  );
+
   // Exported field_instance:
   // 'taxonomy_term-state_managment-field_state_map_color_json'.
   $field_instances['taxonomy_term-state_managment-field_state_map_color_json'] = array(
@@ -127,6 +160,7 @@ function feature_for_key_candidate_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Category');
   t('State Map Color JSON');
   t('State Map JSON');
   t('State SVG JSON');
