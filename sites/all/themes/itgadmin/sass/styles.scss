@@ -2398,17 +2398,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   .field-type-file{
     @extend .hide;
   }
-  tbody{
-    overflow: visible;
-  }
   > tbody > tr{
     @extend .fleft;
     @extend .full;
-    > td{
-      @extend .fleft;
-      width: 100%;
-      margin-bottom: 20px;
-    }
   } 
   .field-name-field-poll-question-video, 
   .field-name-field-audio{
@@ -3013,15 +3005,20 @@ div.node{
     }
   }
 }
+[id*="field-program-schedule-values"],
+[id*="field-event-media-values"],
+[id*="field-event-highlights-values"],
+[id*="field-associate-sponsors-values"]{
+  tbody{overflow: visible;float: left;width: 800px;}
+  > tbody > tr > td{margin-bottom: 10px;float: left;}
+}
 [id*="field-program-schedule-values"]{
-  tbody{overflow: visible;}
   > tbody > tr{
     @extend .fleft;
     @extend .full;
     > td{
       @extend .fleft;
       min-width: 620px;
-      margin-bottom: 20px;
     }
   }
   .field-name-field-start-time{
@@ -3196,6 +3193,7 @@ fieldset#edit-select{
     .fa{
       float: left;
       margin: 5px 10px 0 0;
+      cursor: pointer;
     }
     p{
       overflow: hidden;
@@ -3219,7 +3217,7 @@ fieldset#edit-select{
                 width: 30%;
               }
               &:nth-child(2){
-                width: 30%;
+                width: 20%;
               }
               a{color: #1fb5ad;}
             }
@@ -3271,11 +3269,11 @@ fieldset#edit-select{
     height: 34px;
     padding: 8px 5px;
     &.cmt-title{
-      width: 35%;
+      width: 30%;
     }
     &.cmt-other{
       &:nth-child(2){
-        width: 25%;
+        width: 20%;
       }
       width: 10%;
 
@@ -3411,6 +3409,7 @@ fieldset#edit-select{
 }
 
 .node-event_backend-form{
+  @extend .image-repo-browse;
   .vertical-tabs{
     .container-inline-date{
       .form-item-publish-on{
@@ -3478,10 +3477,11 @@ fieldset#edit-select{
       padding: 5px 0;
       width: 220px;
     }
-    .anchor-order-reorder{
-      @extend .btn-submit;
-      @extend .btn-small;
-    }
+  }
+  .anchor-order-reorder{
+    @extend .btn-submit;
+    @extend .btn-small;
+    text-decoration: none;
   }
 }
 .form-select[name="field_ugc_ctype[und]"]{
@@ -4668,9 +4668,6 @@ div.node{
   a{
     color: #1fb5ad;
   }
-}
-[id*="field-event-highlights-values"] tbody{
-  overflow: visible;
 }
 .block-itg-related{
   .rel-link{
@@ -6300,6 +6297,13 @@ div.node{
       left: 400px;
     }
   } 
+  #custom_another_item{
+    text-align: right;
+    padding-bottom: 10px;
+    #custom_add_another_item{
+      @extend .btn-submit;
+    }
+  }
 }
 
 
@@ -9940,7 +9944,10 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   display: inline-block;
   vertical-align: top;
 }
-.page-related-content #main{min-height: 0 !important;}
+.page-related-content{
+  background-color: #fff;
+  #main{min-height: 0 !important;}
+} 
 .primary_category_radio{float: left; margin: 2px 5px;}
 .node-category-form .metatags-form > legend{display: none;}
 .node-videogallery-form #BasicDetails.itg-form-section-wrapper .itg-form-section{
@@ -10259,16 +10266,21 @@ span.file a{pointer-events: none; color: #2f2f2f;}
 }
 [id*="itg-event-registration-fields-configuration-form"]{
   margin-top: 30px;
-  #edit-display{margin-right: 3%;}
+  #edit-display{
+    border-left: 1px solid #d8d8d8;
+  }
+  #edit-requied-field{
+    border-right: 1px solid #d8d8d8;
+  }
   #edit-display, #edit-requied-field{
-    display: inline-block;
-    vertical-align: top;
-    width: 48%;
-    padding: 10px 15px;
-    border: 1px solid #d8d8d8;
+    float: left;
+    width: 50%;
+    border-bottom: 1px solid #d8d8d8;
     margin-bottom: 20px;
-    border-radius: 5px;
-    .form-type-checkbox{margin: 5px 0;}
+    .form-type-checkbox{
+      padding: 10px 0;
+      border-top: 1px solid #d8d8d8;
+    }
   }
 }
 #itg-user-log-api-form, #itg-user-log-api-form-visited{
@@ -10507,3 +10519,45 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   }
 }
 .widget-wrapper .data-holder .block-itg-widget > div.flexslider{overflow: visible !important;}
+.success-byline{padding: 5px 0 0 220px;}
+.ads-preview-data{
+  max-height: 600px;
+  overflow: auto;
+  text-align: center;
+  .ads-title{margin-bottom: 20px; text-align: left;}
+  .ads-bottom, ads-top{@extend .dib;@extend .full;@extend .vtop;}
+  .ads-rhs2, .ads-rhs1 {
+    clear: right;
+    float: right;
+    padding-right: 20px;
+  }
+  .ads-header-code-holder-device{padding: 10px;}
+}
+.node-heighlights-div{
+  .field-group{
+    @extend .dib;
+    @extend .full;
+    @extend .vtop;
+    .field{
+      padding: 10px 0;
+      border-top: 1px solid #ddd;
+      &:first-child{padding-top: 0; border-top: none;}
+    }
+  }
+}
+.page-node-add-story #colorbox iframe, 
+.page-node-add-podcast #colorbox iframe, 
+.page-node-add-photogallery #colorbox iframe, 
+.page-node-add-videogallery #colorbox iframe, 
+.page-node-add-blog #colorbox iframe, 
+.page-node-add-poll #colorbox iframe, 
+.page-node-add-breaking-news #colorbox iframe, 
+.node-type-blog #colorbox iframe,
+.node-type-poll #colorbox iframe,
+.node-type-breaking-news #colorbox iframe,
+.node-type-podcast #colorbox iframe,
+.node-type-photogallery #colorbox iframe,
+.node-type-videogallery #colorbox iframe,
+.node-type-story #colorbox iframe{
+  background: url(../images/loading_animation.gif) no-repeat center center;
+}

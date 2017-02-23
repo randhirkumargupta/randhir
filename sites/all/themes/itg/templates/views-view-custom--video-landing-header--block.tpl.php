@@ -18,7 +18,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
         <div class ="video-landing-header">
             <div class="row">
                 <div class="col-md-12">
-                    <h2><?php print $row['title']; ?></h2>
+                    <h1 class="video-heading"><?php print $row['title']; ?></h1>
                 </div>
                 <div class="col-md-8 video-header-left">
                     <div class="video">

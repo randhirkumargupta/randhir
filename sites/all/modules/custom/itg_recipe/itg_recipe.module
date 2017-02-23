@@ -13,11 +13,10 @@
  * @param Array $node
  */
 function itg_recipe_node_presave($node) {
-
+  
   if ($node->type == 'recipe') {
     $node->title = trim($node->title);
-  }
-  if ($node->type == 'recipe') {
+    
     if ($node->field_recipe_content_type[LANGUAGE_NONE][0]['value'] == 'Text') {
       $node->field_recipe_audio = '';
       $node->field_recipe_video = '';
@@ -123,6 +122,9 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
       break;
     case 'survey_node_form':
     case 'astro_node_form':
+    case 'newsletter_node_form':
+    case 'mega_review_critic_node_form':
+    case 'quiz_node_form':
       itg_recepi_save_draft_button($form);
       break;
     case 'poll_node_form':
@@ -146,7 +148,7 @@ function itg_recepi_save_draft_button(&$form) {
         '#type' => 'submit',
         '#value' => t('Save as Draft'),
         '#submit' => array(
-            'node_form_submit'
+            'node_form_submit','itg_save_draft_form_custom_callback'
         ),
     );
 
@@ -483,4 +485,14 @@ function itg_recipe_form_views_exposed_form_alter(&$form, &$form_state, $form_id
     $form['title']['#autocomplete_path'] = 'content-title-list/food_news/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
+}
+
+/**
+ * After submit callback for draft
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_save_draft_form_custom_callback($form, &$form_state) {
+  $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination='.$_GET['destination'];
+  $_GET['destination'] = $redirect_path;  
 }

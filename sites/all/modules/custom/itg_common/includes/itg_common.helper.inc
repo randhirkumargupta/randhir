@@ -83,6 +83,10 @@ define('SMALL_IMAGE_WIDTH', 170);
 define('SMALL_IMAGE_HEIGHT', 127);
 define('EXTRA_SMALL_IMAGE_WIDTH', 88);
 define('EXTRA_SMALL_IMAGE_HEIGHT', 66);
+define('ISSUE_LARGE_IMAGE_WIDTH', 300);
+define('ISSUE_LARGE_IMAGE_HEIGHT', 225);
+define('ISSUE_SMALL_WIDTH', 210);
+define('ISSUE_SMALL_HEIGHT', 145);
 
 /**
  * value define for Ad.

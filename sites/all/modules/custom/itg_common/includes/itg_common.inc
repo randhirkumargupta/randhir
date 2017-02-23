@@ -235,7 +235,7 @@ function itg_last_node_published_user($uid, $publish_id) {
             ->fields('w', array('nid', 'vid'))
             ->condition('uid', $uid, '=')
             ->condition('published', $publish_id, '=')
-            ->orderBy('stamp', 'DESC')//ORDER BY created
+           // ->orderBy('stamp', 'ASC')//ORDER BY created
             ->range(0, 1)
             ->execute();
 
@@ -576,14 +576,7 @@ function itg_common_custompath_val($pathdata) {
 
 function itg_common_custompath_insert_load($node) {
     global $edited_sef_url;
-    
-    if (!empty($node->path['alias'])) {
-        $path_data = explode("/", $node->path['alias']);
-        $set_hierarchy = array_reverse($path_data);
-        $alias_set = preg_replace("/[0-9]{4}/", "key-year", $set_hierarchy[0]);
-        $sefurl = explode("key-year", $alias_set);
-        $node_sef = rtrim($sefurl[0],'-');
-    } else if(!empty ($edited_sef_url)) {
+    if(!empty ($edited_sef_url)) {
         $node_sef = $edited_sef_url;
     } else {
         $node_sef = $node->title;

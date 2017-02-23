@@ -97,7 +97,8 @@
             // Validate date difference.
             function validate_bad_word(value, element) {
                 var description = $('#edit-fmessage').val();
-                var final = containsAny(description, result);
+                var f_description = description.toLowerCase();
+                var final = containsAny(f_description, result);
                 if (final) {
                     return false;
                 }

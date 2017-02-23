@@ -35,29 +35,40 @@
     
     jQuery('input[name="lrp_gold_star_one_icon_remove_button"]').on('mousehover', function() {
         jQuery(document).on('ajaxComplete',function(event, request, settings) {
+           if(jQuery('input[name="lrp_gold_star_one_icon[fid]"]').val() ==0) {
             jQuery('.div_lrp_gold_star_one_icon').show();
+        }
         });
     });
     
      jQuery('input[name="lrp_gold_star_two_icon_remove_button"]').on('mousedown', function() {
         jQuery(document).ajaxComplete(function(event, request, settings) {
+           
+           if(jQuery('input[name="lrp_gold_star_two_icon[fid]"]').val() ==0) {
             jQuery('.div_lrp_gold_star_two_icon').show();
+        }
         });
     });
     
      jQuery('input[name="lrp_gold_star_three_icon_remove_button"]').on('mousedown', function() {
         jQuery(document).ajaxComplete(function(event, request, settings) {
+            if(jQuery('input[name="lrp_gold_star_three_icon[fid]"]').val() ==0) {
             jQuery('.div_lrp_gold_star_three_icon').show();
+        }
         });
     });
      jQuery('input[name="lrp_gold_star_four_icon_remove_button"]').on('mousedown', function() {
         jQuery(document).ajaxComplete(function(event, request, settings) {
+            if(jQuery('input[name="lrp_gold_star_four_icon[fid]"]').val() ==0) {
             jQuery('.div_lrp_gold_star_four_icon').show();
+        }
         });
     });
     jQuery('input[name="lrp_gold_star_five_icon_remove_button"]').on('mousedown', function() {
         jQuery(document).ajaxComplete(function(event, request, settings) {
+            if(jQuery('input[name="lrp_gold_star_five_icon[fid]"]').val() ==0) {
             jQuery('.div_lrp_gold_star_five_icon').show();
+        }
         });
     });
     

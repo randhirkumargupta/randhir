@@ -10,7 +10,7 @@
 
 global $theme, $user;
 $preview = NULL;
-
+$arg = arg();
 if (arg(2) == 'preview') {
   $preview = 'preview';  
 }
@@ -271,7 +271,7 @@ if ($theme != 'itgadmin') {
       </section>
     </main>
       
-      <?php if (!empty($user->uid)) {?>
+      <?php if (!empty($user->uid) && $arg[0] != "itg-layout-manager") {?>
         <section class="recommended-for-you">
          <div class="container"><span class="widget-title">RECOMMENDED FOR YOU</span> <?php print $widget_data['personlization']?></div>
         </section>

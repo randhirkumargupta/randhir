@@ -1,7 +1,7 @@
 <h3><span><?php print t("Other podcast") ?></span></h3>
 <ul class="photo-list">    
 <?php foreach ($rows as $index => $row): ?>
-    <li class="col-md-3">
+    <li class="col-md-3 col-sm-3 col-xs-6">
         <div class="tile">
             <?php if(!empty($row['field_story_extra_large_image'])) : ?>
             <figure>                

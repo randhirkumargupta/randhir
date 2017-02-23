@@ -8,6 +8,7 @@
     background: -moz-linear-gradient($color1, $color2); /* For Firefox */
     background: linear-gradient($color1, $color2); /* Standard syntax */
 }
+body, html, #page{height: 100%;}
 input[type="text"], textarea{
   transition: all 300ms;
   &:focus{
@@ -92,6 +93,9 @@ input[type="file"], input[type="submit"], input[type="text"]{
               display: inline-block;
               vertical-align: top;
               margin-top: 6px;
+              & + select{
+                height: 32px;
+              }
             }
           }
         }
@@ -477,9 +481,14 @@ input[type="file"], input[type="submit"], input[type="text"]{
 .region-content{
     margin: 20px 0;
 }
+.featured-news .featured-post h2{
+    margin-top: 5px;
+}
 .featured-news .featured-post h3{
     max-height: 96px;
     overflow: hidden;
+    margin-top: 5px;
+    line-height: 22px;
 }
 .itg-widget .tab-buttons span{  
     padding: 0 3px;
@@ -837,6 +846,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 }
 .personal-list{
+  text-align: left;
   list-style: none;
   > li{
       padding-bottom: 30px;
@@ -3240,14 +3250,17 @@ body{
   .jw-controlbar-center-group{ 
     .jw-slider-horizontal{height: 39px;}
     .jw-slider-container{height: 39px;}
-    .jw-slider-horizontal .jw-buffer,
+    .jw-slider-horizontal .jw-buffer{
+      height: 39px;
+      background: url(../images/podcast_audio_white.png) -5px center /348px 35px no-repeat;
+    }
     .jw-slider-horizontal .jw-progress{
       height: 39px;
-      background: url(../images/podcast_audio_yellow.png) 0 center /348px 35px no-repeat;
+      background: url(../images/podcast_audio_yellow.png) -5px center /348px 35px no-repeat;
     } 
     .jw-slider-horizontal .jw-rail{
       height: 39px;
-      background: url(../images/podcast_audio_grey.png) 0 center /348px 35px no-repeat;
+      background: url(../images/podcast_audio_grey.png) -5px center /348px 35px no-repeat;
     }
     .jw-slider-horizontal .jw-knob{
       top: 0;
@@ -4898,7 +4911,57 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 @media all and (min-width: 768px){
   .block-itg-personalization .personal-menu-tab, .block-itg-personalization .saved-item-tab{display: inline-block !important;}
   .personal-menu-tab-mobile{display: none;}
-  
+  .page-personalization #main{min-height: calc(100% - 212px);}
+}
+
+@media all and (max-width: 1024px) and (min-width: 768px){
+  .page-personalization{
+    .personalized-wrapper{
+      .personalized-user-area {
+        display: inline-block;
+        height: auto; 
+        vertical-align: top;
+        .personalized-user{
+          float: left;
+          height: 180px;
+          width: 30%;
+          padding: 0 10px;
+          .user-name{font-size: 18px;}
+        } 
+        .personalized-user-info, .total-point-wrapper{
+          width: 35%;
+          float: left;
+          height: 180px;
+        }
+        .personalized-user-info{
+          padding: 60px 0;
+          span{
+            padding: 0 10px;
+          }
+        }
+        .total-point-wrapper{
+          .pregress-bar{
+            .pregress-bar-active{
+              width: 80%;
+            }
+            span.current-badge{
+              left: 10px;
+            }
+            span.next-badge{
+              right: 15px;
+            }
+            span.current-badge, span.next-badge{
+              top: -15px;
+              small{
+                margin-bottom: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .personal-menu-tab li a{font-size: 16px;}
 }
 
 /* Responsive CSS */
@@ -5850,10 +5913,12 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     }
   }
   .cart-total-block .points-balance span{font-size: 13px; font-weight: 500;}
-  .cart-total-block .points-balance span:first-child{max-width: 100px;}
-  [id="views-exposed-form-front-end-global-search-page"]{
-    .views-exposed-form .form-select{height: 32px;}
+  .cart-total-block .points-balance span:first-child{max-width: 100px;} 
+  #block-itg-widget-podcast-header .podcast-header-container .podcast-header-top .pic{
+    width: 54px; height: 40px; margin-right: 0; overflow: hidden;
+    img{max-width: 100%;}
   }
+  .podcast-detail .jw-controlbar{padding: 0;}
 }
 @media all and (max-width: 480px){
   .photos-videos-wrapper .movie-videos, 
