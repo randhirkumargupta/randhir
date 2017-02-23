@@ -13,7 +13,7 @@ if(isset($_SESSION['msg'])) {
   unset($_SESSION['msg']);
 } 
 if(!empty($variables['total_comments'])) {
-print $variables['total_comments'].' comments';
+print $variables['total_comments'].' Comment(s)';
 }
 else
 {
