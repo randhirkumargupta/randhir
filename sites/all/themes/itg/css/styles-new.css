@@ -655,38 +655,26 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   height: 40px;
   margin-top: 20px;
 }
-.total-point-wrapper .pregress-bar .pregress-bar-active {
+.total-point-wrapper .pregress-bar .progress-bar-div {
   width: 320px;
   background: #cdcdcd;
   display: inline-block;
   vertical-align: middle;
   height: 6px;
   border-radius: 10px;
+  overflow: hidden;
   position: relative;
 }
-.total-point-wrapper .pregress-bar .pregress-bar-active:before {
+.total-point-wrapper .pregress-bar .progress-bar-div .pregress-bar-default {
   position: absolute;
-  top: 0;
   left: 0;
-  content: '';
-  height: 6px;
-  background: #a00606;
-  border-radius: 10px;
-}
-.total-point-wrapper .pregress-bar .progress-bar-1:before {
-  width: 20%;
-}
-.total-point-wrapper .pregress-bar .progress-bar-2:before {
-  width: 40%;
-}
-.total-point-wrapper .pregress-bar .progress-bar-3:before {
-  width: 60%;
-}
-.total-point-wrapper .pregress-bar .progress-bar-4:before {
-  width: 80%;
-}
-.total-point-wrapper .pregress-bar .progress-bar-5:before {
+  top: 0;
   width: 100%;
+  height: 100%;
+  background-color: #cdcdcd;
+}
+.total-point-wrapper .pregress-bar .progress-bar-div .pregress-bar-default.pregress-bar-active {
+  background-color: #9f0505;
 }
 .total-point-wrapper .pregress-bar span.current-badge, .total-point-wrapper .pregress-bar span.next-badge {
   display: inline-block;
