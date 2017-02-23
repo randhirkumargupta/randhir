@@ -1019,7 +1019,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
           text-align: center;
         }
       }
-      .form-type-textfield{
+      .form-type-textfield, .form-type-select{
         display: inline-block;
         vertical-align: top;
         overflow: hidden;
@@ -1052,6 +1052,11 @@ $debug: "width:645px"; // TODO: move to _settings.scss
             right: 5px;
             top: 8px;
             z-index: 9;
+          }
+          select{
+            margin-left: 15px;
+            margin-top: 2px;
+            border: none;
           }
       }
       .form-type-textarea{
@@ -1229,9 +1234,13 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       .captcha{
         max-width: 100%;
         margin-left: 0;
-        .form-item-captcha-response{
-          label{width: 220px;}
-          .form-text{padding-left: 230px;}
+        img{
+            margin-left: 160px;
+        }
+        .form-item-captcha-response{      
+            label{
+                line-height: 22px;
+            }
           div.description{display: none;}
         }
       }
@@ -5056,7 +5065,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         .form-field-name-field-recipe-audio{
           .form-type-managed-file{margin: 20px 0;}
         }
-        .form-type-textfield{
+        .form-type-textfield, .form-type-select{
           overflow: visible;
           margin: 20px 0 !important;
           label{
@@ -5240,8 +5249,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           margin-left: 0;
           .form-item-captcha-response{
             margin-top: 10px !important;
-            label{width: 195px;}
+            /*label{width: 195px;}*/
             .form-text{padding-left: 200px;}
+          }
+          img{
+              margin-left: 122px;
           }
         }
       }
