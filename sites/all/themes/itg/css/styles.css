@@ -5134,6 +5134,7 @@ h1.category-heading {
 #block-views-video-landing-header-block .video-landing-header {
   background: transparent;
   padding: 0;
+  margin-top: 10px;
 }
 #block-views-video-landing-header-block .video-header-left {
   zoom: 1;
@@ -6812,7 +6813,7 @@ section.sidebar .block-itg-ads {
 }
 #block-itg-layout-manager-header-block .menu-login .user-menu {
   position: relative;
-  z-index: -99999;
+  z-index: 99999;
 }
 #block-itg-layout-manager-header-block .menu-login .user-menu a {
   cursor: pointer;
@@ -11687,6 +11688,10 @@ h1.about-us-heading + div p {
   width: 65px;
   height: 65px;
   padding-right: 0;
+  border: 1px solid #515567;
+  border-radius: 50%;
+  margin: 10px;
+  overflow: hidden;
 }
 #main-container-budget .budget-predictor-social-share .share-msg {
   font-weight: 700;
@@ -12546,13 +12551,20 @@ span.smilies-title img {
   color: #a1a1a1;
   font-family: roboto;
 }
+#block-itg-layout-manager-front-end-breadcrumb a:hover {
+  text-decoration: underline;
+}
 #block-itg-layout-manager-front-end-breadcrumb .container div.lft {
   display: inline-block;
   vertical-align: top;
 }
 
-.node-type-photogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-videogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-podcast #block-itg-layout-manager-front-end-breadcrumb, .section-videos #block-itg-layout-manager-front-end-breadcrumb {
+.node-type-photogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-videogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-podcast #block-itg-layout-manager-front-end-breadcrumb, .section-videos #block-itg-layout-manager-front-end-breadcrumb, .section-photo #block-itg-layout-manager-front-end-breadcrumb {
   background: #171717;
+}
+
+.node-type-podcast #block-itg-layout-manager-front-end-breadcrumb {
+  background: #000;
 }
 
 /*css breadcrumb end*/
@@ -12564,10 +12576,12 @@ iframe[id*="twitter-widget"] {
   font-size: 32px;
   margin-bottom: 25px;
   color: #fff;
+  line-height: 42px;
 }
 
 .video-heading {
   color: #fff;
   font-size: 24px;
   margin-bottom: 10px;
+  line-height: 34px;
 }

@@ -130,8 +130,9 @@ function itg_mega_reviews_critics_form_draft_callback($form, &$form_state) {
   if (isset($_GET['destination'])) {
     unset($_GET['destination']);
   }
-
-  $form_state['redirect'] = 'movie-review-draft-list';
+  $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination='.$_GET['destination'];   
+  $_GET['destination'] = $redirect_path;
+  //$form_state['redirect'] = 'movie-review-draft-list';
 }
 
 /**

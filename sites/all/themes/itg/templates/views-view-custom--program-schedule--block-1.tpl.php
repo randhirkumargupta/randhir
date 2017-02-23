@@ -32,9 +32,22 @@ drupal_add_js("jQuery(document).ready(function() { jQuery('.program-schedule-con
 <?php foreach ($rows as $index => $row): ?>
 <!--<div class="col-md-6">-->
   <?php
-  $row_count = count($rows);
+     $media = $row["field_daywise_event_1"];
+    $sponsors_data = itg_event_backend_get_session_sponsor($media);
+
+     $sponsor_all_data = "";
+     $sponsor_tags = "";
+      if(!empty($sponsors_data)) {
+         $sponsor_all_data = node_load($sponsors_data['sponsor']);
+     }
+    
+     if($sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri'] != "") {
+         $sponsor_tags = '<div class="program-sch-sponcor"><img src=' . image_style_url("image_221x54", $sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri']) . ' alt="" /></div>';
+     }
+     
+     $row_count = count($rows);
     if ($index <= ((round($row_count / 2)) - 1)) {
-    $output_left .= '<div class="content-list" style="background:'.$heading_background_color.'">';
+    $output_left .= $sponsor_tags.'<div class="content-list" style="background:'.$heading_background_color.'">';
     $output_left .= '<div style="color:'.$content_font_color .'">'.$row['field_start_time'].'</div>';
     $output_left .= '<div class="story-expert-name" style="color:'.$font_color.'">'.$row['field_story_expert_name'].'</div>';
     $output_left .= '<div class="program-schedule-content" style="color:'.$content_font_color.'">'.$row['view'].'</div></div>';

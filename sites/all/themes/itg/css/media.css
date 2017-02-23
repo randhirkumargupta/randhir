@@ -2651,6 +2651,7 @@
   .view-front-end-global-search .attachment .count {
     font-size: 30px;
     font-size: 1.875rem;
+    line-height: 36px;
   }
   .view-front-end-global-search .views-exposed-widget .caln {
     position: inherit;
