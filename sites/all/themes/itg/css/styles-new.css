@@ -1043,7 +1043,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font: 300 16px/normal Roboto;
   text-align: center;
 }
-.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield, .page-personalization #block-formblock-ugc .node-ugc-form .form-type-select {
   display: inline-block;
   vertical-align: top;
   overflow: hidden;
@@ -1053,7 +1053,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   border: 1px solid #e0e0e0;
   border-radius: 5px;
 }
-.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield label {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield label, .page-personalization #block-formblock-ugc .node-ugc-form .form-type-select label {
   width: 150px;
   padding: 0 20px;
   font: 300 14px/36px Roboto;
@@ -1062,7 +1062,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   z-index: 99;
   position: relative;
 }
-.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield .form-text {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield .form-text, .page-personalization #block-formblock-ugc .node-ugc-form .form-type-select .form-text {
   position: absolute;
   left: 0;
   top: 0;
@@ -1072,11 +1072,16 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   padding-left: 160px;
   z-index: 9;
 }
-.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield span.error {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield span.error, .page-personalization #block-formblock-ugc .node-ugc-form .form-type-select span.error {
   position: absolute;
   right: 5px;
   top: 8px;
   z-index: 9;
+}
+.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield select, .page-personalization #block-formblock-ugc .node-ugc-form .form-type-select select {
+  margin-left: 15px;
+  margin-top: 2px;
+  border: none;
 }
 .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textarea {
   display: inline-block;
@@ -1246,11 +1251,11 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   max-width: 100%;
   margin-left: 0;
 }
-.page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response label {
-  width: 220px;
+.page-personalization #block-formblock-ugc .node-ugc-form .captcha img {
+  margin-left: 160px;
 }
-.page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response .form-text {
-  padding-left: 230px;
+.page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response label {
+  line-height: 22px;
 }
 .page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response div.description {
   display: none;
@@ -5376,18 +5381,18 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .page-personalization #block-formblock-ugc .node-ugc-form .form-field-name-field-recipe-audio .form-type-managed-file {
     margin: 20px 0;
   }
-  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield {
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield, .page-personalization #block-formblock-ugc .node-ugc-form .form-type-select {
     overflow: visible;
     margin: 20px 0 !important;
   }
-  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield label {
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield label, .page-personalization #block-formblock-ugc .node-ugc-form .form-type-select label {
     width: 115px;
     padding: 0 8px;
   }
-  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield .form-text {
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield .form-text, .page-personalization #block-formblock-ugc .node-ugc-form .form-type-select .form-text {
     padding-left: 125px;
   }
-  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield span.error {
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield span.error, .page-personalization #block-formblock-ugc .node-ugc-form .form-type-select span.error {
     right: 0;
     top: 40px;
     padding-left: 0;
@@ -5553,12 +5558,13 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
   .page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response {
     margin-top: 10px !important;
-  }
-  .page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response label {
-    width: 195px;
+    /*label{width: 195px;}*/
   }
   .page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response .form-text {
     padding-left: 200px;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .captcha img {
+    margin-left: 122px;
   }
   .page-personalization #block-formblock-ugc [id*="field-ugc-personalization-photo-add-more-wrapper"] > .form-item {
     margin-left: 0;
@@ -5996,6 +6002,23 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 
   .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child {
     margin-left: 175px;
+  }
+
+  [id*="views-exposed-form-front-end-global-search-page"] .form-item-sm-field-itg-common-by-line-name #autocomplete, [id*="views-exposed-form-front-end-global-search-page"] .views-widget-filter-tm_vid_4_names #autocomplete {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    display: block !important;
+    min-height: 1px;
+    margin-top: 32px;
+  }
+  [id*="views-exposed-form-front-end-global-search-page"] .form-item-sm-field-itg-common-by-line-name #autocomplete + .form-text, [id*="views-exposed-form-front-end-global-search-page"] .views-widget-filter-tm_vid_4_names #autocomplete + .form-text {
+    position: absolute;
+    top: -32px;
+    left: 0;
+  }
+  [id*="views-exposed-form-front-end-global-search-page"] .form-item-sm-field-itg-common-by-line-name #autocomplete ul li, [id*="views-exposed-form-front-end-global-search-page"] .views-widget-filter-tm_vid_4_names #autocomplete ul li {
+    padding: 5px 1px;
   }
 }
 @media all and (max-width: 767px) {
