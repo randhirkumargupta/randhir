@@ -1303,8 +1303,10 @@ function itg_category_manager_seflogpage($tid) {
  * @return json Autocomplete callback for category manager view
  */
 function itg_category_manager_autocomplete_name($string) {
+  $vocabulary = taxonomy_vocabulary_machine_name_load('category_management');  
   $itg_query = db_select('taxonomy_term_data', 'itg');
   $itg_query->condition('name', '%' . $string . '%', 'LIKE')
+      ->condition('vid', $vocabulary->vid)
       ->fields('itg', array('name'));
   $itg_result = $itg_query->execute();
   $result = array();
