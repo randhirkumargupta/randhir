@@ -37,6 +37,10 @@
                 url = baseurl+'/bestcolleges/'+year+'/zone-wise-list/'+st2current_val;
                 window.location.href = url;
             });
+            $(".htmlstatic_rhsdiv select").change(function() {
+                var st3current_val = $(this).val();
+                window.location.href = st3current_val;
+            });
         }
     };
 })(jQuery, Drupal, this, this.document);

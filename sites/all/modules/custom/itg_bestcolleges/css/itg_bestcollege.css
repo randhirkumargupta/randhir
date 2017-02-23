@@ -47,6 +47,9 @@
   padding: 5px 4px 5px 10px;
   width: 12%;  
 }
+.city-directory .ready-directory-clgname {
+    width: 60%;
+}
 .main-bestzonewisecompare .zonecell {
   float: left;
   padding: 5px 4px 5px 10px; 

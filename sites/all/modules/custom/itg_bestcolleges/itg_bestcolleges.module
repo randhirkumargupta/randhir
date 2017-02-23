@@ -47,6 +47,11 @@ function itg_bestcolleges_menu() {
     'page arguments' => array(1, 2),
     'access callback' => TRUE,
   );
+  $items['bestcolleges/%/%/citywise-list/%'] = array(
+    'page callback' => 'itg_city_wise_list',
+    'page arguments' => array(1, 2, 3, 4),
+    'access callback' => TRUE,
+  );
   return $items;
 }
 
@@ -92,6 +97,11 @@ function itg_bestcolleges_theme($existing, $type, $theme, $path) {
     'itg_campus_wise_list' => array(
       'variable' => array('data' => NULL),
       'template' => 'itg-campus-wise-list',
+      'path' => drupal_get_path('module', 'itg_bestcolleges') . '/templates',
+    ),
+    'itg_city_wise_list' => array(
+      'variable' => array('data' => NULL),
+      'template' => 'itg-city-wise-list',
       'path' => drupal_get_path('module', 'itg_bestcolleges') . '/templates',
     ),
     'bestcollege_rhssearch' => array(
@@ -144,6 +154,10 @@ function itg_bestcolleges_block_info() {
     'info' => t('Best College RHS Search Form'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['bestcollege_rhsstatic'] = array(
+    'info' => t('Best College RHS Static Widget'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   return $blocks;
 }
 
@@ -155,11 +169,18 @@ function itg_bestcolleges_block_view($delta = '') {
   $block = array();
   switch ($delta) {
     case 'bestcollege_rhssearch':
-    module_load_include('inc', 'itg_bestcolleges', 'includes/itg_bestcolleges');
-    $clgsearch_form = drupal_get_form('bestcollege_rhssearch_form');
-    $data['clgsearch_form'] = drupal_render($clgsearch_form);
-    $block['content'] = theme('bestcollege_rhssearch', array('data' => $data));
-    break;
+      module_load_include('inc', 'itg_bestcolleges', 'includes/itg_bestcolleges');
+      $clgsearch_form = drupal_get_form('bestcollege_rhssearch_form');
+      $data['clgsearch_form'] = drupal_render($clgsearch_form);
+      $block['content'] = theme('bestcollege_rhssearch', array('data' => $data));
+      break;
+    case 'bestcollege_rhsstatic':
+      $year = arg(1);
+      //module_load_include('inc', 'itg_bestcolleges', 'includes/itg_bestcolleges');
+      $data = bestcollege_getStaticWidgetData($year);
+      $block['title'] = t('LAST 19 YEARS BEST COLLEGE SURVEYS');
+      $block['content'] = $data;
+      break;
   }
   return $block;
 }
@@ -306,13 +327,30 @@ function itg_campus_wise_list($year, $type, $stream) {
 }
 
 /**
+ * Function used to show Readyrecnor directory list Colleges List:
+ * @param int $year
+ * @param string $type
+ * @param string $stream
+ * @return string
+ */
+function itg_city_wise_list($year, $stream, $type, $city) {
+  drupal_set_title(t('CITYWISE RANKING: BEST '.drupal_strtoupper($stream).' COLLEGES'));
+  $result_data = itg_bestcollege_getData($type, $year, $stream, $city);
+  $data = array();
+  foreach ($result_data as $result_data_key => $result_data_val) {
+    $data[$city][] = array($result_data_val->rank, $result_data_val->collegename);
+  }
+  return theme('itg_city_wise_list', array('data' => $data));
+}
+
+/**
  * Common function to get data of Best colleges:
  * @param String $type
  * @param int $byear
  * @param string $bstream
  * @return string
  */
-function itg_bestcollege_getData($type, $byear, $bstream) {
+function itg_bestcollege_getData($type, $byear, $bstream, $city = NULL) {
   $itg_result = array();
   // Need to change below query once bestcollege migrate:
   if ($type == 'emerging') {
@@ -387,6 +425,19 @@ function itg_bestcollege_getData($type, $byear, $bstream) {
     $itg_result = $itg_query->execute()->fetchAll();
     return $itg_result;
   }
+  if ($type == 'citywise-list') {
+    // Query to find result of best colleges with zone on behalf of stream, year & city:
+    $itg_query = db_select('bestcolleges_citywiseranking', 'bcr');
+    $itg_query->fields('bcr', array('rank', 'collegename'))
+        ->condition('bcr.year', $byear, '=')
+        ->condition('bcr.stream', $bstream, '=')
+        ->condition('bcr.city', $city, '=')
+        ->condition('bcr.published', 1)
+        ->condition('bcr.rank', 0, '!=')
+        ->orderBy('bcr.rank', 'ASC');
+    $itg_result = $itg_query->execute()->fetchAll();
+    return $itg_result;
+  }
 }
 
 /**
@@ -456,4 +507,22 @@ function itg_bestcollege_getStreamYear($type, $byear) {
     }
     return $data;
   }
+}
+
+/*
+ * Get HTML Widget data for bestcolleges detail page on behalf of its title.
+ * @param int year
+ * @return string
+ */
+function bestcollege_getStaticWidgetData($year) {
+  //RHS2016
+    $keyword = 'RHS'.$year;
+    $query = db_select('node', 'n');
+    $query->fields('n', array('nid'))
+        ->condition('n.status', 1)
+        ->condition('n.title', '%'.$keyword.'%', 'LIKE')
+        ->condition('n.type', 'custom_html_widgets');
+    $results = $query->execute()->fetchAll();
+    $best_html = node_load($results[0]->nid)->body[LANGUAGE_NONE][0]['value'];
+    return $best_html;
 }
