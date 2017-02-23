@@ -146,13 +146,17 @@ function itg_autosave_nodeform($nid, $ctype) {
   $f_collection = $itg_auto_save->itg_autosave_prepare_presave($data, $inputs, $node);
   
   // Check if field collection is available.
+  /******************************* Hide field collection code ***************** 
   if (count($f_collection) > 0) {
     // Find how many field collection are present.
     foreach ($f_collection as $field) {      
       // Delete old field collection fields and create fresh collections.
       $itg_auto_save->itg_save_field_field_collection($inputs[$field], $node, $field, $itg_nid->field_collection);      
     }    
-  }  
+  }
+   
+  *********** End of code field collection ***********************************/  
+  
   // Submit the node before save.        
   $node = node_submit($node); 
   // Save node to save all values into node.    

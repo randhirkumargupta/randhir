@@ -13,7 +13,7 @@ function itg_seo_node_data($node) {
       foreach ($configurableopt as $key => $value){
         $opt_value[] = $value['value'];
       }
-      if (in_array("noindex_nofollow", $opt_value)) {
+      if (in_array("noindex_nofollow", $opt_value) && in_array("nofollow", $opt_value)) {
         $element = array(
            '#tag' => 'meta',
            '#attributes' => array(
@@ -21,7 +21,26 @@ function itg_seo_node_data($node) {
              'content' => 'noindex, nofollow',
            ),
         );
+      } 
+      else if(in_array("nofollow", $opt_value)) {
+        $element = array(
+           '#tag' => 'meta',
+           '#attributes' => array(
+             'name' => 'robots',
+             'content' => 'nofollow',
+           ),
+        );
       }
+      else if(in_array("noindex_nofollow", $opt_value)) {
+        $element = array(
+           '#tag' => 'meta',
+           '#attributes' => array(
+             'name' => 'robots',
+             'content' => 'noindex',
+           ),
+        );
+      }
+      
     }
   } 
   drupal_add_html_head($element, 'robots');

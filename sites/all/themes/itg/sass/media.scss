@@ -1027,6 +1027,18 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
         clear: left;
     }
 }
+#block-itg-event-backend-program-tab-block .event-listing .side-right .title{
+    &.sponsors-parent {
+        padding-right: 93px;
+    } 
+    .spncor-tag{
+        width: 75px;
+        padding-right: 5px;
+        span{
+            font-size: 10px;
+        }
+    }
+} 
 /*end event page*/
 
 /*Start css program live page*/
@@ -1462,7 +1474,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
                     vertical-align: top;
                 }
             }
-        }
+        }        
     }
 }
 /*Globle search page css end*/
