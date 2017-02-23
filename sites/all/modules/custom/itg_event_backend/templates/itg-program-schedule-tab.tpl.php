@@ -83,7 +83,8 @@ foreach ($data as $key => $value) {
      }
     
      if($sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri'] != "") {
-         $sponsor_tags = '<img src=' . image_style_url("image_136x73", $sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri']) . ' alt="" />';
+         $sponsors_data_parent = "sponsors-parent";
+         $sponsor_tags = '<div class="spncor-tag"><span>Powered By</span><img src=' . image_style_url("image_136x73", $sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri']) . ' alt="" /></div>';
      }
     // p($sponsor_tags);
       $story_title = itg_event_backend_get_session_story_title($media, $content_font_color);
@@ -109,7 +110,7 @@ foreach ($data as $key => $value) {
         $output_media .= '<br>';
       }
       ?>
-      <div class="side-right"><div class="title" style="background: <?php print $heading_background_color; ?>"><?php print $program["session_title"]; ?><div class="spncor-tag"><?php echo $sponsor_tags;?></div></div> 
+      <div class="side-right"><div class="title <?php echo $sponsors_data_parent; ?>" style="background: <?php print $heading_background_color; ?>"><?php print $program["session_title"]; ?><?php echo $sponsor_tags;?></div> 
         <div class="listing-detail"><div class="section-part"><?php print $output_story_title. ' ' . $output_media; ?></div>
           <div class="profile-detail">
             <?php
