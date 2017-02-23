@@ -189,7 +189,7 @@ function _get_last_24_hour_visited_node_ids_for_analytics_data() {
       $count_result = $count_collection->find($count_condition);
       foreach ($count_result as $count_document) {
         // Remove 0 which is appended during insert in mongo only case on story.
-        if(_get_node_type_from($count_document['nid']) == "story") {
+        if (_get_node_type_from($count_document['nid']) == "story") {
           $actualy_node_id = substr($count_document['nid'], 1);
         }
         else {
@@ -300,4 +300,21 @@ function _get_node_type_from($nid) {
       ->condition('n.nid', $nid, '=');
 
   return $query->execute()->fetchField();
+}
+
+/**
+ * Implementation of hook_views_query_alter
+ * {@inheritdoc}
+ */
+function itg_analytics_views_query_alter(&$view, &$query) {
+  if ($view->name == 'story_widget' && $view->current_display == 'most_popular') {
+//    $query = (string)$view->build_info['query'];
+//    echo $query;
+  }
+}
+
+
+function itg_analytics_views_pre_execute(&$view) {
+//  $query = (string)$view->build_info['query'];
+//  echo $query;
 }
