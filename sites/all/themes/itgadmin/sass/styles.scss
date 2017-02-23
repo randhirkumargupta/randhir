@@ -1553,6 +1553,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   z-index: 9999;
 }
 #block-menu-menu-ask-an-expert-menu,
+#block-menu-menu-funalytics-tab,
 #block-menu-menu-photogallery-admin-menu,
 #block-menu-menu-mega-review-menu,
 #block-menu-menu-blog-admin-menu,
@@ -6909,9 +6910,18 @@ div.node{
   }
 }
 
-.views-widget-filter-shs_term_node_tid_depth{
+.view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-shs_term_node_tid_depth{
+  width: auto !important;
   #edit-category-tid.form-text{display: none;}
+  .form-select{
+    float: left;
+    width: 161px;
+    & + .form-select{
+      margin-left: 10px;
+    }
+  }
 }
+
 [id*="itg-mobile-services-search-form"]{
   @extend .dib;
   @extend .full;
@@ -10562,3 +10572,15 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   background: url(../images/loading_animation.gif) no-repeat center center;
 }
 #field-itg-content-publish-date-add-more-wrapper{@extend .hide;}
+.key-radio-field {
+  display: inline-block;
+  vertical-align: top;
+  width: 80px;
+  .key-radio {
+    float: left;
+    margin: 3px 5px 3px 0;
+  }
+}
+.file-upload-js-error {
+    display: none;
+}
