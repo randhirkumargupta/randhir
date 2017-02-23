@@ -4,7 +4,6 @@
  * Updating rich snippet for node type story, videogallery and mega review critic
  */
 function itg_seo_node_data($node) {
-//  p($node);
   global $base_url, $theme_key;
   
   // Adding noindex, nofollow for making content search engin friendly
