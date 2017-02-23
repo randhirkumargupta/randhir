@@ -104,7 +104,7 @@ function itg_flag_insert_count($nid, $type, $val) {
     $con = mongodb();
     if ($con) {
       $people = $con->itg_custom_flag_count;
-      $qry = array("nid" => $nid, $type => $val, "created" => date('Y-m-d G:i:s'));
+      $qry = array("nid" => $nid, $type => $val, "created" => date('Y-m-d G:i:s') , "timestamp" => time());
       $result = $people->insert($qry);
       $expire = time() + 60 * 60 * 24 * 30;
       setcookie("likeDislike" . "_" . $nid, "likeDislike" . "_" . $nid, $expire);
@@ -123,7 +123,7 @@ function itg_flag_upd_count($nid, $type, $val) {
     $con = mongodb();
     if ($con) {
       $people = $con->itg_custom_flag_count;
-      $newdata = array('$set' => array($type => $val, "created" => date('Y-m-d G:i:s')));
+      $newdata = array('$set' => array($type => $val, "created" => date('Y-m-d G:i:s') , "timestamp" => time()));
       $people->update(array("nid" => $nid), $newdata);
       $expire = time() + 60 * 60 * 24 * 30;
       setcookie("likeDislike" . "_" . $nid, "likeDislike" . "_" . $nid, $expire);

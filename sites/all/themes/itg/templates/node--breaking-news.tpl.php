@@ -19,7 +19,6 @@ $share_image = '';
 <?php
 
 if (!empty($content)):
-
     $type = $node->field_type['und']['0']['value'];
     if ($type == 'Live Blog' || $type == 'Breaking News') {
         $title = $node->title;
@@ -43,6 +42,7 @@ if (!empty($content)):
           $useragent = $_SERVER['HTTP_USER_AGENT'];
           if (function_exists(itg_live_tv_company))
           {
+            if(!empty($node->field_story_expires['und']['0']['value']) && $node->field_story_expires['und']['0']['value'] == 'Yes') {
             ?>
             <div class="iframe-video">
                 <?php
@@ -77,6 +77,7 @@ if (!empty($content)):
             </div>
         <?php
       }
+          }
       ?>
       
     <!--<iframe width="100%" height="360" frameborder="0" style="z-index:4" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="http://livestream.com/accounts/11965022/events/4086327/player?width=640&amp;height=360&amp;autoPlay=true&amp;mute=false"></iframe>-->
