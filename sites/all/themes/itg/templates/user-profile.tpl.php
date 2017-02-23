@@ -35,9 +35,7 @@
 
   ?>
 <div class="user-profile-div">
-  <?php if ($user_profile): ?>
-  <?php endif; ?>
-  <div class="user-details">
+<div class="user-details">
     <?php if (!array_key_exists(FRONT_USER, $elements['#account']->roles)) { ?>
     <?php print render($user_profile['field_first_name']); ?>
     <?php print render($user_profile['field_last_name']); ?>
@@ -45,11 +43,11 @@
     
     <div class="field">
       <div class="field-label"><?php print t('User name'); ?>:</div>
-      <div class="field-items"><?php print_r($elements['#account']->name); ?></div>
+      <div class="field-items"><?php print $elements['#account']->name; ?></div>
     </div> 
     <div class="field">
       <div class="field-label"><?php print t('Email'); ?>:</div>
-      <div class="field-items"><?php print_r($elements['#account']->mail); ?></div>
+      <div class="field-items"><?php print $elements['#account']->mail; ?></div>
     </div>
     <div class="field">
       <div class="field-label"><?php print t('Role'); ?>:</div>
