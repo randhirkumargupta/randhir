@@ -347,6 +347,9 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     $form['field_user_city'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('City'));
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
     $form['field_user_message']['#attributes'] = array('placeholder' => t('Description'));
+    if($user->uid) {
+    $form['field_user_message']['und'][0]['#format'] = 'front_user';
+    }
     $user_fields = user_load($user->uid);
    
    if ($user->uid != '1') {
