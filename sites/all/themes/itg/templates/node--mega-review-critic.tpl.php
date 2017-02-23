@@ -28,6 +28,9 @@
   if (function_exists('itg_total_share_count')) {
     $tot_count = itg_total_share_count($actual_link);
   }
+  if(function_exists('itg_report_get_node_share')) {
+      $tot_count = itg_report_get_node_share($nid, $tot_count);
+  }
 
 ?>
 <article class="node-<?php print $node->nid; ?> <?php print $classes; ?> clearfix"<?php print $attributes; ?>>

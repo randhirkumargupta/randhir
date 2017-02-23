@@ -86,6 +86,3 @@
   };
 })(jQuery, Drupal, this, this.document);
 
-JQuery('#edit-submit').mousedown(function (){
-  alert(1);
-});

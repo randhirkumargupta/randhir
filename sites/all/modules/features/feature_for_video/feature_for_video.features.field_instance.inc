@@ -392,6 +392,65 @@ function feature_for_video_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-videogallery-field_itg_content_publish_date'.
+  $field_instances['node-videogallery-field_itg_content_publish_date'] = array(
+    'bundle' => 'videogallery',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 51,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_itg_content_publish_date',
+    'label' => 'Content Publish date',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'display_all_day' => 0,
+        'increment' => 15,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_text',
+      'weight' => 59,
+    ),
+  );
+
   // Exported field_instance: 'node-videogallery-field_multi_bitrate'.
   $field_instances['node-videogallery-field_multi_bitrate'] = array(
     'bundle' => 'videogallery',
@@ -2442,6 +2501,7 @@ function feature_for_video_field_default_field_instances() {
   t('Comment question');
   t('Common by line');
   t('Configurations');
+  t('Content Publish date');
   t('Courtesy');
   t('Description');
   t('Expiry Date');
