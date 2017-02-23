@@ -73,6 +73,7 @@ function itg_seo_theme() {
  */
 function itg_seo_form_alter(&$form, &$form_state, $form_id) {
   global $user;
+  
   // Extra meta tags element hide from form
   if ($form_id == 'mega_review_critic_node_form' 
           || $form_id == 'story_node_form' 
@@ -100,7 +101,8 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
           || $form_id == 'quiz_node_form' 
           || $form_id == 'page_node_form' 
           || $form_id == 'poll_node_form' 
-          || $form_id == 'sponsor_node_form') {
+          || $form_id == 'sponsor_node_form'
+          || $form_id == 'itg_funalytics_node_form') {
       if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
           $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
       }
