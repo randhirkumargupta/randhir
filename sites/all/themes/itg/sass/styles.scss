@@ -1669,9 +1669,9 @@ footer{
             @include font(19px,22px,$itg-font-medium);            
             color: #737373;                     
             padding-bottom: 20px;
-            display: block;
+            display: block;            
             span{
-                color: $red-color;
+                color: $red-color;              
             }
         }
         .search-menu{
@@ -3891,6 +3891,7 @@ h1.category-heading{
     .video-landing-header{
         background: transparent;
         padding:0;
+        margin-top: 10px;
     }
     .video-header-left{
         @include clearfix;
@@ -9757,6 +9758,10 @@ h1.about-us-heading{
             width: 65px;
             height: 65px;
             padding-right: 0;
+            border: 1px solid #515567;
+            border-radius: 50%;
+            margin: 10px;
+            overflow: hidden;
         }
     }
     .budget-predictor-social-share{
@@ -10392,6 +10397,11 @@ span.smilies-title {
         background: #171717;   
     }    
 }
+.node-type-podcast{
+    #block-itg-layout-manager-front-end-breadcrumb{
+        background: #000;   
+    }
+}
 /*css breadcrumb end*/
 iframe{
   &[id*="twitter-widget"]{
@@ -10402,9 +10412,11 @@ iframe{
     font-size: 32px;
     margin-bottom: 25px;
     color:#fff;
+    line-height: 42px;
 }
 .video-heading{
     color: #fff;    
     font-size: 24px;
     margin-bottom: 10px;
+    line-height: 34px;
 }

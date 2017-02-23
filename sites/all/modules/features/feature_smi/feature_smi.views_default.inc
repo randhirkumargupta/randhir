@@ -309,18 +309,19 @@ function feature_smi_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['label'] = 'Category';
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
-  /* Field: Social Media Logs: node publish on */
-  $handler->display->display_options['fields']['node_publish_on']['id'] = 'node_publish_on';
-  $handler->display->display_options['fields']['node_publish_on']['table'] = 'itg_social_media_logs';
-  $handler->display->display_options['fields']['node_publish_on']['field'] = 'node_publish_on';
-  $handler->display->display_options['fields']['node_publish_on']['label'] = 'Published On';
-  /* Field: Content: Post date */
-  $handler->display->display_options['fields']['created']['id'] = 'created';
-  $handler->display->display_options['fields']['created']['table'] = 'node';
-  $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['label'] = 'Posted On';
-  $handler->display->display_options['fields']['created']['date_format'] = 'itg_y_m_d';
-  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: Content: Content Publish date */
+  $handler->display->display_options['fields']['field_itg_content_publish_date']['id'] = 'field_itg_content_publish_date';
+  $handler->display->display_options['fields']['field_itg_content_publish_date']['table'] = 'field_data_field_itg_content_publish_date';
+  $handler->display->display_options['fields']['field_itg_content_publish_date']['field'] = 'field_itg_content_publish_date';
+  $handler->display->display_options['fields']['field_itg_content_publish_date']['label'] = 'Published On';
+  $handler->display->display_options['fields']['field_itg_content_publish_date']['settings'] = array(
+    'format_type' => 'itg',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
@@ -331,18 +332,18 @@ function feature_smi_views_default_views() {
   $handler->display->display_options['fields']['view_node']['text'] = 'Promote';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Post date */
-  $handler->display->display_options['filters']['created']['id'] = 'created';
-  $handler->display->display_options['filters']['created']['table'] = 'node';
-  $handler->display->display_options['filters']['created']['field'] = 'created';
-  $handler->display->display_options['filters']['created']['operator'] = 'between';
-  $handler->display->display_options['filters']['created']['group'] = 1;
-  $handler->display->display_options['filters']['created']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['created']['expose']['operator_id'] = 'created_op';
-  $handler->display->display_options['filters']['created']['expose']['label'] = 'Search By Post Date';
-  $handler->display->display_options['filters']['created']['expose']['operator'] = 'created_op';
-  $handler->display->display_options['filters']['created']['expose']['identifier'] = 'created';
-  $handler->display->display_options['filters']['created']['expose']['remember_roles'] = array(
+  /* Filter criterion: Content: Content Publish date (field_itg_content_publish_date) */
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['id'] = 'field_itg_content_publish_date_value';
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['table'] = 'field_data_field_itg_content_publish_date';
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['field'] = 'field_itg_content_publish_date_value';
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['operator'] = 'between';
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['expose']['operator_id'] = 'field_itg_content_publish_date_value_op';
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['expose']['label'] = 'Filter By Publish Date ';
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['expose']['operator'] = 'field_itg_content_publish_date_value_op';
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['expose']['identifier'] = 'field_itg_content_publish_date_value';
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -369,6 +370,7 @@ function feature_smi_views_default_views() {
     25 => 0,
     26 => 0,
   );
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['form_type'] = 'date_popup';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
