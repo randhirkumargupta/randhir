@@ -6967,8 +6967,18 @@ div.node #comments h2 {
   height: 100% !important;
 }
 
-.views-widget-filter-shs_term_node_tid_depth #edit-category-tid.form-text {
+.view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-shs_term_node_tid_depth {
+  width: auto !important;
+}
+.view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-shs_term_node_tid_depth #edit-category-tid.form-text {
   display: none;
+}
+.view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-shs_term_node_tid_depth .form-select {
+  float: left;
+  width: 161px;
+}
+.view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-shs_term_node_tid_depth .form-select + .form-select {
+  margin-left: 10px;
 }
 
 [id*="itg-mobile-services-search-form"] {
@@ -11089,4 +11099,14 @@ span.file a {
 .node-type-videogallery #colorbox iframe,
 .node-type-story #colorbox iframe {
   background: url(../images/loading_animation.gif) no-repeat center center;
+}
+
+.key-radio-field {
+  display: inline-block;
+  vertical-align: top;
+  width: 80px;
+}
+.key-radio-field .key-radio {
+  float: left;
+  margin: 3px 5px 3px 0;
 }
