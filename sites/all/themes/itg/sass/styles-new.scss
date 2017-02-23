@@ -3277,8 +3277,47 @@ body{
     }
   }
 }
-
-
+#itg-personalization-all-content-form{
+  margin-bottom: 20px;
+  h2{margin-bottom: 20px;}
+  .form-type-select {
+    display: inline-block;
+    vertical-align: top;
+    width: 200px;
+    text-align: left;
+    margin-right: 7px;
+    > label {
+      display: block;
+      text-align: left;
+      padding-bottom: 5px;
+    }
+    select {
+      width: 100%;
+    }
+  }
+  .user-log-filter-btn {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 22px;
+    .form-submit {
+      border: 1px solid #000;
+      background-color: #000;
+      color: #fff;
+      padding: 5px 20px;
+      height: 32px;
+      border-radius: 3px;
+      line-height: 22px;
+      font-family: Roboto;
+      font-size: 14px;
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 10px;
+    }
+  }
+}
+.page-personalization-all-content{
+  table{@include personalization-table;}
+}
 
 
 
