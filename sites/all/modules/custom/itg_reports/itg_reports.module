@@ -344,6 +344,37 @@ function itg_reports_missing_year(&$chart_data) {
 }
 
 /**
+ * This function use for entry user on social node share 
+ */
+function itg_report_get_node_share($nid, $count = 0) {
+
+    $query = db_select('itg_node_share_count', 'insc')
+            ->fields('insc', array('share_count'))
+            ->condition('insc.nid', $nid, '=');
+    $result = $query->execute()->fetchField();
+    if (!empty($result) && $count < $result) {
+        $count = (int) $count + (int) $result;
+    }
+
+    $pre_save = array(
+        'nid' => $nid,
+        'share_count' => $count
+    );
+  
+    // iNSERT INTO DATABASE
+   db_merge('itg_node_share_count')
+  	->key(array(
+        'nid' => $nid))
+  	->fields($pre_save)
+  	->execute();
+    $query1 = db_select('itg_node_share_count', 'insc')
+            ->fields('insc', array('share_count'))
+            ->condition('insc.nid', $nid, '=');
+    $result1 = $query1->execute()->fetchField();
+    return $result1;
+}
+
+/**
  * Get node edit count from revision table.
  *
  * @param int $output
