@@ -3051,6 +3051,9 @@ footer .footer-top ul li a:hover {
 #other-comment .error {
   font-size: 13px;
 }
+#other-comment .messages--status {
+  color: #fff;
+}
 
 .comment-popup-wrapper {
   background-color: rgba(0, 0, 0, 0.7);
@@ -3098,15 +3101,19 @@ footer .footer-top ul li a:hover {
 
 .comment-user-details {
   padding: 20px 0 0;
-  text-align: right;
+  text-align: left;
 }
 
 .comment-user-details > div {
   display: inline-block;
   margin-right: 7px;
   vertical-align: top;
-  width: 200px;
+  width: 208px;
   text-align: left;
+  margin-bottom: 20px;
+}
+.comment-user-details > div#user-email {
+  margin-right: 0;
 }
 .comment-user-details > div.social-login {
   text-align: right;

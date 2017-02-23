@@ -1669,9 +1669,9 @@ footer{
             @include font(19px,22px,$itg-font-medium);            
             color: #737373;                     
             padding-bottom: 20px;
-            display: block;
+            display: block;            
             span{
-                color: $red-color;
+                color: $red-color;              
             }
         }
         .search-menu{
