@@ -1019,7 +1019,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
           text-align: center;
         }
       }
-      .form-type-textfield{
+      .form-type-textfield, .form-type-select{
         display: inline-block;
         vertical-align: top;
         overflow: hidden;
@@ -1052,6 +1052,11 @@ $debug: "width:645px"; // TODO: move to _settings.scss
             right: 5px;
             top: 8px;
             z-index: 9;
+          }
+          select{
+            margin-left: 15px;
+            margin-top: 2px;
+            border: none;
           }
       }
       .form-type-textarea{
@@ -1229,9 +1234,13 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       .captcha{
         max-width: 100%;
         margin-left: 0;
-        .form-item-captcha-response{
-          label{width: 220px;}
-          .form-text{padding-left: 230px;}
+        img{
+            margin-left: 160px;
+        }
+        .form-item-captcha-response{      
+            label{
+                line-height: 22px;
+            }
           div.description{display: none;}
         }
       }
@@ -3322,6 +3331,7 @@ body{
 
 
 
+
 /* CSS To Add Zoom Effect on Images */
 
 @media all and(min-width: 1025px){
@@ -5056,7 +5066,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         .form-field-name-field-recipe-audio{
           .form-type-managed-file{margin: 20px 0;}
         }
-        .form-type-textfield{
+        .form-type-textfield, .form-type-select{
           overflow: visible;
           margin: 20px 0 !important;
           label{
@@ -5240,8 +5250,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           margin-left: 0;
           .form-item-captcha-response{
             margin-top: 10px !important;
-            label{width: 195px;}
+            /*label{width: 195px;}*/
             .form-text{padding-left: 200px;}
+          }
+          img{
+              margin-left: 122px;
           }
         }
       }
@@ -5701,6 +5714,24 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     }
   }
   .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child{margin-left: 175px;}
+  [id*="views-exposed-form-front-end-global-search-page"]{
+    .form-item-sm-field-itg-common-by-line-name, .views-widget-filter-tm_vid_4_names{
+      #autocomplete{
+        position: relative !important;
+        top: 0 !important; 
+        left: 0 !important;
+        display: block !important;
+        min-height: 1px;
+        margin-top: 32px;
+        & + .form-text{
+          position: absolute;
+          top: -32px;
+          left: 0;
+        }
+        ul li{padding: 5px 1px;}
+      }
+    }
+  }
 }
 @media all and(max-width: 767px){
   
