@@ -114,8 +114,6 @@ function itg_survey_result() {
                  $four_star_percentage = $rating_user4/$total_rating_user;
                  $five_star_percentage = $rating_user5/$total_rating_user;
             
-           
-            
             $answer_op_tbl .= '<tr>
               <td style="width:25%">' . $answer . '</td>
               <td>' . $vote_percentage . '</td>
@@ -142,9 +140,7 @@ function itg_survey_result() {
               <td>' . $authenticated_percentage . '</td>
               <td>' . $anonymous_percentage . '</td>
               
-              </tr>';
-              
-              
+              </tr>';       
           } else  {
             
             $vote_percentage = itg_survey_vote_percentage($node->nid, $question_arr['value'], strtolower($value));
@@ -159,18 +155,6 @@ function itg_survey_result() {
             </tr>';
           } 
       }
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
- 
       $output.$num .= $answer_op_tbl;
       $output.$num .= '</table><p>&nbsp;</p>';
       //return $output;
@@ -191,45 +175,14 @@ function itg_survey_result() {
     return '<h2>No Result Found! This survey has not taken yet.</h2>';
   }
 }
-//   function itg_survey_checkbox_rating($rating_star_percentage){
-//      
-//     //  p($rating_star_percentage);
-//       
-//       foreach($rating_star_percentage as $value) {
-//               if($value->rating_value == 1) {
-//                   
-//                   $rating_user = $value->user*100;
-//                 //  $i++; 
-//                   
-//               }
-//                $total_rating_user+= $value->user;
-//            }
-//       
-//       
-//       
-//   }
-   $one_star_percentage = $rating_user/$total_rating_user;
-       //return round( $one_star_percentage, 2) . '%';
-            
-//            switch ($value->rating_value) {
-//               
-//    case $rating == 1:
-//        echo $one_star_percentage = itg_survey_vote_percentage_user_onestar($node->nid, $question_arr['value'], strtolower($answer),$rating);
-//        break;
-//    case $rating == 2:
-//        echo $two_star_percentage = itg_survey_vote_percentage_user_onestar($node->nid, $question_arr['value'], strtolower($answer),$rating);
-//        break;
-//    case $rating == 3:
-//        echo  $three_star_percentage = itg_survey_vote_percentage_user_onestar($node->nid, $question_arr['value'], strtolower($answer),$rating);
-//        break;
-//    case $rating == 4:
-//        echo  $four_star_percentage = itg_survey_vote_percentage_user_onestar($node->nid, $question_arr['value'], strtolower($answer),$rating);
-//        break;
-//    case $rating == 5:
-//        echo  $five_star_percentage = itg_survey_vote_percentage_user_onestar($node->nid, $question_arr['value'], strtolower($answer),$rating);
-//        break;
-//        
-//    default:
-//        echo "Your favorite color is neither red, blue, nor green!";
-//}
-//         
+   
+          
+          
+          
+          
+          
+          
+          
+          
+      
+ 

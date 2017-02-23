@@ -6,14 +6,7 @@
 (function($) {
     Drupal.behaviors.itg_dailymotion = {
         attach: function(context, settings) {
-            // GET field id
-//            var video_field_id = settings.itg_dailymotion.settings.video_field_id;
-//            var video_field_file = settings.itg_dailymotion.settings.video_field_file;
-            // FTP browse
-
-
-            
-
+  
             $(".ftp-server .asso-filed_single").click(function(e) {
                 jQuery('#loader-data img').show().parent().addClass('loader_overlay');
                 var selected_check_boxes_index = 0;
@@ -250,17 +243,26 @@ jQuery('document').ready(function() {
                 parent.jQuery('[name="' + getbtnmane + '[fid]"]').val(videogallery_new_file_hold);
                 parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_video][button]").trigger('mousedown');
                 parent.jQuery('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
-
-                    parent.jQuery.colorbox.close();
+                  
+                    try {
+                       
+                        parent.jQuery.colorbox.close();
+                    } catch (err) {
+                        
+                        parent.jQuery.colorbox.close();
+                    }
                 });
             }
             else {
                 parent.jQuery("[name='field_video_upload_add_more']").mousedown();
                 parent.jQuery('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
+                   
                     try {
+                      
                         parent.jQuery.colorbox.close();
                     } catch (err) {
-
+                       
+                        parent.jQuery.colorbox.close();
                     }
 
 
@@ -307,9 +309,9 @@ jQuery('document').ready(function() {
         });
     })
 
-setTimeout(function() {
-                jQuery(".video-ftp").trigger("click");
-            }, 1000);
+    setTimeout(function() {
+        jQuery(".video-ftp").trigger("click");
+    }, 1000);
 });
 
 // Implement function for video search by title
