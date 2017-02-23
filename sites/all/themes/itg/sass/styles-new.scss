@@ -4890,16 +4890,19 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       &.bp-items{
         background-color: #f0f0f0;
       }
-      #sortable1, #sortable2, #sortable3, #sortable4{min-height:647px; cursor: move;}
+      #sortable1, #sortable2, #sortable3, #sortable4{min-height:600px; cursor: move;}
     }
     .cheaper-deaper-action{
       text-align: center;
       button{
-        padding: 5px 10px;
-        border: 1px solid #193984;
-        background-color: #193984;
-        border-radius: 3px;
+        padding: 3px 20px 1px;
+        border: 1px solid #cd070f;
+        background-color: #cd070f;
         color: #fff;
+        font-size: 28px;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-bottom: 36px;
       }
     }
   }

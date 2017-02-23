@@ -8,7 +8,7 @@
         $ans_detail = entity_load('field_collection_item', array($mega_item['value']));
         $byline_id = $ans_detail[$mega_item['value']]->field_images['und'][0]['uri'];
         ?>
-        <li >
+        <li>
           <figure class="" img-fid=" <?php print $ans_detail[$mega_item['value']]->field_images['und'][0]['fid']; ?>">
 
             <img src=<?php print file_create_url($byline_id); ?> width="753" height="543" title="" alt="" />
@@ -33,7 +33,7 @@
 </div>
 <style>
   .page-photogallery-embed{background-color: #171717;}
-  h1{font-size: 32px; margin: 25px 0; color: #fff;}
+  h1{font-size: 32px; margin: 25px 0; color: #fff; text-align: center;}
   .itg-embed-photo-wrapper{padding: 10px; background-color: #000; max-width: 773px; margin: 0 auto;}
   .itg-embed-photo-thumb{margin-top: 10px;}
   .itg-embed-photo-thumb .slick-slide{outline: none;}
