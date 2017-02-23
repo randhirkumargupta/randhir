@@ -183,7 +183,7 @@ if (!empty($content)):
                                         else {
                                           print 0;
                                         }
-                                        ?></span>SHARES</li>
+                                        ?></span><?php print t('SHARES'); ?></li>
                                 <li><?php print date('F j, Y', $node->created); ?>   </li>
                                 <li>UPDATED <?php print date('H:i', $node->changed);
                                 print t(' IST');
