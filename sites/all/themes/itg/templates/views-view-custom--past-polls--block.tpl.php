@@ -36,7 +36,7 @@ $fb_share_image = '';
 				<div class="vota"><?php echo $row['php_1'];?> | </div>
 				<div class="time">Updated: <?php echo $row['changed'];?></div>
 				
-				<div class="social-share"><ul><li><span class="share"><i class="fa fa-share-alt"></i></span></li><li><a href="#"  onclick="" class="facebook"><i class="fa fa-facebook"></i></a></li><li><a href="#"  class="twitter"><i class="fa fa-twitter"></i></a></li><li><a href="#"  class="google"></a></li></ul></div>			
+				<div class="social-share"><ul><li><span class="share"><i class="fa fa-share-alt"></i></span></li><li><a href="javascript:;" onclick="<?php echo 'fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fb_share_title . "'" . ', ' . "'" . $fb_share_desc . "'" . ', ' . "'" . $fb_share_image . "'" . ')';?>" class="facebook"><i class="fa fa-facebook"></i></a></li><li><a title = "share on twitter"  <?php echo ' onclick="twitter_popup(\'' . urlencode($row['title']) . ',' . urlencode($short_url) . '\')" href="javascript:;"';?> class="twitter"><i class="fa fa-twitter"></i></a></li><li><a title="share on google+" <?php echo 'onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')"';?> href="javascript:;"  class="google"></a></li></ul></div>			
 				
 			</div>
 	<div class="voting-data">
