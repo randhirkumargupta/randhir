@@ -11,72 +11,68 @@
 function itg_layout_list_delete() {
   // configure the table header columns
   $header = array(
-    array('data' => t('ID')),
-    array('data' => t('Section name')),
-    array('data' => t('Template name')),
-    array('data' => t('Delete')),
-    array('data' => t('Edit')),
+      array('data' => t('ID')),
+      array('data' => t('Section name')),
+      array('data' => t('Template name')),
+      array('data' => t('Delete')),
+      array('data' => t('Edit')),
   );
-  
+
   if ($_GET['items_per_page']) {
     $items_per_page = $_GET['items_per_page'];
-  }
-  else {
+  } else {
     $items_per_page = 10;
   }
   if (arg(1) == 'home') {
     $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
-    $itg_query->fields('layout_tpl', array('id','section_name', 'template_name', 'status', 'created_date'));  
-    
+    $itg_query->fields('layout_tpl', array('id', 'section_name', 'template_name', 'status', 'created_date'));
+
     $itg_query->condition('layout_tpl.section_name', 'home_page', '=');
-    
+
     $itg_query->extend('PagerDefault')->limit($items_per_page);
-  }
-  else {
+  } else {
     $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
-    $itg_query->fields('layout_tpl', array('id','section_name', 'template_name', 'status', 'created_date'));  
+    $itg_query->fields('layout_tpl', array('id', 'section_name', 'template_name', 'status', 'created_date'));
     $itg_query->join('taxonomy_term_data', 'ttd', 'ttd.tid = layout_tpl.section_name');
     $itg_query->fields('ttd', array('name'));
     $itg_query->groupBy('layout_tpl.section_name');
     $itg_query->extend('PagerDefault')->limit($items_per_page);
   }
-  
-  /*if (!empty($_GET['section'])) {
+
+  /* if (!empty($_GET['section'])) {
     $itg_query->condition('layout_tpl.section_name', $_GET['section']);
-  }
-  else {
+    }
+    else {
     $itg_query->condition('layout_tpl.section_name', 'home_page', '!=');
-  } */
-  
+    } */
+
   $itg_result = $itg_query->execute()->fetchAll();
-  
+
   $rows = array();
-  
+
   $count = 0;
-  
+
   foreach ($itg_result as $row) {
     $rows[] = array(
-      array('data' => $count+1),
-      array('data' => $row->name),
-      array('data' => $row->template_name),
-      array('data' => l(t('delete'), 'itg-delete-layout/'.$row->id)),
-      array('data' => l(t('Edit'), 'itg-layout-manager/section', array('query' => array('section' => $row->section_name, 'template_name' => $row->template_name)))),
+        array('data' => $count + 1),
+        array('data' => $row->name),
+        array('data' => $row->template_name),
+        array('data' => l(t('delete'), 'itg-delete-layout/' . $row->id)),
+        array('data' => l(t('Edit'), 'itg-layout-manager/section', array('query' => array('section' => $row->section_name, 'template_name' => $row->template_name)))),
     );
     $count++;
   }
-  
+
   $output = render(drupal_get_form('itg_layout_manager_filter_form'));
   $output .= '<div class="view"><div class="attachment"><span class="count">Count (' . $count . ') </span>';
-  $output .= l(t('Add New Template'), 'itg-layout-manager/section').'</div></div>';  
+  $output .= l(t('Add New Template'), 'itg-layout-manager/section') . '</div></div>';
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
 
   // add the pager
   $output .= theme('pager');
 
   return $output;
- 
 }
-
 
 /**
  * for layout delete for admin
@@ -94,9 +90,9 @@ function itg_layout_delete() {
   //SELECT * FROM `itg_layout_manager` WHERE widget_name = '';
   //db_delete('itg_layout_manager')->condition('widget_name', '')->execute();
   //exit;
-  /*db_delete('itg_layout_manager')->condition('layout_id', arg(1))->execute();
-  db_delete('itg_layout_tpl')->condition('id', arg(1))->execute();
-  drupal_goto('itg-admin-layout-list');*/
+  /* db_delete('itg_layout_manager')->condition('layout_id', arg(1))->execute();
+    db_delete('itg_layout_tpl')->condition('id', arg(1))->execute();
+    drupal_goto('itg-admin-layout-list'); */
 }
 
 /**
@@ -112,15 +108,95 @@ function itg_section_widgets_list_delete() {
  * Callback for create-poll-table
  * @param 
  */
-
 function create_poll_table() {
-  /*$query = 'CREATE TABLE IF NOT EXISTS `itg_poll_count_content` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content_id` int(11) NOT NULL,
-  `poll_id` int(11) NOT NULL,
-  `content_type` varchar(250) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;';
-  db_query($query);*/
+  /* $query = 'CREATE TABLE IF NOT EXISTS `itg_poll_count_content` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `content_id` int(11) NOT NULL,
+    `poll_id` int(11) NOT NULL,
+    `content_type` varchar(250) NOT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;';
+    db_query($query); */
 }
 
+/**
+ * Implements create_section_category_in_mongo()
+ */
+// Code started for sending the section and it category data into mongo DB
+
+
+function create_section_category_in_mongo() {
+
+  $form['submit_button'] = array(
+      '#type' => 'submit',
+      '#value' => t('Please submit for bulk insert section and its category'),
+  );
+
+  return $form;
+}
+
+/**
+ * Implements create_section_category_in_mongo_submit().
+ */
+function create_section_category_in_mongo_submit($form, &$form_state) {
+
+  $query = db_select('taxonomy_term_data', 'td');
+  $query->leftJoin('taxonomy_term_hierarchy', 'th', 'th.tid = td.tid');
+  $result = $query
+          ->condition('td.vid', CATEGORY_MANAGMENT)
+          ->fields('td', array('tid', 'name'))
+          ->fields('th', array('parent'))
+          ->execute();
+
+
+  foreach ($result as $chunk_data) {
+    if (!empty($chunk_data) && isset($chunk_data)) {
+      $operations[] = array('create_section_cat_op', array($chunk_data));
+    }
+  }
+
+  $batch = array(
+      'title' => t('Migrating data finally....please wait....!'),
+      'operations' => $operations,
+      'finished' => 'create_section_cat_op_batch_finished',
+      'init_message' => t('Migration started...please wait....!'),
+      'progress_message' => t('Processed @current out of @total.'),
+      'error_message' => t('Migration checking process has encountered an error.'),
+      'file' => drupal_get_path('module', 'itg_miscellaneous') . '/includes/itg_miscellaneous.inc',
+  );
+
+  batch_set($batch);
+  batch_process('create-section-category-in-mongo');
+}
+
+/**
+ * Implements create_section_cat_op().
+ */
+function create_section_cat_op($data, &$context) {
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $people = $con->taxonomy_term_data_mongo;
+    if ($con) {
+      $qry = array(
+          "tid" => $data->tid,
+          "name" => $data->name,
+          "parent" => $data->parent,
+      );
+      $result = $people->insert($qry);
+    }
+    drupal_set_message('data inserted successfully for ' . json_encode($result));
+    }
+  }
+
+  /**
+   * Implements create_section_cat_op_batch_finished().
+   */
+  function create_section_cat_op_batch_finished($success, $results, $operations) {
+    if ($success) {
+      drupal_set_message(t('migration processed successfully.'));
+    } else {
+      drupal_set_message(t('An error occurred while processing.'));
+    }
+  }
+
+  
