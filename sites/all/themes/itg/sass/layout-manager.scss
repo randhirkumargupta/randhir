@@ -598,6 +598,9 @@ img{
 }
 /*End Watch right Now suggest End*/
 /*Start photo section slider Homepage*/
+.featured_photo_carousel{
+  .widget-settings{position: absolute; left: 10px; top: 10px;}
+}
 .featured_photo_carousel, .tech-block_5, .auto-block_5{
     .widget-title{
         @include pos(absolute,10px,null,null,10px);        

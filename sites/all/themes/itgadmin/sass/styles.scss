@@ -3404,7 +3404,9 @@ fieldset#edit-select{
     }
   }
 }
-.form-field-name-field-magazine-publish, 
+.form-field-name-field-magazine-publish{
+  .form-type-checkbox{padding-left: 220px;}
+}
 .form-field-name-field-supp-publish{
   .form-type-checkbox{padding-left: 220px;margin-top: -10px;}
 }
@@ -4093,14 +4095,19 @@ div.node{
       @extend .mb-10;
       width: 615px;
       .field-name-field-syndication-time{
-        @extend .fleft;
-        width: 70%;
+        @extend .dib;
+        @extend .vtop;
+        width: 100%;
         .form-type-textfield{
           margin: 0;
           padding-right: 0;
           .form-text{
             @extend .fleft;
             width: 170px;
+            & + span.error{
+              float: left;
+              width: 100%;
+            }
           }
         }
       }
@@ -9498,7 +9505,7 @@ div.node{
     }
   }
 }
-[id="itg-widget-keycandidate-form"]{
+[id*="itg-widget-keycandidate-form"]{
   @extend .full;
   @extend .dib;
   @extend .vtop;
@@ -10569,7 +10576,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
 .node-type-photogallery #colorbox iframe,
 .node-type-videogallery #colorbox iframe,
 .node-type-story #colorbox iframe{
-  background: url(../images/loading_animation.gif) no-repeat center center;
+  /*background: url(../images/loading_animation.gif) no-repeat center center;*/
 }
 #field-itg-content-publish-date-add-more-wrapper{@extend .hide;}
 .key-radio-field {
@@ -10583,4 +10590,15 @@ span.file a{pointer-events: none; color: #2f2f2f;}
 }
 .file-upload-js-error {
     display: none;
+}
+#views-form-poll-widget-poll-widget-format, 
+#views-form-issue-base-magazin-widget-issue-base-magazin-widget, 
+#views-form-category-of-stroy-base-magazin-widget-issue-category-magazin-widget{
+  p{margin-top: 20px;}
+  .form-actions{
+    margin-top: 20px;
+    a{
+      @extend .btn-reset;
+    }
+  }
 }
