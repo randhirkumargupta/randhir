@@ -62,7 +62,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                                             <?php }
                                             else
                                             { ?>
-                                          <li><a title = "Save" href="javascript:" class="def-cur-pointer active"><i class="fa fa-bookmark"></i></a></li>
+                                          <li><a title = "Save" href="javascript:" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i></a></li>
                                             <?php
                                             }
                                           }
@@ -197,7 +197,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                                             <?php }
                                             else
                                             { ?>
-                                          <li><a title = "Save" href="javascript:" class="def-cur-pointer active"><i class="fa fa-bookmark"></i></a></li>
+                                          <li><a title = "Save" href="javascript:" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i></a></li>
                                             <?php
                                             }
                                           }
