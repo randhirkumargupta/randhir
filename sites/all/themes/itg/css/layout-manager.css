@@ -953,6 +953,12 @@ img {
 
 /*End Watch right Now suggest End*/
 /*Start photo section slider Homepage*/
+.featured_photo_carousel .widget-settings {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
 .featured_photo_carousel .widget-title, .tech-block_5 .widget-title, .auto-block_5 .widget-title {
   position: absolute;
   top: 10px;

@@ -9498,7 +9498,7 @@ div.node{
     }
   }
 }
-[id="itg-widget-keycandidate-form"]{
+[id*="itg-widget-keycandidate-form"]{
   @extend .full;
   @extend .dib;
   @extend .vtop;
@@ -10583,4 +10583,15 @@ span.file a{pointer-events: none; color: #2f2f2f;}
 }
 .file-upload-js-error {
     display: none;
+}
+#views-form-poll-widget-poll-widget-format, 
+#views-form-issue-base-magazin-widget-issue-base-magazin-widget, 
+#views-form-category-of-stroy-base-magazin-widget-issue-category-magazin-widget{
+  p{margin-top: 20px;}
+  .form-actions{
+    margin-top: 20px;
+    a{
+      @extend .btn-reset;
+    }
+  }
 }
