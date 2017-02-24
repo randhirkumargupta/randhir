@@ -578,6 +578,12 @@ function itg_event_backend_after_build($form, &$form_state) {
     ),
   );
 
+      $max_delta_config = $form['field_ticket_group_type'][LANGUAGE_NONE]['#max_delta'] + 1;
+      //Hide add more button, if ticket are not available
+        if (isset($max_delta_config) && $max_delta_config >= 4) {
+          unset($form['field_ticket_group_type']['und']['add_more']);
+        }
+    
   return $form;
 }
 
