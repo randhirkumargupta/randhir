@@ -59,6 +59,7 @@
   <div class="itg-form-section hide">
   <?php print drupal_render($form['field_featured']); ?>
   <?php print drupal_render($form['field_common_related_content']); ?>
+  <?php print drupal_render($form['field_photogallery_configuration']); ?>
   </div>
 </div>
 <!--<div id="Categorization" class="itg-sidebar-form-section">
