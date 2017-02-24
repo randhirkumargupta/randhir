@@ -225,7 +225,6 @@ jQuery(document).ready(function () {
                     cache: false,
                     dataType: "JSON",
                     success: function (data) {
-                        alert(data.fid);
                         jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find(".newsletter-loader").html('');
                         jQuery('.newsletter-get-content[rel="' + relval + '"]').removeClass('inactive');
                         jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find('.ajax-progress-throbber').hide();
