@@ -1284,6 +1284,12 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
             .marquee-container{
                 width: 100%;
                 height: 23px;
+                float: none;
+                line-height: 23px;
+                .marquee-child{
+                    height: 23px;
+                    line-height: 23px;
+                }
             }
             .social-share{
                 display: none;
@@ -2288,7 +2294,8 @@ footer .footer-top .footer-social-link{
             }
             p{
                 margin-top:0;
-            }
+                overflow: hidden;
+            }            
         }
         i{
             color: #ccc;

@@ -1134,11 +1134,14 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
             $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
             $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
             $form['#validate'][] = 'custom_section_wise_validate';
-            $states_neame = get_all_state();
+            $states_name = get_all_state();
+            
             $form['state_val'] = array(
                 '#type' => 'select',
                 '#multiple' => TRUE,
-                '#options' => $states_neame,
+               '#default_value' => '',
+                '#validated'=>TRUE,
+                '#options' => $states_name,
             );
             $form['state_val']['#prefix'] = '<div class=""style="display:none">';
             $form['state_val']['#suffix'] = '</div>';
