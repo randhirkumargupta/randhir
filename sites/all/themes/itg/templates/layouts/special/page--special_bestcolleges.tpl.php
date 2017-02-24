@@ -1,3 +1,4 @@
+
 <?php
 /**
  * @file
@@ -104,8 +105,8 @@ if ($theme != 'itgadmin') {
     <div class="row">
         <div class="col-md-8 col-sm-12 col-xs-12 left-side">
    <?php if (isset($widget_data['itg-block-1']['widget_name']) || isset($widget_data['itg-block-2']['widget_name']) || isset($widget_data['itg-block-3']['widget_name']) || $theme == 'itgadmin') { ?>
-    <div class="row">
-        <div class="col-md-12 itg-h747-section">
+    <div>
+        <div class="itg-h747-section">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name'].$widget_data['itg-block-1']['widget_display_name']; ?>">
@@ -117,22 +118,33 @@ if ($theme != 'itgadmin') {
 
 
 
-         <div class="col-md-12 mt-50 itg-h305-section">
-            <div class="itg-widget">
 
-            </div>
-        </div>
 
         <div>
 
-        <div class="list-grid"><a href="http://qa.localhost.com/taxonomy/term/788?view_type=list" class="active"><i class="fa fa-list" aria-hidden="true"></i>List</a><span class="pipline"> | </span><a href="http://qa.localhost.com/taxonomy/term/788?view_type=grid"><i class="fa fa-th" aria-hidden="true"></i> Grid</a></div>
 
-         <div class="col-md-12 mt-50 itg-h625-section">
+<!--- list / grid -->
+<div class="col-sm-12 col-xs-12 view1">
+<div class="title col-md-6 col-sm-6 col-xs-12">Best of The Best 2016</div>
+
+        <div class="right_Section pull-right  col-md-6  col-sm-6 col-xs-12 text-right hidden-xs">
+        <strong>view as</strong>
+        <div class="btn-group">
+            <a href="#" class="btn btn-default btn-sm list"><span class="fa fa-th-list"></span> List</a>
+            <a href="#" class="btn btn-default btn-sm active_btn grid"><span class="fa fa-th"></span> Grid</a>
+        </div>
+        </div>
+</div>
+<!--- list / grid -->
+
+
+
+         <div class="col-md-12 itg-h625-section  remove_padd_left remove_padd_right ">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-3']['widget_name'].$widget_data['itg-block-3']['widget_display_name']; ?>">
                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-3']['block_title'])) { ?>
-                     <h4 class="heading"><?php print $widget_data['itg-block-3']['block_title']; ?></h4>
+                     <!--<h4 class="heading"><?php //print $widget_data['itg-block-3']['block_title']; ?></h4> -->
                   <?php } ?>
                      <!-- for admin  -->
                   <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
@@ -145,7 +157,17 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>
 
-                    <div class="data-holder" id="itg-block-3"><?php print $widget_data['itg-block-3']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-3">
+                          <div class="col-sm-12 remove_padd_right">
+                            <div class="row list-group college">
+                                  <div class="clr_chn">
+
+                          <?php print $widget_data['itg-block-3']['widget']; ?>
+                                   </div>
+                            </div>
+                        </div>
+
+                    </div>
                   </div>
                 </div>
             </div>
@@ -205,7 +227,7 @@ if ($theme != 'itgadmin') {
             </div>
         </div>
 
-            <div class="col-md-12 mt-50 itg-h625-section">
+            <div class="col-md-12 itg-h624-section">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-5']['widget_name'].$widget_data['itg-block-5']['widget_display_name']; ?>">
@@ -346,5 +368,5 @@ if($theme != 'itgadmin')
 
     });", array('type' => 'inline', 'scope' => 'footer'));
 }
-
 ?>
+

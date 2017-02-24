@@ -1,14 +1,14 @@
-<div class="year-slider">
+<div class="slider_besrCollage slider_outer">
     <?php foreach($rows as $index => $row): ?>
     <div><?php print $row['field_story_extra_large_image'];?>
-        <h2><?php echo l(mb_strimwidth(strip_tags($row['title']), 0, 105, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h2>
+        <div class="carousel-caption"><?php echo l(mb_strimwidth(strip_tags($row['title']), 0, 105, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></div>
     </div>
     <?php endforeach; ?>
 </div>
 
 <script>
 jQuery(document).ready(function () {
-    jQuery('.year-slider').slick({
+    jQuery('.slider_outer').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: true,
@@ -16,3 +16,5 @@ jQuery(document).ready(function () {
     });
 });
 </script>
+
+

@@ -42,7 +42,7 @@
 </div>
 
 <!-- Slider End-->
-
+<div class="clearfix"></div>
 <!-- Grid View-->
 <div class="col-sm-12 col-xs-12 view1">
 <div class="title col-md-6 col-sm-6 col-xs-12">Best of The Best 2016</div>
@@ -50,8 +50,8 @@
         <div class="right_Section pull-right  col-md-6  col-sm-6 col-xs-12 text-right hidden-xs">
         <strong>view as</strong>
         <div class="btn-group">
-            <a href="#" id="list" class="btn btn-default btn-sm"><span class="fa fa-th-list"></span> List</a>
-            <a href="#" id="grid" class="btn btn-default btn-sm active_btn"><span class="fa fa-th"></span> Grid</a>
+            <a href="#" class="btn btn-default btn-sm list"><span class="fa fa-th-list"></span> List</a>
+            <a href="#" class="btn btn-default btn-sm active_btn grid"><span class="fa fa-th"></span> Grid</a>
         </div>
         </div>
 </div>
@@ -59,8 +59,8 @@
 <div>
 <div class="clearfix"></div>
 <div class="col-sm-12 remove_padd_right">
-<div id="products" class="row list-group">
-      <div class="clr_chn">
+<div class="row list-group college">
+      <div class="clr_chn right_align_bestcollege" >
 
               <?php
                 if (array_filter(views_get_view_result('best_college_image_slider', 'block_1'))) {
