@@ -616,7 +616,7 @@ function itg_image_croping_crop_image_orignal() {
                 $scaled = image_scale($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height'], true);
             }
             else {
-                $scaled = image_scale($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height'],flase);
+                $scaled = image_scale($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height'],false);
             }
 
             if ($scaled) {
