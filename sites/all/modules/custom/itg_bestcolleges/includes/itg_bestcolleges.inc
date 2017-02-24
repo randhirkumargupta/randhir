@@ -13,7 +13,7 @@
 */
 function bestcollege_rhssearch_form($form, &$form_state) {
   global $base_url;
-  $year = arg(1);
+  $year = 2016;//arg(1);
   $settings['base_url'] = $base_url;
   $settings['year'] = $year;
   drupal_add_js(array('itg_bestcolleges' => array('settings' => $settings)), array('type' => 'setting'));
@@ -26,119 +26,170 @@ function bestcollege_rhssearch_form($form, &$form_state) {
   $form = array();
   if (count($getstream) > 0) {
     $form['emerging_rhs'] = array(
-      '#type' => 'fieldset', 
+      '#type' => 'item', 
       '#title' => t('EMERGING BEST COLLEGES'), 
-      '#weight' => 0, 
-      '#collapsible' => TRUE, 
-      '#collapsed' => FALSE,
-      '#prefix' => '<div class = "emerging_rhsdiv">',
+      '#weight' => 0,
+      '#prefix' => '<div class = "right_side"><div class = "right_view">',
       '#suffix' => '</div>',
     );
-    $form['emerging_rhs']['emerging_select'] = array(
+    $form['emerging_select'] = array(
       '#type' => 'select',
       '#title' => t(''),
+      '#weight' => 1,
       '#options' => $getstream,
+      '#attributes' => array('class' => array('city_wise')),
+      '#prefix' => '<div class = "detail_box">',
+      '#suffix' => '</div>',
     );
   }
   
   $form['yearcompare_rhs'] = array(
-    '#type' => 'fieldset', 
+    '#type' => 'item', 
     '#title' => t('YEAR-WISE COMPARISON'), 
-    '#weight' => 1, 
-    '#collapsible' => TRUE, 
-    '#collapsed' => FALSE,
-    '#prefix' => '<div class = "yearcompare_rhsdiv">',
+    '#weight' => 2, 
+    '#prefix' => '<div class = "right_view">',
     '#suffix' => '</div>',
   );
-  $form['yearcompare_rhs']['yearcompare_yr1'] = array(
+  $form['yearcompare_yr'] = array(
+      '#type' => 'item', 
+      '#title' => t('YEAR'), 
+      '#weight' => 2.5,
+      '#prefix' => '<div class = "detail_box"><div class = "col-md-2 col-sm-2 col-xs-2 remove_padd_left">',
+      '#suffix' => '</div>',
+    );
+  $form['yearcompare_yr1'] = array(
     '#type' => 'select',
     '#title' => t(''),
-    '#options' => $getsyears['year']
+    '#weight' => 3,
+    '#options' => $getsyears['year'],
+    '#attributes' => array('class' => array('city_wise')),
+    '#prefix' => '<div class = "col-sm-4 col-xs-4 remove_padd_left">',
+    '#suffix' => '</div>',
   );
-  $form['yearcompare_rhs']['yearcompare_yr2'] = array(
+  $form['yearcompare_vs'] = array(
+      '#type' => 'item', 
+      '#title' => t('Vs'), 
+      '#weight' => 3.5,
+      '#prefix' => '<div class = "col-md-2 col-sm-1 col-xs-2 control-label remove_padd_left">',
+      '#suffix' => '</div>',
+    );
+  $form['yearcompare_yr2'] = array(
     '#type' => 'select',
     '#title' => t(''),
-    '#options' => $getsyears['year']
+    '#weight' => 4,
+    '#options' => $getsyears['year'],
+    '#attributes' => array('class' => array('city_wise')),
+    '#prefix' => '<div class = "col-sm-4 col-xs-4 remove_padd_left remove_padd_right">',
+    '#suffix' => '</div>',
   );
-  $form['yearcompare_rhs']['yearcompare_stream'] = array(
+  $form['yearcompare_streamlabel'] = array(
+      '#type' => 'item', 
+      '#title' => t('For Stream'), 
+      '#weight' => 4.5,
+      '#prefix' => '<div class = "stream"><div class = "col-lg-4 col-md-12 col-sm-12 control-label remove_padd_left">',
+      '#suffix' => '</div>',
+    );
+  $form['yearcompare_stream'] = array(
     '#type' => 'select',
     '#title' => t(''),
-    '#options' => $getsyears['stream']
+    '#weight' => 5,
+    '#options' => $getsyears['stream'],
+    '#attributes' => array('class' => array('city_wise')),
+    '#prefix' => '<div class ="col-lg-8 col-sm-12 col-md-12 remove_padd_left remove_padd_right">',
+    '#suffix' => '</div></div><div class="clearfix"></div></div>',
   );
   $form['streamcompare_rhs'] = array(
-    '#type' => 'fieldset', 
+    '#type' => 'item', 
     '#title' => t('STREAM-WISE COMPARISON'), 
-    '#weight' => 2, 
-    '#collapsible' => TRUE, 
-    '#collapsed' => FALSE,
-    '#prefix' => '<div class = "streamcompare_rhsdiv">',
+    '#weight' => 6, 
+    '#prefix' => '<div class = "right_view">',
     '#suffix' => '</div>',
   );
-  $form['streamcompare_rhs']['streamcompare_rhs_stream1'] = array(
+  $form['yearcompare_st'] = array(
+      '#type' => 'item', 
+      '#title' => t('STREAM'), 
+      '#weight' => 6.5,
+      '#prefix' => '<div class = "detail_box"><div class = "col-md-2 col-sm-2 col-xs-2 remove_padd_left">',
+      '#suffix' => '</div>',
+  );
+  $form['streamcompare_rhs_stream1'] = array(
     '#type' => 'select',
     '#title' => t(''),
-    '#options' => $getsyears['stream']
+    '#weight' => 7,
+    '#options' => $getsyears['stream'],
+    '#attributes' => array('class' => array('city_wise')),
+    '#prefix' => '<div class = "col-sm-4 col-xs-4 remove_padd_left">',
+    '#suffix' => '</div>',
+  );
+  $form['streamcompare_rhs_vs'] = array(
+      '#type' => 'item', 
+      '#title' => t('Vs'), 
+      '#weight' => 7.5,
+      '#prefix' => '<div class = "col-md-2 col-sm-1 col-xs-2 control-label remove_padd_left">',
+      '#suffix' => '</div>',
   );  
-  $form['streamcompare_rhs']['streamcompare_rhs_stream2'] = array(
+  $form['streamcompare_rhs_stream2'] = array(
     '#type' => 'select',
     '#title' => t(''),
-    '#options' => $getsyears['stream']
-  );
-  $form['streamcompare_rhs']['streamcompare_rhs_yr'] = array(
-    '#type' => 'select',
-    '#title' => t(''),
-    '#options' => $getsyears['year']
-  );
-  $form['clgsurvey_rhs'] = array(
-    '#type' => 'fieldset', 
-    '#title' => t('LAST 19 YEARS BEST COLLEGE SURVEYS'), 
-    '#weight' => 3, 
-    '#collapsible' => TRUE, 
-    '#collapsed' => FALSE,
-    '#prefix' => '<div class = "clgsurvey_rhsdiv">',
+    '#weight' => 8,
+    '#options' => $getsyears['stream'],
+    '#attributes' => array('class' => array('city_wise')),
+    '#prefix' => '<div class = "col-sm-4 col-xs-4 remove_padd_left remove_padd_right">',
     '#suffix' => '</div>',
   );
-  $form['clgsurvey_rhs']['clgsurvey_stream'] = array(
+  $form['streamcompare_rhs_label'] = array(
+    '#type' => 'item', 
+      '#title' => t('For Year'), 
+      '#weight' => 8.5,
+      '#prefix' => '<div class = "stream"><div class = "col-lg-4 col-md-12 col-sm-12 control-label remove_padd_left">',
+      '#suffix' => '</div>',
+  );
+  $form['streamcompare_rhs_yr'] = array(
     '#type' => 'select',
     '#title' => t(''),
-    '#options' => array(
-      0 => t('No'),
-      1 => t('Yes'),
-    ),
+    '#weight' => 9,
+    '#options' => $getsyears['year'],
+    '#attributes' => array('class' => array('city_wise')),
+    '#prefix' => '<div class ="col-lg-8 col-sm-12 col-md-12 remove_padd_left remove_padd_right">',
+    '#suffix' => '</div></div><div class="clearfix"></div></div>',
   );
   if (count($directory_stream) > 0) {
     $form['clgdir_rhs'] = array(
-      '#type' => 'fieldset', 
+      '#type' => 'item', 
       '#title' => t('DIRECTORY OF BEST COLLEGES'), 
-      '#weight' => 4, 
-      '#collapsible' => TRUE, 
-      '#collapsed' => FALSE,
-      '#prefix' => '<div class = "clgdir_rhsdiv">',
+      '#weight' => 12, 
+      '#prefix' => '<div class = "right_view">',
       '#suffix' => '</div>',
     );
-    $form['clgdir_rhs']['clgdir_stream'] = array(
+    $form['clgdir_stream'] = array(
       '#type' => 'select',
       '#title' => t(''),
-      '#options' => $directory_stream
+      '#weight' => 13,
+      '#options' => $directory_stream,
+      '#attributes' => array('class' => array('city_wise')),
+      '#prefix' => '<div class = "detail_box">',
+      '#suffix' => '</div>',
     );
   }
   $form['clgzone_rhs'] = array(
-    '#type' => 'fieldset', 
+    '#type' => 'item', 
     '#title' => t('ZONEWISE BEST COLLEGES'), 
-    '#weight' => 5, 
-    '#collapsible' => TRUE, 
-    '#collapsed' => FALSE,
-    '#prefix' => '<div class = "clgzone_rhsdiv">',
+    '#weight' => 14, 
+    '#prefix' => '<div class = "right_view">',
     '#suffix' => '</div>',
   );
-  $form['clgzone_rhs']['clgzone_select'] = array(
+  $form['clgzone_select'] = array(
     '#type' => 'select',
     '#title' => t(''),
+    '#weight' => 15,
     '#options' => array(
       'engineering' => t('ENGINEERING'),
       'medical' => t('MEDICAL'),
       'law' => t('LAW'),
     ),
+    '#attributes' => array('class' => array('city_wise')),
+    '#prefix' => '<div class = "detail_box">',
+    '#suffix' => '</div>',
   );
   return $form;
 }

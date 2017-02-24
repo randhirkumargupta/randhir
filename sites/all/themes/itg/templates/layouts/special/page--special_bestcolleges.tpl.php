@@ -207,32 +207,24 @@ if ($theme != 'itgadmin') {
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-4']['widget_name'].$widget_data['itg-block-4']['widget_display_name']; ?>">
-                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-4']['block_title'])) { ?>
-                     <h4 class="heading"><?php print $widget_data['itg-block-4']['block_title']; ?></h4>
-                  <?php } ?>
-                     <!-- for admin  -->
-                  <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
-                    <div class="widget-settings">
-                      <div class="widget-title-wrapper">
-                        <span class="widget-title" data-id="itg-block-4"><?php print $widget_data['itg-block-4']['block_title']; ?></span>
-                        <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-4']['block_title']; ?>" name="itg-block-4" class="block_title_id" placeholder="Enter Title" />
-                      </div>
-                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    <div class="data-holder" id="itg-block-4" widget-style="oscar-news best-news">
+                    <?php
+                          $block = block_load('itg_bestcolleges', 'bestcollege_rhssearch');
+                          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                          print $output = render($render_array);
+                    ?>
                     </div>
-                   <?php } ?>
-
-                    <div class="data-holder" id="itg-block-4" widget-style="oscar-news"><?php print $widget_data['itg-block-4']['widget']; ?></div>
                   </div>
                 </div>
             </div>
         </div>
 
-            <div class="col-md-12 itg-h624-section">
+            <div class="itg-h624-section">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-5']['widget_name'].$widget_data['itg-block-5']['widget_display_name']; ?>">
                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-5']['block_title'])) { ?>
-                    <h4 class="heading"><?php print $widget_data['itg-block-5']['block_title']; ?></h4>
+                    <div class="right_view"><?php print $widget_data['itg-block-5']['block_title']; ?></div>
                   <?php } ?>
                      <!-- for admin  -->
                   <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
@@ -245,7 +237,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>
 
-                    <div class="data-holder" id="itg-block-5"><?php print $widget_data['itg-block-5']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-5 detail_box"><?php print $widget_data['itg-block-5']['widget']; ?></div>
                   </div>
                 </div>
             </div>

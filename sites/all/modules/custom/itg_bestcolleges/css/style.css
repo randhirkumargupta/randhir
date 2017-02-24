@@ -80,7 +80,7 @@ height: 105px;width: 44px;color: #000;font-size: 40px;top:40%;}
 .cl1 {display:block;}
 .list-group-item .city_wise{ width:auto; float:right; min-width: 20%;}
 .city_wise {height: 35px;-moz-appearance: none; appearance: none;   -webkit-appearance: none;   -moz-user-select: none; background-image: url(../images/dropdown.png); background-position: 97% 55%;background-repeat: no-repeat;border: 1px solid #cccccc; margin: 0;padding-top: 2px;padding-bottom: 2px;width: 100%;padding-right: 15px;padding-left: 5px;}
-}
+
 
 
 /*-- Right Panel--*/
@@ -95,7 +95,7 @@ height: 105px;width: 44px;color: #000;font-size: 40px;top:40%;}
 .detail_box  td { padding-right:5px;}
 .detail_box table{ width:100%;}
 .detail_box td .city_wise {min-width: 123px;}
-.stream{ margin-top:20px;}
+.stream{ padding-top:15px; clear: both;}
 .detail_box td:last-child {padding-right: 0;}
 .detail_box p { margin-top:20px; text-transform:none;}
 .dark_bg {background: #d0d0d0;padding: 15px;font-weight: bold;font-size: 13px;}
@@ -104,14 +104,16 @@ height: 105px;width: 44px;color: #000;font-size: 40px;top:40%;}
 .vid_sec{ border-bottom:solid 1px #ddd; text-transform:none; margin-bottom: 20px;}
 .vid_sec img{ width:100%;}
 .detail_box .vid_sec:last-child{ margin-bottom:0;}
-.form-group label{ padding-top:6px;}
-
+.detail_box label{ padding-top:6px; position:relative; top:10px; font-weight: bold;}
+.bb1-text1 {
+    margin-top: 20px;
+}
 /*--- Arts---*/
 .slider_outer1 {box-shadow: 0 0 4px #ccc; padding-bottom:10px;}
 .slider_outer1 h1{  font-size:36px !important; display:inline-block; font-weight:bold; color:#000;}
 .slider_outer1 span.rank { background: #3176a0 none repeat scroll 0 0; color: #fff; display: inline-block;font-size: 28px; font-weight: 900; margin-bottom: 10px; margin-left: 15px;
  margin-right: 10px; padding: 15px 10px; text-transform: uppercase;}
-.arts h2 { margin-top:50px; margin-bottom:25px; font-weight: 400;}
+.arts h2 {  margin-bottom:25px; font-weight: 400;}
 .slider_outer1 .carousel-control.left{ background:none;}
 .slider_outer1 .carousel-indicators{ display:none;}
 .slider_outer1 .carousel-caption { color: #000; left: 0; padding-bottom: 0px;position: relative !important;text-align: left;text-shadow: none;}
