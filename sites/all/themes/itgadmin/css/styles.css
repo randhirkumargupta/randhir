@@ -581,7 +581,7 @@ div.filefield-sources-list a.active {
 .node-videogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix .form-submit,
 .node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix .form-submit, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] + div.clearfix .form-submit, [id*="field-ads-ex-body-start-values"] + div.clearfix .form-submit,
 [id*="field-ads-ex-body-close-values"] + div.clearfix .form-submit,
-[id*="field-ads-ex-headerscript-values"] + div.clearfix .form-submit {
+[id*="field-ads-ex-headerscript-values"] + div.clearfix .form-submit, [id*="field-ticket-group-type-values"] + div.clearfix .form-submit {
   background: url("../images/add-item.png") no-repeat center center;
   border: none;
   /*bottom: 10px;*/
@@ -609,7 +609,7 @@ div.filefield-sources-list a.active {
 [id*="field-ads-ex-body-close-values"] tbody tr td > .form-submit,
 [id*="field-ads-ex-body-close-values"] tbody tr td .ajax-new-content > .form-submit,
 [id*="field-ads-ex-headerscript-values"] tbody tr td > .form-submit,
-[id*="field-ads-ex-headerscript-values"] tbody tr td .ajax-new-content > .form-submit {
+[id*="field-ads-ex-headerscript-values"] tbody tr td .ajax-new-content > .form-submit, [id*="field-ticket-group-type-values"] tbody tr td > .form-submit[value="Remove"], [id*="field-ticket-group-type-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"] {
   background: url("../images/remove-item.png") no-repeat center center;
   border: none;
   /*bottom: 10px;*/
@@ -11147,4 +11147,38 @@ span.file a {
 #views-form-issue-base-magazin-widget-issue-base-magazin-widget .form-actions,
 #views-form-category-of-stroy-base-magazin-widget-issue-category-magazin-widget .form-actions {
   margin-top: 20px;
+}
+
+[id*="field-ticket-group-type-values"] .form-type-textfield > label, [id*="field-ticket-group-type-values"] .form-type-select > label {
+  width: 2280px;
+}
+[id*="field-ticket-group-type-values"] thead {
+  display: none;
+}
+[id*="field-ticket-group-type-values"] tbody tr td {
+  background-color: #e5e5e5;
+  float: left;
+  margin-bottom: 10px;
+  width: 100%;
+}
+[id*="field-ticket-group-type-values"] tbody tr td > .form-submit[value="Remove"], [id*="field-ticket-group-type-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"] {
+  right: 38px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: 10px;
+}
+[id*="field-ticket-group-type-values"] tbody tr td .ajax-progress {
+  display: none;
+}
+[id*="field-ticket-group-type-values"] tbody tr td div.description {
+  left: 665px !important;
+}
+[id*="field-ticket-group-type-values"] + div.clearfix {
+  bottom: 20px;
+  position: absolute;
+  right: 10px;
+}
+[id*="field-ticket-group-type-values"] + div.clearfix .ajax-progress {
+  display: none;
 }

@@ -10602,3 +10602,44 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     }
   }
 }
+[id*="field-ticket-group-type-values"]{
+  .form-type-textfield > label, .form-type-select > label{
+    width: 2280px;
+  }
+  thead{display: none;}
+  tbody{
+    tr{
+      td{
+        background-color: #e5e5e5;
+        float: left;
+        margin-bottom: 10px;
+        width: 100%;
+        > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+          @extend .icon-remove-item;
+          right: 38px;
+          margin: 0;
+          padding: 0;
+          position: absolute;
+          bottom: 10px;
+        }
+        .ajax-progress{
+          display: none;
+        }
+        div.description{
+          left: 665px !important;
+        }
+      }
+    }
+  }
+  & + div.clearfix {
+    bottom: 20px;
+    position: absolute;
+    right: 10px;
+    .form-submit{
+      @extend .icon-add-more;
+    }
+    .ajax-progress{
+      display: none;
+    }
+  }
+}
