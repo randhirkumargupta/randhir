@@ -2194,6 +2194,7 @@
   }
   .oscar-layout-page .oscar-slider .bottom-slider li p {
     margin-top: 0;
+    overflow: hidden;
   }
   .oscar-layout-page .oscar-slider .bottom-slider i {
     color: #ccc;

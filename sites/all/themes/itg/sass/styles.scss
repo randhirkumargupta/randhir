@@ -5763,6 +5763,9 @@ section.sidebar{
                 float: left;
                 margin-right: 15px;
             }
+            p{
+                overflow: hidden;
+            }
 
         }
     }
@@ -10339,7 +10342,7 @@ h1.about-us-heading{
 span.smilies-title {
     width: auto;
     height: auto;
-    display: inline-block !important;
+    display: inline !important;
     vertical-align: middle;   
     float: none !important;
     margin: 0 !important;
@@ -10347,8 +10350,9 @@ span.smilies-title {
     img{
         display: inline;
         max-width: inherit;
-        width: auto;
+        width: auto !important;
         margin: 0 !important;
+        float: none !important;
     }
 }
 

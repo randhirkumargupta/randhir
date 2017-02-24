@@ -552,7 +552,7 @@ jQuery(document).ready(function () {
     //social share animation effects   
     jQuery('.social-share ul').each(function () {
         jQuery(this).children().not(":first").hide();
-    })
+    });
     jQuery('.social-share li').click(function () {
         jQuery(this).find('.share').parent('li').nextAll('li').toggle();
     });

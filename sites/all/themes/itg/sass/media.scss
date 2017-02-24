@@ -2294,7 +2294,8 @@ footer .footer-top .footer-social-link{
             }
             p{
                 margin-top:0;
-            }
+                overflow: hidden;
+            }            
         }
         i{
             color: #ccc;
