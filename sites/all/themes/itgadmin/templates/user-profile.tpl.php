@@ -142,16 +142,16 @@ foreach ($node_type as $final_type) {
 <div class="my-stats">
 <table class="views-table">
     <tr>
-      <th><h2>My Stats</h2></th>
+      <th><h2><?php print t('My Stats');?></h2></th>
       <th>Total Posted: <?php print array_sum($total_posted);?></th>
       <th>Last Content Posted: <?php print l($last_record['title'], 'node/'.$last_record['nid']);?></th>  
       <th>Total Published: <?php print array_sum($total_publish);?></th>  
       <th>Last Content Published: <?php print l($last_publish_record['title'], 'node/'.$last_publish_record['nid']);?></th>  
     </tr>
     <tr>
-      <th>Contents</th>
-      <th>Posted</th>
-      <th>Published</th>  
+      <th><?php print t('Contents');?></th>
+      <th><?php print t('Posted');?></th>
+      <th><?php print t('Published');?></th>  
       <th></th>  
       <th></th>  
     </tr>
