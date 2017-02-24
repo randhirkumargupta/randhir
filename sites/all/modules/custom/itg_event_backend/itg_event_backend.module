@@ -1191,64 +1191,85 @@ function itg_event_backend_menu() {
   $items['programme'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['event/%/programme'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['speakers'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['event/%/speakers'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['sponsors'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['event/%/sponsors'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['sing-and-win'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['event/%/sing-and-win'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['flashback'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['event/%/flashback'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['speaker-details'] = array(
     'page callback' => 'itg_event_backend_page',
     'title' => 'Speaker Details',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['event/%/speaker-details'] = array(
     'page callback' => 'itg_event_backend_page',
     'title' => 'Speaker Details',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['sponsor-details'] = array(
     'page callback' => 'itg_event_backend_page',
     'title' => 'Sponsor Details',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['event/%/sponsor-details'] = array(
     'page callback' => 'itg_event_backend_page',
     'title' => 'Sponsor Details',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   return $items;
+}
+
+/**
+ * Implement callback for theme
+ */
+ function itg_event_backend_default_node_theme(){
+  return 'itg';
 }
 
 /**

@@ -34,12 +34,14 @@ function itg_event_registration_menu() {
     'title' => 'Event Registration',
     'page callback' => 'itg_event_reg_form',
     'access callback' => TRUE,
+     'theme callback' => 'itg_event_registration_default_node_theme',
   );
 
   $items['event/%/registration'] = array(
     'title' => 'Event Registration',
     'page callback' => 'itg_event_reg_form',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_registration_default_node_theme',
   );
 
   $items['event-registration/users-list/%'] = array(
@@ -86,6 +88,13 @@ function itg_event_registration_menu() {
 
 function itg_event_reg_form() {
   return '';
+}
+
+/**
+ * Implement callback for theme
+ */
+ function itg_event_registration_default_node_theme(){
+  return 'itg';
 }
 
 /**
