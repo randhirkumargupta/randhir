@@ -142,10 +142,8 @@ function itg_get_all_node($content_type, $uid) {
     $query = "SELECT COUNT(*) amount FROM {node} n " .
             "WHERE n.type = :type AND n.uid = :uid";
     $result = db_query($query, array(':type' => $content_type, ':uid' => $uid))->fetch();
-
     return $result->amount;
 }
-
 /**
  * Get node publish count.
  * @param string $content_type
@@ -187,7 +185,7 @@ function itg_get_all_node_type($uid) {
 function itg_last_node_user($uid) {
 
     $last_result = db_select('node', 'n')
-            ->fields('n', array('title', 'type'))
+            ->fields('n', array('title', 'type','nid'))
             ->condition('uid', $uid, '=')
             ->orderBy('created', 'DESC')//ORDER BY created
             ->range(0, 1)
@@ -196,6 +194,7 @@ function itg_last_node_user($uid) {
     while ($last_record = $last_result->fetchAssoc()) {
         $last_record_info['title'] = $last_record['title'];
         $last_record_info['type'] = $last_record['type'];
+        $last_record_info['nid'] = $last_record['nid'];
     }
 
     return $last_record_info;
@@ -209,7 +208,7 @@ function itg_last_node_user($uid) {
  */
 function itg_last_publish_user_node($uid, $publish_id) {
     $last_result_user = db_select('node', 'n')
-            ->fields('n', array('title', 'type'))
+            ->fields('n', array('title', 'type','nid'))
             ->condition('uid', $uid, '=')
             ->condition('status', $publish_id, '=')
             ->orderBy('created', 'DESC')
@@ -219,6 +218,7 @@ function itg_last_publish_user_node($uid, $publish_id) {
     while ($last_record_user = $last_result_user->fetchAssoc()) {
         $last_record_info_user['title'] = $last_record_user['title'];
         $last_record_info_user['type'] = $last_record_user['type'];
+        $last_record_info_user['nid'] = $last_record_user['nid'];
     }
 
     return $last_record_info_user;
