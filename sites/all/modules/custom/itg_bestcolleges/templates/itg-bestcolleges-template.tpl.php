@@ -1,6 +1,10 @@
-
-
-
+<?php
+/**
+ * @file : itg-bestcolleges-template.tpl.php
+ */
+$comment_value = variable_get('COMMENT_CONFIG');
+$config_name = $comment_value[0]->config_name;
+?>
 <?php global $base_url;?>
 <meta charset="utf-8">
 <title>Untitled Document</title>
@@ -81,5 +85,38 @@
 
 
 <!-- Grid View End-->
+
+<?php
+  if ($from_story != 'yes') {
+    if (function_exists('taboola_view')) {
+      taboola_view();
+    }
+  }
+
+  if ($config_name == 'vukkul') {
+    ?>
+    <div class="vukkul-comment">
+        <div id="vuukle-emote"></div>
+        <div id="vuukle_div"></div>
+
+        <?php
+        if (function_exists('vukkul_view')) {
+          vukkul_view();
+        }
+        ?>
+
+    </div>
+    <?php
+  }
+  if ($config_name == 'other') {
+    ?>
+    <div id="other-comment">
+        <?php
+        $block = module_invoke('itg_ugc_comment', 'block_view', 'ugc_form_comment_block');
+        print render($block['content']);
+        ?>
+    </div>
+  <?php } ?>
+
 
 </div>
