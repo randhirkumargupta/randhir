@@ -3306,6 +3306,20 @@ body{
 .page-personalization-all-content{
   table{@include personalization-table;}
 }
+.multiple-photo-disc{
+  .prev-story-link{display: none;}
+  .fa-chevron-left.slick-disabled{
+    display: none !important;
+    & + div{
+      .prev-story-link{display: block;}
+    }
+  }
+  .slick-list{
+    & + .fa-chevron-right.slick-disabled{
+      display: none !important;
+    }
+  }
+}
 
 
 

@@ -3438,6 +3438,19 @@ body .program-livetv.effect-added .light-on-text {
   border-right: 1px solid #e0e0e0;
 }
 
+.multiple-photo-disc .prev-story-link {
+  display: none;
+}
+.multiple-photo-disc .fa-chevron-left.slick-disabled {
+  display: none !important;
+}
+.multiple-photo-disc .fa-chevron-left.slick-disabled + div .prev-story-link {
+  display: block;
+}
+.multiple-photo-disc .slick-list + .fa-chevron-right.slick-disabled {
+  display: none !important;
+}
+
 /* CSS To Add Zoom Effect on Images */
 @media all and (min-width: 1025px) {
   .zoom-image, #block-itg-front-end-common-related-photo-block #related-photo ul li a,
