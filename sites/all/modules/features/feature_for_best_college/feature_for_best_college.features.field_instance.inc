@@ -307,8 +307,8 @@ function feature_for_best_college_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-bestcolleges-field_bestcollege_year'.
-  $field_instances['node-bestcolleges-field_bestcollege_year'] = array(
+  // Exported field_instance: 'node-bestcolleges-field_college_id'.
+  $field_instances['node-bestcolleges-field_college_id'] = array(
     'bundle' => 'bestcolleges',
     'default_value' => NULL,
     'deleted' => 0,
@@ -316,10 +316,15 @@ function feature_for_best_college_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 11,
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 16,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -329,20 +334,22 @@ function feature_for_best_college_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_bestcollege_year',
-    'label' => 'Year',
-    'required' => 0,
+    'field_name' => 'field_college_id',
+    'label' => 'College Id',
+    'required' => FALSE,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'options',
+      'module' => 'number',
       'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 15,
+      'type' => 'number',
+      'weight' => 19,
     ),
   );
 
@@ -774,6 +781,7 @@ function feature_for_best_college_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Body');
   t('City');
+  t('College Id');
   t('Extra large image');
   t('Extra small image');
   t('Image Size (170 x 127)');
@@ -790,7 +798,6 @@ function feature_for_best_college_field_default_field_instances() {
   t('Section');
   t('Small image');
   t('Website URL');
-  t('Year');
 
   return $field_instances;
 }

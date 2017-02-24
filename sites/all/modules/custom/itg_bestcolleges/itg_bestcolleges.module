@@ -60,6 +60,7 @@ function itg_bestcolleges_menu() {
  * @return type
  */
 function itg_bestcolleges_deatils() {
+  drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', array('type' => 'external'));
   return theme('itg_bestcolleges_template');
 }
 

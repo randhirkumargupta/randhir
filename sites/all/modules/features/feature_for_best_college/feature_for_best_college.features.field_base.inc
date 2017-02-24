@@ -52,7 +52,18 @@ function feature_for_best_college_field_default_field_bases() {
     'locked' => 0,
     'module' => 'list',
     'settings' => array(
-      'allowed_values' => array(),
+      'allowed_values' => array(
+        1 => 1,
+        2 => 2,
+        3 => 3,
+        4 => 4,
+        5 => 5,
+        6 => 6,
+        7 => 7,
+        8 => 8,
+        9 => 9,
+        10 => 10,
+      ),
       'allowed_values_function' => '',
     ),
     'translatable' => 0,
@@ -155,29 +166,19 @@ function feature_for_best_college_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_bestcollege_year'.
-  $field_bases['field_bestcollege_year'] = array(
+  // Exported field_base: 'field_college_id'.
+  $field_bases['field_college_id'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_bestcollege_year',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
+    'field_name' => 'field_college_id',
+    'indexes' => array(),
     'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(),
-      'allowed_values_function' => '',
-    ),
+    'module' => 'number',
+    'settings' => array(),
     'translatable' => 0,
-    'type' => 'list_integer',
+    'type' => 'number_integer',
   );
 
   return $field_bases;
