@@ -23,14 +23,25 @@
  */
 
 ?>
+
 <?php
 if ($row->_field_data['nid']['entity']->type == 'event_backend') {
   print $output;
-} else {
-    //$color_box_query = array("width" => "900", "height" => "600", "iframe" => "true");
-    //$color_box_class = array("class" => array("colorbox-load"));
-    print l(strip_tags($output), 'node/'.$row->nid, array('attributes' => array('target' => '_blank')));
-    //print l($output, 'node/'.$row->nid, array('query' => $color_box_query, 'attributes' => $color_box_class)); 
+} if ($row->_field_data['nid']['entity']->type == 'blog' || 
+        $row->_field_data['nid']['entity']->type == 'photogallery' || 
+        $row->_field_data['nid']['entity']->type == 'videogallery' ||
+        $row->_field_data['nid']['entity']->type == 'mega_review_critic' ||
+        $row->_field_data['nid']['entity']->type == 'podcast' ||
+        $row->_field_data['nid']['entity']->type == 'breaking_news') {
+  
+    if ($row->_field_data['nid']['entity']->status == 0) {
+      print l(strip_tags($output), 'node/'.$row->nid, array('attributes' => array('target' => '_blank')));
+    } else {
+      print '<a href='.FRONT_URL.'"/node/'.$row->nid.'" target="_blank">'.strip_tags($output).'</a>';   
+    } 
+  
+} else {   
+    print l(strip_tags($output), 'node/'.$row->nid);    
 }
   
 ?>

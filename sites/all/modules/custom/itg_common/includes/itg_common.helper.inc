@@ -113,6 +113,8 @@ define('PARENT_SSO', 'dev.indiatodayonline.in');
 
 define('FRONT_URL', 'http://uat-it.indiatodayonline.in');
 define('BACKEND_URL', 'http://uat-it-backend.indiatodayonline.in');
+define('SSO_URL', 'http://uat-sso.indiatodayonline.in');
+
 
 //define('FRONT_URL', 'http://itgd-mum-lb-dev-frontend-app-1144451114.ap-south-1.elb.amazonaws.com');
 //define('BACKEND_URL', 'http://itgd-mum-lb-dev-backend-app-678057722.ap-south-1.elb.amazonaws.com');
