@@ -33,6 +33,13 @@ function itg_common_init() {
     drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.admin.js');
   }
+  
+  if (arg(0) == 'funalytics') {
+    $settings = array();
+    $settings['base_url'] = $base_url;
+    drupal_add_js(array('itg_funalytics' => array('settings' => $settings)), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_funalytics.js');
+  }
 }
 
 /**
@@ -59,6 +66,12 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  $items['funalytics-popup'] = array(
+    'page callback' => 'itg_funalytics_popup',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
@@ -68,6 +81,15 @@ function itg_common_menu() {
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
+  $arg = arg();
+  
+  $settings = array();
+  
+  $settings['formid'] = $form_id;
+  $settings['arg_url'] = $form_id;
+  drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_admin_form.js');
+  
   
   //code for preview_changes button remove
   if (!empty($form['actions']['preview_changes'])) {
@@ -783,4 +805,13 @@ function itg_videogallery_embed() {
     }
     return theme('itg_videogallery_embed', array('data' => $videoids));
   }
+}
+
+/**
+ * callback for funalytics-popup.
+ */
+function itg_funalytics_popup() {
+  
+  echo views_embed_view('front_funalytics_list', 'block_1');
+  //exit;
 }

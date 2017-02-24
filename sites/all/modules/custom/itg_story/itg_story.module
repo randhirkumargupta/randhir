@@ -802,8 +802,8 @@ function itg_story_photo_story_redirect($node_id, $type) {
   $query->condition('s.field_story_type_value', 'photo_story');
   $query->condition('n.nid', $node_id, $type);
   $query->range(0, 1);
+  $query->orderBy('nid' , 'DESC');
   $result = $query->execute()->fetchAll();
-  
   $nid = '';
   foreach ($result as $val) {
     $nid = $val->nid;
@@ -828,21 +828,36 @@ function itg_story_photo_story_html($node_id) {
   if (!empty($node_id)) {
     $node = node_load($node_id);
     $photo_story = $node->field_photo_story[LANGUAGE_NONE];
-      $html = '';
-      $html .= '<div class="photo-story-img multiple-photo-disc">';
-      foreach ($photo_story as $key => $val) {
-        $entity_obj = entity_load('field_collection_item', array($val['value']));
-        $photo_story_img_path = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['uri'];
-        $photo_story_file_name = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['filename'];
-        $photo_story_img = image_style_url('photo_story_771x432', $photo_story_img_path);
-        $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
-        $html .= '<div class="photo-slider">';
-        $html .= '<img src="' . $photo_story_img . '" title="' . $photo_story_file_name . '" alt="photo_story_img" />';
-        $html .= '<div class="description"><p>' . $photo_story_desc . '</p></div>';
-        $html .= '</div>';
+    $next = itg_story_photo_story_redirect($node->nid, '>');
+    $previous = itg_story_photo_story_redirect($node->nid, '<');
+    $next_link_count = count($photo_story) - 1;
+    $html = '';
+    $html .= '<div class="photo-story-img multiple-photo-disc">';
+    foreach ($photo_story as $key => $val) {
+      if ($key == 0 && !empty($previous)) {
+        $previous_link = "<a class='fa fa-chevron-left prev-story-link' href='" . $previous . "'></a>";
       }
+      else {
+        $previous_link = "";
+      }
+      if ($key == $next_link_count && !empty($next)) {
+        $next_link = "<a class='fa fa-chevron-right next-story-link' href='" . $next . "'></a>";
+      }
+      else {
+        $next_link = "";
+      }
+      $entity_obj = entity_load('field_collection_item', array($val['value']));
+      $photo_story_img_path = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['uri'];
+      $photo_story_file_name = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['filename'];
+      $photo_story_img = image_style_url('photo_story_771x432', $photo_story_img_path);
+      $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
+      $html .= '<div class="photo-slider">';
+      $html .= $next_link . '<img src="' . $photo_story_img . '" title="' . $photo_story_file_name . '" alt="photo_story_img" />' . $previous_link;
+      $html .= '<div class="description"><p>' . $photo_story_desc . '</p></div>';
       $html .= '</div>';
-      return $html;
+    }
+    $html .= '</div>';
+    return $html;
   }
 }
 

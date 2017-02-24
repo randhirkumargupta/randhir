@@ -655,38 +655,26 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   height: 40px;
   margin-top: 20px;
 }
-.total-point-wrapper .pregress-bar .pregress-bar-active {
+.total-point-wrapper .pregress-bar .progress-bar-div {
   width: 320px;
   background: #cdcdcd;
   display: inline-block;
   vertical-align: middle;
   height: 6px;
   border-radius: 10px;
+  overflow: hidden;
   position: relative;
 }
-.total-point-wrapper .pregress-bar .pregress-bar-active:before {
+.total-point-wrapper .pregress-bar .progress-bar-div .pregress-bar-default {
   position: absolute;
-  top: 0;
   left: 0;
-  content: '';
-  height: 6px;
-  background: #a00606;
-  border-radius: 10px;
-}
-.total-point-wrapper .pregress-bar .progress-bar-1:before {
-  width: 20%;
-}
-.total-point-wrapper .pregress-bar .progress-bar-2:before {
-  width: 40%;
-}
-.total-point-wrapper .pregress-bar .progress-bar-3:before {
-  width: 60%;
-}
-.total-point-wrapper .pregress-bar .progress-bar-4:before {
-  width: 80%;
-}
-.total-point-wrapper .pregress-bar .progress-bar-5:before {
+  top: 0;
   width: 100%;
+  height: 100%;
+  background-color: #cdcdcd;
+}
+.total-point-wrapper .pregress-bar .progress-bar-div .pregress-bar-default.pregress-bar-active {
+  background-color: #9f0505;
 }
 .total-point-wrapper .pregress-bar span.current-badge, .total-point-wrapper .pregress-bar span.next-badge {
   display: inline-block;
@@ -3450,6 +3438,19 @@ body .program-livetv.effect-added .light-on-text {
   border-right: 1px solid #e0e0e0;
 }
 
+.multiple-photo-disc .prev-story-link {
+  display: none;
+}
+.multiple-photo-disc .fa-chevron-left.slick-disabled {
+  display: none !important;
+}
+.multiple-photo-disc .fa-chevron-left.slick-disabled + div .prev-story-link {
+  display: block;
+}
+.multiple-photo-disc .slick-list + .fa-chevron-right.slick-disabled {
+  display: none !important;
+}
+
 /* CSS To Add Zoom Effect on Images */
 @media all and (min-width: 1025px) {
   .zoom-image, #block-itg-front-end-common-related-photo-block #related-photo ul li a,
@@ -5307,6 +5308,124 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   top: -20px;
   width: 0;
   left: 230px;
+}
+
+.view-front-funalytics-list #funalytics_popup_display {
+  position: relative;
+}
+.view-front-funalytics-list #funalytics_popup_display .close-popup {
+  position: absolute;
+  right: 50px;
+  top: 25px;
+  z-index: 9;
+  cursor: pointer;
+  font-size: 20px;
+}
+.view-front-funalytics-list #funalytics_popup_display #funalytics-ajex-loader {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  text-align: center;
+}
+.view-front-funalytics-list #funalytics_popup_display #funalytics-ajex-loader .widget-loader {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 75px;
+  height: 75px;
+}
+.view-front-funalytics-list #funalytics_popup_display .view-front-funalytics-list {
+  background-color: rgba(0, 0, 0, 0.01);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+}
+.view-front-funalytics-list #funalytics_popup_display .view-front-funalytics-list .view-content {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  width: 1090px;
+  height: 470px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px 0 #666;
+}
+.view-front-funalytics-list #funalytics_popup_display .funalytics-slider {
+  padding: 20px 50px;
+}
+.view-front-funalytics-list #funalytics_popup_display .funalytics-slider .slick-slide .title {
+  font: 500 26px/30px Roboto;
+  padding-bottom: 12px;
+}
+.view-front-funalytics-list #funalytics_popup_display .funalytics-slider .slick-slide .pic {
+  background: url(../images/funalytics.png) top right no-repeat;
+}
+.view-front-funalytics-list #funalytics_popup_display .funalytics-slider .slick-slide .pic img {
+  width: calc(100% - 180px);
+  height: 388px;
+}
+.view-front-funalytics-list #funalytics_popup_display .funalytics-slider .slick-arrow {
+  cursor: pointer;
+  width: 50px;
+  height: 100px;
+  background-color: rgba(96, 96, 96, 0.65);
+  font-size: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  z-index: 9;
+  border: none;
+}
+.view-front-funalytics-list #funalytics_popup_display .funalytics-slider .slick-arrow .fa {
+  font: normal normal normal 62px/100px FontAwesome;
+  position: absolute;
+  top: 0;
+  color: #fff;
+}
+.view-front-funalytics-list #funalytics_popup_display .funalytics-slider .slick-arrow.slick-next {
+  right: 0;
+  border-radius: 90px 0px 0px 90px;
+}
+.view-front-funalytics-list #funalytics_popup_display .funalytics-slider .slick-arrow.slick-next .fa {
+  right: 10px;
+}
+.view-front-funalytics-list #funalytics_popup_display .funalytics-slider .slick-arrow.slick-prev {
+  left: 0;
+  border-radius: 0 90px 90px 0;
+}
+.view-front-funalytics-list #funalytics_popup_display .funalytics-slider .slick-arrow.slick-prev .fa {
+  left: 10px;
+}
+.view-front-funalytics-list .view-content {
+  margin: 0 -15px;
+}
+.view-front-funalytics-list .funalytics-tile {
+  padding-bottom: 50px;
+}
+.view-front-funalytics-list .funalytics-tile .updated-date {
+  font-size: 12px;
+  color: #b1b1b1;
+  padding: 5px 0 0;
+}
+.view-front-funalytics-list .funalytics-tile .title {
+  font: 500 20px/24px Roboto;
+  color: #323232;
+  height: 48px;
+  overflow: hidden;
 }
 
 @media all and (min-width: 768px) {

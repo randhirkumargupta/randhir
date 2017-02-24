@@ -55,17 +55,17 @@ class ItgStoryMigration extends XMLMigration {
       'facebookimage' => t('facebookimage'),
       'facebookimage_alt' => t('facebookimage_alt'),
       'facebookimage_title' => t('facebookimage_title'),
-      'facebookvideonarrative' => t('facebookvideonarrative'),
-      'facebookvideo' => t('facebookvideo'),
+      //'facebookvideonarrative' => t('facebookvideonarrative'),
+      //'facebookvideo' => t('facebookvideo'),
       'twitternarrative' => t('twitternarrative'),
       'twitterimage' => t('twitterimage'),
       'twitterimage_alt' => t('twitterimage_alt'),
       'twitterimage_title' => t('twitterimage_title'),
-      'twittervideodescription' => t('twittervideodescription'),
-      'twittervideo' => t('twittervideo'),
+      //'twittervideodescription' => t('twittervideodescription'),
+      //'twittervideo' => t('twittervideo'),
       'syndication' => t('syndication'),
-      'mediafiles' => t('mediafiles'),
-      'client_title' => t('client_title'),
+      //'mediafiles' => t('mediafiles'),
+      //'client_title' => t('client_title'),
       //'configurations' => t('configurations'), //checkbox
       'commentquestion' => t('commentquestion'),
       'featuredname' => t('featuredname'), //id
@@ -97,7 +97,7 @@ class ItgStoryMigration extends XMLMigration {
       'factoids_title' => t('factoids_title'),
       'title' => t('title'),
       'rating' => t('rating'),
-      'pron-cons-img' => t('pron-cons-img'),
+      'pron_cons_img' => t('pron_cons_img'),
       'item' => t('item'),
       'factoids_title' => t('factoids_title'),
       'sefurl' => t('sefurl'),
@@ -181,7 +181,7 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('field_story_magazine_story_issue', 'story_issue')->xpath('story_issue');
     $this->addFieldMapping('field_story_select_magazine', 'select_magazine')->xpath('select_magazine');
     $this->addFieldMapping('field_story_select_supplement', 'select_supplement')->xpath('select_supplement');
-    $this->addFieldMapping('field_story_issue_date', 'issue_date')->xpath('issue_date');
+    /*$this->addFieldMapping('field_story_issue_date', 'issue_date')->xpath('issue_date');*/
     $this->addFieldMapping('field_poll_start_date', 'associatetvdate')->xpath('associatetvdate');
     
     $this->addFieldMapping('title', 'longheadline')->xpath('longheadline');
@@ -193,31 +193,43 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('body', 'storybody')->xpath('storybody');
     $this->addFieldMapping('body:format', 'format')
          ->defaultValue('full_html');
-    //$this->addFieldMapping('workbench_moderation_state_new', 'workbench_moderation_state_new')->xpath('workbench_moderation_state_new');
-//    $this->addFieldMapping('workbench_moderation_state_new', 'workbench_moderation_state_new')
-//      ->defaultValue('published');
-//    $this->addFieldMapping('workbench_moderation_state_current', 'workbench_moderation_state_new')
-//      ->defaultValue('published');
-//    $this->addFieldMapping('revision')
-//      ->defaultValue(0);
+    /*$this->addFieldMapping('workbench_moderation_state_new', 'workbench_moderation_state_new')->xpath('workbench_moderation_state_new');
+    $this->addFieldMapping('workbench_moderation_state_new', 'workbench_moderation_state_new')
+      ->defaultValue('published');
+    $this->addFieldMapping('workbench_moderation_state_current', 'workbench_moderation_state_new')
+      ->defaultValue('published');
+    $this->addFieldMapping('revision')
+      ->defaultValue(0);*/
     //code for image
     $this->addFieldMapping('field_story_extra_large_image', 'extralargeimage')->xpath('extralargeimage');
+    $this->addFieldMapping('field_story_extra_large_image:preserve_files')
+         ->defaultValue(TRUE);
     $this->addFieldMapping('field_story_extra_large_image:alt', 'extra_large_alt')->xpath('extra_large_alt');
     $this->addFieldMapping('field_story_extra_large_image:title', 'extra_large_title')->xpath('extra_large_title');
     
     $this->addFieldMapping('field_story_large_image', 'largeimage')->xpath('largeimage');
+    $this->addFieldMapping('field_story_large_image:preserve_files')
+         ->defaultValue(TRUE);
     $this->addFieldMapping('field_story_large_image:alt', 'large_alt')->xpath('large_alt');
     $this->addFieldMapping('field_story_large_image:title', 'large_title')->xpath('large_title');
     
     $this->addFieldMapping('field_story_medium_image', 'mediumimage')->xpath('mediumimage');
+    $this->addFieldMapping('field_story_medium_image:preserve_files')
+         ->defaultValue(TRUE);
     $this->addFieldMapping('field_story_medium_image:alt', 'mediumimage_alt')->xpath('mediumimage_alt');
     $this->addFieldMapping('field_story_medium_image:title', 'mediumimage_title')->xpath('mediumimage_title');
     
     $this->addFieldMapping('field_story_small_image', 'smallimage')->xpath('smallimage');
+    $this->addFieldMapping('field_story_small_image:preserve_files')
+         ->defaultValue(TRUE);
     $this->addFieldMapping('field_story_small_image:alt', 'smallimage_alt')->xpath('smallimage_alt');
     $this->addFieldMapping('field_story_small_image:title', 'smallimage_title')->xpath('smallimage_title');
     
     $this->addFieldMapping('field_story_extra_small_image', 'extrasmallimage')->xpath('extrasmallimage');
+    $this->addFieldMapping('field_story_extra_small_image:preserve_files')
+         ->defaultValue(TRUE);
+    $this->addFieldMapping('field_story_extra_small_image:file_replace')
+         ->defaultValue(FILE_EXISTS_REPLACE);
     $this->addFieldMapping('field_story_extra_small_image:alt', 'extra_small_alt')->xpath('extra_small_alt');
     $this->addFieldMapping('field_story_extra_small_image:title', 'extra_small_title')->xpath('extra_small_title');
     
@@ -233,29 +245,38 @@ class ItgStoryMigration extends XMLMigration {
     //code for social media
     $this->addFieldMapping('field_story_facebook_narrative', 'facebooknarrative')->xpath('facebooknarrative');
     $this->addFieldMapping('field_story_facebook_image', 'facebookimage')->xpath('facebookimage');
+    $this->addFieldMapping('field_story_facebook_image:file_replace')
+         ->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_story_facebook_image:preserve_files')
+         ->defaultValue(TRUE);
     $this->addFieldMapping('field_story_facebook_image:alt', 'facebookimage_alt')->xpath('facebookimage_alt');
     $this->addFieldMapping('field_story_facebook_image:title', 'facebookimage_title')->xpath('facebookimage_title');
-    $this->addFieldMapping('field_story_facebook_vdescripti', 'facebookvideonarrative')->xpath('facebookvideonarrative');
-    $this->addFieldMapping('field_story_facebook_video', 'facebookvideo')->xpath('facebookvideo');
+    //$this->addFieldMapping('field_story_facebook_vdescripti', 'facebookvideonarrative')->xpath('facebookvideonarrative');
+    //$this->addFieldMapping('field_story_facebook_video', 'facebookvideo')->xpath('facebookvideo'); confirmed no data in xml
     $this->addFieldMapping('field_story_tweet', 'twitternarrative')->xpath('twitternarrative');
     $this->addFieldMapping('field_story_tweet_image', 'twitterimage')->xpath('twitterimage');
+    $this->addFieldMapping('field_story_tweet_image:file_replace')
+         ->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_story_tweet_image:preserve_files')
+         ->defaultValue(TRUE);
     $this->addFieldMapping('field_story_tweet_image:alt', 'twitterimage_alt')->xpath('twitterimage_alt');
     $this->addFieldMapping('field_story_tweet_image:title', 'twitterimage_title')->xpath('twitterimage_title');
-    $this->addFieldMapping('field_story_twitter_video_desc', 'twittervideodescription')->xpath('twittervideodescription');
-    $this->addFieldMapping('field_story_twitter_video', 'twittervideo')->xpath('twittervideo');    
-    $this->addFieldMapping('field_story_media_files_syndicat', 'mediafiles')->xpath('mediafiles');
-    $this->addFieldMapping('field_story_client_title', 'client_title')->xpath('client_title');
-    
+    //$this->addFieldMapping('field_story_twitter_video_desc', 'twittervideodescription')->xpath('twittervideodescription');
+    //$this->addFieldMapping('field_story_twitter_video', 'twittervideo')->xpath('twittervideo'); confirmed no data in xml    
+    //$this->addFieldMapping('field_story_media_files_syndicat', 'mediafiles')->xpath('mediafiles');
+    //$this->addFieldMapping('field_story_client_title', 'client_title')->xpath('client_title');
     $this->addFieldMapping('field_story_syndication', 'syndication')->xpath('syndication');
-    
     $this->addFieldMapping('field_story_archive', 'archive')->xpath('archive');
-
     $this->addFieldMapping('field_story_comment_question', 'commentquestion')->xpath('commentquestion');
     $this->addFieldMapping('field_story_featured_name', 'featuredname')->xpath('featuredname'); //id
     
     $this->addFieldMapping('field_story_templates', 'selectlisticletemplates')->xpath('selectlisticletemplates');
     $this->addFieldMapping('field_story_expert_name', 'expertname')->xpath('expertname');
-    $this->addFieldMapping('field_story_expert_image', 'expertimage')->xpath('expertimage');
+    $this->addFieldMapping('field_story_expert_image', 'expertimage')->xpath('expertimage'); // image
+    $this->addFieldMapping('field_story_expert_image:file_replace')
+         ->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_story_expert_image:preserve_files')
+         ->defaultValue(TRUE);
     $this->addFieldMapping('field_story_expert_image:alt', 'expert_alt')->xpath('expert_alt');
     $this->addFieldMapping('field_story_expert_image:title', 'expert_title')->xpath('expert_title');
     $this->addFieldMapping('field_story_expert_description', 'expertdescription')->xpath('expertdescription');
@@ -268,14 +289,27 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('field_story_template_guru', 'listicle_title')->xpath('fulltext_conclaveformat/listicle_title');
     $this->addFieldMapping('field_story_quote_title', 'quote_title')->xpath('fulltext_conclaveformat/quote_title');
     $this->addFieldMapping('field_story_factoids_title', 'factoids_title')->xpath('fulltext_conclaveformat/factoids_title');
-    $this->addFieldMapping('field_story_quote_image', 'quote_image')->xpath('fulltext_conclaveformat/quote_image');
+    $this->addFieldMapping('field_story_quote_image', 'quote_image')->xpath('fulltext_conclaveformat/quote_image'); // image
+     $this->addFieldMapping('field_story_quote_image:file_replace')
+         ->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_story_quote_image:preserve_files')
+         ->defaultValue(TRUE);
     
-    $this->addFieldMapping('field_story_tech_pros_cons_title', 'title')->xpath('pros-cons/tech-pros-cons-main/title');
-    $this->addFieldMapping('field_story_tech_pros_cons_ratin', 'rating')->xpath('pros-cons/tech-pros-cons-main/rating');
-    $this->addFieldMapping('field_story_tech_pros_cons_image', 'pron-cons-img')->xpath('pros-cons/tech-pros-cons-main/pron-cons-img');
-    $this->addFieldMapping('field_story_technology_pros', 'item')->xpath('tech-pros/item');
-    $this->addFieldMapping('field_story_technology_cons', 'item')->xpath('tech-cons/item');
-    $this->addFieldMapping('field_story_tech_image_gallery', 'image')->xpath('tech-image-gallery/image');
+    //confused
+    $this->addFieldMapping('field_story_tech_pros_cons_title', 'title')->xpath('pros_cons/tech_pros_cons_main/title');
+    $this->addFieldMapping('field_story_tech_pros_cons_ratin', 'rating')->xpath('pros_cons/tech_pros_cons_main/rating');
+    $this->addFieldMapping('field_story_tech_pros_cons_image', 'pron_cons_img')->xpath('pros_cons/tech_pros_cons_main/pron_cons_img');
+    $this->addFieldMapping('field_story_tech_pros_cons_image:file_replace')
+         ->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_story_tech_pros_cons_image:preserve_files')
+         ->defaultValue(TRUE);
+    $this->addFieldMapping('field_story_technology_pros', 'item')->xpath('tech_pros/item');
+    $this->addFieldMapping('field_story_technology_cons', 'item')->xpath('tech_cons/item');
+    $this->addFieldMapping('field_story_tech_image_gallery', 'image')->xpath('tech_image_gallery/image'); // image
+    $this->addFieldMapping('field_story_tech_image_gallery:file_replace')
+         ->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_story_tech_image_gallery:preserve_files')
+         ->defaultValue(TRUE);
 
     //$this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
     $this->addFieldMapping('pathauto')->defaultValue(0);
@@ -288,6 +322,10 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('field_facebook_instant_audio_url', 'audio_url')->xpath('facebook_instant_article_integration/audio_url');
     $this->addFieldMapping('field_animated_image_position', 'animated_image_position')->xpath('facebook_instant_article_integration/animated_image_position');
     $this->addFieldMapping('field_facebook_animated_image', 'animated_image')->xpath('facebook_instant_article_integration/animated_image');
+    $this->addFieldMapping('field_facebook_animated_image:file_replace')
+         ->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_facebook_animated_image:preserve_files')
+         ->defaultValue(TRUE);
     $this->addFieldMapping('field_facebook_map_position', 'map_embed_code_position')->xpath('facebook_instant_article_integration/map_embed_code_position');
     $this->addFieldMapping('field_map_embed_code', 'map_embed_code')->xpath('facebook_instant_article_integration/map_embed_code');
     $this->addFieldMapping('field_social_embed_code', 'social_embed_code')->xpath('facebook_instant_article_integration/social_embed_code');
@@ -297,10 +335,10 @@ class ItgStoryMigration extends XMLMigration {
     // source migrated
     $this->addFieldMapping('field_story_source_type')
         ->defaultValue('migrated');
-    $this->addUnmigratedDestinations(array('uid', 'promote', 'sticky', 'revision', 'log', 'language', 'tnid', 'translate', 'revision_uid', 'is_new', 'body:summary', 'field_common_by_line_reporter_id', 'field_common_related_content', 'field_emoji', 'field_emoji:format', 'field_emoji_position', 'field_facebook_animated_image:file_class', 'field_facebook_animated_image:preserve_files',
+    $this->addUnmigratedDestinations(array('uid', 'promote', 'sticky', 'revision', 'log', 'language', 'tnid', 'translate', 'revision_uid', 'is_new', 'body:summary', 'field_common_by_line_reporter_id', 'field_common_related_content', 'field_emoji', 'field_emoji:format', 'field_emoji_position', 'field_facebook_animated_image:file_class',
       'field_facebook_animated_image:destination_dir',
       'field_facebook_animated_image:destination_file',
-      'field_facebook_animated_image:file_replace',
+      //'field_facebook_animated_image:file_replace',
       'field_facebook_animated_image:source_dir',
       'field_facebook_animated_image:urlencode',
       'field_facebook_animated_image:alt',
@@ -320,10 +358,10 @@ class ItgStoryMigration extends XMLMigration {
       'field_story_category:ignore_case',
       'field_story_configurations',
       'field_story_expert_image:file_class',
-      'field_story_expert_image:preserve_files',
+      //'field_story_expert_image:preserve_files',
       'field_story_expert_image:destination_dir',
       'field_story_expert_image:destination_file',
-      'field_story_expert_image:file_replace',
+      //'field_story_expert_image:file_replace',
       'field_story_expert_image:source_dir',
       'field_story_expert_image:urlencode',
       'field_story_expertise',
@@ -331,24 +369,24 @@ class ItgStoryMigration extends XMLMigration {
       'field_story_expiry_date:rrule',
       'field_story_expiry_date:to',
       'field_story_extra_large_image:file_class',
-      'field_story_extra_large_image:preserve_files',
+      //'field_story_extra_large_image:preserve_files',
       'field_story_extra_large_image:destination_dir',
       'field_story_extra_large_image:destination_file',
       'field_story_extra_large_image:file_replace',
       'field_story_extra_large_image:source_dir',
       'field_story_extra_large_image:urlencode',
       'field_story_extra_small_image:file_class',
-      'field_story_extra_small_image:preserve_files',
+      //'field_story_extra_small_image:preserve_files',
       'field_story_extra_small_image:destination_dir',
       'field_story_extra_small_image:destination_file',
-      'field_story_extra_small_image:file_replace',
+      //'field_story_extra_small_image:file_replace',
       'field_story_extra_small_image:source_dir',
       'field_story_extra_small_image:urlencode',
       'field_story_facebook_image:file_class',
-      'field_story_facebook_image:preserve_files',
+      //'field_story_facebook_image:preserve_files',
       'field_story_facebook_image:destination_dir',
       'field_story_facebook_image:destination_file',
-      'field_story_facebook_image:file_replace',
+      //'field_story_facebook_image:file_replace',
       'field_story_facebook_image:source_dir',
       'field_story_facebook_image:urlencode',
       'field_story_facebook_video:file_class',
@@ -372,7 +410,7 @@ class ItgStoryMigration extends XMLMigration {
       'field_story_itg_tags:create_term',
       'field_story_itg_tags:ignore_case',
       'field_story_large_image:file_class',
-      'field_story_large_image:preserve_files',
+      //'field_story_large_image:preserve_files',
       'field_story_large_image:destination_dir',
       'field_story_large_image:destination_file',
       'field_story_large_image:file_replace',
@@ -381,7 +419,7 @@ class ItgStoryMigration extends XMLMigration {
       'field_story_listicle',
       'field_story_listicle:revision_id',
       'field_story_medium_image:file_class',
-      'field_story_medium_image:preserve_files',
+      //'field_story_medium_image:preserve_files',
       'field_story_medium_image:destination_dir ',
       'field_story_medium_image:destination_file',
       'field_story_medium_image:file_replace',
@@ -390,10 +428,10 @@ class ItgStoryMigration extends XMLMigration {
       'field_story_mosimage',
       'field_story_node_identity',
       'field_story_quote_image:file_class',
-      'field_story_quote_image:preserve_files',
+      //'field_story_quote_image:preserve_files',
       'field_story_quote_image:destination_dir',
       'field_story_quote_image:destination_file',
-      'field_story_quote_image:file_replace',
+      //'field_story_quote_image:file_replace',
       'field_story_quote_image:source_dir',
       'field_story_quote_image:urlencode',
       'field_story_quote_image:alt',
@@ -404,7 +442,7 @@ class ItgStoryMigration extends XMLMigration {
       'field_story_schedule_date_time:to',
       'field_story_select_templates',
       'field_story_small_image:file_class',
-      'field_story_small_image:preserve_files',
+      //'field_story_small_image:preserve_files',
       'field_story_small_image:destination_dir',
       'field_story_small_image:destination_file',
       'field_story_small_image:file_replace',
@@ -413,19 +451,19 @@ class ItgStoryMigration extends XMLMigration {
       'field_story_social_media_integ',
       'field_story_source_id',
       'field_story_tech_image_gallery:file_class',
-      'field_story_tech_image_gallery:preserve_files',
+      //'field_story_tech_image_gallery:preserve_files',
       'field_story_tech_image_gallery:destination_dir',
       'field_story_tech_image_gallery:destination_file',
-      'field_story_tech_image_gallery:file_replace',
+      //'field_story_tech_image_gallery:file_replace',
       'field_story_tech_image_gallery:source_dir',
       'field_story_tech_image_gallery:urlencode',
       'field_story_tech_image_gallery:alt',
       'field_story_tech_image_gallery:title',
       'field_story_tech_pros_cons_image:file_class',
-      'field_story_tech_pros_cons_image:preserve_files',
+      //'field_story_tech_pros_cons_image:preserve_files',
       'field_story_tech_pros_cons_image:destination_dir',
       'field_story_tech_pros_cons_image:destination_file',
-      'field_story_tech_pros_cons_image:file_replace',
+      //'field_story_tech_pros_cons_image:file_replace',
       'field_story_tech_pros_cons_image:source_dir',
       'field_story_tech_pros_cons_image:urlencode',
       'field_story_tech_pros_cons_image:alt',
@@ -442,10 +480,10 @@ class ItgStoryMigration extends XMLMigration {
       'field_story_template_quotes',
       'field_story_tv_time',
       'field_story_tweet_image:file_class',
-      'field_story_tweet_image:preserve_files',
+      //'field_story_tweet_image:preserve_files',
       'field_story_tweet_image:destination_dir',
       'field_story_tweet_image:destination_file',
-      'field_story_tweet_image:file_replace',
+      //'field_story_tweet_image:file_replace',
       'field_story_tweet_image:source_dir',
       'field_story_tweet_image:urlencode',
       'field_story_twitter_video:file_class',
@@ -503,7 +541,8 @@ class ItgStoryMigration extends XMLMigration {
       'totalcount',
       'daycount',
       'timestamp',
-      'field_story_medium_image:destination_dir',
+      'field_story_facebook_video',
+      'field_story_twitter_video',
       ));
   }
 
@@ -514,6 +553,43 @@ class ItgStoryMigration extends XMLMigration {
     }else{
       $row->xml->syndication = '';
     }
+    // Image prepare
+    if(!empty($row->xml->extralargeimage)) {
+      $row->xml->extralargeimage = itg_dbmigrate_imagepath_url((string)$row->xml->extralargeimage);
+    }
+    
+    if(!empty($row->xml->largeimage)) {
+      $row->xml->largeimage = itg_dbmigrate_imagepath_url((string)$row->xml->largeimage);
+    }    
+    if(!empty($row->xml->mediumimage)) {
+      $row->xml->mediumimage = itg_dbmigrate_imagepath_url((string)$row->xml->mediumimage);
+    }
+    
+    if(!empty($row->xml->smallimage)) {
+      $row->xml->smallimage = itg_dbmigrate_imagepath_url((string)$row->xml->smallimage);
+    }
+    
+    if(!empty($row->xml->extrasmallimage)) {
+      $row->xml->extrasmallimage = itg_dbmigrate_imagepath_url((string)$row->xml->extrasmallimage);
+    }
+    
+    if(!empty($row->xml->bigimage)) {
+      $row->xml->bigimage = itg_dbmigrate_imagepath_url((string)$row->xml->bigimage);
+    }
+    
+    if(!empty($row->xml->facebookimage)) {
+      $row->xml->facebookimage = itg_dbmigrate_imagepath_url((string)$row->xml->facebookimage);
+    }
+    
+    if(!empty($row->xml->twitterimage)) {
+      $row->xml->twitterimage = itg_dbmigrate_imagepath_url((string)$row->xml->twitterimage);
+    }
+    
+    if(!empty($row->xml->quote_image)) {
+      $row->xml->quote_image = itg_dbmigrate_imagepath_url((string)$row->xml->quote_image);
+    }
+    
+    
     //Workbench 
     /*if ((string) $row->xml->state == '1') {
       $row->xml->workbench_moderation_state_new = 'published';
@@ -630,7 +706,7 @@ class ItgStoryMigration extends XMLMigration {
     $row->category_new = $data_category;
     // End category migrate
     // Story tags migration
-    /*$data_tags = '';
+    $data_tags = '';
 
     if (isset($row->xml->tags->tag) && !empty($row->xml->tags->tag)) {
       foreach ($row->xml->tags->tag as $final_tags) {
@@ -639,7 +715,7 @@ class ItgStoryMigration extends XMLMigration {
         $data_tags[]['tid'] = $orignal_tag;
       }
     }
-    $row->tag_new = $data_tags;*/
+    $row->tag_new = $data_tags;
     // End story tags migration
     
     // Story city migration
@@ -757,11 +833,11 @@ class ItgStoryMigration extends XMLMigration {
       $expire_date_time = date('m/d/Y H:i', $expire_time);
       $row->xml->storyexpirydate = $expire_date_time;
     }
-    if (isset($row->xml->issue_date) && !empty($row->xml->issue_date)) {
+     /* if (isset($row->xml->issue_date) && !empty($row->xml->issue_date)) {
       $issue_time = (string) $row->xml->issue_date;
       $issue_date_time = date('m/d/Y H:i', $issue_time);
       $row->xml->issue_date = $issue_date_time;
-    }
+    }*/
     if (isset($row->xml->scheduledatetime) && !empty($row->xml->scheduledatetime)) {
       $schedule_time = (string) $row->xml->scheduledatetime;
       $schedule_date_time = date('m/d/Y H:i', $schedule_time);
@@ -815,9 +891,9 @@ class ItgStoryMigration extends XMLMigration {
     if (!empty($row->category_new)) {
       $node->field_story_category[LANGUAGE_NONE] = $row->category_new;
     }
-    /*if (!empty($row->tag_new)) {
+    if (!empty($row->tag_new)) {
       $node->field_story_itg_tags[LANGUAGE_NONE] = $row->tag_new;
-    }*/
+    }
     
     if (!empty($row->city_new)) {
       $node->field_stroy_city[LANGUAGE_NONE] = $row->city_new;
@@ -839,8 +915,8 @@ class ItgStoryMigration extends XMLMigration {
 
   public function complete($entity, $row) {
   print $row->xml->id.' ';
-    $node = node_load($entity->nid);
-    
+    //$node = node_load($entity->nid);
+    $node = $entity;
     if (isset($row->xml->buzz_content->buzz) && (!empty($row->xml->buzz_content->buzz->headline) || !empty($row->xml->buzz_content->buzz->image) || !empty($row->xml->buzz_content->buzz->description))) {
       
       $key = 0;
@@ -877,7 +953,7 @@ class ItgStoryMigration extends XMLMigration {
         $listicle = (string) $value;
         $values = array(
           'field_name' => 'field_story_listicle',
-          'field_story_listicle_description' => array(LANGUAGE_NONE => array(array('value' => $listicle))),          
+          'field_story_listicle_description' => array(LANGUAGE_NONE => array(array('value' => 'kellton'))),          
         );
         $field_collection_item_listicle = entity_create('field_collection_item', $values);
         $field_collection_item_listicle->setHostEntity('node', $node);
@@ -910,6 +986,7 @@ class ItgStoryMigration extends XMLMigration {
 
    if (isset($row->xml->buzz_content->buzz) || isset($row->xml->fulltext_conclaveformat->listicle_content->listicle) || (isset($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate) && !empty($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate))) {
       $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'] = 'migrate-'.$node->nid;
+      field_attach_update('node', $node);
    }
    //code for like and dislike
    if (isset($row->xml->like_dislike->like) || isset($row->xml->like_dislike->dislike)) {
@@ -951,9 +1028,8 @@ class ItgStoryMigration extends XMLMigration {
          }
       }
     }
-   
+   drupal_set_message();
   }
-
 }
 
 /**

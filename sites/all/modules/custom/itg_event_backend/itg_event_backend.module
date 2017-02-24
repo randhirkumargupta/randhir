@@ -316,25 +316,41 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   }
 
   $event_type = $form_state['values']['field_event_type'][LANGUAGE_NONE][0]['value'];
-  if ($event_type == 'paid' && $form_state['values']['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] == '') {
-    form_set_error('field_individual_registration_fe', t('Individual Registration Fee is required.'));
-  }
-  if ($event_type == 'paid' && $form_state['values']['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] == '') {
-    form_set_error('field_group_registration_fee_5', t('Group Registration Fee (for 5 member) is required.'));
-  }
-
-  if ($event_type == 'paid' && $form_state['values']['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value'] == '') {
-    form_set_error('field_group_registration_fee_10', t('Group Registration Fee (upto 10 member) is required.'));
-  }
-  // Fees validation for registration
-  if ($event_type == 'paid' && $form_state['values']['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value']) {
-    form_set_error('field_individual_registration_fe', t('Individual Registration Fee should be less then Group Registration Fee (for 5 member)'));
-  }
-
-  if ($event_type == 'paid' && $form_state['values']['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value']) {
-    form_set_error('field_group_registration_fee_5', t('Group Registration Fee (for 5 member) should be less then Group Registration Fee (upto 10 member).'));
-  }
-
+  if($event_type == 'paid'){
+    foreach($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE] as $key => $field_collection_reg) {
+        if (is_numeric($key)) {
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] == '') {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_individual_registration_fe', t('Individual Registration Fee is required.'));
+          }
+          
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] == '') {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_5', t('Group Registration Fee (for 5 member) is required.'));
+          }
+          
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value'] == '') {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_10', t('Group Registration Fee (upto 10 member) is required.'));
+          }
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_participate_type'][LANGUAGE_NONE][0]['tid'] == '') {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_participate_type', t('Participate type is required.'));
+          }
+          
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value']) {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_individual_registration_fe', t('Individual Registration Fee should be less then Group Registration Fee (for 5 member)'));
+          }
+          
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value']) {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_5', t('Group Registration Fee (for 5 member) should be less then Group Registration Fee (upto 10 member).'));
+          }
+          
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value'] == '') {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_10', t('Group Registration Fee (upto 10 member) is required.'));
+          }
+          
+          
+        }
+    }
+  } 
+  
   if (($event_type == 'paid' || $event_type == 'free') && $form_state['values']['field_no_of_tickets'][LANGUAGE_NONE][0]['value'] == '' && (isset($form_state['storage']['step']) && $form_state['storage']['step'] == "step_second")) {
     form_set_error('field_no_of_tickets', t('Please enter No. of Tickets'));
   }
@@ -519,30 +535,36 @@ function itg_event_backend_after_build($form, &$form_state) {
   }
 
   $form['title']['#title'] = 'Event Title';
-  $form['field_group_registration_fee_5']['#states'] = array(
+//  $form['field_group_registration_fee_5']['#states'] = array(
+//    'visible' => array(
+//      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
+//    ),
+//    'required' => array(
+//      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
+//    ),
+//  );
+//  $form['field_group_registration_fee_10']['#states'] = array(
+//    'visible' => array(
+//      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
+//    ),
+//    'required' => array(
+//      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
+//    ),
+//  );
+//  $form['field_individual_registration_fe']['#states'] = array(
+//    'visible' => array(
+//      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
+//    ),
+//    'required' => array(
+//      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
+//    ),
+//  );
+  $form['field_ticket_group_type']['#states'] = array(
     'visible' => array(
       ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
     ),
-    'required' => array(
-      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
-    ),
   );
-  $form['field_group_registration_fee_10']['#states'] = array(
-    'visible' => array(
-      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
-    ),
-    'required' => array(
-      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
-    ),
-  );
-  $form['field_individual_registration_fe']['#states'] = array(
-    'visible' => array(
-      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
-    ),
-    'required' => array(
-      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
-    ),
-  );
+  
   $form['field_no_of_tickets']['#states'] = array(
     'visible' => array(
       array(':input[name="field_event_type[und]"]' => array('value' => 'paid')),
@@ -556,6 +578,12 @@ function itg_event_backend_after_build($form, &$form_state) {
     ),
   );
 
+      $max_delta_config = $form['field_ticket_group_type'][LANGUAGE_NONE]['#max_delta'] + 1;
+      //Hide add more button, if ticket are not available
+        if (isset($max_delta_config) && $max_delta_config >= 4) {
+          unset($form['field_ticket_group_type']['und']['add_more']);
+        }
+    
   return $form;
 }
 
@@ -1169,64 +1197,85 @@ function itg_event_backend_menu() {
   $items['programme'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['event/%/programme'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['speakers'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['event/%/speakers'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['sponsors'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['event/%/sponsors'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['sing-and-win'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['event/%/sing-and-win'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['flashback'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['event/%/flashback'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['speaker-details'] = array(
     'page callback' => 'itg_event_backend_page',
     'title' => 'Speaker Details',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['event/%/speaker-details'] = array(
     'page callback' => 'itg_event_backend_page',
     'title' => 'Speaker Details',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['sponsor-details'] = array(
     'page callback' => 'itg_event_backend_page',
     'title' => 'Sponsor Details',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['event/%/sponsor-details'] = array(
     'page callback' => 'itg_event_backend_page',
     'title' => 'Sponsor Details',
     'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   return $items;
+}
+
+/**
+ * Implement callback for theme
+ */
+ function itg_event_backend_default_node_theme(){
+  return 'itg';
 }
 
 /**
@@ -1359,7 +1408,8 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
     if (!empty($whole_node)) {
       if ($arg[0] == 'event') {
         $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
-        $node = menu_get_object("node", 1, $path);
+        $event_nid = explode('/', $path);
+        $node = node_load($event_nid[1]);
       }
       elseif (!empty($arg[1]) && is_numeric($arg[1])) {
         $node = node_load($arg[1]);
@@ -1374,7 +1424,8 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
     else {
       if ($arg[0] == 'event') {
         $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
-        $node = menu_get_object("node", 1, $path);
+        $event_nid = explode('/', $path);
+        $node = node_load($event_nid[1]);
         return $node->nid;
       }
       elseif (!empty($arg[1]) && is_numeric($arg[1])) {//shravan
@@ -1437,20 +1488,20 @@ function itg_event_get_host_name_for_all_events($nid = NULL) {
  * Get domain using domain id
  * @return boolean
  */
-function itg_event_backend_get_domain($domain_id) {
-  if (module_exists('domain') && !empty($domain_id)) {
-    $query = db_select('domain', 'd');
-    $query->fields('d', array('subdomain'));
-    $query->condition('d.domain_id', $domain_id, '=');
-    $result = $query->execute()->fetchField();
-    if ($result) {
-      return $result;
-    }
-    else {
-      return FALSE;
-    }
-  }
-}
+//function itg_event_backend_get_domain($domain_id) {
+//  if (module_exists('domain') && !empty($domain_id)) {
+//    $query = db_select('domain', 'd');
+//    $query->fields('d', array('subdomain'));
+//    $query->condition('d.domain_id', $domain_id, '=');
+//    $result = $query->execute()->fetchField();
+//    if ($result) {
+//      return $result;
+//    }
+//    else {
+//      return FALSE;
+//    }
+//  }
+//}
 
 /**
  * Get redirect table value
@@ -1535,38 +1586,38 @@ function itg_event_backend_vukkul_content($nid) {
  */
 function itg_event_backend_insert_into_redirect($node) {
 
-  global $user;
-  $domain = itg_event_backend_get_domain($node->domains);
-
-  if ($domain) {
-    $path = 'http://' . $domain;
-
-    // Prepare for redirect table
-    $redirect = new stdClass();
-    redirect_object_prepare($redirect);
-    $redirect->source = 'node/' . $node->nid;
-    $redirect->redirect = $path;
-    $redirect->language = 'und';
-    $hash = redirect_hash($redirect);
-    $redirect->hash = $hash;
-    $redirect->uid = $user->uid;
-    $redirect->type = 'redirect';
-    $redirect->access = time();
-    $redirect->count = 1;
-    $redirect->status = 1;
-
-    // Prepare for domain source table
-    $domain_source = new stdClass();
-    redirect_object_prepare($domain_source);
-    $domain_source->nid = $node->nid;
-    $domain_source->domain_id = '-' . $node->domains;
-
-    $existing = itg_event_backend_check_old_rec($node->nid);
-    if (!$existing) {
-      drupal_write_record('redirect', $redirect);
-      drupal_write_record('domain_source', $domain_source);
-    }
-  }
+//  global $user;
+//  $domain = itg_event_backend_get_domain($node->domains);
+//
+//  if ($domain) {
+//    $path = 'http://' . $domain;
+//
+//    // Prepare for redirect table
+//    $redirect = new stdClass();
+//    redirect_object_prepare($redirect);
+//    $redirect->source = 'node/' . $node->nid;
+//    $redirect->redirect = $path;
+//    $redirect->language = 'und';
+//    $hash = redirect_hash($redirect);
+//    $redirect->hash = $hash;
+//    $redirect->uid = $user->uid;
+//    $redirect->type = 'redirect';
+//    $redirect->access = time();
+//    $redirect->count = 1;
+//    $redirect->status = 1;
+//
+//    // Prepare for domain source table
+//    $domain_source = new stdClass();
+//    redirect_object_prepare($domain_source);
+//    $domain_source->nid = $node->nid;
+//    $domain_source->domain_id = '-' . $node->domains;
+//
+//    $existing = itg_event_backend_check_old_rec($node->nid);
+//    if (!$existing) {
+//      drupal_write_record('redirect', $redirect);
+//      //drupal_write_record('domain_source', $domain_source);
+//    }
+//  }
 }
 
 /**
