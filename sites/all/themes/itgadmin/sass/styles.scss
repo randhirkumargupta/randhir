@@ -10576,7 +10576,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
 .node-type-photogallery #colorbox iframe,
 .node-type-videogallery #colorbox iframe,
 .node-type-story #colorbox iframe{
-  background: url(../images/loading_animation.gif) no-repeat center center;
+  /*background: url(../images/loading_animation.gif) no-repeat center center;*/
 }
 #field-itg-content-publish-date-add-more-wrapper{@extend .hide;}
 .key-radio-field {
