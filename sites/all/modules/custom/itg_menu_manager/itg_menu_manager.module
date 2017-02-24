@@ -302,7 +302,7 @@ function itg_menu_manager_form_validate($form, &$form_state) {
     $url = $values['url'];
 
     // Validation for dublicate menu and sub menu.
-    if ($url_type == 'internal') {
+    if ($url_type == 'internal' && !isset($_GET['edit_id'])) {
       // get values beween squre breaket.
       preg_match_all("/\[([^\]]*)\]/", $values['title'], $matches);
       // get tid
