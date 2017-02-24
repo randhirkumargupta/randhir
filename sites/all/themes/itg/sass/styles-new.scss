@@ -280,15 +280,15 @@ input[type="file"], input[type="submit"], input[type="text"]{
                 li{
                     float: left;                                      
                     a{
-                        font-size: 22px;
-                        color: #c0c0c0;
-                        padding: 0 10px;
-                        line-height: 35px;
-                        display: block;
-                        cursor: pointer;
-                        &:hover{
-                            background: #222222;
-                        }
+                      font-size: 22px;
+                      color: #c0c0c0;
+                      padding: 0 10px;
+                      line-height: 35px;
+                      display: block;
+                      cursor: pointer;
+                      &:hover, &.active{
+                          background: #222222;
+                      }
                     }  
                     .flag-throbber{display: none;}
                 }
@@ -1019,7 +1019,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
           text-align: center;
         }
       }
-      .form-type-textfield{
+      .form-type-textfield, .form-type-select{
         display: inline-block;
         vertical-align: top;
         overflow: hidden;
@@ -1052,6 +1052,11 @@ $debug: "width:645px"; // TODO: move to _settings.scss
             right: 5px;
             top: 8px;
             z-index: 9;
+          }
+          select{
+            margin-left: 15px;
+            margin-top: 2px;
+            border: none;
           }
       }
       .form-type-textarea{
@@ -1229,9 +1234,13 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       .captcha{
         max-width: 100%;
         margin-left: 0;
-        .form-item-captcha-response{
-          label{width: 220px;}
-          .form-text{padding-left: 230px;}
+        img{
+            margin-left: 160px;
+        }
+        .form-item-captcha-response{      
+            label{
+                line-height: 22px;
+            }
           div.description{display: none;}
         }
       }
@@ -2986,6 +2995,9 @@ footer .footer-top ul li a:hover{
   .error{
     font-size: 13px;
   }
+  .messages--status{
+      color:#fff;
+  }
 }
 .comment-popup-wrapper {
     background-color: rgba(0, 0, 0, 0.7);
@@ -3031,14 +3043,18 @@ footer .footer-top ul li a:hover{
 }
 .comment-user-details {
     padding: 20px 0 0;
-    text-align: right;
+    text-align: left;
 }
 .comment-user-details > div {
   display: inline-block;
   margin-right: 7px;
   vertical-align: top;
-  width: 200px;
+  width: 208px;
   text-align: left;
+  margin-bottom: 20px;
+  &#user-email{
+      margin-right: 0;
+  }
   &.social-login{
     text-align: right;
     width: auto;
@@ -3270,7 +3286,47 @@ body{
     }
   }
 }
-
+#itg-personalization-all-content-form{
+  margin-bottom: 20px;
+  h2{margin-bottom: 20px;}
+  .form-type-select {
+    display: inline-block;
+    vertical-align: top;
+    width: 200px;
+    text-align: left;
+    margin-right: 7px;
+    > label {
+      display: block;
+      text-align: left;
+      padding-bottom: 5px;
+    }
+    select {
+      width: 100%;
+    }
+  }
+  .user-log-filter-btn {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 22px;
+    .form-submit {
+      border: 1px solid #000;
+      background-color: #000;
+      color: #fff;
+      padding: 5px 20px;
+      height: 32px;
+      border-radius: 3px;
+      line-height: 22px;
+      font-family: Roboto;
+      font-size: 14px;
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 10px;
+    }
+  }
+}
+.page-personalization-all-content{
+  table{@include personalization-table;}
+}
 
 
 
@@ -4890,16 +4946,47 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       &.bp-items{
         background-color: #f0f0f0;
       }
-      #sortable1, #sortable2, #sortable3, #sortable4{min-height:647px; cursor: move;}
+      #sortable1, #sortable2, #sortable3, #sortable4{min-height:600px; cursor: move;}
     }
     .cheaper-deaper-action{
       text-align: center;
       button{
-        padding: 5px 10px;
-        border: 1px solid #193984;
-        background-color: #193984;
-        border-radius: 3px;
+        padding: 3px 20px 1px;
+        border: 1px solid #cd070f;
+        background-color: #cd070f;
         color: #fff;
+        font-size: 28px;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-bottom: 36px;
+      }
+    }
+  }
+  .show-embed-code-link{
+    position: relative;
+    .show-embed-code-div{
+      top: 46px;
+      position: absolute;
+      display: none;
+      width: 340px;
+      right: -75px;
+      padding-top: 10px;
+      .copy-sample-code{
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+        position: relative;
+        &:before {
+          border-color: transparent transparent #fff transparent;
+          border-style: solid;
+          border-width: 11px;
+          content: "";
+          height: 0;
+          position: absolute;
+          top: -20px;
+          width: 0;
+          left: 230px;
+        }
       }
     }
   }
@@ -5007,7 +5094,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         .form-field-name-field-recipe-audio{
           .form-type-managed-file{margin: 20px 0;}
         }
-        .form-type-textfield{
+        .form-type-textfield, .form-type-select{
           overflow: visible;
           margin: 20px 0 !important;
           label{
@@ -5191,8 +5278,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           margin-left: 0;
           .form-item-captcha-response{
             margin-top: 10px !important;
-            label{width: 195px;}
+            /*label{width: 195px;}*/
             .form-text{padding-left: 200px;}
+          }
+          img{
+              margin-left: 122px;
           }
         }
       }
@@ -5652,6 +5742,24 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     }
   }
   .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child{margin-left: 175px;}
+  [id*="views-exposed-form-front-end-global-search-page"]{
+    .form-item-sm-field-itg-common-by-line-name, .views-widget-filter-tm_vid_4_names{
+      #autocomplete{
+        position: relative !important;
+        top: 0 !important; 
+        left: 0 !important;
+        display: block !important;
+        min-height: 1px;
+        margin-top: 32px;
+        & + .form-text{
+          position: absolute;
+          top: -32px;
+          left: 0;
+        }
+        ul li{padding: 5px 1px;}
+      }
+    }
+  }
 }
 @media all and(max-width: 767px){
   

@@ -173,9 +173,12 @@ function create_section_category_in_mongo_submit($form, &$form_state) {
  * Implements create_section_cat_op().
  */
 function create_section_cat_op($data, &$context) {
+// Mongo code will be here
   if (function_exists('mongodb')) {
     $con = mongodb();
     $people = $con->taxonomy_term_data_mongo;
+
+    // check connection
     if ($con) {
       $qry = array(
           "tid" => $data->tid,

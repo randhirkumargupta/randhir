@@ -988,6 +988,17 @@
     clear: left;
   }
 
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .title.sponsors-parent {
+    padding-right: 93px;
+  }
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .title .spncor-tag {
+    width: 75px;
+    padding-right: 5px;
+  }
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .title .spncor-tag span {
+    font-size: 10px;
+  }
+
   /*end event page*/
   /*Start css program live page*/
   #block-itg-live-tv-live-tv-video-page .view-programme-content-live-tv .view-content .photo-list li:nth-child(3n+1) {
@@ -2651,6 +2662,7 @@
   .view-front-end-global-search .attachment .count {
     font-size: 30px;
     font-size: 1.875rem;
+    line-height: 36px;
   }
   .view-front-end-global-search .views-exposed-widget .caln {
     position: inherit;

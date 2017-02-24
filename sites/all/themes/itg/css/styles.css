@@ -5134,6 +5134,7 @@ h1.category-heading {
 #block-views-video-landing-header-block .video-landing-header {
   background: transparent;
   padding: 0;
+  margin-top: 10px;
 }
 #block-views-video-landing-header-block .video-header-left {
   zoom: 1;
@@ -6812,7 +6813,7 @@ section.sidebar .block-itg-ads {
 }
 #block-itg-layout-manager-header-block .menu-login .user-menu {
   position: relative;
-  z-index: -99999;
+  z-index: 99999;
 }
 #block-itg-layout-manager-header-block .menu-login .user-menu a {
   cursor: pointer;
@@ -7709,6 +7710,42 @@ section.sidebar .block-itg-ads {
   padding: 10px;
   font-size: 16px;
   color: #000;
+  line-height: 22px;
+  position: relative;
+}
+#block-itg-event-backend-program-tab-block .event-listing .side-right .title .spncor-tag {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -37px;
+  background: #d1d1d1;
+  width: 105px;
+  height: 73px;
+  text-align: center;
+}
+#block-itg-event-backend-program-tab-block .event-listing .side-right .title .spncor-tag:before {
+  width: 0;
+  height: 0;
+  border-bottom: 73px solid #d1d1d1;
+  border-left: 30px solid transparent;
+  content: '';
+  position: absolute;
+  left: -30px;
+  top: 0;
+}
+#block-itg-event-backend-program-tab-block .event-listing .side-right .title .spncor-tag span {
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 4px;
+  display: block;
+  margin-top: 4px;
+}
+#block-itg-event-backend-program-tab-block .event-listing .side-right .title .spncor-tag img {
+  width: 85px;
+  height: 33px;
+}
+#block-itg-event-backend-program-tab-block .event-listing .side-right .title.sponsors-parent {
+  padding-right: 140px;
 }
 #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail {
   zoom: 1;
@@ -8015,6 +8052,40 @@ section.sidebar .block-itg-ads {
   font-size: 16px;
   font-size: 1rem;
   color: #ef3c24;
+}
+#block-views-program-schedule-block-1 .program-sch-sponcor {
+  text-align: right;
+}
+#block-views-program-schedule-block-1 .program-sch-sponcor div {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  background: #d1d1d1;
+  width: 190px;
+  height: 54px;
+  line-height: 54px;
+  padding-right: 15px;
+}
+#block-views-program-schedule-block-1 .program-sch-sponcor div:before {
+  width: 0;
+  height: 0;
+  border-bottom: 54px solid #d1d1d1;
+  border-left: 30px solid transparent;
+  content: '';
+  position: absolute;
+  left: -30px;
+  top: 0;
+}
+#block-views-program-schedule-block-1 .program-sch-sponcor div span {
+  margin-right: 10px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+}
+#block-views-program-schedule-block-1 .program-sch-sponcor div img {
+  width: 85px;
+  height: 33px;
+  vertical-align: middle;
 }
 
 #block-menu-menu-event-menu ul {
@@ -11687,6 +11758,10 @@ h1.about-us-heading + div p {
   width: 65px;
   height: 65px;
   padding-right: 0;
+  border: 1px solid #515567;
+  border-radius: 50%;
+  margin: 10px;
+  overflow: hidden;
 }
 #main-container-budget .budget-predictor-social-share .share-msg {
   font-weight: 700;
@@ -12546,13 +12621,20 @@ span.smilies-title img {
   color: #a1a1a1;
   font-family: roboto;
 }
+#block-itg-layout-manager-front-end-breadcrumb a:hover {
+  text-decoration: underline;
+}
 #block-itg-layout-manager-front-end-breadcrumb .container div.lft {
   display: inline-block;
   vertical-align: top;
 }
 
-.node-type-photogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-videogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-podcast #block-itg-layout-manager-front-end-breadcrumb, .section-videos #block-itg-layout-manager-front-end-breadcrumb {
+.node-type-photogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-videogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-podcast #block-itg-layout-manager-front-end-breadcrumb, .section-videos #block-itg-layout-manager-front-end-breadcrumb, .section-photo #block-itg-layout-manager-front-end-breadcrumb {
   background: #171717;
+}
+
+.node-type-podcast #block-itg-layout-manager-front-end-breadcrumb {
+  background: #000;
 }
 
 /*css breadcrumb end*/
@@ -12564,10 +12646,12 @@ iframe[id*="twitter-widget"] {
   font-size: 32px;
   margin-bottom: 25px;
   color: #fff;
+  line-height: 42px;
 }
 
 .video-heading {
   color: #fff;
   font-size: 24px;
   margin-bottom: 10px;
+  line-height: 34px;
 }
