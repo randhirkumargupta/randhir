@@ -28,7 +28,14 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                 <?php } if ($config_name == 'other') { ?> 
                 <li><a onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                 <?php } ?>
-                <li><a href="#" title="Embed"><i class="fa fa-link"></i></a></li>
+                <li class="show-embed-code-link">
+                  <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
+                  <div class="show-embed-code-div">
+                    <div class="copy-sample-code">
+                      Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum 
+                    </div>
+                  </div>
+                </li>
                   <?php global $user; ?>
                   <?php
                     if ($user->uid > 0)
@@ -142,7 +149,14 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                 <?php } if ($config_name == 'other') { ?> 
                 <li><a onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                 <?php } ?>
-                <li><a href="#" title="Embed"><i class="fa fa-link"></i></a></li>
+                <li class="show-embed-code-link">
+                  <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
+                  <div class="show-embed-code-div">
+                    <div class="copy-sample-code">
+                      Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum 
+                    </div>
+                  </div>
+                </li>
                  <?php if($user->uid > 0):?>
                   <li class="mhide"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/personalization/my-content/<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                   <?php else: ?>

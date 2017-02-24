@@ -111,7 +111,6 @@
     var offSet = 200;
     var dataOffset = $(this).offset().top;
     var targetOffset = dataOffset - offSet;
-    alert(dataOffset + ' == ' + targetOffset);
     $("body, html").animate({scrollTop: targetOffset}, 300);
   });
 
