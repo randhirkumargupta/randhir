@@ -59,7 +59,6 @@ class ItgBestcollegeMigration extends Migration {
     $this->addFieldMapping('language')->defaultValue('en');  
     //Field ampping
     $this->addFieldMapping('field_story_category', 'field_story_category');
-    $this->addFieldMapping('field_primary_category', 'primarycategory');
     $this->addFieldMapping('title', 'collegename');
     $this->addFieldMapping('field_bestcollege_city', 'city');
     $this->addFieldMapping('body', 'description');
@@ -71,7 +70,6 @@ class ItgBestcollegeMigration extends Migration {
     $this->addFieldMapping('field_bestcollege_related_video', 'videoids');
     
     $this->addFieldMapping('field_bestcollege_rank', 'rank');
-    $this->addFieldMapping('field_bestcollege_related_video', 'videoids');
     $this->addFieldMapping('field_college_id', 'collegeid');
    
   }
@@ -81,8 +79,9 @@ class ItgBestcollegeMigration extends Migration {
     if(isset($row->year) && !empty($row->year)) {
       switch ($row->year) {
         case '2016':
-         // $data_category[0]['tid'] = '787';
-          $data_category[1]['tid'] = '788';
+          $tid = '787';
+          $final_tid = $this->itg_bestcollege_get_tid($tid, $row->stream);
+          $data_category[1]['tid'] = $final_tid;
 
           break;
 
@@ -95,10 +94,21 @@ class ItgBestcollegeMigration extends Migration {
   }
   
   public function prepare($node, stdClass $row) {
-      if (!empty($row->category_new)) {
-        $node->field_story_category[LANGUAGE_NONE] = $row->category_new;
-      }
+    if (!empty($row->category_new)) {
+      $node->field_story_category[LANGUAGE_NONE] = $row->category_new;
+    }
+    $node->uid = 3;  
   }
+  
+  public function itg_bestcollege_get_tid($tid, $stream) {
+    if(isset($tid) && !empty($tid) && !empty($stream)) {
+        $children = taxonomy_get_children($tid);
+        foreach($children as $term) {
+          $category[strtolower($term->name)] = $term->tid;
+        }
+      return $category[strtolower($stream)];
+    }
+  }      
 
 }
 

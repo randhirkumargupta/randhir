@@ -4,5 +4,11 @@ core = 7.x
 package = ITG
 
 stylesheets[all][] = css/itg_bestcollege.css
+stylesheets[all][] = css/style.css
+stylesheets[all][] = css/responsive.css
+
+scripts[] = js/custom.js
+scripts[] = js/scroll_top.js
+
 
 
