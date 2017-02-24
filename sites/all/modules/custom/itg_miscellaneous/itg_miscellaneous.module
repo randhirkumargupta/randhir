@@ -21,8 +21,8 @@ function itg_miscellaneous_init() {
  * Implements hook_menu().
  * @return array $items
  */
-function itg_miscellaneous_menu() {   
-      
+function itg_miscellaneous_menu() {
+
   $items['itg-admin-layout-list'] = array(
       'page callback' => 'itg_layout_list_delete',
       'access arguments' => array('access administrator'),
@@ -45,11 +45,21 @@ function itg_miscellaneous_menu() {
   );
 
   $items['create-poll-table'] = array(
-    'page callback' => 'create_poll_table',
-    'access arguments' => array('access administrator'),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_miscellaneous.inc',
+      'page callback' => 'create_poll_table',
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_miscellaneous.inc',
   );
+
+  $items['create-section-category-in-mongo'] = array(
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('create_section_category_in_mongo'),
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_miscellaneous.inc',
+  );
+  
+  
 
   return $items;
 }

@@ -134,7 +134,7 @@ function itg_icici_order_form_submit($form, &$form_state, $args) {
   //module_load_include('php', 'itg_payment', 'lib/icici/ipg-util');
   
   $responseSuccessURL = "http://127.0.0.1/itgcms/itg_payment_success";
-  $responseFailURL = "http://127.0.0.1/itgcms/itg-payment-response-fail";
+  $responseFailURL = "http://127.0.0.1/itgcms/itg-payment/response-fail";
   
   $db_data = array();
   

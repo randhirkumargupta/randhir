@@ -1447,11 +1447,13 @@ img{
         }
         }        
     }
-    .section_wise_order-edu-tips-and-trick{
+    .droppable{
+     .section_wise_order-edu-tips-and-trick{
         overflow: auto;
         border: 1px solid #ddd;
         padding: 10px;
-    }
+    }   
+    }    
     .auto-tips-n-tricks{
         ul{
             li{
@@ -2142,15 +2144,23 @@ img{
 
 /* CSS For Election Page */
 .election-page{ 
-    h1{
-        margin-top:60px;
-        .disc-share{
-            a{
+   .election-top-block{
+        margin-top:40px;
+        position: relative;
+        z-index: 10; 
+        h1{
+            display: inline;
+        }
+        @include social-share; 
+        .social-share{
+            display: inline-block;
+            vertical-align: top;
+            padding-top: 15px;
+            i.fa-share-alt{
                 font-size: 20px;
-                color: #b6b6b6;
             }
         }
-    }
+    } 
     .left-side{
         .itg-415-layout{
             .droppable{

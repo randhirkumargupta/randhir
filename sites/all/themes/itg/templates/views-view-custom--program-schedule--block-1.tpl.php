@@ -42,7 +42,7 @@ drupal_add_js("jQuery(document).ready(function() { jQuery('.program-schedule-con
      }
     
      if($sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri'] != "") {
-         $sponsor_tags = '<div class="program-sch-sponcor"><div class="div-sponcor"><span>Powered By</span><img src=' . image_style_url("image_221x54", $sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri']) . ' alt="" /></div></div>';
+         $sponsor_tags = '<div class="program-sch-sponcor"><div class="div-sponcor"><span>Powered By</span><img src=' . image_style_url("sponsor85___33", $sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri']) . ' alt="" /></div></div>';
      }
      
      $row_count = count($rows);

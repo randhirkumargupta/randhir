@@ -107,7 +107,16 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                             <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                               <div class="show-embed-code-div">
                                 <div class="copy-sample-code">
-                                  Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum 
+                                  <textarea readonly="true">
+                                  <div id='IndiaToday_gallery' data-type='LOCAL'></div>
+                                  <script src='<?php print $base_url;?>/sites/all/themes/itg/js/video_iframeResizer.js'>
+                                  </script>
+                                  <script> 
+                                  <?php 
+                                     echo "iFrameResize({galleryid: $video_node->nid})";
+                                  ?>
+                                  </script>
+                                  </textarea> 
                                 </div>
                               </div>
                             </li>
@@ -155,7 +164,16 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                             <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                               <div class="show-embed-code-div">
                                 <div class="copy-sample-code">
-                                  Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum 
+                                  <textarea readonly="true">
+                                  <div id='IndiaToday_gallery' data-type='LOCAL'></div>
+                                  <script src='<?php print $base_url;?>/sites/all/themes/itg/js/video_iframeResizer.js'>
+                                  </script>
+                                  <script> 
+                                  <?php 
+                                     echo "iFrameResize({galleryid: $video_node->nid})";
+                                  ?>
+                                  </script>
+                                  </textarea>  
                                 </div>
                               </div>
                             </li>
