@@ -343,6 +343,10 @@ p {
   word-wrap: break-word;
 }
 
+#main {
+  min-height: 500px;
+}
+
 /*start header css*/
 header {
   margin-bottom: 30px;
@@ -1708,9 +1712,9 @@ footer .multiple-items-footer i.slick-next {
 }
 .featured-news .featured-post a {
   display: block;
-}
-.featured-news .featured-post a img {
-  margin-bottom: 10px;
+  /*            img{
+                  margin-bottom: 10px;
+              }*/
 }
 .featured-news .featured-post a:hover {
   color: #193984;
@@ -12255,6 +12259,7 @@ h1.about-us-heading + div p {
 /*magzine lock icon end*/
 /*other comment section start*/
 #content #other-comment {
+  margin-top: 40px;
   /*        #comments .comment-form .form-actions{
               padding-left: 0;
           }*/
@@ -12442,7 +12447,7 @@ h1.about-us-heading + div p {
 span.smilies-title {
   width: auto;
   height: auto;
-  display: inline-block;
+  display: inline-block !important;
   vertical-align: middle;
   float: none !important;
   margin: 0 !important;

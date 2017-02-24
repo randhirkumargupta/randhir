@@ -235,6 +235,9 @@ input[type="text"], select, input[type="password"]{
 p{
     word-wrap: break-word;
 }
+#main{
+    min-height: 500px;
+}
 /*start header css*/
 header{
     margin-bottom: 30px;
@@ -1436,9 +1439,9 @@ footer{
         padding:5px;
          a{
             display: block;
-            img{
+/*            img{
                 margin-bottom: 10px;
-            }
+            }*/
             &:hover{
                 color:$blue-color;
             }
@@ -10156,6 +10159,7 @@ h1.about-us-heading{
 /*other comment section start*/
 #content{    
     #other-comment{
+        margin-top:40px;
         #comments .comment-form fieldset.captcha{
             margin: 10px 0 30px 0;
         }
@@ -10335,7 +10339,7 @@ h1.about-us-heading{
 span.smilies-title {
     width: auto;
     height: auto;
-    display: inline-block;
+    display: inline-block !important;
     vertical-align: middle;   
     float: none !important;
     margin: 0 !important;

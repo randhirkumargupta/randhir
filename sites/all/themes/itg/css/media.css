@@ -1268,6 +1268,12 @@
   .breakingnew-home .new-detail .marquee-container {
     width: 100%;
     height: 23px;
+    float: none;
+    line-height: 23px;
+  }
+  .breakingnew-home .new-detail .marquee-container .marquee-child {
+    height: 23px;
+    line-height: 23px;
   }
   .breakingnew-home .new-detail .social-share {
     display: none;
