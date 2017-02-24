@@ -1780,7 +1780,7 @@ img {
 .education-layout-page .how-made-it ul li + li {
   border-top: 1px solid #ddd;
 }
-.education-layout-page .section_wise_order-edu-tips-and-trick {
+.education-layout-page .droppable .section_wise_order-edu-tips-and-trick {
   overflow: auto;
   border: 1px solid #ddd;
   padding: 10px;
