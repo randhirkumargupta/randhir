@@ -573,6 +573,10 @@ function itg_widget_keycandidate_form_submit($form, $form_state) {
  */
 function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     global $base_url;
+
+    if($form['#id'] == 'taxonomy-form-term') {
+      drupal_add_css("#edit-field-set-as-featured-cate {display:none !important}" , "inline");
+    }
     // Alter form for confirm message during bulk operation.
     $form_id_array_to_alter = array(
         'views_form_section_wise_draggable_content_order_big_story_format',
@@ -1371,6 +1375,14 @@ function itg_widget_views_query_alter(&$view, &$query) {
 
     if ($view->name == 'anchor_option_view') {
         $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
+    }
+    
+    if ($view->name == 'so_sorry_politoons' && $view->current_display = 'so_sorry_politoons') {
+       foreach($query->where[1]['conditions'] as $key => $condtion) {
+         if($condtion['field'] == 'taxonomy_term_data_itg_category_manager__taxonomy_term_hierarchy.parent') {
+           $query->where[1]['conditions'][$key]['value'] = variable_get('so_sorry_category_id_for_widget');
+         }
+       }
     }
 
     if ($view->name == 'anchor_landing_page') {
