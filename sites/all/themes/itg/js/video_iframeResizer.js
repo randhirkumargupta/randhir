@@ -947,7 +947,7 @@
             var uri = 'http://localhost/itgcms/';
         }
         
-        node.innerHTML = '<iframe width="680" height="1000" id="galleryframe"  border="0" frameborder="0" scrolling=no src="'+uri+'photogallery-embed?gid=' + galleryid + '"></iframe>';
+        node.innerHTML = '<iframe width="680" height="1000" id="galleryframe"  border="0" frameborder="0" scrolling=no src="'+uri+'videogallery-embed?gid=' + galleryid + '"></iframe>';
 
     }
 	
