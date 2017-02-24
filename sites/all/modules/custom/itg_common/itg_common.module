@@ -12,6 +12,7 @@ module_load_include('inc', 'itg_common', 'includes/itg_mongo.helper');
 module_load_include('inc', 'itg_common', 'includes/itg_common_mail');
 module_load_include('inc', 'itg_common', 'includes/itg_common');
 
+
 /**
  * Implements hook_init.
  * {@inheritdoc}
@@ -32,6 +33,13 @@ function itg_common_init() {
     drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.admin.js');
   }
+  
+  if (arg(0) == 'funalytics') {
+    $settings = array();
+    $settings['base_url'] = $base_url;
+    drupal_add_js(array('itg_funalytics' => array('settings' => $settings)), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_funalytics.js');
+  }
 }
 
 /**
@@ -45,7 +53,25 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
       //'file' => 'includes/itg_story.inc',
   );
-
+  
+  $items['photogallery-embed'] = array(
+    'page callback' => 'itg_photogallery_embed',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['videogallery-embed'] = array(
+    'page callback' => 'itg_videogallery_embed',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['funalytics-popup'] = array(
+    'page callback' => 'itg_funalytics_popup',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
@@ -55,6 +81,15 @@ function itg_common_menu() {
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
+  $arg = arg();
+  
+  $settings = array();
+  
+  $settings['formid'] = $form_id;
+  $settings['arg_url'] = $form_id;
+  drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_admin_form.js');
+  
   
   //code for preview_changes button remove
   if (!empty($form['actions']['preview_changes'])) {
@@ -145,9 +180,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
   // Button name change some content
   if ($form_id == 'mega_review_critic_node_form' && (empty($form['#node']->nid) || (!empty($form['#node']->nid) && $form['#node']->status == 0))) {
-    $form['actions']['itg_custom_button'] = array('#type' => 'submit',
-      '#value' => t('Save as Draft'),//
-      '#submit' => array('node_form_submit'));
+//    $form['actions']['itg_custom_button'] = array('#type' => 'submit',
+//      '#value' => t('Save as Draft'),//
+//      '#submit' => array('node_form_submit'));
     $form['actions']['submit']['#value'] = t('Publish');
   }
 
@@ -332,7 +367,7 @@ function itg_common_cancel_button($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-
+  //p($form['#id']);
   $settings = array();
 
   $settings['formid'] = $form['#id'];
@@ -346,7 +381,12 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
   if ($form['#id'] == 'views-exposed-form-custom-html-widgets-list-page') {
     $form['title']['#autocomplete_path'] = 'content-title-list/custom_html_widgets/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Widget name'));
-  }
+  } else if ($form['#id'] == 'views-exposed-form-funalytics-list-page-1' 
+          || $form['#id'] == 'views-exposed-form-funalytics-list-page') {
+    $form['title']['#autocomplete_path'] = 'content-title-list/itg_funalytics/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }   
+  
 }
 
 /**
@@ -387,6 +427,7 @@ function itg_common_node_presave($node) {
     case 'survey':
     case 'quiz':
     case 'newsletter':
+    case 'itg_funalytics':
       if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
         if ($node->op == 'Publish') {
           $node->status = 1;
@@ -568,6 +609,16 @@ function itg_common_theme() {
       'path' => drupal_get_path('module', 'itg_common') . '/templates',
       'variables' => array('data' => NULL),
     ),
+    'itg_photogallery_embed' => array(
+      'template' => 'itg-photogallery-embed',
+      'path' => drupal_get_path('module', 'itg_common') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'itg_videogallery_embed' => array(
+      'template' => 'itg-videogallery-embed',
+      'path' => drupal_get_path('module', 'itg_common') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
   );
 
   return $themes;
@@ -731,4 +782,36 @@ function itg_draft_form_custom_callback($form, &$form_state) {
     $_GET['destination'] = $redirect_path;    
   }
   
+}
+
+/**
+ * Helper function to get photogallery.
+ */
+function itg_photogallery_embed() {
+  if (!empty($_GET['gid']))
+  {
+    $data = node_load($_GET['gid']);
+    return theme('itg_photogallery_embed', array('data' => $data));
+  }
+}
+
+/**
+ * Helper function to get videogallery.
+ */
+function itg_videogallery_embed() {
+  if (!empty($_GET['gid'])) {
+    if (function_exists('get_video_in_fieldcollection_by_nid')) {
+      $videoids = get_video_in_fieldcollection_by_nid($_GET['gid']);
+    }
+    return theme('itg_videogallery_embed', array('data' => $videoids));
+  }
+}
+
+/**
+ * callback for funalytics-popup.
+ */
+function itg_funalytics_popup() {
+  
+  echo views_embed_view('front_funalytics_list', 'block_1');
+  //exit;
 }

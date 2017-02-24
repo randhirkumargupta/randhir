@@ -175,6 +175,11 @@ function itg_widget_menu() {
     'access arguments' => array('access content'),
   );
 
+  $items['itg-update-analystics-node-count-data'] = array(
+    'page callback' => 'itg_update_analystics_node_count_data',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('administer nodequeue'),
+  );
   return $items;
 }
 
@@ -183,8 +188,8 @@ function itg_widget_menu() {
  * @return type
  */
 function itg_widget_site_map() {
-  drupal_add_css(".nested-taxonomy-tree a:hover {color: #a00606 !important}" , array("type" => "inline" ,"scope" => "footer"));
-  $tree = extranet_get_nested_tree(CATEGORY_MANAGMENT);
+  drupal_add_css(".nested-taxonomy-tree a:hover {color: #a00606 !important}", array("type" => "inline", "scope" => "footer"));
+  $tree = extranet_get_nested_tree((int) CATEGORY_MANAGMENT);
   $keys = array_keys($tree);
   foreach ($keys as $index => $data) {
     $term_array = array($keys[$index] => $tree[$keys[$index]]);
@@ -208,8 +213,8 @@ function extranet_output_nested_tree($tree) {
   if (count($tree)) {
     $output = '<ul class="nested-taxonomy-tree">';
     foreach ($tree as $term) {
-      if(function_exists('itg_category_manager_term_state')) {
-          if (itg_category_manager_term_state($term->tid)) {
+      if (function_exists('itg_category_manager_term_state')) {
+        if (itg_category_manager_term_state($term->tid)) {
           $output .= '<li class="taxonomy-term">';
           $output .= l($term->name, "taxonomy/term/$term->tid");
           if ($term->children) {
@@ -1027,7 +1032,7 @@ function itg_widget_block_view($delta = '') {
             asNavFor: '.slider-header',
             focusOnSelect: true
           });   
-});",array("type" => "inline" ,"scope" => "footer"));
+});", array("type" => "inline", "scope" => "footer"));
         $block['content'] = theme("podcast_banner", array("podcast_banner_array" => $podcast_banner_array, "podcast_title" => $podcast_title));
       }
       break;
@@ -1174,31 +1179,31 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
       }
       ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->video_id; ?>"><?php
       if ($video_value->dailymotion_thumb_url != "") {
-        $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $video_value->dailymotion_thumb_url . '" height="66" width="88" alt="" /></li>';
+        $newimageds .= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $video_value->dailymotion_thumb_url . '" height="66" width="88" alt="" /></li>';
       }
       else {
-        $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/default_for_all.png" height="66" width="88" alt="" /></li>';
+        $newimageds .= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/default_for_all.png" height="66" width="88" alt="" /></li>';
       }
       $ads_flag = 0;
       if ($video_value->field_include_ads_value == 'yes') {
         $ads_flag = 1;
       }
       ?>
-        <div class="iframe-video">
-          <iframe class='iframe-video-dailymotion' frameborder="0"
-                  src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=0&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
-                  allowfullscreen></iframe>
-        </div>
-        <?php
-        if ($type != 'video') {
-          print ucfirst($video_value->field_videogallery_description_value);
-        }
-        ?>
+          <div class="iframe-video">
+              <iframe class='iframe-video-dailymotion' frameborder="0"
+                      src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=0&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
+                      allowfullscreen></iframe>
+          </div>
+          <?php
+          if ($type != 'video') {
+            print ucfirst($video_value->field_videogallery_description_value);
+          }
+          ?>
       </div>
 
       <?php
     }
-    $newimageds.='</ul></div></div></div>';
+    $newimageds .= '</ul></div></div></div>';
   }
   print '</div>';
   if (count($videoids) > 1) {
@@ -1229,7 +1234,8 @@ function itg_widget_big_story_live_tv_flag($flag) {
                 'nid' => 0,
               ))->execute();
           print "success";
-        } catch (Exception $ex) {
+        }
+        catch (Exception $ex) {
           print "error";
         }
       }
@@ -1265,7 +1271,8 @@ function itg_widget_delete_big_story_live_tv() {
     else {
       return FALSE;
     }
-  } catch (Exception $ex) {
+  }
+  catch (Exception $ex) {
     return $ex->getMessage();
   }
 }
@@ -1338,7 +1345,8 @@ function itg_widget_delete_data_from_widget($widget_name, $nid = 0, $stateid = 0
     }
 
     $query->execute();
-  } catch (Exception $ex) {
+  }
+  catch (Exception $ex) {
     watchdog($widget_name, $ex->getMessage());
   }
 }
@@ -1364,7 +1372,8 @@ function itg_widget_insert_widget_data($node, $widget_name, $category_tid, $extr
           'weight' => --$max_weight,
         ))
         ->execute();
-  } catch (Exception $ex) {
+  }
+  catch (Exception $ex) {
     drupal_set_message($ex->getMessage());
   }
 }
@@ -1417,7 +1426,8 @@ function itg_widget_handle_unpublished_node($nid) {
           ->condition('nid', $nid)
           //->condition('widget', 'key_candidate' ,'!=')
           ->execute();
-    } catch (Exception $ex) {
+    }
+    catch (Exception $ex) {
       watchdog("widget_delete", "From itg_widget_order " + $ex->getMessage());
     }
     // Delete from nodequeue. As we have used nodequeue only for widgets. So we can remove from nodeid.
@@ -1425,7 +1435,8 @@ function itg_widget_handle_unpublished_node($nid) {
       db_delete('nodequeue_nodes')
           ->condition('nid', $nid)
           ->execute();
-    } catch (Exception $ex) {
+    }
+    catch (Exception $ex) {
       watchdog("widget_delete", "From nodequeue_nodes " + $ex->getMessage());
     }
   }
@@ -1499,7 +1510,8 @@ function itg_widget_insert_widget_data_by_min_weight($node, $widget_name, $categ
           'weight' => --$max_weight,
         ))
         ->execute();
-  } catch (Exception $ex) {
+  }
+  catch (Exception $ex) {
     drupal_set_message($ex->getMessage());
   }
 }
@@ -1548,7 +1560,8 @@ function itg_widget_update_weight_during_order_reorder($form, &$form_state) {
             ->condition('widget', $widget)
             ->condition('nid', $nid)
             ->execute();
-      } catch (Exception $ex) {
+      }
+      catch (Exception $ex) {
         drupal_set_message($ex->getMessage());
       }
     }

@@ -74,6 +74,19 @@ foreach ($data as $key => $value) {
     foreach ($value as $program) {
       $media = $program["daywise"] . '--' . $program["session_title"] . '--' . $program["start_time"] . '--' . $program["end_time"];
       $session_result = itg_event_backend_get_session_photo_video($media);
+      $sponsors_data = itg_event_backend_get_session_sponsor($media);
+     
+     $sponsor_all_data = "";
+     $sponsor_tags = "";
+      if(!empty($sponsors_data)) {
+         $sponsor_all_data = node_load($sponsors_data['sponsor']);
+     }
+    
+     if($sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri'] != "") {
+         $sponsors_data_parent = "sponsors-parent";
+         $sponsor_tags = '<div class="spncor-tag"><span>Powered By</span><img src=' . image_style_url("image_136x73", $sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri']) . ' alt="" /></div>';
+     }
+    // p($sponsor_tags);
       $story_title = itg_event_backend_get_session_story_title($media, $content_font_color);
       $output_story_title = '';
       foreach ($story_title['story_title'] as $title) {
@@ -97,7 +110,7 @@ foreach ($data as $key => $value) {
         $output_media .= '<br>';
       }
       ?>
-      <div class="side-right"><div class="title" style="background: <?php print $heading_background_color; ?>"><?php print $program["session_title"]; ?></div> 
+      <div class="side-right"><div class="title <?php echo $sponsors_data_parent; ?>" style="background: <?php print $heading_background_color; ?>"><?php print $program["session_title"]; ?><?php echo $sponsor_tags;?></div> 
         <div class="listing-detail"><div class="section-part"><?php print $output_story_title. ' ' . $output_media; ?></div>
           <div class="profile-detail">
             <?php

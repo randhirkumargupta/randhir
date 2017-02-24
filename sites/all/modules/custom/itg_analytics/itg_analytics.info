@@ -1,0 +1,4 @@
+name = ITG Analytics
+description = "Module provide functionality to widget have sorting according to analytics data"
+core = 7.x
+package = ITG

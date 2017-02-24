@@ -313,7 +313,7 @@ input[type="file"], input[type="submit"], input[type="text"] {
   display: block;
   cursor: pointer;
 }
-#block-views-photo-landing-slider-block .social-icon ul li a:hover {
+#block-views-photo-landing-slider-block .social-icon ul li a:hover, #block-views-photo-landing-slider-block .social-icon ul li a.active {
   background: #222222;
 }
 #block-views-photo-landing-slider-block .social-icon ul li .flag-throbber {
@@ -655,38 +655,26 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   height: 40px;
   margin-top: 20px;
 }
-.total-point-wrapper .pregress-bar .pregress-bar-active {
+.total-point-wrapper .pregress-bar .progress-bar-div {
   width: 320px;
   background: #cdcdcd;
   display: inline-block;
   vertical-align: middle;
   height: 6px;
   border-radius: 10px;
+  overflow: hidden;
   position: relative;
 }
-.total-point-wrapper .pregress-bar .pregress-bar-active:before {
+.total-point-wrapper .pregress-bar .progress-bar-div .pregress-bar-default {
   position: absolute;
-  top: 0;
   left: 0;
-  content: '';
-  height: 6px;
-  background: #a00606;
-  border-radius: 10px;
-}
-.total-point-wrapper .pregress-bar .progress-bar-1:before {
-  width: 20%;
-}
-.total-point-wrapper .pregress-bar .progress-bar-2:before {
-  width: 40%;
-}
-.total-point-wrapper .pregress-bar .progress-bar-3:before {
-  width: 60%;
-}
-.total-point-wrapper .pregress-bar .progress-bar-4:before {
-  width: 80%;
-}
-.total-point-wrapper .pregress-bar .progress-bar-5:before {
+  top: 0;
   width: 100%;
+  height: 100%;
+  background-color: #cdcdcd;
+}
+.total-point-wrapper .pregress-bar .progress-bar-div .pregress-bar-default.pregress-bar-active {
+  background-color: #9f0505;
 }
 .total-point-wrapper .pregress-bar span.current-badge, .total-point-wrapper .pregress-bar span.next-badge {
   display: inline-block;
@@ -1043,7 +1031,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font: 300 16px/normal Roboto;
   text-align: center;
 }
-.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield, .page-personalization #block-formblock-ugc .node-ugc-form .form-type-select {
   display: inline-block;
   vertical-align: top;
   overflow: hidden;
@@ -1053,7 +1041,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   border: 1px solid #e0e0e0;
   border-radius: 5px;
 }
-.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield label {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield label, .page-personalization #block-formblock-ugc .node-ugc-form .form-type-select label {
   width: 150px;
   padding: 0 20px;
   font: 300 14px/36px Roboto;
@@ -1062,7 +1050,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   z-index: 99;
   position: relative;
 }
-.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield .form-text {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield .form-text, .page-personalization #block-formblock-ugc .node-ugc-form .form-type-select .form-text {
   position: absolute;
   left: 0;
   top: 0;
@@ -1072,11 +1060,16 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   padding-left: 160px;
   z-index: 9;
 }
-.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield span.error {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield span.error, .page-personalization #block-formblock-ugc .node-ugc-form .form-type-select span.error {
   position: absolute;
   right: 5px;
   top: 8px;
   z-index: 9;
+}
+.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield select, .page-personalization #block-formblock-ugc .node-ugc-form .form-type-select select {
+  margin-left: 15px;
+  margin-top: 2px;
+  border: none;
 }
 .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textarea {
   display: inline-block;
@@ -1246,11 +1239,11 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   max-width: 100%;
   margin-left: 0;
 }
-.page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response label {
-  width: 220px;
+.page-personalization #block-formblock-ugc .node-ugc-form .captcha img {
+  margin-left: 160px;
 }
-.page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response .form-text {
-  padding-left: 230px;
+.page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response label {
+  line-height: 22px;
 }
 .page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response div.description {
   display: none;
@@ -3051,6 +3044,9 @@ footer .footer-top ul li a:hover {
 #other-comment .error {
   font-size: 13px;
 }
+#other-comment .messages--status {
+  color: #fff;
+}
 
 .comment-popup-wrapper {
   background-color: rgba(0, 0, 0, 0.7);
@@ -3098,15 +3094,19 @@ footer .footer-top ul li a:hover {
 
 .comment-user-details {
   padding: 20px 0 0;
-  text-align: right;
+  text-align: left;
 }
 
 .comment-user-details > div {
   display: inline-block;
   margin-right: 7px;
   vertical-align: top;
-  width: 200px;
+  width: 208px;
   text-align: left;
+  margin-bottom: 20px;
+}
+.comment-user-details > div#user-email {
+  margin-right: 0;
 }
 .comment-user-details > div.social-login {
   text-align: right;
@@ -3365,6 +3365,77 @@ body .program-livetv.effect-added .light-on-text {
   margin-left: 0;
   bottom: 0;
   margin: auto;
+}
+
+#itg-personalization-all-content-form {
+  margin-bottom: 20px;
+}
+#itg-personalization-all-content-form h2 {
+  margin-bottom: 20px;
+}
+#itg-personalization-all-content-form .form-type-select {
+  display: inline-block;
+  vertical-align: top;
+  width: 200px;
+  text-align: left;
+  margin-right: 7px;
+}
+#itg-personalization-all-content-form .form-type-select > label {
+  display: block;
+  text-align: left;
+  padding-bottom: 5px;
+}
+#itg-personalization-all-content-form .form-type-select select {
+  width: 100%;
+}
+#itg-personalization-all-content-form .user-log-filter-btn {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 22px;
+}
+#itg-personalization-all-content-form .user-log-filter-btn .form-submit {
+  border: 1px solid #000;
+  background-color: #000;
+  color: #fff;
+  padding: 5px 20px;
+  height: 32px;
+  border-radius: 3px;
+  line-height: 22px;
+  font-family: Roboto;
+  font-size: 14px;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 10px;
+}
+
+.page-personalization-all-content table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+.page-personalization-all-content table tr {
+  border-bottom: 1px solid #e0e0e0;
+}
+.page-personalization-all-content table th, .page-personalization-all-content table td {
+  padding: 10px;
+  max-width: 300px;
+  font: 300 16px/22px Roboto;
+  text-align: left;
+}
+.page-personalization-all-content table th {
+  background-color: #1a3c8d;
+  color: #fff;
+  border-top: 1px solid #e0e0e0;
+}
+.page-personalization-all-content table th:first-child {
+  border-radius: 5px 0 0 0;
+  border-left: 1px solid #e0e0e0;
+}
+.page-personalization-all-content table th:last-child {
+  border-radius: 0 5px 0 0;
+  border-right: 1px solid #e0e0e0;
 }
 
 /* CSS To Add Zoom Effect on Images */
@@ -5180,18 +5251,50 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   background-color: #f0f0f0;
 }
 .budget-predictor-table td #sortable1, .budget-predictor-table td #sortable2, .budget-predictor-table td #sortable3, .budget-predictor-table td #sortable4 {
-  min-height: 647px;
+  min-height: 600px;
   cursor: move;
 }
 .budget-predictor-table .cheaper-deaper-action {
   text-align: center;
 }
 .budget-predictor-table .cheaper-deaper-action button {
-  padding: 5px 10px;
-  border: 1px solid #193984;
-  background-color: #193984;
-  border-radius: 3px;
+  padding: 3px 20px 1px;
+  border: 1px solid #cd070f;
+  background-color: #cd070f;
   color: #fff;
+  font-size: 28px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 36px;
+}
+
+.show-embed-code-link {
+  position: relative;
+}
+.show-embed-code-link .show-embed-code-div {
+  top: 46px;
+  position: absolute;
+  display: none;
+  width: 340px;
+  right: -75px;
+  padding-top: 10px;
+}
+.show-embed-code-link .show-embed-code-div .copy-sample-code {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  position: relative;
+}
+.show-embed-code-link .show-embed-code-div .copy-sample-code:before {
+  border-color: transparent transparent #fff transparent;
+  border-style: solid;
+  border-width: 11px;
+  content: "";
+  height: 0;
+  position: absolute;
+  top: -20px;
+  width: 0;
+  left: 230px;
 }
 
 @media all and (min-width: 768px) {
@@ -5295,18 +5398,18 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .page-personalization #block-formblock-ugc .node-ugc-form .form-field-name-field-recipe-audio .form-type-managed-file {
     margin: 20px 0;
   }
-  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield {
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield, .page-personalization #block-formblock-ugc .node-ugc-form .form-type-select {
     overflow: visible;
     margin: 20px 0 !important;
   }
-  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield label {
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield label, .page-personalization #block-formblock-ugc .node-ugc-form .form-type-select label {
     width: 115px;
     padding: 0 8px;
   }
-  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield .form-text {
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield .form-text, .page-personalization #block-formblock-ugc .node-ugc-form .form-type-select .form-text {
     padding-left: 125px;
   }
-  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield span.error {
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield span.error, .page-personalization #block-formblock-ugc .node-ugc-form .form-type-select span.error {
     right: 0;
     top: 40px;
     padding-left: 0;
@@ -5472,12 +5575,13 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
   .page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response {
     margin-top: 10px !important;
-  }
-  .page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response label {
-    width: 195px;
+    /*label{width: 195px;}*/
   }
   .page-personalization #block-formblock-ugc .node-ugc-form .captcha .form-item-captcha-response .form-text {
     padding-left: 200px;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .captcha img {
+    margin-left: 122px;
   }
   .page-personalization #block-formblock-ugc [id*="field-ugc-personalization-photo-add-more-wrapper"] > .form-item {
     margin-left: 0;
@@ -5915,6 +6019,23 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 
   .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child {
     margin-left: 175px;
+  }
+
+  [id*="views-exposed-form-front-end-global-search-page"] .form-item-sm-field-itg-common-by-line-name #autocomplete, [id*="views-exposed-form-front-end-global-search-page"] .views-widget-filter-tm_vid_4_names #autocomplete {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    display: block !important;
+    min-height: 1px;
+    margin-top: 32px;
+  }
+  [id*="views-exposed-form-front-end-global-search-page"] .form-item-sm-field-itg-common-by-line-name #autocomplete + .form-text, [id*="views-exposed-form-front-end-global-search-page"] .views-widget-filter-tm_vid_4_names #autocomplete + .form-text {
+    position: absolute;
+    top: -32px;
+    left: 0;
+  }
+  [id*="views-exposed-form-front-end-global-search-page"] .form-item-sm-field-itg-common-by-line-name #autocomplete ul li, [id*="views-exposed-form-front-end-global-search-page"] .views-widget-filter-tm_vid_4_names #autocomplete ul li {
+    padding: 5px 1px;
   }
 }
 @media all and (max-width: 767px) {

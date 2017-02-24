@@ -1,0 +1,19 @@
+name = 'Facebook instant articles'
+description = 'FB Instant articles RSS feed generator for integration into the FB IA program'
+package = Facebook
+core = 7.x
+
+dependencies[] = node
+dependencies[] = views
+dependencies[] = user
+
+files[] = views/handler/views_handler_filter_valid_fia.inc
+files[] = views/plugins/views_plugin_row_fiafields.inc
+
+
+; Information added by Drupal.org packaging script on 2016-03-14
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "facebook_instant_articles"
+datestamp = "1457942640"
+

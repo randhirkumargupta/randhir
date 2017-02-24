@@ -1669,9 +1669,9 @@ footer{
             @include font(19px,22px,$itg-font-medium);            
             color: #737373;                     
             padding-bottom: 20px;
-            display: block;
+            display: block;            
             span{
-                color: $red-color;
+                color: $red-color;              
             }
         }
         .search-menu{
@@ -2173,6 +2173,9 @@ footer{
                   }
                 }
                 .slick-current{
+                    .photo-count{
+                         background-color: rgba(0,0,0,.2);
+                    }
                     .img-wrapper{
                         border: 1px solid #ffc106;
                     }
@@ -3888,6 +3891,7 @@ h1.category-heading{
     .video-landing-header{
         background: transparent;
         padding:0;
+        margin-top: 10px;
     }
     .video-header-left{
         @include clearfix;
@@ -5117,7 +5121,7 @@ section.sidebar{
     .menu-login{
         .user-menu{
             @include pos(relative);
-            z-index: -99999;
+            z-index: 99999;
             a{
                 cursor: pointer;
                 &.user-icon{
@@ -5972,6 +5976,42 @@ section.sidebar{
                 padding: 10px;
                 font-size: 16px;
                 color: #000;
+                line-height: 22px;
+                position: relative;
+                .spncor-tag{
+                    position: absolute;
+                    right: 0;
+                    top: 50%;
+                    margin-top: -37px;
+                    background: #d1d1d1;
+                    width: 105px;
+                    height: 73px;
+                    text-align: center;
+                    &:before{
+                        width: 0;
+                        height: 0;
+                        border-bottom: 73px solid #d1d1d1;
+                        border-left: 30px solid transparent;
+                        content: '';
+                        position: absolute;
+                        left: -30px;
+                        top: 0;
+                    }
+                    span{
+                        text-transform: uppercase;
+                        font-size: 12px;
+                        margin-bottom: 4px;
+                        display: block;
+                        margin-top: 4px;
+                    }
+                    img{
+                        width: 85px;
+                        height: 33px;
+                    }
+                }
+                &.sponsors-parent{
+                    padding-right: 140px;
+                }
             }
             .listing-detail{
                 @include clearfix;
@@ -6279,6 +6319,39 @@ section.sidebar{
         }
 
     }    
+    .program-sch-sponcor{
+        text-align: right;
+        div{
+            @include display-inline;
+            position: relative;            
+            background: #d1d1d1;
+            width: 190px;
+            height: 54px;
+            line-height:54px;
+            padding-right:15px;
+            &:before{
+                width: 0;
+                height: 0;
+                border-bottom: 54px solid #d1d1d1;
+                border-left: 30px solid transparent;
+                content: '';
+                position: absolute;
+                left: -30px;
+                top: 0;
+            }
+            span{
+                margin-right: 10px;
+                text-transform: uppercase;
+                font-size: 12px;
+                font-weight: 600;
+            }
+            img{
+                width: 85px;
+                height: 33px;
+                vertical-align: middle;
+            }
+        }        
+    }
 }
 #block-menu-menu-event-menu{   
     ul{
@@ -8299,7 +8372,7 @@ section.sidebar{
         .election-topadd{
             .ad-widget{
                 margin-top: 0;
-                margin-bottom: 8px
+                margin-bottom: 4px
             }
         }
     }
@@ -9754,6 +9827,10 @@ h1.about-us-heading{
             width: 65px;
             height: 65px;
             padding-right: 0;
+            border: 1px solid #515567;
+            border-radius: 50%;
+            margin: 10px;
+            overflow: hidden;
         }
     }
     .budget-predictor-social-share{
@@ -10376,6 +10453,7 @@ span.smilies-title {
   a{    
     color: #a1a1a1;
     font-family: roboto;
+    &:hover{text-decoration: underline;}
   }
     .container{
       div.lft{
@@ -10383,10 +10461,15 @@ span.smilies-title {
     }   
   } 
 }
-.node-type-photogallery, .node-type-videogallery, .node-type-podcast, .section-videos{
+.node-type-photogallery, .node-type-videogallery, .node-type-podcast, .section-videos, .section-photo{
     #block-itg-layout-manager-front-end-breadcrumb{
         background: #171717;   
     }    
+}
+.node-type-podcast{
+    #block-itg-layout-manager-front-end-breadcrumb{
+        background: #000;   
+    }
 }
 /*css breadcrumb end*/
 iframe{
@@ -10398,9 +10481,11 @@ iframe{
     font-size: 32px;
     margin-bottom: 25px;
     color:#fff;
+    line-height: 42px;
 }
 .video-heading{
     color: #fff;    
     font-size: 24px;
     margin-bottom: 10px;
+    line-height: 34px;
 }

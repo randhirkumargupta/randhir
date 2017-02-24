@@ -309,11 +309,19 @@ function feature_smi_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['label'] = 'Category';
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
-  /* Field: Social Media Logs: node publish on */
-  $handler->display->display_options['fields']['node_publish_on']['id'] = 'node_publish_on';
-  $handler->display->display_options['fields']['node_publish_on']['table'] = 'itg_social_media_logs';
-  $handler->display->display_options['fields']['node_publish_on']['field'] = 'node_publish_on';
-  $handler->display->display_options['fields']['node_publish_on']['label'] = 'Published On';
+  /* Field: Content: Content Publish date */
+  $handler->display->display_options['fields']['field_itg_content_publish_date']['id'] = 'field_itg_content_publish_date';
+  $handler->display->display_options['fields']['field_itg_content_publish_date']['table'] = 'field_data_field_itg_content_publish_date';
+  $handler->display->display_options['fields']['field_itg_content_publish_date']['field'] = 'field_itg_content_publish_date';
+  $handler->display->display_options['fields']['field_itg_content_publish_date']['label'] = 'Published On';
+  $handler->display->display_options['fields']['field_itg_content_publish_date']['settings'] = array(
+    'format_type' => 'itg',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
@@ -324,6 +332,45 @@ function feature_smi_views_default_views() {
   $handler->display->display_options['fields']['view_node']['text'] = 'Promote';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Content Publish date (field_itg_content_publish_date) */
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['id'] = 'field_itg_content_publish_date_value';
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['table'] = 'field_data_field_itg_content_publish_date';
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['field'] = 'field_itg_content_publish_date_value';
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['operator'] = 'between';
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['expose']['operator_id'] = 'field_itg_content_publish_date_value_op';
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['expose']['label'] = 'Filter By Publish Date ';
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['expose']['operator'] = 'field_itg_content_publish_date_value_op';
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['expose']['identifier'] = 'field_itg_content_publish_date_value';
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
+  $handler->display->display_options['filters']['field_itg_content_publish_date_value']['form_type'] = 'date_popup';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
