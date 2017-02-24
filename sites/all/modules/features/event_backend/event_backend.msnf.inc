@@ -261,10 +261,8 @@ function event_backend_msnf_step_info() {
     'weight' => '1',
     'children' => array(
       0 => 'field_event_type',
-      1 => 'field_group_registration_fee_10',
-      2 => 'field_group_registration_fee_5',
-      3 => 'field_individual_registration_fe',
-      4 => 'field_no_of_tickets',
+      1 => 'field_no_of_tickets',
+      2 => 'field_ticket_group_type',
     ),
     'format_type' => 'default',
     'format_settings' => array(

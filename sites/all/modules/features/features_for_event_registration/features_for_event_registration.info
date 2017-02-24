@@ -1,8 +1,9 @@
 name = Features for Event Registration
 core = 7.x
 package = Features
-version = 7.x-1.5
+version = 7.x-1.6
 dependencies[] = date
+dependencies[] = entityreference
 dependencies[] = feature_for_mobile_services
 dependencies[] = features_for_story
 dependencies[] = field_collection

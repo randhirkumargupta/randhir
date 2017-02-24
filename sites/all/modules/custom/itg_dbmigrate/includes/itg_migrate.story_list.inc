@@ -6,7 +6,7 @@
 /**
  * ItgStoryMigration extends XMLMigration 
  */
-class ItgStoryMigration extends XMLMigration {
+class ItgStoryListMigration extends XMLMigration {
 
   public function __construct($arguments) {
     parent::__construct($arguments);
@@ -139,10 +139,15 @@ class ItgStoryMigration extends XMLMigration {
     // of an ID will be /story/item/id.
     $item_ID_xpath = 'id';
 
-    $items_class = new MigrateItemsXML($items_url, $item_xpath, $item_ID_xpath);
-    $this->source = new MigrateSourceMultiItems($items_class, $fields);
+    //$items_class = new MigrateItemsXML($items_url, $item_xpath, $item_ID_xpath);
+    //$this->source = new MigrateSourceMultiItems($items_class, $fields);
     //$this->source = new MigrateSourceXML($items_url, $item_xpath, $item_ID_xpath, $fields);
-
+    $xml_path = $file_path.'/migrate/xml_file/story';
+    $item_url = $xml_path . '/:id.xml';
+    $item_ID_xpath = 'id';
+    $this->source = new MigrateSourceList(new MigrateListXML($list_url),
+      new MigrateItemXML($item_url));
+    
     $this->destination = new MigrateDestinationNode('story');
 
     // The source ID here is the one retrieved from each data item in the XML
@@ -1028,7 +1033,7 @@ class ItgStoryMigration extends XMLMigration {
          }
       }
     }
-   drupal_set_message();
+   
   }
 }
 

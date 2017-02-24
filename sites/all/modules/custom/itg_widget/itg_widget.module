@@ -1424,21 +1424,21 @@ function itg_widget_handle_unpublished_node($nid) {
     try {
       db_delete('itg_widget_order')
           ->condition('nid', $nid)
-          //->condition('widget', 'key_candidate' ,'!=')
+          ->condition('widget', 'issue_primary_category_magazin_widget' ,'!=')
           ->execute();
     }
     catch (Exception $ex) {
-      watchdog("widget_delete", "From itg_widget_order " + $ex->getMessage());
+      //watchdog("widget_delete", "From itg_widget_order " + $ex->getMessage());
     }
     // Delete from nodequeue. As we have used nodequeue only for widgets. So we can remove from nodeid.
-    try {
-      db_delete('nodequeue_nodes')
-          ->condition('nid', $nid)
-          ->execute();
-    }
-    catch (Exception $ex) {
-      watchdog("widget_delete", "From nodequeue_nodes " + $ex->getMessage());
-    }
+//    try {
+//      db_delete('nodequeue_nodes')
+//          ->condition('nid', $nid)
+//          ->execute();
+//    }
+//    catch (Exception $ex) {
+//      //watchdog("widget_delete", "From nodequeue_nodes " + $ex->getMessage());
+//    }
   }
 }
 
