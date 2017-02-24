@@ -787,6 +787,11 @@ jQuery(document).ready(function () {
             smilyanimation('wgmf');
         }                                 
     });
+    // jQuery code to show embed code popup
+    jQuery('.show-embed-code-link').on('click', '.embed-link', function(){
+      jQuery(this).toggleClass('active');
+      jQuery(this).next('.show-embed-code-div').stop().fadeToggle();
+    });
 });
 
 //emoji animation     

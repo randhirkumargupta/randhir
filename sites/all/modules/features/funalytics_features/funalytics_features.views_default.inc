@@ -71,6 +71,8 @@ function funalytics_features_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Funalytics';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
@@ -148,6 +150,8 @@ function funalytics_features_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Funalytics';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
@@ -232,47 +236,6 @@ function funalytics_features_views_default_views() {
     26 => 0,
   );
   $handler->display->display_options['path'] = 'funalytics-draft-list';
-
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page_2');
-  $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Image */
-  $handler->display->display_options['fields']['field_itg_funalytics_image']['id'] = 'field_itg_funalytics_image';
-  $handler->display->display_options['fields']['field_itg_funalytics_image']['table'] = 'field_data_field_itg_funalytics_image';
-  $handler->display->display_options['fields']['field_itg_funalytics_image']['field'] = 'field_itg_funalytics_image';
-  $handler->display->display_options['fields']['field_itg_funalytics_image']['label'] = '';
-  $handler->display->display_options['fields']['field_itg_funalytics_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_itg_funalytics_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_itg_funalytics_image']['settings'] = array(
-    'image_style' => 'magazine_rhs_100x140',
-    'image_link' => '',
-  );
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'itg_funalytics' => 'itg_funalytics',
-  );
-  $handler->display->display_options['path'] = 'funalytics';
   $export['funalytics_list'] = $view;
 
   return $export;
