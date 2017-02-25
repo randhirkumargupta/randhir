@@ -1056,11 +1056,12 @@ else if ($widget_style == 'sport-column') {
            $nid = $entity['nid'];
           $desc = $entity['title'];
           $node_data = node_load($entity['nid']);
+         
           ?>
           <li class="trending-videos-list">
             <?php
-            if ($node_data->field_common_by_line_reporter_id['und'][0]['value'] != "") {
-              $reporter = node_load($node_data->field_common_by_line_reporter_id['und'][0]['value']);
+            if ($node_data->field_reporter_publish_id['und'][0]['value'] != "") {
+              $reporter = node_load($node_data->field_reporter_publish_id['und'][0]['value']);
               
             }
 
