@@ -26,7 +26,7 @@ global $base_url;
                             <option value="unused"><?php print t("Un Published"); ?></option>
                         </select>
                     </div>
-                    <div class="time-filter" style="display: node">
+                    <div class="time-filter" style="display: none">
                         <label><?php echo t('Time range') ?>:</label><select class="time-filter-select">
                             <option value="-all-"><?php print t("All"); ?></option>  
                             <option value="2"><?php print t("2 Hours"); ?></option>
