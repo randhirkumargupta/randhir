@@ -72,17 +72,31 @@ function features_for_event_registration_field_default_field_bases() {
       'type' => 0,
     ),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'target_id' => array(
+        0 => 'target_id',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'entityreference',
     'settings' => array(
-      'max_length' => 255,
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'city' => 'city',
+        ),
+      ),
+      'target_type' => 'taxonomy_term',
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'entityreference',
   );
 
   // Exported field_base: 'field_erf_company_name'.
@@ -351,17 +365,31 @@ function features_for_event_registration_field_default_field_bases() {
       'type' => 0,
     ),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'target_id' => array(
+        0 => 'target_id',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'entityreference',
     'settings' => array(
-      'max_length' => 255,
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'state' => 'state',
+        ),
+      ),
+      'target_type' => 'taxonomy_term',
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'entityreference',
   );
 
   // Exported field_base: 'field_erf_ticket_type'.
@@ -382,12 +410,7 @@ function features_for_event_registration_field_default_field_bases() {
     'locked' => 0,
     'module' => 'list',
     'settings' => array(
-      'allowed_values' => array(
-        499 => 'Student <b>Rs 499</b>',
-        699 => 'Young Professional <b>Rs 699</b>',
-        899 => 'Senior Citizen <b>Rs 899</b>',
-        1299 => 'Business Professional <b>Rs 1299</b>',
-      ),
+      'allowed_values' => array(),
       'allowed_values_function' => '',
     ),
     'translatable' => 0,
@@ -429,22 +452,31 @@ function features_for_event_registration_field_default_field_bases() {
       'type' => 0,
     ),
     'indexes' => array(
-      'tid' => array(
-        0 => 'tid',
+      'target_id' => array(
+        0 => 'target_id',
       ),
     ),
     'locked' => 0,
-    'module' => 'taxonomy',
+    'module' => 'entityreference',
     'settings' => array(
-      'allowed_values' => array(
-        0 => array(
-          'vocabulary' => 'country',
-          'parent' => 0,
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'country' => 'country',
         ),
       ),
+      'target_type' => 'taxonomy_term',
     ),
     'translatable' => 0,
-    'type' => 'taxonomy_term_reference',
+    'type' => 'entityreference',
   );
 
   // Exported field_base: 'field_event_name_title'.

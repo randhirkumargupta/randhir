@@ -164,6 +164,21 @@ function event_backend_image_default_styles() {
     ),
   );
 
+  // Exported image style: sponsor85___33.
+  $styles['sponsor85___33'] = array(
+    'label' => 'sponsor85 * 33',
+    'effects' => array(
+      16 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 85,
+          'height' => 33,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   return $styles;
 }
 

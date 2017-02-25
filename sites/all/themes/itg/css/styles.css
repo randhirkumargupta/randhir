@@ -343,11 +343,15 @@ p {
   word-wrap: break-word;
 }
 
+#main {
+  min-height: 500px;
+}
+
 /*start header css*/
 header {
   margin-bottom: 30px;
   position: relative;
-  z-index: 99999;
+  z-index: 9999;
 }
 
 #block-itg-layout-manager-header-block {
@@ -1708,9 +1712,9 @@ footer .multiple-items-footer i.slick-next {
 }
 .featured-news .featured-post a {
   display: block;
-}
-.featured-news .featured-post a img {
-  margin-bottom: 10px;
+  /*            img{
+                  margin-bottom: 10px;
+              }*/
 }
 .featured-news .featured-post a:hover {
   color: #193984;
@@ -7490,6 +7494,9 @@ section.sidebar .block-itg-ads {
   float: left;
   margin-right: 15px;
 }
+.oscar-layout-page .oscar-features .col-md-6 p {
+  overflow: hidden;
+}
 .oscar-layout-page .oscar-news a {
   display: block;
 }
@@ -12255,6 +12262,7 @@ h1.about-us-heading + div p {
 /*magzine lock icon end*/
 /*other comment section start*/
 #content #other-comment {
+  margin-top: 40px;
   /*        #comments .comment-form .form-actions{
               padding-left: 0;
           }*/
@@ -12442,7 +12450,7 @@ h1.about-us-heading + div p {
 span.smilies-title {
   width: auto;
   height: auto;
-  display: inline-block;
+  display: inline !important;
   vertical-align: middle;
   float: none !important;
   margin: 0 !important;
@@ -12451,8 +12459,9 @@ span.smilies-title {
 span.smilies-title img {
   display: inline;
   max-width: inherit;
-  width: auto;
+  width: auto !important;
   margin: 0 !important;
+  float: none !important;
 }
 
 /* css for story-photo-list starts here */

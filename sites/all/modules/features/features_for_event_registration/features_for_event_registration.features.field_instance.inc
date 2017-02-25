@@ -57,10 +57,12 @@ function features_for_event_registration_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 13,
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 22,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -70,16 +72,17 @@ function features_for_event_registration_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
+      'module' => 'entityreference',
       'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
         'size' => 60,
       ),
-      'type' => 'text_textfield',
+      'type' => 'entityreference_autocomplete',
       'weight' => 8,
     ),
   );
@@ -339,7 +342,7 @@ function features_for_event_registration_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'field_erf_name',
     'label' => 'Name',
     'required' => 1,
@@ -406,10 +409,12 @@ function features_for_event_registration_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 14,
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 23,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -419,16 +424,17 @@ function features_for_event_registration_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
+      'module' => 'entityreference',
       'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
         'size' => 60,
       ),
-      'type' => 'text_textfield',
+      'type' => 'entityreference_autocomplete',
       'weight' => 9,
     ),
   );
@@ -477,10 +483,12 @@ function features_for_event_registration_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 20,
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 24,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -494,9 +502,13 @@ function features_for_event_registration_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
       'weight' => 10,
     ),
   );
@@ -518,10 +530,10 @@ function features_for_event_registration_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'field_event_name_title',
     'label' => 'Title',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
