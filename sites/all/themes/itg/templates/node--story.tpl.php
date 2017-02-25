@@ -255,10 +255,7 @@ if (!empty($content)):
               <!-- For buzzfeed section start -->
                           <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_listicle[LANGUAGE_NONE])) { ?>                       
                 <div class="buzzfeed-byline">
-                    <div class="byline"><?php
-                            $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
-                            $reporter_node = node_load($byline_id);
-                            ?>
+                    <div class="byline">
                         <div class="profile-pic">
                             <?php
                             $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
