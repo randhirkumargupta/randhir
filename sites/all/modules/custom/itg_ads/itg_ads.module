@@ -1011,14 +1011,7 @@ function get_header_body_start_end_code() {
  * @return array $form;
  */
 
-function itg_ads_after_build($form, &$form_state) {
-  if (empty($form['#node']->nid)) {
-    drupal_add_js('jQuery(document).ready(function() {
-                          jQuery("#edit-field-ads-headerscript-und-0-remove-button").hide();
-                          jQuery("#edit-field-ads-body-start-und-0-remove-button").hide();
-                          jQuery("#edit-field-ads-body-close-und-0-remove-button").hide();
-       });', array('type' => 'inline', 'scope' => 'footer'));
-  }
+function itg_ads_after_build($form, &$form_state) {  
   drupal_add_js(drupal_get_path('module', 'itg_ads') . '/js/itg_ads.js', array('weight' => 1, 'scope' => 'footer'));
   return $form;
 }
