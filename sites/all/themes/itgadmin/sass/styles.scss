@@ -3338,8 +3338,12 @@ fieldset#edit-select{
     padding: 0;
     .filefield-sources-list{
       color: #fff;
-      @extend .dib;
-      @extend .full;
+      float: right;
+      margin-top: 5px;
+      width: auto;
+      a.filefield-source.filefield-source-upload{
+        display: none;
+      }
       a.filefield-source.filefield-source-plupload{
         width: auto;
         float: right;
@@ -3350,6 +3354,7 @@ fieldset#edit-select{
       a.filefield-source.filefield-source-imce{
         visibility: hidden;
       }
+      & + .form-file{margin-top: 5px;}
     }
     div.filefield-source{
 
@@ -10610,6 +10615,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
 }
 #views-form-poll-widget-poll-widget-format, 
 #views-form-issue-base-magazin-widget-issue-base-magazin-widget, 
+#views-form-supplement-base-magazin-widget-supplement-base-magazin-widget,
 #views-form-category-of-stroy-base-magazin-widget-issue-category-magazin-widget{
   p{margin-top: 20px;}
   .form-actions{
