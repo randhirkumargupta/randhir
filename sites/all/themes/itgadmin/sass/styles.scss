@@ -1056,9 +1056,9 @@ div.vertical-tabs {
     }
   }
 }
-.generate-image{
+.generate-image, .generate-image-error{
   @extend .pos-rel;
-  display: none;
+  display: none !important;
 }
 .img-crt{
   margin-left: 250px;
@@ -8939,7 +8939,7 @@ div.node{
   .form-field-name-field-common-audio, 
   .form-field-name-field-common-audio-file{@extend .hide;}
 }
-.node-videogallery-form, .node-photogallery-form, .node-story-form{
+.node-videogallery-form, .node-photogallery-form, .node-story-form, .node-breaking_news-form{
   .browse-media-file{
     .itg-form-section{
       height: 250px;
@@ -10556,6 +10556,9 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     @extend .dib;
     @extend .full;
     @extend .vtop;
+    padding: 10px;
+    background: #efefef;
+    margin: 0 0 10px;
     .field{
       padding: 10px 0;
       border-top: 1px solid #ddd;
