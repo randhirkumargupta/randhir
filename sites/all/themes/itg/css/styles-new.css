@@ -3475,7 +3475,7 @@ body .program-livetv.effect-added .light-on-text {
   .may-we-suggest > a,
   .watch-right-now-list > a,
   .recom-listing .pic a,
-  .section-ordering > a {
+  .section-ordering > a, .view-category-wise-content-list .pic, .view-blog-listing .pic, .page-podcasts-listing .view-podcasts-listing .pic {
     overflow: hidden;
     display: block;
   }
@@ -3489,7 +3489,7 @@ body .program-livetv.effect-added .light-on-text {
   .may-we-suggest > a img,
   .watch-right-now-list > a img,
   .recom-listing .pic a img,
-  .section-ordering > a img {
+  .section-ordering > a img, .view-category-wise-content-list .pic img, .view-blog-listing .pic img, .page-podcasts-listing .view-podcasts-listing .pic img {
     transition: all 500ms ease 0s;
   }
   .zoom-image img:hover, #block-itg-front-end-common-related-photo-block #related-photo ul li a img:hover,
@@ -3502,7 +3502,7 @@ body .program-livetv.effect-added .light-on-text {
   .may-we-suggest > a img:hover,
   .watch-right-now-list > a img:hover,
   .recom-listing .pic a img:hover,
-  .section-ordering > a img:hover {
+  .section-ordering > a img:hover, .view-category-wise-content-list .pic img:hover, .view-blog-listing .pic img:hover, .page-podcasts-listing .view-podcasts-listing .pic img:hover {
     transform: scale(1.2);
   }
 
@@ -5306,8 +5306,6 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 }
 .show-embed-code-link .show-embed-code-div .copy-sample-code {
   background-color: #fff;
-  border-radius: 5px;
-  padding: 20px;
   position: relative;
 }
 .show-embed-code-link .show-embed-code-div .copy-sample-code:before {
@@ -5320,6 +5318,13 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   top: -20px;
   width: 0;
   left: 230px;
+}
+.show-embed-code-link .show-embed-code-div .copy-sample-code textarea {
+  border: 1px solid #fff;
+  min-height: 100px;
+  padding: 10px;
+  resize: none;
+  width: 100%;
 }
 
 .view-front-funalytics-list #funalytics_popup_display {
