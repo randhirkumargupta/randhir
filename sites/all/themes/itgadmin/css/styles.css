@@ -2372,7 +2372,7 @@ div.image-widget-data .ajax-progress-throbber {
 }
 .view .view-filters .views-exposed-form .views-widget-filter-title #autocomplete, .view .view-filters .views-exposed-form .views-widget-filter-name #autocomplete {
   width: auto !important;
-  max-width: 400px;
+  max-width: 1170px;
   min-width: 100%;
   max-height: 400px;
   overflow-y: auto;
@@ -11182,4 +11182,8 @@ span.file a {
 }
 [id*="field-ticket-group-type-values"] + div.clearfix .ajax-progress {
   display: none;
+}
+
+.my-stats-status {
+  border-bottom: 1px solid #ddd;
 }

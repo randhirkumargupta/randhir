@@ -1776,7 +1776,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
         width: 380px;
         #autocomplete{
           width: auto !important;
-          max-width: 400px;
+          max-width: 1170px;
           min-width: 100%;
           max-height: 400px;
           overflow-y: auto;
@@ -10643,4 +10643,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       display: none;
     }
   }
+}
+.my-stats-status{
+  border-bottom: 1px solid #ddd;
 }
