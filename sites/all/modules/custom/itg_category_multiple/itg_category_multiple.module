@@ -280,7 +280,7 @@ function itg_category_multiple_hierarchy($category_id) {
       $people = $con->taxonomy_term_data_mongo;
       $query = array();
       if (is_array($query) && empty($query)) {
-        $category_data = $people->find(array("parent" => array('$in' => $tids)));
+        $category_data = $people->find(array("parent" => array('$in' => $category_id)));
         foreach ($category_data as $chunk_data) {
           
         }
