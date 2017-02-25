@@ -843,8 +843,8 @@ else if ($widget_style == 'home-watch') {
             ?>
             <li class="dont-miss-listing">
               <?php
-              if ((!empty($entity['si_file_uri']) && isset($entity['si_file_uri']))) {
-                $extra_large_image_url = image_style_url("widget_very_small", $entity['si_file_uri']);
+              if ((!empty($entity['si_file_uri']) && file_exists($entity['si_file_uri']))) {
+                $extra_large_image_url = image_style_url("image170x127", $entity['si_file_uri']);
               }
               else {
                 $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg";
