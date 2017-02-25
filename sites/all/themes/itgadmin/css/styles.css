@@ -382,7 +382,7 @@ img {
 .page-admin-people form .field-type-image .image-widget-data,
 .page-user form .field-type-image .image-widget-data,
 .node-newsletter_templates-form .field-type-image .image-widget-data,
-.node-mega_review_critic-form .field-type-image .image-widget-data, #taxonomy-form-term .field-type-image .image-widget-data, .node-loyalty_and_rewards-form .field-type-image .image-widget-data, #main, .header, .header .container, .form-type-autocomplete-deluxe div.autocomplete-deluxe-container, .form-type-password, div.form-type-password-confirm, div.vertical-tabs, .form-type-textfield, .form-field-type-taxonomy-term-reference, .form-type-select, .form-type-checkboxes, .form-type-radios, .form-type-textarea, .form-type-managed-file, .form-type-managed-file .filefield-source, .generate-image, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .image-widget-data, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .path-form .fieldset-wrapper, .form-type-plupload, #block-menu-menu-admin-left-menu, #block-menu-menu-admin-left-menu > .menu > li, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded > a, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded, .breadcrumb ol li, .user-role, .user-role a, .dashboard-tab li, .field-name-field-story-reporter, .form-field-name-field-story-reporter, .form-field-name-field-task-task-idea, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), .form-field-name-field-quiz-add-questions, .node-ads_management-form .form-field-name-field-ads-headerscript,
+.node-mega_review_critic-form .field-type-image .image-widget-data, #taxonomy-form-term .field-type-image .image-widget-data, .node-loyalty_and_rewards-form .field-type-image .image-widget-data, #main, .header, .header .container, .form-type-autocomplete-deluxe div.autocomplete-deluxe-container, .form-type-password, div.form-type-password-confirm, div.vertical-tabs, .form-type-textfield, .form-field-type-taxonomy-term-reference, .form-type-select, .form-type-checkboxes, .form-type-radios, .form-type-textarea, .form-type-managed-file, .form-type-managed-file .filefield-source, .generate-image, .generate-image-error, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .image-widget-data, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .path-form .fieldset-wrapper, .form-type-plupload, #block-menu-menu-admin-left-menu, #block-menu-menu-admin-left-menu > .menu > li, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded > a, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded, .breadcrumb ol li, .user-role, .user-role a, .dashboard-tab li, .field-name-field-story-reporter, .form-field-name-field-story-reporter, .form-field-name-field-task-task-idea, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), .form-field-name-field-quiz-add-questions, .node-ads_management-form .form-field-name-field-ads-headerscript,
 .node-ads_management-form .form-field-name-field-ads-body-start,
 .node-ads_management-form .form-field-name-field-ads-ad-code,
 .node-ads_management-form .form-field-name-field-ads-header-script,
@@ -1658,8 +1658,8 @@ div.vertical-tabs .form-textarea-wrapper {
   cursor: pointer;
 }
 
-.generate-image {
-  display: none;
+.generate-image, .generate-image-error {
+  display: none !important;
 }
 
 .img-crt {
@@ -2372,6 +2372,7 @@ div.image-widget-data .ajax-progress-throbber {
 }
 .view .view-filters .views-exposed-form .views-widget-filter-title #autocomplete, .view .view-filters .views-exposed-form .views-widget-filter-name #autocomplete {
   width: auto !important;
+  max-width: 1170px;
   min-width: 100%;
   max-height: 400px;
   overflow-y: auto;
@@ -9428,81 +9429,81 @@ div.node #comments h2 {
   padding: 1px 5px 0 0 !important;
 }
 
-.node-videogallery-form .browse-media-file .itg-form-section, .node-photogallery-form .browse-media-file .itg-form-section, .node-story-form .browse-media-file .itg-form-section {
+.node-videogallery-form .browse-media-file .itg-form-section, .node-photogallery-form .browse-media-file .itg-form-section, .node-story-form .browse-media-file .itg-form-section, .node-breaking_news-form .browse-media-file .itg-form-section {
   height: 250px;
   position: relative;
 }
-.node-videogallery-form .browse-media-file .itg-form-section > .generate-image, .node-photogallery-form .browse-media-file .itg-form-section > .generate-image, .node-story-form .browse-media-file .itg-form-section > .generate-image {
+.node-videogallery-form .browse-media-file .itg-form-section > .generate-image, .node-photogallery-form .browse-media-file .itg-form-section > .generate-image, .node-story-form .browse-media-file .itg-form-section > .generate-image, .node-breaking_news-form .browse-media-file .itg-form-section > .generate-image {
   position: absolute;
   left: 15px;
   bottom: 40px;
   z-index: 10;
 }
-.node-videogallery-form .browse-media-file .itg-form-section > .generate-image .img-crt, .node-photogallery-form .browse-media-file .itg-form-section > .generate-image .img-crt, .node-story-form .browse-media-file .itg-form-section > .generate-image .img-crt {
+.node-videogallery-form .browse-media-file .itg-form-section > .generate-image .img-crt, .node-photogallery-form .browse-media-file .itg-form-section > .generate-image .img-crt, .node-story-form .browse-media-file .itg-form-section > .generate-image .img-crt, .node-breaking_news-form .browse-media-file .itg-form-section > .generate-image .img-crt {
   margin: 0;
 }
-.node-videogallery-form .browse-media-file .itg-form-section > .generate-image .img-crt + .pre-desc, .node-photogallery-form .browse-media-file .itg-form-section > .generate-image .img-crt + .pre-desc, .node-story-form .browse-media-file .itg-form-section > .generate-image .img-crt + .pre-desc {
+.node-videogallery-form .browse-media-file .itg-form-section > .generate-image .img-crt + .pre-desc, .node-photogallery-form .browse-media-file .itg-form-section > .generate-image .img-crt + .pre-desc, .node-story-form .browse-media-file .itg-form-section > .generate-image .img-crt + .pre-desc, .node-breaking_news-form .browse-media-file .itg-form-section > .generate-image .img-crt + .pre-desc {
   left: 155px;
   width: 225px;
 }
-.node-videogallery-form .browse-media-file .itg-form-section > .generate-image + .generate-image-error, .node-photogallery-form .browse-media-file .itg-form-section > .generate-image + .generate-image-error, .node-story-form .browse-media-file .itg-form-section > .generate-image + .generate-image-error {
+.node-videogallery-form .browse-media-file .itg-form-section > .generate-image + .generate-image-error, .node-photogallery-form .browse-media-file .itg-form-section > .generate-image + .generate-image-error, .node-story-form .browse-media-file .itg-form-section > .generate-image + .generate-image-error, .node-breaking_news-form .browse-media-file .itg-form-section > .generate-image + .generate-image-error {
   bottom: 15px;
   left: 0;
   padding: 0 15px;
   position: absolute;
   width: 100%;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image, .node-photogallery-form .browse-media-file .form-field-type-image, .node-story-form .browse-media-file .form-field-type-image {
+.node-videogallery-form .browse-media-file .form-field-type-image, .node-photogallery-form .browse-media-file .form-field-type-image, .node-story-form .browse-media-file .form-field-type-image, .node-breaking_news-form .browse-media-file .form-field-type-image {
   display: inline-block;
   margin-left: -3px;
   padding: 15px 0 0 15px;
   vertical-align: top;
   width: 150px;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image, .node-photogallery-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image, .node-story-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image {
+.node-videogallery-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image, .node-photogallery-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image, .node-story-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image, .node-breaking_news-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image {
   margin-left: 0;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .image-widget-data, .node-photogallery-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .image-widget-data, .node-story-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .image-widget-data {
+.node-videogallery-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .image-widget-data, .node-photogallery-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .image-widget-data, .node-story-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .image-widget-data, .node-breaking_news-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .image-widget-data {
   float: none !important;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data, .node-photogallery-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data, .node-story-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data {
+.node-videogallery-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data, .node-photogallery-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data, .node-story-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data, .node-breaking_news-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data {
   position: static !important;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-photogallery-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-story-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"] {
+.node-videogallery-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-photogallery-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-story-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-breaking_news-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"] {
   left: 114px !important;
   width: 20px;
   height: 20px;
   background: url(../images/cross_small.png) center center no-repeat;
   text-indent: -9999px;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file {
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file, .node-breaking_news-form .browse-media-file .form-field-type-image .form-type-managed-file {
   margin: 0;
   padding: 0;
   position: relative;
   border: 1px solid #d9d9d9;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent {
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent, .node-breaking_news-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent {
   height: 132px;
   overflow: hidden;
   background-color: #fff;
   transition: all .3s;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent:hover, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent:hover, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent:hover {
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent:hover, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent:hover, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent:hover, .node-breaking_news-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent:hover {
   box-shadow: 0 0 10px #888;
   height: 244px !important;
   transform: scale(1.1);
 }
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data {
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data, .node-breaking_news-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data {
   position: static !important;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"] {
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-breaking_news-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"] {
   left: 114px !important;
   width: 20px;
   height: 20px;
   background: url(../images/cross_small.png) center center no-repeat;
   text-indent: -9999px;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file > label, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file > label, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file > label {
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file > label, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file > label, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file > label, .node-breaking_news-form .browse-media-file .form-field-type-image .form-type-managed-file > label {
   background-color: #dedede;
   display: block;
   float: none;
@@ -9511,18 +9512,18 @@ div.node #comments h2 {
   width: 100%;
   padding: 5px;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file {
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file, .node-breaking_news-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file {
   padding: 5px;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview {
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview, .node-breaking_news-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview {
   float: none;
   padding: 0;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview img, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview img, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview img {
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview img, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview img, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview img, .node-breaking_news-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview img {
   width: 100%;
   height: 92px;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview .image-fullname, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview .image-fullname, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview .image-fullname {
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview .image-fullname, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview .image-fullname, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview .image-fullname, .node-breaking_news-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview .image-fullname {
   color: #ababab;
   font-size: 12px;
   margin: 0;
@@ -9533,16 +9534,16 @@ div.node #comments h2 {
   pointer-events: none;
   width: 100%;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview .image-fullname a, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview .image-fullname a, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview .image-fullname a {
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview .image-fullname a, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview .image-fullname a, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview .image-fullname a, .node-breaking_news-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview .image-fullname a {
   color: #2f2f2f;
   display: block;
   text-decoration: none;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data {
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data, .node-breaking_news-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data {
   height: 100px;
   float: none  !important;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse {
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse, .node-breaking_news-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse {
   background: url(../images/default_for_all.png) no-repeat left top/100% auto;
   color: #0c8bb1;
   font-size: 12px;
@@ -9550,23 +9551,23 @@ div.node #comments h2 {
   text-align: center;
   text-transform: uppercase;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse:after, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse:after, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse:after {
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse:after, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse:after, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse:after, .node-breaking_news-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse:after {
   display: none;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-type-textfield, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-type-textfield, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-type-textfield {
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-type-textfield, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-type-textfield, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-type-textfield, .node-breaking_news-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-type-textfield {
   padding: 0;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-type-textfield .form-text, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-type-textfield .form-text, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-type-textfield .form-text {
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-type-textfield .form-text, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-type-textfield .form-text, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-type-textfield .form-text, .node-breaking_news-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-type-textfield .form-text {
   font-size: 12px;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-submit[value="Remove"] {
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-breaking_news-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-submit[value="Remove"] {
   left: 114px;
   width: 20px;
   height: 20px;
   background: url(../images/cross_small.png) center center no-repeat;
   text-indent: -9999px;
 }
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file + div.description, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file + div.description, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file + div.description {
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file + div.description, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file + div.description, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file + div.description, .node-breaking_news-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file + div.description {
   left: 145px !important;
 }
 
@@ -11098,6 +11099,11 @@ span.file a {
   padding: 10px;
 }
 
+.node-heighlights-div .field-group {
+  padding: 10px;
+  background: #efefef;
+  margin: 0 0 10px;
+}
 .node-heighlights-div .field-group .field {
   padding: 10px 0;
   border-top: 1px solid #ddd;
@@ -11181,4 +11187,8 @@ span.file a {
 }
 [id*="field-ticket-group-type-values"] + div.clearfix .ajax-progress {
   display: none;
+}
+
+.my-stats-status {
+  border-bottom: 1px solid #ddd;
 }

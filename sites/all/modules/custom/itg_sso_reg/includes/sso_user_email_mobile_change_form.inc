@@ -71,7 +71,7 @@ function itg_sso_user_email_step_1_form($form, &$form_state, $unique_id) {
   );
   
   $form['emobile'] = array(
-    '#title' => ucfirst(arg(1)),
+    '#title' => t('Email/Mobile'),
     '#description' => '',
     '#type' => 'textfield',
     '#required' => TRUE,

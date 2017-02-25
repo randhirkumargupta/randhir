@@ -206,6 +206,7 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
       $form['actions']['submit']['#submit'][] = 'itg_story_form_custom_callback';
       drupal_add_js(array('itg_common' => array('base_url' => $base_url)), 'setting');
       drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.emoji.js', 'file');
+      $form['field_emoji_2']['und'][0]['#format'] = 'emoji';
       $form['field_emoji']['und'][0]['#format'] = 'emoji';
       // hide remove button of field collection if there is only single instance of it within the form
       if (isset($form['field_photo_story']['und']['#max_delta']) && isset($form['your_field']['und']['#max_delta']) && $form['your_field']['und']['#max_delta'] == 0) {
