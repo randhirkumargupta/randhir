@@ -8832,6 +8832,18 @@ div.node{
         @extend .astrick;
     }
   }
+  .form-field-name-field-emoji-position{
+    .form-checkboxes{
+      .form-type-checkbox{
+        @extend .fleft;
+        margin-right: 20px;
+        .form-checkbox{
+          @extend .fleft;
+          margin: 3px;
+        }
+      }
+    }
+  }
   .form-field-name-field-story-technology{
     margin: 0 10px;   
     [id*="field-story-technology-values"]{
@@ -10085,11 +10097,11 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     margin-top:44px;
   }
 }
-.form-field-name-field-emoji{
+.form-field-name-field-emoji, .form-field-name-field-emoji-2{
   width: 572px;
   @extend .dib;
   @extend .vtop;
-  .ckeditor_links{display: none;}
+  .ckeditor_links{display: none !important;}
   .cke_top{
     height: 34px !important;
     overflow: visible;
@@ -10097,6 +10109,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   }
   .cke_contents{
     padding: 5px;
+    min-height: 30px;
   }
   .cke_bottom{
     display: none;
