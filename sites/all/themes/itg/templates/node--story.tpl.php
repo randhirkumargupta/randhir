@@ -137,10 +137,11 @@ if (!empty($content)):
           }
           $clidk_class_slider = "";
           $widget_data = '';
-          if ($associate_type != "") {
+          if ($associate_type != "" && $associate_id !="") {
             $clidk_class_slider = 'associate-content-block';
             $widget_data = $associate_type . '-' . $associate_id;
           }
+          
           ?>
   <!--           <a href="javascript:void(0)" class="associate-content-block" data-widget="<?php //echo $associate_type; ?>-<?php // echo $associate_id; ?>">click here</a>-->            
           <div class="story-left-section">
@@ -343,13 +344,16 @@ if (!empty($content)):
   }
   ?>">
                   <?php
-                  if(!empty($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'])) {
+                  $associate_lead = $node->field_story_associate_lead[LANGUAGE_NONE][0]['value'];
+                  $associate_photo = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
+                  $associate_video = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
+                  if(!empty($associate_lead) && !empty($associate_photo) && !empty($associate_video)) {
                       $class = 'story-associate-content';
-                  }
+                  } 
                   ?>
                   <div class="<?php echo $class; ?>">
                       <?php
-                  if(!empty($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'])) {?>
+                  if(!empty($associate_lead) && !empty($associate_video)) {?>
                     <div id="videogallery-iframe">
                           <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading" />
                       </div>
@@ -358,18 +362,30 @@ if (!empty($content)):
                       <?php
                       $clidk_class_slider = "";
                       $widget_data = '';
-                      if ($associate_type != "") {
+                      if ($associate_type != "" && $associate_id !="") {
                         $clidk_class_slider = 'associate-content-block';
                         $widget_data = $associate_type . '-' . $associate_id;
                       }
-
                       if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
                         // imgtags" img-fid="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];" use for image tagging
                         ?>
                         <div class="stryimg" ><?php
+                        if(empty($widget_data)){
+                          $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                            if(file_exists($story_image)) {
+                              $file_uri = file_create_url($story_image);
+                            } else {
+                              $file_uri =  $base_url. '/sites/all/themes/itg/images/itg_image647x363.jpg';
+                            }
+                          print '<img  alt="" title="" src="' . $file_uri . '">';
+                        } else {
                         $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                         $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
-                        $file_uri = file_create_url($story_image);
+                        if(file_exists($story_image)){
+                          $file_uri = file_create_url($story_image);
+                        } else {
+                          $file_uri =  $base_url. '/sites/all/themes/itg/images/itg_image647x363.jpg';
+                        }
                         print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">';
                         ?>        
 
@@ -378,7 +394,7 @@ if (!empty($content)):
                             <?php }
                             else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') { ?>                    
                               <i class="fa fa-camera"></i>
-                            <?php } print '</span></a>' ?>
+                            <?php } print '</span></a>'; } ?>
 
                             <?php
                             if (!empty($getimagetags)) {
