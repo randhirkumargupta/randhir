@@ -20,15 +20,6 @@ function feature_for_sport_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'create sport_static_page content on assigned domains'.
-  $permissions['create sport_static_page content on assigned domains'] = array(
-    'name' => 'create sport_static_page content on assigned domains',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'domain',
-  );
-
   // Exported permission: 'delete any sport_static_page content'.
   $permissions['delete any sport_static_page content'] = array(
     'name' => 'delete any sport_static_page content',
@@ -49,15 +40,6 @@ function feature_for_sport_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'delete sport_static_page content on assigned domains'.
-  $permissions['delete sport_static_page content on assigned domains'] = array(
-    'name' => 'delete sport_static_page content on assigned domains',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'domain',
-  );
-
   // Exported permission: 'edit any sport_static_page content'.
   $permissions['edit any sport_static_page content'] = array(
     'name' => 'edit any sport_static_page content',
@@ -76,15 +58,6 @@ function feature_for_sport_user_default_permissions() {
       'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',
-  );
-
-  // Exported permission: 'update sport_static_page content on assigned domains'.
-  $permissions['update sport_static_page content on assigned domains'] = array(
-    'name' => 'update sport_static_page content on assigned domains',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'domain',
   );
 
   return $permissions;
