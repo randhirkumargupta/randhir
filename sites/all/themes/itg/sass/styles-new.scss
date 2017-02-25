@@ -35,7 +35,7 @@ input[type="file"], input[type="submit"], input[type="text"]{
                 color:#b7b7b7;
             }
         }
-        #edit-tm-vid-4-names-wrapper, #edit-sm-field-itg-common-by-line-name-wrapper, #edit-bundle-name-wrapper, #edit-hash-wrapper{
+        [class*="views-widget-filter-tm_vid"], #edit-sm-field-itg-common-by-line-name-wrapper, #edit-bundle-name-wrapper, #edit-hash-wrapper{
             position: relative;
             padding-top:13px;
             > label{
@@ -2660,6 +2660,9 @@ body.has-cart-popup{
             vertical-align: middle;
             margin: 15px;
             color: #333;
+            &:hover{
+                color:#193984;
+            }
         }
         .form-submit{
           background-color: #000 !important;
@@ -2681,6 +2684,9 @@ body.has-cart-popup{
             float: right;
             color: #a6a6a6;
           }
+          a:hover{
+              color:#193984;
+          }
         }
         .form-text{width: 100%; height: 42px; font: 400 14px/normal Roboto;}
         div.description{
@@ -2701,14 +2707,15 @@ body.has-cart-popup{
       display: inline-block;
       vertical-align: top;
       width: 100%;
+      text-align: center;
       a{
-        border-radius: 5px;
-        float: left;
+        border-radius: 5px;        
         height: 50px;
         color: #fff;
         padding: 0 15px 0 55px;
         overflow: hidden;
         font: 400 16px/48px Roboto;
+        @include display-inline;
         & + a{
           margin-left: 10px;
         }
@@ -3291,7 +3298,7 @@ body{
       border: 1px solid #000;
       background-color: #000;
       color: #fff;
-      padding: 5px 20px;
+      padding: 0px 20px;
       height: 32px;
       border-radius: 3px;
       line-height: 22px;
@@ -3300,6 +3307,9 @@ body{
       display: inline-block;
       vertical-align: top;
       margin-right: 10px;
+      &.user-log-reset{
+          padding-top:4px;
+      }
     }
   }
 }

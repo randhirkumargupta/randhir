@@ -2236,10 +2236,6 @@
               height: 100%;
           }
       }*/
-  .page-user .social-share a {
-    padding: 0 10px 0 45px;
-  }
-
   /*CSS Starts Photo landing page*/
   .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li, .view-programme-content-live-tv .view-content .photo-list li {
     width: 33.33333%;
@@ -2529,7 +2525,7 @@
     border-left: 1px solid #dddddd;
   }
   .story-section .buzzfeed-byline .byline .profile-detail {
-    width: 50%;
+    width: 49%;
   }
   .story-section .buzzfeed-byline .social-share-story {
     float: right;

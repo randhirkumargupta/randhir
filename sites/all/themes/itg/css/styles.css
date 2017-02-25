@@ -1585,6 +1585,10 @@ footer .multiple-items-footer i.slick-next {
   color: #fff;
 }
 
+.big-news .featured-post .smilies-title {
+  display: inline-block !important;
+}
+
 @-webkit-keyframes blinker {
   from {
     opacity: 1.0;
@@ -2271,6 +2275,24 @@ footer .multiple-items-footer i.slick-next {
 }
 .story-section .comment-mobile ul li a i {
   font-size: 16px;
+}
+.story-section .comment-mobile ul li a.unflag-action {
+  position: relative;
+  font-family: FontAwesome;
+  pointer-events: none;
+}
+.story-section .comment-mobile ul li a.unflag-action:after {
+  content: "\f00c";
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  font-size: 11px;
+  margin-left: 0;
+  color: #474747;
+  margin-top: 0;
+}
+.story-section .comment-mobile ul li a.unflag-action span {
+  font-family: "Roboto", sans-serif;
 }
 .story-section .comment-mobile ul.social-share {
   display: none;
@@ -2965,6 +2987,22 @@ footer .multiple-items-footer i.slick-next {
   display: block;
   font-size: 11px;
   font-size: 0.6875rem;
+  font-family: "Roboto", sans-serif;
+}
+.story-section .buzzfeed-byline .social-share-story li a.unflag-action {
+  position: relative;
+  font-family: FontAwesome;
+  pointer-events: none;
+}
+.story-section .buzzfeed-byline .social-share-story li a.unflag-action:after {
+  content: "\f00c";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  font-size: 11px;
+  margin-left: -6px;
+  color: #474747;
+  margin-top: -2px;
 }
 .story-section .story-associate-content {
   zoom: 1;
@@ -3250,8 +3288,6 @@ footer .multiple-items-footer i.slick-next {
 }
 .buzz-feedback .buzz-section {
   margin: 60px 0;
-  padding-left: 15px;
-  padding-right: 15px;
 }
 .buzz-feedback .buzz-section > * {
   margin-bottom: 15px;
@@ -3345,6 +3381,9 @@ footer .multiple-items-footer i.slick-next {
 }
 .buzz-feedback .comment-mobile li.mail-to-author {
   display: none;
+}
+.buzz-feedback .story-left-section .buzzfeed-byline, .buzz-feedback .story-left-section .story-right {
+  padding: 0;
 }
 
 .related-story-page {
@@ -12647,10 +12686,11 @@ span.smilies-title img {
 }
 
 /*css breadcrumb end*/
-iframe[id*="twitter-widget"] {
-  width: 100% !important;
-}
-
+/*iframe{
+  &[id*="twitter-widget"]{
+    width: 100% !important;
+  }
+}*/
 .photo-heading {
   font-size: 32px;
   margin-bottom: 25px;

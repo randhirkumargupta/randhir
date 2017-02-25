@@ -67,14 +67,14 @@ input[type="file"], input[type="submit"], input[type="text"] {
   /* Standard syntax */
   color: #b7b7b7;
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper {
+[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form [class*="views-widget-filter-tm_vid"], [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper {
   position: relative;
   padding-top: 13px;
   /*            &:hover{
                   .views-widget{display: block;}
               }*/
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper > label {
+[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form [class*="views-widget-filter-tm_vid"] > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper > label {
   display: block;
   font-size: 14px;
   font-weight: normal;
@@ -82,7 +82,7 @@ input[type="file"], input[type="submit"], input[type="text"] {
   position: relative;
   text-transform: uppercase;
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper > label:after, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper > label:after, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper > label:after, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper > label:after {
+[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form [class*="views-widget-filter-tm_vid"] > label:after, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper > label:after, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper > label:after, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper > label:after {
   content: '';
   width: 0;
   height: 0;
@@ -93,7 +93,7 @@ input[type="file"], input[type="submit"], input[type="text"] {
   right: 5px;
   top: 7px;
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper .views-widget {
+[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form [class*="views-widget-filter-tm_vid"] .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper .views-widget {
   display: none;
   position: absolute;
   left: 0;
@@ -2725,6 +2725,9 @@ body.has-cart-popup {
   margin: 15px;
   color: #333;
 }
+.page-user form .forgot-link:hover {
+  color: #193984;
+}
 .page-user form .form-submit {
   background-color: #000 !important;
   border: 1px solid #000 !important;
@@ -2746,6 +2749,9 @@ body.has-cart-popup {
   float: right;
   color: #a6a6a6;
 }
+.page-user form .bottom-link a:hover {
+  color: #193984;
+}
 .page-user form .form-text {
   width: 100%;
   height: 42px;
@@ -2766,15 +2772,17 @@ body.has-cart-popup {
   display: inline-block;
   vertical-align: top;
   width: 100%;
+  text-align: center;
 }
 .page-user .social-share a {
   border-radius: 5px;
-  float: left;
   height: 50px;
   color: #fff;
   padding: 0 15px 0 55px;
   overflow: hidden;
   font: 400 16px/48px Roboto;
+  display: inline-block;
+  vertical-align: top;
 }
 .page-user .social-share a + a {
   margin-left: 10px;
@@ -3397,7 +3405,7 @@ body .program-livetv.effect-added .light-on-text {
   border: 1px solid #000;
   background-color: #000;
   color: #fff;
-  padding: 5px 20px;
+  padding: 0px 20px;
   height: 32px;
   border-radius: 3px;
   line-height: 22px;
@@ -3406,6 +3414,9 @@ body .program-livetv.effect-added .light-on-text {
   display: inline-block;
   vertical-align: top;
   margin-right: 10px;
+}
+#itg-personalization-all-content-form .user-log-filter-btn .form-submit.user-log-reset {
+  padding-top: 4px;
 }
 
 .page-personalization-all-content table {
@@ -3423,6 +3434,7 @@ body .program-livetv.effect-added .light-on-text {
   max-width: 300px;
   font: 300 16px/22px Roboto;
   text-align: left;
+  word-wrap: break-word;
 }
 .page-personalization-all-content table th {
   background-color: #1a3c8d;
