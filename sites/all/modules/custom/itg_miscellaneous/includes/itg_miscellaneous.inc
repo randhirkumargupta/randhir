@@ -181,7 +181,7 @@ function create_section_cat_op($data, &$context) {
     // check connection
     if ($con) {
       $qry = array(
-          "tid" => $data->tid,
+          "tid" => (int)$data->tid,
           "name" => $data->name,
           "parent" => $data->parent,
       );
