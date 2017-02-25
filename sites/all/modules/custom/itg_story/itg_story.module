@@ -836,13 +836,13 @@ function itg_story_photo_story_html($node_id) {
     $html .= '<div class="photo-story-img multiple-photo-disc">';
     foreach ($photo_story as $key => $val) {
       if ($key == 0 && !empty($previous)) {
-        $previous_link = "<a href='" . $previous . "'>Previous</a>";
+        $previous_link = "<a class='fa fa-chevron-left prev-story-link' href='" . $previous . "'></a>";
       }
       else {
         $previous_link = "";
       }
       if ($key == $next_link_count && !empty($next)) {
-        $next_link = "<a href='" . $next . "'>next</a>";
+        $next_link = "<a class='fa fa-chevron-right next-story-link' href='" . $next . "'></a>";
       }
       else {
         $next_link = "";

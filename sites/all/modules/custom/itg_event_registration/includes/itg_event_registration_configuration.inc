@@ -66,16 +66,3 @@ function itg_event_registration_default_value($e_nid, $type) {
   }
   return $rel;
 }
-
-/**
- * Implement function for return vocab id.
- * @param str $vocab_name
- * @return
- */
-function itg_event_registration_vocab_id($vocab_name) {
-  $query = db_select('taxonomy_vocabulary', 'tv');
-  $query->fields('tv', array('vid'));
-  $query->condition('tv.machine_name', $vocab_name, '=');
-  $result = $query->execute()->fetchField();
-  return $result;
-}

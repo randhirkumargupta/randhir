@@ -178,13 +178,13 @@ jQuery(document).ready(function () {
                 // case for read later
                     if (obj.success == '1' && obj.activity == 'read_later') {
                         if (obj.type == 'photogallery') {
-                            jQuery('.later').html('<a href="javascript:void(0)" title="save" class="def-cur-pointer active"><i class="fa fa-bookmark"></i></a>');
+                            jQuery('.later').html('<a href="javascript:void(0)" title="save" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i></a>');
                         }
                         if (obj.type == 'videogallery') {
                             jQuery('.later').html('<a title = "Save" href="javascript:" class="def-cur-pointer active"><i class="fa fa-clock-o"></i><span>Watch Later</span><span class="video-msg"></span></a>');
                         }
                         if (obj.type == 'story') {
-                            jQuery('.later').html('<a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><span>READ LATER</span></a>');
+                            jQuery('.later').html('<a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i><span>READ LATER</span></a>');
                             jQuery('.left-later').html('<span> <a title = "Read Later" class="def-cur-pointer active"><i class="fa fa-bookmark"></i>READ LATER</a><span class="flag-throbber">&nbsp;</span></span>');
                         }
                         jQuery('.stryimg').prepend('<div class="saved-photogallery">Saved</div>');

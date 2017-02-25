@@ -5372,7 +5372,7 @@ function features_for_story_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_type',
     'label' => 'Story type',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,

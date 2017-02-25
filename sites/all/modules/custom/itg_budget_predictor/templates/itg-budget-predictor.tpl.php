@@ -54,7 +54,7 @@ $user_id = $data['user_id'];
             <td class="ranking-content bp-items">
               <ul id="sortable4" class="connectedSortable">
                 <?php echo $column4; ?>
-                <div id="loader-data"><img class="widget-loader" style="display: none" src="<?php echo base_path(); ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
+                <div id="loader-data"><img class="widget-loader" style="display: none" src="<?php echo base_path(); ?>sites/all/themes/itg/images/tab-loading.gif" alt="Loading..." /></div>
               </ul>
               <?php
                   if ($budget_message_flag) {

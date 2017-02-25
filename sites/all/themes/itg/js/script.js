@@ -167,7 +167,7 @@
 
             //search page result
             var winWidth;
-            $(".view-front-end-global-search").find("#edit-tm-vid-4-names-wrapper, #edit-sm-field-itg-common-by-line-name-wrapper, #edit-bundle-name-wrapper, #edit-hash-wrapper, .views-submit-button, .views-reset-button").wrapAll("<div class='searh-all-filters'></div>");
+            $(".view-front-end-global-search").find("#edit-tm-vid-14-names-wrapper, #edit-tm-vid-4-names-wrapper, #edit-sm-field-itg-common-by-line-name-wrapper, #edit-bundle-name-wrapper, #edit-hash-wrapper, .views-submit-button, .views-reset-button").wrapAll("<div class='searh-all-filters'></div>");
             $('.itg-search-list').each(function () {
                 $(this).find('.search-pic').each(function () {
                     var current = $(this);
@@ -552,7 +552,7 @@ jQuery(document).ready(function () {
     //social share animation effects   
     jQuery('.social-share ul').each(function () {
         jQuery(this).children().not(":first").hide();
-    })
+    });
     jQuery('.social-share li').click(function () {
         jQuery(this).find('.share').parent('li').nextAll('li').toggle();
     });

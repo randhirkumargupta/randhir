@@ -73,7 +73,7 @@ if (!empty($content)):
                                             <?php }
                                             else
                                             { ?>
-                                              <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
+                                              <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
                                             <?php
                                             }
                                           }
@@ -214,7 +214,7 @@ if (!empty($content)):
                                             <?php }
                                             else
                                             { ?>
-                                  <li><span> <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><?php print t('READ LATER'); ?></a><span class="flag-throbber">&nbsp;</span></span></li>
+                                  <li><span> <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i><?php print t('READ LATER'); ?></a><span class="flag-throbber">&nbsp;</span></span></li>
                                             <?php
                                             }
                                           }

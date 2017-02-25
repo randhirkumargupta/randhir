@@ -1,4 +1,5 @@
 <?php
+global $base_url;
 // configuration for social sharing
 $photo_node = node_load(arg(1));
 $f_collection = entity_load('field_collection_item', array($photo_node->field_gallery_image[LANGUAGE_NONE][0]['value']));
@@ -32,7 +33,16 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                   <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
                   <div class="show-embed-code-div">
                     <div class="copy-sample-code">
-                      Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum 
+                     <textarea readonly="true">
+                      <div id='IndiaToday_gallery' data-type='LOCAL'></div>
+                          <script src='<?php print $base_url;?>/sites/all/themes/itg/js/photo_iframeResizer.js'>
+                          </script>
+                          <script> 
+                          <?php 
+                           echo "iFrameResize({galleryid: $photo_node->nid})";
+                          ?>
+                          </script>
+                      </textarea>  
                     </div>
                   </div>
                 </li>
@@ -52,7 +62,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                                             <?php }
                                             else
                                             { ?>
-                                          <li><a title = "Save" href="javascript:" class="def-cur-pointer active"><i class="fa fa-bookmark"></i></a></li>
+                                          <li><a title = "Save" href="javascript:" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i></a></li>
                                             <?php
                                             }
                                           }
@@ -153,7 +163,16 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                   <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
                   <div class="show-embed-code-div">
                     <div class="copy-sample-code">
-                      Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum 
+                        <textarea readonly="true">
+                      <div id='IndiaToday_gallery' data-type='LOCAL'></div>
+                          <script src='<?php print $base_url;?>/sites/all/themes/itg/js/photo_iframeResizer.js'>
+                          </script>
+                          <script> 
+                          <?php 
+                           echo "iFrameResize({galleryid: $photo_node->nid})";
+                          ?>
+                          </script>
+                      </textarea>
                     </div>
                   </div>
                 </li>
@@ -178,7 +197,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                                             <?php }
                                             else
                                             { ?>
-                                          <li><a title = "Save" href="javascript:" class="def-cur-pointer active"><i class="fa fa-bookmark"></i></a></li>
+                                          <li><a title = "Save" href="javascript:" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i></a></li>
                                             <?php
                                             }
                                           }
