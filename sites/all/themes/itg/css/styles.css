@@ -1585,7 +1585,7 @@ footer .multiple-items-footer i.slick-next {
   color: #fff;
 }
 
-.big-news .featured-post .smilies-title {
+.big-news .smilies-title, .featured-post .smilies-title {
   display: inline-block !important;
 }
 

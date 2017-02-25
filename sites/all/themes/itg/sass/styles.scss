@@ -1403,12 +1403,10 @@ footer{
         margin: 10px 0 0 10px;
     }    
 }
-.big-news{
-    .featured-post{
-        .smilies-title{
-            display:inline-block !important;
-        }
-    }   
+.big-news, .featured-post{    
+    .smilies-title{
+        display:inline-block !important;
+    }    
 }
 
 @-webkit-keyframes blinker { from {opacity:1.0;} to {opacity:0.0;} }
