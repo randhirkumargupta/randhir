@@ -34,7 +34,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                   <div class="show-embed-code-div">
                     <div class="copy-sample-code">
                      <textarea readonly="true">
-                      <div id='IndiaToday_gallery' data-type='LOCAL'></div>
+                      <div id='IndiaToday_gallery' data-type='UAT'></div>
                           <script src='<?php print $base_url;?>/sites/all/themes/itg/js/photo_iframeResizer.js'>
                           </script>
                           <script> 
@@ -74,7 +74,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                                             }
                                           }    ?>
                   <?php if($user->uid > 0): ?>
-                  <li><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/personalization/my-content/<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
+                  <li><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i></a></li>
                   <?php else: ?>
                   <li><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                   <?php endif; ?>
@@ -164,7 +164,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                   <div class="show-embed-code-div">
                     <div class="copy-sample-code">
                         <textarea readonly="true">
-                      <div id='IndiaToday_gallery' data-type='LOCAL'></div>
+                      <div id='IndiaToday_gallery' data-type='UAT'></div>
                           <script src='<?php print $base_url;?>/sites/all/themes/itg/js/photo_iframeResizer.js'>
                           </script>
                           <script> 

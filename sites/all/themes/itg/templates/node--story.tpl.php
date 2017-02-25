@@ -255,10 +255,7 @@ if (!empty($content)):
               <!-- For buzzfeed section start -->
                           <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_listicle[LANGUAGE_NONE])) { ?>                       
                 <div class="buzzfeed-byline">
-                    <div class="byline"><?php
-                            $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
-                            $reporter_node = node_load($byline_id);
-                            ?>
+                    <div class="byline">
                         <div class="profile-pic">
                             <?php
                             $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
@@ -761,7 +758,7 @@ if (!empty($content)):
                   <div class="social-list">
                       <ul>
                                       <?php if ($user->uid > 0): ?>
-                            <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer" href="<?php print $base_url; ?>/personalization/my-content/<?php print $node->type; ?>"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
+                            <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
                           <?php else: ?>
                             <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $node->type; ?>"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
                           <?php endif; ?>
