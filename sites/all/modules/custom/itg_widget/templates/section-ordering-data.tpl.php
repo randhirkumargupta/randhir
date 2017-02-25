@@ -1289,8 +1289,8 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
             $video_class = 'video-icon';
           }
           if ($count == 0 && (!empty($entity['mi_file_uri']) && isset($entity['mi_file_uri']))) {
-            //$extra_large_image_url = image_style_url("section_ordering_widget", $entity->field_story_extra_large_image['und'][0]['uri']);
-            $extra_large_image_url = file_create_url($entity['mi_file_uri']);
+            $extra_large_image_url = image_style_url("section_ordering_widget", $entity['mi_file_uri']);
+            //$extra_large_image_url = file_create_url($entity['mi_file_uri']);
           }
           ?>
           <?php if ($count == 0) : ?>
