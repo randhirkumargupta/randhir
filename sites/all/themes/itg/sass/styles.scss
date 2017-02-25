@@ -235,11 +235,14 @@ input[type="text"], select, input[type="password"]{
 p{
     word-wrap: break-word;
 }
+#main{
+    min-height: 500px;
+}
 /*start header css*/
 header{
     margin-bottom: 30px;
     position: relative;
-    z-index: 99999;
+    z-index: 9999;
 }
 #block-itg-layout-manager-header-block{    
     padding-top: 20px;
@@ -1436,9 +1439,9 @@ footer{
         padding:5px;
          a{
             display: block;
-            img{
+/*            img{
                 margin-bottom: 10px;
-            }
+            }*/
             &:hover{
                 color:$blue-color;
             }
@@ -5759,6 +5762,9 @@ section.sidebar{
                 @include display-inline;
                 float: left;
                 margin-right: 15px;
+            }
+            p{
+                overflow: hidden;
             }
 
         }
@@ -10156,6 +10162,7 @@ h1.about-us-heading{
 /*other comment section start*/
 #content{    
     #other-comment{
+        margin-top:40px;
         #comments .comment-form fieldset.captcha{
             margin: 10px 0 30px 0;
         }
@@ -10335,7 +10342,7 @@ h1.about-us-heading{
 span.smilies-title {
     width: auto;
     height: auto;
-    display: inline-block;
+    display: inline !important;
     vertical-align: middle;   
     float: none !important;
     margin: 0 !important;
@@ -10343,8 +10350,9 @@ span.smilies-title {
     img{
         display: inline;
         max-width: inherit;
-        width: auto;
+        width: auto !important;
         margin: 0 !important;
+        float: none !important;
     }
 }
 

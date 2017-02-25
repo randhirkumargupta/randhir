@@ -1,4 +1,5 @@
 <?php if (!empty($data)) : global $base_url; ?>
+<?php if(isset($data[0])) : ?>
   <div class="featured-news">
     <div class="featured-post featured-post-first">
       <?php if (!empty($data[0]['li_file_uri'])) : ?>
@@ -17,7 +18,7 @@
         <h2 class="home-page-feature-<?php echo $data[0]['nid'] ?>">
           <?php
           if (function_exists('itg_common_get_smiley_title')) {
-            echo l(itg_common_get_smiley_title($data[0]['nid'], 0, 90), "node/" . $data[0]['nid'], array('html' => TRUE));
+            echo l(itg_common_get_smiley_title($data[0]['nid'], 0, 80), "node/" . $data[0]['nid'], array('html' => TRUE));
           }
           else {
             echo l(mb_strimwidth($data[0]['title'], 0, 90, ".."), "node/" . $data[0]['nid']);
@@ -26,7 +27,8 @@
         </h2>   
       <?php endif; ?>
     </div>
-
+ <?php endif; ?>     
+<?php if(isset($data[1])) : ?>
     <div class="featured-post">
       <?php if (!empty($data[1]['mi_file_uri'])) : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[1]['nid']); ?>">
@@ -41,7 +43,7 @@
         <h3 class="home-page-feature-small-<?php echo $data[1]['nid'] ?>">
           <?php
           if (function_exists('itg_common_get_smiley_title')) {
-            echo l(itg_common_get_smiley_title($data[1]['nid'], 0, 150), "node/" . $data[1]['nid'], array('html' => TRUE));
+            echo l(itg_common_get_smiley_title($data[1]['nid'], 0, 70), "node/" . $data[1]['nid'], array('html' => TRUE));
           }
           else {
             echo l(mb_strimwidth($data[1]['title'], 0, 90, ".."), "node/" . $data[1]['nid']);
@@ -50,7 +52,8 @@
         </h3>   
       <?php endif; ?>
     </div>
-
+ <?php endif; ?>     
+    <?php if(isset($data[2])) : ?>
     <div class="featured-post">
       <?php if (!empty($data[2]['mi_file_uri'])) : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[2]['nid']); ?>">
@@ -65,7 +68,7 @@
         <h3 class="home-page-feature-small-<?php echo $data[2]['nid'] ?>">
           <?php
           if (function_exists('itg_common_get_smiley_title')) {
-            echo l(itg_common_get_smiley_title($data[2]['nid'], 0, 150), "node/" . $data[2]['nid'], array('html' => TRUE));
+            echo l(itg_common_get_smiley_title($data[2]['nid'], 0, 70), "node/" . $data[2]['nid'], array('html' => TRUE));
           }
           else {
             echo l(mb_strimwidth($data[2]['title'], 0, 90, ".."), "node/" . $data[2]['nid']);
@@ -74,7 +77,7 @@
         </h3>    
       <?php endif; ?>
     </div>
-
+      <?php endif; ?>
   </div>
 <?php else : ?>
   <span class="no-result-found"><?php print t("Content Not Found") ?></span>
