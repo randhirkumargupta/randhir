@@ -572,7 +572,7 @@ function _personalization_show_content() {
         $opt = itg_get_front_activity_info($value['nid'], $value['ntype'], $user->uid, 'read_later', $status = '');
       }
 
-      if (!empty($value['image']))
+      if (!empty($value['image']) && file_exists($value['image']))
       {
         $file = $value['image'];
         $type_image = theme('image_style', array('style_name' => 'anchors_landing', 'path' => $value['image'], 'alt' => $value['image']));
