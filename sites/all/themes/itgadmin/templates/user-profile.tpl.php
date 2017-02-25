@@ -243,11 +243,11 @@ foreach($user->roles as $key=>$value) {
   if($key != 2) {
 $user_check = itg_common_check_role_access($key);
   }
-if($user_check){
-$routput = "<tr><td>Role</td>
-        <td>$comma_role_arr</td>
-                        </tr>"; 
-}
+//if($user_check){
+//$routput = "<tr><td>Role</td>
+//        <td>$comma_role_arr</td>
+//                        </tr>"; 
+//}
 }
 
 $output .= $routput."</table>";
