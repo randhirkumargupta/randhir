@@ -25,10 +25,33 @@ function itg_users_cms_user_dashboard() {
       }
     }
   }
-
+  // Loyalty & Rewards not found
   $menu_link = array_diff($menu_link, $remove_menu_link);
-  $data['user_link'] = $menu_link;
-  
+  $listed_menu_link = array(
+      'mydraft-story' => 'Story',
+      'mydraft-photogallery' => 'Photogallery',
+      'mydraft-video' => 'Videogallery',
+      'breaking-news' => 'Breaking News',
+      'category-manager-listing' => 'Category Management',
+      'manage-users' => 'User Management',
+      'manage-magazines' => 'Magazine',
+      'manage-supplements' => 'Supplement',
+      'manage-issues' => 'Issue',
+      'manage-newsletter-templates' => 'Template Management',
+      'movie-review-draft-list' => 'Mega Review',
+      'manage-ads' => 'Ads',
+      'manage-poll' => 'Poll',
+      'manage-survey' => 'Survey',
+      'manage-quiz' => 'Quiz',
+      'manage-newsletter' => 'Newsletter',
+      'manage-event-backend' => 'Events',
+      'menu-manager/second' => 'Menu manager',
+      'live-tv-integration' => 'Live tv Integration',
+      'ugc-inqueue-content' => 'Manage UGC',
+      'tv' => 'Upload Tv Schedule',
+      'mydraft-blogs' => 'Blogs',
+      'report/filed-content' => 'CMS Report');
+  $data['user_link'] = array_intersect($menu_link, $listed_menu_link);
   return theme('cms_user_dashboard', array('data' => $data));
 }
 
