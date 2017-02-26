@@ -8,7 +8,7 @@
  * callback for cms user dashboard  
  */
 function itg_users_cms_user_dashboard() {
-  $data = '';
+  global $user;
   // Code for User menu on dashboard
 
   // $remove_menu_link = array('manage-poll' => 'Poll', 'manage-survey' => 'Survey');
@@ -27,7 +27,7 @@ function itg_users_cms_user_dashboard() {
   }
   // Loyalty & Rewards not found
   $menu_link = array_diff($menu_link, $remove_menu_link);
-  $listed_menu_link = array(
+  $listed_menu_link_editor = array(
       'mydraft-story' => 'Story',
       'mydraft-photogallery' => 'Photogallery',
       'mydraft-video' => 'Videogallery',
@@ -46,12 +46,45 @@ function itg_users_cms_user_dashboard() {
       'manage-newsletter' => 'Newsletter',
       'manage-event-backend' => 'Events',
       'menu-manager/second' => 'Menu manager',
-      'live-tv-integration' => 'Live tv Integration',
+      'live-tv-integration' => 'Live TV Integration',
       'ugc-inqueue-content' => 'Manage UGC',
-      'tv' => 'Upload Tv Schedule',
+      'tv' => 'Upload TV Schedule',
       'mydraft-blogs' => 'Blogs',
       'report/filed-content' => 'CMS Report');
-  $data['user_link'] = array_intersect($menu_link, $listed_menu_link);
+  
+   $listed_menu_link_site_admin = array(
+      'mydraft-story' => 'Story',
+      'mydraft-photogallery' => 'Photogallery',
+      'mydraft-video' => 'Videogallery',
+      'breaking-news' => 'Breaking News',
+      'category-manager-listing' => 'Category Management',
+      'manage-users' => 'User Management',
+      'manage-magazines' => 'Magazine',
+      'manage-supplements' => 'Supplement',
+      'manage-issues' => 'Issue',
+      'manage-newsletter-templates' => 'Template Management',
+      'movie-review-draft-list' => 'Mega Review',
+      'manage-ads' => 'Ads',
+      'manage-poll' => 'Poll',
+      'manage-survey' => 'Survey',
+      'manage-quiz' => 'Quiz',
+      'manage-newsletter' => 'Newsletter',
+      'manage-event-backend' => 'Events',
+      'menu-manager/second' => 'Menu manager',
+      'live-tv-integration' => 'Live TV Integration',
+      'ugc-inqueue-content' => 'Manage UGC',
+      'tv' => 'Upload TV Schedule',
+      'admin/loyalty/lrp-manage-items' => 'Loyalty & Rewards',
+      'mydraft-blogs' => 'Blogs',
+      'report/filed-content' => 'CMS Report');
+
+  if (in_array("Editor", $user->roles)) {
+    $data['user_link'] = $listed_menu_link_editor;
+  } else if(in_array("Site Admin", $user->roles)) {
+    $data['user_link'] = $listed_menu_link_site_admin;
+  } else {
+    $data['user_link'] = $menu_link;
+  }
   return theme('cms_user_dashboard', array('data' => $data));
 }
 
