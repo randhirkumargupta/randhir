@@ -12,6 +12,7 @@ body{
     color: #333;   
 }
 h1, h2, h3, h4{@include itg-font($itg-roboto,$itg-font-medium);}
+button{outline: none;}
 h1{    
         font-size: $h1-font-size;
         line-height: $h1-line-height;
