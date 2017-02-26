@@ -1679,7 +1679,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   @extend .fright;
   line-height: 50px;
   font-weight: 300;
-  color: #8e8e8e;
+  color: #fff;
   a{
     @extend .pos-rel;
     color: #8e8e8e;
@@ -4270,8 +4270,15 @@ div.node{
     position: absolute;
   }
   .form-field-name-field-featured{
+    .form-type-checkboxes{
+      > label{
+        float: left;
+        margin-right: 10px;
+        width: auto;
+      }
+    }
     .form-type-checkboxes .form-checkboxes + div.description{
-      left: 280px;
+      left: 180px;
     }
   }
   #BrowseMedia{
@@ -8066,7 +8073,7 @@ div.node{
       position: absolute;
       right: 15px;
     }
-    a.ckeditor_links{margin-left: 0;}
+    a.ckeditor_links{margin-left: 20px;}
   }
   #Templates{
     table{
@@ -8871,6 +8878,12 @@ div.node{
     }
   }
   .form-field-name-field-emoji-position{
+    @extend .dib;
+    @extend .full;
+    @extend .vtop;
+    .form-type-checkboxes{
+      margin: 0;
+    }
     .form-checkboxes{
       .form-type-checkbox{
         @extend .fleft;
@@ -9143,7 +9156,7 @@ div.node{
     }
   }
 }
-.node-photogallery-form .form-field-name-field-featured .form-type-checkboxes .form-checkboxes + div.description{left: 145px;}
+
 [id*="views-form-photo-gallery-management-page"]{
   @extend .confirmation;
   .form-type-checkboxes > label{
@@ -9498,7 +9511,7 @@ div.node{
         position: absolute;
         right: 38px;
       }
-      .form-type-textarea, .form-type-textfield, .form-type-radios{
+      .form-type-textarea, .form-type-textfield, .form-type-radios, .form-type-checkboxes{
         padding: 0 10px;
       }
     }
