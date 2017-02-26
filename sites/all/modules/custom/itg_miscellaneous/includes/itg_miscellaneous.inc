@@ -142,10 +142,12 @@ function create_section_category_in_mongo_submit($form, &$form_state) {
 
   $query = db_select('taxonomy_term_data', 'td');
   $query->leftJoin('taxonomy_term_hierarchy', 'th', 'th.tid = td.tid');
+  $query->leftJoin('taxonomy_vocabulary','tv','tv.vid=td.vid');
   $result = $query
           ->condition('td.vid', CATEGORY_MANAGMENT)
-          ->fields('td', array('tid', 'name'))
+          ->fields('td', array('tid', 'name','vid'))
           ->fields('th', array('parent'))
+          ->fields('tv', array('machine_name'))
           ->execute();
 
 
@@ -184,6 +186,9 @@ function create_section_cat_op($data, &$context) {
           "tid" => (int)$data->tid,
           "name" => $data->name,
           "parent" => $data->parent,
+          "vid" => $data->vid,
+          "machine_name" => $data->machine_name,
+          'parent_data'=>taxonomy_get_parents_all($data->tid),
       );
       $result = $people->insert($qry);
     }

@@ -16,6 +16,7 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'story_node_form':
 
+      //p(itg_category_complete_hierarchy(3000));
       $sections = itg_category_multiple_get_section();
 
       $options_category = array();
@@ -209,6 +210,12 @@ function itg_category_multiple_menu() {
       'type' => MENU_CALLBACK,
   );
 
+  $items['itg-category-primary-category'] = array(
+      'page callback' => 'itg_category_primary_category',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+  );
+
   return $items;
 }
 
@@ -274,18 +281,65 @@ function get_categoryies_by_tid($tids) {
  * This function will return complete hierarchy which will be further used in primary category.
  */
 function itg_category_multiple_hierarchy($category_id) {
+
   if (function_exists('mongodb')) {
     $con = mongodb($alias);  // Made mongo db connection
     if ($con) {
       $people = $con->taxonomy_term_data_mongo;
       $query = array();
+
       if (is_array($query) && empty($query)) {
-        $category_data = $people->find(array("parent" => array('$in' => $category_id)));
+        $category_data = $people->find(array("tid" => (int) $category_id));
         foreach ($category_data as $chunk_data) {
-          
+          $data = $chunk_data;
         }
+
+        return $data;
       }
     }
   }
 }
 
+/**
+ * Implements itg_category_complete_hierarchy() 
+ * Getting complete hierarchy.
+ */
+function itg_category_complete_hierarchy($category_id) {
+  $data_label = array();
+  if (empty($category_id)) {
+    return NULL;
+  }
+  $data = itg_category_multiple_hierarchy($category_id);
+  if (isset($data['parent']) && !empty($data['parent'])) {
+    $data_label[] = $data['name'];
+    if (isset($data['parent']) && !empty($data['parent']) && $data['parent'] != 0) {
+      $data = itg_category_multiple_hierarchy($data['parent']);
+      $data_label[] = $data['name'];
+      if (isset($data['parent']) && !empty($data['parent']) && $data['parent'] != 0) {
+        $data = itg_category_multiple_hierarchy($data['parent']);
+        $data_label[] = $data['name'];
+        if (isset($data['parent']) && !empty($data['parent']) && $data['parent'] != 0) {
+          $data = itg_category_multiple_hierarchy($data['parent']);
+          $data_label[] = $data['name'];
+          if (isset($data['parent']) && !empty($data['parent']) && $data['parent'] != 0) {
+            $data = itg_category_multiple_hierarchy($data['parent']);
+            $data_label[] = $data['name'];
+          }
+        }
+      }
+    }
+  }
+
+  return isset($data_label) ? implode('=>', $data_label) : '';
+}
+
+function itg_category_primary_category($category_id) {
+  $main_data = $_POST['data'];
+  $actual_render = array();
+  $html = '';
+  foreach ($main_data as $values) {
+    $option_label = itg_category_complete_hierarchy($values);
+    $html.='<option value="' . $values . '">' . $option_label . '</option>';
+  }
+  print $html;
+}
