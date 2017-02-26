@@ -8455,7 +8455,7 @@ div.node #comments h2 {
 .node-story-form [id*="field-story-template-buzz-values"] a.ckeditor_links,
 .node-videogallery-form [id*="field-story-template-buzz-values"] a.ckeditor_links,
 .node-photogallery-form [id*="field-story-template-buzz-values"] a.ckeditor_links {
-  margin-left: 0;
+  margin-left: 20px;
 }
 .node-story-form #Templates table,
 .node-videogallery-form #Templates table,
@@ -9975,7 +9975,7 @@ div.node #comments h2 {
   position: absolute;
   right: 38px;
 }
-.node-story-form [id*="field-story-listicle-values"] tbody tr td:nth-child(2) .form-type-textarea, .node-story-form [id*="field-story-listicle-values"] tbody tr td:nth-child(2) .form-type-textfield, .node-story-form [id*="field-story-listicle-values"] tbody tr td:nth-child(2) .form-type-radios {
+.node-story-form [id*="field-story-listicle-values"] tbody tr td:nth-child(2) .form-type-textarea, .node-story-form [id*="field-story-listicle-values"] tbody tr td:nth-child(2) .form-type-textfield, .node-story-form [id*="field-story-listicle-values"] tbody tr td:nth-child(2) .form-type-radios, .node-story-form [id*="field-story-listicle-values"] tbody tr td:nth-child(2) .form-type-checkboxes {
   padding: 0 10px;
 }
 

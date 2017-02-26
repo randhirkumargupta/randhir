@@ -8066,7 +8066,7 @@ div.node{
       position: absolute;
       right: 15px;
     }
-    a.ckeditor_links{margin-left: 0;}
+    a.ckeditor_links{margin-left: 20px;}
   }
   #Templates{
     table{
@@ -9498,7 +9498,7 @@ div.node{
         position: absolute;
         right: 38px;
       }
-      .form-type-textarea, .form-type-textfield, .form-type-radios{
+      .form-type-textarea, .form-type-textfield, .form-type-radios, .form-type-checkboxes{
         padding: 0 10px;
       }
     }
