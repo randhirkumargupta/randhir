@@ -2957,7 +2957,6 @@
   #block-views-video-landing-header-block .video-header-left .social-likes {
     float: left;
     width: 15.5%;
-    overflow: hidden;
     padding: 0;
     border-bottom: none;
     margin-bottom: 0;
