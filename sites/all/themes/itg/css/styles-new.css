@@ -67,14 +67,14 @@ input[type="file"], input[type="submit"], input[type="text"] {
   /* Standard syntax */
   color: #b7b7b7;
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper {
+[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form [class*="views-widget-filter-tm_vid"], [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper {
   position: relative;
   padding-top: 13px;
   /*            &:hover{
                   .views-widget{display: block;}
               }*/
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper > label {
+[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form [class*="views-widget-filter-tm_vid"] > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper > label {
   display: block;
   font-size: 14px;
   font-weight: normal;
@@ -82,7 +82,7 @@ input[type="file"], input[type="submit"], input[type="text"] {
   position: relative;
   text-transform: uppercase;
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper > label:after, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper > label:after, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper > label:after, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper > label:after {
+[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form [class*="views-widget-filter-tm_vid"] > label:after, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper > label:after, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper > label:after, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper > label:after {
   content: '';
   width: 0;
   height: 0;
@@ -93,7 +93,7 @@ input[type="file"], input[type="submit"], input[type="text"] {
   right: 5px;
   top: 7px;
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper .views-widget {
+[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form [class*="views-widget-filter-tm_vid"] .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper .views-widget {
   display: none;
   position: absolute;
   left: 0;
@@ -2725,6 +2725,9 @@ body.has-cart-popup {
   margin: 15px;
   color: #333;
 }
+.page-user form .forgot-link:hover {
+  color: #193984;
+}
 .page-user form .form-submit {
   background-color: #000 !important;
   border: 1px solid #000 !important;
@@ -2746,6 +2749,9 @@ body.has-cart-popup {
   float: right;
   color: #a6a6a6;
 }
+.page-user form .bottom-link a:hover {
+  color: #193984;
+}
 .page-user form .form-text {
   width: 100%;
   height: 42px;
@@ -2766,15 +2772,17 @@ body.has-cart-popup {
   display: inline-block;
   vertical-align: top;
   width: 100%;
+  text-align: center;
 }
 .page-user .social-share a {
   border-radius: 5px;
-  float: left;
   height: 50px;
   color: #fff;
   padding: 0 15px 0 55px;
   overflow: hidden;
   font: 400 16px/48px Roboto;
+  display: inline-block;
+  vertical-align: top;
 }
 .page-user .social-share a + a {
   margin-left: 10px;
@@ -3397,7 +3405,7 @@ body .program-livetv.effect-added .light-on-text {
   border: 1px solid #000;
   background-color: #000;
   color: #fff;
-  padding: 5px 20px;
+  padding: 0px 20px;
   height: 32px;
   border-radius: 3px;
   line-height: 22px;
@@ -3406,6 +3414,9 @@ body .program-livetv.effect-added .light-on-text {
   display: inline-block;
   vertical-align: top;
   margin-right: 10px;
+}
+#itg-personalization-all-content-form .user-log-filter-btn .form-submit.user-log-reset {
+  padding-top: 4px;
 }
 
 .page-personalization-all-content table {
@@ -3423,6 +3434,7 @@ body .program-livetv.effect-added .light-on-text {
   max-width: 300px;
   font: 300 16px/22px Roboto;
   text-align: left;
+  word-wrap: break-word;
 }
 .page-personalization-all-content table th {
   background-color: #1a3c8d;
@@ -3463,7 +3475,7 @@ body .program-livetv.effect-added .light-on-text {
   .may-we-suggest > a,
   .watch-right-now-list > a,
   .recom-listing .pic a,
-  .section-ordering > a {
+  .section-ordering > a, .view-category-wise-content-list .pic, .view-blog-listing .pic, .page-podcasts-listing .view-podcasts-listing .pic {
     overflow: hidden;
     display: block;
   }
@@ -3477,7 +3489,7 @@ body .program-livetv.effect-added .light-on-text {
   .may-we-suggest > a img,
   .watch-right-now-list > a img,
   .recom-listing .pic a img,
-  .section-ordering > a img {
+  .section-ordering > a img, .view-category-wise-content-list .pic img, .view-blog-listing .pic img, .page-podcasts-listing .view-podcasts-listing .pic img {
     transition: all 500ms ease 0s;
   }
   .zoom-image img:hover, #block-itg-front-end-common-related-photo-block #related-photo ul li a img:hover,
@@ -3490,7 +3502,7 @@ body .program-livetv.effect-added .light-on-text {
   .may-we-suggest > a img:hover,
   .watch-right-now-list > a img:hover,
   .recom-listing .pic a img:hover,
-  .section-ordering > a img:hover {
+  .section-ordering > a img:hover, .view-category-wise-content-list .pic img:hover, .view-blog-listing .pic img:hover, .page-podcasts-listing .view-podcasts-listing .pic img:hover {
     transform: scale(1.2);
   }
 
@@ -5285,18 +5297,19 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   position: relative;
 }
 .show-embed-code-link .show-embed-code-div {
-  top: 46px;
+  top: calc(100% - 10px);
   position: absolute;
   display: none;
   width: 340px;
-  right: -75px;
+  left: 50%;
+  transform: translateX(-50%);
   padding-top: 10px;
+  z-index: 99999;
 }
 .show-embed-code-link .show-embed-code-div .copy-sample-code {
   background-color: #fff;
-  border-radius: 5px;
-  padding: 20px;
   position: relative;
+  box-shadow: 0 0 10px #666;
 }
 .show-embed-code-link .show-embed-code-div .copy-sample-code:before {
   border-color: transparent transparent #fff transparent;
@@ -5307,7 +5320,16 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   position: absolute;
   top: -20px;
   width: 0;
-  left: 230px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.show-embed-code-link .show-embed-code-div .copy-sample-code textarea {
+  border: 1px solid #fff;
+  min-height: 100px;
+  padding: 10px;
+  resize: none;
+  width: 100%;
 }
 
 .view-front-funalytics-list #funalytics_popup_display {

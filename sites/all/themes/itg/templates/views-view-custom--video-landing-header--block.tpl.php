@@ -108,7 +108,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                               <div class="show-embed-code-div">
                                 <div class="copy-sample-code">
                                   <textarea readonly="true">
-                                  <div id='IndiaToday_gallery' data-type='LOCAL'></div>
+                                  <div id='IndiaToday_gallery' data-type='UAT'></div>
                                   <script src='<?php print $base_url;?>/sites/all/themes/itg/js/video_iframeResizer.js'>
                                   </script>
                                   <script> 
@@ -132,7 +132,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                 <li><a href="javascript:void(0)" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
                             <?php } ?>
                             <?php if ($user->uid > 0): ?>
-                                <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/personalization/my-content/<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
+                                <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                             <?php else: ?>
                                 <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                             <?php endif; ?>
@@ -165,7 +165,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                               <div class="show-embed-code-div">
                                 <div class="copy-sample-code">
                                   <textarea readonly="true">
-                                  <div id='IndiaToday_gallery' data-type='LOCAL'></div>
+                                  <div id='IndiaToday_gallery' data-type='UAT'></div>
                                   <script src='<?php print $base_url;?>/sites/all/themes/itg/js/video_iframeResizer.js'>
                                   </script>
                                   <script> 
@@ -189,7 +189,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                 <li><a href="javascript:void(0)" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
                             <?php } ?>
                             <?php if ($user->uid > 0): ?>
-                                <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/personalization/my-content/<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
+                                <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                             <?php else: ?>
                                 <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                             <?php endif; ?>
@@ -237,7 +237,6 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
             slidesToShow: 1,
             slidesToScroll: 1,
             arrows: false,
-            variableWidth: true,
             fade: true,
             asNavFor: '.video-header-left .video-slider-images ul, .video-header-left .video'
         });

@@ -110,22 +110,22 @@ function features_for_story_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '5',
+          'weight' => '4',
         ),
         'metatags' => array(
-          'weight' => '56',
-        ),
-        'path' => array(
           'weight' => '55',
         ),
+        'path' => array(
+          'weight' => '54',
+        ),
         'flag' => array(
-          'weight' => '12',
+          'weight' => '11',
         ),
         'domain' => array(
           'weight' => '1',
         ),
         'redirect' => array(
-          'weight' => '32',
+          'weight' => '31',
         ),
       ),
       'display' => array(),

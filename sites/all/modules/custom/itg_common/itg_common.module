@@ -691,31 +691,45 @@ function itg_content_inactive() {
  */
 function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255) {
   $titlte = "";
+  $positions_array = array();
+  $left_smiles = "";
+  $right_smiles = "";
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_emoji', 'emoji', 'emoji.entity_id=n.nid');
+  $query->leftJoin('field_data_field_emoji_2', 'emoji_2', 'emoji_2.entity_id=n.nid');
   $query->leftJoin('field_data_field_emoji_position', 'emoji_pos', 'emoji_pos.entity_id=n.nid');
   $query->fields('n', array('title'));
   $query->fields('emoji', array('field_emoji_value'));
+  $query->fields('emoji_2', array('field_emoji_2_value'));
   $query->fields('emoji_pos', array('field_emoji_position_value'));
   $query->condition('n.nid', $nid);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  if (count($result)) {
-    $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));
-    $smilies = "";
-    if (!empty($result[0]['field_emoji_value'])) {
+  foreach($result as $positions) {
+    if(!empty($positions['field_emoji_position_value'])) {
+      $positions_array[] = $positions['field_emoji_position_value']; 
+    }
+  }
+  if(in_array('left', $positions_array)) {
+    if(!empty($result[0]['field_emoji_value'])) {
       // Get all the smiley images.
       preg_match_all('/<img[^>]*>/s', $result[0]['field_emoji_value'], $images);
       // Implode all images in case of muliple smiley.
-      $smilies = implode("", $images[0]);
+      $left_smiles = implode("", $images[0]);
     }
-    if ($result[0]['field_emoji_position_value'] == 'left') {
-      // Add smiley to left;
-      $titlte = '<span class="smilies-title">' . $smilies . '</span>' . $titlte;
+  }
+  if (in_array('right', $positions_array)) {
+    if(!empty($result[0]['field_emoji_2_value'])) {
+      // Get all the smiley images.
+      preg_match_all('/<img[^>]*>/s', $result[0]['field_emoji_2_value'], $images_2);
+      // Implode all images in case of muliple smiley.
+      $right_smiles = implode("", $images_2[0]);
     }
-    else {
-      // Add smiley to right;
-      $titlte = $titlte . '<span class="smilies-title">' . $smilies . '</span>';
-    }
+  }
+  if (count($result)) {
+    $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));    
+    // Add smiley to right;
+    $titlte = '<span class="smilies-title">' . $left_smiles . '</span>' . $titlte . '<span class="smilies-title">' . $right_smiles . '</span>';
+    
     return $titlte;
   }
 }

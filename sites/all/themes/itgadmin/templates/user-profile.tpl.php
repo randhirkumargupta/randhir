@@ -141,8 +141,9 @@ foreach ($node_type as $final_type) {
 ?>
 <div class="my-stats">
 <table class="views-table">
-    <tr>
-      <th><h2><?php print t('My Stats');?></h2></th>
+  <thead>
+    <tr class='my-stats-status'>
+      <th><?php print t('My Stats');?></th>
       <th>Total Posted: <?php print array_sum($total_posted);?></th>
       <th>Last Content Posted: <?php print l($last_record['title'], 'node/'.$last_record['nid']);?></th>  
       <th>Total Published: <?php print array_sum($total_publish);?></th>  
@@ -155,6 +156,7 @@ foreach ($node_type as $final_type) {
       <th></th>  
       <th></th>  
     </tr>
+  </thead>
   <tbody>
     <?php
       $contentlist = array("story","videogallery","photogallery","breaking_news","mega_review_critic","live_tv_integration","podcast","poll","survey","quiz"," print_team_integration","tasks","astro","recipe",);
@@ -227,10 +229,13 @@ foreach ($node_type as $final_type) {
       $comma_del_arr = implode (", ", $final_del_arr);
       
 $output = "<h2>My Permissions</h2><table class='views-table'>
+        <thead>
         <tr>
         <th>Operations</th>
         <th>Types</th>
-              </tr><tr>
+              </tr>
+              </thead>
+<tr>
         <td>Create/Edit</td>
         <td>$comma_create_arr</td>
               </tr><tr>
@@ -243,11 +248,11 @@ foreach($user->roles as $key=>$value) {
   if($key != 2) {
 $user_check = itg_common_check_role_access($key);
   }
-if($user_check){
-$routput = "<tr><td>Role</td>
-        <td>$comma_role_arr</td>
-                        </tr>"; 
-}
+//if($user_check){
+//$routput = "<tr><td>Role</td>
+//        <td>$comma_role_arr</td>
+//                        </tr>"; 
+//}
 }
 
 $output .= $routput."</table>";

@@ -443,6 +443,37 @@ ul.pager{
     }
   }
 }
+[id*="field-quiz-add-questions-values"], [id*="field-survey-add-questions-values"]{
+  .field-name-field-question-video{
+    .form-managed-file{
+      a.filefield-sources-imce-browse{
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        &:after{
+          background-color: #fff;
+          border: 1px solid #d9d9d9;
+          border-radius: 5px;
+          box-sizing: border-box;
+          color: #2f2f2f;
+          content: "Choose Your File";
+          cursor: pointer;
+          font-size: 12px;
+          font-weight: 300;
+          height: 28px;
+          left: 0;
+          line-height: 26px;
+          position: absolute;
+          text-align: center;
+          top: 0;
+          width: 134px;
+        }
+      }
+    }
+  }
+}
 .video-repo-browse, [id*="field-video-upload-values"]{
   .field-name-field-videogallery-video-upload{
     .form-managed-file{
@@ -1056,9 +1087,9 @@ div.vertical-tabs {
     }
   }
 }
-.generate-image{
+.generate-image, .generate-image-error{
   @extend .pos-rel;
-  display: none;
+  display: none !important;
 }
 .img-crt{
   margin-left: 250px;
@@ -1776,6 +1807,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
         width: 380px;
         #autocomplete{
           width: auto !important;
+          max-width: 1170px;
           min-width: 100%;
           max-height: 400px;
           overflow-y: auto;
@@ -3337,8 +3369,12 @@ fieldset#edit-select{
     padding: 0;
     .filefield-sources-list{
       color: #fff;
-      @extend .dib;
-      @extend .full;
+      float: right;
+      margin-top: 5px;
+      width: auto;
+      a.filefield-source.filefield-source-upload{
+        display: none;
+      }
       a.filefield-source.filefield-source-plupload{
         width: auto;
         float: right;
@@ -3349,6 +3385,7 @@ fieldset#edit-select{
       a.filefield-source.filefield-source-imce{
         visibility: hidden;
       }
+      & + .form-file{margin-top: 5px;}
     }
     div.filefield-source{
 
@@ -3789,6 +3826,7 @@ div.node{
             @extend .icon-remove-item;
             left: 332px;
             position: absolute;
+            bottom: 10px;
           }
         }
       }
@@ -4145,6 +4183,7 @@ div.node{
   }
 }
 [id*="field-survey-add-questions-values"], [id*="field-quiz-add-questions-values"]{
+  @extend .image-repo-browse;
   .field-name-field-survey-add-media{
     .ajax-progress{
       display: none;
@@ -8831,6 +8870,18 @@ div.node{
         @extend .astrick;
     }
   }
+  .form-field-name-field-emoji-position{
+    .form-checkboxes{
+      .form-type-checkbox{
+        @extend .fleft;
+        margin-right: 20px;
+        .form-checkbox{
+          @extend .fleft;
+          margin: 3px;
+        }
+      }
+    }
+  }
   .form-field-name-field-story-technology{
     margin: 0 10px;   
     [id*="field-story-technology-values"]{
@@ -8938,7 +8989,7 @@ div.node{
   .form-field-name-field-common-audio, 
   .form-field-name-field-common-audio-file{@extend .hide;}
 }
-.node-videogallery-form, .node-photogallery-form, .node-story-form{
+.node-videogallery-form, .node-photogallery-form, .node-story-form, .node-breaking_news-form{
   .browse-media-file{
     .itg-form-section{
       height: 250px;
@@ -9718,6 +9769,7 @@ div.node{
 [id*="daily-motion-video-dashboard"]{
   @extend .node-form;
   fieldset{
+    @extend .fleft;
     border: none;
     legend{
       display: none;
@@ -9731,15 +9783,15 @@ div.node{
         display: block;
         padding: 0 0 5px;
       }
-      &.form-item-filtertype{
-        select{
-          margin-top: 23px;
-        }
-      }
     }
     #edit-display-button{
-      margin-top: 54px;
+      @extend .btn-small;
+      margin-top: 33px;
     }
+  }
+  #edit-reset{
+    @extend .btn-small;
+    margin-top: 33px;
   }
   table{
     @extend .views-table;
@@ -10084,11 +10136,11 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     margin-top:44px;
   }
 }
-.form-field-name-field-emoji{
+.form-field-name-field-emoji, .form-field-name-field-emoji-2{
   width: 572px;
   @extend .dib;
   @extend .vtop;
-  .ckeditor_links{display: none;}
+  .ckeditor_links{display: none !important;}
   .cke_top{
     height: 34px !important;
     overflow: visible;
@@ -10096,6 +10148,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   }
   .cke_contents{
     padding: 5px;
+    min-height: 30px;
   }
   .cke_bottom{
     display: none;
@@ -10555,6 +10608,9 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     @extend .dib;
     @extend .full;
     @extend .vtop;
+    padding: 10px;
+    background: #efefef;
+    margin: 0 0 10px;
     .field{
       padding: 10px 0;
       border-top: 1px solid #ddd;
@@ -10593,6 +10649,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
 }
 #views-form-poll-widget-poll-widget-format, 
 #views-form-issue-base-magazin-widget-issue-base-magazin-widget, 
+#views-form-supplement-base-magazin-widget-supplement-base-magazin-widget,
 #views-form-category-of-stroy-base-magazin-widget-issue-category-magazin-widget{
   p{margin-top: 20px;}
   .form-actions{
@@ -10600,5 +10657,56 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     a{
       @extend .btn-reset;
     }
+  }
+}
+[id*="field-ticket-group-type-values"]{
+  .form-type-textfield > label, .form-type-select > label{
+    width: 2280px;
+  }
+  thead{display: none;}
+  tbody{
+    tr{
+      td{
+        background-color: #e5e5e5;
+        float: left;
+        margin-bottom: 10px;
+        width: 100%;
+        > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+          @extend .icon-remove-item;
+          right: 38px;
+          margin: 0;
+          padding: 0;
+          position: absolute;
+          bottom: 10px;
+        }
+        .ajax-progress{
+          display: none;
+        }
+        div.description{
+          left: 665px !important;
+        }
+      }
+    }
+  }
+  & + div.clearfix {
+    bottom: 20px;
+    position: absolute;
+    right: 10px;
+    .form-submit{
+      @extend .icon-add-more;
+    }
+    .ajax-progress{
+      display: none;
+    }
+  }
+}
+.my-stats-status{
+  border-bottom: 1px solid #ddd;
+}
+.itg-photo-popup{
+  .itg-close-popup_new {
+    color: #323232;
+    float: right;
+    font-size: 20px;
   }
 }

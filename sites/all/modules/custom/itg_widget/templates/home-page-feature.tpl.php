@@ -4,9 +4,7 @@
     <div class="featured-post featured-post-first">
       <?php if (!empty($data[0]['li_file_uri'])) : ?>
         <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[0]['nid']); ?>">
-          <?php $extra_large_image_url = file_create_url($data[0]['li_file_uri']);
-          ?>
-          <img src="<?php print $extra_large_image_url; ?>" alt="" />
+          <img src="<?php print image_style_url("magazine_top_story_483x271", $data[0]['li_file_uri']); ?>" alt="" />
         </a>
       <?php else : ?>
         <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[0]['nid']); ?>">
@@ -36,17 +34,17 @@
         </a>
       <?php else : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[1]['nid']); ?>">
-          <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image237x133.jpg" alt="" />
+          <img src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image237x133.jpg" alt="" />
         </a>
       <?php endif; ?>
       <?php if (!empty($data[1]['title'])) : ?>
         <h3 class="home-page-feature-small-<?php echo $data[1]['nid'] ?>">
           <?php
           if (function_exists('itg_common_get_smiley_title')) {
-            echo l(itg_common_get_smiley_title($data[1]['nid'], 0, 70), "node/" . $data[1]['nid'], array('html' => TRUE));
+            echo l(itg_common_get_smiley_title($data[1]['nid'], 0, 60), "node/" . $data[1]['nid'], array('html' => TRUE));
           }
           else {
-            echo l(mb_strimwidth($data[1]['title'], 0, 90, ".."), "node/" . $data[1]['nid']);
+            echo l(mb_strimwidth($data[1]['title'], 0, 70, ".."), "node/" . $data[1]['nid']);
           }
           ?>
         </h3>   
@@ -61,17 +59,17 @@
         </a>
       <?php else : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[2]['nid']); ?>">
-          <img src="<?php print$base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image237x133.jpg" alt="" />
+          <img src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image237x133.jpg" alt="" />
         </a>
       <?php endif; ?>
       <?php if (!empty($data[2]['title'])) : ?>
         <h3 class="home-page-feature-small-<?php echo $data[2]['nid'] ?>">
           <?php
           if (function_exists('itg_common_get_smiley_title')) {
-            echo l(itg_common_get_smiley_title($data[2]['nid'], 0, 70), "node/" . $data[2]['nid'], array('html' => TRUE));
+            echo l(itg_common_get_smiley_title($data[2]['nid'], 0, 60), "node/" . $data[2]['nid'], array('html' => TRUE));
           }
           else {
-            echo l(mb_strimwidth($data[2]['title'], 0, 90, ".."), "node/" . $data[2]['nid']);
+            echo l(mb_strimwidth($data[2]['title'], 0, 70, ".."), "node/" . $data[2]['nid']);
           }
           ?>
         </h3>    
