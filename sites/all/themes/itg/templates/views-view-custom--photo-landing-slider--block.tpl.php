@@ -1,4 +1,5 @@
 <?php
+global $base_url;
 // configuration for social sharing
 $photo_node = node_load(arg(1));
 $f_collection = entity_load('field_collection_item', array($photo_node->field_gallery_image[LANGUAGE_NONE][0]['value']));
@@ -10,7 +11,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
 ?>
 <div class="row">
     <div class="col-md-12">
-        <h2><?php print $rows[0]['title']; ?></h2>    
+        <h1 class="photo-heading"><?php print $rows[0]['title']; ?></h1>    
         <div class="social-icon desktop-hide">
             <ul>
                 <li><a title="share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
@@ -28,7 +29,23 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                 <?php } if ($config_name == 'other') { ?> 
                 <li><a onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                 <?php } ?>
-                <li><a href="#" title="Embed"><i class="fa fa-link"></i></a></li>
+                <li class="show-embed-code-link">
+                  <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
+                  <div class="show-embed-code-div">
+                    <div class="copy-sample-code">
+                     <textarea readonly="true">
+                      <div id='IndiaToday_gallery' data-type='UAT'></div>
+                          <script src='<?php print $base_url;?>/sites/all/themes/itg/js/photo_iframeResizer.js'>
+                          </script>
+                          <script> 
+                          <?php 
+                           echo "iFrameResize({galleryid: $photo_node->nid})";
+                          ?>
+                          </script>
+                      </textarea>  
+                    </div>
+                  </div>
+                </li>
                   <?php global $user; ?>
                   <?php
                     if ($user->uid > 0)
@@ -45,7 +62,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                                             <?php }
                                             else
                                             { ?>
-                                          <li><a title = "Save" href="javascript:" class="def-cur-pointer active"><i class="fa fa-bookmark"></i></a></li>
+                                          <li><a title = "Save" href="javascript:" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i></a></li>
                                             <?php
                                             }
                                           }
@@ -57,7 +74,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                                             }
                                           }    ?>
                   <?php if($user->uid > 0): ?>
-                  <li><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/personalization/my-content/<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
+                  <li><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i></a></li>
                   <?php else: ?>
                   <li><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                   <?php endif; ?>
@@ -142,7 +159,23 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                 <?php } if ($config_name == 'other') { ?> 
                 <li><a onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                 <?php } ?>
-                <li><a href="#" title="Embed"><i class="fa fa-link"></i></a></li>
+                <li class="show-embed-code-link">
+                  <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
+                  <div class="show-embed-code-div">
+                    <div class="copy-sample-code">
+                        <textarea readonly="true">
+                      <div id='IndiaToday_gallery' data-type='UAT'></div>
+                          <script src='<?php print $base_url;?>/sites/all/themes/itg/js/photo_iframeResizer.js'>
+                          </script>
+                          <script> 
+                          <?php 
+                           echo "iFrameResize({galleryid: $photo_node->nid})";
+                          ?>
+                          </script>
+                      </textarea>
+                    </div>
+                  </div>
+                </li>
                  <?php if($user->uid > 0):?>
                   <li class="mhide"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/personalization/my-content/<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                   <?php else: ?>
@@ -164,7 +197,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                                             <?php }
                                             else
                                             { ?>
-                                          <li><a title = "Save" href="javascript:" class="def-cur-pointer active"><i class="fa fa-bookmark"></i></a></li>
+                                          <li><a title = "Save" href="javascript:" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i></a></li>
                                             <?php
                                             }
                                           }

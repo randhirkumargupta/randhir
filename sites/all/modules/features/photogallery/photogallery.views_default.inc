@@ -926,7 +926,7 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
@@ -940,11 +940,11 @@ function photogallery_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -953,6 +953,11 @@ function photogallery_views_default_views() {
     12 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   $handler->display->display_options['filters']['title']['group_info']['label'] = 'Title';
   $handler->display->display_options['filters']['title']['group_info']['identifier'] = 'title';
@@ -1265,7 +1270,7 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
   $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
@@ -1280,11 +1285,11 @@ function photogallery_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -1293,6 +1298,11 @@ function photogallery_views_default_views() {
     12 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   $handler->display->display_options['filters']['title']['group_info']['label'] = 'Title';
   $handler->display->display_options['filters']['title']['group_info']['identifier'] = 'title';
@@ -1628,7 +1638,7 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
@@ -1642,11 +1652,11 @@ function photogallery_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -1655,6 +1665,11 @@ function photogallery_views_default_views() {
     12 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   $handler->display->display_options['filters']['title']['group_info']['label'] = 'Title';
   $handler->display->display_options['filters']['title']['group_info']['identifier'] = 'title';
@@ -2009,7 +2024,7 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
@@ -2023,11 +2038,11 @@ function photogallery_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -2036,6 +2051,11 @@ function photogallery_views_default_views() {
     12 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   $handler->display->display_options['filters']['title']['group_info']['label'] = 'Title';
   $handler->display->display_options['filters']['title']['group_info']['identifier'] = 'title';
@@ -2321,7 +2341,7 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
@@ -2335,11 +2355,11 @@ function photogallery_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -2348,6 +2368,11 @@ function photogallery_views_default_views() {
     12 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   $handler->display->display_options['filters']['title']['group_info']['label'] = 'Title';
   $handler->display->display_options['filters']['title']['group_info']['identifier'] = 'title';
@@ -2674,7 +2699,7 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
@@ -2688,11 +2713,11 @@ function photogallery_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -2701,6 +2726,11 @@ function photogallery_views_default_views() {
     12 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   $handler->display->display_options['filters']['title']['group_info']['label'] = 'Title';
   $handler->display->display_options['filters']['title']['group_info']['identifier'] = 'title';
@@ -3051,7 +3081,7 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
@@ -3065,11 +3095,11 @@ function photogallery_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -3078,6 +3108,11 @@ function photogallery_views_default_views() {
     12 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   $handler->display->display_options['filters']['title']['group_info']['label'] = 'Title';
   $handler->display->display_options['filters']['title']['group_info']['identifier'] = 'title';
@@ -3333,7 +3368,7 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
@@ -3347,11 +3382,11 @@ function photogallery_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -3360,6 +3395,11 @@ function photogallery_views_default_views() {
     12 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   $handler->display->display_options['filters']['title']['group_info']['label'] = 'Title';
   $handler->display->display_options['filters']['title']['group_info']['identifier'] = 'title';
@@ -3711,7 +3751,7 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
@@ -3725,11 +3765,11 @@ function photogallery_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -3738,6 +3778,11 @@ function photogallery_views_default_views() {
     12 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   $handler->display->display_options['filters']['title']['group_info']['label'] = 'Title';
   $handler->display->display_options['filters']['title']['group_info']['identifier'] = 'title';
@@ -4027,7 +4072,7 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
   $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
@@ -4042,11 +4087,11 @@ function photogallery_views_default_views() {
     7 => 0,
     9 => 0,
     5 => 0,
-    8 => 0,
     20 => 0,
     6 => 0,
-    10 => 0,
+    21 => 0,
     19 => 0,
+    10 => 0,
     13 => 0,
     11 => 0,
     16 => 0,
@@ -4055,6 +4100,11 @@ function photogallery_views_default_views() {
     12 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   $handler->display->display_options['filters']['title']['group_info']['label'] = 'Title';
   $handler->display->display_options['filters']['title']['group_info']['identifier'] = 'title';

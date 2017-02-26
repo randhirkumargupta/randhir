@@ -120,12 +120,18 @@ function itg_user_activity_front() {
     // check connection
     if ($con)
     {
-      if($user_activity == 'twitter_share' || $user_activity == 'google_share' || $user_activity == 'fb_follow' || $user_activity == 'twitter_follow') {
+      if($user_activity == 'twitter_share' || $user_activity == 'google_share' || $user_activity == 'fb_follow' || $user_activity == 'twitter_follow' || $user_activity == 'google_follow') {
+       if($user->uid) { 
        $people = $con->front_user_activity;
-       $qry = array("nid" => $nd_id, "uid" => $user->uid, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus);
+       $qry = array("nid" => $nd_id, "uid" => $user->uid, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus ,"timestamp" =>time());
        $result = $people->insert($qry);
        $response = array('success' => $dstatus, 'activity' => $user_activity, 'type' => $dtag);
+       itg_loyalty_reward_earnpoint($nd_id, $user_activity, $user->uid);
        print json_encode($response);
+       } else {
+         $response = array('success' => 'anonymous', 'activity' => $user_activity, 'type' => $dtag);
+         print json_encode($response);
+       }
       }
       else {
         $people = $con->front_user_activity;
@@ -137,7 +143,7 @@ function itg_user_activity_front() {
           $primary_cat_name = taxonomy_term_load($actual_data->field_primary_category[LANGUAGE_NONE][0]['value']);
           $extra_image = $actual_data->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
           $path = $actual_data->path['source'];
-          $qry = array("nid" => $nd_id, "uid" => $user->uid, "title" => $actual_data->title, "path" => $path, "image" => $extra_image, "primary_category_id" => $primary_cat_id, "primary_category_name" => $primary_cat_name->name, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus);
+          $qry = array("nid" => $nd_id, "uid" => $user->uid, "title" => $actual_data->title, "path" => $path, "image" => $extra_image, "primary_category_id" => $primary_cat_id, "primary_category_name" => $primary_cat_name->name, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus, "timestamp" =>time());
           $result = $people->insert($qry);
           $response = array('success' => $dstatus, 'activity' => $user_activity, 'type' => $dtag);
           print json_encode($response);
@@ -145,7 +151,7 @@ function itg_user_activity_front() {
         else
         {
           try {
-            $newdata = array('$set' => array("status" => $dstatus, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time));
+            $newdata = array('$set' => array("status" => $dstatus, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time , "timestamp" =>time()));
             $people->update(array("nid" => $nd_id, "activity" => $user_activity, "uid" => $user->uid), $newdata);
             $response = array("success" => $dstatus, 'activity' => $user_activity, 'type' => $dtag);
             print json_encode($response);

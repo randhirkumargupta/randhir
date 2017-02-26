@@ -39,6 +39,28 @@ function features_for_event_registration_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
+  // Exported field_base: 'field_comments_remarks_'.
+  $field_bases['field_comments_remarks_'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_comments_remarks_',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
   // Exported field_base: 'field_erf_city'.
   $field_bases['field_erf_city'] = array(
     'active' => 1,
@@ -50,17 +72,31 @@ function features_for_event_registration_field_default_field_bases() {
       'type' => 0,
     ),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'target_id' => array(
+        0 => 'target_id',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'entityreference',
     'settings' => array(
-      'max_length' => 255,
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'city' => 'city',
+        ),
+      ),
+      'target_type' => 'taxonomy_term',
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'entityreference',
   );
 
   // Exported field_base: 'field_erf_company_name'.
@@ -259,6 +295,8 @@ function features_for_event_registration_field_default_field_bases() {
         'online_payment' => 'Online Payment',
         'icici' => ' ICICI',
         'amex' => ' Amex',
+        'paytm' => ' Paytm',
+        'billdesk' => 'Billdesk',
         'other_banks' => ' Other Banks',
       ),
       'allowed_values_function' => '',
@@ -327,17 +365,31 @@ function features_for_event_registration_field_default_field_bases() {
       'type' => 0,
     ),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'target_id' => array(
+        0 => 'target_id',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'entityreference',
     'settings' => array(
-      'max_length' => 255,
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'state' => 'state',
+        ),
+      ),
+      'target_type' => 'taxonomy_term',
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'entityreference',
   );
 
   // Exported field_base: 'field_erf_ticket_type'.
@@ -358,12 +410,7 @@ function features_for_event_registration_field_default_field_bases() {
     'locked' => 0,
     'module' => 'list',
     'settings' => array(
-      'allowed_values' => array(
-        499 => 'Student <b>Rs 499</b>',
-        699 => 'Young Professional <b>Rs 699</b>',
-        899 => 'Senior Citizen <b>Rs 899</b>',
-        1299 => 'Business Professional <b>Rs 1299</b>',
-      ),
+      'allowed_values' => array(),
       'allowed_values_function' => '',
     ),
     'translatable' => 0,
@@ -392,6 +439,74 @@ function features_for_event_registration_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
+  );
+
+  // Exported field_base: 'field_event_country'.
+  $field_bases['field_event_country'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_event_country',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'country' => 'country',
+        ),
+      ),
+      'target_type' => 'taxonomy_term',
+    ),
+    'translatable' => 0,
+    'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field_event_name_title'.
+  $field_bases['field_event_name_title'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_event_name_title',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'Mr' => 'Mr',
+        'Miss' => 'Miss',
+        'Mrs' => 'Mrs',
+        'Dr' => 'Dr',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_state_county'.

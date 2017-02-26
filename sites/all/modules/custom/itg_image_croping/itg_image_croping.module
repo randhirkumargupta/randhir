@@ -449,7 +449,16 @@ function itg_image_croping_crop_image() {
     if ($extention == "") {
         $extention = 'png';
     }
+//Load orignal image 
+    if (!empty($_POST['original_img_id'])) {
+        $orignal_img = file_load($_POST['original_img_id']);
 
+        $orignal_file_name = $orignal_img->filename;
+        $orignal_file_name = substr($orignal_file_name, 0, (strrpos($orignal_file_name, ".")));
+    }
+    if ($orignal_file_name != "") {
+        $image_name = $orignal_file_name;
+    }
     $image_data_url = str_replace('data:image/' . $extention . ';base64,', '', $image_data_url);
     $imagedata = base64_decode($image_data_url);
     if (!file_exists(file_default_scheme() . '://crop_image')) {
@@ -459,19 +468,24 @@ function itg_image_croping_crop_image() {
     file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
     $image = image_load($file->uri);
 
+
     $fileids['fid'][] = $file->fid . '#' . $_POST['field_name'];
     if (!empty($image_fields) && !empty($image)) {
         foreach ($image_fields as $fields_name) {
             $file = array();
             if (!file_exists(file_default_scheme() . '://crop_image')) {
                 mkdir(file_default_scheme() . '://crop_image', 0777, TRUE);
-            } 
-           // echo is_writable(file_default_scheme() . '://crop_image');
+            }
+            // echo is_writable(file_default_scheme() . '://crop_image');
             $filepath = file_default_scheme() . '://crop_image';
             $scaled = image_resize($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height']);
             if ($scaled) {
                 $image_name = $fields_name . time();
-                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $extention );
+                if ($orignal_file_name != "") {
+                    $image_name = $orignal_file_name . rand(111, 9999) . time();
+                }
+
+                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $extention);
                 $uri = $filepath . '/' . $image_name . '.' . $extention;
                 $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
                 $file = new StdClass;
@@ -549,9 +563,7 @@ function itg_image_croping_crop_image_orignal() {
     $image_fields = $_POST['image_fields'];
     $fileids = array();
     $img_dim = mageimagedimesion();
-    if ($image_name == "") {
-        $image_name = time();
-    }
+
     $image_width = $img_dim[$content_type][$_POST['field_name']]['width'];
     $image_height = $img_dim[$content_type][$_POST['field_name']]['height'];
 
@@ -561,15 +573,23 @@ function itg_image_croping_crop_image_orignal() {
         $image_height = $_POST['resize_image_height'];
     }
 
-    $image_name = $image_name . rand(111, 999);
     $file_image = file_load($image_fiedlid);
     $image = image_load($file_image->uri);
     $image_exten = end(explode('.', $file_image->uri));
     $filepath = file_default_scheme() . '://crop_image';
-    $scaled = image_resize($image, $image_width, $image_height);
-
-    $image_name = $image_name . time();
-    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten );
+    $orig_width = $image->info['width'];
+     $orig_height = $image->info['height'];
+    
+    if($image->info['width'] < $image_width || $image->info['height'] < $image_height) {
+        $scaled = image_scale($image, $image_width, $image_height,true); 
+    } else{
+        $scaled = image_scale_and_crop($image, $image_width, $image_height); 
+    }
+  
+    $image_name_orignal = $file_image->filename;
+    $image_name_orignal = substr($image_name_orignal, 0, (strrpos($image_name_orignal, ".")));
+    $image_name = $image_name_orignal . rand(111, 999) . time();
+    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten);
     $uri = $filepath . '/' . $image_name . '.' . $image_exten;
     $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
     $file = new StdClass;
@@ -584,16 +604,24 @@ function itg_image_croping_crop_image_orignal() {
     $file = file_save($file);
     file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
     $fileids['fid'][] = $file->fid . '#' . $fields_name;
-    $image = image_load($file->uri);
+   
 
     if (!empty($image_fields) && !empty($image)) {
         foreach ($image_fields as $fields_name) {
 
             $filepath = file_default_scheme() . '://crop_image';
-            $scaled = image_scale_and_crop($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height']);
+           
+            if ($orig_width < $img_dim[$content_type][$fields_name]['width'] || $image->info['height'] < $img_dim[$content_type][$fields_name]['height']) {
+                
+                $scaled = image_scale($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height'], true);
+            }
+            else {
+                $scaled = image_scale($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height'],false);
+            }
+
             if ($scaled) {
-                $image_name = $fields_name . time();
-                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten );
+                $image_name = $image_name_orignal . rand(111, 999) . time();
+                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten);
                 $uri = $filepath . '/' . $image_name . '.' . $image_exten;
                 $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
                 $file = new StdClass;
@@ -729,6 +757,16 @@ function mageimagedimesion() {
     $image_dim['food_news']['field_story_small_image']['height'] = SMALL_IMAGE_HEIGHT;
     $image_dim['food_news']['field_recipe_writer_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
     $image_dim['food_news']['field_recipe_writer_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
+
+    $image_dim['issue']['field_issue_large_cover_image']['width'] = ISSUE_LARGE_IMAGE_WIDTH;
+    $image_dim['issue']['field_issue_large_cover_image']['height'] = ISSUE_LARGE_IMAGE_HEIGHT;
+    $image_dim['issue']['field_issue_small_cover_image']['width'] = ISSUE_SMALL_WIDTH;
+    $image_dim['issue']['field_issue_small_cover_image']['height'] = ISSUE_SMALL_HEIGHT;
+    $image_dim['issue']['field_issue_supp_large_image']['width'] = ISSUE_LARGE_IMAGE_WIDTH;
+    $image_dim['issue']['field_issue_supp_large_image']['height'] = ISSUE_LARGE_IMAGE_HEIGHT;
+    $image_dim['issue']['field_issue_supp_small_image']['width'] = ISSUE_SMALL_WIDTH;
+    $image_dim['issue']['field_issue_supp_small_image']['height'] = ISSUE_SMALL_HEIGHT;
+
     return $image_dim;
 }
 
@@ -759,12 +797,12 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
         </div>',
     );
 
-    if (($content_name == 'photogallery' || $content_name == 'videogallery' || $content_name == 'food_news' || $content_name == 'cooking_tips' || $content_name == 'recipe' || $content_name == 'podcast' || $content_name == 'mega_review_critic' || $content_name == 'breaking_news' || $content_name == 'story') && $field_name == 'field_story_extra_large_image') {
+    if (($content_name == 'photogallery' || $content_name == 'videogallery' || $content_name == 'food_news' || $content_name == 'cooking_tips' || $content_name == 'recipe' || $content_name == 'podcast' || $content_name == 'mega_review_critic' || $content_name == 'breaking_news' || $content_name == 'story') && ($field_name == 'field_story_extra_large_image') || ($field_name == 'field_issue_large_cover_image' || $field_name == 'field_issue_supp_large_image' )) {
         $largsize = '(' . $imgdim[$content_name]['field_story_large_image']['width'] . 'X' . $imgdim[$content_name]['field_story_large_image']['height'] . ')';
         $mediumsize = '(' . $imgdim[$content_name]['field_story_medium_image']['width'] . 'X' . $imgdim[$content_name]['field_story_medium_image']['height'] . ')';
         $extrasmallsize = '(' . $imgdim[$content_name]['field_story_extra_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_extra_small_image']['height'] . ')';
         $writer_image = '(' . $imgdim[$content_name]['field_recipe_writer_image']['width'] . 'X' . $imgdim[$content_name]['field_recipe_writer_image']['height'] . ')';
-
+        $issue_img_size = '(' . $imgdim[$content_name]['field_issue_small_cover_image']['width'] . 'X' . $imgdim[$content_name]['field_issue_small_cover_image']['height'] . ')'; 
         $smallsize = '(' . $imgdim[$content_name]['field_story_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_small_image']['height'] . ')';
         if ($content_name == 'photogallery') {
 
@@ -774,7 +812,19 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
                 'field_story_small_image' => t("Small Image  $smallsize"),
                 'field_story_extra_small_image' => t("Extra Small Image $extrasmallsize"));
         }
-        else if ($content_name == 'recipe') {
+        else if ($content_name == 'issue') {
+            if($field_name == 'field_issue_large_cover_image') {
+            $checkoption = array(
+                'field_issue_small_cover_image' => t("Issue Cover Small Image  $issue_img_size"));
+               
+            }
+             if($field_name == 'field_issue_supp_large_image') {
+            $checkoption = array(
+                'field_issue_supp_small_image' => t("Supplement Cover Small Image  $issue_img_size"));
+               
+            }
+        }
+         else if ($content_name == 'recipe') {
             $checkoption = array(
                 'field_story_large_image' => t("Large Image  $largsize"),
                 'field_story_medium_image' => t("Medium Image $mediumsize"),
@@ -867,220 +917,3 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
     return $form;
 }
 
-class resize {
-
-    // *** Class variables
-    private $image;
-    private $width;
-    private $height;
-    private $imageResized;
-
-    function __construct($fileName) {
-        // *** Open up the file
-        $this->image = $this->openImage($fileName);
-
-        // *** Get width and height
-        $this->width = imagesx($this->image);
-        $this->height = imagesy($this->image);
-    }
-
-    ## --------------------------------------------------------
-
-    private function openImage($file) {
-        // *** Get extension
-        $extension = strtolower(strrchr($file, '.'));
-
-        switch ($extension) {
-            case '.jpg':
-            case '.jpeg':
-                $img = @imagecreatefromjpeg($file);
-                break;
-            case '.gif':
-                $img = @imagecreatefromgif($file);
-                break;
-            case '.png':
-                $img = @imagecreatefrompng($file);
-                break;
-            default:
-                $img = false;
-                break;
-        }
-        return $img;
-    }
-
-    ## --------------------------------------------------------
-
-    public function resizeImage($newWidth, $newHeight, $option = "auto") {
-        // *** Get optimal width and height - based on $option
-        $optionArray = $this->getDimensions($newWidth, $newHeight, $option);
-
-        $optimalWidth = $optionArray['optimalWidth'];
-        $optimalHeight = $optionArray['optimalHeight'];
-
-
-        // *** Resample - create image canvas of x, y size
-        $this->imageResized = imagecreatetruecolor($optimalWidth, $optimalHeight);
-        imagecopyresampled($this->imageResized, $this->image, 0, 0, 0, 0, $optimalWidth, $optimalHeight, $this->width, $this->height);
-
-
-        // *** if option is 'crop', then crop too
-        if ($option == 'crop') {
-            $this->crop($optimalWidth, $optimalHeight, $newWidth, $newHeight);
-        }
-    }
-
-    ## --------------------------------------------------------
-
-    private function getDimensions($newWidth, $newHeight, $option) {
-
-        switch ($option) {
-            case 'exact':
-                $optimalWidth = $newWidth;
-                $optimalHeight = $newHeight;
-                break;
-            case 'portrait':
-                $optimalWidth = $this->getSizeByFixedHeight($newHeight);
-                $optimalHeight = $newHeight;
-                break;
-            case 'landscape':
-                $optimalWidth = $newWidth;
-                $optimalHeight = $this->getSizeByFixedWidth($newWidth);
-                break;
-            case 'auto':
-                $optionArray = $this->getSizeByAuto($newWidth, $newHeight);
-                $optimalWidth = $optionArray['optimalWidth'];
-                $optimalHeight = $optionArray['optimalHeight'];
-                break;
-            case 'crop':
-                $optionArray = $this->getOptimalCrop($newWidth, $newHeight);
-                $optimalWidth = $optionArray['optimalWidth'];
-                $optimalHeight = $optionArray['optimalHeight'];
-                break;
-        }
-        return array('optimalWidth' => $optimalWidth, 'optimalHeight' => $optimalHeight);
-    }
-
-    ## --------------------------------------------------------
-
-    private function getSizeByFixedHeight($newHeight) {
-        $ratio = $this->width / $this->height;
-        $newWidth = $newHeight * $ratio;
-        return $newWidth;
-    }
-
-    private function getSizeByFixedWidth($newWidth) {
-        $ratio = $this->height / $this->width;
-        $newHeight = $newWidth * $ratio;
-        return $newHeight;
-    }
-
-    private function getSizeByAuto($newWidth, $newHeight) {
-        if ($this->height < $this->width) {
-        // *** Image to be resized is wider (landscape)
-            $optimalWidth = $newWidth;
-            $optimalHeight = $this->getSizeByFixedWidth($newWidth);
-        }
-        elseif ($this->height > $this->width) {
-        // *** Image to be resized is taller (portrait)
-            $optimalWidth = $this->getSizeByFixedHeight($newHeight);
-            $optimalHeight = $newHeight;
-        }
-        else {
-        // *** Image to be resizerd is a square
-            if ($newHeight < $newWidth) {
-                $optimalWidth = $newWidth;
-                $optimalHeight = $this->getSizeByFixedWidth($newWidth);
-            }
-            else if ($newHeight > $newWidth) {
-                $optimalWidth = $this->getSizeByFixedHeight($newHeight);
-                $optimalHeight = $newHeight;
-            }
-            else {
-                // *** Sqaure being resized to a square
-                $optimalWidth = $newWidth;
-                $optimalHeight = $newHeight;
-            }
-        }
-
-        return array('optimalWidth' => $optimalWidth, 'optimalHeight' => $optimalHeight);
-    }
-
-    ## --------------------------------------------------------
-
-    private function getOptimalCrop($newWidth, $newHeight) {
-
-        $heightRatio = $this->height / $newHeight;
-        $widthRatio = $this->width / $newWidth;
-
-        if ($heightRatio < $widthRatio) {
-            $optimalRatio = $heightRatio;
-        }
-        else {
-            $optimalRatio = $widthRatio;
-        }
-
-        $optimalHeight = $this->height / $optimalRatio;
-        $optimalWidth = $this->width / $optimalRatio;
-
-        return array('optimalWidth' => $optimalWidth, 'optimalHeight' => $optimalHeight);
-    }
-
-    ## --------------------------------------------------------
-
-    private function crop($optimalWidth, $optimalHeight, $newWidth, $newHeight) {
-        // *** Find center - this will be used for the crop
-        $cropStartX = ( $optimalWidth / 2) - ( $newWidth / 2 );
-        $cropStartY = ( $optimalHeight / 2) - ( $newHeight / 2 );
-
-        $crop = $this->imageResized;
-        //imagedestroy($this->imageResized);
-        // *** Now crop from center to exact requested size
-        $this->imageResized = imagecreatetruecolor($newWidth, $newHeight);
-        imagecopyresampled($this->imageResized, $crop, 0, 0, $cropStartX, $cropStartY, $newWidth, $newHeight, $newWidth, $newHeight);
-    }
-
-    ## --------------------------------------------------------
-
-    public function saveImage($savePath, $imageQuality = "100") {
-        // *** Get extension
-        $extension = strrchr($savePath, '.');
-        $extension = strtolower($extension);
-
-        switch ($extension) {
-            case '.jpg':
-            case '.jpeg':
-                if (imagetypes() & IMG_JPG) {
-                    imagejpeg($this->imageResized, $savePath, $imageQuality);
-                }
-                break;
-
-            case '.gif':
-                if (imagetypes() & IMG_GIF) {
-                    imagegif($this->imageResized, $savePath);
-                }
-                break;
-
-            case '.png':
-                // *** Scale quality from 0-100 to 0-9
-                $scaleQuality = round(($imageQuality / 100) * 9);
-
-                // *** Invert quality setting as 0 is best, not 9
-                $invertScaleQuality = 9 - $scaleQuality;
-
-                if (imagetypes() & IMG_PNG) {
-                    imagepng($this->imageResized, $savePath, $invertScaleQuality);
-                }
-                break;
-
-            // ... etc
-
-            default:
-                // *** No extension - No save.
-                break;
-        }
-
-        imagedestroy($this->imageResized);
-    }
-
-    ## --------------------------------------------------------
-}

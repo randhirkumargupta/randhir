@@ -300,11 +300,17 @@
   .election-page h1 {
     margin-top: 20px;
   }
-  .election-page .election-graph .col-el-5 {
-    width: 240px;
+  .election-page .election-graph table {
+    font-size: 12px;
   }
   .election-page .election-top-block .social-share {
     padding-top: 0;
+  }
+  .election-page .col-el-5 .graph-design .highcharts-title tspan {
+    font-size: 16px;
+  }
+  .election-page .col-el-5 .graph-design .highcharts-title tspan:nth-child(1) {
+    font-size: 16px;
   }
 
   /*Election page css end*/
@@ -420,15 +426,44 @@
   }
 
   /*poll page css end*/
+  /*education page css start*/
+  .education-layout-page .auto-block-2 .special-top-news {
+    overflow: scroll;
+  }
+
+  /*education page css end*/
+  /*for all special pages start*/
+  .widget-wrapper {
+    max-height: 100%;
+    overflow: auto;
+    height: auto;
+  }
+
+  /*for all special pages end*/
+  /*search page css start */
+  [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget {
+    padding-right: 10px;
+    font-size: 11px;
+  }
+
+  /*search page css end */
 }
 @media only screen and (max-width: 991px) {
   /*CSS start education page special*/
-  .education-layout-page .itg-layout-672 .droppable, .education-layout-page .itg-layout-672 .droppable .auto-block-1, .education-layout-page .itg-layout-672 .droppable .auto-block-2 {
+  .education-layout-page .itg-layout-672 .droppable, .education-layout-page .itg-layout-672 .droppable .auto-block-1 {
     height: auto;
   }
 
   .education-layout-page .itg-layout-672 .droppable .auto-block-1, .education-layout-page .itg-layout-672 .droppable .auto-block-2 {
     margin-bottom: 50px;
+  }
+
+  .education-layout-page .itg-layout-672 .droppable .auto-block-1 {
+    border: none;
+  }
+
+  .education-layout-page .featured-news {
+    margin: 0 -5px;
   }
 
   .education-layout-page .auto-block-3 .m-bottom40 {
@@ -764,12 +799,6 @@
   .movie-layout-page .itg-layout-580 .droppable,
   .movie-layout-page .itg-layout-580 .droppable .auto-block-1,
   .movie-layout-page .itg-layout-580 .droppable .auto-block-2,
-  .education-layout-page .itg-layout-565 .droppable,
-  .education-layout-page .itg-layout-672 .itg-widget-child .droppable,
-  .education-layout-page .itg-295-layout .droppable,
-  .education-layout-page .itg-325-layout .droppable,
-  .education-layout-page .itg-345-layout .droppable,
-  .education-layout-page .itg-325-layout .ad-widget,
   .auto-layout-page .auto-block-1,
   .election-page .right-side .itg-484 .droppable {
     height: auto;
@@ -782,15 +811,8 @@
 
   /*End CSS Top Block Grid Home Page*/
   /*Start Dont miss Home page css*/
-  .dont-miss ul .dont-miss-listing {
-    width: 100%;
-    padding: 0px 0px 20px 0;
-  }
   .dont-miss ul .dont-miss-listing .dm-pic {
     width: 124px;
-  }
-  .dont-miss ul .dont-miss-listing:nth-child(3) {
-    padding-bottom: 20px;
   }
 
   /*End Dont miss Home page css*/
@@ -921,6 +943,13 @@
     margin-bottom: 40px;
   }
 
+  .education-layout-page .itg-layout-565 .itg-widget-parent .droppable {
+    height: 300px;
+  }
+  .education-layout-page .itg-layout-565 .itg-widget-parent .droppable.m-bottom40 {
+    margin-bottom: 0;
+  }
+
   /*CSS end education page special*/
   /*css start side bar section for video and photo*/
   .default-video .sidebar-section-photo, .default-photo .sidebar-section-photo {
@@ -933,6 +962,9 @@
     margin-bottom: 50px;
   }
 
+  .sport-home-layout-page .right-side .col-md-12 {
+    min-height: 260px;
+  }
   .sport-home-layout-page .right-side .col-md-12 .ad-widget {
     margin-top: 40px;
   }
@@ -954,6 +986,17 @@
   }
   #block-views-program-schedule-block-3 .col-md-3:nth-child(3n+1) {
     clear: left;
+  }
+
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .title.sponsors-parent {
+    padding-right: 93px;
+  }
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .title .spncor-tag {
+    width: 75px;
+    padding-right: 5px;
+  }
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .title .spncor-tag span {
+    font-size: 10px;
   }
 
   /*end event page*/
@@ -1225,6 +1268,12 @@
   .breakingnew-home .new-detail .marquee-container {
     width: 100%;
     height: 23px;
+    float: none;
+    line-height: 23px;
+  }
+  .breakingnew-home .new-detail .marquee-container .marquee-child {
+    height: 23px;
+    line-height: 23px;
   }
   .breakingnew-home .new-detail .social-share {
     display: none;
@@ -1346,6 +1395,10 @@
     margin-bottom: 50px;
   }
 
+  .movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-caption a {
+    font-size: 16px;
+  }
+
   /*movie page css end*/
   /*Globle search page css start*/
   .view-front-end-global-search .views-exposed-widget .caln {
@@ -1409,6 +1462,7 @@
     padding-left: 15px;
     width: 100%;
     background: transparent;
+    display: none;
   }
 
   .event-sidebar .header-top .event-header-banner {
@@ -1495,6 +1549,12 @@
   }
 
   /*sosory page css end*/
+  /*election page css start*/
+  .election-page .election-graph .col-el-5 {
+    width: 245px;
+  }
+
+  /*election page css end*/
 }
 @media only screen and (max-width: 767px) {
   /*css start oscar-layout-page */
@@ -1556,6 +1616,54 @@
   }
 
   /*election page css end*/
+  /*Start Dont miss Home page css*/
+  .dont-miss ul .dont-miss-listing {
+    width: 100%;
+    padding: 0px 0px 20px 0;
+  }
+  .dont-miss ul .dont-miss-listing .dm-pic {
+    width: 124px;
+  }
+  .dont-miss ul .dont-miss-listing:nth-child(3) {
+    padding-bottom: 20px;
+  }
+
+  /*End Dont miss Home page css*/
+  /*education page css start*/
+  .education-layout-page .itg-layout-565 .droppable,
+  .education-layout-page .itg-layout-672 .itg-widget-child .droppable,
+  .education-layout-page .itg-295-layout .droppable,
+  .education-layout-page .itg-325-layout .droppable,
+  .education-layout-page .itg-345-layout .droppable,
+  .education-layout-page .itg-325-layout .ad-widget {
+    height: auto;
+  }
+
+  /*education page css end*/
+  /*Globe change for don't miss start*/
+  .dont-miss ul .dont-miss-listing .dm-detail,
+  #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-detail,
+  #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-detail,
+  .osscar-video ul .dont-miss-listing .dm-detail {
+    overflow: initial;
+  }
+
+  /*Globe change for don't miss end*/
+  /*event page css start*/
+  #block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider li {
+    width: 100%;
+  }
+
+  #block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider .slick-prev, #block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider .slick-next {
+    display: none;
+  }
+
+  /*event page css end*/
+  .video-heading, .photo-heading {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 10px;
+  }
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/
@@ -2086,6 +2194,7 @@
   }
   .oscar-layout-page .oscar-slider .bottom-slider li p {
     margin-top: 0;
+    overflow: hidden;
   }
   .oscar-layout-page .oscar-slider .bottom-slider i {
     color: #ccc;
@@ -2127,10 +2236,6 @@
               height: 100%;
           }
       }*/
-  .page-user .social-share a {
-    padding: 0 10px 0 45px;
-  }
-
   /*CSS Starts Photo landing page*/
   .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li, .view-programme-content-live-tv .view-content .photo-list li {
     width: 33.33333%;
@@ -2420,7 +2525,7 @@
     border-left: 1px solid #dddddd;
   }
   .story-section .buzzfeed-byline .byline .profile-detail {
-    width: 50%;
+    width: 49%;
   }
   .story-section .buzzfeed-byline .social-share-story {
     float: right;
@@ -2560,6 +2665,7 @@
   .view-front-end-global-search .attachment .count {
     font-size: 30px;
     font-size: 1.875rem;
+    line-height: 36px;
   }
   .view-front-end-global-search .views-exposed-widget .caln {
     position: inherit;
@@ -2851,7 +2957,6 @@
   #block-views-video-landing-header-block .video-header-left .social-likes {
     float: left;
     width: 15.5%;
-    overflow: hidden;
     padding: 0;
     border-bottom: none;
     margin-bottom: 0;

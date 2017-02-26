@@ -198,7 +198,7 @@ function ads_features_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -240,7 +240,7 @@ function ads_features_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -298,7 +298,7 @@ function ads_features_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
@@ -340,7 +340,7 @@ function ads_features_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -382,7 +382,7 @@ function ads_features_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -424,7 +424,7 @@ function ads_features_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -452,7 +452,7 @@ function ads_features_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_ads_headerscript',
-    'label' => 'Internal Header script	',
+    'label' => 'Internal Header script (Website)',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -467,6 +467,48 @@ function ads_features_field_default_field_instances() {
       ),
       'type' => 'text_textarea',
       'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance: 'node-ads_management-field_ads_headerscript_mob'.
+  $field_instances['node-ads_management-field_ads_headerscript_mob'] = array(
+    'bundle' => 'ads_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please enter script code with Javascript <b>script</b> tag.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 22,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ads_headerscript_mob',
+    'label' => 'Internal Header script (Mobile)',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 8,
     ),
   );
 
@@ -524,7 +566,7 @@ function ads_features_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -553,7 +595,7 @@ function ads_features_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_ads_template_selection',
-    'label' => 'Template Selection',
+    'label' => 'Select Section',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -603,7 +645,7 @@ function ads_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
@@ -732,11 +774,12 @@ function ads_features_field_default_field_instances() {
   t('If you want to include external script on Category Listing Page and Node Detail Page, please check <b>visibility flag  for external script</b>.');
   t('Internal Body close script');
   t('Internal Body start script');
-  t('Internal Header script	');
+  t('Internal Header script (Mobile)');
+  t('Internal Header script (Website)');
   t('Please enter script code with Javascript <b>script</b> tag.');
+  t('Select Section');
   t('Select template type');
   t('Start Date');
-  t('Template Selection');
   t('Template section');
 
   return $field_instances;

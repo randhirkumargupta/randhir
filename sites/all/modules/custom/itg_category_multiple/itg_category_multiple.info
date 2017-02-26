@@ -1,0 +1,5 @@
+name = ITG Category Multiple
+description = "ITG Category Multiple"
+core = 7.x
+package = ITG
+files[] = itg_category_multiple.module

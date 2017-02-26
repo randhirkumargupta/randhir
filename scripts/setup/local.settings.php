@@ -9,6 +9,12 @@ $conf['mongodb_connections'] = array(
 
 include_once('./includes/cache.inc');
 
+ini_set('session.gc_probability', 1);
+ini_set('session.gc_divisor', 100);
+ini_set('max_input_vars', 50000);
+ini_set('session.gc_maxlifetime', 200000);
+ini_set('session.cookie_lifetime', 2000000);
+
 # -- Configure Cache
 #$conf['cache_backends'][] = 'sites/all/modules/contrib/mongodb/mongodb_cache/mongodb_cache.inc';
 #$conf['cache_class_cache'] = 'DrupalMongoDBCache';

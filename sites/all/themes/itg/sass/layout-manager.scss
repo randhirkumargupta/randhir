@@ -599,6 +599,7 @@ img{
 /*End Watch right Now suggest End*/
 /*Start photo section slider Homepage*/
 .featured_photo_carousel, .tech-block_5, .auto-block_5{
+    .widget-settings{position: absolute; left: 10px; top: 10px; z-index:1;}   
     .widget-title{
         @include pos(absolute,10px,null,null,10px);        
     }
@@ -964,7 +965,18 @@ img{
 /*CSS End special auto page */
 /*CSS Start special tech page */
 .tech-layout-page{
-    
+    .section_wise_order-buying-guid, .section_wise_order-in-depth{
+        .widget-settings{
+            position: absolute;
+            z-index:1;
+        }
+    }
+    .section_wise_order-in-depth{
+        .widget-settings{
+            left:10px;
+            top: 10px;
+        }
+    }
      .itg-layout-672{
         height: 672px;
         overflow: hidden;
@@ -1444,11 +1456,13 @@ img{
         }
         }        
     }
-    .section_wise_order-edu-tips-and-trick{
+    .droppable{
+     .section_wise_order-edu-tips-and-trick{
         overflow: auto;
         border: 1px solid #ddd;
         padding: 10px;
-    }
+    }   
+    }    
     .auto-tips-n-tricks{
         ul{
             li{
@@ -2139,15 +2153,23 @@ img{
 
 /* CSS For Election Page */
 .election-page{ 
-    h1{
-        margin-top:60px;
-        .disc-share{
-            a{
+   .election-top-block{
+        margin-top:40px;
+        position: relative;
+        z-index: 10; 
+        h1{
+            display: inline;
+        }
+        @include social-share; 
+        .social-share{
+            display: inline-block;
+            vertical-align: top;
+            padding-top: 15px;
+            i.fa-share-alt{
                 font-size: 20px;
-                color: #b6b6b6;
             }
         }
-    }
+    } 
     .left-side{
         .itg-415-layout{
             .droppable{
@@ -2868,3 +2890,7 @@ img{
             }
 }            
 /*css End common highlight */   
+
+.featured-news .featured-post span.smilies-title img {
+    width: inherit;
+}

@@ -160,14 +160,14 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
         '#weight' => 21,
         '#value' => t('Cancel'),
       );
-      $form['actions']['itg_custom_button'] = array(
+      /*$form['actions']['itg_custom_button'] = array(
         '#type' => 'submit',
         '#value' => t('Save as Draft'),
         '#submit' => array(
             'node_form_submit',
             'itg_quiz_form_save_as_draft_submit_callback'
         ),
-      );
+      );*/
       $form['field_quiz_add_questions'][LANGUAGE_NONE]['#title'] = '';
       $form['field_quiz_answer_type']['#access'] = FALSE;
       $form['field_quiz_options']['#access'] = FALSE;
@@ -1024,6 +1024,7 @@ $record->correct_answer;
     $not_selected = json_decode(stripslashes($_GET['not_select']));
       foreach($not_selected as $key=>$value) {
        $ansval = explode("-",$value);
+      
         $query="select f3.field_quiz_correct_answer_value as correct_answer from  node as n
 	inner join field_data_field_quiz_add_questions as f1  on f1.entity_id = n.nid
 	inner join field_data_field_quiz_options_answer as f2  on f2.entity_id = f1.field_quiz_add_questions_value
@@ -1039,7 +1040,7 @@ $record->correct_answer;
     $answer[] = $record->correct_answer;
   }
   if(in_array('Yes', $answer)) {
-   	$choice  = 'incorrect';
+   	$choice  = 'Incorrect';
 	$query =db_select('taxonomy_term_data', 't');
 	$query->join('field_data_field_radio_button', 'r', 'r.entity_id = t.tid');
 	$query->fields('t', array('name'));
@@ -1050,10 +1051,10 @@ $record->correct_answer;
 	if(is_array($result) && !empty($result)){
 	  shuffle($result);
 	}        
-	print $result[0]->name.'-incorrect';
+	print $result[0]->name.'-Incorrect';
   } else {
 	  foreach($ans as $key=>$value) {
-	    $ansval = explode("-",$value);
+	    $ansval = field_data_field_quiz_add_questions_explode("-",$value);
 	    $query="select f3.field_quiz_correct_answer_value as correct_answer from  node as n
 		inner join field_data_field_quiz_add_questions as f1  on f1.entity_id = n.nid
 		inner join field_data_field_quiz_options_answer as f2  on f2.entity_id = f1.field_quiz_add_questions_value
@@ -1066,7 +1067,7 @@ $record->correct_answer;
 	    $result=db_query($query);
 
 	    $record = $result->fetchObject();
-            $answer_checked[] = $record->correct_answer;            	    
+            $answer_checked[] = $record->correct_answer;    
 	  }
           if(in_array('', $answer_checked)) {
 	        $choice  = 'incorrect';

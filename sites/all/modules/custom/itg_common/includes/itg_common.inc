@@ -142,10 +142,8 @@ function itg_get_all_node($content_type, $uid) {
     $query = "SELECT COUNT(*) amount FROM {node} n " .
             "WHERE n.type = :type AND n.uid = :uid";
     $result = db_query($query, array(':type' => $content_type, ':uid' => $uid))->fetch();
-
     return $result->amount;
 }
-
 /**
  * Get node publish count.
  * @param string $content_type
@@ -187,7 +185,7 @@ function itg_get_all_node_type($uid) {
 function itg_last_node_user($uid) {
 
     $last_result = db_select('node', 'n')
-            ->fields('n', array('title', 'type'))
+            ->fields('n', array('title', 'type','nid'))
             ->condition('uid', $uid, '=')
             ->orderBy('created', 'DESC')//ORDER BY created
             ->range(0, 1)
@@ -196,6 +194,7 @@ function itg_last_node_user($uid) {
     while ($last_record = $last_result->fetchAssoc()) {
         $last_record_info['title'] = $last_record['title'];
         $last_record_info['type'] = $last_record['type'];
+        $last_record_info['nid'] = $last_record['nid'];
     }
 
     return $last_record_info;
@@ -209,7 +208,7 @@ function itg_last_node_user($uid) {
  */
 function itg_last_publish_user_node($uid, $publish_id) {
     $last_result_user = db_select('node', 'n')
-            ->fields('n', array('title', 'type'))
+            ->fields('n', array('title', 'type','nid'))
             ->condition('uid', $uid, '=')
             ->condition('status', $publish_id, '=')
             ->orderBy('created', 'DESC')
@@ -219,6 +218,7 @@ function itg_last_publish_user_node($uid, $publish_id) {
     while ($last_record_user = $last_result_user->fetchAssoc()) {
         $last_record_info_user['title'] = $last_record_user['title'];
         $last_record_info_user['type'] = $last_record_user['type'];
+        $last_record_info_user['nid'] = $last_record_user['nid'];
     }
 
     return $last_record_info_user;
@@ -235,7 +235,7 @@ function itg_last_node_published_user($uid, $publish_id) {
             ->fields('w', array('nid', 'vid'))
             ->condition('uid', $uid, '=')
             ->condition('published', $publish_id, '=')
-            ->orderBy('stamp', 'DESC')//ORDER BY created
+           // ->orderBy('stamp', 'ASC')//ORDER BY created
             ->range(0, 1)
             ->execute();
 
@@ -502,7 +502,7 @@ function itg_common_get_latest_byline($nid, $status) {
 }
 
 
-/** 
+/**
  * Implementing 'itg_common_custompath_insert_load'.
  * @param $node object
  * Creating Custom path alias for story, photogallery and videogallery
@@ -510,30 +510,26 @@ function itg_common_get_latest_byline($nid, $status) {
 
 function itg_common_custompath_insert_load($node) {
     global $edited_sef_url;
-    
-    if (!empty($node->path['alias'])) {
-        $path_data = explode("/", $node->path['alias']);
-        $set_hierarchy = array_reverse($path_data);
-        $alias_set = preg_replace("/[0-9]{4}/", "key-year", $set_hierarchy[0]);
-        $sefurl = explode("key-year", $alias_set);
-        $node_sef = rtrim($sefurl[0],'-');
-    } else if(!empty ($edited_sef_url)) {
+    if(!empty ($edited_sef_url)) {
         $node_sef = $edited_sef_url;
     } else {
         $node_sef = $node->title;
     }
-
-    if ($node->workbench_moderation_state_new == 'draft' || $node->workbench_moderation_state_new == 'published'){
-        $published_date = date('Y-m-d', $node->created);
-    }
+    if(!empty($node->workbench_moderation_state_new)){
+      if ($node->workbench_moderation_state_new == 'draft' || $node->workbench_moderation_state_new == 'published'){
+          $published_date = date('Y-m-d', $node->created);
+      }
     
+    } else {
+      $published_date = date('Y-m-d', $node->changed);
+    }
     $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
     if (!empty($getsection)) {
       $parents = taxonomy_get_parents_all($getsection);
       if (isset($parents) && !empty($parents)) {
-          foreach ($parents as $key => $val) {
-              $section_hierarchy[] = $val->name;
-          }
+        foreach ($parents as $key => $val) {
+          $section_hierarchy[] = $val->name;
+        }
       }
       $set_hierarchy = array_reverse($section_hierarchy);
       $pathdata = strtolower(implode("/", $set_hierarchy)) . '/'. $node->type . '/' . trim($node_sef). '-'. $node->nid .'-'. $published_date;

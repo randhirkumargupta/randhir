@@ -1,6 +1,6 @@
 <?php
 global $base_url, $user;
-if ($base_url != BACKEND_URL) {
+
 if (!empty($data['itg_main_manu_header'])) {
   foreach ($data['itg_main_manu_header'] as $key => $val) {
     if (isset($val['#localized_options']['attributes']['title']) && $val['#localized_options']['attributes']['title'] == 1) {
@@ -8,8 +8,9 @@ if (!empty($data['itg_main_manu_header'])) {
     }
   }
 }
-
-$get_user_detail = user_load($user->uid);
+if (isset($user->uid)) {
+  $get_user_detail = user_load($user->uid);
+}
 
 if (!empty($get_user_detail->field_user_picture[LANGUAGE_NONE][0]['uri'])) {
   $user_pic = theme('image_style', array('style_name' => 'user_header_image_30x30', 'path' => $get_user_detail->field_user_picture[LANGUAGE_NONE][0]['uri']));
@@ -87,7 +88,7 @@ else {
       <ul class="social-nav mhide">
         <li><a href="https://www.facebook.com/IndiaToday/" class="user-activity def-cur-pointer" rel="1" data-tag="homepage" data-activity="fb_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-facebook"></i></a></li>
         <li><a href="https://twitter.com/indiatoday" class="user-activity def-cur-pointer" rel="1" data-tag="homepage" data-activity="twitter_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-twitter"></i></a></li>
-        <li><a href="#" title=""><i class="fa fa-google-plus"></i></a></li>
+        <li><a href="https://plus.google.com/+indiatoday" class="user-activity def-cur-pointer" rel="1" data-tag="homepage" data-activity="google_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-google-plus"></i></a></li>
         <li><a href="#" title=""><i class="fa fa-rss"></i></a></li>
         <li><a href="#" title=""><i class="fa fa-mobile"></i></a></li>
         <li><a href="#" title=""><i class="fa fa-volume-up"></i></a></li>
@@ -187,4 +188,4 @@ else {
   </div>
 
 </div>
-<?php } ?>
+

@@ -95,11 +95,28 @@ jQuery(document).ready(function() {
     if (jQuery('[name="field_select_template_type[und]"]:checked').val() == "Section") {
       jQuery('#itg_ads_ttype_replace').show();
     }
-  }
-  catch (e) {
+  } catch (e) {
 
   }
 
+
+
+
+  jQuery('.itg-ads-preview-ads').on('click', function(e) {
+    e.preventDefault();
+    jQuery.colorbox({
+      open: true,
+      scrolling: false,
+      innerWidth: '800',
+      innerHeight: '600',
+      href: Drupal.settings.basePath + "itg-ads-preview-ads",
+      data: jQuery("#ads-management-node-form").serializeArray(),
+      onClosed: function() {
+        //Do something on close.
+      }
+    });
+
+  });
 
 
 
