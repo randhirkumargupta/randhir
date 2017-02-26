@@ -185,7 +185,7 @@ jQuery(document).ready(function () {
                         }
                         if (obj.type == 'story') {
                             jQuery('.later').html('<a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i><span>READ LATER</span></a>');
-                            jQuery('.left-later').html('<span> <a title = "Read Later" class="def-cur-pointer active"><i class="fa fa-bookmark"></i>READ LATER</a><span class="flag-throbber">&nbsp;</span></span>');
+                            jQuery('.left-later').html('<span> <a title = "Read Later" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i>READ LATER</a><span class="flag-throbber">&nbsp;</span></span>');
                         }
                         jQuery('.stryimg').prepend('<div class="saved-photogallery">Saved</div>');
                         jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">Saved</div>');

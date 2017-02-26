@@ -804,18 +804,6 @@ return $_GET[\'category\'];
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
-  /* Field: Content: Extra large image */
-  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'video_landing_page_170_x_127',
-    'image_link' => '',
-  );
   /* Field: Content: video_duration */
   $handler->display->display_options['fields']['field_video_duration']['id'] = 'field_video_duration';
   $handler->display->display_options['fields']['field_video_duration']['table'] = 'field_data_field_video_duration';
@@ -857,7 +845,7 @@ return $_GET[\'category\'];
   $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
-    'image_style' => 'video_landing_page_170_x_127',
+    'image_style' => 'image170x127',
     'image_link' => '',
   );
 
@@ -888,18 +876,6 @@ return $_GET[\'category\'];
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
-  /* Field: Content: Extra large image */
-  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'video_landing_page_170_x_127',
-    'image_link' => '',
-  );
   /* Field: Content: video_duration */
   $handler->display->display_options['fields']['field_video_duration']['id'] = 'field_video_duration';
   $handler->display->display_options['fields']['field_video_duration']['table'] = 'field_data_field_video_duration';
@@ -940,7 +916,7 @@ return $_GET[\'category\'];
   $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
-    'image_style' => 'video_landing_page_170_x_127',
+    'image_style' => 'image170x127',
     'image_link' => '',
   );
   $handler->display->display_options['defaults']['sorts'] = FALSE;

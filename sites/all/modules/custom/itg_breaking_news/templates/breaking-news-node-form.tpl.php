@@ -31,7 +31,7 @@
              </div>
 <?php print drupal_render($form['field_story_itg_tags']); ?>
 
-<div id="BrowseMedia">
+<div id="BrowseMedia" class='browse-media-file'>
   <h2 class="story-title">Browse Media</h2>
   <?php print drupal_render($form['field_story_extra_large_image']); ?>
   <p class="pre-desc">This image will be resized by the system into pre-defined dimensions</p>

@@ -352,10 +352,10 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
 
     case "1":
       // Check that the first value is alphabetic
-      if (function_exists(itg_sso_user_email_check)) {
+      if (function_exists('itg_sso_user_email_check')) {
         $get_user_check_email = itg_sso_user_email_check($mail);
       }
-      if (function_exists(itg_sso_user_mobile_check)) {
+      if (function_exists('itg_sso_user_mobile_check')) {
         $get_user_check_mobile = itg_sso_user_mobile_check($mobile);
       }
 
@@ -420,7 +420,7 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
 
     case "2":
       // Check that the second value is numeric
-      if (function_exists(itg_sso_reg_get_otp)) {
+      if (function_exists('itg_sso_reg_get_otp')) {
         $otp_match = itg_sso_reg_get_otp($form_state['values']['step2mobile'], $mail, 'register');
       }
 
@@ -513,7 +513,7 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
 
         $account = user_save(NULL, $edit);
 
-        if(function_exists(itg_personalization_reddem_referfriend)) {
+        if(function_exists('itg_personalization_reddem_referfriend')) {
           itg_personalization_reddem_referfriend($_SESSION['referral_key']);
           unset($_SESSION['referral_key']);
         }
@@ -522,7 +522,7 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
         // Send an email.
         if (empty($form_state['values']['mobile'])) {
           // _user_mail_notify($op, $account);
-          if (function_exists(itg_sso_get_mail_content)) {
+          if (function_exists('itg_sso_get_mail_content')) {
             if(!empty($form_state['values']['url_info'])) {
               $url_info = $form_state['values']['url_info'];
             }
@@ -532,7 +532,7 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
         }
         else {
           $rand_otp = rand(0, 9999);
-          if (function_exists(itg_sso_first_time_otp_insert)) {
+          if (function_exists('itg_sso_first_time_otp_insert')) {
             itg_sso_first_time_otp_insert($mobile, $mail, $rand_otp, 'register');
             itg_sso_sms_send($rand_otp, $mobile);
           }

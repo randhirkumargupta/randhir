@@ -598,10 +598,8 @@ img{
 }
 /*End Watch right Now suggest End*/
 /*Start photo section slider Homepage*/
-.featured_photo_carousel{
-  .widget-settings{position: absolute; left: 10px; top: 10px;}
-}
 .featured_photo_carousel, .tech-block_5, .auto-block_5{
+    .widget-settings{position: absolute; left: 10px; top: 10px; z-index:1;}   
     .widget-title{
         @include pos(absolute,10px,null,null,10px);        
     }
@@ -967,7 +965,18 @@ img{
 /*CSS End special auto page */
 /*CSS Start special tech page */
 .tech-layout-page{
-    
+    .section_wise_order-buying-guid, .section_wise_order-in-depth{
+        .widget-settings{
+            position: absolute;
+            z-index:1;
+        }
+    }
+    .section_wise_order-in-depth{
+        .widget-settings{
+            left:10px;
+            top: 10px;
+        }
+    }
      .itg-layout-672{
         height: 672px;
         overflow: hidden;

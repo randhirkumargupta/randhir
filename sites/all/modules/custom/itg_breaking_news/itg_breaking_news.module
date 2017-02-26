@@ -220,7 +220,7 @@ function itg_breaking_news_after_build($form, &$form_state) {
             });', array('type' => 'inline', 'scope' => 'footer'));
     }
 
-    $form['field_breaking_content_details']['#prefix'] = '<div id="custom_another_item"><a href="javascript:void(0)" id="custom_add_another_item">Add another item</a></div>';
+    //$form['field_breaking_content_details']['#prefix'] = '<div id="custom_another_item"><a href="javascript:void(0)" id="custom_add_another_item">Add another item</a></div>';
     for ($i = 0; $i <= $form['field_breaking_content_details'][LANGUAGE_NONE]['#max_delta']; $i++) {
         $count = $i + 1;
         $form['field_breaking_content_details'][LANGUAGE_NONE][$i]['#title'] = 'Content details - ' . $count;

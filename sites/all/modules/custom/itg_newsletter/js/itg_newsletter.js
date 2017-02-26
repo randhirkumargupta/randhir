@@ -230,7 +230,7 @@ jQuery(document).ready(function () {
                         jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find('.ajax-progress-throbber').hide();
                         jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-title').find('.form-text').val(data.title);
                         jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-kicker').find('.form-textarea').val(data.kicker);
-                        jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div.image-widget-data .form-text').attr('value', data.fid);
+                        jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div.image-widget-data :hidden').attr('value', data.fid);
                         jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div.image-widget-data .form-submit').triggerHandler('mousedown');
                     },
                     error: function () {
