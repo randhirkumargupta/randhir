@@ -9769,6 +9769,7 @@ div.node{
 [id*="daily-motion-video-dashboard"]{
   @extend .node-form;
   fieldset{
+    @extend .fleft;
     border: none;
     legend{
       display: none;
@@ -9782,15 +9783,15 @@ div.node{
         display: block;
         padding: 0 0 5px;
       }
-      &.form-item-filtertype{
-        select{
-          margin-top: 23px;
-        }
-      }
     }
     #edit-display-button{
-      margin-top: 54px;
+      @extend .btn-small;
+      margin-top: 33px;
     }
+  }
+  #edit-reset{
+    @extend .btn-small;
+    margin-top: 33px;
   }
   table{
     @extend .views-table;
@@ -10701,4 +10702,11 @@ span.file a{pointer-events: none; color: #2f2f2f;}
 }
 .my-stats-status{
   border-bottom: 1px solid #ddd;
+}
+.itg-photo-popup{
+  .itg-close-popup_new {
+    color: #323232;
+    float: right;
+    font-size: 20px;
+  }
 }
