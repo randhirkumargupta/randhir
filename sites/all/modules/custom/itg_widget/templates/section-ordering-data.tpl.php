@@ -843,8 +843,8 @@ else if ($widget_style == 'home-watch') {
             ?>
             <li class="dont-miss-listing">
               <?php
-              if ((!empty($entity['si_file_uri']) && isset($entity['si_file_uri']))) {
-                $extra_large_image_url = image_style_url("widget_very_small", $entity['si_file_uri']);
+              if ((!empty($entity['si_file_uri']) && file_exists($entity['si_file_uri']))) {
+                $extra_large_image_url = image_style_url("image170x127", $entity['si_file_uri']);
               }
               else {
                 $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg";
@@ -1056,11 +1056,12 @@ else if ($widget_style == 'sport-column') {
            $nid = $entity['nid'];
           $desc = $entity['title'];
           $node_data = node_load($entity['nid']);
+         
           ?>
           <li class="trending-videos-list">
             <?php
-            if ($node_data->field_common_by_line_reporter_id['und'][0]['value'] != "") {
-              $reporter = node_load($node_data->field_common_by_line_reporter_id['und'][0]['value']);
+            if ($node_data->field_reporter_publish_id['und'][0]['value'] != "") {
+              $reporter = node_load($node_data->field_reporter_publish_id['und'][0]['value']);
               
             }
 
@@ -1289,8 +1290,8 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
             $video_class = 'video-icon';
           }
           if ($count == 0 && (!empty($entity['mi_file_uri']) && isset($entity['mi_file_uri']))) {
-            //$extra_large_image_url = image_style_url("section_ordering_widget", $entity->field_story_extra_large_image['und'][0]['uri']);
-            $extra_large_image_url = file_create_url($entity['mi_file_uri']);
+            $extra_large_image_url = image_style_url("section_ordering_widget", $entity['mi_file_uri']);
+            //$extra_large_image_url = file_create_url($entity['mi_file_uri']);
           }
           ?>
           <?php if ($count == 0) : ?>

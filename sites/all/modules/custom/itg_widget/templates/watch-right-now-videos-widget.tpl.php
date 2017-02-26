@@ -6,10 +6,9 @@
     <ul>    
         <?php foreach ($data as $video_key => $video_data) { ?>
         <li id="watch-right-now-<?php echo $video_data['nid'] ?>" class="watch-right-now-list watch-right-now-<?php echo $video_key ?>">        
-    <?php if (!empty($video_data['si_file_uri'])) { ?>
+    <?php  if (!empty($video_data['si_file_uri']) && file_exists($video_data['si_file_uri'])) { ?>
             <a href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $video_data['nid']); ?>" class="pic">
-
-      <?php $file_uri = file_create_url($video_data['si_file_uri']); ?>
+                <?php $file_uri = image_style_url("image170x127", $video_data['si_file_uri']); ?>
               <img alt="" src="<?php print $file_uri; ?>" />
             </a>
             <?php
@@ -22,7 +21,13 @@
           <?php } ?>
             <?php if (!empty($video_data['title'])) : ?>
             <p class="title">
-            <?php echo l(mb_strimwidth($video_data['title'], 0, 140, ".."), "node/" . $video_data['nid']); ?>
+                <?php 
+                if(function_exists('itg_common_get_smiley_title')) {
+                  echo l(itg_common_get_smiley_title($video_data['nid'], 0, 60), "node/" . $video_data['nid'] , array('html' => TRUE));
+                } else {
+                  echo l(mb_strimwidth($video_data['title'], 0, 70, ".."), "node/" . $video_data['nid']);
+                }
+                ?>
             </p>
         <?php endif; ?>
         </li>
