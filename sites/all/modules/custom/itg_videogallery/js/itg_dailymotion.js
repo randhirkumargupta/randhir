@@ -25,7 +25,7 @@
                     parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_video][button]").trigger('mousedown');
 
                     //parent.jQuery("#" + video_field_id + "-button").mousedown();
-                    parent.jQuery('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
+                    parent.jQuery('form').ajaxComplete(function(event, request, settings) {
                         try {
                             parent.jQuery.colorbox.close();
                         } catch (err) {
@@ -58,7 +58,7 @@
                     jQuery('#loader-data img').show().parent().addClass('loader_overlay');
                     //  parent.jQuery("input[name='" + video_field_file + "'").val(vid);
                     parent.jQuery("[name='field_video_upload_add_more']").mousedown();
-                    parent.jQuery('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
+                    parent.jQuery('form').ajaxComplete(function(event, request, settings) {
                         try {
                             parent.jQuery.colorbox.close();
                         } catch (err) {
@@ -242,7 +242,7 @@ jQuery('document').ready(function() {
             if (getbtnmane != "") {
                 parent.jQuery('[name="' + getbtnmane + '[fid]"]').val(videogallery_new_file_hold);
                 parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_video][button]").trigger('mousedown');
-                parent.jQuery('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
+                parent.jQuery('form').ajaxComplete(function(event, request, settings) {
                   
                     try {
                        
@@ -279,7 +279,7 @@ jQuery('document').ready(function() {
             var getbtnmane = $(this).attr('btn_name');
             parent.jQuery('[name="' + getbtnmane + '[fid]"]').val(videogallery_new_file_hold);
             parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_video][button]").trigger('mousedown');
-            $('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
+            $('#form').ajaxComplete(function(event, request, settings) {
 
                 parent.jQuery.colorbox.close();
             });
