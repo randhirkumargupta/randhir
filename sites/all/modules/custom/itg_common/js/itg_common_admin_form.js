@@ -6,8 +6,9 @@
 (function ($) {
   Drupal.behaviors.itg_common_form = {
     attach: function (context, settings) {
-        
+       
       var fid = settings.itg_common.settings.formid;
+      
       var arg_url = settings.itg_common.settings.arg_url;
       
       if (arg_url == 'user') {
@@ -22,6 +23,11 @@
       if (fid == 'custom_html_widgets_node_form') {
         jQuery(".vertical-tabs").hide();
       }
+//      if (fid == 'views-exposed-form-breaking-news-page') {
+//        jQuery("form").each(function() {            
+//          this.reset();
+//        });
+//      }
   }
  };
 })(jQuery, Drupal, this, this.document);

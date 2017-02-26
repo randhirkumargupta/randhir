@@ -28,13 +28,13 @@
                 }
             });
             
-            $('#edit-path-pathauto').click(function() {
+           /* $('#edit-path-pathauto').click(function() {
               if ($("#edit-path-pathauto").is(":checked")) {                
                 $("#edit-path-alias").attr('readonly', 'readonly');
               } else {                
                 $("#edit-path-alias").removeAttr('readonly');
               }  
-            });
+            });*/
             
             
             jQuery('input[name="field_story_schedule_date_time[und][0][value][date]"]').keydown(false);
