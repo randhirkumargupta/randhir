@@ -4263,7 +4263,8 @@ h1.category-heading{
     }
     .photo-list{
         max-height: 210px;
-        overflow-y: hidden;        
+        overflow-y: hidden; 
+        margin: 0 -10px !important;
     }
     .view-content .photo-list li{        
         overflow: hidden;
