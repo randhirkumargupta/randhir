@@ -12,10 +12,10 @@
  * Implements hook_init.
  * {@inheritdoc}
  */
-function itg_miscellaneous_init() {
-  global $user;
-  //p(node_load(2540));
-}
+//function itg_miscellaneous_init() {
+//  global $user;
+//  //p(node_load(2540));
+//}
 
 /**
  * Implements hook_menu().
