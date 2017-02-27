@@ -15,7 +15,7 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   switch ($form_id) {
     case 'story_node_form':
-
+//p($form_state);
       //p(itg_category_complete_hierarchy(3000));
       $sections = itg_category_multiple_get_section();
 
