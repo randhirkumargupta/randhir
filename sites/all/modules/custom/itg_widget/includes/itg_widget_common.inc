@@ -1390,15 +1390,12 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
 
     if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_listing_page')) {
-        $anchor_tid = variable_get('anchor_id_for_widget');
-        $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
-        if (strlen($anchor_tid) <= 0) {
-// Link should display only adminstrator.
-            if (in_array('administrator', $user->roles)) {
-                $link = l("click here", 'admin/settings/custom-variables');
-            }
-            drupal_set_message("Anchor setting not found $link", "error");
+        $anchor_tid = variable_get('reporter_tid');
+        foreach($query->where[1]['conditions'] as $keys=>$conditions) {
+        if(is_string($conditions['field']) && $conditions['field'] == 'field_data_field_celebrity_pro_occupation.field_celebrity_pro_occupation_tid') {
+          $query->where[1]['conditions'][$keys]['value'] = $anchor_tid;
         }
+      }
     }
 
     if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_listing_widget')) {
@@ -1704,8 +1701,45 @@ function itg_widget_views_query_alter(&$view, &$query) {
         }
         $query->where[1]['conditions'][4]['value'] = $content_value_for_query;
     }
+    // Adding relationship.
+  if (_itg_analytics_relationship_views($view->name, $view->current_display)) {
+    $join = new views_join();
+    $join->table = 'itg_node_analytics_count_data';
+    $join->field = 'nid';
+    $join->left_table = 'node';
+    $join->left_field = 'nid';
+    $join->type = 'LEFT';
+    //add the join the the view query
+    $view->query->add_relationship('itg_node_analytics_count_data', $join, 'node');
+    $view->query->add_field('itg_node_analytics_count_data', 'count');
+    $order_by = array();
+    $order_by['field'] = 'count';
+    $order_by['direction'] = 'DESC';
+    array_unshift($query->orderby, $order_by);
+  }
 }
 
+/**
+ * Function which returns flag for add relationship with analytics table.
+ * @param string $view_name
+ * @param string $view_current_display
+ * @return boolean
+ */
+function _itg_analytics_relationship_views($view_name , $view_current_display) {
+  $flag = FALSE;
+  if(!empty($view_name) && !empty($view_current_display)) {
+    if($view_name == "story_widget" && ($view_current_display == "most_popular" || $view_current_display == "trending_videos" || $view_current_display == "watch_right_now" || $view_current_display == "top_takes_video")) {
+      $flag = TRUE;
+    }
+    if($view_name == "so_sorry" && $view_current_display == "most_watched ") {
+      $flag = TRUE;
+    }
+    if($view_name == "most_read_widget" && $view_current_display == "most_read_widget_contents") {
+      $flag = TRUE;
+    }
+  }
+  return $flag;
+}
 /**
  * Function for returning node queue id by node queue machine name.
  *
