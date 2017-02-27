@@ -16,16 +16,6 @@ function itg_task_allocation_init() {
   }
 }
 
-/**
- * Implements hook_form_alter().
- */
-function itg_task_allocation_form_alter(&$form, &$form_state, $form_id) {
-  /*if ($form_id == 'task_idea_allocation_tracking_node_form') {
-    drupal_add_js('jQuery(document).ready(function() {
-              jQuery(".vertical-tabs-list").hide();              
-            });', array('type' => 'inline', 'scope' => 'footer'));
-  }*/
-}
 
 /**
  * Implements hook_menu().
