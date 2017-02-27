@@ -8595,25 +8595,36 @@ div.node{
               background-color: #ff1f1f !important;
             }
           }
-          &:hover{
-            span{
-              background-color: #ffc106;
-            }
-          }
         }
         .form-radio, .form-checkbox{
+          width: calc(100% - 30px);
+          height: 100%;
           position: absolute;
+          z-index: 99;
           opacity: 0;
-          &:checked + label{            
-            color: #000;   
-            padding:0;
-            span{
-              background-color: #ffc106;
-            }
+          &:hover + label span, &:checked + label span{            
+            color: #000;
+            background-color: #ffc106;
           }
         }
       }
     }
+    .form-type-radios{
+      .form-type-radio{
+        .form-radio:checked{
+          & + label{
+            span.right-answer{
+              background-color: #1ECE1E !important;
+            }
+            span.wrong-answer{
+              background-color: #ff1f1f !important;
+            }
+          } 
+        }
+      }
+    }
+    
+    
     .quiz-media-container{
       float: left;
       width: 170px;
