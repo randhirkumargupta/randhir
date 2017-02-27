@@ -8884,6 +8884,7 @@ div.node{
       }
     } 
   }
+  .form-field-name-field-story-node-identity{@extend .hide;}
 }
 .page-menu-manager-third .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-tid{width: auto; padding-right: 0;}
 [id*="views-exposed-form-menu-manager-menu-manager-page"]{
@@ -10779,3 +10780,6 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   }
 }
 #cboxClose{background: url(../images/controls.png) no-repeat -25px 0px;}
+.node-page-form{
+  .form-field-name-field-page-section{@extend .hide;}
+}
