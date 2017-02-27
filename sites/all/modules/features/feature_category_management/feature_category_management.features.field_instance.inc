@@ -43,7 +43,7 @@ function feature_category_management_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 14,
+      'weight' => 13,
     ),
   );
 
@@ -77,7 +77,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 12,
+      'weight' => 11,
     ),
   );
 
@@ -111,7 +111,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 13,
+      'weight' => 12,
     ),
   );
 
@@ -568,7 +568,7 @@ function feature_category_management_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 11,
+      'weight' => 10,
     ),
   );
 
@@ -602,7 +602,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 15,
+      'weight' => 14,
     ),
   );
 
@@ -673,7 +673,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 10,
+      'weight' => 9,
     ),
   );
 
@@ -854,7 +854,7 @@ function feature_category_management_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 3,
     ),
   );
 
@@ -891,7 +891,7 @@ function feature_category_management_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 16,
+      'weight' => 15,
     ),
   );
 
