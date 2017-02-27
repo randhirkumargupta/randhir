@@ -4973,15 +4973,18 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .show-embed-code-link{
     position: relative;
     .show-embed-code-div{
-      top: 46px;
+      top: calc(100% - 10px);
       position: absolute;
       display: none;
       width: 340px;
-      right: -75px;
+      left: 50%;
+      transform: translateX(-50%);
       padding-top: 10px;
+      z-index: 99999;
       .copy-sample-code{
         background-color: #fff;        
         position: relative;
+        box-shadow: 0 0 10px #666;
         &:before {
           border-color: transparent transparent #fff transparent;
           border-style: solid;
@@ -4991,7 +4994,9 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           position: absolute;
           top: -20px;
           width: 0;
-          left: 230px;
+          left: 0;
+          right: 0;
+          margin: 0 auto;
         }
         textarea {
             border: 1px solid #fff;
