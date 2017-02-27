@@ -8865,6 +8865,7 @@ div.node{
       overflow: visible;
     }
   }
+  .form-field-name-field-associate-photo-gallery, .form-field-name-field-story-associate-video{@extend .hide;}
   .form-field-name-field-story-category{
     .form-type-hierarchical-select{
       > label:after{
