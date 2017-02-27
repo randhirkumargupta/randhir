@@ -29,23 +29,23 @@ if (function_exists('itg_common_mongo_activity_user_count'))
     </div>  
     <div class="personalized-user-info">
       <span>
-        <i class="fa fa-share" aria-hidden="true"></i>
+          <i class="fa fa-share" aria-hidden="true" title="Submit Story"></i>
         <dfn><?php print $submit_ugc_content; ?></dfn>
       </span>
       <span>
-        <i class="fa fa-share-alt" aria-hidden="true"></i>
+        <i class="fa fa-share-alt" aria-hidden="true" title="Share Content"></i>
         <dfn><?php print $tot_count; ?></dfn>
       </span>
       <span>
-        <i class="fa fa-comment" aria-hidden="true"></i>
+        <i class="fa fa-comment" aria-hidden="true" title="Comments"></i>
         <dfn><?php print $comment_count; ?></dfn>
       </span>
       <span>
-        <i class="fa fa-bookmark" aria-hidden="true"></i>
+        <i class="fa fa-bookmark" aria-hidden="true" title="Saved Items"></i>
         <dfn><?php print $read_later_content;?></dfn>
       </span>
       <span>
-        <i class="fa fa-user" aria-hidden="true"></i>
+        <i class="fa fa-user" aria-hidden="true" title="Follow Story"></i>
         <dfn><?php print $follow_ugc_content; ?></dfn>
       </span>
     </div>

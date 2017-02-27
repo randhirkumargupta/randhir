@@ -156,6 +156,10 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'story_node_form':
       global $base_url, $user;
+       unset($form['field_story_short_headline']);
+       unset($form['field_story_long_head_line']);
+       $form['field_story_big_image']['#attributes']['class'][] = 'element-hidden';
+       
       // code for multiple byline
       if (empty($form['#node']->nid))
       {
@@ -206,6 +210,7 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
       $form['actions']['submit']['#submit'][] = 'itg_story_form_custom_callback';
       drupal_add_js(array('itg_common' => array('base_url' => $base_url)), 'setting');
       drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.emoji.js', 'file');
+      $form['field_emoji_2']['und'][0]['#format'] = 'emoji';
       $form['field_emoji']['und'][0]['#format'] = 'emoji';
       // hide remove button of field collection if there is only single instance of it within the form
       if (isset($form['field_photo_story']['und']['#max_delta']) && isset($form['your_field']['und']['#max_delta']) && $form['your_field']['und']['#max_delta'] == 0) {
@@ -333,7 +338,9 @@ function itg_story_node_validate($node, $form, &$form_state) {
         }
 
         $redirection_url = $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'];
-
+        if (!empty($redirection_url) && !preg_match("~^(?:f|ht)tps?://~i", $redirection_url)) {
+          $redirection_url = "http://" .$redirection_url;
+        }
         if (!empty($redirection_url) && filter_var($redirection_url, FILTER_VALIDATE_URL) === FALSE) {
             form_set_error('field_story_redirection_url_titl', t("$redirection_url is not a valid URL"));
         }
@@ -388,7 +395,8 @@ function itg_story_after_build($form, &$form_state) {
         '#attributes' => array('id' => 'original_image_fids', 'name' => 'original_image_fids'),
     );
   drupal_add_js('jQuery(document).ready(function() {              
-                if (jQuery("#edit-path-pathauto").is(":checked")) {                
+                if (jQuery("#edit-path-pathauto").is(":checked")) {
+                
                   jQuery("#edit-path-alias").attr("readonly", "readonly");
                 } else {                
                   jQuery("#edit-path-alias").removeAttr("readonly");
@@ -707,12 +715,19 @@ function itg_story_views_query_alter(&$view, &$query) {
  * {@inheritdoc}
  */
 function itg_story_node_presave($node) {
-    $type = $node->type;
-    if ($type == 'story' && !empty($node->field_story_magazine_story_issue['und'][0]['value'])) {
-      if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-        $node->field_story_source_type['und'][0]['value'] = 'Magazine Story';
-      }        
+  $type = $node->type;
+  if ($type == 'story' && !empty($node->field_story_magazine_story_issue['und'][0]['value']))
+  {
+    if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated')
+    {
+      $node->field_story_source_type['und'][0]['value'] = 'Magazine Story';
     }
+  }
+  $redirection_url = $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'];
+  if (!empty($redirection_url) && !preg_match("~^(?:f|ht)tps?://~i", $redirection_url))
+  {
+    $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'] = "http://" . $redirection_url;
+  }
 }
 
 /**

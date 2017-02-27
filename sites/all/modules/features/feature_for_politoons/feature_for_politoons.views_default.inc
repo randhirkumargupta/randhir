@@ -117,6 +117,7 @@ function feature_for_politoons_views_default_views() {
   $handler->display->display_options['fields']['tid']['field'] = 'tid';
   $handler->display->display_options['fields']['tid']['relationship'] = 'tid';
   $handler->display->display_options['fields']['tid']['label'] = 'Politoons Id';
+  $handler->display->display_options['fields']['tid']['separator'] = '';
   /* Field: Category Manager: created field */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'itg_category_manager';

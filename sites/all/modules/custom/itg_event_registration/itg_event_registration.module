@@ -859,6 +859,7 @@ function itg_event_registration_vocab_id($vocab_name) {
 function itg_event_registration_node_insert($node) {
 
   if ($node->type == 'event_registration') {
+    global $user;
     try {
       $coupon_values = array(
         'coupon_code' => $node->coupon_code,
@@ -881,6 +882,10 @@ function itg_event_registration_node_insert($node) {
     }
     catch (Exception $e) {
       //die('ERROR:'.$e->getMessage());
+    }
+    //loyalti points
+    if($user->uid != 0){
+      itg_loyalty_reward_earnpoint($node->nid, 'ol-register', $user->uid);
     }
   }
 }

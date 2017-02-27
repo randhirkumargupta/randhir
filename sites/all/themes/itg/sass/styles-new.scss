@@ -35,7 +35,7 @@ input[type="file"], input[type="submit"], input[type="text"]{
                 color:#b7b7b7;
             }
         }
-        #edit-tm-vid-4-names-wrapper, #edit-sm-field-itg-common-by-line-name-wrapper, #edit-bundle-name-wrapper, #edit-hash-wrapper{
+        [class*="views-widget-filter-tm_vid"], #edit-sm-field-itg-common-by-line-name-wrapper, #edit-bundle-name-wrapper, #edit-hash-wrapper{
             position: relative;
             padding-top:13px;
             > label{
@@ -2660,6 +2660,9 @@ body.has-cart-popup{
             vertical-align: middle;
             margin: 15px;
             color: #333;
+            &:hover{
+                color:#193984;
+            }
         }
         .form-submit{
           background-color: #000 !important;
@@ -2681,6 +2684,9 @@ body.has-cart-popup{
             float: right;
             color: #a6a6a6;
           }
+          a:hover{
+              color:#193984;
+          }
         }
         .form-text{width: 100%; height: 42px; font: 400 14px/normal Roboto;}
         div.description{
@@ -2701,14 +2707,15 @@ body.has-cart-popup{
       display: inline-block;
       vertical-align: top;
       width: 100%;
+      text-align: center;
       a{
-        border-radius: 5px;
-        float: left;
+        border-radius: 5px;        
         height: 50px;
         color: #fff;
         padding: 0 15px 0 55px;
         overflow: hidden;
         font: 400 16px/48px Roboto;
+        @include display-inline;
         & + a{
           margin-left: 10px;
         }
@@ -3291,7 +3298,7 @@ body{
       border: 1px solid #000;
       background-color: #000;
       color: #fff;
-      padding: 5px 20px;
+      padding: 0px 20px;
       height: 32px;
       border-radius: 3px;
       line-height: 22px;
@@ -3300,6 +3307,9 @@ body{
       display: inline-block;
       vertical-align: top;
       margin-right: 10px;
+      &.user-log-reset{
+          padding-top:4px;
+      }
     }
   }
 }
@@ -3350,6 +3360,11 @@ body{
   .recom-listing .pic a,
   .section-ordering > a{
     @extend .zoom-image;
+  }
+  .view-category-wise-content-list, .view-blog-listing, .page-podcasts-listing .view-podcasts-listing{
+      .pic{
+          @extend .zoom-image;
+      }
   }
   .social-nav li{
     .fa{transition: all 300ms;}
@@ -4958,17 +4973,18 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .show-embed-code-link{
     position: relative;
     .show-embed-code-div{
-      top: 46px;
+      top: calc(100% - 10px);
       position: absolute;
       display: none;
       width: 340px;
-      right: -75px;
+      left: 50%;
+      transform: translateX(-50%);
       padding-top: 10px;
+      z-index: 99999;
       .copy-sample-code{
-        background-color: #fff;
-        border-radius: 5px;
-        padding: 20px;
+        background-color: #fff;        
         position: relative;
+        box-shadow: 0 0 10px #666;
         &:before {
           border-color: transparent transparent #fff transparent;
           border-style: solid;
@@ -4978,7 +4994,16 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           position: absolute;
           top: -20px;
           width: 0;
-          left: 230px;
+          left: 0;
+          right: 0;
+          margin: 0 auto;
+        }
+        textarea {
+            border: 1px solid #fff;
+            min-height: 100px;
+            padding: 10px;
+            resize: none;
+            width: 100%;
         }
       }
     }

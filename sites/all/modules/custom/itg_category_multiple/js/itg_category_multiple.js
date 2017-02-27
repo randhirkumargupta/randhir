@@ -1,20 +1,180 @@
-/* 
- * Javascript for manageing the multiple category 
+/*
+ * @file itg_category_multipal.js
+ * Contains all functionality related to multiple category functionality
  */
 
-jQuery('document').ready(function() {
+$ = jQuery;
+$(document).ready(function() {
+  $('#edit-itg-section').on('change', function() {
+    var categoryies = $(this).val();
+    var actual_dom_name = $(this).attr('name');
+    if (categoryies) {
+      $.ajax({
+        type: 'POST',
+        url: Drupal.settings.basePath + 'itg-category-multiple-find',
+        data: {data: categoryies, category: $(this).attr('name')},
+        success: function(html) {
+          $('#edit-itg-category').empty();
+          $('#edit-itg-sub-category').empty();
+          $('#edit-itg-sub-sub-category').empty();
+          $('#edit-itg-sub-sub-sub-category').empty();
+          $('#edit-itg-primary-category').empty();
+          $('#edit-itg-category').append(html);
+          $('#edit-itg-section option:selected').clone().appendTo('#edit-itg-primary-category')
+        }
+      });
+    } else {
 
-  jQuery('.itg-category-section').click(function() {
 
-    jQuery.ajax({
-      type: 'POST',
-      url: Drupal.settings.basePath + "itg-category-multiple-find",
-      data: itg_category,
-      dataType: "text",
-      success: function(resultData) {
-
-      }
-    });
+    }
   });
 
+
+
+  $('#edit-itg-category').on('change', function() {
+
+    var categoryies = $(this).val();
+    var actual_dom_name = $(this).attr('name');
+    if (categoryies) {
+      $.ajax({
+        type: 'POST',
+        url: Drupal.settings.basePath + 'itg-category-multiple-find',
+        data: {data: categoryies, category: $(this).attr('name')},
+        success: function(html) {
+          $('#edit-itg-sub-category').empty();
+          $('#edit-itg-sub-sub-category').empty();
+          $('#edit-itg-sub-sub-sub-category').empty();
+          $('#edit-itg-sub-category').append(html);
+
+          //$('#edit-itg-primary-category').empty();
+
+          //$('#edit-itg-section option:selected').clone().appendTo('#edit-itg-primary-category')
+          //$('#edit-itg-category option:selected').clone().appendTo('#edit-itg-primary-category')
+
+
+          $.ajax({
+            type: 'POST',
+            url: Drupal.settings.basePath + 'itg-category-primary-category',
+            data: {data: categoryies},
+            success: function(phtml) {
+              // alert(phtml);
+              $('#edit-itg-primary-category').append(phtml);
+
+            }
+          });
+
+
+
+        }
+      });
+    } else {
+
+
+    }
+  });
+
+  $('#edit-itg-sub-category').on('change', function() {
+
+    var categoryies = $(this).val();
+    var actual_dom_name = $(this).attr('name');
+    if (categoryies) {
+      $.ajax({
+        type: 'POST',
+        url: Drupal.settings.basePath + 'itg-category-multiple-find',
+        data: {data: categoryies, category: $(this).attr('name')},
+        success: function(html) {
+          $('#edit-itg-sub-sub-category').empty();
+          $('#edit-itg-sub-sub-sub-category').empty();
+          $('#edit-itg-sub-sub-category').append(html);
+          //$('#edit-itg-primary-category').empty();
+          //$('#edit-itg-section option:selected').clone().appendTo('#edit-itg-primary-category')
+          //$('#edit-itg-category option:selected').clone().appendTo('#edit-itg-primary-category')
+          //$('#edit-itg-sub-category option:selected').clone().appendTo('#edit-itg-primary-category')
+
+          $.ajax({
+            type: 'POST',
+            url: Drupal.settings.basePath + 'itg-category-primary-category',
+            data: {data: categoryies},
+            success: function(phtml) {
+              // alert(phtml);
+              $('#edit-itg-primary-category').append(phtml);
+
+            }
+          });
+
+        }
+      });
+    } else {
+
+
+    }
+  });
+
+
+  $('#edit-itg-sub-sub-category').on('change', function() {
+
+    var categoryies = $(this).val();
+    var actual_dom_name = $(this).attr('name');
+    if (categoryies) {
+      $.ajax({
+        type: 'POST',
+        url: Drupal.settings.basePath + 'itg-category-multiple-find',
+        data: {data: categoryies, category: $(this).attr('name')},
+        success: function(html) {
+          $('#edit-itg-sub-sub-sub-category').empty();
+          $('#edit-itg-sub-sub-sub-category').append(html);
+          //$('#edit-itg-primary-category').empty();
+          //$('#edit-itg-section option:selected').clone().appendTo('#edit-itg-primary-category')
+          //$('#edit-itg-category option:selected').clone().appendTo('#edit-itg-primary-category')
+          //$('#edit-itg-sub-category option:selected').clone().appendTo('#edit-itg-primary-category')
+          //$('#edit-itg-sub-sub-category option:selected').clone().appendTo('#edit-itg-primary-category')
+          
+           $.ajax({
+            type: 'POST',
+            url: Drupal.settings.basePath + 'itg-category-primary-category',
+            data: {data: categoryies},
+            success: function(phtml) {
+              // alert(phtml);
+              $('#edit-itg-primary-category').append(phtml);
+
+            }
+          });
+
+        }
+      });
+    } else {
+
+
+    }
+  });
+
+
+  $('#edit-itg-sub-sub-sub-category').on('change', function() {
+
+    var categoryies = $(this).val();
+    var actual_dom_name = $(this).attr('name');
+    if (categoryies) {
+
+      $('#edit-itg-primary-category').empty();
+      $('#edit-itg-section option:selected').clone().appendTo('#edit-itg-primary-category')
+      $('#edit-itg-category option:selected').clone().appendTo('#edit-itg-primary-category')
+      $('#edit-itg-sub-category option:selected').clone().appendTo('#edit-itg-primary-category')
+      $('#edit-itg-sub-sub-category option:selected').clone().appendTo('#edit-itg-primary-category')
+      $('#edit-itg-sub-sub-sub-category option:selected').clone().appendTo('#edit-itg-primary-category')
+
+    } else {
+
+
+    }
+  });
 });
+
+
+
+
+
+
+// }
+
+// };
+//})(jQuery, Drupal, this, this.document);

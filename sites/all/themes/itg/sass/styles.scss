@@ -12,6 +12,7 @@ body{
     color: #333;   
 }
 h1, h2, h3, h4{@include itg-font($itg-roboto,$itg-font-medium);}
+button{outline: none;}
 h1{    
         font-size: $h1-font-size;
         line-height: $h1-line-height;
@@ -1401,8 +1402,14 @@ footer{
     .story-tag{
         @include story-tag(26px,26px);
         margin: 10px 0 0 10px;
-    }
+    }    
 }
+.big-news, .featured-post{    
+    .smilies-title{
+        display:inline-block !important;
+    }    
+}
+
 @-webkit-keyframes blinker { from {opacity:1.0;} to {opacity:0.0;} }
 @keyframes blinker { from {opacity:1.0;} to {opacity:0.0;} }
 /*End CSS Big New Home page*/
@@ -1776,14 +1783,13 @@ footer{
                 }
             } 
         }
-    }    
+    }     
 }
-
 /*css end watch now home page */
 
 /*css start homepage show*/
 .home-shows{
-    .trending-videos {
+    .trending-videos {        
         border: none;
         padding-top: 25px;
         .trending-videos-list {
@@ -1841,6 +1847,24 @@ footer{
                     i{
                         font-size: 16px;
                     }
+                    &.unflag-action{
+                        position: relative;
+                        font-family: FontAwesome;
+                        pointer-events: none;
+                        &:after{
+                            content: "\f00c";
+                            position: absolute;
+                            left: 8px;
+                            top: 8px;
+                            font-size: 11px;
+                            margin-left: 0;
+                            color: #474747;
+                            margin-top: 0;
+                        }
+                        span{
+                            font-family: $itg-roboto;
+                        }
+                    }
                 }                                               
             }
             &.social-share{
@@ -1894,7 +1918,7 @@ footer{
                     }
                     &.twitter{
                         color: #0783ec;
-                        margin-top: 0px;
+                        margin-top: 0px;                       
                     }
                     &.title{
                         color: #6b6b6b;
@@ -2466,7 +2490,23 @@ footer{
                     span{
                         display: block;
                         @include font(11px);
+                        font-family: $itg-roboto;
                     }
+                    &.unflag-action{
+                        position: relative;
+                        font-family: FontAwesome;
+                        pointer-events: none;
+                        &:after{
+                            content: "\f00c";
+                            position: absolute;
+                            left: 50%;
+                            top: 0;
+                            font-size: 11px;
+                            margin-left: -6px;
+                            color: #474747;
+                            margin-top: -2px;
+                        }
+                    }                    
                 }                
             }
         }
@@ -2600,9 +2640,7 @@ footer{
         }
     }    
     .buzz-section{
-        margin:60px 0;
-        padding-left:15px;
-        padding-right:15px;
+        margin:60px 0;        
         > *{
             margin-bottom: 15px;
         }
@@ -2681,6 +2719,11 @@ footer{
     .comment-mobile{
         li.mail-to-author{            
             display: none;            
+        }
+    }
+    .story-left-section{
+        .buzzfeed-byline, .story-right {
+            padding:0;
         }
     }
 }
@@ -3045,7 +3088,7 @@ h1.category-heading{
     .catagory-listing{
         padding: 20px 0;
         .pic{
-            width: 124px;            
+            width: 124px;              
         }
         .detail{
             h3{
@@ -4220,7 +4263,8 @@ h1.category-heading{
     }
     .photo-list{
         max-height: 210px;
-        overflow-y: hidden;        
+        overflow-y: hidden; 
+        margin: 0 -10px !important;
     }
     .view-content .photo-list li{        
         overflow: hidden;
@@ -10068,7 +10112,8 @@ h1.about-us-heading{
             }
             .field-content{      
                 cursor:pointer;                        
-                @include display-inline;                               
+                @include display-inline; 
+                padding-right: 20px;
             }
         }
         .social-share{
@@ -10480,11 +10525,11 @@ span.smilies-title {
     }
 }
 /*css breadcrumb end*/
-iframe{
+/*iframe{
   &[id*="twitter-widget"]{
     width: 100% !important;
   }
-}
+}*/
 .photo-heading{
     font-size: 32px;
     margin-bottom: 25px;
