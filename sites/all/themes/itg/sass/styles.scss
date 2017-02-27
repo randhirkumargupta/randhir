@@ -10021,6 +10021,14 @@ h1.about-us-heading{
                 float: left;
                 padding-right: 20px;
             }
+            .captcha{
+              img{display: inline-block; vertical-align: middle; margin: 0 20px 0 0px;}
+              .form-item-captcha-response{
+                width: 50%;
+                display: inline-block;
+                vertical-align: middle;
+              }
+            }
         }
     }    
 .node-type-videogallery, .node-type-photogallery, .node-type-story{
