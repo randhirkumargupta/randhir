@@ -270,6 +270,14 @@ jQuery(document).ready(function() {
             prevText: "<i class='fa fa-angle-left' aria-hidden='true'></i>",
             nextText: "<i class='fa fa-angle-right' aria-hidden='true'></i>"
         });
+        // jQuery code for flexslider
+        $('.uploaded-video-list').flexslider({
+            animation: "slide",
+            slideshowSpeed: 3000,
+            controlNav: false,
+            prevText: "<i class='fa fa-angle-left' aria-hidden='true'></i>",
+            nextText: "<i class='fa fa-angle-right' aria-hidden='true'></i>"
+        });
 
         // jQuery code to hide select option whenever user hover on ITGCMS navbar
         $('#block-menu-menu-admin-left-menu').mouseover(function() {

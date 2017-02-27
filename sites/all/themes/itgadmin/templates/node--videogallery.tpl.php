@@ -30,12 +30,11 @@
     <?php if (!isset($node->op) && $node->op != 'Preview') { ?>
           <div class="Story-details">
             <h2><?php print t('Video Upload'); ?></h2>
-            <div class="content-details uploaded-video-view">
+            <div class="content-details">
               <?php
               $items = field_get_items('node', $node, 'field_video_upload');
-
               foreach ($items as $imagecollection):
-                $output .= "<div class='view-item'>";
+                $output .= "<li class='view-item'>";
                 $video_fid_data = get_video_filed_collection_by_its_id($imagecollection['value']);
 
                 if ($video_fid_data[0]->field_videogallery_video_upload_fid != "") {
@@ -54,10 +53,10 @@
                 if (isset($video_fid_data) && !empty($video_fid_data[0]->field_include_ads_valu)) {
                   $output .= '<p><strong>' . $video_fid_data[0]->field_videogallery_description_value . '</strong></p>';
                 }
-                $output .= "</div>";
+                $output .= "</li>";
               endforeach;
               ?>
-              <?php print $output; ?>
+              <div class="uploaded-video-list flexslider"><ul class="slides"><?php print $output; ?></ul></div>
               <?php
               $short_des = render($content['field_story_expert_name']);
               if (!empty($short_des)):
