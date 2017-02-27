@@ -275,10 +275,11 @@
                       <h3><span>MOVIE VIDEOS</span></h3>
                       <?php
                       $video_node = node_load($asso_vid_id);
+                      $final_image = str_replace('styles/mrass_video/http/','',file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']));
                       $large_image = theme(
                                       'image_style', array(
                                       'style_name' => empty($asso_vid_class) ? 'mrass_video' : 'anchors_landing',
-                                      'path' => file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']),
+                                      'path' => $final_image,
                                       )
                                     );
                       print l($large_image, 'node/' . $video_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
@@ -304,10 +305,11 @@
                       <h3><span>PHOTOS</span></h3>
                       <?php
                       $photo_node = node_load($asso_photo_gallery);
+                      $final_image = str_replace('styles/mrass_video/http/','',file_create_url($photo_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']));
                       $small_image = theme(
                                         'image_style', array(
                                         'style_name' => empty($ass_photo_class) ? 'mrass_video' : 'anchors_landing',
-                                        'path' => file_create_url($photo_node->field_story_extra_large_image['und'][0]['uri']),
+                                        'path' => $final_image,
                                         )
                                     );
                       $image_count = count($photo_node->field_gallery_image['und']);
