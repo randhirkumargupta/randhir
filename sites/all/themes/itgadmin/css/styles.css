@@ -11301,3 +11301,7 @@ span.file a {
   float: right;
   font-size: 20px;
 }
+
+#cboxClose {
+  background: url(../images/controls.png) no-repeat -25px 0px;
+}
