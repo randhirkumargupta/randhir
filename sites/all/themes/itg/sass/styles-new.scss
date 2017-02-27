@@ -3340,6 +3340,34 @@ body{
     }
   }
 }
+.story-associate-content{
+  .view-photo-landing-slider{
+    .videogallery-slider{
+      .fa-chevron-left, .fa-chevron-right{                
+        background: rgba(0, 0, 0, 0.6);
+        border: none;
+        width: 45px;
+        height: 66px;
+        border-radius: 0 7px 7px 0;
+        color: #fff;
+        position: absolute;
+        top: 138px;
+        z-index: 1;                
+        font-size: 28px;
+        text-align: center;
+        line-height: 70px;
+        cursor: pointer;
+      }
+      .fa-chevron-left{
+        left: 0;                
+      }
+      .fa-chevron-right{
+        right: 0;     
+        border-radius: 7px 0px 0px 7px;
+      }
+    }
+  }
+}
 
 
 
