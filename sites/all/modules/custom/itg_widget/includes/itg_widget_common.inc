@@ -2824,39 +2824,61 @@ function insert_all_node_in_widegt_table() {
  * {@inheritdoc}
  */
 function itg_widget_node_insert($node) {
-    if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
-        $nid = $node->nid;
-        $cat_id = $node->field_story_category['und'];
-        if (isset($node->field_story_category['und'])) {
-            foreach ($cat_id as $category) {
-                $max_result = get_max_weight($category['tid'], $node->type);
-
-                $query = db_insert('itg_widget_order')
-                        ->fields(array(
-                            'nid' => $nid,
-                            'widget' => 'section_wise_widget',
-                            'content_type' => $node->type,
-                            'cat_id' => $category['tid'],
-                            'weight' => ++$max_result,
-                            'extra' => "",
-                        ))
-                        ->execute();
-
-                $max_result_all = get_max_weight($category['tid'], "All");
-
-                $query_all = db_insert('itg_widget_order')
-                        ->fields(array(
-                            'nid' => $nid,
-                            'widget' => 'section_wise_widget',
-                            'content_type' => "All",
-                            'cat_id' => $category['tid'],
-                            'weight' => ++$max_result_all,
-                            'extra' => "",
-                        ))
-                        ->execute();
-            }
-        }
+  if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
+    $nid = $node->nid;
+    $cat_id = $node->field_story_category['und'];
+    if (isset($node->field_story_category['und'])) {
+      foreach ($cat_id as $category) {
+        $single_max_result = get_max_weight_for_node_insert($category['tid'], $node->type);
+        $max_result = $single_max_result['content_type'];
+        $max_result_all = $single_max_result['All'];
+        $single_insert_query = db_insert('itg_widget_order')->fields(
+            array(
+              'nid',
+              'widget',
+              'content_type',
+              'cat_id',
+              'weight',
+              'extra',
+            )
+        );
+        $single_insert_query->values(array(
+          'nid' => $nid,
+          'widget' => 'section_wise_widget',
+          'content_type' => $node->type,
+          'cat_id' => $category['tid'],
+          'weight' => ++$max_result,
+          'extra' => '',
+            ), array(
+          'nid' => $nid,
+          'widget' => 'section_wise_widget',
+          'content_type' => 'All',
+          'cat_id' => $category['tid'],
+          'weight' => ++$max_result_all,
+          'extra' => '',
+        ));
+        $single_insert_query->execute();
+      }
     }
+  }
+}
+
+/**
+ * Function returns max weight.
+ * @param int $tid
+ * @param string $type
+ * @return int
+ */
+function get_max_weight_for_node_insert($tid, $type) {
+    $max_query = db_select('itg_widget_order');
+    $max_query->addExpression('MAX(weight)' , 'weight');
+    $max_query->condition('cat_id', $tid);
+    $max_query->condition('content_type', array($type , 'All') , 'IN');
+    $max_query->condition('widget', 'section_wise_widget');
+    $max_query->groupBy('content_type');
+    $max_result = $max_query->execute()->fetchAll();
+    $weight_array = array("All" => $max_result[0]->weight , "content_type" => $max_result[1]->weight);
+    return $weight_array;
 }
 
 /**
