@@ -1044,6 +1044,10 @@ jQuery(document).ready(function() {
 //    }
         jQuery(this).closest('.templates-tab-wrapper').find(set_class).show().siblings('.tab-form').hide();
     });
+    
+    $('body').on('click', '.personal-share', function(){
+      $('.personal-social-share-links').slideToggle();
+    });
 
 });
 
