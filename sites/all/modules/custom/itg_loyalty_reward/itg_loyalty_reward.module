@@ -423,12 +423,10 @@ function itg_loyalty_reward_product_expiry_notification_callback() {
         //set node owner
         $end_date = $record['scheduled_time'];
         $diff = $end_date - $current_time;
-        $diff_in_hours = round($diff / ( 60 * 60 ));
-        
-            if ($diff_in_hours <= 48) {
-
-                itg_loyalty_reward_send_mail_product_expiration($record['nid'], $node_user);
-            }
+        $diff_in_hours = round($diff / ( 60 * 60 ));        
+        if ($diff_in_hours <= 48) {
+            itg_loyalty_reward_send_mail_product_expiration($record['nid'], $node_user);
+        }
        
     }
 }

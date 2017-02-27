@@ -31,7 +31,8 @@
                         {
 
                             $('#widget-ajex-loader').hide();
-                            $("#successMessage").html("Saved Sucessfully");
+                            //$("#successMessage").html("Saved Sucessfully");
+                            window.location.reload('true');
                         }
                     });
                 }
