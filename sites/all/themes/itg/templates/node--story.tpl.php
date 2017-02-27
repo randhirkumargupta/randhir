@@ -355,7 +355,7 @@ if (!empty($content)):
                   $associate_lead = $node->field_story_associate_lead[LANGUAGE_NONE][0]['value'];
                   $associate_photo = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
                   $associate_video = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
-                  if(!empty($associate_lead) && !empty($associate_photo) && !empty($associate_video)) {
+                  if(!empty($associate_lead) && !empty($associate_photo) || !empty($associate_video)) {
                       $class = 'story-associate-content';
                   } 
                   ?>
