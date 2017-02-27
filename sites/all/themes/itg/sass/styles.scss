@@ -1375,10 +1375,9 @@ footer{
                     @include display-inline;
                     cursor: pointer;
                 }
-                &:nth-child(3){
+                &:last-child{
                     a{
-                        color: $yellow-color; 
-                        border-right: none;
+                      border-right: none;
                     }
                 }
             }
