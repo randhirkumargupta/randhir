@@ -3498,6 +3498,28 @@ body .program-livetv.effect-added .light-on-text {
   border-radius: 7px 0px 0px 7px;
 }
 
+span.personal-social-share-links {
+  position: absolute;
+  left: 110px;
+  bottom: 15px;
+}
+
+.personal-social-share-links a {
+  display: inline-block;
+  vertical-align: top;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  background: #000;
+  color: #fff;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.personal-social-share-links a .fa:before {
+  font-size: 16px;
+  line-height: 30px;
+}
+
 /* CSS To Add Zoom Effect on Images */
 @media all and (min-width: 1025px) {
   .zoom-image, #block-itg-front-end-common-related-photo-block #related-photo ul li a,

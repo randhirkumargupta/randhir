@@ -10815,7 +10815,7 @@ span.file a {
   margin-bottom: 20px;
 }
 [id*="itg-event-registration-fields-configuration-form"] #edit-display .form-type-checkbox, [id*="itg-event-registration-fields-configuration-form"] #edit-requied-field .form-type-checkbox {
-  padding: 10px 0;
+  padding: 10px;
   border-top: 1px solid #d8d8d8;
 }
 
@@ -11259,7 +11259,7 @@ span.file a {
 }
 
 [id*="field-ticket-group-type-values"] .form-type-textfield > label, [id*="field-ticket-group-type-values"] .form-type-select > label {
-  width: 2280px;
+  width: 280px;
 }
 [id*="field-ticket-group-type-values"] thead {
   display: none;

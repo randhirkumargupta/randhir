@@ -511,9 +511,19 @@ function itg_common_get_latest_byline($nid, $status) {
 function itg_common_custompath_insert_load($node) {
     global $edited_sef_url;
     if(!empty ($edited_sef_url)) {
-        $node_sef = $edited_sef_url;
+        $lencount_sef = strlen($edited_sef_url);
+        if($lencount_sef >= 160){
+           $node_sef = substr($edited_sef_url, 0, 160);
+        } else {
+           $node_sef = $edited_sef_url;
+        }
     } else {
-        $node_sef = $node->title;
+        $title_lenght = strlen($node->title);
+        if($title_lenght >= 160){
+           $node_sef = substr($node->title, 0, 160);
+        } else {
+           $node_sef = $node->title;
+        }
     }
     if(!empty($node->workbench_moderation_state_new)){
       if ($node->workbench_moderation_state_new == 'draft' || $node->workbench_moderation_state_new == 'published'){

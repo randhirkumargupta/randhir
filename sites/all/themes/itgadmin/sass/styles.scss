@@ -10416,7 +10416,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     border-bottom: 1px solid #d8d8d8;
     margin-bottom: 20px;
     .form-type-checkbox{
-      padding: 10px 0;
+      padding: 10px;
       border-top: 1px solid #d8d8d8;
     }
   }
@@ -10729,7 +10729,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
 }
 [id*="field-ticket-group-type-values"]{
   .form-type-textfield > label, .form-type-select > label{
-    width: 2280px;
+    width: 280px;
   }
   thead{display: none;}
   tbody{
