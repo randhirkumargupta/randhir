@@ -3502,6 +3502,7 @@ span.personal-social-share-links {
   position: absolute;
   left: 110px;
   bottom: 15px;
+  display: none;
 }
 
 .personal-social-share-links a {
