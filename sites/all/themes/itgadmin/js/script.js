@@ -767,6 +767,20 @@ jQuery(document).ready(function() {
             $('.form-field-name-field-story-associate-video').show();
           }
         };
+        
+        // jQuery code to show hide Associate lead gallery/video
+        showHidePhotoStory();
+        $('.form-field-name-field-story-type').on('change', '.form-select', function(){
+          showHidePhotoStory();
+        });
+        function showHidePhotoStory(){
+          var selected_val = $('.form-field-name-field-story-type').find('.form-select option:selected').val();
+          if(selected_val == "photo_story"){
+            $('.node-story-form #StoryPhoto').show();
+          } else{
+            $('.node-story-form #StoryPhoto').hide();
+          }
+        };
 
     };
 })(jQuery);
@@ -986,8 +1000,8 @@ jQuery(document).ready(function() {
             complete: function() {
             },
             error: function(xhr, desc, err) {
-                console.log(xhr);
-                console.log("Details: " + desc + "\nError:" + err);
+//                console.log(xhr);
+//                console.log("Details: " + desc + "\nError:" + err);
             }
         });
     });
