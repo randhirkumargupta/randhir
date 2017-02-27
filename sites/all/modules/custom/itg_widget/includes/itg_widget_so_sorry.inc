@@ -6,30 +6,37 @@
  */
 function itg_widget_so_sorry_politoons_ordering_data() {
   $block_data = array();
-
-  $query = db_select('draggableviews_structure', 'dvs');
-  $query->leftJoin('itg_category_manager', 'icm', 'icm.tid=dvs.entity_id');
-  $query->addField('dvs', 'entity_id');
-  $query->condition('dvs.view_name', 'so_sorry_politoons');
-  $query->condition('dvs.view_display', 'so_sorry_politoons');
-  $query->condition('icm.status', 1);
-  $query->range(0, 6);
-  $query->orderBy('dvs.weight');
-
-  $result = $query->execute()->fetchAll();
-
+  $result = views_get_view_result('so_sorry_politoons', 'so_sorry_politoons');
   foreach ($result as $taxonomy) {
-    $term_data = array();
-    $term_data = taxonomy_term_load($taxonomy->entity_id);
+    $uri = itg_widget_get_logo_from_tid($taxonomy->taxonomy_term_data_itg_category_manager_tid);
     $block_data[] = array(
-        'title' => $term_data->name,
-        'uri' => $term_data->field_sponser_logo['und'][0]['uri'],
-        'term_id' => $term_data->tid,
+        'title' => $taxonomy->taxonomy_term_data_itg_category_manager_name,
+        'uri' => $uri[0],
+        'term_id' => $taxonomy->taxonomy_term_data_itg_category_manager_tid,
     );
   }
   return $block_data;
 }
 
+/**
+ * Function to get uri from tid of logo field.
+ * @param int $tid
+ * @return array
+ */
+function itg_widget_get_logo_from_tid($tid) {
+  $query = db_select('field_data_field_sponser_logo' ,'logo');
+  $query->leftJoin('file_managed' , 'fm' ,'fm.fid = logo.field_sponser_logo_fid');
+  $query->fields('fm' , array('uri'));
+  $query->condition('logo.entity_id' , $tid);
+  $uri = $query->execute()->fetchCol();
+  return $uri;
+}
+
+/**
+ * Function to save sosorry widget data in custom table.
+ * 
+ * @param array $so_sorry_selected_content
+ */
 function save_so_sorry_widget_data($so_sorry_selected_content) {
   $selected_node = $so_sorry_selected_content['selection'];
   $already_nodes = db_select('itg_widget_order', 'iwo')

@@ -25,6 +25,7 @@
 ?>
 
 <?php
+global $base_url;
 if ($row->_field_data['nid']['entity']->type == 'event_backend') {
   print $output;
 } if ($row->_field_data['nid']['entity']->type == 'blog' || 
@@ -37,8 +38,13 @@ if ($row->_field_data['nid']['entity']->type == 'event_backend') {
     if ($row->_field_data['nid']['entity']->status == 0) {
       print l(strip_tags($output), 'node/'.$row->nid, array('attributes' => array('target' => '_blank')));
     } else {
-        $node_url = FRONT_URL.'/node/'.$row->nid;      
-        print '<a href="'.$node_url.'" target="_blank">'.strip_tags($output).'</a>';   
+        if (BACKEND_URL == $base_url) {
+            $node_url = FRONT_URL.'/node/'.$row->nid; 
+            print '<a href="'.$node_url.'" target="_blank">'.strip_tags($output).'</a>';
+        } else {
+            print l(strip_tags($output), 'node/'.$row->nid, array('attributes' => array('target' => '_blank')));
+        }
+    
     } 
   
 } else {   
