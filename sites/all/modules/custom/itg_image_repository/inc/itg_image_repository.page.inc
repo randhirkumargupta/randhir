@@ -167,10 +167,9 @@ function itg_image_repository_upload_submit($form, &$form_state) {
     $validators['itg_image_repository_validate_all'] = array(&$itg_image_repository);
     $diruri = itg_image_repository_dir_uri($itg_image_repository);
 
-    //save uploaded file.
 
     $replace = variable_get('imce_settings_replace', FILE_EXISTS_RENAME);
-    $file = file_save_upload('imce', $validators, $diruri, $replace);
+   // $file = file_save_upload('imce', $validators, $diruri, $replace);
 
     if ($file = file_save_upload('imce', $validators, $diruri, $replace)) {
 

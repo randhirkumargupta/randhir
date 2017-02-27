@@ -223,7 +223,6 @@ function feature_for_video_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         'google_standout' => 'Google Standout',
-        'comment_box' => 'Comment Box',
         'comment' => 'Comment',
       ),
       'allowed_values_function' => '',

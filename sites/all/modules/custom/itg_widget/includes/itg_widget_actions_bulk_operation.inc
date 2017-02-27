@@ -55,7 +55,6 @@ function itg_widget_categories_wise_node_group_form($form, &$form_state) {
  */
 function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
   $current_display = $form_state['build_info']['args'][0]->current_display;
-
   $vals = array();
   // Unique combination using below four.
   $widget_name = $form_state['input']['widget_name'];
@@ -118,7 +117,12 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     save_special_auto_review_widget_data($form_state);
   }
   elseif ($current_display == 'special_how_made_it_widget_contents') {
-    module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_how_i_made_it');
+    
+      if (empty($_GET['category_tid']) && $_GET['category_tid'] != 'All') {
+        drupal_set_message('Please select Section', 'error');
+        drupal_goto('special-how-made-it-widget-contents');
+    }
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_how_i_made_it');
     save_special_how_i_made_it_widget_data($form_state);
   }
   elseif ($current_display == 'yearend_left_widget_contents') {
