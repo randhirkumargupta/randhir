@@ -1375,10 +1375,9 @@ footer{
                     @include display-inline;
                     cursor: pointer;
                 }
-                &:nth-child(3){
+                &:last-child{
                     a{
-                        color: $yellow-color; 
-                        border-right: none;
+                      border-right: none;
                     }
                 }
             }
@@ -2149,6 +2148,7 @@ footer{
                 text-align: center;
                 line-height: 70px;
                 cursor: pointer;
+                visibility: visible !important;
             }
             .fa-chevron-left{
                 left: 0;                
@@ -2912,6 +2912,7 @@ footer{
     .messages--error.messages.error{
         margin: 0 30px;
     }
+    #main{min-height: 0;}
 }
 /*Start snap post css*/
 .page-snappost{ 
@@ -10020,6 +10021,14 @@ h1.about-us-heading{
                 width: 220px;
                 float: left;
                 padding-right: 20px;
+            }
+            .captcha{
+              img{display: inline-block; vertical-align: middle; margin: 0 20px 5px 0;}
+              .form-item-captcha-response{
+                width: 50%;
+                display: inline-block;
+                vertical-align: middle;
+              }
             }
         }
     }    

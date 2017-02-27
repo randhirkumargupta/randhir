@@ -563,12 +563,12 @@ span.error{
 }
 
 /* Layout CSS */
-
+html, body, #page{height: 100%;}
 #main{
   padding-bottom: 30px;
   @extend .pos-rel;
   @extend .full;
-  min-height: 800px;
+  min-height: calc(100% - 50px);
 }
 body.sidebar-second{
   .sidebars{
@@ -576,7 +576,7 @@ body.sidebar-second{
     top: 50px;
     left: 100%;
     width: 330px;
-    z-index: 99999;
+    z-index: 9999;
     transition: all 500ms ease 0s;
     &.active{
       transform: translateX(-330px);
@@ -2305,6 +2305,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       margin-right: 10px !important;
     }
   }
+  .form-field-name-field-ads-headerscript{
+    .form-type-textarea > label{padding-right: 0;}
+  }
   .form-field-name-field-ads-headerscript,
   .form-field-name-field-ads-body-start,
   .form-field-name-field-ads-ad-code,
@@ -3667,6 +3670,45 @@ div.node{
       bottom: 0;
       left: 0;
       margin: auto;
+    }
+  } 
+  .flex-direction-nav{
+    @extend .no-bullet;
+  }
+  .flex-nav-prev, .flex-nav-next{
+    position: absolute;
+    width: 45px;
+    height: 95px;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    a{
+      @extend .db;
+      font-size: 75px;
+      line-height: normal;
+      text-align: center;
+    }
+  }
+  .flex-nav-prev{
+    left: 0;
+  }
+  .flex-nav-next{
+    right: 0;
+  }
+}
+.uploaded-video-list.flexslider{
+  @extend .pos-rel;
+  padding: 0 50px;
+  .slides{
+    li{
+      @extend .pos-rel;
+      min-height: 450px;
+      background-color: #f0f0f0;
+      p{padding: 0 10px;}
+    }
+    iframe{
+      width: 100%;
+      height: 400px;
     }
   } 
   .flex-direction-nav{
@@ -5124,7 +5166,7 @@ div.node{
     right: 0;
     top: 0;
     width: 1170px;
-    z-index: 99999;
+    z-index: 9999;
   }
   #page-title{
     @extend .fleft;
@@ -8554,25 +8596,36 @@ div.node{
               background-color: #ff1f1f !important;
             }
           }
-          &:hover{
-            span{
-              background-color: #ffc106;
-            }
-          }
         }
         .form-radio, .form-checkbox{
+          width: calc(100% - 30px);
+          height: 100%;
           position: absolute;
+          z-index: 99;
           opacity: 0;
-          &:checked + label{            
-            color: #000;   
-            padding:0;
-            span{
-              background-color: #ffc106;
-            }
+          &:hover + label span, &:checked + label span{            
+            color: #000;
+            background-color: #ffc106;
           }
         }
       }
     }
+    .form-type-radios{
+      .form-type-radio{
+        .form-radio:checked{
+          & + label{
+            span.right-answer{
+              background-color: #1ECE1E !important;
+            }
+            span.wrong-answer{
+              background-color: #ff1f1f !important;
+            }
+          } 
+        }
+      }
+    }
+    
+    
     .quiz-media-container{
       float: left;
       width: 170px;
@@ -10107,7 +10160,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     position: relative;
   }
 }
-.uploaded-video-view{
+/*.uploaded-video-view{
   @extend .dib;
   @extend .vtop;
   @extend .full;
@@ -10117,7 +10170,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     @extend .vtop;
     padding: 15px;
   }
-}
+}*/
 /*.image-fiels-style .form-type-checkbox {
     display: inline-block;
     padding-right: 12px;
