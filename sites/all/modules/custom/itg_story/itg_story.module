@@ -377,8 +377,12 @@ function itg_story_node_validate($node, $form, &$form_state) {
  * @return array
  */
 function itg_story_after_build($form, &$form_state) {
-
+  
   global $user, $base_url;
+  
+  if(empty($form_state['input']['op'])) {
+    unset($_SESSION['unique']);
+  }
   // code for multiple byline
   if (empty($form['#node']->nid)) {
     $reporter_id = !empty($form_state['input']['field_reporter_unique_id'][LANGUAGE_NONE][0]['value']) ? $form_state['input']['field_reporter_unique_id'][LANGUAGE_NONE][0]['value'] : '';
@@ -723,10 +727,21 @@ function itg_story_node_presave($node) {
       $node->field_story_source_type['und'][0]['value'] = 'Magazine Story';
     }
   }
-  $redirection_url = $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'];
-  if (!empty($redirection_url) && !preg_match("~^(?:f|ht)tps?://~i", $redirection_url))
+  if ($type == 'story')
   {
-    $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'] = "http://" . $redirection_url;
+    $redirection_url = $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'];
+    if (!empty($redirection_url) && !preg_match("~^(?:f|ht)tps?://~i", $redirection_url))
+    {
+      $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'] = "http://" . $redirection_url;
+    }
+    if (empty($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value']))
+    {
+      if (function_exists('itg_get_byline_row'))
+      {
+        $publish_id = itg_get_byline_row($node->field_reporter_unique_id[LANGUAGE_NONE][0]['value']);
+        $node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'] = $publish_id;
+      }
+    }
   }
 }
 

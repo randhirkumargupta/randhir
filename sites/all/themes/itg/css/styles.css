@@ -3711,6 +3711,9 @@ footer .multiple-items-footer i.slick-next {
 .page-node-add-ugc .messages--error.messages.error {
   margin: 0 30px;
 }
+.page-node-add-ugc #main {
+  min-height: 0;
+}
 
 /*Start snap post css*/
 .page-snappost {
@@ -12075,6 +12078,16 @@ h1.about-us-heading + div p {
   width: 220px;
   float: left;
   padding-right: 20px;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper .captcha img {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 20px 5px 0;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper .captcha .form-item-captcha-response {
+  width: 50%;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .node-type-videogallery #cboxLoadedContent, .node-type-photogallery #cboxLoadedContent, .node-type-story #cboxLoadedContent {
