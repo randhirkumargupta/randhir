@@ -563,12 +563,12 @@ span.error{
 }
 
 /* Layout CSS */
-
+html, body, #page{height: 100%;}
 #main{
   padding-bottom: 30px;
   @extend .pos-rel;
   @extend .full;
-  min-height: 800px;
+  min-height: calc(100% - 50px);
 }
 body.sidebar-second{
   .sidebars{
@@ -2304,6 +2304,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     .form-type-textfield:first-child{
       margin-right: 10px !important;
     }
+  }
+  .form-field-name-field-ads-headerscript{
+    .form-type-textarea > label{padding-right: 0;}
   }
   .form-field-name-field-ads-headerscript,
   .form-field-name-field-ads-body-start,

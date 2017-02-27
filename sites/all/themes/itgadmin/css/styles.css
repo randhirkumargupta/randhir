@@ -1227,9 +1227,13 @@ textarea {
 }
 
 /* Layout CSS */
+html, body, #page {
+  height: 100%;
+}
+
 #main {
   padding-bottom: 30px;
-  min-height: 800px;
+  min-height: calc(100% - 50px);
 }
 
 body.sidebar-second .sidebars {
@@ -2748,6 +2752,9 @@ div.image-widget-data .ajax-progress-throbber {
 .node-ads_management-form .form-field-name-field-ads-start-date .form-type-textfield:first-child,
 .node-ads_management-form .form-field-name-field-ads-end-date .form-type-textfield:first-child {
   margin-right: 10px !important;
+}
+.node-ads_management-form .form-field-name-field-ads-headerscript .form-type-textarea > label {
+  padding-right: 0;
 }
 .node-ads_management-form .form-field-name-field-ads-body-close,
 .node-ads_management-form .form-field-name-field-ads-body-start {

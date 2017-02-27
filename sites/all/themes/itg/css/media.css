@@ -2158,9 +2158,6 @@
   #content [id*="ugc-node-form"].ugc-custom-wrapper .captcha .form-item-captcha-response div.description {
     padding-left: 0px;
   }
-  #content [id*="ugc-node-form"].ugc-custom-wrapper .captcha img {
-    margin: 0 0 5px 0px;
-  }
   #content [id*="ugc-node-form"].ugc-custom-wrapper .form-actions {
     text-align: left;
   }
