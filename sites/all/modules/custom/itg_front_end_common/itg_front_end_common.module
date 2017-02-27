@@ -441,9 +441,11 @@ function _related_story_left_block_content() {
     $related_data = itg_get_related_story_content($current_entity_id);
     if (!empty($related_data)) {
       $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
-      $related_image = $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
+      //$related_image = $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
+      $related_image_url = $related_data->sm_field_custom_story_extra_small_url[0];
+      $related_image = '<img src="'.$related_image_url.'">';
 
-      if (empty($related_image)) {
+      if (empty($related_image_url)) {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
         $related_story.= "<li class='col-md-12'><a href='$related_data->url' target='_blank' title='$related_title'><img src='$img_url' class='related-default' alt='' /></a>";
         $related_story.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
@@ -480,14 +482,16 @@ function _related_story_bottom_block_content() {
     $related_data = itg_get_related_story_content($current_entity_id);
     if (!empty($related_data)) {
       $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
-      $related_image = $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
-      if (empty($related_image)) {
+      //$related_image = $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
+      $related_image_url = $related_data->sm_field_custom_story_extra_small_url[0];
+      $related_image = '<img src="'.$related_image_url.'">';
+      if (empty($related_image_url)) {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
         $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$related_data->url' target='_blank' title='$related_title'><img src='$img_url' class='related-default' alt='' /></a>";
         $related_story.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
       }
       else {
-        $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$related_data->url' target='_blank' title='$related_title'>" . $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
+        $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$related_data->url' target='_blank' title='$related_title'>" . $related_image;
         $related_story.= "</a><span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
       }
     }
