@@ -1412,20 +1412,31 @@ function itg_widget_get_primary_cat($nid) {
 }
 
 /**
+ * Implements HOOK_NODE_DELETE
+ * 
+ * {@inheritdoc}
+ * @param array $node
+ */
+function itg_widget_node_delete($node) {
+  itg_widget_handle_unpublished_node($node->nid, FALSE);
+}
+/**
  * Function to delete nodes from widget and nodequeue.
  * @param int $nid
  */
-function itg_widget_handle_unpublished_node($nid) {
+function itg_widget_handle_unpublished_node($nid, $magazin_widget_condition = TRUE) {
   if ($nid) {
     // List of all widget.
     // IF number of widget is increses then increse this list.  
     // Delete query for itg_widget_query.
     // Widgets are define above from which node is to be delete.
     try {
-      db_delete('itg_widget_order')
-          ->condition('nid', $nid)
-          ->condition('widget', 'issue_primary_category_magazin_widget' ,'!=')
-          ->execute();
+      $query = db_delete('itg_widget_order');
+      $query->condition('nid', $nid);
+      if($magazin_widget_condition) {
+        $query->condition('widget', 'issue_primary_category_magazin_widget' ,'!=');
+      }
+      $query->execute();
     }
     catch (Exception $ex) {
       //watchdog("widget_delete", "From itg_widget_order " + $ex->getMessage());

@@ -5602,6 +5602,7 @@ h1.category-heading {
 .view-video-landing-header .photo-list {
   max-height: 210px;
   overflow-y: hidden;
+  margin: 0 -10px !important;
 }
 .view-video-landing-header .view-content .photo-list li {
   overflow: hidden;
@@ -12184,6 +12185,7 @@ h1.about-us-heading + div p {
   cursor: pointer;
   display: inline-block;
   vertical-align: top;
+  padding-right: 20px;
 }
 .breakingnew-home .new-detail .social-share {
   float: right;
