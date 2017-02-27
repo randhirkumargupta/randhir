@@ -1974,6 +1974,9 @@ footer .multiple-items-footer i.slick-next {
   font-weight: 500;
   line-height: 20px;
 }
+.view-front-end-global-search .view-content .search-detail h2 a:hover {
+  color: #1a3c8d;
+}
 .view-front-end-global-search .view-content .search-detail p {
   display: none;
 }
