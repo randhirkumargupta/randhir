@@ -10112,7 +10112,8 @@ h1.about-us-heading{
             }
             .field-content{      
                 cursor:pointer;                        
-                @include display-inline;                               
+                @include display-inline; 
+                padding-right: 20px;
             }
         }
         .social-share{

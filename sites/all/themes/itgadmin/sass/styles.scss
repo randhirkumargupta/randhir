@@ -7853,12 +7853,13 @@ div.node{
   .itg-form-section-wrapper{
     border: 1px solid #d9d9d9;
     margin-top: 20px;
-    display: inline-block;
+    float: left;
     width: 100%;
     .itg-form-section{
       float: left;
       width: 100%;
     }
+    &#StoryPhoto{@extend .hide;}
   }
   .itg-form-main h2, .itg-sidebar-form h2{
     background-color: #d9d9d9; 
@@ -7885,7 +7886,7 @@ div.node{
   }
   input[type="text"], select, input[type="password"]{
     height: 28px;
-    padding: 5px;
+    padding: 0 5px;
     line-height: 26px;
   }
   .form-type-textfield > label, 
@@ -8865,6 +8866,7 @@ div.node{
       overflow: visible;
     }
   }
+  .form-field-name-field-associate-photo-gallery, .form-field-name-field-story-associate-video{@extend .hide;}
   .form-field-name-field-story-category{
     .form-type-hierarchical-select{
       > label:after{

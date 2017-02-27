@@ -86,7 +86,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   $settings = array();
   
   $settings['formid'] = $form_id;
-  $settings['arg_url'] = $form_id;
+  $settings['arg_url'] = $arg[0];
   drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_admin_form.js');
   
@@ -96,11 +96,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     unset($form['actions']['preview_changes']);
   }
   
-  if (arg(0) == 'user') {
-    drupal_add_js('jQuery(document).ready(function() {
-                          jQuery("#skip-link").hide();                                      
-          });', array('type' => 'inline', 'scope' => 'footer'));
-  }
+  
   if ($user->uid != '1') {
 
     if ($form_id == 'menu_edit_item') {
@@ -108,12 +104,6 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
         $form['description']['#type'] = 'checkbox';
         $form['description']['#title'] = 'Sponser';
       }
-      // Add JS to hide extra element of menu forms
-      drupal_add_js('jQuery(document).ready(function() {
-                          jQuery(".form-item-expanded").hide();
-                          jQuery(".form-item-parent").hide();
-                          jQuery(".form-item-weight").hide();             
-          });', array('type' => 'inline', 'scope' => 'footer'));
     }
 
     // hide source relation and type field from other users 
@@ -134,14 +124,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
         '#value' => $type,
       );
     }
-  }
-
-  if ($form_id == 'custom_html_widgets_node_form') {
-    // remove space from title search field.
-    drupal_add_js('jQuery(document).ready(function() {                  
-                        jQuery(".vertical-tabs").hide();
-          });', array('type' => 'inline', 'scope' => 'footer'));
-  }
+  } 
 
   // Set title on Preview
   if (arg(1) == 'add' && isset($form['#node']->op) && $form['#node']->op == 'Preview') {
@@ -180,9 +163,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
   // Button name change some content
   if ($form_id == 'mega_review_critic_node_form' && (empty($form['#node']->nid) || (!empty($form['#node']->nid) && $form['#node']->status == 0))) {
-//    $form['actions']['itg_custom_button'] = array('#type' => 'submit',
-//      '#value' => t('Save as Draft'),//
-//      '#submit' => array('node_form_submit'));
+
     $form['actions']['submit']['#value'] = t('Publish');
   }
 
@@ -367,7 +348,7 @@ function itg_common_cancel_button($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  //p($form['#id']);
+  
   $settings = array();
 
   $settings['formid'] = $form['#id'];
