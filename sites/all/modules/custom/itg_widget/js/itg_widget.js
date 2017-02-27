@@ -43,7 +43,7 @@ Drupal.behaviors.itg_widgets = {
             jQuery('.big-story-col-1 .loading-popup').hide();
             jQuery('.videogallery-slider').slick({
                 slidesToShow: 1,
-                slidesToScroll: 1,
+                slidesToScroll: 1, 
                 prevArrow: '<i class="fa fa-chevron-left slick-prev" aria-hidden="true"></i>',
                 nextArrow: '<i class="fa fa-chevron-right slick-next" aria-hidden="true"></i>',
                 fade: false,

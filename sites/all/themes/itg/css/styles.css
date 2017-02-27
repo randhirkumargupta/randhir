@@ -2637,6 +2637,7 @@ footer .multiple-items-footer i.slick-next {
   text-align: center;
   line-height: 70px;
   cursor: pointer;
+  visibility: visible !important;
 }
 .story-section .story-right.photo-story .fa-chevron-left {
   left: 0;
