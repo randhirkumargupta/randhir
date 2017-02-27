@@ -1536,8 +1536,7 @@ footer .multiple-items-footer i.slick-next {
   vertical-align: top;
   cursor: pointer;
 }
-.big-news .share-new ul li:nth-child(3) a {
-  color: #ffc106;
+.big-news .share-new ul li:last-child a {
   border-right: none;
 }
 .big-news .big-story-detail {
