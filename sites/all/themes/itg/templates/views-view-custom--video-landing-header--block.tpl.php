@@ -29,9 +29,13 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
         $description_slider="";
         $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images"><ul>';
         $description_slider = '<div class="video-slider-description"><ul>';
+        
         foreach ($videoids as $keys => $video_value) {
             if ($keys != 0) {
                 $hide_player = 'hide-player';
+                $autoplay =0;
+            }else {
+                $autoplay =1; 
             }
             ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->video_id; ?>"><?php
 
@@ -51,7 +55,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                 ?>
                                     <div class="iframe-video">
                                         <iframe frameborder="0" scrolling="no"
-                                                src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=0&ui-logo=1&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
+                                                src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=<?php echo $autoplay;?>&player_next_video=x5d9tu3&ui-logo=1&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
                                                 allowfullscreen></iframe></div>
 
                                 </div>
@@ -108,7 +112,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                               <div class="show-embed-code-div">
                                 <div class="copy-sample-code">
                                   <textarea readonly="true">
-                                  <div id='IndiaToday_gallery' data-type='UAT'></div>
+                                  <div id='IndiaToday_gallery' data-type='STAGE'></div>
                                   <script src='<?php print $base_url;?>/sites/all/themes/itg/js/video_iframeResizer.js'>
                                   </script>
                                   <script> 
@@ -165,7 +169,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                               <div class="show-embed-code-div">
                                 <div class="copy-sample-code">
                                   <textarea readonly="true">
-                                  <div id='IndiaToday_gallery' data-type='UAT'></div>
+                                  <div id='IndiaToday_gallery' data-type='STAGE'></div>
                                   <script src='<?php print $base_url;?>/sites/all/themes/itg/js/video_iframeResizer.js'>
                                   </script>
                                   <script> 

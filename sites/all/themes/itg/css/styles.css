@@ -358,6 +358,10 @@ header {
   z-index: 9999;
 }
 
+#cboxClose {
+  background: url(../images/controls.png) no-repeat -25px 0px;
+}
+
 #block-itg-layout-manager-header-block {
   padding-top: 20px;
   box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
@@ -566,7 +570,7 @@ header {
   padding-right: 0;
   position: absolute;
   top: 37px;
-  z-index: 10;
+  z-index: 99999;
   background: #a00606;
   display: none;
   margin-left: 0;
@@ -1536,8 +1540,7 @@ footer .multiple-items-footer i.slick-next {
   vertical-align: top;
   cursor: pointer;
 }
-.big-news .share-new ul li:nth-child(3) a {
-  color: #ffc106;
+.big-news .share-new ul li:last-child a {
   border-right: none;
 }
 .big-news .big-story-detail {
@@ -2638,6 +2641,7 @@ footer .multiple-items-footer i.slick-next {
   text-align: center;
   line-height: 70px;
   cursor: pointer;
+  visibility: visible !important;
 }
 .story-section .story-right.photo-story .fa-chevron-left {
   left: 0;
@@ -3710,6 +3714,9 @@ footer .multiple-items-footer i.slick-next {
 }
 .page-node-add-ugc .messages--error.messages.error {
   margin: 0 30px;
+}
+.page-node-add-ugc #main {
+  min-height: 0;
 }
 
 /*Start snap post css*/
@@ -10197,6 +10204,9 @@ section.sidebar .block-itg-ads {
 }
 .election-page .itg-most-popular .most_popular p {
   margin-top: 10px;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
 }
 .election-page .itg-most-popular .col-md-3 {
   margin-bottom: 30px;
@@ -12076,6 +12086,16 @@ h1.about-us-heading + div p {
   float: left;
   padding-right: 20px;
 }
+#content [id*="ugc-node-form"].ugc-custom-wrapper .captcha img {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 20px 5px 0;
+}
+#content [id*="ugc-node-form"].ugc-custom-wrapper .captcha .form-item-captcha-response {
+  width: 50%;
+  display: inline-block;
+  vertical-align: middle;
+}
 
 .node-type-videogallery #cboxLoadedContent, .node-type-photogallery #cboxLoadedContent, .node-type-story #cboxLoadedContent {
   background: url(../images/tab-loading.gif);
@@ -12185,6 +12205,7 @@ h1.about-us-heading + div p {
   cursor: pointer;
   display: inline-block;
   vertical-align: top;
+  padding-right: 20px;
 }
 .breakingnew-home .new-detail .social-share {
   float: right;
