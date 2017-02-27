@@ -2912,6 +2912,7 @@ footer{
     .messages--error.messages.error{
         margin: 0 30px;
     }
+    #main{min-height: 0;}
 }
 /*Start snap post css*/
 .page-snappost{ 
@@ -10021,6 +10022,14 @@ h1.about-us-heading{
                 float: left;
                 padding-right: 20px;
             }
+            .captcha{
+              img{display: inline-block; vertical-align: middle; margin: 0 20px 5px 0;}
+              .form-item-captcha-response{
+                width: 50%;
+                display: inline-block;
+                vertical-align: middle;
+              }
+            }
         }
     }    
 .node-type-videogallery, .node-type-photogallery, .node-type-story{
@@ -10112,7 +10121,8 @@ h1.about-us-heading{
             }
             .field-content{      
                 cursor:pointer;                        
-                @include display-inline;                               
+                @include display-inline; 
+                padding-right: 20px;
             }
         }
         .social-share{

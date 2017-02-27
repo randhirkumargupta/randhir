@@ -590,7 +590,7 @@ function itg_photogallery_form_views_exposed_form_alter(&$form, &$form_state, $f
 }
 
 function itg_photogallery_form_field_gallery_image_form_alter(&$form, &$form_state, $form_id) {
-    pr($form);
+    //pr($form);
 }
 
 /**

@@ -86,13 +86,8 @@ $(this).parent().parent().parent().parent().find('.answer-container-actual').htm
       });
   
       $('.question-container').on('click', '#show_answer', function(){
-        $(this).closest('.answer-container').find('span.right-checked').addClass('rightbg');
-        $(this).closest('.answer-container').find('span.wrong-checked').addClass('wrongbg');
-      });
-      
-      $('.answer-container').on('click', 'label', function(){
-        $(this).find('span.right-answer').toggleClass('right-checked');
-        $(this).find('span.wrong-answer').toggleClass('wrong-checked');
+        $(this).closest('.answer-container').find('span.right-answer').addClass('rightbg');
+        $(this).closest('.answer-container').find('span.wrong-answer').addClass('wrongbg');
       });
 
     }

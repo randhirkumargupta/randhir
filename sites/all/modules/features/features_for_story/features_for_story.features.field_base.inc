@@ -2956,7 +2956,7 @@ function features_for_story_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         'photo_story' => 'Photo Story',
-        'other_story' => 'Other Story',
+        'other_story' => 'Default',
       ),
       'allowed_values_function' => '',
     ),

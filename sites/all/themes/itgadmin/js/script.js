@@ -270,6 +270,14 @@ jQuery(document).ready(function() {
             prevText: "<i class='fa fa-angle-left' aria-hidden='true'></i>",
             nextText: "<i class='fa fa-angle-right' aria-hidden='true'></i>"
         });
+        // jQuery code for flexslider
+        $('.uploaded-video-list').flexslider({
+            animation: "slide",
+            slideshowSpeed: 3000,
+            controlNav: false,
+            prevText: "<i class='fa fa-angle-left' aria-hidden='true'></i>",
+            nextText: "<i class='fa fa-angle-right' aria-hidden='true'></i>"
+        });
 
         // jQuery code to hide select option whenever user hover on ITGCMS navbar
         $('#block-menu-menu-admin-left-menu').mouseover(function() {
@@ -752,7 +760,35 @@ jQuery(document).ready(function() {
         else {
             $('body').find('.div_lrp_gold_star_five_icon').show();
         }
-
+        // jQuery code to show hide Associate lead gallery/video
+        showHideAssociateLead();
+        $('.form-field-name-field-story-associate-lead').on('change', '.form-radio', function(){
+          showHideAssociateLead();
+        });
+        function showHideAssociateLead(){
+          var checked_val = $('.form-field-name-field-story-associate-lead').find('.form-radio:checked').val();
+          if(checked_val == "gallery"){
+            $('.form-field-name-field-story-associate-video').hide();
+            $('.form-field-name-field-associate-photo-gallery').show();
+          } else if(checked_val == "video"){
+            $('.form-field-name-field-associate-photo-gallery').hide();
+            $('.form-field-name-field-story-associate-video').show();
+          }
+        };
+        
+        // jQuery code to show hide Associate lead gallery/video
+        showHidePhotoStory();
+        $('.form-field-name-field-story-type').on('change', '.form-select', function(){
+          showHidePhotoStory();
+        });
+        function showHidePhotoStory(){
+          var selected_val = $('.form-field-name-field-story-type').find('.form-select option:selected').val();
+          if(selected_val == "photo_story"){
+            $('.node-story-form #StoryPhoto').show();
+          } else{
+            $('.node-story-form #StoryPhoto').hide();
+          }
+        };
 
     };
 })(jQuery);
@@ -972,8 +1008,8 @@ jQuery(document).ready(function() {
             complete: function() {
             },
             error: function(xhr, desc, err) {
-                console.log(xhr);
-                console.log("Details: " + desc + "\nError:" + err);
+//                console.log(xhr);
+//                console.log("Details: " + desc + "\nError:" + err);
             }
         });
     });
