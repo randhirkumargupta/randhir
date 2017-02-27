@@ -120,7 +120,7 @@ function feature_category_management_field_default_field_instances() {
   $field_instances['taxonomy_term-category_management-field_cm_category_banner'] = array(
     'bundle' => 'category_management',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (43 x 43)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -911,6 +911,7 @@ function feature_category_management_field_default_field_instances() {
   t('If you checked this option, category name will not appear on front end navigation.');
   t('If you checked this option, category will be marked as sponsored and will appear in the category listing page with special flag "Sponsored". ');
   t('If you checked this option, then this category would not be able to search in google search.');
+  t('Image Size (43 x 43)');
   t('Issue free');
   t('No Follow');
   t('Please enter display title, it will appear on the front end if user has entered.');
