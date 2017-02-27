@@ -33,6 +33,7 @@ if ($row->_field_data['nid']['entity']->type == 'event_backend') {
         $row->_field_data['nid']['entity']->type == 'videogallery' ||
         $row->_field_data['nid']['entity']->type == 'mega_review_critic' ||
         $row->_field_data['nid']['entity']->type == 'podcast' ||
+        $row->_field_data['nid']['entity']->type == 'story' ||
         $row->_field_data['nid']['entity']->type == 'breaking_news') {
   
     if ($row->_field_data['nid']['entity']->status == 0) {
