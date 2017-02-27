@@ -574,7 +574,7 @@ function _personalization_show_content() {
 
       if (!empty($value['image']) && file_exists($value['image']))
       {
-        $file = $value['image'];
+        $file = file_create_url($value['image']);
         $type_image = theme('image_style', array('style_name' => 'anchors_landing', 'path' => $value['image'], 'alt' => $value['image']));
       }
       else
