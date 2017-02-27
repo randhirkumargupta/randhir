@@ -156,6 +156,10 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'story_node_form':
       global $base_url, $user;
+       unset($form['field_story_short_headline']);
+       unset($form['field_story_long_head_line']);
+       $form['field_story_big_image']['#attributes']['class'][] = 'element-hidden';
+       
       // code for multiple byline
       if (empty($form['#node']->nid))
       {
@@ -334,7 +338,9 @@ function itg_story_node_validate($node, $form, &$form_state) {
         }
 
         $redirection_url = $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'];
-
+        if (!empty($redirection_url) && !preg_match("~^(?:f|ht)tps?://~i", $redirection_url)) {
+          $redirection_url = "http://" .$redirection_url;
+        }
         if (!empty($redirection_url) && filter_var($redirection_url, FILTER_VALIDATE_URL) === FALSE) {
             form_set_error('field_story_redirection_url_titl', t("$redirection_url is not a valid URL"));
         }
@@ -708,12 +714,19 @@ function itg_story_views_query_alter(&$view, &$query) {
  * {@inheritdoc}
  */
 function itg_story_node_presave($node) {
-    $type = $node->type;
-    if ($type == 'story' && !empty($node->field_story_magazine_story_issue['und'][0]['value'])) {
-      if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-        $node->field_story_source_type['und'][0]['value'] = 'Magazine Story';
-      }        
+  $type = $node->type;
+  if ($type == 'story' && !empty($node->field_story_magazine_story_issue['und'][0]['value']))
+  {
+    if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated')
+    {
+      $node->field_story_source_type['und'][0]['value'] = 'Magazine Story';
     }
+  }
+  $redirection_url = $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'];
+  if (!empty($redirection_url) && !preg_match("~^(?:f|ht)tps?://~i", $redirection_url))
+  {
+    $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'] = "http://" . $redirection_url;
+  }
 }
 
 /**
