@@ -278,7 +278,7 @@
                       $large_image = theme(
                                       'image_style', array(
                                       'style_name' => empty($asso_vid_class) ? 'mrass_video' : 'anchors_landing',
-                                      'path' => $video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'],
+                                      'path' => file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']),
                                       )
                                     );
                       print l($large_image, 'node/' . $video_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
@@ -307,7 +307,7 @@
                       $small_image = theme(
                                         'image_style', array(
                                         'style_name' => empty($ass_photo_class) ? 'mrass_video' : 'anchors_landing',
-                                        'path' => $photo_node->field_story_extra_large_image['und'][0]['uri'],
+                                        'path' => file_create_url($photo_node->field_story_extra_large_image['und'][0]['uri']),
                                         )
                                     );
                       $image_count = count($photo_node->field_gallery_image['und']);

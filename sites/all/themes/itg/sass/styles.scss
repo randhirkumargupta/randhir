@@ -8454,6 +8454,9 @@ section.sidebar{
             border: none;
             p{
                 margin-top:10px; 
+                display: inline-block;
+                vertical-align: top;
+                width: 100%;
             }
         }
         .col-md-3{
