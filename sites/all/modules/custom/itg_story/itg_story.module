@@ -389,7 +389,8 @@ function itg_story_after_build($form, &$form_state) {
         '#attributes' => array('id' => 'original_image_fids', 'name' => 'original_image_fids'),
     );
   drupal_add_js('jQuery(document).ready(function() {              
-                if (jQuery("#edit-path-pathauto").is(":checked")) {                
+                if (jQuery("#edit-path-pathauto").is(":checked")) {
+                
                   jQuery("#edit-path-alias").attr("readonly", "readonly");
                 } else {                
                   jQuery("#edit-path-alias").removeAttr("readonly");
