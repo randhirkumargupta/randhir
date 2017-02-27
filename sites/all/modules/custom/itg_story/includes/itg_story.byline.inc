@@ -191,17 +191,12 @@ function itg_get_previous_byline_detail($unique_id, $nid) {
  * @param string $uniqueid
  */
 function itg_get_byline_row($uniqueid) {
-  $options = '';
   if (!empty($uniqueid)) {
     $query = db_select('itg_multi_byline_info', 'c');
-    $query->fields('c', array('id'));
+    $query->fields('c', array('byline_id'));
     $query->condition('c.uniqueid', $uniqueid);
-    $result = $query->execute();
-    while ($record = $result->fetchAssoc()) {
-      $options[] = $record['id'];
-    }
-
-    return $options;
+    $result = $query->execute()->fetchField();
+    return $result;
   }
 }
 
@@ -216,20 +211,25 @@ function itg_story_node_insert($node) {
     if(!empty($node->field_reporter_unique_id[LANGUAGE_NONE])){
       $unique_id = $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'];
     }
-    $row_count = itg_get_byline_row($unique_id);
-    if (!empty($row_count)) {
-      foreach ($row_count as $id) {
-        db_update('itg_multi_byline_info')
-            ->fields(array(
-              'nid' => $nid,
-            ))
-            ->condition('id', $id, '=')
-            ->execute();
-      }
-    }
     if(!empty($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'])) {
-      itg_byline_order_update($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'], $nid);
+      $publish_id = $node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'];
     }
+    $row_count = itg_get_byline_row($unique_id);
+//    $i = 0;
+//    if (!empty($row_count)) {
+//      foreach ($row_count as $id) {
+//        db_update('itg_multi_byline_info')
+//            ->fields(array(
+//              'nid' => $nid,
+//            ))
+//            ->condition('id', $id, '=')
+//            ->execute();
+//        $i++;
+//      }
+//    }
+    //if(!empty($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'])) {
+      itg_byline_order_update($publish_id, $nid, $unique_id);
+    //}
 
     //unset($_SESSION['unique']);
   }
@@ -242,22 +242,28 @@ function itg_story_node_insert($node) {
 function itg_story_node_update($node) {
   if ($node->type == 'story') {
     $nid = $node->nid;
-    $unique_id = $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'];
-    $row_count = itg_get_byline_row($unique_id);
-    if (!empty($row_count)) {
-      foreach ($row_count as $id) {
-        db_update('itg_multi_byline_info')
-            ->fields(array(
-              'nid' => $nid,
-            ))
-            ->condition('id', $id, '=')
-            ->execute();
-      }
+    if(!empty($node->field_reporter_unique_id[LANGUAGE_NONE])){
+      $unique_id = $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'];
     }
-    
     if(!empty($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'])) {
-      itg_byline_order_update($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'], $nid);
+      $publish_id = $node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'];
     }
+    //$unique_id = $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'];
+//    $row_count = itg_get_byline_row($unique_id);
+//    if (!empty($row_count)) {
+//      foreach ($row_count as $id) {
+//        db_update('itg_multi_byline_info')
+//            ->fields(array(
+//              'nid' => $nid,
+//            ))
+//            ->condition('id', $id, '=')
+//            ->execute();
+//      }
+//    }
+    
+    //if(!empty($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'])) {
+      itg_byline_order_update($publish_id, $nid, $unique_id);
+   // }
   }
 }
 
@@ -266,7 +272,7 @@ function itg_story_node_update($node) {
  * @param string $byline
  * @param int $nid
  */
-function itg_byline_order_update($byline, $nid) {
+function itg_byline_order_update($byline, $nid ,$uniqueid) {
   $byline_arr = explode(',', $byline);
   $i = 0;
   if (!empty($byline_arr)) {
@@ -274,9 +280,10 @@ function itg_byline_order_update($byline, $nid) {
       db_update('itg_multi_byline_info')
           ->fields(array(
             'byline_weight' => $i,
+            'nid' => $nid,
           ))
           ->condition('byline_id', $value, '=')
-          ->condition('nid', $nid, '=')
+          ->condition('uniqueid', $uniqueid, '=')
           ->execute();
       $i++;
     }
