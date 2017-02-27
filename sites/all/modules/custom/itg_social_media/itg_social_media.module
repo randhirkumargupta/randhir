@@ -114,6 +114,12 @@ function itg_social_media_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_social_media.settings.inc',
   );
+   $items['itg-social-media-promote/%'] = array(
+    'page callback' => 'itg_social_media_promote',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_social_media.admin.inc'
+  );
 
   return $items;
 }
@@ -377,6 +383,11 @@ function itg_social_media_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'itg_social_media') . '/templates',
       'variables' => array('data' => NULL),
     ),
+    'social_media_promote' => array(
+      'template' => 'itg-social-media-promote',
+      'path' => drupal_get_path('module', 'itg_social_media') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
   );
   return $themes;
 }
@@ -561,6 +572,7 @@ function itg_social_media_block_info() {
 function itg_social_media_block_view($delta = '') {
   $block = array();
   $arg = arg();
+  
   if (isset($arg[1])) {
     $c_type = itg_social_media_node_type(check_plain($arg[1]));
     $nid = check_plain($arg[1]);
