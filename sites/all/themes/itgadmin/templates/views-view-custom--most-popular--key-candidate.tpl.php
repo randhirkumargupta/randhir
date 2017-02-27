@@ -39,7 +39,7 @@ foreach ($resultdata as $key => $mainids) {
 
 
                     <ul>
-            <?php if (!empty($row['field_story_extra_large_image']) && file_exists($row['field_story_extra_large_image'])) { ?>
+            <?php if (!empty($row['field_story_extra_large_image'])) { ?>
                             <li><?php print $row['field_story_extra_large_image']; ?></li>
                         <?php
                         }
