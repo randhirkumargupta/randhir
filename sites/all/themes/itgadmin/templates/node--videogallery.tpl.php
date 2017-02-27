@@ -74,11 +74,11 @@
     <?php } else { ?>
           <div class="Story-details">
             <h2><?php print t('Video Upload'); ?></h2>
-            <div class="content-details uploaded-video-view">
+            <div class="content-details">
               <?php
               $items = field_get_items('node', $node, 'field_video_upload');
               foreach ($items as $imagecollection):
-                $output .= "<div class='view-item'>";
+                $output .= "<li class='view-item'>";
                 $video_fid = $imagecollection['field_videogallery_video_upload'][LANGUAGE_NONE][0]['fid'];
                 if ($video_fid != "") {
                   $video_data = itg_videogallery_get_videoid($video_fid);
@@ -93,10 +93,10 @@
                 if (isset($imagecollection['field_include_ads'][LANGUAGE_NONE]) && !empty($imagecollection['field_include_ads'][LANGUAGE_NONE][0]['value'])) {
                   $output .= '<p><strong>' . $imagecollection['field_include_ads'][LANGUAGE_NONE][0]['value'] . '</strong></p>';
                 }
-                $output .= "</div>";
+                $output .= "</li>";
               endforeach;
               ?>
-              <?php print $output; ?>
+              <div class="uploaded-video-list flexslider"><ul class="slides"><?php print $output; ?></ul></div>
             </div>
           </div> 
         <?php } ?>
