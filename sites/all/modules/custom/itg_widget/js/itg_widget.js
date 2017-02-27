@@ -44,7 +44,7 @@ Drupal.behaviors.itg_widgets = {
             jQuery('.videogallery-slider').slick({
                 slidesToShow: 1,
                 slidesToScroll: 1,
-                arrows: false,
+                arrows: true,
                 fade: false,
                 asNavFor: '.video-slider-images ul'
             });
