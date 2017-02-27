@@ -140,7 +140,9 @@ function itg_social_media_fb_paglist() {
   try {
     // Returns a `Facebook\FacebookResponse` object
     $response = $fb->get('/me?fields=accounts', variable_get('fb_access_token'));
+    
   }
+  
   catch (Facebook\Exceptions\FacebookResponseException $e) {
     drupal_set_message(t('Graph returned an error: @emessage', array('@emessage' => $e->getMessage())), 'error');    
   }

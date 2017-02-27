@@ -430,6 +430,7 @@ function itgadmin_preprocess_page(&$vars) {
     , 'itg-social-log'
     , 'itg-custom-widget-content'
     , 'itg-custom-widget-content-order'
+    , 'itg-social-media-promote'
   );
 
   if (in_array(arg(0), $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {
