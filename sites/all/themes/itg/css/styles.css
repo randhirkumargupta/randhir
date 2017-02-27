@@ -10204,6 +10204,9 @@ section.sidebar .block-itg-ads {
 }
 .election-page .itg-most-popular .most_popular p {
   margin-top: 10px;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
 }
 .election-page .itg-most-popular .col-md-3 {
   margin-bottom: 30px;
