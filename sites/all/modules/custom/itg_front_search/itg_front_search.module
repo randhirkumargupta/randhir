@@ -200,35 +200,42 @@ function itg_front_search_views_pre_render(&$view) {
     drupal_add_js(drupal_get_path('module', 'itg_front_search') . '/js/itg_front_search.js', array('weight' => 1));
 
     foreach ($view->result as $related_result) {
-      // dpm($related_result);
-      if ($related_result->bs_status == '1') {
+       if ($related_result->bs_status == '1') {
         $related_result->bs_status = 'Published';
       }
-
+       $related_data = itg_get_related_story_content($related_result->entity_id);
+       $related_image_url = $related_data->sm_field_custom_story_extra_small_url[0];
+       $related_image = '<img src="' . $related_image_url . '" alt="image">';
       // image condition when image not image
       //$image = $related_result->sm_thumb_medium_field_story_extra_large_image[0];
-      $image = $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0];
-      $blog_image = $related_result->sm_thumb_medium_field_blog_image[0];
-      $magazine_image = $related_result->sm_thumb_medium_field_magazine_cover_photo[0];
-
-      $pattern = '/src="([^"]*)"/';
-
-      if (preg_match($pattern, $image, $matches)) {
-        $src = $matches[1];
-        if (getimagesize($src) !== false) {
-          $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0] = $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0];
-        }
-        else {
-          $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-          $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0] = "<img src='$img_url' alt='' />";
-        }
-      }
-
-      if (empty($image) && empty($magazine_image)) {
+//      $image = $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0];
+//      $blog_image = $related_result->sm_thumb_medium_field_blog_image[0];
+//      $magazine_image = $related_result->sm_thumb_medium_field_magazine_cover_photo[0];
+//
+//      $pattern = '/src="([^"]*)"/';
+//
+//      if (preg_match($pattern, $image, $matches)) {
+//        $src = $matches[1];
+//        if (getimagesize($src) !== false) {
+//          $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0] = $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0];
+//        }
+//        else {
+//          $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
+//          $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0] = "<img src='$img_url' alt='' />";
+//        }
+//      }
+//
+//      if (empty($image) && empty($magazine_image)) {
+//        $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
+//        $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0] = "<img src='$img_url' alt='' />";
+//      }
+      if(!empty($related_image_url)) {
+        $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0] = $related_image;
+      } else {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-        $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0] = "<img src='$img_url' alt='' />";
+        $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0] = "<img src='$img_url' alt='image' />";
       }
-
+      
       $words = $_GET['keyword'];
       $description_raw_value = strip_tags($related_result->content);
       $description_message_lenth = strlen($description_raw_value);
