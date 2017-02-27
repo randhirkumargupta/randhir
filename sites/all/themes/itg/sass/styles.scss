@@ -1643,7 +1643,8 @@ footer{
                 @include font(15px,20px);
                 margin-bottom:10px;
                 a{
-                    @include font(15px,20px,$itg-font-medium);   
+                    @include font(15px,20px,$itg-font-medium);  
+                    &:hover{color: #1a3c8d;}
                 }
             }
             p{
