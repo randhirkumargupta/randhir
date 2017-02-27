@@ -157,7 +157,8 @@
                             ?>
                             <div class="photobyline"><?php print render($content['field_photo_by']); ?></div>
                         <?php endif; ?>      
-                        <?php echo '<div class="photogallery-list flexslider"><ul class="slides">' . $output . '</ul></div>'; ?>     
+                        <?php echo '<div class="photogallery-list flexslider"><ul class="slides">' . $output . '</ul></div>'; ?>
+                            <div class="credit-source"><?php print render($content['field_credit_name']); ?></div>
                     </div>
                 </div>
             <?php endif; ?> 
