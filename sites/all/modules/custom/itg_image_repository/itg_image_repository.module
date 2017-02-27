@@ -47,8 +47,8 @@ function itg_image_repository_menu() {
     $items['file/itg_image_repository/%/%/%'] = array(
         'page callback' => 'filefield_source_itg_image_repository_page',
         'page arguments' => array(2, 3, 4),
-        'access callback' => '_filefield_sources_field_access',
-        'access arguments' => array(2, 3, 4),
+       // 'access arguments' => $access,
+        'access arguments' => array('access content'),
         'type' => MENU_CALLBACK,
     );
     return $items;
@@ -330,6 +330,7 @@ function filefield_source_itg_image_repository_page($entity_type, $bundle_name, 
     $conf['itg_image_repository_settings_absurls'] = 0;
 
     module_load_include('inc', 'itg_image_repository', 'inc/itg_image_repository.page');
+  
     return itg_image_repository($field['settings']['uri_scheme']);
 }
 
@@ -339,90 +340,90 @@ function filefield_source_itg_image_repository_page($entity_type, $bundle_name, 
  * @param reference array $itg_image_repository
  * @return array $directory
  */
-//function filefield_source_itg_image_repository_custom_scan_full($dirname, &$itg_image_repository) {
-//    // Get a list of files in the database for this directory.
-//    $scheme = $itg_image_repository['scheme'];
-//    $sql_uri_name = $dirname == '.' ? $scheme . '://' : $scheme . '://' . $dirname . '/';
-//
-//    $result = db_select('file_managed', 'f')
-//            ->fields('f', array('uri'))
-//            ->condition('f.uri', $sql_uri_name . '%', 'LIKE')
-//            ->condition('f.uri', $sql_uri_name . '_%/%', 'NOT LIKE')
-//            ->execute();
-//
-//    $db_files = array();
-//    foreach ($result as $row) {
-//        $db_files[basename($row->uri)] = 1;
-//    }
-//
-//    // Get the default itg_image_repository directory scan, then filter down to database files.
-//    $directory = itg_image_repository_scan_directory($dirname, $itg_image_repository);
-//    foreach ($directory['files'] as $filename => $file) {
-//        if (!isset($db_files[$filename])) {
-//            unset($directory['files'][$filename]);
-//            $directory['dirsize'] -= $file['size'];
-//        }
-//    }
-//
-//    return $directory;
-//}
-//
-///**
-// * Scan directory and return file list, subdirectories, and total size for Restricted Mode.
-// * @param string $dirname
-// * @param reference array $itg_image_repository
-// * @return array $directory
-// */
-//function filefield_source_itg_image_repository_custom_scan_restricted($dirname, &$itg_image_repository) {
-//    $field = $GLOBALS['conf']['itg_image_repository_custom_field'];
-//    $root = $itg_image_repository['scheme'] . '://';
-//    $field_uri = $field['_uri'];
-//    $is_root = $field_uri == $root;
-//
-//    // Process itg_image_repository. Make field directory the only accessible one.
-//    $itg_image_repository['dir'] = $is_root ? '.' : substr($field_uri, strlen($root));
-//    $itg_image_repository['directories'] = array();
-//    if (!empty($itg_image_repository['perm'])) {
-//        filefield_source_itg_image_repository_disable_perms($itg_image_repository, array('browse'));
-//    }
-//
-//    // Create directory info
-//    $directory = array('dirsize' => 0, 'files' => array(), 'subdirectories' => array(), 'error' => FALSE);
-//
-//    if (isset($field['storage']['details']['sql']['FIELD_LOAD_CURRENT'])) {
-//        $storage = $field['storage']['details']['sql']['FIELD_LOAD_CURRENT'];
-//        $table_info = reset($storage);
-//        $table = key($storage);
-//        $sql_uri = $field_uri . ($is_root ? '' : '/');
-//        $query = db_select($table, 'cf');
-//        $query->innerJoin('file_managed', 'f', 'f.fid = cf.' . $table_info['fid']);
-//        $result = $query->fields('f')
-//                ->condition('f.status', 1)
-//                ->condition('f.uri', $sql_uri . '%', 'LIKE')
-//                ->condition('f.uri', $sql_uri . '%/%', 'NOT LIKE')
-//                ->execute();
-//        foreach ($result as $file) {
-//            // Get real name
-//            $name = basename($file->uri);
-//            // Get dimensions
-//            $width = $height = 0;
-//            if ($img = itg_image_repository_image_info($file->uri)) {
-//                $width = $img['width'];
-//                $height = $img['height'];
-//            }
-//            $directory['files'][$name] = array(
-//                'name' => $name,
-//                'size' => $file->filesize,
-//                'width' => $width,
-//                'height' => $height,
-//                'date' => $file->timestamp,
-//            );
-//            $directory['dirsize'] += $file->filesize;
-//        }
-//    }
-//
-//    return $directory;
-//}
+function filefield_source_itg_image_repository_custom_scan_full($dirname, &$itg_image_repository) {
+    // Get a list of files in the database for this directory.
+    $scheme = $itg_image_repository['scheme'];
+    $sql_uri_name = $dirname == '.' ? $scheme . '://' : $scheme . '://' . $dirname . '/';
+
+    $result = db_select('file_managed', 'f')
+            ->fields('f', array('uri'))
+            ->condition('f.uri', $sql_uri_name . '%', 'LIKE')
+            ->condition('f.uri', $sql_uri_name . '_%/%', 'NOT LIKE')
+            ->execute();
+
+    $db_files = array();
+    foreach ($result as $row) {
+        $db_files[basename($row->uri)] = 1;
+    }
+
+    // Get the default itg_image_repository directory scan, then filter down to database files.
+    $directory = itg_image_repository_scan_directory($dirname, $itg_image_repository);
+    foreach ($directory['files'] as $filename => $file) {
+        if (!isset($db_files[$filename])) {
+            unset($directory['files'][$filename]);
+            $directory['dirsize'] -= $file['size'];
+        }
+    }
+
+    return $directory;
+}
+
+/**
+ * Scan directory and return file list, subdirectories, and total size for Restricted Mode.
+ * @param string $dirname
+ * @param reference array $itg_image_repository
+ * @return array $directory
+ */
+function filefield_source_itg_image_repository_custom_scan_restricted($dirname, &$itg_image_repository) {
+    $field = $GLOBALS['conf']['itg_image_repository_custom_field'];
+    $root = $itg_image_repository['scheme'] . '://';
+    $field_uri = $field['_uri'];
+    $is_root = $field_uri == $root;
+
+    // Process itg_image_repository. Make field directory the only accessible one.
+    $itg_image_repository['dir'] = $is_root ? '.' : substr($field_uri, strlen($root));
+    $itg_image_repository['directories'] = array();
+    if (!empty($itg_image_repository['perm'])) {
+        filefield_source_itg_image_repository_disable_perms($itg_image_repository, array('browse'));
+    }
+
+    // Create directory info
+    $directory = array('dirsize' => 0, 'files' => array(), 'subdirectories' => array(), 'error' => FALSE);
+
+    if (isset($field['storage']['details']['sql']['FIELD_LOAD_CURRENT'])) {
+        $storage = $field['storage']['details']['sql']['FIELD_LOAD_CURRENT'];
+        $table_info = reset($storage);
+        $table = key($storage);
+        $sql_uri = $field_uri . ($is_root ? '' : '/');
+        $query = db_select($table, 'cf');
+        $query->innerJoin('file_managed', 'f', 'f.fid = cf.' . $table_info['fid']);
+        $result = $query->fields('f')
+                ->condition('f.status', 1)
+                ->condition('f.uri', $sql_uri . '%', 'LIKE')
+                ->condition('f.uri', $sql_uri . '%/%', 'NOT LIKE')
+                ->execute();
+        foreach ($result as $file) {
+            // Get real name
+            $name = basename($file->uri);
+            // Get dimensions
+            $width = $height = 0;
+            if ($img = itg_image_repository_image_info($file->uri)) {
+                $width = $img['width'];
+                $height = $img['height'];
+            }
+            $directory['files'][$name] = array(
+                'name' => $name,
+                'size' => $file->filesize,
+                'width' => $width,
+                'height' => $height,
+                'date' => $file->timestamp,
+            );
+            $directory['dirsize'] += $file->filesize;
+        }
+    }
+
+    return $directory;
+}
 
 /**
  * Disable itg_image_repository profile permissions.

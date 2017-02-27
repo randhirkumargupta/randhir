@@ -242,9 +242,9 @@ function metatag_menu() {
 /**
  * Implements hook_flush_caches().
  */
-function metatag_flush_caches() {
-  return array('cache_metatag');
-}
+//function metatag_flush_caches() {
+//  return array('cache_metatag');
+//}
 
 /**
  * Load a metatag configuration record with all the defaults merged in.

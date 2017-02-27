@@ -576,7 +576,7 @@ body.sidebar-second{
     top: 50px;
     left: 100%;
     width: 330px;
-    z-index: 99999;
+    z-index: 9999;
     transition: all 500ms ease 0s;
     &.active{
       transform: translateX(-330px);
@@ -3704,6 +3704,7 @@ div.node{
       @extend .pos-rel;
       min-height: 450px;
       background-color: #f0f0f0;
+      p{padding: 0 10px;}
     }
     iframe{
       width: 100%;
@@ -5165,7 +5166,7 @@ div.node{
     right: 0;
     top: 0;
     width: 1170px;
-    z-index: 99999;
+    z-index: 9999;
   }
   #page-title{
     @extend .fleft;
@@ -10777,3 +10778,4 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     font-size: 20px;
   }
 }
+#cboxClose{background: url(../images/controls.png) no-repeat -25px 0px;}

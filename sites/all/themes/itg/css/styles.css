@@ -358,6 +358,10 @@ header {
   z-index: 9999;
 }
 
+#cboxClose {
+  background: url(../images/controls.png) no-repeat -25px 0px;
+}
+
 #block-itg-layout-manager-header-block {
   padding-top: 20px;
   box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
@@ -566,7 +570,7 @@ header {
   padding-right: 0;
   position: absolute;
   top: 37px;
-  z-index: 10;
+  z-index: 99999;
   background: #a00606;
   display: none;
   margin-left: 0;
@@ -1536,8 +1540,7 @@ footer .multiple-items-footer i.slick-next {
   vertical-align: top;
   cursor: pointer;
 }
-.big-news .share-new ul li:nth-child(3) a {
-  color: #ffc106;
+.big-news .share-new ul li:last-child a {
   border-right: none;
 }
 .big-news .big-story-detail {
@@ -2638,6 +2641,7 @@ footer .multiple-items-footer i.slick-next {
   text-align: center;
   line-height: 70px;
   cursor: pointer;
+  visibility: visible !important;
 }
 .story-section .story-right.photo-story .fa-chevron-left {
   left: 0;
