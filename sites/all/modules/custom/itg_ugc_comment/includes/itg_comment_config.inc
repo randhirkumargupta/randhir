@@ -11,7 +11,7 @@ function comment_global_config($form, &$form_state) {
   
   $form['#prefix'] = '<div id="comment_global_config">';
   $form['#suffix'] = $ext_div . '</div>';
-  $active = array('vukkul' => t('vukkul'), 'other' => t('other'));
+  $active = array('vukkul' => t('Vukkul'), 'other' => t('ITG Custom'));
   $form['choice'] = array(
     '#type' => 'radios',
     '#title' => t('Select Configuration'),
@@ -33,8 +33,14 @@ function comment_global_config($form, &$form_state) {
     
   }
   
+  if($last_record[0]->config_name == 'other') {
+    $nm = 'ITG Custom';
+  } else {
+    $nm = $last_record[0]->config_name;
+  }
+  
   $form['pre-record'] = array(
-        '#markup' => '<div id="pre-record">'.t('Last selected configuration value : ').$last_record[0]->config_name.' : Date : '.$last_record[0]->created.'</div>',
+        '#markup' => '<div id="pre-record">'.t('Last selected configuration value : ').$nm.' : Date : '.$last_record[0]->created.'</div>',
       );
   return $form;
 }
