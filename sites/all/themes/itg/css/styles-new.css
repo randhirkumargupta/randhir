@@ -2774,12 +2774,17 @@ body.has-cart-popup {
 }
 .page-user form .form-item-remember-me label {
   font-size: 14px;
+  margin-top: 10px;
 }
 .page-user .social-share {
-  display: inline-block;
-  vertical-align: top;
-  width: 100%;
-  text-align: center;
+  /*        display: inline-block;
+          vertical-align: top;
+          width: 100%;
+          text-align: center;*/
+  width: 51%;
+  margin: 0 auto;
+  display: block;
+  overflow: hidden;
 }
 .page-user .social-share a {
   border-radius: 5px;

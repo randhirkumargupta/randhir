@@ -56,7 +56,7 @@
       ?>
       
       <span class="count"><?php print 'Count ('.$view->total_rows.')'; ?></span>
-      <a href="clone-story" class="clone-story-link"><?php print t('Clone Story'); ?></a> 
+      <a href="clone-story" class="clone-story-link" target="_blank"><?php print t('Clone Story'); ?></a> 
       <?php print l('Create Story', 'node/add/story', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0)))); ?>
     </div>
   <?php endif; ?>

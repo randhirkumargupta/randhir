@@ -282,7 +282,7 @@ function _related_video_block_content() {
       if (!empty($related_data)) {
         $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
         //$related_image = $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
-        $related_image_url = $related_data->sm_field_custom_story_extra_small_url[0];
+        $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
         $related_image = '<img src="' . $related_image_url . '">';
         if (empty($related_image_url)) {
           $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
@@ -331,7 +331,7 @@ function _related_photo_block_content() {
       if (!empty($related_data)) {
         $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
         //$related_image = $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
-        $related_image_url = $related_data->sm_field_custom_story_extra_small_url[0];
+        $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
         $related_image = '<img src="' . $related_image_url . '">';
         if (empty($related_image_url)) {
           $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
@@ -536,15 +536,15 @@ function _related_story_bottom_block_content() {
  */
 function _related_podcast_bottom_block_content() {
   global $base_url;
-
+  $related_result = array();
   $related_content = itg_get_related_content(arg(1));
-  if (function_exists('itg_get_related_story_id')) {
+  if (function_exists('itg_get_related_story_id') && !empty($related_content)) {
     $related_result = itg_get_related_story_id($related_content);
   }
  $related_story = '';
  // Fix for related label on front end.
   if(!empty($related_result[0])) {
-    $related_story = '<h3><span>'.t('Related').'</span></h3>';
+    $related_story = '<h3><span>'.t('Related Content').'</span></h3>';
   }
   if(!empty($related_result)) {
   $related_story.= "<div class='row'><ul>";
@@ -554,14 +554,15 @@ function _related_podcast_bottom_block_content() {
     $related_data = itg_get_related_story_content($current_entity_id);
     if (!empty($related_data)) {
       $related_title = mb_strimwidth($related_data->label, 0, 200, "..");
-      $related_image = $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
-      if (empty($related_image)) {
+      $related_image_url = $related_data->sm_field_custom_story_extra_small_url[0];
+      $related_image = '<img src="'.$related_image_url.'">';
+      if (empty($related_image_url)) {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
         $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$related_data->url' target='_blank' title='$related_title'><img src='$img_url' class='related-default' alt='' /></a>";
         $related_story.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
       }
       else {
-        $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$related_data->url' target='_blank' title='$related_title'>" . $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
+        $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$related_data->url' target='_blank' title='$related_title'>" . $related_image;
         $related_story.= "</a><span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
       }
     }

@@ -10789,14 +10789,32 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     .views-widget{
       .container-inline-date {
         clear: none;
-        float: left;
-        margin-right: 2%;
+        float: left;       
         width: 49%;
         &:first-child{
-          margin-right: 2%;
+           padding-right: 10px;
         }
         label{display: none !important;}
       }
     }
   }
+}
+
+.page-itg-social-media-promote .promote-sidebar{
+    width: 70%;
+    float: none;
+    margin: 0 auto;
+}
+.page-itg-social-media-promote {
+    header{
+        display: none;   
+    }
+    #main{
+     > .container{
+        display: none;
+            &#content{
+                display: block;
+            }
+        }   
+    }    
 }

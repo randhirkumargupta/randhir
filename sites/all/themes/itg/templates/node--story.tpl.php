@@ -131,7 +131,7 @@ if (!empty($content)):
             ?></h1>
           <?php global $user;
         if(in_array('Social Media', $user->roles)) {?>
-         <a class="def-cur-pointer colorbox-load" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $node->nid;?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span>promote</span></a>   
+         <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $node->nid;?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span>promote</span></a>   
         <?php }?>
           <?php } ?>
           <?php

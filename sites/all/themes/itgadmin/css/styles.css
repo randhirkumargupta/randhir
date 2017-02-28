@@ -11312,12 +11312,27 @@ span.file a {
 [id*="views-exposed-form-browse-content-page"] .views-widget-filter-field_itg_content_publish_date_value .views-widget .container-inline-date {
   clear: none;
   float: left;
-  margin-right: 2%;
   width: 49%;
 }
 [id*="views-exposed-form-browse-content-page"] .views-widget-filter-field_itg_content_publish_date_value .views-widget .container-inline-date:first-child {
-  margin-right: 2%;
+  padding-right: 10px;
 }
 [id*="views-exposed-form-browse-content-page"] .views-widget-filter-field_itg_content_publish_date_value .views-widget .container-inline-date label {
   display: none !important;
+}
+
+.page-itg-social-media-promote .promote-sidebar {
+  width: 70%;
+  float: none;
+  margin: 0 auto;
+}
+
+.page-itg-social-media-promote header {
+  display: none;
+}
+.page-itg-social-media-promote #main > .container {
+  display: none;
+}
+.page-itg-social-media-promote #main > .container#content {
+  display: block;
 }
