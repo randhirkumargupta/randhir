@@ -696,8 +696,11 @@ function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255) {
     if(!empty($result[0]['field_emoji_value'])) {
       // Get all the smiley images.
       preg_match_all('/<img[^>]*>/s', $result[0]['field_emoji_value'], $images);
+      $left_smiles = '<span class="smilies-title">';
       // Implode all images in case of muliple smiley.
-      $left_smiles = implode("", $images[0]);
+      $left_smiles .= implode("", $images[0]);
+      
+      $left_smiles .='</span>';
     }
   }
   if (in_array('right', $positions_array)) {
@@ -705,13 +708,24 @@ function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255) {
       // Get all the smiley images.
       preg_match_all('/<img[^>]*>/s', $result[0]['field_emoji_2_value'], $images_2);
       // Implode all images in case of muliple smiley.
-      $right_smiles = implode("", $images_2[0]);
+      
+      $right_smiles = '<span class="smilies-title">';
+      // Implode all images in case of muliple smiley.
+      $right_smiles .= implode("", $images_2[0]);
+      
+      $right_smiles .='</span>';
     }
   }
   if (count($result)) {
-    $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));    
+    if(!empty($left_smiles) || !empty($right_smiles)) {
+      $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));    
+    }
+    else {
+      $max_limit +=10; 
+      $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));    
+    }
     // Add smiley to right;
-    $titlte = '<span class="smilies-title">' . $left_smiles . '</span>' . $titlte . '<span class="smilies-title">' . $right_smiles . '</span>';
+    $titlte = $left_smiles  . $titlte .  $right_smiles ;
     
     return $titlte;
   }
