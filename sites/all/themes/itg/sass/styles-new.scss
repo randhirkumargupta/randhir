@@ -2707,14 +2707,19 @@ body.has-cart-popup{
           }
           label{
             font-size: 14px;
+            margin-top: 10px;
           }
         }
     }
     .social-share{
-      display: inline-block;
-      vertical-align: top;
-      width: 100%;
-      text-align: center;
+/*        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+        text-align: center;*/    
+        width: 51%;
+        margin: 0 auto;
+        display: block;
+        overflow: hidden;
       a{
         border-radius: 5px;        
         height: 50px;
