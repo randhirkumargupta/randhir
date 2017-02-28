@@ -136,7 +136,8 @@ function _facebook_pages_list() {
  * @return array
  */
 function itg_social_media_fb_paglist() {
-  $fb = itg_social_media_fb_connection();
+    $data = array();
+  $fb = itg_social_media_fb_connection();  
   try {
     // Returns a `Facebook\FacebookResponse` object
     $response = $fb->get('/me?fields=accounts', variable_get('fb_access_token'));
@@ -149,6 +150,7 @@ function itg_social_media_fb_paglist() {
   catch (Facebook\Exceptions\FacebookSDKException $e) {
     drupal_set_message(t('Facebook SDK returned an error: @emessage', array('@emessage' => $e->getMessage())), 'error');    
   }
+  if(!empty($response)) {
   $pages = $response->getGraphPage();
   $accounts = $pages->asArray();
   watchdog('FB Accounts', '<pre>' . print_r($accounts, TRUE) . '</pre>');
@@ -158,6 +160,7 @@ function itg_social_media_fb_paglist() {
     $token[$account['id']] = $account['access_token'];
   }
   $data = array($options, $token);
+  }
   
   return $data;
 }
