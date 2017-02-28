@@ -185,8 +185,8 @@ function create_section_cat_op($data, &$context) {
       $qry = array(
           "tid" => (int)$data->tid,
           "name" => $data->name,
-          "parent" => $data->parent,
-          "vid" => $data->vid,
+          "parent" => (int)$data->parent,
+          "vid" => (int)$data->vid,
           "machine_name" => $data->machine_name,
           'parent_data'=>taxonomy_get_parents_all($data->tid),
       );
