@@ -278,7 +278,7 @@
                       $final_image = str_replace('styles/mrass_video/http/','',file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']));
                       $large_image = theme(
                                       'image_style', array(
-                                      'style_name' => empty($asso_vid_class) ? 'mrass_video' : 'anchors_landing',
+                                      //'style_name' => empty($asso_vid_class) ? 'mrass_video' : 'anchors_landing',
                                       'path' => $final_image,
                                       )
                                     );
@@ -308,7 +308,7 @@
                       $final_image = str_replace('styles/mrass_video/http/','',file_create_url($photo_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']));
                       $small_image = theme(
                                         'image_style', array(
-                                        'style_name' => empty($ass_photo_class) ? 'mrass_video' : 'anchors_landing',
+                                        //'style_name' => empty($ass_photo_class) ? 'mrass_video' : 'anchors_landing',
                                         'path' => $final_image,
                                         )
                                     );
