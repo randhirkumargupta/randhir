@@ -11333,3 +11333,6 @@ span.file a {
 .page-itg-social-media-promote #main > .container {
   display: none;
 }
+.page-itg-social-media-promote #main > .container#content {
+  display: block;
+}

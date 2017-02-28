@@ -259,7 +259,7 @@ function ColoredTable($header, $data, $pdf) {
 
         $pdf->Cell($w[0], 10, $i, 0, 0, 'C', $fill);
         $pdf->Cell($w[1], 10, $row['nid_1'], 0, 0, 'C', $fill);
-        $pdf->Cell($w[2], 10, $row['title'], 0, 0, 'C', $fill);
+        $pdf->Cell($w[2], 10, mb_strimwidth($row['title'], 0, 40, ".."), 0, 0, 'C', $fill);
         $pdf->Cell($w[3], 10, $row['type'], 0, 0, 'C', $fill);
         $pdf->Cell($w[4], 10, $row['username'], 0, 0, 'C', $fill);
         $pdf->writeHTMLCell(20, 10, '', '', $row['count_fb_promote'], 0, 0, $fill, 0, 0);
@@ -623,13 +623,19 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
     // Get file real path
     if (file_exists($file->uri)) {
         $path = drupal_realpath($file->uri);
+
+
+        if ($path == "") {
+            $path = file_create_url($file->uri);
+        }
+
         // Get connection object
         $fb = itg_social_media_fb_connection();
         // Get page information
         $page_id = variable_get('facebook_page_id', '');
         if (variable_get('access_token_one', '') === '') {
             drupal_set_message(t('Please first login to facebook'));
-            //drupal_goto('browse-content');
+            drupal_goto('browse-content');
         }
         // Create complete access token string.
         $token = variable_get('access_token_one') . variable_get('access_token_two');
@@ -700,11 +706,11 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
         } catch (Facebook\Exceptions\FacebookResponseException $e) {
             // When Graph returns an error
             drupal_set_message(t('Content not promoted on facebook error: @egetMessage', array('@egetMessage' => $e->getMessage())), 'error');
-           // drupal_goto('/browse-content');
+             drupal_goto('/browse-content');
         } catch (Facebook\Exceptions\FacebookSDKException $e) {
             // When validation fails or other local issues
             drupal_set_message(t('Facebook SDK returned an error: @egetMessage', array('@egetMessage' => $e->getMessage())), 'error');
-           // drupal_goto('/browse-content');
+             drupal_goto('/browse-content');
         }
         // get response
         $graphNode = $response->isError();
@@ -847,7 +853,7 @@ function itg_social_media_form_submit($form, &$form_state) {
             $desc = $form_state['values']['itg_facebook_narrative'];
             $fid = $form_state['values']['itg_fb_video'];
             $stime = $form_state['values']['video_schedule_time'] !== '' ? strtotime($form_state['values']['video_schedule_time']) : '';
-            if ($stime < strtotime("+10 minutes")  && $stime != NULL) {
+            if ($stime < strtotime("+10 minutes") && $stime != NULL) {
                 drupal_set_message('Schedule time should be greater than 10+ Minutes or  to current time', 'error');
             }
             else {
@@ -916,6 +922,9 @@ function itg_social_media_form_submit($form, &$form_state) {
     }
     // Save node object.
     node_save($node);
+    $arg = arg();
+
+    drupal_goto('/itg-social-media-promote/'.arg(1));
 }
 
 /**
@@ -935,6 +944,9 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node, $is_scheduled_i
     if (file_exists($file->uri)) {
         $path = drupal_realpath($file->uri);
 
+        if ($path == "") {
+            $path = file_create_url($file->uri);
+        }
         // Check node alias is available or not.
         $alias = '';
         if (!empty($node->path['alias'])) {
@@ -1018,6 +1030,10 @@ function itg_social_media_tvideo_post($fid, $desc, $node, $is_scheduled_id = NUL
     // Get real path of the file
     if (file_exists($file->uri)) {
         $path = drupal_realpath($file->uri);
+
+        if ($path == "") {
+            $path = file_create_url($file->uri);
+        }
         $size_bytes = filesize($path);
 
         // Check node alias is available or not.
@@ -1069,7 +1085,7 @@ function itg_social_media_tvideo_post($fid, $desc, $node, $is_scheduled_id = NUL
         if ($reply->httpstatus < 200 || $reply->httpstatus > 299) {
             drupal_set_message(t('Http status: @reply', array('@reply' => $reply->httpstatus)), 'error');
             drupal_set_message(t('Please upload valid video file. @filename', array('@filename' => $file->name)), 'error');
-            //drupal_goto('/browse-content');
+            drupal_goto('/browse-content');
         }
 
         // Now use the media_id in a Tweet
@@ -1210,7 +1226,7 @@ function itg_social_media_save_scheduled_post($node, $type, $stime) {
     }
     else {
         drupal_set_message(t('Unexpected error'), 'error');
-       // drupal_goto('/browse-content');
+         drupal_goto('/browse-content');
     }
 }
 

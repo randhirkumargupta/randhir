@@ -38,7 +38,7 @@ global $base_url;
                 }
                 ?></h3>
                 <?php if (strtolower($row['type']) == 'story'): ?>
-                    <p><?php print $row['field_story_kicker_text']; ?></p>
+                <p><?php if(isset($row['field_story_kicker_text'])) { print $row['field_story_kicker_text']; } ?></p>
                 <?php elseif ($row['type'] == 'photogallery'): ?>
                     <p><?php print $row['field_gallery_kicer']; ?></p>
                 <?php elseif ($row['type'] == 'photogallery'): ?>

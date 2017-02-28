@@ -161,6 +161,12 @@ function itg_widgets_custom_variables() {
         '#default_value' => variable_get('reporter_tid'),
         '#size' => 20,
     );
+      $form['live_score_url'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Live schore URL '),
+        '#default_value' => variable_get('live_score_url'),
+        '#size' => 255,
+    );
     $form['anchor_tid'] = array(
         '#type' => 'textfield',
         '#title' => t('Anchor Tid'),

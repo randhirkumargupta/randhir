@@ -9,18 +9,21 @@ $(document).ready(function() {
     var categoryies = $(this).val();
     var actual_dom_name = $(this).attr('name');
     if (categoryies) {
+      $('#edit-field-story-category-und').val('');
+      $('#edit-field-story-category-und').val($('#edit-itg-section').val());
       $.ajax({
         type: 'POST',
         url: Drupal.settings.basePath + 'itg-category-multiple-find',
-        data: {data: categoryies, category: $(this).attr('name')},
+        data: {section: categoryies, type: $(this).attr('name')},
         success: function(html) {
+          var item = JSON.parse(html);
           $('#edit-itg-category').empty();
           $('#edit-itg-sub-category').empty();
           $('#edit-itg-sub-sub-category').empty();
           $('#edit-itg-sub-sub-sub-category').empty();
           $('#edit-itg-primary-category').empty();
-          $('#edit-itg-category').append(html);
-          $('#edit-itg-section option:selected').clone().appendTo('#edit-itg-primary-category')
+          $('#edit-itg-category').append(item.main);
+          $('#edit-itg-primary-category').append(item.primary);
         }
       });
     } else {
@@ -33,42 +36,36 @@ $(document).ready(function() {
 
   $('#edit-itg-category').on('change', function() {
 
+
     var categoryies = $(this).val();
     var actual_dom_name = $(this).attr('name');
+
     if (categoryies) {
+
+      jQuery('#edit-field-story-category-und').val('');
+      jQuery('#edit-field-story-category-und').val(jQuery('#edit-itg-section').val().concat(jQuery('#edit-itg-category').val()));
+
+
       $.ajax({
         type: 'POST',
         url: Drupal.settings.basePath + 'itg-category-multiple-find',
-        data: {data: categoryies, category: $(this).attr('name')},
+        data: {
+          section: $('#edit-itg-section').val(),
+          category: categoryies,
+          type: $(this).attr('name')
+        },
         success: function(html) {
+          var item = JSON.parse(html);
           $('#edit-itg-sub-category').empty();
           $('#edit-itg-sub-sub-category').empty();
           $('#edit-itg-sub-sub-sub-category').empty();
-          $('#edit-itg-sub-category').append(html);
-
-          //$('#edit-itg-primary-category').empty();
-
-          //$('#edit-itg-section option:selected').clone().appendTo('#edit-itg-primary-category')
-          //$('#edit-itg-category option:selected').clone().appendTo('#edit-itg-primary-category')
-
-
-          $.ajax({
-            type: 'POST',
-            url: Drupal.settings.basePath + 'itg-category-primary-category',
-            data: {data: categoryies},
-            success: function(phtml) {
-              // alert(phtml);
-              $('#edit-itg-primary-category').append(phtml);
-
-            }
-          });
-
-
+          $('#edit-itg-primary-category').empty();
+          $('#edit-itg-sub-category').append(item.main);
+          $('#edit-itg-primary-category').append(item.primary);
 
         }
       });
     } else {
-
 
     }
   });
@@ -77,30 +74,29 @@ $(document).ready(function() {
 
     var categoryies = $(this).val();
     var actual_dom_name = $(this).attr('name');
+
     if (categoryies) {
+
+      jQuery('#edit-field-story-category-und').val('');
+      jQuery('#edit-field-story-category-und').val(jQuery('#edit-itg-section').val().concat(jQuery('#edit-itg-category').val()).concat($(this).val()));
+
+
       $.ajax({
         type: 'POST',
         url: Drupal.settings.basePath + 'itg-category-multiple-find',
-        data: {data: categoryies, category: $(this).attr('name')},
+        data: {
+          section: $('#edit-itg-section').val(),
+          category: $('#edit-itg-category').val(),
+          sub_category: categoryies,
+          type: $(this).attr('name')
+        },
         success: function(html) {
+          var item = JSON.parse(html);
           $('#edit-itg-sub-sub-category').empty();
           $('#edit-itg-sub-sub-sub-category').empty();
-          $('#edit-itg-sub-sub-category').append(html);
-          //$('#edit-itg-primary-category').empty();
-          //$('#edit-itg-section option:selected').clone().appendTo('#edit-itg-primary-category')
-          //$('#edit-itg-category option:selected').clone().appendTo('#edit-itg-primary-category')
-          //$('#edit-itg-sub-category option:selected').clone().appendTo('#edit-itg-primary-category')
-
-          $.ajax({
-            type: 'POST',
-            url: Drupal.settings.basePath + 'itg-category-primary-category',
-            data: {data: categoryies},
-            success: function(phtml) {
-              // alert(phtml);
-              $('#edit-itg-primary-category').append(phtml);
-
-            }
-          });
+          $('#edit-itg-primary-category').empty();
+          $('#edit-itg-sub-sub-category').append(item.main);
+          $('#edit-itg-primary-category').append(item.primary);
 
         }
       });
@@ -113,32 +109,32 @@ $(document).ready(function() {
 
   $('#edit-itg-sub-sub-category').on('change', function() {
 
+
+
     var categoryies = $(this).val();
     var actual_dom_name = $(this).attr('name');
+
+    jQuery('#edit-field-story-category-und').val('');
+    jQuery('#edit-field-story-category-und').val(jQuery('#edit-itg-section').val().concat(jQuery('#edit-itg-category').val()).concat(jQuery('#edit-itg-sub-category').val()).concat($(this).val()));
+
+
     if (categoryies) {
       $.ajax({
         type: 'POST',
         url: Drupal.settings.basePath + 'itg-category-multiple-find',
-        data: {data: categoryies, category: $(this).attr('name')},
+        data: {
+          section: $('#edit-itg-section').val(),
+          category: $('#edit-itg-category').val(),
+          sub_category: $('#edit-itg-sub-category').val(),
+          sub_sub_category: categoryies,
+          type: $(this).attr('name')
+        },
         success: function(html) {
+          var item = JSON.parse(html);
           $('#edit-itg-sub-sub-sub-category').empty();
-          $('#edit-itg-sub-sub-sub-category').append(html);
-          //$('#edit-itg-primary-category').empty();
-          //$('#edit-itg-section option:selected').clone().appendTo('#edit-itg-primary-category')
-          //$('#edit-itg-category option:selected').clone().appendTo('#edit-itg-primary-category')
-          //$('#edit-itg-sub-category option:selected').clone().appendTo('#edit-itg-primary-category')
-          //$('#edit-itg-sub-sub-category option:selected').clone().appendTo('#edit-itg-primary-category')
-          
-           $.ajax({
-            type: 'POST',
-            url: Drupal.settings.basePath + 'itg-category-primary-category',
-            data: {data: categoryies},
-            success: function(phtml) {
-              // alert(phtml);
-              $('#edit-itg-primary-category').append(phtml);
-
-            }
-          });
+          $('#edit-itg-primary-category').empty();
+          $('#edit-itg-sub-sub-sub-category').append(item.main);
+          $('#edit-itg-primary-category').append(item.primary);
 
         }
       });
@@ -150,27 +146,37 @@ $(document).ready(function() {
 
 
   $('#edit-itg-sub-sub-sub-category').on('change', function() {
-
     var categoryies = $(this).val();
     var actual_dom_name = $(this).attr('name');
+
+    jQuery('#edit-field-story-category-und').val('');
+    jQuery('#edit-field-story-category-und').val(jQuery('#edit-itg-section').val().concat(jQuery('#edit-itg-category').val()).concat(jQuery('#edit-itg-sub-category').val()).concat(jQuery('#edit-itg-sub-sub-category').val()).concat($(this).val()));
+
+
+
     if (categoryies) {
+      $.ajax({
+        type: 'POST',
+        url: Drupal.settings.basePath + 'itg-category-multiple-find',
+        data: {
+          section: $('#edit-itg-section').val(),
+          category: $('#edit-itg-category').val(),
+          sub_category: $('#edit-itg-sub-category').val(),
+          sub_sub_category: $('#edit-itg-sub-sub-category').val(),
+          sub_sub_sub_category: categoryies,
+          type: $(this).attr('name')
+        },
+        success: function(html) {
+          var item = JSON.parse(html);
+          $('#edit-itg-primary-category').empty();
+          $('#edit-itg-primary-category').append(item.primary);
 
-      $('#edit-itg-primary-category').empty();
-      $('#edit-itg-section option:selected').clone().appendTo('#edit-itg-primary-category')
-      $('#edit-itg-category option:selected').clone().appendTo('#edit-itg-primary-category')
-      $('#edit-itg-sub-category option:selected').clone().appendTo('#edit-itg-primary-category')
-      $('#edit-itg-sub-sub-category option:selected').clone().appendTo('#edit-itg-primary-category')
-      $('#edit-itg-sub-sub-sub-category option:selected').clone().appendTo('#edit-itg-primary-category')
-
+        }
+      });
     } else {
-
-
     }
   });
 });
-
-
-
 
 
 
