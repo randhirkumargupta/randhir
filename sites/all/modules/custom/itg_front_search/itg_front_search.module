@@ -204,7 +204,7 @@ function itg_front_search_views_pre_render(&$view) {
         $related_result->bs_status = 'Published';
       }
        $related_data = itg_get_related_story_content($related_result->entity_id);
-       $related_image_url = $related_data->sm_field_custom_story_extra_small_url[0];
+       $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
        $related_image = '<img src="' . $related_image_url . '" alt="image">';
       // image condition when image not image
       //$image = $related_result->sm_thumb_medium_field_story_extra_large_image[0];
@@ -230,10 +230,10 @@ function itg_front_search_views_pre_render(&$view) {
 //        $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0] = "<img src='$img_url' alt='' />";
 //      }
       if(!empty($related_image_url)) {
-        $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0] = $related_image;
+        $related_result->sm_field_custom_story_small_large_url[0] = $related_image;
       } else {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-        $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0] = "<img src='$img_url' alt='image' />";
+        $related_result->sm_field_custom_story_small_large_url[0] = "<img src='$img_url' alt='image' />";
       }
       
       $words = $_GET['keyword'];

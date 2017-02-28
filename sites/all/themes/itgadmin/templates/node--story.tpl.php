@@ -31,6 +31,7 @@
               <div class="field-label"><?php print t('Long headline:'); ?></div>
               <div class="field-items"><?php print $title; ?></div>
             </div>
+              <div class="field">
             <?php
             $emojy_position = $content['field_emoji_position']['#object']->field_emoji_position[LANGUAGE_NONE];
             if (isset($emojy_position) && is_array($emojy_position) && !empty($emojy_position)) {
@@ -38,16 +39,16 @@
                 $emogy_pos[] = $emojy_position[$emogy_key]['value'];
               }
               if (in_array('left', $emogy_pos) && in_array('right', $emogy_pos)) {
-                print "<div class='emogy-left'><span class='title'>Emogy Left:</span><span class='emogy-val'>" . $content['field_emoji_2']['#object']->field_emoji_2[LANGUAGE_NONE][0]['value'] . '</span></div>';
-                print "<div class='emogy-right'><span class='title'>Emogy Right:</span><span class='emogy-val'>" . $content['field_emoji']['#object']->field_emoji[LANGUAGE_NONE][0]['value'] . '</span></div>';
+                print "<div class='field-label'>Emoji Left:</div><div class='field-items'>" . $content['field_emoji_2']['#object']->field_emoji_2[LANGUAGE_NONE][0]['value'] . '</div>';
+                print "<div class='field-label'>Emoji Right:</div><div class='field-items'>" . $content['field_emoji']['#object']->field_emoji[LANGUAGE_NONE][0]['value'] . '</div>';
               } else if (in_array('right', $emogy_pos)) {
-                print "<div class='emogy-right'><span class='title'>Emogy Right:</span><span class='emogy-val'>" . $content['field_emoji']['#object']->field_emoji[LANGUAGE_NONE][0]['value'] . '</span></div>';
+                print "<div class='field-label'>Emoji Right:</div><div class='field-items'>" . $content['field_emoji']['#object']->field_emoji[LANGUAGE_NONE][0]['value'] . '</div>';
               } else if (in_array('left', $emogy_pos)) {
-                print "<div class='emogy-left'><span class='title'>Emogy Left:</span><span class='emogy-val'>" . $content['field_emoji_2']['#object']->field_emoji_2[LANGUAGE_NONE][0]['value'] . '</span></div>';
+                print "<div class='field-label'>Emoji Left:</div><div class='field-items'>" . $content['field_emoji_2']['#object']->field_emoji_2[LANGUAGE_NONE][0]['value'] . '</div>';
               }
             }
             ?>
-
+              </div>
             <?php print render($content['field_story_redirection_url']); ?>
 
             <?php print render($content['field_story_redirection_url_titl']); ?>
@@ -289,7 +290,9 @@
         <?php endif; ?>
         <!-- render story movie fields -->
         <div class="movie-details content-box">
+          <?php if (!empty($content['field_story_rating'])) { ?>  
           <h2><?php print t('Movies'); ?></h2>
+          <?php } ?>
           <div class="content-details">
             <?php print render($content['field_story_rating']); ?>
             <?php print render($content['field_mega_review_cast']); ?>
