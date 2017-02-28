@@ -10805,3 +10805,11 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     float: none;
     margin: 0 auto;
 }
+.page-itg-social-media-promote {
+    header{
+        display: none;   
+    }
+    > .container{
+        display: none;
+    }
+}

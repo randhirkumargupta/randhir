@@ -11326,3 +11326,10 @@ span.file a {
   float: none;
   margin: 0 auto;
 }
+
+.page-itg-social-media-promote header {
+  display: none;
+}
+.page-itg-social-media-promote > .container {
+  display: none;
+}
