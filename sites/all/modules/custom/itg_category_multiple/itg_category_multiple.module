@@ -15,7 +15,7 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   switch ($form_id) {
     case 'story_node_form':
-
+    //p($form['field_primary_category']);
       $itg_category_vocabs = get_itg_category_vocabs($form_state);
       $sections = itg_category_multiple_get_section($itg_category_vocabs);
       $options_category = array('_none' => '--Select-');
@@ -23,17 +23,16 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
           '#type' => 'select',
           '#multiple' => TRUE,
           '#title' => t('Section'),
-          '#validate' => TRUE,
+          '#validated' => TRUE,
           '#options' => $sections,
           '#size' => 10,
           '#default_value' => '',
       );
-
       $form['itg_category'] = array(
           '#type' => 'select',
           '#multiple' => TRUE,
           '#title' => t('Category'),
-          '#validate' => TRUE,
+          '#validated' => TRUE,
           '#options' => $options_category,
           '#size' => 10,
           '#default_value' => '',
@@ -43,7 +42,7 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
           '#type' => 'select',
           '#multiple' => TRUE,
           '#title' => t('Sub Category'),
-          '#validate' => TRUE,
+          '#validated' => TRUE,
           '#options' => $options_category,
           '#size' => 10,
           '#default_value' => '',
@@ -54,7 +53,7 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
           '#type' => 'select',
           '#multiple' => TRUE,
           '#title' => t('Sub Sub Category'),
-          '#validate' => TRUE,
+          '#validated' => TRUE,
           '#options' => $options_category,
           '#size' => 10,
           '#default_value' => '',
@@ -64,7 +63,7 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
           '#type' => 'select',
           '#multiple' => TRUE,
           '#title' => t('Sub Sub Sub Category'),
-          '#validate' => TRUE,
+          '#validated' => TRUE,
           '#options' => $options_category,
           '#size' => 10,
           '#default_value' => '',
@@ -72,16 +71,15 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
 
       $form['itg_primary_category'] = array(
           '#type' => 'select',
-          '#multiple' => TRUE,
+          '#size' => '10',
+          //'#multiple' => TRUE,
           '#title' => t('Primary Category'),
-          '#validate' => TRUE,
+          '#validated' => TRUE,
           '#options' => $options_category,
-          '#size' => 10,
           '#default_value' => '',
       );
-     // p($form['actions']);
-
-      $form['actions']['submit']['#submit'][] = 'itg_category_multiple_custom_callback';
+      // p($form['actions']);
+      //$form['actions']['submit']['#submit'][] = 'itg_category_multiple_custom_callback';
       $form['#after_build'][] = 'itg_category_multiple_after_build';
       break;
   }
@@ -117,6 +115,58 @@ function itg_category_multiple_get_section($itg_category_vocabs) {
  * @return array
  */
 function itg_category_multiple_after_build($form, &$form_state) {
+// pr($form['itg_sub_category']);
+//p($form_state['input']);
+
+  if (!empty($form_state['input']['itg_sub_category'])) {
+    //$form['itg_sub_category']['#options'] = $form_state['input']['itg_sub_category'];
+    // $form['itg_sub_category']['#default'] = array('0', '1', '2', '3');
+  }
+
+  if (isset($form_state['input']['itg_primary_category'][0]) && !empty($form_state['input']['itg_primary_category'][0])) {
+    $form['field_primary_category']['und'][0]['value'] = $form_state['input']['itg_primary_category'][0];
+  }
+
+  //Getting category on the basis of section
+
+  if (isset($form_state['input']['itg_section']) && !empty($form_state['input']['itg_section'])) {
+    $itg_section = itg_category_get_texo_desired($form_state['input']['itg_section']);
+    $form['itg_category']['#options'] = $itg_section;
+  }
+
+
+  //Getting sub category on the basis of category
+
+  if (isset($form_state['input']['itg_category']) && !empty($form_state['input']['itg_category'])) {
+    $itg_category = itg_category_get_texo_desired($form_state['input']['itg_category']);
+    $form['itg_sub_category']['#options'] = $itg_category;
+  }
+
+
+  // Getting sub category on the basis of sub category
+  if (isset($form_state['input']['itg_sub_category']) && !empty($form_state['input']['itg_sub_category'])) {
+    $itg_sub_category = itg_category_get_texo_desired($form_state['input']['itg_sub_category']);
+    $form['itg_sub_sub_category']['#options'] = $itg_sub_category;
+  }
+
+  // Getting sub sub category  on the basis of sub sub category
+
+  if (isset($form_state['input']['itg_sub_sub_category']) && !empty($form_state['input']['itg_sub_sub_category'])) {
+    $itg_sub_sub_category = itg_category_get_texo_desired($form_state['input']['itg_sub_sub_category']);
+    $form['itg_sub_sub_sub_category']['#options'] = $itg_sub_sub_category;
+  }
+
+  if (isset($form_state['input']['itg_sub_sub_sub_category']) && !empty($form_state['input']['itg_sub_sub_sub_category'])) {
+
+    $complete_structure = array_merge($form_state['input']['itg_section'], $form_state['input']['itg_category'], $form_state['input']['itg_sub_category'], $form_state['input']['itg_sub_sub_category'], $form_state['input']['itg_sub_sub_sub_category']);
+    $itg_primary_category = get_parent_structure_by_for_all(array_filter($complete_structure));
+    $form['itg_primary_category']['#options'] = $itg_primary_category;
+  }
+
+  //   itg_sub_sub_category  itg_sub_sub_sub_category itg_primary_category
+
+
+
   drupal_add_js(drupal_get_path('module', 'itg_category_multiple') . '/js/itg_category_multiple.js');
   return $form;
 }
@@ -348,6 +398,68 @@ function get_parent_structure_in_ordered($tids, $return_data_chunk) {
   return $html;
 }
 
-function itg_category_multiple_custom_callback(&$form, &$form_state, $form_id) {
-  p($form_state['values']);
+/**
+ * Implements itg_category_get_texo_desired() 
+ * @param array $tids
+ */
+// This code have been written for the getting the desired taxonomy as per selected demo
+
+function itg_category_get_texo_desired($tids) {
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $html = array();
+    $return_data_chunk = array();
+    if ($con) {
+      $people = $con->taxonomy_term_data_mongo;
+      $query = array();
+      if (is_array($query) && empty($query)) {
+        $new_tids = get_categoryies_send_for_convert_to_int($tids);
+        $category_data = $people->find(array("parent" => array('$in' => $new_tids)));
+        foreach ($category_data as $chunk_data) {
+          $html[$chunk_data['tid']] = $chunk_data['name'];
+        }
+        return $html;
+      }
+    }
+  }
+}
+
+/**
+ * Implements get_parent_structure_by_for_all()
+ * @param array $tids
+ * @return string
+ */
+function get_parent_structure_by_for_all($tids) {
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $primaryhtml = '';
+    $return_data_chunk = array();
+    if ($con) {
+      $people = $con->taxonomy_term_data_mongo;
+      $query = array();
+      if (is_array($query) && empty($query)) {
+        $new_tids = get_categoryies_send_for_convert_to_int($tids);
+        $category_data = $people->find(array("tid" => array('$in' => $new_tids)));
+        foreach ($category_data as $chunk_data) {
+          $return_data_chunk[$chunk_data['tid']] = get_parent_complete_structure($chunk_data['parent_data']);
+        }
+        $primaryhtml = get_parent_structure_in_complete($new_tids, $return_data_chunk);
+        return $primaryhtml;
+      }
+    }
+  }
+}
+
+/**
+ * Implements get_parent_structure_in_complete()
+ * @param array $tids
+ * @param array $return_data_chunk
+ * @return string $html
+ */
+function get_parent_structure_in_complete($tids, $return_data_chunk) {
+  $data = '';
+  foreach ($tids as $key => $chunk_val) {
+    $data[$chunk_val] = $return_data_chunk[$chunk_val];
+  }
+  return $data;
 }

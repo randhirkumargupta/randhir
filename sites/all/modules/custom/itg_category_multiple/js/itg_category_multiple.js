@@ -176,7 +176,24 @@ $(document).ready(function() {
     } else {
     }
   });
+
+
+
+  // Setting the value for  the primary category
+  $('#edit-itg-primary-category').on('change', function() {
+    var categoryies = $(this).val();
+    var actual_dom_name = $(this).attr('name');
+    if (categoryies) {
+      jQuery('#edit-field-primary-category-und-0-value').attr('val',categoryies);
+
+    } else {
+    }
+  });
+
+
+
 });
+
 
 
 
