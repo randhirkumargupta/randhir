@@ -129,6 +129,10 @@ if (!empty($content)):
               print $node->title . $pipelinetext;
             }
             ?></h1>
+          <?php global $user;
+        if(in_array('Social Media', $user->roles)) {?>
+         <a class="def-cur-pointer colorbox-load" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $node->nid;?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span>promote</span></a>   
+        <?php }?>
           <?php } ?>
           <?php
           $associate_type = '';
@@ -351,7 +355,7 @@ if (!empty($content)):
                   $associate_lead = $node->field_story_associate_lead[LANGUAGE_NONE][0]['value'];
                   $associate_photo = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
                   $associate_video = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
-                  if(!empty($associate_lead) && !empty($associate_photo) && !empty($associate_video)) {
+                  if(!empty($associate_lead) && !empty($associate_photo) || !empty($associate_video)) {
                       $class = 'story-associate-content';
                   } 
                   ?>

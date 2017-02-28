@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * @file
+ * Handles setting the variable and JS settings for CKEditor timestamp.
+ */
+
+/**
+ * Implements hook_init().
+ *
+ * Adds JS to configure CKEditor timestamp.
+ */
+function itg_ckeditor_cache_init() {
+  if (!user_is_anonymous()) {
+    drupal_add_js(array('itg_ckeditor_cache' => array('timestamp' => variable_get('itg_ckeditor_cache', 'ABCD'))), 'setting');
+    drupal_add_js(drupal_get_path('module', 'itg_ckeditor_cache') . '/itg_ckeditor_cache.js', array('weight' => 0));
+  }
+}
+
+/**
+ * Implements hook_flush_caches().
+ *
+ * Resets CKEditor timestamp variable.
+ */
+function itg_ckeditor_cache_flush_caches() {
+  variable_set('itg_ckeditor_cache', time());
+}
+
+/**
+ * Implement hook_js_alter().
+ */
+function itg_ckeditor_cache_js_alter(&$js) {
+  if (user_is_anonymous()) {
+    return;
+  }
+
+  $ckeditor_path = ckeditor_path('url') . '/ckeditor.js';
+  $tstamp_path = drupal_get_path('module', 'itg_ckeditor_cache') . '/itg_ckeditor_cache.js';
+  $reordered = array();
+
+  foreach ($js as $path => $data) {
+    if ($path === $tstamp_path) {
+      continue;
+    }
+
+    $reordered[$path] = $data;
+
+    if ($path === $ckeditor_path) {
+      $reordered[$tstamp_path] = $js[$tstamp_path];
+      $reordered[$tstamp_path]['scope'] = 'footer';
+    }
+  }
+
+  $js = $reordered;
+}

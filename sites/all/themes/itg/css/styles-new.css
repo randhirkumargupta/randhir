@@ -2571,12 +2571,19 @@ body.has-cart-popup {
   opacity: 0.7;
 }
 #block-views-redeem-points-block-4 .flexslider .flex-direction-nav a:before {
+  font-family: fontawesome;
   color: #fff;
   display: inline-block;
   font-size: 24px;
   position: absolute;
   text-shadow: 0;
   top: 28px;
+}
+#block-views-redeem-points-block-4 .flexslider .flex-direction-nav a.flex-next:before {
+  content: '\f054';
+}
+#block-views-redeem-points-block-4 .flexslider .flex-direction-nav a.flex-prev:before {
+  content: '\f053';
 }
 #block-views-redeem-points-block-4 .flexslider:hover .flex-direction-nav .flex-prev, #block-views-redeem-points-block-4 .flexslider .flex-direction-nav .flex-prev {
   left: -40px;
@@ -3207,6 +3214,21 @@ footer .footer-top ul li a:hover {
 }
 
 /*other comment css end*/
+.ugc-success {
+  background-color: #fff;
+  color: green;
+  font-family: Roboto;
+  padding: 100px 0;
+  text-align: center;
+}
+.ugc-success h2 {
+  font-size: 32px;
+  margin: 30px 0;
+}
+.ugc-success p {
+  font-size: 18px;
+}
+
 #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-email,
 #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-section {
   float: left;
@@ -3259,9 +3281,6 @@ footer .footer-top ul li a:hover {
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper .captcha .form-item-captcha-response div.description, #content [id*="ugc-node-form"].ugc-custom-wrapper .captcha .form-item-captcha-response span.error {
   padding-left: 220px;
-}
-#content [id*="ugc-node-form"].ugc-custom-wrapper .captcha img {
-  margin: 0 0 5px 220px;
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper .form-actions {
   display: inline-block;
@@ -3461,6 +3480,52 @@ body .program-livetv.effect-added .light-on-text {
 }
 .multiple-photo-disc .slick-list + .fa-chevron-right.slick-disabled {
   display: none !important;
+}
+
+.story-associate-content .view-photo-landing-slider .videogallery-slider .fa-chevron-left, .story-associate-content .view-photo-landing-slider .videogallery-slider .fa-chevron-right {
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  width: 45px;
+  height: 66px;
+  border-radius: 0 7px 7px 0;
+  color: #fff;
+  position: absolute;
+  top: 138px;
+  z-index: 1;
+  font-size: 28px;
+  text-align: center;
+  line-height: 70px;
+  cursor: pointer;
+}
+.story-associate-content .view-photo-landing-slider .videogallery-slider .fa-chevron-left {
+  left: 0;
+}
+.story-associate-content .view-photo-landing-slider .videogallery-slider .fa-chevron-right {
+  right: 0;
+  border-radius: 7px 0px 0px 7px;
+}
+
+span.personal-social-share-links {
+  position: absolute;
+  left: 110px;
+  bottom: 15px;
+  display: none;
+}
+
+.personal-social-share-links a {
+  display: inline-block;
+  vertical-align: top;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  background: #000;
+  color: #fff;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.personal-social-share-links a .fa:before {
+  font-size: 16px;
+  line-height: 30px;
 }
 
 /* CSS To Add Zoom Effect on Images */

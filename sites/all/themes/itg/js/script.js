@@ -340,6 +340,9 @@ jQuery(document).ready(function () {
             }
         });
     }
+    jQuery('body').on('click', '.personal-share', function(){
+      jQuery('.personal-social-share-links').slideToggle();
+    });
 });
 
 

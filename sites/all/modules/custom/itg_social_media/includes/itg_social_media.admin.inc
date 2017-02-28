@@ -140,7 +140,9 @@ function itg_social_media_fb_paglist() {
   try {
     // Returns a `Facebook\FacebookResponse` object
     $response = $fb->get('/me?fields=accounts', variable_get('fb_access_token'));
+    
   }
+  
   catch (Facebook\Exceptions\FacebookResponseException $e) {
     drupal_set_message(t('Graph returned an error: @emessage', array('@emessage' => $e->getMessage())), 'error');    
   }
@@ -192,4 +194,27 @@ function itg_social_media_facebook_logout() {
   variable_set('is_fb_logged_in', 0);
   drupal_set_message(t('Facebook session has been closed.'), 'status');
   drupal_goto($logout);
+}
+
+/**
+ * callback for itg-social-media-promote.
+ * @global string $base_url
+ */
+function itg_social_media_promote() {
+  global $user;
+  $arg = arg();
+  if (is_numeric($arg[1]) && in_array('Social Media', $user->roles)):
+    $block = module_invoke('itg_social_media', 'block_view', 'social_media_form');
+  
+    $data_in = itg_social_media_check_node_exist_lock($arg[1]);
+    
+    if ($data_in[0]->uid == $user->uid || empty($data_in)) {
+      itg_social_media_enter_in_lock($arg[1]);      
+      $data['promote_form'] = $block['content'];
+    } else { 
+        $data['promote_form'] = '<div class="promote-lock">'.t("Someone  is already working on this").'</div>';
+    } 
+  endif;
+  
+  return theme('social_media_promote', array('data' => $data));
 }

@@ -45,7 +45,9 @@ function itg_image_repository_content($user, $scheme = NULL, $jsop = NULL) {
     if (!$itg_image_repository = itg_image_repository_initiate_profile($user, $scheme)) {
         return '';
     }
-    itg_image_repository_process_profile($itg_image_repository); //get active directory content
+   //p($itg_image_repository);
+    //p($itg_image_repository)
+    //itg_image_repository_process_profile($itg_image_repository); //get active directory content
     //Before creating the content let's add main files required for itg_image_repository to function properly.
     $path = drupal_get_path('module', 'itg_image_repository');
     drupal_add_js($path . '/js/jquery.form.js');
@@ -99,11 +101,10 @@ function itg_image_repository_content($user, $scheme = NULL, $jsop = NULL) {
  */
 function itg_image_repository_js($user, $scheme, $jsop = '') {
     $response = array();
-
     //data
     if ($itg_image_repository = itg_image_repository_initiate_profile($user, $scheme)) {
-        itg_image_repository_process_profile($itg_image_repository);
-        if (!$itg_image_repository['error']) {
+       // itg_image_repository_process_profile($itg_image_repository);
+       // if (!$itg_image_repository['error']) {
             module_load_include('inc', 'itg_image_repository', 'inc/itg_image_repository.js');
             if (function_exists($func = 'itg_image_repository_js_' . $jsop)) {
                 $response['data'] = $func($itg_image_repository);
@@ -114,7 +115,7 @@ function itg_image_repository_js($user, $scheme, $jsop = '') {
                     $func($jsop, $response, $itg_image_repository, $user);
                 }
             }
-        }
+      //  }
     }
     //messages
     $response['messages'] = drupal_get_messages();
@@ -167,10 +168,9 @@ function itg_image_repository_upload_submit($form, &$form_state) {
     $validators['itg_image_repository_validate_all'] = array(&$itg_image_repository);
     $diruri = itg_image_repository_dir_uri($itg_image_repository);
 
-    //save uploaded file.
 
     $replace = variable_get('imce_settings_replace', FILE_EXISTS_RENAME);
-    $file = file_save_upload('imce', $validators, $diruri, $replace);
+   // $file = file_save_upload('imce', $validators, $diruri, $replace);
 
     if ($file = file_save_upload('imce', $validators, $diruri, $replace)) {
 
