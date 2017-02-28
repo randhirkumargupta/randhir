@@ -11321,8 +11321,15 @@ span.file a {
   display: none !important;
 }
 
-#cboxLoadedContent .promote-sidebar {
+.page-itg-social-media-promote .promote-sidebar {
   width: 70%;
   float: none;
   margin: 0 auto;
+}
+
+.page-itg-social-media-promote header {
+  display: none;
+}
+.page-itg-social-media-promote > .container {
+  display: none;
 }

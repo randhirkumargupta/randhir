@@ -10800,8 +10800,16 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   }
 }
 
-#cboxLoadedContent .promote-sidebar{
+.page-itg-social-media-promote .promote-sidebar{
     width: 70%;
     float: none;
     margin: 0 auto;
+}
+.page-itg-social-media-promote {
+    header{
+        display: none;   
+    }
+    > .container{
+        display: none;
+    }
 }
