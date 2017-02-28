@@ -8,33 +8,35 @@
             var url = '';
             var baseurl = settings.itg_bestcolleges.settings.base_url;
             var year = settings.itg_bestcolleges.settings.year;
-            $(".emerging_rhsdiv select").change(function() {
+            $(".form-item-emerging-select select").change(function() {
                 var current_val = $(this).val();
-                url = baseurl+'/bestcolleges/'+year+'/emerging/'+current_val;
+                url = baseurl+'/bestcolleges/'+year+'/emerging-colleges-rank/'+current_val;
                 window.location.href = url;
             });
-            $(".yearcompare_rhsdiv select#edit-yearcompare-stream").change(function() {
+            $(".form-item-yearcompare-stream select").change(function() {
+            //edit-yearcompare-yr1--2
                 var stcurrent_val = $(this).val();
-                var year1comp_val = $( ".yearcompare_rhsdiv select#edit-yearcompare-yr1" ).val();
-                var year2comp_val = $( ".yearcompare_rhsdiv select#edit-yearcompare-yr2" ).val();
-                url = baseurl+'/bestcolleges/'+year1comp_val+'/'+year2comp_val+'/year-comparecollege/'+stcurrent_val;
+                var year1comp_val = $( ".form-item-yearcompare-yr1 select" ).val();
+                var year2comp_val = $( ".form-item-yearcompare-yr2 select" ).val();
+                url = baseurl+'/bestcolleges/'+year+'/compare-college/'+stcurrent_val+'/'+year1comp_val+'-'+year2comp_val;
                 window.location.href = url;
             });
-            $(".streamcompare_rhsdiv select#edit-streamcompare-rhs-yr").change(function() {
+            $(".form-item-streamcompare-rhs-yr select").change(function() {
                 var yrcurrent_val = $(this).val();
-                var st1_val = $( ".streamcompare_rhsdiv select#edit-streamcompare-rhs-stream1" ).val();
-                var st2_val = $( ".streamcompare_rhsdiv select#edit-streamcompare-rhs-stream2" ).val();
-                url = baseurl+'/bestcolleges/'+yrcurrent_val+'/stream-comparecollege/'+st1_val+'/'+st2_val;
+                var st1_val = $( ".form-item-streamcompare-rhs-stream1 select" ).val();
+                var st2_val = $( ".form-item-streamcompare-rhs-stream2 select" ).val();
+                url = baseurl+'/bestcolleges/'+year+'/compare-college/'+yrcurrent_val+'-'+st1_val+'-'+st2_val;
                 window.location.href = url;
             });
-            $(".clgdir_rhsdiv select").change(function() {
+            $(".form-item-clgdir-stream select").change(function() {
                 var st1current_val = $(this).val();
-                url = baseurl+'/bestcolleges/'+year+'/readyrecnor-directory-list/'+st1current_val;
+                //arts-bestcollege
+                url = baseurl+'/bestcolleges/'+year+'/'+st1current_val+'-'+'bestcollege';
                 window.location.href = url;
             });
-            $(".clgzone_rhsdiv select").change(function() {
+            $(".form-item-clgzone-select select").change(function() {
                 var st2current_val = $(this).val();
-                url = baseurl+'/bestcolleges/'+year+'/zone-wise-list/'+st2current_val;
+                url = baseurl+'/bestcolleges/'+year+'/zonewiselist-'+st2current_val;
                 window.location.href = url;
             });
             $(".htmlstatic_rhsdiv select").change(function() {

@@ -17,29 +17,29 @@ function itg_bestcolleges_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
-  $items['bestcolleges/%/emerging/%'] = array(
+  $items['bestcolleges/%/emerging-colleges-rank/%'] = array(
     'page callback' => 'itg_bestcollege_emerging',
     'page arguments' => array(1, 2, 3),
     'access callback' => TRUE,
   );
-  $items['bestcolleges/%/stream-comparecollege/%/%'] = array(
+  $items['bestcolleges/%/compare-college/%'] = array(
     'page callback' => 'itg_bestcollege_streamcompare',
-    'page arguments' => array(1, 2, 3, 4),
+    'page arguments' => array(1, 2, 3),
     'access callback' => TRUE,
   );
-  $items['bestcolleges/%/%/year-comparecollege/%'] = array(
+  $items['bestcolleges/%/compare-college/%/%'] = array(
     'page callback' => 'itg_bestcollege_yearcompare',
     'page arguments' => array(1, 2, 3, 4),
     'access callback' => TRUE,
   );
-  $items['bestcolleges/%/readyrecnor-directory-list/%'] = array(
-    'page callback' => 'itg_readyrecnor_directory_list',
-    'page arguments' => array(1, 2, 3),
+  $items['bestcolleges/%/%'] = array(
+    'page callback' => 'itg_common_redirect_list',
+    'page arguments' => array(1, 2),
     'access callback' => TRUE,
   );
-  $items['bestcolleges/%/zone-wise-list/%'] = array(
+  /*$items['bestcolleges/%/%'] = array(
     'page callback' => 'itg_zone_wise_list',
-    'page arguments' => array(1, 2, 3),
+    'page arguments' => array(1, 2),
     'access callback' => TRUE,
   );
   $items['bestcolleges/%/campus-wise-list'] = array(
@@ -47,11 +47,11 @@ function itg_bestcolleges_menu() {
     'page arguments' => array(1, 2),
     'access callback' => TRUE,
   );
-  $items['bestcolleges/%/%/citywise-list/%'] = array(
+  $items['bestcolleges/%/%'] = array(
     'page callback' => 'itg_city_wise_list',
-    'page arguments' => array(1, 2, 3, 4),
+    'page arguments' => array(1, 2),
     'access callback' => TRUE,
-  );
+  );*/
   return $items;
 }
 
@@ -176,8 +176,7 @@ function itg_bestcolleges_block_view($delta = '') {
       $block['content'] = theme('bestcollege_rhssearch', array('data' => $data));
       break;
     case 'bestcollege_rhsstatic':
-      $year = arg(1);
-      //module_load_include('inc', 'itg_bestcolleges', 'includes/itg_bestcolleges');
+      $year = 2016; //arg(1); // Need to revert once feature done.
       $data = bestcollege_getStaticWidgetData($year);
       $block['title'] = t('LAST 19 YEARS BEST COLLEGE SURVEYS');
       $block['content'] = $data;
@@ -221,11 +220,15 @@ function itg_bestcollege_emerging($year, $type, $stream) {
  * @param string $stream2
  * @return string
  */
-function itg_bestcollege_streamcompare($year, $type, $stream1, $stream2) {
+function itg_bestcollege_streamcompare($year, $type, $stream_year) {
+  $stream_year_exp = explode('-', $stream_year);
+  $year = $stream_year_exp[0];
+  $stream1 = $stream_year_exp[1];
+  $stream2 = $stream_year_exp[2];
   drupal_set_title(t($year . ' ' . drupal_strtoupper($stream1) . ' Vs ' . drupal_strtoupper($stream2)));
   $result_data = array();
-  $result_data_stream1 = itg_bestcollege_getData($type, $year, $stream1);
-  $result_data_stream2 = itg_bestcollege_getData($type, $year, $stream2);
+  $result_data_stream1 = itg_bestcollege_getData('stream-comparecollege', $year, $stream1);
+  $result_data_stream2 = itg_bestcollege_getData('stream-comparecollege', $year, $stream2);
 
   $data = array();
   foreach ($result_data_stream1 as $result_data_stream1_key => $result_data_stream1_val) {
@@ -242,41 +245,65 @@ function itg_bestcollege_streamcompare($year, $type, $stream1, $stream2) {
 
 /**
  * Function used to show Colleges List on behalf of Year.
- * @param int $frmyear
- * @param int $toyear
+ * @param int $year
  * @param string $type
  * @param string $stream
+ * @param string $years
  * @return string
  */
-function itg_bestcollege_yearcompare($frmyear, $toyear, $type, $stream) {
-  drupal_set_title(t(drupal_ucfirst($stream) . ' ' . $frmyear . ' Vs ' . $toyear));
+function itg_bestcollege_yearcompare($year, $type, $stream, $years) {
+  $years_exp = explode('-', $years);
+  drupal_set_title(t(drupal_ucfirst($stream) . ' ' . $years_exp[0] . ' Vs ' . $years_exp[1]));
   $result_data = array();
-  $result_data_yr1 = itg_bestcollege_getData($type, $frmyear, $stream);
-  $result_data_yr2 = itg_bestcollege_getData($type, $toyear, $stream);
+  $result_data_yr1 = itg_bestcollege_getData('year-comparecollege', $years_exp[0], $stream);
+  $result_data_yr2 = itg_bestcollege_getData('year-comparecollege', $years_exp[1], $stream);
   
   $data = array();
   foreach ($result_data_yr1 as $result_data_yr1_key => $result_data_yr1_val) {
     $clgname_city = $result_data_yr1_val->collegename . ', ' . $result_data_yr1_val->city;
-    $data[$frmyear][] = array('rank' => $result_data_yr1_val->rank, 'college_name' => $clgname_city);
+    $data[$years_exp[0]][] = array('rank' => $result_data_yr1_val->rank, 'college_name' => $clgname_city);
   }
   foreach ($result_data_yr2 as $result_data_yr2_key => $result_data_yr2_val) {
     $clgname_city2 = $result_data_yr2_val->collegename . ', ' . $result_data_yr2_val->city;
-    $data[$toyear][] = array('rank' => $result_data_yr2_val->rank, 'college_name' => $clgname_city2);
+    $data[$years_exp[1]][] = array('rank' => $result_data_yr2_val->rank, 'college_name' => $clgname_city2);
   }
   $output = theme('itg_bestcollege_yearwise', array('data' => $data));
   return $output;
 }
 
+/*
+ * Function to used common redirection for some pages:
+ * @param int $year
+ * @param string $stype
+ * @return 
+ */
+function itg_common_redirect_list ($year, $stype) {
+  if (preg_match('/zonewiselist/',$stype)) {
+    return itg_zone_wise_list($year, $stype);
+  }
+  elseif (preg_match('/campus-wise-list/',$stype)) {
+    return itg_campus_wise_list($year, $stype);
+  }
+  elseif (preg_match('/citycolleges/',$stype)) {
+    return itg_city_wise_list($year, $stype);
+  }
+  else {
+    return itg_readyrecnor_directory_list($year, $stype);
+  }
+}
+
 /**
  * Function used to show Readyrecnor directory list Colleges List:
  * @param int $year
- * @param string $type
- * @param string $stream
+ * @param string $stype
  * @return string
  */
-function itg_readyrecnor_directory_list($year, $type, $stream) {
+function itg_readyrecnor_directory_list($year, $stype) {
+  $stype_exp = explode('-', $stype);
+  $stream = $stype_exp[0];
+  $type = $stype_exp[1];
   drupal_set_title(t('DIRECTORY OF BEST COLLEGES ' . $year.': '.drupal_strtoupper($stream)));
-  $result_data = itg_bestcollege_getData($type, $year, $stream);
+  $result_data = itg_bestcollege_getData('readyrecnor-directory-list', $year, $stream);
   $data = array();
   foreach ($result_data as $result_data_key => $result_data_val) {
     $data[$stream][] = array($result_data_val->rank, $result_data_val->collegename, $result_data_val->address, $result_data_val->phone, $result_data_val->websiteurl, $result_data_val->established, $result_data_val->seats, $result_data_val->cutoff);
@@ -287,13 +314,14 @@ function itg_readyrecnor_directory_list($year, $type, $stream) {
 /**
  * Function used to show Best Colleges List on behalf of zone:
  * @param int $year
- * @param string $type
- * @param string $stream
+ * @param string $stype
  * @return string
  */
-function itg_zone_wise_list($year, $type, $stream) {
+function itg_zone_wise_list($year, $stype) {
+  $stype_exp = explode('-', $stype);
+  $stream = $stype_exp[1];
   drupal_set_title(t('ZONEWISE RANKING: BEST ' . drupal_strtoupper($stream).' COLLEGES'));
-  $result_data = itg_bestcollege_getData($type, $year, $stream);
+  $result_data = itg_bestcollege_getData('zone-wise-list', $year, $stream);
   $data = array();
   foreach ($result_data as $result_data_key => $result_data_val) {
     $data[$stream][] = array($result_data_val->rank, $result_data_val->city, $result_data_val->collegename);
@@ -304,15 +332,14 @@ function itg_zone_wise_list($year, $type, $stream) {
 /**
  * Function used to show Best Colleges List on behalf of zone:
  * @param int $year
- * @param string $type
- * @param string $stream
+ * @param string $stype
  * @return string
  */
-function itg_campus_wise_list($year, $type, $stream) {
+function itg_campus_wise_list($year, $stype) {
   drupal_set_title(t('CAMPUSWISE RANKING: BEST GOVT. & PRIVATE COLLEGES'));
-  $result_data_eng = itg_bestcollege_getData($type, $year, 'eng');
-  $result_data_law = itg_bestcollege_getData($type, $year, 'law');
-  $result_data_medical = itg_bestcollege_getData($type, $year, 'medical');
+  $result_data_eng = itg_bestcollege_getData('campus-wise-list', $year, 'eng');
+  $result_data_law = itg_bestcollege_getData('campus-wise-list', $year, 'law');
+  $result_data_medical = itg_bestcollege_getData('campus-wise-list', $year, 'medical');
   
   $data = array();
   foreach ($result_data_eng as $result_data_eng_key => $result_data_eng_val) {
@@ -330,13 +357,15 @@ function itg_campus_wise_list($year, $type, $stream) {
 /**
  * Function used to show Readyrecnor directory list Colleges List:
  * @param int $year
- * @param string $type
- * @param string $stream
+ * @param string $stype
  * @return string
  */
-function itg_city_wise_list($year, $stream, $type, $city) {
+function itg_city_wise_list($year, $scity) {
+  $scity_exp = explode('-', $scity);
+  $stream = $scity_exp[1];
+  $city = $scity_exp[2];
   drupal_set_title(t('CITYWISE RANKING: BEST '.drupal_strtoupper($stream).' COLLEGES'));
-  $result_data = itg_bestcollege_getData($type, $year, $stream, $city);
+  $result_data = itg_bestcollege_getData('citywise-list', $year, $stream, $city);
   $data = array();
   foreach ($result_data as $result_data_key => $result_data_val) {
     $data[$city][] = array($result_data_val->rank, $result_data_val->collegename);
@@ -354,7 +383,7 @@ function itg_city_wise_list($year, $stream, $type, $city) {
 function itg_bestcollege_getData($type, $byear, $bstream, $city = NULL) {
   $itg_result = array();
   // Need to change below query once bestcollege migrate:
-  if ($type == 'emerging') {
+  if ($type == 'emerging-colleges-rank') {
     $itg_query = db_select('bestcolleges_master', 'n');
     $itg_query->join('bestcolleges_emergingranking', 'bce', 'n.collegeid = bce.collegeid');
     $itg_query->fields('bce', array('id', 'year', 'overall_rank', 'stream', 'reputation', 'academic_input', 'studentcare', 'infrastructure', 'placement', 'preceptual_rank', 'factual_rank'));
@@ -516,7 +545,6 @@ function itg_bestcollege_getStreamYear($type, $byear) {
  * @return string
  */
 function bestcollege_getStaticWidgetData($year) {
-  //RHS2016
     $keyword = 'RHS'.$year;
     $query = db_select('node', 'n');
     $query->fields('n', array('nid'))

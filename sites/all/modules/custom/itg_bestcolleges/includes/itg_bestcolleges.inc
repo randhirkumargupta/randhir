@@ -13,7 +13,7 @@
 */
 function bestcollege_rhssearch_form($form, &$form_state) {
   global $base_url;
-  $year = 2016;//arg(1);
+  $year = 2016;//arg(1); // Need to revert once feature done.
   $settings['base_url'] = $base_url;
   $settings['year'] = $year;
   drupal_add_js(array('itg_bestcolleges' => array('settings' => $settings)), array('type' => 'setting'));
