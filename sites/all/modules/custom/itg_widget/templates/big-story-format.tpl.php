@@ -158,8 +158,9 @@ if (!empty($data)) :
                 $current_site_hash = strtolower($nodes_array_with_prefix[0]);
                 $current_entity_id = $nodes_array_with_prefix[1];
                 $related_data = itg_get_link_from_hash_and_entity_solr_search($current_entity_id, $current_site_hash);
+                $front_url = str_replace('-backend', '', $related_data->url);
                 if (!empty($related_data)) {
-                  print "<li>" . l($related_data->label, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</li>";
+                  print "<li>" . l($related_data->label, $front_url, array("attributes" => array("target" => "_blank"))) . "</li>";
                 }
               }
               ?>                       
