@@ -309,7 +309,7 @@
             <?php
             $story_tech = $node->field_story_technology[LANGUAGE_NONE];
             foreach ($story_tech as $tpl_key => $tpl_val) {
-              print "<div class='lst-desc'><span class='lst-lable'>Sample Photo Title</span>" . $story_tech[$tpl_key]['field_technology_photo_title'][LANGUAGE_NONE][0]['value'] . "</span></div>";
+              print "<div class='field'><div class='field-label'>Sample Photo Title</div><div class='field-items'>" . $story_tech[$tpl_key]['field_technology_photo_title'][LANGUAGE_NONE][0]['value'] . "</div></div>";
             }
             ?>
           </div>
@@ -346,9 +346,9 @@
         <?php
       } else {
         ?>
-        <div class="promote-sidebar">
+<!--        <div class="promote-sidebar">
           <div class="promote-lock">Someone  is already working on this</div>
-        </div> 
+        </div> -->
       <?php }
       ?>
     <?php endif; ?>
