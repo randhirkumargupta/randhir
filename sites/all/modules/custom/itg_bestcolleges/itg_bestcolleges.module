@@ -37,6 +37,15 @@ function itg_bestcolleges_menu() {
     'page arguments' => array(1, 2),
     'access callback' => TRUE,
   );
+  $items['update-college-data'] = array(
+    'title' => 'Update college nid',
+    'description' => 'Update college node id with old id',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('update_college_data_form'),
+    'file' => 'includes/itg_update_college_data.inc',
+    'file path' => drupal_get_path('module','itg_bestcolleges'), 
+    'access callback' => TRUE,
+  );
   /*$items['bestcolleges/%/%'] = array(
     'page callback' => 'itg_zone_wise_list',
     'page arguments' => array(1, 2),
