@@ -90,13 +90,13 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_admin_form.js');
   
-  
+
   //code for preview_changes button remove
   if (!empty($form['actions']['preview_changes'])) {
     unset($form['actions']['preview_changes']);
   }
   
-  
+    $form['#after_build'][] = 'itg_common_meta_token_remove';
   if ($user->uid != '1') {
 
     if ($form_id == 'menu_edit_item') {
@@ -232,6 +232,16 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   if (!empty($form_state['node']->type)) {
     $form['actions']['submit']['#submit'][] = 'itg_draft_form_custom_callback';
   }
+}
+
+
+function itg_common_meta_token_remove($form, &$form_state) {
+  drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery("#edit-metatags-und-description-value").val("");
+              
+          });', array('type' => 'inline', 'scope' => 'footer'));
+  
+  return $form;
 }
 
 /**
