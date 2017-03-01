@@ -793,22 +793,24 @@ function itg_story_movie_image_plugin_data($node_id = '') {
     $technology_entity = $node_obj->field_story_technology[LANGUAGE_NONE];
     
     $html = '';
-    $html .= '<div class="story-photo-list-wrapper"><h3 class="story-photo-list-heading"><span>SAMPLE PHOTOS</span></h3><div class="story-photo-list">';
+    if (!empty($technology_entity)) {
+      $html .= '<div class="story-photo-list-wrapper"><h3 class="story-photo-list-heading"><span>SAMPLE PHOTOS</span></h3><div class="story-photo-list">';
 
-    foreach ($technology_entity as $key => $val) {
-      $entity = entity_load('field_collection_item', array($val['value']));
-      // store the actual image path
-      $sample_img_path = $entity[$val['value']]->field_technology_sample_photo['und'][0]['uri'];
-      $sample_img = image_style_url('video_landing_page_170_x_127', $sample_img_path);
-      // store image title
-      $sample_title = $entity[$val['value']]->field_technology_photo_title[LANGUAGE][0]['value'];
-      // generate html 
-      $html .= '<div class="story-photo-list-item">';
-      $html .= '<img src="' . $sample_img . '"  alt=""/>';
-      $html .= '<p>' . $sample_title . '</p>';
-      $html .= '</div>';
+      foreach ($technology_entity as $key => $val) {
+        $entity = entity_load('field_collection_item', array($val['value']));
+        // store the actual image path
+        $sample_img_path = $entity[$val['value']]->field_technology_sample_photo['und'][0]['uri'];
+        $sample_img = image_style_url('video_landing_page_170_x_127', $sample_img_path);
+        // store image title
+        $sample_title = $entity[$val['value']]->field_technology_photo_title[LANGUAGE][0]['value'];
+        // generate html 
+        $html .= '<div class="story-photo-list-item">';
+        $html .= '<img src="' . $sample_img . '"  alt=""/>';
+        $html .= '<p>' . $sample_title . '</p>';
+        $html .= '</div>';
+      }
+      $html .= '</div></div>';
     }
-    $html .= '</div></div>';
     return $html;
   } else {
     return 'No content id found';
