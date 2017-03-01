@@ -396,7 +396,7 @@ img {
 .node-videogallery-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file,
 .node-photogallery-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file, .itg_menu_manager_form [id*="edit-category-icon-ajax-wrapper"] #edit-category-icon-upload, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget, .form-field-name-field-ads-ex-headerscript,
 .form-field-name-field-ads-ex-body-start,
-.form-field-name-field-ads-ex-body-close, #edit-lrp-gold-star-one-icon-fieldset, #edit-lrp-gold-star-two-icon-fieldset, #edit-lrp-gold-star-three-icon-fieldset, #edit-lrp-gold-star-four-icon-fieldset, #edit-lrp-gold-star-five-icon-fieldset, #edit-lrp-gold-star-six-icon-fieldset {
+.form-field-name-field-ads-ex-body-close, #edit-lrp-gold-star-one-icon-fieldset, #edit-lrp-gold-star-two-icon-fieldset, #edit-lrp-gold-star-three-icon-fieldset, #edit-lrp-gold-star-four-icon-fieldset, #edit-lrp-gold-star-five-icon-fieldset, #edit-lrp-gold-star-six-icon-fieldset, .node-event_backend-form .form-field-name-field-ticket-group-type, [id*="field-ticket-group-type-values"] tbody tr td {
   position: relative;
 }
 
@@ -5496,7 +5496,7 @@ div.node #comments h2 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 650px;
+  width: 600px;
 }
 .action-with-title .block-itg-story-list {
   margin: 10px 0 0;

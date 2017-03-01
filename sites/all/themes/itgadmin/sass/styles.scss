@@ -5175,7 +5175,7 @@ div.node{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 650px;
+    width: 600px;
   }
   .block-itg-story-list{
     margin: 10px 0 0;
@@ -10728,6 +10728,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     }
   }
 }
+.node-event_backend-form .form-field-name-field-ticket-group-type{@extend .pos-rel;}
 [id*="field-ticket-group-type-values"]{
   .form-type-textfield > label, .form-type-select > label{
     width: 280px;
@@ -10738,6 +10739,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       td{
         background-color: #e5e5e5;
         float: left;
+        @extend .pos-rel;
         margin-bottom: 10px;
         width: 100%;
         > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
