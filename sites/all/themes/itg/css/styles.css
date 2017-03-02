@@ -3148,11 +3148,11 @@ footer .multiple-items-footer i.slick-next {
 .story-section .story-associate-content #videogallery-iframe #close-big-story {
   position: absolute;
   right: 0;
-  top: -20px;
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-  border-radius: 3px 3px 0 0;
+  top: 0px;
+  width: 25px;
+  height: 22px;
+  line-height: 22px;
+  border-radius: 0;
   box-shadow: none;
   background: #bb0a0a;
 }
