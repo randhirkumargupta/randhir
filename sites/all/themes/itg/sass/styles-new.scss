@@ -3363,12 +3363,13 @@ body{
         border-radius: 0 7px 7px 0;
         color: #fff;
         position: absolute;
-        top: 138px;
+        top: 50%;
         z-index: 1;                
         font-size: 28px;
         text-align: center;
         line-height: 70px;
         cursor: pointer;
+        margin-top: -33px;
       }
       .fa-chevron-left{
         left: 0;                

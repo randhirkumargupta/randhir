@@ -270,6 +270,17 @@ function itg_get_related_content($nid) {
 function _related_video_block_content() {
   $related_content = itg_get_related_content(arg(1));
   if (!empty($related_content)) {
+    drupal_add_js('jQuery(document).ready(function(){
+        jQuery("#related-video .video-list").slick({
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            centerPadding: \'30px\',
+            variableWidth: true,
+            prevArrow: \'<i class="fa fa-angle-left slick-prev"></i>\',
+            nextArrow: \'<i class="fa fa-angle-right slick-next"></i>\'
+        });
+    });', array('type' => 'inline', 'scope' => 'footer'));
     if (function_exists('itg_get_related_story_id')) {
       $related_result = itg_get_related_story_id($related_content);
     }
