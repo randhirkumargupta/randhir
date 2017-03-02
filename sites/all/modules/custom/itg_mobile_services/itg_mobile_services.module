@@ -1351,7 +1351,7 @@ function itg_mobile_services_field_add_more_submit($form, &$form_state) {
   $end_date = str_replace('/', '-', $form_state['input']['field_service_frequency_date'][LANGUAGE_NONE][0]['value2']['date']);
   $sid = trim($form_state['values']['field_service_association_title'][LANGUAGE_NONE]);
   $service_frequency_id = trim($form_state['values']['field_service_frequency'][LANGUAGE_NONE][0]['value']);
-  session_start();
+  //session_start();
   $_SESSION['service_title_id'] = $sid;
   $_SESSION['service_frequency_id'] = $service_frequency_id;
   $get_exist_content = itg_mobile_services_get_exist_content($sid, $start_date, $end_date);
