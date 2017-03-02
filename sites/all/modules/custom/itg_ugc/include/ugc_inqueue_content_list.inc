@@ -102,7 +102,6 @@ function itg_ugc_inqueue_content() {
 
       if (is_array($query) && empty($query))
       {
-        print 'ankush';
         $userData = $people->find(array("publish_status" => array('$ne' => 1), "status" => 1))->limit($limit)->sort(array('_id' => -1));
       }
       else
