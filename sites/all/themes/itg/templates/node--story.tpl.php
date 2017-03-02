@@ -873,7 +873,14 @@ if (!empty($content)):
     ?>
                     </div>
                     <!-- For buzzfeed section end --> 
-                  <?php } ?>
+                  <?php } 
+                  
+                if(!empty($node->field_story_configurations['und'])) {
+                                 foreach ($node->field_story_configurations['und'] as $value) {
+                                   $config[] = $value['value'];
+                                 }
+                               }
+                  ?>
 
               </div>
 
@@ -884,8 +891,12 @@ if (!empty($content)):
               ?>
 
                   <?php
-                  if ($config_name == 'vukkul') {
-                    ?>
+                  if ($config_name == 'vukkul' && in_array('comment', $config)) {
+                    if (!empty($node->field_story_comment_question['und'][0]['value'])) {
+                    $question = 'Q:'.$node->field_story_comment_question['und'][0]['value'];
+                  }
+                  ?>
+              <div class="c_ques"><?php print $question; ?></div>
                 <div class="vukkul-comment">
                     <div id="vuukle-emote"></div>
                     <div id="vuukle_div"></div>
@@ -898,16 +909,17 @@ if (!empty($content)):
 
                 </div>
     <?php
-  }
-  if ($config_name == 'other') {
-    ?>
-                <div id="other-comment">
-    <?php
-    $block = module_invoke('itg_ugc_comment', 'block_view', 'ugc_form_comment_block');
-    print render($block['content']);
-    ?>
-                </div>
-  <?php } ?>
+                }
+                if ($config_name == 'other' && in_array('comment', $config)) {
+                 ?>
+                    <div id="other-comment">
+                        <?php
+                        $block = module_invoke('itg_ugc_comment', 'block_view', 'ugc_form_comment_block');
+                        print render($block['content']);
+                        ?>
+                    </div>
+                  <?php
+                } ?>
           </div>            
       </div>               
 
