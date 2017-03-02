@@ -102,12 +102,12 @@ function itg_ugc_inqueue_content() {
 
       if (is_array($query) && empty($query))
       {
-
-        $userData = $people->find(array("publish_status" => array('$ne' => 1), "status" => 1))->limit($limit)->sort(array('publish_date_time' => -1));
+        print 'ankush';
+        $userData = $people->find(array("publish_status" => array('$ne' => 1), "status" => 1))->limit($limit)->sort(array('_id' => -1));
       }
       else
       {
-        $userData = $people->find($query)->limit($limit)->sort(array('publish_date_time' => -1));
+        $userData = $people->find($query)->limit($limit)->sort(array('_id' => -1));
       }
 
       $rows = array();
