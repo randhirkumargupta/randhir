@@ -557,12 +557,13 @@ function itg_common_custompath_insert_load($node) {
 function itg_common_custompath_insert_val($pathdata) {
 
     if (preg_match("![^a-z0-9]!i", $pathdata)) {
-        $pathdata = preg_replace('/[^a-zA-Z0-9\/\\.\']/', '-', $pathdata);
+        $pathdata = preg_replace('/[^a-zA-Z0-9\/\\.?!\']/', '-', $pathdata);
         while (preg_match('/--/', $pathdata)) {
             $pathdata = preg_replace('/--/', '-', $pathdata);
         }
         $pathdata = rtrim($pathdata, "-");
         $pathdata = strtolower($pathdata);
+        $pathdata = str_replace(array(':','*', '"', "'", '#'), "-", $pathdata);
     }
     return $pathdata;
 }
