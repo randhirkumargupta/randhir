@@ -233,7 +233,7 @@ function itg_story_form_custom_callback($form, &$form_state) {
     $node_type = ucfirst($form_state['node']->type);
     $node_type = str_replace("_", " ", $node_type);
     $title = ucfirst($form_state['node']->title);
-
+    $clone_id = $_GET['clone_id'];
      // code insert image in custom table
     $node_id = $form_state['node']->nid;
     if ($form_state['input']['original_image_fids'] != "") {
@@ -253,6 +253,12 @@ function itg_story_form_custom_callback($form, &$form_state) {
 
     if ($request_destination == 'published-story') {
         $redirect_path .= "?field_story_syndication_value_op=all";
+    }
+    
+    // redirection for clone story
+    if ($request_destination == 'clone-story' && !empty($clone_id)) {
+      drupal_set_message(t($node_type . ' <b>' . $title . '</b> has been Published sucessfully.'));
+      $_GET['destination'] =  'published-story?field_story_syndication_value_op=all';
     }
     
     if ($form_state['input']['op'] != 'Save as Draft') {        
