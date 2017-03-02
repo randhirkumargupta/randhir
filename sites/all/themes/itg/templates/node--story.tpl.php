@@ -131,7 +131,7 @@ if (!empty($content)):
             ?></h1>
           <?php global $user;
         if(in_array('Social Media', $user->roles)) {?>
-         <a class="def-cur-pointer colorbox-load" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $node->nid;?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span>promote</span></a>   
+         <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $node->nid;?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span>promote</span></a>   
         <?php }?>
           <?php } ?>
           <?php
@@ -609,29 +609,31 @@ if (!empty($content)):
                           if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
                             $wrapper = entity_metadata_wrapper('node', $node);
                             $num = 1;
-                            foreach ($wrapper->field_story_listicle as $i):
-                              $listicletype = '';
+                            if (!empty($wrapper->field_story_listicle)) {
+                              foreach ($wrapper->field_story_listicle as $i):
+                                $listicletype = '';
 
-                              print '<div class="listicle-detail">';
-                              $type = $i->field_story_listicle_type->value();
-                              $description = $i->field_story_listicle_description->value();
-                              $color = $i->field_listicle_color->value();
-                              $li_type = $node->field_story_templates[LANGUAGE_NONE][0]['value'];
-                              $color = ($color) ? $color : '#000000';
-                              if ($li_type == 'bullet_points') {
-                                print '<span class="bullet_points"></span>';
-                              }
-                              else {
-                                print '<span>' . $num . '</span>';
-                              }
+                                print '<div class="listicle-detail">';
+                                $type = $i->field_story_listicle_type->value();
+                                $description = $i->field_story_listicle_description->value();
+                                $color = $i->field_listicle_color->value();
+                                $li_type = $node->field_story_templates[LANGUAGE_NONE][0]['value'];
+                                $color = ($color) ? $color : '#000000';
+                                if ($li_type == 'bullet_points') {
+                                  print '<span class="bullet_points"></span>';
+                                }
+                                else {
+                                  print '<span>' . $num . '</span>';
+                                }
 
-                              if (isset($type)) {
-                                $listicletype = '<span class="listicle-type" style="color: ' . $color . '">' . $type . ': </span>';
-                              }
-                              print '<div class="listicle-description">' . $listicletype . $description . '</div>';
-                              print '</div>';
-                              $num++;
-                            endforeach;
+                                if (isset($type)) {
+                                  $listicletype = '<span class="listicle-type" style="color: ' . $color . '">' . $type . ': </span>';
+                                }
+                                print '<div class="listicle-description">' . $listicletype . $description . '</div>';
+                                print '</div>';
+                                $num++;
+                              endforeach;
+                            }
                           }
                           else {
                             // Print story body
