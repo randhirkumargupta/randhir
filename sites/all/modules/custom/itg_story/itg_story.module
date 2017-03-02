@@ -922,3 +922,27 @@ function itg_story_photo_story_bottom_html($node_id) {
       return $html;
   }
 }
+
+/**
+ * Implement hook_node_access
+ * @param object $node
+ * @param string $op
+ * @param array $account
+ * @return string
+ */
+function itg_story_node_access($node, $op, $account) {
+  // We're only bothered about the 'view' operation at the moment
+  if ($op == 'view') {
+    if (!empty($node->field_story_configurations['und'][0]['value'])) {
+      foreach ($node->field_story_configurations['und'] as $value) {
+        $config[] = $value['value'];
+      }
+    }
+    if (in_array('lock_story', $config)) {
+      return NODE_ACCESS_DENY;
+    }
+  }
+
+  // For everything else let the system decide.
+  return NODE_ACCESS_IGNORE;
+}
