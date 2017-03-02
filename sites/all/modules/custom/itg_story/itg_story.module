@@ -259,8 +259,8 @@ function itg_story_form_custom_callback($form, &$form_state) {
     if ($request_destination == 'clone-story' && !empty($clone_id)) {
     if (arg(1) == 'add') {
       if ($workbench_current_state == 'published') {
-        $op = 'published';
-        drupal_set_message(t($node_type . ' <b>' . $title . '</b> has been ' . $op . ' successfully.'));
+        $op = 'cloned and published.';
+        drupal_set_message(t($node_type . ' <b>' . $title . '</b> has been successfully ' . $op . ''));
       }
       else {
         $op = 'created';
