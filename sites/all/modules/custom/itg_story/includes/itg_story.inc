@@ -33,7 +33,7 @@ function itg_story_issue_date_checked() {
     $issue = itg_story_checked_issue($issue_date);
 
     if (!$issue) {
-        echo '<div id="idIssue">' . t("Issue dose not exit.") . '</div>';
+        echo '<div id="idIssue">' . t("Issue dose not exist.") . '</div>';
     }
 }
 
