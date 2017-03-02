@@ -233,7 +233,7 @@ function itg_story_form_custom_callback($form, &$form_state) {
     $node_type = ucfirst($form_state['node']->type);
     $node_type = str_replace("_", " ", $node_type);
     $title = ucfirst($form_state['node']->title);
-
+    $clone_id = $_GET['clone_id'];
      // code insert image in custom table
     $node_id = $form_state['node']->nid;
     if ($form_state['input']['original_image_fids'] != "") {
@@ -255,7 +255,22 @@ function itg_story_form_custom_callback($form, &$form_state) {
         $redirect_path .= "?field_story_syndication_value_op=all";
     }
     
-    if ($form_state['input']['op'] != 'Save as Draft') {        
+    // redirection for clone story
+    if ($request_destination == 'clone-story' && !empty($clone_id)) {
+    if (arg(1) == 'add') {
+      if ($workbench_current_state == 'published') {
+        $op = 'cloned and published.';
+        drupal_set_message(t($node_type . ' <b>' . $title . '</b> has been successfully ' . $op . ''));
+      }
+      else {
+        $op = 'created';
+        drupal_set_message(t($node_type . ' <b>' . $title . '</b> has been ' . $op . ' successfully and submitted for further review and approval.'));
+      }
+      $_GET['destination'] = 'published-story?field_story_syndication_value_op=all';
+    }
+  }
+
+  if ($form_state['input']['op'] != 'Save as Draft') {        
       if (function_exists('itg_custom_message')) {
         itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path, $action);
       }
@@ -359,7 +374,7 @@ function itg_story_node_validate($node, $form, &$form_state) {
         if (!empty($node->field_story_issue_date[LANGUAGE_NONE][0]['value'])) {
             $issue = itg_story_checked_issue($node->field_story_issue_date[LANGUAGE_NONE][0]['value']);
             if (!$issue) {
-                form_set_error('edit-field-story-issue-date-und-0-value-datepicker-popup-0', t("Issue does not exit."));
+                form_set_error('edit-field-story-issue-date-und-0-value-datepicker-popup-0', t("Issue does not exist."));
             }
         }
 
@@ -921,4 +936,28 @@ function itg_story_photo_story_bottom_html($node_id) {
       $html .= '</div>';
       return $html;
   }
+}
+
+/**
+ * Implement hook_node_access
+ * @param object $node
+ * @param string $op
+ * @param array $account
+ * @return string
+ */
+function itg_story_node_access($node, $op, $account) {
+  // We're only bothered about the 'view' operation at the moment
+  if ($op == 'view') {
+    if (!empty($node->field_story_configurations['und'][0]['value'])) {
+      foreach ($node->field_story_configurations['und'] as $value) {
+        $config[] = $value['value'];
+      }
+    }
+    if (in_array('lock_story', $config)) {
+      return NODE_ACCESS_DENY;
+    }
+  }
+
+  // For everything else let the system decide.
+  return NODE_ACCESS_IGNORE;
 }
