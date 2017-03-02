@@ -8536,6 +8536,11 @@ div.node #comments h2 {
 .node-photogallery-form .form-field-name-field-story-issue-date .form-type-date-popup .date-padding .form-type-textfield {
   padding: 0 !important;
 }
+.node-story-form .form-field-name-field-story-issue-date #idIssue,
+.node-videogallery-form .form-field-name-field-story-issue-date #idIssue,
+.node-photogallery-form .form-field-name-field-story-issue-date #idIssue {
+  color: red;
+}
 .node-story-form .itg-sidebar-form,
 .node-videogallery-form .itg-sidebar-form,
 .node-photogallery-form .itg-sidebar-form {
