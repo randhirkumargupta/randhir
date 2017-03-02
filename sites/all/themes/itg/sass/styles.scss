@@ -9433,7 +9433,7 @@ h1.about-us-heading{
             padding-left: 0;
         }
     }
-    #related-photo{
+    #related-photo, #related-video{
         .row{
             margin: 0;
         }
@@ -9442,6 +9442,7 @@ h1.about-us-heading{
         span{            
             padding-right: 30px;
             display: block;
+            margin-top: 10px;
         }
     }
     ul{
