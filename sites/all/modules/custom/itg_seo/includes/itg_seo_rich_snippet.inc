@@ -52,11 +52,12 @@ function itg_seo_node_data($node) {
         $smi_data[] = $social_media_int[$smi_key]['value'];
       }
       if (in_array('facebook_instant_article', $smi_data)) {
+        $app_id = variable_get('itg_fia_config');
         $element = array(
            '#tag' => 'meta',
            '#attributes' => array(
              'property' => 'fb:pages',
-             'content' => '159544954558163',
+             'content' => $app_id,
            ),
         );
 
