@@ -8889,21 +8889,18 @@ div.node{
 }
 .page-menu-manager-third .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-tid{width: auto; padding-right: 0;}
 [id*="views-exposed-form-menu-manager-menu-manager-page"]{
-  .views-submit-button{
-    .form-type-select{
-      float: left;
-      max-width: 125px;
-    }
-    .form-submit{
-      margin-left: 10px !important;
-      margin-top: 26px !important;
-    }
+  .views-exposed-widget{padding: 0 !important;}
+  .views-submit-button, .views-reset-button{
+    @extend .fleft;
+    margin: 26px 0 0 10px;
   }
   .third-label-menu-section, .third-label-menu-term{
     @extend .fleft;
-    width: 200px;
   }
-  .third-label-menu-section{margin-right: 10px;}
+  .third-label-menu-term{
+    .form-text{max-width: 200px; margin-left: 10px !important;}
+    > label{padding-left: 10px !important;}
+  } 
 }
 [id*="comment-global-config"]{
   .form-submit{
