@@ -3035,6 +3035,36 @@ div.node{
           }
         }
       }
+      &.form-item-itg-fb-img{
+        #edit-itg-fb-img-upload{
+          .form-submit[value="Remove"]{
+            & + .div_itg_fb_img, & + .ajax-progress + .div_itg_fb_img{
+              a{
+                @extend .hide;
+              }
+            }
+          }
+          .form-submit[value="Upload"]{
+            @extend .hide;
+            & + .div_itg_fb_img{
+              a{
+                background-color: #fff;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                color: #323232;
+                font-size: 13px;
+                padding: 5px 10px;
+                display: inline-block;
+                vertical-align: top;
+              }
+            }
+          }
+          span.file{
+            position: absolute;
+            top: 70px;
+          }
+        }
+      }
     }
     > .form-submit{
       margin: 20px 0 0 130px;
