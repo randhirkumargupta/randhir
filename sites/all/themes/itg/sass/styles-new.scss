@@ -5966,7 +5966,30 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
 }
 @media all and(max-width: 767px){
-  
+  #block-views-video-landing-header-block{
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    .video-header-right .ads{
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
+    }
+  }
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-textarea, 
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-text, 
+  #content [id*="ugc-node-form"].ugc-custom-wrapper select{
+    width: 100%;
+  }
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-name, 
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-city,
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-email, 
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-section{
+    float: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
   .comment-user-details{
     text-align: left;
     > div {
