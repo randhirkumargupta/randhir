@@ -129,6 +129,10 @@ if (!empty($content)):
               print $node->title . $pipelinetext;
             }
             ?></h1>
+          <?php global $user;
+        if(in_array('Social Media', $user->roles)) {?>
+         <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $node->nid;?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span>promote</span></a>   
+        <?php }?>
           <?php } ?>
           <?php
           $associate_type = '';
@@ -351,7 +355,7 @@ if (!empty($content)):
                   $associate_lead = $node->field_story_associate_lead[LANGUAGE_NONE][0]['value'];
                   $associate_photo = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
                   $associate_video = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
-                  if(!empty($associate_lead) && !empty($associate_photo) && !empty($associate_video)) {
+                  if(!empty($associate_lead) && !empty($associate_photo) || !empty($associate_video)) {
                       $class = 'story-associate-content';
                   } 
                   ?>
@@ -605,29 +609,31 @@ if (!empty($content)):
                           if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
                             $wrapper = entity_metadata_wrapper('node', $node);
                             $num = 1;
-                            foreach ($wrapper->field_story_listicle as $i):
-                              $listicletype = '';
+                            if (!empty($wrapper->field_story_listicle)) {
+                              foreach ($wrapper->field_story_listicle as $i):
+                                $listicletype = '';
 
-                              print '<div class="listicle-detail">';
-                              $type = $i->field_story_listicle_type->value();
-                              $description = $i->field_story_listicle_description->value();
-                              $color = $i->field_listicle_color->value();
-                              $li_type = $node->field_story_templates[LANGUAGE_NONE][0]['value'];
-                              $color = ($color) ? $color : '#000000';
-                              if ($li_type == 'bullet_points') {
-                                print '<span class="bullet_points"></span>';
-                              }
-                              else {
-                                print '<span>' . $num . '</span>';
-                              }
+                                print '<div class="listicle-detail">';
+                                $type = $i->field_story_listicle_type->value();
+                                $description = $i->field_story_listicle_description->value();
+                                $color = $i->field_listicle_color->value();
+                                $li_type = $node->field_story_templates[LANGUAGE_NONE][0]['value'];
+                                $color = ($color) ? $color : '#000000';
+                                if ($li_type == 'bullet_points') {
+                                  print '<span class="bullet_points"></span>';
+                                }
+                                else {
+                                  print '<span>' . $num . '</span>';
+                                }
 
-                              if (isset($type)) {
-                                $listicletype = '<span class="listicle-type" style="color: ' . $color . '">' . $type . ': </span>';
-                              }
-                              print '<div class="listicle-description">' . $listicletype . $description . '</div>';
-                              print '</div>';
-                              $num++;
-                            endforeach;
+                                if (isset($type)) {
+                                  $listicletype = '<span class="listicle-type" style="color: ' . $color . '">' . $type . ': </span>';
+                                }
+                                print '<div class="listicle-description">' . $listicletype . $description . '</div>';
+                                print '</div>';
+                                $num++;
+                              endforeach;
+                            }
                           }
                           else {
                             // Print story body
@@ -869,7 +875,14 @@ if (!empty($content)):
     ?>
                     </div>
                     <!-- For buzzfeed section end --> 
-                  <?php } ?>
+                  <?php } 
+                  
+                if(!empty($node->field_story_configurations['und'])) {
+                                 foreach ($node->field_story_configurations['und'] as $value) {
+                                   $config[] = $value['value'];
+                                 }
+                               }
+                  ?>
 
               </div>
 
@@ -880,8 +893,12 @@ if (!empty($content)):
               ?>
 
                   <?php
-                  if ($config_name == 'vukkul') {
-                    ?>
+                  if ($config_name == 'vukkul' && in_array('comment', $config)) {
+                    if (!empty($node->field_story_comment_question['und'][0]['value'])) {
+                    $question = 'Q:'.$node->field_story_comment_question['und'][0]['value'];
+                  }
+                  ?>
+              <div class="c_ques"><?php print $question; ?></div>
                 <div class="vukkul-comment">
                     <div id="vuukle-emote"></div>
                     <div id="vuukle_div"></div>
@@ -894,16 +911,17 @@ if (!empty($content)):
 
                 </div>
     <?php
-  }
-  if ($config_name == 'other') {
-    ?>
-                <div id="other-comment">
-    <?php
-    $block = module_invoke('itg_ugc_comment', 'block_view', 'ugc_form_comment_block');
-    print render($block['content']);
-    ?>
-                </div>
-  <?php } ?>
+                }
+                if ($config_name == 'other' && in_array('comment', $config)) {
+                 ?>
+                    <div id="other-comment">
+                        <?php
+                        $block = module_invoke('itg_ugc_comment', 'block_view', 'ugc_form_comment_block');
+                        print render($block['content']);
+                        ?>
+                    </div>
+                  <?php
+                } ?>
           </div>            
       </div>               
 

@@ -22,13 +22,13 @@
                         <div class="featured-post featured-post-first <?php echo $video_class; ?>">
                             <?php
                             if ($row['field_story_large_image'] != "") {
-                                print $row['field_story_large_image'];
+                                $img = $row['field_story_large_image'];
                             }
                             else {
-                                print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image483x271.jpg' alt='' />";
+                                $img = "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image483x271.jpg' alt='' />";
                             }
                             ?> 
-
+                            <?php print l($img, 'node/'.$row['nid'], array('html' => TRUE)); ?>
                             <h2>
                                 <?php //echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
                                 <?php
@@ -49,12 +49,13 @@
                         <div class="featured-post <?php echo $video_class; ?>">
                             <?php
                             if ($row['field_story_medium_image'] != "") {
-                                print $row['field_story_medium_image'];
+                                $img_second = $row['field_story_medium_image'];
                             }
                             else {
-                                print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image237x133.jpg' alt='' />";
+                                $img_second =  "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image237x133.jpg' alt='' />";
                             }
                             ?>
+                          <?php print l($img_second, 'node/'.$row['nid'], array('html' => TRUE)); ?>
                             <h3>
                                 <?php //echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
                                 <?php

@@ -2499,12 +2499,19 @@ body.has-cart-popup{
         font-size: 0;
         opacity: 0.7;
         &:before{
+          font-family: fontawesome;
           color: #fff;
           display: inline-block;
           font-size: 24px;
           position: absolute;
           text-shadow: 0;
           top: 28px;
+        }
+        &.flex-next:before{
+          content: '\f054';
+        }
+        &.flex-prev:before{
+          content: '\f053';
         }
       }
     }
@@ -2700,14 +2707,19 @@ body.has-cart-popup{
           }
           label{
             font-size: 14px;
+            margin-top: 10px;
           }
         }
     }
     .social-share{
-      display: inline-block;
-      vertical-align: top;
-      width: 100%;
-      text-align: center;
+/*        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+        text-align: center;*/    
+        width: 51%;
+        margin: 0 auto;
+        display: block;
+        overflow: hidden;
       a{
         border-radius: 5px;        
         height: 50px;
@@ -3339,6 +3351,56 @@ body{
       display: none !important;
     }
   }
+}
+.story-associate-content{
+  .view-photo-landing-slider{
+    .videogallery-slider{
+      .fa-chevron-left, .fa-chevron-right{                
+        background: rgba(0, 0, 0, 0.6);
+        border: none;
+        width: 45px;
+        height: 66px;
+        border-radius: 0 7px 7px 0;
+        color: #fff;
+        position: absolute;
+        top: 50%;
+        z-index: 1;                
+        font-size: 28px;
+        text-align: center;
+        line-height: 70px;
+        cursor: pointer;
+        margin-top: -33px;
+      }
+      .fa-chevron-left{
+        left: 0;                
+      }
+      .fa-chevron-right{
+        right: 0;     
+        border-radius: 7px 0px 0px 7px;
+      }
+    }
+  }
+}
+span.personal-social-share-links {
+    position: absolute;
+    left: 110px;
+    bottom: 15px;
+    display: none;
+}
+.personal-social-share-links a {
+    display: inline-block;
+    vertical-align: top;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    background: #000;
+    color: #fff;
+    border-radius: 50%;
+    margin-right: 5px;
+    .fa:before{
+      font-size: 16px;
+      line-height: 30px;
+    }
 }
 
 
@@ -5904,7 +5966,30 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
 }
 @media all and(max-width: 767px){
-  
+  #block-views-video-landing-header-block{
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    .video-header-right .ads{
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
+    }
+  }
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-textarea, 
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-text, 
+  #content [id*="ugc-node-form"].ugc-custom-wrapper select{
+    width: 100%;
+  }
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-name, 
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-city,
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-email, 
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-section{
+    float: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
   .comment-user-details{
     text-align: left;
     > div {

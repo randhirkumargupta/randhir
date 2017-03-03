@@ -576,7 +576,7 @@ body.sidebar-second{
     top: 50px;
     left: 100%;
     width: 330px;
-    z-index: 99999;
+    z-index: 9999;
     transition: all 500ms ease 0s;
     &.active{
       transform: translateX(-330px);
@@ -3704,6 +3704,7 @@ div.node{
       @extend .pos-rel;
       min-height: 450px;
       background-color: #f0f0f0;
+      p{padding: 0 10px;}
     }
     iframe{
       width: 100%;
@@ -5165,7 +5166,7 @@ div.node{
     right: 0;
     top: 0;
     width: 1170px;
-    z-index: 99999;
+    z-index: 9999;
   }
   #page-title{
     @extend .fleft;
@@ -5174,7 +5175,7 @@ div.node{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 650px;
+    width: 600px;
   }
   .block-itg-story-list{
     margin: 10px 0 0;
@@ -8137,6 +8138,7 @@ div.node{
         padding: 0 !important;
       }
     }
+    #idIssue{color: red;}
   }
 
   .itg-sidebar-form{
@@ -8595,25 +8597,36 @@ div.node{
               background-color: #ff1f1f !important;
             }
           }
-          &:hover{
-            span{
-              background-color: #ffc106;
-            }
-          }
         }
         .form-radio, .form-checkbox{
+          width: calc(100% - 30px);
+          height: 100%;
           position: absolute;
+          z-index: 99;
           opacity: 0;
-          &:checked + label{            
-            color: #000;   
-            padding:0;
-            span{
-              background-color: #ffc106;
-            }
+          &:hover + label span, &:checked + label span{            
+            color: #000;
+            background-color: #ffc106;
           }
         }
       }
     }
+    .form-type-radios{
+      .form-type-radio{
+        .form-radio:checked{
+          & + label{
+            span.right-answer{
+              background-color: #1ECE1E !important;
+            }
+            span.wrong-answer{
+              background-color: #ff1f1f !important;
+            }
+          } 
+        }
+      }
+    }
+    
+    
     .quiz-media-container{
       float: left;
       width: 170px;
@@ -8872,6 +8885,7 @@ div.node{
       }
     } 
   }
+  .form-field-name-field-story-node-identity{@extend .hide;}
 }
 .page-menu-manager-third .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-tid{width: auto; padding-right: 0;}
 [id*="views-exposed-form-menu-manager-menu-manager-page"]{
@@ -10404,7 +10418,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     border-bottom: 1px solid #d8d8d8;
     margin-bottom: 20px;
     .form-type-checkbox{
-      padding: 10px 0;
+      padding: 10px;
       border-top: 1px solid #d8d8d8;
     }
   }
@@ -10715,9 +10729,10 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     }
   }
 }
+.node-event_backend-form .form-field-name-field-ticket-group-type{@extend .pos-rel;}
 [id*="field-ticket-group-type-values"]{
   .form-type-textfield > label, .form-type-select > label{
-    width: 2280px;
+    width: 280px;
   }
   thead{display: none;}
   tbody{
@@ -10725,6 +10740,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       td{
         background-color: #e5e5e5;
         float: left;
+        @extend .pos-rel;
         margin-bottom: 10px;
         width: 100%;
         > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
@@ -10765,4 +10781,43 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     float: right;
     font-size: 20px;
   }
+}
+#cboxClose{background: url(../images/controls.png) no-repeat -25px 0px;}
+.node-page-form{
+  .form-field-name-field-page-section{@extend .hide;}
+}
+[id*="views-exposed-form-browse-content-page"]{
+  .views-widget-filter-field_itg_content_publish_date_value{
+    width: 300px !important;
+    .views-widget{
+      .container-inline-date {
+        clear: none;
+        float: left;       
+        width: 49%;
+        &:first-child{
+           padding-right: 10px;
+        }
+        label{display: none !important;}
+      }
+    }
+  }
+}
+
+.page-itg-social-media-promote .promote-sidebar{
+    width: 70%;
+    float: none;
+    margin: 0 auto;
+}
+.page-itg-social-media-promote {
+    header{
+        display: none;   
+    }
+    #main{
+     > .container{
+        display: none;
+            &#content{
+                display: block;
+            }
+        }   
+    }    
 }

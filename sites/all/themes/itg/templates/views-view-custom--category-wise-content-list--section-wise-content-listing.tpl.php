@@ -31,14 +31,14 @@ global $base_url;
             </div>
             <div class="detail"><h3><?php 
                 if(function_exists('itg_common_get_smiley_title')) {
-                  print itg_common_get_smiley_title($row['nid'] , 0, 35);
+                  print l(itg_common_get_smiley_title($row['nid'] , 0, 100) , "node/".$row['nid'] , array("html" => TRUE));
                 }
                 else {
-                  print $row['title'];
+                  print l(strip_tags(mb_strimwidth($row['title'], 0, 120, "..")) , "node/".$row['nid']);
                 }
                 ?></h3>
                 <?php if (strtolower($row['type']) == 'story'): ?>
-                    <p><?php print $row['field_story_kicker_text']; ?></p>
+                <p><?php if(isset($row['field_story_kicker_text'])) { print $row['field_story_kicker_text']; } ?></p>
                 <?php elseif ($row['type'] == 'photogallery'): ?>
                     <p><?php print $row['field_gallery_kicer']; ?></p>
                 <?php elseif ($row['type'] == 'photogallery'): ?>

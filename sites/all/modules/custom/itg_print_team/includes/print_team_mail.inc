@@ -35,7 +35,8 @@ function itg_print_team_send_idea_status_mail($node, $source, $op_type = FALSE) 
   );
 
   // Send mail function
-  drupal_mail('itg_print_team_status', 'print_team_mail', $user_email_ids, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  // for code email
+  //drupal_mail('itg_print_team_status', 'print_team_mail', $user_email_ids, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
 }
 
 /**

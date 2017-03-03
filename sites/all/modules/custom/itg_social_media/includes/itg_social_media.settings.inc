@@ -33,7 +33,7 @@ function itg_social_media_fb_connection() {
     'app_secret' => variable_get('facebook_app_secret'),
     'default_graph_version' => 'v2.5',
   ]);
-
+  
   return $fb;
 }
 

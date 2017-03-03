@@ -18,7 +18,11 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
         <div class ="video-landing-header">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="video-heading"><?php print $row['title']; ?></h1>
+                    <h1 class="video-heading"><?php print $row['title']; ?></h1><?php global $user;
+        if(in_array('Social Media', $user->roles)) {?>
+         <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $video_node->nid;?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span>promote</span></a>   
+        <?php }?>
+                    
                 </div>
                 <div class="col-md-8 video-header-left">
                     <div class="video">

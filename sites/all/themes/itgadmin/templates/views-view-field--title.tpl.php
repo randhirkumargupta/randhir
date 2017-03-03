@@ -26,16 +26,17 @@
 
 <?php
 global $base_url;
-if ($row->_field_data['nid']['entity']->type == 'event_backend') {
+if (isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['nid']['entity']->type == 'event_backend' || $row->_field_data['nid']['entity']->type == 'itg_funalytics')) {
   print $output;
-} if ($row->_field_data['nid']['entity']->type == 'blog' || 
+} if (isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['nid']['entity']->type == 'blog' || 
         $row->_field_data['nid']['entity']->type == 'photogallery' || 
         $row->_field_data['nid']['entity']->type == 'videogallery' ||
         $row->_field_data['nid']['entity']->type == 'mega_review_critic' ||
         $row->_field_data['nid']['entity']->type == 'podcast' ||
-        $row->_field_data['nid']['entity']->type == 'breaking_news') {
+        $row->_field_data['nid']['entity']->type == 'story' ||
+        $row->_field_data['nid']['entity']->type == 'breaking_news')) {
   
-    if ($row->_field_data['nid']['entity']->status == 0) {
+    if (isset($row->_field_data['nid']['entity']->status) && $row->_field_data['nid']['entity']->status == 0) {
       print l(strip_tags($output), 'node/'.$row->nid, array('attributes' => array('target' => '_blank')));
     } else {
         if (BACKEND_URL == $base_url) {

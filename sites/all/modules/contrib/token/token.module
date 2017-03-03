@@ -575,8 +575,19 @@ function _token_module($type, $name) {
 /**
  * uasort() callback to sort tokens by the 'name' property.
  */
+//function token_asort_tokens($token_a, $token_b) {
+//  return strnatcmp($token_a['name'], $token_b['name']);
+//}
+
+/**
+ * Patch By kellton
+ */
 function token_asort_tokens($token_a, $token_b) {
-  return strnatcmp($token_a['name'], $token_b['name']);
+  if(is_array($token_a) && is_array($token_b) ) {
+    if(array_key_exists('name',$token_a) && array_key_exists('name',$token_b)) {
+      return strnatcmp($token_a['name'], $token_b['name']);
+    }
+  }
 }
 
 /**
