@@ -745,13 +745,6 @@ function itg_custom_lock_delete() {
   exit;
 }
 
-/**
- * Implement hook_mail_alter()
- * @param array $message
- */
-//function itg_custom_mail_alter(&$message) {
-//    $message['send'] = FALSE;
-//}
 
 /** Implements itg_apache_solr_get_site_hash();
  */
@@ -775,7 +768,7 @@ function itg_common_mail_alter(&$message) {
   global $user, $base_url;  
  
   if (FRONT_URL == $base_url || BACKEND_URL == $base_url) {
-    $message['send'] = FALSE;
+    //$message['send'] = FALSE;
   }
   
 }

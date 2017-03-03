@@ -804,6 +804,7 @@ function itg_workflow_node_insert($node) {
 
   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
     //drupal_set_message("under itg_workflow_node_insert");
+    // for code email
     /* if (!array_key_exists(COPY_EDITOR, $user->roles) &&
       !array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) &&
       !array_key_exists(EDITOR, $user->roles) &&
@@ -827,7 +828,7 @@ function itg_workflow_node_insert($node) {
  */
 function itg_workflow_node_update($node) {
   global $user;
-  watchdog("email_test", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
+  //watchdog("email_test", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
     //drupal_set_message("under itg_workflow_node_update");
     // get preview log ID.
@@ -878,11 +879,11 @@ function itg_workflow_node_update($node) {
         //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
       }
 
-      $user_email = get_email_by_roll($rid);
+      //$user_email = get_email_by_roll($rid);
       $user_email[] = $itguser->mail;
 
       if(itg_workflow_stop_email_during_bulk_operation($_REQUEST)) {
-        workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
+        //workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
       }
       if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
         if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
@@ -901,12 +902,12 @@ function itg_workflow_node_update($node) {
               //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
             }
 
-            $user_email = get_email_by_roll($rid);
+            //$user_email = get_email_by_roll($rid);
             $user_email[] = $itguser->mail;
 
             unset($_SESSION['node_preview_unique']);
             if(itg_workflow_stop_email_during_bulk_operation($_REQUEST)) {
-              workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
+              //workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
             }
           }
         }
