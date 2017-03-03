@@ -3495,12 +3495,13 @@ body .program-livetv.effect-added .light-on-text {
   border-radius: 0 7px 7px 0;
   color: #fff;
   position: absolute;
-  top: 138px;
+  top: 50%;
   z-index: 1;
   font-size: 28px;
   text-align: center;
   line-height: 70px;
   cursor: pointer;
+  margin-top: -33px;
 }
 .story-associate-content .view-photo-landing-slider .videogallery-slider .fa-chevron-left {
   left: 0;
