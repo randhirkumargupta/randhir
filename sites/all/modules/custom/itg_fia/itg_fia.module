@@ -1,11 +1,6 @@
 <?php
 
 /**
- * @file
- * Render commenting interface for the taxonomy terms.
- */
-
-/**
  * Implements hook_menu().
  */
 function itg_fia_menu() {
