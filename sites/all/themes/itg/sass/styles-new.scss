@@ -570,6 +570,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     font: 500 27px/27px Roboto;
     text-transform: uppercase;
     padding: 12px 0 2px;
+    word-wrap: break-word;
   }
   .logout-link a{
     color: #777;
@@ -2711,12 +2712,8 @@ body.has-cart-popup{
           }
         }
     }
-    .social-share{
-/*        display: inline-block;
-        vertical-align: top;
-        width: 100%;
-        text-align: center;*/    
-        width: 51%;
+    .social-share{  
+        width: 275px;
         margin: 0 auto;
         display: block;
         overflow: hidden;
