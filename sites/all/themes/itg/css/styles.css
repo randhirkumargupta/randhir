@@ -88,7 +88,7 @@ h4.heading a {
   clear: both;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .dont-miss ul, #block-itg-widget-yearende-left-top-news .top-news ul, #block-itg-widget-yearende-left-top-videos .top-video ul, .osscar-video ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-event-subsite-speaker-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, .movie-layout-page ul, #block-itg-menu-manager-third-level-menu ul, .election-page .key-candidate ul, #block-itg-live-tv-live-tv-video-page ul, #block-menu-menu-about-us-page-menu ul, #block-itg-front-end-common-related-photo-block #related-photo ul, #block-itg-front-end-common-related-video-block #related-photo ul, .site-map ul {
+.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .dont-miss ul, #block-itg-widget-yearende-left-top-news .top-news ul, #block-itg-widget-yearende-left-top-videos .top-video ul, .osscar-video ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-event-subsite-speaker-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, .movie-layout-page ul, #block-itg-menu-manager-third-level-menu ul, .election-page .key-candidate ul, #block-itg-live-tv-live-tv-video-page ul, #block-menu-menu-about-us-page-menu ul, #block-itg-front-end-common-related-photo-block #related-photo ul, #block-itg-front-end-common-related-photo-block #related-video ul, #block-itg-front-end-common-related-video-block #related-photo ul, #block-itg-front-end-common-related-video-block #related-video ul, .site-map ul {
   list-style-type: none;
 }
 
@@ -3148,11 +3148,11 @@ footer .multiple-items-footer i.slick-next {
 .story-section .story-associate-content #videogallery-iframe #close-big-story {
   position: absolute;
   right: 0;
-  top: -20px;
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-  border-radius: 3px 3px 0 0;
+  top: 0px;
+  width: 25px;
+  height: 22px;
+  line-height: 22px;
+  border-radius: 0;
   box-shadow: none;
   background: #bb0a0a;
 }
@@ -11295,46 +11295,47 @@ h1.about-us-heading + div p {
 #block-itg-front-end-common-related-photo-block h3 span, #block-itg-front-end-common-related-video-block h3 span {
   padding-left: 0;
 }
-#block-itg-front-end-common-related-photo-block #related-photo .row, #block-itg-front-end-common-related-video-block #related-photo .row {
+#block-itg-front-end-common-related-photo-block #related-photo .row, #block-itg-front-end-common-related-photo-block #related-video .row, #block-itg-front-end-common-related-video-block #related-photo .row, #block-itg-front-end-common-related-video-block #related-video .row {
   margin: 0;
 }
-#block-itg-front-end-common-related-photo-block #related-photo .col-md-3, #block-itg-front-end-common-related-video-block #related-photo .col-md-3 {
+#block-itg-front-end-common-related-photo-block #related-photo .col-md-3, #block-itg-front-end-common-related-photo-block #related-video .col-md-3, #block-itg-front-end-common-related-video-block #related-photo .col-md-3, #block-itg-front-end-common-related-video-block #related-video .col-md-3 {
   width: 200px;
 }
-#block-itg-front-end-common-related-photo-block #related-photo .col-md-3 span, #block-itg-front-end-common-related-video-block #related-photo .col-md-3 span {
+#block-itg-front-end-common-related-photo-block #related-photo .col-md-3 span, #block-itg-front-end-common-related-photo-block #related-video .col-md-3 span, #block-itg-front-end-common-related-video-block #related-photo .col-md-3 span, #block-itg-front-end-common-related-video-block #related-video .col-md-3 span {
   padding-right: 30px;
   display: block;
+  margin-top: 10px;
 }
-#block-itg-front-end-common-related-photo-block #related-photo ul, #block-itg-front-end-common-related-video-block #related-photo ul {
+#block-itg-front-end-common-related-photo-block #related-photo ul, #block-itg-front-end-common-related-photo-block #related-video ul, #block-itg-front-end-common-related-video-block #related-photo ul, #block-itg-front-end-common-related-video-block #related-video ul {
   zoom: 1;
 }
-#block-itg-front-end-common-related-photo-block #related-photo ul:before, #block-itg-front-end-common-related-photo-block #related-photo ul:after, #block-itg-front-end-common-related-video-block #related-photo ul:before, #block-itg-front-end-common-related-video-block #related-photo ul:after {
+#block-itg-front-end-common-related-photo-block #related-photo ul:before, #block-itg-front-end-common-related-photo-block #related-photo ul:after, #block-itg-front-end-common-related-photo-block #related-video ul:before, #block-itg-front-end-common-related-photo-block #related-video ul:after, #block-itg-front-end-common-related-video-block #related-photo ul:before, #block-itg-front-end-common-related-video-block #related-photo ul:after, #block-itg-front-end-common-related-video-block #related-video ul:before, #block-itg-front-end-common-related-video-block #related-video ul:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-#block-itg-front-end-common-related-photo-block #related-photo ul:after, #block-itg-front-end-common-related-video-block #related-photo ul:after {
+#block-itg-front-end-common-related-photo-block #related-photo ul:after, #block-itg-front-end-common-related-photo-block #related-video ul:after, #block-itg-front-end-common-related-video-block #related-photo ul:after, #block-itg-front-end-common-related-video-block #related-video ul:after {
   clear: both;
 }
-#block-itg-front-end-common-related-photo-block #related-photo ul li, #block-itg-front-end-common-related-video-block #related-photo ul li {
+#block-itg-front-end-common-related-photo-block #related-photo ul li, #block-itg-front-end-common-related-photo-block #related-video ul li, #block-itg-front-end-common-related-video-block #related-photo ul li, #block-itg-front-end-common-related-video-block #related-video ul li {
   padding-right: 0px;
   padding-left: 0px;
   /*            &:nth-child(4n+1){
                   clear:left;
               }*/
 }
-#block-itg-front-end-common-related-photo-block #related-photo ul li a, #block-itg-front-end-common-related-video-block #related-photo ul li a {
+#block-itg-front-end-common-related-photo-block #related-photo ul li a, #block-itg-front-end-common-related-photo-block #related-video ul li a, #block-itg-front-end-common-related-video-block #related-photo ul li a, #block-itg-front-end-common-related-video-block #related-video ul li a {
   display: block;
   overflow: hidden;
 }
-#block-itg-front-end-common-related-photo-block #related-photo .views-field-ds-changed, #block-itg-front-end-common-related-video-block #related-photo .views-field-ds-changed {
+#block-itg-front-end-common-related-photo-block #related-photo .views-field-ds-changed, #block-itg-front-end-common-related-photo-block #related-video .views-field-ds-changed, #block-itg-front-end-common-related-video-block #related-photo .views-field-ds-changed, #block-itg-front-end-common-related-video-block #related-video .views-field-ds-changed {
   display: block;
   font-size: 12px;
   color: #b1b1b1;
   padding: 8px 0 5px;
 }
-#block-itg-front-end-common-related-photo-block #related-photo .slick-next, #block-itg-front-end-common-related-photo-block #related-photo .slick-prev, #block-itg-front-end-common-related-video-block #related-photo .slick-next, #block-itg-front-end-common-related-video-block #related-photo .slick-prev {
+#block-itg-front-end-common-related-photo-block #related-photo .slick-next, #block-itg-front-end-common-related-photo-block #related-photo .slick-prev, #block-itg-front-end-common-related-photo-block #related-video .slick-next, #block-itg-front-end-common-related-photo-block #related-video .slick-prev, #block-itg-front-end-common-related-video-block #related-photo .slick-next, #block-itg-front-end-common-related-video-block #related-photo .slick-prev, #block-itg-front-end-common-related-video-block #related-video .slick-next, #block-itg-front-end-common-related-video-block #related-video .slick-prev {
   background: #000 none repeat scroll 0 0;
   color: #fff;
   cursor: pointer;
@@ -11348,11 +11349,11 @@ h1.about-us-heading + div p {
   width: 25px;
   z-index: 1;
 }
-#block-itg-front-end-common-related-photo-block #related-photo .slick-next, #block-itg-front-end-common-related-video-block #related-photo .slick-next {
+#block-itg-front-end-common-related-photo-block #related-photo .slick-next, #block-itg-front-end-common-related-photo-block #related-video .slick-next, #block-itg-front-end-common-related-video-block #related-photo .slick-next, #block-itg-front-end-common-related-video-block #related-video .slick-next {
   right: 0;
   left: auto;
 }
-#block-itg-front-end-common-related-photo-block #related-photo .slick-prev, #block-itg-front-end-common-related-video-block #related-photo .slick-prev {
+#block-itg-front-end-common-related-photo-block #related-photo .slick-prev, #block-itg-front-end-common-related-photo-block #related-video .slick-prev, #block-itg-front-end-common-related-video-block #related-photo .slick-prev, #block-itg-front-end-common-related-video-block #related-video .slick-prev {
   right: auto;
   left: 0;
 }

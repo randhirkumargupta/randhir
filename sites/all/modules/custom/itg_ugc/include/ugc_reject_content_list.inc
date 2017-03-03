@@ -105,11 +105,11 @@ function itg_ugc_reject_content() {
       if (is_array($query) && empty($query))
       {
 
-        $userData = $people->find(array("title" => array('$ne' => null), "status" => 0, "publish_status" => array('$ne' => null)))->limit($limit)->sort(array('publish_date_time' => -1));
+        $userData = $people->find(array("title" => array('$ne' => null), "status" => 0, "publish_status" => array('$ne' => null)))->limit($limit)->sort(array('_id' => -1));
       }
       else
       {
-        $userData = $people->find($query)->limit($limit)->sort(array('publish_date_time' => -1));
+        $userData = $people->find($query)->limit($limit)->sort(array('_id' => -1));
       }
 
       $rows = array();

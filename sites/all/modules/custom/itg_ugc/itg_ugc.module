@@ -593,10 +593,12 @@ function ugc_form_submit_handler($form, &$form_state) {
     unset($_SESSION['messages']['status']);
   }
   // Set redirection after submit.
-  if ($arg[0] == 'personalization' && $arg[1] == 'my-content')
-  {
+  if ($arg[0] == 'personalization' && $arg[1] == 'my-content') {
     $_REQUEST['destination'] = 'personalization/my-content';
-    $form_state['redirect'] = 'personalization/my-content';
+    $form_state['redirect'] = array(
+      'personalization/my-content',
+      array('query' => array('ugc' => 'success'))
+    );
   }
   else
   {
