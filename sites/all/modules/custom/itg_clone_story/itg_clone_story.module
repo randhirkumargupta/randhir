@@ -15,24 +15,36 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
         $label = html_entity_decode($clone_arr_response->label, ENT_QUOTES);
         $kicker = html_entity_decode($clone_arr_response->sm_field_story_kicker_text[0], ENT_QUOTES);
 
-        $image_array = array('sm_image_uri_field_story_extra_large_image',
-          'sm_image_uri_field_story_small_image',
-          'sm_image_uri_field_story_large_image',
-          'sm_image_uri_field_story_medium_image',
-          'sm_image_uri_field_story_extra_small_image'
+        // code to assign image on clone story
+        $image_array = array('sm_field_custom_story_extra_large_url',
+          'sm_field_custom_story_large_url',
+          'sm_field_custom_story_medium_large_url',
+          'sm_field_custom_story_small_large_url',
+          'sm_field_custom_story_extra_small_url'
         );
 
         foreach ($image_array as $value) {
-          if (!empty($clone_arr_response->{$value}[0]))
-          {
+          if (!empty($clone_arr_response->{$value}[0])) {
             $image = $clone_arr_response->{$value}[0];
-            $url = $clone_arr_response->site . 'sites/default/files/' . $image;
-            $extra_url = str_replace('public://', '', $url);
-            $extra_large_fid = itg_clone_image_mapping($extra_url);
-            $machine_name = str_replace('sm_image_uri_', '', $value);
-            $form[$machine_name][LANGUAGE_NONE][0]['#default_value']['fid'] = $extra_large_fid;
+            $extra_large_fid = itg_clone_image_mapping($image);
+            if ($value == 'sm_field_custom_story_extra_large_url') {
+              $form['field_story_extra_large_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $extra_large_fid;
+            }
+            if ($value == 'sm_field_custom_story_large_url') {
+              $form['field_story_large_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $extra_large_fid;
+            }
+            if ($value == 'sm_field_custom_story_medium_large_url') {
+              $form['field_story_medium_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $extra_large_fid;
+            }
+            if ($value == 'sm_field_custom_story_small_large_url') {
+              $form['field_story_small_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $extra_large_fid;
+            }
+            if ($value == 'sm_field_custom_story_extra_small_url') {
+              $form['field_story_extra_small_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $extra_large_fid;
+            }
           }
         }
+
 
         $form['title']['#default_value'] = $label;
         $form['body'][LANGUAGE_NONE][0]['#default_value'] = $clone_arr_response->sm_field_custom_story_description_text[0];
@@ -111,25 +123,14 @@ function itg_story_clone_data($keyword, $type) {
  */
 function itg_clone_story_views_pre_render(&$view) {
 
-  if ($view->name == "story_clone")
-  {
+  if ($view->name == "story_clone") {
+    if (function_exists('itg_apache_solr_get_site_hash')) {
+      $hash = itg_apache_solr_get_site_hash();
+    }
 
     foreach ($view->result as $related_result) {
-//      $splittedsite = explode("/", $related_result->site);
-//      $explode_site = explode(".", $splittedsite[2]);
-//      $related_result->site = strtoupper($explode_site[0]);
-      if ($related_result->hash == '5fyeg7')
-      {
-        $related_result->site = 'DEV';
-      }
-      elseif ($related_result->hash == '2e1u4m')
-      {
-        $related_result->site = 'QA';
-      }
-      elseif ($related_result->hash == 'e49it8')
-      {
-        $related_result->site = 'STAGE';
-      }
+      $key = $related_result->hash;
+      $related_result->site = $hash[$key];
     }
   }
 }

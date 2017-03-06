@@ -80,8 +80,6 @@
         tagurl = jQuery('#tagurl').val();
         tagid = jQuery('#tagid').val();
 
-
-
         var img = jQuery('#imgtag').find('img');
         if (/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(tagurl)) {
             jQuery('.web-error').hide();
@@ -111,9 +109,6 @@
 
 
     });
-
-
-
 
     // Cancel the tag box.
     jQuery(document).on('click', '#tagit #btncancel', function() {
@@ -155,8 +150,6 @@
                 jQuery('#tagit').remove();
                 viewtag(image_fiedlid);
 
-
-
             }
         });
     });
@@ -177,7 +170,6 @@
                 //get tags if present
                 jQuery('#tagit').remove();
                 viewtag(image_fiedlid);
-
 
             }
         });
@@ -203,10 +195,6 @@
             }
         });
     });
-
-
-
-
 
 
     viewtag(image_fiedlid); // view all tags available on page load
@@ -341,7 +329,7 @@
                                     parent.jQuery('[name="' + captionid1 + '"]').val(credit);
                                     hideloader();
                                     parent.jQuery.colorbox.close();
-                                }, 2000);
+                                }, 1000);
                             }
 
 
