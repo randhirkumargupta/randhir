@@ -29,8 +29,7 @@ function feature_category_management_field_group_info() {
       3 => 'field_cm_no_follow',
       4 => 'field_cm_redirection_url',
       5 => 'field_sponser_logo',
-      6 => 'field_time_period',
-      7 => 'name',
+      6 => 'name',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -61,14 +60,14 @@ function feature_category_management_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Selection Details',
-    'weight' => '5',
+    'weight' => '6',
     'children' => array(
-      0 => 'field_cm_select_type',
-      1 => 'field_cm_select_template',
-      2 => 'field_cm_select_template_type',
-      3 => 'field_set_as_featured_cate',
-      4 => 'field_cm_category_banner',
-      5 => 'field_cm_category_color',
+      0 => 'field_cm_category_banner',
+      1 => 'field_cm_category_color',
+      2 => 'field_cm_select_template',
+      3 => 'field_cm_select_template_type',
+      4 => 'field_cm_select_type',
+      5 => 'field_set_as_featured_cate',
     ),
     'format_type' => 'div',
     'format_settings' => array(

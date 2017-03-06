@@ -8,11 +8,9 @@
  * get tweets
  */
 function live_score() {
-    $urllivescore = variable_get('reporter_tid');
+    $urllivescore = variable_get('live_score_url');
     try {
-        if (is_readable($urllivescore)) {
-            $dataxml = simplexml_load_file($urllivescore);
-        }
+           $dataxml = simplexml_load_file($urllivescore);
     } catch (Exception $ex) {
         drupal_set_message($ex->getMessage());
     }
