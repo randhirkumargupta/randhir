@@ -580,10 +580,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
 }
 
 @media only screen and (max-width:768px){
-  ::-webkit-scrollbar {
-    -webkit-appearance: none;// you need to tweak this to make it available..
-    width: 8px;
-  }
+  
   .widget-wrapper {
     overflow: initial;
   }

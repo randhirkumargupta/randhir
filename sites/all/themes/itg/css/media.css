@@ -579,11 +579,6 @@
   /*budget page css end*/
 }
 @media only screen and (max-width: 768px) {
-  ::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: 8px;
-  }
-
   .widget-wrapper {
     overflow: initial;
   }
