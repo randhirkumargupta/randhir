@@ -44,22 +44,6 @@ function itg_seo_node_data($node) {
       drupal_add_html_head($element, 'robots');
      }
     }
-    
-    // meta property for story node for facebook instant article creation
-    $app_id = variable_get('itg_fia_config');
-    if (!empty($app_id)) {
-       $element = array(
-          '#tag' => 'meta',
-          '#attributes' => array(
-            'property' => 'fb:pages',
-            'content' => $app_id,
-          ),
-       );
-
-     }
-     if (!empty($element)) {
-      drupal_add_html_head($element, 'fb:pages');
-     }
   } 
   
   
