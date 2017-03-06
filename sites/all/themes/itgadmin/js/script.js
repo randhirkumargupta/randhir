@@ -730,6 +730,8 @@ jQuery(document).ready(function() {
         var badge_three_val = $('input[name="' + badge_three + '"]').val();
         var badge_four_val = $('input[name="' + badge_four + '"]').val();
         var badge_five_val = $('input[name="' + badge_five + '"]').val();
+        var fb_img_soc = $('input[name="' + fb_img_soc + '"]').val();
+        var tw_img_soc = $('input[name="' + tw_img_soc + '"]').val();
         if (fb_img_soc > 0) {
             $('body').find('.div_itg_fb_img').hide();
         }
