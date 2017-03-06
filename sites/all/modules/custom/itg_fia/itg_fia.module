@@ -39,3 +39,20 @@ function itg_fia_config_form($form, &$form_state) {
   $form = system_settings_form($form);
   return $form;
 }
+
+/**
+ * Implements hook_html_head_alter().
+ */
+function itg_fia_html_head_alter(&$head_elements) {
+  $fia_pagesid = variable_get('itg_fia_config', '');
+  if (!empty($fia_pagesid)) {
+    $head_elements['fia_pagesid'] = array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'property' => 'fb:pages',
+        'content' => $fia_pagesid
+      ),
+    );
+  }
+}
