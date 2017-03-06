@@ -1,6 +1,7 @@
 <?php
 
 module_load_include('inc', 'itg_sso_reg', 'includes/itg_sso_mail');
+module_load_include('inc', 'itg_sso_reg', 'includes/itg_sso_otp_mail');
 module_load_include('inc', 'itg_sso_reg', 'includes/common_fn');
 module_load_include('inc', 'itg_sso_reg', 'includes/sso_user_form');
 module_load_include('inc', 'itg_sso_reg', 'includes/sso_user_change_password');
@@ -141,7 +142,11 @@ function itg_sso_reg_theme($existing, $type, $theme, $path) {
     'itg_sso_notification_mail' => array(
       'variables' => array('account' => NULL, 'url_info' => NULL),
       'template' => 'templates/sso-notification-mail',
-    )
+    ),
+   'itg_sso_otp_mail' => array(
+      'variables' => array('rand_otp' => NULL),
+      'template' => 'templates/sso-otp-mail',
+    ),
   );
 
   return $themes;
