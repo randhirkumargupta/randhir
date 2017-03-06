@@ -5963,6 +5963,9 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
 }
 @media all and(max-width: 767px){
+  .personal-list{
+    margin: 0 -15px;
+  }
   #block-views-video-landing-header-block{
     display: inline-block;
     vertical-align: top;
@@ -6148,15 +6151,12 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     }
     .pregress-bar{
       margin-top: 5px;
-      .pregress-bar-active{
-        max-width: 88%;
-        height: 2px;
-        &:before{
-          height: 2px;
-        }
+      padding-left: 10px;
+      .progress-bar-div{
+        max-width: 90%;
       }
       span.current-badge, span.next-badge{font-size: 10px; line-height: 16px;}
-      span.current-badge{left: 0; top: 0; text-align: left;}
+      span.current-badge{left: 5px; top: 0; text-align: left;}
       span.next-badge{right: 0; top: 0; text-align: right;}
       span.current-badge small, 
       span.next-badge small{margin-bottom: 0; font-size: 12px;}

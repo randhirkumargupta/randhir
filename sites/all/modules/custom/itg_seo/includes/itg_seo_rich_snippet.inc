@@ -44,7 +44,6 @@ function itg_seo_node_data($node) {
       drupal_add_html_head($element, 'robots');
      }
     }
-    
   } 
   
   

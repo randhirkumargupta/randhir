@@ -580,6 +580,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
 }
 
 @media only screen and (max-width:768px){
+  
+  .widget-wrapper {
+    overflow: initial;
+  }
     header {
         margin-bottom: 15px;
     }
