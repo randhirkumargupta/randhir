@@ -37,7 +37,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                   <div class="show-embed-code-div">
                     <div class="copy-sample-code">
                      <textarea readonly="true">
-                      <div id='IndiaToday_gallery' data-type='STAGE'></div>
+                      <div id='IndiaToday_gallery' data-type='UAT'></div>
                           <script src='<?php print $base_url;?>/sites/all/themes/itg/js/photo_iframeResizer.js'>
                           </script>
                           <script> 
@@ -167,7 +167,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                   <div class="show-embed-code-div">
                     <div class="copy-sample-code">
                         <textarea readonly="true">
-                      <div id='IndiaToday_gallery' data-type='STAGE'></div>
+                      <div id='IndiaToday_gallery' data-type='UAT'></div>
                           <script src='<?php print $base_url;?>/sites/all/themes/itg/js/photo_iframeResizer.js'>
                           </script>
                           <script> 

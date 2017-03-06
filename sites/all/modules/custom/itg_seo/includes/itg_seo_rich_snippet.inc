@@ -44,28 +44,6 @@ function itg_seo_node_data($node) {
       drupal_add_html_head($element, 'robots');
      }
     }
-    
-    // meta property for story node for facebook instant article creation
-    $social_media_int = $node->field_story_social_media_integ[LANGUAGE_NONE];
-    if(isset($social_media_int) && is_array($social_media_int) && !empty($social_media_int)) {
-      foreach ($social_media_int as $smi_key =>  $smi_val) {
-        $smi_data[] = $social_media_int[$smi_key]['value'];
-      }
-      if (in_array('facebook_instant_article', $smi_data)) {
-        $app_id = variable_get('itg_fia_config');
-        $element = array(
-           '#tag' => 'meta',
-           '#attributes' => array(
-             'property' => 'fb:pages',
-             'content' => $app_id,
-           ),
-        );
-
-      }
-     if (!empty($element)) {
-      drupal_add_html_head($element, 'fb:pages');
-     }
-    }
   } 
   
   
