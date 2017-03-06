@@ -2912,6 +2912,7 @@ div.node{
         .form-submit{
           margin-right: 0;
           margin-left: 200px;
+          line-height: normal;
         }
         .file{
           @extend .dib;
@@ -3028,7 +3029,7 @@ div.node{
             position: absolute;
             line-height: 18px;
             text-transform: capitalize;
-            top: 0;
+            top: 4px;
             &+.ajax-progress-throbber{
               display: none;
             }
@@ -3065,10 +3066,51 @@ div.node{
           }
         }
       }
+      &.form-item-itg-twitter-img{
+        #edit-itg-twitter-img-upload{
+          .form-submit[value="Remove"]{
+            & + .div_itg_twitter_img, & + .ajax-progress + .div_itg_twitter_img{
+              a{
+                @extend .hide;
+              }
+            }
+          }
+          .form-submit[value="Upload"]{
+            @extend .hide;
+            & + .div_itg_twitter_img{
+              a{
+                background-color: #fff;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                color: #323232;
+                font-size: 13px;
+                padding: 5px 10px;
+                display: inline-block;
+                vertical-align: top;
+              }
+            }
+          }
+          span.file{
+            position: absolute;
+            top: 70px;
+          }
+        }
+      }
+      #edit-itg-fb-video-upload, #edit-itg-twit-video-upload{
+        .form-file{
+          display: inline-block; 
+          vertical-align: top; 
+          width: 175px;
+          & + .form-submit{margin-top: 3px;}
+        }
+      }
     }
     > .form-submit{
       margin: 20px 0 0 130px;
     }
+  }
+  .form-item-itg-facebook-narrative, .form-item-itg-twitter-narrative{
+    & + p{font-size: 12px; padding-left: 130px; margin-bottom: 10px;}
   }
 }
 [id*="field-program-schedule-values"],
