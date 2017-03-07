@@ -486,12 +486,11 @@
             });
             
             // for html widgets
-            $('#content_widget_submit').click(function() {
+            $('#layout-content-submit').click(function() {
                 var base_url = settings.itg_story.settings.base_url;
                 // html widget value
                 var content_title = $('#edit-custom-content-title').val();                
-
-                if (html_title) {
+                if (content_title) {
                     $.ajax({
                         url: base_url + "/custom-content-widgets",
                         method: 'post',

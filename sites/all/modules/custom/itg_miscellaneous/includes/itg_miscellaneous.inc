@@ -8,6 +8,10 @@
  * Get itg layout list for admin
  * @return array $output
  */
+/*
+ * Inc file contains the common functions
+ */
+
 function itg_layout_list_delete() {
   // configure the table header columns
   $header = array(
@@ -120,17 +124,8 @@ function create_poll_table() {
     ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;';
     db_query($query); */ 
 
-  //$file_name = 'indiatoday-story_2016-06-01.xml';
-  //$file_name = 'indiatoday-story_2016-06-11.xml';
-  //$file_name = 'indiatoday-story_2016-06-21.xml';
-  //$file_name = 'indiatoday-story_2016-07-01.xml';
-  //$file_name = 'indiatoday-story_2016-08-01.xml';
-  //$file_name = 'indiatoday-story_2016-09-01.xml';
-  //$file_name = 'indiatoday-story_2016-10-01.xml';
-  //$file_name = 'indiatoday-story_2016-11-01.xml';
-  //$file_name = 'indiatoday-story_2016-12-01.xml';
-
-  $xml_path = 'sites/default/files' . '/xml_file_newcutxml/';
+  $file_name = 'indiatoday-story_2016-06-01_05.xml';
+  $xml_path = drupal_get_path('module', 'itg_dbmigrate') . '/xml_file/';
   $xml = simplexml_load_file($xml_path . $file_name, 'SimpleXMLElement');  
   $i = 0;
   foreach ($xml->story as $stories) {
@@ -320,4 +315,59 @@ function _map_xml_city($xml_city_id, &$stories) {
       ++$j;
     }
   }
+}
+  
+function create_section_cat_op($data, &$context) {
+// Mongo code will be here
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $people = $con->taxonomy_term_data_mongo;
+
+    // check connection
+    if ($con) {
+      $qry = array(
+          "tid" => (int) $data->tid,
+          "name" => $data->name,
+          "parent" => (int) $data->parent,
+          "vid" => (int) $data->vid,
+          "machine_name" => $data->machine_name,
+          "content_type" => get_content_type_list_for_this_term($data->tid),
+          "status" => 1,
+          'parent_data' => taxonomy_get_parents_all($data->tid),
+      );
+      $result = $people->insert($qry);
+    }
+    drupal_set_message('data inserted successfully for ' . json_encode($result));
+  }
+}
+
+/**
+ * Implements create_section_cat_op_batch_finished().
+ */
+function create_section_cat_op_batch_finished($success, $results, $operations) {
+  if ($success) {
+    drupal_set_message(t('migration processed successfully.'));
+  } else {
+    drupal_set_message(t('An error occurred while processing.'));
+  }
+}
+
+/**
+ * Implements get_content_type_list_for_this_term()
+ */
+function get_content_type_list_for_this_term($tid) {
+  $data = array();
+  $query = db_select('field_data_field_cm_select_type', 'td');
+  $res = $query
+          ->condition('td.entity_id', $tid)
+          ->fields('td', array('field_cm_select_type_value',))
+          ->execute();
+
+  foreach ($res as $result) {
+    $data[] = $result->field_cm_select_type_value;
+  }
+  if (!empty($data)) {
+    return implode(',', $data);
+  }
+  return '';
 }
