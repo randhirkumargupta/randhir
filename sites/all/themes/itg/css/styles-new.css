@@ -2867,7 +2867,7 @@ body.has-cart-popup {
 
 [id*="itg-sso-reg-multistep-form"] #email-sucess, [id*="itg-sso-reg-multistep-form"] #thank-you, [id*="itg-sso-reg-multistep-form"] #mobile-success, [id*="itg-user-forgot-password-multistep-form"] #email-sucess, [id*="itg-user-forgot-password-multistep-form"] #thank-you, [id*="itg-user-forgot-password-multistep-form"] #mobile-success {
   color: #009c00;
-  margin: 20px 0;
+  margin: 20px;
 }
 
 .sign-in-link {
@@ -6623,6 +6623,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 
   .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child {
     margin-left: 125px;
+  }
+
+  .sign-in-link a {
+    float: left;
   }
 }
 @media all and (max-width: 360px) {

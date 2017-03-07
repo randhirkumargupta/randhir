@@ -2804,7 +2804,7 @@ body.has-cart-popup{
 [id*="itg-sso-reg-multistep-form"], [id*="itg-user-forgot-password-multistep-form"]{
   #email-sucess, #thank-you, #mobile-success{
     color: #009c00;
-    margin: 20px 0;
+    margin: 20px;
   }
 }
 .sign-in-link{
@@ -6268,6 +6268,9 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     padding-right: 0;
   }
   .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child{margin-left: 125px;}
+  .sign-in-link a{
+    float: left;
+  }
 }
 @media all and (max-width: 360px){
   .cart-total-block .points-balance span:first-child{
