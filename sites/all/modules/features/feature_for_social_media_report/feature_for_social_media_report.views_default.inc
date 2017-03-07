@@ -210,7 +210,6 @@ function feature_for_social_media_report_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'recipe' => 'recipe',
     'story' => 'story',
     'videogallery' => 'videogallery',
     'photogallery' => 'photogallery',
@@ -255,7 +254,6 @@ function feature_for_social_media_report_views_default_views() {
   $handler->display->display_options['filters']['type_1']['table'] = 'node';
   $handler->display->display_options['filters']['type_1']['field'] = 'type';
   $handler->display->display_options['filters']['type_1']['value'] = array(
-    'recipe' => 'recipe',
     'story' => 'story',
     'videogallery' => 'videogallery',
     'photogallery' => 'photogallery',

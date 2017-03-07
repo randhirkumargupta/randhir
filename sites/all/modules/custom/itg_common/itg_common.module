@@ -26,6 +26,11 @@ function itg_common_init() {
     drupal_goto('user');
   }
   
+  // helper condition for user when directly hit base url
+  if ($theme == 'itgadmin' && $base_url == BACKEND_URL && $user->uid > 0 && !array_key_exists(FRONT_USER, $user->roles) && drupal_is_front_page()) {
+    drupal_goto('cms-user-dashboard');
+  }
+  
   if ($theme == 'itgadmin') {
     $settings = array();
     $settings['base_url'] = $base_url;
@@ -755,13 +760,6 @@ function itg_custom_lock_delete() {
   exit;
 }
 
-/**
- * Implement hook_mail_alter()
- * @param array $message
- */
-//function itg_custom_mail_alter(&$message) {
-//    $message['send'] = FALSE;
-//}
 
 /** Implements itg_apache_solr_get_site_hash();
  */
@@ -785,7 +783,7 @@ function itg_common_mail_alter(&$message) {
   global $user, $base_url;  
  
   if (FRONT_URL == $base_url || BACKEND_URL == $base_url) {
-    $message['send'] = FALSE;
+    //$message['send'] = FALSE;
   }
   
 }

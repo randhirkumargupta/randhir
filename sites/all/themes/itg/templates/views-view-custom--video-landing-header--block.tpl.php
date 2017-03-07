@@ -116,7 +116,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                               <div class="show-embed-code-div">
                                 <div class="copy-sample-code">
                                   <textarea readonly="true">
-                                  <div id='IndiaToday_gallery' data-type='STAGE'></div>
+                                  <div id='IndiaToday_gallery' data-type='UAT'></div>
                                   <script src='<?php print $base_url;?>/sites/all/themes/itg/js/video_iframeResizer.js'>
                                   </script>
                                   <script> 
@@ -173,7 +173,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                               <div class="show-embed-code-div">
                                 <div class="copy-sample-code">
                                   <textarea readonly="true">
-                                  <div id='IndiaToday_gallery' data-type='STAGE'></div>
+                                  <div id='IndiaToday_gallery' data-type='UAT'></div>
                                   <script src='<?php print $base_url;?>/sites/all/themes/itg/js/video_iframeResizer.js'>
                                   </script>
                                   <script> 

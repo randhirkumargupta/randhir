@@ -590,6 +590,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font: 500 27px/27px Roboto;
   text-transform: uppercase;
   padding: 12px 0 2px;
+  word-wrap: break-word;
 }
 .personalized-user .logout-link a {
   color: #777;
@@ -2777,11 +2778,7 @@ body.has-cart-popup {
   margin-top: 10px;
 }
 .page-user .social-share {
-  /*        display: inline-block;
-          vertical-align: top;
-          width: 100%;
-          text-align: center;*/
-  width: 51%;
+  width: 275px;
   margin: 0 auto;
   display: block;
   overflow: hidden;
@@ -6263,6 +6260,37 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
 }
 @media all and (max-width: 767px) {
+  .personal-list {
+    margin: 0 -15px;
+  }
+
+  #block-views-video-landing-header-block {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+  }
+  #block-views-video-landing-header-block .video-header-right .ads {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+  }
+
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-textarea,
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-text,
+  #content [id*="ugc-node-form"].ugc-custom-wrapper select {
+    width: 100%;
+  }
+
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-name,
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-city,
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-email,
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-section {
+    float: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
   .comment-user-details {
     text-align: left;
   }
@@ -6401,20 +6429,17 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
   .total-point-wrapper .pregress-bar {
     margin-top: 5px;
+    padding-left: 10px;
   }
-  .total-point-wrapper .pregress-bar .pregress-bar-active {
-    max-width: 88%;
-    height: 2px;
-  }
-  .total-point-wrapper .pregress-bar .pregress-bar-active:before {
-    height: 2px;
+  .total-point-wrapper .pregress-bar .progress-bar-div {
+    max-width: 90%;
   }
   .total-point-wrapper .pregress-bar span.current-badge, .total-point-wrapper .pregress-bar span.next-badge {
     font-size: 10px;
     line-height: 16px;
   }
   .total-point-wrapper .pregress-bar span.current-badge {
-    left: 0;
+    left: 5px;
     top: 0;
     text-align: left;
   }

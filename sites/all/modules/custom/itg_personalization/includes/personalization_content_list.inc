@@ -104,11 +104,11 @@ function itg_personalization_all_content_display() {
       if (is_array($query) && empty($query))
       {
 
-        $userData = $people->find(array("publish_status" => array('$ne' => 1), "status" => 1, "uid" => $user->uid))->limit($limit)->sort(array('publish_date_time' => -1));
+        $userData = $people->find(array("publish_status" => array('$ne' => 1), "status" => 1, "uid" => $user->uid))->limit($limit)->sort(array('_id' => -1));
       }
       else
       {
-        $userData = $people->find($query)->limit($limit)->sort(array('publish_date_time' => -1));
+        $userData = $people->find($query)->limit($limit)->sort(array('_id' => -1));
       }
 
       $rows = array();

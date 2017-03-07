@@ -26,9 +26,15 @@
 
 <?php
 global $base_url;
+
+if ($field->view->name == 'autocomplete_for_event' 
+        || $field->view->name == 'autocomplete_event_photo' 
+        || $field->view->name == 'podcast_for_event') {
+  print $output;
+} else
 if (isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['nid']['entity']->type == 'event_backend' || $row->_field_data['nid']['entity']->type == 'itg_funalytics')) {
   print $output;
-} if (isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['nid']['entity']->type == 'blog' || 
+} else if (isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['nid']['entity']->type == 'blog' || 
         $row->_field_data['nid']['entity']->type == 'photogallery' || 
         $row->_field_data['nid']['entity']->type == 'videogallery' ||
         $row->_field_data['nid']['entity']->type == 'mega_review_critic' ||
