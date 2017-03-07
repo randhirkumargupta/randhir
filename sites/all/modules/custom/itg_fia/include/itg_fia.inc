@@ -45,7 +45,8 @@ function itg_fia_xml_node_feed($query) {
     $audio_position = $node->field_facebook_audio_position[LANGUAGE_NONE][0]['value'];
     $audio_position = $node->field_facebook_instant_audio_url[LANGUAGE_NONE][0]['value'];
     $img_position = $node->field_animated_image_position[LANGUAGE_NONE][0]['value'];
-    $img_path .file_create_url($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri']);
+    $img_path = file_create_url($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri']);
+    
     $map_position = $node->field_facebook_map_position[LANGUAGE_NONE][0]['value'];
     $map_code = $node->field_map_embed_code[LANGUAGE_NONE][0]['value'];
     $gall_position = $node->field_facebook_gallery_associate[LANGUAGE_NONE][0]['target_id'];
@@ -53,7 +54,6 @@ function itg_fia_xml_node_feed($query) {
     
     $items .= itg_fia_xml_format_rss_item($img_path, $guid, $node_body, $node->title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
   }
-  
   global $base_url;
   $channel_defaults = array(
     'title' => variable_get('site_name', 'Drupal'),
