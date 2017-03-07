@@ -11,8 +11,8 @@
 //            var video_field_file = settings.itg_dailymotion.settings.video_field_file;
             // FTP browse
 
+            var base_url = Drupal.settings.baseUrl.baseUrl;
 
-            
 
             $(".ftp-server .asso-filed_single").click(function(e) {
                 jQuery('#loader-data img').show().parent().addClass('loader_overlay');
@@ -47,35 +47,56 @@
             $(".ftp-server .asso-filed").click(function(e) {
 
                 // Getting selected videos from checkboxes        
-
+                var video_fids = [];
                 var selected_check_boxes_values = new Array();
                 var selected_check_boxes_index = 0;
-                $("input:checkbox[class=form-radio]:checked").each(function() {
+                $("#video_iframe").contents().find("input:checkbox[class=form-radio]:checked").each(function() {
                     selected_check_boxes_values[selected_check_boxes_index++] = $(this).val();
                 });
+                 if (selected_check_boxes_index == 0) {
+                    alert("Please select video file.");
+                } else {
+                jQuery.ajax({
+                    url: base_url + '/solr-video-make-fid',
+                    type: 'post',
+                    data: {'checkvalue': selected_check_boxes_values},
+                    success: function(data) {
+                        var as = JSON.parse(data);
+                        var parsed = JSON.parse(data);
 
-                parent.jQuery('#edit-field-video-upload-add-more-number').val(selected_check_boxes_values.length);
-                parent.jQuery('#edit-field-video-upload-file-entity-holder-nums').val(selected_check_boxes_values.join());
+
+
+                        for (var x in parsed) {
+                            video_fids.push(parsed[x]);
+                        }
+                        parent.jQuery('#edit-field-video-upload-add-more-number').val(video_fids.length);
+                        parent.jQuery('#edit-field-video-upload-file-entity-holder-nums').val(video_fids.join());
+                        jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+                        //  parent.jQuery("input[name='" + video_field_file + "'").val(vid);
+                        parent.jQuery("[name='field_video_upload_add_more']").mousedown();
+                        parent.jQuery('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
+                            try {
+                                parent.jQuery.colorbox.close();
+                            } catch (err) {
+
+                            }
+
+
+                        });
+
+                    },
+                    error: function(xhr, desc, err) {
+                        console.log(xhr);
+                        console.log("Details: " + desc + "\nError:" + err);
+                    }
+                });
+            }
+
+
 
                 //var vid = $("#edit-video-browse-select .form-radio:checked").val();
 
-                if (selected_check_boxes_index == 0) {
-                    alert("Please select video file.");
-                } else {
-                    jQuery('#loader-data img').show().parent().addClass('loader_overlay');
-                    //  parent.jQuery("input[name='" + video_field_file + "'").val(vid);
-                    parent.jQuery("[name='field_video_upload_add_more']").mousedown();
-                    parent.jQuery('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
-                        try {
-                            parent.jQuery.colorbox.close();
-                        } catch (err) {
-
-                        }
-
-
-                    });
-
-                }
+               
             });
 
 
@@ -307,9 +328,9 @@ jQuery('document').ready(function() {
         });
     })
 
-setTimeout(function() {
-                jQuery(".video-ftp").trigger("click");
-            }, 1000);
+    setTimeout(function() {
+        jQuery(".video-ftp").trigger("click");
+    }, 1000);
 });
 
 // Implement function for video search by title
