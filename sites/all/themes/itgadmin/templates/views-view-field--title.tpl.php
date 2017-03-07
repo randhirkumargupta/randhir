@@ -29,7 +29,9 @@ global $base_url;
 
 if ($field->view->name == 'autocomplete_for_event' 
         || $field->view->name == 'autocomplete_event_photo' 
-        || $field->view->name == 'podcast_for_event') {
+        || $field->view->name == 'podcast_for_event' 
+        || $field->view->name == 'manage_survey' 
+        || $field->view->name == 'manage_quiz') {
   print $output;
 } else
 if (isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['nid']['entity']->type == 'event_backend' || $row->_field_data['nid']['entity']->type == 'itg_funalytics')) {
