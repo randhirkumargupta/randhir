@@ -26,6 +26,11 @@ function itg_common_init() {
     drupal_goto('user');
   }
   
+  // helper condition for user when directly hit base url
+  if ($theme == 'itgadmin' && $base_url == BACKEND_URL && $user->uid > 0 && !array_key_exists(FRONT_USER, $user->roles) && drupal_is_front_page()) {
+    drupal_goto('cms-user-dashboard');
+  }
+  
   if ($theme == 'itgadmin') {
     $settings = array();
     $settings['base_url'] = $base_url;
