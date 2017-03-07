@@ -723,11 +723,27 @@ jQuery(document).ready(function() {
         var badge_three = 'lrp_gold_star_three_icon[fid]';
         var badge_four = 'lrp_gold_star_four_icon[fid]';
         var badge_five = 'lrp_gold_star_five_icon[fid]';
+        var fb_img_soc = 'itg_fb_img[fid]';
+        var tw_img_soc = 'itg_twitter_img[fid]';
         var badge_one_val = $('input[name="' + badge_one + '"]').val();
         var badge_two_val = $('input[name="' + badge_two + '"]').val();
         var badge_three_val = $('input[name="' + badge_three + '"]').val();
         var badge_four_val = $('input[name="' + badge_four + '"]').val();
         var badge_five_val = $('input[name="' + badge_five + '"]').val();
+        var fb_img_soc = $('input[name="' + fb_img_soc + '"]').val();
+        var tw_img_soc = $('input[name="' + tw_img_soc + '"]').val();
+        if (fb_img_soc > 0) {
+            $('body').find('.div_itg_fb_img').hide();
+        }
+        else {
+            $('body').find('.div_itg_fb_img').show();
+        }
+        if (tw_img_soc > 0) {
+            $('body').find('.div_itg_twitter_img').hide();
+        }
+        else {
+            $('body').find('.div_itg_twitter_img').show();
+        }
         if (badge_one_val > 0) {
             $('body').find('.div_lrp_gold_star_one_icon').hide();
         }

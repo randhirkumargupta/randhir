@@ -946,18 +946,21 @@ function itg_story_photo_story_bottom_html($node_id) {
  * @return string
  */
 function itg_story_node_access($node, $op, $account) {
+  global $user;
   // We're only bothered about the 'view' operation at the moment
   if ($op == 'view') {
-    if (!empty($node->field_story_configurations['und'][0]['value'])) {
-      foreach ($node->field_story_configurations['und'] as $value) {
-        $config[] = $value['value'];
+    if (in_array(FRONT_USER, $user->roles) || $user->uid == 0) {
+      if (!empty($node->field_story_configurations['und'][0]['value'])) {
+        foreach ($node->field_story_configurations['und'] as $value) {
+          $config[] = $value['value'];
+        }
+      }
+      if (in_array('lock_story', $config)) {
+        //return NODE_ACCESS_DENY;
+        drupal_goto('http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
       }
     }
-    if (in_array('lock_story', $config)) {
-      return NODE_ACCESS_DENY;
-    }
-  }
-
+  } // op close
   // For everything else let the system decide.
   return NODE_ACCESS_IGNORE;
 }

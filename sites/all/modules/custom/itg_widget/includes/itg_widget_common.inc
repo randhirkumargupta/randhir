@@ -5,7 +5,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  * This function is used to create settings.
  * 
@@ -165,6 +164,12 @@ function itg_widgets_custom_variables() {
         '#type' => 'textfield',
         '#title' => t('Live schore URL '),
         '#default_value' => variable_get('live_score_url'),
+        '#size' => 255,
+    );
+      $form['ipl_rhs_nids'] = array(
+        '#type' => 'textfield',
+        '#title' => t('node id for ipl rhs '),
+        '#default_value' => variable_get('ipl_rhs_nids'),
         '#size' => 255,
     );
     $form['anchor_tid'] = array(
@@ -2305,7 +2310,9 @@ function itg_widget_block_view_alter(&$data, $block) {
 
 
     if ($block->delta == 'programmes-rhs_programmes') {
-        if ($user_link == 'ipl-venue' || $user_link == 'ipl-schedule' || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
+        $arraynid = array();
+         $arraynid = explode(',', variable_get('ipl_rhs_nids'));
+        if (in_array($arg[1],$arraynid) || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
             $data['content'] = array();
         }
         else {
@@ -2319,8 +2326,14 @@ function itg_widget_block_view_alter(&$data, $block) {
     }
 
     if ($block->delta == 'sport_ipl-top_performers' || $block->delta == 'sport_ipl-points_tally' || $block->delta == 'ipl_tweets' || $block->delta == 'live_score') {
+          $arraynid = array();
+        $arraynid = explode(',', variable_get('ipl_rhs_nids'));
+       
+        if (in_array($arg[1],$arraynid) || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
+           drupal_add_js('jQuery(document).ready(function() {                  
+                        jQuery("body").addClass("section-sport-ipl-bg");
 
-        if ($user_link == 'ipl-venue' || $user_link == 'ipl-schedule' || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
+          });', array('type' => 'inline', 'scope' => 'footer'));
             return TRUE;
         }
         else {
