@@ -121,38 +121,21 @@ class ItgStoryListMigration extends XMLMigration {
       'image' => t('image'),
       'state' => t('state'),
       'syndications_photo' => t('syndications_photo'),
+      'uid' => t('uid'),
     );
 
 
     // This can also be an URL instead of a local file path.
-    $file_path = 'sites/default/files';
+    $file_path = DRUPAL_ROOT . '/' .'sites/default/files';
 
-    $xml_folder = $file_path . '/' . 'migrate/xml_file/';
-
-    $items_url = $xml_folder . 'story.xml';
+    //$xml_folder = $file_path . '/' . 'migrate/xml_file/stories';
 
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
-    $item_xpath = '/Root/story';
+    $item_xpath = '/story';
 
-    // This is the xpath relative to the individual items - thus the full xpath
-    // of an ID will be /story/item/id.
-    $item_ID_xpath = 'id';
-
-    //$items_class = new MigrateItemsXML($items_url, $item_xpath, $item_ID_xpath);
-    //$this->source = new MigrateSourceMultiItems($items_class, $fields);
-    //$this->source = new MigrateSourceXML($items_url, $item_xpath, $item_ID_xpath, $fields);
-    $xml_path = $file_path.'/migrate/xml_file/story';
-    $item_url = $xml_path . '/:id.xml';
-    $item_ID_xpath = 'id';
-    $this->source = new MigrateSourceList(new MigrateListXML($list_url),
-      new MigrateItemXML($item_url));
     
-    $this->destination = new MigrateDestinationNode('story');
-
-    // The source ID here is the one retrieved from each data item in the XML
-    // file, and used to identify specific items
-    $this->map = new MigrateSQLMap($this->machineName, array(
+     $this->map = new MigrateSQLMap($this->machineName, array(
       'id' => array(
         'type' => 'int',
         'unsigned' => TRUE,
@@ -160,6 +143,21 @@ class ItgStoryListMigration extends XMLMigration {
       )
         ), MigrateDestinationNode::getKeySchema()
     );
+    $xml_folder = $file_path.'/migrate/xml_file/stories';
+    $list_url = $xml_folder . '/index.xml';
+
+
+    $item_url = $xml_folder . '/:id.xml';
+    $item_ID_xpath = 'id';
+//    $this->source = new MigrateSourceList(new MigrateListFiles($xml_folder),
+//      new MigrateItemXML($item_url), $fields);
+    $this->source = new MigrateSourceList(new MigrateListXML($list_url),
+      new MigrateItemXML($item_url), $fields);
+    $this->destination = new MigrateDestinationNode('story');
+
+    // The source ID here is the one retrieved from each data item in the XML
+    // file, and used to identify specific items
+   
 
     // TIP: Note that for XML sources, in addition to the source field passed to
     // addFieldMapping (the name under which it will be saved in the data row
@@ -173,7 +171,9 @@ class ItgStoryListMigration extends XMLMigration {
     $this->addFieldMapping('status', 'state')->xpath('state');
     
     //code for date
-    $this->addFieldMapping('created', 'createddate')->xpath('createddate');    
+    $this->addFieldMapping('created', 'createddate')->xpath('createddate');   
+    $this->addFieldMapping('uid', 'createdby')->xpath('createdby')
+        ->defaultValue(1);    
     $this->addFieldMapping('changed', 'modifieddate')->xpath('modifieddate');
     $this->addFieldMapping('field_story_schedule_date_time', 'publisheddate')->xpath('publisheddate');
     $this->addFieldMapping('field_story_expires', 'storyexpires')->xpath('storyexpires');
@@ -340,7 +340,7 @@ class ItgStoryListMigration extends XMLMigration {
     // source migrated
     $this->addFieldMapping('field_story_source_type')
         ->defaultValue('migrated');
-    $this->addUnmigratedDestinations(array('uid', 'promote', 'sticky', 'revision', 'log', 'language', 'tnid', 'translate', 'revision_uid', 'is_new', 'body:summary', 'field_common_by_line_reporter_id', 'field_common_related_content', 'field_emoji', 'field_emoji:format', 'field_emoji_position', 'field_facebook_animated_image:file_class',
+    $this->addUnmigratedDestinations(array('promote', 'sticky', 'revision', 'log', 'language', 'tnid', 'translate', 'revision_uid', 'is_new', 'body:summary', 'field_common_by_line_reporter_id', 'field_common_related_content', 'field_emoji', 'field_emoji:format', 'field_emoji_position', 'field_facebook_animated_image:file_class',
       'field_facebook_animated_image:destination_dir',
       'field_facebook_animated_image:destination_file',
       //'field_facebook_animated_image:file_replace',
@@ -552,6 +552,7 @@ class ItgStoryListMigration extends XMLMigration {
   }
 
   public function prepareRow($row) {
+    drupal_set_message('<pre>'.print_r($row, 1).'<pre>');
     //syndication
     if ((string) $row->xml->syndication == '1') {
       $row->xml->syndication = 'Yes';
@@ -593,89 +594,7 @@ class ItgStoryListMigration extends XMLMigration {
     if(!empty($row->xml->quote_image)) {
       $row->xml->quote_image = itg_dbmigrate_imagepath_url((string)$row->xml->quote_image);
     }
-    
-    
-    //Workbench 
-    /*if ((string) $row->xml->state == '1') {
-      $row->xml->workbench_moderation_state_new = 'published';
-    }
-    else {
-      $row->xml->workbench_moderation_state_new = 'draft';
-    }*/
-    
-    // Mosimage in body
-   /* if(!empty($row->xml->mosimage)){
-      $mos_count= array();
-      $cap=0;
-      foreach($row->xml->mosimage->image as $images){
-        $image = (string)$images;
-        $caption = (string) $row->xml->mosimage->caption[$cap];
-        if(!empty($image)){
-          $mosimage_array[] = '<img alt="'.$caption.'" src="'.$image.'">';
-        }
-        $cap++;
-      }
-     $mos_count = count($mosimage_array);
-    }
 
-    if(!empty($row->xml->storybody)){
-      $body_string = (string) $row->xml->storybody;
-      $mos_image_tag = substr_count($body_string, '{mosimage}');
-      if($mos_count >= $mos_image_tag){
-        $string = itg_dbmigrate_mosimage_replace($body_string, $mosimage_array, '{mosimage}');
-      }else{
-        $string = (string)$body_string;
-      }
-      $row->xml->storybody = $string;
-    }
-    
-    // blurb tags
-    if(!empty($row->xml->blurbs)){
-      $blurb_count = array();
-      foreach($row->xml->blurbs->blurb as $blurbs){
-        $blurb = (string)$blurbs;
-        
-        if(!empty($blurb)){
-          $blurb_array[] = $blurb;
-        }
-      }
-      $blurb_count = count($blurb_array);
-    }
-    // Blurb assign to body
-      if(!empty($row->xml->storybody)){
-      $body_string = (string) $row->xml->storybody;      
-      $blurb_tag = substr_count($body_string, '{blurb}');
-      if($blurb_count >= $blurb_tag){
-        $string = itg_dbmigrate_mosimage_replace($body_string, $blurb_array, '{blurb}');
-      }else{
-        $string = (string)$body_string;
-      }
-      $row->xml->storybody = $string;
-    }
-    
-    //Tabel tags
-    if(!empty($row->xml->tables)){
-      $table_count = array();
-      foreach($row->xml->tables->table as $tables){
-        $table = (string) $tables;
-        if(!empty($table)){
-          $table_array[] = $table;
-        }
-      }
-      $table_count = count($table_array);
-    }
-    
-    // Table assing to body
-    if(!empty($row->xml->storybody)){
-      $body_string = (string) $row->xml->storybody;
-      $table_tag = substr_count($body_string, '{table}');
-      if($table_count >= $table_tag){
-        $string = itg_dbmigrate_mosimage_replace($body_string, $table_array, '{table}');
-      }else{
-        $string = (string)$body_string;
-      }
-      $row->xml->storybody = $string;
-    }*/
     // prepare row for quote
     $data_quotes = '';
     if (isset($row->xml->fulltext_conclaveformat->quotes->quote) && !empty($row->xml->fulltext_conclaveformat->quotes->quote)) {
@@ -699,13 +618,8 @@ class ItgStoryListMigration extends XMLMigration {
 
     if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {
       foreach ($row->xml->categories->category as $final_category) {
-        $category_array = explode('#', $final_category);
-        $array_count = count($category_array);
-        $table_name = itg_migrate_category_table($array_count);
-        $last_value = end($category_array);
-        $source_cid = (string) $last_value;
-        $orignal_category = get_itg_destination_id($table_name, $source_cid);
-        $data_category[]['tid'] = $orignal_category;
+        $source_cid = (string) $final_category;
+        $data_category[]['tid'] = $source_cid;
       }
     }
     $row->category_new = $data_category;
@@ -715,9 +629,7 @@ class ItgStoryListMigration extends XMLMigration {
 
     if (isset($row->xml->tags->tag) && !empty($row->xml->tags->tag)) {
       foreach ($row->xml->tags->tag as $final_tags) {
-        $source_tags = (string) $final_tags;
-        $orignal_tag = get_itg_destination_id('migrate_map_itgtags', $source_tags);
-        $data_tags[]['tid'] = $orignal_tag;
+        $data_tags[]['tid'] = (string) $final_tags;
       }
     }
     $row->tag_new = $data_tags;
@@ -728,9 +640,7 @@ class ItgStoryListMigration extends XMLMigration {
 
     if (isset($row->xml->cities->city) && !empty($row->xml->cities->city)) {
       foreach ($row->xml->cities->city as $final_city) {
-        $source_city = (string) $final_city;
-        $orignal_city = get_itg_destination_id('migrate_map_itgcity', $source_city);
-        $data_city[]['tid'] = $orignal_city;
+        $data_city[]['tid'] = (string) $final_city;
       }
     }
     $row->city_new = $data_city;
@@ -822,13 +732,7 @@ class ItgStoryListMigration extends XMLMigration {
     // Primary category
     if (isset($row->xml->primarycategory) && !empty($row->xml->primarycategory)) {
       $source_cid = (string) $row->xml->primarycategory;
-      $pcategory_array = explode('#', $source_cid);
-      $parray_count = count($pcategory_array);
-      $table_name = itg_migrate_category_table($parray_count);
-      $last_value = end($pcategory_array);
-      $source_cid = (string) $last_value;
-      $orignal_pcategory = get_itg_destination_id($table_name, $source_cid);
-      $row->xml->primarycategory = $orignal_pcategory;
+      $row->xml->primarycategory = $source_cid;
     }
     //End primary category
     //$row->status = $row->xml->publicationName;
@@ -853,37 +757,13 @@ class ItgStoryListMigration extends XMLMigration {
       $associate_date_time = date('m/d/Y H:i', $associate_time);
       $row->xml->associatetvdate = $associate_date_time;
     }
-    //End story date
-    
-    //Byline associate with story
-//    $data_byline = '';
-//    if (isset($row->xml->bylines->byline) && !empty($row->xml->bylines->byline)) {
-//      foreach ($row->xml->bylines->byline as $final_byline) {
-//        $source_bid = (string) $final_byline;
-//        $orignal_byline = get_itg_destination_id('migrate_map_itgbyline', $source_bid);
-//        //$data_byline[]['target_id'] = $orignal_byline;
-//        itg_db_migrate_bylines($orignal_byline);
-//      }
-//    }
-    //$row->byline_new = $data_byline;
-    
-     // manage created user
-    if (isset($row->xml->createdby) && !empty($row->xml->createdby)) {
-      $created_uid = (string) $row->xml->createdby;
-      $orignal_crated_uid = get_itg_destination_id('migrate_map_itguser', $created_uid);
-      $row->xml->createdby = $orignal_crated_uid;
-    }else{
-      $row->xml->createdby = 1;
-    }
+    //End story date  
 
     return TRUE;
   }
 
   public function prepare($node, stdClass $row) {
     $node->teaser = (string) $row->xml->description;
-//    if (!empty($row->listicle_new)) {
-//      $node->field_story_template_guru[LANGUAGE_NONE] = $row->listicle_new;
-//    }
     if (!empty($row->quotes_new)) {
       $node->field_story_template_quotes[LANGUAGE_NONE] = $row->quotes_new;
     }
@@ -915,7 +795,6 @@ class ItgStoryListMigration extends XMLMigration {
     if(!empty($row->featuredname)){
       $node->field_story_featured_name[LANGUAGE_NONE][0]['tid'] = (string) $row->featuredname;
     }  
-    $node->uid = $row->xml->createdby;
   }
 
   public function complete($entity, $row) {
@@ -1028,25 +907,10 @@ class ItgStoryListMigration extends XMLMigration {
        
         $source_bid = (string) $final_byline;
          if(!empty($source_bid)){
-          $orignal_byline = get_itg_destination_id('migrate_map_itgbyline', $source_bid);
-          $value = itg_db_migrate_bylines($orignal_byline, $node->nid);
+          $value = itg_db_migrate_bylines($source_bid, $node->nid);
          }
       }
     }
    
   }
 }
-
-/**
- * implement function to get category table
- *//*
-function itg_migrate_category_table($level){
-  $table = array(
-    '1' => 'migrate_map_itgsection',
-    '2' => 'migrate_map_itgcategory',
-    '3' => 'migrate_map_itgsubcategory',
-    '4' => 'migrate_map_itgsubsubcategory',
-  );
-  
-  return $table[$level];
-}*/
