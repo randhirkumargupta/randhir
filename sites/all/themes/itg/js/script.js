@@ -404,7 +404,7 @@ jQuery(document).ready(function () {
     
     //jQuery code to set slider for story photo list
     jQuery('.story-photo-list').slick({
-        slidesToShow: 4,
+        slidesToShow: 3,
         slidesToScroll: 1,
         infinite: false,
         variableWidth: true,
