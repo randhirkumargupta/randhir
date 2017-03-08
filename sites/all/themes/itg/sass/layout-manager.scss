@@ -2895,10 +2895,16 @@ img{
     width: inherit;
 }
 .itg-layout-container.default-section{
-  .widget-wrapper.custom_ask_expert_form_block{
-    .data-holder{
-      max-height: calc(100% - 22px);
+  [id*="block-itg-ask-expert-custom-ask-expert-form-block"]{
+    height: 100%;
+    padding-top: 25px;
+    border: 1px solid #f1f1f1;
+    .section-user-details, [id*="itg-custom-ask-an-expert-form"]{
+      background-color: #fff;
     }
+  }
+  .custom_ask_expert_form_block{
+    .widget-settings{position: absolute;}
   }
   .ask-question{
     padding:15px;
@@ -2957,6 +2963,7 @@ img{
         width: 90px;
         cursor: pointer;
         font-family: roboto-slab;
+        margin-top: 10px;
       }
       .captcha{
         border: none;
