@@ -537,7 +537,7 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
             itg_sso_sms_send($rand_otp, $mobile);
           }
           if(!empty($form_state['values']['mail'])) {
-            itg_sso_otp_mail_content($rand_otp, $email);
+            itg_sso_otp_mail_content($rand_otp, $mail);
           }
         }
 

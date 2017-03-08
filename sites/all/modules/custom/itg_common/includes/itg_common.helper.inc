@@ -106,6 +106,7 @@ define('CITY_MANAGMENT', variable_get('city_manager_vid'));
 define('POLITICIAN_TID', variable_get('tid_politician'));
 define('ANCHOR_TID', variable_get('anchor_tid'));
 define('REPORTER_TID', variable_get('reporter_tid'));
+define('TAG_ID', 1);
 
 define('NEWSLETTER_EDUCATION_TID', variable_get('newsletter_education_tid'));
 
