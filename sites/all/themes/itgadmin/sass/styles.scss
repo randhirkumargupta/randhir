@@ -3239,6 +3239,9 @@ fieldset#edit-select{
       border: 1px solid #ee4d4d;
       box-shadow: 0 0 5px #ee4d4d;
     }
+    #edit-submit{
+      @extend .btn-submit;
+    }
   }
 }
 .user-configurations{
@@ -6407,6 +6410,7 @@ div.node{
 #views-form-section-wise-draggable-content-order-big-story-format, 
 #views-form-section-wise-draggable-content-order-we-may-suggest-widget, 
 #views-form-story-widget-trending-videos, 
+#views-form-user-selection-user-selection-for-section,
 #views-form-story-widget-most-popular{       
   @extend .confirmation;
 }
@@ -10459,6 +10463,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   }
 }
 .view-social-media-report{
+  @extend .pos-rel;
   .view-filters .views-exposed-form .views-exposed-widget{
     &.views-widget-filter-scheduled_time{
       width: 300px;
@@ -10471,7 +10476,12 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       }
     }
   }
-  .feed-icon{margin-top: 5px;}
+  .feed-icon{
+    bottom: -9px;
+    left: 152px;
+    margin-top: 0;
+    position: absolute;
+  }
 }
 [id*="itg-event-registration-fields-configuration-form"]{
   margin-top: 30px;
@@ -10889,4 +10899,16 @@ span.file a{pointer-events: none; color: #2f2f2f;}
             }
         }   
     }    
+}
+[id*="itg-quiz-quiz-form"]{
+  .answer-container{
+    .answer-container-actual{
+      text-align: center;
+    }
+    #show_answer{
+      width: 135px;
+      margin: 10px auto;
+      display: block;
+    }
+  }
 }
