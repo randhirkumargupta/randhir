@@ -259,7 +259,7 @@ function ColoredTable($header, $data, $pdf) {
 
         $pdf->Cell($w[0], 10, $i, 0, 0, 'C', $fill);
         $pdf->Cell($w[1], 10, $row['nid_1'], 0, 0, 'C', $fill);
-        $pdf->Cell($w[2], 10, mb_strimwidth($row['title'], 0, 40, ".."), 0, 0, 'C', $fill);
+        $pdf->Cell($w[2], 10, mb_strimwidth(strip_tags($row['title']), 0, 40, ".."), 0, 0, 'C', $fill);
         $pdf->Cell($w[3], 10, $row['type'], 0, 0, 'C', $fill);
         $pdf->Cell($w[4], 10, $row['username'], 0, 0, 'C', $fill);
         $pdf->writeHTMLCell(20, 10, '', '', $row['count_fb_promote'], 0, 0, $fill, 0, 0);

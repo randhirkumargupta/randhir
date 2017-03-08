@@ -329,15 +329,17 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
                   </div>               
                 </div>-->
                 <?php if ($theme == 'itg') { ?>
-<!--                  <div class="">
-                    <div class="ask-question-sidebar ask-question">
-                        <h3><span>Ask a Question</span></h3>
-                      <div class="data-holder ask-question" id="itg-block-19">
-                        <?php $block = module_invoke('itg_ask_expert', 'block_view', 'custom_ask_expert_form_block');
-                             // print render($block['content']); ?>
-                      </div>
-                    </div>              
-                  </div>-->
+                  <?php $block_ask_expert = module_invoke('itg_ask_expert', 'block_view', 'custom_ask_expert_form_block');?>
+                  <?php if (!empty($block_ask_expert['content'])) {?>
+<!--                    <div class="">
+                      <div class="ask-question-sidebar ask-question">
+                          <h3><span>Ask a Question</span></h3>
+                        <div class="data-holder ask-question" id="itg-block-19">                          
+                          <?php //print render($block_ask_expert['content']); ?>
+                        </div>
+                      </div>              
+                    </div>-->
+                  <?php } ?>
                 <?php } ?>
                 <div class="itg-widget">
                     <div class="ad-widget">

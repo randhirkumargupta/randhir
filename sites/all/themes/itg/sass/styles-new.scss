@@ -2804,7 +2804,7 @@ body.has-cart-popup{
 [id*="itg-sso-reg-multistep-form"], [id*="itg-user-forgot-password-multistep-form"]{
   #email-sucess, #thank-you, #mobile-success{
     color: #009c00;
-    margin: 20px 0;
+    margin: 20px;
   }
 }
 .sign-in-link{
@@ -3423,6 +3423,7 @@ span.personal-social-share-links {
   .dm-pic a,
   .top-takes-list a,
   .trending-videos-list .pic a,
+  .trending-videos-list > a.pic,
   .big-story-col-1 a,
   .may-we-suggest > a,
   .watch-right-now-list > a,
@@ -5133,13 +5134,14 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       .funalytics-slider{
         padding: 20px 50px;
         .slick-slide{
-          
+
           .title{font: 500 26px/30px Roboto; padding-bottom: 12px;}
           .pic{
             background: url(../images/funalytics.png) top right no-repeat;
             img{
               width: calc(100% - 180px);
               height: 388px;
+              float: left;
             }
           }
         }
@@ -5174,10 +5176,13 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         }
       }
     }
-    
+
     .view-content{margin: 0 -15px;}
     .funalytics-tile{
-      padding-bottom: 50px;
+      margin-bottom: 50px;
+      border: 1px solid #ddd;
+      .pic{border-bottom: 1px solid #ddd;}
+      .funalytics-text{padding: 0 10px;}
       .updated-date {
         font-size: 12px;
         color: #b1b1b1;
@@ -5188,6 +5193,60 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         color: #323232;
         height: 48px;
         overflow: hidden;
+      }
+      .social-share{
+        @include display-inline;
+        @include social-share;
+        padding: 5px 5px;
+        ul{
+          li{
+            padding-right: 4px;
+            a.share{
+              width: auto;
+              height: auto; 
+              .fa{font-size: 18px;}
+            }
+          }
+        }
+      }
+    }
+  }
+  .funalytics-socials {
+    height: 388px;
+    overflow: hidden;
+    width: 180px;
+    .download-nf {
+      display: inline-block;
+      height: 105px;
+      margin-top: 92px;
+      vertical-align: top;
+      width: 100%;
+    }
+    .google-play {
+      display: inline-block;
+      height: 38px;
+      margin: 31px 0 0 33px;
+      vertical-align: top;
+      width: 125px;
+    }
+    .app-store {
+      display: inline-block;
+      height: 38px;
+      margin: 5px 0 0 33px;
+      vertical-align: top;
+      width: 125px;
+    }
+    .funalytics-social-links {
+      display: inline-block;
+      height: 40px;
+      margin: 34px 0 0 28px;
+      vertical-align: top;
+      width: 135px;
+      a{
+        float: left;
+        width: 40px;
+        height: 40px;
+        margin-right: 5px;
       }
     }
   }
@@ -6268,6 +6327,9 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     padding-right: 0;
   }
   .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child{margin-left: 125px;}
+  .sign-in-link a{
+    float: left;
+  }
 }
 @media all and (max-width: 360px){
   .cart-total-block .points-balance span:first-child{
