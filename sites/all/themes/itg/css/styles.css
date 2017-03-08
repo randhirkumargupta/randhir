@@ -12750,3 +12750,8 @@ span.smilies-title img {
   font-family: roboto;
   pointer-events: auto;
 }
+
+.smp-date {
+  font-size: 12px;
+  color: #b1b1b1;
+}
