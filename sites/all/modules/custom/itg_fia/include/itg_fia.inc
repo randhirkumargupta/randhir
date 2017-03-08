@@ -53,14 +53,14 @@ function itg_fia_xml_node_feed($query) {
     // need to write code for gallery position
     if(is_array($node->field_facebook_gallery_associate[LANGUAGE_NONE]) && !empty($node->field_facebook_gallery_associate[LANGUAGE_NONE])) {
       $associate_gallery = $node->field_facebook_gallery_associate[LANGUAGE_NONE];
-      foreach($fc_data as $fc_k => $fc_v){
+      foreach($associate_gallery as $fc_k => $fc_v){
         $load_fc = field_collection_item_load($fc_v);
         $fc_target_id = $load_fc->field_associate_gallery_id[LANGUAGE_NONE];
         foreach($fc_target_id as $fct_k => $fct_v){
           $target_nids[] = $fct_v['target_id'];
         }
       }
-    }    
+    }
     $items .= itg_fia_xml_format_rss_item($target_nids, $subtitle, $img_path, $guid, $node_body, $node->title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
   }
   
