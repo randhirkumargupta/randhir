@@ -53,7 +53,7 @@ function itg_fia_xml_node_feed($query) {
     // need to write code for gallery position
     
     
-    $target_nids = array();
+    $target_nids = NULL;
     $fc_target_id = NULL;
     if(is_array($node->field_facebook_gallery_associate[LANGUAGE_NONE]) && !empty($node->field_facebook_gallery_associate[LANGUAGE_NONE])) {
       $associate_gallery = $node->field_facebook_gallery_associate[LANGUAGE_NONE];
