@@ -5181,7 +5181,15 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     .funalytics-tile{
       margin-bottom: 50px;
       border: 1px solid #ddd;
-      .pic{border-bottom: 1px solid #ddd;}
+      .pic{
+        border-bottom: 1px solid #ddd;
+        height: 208px;
+        overflow: hidden;
+        img{
+          width: 100%;
+          height: 100%;
+        }
+      }
       .funalytics-text{padding: 0 10px;}
       .updated-date {
         font-size: 12px;
@@ -5210,6 +5218,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         }
       }
     }
+    @include pager;
   }
   .funalytics-socials {
     height: 388px;

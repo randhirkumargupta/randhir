@@ -3239,6 +3239,9 @@ fieldset#edit-select{
       border: 1px solid #ee4d4d;
       box-shadow: 0 0 5px #ee4d4d;
     }
+    #edit-submit{
+      @extend .btn-submit;
+    }
   }
 }
 .user-configurations{
@@ -6407,6 +6410,7 @@ div.node{
 #views-form-section-wise-draggable-content-order-big-story-format, 
 #views-form-section-wise-draggable-content-order-we-may-suggest-widget, 
 #views-form-story-widget-trending-videos, 
+#views-form-user-selection-user-selection-for-section,
 #views-form-story-widget-most-popular{       
   @extend .confirmation;
 }
@@ -10905,158 +10909,6 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       width: 135px;
       margin: 10px auto;
       display: block;
-    }
-  }
-}
-.itg-layout-container.default-section{
-  .widget-wrapper.custom_ask_expert_form_block{
-    .data-holder{
-      max-height: calc(100% - 22px);
-    }
-  }
-  .ask-question{
-    padding:15px;
-    font-family: roboto-slab;
-    overflow: auto;
-    .form-type-textarea, .form-type-textfield{
-      margin: 0;
-      padding: 0;            
-    }
-    [id*="itg-custom-ask-an-expert-form"]{
-      @include clearfix;
-      input[type="text"]{                
-        width: 100%;
-        font-family: roboto-slab;                
-      }
-      textarea{
-        font-family: roboto-slab;
-        height: 65px;
-        margin-bottom: 10px;
-      }
-      #question{
-        p{
-          color: #000;
-          font-size: 12px;
-          margin-bottom: 20px;
-          margin-top: 10px;
-          &.chtr-limit{
-            margin-bottom: 10px;    
-          }
-        }
-      }
-      #askname{
-        @include clearfix;
-        .form-item-askname, .form-item-askemail{
-          @include float(left);
-          width: 50%;                    
-          input[type="text"]{
-            width: 100%;
-          }
-        }
-        .form-item-askname{
-          padding-right: 10px;
-        }
-        .form-item-askemail{
-          padding-left: 10px;                    
-        }
-      } 
-      input[type="submit"]{
-        background: #000 none repeat scroll 0 0;
-        border: medium none;
-        border-radius: 5px;
-        color: #fff;                
-        font-size: 16px;
-        height: 32px;                
-        text-transform: uppercase;
-        width: 90px;
-        cursor: pointer;
-        font-family: roboto-slab;
-      }
-      .captcha{
-        border: none;
-        legend, .fieldset-description{
-          display: none;
-        }
-        img{
-          width: 120px;
-          margin-top: 15px;
-        }
-      }
-      .form-item-captcha-response{
-        display: inline-block;
-        width: 100%;
-        margin-bottom: 10px;
-        label{
-          width: 47%;
-          float: left;
-        }
-        input[type="text"]{                
-          width: 47%;
-          font-family: roboto-slab;    
-          float: right;
-        }
-        .description{
-          display: none;
-        }
-      }
-    } 
-    .expert-question{
-      position: relative;
-      font-size: 14px;
-      color: #323232;
-      margin: 15px 0;
-      border-top: 1px solid #ddd;
-      padding-top: 20px;
-      padding-left: 30px;
-      &:before{
-        content: 'Q';
-        width: 20px;
-        height: 20px;
-        background: #000;
-        display: inline-block;
-        color: #fff;
-        text-align: center;
-        font-family: roboto;
-        margin-right: 10px;
-        position: absolute;
-        top: 20px;
-        left: 0;
-      }
-    }
-    .question-link{
-      text-align: center;
-      a{           
-        font-size: 12px;
-        text-transform: uppercase;
-        font-weight: 900;
-        color: #000;
-        text-decoration: underline;
-        letter-spacing: 0;
-        margin-bottom: 20px;
-        display: block;
-      }
-    }
-    .ask-user-detail{
-      h4{
-        display: block;
-        margin-bottom: 10px;
-      }
-    }
-    .section-user-details{
-      overflow: hidden;
-      margin-bottom: 20px;
-      img{
-        float: right;
-        border: 2px solid #ddd;
-        border-radius: 100%;
-        width: 60px;
-        height: 60px;
-      }
-      .section-user-name{
-        font-size: 14px;
-        font-weight: 700;
-        color: #585858;
-      }
     }
   }
 }
