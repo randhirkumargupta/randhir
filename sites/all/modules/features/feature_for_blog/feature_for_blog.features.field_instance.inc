@@ -281,7 +281,7 @@ function feature_for_blog_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'field_story_category',
     'label' => 'Section',
     'required' => 1,

@@ -1,5 +1,6 @@
 <?php
-if (!empty($data)) :
+// Handel case if there is not any bigstory selected in widget then hide all bug story.
+if (!empty($data['node_data'])) :
   global $base_url, $user;
   $is_videogallery = FALSE;
   $href = $base_url . '/' . drupal_get_path_alias("node/{$data['node_data']->nid}");
