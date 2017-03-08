@@ -116,20 +116,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
         $answer_type = 'radios';
       } else {
         $answer_type = 'checkboxes';
-      }
-      
-//      foreach ($question_detail as $key => $v) { 
-//        //pr($v->field_quiz_options_answer[LANGUAGE_NONE]);
-//         //$d[$key] =  $v->field_quiz_options_answer[LANGUAGE_NONE];
-//         foreach ($v->field_quiz_options_answer[LANGUAGE_NONE] as $t=>$h) {
-//           //$df .= $v->field_quiz_options_answer[LANGUAGE_NONE].':'.$h['value'].'@';
-//           $fgt = $h['value'];
-//         }
-//         $dr[] = $fgt;
-//         pr($dr);
-//       }
-       
-       
+      }       
       // Loop for answer details
       $all_ans_options_media = '';
       $answer_option = $question_detail[$question_arr['value']]->field_quiz_option[LANGUAGE_NONE][0]['value'];

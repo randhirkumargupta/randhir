@@ -2216,12 +2216,6 @@
     display: block;
     text-align: left;
   }
-
-  .sign-in-link a {
-    display: block;
-    text-align: left;
-    margin-bottom: 10px;
-  }
 }
 @media only screen and (max-width: 680px) {
   #block-views-anchor-landing-page-block .anchor-left {
