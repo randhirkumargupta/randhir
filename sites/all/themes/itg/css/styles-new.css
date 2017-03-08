@@ -5630,6 +5630,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 .view-front-funalytics-list ul.pager li.pager-next.pager-first.first, .view-front-funalytics-list ul.pager li.pager-next.pager-last.last, .view-front-funalytics-list ul.pager li.pager-last.pager-first.first, .view-front-funalytics-list ul.pager li.pager-last.pager-last.last, .view-front-funalytics-list ul.pager li.pager-first.pager-first.first, .view-front-funalytics-list ul.pager li.pager-first.pager-last.last, .view-front-funalytics-list ul.pager li.pager-previous.pager-first.first, .view-front-funalytics-list ul.pager li.pager-previous.pager-last.last {
   display: none;
 }
+.view-front-funalytics-list ul.pager {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+}
 
 .funalytics-socials {
   height: 388px;
