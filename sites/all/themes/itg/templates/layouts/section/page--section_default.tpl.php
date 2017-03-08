@@ -366,20 +366,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                 </div>               
                             </div>
                         </div>
-                        <?php $block_ask_expert = module_invoke('itg_ask_expert', 'block_view', 'custom_ask_expert_form_block');?>
-                        <?php if (!empty($block_ask_expert['content'])) {?>
-                          <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
-                                <div class="itg-widget-child shadow-on">
-                                    <div class="droppable <?php print $gray_bg_layout; ?>">
-                                        <div class="widget-wrapper <?php //print $widget_data['itg-block-19']['widget_name'] . $widget_data['itg-block-19']['widget_display_name']; ?>">                                    
-                                            <span class="widget-title">Ask a Question</span>                                
-                                            <div class="data-holder ask-question" id="itg-block-19">                                      
-                                            <?php print render($block_ask_expert['content']); ?></div>
-                                        </div>             
-                                    </div>               
-                                </div>
-                            </div>
-                        <?php } else { ?>
+                        
                         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
                             <div class="itg-widget">
                                 <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -403,7 +390,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                 </div>               
                             </div>          
                         </div>
-                        <?php } ?>
+                        
 
                     </div>
 <?php } ?>
