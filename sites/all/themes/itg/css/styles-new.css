@@ -5507,7 +5507,14 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   margin: 0 -15px;
 }
 .view-front-funalytics-list .funalytics-tile {
-  padding-bottom: 50px;
+  margin-bottom: 50px;
+  border: 1px solid #ddd;
+}
+.view-front-funalytics-list .funalytics-tile .pic {
+  border-bottom: 1px solid #ddd;
+}
+.view-front-funalytics-list .funalytics-tile .funalytics-text {
+  padding: 0 10px;
 }
 .view-front-funalytics-list .funalytics-tile .updated-date {
   font-size: 12px;
@@ -5519,6 +5526,62 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   color: #323232;
   height: 48px;
   overflow: hidden;
+}
+.view-front-funalytics-list .funalytics-tile .social-share {
+  display: inline-block;
+  vertical-align: top;
+  padding: 5px 5px;
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul {
+  list-style-type: none;
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul li {
+  display: inline-block;
+  vertical-align: top;
+  padding-right: 8px;
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul li a, .view-front-funalytics-list .funalytics-tile .social-share ul li span {
+  background: #000;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  display: block;
+  color: #fff;
+  text-align: center;
+  line-height: 23px;
+  font-size: 15px;
+}
+@media screen and (min-width: 768px) {
+  .view-front-funalytics-list .funalytics-tile .social-share ul li a, .view-front-funalytics-list .funalytics-tile .social-share ul li span {
+    width: 23px;
+    height: 23px;
+    line-height: 25px;
+  }
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul li a.share, .view-front-funalytics-list .funalytics-tile .social-share ul li span.share {
+  color: #d0d0d0;
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul li a.share, .view-front-funalytics-list .funalytics-tile .social-share ul li a.google, .view-front-funalytics-list .funalytics-tile .social-share ul li span.share, .view-front-funalytics-list .funalytics-tile .social-share ul li span.google {
+  background: transparent;
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul li a.facebook, .view-front-funalytics-list .funalytics-tile .social-share ul li span.facebook {
+  background: #0b4887;
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul li a.twitter, .view-front-funalytics-list .funalytics-tile .social-share ul li span.twitter {
+  background: #05a3d2;
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul li a.google, .view-front-funalytics-list .funalytics-tile .social-share ul li span.google {
+  background: url(../images/google-icon.jpg) no-repeat center center;
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul li {
+  padding-right: 4px;
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul li a.share {
+  width: auto;
+  height: auto;
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul li a.share .fa {
+  font-size: 18px;
 }
 
 @media all and (min-width: 768px) {

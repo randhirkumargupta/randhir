@@ -15,7 +15,9 @@ function itg_ap_content() {
   }
 
 
-  $direc = get_dir_content($file_path . '/feeds/ap/');
+  //$direc = get_dir_content($file_path . '/feeds/ap/');
+  $final_dir = getcwd().'/sites/all/modules/custom/itg_api/feeds/ap/';
+  $direc = get_dir_content($final_dir);
 
   foreach ($direc as $xm_file) {
 
@@ -87,7 +89,7 @@ function itg_ap_content() {
           $exp_description = explode(" ", $exp_description);
 
           $node = new stdClass();
-          $node->title = trim($original_headline);
+          $node->title = trim(html_entity_decode($original_headline));
           $node->type = "story";
           node_object_prepare($node);
           $node->language = LANGUAGE_NONE;
@@ -96,7 +98,7 @@ function itg_ap_content() {
           $node->comment = 0;
           $node->body[$node->language][0]['value'] = $description ? $description : 'NA';
           $node->body[$node->language][0]['format'] = 'full_html';
-          $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($original_headline);
+          $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($original_headline));
           $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = $final_kicker;
           $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim($headline);
           $node->metatags[LANGUAGE_NONE]['keywords']['value'] = $meta_keyword;
