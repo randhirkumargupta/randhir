@@ -1179,6 +1179,9 @@ else
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'user_selection_for_section');
+  $handler->display->display_options['defaults']['exposed_form'] = FALSE;
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: User: Section (field_user_section) */

@@ -15,11 +15,13 @@ function itg_pti_content() {
     $op[$val->tid] = strtolower($val->name);
   }
  
-  $direc = get_dir_content($file_path . '/feeds/pti/');
-
+  //$direc = get_dir_content($file_path . '/feeds/pti/');
+  $final_dir = getcwd().'/sites/all/modules/custom/itg_api/feeds/pti/';
+  $direc = get_dir_content($final_dir);
+ 
   foreach ($direc as $xm_file) {
    $xml_file_path = $xm_file;
-    $xml_filename = basename($xml_file_path);
+   $xml_filename = basename($xml_file_path);
     $pti_xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
     if (!empty($pti_xml)) {
       $pti = 0;
@@ -89,7 +91,7 @@ function itg_pti_content() {
           }
           //Set values to node
           $node = new stdClass();
-          $node->title = trim($headline);
+          $node->title = trim(html_entity_decode($headline));
           $node->type = "story";
           node_object_prepare($node);
           $node->language = LANGUAGE_NONE;
@@ -98,9 +100,9 @@ function itg_pti_content() {
           $node->comment = 0;
           $node->body[$node->language][0]['value'] = $description ? $description : 'NA';
           $node->body[$node->language][0]['format'] = 'full_html';
-          $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline);
+          $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($headline));
           $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = $final_kicker;
-          $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim($headline);
+          $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($headline));
           $node->metatags[LANGUAGE_NONE]['keywords']['value'] = $meta_keyword;
           $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'PTI';
           if(!empty($term_id)) {
