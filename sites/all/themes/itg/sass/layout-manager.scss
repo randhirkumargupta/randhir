@@ -2902,6 +2902,9 @@ img{
     .section-user-details, [id*="itg-custom-ask-an-expert-form"]{
       background-color: #fff;
     }
+    [id*="itg-custom-ask-an-expert-form"]{
+      input[type="submit"]{margin-top: 10px;}
+    }
   }
   .custom_ask_expert_form_block{
     .widget-settings{position: absolute;}
