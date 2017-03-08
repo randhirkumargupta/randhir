@@ -5061,8 +5061,11 @@ div.node #comments h2 {
 .node-vas_service_content-form .form-field-name-field-service-content .field-name-field-service-audio-keyword .form-type-textfield > label {
   width: 93px;
 }
-.node-vas_service_content-form td .field-name-field-story-large-image .form-managed-file .image-widget-data .form-submit[value="Remove"] {
-  left: 500px;
+.node-vas_service_content-form td .field-name-field-service-video-keyword {
+  padding-left: 220px;
+}
+.node-vas_service_content-form td .field-name-field-service-video-keyword .form-type-textfield > label {
+  width: 80px;
 }
 .node-vas_service_content-form td .field-name-field-service-video .form-managed-file .form-type-textfield,
 .node-vas_service_content-form td .field-name-field-service-audio .form-managed-file .form-type-textfield {
@@ -5071,7 +5074,7 @@ div.node #comments h2 {
 }
 .node-vas_service_content-form td .field-name-field-service-video .form-managed-file .form-type-textfield > label,
 .node-vas_service_content-form td .field-name-field-service-audio .form-managed-file .form-type-textfield > label {
-  width: auto;
+  width: 80px;
 }
 .node-vas_service_content-form td .field-name-field-service-video .form-managed-file .form-type-textfield .form-text + div.description,
 .node-vas_service_content-form td .field-name-field-service-audio .form-managed-file .form-type-textfield .form-text + div.description {

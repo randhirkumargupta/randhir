@@ -4625,9 +4625,10 @@ div.node{
   .field-name-field-service-video{
     @extend .choose-audio-video-file;
   }
-  td .field-name-field-story-large-image {
-    .form-managed-file .image-widget-data .form-submit[value="Remove"]{
-      left: 500px;
+  td .field-name-field-service-video-keyword{
+    padding-left: 220px;
+    .form-type-textfield > label{
+      width: 80px;
     }
   }
   td .field-name-field-service-video,
@@ -4637,7 +4638,7 @@ div.node{
         margin: 10px 0 0;
         padding: 0;
         > label{
-          width: auto;
+          width: 80px;
         }
         .form-text + div.description{
           left: 440px;
