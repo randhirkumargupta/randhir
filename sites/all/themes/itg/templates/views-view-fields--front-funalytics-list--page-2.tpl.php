@@ -30,7 +30,7 @@ $short_url = shorten_url($row->url, 'goo.gl');
 $twitter_title = addslashes($row->node_title);
 $share_desc = '';
 $image = file_create_url($row->field_field_itg_funalytics_image[0]['rendered']['#item']['uri']);
-$changed = date('Y-m-d', $row->node_changed);
+$changed = date("D j M Y", $row->node_changed);
 ?>
 <div class="funalytics-tile">
   <div class="pic"><?php print '<img src="' . $image . '" alt="image">'; ?></div>
