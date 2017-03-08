@@ -52,62 +52,57 @@ function get_personalization_saved_value($tid, $uid) {
 
 function get_personalization_front_data() {
   global $user;
-  $new_ordered_data = array();
+  $weight_count_loop = FALSE;
   // As in table itg_widget_order tid is saved in nid colom.
   // So join field_story_category_tid join is applied on nid.
   $query = db_select('itg_widget_order', 'iwo');
   $query->fields('iwo', array('weight', 'nid'))
       ->condition('iwo.widget', "personalization_widget")
       ->condition('iwo.extra', $user->uid)
+      // Orderby weight or taxonomyterm id.
       ->orderBy('iwo.weight', 'DESC')
-      ->orderBy('iwo.nid', 'DESC');
-  $result = $query->execute()->fetchAll();
-
+      ->orderBy('iwo.nid', 'DESC')
+      ->range(0,30);
+  $result = $query->execute()->fetchAllAssoc('nid');
+  $new_array_of_terms = array_keys($result);
   // case handled if perferences is not saved.
   if (count($result) == 0) {
-    $vocabulary = taxonomy_vocabulary_machine_name_load('category_management');
-    $terms = taxonomy_get_tree($vocabulary->vid);
-    foreach ($terms as $term_ids) {
-      $std_obj = new stdClass();
-      // Default weight 50 is required.
-      // so that (Create gorup of same weight tids) 
-      // code will handle weight according to number of nodes associated with term
-      $std_obj->weight = 50;
-      $std_obj->nid = $term_ids->tid;
-      $result[] = $std_obj;
-    }
+    $weight_count_loop = TRUE;
+    $query = db_select('itg_widget_order', 'iwo');
+    $query->leftJoin('field_data_field_set_as_featured_cate' ,'fc' ,'fc.entity_id=iwo.cat_id');
+    $query->fields('iwo', array('cat_id'))
+        ->condition('iwo.widget', "section_wise_widget")
+        ->condition('fc.field_set_as_featured_cate_value','Yes')
+        ->groupBy('iwo.cat_id')
+        ->range(0,30);
+    $result = $query->execute()->fetchAllAssoc('cat_id');
   }
-
-  // Create gorup of same weight tids
-  foreach ($result as $info) {
-    $new_ordered_data_weighted_group[$info->weight][] = $info->nid;
-  }
-
-  foreach ($new_ordered_data_weighted_group as $weight => $tids) {
-    $temp_tid_array_baised_on_node_count = array();
-
-    if (count($tids) > 1) {
-      // For each term create array baised on number of nodes inside tid.
-      foreach ($tids as $term_id) {
-        // count the nodes under tid
-        $number_of_nodes_in_tid = count(get_node_ids_assoicated_with_tid($term_id));
-        //create
-        $temp_tid_array_baised_on_node_count[$number_of_nodes_in_tid][] = $term_id;
-      }
-      // decending order
-      krsort($temp_tid_array_baised_on_node_count);
-      // Get array in decending mode baised on node count.
-      $sorted_array = get_array_in_decending_mode($temp_tid_array_baised_on_node_count);
-
-      foreach ($sorted_array as $tids_after_sorting) {
-        $new_ordered_data[] = $tids_after_sorting;
-      }
+  if($weight_count_loop) {
+    $new_array_of_terms = array();
+    // Get only tids.
+    $tids_array = array_keys($result);
+    foreach($tids_array as $term_id) {
+      $new_array_of_terms[$term_id] = count_node_under_tid($term_id);
     }
-    else {
-      $new_ordered_data[] = $tids[0];
-    }
+    krsort($new_array_of_terms);
   }
-  return $new_ordered_data;
+  return ($weight_count_loop) ? array_keys($new_array_of_terms) : $new_array_of_terms;
+}
+
+/**
+ * Function to get total number of nodes in taxonomy.
+ * @param int $tid
+ * @return int
+ */
+function count_node_under_tid($tid) {
+  $query = db_select('taxonomy_index', 'ti');
+  $query->leftJoin('node', 'n', 'n.nid=ti.nid');
+  $query->addField('ti', 'nid');
+  $query->condition('ti.tid', $tid);
+  $query->condition('n.status', 1);
+  $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
+  $query->orderBy('n.created', 'DESC');
+  return $query->execute()->rowCount();  
 }
 
 function get_array_in_decending_mode($temp_tid_array_baised_on_node_count) {
@@ -153,6 +148,9 @@ function get_personlization_node_data_for_front($nid) {
 function get_node_ids_assoicated_with_tid($tid, $is_front = FALSE) {
   $query = db_select('taxonomy_index', 'ti');
   $query->leftJoin('node', 'n', 'n.nid=ti.nid');
+  $query->leftJoin('taxonomy_term_data', 'ttd', 'ttd.tid=ti.tid');
+  $query->addField('ttd', 'tid');
+  $query->addField('ttd', 'name');
   $query->addField('ti', 'nid');
   $query->condition('ti.tid', $tid);
   $query->condition('n.status', 1);
@@ -169,6 +167,7 @@ function get_node_ids_assoicated_with_tid($tid, $is_front = FALSE) {
  */
 function get_personlization_front_block_data() {
   $persionalization = get_personalization_front_data();
+  //pr($persionalization);
   $front_end_data = array();
   foreach ($persionalization as $persionalization_key => $persionalization_data) {
     // tid saved in nid colom in itg_widget_order table
@@ -177,9 +176,28 @@ function get_personlization_front_block_data() {
       $nid = $nid_array['nid'];
       $tid = $persionalization_data;
       $temp_node_data = get_personlization_node_data_for_front($nid);
-      $texonomy_data = taxonomy_term_load($tid);
+      // Create term details object.
+      $temp_term = new stdClass();
+      $temp_term->name = $nid_array['name'];
+      $temp_term->tid = $nid_array['tid'];
+      $texonomy_data = $temp_term;
+      unset($temp_term);
       $front_end_data[] = array("node_data" => $temp_node_data[0], "taxonomy_name" => $texonomy_data);
     }
   }
   return $front_end_data;
 }
+//
+///**
+// * Function gives only name and tid.
+// * @param int $tid
+// * @return object
+// */
+//function _get_term_data_from_tid($tid) {
+//  $data = array();
+//  $query = db_select('taxonomy_term_data' ,'ttd')
+//      ->fields('ttd' ,array('tid','name'))
+//      ->condition('ttd.tid' ,$tid);
+//  $data = $query->execute()->fetchObject();
+//  return $data;
+//}
