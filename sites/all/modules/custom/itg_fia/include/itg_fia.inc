@@ -54,7 +54,6 @@ function itg_fia_xml_node_feed($query) {
     
     
     $target_nids = NULL;
-    $fc_target_id = NULL;
     if(is_array($node->field_facebook_gallery_associate[LANGUAGE_NONE]) && !empty($node->field_facebook_gallery_associate[LANGUAGE_NONE])) {
       $associate_gallery = $node->field_facebook_gallery_associate[LANGUAGE_NONE];
       foreach($associate_gallery as $fc_k => $fc_v){
@@ -105,7 +104,7 @@ function itg_fia_xml_format_rss_channel($title, $link, $items) {
 /**
  * Creates the xml item.
  */
-function itg_fia_xml_format_rss_item($fc_target_id, $target_nids, $img_path, $guid, $node_body, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
+function itg_fia_xml_format_rss_item($target_nids, $img_path, $guid, $node_body, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
   $output = "    <item>\n";
   
   $output .= '      <title>' . $title . "</title>\n";
