@@ -753,8 +753,10 @@ function itg_story_node_presave($node) {
     {
       if (function_exists('itg_get_byline_row'))
       {
-        $publish_id = itg_get_byline_row($node->field_reporter_unique_id[LANGUAGE_NONE][0]['value']);
-        $node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'] = $publish_id;
+        if(!empty($node->field_reporter_unique_id[LANGUAGE_NONE])){
+          $publish_id = itg_get_byline_row($node->field_reporter_unique_id[LANGUAGE_NONE][0]['value']);
+          $node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'] = $publish_id;
+        }
       }
     }
   }
