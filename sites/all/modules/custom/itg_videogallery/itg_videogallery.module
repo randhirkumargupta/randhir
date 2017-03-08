@@ -384,7 +384,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
             }
         }
     }
-    
+
     // here first video duration assign
     if (empty($form_state['values']['field_video_duration'][LANGUAGE_NONE][0]['value'])) {
 
@@ -401,13 +401,17 @@ function itg_videogallery_custom_submit($form, &$form_state) {
             $query->fields('drd', array('solr_video_thumb', 'solr_video_id'));
             $query->condition('fid', $videofields['field_videogallery_video_upload']['und'][0]['fid'], '=');
             $video_image = $query->execute()->fetchAll();
-        
+
             if (empty($video_image)) {
-                $video_fid= $videofields['field_videogallery_video_upload']['und'][0]['fid'];
+                $video_fid = $videofields['field_videogallery_video_upload']['und'][0]['fid'];
                 $file_details = file_load($videofields['field_videogallery_video_upload']['und'][0]['fid']);
 
                 $real_path = drupal_realpath($file_details->uri);
                 if (file_exists($file_details->uri)) {
+                    if ($real_path == "") {
+                        $real_path = file_create_url($file_details->uri);
+                    }
+
                     // use for upload local video to DM
                     itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details->uri, $video_fid, $tags_value, $node_id);
                 }
@@ -466,8 +470,8 @@ function itg_videogallery_send_local_video_to_dailymotion($real_path, $file_deta
                     'solr_video_thumb' => "",
                 ))
                 ->execute();
-        itg_videogallery_unlink_video_playlist($response_result, $playlist_name, $tags_value);
-        itg_videogallery_edit_dailymotion($response_result, $playlist_name, $node_id);
+        //  itg_videogallery_unlink_video_playlist($response_result, $playlist_name, $tags_value);
+        // itg_videogallery_edit_dailymotion($response_result, $playlist_name, $node_id);
     }
 }
 
@@ -606,15 +610,22 @@ function itg_videogallery_edit_dailymotion($vid_res_result, $playlist_name, $nod
  */
 function itg_videogallery_dailymotion($real_path, $uri, $fid, $tags_value, $node_id) {
     $api = itg_videogallery_dailymotion_api();
+
     try {
         if (itg_videogallery_check_ftp_video($fid)) {
             $ftp_file = explode('/dailymotion_video_dir/', $real_path);
             $uri = 'public://dailymotion-ftp/' . $ftp_file[1];
             $url = FTP_URL_VIDEO . $ftp_file[1];
         }
-        else {
+        else if (strpos($real_path, '/s3fs') === FALSE) {
+
             $url = $api->uploadFile($real_path);
         }
+        else {
+            $url = $real_path;
+        }
+
+        // $url = $real_path;
         $result = $api->post(
                 '/me/videos', array(
             'url' => $url,
@@ -624,6 +635,7 @@ function itg_videogallery_dailymotion($real_path, $uri, $fid, $tags_value, $node
             'published' => TRUE,
                 )
         );
+
         $dur = $api->get(
                 '/video/' . $result['id'], array('fields' => array('duration'))
         );
@@ -713,7 +725,6 @@ function itg_videogallery_after_build($form, &$form_state) {
     if ($form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] != 'migrated') {
         foreach ($form['field_video_upload']['und'] as $delta => $field) {
             if (is_numeric($delta)) {
-
                 unset($form['field_video_upload']['und'][$delta]['field_migrated_video_url']);
                 unset($form['field_multi_bitrate']);
                 unset($form['field_noindex_nofollow']);
@@ -728,10 +739,8 @@ function itg_videogallery_after_build($form, &$form_state) {
     if (!isset($form['#node']->nid)) {
         // hide remove button of first field on add form 
         drupal_add_js('jQuery(document).ready(function() {
-
               jQuery("#edit-field-story-reporter-und-0-remove-button").hide();              
               jQuery("#edit-field-video-anchor-und-0-remove-button").hide();
-
             });', array('type' => 'inline', 'scope' => 'footer'));
     }
 
@@ -766,7 +775,6 @@ function itg_videogallery_form_videogallery_node_form_alter(&$form, &$form_state
             ':input[name="field_video_configurations[und][comment]"]' => array('checked' => TRUE),
         )
     );
-
 
     $form['field_story_posted_by_twitter']['#default_value'] = $user->mail;
     $form['field_story_posted_by_instagram']['#default_value'] = $user->mail;
@@ -822,7 +830,9 @@ function itg_videogallery_submit_status_message(&$form, $form_state) {
         $redirect_path .= "?field_story_syndication_value_op=all";
     }
 
-    itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path);
+    if ($form_state['input']['op'] != 'Save as Draft') {
+        itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path);
+    }
 }
 
 /**
@@ -1371,10 +1381,6 @@ function itg_videogallery_thumb_url() {
 //    exit();
     $query = db_select('dailymotion_response_details', 'drd');
     $query->fields('drd');
-    // $db_or = db_or();
-    // $db_or->isNull('drd.dailymotion_thumb_url');
-    //  $db_or->condition('drd.video_duration', 0, '=');
-    // $query->condition($db_or);
     $result = $query->execute()->fetchAll();
     $api = itg_videogallery_dailymotion_api();
     foreach ($result as $val) {
@@ -1382,6 +1388,7 @@ function itg_videogallery_thumb_url() {
             $thumb_url = $api->get(
                     '/video/' . $val->video_id, array('fields' => array('thumbnail_720_url', 'duration'))
             );
+
             $duration = '';
             if ($thumb_url['duration'] < 3600) {
                 $duration = gmdate("i:s", $thumb_url['duration']);
@@ -1412,7 +1419,6 @@ function itg_videogallery_thumb_url() {
                 $node->field_video_used [LANGUAGE_NONE][0]['value'] = $val->dailymotion_published;
                 $node->field_video_thumb_url[LANGUAGE_NONE][0]['value'] = $image_url;
                 $node->field_video_size[LANGUAGE_NONE][0]['value'] = $val->video_size;
-
                 $node->uid = $user->uid;
                 $node->field_video_time[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', $val->upload_time);
                 $node->status = 1; //(1 or 0): Published or not
@@ -1423,7 +1429,6 @@ function itg_videogallery_thumb_url() {
                     $node->nid = $video_exist_innode[0]->nid;
                 }
                 node_save($node);
-                pr($node->nid);
             }
         } catch (Exception $e) {
             db_update('dailymotion_response_details')
@@ -1553,7 +1558,7 @@ function itg_videogallery_thumb_assign() {
                     $filepath = file_default_scheme() . '://crop_image';
                     $scaled = image_scale_and_crop($image, EXTRA_LARGE_IMAGE_WIDTH, EXTRA_LARGE_IMAGE_HEIGHT);
                     $image_name = $image_name . time();
-                    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension . '/');
+                    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
                     $uri = $filepath . '/' . $image_name . '.' . $image_extension;
                     $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
                     $file = new StdClass;
@@ -1577,7 +1582,7 @@ function itg_videogallery_thumb_assign() {
                     $filepath = file_default_scheme() . '://crop_image';
                     $scaled = image_scale_and_crop($image, LARGE_IMAGE_WIDTH, LARGE_IMAGE_HEIGHT);
                     $image_name = $image_name . time();
-                    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension . '/');
+                    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
                     $uri = $filepath . '/' . $image_name . '.' . $image_extension;
                     $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
                     $file = new StdClass;
@@ -1600,7 +1605,7 @@ function itg_videogallery_thumb_assign() {
                     $filepath = file_default_scheme() . '://crop_image';
                     $scaled = image_scale_and_crop($image, MEDIUM_IMAGE_WIDTH, MEDIUM_IMAGE_HEIGHT);
                     $image_name = $image_name . time();
-                    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension . '/');
+                    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
                     $uri = $filepath . '/' . $image_name . '.' . $image_extension;
                     $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
                     $file = new StdClass;
@@ -1624,7 +1629,7 @@ function itg_videogallery_thumb_assign() {
                     $filepath = file_default_scheme() . '://crop_image';
                     $scaled = image_scale_and_crop($image, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
                     $image_name = $image_name . time();
-                    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension . '/');
+                    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
                     $uri = $filepath . '/' . $image_name . '.' . $image_extension;
                     $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
                     $file = new StdClass;
@@ -1647,7 +1652,7 @@ function itg_videogallery_thumb_assign() {
                     $filepath = file_default_scheme() . '://crop_image';
                     $scaled = image_scale_and_crop($image, EXTRA_SMALL_IMAGE_WIDTH, EXTRA_SMALL_IMAGE_HEIGHT);
                     $image_name = $image_name . time();
-                    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension . '/');
+                    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
                     $uri = $filepath . '/' . $image_name . '.' . $image_extension;
                     $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
                     $file = new StdClass;
@@ -1717,10 +1722,12 @@ function itg_videogallery_video_bitrate() {
 function get_video_in_fieldcollection_by_nid($nid) {
     $query = db_select('field_data_field_video_upload', 'up_video');
     $query->join('field_data_field_videogallery_video_upload', 'fvu', 'up_video.field_video_upload_value = fvu.entity_id');
-    $query->join('dailymotion_response_details', 'drd', 'drd.fid = fvu.field_videogallery_video_upload_fid');
+    $query->leftJoin('dailymotion_response_details', 'drd', 'drd.fid = fvu.field_videogallery_video_upload_fid');
+    $query->Join('itg_solr_video_info', 'isvi', 'isvi.fid = fvu.field_videogallery_video_upload_fid');
     $query->leftJoin('field_data_field_include_ads', 'ads_inc', 'ads_inc.entity_id = fvu.entity_id');
     $query->leftJoin('field_data_field_videogallery_description', 'desc_inc', 'desc_inc.entity_id = fvu.entity_id');
     $query->fields('drd', array('fid', 'video_id', 'dailymotion_thumb_url'));
+    $query->fields('isvi', array('fid', 'solr_video_id', 'solr_video_thumb'));
     $query->fields('up_video', array('entity_id'));
     $query->fields('ads_inc', array('field_include_ads_value'));
     $query->fields('desc_inc', array('field_videogallery_description_value'));
@@ -2534,7 +2541,6 @@ function itg_videogallery_ftp_file_insert_cron() {
                                 ))
                                 ->execute();
                         $title = $_POST['title'];
-
                         // data insert into node
                     } catch (Exception $e) {
                         die($e->getMessage());
@@ -2571,6 +2577,7 @@ function itg_videogallery_dailymotion_add_video($real_path, $name, $realfilename
         $dur = $api->get(
                 '/video/' . $result['id'], array('fields' => array('duration'))
         );
+        $resp = $api->post('/playlist/x4u3b1/videos/' . $result['id']);
         $result['duration'] = $dur['duration'];
 
         $a = new Dailymotion();

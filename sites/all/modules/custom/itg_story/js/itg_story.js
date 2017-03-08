@@ -7,6 +7,7 @@
     Drupal.behaviors.itg_story = {
         attach: function(context, settings) {
             var uid = settings.itg_story.settings.uid;
+            $("#edit-field-itg-content-publish-date").hide();
             $(".form-item-field-story-configurations-und-breaking-news").hide('');
             $("label[for='edit-field-story-configurations-und-tv']").html("Associate Story with TV");
             // enable check box of developing story based on condition 
@@ -27,13 +28,13 @@
                 }
             });
             
-            $('#edit-path-pathauto').click(function() {
+           /* $('#edit-path-pathauto').click(function() {
               if ($("#edit-path-pathauto").is(":checked")) {                
                 $("#edit-path-alias").attr('readonly', 'readonly');
               } else {                
                 $("#edit-path-alias").removeAttr('readonly');
               }  
-            });
+            });*/
             
             
             jQuery('input[name="field_story_schedule_date_time[und][0][value][date]"]').keydown(false);

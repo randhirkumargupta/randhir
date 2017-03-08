@@ -174,7 +174,7 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -923,7 +923,7 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -1212,7 +1212,7 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -1584,7 +1584,7 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -1868,7 +1868,7 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -2237,7 +2237,7 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -2533,7 +2533,7 @@ print \'<a href="move-dont-miss-widget-node/most_popular_widget/\'.$_GET[\'type\
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -2898,7 +2898,7 @@ print \'<a href="move-dont-miss-widget-node/most_popular_widget/\'.$_GET[\'type\
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -3199,7 +3199,7 @@ print \'<a href="move-dont-miss-widget-node/top_takes_video_widget/\'.$_GET[\'ty
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -3556,7 +3556,7 @@ print \'<a href="move-dont-miss-widget-node/top_takes_video_widget/\'.$_GET[\'ty
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';

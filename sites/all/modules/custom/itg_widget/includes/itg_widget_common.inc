@@ -5,7 +5,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  * This function is used to create settings.
  * 
@@ -125,12 +124,12 @@ function itg_widgets_custom_variables() {
         '#description' => t("Ex: dev|eoshds,stage|asdasd"),
         '#default_value' => variable_get('apache_solr_sites_prefix_values'),
     );
-   $form['newsletter_education_tid'] = array(
+    $form['newsletter_education_tid'] = array(
         '#type' => 'textfield',
         '#title' => t('Newsletter Eduction Tid'),
         '#default_value' => variable_get('newsletter_education_tid'),
     );
-   $form['category_manager_vid'] = array(
+    $form['category_manager_vid'] = array(
         '#type' => 'textfield',
         '#title' => t('Category Manager Vid'),
         '#default_value' => variable_get('category_manager_vid'),
@@ -153,6 +152,30 @@ function itg_widgets_custom_variables() {
         '#type' => 'textfield',
         '#title' => t('City Management Vid'),
         '#default_value' => variable_get('city_manager_vid'),
+        '#size' => 20,
+    );
+    $form['reporter_tid'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Reporter Tid'),
+        '#default_value' => variable_get('reporter_tid'),
+        '#size' => 20,
+    );
+      $form['live_score_url'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Live schore URL '),
+        '#default_value' => variable_get('live_score_url'),
+        '#size' => 255,
+    );
+      $form['ipl_rhs_nids'] = array(
+        '#type' => 'textfield',
+        '#title' => t('node id for ipl rhs '),
+        '#default_value' => variable_get('ipl_rhs_nids'),
+        '#size' => 255,
+    );
+    $form['anchor_tid'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Anchor Tid'),
+        '#default_value' => variable_get('anchor_tid'),
         '#size' => 20,
     );
     return system_settings_form($form);
@@ -474,9 +497,22 @@ function draggable_view_node_delete($view_name, $page_name, $nid) {
 function itg_widget_keycandidate_form($form, $form_state) {
     $pre_fix = "";
     $suf_fix = "";
+    $op = getsaction_list();
 
+    $form['cat_value'] = array(
+        '#type' => 'select',
+        '#title' => 'Section <span class="form-required" title="This field is required.">*</span>',
+        '#options' => $op,
+        '#ajax' => array(
+            'callback' => 'ajax_dependent_dropdown_state',
+        //'wrapper' => 'view-display-isesue',
+        ),
+        '#prefix' => $pre_fix,
+        '#suffix' => $suf_fix,
+    );
     $state_class = "visible";
-    $states_neame = get_all_state();
+   $states_neame = array();
+    $states_neame = get_all_state($form_state['input']['cat_value']);
 //    if (isset($_POST['state_value'])) {
 //        $pre_fix = "<div style='display:none'>";
 //        $suf_fix = "</div>";
@@ -487,19 +523,11 @@ function itg_widget_keycandidate_form($form, $form_state) {
         '#title' => 'State <span class="form-required" title="This field is required.">*</span>',
         '#multiple' => TRUE,
         '#options' => $states_neame,
-        '#prefix' => $pre_fix,
-        '#suffix' => $suf_fix,
+         '#prefix' => '<div id="view-display-isesue">',
+        '#suffix' => '</div>',
     );
 
-    $op = getsaction_list();
 
-    $form['cat_value'] = array(
-        '#type' => 'select',
-        '#title' => 'Section <span class="form-required" title="This field is required.">*</span>',
-        '#options' => $op,
-        '#prefix' => $pre_fix,
-        '#suffix' => $suf_fix,
-    );
 
 
     $form['alt_button'] = array(
@@ -514,7 +542,7 @@ function itg_widget_keycandidate_form($form, $form_state) {
  * this function use for get section list
  */
 function getsaction_list() {
-    $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+    $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
     // override taxonomy.
     $tax = itg_widget_get_active_taxonomy($tax);
     $op = array("All" => " - None -");
@@ -527,11 +555,13 @@ function getsaction_list() {
 /**
  * This function use for get state
  */
-function get_all_state() {
+function get_all_state($cat) {
+    $states_neame = array();
     $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
     $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
     $states_neame[] = 'Select';
     foreach ($terms as $values) {
+        if($cat == $values->field_section[LANGUAGE_NONE][0]['tid'] )
         $states_neame[$values->tid] = $values->name;
     }
     return $states_neame;
@@ -554,6 +584,10 @@ function itg_widget_keycandidate_form_submit($form, $form_state) {
  */
 function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     global $base_url;
+
+    if($form['#id'] == 'taxonomy-form-term') {
+      drupal_add_css("#edit-field-set-as-featured-cate {display:none !important}" , "inline");
+    }
     // Alter form for confirm message during bulk operation.
     $form_id_array_to_alter = array(
         'views_form_section_wise_draggable_content_order_big_story_format',
@@ -647,14 +681,14 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
 
     if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_auto_review_widget' && ($form_state['view']->current_display == 'special_auto_review_widget_contents' || $form_state['view']->current_display == 'special_auto_review_widget_list')) {
 
-        $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+        $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
 
         // override taxonomy.
         $tax = itg_widget_get_active_taxonomy($tax);
     }
 
     if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'most_read_widget' && ($form_state['view']->current_display == 'most_read_widget_contents' || $form_state['view']->current_display == 'most_read_widget_list')) {
-        $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+        $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
         // override taxonomy.
         $tax = itg_widget_get_active_taxonomy($tax);
         $op = array("All" => " - None -");
@@ -667,7 +701,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
 
 
     if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_how_i_made_it' && ($form_state['view']->current_display == 'special_how_made_it_widget_contents' || $form_state['view']->current_display == 'special_how_made_widget_list')) {
-        $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+        $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
         // override taxonomy.
         $tax = itg_widget_get_active_taxonomy($tax);
         $op = array("All" => " - None -");
@@ -681,7 +715,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
 
     if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_how_i_made_it' && ($form_state['view']->current_display == 'special_how_made_it_widget_contents' || $form_state['view']->current_display == 'special_how_made_widget_list')) {
 
-        $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+        $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
         // override taxonomy.
         $tax = itg_widget_get_active_taxonomy($tax);
 
@@ -694,7 +728,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     }
 // Hiding section filed from basic page (Static page node form)
     if ($form_id == 'page_node_form') {
-        drupal_add_css("div.form-item-field-page-section-und {display:none}", 'inline');
+        //   drupal_add_css("div.form-item-field-page-section-und {display:none}", 'inline');
     }
 
     if (in_array($form_id, itg_widget_order_reorder_form())) {
@@ -1115,11 +1149,14 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
             $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
             $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
             $form['#validate'][] = 'custom_section_wise_validate';
-            $states_neame = get_all_state();
+            $states_name = get_all_state();
+            
             $form['state_val'] = array(
                 '#type' => 'select',
                 '#multiple' => TRUE,
-                '#options' => $states_neame,
+               '#default_value' => '',
+                '#validated'=>TRUE,
+                '#options' => $states_name,
             );
             $form['state_val']['#prefix'] = '<div class=""style="display:none">';
             $form['state_val']['#suffix'] = '</div>';
@@ -1350,21 +1387,26 @@ function itg_widget_views_query_alter(&$view, &$query) {
     if ($view->name == 'anchor_option_view') {
         $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
     }
+    
+    if ($view->name == 'so_sorry_politoons' && $view->current_display = 'so_sorry_politoons') {
+       foreach($query->where[1]['conditions'] as $key => $condtion) {
+         if($condtion['field'] == 'taxonomy_term_data_itg_category_manager__taxonomy_term_hierarchy.parent') {
+           $query->where[1]['conditions'][$key]['value'] = variable_get('so_sorry_category_id_for_widget');
+         }
+       }
+    }
 
     if ($view->name == 'anchor_landing_page') {
         $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
     }
 
     if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_listing_page')) {
-        $anchor_tid = variable_get('anchor_id_for_widget');
-        $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
-        if (strlen($anchor_tid) <= 0) {
-// Link should display only adminstrator.
-            if (in_array('administrator', $user->roles)) {
-                $link = l("click here", 'admin/settings/custom-variables');
-            }
-            drupal_set_message("Anchor setting not found $link", "error");
+        $anchor_tid = variable_get('reporter_tid');
+        foreach($query->where[1]['conditions'] as $keys=>$conditions) {
+        if(is_string($conditions['field']) && $conditions['field'] == 'field_data_field_celebrity_pro_occupation.field_celebrity_pro_occupation_tid') {
+          $query->where[1]['conditions'][$keys]['value'] = $anchor_tid;
         }
+      }
     }
 
     if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_listing_widget')) {
@@ -1380,7 +1422,11 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
 
     if ($view->name == 'so_sorry' && $view->current_display == 'so_sorry_videos') {
-        $query->where[1]['conditions'][1]['value'] = variable_get('so_sorry_category_id_for_widget');
+      foreach($query->where[1]['conditions'] as $keys=>$conditions) {
+        if(is_string($conditions['field']) && $conditions['field'] == 'taxonomy_index.tid') {
+           $query->where[1]['conditions'][$keys]['value'] = variable_get('so_sorry_category_id_for_widget');
+        }
+      }
     }
 
     if ($view->name == 'so_sorry' && $view->current_display == 'so_sorry_videos_widget') {
@@ -1666,8 +1712,45 @@ function itg_widget_views_query_alter(&$view, &$query) {
         }
         $query->where[1]['conditions'][4]['value'] = $content_value_for_query;
     }
+    // Adding relationship.
+  if (_itg_analytics_relationship_views($view->name, $view->current_display)) {
+    $join = new views_join();
+    $join->table = 'itg_node_analytics_count_data';
+    $join->field = 'nid';
+    $join->left_table = 'node';
+    $join->left_field = 'nid';
+    $join->type = 'LEFT';
+    //add the join the the view query
+    $view->query->add_relationship('itg_node_analytics_count_data', $join, 'node');
+    $view->query->add_field('itg_node_analytics_count_data', 'count');
+    $order_by = array();
+    $order_by['field'] = 'count';
+    $order_by['direction'] = 'DESC';
+    array_unshift($query->orderby, $order_by);
+  }
 }
 
+/**
+ * Function which returns flag for add relationship with analytics table.
+ * @param string $view_name
+ * @param string $view_current_display
+ * @return boolean
+ */
+function _itg_analytics_relationship_views($view_name , $view_current_display) {
+  $flag = FALSE;
+  if(!empty($view_name) && !empty($view_current_display)) {
+    if($view_name == "story_widget" && ($view_current_display == "most_popular" || $view_current_display == "trending_videos" || $view_current_display == "watch_right_now" || $view_current_display == "top_takes_video")) {
+      $flag = TRUE;
+    }
+    if($view_name == "so_sorry" && $view_current_display == "most_watched ") {
+      $flag = TRUE;
+    }
+    if($view_name == "most_read_widget" && $view_current_display == "most_read_widget_contents") {
+      $flag = TRUE;
+    }
+  }
+  return $flag;
+}
 /**
  * Function for returning node queue id by node queue machine name.
  *
@@ -2227,7 +2310,9 @@ function itg_widget_block_view_alter(&$data, $block) {
 
 
     if ($block->delta == 'programmes-rhs_programmes') {
-        if ($user_link == 'ipl-venue' || $user_link == 'ipl-schedule' || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
+        $arraynid = array();
+         $arraynid = explode(',', variable_get('ipl_rhs_nids'));
+        if (in_array($arg[1],$arraynid) || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
             $data['content'] = array();
         }
         else {
@@ -2241,8 +2326,14 @@ function itg_widget_block_view_alter(&$data, $block) {
     }
 
     if ($block->delta == 'sport_ipl-top_performers' || $block->delta == 'sport_ipl-points_tally' || $block->delta == 'ipl_tweets' || $block->delta == 'live_score') {
+          $arraynid = array();
+        $arraynid = explode(',', variable_get('ipl_rhs_nids'));
+       
+        if (in_array($arg[1],$arraynid) || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
+           drupal_add_js('jQuery(document).ready(function() {                  
+                        jQuery("body").addClass("section-sport-ipl-bg");
 
-        if ($user_link == 'ipl-venue' || $user_link == 'ipl-schedule' || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
+          });', array('type' => 'inline', 'scope' => 'footer'));
             return TRUE;
         }
         else {
@@ -2509,6 +2600,14 @@ function ajax_dependent_dropdown_issue(&$form, $form_state) {
     );
 }
 
+function ajax_dependent_dropdown_state(&$form, $form_state) {
+    return array(
+        '#type' => 'ajax',
+        '#commands' => array(
+            ajax_command_replace("#view-display-isesue", render($form['state_value'])),
+        )
+    );
+}
 /**
  * This function use for get issue data
  * @return array $result
@@ -2674,48 +2773,47 @@ function itg_block_display_condition() {
  */
 function get_rhs_block_display_condtion($delta = '') {
 
-  $arg = arg();
-  $item = menu_get_item();
-  $page_argument = $item['page_arguments'];
-  $ipl_category = array();
-  $we_may_suggest_display_nodes = variable_get('we_may_suggest_block_condition');
-  $we_may_suggest_node_array = explode(",", $we_may_suggest_display_nodes);
-  $watch_right_now_display_nodes = variable_get('watch_right_now_block_condition');
-  $watch_right_now_node_array = explode(",", $watch_right_now_display_nodes);
-  $top_takes_display_nodes = variable_get('top_takes_block_condition');
-  $top_takes_node_array = explode(",", $top_takes_display_nodes);
-  $story_category = (!empty($page_argument[0]->field_story_category['und'])) ? $page_argument[0]->field_story_category['und'] : "";
-  if (!empty($story_category)) {
-    foreach ($story_category as $category) {
-      $ipl_category[] = $category['tid'];
+    $arg = arg();
+    $item = menu_get_item();
+    $page_argument = $item['page_arguments'];
+    $ipl_category = array();
+    $we_may_suggest_display_nodes = variable_get('we_may_suggest_block_condition');
+    $we_may_suggest_node_array = explode(",", $we_may_suggest_display_nodes);
+    $watch_right_now_display_nodes = variable_get('watch_right_now_block_condition');
+    $watch_right_now_node_array = explode(",", $watch_right_now_display_nodes);
+    $top_takes_display_nodes = variable_get('top_takes_block_condition');
+    $top_takes_node_array = explode(",", $top_takes_display_nodes);
+    $story_category = (!empty($page_argument[0]->field_story_category['und'])) ? $page_argument[0]->field_story_category['und'] : "";
+    if (!empty($story_category)) {
+        foreach ($story_category as $category) {
+            $ipl_category[] = $category['tid'];
+        }
     }
-  }
-  $display_block = itg_block_display_condition();
-  $user_link = (!empty($arg[1])) ? drupal_get_path_alias('node/' . $arg[1]) : "";
-  if ($user_link == 'ipl-venue' || $user_link == 'ipl-schedule' || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
-    
-  }
-  else {
-      
-    switch ($delta) {
-      case 'watch_right_now_videos_widget':
-        if ((!empty($arg[1]) && in_array($arg[1], $watch_right_now_node_array)) || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'blog-listing' || $arg[0] == 'podcasts-listing' || $arg[0] == 'programmes' || $arg[0] == 'site-search' || $arg[0] == 'online-archive-story' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') ||  $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') ||(!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE) {
-          return TRUE;
-        }
-        break;
-      case 'top_takes_videos_widget':
-        if ((!empty($arg[1]) && in_array($arg[1], $top_takes_node_array)) || $arg[0] == 'itg_active_polls' || $arg[0] == 'itg-quiz' || $arg[0] == 'programmes' ||  $arg[0] == 'site-search' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
-          return TRUE;
-        }
-        break;
-      case 'we_may_suggest':
-        if ((!empty($arg[1]) && in_array($arg[1], $we_may_suggest_node_array)) || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'itg-quiz' || $arg[0] == 'blog-listing' ||  $arg[0] == 'podcasts-listing' ||  $arg[0] == 'site-search' || $arg[0] == 'livetv' || $arg[0] == 'online-archive-story'|| (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
-          return TRUE;
-        }
-        break;
+    $display_block = itg_block_display_condition();
+    $user_link = (!empty($arg[1])) ? drupal_get_path_alias('node/' . $arg[1]) : "";
+    if ($user_link == 'ipl-venue' || $user_link == 'ipl-schedule' || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
+        
     }
-  }
+    else {
 
+        switch ($delta) {
+            case 'watch_right_now_videos_widget':
+                if ((!empty($arg[1]) && in_array($arg[1], $watch_right_now_node_array)) || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'blog-listing' || $arg[0] == 'podcasts-listing' || $arg[0] == 'programmes' || $arg[0] == 'site-search' || $arg[0] == 'online-archive-story' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE) {
+                    return TRUE;
+                }
+                break;
+            case 'top_takes_videos_widget':
+                if ((!empty($arg[1]) && in_array($arg[1], $top_takes_node_array)) || $arg[0] == 'itg_active_polls' || $arg[0] == 'itg-quiz' || $arg[0] == 'programmes' || $arg[0] == 'site-search' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
+                    return TRUE;
+                }
+                break;
+            case 'we_may_suggest':
+                if ((!empty($arg[1]) && in_array($arg[1], $we_may_suggest_node_array)) || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'itg-quiz' || $arg[0] == 'blog-listing' || $arg[0] == 'podcasts-listing' || $arg[0] == 'site-search' || $arg[0] == 'livetv' || $arg[0] == 'online-archive-story' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
+                    return TRUE;
+                }
+                break;
+        }
+    }
 }
 
 /**
@@ -2745,39 +2843,61 @@ function insert_all_node_in_widegt_table() {
  * {@inheritdoc}
  */
 function itg_widget_node_insert($node) {
-    if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
-        $nid = $node->nid;
-        $cat_id = $node->field_story_category['und'];
-        if (isset($node->field_story_category['und'])) {
-            foreach ($cat_id as $category) {
-                $max_result = get_max_weight($category['tid'], $node->type);
-
-                $query = db_insert('itg_widget_order')
-                        ->fields(array(
-                            'nid' => $nid,
-                            'widget' => 'section_wise_widget',
-                            'content_type' => $node->type,
-                            'cat_id' => $category['tid'],
-                            'weight' => ++$max_result,
-                            'extra' => "",
-                        ))
-                        ->execute();
-
-                $max_result_all = get_max_weight($category['tid'], "All");
-
-                $query_all = db_insert('itg_widget_order')
-                        ->fields(array(
-                            'nid' => $nid,
-                            'widget' => 'section_wise_widget',
-                            'content_type' => "All",
-                            'cat_id' => $category['tid'],
-                            'weight' => ++$max_result_all,
-                            'extra' => "",
-                        ))
-                        ->execute();
-            }
-        }
+  if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
+    $nid = $node->nid;
+    $cat_id = $node->field_story_category['und'];
+    if (isset($node->field_story_category['und'])) {
+      foreach ($cat_id as $category) {
+        $single_max_result = get_max_weight_for_node_insert($category['tid'], $node->type);
+        $max_result = $single_max_result['content_type'];
+        $max_result_all = $single_max_result['All'];
+        $single_insert_query = db_insert('itg_widget_order')->fields(
+            array(
+              'nid',
+              'widget',
+              'content_type',
+              'cat_id',
+              'weight',
+              'extra',
+            )
+        );
+        $single_insert_query->values(array(
+          'nid' => $nid,
+          'widget' => 'section_wise_widget',
+          'content_type' => $node->type,
+          'cat_id' => $category['tid'],
+          'weight' => ++$max_result,
+          'extra' => '',
+            ), array(
+          'nid' => $nid,
+          'widget' => 'section_wise_widget',
+          'content_type' => 'All',
+          'cat_id' => $category['tid'],
+          'weight' => ++$max_result_all,
+          'extra' => '',
+        ));
+        $single_insert_query->execute();
+      }
     }
+  }
+}
+
+/**
+ * Function returns max weight.
+ * @param int $tid
+ * @param string $type
+ * @return int
+ */
+function get_max_weight_for_node_insert($tid, $type) {
+    $max_query = db_select('itg_widget_order');
+    $max_query->addExpression('MAX(weight)' , 'weight');
+    $max_query->condition('cat_id', $tid);
+    $max_query->condition('content_type', array($type , 'All') , 'IN');
+    $max_query->condition('widget', 'section_wise_widget');
+    $max_query->groupBy('content_type');
+    $max_result = $max_query->execute()->fetchAll();
+    $weight_array = array("All" => $max_result[0]->weight , "content_type" => $max_result[1]->weight);
+    return $weight_array;
 }
 
 /**

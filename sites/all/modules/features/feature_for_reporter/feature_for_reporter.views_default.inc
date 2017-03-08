@@ -117,9 +117,7 @@ function feature_for_reporter_views_default_views() {
   $handler->display->display_options['arguments']['tid']['field'] = 'tid';
   $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
   $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'php';
-  $handler->display->display_options['arguments']['tid']['default_argument_options']['code'] = '$tem_tid = taxonomy_get_term_by_name(\'reporter\',NULL);
-$tid = array_pop($tem_tid)->tid;
-return $tid;';
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['code'] = 'return REPORTER_TID;';
   $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';

@@ -291,6 +291,30 @@ function itg_live_tv_company($device) {
 }
 
 /**
+ * Helper function to get live tv code
+ * @param int $nid
+ */
+function itg_get_live_tv_code($nid) {
+  if (!empty($nid))
+  {
+    $query = db_select('field_data_field_ads_ad_code', 's');
+    $query->fields('s', array('field_ads_ad_code_value'))
+        ->condition('s.entity_id', $nid, '=');
+    $query->range(0, 1);
+    $result = $query->execute();
+    $tv_code = $result->fetchField();
+    if ($tv_code)
+    {
+      return $tv_code;
+    }
+    else
+    {
+      return FALSE;
+    }
+  }
+}
+
+/**
  * Implements itg_live_tv_insert
  * @param int $n_id
  * @param string $device

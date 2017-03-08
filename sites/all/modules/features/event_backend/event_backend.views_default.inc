@@ -3704,7 +3704,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['relationships']['field_program_schedule_value']['table'] = 'field_data_field_program_schedule';
   $handler->display->display_options['relationships']['field_program_schedule_value']['field'] = 'field_program_schedule_value';
   $handler->display->display_options['relationships']['field_program_schedule_value']['delta'] = '-1';
-  /* Field: Field: Kicker */
+  /* Field: Field: Session Title  */
   $handler->display->display_options['fields']['field_story_expert_name']['id'] = 'field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['table'] = 'field_data_field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['field'] = 'field_story_expert_name';
@@ -3785,6 +3785,17 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Session wise Coverage';
   $handler->display->display_options['defaults']['header'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Content: Program Schedule (field_program_schedule) */
+  $handler->display->display_options['relationships']['field_program_schedule_value']['id'] = 'field_program_schedule_value';
+  $handler->display->display_options['relationships']['field_program_schedule_value']['table'] = 'field_data_field_program_schedule';
+  $handler->display->display_options['relationships']['field_program_schedule_value']['field'] = 'field_program_schedule_value';
+  $handler->display->display_options['relationships']['field_program_schedule_value']['delta'] = '-1';
+  /* Relationship: Content: Associate Sponsors (field_associate_sponsors) */
+  $handler->display->display_options['relationships']['field_associate_sponsors_value']['id'] = 'field_associate_sponsors_value';
+  $handler->display->display_options['relationships']['field_associate_sponsors_value']['table'] = 'field_data_field_associate_sponsors';
+  $handler->display->display_options['relationships']['field_associate_sponsors_value']['field'] = 'field_associate_sponsors_value';
+  $handler->display->display_options['relationships']['field_associate_sponsors_value']['delta'] = '-1';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Field collection item: Start Time */
   $handler->display->display_options['fields']['field_start_time']['id'] = 'field_start_time';
@@ -3801,7 +3812,7 @@ return itg_event_backend_get_event_node();
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Field: Kicker */
+  /* Field: Field: Session Title  */
   $handler->display->display_options['fields']['field_story_expert_name']['id'] = 'field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['table'] = 'field_data_field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['field'] = 'field_story_expert_name';
@@ -3864,6 +3875,11 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['view']['view'] = 'program_schedule';
   $handler->display->display_options['fields']['view']['display'] = 'block_2';
   $handler->display->display_options['fields']['view']['arguments'] = '[%field_select_speaker]';
+  /* Field: Field collection item: Daywise */
+  $handler->display->display_options['fields']['field_daywise_event_1']['id'] = 'field_daywise_event_1';
+  $handler->display->display_options['fields']['field_daywise_event_1']['table'] = 'field_data_field_daywise_event';
+  $handler->display->display_options['fields']['field_daywise_event_1']['field'] = 'field_daywise_event';
+  $handler->display->display_options['fields']['field_daywise_event_1']['relationship'] = 'field_associate_sponsors_value';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';

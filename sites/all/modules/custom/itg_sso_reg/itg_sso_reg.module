@@ -1,6 +1,7 @@
 <?php
 
 module_load_include('inc', 'itg_sso_reg', 'includes/itg_sso_mail');
+module_load_include('inc', 'itg_sso_reg', 'includes/itg_sso_otp_mail');
 module_load_include('inc', 'itg_sso_reg', 'includes/common_fn');
 module_load_include('inc', 'itg_sso_reg', 'includes/sso_user_form');
 module_load_include('inc', 'itg_sso_reg', 'includes/sso_user_change_password');
@@ -141,7 +142,11 @@ function itg_sso_reg_theme($existing, $type, $theme, $path) {
     'itg_sso_notification_mail' => array(
       'variables' => array('account' => NULL, 'url_info' => NULL),
       'template' => 'templates/sso-notification-mail',
-    )
+    ),
+   'itg_sso_otp_mail' => array(
+      'variables' => array('rand_otp' => NULL),
+      'template' => 'templates/sso-otp-mail',
+    ),
   );
 
   return $themes;
@@ -177,6 +182,7 @@ function itg_sso_reg_user_mail($key, &$message, $params) {
  */
 function itg_sso_reg_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'user_login' && !empty($_GET['ReturnTo'])) {
+    $form['#after_build'][] = 'itg_user_login_after_build';
     array_unshift($form['#validate'], 'itg_sso_user_login_form_validate');
     $form['#attributes'] = array('autocomplete' => 'off');
   }
@@ -187,6 +193,15 @@ function itg_sso_reg_form_alter(&$form, &$form_state, $form_id) {
                           
           });', array('type' => 'inline', 'scope' => 'footer'));
   }
+}
+
+/**
+ * Implements itg_user_login_after_build().
+ */
+function itg_user_login_after_build($form, &$form_state) {
+ $form['name']['#title'] = t('Enter your email/mobile number'); 
+ $form['name']['#description'] = t('You may login with either your assigned mobile or your e-mail address.'); 
+ return $form; 
 }
 
 /**

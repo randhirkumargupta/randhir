@@ -68,7 +68,7 @@ if (!empty($node) && ($node->type == 'event_backend')) {//shravan
               if(!empty($flash_old)){
                 $flash_old_event = $flash_old;
               }
-              print '<li>'.l('Flashback', 'node/'.$node->nid, array('attributes' => array("style" => "color:$menu_font_color"))).$flash_old_event.'</li>';
+              print '<li>'.l('Flashback', 'javascript:void();', array('fragment' => 'javascript:void();', 'external' => TRUE), array('attributes' => array("style" => "color:$menu_font_color"))).$flash_old_event.'</li>';
             }
             
 //            if ($node->nid) {

@@ -267,7 +267,7 @@ function feature_category_management_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_cm_redirection_url',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'format' => array(
@@ -371,7 +371,7 @@ function feature_category_management_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_description',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'format' => array(

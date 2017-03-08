@@ -16,7 +16,7 @@
       
       // for lock content
         $('.cancle-itg-btn').click(function() {
-            var base_url = settings.itg_story.settings.base_url;
+            var base_url =  Drupal.settings.baseUrl.baseUrl;
             var nid = $(this).attr('data-widget');
             var itgurl = $(this).attr('data-dest');
             

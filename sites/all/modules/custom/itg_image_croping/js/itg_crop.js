@@ -88,7 +88,7 @@
         jQuery.ajax({
             url: Drupal.settings.basePath + 'savecropedimage',
             type: 'post',
-            data: {'image_data': image_data_first, 'content_name': content_type, 'field_name': field_name, 'image_fields': imagefield},
+            data: {'image_data': image_data_first, 'content_name': content_type, 'field_name': field_name, 'image_fields': imagefield,'original_img_id': original_img_id,},
             success: function(data) {
 
                 var image_fiedlid = data;

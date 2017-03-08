@@ -16,14 +16,14 @@
 function itg_theme() {
   $items = array();
   $items['user_login'] = array(
-    'render element' => 'form',
-    'path' => drupal_get_path('theme', 'itg') . '/templates',
-    'template' => 'user-login',
+      'render element' => 'form',
+      'path' => drupal_get_path('theme', 'itg') . '/templates',
+      'template' => 'user-login',
   );
   $items['user_pass'] = array(
-    'render element' => 'form',
-    'path' => drupal_get_path('theme', 'itg') . '/templates',
-    'template' => 'user-pass',
+      'render element' => 'form',
+      'path' => drupal_get_path('theme', 'itg') . '/templates',
+      'template' => 'user-pass',
   );
   return $items;
 }
@@ -87,12 +87,10 @@ function itg_preprocess_comment(&$variables) {
       $user = user_load($comment->uid);
       if (!empty($user->field_first_name[LANGUAGE_NONE][0]['value'])) {
         $submit_name = $user->field_first_name[LANGUAGE_NONE][0]['value'];
-      }
-      else {
+      } else {
         $submit_name = $variables['author'];
       }
-    }
-    else {
+    } else {
       $submit_name = $variables['author'];
     }
     $variables['submitted'] = t('Submitted by !username on !datetime', array('!username' => $submit_name, '!datetime' => $variables['created']));
@@ -126,8 +124,12 @@ function itg_preprocess_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
 
-  if ((!empty($arg[2]) && $arg[2] == 'ugc') || $arg[0] == 'signup' || $arg[0] == 'forgot-password' || $arg[0] == 'sso-user' || $arg[0] == 'sso' || $arg[0] == 'password-success' || $arg[0] == 'complete-page' || $arg[0] == 'associate-photo-video-content') {
+  if ((!empty($arg[2]) && $arg[2] == 'ugc') || $arg[0] == 'signup' || $arg[0] == 'forgot-password' || $arg[0] == 'sso-user' || $arg[0] == 'sso' || $arg[0] == 'password-success' || $arg[0] == 'complete-page' || $arg[0] == 'associate-photo-video-content' || $arg[0] == 'funalytics-popup') {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
+  }
+
+  if ($arg[0] == 'photogallery-embed' || $arg[0] == 'videogallery-embed') {
+    $variables['theme_hook_suggestions'][] = 'page__itgembed';
   }
 
   // Access domain
@@ -153,7 +155,6 @@ function itg_preprocess_page(&$variables) {
   if (!empty($variables['node']->type) && $variables['node']->type == 'event_backend' || $arg[0] == 'event') {
     $variables['theme_hook_suggestions'][] = 'page__event_domain';
   }
-
 }
 
 /**
@@ -174,30 +175,35 @@ function itg_breadcrumb($variables) {
       }
 
       $crumbs .= '<li>Search</li>' . $keyword . '</li></ul></div>';
-    }
-    else {
+    } else {
       $crumbs .= '<li>' . drupal_get_title() . '</li></ul></div>';
     }
   }
   return $crumbs;
 }
 
-
 /**
  * {@inheritdoc}
  */
-
-function itg_preprocess_html($param) {
-  // Code started for adding header , body start , body close for ads module
-  $ads_code = get_header_body_start_end_code();
-  foreach ($ads_code as $ads_key => $ads_chunk) {
-    $code = implode(' ', $ads_chunk);
-    $script_code = array(
-      '#type' => 'markup',
-      '#markup' => $code,
-    );
-    drupal_add_html_head($script_code, $ads_key);
+function itg_preprocess_html(&$vars) {
+  global $base_url, $user;
+  if ($base_url == BACKEND_URL && !empty($user->uid)) {
+    $vars['classes_array'][] = 'pointer-event-none';
   }
+  // Code started for adding header , body start , body close for ads module
+
+  if (function_exists('get_header_body_start_end_code')) {
+    $ads_code = get_header_body_start_end_code();
+    foreach ($ads_code as $ads_key => $ads_chunk) {
+      $code = implode(' ', $ads_chunk);
+      $script_code = array(
+          '#type' => 'markup',
+          '#markup' => $code,
+      );
+      drupal_add_html_head($script_code, $ads_key);
+    }
+  }
+
   // Code ends for adding header, body start, body close for ads module
 }
 
@@ -205,56 +211,72 @@ function itg_preprocess_html($param) {
  * page head alter for update the meta keywords
  */
 function itg_html_head_alter(&$head_elements) {
-    global $base_url;
-    
-    if (!empty(arg(1)) && is_numeric(arg(1))) {
-      $arg_data = node_load(arg(1));
-      if ($arg_data->type == 'videogallery') {
-        if(is_array($arg_data->field_video_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_video_configurations[LANGUAGE_NONE])){
-            if($arg_data->field_video_configurations[LANGUAGE_NONE][0]['value'] == 'google_standout'){
-                $standout_path = $base_url .'/'. $arg_data->path['alias'];
-                $head_elements['google_standout'] = array(
-                  '#type' => 'html_tag',
-                  '#tag' => 'link',
-                  '#attributes' => array('rel'=>'standout', 'href' => $standout_path),
-                );
-            }
+  global $base_url;
+
+  if (!empty(arg(1)) && is_numeric(arg(1))) {
+    $arg_data = node_load(arg(1));
+    if ($arg_data->type == 'videogallery') {
+      if (is_array($arg_data->field_video_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_video_configurations[LANGUAGE_NONE])) {
+        $configurableopt = $arg_data->field_video_configurations[LANGUAGE_NONE];
+        foreach ($configurableopt as $key => $value){
+          $opt_value[] = $value['value'];
         }
-      } else if($arg_data->type == 'photogallery') {
-        if(is_array($arg_data->field_photogallery_configuration[LANGUAGE_NONE]) && !empty($arg_data->field_photogallery_configuration[LANGUAGE_NONE])){
-            if($arg_data->field_photogallery_configuration[LANGUAGE_NONE][0]['value'] == 'google_standout'){
-                $standout_path = $base_url .'/'. $arg_data->path['alias'];
-                $head_elements['google_standout'] = array(
-                  '#type' => 'html_tag',
-                  '#tag' => 'link',
-                  '#attributes' => array('rel'=>'standout', 'href' => $standout_path),
-                );
-            }
+        if (in_array("google_standout", $opt_value)) {
+          $standout_path = $base_url . '/' . $arg_data->path['alias'];
+          $head_elements['google_standout'] = array(
+              '#type' => 'html_tag',
+              '#tag' => 'link',
+              '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
+          );
         }
-      } else if($arg_data->type == 'podcast') {
-        if(is_array($arg_data->field_podcast_configuration[LANGUAGE_NONE]) && !empty($arg_data->field_podcast_configuration[LANGUAGE_NONE])){
-            if($arg_data->field_podcast_configuration[LANGUAGE_NONE][0]['value'] == 'google_standout'){
-                $standout_path = $base_url .'/'. $arg_data->path['alias'];
-                $head_elements['google_standout'] = array(
-                  '#type' => 'html_tag',
-                  '#tag' => 'link',
-                  '#attributes' => array('rel'=>'standout', 'href' => $standout_path),
-                );
-            }
+      }
+    } else if ($arg_data->type == 'photogallery') {
+      if (is_array($arg_data->field_photogallery_configuration[LANGUAGE_NONE]) && !empty($arg_data->field_photogallery_configuration[LANGUAGE_NONE])) {
+        $configurableopt = $arg_data->field_photogallery_configuration[LANGUAGE_NONE];
+        foreach ($configurableopt as $key => $value){
+          $opt_value[] = $value['value'];
         }
-      } else if($arg_data->type == 'story') {
-        if(is_array($arg_data->field_story_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_story_configurations[LANGUAGE_NONE])){
-            if($arg_data->field_story_configurations[LANGUAGE_NONE][0]['value'] == 'google_standout'){
-                $standout_path = $base_url .'/'. $arg_data->path['alias'];
-                $head_elements['google_standout'] = array(
-                  '#type' => 'html_tag',
-                  '#tag' => 'link',
-                  '#attributes' => array('rel'=>'standout', 'href' => $standout_path),
-                );
-            }
+        if (in_array("google_standout", $opt_value)) {
+          $standout_path = $base_url . '/' . $arg_data->path['alias'];
+          $head_elements['google_standout'] = array(
+              '#type' => 'html_tag',
+              '#tag' => 'link',
+              '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
+          );
+        }
+      }
+    } else if ($arg_data->type == 'podcast') {
+      if (is_array($arg_data->field_podcast_configuration[LANGUAGE_NONE]) && !empty($arg_data->field_podcast_configuration[LANGUAGE_NONE])) {
+        $configurableopt = $arg_data->field_podcast_configuration[LANGUAGE_NONE];
+        foreach ($configurableopt as $key => $value){
+          $opt_value[] = $value['value'];
+        }
+        if (in_array("google_standout", $opt_value)) {
+          $standout_path = $base_url . '/' . $arg_data->path['alias'];
+          $head_elements['google_standout'] = array(
+              '#type' => 'html_tag',
+              '#tag' => 'link',
+              '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
+          );
+        }
+      }
+    } else if ($arg_data->type == 'story') {
+      if (is_array($arg_data->field_story_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_story_configurations[LANGUAGE_NONE])) {
+        $configurableopt = $arg_data->field_story_configurations[LANGUAGE_NONE];
+        foreach ($configurableopt as $key => $value){
+          $opt_value[] = $value['value'];
+        }
+        if (in_array("google_standout", $opt_value)) {
+          $standout_path = $base_url . '/' . $arg_data->path['alias'];
+          $head_elements['google_standout'] = array(
+              '#type' => 'html_tag',
+              '#tag' => 'link',
+              '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
+          );
         }
       }
     }
-     
-    $head_elements['metatag_keywords_0']['#name'] = 'news_keyword';
+  }
+
+  $head_elements['metatag_keywords_0']['#name'] = 'news_keyword';
 }

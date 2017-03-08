@@ -114,6 +114,12 @@ function itg_social_media_menu() {
         'type' => MENU_CALLBACK,
         'file' => 'includes/itg_social_media.settings.inc',
     );
+    $items['itg-social-media-promote/%'] = array(
+        'page callback' => 'itg_social_media_promote',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_social_media.admin.inc'
+    );
 
     return $items;
 }
@@ -253,7 +259,7 @@ function ColoredTable($header, $data, $pdf) {
 
         $pdf->Cell($w[0], 10, $i, 0, 0, 'C', $fill);
         $pdf->Cell($w[1], 10, $row['nid_1'], 0, 0, 'C', $fill);
-        $pdf->Cell($w[2], 10, $row['title'], 0, 0, 'C', $fill);
+        $pdf->Cell($w[2], 10, mb_strimwidth($row['title'], 0, 40, ".."), 0, 0, 'C', $fill);
         $pdf->Cell($w[3], 10, $row['type'], 0, 0, 'C', $fill);
         $pdf->Cell($w[4], 10, $row['username'], 0, 0, 'C', $fill);
         $pdf->writeHTMLCell(20, 10, '', '', $row['count_fb_promote'], 0, 0, $fill, 0, 0);
@@ -377,6 +383,11 @@ function itg_social_media_theme($existing, $type, $theme, $path) {
             'path' => drupal_get_path('module', 'itg_social_media') . '/templates',
             'variables' => array('data' => NULL),
         ),
+        'social_media_promote' => array(
+            'template' => 'itg-social-media-promote',
+            'path' => drupal_get_path('module', 'itg_social_media') . '/templates',
+            'variables' => array('data' => NULL),
+        ),
     );
     return $themes;
 }
@@ -460,22 +471,39 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
         case 'views-exposed-form-sold-item-history-page':
             $form['status']['#options'][1] = t('Complete');
             $form['status']['#options'][0] = t('Pending');
-        case 'views-exposed-form-browse-content-page':
-            $form['date_filter']['min']['#attributes'] = array(
-                'autocomplete' => 'off',
-                'readonly' => 'readonly',
-                'placeholder' => t('Start Date'),
+            $form['created']['min'] = array(
+                '#type' => 'date_popup',
+                '#title' => 'From',
+                '#date_format' => 'd/m/Y',
+                '#date_year_range' => '-3:+3',
+                '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date')),
             );
-            $form['date_filter']['min']['#datepicker_options'] = array('maxDate' => '+0d');
-            $form['date_filter']['max']['#datepicker_options'] = array('maxDate' => '+0d');
-            $form['date_filter']['max']['#attributes'] = array(
-                'autocomplete' => 'off',
-                'readonly' => 'readonly',
-                'placeholder' => t('End Date')
+            $form['created']['max'] = array(
+                '#type' => 'date_popup',
+                '#title' => 'To',
+                '#date_format' => 'd/m/Y',
+                '#date_year_range' => '-3:+3',
+                '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date')),
+            );
+            break;
+        case 'views-exposed-form-browse-content-page':
+            $form['field_itg_content_publish_date_value']['min'] = array(
+                '#type' => 'date_popup',
+                '#title' => 'From',
+                '#date_format' => 'Y-m-d',
+                '#date_year_range' => '-3:+3',
+                '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date')),
+            );
+
+            $form['field_itg_content_publish_date_value']['max'] = array(
+                '#type' => 'date_popup',
+                '#title' => 'To',
+                '#date_format' => 'Y-m-d',
+                '#date_year_range' => '-3:+3',
+                '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date')),
             );
 
             break;
-
         case 'views-exposed-form-social-media-report-social-media-report':
             $form['scheduled_time']['min']['#attributes'] = array(
                 'autocomplete' => 'off',
@@ -544,6 +572,7 @@ function itg_social_media_block_info() {
 function itg_social_media_block_view($delta = '') {
     $block = array();
     $arg = arg();
+
     if (isset($arg[1])) {
         $c_type = itg_social_media_node_type(check_plain($arg[1]));
         $nid = check_plain($arg[1]);
@@ -592,110 +621,124 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
     // Set file status to permanent
     $file = file_load($fid);
     // Get file real path
-    $path = drupal_realpath($file->uri);
-    // Get connection object
-    $fb = itg_social_media_fb_connection();
-    // Get page information
-    $page_id = variable_get('facebook_page_id', '');
-    if (variable_get('access_token_one', '') === '') {
-        drupal_set_message(t('Please first login to facebook'));
-        drupal_goto('browse-content');
-    }
-    // Create complete access token string.
-    $token = variable_get('access_token_one') . variable_get('access_token_two');
-    // Check node alias is available or not.
-    $alias = '';
-    if (!empty($node->path['alias'])) {
-        $alias = $node->path['alias'];
+    if (file_exists($file->uri)) {
+        $path = drupal_realpath($file->uri);
+
+
+        if ($path == "") {
+            $path = file_create_url($file->uri);
+        }
+
+        // Get connection object
+        $fb = itg_social_media_fb_connection();
+        // Get page information
+        $page_id = variable_get('facebook_page_id', '');
+        if (variable_get('access_token_one', '') === '') {
+            drupal_set_message(t('Please first login to facebook'));
+            drupal_goto('browse-content');
+        }
+        // Create complete access token string.
+        $token = variable_get('access_token_one') . variable_get('access_token_two');
+        // Check node alias is available or not.
+        $alias = '';
+        if (!empty($node->path['alias'])) {
+            $alias = $node->path['alias'];
+        }
+        else {
+            $alias = 'node/' . $node->nid;
+        }
+        // Get short url
+        $short_url = shorten_url($base_url . '/' . $alias, 'goo.gl');
+
+        switch ($type) {
+            case 'videos':
+                if ($stime != NULL) {
+                    $data = [
+                        'title' => $node->title,
+                        'description' => t($desc) . ' ' . $short_url,
+                        'source' => $fb->videoToUpload($path),
+                        'published' => FALSE,
+                        'scheduled_publish_time' => $stime,
+                    ];
+                    $pre_save['scheduled_time'] = $stime;
+                    $pre_save['created'] = REQUEST_TIME;
+                }
+                else {
+                    $data = [
+                        'title' => $node->title,
+                        'description' => t($desc) . ' ' . $short_url,
+                        'source' => $fb->videoToUpload($path),
+                        'published' => TRUE,
+                    ];
+                    $pre_save['created'] = REQUEST_TIME;
+                    $pre_save['scheduled_time'] = REQUEST_TIME;
+                }
+
+                break;
+
+            case 'photos':
+                if ($stime != NULL) {
+                    $data = [
+                        'message' => t($desc) . ' ' . $short_url,
+                        'source' => $fb->fileToUpload($path),
+                        'published' => FALSE,
+                        'scheduled_publish_time' => $stime,
+                    ];
+                    $pre_save['scheduled_time'] = $stime;
+                    $pre_save['created'] = REQUEST_TIME;
+                }
+                else {
+                    $data = [
+                        'message' => t($desc) . ' ' . $short_url,
+                        'source' => $fb->fileToUpload($path),
+                        'published' => TRUE,
+                    ];
+                    $pre_save['created'] = REQUEST_TIME;
+                    $pre_save['scheduled_time'] = REQUEST_TIME;
+                }
+
+                break;
+        }
+
+        try {
+            $response = $fb->post('/' . $page_id . '/' . $type, $data, $token);
+            $graph_node_res = $response->getGraphNode();
+        } catch (Facebook\Exceptions\FacebookResponseException $e) {
+            // When Graph returns an error
+            drupal_set_message(t('Content not promoted on facebook error: @egetMessage', array('@egetMessage' => $e->getMessage())), 'error');
+            drupal_goto('/browse-content');
+        } catch (Facebook\Exceptions\FacebookSDKException $e) {
+            // When validation fails or other local issues
+            drupal_set_message(t('Facebook SDK returned an error: @egetMessage', array('@egetMessage' => $e->getMessage())), 'error');
+            drupal_goto('/browse-content');
+        }
+        // get response
+        $graphNode = $response->isError();
+        $post_id = $graph_node_res['post_id'];
+        if ($graph_node_res['post_id'] == "") {
+            $post_id = variable_get('facebook_page_id', '') . '_' . $graph_node_res['id'];
+        }
+
+        if (!$graphNode) {
+            $pre_save['nid'] = $node->nid;
+            $pre_save['node_title'] = $node->title;
+            $pre_save['username'] = $user->name;
+            $pre_save['post_id'] = $post_id;
+            $pre_save['social_media'] = 'facebook ' . $type;
+            $pre_save['status'] = 1;
+            $mtype = $type == 'photos' ? 'Image' : 'Video';
+            watchdog('Facebook pre', '<pre>' . print_r($pre_save, TRUE) . '</pre>');
+            // INSERT INTO DATABASE    
+            drupal_write_record('itg_social_media_logs', $pre_save);
+
+            drupal_set_message(t('@mtype has been posted on social media - Facebook', array('@mtype' => $mtype)), 'status');
+        }
     }
     else {
-        $alias = 'node/' . $node->nid;
-    }
-    // Get short url
-    $short_url = shorten_url($base_url . '/' . $alias, 'goo.gl');
-
-    switch ($type) {
-        case 'videos':
-            if ($stime != NULL) {
-                $data = [
-                    'title' => $node->title,
-                    'description' => t($desc) . ' ' . $short_url,
-                    'source' => $fb->videoToUpload($path),
-                    'published' => FALSE,
-                    'scheduled_publish_time' => $stime,
-                ];
-                $pre_save['scheduled_time'] = $stime;
-                $pre_save['created'] = REQUEST_TIME;
-            }
-            else {
-                $data = [
-                    'title' => $node->title,
-                    'description' => t($desc) . ' ' . $short_url,
-                    'source' => $fb->videoToUpload($path),
-                    'published' => TRUE,
-                ];
-                $pre_save['created'] = REQUEST_TIME;
-                $pre_save['scheduled_time'] = REQUEST_TIME;
-            }
-
-            break;
-
-        case 'photos':
-            if ($stime != NULL) {
-                $data = [
-                    'message' => t($desc) . ' ' . $short_url,
-                    'source' => $fb->fileToUpload($path),
-                    'published' => FALSE,
-                    'scheduled_publish_time' => $stime,
-                ];
-                $pre_save['scheduled_time'] = $stime;
-                $pre_save['created'] = REQUEST_TIME;
-            }
-            else {
-                $data = [
-                    'message' => t($desc) . ' ' . $short_url,
-                    'source' => $fb->fileToUpload($path),
-                    'published' => TRUE,
-                ];
-                $pre_save['created'] = REQUEST_TIME;
-                $pre_save['scheduled_time'] = REQUEST_TIME;
-            }
-
-            break;
-    }
-
-    try {
-        $response = $fb->post('/' . $page_id . '/' . $type, $data, $token);
-        $graph_node_res = $response->getGraphNode();
-    } catch (Facebook\Exceptions\FacebookResponseException $e) {
-        // When Graph returns an error
-        drupal_set_message(t('Content not promoted on facebook error: @egetMessage', array('@egetMessage' => $e->getMessage())), 'error');
-        drupal_goto('/browse-content');
-    } catch (Facebook\Exceptions\FacebookSDKException $e) {
-        // When validation fails or other local issues
-        drupal_set_message(t('Facebook SDK returned an error: @egetMessage', array('@egetMessage' => $e->getMessage())), 'error');
-        drupal_goto('/browse-content');
-    }
-    // get response
-    $graphNode = $response->isError();
-    $post_id = $graph_node_res['post_id'];
-    if ($graph_node_res['post_id'] == "") {
-        $post_id = variable_get('facebook_page_id', '') . '_' . $graph_node_res['id'];
-    }
-
-    if (!$graphNode) {
-        $pre_save['nid'] = $node->nid;
-        $pre_save['node_title'] = $node->title;
-        $pre_save['username'] = $user->name;
-        $pre_save['post_id'] = $post_id;
-        $pre_save['social_media'] = 'facebook ' . $type;
-        $pre_save['status'] = 1;
-        $mtype = $type == 'photos' ? 'Image' : 'Video';
-        watchdog('Facebook pre', '<pre>' . print_r($pre_save, TRUE) . '</pre>');
-        // INSERT INTO DATABASE    
-        drupal_write_record('itg_social_media_logs', $pre_save);
-
-        drupal_set_message(t('@mtype has been posted on social media - Facebook', array('@mtype' => $mtype)), 'status');
+        if ($type == 'photos') {
+            $type = 'Image';
+        }
+        drupal_set_message($type . ' Not found please upload new ' . $type, "error");
     }
 }
 
@@ -785,13 +828,24 @@ function itg_social_media_form_submit($form, &$form_state) {
     // Facebook section
     if (isset($form_state['values']['itg_smi']['facebook']) && $form_state['values']['itg_smi']['facebook'] === 'facebook') {
         // Facebook Image
+
         if ($form_state['values']['itg_fb_img'] > 0 && $form_state['values']['itg_facebook_condition'] == 0) {
             $desc = $form_state['values']['itg_facebook_narrative'];
             $fid = $form_state['values']['itg_fb_img'];
             $stime = $form_state['values']['img_schedule_time'] != NULL ? strtotime($form_state['values']['img_schedule_time']) : NULL;
-            itg_social_media_facebook_post($fid, $desc, 'photos', $node, $stime);
-            $node->field_story_facebook_image['und'][0]['fid'] = $form_state['values']['itg_fb_img'];
-            $node->field_story_facebook_narrative['und'][0]['value'] = $form_state['values']['itg_facebook_narrative'];
+            if ($stime < strtotime("+10 minutes") && $stime != NULL) {
+                drupal_set_message('Schedule time should be greater than 10+ Minutes or  to current time', 'error');
+            }
+            else {
+
+                //if($stime != NULL && )
+                itg_social_media_facebook_post($fid, $desc, 'photos', $node, $stime);
+                $node->field_story_facebook_image['und'][0]['fid'] = $form_state['values']['itg_fb_img'];
+                $node->field_story_facebook_narrative['und'][0]['value'] = $form_state['values']['itg_facebook_narrative'];
+            }
+        }
+        if ($form_state['values']['itg_fb_img'] == 0 && $form_state['values']['itg_facebook_condition'] == 0) {
+            drupal_set_message('Please uplaod facebook Image', 'error');
         }
 
         // Facebook Video
@@ -799,14 +853,22 @@ function itg_social_media_form_submit($form, &$form_state) {
             $desc = $form_state['values']['itg_facebook_narrative'];
             $fid = $form_state['values']['itg_fb_video'];
             $stime = $form_state['values']['video_schedule_time'] !== '' ? strtotime($form_state['values']['video_schedule_time']) : '';
-            itg_social_media_facebook_post($fid, $desc, 'videos', $node, $stime);
-            // save node field
-            $node->field_story_facebook_video['und'][0] = array(
-                'fid' => $fid,
-                'display' => 1,
-                'description' => ''
-            );
-            $node->field_story_facebook_narrative['und'][0]['value'] = $form_state['values']['itg_facebook_narrative'];
+            if ($stime < strtotime("+10 minutes") && $stime != NULL) {
+                drupal_set_message('Schedule time should be greater than 10+ Minutes or  to current time', 'error');
+            }
+            else {
+                itg_social_media_facebook_post($fid, $desc, 'videos', $node, $stime);
+                // save node field
+                $node->field_story_facebook_video['und'][0] = array(
+                    'fid' => $fid,
+                    'display' => 1,
+                    'description' => ''
+                );
+                $node->field_story_facebook_narrative['und'][0]['value'] = $form_state['values']['itg_facebook_narrative'];
+            }
+        }
+        if ($form_state['values']['itg_fb_video'] == 0 && $form_state['values']['itg_facebook_condition'] == 1) {
+            drupal_set_message('Please uplaod facebook Video', 'error');
         }
     }
 
@@ -860,6 +922,7 @@ function itg_social_media_form_submit($form, &$form_state) {
     }
     // Save node object.
     node_save($node);
+    $arg = arg();
 }
 
 /**
@@ -876,67 +939,80 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node, $is_scheduled_i
     // Set image status permanent
     $file = file_load($fid);
     // Get real path of the file
-    $path = drupal_realpath($file->uri);
+    if (file_exists($file->uri)) {
+        $path = drupal_realpath($file->uri);
 
-    // Check node alias is available or not.
-    $alias = '';
-    if (!empty($node->path['alias'])) {
-        $alias = $node->path['alias'];
-    }
-    else {
-        $alias = 'node/' . $node->nid;
-    }
-    // Get short url
-    $short_url = shorten_url($base_url . '/' . $alias, 'goo.gl');
-    $media_files = [$path];
-    // will hold the uploaded IDs
-    $media_ids = [];
+        if ($path == "") {
+            $path = file_create_url($file->uri);
+            $path = file_get_contents($path);
+        }
+        // Check node alias is available or not.
+        $alias = '';
+        if (!empty($node->path['alias'])) {
+            $alias = $node->path['alias'];
+        }
+        else {
+            $alias = 'node/' . $node->nid;
+        }
+        // Get short url
+        $short_url = shorten_url($base_url . '/' . $alias, 'goo.gl');
+        $media_files = [$path];
+        // will hold the uploaded IDs
+        $media_ids = [];
 
-    foreach ($media_files as $files) {
-        // upload all media files
-        $reply = $cb->media_upload([
-            'media' => $files
+        foreach ($media_files as $files) {
+            // upload all media files
+
+            $reply = $cb->media_upload([
+                'media' => $path
+            ]);
+
+            // and collect their IDs
+            $media_ids[] = $reply->media_id_string;
+        }
+
+        // convert media ids to string list
+        $media_id = implode(',', $media_ids);
+
+        // send Tweet with these medias
+        $reply = $cb->statuses_update([
+            'status' => $desc . ' ' . $short_url,
+            'media_ids' => $media_id
         ]);
-        // and collect their IDs
-        $media_ids[] = $reply->media_id_string;
-    }
-    // convert media ids to string list
-    $media_id = implode(',', $media_ids);
 
-    // send Tweet with these medias
-    $reply = $cb->statuses_update([
-        'status' => $desc . ' ' . $short_url,
-        'media_ids' => $media_id
-    ]);
+        watchdog('twitter image', '<pre>' . print_r($reply, TRUE) . '</pre>');
+        if (isset($reply->id) && $is_scheduled_id === NULL) {
+            $pre_save = array(
+                'nid' => $node->nid,
+                'node_title' => $node->title,
+                'username' => $user->name,
+                'post_id' => $reply->id,
+                'social_media' => 'Twitter Image',
+                'created' => REQUEST_TIME,
+                'scheduled_time' => REQUEST_TIME,
+                'status' => 1,
+            );
 
-    watchdog('twitter image', '<pre>' . print_r($reply, TRUE) . '</pre>');
-    if (isset($reply->id) && $is_scheduled_id === NULL) {
-        $pre_save = array(
-            'nid' => $node->nid,
-            'node_title' => $node->title,
-            'username' => $user->name,
-            'post_id' => $reply->id,
-            'social_media' => 'Twitter Image',
-            'created' => REQUEST_TIME,
-            'scheduled_time' => REQUEST_TIME,
-            'status' => 1,
-        );
-
-        // iNSERT INTO DATABASE
-        $query = drupal_write_record('itg_social_media_logs', $pre_save);
-        // Set message
-        drupal_set_message(t('Image has been posted on social media - Twitter'), 'status');
+            // iNSERT INTO DATABASE
+            $query = drupal_write_record('itg_social_media_logs', $pre_save);
+            // Set message
+            drupal_set_message(t('Image has been posted on social media - Twitter'), 'status');
+        }
+        else {
+            $pre_save = array(
+                'status' => 1,
+            );
+            $query = db_update('itg_social_media_logs');
+            $query->condition('id', $is_scheduled_id)
+                    ->condition('status', 0)
+                    ->fields($pre_save)
+                    ->execute();
+            drupal_set_message(t('Image has been posted on social media - Twitter'), 'status');
+        }
     }
     else {
-        $pre_save = array(
-            'status' => 1,
-        );
-        $query = db_update('itg_social_media_logs');
-        $query->condition('id', $is_scheduled_id)
-                ->condition('status', 0)
-                ->fields($pre_save)
-                ->execute();
-        drupal_set_message(t('Image has been posted on social media - Twitter'), 'status');
+
+        drupal_set_message('Twitter Image Not found please upload new Image', "error");
     }
 }
 
@@ -954,95 +1030,113 @@ function itg_social_media_tvideo_post($fid, $desc, $node, $is_scheduled_id = NUL
     // Set image status permanent
     $file = file_load($fid);
     // Get real path of the file
-    $path = drupal_realpath($file->uri);
-    $size_bytes = filesize($path);
+    if (file_exists($file->uri)) {
+        $path = drupal_realpath($file->uri);
 
-    // Check node alias is available or not.
-    $alias = '';
-    if (!empty($node->path['alias'])) {
-        $alias = $node->path['alias'];
-    }
-    else {
-        $alias = 'node/' . $node->nid;
-    }
+        if ($path == "") {
+            $path = file_create_url($file->uri);
+        }
+        $size_bytes = filesize($path);
+        $ch = curl_init($path);
 
-    // Get short url
-    $short_url = shorten_url($base_url . '/' . $alias, 'goo.gl');
-    $fp = fopen($path, 'r');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, TRUE);
+        curl_setopt($ch, CURLOPT_NOBODY, TRUE);
 
-    // INIT the upload
-    $reply = $cb->media_upload([
-        'command' => 'INIT',
-        'total_bytes' => $size_bytes,
-        'media_type' => 'video/mp4',
-    ]);
+        $data = curl_exec($ch);
+        $size_bytes = curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
 
-    $media_id = $reply->media_id_string;
+        curl_close($ch);
+       
+        // Check node alias is available or not.
+        $alias = '';
+        if (!empty($node->path['alias'])) {
+            $alias = $node->path['alias'];
+        }
+        else {
+            $alias = 'node/' . $node->nid;
+        }
 
-    // APPEND data to the upload
-    $segment_id = 0;
+        // Get short url
+        $short_url = shorten_url($base_url . '/' . $alias, 'goo.gl');
+        $fp = fopen($path, 'r');
 
-    while (!feof($fp)) {
-        // 1MB per chunk for this sample
-        $chunk = fread($fp, 1048576);
+        // INIT the upload
         $reply = $cb->media_upload([
-            'command' => 'APPEND',
-            'media_id' => $media_id,
-            'segment_index' => $segment_id,
-            'media' => $chunk
+            'command' => 'INIT',
+            'total_bytes' => $size_bytes,
+            'media_type' => 'video/mp4',
         ]);
 
-        $segment_id++;
-    }
+        $media_id = $reply->media_id_string;
+        // APPEND data to the upload
+        $segment_id = 0;
 
-    fclose($fp);
+        while (!feof($fp)) {
+            // 1MB per chunk for this sample
+            $chunk = fread($fp, 1048576);
+            $reply = $cb->media_upload([
+                'command' => 'APPEND',
+                'media_id' => $media_id,
+                'segment_index' => $segment_id,
+                'media' => $chunk
+            ]);
 
-    // FINALIZE the upload
-    $reply = $cb->media_upload([
-        'command' => 'FINALIZE',
-        'media_id' => $media_id
-    ]);
+            $segment_id++;
+        }
 
-    if ($reply->httpstatus < 200 || $reply->httpstatus > 299) {
-        drupal_set_message(t('Http status: @reply', array('@reply' => $reply->httpstatus)), 'error');
-        drupal_set_message(t('Please upload valid video file. @filename', array('@filename' => $file->name)), 'error');
-        drupal_goto('/browse-content');
-    }
+        fclose($fp);
+        // FINALIZE the upload
+        $reply = $cb->media_upload([
+            'command' => 'FINALIZE',
+            'media_id' => $media_id
+        ]);
 
-    // Now use the media_id in a Tweet
-    $reply = $cb->statuses_update([
-        'status' => $desc . ' ' . $short_url,
-        'media_ids' => $media_id
-    ]);
+        if ($reply->httpstatus < 200 || $reply->httpstatus > 299) {
+            drupal_set_message(t('Http status: @reply', array('@reply' => $reply->httpstatus)), 'error');
+            drupal_set_message(t('Please upload valid video file. @filename', array('@filename' => $file->name)), 'error');
+            drupal_goto('/browse-content');
+        }
 
-    watchdog('twitter video', '<pre>' . print_r($reply, TRUE) . '</pre>');
-    if (isset($reply->id) && $is_scheduled === NULL) {
-        $pre_save = array(
-            'nid' => $node->nid,
-            'node_title' => $node->title,
-            'username' => $user->name,
-            'post_id' => $reply->id,
-            'social_media' => 'Twitter Video',
-            'created' => REQUEST_TIME,
-            'status' => 1,
-            'scheduled_time' => REQUEST_TIME,
-        );
+        // Now use the media_id in a Tweet
+        $reply = $cb->statuses_update([
+            'status' => $desc . ' ' . $short_url,
+            'media_ids' => $media_id
+        ]);
 
-        // iNSERT INTO DATABASE
-        $query = drupal_write_record('itg_social_media_logs', $pre_save);
-        // Set message
-        drupal_set_message(t('Video has been posted on social media - Twitter'), 'status');
+        watchdog('twitter video', '<pre>' . print_r($reply, TRUE) . '</pre>');
+        if (isset($reply->id) && $is_scheduled === NULL) {
+            $pre_save = array(
+                'nid' => $node->nid,
+                'node_title' => $node->title,
+                'username' => $user->name,
+                'post_id' => $reply->id,
+                'social_media' => 'Twitter Video',
+                'created' => REQUEST_TIME,
+                'status' => 1,
+                'scheduled_time' => REQUEST_TIME,
+            );
+
+            // iNSERT INTO DATABASE
+            $query = drupal_write_record('itg_social_media_logs', $pre_save);
+            // Set message
+            drupal_set_message(t('Video has been posted on social media - Twitter'), 'status');
+        }
+        else {
+            $pre_save = array(
+                'status' => 1,
+            );
+            $query = db_update('itg_social_media_logs');
+            $query->condition('id', $is_scheduled_id)
+                    ->condition('status', 0)
+                    ->fields($pre_save)
+                    ->execute();
+            drupal_set_message(t('Video has been posted on social media - Twitter'), 'status');
+        }
     }
     else {
-        $pre_save = array(
-            'status' => 1,
-        );
-        $query = db_update('itg_social_media_logs');
-        $query->condition('id', $is_scheduled_id)
-                ->condition('status', 0)
-                ->fields($pre_save)
-                ->execute();
-        drupal_set_message(t('Video has been posted on social media - Twitter'), 'status');
+
+        drupal_set_message('Twitter video Not found please upload new video', "error");
     }
 }
 
@@ -1073,6 +1167,25 @@ function itg_social_media_views_query_alter(&$view, &$query) {
         foreach ($query->where[1]['conditions'] as $key => $condition) {
             if (isset($condition['value'][':field_data_field_story_schedule_date_time_field_story_schedule_date_time_value']) && $type !== 'story') {
                 unset($query->where[1]['conditions'][$key]);
+            }
+        }
+    }
+
+    if ($view->name === 'sold_item_history' || $view->name === 'page') {
+        if (isset($_GET['created']['max']['date'])) {
+            $mx_date = str_replace('/', '-', $_GET['created']['max']['date']);
+            $mx_date = strtotime($mx_date . ' +1 days');
+            $max_conditions_array = array();
+            $max_date = strtotime(date('d-m-Y', $mx_date));
+            $max_date_condition = " AND " . $max_date;
+
+            if (isset($view->query->where[1]['conditions'][0]['field'])) {
+                foreach ($query->where[1]['conditions'] as $idx => $condition) {
+                    if (!is_object($condition['field']) && $condition['operator'] == 'formula') {
+                        $max_conditions_array = explode('AND', $view->query->where[1]['conditions'][$idx]['field']);
+                        $view->query->where[1]['conditions'][$idx]['field'] = $max_conditions_array[0] . $max_date_condition;
+                    }
+                }
             }
         }
     }

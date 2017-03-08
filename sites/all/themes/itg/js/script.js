@@ -136,12 +136,12 @@
                     if(! mouse_is_inside) $('.globle-search').css('width', '0px');
                 });
                 
-                $('.search-icon').click(function () {
-                    $(this).parents('div').find('.globle-search').css('width', '255px').find('.search-text').focus();
-                    
+                $('header .search-icon').click(function () {
+                    $('header').find('.globle-search').css('width', '255px').find('.search-text').focus();
                 });                
-
-                
+                $('footer .search-icon').click(function () {
+                    $('footer').find('.globle-search').css('width', '255px').find('.search-text').focus();
+                }); 
                 
                 $('#block-itg-layout-manager-header-block .menu-login .user-menu').hover(function(){                    
                     $('#newlist').hide();
@@ -167,7 +167,7 @@
 
             //search page result
             var winWidth;
-            $(".view-front-end-global-search").find("#edit-tm-vid-4-names-wrapper, #edit-sm-field-itg-common-by-line-name-wrapper, #edit-bundle-name-wrapper, #edit-hash-wrapper, .views-submit-button, .views-reset-button").wrapAll("<div class='searh-all-filters'></div>");
+            $(".view-front-end-global-search").find("[class*='views-widget-filter-tm_vid'], #edit-tm-vid-14-names-wrapper, #edit-tm-vid-4-names-wrapper, #edit-sm-field-itg-common-by-line-name-wrapper, #edit-bundle-name-wrapper, #edit-hash-wrapper, .views-submit-button, .views-reset-button").wrapAll("<div class='searh-all-filters'></div>");
             $('.itg-search-list').each(function () {
                 $(this).find('.search-pic').each(function () {
                     var current = $(this);
@@ -340,6 +340,9 @@ jQuery(document).ready(function () {
             }
         });
     }
+    jQuery('body').on('click', '.personal-share', function(){
+      jQuery('.personal-social-share-links').slideToggle();
+    });
 });
 
 
@@ -552,7 +555,7 @@ jQuery(document).ready(function () {
     //social share animation effects   
     jQuery('.social-share ul').each(function () {
         jQuery(this).children().not(":first").hide();
-    })
+    });
     jQuery('.social-share li').click(function () {
         jQuery(this).find('.share').parent('li').nextAll('li').toggle();
     });
@@ -786,6 +789,11 @@ jQuery(document).ready(function () {
         } else if(datavalue === 'whatever'){
             smilyanimation('wgmf');
         }                                 
+    });
+    // jQuery code to show embed code popup
+    jQuery('.show-embed-code-link').on('click', '.embed-link', function(){
+      jQuery(this).toggleClass('active');
+      jQuery(this).next('.show-embed-code-div').stop().fadeToggle();
     });
 });
 

@@ -1,5 +1,3 @@
-
-
 /*
  * @file itg_field_mapping.js
  * Contains all the functionality of mapping image to field 
@@ -82,8 +80,6 @@
         tagurl = jQuery('#tagurl').val();
         tagid = jQuery('#tagid').val();
 
-
-
         var img = jQuery('#imgtag').find('img');
         if (/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(tagurl)) {
             jQuery('.web-error').hide();
@@ -113,9 +109,6 @@
 
 
     });
-
-
-
 
     // Cancel the tag box.
     jQuery(document).on('click', '#tagit #btncancel', function() {
@@ -157,8 +150,6 @@
                 jQuery('#tagit').remove();
                 viewtag(image_fiedlid);
 
-
-
             }
         });
     });
@@ -179,7 +170,6 @@
                 //get tags if present
                 jQuery('#tagit').remove();
                 viewtag(image_fiedlid);
-
 
             }
         });
@@ -205,10 +195,6 @@
             }
         });
     });
-
-
-
-
 
 
     viewtag(image_fiedlid); // view all tags available on page load
@@ -242,13 +228,11 @@
             type: 'post',
             data: {'form_value': form_value},
             success: function(data) {
-
                 var getbame = jQuery('#btn_name').val();
                 var getis_custom_form = jQuery('#is_custom_form').val();
                 var original_img_id = jQuery('#orig_image_fiedlid').val();
                 var exist_original_id = parent.jQuery('#original_image_fids').val();
                 var is_solr = jQuery('#is_solr').val();
-
                 if (original_img_id != "" && is_solr != '1') {
                     if (exist_original_id == "") {
                         parent.jQuery('#original_image_fids').val(original_img_id);
@@ -282,7 +266,6 @@
                         var replaced = newbname.substring(newbname.indexOf("[") + 1);
                         replaced = getvalue[1] + '[' + replaced;
                         var field_name = jQuery('#field_name').val();
-
                         if (getis_custom_form == 1) {
                             parent.jQuery('[name="' + field_name + '[fid]"]').val(image_fiedlid);
                             parent.jQuery('.div_' + field_name).hide();
@@ -292,12 +275,9 @@
                         parent.jQuery("body").find("input[name='" + replaced + "[filefield_itg_image_repository][button]").trigger('mousedown');
                         parent.jQuery('[name="' + getbame + '[fid]"]').val(image_fiedlid);
                         parent.jQuery("body").find("input[name='" + getbame + "[filefield_itg_image_repository][button]").trigger('mousedown');
-
                         parent.jQuery(document).ajaxComplete(function(event, request, settings) {
 
                             if (settings.url.indexOf(field_name) >= 0) {
-
-
                                 if (image_alttext == "")
                                 {
                                     var imagealt = jQuery('#imgtag img').attr('src');
@@ -310,22 +290,18 @@
                                     var image_title = imagetitle.substring(imagetitle.lastIndexOf("/") + 1, imagetitle.length);
                                     image_title = image_title.substr(0, image_title.lastIndexOf('.'));
                                 }
-
                                 var image_alttext = jQuery('#alt_text_image').val();
                                 var image_title = jQuery('#image_title_exta').val();
-
                                 setTimeout(function() {
                                     if (image_alttext != "")
                                     {
                                         parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
                                         parent.jQuery('[name="' + replaced + '[alt]"]').val(image_alttext);
-
                                     }
                                     if (image_title != "")
                                     {
                                         parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
                                         parent.jQuery('[name="' + replaced + '[title]"]').val(image_title);
-
                                     }
 
                                     var credit = parent.jQuery('#edit-field-credit-name-und-0-value').val();
@@ -333,7 +309,6 @@
                                     captionid = captionid.replace('[field_images][und][0]', "");
                                     var captionid1 = getbame + '[field_credit][und][0][value]';
                                     captionid1 = captionid1.replace('[field_images][und][0]', "");
-
                                     var syndi = getbame + '[field_image_syndication][und][yes]';
                                     syndi = syndi.replace('[field_images][und][0]', "");
                                     //  parent.jQuery('[name="' + captionid + '"]').val(image_title);
@@ -343,9 +318,8 @@
                                     parent.jQuery('[name="' + captionid1 + '"]').val(credit);
                                     hideloader();
                                     parent.jQuery.colorbox.close();
-                                }, 2000);
+                                }, 1000);
                             }
-
 
                         });
                     });
@@ -357,8 +331,6 @@
                 console.log("Details: " + desc + "\nError:" + err);
             }
         });
-
-
 
     })
 

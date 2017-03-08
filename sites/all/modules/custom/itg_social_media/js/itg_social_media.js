@@ -190,8 +190,9 @@
 })(jQuery, Drupal, this, this.document);
 
 jQuery(document).ready(function() {
+   
     var current_langth = jQuery('#edit-itg-twitter-narrative').val().length; 
-     var maxLength = jQuery('#edit-itg-twitter-narrative').attr('maxlength'); 
+     var maxLength = 126; 
     var count_li = maxLength-current_langth;
     jQuery('#twitt_chars').text(count_li);
     jQuery('#edit-itg-twitter-narrative').on('keyup',function() {
@@ -202,7 +203,7 @@ jQuery(document).ready(function() {
     });
     
     var fbcurrent_langth = jQuery('#edit-itg-facebook-narrative').val().length; 
-     var fb_maxLength = jQuery('#edit-itg-facebook-narrative').attr('maxlength'); 
+     var fb_maxLength = 255; 
     var fb_count_li = fb_maxLength-fbcurrent_langth;
     jQuery('#fb_chars').text(fb_count_li);
     jQuery('#edit-itg-facebook-narrative').on('keyup',function() {

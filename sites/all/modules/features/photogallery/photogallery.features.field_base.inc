@@ -32,12 +32,6 @@ function photogallery_field_default_field_bases() {
       'display_field' => 0,
       'uri_scheme' => 'public',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'file',
   );
@@ -64,12 +58,6 @@ function photogallery_field_default_field_bases() {
         1 => 'Bulk Media Upload',
       ),
       'allowed_values_function' => '',
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'list_text',
@@ -98,12 +86,6 @@ function photogallery_field_default_field_bases() {
       ),
       'allowed_values_function' => '',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'list_text',
   );
@@ -130,12 +112,6 @@ function photogallery_field_default_field_bases() {
       'display_field' => 0,
       'uri_scheme' => 'public',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'file',
   );
@@ -160,12 +136,6 @@ function photogallery_field_default_field_bases() {
     'settings' => array(
       'max_length' => 255,
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'text',
   );
@@ -189,12 +159,6 @@ function photogallery_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -223,12 +187,6 @@ function photogallery_field_default_field_bases() {
       ),
       'allowed_values_function' => '',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'list_text',
   );
@@ -256,12 +214,6 @@ function photogallery_field_default_field_bases() {
       ),
       'allowed_values_function' => '',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'list_text',
   );
@@ -287,12 +239,6 @@ function photogallery_field_default_field_bases() {
       'hide_blank_items' => 1,
       'path' => '',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'field_collection',
   );
@@ -315,12 +261,6 @@ function photogallery_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'text_long',
   );
@@ -348,12 +288,6 @@ function photogallery_field_default_field_bases() {
       ),
       'allowed_values_function' => '',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'list_text',
   );
@@ -379,44 +313,8 @@ function photogallery_field_default_field_bases() {
       'default_image' => 0,
       'uri_scheme' => 'public',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'image',
-  );
-
-  // Exported field_base: 'field_people_tag'.
-  $field_bases['field_people_tag'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_people_tag',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
-    'translatable' => 0,
-    'type' => 'text',
   );
 
   // Exported field_base: 'field_photo_by'.
@@ -451,12 +349,6 @@ function photogallery_field_default_field_bases() {
         ),
       ),
       'target_type' => 'node',
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'entityreference',
@@ -495,12 +387,6 @@ function photogallery_field_default_field_bases() {
       ),
       'target_type' => 'node',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'entityreference',
   );
@@ -528,12 +414,6 @@ function photogallery_field_default_field_bases() {
       ),
       'allowed_values_function' => '',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'list_text',
   );
@@ -556,12 +436,6 @@ function photogallery_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'text_long',
   );
@@ -585,12 +459,6 @@ function photogallery_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -616,12 +484,6 @@ function photogallery_field_default_field_bases() {
     'settings' => array(
       'max_length' => 255,
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'text',
   );
@@ -645,12 +507,6 @@ function photogallery_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -684,12 +540,6 @@ function photogallery_field_default_field_bases() {
       'todate' => '',
       'tz_handling' => 'none',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'datestamp',
   );
@@ -722,12 +572,6 @@ function photogallery_field_default_field_bases() {
       'todate' => '',
       'tz_handling' => 'none',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'datestamp',
   );
@@ -759,12 +603,6 @@ function photogallery_field_default_field_bases() {
       'timezone_db' => '',
       'todate' => '',
       'tz_handling' => 'none',
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'datestamp',

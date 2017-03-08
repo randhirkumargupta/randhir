@@ -104,6 +104,36 @@ function event_backend_image_default_styles() {
     ),
   );
 
+  // Exported image style: image_136x73.
+  $styles['image_136x73'] = array(
+    'label' => 'image 136X73',
+    'effects' => array(
+      17 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 136,
+          'height' => 73,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: image_221x54.
+  $styles['image_221x54'] = array(
+    'label' => 'image 221X54',
+    'effects' => array(
+      16 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 221,
+          'height' => 54,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: speaker_detail_168x168.
   $styles['speaker_detail_168x168'] = array(
     'label' => 'speaker_detail_168x168',
@@ -128,6 +158,21 @@ function event_backend_image_default_styles() {
         'data' => array(
           'width' => 103,
           'height' => 103,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: sponsor85___33.
+  $styles['sponsor85___33'] = array(
+    'label' => 'sponsor85 * 33',
+    'effects' => array(
+      16 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 85,
+          'height' => 33,
         ),
         'weight' => 1,
       ),

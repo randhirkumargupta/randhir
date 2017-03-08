@@ -30,9 +30,9 @@ function itg_ask_expert_theme($existing, $type, $theme, $path) {
  */
 function itg_ask_expert_form_alter(&$form, &$form_state, $form_id) {
     global $user;
-    $user_fields = user_load($user->uid);
+    
     if ($form_id == 'ask_an_expert_node_form') {
-
+        $user_fields = user_load($user->uid);
         // code to hide source field
         if ($user->uid != '1') {
             $form['field_user_source_term_id']['#access'] = FALSE;
@@ -561,7 +561,7 @@ function itg_custom_ask_an_expert_form_submit(&$form, &$form_state) {
     $node = node_submit($node); // Prepare node for saving
     node_save($node);
 
-    drupal_set_message('Your Query has been submitted successfully, Our Experts will reply you soon.');
+    drupal_set_message('Your question has been submitted successfully. Our experts will respond to you soon.');
 
     $form_state['input'] = array();
     $form_state['rebuild'] = TRUE;

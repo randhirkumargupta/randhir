@@ -318,7 +318,6 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         }
       }
       if ($idea_review_flag && $filtered_result) {
-
         // User should not be of mark as complete type
         if ($mark_task_comp_users_flag) {
           $magazine_options = itg_print_team_get_magazine_title();
@@ -831,7 +830,10 @@ function itg_print_team_association_custom_validate($form, &$form_state) {
  * @param array $form_state
  */
 function itg_print_team_association_custom_submit($form, &$form_state) {  
-  $views_bulk_operations = $form_state['values']['views_bulk_operations'];
+  // remove dublicate.
+  $views_bulk_operations = array_unique($form_state['values']['views_bulk_operations']);
+  // Remove all 0 , as it is not a nodeid.
+  unset($views_bulk_operations[array_search(0, $views_bulk_operations)]);
   $issue = check_plain($form_state['values']['pti_issue']);
   $magazine = check_plain($form_state['values']['pti_magazine']);
   $supplement = check_plain($form_state['values']['pti_supplement']);
@@ -858,8 +860,15 @@ function itg_print_team_association_custom_submit($form, &$form_state) {
  */
 function itg_print_team_markascomplete_custom_submit($form, &$form_state) {
   $filtered_result = count($form['#substitutions']['#value']);
-  $views_bulk_operations = $form_state['values']['views_bulk_operations'];
-  
+  // remove dublicate.
+  $views_bulk_operations = array_unique($form_state['values']['views_bulk_operations']);
+  foreach ($views_bulk_operations as $bulk_key => $bulk_value) {
+    if($bulk_value == 0) {
+      unset($views_bulk_operations[$bulk_key]);
+    }
+  }
+  // Remove all 0 , as it is not a nodeid.
+  //unset($views_bulk_operations[array_search(0, $views_bulk_operations)]);
   if (is_array($views_bulk_operations) && count($views_bulk_operations) > 0) {
     foreach ($views_bulk_operations as $source_id) {
       if (!empty($source_id)) {
@@ -1168,7 +1177,10 @@ function itg_print_team_ideas_csv() {
 
   // CSV file header
   $file = 'ideas_csv';
-  $idea_csv = "Idea Title" . "," . "Created Date" . "," . "User Type" . "," . "Status" . "," . "Rating" . "|\n\r\0";
+  $idea_csv = "Idea Title" . "," . "Magazine Kicker" . "," . "Section" 
+          . "," . "Status" . "," . "Word Limit" . "," . "Timeline" . "," 
+          . "Magazine" . "," . "Issue" . "," . "Created" . "," . "Rating" 
+          . "," . "User Type" . "," . "Brief" . "\n\r\0";
 
   $query = db_select('node', 'n');
   $query->join('field_data_field_pti_idea_status', 'ps', 'n.nid = ps.entity_id'); //JOIN node with magazines
@@ -1183,10 +1195,24 @@ function itg_print_team_ideas_csv() {
   foreach ($result as $row) {
     $node = node_load($row->nid);
     $title = $node->title;
-    $created_date = date('d/m/Y', $node->created);
+    $brief_body = strip_tags($node->body[LANGUAGE_NONE][0]['value']);
+    $brief = $brief_body;
+    $kicker = $node->field_pti_magazine_kicker[LANGUAGE_NONE][0]['value'];
+    $section_tid = itg_print_tem_get_section($node->field_story_category[LANGUAGE_NONE][0]['tid']);
     $status = $node->field_pti_idea_status[LANGUAGE_NONE][0]['value'];
+    $word_limit = $node->field_pti_words_limit[LANGUAGE_NONE][0]['value'];
+    $time_line = explode(" ", $node->field_survey_end_date[LANGUAGE_NONE][0]['value']);
+    $get_magazine = itg_print_tem_get_magazine($node->field_pti_magazine[LANGUAGE_NONE][0]['target_id']);
+    $getissue = itg_print_tem_get_magazine($node->field_pti_issue[LANGUAGE_NONE][0]['target_id']);
+    $get_issue = explode(" ", $getissue);    
+    
+    $created_date = date('d/m/Y', $node->created);
     $rating = $node->field_story_rating[LANGUAGE_NONE][0]['value'] ? $node->field_story_rating[LANGUAGE_NONE][0]['value'] : '0';
-    $idea_csv .= $title . "," . $created_date . "," . "Correspondent" . "," . $status . "," . $rating . "|\n\r\0";
+    $idea_csv .= $title . "," . $kicker . "," . $section_tid 
+            . "," . $status . "," . $word_limit . "," . $time_line[0] . "," . $get_magazine 
+            . "," . $get_issue[0] . "," . $created_date . "," . $rating . "," 
+            . "Correspondent" . "," . $brief . "\n\r\0";
+    
   }
 
   $filename = $file . "_" . date("d-m-Y:i", time());
@@ -1195,6 +1221,28 @@ function itg_print_team_ideas_csv() {
   header('Content-Disposition: attachment; filename=' . $filename . '.csv');
   print $idea_csv;
 }
+
+/*
+ * Get team section name
+ * @param $get_tid
+ * @return str
+ */
+function itg_print_tem_get_section($get_tid) {
+  $section_name = db_query("SELECT name from {taxonomy_term_data} WHERE tid = :tid ", array(":tid" => $get_tid))->fetchField();
+  return $section_name;
+}
+
+/*
+ * Get team magazine name
+ * @param $get_nid
+ * @return str
+ */
+function itg_print_tem_get_magazine($get_nid) {
+  $magazine_name = db_query("SELECT title from {node} WHERE nid = :nid ", array(":nid" => $get_nid))->fetchField();
+  return $magazine_name;
+}
+
+
 
 /**
  * Implements hook_form_comment_form_alter

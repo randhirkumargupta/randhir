@@ -112,16 +112,6 @@ function feature_for_sport_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Contextual filter: Content: section (field_page_section) */
-  $handler->display->display_options['arguments']['field_page_section_tid']['id'] = 'field_page_section_tid';
-  $handler->display->display_options['arguments']['field_page_section_tid']['table'] = 'field_data_field_page_section';
-  $handler->display->display_options['arguments']['field_page_section_tid']['field'] = 'field_page_section_tid';
-  $handler->display->display_options['arguments']['field_page_section_tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_page_section_tid']['default_argument_type'] = 'php';
-  $handler->display->display_options['arguments']['field_page_section_tid']['default_argument_options']['code'] = 'return arg(1);';
-  $handler->display->display_options['arguments']['field_page_section_tid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['field_page_section_tid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['field_page_section_tid']['summary_options']['items_per_page'] = '25';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -134,7 +124,7 @@ function feature_for_sport_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'page' => 'page',
+    'sport_static_page' => 'sport_static_page',
   );
 
   /* Display: Page */
@@ -179,6 +169,49 @@ function feature_for_sport_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Action';
   $handler->display->display_options['path'] = 'itg-basic-page-list';
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = 'S. No';
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
+  $handler->display->display_options['fields']['counter']['reverse'] = 0;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Path */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'node';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
+  $handler->display->display_options['fields']['path']['label'] = 'URL';
+  /* Field: Content: Link */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = 'View';
+  $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]</span>';
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Action';
+  $handler->display->display_options['path'] = 'saction-staticpage-list';
   $export['itg_basic_page_list'] = $view;
 
   $view = new view();
@@ -256,7 +289,7 @@ function feature_for_sport_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Description */
+  /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -309,7 +342,7 @@ function feature_for_sport_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Description */
+  /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -362,17 +395,6 @@ function feature_for_sport_views_default_views() {
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
-  /* Field: Content: Extra large image */
-  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'video_landing_page_170_x_127',
-    'image_link' => 'content',
-  );
   /* Field: Content: Gallery Image (field_gallery_image:delta) */
   $handler->display->display_options['fields']['delta']['id'] = 'delta';
   $handler->display->display_options['fields']['delta']['table'] = 'field_data_field_gallery_image';
@@ -405,7 +427,7 @@ function feature_for_sport_views_default_views() {
   $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
-    'image_style' => 'video_landing_page_170_x_127',
+    'image_style' => 'image170x127',
     'image_link' => 'content',
   );
   $handler->display->display_options['defaults']['arguments'] = FALSE;
@@ -466,17 +488,6 @@ function feature_for_sport_views_default_views() {
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
-  /* Field: Content: Extra large image */
-  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'video_landing_page_170_x_127',
-    'image_link' => 'content',
-  );
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -512,7 +523,7 @@ function feature_for_sport_views_default_views() {
   $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
-    'image_style' => 'video_landing_page_170_x_127',
+    'image_style' => 'image170x127',
     'image_link' => '',
   );
   $handler->display->display_options['defaults']['arguments'] = FALSE;
@@ -558,17 +569,6 @@ function feature_for_sport_views_default_views() {
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
-  /* Field: Content: Extra large image */
-  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'video_landing_page_170_x_127',
-    'image_link' => 'content',
-  );
   /* Field: Content: video_duration */
   $handler->display->display_options['fields']['field_video_duration']['id'] = 'field_video_duration';
   $handler->display->display_options['fields']['field_video_duration']['table'] = 'field_data_field_video_duration';
@@ -591,7 +591,7 @@ function feature_for_sport_views_default_views() {
   $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
-    'image_style' => 'video_landing_page_170_x_127',
+    'image_style' => 'image170x127',
     'image_link' => '',
   );
   $handler->display->display_options['defaults']['sorts'] = FALSE;
@@ -630,7 +630,7 @@ function feature_for_sport_views_default_views() {
   $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['value'] = '444';
+  $handler->display->display_options['filters']['cat_id']['value'] = '844599';
   $handler->display->display_options['filters']['cat_id']['group'] = 1;
   $export['sport_ipl'] = $view;
 

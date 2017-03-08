@@ -20,6 +20,7 @@ function itg_personalization_edit_profile_form() {
     $edit_mobile_url = 'http://' . PARENT_SSO . '/sso-user/mobile/' . base64_encode($user->name) . '/' . base64_encode($_SERVER['HTTP_HOST']);
     $edit_mobile_link = '<a href="javascript:void(0)"  onclick="CenterWindow(550, 200, 50, ' . "'" . $edit_mobile_url . "'" . ');">Edit</a>';
   }
+  
   $user_detail = user_load($user->uid);
   if (is_numeric($user_detail->name)) {
     $mobile = $user_detail->name;
@@ -130,7 +131,7 @@ function itg_personalization_edit_profile_form() {
     '#default_value' => $user_detail->field_short_description['und'][0]['value'],
   );
   $form['zip_code'] = array(
-    '#title' => t('Picode'),
+    '#title' => t('Pincode'),
     '#type' => 'textfield',
     '#attributes' => array('placeholder' => 'E.g., 122016'),
     '#default_value' => $user_detail->field_user_pincode['und'][0]['value'],
