@@ -108,21 +108,41 @@ function itg_fia_xml_format_rss_item($img_path, $guid, $node_body, $title, $link
   $output .= "    <link rel='canonical' href='" . $link . "'>\n";
   $output .= "    <meta property='op:markup_version' content='v1.0'>\n";
   $output .= "    <body>\n";
+  $output .= "    </head>\n\n";
   $output .= "    <article>\n";
   $output .= "    <header>\n";
+  
+  // <!-- The header image shown inside your article --> 
+  $output .= "    <figure data-mode=aspect-fit>\n";
+  $output .= "    <video loop>\n";
+  $output .= "    <source src='" . $img_path . "' type='video/mov' />\n";
+  $output .= "    </video>\n\n";
+  $output .= "    </figure>\n\n";
   $output .= "      <h1>" . $title . "</h1>\n";
-  $output .= "      <time class='op-published' datetime='" . $pubdate . "'>" . $op_pub . "</time>\n";
-  $output .= "      <time class='op-modified' datetime='" . $modified . "'>" . $op_modified . "</time>\n";
-//  $output .= "      <figure>" . check_plain($name) . "</figure>\n";
-  $output .= "      <figure>\n"; // . check_plain($name) . "</address>\n";
-  $output .= "      <img src='" . $img_path . "' />\n";
-  $output .= "      </figure>\n\n";
+  $output .= "      <h2>" . $subtitle . "</h2>\n";
+  // <!-- A kicker for your article -->
+  $output .= "      <h3 class='op-kicker'>" . $kicker . "</h3>\n";
+  // <!-- The author of your article -->
+  $output .= "      <address>" . $name . "</address>\n";
+  $output .= "      <time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>\n";
+  $output .= "      <time class='op-modified' dateTime='" . $modified . "'>" . $op_modified . "</time>\n";
   
   $output .= "    </header>\n\n";
   $output .= "    <div property='content:encoded'>". $node_body . "</div>\n";
+  $output .= "    <footer>\n";
+  $output .= "    <ul>\n";
+  $output .= "    <li><a href='http://instantarticles.fb.com'></a></li>\n";
+  $output .= "    <li><a href='http://instantarticles.fb.com'></a></li>\n";
+  $output .= "    </ul>\n\n";
+  // <!-- Credits for your article -->
+  $output .= "    <aside>The footer section can be used for acknowledgements, author bios, related articles, or any other supplemental information.</aside>\n";
+  // <!-- Copyright details for your article -->
+  $output .= "    <small>© Facebook</small>\n";
+  $output .= "    </footer>\n\n";
+
   $output .= "    </article>\n\n";
   $output .= "    </body>\n\n";
-  $output .= "    </head>\n\n";
+  
   $output .= "    </html>\n\n";
   $output .= "    ]]>\n\n";
   $output .= "    </content:encoded>\n\n";
