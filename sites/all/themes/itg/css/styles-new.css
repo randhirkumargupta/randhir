@@ -5507,7 +5507,14 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   margin: 0 -15px;
 }
 .view-front-funalytics-list .funalytics-tile {
-  padding-bottom: 50px;
+  margin-bottom: 50px;
+  border: 1px solid #ddd;
+}
+.view-front-funalytics-list .funalytics-tile .pic {
+  border-bottom: 1px solid #ddd;
+}
+.view-front-funalytics-list .funalytics-tile .funalytics-text {
+  padding: 0 10px;
 }
 .view-front-funalytics-list .funalytics-tile .updated-date {
   font-size: 12px;

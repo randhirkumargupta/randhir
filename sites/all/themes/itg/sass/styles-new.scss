@@ -5178,7 +5178,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     
     .view-content{margin: 0 -15px;}
     .funalytics-tile{
-      padding-bottom: 50px;
+      margin-bottom: 50px;
+      border: 1px solid #ddd;
+      .pic{border-bottom: 1px solid #ddd;}
+      .funalytics-text{padding: 0 10px;}
       .updated-date {
         font-size: 12px;
         color: #b1b1b1;
