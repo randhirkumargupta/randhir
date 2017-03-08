@@ -1,23 +1,23 @@
 /*
 Error: Undefined mixin 'clearfix'.
-        on line 10920 of D:/xampp/htdocs/itgcms/sites/all/themes/itgadmin/sass/styles.scss, in `clearfix'
-        from line 10920 of D:/xampp/htdocs/itgcms/sites/all/themes/itgadmin/sass/styles.scss
+        on line 10926 of D:/xampp/htdocs/itgcms/sites/all/themes/itgadmin/sass/styles.scss, in `clearfix'
+        from line 10926 of D:/xampp/htdocs/itgcms/sites/all/themes/itgadmin/sass/styles.scss
 
-10915:     .form-type-textarea, .form-type-textfield{
-10916:       margin: 0;
-10917:       padding: 0;            
-10918:     }
-10919:     [id*="itg-custom-ask-an-expert-form"]{
-10920:       @include clearfix;
-10921:       input[type="text"]{                
-10922:         width: 100%;
-10923:         font-family: roboto-slab;                
-10924:       }
-10925:       textarea{
+10921:     .form-type-textarea, .form-type-textfield{
+10922:       margin: 0;
+10923:       padding: 0;            
+10924:     }
+10925:     [id*="itg-custom-ask-an-expert-form"]{
+10926:       @include clearfix;
+10927:       input[type="text"]{                
+10928:         width: 100%;
+10929:         font-family: roboto-slab;                
+10930:       }
+10931:       textarea{
 
 Backtrace:
-D:/xampp/htdocs/itgcms/sites/all/themes/itgadmin/sass/styles.scss:10920:in `clearfix'
-D:/xampp/htdocs/itgcms/sites/all/themes/itgadmin/sass/styles.scss:10920
+D:/xampp/htdocs/itgcms/sites/all/themes/itgadmin/sass/styles.scss:10926:in `clearfix'
+D:/xampp/htdocs/itgcms/sites/all/themes/itgadmin/sass/styles.scss:10926
 C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:351:in `block in visit_mixin'
 C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:98:in `block in with_mixin'
 C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:115:in `with_frame'
@@ -90,4 +90,4 @@ C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/vendor/listen/lib/listen/adap
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined mixin 'clearfix'.\A         on line 10920 of D:/xampp/htdocs/itgcms/sites/all/themes/itgadmin/sass/styles.scss, in `clearfix'\A         from line 10920 of D:/xampp/htdocs/itgcms/sites/all/themes/itgadmin/sass/styles.scss\A \A 10915:     .form-type-textarea, .form-type-textfield{\A 10916:       margin: 0;\A 10917:       padding: 0;            \A 10918:     }\A 10919:     [id*=\"itg-custom-ask-an-expert-form\"]{\A 10920:       @include clearfix;\A 10921:       input[type=\"text\"]{                \A 10922:         width: 100%;\A 10923:         font-family: roboto-slab;                \A 10924:       }\A 10925:       textarea{"; }
+  content: "Error: Undefined mixin 'clearfix'.\A         on line 10926 of D:/xampp/htdocs/itgcms/sites/all/themes/itgadmin/sass/styles.scss, in `clearfix'\A         from line 10926 of D:/xampp/htdocs/itgcms/sites/all/themes/itgadmin/sass/styles.scss\A \A 10921:     .form-type-textarea, .form-type-textfield{\A 10922:       margin: 0;\A 10923:       padding: 0;            \A 10924:     }\A 10925:     [id*=\"itg-custom-ask-an-expert-form\"]{\A 10926:       @include clearfix;\A 10927:       input[type=\"text\"]{                \A 10928:         width: 100%;\A 10929:         font-family: roboto-slab;                \A 10930:       }\A 10931:       textarea{"; }

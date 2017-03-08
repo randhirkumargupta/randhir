@@ -10459,6 +10459,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   }
 }
 .view-social-media-report{
+  @extend .pos-rel;
   .view-filters .views-exposed-form .views-exposed-widget{
     &.views-widget-filter-scheduled_time{
       width: 300px;
@@ -10471,7 +10472,12 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       }
     }
   }
-  .feed-icon{margin-top: 5px;}
+  .feed-icon{
+    bottom: -9px;
+    left: 152px;
+    margin-top: 0;
+    position: absolute;
+  }
 }
 [id*="itg-event-registration-fields-configuration-form"]{
   margin-top: 30px;
