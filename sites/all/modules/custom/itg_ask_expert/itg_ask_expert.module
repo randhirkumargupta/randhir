@@ -348,10 +348,13 @@ function itg_ask_expert_block_view($delta = '') {
                 $term = taxonomy_term_load($arg[2]);
                 $vid = $term->vid;
                 if ($vid == CATEGORY_MANAGMENT) {
-                    $tid = $arg[2];
+                    $tid = $arg[2];                    
                     $user_detail = user_details_for_section($arg, $tid);
                     if (!empty($user_detail)) {
-                      $block['subject'] = '<h3><span>ASK THE EXPERT</span></h3>';                    
+                      $tpl_name = get_template_name_by_section_name($arg[2]);
+                      if (empty($tpl_name)) {
+                        $block['subject'] = '<h3><span>ASK THE EXPERT</span></h3>';
+                      }
                       $ask_expert_form = drupal_get_form('itg_custom_ask_an_expert_form', $tid);
                       $block['content'] = drupal_render($user_detail);
                       $block['content'] .= drupal_render($ask_expert_form);
@@ -359,22 +362,26 @@ function itg_ask_expert_block_view($delta = '') {
                 }
             }
             elseif (isset($_GET['section']) && !empty($_GET['section'])) {
-                $cat_id = check_plain($_GET['section']);
+                $cat_id = check_plain($_GET['section']);                
                 $user_detail = user_details_for_section($arg, $cat_id);
                 if (!empty($user_detail)) {
-                  $block['subject'] = '<h3><span>ASK THE EXPERT</span></h3>';
+                  //$block['subject'] = '<h3><span>ASK THE EXPERT</span></h3>';
                   $block['content'] = drupal_render($user_detail);
                   $block['content'] .= drupal_render(drupal_get_form('itg_custom_ask_an_expert_form', $cat_id));
-                }
+                } else {
+                    $block['content'] = 'No expert available.';
+                  }
             }
             elseif (isset($_GET['section_name']) && !empty($_GET['section_name'])) {
                 $cat_id = check_plain($_GET['section']);
                 if (!empty($user_detail)) {
                   $user_detail = user_details_for_section($arg, $cat_id);
-                  $block['subject'] = '<h3><span>ASK THE EXPERT</span></h3>';
+                  //$block['subject'] = '<h3><span>ASK THE EXPERT</span></h3>';
                   $block['content'] = drupal_render($user_detail);
                   $block['content'] .= drupal_render(drupal_get_form('itg_custom_ask_an_expert_form', $cat_id));
-                }
+                } else {
+                    $block['content'] = 'No expert available.';
+                  }
             }
             break;
         case 'ask_an_expert_details_page_block':
