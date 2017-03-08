@@ -15,7 +15,9 @@ function itg_reuters_content() {
     $op[$val->tid] = strtolower($val->name);
   }
  
-  $direc = get_dir_content($file_path . '/feeds/reuters/');
+  //$direc = get_dir_content($file_path . '/feeds/reuters/');
+  $final_dir = getcwd().'/sites/all/modules/custom/itg_api/feeds/reuters/';
+  $direc = get_dir_content($final_dir);
 
   foreach ($direc as $xm_file) {
    $xml_file_path = $xm_file;
@@ -63,7 +65,7 @@ function itg_reuters_content() {
 
           //Set values to node
           $node = new stdClass();
-          $node->title = trim($headline);
+          $node->title = trim(html_entity_decode($headline));
           $node->type = "story";
           node_object_prepare($node);
           $node->language = LANGUAGE_NONE;
@@ -72,9 +74,9 @@ function itg_reuters_content() {
           $node->comment = 0;
           $node->body[$node->language][0]['value'] = $description ? $description : 'NA';
           $node->body[$node->language][0]['format'] = 'full_html';
-          $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline);
+          $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($headline));
           $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = $final_kicker;
-          $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim($headline);
+          $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($headline));
           $node->metatags[LANGUAGE_NONE]['keywords']['value'] = $meta_keyword;
           $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'Reuters';
           $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $publish_date ? $publish_date : date('Y-m-d', time());

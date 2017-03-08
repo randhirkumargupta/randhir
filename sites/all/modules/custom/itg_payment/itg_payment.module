@@ -44,7 +44,7 @@ function itg_payment_menu() {
     'type' => MENU_CALLBACK,
     'access arguments' => array('access content'),
   );
-  
+
   // Order payment response fail
   $items['itg-payment/response-fail'] = array(
     'page callback' => 'itg_payment_response_fail',
@@ -431,8 +431,8 @@ function itg_payment_billdesk_order_form($form, &$form_state) {
   $value = $merchant_id . '|100000009|NA|' . $amount . '|NA|NA|NA|INR|NA|R|' . $security_id . '|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . $base_url . '/itg_billdesk_payment_success';
 
   $value = 'INDIATODAY|34137112|NA|2.00|CIT|NA|NA|INR|DIRECT|R|indiatoday|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . $base_url . '/itg-payment/billdesk-payment-success';
-  
-  
+
+
 //  $newdatawithchecksumkey = $value . "|" . $checksumkey;
 //  $checksum = crc32($newdatawithchecksumkey);
 //  $datawithchecksumvalue = $value . "|" . $checksum;
@@ -446,15 +446,33 @@ function itg_payment_billdesk_order_form($form, &$form_state) {
 
 
   // Put the msg on a form.
-  $form['msg'] = array(
+ $form['#attributes'] = array('name' => 'mForm');
+  $form['txtCustomerID'] = array(
     '#type' => 'hidden',
-    '#value' => $msg,
+    '#value' => 'INDIATODAY',
   );
-  $form['#action'] = $bdposturl;
+  
+   $form['txtTxnAmount'] = array(
+    '#type' => 'hidden',
+    '#value' => '2.00',
+  );
+   
+    $form['RU'] = array(
+    '#type' => 'hidden',
+    '#value' => 'http://qa.indiatodayonline.in/itg-payment/billdesk-payment-success',
+  );
+
+//  $form['msg'] = array(
+//    '#type' => 'hidden',
+//    '#value' => $msg,
+//  );
+  //$form['#action'] = $bdposturl;
+  $form['#action'] = 'https://www.billdesk.com/pgidsk/pgmerc/INDIATODAYPaymentoption.jsp';
   $form['submit'] = array(
     "#type" => 'submit',
     "#value" => 'paybilldesk',
   );
+
   return $form;
 }
 
@@ -464,8 +482,8 @@ function itg_billdesk_payment_success_page() {
   }
   if (isset($_POST['msg']) && $_POST['msg'] != '') {
     $values = explode('|', $_POST['msg']);
-    watchdog('billdeskpayment','<pre>' . print_r($_POST['msg'], true) . '</pre>');
-    
+    watchdog('billdeskpayment', '<pre>' . print_r($_POST['msg'], true) . '</pre>');
+
     // Payment Failed transactions for BillDesk.
     if (($values['24'] == 'Canceled By User') || ($values[14] == '0399') || ($values[14] == 'NA') || ($values[14] == '0002') || ($values[14] == '0001')) {
       if ($values[14] == '0399') {
@@ -490,7 +508,6 @@ function itg_billdesk_payment_success_page() {
     }
   }
 }
-
 
 function itg_payment_response_fail() {
   return theme("itg_payment_response_fail");

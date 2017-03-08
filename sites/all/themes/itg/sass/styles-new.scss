@@ -5134,7 +5134,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       .funalytics-slider{
         padding: 20px 50px;
         .slick-slide{
-          
+
           .title{font: 500 26px/30px Roboto; padding-bottom: 12px;}
           .pic{
             background: url(../images/funalytics.png) top right no-repeat;
@@ -5175,10 +5175,13 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         }
       }
     }
-    
+
     .view-content{margin: 0 -15px;}
     .funalytics-tile{
-      padding-bottom: 50px;
+      margin-bottom: 50px;
+      border: 1px solid #ddd;
+      .pic{border-bottom: 1px solid #ddd;}
+      .funalytics-text{padding: 0 10px;}
       .updated-date {
         font-size: 12px;
         color: #b1b1b1;
@@ -5189,6 +5192,21 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         color: #323232;
         height: 48px;
         overflow: hidden;
+      }
+      .social-share{
+        @include display-inline;
+        @include social-share;
+        padding: 5px 5px;
+        ul{
+          li{
+            padding-right: 4px;
+            a.share{
+              width: auto;
+              height: auto; 
+              .fa{font-size: 18px;}
+            }
+          }
+        }
       }
     }
   }
