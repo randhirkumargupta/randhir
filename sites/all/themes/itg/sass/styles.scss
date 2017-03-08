@@ -10577,6 +10577,11 @@ span.smilies-title {
   color: #b1b1b1;
 }
 .itg-layout-container.default-section{
+  .widget-wrapper.custom_ask_expert_form_block{
+    .data-holder{
+      max-height: calc(100% - 22px);
+    }
+  }
   .ask-question{
     padding:15px;
     font-family: roboto-slab;
@@ -10746,3 +10751,4 @@ span.smilies-title {
     }
   }
 }
+ 
