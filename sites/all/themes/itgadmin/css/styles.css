@@ -11382,3 +11382,12 @@ span.file a {
 .page-itg-social-media-promote #main > .container#content {
   display: block;
 }
+
+[id*="itg-quiz-quiz-form"] .answer-container .answer-container-actual {
+  text-align: center;
+}
+[id*="itg-quiz-quiz-form"] .answer-container #show_answer {
+  width: 135px;
+  margin: 10px auto;
+  display: block;
+}

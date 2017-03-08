@@ -12915,3 +12915,23 @@ span.smilies-title img {
   font-weight: 700;
   color: #585858;
 }
+
+[id*="itg-quiz-quiz-form"] .answer-container .answer-container-actual {
+  text-align: center;
+}
+[id*="itg-quiz-quiz-form"] .answer-container #show_answer {
+  width: 135px;
+  margin: 10px auto;
+  display: block;
+  border-radius: 1px;
+  border: 1px solid #000;
+  background-color: #000;
+  padding: 0 20px;
+  line-height: normal;
+  height: 28px;
+  text-transform: uppercase;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
+}
