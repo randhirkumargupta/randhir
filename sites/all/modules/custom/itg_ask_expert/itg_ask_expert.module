@@ -374,8 +374,8 @@ function itg_ask_expert_block_view($delta = '') {
             }
             elseif (isset($_GET['section_name']) && !empty($_GET['section_name'])) {
                 $cat_id = check_plain($_GET['section']);
-                if (!empty($user_detail)) {
-                  $user_detail = user_details_for_section($arg, $cat_id);
+                $user_detail = user_details_for_section($arg, $cat_id);
+                if (!empty($user_detail)) {                  
                   //$block['subject'] = '<h3><span>ASK THE EXPERT</span></h3>';
                   $block['content'] = drupal_render($user_detail);
                   $block['content'] .= drupal_render(drupal_get_form('itg_custom_ask_an_expert_form', $cat_id));
