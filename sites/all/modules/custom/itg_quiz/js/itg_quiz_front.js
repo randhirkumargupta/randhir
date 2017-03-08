@@ -33,7 +33,7 @@
         var correct_ans = $("input[name='correct_answer"+ans_no[1]+"']").val();
         
         anslastid = res[2].substr(res[2].length - 1);
-        $('input[name='+$(this).attr('name')+']').attr('disabled', 'disabled');
+        $('input[name='+$(this).attr('name')+']').attr('readonly', 'true');
         $(this).parent().parent().parent().parent().find('.answer-container-actual').html('');
 
          var qnid = $("input[name='nid']").val();
@@ -43,12 +43,9 @@
                     method:"post",
                     data: {nid:qnid, ans_val:ans_val, correct_ans:correct_ans},
                     url: Drupal.settings.basePath+"quiz-response",
-                    success: function(data) {
-                  //    console.log(data);
-                        ansvalue = data.split('-');
-                      
-                      $('#answer-container-'+anslastid+' .answer-container-actual').html(ansvalue[0]+'<br/>'+ansvalue[1]);
-
+                    success: function(data) {                  
+                        ansvalue = data.split('-');                      
+                        $('#answer-container-'+anslastid+' .answer-container-actual').html(ansvalue[0]+'<br/>'+ansvalue[1]);
                     }
                });        
             }    
@@ -58,7 +55,7 @@
  //multi answer
    $('body').on('click', '#show_answer', function() {
       buttonClass = $(this).attr('class');
-      $(this).closest('.answer-container').find('.form-checkbox').attr('disabled', true);
+      $(this).closest('.answer-container').find('.form-checkbox').attr('readonly', true);
       var qnid = $("input[name='nid']").val();
       var ans_class = $(this).attr('class');      
       var correct_ans = $("input[name='correct_"+ans_class+"']").val();
