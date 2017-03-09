@@ -11004,20 +11004,34 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     }
   }
 }
-.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget{vertical-align: top;}
-.view.view-display-id-search_unpublish_video .view-filters{padding-bottom: 20px;}
-.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-submit-butto{
-    position: relative;
-    padding-right: 85px;
-    .form-submit{
-        position: absolute;
-        right: 5px;
-        top: 38px;
-    }
-}
-.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-submit-butto{
-    .form-submit{margin-top: 28px;}
-}
-.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name{
-    display: none;
+.view.view-display-id-search_unpublish_video, .view-id-searchimage.view-display-id-page_1{
+  .view-filters{
+    padding-bottom: 20px;
+    .views-exposed-form{
+        .views-exposed-widget{
+          vertical-align: top;
+          &.views-submit-button{
+            position: relative;
+            padding-right: 85px;
+          .form-submit{
+              position: absolute;
+              right: 5px;
+              top: 38px;
+          }
+        } 
+        &.views-reset-button{
+          .form-submit{
+            margin-top: 28px;
+          }
+        }
+        &.views-widget-filter-bundle_name{
+          display: none;
+        }        
+      }      
+      }      
+    }     
+  } 
+.ftp-server > iframe {
+    border: 1px solid #ccc;
+    width: 100%;
 }
