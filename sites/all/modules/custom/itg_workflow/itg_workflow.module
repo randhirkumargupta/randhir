@@ -681,7 +681,7 @@ function itg_workflow_views_query_alter(&$view, &$query) {
       unset($view->query->where[1]['conditions'][4]);
     }
     elseif ((!isset($_REQUEST['field_story_schedule_date_time_value_op'])) && $view->current_display == 'page_1') {
-     // unset($view->query->where[1]['conditions'][4]);
+      unset($view->query->where[1]['conditions'][4]);
     }
   }
 

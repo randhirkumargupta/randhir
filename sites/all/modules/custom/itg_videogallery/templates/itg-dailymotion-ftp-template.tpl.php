@@ -21,7 +21,7 @@ global $base_url;
 
                 <?php }
                 else { ?>
-                    ?>
+                    
                     <iframe id="video_iframe" src="<?php echo base_path() . 'search-unpublish-video'; ?>" width="900" height="650"></iframe>
                 <?php } ?>
                 <div class="video-options-wrapper"></div>
