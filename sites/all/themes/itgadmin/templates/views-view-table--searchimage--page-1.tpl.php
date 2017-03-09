@@ -27,7 +27,10 @@ global $base_url;
 
 <?php
 $video_data = "";
-foreach ($rows as $id => $row) {
+?>
+<div class="video-ftp-div">
+<?php 
+    foreach ($rows as $id => $row) {
     $video_value = $row['sm_field_video_id'] . '#' . $row['sm_field_video_size'] . '#' . $row['label'] . '#' . $row['sm_field_video_thumb_url'] . '#' . $row['sm_field_video_duration'];
     if (!empty($row['sm_field_video_thumb_url'])) {
         $video_image = '<img  width="100" height="44" src="' . $row['sm_field_video_thumb_url'] . '">';
@@ -42,3 +45,4 @@ echo '<div id="edit-video-browse-select">' . $video_data . '</div><script>jQuery
 	});</script>';
 ?>
 
+</div>
