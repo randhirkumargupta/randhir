@@ -850,7 +850,7 @@ class ItgStoryListMigration extends XMLMigration {
         $listicle = (string) $value;
         $values = array(
           'field_name' => 'field_story_listicle',
-          'field_story_listicle_description' => array(LANGUAGE_NONE => array(array('value' => 'kellton'))),          
+          'field_story_listicle_description' => array(LANGUAGE_NONE => array(array('value' => $listicle))),          
         );
         $field_collection_item_listicle = entity_create('field_collection_item', $values);
         $field_collection_item_listicle->setHostEntity('node', $node);
