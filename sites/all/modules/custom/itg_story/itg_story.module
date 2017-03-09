@@ -841,20 +841,13 @@ function itg_story_photo_story_redirect($node_id, $type) {
   /*
    * query to fetch the previous content id of the id received from the argument
    */
-  $query = db_select('node', 'n');
-  $query->join('field_data_field_story_type', 's', 's.entity_id = n.nid');
-  $query->fields('n', array('nid'));
-  $query->condition('n.type', 'story');
-  $query->condition('n.status', 1, '=');
-  $query->condition('s.field_story_type_value', 'photo_story');
-  $query->condition('n.nid', $node_id, $type);
-  $query->range(0, 1);
-  $query->orderBy('nid' , 'DESC');
-  $result = $query->execute()->fetchAll();
-  $nid = '';
-  foreach ($result as $val) {
-    $nid = $val->nid;
-  }
+  $query = db_select('field_data_field_story_type', 'fst');
+  $query->fields('fst',array('entity_id'));
+  $query->condition('fst.field_story_type_value', 'photo_story');
+  $query->condition('fst.entity_id', $node_id , $type);
+  $query->range(0,1);
+  $result = $query->execute()->fetchCol();
+  $nid = $result[0];
   if (!empty($nid)) {
   // stores node redirect path 
   $redirect = $base_url . '/' . drupal_get_path_alias('node/' . $nid);
@@ -875,8 +868,8 @@ function itg_story_photo_story_html($node_id) {
   if (!empty($node_id)) {
     $node = node_load($node_id);
     $photo_story = $node->field_photo_story[LANGUAGE_NONE];
-    $next = itg_story_photo_story_redirect($node->nid, '>');
-    $previous = itg_story_photo_story_redirect($node->nid, '<');
+    $next = itg_story_photo_story_redirect($node_id, '>');
+    $previous = itg_story_photo_story_redirect($node_id, '<');
     $next_link_count = count($photo_story) - 1;
     $html = '';
     $html .= '<div class="photo-story-img multiple-photo-disc">';
