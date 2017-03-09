@@ -32,12 +32,6 @@ function itg_related_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
-  
-  $items['get-related-view'] = array(
-    'page callback' => 'itg_get_related_content_view',
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-  );
 
   return $items;
 }
@@ -509,24 +503,4 @@ function itg_get_twitter_list($name) {
     $options[$r_title] = $r_title;
   }
   drupal_json_output($options);
-}
-
-/**
- * Helper function for related content view
- */
-function itg_get_related_content_view() {
-  global $user;
-  if ($user->uid > 0) {
-    $arg = arg();
-    $exp_parameter = explode("_", $arg[1]);
-    $solr = apachesolr_get_solr();
-    $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$exp_parameter[1]"));
-    $query->addParam('rows', '1'); // How many rows of result to display default it is 10.
-    $query->addParam('qf', 'entity_id'); // Only search in title
-    $query->setSolrsort('sort_label', 'desc');
-    $resp_search = $query->search();
-    if (!empty($resp_search->response->docs[0]->url)) {
-      drupal_goto($resp_search->response->docs[0]->url);
-    }
-  }
 }
