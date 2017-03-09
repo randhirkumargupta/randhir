@@ -209,7 +209,7 @@ img {
 .delete-link,
 .move-link,
 .download-link,
-.edit-cm a, [id*="taxonomy-csv-import-form"] .form-type-file > label, [id*="field-newsl-add-news-values"] fieldset, .node-syndication_rule-form tbody td .field-name-field-syndication-time, .newsletter-templates .newsletter-list, [id*="field-service-content-values"] .field-name-field-story-expert-description label + .form-textarea-wrapper:after, .my-stats, .my-stats-last-details, .node-newsletter_templates-form .form-item-title + .form-type-item, .node-newsletter_templates-form .form-field-name-field-newst-header-headline, .block-itg-related .checked-list li .ui-icon, .node-newsletter-form #newsletter-date-time-wrapper, .view-related-content-new .view-filters, .search-criteria + .success, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, .block-itg-layout-manager, #itg-layout-manager-filter-form, .itg-region ul, .itg-region ul li, #pti-basic-info, #itg_video_content .ftp-server, #itg_video_content .local_browse, #itg_video_content .ftp-server .video_filters .time-filter, .page-admin-structure-menu-manage .action-links, [id*="itg-mobile-services-search-form"], .ftp-server #edit-video-browse-select .ftp_video_radio, .browse-video-form .ftp_browse_field .browse-ftp-click, .easyPaginateNav a, #itg-image-croping-crop-form .form-item-aspect-ratio, #itg-image-croping-crop-form .form-item-aspect-ratio label, #itg-image-croping-crop-form .form-item-aspect-ratio .form-select, [id*="itg-widget-issuewidget-filter-form"], [id*="itg-widget-issuewidgetlist-filter-form"], [id*="itg-widget-issuewidget-filter-form"] .form-type-select, [id*="itg-widget-issuewidgetlist-filter-form"] .form-type-select, .load-more-wrapper, .load-more-wrapper .add-more-block, .load-more-wrapper .removes-more-block, .node-category-form .field-name-field-user-city, .node-category-form .field-name-field-time-period, .itg_menu_manager_form [id*="edit-category-icon-ajax-wrapper"] .form-type-managed-file, .node-story-form .form-field-name-field-emoji-position, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .field-name-field-technology-photo-title, [id*="itg-widget-keycandidate-form"], #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file a, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file-size, .go-btn-div, .custom-syndication-feed-pattern-form .title, .form-field-name-field-emoji, .form-field-name-field-emoji-2, #itg-user-log-api-form, #itg-user-log-api-form-visited, [id*="itg-user-block-api-form"], .ads-preview-data .ads-bottom, .ads-preview-data ads-top, .node-heighlights-div .field-group {
+.edit-cm a, [id*="taxonomy-csv-import-form"] .form-type-file > label, [id*="field-newsl-add-news-values"] fieldset, .node-syndication_rule-form tbody td .field-name-field-syndication-time, .newsletter-templates .newsletter-list, [id*="field-service-content-values"] .field-name-field-story-expert-description label + .form-textarea-wrapper:after, .my-stats, .my-stats-last-details, .node-newsletter_templates-form .form-item-title + .form-type-item, .node-newsletter_templates-form .form-field-name-field-newst-header-headline, .block-itg-related .checked-list li .ui-icon, .node-newsletter-form #newsletter-date-time-wrapper, .view-related-content-new .view-filters, .search-criteria + .success, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, .block-itg-layout-manager, #itg-layout-manager-filter-form, .itg-region ul, .itg-region ul li, #pti-basic-info, #itg_video_content .ftp-server, #itg_video_content .local_browse, #itg_video_content .ftp-server .video_filters .time-filter, .page-admin-structure-menu-manage .action-links, [id*="itg-mobile-services-search-form"], .ftp-server #edit-video-browse-select .ftp_video_radio, .browse-video-form .ftp_browse_field .browse-ftp-click, .easyPaginateNav a, #itg-image-croping-crop-form .form-item-aspect-ratio, #itg-image-croping-crop-form .form-item-aspect-ratio label, #itg-image-croping-crop-form .form-item-aspect-ratio .form-select, [id*="itg-widget-issuewidget-filter-form"], [id*="itg-widget-issuewidgetlist-filter-form"], [id*="itg-widget-issuewidget-filter-form"] .form-type-select, [id*="itg-widget-issuewidgetlist-filter-form"] .form-type-select, .load-more-wrapper, .load-more-wrapper .add-more-block, .load-more-wrapper .removes-more-block, .node-category-form .field-name-field-user-city, .node-category-form .field-name-field-time-period, .itg_menu_manager_form [id*="edit-category-icon-ajax-wrapper"] .form-type-managed-file, .node-story-form .form-field-name-field-emoji-position, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .field-name-field-technology-photo-title, [id*="itg-widget-keycandidate-form"], #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file a, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file-size, .go-btn-div, .custom-syndication-feed-pattern-form .title, .form-field-name-field-emoji, .form-field-name-field-emoji-2, #itg-user-log-api-form, #itg-user-log-api-form-visited, [id*="itg-user-block-api-form"], .ads-preview-data .ads-bottom, .ads-preview-data ads-top, .node-heighlights-div .field-group, .video-ftp-div .ftp_video_radio {
   display: inline-block;
 }
 
@@ -245,7 +245,7 @@ img {
 #block-menu-menu-manage-survey-tabs > .menu > li,
 #block-menu-menu-manage-quiz-tabs > .menu > li,
 #block-menu-menu-newsletter-manage-tabs > .menu > li,
-#block-menu-menu-story-content-admin-menu > .menu > li, .block-itg-story-list span, .view .attachment .count, [id*="itg-social-media-form"] > div fieldset .form-managed-file .file img, [id*="itg-social-media-form"] > div fieldset .form-managed-file .file a, [id*="itg-social-media-form"] > div .form-type-managed-file, .node-syndication_rule-form tbody td .field-name-field-syndication-time, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file a, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file a, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file a, .block-itg-related .checked-list li .ui-icon, .view-related-content-new .view-filters, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, #pti-basic-info, #itg_video_content .ftp-server .video_filters .time-filter, .page-admin-structure-menu-manage .action-links, .ftp-server #edit-video-browse-select .ftp_video_radio, .browse-video-form .ftp_browse_field .browse-ftp-click, #itg-image-croping-crop-form .form-item-aspect-ratio, [id*="itg-widget-issuewidget-filter-form"], [id*="itg-widget-issuewidgetlist-filter-form"], [id*="itg-widget-issuewidget-filter-form"] .form-type-select, [id*="itg-widget-issuewidgetlist-filter-form"] .form-type-select, .load-more-wrapper, .load-more-wrapper .add-more-block, .load-more-wrapper .removes-more-block, .node-story-form .form-field-name-field-emoji-position, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .field-name-field-technology-photo-title, [id*="itg-widget-keycandidate-form"], #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file a, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file-size, .custom-syndication-feed-pattern-form .title, .form-field-name-field-emoji, .form-field-name-field-emoji-2, #itg-user-log-api-form, #itg-user-log-api-form-visited, [id*="itg-user-block-api-form"], .ads-preview-data .ads-bottom, .ads-preview-data ads-top, .node-heighlights-div .field-group {
+#block-menu-menu-story-content-admin-menu > .menu > li, .block-itg-story-list span, .view .attachment .count, [id*="itg-social-media-form"] > div fieldset .form-managed-file .file img, [id*="itg-social-media-form"] > div fieldset .form-managed-file .file a, [id*="itg-social-media-form"] > div .form-type-managed-file, .node-syndication_rule-form tbody td .field-name-field-syndication-time, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file a, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file a, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file a, .block-itg-related .checked-list li .ui-icon, .view-related-content-new .view-filters, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, #pti-basic-info, #itg_video_content .ftp-server .video_filters .time-filter, .page-admin-structure-menu-manage .action-links, .ftp-server #edit-video-browse-select .ftp_video_radio, .browse-video-form .ftp_browse_field .browse-ftp-click, #itg-image-croping-crop-form .form-item-aspect-ratio, [id*="itg-widget-issuewidget-filter-form"], [id*="itg-widget-issuewidgetlist-filter-form"], [id*="itg-widget-issuewidget-filter-form"] .form-type-select, [id*="itg-widget-issuewidgetlist-filter-form"] .form-type-select, .load-more-wrapper, .load-more-wrapper .add-more-block, .load-more-wrapper .removes-more-block, .node-story-form .form-field-name-field-emoji-position, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .field-name-field-technology-photo-title, [id*="itg-widget-keycandidate-form"], #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file a, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file-size, .custom-syndication-feed-pattern-form .title, .form-field-name-field-emoji, .form-field-name-field-emoji-2, #itg-user-log-api-form, #itg-user-log-api-form-visited, [id*="itg-user-block-api-form"], .ads-preview-data .ads-bottom, .ads-preview-data ads-top, .node-heighlights-div .field-group, .video-ftp-div .ftp_video_radio {
   vertical-align: top;
 }
 
@@ -370,7 +370,7 @@ img {
 .page-admin-people form .form-field-type-image .image-widget-data,
 .page-user form .form-field-type-image .image-widget-data,
 .node-newsletter_templates-form .form-field-type-image .image-widget-data,
-.node-mega_review_critic-form .form-field-type-image .image-widget-data, #taxonomy-form-term .form-field-type-image .image-widget-data, .node-loyalty_and_rewards-form .form-field-type-image .image-widget-data, .image-repo-browse .field-type-image .image-widget-data, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .field-type-image .image-widget-data, .node-event_backend-form .field-type-image .image-widget-data, [id*="field-survey-add-questions-values"] .field-type-image .image-widget-data, [id*="field-quiz-add-questions-values"] .field-type-image .image-widget-data, .node-photogallery-form #BrowseMedia .field-type-image .image-widget-data, .node-poll-form .field-type-image .image-widget-data, .node-notification-form .field-type-image .image-widget-data,
+.node-mega_review_critic-form .form-field-type-image .image-widget-data, #taxonomy-form-term .form-field-type-image .image-widget-data, .node-loyalty_and_rewards-form .form-field-type-image .image-widget-data, [id*="node-itg_funalytics-form"] .form-field-type-image .image-widget-data, .image-repo-browse .field-type-image .image-widget-data, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .field-type-image .image-widget-data, .node-event_backend-form .field-type-image .image-widget-data, [id*="field-survey-add-questions-values"] .field-type-image .image-widget-data, [id*="field-quiz-add-questions-values"] .field-type-image .image-widget-data, .node-photogallery-form #BrowseMedia .field-type-image .image-widget-data, .node-poll-form .field-type-image .image-widget-data, .node-notification-form .field-type-image .image-widget-data,
 .node-food_news-form .field-type-image .image-widget-data,
 .node-cooking_tips-form .field-type-image .image-widget-data,
 .node-reporter-form .field-type-image .image-widget-data,
@@ -382,7 +382,7 @@ img {
 .page-admin-people form .field-type-image .image-widget-data,
 .page-user form .field-type-image .image-widget-data,
 .node-newsletter_templates-form .field-type-image .image-widget-data,
-.node-mega_review_critic-form .field-type-image .image-widget-data, #taxonomy-form-term .field-type-image .image-widget-data, .node-loyalty_and_rewards-form .field-type-image .image-widget-data, #main, .header, .header .container, .form-type-autocomplete-deluxe div.autocomplete-deluxe-container, .form-type-password, div.form-type-password-confirm, div.vertical-tabs, .form-type-textfield, .form-field-type-taxonomy-term-reference, .form-type-select, .form-type-checkboxes, .form-type-radios, .form-type-textarea, .form-type-managed-file, .form-type-managed-file .filefield-source, .generate-image, .generate-image-error, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .image-widget-data, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .path-form .fieldset-wrapper, .form-type-plupload, #block-menu-menu-admin-left-menu, #block-menu-menu-admin-left-menu > .menu > li, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded > a, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded, .breadcrumb ol li, .user-role, .user-role a, .dashboard-tab li, .field-name-field-story-reporter, .form-field-name-field-story-reporter, .form-field-name-field-task-task-idea, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), .form-field-name-field-quiz-add-questions, .node-ads_management-form .form-field-name-field-ads-headerscript,
+.node-mega_review_critic-form .field-type-image .image-widget-data, #taxonomy-form-term .field-type-image .image-widget-data, .node-loyalty_and_rewards-form .field-type-image .image-widget-data, [id*="node-itg_funalytics-form"] .field-type-image .image-widget-data, #main, .header, .header .container, .form-type-autocomplete-deluxe div.autocomplete-deluxe-container, .form-type-password, div.form-type-password-confirm, div.vertical-tabs, .form-type-textfield, .form-field-type-taxonomy-term-reference, .form-type-select, .form-type-checkboxes, .form-type-radios, .form-type-textarea, .form-type-managed-file, .form-type-managed-file .filefield-source, .generate-image, .generate-image-error, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .image-widget-data, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .path-form .fieldset-wrapper, .form-type-plupload, #block-menu-menu-admin-left-menu, #block-menu-menu-admin-left-menu > .menu > li, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded > a, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded, .breadcrumb ol li, .user-role, .user-role a, .dashboard-tab li, .field-name-field-story-reporter, .form-field-name-field-story-reporter, .form-field-name-field-task-task-idea, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), .form-field-name-field-quiz-add-questions, .node-ads_management-form .form-field-name-field-ads-headerscript,
 .node-ads_management-form .form-field-name-field-ads-body-start,
 .node-ads_management-form .form-field-name-field-ads-ad-code,
 .node-ads_management-form .form-field-name-field-ads-header-script,
@@ -394,7 +394,7 @@ img {
 .download-link,
 .edit-cm a, [id*="field-newsl-add-news-values"] fieldset legend .fieldset-title, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper, .newsletter-templates .newsletter-header, [id*="field-service-content-values"] .field-name-field-service-content-date, .form-field-name-field-syndication-ftp-details, .user-profile-div, .block-itg-related .rel-link, .main-cont, .node-videogallery-form #Imageupload .form-field-type-image .image-widget-data, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2), [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2), [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .form-field-name-field-pti-print-media, [id*="edit-field-story-highlights"], .itg-region ul, .view-photo-list-of-category .view-content .photo-list li .tile figure, .view-video-list-of-category .view-content .photo-list li .tile figure, .node-story-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file,
 .node-videogallery-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file,
-.node-photogallery-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file, .itg_menu_manager_form [id*="edit-category-icon-ajax-wrapper"] #edit-category-icon-upload, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget, .form-field-name-field-ads-ex-headerscript,
+.node-photogallery-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file, .itg_menu_manager_form [id*="edit-category-icon-ajax-wrapper"] #edit-category-icon-upload, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget, .view-social-media-report, .form-field-name-field-ads-ex-headerscript,
 .form-field-name-field-ads-ex-body-start,
 .form-field-name-field-ads-ex-body-close, #edit-lrp-gold-star-one-icon-fieldset, #edit-lrp-gold-star-two-icon-fieldset, #edit-lrp-gold-star-three-icon-fieldset, #edit-lrp-gold-star-four-icon-fieldset, #edit-lrp-gold-star-five-icon-fieldset, #edit-lrp-gold-star-six-icon-fieldset, .node-event_backend-form .form-field-name-field-ticket-group-type, [id*="field-ticket-group-type-values"] tbody tr td {
   position: relative;
@@ -475,6 +475,7 @@ div.filefield-sources-list a.active {
 #views-form-section-wise-draggable-content-order-big-story-format .form-actions a,
 #views-form-section-wise-draggable-content-order-we-may-suggest-widget .form-actions a,
 #views-form-story-widget-trending-videos .form-actions a,
+#views-form-user-selection-user-selection-for-section .form-actions a,
 #views-form-story-widget-most-popular .form-actions a, #views-form-photo-carousel-widget-photo-carousel-list .form-actions a,
 #views-form-special-how-i-made-it-special-how-made-it-widget-contents .form-actions a,
 #views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions a,
@@ -509,6 +510,7 @@ div.filefield-sources-list a.active {
 #views-form-section-wise-draggable-content-order-big-story-format .form-actions a:hover,
 #views-form-section-wise-draggable-content-order-we-may-suggest-widget .form-actions a:hover,
 #views-form-story-widget-trending-videos .form-actions a:hover,
+#views-form-user-selection-user-selection-for-section .form-actions a:hover,
 #views-form-story-widget-most-popular .form-actions a:hover, #views-form-photo-carousel-widget-photo-carousel-list .form-actions a:hover,
 #views-form-special-how-i-made-it-special-how-made-it-widget-contents .form-actions a:hover,
 #views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions a:hover,
@@ -523,7 +525,23 @@ div.filefield-sources-list a.active {
   box-shadow: 0 0 2px #ee4d4d;
 }
 
-.btn-submit, .form-submit, .top-actions a[data-id="story_submit_link"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .view .attachment a, div.node .ugc-action .approve-ugc, [id*="edit-field-supp-import-xml"] .form-type-managed-file .filefield-sources-list a.filefield-source.filefield-source-plupload,
+.btn-submit, .form-submit, .top-actions a[data-id="story_submit_link"], .form-type-plupload .plupload_buttons .plupload_button.plupload_add, .form-type-plupload .plupload_buttons .plupload_button.plupload_start, .view .attachment a, div.node .ugc-action .approve-ugc, .confirmation .form-actions #edit-submit, #views-form-key-candidate-special-key-candidate-widget-contents .form-actions #edit-submit,
+#views-form-story-widget-watch-right-now .form-actions #edit-submit, #views-form-story-widget-top-takes-video .form-actions #edit-submit,
+#views-form-widget-anchors-listing-anchors-listing-page .form-actions #edit-submit, #views-form-story-widget-page-1 .form-actions #edit-submit,
+#views-form-section-wise-draggable-content-order-page .form-actions #edit-submit, #views-form-home-page-feature-widget-page-1 .form-actions #edit-submit,
+#views-form-section-wise-draggable-content-order-dont-miss-content .form-actions #edit-submit,
+#views-form-section-wise-draggable-content-order-big-story-format .form-actions #edit-submit,
+#views-form-section-wise-draggable-content-order-we-may-suggest-widget .form-actions #edit-submit,
+#views-form-story-widget-trending-videos .form-actions #edit-submit,
+#views-form-user-selection-user-selection-for-section .form-actions #edit-submit,
+#views-form-story-widget-most-popular .form-actions #edit-submit, #views-form-photo-carousel-widget-photo-carousel-list .form-actions #edit-submit,
+#views-form-special-how-i-made-it-special-how-made-it-widget-contents .form-actions #edit-submit,
+#views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions #edit-submit,
+#views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions #edit-submit,
+#views-form-most-read-widget-most-read-widget-contents .form-actions #edit-submit,
+#views-form-highlights-widget-highlights-widget-conent .form-actions #edit-submit,
+[id*="views-form-so-sorry-so-sorry-videos"] .form-actions #edit-submit,
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, [id*="views-form-photo-gallery-management-page"] .form-actions #edit-submit, [id*="edit-field-supp-import-xml"] .form-type-managed-file .filefield-sources-list a.filefield-source.filefield-source-plupload,
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file .filefield-sources-list a.filefield-source.filefield-source-plupload, .node-event_backend-form .anchor-order-reorder, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper .newsletter-get-content, .block-itg-related .rel-link .saved-search-link, .block-itg-related .add-related-content-link, #clickme, .save-checklist-ordre .save-checklist, [id*="views-form-manage-print-team-page"] a.btn-save, .original-image, .crop-image, .maptofield, #layout-section-widgets-search-form #layout-section-save, .node-breaking_news-form #custom_another_item #custom_add_another_item, #block-itg-layout-manager-layout-button-block .layout-button .btn-save, #block-itg-layout-manager-layout-button-block .layout-button .btn-preview, #itg_video_content .ftp-server .video_filters > div.apply_video_filter span, #itg_video_content .ftp-server a.button.asso-filed, .page-manage-budget-list table caption a, .page-budget-predictor-list table caption a, #layout-html-submit, #layout-highlights-submit, .download-html, .multi_reporter .multi-byline, .byline-list .save-byline, .itg-smi .data-popup-link {
   border-radius: 1px;
   border: 1px solid #1fb5ad;
@@ -540,21 +558,101 @@ div.filefield-sources-list a.active {
   vertical-align: top;
   margin-right: 10px;
 }
-.btn-submit:hover, .form-submit:hover, .top-actions a[data-id="story_submit_link"]:hover, .form-type-plupload .plupload_buttons .plupload_button.plupload_add:hover, .form-type-plupload .plupload_buttons .plupload_button.plupload_start:hover, .view .attachment a:hover, div.node .ugc-action .approve-ugc:hover, [id*="edit-field-supp-import-xml"] .form-type-managed-file .filefield-sources-list a.filefield-source.filefield-source-plupload:hover,
+.btn-submit:hover, .form-submit:hover, .top-actions a[data-id="story_submit_link"]:hover, .form-type-plupload .plupload_buttons .plupload_button.plupload_add:hover, .form-type-plupload .plupload_buttons .plupload_button.plupload_start:hover, .view .attachment a:hover, div.node .ugc-action .approve-ugc:hover, .confirmation .form-actions #edit-submit:hover, #views-form-key-candidate-special-key-candidate-widget-contents .form-actions #edit-submit:hover,
+#views-form-story-widget-watch-right-now .form-actions #edit-submit:hover, #views-form-story-widget-top-takes-video .form-actions #edit-submit:hover,
+#views-form-widget-anchors-listing-anchors-listing-page .form-actions #edit-submit:hover, #views-form-story-widget-page-1 .form-actions #edit-submit:hover,
+#views-form-section-wise-draggable-content-order-page .form-actions #edit-submit:hover, #views-form-home-page-feature-widget-page-1 .form-actions #edit-submit:hover,
+#views-form-section-wise-draggable-content-order-dont-miss-content .form-actions #edit-submit:hover,
+#views-form-section-wise-draggable-content-order-big-story-format .form-actions #edit-submit:hover,
+#views-form-section-wise-draggable-content-order-we-may-suggest-widget .form-actions #edit-submit:hover,
+#views-form-story-widget-trending-videos .form-actions #edit-submit:hover,
+#views-form-user-selection-user-selection-for-section .form-actions #edit-submit:hover,
+#views-form-story-widget-most-popular .form-actions #edit-submit:hover, #views-form-photo-carousel-widget-photo-carousel-list .form-actions #edit-submit:hover,
+#views-form-special-how-i-made-it-special-how-made-it-widget-contents .form-actions #edit-submit:hover,
+#views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions #edit-submit:hover,
+#views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions #edit-submit:hover,
+#views-form-most-read-widget-most-read-widget-contents .form-actions #edit-submit:hover,
+#views-form-highlights-widget-highlights-widget-conent .form-actions #edit-submit:hover,
+[id*="views-form-so-sorry-so-sorry-videos"] .form-actions #edit-submit:hover,
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit:hover, [id*="views-form-photo-gallery-management-page"] .form-actions #edit-submit:hover, [id*="edit-field-supp-import-xml"] .form-type-managed-file .filefield-sources-list a.filefield-source.filefield-source-plupload:hover,
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file .filefield-sources-list a.filefield-source.filefield-source-plupload:hover, .node-event_backend-form .anchor-order-reorder:hover, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper .newsletter-get-content:hover, .block-itg-related .rel-link .saved-search-link:hover, .block-itg-related .add-related-content-link:hover, #clickme:hover, .save-checklist-ordre .save-checklist:hover, [id*="views-form-manage-print-team-page"] a.btn-save:hover, .original-image:hover, .crop-image:hover, .maptofield:hover, #layout-section-widgets-search-form #layout-section-save:hover, .node-breaking_news-form #custom_another_item #custom_add_another_item:hover, #block-itg-layout-manager-layout-button-block .layout-button .btn-save:hover, #block-itg-layout-manager-layout-button-block .layout-button .btn-preview:hover, #itg_video_content .ftp-server .video_filters > div.apply_video_filter span:hover, #itg_video_content .ftp-server a.button.asso-filed:hover, .page-manage-budget-list table caption a:hover, .page-budget-predictor-list table caption a:hover, #layout-html-submit:hover, #layout-highlights-submit:hover, .download-html:hover, .multi_reporter .multi-byline:hover, .byline-list .save-byline:hover, .itg-smi .data-popup-link:hover {
   box-shadow: 0 0 2px #3a8a82;
 }
-.btn-submit[value="Reset"], [value="Reset"].form-submit, .top-actions a[value="Reset"][data-id="story_submit_link"], .form-type-plupload .plupload_buttons [value="Reset"].plupload_button.plupload_add, .form-type-plupload .plupload_buttons [value="Reset"].plupload_button.plupload_start, .view .attachment a[value="Reset"], div.node .ugc-action [value="Reset"].approve-ugc, [id*="edit-field-supp-import-xml"] .form-type-managed-file .filefield-sources-list a[value="Reset"].filefield-source.filefield-source-plupload,
+.btn-submit[value="Reset"], [value="Reset"].form-submit, .top-actions a[value="Reset"][data-id="story_submit_link"], .form-type-plupload .plupload_buttons [value="Reset"].plupload_button.plupload_add, .form-type-plupload .plupload_buttons [value="Reset"].plupload_button.plupload_start, .view .attachment a[value="Reset"], div.node .ugc-action [value="Reset"].approve-ugc, .confirmation .form-actions [value="Reset"]#edit-submit, #views-form-key-candidate-special-key-candidate-widget-contents .form-actions [value="Reset"]#edit-submit,
+#views-form-story-widget-watch-right-now .form-actions [value="Reset"]#edit-submit, #views-form-story-widget-top-takes-video .form-actions [value="Reset"]#edit-submit,
+#views-form-widget-anchors-listing-anchors-listing-page .form-actions [value="Reset"]#edit-submit, #views-form-story-widget-page-1 .form-actions [value="Reset"]#edit-submit,
+#views-form-section-wise-draggable-content-order-page .form-actions [value="Reset"]#edit-submit, #views-form-home-page-feature-widget-page-1 .form-actions [value="Reset"]#edit-submit,
+#views-form-section-wise-draggable-content-order-dont-miss-content .form-actions [value="Reset"]#edit-submit,
+#views-form-section-wise-draggable-content-order-big-story-format .form-actions [value="Reset"]#edit-submit,
+#views-form-section-wise-draggable-content-order-we-may-suggest-widget .form-actions [value="Reset"]#edit-submit,
+#views-form-story-widget-trending-videos .form-actions [value="Reset"]#edit-submit,
+#views-form-user-selection-user-selection-for-section .form-actions [value="Reset"]#edit-submit,
+#views-form-story-widget-most-popular .form-actions [value="Reset"]#edit-submit, #views-form-photo-carousel-widget-photo-carousel-list .form-actions [value="Reset"]#edit-submit,
+#views-form-special-how-i-made-it-special-how-made-it-widget-contents .form-actions [value="Reset"]#edit-submit,
+#views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions [value="Reset"]#edit-submit,
+#views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions [value="Reset"]#edit-submit,
+#views-form-most-read-widget-most-read-widget-contents .form-actions [value="Reset"]#edit-submit,
+#views-form-highlights-widget-highlights-widget-conent .form-actions [value="Reset"]#edit-submit,
+[id*="views-form-so-sorry-so-sorry-videos"] .form-actions [value="Reset"]#edit-submit,
+#views-form-photo-carousel-widget-video-carousel-list .form-actions [value="Reset"]#edit-submit, [id*="views-form-photo-gallery-management-page"] .form-actions [value="Reset"]#edit-submit, [id*="edit-field-supp-import-xml"] .form-type-managed-file .filefield-sources-list a[value="Reset"].filefield-source.filefield-source-plupload,
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file .filefield-sources-list a[value="Reset"].filefield-source.filefield-source-plupload, .node-event_backend-form [value="Reset"].anchor-order-reorder, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper [value="Reset"].newsletter-get-content, .block-itg-related .rel-link [value="Reset"].saved-search-link, .block-itg-related [value="Reset"].add-related-content-link, [value="Reset"]#clickme, .save-checklist-ordre [value="Reset"].save-checklist, [id*="views-form-manage-print-team-page"] a[value="Reset"].btn-save, [value="Reset"].original-image, [value="Reset"].crop-image, [value="Reset"].maptofield, #layout-section-widgets-search-form [value="Reset"]#layout-section-save, .node-breaking_news-form #custom_another_item [value="Reset"]#custom_add_another_item, #block-itg-layout-manager-layout-button-block .layout-button [value="Reset"].btn-save, #block-itg-layout-manager-layout-button-block .layout-button [value="Reset"].btn-preview, #itg_video_content .ftp-server .video_filters > div.apply_video_filter span[value="Reset"], #itg_video_content .ftp-server a[value="Reset"].button.asso-filed, .page-manage-budget-list table caption a[value="Reset"], .page-budget-predictor-list table caption a[value="Reset"], [value="Reset"]#layout-html-submit, [value="Reset"]#layout-highlights-submit, [value="Reset"].download-html, .multi_reporter [value="Reset"].multi-byline, .byline-list [value="Reset"].save-byline, .itg-smi [value="Reset"].data-popup-link, .btn-submit#edit-delete, #edit-delete.form-submit, .top-actions a#edit-delete[data-id="story_submit_link"], .form-type-plupload .plupload_buttons #edit-delete.plupload_button.plupload_add, .form-type-plupload .plupload_buttons #edit-delete.plupload_button.plupload_start, .view .attachment a#edit-delete, div.node .ugc-action #edit-delete.approve-ugc, [id*="edit-field-supp-import-xml"] .form-type-managed-file .filefield-sources-list a#edit-delete.filefield-source.filefield-source-plupload,
-[id*="edit-field-field-issue-import-xml"] .form-type-managed-file .filefield-sources-list a#edit-delete.filefield-source.filefield-source-plupload, .node-event_backend-form #edit-delete.anchor-order-reorder, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper #edit-delete.newsletter-get-content, .block-itg-related .rel-link #edit-delete.saved-search-link, .block-itg-related #edit-delete.add-related-content-link, .save-checklist-ordre #edit-delete.save-checklist, [id*="views-form-manage-print-team-page"] a#edit-delete.btn-save, #edit-delete.original-image, #edit-delete.crop-image, #edit-delete.maptofield, #block-itg-layout-manager-layout-button-block .layout-button #edit-delete.btn-save, #block-itg-layout-manager-layout-button-block .layout-button #edit-delete.btn-preview, #itg_video_content .ftp-server .video_filters > div.apply_video_filter span#edit-delete, #itg_video_content .ftp-server a#edit-delete.button.asso-filed, .page-manage-budget-list table caption a#edit-delete, .page-budget-predictor-list table caption a#edit-delete, #edit-delete.download-html, .multi_reporter #edit-delete.multi-byline, .byline-list #edit-delete.save-byline, .itg-smi #edit-delete.data-popup-link, .btn-submit[data-id="edit-delete"], [data-id="edit-delete"].form-submit, .top-actions a[data-id="edit-delete"][data-id="story_submit_link"], .form-type-plupload .plupload_buttons [data-id="edit-delete"].plupload_button.plupload_add, .form-type-plupload .plupload_buttons [data-id="edit-delete"].plupload_button.plupload_start, .view .attachment a[data-id="edit-delete"], div.node .ugc-action [data-id="edit-delete"].approve-ugc, [id*="edit-field-supp-import-xml"] .form-type-managed-file .filefield-sources-list a[data-id="edit-delete"].filefield-source.filefield-source-plupload,
+[id*="edit-field-field-issue-import-xml"] .form-type-managed-file .filefield-sources-list a#edit-delete.filefield-source.filefield-source-plupload, .node-event_backend-form #edit-delete.anchor-order-reorder, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper #edit-delete.newsletter-get-content, .block-itg-related .rel-link #edit-delete.saved-search-link, .block-itg-related #edit-delete.add-related-content-link, .save-checklist-ordre #edit-delete.save-checklist, [id*="views-form-manage-print-team-page"] a#edit-delete.btn-save, #edit-delete.original-image, #edit-delete.crop-image, #edit-delete.maptofield, #block-itg-layout-manager-layout-button-block .layout-button #edit-delete.btn-save, #block-itg-layout-manager-layout-button-block .layout-button #edit-delete.btn-preview, #itg_video_content .ftp-server .video_filters > div.apply_video_filter span#edit-delete, #itg_video_content .ftp-server a#edit-delete.button.asso-filed, .page-manage-budget-list table caption a#edit-delete, .page-budget-predictor-list table caption a#edit-delete, #edit-delete.download-html, .multi_reporter #edit-delete.multi-byline, .byline-list #edit-delete.save-byline, .itg-smi #edit-delete.data-popup-link, .btn-submit[data-id="edit-delete"], [data-id="edit-delete"].form-submit, .top-actions a[data-id="edit-delete"][data-id="story_submit_link"], .form-type-plupload .plupload_buttons [data-id="edit-delete"].plupload_button.plupload_add, .form-type-plupload .plupload_buttons [data-id="edit-delete"].plupload_button.plupload_start, .view .attachment a[data-id="edit-delete"], div.node .ugc-action [data-id="edit-delete"].approve-ugc, .confirmation .form-actions [data-id="edit-delete"]#edit-submit, #views-form-key-candidate-special-key-candidate-widget-contents .form-actions [data-id="edit-delete"]#edit-submit,
+#views-form-story-widget-watch-right-now .form-actions [data-id="edit-delete"]#edit-submit, #views-form-story-widget-top-takes-video .form-actions [data-id="edit-delete"]#edit-submit,
+#views-form-widget-anchors-listing-anchors-listing-page .form-actions [data-id="edit-delete"]#edit-submit, #views-form-story-widget-page-1 .form-actions [data-id="edit-delete"]#edit-submit,
+#views-form-section-wise-draggable-content-order-page .form-actions [data-id="edit-delete"]#edit-submit, #views-form-home-page-feature-widget-page-1 .form-actions [data-id="edit-delete"]#edit-submit,
+#views-form-section-wise-draggable-content-order-dont-miss-content .form-actions [data-id="edit-delete"]#edit-submit,
+#views-form-section-wise-draggable-content-order-big-story-format .form-actions [data-id="edit-delete"]#edit-submit,
+#views-form-section-wise-draggable-content-order-we-may-suggest-widget .form-actions [data-id="edit-delete"]#edit-submit,
+#views-form-story-widget-trending-videos .form-actions [data-id="edit-delete"]#edit-submit,
+#views-form-user-selection-user-selection-for-section .form-actions [data-id="edit-delete"]#edit-submit,
+#views-form-story-widget-most-popular .form-actions [data-id="edit-delete"]#edit-submit, #views-form-photo-carousel-widget-photo-carousel-list .form-actions [data-id="edit-delete"]#edit-submit,
+#views-form-special-how-i-made-it-special-how-made-it-widget-contents .form-actions [data-id="edit-delete"]#edit-submit,
+#views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions [data-id="edit-delete"]#edit-submit,
+#views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions [data-id="edit-delete"]#edit-submit,
+#views-form-most-read-widget-most-read-widget-contents .form-actions [data-id="edit-delete"]#edit-submit,
+#views-form-highlights-widget-highlights-widget-conent .form-actions [data-id="edit-delete"]#edit-submit,
+[id*="views-form-so-sorry-so-sorry-videos"] .form-actions [data-id="edit-delete"]#edit-submit,
+#views-form-photo-carousel-widget-video-carousel-list .form-actions [data-id="edit-delete"]#edit-submit, [id*="views-form-photo-gallery-management-page"] .form-actions [data-id="edit-delete"]#edit-submit, [id*="edit-field-supp-import-xml"] .form-type-managed-file .filefield-sources-list a[data-id="edit-delete"].filefield-source.filefield-source-plupload,
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file .filefield-sources-list a[data-id="edit-delete"].filefield-source.filefield-source-plupload, .node-event_backend-form [data-id="edit-delete"].anchor-order-reorder, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper [data-id="edit-delete"].newsletter-get-content, .block-itg-related .rel-link [data-id="edit-delete"].saved-search-link, .block-itg-related [data-id="edit-delete"].add-related-content-link, [data-id="edit-delete"]#clickme, .save-checklist-ordre [data-id="edit-delete"].save-checklist, [id*="views-form-manage-print-team-page"] a[data-id="edit-delete"].btn-save, [data-id="edit-delete"].original-image, [data-id="edit-delete"].crop-image, [data-id="edit-delete"].maptofield, #layout-section-widgets-search-form [data-id="edit-delete"]#layout-section-save, .node-breaking_news-form #custom_another_item [data-id="edit-delete"]#custom_add_another_item, #block-itg-layout-manager-layout-button-block .layout-button [data-id="edit-delete"].btn-save, #block-itg-layout-manager-layout-button-block .layout-button [data-id="edit-delete"].btn-preview, #itg_video_content .ftp-server .video_filters > div.apply_video_filter span[data-id="edit-delete"], #itg_video_content .ftp-server a[data-id="edit-delete"].button.asso-filed, .page-manage-budget-list table caption a[data-id="edit-delete"], .page-budget-predictor-list table caption a[data-id="edit-delete"], [data-id="edit-delete"]#layout-html-submit, [data-id="edit-delete"]#layout-highlights-submit, [data-id="edit-delete"].download-html, .multi_reporter [data-id="edit-delete"].multi-byline, .byline-list [data-id="edit-delete"].save-byline, .itg-smi [data-id="edit-delete"].data-popup-link {
   border: 1px solid #ee4d4d;
   background-color: #ee4d4d;
   box-shadow: 0 0 5px #ee4d4d;
 }
-.btn-submit[value="Reset"]:hover, [value="Reset"].form-submit:hover, .top-actions a[value="Reset"][data-id="story_submit_link"]:hover, .form-type-plupload .plupload_buttons [value="Reset"].plupload_button.plupload_add:hover, .form-type-plupload .plupload_buttons [value="Reset"].plupload_button.plupload_start:hover, .view .attachment a[value="Reset"]:hover, div.node .ugc-action [value="Reset"].approve-ugc:hover, [id*="edit-field-supp-import-xml"] .form-type-managed-file .filefield-sources-list a[value="Reset"].filefield-source.filefield-source-plupload:hover,
+.btn-submit[value="Reset"]:hover, [value="Reset"].form-submit:hover, .top-actions a[value="Reset"][data-id="story_submit_link"]:hover, .form-type-plupload .plupload_buttons [value="Reset"].plupload_button.plupload_add:hover, .form-type-plupload .plupload_buttons [value="Reset"].plupload_button.plupload_start:hover, .view .attachment a[value="Reset"]:hover, div.node .ugc-action [value="Reset"].approve-ugc:hover, .confirmation .form-actions [value="Reset"]#edit-submit:hover, #views-form-key-candidate-special-key-candidate-widget-contents .form-actions [value="Reset"]#edit-submit:hover,
+#views-form-story-widget-watch-right-now .form-actions [value="Reset"]#edit-submit:hover, #views-form-story-widget-top-takes-video .form-actions [value="Reset"]#edit-submit:hover,
+#views-form-widget-anchors-listing-anchors-listing-page .form-actions [value="Reset"]#edit-submit:hover, #views-form-story-widget-page-1 .form-actions [value="Reset"]#edit-submit:hover,
+#views-form-section-wise-draggable-content-order-page .form-actions [value="Reset"]#edit-submit:hover, #views-form-home-page-feature-widget-page-1 .form-actions [value="Reset"]#edit-submit:hover,
+#views-form-section-wise-draggable-content-order-dont-miss-content .form-actions [value="Reset"]#edit-submit:hover,
+#views-form-section-wise-draggable-content-order-big-story-format .form-actions [value="Reset"]#edit-submit:hover,
+#views-form-section-wise-draggable-content-order-we-may-suggest-widget .form-actions [value="Reset"]#edit-submit:hover,
+#views-form-story-widget-trending-videos .form-actions [value="Reset"]#edit-submit:hover,
+#views-form-user-selection-user-selection-for-section .form-actions [value="Reset"]#edit-submit:hover,
+#views-form-story-widget-most-popular .form-actions [value="Reset"]#edit-submit:hover, #views-form-photo-carousel-widget-photo-carousel-list .form-actions [value="Reset"]#edit-submit:hover,
+#views-form-special-how-i-made-it-special-how-made-it-widget-contents .form-actions [value="Reset"]#edit-submit:hover,
+#views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions [value="Reset"]#edit-submit:hover,
+#views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions [value="Reset"]#edit-submit:hover,
+#views-form-most-read-widget-most-read-widget-contents .form-actions [value="Reset"]#edit-submit:hover,
+#views-form-highlights-widget-highlights-widget-conent .form-actions [value="Reset"]#edit-submit:hover,
+[id*="views-form-so-sorry-so-sorry-videos"] .form-actions [value="Reset"]#edit-submit:hover,
+#views-form-photo-carousel-widget-video-carousel-list .form-actions [value="Reset"]#edit-submit:hover, [id*="views-form-photo-gallery-management-page"] .form-actions [value="Reset"]#edit-submit:hover, [id*="edit-field-supp-import-xml"] .form-type-managed-file .filefield-sources-list a[value="Reset"].filefield-source.filefield-source-plupload:hover,
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file .filefield-sources-list a[value="Reset"].filefield-source.filefield-source-plupload:hover, .node-event_backend-form [value="Reset"].anchor-order-reorder:hover, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper [value="Reset"].newsletter-get-content:hover, .block-itg-related .rel-link [value="Reset"].saved-search-link:hover, .block-itg-related [value="Reset"].add-related-content-link:hover, [value="Reset"]#clickme:hover, .save-checklist-ordre [value="Reset"].save-checklist:hover, [id*="views-form-manage-print-team-page"] a[value="Reset"].btn-save:hover, [value="Reset"].original-image:hover, [value="Reset"].crop-image:hover, [value="Reset"].maptofield:hover, #layout-section-widgets-search-form [value="Reset"]#layout-section-save:hover, .node-breaking_news-form #custom_another_item [value="Reset"]#custom_add_another_item:hover, #block-itg-layout-manager-layout-button-block .layout-button [value="Reset"].btn-save:hover, #block-itg-layout-manager-layout-button-block .layout-button [value="Reset"].btn-preview:hover, #itg_video_content .ftp-server .video_filters > div.apply_video_filter span[value="Reset"]:hover, #itg_video_content .ftp-server a[value="Reset"].button.asso-filed:hover, .page-manage-budget-list table caption a[value="Reset"]:hover, .page-budget-predictor-list table caption a[value="Reset"]:hover, [value="Reset"]#layout-html-submit:hover, [value="Reset"]#layout-highlights-submit:hover, [value="Reset"].download-html:hover, .multi_reporter [value="Reset"].multi-byline:hover, .byline-list [value="Reset"].save-byline:hover, .itg-smi [value="Reset"].data-popup-link:hover, .btn-submit#edit-delete:hover, #edit-delete.form-submit:hover, .top-actions a#edit-delete[data-id="story_submit_link"]:hover, .form-type-plupload .plupload_buttons #edit-delete.plupload_button.plupload_add:hover, .form-type-plupload .plupload_buttons #edit-delete.plupload_button.plupload_start:hover, .view .attachment a#edit-delete:hover, div.node .ugc-action #edit-delete.approve-ugc:hover, [id*="edit-field-supp-import-xml"] .form-type-managed-file .filefield-sources-list a#edit-delete.filefield-source.filefield-source-plupload:hover,
-[id*="edit-field-field-issue-import-xml"] .form-type-managed-file .filefield-sources-list a#edit-delete.filefield-source.filefield-source-plupload:hover, .node-event_backend-form #edit-delete.anchor-order-reorder:hover, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper #edit-delete.newsletter-get-content:hover, .block-itg-related .rel-link #edit-delete.saved-search-link:hover, .block-itg-related #edit-delete.add-related-content-link:hover, .save-checklist-ordre #edit-delete.save-checklist:hover, [id*="views-form-manage-print-team-page"] a#edit-delete.btn-save:hover, #edit-delete.original-image:hover, #edit-delete.crop-image:hover, #edit-delete.maptofield:hover, #block-itg-layout-manager-layout-button-block .layout-button #edit-delete.btn-save:hover, #block-itg-layout-manager-layout-button-block .layout-button #edit-delete.btn-preview:hover, #itg_video_content .ftp-server .video_filters > div.apply_video_filter span#edit-delete:hover, #itg_video_content .ftp-server a#edit-delete.button.asso-filed:hover, .page-manage-budget-list table caption a#edit-delete:hover, .page-budget-predictor-list table caption a#edit-delete:hover, #edit-delete.download-html:hover, .multi_reporter #edit-delete.multi-byline:hover, .byline-list #edit-delete.save-byline:hover, .itg-smi #edit-delete.data-popup-link:hover, .btn-submit[data-id="edit-delete"]:hover, [data-id="edit-delete"].form-submit:hover, .top-actions a[data-id="edit-delete"][data-id="story_submit_link"]:hover, .form-type-plupload .plupload_buttons [data-id="edit-delete"].plupload_button.plupload_add:hover, .form-type-plupload .plupload_buttons [data-id="edit-delete"].plupload_button.plupload_start:hover, .view .attachment a[data-id="edit-delete"]:hover, div.node .ugc-action [data-id="edit-delete"].approve-ugc:hover, [id*="edit-field-supp-import-xml"] .form-type-managed-file .filefield-sources-list a[data-id="edit-delete"].filefield-source.filefield-source-plupload:hover,
+[id*="edit-field-field-issue-import-xml"] .form-type-managed-file .filefield-sources-list a#edit-delete.filefield-source.filefield-source-plupload:hover, .node-event_backend-form #edit-delete.anchor-order-reorder:hover, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper #edit-delete.newsletter-get-content:hover, .block-itg-related .rel-link #edit-delete.saved-search-link:hover, .block-itg-related #edit-delete.add-related-content-link:hover, .save-checklist-ordre #edit-delete.save-checklist:hover, [id*="views-form-manage-print-team-page"] a#edit-delete.btn-save:hover, #edit-delete.original-image:hover, #edit-delete.crop-image:hover, #edit-delete.maptofield:hover, #block-itg-layout-manager-layout-button-block .layout-button #edit-delete.btn-save:hover, #block-itg-layout-manager-layout-button-block .layout-button #edit-delete.btn-preview:hover, #itg_video_content .ftp-server .video_filters > div.apply_video_filter span#edit-delete:hover, #itg_video_content .ftp-server a#edit-delete.button.asso-filed:hover, .page-manage-budget-list table caption a#edit-delete:hover, .page-budget-predictor-list table caption a#edit-delete:hover, #edit-delete.download-html:hover, .multi_reporter #edit-delete.multi-byline:hover, .byline-list #edit-delete.save-byline:hover, .itg-smi #edit-delete.data-popup-link:hover, .btn-submit[data-id="edit-delete"]:hover, [data-id="edit-delete"].form-submit:hover, .top-actions a[data-id="edit-delete"][data-id="story_submit_link"]:hover, .form-type-plupload .plupload_buttons [data-id="edit-delete"].plupload_button.plupload_add:hover, .form-type-plupload .plupload_buttons [data-id="edit-delete"].plupload_button.plupload_start:hover, .view .attachment a[data-id="edit-delete"]:hover, div.node .ugc-action [data-id="edit-delete"].approve-ugc:hover, .confirmation .form-actions [data-id="edit-delete"]#edit-submit:hover, #views-form-key-candidate-special-key-candidate-widget-contents .form-actions [data-id="edit-delete"]#edit-submit:hover,
+#views-form-story-widget-watch-right-now .form-actions [data-id="edit-delete"]#edit-submit:hover, #views-form-story-widget-top-takes-video .form-actions [data-id="edit-delete"]#edit-submit:hover,
+#views-form-widget-anchors-listing-anchors-listing-page .form-actions [data-id="edit-delete"]#edit-submit:hover, #views-form-story-widget-page-1 .form-actions [data-id="edit-delete"]#edit-submit:hover,
+#views-form-section-wise-draggable-content-order-page .form-actions [data-id="edit-delete"]#edit-submit:hover, #views-form-home-page-feature-widget-page-1 .form-actions [data-id="edit-delete"]#edit-submit:hover,
+#views-form-section-wise-draggable-content-order-dont-miss-content .form-actions [data-id="edit-delete"]#edit-submit:hover,
+#views-form-section-wise-draggable-content-order-big-story-format .form-actions [data-id="edit-delete"]#edit-submit:hover,
+#views-form-section-wise-draggable-content-order-we-may-suggest-widget .form-actions [data-id="edit-delete"]#edit-submit:hover,
+#views-form-story-widget-trending-videos .form-actions [data-id="edit-delete"]#edit-submit:hover,
+#views-form-user-selection-user-selection-for-section .form-actions [data-id="edit-delete"]#edit-submit:hover,
+#views-form-story-widget-most-popular .form-actions [data-id="edit-delete"]#edit-submit:hover, #views-form-photo-carousel-widget-photo-carousel-list .form-actions [data-id="edit-delete"]#edit-submit:hover,
+#views-form-special-how-i-made-it-special-how-made-it-widget-contents .form-actions [data-id="edit-delete"]#edit-submit:hover,
+#views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions [data-id="edit-delete"]#edit-submit:hover,
+#views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions [data-id="edit-delete"]#edit-submit:hover,
+#views-form-most-read-widget-most-read-widget-contents .form-actions [data-id="edit-delete"]#edit-submit:hover,
+#views-form-highlights-widget-highlights-widget-conent .form-actions [data-id="edit-delete"]#edit-submit:hover,
+[id*="views-form-so-sorry-so-sorry-videos"] .form-actions [data-id="edit-delete"]#edit-submit:hover,
+#views-form-photo-carousel-widget-video-carousel-list .form-actions [data-id="edit-delete"]#edit-submit:hover, [id*="views-form-photo-gallery-management-page"] .form-actions [data-id="edit-delete"]#edit-submit:hover, [id*="edit-field-supp-import-xml"] .form-type-managed-file .filefield-sources-list a[data-id="edit-delete"].filefield-source.filefield-source-plupload:hover,
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file .filefield-sources-list a[data-id="edit-delete"].filefield-source.filefield-source-plupload:hover, .node-event_backend-form [data-id="edit-delete"].anchor-order-reorder:hover, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper [data-id="edit-delete"].newsletter-get-content:hover, .block-itg-related .rel-link [data-id="edit-delete"].saved-search-link:hover, .block-itg-related [data-id="edit-delete"].add-related-content-link:hover, [data-id="edit-delete"]#clickme:hover, .save-checklist-ordre [data-id="edit-delete"].save-checklist:hover, [id*="views-form-manage-print-team-page"] a[data-id="edit-delete"].btn-save:hover, [data-id="edit-delete"].original-image:hover, [data-id="edit-delete"].crop-image:hover, [data-id="edit-delete"].maptofield:hover, #layout-section-widgets-search-form [data-id="edit-delete"]#layout-section-save:hover, .node-breaking_news-form #custom_another_item [data-id="edit-delete"]#custom_add_another_item:hover, #block-itg-layout-manager-layout-button-block .layout-button [data-id="edit-delete"].btn-save:hover, #block-itg-layout-manager-layout-button-block .layout-button [data-id="edit-delete"].btn-preview:hover, #itg_video_content .ftp-server .video_filters > div.apply_video_filter span[data-id="edit-delete"]:hover, #itg_video_content .ftp-server a[data-id="edit-delete"].button.asso-filed:hover, .page-manage-budget-list table caption a[data-id="edit-delete"]:hover, .page-budget-predictor-list table caption a[data-id="edit-delete"]:hover, [data-id="edit-delete"]#layout-html-submit:hover, [data-id="edit-delete"]#layout-highlights-submit:hover, [data-id="edit-delete"].download-html:hover, .multi_reporter [data-id="edit-delete"].multi-byline:hover, .byline-list [data-id="edit-delete"].save-byline:hover, .itg-smi [data-id="edit-delete"].data-popup-link:hover {
   box-shadow: 0 0 2px #ee4d4d;
 }
@@ -1005,7 +1103,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .page-admin-people form .form-field-type-image .form-type-managed-file > label,
 .page-user form .form-field-type-image .form-type-managed-file > label,
 .node-newsletter_templates-form .form-field-type-image .form-type-managed-file > label,
-.node-mega_review_critic-form .form-field-type-image .form-type-managed-file > label, #taxonomy-form-term .form-field-type-image .form-type-managed-file > label, .node-loyalty_and_rewards-form .form-field-type-image .form-type-managed-file > label, .image-repo-browse .field-type-image .form-type-managed-file > label, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .field-type-image .form-type-managed-file > label, .node-event_backend-form .field-type-image .form-type-managed-file > label, [id*="field-survey-add-questions-values"] .field-type-image .form-type-managed-file > label, [id*="field-quiz-add-questions-values"] .field-type-image .form-type-managed-file > label, .node-photogallery-form #BrowseMedia .field-type-image .form-type-managed-file > label, .node-poll-form .field-type-image .form-type-managed-file > label, .node-notification-form .field-type-image .form-type-managed-file > label,
+.node-mega_review_critic-form .form-field-type-image .form-type-managed-file > label, #taxonomy-form-term .form-field-type-image .form-type-managed-file > label, .node-loyalty_and_rewards-form .form-field-type-image .form-type-managed-file > label, [id*="node-itg_funalytics-form"] .form-field-type-image .form-type-managed-file > label, .image-repo-browse .field-type-image .form-type-managed-file > label, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .field-type-image .form-type-managed-file > label, .node-event_backend-form .field-type-image .form-type-managed-file > label, [id*="field-survey-add-questions-values"] .field-type-image .form-type-managed-file > label, [id*="field-quiz-add-questions-values"] .field-type-image .form-type-managed-file > label, .node-photogallery-form #BrowseMedia .field-type-image .form-type-managed-file > label, .node-poll-form .field-type-image .form-type-managed-file > label, .node-notification-form .field-type-image .form-type-managed-file > label,
 .node-food_news-form .field-type-image .form-type-managed-file > label,
 .node-cooking_tips-form .field-type-image .form-type-managed-file > label,
 .node-reporter-form .field-type-image .form-type-managed-file > label,
@@ -1017,7 +1115,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .page-admin-people form .field-type-image .form-type-managed-file > label,
 .page-user form .field-type-image .form-type-managed-file > label,
 .node-newsletter_templates-form .field-type-image .form-type-managed-file > label,
-.node-mega_review_critic-form .field-type-image .form-type-managed-file > label, #taxonomy-form-term .field-type-image .form-type-managed-file > label, .node-loyalty_and_rewards-form .field-type-image .form-type-managed-file > label {
+.node-mega_review_critic-form .field-type-image .form-type-managed-file > label, #taxonomy-form-term .field-type-image .form-type-managed-file > label, .node-loyalty_and_rewards-form .field-type-image .form-type-managed-file > label, [id*="node-itg_funalytics-form"] .field-type-image .form-type-managed-file > label {
   padding-bottom: 5px;
   padding-top: 5px;
 }
@@ -1033,7 +1131,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .page-admin-people form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
 .page-user form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
 .node-newsletter_templates-form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
-.node-mega_review_critic-form .form-field-type-image .image-widget-data .form-submit[value="Remove"], #taxonomy-form-term .form-field-type-image .image-widget-data .form-submit[value="Remove"], .node-loyalty_and_rewards-form .form-field-type-image .image-widget-data .form-submit[value="Remove"], .image-repo-browse .field-type-image .image-widget-data .form-submit[value="Remove"], .node-event_backend-form .field-type-image .image-widget-data .form-submit[value="Remove"], [id*="field-survey-add-questions-values"] .field-type-image .image-widget-data .form-submit[value="Remove"], [id*="field-quiz-add-questions-values"] .field-type-image .image-widget-data .form-submit[value="Remove"], .node-photogallery-form #BrowseMedia .field-type-image .image-widget-data .form-submit[value="Remove"], .node-poll-form .field-type-image .image-widget-data .form-submit[value="Remove"], .node-notification-form .field-type-image .image-widget-data .form-submit[value="Remove"],
+.node-mega_review_critic-form .form-field-type-image .image-widget-data .form-submit[value="Remove"], #taxonomy-form-term .form-field-type-image .image-widget-data .form-submit[value="Remove"], .node-loyalty_and_rewards-form .form-field-type-image .image-widget-data .form-submit[value="Remove"], [id*="node-itg_funalytics-form"] .form-field-type-image .image-widget-data .form-submit[value="Remove"], .image-repo-browse .field-type-image .image-widget-data .form-submit[value="Remove"], .node-event_backend-form .field-type-image .image-widget-data .form-submit[value="Remove"], [id*="field-survey-add-questions-values"] .field-type-image .image-widget-data .form-submit[value="Remove"], [id*="field-quiz-add-questions-values"] .field-type-image .image-widget-data .form-submit[value="Remove"], .node-photogallery-form #BrowseMedia .field-type-image .image-widget-data .form-submit[value="Remove"], .node-poll-form .field-type-image .image-widget-data .form-submit[value="Remove"], .node-notification-form .field-type-image .image-widget-data .form-submit[value="Remove"],
 .node-food_news-form .field-type-image .image-widget-data .form-submit[value="Remove"],
 .node-cooking_tips-form .field-type-image .image-widget-data .form-submit[value="Remove"],
 .node-reporter-form .field-type-image .image-widget-data .form-submit[value="Remove"],
@@ -1045,7 +1143,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .page-admin-people form .field-type-image .image-widget-data .form-submit[value="Remove"],
 .page-user form .field-type-image .image-widget-data .form-submit[value="Remove"],
 .node-newsletter_templates-form .field-type-image .image-widget-data .form-submit[value="Remove"],
-.node-mega_review_critic-form .field-type-image .image-widget-data .form-submit[value="Remove"], #taxonomy-form-term .field-type-image .image-widget-data .form-submit[value="Remove"], .node-loyalty_and_rewards-form .field-type-image .image-widget-data .form-submit[value="Remove"] {
+.node-mega_review_critic-form .field-type-image .image-widget-data .form-submit[value="Remove"], #taxonomy-form-term .field-type-image .image-widget-data .form-submit[value="Remove"], .node-loyalty_and_rewards-form .field-type-image .image-widget-data .form-submit[value="Remove"], [id*="node-itg_funalytics-form"] .field-type-image .image-widget-data .form-submit[value="Remove"] {
   left: 400px;
 }
 .image-repo-browse .form-field-type-image a.filefield-sources-imce-browse, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .form-field-type-image a.filefield-sources-imce-browse, .node-event_backend-form .form-field-type-image a.filefield-sources-imce-browse, [id*="field-survey-add-questions-values"] .form-field-type-image a.filefield-sources-imce-browse, [id*="field-quiz-add-questions-values"] .form-field-type-image a.filefield-sources-imce-browse, .node-photogallery-form #BrowseMedia .form-field-type-image a.filefield-sources-imce-browse, .node-poll-form .form-field-type-image a.filefield-sources-imce-browse, .node-notification-form .form-field-type-image a.filefield-sources-imce-browse,
@@ -1060,7 +1158,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .page-admin-people form .form-field-type-image a.filefield-sources-imce-browse,
 .page-user form .form-field-type-image a.filefield-sources-imce-browse,
 .node-newsletter_templates-form .form-field-type-image a.filefield-sources-imce-browse,
-.node-mega_review_critic-form .form-field-type-image a.filefield-sources-imce-browse, #taxonomy-form-term .form-field-type-image a.filefield-sources-imce-browse, .node-loyalty_and_rewards-form .form-field-type-image a.filefield-sources-imce-browse, .image-repo-browse .field-type-image a.filefield-sources-imce-browse, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .field-type-image a.filefield-sources-imce-browse, .node-event_backend-form .field-type-image a.filefield-sources-imce-browse, [id*="field-survey-add-questions-values"] .field-type-image a.filefield-sources-imce-browse, [id*="field-quiz-add-questions-values"] .field-type-image a.filefield-sources-imce-browse, .node-photogallery-form #BrowseMedia .field-type-image a.filefield-sources-imce-browse, .node-poll-form .field-type-image a.filefield-sources-imce-browse, .node-notification-form .field-type-image a.filefield-sources-imce-browse,
+.node-mega_review_critic-form .form-field-type-image a.filefield-sources-imce-browse, #taxonomy-form-term .form-field-type-image a.filefield-sources-imce-browse, .node-loyalty_and_rewards-form .form-field-type-image a.filefield-sources-imce-browse, [id*="node-itg_funalytics-form"] .form-field-type-image a.filefield-sources-imce-browse, .image-repo-browse .field-type-image a.filefield-sources-imce-browse, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .field-type-image a.filefield-sources-imce-browse, .node-event_backend-form .field-type-image a.filefield-sources-imce-browse, [id*="field-survey-add-questions-values"] .field-type-image a.filefield-sources-imce-browse, [id*="field-quiz-add-questions-values"] .field-type-image a.filefield-sources-imce-browse, .node-photogallery-form #BrowseMedia .field-type-image a.filefield-sources-imce-browse, .node-poll-form .field-type-image a.filefield-sources-imce-browse, .node-notification-form .field-type-image a.filefield-sources-imce-browse,
 .node-food_news-form .field-type-image a.filefield-sources-imce-browse,
 .node-cooking_tips-form .field-type-image a.filefield-sources-imce-browse,
 .node-reporter-form .field-type-image a.filefield-sources-imce-browse,
@@ -1072,7 +1170,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .page-admin-people form .field-type-image a.filefield-sources-imce-browse,
 .page-user form .field-type-image a.filefield-sources-imce-browse,
 .node-newsletter_templates-form .field-type-image a.filefield-sources-imce-browse,
-.node-mega_review_critic-form .field-type-image a.filefield-sources-imce-browse, #taxonomy-form-term .field-type-image a.filefield-sources-imce-browse, .node-loyalty_and_rewards-form .field-type-image a.filefield-sources-imce-browse {
+.node-mega_review_critic-form .field-type-image a.filefield-sources-imce-browse, #taxonomy-form-term .field-type-image a.filefield-sources-imce-browse, .node-loyalty_and_rewards-form .field-type-image a.filefield-sources-imce-browse, [id*="node-itg_funalytics-form"] .field-type-image a.filefield-sources-imce-browse {
   height: 100%;
   left: 0;
   position: absolute;
@@ -1091,7 +1189,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .page-admin-people form .form-field-type-image a.filefield-sources-imce-browse:after,
 .page-user form .form-field-type-image a.filefield-sources-imce-browse:after,
 .node-newsletter_templates-form .form-field-type-image a.filefield-sources-imce-browse:after,
-.node-mega_review_critic-form .form-field-type-image a.filefield-sources-imce-browse:after, #taxonomy-form-term .form-field-type-image a.filefield-sources-imce-browse:after, .node-loyalty_and_rewards-form .form-field-type-image a.filefield-sources-imce-browse:after, .image-repo-browse .field-type-image a.filefield-sources-imce-browse:after, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .field-type-image a.filefield-sources-imce-browse:after, .node-event_backend-form .field-type-image a.filefield-sources-imce-browse:after, [id*="field-survey-add-questions-values"] .field-type-image a.filefield-sources-imce-browse:after, [id*="field-quiz-add-questions-values"] .field-type-image a.filefield-sources-imce-browse:after, .node-photogallery-form #BrowseMedia .field-type-image a.filefield-sources-imce-browse:after, .node-poll-form .field-type-image a.filefield-sources-imce-browse:after, .node-notification-form .field-type-image a.filefield-sources-imce-browse:after,
+.node-mega_review_critic-form .form-field-type-image a.filefield-sources-imce-browse:after, #taxonomy-form-term .form-field-type-image a.filefield-sources-imce-browse:after, .node-loyalty_and_rewards-form .form-field-type-image a.filefield-sources-imce-browse:after, [id*="node-itg_funalytics-form"] .form-field-type-image a.filefield-sources-imce-browse:after, .image-repo-browse .field-type-image a.filefield-sources-imce-browse:after, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2) .field-type-image a.filefield-sources-imce-browse:after, .node-event_backend-form .field-type-image a.filefield-sources-imce-browse:after, [id*="field-survey-add-questions-values"] .field-type-image a.filefield-sources-imce-browse:after, [id*="field-quiz-add-questions-values"] .field-type-image a.filefield-sources-imce-browse:after, .node-photogallery-form #BrowseMedia .field-type-image a.filefield-sources-imce-browse:after, .node-poll-form .field-type-image a.filefield-sources-imce-browse:after, .node-notification-form .field-type-image a.filefield-sources-imce-browse:after,
 .node-food_news-form .field-type-image a.filefield-sources-imce-browse:after,
 .node-cooking_tips-form .field-type-image a.filefield-sources-imce-browse:after,
 .node-reporter-form .field-type-image a.filefield-sources-imce-browse:after,
@@ -1103,7 +1201,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .page-admin-people form .field-type-image a.filefield-sources-imce-browse:after,
 .page-user form .field-type-image a.filefield-sources-imce-browse:after,
 .node-newsletter_templates-form .field-type-image a.filefield-sources-imce-browse:after,
-.node-mega_review_critic-form .field-type-image a.filefield-sources-imce-browse:after, #taxonomy-form-term .field-type-image a.filefield-sources-imce-browse:after, .node-loyalty_and_rewards-form .field-type-image a.filefield-sources-imce-browse:after {
+.node-mega_review_critic-form .field-type-image a.filefield-sources-imce-browse:after, #taxonomy-form-term .field-type-image a.filefield-sources-imce-browse:after, .node-loyalty_and_rewards-form .field-type-image a.filefield-sources-imce-browse:after, [id*="node-itg_funalytics-form"] .field-type-image a.filefield-sources-imce-browse:after {
   background-color: #fff;
   border: 1px solid #d9d9d9;
   border-radius: 5px;
@@ -3694,6 +3792,7 @@ fieldset#edit-select .form-submit {
 #views-form-section-wise-draggable-content-order-big-story-format p,
 #views-form-section-wise-draggable-content-order-we-may-suggest-widget p,
 #views-form-story-widget-trending-videos p,
+#views-form-user-selection-user-selection-for-section p,
 #views-form-story-widget-most-popular p, #views-form-photo-carousel-widget-photo-carousel-list p,
 #views-form-special-how-i-made-it-special-how-made-it-widget-contents p,
 #views-form-special-auto-review-widget-special-auto-review-widget-contents p,
@@ -3712,6 +3811,7 @@ fieldset#edit-select .form-submit {
 #views-form-section-wise-draggable-content-order-big-story-format .form-actions,
 #views-form-section-wise-draggable-content-order-we-may-suggest-widget .form-actions,
 #views-form-story-widget-trending-videos .form-actions,
+#views-form-user-selection-user-selection-for-section .form-actions,
 #views-form-story-widget-most-popular .form-actions, #views-form-photo-carousel-widget-photo-carousel-list .form-actions,
 #views-form-special-how-i-made-it-special-how-made-it-widget-contents .form-actions,
 #views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions,
@@ -3730,6 +3830,7 @@ fieldset#edit-select .form-submit {
 #views-form-section-wise-draggable-content-order-big-story-format .form-actions .form-submit,
 #views-form-section-wise-draggable-content-order-we-may-suggest-widget .form-actions .form-submit,
 #views-form-story-widget-trending-videos .form-actions .form-submit,
+#views-form-user-selection-user-selection-for-section .form-actions .form-submit,
 #views-form-story-widget-most-popular .form-actions .form-submit, #views-form-photo-carousel-widget-photo-carousel-list .form-actions .form-submit,
 #views-form-special-how-i-made-it-special-how-made-it-widget-contents .form-actions .form-submit,
 #views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions .form-submit,
@@ -4960,8 +5061,11 @@ div.node #comments h2 {
 .node-vas_service_content-form .form-field-name-field-service-content .field-name-field-service-audio-keyword .form-type-textfield > label {
   width: 93px;
 }
-.node-vas_service_content-form td .field-name-field-story-large-image .form-managed-file .image-widget-data .form-submit[value="Remove"] {
-  left: 500px;
+.node-vas_service_content-form td .field-name-field-service-video-keyword {
+  padding-left: 220px;
+}
+.node-vas_service_content-form td .field-name-field-service-video-keyword .form-type-textfield > label {
+  width: 80px;
 }
 .node-vas_service_content-form td .field-name-field-service-video .form-managed-file .form-type-textfield,
 .node-vas_service_content-form td .field-name-field-service-audio .form-managed-file .form-type-textfield {
@@ -4970,7 +5074,7 @@ div.node #comments h2 {
 }
 .node-vas_service_content-form td .field-name-field-service-video .form-managed-file .form-type-textfield > label,
 .node-vas_service_content-form td .field-name-field-service-audio .form-managed-file .form-type-textfield > label {
-  width: auto;
+  width: 80px;
 }
 .node-vas_service_content-form td .field-name-field-service-video .form-managed-file .form-type-textfield .form-text + div.description,
 .node-vas_service_content-form td .field-name-field-service-audio .form-managed-file .form-type-textfield .form-text + div.description {
@@ -5233,6 +5337,7 @@ div.node #comments h2 {
 .view-manage-users #views-form-section-wise-draggable-content-order-big-story-format .item-list ul,
 .view-manage-users #views-form-section-wise-draggable-content-order-we-may-suggest-widget .item-list ul,
 .view-manage-users #views-form-story-widget-trending-videos .item-list ul,
+.view-manage-users #views-form-user-selection-user-selection-for-section .item-list ul,
 .view-manage-users #views-form-story-widget-most-popular .item-list ul, .view-manage-users #views-form-photo-carousel-widget-photo-carousel-list .item-list ul,
 .view-manage-users #views-form-special-how-i-made-it-special-how-made-it-widget-contents .item-list ul,
 .view-manage-users #views-form-special-auto-review-widget-special-auto-review-widget-contents .item-list ul,
@@ -5251,6 +5356,7 @@ div.node #comments h2 {
 .view-manage-users #views-form-section-wise-draggable-content-order-big-story-format .item-list ul li,
 .view-manage-users #views-form-section-wise-draggable-content-order-we-may-suggest-widget .item-list ul li,
 .view-manage-users #views-form-story-widget-trending-videos .item-list ul li,
+.view-manage-users #views-form-user-selection-user-selection-for-section .item-list ul li,
 .view-manage-users #views-form-story-widget-most-popular .item-list ul li, .view-manage-users #views-form-photo-carousel-widget-photo-carousel-list .item-list ul li,
 .view-manage-users #views-form-special-how-i-made-it-special-how-made-it-widget-contents .item-list ul li,
 .view-manage-users #views-form-special-auto-review-widget-special-auto-review-widget-contents .item-list ul li,
@@ -7388,6 +7494,7 @@ div.node #comments h2 {
 .page-node-delete #views-form-section-wise-draggable-content-order-big-story-format,
 .page-node-delete #views-form-section-wise-draggable-content-order-we-may-suggest-widget,
 .page-node-delete #views-form-story-widget-trending-videos,
+.page-node-delete #views-form-user-selection-user-selection-for-section,
 .page-node-delete #views-form-story-widget-most-popular, .page-node-delete #views-form-photo-carousel-widget-photo-carousel-list,
 .page-node-delete #views-form-special-how-i-made-it-special-how-made-it-widget-contents,
 .page-node-delete #views-form-special-auto-review-widget-special-auto-review-widget-contents,
@@ -10842,7 +10949,10 @@ span.file a {
   margin-right: 10px;
 }
 .view-social-media-report .feed-icon {
-  margin-top: 5px;
+  bottom: -9px;
+  left: 152px;
+  margin-top: 0;
+  position: absolute;
 }
 
 [id*="itg-event-registration-fields-configuration-form"] {
@@ -11381,4 +11491,98 @@ span.file a {
 }
 .page-itg-social-media-promote #main > .container#content {
   display: block;
+}
+
+[id*="itg-quiz-quiz-form"] .answer-container .answer-container-actual {
+  text-align: center;
+}
+[id*="itg-quiz-quiz-form"] .answer-container #show_answer {
+  width: 135px;
+  margin: 10px auto;
+  display: block;
+}
+
+.video-ftp-div .ftp_video_radio {
+  position: relative;
+  padding: 0;
+  margin: 0 15px 15px 0;
+  width: 120px;
+  height: 120px;
+}
+.video-ftp-div .ftp_video_radio img {
+  height: 67%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.video-ftp-div .ftp_video_radio label {
+  border: 1px solid #d9d9d9;
+  background: url(../images/default_for_all.png) no-repeat left top/100% auto;
+  font-size: 12px;
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  padding: 80px 5px 0;
+  position: absolute;
+  text-overflow: ellipsis;
+  top: 0;
+  white-space: nowrap;
+  width: 100%;
+}
+.video-ftp-div .ftp_video_radio label:before {
+  border-radius: 50%;
+  bottom: 0;
+  background-color: #fff;
+  border: 1px solid #1fb5ad;
+  color: #1fb5ad;
+  content: "\f00c";
+  font-family: "FontAwesome";
+  font-size: 28px;
+  height: 50px;
+  left: 0;
+  line-height: 50px;
+  margin: auto;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 150px;
+  width: 50px;
+  z-index: 9;
+  opacity: 0;
+  transition: all .3s;
+}
+.video-ftp-div .ftp_video_radio label:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: all .3s;
+}
+.video-ftp-div .ftp_video_radio .form-radio {
+  float: left;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  position: absolute;
+  cursor: pointer;
+  width: 100%;
+  z-index: 999;
+}
+.video-ftp-div .ftp_video_radio .form-radio:hover + label, .video-ftp-div .ftp_video_radio .form-radio:checked + label {
+  box-shadow: 0 0 5px 1px #666;
+}
+.video-ftp-div .ftp_video_radio .form-radio:checked + label:before, .video-ftp-div .ftp_video_radio .form-radio:checked + label:after {
+  top: 0;
+  opacity: 1;
+}
+.video-ftp-div .ftp_video_radio .file_size {
+  color: #ababab;
+  display: block;
+  margin-left: 0;
 }

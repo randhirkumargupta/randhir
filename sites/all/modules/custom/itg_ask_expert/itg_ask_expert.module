@@ -373,9 +373,9 @@ function itg_ask_expert_block_view($delta = '') {
                   }
             }
             elseif (isset($_GET['section_name']) && !empty($_GET['section_name'])) {
-                $cat_id = check_plain($_GET['section']);
-                if (!empty($user_detail)) {
-                  $user_detail = user_details_for_section($arg, $cat_id);
+                $cat_id = check_plain($_GET['section_name']);
+                $user_detail = user_details_for_section($arg, $cat_id);
+                if (!empty($user_detail)) {                  
                   //$block['subject'] = '<h3><span>ASK THE EXPERT</span></h3>';
                   $block['content'] = drupal_render($user_detail);
                   $block['content'] .= drupal_render(drupal_get_form('itg_custom_ask_an_expert_form', $cat_id));
@@ -641,11 +641,11 @@ function user_details_for_section($url, $tid) {
                 $like = itg_flag_get_count($url[1], 'like_count');
                 $dislike = itg_flag_get_count($url[1], 'dislike_count');
               }
-                if (!empty($like)) {
-                    $like_count = '(' . $like . ')';
+                if (!empty($like['like_count'])) {
+                    $like_count = '(' . $like['like_count'] . ')';
                 }
-                if (!empty($dislike)) {
-                    $dislike_count = '(' . $dislike . ')';
+                if (!empty($dislike['dislike_count'])) {
+                    $dislike_count = '(' . $dislike['dislike_count'] . ')';
                 }
                 $pid = "voted_" . $url[1];
                 $like = "no-of-likes_" . $url[1];
