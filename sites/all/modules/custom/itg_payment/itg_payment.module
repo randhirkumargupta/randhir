@@ -425,12 +425,12 @@ function itg_payment_billdesk_order_form($form, &$form_state) {
   $security_id = ITG_BILLDESK_SECURITY_KEY;
   $bdposturl = ITG_BILLDESK_POST_URL;
   $order_id = "ODR-" . time() . rand(0, 100);
-  //$value = $merchant_id . '|100000009|NA|' . $amount . '|NA|NA|NA|INR|NA|R|' . $security_id . '|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . $base_url . '/itg_billdesk_payment_success/' . $order_id;
+  $value = $merchant_id . '|100000009|NA|' . $amount . '|NA|NA|NA|INR|NA|R|' . $security_id . '|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . $base_url . '/itg-payment/billdesk-payment-success';
   // Generate Checksum.
 
-  $value = $merchant_id . '|100000009|NA|' . $amount . '|NA|NA|NA|INR|NA|R|' . $security_id . '|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . $base_url . '/itg_billdesk_payment_success';
-
-  $value = 'INDIATODAY|34137112|NA|2.00|CIT|NA|NA|INR|DIRECT|R|indiatoday|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . $base_url . '/itg-payment/billdesk-payment-success';
+ //echo  $value = $merchant_id . '|34137112|NA|' . $amount . '|NA|NA|NA|INR|NA|R|indiatoday|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . $base_url . '/itg_billdesk_payment_success';
+  //echo '<br>';
+  //echo $value = 'INDIATODAY|34137112|NA|2.00|CIT|NA|NA|INR|DIRECT|R|indiatoday|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . $base_url . '/itg-payment/billdesk-payment-success';
 
 
 //  $newdatawithchecksumkey = $value . "|" . $checksumkey;
@@ -444,30 +444,12 @@ function itg_payment_billdesk_order_form($form, &$form_state) {
   $datawithchecksumvalue = $value . "|" . $checksum;
   $msg = $datawithchecksumvalue;
 
-
-  // Put the msg on a form.
- $form['#attributes'] = array('name' => 'mForm');
-  $form['txtCustomerID'] = array(
+  $form['msg'] = array(
     '#type' => 'hidden',
-    '#value' => 'INDIATODAY',
+    '#value' => $msg,
   );
-  
-   $form['txtTxnAmount'] = array(
-    '#type' => 'hidden',
-    '#value' => '2.00',
-  );
-   
-    $form['RU'] = array(
-    '#type' => 'hidden',
-    '#value' => 'http://qa.indiatodayonline.in/itg-payment/billdesk-payment-success',
-  );
-
-//  $form['msg'] = array(
-//    '#type' => 'hidden',
-//    '#value' => $msg,
-//  );
-  //$form['#action'] = $bdposturl;
-  $form['#action'] = 'https://www.billdesk.com/pgidsk/pgmerc/INDIATODAYPaymentoption.jsp';
+  $form['#action'] = $bdposturl;
+  //$form['#action'] = 'https://www.billdesk.com/pgidsk/pgmerc/INDIATODAYPaymentoption.jsp';
   $form['submit'] = array(
     "#type" => 'submit',
     "#value" => 'paybilldesk',
