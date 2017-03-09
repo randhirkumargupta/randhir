@@ -30,10 +30,11 @@ $short_url = shorten_url($row->url, 'goo.gl');
 $twitter_title = addslashes($row->node_title);
 $share_desc = '';
 $image = file_create_url($row->field_field_itg_funalytics_image[0]['rendered']['#item']['uri']);
+$print_image = $row->field_field_itg_funalytics_image[0]['rendered']['#item']['uri'];
 $changed = date("D j M Y", $row->node_changed);
 ?>
 <div class="funalytics-tile">
-  <div class="pic"><?php print '<img src="' . $image . '" alt="image">'; ?></div>
+  <div class="pic"><a class="funalytic-popup" href="javascript:;"><?php print theme('image_style', array('style_name' => 'anchors_landing', 'path' => $print_image)); ?></a></div>
   <div class="funalytics-text">
       <div class="updated-date"><?php print $changed; ?></div>
       <div class="title"><?php print $row->node_title; ?></div>
@@ -41,8 +42,8 @@ $changed = date("D j M Y", $row->node_changed);
               <ul>
                   <li><a href="javascript:;" class="share"><i class="fa fa-share-alt"></i></a></li>
                   <li><a class="def-cur-pointer facebook" title = "share on facebook " href="javascript:void(0)"  onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
-                  <li><a class="def-cur-pointer twitter" title = "share on twitter" class="" rel="<?php print $row->nid; ?>" data-tag="itg_funalytics" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick="twitter_popup('<?php print urlencode($twitter_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-                  <li><a title="share on google+" class="def-cur-pointer google" rel="<?php print $row->nid; ?>" data-tag="itg_funalytics" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick="return googleplusbtn('<?php print $actual_link; ?>')"></a></li>                  
+                  <li><a class="def-cur-pointer twitter user-activity" title = "share on twitter" class="" rel="<?php print $row->nid; ?>" data-tag="itg_funalytics" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick="twitter_popup('<?php print urlencode($twitter_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                  <li><a title="share on google+" class="def-cur-pointer google user-activity" rel="<?php print $row->nid; ?>" data-tag="itg_funalytics" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick="return googleplusbtn('<?php print $actual_link; ?>')"></a></li>                  
               </ul>
           </div>
   </div>

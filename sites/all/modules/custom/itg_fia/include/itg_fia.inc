@@ -23,7 +23,7 @@ function itg_fia_xml_node_feed($query) {
   global $base_url;
   $xml_base = $base_url . '/' . current_path();
   $nodes = node_load_multiple($query);
-//  $getautor = 
+  $getautor = 
   $items = '';
   foreach ($nodes as $node) {
     if ($node->workbench_moderation['current']->state == 'published') {
@@ -51,6 +51,9 @@ function itg_fia_xml_node_feed($query) {
     $map_code = $node->field_map_embed_code[LANGUAGE_NONE][0]['value'];
     $gall_position = $node->field_facebook_gallery_associate[LANGUAGE_NONE][0]['target_id'];
     // need to write code for gallery position
+    
+    
+    $target_nids = NULL;
     if(is_array($node->field_facebook_gallery_associate[LANGUAGE_NONE]) && !empty($node->field_facebook_gallery_associate[LANGUAGE_NONE])) {
       $associate_gallery = $node->field_facebook_gallery_associate[LANGUAGE_NONE];
       foreach($associate_gallery as $fc_k => $fc_v){
@@ -61,7 +64,8 @@ function itg_fia_xml_node_feed($query) {
         }
       }
     }
-    $items .= itg_fia_xml_format_rss_item($target_nids, $subtitle, $img_path, $guid, $node_body, $node->title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
+    
+    $items .= itg_fia_xml_format_rss_item($target_nids, $img_path, $guid, $node_body, $node->title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
   }
   
   global $base_url;
@@ -83,11 +87,13 @@ function itg_fia_xml_node_feed($query) {
 function itg_fia_xml_format_rss_channel($title, $link, $items) {
 
   $output = "  <channel>\n";
-  $output .= "    <title>" . check_plain($title) . "</title>\n";
+  $output .= "    <title>" . $title . "</title>\n";
   $output .= "    <link>" . check_url($link) . "</link>\n";
   $output .= "    <description>" . t("Facebook Instant Articles feed") . "</description>\n";
   $output .= "    <language>en</language>\n";
   $output .= "    <atom:link href='" . check_url($link) . "' rel='self' type='application/rss+xml' />\n";
+  
+  
   $output .= $items;
   $output .= "  </channel>\n";
   $output .= "</rss>\n";
@@ -98,8 +104,9 @@ function itg_fia_xml_format_rss_channel($title, $link, $items) {
 /**
  * Creates the xml item.
  */
-function itg_fia_xml_format_rss_item($target_nids, $subtitle, $img_path, $guid, $node_body, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
+function itg_fia_xml_format_rss_item($target_nids, $img_path, $guid, $node_body, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
   $output = "    <item>\n";
+  
   $output .= '      <title>' . $title . "</title>\n";
   $output .= '      <link>' . check_url($link) . "</link>\n";
   $output .= '      <guid>' . $guid . "</guid>\n";
@@ -113,14 +120,12 @@ function itg_fia_xml_format_rss_item($target_nids, $subtitle, $img_path, $guid, 
   $output .= "    <head>\n";
   $output .= "    <meta charset='utf-8'>\n";
   $output .= "    <link rel='canonical' href='" . $link . "'>\n";
-  $output .= "    <link rel='stylesheet' title='default' href='#'>\n";
-  $output .= "    <title>" . $title . "</title>\n";
-  $output .= "    <meta property='fb:article_style' content='Test Article Style'>\n";
   $output .= "    <meta property='op:markup_version' content='v1.0'>\n";
-  $output .= "    </head>\n\n";
   $output .= "    <body>\n";
+  $output .= "    </head>\n\n";
   $output .= "    <article>\n";
   $output .= "    <header>\n";
+  
   // <!-- The header image shown inside your article --> 
   $output .= "    <figure data-mode=aspect-fit>\n";
   $output .= "    <video loop>\n";
@@ -130,16 +135,19 @@ function itg_fia_xml_format_rss_item($target_nids, $subtitle, $img_path, $guid, 
   $output .= "      <h1>" . $title . "</h1>\n";
   $output .= "      <h2>" . $subtitle . "</h2>\n";
   // <!-- A kicker for your article -->
-  $output .= "      <h3 class='op-kicker'>" . $kicker . "</h3>\n";
+  $output .= "      <h3 class='op-kicker'>" . $subtitle . "</h3>\n";
   // <!-- The author of your article -->
   $output .= "      <address>" . $name . "</address>\n";
   $output .= "      <time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>\n";
   $output .= "      <time class='op-modified' dateTime='" . $modified . "'>" . $op_modified . "</time>\n";
+  
   $output .= "    </header>\n\n";
   $output .= "    <div property='content:encoded'>". $node_body . "</div>\n";
   
-  // Slideshows Starts
-  if(!empty($target_nids)) {
+  
+  // Slideshows creation
+  // Slideshows Positions
+    if(!empty($target_nids)) {
     $output .= "      <h2>Slideshow</h2>\n";
     $output .= "    <figure class='op-slideshow'>\n";
     $gall_nodes = node_load_multiple($target_nids);
@@ -157,17 +165,15 @@ function itg_fia_xml_format_rss_item($target_nids, $subtitle, $img_path, $guid, 
   // Slideshows Ends
   
   $output .= "    <footer>\n";
-  $output .= "    <ul>\n";
-  $output .= "    <li><a href='http://instantarticles.fb.com'></a></li>\n";
-  $output .= "    <li><a href='http://instantarticles.fb.com'></a></li>\n";
-  $output .= "    </ul>\n\n";
   // <!-- Credits for your article -->
   $output .= "    <aside>The footer section can be used for acknowledgements, author bios, related articles, or any other supplemental information.</aside>\n";
   // <!-- Copyright details for your article -->
   $output .= "    <small>© Facebook</small>\n";
   $output .= "    </footer>\n\n";
+
   $output .= "    </article>\n\n";
   $output .= "    </body>\n\n";
+  
   $output .= "    </html>\n\n";
   $output .= "    ]]>\n\n";
   $output .= "    </content:encoded>\n\n";

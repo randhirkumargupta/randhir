@@ -210,6 +210,7 @@ function itg_story_node_insert($node) {
   {
     $nid = $node->nid;
     $unique_id = '';
+    $publish_id = '';
     if (!empty($node->field_reporter_unique_id[LANGUAGE_NONE]))
     {
       $unique_id = $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'];
