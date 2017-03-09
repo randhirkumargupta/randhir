@@ -124,8 +124,8 @@ function create_poll_table() {
     ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;';
     db_query($query); */ 
 
-  $file_name = 'indiatoday-story_2016-06-01_05.xml';
-  $xml_path = drupal_get_path('module', 'itg_dbmigrate') . '/xml_file/';
+  $file_name = 'indiatoday-story_2016-06-01.xml';
+  $xml_path = 'sites/default/files/xml_file_chunk/';
   $xml = simplexml_load_file($xml_path . $file_name, 'SimpleXMLElement');  
   $i = 0;
   foreach ($xml->story as $stories) {
