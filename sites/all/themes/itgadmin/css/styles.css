@@ -11586,3 +11586,29 @@ span.file a {
   display: block;
   margin-left: 0;
 }
+
+.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget {
+  vertical-align: top;
+}
+
+.view.view-display-id-search_unpublish_video .view-filters {
+  padding-bottom: 20px;
+}
+
+.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-submit-butto {
+  position: relative;
+  padding-right: 85px;
+}
+.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-submit-butto .form-submit {
+  position: absolute;
+  right: 5px;
+  top: 38px;
+}
+
+.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-submit-butto .form-submit {
+  margin-top: 28px;
+}
+
+.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name {
+  display: none;
+}
