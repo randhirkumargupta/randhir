@@ -102,7 +102,7 @@ jQuery(document).ready(function(){
             parent.jQuery('#edit-field-common-related-content-und-0-value').val(item);
             var checkedlist = '';
             for ( var i = 0, l = item.length; i < l; i++ ) {
-                checkedlist += '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value">' + item[i] + '</span><a href="'+Drupal.settings.baseUrl.baseUrl+'/get-related-view/'+item[i]+'" target="_blank"> <i class="fa fa-eye" aria-hidden="true"></i> </a><i class="fa fa-times fright" aria-hidden="true"></i></li>';
+                checkedlist += '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value">' + item[i] + '</span><i class="fa fa-times fright" aria-hidden="true"></i></li>';
             }
             parent.jQuery('.checked-list').html(checkedlist);
             if(item.length){
