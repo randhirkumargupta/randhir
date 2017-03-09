@@ -11602,10 +11602,10 @@ span.file a {
   right: 5px;
   top: 38px;
 }
-.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-form .views-exposed-widget.views-reset-button .form-submit, .view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-form .views-exposed-widget.views-reset-button .form-submit {
+.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-reset-button .form-submit, .view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget.views-reset-button .form-submit {
   margin-top: 28px;
 }
-.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-form .views-exposed-widget.views-reset-button .views-exposed-widget.views-widget-filter-bundle_name, .view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-form .views-exposed-widget.views-reset-button .views-exposed-widget.views-widget-filter-bundle_name {
+.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name, .view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name {
   display: none;
 }
 
