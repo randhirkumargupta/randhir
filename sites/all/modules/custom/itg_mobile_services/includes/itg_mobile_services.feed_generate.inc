@@ -572,12 +572,9 @@ function generate_file_name($node, $service_title, $feeds_type, $ext) {
 //  }
   $file_path = drupal_realpath('public://');
   $feed_dir = "public://mobile/";
-
   drupal_mkdir($feed_dir, 0777, TRUE);
- 
   $full_file_path =  'public://mobile/' . $service_title . '/' . $feeds_type . $file_name;
   $files_path =  'public://mobile/' . $service_title . '/' . $feeds_type;
-
   if (!file_exists($files_path)) {
     drupal_mkdir($files_path, 0777, TRUE);
   }
