@@ -753,8 +753,10 @@ function itg_story_node_presave($node) {
     {
       if (function_exists('itg_get_byline_row'))
       {
-        $publish_id = itg_get_byline_row($node->field_reporter_unique_id[LANGUAGE_NONE][0]['value']);
-        $node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'] = $publish_id;
+        if(!empty($node->field_reporter_unique_id[LANGUAGE_NONE])){
+          $publish_id = itg_get_byline_row($node->field_reporter_unique_id[LANGUAGE_NONE][0]['value']);
+          $node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'] = $publish_id;
+        }
       }
     }
   }
@@ -804,6 +806,7 @@ function itg_story_movie_image_plugin_data($node_id = '') {
   $story_nid = $node_id;
   if (!empty($story_nid)) {
     $node_obj = node_load($story_nid);
+    $dty = date("D j M Y", $node_obj->changed);
     //store entity id of multi value field collection field
     $technology_entity = $node_obj->field_story_technology[LANGUAGE_NONE];
     
@@ -817,10 +820,11 @@ function itg_story_movie_image_plugin_data($node_id = '') {
         $sample_img_path = $entity[$val['value']]->field_technology_sample_photo['und'][0]['uri'];
         $sample_img = image_style_url('video_landing_page_170_x_127', $sample_img_path);
         // store image title
-        $sample_title = $entity[$val['value']]->field_technology_photo_title[LANGUAGE][0]['value'];
+        $sample_title = mb_strimwidth($entity[$val['value']]->field_technology_photo_title['und'][0]['value'], 0, 35, "..");
         // generate html 
         $html .= '<div class="story-photo-list-item">';
         $html .= '<img src="' . $sample_img . '"  alt=""/>';
+        $html .= '<span class="smp-date">' . $dty . '</span>';
         $html .= '<p>' . $sample_title . '</p>';
         $html .= '</div>';
       }
@@ -941,7 +945,7 @@ function itg_story_photo_story_bottom_html($node_id) {
 function itg_story_node_access($node, $op, $account) {
   global $user;
   // We're only bothered about the 'view' operation at the moment
-  if ($op == 'view') {
+  if ($op == 'view' && $node->type == 'story') {
     if (in_array(FRONT_USER, $user->roles) || $user->uid == 0) {
       if (!empty($node->field_story_configurations['und'][0]['value'])) {
         foreach ($node->field_story_configurations['und'] as $value) {

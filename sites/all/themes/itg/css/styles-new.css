@@ -5469,6 +5469,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 .view-front-funalytics-list #funalytics_popup_display .funalytics-slider .slick-slide .pic img {
   width: calc(100% - 180px);
   height: 388px;
+  float: left;
 }
 .view-front-funalytics-list #funalytics_popup_display .funalytics-slider .slick-arrow {
   cursor: pointer;
@@ -5507,7 +5508,20 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   margin: 0 -15px;
 }
 .view-front-funalytics-list .funalytics-tile {
-  padding-bottom: 50px;
+  margin-bottom: 50px;
+  border: 1px solid #ddd;
+}
+.view-front-funalytics-list .funalytics-tile .pic {
+  border-bottom: 1px solid #ddd;
+  height: 208px;
+  overflow: hidden;
+}
+.view-front-funalytics-list .funalytics-tile .pic img {
+  width: 100%;
+  height: 100%;
+}
+.view-front-funalytics-list .funalytics-tile .funalytics-text {
+  padding: 0 10px;
 }
 .view-front-funalytics-list .funalytics-tile .updated-date {
   font-size: 12px;
@@ -5519,6 +5533,147 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   color: #323232;
   height: 48px;
   overflow: hidden;
+}
+.view-front-funalytics-list .funalytics-tile .social-share {
+  display: inline-block;
+  vertical-align: top;
+  padding: 5px 5px;
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul {
+  list-style-type: none;
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul li {
+  display: inline-block;
+  vertical-align: top;
+  padding-right: 8px;
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul li a, .view-front-funalytics-list .funalytics-tile .social-share ul li span {
+  background: #000;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  display: block;
+  color: #fff;
+  text-align: center;
+  line-height: 23px;
+  font-size: 15px;
+}
+@media screen and (min-width: 768px) {
+  .view-front-funalytics-list .funalytics-tile .social-share ul li a, .view-front-funalytics-list .funalytics-tile .social-share ul li span {
+    width: 23px;
+    height: 23px;
+    line-height: 25px;
+  }
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul li a.share, .view-front-funalytics-list .funalytics-tile .social-share ul li span.share {
+  color: #d0d0d0;
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul li a.share, .view-front-funalytics-list .funalytics-tile .social-share ul li a.google, .view-front-funalytics-list .funalytics-tile .social-share ul li span.share, .view-front-funalytics-list .funalytics-tile .social-share ul li span.google {
+  background: transparent;
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul li a.facebook, .view-front-funalytics-list .funalytics-tile .social-share ul li span.facebook {
+  background: #0b4887;
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul li a.twitter, .view-front-funalytics-list .funalytics-tile .social-share ul li span.twitter {
+  background: #05a3d2;
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul li a.google, .view-front-funalytics-list .funalytics-tile .social-share ul li span.google {
+  background: url(../images/google-icon.jpg) no-repeat center center;
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul li {
+  padding-right: 4px;
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul li a.share {
+  width: auto;
+  height: auto;
+}
+.view-front-funalytics-list .funalytics-tile .social-share ul li a.share .fa {
+  font-size: 18px;
+}
+.view-front-funalytics-list ul.pager {
+  margin: 10px 0;
+  list-style-type: none;
+  text-align: center;
+}
+.view-front-funalytics-list ul.pager li {
+  display: inline-block;
+  vertical-align: top;
+}
+.view-front-funalytics-list ul.pager li.pager-current {
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+  font-family: "Roboto", sans-serif;
+}
+.view-front-funalytics-list ul.pager li.pager-item a {
+  display: block;
+  height: 25px;
+  width: 25px;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 25px;
+  color: #323232;
+  font-family: "Roboto", sans-serif;
+}
+.view-front-funalytics-list ul.pager li.pager-item a:hover {
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+}
+.view-front-funalytics-list ul.pager li.pager-next a, .view-front-funalytics-list ul.pager li.pager-last a, .view-front-funalytics-list ul.pager li.pager-first a, .view-front-funalytics-list ul.pager li.pager-previous a {
+  color: #323232;
+  line-height: 25px;
+}
+.view-front-funalytics-list ul.pager li.pager-next.pager-first.first, .view-front-funalytics-list ul.pager li.pager-next.pager-last.last, .view-front-funalytics-list ul.pager li.pager-last.pager-first.first, .view-front-funalytics-list ul.pager li.pager-last.pager-last.last, .view-front-funalytics-list ul.pager li.pager-first.pager-first.first, .view-front-funalytics-list ul.pager li.pager-first.pager-last.last, .view-front-funalytics-list ul.pager li.pager-previous.pager-first.first, .view-front-funalytics-list ul.pager li.pager-previous.pager-last.last {
+  display: none;
+}
+.view-front-funalytics-list ul.pager {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+}
+
+.funalytics-socials {
+  height: 388px;
+  overflow: hidden;
+  width: 180px;
+}
+.funalytics-socials .download-nf {
+  display: inline-block;
+  height: 105px;
+  margin-top: 92px;
+  vertical-align: top;
+  width: 100%;
+}
+.funalytics-socials .google-play {
+  display: inline-block;
+  height: 38px;
+  margin: 31px 0 0 33px;
+  vertical-align: top;
+  width: 125px;
+}
+.funalytics-socials .app-store {
+  display: inline-block;
+  height: 38px;
+  margin: 5px 0 0 33px;
+  vertical-align: top;
+  width: 125px;
+}
+.funalytics-socials .funalytics-social-links {
+  display: inline-block;
+  height: 40px;
+  margin: 34px 0 0 28px;
+  vertical-align: top;
+  width: 135px;
+}
+.funalytics-socials .funalytics-social-links a {
+  float: left;
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
 }
 
 @media all and (min-width: 768px) {
