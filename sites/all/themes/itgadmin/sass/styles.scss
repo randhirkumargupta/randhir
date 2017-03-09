@@ -11018,17 +11018,19 @@ span.file a{pointer-events: none; color: #2f2f2f;}
               right: 5px;
               top: 38px;
           }
-        }          
-      }
-      .views-exposed-form .views-exposed-widget.views-reset-button{
-        .form-submit{margin-top: 28px;}
-        .views-exposed-widget.views-widget-filter-bundle_name{
-          display: none;
+        } 
+        &.views-reset-button{
+          .form-submit{
+            margin-top: 28px;
+          }
         }
+        &.views-widget-filter-bundle_name{
+          display: none;
+        }        
+      }      
       }      
     }     
   } 
-}
 .ftp-server > iframe {
     border: 1px solid #ccc;
     width: 100%;
