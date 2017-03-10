@@ -435,7 +435,9 @@ function itg_story_after_build($form, &$form_state) {
   }
 
   // checked autoalias checkbox on node edit form
-  if (isset($form['#node']->nid)) {
+  //if(arg(0) == 'node' && is_numeric(arg(1)) && )
+
+  if (isset($form['#node']->nid) && $form['#node']->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
       drupal_add_js('jQuery(document).ready(function() {
           jQuery("#edit-path-pathauto").attr("checked", true);            
         });', array('type' => 'inline', 'scope' => 'footer'));

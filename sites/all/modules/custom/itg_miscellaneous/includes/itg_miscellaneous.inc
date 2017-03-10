@@ -111,6 +111,29 @@ function itg_section_widgets_list_delete() {
 }
 
 /**
+ * Implement function for create index.xml
+ */
+function create_index_xml(){
+  $xml_path = 'sites/default/files/xml_file_chunk/';
+  $foldername = 'story/';
+  $path = $xml_path.$foldername;
+  $domDocument = new DOMDocument('1.0', "UTF-8");
+  $domElement = $domDocument->createElement('content');
+  $domDocument->appendChild($domElement);
+  foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as $filename) {
+    $rest = substr($filename, -4);
+    if($rest == ".xml"){
+      $files = end(explode($foldername, $filename));
+      $xml_id = explode('.xml', $files);
+      $domElement1 = $domDocument->createElement('sourceid', $xml_id[0]);
+      $domElement->appendChild($domElement1);
+    }        
+  }
+  
+  $domDocument->save($xml_path.'index/index.xml');
+}
+
+/**
  * Callback for create-poll-table
  * @param 
  */

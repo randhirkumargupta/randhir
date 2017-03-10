@@ -18,7 +18,6 @@ module_load_include('inc', 'itg_common', 'includes/itg_common');
  * {@inheritdoc}
  */
 function itg_common_init() {
-  
   global $user, $base_url, $theme;
   
   //code for multidomain
@@ -417,7 +416,7 @@ function itg_common_date_popup_process_alter(&$element, &$form_state, &$context)
 
 function itg_common_node_presave($node) {
   //global $ctype_array;
-  //$ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
+  $ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
   switch ($node->type) {
     case 'astro':
     case 'recipe':
@@ -438,6 +437,20 @@ function itg_common_node_presave($node) {
       
         
   }
+  
+   if (!empty($node->nid)) {
+    //$ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
+      // custom alias cnditions
+    if (in_array($node->type, $ctype_array)){
+       itg_common_custompath_insert_load($node);
+    }
+  }
+  
+  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
+//    p($node);
+    //itg_common_custompath_migrated_load($node);
+  }
+
 
 }
 
@@ -453,23 +466,10 @@ function itg_common_node_insert($node) {
   if (in_array($node->type, $ctype_array)) {
      itg_common_custompath_insert_load($node);
   }
-}
-
-/**
- * Implementation of hook_node_update().
- * @param object $node
- */
-function itg_common_node_update($node) {
-  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {  
-    $ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
-    // custom alias cnditions
-    if (in_array($node->type, $ctype_array)){
-       itg_common_custompath_insert_load($node);
-    }
+  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
+    //itg_common_custompath_migrated_load($node);
   }
 }
-
-
 
 /**
  * Implements hook_form_FORMID_alter().
