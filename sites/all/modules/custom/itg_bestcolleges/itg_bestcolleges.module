@@ -12,7 +12,7 @@
  * {@inheritdoc}
  */
 function itg_bestcolleges_menu() {
-  $items['bestcolleges/ranks/%'] = array(
+  $items['bestcolleges/%/ranks/%'] = array(
     'page callback' => 'itg_bestcolleges_deatils',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
@@ -43,9 +43,19 @@ function itg_bestcolleges_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('update_college_data_form'),
     'file' => 'includes/itg_update_college_data.inc',
-    'file path' => drupal_get_path('module','itg_bestcolleges'), 
+    'file path' => drupal_get_path('module','itg_bestcolleges'),
     'access callback' => TRUE,
   );
+
+   $items['csvImporter'] = array(
+    'title' => 'Import Data from CSV File',
+    'description' => 'Import content from a <abbr title="Comma Separated Values">CSV</abbr> file.',
+    'access callback' => 'user_access',
+    'access arguments' => array('access content'),
+    'page callback' => 'csvImporter_pagecallback',
+    'type' => MENU_NORMAL_ITEM,
+  );
+
   /*$items['bestcolleges/%/%'] = array(
     'page callback' => 'itg_zone_wise_list',
     'page arguments' => array(1, 2),
@@ -56,11 +66,12 @@ function itg_bestcolleges_menu() {
     'page arguments' => array(1, 2),
     'access callback' => TRUE,
   );
+  */
   $items['bestcolleges/%/%'] = array(
     'page callback' => 'itg_city_wise_list',
     'page arguments' => array(1, 2),
     'access callback' => TRUE,
-  );*/
+  );
   return $items;
 }
 
@@ -74,7 +85,7 @@ function itg_bestcolleges_deatils() {
 }
 
 /**
- * Implements hook_menu().
+ * Implements hook_theme().
  * {@inheritdoc}
  */
 function itg_bestcolleges_theme($existing, $type, $theme, $path) {
@@ -163,7 +174,12 @@ function itg_bestcolleges_block_info() {
   $blocks['bestcollege_rhssearch'] = array(
     'info' => t('Best College RHS Search Form'),
     'cache' => DRUPAL_CACHE_GLOBAL,
+    'cache' => DRUPAL_NO_CACHE,
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'region' => 'Second sidebar',
+    'pages' => "bestcolleges/*\nbestcolleges/",
   );
+
   $blocks['bestcollege_rhsstatic'] = array(
     'info' => t('Best College RHS Static Widget'),
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -266,7 +282,7 @@ function itg_bestcollege_yearcompare($year, $type, $stream, $years) {
   $result_data = array();
   $result_data_yr1 = itg_bestcollege_getData('year-comparecollege', $years_exp[0], $stream);
   $result_data_yr2 = itg_bestcollege_getData('year-comparecollege', $years_exp[1], $stream);
-  
+
   $data = array();
   foreach ($result_data_yr1 as $result_data_yr1_key => $result_data_yr1_val) {
     $clgname_city = $result_data_yr1_val->collegename . ', ' . $result_data_yr1_val->city;
@@ -284,7 +300,7 @@ function itg_bestcollege_yearcompare($year, $type, $stream, $years) {
  * Function to used common redirection for some pages:
  * @param int $year
  * @param string $stype
- * @return 
+ * @return
  */
 function itg_common_redirect_list ($year, $stype) {
   if (preg_match('/zonewiselist/',$stype)) {
@@ -349,7 +365,7 @@ function itg_campus_wise_list($year, $stype) {
   $result_data_eng = itg_bestcollege_getData('campus-wise-list', $year, 'eng');
   $result_data_law = itg_bestcollege_getData('campus-wise-list', $year, 'law');
   $result_data_medical = itg_bestcollege_getData('campus-wise-list', $year, 'medical');
-  
+
   $data = array();
   foreach ($result_data_eng as $result_data_eng_key => $result_data_eng_val) {
     $data['eng'][] = array($result_data_eng_val->rank, $result_data_eng_val->collegename, $result_data_eng_val->city, $result_data_eng_val->stream);
@@ -498,7 +514,7 @@ function itg_bestcollege_getStreamYear($type, $byear) {
         ->condition('bce.published', 1)
         ->orderBy('bce.stream', 'ASC');
     $results = $query->execute()->fetchAll();
-    
+
     foreach($results as $results_key => $results_val) {
       $data[drupal_strtolower($results_val->stream)] = $results_val->stream;
     }
@@ -564,3 +580,355 @@ function bestcollege_getStaticWidgetData($year) {
     $best_html = node_load($results[0]->nid)->body[LANGUAGE_NONE][0]['value'];
     return $best_html;
 }
+
+
+  function csvImporter_pagecallback(){
+
+    $form = drupal_get_form('csvImporter_form');
+
+    $output = "<p>This tool will attempt to import CSV data";
+    $output .= drupal_render($form);
+
+    return $output;
+  }
+
+
+function csvImporter_form() {
+
+    $form['#attributes'] = array(
+      'enctype' => 'multipart/form-data'
+    );
+
+    $form['csvfile'] = array(
+      '#title' => t('CSV File'),
+      '#type'  => 'file',
+      '#description' => ($max_size = parse_size(ini_get('upload_max_filesize'))) ? t('Due to server restrictions, the <strong>maximum upload file size is !max_size</strong>. Files that exceed this size will be disregarded.', array('!max_size' => format_size($max_size))) : '',
+    ) ;
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Commence Import'),
+    ) ;
+    $form['#validate'] = array(
+      'csvImporter_validate_fileupload',
+      'csvImporter_form_validate',
+    ) ;
+  return $form ;
+}
+
+
+  function csvImporter_validate_fileupload(&$form, &$form_state) {
+    $validators = array(
+      'file_validate_extensions' => array( 'csv' ),
+    );
+
+    if ( $file = file_save_upload('csvfile', $validators, "public://", FILE_EXISTS_REPLACE) ) {
+      $form_state['values']['csvupload'] = $file->destination;
+    }
+    else {
+      form_set_error('csvImporter', t('Unable to copy upload file to !dest', array('!dest' => $destination)));
+    }
+  }
+
+
+  function csvImporter_form_validate(&$form, &$form_state) {
+    if ( isset( $form_state['values']['csvupload'] ) ) {
+      if ( $handle = fopen($form_state['values']['csvupload'], 'r') ) {
+        $line_count = 1 ;
+        $first = TRUE ;
+        if ( $line = fgetcsv($handle, 4096) ) {
+         // pr($line);
+         // exit;
+         // print count($line);
+          //-------------------------------------------------------------------------------------------|
+          //  This is where you can validate aspects of the file itself, like the number of columns
+          //-------------------------------------------------------------------------------------------|
+            if(count($line) != 15){
+              form_set_error('csvfile', t('This file has the incorrect number of columns. Expecting 14'));
+            }
+          //-------------------------------------------------------------------------------------------|
+          //  End validating aspects of the CSV file
+          //-------------------------------------------------------------------------------------------|
+
+
+
+        }
+        fclose($handle);
+      }
+      else {
+        form_set_error('csvfile', t('Unable to read uploaded file !filepath', array('!filepath' => $form_state['values']['csvupload'])));
+      }
+    }
+  }
+
+
+
+  function csvImporter_form_submit(&$form, &$form_state) {
+    $batch = array(
+      'title' => t('Importing CSV ...'),
+      'operations' => array(),
+      'init_message' => t('Commencing'),
+      'progress_message' => t('Processed @current out of @total.'),
+      'error_message' => t('An error occurred during processing'),
+      'finished' => 'csvImporter_import_finished',
+    ) ;
+    if ( isset( $form_state['values']['csvupload'] ) ) {
+      if ( $handle = fopen($form_state['values']['csvupload'], 'r') ) {
+        $batch['operations'][] = array('_csvImporter_remember_filename', array( $form_state['values']['csvupload'] ) ) ;
+        $line_count = 1 ;
+        $first = TRUE ;
+        $line = fgetcsv($handle, 4096);
+        while ( $line = fgetcsv($handle, 4096) ) {
+          /**
+           * we use base64_encode to ensure we don't overload the batch
+           * processor by stuffing complex objects into it
+           */
+          $batch['operations'][] = array('_csvImporter_import_line', array(array_map('base64_encode', $line)));
+        }
+        fclose($handle);
+      } // we caught this in csvImporter_form_validate()
+    } // we caught this in csvImporter_form_validate()
+    batch_set($batch);
+  }
+
+
+   function csvImporter_import_finished($success, $results, $operations) {
+    if ( !empty($results['failed_rows']) ) {
+      $dir  = file_directory_path() . '/csvImporter/' ;
+      if ( file_check_directory( $dir, FILE_CREATE_DIRECTORY ) ) {
+        $csv_filename = 'failed_rows-'. basename($results['uploaded_filename']); // we validated extension on upload
+        $csv_filepath = $dir .'/'. $csv_filename;
+        $targs = array(
+          '!csv_url' => l(check_plain($csv_filename), $csv_filepath),
+          '%csv_filename' => $csv_filename,
+          '%csv_filepath' => $csv_filepath,
+        ) ;
+        if ( $handle = fopen($csv_filepath, 'w+') ) {
+          foreach( $results['failed_rows'] as $failed_row ) {
+            fputcsv($handle, $failed_row);
+          }
+          fclose($handle);
+          drupal_set_message(t('Some rows failed to import. You may download a CSV of these rows: !csv_url', $targs), 'error');
+        }
+        else {
+          drupal_set_message(t('Some rows failed to import, but unable to write error CSV to %csv_filepath', $targs), 'error');
+        }
+      }
+      else {
+        drupal_set_message(t('Some rows failed to import, but unable to create directory for error CSV at %csv_directory', $targs), 'error');
+      }
+    }
+    return t('The CSV import has completed.');
+  }
+
+
+  function _csvImporter_remember_filename($filename, &$context) {
+    $context['results']['uploaded_filename'] = $filename;
+  }
+
+
+
+  function _csvImporter_import_line($line, $session_nid, &$context) {
+
+    $context['results']['rows_imported']++;
+    $line = $cleaned_line = array_map('base64_decode', $line);
+
+    //pr($line);
+
+    //$collegename    = $line[0];
+    $collegeid      = $line[1];
+    $collegename    = $line[2];
+    $city           = $line[3];
+    $description    = $line[4];
+    $image          = $line[5];
+    $websiteurl     = $line[6];
+    $storyids       = $line[7];
+    $photoids       = $line[8];
+    $videoids       = $line[9];
+    $published      = $line[10];
+    $created_date   = $line[11];
+    $year           = $line[12];
+    $rank           = $line[13];
+    $stream         = $line[14];
+
+
+    $node = new stdClass();
+    $node->title = $collegename;
+    $node->type = "bestcolleges";
+
+    $node->language = LANGUAGE_NONE; // Or e.g. 'en' if locale is enabled
+
+    //node_object_prepare($node); // Sets some defaults. Invokes hook_prepare() and hook_node_prepare().
+
+    $node->field_bestcollege_city[LANGUAGE_NONE][0]['value']  = $city;
+    $node->body[LANGUAGE_NONE][0]['value'] = $description;
+    //$node->field_story_extra_large_image = $image;
+    $node->field_bestcollege_website_url[LANGUAGE_NONE][0]['value'] = $websiteurl;
+    $node->field_bestcollege_related_story[LANGUAGE_NONE][0]['value'] = $storyids;
+    $node->field_bestcollege_related_photo[LANGUAGE_NONE][0]['value'] = $photoids;
+    $node->field_bestcollege_related_video[LANGUAGE_NONE][0]['value'] = $videoids;
+    $node->field_bestcollege_rank[LANGUAGE_NONE][0]['value'] = $rank;
+    $node->field_bestcollege_year[LANGUAGE_NONE][0]['value'] = $year;
+    $node->field_college_id[LANGUAGE_NONE][0]['value'] = $collegeid;
+
+   // print "year = ".$year;
+    if($year) {
+        if ($year == '2016') {
+            $tid = '787';
+            if($stream == 'Education') {
+              $stream = 'education1';
+            }
+
+            if($stream == 'Fine Arts') {
+              $stream = 'Fine-Arts';
+            }
+            if($stream == 'Hotel Management') {
+              $stream = 'Hotel-Management';
+            }
+            if($stream == 'Mass Comm') {
+              $stream = 'Mass-Comm';
+            }
+
+            $final_tid = itg_bestcollege_get_term_tid($tid, $stream);
+        }
+    }
+
+   // pr($final_tid);
+   // p($node);
+
+    // Term reference (taxonomy) field
+    if(!empty($final_tid)) {
+       $node->field_story_category[LANGUAGE_NONE][]['tid'] = $final_tid;
+     }
+
+
+   // watchdog("test arun@", '<pre>'. print_r($node, TRUE) .'</pre>');
+   // watchdog("test arun line@", '<pre>'. print_r($line, TRUE) .'</pre>');
+
+    $url = $image; //'https://ssl.gstatic.com/gb/images/k1_a31af7ac.png';
+    //I have used picture folder to store images using image field settings
+    $file_info = system_retrieve_file($url, 'public://migrate/', TRUE);
+    if($file_info->fid){
+        $node->field_story_extra_large_image[LANGUAGE_NONE]['0']['fid'] = $file_info->fid;//assign fid
+    }
+
+
+
+    //$node->field_story_category = $final_tid;
+    $node->uid = 3;
+    $node->status = 1; //(1 or 0): published or not
+    //$node->body[$node->language][0]['format']  = 'full_html';
+    // Term reference (taxonomy) field
+   // $node->field_user_name[$node->language][0]['value'] = $askname;
+   // $node->field_user_email[$node->language][0]['value'] = $askemail;
+   // $node->field_user_source_term_id[$node->language][0]['value'] = $cat_id;
+    if(!empty($final_tid)) {
+
+        if($node = node_submit($node)) {
+            node_save($node);
+            drupal_set_message('submitted successfully');
+
+            $num_updated = db_update('bestcolleges_master')
+                ->fields(array('node_id' => $node->nid))
+                ->condition('collegeid', $collegeid)
+                ->execute();
+            // bestcolleges_ranking
+            db_update('bestcolleges_ranking')
+                ->fields(array('CollegeNewNid' => $node->nid))
+                ->condition('collegeid', $collegeid)
+                ->condition('year', $year)
+                ->execute();
+            // bestcolleges_themebasedranking
+            $num_updated = db_update('bestcolleges_themebasedranking')
+                ->fields(array('CollegeNewNid' => $node->nid))
+                ->condition('collegeid', $collegeid)
+                ->condition('year', $year)
+                ->execute();
+
+             // bestcolleges_emergingranking
+            $num_updated = db_update('bestcolleges_emergingranking')
+                ->fields(array('CollegeNewNid' => $node->nid))
+                ->condition('collegeid', $collegeid)
+                ->condition('year', $year)
+                ->execute();
+
+
+          }
+
+
+        drupal_set_message("Pass line {$line[0]} college id = {$collegeid}");
+
+    } else {
+        drupal_set_message("Fail line {$line[0]} college id = {$collegeid}");
+
+        drupal_set_message("Fail line {$line[0]} stream for {$stream}");
+
+
+    }
+
+
+  }
+
+
+ function itg_bestcollege_get_term_tid($tid, $stream) {
+    if(isset($tid) && !empty($tid) && !empty($stream)) {
+        $children = taxonomy_get_children($tid);
+        foreach($children as $term) {
+          $category[strtolower($term->name)] = $term->tid;
+        }
+      return $category[strtolower($stream)];
+    }
+  }
+
+
+
+/**
+ * Implementation of hook_form_alter().
+ * {@inheritdoc}
+ */
+function itg_bestcolleges_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form_id) {
+    case 'bestcolleges_node_form':
+      $options['_none'] = '- None -';
+      for ($i=1; $i<=100; $i++) {
+        $options[$i] = $i;
+      }
+
+      $form['field_bestcollege_rank'][LANGUAGE_NONE]['#options'] = $options;
+    break;
+  }
+
+}
+
+
+//$a = itg_city_option('2016',"800");
+//echo "<pre>";
+//print_r($a);
+function itg_city_option($byear,$tid) {
+   drupal_load('module', 'taxonomy');
+   $term = taxonomy_term_load($tid);
+   //print_r($term);
+   $bstream = strtolower($term->name);
+   $itg_query = db_select('bestcolleges_citywiseranking', 'bcr')->distinct();
+    $itg_query->fields('bcr', array('city'))
+        ->condition('bcr.year', $byear, '=')
+        ->condition('bcr.stream', $bstream, '=')
+        ->condition('bcr.published', 1)
+        ->condition('bcr.rank', 0, '!=')
+        ->orderBy('bcr.rank', 'ASC');
+    $itg_result = $itg_query->execute()->fetchAll();
+    $count = count($itg_result);
+
+    $htm = "<div class='best-college-city'><select class='city_wise'>";
+    $htm .= "<option>- - - Citywise list - - - </option>";
+    foreach($itg_result as $row) {
+      // bestcolleges/2016/citycolleges-arts-coimbatore
+        $custom_url = "/bestcolleges/".$byear."/citycolleges-".strtolower($bstream)."-".strtolower($row->city);
+        $htm .= "<option value = ". $custom_url .">" . $row->city . "</option>";
+    }
+    $htm .= "</select></div>";
+    if(empty($count)) {
+      return '';
+    }
+    return $htm;
+}
+

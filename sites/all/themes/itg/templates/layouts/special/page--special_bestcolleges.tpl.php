@@ -185,6 +185,22 @@ if ($theme != 'itgadmin') {
 
 
         <div class="col-md-4 col-sm-12 col-xs-12 right-side">
+           <div class="col-md-12 mt-50 itg-h735-section">
+            <div class="itg-widget">
+              <div class="droppable <?php print $gray_bg_layout; ?>">
+               <div class="widget-wrapper <?php print $widget_data['itg-block-4']['widget_name'].$widget_data['itg-block-4']['widget_display_name']; ?>">
+                    <div class="data-holder" id="itg-block-4" widget-style="oscar-news best-news">
+                    <?php
+                          $block = block_load('itg_bestcolleges', 'bestcollege_rhssearch');
+                          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                          print $output = render($render_array);
+                    ?>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+            
             <?php if (isset($widget_data['itg-block-4']['widget_name']) || isset($widget_data['itg-block-5']['widget_name']) || $theme == 'itgadmin') { ?>
             <div class="row">
                 <div class="col-md-12">
@@ -203,21 +219,7 @@ if ($theme != 'itgadmin') {
                     </div>
 
 
-            <div class="col-md-12 mt-50 itg-h735-section">
-            <div class="itg-widget">
-              <div class="droppable <?php print $gray_bg_layout; ?>">
-               <div class="widget-wrapper <?php print $widget_data['itg-block-4']['widget_name'].$widget_data['itg-block-4']['widget_display_name']; ?>">
-                    <div class="data-holder" id="itg-block-4" widget-style="oscar-news best-news">
-                    <?php
-                          $block = block_load('itg_bestcolleges', 'bestcollege_rhssearch');
-                          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-                          print $output = render($render_array);
-                    ?>
-                    </div>
-                  </div>
-                </div>
-            </div>
-        </div>
+           
 
             <div class="itg-h624-section">
             <div class="itg-widget">
@@ -245,6 +247,8 @@ if ($theme != 'itgadmin') {
             </div>
 
             <?php } ?>
+            
+            
         </div>
 
     </div>

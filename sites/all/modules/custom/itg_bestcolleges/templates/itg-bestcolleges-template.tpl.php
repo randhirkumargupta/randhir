@@ -17,8 +17,8 @@ $config_name = $comment_value[0]->config_name;
 <div class="row">
 <div class="col-md-12 col-sm-7 col-xs-12 left-panel arts">
 <!-- Slider Start-->
-
-<h2>INDIA'S BEST ARTS COLLEGES 2016</h2>
+<?php $term = taxonomy_term_load(arg(3));?>
+<h2><?php print "INDIA'S BEST ". $term->name ." COLLEGES ".arg(1); ?></h2>
 <div class="slider_outer1">
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -86,15 +86,6 @@ $config_name = $comment_value[0]->config_name;
 
 <!-- Grid View End-->
 
-<?php
-  if ($from_story != 'yes') {
-    if (function_exists('taboola_view')) {
-      taboola_view();
-    }
-  }
-
-  if ($config_name == 'vukkul') {
-    ?>
     <div class="vukkul-comment">
         <div id="vuukle-emote"></div>
         <div id="vuukle_div"></div>
@@ -106,17 +97,7 @@ $config_name = $comment_value[0]->config_name;
         ?>
 
     </div>
-    <?php
-  }
-  if ($config_name == 'other') {
-    ?>
-    <div id="other-comment">
-        <?php
-        $block = module_invoke('itg_ugc_comment', 'block_view', 'ugc_form_comment_block');
-        print render($block['content']);
-        ?>
-    </div>
-  <?php } ?>
+
 
 
 </div>

@@ -43,6 +43,16 @@
                 var st3current_val = $(this).val();
                 window.location.href = st3current_val;
             });
+
+            // for city wise
+            $('.best-college-city select').on('change', function () {
+              var url = $(this).val(); // get selected value
+              if (url) { // require a URL
+                  window.location = url; // redirect
+              }
+              return false;
+            });
+
         }
     };
 })(jQuery, Drupal, this, this.document);
