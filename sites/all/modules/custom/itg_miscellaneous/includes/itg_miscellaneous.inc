@@ -111,6 +111,29 @@ function itg_section_widgets_list_delete() {
 }
 
 /**
+ * Implement function for create index.xml
+ */
+function create_index_xml(){
+  $xml_path = 'sites/default/files/xml_file_chunk/';
+  $foldername = 'story/';
+  $path = $xml_path.$foldername;
+  $domDocument = new DOMDocument('1.0', "UTF-8");
+  $domElement = $domDocument->createElement('content');
+  $domDocument->appendChild($domElement);
+  foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as $filename) {
+    $rest = substr($filename, -4);
+    if($rest == ".xml"){
+      $files = end(explode($foldername, $filename));
+      $xml_id = explode('.xml', $files);
+      $domElement1 = $domDocument->createElement('sourceid', $xml_id[0]);
+      $domElement->appendChild($domElement1);
+    }        
+  }
+  
+  $domDocument->save($xml_path.'index/index.xml');
+}
+
+/**
  * Callback for create-poll-table
  * @param 
  */
@@ -124,8 +147,8 @@ function create_poll_table() {
     ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;';
     db_query($query); */ 
 
-  $file_name = 'indiatoday-story_2016-06-01_05.xml';
-  $xml_path = drupal_get_path('module', 'itg_dbmigrate') . '/xml_file/';
+  $file_name = 'indiatoday-story_2016-06-01.xml';
+  $xml_path = 'sites/default/files/xml_file_chunk/';
   $xml = simplexml_load_file($xml_path . $file_name, 'SimpleXMLElement');  
   $i = 0;
   foreach ($xml->story as $stories) {
