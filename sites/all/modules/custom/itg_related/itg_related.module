@@ -505,16 +505,3 @@ function itg_get_twitter_list($name) {
   }
   drupal_json_output($options);
 }
-
-/** Implements itg_apache_solr_get_site_url();
- */
-function itg_apache_solr_get_site_url() {
-  $var_hash = explode(',', variable_get('solr_url_config'));
-  foreach($var_hash as $key => $value) {
-   $ex_hash = explode('|', $value);
-   $key = trim($ex_hash[0]);
-   $sitehash[$key] = trim($ex_hash[1]);
-  }
-  
-  return $sitehash;
-}
