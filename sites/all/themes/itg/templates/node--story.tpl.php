@@ -611,7 +611,7 @@ if (!empty($content)):
                             print '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
                           }
 
-                          if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
+                          if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
                             $wrapper = entity_metadata_wrapper('node', $node);
                             $num = 1;
                             if (!empty($wrapper->field_story_listicle)) {

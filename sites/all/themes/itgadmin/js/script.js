@@ -811,69 +811,69 @@ jQuery(document).ready(function() {
 jQuery(document).ready(function() {
 
     // jQuery code for related content on edit page
-    var item = [];
+    //var item = [];
 //     var itemString = jQuery('#edit-field-story-kicker-text-und-0-value').val();
-    var itemString = jQuery('#edit-field-common-related-content-und-0-value').val();
-    if (itemString) {
-        item = itemString.split(",");
-    }
-    var checkedlist = '';
-    for (var i = 0, l = item.length; i < l; i++) {
-        checkedlist += '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value">' + item[i] + '</span><i class="fa fa-times fright" aria-hidden="true"></i></li>';
-    }
+//    var itemString = jQuery('#edit-field-common-related-content-und-0-value').val();
+//    if (itemString) {
+//        item = itemString.split(",");
+//    }
+//    var checkedlist = '';
+//    for (var i = 0, l = item.length; i < l; i++) {
+//        checkedlist += '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value">' + item[i] + '</span><i class="fa fa-times fright" aria-hidden="true"></i></li>';
+//    }
     // end of code
 
 
-    jQuery('.checked-list').html(checkedlist);
-    if (checkedlist) {
-        jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save</span>');
-    }
-    else {
-        jQuery('.save-checklist-ordre').html('<span class="empty-checklist">No content associated for this story yet !</span>');
-    }
-
-
-    jQuery('.saved-search-link').click(function(e) {
-        e.stopPropagation();
-        jQuery(this).parent().parent().find('.my-saved-search').slideToggle();
-    });
-    jQuery('body').click(function() {
-        jQuery(this).find('.my-saved-search').slideUp();
-    });
-    jQuery('body').click(function() {
-        jQuery(this).find('.my-saved-search').slideUp();
-    });
-
-    jQuery('body').find(".checked-list").sortable();
-    jQuery('body').find(".checked-list").disableSelection();
-
-    // jQuery code to remove checked list item
-    jQuery('.checked-list').on('click', '.fa-times', function() {
-        jQuery(this).parent().remove();
-    });
-    // end of code
-
+//    jQuery('.checked-list').html(checkedlist);
+//    if (checkedlist) {
+//        jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save</span>');
+//    }
+//    else {
+//        jQuery('.save-checklist-ordre').html('<span class="empty-checklist">No content associated for this story yet !</span>');
+//    }
+//
+//
+//    jQuery('.saved-search-link').click(function(e) {
+//        e.stopPropagation();
+//        jQuery(this).parent().parent().find('.my-saved-search').slideToggle();
+//    });
+//    jQuery('body').click(function() {
+//        jQuery(this).find('.my-saved-search').slideUp();
+//    });
+//    jQuery('body').click(function() {
+//        jQuery(this).find('.my-saved-search').slideUp();
+//    });
+//
+//    jQuery('body').find(".checked-list").sortable();
+//    jQuery('body').find(".checked-list").disableSelection();
+//
+//    // jQuery code to remove checked list item
+//    jQuery('.checked-list').on('click', '.fa-times', function() {
+//        jQuery(this).parent().remove();
+//    });
+//    // end of code
+//
     jQuery('.data-holder').each(function() {
         if (jQuery(this).children().length > 0) {
             jQuery(this).closest('.gray-bg-layout').removeClass('gray-bg-layout');
         }
     });
-
-
-    // jQuery code to save check list after re-order
-    jQuery('body').on('click', '.save-checklist', function() {
-        var item = [];
-        var listLength = jQuery(this).closest('.checked-list-parent').find('.checked-list li').length;
-        if (!listLength) {
-            //alert('Changes made successfully');
-            jQuery(this).parent().html('<span class="empty-checklist">No content associated for this story yet !</span>');
-        }
-        jQuery(this).closest('.checked-list-parent').find('.checked-list li').each(function(i) {
-            item.push(jQuery(this).find('.item-value').text());
-        });
-        jQuery('#edit-field-common-related-content-und-0-value').val(item);
-        alert('Changes made successfully');
-    });
+//
+//
+//    // jQuery code to save check list after re-order
+//    jQuery('body').on('click', '.save-checklist', function() {
+//        var item = [];
+//        var listLength = jQuery(this).closest('.checked-list-parent').find('.checked-list li').length;
+//        if (!listLength) {
+//            //alert('Changes made successfully');
+//            jQuery(this).parent().html('<span class="empty-checklist">No content associated for this story yet !</span>');
+//        }
+//        jQuery(this).closest('.checked-list-parent').find('.checked-list li').each(function(i) {
+//            item.push(jQuery(this).find('.item-value').text());
+//        });
+//        jQuery('#edit-field-common-related-content-und-0-value').val(item);
+//        alert('Changes made successfully');
+//    });
     // end of code
 
     // byline order reorder
