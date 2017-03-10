@@ -178,7 +178,12 @@ function itg_widgets_custom_variables() {
         '#default_value' => variable_get('anchor_tid'),
         '#size' => 20,
     );
-    return system_settings_form($form);
+    $form['solr_url_config'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Solr urlconfig'),
+    '#default_value' => variable_get('solr_url_config'),
+    );
+  return system_settings_form($form);
 }
 
 /**
