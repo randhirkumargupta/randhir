@@ -776,7 +776,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
         }
       }
       if (in_array('lock_story', $config)) {          
-        drupal_goto('http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
+        //drupal_goto('http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
       }
     }
     
