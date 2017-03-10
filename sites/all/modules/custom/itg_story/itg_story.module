@@ -767,9 +767,9 @@ function itg_story_node_presave($node) {
  */
 function itg_story_node_view($node, $view_mode, $langcode) {
   if ($node->type == 'story') {
-    global $user;
+    global $user, $theme;
     // for lock story
-    if (in_array(FRONT_USER, $user->roles) || $user->uid == 0) {
+    if ($theme == FRONT_THEME_NAME && (in_array(FRONT_USER, $user->roles) || $user->uid == 0)) {
       if (!empty($node->field_story_configurations['und'][0]['value'])) {
         foreach ($node->field_story_configurations['und'] as $value) {
           $config[] = $value['value'];
