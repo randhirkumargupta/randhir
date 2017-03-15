@@ -56,6 +56,13 @@ function itg_bestcolleges_menu() {
     'type' => MENU_NORMAL_ITEM,
   );
 
+  $items['bestcollege-test-video'] = array(
+    'title' => 'Bestcollege Test Video',
+    'access arguments' => array('access content'),
+    'page callback' => 'itg_bestcolleges_rhs_video',
+    'type' => MENU_NORMAL_ITEM,
+  );
+
   /* $items['bestcolleges/%/%'] = array(
     'page callback' => 'itg_zone_wise_list',
     'page arguments' => array(1, 2),
@@ -304,6 +311,7 @@ function itg_bestcollege_yearcompare($year, $type, $stream, $years) {
  */
 
 function itg_common_redirect_list($year, $stype) {
+  p("Test");
   if (preg_match('/zonewiselist/', $stype)) {
     return itg_zone_wise_list($year, $stype);
   }
@@ -702,7 +710,7 @@ function csvImporter_form_submit(&$form, &$form_state) {
 }
 
 /**
- *  
+ *
  * @param type $success
  * @param type $results
  * @param type $operations
@@ -738,7 +746,7 @@ function csvImporter_import_finished($success, $results, $operations) {
 }
 
 /**
- * 
+ *
  * @param type $filename
  * @param array $context
  */
@@ -747,7 +755,7 @@ function _csvImporter_remember_filename($filename, &$context) {
 }
 
 /**
- * 
+ *
  * @param type $line
  * @param type $session_nid
  * @param type $context
@@ -901,7 +909,7 @@ function itg_bestcolleges_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
- * 
+ *
  * @param type $byear
  * @param type $tid
  * @return string
@@ -932,4 +940,38 @@ function itg_city_option($byear, $tid) {
     return '';
   }
   return $htm;
+}
+
+
+function itg_bestcolleges_rhs_video() {
+  module_load_include('inc', 'itg_widget', 'includes/itg_widget_common');
+
+/*SELECT *  FROM `itg_widget_order` WHERE `cat_id` = 844504 AND `widget` LIKE 'section_wise_widget' AND content_type = 'videogallery'
+ORDER BY `itg_widget_order`.`weight`  DESC */
+    $arg = arg();
+    $item = menu_get_item();
+    $page_argument = $item['page_arguments'];
+    $ipl_category = array();
+
+    p($arg);
+     //$display = get_rhs_block_display_condtion($delta);
+     // if (empty($display)) {
+      //  return;
+     // }
+      $info['widget'] = 'watch_right_now_widget';
+      $info['order'] = 'ASC';
+      $info['max_limit'] = WATCH_RIGHT_NOW_MAX_RANGE;
+      $info['min_limit'] = WATCH_RIGHT_NOW_MIN_RANGE;
+      $data = itg_widget_get_widget_data_data($info);
+      //$block['content'] = theme("itg_widget_watch_right_now_videos_widget", array("data" => $data));
+      return theme("itg_widget_watch_right_now_videos_widget", array("data" => $data));
+
+/*  $query = db_select('itg_widget_order', 'w')
+              ->fields('w', array('nid'))
+              ->condition('cat_id','cat_id','=')
+              ->condition('widget','section_wise_widget','=')
+              ->condition('content_type','videogallery','=')
+              ->orderBy('weight','DESC');
+  $itg_result = $query->execute()->fetchAll();
+*/
 }
