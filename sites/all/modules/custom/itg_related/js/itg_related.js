@@ -99,7 +99,7 @@ jQuery(document).ready(function(){
      jQuery('body').on('click', '.insert-url', function(){
            
          var solr = Drupal.settings.itg_related.settings.solr;
-         if (solr.length != null) {
+         if (solr != null && solr != undefined) {
             var solr_explict = solr.split(',');
 
             var slr = [];
