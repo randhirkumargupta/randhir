@@ -91,7 +91,8 @@ function itg_fia_xml_node_feed($query) {
         }
       }
     }
-
+    
+    // facebook instant article body placement
     $node_body = $node->body[LANGUAGE_NONE][0]['value'];
     $numLine = explode("<p>",$node_body);
     unset($numLine[0]);
@@ -99,8 +100,6 @@ function itg_fia_xml_node_feed($query) {
       $bk[$body_key] = $body_key;
       $body_vals[$body_key] = $numLine[$body_key];
     }
-    
-
     
     // facebook instant article audio placement
     if (in_array($audio_pos, $bk)) {
@@ -119,12 +118,19 @@ function itg_fia_xml_node_feed($query) {
                 </audio>
               </figure>';
     }
+    
     // facebook instant article animated image placement
     if (in_array($img_position, $bk)) {
-      $body_vals[$img_position] = $body_vals[$img_position] . '<p>' . $img_path . '</p>';
+      $body_vals[$img_position] = $body_vals[$img_position] . 
+             '<figure>
+                <img src="'.$img_path.'" />
+              </figure>';
     } else {
       $last_postion = end($bk);
-      $body_vals[$last_postion] = $body_vals[$last_postion] . '<p>' . $img_path . '</p>';
+      $body_vals[$last_postion] = $body_vals[$last_postion] . 
+             '<figure>
+                <img src="'.$img_path.'" />
+              </figure>';
     }
     
     // facebook instant article map placement
