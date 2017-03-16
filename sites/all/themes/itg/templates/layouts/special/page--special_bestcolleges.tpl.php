@@ -200,6 +200,11 @@ if ($theme != 'itgadmin') {
                           $render_rhsstatic = _block_get_renderable_array(_block_render_blocks(array($block1)));
                           print render($render_rhsstatic);
 
+                          // RHS Video
+                          $block_video = block_load('itg_bestcolleges','bestcollege_rhs_videos_widget');
+                          $render_video = _block_get_renderable_array(_block_render_blocks(array('$block_video')));
+                          print render($render_video);
+
                     ?>
                     </div>
                   </div>
