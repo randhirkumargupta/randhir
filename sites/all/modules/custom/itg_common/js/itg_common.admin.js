@@ -42,7 +42,9 @@
 jQuery(document).ready(function () {
 
     var solr = Drupal.settings.itg_common.settings.solr;
-    var solr_explict = solr.split(',');
+    if (solr.length != 0) {
+        var solr_explict = solr.split(',');
+    }
     var slr = [];
     
     for (i = 0; i < solr_explict.length; i++) {
