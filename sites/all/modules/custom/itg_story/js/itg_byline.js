@@ -64,6 +64,10 @@
                     status = '1';
                     byline_event = 'publish';
                 }
+                
+                if (!jQuery(this).is(":checked")) {
+                    byline_event = 'publish';
+                }
                 var post_data = "&nd_id=" + nd_id + "&unique_id=" + unique_id + "&byline_event=" + byline_event + "&status=" + status + "&bl_id=" + bl_id;
 
                 $.ajax({

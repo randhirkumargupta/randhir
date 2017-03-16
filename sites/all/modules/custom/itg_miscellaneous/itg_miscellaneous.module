@@ -58,6 +58,12 @@ function itg_miscellaneous_menu() {
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_miscellaneous.inc',
   );
+  $items['create-index-for-story-migration'] = array(
+      'page callback' => 'create_index_xml',
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_miscellaneous.inc',
+  );
   
   
 

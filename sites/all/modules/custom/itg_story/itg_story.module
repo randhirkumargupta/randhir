@@ -435,7 +435,9 @@ function itg_story_after_build($form, &$form_state) {
   }
 
   // checked autoalias checkbox on node edit form
-  if (isset($form['#node']->nid)) {
+  //if(arg(0) == 'node' && is_numeric(arg(1)) && )
+
+  if (isset($form['#node']->nid) && $form['#node']->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
       drupal_add_js('jQuery(document).ready(function() {
           jQuery("#edit-path-pathauto").attr("checked", true);            
         });', array('type' => 'inline', 'scope' => 'footer'));
@@ -767,7 +769,19 @@ function itg_story_node_presave($node) {
  */
 function itg_story_node_view($node, $view_mode, $langcode) {
   if ($node->type == 'story') {
-    global $user;
+    global $user, $theme;
+    // for lock story
+    if ($theme == FRONT_THEME_NAME && (in_array(FRONT_USER, $user->roles) || $user->uid == 0)) {
+      if (!empty($node->field_story_configurations['und'][0]['value'])) {
+        foreach ($node->field_story_configurations['und'] as $value) {
+          $config[] = $value['value'];
+        }
+      }
+      if (in_array('lock_story', $config)) {          
+        drupal_goto('http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
+      }
+    }
+    
     $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     if(function_exists('itg_get_related_content')) {
       $node->content['related_content'] = itg_get_related_content(arg(1));
@@ -794,6 +808,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       drupal_add_js(array('itg_story_front' => array('next' => $next, 'previous' => $previous)), 'setting');
       drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story_front.js');
     }
+    
   }
 }
 
@@ -933,31 +948,4 @@ function itg_story_photo_story_bottom_html($node_id) {
       $html .= '</div>';
       return $html;
   }
-}
-
-/**
- * Implement hook_node_access
- * @param object $node
- * @param string $op
- * @param array $account
- * @return string
- */
-function itg_story_node_access($node, $op, $account) {
-  global $user;
-  // We're only bothered about the 'view' operation at the moment
-  if ($op == 'view' && $node->type == 'story') {
-    if (in_array(FRONT_USER, $user->roles) || $user->uid == 0) {
-      if (!empty($node->field_story_configurations['und'][0]['value'])) {
-        foreach ($node->field_story_configurations['und'] as $value) {
-          $config[] = $value['value'];
-        }
-      }
-      if (in_array('lock_story', $config)) {
-        //return NODE_ACCESS_DENY;
-        drupal_goto('http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
-      }
-    }
-  } // op close
-  // For everything else let the system decide.
-  return NODE_ACCESS_IGNORE;
 }
