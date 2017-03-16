@@ -42,6 +42,7 @@
 jQuery(document).ready(function () {
 
     var solr = Drupal.settings.itg_common.settings.solr;
+
     if (solr != null && solr != undefined) {
         var solr_explict = solr.split(',');
 
