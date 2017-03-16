@@ -16,14 +16,35 @@ global $base_url;
             <div id="loader-data"><img class="widget-loader" style="display: none" src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
 
             <div class="ftp-server">
-                <?php if ($_GET['no_value'] == 'single') { ?>
-                    <iframe id="video_iframe" src="<?php echo base_path() . 'search-unpublish-video-radio'; ?>" width="900" height="650"></iframe>
+                <?php
+                if ($_GET['file_filed_name'] == 'field_upload_video[und][0][fid]') {
+                    if ($_GET['no_value'] == 'single') {
+                        ?>
+                        <iframe id="video_iframe" src="<?php echo base_path() . 'search-unpublish-video-radio'; ?>" width="900" height="650"></iframe>
 
-                <?php }
-                else { ?>
-                   
-                    <iframe id="video_iframe" src="<?php echo base_path() . 'search-unpublish-video'; ?>" width="900" height="650"></iframe>
-                <?php } ?>
+                    <?php
+                    }
+                    else {
+                        ?>
+
+                        <iframe id="video_iframe" src="<?php echo base_path() . 'search-unpublish-video'; ?>" width="900" height="650"></iframe>
+    <?php }
+}
+else {
+    if ($_GET['no_value'] == 'single') {
+        ?>
+                        <iframe id="video_iframe" src="<?php echo base_path() . 'search-publish-video-radio'; ?>" width="900" height="650"></iframe>
+
+                    <?php
+                    }
+                    else {
+                        ?>
+
+                        <iframe id="video_iframe" src="<?php echo base_path() . 'search-publish-video'; ?>" width="900" height="650"></iframe>
+                    <?php
+                    }
+                }
+                ?>
                 <div class="video-options-wrapper"></div>
 <?php if (isset($_GET['input_filed']) && $_GET['input_filed'] == 'ckeditor') { ?>
                     <a href="javascript:void(0)" class = "button asso-with-ckeditor"><?php print t('Associate Video'); ?></a>
@@ -35,33 +56,34 @@ global $base_url;
                     <input type="hidden" id="single_add" name="single_add" value="1">
                     <a href="javascript:void(0)" class = "button asso-filed_single" btn_name="<?php echo $_GET['btn_name']; ?>" field_name="<?php echo $_GET['field_name']; ?>"><?php print t('Associate Video'); ?></a>
 
-                    <?php
-                }
-                else {
-                    ?>
+                <?php
+            }
+            else {
+                ?>
                     <input type="hidden" id="single_add" name="single_add" value="0">
                     <a href="javascript:void(0)" class = "button asso-filed"><?php print t('Associate Video'); ?></a>
-            <?php } ?>
+                <?php } ?>
             </div>  
-<?php //print drupal_render($form['video_browse_select']);     ?>
+                    <?php //print drupal_render($form['video_browse_select']);      ?>
             <div class="local_browse" style="display: none;">
 
-                <?php print drupal_render(drupal_get_form('videogallery_new_fileupload_form')); ?>
+<?php print drupal_render(drupal_get_form('videogallery_new_fileupload_form')); ?>
 
-                    <?php if ($_GET['field_name'] == 'field_story_facebook_video' || $_GET['field_name'] == 'field_story_twitter_video' || $_GET['field_name'] == 'field_videogallery_video_upload' || $_GET['no_value'] == 'single') { ?>
+                <?php if ($_GET['field_name'] == 'field_story_facebook_video' || $_GET['field_name'] == 'field_story_twitter_video' || $_GET['field_name'] == 'field_videogallery_video_upload' || $_GET['no_value'] == 'single') { ?>
                     <span class="button browse-local" btn_name="<?php echo $_GET['btn_name']; ?>" field_name="<?php echo $_GET['field_name']; ?>">
-                        <?php
-                        print t('Upload Video');
-                        ?>
+                    <?php
+                    print t('Upload Video');
+                    ?>
 
                     </span>
-                <?php }
-                else {
-                    ?>
-                    <span class="button browse-local" btn_name="">
                         <?php
-                        print t('Upload Video');
+                    }
+                    else {
                         ?>
+                    <span class="button browse-local" btn_name="">
+    <?php
+    print t('Upload Video');
+    ?>
 
                     </span>
 <?php } ?>

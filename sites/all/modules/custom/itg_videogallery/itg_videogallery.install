@@ -164,6 +164,11 @@ function itg_videogallery_schema() {
                 'type' => 'int',
                 ' null' => TRUE,
             ), 
+             'nid' => array(
+                'description' => 'nid of node',
+                'type' => 'int',
+                ' null' => TRUE,
+            ), 
             'solr_video_id' => array(
                 'description' => 'Video id which return by dailymotion',
                 'type' => 'varchar',
@@ -184,6 +189,12 @@ function itg_videogallery_schema() {
             ),
              'solr_video_thumb' => array(
                 'description' => 'Video thumb',
+                'type' => 'varchar',
+                'length' => '250',
+                'null' => TRUE,
+            ),
+             'property' => array(
+                'description' => 'property',
                 'type' => 'varchar',
                 'length' => '250',
                 'null' => TRUE,

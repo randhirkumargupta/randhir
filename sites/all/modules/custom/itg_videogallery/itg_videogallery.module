@@ -229,7 +229,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
 
     $tag_value = implode(', ', $tag);
     $tags_value = trim($tag_value, ",");
-    $node_id = $form_state['values']['nid'];
+    // $node_id = $form_state['values']['nid'];
 
     foreach ($form_state['values']['field_dailymotion_playlist'][LANGUAGE_NONE] as $playlist_term) {
         //$playlist_name[] = $playlist_term['name'];
@@ -392,40 +392,111 @@ function itg_videogallery_custom_submit($form, &$form_state) {
             $form_state['values']['field_video_duration'][LANGUAGE_NONE][0]['value'] = $slor_video_duration;
         }
     }
+    if ($node_id != "") {
+        $main_fids = array();
+        foreach ($form_state['values']['field_video_upload']['und'] as $keys => $videofields) {
 
-    foreach ($form_state['values']['field_video_upload']['und'] as $keys => $videofields) {
+            if ((int) $videofields['field_videogallery_video_upload']['und'][0]['fid'] != 0) {
 
-        if ((int) $videofields['field_videogallery_video_upload']['und'][0]['fid'] != 0) {
+                $video_image = itg_videogallery_get_video_info_by_fid($videofields['field_videogallery_video_upload']['und'][0]['fid']);
+                $main_fids[] = $videofields['field_videogallery_video_upload']['und'][0]['fid'];
+                if (empty($video_image)) {
+                    $video_fid = $videofields['field_videogallery_video_upload']['und'][0]['fid'];
+                    $file_details = file_load($videofields['field_videogallery_video_upload']['und'][0]['fid']);
 
-            $query = db_select('itg_solr_video_info', 'drd');
-            $query->fields('drd', array('solr_video_thumb', 'solr_video_id'));
-            $query->condition('fid', $videofields['field_videogallery_video_upload']['und'][0]['fid'], '=');
-            $video_image = $query->execute()->fetchAll();
+                    $real_path = drupal_realpath($file_details->uri);
+                    if (file_exists($file_details->uri)) {
+                        if ($real_path == "") {
+                            $real_path = file_create_url($file_details->uri);
+                        }
 
-            if (empty($video_image)) {
-                $video_fid = $videofields['field_videogallery_video_upload']['und'][0]['fid'];
-                $file_details = file_load($videofields['field_videogallery_video_upload']['und'][0]['fid']);
-
-                $real_path = drupal_realpath($file_details->uri);
-                if (file_exists($file_details->uri)) {
-                    if ($real_path == "") {
-                        $real_path = file_create_url($file_details->uri);
+                        // use for upload local video to DM
+                        itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details->uri, $video_fid, $tags_value, $node_id);
                     }
+                }
+                else {
+                    $file_video = itg_videogallery_get_video_info_by_fid($videofields['field_videogallery_video_upload']['und'][0]['fid']);
 
-                    // use for upload local video to DM
-                    itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details->uri, $video_fid, $tags_value, $node_id);
+                    $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
+                            ->fields(array(
+                                'dailymotion_published' => 1,
+                            ))
+                            ->condition('video_id', $file_video[0]->solr_video_id, '=')
+                            ->execute();
+                    // update nid in video
+                    $num_updated = db_update('itg_solr_video_info') // Table name no longer needs {}
+                            ->fields(array(
+                                'nid' => $node_id,
+                            ))
+                            ->condition('fid', $videofields['field_videogallery_video_upload']['und'][0]['fid'], '=')
+                            ->execute();
                 }
             }
-            else {
-                $file_video = file_load($videofields['field_videogallery_video_upload']['und'][0]['fid']);
-                $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
-                        ->fields(array(
-                            'dailymotion_published' => 1,
-                        ))
-                        ->condition('video_id', $file_video->uri, '=')
-                        ->execute();
-            }
         }
+        try {
+           // delete deleted video info form itg_solr_video_info
+            $query = db_delete('itg_solr_video_info');
+            $query->condition('fid', $main_fids, 'NOT IN');
+            $query->condition('nid', $node_id);
+            $query->execute();
+        } catch (Exception $e) {
+            watchdog_exception('video fid delete', $e);
+        }
+    }
+}
+
+/**
+ * impliment hook node insert
+ */
+function itg_videogallery_node_insert($node) {
+
+    switch ($node->type) {
+        case 'videogallery':
+            $node_id = $node->nid;
+            foreach ($node->field_video_upload['und'] as $keys => $videofields) {
+                $video_details = entity_load('field_collection_item', array($videofields['value']));
+                foreach ($video_details[$videofields['value']]->field_videogallery_video_upload as $filed_val) {
+
+                    $fids = $filed_val[0]['fid'];
+                }
+                if ((int) $fids != 0) {
+
+                    $video_image = itg_videogallery_get_video_info_by_fid($fids);
+
+                    if (empty($video_image)) {
+                        $video_fid = $fids;
+                        $file_details = file_load($fids);
+
+                        $real_path = drupal_realpath($file_details->uri);
+                        if (file_exists($file_details->uri)) {
+                            if ($real_path == "") {
+                                $real_path = file_create_url($file_details->uri);
+                            }
+
+                            // use for upload local video to DM
+                            itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details->uri, $video_fid, $tags_value, $node_id);
+                        }
+                    }
+                    else {
+                        $file_video = itg_videogallery_get_video_info_by_fid($fids);
+
+                        $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
+                                ->fields(array(
+                                    'dailymotion_published' => 1,
+                                ))
+                                ->condition('video_id', $file_video[0]->solr_video_id, '=')
+                                ->execute();
+                        // update nid in video
+                        $num_updated = db_update('itg_solr_video_info') // Table name no longer needs {}
+                                ->fields(array(
+                                    'nid' => $node_id,
+                                ))
+                                ->condition('fid', $fids, '=')
+                                ->execute();
+                    }
+                }
+            }
+            break;
     }
 }
 
@@ -465,6 +536,8 @@ function itg_videogallery_send_local_video_to_dailymotion($real_path, $file_deta
                 ->fields(array(
                     'fid' => $response['fid'],
                     'solr_video_id' => $response['id'],
+                    'nid' => $node_id,
+                    'property' => 'indiatoday',
                     'solr_video_duration' => $duration,
                     'solr_video_size' => $file_details->filesize,
                     'solr_video_thumb' => "",
@@ -968,40 +1041,41 @@ function itg_videogallery_solr_video_insert_in_for_fid() {
     if (!empty($videos_data)) {
         foreach ($videos_data as $video_info) {
             $expode_video_info = explode('#', $video_info);
-            $videourl = 'public://dailymotion_video_dir/'.$expode_video_info[0].'.mp4';
-            $query = db_select('file_managed', 'drd');
-            $query->fields('drd', array('fid'));
-            $query->condition('uri', $videourl, '=');
-            $dailymotion_video_result = $query->execute()->fetchField();
-            if (!empty($dailymotion_video_result)) {
-                $return_fid[] = $dailymotion_video_result;
-            }
-            else {
-                $fid = db_insert('file_managed')
-                        ->fields(array(
-                            'uid' => $user->uid,
-                            'filename' => $expode_video_info[2],
-                            'uri' => $videourl,
-                            'filemime' => 'video/mp4',
-                            'filesize' => $expode_video_info[1],
-                            'status' => 1,
-                            'timestamp' => REQUEST_TIME,
-                        ))
-                        ->execute();
-                $file = file_load($fid);
-                file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
-                $fid = db_insert('itg_solr_video_info')
-                        ->fields(array(
-                            'fid' => $file->fid,
-                            'solr_video_id' => $expode_video_info[0],
-                            'solr_video_duration' => $expode_video_info[4],
-                            'solr_video_size' => $expode_video_info[1],
-                            'solr_video_thumb' => $expode_video_info[3],
-                        ))
-                        ->execute();
-                $return_fid[] = $file->fid;
-            }
+            $videourl = 'public://dailymotion_video_dir/' . time() . '/' . $expode_video_info[0] . '.mp4';
+//            $query = db_select('file_managed', 'drd');
+//            $query->fields('drd', array('fid'));
+//            $query->condition('uri', $videourl, '=');
+//            $dailymotion_video_result = $query->execute()->fetchField();
+//            if (!empty($dailymotion_video_result)) {
+//                $return_fid[] = $dailymotion_video_result;
+//            }
+//            else {
+            $fid = db_insert('file_managed')
+                    ->fields(array(
+                        'uid' => $user->uid,
+                        'filename' => $expode_video_info[2],
+                        'uri' => $videourl,
+                        'filemime' => 'video/mp4',
+                        'filesize' => $expode_video_info[1],
+                        'status' => 1,
+                        'timestamp' => REQUEST_TIME,
+                    ))
+                    ->execute();
+            $file = file_load($fid);
+            file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
+            $fid = db_insert('itg_solr_video_info')
+                    ->fields(array(
+                        'fid' => $file->fid,
+                        'solr_video_id' => $expode_video_info[0],
+                        'solr_video_duration' => $expode_video_info[4],
+                        'solr_video_size' => $expode_video_info[1],
+                        'property' => $expode_video_info[5],
+                        'solr_video_thumb' => $expode_video_info[3],
+                    ))
+                    ->execute();
+            $return_fid[] = $file->fid;
         }
+        //}
     }
     exit(json_encode($return_fid));
 }
@@ -1693,26 +1767,27 @@ function get_video_filed_collection_by_its_id($entity_fid) {
  * This is temp function use for test dailymotion video resploce no we will 
  */
 function itg_videogallery_video_bitrate() {
+    $api = itg_videogallery_dailymotion_api();
+    $thumb_url = $api->get(
+            '/video/x5e49qb', array('fields' => array('id', 'title', 'owner', 'stream_h264_url'))
+    );
 
-    $query = db_select('field_data_field_videogallery_video_upload', 'up_video');
-    $query->fields('up_video', array('entity_id'));
-    $query->join('dailymotion_response_details', 'drd', 'drd.fid = up_video.field_videogallery_video_upload_fid');
-    $query->fields('drd', array('fid', 'video_id', 'dailymotion_thumb_url'));
-    $query->fields('up_video', array('entity_id'));
-    $result = $query->execute()->fetchAll();
-    if (isset($result) && !empty($result)) {
-        $api = itg_videogallery_dailymotion_api();
-        foreach ($result as $val) {
-            $query = db_select('field_data_field_video_upload', 'fvd');
-            $query->fields('fvd', array('entity_id'));
-            $query->condition('field_video_upload_value', $val->entity_id);
-            $result_video = $query->execute()->fetchAll();
-            $thumb_url = $api->get(
-                    '/video/' . $val->video_id, array('fields' => array('available_formats', 'live_video_bitrate', 'url'))
-            );
-            p($thumb_url);
-        }
-    }
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "http://www.dailymotion.com/json/video/x5e49qb?fields=stream_h264_sd_url,stream_h264_hq_url,stream_h264_url,stream_h264_hd_url");
+    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9');
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $content = curl_exec($ch);
+    curl_close($ch);
+    $daily_res = (json_decode($content, true));
+    p($daily_res);
+    pr($daily_res['stream_h264_sd_url']);
+    print '<video width="400" controls> <source src="' . $daily_res['stream_h264_sd_url'] . '" type="video/mp4"> </video> ';
+//$filedata = file_get_contents($daily_res['stream_h264_sd_url']);
+//$file = file_save_data($filedata, file_default_scheme() . '://dailymotion_video_dir/pavnish'.time().'..mp4');
+//print copy($daily_res['stream_h264_sd_url'], 'includes/pav.mp4');
+//print file_get_contents($daily_res['stream_h264_sd_url']);
 }
 
 /**
@@ -2669,4 +2744,16 @@ function check_file_already_exist_or_not($filename) {
         $res = $file_info['filename'] . $value . '.' . $extension;
         return $res;
     }
+}
+
+/**
+ * Function use for get video info by fid
+ */
+function itg_videogallery_get_video_info_by_fid($fid) {
+    $video_data = "";
+    $query = db_select('itg_solr_video_info', 'drd');
+    $query->fields('drd');
+    $query->condition('fid', $fid, '=');
+    $video_data = $query->execute()->fetchAll();
+    return $video_data;
 }
