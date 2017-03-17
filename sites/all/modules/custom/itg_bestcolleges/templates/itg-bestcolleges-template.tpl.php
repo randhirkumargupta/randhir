@@ -28,6 +28,7 @@ $config_name = $comment_value[0]->config_name;
     <div class="carousel-inner" role="listbox">
 
      <?php
+
                 if (array_filter(views_get_view_result('best_college_image_slider', 'block_2'))) {
                     print views_embed_view('best_college_image_slider', 'block_2');
                 }
@@ -49,7 +50,7 @@ $config_name = $comment_value[0]->config_name;
 <div class="clearfix"></div>
 <!-- Grid View-->
 <div class="col-sm-12 col-xs-12 view1">
-<div class="title col-md-6 col-sm-6 col-xs-12">Best of The Best 2016</div>
+<div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("Best of The Best ") . arg(1);; ?></div>
 
         <div class="right_Section pull-right  col-md-6  col-sm-6 col-xs-12 text-right hidden-xs">
         <strong>view as</strong>

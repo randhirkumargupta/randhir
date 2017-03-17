@@ -6,7 +6,9 @@
  *
  * Contains functionality for best college.
  */
-
+//print $ab = drupal_lookup_path('source', $_GET['q']);
+//echo "<pre>";
+//print_r($_GET);
 /**
  * Implements hook_menu().
  * {@inheritdoc}
@@ -336,7 +338,6 @@ function itg_bestcollege_yearcompare($year, $type, $stream, $years) {
  */
 
 function itg_common_redirect_list($year, $stype) {
-  p("Test");
   if (preg_match('/zonewiselist/', $stype)) {
     return itg_zone_wise_list($year, $stype);
   }

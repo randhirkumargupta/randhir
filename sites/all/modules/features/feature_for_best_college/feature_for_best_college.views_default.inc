@@ -99,6 +99,52 @@ function feature_for_best_college_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Extra large image */
+  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
+    'image_style' => '',
+    'image_link' => 'content',
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Taxonomy term: Term ID */
+  $handler->display->display_options['arguments']['tid']['id'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['arguments']['tid']['field'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['relationship'] = 'term_node_tid';
+  $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'taxonomy_tid';
+  $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'story' => 'story',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block_1');
@@ -232,6 +278,7 @@ function feature_for_best_college_views_default_views() {
   $handler->display->display_options['fields']['tid']['label'] = '';
   $handler->display->display_options['fields']['tid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['tid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['tid']['separator'] = '';
   /* Field: Global: PHP */
   $handler->display->display_options['fields']['php']['id'] = 'php';
   $handler->display->display_options['fields']['php']['table'] = 'views';
@@ -259,8 +306,8 @@ print itg_city_option($year,$tid);
                       <h4 class="list-group-item-heading"><a href="/bestcolleges/[field_bestcollege_year]/ranks/[tid]">  [field_story_category]</a></h4>
                       <p class="group inner list-group-item-text"> <a href="/bestcolleges/[field_bestcollege_year] /ranks/[tid]"> 
                         [title]</a></p> 
-                       <div class="cl1"> <a href="">Rank :  [field_bestcollege_rank]</a></div>
-                       <div class="cl"> <a href="">SEE COMPLETE LIST | DIRECTORY</a></div>
+                       <div class="cl1"> <a href="/bestcolleges/[field_bestcollege_year]/ranks/[tid]">Rank :  [field_bestcollege_rank]</a></div>
+                       <div class="cl"> <a href="/bestcolleges/[field_bestcollege_year]/ranks/[tid]">SEE COMPLETE LIST | DIRECTORY</a></div>
 
                        [php] 
 

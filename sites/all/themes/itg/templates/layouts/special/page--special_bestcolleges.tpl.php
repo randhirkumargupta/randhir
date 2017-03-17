@@ -26,7 +26,7 @@ if ($theme != 'itgadmin') {
 }
 
 ?>
-
+<?php print_r($_GET); ?>
 <!--------------------------------Code for Front tpl---------------------------------------->
 <?php if ($theme != 'itgadmin') {?>
   <div id="page">
@@ -104,19 +104,25 @@ if ($theme != 'itgadmin') {
     <?php endif; ?>
     <div class="row">
         <div class="col-md-8 col-sm-12 col-xs-12 left-side">
-   <?php if (isset($widget_data['itg-block-1']['widget_name']) || isset($widget_data['itg-block-2']['widget_name']) || isset($widget_data['itg-block-3']['widget_name']) || $theme == 'itgadmin') { ?>
+
+    <?php if (isset($widget_data['itg-block-1']['widget_name']) || isset($widget_data['itg-block-2']['widget_name']) || isset($widget_data['itg-block-3']['widget_name']) || $theme == 'itgadmin') { ?>
     <div>
+      <!--
         <div class="itg-h747-section">
             <div class="itg-widget">
-              <div class="droppable <?php print $gray_bg_layout; ?>">
-               <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name'].$widget_data['itg-block-1']['widget_display_name']; ?>">
-                    <div class="data-holder" id="itg-block-1"><?php print $widget_data['itg-block-1']['widget']; ?></div>
+              <div class="droppable <?php //print $gray_bg_layout; ?>">
+               <div class="widget-wrapper <?php //print $widget_data['itg-block-1']['widget_name'].$widget_data['itg-block-1']['widget_display_name']; ?>">
+                    <div class="data-holder" id="itg-block-1"><?php //print $widget_data['itg-block-1']['widget']; ?></div>
                   </div>
                 </div>
             </div>
         </div>
-
-
+       -->
+       <?php
+                if (array_filter(views_get_view_result('best_college_image_slider', 'block'))) {
+                    print views_embed_view('best_college_image_slider', 'block');
+                }
+         ?>
 
 
 
@@ -125,7 +131,7 @@ if ($theme != 'itgadmin') {
 
 <!--- list / grid -->
 <div class="col-sm-12 col-xs-12 view1">
-<div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("Best of The Best 2016"); ?></div>
+<div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("Best of The Best ") . arg(1);; ?></div>
 
         <div class="right_Section pull-right  col-md-6  col-sm-6 col-xs-12 text-right hidden-xs">
         <strong>view as</strong>
