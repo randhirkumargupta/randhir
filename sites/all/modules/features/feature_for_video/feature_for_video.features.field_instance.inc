@@ -409,6 +409,48 @@ function feature_for_video_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-videogallery-field_modified_by_video'.
+  $field_instances['node-videogallery-field_modified_by_video'] = array(
+    'bundle' => 'videogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 53,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_modified_by_video',
+    'label' => 'Modified By',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 61,
+    ),
+  );
+
   // Exported field_instance: 'node-videogallery-field_multi_bitrate'.
   $field_instances['node-videogallery-field_multi_bitrate'] = array(
     'bundle' => 'videogallery',
@@ -2245,6 +2287,45 @@ function feature_for_video_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-videogallery-field_syndication_photo_video'.
+  $field_instances['node-videogallery-field_syndication_photo_video'] = array(
+    'bundle' => 'videogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 52,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_syndication_photo_video',
+    'label' => 'Syndication Photo',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 60,
+    ),
+  );
+
   // Exported field_instance: 'node-videogallery-field_video_anchor'.
   $field_instances['node-videogallery-field_video_anchor'] = array(
     'bundle' => 'videogallery',
@@ -2485,6 +2566,7 @@ function feature_for_video_field_default_field_instances() {
   t('Long Description');
   t('Medium image');
   t('Migrated Video');
+  t('Modified By');
   t('Multi Bitrate');
   t('Node Identity');
   t('Noindex Nofollow');
@@ -2498,6 +2580,7 @@ function feature_for_video_field_default_field_instances() {
   t('Source id');
   t('Source type');
   t('Syndication');
+  t('Syndication Photo');
   t('Tags');
   t('Tweet');
   t('Twitter Image');
