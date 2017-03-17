@@ -792,6 +792,9 @@ function _csvImporter_import_line($line, $session_nid, &$context) {
 
   //pr($line);
   //$collegename    = $line[0];
+  echo "<pre>";
+  print_r($line);
+  echo "</pre> arun <br>";
   $collegeid = $line[1];
   $collegename = $line[2];
   $city = $line[3];
@@ -860,6 +863,9 @@ function _csvImporter_import_line($line, $session_nid, &$context) {
   $url = $image; //'https://ssl.gstatic.com/gb/images/k1_a31af7ac.png';
   //I have used picture folder to store images using image field settings
   $file_info = system_retrieve_file($url, 'public://migrate/', TRUE);
+  echo "<pre>";
+  print_r($file_info);
+  exit;
   if ($file_info->fid) {
     $node->field_story_extra_large_image[LANGUAGE_NONE]['0']['fid'] = $file_info->fid; //assign fid
   }
