@@ -29,23 +29,23 @@ if (function_exists('itg_common_mongo_activity_user_count'))
     </div>  
     <div class="personalized-user-info">
       <span>
-        <i class="fa fa-share" aria-hidden="true"></i>
+          <i class="fa fa-share" aria-hidden="true" title="Submit Story"></i>
         <dfn><?php print $submit_ugc_content; ?></dfn>
       </span>
       <span>
-        <i class="fa fa-share-alt" aria-hidden="true"></i>
+        <i class="fa fa-share-alt" aria-hidden="true" title="Share Content"></i>
         <dfn><?php print $tot_count; ?></dfn>
       </span>
       <span>
-        <i class="fa fa-comment" aria-hidden="true"></i>
+        <i class="fa fa-comment" aria-hidden="true" title="Comments"></i>
         <dfn><?php print $comment_count; ?></dfn>
       </span>
       <span>
-        <i class="fa fa-bookmark" aria-hidden="true"></i>
+        <i class="fa fa-bookmark" aria-hidden="true" title="Saved Items"></i>
         <dfn><?php print $read_later_content;?></dfn>
       </span>
       <span>
-        <i class="fa fa-user" aria-hidden="true"></i>
+        <i class="fa fa-user" aria-hidden="true" title="Follow Story"></i>
         <dfn><?php print $follow_ugc_content; ?></dfn>
       </span>
     </div>
@@ -59,9 +59,19 @@ if (function_exists('itg_common_mongo_activity_user_count'))
             </span>
           <?php print render($data['badge_detail']['badge_icon']); ?>
         </div>
+        
+        <!-- Progress bar logic -->
+        <?php
+          
+        ?>
+        <?php //pr($data); ?>
         <div class="pregress-bar">            
             <span class="current-badge"><small><?php print $data['badge_detail']['earn']; ?></small><?php echo t('Current Level'); ?></span>
-            <span class="pregress-bar-active progress-bar-<?php print $data['badge_detail']['earn']; ?>"></span>
+                <div class="progress-bar-div">
+              <span class="pregress-bar-default"></span>
+              <span class="pregress-bar-default pregress-bar-active" style="width: <?php print $data['badge_detail']['progress_bar']; ?>%"></span>
+            </div>
+            
             <?php if ($data['badge_detail']['earn'] != 5): ?>
             <span class="next-badge"><small><?php print $data['badge_detail']['next']; ?></small><?php echo t('Next Level'); ?></span>
             <?php endif; ?>

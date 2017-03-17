@@ -2,32 +2,32 @@
  * Implementation of Drupal behavior.
  */
 jQuery(document).ready(function() {
-  jQuery('.node-story-form #title-metatags, .node-story-form .node-form-revision-information').wrapAll('<div id="remarks" class="itg-sidebar-form-section"></div>');
-  jQuery('.node-story-form .vertical-tabs h2, .node-story-form .vertical-tabs .path-form, .node-story-form .vertical-tabs .metatags-form').wrapAll('<div id="meta-tags" class="itg-sidebar-form-section"></div>');
-  jQuery('.node-story-form .vertical-tabs .path-form, .node-story-form .vertical-tabs .metatags-form').wrapAll('<div class="itg-form-section hide"></div>');
-  jQuery('.node-story-form .metatags-and-remarks #remarks .node-form-revision-information').wrapAll('<div class="itg-form-section hide"></div>');
-  
-  jQuery('.node-photogallery-form #title-metatags, .node-photogallery-form .node-form-revision-information').wrapAll('<div id="remarks" class="itg-sidebar-form-section"></div>');
-  jQuery('.node-photogallery-form .vertical-tabs h2, .node-photogallery-form .vertical-tabs .path-form, .node-photogallery-form .vertical-tabs .metatags-form').wrapAll('<div id="meta-tags" class="itg-sidebar-form-section"></div>');
-  jQuery('.node-photogallery-form .vertical-tabs .path-form, .node-photogallery-form .vertical-tabs .metatags-form').wrapAll('<div class="itg-form-section hide"></div>');
-  jQuery('.node-photogallery-form .metatags-and-remarks #remarks .node-form-revision-information').wrapAll('<div class="itg-form-section hide"></div>');
-  
-  jQuery('.node-videogallery-form #title-metatags, .node-videogallery-form .node-form-revision-information').wrapAll('<div id="remarks" class="itg-sidebar-form-section"></div>');
-  jQuery('.node-videogallery-form .vertical-tabs h2, .node-videogallery-form .vertical-tabs .path-form, .node-videogallery-form .vertical-tabs .metatags-form').wrapAll('<div id="meta-tags" class="itg-sidebar-form-section"></div>');
-  jQuery('.node-videogallery-form .vertical-tabs .path-form, .node-videogallery-form .vertical-tabs .metatags-form').wrapAll('<div class="itg-form-section hide"></div>');
-  jQuery('.node-videogallery-form .metatags-and-remarks #remarks .node-form-revision-information').wrapAll('<div class="itg-form-section hide"></div>');
-  
-  var category_mgr_meta_title = jQuery('.node-category-form .path-form').prev();
-  category_mgr_meta_title.css('margin-top', '20px').nextAll().hide();
-  category_mgr_meta_title.click(function(){
-  jQuery(this).toggleClass('active');
-    if(jQuery(this).hasClass('active')){
-      jQuery(this).nextAll().show();
-    }
-    else{
-      jQuery(this).nextAll().hide();
-    }
-  });
+    jQuery('.node-story-form #title-metatags, .node-story-form .node-form-revision-information').wrapAll('<div id="remarks" class="itg-sidebar-form-section"></div>');
+    jQuery('.node-story-form .vertical-tabs h2, .node-story-form .vertical-tabs .path-form, .node-story-form .vertical-tabs .metatags-form').wrapAll('<div id="meta-tags" class="itg-sidebar-form-section"></div>');
+    jQuery('.node-story-form .vertical-tabs .path-form, .node-story-form .vertical-tabs .metatags-form').wrapAll('<div class="itg-form-section hide"></div>');
+    jQuery('.node-story-form .metatags-and-remarks #remarks .node-form-revision-information').wrapAll('<div class="itg-form-section hide"></div>');
+
+    jQuery('.node-photogallery-form #title-metatags, .node-photogallery-form .node-form-revision-information').wrapAll('<div id="remarks" class="itg-sidebar-form-section"></div>');
+    jQuery('.node-photogallery-form .vertical-tabs h2, .node-photogallery-form .vertical-tabs .path-form, .node-photogallery-form .vertical-tabs .metatags-form').wrapAll('<div id="meta-tags" class="itg-sidebar-form-section"></div>');
+    jQuery('.node-photogallery-form .vertical-tabs .path-form, .node-photogallery-form .vertical-tabs .metatags-form').wrapAll('<div class="itg-form-section hide"></div>');
+    jQuery('.node-photogallery-form .metatags-and-remarks #remarks .node-form-revision-information').wrapAll('<div class="itg-form-section hide"></div>');
+
+    jQuery('.node-videogallery-form #title-metatags, .node-videogallery-form .node-form-revision-information').wrapAll('<div id="remarks" class="itg-sidebar-form-section"></div>');
+    jQuery('.node-videogallery-form .vertical-tabs h2, .node-videogallery-form .vertical-tabs .path-form, .node-videogallery-form .vertical-tabs .metatags-form').wrapAll('<div id="meta-tags" class="itg-sidebar-form-section"></div>');
+    jQuery('.node-videogallery-form .vertical-tabs .path-form, .node-videogallery-form .vertical-tabs .metatags-form').wrapAll('<div class="itg-form-section hide"></div>');
+    jQuery('.node-videogallery-form .metatags-and-remarks #remarks .node-form-revision-information').wrapAll('<div class="itg-form-section hide"></div>');
+
+    var category_mgr_meta_title = jQuery('.node-category-form .path-form').prev();
+    category_mgr_meta_title.css('margin-top', '20px').nextAll().hide();
+    category_mgr_meta_title.click(function() {
+        jQuery(this).toggleClass('active');
+        if (jQuery(this).hasClass('active')) {
+            jQuery(this).nextAll().show();
+        }
+        else {
+            jQuery(this).nextAll().hide();
+        }
+    });
 });
 
 (function($) {
@@ -358,6 +358,37 @@ jQuery(document).ready(function() {
                 $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').hide();
             }
         });
+
+        $('.field-name-field-question-media').on('change', 'select', function() {
+            var selvalue = $(this).val();
+            if (selvalue == "Video") {
+                $(this).parent().parent().parent().find('.field-name-field-question-video').show();
+
+                $(this).parent().parent().parent().find('.field-name-field-question-image').hide();
+            }
+            if (selvalue == "Photo") {
+                $(this).parent().parent().parent().find('.field-name-field-question-image').show();
+
+                $(this).parent().parent().parent().find('.field-name-field-question-video').hide();
+            }
+        });
+        $('.field-name-field-question-media select').each(function() {
+            var selvalue = $(this).val();
+            if (selvalue == '_none') {
+                $(this).parent().parent().parent().find('.field-name-field-question-video').hide();
+                $(this).parent().parent().parent().find('.field-name-field-question-image').hide();
+            }
+            if (selvalue == "Video") {
+                $(this).parent().parent().parent().find('.field-name-field-question-video').show();
+                $(this).parent().parent().parent().find('.field-name-field-question-image').hide();
+            }
+            if (selvalue == "Photo") {
+                $(this).parent().parent().parent().find('.field-name-field-question-image').show();
+                $(this).parent().parent().parent().find('.field-name-field-question-video').hide();
+            }
+        });
+
+
         $('.field-name-field-quiz-options-answer .form-item').find('.field-add-more-submit').val('+');
         $('input[name="field_quiz_add_questions_add_more"], input[name="field_survey_add_questions_add_more"]').val('Add another question');
         $('input[name="field_newsl_add_news_add_more"]').val('Add More News');
@@ -388,12 +419,12 @@ jQuery(document).ready(function() {
             $('.img-crt, .pre-desc').wrapAll('<div class="generate-image"></div>');
         }
         var get_parent_for_credit = jQuery('.form-field-name-field-credit-to-all, .form-field-name-field-credit-name').parent().attr('class');
-        if(get_parent_for_credit != "credit-to-all"){
-          jQuery('.form-field-name-field-credit-to-all, .form-field-name-field-credit-name').wrapAll('<div class="credit-to-all"></div>');
+        if (get_parent_for_credit != "credit-to-all") {
+            jQuery('.form-field-name-field-credit-to-all, .form-field-name-field-credit-name').wrapAll('<div class="credit-to-all"></div>');
         }
-        
-        
-          $('.image-widget').each(function() {
+
+
+        $('.image-widget').each(function() {
             var filename = $(this).find('.file').html();
             var filesize = $(this).find('.file-size').html();
             var fullname = filename + filesize;
@@ -401,9 +432,9 @@ jQuery(document).ready(function() {
                 $(this).find('.image-preview').append('<div class="image-fullname">' + fullname + '</div>');
             }
             $(this).find('.image-widget-data .file, .image-widget-data .file-size').remove();
-          });
-        
-        
+        });
+
+
         $('.image-widget-data').find('.form-text').each(function() {
             var plaholderText = $(this).prev().text();
             $(this).attr('placeholder', plaholderText);
@@ -526,7 +557,7 @@ jQuery(document).ready(function() {
         $('body').on('click', '.itg-close-popup', function() {
             $(this).closest('.itg-popup').hide();
         });
-          $('body').on('click', '.itg-close-popup_new', function() {
+        $('body').on('click', '.itg-close-popup_new', function() {
             $(this).closest('.itg-popup').remove();
         });
 
@@ -691,37 +722,37 @@ jQuery(document).ready(function() {
         var badge_three_val = $('input[name="' + badge_three + '"]').val();
         var badge_four_val = $('input[name="' + badge_four + '"]').val();
         var badge_five_val = $('input[name="' + badge_five + '"]').val();
-        if(badge_one_val > 0){
-          $('body').find('.div_lrp_gold_star_one_icon').hide();
+        if (badge_one_val > 0) {
+            $('body').find('.div_lrp_gold_star_one_icon').hide();
         }
-        else{
-          $('body').find('.div_lrp_gold_star_one_icon').show();
+        else {
+            $('body').find('.div_lrp_gold_star_one_icon').show();
         }
-        if(badge_two_val > 0){
-          $('body').find('.div_lrp_gold_star_two_icon').hide();
+        if (badge_two_val > 0) {
+            $('body').find('.div_lrp_gold_star_two_icon').hide();
         }
-        else{
-          $('body').find('.div_lrp_gold_star_two_icon').show();
+        else {
+            $('body').find('.div_lrp_gold_star_two_icon').show();
         }
-        if(badge_three_val > 0){
-          $('body').find('.div_lrp_gold_star_three_icon').hide();
+        if (badge_three_val > 0) {
+            $('body').find('.div_lrp_gold_star_three_icon').hide();
         }
-        else{
-          $('body').find('.div_lrp_gold_star_three_icon').show();
+        else {
+            $('body').find('.div_lrp_gold_star_three_icon').show();
         }
-        if(badge_four_val > 0){
-          $('body').find('.div_lrp_gold_star_four_icon').hide();
+        if (badge_four_val > 0) {
+            $('body').find('.div_lrp_gold_star_four_icon').hide();
         }
-        else{
-          $('body').find('.div_lrp_gold_star_four_icon').show();
+        else {
+            $('body').find('.div_lrp_gold_star_four_icon').show();
         }
-        if(badge_five_val > 0){
-          $('body').find('.div_lrp_gold_star_five_icon').hide();
+        if (badge_five_val > 0) {
+            $('body').find('.div_lrp_gold_star_five_icon').hide();
         }
-        else{
-          $('body').find('.div_lrp_gold_star_five_icon').show();
+        else {
+            $('body').find('.div_lrp_gold_star_five_icon').show();
         }
-          
+
 
     };
 })(jQuery);
@@ -794,11 +825,11 @@ jQuery(document).ready(function() {
         alert('Changes made successfully');
     });
     // end of code
-    
+
     // byline order reorder
-    jQuery('body').on('click', '.save-byline', function () {
+    jQuery('body').on('click', '.save-byline', function() {
         var item = [];
-        jQuery(this).closest('.byline-list').find('.byline-ul li').each(function (i) {
+        jQuery(this).closest('.byline-list').find('.byline-ul li').each(function(i) {
             item.push(jQuery(this).find('.byline_publish').val());
         });
         jQuery('#edit-field-reporter-publish-id-und-0-value').val(item);
@@ -819,9 +850,9 @@ jQuery(document).ready(function() {
 
     // jQuery code to toggle ITG-STORY Form
     jQuery('.itg-form-section-wrapper, .itg-sidebar-form-section').on('click', 'h2', function() {
-      jQuery(this).toggleClass('active');
-      jQuery(this).next().slideToggle();
-      jQuery(this).parent().toggleClass('active');
+        jQuery(this).toggleClass('active');
+        jQuery(this).next().slideToggle();
+        jQuery(this).parent().toggleClass('active');
     });
 
     // jQuery code to toggle Cotegory manager form
@@ -849,13 +880,21 @@ jQuery(document).ready(function() {
     jQuery(".menu-manager-delete").click(function() {
         var r = confirm("Are you sure want to delete.");
         if (r == true) {
-            jQuery("#widget-ajex-loader").css("display","block");
+            jQuery("#widget-ajex-loader").css("display", "block");
             return true;
         } else {
             return false;
         }
     });
     
+    //social share animation effects   
+    jQuery('.social-share ul').each(function () {
+        jQuery(this).children().not(":first").hide();
+    });
+    jQuery('.social-share li').click(function () {
+        jQuery(this).find('.share').parent('li').nextAll('li').toggle();
+    });
+
 });
 
 
@@ -905,29 +944,29 @@ jQuery(document).ready(function() {
     jQuery('#auto-new-block .widget-settings, #tech-new-block .widget-settings, #education-new-block .widget-settings, #movie-new-block .widget-settings, #defalt-section-top-block .widget-settings').prependTo('.auto-block-2 .special-top-news');
 
 });
-jQuery(document).ready(function () {  
+jQuery(document).ready(function() {
 
-     jQuery('#map-state').change(function() {
-          jQuery('.map-result-detail').hide();
-         var getstate_id=jQuery(this).val();
-        
-          jQuery.ajax({
+    jQuery('#map-state').change(function() {
+        jQuery('.map-result-detail').hide();
+        var getstate_id = jQuery(this).val();
+
+        jQuery.ajax({
             url: Drupal.settings.basePath + 'get_map_data',
             type: 'post',
             beforeSend: function() {
-               jQuery('#widget-ajex-loader').show();
+                jQuery('#widget-ajex-loader').show();
             },
-            data: {'state_id': getstate_id,},
+            data: {'state_id': getstate_id, },
             success: function(data) {
-            var obj = jQuery.parseJSON(data);
-           jQuery('#widget-ajex-loader').hide();
-           if(obj.mapjson=='')
-           {
-               jQuery("#conssvg").html('Content Not Found');
-               
-           }else{
-            getconssvg(obj,'0');
-         }
+                var obj = jQuery.parseJSON(data);
+                jQuery('#widget-ajex-loader').hide();
+                if (obj.mapjson == '')
+                {
+                    jQuery("#conssvg").html('Content Not Found');
+
+                } else {
+                    getconssvg(obj, '0');
+                }
 
             },
             complete: function() {
@@ -937,38 +976,38 @@ jQuery(document).ready(function () {
                 console.log("Details: " + desc + "\nError:" + err);
             }
         });
-     });
-     
-  jQuery('a.colorbox-load').each(function () {
-    var href = jQuery(this).attr('href');
-    jQuery(this).attr('jshref', href);
-  });
-  jQuery('a.colorbox-load').bind('click', function (e) {
-    e.preventDefault();
-    var href = jQuery(this).attr('jshref');
-    if (!e.metaKey && e.ctrlKey) {
-      e.metaKey = e.ctrlKey;
-    }
-  });
-  jQuery("a.colorbox-load").bind("contextmenu",function(){
-   return false;
-  });
-     
-  // jQuery code for story form templates-tab   
-  var get_temp = jQuery('.form-field-name-field-story-select-templates .form-radio:checked').val(), 
-  set_temp = '.' + get_temp + "-tab-form";
-  jQuery(set_temp).removeClass('hide').siblings('.tab-form').addClass('hide');
-  jQuery('.form-field-name-field-story-select-templates').on('change', '.form-radio', function(){
-    get_value = jQuery(this).val(), 
-    set_class = '.' + get_value + "-tab-form", 
-    siblings = jQuery(this).closest('.templates-tab-wrapper').find(set_class).siblings('.tab-form');
+    });
+
+    jQuery('a.colorbox-load').each(function() {
+        var href = jQuery(this).attr('href');
+        jQuery(this).attr('jshref', href);
+    });
+    jQuery('a.colorbox-load').bind('click', function(e) {
+        e.preventDefault();
+        var href = jQuery(this).attr('jshref');
+        if (!e.metaKey && e.ctrlKey) {
+            e.metaKey = e.ctrlKey;
+        }
+    });
+    jQuery("a.colorbox-load").bind("contextmenu", function() {
+        return false;
+    });
+
+    // jQuery code for story form templates-tab   
+    var get_temp = jQuery('.form-field-name-field-story-select-templates .form-radio:checked').val(),
+            set_temp = '.' + get_temp + "-tab-form";
+    jQuery(set_temp).removeClass('hide').siblings('.tab-form').addClass('hide');
+    jQuery('.form-field-name-field-story-select-templates').on('change', '.form-radio', function() {
+        get_value = jQuery(this).val(),
+                set_class = '.' + get_value + "-tab-form",
+                siblings = jQuery(this).closest('.templates-tab-wrapper').find(set_class).siblings('.tab-form');
 //    if(get_value){
 //      siblings.find('input[type=text], textarea').val(''),
 //      siblings.find('input[type=radio], input[type=checkbox]').removeAttr('checked'),
 //      siblings.find('.image-widget-data input[value="Remove"]').trigger('mousedown');
 //    }
-    jQuery(this).closest('.templates-tab-wrapper').find(set_class).show().siblings('.tab-form').hide();
-  });   
-     
+        jQuery(this).closest('.templates-tab-wrapper').find(set_class).show().siblings('.tab-form').hide();
+    });
+
 });
 

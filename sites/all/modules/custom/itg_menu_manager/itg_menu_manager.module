@@ -302,7 +302,7 @@ function itg_menu_manager_form_validate($form, &$form_state) {
     $url = $values['url'];
 
     // Validation for dublicate menu and sub menu.
-    if ($url_type == 'internal') {
+    if ($url_type == 'internal' && !isset($_GET['edit_id'])) {
       // get values beween squre breaket.
       preg_match_all("/\[([^\]]*)\]/", $values['title'], $matches);
       // get tid
@@ -1248,10 +1248,7 @@ function itg_menu_manager_views_pre_render(&$view) {
     else {
       $count = $view->total_rows;
     }
-    $header_content = "";
-    $header_content .= '<span class="count">Count (' . $count . ') </span>';
-    $header_content .= l(t('Create Menu'), 'itg-menu-manager', array("query" => array("destination" => $arg[0] . "/" . $arg[1])));
-    $view->attachment_before = $header_content;
+    
 
     // Handel case for inactive category.
     // Here altered result of $views->result i.e. skip rowa which have inactive tid.
@@ -1273,6 +1270,10 @@ function itg_menu_manager_views_pre_render(&$view) {
       }
     }
     $view->result = $correct_view_result;
+    $header_content = "";
+    $header_content .= '<span class="count">Count (' . count($correct_view_result) . ') </span>';
+    $header_content .= l(t('Create Menu'), 'itg-menu-manager', array("query" => array("destination" => $arg[0] . "/" . $arg[1])));
+    $view->attachment_before = $header_content;
   }
 }
 

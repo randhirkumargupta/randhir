@@ -109,6 +109,9 @@ function itg_dbmigrate_migrate_api() {
       'itg_Photo_category' => array(
         'title' => t('Itg Photo Category Migration'),
       ),
+      'itg_story_list' => array(
+        'title' => t('Story Migrate by single xml'),
+      ),
       /*'itg_magazine' => array(
         'title' => t('Itg magazine Imports'),
       ),
@@ -170,6 +173,10 @@ function itg_dbmigrate_migrate_api() {
       'ItgStory' => array(
         'class_name' => 'ItgStoryMigration',
         'group_name' => 'itg_story',
+      ),
+      'ItgStoryList' => array(
+        'class_name' => 'ItgStoryListMigration',
+        'group_name' => 'itg_story_list',
       ),
       'ItgByline' => array(
         'class_name' => 'ItgBylineMigration',

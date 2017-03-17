@@ -236,4 +236,8 @@ jQuery(document).ready(function () {
     if(jQuery.inArray(ugc_value_id, ugc_arr) != -1) {
         jQuery('#'+ugc_value_id).trigger('click');
     }
+    
+    jQuery('#edit-zip-code').keyup(function() {
+                this.value = this.value.replace(/[^\d\.\-]/g,'');
+            });
 });

@@ -199,7 +199,7 @@ Drupal.behaviors.itg_widgets = {
                 },
                 success: function (data) {
 
-
+ jQuery('#widget-ajex-loader').hide();
                 },
                 error: function (xhr, desc, err) {
                     console.log(xhr);

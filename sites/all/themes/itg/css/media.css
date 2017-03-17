@@ -988,6 +988,17 @@
     clear: left;
   }
 
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .title.sponsors-parent {
+    padding-right: 93px;
+  }
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .title .spncor-tag {
+    width: 75px;
+    padding-right: 5px;
+  }
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .title .spncor-tag span {
+    font-size: 10px;
+  }
+
   /*end event page*/
   /*Start css program live page*/
   #block-itg-live-tv-live-tv-video-page .view-programme-content-live-tv .view-content .photo-list li:nth-child(3n+1) {
@@ -1257,6 +1268,12 @@
   .breakingnew-home .new-detail .marquee-container {
     width: 100%;
     height: 23px;
+    float: none;
+    line-height: 23px;
+  }
+  .breakingnew-home .new-detail .marquee-container .marquee-child {
+    height: 23px;
+    line-height: 23px;
   }
   .breakingnew-home .new-detail .social-share {
     display: none;
@@ -2177,6 +2194,7 @@
   }
   .oscar-layout-page .oscar-slider .bottom-slider li p {
     margin-top: 0;
+    overflow: hidden;
   }
   .oscar-layout-page .oscar-slider .bottom-slider i {
     color: #ccc;
@@ -2218,10 +2236,6 @@
               height: 100%;
           }
       }*/
-  .page-user .social-share a {
-    padding: 0 10px 0 45px;
-  }
-
   /*CSS Starts Photo landing page*/
   .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li, .view-programme-content-live-tv .view-content .photo-list li {
     width: 33.33333%;
@@ -2511,7 +2525,7 @@
     border-left: 1px solid #dddddd;
   }
   .story-section .buzzfeed-byline .byline .profile-detail {
-    width: 50%;
+    width: 49%;
   }
   .story-section .buzzfeed-byline .social-share-story {
     float: right;
@@ -2651,6 +2665,7 @@
   .view-front-end-global-search .attachment .count {
     font-size: 30px;
     font-size: 1.875rem;
+    line-height: 36px;
   }
   .view-front-end-global-search .views-exposed-widget .caln {
     position: inherit;
@@ -2942,7 +2957,6 @@
   #block-views-video-landing-header-block .video-header-left .social-likes {
     float: left;
     width: 15.5%;
-    overflow: hidden;
     padding: 0;
     border-bottom: none;
     margin-bottom: 0;

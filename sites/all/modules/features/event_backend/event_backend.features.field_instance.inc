@@ -42,6 +42,40 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_associate_sponsors-field_daywise_event'.
+  $field_instances['field_collection_item-field_associate_sponsors-field_daywise_event'] = array(
+    'bundle' => 'field_associate_sponsors',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_daywise_event',
+    'label' => 'Daywise',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
       'weight' => 0,
     ),
   );
@@ -83,7 +117,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'autocomplete_deluxe_taxonomy',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -427,6 +461,46 @@ function event_backend_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'field_collection_item-field_program_schedule-field_session_moderator'.
+  $field_instances['field_collection_item-field_program_schedule-field_session_moderator'] = array(
+    'bundle' => 'field_program_schedule',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 12,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_session_moderator',
+    'label' => 'Session Moderator',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_program_schedule-field_source'.
   $field_instances['field_collection_item-field_program_schedule-field_source'] = array(
     'bundle' => 'field_program_schedule',
@@ -553,6 +627,169 @@ function event_backend_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'field_collection_item-field_ticket_group_type-field_group_registration_fee_10'.
+  $field_instances['field_collection_item-field_ticket_group_type-field_group_registration_fee_10'] = array(
+    'bundle' => 'field_ticket_group_type',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Enter fees in INR',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 5,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_group_registration_fee_10',
+    'label' => 'Group Registration Fee (for 10 members)',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'max' => '',
+      'min' => 1,
+      'prefix' => '₹',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_ticket_group_type-field_group_registration_fee_5'.
+  $field_instances['field_collection_item-field_ticket_group_type-field_group_registration_fee_5'] = array(
+    'bundle' => 'field_ticket_group_type',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Enter fees in INR',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 4,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_group_registration_fee_5',
+    'label' => 'Group Registration Fee (for 5 members)',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'max' => '',
+      'min' => 1,
+      'prefix' => '₹',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_ticket_group_type-field_individual_registration_fe'.
+  $field_instances['field_collection_item-field_ticket_group_type-field_individual_registration_fe'] = array(
+    'bundle' => 'field_ticket_group_type',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Enter fees in INR',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_individual_registration_fe',
+    'label' => 'Individual Registration Fee',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'max' => '',
+      'min' => 1,
+      'prefix' => '₹',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_ticket_group_type-field_participate_type'.
+  $field_instances['field_collection_item-field_ticket_group_type-field_participate_type'] = array(
+    'bundle' => 'field_ticket_group_type',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 6,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_participate_type',
+    'label' => 'Ticket Type',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 0,
+    ),
+  );
+
   // Exported field_instance: 'node-event_backend-body'.
   $field_instances['node-event_backend-body'] = array(
     'bundle' => 'event_backend',
@@ -641,7 +878,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete_tags',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -686,7 +923,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete_tags',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
@@ -727,7 +964,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 6,
+      'weight' => 12,
     ),
   );
 
@@ -770,7 +1007,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -1028,7 +1265,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -1073,7 +1310,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete_tags',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -1112,7 +1349,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 23,
+      'weight' => 24,
     ),
   );
 
@@ -1188,7 +1425,7 @@ function event_backend_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 18,
+      'weight' => 19,
     ),
   );
 
@@ -1231,7 +1468,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 21,
+      'weight' => 22,
     ),
   );
 
@@ -1275,7 +1512,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 22,
+      'weight' => 23,
     ),
   );
 
@@ -1314,7 +1551,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 19,
+      'weight' => 20,
     ),
   );
 
@@ -1357,7 +1594,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 20,
+      'weight' => 21,
     ),
   );
 
@@ -1400,7 +1637,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 25,
+      'weight' => 26,
     ),
   );
 
@@ -1443,7 +1680,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 24,
+      'weight' => 25,
     ),
   );
 
@@ -1548,7 +1785,7 @@ function event_backend_field_default_field_instances() {
         'replace_label' => 0,
       ),
       'type' => 'field_collection_embed',
-      'weight' => 4,
+      'weight' => 12,
     ),
   );
 
@@ -1738,7 +1975,7 @@ function event_backend_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 26,
+      'weight' => 27,
     ),
   );
 
@@ -1770,7 +2007,7 @@ function event_backend_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_event_type',
-    'label' => 'Event Type',
+    'label' => 'Registration Type',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1781,7 +2018,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 6,
+      'weight' => 12,
     ),
   );
 
@@ -1864,7 +2101,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -2059,7 +2296,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 10,
+      'weight' => 14,
     ),
   );
 
@@ -2106,7 +2343,7 @@ function event_backend_field_default_field_instances() {
         'replace_label' => 0,
       ),
       'type' => 'field_collection_embed',
-      'weight' => 6,
+      'weight' => 12,
     ),
   );
 
@@ -2210,7 +2447,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -2253,7 +2490,7 @@ function event_backend_field_default_field_instances() {
         'rows' => 4,
       ),
       'type' => 'text_textarea',
-      'weight' => 27,
+      'weight' => 28,
     ),
   );
 
@@ -2396,6 +2633,51 @@ function event_backend_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-event_backend-field_ticket_group_type'.
+  $field_instances['node-event_backend-field_ticket_group_type'] = array(
+    'bundle' => 'event_backend',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 50,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ticket_group_type',
+    'label' => 'Ticket Type',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 13,
     ),
   );
 
@@ -2546,7 +2828,9 @@ function event_backend_field_default_field_instances() {
   t('Event URL');
   t('Flashback');
   t('Force Registration Open');
+  t('Group Registration Fee (for 10 members)');
   t('Group Registration Fee (for 5 member) ');
+  t('Group Registration Fee (for 5 members)');
   t('Group Registration Fee (upto 10 member)');
   t('Heading Background Color');
   t('Highlighted Font Color');
@@ -2565,9 +2849,11 @@ function event_backend_field_default_field_instances() {
   t('Program Title color');
   t('Programme');
   t('Registration Close Date');
+  t('Registration Type');
   t('Registration start date');
   t('Select Program');
   t('Select Speaker');
+  t('Session Moderator');
   t('Session Title ');
   t('Short Description');
   t('Speakers');
@@ -2579,6 +2865,7 @@ function event_backend_field_default_field_instances() {
   t('Terms & Conditions');
   t('The complete description of the event.');
   t('This displays information about the event.');
+  t('Ticket Type');
   t('Twitter');
   t('Values – Paid, Free and Invite');
   t('Video');

@@ -33,6 +33,13 @@ function itg_common_init() {
     drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.admin.js');
   }
+  
+  if (arg(0) == 'funalytics') {
+    $settings = array();
+    $settings['base_url'] = $base_url;
+    drupal_add_js(array('itg_funalytics' => array('settings' => $settings)), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_funalytics.js');
+  }
 }
 
 /**
@@ -58,7 +65,13 @@ function itg_common_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
-
+  
+  $items['funalytics-popup'] = array(
+    'page callback' => 'itg_funalytics_popup',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
@@ -68,6 +81,15 @@ function itg_common_menu() {
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
+  $arg = arg();
+  
+  $settings = array();
+  
+  $settings['formid'] = $form_id;
+  $settings['arg_url'] = $form_id;
+  drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_admin_form.js');
+  
   
   //code for preview_changes button remove
   if (!empty($form['actions']['preview_changes'])) {
@@ -345,7 +367,7 @@ function itg_common_cancel_button($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-
+  //p($form['#id']);
   $settings = array();
 
   $settings['formid'] = $form['#id'];
@@ -359,7 +381,12 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
   if ($form['#id'] == 'views-exposed-form-custom-html-widgets-list-page') {
     $form['title']['#autocomplete_path'] = 'content-title-list/custom_html_widgets/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Widget name'));
-  }
+  } else if ($form['#id'] == 'views-exposed-form-funalytics-list-page-1' 
+          || $form['#id'] == 'views-exposed-form-funalytics-list-page') {
+    $form['title']['#autocomplete_path'] = 'content-title-list/itg_funalytics/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }   
+  
 }
 
 /**
@@ -400,6 +427,7 @@ function itg_common_node_presave($node) {
     case 'survey':
     case 'quiz':
     case 'newsletter':
+    case 'itg_funalytics':
       if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
         if ($node->op == 'Publish') {
           $node->status = 1;
@@ -663,31 +691,45 @@ function itg_content_inactive() {
  */
 function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255) {
   $titlte = "";
+  $positions_array = array();
+  $left_smiles = "";
+  $right_smiles = "";
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_emoji', 'emoji', 'emoji.entity_id=n.nid');
+  $query->leftJoin('field_data_field_emoji_2', 'emoji_2', 'emoji_2.entity_id=n.nid');
   $query->leftJoin('field_data_field_emoji_position', 'emoji_pos', 'emoji_pos.entity_id=n.nid');
   $query->fields('n', array('title'));
   $query->fields('emoji', array('field_emoji_value'));
+  $query->fields('emoji_2', array('field_emoji_2_value'));
   $query->fields('emoji_pos', array('field_emoji_position_value'));
   $query->condition('n.nid', $nid);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  if (count($result)) {
-    $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));
-    $smilies = "";
-    if (!empty($result[0]['field_emoji_value'])) {
+  foreach($result as $positions) {
+    if(!empty($positions['field_emoji_position_value'])) {
+      $positions_array[] = $positions['field_emoji_position_value']; 
+    }
+  }
+  if(in_array('left', $positions_array)) {
+    if(!empty($result[0]['field_emoji_value'])) {
       // Get all the smiley images.
       preg_match_all('/<img[^>]*>/s', $result[0]['field_emoji_value'], $images);
       // Implode all images in case of muliple smiley.
-      $smilies = implode("", $images[0]);
+      $left_smiles = implode("", $images[0]);
     }
-    if ($result[0]['field_emoji_position_value'] == 'left') {
-      // Add smiley to left;
-      $titlte = '<span class="smilies-title">' . $smilies . '</span>' . $titlte;
+  }
+  if (in_array('right', $positions_array)) {
+    if(!empty($result[0]['field_emoji_2_value'])) {
+      // Get all the smiley images.
+      preg_match_all('/<img[^>]*>/s', $result[0]['field_emoji_2_value'], $images_2);
+      // Implode all images in case of muliple smiley.
+      $right_smiles = implode("", $images_2[0]);
     }
-    else {
-      // Add smiley to right;
-      $titlte = $titlte . '<span class="smilies-title">' . $smilies . '</span>';
-    }
+  }
+  if (count($result)) {
+    $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));    
+    // Add smiley to right;
+    $titlte = '<span class="smilies-title">' . $left_smiles . '</span>' . $titlte . '<span class="smilies-title">' . $right_smiles . '</span>';
+    
     return $titlte;
   }
 }
@@ -771,12 +813,19 @@ function itg_photogallery_embed() {
  * Helper function to get videogallery.
  */
 function itg_videogallery_embed() {
-  if (!empty($_GET['gid']))
-  {
-   if (function_exists('get_video_in_fieldcollection_by_nid'))
-    {
+  if (!empty($_GET['gid'])) {
+    if (function_exists('get_video_in_fieldcollection_by_nid')) {
       $videoids = get_video_in_fieldcollection_by_nid($_GET['gid']);
     }
     return theme('itg_videogallery_embed', array('data' => $videoids));
   }
+}
+
+/**
+ * callback for funalytics-popup.
+ */
+function itg_funalytics_popup() {
+  
+  echo views_embed_view('front_funalytics_list', 'block_1');
+  //exit;
 }

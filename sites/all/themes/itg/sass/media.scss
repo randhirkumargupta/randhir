@@ -1027,6 +1027,18 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
         clear: left;
     }
 }
+#block-itg-event-backend-program-tab-block .event-listing .side-right .title{
+    &.sponsors-parent {
+        padding-right: 93px;
+    } 
+    .spncor-tag{
+        width: 75px;
+        padding-right: 5px;
+        span{
+            font-size: 10px;
+        }
+    }
+} 
 /*end event page*/
 
 /*Start css program live page*/
@@ -1272,6 +1284,12 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
             .marquee-container{
                 width: 100%;
                 height: 23px;
+                float: none;
+                line-height: 23px;
+                .marquee-child{
+                    height: 23px;
+                    line-height: 23px;
+                }
             }
             .social-share{
                 display: none;
@@ -1462,7 +1480,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text{
                     vertical-align: top;
                 }
             }
-        }
+        }        
     }
 }
 /*Globle search page css end*/
@@ -2276,7 +2294,8 @@ footer .footer-top .footer-social-link{
             }
             p{
                 margin-top:0;
-            }
+                overflow: hidden;
+            }            
         }
         i{
             color: #ccc;
@@ -2322,10 +2341,7 @@ footer .footer-top .footer-social-link{
             background: transparent;
             height: 100%;
         }
-    }*/
-    .page-user .social-share a{
-       padding: 0 10px 0 45px;
-    }
+    }*/    
     
      /*CSS Starts Photo landing page*/
     .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo, .view-programme-content-live-tv{
@@ -2630,7 +2646,7 @@ footer .footer-top .footer-social-link{
         }
         .buzzfeed-byline{         
             .byline .profile-detail{                
-                width: 50%;
+                width: 49%;
             }
             .social-share-story{
                 float: right;
@@ -2738,6 +2754,7 @@ footer .footer-top .footer-social-link{
             }        
             .count{
                 @include font(30px);
+                line-height: 36px;
             }        
         }
         .views-exposed-widget .caln{
@@ -3030,8 +3047,7 @@ footer .footer-top .footer-social-link{
             }
             .social-likes  {
                 @include float(left);
-                width: 15.5%;                
-                overflow: hidden;
+                width: 15.5%; 
                 padding: 0;
                 border-bottom: none;
                 margin-bottom: 0;

@@ -953,6 +953,12 @@ img {
 
 /*End Watch right Now suggest End*/
 /*Start photo section slider Homepage*/
+.featured_photo_carousel .widget-settings, .tech-block_5 .widget-settings, .auto-block_5 .widget-settings {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 1;
+}
 .featured_photo_carousel .widget-title, .tech-block_5 .widget-title, .auto-block_5 .widget-title {
   position: absolute;
   top: 10px;
@@ -1380,6 +1386,14 @@ img {
   /*Start photo section slider*/
   /*End photo section slider*/
 }
+.tech-layout-page .section_wise_order-buying-guid .widget-settings, .tech-layout-page .section_wise_order-in-depth .widget-settings {
+  position: absolute;
+  z-index: 1;
+}
+.tech-layout-page .section_wise_order-in-depth .widget-settings {
+  left: 10px;
+  top: 10px;
+}
 .tech-layout-page .itg-layout-672 {
   height: 672px;
   overflow: hidden;
@@ -1780,7 +1794,7 @@ img {
 .education-layout-page .how-made-it ul li + li {
   border-top: 1px solid #ddd;
 }
-.education-layout-page .section_wise_order-edu-tips-and-trick {
+.education-layout-page .droppable .section_wise_order-edu-tips-and-trick {
   overflow: auto;
   border: 1px solid #ddd;
   padding: 10px;
@@ -2426,12 +2440,62 @@ img {
 
 /*CSS End for movie page*/
 /* CSS For Election Page */
-.election-page h1 {
-  margin-top: 60px;
+.election-page .election-top-block {
+  margin-top: 40px;
+  position: relative;
+  z-index: 10;
 }
-.election-page h1 .disc-share a {
+.election-page .election-top-block h1 {
+  display: inline;
+}
+.election-page .election-top-block ul {
+  list-style-type: none;
+}
+.election-page .election-top-block ul li {
+  display: inline-block;
+  vertical-align: top;
+  padding-right: 8px;
+}
+.election-page .election-top-block ul li a, .election-page .election-top-block ul li span {
+  background: #000;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  display: block;
+  color: #fff;
+  text-align: center;
+  line-height: 23px;
+  font-size: 15px;
+}
+@media screen and (min-width: 768px) {
+  .election-page .election-top-block ul li a, .election-page .election-top-block ul li span {
+    width: 23px;
+    height: 23px;
+    line-height: 25px;
+  }
+}
+.election-page .election-top-block ul li a.share, .election-page .election-top-block ul li span.share {
+  color: #d0d0d0;
+}
+.election-page .election-top-block ul li a.share, .election-page .election-top-block ul li a.google, .election-page .election-top-block ul li span.share, .election-page .election-top-block ul li span.google {
+  background: transparent;
+}
+.election-page .election-top-block ul li a.facebook, .election-page .election-top-block ul li span.facebook {
+  background: #0b4887;
+}
+.election-page .election-top-block ul li a.twitter, .election-page .election-top-block ul li span.twitter {
+  background: #05a3d2;
+}
+.election-page .election-top-block ul li a.google, .election-page .election-top-block ul li span.google {
+  background: url(../images/google-icon.jpg) no-repeat center center;
+}
+.election-page .election-top-block .social-share {
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 15px;
+}
+.election-page .election-top-block .social-share i.fa-share-alt {
   font-size: 20px;
-  color: #b6b6b6;
 }
 .election-page .left-side .itg-415-layout .droppable {
   min-height: 415px;
@@ -3109,3 +3173,6 @@ img {
 }
 
 /*css End common highlight */
+.featured-news .featured-post span.smilies-title img {
+  width: inherit;
+}

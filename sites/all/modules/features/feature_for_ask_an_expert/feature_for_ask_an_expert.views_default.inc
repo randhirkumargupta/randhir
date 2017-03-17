@@ -1179,6 +1179,65 @@ else
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'user_selection_for_section');
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: User: Section (field_user_section) */
+  $handler->display->display_options['filters']['field_user_section_tid']['id'] = 'field_user_section_tid';
+  $handler->display->display_options['filters']['field_user_section_tid']['table'] = 'field_data_field_user_section';
+  $handler->display->display_options['filters']['field_user_section_tid']['field'] = 'field_user_section_tid';
+  $handler->display->display_options['filters']['field_user_section_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_user_section_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_user_section_tid']['expose']['operator_id'] = 'field_user_section_tid_op';
+  $handler->display->display_options['filters']['field_user_section_tid']['expose']['label'] = 'Section';
+  $handler->display->display_options['filters']['field_user_section_tid']['expose']['operator'] = 'field_user_section_tid_op';
+  $handler->display->display_options['filters']['field_user_section_tid']['expose']['identifier'] = 'field_user_section_tid';
+  $handler->display->display_options['filters']['field_user_section_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
+  $handler->display->display_options['filters']['field_user_section_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_user_section_tid']['vocabulary'] = 'category_management';
+  /* Filter criterion: User: Roles */
+  $handler->display->display_options['filters']['rid']['id'] = 'rid';
+  $handler->display->display_options['filters']['rid']['table'] = 'users_roles';
+  $handler->display->display_options['filters']['rid']['field'] = 'rid';
+  $handler->display->display_options['filters']['rid']['operator'] = 'not';
+  $handler->display->display_options['filters']['rid']['value'] = array(
+    3 => '3',
+  );
+  $handler->display->display_options['filters']['rid']['group'] = 1;
+  /* Filter criterion: User: Name */
+  $handler->display->display_options['filters']['uid_1']['id'] = 'uid_1';
+  $handler->display->display_options['filters']['uid_1']['table'] = 'users';
+  $handler->display->display_options['filters']['uid_1']['field'] = 'uid';
+  $handler->display->display_options['filters']['uid_1']['operator'] = 'not in';
+  $handler->display->display_options['filters']['uid_1']['value'] = array(
+    0 => 0,
+  );
+  $handler->display->display_options['filters']['uid_1']['group'] = 1;
   $handler->display->display_options['path'] = 'user-selection';
   $export['user_selection'] = $view;
 

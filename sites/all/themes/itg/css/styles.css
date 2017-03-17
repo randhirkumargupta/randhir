@@ -44,6 +44,10 @@ h1, h2, h3, h4 {
   font-family: "Roboto", sans-serif;
 }
 
+button {
+  outline: none;
+}
+
 h1 {
   font-size: 40px;
   line-height: 46px;
@@ -343,11 +347,15 @@ p {
   word-wrap: break-word;
 }
 
+#main {
+  min-height: 500px;
+}
+
 /*start header css*/
 header {
   margin-bottom: 30px;
   position: relative;
-  z-index: 99999;
+  z-index: 9999;
 }
 
 #block-itg-layout-manager-header-block {
@@ -1581,6 +1589,10 @@ footer .multiple-items-footer i.slick-next {
   color: #fff;
 }
 
+.big-news .smilies-title, .featured-post .smilies-title {
+  display: inline-block !important;
+}
+
 @-webkit-keyframes blinker {
   from {
     opacity: 1.0;
@@ -1708,9 +1720,9 @@ footer .multiple-items-footer i.slick-next {
 }
 .featured-news .featured-post a {
   display: block;
-}
-.featured-news .featured-post a img {
-  margin-bottom: 10px;
+  /*            img{
+                  margin-bottom: 10px;
+              }*/
 }
 .featured-news .featured-post a:hover {
   color: #193984;
@@ -2267,6 +2279,24 @@ footer .multiple-items-footer i.slick-next {
 }
 .story-section .comment-mobile ul li a i {
   font-size: 16px;
+}
+.story-section .comment-mobile ul li a.unflag-action {
+  position: relative;
+  font-family: FontAwesome;
+  pointer-events: none;
+}
+.story-section .comment-mobile ul li a.unflag-action:after {
+  content: "\f00c";
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  font-size: 11px;
+  margin-left: 0;
+  color: #474747;
+  margin-top: 0;
+}
+.story-section .comment-mobile ul li a.unflag-action span {
+  font-family: "Roboto", sans-serif;
 }
 .story-section .comment-mobile ul.social-share {
   display: none;
@@ -2961,6 +2991,22 @@ footer .multiple-items-footer i.slick-next {
   display: block;
   font-size: 11px;
   font-size: 0.6875rem;
+  font-family: "Roboto", sans-serif;
+}
+.story-section .buzzfeed-byline .social-share-story li a.unflag-action {
+  position: relative;
+  font-family: FontAwesome;
+  pointer-events: none;
+}
+.story-section .buzzfeed-byline .social-share-story li a.unflag-action:after {
+  content: "\f00c";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  font-size: 11px;
+  margin-left: -6px;
+  color: #474747;
+  margin-top: -2px;
 }
 .story-section .story-associate-content {
   zoom: 1;
@@ -3246,8 +3292,6 @@ footer .multiple-items-footer i.slick-next {
 }
 .buzz-feedback .buzz-section {
   margin: 60px 0;
-  padding-left: 15px;
-  padding-right: 15px;
 }
 .buzz-feedback .buzz-section > * {
   margin-bottom: 15px;
@@ -3341,6 +3385,9 @@ footer .multiple-items-footer i.slick-next {
 }
 .buzz-feedback .comment-mobile li.mail-to-author {
   display: none;
+}
+.buzz-feedback .story-left-section .buzzfeed-byline, .buzz-feedback .story-left-section .story-right {
+  padding: 0;
 }
 
 .related-story-page {
@@ -5134,6 +5181,7 @@ h1.category-heading {
 #block-views-video-landing-header-block .video-landing-header {
   background: transparent;
   padding: 0;
+  margin-top: 10px;
 }
 #block-views-video-landing-header-block .video-header-left {
   zoom: 1;
@@ -6812,7 +6860,7 @@ section.sidebar .block-itg-ads {
 }
 #block-itg-layout-manager-header-block .menu-login .user-menu {
   position: relative;
-  z-index: -99999;
+  z-index: 99999;
 }
 #block-itg-layout-manager-header-block .menu-login .user-menu a {
   cursor: pointer;
@@ -7489,6 +7537,9 @@ section.sidebar .block-itg-ads {
   float: left;
   margin-right: 15px;
 }
+.oscar-layout-page .oscar-features .col-md-6 p {
+  overflow: hidden;
+}
 .oscar-layout-page .oscar-news a {
   display: block;
 }
@@ -7709,6 +7760,42 @@ section.sidebar .block-itg-ads {
   padding: 10px;
   font-size: 16px;
   color: #000;
+  line-height: 22px;
+  position: relative;
+}
+#block-itg-event-backend-program-tab-block .event-listing .side-right .title .spncor-tag {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -37px;
+  background: #d1d1d1;
+  width: 105px;
+  height: 73px;
+  text-align: center;
+}
+#block-itg-event-backend-program-tab-block .event-listing .side-right .title .spncor-tag:before {
+  width: 0;
+  height: 0;
+  border-bottom: 73px solid #d1d1d1;
+  border-left: 30px solid transparent;
+  content: '';
+  position: absolute;
+  left: -30px;
+  top: 0;
+}
+#block-itg-event-backend-program-tab-block .event-listing .side-right .title .spncor-tag span {
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 4px;
+  display: block;
+  margin-top: 4px;
+}
+#block-itg-event-backend-program-tab-block .event-listing .side-right .title .spncor-tag img {
+  width: 85px;
+  height: 33px;
+}
+#block-itg-event-backend-program-tab-block .event-listing .side-right .title.sponsors-parent {
+  padding-right: 140px;
 }
 #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail {
   zoom: 1;
@@ -8015,6 +8102,40 @@ section.sidebar .block-itg-ads {
   font-size: 16px;
   font-size: 1rem;
   color: #ef3c24;
+}
+#block-views-program-schedule-block-1 .program-sch-sponcor {
+  text-align: right;
+}
+#block-views-program-schedule-block-1 .program-sch-sponcor div {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  background: #d1d1d1;
+  width: 190px;
+  height: 54px;
+  line-height: 54px;
+  padding-right: 15px;
+}
+#block-views-program-schedule-block-1 .program-sch-sponcor div:before {
+  width: 0;
+  height: 0;
+  border-bottom: 54px solid #d1d1d1;
+  border-left: 30px solid transparent;
+  content: '';
+  position: absolute;
+  left: -30px;
+  top: 0;
+}
+#block-views-program-schedule-block-1 .program-sch-sponcor div span {
+  margin-right: 10px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+}
+#block-views-program-schedule-block-1 .program-sch-sponcor div img {
+  width: 85px;
+  height: 33px;
+  vertical-align: middle;
 }
 
 #block-menu-menu-event-menu ul {
@@ -11687,6 +11808,10 @@ h1.about-us-heading + div p {
   width: 65px;
   height: 65px;
   padding-right: 0;
+  border: 1px solid #515567;
+  border-radius: 50%;
+  margin: 10px;
+  overflow: hidden;
 }
 #main-container-budget .budget-predictor-social-share .share-msg {
   font-weight: 700;
@@ -12180,6 +12305,7 @@ h1.about-us-heading + div p {
 /*magzine lock icon end*/
 /*other comment section start*/
 #content #other-comment {
+  margin-top: 40px;
   /*        #comments .comment-form .form-actions{
               padding-left: 0;
           }*/
@@ -12367,7 +12493,7 @@ h1.about-us-heading + div p {
 span.smilies-title {
   width: auto;
   height: auto;
-  display: inline-block;
+  display: inline !important;
   vertical-align: middle;
   float: none !important;
   margin: 0 !important;
@@ -12376,8 +12502,9 @@ span.smilies-title {
 span.smilies-title img {
   display: inline;
   max-width: inherit;
-  width: auto;
+  width: auto !important;
   margin: 0 !important;
+  float: none !important;
 }
 
 /* css for story-photo-list starts here */
@@ -12546,28 +12673,38 @@ span.smilies-title img {
   color: #a1a1a1;
   font-family: roboto;
 }
+#block-itg-layout-manager-front-end-breadcrumb a:hover {
+  text-decoration: underline;
+}
 #block-itg-layout-manager-front-end-breadcrumb .container div.lft {
   display: inline-block;
   vertical-align: top;
 }
 
-.node-type-photogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-videogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-podcast #block-itg-layout-manager-front-end-breadcrumb, .section-videos #block-itg-layout-manager-front-end-breadcrumb {
+.node-type-photogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-videogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-podcast #block-itg-layout-manager-front-end-breadcrumb, .section-videos #block-itg-layout-manager-front-end-breadcrumb, .section-photo #block-itg-layout-manager-front-end-breadcrumb {
   background: #171717;
 }
 
-/*css breadcrumb end*/
-iframe[id*="twitter-widget"] {
-  width: 100% !important;
+.node-type-podcast #block-itg-layout-manager-front-end-breadcrumb {
+  background: #000;
 }
 
+/*css breadcrumb end*/
+/*iframe{
+  &[id*="twitter-widget"]{
+    width: 100% !important;
+  }
+}*/
 .photo-heading {
   font-size: 32px;
   margin-bottom: 25px;
   color: #fff;
+  line-height: 42px;
 }
 
 .video-heading {
   color: #fff;
   font-size: 24px;
   margin-bottom: 10px;
+  line-height: 34px;
 }

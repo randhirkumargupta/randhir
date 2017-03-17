@@ -71,6 +71,11 @@ function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_i
 
     switch ($form['#id']) {
 
+        case 'views-exposed-form-comparative-report-cm-page':
+            $form['uid']['#attributes'] = array('placeholder' => 'Search by user name');
+            $form['mail']['#attributes'] = array('placeholder' => 'Search by user email');
+            $form['mail']['#autocomplete_path'] = 'itg-reports-mail/autocomplete';
+          break;
         case 'views-exposed-form-report-filed-content-page':
             // remove archive and unpublish on list
             $option = array();
@@ -341,6 +346,37 @@ function itg_reports_missing_year(&$chart_data) {
         $chart_data = array_merge($chart_data, $data);
         array_multisort($chart_data);
     }
+}
+
+/**
+ * This function use for entry user on social node share 
+ */
+function itg_report_get_node_share($nid, $count = 0) {
+
+    $query = db_select('itg_node_share_count', 'insc')
+            ->fields('insc', array('share_count'))
+            ->condition('insc.nid', $nid, '=');
+    $result = $query->execute()->fetchField();
+    if (!empty($result) && $count < $result) {
+        $count = (int) $count + (int) $result;
+    }
+
+    $pre_save = array(
+        'nid' => $nid,
+        'share_count' => $count
+    );
+  
+    // iNSERT INTO DATABASE
+   db_merge('itg_node_share_count')
+  	->key(array(
+        'nid' => $nid))
+  	->fields($pre_save)
+  	->execute();
+    $query1 = db_select('itg_node_share_count', 'insc')
+            ->fields('insc', array('share_count'))
+            ->condition('insc.nid', $nid, '=');
+    $result1 = $query1->execute()->fetchField();
+    return $result1;
 }
 
 /**

@@ -269,7 +269,7 @@ function feature_for_issue_magazin_widget_views_default_views() {
   $handler->display->display_options['fields']['counter']['label'] = 'S. No.';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
-  /* Field: Field: DOB */
+  /* Field: Field: Issue date */
   $handler->display->display_options['fields']['field_story_issue_date']['id'] = 'field_story_issue_date';
   $handler->display->display_options['fields']['field_story_issue_date']['table'] = 'field_data_field_story_issue_date';
   $handler->display->display_options['fields']['field_story_issue_date']['field'] = 'field_story_issue_date';
@@ -381,7 +381,7 @@ function feature_for_issue_magazin_widget_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Field: DOB (field_story_issue_date) */
+  /* Filter criterion: Field: Issue date (field_story_issue_date) */
   $handler->display->display_options['filters']['field_story_issue_date_value']['id'] = 'field_story_issue_date_value';
   $handler->display->display_options['filters']['field_story_issue_date_value']['table'] = 'field_data_field_story_issue_date';
   $handler->display->display_options['filters']['field_story_issue_date_value']['field'] = 'field_story_issue_date_value';
@@ -449,7 +449,7 @@ function feature_for_issue_magazin_widget_views_default_views() {
   $handler->display->display_options['fields']['counter']['label'] = 'S. No';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
-  /* Field: Field: DOB */
+  /* Field: Field: Issue date */
   $handler->display->display_options['fields']['field_story_issue_date']['id'] = 'field_story_issue_date';
   $handler->display->display_options['fields']['field_story_issue_date']['table'] = 'field_data_field_story_issue_date';
   $handler->display->display_options['fields']['field_story_issue_date']['field'] = 'field_story_issue_date';
@@ -494,6 +494,8 @@ function feature_for_issue_magazin_widget_views_default_views() {
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]  </span>';
   /* Field: Global: PHP */
   $handler->display->display_options['fields']['php']['id'] = 'php';
   $handler->display->display_options['fields']['php']['table'] = 'views';
@@ -531,7 +533,7 @@ print \' <a href="move-dont-miss-widget-node/issue_magazin_widget/0/0/\'.$row->n
   $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'issue_magazin_widget';
-  /* Filter criterion: Field: DOB (field_story_issue_date) */
+  /* Filter criterion: Field: Issue date (field_story_issue_date) */
   $handler->display->display_options['filters']['field_story_issue_date_value']['id'] = 'field_story_issue_date_value';
   $handler->display->display_options['filters']['field_story_issue_date_value']['table'] = 'field_data_field_story_issue_date';
   $handler->display->display_options['filters']['field_story_issue_date_value']['field'] = 'field_story_issue_date_value';
