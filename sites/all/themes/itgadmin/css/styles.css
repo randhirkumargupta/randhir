@@ -657,7 +657,7 @@ div.filefield-sources-list a.active {
   box-shadow: 0 0 2px #ee4d4d;
 }
 
-.btn-small, [id*="itg-social-media-form"] > div fieldset .form-submit, .node-event_backend-form .anchor-order-reorder, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .form-file + .form-submit, .save-checklist-ordre .save-checklist, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .form-file + .form-submit, [id*="loyality-reward-points-configuration-form"] .form-type-managed-file .form-managed-file .form-file + .form-submit, #itg_video_content .ftp-server .video_filters > div.apply_video_filter span, #itg_video_content .ftp-server .video_filters > div.reset_video_filter span, .itg_menu_manager_form .form-item-category-icon .form-submit, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .field-name-field-technology-sample-photo .form-type-managed-file .image-widget-data input[type="file"] + .form-submit, [id*="itg-manage-budget"] .form-managed-file #edit-budget-image-upload-button, #itg-budget-predictor-search-form .form-submit, #itg-budget-predictor-search-form .custom-url-search, #itg-budget-predictor-search-user-form .form-submit, #itg-budget-predictor-search-user-form .custom-url-search, [id*="daily-motion-video-dashboard"] fieldset #edit-display-button, [id*="daily-motion-video-dashboard"] #edit-reset, .page-admin-structure-taxonomy-cheaper-dearer .form-file + .form-submit, .comment-view .publish-ugc-comments, .multi_reporter .multi-byline, .byline-list .save-byline, .itg-smi .data-popup-link, [id*="field-photo-story-values"] tbody tr td .form-type-managed-file .image-widget-data input[type="file"] + .form-submit, #itg-user-log-api-form > div > div.user-log-filter-btn .form-submit, #itg-user-log-api-form-visited > div > div.user-log-filter-btn .form-submit, #itg-user-log-api-form > div > div.user-log-filter-btn a, #itg-user-log-api-form-visited > div > div.user-log-filter-btn a, [id*="itg-user-block-api-form"] .user-log-filter-btn .user-block-apply, [id*="itg-user-block-api-form"] .user-log-filter-btn .user-log-reset {
+.btn-small, [id*="itg-social-media-form"] > div fieldset .form-submit, .node-event_backend-form .anchor-order-reorder, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .form-file + .form-submit, .search-criteria .form-submit, .save-checklist-ordre .save-checklist, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .form-file + .form-submit, [id*="loyality-reward-points-configuration-form"] .form-type-managed-file .form-managed-file .form-file + .form-submit, #itg_video_content .ftp-server .video_filters > div.apply_video_filter span, #itg_video_content .ftp-server .video_filters > div.reset_video_filter span, .itg_menu_manager_form .form-item-category-icon .form-submit, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .field-name-field-technology-sample-photo .form-type-managed-file .image-widget-data input[type="file"] + .form-submit, [id*="itg-manage-budget"] .form-managed-file #edit-budget-image-upload-button, #itg-budget-predictor-search-form .form-submit, #itg-budget-predictor-search-form .custom-url-search, #itg-budget-predictor-search-user-form .form-submit, #itg-budget-predictor-search-user-form .custom-url-search, [id*="daily-motion-video-dashboard"] fieldset #edit-display-button, [id*="daily-motion-video-dashboard"] #edit-reset, .page-admin-structure-taxonomy-cheaper-dearer .form-file + .form-submit, .comment-view .publish-ugc-comments, .multi_reporter .multi-byline, .byline-list .save-byline, .itg-smi .data-popup-link, [id*="field-photo-story-values"] tbody tr td .form-type-managed-file .image-widget-data input[type="file"] + .form-submit, #itg-user-log-api-form > div > div.user-log-filter-btn .form-submit, #itg-user-log-api-form-visited > div > div.user-log-filter-btn .form-submit, #itg-user-log-api-form > div > div.user-log-filter-btn a, #itg-user-log-api-form-visited > div > div.user-log-filter-btn a, [id*="itg-user-block-api-form"] .user-log-filter-btn .user-block-apply, [id*="itg-user-block-api-form"] .user-log-filter-btn .user-log-reset {
   height: 28px;
   line-height: 26px;
   padding: 0 10px;
@@ -5456,10 +5456,10 @@ div.node #comments h2 {
   vertical-align: top;
 }
 .view-related-content-new .view-filters .views-exposed-form .views-exposed-widget.views-submit-button, .view-related-content-new .view-filters .views-exposed-form .views-exposed-widget.views-reset-button {
-  margin-top: 18px;
+  margin-top: 28px;
 }
 .view-related-content-new .scroll-wrap {
-  max-height: 320px;
+  max-height: 280px;
   width: 100%;
   overflow: auto;
 }
@@ -5488,6 +5488,7 @@ div.node #comments h2 {
   position: absolute;
   right: 129px;
   text-align: right;
+  padding: 0 8px 5px;
   top: 0;
   width: 50%;
   z-index: 9999;

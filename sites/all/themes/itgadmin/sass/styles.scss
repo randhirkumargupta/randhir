@@ -5032,12 +5032,12 @@ div.node{
       width: auto;
       vertical-align: top;
       &.views-submit-button, &.views-reset-button{
-        margin-top: 18px;
+        margin-top: 28px;
       }
     }
   }
   .scroll-wrap{
-    max-height: 320px;
+    max-height: 280px;
     width: 100%;
     overflow: auto;
   }
@@ -5068,9 +5068,13 @@ div.node{
   position: absolute;
   right: 129px;
   text-align: right;
+  padding: 0 8px 5px;
   top: 0;
   width: 50%;
   z-index: 9999;
+  .form-submit{
+    @extend .btn-small;
+  }
   .form-text{
     width: 280px;
     margin-right: 10px;
