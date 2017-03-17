@@ -40,7 +40,30 @@ function ordering_set_of_content($node, $count) {
           'weight' => $count,
           'extra' => "",
         ))
-        ->execute();        
+        ->execute();
+     $val = get_max_weight_for_node_insert($cat_id, $node->type);
+     $max_result_all = $val['All'];
+     $single_insert_query_all = db_insert('itg_widget_order')->fields(
+            array(
+              'nid',
+              'widget',
+              'content_type',
+              'cat_id',
+              'weight',
+              'extra',
+            )
+        );
+        
+        $single_insert_query_all->values(array(
+            'nid' => $nid,
+            'widget' => 'section_wise_widget',
+            'content_type' => 'All',
+            'cat_id' => $cat_id,
+            'weight' => ++$max_result_all,
+            'extra' => '',
+          )
+        );
+        $single_insert_query_all->execute();    
   }
     
 }    
