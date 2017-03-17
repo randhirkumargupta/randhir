@@ -130,7 +130,7 @@ class ItgVideogalleryMigration extends XMLMigration {
     // configuration mapped in prepare
     $this->addFieldMapping('field_story_comment_question', 'commentquestion')->xpath('commentquestion');
     $this->addFieldMapping('field_story_schedule_date_time', 'publisheddate')->xpath('publisheddate'); // published date
-    $this->addFieldMapping('field_itg_content_publish_date', 'publisheddate')->xpath('publisheddate'); // published date
+    //$this->addFieldMapping('field_itg_content_publish_date', 'publisheddate')->xpath('publisheddate'); // published date
     $this->addFieldMapping('field_story_expiry_date', 'expirydate')->xpath('expirydate');
     $this->addFieldMapping('field_story_expires', 'videoexpires')->xpath('videoexpires');
     // Image field 
@@ -431,10 +431,10 @@ class ItgVideogalleryMigration extends XMLMigration {
     
     // Multipart and bitrate flags
     if(!empty($row->xml->multibitrate_flag) && (string) $row->xml->multibitrate_flag == 1){
-      $multipart[]['value'] = 'multipart_flag';
+      $multipart[]['value'] = 'multibitrate_flag';
     }
     if(!empty($row->xml->multipart_flag) && (string) $row->xml->multipart_flag == 1){
-      $multipart[]['value'] = 'multibitrate_flag';
+      $multipart[]['value'] = 'multipart_flag';
     }
     $row->multipart_bitrate = $multipart;
     // City migrate
