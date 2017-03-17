@@ -23,7 +23,7 @@ function itg_user_log_user_login(&$edit, $account) {
 function itg_user_log_node_view($node, $view_mode, $langcode) {
     module_load_include('inc', 'itg_user_log', 'includes/user_info_count_update');
      global $theme;      
-     if($theme == 'itg' && $node->type == 'story' && $view_mode == 'full') {
+     if($theme == 'itg' && $view_mode == 'full') {
           itg_logged_in_user_node_insert_data($node);//funstion written for insert the value in mongodb 
      }
 
