@@ -6126,6 +6126,12 @@ div.node{
         background: #fff;
         margin: 0;
         padding: 30px 0;
+        > label{
+          width: 115px;
+          font-size: 12px;
+          padding: 0;
+          & + div{padding-left: 115px;font-size: 12px;}
+        }
       }
     }
   }

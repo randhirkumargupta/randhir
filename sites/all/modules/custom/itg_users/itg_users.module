@@ -474,7 +474,6 @@ function itg_users_theme($existing, $type, $theme, $path) {
 function itg_users_user_login(&$edit, $account) {
   $role_count = count($account->roles);
 
-  //p($account->roles);
   if (isset($_GET['destination'])) {
     unset($_GET['destination']);
   }
@@ -491,6 +490,15 @@ function itg_users_user_login(&$edit, $account) {
     if (array_key_exists(EXPERT, $account->roles)) {
       if (arg(1) != "reset") {
         $_GET['destination'] = 'ask-an-expert';
+      }
+    }
+  }
+  
+  
+  if ($role_count < 3) {
+    if (array_key_exists(CORRESPONDENT, $account->roles)) {
+      if (arg(1) != "reset") {
+        $_GET['destination'] = 'manage-print-team-not-decided';
       }
     }
   }

@@ -98,6 +98,9 @@ function itg_newsletter_theme($existing, $type, $theme, $path) {
  * {@inheritdoc}
  */
 function itg_newsletter_form_alter(&$form, &$form_state, $form_id) {
+  if($form_id == 'newsletter_templates_node_form') {
+    $form['field_newst_banner'][LANGUAGE_NONE][0]['#required'] = FALSE;
+  }
   // Set destination for newsletter form
   if ($form_id == 'newsletter_node_form') {
     // Modify content id(show content id only instead of title and content id)
@@ -648,7 +651,6 @@ function itg_newsletter_cronapi($op, $job = NULL) {
  * Automation: Send newsletter in case of manual and automatic
  */
 function itg_newsletter_send_automatic_newsletter() {
-
   // TODO: Add queueing for email before Deployment. ~ Mahesh Salaria
   // Include newsletter mail file to send mail
   module_load_include('inc', 'itg_newsletter', 'includes/newsletter_mail');
@@ -664,6 +666,7 @@ function itg_newsletter_send_automatic_newsletter() {
   while ($record = $result->fetchAssoc()) {
     $manual_nids[] = $record['nid'];
   }
+
   // Send manual mail in case of later.
   if (!empty($manual_nids)) {
     foreach ($manual_nids as $nids) {
@@ -679,7 +682,7 @@ function itg_newsletter_send_automatic_newsletter() {
   $query_auto->fields('cn')
       ->condition('cn.status', 0, '=')
       ->condition('cn.type', 'automatic', '=')
-      ->condition('cn.scheduled_time', time(), '<=');
+      ->condition('cn.scheduled_time', time(), '>=');
   $result_auto = $query_auto->execute();
 
   while ($record_auto = $result_auto->fetchAssoc()) {

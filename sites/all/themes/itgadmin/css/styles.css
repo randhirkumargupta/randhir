@@ -6378,6 +6378,15 @@ div.node #comments h2 {
   margin: 0;
   padding: 30px 0;
 }
+.croper .image-editor .image-fiels-style .form-item.form-type-checkboxes.form-item-images > label {
+  width: 115px;
+  font-size: 12px;
+  padding: 0;
+}
+.croper .image-editor .image-fiels-style .form-item.form-type-checkboxes.form-item-images > label + div {
+  padding-left: 115px;
+  font-size: 12px;
+}
 .croper .first-resize, .croper .second-resize {
   display: inline-block;
   margin: 0 auto;

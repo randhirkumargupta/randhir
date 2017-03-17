@@ -164,7 +164,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
     if (!empty($form['#node']->nid)) {
       if ($idea_review_flag) {
         if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] != 'Approved') {
-          $form['field_story_category']['#access'] = FALSE;
+//          $form['field_story_category']['#access'] = FALSE;
           $form['field_primary_cat_data']['#access'] = FALSE;
           unset($form['field_pti_print_media']);
           //$form['field_pti_issue']['#access'] = FALSE;
@@ -176,7 +176,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       }
       else {
         if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] != 'Approved') {
-          $form['field_story_category']['#access'] = FALSE;
+//          $form['field_story_category']['#access'] = FALSE;
           $form['field_primary_cat_data']['#access'] = FALSE;
           $form['field_pti_magazine_kicker']['#access'] = FALSE;
           unset($form['field_pti_print_media']);
@@ -258,7 +258,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       );
     }
     else {
-      $form['field_story_category']['#access'] = FALSE;
+//      $form['field_story_category']['#access'] = FALSE;
       $form['field_primary_cat_data']['#access'] = FALSE;
       $form['field_pti_words_limit']['#access'] = FALSE;
       $form['field_survey_end_date']['#access'] = FALSE;
@@ -607,7 +607,7 @@ function itg_print_team_views_pre_render(&$view) {
     // If Current user does not have above role then print submit idea button.
     $matched_restricted_role = array_filter($matched_restricted_role);
     if (empty($matched_restricted_role)) {
-      $header_content_print_team .= l('Submit Idea', $base_url . '/submit-idea');
+      $header_content_print_team .= l('File Story', $base_url . '/submit-idea');
     }
     $view->attachment_before = $header_content_print_team;
   }

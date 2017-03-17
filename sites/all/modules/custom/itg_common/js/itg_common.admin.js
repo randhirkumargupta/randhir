@@ -42,14 +42,17 @@
 jQuery(document).ready(function () {
 
     var solr = Drupal.settings.itg_common.settings.solr;
-    var solr_explict = solr.split(',');
-    var slr = [];
-    
-    for (i = 0; i < solr_explict.length; i++) {
-        var c = solr_explict[i].split('|');
-        slr[c[0]] = c[1];
-    }
 
+    if (solr != null && solr != undefined) {
+        var solr_explict = solr.split(',');
+
+        var slr = [];
+
+        for (i = 0; i < solr_explict.length; i++) {
+            var c = solr_explict[i].split('|');
+            slr[c[0]] = c[1];
+        }
+    }
     // jQuery code for related content on edit page
     var item = [];
     var itemString = jQuery('#edit-field-common-related-content-und-0-value').val();

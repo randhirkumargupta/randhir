@@ -99,13 +99,16 @@ jQuery(document).ready(function(){
      jQuery('body').on('click', '.insert-url', function(){
            
          var solr = Drupal.settings.itg_related.settings.solr;
-           var solr_explict = solr.split(',');
+         if (solr != null && solr != undefined) {
+            var solr_explict = solr.split(',');
+
             var slr = [];
             for (i = 0; i < solr_explict.length; i++) {
                 var c = solr_explict[i].split('|');
                 slr[c[0]] = c[1];
 
             }
+        }
             
            // parent.jQuery('#edit-field-story-kicker-text-und-0-value').val(item);
             parent.jQuery('#edit-field-common-related-content-und-0-value').val(item);
