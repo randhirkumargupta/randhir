@@ -1,6 +1,6 @@
 <?php
-function itg_bestcollege_csv_import() {
 
+function itg_bestcollege_csv_import() {
   $form = drupal_get_form('itg_bestcollege_csv_form');
 
   $output = "<p>This tool will attempt to import CSV data";
@@ -9,11 +9,12 @@ function itg_bestcollege_csv_import() {
   return $output;
 }
 
+
 /**
  * csvImporter form
  * @return string
  */
-function itg_bestcollege_csv_form() {
+function itg_bestcollege_csv_form($form, &$form_state) {
 
   $form['#attributes'] = array(
     'enctype' => 'multipart/form-data'

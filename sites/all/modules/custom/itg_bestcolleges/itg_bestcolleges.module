@@ -6,9 +6,7 @@
  *
  * Contains functionality for best college.
  */
-//print $ab = drupal_lookup_path('source', $_GET['q']);
-//echo "<pre>";
-//print_r($_GET);
+
 /**
  * Implements hook_menu().
  * {@inheritdoc}
@@ -61,11 +59,11 @@ function itg_bestcolleges_menu() {
   $items['bestcollege-csv-import'] = array(
     'title' => 'Upload csv for new data.',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('itg_bestcollege_csv_import'),
-    'access arguments' => array('administer itg_term settings'),
-    'type' => MENU_NORMAL_ITEM,
+    'page arguments' => array('itg_bestcollege_csv_form'),
     'file' => 'includes/itg_bestcolleges_import.inc',
+    'access callback' => TRUE,
   );
+
 
   /* $items['bestcolleges/%/%'] = array(
     'page callback' => 'itg_zone_wise_list',
