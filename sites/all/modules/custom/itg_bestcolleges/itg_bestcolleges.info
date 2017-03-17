@@ -3,7 +3,7 @@ description = "ITG BestCollege module is used to implement features to show Best
 core = 7.x
 package = ITG
 
-#stylesheets[all][] = css/itg_bestcollege.css
+stylesheets[all][] = css/itg_bestcollege.css
 #stylesheets[all][] = css/style.css
 #stylesheets[all][] = css/responsive.css
 
