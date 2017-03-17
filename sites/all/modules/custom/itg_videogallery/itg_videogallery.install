@@ -90,6 +90,16 @@ function itg_videogallery_schema() {
                 'length' => '250',
                 'null' => TRUE,
             ),
+             'encoding_progress' => array(
+                'description' => 'Encoding progress',
+                'type' => 'int',
+                'null' => TRUE,
+            ),
+            'publishing_progress' => array(
+                'description' => 'publishing progress',
+                'type' => 'int',
+                'null' => TRUE,
+            ),
             'name' => array(
                 'description' => 'Video name',
                 'type' => 'varchar',
@@ -195,6 +205,12 @@ function itg_videogallery_schema() {
             ),
              'property' => array(
                 'description' => 'property',
+                'type' => 'varchar',
+                'length' => '250',
+                'null' => TRUE,
+            ),
+             'content_type' => array(
+                'description' => 'content_type',
                 'type' => 'varchar',
                 'length' => '250',
                 'null' => TRUE,
