@@ -125,7 +125,7 @@ if ($theme != 'itgadmin') {
 
 <!--- list / grid -->
 <div class="col-sm-12 col-xs-12 view1">
-<div class="title col-md-6 col-sm-6 col-xs-12">Best of The Best 2016</div>
+<div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("Best of The Best 2016"); ?></div>
 
         <div class="right_Section pull-right  col-md-6  col-sm-6 col-xs-12 text-right hidden-xs">
         <strong>view as</strong>
@@ -202,7 +202,7 @@ if ($theme != 'itgadmin') {
 
                           // RHS Video
                           $block_video = block_load('itg_bestcolleges','bestcollege_rhs_videos_widget');
-                          $render_video = _block_get_renderable_array(_block_render_blocks(array('$block_video')));
+                          $render_video = _block_get_renderable_array(_block_render_blocks(array($block_video)));
                           print render($render_video);
 
                     ?>

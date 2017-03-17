@@ -210,6 +210,20 @@ function feature_for_best_college_views_default_views() {
   $handler->display->display_options['fields']['field_bestcollege_rank']['label'] = '';
   $handler->display->display_options['fields']['field_bestcollege_rank']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_bestcollege_rank']['element_label_colon'] = FALSE;
+  /* Field: Content: Year */
+  $handler->display->display_options['fields']['field_bestcollege_year']['id'] = 'field_bestcollege_year';
+  $handler->display->display_options['fields']['field_bestcollege_year']['table'] = 'field_data_field_bestcollege_year';
+  $handler->display->display_options['fields']['field_bestcollege_year']['field'] = 'field_bestcollege_year';
+  $handler->display->display_options['fields']['field_bestcollege_year']['label'] = '';
+  $handler->display->display_options['fields']['field_bestcollege_year']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_bestcollege_year']['element_label_colon'] = FALSE;
+  /* Field: Content: City */
+  $handler->display->display_options['fields']['field_bestcollege_city']['id'] = 'field_bestcollege_city';
+  $handler->display->display_options['fields']['field_bestcollege_city']['table'] = 'field_data_field_bestcollege_city';
+  $handler->display->display_options['fields']['field_bestcollege_city']['field'] = 'field_bestcollege_city';
+  $handler->display->display_options['fields']['field_bestcollege_city']['label'] = '';
+  $handler->display->display_options['fields']['field_bestcollege_city']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_bestcollege_city']['element_label_colon'] = FALSE;
   /* Field: Taxonomy term: Term ID */
   $handler->display->display_options['fields']['tid']['id'] = 'tid';
   $handler->display->display_options['fields']['tid']['table'] = 'taxonomy_term_data';
@@ -226,11 +240,11 @@ function feature_for_best_college_views_default_views() {
   $handler->display->display_options['fields']['php']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
-  $handler->display->display_options['fields']['php']['php_output'] = '<select class="city_wise">
-                   <option>- - - Citywise list - - - </option>
-                   <option>City 2</option>
-                   <option>City 3</option>
-                   </select>';
+  $handler->display->display_options['fields']['php']['php_output'] = '<?php
+$tid = $data->_field_data[\'nid\'][\'entity\']->field_story_category[\'und\'][0][\'tid\'];
+$year = $data->_field_data[\'nid\'][\'entity\']->field_bestcollege_year[\'und\'][0][\'value\'];
+print itg_city_option($year,$tid); 
+?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
   /* Field: Global: Custom text */
@@ -242,8 +256,8 @@ function feature_for_best_college_views_default_views() {
                 <div class="thumbnail">
                     [field_story_extra_large_image]
                     <div class="caption">
-                      <h4 class="list-group-item-heading"><a href="/bestcolleges/ranks/[tid]">  [field_story_category]</a></h4>
-                      <p class="group inner list-group-item-text"> <a href="/bestcolleges/ranks/[tid]"> 
+                      <h4 class="list-group-item-heading"><a href="/bestcolleges/[field_bestcollege_year]/ranks/[tid]">  [field_story_category]</a></h4>
+                      <p class="group inner list-group-item-text"> <a href="/bestcolleges/[field_bestcollege_year] /ranks/[tid]"> 
                         [title]</a></p> 
                        <div class="cl1"> <a href="">Rank :  [field_bestcollege_rank]</a></div>
                        <div class="cl"> <a href="">SEE COMPLETE LIST | DIRECTORY</a></div>
@@ -381,6 +395,13 @@ function feature_for_best_college_views_default_views() {
   $handler->display->display_options['fields']['field_bestcollege_city']['field'] = 'field_bestcollege_city';
   $handler->display->display_options['fields']['field_bestcollege_city']['label'] = 'CITY';
   $handler->display->display_options['fields']['field_bestcollege_city']['exclude'] = TRUE;
+  /* Field: Content: Website URL */
+  $handler->display->display_options['fields']['field_bestcollege_website_url']['id'] = 'field_bestcollege_website_url';
+  $handler->display->display_options['fields']['field_bestcollege_website_url']['table'] = 'field_data_field_bestcollege_website_url';
+  $handler->display->display_options['fields']['field_bestcollege_website_url']['field'] = 'field_bestcollege_website_url';
+  $handler->display->display_options['fields']['field_bestcollege_website_url']['label'] = '';
+  $handler->display->display_options['fields']['field_bestcollege_website_url']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_bestcollege_website_url']['element_label_colon'] = FALSE;
   /* Field: Global: PHP */
   $handler->display->display_options['fields']['php']['id'] = 'php';
   $handler->display->display_options['fields']['php']['table'] = 'views';
@@ -389,7 +410,10 @@ function feature_for_best_college_views_default_views() {
   $handler->display->display_options['fields']['php']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
-  $handler->display->display_options['fields']['php']['php_output'] = ' <button class="btn btn-default">Website</button>';
+  $handler->display->display_options['fields']['php']['php_output'] = '<?php
+$website_url = $data->_field_data[\'nid\'][\'entity\']->field_bestcollege_website_url[\'und\'][0][\'value\'];
+print "<a href=\'$website_url\' target=\'_blank\'><img src=\'http://media2.intoday.in/indiatoday/bestcollegespoll/website-button.png\' border=\'0\'></a>";
+?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
   /* Field: Global: Custom text */
@@ -421,7 +445,7 @@ function feature_for_best_college_views_default_views() {
   $handler->display->display_options['arguments']['field_story_category_tid']['field'] = 'field_story_category_tid';
   $handler->display->display_options['arguments']['field_story_category_tid']['default_action'] = 'default';
   $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_type'] = 'raw';
-  $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_options']['index'] = '2';
+  $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_options']['index'] = '3';
   $handler->display->display_options['arguments']['field_story_category_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_story_category_tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_story_category_tid']['summary_options']['items_per_page'] = '25';
@@ -473,6 +497,7 @@ function feature_for_best_college_views_default_views() {
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options'] = '5, 10, 20, 40, 60, 200';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
