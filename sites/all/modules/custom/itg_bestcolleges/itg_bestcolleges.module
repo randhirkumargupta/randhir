@@ -780,7 +780,7 @@ function csvImporter_form_validate(&$form, &$form_state) {
         switch ($csv_type) {
           case '1':
             # code...
-            $validate_csv_columns = '14';
+            $validate_csv_columns = '16';
             break;
           case '2':
             $validate_csv_columns = '4';
@@ -797,7 +797,7 @@ function csvImporter_form_validate(&$form, &$form_state) {
         }
 
         if (count($line) != $validate_csv_columns) {
-          form_set_error('csvfile', t('This file has the incorrect number of columns. Expecting {$validate_csv_columns}'));
+          form_set_error('csvfile', t('This file has the incorrect number of columns. Expecting ') . $validate_csv_columns);
         }
       }
       fclose($handle);
@@ -834,7 +834,10 @@ function csvImporter_form_submit(&$form, &$form_state) {
          * we use base64_encode to ensure we don't overload the batch
          * processor by stuffing complex objects into it
          */
-        if ($csv_type == 2) {
+
+        if ($csv_type == 1) {
+          $batch['operations'][] = array('best_college_previous_data_migrate', array(array_map('base64_encode', $line)));
+        } elseif ($csv_type == 2) {
           $batch['operations'][] = array('best_college_citywiseranking_data_migrate', array(array_map('base64_encode', $line)));
         }
         else if ($csv_type == 3) {
@@ -1159,9 +1162,9 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
   $videoids = $line[9];
   $published = $line[10];
   $created_date = $line[11];
-  $year = $line[12];
-  $rank = $line[13];
-  $stream = $line[14];
+  $year = $line[13];
+  $rank = $line[14];
+  $stream = $line[15];
 
 
   $node = new stdClass();
@@ -1184,9 +1187,14 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
 
   // print "year = ".$year;
   if ($year) {
-    if ($year == '2016') {
-      $tid = '844693';
-      if ($stream == 'Education') {
+    if ($year == '2015') {
+      $tid = '801';
+
+      if ($stream == 'Arts') {
+        $stream = 'Art';
+      }
+
+   /*   if ($stream == 'Education') {
         $stream = 'education1';
       }
 
@@ -1198,7 +1206,7 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
       }
       if ($stream == 'Mass Comm') {
         $stream = 'Mass-Comm';
-      }
+      }*/
 
       $final_tid = itg_bestcollege_get_term_tid($tid, $stream);
     }
@@ -1225,7 +1233,7 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
   $node->status = 1; //(1 or 0): published or not
   if (!empty($final_tid)) {
 
-    if ($node = node_submit($node)) {
+     if ($node = node_submit($node)) {
       node_save($node);
       drupal_set_message('submitted successfully');
 
@@ -1253,12 +1261,12 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
           ->condition('year', $year)
           ->execute();
     }
-    drupal_set_message("Pass line {$line[0]} college id = {$collegeid}");
+    drupal_set_message("Pass line for 2015 {$line[0]} college id = {$collegeid}");
   }
   else {
-    drupal_set_message("Fail line {$line[0]} college id = {$collegeid}");
+    drupal_set_message("Fail line for 2015 {$line[0]} college id = {$collegeid}");
 
-    drupal_set_message("Fail line {$line[0]} stream for {$stream}");
+    drupal_set_message("Fail line for 2015{$line[0]} stream for {$stream}");
   }
 }
 
