@@ -706,7 +706,7 @@ function _latest_from_businesstoday() {
 }
 
 /**
- * Helper function to get latest pti content
+ * Helper function to get latest third party content
  * @param string $type
  * @param int $limit
  */
