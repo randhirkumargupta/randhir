@@ -1,5 +1,5 @@
 <?php if (!empty($data)) : global $base_url; ?>
-  <div class="watch-right-now-video">
+  <div class="watch-right-now-video bestcollege-rhs-video">
     <?php $is_fron_page = drupal_is_front_page();
     if (empty($is_fron_page)) {
       ?><h3><span><?php print t("VIDEOS") ?></span></h3><?php } ?>
