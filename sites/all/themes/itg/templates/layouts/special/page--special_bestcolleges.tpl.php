@@ -26,7 +26,6 @@ if ($theme != 'itgadmin') {
 }
 
 ?>
-<?php print_r($_GET); ?>
 <!--------------------------------Code for Front tpl---------------------------------------->
 <?php if ($theme != 'itgadmin') {?>
   <div id="page">
