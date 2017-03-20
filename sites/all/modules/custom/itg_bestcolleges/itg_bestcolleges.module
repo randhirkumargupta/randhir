@@ -211,7 +211,7 @@ function itg_bestcolleges_block_view($delta = '') {
     case 'bestcollege_rhsstatic':
       $year = 2016; //arg(1); // Need to revert once feature done.
       $data = bestcollege_getStaticWidgetData($year);
-      $block['title'] = t('LAST 19 YEARS BEST COLLEGE SURVEYS');
+      //$block['title'] = t('LAST 19 YEARS BEST COLLEGE SURVEYS');
       $block['content'] = $data;
       break;
     case 'bestcollege_rhs_videos_widget':
