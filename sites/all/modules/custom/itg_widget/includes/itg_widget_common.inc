@@ -178,10 +178,23 @@ function itg_widgets_custom_variables() {
         '#default_value' => variable_get('anchor_tid'),
         '#size' => 20,
     );
+    
     $form['solr_url_config'] = array(
     '#type' => 'textarea',
     '#title' => t('Solr urlconfig'),
     '#default_value' => variable_get('solr_url_config'),
+    );
+    
+    $form['aaj_tak_json_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Aaj tak json url'),
+    '#default_value' => variable_get('aaj_tak_json_url'),
+    );
+    
+    $form['business_today_json_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Business today json url'),
+    '#default_value' => variable_get('business_today_json_url'),
     );
   return system_settings_form($form);
 }

@@ -48,6 +48,21 @@ function itg_front_end_common_block_info() {
     'info' => t('Related Podcast block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  
+  $blocks['latest_from_aajtak'] = array(
+    'info' => t('Latest from aaj tak block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  $blocks['latest_from_businesstoday'] = array(
+    'info' => t('Latest from business today block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  $blocks['latest_from_pti'] = array(
+    'info' => t('Latest from PTI block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   return $blocks;
 }
 
@@ -89,6 +104,18 @@ function itg_front_end_common_block_view($delta = '') {
     
     case 'related_podcast_block':
       $block['content'] = _related_podcast_bottom_block_content();
+      break; 
+    
+    case 'latest_from_aajtak':
+      $block['content'] = _latest_from_aajtak();
+      break; 
+    
+    case 'latest_from_businesstoday':
+      $block['content'] = _latest_from_businesstoday();
+      break; 
+    
+    case 'latest_from_pti':
+      $block['content'] = _latest_from_pti();
       break; 
   }
 
@@ -584,4 +611,114 @@ function _related_podcast_bottom_block_content() {
   $related_story.= "</ul></div>";
   }
   return $related_story;
+}
+
+/**
+ * Implements latest form pti block content
+ */
+function _latest_from_pti() {
+  global $base_url;
+  $related_content = itg_third_party_section_card_content('PTI', 5);
+  $related_dt = '';
+  if (!empty($related_content)) {
+    $related_dt = '<h3><span>' . t('LATEST FROM PTI') . '</span></h3>';
+  }
+  if (!empty($related_content)) {
+    $related_dt.= "<div class='third_party-row'><ul>";
+    $i = 0;
+    foreach ($related_content as $key => $value) {
+      if (!empty($value['title'])) {
+        $related_title = mb_strimwidth($value['title'], 0, 200, "..");
+        $path = drupal_get_path_alias('node/' . $value['nid']);
+        $related_dt.= "<li class='col-third-party'><span class='tile'>" . l($related_title, $path) . "</span></li>";
+      }
+      $i++;
+    }
+    $related_dt.= "</ul></div>";
+  }
+  return $related_dt;
+}
+
+/**
+ * Implements latest form aajtak block content
+ */
+function _latest_from_aajtak() {
+  global $base_url;
+  $url = variable_get('aaj_tak_json_url');
+  $JSON = file_get_contents($url);
+  // You can decode it to process it in PHP
+  $aajtak_data = json_decode($JSON);
+  $related_dt = '';
+  if (!empty($aajtak_data[0]->id)) {
+    $related_dt = '<h3><span>' . t('LATEST FROM AAJ TAK') . '</span></h3>';
+  }
+  if (!empty($aajtak_data[0]->id)) {
+    $related_dt.= "<div class='third_party-row'><ul>";
+    $i = 0;
+    foreach ($aajtak_data as $key => $value) {
+      if (!empty($value->title)) {
+        $related_title = mb_strimwidth($value->title, 0, 200, "..");
+        $path = $value->story_url;
+        $img_url = $value->thumb_image;
+        $related_dt.= "<li class='col-third-party'><a href='$path' target='_blank' title='$related_title'><img src='$img_url' alt='$related_title' /></a>";
+        $related_dt.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
+      }
+      $i++;
+      if ($i == 5)
+      break;
+    }
+    $related_dt.= "</ul></div>";
+  }
+  return $related_dt;
+}
+
+/**
+ * Implements latest form business today block content
+ */
+function _latest_from_businesstoday() {
+  global $base_url;
+  $url = variable_get('business_today_json_url');
+  $JSON = file_get_contents($url);
+  // You can decode it to process it in PHP
+  $business_data = json_decode($JSON);
+  $related_dt = '';
+  if (!empty($business_data[0]->id)) {
+    $related_dt = '<h3><span>' . t('LATEST FROM BUSINESS TODAY') . '</span></h3>';
+  }
+  if (!empty($business_data[0]->id)) {
+    $related_dt.= "<div class='third_party-row'><ul>";
+    $i = 0;
+    foreach ($business_data as $key => $value) {
+      if (!empty($value->title)) {
+        $related_title = mb_strimwidth($value->title, 0, 200, "..");
+        $path = $value->story_url;
+        $img_url = $value->thumb_image;
+        $related_dt.= "<li class='col-third-party'><a href='$path' target='_blank' title='$related_title'><img src='$img_url' alt='$related_title' /></a>";
+        $related_dt.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
+      }
+      $i++;
+      if ($i == 5)
+      break;
+    }
+    $related_dt.= "</ul></div>";
+  }
+  return $related_dt;
+}
+
+/**
+ * Helper function to get latest third party content
+ * @param string $type
+ * @param int $limit
+ */
+function itg_third_party_section_card_content($type, $limit) {
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_story_source_type', 're', 'n.nid = re.entity_id');
+  $query->fields('n');
+  $query->condition('re.field_story_source_type_value', $type, '=');
+  $query->condition('n.type', 'story');
+  $query->condition('n.status', 1);
+  $query->range(0, $limit);
+  $query->orderBy('n.created', 'DESC'); //ORDER BY created
+  $result = $query->execute();
+  return $record = $result->fetchAll(PDO::FETCH_ASSOC);
 }
