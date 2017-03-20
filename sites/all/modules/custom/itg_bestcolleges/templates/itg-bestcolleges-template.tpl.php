@@ -6,12 +6,9 @@ $comment_value = variable_get('COMMENT_CONFIG');
 $config_name = $comment_value[0]->config_name;
 ?>
 <?php global $base_url;?>
-<meta charset="utf-8">
-<title>Untitled Document</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <div class="row">
-<div class="col-md-12 col-sm-7 col-xs-12 left-panel arts">
+<div class="col-md-12 col-sm-12 col-xs-12 left-panel arts">
 <!-- Slider Start-->
 <?php $term = taxonomy_term_load(arg(3));?>
 <h2><?php print "INDIA'S BEST ". $term->name ." COLLEGES ".arg(1); ?></h2>
@@ -23,21 +20,15 @@ $config_name = $comment_value[0]->config_name;
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
 
-     <?php
-
+            <?php
                 if (array_filter(views_get_view_result('best_college_image_slider', 'block_2'))) {
                     print views_embed_view('best_college_image_slider', 'block_2');
                 }
 
               ?>
 
-
-
-
   <div class="clearfix"></div>
     </div>
-
-
 
   </div>
 </div>
@@ -94,7 +85,5 @@ $config_name = $comment_value[0]->config_name;
         ?>
 
     </div>
-
-
 
 </div>
