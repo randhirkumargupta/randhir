@@ -162,14 +162,14 @@
                 </div>
 
         <?php
-        $templates = render($content['field_story_templates']);
+        $templates = render($content['field_story_select_templates']);
         if (!empty($templates)):
             ?>
                     <div class="Templates">
                         <h2><?php print t('Templates'); ?></h2>
 
                         <div class="content-details">
-                                    <?php print render($content['field_story_templates']); ?>
+                                    <?php print render($content['field_story_select_templates']); ?>
                                     <?php $vr = $content['field_story_templates']['#items']['0']['value']; ?>    
                                     <?php $fr = $node->field_story_template_guru[LANGUAGE_NONE]; ?>
                             <div class="field">

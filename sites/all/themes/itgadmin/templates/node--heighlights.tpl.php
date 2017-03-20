@@ -50,7 +50,7 @@
           </div>
           <div class="field">
               <div class="field-label"> field_emoji_highlights_1 :   </div>
-              <div class="field-items"> <?php echo $field_field_emoji_highlights_1; ?></div>
+              <div class="field-items"> <?php echo ($field_field_emoji_highlights_1) ?   "Yes" : "No" ; ?></div>
           </div>
         <?php endif; ?>
 
@@ -62,7 +62,7 @@
           </div>
           <div class="field">
               <div class="field-label"> field_emoji_highlights_2 :   </div>
-              <div class="field-items"> <?php echo $field_field_emoji_highlights_2; ?></div>
+              <div class="field-items"> <?php echo ($field_field_emoji_highlights_2) ?   "Yes" : "No" ; ?></div>
           </div>
         <?php endif; ?>
 
@@ -74,7 +74,7 @@
           </div>
           <div class="field">
               <div class="field-label"> field_emoji_highlights_3 :   </div>
-              <div class="field-items"> <?php echo $field_field_emoji_highlights_3; ?></div>
+              <div class="field-items"> <?php echo ($field_field_emoji_highlights_3) ?   "Yes" : "No" ; ?></div>
           </div>
         <?php endif; ?>
       <?php endif; ?>

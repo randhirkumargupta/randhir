@@ -963,7 +963,12 @@ function _simplesamlphp_auth_get_fname() {
   $fname = '';
   global $seg;
   
+  if (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['twitter.name']))) {
+   $seg = $_simplesamlphp_auth_saml_attributes['twitter.name'];
+  }
+  else {
    $seg = $_simplesamlphp_auth_saml_attributes['givenName'];
+  }
   
   // Check if valid local session exists..
   if ($_simplesamlphp_auth_as->isAuthenticated()) {

@@ -47,8 +47,8 @@ function itg_image_repository_menu() {
     $items['file/itg_image_repository/%/%/%'] = array(
         'page callback' => 'filefield_source_itg_image_repository_page',
         'page arguments' => array(2, 3, 4),
-        'access callback' => '_filefield_sources_field_access',
-        'access arguments' => array(2, 3, 4),
+       // 'access arguments' => $access,
+        'access arguments' => array('access content'),
         'type' => MENU_CALLBACK,
     );
     return $items;
@@ -311,25 +311,26 @@ function filefield_source_itg_image_repository_page($entity_type, $bundle_name, 
     global $conf;
 
     // Check access.
-    if (!module_exists('itg_image_repository') || !itg_image_repository_access() || !$instance = field_info_instance($entity_type, $field_name, $bundle_name)) {
-        return drupal_access_denied();
-    }
+//    if (!module_exists('itg_image_repository') || !itg_image_repository_access() || !$instance = field_info_instance($entity_type, $field_name, $bundle_name)) {
+//        return drupal_access_denied();
+//    }
     $field = field_info_field($field_name);
 
-    // Full mode
-    if (!empty($instance['widget']['settings']['filefield_sources']['source_itg_image_repository']['itg_image_repository_mode'])) {
-        $conf['itg_image_repository_custom_scan'] = 'filefield_source_itg_image_repository_custom_scan_full';
-    }
-    // Restricted mode
-    else {
-        $conf['itg_image_repository_custom_scan'] = 'filefield_source_itg_image_repository_custom_scan_restricted';
-        $conf['itg_image_repository_custom_field'] = $field + array('_uri' => file_field_widget_uri($field, $instance));
-    }
+//    // Full mode
+//    if (!empty($instance['widget']['settings']['filefield_sources']['source_itg_image_repository']['itg_image_repository_mode'])) {
+//        $conf['itg_image_repository_custom_scan'] = 'filefield_source_itg_image_repository_custom_scan_full';
+//    }
+//    // Restricted mode
+//    else {
+//        $conf['itg_image_repository_custom_scan'] = 'filefield_source_itg_image_repository_custom_scan_restricted';
+//        $conf['itg_image_repository_custom_field'] = $field + array('_uri' => file_field_widget_uri($field, $instance));
+//    }
 
     // Disable absolute URLs.
     $conf['itg_image_repository_settings_absurls'] = 0;
 
     module_load_include('inc', 'itg_image_repository', 'inc/itg_image_repository.page');
+  
     return itg_image_repository($field['settings']['uri_scheme']);
 }
 

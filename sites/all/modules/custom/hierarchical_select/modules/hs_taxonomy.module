@@ -152,10 +152,17 @@ function hs_taxonomy_form_taxonomy_form_term_alter(&$form, &$form_state) {
   if (isset($form_state['confirm_delete']) || isset($form_state['confirm_parents'])) {
     return;
   }
+  
 
   // Build an appropriate config.
   $vocabulary = $form['#vocabulary'];
   $vid = $vocabulary->vid;
+  
+  // code for tag form by shravan
+  if (TAG_ID == $vid) {
+    return;
+  }
+  
   module_load_include('inc', 'hierarchical_select', 'includes/common');
   $config = array(
     'module' => 'hs_taxonomy',
@@ -602,7 +609,7 @@ function hs_taxonomy_hierarchical_select_root_level($params) {
     $type = $_POST['cat_node_type']; 
   }  
   
-  foreach ($terms as $key => $term) {    
+/*  foreach ($terms as $key => $term) {    
     if (!itg_category_manager_term_state($term->tid)) {
       unset($terms[$key]);
     }
@@ -611,7 +618,7 @@ function hs_taxonomy_hierarchical_select_root_level($params) {
         unset($terms[$key]);
       }
     }
-  }
+  }*/
   
   // end
   // If the root_term parameter is enabled, then prepend a fake "<root>" term.

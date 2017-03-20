@@ -593,10 +593,12 @@ function ugc_form_submit_handler($form, &$form_state) {
     unset($_SESSION['messages']['status']);
   }
   // Set redirection after submit.
-  if ($arg[0] == 'personalization' && $arg[1] == 'my-content')
-  {
+  if ($arg[0] == 'personalization' && $arg[1] == 'my-content') {
     $_REQUEST['destination'] = 'personalization/my-content';
-    $form_state['redirect'] = 'personalization/my-content';
+    $form_state['redirect'] = array(
+      'personalization/my-content',
+      array('query' => array('ugc' => 'success'))
+    );
   }
   else
   {
@@ -942,7 +944,7 @@ function itg_ugc_views_pre_render(&$view) {
  * Implements itg_ugc_thank_you
  */
 function itg_ugc_thank_you() {
- print '<div class="ugc-success" style="height: 100%; background: #fff;">UGC content has been submitted successfully for further review and approval.</div>';
+ print '<div class="ugc-success"><h2>Thank you !</h2><p>UGC content has been submitted successfully for further review and approval.</p></div>';
 }
 
 /**

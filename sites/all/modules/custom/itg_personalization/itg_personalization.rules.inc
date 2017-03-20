@@ -29,7 +29,7 @@ function itg_personalization_rules_action_info() {
 function itg_personalization_send_new_content_mail($node) {
   global $base_url;
   // $mail_ids = array();
-  if (!empty($node->field_story_itg_tags['und']) && is_array($node->field_story_itg_tags['und'])) {
+  /*if (!empty($node->field_story_itg_tags['und']) && is_array($node->field_story_itg_tags['und'])) {
     foreach ($node->field_story_itg_tags['und'] as $k => $value) {
       $tid = $value['tid'];
       $query = db_select('flagging', 'f');
@@ -52,5 +52,5 @@ function itg_personalization_send_new_content_mail($node) {
         itg_common_get_mail_content($data, $to, $key, $subject);
       }
     }
-  }
+  }*/
 }

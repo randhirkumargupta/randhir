@@ -106,10 +106,11 @@ define('CITY_MANAGMENT', variable_get('city_manager_vid'));
 define('POLITICIAN_TID', variable_get('tid_politician'));
 define('ANCHOR_TID', variable_get('anchor_tid'));
 define('REPORTER_TID', variable_get('reporter_tid'));
+define('TAG_ID', 1);
 
 define('NEWSLETTER_EDUCATION_TID', variable_get('newsletter_education_tid'));
 
-define('PARENT_SSO', 'dev.indiatodayonline.in');
+define('PARENT_SSO', 'uat-sso.indiatodayonline.in');
 
 define('FRONT_URL', 'http://uat-it.indiatodayonline.in');
 define('BACKEND_URL', 'http://uat-it-backend.indiatodayonline.in');

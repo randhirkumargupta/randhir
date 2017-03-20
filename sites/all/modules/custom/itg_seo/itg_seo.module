@@ -149,18 +149,28 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
  * @return array
  */
 function itg_meta_tags_alias_set($form, &$form_state) {
-  global $edited_sef_url;
+ global $edited_sef_url;
   $nodeid = arg(1);
   if (isset($form['path']) && !empty($form['path'])) {
-      $path_alias_set = $form['path']['alias']['#value'];
-      $path_data = explode("/", $path_alias_set);
-      $set_hierarchy = array_reverse($path_data);
-      $seftitle = $set_hierarchy[0];
-      $sef_url = explode($nodeid, $seftitle);
-      $edited_sef_url = rtrim($sef_url[0], '-');
-      $form['path']['alias']['#value'] = $edited_sef_url;
+    $edited_sef_url = itg_get_sef_url($form['path']['alias']['#value'], $nodeid);
+    $form['path']['alias']['#value'] = $edited_sef_url;
   }
   return $form;
+}
+
+/**
+ * Return SEF Url
+ */
+function itg_get_sef_url($sef_path, $nodeid) {
+  if (isset($sef_path) && !empty($sef_path)) {
+    $path_alias_set = $sef_path;
+    $path_data = explode("/", $path_alias_set);
+    $set_hierarchy = array_reverse($path_data);
+    $seftitle = $set_hierarchy[0];
+    $sef_url = explode($nodeid, $seftitle);
+    $edited_sef_url = rtrim($sef_url[0], '-');
+    return $edited_sef_url;
+  }
 }
 
 /**

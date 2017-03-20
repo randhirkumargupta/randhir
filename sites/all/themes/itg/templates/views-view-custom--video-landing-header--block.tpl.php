@@ -18,7 +18,11 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
         <div class ="video-landing-header">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="video-heading"><?php print $row['title']; ?></h1>
+                    <h1 class="video-heading"><?php print $row['title']; ?></h1><?php global $user;
+        if(in_array('Social Media', $user->roles)) {?>
+         <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $video_node->nid;?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span>promote</span></a>   
+        <?php }?>
+                    
                 </div>
                 <div class="col-md-8 video-header-left">
                     <div class="video">
@@ -29,9 +33,13 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
         $description_slider="";
         $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images"><ul>';
         $description_slider = '<div class="video-slider-description"><ul>';
+        
         foreach ($videoids as $keys => $video_value) {
             if ($keys != 0) {
                 $hide_player = 'hide-player';
+                $autoplay =0;
+            }else {
+                $autoplay =1; 
             }
             ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->video_id; ?>"><?php
 
@@ -51,7 +59,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                 ?>
                                     <div class="iframe-video">
                                         <iframe frameborder="0" scrolling="no"
-                                                src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=0&ui-logo=1&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
+                                                src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=<?php echo $autoplay;?>&player_next_video=x5d9tu3&ui-logo=1&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
                                                 allowfullscreen></iframe></div>
 
                                 </div>
@@ -237,7 +245,6 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
             slidesToShow: 1,
             slidesToScroll: 1,
             arrows: false,
-            variableWidth: true,
             fade: true,
             asNavFor: '.video-header-left .video-slider-images ul, .video-header-left .video'
         });

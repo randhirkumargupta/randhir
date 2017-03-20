@@ -61,7 +61,9 @@ function itg_widget_tech_reviews_ordering_data($info) {
         }else{
             $selction_name='section_name';
         }
+        if(isset($_GET[$selction_name])) {
          $cat_id = $_GET[$selction_name];
+        }
           if ($theme == FRONT_THEME_NAME) {
           $cat_id = arg(2);
          }

@@ -251,7 +251,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js',
     );
     $form['field_user_city'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('HH:MM');
-    $form['relations']['parent']['#config']['module'] = 'itg_category_manager';
+    //$form['relations']['parent']['#config']['module'] = 'itg_category_manager';
     $form['relations']['parent']['#weight'] = -1;
     $form['#submit'][] = 'itg_category_manager_custom_submit';
   }
@@ -262,8 +262,15 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js',
     );
     $form['field_user_city'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('HH:MM');
-    $form['relations']['parent']['#config']['module'] = 'itg_category_manager';
+    //$form['relations']['parent']['#config']['module'] = 'itg_category_manager';
     $form['relations']['parent']['#weight'] = -1;
+    $form['term_state']['#access'] = false;
+    drupal_add_js('jQuery(document).ready(function() {
+             //code to check unchek checkbox when all search engine checkbox is checked
+             jQuery(".form-item-term-state").hide();
+           
+              
+           });', array('type' => 'inline', 'scope' => 'footer'));
     $form['#submit'][] = 'itg_category_manager_custom_submit';
   }
   if ($form_id == 'taxonomy_form_term') {
@@ -365,8 +372,8 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       );
       $form['itg_open_close'] = array(
         '#type' => 'markup',
-        '#markup' => '<div class="cotegory-manager-settings"><h2>Settings</h2><div class="setting-div">',
-        '#weight' => 0,
+        '#markup' => '<div class="cotegory-manager-settings"><h2>Program</h2><div class="setting-div">',
+        '#weight' => 2,
       );
       $form['term-state-wrap']['term_state'] = array(
         '#type' => 'checkbox',

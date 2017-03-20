@@ -20,18 +20,18 @@ function itg_loyalty_reward_send_mail_product_expiration($nid ,$node_user) {
     'body' => $mail_content,
     'subject' => 'India Today | Product Expiration Status!',
   );
- 
+  // for code email
   // Send product expiration notification mail
-  $mail = drupal_mail('itg_loyalty_reward_product_expiration', 'itg_loyalty_reward', $user_email_ids, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  //$mail = drupal_mail('itg_loyalty_reward_product_expiration', 'itg_loyalty_reward', $user_email_ids, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   // Update mail status after sending notification 
-  if ($mail['result']) {
+  /*if ($mail['result']) {
     db_update('itg_loyalty_reward_cron')
         ->fields(array(
           'status' => 1,
         ))
         ->condition('nid', $nid, '=')
         ->execute();
-  }
+  }*/
 }
 
 /**

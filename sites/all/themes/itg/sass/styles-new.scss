@@ -570,6 +570,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     font: 500 27px/27px Roboto;
     text-transform: uppercase;
     padding: 12px 0 2px;
+    word-wrap: break-word;
   }
   .logout-link a{
     color: #777;
@@ -2499,12 +2500,19 @@ body.has-cart-popup{
         font-size: 0;
         opacity: 0.7;
         &:before{
+          font-family: fontawesome;
           color: #fff;
           display: inline-block;
           font-size: 24px;
           position: absolute;
           text-shadow: 0;
           top: 28px;
+        }
+        &.flex-next:before{
+          content: '\f054';
+        }
+        &.flex-prev:before{
+          content: '\f053';
         }
       }
     }
@@ -2700,14 +2708,15 @@ body.has-cart-popup{
           }
           label{
             font-size: 14px;
+            margin-top: 10px;
           }
         }
     }
-    .social-share{
-      display: inline-block;
-      vertical-align: top;
-      width: 100%;
-      text-align: center;
+    .social-share{  
+        width: 275px;
+        margin: 0 auto;
+        display: block;
+        overflow: hidden;
       a{
         border-radius: 5px;        
         height: 50px;
@@ -2795,7 +2804,7 @@ body.has-cart-popup{
 [id*="itg-sso-reg-multistep-form"], [id*="itg-user-forgot-password-multistep-form"]{
   #email-sucess, #thank-you, #mobile-success{
     color: #009c00;
-    margin: 20px 0;
+    margin: 20px;
   }
 }
 .sign-in-link{
@@ -3133,7 +3142,20 @@ footer .footer-top ul li a:hover{
   }
 }
 /*other comment css end*/
-
+.ugc-success {
+  background-color: #fff;
+  color: green;
+  font-family: Roboto;
+  padding: 100px 0;
+  text-align: center;
+  h2{
+    font-size: 32px;
+    margin: 30px 0;
+  }
+  p{
+    font-size: 18px;
+  }
+}
 #content [id*="ugc-node-form"].ugc-custom-wrapper{
   .form-field-name-field-user-email, 
   .form-field-name-field-section{
@@ -3169,9 +3191,6 @@ footer .footer-top ul li a:hover{
       div.description, span.error{
         padding-left: 220px;
       }
-    }
-    img{
-      margin: 0 0 5px 220px;
     }
   }
   .form-actions{
@@ -3330,6 +3349,56 @@ body{
     }
   }
 }
+.story-associate-content{
+  .view-photo-landing-slider{
+    .videogallery-slider{
+      .fa-chevron-left, .fa-chevron-right{                
+        background: rgba(0, 0, 0, 0.6);
+        border: none;
+        width: 45px;
+        height: 66px;
+        border-radius: 0 7px 7px 0;
+        color: #fff;
+        position: absolute;
+        top: 50%;
+        z-index: 1;                
+        font-size: 28px;
+        text-align: center;
+        line-height: 70px;
+        cursor: pointer;
+        margin-top: -33px;
+      }
+      .fa-chevron-left{
+        left: 0;                
+      }
+      .fa-chevron-right{
+        right: 0;     
+        border-radius: 7px 0px 0px 7px;
+      }
+    }
+  }
+}
+span.personal-social-share-links {
+    position: absolute;
+    left: 110px;
+    bottom: 15px;
+    display: none;
+}
+.personal-social-share-links a {
+    display: inline-block;
+    vertical-align: top;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    background: #000;
+    color: #fff;
+    border-radius: 50%;
+    margin-right: 5px;
+    .fa:before{
+      font-size: 16px;
+      line-height: 30px;
+    }
+}
 
 
 
@@ -3354,6 +3423,7 @@ body{
   .dm-pic a,
   .top-takes-list a,
   .trending-videos-list .pic a,
+  .trending-videos-list > a.pic,
   .big-story-col-1 a,
   .may-we-suggest > a,
   .watch-right-now-list > a,
@@ -4973,15 +5043,18 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .show-embed-code-link{
     position: relative;
     .show-embed-code-div{
-      top: 46px;
+      top: calc(100% - 10px);
       position: absolute;
       display: none;
       width: 340px;
-      right: -75px;
+      left: 50%;
+      transform: translateX(-50%);
       padding-top: 10px;
+      z-index: 99999;
       .copy-sample-code{
         background-color: #fff;        
         position: relative;
+        box-shadow: 0 0 10px #666;
         &:before {
           border-color: transparent transparent #fff transparent;
           border-style: solid;
@@ -4991,7 +5064,9 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           position: absolute;
           top: -20px;
           width: 0;
-          left: 230px;
+          left: 0;
+          right: 0;
+          margin: 0 auto;
         }
         textarea {
             border: 1px solid #fff;
@@ -5059,13 +5134,14 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       .funalytics-slider{
         padding: 20px 50px;
         .slick-slide{
-          
+
           .title{font: 500 26px/30px Roboto; padding-bottom: 12px;}
           .pic{
             background: url(../images/funalytics.png) top right no-repeat;
             img{
               width: calc(100% - 180px);
               height: 388px;
+              float: left;
             }
           }
         }
@@ -5100,10 +5176,21 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         }
       }
     }
-    
+
     .view-content{margin: 0 -15px;}
     .funalytics-tile{
-      padding-bottom: 50px;
+      margin-bottom: 50px;
+      border: 1px solid #ddd;
+      .pic{
+        border-bottom: 1px solid #ddd;
+        height: 208px;
+        overflow: hidden;
+        img{
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .funalytics-text{padding: 0 10px;}
       .updated-date {
         font-size: 12px;
         color: #b1b1b1;
@@ -5114,6 +5201,62 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         color: #323232;
         height: 48px;
         overflow: hidden;
+      }
+      .social-share{
+        @include display-inline;
+        @include social-share;
+        padding: 5px 5px;
+        ul{
+          li{
+            padding-right: 4px;
+            a.share{
+              width: auto;
+              height: auto; 
+              .fa{font-size: 18px;}
+            }
+          }
+        }
+      }
+    }
+    @include pager;
+    ul.pager{display: inline-block; vertical-align: top; width: 100%;}
+  }
+  .funalytics-socials {
+    height: 388px;
+    overflow: hidden;
+    width: 180px;
+    .download-nf {
+      display: inline-block;
+      height: 105px;
+      margin-top: 92px;
+      vertical-align: top;
+      width: 100%;
+    }
+    .google-play {
+      display: inline-block;
+      height: 38px;
+      margin: 31px 0 0 33px;
+      vertical-align: top;
+      width: 125px;
+    }
+    .app-store {
+      display: inline-block;
+      height: 38px;
+      margin: 5px 0 0 33px;
+      vertical-align: top;
+      width: 125px;
+    }
+    .funalytics-social-links {
+      display: inline-block;
+      height: 40px;
+      margin: 34px 0 0 28px;
+      vertical-align: top;
+      width: 135px;
+      a{
+        float: left;
+        width: 40px;
+        height: 40px;
+        margin-right: 5px;
       }
     }
   }
@@ -5870,7 +6013,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
   .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child{margin-left: 175px;}
   [id*="views-exposed-form-front-end-global-search-page"]{
-    .form-item-sm-field-itg-common-by-line-name, .views-widget-filter-tm_vid_4_names{
+    .form-item-sm-field-itg-common-by-line-name, [class*="views-widget-filter-tm_vid_"], .views-widget-filter-tm_vid_4_names, .views-widget-filter-tm_vid_14_names{
       #autocomplete{
         position: relative !important;
         top: 0 !important; 
@@ -5889,7 +6032,33 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
 }
 @media all and(max-width: 767px){
-  
+  .personal-list{
+    margin: 0 -15px;
+  }
+  #block-views-video-landing-header-block{
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    .video-header-right .ads{
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
+    }
+  }
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-textarea, 
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-text, 
+  #content [id*="ugc-node-form"].ugc-custom-wrapper select{
+    width: 100%;
+  }
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-name, 
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-city,
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-user-email, 
+  #content [id*="ugc-node-form"].ugc-custom-wrapper .form-field-name-field-section{
+    float: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
   .comment-user-details{
     text-align: left;
     > div {
@@ -6051,15 +6220,12 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     }
     .pregress-bar{
       margin-top: 5px;
-      .pregress-bar-active{
-        max-width: 88%;
-        height: 2px;
-        &:before{
-          height: 2px;
-        }
+      padding-left: 10px;
+      .progress-bar-div{
+        max-width: 90%;
       }
       span.current-badge, span.next-badge{font-size: 10px; line-height: 16px;}
-      span.current-badge{left: 0; top: 0; text-align: left;}
+      span.current-badge{left: 5px; top: 0; text-align: left;}
       span.next-badge{right: 0; top: 0; text-align: right;}
       span.current-badge small, 
       span.next-badge small{margin-bottom: 0; font-size: 12px;}
@@ -6171,6 +6337,9 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     padding-right: 0;
   }
   .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child{margin-left: 125px;}
+  .sign-in-link a{
+    float: left;
+  }
 }
 @media all and (max-width: 360px){
   .cart-total-block .points-balance span:first-child{

@@ -119,7 +119,8 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
   } if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'archive_story') {
     
     $dat_1_day_ago = date('Y-m-d', strtotime('-1 days'));
-    $hash = array('5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'e49it8' => 'Stage Server');
+    //$hash = array('5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'e49it8' => 'Stage Server');
+    $hash = array('9m4hke' => 'UAT');
     $request_url_array = explode('/', $_SERVER['REQUEST_URI']);
     if (is_array($request_url_array) && count($request_url_array) > 0) {
       if (in_array('dev', $request_url_array)) {
@@ -132,7 +133,8 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
         $hash = 'e49it8';
       }
       else {
-        $hash = '2e1u4m';
+        //$hash = '2e1u4m';
+        $hash = '9m4hke';
       }
     }
     
@@ -198,33 +200,8 @@ function itg_front_search_views_pre_render(&$view) {
     drupal_add_js(drupal_get_path('module', 'itg_front_search') . '/js/itg_front_search.js', array('weight' => 1));
 
     foreach ($view->result as $related_result) {
-      // dpm($related_result);
-      if ($related_result->bs_status == '1') {
+       if ($related_result->bs_status == '1') {
         $related_result->bs_status = 'Published';
-      }
-
-      // image condition when image not image
-      //$image = $related_result->sm_thumb_medium_field_story_extra_large_image[0];
-      $image = $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0];
-      $blog_image = $related_result->sm_thumb_medium_field_blog_image[0];
-      $magazine_image = $related_result->sm_thumb_medium_field_magazine_cover_photo[0];
-
-      $pattern = '/src="([^"]*)"/';
-
-      if (preg_match($pattern, $image, $matches)) {
-        $src = $matches[1];
-        if (getimagesize($src) !== false) {
-          $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0] = $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0];
-        }
-        else {
-          $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-          $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0] = "<img src='$img_url' alt='' />";
-        }
-      }
-
-      if (empty($image) && empty($magazine_image)) {
-        $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-        $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0] = "<img src='$img_url' alt='' />";
       }
 
       $words = $_GET['keyword'];

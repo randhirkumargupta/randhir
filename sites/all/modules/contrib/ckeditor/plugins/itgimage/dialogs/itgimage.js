@@ -12,7 +12,7 @@ function capitalise(string) {
 CKEDITOR.dialog.add('itgimageDialog', function(editor) {
     return {
         // Basic properties of the dialog window: title, minimum size.
-        title: 'itgvideo',
+        title: 'itgimage',
         minWidth: 400,
         minHeight: 200,
         // Dialog window content definition.

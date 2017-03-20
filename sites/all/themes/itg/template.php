@@ -217,7 +217,11 @@ function itg_html_head_alter(&$head_elements) {
     $arg_data = node_load(arg(1));
     if ($arg_data->type == 'videogallery') {
       if (is_array($arg_data->field_video_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_video_configurations[LANGUAGE_NONE])) {
-        if ($arg_data->field_video_configurations[LANGUAGE_NONE][0]['value'] == 'google_standout') {
+        $configurableopt = $arg_data->field_video_configurations[LANGUAGE_NONE];
+        foreach ($configurableopt as $key => $value){
+          $opt_value[] = $value['value'];
+        }
+        if (in_array("google_standout", $opt_value)) {
           $standout_path = $base_url . '/' . $arg_data->path['alias'];
           $head_elements['google_standout'] = array(
               '#type' => 'html_tag',
@@ -228,7 +232,11 @@ function itg_html_head_alter(&$head_elements) {
       }
     } else if ($arg_data->type == 'photogallery') {
       if (is_array($arg_data->field_photogallery_configuration[LANGUAGE_NONE]) && !empty($arg_data->field_photogallery_configuration[LANGUAGE_NONE])) {
-        if ($arg_data->field_photogallery_configuration[LANGUAGE_NONE][0]['value'] == 'google_standout') {
+        $configurableopt = $arg_data->field_photogallery_configuration[LANGUAGE_NONE];
+        foreach ($configurableopt as $key => $value){
+          $opt_value[] = $value['value'];
+        }
+        if (in_array("google_standout", $opt_value)) {
           $standout_path = $base_url . '/' . $arg_data->path['alias'];
           $head_elements['google_standout'] = array(
               '#type' => 'html_tag',
@@ -239,7 +247,11 @@ function itg_html_head_alter(&$head_elements) {
       }
     } else if ($arg_data->type == 'podcast') {
       if (is_array($arg_data->field_podcast_configuration[LANGUAGE_NONE]) && !empty($arg_data->field_podcast_configuration[LANGUAGE_NONE])) {
-        if ($arg_data->field_podcast_configuration[LANGUAGE_NONE][0]['value'] == 'google_standout') {
+        $configurableopt = $arg_data->field_podcast_configuration[LANGUAGE_NONE];
+        foreach ($configurableopt as $key => $value){
+          $opt_value[] = $value['value'];
+        }
+        if (in_array("google_standout", $opt_value)) {
           $standout_path = $base_url . '/' . $arg_data->path['alias'];
           $head_elements['google_standout'] = array(
               '#type' => 'html_tag',
@@ -250,7 +262,11 @@ function itg_html_head_alter(&$head_elements) {
       }
     } else if ($arg_data->type == 'story') {
       if (is_array($arg_data->field_story_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_story_configurations[LANGUAGE_NONE])) {
-        if ($arg_data->field_story_configurations[LANGUAGE_NONE][0]['value'] == 'google_standout') {
+        $configurableopt = $arg_data->field_story_configurations[LANGUAGE_NONE];
+        foreach ($configurableopt as $key => $value){
+          $opt_value[] = $value['value'];
+        }
+        if (in_array("google_standout", $opt_value)) {
           $standout_path = $base_url . '/' . $arg_data->path['alias'];
           $head_elements['google_standout'] = array(
               '#type' => 'html_tag',

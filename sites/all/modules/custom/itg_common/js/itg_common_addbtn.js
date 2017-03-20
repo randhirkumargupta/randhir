@@ -40,6 +40,20 @@
         }
         });
     });
+    jQuery('input[name="itg_twitter_img_remove_button"]').on('mousehover', function() {
+        jQuery(document).on('ajaxComplete',function(event, request, settings) {
+           if(jQuery('input[name="itg_twitter_img[fid]"]').val() ==0) {
+            jQuery('.div_itg_twitter_img').show();
+        }
+        });
+    });
+    jQuery('input[name="itg_fb_img_remove_button"]').on('mousehover', function() {
+        jQuery(document).on('ajaxComplete',function(event, request, settings) {
+           if(jQuery('input[name="itg_fb_img[fid]"]').val() ==0) {
+            jQuery('.div_itg_fb_img').show();
+        }
+        });
+    });
     
      jQuery('input[name="lrp_gold_star_two_icon_remove_button"]').on('mousedown', function() {
         jQuery(document).ajaxComplete(function(event, request, settings) {

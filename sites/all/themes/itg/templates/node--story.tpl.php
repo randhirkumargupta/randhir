@@ -111,7 +111,14 @@ if (!empty($content)):
           }
           if (!empty($get_develop_story_status)) {
             ?>
-            <h1><?php print $node->title . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
+          <h1><?php
+                  if (function_exists('itg_common_get_smiley_title')) {
+                    print itg_common_get_smiley_title($node->nid, 0, 255) . $pipelinetext;
+                  }
+                  else {
+                    print $node->title . $pipelinetext;
+                  }
+                  ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
           <?php }
           else { ?>
             <h1><?php 
@@ -122,8 +129,14 @@ if (!empty($content)):
               print $node->title . $pipelinetext;
             }
             ?></h1>
+          <?php global $user;
+        if(in_array('Social Media', $user->roles)) {?>
+         <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $node->nid;?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span>promote</span></a>   
+        <?php }?>
           <?php } ?>
           <?php
+          
+          //code for Associate lead
           $associate_type = '';
           $associate_id = '';
 
@@ -135,15 +148,19 @@ if (!empty($content)):
             $associate_type = 'video';
             $associate_id = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
           }
+          
           $clidk_class_slider = "";
           $widget_data = '';
+          
           if ($associate_type != "" && $associate_id !="") {
             $clidk_class_slider = 'associate-content-block';
             $widget_data = $associate_type . '-' . $associate_id;
           }
           
+          //code end for Associate lead
+          
           ?>
-  <!--           <a href="javascript:void(0)" class="associate-content-block" data-widget="<?php //echo $associate_type; ?>-<?php // echo $associate_id; ?>">click here</a>-->            
+  
           <div class="story-left-section">
   <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_listicle[LANGUAGE_NONE])) { ?>
                 <div class="story-left">
@@ -336,38 +353,34 @@ if (!empty($content)):
               <!-- Check the story type whether it is a photo story or not-->
                <?php if ((!empty($node->field_story_type) && $node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story') || (empty($node->field_story_type))) { ?>
               <div class="story-right <?php
-  if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
-    echo 'listicle-page';
-  }
-  ?>">
+                if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
+                  echo 'listicle-page';
+                }
+                ?>">
                   <?php
+                  //associate_lead
                   $associate_lead = $node->field_story_associate_lead[LANGUAGE_NONE][0]['value'];
                   $associate_photo = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
                   $associate_video = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
-                  if(!empty($associate_lead) && !empty($associate_photo) && !empty($associate_video)) {
-                      $class = 'story-associate-content';
+                  
+                  if(!empty($associate_lead) && (isset($associate_photo) || isset($associate_video))) {
+                    $class = 'story-associate-content';
                   } 
                   ?>
                   <div class="<?php echo $class; ?>">
-                      <?php
-                  if(!empty($associate_lead) && !empty($associate_video)) {?>
+                  <?php
+                  if(!empty($associate_lead) && (isset($associate_photo) || isset($associate_video))) {?>
                     <div id="videogallery-iframe">
-                          <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading" />
-                      </div>
-                  <?php }
-                  ?>                      
+                      <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading" />
+                    </div>
+                  <?php } ?>                      
                       <?php
-                      $clidk_class_slider = "";
-                      $widget_data = '';
-                      if ($associate_type != "" && $associate_id !="") {
-                        $clidk_class_slider = 'associate-content-block';
-                        $widget_data = $associate_type . '-' . $associate_id;
-                      }
+                      
                       if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
                         // imgtags" img-fid="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];" use for image tagging
                         ?>
                         <div class="stryimg" ><?php
-                        if(empty($widget_data)){
+                        if (empty($widget_data)) {
                           $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                             if(file_exists($story_image)) {
                               $file_uri = file_create_url($story_image);
@@ -376,14 +389,14 @@ if (!empty($content)):
                             }
                           print '<img  alt="" title="" src="' . $file_uri . '">';
                         } else {
-                        $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                        $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
-                        if(file_exists($story_image)){
-                          $file_uri = file_create_url($story_image);
-                        } else {
-                          $file_uri =  $base_url. '/sites/all/themes/itg/images/itg_image647x363.jpg';
-                        }
-                        print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">';
+                            $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                            $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
+                            if(file_exists($story_image)){
+                              $file_uri = file_create_url($story_image);
+                            } else {
+                              $file_uri =  $base_url. '/sites/all/themes/itg/images/itg_image647x363.jpg';
+                            }
+                            print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">';
                         ?>        
 
                             <?php if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') { ?>
@@ -391,7 +404,10 @@ if (!empty($content)):
                             <?php }
                             else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') { ?>                    
                               <i class="fa fa-camera"></i>
-                            <?php } print '</span></a>'; } ?>
+                            <?php } 
+                                print '</span></a>'; 
+                                
+                            } ?>
 
                             <?php
                             if (!empty($getimagetags)) {
@@ -595,32 +611,34 @@ if (!empty($content)):
                             print '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
                           }
 
-                          if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
+                          if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
                             $wrapper = entity_metadata_wrapper('node', $node);
                             $num = 1;
-                            foreach ($wrapper->field_story_listicle as $i):
-                              $listicletype = '';
+                            if (!empty($wrapper->field_story_listicle)) {
+                              foreach ($wrapper->field_story_listicle as $i):
+                                $listicletype = '';
 
-                              print '<div class="listicle-detail">';
-                              $type = $i->field_story_listicle_type->value();
-                              $description = $i->field_story_listicle_description->value();
-                              $color = $i->field_listicle_color->value();
-                              $li_type = $node->field_story_templates[LANGUAGE_NONE][0]['value'];
-                              $color = ($color) ? $color : '#000000';
-                              if ($li_type == 'bullet_points') {
-                                print '<span class="bullet_points"></span>';
-                              }
-                              else {
-                                print '<span>' . $num . '</span>';
-                              }
+                                print '<div class="listicle-detail">';
+                                $type = $i->field_story_listicle_type->value();
+                                $description = $i->field_story_listicle_description->value();
+                                $color = $i->field_listicle_color->value();
+                                $li_type = $node->field_story_templates[LANGUAGE_NONE][0]['value'];
+                                $color = ($color) ? $color : '#000000';
+                                if ($li_type == 'bullet_points') {
+                                  print '<span class="bullet_points"></span>';
+                                }
+                                else {
+                                  print '<span>' . $num . '</span>';
+                                }
 
-                              if (isset($type)) {
-                                $listicletype = '<span class="listicle-type" style="color: ' . $color . '">' . $type . ': </span>';
-                              }
-                              print '<div class="listicle-description">' . $listicletype . $description . '</div>';
-                              print '</div>';
-                              $num++;
-                            endforeach;
+                                if (isset($type)) {
+                                  $listicletype = '<span class="listicle-type" style="color: ' . $color . '">' . $type . ': </span>';
+                                }
+                                print '<div class="listicle-description">' . $listicletype . $description . '</div>';
+                                print '</div>';
+                                $num++;
+                              endforeach;
+                            }
                           }
                           else {
                             // Print story body
@@ -862,7 +880,14 @@ if (!empty($content)):
     ?>
                     </div>
                     <!-- For buzzfeed section end --> 
-                  <?php } ?>
+                  <?php } 
+                  
+                if(!empty($node->field_story_configurations['und'])) {
+                                 foreach ($node->field_story_configurations['und'] as $value) {
+                                   $config[] = $value['value'];
+                                 }
+                               }
+                  ?>
 
               </div>
 
@@ -873,8 +898,12 @@ if (!empty($content)):
               ?>
 
                   <?php
-                  if ($config_name == 'vukkul') {
-                    ?>
+                  if ($config_name == 'vukkul' && in_array('comment', $config)) {
+                    if (!empty($node->field_story_comment_question['und'][0]['value'])) {
+                    $question = 'Q:'.$node->field_story_comment_question['und'][0]['value'];
+                  }
+                  ?>
+              <div class="c_ques"><?php print $question; ?></div>
                 <div class="vukkul-comment">
                     <div id="vuukle-emote"></div>
                     <div id="vuukle_div"></div>
@@ -887,16 +916,17 @@ if (!empty($content)):
 
                 </div>
     <?php
-  }
-  if ($config_name == 'other') {
-    ?>
-                <div id="other-comment">
-    <?php
-    $block = module_invoke('itg_ugc_comment', 'block_view', 'ugc_form_comment_block');
-    print render($block['content']);
-    ?>
-                </div>
-  <?php } ?>
+                }
+                if ($config_name == 'other' && in_array('comment', $config)) {
+                 ?>
+                    <div id="other-comment">
+                        <?php
+                        $block = module_invoke('itg_ugc_comment', 'block_view', 'ugc_form_comment_block');
+                        print render($block['content']);
+                        ?>
+                    </div>
+                  <?php
+                } ?>
           </div>            
       </div>               
 

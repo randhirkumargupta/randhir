@@ -43,7 +43,7 @@ function feature_category_management_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 15,
+      'weight' => 14,
     ),
   );
 
@@ -77,7 +77,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 13,
+      'weight' => 12,
     ),
   );
 
@@ -111,7 +111,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 14,
+      'weight' => 13,
     ),
   );
 
@@ -120,7 +120,7 @@ function feature_category_management_field_default_field_instances() {
   $field_instances['taxonomy_term-category_management-field_cm_category_banner'] = array(
     'bundle' => 'category_management',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (43 x 43)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -136,7 +136,7 @@ function feature_category_management_field_default_field_instances() {
     'entity_type' => 'taxonomy_term',
     'exclude_cv' => 0,
     'field_name' => 'field_cm_category_banner',
-    'label' => 'Category Banner',
+    'label' => 'Category Banner Icon',
     'required' => 0,
     'settings' => array(
       'alt_field' => 1,
@@ -160,6 +160,8 @@ function feature_category_management_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -182,7 +184,7 @@ function feature_category_management_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 7,
+      'weight' => 23,
     ),
   );
 
@@ -205,7 +207,7 @@ function feature_category_management_field_default_field_instances() {
     'entity_type' => 'taxonomy_term',
     'exclude_cv' => 0,
     'field_name' => 'field_cm_category_color',
-    'label' => 'Category Color',
+    'label' => 'Category Banner Colour',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -216,7 +218,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 5,
+      'weight' => 22,
     ),
   );
 
@@ -287,7 +289,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 1,
+      'weight' => 15,
     ),
   );
 
@@ -321,7 +323,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 2,
+      'weight' => 14,
     ),
   );
 
@@ -355,7 +357,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 3,
+      'weight' => 16,
     ),
   );
 
@@ -529,7 +531,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 4,
+      'weight' => 1,
     ),
   );
 
@@ -566,7 +568,7 @@ function feature_category_management_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 12,
+      'weight' => 11,
     ),
   );
 
@@ -600,7 +602,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 16,
+      'weight' => 15,
     ),
   );
 
@@ -637,7 +639,7 @@ function feature_category_management_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 15,
+      'weight' => 3,
     ),
   );
 
@@ -671,7 +673,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 11,
+      'weight' => 10,
     ),
   );
 
@@ -815,7 +817,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 14,
+      'weight' => 2,
     ),
   );
 
@@ -852,7 +854,7 @@ function feature_category_management_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 4,
     ),
   );
 
@@ -889,7 +891,7 @@ function feature_category_management_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 17,
+      'weight' => 16,
     ),
   );
 
@@ -897,8 +899,8 @@ function feature_category_management_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t(' Program Timing');
   t('App description');
-  t('Category Banner');
-  t('Category Color');
+  t('Category Banner Colour');
+  t('Category Banner Icon');
   t('Category Icon');
   t('Content Type');
   t('Description');
@@ -909,6 +911,7 @@ function feature_category_management_field_default_field_instances() {
   t('If you checked this option, category name will not appear on front end navigation.');
   t('If you checked this option, category will be marked as sponsored and will appear in the category listing page with special flag "Sponsored". ');
   t('If you checked this option, then this category would not be able to search in google search.');
+  t('Image Size (43 x 43)');
   t('Issue free');
   t('No Follow');
   t('Please enter display title, it will appear on the front end if user has entered.');

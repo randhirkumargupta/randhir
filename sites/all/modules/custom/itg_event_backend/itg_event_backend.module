@@ -132,6 +132,24 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       drupal_add_css("a.anchor-order-reorder {text-decoration:underline !important}", "inline");
       $form['field_e_associate_highlights']['#suffix'] = "<div class='form-wrapper speaker-order-reorder'>$link</div>";
     }
+    
+    $form['field_config_photo']['#access'] = FALSE;
+    $form['field_config_video']['#access'] = FALSE;
+    $color_box_query_config = array("width" => "900", "height" => "600", "iframe" => "true");
+    $color_box_class_config = array("class" => array("colorbox-load anchor-order-reorder"));
+    $link_text_config = l(t('Click here'), "event-registration-config/" . arg(1), array('query' => $color_box_query_config, 'attributes' => $color_box_class_config));
+    if (isset($_GET['step']) && $_GET['step'] == 'step_second' && is_numeric(arg(1))) {
+      $form['registration_config'] = array(
+        '#type' => 'item',
+        '#title' => t('Registration form configuration'),
+        '#markup' => $link_text_config,
+        '#weight' => 10,
+      );
+      // add field in step
+      $form['#steps']['step_second']->children[] = 'registration_config';
+      $form['#step_children']['registration_config'] = 'step_second';
+    }
+    
   }
 
   // Form alter for sponsor node
@@ -157,21 +175,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => 20,
     );
   }
-  $form['field_config_photo']['#access'] = FALSE;
-  $form['field_config_video']['#access'] = FALSE;
-  $color_box_query_config = array("width" => "900", "height" => "600", "iframe" => "true");
-  $color_box_class_config = array("class" => array("colorbox-load anchor-order-reorder"));
-  $link_text_config = l(t('Click here'), "event-registration-config/" . arg(1), array('query' => $color_box_query_config, 'attributes' => $color_box_class_config));
-  if (isset($_GET['step']) && $_GET['step'] == 'step_second' && is_numeric(arg(1))) {
-    $form['registration_config'] = array(
-      '#type' => 'item',
-      '#title' => t('Registration form configuration'),
-      '#markup' => $link_text_config,
-      '#weight' => 10,
-    );
-    $form['#steps']['step_second']->children[] = 'registration_config';
-    $form['#step_children']['registration_config'] = 'step_second';
-  }
+  
 }
 
 /**
@@ -507,10 +511,10 @@ function itg_event_backend_after_build($form, &$form_state) {
   
   foreach ($form['field_associate_sponsors'][LANGUAGE_NONE] as $key => $program) {
     if (is_numeric($key)) {
-      $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] . '<span title="This field is required." class="form-required"></span>';
+      $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] . '<span title="This field is required." class="form-required"></span>';
       if (isset($form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
-        $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
-        $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+        $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+        $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
       }
 
       $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $media_options;

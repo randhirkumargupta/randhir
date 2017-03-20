@@ -90,7 +90,7 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
 
   // Set destination for survey form
   if ($form_id == 'survey_node_form') {
-    $form['field_survey_category']['und']['#config']['module'] = 'itg_category_manager';
+    //$form['field_survey_category']['und']['#config']['module'] = 'itg_category_manager';
     unset($form['field_supp_publish']['und']['#options']['_none']);
     if (is_numeric(arg(1))) {
       $publish_value = itg_survey_get_publish_status(arg(1));
@@ -109,13 +109,13 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
     $form['title']['#description'] = '<p>' . t('Please enter survey title.') . '</p>';
     unset($form['field_supp_publish'][LANGUAGE_NONE]['#title']);
 
-    if (is_numeric(arg(1)) && arg(2) == 'edit') {
-      $form['actions']['view_survey_result'] = array(
-        '#markup' => l(t('View Survey Result'), 'survey-result/' . arg(1), array('attributes' => array('class' => 'survey-view-result-btn', 'target' => '_blank'))),
-        '#weight' => 20,
-        '#value' => t('View Survey Result'),
-      );
-    }
+//    if (is_numeric(arg(1)) && arg(2) == 'edit') {
+//      $form['actions']['view_survey_result'] = array(
+//        '#markup' => l(t('View Survey Result'), 'survey-result/' . arg(1), array('attributes' => array('class' => 'survey-view-result-btn', 'target' => '_blank'))),
+//        '#weight' => 20,
+//        '#value' => t('View Survey Result'),
+//      );
+//    }
 
     $form['actions']['cancel'] = array(
       '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
@@ -1218,7 +1218,7 @@ function itg_survey_survey_form_submit($form, &$form_state) {
     // Call loyalty & rewards function to save points for a user
     if (function_exists('itg_loyalty_reward_earnpoint')) {
       if ($user->uid) {
-        itg_loyalty_reward_earnpoint($form_state['values']['nid'], 'participate', $user->uid);
+        //itg_loyalty_reward_earnpoint($form_state['values']['nid'], 'participate', $user->uid);
       }
     }
   }

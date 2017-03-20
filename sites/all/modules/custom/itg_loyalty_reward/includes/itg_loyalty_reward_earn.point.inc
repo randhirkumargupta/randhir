@@ -328,7 +328,8 @@ function itg_loyalty_reward_points_expire_notification_callback() {
   if (!empty($itg_result)) {
     foreach ($itg_result as $value) {
       $data['remaining_point'] = $value->remaining_point;
-      itg_common_get_mail_content($data, $value->mail, 'lrp_point', 'India Today | Loyalty Points Notification');
+      // for mail code
+      //itg_common_get_mail_content($data, $value->mail, 'lrp_point', 'India Today | Loyalty Points Notification');
     }
   }
 }

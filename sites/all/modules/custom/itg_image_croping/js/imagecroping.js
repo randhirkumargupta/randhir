@@ -15,11 +15,11 @@
             type: 'post',
             data: {'fid': imageid, 'field_name': fieldname},
             success: function(data) {
-                var appenddata = '<div id="smi-popup" class="itg-popup">';
+                var appenddata = '<div id="smi-popup" class="itg-popup itg-photo-popup">';
                 appenddata += '<div class="popup-content">';
                 appenddata += '<div class="popup-head">';
                 appenddata += '<div class="popup-title">&nbsp;</div>';
-                appenddata += '<a class="itg-close-popup_new" href="javascript:;"> Close </a>';
+                appenddata += '<a class="itg-close-popup_new" href="javascript:;"> <i class="fa fa-times" aria-hidden="true"></i> </a>';
                 appenddata += '</div>';
                 appenddata += '<div class="popup-body">';
                 appenddata += data;

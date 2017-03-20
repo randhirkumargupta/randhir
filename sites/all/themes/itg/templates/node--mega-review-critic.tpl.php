@@ -275,12 +275,14 @@
                       <h3><span>MOVIE VIDEOS</span></h3>
                       <?php
                       $video_node = node_load($asso_vid_id);
-                      $large_image = theme(
-                                      'image_style', array(
-                                      'style_name' => empty($asso_vid_class) ? 'mrass_video' : 'anchors_landing',
-                                      'path' => $video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'],
-                                      )
-                                    );
+                      $final_image = str_replace('styles/mrass_video/http/','',file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']));
+//                      $large_image = theme(
+//                                      'image_style', array(
+//                                      //'style_name' => empty($asso_vid_class) ? 'mrass_video' : 'anchors_landing',
+//                                      'path' => $final_image,
+//                                      )
+//                                    );
+                      $large_image = '<img src="' . $final_image . '" alt="image">';
                       print l($large_image, 'node/' . $video_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
                       ?>
               <?php $video_date = format_date($video_node->created, 'custom', 'D, d M, Y'); ?>
@@ -304,12 +306,14 @@
                       <h3><span>PHOTOS</span></h3>
                       <?php
                       $photo_node = node_load($asso_photo_gallery);
-                      $small_image = theme(
-                                        'image_style', array(
-                                        'style_name' => empty($ass_photo_class) ? 'mrass_video' : 'anchors_landing',
-                                        'path' => $photo_node->field_story_extra_large_image['und'][0]['uri'],
-                                        )
-                                    );
+                      $final_image = str_replace('styles/mrass_video/http/','',file_create_url($photo_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']));
+//                      $small_image = theme(
+//                                        'image_style', array(
+//                                        'style_name' => empty($ass_photo_class) ? 'mrass_video' : 'anchors_landing',
+//                                        'path' => $final_image,
+//                                        )
+//                                    );
+                      $small_image = '<img src="' . $final_image . '" alt="image">';
                       $image_count = count($photo_node->field_gallery_image['und']);
                       print l($small_image, 'node/' . $photo_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
                       ?>

@@ -110,7 +110,7 @@ function itg_dbmigrate_migrate_api() {
         'title' => t('Itg Photo Category Migration'),
       ),
       'itg_story_list' => array(
-        'title' => t('Story Migrate by single xml'),
+        'title' => t('Story Migrate by xml chunks'),
       ),
       /*'itg_magazine' => array(
         'title' => t('Itg magazine Imports'),

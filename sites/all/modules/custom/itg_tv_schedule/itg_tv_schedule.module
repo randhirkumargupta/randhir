@@ -64,13 +64,6 @@ function itg_tv_schedule_form($form, &$form_state) {
       '#value' => t('Submit'),
     );
     
-    drupal_add_js('jQuery(document).ready(function () {
-      jQuery("#edit-file-upload-button").hide();
-    jQuery("body").on("change", "#edit-file-upload", function () {
-        jQuery("#edit-file-upload-button").mousedown();
-    });
-    });', array('type' => 'inline', 'scope' => 'footer'));
-    
   return $form;
 }
 

@@ -57,7 +57,7 @@ list($width, $height) = getimagesize($url);
                 . '<input type="text" name="keyword[]" placeholder="Keyword"  value=""></br>'
                 . '<input type="text" name="tags[]" placeholder="Tags"  value=""></br>'
                 . '<input type="text" name="place[]" placeholder="Place"  value=""></br>'
-                . '<input type="text" name="photo_grapher[]" placeholder="Photo grapher"  value=""></br>'
+                . '<input type="text" name="photo_grapher[]" placeholder="Photographer"  value=""></br>'
                 . '<input type="text" name="image_date[]" placeholder="Date (dd/mm/yyyy)"  value=""></br>'
                  . '<input type="text" name="image_description[]" placeholder="Description"  value=""></br>'
                 . '</div> </div> ';  

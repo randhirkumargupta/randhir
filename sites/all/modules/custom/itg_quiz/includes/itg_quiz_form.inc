@@ -104,8 +104,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
     $total_num_of_ques = count($ques_arr);
 
     // Parent loop for generate quiz form
-    foreach ($ques_arr as $question_arr) {
-
+    foreach ($ques_arr as $question_arr) {     
       // Question Details
       $question_detail = entity_load('field_collection_item', array($question_arr['value']));
       $question = $question_detail[$question_arr['value']]->field_survey_question[LANGUAGE_NONE][0]['value'];
@@ -117,24 +116,23 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
         $answer_type = 'radios';
       } else {
         $answer_type = 'checkboxes';
-      }
-      
+      }       
       // Loop for answer details
       $all_ans_options_media = '';
       $answer_option = $question_detail[$question_arr['value']]->field_quiz_option[LANGUAGE_NONE][0]['value'];
       foreach($question_detail[$question_arr['value']]->field_quiz_options_answer[LANGUAGE_NONE] as $ans_option) {
         $ans_option_arr = entity_load('field_collection_item', array($ans_option['value']));
-        
+       
         // Prepare array of correct answers
        $option_class = 'wrong-answer';
         if(!empty($ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE])) {
               foreach ($ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE] as $currect_ans) {
                 if ($currect_ans['value'] == 'Yes') {
                   $option_class = 'right-answer';
-                  $correct_ans_op[$num][] = $ans_option['value'];
+                  $correct_ans_op[$num][] = $ans_option['value'];                  
                 }
               }
-         }
+         }         
         
         // Prepare array of answer options
         foreach ($ans_option_arr[$ans_option['value']]->field_quiz_answer_text[LANGUAGE_NONE] as $final_ans_op) {
@@ -161,7 +159,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
          }
         
       }
-
+      
       //Media information
       $media = $question_detail[$question_arr['value']]->field_survey_add_media[LANGUAGE_NONE][0]['uri'];
       $media_type = strtolower(substr(strrchr($media, '.'), 1));
@@ -226,26 +224,28 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
       }
       
        $items = field_get_items('node', $node, 'field_quiz_add_questions');
+      
        if(!empty($items)) {
-	foreach ($items as $item) {
-	  $fc = field_collection_field_get_entity($item);
-      }
+        foreach ($items as $item) {
+          $fc = field_collection_field_get_entity($item);
+        }
        }
 
       // Answer Section
       
-           if($node->field_quiz_immediate_result[LANGUAGE_NONE][0]['value'] == 'qwr' && $fc->field_quiz_answer_type[LANGUAGE_NONE][0]['value'] == 'multiple_correct') {
-              $form['answer' . $num] = array(
-		  '#type' => 'markup',
-		  '#prefix' => '<div id="answer-container-'.$num.'" class="answer-container">',
-		  '#suffix' => '<div id="answer-response-'.$question_arr['value'].'" class="answer-container-actual"></div><button id="show_answer" class="answer' . $num.'">Show answer</button>',
-	      );
+      //if($node->field_quiz_immediate_result[LANGUAGE_NONE][0]['value'] == 'qwr' && $fc->field_quiz_answer_type[LANGUAGE_NONE][0]['value'] == 'multiple_correct') {
+       if($node->field_quiz_immediate_result[LANGUAGE_NONE][0]['value'] == 'qwr' && $quiz_type == 'immediate') {
+        $form['answer' . $num] = array(
+        '#type' => 'markup',
+        '#prefix' => '<div id="answer-container-'.$num.'" class="answer-container answer_block_'.$num.'">',
+        '#suffix' => '<div id="answer-response-'.$question_arr['value'].'" class="answer-container-actual"></div><button data-type="'.$num.'" id="show_answer" class="answer' . $num.'">Show answer</button>',
+          );
       } else {
-	      $form['answer' . $num] = array(
-		  '#type' => 'markup',
-		  '#prefix' => '<div id="answer-container-'.$num.'" class="answer-container">',
-		  '#suffix' => '<div id="answer-response-'.$question_arr['value'].'" class="answer-container-actual"></div>',
-	      );
+          $form['answer' . $num] = array(
+          '#type' => 'markup',
+          '#prefix' => '<div id="answer-container-'.$num.'" class="answer-container">',
+          '#suffix' => '<div id="answer-response-'.$question_arr['value'].'" class="answer-container-actual"></div>',
+          );
       }
  
       if ($answer_option == 'Photo' || $answer_option == 'Video') {

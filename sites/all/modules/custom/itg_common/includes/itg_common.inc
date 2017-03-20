@@ -511,9 +511,19 @@ function itg_common_get_latest_byline($nid, $status) {
 function itg_common_custompath_insert_load($node) {
     global $edited_sef_url;
     if(!empty ($edited_sef_url)) {
-        $node_sef = $edited_sef_url;
+        $lencount_sef = strlen($edited_sef_url);
+        if($lencount_sef >= 160){
+           $node_sef = substr($edited_sef_url, 0, 160);
+        } else {
+           $node_sef = $edited_sef_url;
+        }
     } else {
-        $node_sef = $node->title;
+        $title_lenght = strlen($node->title);
+        if($title_lenght >= 160){
+           $node_sef = substr($node->title, 0, 160);
+        } else {
+           $node_sef = $node->title;
+        }
     }
     if(!empty($node->workbench_moderation_state_new)){
       if ($node->workbench_moderation_state_new == 'draft' || $node->workbench_moderation_state_new == 'published'){
@@ -538,6 +548,52 @@ function itg_common_custompath_insert_load($node) {
     }
 }
 
+/**
+ * Implementing 'itg_common_custompath_migrated_load'.
+ * @param $node object
+ * Creating Custom path alias for story, photogallery and videogallery
+ */
+
+function itg_common_custompath_migrated_load($node) {
+    global $edited_sef_url;
+    if(!empty ($edited_sef_url)) {
+        $lencount_sef = strlen($edited_sef_url);
+        if($lencount_sef >= 160){
+           $node_sef = substr($edited_sef_url, 0, 160);
+        } else {
+           $node_sef = $edited_sef_url;
+        }
+    } else {
+        $title_lenght = strlen($node->path['alias']);
+        if($title_lenght >= 160){
+           $node_sef = substr($node->path['alias'], 0, 160);
+        } else {
+           $node_sef = $node->path['alias'];
+        }
+    }
+    
+    $published_date = date('Y-m-d', $node->changed);
+    $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
+    if (!empty($getsection)) {
+      $parents = taxonomy_get_parents_all($getsection);
+      if (isset($parents) && !empty($parents)) {
+        foreach ($parents as $key => $val) {
+          $section_hierarchy[] = $val->name;
+        }
+      }
+      $set_hierarchy = array_reverse($section_hierarchy);
+      $pathdata = strtolower(implode("/", $set_hierarchy)) . '/'. $node->type . '/' . trim($node_sef). '-'. $node->nid .'-'. $published_date;
+      $newpath = itg_common_custompath_insert_val($pathdata);
+      $node->path = array('alias' => $newpath, 'pathauto' => FALSE);
+    }
+}
+
+
+
+
+
+
+
 /** 
  * Implementing 'itg_common_custompath_insert_val'.
  * @param $pathdata path alias content
@@ -553,6 +609,7 @@ function itg_common_custompath_insert_val($pathdata) {
         }
         $pathdata = rtrim($pathdata, "-");
         $pathdata = strtolower($pathdata);
+        $pathdata = str_replace(array(':','*', '"', "'", '#'), "-", $pathdata);
     }
     return $pathdata;
 }

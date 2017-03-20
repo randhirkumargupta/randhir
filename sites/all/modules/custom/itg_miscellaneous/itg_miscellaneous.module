@@ -12,10 +12,10 @@
  * Implements hook_init.
  * {@inheritdoc}
  */
-function itg_miscellaneous_init() {
-  global $user;
-  //p(node_load(2540));
-}
+//function itg_miscellaneous_init() {
+//  global $user;
+//  //p(node_load(2540));
+//}
 
 /**
  * Implements hook_menu().
@@ -54,6 +54,12 @@ function itg_miscellaneous_menu() {
   $items['create-section-category-in-mongo'] = array(
       'page callback' => 'drupal_get_form',
       'page arguments' => array('create_section_category_in_mongo'),
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_miscellaneous.inc',
+  );
+  $items['create-index-for-story-migration'] = array(
+      'page callback' => 'create_index_xml',
       'access arguments' => array('access administrator'),
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_miscellaneous.inc',

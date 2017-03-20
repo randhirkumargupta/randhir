@@ -35,8 +35,8 @@ global $theme_key;
      }
      //pr($widget);
   ?>
-  <li id="<?php print $widget0;?>" data-widget="<?php print $widget1;?>" data-widget-info="<?php print $widget2.'|'.$widget3.'|'.$widget4;?>">
-    <span><?php print $widget0;?></span>
+  <li id="<?php print $widget[0];?>" data-widget="<?php print $widget[1];?>" data-widget-info="<?php print $widget[2].'|'.$widget[3].'|'.$widget[4];?>">
+    <span><?php print $widget[0];?></span>
   </li>
   <?php } }?>
 <!--    <li data-widget="section_wise_order"><span>Section Wise order</span></li>-->

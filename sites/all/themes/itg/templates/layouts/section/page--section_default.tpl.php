@@ -366,16 +366,16 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                 </div>               
                             </div>
                         </div>
-
+                        
                         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
                             <div class="itg-widget">
                                 <div class="droppable <?php print $gray_bg_layout; ?>">
                                     <div class="widget-wrapper <?php print $widget_data['itg-block-19']['widget_name']; ?>">
-    <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-19']['block_title'])) { ?>
+                                    <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-19']['block_title'])) { ?>
                                             <span class="widget-title"><?php print $widget_data['itg-block-19']['block_title']; ?></span>
-    <?php } ?>
+                                    <?php } ?>
                                         <!-- for admin  -->
-    <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                                   <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
                                             <div class="widget-settings">
                                                 <div class="widget-title-wrapper">
                                                     <span class="widget-title" data-id="itg-block-19"><?php print $widget_data['itg-block-19']['block_title']; ?></span>
@@ -383,13 +383,14 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 </div>
                                                 <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                             </div>
-    <?php } ?>  
+                                    <?php } ?>  
 
                                         <div class="data-holder" id="itg-block-19"><?php print $widget_data['itg-block-19']['widget']; ?></div>
                                     </div>             
                                 </div>               
                             </div>          
                         </div>
+                        
 
                     </div>
 <?php } ?>

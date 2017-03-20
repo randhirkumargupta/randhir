@@ -38,4 +38,8 @@
     </li>
   </ul>
 </div>
-
+<?php
+if (!empty($_GET['ugc']) && $_GET['ugc'] == 'success') {
+  print '<div class="ugc_success">' . t('UGC content has been submitted successfully for further review and approval.') . '</div>';
+}
+?>

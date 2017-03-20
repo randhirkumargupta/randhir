@@ -140,6 +140,7 @@ function _create_issue_process($fid, $node_info, $parent_node) {
 
     //Insert Section and sub-section
     $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $section_tid;
+    $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_tid;
 
 
     //Set source variables in to story content type

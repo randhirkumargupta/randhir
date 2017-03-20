@@ -96,6 +96,7 @@ function itg_menu_manager_permission() {
  * {@inheritdoc}
  */
 function itg_menu_manager_form($form, &$form_state) {
+  $menu_arg = arg();
   // Change title during edit operation.
   if (isset($_GET['edit_id'])) {
     drupal_set_title("Edit menu");
@@ -122,8 +123,28 @@ function itg_menu_manager_form($form, &$form_state) {
   $section = isset($form_state['values']['sections']) ? $form_state['values']['sections'] : $frist_section;
 
   $menu_level = isset($form_state['values']['menu_level']) ? $form_state['values']['menu_level'] : "second";
+  
+  ########################################
+  #                                      #
+  # Handel case when user come form menu #
+  #                                      #
+  ########################################
+  
+  if($menu_arg[0] == 'itg-menu-manager' && $menu_arg[1] == 'second') {
+    $default_values['menu_level'] = "second";
+  }
+  
+  if($menu_arg[0] == 'itg-menu-manager' && $menu_arg[1] == 'vertical') {
+    $default_values['menu_level'] = "vertical";
+  }
+  
+  if($menu_arg[0] == 'itg-menu-manager' && $menu_arg[1] == 'third') {
+    $default_values['menu_level'] = "third";
+    $menu_level = 'third';
+  }
+  
   if ($menu_level == 'third') {
-    drupal_add_css('#decided-section {display:inline-block !important;}', array('type' => 'inline'));
+    //drupal_add_css('#decided-section {display:inline-block !important;}', array('type' => 'inline'));
     $options = itg_menu_manager_get_taxonomy_term_options('category_management');
   }
   else {
@@ -1272,7 +1293,7 @@ function itg_menu_manager_views_pre_render(&$view) {
     $view->result = $correct_view_result;
     $header_content = "";
     $header_content .= '<span class="count">Count (' . count($correct_view_result) . ') </span>';
-    $header_content .= l(t('Create Menu'), 'itg-menu-manager', array("query" => array("destination" => $arg[0] . "/" . $arg[1])));
+    $header_content .= l(t('Create Menu'), 'itg-menu-manager/'.$arg[1], array("query" => array("destination" => $arg[0] . "/" . $arg[1])));
     $view->attachment_before = $header_content;
   }
 }

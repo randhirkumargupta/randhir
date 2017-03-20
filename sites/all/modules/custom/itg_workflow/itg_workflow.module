@@ -269,7 +269,7 @@ function itg_workflow_logs_detailis() {
     array('data' => t('Modified Date')),
     array('data' => t('Action')),
   );
-  if (!empty($_GET['items_per_page']) && (!empty($_GET['username'] || !empty($_GET['email'])))) {
+  if (!empty($_GET['items_per_page']) && (!empty($_GET['username']) || !empty($_GET['email']))) {
     if (isset($_GET['items_per_page'])) {
       $items_per_page = $_GET['items_per_page'];
     }
@@ -720,17 +720,22 @@ function itg_workflow_query_alter(QueryAlterableInterface $query) {
  */
 function itg_workflow_node_access($node, $op, $account) {
   global $user;
-
+  $story_expiry_date = '';
   $arr_source_type = array('issue', 'supplement');
 
   if (isset($node->type) && $node->type == 'story' && $op == 'update' && (isset($node->field_story_source_type[LANGUAGE_NONE]) && !in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $arr_source_type))) {
-    $story_expiry_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
+    if (!empty($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {
+      $story_expiry_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
+    }
+    
     $current_time = time();
 
-    if ($node->status == 0 && (($node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected'))
+    if ($node->status == 0 && (($node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected')) {
       return NODE_ACCESS_DENY;
-    elseif (($story_expiry_date < $current_time) && (arg(0) != 'issue-listing'))
+    }
+    elseif ((!empty($story_expiry_date) && $story_expiry_date < $current_time) && (arg(0) != 'issue-listing')) {
       return NODE_ACCESS_DENY;
+    }
   } elseif (isset($node->type) && $op == 'update' && ($node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery')) {
     if (!empty($node) && $node->status == 0 && ((!empty($node->field_story_archive[LANGUAGE_NONE][0]['value']) && $node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected')) { //shravan
       return NODE_ACCESS_DENY;
@@ -804,6 +809,7 @@ function itg_workflow_node_insert($node) {
 
   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
     //drupal_set_message("under itg_workflow_node_insert");
+    // for code email
     /* if (!array_key_exists(COPY_EDITOR, $user->roles) &&
       !array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) &&
       !array_key_exists(EDITOR, $user->roles) &&
@@ -827,7 +833,7 @@ function itg_workflow_node_insert($node) {
  */
 function itg_workflow_node_update($node) {
   global $user;
-  watchdog("email_test", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
+  //watchdog("email_test", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
     //drupal_set_message("under itg_workflow_node_update");
     // get preview log ID.
@@ -878,11 +884,11 @@ function itg_workflow_node_update($node) {
         //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
       }
 
-      $user_email = get_email_by_roll($rid);
+      //$user_email = get_email_by_roll($rid);
       $user_email[] = $itguser->mail;
 
       if(itg_workflow_stop_email_during_bulk_operation($_REQUEST)) {
-        workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
+        //workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
       }
       if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
         if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
@@ -901,12 +907,12 @@ function itg_workflow_node_update($node) {
               //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
             }
 
-            $user_email = get_email_by_roll($rid);
+            //$user_email = get_email_by_roll($rid);
             $user_email[] = $itguser->mail;
 
             unset($_SESSION['node_preview_unique']);
             if(itg_workflow_stop_email_during_bulk_operation($_REQUEST)) {
-              workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
+              //workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
             }
           }
         }

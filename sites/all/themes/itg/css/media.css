@@ -579,6 +579,10 @@
   /*budget page css end*/
 }
 @media only screen and (max-width: 768px) {
+  .widget-wrapper {
+    overflow: initial;
+  }
+
   header {
     margin-bottom: 15px;
   }
@@ -1409,7 +1413,7 @@
   [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form {
     height: 90px;
   }
-  [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper .views-widget {
+  [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-14-names-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper .views-widget {
     display: none;
     position: relative;
     left: auto;
@@ -2158,9 +2162,6 @@
   #content [id*="ugc-node-form"].ugc-custom-wrapper .captcha .form-item-captcha-response div.description {
     padding-left: 0px;
   }
-  #content [id*="ugc-node-form"].ugc-custom-wrapper .captcha img {
-    margin: 0 0 5px 0px;
-  }
   #content [id*="ugc-node-form"].ugc-custom-wrapper .form-actions {
     text-align: left;
   }
@@ -2214,12 +2215,6 @@
     float: none;
     display: block;
     text-align: left;
-  }
-
-  .sign-in-link a {
-    display: block;
-    text-align: left;
-    margin-bottom: 10px;
   }
 }
 @media only screen and (max-width: 680px) {
@@ -2974,7 +2969,8 @@
     display: inline-block;
   }
   #block-views-video-landing-header-block .video-header-left .social-likes ul li a i {
-    margin-right: 5px;
+    margin-right: 8px;
+    float: left;
   }
   #block-views-video-landing-header-block .video-header-left .social-likes ul li + li a {
     border-top: 1px solid #000;

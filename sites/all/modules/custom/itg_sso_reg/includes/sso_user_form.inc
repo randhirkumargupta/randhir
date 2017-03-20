@@ -536,6 +536,9 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
             itg_sso_first_time_otp_insert($mobile, $mail, $rand_otp, 'register');
             itg_sso_sms_send($rand_otp, $mobile);
           }
+          if(!empty($form_state['values']['mail'])) {
+            itg_sso_otp_mail_content($rand_otp, $mail);
+          }
         }
 
         $mobile = isset($form_state['values']['mobile']) ? $form_state['values']['mobile'] : '';

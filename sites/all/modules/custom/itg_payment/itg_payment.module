@@ -32,6 +32,20 @@ function itg_payment_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['itg-payment/icici-payment-success'] = array(
+    'title' => 'Payment success',
+    'page callback' => 'itg_icici_payment_success_page',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['itg-payment/icici-payment-fail'] = array(
+    'title' => 'Payment success',
+    'page callback' => 'itg_icici_payment_fail_page',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
   // Order payment request url
   $items['itg_payment_order_form_request_url'] = array(
     'page callback' => 'itg_payment_order_form_request_url',
@@ -44,7 +58,7 @@ function itg_payment_menu() {
     'type' => MENU_CALLBACK,
     'access arguments' => array('access content'),
   );
-  
+
   // Order payment response fail
   $items['itg-payment/response-fail'] = array(
     'page callback' => 'itg_payment_response_fail',
@@ -307,7 +321,7 @@ function itg_payment_initial_info_update($data) {
           'user_type' => isset($data['USER_TYPE']) ? $data['USER_TYPE'] : "0",
           'registration_id' => isset($data['REGISTRATION_ID']) ? $data['REGISTRATION_ID'] : "0",
           'user_id' => isset($data['CUST_ID']) ? $data['CUST_ID'] : "0",
-          'payment_gateway' => PAYTM_PAYMENT_GATEWAY_NAME,
+          'payment_gateway' => isset($data['PAYMENT_GATEWAY']) ? $data['PAYMENT_GATEWAY'] : "0",
           'transaction_id' => isset($data['TRANSACTION_ID']) ? $data['TRANSACTION_ID'] : "0",
           'order_status' => PAYTM_ORDER_PAYMENT_PENDING_STATUS,
           'transaction_history' => isset($data['TRANSACTION_HISTORY']) ? $data['TRANSACTION_HISTORY'] : "0",
@@ -317,6 +331,7 @@ function itg_payment_initial_info_update($data) {
         ))->execute();
   }
   catch (Exception $ex) {
+    die($ex->getMessage());
     drupal_set_message($ex->getMessage(), 'error');
   }
 }
@@ -367,10 +382,10 @@ function itg_payment_checkout() {
       break;
 
     case 'icici':
-      if (isset($_SESSION['event_registration_payment']['event_key'])) {
-        $args = itg_payment_decode_data($_SESSION['event_registration_payment']['event_key']);
-        return drupal_render(drupal_get_form('itg_icici_order_form', $args));
-      }
+      //if (isset($_SESSION['event_registration_payment']['event_key'])) {
+      //$args = itg_payment_decode_data($_SESSION['event_registration_payment']['event_key']);
+      return drupal_render(drupal_get_form('itg_icici_order_form', $args));
+      //}
       //Prevent direct access the checkout url, if user is not procced the payment button.
       drupal_set_message(t("Something went wrong"), 'error');
       drupal_goto('<front>');
@@ -425,14 +440,11 @@ function itg_payment_billdesk_order_form($form, &$form_state) {
   $security_id = ITG_BILLDESK_SECURITY_KEY;
   $bdposturl = ITG_BILLDESK_POST_URL;
   $order_id = "ODR-" . time() . rand(0, 100);
-  //$value = $merchant_id . '|100000009|NA|' . $amount . '|NA|NA|NA|INR|NA|R|' . $security_id . '|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . $base_url . '/itg_billdesk_payment_success/' . $order_id;
+  $value = $merchant_id . '|100000009|NA|' . $amount . '|NA|NA|NA|INR|NA|R|' . $security_id . '|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . $base_url . '/itg-payment/billdesk-payment-success';
   // Generate Checksum.
-
-  $value = $merchant_id . '|100000009|NA|' . $amount . '|NA|NA|NA|INR|NA|R|' . $security_id . '|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . $base_url . '/itg_billdesk_payment_success';
-
-  $value = 'INDIATODAY|34137112|NA|2.00|CIT|NA|NA|INR|DIRECT|R|indiatoday|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . $base_url . '/itg-payment/billdesk-payment-success';
-  
-  
+  //echo  $value = $merchant_id . '|34137112|NA|' . $amount . '|NA|NA|NA|INR|NA|R|indiatoday|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . $base_url . '/itg_billdesk_payment_success';
+  //echo '<br>';
+  //echo $value = 'INDIATODAY|34137112|NA|2.00|CIT|NA|NA|INR|DIRECT|R|indiatoday|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . $base_url . '/itg-payment/billdesk-payment-success';
 //  $newdatawithchecksumkey = $value . "|" . $checksumkey;
 //  $checksum = crc32($newdatawithchecksumkey);
 //  $datawithchecksumvalue = $value . "|" . $checksum;
@@ -444,17 +456,17 @@ function itg_payment_billdesk_order_form($form, &$form_state) {
   $datawithchecksumvalue = $value . "|" . $checksum;
   $msg = $datawithchecksumvalue;
 
-
-  // Put the msg on a form.
   $form['msg'] = array(
     '#type' => 'hidden',
     '#value' => $msg,
   );
   $form['#action'] = $bdposturl;
+  //$form['#action'] = 'https://www.billdesk.com/pgidsk/pgmerc/INDIATODAYPaymentoption.jsp';
   $form['submit'] = array(
     "#type" => 'submit',
     "#value" => 'paybilldesk',
   );
+
   return $form;
 }
 
@@ -464,8 +476,45 @@ function itg_billdesk_payment_success_page() {
   }
   if (isset($_POST['msg']) && $_POST['msg'] != '') {
     $values = explode('|', $_POST['msg']);
-    watchdog('billdeskpayment','<pre>' . print_r($_POST['msg'], true) . '</pre>');
-    
+    watchdog('billdeskpayment', '<pre>' . print_r($_POST['msg'], true) . '</pre>');
+
+    // Payment Failed transactions for BillDesk.
+    if (($values['24'] == 'Canceled By User') || ($values[14] == '0399') || ($values[14] == 'NA') || ($values[14] == '0002') || ($values[14] == '0001')) {
+      if ($values[14] == '0399') {
+        $cancelled = 'Invalid Authentication at Bank';
+      }
+      if ($values[14] == 'NA') {
+        $cancelled = 'Invalid Input in the Request Message ';
+      }
+      if ($values[14] == '0002') {
+        $cancelled = 'BillDesk is waiting for Response from Bank';
+      }
+      if ($values[14] == '0001') {
+        $cancelled = 'Error at BillDesk ';
+      }
+      drupal_set_message(t('Transaction denied') . $cancelled, 'error');
+      drupal_goto('<front>');
+    }
+    // Payment Success transactions for BillDesk.
+    elseif (($values['24'] == 'Completed successfully.') || ($values['24'] == 'PGS10001-Success') || ($values[14] == '0300')) {
+      // payment success code needs to put here for database update.
+      drupal_set_message(t('Transaction successfully Completed'), 'success');
+    }
+  }
+}
+
+function itg_payment_response_fail() {
+  return theme("itg_payment_response_fail");
+}
+
+function itg_icici_payment_success_page() {
+  if (empty($_POST)) {
+    return t("'There was a problem with your payment'");
+  }
+  if (isset($_POST['msg']) && $_POST['msg'] != '') {
+    $values = explode('|', $_POST['msg']);
+    watchdog('billdeskpayment', '<pre>' . print_r($_POST['msg'], true) . '</pre>');
+
     // Payment Failed transactions for BillDesk.
     if (($values['24'] == 'Canceled By User') || ($values[14] == '0399') || ($values[14] == 'NA') || ($values[14] == '0002') || ($values[14] == '0001')) {
       if ($values[14] == '0399') {
@@ -492,6 +541,6 @@ function itg_billdesk_payment_success_page() {
 }
 
 
-function itg_payment_response_fail() {
-  return theme("itg_payment_response_fail");
+function itg_icici_payment_fail_page() {
+  
 }

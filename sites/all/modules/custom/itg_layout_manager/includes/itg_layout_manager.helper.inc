@@ -92,6 +92,9 @@ function get_itg_widget($widget_name, $widget_info = 'custom', $filter_url = NUL
   else if (isset($widget_name) && $widget_name == 'custom_html_widgets') {
     return get_html_custom_widget($filter_url);    
   }
+  else if (isset($widget_name) && $widget_name == 'custom_content_widgets') {
+    return itg_custom_widget_ordering_data_from_title($filter_url);    
+  }
   else if (isset($widget_name) && $widget_name == 'highlights') {
     return get_highlights_widget($filter_url);    
   }

@@ -5,7 +5,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  * This function is used to create settings.
  * 
@@ -161,13 +160,30 @@ function itg_widgets_custom_variables() {
         '#default_value' => variable_get('reporter_tid'),
         '#size' => 20,
     );
+      $form['live_score_url'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Live schore URL '),
+        '#default_value' => variable_get('live_score_url'),
+        '#size' => 255,
+    );
+      $form['ipl_rhs_nids'] = array(
+        '#type' => 'textfield',
+        '#title' => t('node id for ipl rhs '),
+        '#default_value' => variable_get('ipl_rhs_nids'),
+        '#size' => 255,
+    );
     $form['anchor_tid'] = array(
         '#type' => 'textfield',
         '#title' => t('Anchor Tid'),
         '#default_value' => variable_get('anchor_tid'),
         '#size' => 20,
     );
-    return system_settings_form($form);
+    $form['solr_url_config'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Solr urlconfig'),
+    '#default_value' => variable_get('solr_url_config'),
+    );
+  return system_settings_form($form);
 }
 
 /**
@@ -1390,15 +1406,12 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
 
     if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_listing_page')) {
-        $anchor_tid = variable_get('anchor_id_for_widget');
-        $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
-        if (strlen($anchor_tid) <= 0) {
-// Link should display only adminstrator.
-            if (in_array('administrator', $user->roles)) {
-                $link = l("click here", 'admin/settings/custom-variables');
-            }
-            drupal_set_message("Anchor setting not found $link", "error");
+        $anchor_tid = variable_get('reporter_tid');
+        foreach($query->where[1]['conditions'] as $keys=>$conditions) {
+        if(is_string($conditions['field']) && $conditions['field'] == 'field_data_field_celebrity_pro_occupation.field_celebrity_pro_occupation_tid') {
+          $query->where[1]['conditions'][$keys]['value'] = $anchor_tid;
         }
+      }
     }
 
     if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_listing_widget')) {
@@ -1704,8 +1717,45 @@ function itg_widget_views_query_alter(&$view, &$query) {
         }
         $query->where[1]['conditions'][4]['value'] = $content_value_for_query;
     }
+    // Adding relationship.
+  if (_itg_analytics_relationship_views($view->name, $view->current_display)) {
+    $join = new views_join();
+    $join->table = 'itg_node_analytics_count_data';
+    $join->field = 'nid';
+    $join->left_table = 'node';
+    $join->left_field = 'nid';
+    $join->type = 'LEFT';
+    //add the join the the view query
+    $view->query->add_relationship('itg_node_analytics_count_data', $join, 'node');
+    $view->query->add_field('itg_node_analytics_count_data', 'count');
+    $order_by = array();
+    $order_by['field'] = 'count';
+    $order_by['direction'] = 'DESC';
+    array_unshift($query->orderby, $order_by);
+  }
 }
 
+/**
+ * Function which returns flag for add relationship with analytics table.
+ * @param string $view_name
+ * @param string $view_current_display
+ * @return boolean
+ */
+function _itg_analytics_relationship_views($view_name , $view_current_display) {
+  $flag = FALSE;
+  if(!empty($view_name) && !empty($view_current_display)) {
+    if($view_name == "story_widget" && ($view_current_display == "most_popular" || $view_current_display == "trending_videos" || $view_current_display == "watch_right_now" || $view_current_display == "top_takes_video")) {
+      $flag = TRUE;
+    }
+    if($view_name == "so_sorry" && $view_current_display == "most_watched ") {
+      $flag = TRUE;
+    }
+    if($view_name == "most_read_widget" && $view_current_display == "most_read_widget_contents") {
+      $flag = TRUE;
+    }
+  }
+  return $flag;
+}
 /**
  * Function for returning node queue id by node queue machine name.
  *
@@ -2265,7 +2315,9 @@ function itg_widget_block_view_alter(&$data, $block) {
 
 
     if ($block->delta == 'programmes-rhs_programmes') {
-        if ($user_link == 'ipl-venue' || $user_link == 'ipl-schedule' || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
+        $arraynid = array();
+         $arraynid = explode(',', variable_get('ipl_rhs_nids'));
+        if (in_array($arg[1],$arraynid) || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
             $data['content'] = array();
         }
         else {
@@ -2279,8 +2331,14 @@ function itg_widget_block_view_alter(&$data, $block) {
     }
 
     if ($block->delta == 'sport_ipl-top_performers' || $block->delta == 'sport_ipl-points_tally' || $block->delta == 'ipl_tweets' || $block->delta == 'live_score') {
+          $arraynid = array();
+        $arraynid = explode(',', variable_get('ipl_rhs_nids'));
+       
+        if (in_array($arg[1],$arraynid) || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
+           drupal_add_js('jQuery(document).ready(function() {                  
+                        jQuery("body").addClass("section-sport-ipl-bg");
 
-        if ($user_link == 'ipl-venue' || $user_link == 'ipl-schedule' || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
+          });', array('type' => 'inline', 'scope' => 'footer'));
             return TRUE;
         }
         else {
@@ -2790,39 +2848,61 @@ function insert_all_node_in_widegt_table() {
  * {@inheritdoc}
  */
 function itg_widget_node_insert($node) {
-    if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
-        $nid = $node->nid;
-        $cat_id = $node->field_story_category['und'];
-        if (isset($node->field_story_category['und'])) {
-            foreach ($cat_id as $category) {
-                $max_result = get_max_weight($category['tid'], $node->type);
-
-                $query = db_insert('itg_widget_order')
-                        ->fields(array(
-                            'nid' => $nid,
-                            'widget' => 'section_wise_widget',
-                            'content_type' => $node->type,
-                            'cat_id' => $category['tid'],
-                            'weight' => ++$max_result,
-                            'extra' => "",
-                        ))
-                        ->execute();
-
-                $max_result_all = get_max_weight($category['tid'], "All");
-
-                $query_all = db_insert('itg_widget_order')
-                        ->fields(array(
-                            'nid' => $nid,
-                            'widget' => 'section_wise_widget',
-                            'content_type' => "All",
-                            'cat_id' => $category['tid'],
-                            'weight' => ++$max_result_all,
-                            'extra' => "",
-                        ))
-                        ->execute();
-            }
-        }
+  if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
+    $nid = $node->nid;
+    $cat_id = $node->field_story_category['und'];
+    if (isset($node->field_story_category['und'])) {
+      foreach ($cat_id as $category) {
+        $single_max_result = get_max_weight_for_node_insert($category['tid'], $node->type);
+        $max_result = $single_max_result['content_type'];
+        $max_result_all = $single_max_result['All'];
+        $single_insert_query = db_insert('itg_widget_order')->fields(
+            array(
+              'nid',
+              'widget',
+              'content_type',
+              'cat_id',
+              'weight',
+              'extra',
+            )
+        );
+        $single_insert_query->values(array(
+          'nid' => $nid,
+          'widget' => 'section_wise_widget',
+          'content_type' => $node->type,
+          'cat_id' => $category['tid'],
+          'weight' => ++$max_result,
+          'extra' => '',
+            ), array(
+          'nid' => $nid,
+          'widget' => 'section_wise_widget',
+          'content_type' => 'All',
+          'cat_id' => $category['tid'],
+          'weight' => ++$max_result_all,
+          'extra' => '',
+        ));
+        $single_insert_query->execute();
+      }
     }
+  }
+}
+
+/**
+ * Function returns max weight.
+ * @param int $tid
+ * @param string $type
+ * @return int
+ */
+function get_max_weight_for_node_insert($tid, $type) {
+    $max_query = db_select('itg_widget_order');
+    $max_query->addExpression('MAX(weight)' , 'weight');
+    $max_query->condition('cat_id', $tid);
+    $max_query->condition('content_type', array($type , 'All') , 'IN');
+    $max_query->condition('widget', 'section_wise_widget');
+    $max_query->groupBy('content_type');
+    $max_result = $max_query->execute()->fetchAll();
+    $weight_array = array("All" => $max_result[0]->weight , "content_type" => $max_result[1]->weight);
+    return $weight_array;
 }
 
 /**

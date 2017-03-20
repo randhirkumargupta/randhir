@@ -110,7 +110,7 @@ function itg_custom_widget_ordering_data_from_title($title) {
       $entity_data[] = $entity_data_node;
     }
 
-    return $entity_data;
+    return theme("itg_custom_widget_ordering_data", array("data" => $entity_data));
   }
   return array();
 }

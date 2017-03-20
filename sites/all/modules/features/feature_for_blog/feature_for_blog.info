@@ -37,6 +37,7 @@ features[user_permission][] = delete any blog content
 features[user_permission][] = delete own blog content
 features[user_permission][] = edit any blog content
 features[user_permission][] = edit own blog content
+features[variable][] = pathauto_taxonomy_term_bloggers_pattern
 features[views_view][] = blog_ugc_tab
 features[views_view][] = blogs_management
 features[views_view][] = manage_blogs
