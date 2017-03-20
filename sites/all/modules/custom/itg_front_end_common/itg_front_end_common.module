@@ -664,7 +664,7 @@ function _latest_from_aajtak() {
         $related_dt.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
       }
       $i++;
-      if ($i == 5)
+      if ($i == 4)
       break;
     }
     $related_dt.= "</ul></div>";
@@ -697,7 +697,7 @@ function _latest_from_businesstoday() {
         $related_dt.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
       }
       $i++;
-      if ($i == 5)
+      if ($i == 4)
       break;
     }
     $related_dt.= "</ul></div>";
