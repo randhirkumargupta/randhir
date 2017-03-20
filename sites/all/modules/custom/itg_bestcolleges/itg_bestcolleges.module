@@ -55,26 +55,6 @@ function itg_bestcolleges_menu() {
     'page callback' => 'csvImporter_pagecallback',
     'type' => MENU_NORMAL_ITEM,
   );
-  /*
-    $items['bestcollege-csv-import'] = array(
-    'title' => 'Upload csv for new data.',
-    'access callback' => 'user_access',
-    'access arguments' => array('access content'),
-    'page callback' => 'bestcollege_pagecallback',
-    //'page arguments' => array('itg_bestcollege_csv_form'),
-    'file' => 'includes/itg_bestcolleges_import.inc',
-    'type' => MENU_NORMAL_ITEM,
-    );
-
-
-    $items['bestcollege-csv-import'] = array(
-    'title' => 'Upload csv for new data.',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('itg_bestcollege_csv_form'),
-    'file' => 'includes/itg_bestcolleges_import.inc',
-    'access callback' => TRUE,
-    );
-   */
 
   /* $items['bestcolleges/%/%'] = array(
     'page callback' => 'itg_zone_wise_list',
@@ -677,7 +657,7 @@ function itg_city_option($byear, $tid) {
 }
 
 /**
- * 
+ *
  * @return type
  */
 function itg_bestcolleges_rhs_video() {
@@ -691,7 +671,7 @@ function itg_bestcolleges_rhs_video() {
 }
 
 /**
- * 
+ *
  * @param type $tid
  * @param type $stream
  * @return type
@@ -711,7 +691,7 @@ function itg_bestcollege_get_term_tid($tid, $stream) {
 //-------------------------------------------------------------------------------------------|
 
 /**
- * 
+ *
  * @return type
  */
 function csvImporter_pagecallback() {
@@ -740,7 +720,7 @@ function csvImporter_form() {
     '#description' => ($max_size = parse_size(ini_get('upload_max_filesize'))) ? t('Due to server restrictions, the <strong>maximum upload file size is !max_size</strong>. Files that exceed this size will be disregarded.', array('!max_size' => format_size($max_size))) : '',
   );
 
-  $csv_arr = array("" => t("-- Section --"), '1' => t('Previous Data'), '2' => t('citywiseranking'), '3' => t('global ranking'), '4' => t('Emerging colleges'), '5' => t('Master colleges'));
+  $csv_arr = array("" => t("-- Section --"), '1' => t('Previous Data'), '2' => t('citywiseranking'), '3' => t('global ranking'), '4' => t('Emerging colleges'), '5' => t('Master colleges'), '6' => t('themebasedranking'));
 
   $form['csv_type'] = array(
     '#type' => 'select',
@@ -811,6 +791,8 @@ function csvImporter_form_validate(&$form, &$form_state) {
             $validate_csv_columns = '5';
           case '5':
             $validate_csv_columns = '11';
+          case '6':
+            $validate_csv_columns = '10';
             break;
         }
 
@@ -864,6 +846,9 @@ function csvImporter_form_submit(&$form, &$form_state) {
         }
         else if ($csv_type == 5) {
           $batch['operations'][] = array('best_college_master_data_migrate', array(array_map('base64_encode', $line)));
+        }
+        else if ($csv_type == 6) {
+          $batch['operations'][] = array('best_college_theme_data_migrate', array(array_map('base64_encode', $line)));
         }
         else {
           $batch['operations'][] = array('_csvImporter_import_line', array(array_map('base64_encode', $line)));
@@ -929,15 +914,10 @@ function _csvImporter_remember_filename($filename, &$context) {
 function _csvImporter_import_line($line, $session_nid, &$context) {
   $context['results']['rows_imported'] ++;
   $line = $cleaned_line = array_map('base64_decode', $line);
-  print $csv_type;
-  pr($csv_type);
-  watchdog("test arun@", '<pre>' . print_r($line, TRUE) . '</pre>');
-
-  // best_college_city_data_migrate($line);
 }
 
 /**
- * 
+ *
  * @param type $line
  * @param type $session_nid
  * @param type $context
@@ -980,7 +960,7 @@ function best_college_citywiseranking_data_migrate($line, $session_nid, &$contex
 }
 
 /**
- * 
+ *
  * @param type $line
  * @param type $session_nid
  * @param type $context
@@ -1023,7 +1003,7 @@ function best_college_city_data_migrate($line, $session_nid, &$context) {
 }
 
 /**
- * 
+ *
  * @param type $line
  * @param type $session_nid
  * @param type $context
@@ -1034,7 +1014,7 @@ function best_college_master_data_migrate($line, $session_nid, &$context) {
 
   watchdog("test arun@", '<pre>' . print_r($line, TRUE) . '</pre>');
   drupal_set_message("Pass line {$line[0]} college id = {$collegeid}");
- 
+
   $collegeid = $line[0];
   $collegename = $line[1];
   $city = $line[2];
@@ -1047,11 +1027,11 @@ function best_college_master_data_migrate($line, $session_nid, &$context) {
   // rank and stream
   $rank = $line[9];
   $stream = $line[10];
-  
+
   $published = '1';
  // $created_date = $line[10];
   $year = '2017';
-  
+
 
 
   $node = new stdClass();
@@ -1123,8 +1103,8 @@ function best_college_master_data_migrate($line, $session_nid, &$context) {
           ->fields(array('node_id' => $node->nid))
           ->condition('collegeid', $collegeid)
           ->execute();
-      */ 
-       
+      */
+
       // bestcolleges_ranking
       db_update('bestcolleges_ranking')
           ->fields(array('CollegeNewNid' => $node->nid))
@@ -1152,11 +1132,11 @@ function best_college_master_data_migrate($line, $session_nid, &$context) {
 
     drupal_set_message("Fail line {$line[0]} stream for {$stream}");
   }
-  
+
 }
 
 /**
- * 
+ *
  * @param type $line
  * @param type $session_nid
  * @param type $context
@@ -1167,7 +1147,7 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
 
   watchdog("test arun@", '<pre>' . print_r($line, TRUE) . '</pre>');
   drupal_set_message("Pass line {$line[0]} college id = {$collegeid}");
-  
+
   $collegeid = $line[1];
   $collegename = $line[2];
   $city = $line[3];
@@ -1279,6 +1259,61 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
     drupal_set_message("Fail line {$line[0]} college id = {$collegeid}");
 
     drupal_set_message("Fail line {$line[0]} stream for {$stream}");
+  }
+}
+
+
+/**
+ *
+ * @param type $line
+ * @param type $session_nid
+ * @param type $context
+ */
+function best_college_theme_data_migrate($line, $session_nid, &$context) {
+  $context['results']['rows_imported'] ++;
+  $line = $cleaned_line = array_map('base64_decode', $line);
+  watchdog("test theme@", '<pre>' . print_r($line, TRUE) . '</pre>');
+  drupal_set_message("Pass line {$line[0]} college id = {$collegeid}");
+
+  $stream           = trim($line[0]);
+  $collegeid        = trim($line[1]);
+  $reputation       = trim($line[2]);
+  $academic_input   = trim($line[3]);
+  $studentcare      = trim($line[4]);
+  $infrastructure   = trim($line[5]);
+  $placement        = trim($line[6]);
+  $preceptual_rank  = trim($line[7]);
+  $factual_rank     = trim($line[8]);
+  $overall_score    = trim($line[9]);
+
+  $year = '2017';
+
+  try {
+
+    $result = db_insert('bestcolleges_themebasedranking')
+            ->fields(array(
+              'stream' => $stream,
+              'streamid' => $stream,
+              'year' => $year,
+              'collegeid' => $collegeid,
+              'CollegeNewNid' => '0',
+              'reputation' => $reputation,
+              'academic_input' => $academic_input,
+              'studentcare' => $studentcare,
+              'infrastructure' => $infrastructure,
+              'placement' => $placement,
+              'preceptual_rank' => $preceptual_rank,
+              'factual_rank' => $factual_rank,
+              'overall_score' => $overall_score,
+              'published' => '1',
+            ))->execute();
+
+    // No exception thrown; PDO thinks the record was inserted correctly.
+    drupal_set_message("Pass line for city {$line[0]} city = {$city}");
+  }
+  catch (PDOException $e) {
+    // Query failed; recover based on $e->getMessage()
+    drupal_set_message("Fail line {$line[0]} city = {$city}");
   }
 }
 
