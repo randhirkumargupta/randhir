@@ -90,7 +90,7 @@ function itg_videogallery_schema() {
                 'length' => '250',
                 'null' => TRUE,
             ),
-             'encoding_progress' => array(
+            'encoding_progress' => array(
                 'description' => 'Encoding progress',
                 'type' => 'int',
                 'null' => TRUE,
@@ -104,6 +104,16 @@ function itg_videogallery_schema() {
                 'description' => 'Video name',
                 'type' => 'varchar',
                 'length' => '250',
+                'null' => TRUE,
+            ),
+            'need_delete' => array(
+                'description' => 'Video delete',
+                'type' => 'int',
+                'null' => TRUE,
+            ),
+            'is_draft' => array(
+                'description' => 'node is draft',
+                'type' => 'int',
                 'null' => TRUE,
             ),
         ),
@@ -161,7 +171,7 @@ function itg_videogallery_schema() {
         ),
         'primary key' => array('id'),
     );
-     $schema['itg_solr_video_info'] = array(
+    $schema['itg_solr_video_info'] = array(
         'description' => 'Differenc between FTP video and local video',
         'fields' => array(
             'id' => array(
@@ -173,12 +183,12 @@ function itg_videogallery_schema() {
                 'description' => 'Fid id',
                 'type' => 'int',
                 ' null' => TRUE,
-            ), 
-             'nid' => array(
+            ),
+            'nid' => array(
                 'description' => 'nid of node',
                 'type' => 'int',
                 ' null' => TRUE,
-            ), 
+            ),
             'solr_video_id' => array(
                 'description' => 'Video id which return by dailymotion',
                 'type' => 'varchar',
@@ -197,25 +207,29 @@ function itg_videogallery_schema() {
                 'length' => '250',
                 'null' => TRUE,
             ),
-             'solr_video_thumb' => array(
+            'solr_video_thumb' => array(
                 'description' => 'Video thumb',
                 'type' => 'varchar',
                 'length' => '250',
                 'null' => TRUE,
             ),
-             'property' => array(
+            'property' => array(
                 'description' => 'property',
                 'type' => 'varchar',
                 'length' => '250',
                 'null' => TRUE,
             ),
-             'content_type' => array(
+            'content_type' => array(
                 'description' => 'content_type',
                 'type' => 'varchar',
                 'length' => '250',
                 'null' => TRUE,
             ),
-            
+            'is_delete' => array(
+                'description' => 'Need to delete video',
+                'type' => 'int',
+                'null' => TRUE,
+            ),
         ),
         'primary key' => array('id'),
     );
