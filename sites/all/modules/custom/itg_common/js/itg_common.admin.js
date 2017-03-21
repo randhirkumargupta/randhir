@@ -39,7 +39,7 @@
   };
 })(jQuery, Drupal, this, this.document);
 
-jQuery(document).ready(function () {
+/*jQuery(document).ready(function () {
 
     var solr = Drupal.settings.itg_common.settings.solr;
     var solr_explict = solr.split(',');
@@ -110,7 +110,7 @@ jQuery(document).ready(function () {
     // end of code
 
 
-});
+});*/
 
 
 // open save search in popup
