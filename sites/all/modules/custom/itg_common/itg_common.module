@@ -37,6 +37,7 @@ function itg_common_init() {
     $settings['solr'] = variable_get('solr_url_config');
     drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.admin.js');
+    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_related_content.admin.js');
   }
   
   if (arg(0) == 'funalytics') {
