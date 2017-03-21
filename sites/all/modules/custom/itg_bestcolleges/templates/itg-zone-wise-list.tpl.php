@@ -1,7 +1,7 @@
 <div class="main-bestzonewisecompare">
     <?php
       foreach($data as $data_key => $data_val) {
-    ?>    
+    ?>
         <div class="bestzonecontainer">
             <div class="bestzone_label">
                 <div class="zonecell bestzone_rank"><?php print t('RANK'); ?></div>

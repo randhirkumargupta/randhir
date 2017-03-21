@@ -37,6 +37,7 @@ function itg_bestcolleges_menu() {
     'page arguments' => array(1, 2),
     'access callback' => TRUE,
   );
+
   $items['update-college-data'] = array(
     'title' => 'Update college nid',
     'description' => 'Update college node id with old id',
@@ -67,11 +68,18 @@ function itg_bestcolleges_menu() {
     'access callback' => TRUE,
     );
    */
-  $items['bestcolleges/%/%'] = array(
+/*  $items['bestcolleges/%/%'] = array(
     'page callback' => 'itg_city_wise_list',
     'page arguments' => array(1, 2),
     'access callback' => TRUE,
   );
+
+   $items['bestcolleges/%/zonewiselist/%'] = array(
+    'page callback' => 'itg_common_redirect_list',
+    'page arguments' => array(1, 2),
+    'access callback' => TRUE,
+  );*/
+
   return $items;
 }
 
@@ -336,6 +344,7 @@ function itg_bestcollege_yearcompare($year, $type, $stream, $years) {
  */
 
 function itg_common_redirect_list($year, $stype) {
+
   if (preg_match('/zonewiselist/', $stype)) {
     return itg_zone_wise_list($year, $stype);
   }
@@ -376,6 +385,7 @@ function itg_readyrecnor_directory_list($year, $stype) {
  * @return string
  */
 function itg_zone_wise_list($year, $stype) {
+
   $stype_exp = explode('-', $stype);
   $stream = $stype_exp[1];
   drupal_set_title(t('ZONEWISE RANKING: BEST ' . drupal_strtoupper($stream) . ' COLLEGES'));
