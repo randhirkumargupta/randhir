@@ -6400,7 +6400,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     margin-left: 175px;
   }
 
-  [id*="views-exposed-form-front-end-global-search-page"] .form-item-sm-field-itg-common-by-line-name #autocomplete, [id*="views-exposed-form-front-end-global-search-page"] .views-widget-filter-tm_vid_4_names #autocomplete {
+  [id*="views-exposed-form-front-end-global-search-page"] .form-item-sm-field-itg-common-by-line-name #autocomplete, [id*="views-exposed-form-front-end-global-search-page"] [class*="views-widget-filter-tm_vid_"] #autocomplete, [id*="views-exposed-form-front-end-global-search-page"] .views-widget-filter-tm_vid_4_names #autocomplete, [id*="views-exposed-form-front-end-global-search-page"] .views-widget-filter-tm_vid_14_names #autocomplete {
     position: relative !important;
     top: 0 !important;
     left: 0 !important;
@@ -6408,16 +6408,28 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     min-height: 1px;
     margin-top: 32px;
   }
-  [id*="views-exposed-form-front-end-global-search-page"] .form-item-sm-field-itg-common-by-line-name #autocomplete + .form-text, [id*="views-exposed-form-front-end-global-search-page"] .views-widget-filter-tm_vid_4_names #autocomplete + .form-text {
+  [id*="views-exposed-form-front-end-global-search-page"] .form-item-sm-field-itg-common-by-line-name #autocomplete + .form-text, [id*="views-exposed-form-front-end-global-search-page"] [class*="views-widget-filter-tm_vid_"] #autocomplete + .form-text, [id*="views-exposed-form-front-end-global-search-page"] .views-widget-filter-tm_vid_4_names #autocomplete + .form-text, [id*="views-exposed-form-front-end-global-search-page"] .views-widget-filter-tm_vid_14_names #autocomplete + .form-text {
     position: absolute;
     top: -32px;
     left: 0;
   }
-  [id*="views-exposed-form-front-end-global-search-page"] .form-item-sm-field-itg-common-by-line-name #autocomplete ul li, [id*="views-exposed-form-front-end-global-search-page"] .views-widget-filter-tm_vid_4_names #autocomplete ul li {
+  [id*="views-exposed-form-front-end-global-search-page"] .form-item-sm-field-itg-common-by-line-name #autocomplete ul li, [id*="views-exposed-form-front-end-global-search-page"] [class*="views-widget-filter-tm_vid_"] #autocomplete ul li, [id*="views-exposed-form-front-end-global-search-page"] .views-widget-filter-tm_vid_4_names #autocomplete ul li, [id*="views-exposed-form-front-end-global-search-page"] .views-widget-filter-tm_vid_14_names #autocomplete ul li {
     padding: 5px 1px;
   }
 }
 @media all and (max-width: 767px) {
+  .movie-layout-page .itg-widget.trending-list {
+    overflow: hidden;
+  }
+
+  .education-layout-page .section_wise_order-edu-tips-and-trick, .section_wise_order-edu-tips-and-trick {
+    max-height: 400px;
+  }
+
+  .featured-news .featured-post h3 {
+    max-height: none;
+  }
+
   .personal-list {
     margin: 0 -15px;
   }

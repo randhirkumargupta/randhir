@@ -90,6 +90,30 @@ function feature_for_video_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_modified_by_video'.
+  $field_bases['field_modified_by_video'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_modified_by_video',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_multi_bitrate'.
   $field_bases['field_multi_bitrate'] = array(
     'active' => 1,
@@ -98,7 +122,7 @@ function feature_for_video_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_multi_bitrate',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'format' => array(
@@ -166,6 +190,33 @@ function feature_for_video_field_default_field_bases() {
     'type' => 'image',
   );
 
+  // Exported field_base: 'field_syndication_photo_video'.
+  $field_bases['field_syndication_photo_video'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_syndication_photo_video',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'syndications_photo' => 'Syndications Photo',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_video_anchor'.
   $field_bases['field_video_anchor'] = array(
     'active' => 1,
@@ -224,6 +275,7 @@ function feature_for_video_field_default_field_bases() {
       'allowed_values' => array(
         'google_standout' => 'Google Standout',
         'comment' => 'Comment',
+        'comment_box' => ' Comment Box',
       ),
       'allowed_values_function' => '',
     ),

@@ -117,19 +117,25 @@ function create_index_xml(){
   $xml_path = 'sites/default/files/xml_file_chunk/';
   $foldername = 'story/';
   $path = $xml_path.$foldername;
-  $domDocument = new DOMDocument('1.0', "UTF-8");
-  $domElement = $domDocument->createElement('content');
-  $domDocument->appendChild($domElement);
   foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as $filename) {
     $rest = substr($filename, -4);
     if($rest == ".xml"){
-      $files = end(explode($foldername, $filename));
-      $xml_id = explode('.xml', $files);
-      $domElement1 = $domDocument->createElement('sourceid', $xml_id[0]);
-      $domElement->appendChild($domElement1);
+      $xml_file = $filename->getFilename();
+      //$files = end(explode($foldername, (string) $filename));
+      $xml_id = explode('.xml', $xml_file);
+      $file_id[$xml_id[0]] = $xml_id[0];
     }        
   }
-  
+  ksort($file_id);
+  $domDocument = new DOMDocument('1.0', "UTF-8");
+  $domElement = $domDocument->createElement('content');
+  $domDocument->appendChild($domElement);
+  foreach($file_id as $new_file){
+      $domElement1 = $domDocument->createElement('sourceid', $new_file);
+      $domElement->appendChild($domElement1);
+  }
+  //echo count($file_id);
+  //p($file_id);
   $domDocument->save($xml_path.'index/index.xml');
 }
 
@@ -147,7 +153,15 @@ function create_poll_table() {
     ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;';
     db_query($query); */ 
 
-  $file_name = 'indiatoday-story_2016-06-01.xml';
+  //$file_name = 'indiatoday-story_2016-06-01.xml';
+  //$file_name = 'indiatoday-story_2016-06-11.xml';
+  //$file_name = 'indiatoday-story_2016-06-21.xml';
+  //$file_name = 'indiatoday-story_2016-07-01.xml';
+  //$file_name = 'indiatoday-story_2016-08-01.xml';
+  //$file_name = 'indiatoday-story_2016-09-01.xml';
+  //$file_name = 'indiatoday-story_2016-10-01.xml';
+  //$file_name = 'indiatoday-story_2016-11-01.xml';
+  $file_name = 'indiatoday-story_2016-12-01.xml';
   $xml_path = 'sites/default/files/xml_file_chunk/';
   $xml = simplexml_load_file($xml_path . $file_name, 'SimpleXMLElement');  
   $i = 0;

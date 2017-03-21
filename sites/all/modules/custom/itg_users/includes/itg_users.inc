@@ -10,7 +10,6 @@
 function itg_users_cms_user_dashboard() {
   global $user;
   // Code for User menu on dashboard
-//  p($user);
   // $remove_menu_link = array('manage-poll' => 'Poll', 'manage-survey' => 'Survey');
   $remove_menu_link = array();
   $user_menu_tree = menu_tree_all_data('menu-admin-left-menu');
@@ -95,6 +94,9 @@ function itg_users_cms_user_dashboard() {
      
    } else if (in_array("Editor", $user->roles) || in_array("Site Admin", $user->roles)) {
      $data['user_link'] = $listed_menu_link_site_admin;
+   } else if (in_array("Correspondent", $user->roles)) {
+     unset($menu_link['created-task-list']);
+     $data['user_link'] = $menu_link;
    } else {
      $data['user_link'] = $menu_link;
    }

@@ -432,6 +432,7 @@ function itgadmin_preprocess_page(&$vars) {
         , 'itg-custom-widget-content-order'
         , 'search-unpublish-video'
         , 'search-unpublish-video-radio'
+        , 'itg-registered-user-report'
     );
 
     if (in_array(arg(0), $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {
