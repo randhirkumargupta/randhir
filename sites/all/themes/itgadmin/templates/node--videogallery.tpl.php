@@ -37,6 +37,7 @@
                                 $output .= "<li class='view-item'>";
                                 $video_fid_data = get_video_filed_collection_by_its_id($imagecollection['value']);
 
+
                                 if ($video_fid_data[0]->field_videogallery_video_upload_fid != "") {
                                     $video_data = itg_videogallery_get_videoid($video_fid_data[0]->field_videogallery_video_upload_fid);
                                 }
@@ -46,7 +47,7 @@
                                 }
                                 if (!empty($video_data)) {
 
-                                    $output .= ' <iframe frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_data . '?autoplay=0&endscreen-enable='.$ads_flag.'&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
+                                    $output .= ' <iframe frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_data . '?autoplay=0&endscreen-enable=' . $ads_flag . '&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
                                 }
 
                                 if (isset($video_fid_data) && !empty($video_fid_data[0]->field_videogallery_description_value)) {
@@ -80,7 +81,9 @@
                         <div class="content-details">
                             <?php
                             $items = field_get_items('node', $node, 'field_video_upload');
-                            foreach ($items as $imagecollection):
+                            
+                            foreach ($items as $key => $imagecollection):
+                               
                                 $output .= "<li class='view-item'>";
                                 $video_fid = $imagecollection['field_videogallery_video_upload'][LANGUAGE_NONE][0]['fid'];
                                 if ($video_fid != "") {
@@ -90,10 +93,29 @@
                                 if ($imagecollection['field_include_ads'][LANGUAGE_NONE][0]['value'] == 'yes') {
                                     $ads_flag = 1;
                                 }
-                               
-                                if (!empty($video_data)) {
 
-                                    $output .= ' <iframe frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_data . '?autoplay=0&endscreen-enable='.$ads_flag.'&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
+                                if (!empty($video_data) && empty($imagecollection['field_migrated_video_url'][LANGUAGE_NONE][0]['value'])) {
+
+                                    $output .= ' <iframe frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_data . '?autoplay=0&endscreen-enable=' . $ads_flag . '&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
+                                }
+                                if (!empty($imagecollection['field_migrated_video_url'][LANGUAGE_NONE][0]['value'])) {
+                                    ?>
+                                    <script src="<?php
+                    global $base_url;
+                    print $base_url . '/' . drupal_get_path('module', 'itg_podcast');
+                    ?>/jwplayer/jwplayer.js"></script>
+                                    <script>jwplayer.key = "Cbz5fuKQAlYHtZgBSR0G/4GgYFO7YTb0k8Ankg==";</script>
+                                    
+                                    <?php
+                                    $output .= ' <script type="text/javascript">
+                                        var playerInstance = jwplayer("podcast-'.$key.'");
+                                        playerInstance.setup({
+                                            file: " '.$imagecollection['field_migrated_video_url'][LANGUAGE_NONE][0]['value'].'",
+                                            width: 640,
+                                            height: 350,
+                                           
+                                        });
+                                    </script> <div id="podcast-' . $key . '">Loading the player...</div>';
                                 }
                                 if (isset($imagecollection['field_videogallery_description'][LANGUAGE_NONE]) && !empty($imagecollection['field_videogallery_description'][LANGUAGE_NONE][0]['value'])) {
                                     $output .= '<p><strong>Description: </strong><strong>' . $imagecollection['field_videogallery_description'][LANGUAGE_NONE][0]['value'] . '</strong></p>';
@@ -103,6 +125,7 @@
                                 }
                                 $output .= "</li>";
                             endforeach;
+                           
                             ?>
                             <div class="uploaded-video-list flexslider"><ul class="slides"><?php print $output; ?></ul></div>
                         </div>
@@ -228,7 +251,8 @@
                 <div class="promote-sidebar">
                     <?php print render($block['content']); ?>
                 </div>
-            <?php }
+                <?php
+            }
             else {
                 ?>
                 <div class="promote-sidebar">
@@ -236,7 +260,7 @@
                 </div> 
             <?php }
             ?>
-    <?php endif; ?>
+        <?php endif; ?>
     </div>
     <?php
 //            $comment_checkbox = $node->field_video_configurations[LANGUAGE_NONE];

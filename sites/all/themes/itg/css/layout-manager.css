@@ -329,6 +329,7 @@ img {
 .dont-miss ul .dont-miss-listing .dm-detail, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-detail, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-detail, .osscar-video ul .dont-miss-listing .dm-detail {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -423,6 +424,7 @@ img {
 .may-be-suggest-container ul .may-we-suggest .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -483,6 +485,7 @@ img {
 .top-takes-video-container ul .top-takes-video .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -552,6 +555,7 @@ img {
 .trending-videos .trending-videos-list .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -578,6 +582,7 @@ img {
 .watch-right-now-video ul .watch-right-now-list .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -606,6 +611,7 @@ img {
 .rhs-section-ordering ul .rhs-section-item-container .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -765,6 +771,7 @@ img {
 .may-be-suggest-container ul .may-we-suggest .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -825,6 +832,7 @@ img {
 .top-takes-video-container ul .top-takes-video .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -923,6 +931,7 @@ img {
 .watch-right-now-video ul .watch-right-now-list .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
