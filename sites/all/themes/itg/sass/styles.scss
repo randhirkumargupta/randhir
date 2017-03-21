@@ -2001,6 +2001,7 @@ footer{
     .story-right{        
         .stryimg{
             @include pos(relative);
+            text-align: center;
             .saved-photogallery{
                 background: #fff none repeat scroll 0 0;
                 box-shadow: 0 0 8px #666;
@@ -2022,6 +2023,7 @@ footer{
                 display: none;
             }
             .photoby{
+                text-align: left;
                 @include pos(absolute,null,null,0,0);
                 width: 100%;
                 .story-img-rating {
