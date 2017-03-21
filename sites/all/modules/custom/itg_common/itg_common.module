@@ -37,6 +37,7 @@ function itg_common_init() {
     $settings['solr'] = variable_get('solr_url_config');
     drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.admin.js');
+    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_related_content.admin.js');
   }
   
   if (arg(0) == 'funalytics') {
@@ -112,12 +113,13 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     }
 
     // hide source relation and type field from other users 
-    if ($form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'recipe_node_form' || $form_id == 'photogallery_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form') {
+    if ($form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'recipe_node_form' || $form_id == 'photogallery_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form' || $form_id == 'poll_node_form') {
       $form['field_story_source_id']['#attributes']['class'][] = 'element-hidden';
       $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
       $form['field_story_ugc_source_id']['#attributes']['class'][] = 'element-hidden';
       $form['field_story_node_identity']['#attributes']['class'][] = 'element-hidden';
       $form['field_common_related_content']['#attributes']['class'][] = 'element-hidden';
+      $form['field_cm_related_content_detail']['#attributes']['class'][] = 'element-hidden';
 
       // add common hidden type field
       $type = $form['type']['#value'];
