@@ -95,6 +95,13 @@ function itg_bestcolleges_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'itg_bestcolleges') . '/templates',
       'variables' => array('data' => NULL),
     ),
+
+    'itg_bestcollege_emerging_colleges_rank' => array(
+      'variable' => array('data' => NULL),
+      'template' => 'itg-bestcollege-emerging-colleges-rank',
+      'path' => drupal_get_path('module', 'itg_bestcolleges') . '/templates',
+    ),
+
     'itg_bestcollege_streamwise' => array(
       'variable' => array('data' => NULL),
       'template' => 'itg-bestcollege-streamwise',
@@ -242,12 +249,12 @@ function itg_bestcolleges_block_view($delta = '') {
 function itg_bestcollege_emerging($year, $type, $stream) {
   drupal_set_title(t('EMERGING COLLEGES RANKING: BEST ' . drupal_strtoupper($stream) . ' COLLEGES'));
   $result_data = itg_bestcollege_getData($type, $year, $stream);
-  $data = array();
-  foreach ($result_data as $result_data_key => $result_data_val) {
+  $data = $result_data;
+ /* foreach ($result_data as $result_data_key => $result_data_val) {
     $clgname_city = $result_data_val->collegename . ', ' . $result_data_val->city;
-    $data[] = array($result_data_val->overall_rank, $clgname_city, $result_data_val->reputation, $result_data_val->academic_input, $result_data_val->studentcare, $result_data_val->infrastructure, $result_data_val->placement, $result_data_val->preceptual_rank, $result_data_val->factual_rank);
-  }
-  $header = array(t('Rank'), t('NAME OF THE COLLEGE'), t('Reputation'), t('Academic Input'), t('Student Care'), t('Infra'), t('Placement'), t('Perceptual Rank'), t('Factual Rank'));
+    $data[$result_data_val] = array($result_data_val->overall_rank, $clgname_city, $result_data_val->reputation, $result_data_val->academic_input, $result_data_val->studentcare, $result_data_val->infrastructure, $result_data_val->placement, $result_data_val->preceptual_rank, $result_data_val->factual_rank);
+  }*/
+  /*$header = array(t('Rank'), t('NAME OF THE COLLEGE'), t('Reputation'), t('Academic Input'), t('Student Care'), t('Infra'), t('Placement'), t('Perceptual Rank'), t('Factual Rank'));
   $output = theme('table', array(
     'header' => $header,
     'rows' => $data,
@@ -255,7 +262,10 @@ function itg_bestcollege_emerging($year, $type, $stream) {
       'class' => array('table')
     )
       )
-  );
+  );*/
+
+  $output = theme('itg_bestcollege_emerging_colleges_rank', array('data' => $data));
+
   return $output;
 }
 
