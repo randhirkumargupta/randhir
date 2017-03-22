@@ -122,7 +122,8 @@ function itg_registered_user_display_report($user_id) {
     if (function_exists('mongodb')) {
       $con = mongodb();
       $people = $con->pagedetails;
-      $date_from = $_GET['date_from'];
+      // Handle case from current date.
+      $date_from = strtotime('-1 day',$_GET['date_from']);
       $date_to = strtotime('+1 day', $_GET['date_to']);
       $condition = array(
         'viewtime' => array('$gte' => (int) $date_from, '$lte' => (int) $date_to),
