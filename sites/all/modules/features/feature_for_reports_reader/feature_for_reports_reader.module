@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Feature For Reports Reader feature.
- */
-
-include_once 'feature_for_reports_reader.features.inc';

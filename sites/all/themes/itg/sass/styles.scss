@@ -10357,6 +10357,7 @@ h1.about-us-heading{
                 .slick-next{ 
                     right: 0;
                 }
+                .podcast-nav-item{cursor: pointer;}
             }
         }        
     }
@@ -10757,6 +10758,16 @@ span.smilies-title {
       text-align: center;
       font-size: 14px;
     }
+  }
+}
+#block-itg-front-end-common-latest-from-aajtak, 
+#block-itg-front-end-common-latest-from-pti,
+#block-itg-front-end-common-latest-from-businesstoday{
+  ul{
+    border: 1px solid #dddddd;
+    @extend .list-none;
+    @include listing-with-image(third-party-list,left,10px,pic,title);
+    li + li{border-top: 1px solid #dddddd;}
   }
 }
  
