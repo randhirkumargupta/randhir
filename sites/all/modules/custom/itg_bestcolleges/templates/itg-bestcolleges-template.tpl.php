@@ -36,8 +36,6 @@ $config_name = $comment_value[0]->config_name;
 <!-- Related story start-->
 <?php
 $related_story_value = bestCollegesRelatedStoryList();
-//echo "<pre>on tpl"; print_r($data_value); echo "</pre>";
-//echo $data_value['relatedstory_count'];
 if(isset($related_story_value['relatedstory_count']) && $related_story_value['relatedstory_count'] > 0){
     unset($related_story_value['relatedstory_count']);
 // Related story block start here
@@ -58,7 +56,7 @@ if(isset($related_story_value['relatedstory_count']) && $related_story_value['re
 
          ?>
 
-        
+
          <div class="midstoryleft">
            <a href="<?php print $base_url; ?>/node/<?php print $value['nid']; ?>" target="_blank"><img alt="" title="" src="http://media2.intoday.in/indiatoday/images/stories/bc-arts-jun29-1_180_061915094528.jpg" width="125" align="left" height="93"></a>
            <div class="midstorydetail">
@@ -67,7 +65,7 @@ if(isset($related_story_value['relatedstory_count']) && $related_story_value['re
                <div class="midstoryintro"><?php print $value['title']; ?></div>
            </div>
          </div>
-        
+
 
     <?php
 
@@ -104,12 +102,13 @@ if(isset($related_story_value['relatedstory_count']) && $related_story_value['re
 <div class="row list-group college">
       <div class="clr_chn right_align_bestcollege" >
 
-              <?php
-                if (array_filter(views_get_view_result('best_college_image_slider', 'block_1'))) {
-                    print views_embed_view('best_college_image_slider', 'block_1');
-                }
 
-              ?>
+            <?php
+               $url_get = explode('/',$_SERVER['REQUEST_URI']);
+                if (array_filter(views_get_view_result('best_college_image_slider', 'block_1', $url_get[2]))) {
+                    print views_embed_view('best_college_image_slider', 'block_1', $url_get[2]);
+                }
+            ?>
 
 
 
@@ -121,6 +120,47 @@ if(isset($related_story_value['relatedstory_count']) && $related_story_value['re
 
 <!-- Right Side -->
 
+
+<!-- code for like dislike -->
+
+  <?php
+      $get_val = '0' . arg(1);
+      $get_val = '844705';
+      if (function_exists('itg_flag_get_count')) {
+        $like = itg_flag_get_count($get_val, 'like_count');
+        $dislike = itg_flag_get_count($get_val, 'dislike_count');
+      }
+      if (!empty($like['like_count'])) {
+        $like_count = $like['like_count'];
+      }
+      if (!empty($dislike['dislike_count'])) {
+        $dislike_count = $dislike['dislike_count'];
+      }
+      $pid = "voted_" . $get_val;
+      $like = "no-of-likes_" . $get_val;
+      $dislike = "no-of-dislikes_" . $get_val;
+  ?>
+
+    <!--- Like Dis-Like -->
+    <div class="agbutton story-like-dislike">
+        <div id="name-dv">
+            <?php print t('Do You Like This Story'); ?>
+                <span id="lky">
+                    <button title="Like" id="like_count" rel="<?php print $get_val; ?>" data-tag="sty">
+                        <i class="fa fa-thumbs-o-up"></i>
+                        <span id="<?php print $like; ?>"><?php print $like_count; ?></span>
+                    </button>
+                </span>
+                <span id="dlky">
+                    <button title="Dislike" id="dislike_count" rel="<?php print $get_val; ?>" data-tag="dsty">
+                        <i class="fa fa-thumbs-o-down"></i>
+                        <span id="<?php print $dislike; ?>"><?php print $dislike_count; ?></span>
+                    </button>
+                </span>
+        </div>
+    </div>
+    <!--- End Like Dis-Like -->
+ <!-- code for like dislike -->
 
 <!-- Grid View End-->
 
