@@ -2919,7 +2919,7 @@ footer{
     #main{min-height: 0;}
 }
 /*Start snap post css*/
-.page-snappost{ 
+.page-snap-post{ 
     header{
         margin-bottom: 0;
     }
@@ -10357,6 +10357,7 @@ h1.about-us-heading{
                 .slick-next{ 
                     right: 0;
                 }
+                .podcast-nav-item{cursor: pointer;}
             }
         }        
     }
@@ -10740,6 +10741,18 @@ span.smilies-title {
   .answer-container{
     .answer-container-actual{
       text-align: center;
+      .correct-ans, .incorrect-ans {
+        font-size: 28px;
+        line-height: 32px;
+        padding: 10px 0 20px;
+        text-transform: capitalize;
+      }
+      .correct-ans{color: #1ece1e;}
+      .incorrect-ans{color: red;}
+      strong {
+        font-size: 16px;
+        font-weight: 400;
+      }
     }
     #show_answer{
       width: 135px;
@@ -10757,6 +10770,16 @@ span.smilies-title {
       text-align: center;
       font-size: 14px;
     }
+  }
+}
+#block-itg-front-end-common-latest-from-aajtak, 
+#block-itg-front-end-common-latest-from-pti,
+#block-itg-front-end-common-latest-from-businesstoday{
+  ul{
+    border: 1px solid #dddddd;
+    @extend .list-none;
+    @include listing-with-image(third-party-list,left,10px,pic,title);
+    li + li{border-top: 1px solid #dddddd;}
   }
 }
  

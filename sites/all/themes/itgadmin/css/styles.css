@@ -11506,9 +11506,25 @@ span.file a {
 [id*="itg-quiz-quiz-form"] .answer-container .answer-container-actual {
   text-align: center;
 }
+[id*="itg-quiz-quiz-form"] .answer-container .answer-container-actual .correct-ans, [id*="itg-quiz-quiz-form"] .answer-container .answer-container-actual .incorrect-ans {
+  font-size: 28px;
+  line-height: 32px;
+  padding: 10px 0 20px;
+  text-transform: capitalize;
+}
+[id*="itg-quiz-quiz-form"] .answer-container .answer-container-actual .correct-ans {
+  color: #1ece1e;
+}
+[id*="itg-quiz-quiz-form"] .answer-container .answer-container-actual .incorrect-ans {
+  color: red;
+}
+[id*="itg-quiz-quiz-form"] .answer-container .answer-container-actual strong {
+  font-size: 16px;
+  font-weight: 400;
+}
 [id*="itg-quiz-quiz-form"] .answer-container #show_answer {
   width: 135px;
-  margin: 10px auto;
+  margin: 20px auto;
   display: block;
 }
 
@@ -11597,25 +11613,25 @@ span.file a {
   margin-left: 0;
 }
 
-.view.view-display-id-search_unpublish_video .view-filters, .view-id-searchimage.view-display-id-page_1 .view-filters {
+.view.view-display-id-search_unpublish_video .view-filters, .view-id-searchimage.view-display-id-page_1 .view-filters, .view-display-id-search_publish_video_radio .view-filters {
   padding-bottom: 20px;
 }
-.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget, .view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget {
+.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget, .view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget, .view-display-id-search_publish_video_radio .view-filters .views-exposed-form .views-exposed-widget {
   vertical-align: top;
 }
-.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-submit-button, .view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget.views-submit-button {
+.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-submit-button, .view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget.views-submit-button, .view-display-id-search_publish_video_radio .view-filters .views-exposed-form .views-exposed-widget.views-submit-button {
   position: relative;
   padding-right: 85px;
 }
-.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-submit-button .form-submit, .view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget.views-submit-button .form-submit {
+.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-submit-button .form-submit, .view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget.views-submit-button .form-submit, .view-display-id-search_publish_video_radio .view-filters .views-exposed-form .views-exposed-widget.views-submit-button .form-submit {
   position: absolute;
   right: 5px;
   top: 38px;
 }
-.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-reset-button .form-submit, .view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget.views-reset-button .form-submit {
+.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-reset-button .form-submit, .view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget.views-reset-button .form-submit, .view-display-id-search_publish_video_radio .view-filters .views-exposed-form .views-exposed-widget.views-reset-button .form-submit {
   margin-top: 28px;
 }
-.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name, .view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name {
+.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name, .view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name, .view-display-id-search_publish_video_radio .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name {
   display: none;
 }
 

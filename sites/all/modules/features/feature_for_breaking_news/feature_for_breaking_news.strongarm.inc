@@ -14,7 +14,7 @@ function feature_for_breaking_news_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_anonymous_breaking_news';
-  $strongarm->value = 0;
+  $strongarm->value = '0';
   $export['comment_anonymous_breaking_news'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -98,6 +98,9 @@ function feature_for_breaking_news_strongarm() {
         'path' => array(
           'weight' => '8',
         ),
+        'redirect' => array(
+          'weight' => '30',
+        ),
       ),
       'display' => array(),
     ),
@@ -140,6 +143,13 @@ function feature_for_breaking_news_strongarm() {
   $strongarm->name = 'node_submitted_breaking_news';
   $strongarm->value = 0;
   $export['node_submitted_breaking_news'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_breaking_news_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_breaking_news_pattern'] = $strongarm;
 
   return $export;
 }

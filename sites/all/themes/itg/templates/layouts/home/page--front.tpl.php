@@ -774,8 +774,48 @@ if( $theme != 'itgadmin')
 
 <?php $count_widget = 3 + $count_widget;$divcounter++; ?>
 <?php } }?>
-  <!--End of Common section-->
-  <div class="no-more-card" style="display:none">No More Result Found.</div>
+<!--End of Common section-->
+<div class="no-more-card" style="display:none">No More Result Found.</div>
+
+<!--Common section strat here-->
+<?php if (isset($widget_data['itg-block-14']['widget_name']) || isset($widget_data['itg-block-15']['widget_name']) || isset($widget_data['itg-block-16']['widget_name']) || $theme == 'itgadmin') { ?>
+      <div class="row itg-common-section itg-third-party-section" >
+        <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
+          <div class="itg-widget">
+            <div class="widget-wrapper">
+              <?php
+                $block = block_load('itg_front_end_common', 'latest_from_aajtak');
+                $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                print render($render_array);
+              ?>
+            </div>             
+          </div>               
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
+          <div class="itg-widget">
+            <div class="widget-wrapper">
+              <?php
+                $block = block_load('itg_front_end_common', 'latest_from_businesstoday');
+                $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                print render($render_array);
+              ?>
+            </div>             
+          </div>               
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
+          <div class="itg-widget">
+            <div class="widget-wrapper">
+              <?php
+                $block = block_load('itg_front_end_common', 'latest_from_pti');
+                $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                print render($render_array);
+              ?>
+            </div>             
+          </div>               
+        </div>
+    </div>
+<?php } ?>
+<!--End of Common section-->
 
   <!--Load More Loader
   <div class="load-more">
