@@ -133,8 +133,6 @@ function itg_registered_user_display_report($user_id) {
         $data[] = $chunk_data['nid'];
       }
       
-      pr($condtions);
-      
       $visited_nodes_array = array_unique($data);
       $total_visted_node_by_user = count($visited_nodes_array);
 
