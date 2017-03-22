@@ -236,7 +236,9 @@
      border-radius: 0px;
      background: none;
      border: solid 1px #ccc;
+
  }
+
  .thumbnail .caption {
      min-height: 175px;
  }
@@ -280,6 +282,7 @@
      clear: both;
      display: inline-block;
  }
+ .grid-group-item .thumbnail{height: 355px;} 
  .caption {
      text-transform: uppercase;
      padding: 9px;
@@ -457,6 +460,9 @@
      display: inline-block;
      font-weight: bold;
      color: #000;
+    float: left;
+    width: calc(100% - 135px);
+    line-height: 32px;
  }
  .slider_outer1 .remove_padd_right{ padding-left: 0px;}
  .slider_outer1 span.rank {
@@ -465,10 +471,10 @@
      display: inline-block;
      font-size: 25px;
      font-weight: 900;
-     margin-bottom: 10px;
+     margin-bottom: 30px;
      margin-right: 10px;
      padding: 15px 10px;
-     text-transform: uppercase;
+     text-transform: uppercase;float: left;
  }
  .arts h2 {
      margin-bottom: 25px;
@@ -612,6 +618,14 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 .emergingCollege-section table tr td:nth-child(1),.emergingCollege-section table tr td:nth-child(2){ color:#D72A3E; font-weight: bold;}
 .emergingCollege-section table tr td:nth-child(1){ font-size:15px;}
 .emergingCollege-section table tr td:nth-child(2){ text-align: left;}
+
+/*Collage Ranking Inner page more Story Section */
+
+.related-story-list .midstoryleft {float: left;width: 46%; padding: 8px;}
+.related-story-list .midstoryright { float: right; width: 46%;padding: 8px;}
+.related-story-list .midstoryleft .midstorytitle a, .related-story-list .midstoryright .midstorytitle a{ font-size:18px; color:#323232; line-height:23px;}
+.related-story-list .midstoryleft .midstoryintro,.related-story-list .midstoryright .midstoryintro{ font-size:13px; line-height:18px; color:#323232;}
+.related-story-list .midstoryleft >a img,.related-story-list .midstoryright >a img{ margin:0 10px 5px 0;}
 /* Media Query for same */
 @media only screen  and (min-device-width: 320px)  and (max-device-width: 736px){ 
 .slider_besrCollage img{ min-height:100%; max-height: 100%;}
@@ -634,5 +648,10 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 text-align: left;}
 .emergingCollege-section table tr td:nth-child(1){ background:#4688ac; color:#fff; font-size:20px;}
 .emergingCollege-section table tr td:nth-child(1):before{color:#fff;font-size:20px;}
-
+.related-story-list .midstoryleft {width:100%;}
+.related-story-list .midstoryright {width: 100%;}
+.list-group-item .caption {left: 175px;width: calc(100% - 175px);}
+.list-group-item .thumbnail-img{ display: none;}
+.slider_outer1 h1{ width:100%;}
+.slider_outer1 span.rank{ margin-bottom:10px;}
 }
