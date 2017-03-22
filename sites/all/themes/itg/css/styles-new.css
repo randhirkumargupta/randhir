@@ -6418,6 +6418,18 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
 }
 @media all and (max-width: 767px) {
+  .movie-layout-page .itg-widget.trending-list {
+    overflow: hidden;
+  }
+
+  .education-layout-page .section_wise_order-edu-tips-and-trick, .section_wise_order-edu-tips-and-trick {
+    max-height: 400px;
+  }
+
+  .featured-news .featured-post h3 {
+    max-height: none;
+  }
+
   .personal-list {
     margin: 0 -15px;
   }

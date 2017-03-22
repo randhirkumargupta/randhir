@@ -1809,6 +1809,7 @@ footer .multiple-items-footer i.slick-next {
 .trending-videos .trending-videos-list .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -1943,6 +1944,7 @@ footer .multiple-items-footer i.slick-next {
 .view-front-end-global-search .view-content .itg-search-list .search-detail {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -2156,6 +2158,7 @@ footer .multiple-items-footer i.slick-next {
 .dont-miss ul .dont-miss-listing .dm-detail, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-detail, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-detail, .osscar-video ul .dont-miss-listing .dm-detail {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -2484,6 +2487,7 @@ footer .multiple-items-footer i.slick-next {
 }
 .story-section .story-right .stryimg {
   position: relative;
+  text-align: center;
 }
 .story-section .story-right .stryimg .saved-photogallery {
   background: #fff none repeat scroll 0 0;
@@ -2506,6 +2510,7 @@ footer .multiple-items-footer i.slick-next {
   display: none;
 }
 .story-section .story-right .stryimg .photoby {
+  text-align: left;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -3492,6 +3497,7 @@ footer .multiple-items-footer i.slick-next {
 .may-be-suggest-container ul .may-we-suggest .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -3589,6 +3595,7 @@ footer .multiple-items-footer i.slick-next {
 .top-takes-video-container ul .top-takes-video .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -3684,6 +3691,7 @@ footer .multiple-items-footer i.slick-next {
 .watch-right-now-video ul .watch-right-now-list .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -4019,6 +4027,7 @@ h1.category-heading {
 .view-category-wise-content-list .catagory-listing .detail, .view-blog-listing .catagory-listing .detail, .page-podcasts-listing .view-podcasts-listing .catagory-listing .detail {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -4136,6 +4145,7 @@ h1.category-heading {
 .view-widget-anchors-listing .anchor-listing .detail {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -5739,6 +5749,7 @@ h1.category-heading {
 .rhs-section-ordering ul .rhs-section-item-container .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -5808,6 +5819,7 @@ h1.category-heading {
 .programe-container .program-row .program-right {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -5920,6 +5932,7 @@ h1.category-heading {
 .view-archive-story .view-content .itg-search-list .search-detail {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -6254,6 +6267,7 @@ h1.category-heading {
 .program-rhs .detail .discription {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -6970,6 +6984,7 @@ section.sidebar .block-itg-ads {
 .recommended-for-you #block-itg-widget-personlization ul.common-list .recom-listing .detail {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -8320,6 +8335,7 @@ section.sidebar .block-itg-ads {
 .sponsor-detail-container .sponsor-detail .detail {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -12456,6 +12472,9 @@ h1.about-us-heading + div p {
 }
 #block-itg-widget-podcast-header .podcast-header-container .podcast-header-bottom .other-list .slick-next {
   right: 0;
+}
+#block-itg-widget-podcast-header .podcast-header-container .podcast-header-bottom .other-list .podcast-nav-item {
+  cursor: pointer;
 }
 #block-itg-widget-podcast-header .itg-adds {
   width: 300px;
