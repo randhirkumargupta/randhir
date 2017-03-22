@@ -500,11 +500,11 @@ function itg_workflow_after_build($form, &$form_state) {
   $form['revision_information']['log']['#title'] = t('Remarks');
 
   // hide workbench dropdown
-  drupal_add_js('jQuery(document).ready(function() {
+  /*drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-revision-information").show();
               jQuery(".form-item-workbench-moderation-state-new").hide();
               jQuery("#edit-field-story-archive").hide();              
-            });', array('type' => 'inline', 'scope' => 'footer'));
+            });', array('type' => 'inline', 'scope' => 'footer'));*/
 
   if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(EDITOR, $user->roles) || array_key_exists(UGC_MODERATOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles)) {
     if (!isset($form['#node']->workbench_moderation['current'])) {
@@ -513,7 +513,7 @@ function itg_workflow_after_build($form, &$form_state) {
       $form['actions']['submit']['#value'] = t('Save as Draft');
     }
     elseif (isset($form['#node']->workbench_moderation['current'])) {
-      if ($form['#node']->workbench_moderation['current']->state == 'draft') {
+      if ($form['#node']->workbench_moderation['current']->state == 'draft' && $form['#node']->status == 0) {
         $state_class = ' published';
         $submit_name = 'Publish';
         $form['actions']['submit']['#value'] = t('Save as Draft');
@@ -649,20 +649,20 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
   elseif ($form['#id'] == 'views-exposed-form-strory-menegment-page-5') {
     $form['field_story_schedule_date_time_value_1_op']['#options'] = array('empty' => t('-All-'), '<' => 'Published', '>=' => t('To Be Live'));
 
-    drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();              
-            });', array('type' => 'inline', 'scope' => 'footer'));
+//    drupal_add_js('jQuery(document).ready(function() {
+//              jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();              
+//            });', array('type' => 'inline', 'scope' => 'footer'));
   }
   elseif ($form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12') {
 
     $form['field_story_schedule_date_time_value_op']['#options'] = array('empty' => t('-All-'), '<' => 'Published', '>=' => t('To Be Live'));
 
-    drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();
-              jQuery("#edit-field-story-schedule-date-time-value-op").click(function() {                     
-                     jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();                     
-                 });
-            });', array('type' => 'inline', 'scope' => 'footer'));
+//    drupal_add_js('jQuery(document).ready(function() {
+//              jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();
+//              jQuery("#edit-field-story-schedule-date-time-value-op").click(function() {                     
+//                     jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();                     
+//                 });
+//            });', array('type' => 'inline', 'scope' => 'footer'));
   }
 
   return $form;
