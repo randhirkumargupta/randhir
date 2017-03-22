@@ -1,26 +1,26 @@
-<div class="main-ready-directory city-directory">
+<div class="emergingCollege-section textwrap">
     <?php
       foreach($data as $data_key => $data_val) {
-    ?>    
-        <div class="ready-directory-container">
-            <div class="ready-directory-header">
-                <?php print t('CITY '.drupal_strtoupper($data_key)); ?>
-            </div>
-            <div class="ready-directory-label">
-                <div class="directory-cell ready-directory-rank"><?php print t('RANK'); ?></div>
-                <div class="directory-cell ready-directory-clgname"><?php print t('NAME OF THE COLLEGE'); ?></div>
-            </div>
+    ?>   
+    <div class="streamtitle"><?php print t('CITY '.drupal_strtoupper($data_key)); ?></div>  
+        <table style="border-collapse: collapse;" width="100%" align="CENTER" border="1" bordercolor="#c4c4c4" cellpadding="0" cellspacing="0">
+    <tr>
+    <th><?php print t('Rank'); ?></th>
+    <th><?php print t('Name of the college'); ?></th>
+  </tr> 
             <?php
               foreach($data_val as $data_val_stream) {
             ?>
-                <div class="ready-directory-value">
-                    <div class="directory-cell ready-directory-rank"><?php print $data_val_stream[0]; ?></div>
-                    <div class="directory-cell ready-directory-clgname"><?php print $data_val_stream[1]; ?></div>
-                </div>
+
+            <tr>
+    <td data-title="Rank"><?php print $data_val_stream[0]; ?>.</td>
+    <td data-title="Name of the college"><?php print $data_val_stream[1]; ?></td>
+</tr>
+
             <?php
               }
             ?>
-        </div>
+        </table>
   <?php
       }
   ?>

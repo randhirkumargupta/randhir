@@ -1,24 +1,24 @@
-<div class="main-bestzonewisecompare">
-    <div class="bestzonecontainer">
-        <div class="bestzone_label">
-                <div class="zonecell bestzone_rank"><?php print t('RANK'); ?></div>
-                <div class="zonecell bestzone_clgname"><?php print t('NAME OF THE COLLEGE'); ?></div>
-                <div class="zonecell bestzone_zone"><?php print t('CITY'); ?></div>
-                <div class="zonecell bestzone_stream"><?php print t('GOVT/PVT'); ?></div>
-        </div>
+<div class="emergingCollege-section textwrap">
+<table style="border-collapse: collapse;" width="100%" align="CENTER" border="1" bordercolor="#c4c4c4" cellpadding="0" cellspacing="0">
+    <tr>
+    <th><?php print t('Rank'); ?></th>
+    <th><?php print t('Name of the college'); ?></th>
+    <th><?php print t('City'); ?></th>
+    <th><?php print t('Govt/Pvt'); ?></th>
+  </tr>
     <?php
       foreach($data as $data_key => $data_val) {
         foreach($data_val as $data_val_stream) {
     ?>
-          <div class="bestzone_value">
-              <div class="zonecell bestzone_rank"><?php print $data_val_stream[0]; ?></div>
-              <div class="zonecell bestzone_clgname"><?php print $data_val_stream[1]; ?></div>
-              <div class="zonecell bestzone_zone"><?php print $data_val_stream[2]; ?></div>
-              <div class="zonecell bestzone_stream"><?php print $data_val_stream[3]; ?></div>
-          </div>
+    <tr>
+    <td data-title="Rank"><?php print $data_val_stream[0]; ?>.</td>
+    <td data-title="Name of the college"><?php print $data_val_stream[1]; ?></td>
+    <td data-title="City"><?php print $data_val_stream[2]; ?></td>
+    <td data-title="Govt/Pvt"><?php print $data_val_stream[3]; ?></td>
+</tr>    
       <?php
         }
       }
   ?>
-  </div>
+  </table>
 </div>

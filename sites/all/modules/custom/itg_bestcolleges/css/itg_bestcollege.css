@@ -1,6 +1,7 @@
+*{ font-family:roboto;} .main-streamwisecompare{ overflow: hidden;}
 .main-streamwisecompare .streamcontainer, .main-streamwisecompare .streamcontainer1 {
   float:left;
-  width:48%;
+  width:49%; border-right:1px solid #c4c4c4; border-left:1px solid #c4c4c4;border-bottom:1px solid #c4c4c4;border-top:1px solid #c4c4c4;
 }
 .main-streamwisecompare .streamcontainer1 {
   margin-left:2%;
@@ -10,6 +11,8 @@
   width:100%;
   font-weight: bold;
 }
+.main-streamwisecompare .stream_label .stream_rank{ padding:5px 0px 5px 0px;}
+
 .main-streamwisecompare .stream_header, .main-ready-directory .ready-directory-header {
   background-color:#d72a3e;
   padding: 5px 4px 5px 10px;
@@ -29,6 +32,16 @@
 .main-streamwisecompare .stream_value {
    border-bottom: 1px solid gray;
 }
+
+.main-streamwisecompare .stream_value .stream_rank{
+    padding:5px; border-top:1px solid #c4c4c4;color:#D72A3E; font-weight:bold;
+
+}
+.main-streamwisecompare .stream_value .stream_clgname{
+    padding:5px; border-left:1px solid #c4c4c4; border-top:1px solid #c4c4c4;
+
+}
+
 .main-streamwisecompare .stream_clgname {
   float:left;
   width:80%;
@@ -97,16 +110,18 @@
      margin-left: -10px;
      background: rgba(96, 96, 96, 0.5);
      padding: 32px 14px 40px 3px;
-     border-radius: 90px 0px 0px 90px;
+     border-radius: 100px 0px 0px 100px;
      right: 10px;
-     height: 105px;
-     width: 44px;
+     height:85px;
+     width: 45px;
      color: #000;
      font-size: 40px;
      top: 40%;
      position: absolute;
      border: none;
      cursor: pointer;
+     text-indent: -9999px;
+     background-image:url(../images/slider-next.png); background-repeat: no-repeat; background-position: center center; 
  }
  .slider_outer .slick-prev {
      z-index: 9;
@@ -116,13 +131,15 @@
      margin-left: 0px;
      background-color: rgba(96, 96, 96, 0.5);
      padding: 32px 10px 40px 0;
-     border-radius: 0 90px 90px 0;
+     border-radius: 0 100px 100px 0;
      left: 10px;
-     height: 105px;
-     width: 44px;
+     height: 85px;
+     width: 45px;
      color: #000;
      font-size: 40px;
      top: 40%;
+     text-indent: -9999px;
+     background-image:url(../images/slider-pre.png); background-repeat: no-repeat; background-position: center center;
  }
  .slider_outer .carousel-indicators {
      display: none;
@@ -221,7 +238,7 @@
      border: solid 1px #ccc;
  }
  .thumbnail .caption {
-     min-height: 212px;
+     min-height: 175px;
  }
  .list-group-item .caption {
      min-height: auto;
@@ -233,6 +250,7 @@
  .list-group-item-heading a:hover {
      background: none;
  }
+ .list-group-item .caption .best-college-city{float: right;}
  .thumbnail a {
      color: #3176a0;
      margin-bottom: 10px;
@@ -257,7 +275,7 @@
      padding: 20px 10px;
  }
  .list-group-item-heading {
-     padding: 10px 0 0;
+     padding: 10px 0 0 10px;
      text-transform: uppercase;
      clear: both;
      display: inline-block;
@@ -333,6 +351,7 @@
      padding-left: 5px;
       font-family: roboto;
  }
+ .list-group.college{ margin-bottom: 30px;}
  /*-- Right Panel--*/
  
  .add_box {
@@ -341,11 +360,11 @@
      border: solid 1px #dddddd;
      margin-top: 50px;
  }
- .add {
+ /*.add {
      background: #d9d9d9;
      min-height: 250px;
      min-width: 300px;
- }
+ }*/
  .right_view {
      background: #3176a0;
      font-size: 16px;
@@ -431,22 +450,22 @@
  
  .slider_outer1 {
      box-shadow: 0 0 4px #ccc;
-     padding-bottom: 10px;
+     padding: 10px;
  }
  .slider_outer1 h1 {
-     font-size: 36px !important;
+     font-size:30px !important;
      display: inline-block;
      font-weight: bold;
      color: #000;
  }
+ .slider_outer1 .remove_padd_right{ padding-left: 0px;}
  .slider_outer1 span.rank {
      background: #3176a0 none repeat scroll 0 0;
      color: #fff;
      display: inline-block;
-     font-size: 28px;
+     font-size: 25px;
      font-weight: 900;
      margin-bottom: 10px;
-     margin-left: 15px;
      margin-right: 10px;
      padding: 15px 10px;
      text-transform: uppercase;
@@ -475,9 +494,9 @@
      color: #696969;
  }
  .slider_outer1 .carousel-caption p {
-     font-size: 14px;
+     font-size: 15px; padding:15px 0; line-height:20px;
      font-weight: normal;
-     color: #818181;
+     color: #818181; font-family:roboto;
  }
  .slider_outer1 .right .glyphicon {
      margin-right: 0;
@@ -498,7 +517,7 @@
      position: absolute;
      right: 0;
  }
- .slider_outer1 .btn-default {
+ .slider_outer1 .btn-link {
      border-radius: 0;
      padding: 3px 15px;
      background: #f5f5f5;
@@ -506,12 +525,12 @@
      border: solid 1px #ccc;
      margin-top: 15px;
  }
- ul.pager li {
+ .slider_outer1 .item-list ul.pager li {
      list-style-type: none;
      float: left;
      margin-right: 15px;
  }
- ul.pager {
+ .slider_outer1 .item-list ul.pager {
      float: right;
      margin-right: 0px;
      background: #000;
@@ -520,37 +539,28 @@
      position: relative;
      bottom: -10px;
  }
- li.pager-next.last {
+ .slider_outer1 .item-list li.pager-next.last {
      margin-right: 0;
  }
- .btn {
+ .slider_outer1 .btn {
      cursor: default;
      background-color: #FFF;
      border-radius: 4px;
      text-align: left;
  }
- .caret {
+ .slider_outer1 .caret {
      position: absolute;
      right: 16px;
      top: 16px;
  }
- .btn-default:hover,
- .btn-default:focus,
- .btn-default:active,
- .btn-default.active,
- .open .dropdown-toggle.btn-default {
-     background-color: #FFF;
- }
- .btn-group.open .dropdown-toggle {
-     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6)
- }
- li.pager-current {
+ 
+ .slider_outer1 li.pager-current {
      display: none !important;
  }
- .pager li a {
+ .slider_outer1 .pager li a {
      color: #fff !important;
  }
- .btn-group {
+ .slider_outer1 .btn-group {
      width: 100%
  }
  .view-best-college-pagination ul li {
@@ -559,24 +569,70 @@
      margin-right: 0;
      margin-left: 15px;
  }
- .thumbnail img {
+ .list-group-item .thumbnail { height: 135px;
+    position: relative;}
+.list-group-item .thumbnail img {
      max-height: 100px;
      min-height: 100px;
+     border-left:1px solid #ccc; padding-left: 10px; 
+    
  }
  .slider_besrCollage img {
      width: 100%;
      min-height: 450px;
      max-height: 450px;
  }
- .slick-prev:before,
- .slick-next:before {
-     font-family: 'slick';
-     font-size: 20px;
-     line-height: 1;
-     opacity: .75;
-     color: white;
-     -webkit-font-smoothing: antialiased;
-     -moz-osx-font-smoothing: grayscale;
-     display: none;
-     content: ">";
- }
+
+ .list-group-item .thumbnail .thumbnail-img{position: absolute;left: 175px;}
+ .list-group-item .list-group-item-heading{position: absolute;
+left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-50%); width:150px;}
+ .list-group-item .caption{position: absolute;left: 340px;width: calc(100% - 340px);}
+ .list-group-item .list-group-item-heading a span{word-break:break-all; display: block;}
+ /* Sandeep Bharti Css For bestcolloge RHS Video section */
+.sidebar-second .watch-right-now-video.bestcollege-rhs-video{ margin-top: 30px;}
+.sidebar-second .watch-right-now-video.bestcollege-rhs-video h3{background: #3176a0; font-size: 16px;
+    color: #fff; text-transform: uppercase; padding: 10px; font-weight: bold;font-family: roboto;}
+.sidebar-second .watch-right-now-video.bestcollege-rhs-video h3:before{ display:none;}
+.sidebar-second .watch-right-now-video.bestcollege-rhs-video h3 span{margin: 0px;padding: 0px;background: transparent;}
+.sidebar-second .watch-right-now-video.bestcollege-rhs-video ul{background: #f2f2f2;
+    padding:10px;border: solid 1px #dddddd; font-family: roboto;}
+.sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li{ padding:15px 0 0;}
+.sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li:last-child{ border-bottom:0px;}
+.sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li.watch-right-now-list .pic{ width:170px; float: left; margin-left: 0px;}
+.sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li.watch-right-now-list .title{ padding:0px 0 0 10px;}
+.sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li.watch-right-now-list .title a{ font-weight: normal; font-size:14px;}
+.block-itg-bestcolleges .bb1-text1{ background:#d0d0d0; padding:10px; margin-top:0px;}
+.block-itg-bestcolleges .bb1-text1 a{font-size: 13px;font-weight: bold;color: #464646;font-family: roboto;}
+/*EMERGING COLLEGES RANKING TABLE CSS */
+.emergingCollege-section{ margin-bottom:40px;}
+.emergingCollege-section.textwrap td{ word-break: break-all; white-space: normal;}
+.emergingCollege-section .streamtitle {background:#d72a3e;font-size: 15px;color: #ffffff;padding: 5px 0px 5px 0px; font-weight: normal;text-align: center;}
+.emergingCollege-section table th{ background:#4688ac; font-size:14px; color:#fff; font-weight:700; padding:5px;}
+.emergingCollege-section table tr td{ text-align: center; font-size:13px; padding:8px 5px;}
+.emergingCollege-section table tr td:nth-child(1),.emergingCollege-section table tr td:nth-child(2){ color:#D72A3E; font-weight: bold;}
+.emergingCollege-section table tr td:nth-child(1){ font-size:15px;}
+.emergingCollege-section table tr td:nth-child(2){ text-align: left;}
+/* Media Query for same */
+@media only screen  and (min-device-width: 320px)  and (max-device-width: 736px){ 
+.slider_besrCollage img{ min-height:100%; max-height: 100%;}
+.slider_outer .carousel-caption{position: relative;font-size: 20px;line-height: 25px;}
+.slider_outer1 span.rank{font-size: 18px; padding:10px;}
+.slider_outer1 h1{ font-size:25px !important; margin-bottom:10px;}
+.slider_outer1 .remove_padd_right+div{ padding-left: 0px; padding-right: 0px; margin-top:10px;}
+.sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li.watch-right-now-list .pic{ width:100px;}
+.main-streamwisecompare .streamcontainer, .main-streamwisecompare .streamcontainer1{ width:100%;}
+.main-streamwisecompare .streamcontainer1{ margin-left:0px; margin-top:30px;}
+/*EMERGING COLLEGES RANKING TABLE CSS */
+.emergingCollege-section table{border: 0px;}
+.emergingCollege-section table tr:nth-child(1){ display: none;}
+.emergingCollege-section table tr{ display: block; margin-bottom:30px; margin-top:10px;}
+.emergingCollege-section table tr td{ display: block; text-align: right!important; border-top:1px solid #c4c4c4; border-left:1px solid #c4c4c4;border-right:1px solid #c4c4c4; border-bottom:0px;}
+.emergingCollege-section table tr td:nth-last-child(1){border-bottom:1px solid #c4c4c4;}
+.emergingCollege-section table tr td[data-title]:before {content: attr(data-title); float: left; font-size:13px; color:rgba(94, 93, 82, 0.85);}
+.emergingCollege-section table tr td:nth-child(2){ color:#323232; text-align: left!important;}
+.emergingCollege-section table tr td:nth-child(2):before{ display: block; padding:0 0 5px;width: 100%;
+text-align: left;}
+.emergingCollege-section table tr td:nth-child(1){ background:#4688ac; color:#fff; font-size:20px;}
+.emergingCollege-section table tr td:nth-child(1):before{color:#fff;font-size:20px;}
+
+}

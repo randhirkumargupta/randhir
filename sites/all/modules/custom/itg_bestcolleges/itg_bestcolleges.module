@@ -258,19 +258,6 @@ function itg_bestcollege_emerging($year, $type, $stream) {
   drupal_set_title(t('EMERGING COLLEGES RANKING: BEST ' . drupal_strtoupper($stream) . ' COLLEGES'));
   $result_data = itg_bestcollege_getData($type, $year, $stream);
   $data = $result_data;
- /* foreach ($result_data as $result_data_key => $result_data_val) {
-    $clgname_city = $result_data_val->collegename . ', ' . $result_data_val->city;
-    $data[$result_data_val] = array($result_data_val->overall_rank, $clgname_city, $result_data_val->reputation, $result_data_val->academic_input, $result_data_val->studentcare, $result_data_val->infrastructure, $result_data_val->placement, $result_data_val->preceptual_rank, $result_data_val->factual_rank);
-  }*/
-  /*$header = array(t('Rank'), t('NAME OF THE COLLEGE'), t('Reputation'), t('Academic Input'), t('Student Care'), t('Infra'), t('Placement'), t('Perceptual Rank'), t('Factual Rank'));
-  $output = theme('table', array(
-    'header' => $header,
-    'rows' => $data,
-    'attributes' => array(
-      'class' => array('table')
-    )
-      )
-  );*/
 
   $output = theme('itg_bestcollege_emerging_colleges_rank', array('data' => $data));
 
@@ -1168,9 +1155,6 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
   $context['results']['rows_imported'] ++;
   $line = $cleaned_line = array_map('base64_decode', $line);
 
-  watchdog("test arun@", '<pre>' . print_r($line, TRUE) . '</pre>');
-  drupal_set_message("Pass line {$line[0]} college id = {$collegeid}");
-
   $collegeid = $line[1];
   $collegename = $line[2];
   $city = $line[3];
@@ -1187,16 +1171,14 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
   $stream = $line[15];
 
 
-  $node = new stdClass();
+  /*$node = new stdClass();
   $node->title = $collegename;
   $node->type = "bestcolleges";
 
   $node->language = LANGUAGE_NONE; // Or e.g. 'en' if locale is enabled
-  //node_object_prepare($node); // Sets some defaults. Invokes hook_prepare() and hook_node_prepare().
 
   $node->field_bestcollege_city[LANGUAGE_NONE][0]['value'] = $city;
   $node->body[LANGUAGE_NONE][0]['value'] = $description;
-  //$node->field_story_extra_large_image = $image;
   $node->field_bestcollege_website_url[LANGUAGE_NONE][0]['value'] = $websiteurl;
   $node->field_bestcollege_related_story[LANGUAGE_NONE][0]['value'] = $storyids;
   $node->field_bestcollege_related_photo[LANGUAGE_NONE][0]['value'] = $photoids;
@@ -1204,17 +1186,45 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
   $node->field_bestcollege_rank[LANGUAGE_NONE][0]['value'] = $rank;
   $node->field_bestcollege_year[LANGUAGE_NONE][0]['value'] = $year;
   $node->field_college_id[LANGUAGE_NONE][0]['value'] = $collegeid;
-
-  // print "year = ".$year;
+*/
   if ($year) {
-    if ($year == '2015') {
-      $tid = '801';
+    if ($year == '2014') {
+      $tid = '844720';
 
       if ($stream == 'Arts') {
         $stream = 'Art';
       }
 
-   /*   if ($stream == 'Education') {
+      if ($stream == 'Science') {
+        $stream = 'science';
+      }
+      if ($stream == 'Commerce') {
+        $stream = 'Art';
+      }
+      if ($stream == 'Arts') {
+        $stream = 'Art';
+      }
+      if ($stream == 'Arts') {
+        $stream = 'Art';
+      }
+      if ($stream == 'Arts') {
+        $stream = 'Art';
+      }
+      if ($stream == 'Arts') {
+        $stream = 'Art';
+      }
+      if ($stream == 'Arts') {
+        $stream = 'Art';
+      }
+      if ($stream == 'Arts') {
+        $stream = 'Art';
+      }
+      if ($stream == 'Arts') {
+        $stream = 'Art';
+      }
+
+      /*
+      if ($stream == 'Education') {
         $stream = 'education1';
       }
 
@@ -1233,12 +1243,10 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
   }
 
   // Term reference (taxonomy) field
-  if (!empty($final_tid)) {
+ /* if (!empty($final_tid)) {
     $node->field_story_category[LANGUAGE_NONE][]['tid'] = $final_tid;
   }
 
-  // watchdog("test arun@", '<pre>'. print_r($node, TRUE) .'</pre>');
-  // watchdog("test arun line@", '<pre>'. print_r($line, TRUE) .'</pre>');
 
   $url = $image; //'https://ssl.gstatic.com/gb/images/k1_a31af7ac.png';
   //I have used picture folder to store images using image field settings
@@ -1247,13 +1255,13 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
 
   if ($file_info->fid) {
     $node->field_story_extra_large_image[LANGUAGE_NONE]['0']['fid'] = $file_info->fid; //assign fid
-  }
-
+  }*/
+/*
   $node->uid = 3;
-  $node->status = 1; //(1 or 0): published or not
+  $node->status = 1; //(1 or 0): published or not*/
   if (!empty($final_tid)) {
 
-     if ($node = node_submit($node)) {
+    /* if ($node = node_submit($node)) {
       node_save($node);
       drupal_set_message('submitted successfully');
 
@@ -1280,7 +1288,7 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
           ->condition('collegeid', $collegeid)
           ->condition('year', $year)
           ->execute();
-    }
+    }*/
     drupal_set_message("Pass line for 2015 {$line[0]} college id = {$collegeid}");
   }
   else {
@@ -1348,3 +1356,65 @@ function best_college_theme_data_migrate($line, $session_nid, &$context) {
 //-------------------------------------------------------------------------------------------|
 //  End import of the CSV file
 //-------------------------------------------------------------------------------------------|
+
+
+
+/**
+ * related story for best college
+ * @return array
+ */
+function bestCollegesRelatedStoryList() {
+        // variable declaration
+        $flag_related_nid = 0;
+        $related_story_nid_ar = array();
+        $count = 0;
+        $data = array();
+        // view calling for pick related story node
+        $result_best_college_image_slider =
+views_get_view_result('best_college_image_slider', 'block_2');
+        $field_bestcollege_related_story_nid =
+$result_best_college_image_slider[0]->_field_data['nid']['entity']->field_bestcollege_related_story['und'][0];
+
+
+            //echo $field_bestcollege_related_story_nid['value'];
+            //$related_story_nid_ar =  (explode(",",
+           // $field_bestcollege_related_story_nid['value'])); // after final
+            $related_story_nid_ar[] = 666;
+            $related_story_nid_ar[] = 664;
+
+       // related story node data fatching
+        if(isset($field_bestcollege_related_story_nid['value']) &&
+$field_bestcollege_related_story_nid['value'] != ""){
+            $flag_related_nid = 1;
+             $query = db_select('node', 'n');
+            //join  for field value
+            $query->leftJoin('field_data_field_story_long_head_line',
+'lhl', 'lhl.entity_id=n.nid');
+            $query->leftJoin('field_data_body', 'fdb',
+'fdb.entity_id=n.nid');
+            $query->leftJoin('field_data_field_story_small_image',
+'ssi', 'ssi.entity_id=n.nid');
+            $query->fields('lhl',
+array('field_story_long_head_line_value'));
+            $query->fields('fdb', array('body_value'));
+            $query->fields('fdb', array('body_summary'));
+            $query->fields('ssi', array('field_story_small_image_fid'));
+            $query->fields('n', array('title', 'nid'));
+            $query->condition('n.status', '1');
+            //$query->condition('n.nid', '666', '=');
+            $query->condition('n.nid', $related_story_nid_ar,'IN');
+            $result = $query->execute();
+
+            while($record = $result->fetchAssoc()) {
+               $data[$count] = $record;
+               $count++;
+            }
+           $data['relatedstory_count'] = $count;
+
+
+
+        }
+        // return final result
+        return $data;
+    }
+

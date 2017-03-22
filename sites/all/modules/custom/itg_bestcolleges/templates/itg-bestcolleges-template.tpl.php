@@ -33,6 +33,56 @@ $config_name = $comment_value[0]->config_name;
   </div>
 </div>
 
+
+<!-- Related story start-->
+<?php
+$related_story_value = bestCollegesRelatedStoryList();
+//echo "<pre>on tpl"; print_r($data_value); echo "</pre>";
+//echo $data_value['relatedstory_count'];
+if(isset($related_story_value['relatedstory_count']) && $related_story_value['relatedstory_count'] > 0){
+    unset($related_story_value['relatedstory_count']);
+// Related story block start here
+
+?>
+
+<div class="col-sm-12 col-xs-12 view1">
+<div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("MORE STORIES ") ; ?></div>
+
+</div>
+<div class="col-sm-12 related-story-list">
+    <div class="row">
+    <?php
+     foreach ($related_story_value as $key => $value){
+
+         ?>
+
+        <div class="section">
+
+            <a href="<?php print $base_url; ?>/node/<?php print $value['nid']; ?>" target="_blank"><img alt="" title="" src="http://media2.intoday.in/indiatoday/images/stories/bc-arts-jun29-1_180_061915094528.jpg" width="125" align="left" height="93"></a>
+                <div class="midseeviddetail">
+                    <div class="midseevidtitle"><a href="<?php print $base_url; ?>/node/<?php print $value['nid']; ?>" target="_blank"><?php print $value['title']; ?></a></div>
+                    <div class="midseevidintro"><?php print $value['title']; ?></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+
+
+            <div class="clear"></div>
+
+    <?php
+
+     }
+    ?>
+        </div>
+
+</div>
+<?php
+} // Related story block end here
+?>
+
+<!-- Related story end-->
+
 <!-- Slider End-->
 <div class="clearfix"></div>
 <!-- Grid View-->
