@@ -155,18 +155,24 @@ function itg_videogallery_schema() {
         'primary key' => array('id'),
     );
     // FTP Videos
-    $schema['itg_dailymotion_ftp_video'] = array(
-        'description' => 'Differenc between FTP video and local video',
+    $schema['itg_video_bitrates_data'] = array(
+        'description' => 'ITG used videos store bitrates urls',
         'fields' => array(
             'id' => array(
                 'description' => 'id',
                 'type' => 'serial',
                 ' null' => TRUE,
             ),
-            'fid' => array(
-                'description' => 'node id',
+            'video_id' => array(
+                'description' => 'Video  id',
                 'type' => 'int',
                 ' null' => TRUE,
+            ),
+            'responce' => array(
+                'description' => 'Bitrates',
+                'type' => 'text',
+                'size' => 'big',
+                'null' => TRUE
             ),
         ),
         'primary key' => array('id'),

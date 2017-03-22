@@ -653,7 +653,7 @@ function itg_workflow_node_presave($node) {
 
                             if ($node_id) {
                                 // use for upload local video to DM
-                                itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details->uri, $video_fid, $tags_value, $node_id, 'is_draft');
+                                itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details, $video_fid, $tags_value, $node_id, 'is_draft');
                             }
                         }
                     }

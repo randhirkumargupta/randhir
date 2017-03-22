@@ -436,6 +436,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
                     ->fields(array('is_delete' => 1));
             $query->condition('fid', $main_fids, 'NOT IN');
             $query->condition('nid', $node_id);
+            $query->condition('content_type', 'video_gallery', '=');
             $query->execute();
         } catch (Exception $e) {
             watchdog_exception('video fid delete', $e);
@@ -500,7 +501,7 @@ function itg_videogallery_node_insert($node) {
                             }
 
                             // use for upload local video to DM
-                            itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details->uri, $video_fid, $tags_value, $node_id, 'is_draft');
+                            itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details, $video_fid, $tags_value, $node_id, 'is_draft');
                         }
                     }
                     else {
@@ -548,7 +549,8 @@ function itg_videogallery_update_node_id_for_video_fid($node_id, $fids) {
  * Function use for upload local video to dailymotion
  */
 function itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details, $video_fid, $tags_value, $node_id, $is_draft = null) {
-    $response = itg_videogallery_dailymotion($real_path, $file_details, $video_fid, $tags_value, $node_id);
+
+    $response = itg_videogallery_dailymotion($real_path, $file_details->uri, $video_fid, $tags_value, $node_id);
     // Perform playlist and tags when new video create.
     $response_result['video_id'] = $response['id'];
     $response_result['fid'] = $response['fid'];
@@ -572,6 +574,7 @@ function itg_videogallery_send_local_video_to_dailymotion($real_path, $file_deta
                     'upload_time' => REQUEST_TIME,
                     'video_duration' => $duration,
                     'dailymotion_published' => 1,
+                    'video_size' => $file_details->filesize,
                     'is_draft' => ($is_draft) ? 1 : 0,
                     'type' => 'local',
                     'name' => $file_details->filename,
@@ -1068,6 +1071,11 @@ function itg_videogallery_menu() {
         'access arguments' => array('access content'),
         'type' => MENU_CALLBACK,
     );
+    $items['baklol2'] = array(
+        'page callback' => 'itg_videogallery_remove_video_with_child',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
 
     $items['daily-motion-video-dashboard'] = array(
         'title' => 'Daily Motion Video Dashboard',
@@ -1094,6 +1102,59 @@ function itg_videogallery_menu() {
 
 
     return $items;
+}
+
+/**
+ * This function use for removed or replaced video from other content
+ * 
+ */
+function itg_videogallery_remove_video_with_child() {
+    $video_data = "";
+    $query = db_select('itg_solr_video_info', 'drd');
+    $query->fields('drd', array('fid', 'nid', 'solr_video_id', 'id', 'property'));
+    $query->condition('is_delete', '1', '=');
+    $video_data = $query->execute()->fetchAll();
+
+
+    foreach ($video_data as $data_delete) {
+
+        if ($data_delete->fid != "") {
+            $query = db_select('itg_solr_video_info', 'drd');
+            $query->fields('drd', array('fid'));
+            $query->condition('solr_video_id', $data_delete->solr_video_id, '=');
+            $video_data1 = $query->execute()->fetchAll();
+
+            foreach ($video_data1 as $viddata) {
+
+
+                try {
+                    $deleted = db_delete('file_managed')
+                            ->condition('fid', $viddata->fid)
+                            ->execute();
+                } catch (Exception $e) {
+                    watchdog_exception('file manage delete', $e);
+                }
+            }
+
+            $query = db_update('dailymotion_response_details');
+            $query->fields(array('dailymotion_published' => 0));
+            $query->condition('video_id', $data_delete->solr_video_id, '=');
+            $query->execute();
+
+            if ($data_delete->property == 'indiatoday') {
+
+                $node_data = itg_videogallery_get_video_solrcontent($data_delete->solr_video_id);
+                $node = node_load($node_data[0]->nid);
+
+                $node->field_video_used [LANGUAGE_NONE][0]['value'] = 0;
+                node_save($node);
+            }
+            // delete from itg_solr_video_info table
+            $deleted = db_delete('itg_solr_video_info')
+                    ->condition('solr_video_id', $data_delete->solr_video_id)
+                    ->execute();
+        }
+    }
 }
 
 /**
@@ -1512,6 +1573,14 @@ function itg_videogallery_cronapi($op, $job = NULL) {
         'description' => 'This is the callback for uploading FTP video to Daily motion server in unpublished mode',
         'callback' => 'itg_videogallery_ftp_file_insert_cron',
     );
+    $items['save-video-bitrates'] = array(
+        'description' => 'This is use for store video birates urls',
+        'callback' => 'itg_videogallery_video_bitrate',
+    );
+    $items['content-remove-video-with-child'] = array(
+        'description' => 'This crone use for replaced video remove from other content type.',
+        'callback' => 'itg_videogallery_remove_video_with_child',
+    );
 
     return $items;
 }
@@ -1865,26 +1934,29 @@ function get_video_filed_collection_by_its_id($entity_fid) {
  */
 function itg_videogallery_video_bitrate() {
     $api = itg_videogallery_dailymotion_api();
-    $thumb_url = $api->get(
-            '/video/x5f1p1l', array('fields' => array('id', 'title', 'owner', 'stream_h264_url', 'encoding_progress', 'publishing_progress'))
-    );
+    $query = db_select('itg_solr_video_info', 'drd');
+    $query->fields('drd', array('solr_video_id'));
+    //$query->condition('is_delete', '1', '!=');
+    $result = $query->execute()->fetchall();
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "http://www.dailymotion.com/json/video/x5e49qb?fields=stream_h264_sd_url,stream_h264_hq_url,stream_h264_url,stream_h264_hd_url");
-    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9');
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    foreach ($result as $vid) {
 
-    $content = curl_exec($ch);
-    curl_close($ch);
-    $daily_res = (json_decode($content, true));
-    pr($daily_res);
-    pr($daily_res['stream_h264_sd_url']);
-    print '<video width="400" controls> <source src="' . $daily_res['stream_h264_sd_url'] . '" type="video/mp4"> </video> ';
-//$filedata = file_get_contents($daily_res['stream_h264_sd_url']);
-//$file = file_save_data($filedata, file_default_scheme() . '://dailymotion_video_dir/pavnish'.time().'..mp4');
-//print copy($daily_res['stream_h264_sd_url'], 'includes/pav.mp4');
-//print file_get_contents($daily_res['stream_h264_sd_url']);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "http://www.dailymotion.com/json/video/" . $vid->solr_video_id . "?fields=stream_h264_hd1080_url,stream_h264_hd_url,stream_h264_hq_url,stream_h264_ld_url,stream_h264_url");
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9');
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $content = curl_exec($ch);
+        curl_close($ch);
+       
+        db_merge('itg_video_bitrates_data')
+                ->key(array('video_id' => $vid->solr_video_id))
+                ->fields(array(
+                    'video_id' => $vid->solr_video_id,
+                    'responce' => $content
+                ))
+                ->execute();
+    }
 }
 
 /**
@@ -1937,6 +2009,18 @@ function get_video_in_fieldcollection_by_nid_mirtaed($nid) {
 function itg_videogallery_get_videoid($fid) {
     $query = db_select('dailymotion_response_details', 'drd');
     $query->fields('drd', array('video_id'));
+    $query->condition('fid', $fid, '=');
+    $result = $query->execute()->fetchField();
+    return $result;
+}
+
+/**
+ * Implements function for get videoid by file id
+ * @param int $fid
+ */
+function itg_videogallery_get_videoid_new($fid) {
+    $query = db_select('itg_solr_video_info', 'drd');
+    $query->fields('drd', array('solr_video_id'));
     $query->condition('fid', $fid, '=');
     $result = $query->execute()->fetchField();
     return $result;
