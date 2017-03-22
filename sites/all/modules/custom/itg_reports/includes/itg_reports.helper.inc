@@ -123,7 +123,7 @@ function itg_registered_user_display_report($user_id) {
       $con = mongodb();
       $people = $con->pagedetails;
       $date_from = $_GET['date_from'];
-      $date_to = $_GET['date_to'];
+      $date_to = strtotime('+1 day', $_GET['date_to']);
       $condition = array(
         'viewtime' => array('$gte' => (int) $date_from, '$lte' => (int) $date_to),
         'uid' => $user_id,
