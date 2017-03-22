@@ -10760,4 +10760,14 @@ span.smilies-title {
     }
   }
 }
+#block-itg-front-end-common-latest-from-aajtak, 
+#block-itg-front-end-common-latest-from-pti,
+#block-itg-front-end-common-latest-from-businesstoday{
+  ul{
+    border: 1px solid #dddddd;
+    @extend .list-none;
+    @include listing-with-image(third-party-list,left,10px,pic,title);
+    li + li{border-top: 1px solid #dddddd;}
+  }
+}
  
