@@ -91,10 +91,44 @@
         }
     };
 })(jQuery, Drupal, this, this.document);
+
 jQuery( document ).ready(function() {
    jQuery('#edit-field-story-archive-value-wrapper').hide();
     if(jQuery('#edit-field-story-archive-value').val() == 'Yes') {
        
         jQuery('.view-id-report_filed_content td.views-field-status').text('Archive');
     }
+    var date_used = new Date();
+    jQuery('#itg-registred-user-report-form #edit-date-from').datepicker({
+        // Get 5 year previous and next year data.
+        maxDate: new Date(date_used.getFullYear()+5 , 01 , 01),
+        minDate: new Date(date_used.getFullYear()-5, 01, 01),
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'dd-mm-yy',
+    });
+    jQuery('#itg-registred-user-report-form #edit-date-to').datepicker({
+        // Get 5 year previous and next year data.
+        maxDate: new Date(date_used.getFullYear()+5 , 01 , 01),
+        minDate: new Date(date_used.getFullYear()-5, 01, 01),
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'dd-mm-yy',
+    });
+    jQuery('#itg-active-user-report-form #edit-date-from').datepicker({
+        // Get 5 year previous and next year data.
+        maxDate: new Date(date_used.getFullYear()+5 , 01 , 01),
+        minDate: new Date(date_used.getFullYear()-5, 01, 01),
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'dd-mm-yy',
+    });
+    jQuery('#itg-active-user-report-form #edit-date-to').datepicker({
+        // Get 5 year previous and next year data.
+        maxDate: new Date(date_used.getFullYear()+5 , 01 , 01),
+        minDate: new Date(date_used.getFullYear()-5, 01, 01),
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'dd-mm-yy',
+    });
 });

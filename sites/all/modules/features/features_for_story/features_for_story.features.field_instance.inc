@@ -722,6 +722,48 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_cm_related_content_detail'.
+  $field_instances['node-story-field_cm_related_content_detail'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 126,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_cm_related_content_detail',
+    'label' => 'Related Content Detail',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 109,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_common_by_line_reporter_id'.
   $field_instances['node-story-field_common_by_line_reporter_id'] = array(
     'bundle' => 'story',
@@ -830,7 +872,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_emoji',
-    'label' => 'Right Emoji',
+    'label' => 'Left Emoji',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -872,7 +914,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_emoji_2',
-    'label' => 'Left Emoji',
+    'label' => 'Right Emoji',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -893,11 +935,7 @@ function features_for_story_field_default_field_instances() {
   // Exported field_instance: 'node-story-field_emoji_position'.
   $field_instances['node-story-field_emoji_position'] = array(
     'bundle' => 'story',
-    'default_value' => array(
-      0 => array(
-        'value' => 'left',
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -2519,7 +2557,7 @@ function features_for_story_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 1,
-      'default_image' => 2686,
+      'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
@@ -2539,6 +2577,7 @@ function features_for_story_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -5632,6 +5671,7 @@ function features_for_story_field_default_field_instances() {
   t('Quotes');
   t('Redirection URL');
   t('Related Content');
+  t('Related Content Detail');
   t('Right Emoji');
   t('Sample Photo');
   t('Sample Photo Title');

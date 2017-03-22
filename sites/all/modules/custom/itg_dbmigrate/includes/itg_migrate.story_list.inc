@@ -185,7 +185,7 @@ class ItgStoryListMigration extends XMLMigration {
     $this->addFieldMapping('field_story_expiry_date', 'storyexpirydate')->xpath('storyexpirydate');
 
     //code for user
-    //<createdby>2345</createdby><modifiedby>2345</modifiedby>//pending
+    //<createdby>2345</createdby><modifiedby>2345</modifiedby>//save in custom table
     
     //code for issue
     $this->addFieldMapping('field_story_magazine_story_issue', 'story_issue')->xpath('story_issue');
@@ -880,7 +880,7 @@ class ItgStoryListMigration extends XMLMigration {
        }
       }
     }*/
-    $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'] = 'migrate-'.$node->nid;
+    $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'] = 'migrated-'.$node->nid;
    if (isset($row->xml->buzz_content->buzz) || isset($row->xml->fulltext_conclaveformat->listicle_content->listicle) || (isset($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate) || !empty($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate))) {
       
       field_attach_update('node', $node);

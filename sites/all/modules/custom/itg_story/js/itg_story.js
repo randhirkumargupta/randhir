@@ -238,9 +238,3 @@
     });
 });
 
-// open save search in popup
-function showrelatedpopup(iframeurl)
-{
-    jQuery.colorbox({href: iframeurl, iframe: true, width: "1030", height: "730", fixed: true});
-
-}

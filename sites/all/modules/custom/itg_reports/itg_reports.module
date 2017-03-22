@@ -39,7 +39,24 @@ function itg_reports_menu() {
         'type' => MENU_CALLBACK,
         'file' => 'includes/itg_reports.helper.inc',
     );
-
+    // Menu form email autocomplete.
+    $items['itg-registered-user-report/%'] = array(
+        'page callback' => 'itg_registered_user_report',
+        'page arguments' => array(1),
+        'access arguments' => array('administer nodequeue'),
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_reports.helper.inc',
+    );
+    
+    // Menu form active users reports.
+    $items['itg-active-user-report'] = array(
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('itg_active_user_report_form'),
+        'access arguments' => array('administer nodequeue'),
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_users_reports.inc',
+    );
+    
     return $items;
 }
 
@@ -118,11 +135,25 @@ function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_i
             $form['#after_build'][] = 'itg_reports_view_after_build';
 
             break;
+        case 'views-exposed-form-readers-reports-page':
+              $form['mail']['#attributes'] = array('placeholder' => t('Search by email'));
+              $form['mail']['#autocomplete_path'] = 'itg-reports-mail/autocomplete';
+              $form['field_mobile_number_value']['#attributes'] = array('placeholder' => t('Search by mobile number'));
+            break;
         case 'views-exposed-form-movies-master-page':
             $form['tid']['#attributes'] = array('placeholder' => t('Search by movie name'));
             $form['field_movie_earning_value']['min']['#attributes'] = array('placeholder' => t('Start range'));
             $form['field_movie_earning_value']['max']['#attributes'] = array('placeholder' => t('End range'));
             unset($form['field_movie_earning_value']['max']['#title']);
+            break;
+        case 'views-exposed-form-users-reports-page':
+            $form['created']['min']['#type'] = 'date_popup';
+            $form['created']['min']['#date_format'] = 'd/m/Y';
+            $form['created']['max']['#attributes']['placeholder'] = 'Date To';
+            $form['created']['min']['#attributes']['placeholder'] = 'Date From';
+            $form['created']['max']['#type'] = 'date_popup';
+            $form['created']['max']['#date_format'] = 'd/m/Y';
+            break;
     }
 }
 
@@ -440,4 +471,22 @@ function itg_reports_form_alter(&$form, &$form_state, $form_id) {
             }
         }
     }
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reports_user_login(&$edit, $account) {
+  $user_required_data = array();
+  $user_required_data['uid'] = $account->uid;
+  $user_required_data['name'] = $account->name;
+  $user_required_data['mail'] = $account->mail;
+  $user_required_data['created'] = (int) $account->created;
+  $user_required_data['access'] = (int) $account->access;
+  $user_required_data['login'] = (int) $account->login;
+  $user_required_data['mobile'] =  $account->field_mobile_number['und'][0]['value'];
+  module_load_include('inc', 'itg_reports', 'includes/itg_users_reports');
+  _itg_report_save_active_user_data($user_required_data);
 }

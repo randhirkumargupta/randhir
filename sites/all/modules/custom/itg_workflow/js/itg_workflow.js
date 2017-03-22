@@ -86,6 +86,13 @@ jQuery(document).ready(function() {
     });                  
 });
 
+// hide workbench dropdown
+jQuery(document).ready(function() {
+    jQuery("#edit-revision-information").show();
+    jQuery(".form-item-workbench-moderation-state-new").hide();
+    jQuery("#edit-field-story-archive").hide();              
+});
+
 //jQuery(document).ready(function() {
 //              
 //              

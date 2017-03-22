@@ -68,6 +68,17 @@
         jQuery("#edit-bundle-videogallery-field-story-archive-und-yes").attr("checked", true);
         jQuery("#edit-bundle-videogallery-field-story-archive-und").hide();
     }
+    
+    if (form_id == 'views-exposed-form-strory-menegment-page-5') {
+        jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();
+    }
+    
+    if (form_id == 'views-exposed-form-strory-menegment-page-1' || form_id == 'views-exposed-form-strory-menegment-page-12') {
+        jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();
+            jQuery("#edit-field-story-schedule-date-time-value-op").click(function() {                     
+              jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();                     
+            });
+    }
       
   }
 

@@ -94,7 +94,7 @@ class ItgPhotoMigration extends XMLMigration {
   }
    public function prepareRow($row) {
      $term_name = 'Photo';
-     $vid = 4;
+     $vid = 14;
      $parent_tid = itg_db_migrate_parent_term($term_name, $vid);
      $row->xml->section_id = $parent_tid;
    }

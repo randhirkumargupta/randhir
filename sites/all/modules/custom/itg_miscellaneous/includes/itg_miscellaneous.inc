@@ -105,6 +105,35 @@ function itg_section_widgets_list_delete() {
 }
 
 /**
+ * Implement function for create index.xml
+ */
+function create_index_xml(){
+  $xml_path = 'sites/default/files/xml_file_chunk/';
+  $foldername = 'story/';
+  $path = $xml_path.$foldername;
+  foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as $filename) {
+    $rest = substr($filename, -4);
+    if($rest == ".xml"){
+      $xml_file = $filename->getFilename();
+      //$files = end(explode($foldername, (string) $filename));
+      $xml_id = explode('.xml', $xml_file);
+      $file_id[$xml_id[0]] = $xml_id[0];
+    }        
+  }
+  ksort($file_id);
+  $domDocument = new DOMDocument('1.0', "UTF-8");
+  $domElement = $domDocument->createElement('content');
+  $domDocument->appendChild($domElement);
+  foreach($file_id as $new_file){
+      $domElement1 = $domDocument->createElement('sourceid', $new_file);
+      $domElement->appendChild($domElement1);
+  }
+  //echo count($file_id);
+  //p($file_id);
+  $domDocument->save($xml_path.'index/index.xml');
+}
+
+/**
  * Callback for create-poll-table
  * @param 
  */
@@ -116,7 +145,73 @@ function create_poll_table() {
     `content_type` varchar(250) NOT NULL,
     PRIMARY KEY (`id`)
     ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;';
-    db_query($query); */
+    db_query($query); */ 
+
+  //$file_name = 'indiatoday-story_2016-06-01.xml';
+  //$file_name = 'indiatoday-story_2016-06-11.xml';
+  //$file_name = 'indiatoday-story_2016-06-21.xml';
+  //$file_name = 'indiatoday-story_2016-07-01.xml';
+  //$file_name = 'indiatoday-story_2016-08-01.xml';
+  //$file_name = 'indiatoday-story_2016-09-01.xml';
+  //$file_name = 'indiatoday-story_2016-10-01.xml';
+  //$file_name = 'indiatoday-story_2016-11-01.xml';
+  $file_name = 'indiatoday-story_2016-12-01.xml';
+  $xml_path = 'sites/default/files/xml_file_chunk/';
+  $xml = simplexml_load_file($xml_path . $file_name, 'SimpleXMLElement');  
+  $i = 0;
+  foreach ($xml->story as $stories) {
+    $xml_city_id = (array) $stories->cities->city;
+    $original_id = array();    
+    // map city
+    _map_xml_city($xml_city_id, $stories);
+
+    // Map createdby
+    _map_xml_user($stories, 'createdby');
+
+    // Map modifiedby
+    _map_xml_user($stories, 'modifiedby');
+    // Get folder name.
+    $category_ids = (string) $stories->categories->category;
+    $split_category = explode('#', $category_ids);
+    $folder_name = '';
+    $pti_section = 0;
+    if (count($split_category) == 2 && $split_category[0] == 177 && $split_category[1] == 1) {
+      $folder_name = 'pti';
+      $pti_section = 177;
+    }
+    if ($split_category[0] == 177) {
+      $folder_name = 'pti';
+    }
+    $issue_based_story = (string) $stories->story_issue;
+    if ($issue_based_story == 'yes') {
+      $folder_name = 'issue_based_story';
+    }
+    // Map category.      
+    if ($pti_section) {
+      _map_xml_category($stories, $pti_section);
+    }
+    else {
+      _map_xml_category($stories);
+    }
+
+    // Map primary category.
+    _map_xml_primary_category($stories);
+
+    // Map tags.
+    _map_xml_tags($stories);
+
+    // Map byline
+    _map_xml_byline($stories);    
+    if (!empty($folder_name)) {
+      $stories->asXml($xml_path . $folder_name . '/' . $stories->id . '.xml');
+    }
+    else {
+      $stories->asXml($xml_path . 'story/' . $stories->id . '.xml');
+    }    
+    ++$i;
+  }
+
+  return 'hi';
 }
 
 /**

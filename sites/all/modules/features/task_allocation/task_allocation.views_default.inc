@@ -29,7 +29,6 @@ function task_allocation_views_default_views() {
     11 => '11',
     12 => '12',
     5 => '5',
-    13 => '13',
     14 => '14',
     15 => '15',
     6 => '6',

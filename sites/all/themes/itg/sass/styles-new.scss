@@ -6013,7 +6013,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
   .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child{margin-left: 175px;}
   [id*="views-exposed-form-front-end-global-search-page"]{
-    .form-item-sm-field-itg-common-by-line-name, .views-widget-filter-tm_vid_4_names{
+    .form-item-sm-field-itg-common-by-line-name, [class*="views-widget-filter-tm_vid_"], .views-widget-filter-tm_vid_4_names, .views-widget-filter-tm_vid_14_names{
       #autocomplete{
         position: relative !important;
         top: 0 !important; 
@@ -6032,6 +6032,13 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
 }
 @media all and(max-width: 767px){
+  .movie-layout-page .itg-widget.trending-list{overflow: hidden;}
+  .education-layout-page .section_wise_order-edu-tips-and-trick, .section_wise_order-edu-tips-and-trick{
+    max-height: 400px;
+  }
+  .featured-news .featured-post h3{
+    max-height: none;
+  }
   .personal-list{
     margin: 0 -15px;
   }

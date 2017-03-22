@@ -97,12 +97,26 @@ jQuery(document).ready(function(){
     });
 
      jQuery('body').on('click', '.insert-url', function(){
-         
+           
+         var solr = Drupal.settings.itg_related.settings.solr;
+         if (solr != null && solr != undefined) {
+            var solr_explict = solr.split(',');
+
+            var slr = [];
+            for (i = 0; i < solr_explict.length; i++) {
+                var c = solr_explict[i].split('|');
+                slr[c[0]] = c[1];
+
+            }
+        }
+            
            // parent.jQuery('#edit-field-story-kicker-text-und-0-value').val(item);
             parent.jQuery('#edit-field-common-related-content-und-0-value').val(item);
             var checkedlist = '';
             for ( var i = 0, l = item.length; i < l; i++ ) {
-                checkedlist += '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value">' + item[i] + '</span><i class="fa fa-times fright" aria-hidden="true"></i></li>';
+                var site = item[i].split('_');
+                var solr_uri = slr[site[0]]+'/node/'+site[1];
+                checkedlist += '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value">' + item[i] + '</span><a href="'+solr_uri+'" target="_blank"> <i class="fa fa-eye" aria-hidden="true"></i> </a><i class="fa fa-times fright" aria-hidden="true"></i></li>';
             }
             parent.jQuery('.checked-list').html(checkedlist);
             if(item.length){
