@@ -145,6 +145,7 @@ function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_i
             $form['field_movie_earning_value']['min']['#attributes'] = array('placeholder' => t('Start range'));
             $form['field_movie_earning_value']['max']['#attributes'] = array('placeholder' => t('End range'));
             unset($form['field_movie_earning_value']['max']['#title']);
+            break;
         case 'views-exposed-form-users-reports-page':
             $form['created']['min']['#type'] = 'date_popup';
             $form['created']['min']['#date_format'] = 'd/m/Y';
@@ -152,6 +153,7 @@ function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_i
             $form['created']['min']['#attributes']['placeholder'] = 'Date From';
             $form['created']['max']['#type'] = 'date_popup';
             $form['created']['max']['#date_format'] = 'd/m/Y';
+            break;
     }
 }
 
