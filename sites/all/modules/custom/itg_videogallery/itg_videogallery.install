@@ -236,6 +236,12 @@ function itg_videogallery_schema() {
                 'type' => 'int',
                 'null' => TRUE,
             ),
+             'is_alredy_used' => array(
+                'description' => 'Need to Alredy Used video',
+                'type' => 'int',
+                'null' => TRUE,
+            ),
+            
         ),
         'primary key' => array('id'),
     );

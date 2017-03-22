@@ -1066,16 +1066,16 @@ function itg_videogallery_menu() {
         'access arguments' => array('access content'),
         'type' => MENU_CALLBACK,
     );
-    $items['baklol'] = array(
-        'page callback' => 'itg_videogallery_publish_node_after_video_ready_by_dm',
-        'access arguments' => array('access content'),
-        'type' => MENU_CALLBACK,
-    );
-    $items['baklol2'] = array(
-        'page callback' => 'itg_videogallery_remove_video_with_child',
-        'access arguments' => array('access content'),
-        'type' => MENU_CALLBACK,
-    );
+//    $items['baklol'] = array(
+//        'page callback' => 'itg_videogallery_publish_node_after_video_ready_by_dm',
+//        'access arguments' => array('access content'),
+//        'type' => MENU_CALLBACK,
+//    );
+//    $items['baklol2'] = array(
+//        'page callback' => 'itg_videogallery_remove_video_with_child',
+//        'access arguments' => array('access content'),
+//        'type' => MENU_CALLBACK,
+//    );
 
     $items['daily-motion-video-dashboard'] = array(
         'title' => 'Daily Motion Video Dashboard',
