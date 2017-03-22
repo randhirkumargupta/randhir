@@ -10,7 +10,7 @@ if (!empty($content)):
   if (!empty($related_content)) {
     $class_related = ' buzz-related';
   }
-  if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
+  if (!empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
     $class_listicle = ' buzz-feedback listicle-feedback';
   }
   // prepare url for sharing
@@ -162,7 +162,7 @@ if (!empty($content)):
           ?>
   
           <div class="story-left-section">
-  <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_listicle[LANGUAGE_NONE])) { ?>
+  <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>
                 <div class="story-left">
                     <div class="byline">              
                         <div class="profile-pic">
@@ -271,7 +271,7 @@ if (!empty($content)):
                 </div>
                       <?php } ?>
               <!-- For buzzfeed section start -->
-                          <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_listicle[LANGUAGE_NONE])) { ?>                       
+                          <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>                       
                 <div class="buzzfeed-byline">
                     <div class="byline">
                         <div class="profile-pic">
@@ -353,7 +353,7 @@ if (!empty($content)):
               <!-- Check the story type whether it is a photo story or not-->
                <?php if ((!empty($node->field_story_type) && $node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story') || (empty($node->field_story_type))) { ?>
               <div class="story-right <?php
-                if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
+                if (!empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
                   echo 'listicle-page';
                 }
                 ?>">
