@@ -11,194 +11,285 @@
  * @return array
  */
 function itg_videogallery_schema() {
-  $schema = array();
-  $schema['dailymotion_response_details'] = array(
-    'description' => 'Save the dailymotion response.',
-    'fields' => array(
-      'eid' => array(
-        'description' => 'Video entry id',
-        'type' => 'serial',
-        'not null' => TRUE,
-      ),
-      'title' => array(
-        'description' => 'Video title',
-        'type' => 'varchar',
-        'length' => '255',
-        'null' => TRUE,
-      ),
-      'channel' => array(
-        'description' => 'Video category on dailymotion',
-        'type' => 'varchar',
-        'length' => '255',
-        'null' => TRUE,
-      ),
-        'type' => array(
-        'description' => 'Video type on dailymotion',
-        'type' => 'varchar',
-        'length' => '255',
-        'null' => TRUE,
-      ),
-      'fid' => array(
-        'description' => 'file id from file manage table',
-        'type' => 'int',
-        'null' => TRUE,
-      ),
-      'nid' => array(
-        'description' => 'video_nid',
-        'type' => 'int',
-        'null' => TRUE,
-      ),
-      'tags' => array(
-        'description' => 'Tags of video',
-        'type' => 'varchar',
-        'length' => '255',
-        'null' => TRUE,
-      ),
-      'upload_time' => array(
-        'description' => 'Video upload time',
-        'type' => 'varchar',
-        'length' => '255',
-        'null' => TRUE,
-      ),
-      'video_id' => array(
-        'description' => 'Video id which return by dailymotion',
-        'type' => 'varchar',
-        'length' => '250',
-        'null' => TRUE,
-      ),
-      'video_duration' => array(
-        'description' => 'Video duration',
-        'type' => 'varchar',
-        'length' => '250',
-        'null' => TRUE,
-      ),
-        'dailymotion_thumb_url' => array(
-        'description' => 'Thumb Url',
-        'type' => 'varchar',
-        'length' => '250',
-        'null' => TRUE,
-      ),
-        'dailymotion_published' => array(
-        'description' => 'Publish status',
-        'type' => 'varchar',
-        'length' => '250',
-        'null' => TRUE,
-      ),
-        'name' => array(
-        'description' => 'Video name',
-        'type' => 'varchar',
-        'length' => '250',
-        'null' => TRUE,
-      ),
-        
-    ),
-    'primary key' => array('eid'),
-  );
-  // playlist in database
-  $schema['dailymotion_playlist_details'] = array(
-    'description' => 'Save the dailymotion response.',
-    'fields' => array(
-      'id' => array(
-        'description' => 'id',
-        'type' => 'serial',
-        'null' => TRUE,
-      ),
-       'pid' => array(
-        'description' => 'playlist id from dailymotion',
-        'type' => 'varchar',
-        'length' => '255',
-        'null' => TRUE,
-      ),
-      'playlist_name' => array(
-        'description' => 'playlist name from dailymotion',
-        'type' => 'varchar',
-        'length' => '255',
-        ' null' => TRUE,
-      ),
-      'node_id' => array(
-        'description' => 'node id',
-        'type' => 'int',
-        'not null' => TRUE,
-      ),
-      'video_id' => array(
-        'description' => 'Video id which return by dailymotion',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => TRUE,
-      ),
-    ),
-    'primary key' => array('id'),
-  );
-  // FTP Videos
-  $schema['itg_dailymotion_ftp_video'] = array(
-    'description' => 'Differenc between FTP video and local video',
-    'fields' => array(
-      'id' => array(
-        'description' => 'id',
-        'type' => 'serial',
-        ' null' => TRUE,
-      ),
-      'fid' => array(
-        'description' => 'node id',
-        'type' => 'int',
-        ' null' => TRUE,
-      ),
-    ),
-    'primary key' => array('id'),
-  );
-  return $schema;
+    $schema = array();
+    $schema['dailymotion_response_details'] = array(
+        'description' => 'Save the dailymotion response.',
+        'fields' => array(
+            'eid' => array(
+                'description' => 'Video entry id',
+                'type' => 'serial',
+                'not null' => TRUE,
+            ),
+            'title' => array(
+                'description' => 'Video title',
+                'type' => 'varchar',
+                'length' => '255',
+                'null' => TRUE,
+            ),
+            'channel' => array(
+                'description' => 'Video category on dailymotion',
+                'type' => 'varchar',
+                'length' => '255',
+                'null' => TRUE,
+            ),
+            'type' => array(
+                'description' => 'Video type on dailymotion',
+                'type' => 'varchar',
+                'length' => '255',
+                'null' => TRUE,
+            ),
+            'fid' => array(
+                'description' => 'file id from file manage table',
+                'type' => 'int',
+                'null' => TRUE,
+            ),
+            'nid' => array(
+                'description' => 'video_nid',
+                'type' => 'int',
+                'null' => TRUE,
+            ),
+            'tags' => array(
+                'description' => 'Tags of video',
+                'type' => 'varchar',
+                'length' => '255',
+                'null' => TRUE,
+            ),
+            'upload_time' => array(
+                'description' => 'Video upload time',
+                'type' => 'varchar',
+                'length' => '255',
+                'null' => TRUE,
+            ),
+            'video_id' => array(
+                'description' => 'Video id which return by dailymotion',
+                'type' => 'varchar',
+                'length' => '250',
+                'null' => TRUE,
+            ),
+            'video_duration' => array(
+                'description' => 'Video duration',
+                'type' => 'varchar',
+                'length' => '250',
+                'null' => TRUE,
+            ),
+            'video_size' => array(
+                'description' => 'Video Size',
+                'type' => 'varchar',
+                'length' => '250',
+                'null' => TRUE,
+            ),
+            'dailymotion_thumb_url' => array(
+                'description' => 'Thumb Url',
+                'type' => 'varchar',
+                'length' => '250',
+                'null' => TRUE,
+            ),
+            'dailymotion_published' => array(
+                'description' => 'Publish status',
+                'type' => 'varchar',
+                'length' => '250',
+                'null' => TRUE,
+            ),
+            'encoding_progress' => array(
+                'description' => 'Encoding progress',
+                'type' => 'int',
+                'null' => TRUE,
+            ),
+            'publishing_progress' => array(
+                'description' => 'publishing progress',
+                'type' => 'int',
+                'null' => TRUE,
+            ),
+            'name' => array(
+                'description' => 'Video name',
+                'type' => 'varchar',
+                'length' => '250',
+                'null' => TRUE,
+            ),
+            'need_delete' => array(
+                'description' => 'Video delete',
+                'type' => 'int',
+                'null' => TRUE,
+            ),
+            'is_draft' => array(
+                'description' => 'node is draft',
+                'type' => 'int',
+                'null' => TRUE,
+            ),
+        ),
+        'primary key' => array('eid'),
+    );
+    // playlist in database
+    $schema['dailymotion_playlist_details'] = array(
+        'description' => 'Save the dailymotion response.',
+        'fields' => array(
+            'id' => array(
+                'description' => 'id',
+                'type' => 'serial',
+                'null' => TRUE,
+            ),
+            'pid' => array(
+                'description' => 'playlist id from dailymotion',
+                'type' => 'varchar',
+                'length' => '255',
+                'null' => TRUE,
+            ),
+            'playlist_name' => array(
+                'description' => 'playlist name from dailymotion',
+                'type' => 'varchar',
+                'length' => '255',
+                ' null' => TRUE,
+            ),
+            'node_id' => array(
+                'description' => 'node id',
+                'type' => 'int',
+                'not null' => TRUE,
+            ),
+            'video_id' => array(
+                'description' => 'Video id which return by dailymotion',
+                'type' => 'varchar',
+                'length' => '250',
+                'not null' => TRUE,
+            ),
+        ),
+        'primary key' => array('id'),
+    );
+    // FTP Videos
+    $schema['itg_video_bitrates_data'] = array(
+        'description' => 'ITG used videos store bitrates urls',
+        'fields' => array(
+            'id' => array(
+                'description' => 'id',
+                'type' => 'serial',
+                ' null' => TRUE,
+            ),
+            'video_id' => array(
+                'description' => 'Video  id',
+                'type' => 'int',
+                ' null' => TRUE,
+            ),
+            'responce' => array(
+                'description' => 'Bitrates',
+                'type' => 'text',
+                'size' => 'big',
+                'null' => TRUE
+            ),
+        ),
+        'primary key' => array('id'),
+    );
+    $schema['itg_solr_video_info'] = array(
+        'description' => 'Differenc between FTP video and local video',
+        'fields' => array(
+            'id' => array(
+                'description' => 'id',
+                'type' => 'serial',
+                ' null' => TRUE,
+            ),
+            'fid' => array(
+                'description' => 'Fid id',
+                'type' => 'int',
+                ' null' => TRUE,
+            ),
+            'nid' => array(
+                'description' => 'nid of node',
+                'type' => 'int',
+                ' null' => TRUE,
+            ),
+            'solr_video_id' => array(
+                'description' => 'Video id which return by dailymotion',
+                'type' => 'varchar',
+                'length' => '250',
+                'null' => TRUE,
+            ),
+            'solr_video_duration' => array(
+                'description' => 'Video duration',
+                'type' => 'varchar',
+                'length' => '250',
+                'null' => TRUE,
+            ),
+            'solr_video_size' => array(
+                'description' => 'Video Size',
+                'type' => 'varchar',
+                'length' => '250',
+                'null' => TRUE,
+            ),
+            'solr_video_thumb' => array(
+                'description' => 'Video thumb',
+                'type' => 'varchar',
+                'length' => '250',
+                'null' => TRUE,
+            ),
+            'property' => array(
+                'description' => 'property',
+                'type' => 'varchar',
+                'length' => '250',
+                'null' => TRUE,
+            ),
+            'content_type' => array(
+                'description' => 'content_type',
+                'type' => 'varchar',
+                'length' => '250',
+                'null' => TRUE,
+            ),
+            'is_delete' => array(
+                'description' => 'Need to delete video',
+                'type' => 'int',
+                'null' => TRUE,
+            ),
+        ),
+        'primary key' => array('id'),
+    );
+    return $schema;
 }
 
 /**
  * Implemens hook_uninstall().
  */
 function itg_videogallery_uninstall() {
-  variable_del('dailymotion_username');
-  variable_del('dailymotion_password');
-  variable_del('dailymotion_apikey');
-  variable_del('dailymotion_secretkey');
-  drupal_set_message(t('Video Gallery module was successfully uninstalled.'));
+    variable_del('dailymotion_username');
+    variable_del('dailymotion_password');
+    variable_del('dailymotion_apikey');
+    variable_del('dailymotion_secretkey');
+    drupal_set_message(t('Video Gallery module was successfully uninstalled.'));
 }
 
 /**
  * Implements hook_update_n()
  * Add another coloumn in "dailymotion_response_details" table
  */
-function itg_videogallery_update_751(){
-  $field = array(
-    'type' => 'text',
-    'size' => 'big',
-    'description' => 'video thumbnail url from ',
-  );
-  
-  
+function itg_videogallery_update_751() {
+    $field = array(
+        'type' => 'text',
+        'size' => 'big',
+        'description' => 'video thumbnail url from ',
+    );
+
+
     $dailymotion_published = array(
         'description' => 'Dailymotion Published',
         'type' => 'int',
         'not null' => TRUE,
-      );
-      
-      $type = array(
+    );
+
+    $type = array(
         'description' => 'Type',
         'type' => 'varchar',
         'length' => '20',
         'not null' => TRUE,
-      
-        );
-      
-      $name = array(
+    );
+
+    $name = array(
         'description' => 'Name',
         'type' => 'varchar',
         'length' => '255',
         'not null' => TRUE,
-      );
-  
-  
-  db_add_field('dailymotion_response_details', 'dailymotion_thumb_url', $field);
-  db_add_field('dailymotion_response_details', 'dailymotion_published', $dailymotion_published);
-  db_add_field('dailymotion_response_details', 'type', $type);
-  db_add_field('dailymotion_response_details', 'name', $name);
-  
+    );
+
+
+    db_add_field('dailymotion_response_details', 'dailymotion_thumb_url', $field);
+    db_add_field('dailymotion_response_details', 'dailymotion_published', $dailymotion_published);
+    db_add_field('dailymotion_response_details', 'type', $type);
+    db_add_field('dailymotion_response_details', 'name', $name);
 }
 
 //
