@@ -12473,6 +12473,9 @@ h1.about-us-heading + div p {
 #block-itg-widget-podcast-header .podcast-header-container .podcast-header-bottom .other-list .slick-next {
   right: 0;
 }
+#block-itg-widget-podcast-header .podcast-header-container .podcast-header-bottom .other-list .podcast-nav-item {
+  cursor: pointer;
+}
 #block-itg-widget-podcast-header .itg-adds {
   width: 300px;
   height: 250px;
