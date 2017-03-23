@@ -1477,3 +1477,116 @@ function bestCollegesrank(){
     return $page_data;
 }
 
+
+/**
+ * best college rank
+ * @return array
+ */
+function bestCollegesrank(){
+    // variable declaration
+    $collegeid = "";
+    $stream = "";
+    $result_best_college_image_slider = views_get_view_result('best_college_image_slider', 'block_2');
+    //print_ar($result_best_college_image_slider);
+    $college_id = $result_best_college_image_slider[0]->_field_data['nid']['entity']->field_college_id['und'][0]['value'];
+    $nid = $result_best_college_image_slider[0]->nid;
+    $tid = arg(3);
+    $term = taxonomy_term_load($tid);
+    $name = $term->name;
+    $data_previous_rank = array();
+    $count_previous_rank = 0;
+    $data_parameterwise_rank = array();
+    $count_parameterwise_rank = 0;
+    $page_data = array();
+    $str_parameterwise_rank = "";
+    $str_yearwise_rank = "";
+
+    // query for previous_rank
+    $query = db_select('bestcolleges_ranking', 'bcr');
+    $query->fields('bcr', array('year', 'rank'));
+    $query->condition('published', '1', '=');
+    $query->condition('stream', $name, '=');
+    $query->condition('collegeid', $college_id, '=');
+    $query->orderBy('year', 'DESC');
+    $result = $query->execute();
+
+    while($record = $result->fetchAssoc()) {
+               $data_previous_rank[$count_previous_rank] = $record;
+               $count_previous_rank++;
+            }
+
+    // query for PARAMETER-WISE RANKING
+
+    $query = db_select('bestcolleges_emergingranking', 'bcr');
+    $query->fields('bcr', array('year','reputation', 'academic_input', 'studentcare', 'infrastructure', 'placement', 'preceptual_rank', 'factual_rank', 'overall_score', 'overall_rank'));
+    $query->condition('published', '1', '=');
+    $query->condition('stream', $name, '=');
+    $query->condition('collegeid', $college_id, '=');
+    $query->orderBy('year', 'DESC');
+    $result = $query->execute();
+
+    while($record = $result->fetchAssoc()) {
+               $data_parameterwise_rank[$count_parameterwise_rank] = $record;
+               $count_parameterwise_rank++;
+            }
+    //print_ar($data_parameterwise_rank, "parameterwise rank");
+    $page_data['previous-rank'] = $data_previous_rank;
+    $page_data['parameterwise-rank'] = $data_parameterwise_rank;
+    $page_data['flag-rank'] = 1;
+
+    // return final result
+    return $page_data;
+
+}
+
+
+/**
+ * best colleges related Image List
+ * @return array
+ */
+
+function bestCollegesRelatedImgList(){
+        // variable declaration
+        $flag_related_nid = 0;
+        $related_story_nid_ar = array();
+        $count = 0;
+        $data = array();
+        // view calling for pick related story node
+        $result_best_college_image_slider = views_get_view_result('best_college_image_slider', 'block_2');
+        //return $result_best_college_image_slider;
+        $field_bestcollege_related_photo_nid = $result_best_college_image_slider[0]->_field_data['nid']['entity']->field_bestcollege_related_photo['und'][0];
+
+
+            //echo $field_bestcollege_related_photo_nid['value'];
+            //$related_photo_nid_ar =  (explode(",",$field_bestcollege_related_photo_nid['value'])); // after final uncomment this
+            $related_photo_nid_ar = array(640, 652, 328, 626); // after final remove this
+
+
+       // related story node data fatching
+        if(isset($field_bestcollege_related_photo_nid['value']) && $field_bestcollege_related_photo_nid['value'] != ""){
+            $flag_related_nid = 1;
+             $query = db_select('node', 'n');
+            //join  for field value
+            $query->leftJoin('field_data_field_story_long_head_line', 'lhl', 'lhl.entity_id=n.nid');
+            $query->leftJoin('field_data_field_story_large_image', 'fsli', 'fsli.entity_id=n.nid');
+            $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
+            $query->fields('lhl', array('field_story_long_head_line_value'));
+            $query->fields('fsli', array('field_story_large_image_fid'));
+            $query->fields('ssi', array('field_story_small_image_fid'));
+            $query->fields('n', array('title', 'nid'));
+            $query->condition('n.status', '1');
+            //$query->condition('n.nid', '640', '=');
+            $query->condition('n.nid', $related_photo_nid_ar,'IN');
+            $result = $query->execute();
+
+            while($record = $result->fetchAssoc()) {
+               $data[$count] = $record;
+               $count++;
+            }
+           $data['relatedimg_count'] = $count;
+
+
+        }
+        // return final result
+        return $data;
+    }
