@@ -80,7 +80,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                             if (function_exists('get_video_in_fieldcollection_by_nid_mirtaed')) {
                                 $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
                             }
-
+                            drupal_add_js('http://content.jwplatform.com/libraries/V30NJ3Gt.js', 'external');
                             $hide_player = "";
                             $description_slider = "";
                             $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images"><ul>';
@@ -114,12 +114,12 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                     $allbitrates[] = end(explode('@', $bitratevalue['value']));
                                 }
                                 $usebitrates = implode(',', $allbitrates);
-                                
-                                $getvideo_bitrate_url = itg_videogallery_make_bitrate_url($video_value->field_migrated_video_url_value,$usebitrates);
+
+                                $getvideo_bitrate_url = itg_videogallery_make_bitrate_url($video_value->field_migrated_video_url_value, $usebitrates);
                                 //pr($video_value->field_migrated_video_url_value);
                                 ?>
                                     <div class="iframe-video">
-                                        <script src="http://content.jwplatform.com/libraries/V30NJ3Gt.js"></script>
+
 
                                         <div style="margin:0 auto; width:622px;"><div align="center" id="videoplayer_<?php echo $keys; ?>"></div></div> 
                                         <script type="text/javascript">
@@ -130,7 +130,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                                         image: "<?php echo $image_url; ?>",
                                                         sources: [
                                                             {
-                                                                file: "<?php echo $getvideo_bitrate_url;?>"
+                                                                file: "<?php echo $getvideo_bitrate_url; ?>"
                                                             }, {
                                                                 file: "<?php print $video_value->field_migrated_video_url_value; ?>"
                                                             }]
@@ -143,7 +143,6 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                                 androidhls: "true",
                                                 fallback: "false",
                                                 hlslabels: {"156": "lowest", "364": "low", "512": "medium", "864": "high", "996": "Highest"},
-                                               
                                                 advertising: {
                                                     client: "vast",
                                                     skipoffset: 5,
@@ -152,7 +151,6 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                                 },
                                                 ga: {
                                                     idstring: "<?php print $row['title']; ?>",
-                                                   
                                                 }
                                             });
                                         </script></div>
@@ -207,14 +205,14 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                 <div class="show-embed-code-div">
                                     <div class="copy-sample-code">
                                         <textarea readonly="true">
-                                                              <div id='IndiaToday_gallery' data-type='UAT'></div>
-                                                              <script src='<?php print $base_url; ?>/sites/all/themes/itg/js/video_iframeResizer.js'>
-                                                              </script>
-                                                              <script>
+                                                                  <div id='IndiaToday_gallery' data-type='UAT'></div>
+                                                                  <script src='<?php print $base_url; ?>/sites/all/themes/itg/js/video_iframeResizer.js'>
+                                                                  </script>
+                                                                  <script>
     <?php
     echo "iFrameResize({galleryid: $video_node->nid})";
     ?>
-                    </script>
+    </script>
                                         </textarea> 
                                     </div>
                                 </div>
@@ -264,14 +262,14 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                     <div class="show-embed-code-div">
                                         <div class="copy-sample-code">
                                             <textarea readonly="true">
-                                                              <div id='IndiaToday_gallery' data-type='UAT'></div>
-                                                              <script src='<?php print $base_url; ?>/sites/all/themes/itg/js/video_iframeResizer.js'>
-                                                              </script>
-                                                              <script>
+                                                                  <div id='IndiaToday_gallery' data-type='UAT'></div>
+                                                                  <script src='<?php print $base_url; ?>/sites/all/themes/itg/js/video_iframeResizer.js'>
+                                                                  </script>
+                                                                  <script>
     <?php
     echo "iFrameResize({galleryid: $video_node->nid})";
     ?>
-                                                </script>
+                                  </script>
                                             </textarea>  
                                         </div>
                                     </div>
