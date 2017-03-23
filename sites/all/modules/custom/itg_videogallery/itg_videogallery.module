@@ -1158,6 +1158,19 @@ function itg_videogallery_remove_video_with_child() {
 }
 
 /**
+ * This function use for make video bitrate url:
+ */
+function itg_videogallery_make_bitrate_url($video_url, $bitrates) {
+    
+    $firestparet_replace = str_replace('http://medias3d.intoday.in', 'http://indiatoday-vh.akamaihd.net/i', $video_url);
+    $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $firestparet_replace);
+    $returnstring = substr($withoutExt, 0, strpos($withoutExt, '1024_512'));
+    $returnstring = $returnstring . '1024_,' . $bitrates . ',.mp4.csmil/master.m3u8';
+    //print $returnstring;die;
+    return $returnstring;
+}
+
+/**
  * function use for insert solr video in file_manage for fid
  * @global object $user
  * 
@@ -1948,7 +1961,7 @@ function itg_videogallery_video_bitrate() {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $content = curl_exec($ch);
         curl_close($ch);
-       
+
         db_merge('itg_video_bitrates_data')
                 ->key(array('video_id' => $vid->solr_video_id))
                 ->fields(array(

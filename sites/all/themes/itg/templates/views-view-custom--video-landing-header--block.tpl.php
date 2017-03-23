@@ -109,22 +109,51 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                 if ($video_value->field_include_ads_value == 'yes') {
                                     $ads_flag = 1;
                                 }
+                                $allbitrates = array();
+                                foreach ($video_node->field_multi_bitrate[LANGUAGE_NONE] as $bitratevalue) {
+                                    $allbitrates[] = end(explode('@', $bitratevalue['value']));
+                                }
+                                $usebitrates = implode(',', $allbitrates);
+                                
+                                $getvideo_bitrate_url = itg_videogallery_make_bitrate_url($video_value->field_migrated_video_url_value,$usebitrates);
                                 //pr($video_value->field_migrated_video_url_value);
                                 ?>
                                     <div class="iframe-video">
-                                        <script src="<?php
-                    global $base_url;
-                    print $base_url . '/' . drupal_get_path('module', 'itg_podcast');
-                    ?>/jwplayer/jwplayer.js"></script>
-                                        <script>jwplayer.key = "Cbz5fuKQAlYHtZgBSR0G/4GgYFO7YTb0k8Ankg==";</script>
-                                        <div id="podcast-<?php print $keys; ?>">Loading the player...</div>
+                                        <script src="http://content.jwplatform.com/libraries/V30NJ3Gt.js"></script>
+
+                                        <div style="margin:0 auto; width:622px;"><div align="center" id="videoplayer_<?php echo $keys; ?>"></div></div> 
                                         <script type="text/javascript">
-                                            var playerInstance = jwplayer("podcast-<?php print $keys; ?>");
-                                            playerInstance.setup({
-                                                file: "<?php print $video_value->field_migrated_video_url_value; ?>",
-                                                width: 640,
-                                                height: 350,
-                                                image: "<?php echo $image_url; ?>",
+
+                                            jwplayer('videoplayer_<?php echo $keys; ?>').setup({
+                                                playlist: [{
+                                                        title: "<?php print $row['title']; ?>",
+                                                        image: "<?php echo $image_url; ?>",
+                                                        sources: [
+                                                            {
+                                                                file: "<?php echo $getvideo_bitrate_url;?>"
+                                                            }, {
+                                                                file: "<?php print $video_value->field_migrated_video_url_value; ?>"
+                                                            }]
+                                                    }],
+                                                primary: "flash",
+                                                width: "622",
+                                                height: "370",
+                                                aspectratio: "4:3",
+                                                "stretching": "exactfit",
+                                                androidhls: "true",
+                                                fallback: "false",
+                                                hlslabels: {"156": "lowest", "364": "low", "512": "medium", "864": "high", "996": "Highest"},
+                                               
+                                                advertising: {
+                                                    client: "vast",
+                                                    skipoffset: 5,
+                                                    schedule: {"myAds": {"offset": "pre", "tag": "http://xp1.zedo.com/jsc/d2/fns.vast?n=821&c=2040/1137&d=39&s=2&v=vast2&pu=__page-url__&ru=__referrer__&pw=__player-width__&ph=__player-height__&z=__random-number__"}}
+
+                                                },
+                                                ga: {
+                                                    idstring: "<?php print $row['title']; ?>",
+                                                   
+                                                }
                                             });
                                         </script></div>
 
@@ -178,14 +207,14 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                 <div class="show-embed-code-div">
                                     <div class="copy-sample-code">
                                         <textarea readonly="true">
-                                              <div id='IndiaToday_gallery' data-type='UAT'></div>
-                                              <script src='<?php print $base_url; ?>/sites/all/themes/itg/js/video_iframeResizer.js'>
-                                              </script>
-                                              <script>
+                                                              <div id='IndiaToday_gallery' data-type='UAT'></div>
+                                                              <script src='<?php print $base_url; ?>/sites/all/themes/itg/js/video_iframeResizer.js'>
+                                                              </script>
+                                                              <script>
     <?php
     echo "iFrameResize({galleryid: $video_node->nid})";
     ?>
-                                                    </script>
+                    </script>
                                         </textarea> 
                                     </div>
                                 </div>
@@ -235,14 +264,14 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                     <div class="show-embed-code-div">
                                         <div class="copy-sample-code">
                                             <textarea readonly="true">
-                                              <div id='IndiaToday_gallery' data-type='UAT'></div>
-                                              <script src='<?php print $base_url; ?>/sites/all/themes/itg/js/video_iframeResizer.js'>
-                                              </script>
-                                              <script>
+                                                              <div id='IndiaToday_gallery' data-type='UAT'></div>
+                                                              <script src='<?php print $base_url; ?>/sites/all/themes/itg/js/video_iframeResizer.js'>
+                                                              </script>
+                                                              <script>
     <?php
     echo "iFrameResize({galleryid: $video_node->nid})";
     ?>
-                                                                </script>
+                                                </script>
                                             </textarea>  
                                         </div>
                                     </div>
