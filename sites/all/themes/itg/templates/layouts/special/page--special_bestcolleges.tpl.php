@@ -117,6 +117,51 @@ if ($theme != 'itgadmin') {
             </div>
         </div>
        -->
+
+
+
+       <!-- sponsor for static -->
+       <div class="sponsorContainer">
+      <span class="leftFirstLogo"><a href="http://indiatoday.intoday.in/bestcolleges/2016/" target="_blank" title="India Today Best Colleges 2016"><img src="http://media2.intoday.in/aajtak/resources/images/sopnsor1.jpg" alt=""></a></span>
+        <div class="mobileCenterSec">
+          <div class="leftPresentingSponsor">
+          <span class="PreSponsorTxt">Presenting<br>sponsor</span>
+            <span class="PreSponsorImg">
+              <a href="http://yads.zedo.com/ads2/c?a=2556978;g=0;c=821003262;i=0;x=23040;n=821;s=2;k=http://www.amity.edu/webcampaign/default.asp?id=IndTday23052016E" target="_blank" title="">
+                <img src="http://media2.intoday.in/aajtak/resources/images/sopnsor2.jpg" alt=""></a>
+                <!-- Begin ZEDO -->
+                <script language="JavaScript">
+          var zzp=new Image();
+          zzp.src="http://m4.zedo.com/log/p.gif?a=2556978;c=821003262;x=23040;n=821;e=i;i=0;s=2;z="+Math.random();
+                </script>
+        <noscript>
+          &lt;img width=1 height=1 border=0 src="http://m4.zedo.com/log/p.gif?a=2556978;g=0;c=821003262;x=23040;n=821;i=0;e=i;s=2;z=[timestamp]"&gt;
+              </noscript>
+            <!-- End ZEDO -->
+            </span>
+        </div>
+        </div>
+        <div class="mobileCenterSec">
+          <div class="rightAssociateSponsor">
+          <span class="assSponsorTxt">Associate<br>sponsor</span>
+            <span class="assSponsorImg1">
+              <a href="http://yads.zedo.com/ads2/c?a=2556802;g=0;c=821003242;i=0;x=23040;n=821;s=2;k=http://www.lpu.in/landing-pages/btech.php?utm_source=Indiatoday&amp;utm_medium=website&amp;utm_campaign=lpu_brand-Indiatoday" target="_blank" title=""><img src="http://media2.intoday.in/aajtak/resources/images/sopnsor4.jpg" alt=""></a>
+            <!-- Begin ZEDO -->
+        <script language="JavaScript">
+          var zzp=new Image();
+          zzp.src="http://m4.zedo.com/log/p.gif?a=2556802;c=821003242;x=23040;n=821;e=i;i=0;s=2;z="+Math.random();
+                </script>
+                <noscript>
+                   &lt;img width=1 height=1 border=0 src="http://m4.zedo.com/log/p.gif?a=2556802;g=0;c=821003242;x=23040;n=821;i=0;e=i;s=2;z=[timestamp]"&gt;
+                </noscript>
+            <!-- End ZEDO -->
+            </span>
+        </div>
+        </div>
+    </div>
+
+      <!-- end sponsor for static -->
+
        <?php
                 if (array_filter(views_get_view_result('best_college_image_slider', 'block'))) {
                     print views_embed_view('best_college_image_slider', 'block');
@@ -202,12 +247,23 @@ if ($theme != 'itgadmin') {
         </div>
 
 
+
+
         <div class="col-md-4 col-sm-12 col-xs-12 right-side">
            <div class="col-md-12 mt-50 itg-h735-section">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-4']['widget_name'].$widget_data['itg-block-4']['widget_display_name']; ?>">
                     <div class="data-holder" id="itg-block-4" widget-style="oscar-news best-news">
+                     <div class="ad-widget">
+                                    <div class="sidebar-ad">
+                                      <?php
+                                        $block = block_load('itg_ads', ADS_RHS1);
+                                        $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                        print render($render_array);
+                                       ?></div>
+                                </div>
+
                     <?php
                           $block = block_load('itg_bestcolleges', 'bestcollege_rhssearch');
                           $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));

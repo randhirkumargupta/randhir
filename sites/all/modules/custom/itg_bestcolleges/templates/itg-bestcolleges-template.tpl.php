@@ -11,7 +11,7 @@ $config_name = $comment_value[0]->config_name;
 <div class="col-md-12 col-sm-12 col-xs-12 left-panel arts">
 <!-- Slider Start-->
 <?php $term = taxonomy_term_load(arg(3));?>
-<h2><?php print "INDIA'S BEST ". $term->name ." COLLEGES ".arg(1); ?></h2>
+<h2><?php print "INDIA'S BEST ". strtoupper($term->name) ." COLLEGES ".arg(1); ?></h2>
 <div class="slider_outer1">
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
