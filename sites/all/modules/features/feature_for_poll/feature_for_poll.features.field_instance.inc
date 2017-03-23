@@ -243,6 +243,48 @@ function feature_for_poll_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-poll-field_cm_related_content_detail'.
+  $field_instances['node-poll-field_cm_related_content_detail'] = array(
+    'bundle' => 'poll',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 18,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_cm_related_content_detail',
+    'label' => 'Related Content Detail',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 34,
+    ),
+  );
+
   // Exported field_instance: 'node-poll-field_common_related_content'.
   $field_instances['node-poll-field_common_related_content'] = array(
     'bundle' => 'poll',
@@ -1053,6 +1095,7 @@ function feature_for_poll_field_default_field_instances() {
   t('Poll Type');
   t('Poll manipulate');
   t('Related Content');
+  t('Related Content Detail');
   t('Result format');
   t('Show End Date');
   t('Start Date');
