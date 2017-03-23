@@ -81,6 +81,58 @@ if(isset($related_story_value['relatedstory_count']) && $related_story_value['re
 ?>
 <!-- Related story end-->
 
+
+<!-- ranking-section start-->
+<div class="col-sm-12 col-xs-12 view1">
+<div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("Ranking Section ") ; ?></div>
+</div>
+<?php
+    $page_data = bestCollegesrank();
+    $str_fulldata = "";
+    $data_parameterwise_rank = $page_data['parameterwise-rank'];
+    $data_previous_rank = $page_data['previous-rank'];
+
+
+    // parameterwise data string building
+
+    $str_parameterwise_rank = "<div class='wishranking'>
+        <div class='midcontitles'>PARAMETER-WISE RANKING <span style='float:right;'></span></div>
+        <div class='midmorestories'>
+          <ul>
+             <li>Reputation: ".$data_parameterwise_rank[0]['reputation']."</li>
+             <li>Academic Input: ".$data_parameterwise_rank[0]['academic_input']."</li>
+             <li>Student Care: ".$data_parameterwise_rank[0]['studentcare']."</li>
+             <li>Infrastructure: ".$data_parameterwise_rank[0]['infrastructure']."</li>
+             <li>Placement: ".$data_parameterwise_rank[0]['placement']."</li>
+             <li>Perceptual Rank: ".$data_parameterwise_rank[0]['preceptual_rank']."</li>
+             <li>Factual Rank: ".$data_parameterwise_rank[0]['factual_rank']."</li>
+
+          </ul>
+        <div class='clear'></div>
+        </div>
+      </div>";
+
+    // yearwisewise data string building
+
+    $str_yearwise_rank= "<div class='prvlink'>
+    <div class='prvarrtxt'>PREVIOUS RANKING:</div>
+    <div class='prvyrs'>
+     <ul>";
+
+    foreach ($data_previous_rank as $key => $value){
+        $year = $value['year'];
+        $rank = $value['rank'];
+        $str_yearwise_rank .= "<li>".$year." - <span>".$rank."</span></li>";
+    }
+    $str_yearwise_rank .= "</ul></div></div>";
+
+    $str_fulldata = "<div class='col-sm-12 ranking-section'><div class='ranking-section'>".$str_parameterwise_rank." ".$str_yearwise_rank."</div></div>";
+    print $str_fulldata;
+?>
+<!-- ranking-section end-->
+
+
+
 <!-- Slider End-->
 <div class="clearfix"></div>
 <!-- Grid View-->
