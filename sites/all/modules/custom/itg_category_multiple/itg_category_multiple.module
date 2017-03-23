@@ -19,7 +19,8 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
       if (isset($form['#node']->type) && !empty($form['#node']->type)) {
         $content_type = $form['#node']->type;
       }
-      
+
+      //pr($form_state['build_info']['args'][0]->field_story_extra_data[LANGUAGE_NONE][0]['value']);
 
       $itg_category_multiple_prev_data = NULL; //p($form_state['build_info']['args'][0]);
       if (isset($form_state['build_info']['args'][0]->field_story_extra_data[LANGUAGE_NONE][0]['value']) &&
@@ -101,10 +102,6 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
 
 
       $form['category_holder'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Category'),
-        '#collapsible' => TRUE,
-        '#collapsed' => FALSE,
       );
 
       $form['category_holder']['itg_section'] = array(
@@ -168,7 +165,9 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
       );
 
       // Hiding story extra field 
-      //$form['field_story_extra_data'][LANGUAGE_NONE][0]['value']['#type'] = 'hidden';
+      if (isset($form['field_story_extra_data'][LANGUAGE_NONE][0]['value']['#type'])) {
+        $form['field_story_extra_data'][LANGUAGE_NONE][0]['value']['#type'] = 'hidden';
+      }
       //    p($form['actions']);
       //    $form['actions']['submit']['#submit'][] = 'itg_category_multiple_custom_callback';
       $form['#after_build'][] = 'itg_category_multiple_after_build';
@@ -212,18 +211,17 @@ function itg_category_multiple_get_section($itg_category_vocabs, $content_type) 
  * @return array
  */
 function itg_category_multiple_after_build($form, &$form_state) {
-// pr($form['itg_sub_category']);
-//p($form_state['input']);
+
 
   if (isset($form_state['input']['itg_primary_category'][0]) && !empty($form_state['input']['itg_primary_category'][0])) {
-    $form['field_primary_category']['und'][0]['value'] = $form_state['input']['itg_primary_category'][0];
+    $form['category_holder']['field_primary_category']['und'][0]['value'] = $form_state['input']['itg_primary_category'][0];
   }
 
   //Getting category on the basis of section
 
   if (isset($form_state['input']['itg_section']) && !empty($form_state['input']['itg_section'])) {
-    $itg_section = itg_category_get_texo_desired($form_state['input']['itg_section']);
-    $form['itg_category']['#options'] = $itg_section;
+    $itg_section = itg_category_get_texo_desired($form_state['input']['itg_section']); //p($itg_section);
+    $form['category_holder']['itg_category']['#options'] = $itg_section;
   }
 
 
@@ -231,28 +229,28 @@ function itg_category_multiple_after_build($form, &$form_state) {
 
   if (isset($form_state['input']['itg_category']) && !empty($form_state['input']['itg_category'])) {
     $itg_category = itg_category_get_texo_desired($form_state['input']['itg_category']);
-    $form['itg_sub_category']['#options'] = $itg_category;
+    $form['category_holder']['itg_sub_category']['#options'] = $itg_category;
   }
 
 
   // Getting sub category on the basis of sub category
   if (isset($form_state['input']['itg_sub_category']) && !empty($form_state['input']['itg_sub_category'])) {
     $itg_sub_category = itg_category_get_texo_desired($form_state['input']['itg_sub_category']);
-    $form['itg_sub_sub_category']['#options'] = $itg_sub_category;
+    $form['category_holder']['itg_sub_sub_category']['#options'] = $itg_sub_category;
   }
 
   // Getting sub sub category  on the basis of sub sub category
 
   if (isset($form_state['input']['itg_sub_sub_category']) && !empty($form_state['input']['itg_sub_sub_category'])) {
     $itg_sub_sub_category = itg_category_get_texo_desired($form_state['input']['itg_sub_sub_category']);
-    $form['itg_sub_sub_sub_category']['#options'] = $itg_sub_sub_category;
+    $form['category_holder']['itg_sub_sub_sub_category']['#options'] = $itg_sub_sub_category;
   }
 
   if (isset($form_state['input']['itg_sub_sub_sub_category']) && !empty($form_state['input']['itg_sub_sub_sub_category'])) {
 
     $complete_structure = array_merge($form_state['input']['itg_section'], $form_state['input']['itg_category'], $form_state['input']['itg_sub_category'], $form_state['input']['itg_sub_sub_category'], $form_state['input']['itg_sub_sub_sub_category']);
     $itg_primary_category = get_parent_structure_by_for_all(array_filter($complete_structure));
-    $form['itg_primary_category']['#options'] = $itg_primary_category;
+    $form['category_holder']['itg_primary_category']['#options'] = $itg_primary_category;
   }
 
   //   itg_sub_sub_category  itg_sub_sub_sub_category itg_primary_category
@@ -558,4 +556,94 @@ function get_parent_structure_in_complete($tids, $return_data_chunk) {
     $data[$chunk_val] = $return_data_chunk[$chunk_val];
   }
   return $data;
+}
+
+/**
+ * Implements hook_taxonomy_term_insert()
+ */
+function itg_category_multiple_taxonomy_term_insert($term) {
+  if ($term->vid == CATEGORY_MANAGMENT) {
+    if (function_exists('mongodb')) {
+      $con = mongodb();
+      $people = $con->taxonomy_term_data_mongo;
+
+      // check connection
+      if ($con) {
+        $qry = array(
+          "tid" => (int) $term->tid,
+          "name" => $term->name,
+          "parent" => (int) $term->parent[0],
+          "vid" => (int) $term->vid,
+          "machine_name" => $term->vocabulary_machine_name,
+          "content_type" => get_content_type_combined_list_term($term->field_cm_select_type[LANGUAGE_NONE]),
+          "status" => 1,
+          'parent_data' => taxonomy_get_parents_all($term->tid),
+        );
+        $result = $people->insert($qry);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_taxonomy_term_update()
+ */
+function itg_category_multiple_taxonomy_term_update($term) {
+  if ($term->vid == CATEGORY_MANAGMENT) {
+// First removing term 
+    $id = $term->tid;
+    if (function_exists('mongodb') && !empty($id)) {
+      $con = mongodb();
+      $people = $con->taxonomy_term_data_mongo;
+      $people->remove(array("tid" => (int) $id));
+    }
+    // Inserting data into taxonomy 
+
+    if (function_exists('mongodb')) {
+      $con = mongodb();
+      $people = $con->taxonomy_term_data_mongo;
+      // check connection
+      if ($con) {
+        $qry = array(
+          "tid" => (int) $term->tid,
+          "name" => $term->name,
+          "parent" => (int) $term->parent[0],
+          "vid" => (int) $term->vid,
+          "machine_name" => $term->vocabulary_machine_name,
+          "content_type" => get_content_type_combined_list_term($term->field_cm_select_type[LANGUAGE_NONE]),
+          "status" => 1,
+          'parent_data' => taxonomy_get_parents_all($term->tid),
+        );
+        $result = $people->insert($qry);
+      }
+    }
+  }
+}
+
+/**
+ * Implements get_content_type_combined_list_term()
+ */
+function get_content_type_combined_list_term($data) {
+    $result = array();
+    if (isset($data) && !empty($data)) {
+      foreach ($data as $chunkdata) {
+        $result[] = $chunkdata['value'];
+      }
+      return isset($result) ? implode(',', $result) : '';
+    }
+  
+}
+
+/**
+ * Implements  hook_taxonomy_term_delete()
+ */
+function itg_category_multiple_taxonomy_term_delete($term) {
+  if ($term->vid == CATEGORY_MANAGMENT) {
+    $id = $term->tid;
+    if (function_exists('mongodb') && !empty($id)) {
+      $con = mongodb();
+      $people = $con->taxonomy_term_data_mongo;
+      $people->remove(array("tid" => (int) $id));
+    }
+  }
 }
