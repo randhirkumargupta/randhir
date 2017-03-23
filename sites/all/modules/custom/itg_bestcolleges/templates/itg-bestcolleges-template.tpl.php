@@ -36,8 +36,6 @@ $config_name = $comment_value[0]->config_name;
 <!-- Related story start-->
 <?php
 $related_story_value = bestCollegesRelatedStoryList();
-//echo "<pre>on tpl"; print_r($data_value); echo "</pre>";
-//echo $data_value['relatedstory_count'];
 if(isset($related_story_value['relatedstory_count']) && $related_story_value['relatedstory_count'] > 0){
     unset($related_story_value['relatedstory_count']);
 // Related story block start here
@@ -52,29 +50,28 @@ if(isset($related_story_value['relatedstory_count']) && $related_story_value['re
 </div>
 <div class="col-sm-12 related-story-list">
     <div class="row">
+    <div class="clearfix">
     <?php
      foreach ($related_story_value as $key => $value){
-         $file = file_load($value['field_story_small_image_fid']);
+
          ?>
 
-        <div class="section">
 
-            <a href="<?php print $base_url; ?>/node/<?php print $value['nid']; ?>" target="_blank"><img alt="" title="" src="<?php print file_create_url($file->uri); ?>" width="125" align="left" height="93"></a>
-                <div class="midseeviddetail">
-                    <div class="midseevidtitle"><a href="<?php print $base_url; ?>/node/<?php print $value['nid']; ?>" target="_blank"><?php print $value['title']; ?></a></div>
-                    <div class="midseevidintro"><?php print $value['title']; ?></div>
-                </div>
-                <div class="clear"></div>
-            </div>
+         <div class="midstoryleft">
+           <a href="<?php print $base_url; ?>/node/<?php print $value['nid']; ?>" target="_blank"><img alt="" title="" src="http://media2.intoday.in/indiatoday/images/stories/bc-arts-jun29-1_180_061915094528.jpg" width="125" align="left" height="93"></a>
+           <div class="midstorydetail">
+               <div class="midstorytitle"><a href="<?php print $base_url; ?>/node/<?php print $value['nid']; ?>" target="_blank"><?php print $value['title']; ?></a>
+               </div>
+               <div class="midstoryintro"><?php print $value['title']; ?></div>
+           </div>
+         </div>
 
-
-
-            <div class="clear"></div>
 
     <?php
 
      }
     ?>
+    </div>
         </div>
 
 </div>
@@ -82,77 +79,15 @@ if(isset($related_story_value['relatedstory_count']) && $related_story_value['re
 <?php
 } // Related story block end here
 ?>
-
 <!-- Related story end-->
 
 
-<!-- Related image start-->
-<?php
-$related_image_value = bestCollegesRelatedImgList();
-//echo "<pre>on tpl"; print_r($data_value); echo "</pre>";
-//echo $data_value['relatedimg_count'];
-
-if(isset($related_image_value['relatedimg_count']) && $related_image_value['relatedimg_count'] > 0){
-    unset($related_image_value['relatedimg_count']);
-
-
-?>
-
-<div class="col-sm-12 col-xs-12 view1 related-img-head">
-<div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("MORE IMAGES ") ; ?></div>
-
-
-
-</div>
-<div class="col-sm-12 related-story-list related-img-body">
-    <div class="row">
-    <?php
-     foreach ($related_image_value as $key => $value){
-         //$img_ob = file_load($value['field_story_small_image_fid']);
-
-         $file = file_load($value['field_story_large_image_fid']);
-
-         ?>
-
-        <div class="section">
-
-
-                <div class="midseeviddetail">
-                    <div class="midseevidtitle"><a href="<?php print $base_url; ?>/node/<?php print $value['nid']; ?>" target="_blank"><?php print $value['title']; ?></a></div>
-                    <div class="midseevidintro"><a href="<?php print $base_url; ?>/node/<?php print $value['nid']; ?>" target="_blank"><img alt="" title="" src="<?php print file_create_url($file->uri); ?>" width="125" align="left" height="93"></a></div>
-                </div>
-                <div class="clear"></div>
-            </div>
-
-
-
-            <div class="clear"></div>
-
-    <?php
-
-     }
-    ?>
-        </div>
-
-</div>
-
-<?php
-}
-?>
-
-<!-- Related image end-->
-
-
 <!-- ranking-section start-->
-<?php
-    $page_data = bestCollegesrank();
-    if(isset($page_data['flag-rank'])){
-?>
 <div class="col-sm-12 col-xs-12 view1">
 <div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("Ranking Section ") ; ?></div>
 </div>
 <?php
-    //$page_data = bestCollegesrank();
+    $page_data = bestCollegesrank();
     $str_fulldata = "";
     $data_parameterwise_rank = $page_data['parameterwise-rank'];
     $data_previous_rank = $page_data['previous-rank'];
@@ -193,7 +128,6 @@ if(isset($related_image_value['relatedimg_count']) && $related_image_value['rela
 
     $str_fulldata = "<div class='col-sm-12 ranking-section'><div class='ranking-section'>".$str_parameterwise_rank." ".$str_yearwise_rank."</div></div>";
     print $str_fulldata;
-    }
 ?>
 <!-- ranking-section end-->
 
