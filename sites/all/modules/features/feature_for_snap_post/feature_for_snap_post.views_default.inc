@@ -123,7 +123,7 @@ function feature_for_snap_post_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'story' => 'story',
   );
-  $handler->display->display_options['path'] = 'snappost';
+  $handler->display->display_options['path'] = 'snap-post';
   $export['snappost'] = $view;
 
   return $export;

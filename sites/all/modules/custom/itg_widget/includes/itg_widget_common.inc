@@ -178,10 +178,23 @@ function itg_widgets_custom_variables() {
         '#default_value' => variable_get('anchor_tid'),
         '#size' => 20,
     );
+    
     $form['solr_url_config'] = array(
     '#type' => 'textarea',
     '#title' => t('Solr urlconfig'),
     '#default_value' => variable_get('solr_url_config'),
+    );
+    
+    $form['aaj_tak_json_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Aaj tak json url'),
+    '#default_value' => variable_get('aaj_tak_json_url'),
+    );
+    
+    $form['business_today_json_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Business today json url'),
+    '#default_value' => variable_get('business_today_json_url'),
     );
   return system_settings_form($form);
 }
@@ -2852,8 +2865,14 @@ function itg_widget_node_insert($node) {
     $nid = $node->nid;
     $cat_id = $node->field_story_category['und'];
     if (isset($node->field_story_category['und'])) {
+      $primary_category = $node->field_primary_category['und'][0]['value'];
       foreach ($cat_id as $category) {
-        $single_max_result = get_max_weight_for_node_insert($category['tid'], $node->type);
+        
+         if ($node->field_story_source_type['und'][0]['value'] == 'migrated' && $category['tid'] == $primary_category) {
+           continue;
+          }
+          else {
+            $single_max_result = get_max_weight_for_node_insert($category['tid'], $node->type);
         $max_result = $single_max_result['content_type'];
         $max_result_all = $single_max_result['All'];
         $single_insert_query = db_insert('itg_widget_order')->fields(
@@ -2866,6 +2885,7 @@ function itg_widget_node_insert($node) {
               'extra',
             )
         );
+
         $single_insert_query->values(array(
           'nid' => $nid,
           'widget' => 'section_wise_widget',
@@ -2873,15 +2893,34 @@ function itg_widget_node_insert($node) {
           'cat_id' => $category['tid'],
           'weight' => ++$max_result,
           'extra' => '',
-            ), array(
+            )
+        );
+
+        $single_insert_query->execute();
+
+        $single_insert_query_all = db_insert('itg_widget_order')->fields(
+            array(
+              'nid',
+              'widget',
+              'content_type',
+              'cat_id',
+              'weight',
+              'extra',
+            )
+        );
+
+        $single_insert_query_all->values(array(
           'nid' => $nid,
           'widget' => 'section_wise_widget',
           'content_type' => 'All',
           'cat_id' => $category['tid'],
           'weight' => ++$max_result_all,
           'extra' => '',
-        ));
-        $single_insert_query->execute();
+            )
+        );
+
+        $single_insert_query_all->execute();
+          }
       }
     }
   }
@@ -2894,15 +2933,17 @@ function itg_widget_node_insert($node) {
  * @return int
  */
 function get_max_weight_for_node_insert($tid, $type) {
-    $max_query = db_select('itg_widget_order');
-    $max_query->addExpression('MAX(weight)' , 'weight');
-    $max_query->condition('cat_id', $tid);
-    $max_query->condition('content_type', array($type , 'All') , 'IN');
-    $max_query->condition('widget', 'section_wise_widget');
-    $max_query->groupBy('content_type');
-    $max_result = $max_query->execute()->fetchAll();
-    $weight_array = array("All" => $max_result[0]->weight , "content_type" => $max_result[1]->weight);
-    return $weight_array;
+  $max_query = db_select('itg_widget_order');
+  $max_query->addExpression('MAX(weight)', 'weight');
+  $max_query->condition('cat_id', $tid);
+  $max_query->condition('content_type', array($type, 'All'), 'IN');
+  $max_query->condition('widget', 'section_wise_widget');
+  $max_query->groupBy('content_type');
+  $max_result = $max_query->execute()->fetchAll();
+  $all_weight = !empty($max_result[0]->weight) ? $max_result[0]->weight : 1;
+  $ct_weight = !empty($max_result[1]->weight) ? $max_result[1]->weight : 1;
+  $weight_array = array("All" => $all_weight, "content_type" => $ct_weight);
+  return $weight_array;
 }
 
 /**

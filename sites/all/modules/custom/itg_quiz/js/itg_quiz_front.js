@@ -44,8 +44,15 @@
                     data: {nid:qnid, ans_val:ans_val, correct_ans:correct_ans},
                     url: Drupal.settings.basePath+"quiz-response",
                     success: function(data) {                  
-                        ansvalue = data.split('-');                      
-                        $('#answer-container-'+anslastid+' .answer-container-actual').html(ansvalue[0]+'<br/>'+ansvalue[1]);
+                        ansvalue = data.split('-');    
+                        var cls = "";
+                        if(ansvalue[1] == "correct"){
+                          cls = "correct-ans";
+                        }
+                        else{
+                          cls  = "incorrect-ans";
+                        }
+                        $('#answer-container-'+anslastid+' .answer-container-actual').html("<div class='" + cls + "'>" + ansvalue[1] + " !</div><strong>" + ansvalue[0] + "</strong>");
                     }
                });        
             }    
@@ -71,8 +78,15 @@
                     data: {nid:qnid, correct_ans:correct_ans, ans_val:JSON.stringify(selected)},
                     url: Drupal.settings.basePath+"quiz-response-checkbox",
                     success: function(data) {
-                        ansvalue = data.split('-');                      
-                        $('.'+buttonClass).siblings('.answer-container-actual').html(ansvalue[0]+'<br/>'+ansvalue[1]);
+                        ansvalue = data.split('-'); 
+                        var cls = "";
+                        if(ansvalue[1] == "correct"){
+                          cls = "correct-ans";
+                        }
+                        else{
+                          cls  = "incorrect-ans";
+                        }
+                        $('.'+buttonClass).siblings('.answer-container-actual').html("<div class='" + cls + "'>" + ansvalue[1] + "</div><strong>" + ansvalue[0] + "</strong>");
                     }
                });
       return false;

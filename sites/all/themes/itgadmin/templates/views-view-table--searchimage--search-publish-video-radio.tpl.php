@@ -31,8 +31,8 @@ $video_data = "";
 <div class="video-ftp-div">
     <?php
     foreach ($rows as $id => $row) {
-        if ($row['sm_field_video_used'] == 0) {
-            $video_value = $row['sm_field_video_id'] . '#' . $row['sm_field_video_size'] . '#' . $row['label'] . '#' . $row['sm_field_video_thumb_url'] . '#' . $row['sm_field_video_duration'] . '#' . $row['sm_field_property'];
+        if ($row['sm_field_video_used'] == 1) {
+            $video_value = $row['sm_field_video_id'] . '#' . $row['sm_field_video_size'] . '#' . $row['label'] . '#' . $row['sm_field_video_thumb_url'] . '#' . $row['sm_field_video_duration'] . '#' . $row['sm_field_property']. '#other' .'#1';
             if (!empty($row['sm_field_video_thumb_url'])) {
                 $video_image = '<img  width="100" height="44" src="' . $row['sm_field_video_thumb_url'] . '">';
                 $file_size = number_format($row['sm_field_video_size'] / (1024 * 1024), 2);

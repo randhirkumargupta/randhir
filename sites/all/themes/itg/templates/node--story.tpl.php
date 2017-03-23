@@ -10,7 +10,7 @@ if (!empty($content)):
   if (!empty($related_content)) {
     $class_related = ' buzz-related';
   }
-  if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
+  if (!empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
     $class_listicle = ' buzz-feedback listicle-feedback';
   }
   // prepare url for sharing
@@ -162,7 +162,7 @@ if (!empty($content)):
           ?>
   
           <div class="story-left-section">
-  <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_listicle[LANGUAGE_NONE])) { ?>
+  <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>
                 <div class="story-left">
                     <div class="byline">              
                         <div class="profile-pic">
@@ -271,7 +271,7 @@ if (!empty($content)):
                 </div>
                       <?php } ?>
               <!-- For buzzfeed section start -->
-                          <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_listicle[LANGUAGE_NONE])) { ?>                       
+                          <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>                       
                 <div class="buzzfeed-byline">
                     <div class="byline">
                         <div class="profile-pic">
@@ -353,7 +353,7 @@ if (!empty($content)):
               <!-- Check the story type whether it is a photo story or not-->
                <?php if ((!empty($node->field_story_type) && $node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story') || (empty($node->field_story_type))) { ?>
               <div class="story-right <?php
-                if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
+                if (!empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
                   echo 'listicle-page';
                 }
                 ?>">
@@ -851,7 +851,7 @@ if (!empty($content)):
                             $like = "no-of-likes_" . arg(1);
                             $dislike = "no-of-dislikes_" . arg(1);
                             ?>
-                        <div class="agbutton"><button title ="Like" id="like_count" rel="<?php print arg(1); ?>">Like <span id="<?php print $like; ?>"><?php print $like_count; ?></span> </button> <button title ="Dislike" id="dislike_count" rel="<?php print arg(1); ?>">Dislike <span id="<?php print $dislike; ?>"><?php print $dislike_count; ?></span></button>  <a href="<?php echo $base_url; ?>/snappost"> More from Snap post</a><p class="error-msg" id="<?php print $pid; ?>"></p></div>
+                        <div class="agbutton"><button title ="Like" id="like_count" rel="<?php print arg(1); ?>">Like <span id="<?php print $like; ?>"><?php print $like_count; ?></span> </button> <button title ="Dislike" id="dislike_count" rel="<?php print arg(1); ?>">Dislike <span id="<?php print $dislike; ?>"><?php print $dislike_count; ?></span></button>  <a href="<?php echo $base_url; ?>/snap-post"> More from Snap post</a><p class="error-msg" id="<?php print $pid; ?>"></p></div>
                     </div>
                       <?php } ?>
                   <div class="tags">

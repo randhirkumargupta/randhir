@@ -282,15 +282,21 @@ function itg_story_form_custom_callback($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-    //pr($form['#id']);
+   
     $soruce_type_filter_display_views = array(
         'views-exposed-form-strory-menegment-page',
         'views-exposed-form-strory-menegment-page-1',
         'views-exposed-form-strory-menegment-page-2',
         'views-exposed-form-strory-menegment-page-7',
         'views-exposed-form-strory-menegment-page-4',
-        ''
-    );
+        'views-exposed-form-strory-menegment-page-5',
+        'views-exposed-form-videogallery-management-page-1',
+        'views-exposed-form-videogallery-management-page',
+        'views-exposed-form-videogallery-management-page-2',
+        'views-exposed-form-videogallery-management-page-5'
+      );
+    
+   
     if ($form['#id'] == 'views-exposed-form-strory-menegment-page' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-3' || $form['#id'] == 'views-exposed-form-strory-menegment-page-8' || $form['#id'] == 'views-exposed-form-strory-menegment-page-6' || $form['#id'] == 'views-exposed-form-strory-menegment-page-5' || $form['#id'] == 'views-exposed-form-strory-menegment-page-2' || $form['#id'] == 'views-exposed-form-strory-menegment-page-9' || $form['#id'] == 'views-exposed-form-strory-menegment-page-7' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1'
     ) {
         $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
@@ -303,10 +309,15 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
     }
 
     if (in_array($form['#id'], $soruce_type_filter_display_views)) {
-        $option = array("" => '-Any-', "story" => "Story");
+       if($form['#id'] == 'views-exposed-form-videogallery-management-page-1' || $form['#id'] == 'views-exposed-form-videogallery-management-page' || $form['#id'] == 'views-exposed-form-videogallery-management-page-2' || $form['#id'] == 'views-exposed-form-videogallery-management-page-5') {
+         $cn_type = 'videogallery';
+       } else {
+         $cn_type = 'story';
+       }
+        $option = array("" => '-Any-', $cn_type => $cn_type);
         $query = db_select('field_data_field_story_source_type', 'st');
         $query->leftJoin('node', 'n', 'n.nid=st.entity_id');
-        $query->condition('n.type', 'story')->distinct()
+        $query->condition('n.type', $cn_type)->distinct()
                 ->fields('st', array('field_story_source_type_value'));
         $result = $query->execute()->fetchAll();
         foreach ($result as $option_values) {
@@ -413,14 +424,14 @@ function itg_story_after_build($form, &$form_state) {
         '#value' => !empty($form_state['input']['original_image_fids']) ? $form_state['input']['original_image_fids'] : '',
         '#attributes' => array('id' => 'original_image_fids', 'name' => 'original_image_fids'),
     );
-  drupal_add_js('jQuery(document).ready(function() {              
-                if (jQuery("#edit-path-pathauto").is(":checked")) {
-                
-                  jQuery("#edit-path-alias").attr("readonly", "readonly");
-                } else {                
-                  jQuery("#edit-path-alias").removeAttr("readonly");
-                }              
-              });', array('type' => 'inline', 'scope' => 'footer'));
+//  drupal_add_js('jQuery(document).ready(function() {              
+//                if (jQuery("#edit-path-pathauto").is(":checked")) {
+//                
+//                  jQuery("#edit-path-alias").attr("readonly", "readonly");
+//                } else {                
+//                  jQuery("#edit-path-alias").removeAttr("readonly");
+//                }              
+//              });', array('type' => 'inline', 'scope' => 'footer'));
 
   if (!isset($form['#node']->nid)) {
       // hide remove button of first field on add form
@@ -438,9 +449,9 @@ function itg_story_after_build($form, &$form_state) {
   //if(arg(0) == 'node' && is_numeric(arg(1)) && )
 
   if (isset($form['#node']->nid) && $form['#node']->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-      drupal_add_js('jQuery(document).ready(function() {
-          jQuery("#edit-path-pathauto").attr("checked", true);            
-        });', array('type' => 'inline', 'scope' => 'footer'));
+//      drupal_add_js('jQuery(document).ready(function() {
+//          jQuery("#edit-path-pathauto").attr("checked", true);            
+//        });', array('type' => 'inline', 'scope' => 'footer'));
   }
 
   unset($form['field_story_associate_lead'][LANGUAGE_NONE]['_none']);
@@ -719,7 +730,7 @@ function itg_get_video_display($nid) {
 /**
  * {@inheritdoc}
  */
-function itg_story_views_query_alter(&$view, &$query) {
+/*function itg_story_views_query_alter(&$view, &$query) {
   if ($view->name == 'strory_menegment') {
     if (!empty($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == "story") {
       foreach ($query->where[1]['conditions'] as $keys => $field) {
@@ -730,31 +741,30 @@ function itg_story_views_query_alter(&$view, &$query) {
       }
     }
   }
-}
+}*/
 
 /**
  * {@inheritdoc}
  */
 function itg_story_node_presave($node) {
   $type = $node->type;
-  if ($type == 'story' && !empty($node->field_story_magazine_story_issue['und'][0]['value']))
-  {
-    if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated')
-    {
+  if ($type == 'story' && !empty($node->field_story_magazine_story_issue['und'][0]['value'])) {
+    if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
       $node->field_story_source_type['und'][0]['value'] = 'Magazine Story';
     }
   }
-  if ($type == 'story')
-  {
+  
+  if($type == 'story' && empty($node->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
+   $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'story';
+  }
+  
+  if ($type == 'story') {
     $redirection_url = $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'];
-    if (!empty($redirection_url) && !preg_match("~^(?:f|ht)tps?://~i", $redirection_url))
-    {
+    if (!empty($redirection_url) && !preg_match("~^(?:f|ht)tps?://~i", $redirection_url)) {
       $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'] = "http://" . $redirection_url;
     }
-    if (empty($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value']))
-    {
-      if (function_exists('itg_get_byline_row'))
-      {
+    if (empty($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'])) {
+      if (function_exists('itg_get_byline_row')) {
         if(!empty($node->field_reporter_unique_id[LANGUAGE_NONE])){
           $publish_id = itg_get_byline_row($node->field_reporter_unique_id[LANGUAGE_NONE][0]['value']);
           $node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'] = $publish_id;
