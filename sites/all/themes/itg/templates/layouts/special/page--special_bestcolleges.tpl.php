@@ -448,6 +448,14 @@ if($theme != 'itgadmin')
                 jQuery(this).parent('.itg-common-section').prev('.itg-common-section').find('.add-more-block').show();
             });
 
+
+            jQuery('.item-college img').each(function($) {
+                var urlRelative = jQuery(this).attr("src");
+                var urlAbsolute = urlRelative.replace('http://itgddev.indiatodayonline.in/s3/files/', "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/");
+
+                jQuery(this).attr("src",urlAbsolute);
+            });
+
     });", array('type' => 'inline', 'scope' => 'footer'));
 }
 ?>
