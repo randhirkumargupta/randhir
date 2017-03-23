@@ -260,6 +260,28 @@ function features_for_story_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_cm_related_content_detail'.
+  $field_bases['field_cm_related_content_detail'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_cm_related_content_detail',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
   // Exported field_base: 'field_cm_select_type'.
   $field_bases['field_cm_select_type'] = array(
     'active' => 1,
@@ -280,7 +302,6 @@ function features_for_story_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         'newsletter' => 'Newsletter',
-        'breaking-news' => 'Breaking News',
         'magazine' => 'Magazine',
         'story' => 'Story',
         'supplement' => 'Supplement',
@@ -290,13 +311,14 @@ function features_for_story_field_default_field_bases() {
         'blog' => 'blogs',
         'videogallery' => 'videogallery',
         'podcast' => 'podcast',
-        'reporter' => 'reporter',
+        'reporter' => 'Byline',
         'print_team_integration' => 'print Team',
         'survey' => 'survey',
         'cooking-tips' => 'cooking-tips',
         'food-news' => 'food-news',
         'quiz' => 'quiz',
         'ugc' => 'ugc',
+        'breaking_news' => 'Breaking News',
         'manage-budget-predictor' => 'Budget-Predictor',
       ),
       'allowed_values_function' => '',
