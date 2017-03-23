@@ -211,11 +211,11 @@ function itg_category_multiple_get_section($itg_category_vocabs, $content_type) 
  * @return array
  */
 function itg_category_multiple_after_build($form, &$form_state) {
-
-
-  if (isset($form_state['input']['itg_primary_category'][0]) && !empty($form_state['input']['itg_primary_category'][0])) {
-    $form['category_holder']['field_primary_category']['und'][0]['value'] = $form_state['input']['itg_primary_category'][0];
-  }
+  //pr( $form['field_primary_category']['und']);
+//p($form_state['input']['itg_primary_category']);
+  //if (isset($form_state['input']['itg_primary_category']) && !empty($form_state['input']['itg_primary_category'])) {
+   // $form['field_primary_category']['und'][0]['value'] = $form_state['input']['itg_primary_category'];
+  //}
 
   //Getting category on the basis of section
 
@@ -246,9 +246,16 @@ function itg_category_multiple_after_build($form, &$form_state) {
     $form['category_holder']['itg_sub_sub_sub_category']['#options'] = $itg_sub_sub_category;
   }
 
-  if (isset($form_state['input']['itg_sub_sub_sub_category']) && !empty($form_state['input']['itg_sub_sub_sub_category'])) {
-
-    $complete_structure = array_merge($form_state['input']['itg_section'], $form_state['input']['itg_category'], $form_state['input']['itg_sub_category'], $form_state['input']['itg_sub_sub_category'], $form_state['input']['itg_sub_sub_sub_category']);
+  if (isset($form_state['input']['itg_section']) && !empty($form_state['input']['itg_section'])) {
+    $fsection = isset($form_state['input']['itg_section']) && !empty($form_state['input']['itg_section']) ? $form_state['input']['itg_section'] : array();
+    $fcategory = isset($form_state['input']['itg_category']) && !empty($form_state['input']['itg_category']) ? $form_state['input']['itg_category'] : array();
+    $fsub_category = isset($form_state['input']['itg_sub_category']) && !empty($form_state['input']['itg_sub_category']) ? $form_state['input']['itg_sub_category'] : array();
+    $fsub_sub_category = isset($form_state['input']['itg_sub_sub_category']) && !empty($form_state['input']['itg_sub_sub_category']) ? $form_state['input']['itg_sub_sub_category'] : array();
+    $fsub_sub_sub_category = isset($form_state['input']['itg_sub_sub_sub_category']) && !empty($form_state['input']['itg_sub_sub_sub_category']) ? $form_state['input']['itg_sub_sub_sub_category'] : array();
+    $complete_structure = array_merge(
+        $fsection, $fcategory, $fsub_category, $fsub_sub_category, $fsub_sub_sub_category
+    );
+      
     $itg_primary_category = get_parent_structure_by_for_all(array_filter($complete_structure));
     $form['category_holder']['itg_primary_category']['#options'] = $itg_primary_category;
   }
@@ -624,14 +631,13 @@ function itg_category_multiple_taxonomy_term_update($term) {
  * Implements get_content_type_combined_list_term()
  */
 function get_content_type_combined_list_term($data) {
-    $result = array();
-    if (isset($data) && !empty($data)) {
-      foreach ($data as $chunkdata) {
-        $result[] = $chunkdata['value'];
-      }
-      return isset($result) ? implode(',', $result) : '';
+  $result = array();
+  if (isset($data) && !empty($data)) {
+    foreach ($data as $chunkdata) {
+      $result[] = $chunkdata['value'];
     }
-  
+    return isset($result) ? implode(',', $result) : '';
+  }
 }
 
 /**
