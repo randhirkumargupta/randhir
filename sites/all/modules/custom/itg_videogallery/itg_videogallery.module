@@ -1160,10 +1160,14 @@ function itg_videogallery_remove_video_with_child() {
 /**
  * This function use for make video bitrate url:
  */
-function itg_videogallery_make_bitrate_url($video_url , $bitrates) {
+function itg_videogallery_make_bitrate_url($video_url, $bitrates) {
+    
     $firestparet_replace = str_replace('http://medias3d.intoday.in', 'http://indiatoday-vh.akamaihd.net/i', $video_url);
     $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $firestparet_replace);
-    p($withoutExt);
+    $returnstring = substr($withoutExt, 0, strpos($withoutExt, '1024_512'));
+    $returnstring = $returnstring . '1024_,' . $bitrates . ',.mp4.csmil/master.m3u8';
+    return $returnstring;
+
 }
 
 /**
