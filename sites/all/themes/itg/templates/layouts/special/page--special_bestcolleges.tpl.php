@@ -450,10 +450,10 @@ if($theme != 'itgadmin')
 
 
             jQuery('.college .view-id-best_college_image_slider img').each(function($) {
-                var urlRelative = jQuery(this).attr("src");
-                var urlAbsolute = urlRelative.replace('http://itgddev.indiatodayonline.in/s3/files/', "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/");
+                var urlRelative = jQuery(this).attr('src');
+                var urlAbsolute = urlRelative.replace('http://itgddev.indiatodayonline.in/s3/files/', 'http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/');
 
-                jQuery(this).attr("src",urlAbsolute);
+                jQuery(this).attr('src',urlAbsolute);
             });
 
     });", array('type' => 'inline', 'scope' => 'footer'));
