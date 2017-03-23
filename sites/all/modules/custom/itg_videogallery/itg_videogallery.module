@@ -1253,13 +1253,17 @@ function itg_videogallery_get_old_playlist($nid) {
  * {@inheritdoc}
  */
 function itg_videogallery_node_presave($node) {
-    if ($node->type == 'videogallery' && !empty($node->field_dailymotion_playlist[LANGUAGE_NONE])) {
-        foreach ($node->field_dailymotion_playlist[LANGUAGE_NONE] as $playlist_val) {
-            $playlist[$playlist_val['tid']] = $playlist_val['name'];
-        }
-        $node->field_story_source_id = $playlist;
-        $_SESSION['old_playlist'] = itg_videogallery_get_old_playlist($node->nid);
+  if ($node->type == 'videogallery' && !empty($node->field_dailymotion_playlist[LANGUAGE_NONE])) {
+    foreach ($node->field_dailymotion_playlist[LANGUAGE_NONE] as $playlist_val) {
+      $playlist[$playlist_val['tid']] = $playlist_val['name'];
     }
+    $node->field_story_source_id = $playlist;
+    $_SESSION['old_playlist'] = itg_videogallery_get_old_playlist($node->nid);
+  }
+  // condition for source type field
+  if ($node->type == 'videogallery' && empty($node->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
+    $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'videogallery';
+  }
 }
 
 /**
