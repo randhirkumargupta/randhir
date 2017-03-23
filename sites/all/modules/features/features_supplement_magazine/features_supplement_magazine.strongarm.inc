@@ -256,6 +256,9 @@ function features_supplement_magazine_strongarm() {
         'path' => array(
           'weight' => '3',
         ),
+        'redirect' => array(
+          'weight' => '4',
+        ),
       ),
       'display' => array(),
     ),
@@ -392,6 +395,27 @@ function features_supplement_magazine_strongarm() {
   $strongarm->name = 'node_submitted_supplement';
   $strongarm->value = 0;
   $export['node_submitted_supplement'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_issue_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_issue_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_magazine_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_magazine_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_supplement_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_supplement_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

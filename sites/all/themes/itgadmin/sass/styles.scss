@@ -11220,3 +11220,45 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   }
   
   /*budget predictor css end*/
+  [id*="itg-active-user-report-form"]{
+    .form-type-textfield, .form-type-select{
+      float: left;
+      width: 100%;
+      margin-right: 10px;
+      padding: 0;
+      &.form-item-username, &.form-item-email{max-width: 200px;}
+      &.form-item-mobile{max-width: 150px;}
+      &.form-item-date-from, &.form-item-date-to{max-width: 150px;}
+      &.form-item-items-per-page{max-width: 100px;}
+      > label{
+        float: none;
+        padding: 5px 0;
+        width: 100%;
+        display: block;
+      }
+      .form-text, .form-select{width: 100%;}
+    }
+    .user-log-filter-btn{
+      display: inline-block;
+      margin-top: 38px;
+      vertical-align: top;
+      .form-submit{
+        @extend .btn-small;
+      }
+      .user-log-reset{
+        @extend .btn-reset;
+        @extend .btn-small;
+      }
+    }
+  }
+  [id*="itg-registred-user-report-form"]{
+    h2{margin-bottom: 30px;}
+    .form-type-textfield{
+      > label{width: 120px;}
+      .form-text{max-width: 200px;}
+    }
+    .form-submit {
+      margin-left: 150px;
+      @extend .btn-small;
+    }
+  }

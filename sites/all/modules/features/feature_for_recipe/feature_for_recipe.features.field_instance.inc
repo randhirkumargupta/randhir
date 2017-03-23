@@ -1730,6 +1730,48 @@ function feature_for_recipe_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-recipe-field_cm_related_content_detail'.
+  $field_instances['node-recipe-field_cm_related_content_detail'] = array(
+    'bundle' => 'recipe',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 52,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_cm_related_content_detail',
+    'label' => 'Related Content Detail',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 54,
+    ),
+  );
+
   // Exported field_instance: 'node-recipe-field_itg_content_publish_date'.
   $field_instances['node-recipe-field_itg_content_publish_date'] = array(
     'bundle' => 'recipe',
@@ -3011,6 +3053,48 @@ function feature_for_recipe_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-recipe-field_story_facebook_vdescripti'.
+  $field_instances['node-recipe-field_story_facebook_vdescripti'] = array(
+    'bundle' => 'recipe',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 45,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_facebook_vdescripti',
+    'label' => 'Facebook Video Narrative',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 40,
+    ),
+  );
+
   // Exported field_instance: 'node-recipe-field_story_facebook_video'.
   $field_instances['node-recipe-field_story_facebook_video'] = array(
     'bundle' => 'recipe',
@@ -3790,6 +3874,48 @@ function feature_for_recipe_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-recipe-field_story_twitter_video_desc'.
+  $field_instances['node-recipe-field_story_twitter_video_desc'] = array(
+    'bundle' => 'recipe',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 47,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_twitter_video_desc',
+    'label' => 'Twitter Video Description',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 44,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Ailment');
@@ -3809,6 +3935,7 @@ function feature_for_recipe_field_default_field_instances() {
   t('Extra large image');
   t('Facebook Narrative');
   t('Facebook Video');
+  t('Facebook Video Narrative');
   t('Facebook image');
   t('Facebook narrative');
   t('Festivals');
@@ -3850,6 +3977,7 @@ function feature_for_recipe_field_default_field_instances() {
   t('Please upload video.');
   t('Primary category html');
   t('Primary category textarea');
+  t('Related Content Detail');
   t('Section');
   t('Short headline');
   t('Small image');
@@ -3861,6 +3989,7 @@ function feature_for_recipe_field_default_field_instances() {
   t('Tweet');
   t('Twitter Image');
   t('Twitter Video');
+  t('Twitter Video Description');
   t('Twitter narrative');
   t('Video');
   t('WAP headline');
