@@ -449,7 +449,7 @@ if($theme != 'itgadmin')
             });
 
 
-            jQuery('.item-college img').each(function($) {
+            jQuery('.college .view-id-best_college_image_slider img').each(function($) {
                 var urlRelative = jQuery(this).attr("src");
                 var urlAbsolute = urlRelative.replace('http://itgddev.indiatodayonline.in/s3/files/', "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/");
 
