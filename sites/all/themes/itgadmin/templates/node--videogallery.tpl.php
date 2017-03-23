@@ -39,8 +39,9 @@
 
 
                                 if ($video_fid_data[0]->field_videogallery_video_upload_fid != "") {
-                                    $video_data = itg_videogallery_get_videoid($video_fid_data[0]->field_videogallery_video_upload_fid);
-                                }
+                                   // $video_data = itg_videogallery_get_videoid($video_fid_data[0]->field_videogallery_video_upload_fid);
+                               $video_data = itg_videogallery_get_videoid_new($video_fid_data[0]->field_videogallery_video_upload_fid);
+                                    }
                                 $ads_flag = 0;
                                 if ($video_fid_data[0]->field_include_ads_valu == 'yes') {
                                     $ads_flag = 1;
@@ -86,8 +87,10 @@
                                
                                 $output .= "<li class='view-item'>";
                                 $video_fid = $imagecollection['field_videogallery_video_upload'][LANGUAGE_NONE][0]['fid'];
+                               
                                 if ($video_fid != "") {
-                                    $video_data = itg_videogallery_get_videoid($video_fid);
+                                    //$video_data = itg_videogallery_get_videoid($video_fid);
+                                     $video_data = itg_videogallery_get_videoid_new($video_fid);
                                 }
                                 $ads_flag = 0;
                                 if ($imagecollection['field_include_ads'][LANGUAGE_NONE][0]['value'] == 'yes') {

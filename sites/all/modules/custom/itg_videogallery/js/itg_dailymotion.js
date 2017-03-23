@@ -6,33 +6,68 @@
 (function($) {
     Drupal.behaviors.itg_dailymotion = {
         attach: function(context, settings) {
-  
+
+            // GET field id
+//            var video_field_id = settings.itg_dailymotion.settings.video_field_id;
+//            var video_field_file = settings.itg_dailymotion.settings.video_field_file;
+            // FTP browse
+
+            var base_url = Drupal.settings.baseUrl.baseUrl;
+
+
             $(".ftp-server .asso-filed_single").click(function(e) {
                 jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+                var video_fids = [];
+                var selected_check_boxes_values = new Array();
                 var selected_check_boxes_index = 0;
-                $("input:radio").each(function() {
-                    if ($(this).is(':checked'))
-                    {
-                        selected_check_boxes_index = $(this).val();
-                    }
+                 $("#video_iframe").contents().find("input:radio[class=form-radio]:checked").each(function() {
+                    selected_check_boxes_values[selected_check_boxes_index++] = $(this).val();
                 });
                 if (selected_check_boxes_index == 0) {
                     alert("Please select video file.");
                 } else {
                     jQuery('#loader-data img').show().parent().addClass('loader_overlay');
                     var getbtnmane = $(this).attr('btn_name');
-                    parent.jQuery('[name="' + getbtnmane + '[fid]"]').val(selected_check_boxes_index);
-                    parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_video][button]").trigger('mousedown');
 
-                    //parent.jQuery("#" + video_field_id + "-button").mousedown();
-                    parent.jQuery('form').ajaxComplete(function(event, request, settings) {
-                        try {
-                            parent.jQuery.colorbox.close();
-                        } catch (err) {
+                    jQuery.ajax({
+                        url: base_url + '/solr-video-make-fid',
+                        type: 'post',
+                        data: {'checkvalue': selected_check_boxes_values},
+                        success: function(data) {
+                            var as = JSON.parse(data);
+                            var parsed = JSON.parse(data);
+
+                            for (var x in parsed) {
+                                video_fids.push(parsed[x]);
+                            }
+                              
+                            parent.jQuery('[name="' + getbtnmane + '[fid]"]').val(parsed[0]);
+                            parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_video][button]").trigger('mousedown');
+
+                            //parent.jQuery("#" + video_field_id + "-button").mousedown();
+                            parent.jQuery('form').ajaxComplete(function(event, request, settings) {
+                                try {
+                                    parent.jQuery.colorbox.close();
+                                } catch (err) {
+
+                                }
+
+
+                            });
 
                         }
+                        //var vid = $("#edit-video-browse-select .form-radio:checked").val();
 
 
+                    });
+
+                }
+            });
+
+            $(window).load(function() {
+                if ($('#single_add').val() == 1) {
+                    $("#video_iframe").contents().find("input:checkbox[class=form-radio]").each(function() {
+                        $(this).attr('type', 'radio');
                     });
                 }
             });
@@ -40,36 +75,50 @@
             $(".ftp-server .asso-filed").click(function(e) {
 
                 // Getting selected videos from checkboxes        
-
+                var video_fids = [];
                 var selected_check_boxes_values = new Array();
                 var selected_check_boxes_index = 0;
-                $("input:checkbox[class=form-radio]:checked").each(function() {
+                $("#video_iframe").contents().find("input:checkbox[class=form-radio]:checked").each(function() {
                     selected_check_boxes_values[selected_check_boxes_index++] = $(this).val();
                 });
-
-                parent.jQuery('#edit-field-video-upload-add-more-number').val(selected_check_boxes_values.length);
-                parent.jQuery('#edit-field-video-upload-file-entity-holder-nums').val(selected_check_boxes_values.join());
-
-                //var vid = $("#edit-video-browse-select .form-radio:checked").val();
-
                 if (selected_check_boxes_index == 0) {
                     alert("Please select video file.");
                 } else {
-                    jQuery('#loader-data img').show().parent().addClass('loader_overlay');
-                    //  parent.jQuery("input[name='" + video_field_file + "'").val(vid);
-                    parent.jQuery("[name='field_video_upload_add_more']").mousedown();
-                    parent.jQuery('form').ajaxComplete(function(event, request, settings) {
-                        try {
-                            parent.jQuery.colorbox.close();
-                        } catch (err) {
+                    jQuery.ajax({
+                        url: base_url + '/solr-video-make-fid',
+                        type: 'post',
+                        data: {'checkvalue': selected_check_boxes_values},
+                        success: function(data) {
+                            var as = JSON.parse(data);
+                            var parsed = JSON.parse(data);
+
+                            for (var x in parsed) {
+                                video_fids.push(parsed[x]);
+                            }
+
+                            parent.jQuery('#edit-field-video-upload-add-more-number').val(video_fids.length);
+                            parent.jQuery('#edit-field-video-upload-file-entity-holder-nums').val(video_fids.join());
+                            jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+                            //  parent.jQuery("input[name='" + video_field_file + "'").val(vid);
+                            parent.jQuery("[name='field_video_upload_add_more']").mousedown();
+                            parent.jQuery('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
+                                try {
+                                    parent.jQuery.colorbox.close();
+                                } catch (err) {
+
+                                }
+
+
+                            });
 
                         }
+                        //var vid = $("#edit-video-browse-select .form-radio:checked").val();
 
 
                     });
-
                 }
             });
+
 
 
             $(".ftp-server .asso-with-ckeditor").click(function(e) {
@@ -243,12 +292,12 @@ jQuery('document').ready(function() {
                 parent.jQuery('[name="' + getbtnmane + '[fid]"]').val(videogallery_new_file_hold);
                 parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_video][button]").trigger('mousedown');
                 parent.jQuery('form').ajaxComplete(function(event, request, settings) {
-                  
+
                     try {
-                       
+
                         parent.jQuery.colorbox.close();
                     } catch (err) {
-                        
+
                         parent.jQuery.colorbox.close();
                     }
                 });
@@ -256,12 +305,12 @@ jQuery('document').ready(function() {
             else {
                 parent.jQuery("[name='field_video_upload_add_more']").mousedown();
                 parent.jQuery('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
-                   
+
                     try {
-                      
+
                         parent.jQuery.colorbox.close();
                     } catch (err) {
-                       
+
                         parent.jQuery.colorbox.close();
                     }
 

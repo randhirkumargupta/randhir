@@ -193,7 +193,7 @@ function itg_video_check_exist_file($filename) {
  * @param array $form_state
  */
 function itg_videogallery_custom_submit($form, &$form_state) {
-
+    global $user;
     foreach ($form_state['values']['field_story_itg_tags'][LANGUAGE_NONE] as $tags) {
         $tag[] = $tags['name'];
     }
@@ -209,24 +209,27 @@ function itg_videogallery_custom_submit($form, &$form_state) {
     }
 
     $fids = array();
-
+    $thumg_to_crop = "";
     foreach ($form_state['values']['field_video_upload']['und'] as $videofields) {
 
         if ((int) $videofields['field_videogallery_video_upload']['und'][0]['fid'] != 0) {
-            $fids[] = (int) $videofields['field_videogallery_video_upload']['und'][0]['fid'];
+            //$fids[] = (int) $videofields['field_videogallery_video_upload']['und'][0]['fid'];
+            $query = db_select('itg_solr_video_info', 'drd');
+            $query->fields('drd', array('solr_video_thumb', 'solr_video_duration'));
+            $query->condition('fid', $videofields['field_videogallery_video_upload']['und'][0]['fid'], '=');
+            $video_image = $query->execute()->fetchAll();
+            if (!empty($video_image[0]->solr_video_thumb)) {
+                $thumg_to_crop = $video_image[0]->solr_video_thumb;
+                $slor_video_duration = $video_image[0]->solr_video_duration;
+                break;
+            }
         }
     }
 
 
     $tag_value = implode(', ', $tag);
     $tags_value = trim($tag_value, ",");
-    $node_id = $form_state['values']['nid'];
-    if (!empty($fids)) {
-        $query = db_select('dailymotion_response_details', 'drd');
-        $query->fields('drd');
-        $query->condition('fid', $fids[0], '=');
-        $vid_result = $query->execute()->fetchAssoc();
-    }
+    // $node_id = $form_state['values']['nid'];
 
     foreach ($form_state['values']['field_dailymotion_playlist'][LANGUAGE_NONE] as $playlist_term) {
         //$playlist_name[] = $playlist_term['name'];
@@ -236,7 +239,8 @@ function itg_videogallery_custom_submit($form, &$form_state) {
 
     // assign image in field after resize
     if ($form_state['values']['field_story_extra_large_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_medium_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_small_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_extra_small_image'][LANGUAGE_NONE][0]['fid'] == 0) {
-        $image_url = $vid_result['dailymotion_thumb_url'];
+        $image_url = $thumg_to_crop;
+
         if (!empty($image_url)) {
 
             $imagedata = file_get_contents($image_url);
@@ -245,217 +249,351 @@ function itg_videogallery_custom_submit($form, &$form_state) {
             $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
         }
         if (!empty($file_data_temp)) {
-            // This code for resize all images 
-            if ($form_state['values']['field_story_extra_large_image'][LANGUAGE_NONE][0]['fid'] == 0) {
-                $file_image = file_load($file_data_temp->fid);
-                $image = image_load($file_image->uri);
-                $filepath = file_default_scheme() . '://crop_image';
-                $scaled = image_scale_and_crop($image, EXTRA_LARGE_IMAGE_WIDTH, EXTRA_LARGE_IMAGE_HEIGHT);
-                $image_name = $image_name . time();
-                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
-                $uri = $filepath . '/' . $image_name . '.' . $image_extension;
-                $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
-                $file = new StdClass;
-                $file->uid = $user->uid;
-                $file->filename = basename($uri);
-                $file->uri = $uri;
-                $file->filemime = file_get_mimetype($uri);
-                $file->filesize = @filesize($uri);
-                $file->timestamp = REQUEST_TIME;
-                $file->is_new = TRUE;
-                $file->status = FILE_STATUS_PERMANENT;
-                $file = file_save($file);
-                file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
-                $form_state['values']['field_story_extra_large_image'][LANGUAGE_NONE][0]['fid'] = $file->fid;
-            }
+            $file_image = file_load($file_data_temp->fid);
+            $image = image_load($file_image->uri);
+            if (!empty($image)) {
+                // This code for resize all images 
+                if ($form_state['values']['field_story_extra_large_image'][LANGUAGE_NONE][0]['fid'] == 0) {
 
-            if ($form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid'] == 0) {
-                $file_image = file_load($file_data_temp->fid);
-                $image = image_load($file_image->uri);
-                $filepath = file_default_scheme() . '://crop_image';
-                $scaled = image_scale_and_crop($image, LARGE_IMAGE_WIDTH, LARGE_IMAGE_HEIGHT);
-                $image_name = $image_name . time();
-                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
-                $uri = $filepath . '/' . $image_name . '.' . $image_extension;
-                $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
-                $file = new StdClass;
-                $file->uid = $user->uid;
-                $file->filename = basename($uri);
-                $file->uri = $uri;
-                $file->filemime = file_get_mimetype($uri);
-                $file->filesize = @filesize($uri);
-                $file->timestamp = REQUEST_TIME;
-                $file->is_new = TRUE;
-                $file->status = FILE_STATUS_PERMANENT;
-                $file = file_save($file);
-                file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
-                $form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid'] = $file->fid;
-            }
+                    $filepath = file_default_scheme() . '://crop_image';
+                    $scaled = image_scale_and_crop($image, EXTRA_LARGE_IMAGE_WIDTH, EXTRA_LARGE_IMAGE_HEIGHT);
+                    $image_name = $image_name . time();
+                    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension . '/');
+                    $uri = $filepath . '/' . $image_name . '.' . $image_extension;
+                    $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
+                    $file = new StdClass;
+                    $file->uid = $user->uid;
+                    $file->filename = basename($uri);
+                    $file->uri = $uri;
+                    $file->filemime = file_get_mimetype($uri);
+                    $file->filesize = @filesize($uri);
+                    $file->timestamp = REQUEST_TIME;
+                    $file->is_new = TRUE;
+                    $file->status = FILE_STATUS_PERMANENT;
+                    $file = file_save($file);
+                    file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
+                    $form_state['values']['field_story_extra_large_image'][LANGUAGE_NONE][0]['fid'] = $file->fid;
+                }
 
-            if ($form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid'] == 0) {
-                $file_image = file_load($file_data_temp->fid);
-                $image = image_load($file_image->uri);
-                $filepath = file_default_scheme() . '://crop_image';
-                $scaled = image_scale_and_crop($image, LARGE_IMAGE_WIDTH, LARGE_IMAGE_HEIGHT);
-                $image_name = $image_name . time();
-                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
-                $uri = $filepath . '/' . $image_name . '.' . $image_extension;
-                $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
-                $file = new StdClass;
-                $file->uid = $user->uid;
-                $file->filename = basename($uri);
-                $file->uri = $uri;
-                $file->filemime = file_get_mimetype($uri);
-                $file->filesize = @filesize($uri);
-                $file->timestamp = REQUEST_TIME;
-                $file->is_new = TRUE;
-                $file->status = FILE_STATUS_PERMANENT;
-                $file = file_save($file);
-                file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
-                $form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid'] = $file->fid;
-            }
-            if ($form_state['values']['field_story_medium_image'][LANGUAGE_NONE][0]['fid'] == 0) {
-                $file_image = file_load($file_data_temp->fid);
-                $image = image_load($file_image->uri);
-                $filepath = file_default_scheme() . '://crop_image';
-                $scaled = image_scale_and_crop($image, MEDIUM_IMAGE_WIDTH, MEDIUM_IMAGE_HEIGHT);
-                $image_name = $image_name . time();
-                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
-                $uri = $filepath . '/' . $image_name . '.' . $image_extension;
-                $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
-                $file = new StdClass;
-                $file->uid = $user->uid;
-                $file->filename = basename($uri);
-                $file->uri = $uri;
-                $file->filemime = file_get_mimetype($uri);
-                $file->filesize = @filesize($uri);
-                $file->timestamp = REQUEST_TIME;
-                $file->is_new = TRUE;
-                $file->status = FILE_STATUS_PERMANENT;
-                $file = file_save($file);
-                file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
-                $form_state['values']['field_story_medium_image'][LANGUAGE_NONE][0]['fid'] = $file->fid;
-            }
-            if ($form_state['values']['field_story_small_image'][LANGUAGE_NONE][0]['fid'] == 0) {
-                $file_image = file_load($file_data_temp->fid);
-                $image = image_load($file_image->uri);
-                $filepath = file_default_scheme() . '://crop_image';
-                $scaled = image_scale_and_crop($image, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
-                $image_name = $image_name . time();
-                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
-                $uri = $filepath . '/' . $image_name . '.' . $image_extension;
-                $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
-                $file = new StdClass;
-                $file->uid = $user->uid;
-                $file->filename = basename($uri);
-                $file->uri = $uri;
-                $file->filemime = file_get_mimetype($uri);
-                $file->filesize = @filesize($uri);
-                $file->timestamp = REQUEST_TIME;
-                $file->is_new = TRUE;
-                $file->status = FILE_STATUS_PERMANENT;
-                $file = file_save($file);
-                file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
-                $form_state['values']['field_story_small_image'][LANGUAGE_NONE][0]['fid'] = $file->fid;
-            }
-            if ($form_state['values']['field_story_extra_small_image'][LANGUAGE_NONE][0]['fid'] == 0) {
-                $file_image = file_load($file_data_temp->fid);
-                $image = image_load($file_image->uri);
-                $filepath = file_default_scheme() . '://crop_image';
-                $scaled = image_scale_and_crop($image, EXTRA_SMALL_IMAGE_WIDTH, EXTRA_SMALL_IMAGE_HEIGHT);
-                $image_name = $image_name . time();
-                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
-                $uri = $filepath . '/' . $image_name . '.' . $image_extension;
-                $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
-                $file = new StdClass;
-                $file->uid = $user->uid;
-                $file->filename = basename($uri);
-                $file->uri = $uri;
-                $file->filemime = file_get_mimetype($uri);
-                $file->filesize = @filesize($uri);
-                $file->timestamp = REQUEST_TIME;
-                $file->is_new = TRUE;
-                $file->status = FILE_STATUS_PERMANENT;
-                $file = file_save($file);
-                file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
-                $form_state['values']['field_story_extra_small_image'][LANGUAGE_NONE][0]['fid'] = $file->fid;
+                if ($form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid'] == 0) {
+
+                    $filepath = file_default_scheme() . '://crop_image';
+                    $scaled = image_scale_and_crop($image, LARGE_IMAGE_WIDTH, LARGE_IMAGE_HEIGHT);
+                    $image_name = $image_name . time();
+                    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension . '/');
+                    $uri = $filepath . '/' . $image_name . '.' . $image_extension;
+                    $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
+                    $file = new StdClass;
+                    $file->uid = $user->uid;
+                    $file->filename = basename($uri);
+                    $file->uri = $uri;
+                    $file->filemime = file_get_mimetype($uri);
+                    $file->filesize = @filesize($uri);
+                    $file->timestamp = REQUEST_TIME;
+                    $file->is_new = TRUE;
+                    $file->status = FILE_STATUS_PERMANENT;
+                    $file = file_save($file);
+                    file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
+                    $form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid'] = $file->fid;
+                }
+
+                if ($form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid'] == 0) {
+
+                    $filepath = file_default_scheme() . '://crop_image';
+                    $scaled = image_scale_and_crop($image, LARGE_IMAGE_WIDTH, LARGE_IMAGE_HEIGHT);
+                    $image_name = $image_name . time();
+                    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension . '/');
+                    $uri = $filepath . '/' . $image_name . '.' . $image_extension;
+                    $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
+                    $file = new StdClass;
+                    $file->uid = $user->uid;
+                    $file->filename = basename($uri);
+                    $file->uri = $uri;
+                    $file->filemime = file_get_mimetype($uri);
+                    $file->filesize = @filesize($uri);
+                    $file->timestamp = REQUEST_TIME;
+                    $file->is_new = TRUE;
+                    $file->status = FILE_STATUS_PERMANENT;
+                    $file = file_save($file);
+                    file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
+                    $form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid'] = $file->fid;
+                }
+                if ($form_state['values']['field_story_medium_image'][LANGUAGE_NONE][0]['fid'] == 0) {
+
+                    $filepath = file_default_scheme() . '://crop_image';
+                    $scaled = image_scale_and_crop($image, MEDIUM_IMAGE_WIDTH, MEDIUM_IMAGE_HEIGHT);
+                    $image_name = $image_name . time();
+                    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension . '/');
+                    $uri = $filepath . '/' . $image_name . '.' . $image_extension;
+                    $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
+                    $file = new StdClass;
+                    $file->uid = $user->uid;
+                    $file->filename = basename($uri);
+                    $file->uri = $uri;
+                    $file->filemime = file_get_mimetype($uri);
+                    $file->filesize = @filesize($uri);
+                    $file->timestamp = REQUEST_TIME;
+                    $file->is_new = TRUE;
+                    $file->status = FILE_STATUS_PERMANENT;
+                    $file = file_save($file);
+                    file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
+                    $form_state['values']['field_story_medium_image'][LANGUAGE_NONE][0]['fid'] = $file->fid;
+                }
+                if ($form_state['values']['field_story_small_image'][LANGUAGE_NONE][0]['fid'] == 0) {
+
+                    $filepath = file_default_scheme() . '://crop_image';
+                    $scaled = image_scale_and_crop($image, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
+                    $image_name = $image_name . time();
+                    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension . '/');
+                    $uri = $filepath . '/' . $image_name . '.' . $image_extension;
+                    $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
+                    $file = new StdClass;
+                    $file->uid = $user->uid;
+                    $file->filename = basename($uri);
+                    $file->uri = $uri;
+                    $file->filemime = file_get_mimetype($uri);
+                    $file->filesize = @filesize($uri);
+                    $file->timestamp = REQUEST_TIME;
+                    $file->is_new = TRUE;
+                    $file->status = FILE_STATUS_PERMANENT;
+                    $file = file_save($file);
+                    file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
+                    $form_state['values']['field_story_small_image'][LANGUAGE_NONE][0]['fid'] = $file->fid;
+                }
+                if ($form_state['values']['field_story_extra_small_image'][LANGUAGE_NONE][0]['fid'] == 0) {
+
+                    $filepath = file_default_scheme() . '://crop_image';
+                    $scaled = image_scale_and_crop($image, EXTRA_SMALL_IMAGE_WIDTH, EXTRA_SMALL_IMAGE_HEIGHT);
+                    $image_name = $image_name . time();
+                    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension . '/');
+                    $uri = $filepath . '/' . $image_name . '.' . $image_extension;
+                    $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
+                    $file = new StdClass;
+                    $file->uid = $user->uid;
+                    $file->filename = basename($uri);
+                    $file->uri = $uri;
+                    $file->filemime = file_get_mimetype($uri);
+                    $file->filesize = @filesize($uri);
+                    $file->timestamp = REQUEST_TIME;
+                    $file->is_new = TRUE;
+                    $file->status = FILE_STATUS_PERMANENT;
+                    $file = file_save($file);
+                    file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
+                    $form_state['values']['field_story_extra_small_image'][LANGUAGE_NONE][0]['fid'] = $file->fid;
+                }
             }
         }
     }
+
+    // here first video duration assign
     if (empty($form_state['values']['field_video_duration'][LANGUAGE_NONE][0]['value'])) {
 
         if ($vid_result['video_duration'] != '0') {
-            $form_state['values']['field_video_duration'][LANGUAGE_NONE][0]['value'] = $vid_result['video_duration'];
+            $form_state['values']['field_video_duration'][LANGUAGE_NONE][0]['value'] = $slor_video_duration;
         }
     }
-    foreach ($fids as $video_fid) {
-        if ($video_fid != '' && is_numeric($video_fid)) {
-            $query = db_select('dailymotion_response_details', 'drd');
-            $query->fields('drd', array('fid', 'video_id'));
-            $query->condition('fid', $video_fid, '=');
-            $dailymotion_video_result = $query->execute()->fetchAssoc();
-            if (empty($dailymotion_video_result['fid'])) {
-                // Video not uploaded on dailymotion
-                $file_details = file_load($video_fid);
-                if (file_exists($file_details->uri)) {
-                    $real_path = drupal_realpath($file_details->uri);
-                    if ($real_path == "") {
-                        $real_path = file_create_url($file_details->uri);
-                    }
+    if ($node_id != "") {
+        $main_fids = array();
+        foreach ($form_state['values']['field_video_upload']['und'] as $keys => $videofields) {
+            if ((int) $videofields['field_videogallery_video_upload']['und'][0]['fid'] != 0) {
 
+                $video_image = itg_videogallery_get_video_info_by_fid($videofields['field_videogallery_video_upload']['und'][0]['fid']);
+                $main_fids[] = $videofields['field_videogallery_video_upload']['und'][0]['fid'];
+                if (!empty($video_image)) {
+                    $file_video = itg_videogallery_get_video_info_by_fid($videofields['field_videogallery_video_upload']['und'][0]['fid']);
 
-                    $response = itg_videogallery_dailymotion($real_path, $file_details->uri, $video_fid, $tags_value, $node_id);
-                    // Perform playlist and tags when new video create.
-
-                    $response_result['video_id'] = $response['id'];
-                    $response_result['fid'] = $response['fid'];
-                    $duration = "";
-                    if ($response['duration'] < 3600) {
-                        $duration = gmdate("i:s", $response['duration']);
-                    }
-                    else {
-                        $duration = gmdate("H:i:s", $response['duration']);
-                    }
-                    $nid = db_insert('dailymotion_response_details')
-                            ->fields(array(
-                                'title' => $response['title'],
-                                'channel' => $response['channel'],
-                                'fid' => $response['fid'],
-                                'tags' => $response['tags'],
-                                'video_id' => $response['id'],
-                                'nid' => $node_id,
-                                'upload_time' => REQUEST_TIME,
-                                'video_duration' => $duration,
-                                'dailymotion_published' => 1,
-                                'type' => 'local',
-                                'name' => $file_details->filename,
-                            ))
-                            ->execute();
-                    //itg_videogallery_unlink_video_playlist($response_result, $playlist_name, $tags_value);
-                    //itg_videogallery_edit_dailymotion($response_result, $playlist_name, $node_id);
-                }
-            }
-            else {
-                // Video uploaded on dailymotion
-                // Updating status of video
-                $api = itg_videogallery_dailymotion_api();
-                $api->post('/video/' . $dailymotion_video_result['video_id'], array('published' => true));
-
-                try {
                     $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
                             ->fields(array(
                                 'dailymotion_published' => 1,
                             ))
-                            ->condition('fid', $dailymotion_video_result['fid'], '=')
+                            ->condition('video_id', $file_video[0]->solr_video_id, '=')
                             ->execute();
-                } catch (Exception $e) {
-                    
+                    // update nid in video
+                    $num_updated = db_update('itg_solr_video_info') // Table name no longer needs {}
+                            ->fields(array(
+                                'nid' => $node_id,
+                            ))
+                            ->condition('fid', $videofields['field_videogallery_video_upload']['und'][0]['fid'], '=')
+                            ->execute();
                 }
-
-                // itg_videogallery_unlink_video_playlist($dailymotion_video_result, $playlist_name, $tags_value);
-                //itg_videogallery_edit_dailymotion($dailymotion_video_result, $playlist_name, $node_id);
             }
         }
+
+        // check loavl upaod file
+        $is_loacl = 0;
+
+        try {
+
+            if ($form_state['values']['field_story_facebook_video'][LANGUAGE_NONE][0]['fid'] != 0) {
+                itg_videogallery_update_node_id_for_video_fid($node_id, $form_state['values']['field_story_facebook_video'][LANGUAGE_NONE][0]['fid']);
+            }
+            if ($form_state['values']['field_story_twitter_video'][LANGUAGE_NONE][0]['fid'] != 0) {
+                itg_videogallery_update_node_id_for_video_fid($node_id, $form_state['values']['field_story_twitter_video'][LANGUAGE_NONE][0]['fid']);
+            }
+            itg_videogallery_node_publish_video_to_unpublish($node_id, $main_fids);
+            // delete deleted video info form itg_solr_video_info
+            $query = db_update('itg_solr_video_info')
+                    ->fields(array('is_delete' => 1));
+            $query->condition('fid', $main_fids, 'NOT IN');
+            $query->condition('nid', $node_id);
+            $query->condition('content_type', 'video_gallery', '=');
+            $query->execute();
+        } catch (Exception $e) {
+            watchdog_exception('video fid delete', $e);
+        }
+    }
+}
+
+/**
+ * This function use for mark node remove video unpublish
+ */
+function itg_videogallery_node_publish_video_to_unpublish($nid, $main_fids) {
+    $unp_videos = array();
+    $query = db_select('itg_solr_video_info', 'drd')
+            ->fields('drd', array('solr_video_id'));
+    $query->condition('fid', $main_fids, 'NOT IN');
+    $query->condition('nid', $nid);
+    $result = $query->execute()->fetchAll();
+    foreach ($result as $un_video) {
+        $unp_videos[] = $un_video->solr_video_id;
+    }
+    if (!empty($unp_videos)) {
+
+        try {
+            db_update('dailymotion_response_details') // Table name no longer needs {}
+                    ->fields(array(
+                        'dailymotion_published' => 0,
+                    ))
+                    ->condition('video_id', $unp_videos, 'IN')
+                    ->execute();
+        } catch (Exception $e) {
+            watchdog_exception('video fid delete', $e);
+        }
+    }
+}
+
+/**
+ * impliment hook node insert
+ */
+function itg_videogallery_node_insert($node) {
+
+    switch ($node->type) {
+        case 'videogallery':
+            $node_id = $node->nid;
+            foreach ($node->field_video_upload['und'] as $keys => $videofields) {
+                $video_details = entity_load('field_collection_item', array($videofields['value']));
+                foreach ($video_details[$videofields['value']]->field_videogallery_video_upload as $filed_val) {
+
+                    $fids = $filed_val[0]['fid'];
+                }
+                if ((int) $fids != 0) {
+
+                    $video_image = itg_videogallery_get_video_info_by_fid($fids);
+
+                    if (empty($video_image)) {
+                        $video_fid = $fids;
+                        $file_details = file_load($fids);
+
+                        $real_path = drupal_realpath($file_details->uri);
+                        if (file_exists($file_details->uri)) {
+                            if ($real_path == "") {
+                                $real_path = file_create_url($file_details->uri);
+                            }
+
+                            // use for upload local video to DM
+                            itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details, $video_fid, $tags_value, $node_id, 'is_draft');
+                        }
+                    }
+                    else {
+                        $file_video = itg_videogallery_get_video_info_by_fid($fids);
+
+                        $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
+                                ->fields(array(
+                                    'dailymotion_published' => 1,
+                                ))
+                                ->condition('video_id', $file_video[0]->solr_video_id, '=')
+                                ->execute();
+                        // update nid in video
+                        $num_updated = db_update('itg_solr_video_info') // Table name no longer needs {}
+                                ->fields(array(
+                                    'nid' => $node_id,
+                                ))
+                                ->condition('fid', $fids, '=')
+                                ->execute();
+                    }
+                }
+            }
+            if ($node->field_story_facebook_video[LANGUAGE_NONE][0]['fid'] != 0) {
+                itg_videogallery_update_node_id_for_video_fid($node_id, $node->field_story_facebook_video[LANGUAGE_NONE][0]['fid']);
+            }
+            if ($node->field_story_twitter_video[LANGUAGE_NONE][0]['fid'] != 0) {
+                itg_videogallery_update_node_id_for_video_fid($node_id, $node->field_story_twitter_video[LANGUAGE_NONE][0]['fid']);
+            }
+            break;
+    }
+}
+
+/**
+ * This function use for upadet node id in itg_solr_video_info table after by fid when node is update and insert
+ */
+function itg_videogallery_update_node_id_for_video_fid($node_id, $fids) {
+    $num_updated = db_update('itg_solr_video_info') // Table name no longer needs {}
+            ->fields(array(
+                'nid' => $node_id,
+            ))
+            ->condition('fid', $fids, '=')
+            ->execute();
+}
+
+/**
+ * Function use for upload local video to dailymotion
+ */
+function itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details, $video_fid, $tags_value, $node_id, $is_draft = null) {
+
+    $response = itg_videogallery_dailymotion($real_path, $file_details->uri, $video_fid, $tags_value, $node_id);
+    // Perform playlist and tags when new video create.
+    $response_result['video_id'] = $response['id'];
+    $response_result['fid'] = $response['fid'];
+    if (!empty($response_result['video_id'])) {
+
+        $duration = "";
+        if ($response['duration'] < 3600) {
+            $duration = gmdate("i:s", $response['duration']);
+        }
+        else {
+            $duration = gmdate("H:i:s", $response['duration']);
+        }
+        $nid = db_insert('dailymotion_response_details')
+                ->fields(array(
+                    'title' => $response['title'],
+                    'channel' => $response['channel'],
+                    'fid' => $response['fid'],
+                    'tags' => $response['tags'],
+                    'video_id' => $response['id'],
+                    'nid' => $node_id,
+                    'upload_time' => REQUEST_TIME,
+                    'video_duration' => $duration,
+                    'dailymotion_published' => 1,
+                    'video_size' => $file_details->filesize,
+                    'is_draft' => ($is_draft) ? 1 : 0,
+                    'type' => 'local',
+                    'name' => $file_details->filename,
+                ))
+                ->execute();
+        db_insert('itg_solr_video_info')
+                ->fields(array(
+                    'fid' => $response['fid'],
+                    'solr_video_id' => $response['id'],
+                    'nid' => $node_id,
+                    'property' => 'indiatoday',
+                    'content_type' => 'video_gallery',
+                    'solr_video_duration' => $duration,
+                    'solr_video_size' => $file_details->filesize,
+                    'solr_video_thumb' => "",
+                ))
+                ->execute();
+        //  itg_videogallery_unlink_video_playlist($response_result, $playlist_name, $tags_value);
+        // itg_videogallery_edit_dailymotion($response_result, $playlist_name, $node_id);
     }
 }
 
@@ -688,7 +826,7 @@ function itg_videogallery_custom_validate($form, &$form_state) {
 
     foreach ($form_state['values']['field_video_upload']['und'] as $videofields) {
         if ($videofields['field_migrated_video_url']['und'][0]['value'] != "" && $videofields != 'Add another item') {
-      
+
             $is_migrate_validate = 1;
         }
     }
@@ -697,7 +835,7 @@ function itg_videogallery_custom_validate($form, &$form_state) {
             form_set_error('field_video_upload', t("Please select video."));
         }
     }
-   
+
     if ($is_migrate_validate == 1 && !empty($fids)) {
         form_set_error('field_video_upload', t("Please Remove Migrated Video Url."));
     }
@@ -740,10 +878,8 @@ function itg_videogallery_after_build($form, &$form_state) {
     if (!isset($form['#node']->nid)) {
         // hide remove button of first field on add form 
         drupal_add_js('jQuery(document).ready(function() {
-
               jQuery("#edit-field-story-reporter-und-0-remove-button").hide();              
               jQuery("#edit-field-video-anchor-und-0-remove-button").hide();
-
             });', array('type' => 'inline', 'scope' => 'footer'));
     }
 
@@ -778,7 +914,6 @@ function itg_videogallery_form_videogallery_node_form_alter(&$form, &$form_state
             ':input[name="field_video_configurations[und][comment]"]' => array('checked' => TRUE),
         )
     );
-
 
     $form['field_story_posted_by_twitter']['#default_value'] = $user->mail;
     $form['field_story_posted_by_instagram']['#default_value'] = $user->mail;
@@ -911,13 +1046,18 @@ function itg_videogallery_menu() {
         'access arguments' => array('access content'),
         'type' => MENU_CALLBACK,
     );
+    $items['dailymotion-img'] = array(
+        'page callback' => 'itg_videogallery_thumb_url',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
     $items['dailymotion-image'] = array(
         'page callback' => 'itg_videogallery_thumb_assign',
         'access arguments' => array('access content'),
         'type' => MENU_CALLBACK,
     );
-    $items['dailymotion-img'] = array(
-        'page callback' => 'itg_videogallery_thumb_url',
+    $items['solr-video-make-fid'] = array(
+        'page callback' => 'itg_videogallery_solr_video_insert_in_for_fid',
         'access arguments' => array('access content'),
         'type' => MENU_CALLBACK,
     );
@@ -926,6 +1066,16 @@ function itg_videogallery_menu() {
         'access arguments' => array('access content'),
         'type' => MENU_CALLBACK,
     );
+//    $items['baklol'] = array(
+//        'page callback' => 'itg_videogallery_publish_node_after_video_ready_by_dm',
+//        'access arguments' => array('access content'),
+//        'type' => MENU_CALLBACK,
+//    );
+//    $items['baklol2'] = array(
+//        'page callback' => 'itg_videogallery_remove_video_with_child',
+//        'access arguments' => array('access content'),
+//        'type' => MENU_CALLBACK,
+//    );
 
     $items['daily-motion-video-dashboard'] = array(
         'title' => 'Daily Motion Video Dashboard',
@@ -954,6 +1104,126 @@ function itg_videogallery_menu() {
     return $items;
 }
 
+/**
+ * This function use for removed or replaced video from other content
+ * 
+ */
+function itg_videogallery_remove_video_with_child() {
+    $video_data = "";
+    $query = db_select('itg_solr_video_info', 'drd');
+    $query->fields('drd', array('fid', 'nid', 'solr_video_id', 'id', 'property'));
+    $query->condition('is_delete', '1', '=');
+    $video_data = $query->execute()->fetchAll();
+
+
+    foreach ($video_data as $data_delete) {
+
+        if ($data_delete->fid != "") {
+            $query = db_select('itg_solr_video_info', 'drd');
+            $query->fields('drd', array('fid'));
+            $query->condition('solr_video_id', $data_delete->solr_video_id, '=');
+            $video_data1 = $query->execute()->fetchAll();
+
+            foreach ($video_data1 as $viddata) {
+
+
+                try {
+                    $deleted = db_delete('file_managed')
+                            ->condition('fid', $viddata->fid)
+                            ->execute();
+                } catch (Exception $e) {
+                    watchdog_exception('file manage delete', $e);
+                }
+            }
+
+            $query = db_update('dailymotion_response_details');
+            $query->fields(array('dailymotion_published' => 0));
+            $query->condition('video_id', $data_delete->solr_video_id, '=');
+            $query->execute();
+
+            if ($data_delete->property == 'indiatoday') {
+
+                $node_data = itg_videogallery_get_video_solrcontent($data_delete->solr_video_id);
+                $node = node_load($node_data[0]->nid);
+
+                $node->field_video_used [LANGUAGE_NONE][0]['value'] = 0;
+                node_save($node);
+            }
+            // delete from itg_solr_video_info table
+            $deleted = db_delete('itg_solr_video_info')
+                    ->condition('solr_video_id', $data_delete->solr_video_id)
+                    ->execute();
+        }
+    }
+}
+
+/**
+ * This function use for make video bitrate url:
+ */
+function itg_videogallery_make_bitrate_url($video_url , $bitrates) {
+    $firestparet_replace = str_replace('http://medias3d.intoday.in', 'http://indiatoday-vh.akamaihd.net/i', $video_url);
+    $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $firestparet_replace);
+    p($withoutExt);
+}
+
+/**
+ * function use for insert solr video in file_manage for fid
+ * @global object $user
+ * 
+ */
+function itg_videogallery_solr_video_insert_in_for_fid() {
+    global $user;
+    $videos_data = $_POST['checkvalue'];
+    $return_fid = array();
+
+    if (!empty($videos_data)) {
+        foreach ($videos_data as $video_info) {
+            $expode_video_info = explode('#', $video_info);
+            $videourl = 'public://dailymotion_video_dir/' . time() . '/' . $expode_video_info[0] . '.mp4';
+//            $query = db_select('file_managed', 'drd');
+//            $query->fields('drd', array('fid'));
+//            $query->condition('uri', $videourl, '=');
+//            $dailymotion_video_result = $query->execute()->fetchField();
+//            if (!empty($dailymotion_video_result)) {
+//                $return_fid[] = $dailymotion_video_result;
+//            }
+//            else {
+            $fid = db_insert('file_managed')
+                    ->fields(array(
+                        'uid' => $user->uid,
+                        'filename' => $expode_video_info[2],
+                        'uri' => $videourl,
+                        'filemime' => 'video/mp4',
+                        'filesize' => $expode_video_info[1],
+                        'status' => 1,
+                        'timestamp' => REQUEST_TIME,
+                    ))
+                    ->execute();
+            $file = file_load($fid);
+            file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
+            $is_used = 0;
+            if (isset($expode_video_info[7])) {
+                $is_used = 1;
+            }
+            $fid = db_insert('itg_solr_video_info')
+                    ->fields(array(
+                        'fid' => $file->fid,
+                        'solr_video_id' => $expode_video_info[0],
+                        'solr_video_duration' => $expode_video_info[4],
+                        'solr_video_size' => $expode_video_info[1],
+                        'property' => $expode_video_info[5],
+                        'content_type' => $expode_video_info[6],
+                        'is_alredy_used' => $is_used,
+                        'solr_video_thumb' => $expode_video_info[3],
+                    ))
+                    ->execute();
+            $return_fid[] = $file->fid;
+        }
+        //}
+    }
+    exit(json_encode($return_fid));
+}
+
 /*
  * This callback use for delete video from local and daily motion
  */
@@ -962,23 +1232,16 @@ function delete_daily_motion_video_callback() {
     $fid = arg(1);
     $video_id = arg(2);
 
-    $api = itg_videogallery_dailymotion_api();
-    $success = 0;
-    try {
-        $api->delete('/video/' . $video_id);
-        $success = 1;
-    } catch (Exception $e) {
-        watchdog('daily motion video delete', t('Unable to delete video due to:' . $e->getMessage()));
-    }
-    if ($success == 1) {
-
-        $query = db_delete('dailymotion_response_details');
-        $query->condition('video_id', $video_id);
-        $query->condition('fid', $fid);
-        if ($query->execute()) {
-            drupal_set_message('Video has been deleted successfully');
-            drupal_goto('daily-motion-video-dashboard');
+    $query = db_delete('dailymotion_response_details');
+    $query->condition('video_id', $video_id);
+    $query->condition('fid', $fid);
+    if ($query->execute()) {
+        $video_info = itg_videogallery_get_video_solrcontent($video_id);
+        if (!empty($video_exist_innode[0]->nid)) {
+            node_delete($video_exist_innode[0]->nid);
         }
+        drupal_set_message('Video has been deleted successfully');
+        drupal_goto('daily-motion-video-dashboard');
     }
 }
 
@@ -1092,15 +1355,25 @@ function daily_motion_video_dashboard_rows() {
             $status_flag = '<span class="used-video">Used</span>';
             $delete_link = '';
         }
-        else {
+        else if ($record->encoding_progress == '100') {
             $status_flag = '<span class="ready-to-use-video">Ready To Use</span>';
 
 
             $delete_link = "<a href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' onClick='return confirm('Do you really want to delete this?');'> Delete </a>";
         }
-        if ($record->video_duration == '0' || $record->dailymotion_thumb_url == '') {
+        if ($record->encoding_progress != '100' && $record->publishing_progress != '100') {
 
-            $status_flag = '<span class="under-precess">Under Process</span>';
+            $status_flag = '<span class="under-precess">Publishing Processing (' . $record->publishing_progress . ')%</span>';
+            $delete_link = "<a href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' onClick='return confirm('Do you really want to delete this?');'> Delete </a>";
+        }
+        if ($record->encoding_progress != '100' && $record->publishing_progress == '100') {
+
+            $status_flag = '<span class="under-precess">Ready to Use</span>';
+            $delete_link = "<a href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' onClick='return confirm('Do you really want to delete this?');'> Delete </a>";
+        }
+        if ($record->encoding_progress == '100' && $record->publishing_progress == '100') {
+
+            $status_flag = '<span class="under-precess">Completed</span>';
             $delete_link = "<a href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' onClick='return confirm('Do you really want to delete this?');'> Delete </a>";
         }
         $rows[] = array(
@@ -1257,12 +1530,14 @@ function itg_videogallery_node_presave($node) {
     foreach ($node->field_dailymotion_playlist[LANGUAGE_NONE] as $playlist_val) {
       $playlist[$playlist_val['tid']] = $playlist_val['name'];
     }
+
+    // condition for source type field
+    if ($node->type == 'videogallery' && empty($node->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
+      $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'videogallery';
+    }
+
     $node->field_story_source_id = $playlist;
     $_SESSION['old_playlist'] = itg_videogallery_get_old_playlist($node->nid);
-  }
-  // condition for source type field
-  if ($node->type == 'videogallery' && empty($node->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
-    $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'videogallery';
   }
 }
 
@@ -1292,9 +1567,9 @@ function itg_videogallery_cronapi($op, $job = NULL) {
         'description' => 'Thumbnail image assign to node from dailymotion.',
         'callback' => 'itg_videogallery_thumb_assign',
     );
-    $items['video_duration'] = array(
-        'description' => 'Video duration assign get from dailymotion.',
-        'callback' => 'itg_videogallery_duration_time',
+    $items['draft-video-publish-after-local-video-readytouse'] = array(
+        'description' => 'Cron use for make publish node after check video status ready to play.',
+        'callback' => 'itg_videogallery_publish_node_after_video_ready_by_dm',
     );
     $items['ftp_file_save'] = array(
         'description' => 'Ftp file save in file managed table.',
@@ -1311,6 +1586,14 @@ function itg_videogallery_cronapi($op, $job = NULL) {
         'description' => 'This is the callback for uploading FTP video to Daily motion server in unpublished mode',
         'callback' => 'itg_videogallery_ftp_file_insert_cron',
     );
+    $items['save-video-bitrates'] = array(
+        'description' => 'This is use for store video birates urls',
+        'callback' => 'itg_videogallery_video_bitrate',
+    );
+    $items['content-remove-video-with-child'] = array(
+        'description' => 'This crone use for replaced video remove from other content type.',
+        'callback' => 'itg_videogallery_remove_video_with_child',
+    );
 
     return $items;
 }
@@ -1319,45 +1602,95 @@ function itg_videogallery_cronapi($op, $job = NULL) {
  * Implements cron function for get thumburl in dailymotion custom table
  */
 function itg_videogallery_thumb_url() {
+//    $result = db_select('node', 'n')
+//            ->fields('n', array('nid'))
+//            ->condition('type', 'itg_solr_video', '=')
+//            ->execute();
+//
+//    $deleted_count = 0;
+//    foreach ($result as $record) {
+//        node_delete($record->nid);
+//        $deleted_count++;
+//    }
+//    pr($deleted_count);
+//    exit();
     $query = db_select('dailymotion_response_details', 'drd');
     $query->fields('drd');
-    // $db_or = db_or();
-    // $db_or->isNull('drd.dailymotion_thumb_url');
-    //  $db_or->condition('drd.video_duration', 0, '=');
-    // $query->condition($db_or);
     $result = $query->execute()->fetchAll();
     $api = itg_videogallery_dailymotion_api();
     foreach ($result as $val) {
         try {
-            $thumb_url = $api->get(
-                    '/video/' . $val->video_id, array('fields' => array('thumbnail_720_url', 'duration'))
-            );
-            $duration = '';
-            if ($thumb_url['duration'] < 3600) {
-                $duration = gmdate("i:s", $thumb_url['duration']);
+            if ($val->encoding_progress != "100") {
+                $thumb_url = $api->get(
+                        '/video/' . $val->video_id, array('fields' => array('thumbnail_720_url', 'duration', 'encoding_progress', 'publishing_progress'))
+                );
+
+                $duration = '';
+                if ($thumb_url['duration'] < 3600) {
+                    $duration = gmdate("i:s", $thumb_url['duration']);
+                }
+                else {
+                    $duration = gmdate("H:i:s", $thumb_url['duration']);
+                }
+
+                $image_url = $thumb_url['thumbnail_720_url'];
+                db_update('dailymotion_response_details')
+                        ->fields(array(
+                            'dailymotion_thumb_url' => $image_url,
+                            'encoding_progress' => $thumb_url['encoding_progress'],
+                            'publishing_progress' => $thumb_url['publishing_progress'],
+                            'video_duration' => $duration
+                        ))
+                        ->condition('fid', $val->fid, '=')
+                        ->condition('eid', $val->eid, '=')
+                        ->execute();
             }
-            else {
-                $duration = gmdate("H:i:s", $thumb_url['duration']);
-            }
-            $image_url = $thumb_url['thumbnail_720_url'];
-            db_update('dailymotion_response_details')
-                    ->fields(array(
-                        'dailymotion_thumb_url' => $image_url,
-                        'video_duration' => $duration
-                    ))
-                    ->condition('fid', $val->fid, '=')
-                    ->condition('eid', $val->eid, '=')
-                    ->execute();
         } catch (Exception $e) {
-            db_update('dailymotion_response_details')
-                    ->fields(array(
-                        'dailymotion_thumb_url' => 'deleted_video_dailymotion',
-                    ))
-                    ->condition('fid', $val->fid, '=')
-                    ->condition('eid', $val->eid, '=')
-                    ->execute();
+            
         }
     }
+    $query = db_select('dailymotion_response_details', 'drd');
+    $query->fields('drd');
+    $query->condition('publishing_progress', '100', '=');
+    $result_new = $query->execute()->fetchAll();
+    $api = itg_videogallery_dailymotion_api();
+    foreach ($result_new as $val) {
+        global $user;
+        $node = new stdClass();
+        $node->title = $val->name;
+        $node->type = "itg_solr_video";
+        node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
+        $node->language = LANGUAGE_NONE;
+        $node->field_video_id[LANGUAGE_NONE][0]['value'] = $val->video_id;
+        $node->field_property [LANGUAGE_NONE][0]['value'] = 'indiatoday';
+        $node->field_video_duration [LANGUAGE_NONE][0]['value'] = $val->video_duration;
+        $node->field_video_used [LANGUAGE_NONE][0]['value'] = $val->dailymotion_published;
+        $node->field_video_thumb_url[LANGUAGE_NONE][0]['value'] = $val->dailymotion_thumb_url;
+        $node->field_video_size[LANGUAGE_NONE][0]['value'] = $val->video_size;
+        $node->uid = $user->uid;
+        $node->field_video_time[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', $val->upload_time);
+        $node->status = 1; //(1 or 0): Published or not
+        $node->promote = 0; //(1 or 0): Promoted to front page
+        $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
+        $video_exist_innode = itg_videogallery_get_video_solrcontent($val->video_id);
+        if (!empty($video_exist_innode)) {
+            $node->nid = $video_exist_innode[0]->nid;
+        }
+        node_save($node);
+    }
+}
+
+/**
+ * This function check video id insert in solr video content
+ */
+function itg_videogallery_get_video_solrcontent($video_id = null) {
+
+    $query = db_select('node', 'n');
+    $query->fields('n', array('nid'));
+    $query->Join('field_data_field_video_id', 'fvd', 'n.nid = fvd.entity_id');
+    $query->condition('fvd.field_video_id_value', $video_id, '=');
+    $result = $query->execute()->fetchAll();
+    return $result;
 }
 
 /**
@@ -1372,36 +1705,51 @@ function itg_videogallery_remove_video() {
 }
 
 /**
- * Implement function for add videoduration from dailymotion.
+ * Implement function make  node publish after check video status ready to play.
  */
-function itg_videogallery_duration_time() {
-    $query = db_select('node', 'n');
-    $query->fields('n', array('nid'));
-    $query->leftJoin('field_data_field_video_duration', 'fvd', 'n.nid = fvd.entity_id');
-    $query->fields('fvd', array('entity_id'));
-    $query->condition(db_or()->isNull('fvd.field_video_duration_value'));
-    $query->condition('n.type', 'videogallery', '=');
+function itg_videogallery_publish_node_after_video_ready_by_dm() {
+
+    $node_video_id = array();
+    $query = db_select('dailymotion_response_details', 'drd');
+    $query->fields('drd', array('nid'));
+    $query->addExpression('GROUP_CONCAT(video_id)', 'video_ids');
+    $query->condition('drd.is_draft', '1', '=');
+    $query->condition('drd.nid', 'null', '!=');
+    $query->groupBy('nid');
     $result = $query->execute()->fetchAll();
-    if (isset($result) && !empty($result)) {
-        $api = itg_videogallery_dailymotion_api();
-        foreach ($result as $value) {
-            $node = node_load($value->nid);
-            $video_fid = $node->field_upload_video[LANGUAGE_NONE][0]['fid'];
-            $video_id = itg_videogallery_get_videoid($video_fid);
-            if (!empty($video_id)) {
-                $dur = $api->get(
-                        '/video/' . $video_id, array('fields' => array('duration'))
-                );
-                $duration = '';
-                if ($dur['duration'] < 3600) {
-                    $duration = gmdate("i:s", $dur['duration']);
+
+    foreach ($result as $key => $video_id) {
+        $node_flag = 0;
+        $all_vid = explode(',', $video_id->video_ids);
+
+        foreach ($all_vid as $keyof => $dmvid_id) {
+            $api = itg_videogallery_dailymotion_api();
+
+            try {
+                if ($dmvid_id) {
+                    $dm_data = $api->get(
+                            '/video/' . $dmvid_id, array('fields' => array('thumbnail_720_url', 'duration', 'encoding_progress', 'publishing_progress'))
+                    );
+                    if ($dm_data['encoding_progress'] == 100) {
+
+                        $query = db_update('dailymotion_response_details');
+                        $query->fields(array('is_draft' => 0));
+                        $query->condition('video_id', $dmvid_id, '=');
+                        $query->execute();
+                    }
+                    else {
+                        $node_flag = 1;
+                    }
                 }
-                else {
-                    $duration = gmdate("H:i:s", $dur['duration']);
-                }
-                $node->field_video_duration[LANGUAGE_NONE][0]['value'] = $duration;
-                field_attach_update('node', $node);
+            } catch (Exception $e) {
+                
             }
+        }
+        $node_ids = $video_id->nid;
+        if ($node_flag == 0) {
+            $node = node_load($node_ids);
+            $node->workbench_moderation_state_new = 'published';
+            node_save($node);
         }
     }
 }
@@ -1598,25 +1946,29 @@ function get_video_filed_collection_by_its_id($entity_fid) {
  * This is temp function use for test dailymotion video resploce no we will 
  */
 function itg_videogallery_video_bitrate() {
+    $api = itg_videogallery_dailymotion_api();
+    $query = db_select('itg_solr_video_info', 'drd');
+    $query->fields('drd', array('solr_video_id'));
+    //$query->condition('is_delete', '1', '!=');
+    $result = $query->execute()->fetchall();
 
-    $query = db_select('field_data_field_videogallery_video_upload', 'up_video');
-    $query->fields('up_video', array('entity_id'));
-    $query->join('dailymotion_response_details', 'drd', 'drd.fid = up_video.field_videogallery_video_upload_fid');
-    $query->fields('drd', array('fid', 'video_id', 'dailymotion_thumb_url'));
-    $query->fields('up_video', array('entity_id'));
-    $result = $query->execute()->fetchAll();
-    if (isset($result) && !empty($result)) {
-        $api = itg_videogallery_dailymotion_api();
-        foreach ($result as $val) {
-            $query = db_select('field_data_field_video_upload', 'fvd');
-            $query->fields('fvd', array('entity_id'));
-            $query->condition('field_video_upload_value', $val->entity_id);
-            $result_video = $query->execute()->fetchAll();
-            $thumb_url = $api->get(
-                    '/video/' . $val->video_id, array('fields' => array('available_formats', 'live_video_bitrate', 'url'))
-            );
-            p($thumb_url);
-        }
+    foreach ($result as $vid) {
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "http://www.dailymotion.com/json/video/" . $vid->solr_video_id . "?fields=stream_h264_hd1080_url,stream_h264_hd_url,stream_h264_hq_url,stream_h264_ld_url,stream_h264_url");
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9');
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $content = curl_exec($ch);
+        curl_close($ch);
+
+        db_merge('itg_video_bitrates_data')
+                ->key(array('video_id' => $vid->solr_video_id))
+                ->fields(array(
+                    'video_id' => $vid->solr_video_id,
+                    'responce' => $content
+                ))
+                ->execute();
     }
 }
 
@@ -1627,10 +1979,12 @@ function itg_videogallery_video_bitrate() {
 function get_video_in_fieldcollection_by_nid($nid) {
     $query = db_select('field_data_field_video_upload', 'up_video');
     $query->join('field_data_field_videogallery_video_upload', 'fvu', 'up_video.field_video_upload_value = fvu.entity_id');
-    $query->join('dailymotion_response_details', 'drd', 'drd.fid = fvu.field_videogallery_video_upload_fid');
+    $query->leftJoin('dailymotion_response_details', 'drd', 'drd.fid = fvu.field_videogallery_video_upload_fid');
+    $query->Join('itg_solr_video_info', 'isvi', 'isvi.fid = fvu.field_videogallery_video_upload_fid');
     $query->leftJoin('field_data_field_include_ads', 'ads_inc', 'ads_inc.entity_id = fvu.entity_id');
     $query->leftJoin('field_data_field_videogallery_description', 'desc_inc', 'desc_inc.entity_id = fvu.entity_id');
     $query->fields('drd', array('fid', 'video_id', 'dailymotion_thumb_url'));
+    $query->fields('isvi', array('fid', 'solr_video_id', 'solr_video_thumb'));
     $query->fields('up_video', array('entity_id'));
     $query->fields('ads_inc', array('field_include_ads_value'));
     $query->fields('desc_inc', array('field_videogallery_description_value'));
@@ -1668,6 +2022,18 @@ function get_video_in_fieldcollection_by_nid_mirtaed($nid) {
 function itg_videogallery_get_videoid($fid) {
     $query = db_select('dailymotion_response_details', 'drd');
     $query->fields('drd', array('video_id'));
+    $query->condition('fid', $fid, '=');
+    $result = $query->execute()->fetchField();
+    return $result;
+}
+
+/**
+ * Implements function for get videoid by file id
+ * @param int $fid
+ */
+function itg_videogallery_get_videoid_new($fid) {
+    $query = db_select('itg_solr_video_info', 'drd');
+    $query->fields('drd', array('solr_video_id'));
     $query->condition('fid', $fid, '=');
     $result = $query->execute()->fetchField();
     return $result;
@@ -2163,9 +2529,7 @@ function itg_videogallery_get_term($nid) {
     $query->condition('iwo.entity_id', $nid)
             ->fields('iwo', array('field_story_category_tid'));
     $result = $query->execute();
-
     foreach ($result as $key => $value) {
-
         $return[] = $value->field_story_category_tid;
     }
     return $return;
@@ -2347,11 +2711,9 @@ function videogallery_new_fileupload_form($form, &$form_state) {
  */
 function file_validate_name(stdClass $file) {
     $errors = array();
-
     //generate file name 
     $new_filename = time() . $file->filename;
     $new_filename = preg_replace('/\s+/', '_', $new_filename);
-
     $file->filename = $new_filename;
 
     //changing file location 
@@ -2441,8 +2803,6 @@ function itg_videogallery_ftp_file_insert_cron() {
                 $file_details = file_load($fid);
                 $real_path = drupal_realpath($file_details->uri);
                 $response = itg_videogallery_dailymotion_add_video($real_path, $file_array[1], $realfilename, $fid);
-
-
                 // Perform playlist and tags when new video create.
 
                 if (!empty($response)) {
@@ -2458,6 +2818,9 @@ function itg_videogallery_ftp_file_insert_cron() {
                                     'tags' => ' ',
                                     'video_id' => $response['id'],
                                     'nid' => 0,
+                                    'video_size' => $file_size,
+                                    'encoding_progress' => $response['encoding_progress'],
+                                    'publishing_progress' => $response['publishing_progress'],
                                     'upload_time' => REQUEST_TIME,
                                     'video_duration' => $response['duration'],
                                     'dailymotion_published' => 0,
@@ -2465,6 +2828,8 @@ function itg_videogallery_ftp_file_insert_cron() {
                                     'name' => $file_array[1],
                                 ))
                                 ->execute();
+                        $title = $_POST['title'];
+                        // data insert into node
                     } catch (Exception $e) {
                         die($e->getMessage());
                     }
@@ -2498,9 +2863,12 @@ function itg_videogallery_dailymotion_add_video($real_path, $name, $realfilename
                 )
         );
         $dur = $api->get(
-                '/video/' . $result['id'], array('fields' => array('duration'))
+                '/video/' . $result['id'], array('fields' => array('duration', 'encoding_progress', 'publishing_progress'))
         );
+        $resp = $api->post('/playlist/x4u3b1/videos/' . $result['id']);
         $result['duration'] = $dur['duration'];
+        $result['encoding_progress'] = $dur['encoding_progress'];
+        $result['publishing_progress'] = $dur['publishing_progress'];
 
         $a = new Dailymotion();
         $a->logout();
@@ -2591,4 +2959,32 @@ function check_file_already_exist_or_not($filename) {
         $res = $file_info['filename'] . $value . '.' . $extension;
         return $res;
     }
+}
+
+/**
+ * Function use for get video info by fid
+ */
+function itg_videogallery_get_video_info_by_fid($fid) {
+    $video_data = "";
+    $query = db_select('itg_solr_video_info', 'drd');
+    $query->fields('drd');
+    $query->condition('fid', $fid, '=');
+    $video_data = $query->execute()->fetchAll();
+    return $video_data;
+}
+
+/**
+ * Function use for get all used video 
+ */
+function itg_videogallery_get_all_publish_video_of_video_content() {
+    $video_data = "";
+    $all_video_id = array();
+    $query = db_select('itg_solr_video_info', 'drd');
+    $query->fields('drd', array('solr_video_id'));
+    $query->isNotNull('nid')->condition('content_type', 'video_gallery', '=');
+    $video_data = $query->execute()->fetchAll();
+    foreach ($video_data as $vid_data) {
+        $all_video_id[] = $vid_data->solr_video_id;
+    }
+    return $all_video_id;
 }
