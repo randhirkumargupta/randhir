@@ -114,7 +114,7 @@ function features_supplement_magazine_field_group_info() {
   $field_groups['group_issue_seo_metatags|node|issue|form'] = $field_group;
 
   $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_issue_supp_img|node|issue|form';
   $field_group->group_name = 'group_issue_supp_img';
@@ -294,9 +294,9 @@ function features_supplement_magazine_field_group_info() {
     'label' => 'Basic Settings',
     'weight' => '0',
     'children' => array(
-      0 => 'field_supp_publish',
-      1 => 'field_supp_select_magazine',
-      2 => 'field_supp_issue',
+      0 => 'field_supp_issue',
+      1 => 'field_supp_publish',
+      2 => 'field_supp_select_magazine',
       3 => 'title',
     ),
     'format_type' => 'div',
@@ -328,7 +328,7 @@ function features_supplement_magazine_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Import XML',
-    'weight' => '1',
+    'weight' => '2',
     'children' => array(
       0 => 'field_supp_import_xml',
     ),
@@ -361,7 +361,7 @@ function features_supplement_magazine_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'SEO Meta Tags',
-    'weight' => '2',
+    'weight' => '3',
     'children' => array(
       0 => 'metatags',
       1 => 'path',
@@ -383,6 +383,40 @@ function features_supplement_magazine_field_group_info() {
     ),
   );
   $field_groups['group_supp_seo_metatags|node|supplement|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_supplement_images|node|supplement|form';
+  $field_group->group_name = 'group_supplement_images';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'supplement';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Supplement Cover Images',
+    'weight' => '1',
+    'children' => array(
+      0 => 'field_issue_supp_large_image',
+      1 => 'field_issue_supp_small_image',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Supplement Cover Images',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => '',
+        'classes' => ' itg-group-field',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_supplement_images|node|supplement|form'] = $field_group;
 
   // Translatables
   // Included for use with string extractors like potx.

@@ -46,9 +46,6 @@
   <div class="field"><div class="field-label"><strong>Issue Cover Images:</strong> </div><div class="field-items"></div></div>
   <div class="field"><div class="field-label">Large Cover Image: </div><div class="field-items"><img src="<?php print image_style_url("thumbnail", $node->field_issue_large_cover_image[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
   <div class="field"><div class="field-label">Small Cover Image: </div><div class="field-items"><img src="<?php print image_style_url("thumbnail", $node->field_issue_small_cover_image[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
-  <div class="field"><div class="field-label"><strong>Supplement Cover Images:</strong> </div><div class="field-items"></div></div>
-  <div class="field"><div class="field-label">Large Cover Image: </div><div class="field-items"><img src="<?php print image_style_url("thumbnail", $node->field_issue_supp_large_image[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
-  <div class="field"><div class="field-label">Small Cover Image: </div><div class="field-items"><img src="<?php print image_style_url("thumbnail", $node->field_issue_supp_small_image[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
   <div class="field"><div class="field-label">Status: </div><div class="field-items"><?php print $status ? 'Published' : 'Unpublished';?></div></div>
   <div class="field">
     <div class="field-label"><strong>Attached XML Files:</strong></div>
