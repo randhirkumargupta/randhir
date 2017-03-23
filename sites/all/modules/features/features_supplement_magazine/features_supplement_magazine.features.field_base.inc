@@ -176,7 +176,7 @@ function features_supplement_magazine_field_default_field_bases() {
   // Exported field_base: 'field_issue_supplement'.
   $field_bases['field_issue_supplement'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => 12,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_issue_supplement',
