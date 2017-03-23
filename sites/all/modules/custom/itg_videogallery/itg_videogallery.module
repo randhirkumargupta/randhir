@@ -1158,6 +1158,15 @@ function itg_videogallery_remove_video_with_child() {
 }
 
 /**
+ * This function use for make video bitrate url:
+ */
+function itg_videogallery_make_bitrate_url($video_url , $bitrates) {
+    $firestparet_replace = str_replace('http://medias3d.intoday.in', 'http://indiatoday-vh.akamaihd.net/i', $video_url);
+    $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $firestparet_replace);
+    p($withoutExt);
+}
+
+/**
  * function use for insert solr video in file_manage for fid
  * @global object $user
  * 
@@ -1517,15 +1526,19 @@ function itg_videogallery_get_old_playlist($nid) {
  * {@inheritdoc}
  */
 function itg_videogallery_node_presave($node) {
-    if ($node->type == 'videogallery' && !empty($node->field_dailymotion_playlist[LANGUAGE_NONE])) {
-        foreach ($node->field_dailymotion_playlist[LANGUAGE_NONE] as $playlist_val) {
-            $playlist[$playlist_val['tid']] = $playlist_val['name'];
-        }
-
-
-        $node->field_story_source_id = $playlist;
-        $_SESSION['old_playlist'] = itg_videogallery_get_old_playlist($node->nid);
+  if ($node->type == 'videogallery' && !empty($node->field_dailymotion_playlist[LANGUAGE_NONE])) {
+    foreach ($node->field_dailymotion_playlist[LANGUAGE_NONE] as $playlist_val) {
+      $playlist[$playlist_val['tid']] = $playlist_val['name'];
     }
+
+    // condition for source type field
+    if ($node->type == 'videogallery' && empty($node->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
+      $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'videogallery';
+    }
+
+    $node->field_story_source_id = $playlist;
+    $_SESSION['old_playlist'] = itg_videogallery_get_old_playlist($node->nid);
+  }
 }
 
 /**
@@ -1948,7 +1961,7 @@ function itg_videogallery_video_bitrate() {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $content = curl_exec($ch);
         curl_close($ch);
-       
+
         db_merge('itg_video_bitrates_data')
                 ->key(array('video_id' => $vid->solr_video_id))
                 ->fields(array(
