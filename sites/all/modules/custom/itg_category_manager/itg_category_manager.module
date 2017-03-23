@@ -186,7 +186,7 @@ function itg_category_manager_form($form, &$form_state) {
  * @return boolean
  */
 function itg_category_manager_term_state($tid) {
-  $itg_query = db_select('itg_category_manager', 'itg')
+  /*$itg_query = db_select('itg_category_manager', 'itg')
       ->fields('itg', array('status'))
       ->condition('tid', $tid, '=');
   $itg_result = $itg_query->execute()->fetchField();
@@ -194,8 +194,9 @@ function itg_category_manager_term_state($tid) {
   $flag = FALSE;
   if (isset($itg_result) && $itg_result == 1) {
     $flag = TRUE;
-  }
-
+  }*/
+  $flag = TRUE;
+  
   return $flag;
 }
 
