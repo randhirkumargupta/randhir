@@ -101,26 +101,10 @@ if ($theme != 'itgadmin') {
         </div>
     </div>
     <?php endif; ?>
-    <div class="row">
-        <div class="col-md-8 col-sm-12 col-xs-12 left-side">
-
-    <?php if (isset($widget_data['itg-block-1']['widget_name']) || isset($widget_data['itg-block-2']['widget_name']) || isset($widget_data['itg-block-3']['widget_name']) || $theme == 'itgadmin') { ?>
-    <div>
-      <!--
-        <div class="itg-h747-section">
-            <div class="itg-widget">
-              <div class="droppable <?php //print $gray_bg_layout; ?>">
-               <div class="widget-wrapper <?php //print $widget_data['itg-block-1']['widget_name'].$widget_data['itg-block-1']['widget_display_name']; ?>">
-                    <div class="data-holder" id="itg-block-1"><?php //print $widget_data['itg-block-1']['widget']; ?></div>
-                  </div>
-                </div>
-            </div>
-        </div>
-       -->
-
-
-
-       <!-- sponsor for static -->
+   <div class="row">
+   	  <div class="col-md-12 col-sm-12 col-xs-12">
+   	  	
+   	  	<!-- sponsor for static -->
        <div class="sponsorContainer">
       <span class="leftFirstLogo"><a href="http://indiatoday.intoday.in/bestcolleges/2016/" target="_blank" title="India Today Best Colleges 2016"><img src="http://media2.intoday.in/aajtak/resources/images/sopnsor1.jpg" alt=""></a></span>
         <div class="mobileCenterSec">
@@ -161,6 +145,29 @@ if ($theme != 'itgadmin') {
     </div>
 
       <!-- end sponsor for static -->
+   	  </div>
+
+   </div>
+
+
+
+    <div class="row">
+        <div class="col-md-8 col-sm-12 col-xs-12 left-side">
+
+    <?php if (isset($widget_data['itg-block-1']['widget_name']) || isset($widget_data['itg-block-2']['widget_name']) || isset($widget_data['itg-block-3']['widget_name']) || $theme == 'itgadmin') { ?>
+    <div>
+      <!--
+        <div class="itg-h747-section">
+            <div class="itg-widget">
+              <div class="droppable <?php //print $gray_bg_layout; ?>">
+               <div class="widget-wrapper <?php //print $widget_data['itg-block-1']['widget_name'].$widget_data['itg-block-1']['widget_display_name']; ?>">
+                    <div class="data-holder" id="itg-block-1"><?php //print $widget_data['itg-block-1']['widget']; ?></div>
+                  </div>
+                </div>
+            </div>
+        </div>
+       -->
+   
 
        <?php
                 if (array_filter(views_get_view_result('best_college_image_slider', 'block'))) {
