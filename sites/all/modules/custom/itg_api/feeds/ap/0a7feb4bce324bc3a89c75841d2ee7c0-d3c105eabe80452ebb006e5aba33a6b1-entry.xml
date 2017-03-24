@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:apcm="http://ap.org/schemas/03/2005/apcm" xmlns:apnm="http://ap.org/schemas/03/2005/apnm" xmlns:o="http://w3.org/ns/odrl/2/">
+   <id>urn:publicid:ap.org:d3c105eabe80452ebb006e5aba33a6b1</id>
+   <title>BBN--NL Leaders</title>
+   <updated>2014-05-09T06:10:45.313Z</updated>
+   <published>2014-05-09T06:10:27Z</published>
+   <author>
+      <name>AP</name>
+   </author>
+   <rights>Copyright 2014 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed.</rights>
+   <content type="text/xml">
+      <nitf version="-//IPTC//DTD NITF 3.4//EN" change.date="October 18, 2006" change.time="19:30">
+         <head>
+            <docdata>
+               <doc-id regsrc="AP"/>
+               <date.issue norm="20140509T061027Z"/>
+               <doc.rights owner="http://www.ap.org" agent="http://license.icopyright.net" type="none"/>
+               <doc.copyright holder="AP" year="2014"/>
+            </docdata>
+         </head>
+         <body>
+            <body.head>
+               <hedline>
+                  <hl1 id="headline">TODAY'S MAJOR LEAGUE LEADERS</hl1>
+                  <hl2 id="originalHeadline">TODAY'S MAJOR LEAGUE LEADERS</hl2>
+               </hedline>
+               <byline>The Associated Press</byline>
+               <distributor>The Associated Press</distributor>
+            </body.head>
+            <body.content>
+               <block id="Main">
+                  <table>
+                     <tr>
+                        <th>NATIONAL LEAGUE</th>
+                     </tr>
+                  </table>
+                  <p>BATTING_Tulowitzki, Colorado, .407; Blackmon, Colorado, .348; Goldschmidt, Arizona, .344; DGordon, Los Angeles, .338; Morneau, Colorado, .331; Utley, Philadelphia, .325; LaRoche, Washington, .324.</p>
+                  <p>RUNS_Tulowitzki, Colorado, 34; Blackmon, Colorado, 30; MCarpenter, St. Louis, 27; Goldschmidt, Arizona, 27; Stanton, Miami, 26; Pence, San Francisco, 25; CGonzalez, Colorado, 24.</p>
+                  <p>RBI_Stanton, Miami, 40; Tulowitzki, Colorado, 31; Arenado, Colorado, 26; AdGonzalez, Los Angeles, 26; Morneau, Colorado, 26; Blackmon, Colorado, 25; CGonzalez, Colorado, 25.</p>
+                  <p>HITS_Goldschmidt, Arizona, 52; Arenado, Colorado, 47; Blackmon, Colorado, 46; Tulowitzki, Colorado, 46; DGordon, Los Angeles, 45; Morneau, Colorado, 43; MaAdams, St. Louis, 42; AMcCutchen, Pittsburgh, 42.</p>
+                  <p>DOUBLES_Goldschmidt, Arizona, 13; HRamirez, Los Angeles, 13; Arenado, Colorado, 12; Utley, Philadelphia, 12; MaAdams, St. Louis, 11; Byrd, Philadelphia, 11; Lucroy, Milwaukee, 11; Tulowitzki, Colorado, 11.</p>
+                  <p>TRIPLES_DGordon, Los Angeles, 3; Hechavarria, Miami, 3; Rendon, Washington, 3; Simmons, Atlanta, 3; Yelich, Miami, 3; 16 tied at 2.</p>
+                  <p>HOME RUNS_Stanton, Miami, 11; Belt, San Francisco, 9; AdGonzalez, Los Angeles, 9; Tulowitzki, Colorado, 9; JUpton, Atlanta, 9; PAlvarez, Pittsburgh, 8; CGomez, Milwaukee, 8; Morse, San Francisco, 8.</p>
+                  <p>STOLEN BASES_DGordon, Los Angeles, 21; EYoung, New York, 12; Bonifacio, Chicago, 11; BHamilton, Cincinnati, 11; SMarte, Pittsburgh, 11; Revere, Philadelphia, 11; Blackmon, Colorado, 8.</p>
+                  <p>PITCHING_Wainwright, St. Louis, 6-2; Machi, San Francisco, 5-0; Greinke, Los Angeles, 5-1; 12 tied at 4.</p>
+                  <p>ERA_Cueto, Cincinnati, 1.31; Samardzija, Chicago, 1.62; Fernandez, Miami, 1.74; Teheran, Atlanta, 1.80; Niese, New York, 1.82; Hudson, San Francisco, 1.99; Simon, Cincinnati, 1.99; Koehler, Miami, 1.99.</p>
+                  <p>STRIKEOUTS_Fernandez, Miami, 65; Strasburg, Washington, 64; Cueto, Cincinnati, 60; Kennedy, San Diego, 56; Wainwright, St. Louis, 52; ClLee, Philadelphia, 51; Wacha, St. Louis, 50.</p>
+                  <p>SAVES_FRodriguez, Milwaukee, 14; Jansen, Los Angeles, 11; Romo, San Francisco, 11; AReed, Arizona, 10; Street, San Diego, 10; Hawkins, Colorado, 9; Papelbon, Philadelphia, 9; Rosenthal, St. Louis, 9; Kimbrel, Atlanta, 9.</p>
+               </block>
+            </body.content>
+            <body.end/>
+         </body>
+      </nitf>
+   </content>
+   <link rel="enclosure" title="AP Article" href="http://syndication.ap.org/AP.Distro.ContentBroker2/ContentBroker.aspx?media=text&amp;recordid=d3c105eabe80452ebb006e5aba33a6b1&amp;filingId=505983269a314739b5bcb92787007b23&amp;showInlineLinks=False&amp;broadcastAnpa=False&amp;onlineAnpa=True&amp;fmt=13&amp;authToken=eNoFwlsKAyEMBdAVKTfG6PxkMcaGVuhjQMr0I4sv54T%2ftLGw1N6kCADpB8VceuNJEB%2fJ%2fECqUjyZAam5DBvMoxnFd6vtvd73R5yXXv6cn5cXUI11KiETZQIy9z8V8B5h" length="2253" type="application/octet-stream">
+      <apcm:Characteristics IngestLink="True" ContentId="urn:publicid:ap.org:6985ecae774a4d16814e67f1b35f28a0" FileExtension="anpa" Format="ANPA1312" MediaType="Binary" MimeType="application/octet-stream" Role="Main" SizeInBytes="2253" Words="301"/>
+   </link>
+   <link rel="enclosure" title="AP Article" href="http://syndication.ap.org/AP.Distro.ContentBroker2/ContentBroker.aspx?media=text&amp;recordid=d3c105eabe80452ebb006e5aba33a6b1&amp;showInlineLinks=False&amp;fmt=14&amp;authToken=eNoFwlsKAyEMBdAVKTfG6PxkMcaGVuhjQMr0I4sv54T%2ftLGw1N6kCADpB8VceuNJEB%2fJ%2fECqUjyZAam5DBvMoxnFd6vtvd73R5yXXv6cn5cXUI11KiETZQIy9z8V8B5h" length="2253" type="application/octet-stream">
+      <apcm:Characteristics IngestLink="True" ContentId="urn:publicid:ap.org:6985ecae774a4d16814e67f1b35f28a0" FileExtension="iptc" Format="IPTC7901" MediaType="Binary" MimeType="application/octet-stream" Role="Main" SizeInBytes="2253" Words="301"/>
+   </link>
+   <link rel="enclosure" title="AP Article" href="http://syndication.ap.org/AP.Distro.ContentBroker2/ContentBroker.aspx?media=text&amp;recordid=d3c105eabe80452ebb006e5aba33a6b1&amp;showHNewsLinks=True&amp;fmt=15&amp;authToken=eNoFwlsKAyEMBdAVKTfG6PxkMcaGVuhjQMr0I4sv54T%2ftLGw1N6kCADpB8VceuNJEB%2fJ%2fECqUjyZAam5DBvMoxnFd6vtvd73R5yXXv6cn5cXUI11KiETZQIy9z8V8B5h" length="2308" type="text/html">
+      <apcm:Characteristics IngestLink="True" ContentId="urn:publicid:ap.org:6985ecae774a4d16814e67f1b35f28a0" FileExtension="html" Format="hNews" MediaType="Text" MimeType="text/html" Role="Main" SizeInBytes="2308" Words="301"/>
+   </link>
+   <apcm:ContentMetadata>
+      <apcm:Priority Numeric="4" Legacy="r"/>
+      <apcm:ConsumerReady>TRUE</apcm:ConsumerReady>
+      <apcm:ByLine>By The Associated Press</apcm:ByLine>
+      <apcm:HeadLine>TODAY'S MAJOR LEAGUE LEADERS</apcm:HeadLine>
+      <apcm:OriginalHeadLine>TODAY'S MAJOR LEAGUE LEADERS</apcm:OriginalHeadLine>
+      <apcm:Keywords>NL Leaders</apcm:Keywords>
+      <apcm:OverLine>NATIONAL LEAGUE</apcm:OverLine>
+      <apcm:Cycle>BC</apcm:Cycle>
+      <apcm:Selector>asian</apcm:Selector>
+      <apcm:LegacyTypeSetFormat>ax</apcm:LegacyTypeSetFormat>
+      <apcm:TransmissionReference>W2805</apcm:TransmissionReference>
+      <apcm:SlugLine>BC-BBN--NL Leaders</apcm:SlugLine>
+      <apcm:MediaType>Text</apcm:MediaType>
+      <apcm:EntityClassification Authority="AP Geography" Value="Colorado" Id="902a5eb082af1004828adf092526b43e"/>
+      <apcm:EntityClassification Authority="AP Geography" Value="Los Angeles" Id="8345b5f082af10048280df092526b43e"/>
+      <apcm:EntityClassification Authority="AP Geography" Value="San Francisco" Id="8531ce8082af10048285df092526b43e"/>
+      <apcm:EntityClassification Authority="AP Geography" Value="California" Id="789fdd8882af10048263df092526b43e"/>
+      <apcm:EntityClassification Authority="AP Geography" Value="San Diego" Id="06ddc2e0834110048585df092526b43e"/>
+      <apcm:EntityClassification Authority="AP Geography" Value="Philadelphia" Id="134f051882c710048891df092526b43e"/>
+      <apcm:EntityClassification Authority="AP Geography" Value="Pittsburgh" Id="1609d3a082c710048896df092526b43e"/>
+      <apcm:EntityClassification Authority="AP Geography" Value="Arizona" Id="e427079081d610048a4edf092526b43e"/>
+      <apcm:EntityClassification Authority="AP Geography" Value="Wisconsin" Id="1bc1bc3082c81004896cdf092526b43e"/>
+      <apcm:EntityClassification Authority="AP Geography" Value="United States" Id="661e48387d5b10048291c076b8e3055c"/>
+      <apcm:EntityClassification Authority="AP Geography" Value="North America" Id="661850e07d5b100481f7c076b8e3055c"/>
+      <apcm:EntityClassification Authority="AP Geography" Value="Pennsylvania" Id="0b394d7082c71004887fdf092526b43e"/>
+      <apcm:EntityClassification Authority="AP Organization" Value="National League" Id="3749d409f0e346bfa48dcc90d5eabeae"/>
+      <apcm:EntityClassification Authority="AP Region" Id="ENGL"/>
+      <apcm:EntityClassification Authority="AP Region" Id="EURO"/>
+      <apcm:EntityClassification Authority="AP Region" Id="BRIT"/>
+      <apcm:EntityClassification Authority="AP Region" Id="SCAN"/>
+      <apcm:EntityClassification Authority="AP Region" Id="MEST"/>
+      <apcm:EntityClassification Authority="AP Region" Id="AFRI"/>
+      <apcm:EntityClassification Authority="AP Region" Id="INDI"/>
+      <apcm:EntityClassification Authority="AP Region" Id="ASIA"/>
+      <apcm:SubjectClassification Authority="AP Category Code" Value="s" Id="s"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="Sports" Id="54df6c687df7100483dedf092526b43e"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="Professional baseball" Id="20dd2c287e4e100488e5d0913b2d075c"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="Baseball" Id="20d82ae87e4e100488a0d0913b2d075c"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="Men's sports" Id="039d42210158410db74f393deea38897"/>
+      <apcm:Source>AP</apcm:Source>
+      <apcm:Property Name="EntitlementMatch" Id="urn:publicid:ap.org:product:1" Value="All Media"/>
+      <apcm:Property Name="EntitlementMatch" Id="urn:publicid:ap.org:product:3" Value="All Stories"/>
+      <apcm:Property Name="EntitlementMatch" Id="urn:publicid:ap.org:product:33320" Value="AP World English - Asia (filingsource = asian)"/>
+      <apcm:Property Name="EntitlementMatch" Id="urn:publicid:ap.org:product:39754" Value="Global Sports Report - Asia"/>
+      <apcm:Property Name="EntitlementMatch" Id="urn:publicid:ap.org:product:31244" Value="Asian Wire"/>
+      <apcm:Property Name="SequenceNumber" Value="InSequence" Id="286910368"/>
+      <apcm:FirstCreated>2014-05-09T06:10:27Z</apcm:FirstCreated>
+   </apcm:ContentMetadata>
+   <apnm:NewsManagement>
+      <apnm:ManagementId>urn:publicid:ap.org:0a7feb4bce324bc3a89c75841d2ee7c0</apnm:ManagementId>
+      <apnm:ManagementSequenceNumber>0</apnm:ManagementSequenceNumber>
+      <apnm:PublishingStatus>Usable</apnm:PublishingStatus>
+   </apnm:NewsManagement>
+</entry>
