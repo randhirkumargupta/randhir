@@ -1436,13 +1436,14 @@ function itg_videogallery_permission() {
  */
 function itg_videogallery_get_file_details() {
     $getids = $_POST['checkvalue'];
-    $query = db_select('dailymotion_response_details', 'drd')
-            ->fields('drd')
-            ->condition('fid', $getids, 'IN');
-    $result = $query->execute()->fetchAll();
+//    $query = db_select('dailymotion_response_details', 'drd')
+//            ->fields('drd')
+//            ->condition('fid', $getids, 'IN');
+//    $result = $query->execute()->fetchAll();
     $responce = "";
-    foreach ($result as $key => $file_value) {
-        $responce.=' <iframe frameborder="0" src="https://www.dailymotion.com/embed/video/' . $file_value->video_id . '?autoplay=0&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
+    foreach ($getids as $key => $file_value) {
+        $video_id = explode('#', $file_value);
+        $responce.=' <iframe class="video_data" frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_id[0]. '?autoplay=0&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
     }
     exit($responce);
 }
