@@ -11647,25 +11647,43 @@ span.file a {
   margin-left: 0;
 }
 
-.view.view-display-id-search_unpublish_video .view-filters, .view-id-searchimage.view-display-id-page_1 .view-filters, .view-display-id-search_publish_video_radio .view-filters {
+.view.view-display-id-search_unpublish_video .view-filters,
+.view-display-id-search_publish_video .view-filters,
+.view-id-searchimage.view-display-id-page_1 .view-filters,
+.view-display-id-search_publish_video_radio .view-filters {
   padding-bottom: 20px;
 }
-.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget, .view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget, .view-display-id-search_publish_video_radio .view-filters .views-exposed-form .views-exposed-widget {
+.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget,
+.view-display-id-search_publish_video .view-filters .views-exposed-form .views-exposed-widget,
+.view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget,
+.view-display-id-search_publish_video_radio .view-filters .views-exposed-form .views-exposed-widget {
   vertical-align: top;
 }
-.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-submit-button, .view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget.views-submit-button, .view-display-id-search_publish_video_radio .view-filters .views-exposed-form .views-exposed-widget.views-submit-button {
+.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-submit-button,
+.view-display-id-search_publish_video .view-filters .views-exposed-form .views-exposed-widget.views-submit-button,
+.view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget.views-submit-button,
+.view-display-id-search_publish_video_radio .view-filters .views-exposed-form .views-exposed-widget.views-submit-button {
   position: relative;
   padding-right: 85px;
 }
-.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-submit-button .form-submit, .view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget.views-submit-button .form-submit, .view-display-id-search_publish_video_radio .view-filters .views-exposed-form .views-exposed-widget.views-submit-button .form-submit {
+.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-submit-button .form-submit,
+.view-display-id-search_publish_video .view-filters .views-exposed-form .views-exposed-widget.views-submit-button .form-submit,
+.view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget.views-submit-button .form-submit,
+.view-display-id-search_publish_video_radio .view-filters .views-exposed-form .views-exposed-widget.views-submit-button .form-submit {
   position: absolute;
   right: 5px;
   top: 38px;
 }
-.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-reset-button .form-submit, .view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget.views-reset-button .form-submit, .view-display-id-search_publish_video_radio .view-filters .views-exposed-form .views-exposed-widget.views-reset-button .form-submit {
+.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-reset-button .form-submit,
+.view-display-id-search_publish_video .view-filters .views-exposed-form .views-exposed-widget.views-reset-button .form-submit,
+.view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget.views-reset-button .form-submit,
+.view-display-id-search_publish_video_radio .view-filters .views-exposed-form .views-exposed-widget.views-reset-button .form-submit {
   margin-top: 28px;
 }
-.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name, .view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name, .view-display-id-search_publish_video_radio .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name {
+.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name,
+.view-display-id-search_publish_video .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name,
+.view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name,
+.view-display-id-search_publish_video_radio .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name {
   display: none;
 }
 
