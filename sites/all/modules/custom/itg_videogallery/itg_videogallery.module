@@ -1076,16 +1076,16 @@ function itg_videogallery_menu() {
         'access arguments' => array('access content'),
         'type' => MENU_CALLBACK,
     );
-//    $items['baklol'] = array(
-//        'page callback' => 'itg_videogallery_publish_node_after_video_ready_by_dm',
-//        'access arguments' => array('access content'),
-//        'type' => MENU_CALLBACK,
-//    );
-//    $items['baklol2'] = array(
-//        'page callback' => 'itg_videogallery_remove_video_with_child',
-//        'access arguments' => array('access content'),
-//        'type' => MENU_CALLBACK,
-//    );
+    $items['baklol'] = array(
+        'page callback' => 'itg_videogallery_publish_node_after_video_ready_by_dm',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+    $items['baklol2'] = array(
+        'page callback' => 'itg_videogallery_remove_video_with_child',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
 
     $items['daily-motion-video-dashboard'] = array(
         'title' => 'Daily Motion Video Dashboard',
@@ -1443,7 +1443,7 @@ function itg_videogallery_get_file_details() {
     $responce = "";
     foreach ($getids as $key => $file_value) {
         $video_id = explode('#', $file_value);
-        $responce.=' <iframe class="video_data" frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_id[0]. '?autoplay=0&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
+        $responce.=' <iframe class="video_data" frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_id[0] . '?autoplay=0&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
     }
     exit($responce);
 }
@@ -1763,6 +1763,8 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
         if ($node_flag == 0) {
             $node = node_load($node_ids);
             $node->workbench_moderation_state_new = 'published';
+            $node->status = 1;
+
             node_save($node);
         }
     }

@@ -666,10 +666,18 @@ function itg_workflow_node_presave($node) {
                     }
                 }
             }
-          
+
 // Need to chenge this for redirect
-            if ($is_draft == 1) {
-                $node->workbench_moderation_state_new = 'draft';
+            if ($is_draft == 0) {
+              
+                if ($node->workbench_moderation['current']->state == 'published') {
+                    $node->status = 0;
+                    //$node->workbench_moderation['published']->published = 0;
+                    
+                }
+                else {
+                    $node->workbench_moderation_state_new = 'draft';
+                }
             }
             else {
                 if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
@@ -680,6 +688,8 @@ function itg_workflow_node_presave($node) {
             if ($node->workbench_moderation_state_new == 'published' && $node->workbench_moderation_state_current != 'published') {
                 $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i'); //2017-02-21 23:45
             }
+            //p($node->workbench_moderation);
+            //p($node);
         }
     }
 }
@@ -888,7 +898,9 @@ function itg_workflow_node_insert($node) {
           } */
         //   drupal_set_message("unser node insert");
         //unset session if exists during node insert.
-        unset($_SESSION['node_preview_unique']);
+       if (isset($_SESSION['node_preview_unique'])) {
+       unset($_SESSION['node_preview_unique']); 
+      }
     }
 }
 
