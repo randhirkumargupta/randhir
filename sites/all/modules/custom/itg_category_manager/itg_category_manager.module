@@ -185,17 +185,18 @@ function itg_category_manager_form($form, &$form_state) {
  * @param int $tid
  * @return boolean
  */
-function itg_category_manager_term_state($tid) {
-  /*$itg_query = db_select('itg_category_manager', 'itg')
+function itg_category_manager_term_state($tid, $vid = CATEGORY_MANAGMENT) {
+  $itg_query = db_select('itg_category_manager', 'itg')
       ->fields('itg', array('status'))
-      ->condition('tid', $tid, '=');
+      ->condition('tid', $tid, '=')
+      ->condition('vid', $vid, '=');
   $itg_result = $itg_query->execute()->fetchField();
 
   $flag = FALSE;
   if (isset($itg_result) && $itg_result == 1) {
     $flag = TRUE;
-  }*/
-  $flag = TRUE;
+  }
+  //$flag = TRUE;
   
   return $flag;
 }
@@ -383,7 +384,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         '#description' => t('If you uncheck this option, term will be in disabled state. By default is is checked. Only uncheck if you know what are you doing.'),
       );
       if ($form['tid']['#value'] !== NULL) {
-        $term_status = itg_category_manager_term_state($form['tid']['#value']);
+        $term_status = itg_category_manager_term_state($form['tid']['#value'], CATEGORY_MANAGMENT);
 
         if ($term_status) {
           $form['term-state-wrap']['state-mode'] = array(
@@ -466,7 +467,7 @@ function taxonomy_get_children_all($tid, $vid = 0, $key = 'tid') {
  */
 function itg_category_manager_term_validate($form, &$form_state) {
 // Check status of the mode
-  $mode_status = itg_category_manager_term_state($form_state['values']['tid']);
+  $mode_status = itg_category_manager_term_state($form_state['values']['tid'], CATEGORY_MANAGMENT);
 
 // If term is inactive then set disable mode value to 0 to avoid below error.
   if (!$mode_status) {
@@ -836,25 +837,30 @@ function itg_category_manager_get_mail_content($entity) {
  */
 function itg_category_manager_taxonomy_term_insert($term) {
   global $user;
-  $data = array(
-    'tid' => $term->tid,
-    'uid' => $user->uid,
-    'created' => time(),
-    'changed' => time(),
-    'status' => isset($term->term_state) ? $term->term_state : 1,
-  );
-  drupal_write_record('itg_category_manager', $data);
-  $data = array();
-  $data = array(
-    'tid' => $term->tid,
-    'uid' => $user->uid,
-    'changed' => time(),
-  );
-  if (!empty($term->path['alias'])) {
-    $term->path['alias'] = rtrim($term->path['alias'], '/');
-    $data['sef_url'] = $term->path['alias'];
+  
+  if ($term->vid == CATEGORY_MANAGMENT) {
+    $vid = $term->vid;
+    $data = array(
+      'tid' => $term->tid,
+      'uid' => $user->uid,
+      'vid' => $vid,
+      'created' => time(),
+      'changed' => time(),
+      'status' => isset($term->term_state) ? $term->term_state : 1,
+    );
+    drupal_write_record('itg_category_manager', $data);
+    $data = array();
+    $data = array(
+      'tid' => $term->tid,
+      'uid' => $user->uid,
+      'changed' => time(),
+    );
+    if (!empty($term->path['alias'])) {
+      $term->path['alias'] = rtrim($term->path['alias'], '/');
+      $data['sef_url'] = $term->path['alias'];
+    }
+    drupal_write_record('itg_sef_url', $data);
   }
-  drupal_write_record('itg_sef_url', $data);
 }
 
 /**
