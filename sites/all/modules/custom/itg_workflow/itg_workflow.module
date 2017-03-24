@@ -668,7 +668,7 @@ function itg_workflow_node_presave($node) {
             }
 
 // Need to chenge this for redirect
-            if ($is_draft == 0) {
+            if ($is_draft == 1) {
               
                 if ($node->workbench_moderation['current']->state == 'published') {
                     $node->status = 0;
