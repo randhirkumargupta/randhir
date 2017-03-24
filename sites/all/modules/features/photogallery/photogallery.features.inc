@@ -71,6 +71,22 @@ function photogallery_image_default_styles() {
     ),
   );
 
+  // Exported image style: photo_slider_753x543.
+  $styles['photo_slider_753x543'] = array(
+    'label' => 'Photo_slider_753x543',
+    'effects' => array(
+      13 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 753,
+          'height' => 543,
+          'upscale' => 0,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: photogallery_slide.
   $styles['photogallery_slide'] = array(
     'label' => 'Photogallery_slide',
