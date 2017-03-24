@@ -555,24 +555,26 @@ function itg_common_custompath_insert_load($node) {
  */
 
 function itg_common_custompath_migrated_load($node) {
-    global $edited_sef_url;
-    if(!empty ($edited_sef_url)) {
-        $lencount_sef = strlen($edited_sef_url);
-        if($lencount_sef >= 160){
-           $node_sef = substr($edited_sef_url, 0, 160);
-        } else {
-           $node_sef = $edited_sef_url;
-        }
-    } else {
-        $title_lenght = strlen($node->path['alias']);
-        if($title_lenght >= 160){
-           $node_sef = substr($node->path['alias'], 0, 160);
-        } else {
+    if(!empty ($node->path['alias'])) {
+      
            $node_sef = $node->path['alias'];
+        
+    } else {
+        $title_lenght = strlen($node->title);
+        if($title_lenght >= 160){
+           $node_sef = substr($node->title, 0, 160);
+        } else {
+           $node_sef = $node->title;
         }
     }
     
-    $published_date = date('Y-m-d', $node->changed);
+    
+    if($node->type == 'photogallery') {
+      $published_date = date('Y-m-d', $node->created);
+    }else {
+      $published_dat = explode(' ', $node->field_itg_content_publish_date['und'][0]['value']);
+      $published_date = $published_dat[0];
+    }
     $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
     if (!empty($getsection)) {
       $parents = taxonomy_get_parents_all($getsection);

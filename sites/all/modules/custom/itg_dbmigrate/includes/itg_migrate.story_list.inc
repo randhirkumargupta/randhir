@@ -892,9 +892,9 @@ class ItgStoryListMigration extends XMLMigration {
 
    
    //code for order set
-   if (isset($row->xml->ordering)) {
+   //if (isset($row->xml->ordering)) {
      ordering_set_of_content($node, $row->xml->ordering);
-   }
+   //}
    
    // Related content save in db
      if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
