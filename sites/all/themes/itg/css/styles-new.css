@@ -157,6 +157,18 @@ input[type="file"], input[type="submit"], input[type="text"] {
 #block-views-photo-landing-slider-block .slick-slider .slick-slide {
   position: relative;
 }
+#block-views-photo-landing-slider-block .slick-slider .slick-slide .photo-landing-slider-pic {
+  text-align: center;
+  height: 543px;
+}
+#block-views-photo-landing-slider-block .slick-slider .slick-slide .photo-landing-slider-pic img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
 #block-views-photo-landing-slider-block .slick-slider .slick-prev {
   font: normal normal normal 14px/1 FontAwesome;
   cursor: pointer;

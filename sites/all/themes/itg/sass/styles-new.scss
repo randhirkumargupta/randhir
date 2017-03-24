@@ -126,6 +126,18 @@ input[type="file"], input[type="submit"], input[type="text"]{
         border: none;   
         .slick-slide{
             position: relative;
+            .photo-landing-slider-pic{
+              text-align: center;
+              height: 543px;
+              img{
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+              }
+            }
         }
         .slick-prev{
             font: normal normal normal 14px/1 FontAwesome;
