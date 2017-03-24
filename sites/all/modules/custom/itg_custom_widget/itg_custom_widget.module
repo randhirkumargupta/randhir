@@ -100,7 +100,7 @@ function itg_custom_widget_ordering_data_from_title($title) {
     $query->fields('icw', array('nid', 'weight'))
         ->condition('icw.widget', $title)
         ->condition('n.status', '1')
-        ->orderBy('icw.weight', 'DESC')
+        ->orderBy('icw.weight', 'ASC')
         ->orderBy('n.nid', 'DESC')
         ->groupBy('icw.nid')
         ->range(0, 3);
