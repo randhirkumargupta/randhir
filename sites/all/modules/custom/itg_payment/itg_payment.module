@@ -293,7 +293,6 @@ function itg_payment_order_form_submit($form, &$form_state, $args) {
   $merchant_checkout_form = drupal_get_form('itg_payment_merchant_form');
 
   $check_sum = getChecksumFromArray($param_list, PAYTM_MERCHANT_KEY);
-
   echo theme('itg_payment_merchant_form', array(
     'param_list' => $param_list,
     'check_sum' => $check_sum,
