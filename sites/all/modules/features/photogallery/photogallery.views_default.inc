@@ -4456,7 +4456,7 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_images']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_images']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_images']['settings'] = array(
-    'image_style' => 'photgallery_landing_slider_753x543',
+    'image_style' => 'photo_slider_753x543',
     'image_link' => '',
   );
   /* Field: Field collection item: Caption */

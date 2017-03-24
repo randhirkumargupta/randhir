@@ -1,6 +1,8 @@
+<script type="text/javascript">var __at__ = 0;</script>
 <div style="display:none">
 <?php print render($content); ?>
 </div>
+<div class="ad-blocker"></div>
 <?php print $node->view_output; ?>
 <?php
 //print views_embed_view('photo_list_of_category', 'block_1');

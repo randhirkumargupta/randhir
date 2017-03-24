@@ -1,3 +1,4 @@
+<script type="text/javascript">var __at__ = 0;</script>
 <?php
 if (!empty($content)):
   global $base_url, $user;
@@ -523,6 +524,7 @@ if (!empty($content)):
                           <?php endif; ?>
                           </div>                            
                       </div>
+                      <div class="ad-blocker"></div>
                       <div class="description">
                           <?php
                           $story_body = $node->body['und'][0]['value'];
