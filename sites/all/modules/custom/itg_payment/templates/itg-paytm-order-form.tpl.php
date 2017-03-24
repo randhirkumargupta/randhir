@@ -8,5 +8,5 @@ print drupal_render_children($form);
 print "</div>";
 ?>
 <script>
-  //document.getElementById("itg-payment-order-form").submit();
+  document.getElementById("itg-payment-order-form").submit();
 </script>
