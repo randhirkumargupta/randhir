@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:apcm="http://ap.org/schemas/03/2005/apcm" xmlns:apnm="http://ap.org/schemas/03/2005/apnm" xmlns:o="http://w3.org/ns/odrl/2/">
+   <id>urn:publicid:ap.org:8e6c72c370434f79a68342ed050ec348</id>
+   <title>AS--Pakistan</title>
+   <updated>2014-05-09T05:54:58.870Z</updated>
+   <published>2014-05-09T05:54:36Z</published>
+   <author>
+      <name>AP</name>
+   </author>
+   <rights>Copyright 2014 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed.</rights>
+   <content type="text/xml">
+      <nitf version="-//IPTC//DTD NITF 3.4//EN" change.date="October 18, 2006" change.time="19:30">
+         <head>
+            <docdata>
+               <doc-id regsrc="AP"/>
+               <date.issue norm="20140509T055436Z"/>
+               <ed-msg info="Eds: Updates with official saying quake was a magnitude 5 and killed 1 person; changes dateline."/>
+               <doc.rights owner="http://www.ap.org" agent="http://license.icopyright.net" type="none"/>
+               <doc.copyright holder="AP" year="2014"/>
+            </docdata>
+         </head>
+         <body>
+            <body.head>
+               <hedline>
+                  <hl1 id="headline">Magnitude 5 earthquake kills 1 in Pakistan</hl1>
+                  <hl2 id="originalHeadline">Magnitude 5 earthquake kills 1 in Pakistan</hl2>
+               </hedline>
+               <distributor>The Associated Press</distributor>
+               <dateline>
+                  <location>KARACHI, Pakistan</location>
+               </dateline>
+            </body.head>
+            <body.content>
+               <block id="Main">
+                  <p>KARACHI, Pakistan (AP) — A moderate earthquake rattled several towns in southern Pakistan before dawn Friday, killing one person and wounding 70, a government official said.</p>
+                  <p>The magnitude 5 quake struck the district of Nawabshah, about 400 kilometers (240 miles) northeast of Karachi, the capital of southern Sindh province, said Roshan Ali Sheikh, the top official at the province's rehabilitation and disaster management department. It hit around 4 a.m. local time (2300 GMT) while many still slept, causing panic, he said.</p>
+                  <p>The U.S. Geological Survey said the temblor had a preliminary magnitude of 4.3 and struck some 12 kilometers (7.5 miles) north of Nawabshah. It said the quake had a depth of 15.6 kilometers (9.7 miles).</p>
+                  <p>Sheikh said at least 25 mud-brick homes collapsed in the quake-hit district and authorities were still assessing the damage. Some of those injured were listed in critical condition at a government hospital, he said.</p>
+                  <p>Earlier, local television stations in Pakistan reported that walls came down and people fled their homes with their children.</p>
+                  <p>Pakistan is often hit by earthquakes. In September 2013, a 7.7-magnitude quake struck its province of Baluchistan, killing at least 376 people and pushing a new island up in the Arabian Sea.</p>
+               </block>
+            </body.content>
+            <body.end/>
+         </body>
+      </nitf>
+   </content>
+   <link rel="alternate" title="AP Article" href="http://www.apnewsarchive.com/2014/Magnitude-5-earthquake-rattles-southern-Pakistan,-killing-1-person,-wounding-70/id-7ffd9e75fc594a1589d8913bbfa55702"/>
+   <link rel="enclosure" title="AP Article" href="http://syndication.ap.org/AP.Distro.ContentBroker2/ContentBroker.aspx?media=text&amp;recordid=8e6c72c370434f79a68342ed050ec348&amp;filingId=6b1d5be8a97c4609819bdb4b2b4dcbda&amp;showInlineLinks=False&amp;broadcastAnpa=False&amp;onlineAnpa=True&amp;fmt=13&amp;authToken=eNoNxksOAjEIANATtYECpbPgMIqoTfxM0phxweH1rV7G1zoJCWuXJgCwDdT0aSO6a3MqCkyFr7qVUx%2f%2ftbiAQDjxyM%2by81rzdbvnftgRD38%2fowFyzt0QKmJFgEr6A930HXI%3d" length="1298" type="application/octet-stream">
+      <apcm:Characteristics IngestLink="True" ContentId="urn:publicid:ap.org:162820af17034eae866e96a263167eb9" FileExtension="anpa" Format="ANPA1312" MediaType="Binary" MimeType="application/octet-stream" Role="Main" SizeInBytes="1298" Words="211"/>
+   </link>
+   <link rel="enclosure" title="AP Article" href="http://syndication.ap.org/AP.Distro.ContentBroker2/ContentBroker.aspx?media=text&amp;recordid=8e6c72c370434f79a68342ed050ec348&amp;showInlineLinks=False&amp;fmt=14&amp;authToken=eNoNxksOAjEIANATtYECpbPgMIqoTfxM0phxweH1rV7G1zoJCWuXJgCwDdT0aSO6a3MqCkyFr7qVUx%2f%2ftbiAQDjxyM%2by81rzdbvnftgRD38%2fowFyzt0QKmJFgEr6A930HXI%3d" length="1298" type="application/octet-stream">
+      <apcm:Characteristics IngestLink="True" ContentId="urn:publicid:ap.org:162820af17034eae866e96a263167eb9" FileExtension="iptc" Format="IPTC7901" MediaType="Binary" MimeType="application/octet-stream" Role="Main" SizeInBytes="1298" Words="211"/>
+   </link>
+   <link rel="enclosure" title="AP Article" href="http://syndication.ap.org/AP.Distro.ContentBroker2/ContentBroker.aspx?media=text&amp;recordid=8e6c72c370434f79a68342ed050ec348&amp;showHNewsLinks=True&amp;fmt=15&amp;authToken=eNoNxksOAjEIANATtYECpbPgMIqoTfxM0phxweH1rV7G1zoJCWuXJgCwDdT0aSO6a3MqCkyFr7qVUx%2f%2ftbiAQDjxyM%2by81rzdbvnftgRD38%2fowFyzt0QKmJFgEr6A930HXI%3d" length="1327" type="text/html">
+      <apcm:Characteristics IngestLink="True" ContentId="urn:publicid:ap.org:162820af17034eae866e96a263167eb9" FileExtension="html" Format="hNews" MediaType="Text" MimeType="text/html" Role="Main" SizeInBytes="1327" Words="211"/>
+   </link>
+   <apcm:ContentMetadata>
+      <apcm:DateLineLocation City="Karachi" Country="PAK" CountryName="Pakistan"/>
+      <apcm:Priority Numeric="4" Legacy="r"/>
+      <apcm:ConsumerReady>TRUE</apcm:ConsumerReady>
+      <apcm:DateLine>KARACHI, Pakistan</apcm:DateLine>
+      <apcm:ExtendedHeadLine>Magnitude 5 earthquake rattles southern Pakistan, killing 1 person, wounding 70</apcm:ExtendedHeadLine>
+      <apcm:HeadLine>Magnitude 5 earthquake kills 1 in Pakistan</apcm:HeadLine>
+      <apcm:OriginalHeadLine>Magnitude 5 earthquake kills 1 in Pakistan</apcm:OriginalHeadLine>
+      <apcm:Keywords>Pakistan</apcm:Keywords>
+      <apcm:Cycle>BC</apcm:Cycle>
+      <apcm:Selector>asian</apcm:Selector>
+      <apcm:LegacyTypeSetFormat>bx</apcm:LegacyTypeSetFormat>
+      <apcm:TransmissionReference>W2797</apcm:TransmissionReference>
+      <apcm:SlugLine>BC-AS--Pakistan,1st Ld-Writethru</apcm:SlugLine>
+      <apcm:ContentElement>FullStory</apcm:ContentElement>
+      <apcm:MediaType>Text</apcm:MediaType>
+      <apcm:EntityClassification Authority="AP Geography" Value="Pakistan" Id="661f78e87d5b100482a9c076b8e3055c"/>
+      <apcm:EntityClassification Authority="AP Geography" Value="Karachi" Id="baad31b87ec110048d2edf092526b43e"/>
+      <apcm:EntityClassification Authority="AP Geography" Value="South Asia" Id="66188f607d5b100481ffc076b8e3055c"/>
+      <apcm:EntityClassification Authority="AP Geography" Value="Asia" Id="661812607d5b100481f3c076b8e3055c"/>
+      <apcm:EntityClassification Authority="AP Region" Id="ENGL"/>
+      <apcm:SubjectClassification Authority="AP Category Code" Value="i" Id="i"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="General news" Id="f25af2d07e4e100484f5df092526b43e"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="Natural disasters" Id="7448dd4882a0100481dddf092526b43e"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="Accidents and disasters" Id="31711ec0894b10048983ba0a2b2ca13e"/>
+      <apcm:ItemContentType>Spot Development</apcm:ItemContentType>
+      <apcm:Source>AP</apcm:Source>
+      <apcm:Property Name="EntitlementMatch" Id="urn:publicid:ap.org:product:1" Value="All Media"/>
+      <apcm:Property Name="EntitlementMatch" Id="urn:publicid:ap.org:product:3" Value="All Stories"/>
+      <apcm:Property Name="EntitlementMatch" Id="urn:publicid:ap.org:product:33320" Value="AP World English - Asia (filingsource = asian)"/>
+      <apcm:Property Name="EntitlementMatch" Id="urn:publicid:ap.org:product:40054" Value="Filing Region - Asia - All"/>
+      <apcm:Property Name="EntitlementMatch" Id="urn:publicid:ap.org:product:31244" Value="Asian Wire"/>
+      <apcm:Property Name="SequenceNumber" Value="InSequence" Id="286908778"/>
+      <apcm:FirstCreated>2014-05-09T05:54:37Z</apcm:FirstCreated>
+   </apcm:ContentMetadata>
+   <apnm:NewsManagement>
+      <apnm:ManagementId>urn:publicid:ap.org:7ffd9e75fc594a1589d8913bbfa55702</apnm:ManagementId>
+      <apnm:ManagementSequenceNumber>1</apnm:ManagementSequenceNumber>
+      <apnm:PublishingStatus>Usable</apnm:PublishingStatus>
+      <apnm:PublishingSpecialInstructions>Eds: Updates with official saying quake was a magnitude 5 and killed 1 person; changes dateline.</apnm:PublishingSpecialInstructions>
+      <apnm:PublishingReleaseDateTime>2014-05-09T05:54:30Z</apnm:PublishingReleaseDateTime>
+      <apnm:LegacyNewsManagement>
+         <apnm:LegacyType>ANPA1312+NAA89-3</apnm:LegacyType>
+         <apnm:LegacyManagementType Value="Lead">
+            <apnm:TypeSupportingData DataType="LeadNumber">1</apnm:TypeSupportingData>
+         </apnm:LegacyManagementType>
+      </apnm:LegacyNewsManagement>
+   </apnm:NewsManagement>
+</entry>
