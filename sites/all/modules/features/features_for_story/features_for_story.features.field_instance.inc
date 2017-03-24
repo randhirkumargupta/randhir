@@ -872,7 +872,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_emoji',
-    'label' => 'Left Emoji',
+    'label' => 'Right Emoji',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -914,7 +914,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_emoji_2',
-    'label' => 'Right Emoji',
+    'label' => 'Left Emoji',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,

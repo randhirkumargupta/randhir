@@ -183,10 +183,13 @@ function features_supplement_magazine_strongarm() {
           'weight' => '6',
         ),
         'title' => array(
-          'weight' => '7',
+          'weight' => '5',
         ),
         'path' => array(
           'weight' => '5',
+        ),
+        'redirect' => array(
+          'weight' => '7',
         ),
       ),
       'display' => array(),
