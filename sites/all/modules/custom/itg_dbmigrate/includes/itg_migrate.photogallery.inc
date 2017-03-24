@@ -167,6 +167,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
     $this->addFieldMapping('created', 'created')->xpath('created');
     $this->addFieldMapping('changed', 'modified')->xpath('modified');
     $this->addFieldMapping('status', 'published')->xpath('published');
+   
 
     $this->addFieldMapping('field_common_audio', 'commonaudio')->xpath('commonaudio');
     $this->addFieldMapping('field_common_audio_file', 'commonaudiofile')->xpath('commonaudiofile');
@@ -508,6 +509,13 @@ class ItgPhotogalleryMigration extends XMLMigration {
       $node->field_story_social_media_integ[LANGUAGE_NONE] = $row->final_social_checkbox;
     }
 
+    // modified by
+    if (isset($row->xml->modified_by) && !empty($row->xml->modified_by)) {
+      $modified_uid = (string) $row->xml->modified_by;
+      $orignal_modified_uid = get_itg_destination_id('migrate_map_itguser', $modified_uid);
+      $node->field_modify_by[LANGUAGE_NONE][0]['value'] = $orignal_modified_uid;
+    }
+    
     // manage created user
     if (isset($row->xml->created_by) && !empty($row->xml->created_by)) {
       $created_uid = (string) $row->xml->created_by;
