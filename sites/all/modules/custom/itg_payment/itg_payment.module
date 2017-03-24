@@ -93,6 +93,10 @@ function itg_payment_theme() {
       'render element' => 'form',
       'template' => 'templates/itg-icici-merchant-form',
     ),
+    'itg_payment_billdesk_order_form' => array(
+      'render element' => 'form',
+      'template' => 'templates/itg-payment-billdesk-order-form',
+    ),
   );
 }
 
@@ -377,7 +381,7 @@ function itg_payment_checkout() {
       break;
 
     case 'billdesk':
-      return drupal_get_form('itg_payment_billdesk_order_form');
+      return drupal_render(drupal_get_form('itg_payment_billdesk_order_form'));
       break;
 
     case 'icici':
@@ -439,15 +443,8 @@ function itg_payment_billdesk_order_form($form, &$form_state) {
   $security_id = ITG_BILLDESK_SECURITY_KEY;
   $bdposturl = ITG_BILLDESK_POST_URL;
   $order_id = "ODR-" . time() . rand(0, 100);
-  $value = $merchant_id . '|100000009|NA|' . $amount . '|NA|NA|NA|INR|NA|R|' . $security_id . '|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . $base_url . '/itg-payment/billdesk-payment-success';
+  $value = $merchant_id . '|ARP10234|NA|' . $amount . '|NA|NA|NA|INR|NA|R|' . $security_id . '|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . 'http://qa.indiatodayonline.in/itg-payment/billdesk-payment-success';
   // Generate Checksum.
-  //echo  $value = $merchant_id . '|34137112|NA|' . $amount . '|NA|NA|NA|INR|NA|R|indiatoday|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . $base_url . '/itg_billdesk_payment_success';
-  //echo '<br>';
-  //echo $value = 'INDIATODAY|34137112|NA|2.00|CIT|NA|NA|INR|DIRECT|R|indiatoday|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . $base_url . '/itg-payment/billdesk-payment-success';
-//  $newdatawithchecksumkey = $value . "|" . $checksumkey;
-//  $checksum = crc32($newdatawithchecksumkey);
-//  $datawithchecksumvalue = $value . "|" . $checksum;
-//  $msg = $datawithchecksumvalue;
   $common_string = $security_id;
 
   $string_new = $value . "|" . $common_string;
@@ -460,10 +457,9 @@ function itg_payment_billdesk_order_form($form, &$form_state) {
     '#value' => $msg,
   );
   $form['#action'] = $bdposturl;
-  //$form['#action'] = 'https://www.billdesk.com/pgidsk/pgmerc/INDIATODAYPaymentoption.jsp';
   $form['submit'] = array(
     "#type" => 'submit',
-    "#value" => 'paybilldesk',
+    "#value" => 'Continue Payment',
   );
 
   return $form;
@@ -538,7 +534,6 @@ function itg_icici_payment_success_page() {
     }
   }
 }
-
 
 function itg_icici_payment_fail_page() {
   
