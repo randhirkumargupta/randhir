@@ -16,6 +16,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
 ?>
 <?php foreach ($rows as $row): ?>
     <div class="container">
+        <div class="ad-blocker"></div>
         <div class ="video-landing-header">
             <div class="row">
                 <div class="col-md-12">
