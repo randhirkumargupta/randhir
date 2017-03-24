@@ -189,6 +189,10 @@
      padding: 9px;
      font-weight: bold;
  }
+ #content #page-title{
+ 	font:normal 33px/35px roboto;
+    color: #545454;padding:0 0 10px;
+ }
  .clr_chn .item {
      margin-top: 20px;
      padding-left: 0;
@@ -626,6 +630,64 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 .related-story-list .midstoryleft .midstorytitle a, .related-story-list .midstoryright .midstorytitle a{ font-size:18px; color:#323232; line-height:23px;}
 .related-story-list .midstoryleft .midstoryintro,.related-story-list .midstoryright .midstoryintro{ font-size:13px; line-height:18px; color:#323232;}
 .related-story-list .midstoryleft >a img,.related-story-list .midstoryright >a img{ margin:0 10px 5px 0;}
+
+/* Like and Dislike Css */
+.agbutton.story-like-dislike { margin:40px 0 30px; border-top: 1px solid #ddd;border-bottom: 1px solid #ddd; text-align: center; padding: 15px 0; color: #929292;
+  font-family: roboto; font-size: 16px; font-weight: 700;}
+.agbutton.story-like-dislike #name-dv #lky, .agbutton.story-like-dislike #name-dv #dlky { padding: 0 10px; position: relative;
+  display: inline-block; padding: 0 10px; vertical-align: middle;}
+.agbutton.story-like-dislike #name-dv #lky button, .agbutton.story-like-dislike #name-dv #dlky button { background: transparent;
+  border: none; font-size: 22px; cursor: pointer; color: #929292;}
+.agbutton.story-like-dislike #name-dv #lky button#like_count span, .agbutton.story-like-dislike #name-dv #lky button#dislike_count span, .agbutton.story-like-dislike #name-dv #dlky button#like_count span, .agbutton.story-like-dislike #name-dv #dlky button#dislike_count span {color: #1f8201;font-weight: 700; font-size: 16px;}
+.agbutton.story-like-dislike #name-dv #lky button#dislike_count span, .agbutton.story-like-dislike #name-dv #dlky button#dislike_count span { color: #ef0401;}
+.agbutton.story-like-dislike #name-dv #lky > span, .agbutton.story-like-dislike #name-dv #dlky > span { padding: 0 15px;
+  display: inline-block; vertical-align: middle;}
+.agbutton.story-like-dislike #name-dv #lky > span#dlky, .agbutton.story-like-dislike #name-dv #dlky > span#dlky { padding-left: 0;}
+.agbutton.story-like-dislike #name-dv #lky #sty-dv, .agbutton.story-like-dislike #name-dv #lky #dsty-dv, .agbutton.story-like-dislike #name-dv #dlky #sty-dv, .agbutton.story-like-dislike #name-dv #dlky #dsty-dv {background: #fff; width: 200px; position: absolute; box-shadow: 0px 0px 5px #ccc; left: 0; top: 40px; font-weight: normal; color: #000; padding: 15px; border-radius: 5px;
+  line-height: 24px; text-align: left; border: 1px solid #d2d2d2; overflow: visible !important;}
+.agbutton.story-like-dislike #name-dv #lky #sty-dv:before, .agbutton.story-like-dislike #name-dv #lky #dsty-dv:before, .agbutton.story-like-dislike #name-dv #dlky #sty-dv:before, .agbutton.story-like-dislike #name-dv #dlky #dsty-dv:before { content: '';
+  height: 21px; background: url(../images/story-up-arrow-icon.png) no-repeat; position: absolute; left: 12px; top: -21px;
+  width: 25px;}
+.agbutton.story-like-dislike #name-dv #lky #sty-dv a, .agbutton.story-like-dislike #name-dv #lky #dsty-dv a, .agbutton.story-like-dislike #name-dv #dlky #sty-dv a, .agbutton.story-like-dislike #name-dv #dlky #dsty-dv a { padding: 3px; display: inline-block;
+  vertical-align: top;  cursor: pointer;}
+.agbutton.story-like-dislike #name-dv #lky #dsty-dv a, .agbutton.story-like-dislike #name-dv #dlky #dsty-dv a { padding: 0;
+  color: #2877c4; text-decoration: underline;}
+.agbutton.story-like-dislike .error-msg { color: red;font-weight: 400;font-size: 12px;}
+
+/* Sponser strip css */
+.sponsorContainer{ margin:10px auto; width:100%; border:1px solid #000; height:auto; overflow:hidden; position: relative;  box-sizing: border-box}
+.leftFirstLogo{ position: absolute; left:0; top:0;x}
+.leftPresentingSponsor{ float: left; width:335px;; box-sizing: border-box; margin-left:220px; position: relative }
+.leftPresentingSponsor:after{ content:""; position: absolute; right:0; top:2px; height:44px; width:1px; background:#c5c5c5}
+.PreSponsorTxt{ float: left; font:normal 12px/14px Arial, Helvetica, sans-serif; color:#525252; margin:11px 0 0 15px}
+.PreSponsorImg{ float: left; margin-left:12px;}
+.rightAssociateSponsor{float: left; width:335px;; box-sizing: border-box; }
+.assSponsorTxt{float: left; font:normal 12px/14px Arial, Helvetica, sans-serif; color:#525252; margin:11px 0px 0 15px}
+.assSponsorImg1{float: left; margin:0px 0 0 30px;}
+@media screen and (min-width: 768px) and (max-width:1000px) {
+.sponsorContainer{ width:100%}
+.leftPresentingSponsor{ width:250px}
+.rightAssociateSponsor{ width:250px}
+}
+@media screen and (min-width: 481px) and (max-width:767px) {
+.sponsorContainer{ width:100%; height: 107px;}
+.leftPresentingSponsor{ width:100%; height:48px}
+.leftPresentingSponsor:after{ display: none}
+.rightAssociateSponsor{ width:100%; border-top:1px solid #000}
+.assSponsorImg1{ height:48px}
+}
+@media screen and (min-width: 320px) and (max-width:480px) {
+.sponsorContainer{ width:100%; height: 107px; text-align: center; border:0px; overflow: inherit}
+.leftFirstLogo{ position: relative; width:100%}
+.leftPresentingSponsor{ width:95%; height:48px; margin-left:0px; position: absolute;  left:50%; top:6px; margin:0 0 0 -125px; height:48px}
+.leftPresentingSponsor:after{ display: none}
+.rightAssociateSponsor{ width:95%;position: absolute;  left:50%; top:55px; margin:0 0 0 -125px; height:48px;}
+.assSponsorImg1{ height:48px}
+.mobileCenterSec{ float: left; width:100%; position: relative; }
+.mobileCenterSec + .mobileCenterSec{border-top:1px solid #000;}
+.mobileCenterSec + .mobileCenterSec:after{ position: absolute; left:0; bottom:-52px; height:1px; width:100%; content:""; background:#000}
+}
+
 /* Media Query for same */
 @media only screen  and (min-device-width: 320px)  and (max-device-width: 736px){ 
 .slider_besrCollage img{ min-height:100%; max-height: 100%;}
