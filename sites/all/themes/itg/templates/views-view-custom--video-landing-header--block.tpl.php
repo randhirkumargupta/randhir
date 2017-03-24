@@ -45,15 +45,15 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                 else {
                                     $autoplay = 1;
                                 }
-                                ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->video_id; ?>"><?php
+                                ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->solr_video_id; ?>"><?php
                                 if (module_exists('itg_videogallery')) {
                                     $vid = itg_videogallery_get_videoid($row['fid']);
                                 }
-                                if ($video_value->dailymotion_thumb_url != "") {
-                                    $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $video_value->dailymotion_thumb_url . '" height="66" width="88" alt=""></li>';
+                                if ($video_value->solr_video_thumb != "") {
+                                    $newimageds.= '<li><img data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt=""></li>';
                                 }
                                 else {
-                                    $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt=""></li>';
+                                    $newimageds.= '<li><img data-tag="video_' . $video_value->solr_video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt=""></li>';
                                 }
                                 $ads_flag = 0;
                                 if ($video_value->field_include_ads_value == 'yes') {
@@ -62,7 +62,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                 ?>
                                     <div class="iframe-video">
                                         <iframe frameborder="0" scrolling="no"
-                                                src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=<?php echo $autoplay; ?>&player_next_video=x5d9tu3&ui-logo=1&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
+                                                src="https://www.dailymotion.com/embed/video/<?php print $video_value->solr_video_id; ?>?autoplay=<?php echo $autoplay; ?>&player_next_video=x5d9tu3&ui-logo=1&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
                                                 allowfullscreen></iframe></div>
 
                                 </div>
@@ -80,7 +80,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                             if (function_exists('get_video_in_fieldcollection_by_nid_mirtaed')) {
                                 $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
                             }
-
+                            drupal_add_js('http://content.jwplatform.com/libraries/V30NJ3Gt.js', 'external');
                             $hide_player = "";
                             $description_slider = "";
                             $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images"><ul>';
@@ -109,22 +109,46 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                 if ($video_value->field_include_ads_value == 'yes') {
                                     $ads_flag = 1;
                                 }
-                                //pr($video_value->field_migrated_video_url_value);
+                                $allbitrates = array();
+                                foreach ($video_node->field_multi_bitrate[LANGUAGE_NONE] as $bitratevalue) {
+                                    $allbitrates[] = end(explode('@', $bitratevalue['value']));
+                                }
+                                $usebitrates = implode(',', $allbitrates);
+                                $getvideo_bitrate_url = itg_videogallery_make_bitrate_url($video_value->field_migrated_video_url_value, $usebitrates);
                                 ?>
                                     <div class="iframe-video">
-                                        <script src="<?php
-                    global $base_url;
-                    print $base_url . '/' . drupal_get_path('module', 'itg_podcast');
-                    ?>/jwplayer/jwplayer.js"></script>
-                                        <script>jwplayer.key = "Cbz5fuKQAlYHtZgBSR0G/4GgYFO7YTb0k8Ankg==";</script>
-                                        <div id="podcast-<?php print $keys; ?>">Loading the player...</div>
+
+                                        <div style="margin:0 auto; width:622px;"><div align="center" id="videoplayer_<?php echo $keys; ?>"></div></div> 
                                         <script type="text/javascript">
-                                            var playerInstance = jwplayer("podcast-<?php print $keys; ?>");
-                                            playerInstance.setup({
-                                                file: "<?php print $video_value->field_migrated_video_url_value; ?>",
-                                                width: 640,
-                                                height: 350,
-                                                image: "<?php echo $image_url; ?>",
+
+                                            jwplayer('videoplayer_<?php echo $keys; ?>').setup({
+                                                playlist: [{
+                                                        title: "<?php print $row['title']; ?>",
+                                                        image: "<?php echo $image_url; ?>",
+                                                        sources: [
+                                                            {
+                                                                file: "<?php echo $getvideo_bitrate_url; ?>"
+                                                            }, {
+                                                                file: "<?php print $video_value->field_migrated_video_url_value; ?>"
+                                                            }]
+                                                    }],
+                                                primary: "flash",
+                                                width: "622",
+                                                height: "370",
+                                                aspectratio: "4:3",
+                                                "stretching": "exactfit",
+                                                androidhls: "true",
+                                                fallback: "false",
+                                                hlslabels: {"156": "lowest", "364": "low", "512": "medium", "864": "high", "996": "Highest"},
+                                                advertising: {
+                                                    client: "vast",
+                                                    skipoffset: 5,
+                                                    schedule: {"myAds": {"offset": "pre", "tag": "http://xp1.zedo.com/jsc/d2/fns.vast?n=821&c=2040/1137&d=39&s=2&v=vast2&pu=__page-url__&ru=__referrer__&pw=__player-width__&ph=__player-height__&z=__random-number__"}}
+
+                                                },
+                                                ga: {
+                                                    idstring: "<?php print $row['title']; ?>",
+                                                }
                                             });
                                         </script></div>
 
@@ -178,14 +202,14 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                 <div class="show-embed-code-div">
                                     <div class="copy-sample-code">
                                         <textarea readonly="true">
-                                              <div id='IndiaToday_gallery' data-type='UAT'></div>
-                                              <script src='<?php print $base_url; ?>/sites/all/themes/itg/js/video_iframeResizer.js'>
-                                              </script>
-                                              <script>
+                                                                          <div id='IndiaToday_gallery' data-type='UAT'></div>
+                                                                          <script src='<?php print $base_url; ?>/sites/all/themes/itg/js/video_iframeResizer.js'>
+                                                                          </script>
+                                                                          <script>
     <?php
     echo "iFrameResize({galleryid: $video_node->nid})";
     ?>
-                                                    </script>
+    </script>
                                         </textarea> 
                                     </div>
                                 </div>
@@ -216,7 +240,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                     }
                     ?>
                 </div>
-                <?php //$row['field_story_expert_description']; ?>
+                <?php //$row['field_story_expert_description'];  ?>
                 <div class="col-md-4 video-header-right">
                     <div class="top-section">
                         <div class="social-likes desktop-hide">
@@ -235,14 +259,14 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                     <div class="show-embed-code-div">
                                         <div class="copy-sample-code">
                                             <textarea readonly="true">
-                                              <div id='IndiaToday_gallery' data-type='UAT'></div>
-                                              <script src='<?php print $base_url; ?>/sites/all/themes/itg/js/video_iframeResizer.js'>
-                                              </script>
-                                              <script>
+                                                                          <div id='IndiaToday_gallery' data-type='UAT'></div>
+                                                                          <script src='<?php print $base_url; ?>/sites/all/themes/itg/js/video_iframeResizer.js'>
+                                                                          </script>
+                                                                          <script>
     <?php
     echo "iFrameResize({galleryid: $video_node->nid})";
     ?>
-                                                                </script>
+    </script>
                                             </textarea>  
                                         </div>
                                     </div>

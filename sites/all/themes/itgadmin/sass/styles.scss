@@ -10915,10 +10915,22 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   .answer-container{
     .answer-container-actual{
       text-align: center;
+      .correct-ans, .incorrect-ans {
+        font-size: 28px;
+        line-height: 32px;
+        padding: 10px 0 20px;
+        text-transform: capitalize;
+      }
+      .correct-ans{color: #1ece1e;}
+      .incorrect-ans{color: red;}
+      strong {
+        font-size: 16px;
+        font-weight: 400;
+      }
     }
     #show_answer{
       width: 135px;
-      margin: 10px auto;
+      margin: 20px auto;
       display: block;
     }
   }
@@ -11014,7 +11026,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     }
   }
 }
-.view.view-display-id-search_unpublish_video, .view-id-searchimage.view-display-id-page_1{
+.view.view-display-id-search_unpublish_video, .view-id-searchimage.view-display-id-page_1, .view-display-id-search_publish_video_radio{
   .view-filters{
     padding-bottom: 20px;
     .views-exposed-form{
@@ -11208,3 +11220,45 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   }
   
   /*budget predictor css end*/
+  [id*="itg-active-user-report-form"]{
+    .form-type-textfield, .form-type-select{
+      float: left;
+      width: 100%;
+      margin-right: 10px;
+      padding: 0;
+      &.form-item-username, &.form-item-email{max-width: 200px;}
+      &.form-item-mobile{max-width: 150px;}
+      &.form-item-date-from, &.form-item-date-to{max-width: 150px;}
+      &.form-item-items-per-page{max-width: 100px;}
+      > label{
+        float: none;
+        padding: 5px 0;
+        width: 100%;
+        display: block;
+      }
+      .form-text, .form-select{width: 100%;}
+    }
+    .user-log-filter-btn{
+      display: inline-block;
+      margin-top: 38px;
+      vertical-align: top;
+      .form-submit{
+        @extend .btn-small;
+      }
+      .user-log-reset{
+        @extend .btn-reset;
+        @extend .btn-small;
+      }
+    }
+  }
+  [id*="itg-registred-user-report-form"]{
+    h2{margin-bottom: 30px;}
+    .form-type-textfield{
+      > label{width: 120px;}
+      .form-text{max-width: 200px;}
+    }
+    .form-submit {
+      margin-left: 150px;
+      @extend .btn-small;
+    }
+  }

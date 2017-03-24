@@ -192,6 +192,48 @@ function feature_for_podcast_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-podcast-field_cm_related_content_detail'.
+  $field_instances['node-podcast-field_cm_related_content_detail'] = array(
+    'bundle' => 'podcast',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 26,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_cm_related_content_detail',
+    'label' => 'Related Content Detail',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 36,
+    ),
+  );
+
   // Exported field_instance: 'node-podcast-field_common_related_content'.
   $field_instances['node-podcast-field_common_related_content'] = array(
     'bundle' => 'podcast',
@@ -1231,6 +1273,7 @@ function feature_for_podcast_field_default_field_instances() {
   t('Primary category html');
   t('Primary category textarea');
   t('Related Content');
+  t('Related Content Detail');
   t('Short headline');
   t('Small image');
   t('Source id');

@@ -64,7 +64,7 @@ function itg_registered_user_report($user_id) {
 function itg_registred_user_report_form($form , $form_state) {
   // Add date/time field with Pop-up calendar to the form.
   $form['markup'] = array(
-    '#markup' => t("Please select date from and to for display report"),
+    '#markup' => t("<h2>Please select date from and to for display report</h2>"),
   );
   $form['date_from'] = array(
     '#type' => 'textfield',
@@ -122,8 +122,9 @@ function itg_registered_user_display_report($user_id) {
     if (function_exists('mongodb')) {
       $con = mongodb();
       $people = $con->pagedetails;
-      $date_from = $_GET['date_from'];
-      $date_to = $_GET['date_to'];
+      // Handle case from current date.
+      $date_from = strtotime('-1 day',$_GET['date_from']);
+      $date_to = strtotime('+1 day', $_GET['date_to']);
       $condition = array(
         'viewtime' => array('$gte' => (int) $date_from, '$lte' => (int) $date_to),
         'uid' => $user_id,
@@ -132,8 +133,6 @@ function itg_registered_user_display_report($user_id) {
       foreach ($views_nodes as $chunk_data) {
         $data[] = $chunk_data['nid'];
       }
-      
-      pr($condtions);
       
       $visited_nodes_array = array_unique($data);
       $total_visted_node_by_user = count($visited_nodes_array);

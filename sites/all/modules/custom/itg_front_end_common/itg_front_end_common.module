@@ -509,7 +509,7 @@ function _related_story_left_block_content() {
     if (!empty($related_data)) {
       $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
       //$related_image = $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
-      $related_image_url = $related_data->sm_field_custom_story_extra_small_url[0];
+      $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
       $related_image = '<img src="'.$related_image_url.'">';
 
       if (empty($related_image_url)) {
@@ -550,7 +550,7 @@ function _related_story_bottom_block_content() {
     if (!empty($related_data)) {
       $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
       //$related_image = $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
-      $related_image_url = $related_data->sm_field_custom_story_extra_small_url[0];
+      $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
       $related_image = '<img src="' . $related_image_url . '">';
       if (empty($related_image_url)) {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
@@ -621,20 +621,20 @@ function _latest_from_pti() {
   $related_content = itg_third_party_section_card_content('PTI', 5);
   $related_dt = '';
   if (!empty($related_content)) {
-    $related_dt = '<h3><span>' . t('LATEST FROM PTI') . '</span></h3>';
+    $related_dt = '<span class="widget-title">' . t('LATEST FROM PTI') . '</span>';
   }
   if (!empty($related_content)) {
-    $related_dt.= "<div class='third_party-row'><ul>";
+    $related_dt.= "<ul>";
     $i = 0;
     foreach ($related_content as $key => $value) {
       if (!empty($value['title'])) {
         $related_title = mb_strimwidth($value['title'], 0, 200, "..");
         $path = drupal_get_path_alias('node/' . $value['nid']);
-        $related_dt.= "<li class='col-third-party'><span class='tile'>" . l($related_title, $path) . "</span></li>";
+        $related_dt.= "<li class='third-party-list'><span class='tile'>" . l($related_title, $path) . "</span></li>";
       }
       $i++;
     }
-    $related_dt.= "</ul></div>";
+    $related_dt.= "</ul>";
   }
   return $related_dt;
 }
@@ -650,24 +650,24 @@ function _latest_from_aajtak() {
   $aajtak_data = json_decode($JSON);
   $related_dt = '';
   if (!empty($aajtak_data[0]->id)) {
-    $related_dt = '<h3><span>' . t('LATEST FROM AAJ TAK') . '</span></h3>';
+    $related_dt = '<span class="widget-title">' . t('LATEST FROM AAJ TAK') . '</span>';
   }
   if (!empty($aajtak_data[0]->id)) {
-    $related_dt.= "<div class='third_party-row'><ul>";
+    $related_dt.= "<ul>";
     $i = 0;
     foreach ($aajtak_data as $key => $value) {
       if (!empty($value->title)) {
         $related_title = mb_strimwidth($value->title, 0, 200, "..");
         $path = $value->story_url;
         $img_url = $value->thumb_image;
-        $related_dt.= "<li class='col-third-party'><a href='$path' target='_blank' title='$related_title'><img src='$img_url' alt='$related_title' /></a>";
-        $related_dt.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
+        $related_dt.= "<li class='third-party-list'><a class='pic' href='$path' target='_blank' title='$related_title'><img src='$img_url' alt='$related_title' /></a>";
+        $related_dt.= "<div class='title'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</div></li>";
       }
       $i++;
-      if ($i == 4)
+      if ($i == 5)
       break;
     }
-    $related_dt.= "</ul></div>";
+    $related_dt.= "</ul>";
   }
   return $related_dt;
 }
@@ -683,24 +683,24 @@ function _latest_from_businesstoday() {
   $business_data = json_decode($JSON);
   $related_dt = '';
   if (!empty($business_data[0]->id)) {
-    $related_dt = '<h3><span>' . t('LATEST FROM BUSINESS TODAY') . '</span></h3>';
+    $related_dt = '<span class="widget-title">' . t('LATEST FROM BUSINESS TODAY') . '</span>';
   }
   if (!empty($business_data[0]->id)) {
-    $related_dt.= "<div class='third_party-row'><ul>";
+    $related_dt.= "<ul>";
     $i = 0;
     foreach ($business_data as $key => $value) {
       if (!empty($value->title)) {
         $related_title = mb_strimwidth($value->title, 0, 200, "..");
         $path = $value->story_url;
         $img_url = $value->thumb_image;
-        $related_dt.= "<li class='col-third-party'><a href='$path' target='_blank' title='$related_title'><img src='$img_url' alt='$related_title' /></a>";
-        $related_dt.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
+        $related_dt.= "<li class='third-party-list'><a class='pic' href='$path' target='_blank' title='$related_title'><img src='$img_url' alt='$related_title' /></a>";
+        $related_dt.= "<div class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</div></li>";
       }
       $i++;
-      if ($i == 4)
+      if ($i == 5)
       break;
     }
-    $related_dt.= "</ul></div>";
+    $related_dt.= "</ul>";
   }
   return $related_dt;
 }

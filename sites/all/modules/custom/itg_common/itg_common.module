@@ -743,7 +743,7 @@ function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255) {
       $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));    
     }
     // Add smiley to right;
-    $titlte = $left_smiles  . $titlte .  $right_smiles ;
+    $titlte =  $right_smiles . $titlte .  $left_smiles ;
     
     return $titlte;
   }
