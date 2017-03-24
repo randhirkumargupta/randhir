@@ -6339,6 +6339,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     img{max-width: 100%;}
   }
   .podcast-detail .jw-controlbar{padding: 0;}
+  #block-views-photo-landing-slider-block .slick-slider .slick-slide .photo-landing-slider-pic{
+    height: auto;
+    img{position: static;}
+  }
 }
 @media all and (max-width: 480px){
   .photos-videos-wrapper .movie-videos, 
