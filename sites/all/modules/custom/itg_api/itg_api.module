@@ -116,6 +116,7 @@ function itg_nifty_feed() {
  */
 
 function itg_api_check_title($title) {
+  $title = html_entity_decode($title);
   $result = db_select('node', 'node')
     ->fields('node', array('title'))
     ->condition('title', $title, '=')

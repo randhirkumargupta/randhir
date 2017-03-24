@@ -243,10 +243,10 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
 
 function itg_common_meta_token_remove($form, &$form_state) {
-  drupal_add_js('jQuery(document).ready(function() {                  
-                 jQuery("#edit-metatags-und-description-value").val("");
-              
-          });', array('type' => 'inline', 'scope' => 'footer'));
+//  drupal_add_js('jQuery(document).ready(function() {                  
+//                 jQuery("#edit-metatags-und-description-value").val("");
+//              
+//          });', array('type' => 'inline', 'scope' => 'footer'));
   
   return $form;
 }
@@ -443,15 +443,15 @@ function itg_common_node_presave($node) {
    if (!empty($node->nid)) {
     //$ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
       // custom alias cnditions
-    if (in_array($node->type, $ctype_array)){
+    if (in_array($node->type, $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated'){
        itg_common_custompath_insert_load($node);
     }
   }
   
-  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
-//    p($node);
-    //itg_common_custompath_migrated_load($node);
-  }
+//  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
+////    p($node);
+//    itg_common_custompath_migrated_load($node);
+//  }
 
 
 }
@@ -465,11 +465,11 @@ function itg_common_node_insert($node) {
     
   $ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
   // custom alias cnditions
-  if (in_array($node->type, $ctype_array)) {
+  if (in_array($node->type, $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
      itg_common_custompath_insert_load($node);
-  }
-  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
-    //itg_common_custompath_migrated_load($node);
+  }elseif ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
+//    p($node);
+    itg_common_custompath_migrated_load($node);
   }
 }
 
