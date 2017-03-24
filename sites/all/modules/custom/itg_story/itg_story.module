@@ -156,8 +156,10 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'story_node_form':
       global $base_url, $user;
+      if($user->uid != 1) {
        unset($form['field_story_short_headline']);
        unset($form['field_story_long_head_line']);
+      }
        $form['field_story_big_image']['#attributes']['class'][] = 'element-hidden';
        
       // code for multiple byline
