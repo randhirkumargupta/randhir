@@ -384,7 +384,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         '#description' => t('If you uncheck this option, term will be in disabled state. By default is is checked. Only uncheck if you know what are you doing.'),
       );
       if ($form['tid']['#value'] !== NULL) {
-        $term_status = itg_category_manager_term_state($form['tid']['#value'], CATEGORY_MANAGMENT);
+        $term_status = itg_category_manager_term_state($form['tid']['#value']);
 
         if ($term_status) {
           $form['term-state-wrap']['state-mode'] = array(
@@ -467,7 +467,7 @@ function taxonomy_get_children_all($tid, $vid = 0, $key = 'tid') {
  */
 function itg_category_manager_term_validate($form, &$form_state) {
 // Check status of the mode
-  $mode_status = itg_category_manager_term_state($form_state['values']['tid'], CATEGORY_MANAGMENT);
+  $mode_status = itg_category_manager_term_state($form_state['values']['tid']);
 
 // If term is inactive then set disable mode value to 0 to avoid below error.
   if (!$mode_status) {
