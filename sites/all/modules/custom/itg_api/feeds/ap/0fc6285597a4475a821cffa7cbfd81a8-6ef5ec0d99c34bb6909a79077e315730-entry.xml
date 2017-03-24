@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:apcm="http://ap.org/schemas/03/2005/apcm" xmlns:apnm="http://ap.org/schemas/03/2005/apnm" xmlns:o="http://w3.org/ns/odrl/2/">
+   <id>urn:publicid:ap.org:6ef5ec0d99c34bb6909a79077e315730</id>
+   <title>AS--South Korea-Ship Sinks</title>
+   <updated>2014-05-09T06:47:06.590Z</updated>
+   <published>2014-05-09T06:46:46Z</published>
+   <author>
+      <name>AP</name>
+   </author>
+   <rights>Copyright 2014 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed.</rights>
+   <content type="text/xml">
+      <nitf version="-//IPTC//DTD NITF 3.4//EN" change.date="October 18, 2006" change.time="19:30">
+         <head>
+            <docdata>
+               <doc-id regsrc="AP"/>
+               <date.issue norm="20140509T064646Z"/>
+               <ed-msg info="Eds: Updates with court quizzing head of ferry company and other details; links new photos. With AP Photos."/>
+               <doc.rights owner="http://www.ap.org" agent="http://license.icopyright.net" type="none"/>
+               <doc.copyright holder="AP" year="2014"/>
+            </docdata>
+         </head>
+         <body>
+            <body.head>
+               <hedline>
+                  <hl1 id="headline">Prosecutors seek to arrest head of ferry company</hl1>
+                  <hl2 id="originalHeadline">Prosecutors seek to arrest head of ferry company</hl2>
+               </hedline>
+               <byline>HYUNG-JIN KIM<byttl>Associated Press</byttl>
+               </byline>
+               <distributor>The Associated Press</distributor>
+               <dateline>
+                  <location>SEOUL, South Korea</location>
+               </dateline>
+            </body.head>
+            <body.content>
+               <media id="media:6834594d511c42d68c3a54961841632d" media-type="Photo">
+                  <media-metadata id="media-id:6834594d511c42d68c3a54961841632d" name="id" value="urn:publicid:ap.org:6834594d511c42d68c3a54961841632d"/>
+                  <media-metadata id="media-managementId:6834594d511c42d68c3a54961841632d" name="managementId" value="urn:publicid:ap.org:6834594d511c42d68c3a54961841632d"/>
+                  <media-metadata id="media-friendlyKey:6834594d511c42d68c3a54961841632d" name="FriendlyKey" value="657855514115"/>
+                  <media-metadata id="media-transRef:6834594d511c42d68c3a54961841632d" name="TransRef" value="SEL802"/>
+                  <media-metadata id="media-metadata-OriginalFileName:d6bae2bf06f48b12530f6a70670069c8" name="OriginalFileName" value="South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:d6bae2bf06f48b12530f6a70670069c8" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:d6bae2bf06f48b12530f6a70670069c8" name="Role" value="Main"/>
+                  <media-metadata id="media-metadata-IngestLink:d6bae2bf06f48b12530f6a70670069c8" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:d6bae2bf06f48b12530f6a70670069c8" mime-type="image/jpeg" name="AP Photo" source="http://eapcontent.ap.org/jpg/2014/20140508/03/d6bae2bf06f48b12530f6a70670069c8.jpg?contentid=d6bae2bf06f48b12530f6a70670069c8/fmt=jpg/role=Main/reldt=2014-05-08T03:15:19/media=Photo/recordid=6834594d511c42d68c3a54961841632d/itemid=6834594d511c42d68c3a54961841632d/objfilename=secured/main.jpg/authToken=eNoFwlEOgyAQBcATQd4Cu9iPPYxQUBLbmpBGP%2fbwZsbarRI5csrCQQCQMFsd%2bpaytlC6g%2fTklkLBcUR3smZIBuRVF%2ftPLXOO77bbeenVjvr7tABKNk4leCJPgI%2f5AfpYHb0%3d&amp;token=1399879726_8E991C7E9D5680EDEFB0344AD1BBF03A" alternate-text="Kim Hank-sik" height="3000" width="1756" coding="jpg"/>
+                  <media-metadata id="media-metadata-OriginalFileName:d6ba01ef06f48b12530f6a706700902f" name="OriginalFileName" value="South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:d6ba01ef06f48b12530f6a706700902f" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:d6ba01ef06f48b12530f6a706700902f" name="Role" value="Preview"/>
+                  <media-metadata id="media-metadata-IngestLink:d6ba01ef06f48b12530f6a706700902f" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:d6ba01ef06f48b12530f6a706700902f" mime-type="image/jpeg" name="AP Preview Image" source="http://eapcontent.ap.org/jpg/2014/20140508/03/d6ba01ef06f48b12530f6a706700902f.jpg?contentid=d6ba01ef06f48b12530f6a706700902f/fmt=jpg/role=Preview/reldt=2014-05-08T03:15:19/media=Photo/recordid=6834594d511c42d68c3a54961841632d/itemid=6834594d511c42d68c3a54961841632d/objfilename=preview.jpg/authToken=eNoFwksOwyAMBcATgZ4Bm3ThwwQCLVI%2fkVBEFj58NWPtVokcOWXhIABImK0OPaTsoNYdpCe3FQqOI7qTPUMy8EDodk0tc47v82Xn0tXe9fdpAZRsnErwRJ4AH%2fMf6dgdgQ%3d%3d&amp;token=1399879726_D98A25CBD48C1D56F1605686D906695C" alternate-text="Kim Hank-sik" height="512" width="299" coding="jpg"/>
+                  <media-metadata id="media-metadata-OriginalFileName:d6ba311e06f48b12530f6a706700109e" name="OriginalFileName" value="South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:d6ba311e06f48b12530f6a706700109e" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:d6ba311e06f48b12530f6a706700109e" name="Role" value="Thumbnail"/>
+                  <media-metadata id="media-metadata-IngestLink:d6ba311e06f48b12530f6a706700109e" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:d6ba311e06f48b12530f6a706700109e" mime-type="image/jpeg" name="AP Thumbnail Image" source="http://eapcontent.ap.org/jpg/2014/20140508/03/d6ba311e06f48b12530f6a706700109e.jpg?contentid=d6ba311e06f48b12530f6a706700109e/fmt=jpg/role=Thumbnail/reldt=2014-05-08T03:15:19/media=Photo/recordid=6834594d511c42d68c3a54961841632d/itemid=6834594d511c42d68c3a54961841632d/objfilename=thumbnail.jpg/authToken=eNoNyksOwjAMBcATJXqOYwcWPkxTXIjEp1KE2oUPD7Oe8NOUhaU2laIASEViHXbTvjCRJ%2bhW06VTScLYki4N2v4PV4%2fvtD7neN8fsR92%2bHP9vLyAaozdCJkoE5C5%2fQDbaB1N&amp;token=1399879726_CD00E30A98294D5015259012A212CF4F" alternate-text="Kim Hank-sik" height="128" width="74" coding="jpg"/>
+                  <media-caption id="media-caption:6834594d511c42d68c3a54961841632d">
+                     <p>
+              In this April 17, 2014 photo, Kim Han-sik, president of Chonghaejin, is escorted by helpers to hold a press conference at Incheon Port International Passenger Terminal in Incheon, South Korea. South Korean prosecutors on Thursday, May 8, 2014 detained Kim, the head of the company that owns the ferry that sank last month, over an allegation of cargo overloading.(AP Photo/Yonhap)  KOREA OUT
+            </p>
+                  </media-caption>
+                  <media-producer id="media-producer:6834594d511c42d68c3a54961841632d">The Associated Press</media-producer>
+               </media>
+               <media id="media:65448acb0ff543e3bf6b3d80fe722a6c" media-type="Photo">
+                  <media-metadata id="media-id:65448acb0ff543e3bf6b3d80fe722a6c" name="id" value="urn:publicid:ap.org:65448acb0ff543e3bf6b3d80fe722a6c"/>
+                  <media-metadata id="media-managementId:65448acb0ff543e3bf6b3d80fe722a6c" name="managementId" value="urn:publicid:ap.org:65448acb0ff543e3bf6b3d80fe722a6c"/>
+                  <media-metadata id="media-friendlyKey:65448acb0ff543e3bf6b3d80fe722a6c" name="FriendlyKey" value="309292506465"/>
+                  <media-metadata id="media-transRef:65448acb0ff543e3bf6b3d80fe722a6c" name="TransRef" value="LJM104"/>
+                  <media-metadata id="media-metadata-OriginalFileName:200a0240e3b27611530f6a706700093d" name="OriginalFileName" value="South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:200a0240e3b27611530f6a706700093d" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:200a0240e3b27611530f6a706700093d" name="Role" value="Main"/>
+                  <media-metadata id="media-metadata-IngestLink:200a0240e3b27611530f6a706700093d" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:200a0240e3b27611530f6a706700093d" mime-type="image/jpeg" name="AP Photo" source="http://eapcontent.ap.org/jpg/2014/20140507/06/200a0240e3b27611530f6a706700093d.jpg?contentid=200a0240e3b27611530f6a706700093d/fmt=jpg/role=Main/reldt=2014-05-07T06:55:45/media=Photo/recordid=65448acb0ff543e3bf6b3d80fe722a6c/itemid=65448acb0ff543e3bf6b3d80fe722a6c/objfilename=secured/main.jpg/authToken=eNoNyksOwjAMBcATJXq2Y1ssfJi2BIjEp1KE2oUPD7Oe7GeYqGhzUzYAZKq5jWBgATeULisXN6KigluxxWH%2bjxe55nfGOud43x%2b5H3H05%2fZ5dQa1HHsQKlEloIr%2fAK3mHK4%3d&amp;token=1399879726_DCB6A896B40904302846F29B3731ECB9" height="3252" width="5100" coding="jpg"/>
+                  <media-metadata id="media-metadata-OriginalFileName:200a3ebfe3b27611530f6a7067001a63" name="OriginalFileName" value="South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:200a3ebfe3b27611530f6a7067001a63" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:200a3ebfe3b27611530f6a7067001a63" name="Role" value="Preview"/>
+                  <media-metadata id="media-metadata-IngestLink:200a3ebfe3b27611530f6a7067001a63" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:200a3ebfe3b27611530f6a7067001a63" mime-type="image/jpeg" name="AP Preview Image" source="http://eapcontent.ap.org/jpg/2014/20140507/06/200a3ebfe3b27611530f6a7067001a63.jpg?contentid=200a3ebfe3b27611530f6a7067001a63/fmt=jpg/role=Preview/reldt=2014-05-07T06:55:45/media=Photo/recordid=65448acb0ff543e3bf6b3d80fe722a6c/itemid=65448acb0ff543e3bf6b3d80fe722a6c/objfilename=preview.jpg/authToken=eNoNyksKwzAMBcAT2TxZkbTSYeygtIZ%2bAqakCx2%2bnfVkfF1ZWDZTaQqAVCT36Q3oHOMowaMVU6IijKNoN6j9X1fOz%2fKx1nzd7nlefsVjfz%2bjgbacpxMqUSWgsv0A2LgdQw%3d%3d&amp;token=1399879726_A59D1B1FEC3A85617931D2DC10E87612" height="326" width="512" coding="jpg"/>
+                  <media-metadata id="media-metadata-OriginalFileName:200a7184e3b27611530f6a70670091ca" name="OriginalFileName" value="South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:200a7184e3b27611530f6a70670091ca" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:200a7184e3b27611530f6a70670091ca" name="Role" value="Thumbnail"/>
+                  <media-metadata id="media-metadata-IngestLink:200a7184e3b27611530f6a70670091ca" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:200a7184e3b27611530f6a70670091ca" mime-type="image/jpeg" name="AP Thumbnail Image" source="http://eapcontent.ap.org/jpg/2014/20140507/06/200a7184e3b27611530f6a70670091ca.jpg?contentid=200a7184e3b27611530f6a70670091ca/fmt=jpg/role=Thumbnail/reldt=2014-05-07T06:55:45/media=Photo/recordid=65448acb0ff543e3bf6b3d80fe722a6c/itemid=65448acb0ff543e3bf6b3d80fe722a6c/objfilename=thumbnail.jpg/authToken=eNoFwlEOAiEMBcATQV4pbfWjh2EJKonubkLM%2btHDm5kYP1cWlmoqRQGQikSfXoBmdKtp8FaSKVESxiNpM6gBd%2botvsu3teb%2bfMV5%2bTXe%2ffiMAqoxTydkokxAZvsDudQc6g%3d%3d&amp;token=1399879726_E6F99982BDE5B74A3F7011B0E23EA305" height="81" width="128" coding="jpg"/>
+                  <media-caption id="media-caption:65448acb0ff543e3bf6b3d80fe722a6c">
+                     <p>
+              A girl with a man puts a paper ship she made to pay tribute to the victims and missing passengers of the sunken ferry Sewol at a group memorial altar in Seoul, South Korea, Wednesday, May 7, 2014. The ferry disaster left more than 200 people dead, with others still missing. Government and civilian divers are fighting rapid currents as they try to retrieve the remaining bodies. (AP Photo/Lee Jin-man)
+            </p>
+                  </media-caption>
+                  <media-producer id="media-producer:65448acb0ff543e3bf6b3d80fe722a6c">The Associated Press</media-producer>
+               </media>
+               <media id="media:70796b36082b4cc58fdb48f580de4798" media-type="Photo">
+                  <media-metadata id="media-id:70796b36082b4cc58fdb48f580de4798" name="id" value="urn:publicid:ap.org:70796b36082b4cc58fdb48f580de4798"/>
+                  <media-metadata id="media-managementId:70796b36082b4cc58fdb48f580de4798" name="managementId" value="urn:publicid:ap.org:70796b36082b4cc58fdb48f580de4798"/>
+                  <media-metadata id="media-friendlyKey:70796b36082b4cc58fdb48f580de4798" name="FriendlyKey" value="116586505090"/>
+                  <media-metadata id="media-transRef:70796b36082b4cc58fdb48f580de4798" name="TransRef" value="SEL801"/>
+                  <media-metadata id="media-metadata-OriginalFileName:fb62bf2906d28a12530f6a70670032f7" name="OriginalFileName" value="South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:fb62bf2906d28a12530f6a70670032f7" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:fb62bf2906d28a12530f6a70670032f7" name="Role" value="Main"/>
+                  <media-metadata id="media-metadata-IngestLink:fb62bf2906d28a12530f6a70670032f7" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:fb62bf2906d28a12530f6a70670032f7" mime-type="image/jpeg" name="AP Photo" source="http://eapcontent.ap.org/jpg/2014/20140508/02/fb62bf2906d28a12530f6a70670032f7.jpg?contentid=fb62bf2906d28a12530f6a70670032f7/fmt=jpg/role=Main/reldt=2014-05-08T02:38:21/media=Photo/recordid=70796b36082b4cc58fdb48f580de4798/itemid=70796b36082b4cc58fdb48f580de4798/objfilename=secured/main.jpg/authToken=eNoFwkEOwjAMBMAXJVrbtQ0HP6YpCUSCtlKEyiGPRzOz%2fsJERRc3ZQNApjq3Hq0Yl8b3BHtwuq3ESQUt2eowB4Sbz%2b%2bIMkbfn695XnHV93Z8KoOW2c8gZKJMQBb%2fA96hHVc%3d&amp;token=1399879726_078436AB57708A64D2268886B4952C08" height="1874" width="3000" coding="jpg"/>
+                  <media-metadata id="media-metadata-OriginalFileName:fb62cf8f06d28a12530f6a7067002abd" name="OriginalFileName" value="South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:fb62cf8f06d28a12530f6a7067002abd" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:fb62cf8f06d28a12530f6a7067002abd" name="Role" value="Preview"/>
+                  <media-metadata id="media-metadata-IngestLink:fb62cf8f06d28a12530f6a7067002abd" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:fb62cf8f06d28a12530f6a7067002abd" mime-type="image/jpeg" name="AP Preview Image" source="http://eapcontent.ap.org/jpg/2014/20140508/02/fb62cf8f06d28a12530f6a7067002abd.jpg?contentid=fb62cf8f06d28a12530f6a7067002abd/fmt=jpg/role=Preview/reldt=2014-05-08T02:38:21/media=Photo/recordid=70796b36082b4cc58fdb48f580de4798/itemid=70796b36082b4cc58fdb48f580de4798/objfilename=preview.jpg/authToken=eNoFwkEOwyAMBMAXgdYG7PTgxwCBFqlNIqEqPfD4ama1n0lIIUWVxAJAJT5WHdaLcO1bd5Cd3ZaJXQroTrJCFOBc9vWdVuYcx%2fO1rtvu9q7npzEornEZwRN5AnzQP%2f8GHes%3d&amp;token=1399879726_8B40C4E9A7639B227FC9C084C97D6A21" height="319" width="512" coding="jpg"/>
+                  <media-metadata id="media-metadata-OriginalFileName:fb624b1c06d28a12530f6a7067004e50" name="OriginalFileName" value="South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:fb624b1c06d28a12530f6a7067004e50" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:fb624b1c06d28a12530f6a7067004e50" name="Role" value="Thumbnail"/>
+                  <media-metadata id="media-metadata-IngestLink:fb624b1c06d28a12530f6a7067004e50" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:fb624b1c06d28a12530f6a7067004e50" mime-type="image/jpeg" name="AP Thumbnail Image" source="http://eapcontent.ap.org/jpg/2014/20140508/02/fb624b1c06d28a12530f6a7067004e50.jpg?contentid=fb624b1c06d28a12530f6a7067004e50/fmt=jpg/role=Thumbnail/reldt=2014-05-08T02:38:21/media=Photo/recordid=70796b36082b4cc58fdb48f580de4798/itemid=70796b36082b4cc58fdb48f580de4798/objfilename=thumbnail.jpg/authToken=eNoFwksOAiEQBcATQV43%2fdFFH2ZARkn8TELMuODwpmr1X1jRouKmbADc5LraiL0aS6WWYDdOl404acGebHOYA9IV6zujzjne98c6zjj7s31enUGyxhGETJQJyMX%2f3hcdUw%3d%3d&amp;token=1399879726_9DCC687E83981308360D99511AF2117F" height="79" width="128" coding="jpg"/>
+                  <media-caption id="media-caption:70796b36082b4cc58fdb48f580de4798">
+                     <p>
+              Relatives of a passenger aboard the sunken ferry Sewol weep at a port in Jindo, South Korea, Thursday, May 8, 2014. South Korean prosecutors said they have detained the head of the company that owns the ferry that sank last month over an allegation of cargo overloading.(AP Photo/Yonhap)   KOREA OUT
+            </p>
+                  </media-caption>
+                  <media-producer id="media-producer:70796b36082b4cc58fdb48f580de4798">The Associated Press</media-producer>
+               </media>
+               <media id="media:70a7bd4be98f43ac8ee8313fe489945f" media-type="Photo">
+                  <media-metadata id="media-id:70a7bd4be98f43ac8ee8313fe489945f" name="id" value="urn:publicid:ap.org:70a7bd4be98f43ac8ee8313fe489945f"/>
+                  <media-metadata id="media-managementId:70a7bd4be98f43ac8ee8313fe489945f" name="managementId" value="urn:publicid:ap.org:70a7bd4be98f43ac8ee8313fe489945f"/>
+                  <media-metadata id="media-friendlyKey:70a7bd4be98f43ac8ee8313fe489945f" name="FriendlyKey" value="159169565888"/>
+                  <media-metadata id="media-transRef:70a7bd4be98f43ac8ee8313fe489945f" name="TransRef" value="SPANTOK801"/>
+                  <media-metadata id="media-metadata-OriginalFileName:1a452f7806b18a12530f6a70670099db" name="OriginalFileName" value="SURCOREA-NAUFRAGIO_SPANTOK801.jpg"/>
+                  <media-metadata id="media-metadata-Format:1a452f7806b18a12530f6a70670099db" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:1a452f7806b18a12530f6a70670099db" name="Role" value="Main"/>
+                  <media-metadata id="media-metadata-IngestLink:1a452f7806b18a12530f6a70670099db" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:1a452f7806b18a12530f6a70670099db" mime-type="image/jpeg" name="AP Photo" source="http://eapcontent.ap.org/jpg/2014/20140508/02/1a452f7806b18a12530f6a70670099db.jpg?contentid=1a452f7806b18a12530f6a70670099db/fmt=jpg/role=Main/reldt=2014-05-08T02:01:21/media=Photo/recordid=70a7bd4be98f43ac8ee8313fe489945f/itemid=70a7bd4be98f43ac8ee8313fe489945f/objfilename=secured/main.jpg/authToken=eNoFwksOwyAMBcATgZ4B22Hhw0BKWqR%2bIqEqXfjw1YyPn0nmzEWFkwBQKdX3adQKp0O3AOkUtkYpcMYRpClEgVpv3b%2fL%2blrzfX%2f4edk1nvvnNRKo%2bDyNEIkiATHrH80cHTI%3d&amp;token=1399879726_90E343776588AC7FFAF01F856CB09BDB" height="1254" width="2000" coding="jpg"/>
+                  <media-metadata id="media-metadata-OriginalFileName:1a350ea206b18a12530f6a706700bed3" name="OriginalFileName" value="SURCOREA-NAUFRAGIO_SPANTOK801.jpg"/>
+                  <media-metadata id="media-metadata-Format:1a350ea206b18a12530f6a706700bed3" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:1a350ea206b18a12530f6a706700bed3" name="Role" value="Preview"/>
+                  <media-metadata id="media-metadata-IngestLink:1a350ea206b18a12530f6a706700bed3" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:1a350ea206b18a12530f6a706700bed3" mime-type="image/jpeg" name="AP Preview Image" source="http://eapcontent.ap.org/jpg/2014/20140508/02/1a350ea206b18a12530f6a706700bed3.jpg?contentid=1a350ea206b18a12530f6a706700bed3/fmt=jpg/role=Preview/reldt=2014-05-08T02:01:21/media=Photo/recordid=70a7bd4be98f43ac8ee8313fe489945f/itemid=70a7bd4be98f43ac8ee8313fe489945f/objfilename=preview.jpg/authToken=eNoFwlsOAiEMBdAVQW4pbfWji4GxKomPSYiZ%2bWDx5pwVpysLSzWVogBM63Vtw6mxIFpJ0E7p0qgkYdyTNoMa0OPG6ze9zzk%2bj%2bfaDz%2fitX3fUUB1jd0JmSgTkNn%2b3U4deA%3d%3d&amp;token=1399879726_40278C9D6AF4A63147E93D1A9F4C2038" height="321" width="512" coding="jpg"/>
+                  <media-metadata id="media-metadata-OriginalFileName:1a35b79906b18a12530f6a706700a003" name="OriginalFileName" value="SURCOREA-NAUFRAGIO_SPANTOK801.jpg"/>
+                  <media-metadata id="media-metadata-Format:1a35b79906b18a12530f6a706700a003" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:1a35b79906b18a12530f6a706700a003" name="Role" value="Thumbnail"/>
+                  <media-metadata id="media-metadata-IngestLink:1a35b79906b18a12530f6a706700a003" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:1a35b79906b18a12530f6a706700a003" mime-type="image/jpeg" name="AP Thumbnail Image" source="http://eapcontent.ap.org/jpg/2014/20140508/02/1a35b79906b18a12530f6a706700a003.jpg?contentid=1a35b79906b18a12530f6a706700a003/fmt=jpg/role=Thumbnail/reldt=2014-05-08T02:01:21/media=Photo/recordid=70a7bd4be98f43ac8ee8313fe489945f/itemid=70a7bd4be98f43ac8ee8313fe489945f/objfilename=thumbnail.jpg/authToken=eNoFwtEKwyAMBdAvUm6MJvMhH6PFbcLaFWS0D%2fn4cY6P24QLl6xSkgBQydW3adS4dK01QDqFR6MUCuMZpClEgQaw%2f5b1tebxevt52TU%2b23cfCZR9nkaIRJGAyPoHwuYc8Q%3d%3d&amp;token=1399879726_E684F6B1D0B435A49D61EC30020AD3DF" height="80" width="128" coding="jpg"/>
+                  <media-caption id="media-caption:70a7bd4be98f43ac8ee8313fe489945f">
+                     <p>
+              En esta fotografía del 18 de abril de 2014, funcionarios de la Guardia Costera surcoreana buscan a pasajeros perdidos que iban a bordo del transbordador Sewol, al centro, en aguas de la costa meridional de Corea del Sur, cerca de Jindo. (Foto AP/Yonhap/Archivo)
+            </p>
+                  </media-caption>
+                  <media-producer id="media-producer:70a7bd4be98f43ac8ee8313fe489945f">The Associated Press</media-producer>
+               </media>
+               <media id="media:a6a54d7bec054d0e8b38dd528c47e5dc" media-type="Photo">
+                  <media-metadata id="media-id:a6a54d7bec054d0e8b38dd528c47e5dc" name="id" value="urn:publicid:ap.org:a6a54d7bec054d0e8b38dd528c47e5dc"/>
+                  <media-metadata id="media-managementId:a6a54d7bec054d0e8b38dd528c47e5dc" name="managementId" value="urn:publicid:ap.org:a6a54d7bec054d0e8b38dd528c47e5dc"/>
+                  <media-metadata id="media-friendlyKey:a6a54d7bec054d0e8b38dd528c47e5dc" name="FriendlyKey" value="960673788016"/>
+                  <media-metadata id="media-transRef:a6a54d7bec054d0e8b38dd528c47e5dc" name="TransRef" value="SEL102"/>
+                  <media-metadata id="media-metadata-OriginalFileName:7b8ec2772baea612530f6a7067008d0f" name="OriginalFileName" value="South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:7b8ec2772baea612530f6a7067008d0f" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:7b8ec2772baea612530f6a7067008d0f" name="Role" value="Main"/>
+                  <media-metadata id="media-metadata-IngestLink:7b8ec2772baea612530f6a7067008d0f" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:7b8ec2772baea612530f6a7067008d0f" mime-type="image/jpeg" name="AP Photo" source="http://eapcontent.ap.org/jpg/2014/20140509/06/7b8ec2772baea612530f6a7067008d0f.jpg?contentid=7b8ec2772baea612530f6a7067008d0f/fmt=jpg/role=Main/reldt=2014-05-09T06:24:26/media=Photo/recordid=a6a54d7bec054d0e8b38dd528c47e5dc/itemid=a6a54d7bec054d0e8b38dd528c47e5dc/objfilename=secured/main.jpg/authToken=eNoFwksOwyAMBcATgZ4N2OnChwHqtEj9REJVsuDw1czyyySVVLJKYQGgkm%2brD9O2eWfVwK16qEIcSsIepCpEge2Off2mtTnH5%2fFcx2mnv%2fr37QzKaxxGiESRgJj0D%2fWzHcI%3d&amp;token=1399879726_232F85B926FE56B3B5A141161024008B" height="2073" width="3000" coding="jpg"/>
+                  <media-metadata id="media-metadata-OriginalFileName:7b8e9e1e2baea612530f6a706700e2b0" name="OriginalFileName" value="South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:7b8e9e1e2baea612530f6a706700e2b0" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:7b8e9e1e2baea612530f6a706700e2b0" name="Role" value="Preview"/>
+                  <media-metadata id="media-metadata-IngestLink:7b8e9e1e2baea612530f6a706700e2b0" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:7b8e9e1e2baea612530f6a706700e2b0" mime-type="image/jpeg" name="AP Preview Image" source="http://eapcontent.ap.org/jpg/2014/20140509/06/7b8e9e1e2baea612530f6a706700e2b0.jpg?contentid=7b8e9e1e2baea612530f6a706700e2b0/fmt=jpg/role=Preview/reldt=2014-05-09T06:24:26/media=Photo/recordid=a6a54d7bec054d0e8b38dd528c47e5dc/itemid=a6a54d7bec054d0e8b38dd528c47e5dc/objfilename=preview.jpg/authToken=eNoFwksOwyAMBcATgZ4N2M3Ch4HIbZH6iYSqZOHDVzPhl0lppVWVxgJApW6xT9Nx883JE4%2fuqQtxagX3JF0hCjgPxG%2fZWGt%2bHs84Tjv9tX%2ffzqAa8zBCJsoE5KJ%2fAg0d6g%3d%3d&amp;token=1399879726_D4A4E5987C1A351D0361F9AAA1264E4D" height="353" width="512" coding="jpg"/>
+                  <media-metadata id="media-metadata-OriginalFileName:7b8efbe62baea612530f6a70670065e1" name="OriginalFileName" value="South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:7b8efbe62baea612530f6a70670065e1" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:7b8efbe62baea612530f6a70670065e1" name="Role" value="Thumbnail"/>
+                  <media-metadata id="media-metadata-IngestLink:7b8efbe62baea612530f6a70670065e1" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:7b8efbe62baea612530f6a70670065e1" mime-type="image/jpeg" name="AP Thumbnail Image" source="http://eapcontent.ap.org/jpg/2014/20140509/06/7b8efbe62baea612530f6a70670065e1.jpg?contentid=7b8efbe62baea612530f6a70670065e1/fmt=jpg/role=Thumbnail/reldt=2014-05-09T06:24:26/media=Photo/recordid=a6a54d7bec054d0e8b38dd528c47e5dc/itemid=a6a54d7bec054d0e8b38dd528c47e5dc/objfilename=thumbnail.jpg/authToken=eNoFwksOwyAMBcATgZ4B2%2b3Ch4HIaZH6iYSqZOHDVzPhl0nlyk2FiwBQaffYpum4%2bT5cUhndUxcqiSv2JF0hCgg7xW%2fZWGt%2bHs84Tjv9tX3fXkAt5mGETJQJyFX%2fCI8d8Q%3d%3d&amp;token=1399879726_30A4E345E2A1366D78AA80BDD5948B05" height="88" width="128" coding="jpg"/>
+                  <media-caption id="media-caption:a6a54d7bec054d0e8b38dd528c47e5dc">
+                     <p>
+              A family member of the victims of the sunken ferry Sewol displays portraits of victims near the presidential Blue House in Seoul, South Korea, Friday, May 9, 2014. Family members of the victims in the ferry sinking marched to the presidential Blue House in Seoul early Friday calling for a meeting with President Park Geun-hye but ended up sitting on streets near the presidential palace after police officers blocked them. Park's office said a senior presidential official plans to meet them later Friday. (AP Photo/Ahn Young-joon)
+            </p>
+                  </media-caption>
+                  <media-producer id="media-producer:a6a54d7bec054d0e8b38dd528c47e5dc">The Associated Press</media-producer>
+               </media>
+               <media id="media:259bb4f28a1e4d60b816c60b4b5337ae" media-type="Photo">
+                  <media-metadata id="media-id:259bb4f28a1e4d60b816c60b4b5337ae" name="id" value="urn:publicid:ap.org:259bb4f28a1e4d60b816c60b4b5337ae"/>
+                  <media-metadata id="media-managementId:6dc7998f4a154cd4b55a16cb09c17c25" name="managementId" value="urn:publicid:ap.org:6dc7998f4a154cd4b55a16cb09c17c25"/>
+                  <media-metadata id="media-friendlyKey:259bb4f28a1e4d60b816c60b4b5337ae" name="FriendlyKey" value="373597274104"/>
+                  <media-metadata id="media-transRef:6dc7998f4a154cd4b55a16cb09c17c25" name="TransRef" value="LJM101"/>
+                  <media-metadata id="media-metadata-OriginalFileName:f5ca972e2b38a412530f6a7067008658" name="OriginalFileName" value="APTOPIX South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:f5ca972e2b38a412530f6a7067008658" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:f5ca972e2b38a412530f6a7067008658" name="Role" value="Main"/>
+                  <media-metadata id="media-metadata-IngestLink:f5ca972e2b38a412530f6a7067008658" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:f5ca972e2b38a412530f6a7067008658" mime-type="image/jpeg" name="AP Photo" source="http://eapcontent.ap.org/jpg/2014/20140509/04/f5ca972e2b38a412530f6a7067008658.jpg?contentid=f5ca972e2b38a412530f6a7067008658/fmt=jpg/role=Main/reldt=2014-05-09T04:16:04/media=Photo/recordid=259bb4f28a1e4d60b816c60b4b5337ae/itemid=6dc7998f4a154cd4b55a16cb09c17c25/objfilename=secured/main.jpg/authToken=eNoFwksOwyAMBcATgZ4NtsnChyGItEj9REJVsuDw1czqt2uSJNlUWAGY5m214Ye0uhn3wHsqoWbiIAlH0GpQA4pKWb%2fp%2b5zj83iu8%2fKrv9r33RmU1zidEIkiATHZH9uhHTs%3d&amp;token=1399879726_CEBC50BFA36B1B652BD63A9C680BF58A" height="2970" width="4446" coding="jpg"/>
+                  <media-metadata id="media-metadata-OriginalFileName:f5ca707b2b38a412530f6a7067006d4c" name="OriginalFileName" value="APTOPIX South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:f5ca707b2b38a412530f6a7067006d4c" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:f5ca707b2b38a412530f6a7067006d4c" name="Role" value="Preview"/>
+                  <media-metadata id="media-metadata-IngestLink:f5ca707b2b38a412530f6a7067006d4c" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:f5ca707b2b38a412530f6a7067006d4c" mime-type="image/jpeg" name="AP Preview Image" source="http://eapcontent.ap.org/jpg/2014/20140509/04/f5ca707b2b38a412530f6a7067006d4c.jpg?contentid=f5ca707b2b38a412530f6a7067006d4c/fmt=jpg/role=Preview/reldt=2014-05-09T04:16:04/media=Photo/recordid=259bb4f28a1e4d60b816c60b4b5337ae/itemid=6dc7998f4a154cd4b55a16cb09c17c25/objfilename=preview.jpg/authToken=eNoNyEEOwiAQBdATQf4wMKOLOUxBqiS2NiGmXczh9S2f98uEC5esUpIAUMl3b8PW0haF1pAq38KSKYXCWIP8VxSQR27%2bnVbnHPvz5cdpZ3%2b3z9YTKPs4jBCJIgGR9QfoaB2K&amp;token=1399879726_BF8DB86494296C91F000DD05D2414FAF" height="342" width="512" coding="jpg"/>
+                  <media-metadata id="media-metadata-OriginalFileName:f5cabd8b2b38a412530f6a7067007220" name="OriginalFileName" value="APTOPIX South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:f5cabd8b2b38a412530f6a7067007220" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:f5cabd8b2b38a412530f6a7067007220" name="Role" value="Thumbnail"/>
+                  <media-metadata id="media-metadata-IngestLink:f5cabd8b2b38a412530f6a7067007220" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:f5cabd8b2b38a412530f6a7067007220" mime-type="image/jpeg" name="AP Thumbnail Image" source="http://eapcontent.ap.org/jpg/2014/20140509/04/f5cabd8b2b38a412530f6a7067007220.jpg?contentid=f5cabd8b2b38a412530f6a7067007220/fmt=jpg/role=Thumbnail/reldt=2014-05-09T04:16:04/media=Photo/recordid=259bb4f28a1e4d60b816c60b4b5337ae/itemid=6dc7998f4a154cd4b55a16cb09c17c25/objfilename=thumbnail.jpg/authToken=eNoNyksOAiEMANATQfqh7bjoYQAZJfEzCTHjoofXt34xvq4sLMVUSAHAtFyiT9%2bl13bdWqLGW6oFKQnDnrQaqP0fEcRneVtrvm73OE4%2fx6O%2fn4MAS8zDETJiRoDM9gPybR2E&amp;token=1399879726_673AEBBE1FAFF91DB94B5CA1EDFD5993" height="85" width="128" coding="jpg"/>
+                  <media-caption id="media-caption:259bb4f28a1e4d60b816c60b4b5337ae">
+                     <p>
+              Family members holding the portraits of the victims of the sunken ferry Sewol, sit on a street near the presidential Blue House in Seoul, South Korea, Friday, May 9, 2014. Family members marched to the presidential Blue House in Seoul early Friday calling for a meeting with President Park Geun-hye but ended up sitting on streets near the presidential palace after police officers blocked them. Park's office said a senior presidential official plans to meet them later Friday. (AP Photo/Lee Jin-man)
+            </p>
+                  </media-caption>
+                  <media-producer id="media-producer:259bb4f28a1e4d60b816c60b4b5337ae">The Associated Press</media-producer>
+               </media>
+               <media id="media:9c6c3c87e8784ed1bad2a6ac987eae21" media-type="Photo">
+                  <media-metadata id="media-id:9c6c3c87e8784ed1bad2a6ac987eae21" name="id" value="urn:publicid:ap.org:9c6c3c87e8784ed1bad2a6ac987eae21"/>
+                  <media-metadata id="media-managementId:9c6c3c87e8784ed1bad2a6ac987eae21" name="managementId" value="urn:publicid:ap.org:9c6c3c87e8784ed1bad2a6ac987eae21"/>
+                  <media-metadata id="media-friendlyKey:9c6c3c87e8784ed1bad2a6ac987eae21" name="FriendlyKey" value="518356542285"/>
+                  <media-metadata id="media-transRef:9c6c3c87e8784ed1bad2a6ac987eae21" name="TransRef" value="LJM103"/>
+                  <media-metadata id="media-metadata-OriginalFileName:bcd363c62b37a412530f6a706700453b" name="OriginalFileName" value="South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:bcd363c62b37a412530f6a706700453b" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:bcd363c62b37a412530f6a706700453b" name="Role" value="Main"/>
+                  <media-metadata id="media-metadata-IngestLink:bcd363c62b37a412530f6a706700453b" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:bcd363c62b37a412530f6a706700453b" mime-type="image/jpeg" name="AP Photo" source="http://eapcontent.ap.org/jpg/2014/20140509/04/bcd363c62b37a412530f6a706700453b.jpg?contentid=bcd363c62b37a412530f6a706700453b/fmt=jpg/role=Main/reldt=2014-05-09T04:14:43/media=Photo/recordid=9c6c3c87e8784ed1bad2a6ac987eae21/itemid=9c6c3c87e8784ed1bad2a6ac987eae21/objfilename=secured/main.jpg/authToken=eNoFwlEOAiEMBcATQV5paeNHD7MgKonubkLM%2btHDm5kYP1euXMW0FgVgKrfo01u%2fs3LXVBpb2oRKqoxH0s2gBkjlFt%2flba25P19xXn6Ndz8%2bo4Ak5umETJQJyGx%2f310dVQ%3d%3d&amp;token=1399879726_79160850B6F929A70073B2792EA5BBDD" height="3006" width="4794" coding="jpg"/>
+                  <media-metadata id="media-metadata-OriginalFileName:bcc3d6382b37a412530f6a706700db81" name="OriginalFileName" value="South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:bcc3d6382b37a412530f6a706700db81" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:bcc3d6382b37a412530f6a706700db81" name="Role" value="Preview"/>
+                  <media-metadata id="media-metadata-IngestLink:bcc3d6382b37a412530f6a706700db81" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:bcc3d6382b37a412530f6a706700db81" mime-type="image/jpeg" name="AP Preview Image" source="http://eapcontent.ap.org/jpg/2014/20140509/04/bcc3d6382b37a412530f6a706700db81.jpg?contentid=bcc3d6382b37a412530f6a706700db81/fmt=jpg/role=Preview/reldt=2014-05-09T04:14:43/media=Photo/recordid=9c6c3c87e8784ed1bad2a6ac987eae21/itemid=9c6c3c87e8784ed1bad2a6ac987eae21/objfilename=preview.jpg/authToken=eNoFwkEOwyAMBMAXgdYY7PTgxwRCW6QmjYSq5ODHVzPebxMuXLJKSQJAJT%2b8Daut8Sa8hFRZw5ophcJ4BlkVosBWF%2fLftDrnOF5vPy%2b7%2bqd9955A2cdphEgUCYisf%2blwHYg%3d&amp;token=1399879726_F87CF3B5055F3AF84E934B768B7078DE" height="321" width="512" coding="jpg"/>
+                  <media-metadata id="media-metadata-OriginalFileName:bcd382612b37a412530f6a7067002ff9" name="OriginalFileName" value="South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:bcd382612b37a412530f6a7067002ff9" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:bcd382612b37a412530f6a7067002ff9" name="Role" value="Thumbnail"/>
+                  <media-metadata id="media-metadata-IngestLink:bcd382612b37a412530f6a7067002ff9" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:bcd382612b37a412530f6a7067002ff9" mime-type="image/jpeg" name="AP Thumbnail Image" source="http://eapcontent.ap.org/jpg/2014/20140509/04/bcd382612b37a412530f6a7067002ff9.jpg?contentid=bcd382612b37a412530f6a7067002ff9/fmt=jpg/role=Thumbnail/reldt=2014-05-09T04:14:43/media=Photo/recordid=9c6c3c87e8784ed1bad2a6ac987eae21/itemid=9c6c3c87e8784ed1bad2a6ac987eae21/objfilename=thumbnail.jpg/authToken=eNoFwksOwyAMBcATgZ5tsJuFDxMotEj9REJVsuDw1cxql6tkyck0swIwTduqw0u9y42VAhexsCfikAU96G5QA7j3bf2mlznH5%2fFcx%2blne9XvuzEorXE4IRJFAqLYH9u%2fHV0%3d&amp;token=1399879726_3722C17B7446E03E4E9F24DD0DA814CB" height="80" width="128" coding="jpg"/>
+                  <media-caption id="media-caption:9c6c3c87e8784ed1bad2a6ac987eae21">
+                     <p>
+              Family members of the victims of the sunken ferry Sewol and citizens sit on a street near the presidential Blue House in Seoul, South Korea, Friday, May 9, 2014. Family members of the victims in the ferry sinking marched to the presidential Blue House in Seoul early Friday calling for a meeting with President Park Geun-hye but ended up sitting on streets near the presidential palace after police officers blocked them. Park's office said a senior presidential official plans to meet them later Friday. (AP Photo/Lee Jin-man)
+            </p>
+                  </media-caption>
+                  <media-producer id="media-producer:9c6c3c87e8784ed1bad2a6ac987eae21">The Associated Press</media-producer>
+               </media>
+               <media id="media:62de42af068d48b394255d58bcca2292" media-type="Photo">
+                  <media-metadata id="media-id:62de42af068d48b394255d58bcca2292" name="id" value="urn:publicid:ap.org:62de42af068d48b394255d58bcca2292"/>
+                  <media-metadata id="media-managementId:62de42af068d48b394255d58bcca2292" name="managementId" value="urn:publicid:ap.org:62de42af068d48b394255d58bcca2292"/>
+                  <media-metadata id="media-friendlyKey:62de42af068d48b394255d58bcca2292" name="FriendlyKey" value="833608157712"/>
+                  <media-metadata id="media-transRef:62de42af068d48b394255d58bcca2292" name="TransRef" value="LJM102"/>
+                  <media-metadata id="media-metadata-OriginalFileName:1f8af5622b37a412530f6a706700b892" name="OriginalFileName" value="South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:1f8af5622b37a412530f6a706700b892" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:1f8af5622b37a412530f6a706700b892" name="Role" value="Main"/>
+                  <media-metadata id="media-metadata-IngestLink:1f8af5622b37a412530f6a706700b892" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:1f8af5622b37a412530f6a706700b892" mime-type="image/jpeg" name="AP Photo" source="http://eapcontent.ap.org/jpg/2014/20140509/04/1f8af5622b37a412530f6a706700b892.jpg?contentid=1f8af5622b37a412530f6a706700b892/fmt=jpg/role=Main/reldt=2014-05-09T04:14:03/media=Photo/recordid=62de42af068d48b394255d58bcca2292/itemid=62de42af068d48b394255d58bcca2292/objfilename=secured/main.jpg/authToken=eNoFwksOwyAMBcATgZ4N2MnCh4EIWqR%2bIqEqWfjw1Yz32ySVVLJKYQGgknc%2fptHY6ijCgVvSUDNxKAkjSFWIAm3b2X%2fL2lrz83j6ednVX8f33RmUfZ5GiESRgJj0D9QxHTE%3d&amp;token=1399879726_C80A734D634A41E2445EB0EB4849899C" height="3120" width="4974" coding="jpg"/>
+                  <media-metadata id="media-metadata-OriginalFileName:1f8a1bf62b37a412530f6a706700f0ea" name="OriginalFileName" value="South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:1f8a1bf62b37a412530f6a706700f0ea" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:1f8a1bf62b37a412530f6a706700f0ea" name="Role" value="Preview"/>
+                  <media-metadata id="media-metadata-IngestLink:1f8a1bf62b37a412530f6a706700f0ea" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:1f8a1bf62b37a412530f6a706700f0ea" mime-type="image/jpeg" name="AP Preview Image" source="http://eapcontent.ap.org/jpg/2014/20140509/04/1f8a1bf62b37a412530f6a706700f0ea.jpg?contentid=1f8a1bf62b37a412530f6a706700f0ea/fmt=jpg/role=Preview/reldt=2014-05-09T04:14:03/media=Photo/recordid=62de42af068d48b394255d58bcca2292/itemid=62de42af068d48b394255d58bcca2292/objfilename=preview.jpg/authToken=eNoFwtEKwyAMBdAvUm6MJutDPkaLbsLWFWS0D%2fn4cY7324QLl6xSkgBQyZvv02g8KrUhITXWUDOlUBgjSFWIAgO9%2bm9ZW2sez5efl139vX8%2fPYGyz9MIkSgSEFn%2f7xUdtA%3d%3d&amp;token=1399879726_28298964D534904ADB5BC6A3B600A9FE" height="321" width="512" coding="jpg"/>
+                  <media-metadata id="media-metadata-OriginalFileName:1f8a70d12b37a412530f6a706700652a" name="OriginalFileName" value="South Korea Ship Sinks.JPEG"/>
+                  <media-metadata id="media-metadata-Format:1f8a70d12b37a412530f6a706700652a" name="Format" value="JPEG Baseline"/>
+                  <media-metadata id="media-metadata-Role:1f8a70d12b37a412530f6a706700652a" name="Role" value="Thumbnail"/>
+                  <media-metadata id="media-metadata-IngestLink:1f8a70d12b37a412530f6a706700652a" name="IngestLink" value="True"/>
+                  <media-reference id="media-reference:1f8a70d12b37a412530f6a706700652a" mime-type="image/jpeg" name="AP Thumbnail Image" source="http://eapcontent.ap.org/jpg/2014/20140509/04/1f8a70d12b37a412530f6a706700652a.jpg?contentid=1f8a70d12b37a412530f6a706700652a/fmt=jpg/role=Thumbnail/reldt=2014-05-09T04:14:03/media=Photo/recordid=62de42af068d48b394255d58bcca2292/itemid=62de42af068d48b394255d58bcca2292/objfilename=thumbnail.jpg/authToken=eNoNykEOgzAMBMAXJVrHid2LHxNogEi0RYoqOPjxcB2Nt8uEC5esUpIAYMnsczdaXlXxppAm1lAzpVAYS5BHRYGnV%2f8Pm8bo33Xz47Sz7fPv0xIoez%2bMEIkiAZH1BszPHRk%3d&amp;token=1399879726_5859C0DA770B4893569F3399F3019524" height="80" width="128" coding="jpg"/>
+                  <media-caption id="media-caption:62de42af068d48b394255d58bcca2292">
+                     <p>
+              Family members holding the portraits of the victims of the sunken ferry Sewol, sit on a street near the presidential Blue House in Seoul, South Korea, Friday, May 9, 2014. Family members marched to the presidential Blue House in Seoul early Friday calling for a meeting with President Park Geun-hye but ended up sitting on streets near the presidential palace after police officers blocked them. Park's office said a senior presidential official plans to meet them later Friday. (AP Photo/Lee Jin-man)
+            </p>
+                  </media-caption>
+                  <media-producer id="media-producer:62de42af068d48b394255d58bcca2292">The Associated Press</media-producer>
+               </media>
+               <block id="Main">
+                  <p>SEOUL, South Korea (AP) — South Korean prosecutors are seeking to formally arrest the head of the company that owns a doomed ferry in part of their investigation into its sinking last month that left more than 300 people, mostly high school students, dead or missing, officials said Friday.</p>
+                  <p>Prosecutors asked a court to issue an arrest warrant for Kim Han-sik, president of Chonghaejin Marine Co. Ltd, over allegations of cargo overloading, according to a judge at the court in the southern port city of Mokpo. He spoke on condition of anonymity citing department rules.</p>
+                  <p>The Mokpo court subsequently quizzed Kim and was expected to decide whether to approve his arrest later Friday, court officials said.</p>
+                  <p>Authorities believe improper stowage and overloading of cargo are one possible reason the ferry sank on April 16. Four employees at Chonghaejin Marine Co. Ltd, who handled cargo on the Sewol, have already been arrested, and Kim faced allegations that he was aware that the ferry exceeded its cargo limit but didn't do anything before it started it trip, senior prosecutor Yang Jung-jin said. Kim was detained on Thursday.</p>
+                  <p>"I feel very sorry for the victims .... their family members. I committed a grave sin," Kim, wearing a cap and a mask, told reporters at a detention facility in Mokpo, according to South Korean TV footage. He declined to comment on questions over alleged cargo overloading.</p>
+                  <p>More than three weeks after the sinking, 273 bodies have been retrieved but 31 others are still listed as missing. Searches have been hampered by strong currents, bad weather and floating debris inside the ship. A civilian diver fell unconscious while searching and died on Tuesday.</p>
+                  <p>Relatives of the dead and missing passengers and many other South Koreans have been highly critical of the government's handling of the rescue effort, and the regulatory failures that may have allowed the disaster to happen.</p>
+                  <p>Family members marched to the presidential Blue House in Seoul early Friday calling for a meeting with President Park Geun-hye but were blocked by police officers.  The family members then sat on streets near the presidential palace after conveying to senior presidential officials their wishes for a meeting with Park. No violence was reported.</p>
+                  <p>Park has apologized over the sinking at least three times but her apologies came during meetings with top officials, religious leaders or in a speech marking Buddha's Birthday holiday. Family members and critics say Park should deliver a special speech on the sinking to the whole nation.</p>
+                  <p>All 15 surviving crew members involved in the ferry's navigation have been arrested, accused of negligence and failing to protect passengers. Besides possible freight problems, prosecutors say they are looking into other factors, such as the turn made during the time the ship began listing, ocean currents and modifications made to the ship.</p>
+               </block>
+            </body.content>
+            <body.end/>
+         </body>
+      </nitf>
+   </content>
+   <link rel="alternate" title="AP Article" href="http://www.apnewsarchive.com/2014/South-Korean-prosecutors-seek-to-arrest-head-of-company-that-owns-sunken-ferry/id-0fc6285597a4475a821cffa7cbfd81a8"/>
+   <link rel="enclosure" title="AP Article" href="http://syndication.ap.org/AP.Distro.ContentBroker2/ContentBroker.aspx?media=text&amp;recordid=6ef5ec0d99c34bb6909a79077e315730&amp;filingId=53e9304fccb842f88116c3ef97c593ee&amp;showInlineLinks=False&amp;broadcastAnpa=False&amp;onlineAnpa=True&amp;fmt=13&amp;authToken=eNoFwlEOAiEMBcATQV63tA0fPYxgVRLd3YSY9YPDm5kVP1cWlmIqmwIgFVl9uMZDouOeau2cSmuaKuotWYVZMIkx1nd6m3Psz9c6L7%2fi3Y9PbKCyxumETJQJyGx%2f9Msdog%3d%3d" length="2949" type="application/octet-stream">
+      <apcm:Characteristics IngestLink="True" ContentId="urn:publicid:ap.org:4595c40c14be4ef6af67a0d989c79e16" FileExtension="anpa" Format="ANPA1312" MediaType="Binary" MimeType="application/octet-stream" Role="Main" SizeInBytes="2949" Words="473"/>
+   </link>
+   <link rel="enclosure" title="AP Article" href="http://syndication.ap.org/AP.Distro.ContentBroker2/ContentBroker.aspx?media=text&amp;recordid=6ef5ec0d99c34bb6909a79077e315730&amp;showInlineLinks=False&amp;fmt=14&amp;authToken=eNoFwlEOAiEMBcATQV63tA0fPYxgVRLd3YSY9YPDm5kVP1cWlmIqmwIgFVl9uMZDouOeau2cSmuaKuotWYVZMIkx1nd6m3Psz9c6L7%2fi3Y9PbKCyxumETJQJyGx%2f9Msdog%3d%3d" length="2949" type="application/octet-stream">
+      <apcm:Characteristics IngestLink="True" ContentId="urn:publicid:ap.org:4595c40c14be4ef6af67a0d989c79e16" FileExtension="iptc" Format="IPTC7901" MediaType="Binary" MimeType="application/octet-stream" Role="Main" SizeInBytes="2949" Words="473"/>
+   </link>
+   <link rel="enclosure" title="AP Article" href="http://syndication.ap.org/AP.Distro.ContentBroker2/ContentBroker.aspx?media=text&amp;recordid=6ef5ec0d99c34bb6909a79077e315730&amp;showHNewsLinks=True&amp;fmt=15&amp;authToken=eNoFwlEOAiEMBcATQV63tA0fPYxgVRLd3YSY9YPDm5kVP1cWlmIqmwIgFVl9uMZDouOeau2cSmuaKuotWYVZMIkx1nd6m3Psz9c6L7%2fi3Y9PbKCyxumETJQJyGx%2f9Msdog%3d%3d" length="2998" type="text/html">
+      <apcm:Characteristics IngestLink="True" ContentId="urn:publicid:ap.org:4595c40c14be4ef6af67a0d989c79e16" FileExtension="html" Format="hNews" MediaType="Text" MimeType="text/html" Role="Main" SizeInBytes="2998" Words="473"/>
+   </link>
+   <apcm:ContentMetadata>
+      <apcm:DateLineLocation City="Seoul" Country="KOR" CountryName="South Korea"/>
+      <apcm:Priority Numeric="4" Legacy="r"/>
+      <apcm:ConsumerReady>TRUE</apcm:ConsumerReady>
+      <apcm:ByLine Title="Associated Press">By HYUNG-JIN KIM</apcm:ByLine>
+      <apcm:DateLine>SEOUL, South Korea</apcm:DateLine>
+      <apcm:ExtendedHeadLine>South Korean prosecutors seek to arrest head of company that owns sunken ferry</apcm:ExtendedHeadLine>
+      <apcm:HeadLine>Prosecutors seek to arrest head of ferry company</apcm:HeadLine>
+      <apcm:OriginalHeadLine>Prosecutors seek to arrest head of ferry company</apcm:OriginalHeadLine>
+      <apcm:Keywords>South Korea-Ship Sinks</apcm:Keywords>
+      <apcm:Cycle>BC</apcm:Cycle>
+      <apcm:Selector>asian</apcm:Selector>
+      <apcm:LegacyTypeSetFormat>bx</apcm:LegacyTypeSetFormat>
+      <apcm:TransmissionReference>W2818</apcm:TransmissionReference>
+      <apcm:SlugLine>BC-AS--South Korea-Ship Sinks</apcm:SlugLine>
+      <apcm:ContentElement>FullStory</apcm:ContentElement>
+      <apcm:MediaType>Text</apcm:MediaType>
+      <apcm:EntityClassification Authority="AP Party" Value="Park Geun-hye" Id="aa49f08ed42a4aac80a52169b1fe5e5f">
+         <apcm:Property Id="c9d7fa107e4e1004847adf092526b43e" Name="PartyType" Value="POLITICIAN"/>
+         <apcm:Property Id="d188b8b8886b100481accb8225d5863e" Name="PartyType" Value="PERSON"/>
+      </apcm:EntityClassification>
+      <apcm:EntityClassification Authority="AP Geography" Value="South Korea" Id="661be2f07d5b10048252c076b8e3055c"/>
+      <apcm:EntityClassification Authority="AP Geography" Value="Seoul" Id="8a2d4cf87ec110048d01df092526b43e"/>
+      <apcm:EntityClassification Authority="AP Geography" Value="East Asia" Id="66188f607d5b100481fec076b8e3055c"/>
+      <apcm:EntityClassification Authority="AP Geography" Value="Asia" Id="661812607d5b100481f3c076b8e3055c"/>
+      <apcm:EntityClassification Authority="AP Organization" Value="South Korea government" Id="993327ccec064b6087c1699c1b5f9410"/>
+      <apcm:SubjectClassification Authority="AP Category Code" Value="i" Id="i"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="General news" Id="f25af2d07e4e100484f5df092526b43e"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="Arrests" Id="b2a4c0a08315100485d9d5a57deba703"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="Corporate legal affairs" Id="35779549a39b4d3cb3a90dc198e0cb8f"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="Corporate crime" Id="70613b38899b10048dccd56c852d093e"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="Crime" Id="48612b807c2b4b93bbbacbf54f547ad5"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="Accidents" Id="5f7ebcc082b4100485cfdf092526b43e"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="Accidents and disasters" Id="31711ec0894b10048983ba0a2b2ca13e"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="Transportation" Id="877cb3c0899a10048abbd56c852d093e"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="Law and order" Id="17956128897810048ce8d56c852d093e"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="Corporate news" Id="4d3302d8857510048d06ff2260dd383e"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="Business" Id="c8e409f8858510048872ff2260dd383e"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="Industrial products and services" Id="c82299a88b2f1004859fbd945080b03e"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="Industries" Id="511dd198857510048d0fff2260dd383e"/>
+      <apcm:SubjectClassification Authority="AP Subject" Value="Government and politics" Id="86aad5207dac100488ecba7fa5283c3e"/>
+      <apcm:ItemContentType>Spot Development</apcm:ItemContentType>
+      <apcm:Source>AP</apcm:Source>
+      <apcm:Property Name="EntitlementMatch" Id="urn:publicid:ap.org:product:1" Value="All Media"/>
+      <apcm:Property Name="EntitlementMatch" Id="urn:publicid:ap.org:product:3" Value="All Stories"/>
+      <apcm:Property Name="EntitlementMatch" Id="urn:publicid:ap.org:product:33320" Value="AP World English - Asia (filingsource = asian)"/>
+      <apcm:Property Name="EntitlementMatch" Id="urn:publicid:ap.org:product:31244" Value="Asian Wire"/>
+      <apcm:Property Name="SequenceNumber" Value="InSequence" Id="286913457"/>
+      <apcm:FirstCreated>2014-05-09T06:46:47Z</apcm:FirstCreated>
+   </apcm:ContentMetadata>
+   <apnm:NewsManagement>
+      <apnm:ManagementId>urn:publicid:ap.org:0fc6285597a4475a821cffa7cbfd81a8</apnm:ManagementId>
+      <apnm:ManagementSequenceNumber>11</apnm:ManagementSequenceNumber>
+      <apnm:PublishingStatus>Usable</apnm:PublishingStatus>
+      <apnm:PublishingSpecialInstructions>Eds: Updates with court quizzing head of ferry company and other details; links new photos. With AP Photos.</apnm:PublishingSpecialInstructions>
+      <apnm:PublishingReleaseDateTime>2014-05-09T06:46:36Z</apnm:PublishingReleaseDateTime>
+   </apnm:NewsManagement>
+</entry>

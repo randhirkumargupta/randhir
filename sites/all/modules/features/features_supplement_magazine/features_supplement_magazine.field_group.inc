@@ -48,6 +48,40 @@ function features_supplement_magazine_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_issue_cover_image|node|issue|form';
+  $field_group->group_name = 'group_issue_cover_image';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'issue';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Issue Cover Images',
+    'weight' => '2',
+    'children' => array(
+      0 => 'field_issue_large_cover_image',
+      1 => 'field_issue_small_cover_image',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Issue Cover Images',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => '',
+        'classes' => 'itg-group-field',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_issue_cover_image|node|issue|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_issue_img|node|issue|form';
   $field_group->group_name = 'group_issue_img';
   $field_group->entity_type = 'node';
@@ -90,7 +124,7 @@ function features_supplement_magazine_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'SEO Meta Tags',
-    'weight' => '4',
+    'weight' => '3',
     'children' => array(
       0 => 'metatags',
       1 => 'path',
