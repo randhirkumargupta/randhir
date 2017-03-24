@@ -465,64 +465,64 @@ function itg_workflow_preview_db_merge($preview_unique_id, $user_id, $nid = 0) {
  * @param array $form_state
  */
 function itg_workflow_after_build($form, &$form_state) {
-  global $user, $base_url;
+    global $user, $base_url;
 
-  // code for sequence change of modration field
-  $form['additional_settings']['group']['#groups']['additional_settings'][0]['#weight'] = -1;
-  $log = $form['revision_information']['log'];
-  $state = $form['revision_information']['workbench_moderation_state_new'];
+    // code for sequence change of modration field
+    $form['additional_settings']['group']['#groups']['additional_settings'][0]['#weight'] = -1;
+    $log = $form['revision_information']['log'];
+    $state = $form['revision_information']['workbench_moderation_state_new'];
 
-  unset($form['revision_information']['log']);
-  unset($form['revision_information']['workbench_moderation_state_new']);
+    unset($form['revision_information']['log']);
+    unset($form['revision_information']['workbench_moderation_state_new']);
 
-  $form['revision_information']['workbench_moderation_state_new'] = $state;
+    $form['revision_information']['workbench_moderation_state_new'] = $state;
 
-  // Code for rejection master message
-  if (!empty($form['#entity']->workbench_moderation['current']->state) && $form['#entity']->workbench_moderation['current']->state == 'needs_review') {
-    $vid = taxonomy_vocabulary_machine_name_load('reasons_for_reject');
-    $terms = taxonomy_get_tree($vid->vid);
-    foreach ($terms as $key => $val) {
-      $term_name[$val->name] = $val->name;
+    // Code for rejection master message
+    if (!empty($form['#entity']->workbench_moderation['current']->state) && $form['#entity']->workbench_moderation['current']->state == 'needs_review') {
+        $vid = taxonomy_vocabulary_machine_name_load('reasons_for_reject');
+        $terms = taxonomy_get_tree($vid->vid);
+        foreach ($terms as $key => $val) {
+            $term_name[$val->name] = $val->name;
+        }
+        $form['revision_information']['reject_msg'] = array(
+            '#type' => 'select',
+            '#title' => t('Remarks'),
+            '#options' => $term_name,
+            '#attributes' => array('class' => array('reasons-form-msg')),
+            '#prefix' => '<div class="reasons-form">',
+            '#suffix' => '</div>',
+        );
     }
-    $form['revision_information']['reject_msg'] = array(
-      '#type' => 'select',
-      '#title' => t('Remarks'),
-      '#options' => $term_name,
-      '#attributes' => array('class' => array('reasons-form-msg')),
-      '#prefix' => '<div class="reasons-form">',
-      '#suffix' => '</div>',
-    );
-  }
 
-  $form['revision_information']['log'] = $log;
+    $form['revision_information']['log'] = $log;
 
-  $form['revision_information']['log']['#title'] = t('Remarks');
+    $form['revision_information']['log']['#title'] = t('Remarks');
 
-  // hide workbench dropdown
-  /*drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-revision-information").show();
-              jQuery(".form-item-workbench-moderation-state-new").hide();
-              jQuery("#edit-field-story-archive").hide();              
-            });', array('type' => 'inline', 'scope' => 'footer'));*/
+    // hide workbench dropdown
+    /* drupal_add_js('jQuery(document).ready(function() {
+      jQuery("#edit-revision-information").show();
+      jQuery(".form-item-workbench-moderation-state-new").hide();
+      jQuery("#edit-field-story-archive").hide();
+      });', array('type' => 'inline', 'scope' => 'footer')); */
 
-  if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(EDITOR, $user->roles) || array_key_exists(UGC_MODERATOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles)) {
-    if (!isset($form['#node']->workbench_moderation['current'])) {
-      $state_class = ' published';
-      $submit_name = 'Publish';
-      $form['actions']['submit']['#value'] = t('Save as Draft');
-    }
-    elseif (isset($form['#node']->workbench_moderation['current'])) {
-      if ($form['#node']->workbench_moderation['current']->state == 'draft' && $form['#node']->status == 0) {
-        $state_class = ' published';
-        $submit_name = 'Publish';
-        $form['actions']['submit']['#value'] = t('Save as Draft');
-      }
-      elseif ($form['#node']->workbench_moderation['current']->state == 'needs_review') {
-        $submit_name = '';
-        $state_class = ' published';
-        $form['actions']['submit']['#attributes']['class'][] = 'edit-submit-class';
+    if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(EDITOR, $user->roles) || array_key_exists(UGC_MODERATOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles)) {
+        if (!isset($form['#node']->workbench_moderation['current'])) {
+            $state_class = ' published';
+            $submit_name = 'Publish';
+            $form['actions']['submit']['#value'] = t('Save as Draft');
+        }
+        elseif (isset($form['#node']->workbench_moderation['current'])) {
+            if ($form['#node']->workbench_moderation['current']->state == 'draft' && $form['#node']->status == 0) {
+                $state_class = ' published';
+                $submit_name = 'Publish';
+                $form['actions']['submit']['#value'] = t('Save as Draft');
+            }
+            elseif ($form['#node']->workbench_moderation['current']->state == 'needs_review') {
+                $submit_name = '';
+                $state_class = ' published';
+                $form['actions']['submit']['#attributes']['class'][] = 'edit-submit-class';
 
-        drupal_add_js('jQuery(document).ready(function() {              
+                drupal_add_js('jQuery(document).ready(function() {              
                     jQuery(".form-item-workbench-moderation-state-new").show();
                     jQuery(".reasons-form").hide();              
                     jQuery("#edit-log").val("");
@@ -543,67 +543,67 @@ function itg_workflow_after_build($form, &$form_state) {
                       }
                     });
                 });', array('type' => 'inline', 'scope' => 'footer'));
-      }
+            }
+        }
     }
-  }
-  elseif (array_key_exists(AUTHOR_GUEST, $user->roles) || array_key_exists(INTERN, $user->roles) || array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
-    if (!isset($form['#node']->workbench_moderation['current'])) {
-      $submit_name = 'Submit for Review';
-      $state_class = ' needs_review';
-      $form['actions']['submit']['#value'] = t('Save as Draft');
-    }
-    elseif (isset($form['#node']->workbench_moderation['current']) && ($form['#node']->workbench_moderation['current']->state == 'draft' || $form['#node']->workbench_moderation['current']->state == 'needs_review' || $form['#node']->workbench_moderation['current']->state == 'needs_modification')) {
-      if ($form['#node']->workbench_moderation['current']->state == 'needs_review') {
-        $submit_name = '';
-      }
-      elseif ($form['#node']->workbench_moderation['current']->state == 'needs_modification') {
-        $submit_name = 'Submit for Review';
-        $state_class = ' needs_review';
-        $form['actions']['submit']['#value'] = t('Save as Draft');
+    elseif (array_key_exists(AUTHOR_GUEST, $user->roles) || array_key_exists(INTERN, $user->roles) || array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
+        if (!isset($form['#node']->workbench_moderation['current'])) {
+            $submit_name = 'Submit for Review';
+            $state_class = ' needs_review';
+            $form['actions']['submit']['#value'] = t('Save as Draft');
+        }
+        elseif (isset($form['#node']->workbench_moderation['current']) && ($form['#node']->workbench_moderation['current']->state == 'draft' || $form['#node']->workbench_moderation['current']->state == 'needs_review' || $form['#node']->workbench_moderation['current']->state == 'needs_modification')) {
+            if ($form['#node']->workbench_moderation['current']->state == 'needs_review') {
+                $submit_name = '';
+            }
+            elseif ($form['#node']->workbench_moderation['current']->state == 'needs_modification') {
+                $submit_name = 'Submit for Review';
+                $state_class = ' needs_review';
+                $form['actions']['submit']['#value'] = t('Save as Draft');
 
-        drupal_add_js('jQuery(document).ready(function() {
+                drupal_add_js('jQuery(document).ready(function() {
                       jQuery("#edit-workbench-moderation-state-new").val("needs_modification");              
                 });', array('type' => 'inline', 'scope' => 'footer'));
-      }
-      elseif ($form['#node']->workbench_moderation['current']->state == 'published') {
-        $submit_name = '';
-      }
-      elseif ($form['#node']->workbench_moderation['current']->state == 'draft') {
-        $submit_name = 'Submit for Review';
-        $state_class = ' needs_review';
-        $form['actions']['submit']['#value'] = t('Save as Draft');
-      }
+            }
+            elseif ($form['#node']->workbench_moderation['current']->state == 'published') {
+                $submit_name = '';
+            }
+            elseif ($form['#node']->workbench_moderation['current']->state == 'draft') {
+                $submit_name = 'Submit for Review';
+                $state_class = ' needs_review';
+                $form['actions']['submit']['#value'] = t('Save as Draft');
+            }
+        }
     }
-  }
 
-  if (!empty($submit_name)) {
-    $form['actions']['submit_link'] = array(
-      '#markup' => '<a href="javascript:void(0)" id="story_submit_link" class="button' . $state_class . ' btn-submit">' . t($submit_name) . '</a>',
-      '#weight' => 20,
-    );
-  }
-
-  $settings['base_url'] = $base_url;
-  $settings['uid'] = $user->uid;
-  $settings['ntype'] = $form['type']['#value'];
-
-  drupal_add_js(array('itg_workflow' => array('settings' => $settings)), array('type' => 'setting'));
-
-  drupal_add_js(drupal_get_path('module', 'itg_workflow') . '/js/itg_workflow.js', array('weight' => 1));
-
-  // Code for UGC. For now below code is commented may be we need it in future.
-  /*
-    $arg3 = arg(3);
-
-    if (arg(1) == 'add' && isset($arg3) && is_numeric($arg3)) {
-    drupal_add_js('jQuery(document).ready(function() {
-    jQuery("#edit-submit").hide();
-    });', array('type' => 'inline', 'scope' => 'footer'));
+    if (!empty($submit_name)) {
+        $form['actions']['submit_link'] = array(
+            '#markup' => '<a href="javascript:void(0)" id="story_submit_link" class="button' . $state_class . ' btn-submit">' . t($submit_name) . '</a>',
+            '#weight' => 20,
+        );
     }
-   * 
-   */
 
-  return $form;
+    $settings['base_url'] = $base_url;
+    $settings['uid'] = $user->uid;
+    $settings['ntype'] = $form['type']['#value'];
+
+    drupal_add_js(array('itg_workflow' => array('settings' => $settings)), array('type' => 'setting'));
+
+    drupal_add_js(drupal_get_path('module', 'itg_workflow') . '/js/itg_workflow.js', array('weight' => 1));
+
+    // Code for UGC. For now below code is commented may be we need it in future.
+    /*
+      $arg3 = arg(3);
+
+      if (arg(1) == 'add' && isset($arg3) && is_numeric($arg3)) {
+      drupal_add_js('jQuery(document).ready(function() {
+      jQuery("#edit-submit").hide();
+      });', array('type' => 'inline', 'scope' => 'footer'));
+      }
+     * 
+     */
+
+    return $form;
 }
 
 /**
@@ -624,18 +624,25 @@ function itg_workflow_node_presave($node) {
         if ($node->type == 'videogallery') {
             $is_draft = 0;
             $node_id = $node->nid;
-
+            foreach ($node->field_story_itg_tags[LANGUAGE_NONE] as $tags) {
+                $tag[] = $tags['name'];
+            }
+            $tag_value = implode(', ', $tag);
+            $tags_value = trim($tag_value, ",");
             $items = field_get_items('node', $node, 'field_video_upload');
 
             foreach ($items as $imagecollection) {
 
                 if ($imagecollection['field_videogallery_video_upload'][LANGUAGE_NONE][0]['fid']) {
                     $fids = $imagecollection['field_videogallery_video_upload'][LANGUAGE_NONE][0]['fid'];
+                    $priv_status = $imagecollection['field_video_private'][LANGUAGE_NONE][0]['value'];
                 }
                 else {
                     $entitydata = entity_load('field_collection_item', $imagecollection);
                     $v_fid = $entitydata[$imagecollection['value']]->field_videogallery_video_upload;
                     $fids = $v_fid[LANGUAGE_NONE]['und'][0]['fid'];
+                    $priv_data = $entitydata[$imagecollection['value']]->field_video_private;
+                    $priv_status = $imagecollection['field_video_private'][LANGUAGE_NONE][0]['value'];
                 }
 
                 if ((int) $fids != 0) {
@@ -653,45 +660,24 @@ function itg_workflow_node_presave($node) {
 
                             if ($node_id) {
                                 // use for upload local video to DM
-                                itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details, $video_fid, $tags_value, $node_id, 'is_draft');
+                                itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details, $video_fid, $tags_value, $node_id, 'is_draft', $priv_status);
                             }
                         }
                     }
                 }
             }
-            //$field_field_collection = field_get_items('node', $node, 'field_video_upload');
-//            foreach ($field_field_collection as $key => $value) {
-//                $fc_wrapper = entity_metadata_wrapper('field_collection_item', $value['entity']);
-//                p($fc_wrapper);
-//                $fc_name = $fc_wrapper->field_videogallery_video_upload->value();
-//                p($fc_name);
-//                $fids = $fc_name['fid'];
-//                if ((int) $fids != 0) {
-//
-//                    $video_image = itg_videogallery_get_video_info_by_fid($fids);
-//
-//                    if (empty($video_image)) {
-//                        $video_fid = $fids;
-//                        $file_details = file_load($fids);
-//
-//                        $real_path = drupal_realpath($file_details->uri);
-//                        if (file_exists($file_details->uri)) {
-//                            if ($real_path == "") {
-//                                $real_path = file_create_url($file_details->uri);
-//                            }
-//                            $is_draft = 1;
-//
-//                            if ($node_id) {
-//                                // use for upload local video to DM
-//                                itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details->uri, $video_fid, $tags_value, $node_id, 'is_draft');
-//                            }
-//                        }
-//                    }
-//                }
-//            }
+
 // Need to chenge this for redirect
-            if ($is_draft == 1) {
-                $node->workbench_moderation_state_new = 'draft';
+            if ($is_draft == 0) {
+              
+                if ($node->workbench_moderation['current']->state == 'published') {
+                    $node->status = 0;
+                    //$node->workbench_moderation['published']->published = 0;
+                    
+                }
+                else {
+                    $node->workbench_moderation_state_new = 'draft';
+                }
             }
             else {
                 if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
@@ -702,39 +688,43 @@ function itg_workflow_node_presave($node) {
             if ($node->workbench_moderation_state_new == 'published' && $node->workbench_moderation_state_current != 'published') {
                 $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i'); //2017-02-21 23:45
             }
+            //p($node->workbench_moderation);
+            //p($node);
         }
     }
 }
+
 /* After build for views exposed form.
  * @param array $form
  * @param array $form_state
  * @return array
  */
+
 function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
-  global $user, $base_url;
+    global $user, $base_url;
 
-  $settings = array();
+    $settings = array();
 
-  $settings['form_id'] = $form['#id'];
-  drupal_add_js(array('itg_workflow' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_workflow') . '/js/itg_workflow_form.js');
+    $settings['form_id'] = $form['#id'];
+    drupal_add_js(array('itg_workflow' => array('settings' => $settings)), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'itg_workflow') . '/js/itg_workflow_form.js');
 
-  if ($form['#id'] == 'views-exposed-form-strory-menegment-page-6' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-6') {
-    $form['state']['#options'] = array('All' => '-All-',
-      'needs_review' => 'Submitted for Review',
-      'rejected' => 'Rejected',
-      'needs_modification' => 'Needs Modification');
-  }
-  elseif ($form['#id'] == 'views-exposed-form-strory-menegment-page-5') {
-    $form['field_story_schedule_date_time_value_1_op']['#options'] = array('empty' => t('-All-'), '<' => 'Published', '>=' => t('To Be Live'));
+    if ($form['#id'] == 'views-exposed-form-strory-menegment-page-6' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-6') {
+        $form['state']['#options'] = array('All' => '-All-',
+            'needs_review' => 'Submitted for Review',
+            'rejected' => 'Rejected',
+            'needs_modification' => 'Needs Modification');
+    }
+    elseif ($form['#id'] == 'views-exposed-form-strory-menegment-page-5') {
+        $form['field_story_schedule_date_time_value_1_op']['#options'] = array('empty' => t('-All-'), '<' => 'Published', '>=' => t('To Be Live'));
 
 //    drupal_add_js('jQuery(document).ready(function() {
 //              jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();              
 //            });', array('type' => 'inline', 'scope' => 'footer'));
-  }
-  elseif ($form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12') {
+    }
+    elseif ($form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12') {
 
-    $form['field_story_schedule_date_time_value_op']['#options'] = array('empty' => t('-All-'), '<' => 'Published', '>=' => t('To Be Live'));
+        $form['field_story_schedule_date_time_value_op']['#options'] = array('empty' => t('-All-'), '<' => 'Published', '>=' => t('To Be Live'));
 
 //    drupal_add_js('jQuery(document).ready(function() {
 //              jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();
@@ -742,9 +732,9 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
 //                     jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();                     
 //                 });
 //            });', array('type' => 'inline', 'scope' => 'footer'));
-  }
+    }
 
-  return $form;
+    return $form;
 }
 
 /**
@@ -908,7 +898,9 @@ function itg_workflow_node_insert($node) {
           } */
         //   drupal_set_message("unser node insert");
         //unset session if exists during node insert.
-        unset($_SESSION['node_preview_unique']);
+       if (isset($_SESSION['node_preview_unique'])) {
+       unset($_SESSION['node_preview_unique']); 
+      }
     }
 }
 

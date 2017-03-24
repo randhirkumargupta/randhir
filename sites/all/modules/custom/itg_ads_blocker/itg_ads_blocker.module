@@ -98,7 +98,7 @@ print $data;
  * Implements hook_preprocess_page();
  */
 function itg_ads_blocker_preprocess_page(&$vars) {
-  if($vars['node']->type == 'story' || $vars['node']->type == 'photogallery') {
+  if($vars['node']->type == 'story' || $vars['node']->type == 'photogallery' || $vars['node']->type == 'videogallery') {
     drupal_add_js(drupal_get_path('module', 'itg_ads_blocker') . '/js/ads.js', array('scope' => 'footer', 'weight' => 0));
     drupal_add_js(drupal_get_path('module', 'itg_ads_blocker') . '/js/showadcontent.js', array('scope' => 'footer', 'weight' => 1));
     drupal_add_css(drupal_get_path('module', 'itg_ads_blocker') . '/css/ad_content_blocker.css');

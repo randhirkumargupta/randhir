@@ -23,6 +23,7 @@ jQuery(document).ready(function () {
 function openPopup() {
     jQuery(".description").hide();
     jQuery('.view-photo-landing-slider').hide();
+    jQuery('.video-landing-header').hide();
     var a = gup('source');
     //console.log(a);
     ga("send", "event", "AdblockPopup", a, "true");
