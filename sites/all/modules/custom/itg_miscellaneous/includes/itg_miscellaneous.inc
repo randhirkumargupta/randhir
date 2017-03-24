@@ -153,7 +153,7 @@ function create_poll_table() {
     ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;';
     db_query($query); */ 
 
-  //$file_name = 'indiatoday-story_2016-06-01.xml';
+ $file_name = 'indiatoday-story_2016-06-01.xml';
   //$file_name = 'indiatoday-story_2016-06-11.xml';
   //$file_name = 'indiatoday-story_2016-06-21.xml';
   //$file_name = 'indiatoday-story_2016-07-01.xml';
@@ -161,7 +161,7 @@ function create_poll_table() {
   //$file_name = 'indiatoday-story_2016-09-01.xml';
   //$file_name = 'indiatoday-story_2016-10-01.xml';
   //$file_name = 'indiatoday-story_2016-11-01.xml';
-  $file_name = 'indiatoday-story_2016-12-01.xml';
+ // $file_name = 'indiatoday-story_2016-12-01.xml';
   $xml_path = 'sites/default/files/xml_file_chunk/';
   $xml = simplexml_load_file($xml_path . $file_name, 'SimpleXMLElement');  
   $i = 0;
