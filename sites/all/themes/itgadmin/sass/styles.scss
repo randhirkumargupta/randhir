@@ -11314,3 +11314,6 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       @extend .btn-small;
     }
   }
+  .node-supplement-form{
+    @extend .image-repo-browse;
+  }
