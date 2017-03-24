@@ -226,6 +226,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
     $this->addFieldMapping('field_featured_ordering', 'featured_ordering')->xpath('featured_ordering'); // published date
     $this->addFieldMapping('field_large_image_description', 'description')->xpath('description'); // Large image description
     
+    
     $this->addUnmigratedDestinations(array('uid', 'promote', 'sticky', 'revision', 'log', 'language', 'tnid', 'translate', 'revision_uid', 'is_new',
 //      'field_story_expiry_date:timezone',
 //      'field_story_expiry_date:rrule',
@@ -520,6 +521,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
   }
 
   public function complete($entity, $row) {
+    print $row->xml->id.' ';
     $node = $entity;
     
      //code for order set
