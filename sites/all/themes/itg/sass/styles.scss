@@ -10777,9 +10777,21 @@ span.smilies-title {
 #block-itg-front-end-common-latest-from-businesstoday{
   ul{
     border: 1px solid #dddddd;
+    min-height: 381px;
     @extend .list-none;
     @include listing-with-image(third-party-list,left,10px,pic,title);
+    li{
+      a.pic{
+        @extend .zoom-image;
+        max-height: 55px;
+      }
+    }
     li + li{border-top: 1px solid #dddddd;}
+  }
+}
+#block-itg-front-end-common-latest-from-businesstoday{
+  a.pic{
+    img{max-width: 56px;}
   }
 }
  
