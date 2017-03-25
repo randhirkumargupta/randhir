@@ -200,6 +200,9 @@ function itg_custom_widget_form_views_form_itg_custom_widget_page_alter(&$form ,
   }
 }
 
+/**
+ * {@inheritdoc}
+ */
 function itg_custom_widget_categories_wise_node_group_validate($form , &$form_state) {
   if ( empty($form_state['values']['widget_name']) ) {
     drupal_set_message(t("Please enter widget name.") , 'error');
@@ -287,6 +290,9 @@ function itg_custom_widget_form_alter(&$form , &$form_state , $form_id) {
   }
 }
 
+/**
+ * {@inheritdoc}
+ */
 function itg_custom_widget_update_order_reorder_data($form , &$form_state) {
   $arg = arg();
   // Take draggable view input value after submit the form.
