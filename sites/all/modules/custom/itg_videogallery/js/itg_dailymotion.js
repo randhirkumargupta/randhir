@@ -20,7 +20,7 @@
                 var video_fids = [];
                 var selected_check_boxes_values = new Array();
                 var selected_check_boxes_index = 0;
-                 $("#video_iframe").contents().find("input:radio[class=form-radio]:checked").each(function() {
+                $("#video_iframe").contents().find("input:radio[class=form-radio]:checked").each(function() {
                     selected_check_boxes_values[selected_check_boxes_index++] = $(this).val();
                 });
                 if (selected_check_boxes_index == 0) {
@@ -40,7 +40,7 @@
                             for (var x in parsed) {
                                 video_fids.push(parsed[x]);
                             }
-                              
+
                             parent.jQuery('[name="' + getbtnmane + '[fid]"]').val(parsed[0]);
                             parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_video][button]").trigger('mousedown');
 
@@ -56,8 +56,6 @@
                             });
 
                         }
-                        //var vid = $("#edit-video-browse-select .form-radio:checked").val();
-
 
                     });
 
@@ -125,14 +123,15 @@
 
                 // Getting selected videos from checkboxes        
 
+
                 var selected_check_boxes_values = new Array();
                 var selected_check_boxes_index = 0;
-                $("input:checkbox[class=form-radio]:checked").each(function() {
+                $("#video_iframe").contents().find("input:checkbox[class=form-radio]:checked").each(function() {
                     selected_check_boxes_values[selected_check_boxes_index++] = $(this).val();
                 });
-
-                if (selected_check_boxes_values.length > 0)
-                {
+                if (selected_check_boxes_index == 0) {
+                    alert("Please select video file.");
+                } else {
                     jQuery('#loader-data img').show().parent().addClass('loader_overlay');
                     //var base_url = Drupal.settings.basePath;
                     var base_url = Drupal.settings.baseUrl.baseUrl;
@@ -152,18 +151,6 @@
                 }
 
             });
-
-            // Browse Local
-//            $(".browse-local").click(function() {
-//                parent.jQuery("#" + video_field_id + "").trigger('click');
-//                parent.jQuery("#" + video_field_id + "").change(function() {
-//                    parent.jQuery("#" + video_field_id + "").show();
-//                    parent.jQuery("#" + video_field_id + "-button").show();
-//                    parent.jQuery("#" + video_field_id + "-button").mousedown();
-//                    parent.jQuery.colorbox.close();
-//                });
-//            });
-
 
             // popup show hide
             $(".video-local").click(function() {
@@ -185,28 +172,7 @@
 
             });
 
-            // check ajax upload button
-
-//            $('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
-//                if (form_build_id = settings.url.match(/file\/ajax\/field_upload_video\d*\/(.*)$/)) {
-//
-//                    if ($('#videogallery-node-form').find("input[name='" + video_field_id + "_button']").val() == 'Remove') {
-//                        $(".browse-ftp-click").hide();
-//                        $('.browse-video-form label').hide();
-//                        $('#edit-field-upload-video label:first').show();
-//
-//                    } else {
-//
-//                        $(".browse-ftp-click").show();
-//                        $("input[name='field_video_duration[und][0][value]']").val('');
-//
-//                        $('.browse-video-form label').show();
-//                        $('#edit-field-upload-video label:first').hide();
-//                    }
-//                }
-//
-//            });
-
+          
             //Reset video form
             $('.reset_video_filters').click(function() {
                 var unused_value = $('.used-unused-select').val();
@@ -365,23 +331,5 @@ jQuery('document').ready(function() {
 
 // Implement function for video search by title
 function videosearch() {
-//    var select_val = jQuery('.used-unused-select').val();
-//    var search_val = jQuery('#video_text_search').val();
-//    var time_val = jQuery('.time-filter-select').val();
-//    jQuery('#loader-data img').show().parent().addClass('loader_overlay');
-//    var base_url = Drupal.settings.baseUrl.baseUrl;
-//    jQuery.ajax({
-//        url: base_url + '/dailymotion-video-search-filter',
-//        type: 'post',
-//        data: {'back_time': select_val + '@' + search_val + '@' + time_val, 'value_type': jQuery('#single_add').val()},
-//        success: function(data) {
-//            jQuery('#loader-data img').hide().parent().removeClass('loader_overlay');
-//            jQuery('.video-options-wrapper').html(data);
-//
-//        },
-//        error: function(xhr, desc, err) {
-//            console.log(xhr);
-//            console.log("Details: " + desc + "\nError:" + err);
-//        }
-//    });
+
 }
