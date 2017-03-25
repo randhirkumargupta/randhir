@@ -432,6 +432,8 @@ function itgadmin_preprocess_page(&$vars) {
         , 'itg-custom-widget-content-order'
         , 'search-unpublish-video'
         , 'search-unpublish-video-radio'
+        , 'search-publish-video-radio'
+        , 'search-publish-video'
         , 'itg-registered-user-report'
     );
 

@@ -10,7 +10,7 @@ global $base_url;
     <div class="browse-ftp">
         <div id="itg_video_content">
             <div class="video-ftp active"><?php print t('FTP'); ?></div>
-            <?php if ($_GET['input_filed'] != 'ckeditor') { ?>
+            <?php if ($_GET['input_filed'] != 'ckeditor' && $_GET['no_value'] != 'single' ) { ?>
                 <div class="video-local"><?php print t('Local Browse'); ?></div>
             <?php } ?>
             <div id="loader-data"><img class="widget-loader" style="display: none" src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
