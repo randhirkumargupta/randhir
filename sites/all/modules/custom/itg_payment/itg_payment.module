@@ -188,7 +188,7 @@ function itg_payment_order_form_response_url() {
 
   $transaction_id = $_POST['TXNID'];
   $transaction_status = 0;
-
+  $data['order_status'] = 0;
   if ($_POST["STATUS"] == "TXN_SUCCESS") {
     $transaction_status = PAYTM_TXN_SUCCESS_STATUS;
     $data['order_status'] = PAYTM_ORDER_SUCCESS_STATUS;
