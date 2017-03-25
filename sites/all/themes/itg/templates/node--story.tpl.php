@@ -40,6 +40,7 @@ if (!empty($content)):
 
   $follow_status = $content["follow_status"];
   
+  $migrated_count = $content["migrated_count"];
   //get byline id based on order reorder
 
   $byline_id = $content["byline_id"];
@@ -748,12 +749,10 @@ if (!empty($content)):
                 $like = itg_flag_get_count($get_val, 'like_count');
                 $dislike = itg_flag_get_count($get_val, 'dislike_count');
               }
-              if (!empty($like['like_count'])) {
-                $like_count = $like['like_count'];
-              }
-              if (!empty($dislike['dislike_count'])) {
-                $dislike_count = $dislike['dislike_count'];
-              }
+              
+              $like_count = $like['like_count'] + $migrated_count[0]['like_count'];
+              $dislike_count = $dislike['dislike_count']+ $migrated_count[0]['dislike_count'];
+              
               $pid = "voted_" . $get_val;
               $like = "no-of-likes_" . $get_val;
               $dislike = "no-of-dislikes_" . $get_val;
