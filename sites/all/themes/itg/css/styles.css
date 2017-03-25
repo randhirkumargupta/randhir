@@ -2562,6 +2562,10 @@ footer .multiple-items-footer i.slick-next {
 .story-section .story-right .description video {
   max-width: 100%;
 }
+.story-section .story-right .description ul {
+  list-style: disc;
+  padding-left: 18px;
+}
 .story-section .story-right .briefcase {
   margin-top: 20px;
 }

@@ -11686,6 +11686,12 @@ span.file a {
 .view-display-id-search_publish_video_radio .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name {
   display: none;
 }
+.view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-keyword,
+.view-display-id-search_publish_video .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-keyword,
+.view-id-searchimage.view-display-id-page_1 .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-keyword,
+.view-display-id-search_publish_video_radio .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-keyword {
+  width: 350px;
+}
 
 .ftp-server > iframe {
   border: 1px solid #ccc;
