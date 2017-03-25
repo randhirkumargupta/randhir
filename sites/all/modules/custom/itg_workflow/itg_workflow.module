@@ -252,116 +252,112 @@ function itg_workflow_preview_log_filter_form_submit($form, &$form_state) {
     );
 }
 
-/**
- *  Give output of audit log.
- * @return string
- */
 function itg_workflow_logs_detailis() {
-    // configure the table header columns
-    $header = array(
-        array('data' => t('ID')),
-        array('data' => t('Nid')),
-        array('data' => t('Title')),
-        array('data' => t('Created By')),
-        array('data' => t('Modified By')),
-        array('data' => t('Type')),
-        array('data' => t('Created Date')),
-        array('data' => t('Modified Date')),
-        array('data' => t('Action')),
+  // configure the table header columns
+  $header = array(
+    array('data' => t('ID')),
+    array('data' => t('Nid')),
+    array('data' => t('Title')),
+    array('data' => t('Created By')),
+    array('data' => t('Published by')),
+    array('data' => t('Type')),
+    array('data' => t('Created Date')),
+    array('data' => t('Modified Date')),
+    array('data' => t('Action')),
+  );
+  //if (!empty($_GET['items_per_page']) && (!empty($_GET['username']) || !empty($_GET['email']))) {
+  if (isset($_GET['items_per_page'])) {
+    $items_per_page = $_GET['items_per_page'];
+  }
+  else {
+    $items_per_page = 20;
+  }
+
+  $itg_query = db_select('node', 'n')->extend('PagerDefault')->limit($items_per_page);
+  $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
+  $itg_query->leftJoin('workbench_moderation_node_history', 'wbh', 'wbh.nid=n.nid');
+  $itg_query->leftJoin('users', 'user', 'user.uid=n.uid');
+  $itg_query->leftJoin('users', 'wbh_user', 'wbh_user.uid=wbh.uid');
+  $itg_query->condition("wbh.published", 1);
+  $itg_query->condition("wbh.is_current", 1);
+  $itg_query->condition("wbh.state", "published");
+
+  if (!isset($_GET['type']) || (isset($_GET['type']) && $_GET['type'] == "All")) {
+    $itg_query->condition("n.type", array("story", "videogallery", "blog", "photogallery"), "IN");
+  }
+  else {
+    $itg_query->condition("n.type", $_GET['type']);
+  }
+
+  if (isset($_GET['nid']) && !empty($_GET['nid'])) {
+    $itg_query->condition("n.nid", $_GET['nid']);
+  }
+
+  if (isset($_GET['username']) && !empty($_GET['username'])) {
+    $or = db_or()->condition("wbh_user.name", $_GET['username'])->condition("user.name", $_GET['username']);
+    $itg_query->condition($or);
+  }
+
+  if (isset($_GET['email']) && !empty($_GET['email'])) {
+    $itg_query->condition("user.mail", $_GET['email']);
+  }
+
+  if (isset($_GET['title']) && !empty($_GET['title'])) {
+    $title_chunk_array = explode(" ", $_GET['title']);
+    foreach ($title_chunk_array as $title_chunk) {
+      $itg_query->condition('title', '%' . db_like($title_chunk) . '%', 'LIKE');
+    }
+  }
+  $itg_query->condition('n.status', 1);
+  $itg_query->fields('n', array('nid', 'title', 'uid', 'type', 'created', 'changed'));
+  $itg_query->fields('user', array('name'));
+  $itg_query->fields('wbh_user', array('name'));
+  $itg_query->fields('wbh', array('uid'));
+  $itg_query->fields('iwf', array('nid'));
+  $itg_query->isNull('iwf.nid');
+  $itg_query->orderBy('n.nid', "DESC");
+  $itg_result = $itg_query->execute()->fetchAll();
+
+  $rows = array();
+  $count = 0;
+  foreach ($itg_result as $row) {
+    $rows[] = array(
+      array('data' => $count + 1),
+      array('data' => $row->nid),
+      array('data' => $row->title),
+      array('data' => l($row->name, "user/$row->uid")),
+      array('data' => l($row->wbh_user_name, "user/$row->wbh_uid")),
+      array('data' => $row->type),
+      array('data' => date('d/m/Y', $row->created)),
+      array('data' => date('d/m/Y', $row->changed)),
+      array('data' => l("<span class='view-link'>View</span>", "node/$row->nid", array("html" => TRUE, "attributes" => array("target" => "_blank")))),
     );
-    if (!empty($_GET['items_per_page']) && (!empty($_GET['username']) || !empty($_GET['email']))) {
-        if (isset($_GET['items_per_page'])) {
-            $items_per_page = $_GET['items_per_page'];
-        }
-        else {
-            $items_per_page = 20;
-        }
+    $count++;
+  }
+  $filter_form = drupal_get_form('itg_workflow_preview_log_filter_form');
+  $output = render($filter_form);
+  $output .= '<div class="view"><div class="attachment"><span class="count">Count (' . count($itg_result) . ') </span>';
+  $output .= '</div></div>';
+  $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table', 'preview-log-table')), 'empty' => 'No result found.'));
 
-        $itg_query = db_select('node', 'n')->extend('PagerDefault')->limit($items_per_page);
-        $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
-        $itg_query->leftJoin('workbench_moderation_node_history', 'wbh', 'wbh.nid=n.nid');
-        $itg_query->leftJoin('users', 'user', 'user.uid=n.uid');
-        $itg_query->leftJoin('users', 'wbh_user', 'wbh_user.uid=wbh.uid');
-        $itg_query->condition("wbh.published", 1);
-        $itg_query->condition("wbh.is_current", 1);
-        $itg_query->condition("wbh.state", "published");
+  // add the pager
+  $output .= theme('pager');
+//    }
+//    else {
+//        $filter_form = drupal_get_form('itg_workflow_preview_log_filter_form');
+//        $output .= render($filter_form);
+//        $output .= '<div class="view-content">
+//      <table class="">
+//      <tbody>
+//        <tr>
+//          <td>' . t("Please select Username or Email filter first.") . '</td>
+//        </tr>
+//      </tbody>
+//      </table>
+//      </div>';
+//    }
 
-        if (!isset($_GET['type']) || (isset($_GET['type']) && $_GET['type'] == "All")) {
-            $itg_query->condition("n.type", array("story", "videogallery", "blog", "photogallery"), "IN");
-        }
-        else {
-            $itg_query->condition("n.type", $_GET['type']);
-        }
-
-        if (isset($_GET['nid']) && !empty($_GET['nid'])) {
-            $itg_query->condition("n.nid", $_GET['nid']);
-        }
-
-        if (isset($_GET['username']) && !empty($_GET['username'])) {
-            $or = db_or()->condition("wbh_user.name", $_GET['username'])->condition("user.name", $_GET['username']);
-            $itg_query->condition($or);
-        }
-
-        if (isset($_GET['email']) && !empty($_GET['email'])) {
-            $itg_query->condition("user.mail", $_GET['email']);
-        }
-
-        if (isset($_GET['title']) && !empty($_GET['title'])) {
-            $title_chunk_array = explode(" ", $_GET['title']);
-            foreach ($title_chunk_array as $title_chunk) {
-                $itg_query->condition('title', '%' . db_like($title_chunk) . '%', 'LIKE');
-            }
-        }
-        $itg_query->condition('n.status', 1);
-        $itg_query->fields('n', array('nid', 'title', 'uid', 'type', 'created', 'changed'));
-        $itg_query->fields('user', array('name'));
-        $itg_query->fields('wbh_user', array('name'));
-        $itg_query->fields('wbh', array('uid'));
-        $itg_query->fields('iwf', array('nid'));
-        $itg_query->isNull('iwf.nid');
-        $itg_query->orderBy('n.nid', "DESC");
-        $itg_result = $itg_query->execute()->fetchAll();
-
-        $rows = array();
-        $count = 0;
-        foreach ($itg_result as $row) {
-            $rows[] = array(
-                array('data' => $count + 1),
-                array('data' => $row->nid),
-                array('data' => $row->title),
-                array('data' => l($row->name, "user/$row->uid")),
-                array('data' => l($row->wbh_user_name, "user/$row->wbh_uid")),
-                array('data' => $row->type),
-                array('data' => date('d/m/Y', $row->created)),
-                array('data' => date('d/m/Y', $row->changed)),
-                array('data' => l("<span class='view-link'>View</span>", "node/$row->nid", array("html" => TRUE, "attributes" => array("target" => "_blank")))),
-            );
-            $count++;
-        }
-        $filter_form = drupal_get_form('itg_workflow_preview_log_filter_form');
-        $output = render($filter_form);
-        $output .= '<div class="view"><div class="attachment"><span class="count">Count (' . count($itg_result) . ') </span>';
-        $output .= '</div></div>';
-        $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table', 'preview-log-table')), 'empty' => 'No result found.'));
-
-        // add the pager
-        $output .= theme('pager');
-    }
-    else {
-        $filter_form = drupal_get_form('itg_workflow_preview_log_filter_form');
-        $output .= render($filter_form);
-        $output .= '<div class="view-content">
-      <table class="">
-      <tbody>
-        <tr>
-          <td>' . t("Please select Username or Email filter first.") . '</td>
-        </tr>
-      </tbody>
-      </table>
-      </div>';
-    }
-
-    return $output;
+  return $output;
 }
 
 /**
@@ -664,16 +660,22 @@ function itg_workflow_node_presave($node) {
                             }
                         }
                     }
+                    else {
+                        $video_image = itg_videogallery_get_video_all($fids);
+                        
+                        if ($video_image) {
+                            $is_draft = 1;
+                        }
+                    }
                 }
             }
 
 // Need to chenge this for redirect
-            if ($is_draft == 0) {
-              
+            if ($is_draft == 1) {
+
                 if ($node->workbench_moderation['current']->state == 'published') {
                     $node->status = 0;
                     //$node->workbench_moderation['published']->published = 0;
-                    
                 }
                 else {
                     $node->workbench_moderation_state_new = 'draft';
@@ -898,9 +900,9 @@ function itg_workflow_node_insert($node) {
           } */
         //   drupal_set_message("unser node insert");
         //unset session if exists during node insert.
-       if (isset($_SESSION['node_preview_unique'])) {
-       unset($_SESSION['node_preview_unique']); 
-      }
+        if (isset($_SESSION['node_preview_unique'])) {
+            unset($_SESSION['node_preview_unique']);
+        }
     }
 }
 
