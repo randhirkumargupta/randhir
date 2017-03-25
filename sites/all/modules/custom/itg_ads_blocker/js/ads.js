@@ -3,7 +3,7 @@
  */
 
 (function($) {
-  Drupal.behaviors.itg_metatags = {
+  Drupal.behaviors.itg_ads_blocker = {
     attach: function() {
       __at__ = 1 ;
     }
