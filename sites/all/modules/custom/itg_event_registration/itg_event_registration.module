@@ -905,3 +905,19 @@ function _get_unique_id_for_registration_unique_field() {
   }
   return $reporter_id;
 }
+
+
+/**
+ * Implement function for redirect save.
+ * @param str $source, $new_redirect
+ * 
+ */
+
+function itg_save_redirect($source, $new_redirect) {
+  $redirect = new StdClass();
+  redirect_object_prepare($redirect);
+  $redirect->source = $new_redirect;
+  $redirect->redirect = $source;
+  redirect_save($redirect);
+}
+ 
