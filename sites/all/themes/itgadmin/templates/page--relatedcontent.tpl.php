@@ -1,5 +1,6 @@
 <?php
 global $base_url;
+global $message;
 /**
  * @file
  * Returns the HTML for a single Drupal page.
@@ -14,7 +15,7 @@ global $base_url;
   
 
   <main id="main">
-    
+    <?php print $messages; ?>
     <section id="content" class="container" role="main">
       <div id="widget-ajex-loader" style="display: none">
     <img class="widget-loader" align="center" src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />
