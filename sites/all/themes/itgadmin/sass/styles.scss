@@ -11085,15 +11085,15 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   .view-filters{
     padding-bottom: 20px;
     .views-exposed-form{
-        .views-exposed-widget{
-          vertical-align: top;
-          &.views-submit-button{
-            position: relative;
-            padding-right: 85px;
+      .views-exposed-widget{
+        vertical-align: top;
+        &.views-submit-button{
+          position: relative;
+          padding-right: 85px;
           .form-submit{
-              position: absolute;
-              right: 5px;
-              top: 38px;
+            position: absolute;
+            right: 5px;
+            top: 38px;
           }
         } 
         &.views-reset-button{
@@ -11103,11 +11103,14 @@ span.file a{pointer-events: none; color: #2f2f2f;}
         }
         &.views-widget-filter-bundle_name{
           display: none;
-        }        
-      }      
-      }      
-    }     
-  } 
+        }  
+        &.views-widget-filter-keyword{
+          width: 350px;
+        }
+      } 
+    }      
+  }     
+} 
 .ftp-server > iframe {
     border: 1px solid #ccc;
     width: 100%;
