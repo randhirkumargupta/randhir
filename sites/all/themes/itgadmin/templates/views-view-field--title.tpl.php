@@ -26,7 +26,7 @@
 
 <?php
 global $base_url;
-
+$arg = arg();
 if ($field->view->name == 'autocomplete_for_event' 
         || $field->view->name == 'autocomplete_event_photo' 
         || $field->view->name == 'podcast_for_event' 
@@ -34,7 +34,7 @@ if ($field->view->name == 'autocomplete_for_event'
         || $field->view->name == 'manage_quiz') {
   print $output;
 } else
-if (isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['nid']['entity']->type == 'event_backend' || $row->_field_data['nid']['entity']->type == 'itg_funalytics')) {
+if ((isset($arg[0]) && $arg[0] == 'itg-custom-widget-content') || isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['nid']['entity']->type == 'event_backend' || $row->_field_data['nid']['entity']->type == 'itg_funalytics')) {
   print $output;
 } else if (isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['nid']['entity']->type == 'blog' || 
         $row->_field_data['nid']['entity']->type == 'photogallery' || 
