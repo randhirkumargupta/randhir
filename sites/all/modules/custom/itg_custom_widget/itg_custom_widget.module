@@ -222,6 +222,9 @@ function itg_custom_widget_form_views_exposed_form_alter(&$form , &$form_state ,
       $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
       $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
       break;
+    case 'views-exposed-form-itg-custom-widget-page-2':
+      $form['widget']['#attributes']['placeholder'] = t('Widget Title');
+      break;
   }
 }
 
