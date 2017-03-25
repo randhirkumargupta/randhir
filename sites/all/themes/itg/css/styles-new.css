@@ -157,6 +157,18 @@ input[type="file"], input[type="submit"], input[type="text"] {
 #block-views-photo-landing-slider-block .slick-slider .slick-slide {
   position: relative;
 }
+#block-views-photo-landing-slider-block .slick-slider .slick-slide .photo-landing-slider-pic {
+  text-align: center;
+  height: 543px;
+}
+#block-views-photo-landing-slider-block .slick-slider .slick-slide .photo-landing-slider-pic img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
 #block-views-photo-landing-slider-block .slick-slider .slick-prev {
   font: normal normal normal 14px/1 FontAwesome;
   cursor: pointer;
@@ -6770,6 +6782,13 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 
   .podcast-detail .jw-controlbar {
     padding: 0;
+  }
+
+  #block-views-photo-landing-slider-block .slick-slider .slick-slide .photo-landing-slider-pic {
+    height: auto;
+  }
+  #block-views-photo-landing-slider-block .slick-slider .slick-slide .photo-landing-slider-pic img {
+    position: static;
   }
 }
 @media all and (max-width: 480px) {

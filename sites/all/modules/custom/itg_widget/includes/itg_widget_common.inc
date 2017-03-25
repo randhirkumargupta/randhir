@@ -2862,6 +2862,7 @@ function insert_all_node_in_widegt_table() {
  */
 function itg_widget_node_insert($node) {
   if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
+    if ($node->field_story_source_type['und'][0]['value'] != 'migrated') {
     $nid = $node->nid;
     $cat_id = $node->field_story_category['und'];
     if (isset($node->field_story_category['und'])) {
@@ -2923,6 +2924,7 @@ function itg_widget_node_insert($node) {
           }
       }
     }
+  }
   }
 }
 

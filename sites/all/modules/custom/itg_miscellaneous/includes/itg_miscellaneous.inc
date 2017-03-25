@@ -147,7 +147,7 @@ function create_poll_table() {
     ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;';
     db_query($query); */ 
 
-  //$file_name = 'indiatoday-story_2016-06-01.xml';
+ $file_name = 'indiatoday-story_2016-06-01.xml';
   //$file_name = 'indiatoday-story_2016-06-11.xml';
   //$file_name = 'indiatoday-story_2016-06-21.xml';
   //$file_name = 'indiatoday-story_2016-07-01.xml';
@@ -155,7 +155,7 @@ function create_poll_table() {
   //$file_name = 'indiatoday-story_2016-09-01.xml';
   //$file_name = 'indiatoday-story_2016-10-01.xml';
   //$file_name = 'indiatoday-story_2016-11-01.xml';
-  $file_name = 'indiatoday-story_2016-12-01.xml';
+ // $file_name = 'indiatoday-story_2016-12-01.xml';
   $xml_path = 'sites/default/files/xml_file_chunk/';
   $xml = simplexml_load_file($xml_path . $file_name, 'SimpleXMLElement');  
   $i = 0;
@@ -237,12 +237,14 @@ function create_section_category_in_mongo_submit($form, &$form_state) {
 
   $query = db_select('taxonomy_term_data', 'td');
   $query->leftJoin('taxonomy_term_hierarchy', 'th', 'th.tid = td.tid');
+  $query->leftJoin('itg_category_manager', 'icm', 'icm.tid = td.tid');
   $query->leftJoin('taxonomy_vocabulary', 'tv', 'tv.vid=td.vid');
   $result = $query
           ->condition('td.vid', CATEGORY_MANAGMENT)
           ->fields('td', array('tid', 'name', 'vid'))
           ->fields('th', array('parent'))
           ->fields('tv', array('machine_name'))
+          ->fields('icm', array('status'))
           ->execute();
 
 
@@ -284,7 +286,7 @@ function create_section_cat_op($data, &$context) {
           "vid" => (int) $data->vid,
           "machine_name" => $data->machine_name,
           "content_type" => get_content_type_list_for_this_term($data->tid),
-          "status" => 1,
+          "status" => (int)$data->status,
           'parent_data' => taxonomy_get_parents_all($data->tid),
       );
       $result = $people->insert($qry);

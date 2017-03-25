@@ -509,7 +509,7 @@ function _related_story_left_block_content() {
     if (!empty($related_data)) {
       $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
       //$related_image = $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
-      $related_image_url = $related_data->sm_field_custom_story_extra_small_url[0];
+      $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
       $related_image = '<img src="'.$related_image_url.'">';
 
       if (empty($related_image_url)) {
@@ -550,7 +550,7 @@ function _related_story_bottom_block_content() {
     if (!empty($related_data)) {
       $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
       //$related_image = $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
-      $related_image_url = $related_data->sm_field_custom_story_extra_small_url[0];
+      $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
       $related_image = '<img src="' . $related_image_url . '">';
       if (empty($related_image_url)) {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
@@ -661,7 +661,7 @@ function _latest_from_aajtak() {
         $path = $value->story_url;
         $img_url = $value->thumb_image;
         $related_dt.= "<li class='third-party-list'><a class='pic' href='$path' target='_blank' title='$related_title'><img src='$img_url' alt='$related_title' /></a>";
-        $related_dt.= "<div class='title'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</div></li>";
+        $related_dt.= "<div class='title'>" . l($related_title, $path, array("attributes" => array("target" => "_blank"))) . "</div></li>";
       }
       $i++;
       if ($i == 5)
@@ -694,7 +694,7 @@ function _latest_from_businesstoday() {
         $path = $value->story_url;
         $img_url = $value->thumb_image;
         $related_dt.= "<li class='third-party-list'><a class='pic' href='$path' target='_blank' title='$related_title'><img src='$img_url' alt='$related_title' /></a>";
-        $related_dt.= "<div class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</div></li>";
+        $related_dt.= "<div class='tile'>" . l($related_title, $path, array("attributes" => array("target" => "_blank"))) . "</div></li>";
       }
       $i++;
       if ($i == 5)

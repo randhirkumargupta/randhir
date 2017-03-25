@@ -64,7 +64,7 @@ function itg_registered_user_report($user_id) {
 function itg_registred_user_report_form($form , $form_state) {
   // Add date/time field with Pop-up calendar to the form.
   $form['markup'] = array(
-    '#markup' => t("Please select date from and to for display report"),
+    '#markup' => t("<h2>Please select date from and to for display report</h2>"),
   );
   $form['date_from'] = array(
     '#type' => 'textfield',

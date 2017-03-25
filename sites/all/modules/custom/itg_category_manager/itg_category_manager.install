@@ -65,6 +65,12 @@ function itg_category_manager_schema() {
         'size' => 'tiny',
         'description' => t('Whether the term is active(1) or blocked(0).'),
       ),
+      'vid' => array(
+      'description' => 'Vid of category',
+      'type' => 'int',
+      'not null' => TRUE,
+      'default' => 0
+      ),
     ),
     'indexes' => array(
       'changed' => array('changed'),

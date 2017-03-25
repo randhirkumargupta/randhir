@@ -4032,6 +4032,7 @@ div.node{
   line-height: 48px;
   color: #585858;
   font-size: 28px;
+  .fa{line-height: 48px;}
 }
 .region-sidebar-second{
   background-color: #2f2f2f;
@@ -4446,6 +4447,57 @@ div.node{
     @extend .choose-audio-video-file;
     .form-type-managed-file > label{
       padding-top: 0;
+    }
+  }
+  .form-field-name-field-facebook-animated-image{
+    .image-widget-data{
+      .form-file{
+        @extend .fleft;
+        max-width: 200px;
+        margin-top: 3px;
+        & + .form-submit{
+          @extend .btn-small;
+        }
+      }
+    }
+    div.description{display: none !important;}
+  }
+  .form-field-name-field-facebook-gallery-associate{
+    margin: 0 10px;
+    [id*="field-facebook-gallery-associate-values"]{
+      thead{@extend .hide;}
+      tbody{
+        tr{
+          td:nth-child(2){
+            @extend .pos-rel;
+            @extend .fleft;
+            @extend .full;
+            margin-bottom: 10px;
+            background-color: #ddd;
+            padding-bottom: 30px;
+            .form-submit{
+              @extend .icon-remove-item;
+              background-color: transparent;
+              border: none;
+              box-shadow: none;
+              position: absolute;
+              right: 38px;
+              bottom: 5px;
+              width: 28px;
+              height: 28px;
+              padding: 0;
+            }
+          }
+        }
+      }
+      & + div.clearfix{
+        .form-submit{
+          @extend .icon-add-more;
+          position: absolute;
+          right: 5px;
+          bottom: 15px;
+        }
+      }
     }
   }
 }
@@ -11026,7 +11078,10 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     }
   }
 }
-.view.view-display-id-search_unpublish_video, .view-id-searchimage.view-display-id-page_1, .view-display-id-search_publish_video_radio{
+.view.view-display-id-search_unpublish_video,
+.view-display-id-search_publish_video,
+.view-id-searchimage.view-display-id-page_1, 
+.view-display-id-search_publish_video_radio{
   .view-filters{
     padding-bottom: 20px;
     .views-exposed-form{
@@ -11261,4 +11316,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       margin-left: 150px;
       @extend .btn-small;
     }
+  }
+  .node-supplement-form{
+    @extend .image-repo-browse;
   }

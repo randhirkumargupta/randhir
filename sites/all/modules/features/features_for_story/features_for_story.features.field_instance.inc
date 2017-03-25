@@ -634,7 +634,7 @@ function features_for_story_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 23,
+      'weight' => 22,
     ),
   );
 
@@ -673,7 +673,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 85,
+      'weight' => 84,
     ),
   );
 
@@ -718,7 +718,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete_tags',
-      'weight' => 70,
+      'weight' => 69,
     ),
   );
 
@@ -760,7 +760,7 @@ function features_for_story_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 109,
+      'weight' => 108,
     ),
   );
 
@@ -802,7 +802,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 69,
+      'weight' => 68,
     ),
   );
 
@@ -844,7 +844,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 60,
+      'weight' => 59,
     ),
   );
 
@@ -872,7 +872,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_emoji',
-    'label' => 'Left Emoji',
+    'label' => 'Right Emoji',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -886,7 +886,7 @@ function features_for_story_field_default_field_instances() {
         'rows' => 1,
       ),
       'type' => 'text_textarea',
-      'weight' => 92,
+      'weight' => 91,
     ),
   );
 
@@ -914,7 +914,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_emoji_2',
-    'label' => 'Right Emoji',
+    'label' => 'Left Emoji',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -928,7 +928,7 @@ function features_for_story_field_default_field_instances() {
         'rows' => 1,
       ),
       'type' => 'text_textarea',
-      'weight' => 93,
+      'weight' => 92,
     ),
   );
 
@@ -967,7 +967,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 94,
+      'weight' => 93,
     ),
   );
 
@@ -1043,7 +1043,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 86,
+      'weight' => 85,
     ),
   );
 
@@ -1082,7 +1082,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 84,
+      'weight' => 83,
     ),
   );
 
@@ -1127,7 +1127,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 91,
+      'weight' => 90,
     ),
   );
 
@@ -1169,7 +1169,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 83,
+      'weight' => 82,
     ),
   );
 
@@ -1208,7 +1208,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 87,
+      'weight' => 86,
     ),
   );
 
@@ -1249,7 +1249,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 61,
+      'weight' => 60,
     ),
   );
 
@@ -1290,7 +1290,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 62,
+      'weight' => 61,
     ),
   );
 
@@ -1348,7 +1348,7 @@ function features_for_story_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 107,
+      'weight' => 106,
     ),
   );
 
@@ -1390,7 +1390,7 @@ function features_for_story_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 88,
+      'weight' => 87,
     ),
   );
 
@@ -1435,7 +1435,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete_tags',
-      'weight' => 95,
+      'weight' => 94,
     ),
   );
 
@@ -1477,7 +1477,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 97,
+      'weight' => 96,
     ),
   );
 
@@ -1519,7 +1519,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 96,
+      'weight' => 95,
     ),
   );
 
@@ -1564,7 +1564,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 104,
+      'weight' => 103,
     ),
   );
 
@@ -1623,7 +1623,7 @@ function features_for_story_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 66,
+      'weight' => 65,
     ),
   );
 
@@ -1665,7 +1665,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 105,
+      'weight' => 104,
     ),
   );
 
@@ -1706,7 +1706,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 65,
+      'weight' => 64,
     ),
   );
 
@@ -1748,7 +1748,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 101,
+      'weight' => 100,
     ),
   );
 
@@ -1790,7 +1790,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 102,
+      'weight' => 101,
     ),
   );
 
@@ -1832,7 +1832,7 @@ function features_for_story_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 89,
+      'weight' => 88,
     ),
   );
 
@@ -1871,7 +1871,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 90,
+      'weight' => 89,
     ),
   );
 
@@ -1910,7 +1910,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 53,
+      'weight' => 52,
     ),
   );
 
@@ -1949,7 +1949,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 72,
+      'weight' => 71,
     ),
   );
 
@@ -1994,7 +1994,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete_tags',
-      'weight' => 71,
+      'weight' => 70,
     ),
   );
 
@@ -2059,7 +2059,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 108,
+      'weight' => 107,
     ),
   );
 
@@ -2098,7 +2098,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'hs_taxonomy',
       'settings' => array(),
       'type' => 'taxonomy_hs',
-      'weight' => 51,
+      'weight' => 50,
     ),
   );
 
@@ -2140,7 +2140,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 28,
+      'weight' => 27,
     ),
   );
 
@@ -2179,7 +2179,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 25,
+      'weight' => 24,
     ),
   );
 
@@ -2221,7 +2221,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 14,
+      'weight' => 13,
     ),
   );
 
@@ -2263,7 +2263,7 @@ function features_for_story_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 22,
+      'weight' => 21,
     ),
   );
 
@@ -2340,7 +2340,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 20,
+      'weight' => 19,
     ),
   );
 
@@ -2382,7 +2382,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 19,
+      'weight' => 18,
     ),
   );
 
@@ -2424,7 +2424,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 21,
+      'weight' => 20,
     ),
   );
 
@@ -2463,7 +2463,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 17,
+      'weight' => 16,
     ),
   );
 
@@ -2523,7 +2523,7 @@ function features_for_story_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 18,
+      'weight' => 17,
     ),
   );
 
@@ -2601,7 +2601,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 36,
+      'weight' => 35,
     ),
   );
 
@@ -2677,7 +2677,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 40,
+      'weight' => 39,
     ),
   );
 
@@ -2753,7 +2753,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 33,
+      'weight' => 32,
     ),
   );
 
@@ -2795,7 +2795,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 32,
+      'weight' => 31,
     ),
   );
 
@@ -2863,7 +2863,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 58,
+      'weight' => 57,
     ),
   );
 
@@ -2905,7 +2905,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 48,
+      'weight' => 47,
     ),
   );
 
@@ -2947,7 +2947,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 26,
+      'weight' => 25,
     ),
   );
 
@@ -2989,7 +2989,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 63,
+      'weight' => 62,
     ),
   );
 
@@ -3095,7 +3095,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'autocomplete_deluxe_taxonomy',
-      'weight' => 52,
+      'weight' => 51,
     ),
   );
 
@@ -3137,7 +3137,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 73,
+      'weight' => 72,
     ),
   );
 
@@ -3146,14 +3146,14 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Story Kicker Text',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 42,
+        'weight' => 127,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3165,7 +3165,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_kicker_text',
-    'label' => 'Story kicker',
+    'label' => 'Story Kicker',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -3176,10 +3176,10 @@ function features_for_story_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'size' => 60,
+        'rows' => 5,
       ),
-      'type' => 'text_textfield',
-      'weight' => 24,
+      'type' => 'text_textarea',
+      'weight' => 23,
     ),
   );
 
@@ -3255,7 +3255,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 37,
+      'weight' => 36,
     ),
   );
 
@@ -3300,7 +3300,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 44,
+      'weight' => 43,
     ),
   );
 
@@ -3426,7 +3426,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 12,
+      'weight' => 11,
     ),
   );
 
@@ -3541,7 +3541,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 38,
+      'weight' => 37,
     ),
   );
 
@@ -3583,7 +3583,7 @@ function features_for_story_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 106,
+      'weight' => 105,
     ),
   );
 
@@ -3667,7 +3667,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 64,
+      'weight' => 63,
     ),
   );
 
@@ -3732,7 +3732,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 46,
+      'weight' => 45,
     ),
   );
 
@@ -3774,7 +3774,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 45,
+      'weight' => 44,
     ),
   );
 
@@ -3813,7 +3813,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 29,
+      'weight' => 28,
     ),
   );
 
@@ -3900,7 +3900,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 15,
+      'weight' => 14,
     ),
   );
 
@@ -3960,7 +3960,7 @@ function features_for_story_field_default_field_instances() {
         'year_range' => '-0:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 16,
+      'weight' => 15,
     ),
   );
 
@@ -4085,7 +4085,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 41,
+      'weight' => 40,
     ),
   );
 
@@ -4169,7 +4169,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 74,
+      'weight' => 73,
     ),
   );
 
@@ -4245,7 +4245,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 39,
+      'weight' => 38,
     ),
   );
 
@@ -4326,7 +4326,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 30,
+      'weight' => 29,
     ),
   );
 
@@ -4374,7 +4374,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 57,
+      'weight' => 56,
     ),
   );
 
@@ -4416,7 +4416,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 56,
+      'weight' => 55,
     ),
   );
 
@@ -4458,7 +4458,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 75,
+      'weight' => 74,
     ),
   );
 
@@ -4497,7 +4497,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 27,
+      'weight' => 26,
     ),
   );
 
@@ -4536,7 +4536,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 76,
+      'weight' => 75,
     ),
   );
 
@@ -4612,7 +4612,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 82,
+      'weight' => 81,
     ),
   );
 
@@ -4688,7 +4688,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 79,
+      'weight' => 78,
     ),
   );
 
@@ -4727,7 +4727,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 78,
+      'weight' => 77,
     ),
   );
 
@@ -4769,7 +4769,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 77,
+      'weight' => 76,
     ),
   );
 
@@ -4813,7 +4813,7 @@ function features_for_story_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 100,
+      'weight' => 99,
     ),
   );
 
@@ -4858,7 +4858,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 98,
+      'weight' => 97,
     ),
   );
 
@@ -4900,7 +4900,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 81,
+      'weight' => 80,
     ),
   );
 
@@ -4942,7 +4942,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 80,
+      'weight' => 79,
     ),
   );
 
@@ -4981,7 +4981,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 99,
+      'weight' => 98,
     ),
   );
 
@@ -5026,7 +5026,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 50,
+      'weight' => 49,
     ),
   );
 
@@ -5068,7 +5068,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 49,
+      'weight' => 48,
     ),
   );
 
@@ -5110,7 +5110,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 43,
+      'weight' => 42,
     ),
   );
 
@@ -5152,7 +5152,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 47,
+      'weight' => 46,
     ),
   );
 
@@ -5195,7 +5195,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 42,
+      'weight' => 41,
     ),
   );
 
@@ -5234,7 +5234,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 67,
+      'weight' => 66,
     ),
   );
 
@@ -5276,7 +5276,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 34,
+      'weight' => 33,
     ),
   );
 
@@ -5352,7 +5352,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 35,
+      'weight' => 34,
     ),
   );
 
@@ -5420,7 +5420,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 59,
+      'weight' => 58,
     ),
   );
 
@@ -5463,7 +5463,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 103,
+      'weight' => 102,
     ),
   );
 
@@ -5509,7 +5509,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 68,
+      'weight' => 67,
     ),
   );
 
@@ -5551,7 +5551,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 13,
+      'weight' => 12,
     ),
   );
 
@@ -5691,12 +5691,11 @@ function features_for_story_field_default_field_instances() {
   t('Social media integration');
   t('Source id');
   t('Source type');
-  t('Story Kicker Text');
+  t('Story Kicker');
   t('Story Technology');
   t('Story body');
   t('Story expires');
   t('Story expiry date');
-  t('Story kicker');
   t('Story rating');
   t('Story title');
   t('Story type');

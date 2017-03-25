@@ -130,7 +130,7 @@ class ItgVideogalleryMigration extends XMLMigration {
     // configuration mapped in prepare
     $this->addFieldMapping('field_story_comment_question', 'commentquestion')->xpath('commentquestion');
     $this->addFieldMapping('field_story_schedule_date_time', 'publisheddate')->xpath('publisheddate'); // published date
-    //$this->addFieldMapping('field_itg_content_publish_date', 'publisheddate')->xpath('publisheddate'); // published date
+    $this->addFieldMapping('field_itg_content_publish_date', 'publisheddate')->xpath('publisheddate'); // published date
     $this->addFieldMapping('field_story_expiry_date', 'expirydate')->xpath('expirydate');
     $this->addFieldMapping('field_story_expires', 'videoexpires')->xpath('videoexpires');
     // Image field 
@@ -566,9 +566,9 @@ class ItgVideogalleryMigration extends XMLMigration {
 
 
     //code for order set
-    if (isset($row->xml->ordering)) {
+    //if (isset($row->xml->ordering)) {
       ordering_set_of_content($node, (string) $row->xml->ordering);
-    }
+    //}
     // Related content save in db
     if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
      //$arr = array();

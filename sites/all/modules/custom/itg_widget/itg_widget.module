@@ -29,10 +29,19 @@ function itg_widget_init() {
 // Js for move funtionality.
 // This is use in case of nodequeue in case of custom table we calls a callback funtion.
   global $base_url;
+  global $user;
+  
   $settings = array();
   $settings['base_url'] = $base_url;
   drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));
+  // set cookie for recommended chunk.
+  if ($user->uid == 0 && !isset($_COOKIE['recomended_for_you'])) {
+    setcookie('recomended_for_you', uniqid(), time() + (86400 * 30), "/"); // 1 day
+  }
+  elseif (isset($_COOKIE['recomended_for_you']) && $user->uid) {
+    unset($_COOKIE['recomended_for_you']);
+  }
 }
 
 /**
@@ -1420,6 +1429,7 @@ function itg_widget_get_primary_cat($nid) {
 function itg_widget_node_delete($node) {
   itg_widget_handle_unpublished_node($node->nid, FALSE);
 }
+
 /**
  * Function to delete nodes from widget and nodequeue.
  * @param int $nid
@@ -1433,8 +1443,8 @@ function itg_widget_handle_unpublished_node($nid, $magazin_widget_condition = TR
     try {
       $query = db_delete('itg_widget_order');
       $query->condition('nid', $nid);
-      if($magazin_widget_condition) {
-        $query->condition('widget', 'issue_primary_category_magazin_widget' ,'!=');
+      if ($magazin_widget_condition) {
+        $query->condition('widget', 'issue_primary_category_magazin_widget', '!=');
       }
       $query->execute();
     }

@@ -245,6 +245,9 @@ function feature_for_recipe_strongarm() {
         'path' => array(
           'weight' => '1',
         ),
+        'redirect' => array(
+          'weight' => '16',
+        ),
       ),
       'display' => array(),
     ),
@@ -289,6 +292,9 @@ function feature_for_recipe_strongarm() {
         ),
         'path' => array(
           'weight' => '1',
+        ),
+        'redirect' => array(
+          'weight' => '19',
         ),
       ),
       'display' => array(),
@@ -339,7 +345,7 @@ function feature_for_recipe_strongarm() {
           'weight' => '1',
         ),
         'redirect' => array(
-          'weight' => '30',
+          'weight' => '31',
         ),
       ),
       'display' => array(),

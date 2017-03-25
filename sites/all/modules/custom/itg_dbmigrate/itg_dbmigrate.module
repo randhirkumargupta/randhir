@@ -28,44 +28,33 @@ function get_itg_destination_id($table_name, $sourceid) {
 function ordering_set_of_content($node, $count) {  
   
   $nid = $node->nid;
-  $cat_id = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
-  
-  if (!empty($cat_id)) {
-    $query = db_insert('itg_widget_order')
+ // $cat_id = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+  if (isset($node->field_story_category['und'])) {
+    $cat_id = $node->field_story_category['und'];
+      foreach ($cat_id as $category) {
+         $query = db_insert('itg_widget_order')
         ->fields(array(
           'nid' => $nid,
           'widget' => 'section_wise_widget',
           'content_type' => $node->type,
-          'cat_id' => $cat_id,
+          'cat_id' => $category['tid'],
           'weight' => $count,
           'extra' => "",
         ))
         ->execute();
-     $val = get_max_weight_for_node_insert($cat_id, $node->type);
-     $max_result_all = $val['All'];
-     $single_insert_query_all = db_insert('itg_widget_order')->fields(
-            array(
-              'nid',
-              'widget',
-              'content_type',
-              'cat_id',
-              'weight',
-              'extra',
-            )
-        );
-        
-        $single_insert_query_all->values(array(
-            'nid' => $nid,
+         
+       $query = db_insert('itg_widget_order')
+        ->fields(array(
+          'nid' => $nid,
             'widget' => 'section_wise_widget',
             'content_type' => 'All',
-            'cat_id' => $cat_id,
-            'weight' => ++$max_result_all,
+            'cat_id' => $category['tid'],
+            'weight' => $count,
             'extra' => '',
-          )
-        );
-        $single_insert_query_all->execute();    
-  }
-    
+        ))
+        ->execute();          
+      }
+    }   
 }    
  
 
