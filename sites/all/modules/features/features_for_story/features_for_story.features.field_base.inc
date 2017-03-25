@@ -1198,6 +1198,7 @@ function features_for_story_field_default_field_bases() {
         'breaking_news' => 'Breaking News',
         'google_standout' => 'Google Standout',
         'comment' => 'Comment',
+        'commentbox' => 'Comment Box',
         'medium_style_comment' => 'Medium Style Comment',
         'display_lock' => 'Display Lock',
         'set_as_featured' => 'Set As Featured',
@@ -1694,11 +1695,9 @@ function features_for_story_field_default_field_bases() {
     ),
     'locked' => 0,
     'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
+    'settings' => array(),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'text_long',
   );
 
   // Exported field_base: 'field_story_large_image'.
