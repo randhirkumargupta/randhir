@@ -3,9 +3,9 @@
 global $base_url;
 
 define('PAYTM_ENVIRONMENT', 'TEST'); // PROD
-define('PAYTM_MERCHANT_KEY', 'vRATqRV01k3O0B#H');
-define('PAYTM_MERCHANT_MID', 'Indiaa22153325984376');
-define('PAYTM_MERCHANT_WEBSITE', 'india');
+define('PAYTM_MERCHANT_KEY', 'd8DJIC6KlVT4HekP');
+define('PAYTM_MERCHANT_MID', 'LTDMED81989694148457');
+define('PAYTM_MERCHANT_WEBSITE', 'WEB_STAGING');
 define('INDUSTRY_TYPE_ID', 'Retail');
 define('CHANNEL_ID', 'WEB');
 define('PAYTM_TXN_SUCCESS_STATUS', 1);
@@ -20,7 +20,7 @@ define('PAYTM_ORDER_SUCCESS_STATUS', 1);
 define('ITG_BILLDESK_SECURITY_KEY', '5n9wh8T0a3fw');
 define('ITG_BILLDESK_CHECKSUM' ,'3712345678');
 define('ITG_BILLDESK_MERCHANT_ID' ,'INDIATODAY');
-define('ITG_BILLDESK_POST_URL' , ' https://pgi.billdesk.com/pgidsk/PGIMerchantPayment');
+define('ITG_BILLDESK_POST_URL' , 'https://pgi.billdesk.com/pgidsk/PGIMerchantPayment');
 //define('ITG_BILLDESK_POST_URL' , 'https://www.billdesk.com/pgidsk/pgmerc/INDIATODAYPaymentoption.jsp');
 define('PAYTM_CALLBACK_URL', $base_url . '/itg_payment_order_form_response_url');
 define('BILLDESK_LABELS', 'MerchantID|CustomerID|TxnReferenceNo|BankReferenceNo|TxnAmount|' .

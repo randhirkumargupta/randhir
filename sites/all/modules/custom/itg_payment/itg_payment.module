@@ -188,7 +188,7 @@ function itg_payment_order_form_response_url() {
 
   $transaction_id = $_POST['TXNID'];
   $transaction_status = 0;
-
+  $data['order_status'] = 0;
   if ($_POST["STATUS"] == "TXN_SUCCESS") {
     $transaction_status = PAYTM_TXN_SUCCESS_STATUS;
     $data['order_status'] = PAYTM_ORDER_SUCCESS_STATUS;
@@ -443,7 +443,7 @@ function itg_payment_billdesk_order_form($form, &$form_state) {
   $security_id = ITG_BILLDESK_SECURITY_KEY;
   $bdposturl = ITG_BILLDESK_POST_URL;
   $order_id = "ODR-" . time() . rand(0, 100);
-  $value = $merchant_id . '|ARP10234|NA|' . $amount . '|NA|NA|NA|INR|NA|R|' . $security_id . '|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . 'http://qa.indiatodayonline.in/itg-payment/billdesk-payment-success';
+  $value = $merchant_id . '|34137112|NA|' . $amount . '|NA|NA|NA|INR|NA|R|' . $security_id . '|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . 'http://qa.indiatodayonline.in/itg-payment/billdesk-payment-success';
   // Generate Checksum.
   $common_string = $security_id;
 

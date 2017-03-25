@@ -167,6 +167,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
     $this->addFieldMapping('created', 'created')->xpath('created');
     $this->addFieldMapping('changed', 'modified')->xpath('modified');
     $this->addFieldMapping('status', 'published')->xpath('published');
+   
 
     $this->addFieldMapping('field_common_audio', 'commonaudio')->xpath('commonaudio');
     $this->addFieldMapping('field_common_audio_file', 'commonaudiofile')->xpath('commonaudiofile');
@@ -225,6 +226,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
     $this->addFieldMapping('field_itg_content_publish_date', 'created')->xpath('created'); // published date
     $this->addFieldMapping('field_featured_ordering', 'featured_ordering')->xpath('featured_ordering'); // published date
     $this->addFieldMapping('field_large_image_description', 'description')->xpath('description'); // Large image description
+    
     
     $this->addUnmigratedDestinations(array('uid', 'promote', 'sticky', 'revision', 'log', 'language', 'tnid', 'translate', 'revision_uid', 'is_new',
 //      'field_story_expiry_date:timezone',
@@ -507,6 +509,13 @@ class ItgPhotogalleryMigration extends XMLMigration {
       $node->field_story_social_media_integ[LANGUAGE_NONE] = $row->final_social_checkbox;
     }
 
+    // modified by
+    if (isset($row->xml->modified_by) && !empty($row->xml->modified_by)) {
+      $modified_uid = (string) $row->xml->modified_by;
+      $orignal_modified_uid = get_itg_destination_id('migrate_map_itguser', $modified_uid);
+      $node->field_modify_by[LANGUAGE_NONE][0]['value'] = $orignal_modified_uid;
+    }
+    
     // manage created user
     if (isset($row->xml->created_by) && !empty($row->xml->created_by)) {
       $created_uid = (string) $row->xml->created_by;
@@ -520,6 +529,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
   }
 
   public function complete($entity, $row) {
+    print $row->xml->id.' ';
     $node = $entity;
     
      //code for order set

@@ -609,7 +609,7 @@ function hs_taxonomy_hierarchical_select_root_level($params) {
     $type = $_POST['cat_node_type']; 
   }  
   
-/*  foreach ($terms as $key => $term) {    
+  foreach ($terms as $key => $term) {    
     if (!itg_category_manager_term_state($term->tid)) {
       unset($terms[$key]);
     }
@@ -618,7 +618,7 @@ function hs_taxonomy_hierarchical_select_root_level($params) {
         unset($terms[$key]);
       }
     }
-  }*/
+  }
   
   // end
   // If the root_term parameter is enabled, then prepend a fake "<root>" term.
