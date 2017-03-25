@@ -1443,6 +1443,20 @@ function itg_videogallery_get_file_details() {
  * @param int $fid
  * @return type string
  */
+function itg_videogallery_get_video_all($fid) {
+    $query = db_select('dailymotion_response_details', 'dm')
+            ->fields('dm', array('is_draft'))
+            ->condition('fid', $fid, '=');
+    $result = $query->execute()->fetchField();
+    return $result;
+}
+
+
+/**
+ * Implement function get dailymotion video id by fid
+ * @param int $fid
+ * @return type string
+ */
 function itg_videogallery_get_video($fid) {
     $query = db_select('dailymotion_response_details', 'dm')
             ->fields('dm', array('video_id'))
@@ -1450,7 +1464,6 @@ function itg_videogallery_get_video($fid) {
     $result = $query->execute()->fetchField();
     return $result;
 }
-
 /**
  * Implements hook_node_access().
  * {@inheritdoc}

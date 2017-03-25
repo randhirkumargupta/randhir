@@ -664,16 +664,22 @@ function itg_workflow_node_presave($node) {
                             }
                         }
                     }
+                    else {
+                        $video_image = itg_videogallery_get_video_all($fids);
+                        
+                        if ($video_image) {
+                            $is_draft = 1;
+                        }
+                    }
                 }
             }
 
 // Need to chenge this for redirect
             if ($is_draft == 1) {
-              
+
                 if ($node->workbench_moderation['current']->state == 'published') {
                     $node->status = 0;
                     //$node->workbench_moderation['published']->published = 0;
-                    
                 }
                 else {
                     $node->workbench_moderation_state_new = 'draft';
@@ -898,9 +904,9 @@ function itg_workflow_node_insert($node) {
           } */
         //   drupal_set_message("unser node insert");
         //unset session if exists during node insert.
-       if (isset($_SESSION['node_preview_unique'])) {
-       unset($_SESSION['node_preview_unique']); 
-      }
+        if (isset($_SESSION['node_preview_unique'])) {
+            unset($_SESSION['node_preview_unique']);
+        }
     }
 }
 
