@@ -1363,14 +1363,14 @@ function daily_motion_video_dashboard_rows() {
       if ($record->encoding_progress == '100') {
         $status_flag = '<span class="ready-to-use-video">Ready To Use</span>';
         if (strtoupper($record->type) != 'LOCAL') {
-          $delete_link = "<a class ='delete-vdio' href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' onClick='return confirm('Do you really want to delete this?');'> Delete </a>";
+          $delete_link = "<a  href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' onClick=return confirm(Do you really want to delete this);> Delete </a>";
         }
       }
       if ($record->encoding_progress != '100' && $record->publishing_progress != '100') {
 
         $status_flag = '<span class="under-precess">Publishing Processing (' . $record->publishing_progress . ')%</span>';
         if (strtoupper($record->type) != 'LOCAL') {
-          $delete_link = "<a class ='delete-vdio' href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' onClick='return confirm('Do you really want to delete this?');'> Delete </a>";
+          $delete_link = "<a  href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' onClick='return confirm(Do you really want to delete this);'> Delete </a>";
         }
       }
       if ($record->encoding_progress != '100' && $record->publishing_progress == '100') {
@@ -1378,7 +1378,7 @@ function daily_motion_video_dashboard_rows() {
         $status_flag = '<span class="under-precess">Ready to Use</span>';
 
         if (strtoupper($record->type) != 'LOCAL') {
-          $delete_link = "<a class ='delete-vdio' href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' onClick='return confirm('Do you really want to delete this?');'> Delete </a>";
+          $delete_link = "<a  href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' onClick='return confirm(Do you really want to delete this);'> Delete </a>";
         }
       }
       if ($record->encoding_progress == '100' && $record->publishing_progress == '100') {
@@ -1386,7 +1386,7 @@ function daily_motion_video_dashboard_rows() {
         $status_flag = '<span class="under-precess">Completed</span>';
 
         if (strtoupper($record->type) != 'LOCAL') {
-          $delete_link = "<a class ='delete-vdio' href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' onClick='return confirm('Do you really want to delete this?');'> Delete </a>";
+          $delete_link = "<a  href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' onClick='return confirm(Do you really want to delete this);'> Delete </a>";
         }
       }
     }
