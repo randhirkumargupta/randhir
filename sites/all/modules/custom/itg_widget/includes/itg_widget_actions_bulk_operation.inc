@@ -163,8 +163,10 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     save_feature_content_section_widget_data($form_state);
   }
   elseif ($current_display == 'user_selection_for_section') {
-    module_load_include('inc', 'itg_widget', 'includes/itg_widget_section_wise_user');
-    save_default_user_for_every_section($form_state);
+    if (isset($_GET['field_user_section_tid']) && !empty($_GET['field_user_section_tid'])) {
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_section_wise_user');
+      save_default_user_for_every_section($form_state);
+    }
   }
   elseif ($current_display == 'issue_category_magazin_widget') {
     module_load_include('inc', 'itg_widget', 'includes/itg_widget_section_wise_magazine');

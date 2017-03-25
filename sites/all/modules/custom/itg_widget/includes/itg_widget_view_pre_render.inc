@@ -272,6 +272,11 @@ function itg_widget_views_pre_render(&$view) {
       $view->attachment_before = $header_content;
     }
   }
-
- 
+  
+  elseif ($view->name == "user_selection" && $view->current_display == 'user_selection_for_section') {
+    if(isset($_POST['views_bulk_operations']) && !isset($_GET['field_user_section_tid'])) {
+      drupal_set_message(t("Please select section first.") , 'error');
+      drupal_goto('user-selection');
+    }
+  }
 }

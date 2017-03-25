@@ -191,6 +191,7 @@ function itg_category_multiple_get_section($itg_category_vocabs, $content_type) 
         $category_data = $people->find(
             array(
               "parent" => 0,
+              "status" => 1,
               "machine_name" => array('$in' => $itg_category_vocabs),
               "content_type" => array('$regex' => $content_type)
             )
@@ -211,12 +212,11 @@ function itg_category_multiple_get_section($itg_category_vocabs, $content_type) 
  * @return array
  */
 function itg_category_multiple_after_build($form, &$form_state) {
-
-
-  if (isset($form_state['input']['itg_primary_category'][0]) && !empty($form_state['input']['itg_primary_category'][0])) {
-    $form['category_holder']['field_primary_category']['und'][0]['value'] = $form_state['input']['itg_primary_category'][0];
-  }
-
+  //pr( $form['field_primary_category']['und']);
+//p($form_state['input']['itg_primary_category']);
+  //if (isset($form_state['input']['itg_primary_category']) && !empty($form_state['input']['itg_primary_category'])) {
+  // $form['field_primary_category']['und'][0]['value'] = $form_state['input']['itg_primary_category'];
+  //}
   //Getting category on the basis of section
 
   if (isset($form_state['input']['itg_section']) && !empty($form_state['input']['itg_section'])) {
@@ -246,9 +246,16 @@ function itg_category_multiple_after_build($form, &$form_state) {
     $form['category_holder']['itg_sub_sub_sub_category']['#options'] = $itg_sub_sub_category;
   }
 
-  if (isset($form_state['input']['itg_sub_sub_sub_category']) && !empty($form_state['input']['itg_sub_sub_sub_category'])) {
+  if (isset($form_state['input']['itg_section']) && !empty($form_state['input']['itg_section'])) {
+    $fsection = isset($form_state['input']['itg_section']) && !empty($form_state['input']['itg_section']) ? $form_state['input']['itg_section'] : array();
+    $fcategory = isset($form_state['input']['itg_category']) && !empty($form_state['input']['itg_category']) ? $form_state['input']['itg_category'] : array();
+    $fsub_category = isset($form_state['input']['itg_sub_category']) && !empty($form_state['input']['itg_sub_category']) ? $form_state['input']['itg_sub_category'] : array();
+    $fsub_sub_category = isset($form_state['input']['itg_sub_sub_category']) && !empty($form_state['input']['itg_sub_sub_category']) ? $form_state['input']['itg_sub_sub_category'] : array();
+    $fsub_sub_sub_category = isset($form_state['input']['itg_sub_sub_sub_category']) && !empty($form_state['input']['itg_sub_sub_sub_category']) ? $form_state['input']['itg_sub_sub_sub_category'] : array();
+    $complete_structure = array_merge(
+        $fsection, $fcategory, $fsub_category, $fsub_sub_category, $fsub_sub_sub_category
+    );
 
-    $complete_structure = array_merge($form_state['input']['itg_section'], $form_state['input']['itg_category'], $form_state['input']['itg_sub_category'], $form_state['input']['itg_sub_sub_category'], $form_state['input']['itg_sub_sub_sub_category']);
     $itg_primary_category = get_parent_structure_by_for_all(array_filter($complete_structure));
     $form['category_holder']['itg_primary_category']['#options'] = $itg_primary_category;
   }
@@ -360,7 +367,7 @@ function get_categoryies_by_tid($tids) {
       $query = array();
       if (is_array($query) && empty($query)) {
         $new_tids = get_categoryies_send_for_convert_to_int($tids);
-        $category_data = $people->find(array("parent" => array('$in' => $new_tids)));
+        $category_data = $people->find(array('status' => 1, "parent" => array('$in' => $new_tids)));
         foreach ($category_data as $chunk_data) {
           $html.='<option value="' . $chunk_data['tid'] . '">' . $chunk_data['name'] . '</option>';
         }
@@ -508,7 +515,7 @@ function itg_category_get_texo_desired($tids) {
       $query = array();
       if (is_array($query) && empty($query)) {
         $new_tids = get_categoryies_send_for_convert_to_int($tids);
-        $category_data = $people->find(array("parent" => array('$in' => $new_tids)));
+        $category_data = $people->find(array('status' => 1, "parent" => array('$in' => $new_tids)));
         foreach ($category_data as $chunk_data) {
           $html[$chunk_data['tid']] = $chunk_data['name'];
         }
@@ -533,7 +540,7 @@ function get_parent_structure_by_for_all($tids) {
       $query = array();
       if (is_array($query) && empty($query)) {
         $new_tids = get_categoryies_send_for_convert_to_int($tids);
-        $category_data = $people->find(array("tid" => array('$in' => $new_tids)));
+        $category_data = $people->find(array('status' => 1, "tid" => array('$in' => $new_tids)));
         foreach ($category_data as $chunk_data) {
           $return_data_chunk[$chunk_data['tid']] = get_parent_complete_structure($chunk_data['parent_data']);
         }
@@ -562,11 +569,12 @@ function get_parent_structure_in_complete($tids, $return_data_chunk) {
  * Implements hook_taxonomy_term_insert()
  */
 function itg_category_multiple_taxonomy_term_insert($term) {
+
   if ($term->vid == CATEGORY_MANAGMENT) {
     if (function_exists('mongodb')) {
       $con = mongodb();
       $people = $con->taxonomy_term_data_mongo;
-
+      $status_data = isset($term->term_state) && $term->term_state == 1 ? 1 : 0;
       // check connection
       if ($con) {
         $qry = array(
@@ -576,7 +584,7 @@ function itg_category_multiple_taxonomy_term_insert($term) {
           "vid" => (int) $term->vid,
           "machine_name" => $term->vocabulary_machine_name,
           "content_type" => get_content_type_combined_list_term($term->field_cm_select_type[LANGUAGE_NONE]),
-          "status" => 1,
+          "status" => (int) $status_data,
           'parent_data' => taxonomy_get_parents_all($term->tid),
         );
         $result = $people->insert($qry);
@@ -592,6 +600,7 @@ function itg_category_multiple_taxonomy_term_update($term) {
   if ($term->vid == CATEGORY_MANAGMENT) {
 // First removing term 
     $id = $term->tid;
+
     if (function_exists('mongodb') && !empty($id)) {
       $con = mongodb();
       $people = $con->taxonomy_term_data_mongo;
@@ -602,6 +611,8 @@ function itg_category_multiple_taxonomy_term_update($term) {
     if (function_exists('mongodb')) {
       $con = mongodb();
       $people = $con->taxonomy_term_data_mongo;
+      $status_data = isset($term->term_state) && $term->term_state == 1 ? 1 : 0;
+
       // check connection
       if ($con) {
         $qry = array(
@@ -611,7 +622,7 @@ function itg_category_multiple_taxonomy_term_update($term) {
           "vid" => (int) $term->vid,
           "machine_name" => $term->vocabulary_machine_name,
           "content_type" => get_content_type_combined_list_term($term->field_cm_select_type[LANGUAGE_NONE]),
-          "status" => 1,
+          "status" => (int) $status_data,
           'parent_data' => taxonomy_get_parents_all($term->tid),
         );
         $result = $people->insert($qry);
@@ -624,14 +635,13 @@ function itg_category_multiple_taxonomy_term_update($term) {
  * Implements get_content_type_combined_list_term()
  */
 function get_content_type_combined_list_term($data) {
-    $result = array();
-    if (isset($data) && !empty($data)) {
-      foreach ($data as $chunkdata) {
-        $result[] = $chunkdata['value'];
-      }
-      return isset($result) ? implode(',', $result) : '';
+  $result = array();
+  if (isset($data) && !empty($data)) {
+    foreach ($data as $chunkdata) {
+      $result[] = $chunkdata['value'];
     }
-  
+    return isset($result) ? implode(',', $result) : '';
+  }
 }
 
 /**
