@@ -248,14 +248,20 @@ img {
   margin-bottom: 40px;
 }
 
-.zoom-image {
+.zoom-image, #block-itg-front-end-common-latest-from-aajtak ul li a.pic,
+#block-itg-front-end-common-latest-from-pti ul li a.pic,
+#block-itg-front-end-common-latest-from-businesstoday ul li a.pic {
   overflow: hidden;
   display: block;
 }
-.zoom-image img {
+.zoom-image img, #block-itg-front-end-common-latest-from-aajtak ul li a.pic img,
+#block-itg-front-end-common-latest-from-pti ul li a.pic img,
+#block-itg-front-end-common-latest-from-businesstoday ul li a.pic img {
   transition: all 500ms ease 0s;
 }
-.zoom-image img:hover {
+.zoom-image img:hover, #block-itg-front-end-common-latest-from-aajtak ul li a.pic img:hover,
+#block-itg-front-end-common-latest-from-pti ul li a.pic img:hover,
+#block-itg-front-end-common-latest-from-businesstoday ul li a.pic img:hover {
   transform: scale(1.2);
 }
 
@@ -12988,6 +12994,7 @@ span.smilies-title img {
 #block-itg-front-end-common-latest-from-pti ul,
 #block-itg-front-end-common-latest-from-businesstoday ul {
   border: 1px solid #dddddd;
+  min-height: 381px;
 }
 #block-itg-front-end-common-latest-from-aajtak ul .third-party-list,
 #block-itg-front-end-common-latest-from-pti ul .third-party-list,
@@ -13012,8 +13019,17 @@ span.smilies-title img {
   line-height: 19px;
   color: #323232;
 }
+#block-itg-front-end-common-latest-from-aajtak ul li a.pic,
+#block-itg-front-end-common-latest-from-pti ul li a.pic,
+#block-itg-front-end-common-latest-from-businesstoday ul li a.pic {
+  max-height: 55px;
+}
 #block-itg-front-end-common-latest-from-aajtak ul li + li,
 #block-itg-front-end-common-latest-from-pti ul li + li,
 #block-itg-front-end-common-latest-from-businesstoday ul li + li {
   border-top: 1px solid #dddddd;
+}
+
+#block-itg-front-end-common-latest-from-businesstoday a.pic img {
+  max-width: 56px;
 }
