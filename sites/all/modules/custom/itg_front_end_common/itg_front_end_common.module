@@ -661,7 +661,7 @@ function _latest_from_aajtak() {
         $path = $value->story_url;
         $img_url = $value->thumb_image;
         $related_dt.= "<li class='third-party-list'><a class='pic' href='$path' target='_blank' title='$related_title'><img src='$img_url' alt='$related_title' /></a>";
-        $related_dt.= "<div class='title'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</div></li>";
+        $related_dt.= "<div class='title'>" . l($related_title, $path, array("attributes" => array("target" => "_blank"))) . "</div></li>";
       }
       $i++;
       if ($i == 5)
@@ -694,7 +694,7 @@ function _latest_from_businesstoday() {
         $path = $value->story_url;
         $img_url = $value->thumb_image;
         $related_dt.= "<li class='third-party-list'><a class='pic' href='$path' target='_blank' title='$related_title'><img src='$img_url' alt='$related_title' /></a>";
-        $related_dt.= "<div class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</div></li>";
+        $related_dt.= "<div class='tile'>" . l($related_title, $path, array("attributes" => array("target" => "_blank"))) . "</div></li>";
       }
       $i++;
       if ($i == 5)
