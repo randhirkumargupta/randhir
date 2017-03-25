@@ -20,7 +20,7 @@ define('PAYTM_ORDER_SUCCESS_STATUS', 1);
 define('ITG_BILLDESK_SECURITY_KEY', '5n9wh8T0a3fw');
 define('ITG_BILLDESK_CHECKSUM' ,'3712345678');
 define('ITG_BILLDESK_MERCHANT_ID' ,'INDIATODAY');
-define('ITG_BILLDESK_POST_URL' , ' https://pgi.billdesk.com/pgidsk/PGIMerchantPayment');
+define('ITG_BILLDESK_POST_URL' , 'https://pgi.billdesk.com/pgidsk/PGIMerchantPayment');
 //define('ITG_BILLDESK_POST_URL' , 'https://www.billdesk.com/pgidsk/pgmerc/INDIATODAYPaymentoption.jsp');
 define('PAYTM_CALLBACK_URL', $base_url . '/itg_payment_order_form_response_url');
 define('BILLDESK_LABELS', 'MerchantID|CustomerID|TxnReferenceNo|BankReferenceNo|TxnAmount|' .
