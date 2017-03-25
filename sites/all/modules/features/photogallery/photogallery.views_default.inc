@@ -1462,12 +1462,6 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
   $handler->display->display_options['filters']['field_story_archive_value']['group'] = 1;
-  /* Filter criterion: Content: Source type (field_story_source_type) */
-  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
-  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
-  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
-  $handler->display->display_options['filters']['field_story_source_type_value']['operator'] = 'empty';
-  $handler->display->display_options['filters']['field_story_source_type_value']['group'] = 1;
   /* Filter criterion: Content: Set As Featured (field_featured) */
   $handler->display->display_options['filters']['field_featured_value']['id'] = 'field_featured_value';
   $handler->display->display_options['filters']['field_featured_value']['table'] = 'field_data_field_featured';
