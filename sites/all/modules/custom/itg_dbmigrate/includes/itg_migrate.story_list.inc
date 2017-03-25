@@ -102,7 +102,7 @@ class ItgStoryListMigration extends XMLMigration {
       'factoids_title' => t('factoids_title'),
       'sefurl' => t('sefurl'),
       'pagetitle' => t('Page title'),
-      'description' => t('Description'),
+      //'description' => t('Description'),
       'keywords' => t('Keywords'),
       'audio_position' => t('audio_position'),
       'audio_url' => t('audio_url'),
@@ -126,6 +126,7 @@ class ItgStoryListMigration extends XMLMigration {
       'tech_cons' => t('tech_cons'),
       'tech_pros' => t('tech_pros'),
       'bigimage' => t('bigimage'),
+      'metadescription' => t('metadescription'),
     );
 
 
@@ -316,7 +317,7 @@ class ItgStoryListMigration extends XMLMigration {
     $this->addFieldMapping('pathauto')->defaultValue(0);
     $this->addFieldMapping('path', 'sefurl')->xpath('metatags/sefurl');
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
-    $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
+    $this->addFieldMapping('metatag_description', 'metadescription')->xpath('metatags/metadescription');
     $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
     // Facebook instant Article migrate code
     $this->addFieldMapping('field_facebook_audio_position', 'audio_position')->xpath('facebook_instant_article_integration/audio_position');
@@ -569,8 +570,12 @@ class ItgStoryListMigration extends XMLMigration {
       foreach($row->xml->tech_image_gallery->image as $image){
         $img_val = (string) $image;
         if(!empty($img_val)){
-          $row->xml->tech_image_gallery->image[$key] = itg_dbmigrate_imagepath_url($img_val);
-          $key++;
+          try{
+            $row->xml->tech_image_gallery->image[$key] = itg_dbmigrate_imagepath_url($img_val);
+            $key++;
+          } catch(Exception $e) {
+              // echo 'Message: ' .$e->getMessage();
+          }
         }
       }
     }
@@ -714,7 +719,7 @@ class ItgStoryListMigration extends XMLMigration {
         if ((string) $social_option->facebook == true) {
           $final_social[]['value'] = 'facebook';
         }
-        if ((string) $social_option->facebook_instant_article == true) {
+        if ((string) $social_option->facebook_instant_article == 1) {
           $final_social[]['value'] = 'facebook_instant_article';
         }
         if ((string) $social_option->twitter == true) {
@@ -727,32 +732,34 @@ class ItgStoryListMigration extends XMLMigration {
 
     if (isset($row->xml->configurations) && !empty($row->xml->configurations)) {
       foreach ($row->xml->configurations as $key => $option) {
-        if ((string) $option->breakingnews == true) {
+        if ((string) $option->breakingnews == 1) {
           $final_option[]['value'] = 'breaking_news';
         }
-        if ((string) $option->googlestandout == true) {
+        if ((string) $option->googlestandout == 1) {
           $final_option[]['value'] = 'google_standout';
         }
-        if ((string) $option->comment == true) {
+        if ((string) $option->comment == 1) {
           $final_option[]['value'] = 'comment';
         }
-        if ((string) $option->mediumstylecomment == true) {
+        if ((string) $option->mediumstylecomment == 1) {
           $final_option[]['value'] = 'medium_style_comment';
         }
-        if ((string) $option->setfeature == true) {
+        if ((string) $option->setfeature == 1) {
           $final_option[]['value'] = 'display_lock';
         }
-        if ((string) $option->displaylock == true) {
+        if ((string) $option->displaylock == 1) {
           $final_option[]['value'] = 'set_as_featured';
         }
-        if ((string) $option->associatetv == true) {
+        if ((string) $option->associatetv == 1) {
           $final_option[]['value'] = 'tv';
-        }
-        
+        }        
       }
     }
+    if ((string) $row->xml->commentbox == 1 && !empty($row->xml->commentbox)) {
+          $final_option[]['value'] = 'commentbox';
+        }
     
-    if ((string) $row->xml->noindex_nofollow == true) {
+    if ((string) $row->xml->noindex_nofollow == 1) {
       $final_option[]['value'] = 'noindex_nofollow';
     }
     
@@ -782,7 +789,7 @@ class ItgStoryListMigration extends XMLMigration {
   }
 
   public function prepare($node, stdClass $row) {
-    $node->teaser = (string) $row->xml->description;
+    $node->teaser = (string) $row->xml->storybody;
     if (!empty($row->quotes_new)) {
       $node->field_story_template_quotes[LANGUAGE_NONE] = $row->quotes_new;
     }
@@ -823,11 +830,19 @@ class ItgStoryListMigration extends XMLMigration {
         if(!empty($buzz_value->headline) || !empty($buzz_value->image) || !empty($buzz_value->description)){
         $headline = (string) $buzz_value->headline;
         $image_url = (string) $buzz_value->image;
-        $file = file_save_data(file_get_contents($image_url), file_default_scheme() . '://' . basename($image_url), FILE_EXISTS_RENAME);
-        $file->status = 1;
-        $file->alt = (string) $buzz_value->buzz_alt;
-        $file->title = (string) $buzz_value->buzz_title;
-        $image = (array) $file;
+        if (!empty($image_url)) {
+            try{
+            $file = file_save_data(file_get_contents($image_url), file_default_scheme() . '://' . basename($image_url), FILE_EXISTS_RENAME);
+            $file->status = 1;
+            $file->alt = (string) $buzz_value->buzz_alt;
+            $file->title = (string) $buzz_value->buzz_title;
+            $image = (array) $file;
+            }
+            catch(Exception $e) {
+              // echo 'Message: ' .$e->getMessage();
+            }
+          }
+        
         $description = (string) $buzz_value->description;
         $buzz_values = array(
           'field_name' => 'field_story_template_buzz',
