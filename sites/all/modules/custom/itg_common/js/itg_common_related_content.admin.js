@@ -82,7 +82,7 @@ jQuery(document).ready(function () {
                     display_type = final_tit[1];
                 }
             }
-            checkedlist += '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value" title="' + display_tit + '">' + item[i] + '</span> | ' + display_type + ' | <a href="' + solr_uri + '" target="_blank"> <i class="fa fa-eye" aria-hidden="true"></i> </a><i class="fa fa-times fright" aria-hidden="true"></i></li>';
+            checkedlist += '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value" title="' + display_tit + '">' + item[i] + '</span> | ' + display_type + ' | <a href="' + solr_uri + '" target="_blank"> view </a><i class="fa fa-times fright" aria-hidden="true"></i></li>';
         }
 
     }

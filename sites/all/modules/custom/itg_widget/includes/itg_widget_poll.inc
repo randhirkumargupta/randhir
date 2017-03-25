@@ -1,8 +1,14 @@
 <?php
 
 /**
- * File provide poll widget funtionality.
+ * @file
+ * File provide poll widget functionality.
  *
+ */
+
+/**
+ *function to save poll data.
+ * 
  * @param array $poll_data
  */
 function save_poll_widget_data($poll_data) {

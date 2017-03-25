@@ -1,10 +1,11 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @file
+ * Provide save function for dont miss widget.
+ *
  */
+
 module_load_include('inc', 'itg_widget', 'itg_widget.helper');
 
 /**
