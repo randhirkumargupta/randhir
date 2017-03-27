@@ -110,7 +110,7 @@ define('TAG_ID', 1);
 
 define('NEWSLETTER_EDUCATION_TID', variable_get('newsletter_education_tid'));
 
-define('PARENT_SSO', 'uat-sso.indiatodayonline.in');
+define('PARENT_SSO', 'itgcms.drupallocal.dev');
 
 define('FRONT_URL', 'http://uat-it.indiatodayonline.in');
 define('BACKEND_URL', 'http://uat-it-backend.indiatodayonline.in');

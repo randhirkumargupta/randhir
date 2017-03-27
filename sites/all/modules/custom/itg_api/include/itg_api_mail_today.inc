@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Implement itg_api_mail_today_content
  */
@@ -15,7 +16,7 @@ function itg_api_mail_today_content() {
   }
 
   //$direc = get_dir_content($file_path . '/feeds/mailtoday/');
-  $final_dir = getcwd().'/sites/all/modules/custom/itg_api/feeds/mailtoday/';
+  $final_dir = getcwd() . '/sites/all/modules/custom/itg_api/feeds/mailtoday/';
   $direc = get_dir_content($final_dir);
 
   foreach ($direc as $xm_file) {
@@ -125,12 +126,12 @@ function itg_api_mail_today_content() {
             $node = node_submit($node); // Prepare node for saving
             node_save($node); // Finally save node
             itg_api_insert_xml_info($node->nid, $xml_filename, 'story', 'Mail Today');
-            print '<font color="green">' . $headline . ' imported sucessfully' . '</font>';
-            print '<br/>';
+            $msg = $headline . ' imported sucessfully';
+            watchdog('MAIL_TODAY_XML', $msg);
           }
           else {
-            print '<font color="red">' . $headline . ' Already imported' . '</font>';
-            print '<br/>';
+            $msg = $headline . ' Already imported';
+            watchdog('MAIL_TODAY_XML', $msg);
           }
 
           if ($i == 10)

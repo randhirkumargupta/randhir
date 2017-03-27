@@ -14,14 +14,14 @@ function itg_pti_content() {
   foreach ($tax as $key => $val) {
     $op[$val->tid] = strtolower($val->name);
   }
- 
+
   //$direc = get_dir_content($file_path . '/feeds/pti/');
-  $final_dir = getcwd().'/sites/all/modules/custom/itg_api/feeds/pti/';
+  $final_dir = getcwd() . '/sites/all/modules/custom/itg_api/feeds/pti/';
   $direc = get_dir_content($final_dir);
- 
+
   foreach ($direc as $xm_file) {
-   $xml_file_path = $xm_file;
-   $xml_filename = basename($xml_file_path);
+    $xml_file_path = $xm_file;
+    $xml_filename = basename($xml_file_path);
     $pti_xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
     if (empty(itg_api_get_xml_info($xml_filename))) {
       if (!empty($pti_xml)) {
@@ -146,14 +146,13 @@ function itg_pti_content() {
             $node = node_submit($node); // Prepare node for saving
             node_save($node); // Finally save node
             itg_api_insert_xml_info($node->nid, $xml_filename, 'story', 'PTI');
-            print '<font color="green">' . $headline . ' imported sucessfully' . '</font>';
-            print '<br/>';
+            $msg = $headline . ' imported sucessfully';
+            watchdog('PTI_XML', $msg);
           }
           else {
-            print '<font color="red">' . $headline . ' Already imported' . '</font>';
-            print '<br/>';
+            $msg = $headline . ' Already imported';
+            watchdog('PTI_XML', $msg);
           }
-
           if ($pti == 5)
             break;
           $pti++;
@@ -162,4 +161,3 @@ function itg_pti_content() {
     }
   }
 }
-

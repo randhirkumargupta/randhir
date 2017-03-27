@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Implement itg_ani_content
  */
@@ -14,7 +15,7 @@ function itg_ani_content() {
   }
 
   //$direc = get_dir_content($file_path . '/feeds/ani/');
-  $final_dir = getcwd().'/sites/all/modules/custom/itg_api/feeds/ani/';
+  $final_dir = getcwd() . '/sites/all/modules/custom/itg_api/feeds/ani/';
   $direc = get_dir_content($final_dir);
 
   foreach ($direc as $xm_file) {
@@ -137,12 +138,12 @@ function itg_ani_content() {
             $node = node_submit($node); // Prepare node for saving
             node_save($node); // Finally save node
             itg_api_insert_xml_info($node->nid, $xml_filename, 'story', 'ANI');
-            print '<font color="green">' . $headline . ' imported sucessfully' . '</font>';
-            print '<br/>';
+            $msg = $headline . ' imported sucessfully';
+            watchdog('ANI_XML', $msg);
           }
           else {
-            print '<font color="red">' . $headline . ' Already imported' . '</font>';
-            print '<br/>';
+            $msg = $headline . ' Already imported';
+            watchdog('ANI_XML', $msg);
           }
 
           if ($ani == 2)

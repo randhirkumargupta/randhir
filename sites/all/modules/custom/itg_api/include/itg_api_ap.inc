@@ -16,7 +16,7 @@ function itg_ap_content() {
 
 
   //$direc = get_dir_content($file_path . '/feeds/ap/');
-  $final_dir = getcwd().'/sites/all/modules/custom/itg_api/feeds/ap/';
+  $final_dir = getcwd() . '/sites/all/modules/custom/itg_api/feeds/ap/';
   $direc = get_dir_content($final_dir);
 
   foreach ($direc as $xm_file) {
@@ -120,12 +120,12 @@ function itg_ap_content() {
             $node = node_submit($node); // Prepare node for saving
             node_save($node); // Finally save node
             itg_api_insert_xml_info($node->nid, $xml_filename, 'story', 'AP');
-            print '<font color="green">' . $headline . ' imported sucessfully' . '</font>';
-            print '<br/>';
+            $msg = $headline . ' imported sucessfully';
+            watchdog('AP_XML', $msg);
           }
           else {
-            print '<font color="red">' . $headline . ' Already imported' . '</font>';
-            print '<br/>';
+            $msg = $headline . ' Already imported';
+            watchdog('AP_XML', $msg);
           }
           $ap++;
           if ($ap == 2)

@@ -14,13 +14,13 @@ function itg_reuters_content() {
   foreach ($tax as $key => $val) {
     $op[$val->tid] = strtolower($val->name);
   }
- 
+
   //$direc = get_dir_content($file_path . '/feeds/reuters/');
-  $final_dir = getcwd().'/sites/all/modules/custom/itg_api/feeds/reuters/';
+  $final_dir = getcwd() . '/sites/all/modules/custom/itg_api/feeds/reuters/';
   $direc = get_dir_content($final_dir);
 
   foreach ($direc as $xm_file) {
-   $xml_file_path = $xm_file;
+    $xml_file_path = $xm_file;
     $xml_filename = basename($xml_file_path);
     $reuters_xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
     if (empty(itg_api_get_xml_info($xml_filename))) {
@@ -103,12 +103,12 @@ function itg_reuters_content() {
             $node = node_submit($node); // Prepare node for saving
             node_save($node); // Finally save node
             itg_api_insert_xml_info($node->nid, $xml_filename, 'story', 'PTI');
-            print '<font color="green">' . $headline . ' imported sucessfully' . '</font>';
-            print '<br/>';
+            $msg = $headline . ' imported sucessfully';
+            watchdog('REUTERS_XML', $msg);
           }
           else {
-            print '<font color="red">' . $headline . ' Already imported' . '</font>';
-            print '<br/>';
+            $msg = $headline . ' Already imported';
+            watchdog('REUTERS_XML', $msg);
           }
 
           if ($reuters == 2)
@@ -119,4 +119,3 @@ function itg_reuters_content() {
     }
   }
 }
-
