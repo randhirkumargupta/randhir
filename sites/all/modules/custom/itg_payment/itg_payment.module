@@ -443,7 +443,7 @@ function itg_payment_billdesk_order_form($form, &$form_state) {
   $security_id = ITG_BILLDESK_SECURITY_KEY;
   $bdposturl = ITG_BILLDESK_POST_URL;
   $order_id = "ODR-" . time() . rand(0, 100);
-  $value = $merchant_id . '|34137112|NA|' . $amount . '|NA|NA|NA|INR|NA|R|' . $security_id . '|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . 'http://qa.indiatodayonline.in/itg-payment/billdesk-payment-success';
+  $value = $merchant_id . '|' . $order_id .'|NA|' . $amount . '|NA|NA|NA|INR|NA|R|' . $security_id . '|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . 'http://qa.indiatodayonline.in/itg-payment/billdesk-payment-success';
   // Generate Checksum.
   $common_string = $security_id;
 
