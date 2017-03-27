@@ -189,7 +189,8 @@ function feature_for_video_field_default_field_instances() {
             'attach' => 0,
             'clipboard' => 0,
             'imce' => 0,
-            'itg_image_repository' => 'itg_image_repository',
+            'itg_image_repository' => 0,
+            'itg_image_video' => 'itg_image_video',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -1062,7 +1063,7 @@ function feature_for_video_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_extra_large_image',
-    'label' => 'Extra large image 1',
+    'label' => 'Extra large image',
     'required' => 0,
     'settings' => array(
       'alt_field' => 1,
@@ -1086,6 +1087,7 @@ function feature_for_video_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -2670,7 +2672,7 @@ function feature_for_video_field_default_field_instances() {
   t('Courtesy');
   t('Description');
   t('Expiry Date');
-  t('Extra large image 1');
+  t('Extra large image');
   t('Extra large image 2');
   t('Extra small image');
   t('Facebook Narrative');
