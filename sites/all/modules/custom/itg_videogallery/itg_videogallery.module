@@ -2546,6 +2546,15 @@ function itg_videogallery_views_query_alter(&$view, &$query) {
       }
     }
   }
+  
+  if($view->name == 'videogallery_management' && $view->current_display == 'page_1') {
+    if(isset($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == 'migrated') {
+      $query->add_where(1,'field_data_field_story_source_type.field_story_source_type_value', 'migrated', '=');
+    }
+    if(isset($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == 'videogallery') {
+      $query->add_where(1,'field_data_field_story_source_type.field_story_source_type_value', 'migrated', '!=');
+    }
+  }
 }
 
 /**
