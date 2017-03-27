@@ -4688,7 +4688,7 @@ function features_for_story_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 78,
+      'weight' => 77,
     ),
   );
 
@@ -4704,7 +4704,7 @@ function features_for_story_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 92,
+        'weight' => 128,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4716,7 +4716,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_tech_pros_cons_ratin',
-    'label' => 'Technology pros cons rating',
+    'label' => 'Technology rating',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -4727,7 +4727,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 77,
+      'weight' => 79,
     ),
   );
 
@@ -4942,7 +4942,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 79,
+      'weight' => 78,
     ),
   );
 
@@ -5708,7 +5708,6 @@ function features_for_story_field_default_field_instances() {
   t('Technology image gallery');
   t('Technology pros');
   t('Technology pros cons image');
-  t('Technology pros cons rating');
   t('Technology pros cons title');
   t('Technology rating');
   t('Templates Factoids');

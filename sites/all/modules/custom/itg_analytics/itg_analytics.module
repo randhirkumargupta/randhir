@@ -449,7 +449,7 @@ function itg_update_analytics_node_count_data($newsletter_content) {
 }
 
 /**
- * 
+ * Implementation of _get_node_type_from
  * @param int $nid
  */
 function _get_node_type_from($nid) {
@@ -458,21 +458,4 @@ function _get_node_type_from($nid) {
       ->condition('n.nid', $nid, '=');
 
   return $query->execute()->fetchField();
-}
-
-/**
- * Implementation of hook_views_query_alter
- * {@inheritdoc}
- */
-function itg_analytics_views_query_alter(&$view, &$query) {
-  if ($view->name == 'story_widget' && $view->current_display == 'most_popular') {
-//    $query = (string)$view->build_info['query'];
-//    echo $query;
-  }
-}
-
-
-function itg_analytics_views_pre_execute(&$view) {
-//  $query = (string)$view->build_info['query'];
-//  echo $query;
 }

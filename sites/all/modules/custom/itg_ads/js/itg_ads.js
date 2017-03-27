@@ -60,7 +60,6 @@
 jQuery(document).ready(function() {
   jQuery('#itg_ads_ttype_replace').hide();
 
-
   jQuery('[name="field_select_template_type[und]"]').on('click', function() {
 
     switch (jQuery(this).val()) {
@@ -99,9 +98,6 @@ jQuery(document).ready(function() {
 
   }
 
-
-
-
   jQuery('.itg-ads-preview-ads').on('click', function(e) {
     e.preventDefault();
     jQuery.colorbox({
@@ -117,7 +113,5 @@ jQuery(document).ready(function() {
     });
 
   });
-
-
 
 });

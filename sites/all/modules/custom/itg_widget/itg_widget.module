@@ -169,6 +169,7 @@ function itg_widget_menu() {
     'description' => 'Custom variables settings page',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_widgets_custom_variables'),
+    'file' => 'includes/itg_widgets_custom_variables.inc',
     'access arguments' => array('access administrator'),
     'type' => MENU_NORMAL_ITEM,
   );
