@@ -45,7 +45,7 @@
                     jQuery(".form-item-sections").css("display", "none");
                 }
 
-                console.log(menu_level_val);
+                //console.log(menu_level_val);
             });
 
         }

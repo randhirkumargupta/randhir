@@ -189,7 +189,8 @@ function feature_for_video_field_default_field_instances() {
             'attach' => 0,
             'clipboard' => 0,
             'imce' => 0,
-            'itg_image_repository' => 'itg_image_repository',
+            'itg_image_repository' => 0,
+            'itg_image_video' => 'itg_image_video',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -763,9 +764,9 @@ function feature_for_video_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'hs_taxonomy',
+      'module' => 'options',
       'settings' => array(),
-      'type' => 'taxonomy_hs',
+      'type' => 'options_select',
       'weight' => 28,
     ),
   );
@@ -1036,6 +1037,48 @@ function feature_for_video_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-videogallery-field_story_extra_data'.
+  $field_instances['node-videogallery-field_story_extra_data'] = array(
+    'bundle' => 'videogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 56,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_extra_data',
+    'label' => 'Story Extra Data',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 53,
+    ),
+  );
+
   // Exported field_instance: 'node-videogallery-field_story_extra_large_image'.
   $field_instances['node-videogallery-field_story_extra_large_image'] = array(
     'bundle' => 'videogallery',
@@ -1062,7 +1105,7 @@ function feature_for_video_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_extra_large_image',
-    'label' => 'Extra large image 1',
+    'label' => 'Extra large image',
     'required' => 0,
     'settings' => array(
       'alt_field' => 1,
@@ -1086,6 +1129,7 @@ function feature_for_video_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -2670,7 +2714,7 @@ function feature_for_video_field_default_field_instances() {
   t('Courtesy');
   t('Description');
   t('Expiry Date');
-  t('Extra large image 1');
+  t('Extra large image');
   t('Extra large image 2');
   t('Extra small image');
   t('Facebook Narrative');
@@ -2703,6 +2747,7 @@ function feature_for_video_field_default_field_instances() {
   t('Social media integration');
   t('Source id');
   t('Source type');
+  t('Story Extra Data');
   t('Syndication');
   t('Syndication Photo');
   t('Tags');
