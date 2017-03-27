@@ -206,6 +206,9 @@ function itg_menu_manager_form($form, &$form_state) {
       'callback' => 'get_url_of_current_term',
       'wrapper' => 'entire_form',
     ),
+    '#attributes' => array(
+      'onkeydown' => array("return isValidKey(event)"),
+    ),
     '#default_value' => isset($default_values['title']) ? $default_values['title'] : "",
     '#required' => TRUE,
   );

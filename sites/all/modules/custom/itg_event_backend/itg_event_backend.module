@@ -994,11 +994,12 @@ function itg_event_backend_node_insert($node) {
 function itg_event_backend_node_update($node) {
   if ($node->type == 'event_backend') {
     
-    /*$event_title = str_replace(' ', '-', $node->title);
-    $source = drupal_get_path_alias('node/' . $node->nid);    
+    $event_title = str_replace(' ', '-', $node->title);
+    //$source = drupal_get_path_alias('node/' . $node->nid);
+    $source = '';
     $redirect = $event_title.'/'.date('Y');
     
-    itg_save_redirect($source, $redirect);*/
+    itg_save_redirect($source, $redirect);
     
     if ($node->domains != '1' && $_GET['step'] == 'step_configuration') {
       //itg_event_backend_insert_into_redirect($node); me
@@ -1007,7 +1008,7 @@ function itg_event_backend_node_update($node) {
     itg_event_backend_insert_event_publish_details($node->nid, $event_start_date_time, 'update');
     $query_param = drupal_get_query_parameters();
     if ($query_param['step'] == 'step_configuration') {
-      $node->field_step_completion['und'][0]['value'] = '2';
+      $node->field_step_completion[LANGUAGE_NONE][0]['value'] = '2';
       field_attach_update('node', $node);
     }
   }
@@ -1891,22 +1892,27 @@ function itg_event_backend_highlights_block_content() {
  * @return string
  */
 function itg_event_backend_highlights_like_dislike($unique_id) {
+  
   if (function_exists('itg_flag_get_count')) {
     $like = itg_flag_get_count($unique_id, 'like_count');
     $dislike = itg_flag_get_count($unique_id, 'dislike_count');
   }
-  if (!empty($like['like_count'])) {
-    $like_count = '(' . $like['like_count'] . ')';
+  // get migrated count 
+  if(function_exists('itg_get_migrated_like_count')) {
+      $migrated_count = itg_get_migrated_like_count($unique_id);
   }
-  if (!empty($dislike['dislike_count'])) {
-    $dislike_count = '(' . $dislike['dislike_count'] . ')';
-  }
+  
+  $sum_of_likes = $like['like_count']+ $migrated_count[0]['like_count'];  
+  $sum_of_dislikes = $dislike['dislike_count']+ $migrated_count[0]['dislike_count'];  
+  $like_count_common = '(' . $sum_of_likes . ')';
+  $dislike_count_common = '(' . $sum_of_dislikes . ')';
+  
   $pid = "voted_" . $unique_id;
   $like = "no-of-likes_" . $unique_id;
   $dislike = "no-of-dislikes_" . $unique_id;
 
-  $like_btn = '<div class="agbutton"><button class="btn-highlights-like" id="like_count" rel="' . $unique_id . '"><i class="fa fa-thumbs-o-up"></i> <span id="' . $like . '">' . $like_count . '</span></button>';
-  $dislike_btn = '<button class="btn-highlights-dislike" id="dislike_count" rel="' . $unique_id . '"><i class="fa fa-thumbs-o-down"></i> <span id="' . $dislike . '">' . $dislike_count . '</span></button>';
+  $like_btn = '<div class="agbutton"><button class="btn-highlights-like" id="like_count" rel="' . $unique_id . '"><i class="fa fa-thumbs-o-up"></i> <span id="' . $like . '">' . $like_count_common . '</span></button>';
+  $dislike_btn = '<button class="btn-highlights-dislike" id="dislike_count" rel="' . $unique_id . '"><i class="fa fa-thumbs-o-down"></i> <span id="' . $dislike . '">' . $dislike_count_common . '</span></button>';
   $error_msg = '<p class="error-msg" id="' . $pid . '"></p></div>';
   return $like_btn . $dislike_btn . $error_msg;
 }

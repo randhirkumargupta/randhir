@@ -621,7 +621,7 @@ Image Size (210 x 145).',
   $field_instances['node-supplement-field_issue_supp_large_image'] = array(
     'bundle' => 'supplement',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (300 x 225)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -646,7 +646,7 @@ Image Size (210 x 145).',
     'label' => 'Large Cover Image',
     'required' => 1,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -654,7 +654,7 @@ Image Size (210 x 145).',
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -699,7 +699,7 @@ Image Size (210 x 145).',
   $field_instances['node-supplement-field_issue_supp_small_image'] = array(
     'bundle' => 'supplement',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (210 x 145)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -724,7 +724,7 @@ Image Size (210 x 145).',
     'label' => 'Small Cover Image',
     'required' => 1,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -732,7 +732,7 @@ Image Size (210 x 145).',
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -985,6 +985,8 @@ Image Size (210 x 145).',
   // Included for use with string extractors like potx.
   t('Comment');
   t('Image Size (172 x 240)');
+  t('Image Size (210 x 145)');
+  t('Image Size (300 x 225)');
   t('Import Issue XML');
   t('Import XML');
   t('Issue');
