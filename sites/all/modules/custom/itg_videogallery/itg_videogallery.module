@@ -1579,14 +1579,15 @@ function itg_videogallery_node_presave($node) {
       $playlist[$playlist_val['tid']] = $playlist_val['name'];
     }
 
-    // condition for source type field
+    $node->field_story_source_id = $playlist;
+    $_SESSION['old_playlist'] = itg_videogallery_get_old_playlist($node->nid);
+  }
+  
+  // condition for source type field
     if ($node->type == 'videogallery' && empty($node->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
       $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'videogallery';
     }
 
-    $node->field_story_source_id = $playlist;
-    $_SESSION['old_playlist'] = itg_videogallery_get_old_playlist($node->nid);
-  }
 }
 
 /**

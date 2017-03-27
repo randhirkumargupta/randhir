@@ -604,6 +604,11 @@ function itg_photogallery_node_presave($node) {
             }
         }
     }
+    
+    // add source type
+    if ($node->type == 'photogallery' && empty($node->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
+      $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'photogallery';
+    }
 }
 
 /**
