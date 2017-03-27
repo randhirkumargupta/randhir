@@ -574,8 +574,6 @@ function itg_ads_rule_after_build_validate($form, &$form_state) {
     }
   }
 
-
-
   $placeholder_data_final = array_filter($placeholder_data);
   $device_data_final = array_filter($device_data);
 
@@ -590,7 +588,6 @@ function itg_ads_rule_after_build_validate($form, &$form_state) {
       if ($placeholder_data_final[$placeholder_chunk_key] == $placeholder_data_final[$i]) {
         $p_matched_key = $i;
       }
-
 
       if (!empty($p_matched_key)) {
         if ($placeholder_chunk_key != $i) {
@@ -747,11 +744,9 @@ function get_itg_page_name($placeholder_name) {
       $startdate = new DateTime($default_ros_value['ros_date_range_filter']['field_ads_start_date']);
     }
 
-
     if (isset($default_ros_value['ros_date_range_filter']['field_ads_end_date']) && !empty($default_ros_value['ros_date_range_filter']['field_ads_end_date'])) {
       $enddate = new DateTime($default_ros_value['ros_date_range_filter']['field_ads_end_date']);
     }
-
 
     // This is the case where start date and end date both have the date data
     if (isset($startdate) && !empty($startdate) && isset($enddate) && !empty($enddate)) {
@@ -771,8 +766,6 @@ function get_itg_page_name($placeholder_name) {
         $ad_value = NULL;
       }
     }
-
-
 
     // End case where start date is available but end or expiry date is not decided by the user
   }
@@ -937,17 +930,13 @@ function get_header_body_start_end_code() {
       }
     }
 
-
     foreach ($ads_object->field_ads_body_start[$ads_object->language] as $bodystart) {
       $adsheaderbody['body_start'][] = $bodystart['value'];
     }
 
-
-
     foreach ($ads_object->field_ads_body_close[$ads_object->language] as $body_close) {
       $adsheaderbody['body_close'][] = $body_close['value'];
     }
-
 
     // Code ends for internal script 
     // Code start for external script  
