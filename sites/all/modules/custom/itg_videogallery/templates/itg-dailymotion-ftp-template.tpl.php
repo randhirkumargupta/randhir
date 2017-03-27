@@ -10,14 +10,17 @@ global $base_url;
     <div class="browse-ftp">
         <div id="itg_video_content">
             <div class="video-ftp active"><?php print t('FTP'); ?></div>
-            <?php if ($_GET['input_filed'] != 'ckeditor') { ?>
+            <?php if ($_GET['input_filed'] != 'ckeditor' && $_GET['no_value'] != 'single'  ) { ?>
+                <div class="video-local"><?php print t('Local Browse'); ?></div>
+            <?php } ?>
+                 <?php if ($_GET['field_name'] == 'field_videogallery_video_upload' ) { ?>
                 <div class="video-local"><?php print t('Local Browse'); ?></div>
             <?php } ?>
             <div id="loader-data"><img class="widget-loader" style="display: none" src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
 
             <div class="ftp-server">
                 <?php
-                if ($_GET['file_filed_name'] == 'field_upload_video[und][0][fid]') {
+                if ($_GET['file_filed_name'] == 'field_upload_video[und][0][fid]' || $_GET['field_name'] == 'field_videogallery_video_upload') {
                     if ($_GET['no_value'] == 'single') {
                         ?>
                         <iframe id="video_iframe" src="<?php echo base_path() . 'search-unpublish-video-radio'; ?>" width="900" height="650"></iframe>

@@ -58,6 +58,11 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_small_image']['id'] = 'sm_thumb_thumbnail_field_story_small_image';
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_small_image']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_small_image']['field'] = 'sm_thumb_thumbnail_field_story_small_image';
+  /* Sort criterion: Apache Solr: entity_id */
+  $handler->display->display_options['sorts']['entity_id']['id'] = 'entity_id';
+  $handler->display->display_options['sorts']['entity_id']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['sorts']['entity_id']['field'] = 'entity_id';
+  $handler->display->display_options['sorts']['entity_id']['order'] = 'DESC';
   /* Filter criterion: Apache Solr: Search */
   $handler->display->display_options['filters']['keyword']['id'] = 'keyword';
   $handler->display->display_options['filters']['keyword']['table'] = 'apachesolr__solr';

@@ -66,3 +66,19 @@ function itg_story_create_breaking_news() {
   $response = array('story_nid' => $node->nid);
   print json_encode($response);
 }
+
+
+/**
+ * Callback for migatred content count
+ * 
+ */
+function itg_get_migrated_like_count($nid) {
+  if (!empty($nid)) {
+    $query = db_select('itg_custom_flag_count', 'mg');
+    $query->fields('mg');
+    $query->condition('mg.nid', $nid);
+    $query->orderBy('mg.created', 'DESC'); //ORDER BY created
+    $result = $query->execute();
+    return $record = $result->fetchAll(PDO::FETCH_ASSOC);
+  }
+}

@@ -1,8 +1,12 @@
 <?php
 
 /**
- * File provide poll widget funtionality.
- *
+ * @file
+ * Main file for magazin widget.
+ */
+
+/**
+ *Function for save magazine widget.
  * @param array $poll_data
  */
 function save_issue_magazin_widget_data($issue_data) {

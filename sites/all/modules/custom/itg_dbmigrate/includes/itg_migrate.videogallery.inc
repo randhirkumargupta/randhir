@@ -190,7 +190,8 @@ class ItgVideogalleryMigration extends XMLMigration {
     // Video migrate
     // $this->addFieldMapping('field_upload_video', 'video')->xpath('video');
 
-    $this->addFieldMapping('field_story_expert_name', 'shortdescription')->xpath('shortdescription');
+    //$this->addFieldMapping('field_story_expert_name', 'shortdescription')->xpath('shortdescription');
+    $this->addFieldMapping('field_video_kicker', 'shortdescription')->xpath('shortdescription');
     $this->addFieldMapping('field_story_expert_description', 'longdescription')->xpath('longdescription');
 
     // Section mapped in prepare
