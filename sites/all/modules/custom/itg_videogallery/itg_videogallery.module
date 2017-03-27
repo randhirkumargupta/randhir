@@ -772,7 +772,7 @@ function itg_videogallery_dailymotion($real_path, $uri, $fid, $tags_value, $node
     $result = $api->post(
             '/me/videos', array(
         'url' => $url,
-        'title' => $uri,
+        'title' => $ftp_file[1],
         'tags' => $tags_value,
         'channel' => 'tv',
         'private' => $is_private,
@@ -2905,7 +2905,7 @@ function itg_videogallery_dailymotion_add_video($real_path, $name, $realfilename
     $result = $api->post(
             '/me/videos', array(
         'url' => $url,
-        'title' => $uri,
+        'title' => $realfilename,
         'channel' => 'tv',
         'published' => TRUE,
             )
