@@ -14,7 +14,11 @@
 function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   switch ($form_id) {
-    case 'story_node_form':
+    case 'story_node_form':        // Story
+    case 'photogallery_node_form': // Photo gallery
+    case 'videogallery_node_form': // Video Gallery
+
+
       $content_type = '';
       if (isset($form['#node']->type) && !empty($form['#node']->type)) {
         $content_type = $form['#node']->type;
@@ -220,7 +224,7 @@ function itg_category_multiple_after_build($form, &$form_state) {
   //Getting category on the basis of section
 
   if (isset($form_state['input']['itg_section']) && !empty($form_state['input']['itg_section'])) {
-    $itg_section = itg_category_get_texo_desired($form_state['input']['itg_section']); //p($itg_section);
+    $itg_section = itg_category_get_texo_desired($form_state['input']['itg_section']);
     $form['category_holder']['itg_category']['#options'] = $itg_section;
   }
 
@@ -291,12 +295,12 @@ function itg_category_multiple_menu() {
  * Implements itg_category_multiple_find()
  */
 function itg_category_multiple_find() {
-  $category = $_POST['type'];
+  $category = $_POST['type']; //p($_POST);
   switch ($category) {
     case 'itg_section[]':
       if (isset($_POST['section']) && count($_POST['section']) >= 1 && !empty($_POST['section'])) {
-        $main_category = get_categoryies_by_tid($_POST['section']);
-        $primary_category = get_parent_structure_by_tid($_POST['section']);
+        $main_category = get_categoryies_by_tid(json_decode($_POST['section']));
+        $primary_category = get_parent_structure_by_tid(json_decode($_POST['section']));
         $render_data['main'] = $main_category;
         $render_data['primary'] = $primary_category;
         print json_encode($render_data);
@@ -306,8 +310,11 @@ function itg_category_multiple_find() {
     case 'itg_category[]':
 
       if (isset($_POST['category']) && count($_POST['category']) >= 1 && !empty($_POST['category'])) {
-        $main_category = get_categoryies_by_tid($_POST['category']);
-        $final_array_for_final_category = array_merge($_POST['section'], $_POST['category']);
+        $main_category = get_categoryies_by_tid(json_decode($_POST['category']));
+        $section = json_decode($_POST['section']);
+        $category = json_decode($_POST['category']);
+
+        $final_array_for_final_category = array_merge($section, $category);
         $primary_category = get_parent_structure_by_tid($final_array_for_final_category);
         $render_data['main'] = $main_category;
         $render_data['primary'] = $primary_category;
@@ -318,8 +325,11 @@ function itg_category_multiple_find() {
 
     case 'itg_sub_category[]':
       if (isset($_POST['sub_category']) && count($_POST['sub_category']) >= 1 && !empty($_POST['sub_category'])) {
-        $main_category = get_categoryies_by_tid($_POST['sub_category']);
-        $final_array_for_final_category = array_merge($_POST['section'], $_POST['category'], $_POST['sub_category']);
+        $main_category = get_categoryies_by_tid(json_decode($_POST['sub_category']));
+        $section = json_decode($_POST['section']);
+        $category = json_decode($_POST['category']);
+        $sub_category = json_decode($_POST['sub_category']);
+        $final_array_for_final_category = array_merge($section, $category, $sub_category);
         $primary_category = get_parent_structure_by_tid($final_array_for_final_category);
         $render_data['main'] = $main_category;
         $render_data['primary'] = $primary_category;
@@ -330,8 +340,13 @@ function itg_category_multiple_find() {
 
     case 'itg_sub_sub_category[]':
       if (isset($_POST['sub_sub_category']) && count($_POST['sub_sub_category']) >= 1 && !empty($_POST['sub_sub_category'])) {
-        $main_category = get_categoryies_by_tid($_POST['sub_sub_category']);
-        $final_array_for_final_category = array_merge($_POST['section'], $_POST['category'], $_POST['sub_category'], $_POST['sub_sub_category']);
+        $main_category = get_categoryies_by_tid(json_decode($_POST['sub_sub_category']));
+        $section = json_decode($_POST['section']);
+        $category = json_decode($_POST['category']);
+        $sub_category = json_decode($_POST['sub_category']);
+        $sub_sub_category = json_decode($_POST['sub_sub_category']);
+
+        $final_array_for_final_category = array_merge($section, $category, $sub_category, $sub_sub_category);
         $primary_category = get_parent_structure_by_tid($final_array_for_final_category);
         $render_data['main'] = $main_category;
         $render_data['primary'] = $primary_category;
@@ -342,7 +357,12 @@ function itg_category_multiple_find() {
 
     case 'itg_sub_sub_sub_category[]':
       if (isset($_POST['sub_sub_sub_category']) && count($_POST['sub_sub_sub_category']) >= 1 && !empty($_POST['sub_sub_sub_category'])) {
-        $final_array_for_final_category = array_merge($_POST['section'], $_POST['category'], $_POST['sub_category'], $_POST['sub_sub_category'], $_POST['sub_sub_sub_category']);
+        $section = json_decode($_POST['section']);
+        $category = json_decode($_POST['category']);
+        $sub_category = json_decode($_POST['sub_category']);
+        $sub_sub_category = json_decode($_POST['sub_sub_category']);
+        $sub_sub_sub_category = json_decode($_POST['sub_sub_sub_category']);
+        $final_array_for_final_category = array_merge($section, $category, $sub_category, $sub_sub_category, $sub_sub_sub_category);
         $primary_category = get_parent_structure_by_tid($final_array_for_final_category);
         $render_data['primary'] = $primary_category;
         print json_encode($render_data);

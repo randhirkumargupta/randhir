@@ -14,7 +14,11 @@ $(document).ready(function() {
 
     //$('.form-item-field-story-extra-data-und-0-value').hide();
 
+    // Hiding category
     $('.form-field-name-field-story-category').hide();
+    //Adding css for  primary category
+    $("#edit-itg-primary-category").css("height", "100px");
+    $("#edit-itg-primary-category").css("overflow-x", "auto");
 
     $('#edit-itg-section').on('change', function() {
         var categoryies = $(this).val();
@@ -38,7 +42,7 @@ $(document).ready(function() {
                         currentSectionRequest.abort();
                     }
                 },
-                data: {section: categoryies, type: $(this).attr('name')},
+                data: {type: $(this).attr('name'), section: JSON.stringify(categoryies)},
                 success: function(html) {
                     var item = JSON.parse(html);
                     $('#edit-itg-category').empty();
@@ -87,9 +91,9 @@ $(document).ready(function() {
                     }
                 },
                 data: {
-                    section: $('#edit-itg-section').val(),
-                    category: categoryies,
-                    type: $(this).attr('name')
+                    type: $(this).attr('name'),
+                    section: JSON.stringify($('#edit-itg-section').val()),
+                    category: JSON.stringify(categoryies),
                 },
                 success: function(html) {
                     var item = JSON.parse(html);
@@ -134,11 +138,12 @@ $(document).ready(function() {
                         currentsubCategoryRequest.abort();
                     }
                 },
+                
                 data: {
-                    section: $('#edit-itg-section').val(),
-                    category: $('#edit-itg-category').val(),
-                    sub_category: categoryies,
-                    type: $(this).attr('name')
+                    type: $(this).attr('name'),
+                    section: JSON.stringify($('#edit-itg-section').val()),
+                    category: JSON.stringify($('#edit-itg-category').val()),
+                    sub_category: JSON.stringify(categoryies),
                 },
                 success: function(html) {
                     var item = JSON.parse(html);
@@ -190,11 +195,12 @@ $(document).ready(function() {
                     }
                 },
                 data: {
-                    section: $('#edit-itg-section').val(),
-                    category: $('#edit-itg-category').val(),
-                    sub_category: $('#edit-itg-sub-category').val(),
-                    sub_sub_category: categoryies,
-                    type: $(this).attr('name')
+                    type: $(this).attr('name'),
+                    section: JSON.stringify($('#edit-itg-section').val()),
+                    category: JSON.stringify($('#edit-itg-category').val()),
+                    sub_category: JSON.stringify($('#edit-itg-sub-category').val()),
+                    sub_sub_category: JSON.stringify(categoryies),
+                    
                 },
                 success: function(html) {
                     var item = JSON.parse(html);
@@ -243,11 +249,12 @@ $(document).ready(function() {
                     }
                 },
                 data: {
-                    section: $('#edit-itg-section').val(),
-                    category: $('#edit-itg-category').val(),
-                    sub_category: $('#edit-itg-sub-category').val(),
-                    sub_sub_category: $('#edit-itg-sub-sub-category').val(),
-                    sub_sub_sub_category: categoryies,
+                    type: $(this).attr('name'),
+                    section: JSON.stringify($('#edit-itg-section').val()),
+                    category: JSON.stringify($('#edit-itg-category').val()),
+                    sub_category: JSON.stringify($('#edit-itg-sub-category').val()),
+                    sub_sub_category: JSON.stringify($('#edit-itg-sub-sub-category').val()),
+                    sub_sub_sub_category: JSON.stringify(categoryies),
                     type: $(this).attr('name')
                 },
                 success: function(html) {
