@@ -284,7 +284,7 @@ function itg_story_form_custom_callback($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-   
+  
     $soruce_type_filter_display_views = array(
         'views-exposed-form-strory-menegment-page',
         'views-exposed-form-strory-menegment-page-1',
@@ -295,7 +295,11 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
         'views-exposed-form-videogallery-management-page-1',
         'views-exposed-form-videogallery-management-page',
         'views-exposed-form-videogallery-management-page-2',
-        'views-exposed-form-videogallery-management-page-5'
+        'views-exposed-form-videogallery-management-page-5',
+        'views-exposed-form-photo-gallery-management-page-1',
+        'views-exposed-form-photo-gallery-management-page',
+        'views-exposed-form-photo-gallery-management-page-2',
+        'views-exposed-form-photo-gallery-management-page-5'
       );
     
    
@@ -311,35 +315,39 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
     }
 
     if (in_array($form['#id'], $soruce_type_filter_display_views)) {
-       if($form['#id'] == 'views-exposed-form-videogallery-management-page-1' || $form['#id'] == 'views-exposed-form-videogallery-management-page' || $form['#id'] == 'views-exposed-form-videogallery-management-page-2' || $form['#id'] == 'views-exposed-form-videogallery-management-page-5') {
-         $cn_type = 'videogallery';
-       } else {
-         $cn_type = 'story';
-       }
-        $option = array("" => '-Any-', $cn_type => $cn_type);
-        $query = db_select('field_data_field_story_source_type', 'st');
-        $query->leftJoin('node', 'n', 'n.nid=st.entity_id');
-        $query->condition('n.type', $cn_type)->distinct()
-                ->fields('st', array('field_story_source_type_value'));
-        $result = $query->execute()->fetchAll();
-        foreach ($result as $option_values) {
-            $option[$option_values->field_story_source_type_value] = $option_values->field_story_source_type_value;
-        }
-
-        $source_type = "<select class='form-item form-type-select' id='fake-soruce-type'>";
-        foreach ($option as $option_value => $option_element) {
-            if (!empty($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == $option_value) {
-                $select = "selected";
-            }
-            else {
-                $select = "";
-            }
-            $source_type .= "<option value=\"$option_value\" $select>$option_element</option>";
-        }
-        $source_type .= "</select>";
-        $form['field_story_source_type_value']['#suffix'] = $source_type;
-        drupal_add_css("input#edit-field-story-source-type-value {display:none}", "inline");
+    if ($form['#id'] == 'views-exposed-form-videogallery-management-page-1' || $form['#id'] == 'views-exposed-form-videogallery-management-page' || $form['#id'] == 'views-exposed-form-videogallery-management-page-2' || $form['#id'] == 'views-exposed-form-videogallery-management-page-5') {
+      $cn_type = 'videogallery';
     }
+    elseif ($form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-2' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-5') {
+      $cn_type = 'photogallery';
+    }
+    else {
+      $cn_type = 'story';
+    }
+    $option = array("" => '-Any-', $cn_type => $cn_type);
+    $query = db_select('field_data_field_story_source_type', 'st');
+    $query->leftJoin('node', 'n', 'n.nid=st.entity_id');
+    $query->condition('n.type', $cn_type)->distinct()
+        ->fields('st', array('field_story_source_type_value'));
+    $result = $query->execute()->fetchAll();
+    foreach ($result as $option_values) {
+      $option[$option_values->field_story_source_type_value] = $option_values->field_story_source_type_value;
+    }
+
+    $source_type = "<select class='form-item form-type-select' id='fake-soruce-type'>";
+    foreach ($option as $option_value => $option_element) {
+      if (!empty($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == $option_value) {
+        $select = "selected";
+      }
+      else {
+        $select = "";
+      }
+      $source_type .= "<option value=\"$option_value\" $select>$option_element</option>";
+    }
+    $source_type .= "</select>";
+    $form['field_story_source_type_value']['#suffix'] = $source_type;
+    drupal_add_css("input#edit-field-story-source-type-value {display:none}", "inline");
+  }
 }
 
 /**

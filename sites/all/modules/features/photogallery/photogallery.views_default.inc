@@ -875,6 +875,11 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm/d/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Field: Content: Source type */
+  $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'photogallery';
   /* Field: Workbench Moderation: State */
   $handler->display->display_options['fields']['state']['id'] = 'state';
   $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
@@ -1105,6 +1110,43 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '0';
   $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_story_source_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['operator_id'] = 'field_story_source_type_value_op';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['label'] = 'Source type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['operator'] = 'field_story_source_type_value_op';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['identifier'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
   /* Filter criterion: Workbench Moderation: From state */
   $handler->display->display_options['filters']['from_state']['id'] = 'from_state';
   $handler->display->display_options['filters']['from_state']['table'] = 'workbench_moderation_node_history';
@@ -1114,11 +1156,42 @@ function photogallery_views_default_views() {
   );
   $handler->display->display_options['filters']['from_state']['group'] = 2;
   /* Filter criterion: Content: Source type (field_story_source_type) */
-  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
-  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
-  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
-  $handler->display->display_options['filters']['field_story_source_type_value']['value'] = 'migrated';
-  $handler->display->display_options['filters']['field_story_source_type_value']['group'] = 2;
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['id'] = 'field_story_source_type_value_1';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['value'] = 'migrated';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['group'] = 2;
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['operator_id'] = 'field_story_source_type_value_1_op';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['label'] = 'Source type';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['operator'] = 'field_story_source_type_value_1_op';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['identifier'] = 'field_story_source_type_value_1';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
   $handler->display->display_options['path'] = 'unpublished-photogallery';
 
   /* Display: Published Photogallery */
@@ -1240,6 +1313,11 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['name']['alter']['replace_spaces'] = TRUE;
   $handler->display->display_options['fields']['name']['alter']['path_case'] = 'lower';
   $handler->display->display_options['fields']['name']['alter']['target'] = '_blank';
+  /* Field: Content: Source type */
+  $handler->display->display_options['fields']['field_story_source_type_1']['id'] = 'field_story_source_type_1';
+  $handler->display->display_options['fields']['field_story_source_type_1']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type_1']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type_1']['empty'] = 'photogallery';
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
@@ -1506,6 +1584,80 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_story_source_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['operator_id'] = 'field_story_source_type_value_op';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['label'] = 'Source type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['operator'] = 'field_story_source_type_value_op';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['identifier'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['id'] = 'field_story_source_type_value_1';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['value'] = 'migrated';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['group'] = 2;
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['operator_id'] = 'field_story_source_type_value_1_op';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['label'] = 'Source type';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['operator'] = 'field_story_source_type_value_1_op';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['identifier'] = 'field_story_source_type_value_1';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
   /* Filter criterion: Workbench Moderation: State */
   $handler->display->display_options['filters']['state']['id'] = 'state';
   $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
@@ -1514,12 +1666,6 @@ function photogallery_views_default_views() {
     'published' => 'published',
   );
   $handler->display->display_options['filters']['state']['group'] = 2;
-  /* Filter criterion: Content: Source type (field_story_source_type) */
-  $handler->display->display_options['filters']['field_story_source_type_value_1']['id'] = 'field_story_source_type_value_1';
-  $handler->display->display_options['filters']['field_story_source_type_value_1']['table'] = 'field_data_field_story_source_type';
-  $handler->display->display_options['filters']['field_story_source_type_value_1']['field'] = 'field_story_source_type_value';
-  $handler->display->display_options['filters']['field_story_source_type_value_1']['value'] = 'migrated';
-  $handler->display->display_options['filters']['field_story_source_type_value_1']['group'] = 2;
   $handler->display->display_options['path'] = 'published-photogallery';
 
   /* Display: My Un Published Photogallery */
@@ -1606,6 +1752,11 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Posted By';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
+  /* Field: Content: Source type */
+  $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'photogallery';
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
@@ -1816,6 +1967,49 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '0';
   $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_story_source_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['operator_id'] = 'field_story_source_type_value_op';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['label'] = 'Source type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['operator'] = 'field_story_source_type_value_op';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['identifier'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['id'] = 'field_story_source_type_value_1';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['value'] = 'migrated';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['group'] = 2;
   /* Filter criterion: Workbench Moderation: From state */
   $handler->display->display_options['filters']['from_state']['id'] = 'from_state';
   $handler->display->display_options['filters']['from_state']['table'] = 'workbench_moderation_node_history';
@@ -1824,12 +2018,6 @@ function photogallery_views_default_views() {
     'published' => 'published',
   );
   $handler->display->display_options['filters']['from_state']['group'] = 2;
-  /* Filter criterion: Content: Source type (field_story_source_type) */
-  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
-  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
-  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
-  $handler->display->display_options['filters']['field_story_source_type_value']['value'] = 'migrated';
-  $handler->display->display_options['filters']['field_story_source_type_value']['group'] = 2;
   $handler->display->display_options['path'] = 'my-unpublished-photogallery';
 
   /* Display: My Draft Of Photogallery */
@@ -2354,6 +2542,11 @@ function photogallery_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
+  /* Field: Content: Source type */
+  $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'photogallery';
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
@@ -2535,6 +2728,49 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_story_source_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['operator_id'] = 'field_story_source_type_value_op';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['label'] = 'Source type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['operator'] = 'field_story_source_type_value_op';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['identifier'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['id'] = 'field_story_source_type_value_1';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['value'] = 'migrated';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['group'] = 2;
   /* Filter criterion: Workbench Moderation: State */
   $handler->display->display_options['filters']['state']['id'] = 'state';
   $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
@@ -2543,12 +2779,6 @@ function photogallery_views_default_views() {
     'published' => 'published',
   );
   $handler->display->display_options['filters']['state']['group'] = 2;
-  /* Filter criterion: Content: Source type (field_story_source_type) */
-  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
-  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
-  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
-  $handler->display->display_options['filters']['field_story_source_type_value']['value'] = 'migrated';
-  $handler->display->display_options['filters']['field_story_source_type_value']['group'] = 2;
   $handler->display->display_options['path'] = 'my-published-photogallery';
 
   /* Display: My photogallery queue */
