@@ -249,12 +249,12 @@ function itg_story_form_custom_callback($form, &$form_state) {
     if (isset($_SESSION['messages']['status'])) {
         unset($_SESSION['messages']['status']);
     }
-
     $request_destination = $_REQUEST['destination'];
     $redirect_path = $_REQUEST['destination'];
 
     if ($request_destination == 'published-story') {
         $redirect_path .= "?field_story_syndication_value_op=all";
+        $_GET['destination'] = $redirect_path;
     }
     
     // redirection for clone story
@@ -271,7 +271,7 @@ function itg_story_form_custom_callback($form, &$form_state) {
       $_GET['destination'] = 'published-story?field_story_syndication_value_op=all';
     }
   }
-
+  
   if ($form_state['input']['op'] != 'Save as Draft') {        
       if (function_exists('itg_custom_message')) {
         itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path, $action);

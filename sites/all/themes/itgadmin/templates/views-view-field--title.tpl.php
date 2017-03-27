@@ -21,44 +21,44 @@
  * regardless of any changes in the aliasing that might happen if
  * the view is modified.
  */
-
 ?>
 
 <?php
+
 global $base_url;
 $arg = arg();
-if ($field->view->name == 'autocomplete_for_event' 
-        || $field->view->name == 'autocomplete_event_photo' 
-        || $field->view->name == 'podcast_for_event' 
-        || $field->view->name == 'manage_survey' 
-        || $field->view->name == 'manage_quiz') {
+if ( $field->view->name == 'autocomplete_for_event' || $field->view->name == 'autocomplete_event_photo' || $field->view->name == 'podcast_for_event' || $field->view->name == 'manage_survey' || $field->view->name == 'manage_quiz' ) {
   print $output;
-} else
-if ((isset($arg[0]) && $arg[0] == 'itg-custom-widget-content') || isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['nid']['entity']->type == 'event_backend' || $row->_field_data['nid']['entity']->type == 'itg_funalytics')) {
-  print $output;
-} else if (isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['nid']['entity']->type == 'blog' || 
-        $row->_field_data['nid']['entity']->type == 'photogallery' || 
-        $row->_field_data['nid']['entity']->type == 'videogallery' ||
-        $row->_field_data['nid']['entity']->type == 'mega_review_critic' ||
-        $row->_field_data['nid']['entity']->type == 'podcast' ||
-        $row->_field_data['nid']['entity']->type == 'story' ||
-        $row->_field_data['nid']['entity']->type == 'breaking_news')) {
-  
-    if (isset($row->_field_data['nid']['entity']->status) && $row->_field_data['nid']['entity']->status == 0) {
-      print l(strip_tags($output), 'node/'.$row->nid, array('attributes' => array('target' => '_blank')));
-    } else {
-        if (BACKEND_URL == $base_url) {
-            $node_url = FRONT_URL.'/node/'.$row->nid; 
-            print '<a href="'.$node_url.'" target="_blank">'.strip_tags($output).'</a>';
-        } else {
-            print l(strip_tags($output), 'node/'.$row->nid, array('attributes' => array('target' => '_blank')));
-        }
-    
-    } 
-  
-} else {   
-    print l(strip_tags($output), 'node/'.$row->nid);    
 }
-  
+elseif (
+    (isset($arg[0]) && $arg[0] == 'itg-custom-widget-content') || isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['nid']['entity']->type == 'event_backend' || $row->_field_data['nid']['entity']->type == 'itg_funalytics'
+    ) || $arg[0] == 'menu-manager'
+ ) {
+  print $output;
+}
+elseif ( isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['nid']['entity']->type == 'blog' ||
+    $row->_field_data['nid']['entity']->type == 'photogallery' ||
+    $row->_field_data['nid']['entity']->type == 'videogallery' ||
+    $row->_field_data['nid']['entity']->type == 'mega_review_critic' ||
+    $row->_field_data['nid']['entity']->type == 'podcast' ||
+    $row->_field_data['nid']['entity']->type == 'story' ||
+    $row->_field_data['nid']['entity']->type == 'breaking_news') ) {
+
+  if ( isset($row->_field_data['nid']['entity']->status) && $row->_field_data['nid']['entity']->status == 0 ) {
+    print l(strip_tags($output) , 'node/' . $row->nid , array('attributes' => array('target' => '_blank')));
+  }
+  else {
+    if ( BACKEND_URL == $base_url ) {
+      $node_url = FRONT_URL . '/node/' . $row->nid;
+      print '<a href="' . $node_url . '" target="_blank">' . strip_tags($output) . '</a>';
+    }
+    else {
+      print l(strip_tags($output) , 'node/' . $row->nid , array('attributes' => array('target' => '_blank')));
+    }
+  }
+}
+else {
+  print l(strip_tags($output) , 'node/' . $row->nid);
+}
 ?>
 
