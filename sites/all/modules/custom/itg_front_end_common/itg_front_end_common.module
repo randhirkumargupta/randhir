@@ -735,9 +735,7 @@ function itg_third_party_section_card_content($type, $limit) {
  * Helper funcion to check url exist or not
  */
 function url_exists($url) {
-    $hdrs = @get_headers($url);
-
-   // echo @$hdrs[1]."\n";
-
-    return is_array($hdrs) ? preg_match('/^HTTP\\/\\d+\\.\\d+\\s+2\\d\\d\\s+.*$/',$hdrs[0]) : false;
+  $hdrs = @get_headers($url);
+  // echo @$hdrs[1]."\n";
+  return is_array($hdrs) ? preg_match('/^HTTP\\/\\d+\\.\\d+\\s+2\\d\\d\\s+.*$/', $hdrs[0]) : false;
 }
