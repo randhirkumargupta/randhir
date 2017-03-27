@@ -34,4 +34,20 @@ jQuery(document).ready(function () {
         jQuery("#views-exposed-form-menu-manager-menu-manager-page").submit();
         jQuery("#widget-ajex-loader").show();
     });
+
+    jQuery("input[name=title]").on('keydown', function (event) {
+        var key_code = event.keyCode;
+        if (key_code == 8) {
+            jQuery(this).attr("value", "");
+        }
+    });
 });
+
+function isValidKey(e) {
+    var charCode = e.keyCode || e.which;
+    if (charCode == 8 || charCode == 46) {
+      jQuery("input[name=title]").attr("value", "");
+      jQuery("input[name=url]").attr("value", "");
+    }
+    return true;
+}
