@@ -561,14 +561,15 @@ function itg_msi_node_validate($node, $form, &$form_state) {
                     $node_supplement_name = $node->title;
                 }
                 elseif ($node->type == 'issue') {
+                    $node_supplement_name_for_issue = array();
                     $issue_date = $node->field_issue_title[LANGUAGE_NONE][0]['value'];
-                    $node_supplement_id = $node->field_issue_supplement[LANGUAGE_NONE][0]['target_id'];
-                    $node_supplement_name = '';
-                    if (!empty($node_supplement_id)) {
-                        $node_supplement_name = itg_msi_get_supplement_name($node_supplement_id);
+                    foreach($node->field_issue_supplement[LANGUAGE_NONE] as $key=> $supplement) {
+                      $node_supplement_id = $node->field_issue_supplement[LANGUAGE_NONE][$key]['target_id'];
+                      if (!empty($node_supplement_id)) {
+                          $node_supplement_name_for_issue[] = itg_msi_get_supplement_name($node_supplement_id);
+                      }
                     }
                 }
-
                 if (!empty($issue_date)) {
                     $node_issue_date = date('Y-m-d 00:00:00', strtotime($issue_date));
                 }
@@ -605,7 +606,7 @@ function itg_msi_node_validate($node, $form, &$form_state) {
                 elseif ((!empty($xml_supplement) && itg_msi_exist_supplement($xml_supplement) == 0) && ($node_supplement_name != $xml_supplement)) {
                     form_set_error($field . '10' . $result['fid'], t('Supplement in the file <strong>@xmlfilename</strong> is not exists in system. Please upload file with correct Supplement and try again.', array('@xmlfilename' => $xml_file->filename)));
                 }
-                elseif (!empty($xml_supplement) && $node_supplement_name != $xml_supplement) { //xml supplement is not equal to node supple
+                elseif (!empty($xml_supplement) && !in_array($xml_supplement , $node_supplement_name_for_issue)) { //xml supplement is not equal to node supple
                     form_set_error($field . '10' . $result['fid'], t('Node supplement and  <strong>@xmlfilename</strong> file supplement do not match. Please upload file with correct Supplement and try again.', array('@xmlfilename' => $xml_file->filename)));
                 }
 
