@@ -81,6 +81,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                             if (function_exists('get_video_in_fieldcollection_by_nid_mirtaed')) {
                                 $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
                             }
+                           
                             drupal_add_js('http://content.jwplatform.com/libraries/V30NJ3Gt.js', 'external');
                             $hide_player = "";
                             $description_slider = "";
