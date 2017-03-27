@@ -4973,6 +4973,10 @@ div.node{
       }
       .fa-times{cursor: pointer; color: red;}
     }
+    .ui-state-default{
+      span.item-value{cursor: default;}
+      a:hover{color: #0c8bb1;}
+    } 
   }
 }
 .view-manage-users{
@@ -9965,7 +9969,7 @@ div.node{
     padding-top: 10px;
   } 
 }
-#layout-html-submit, #layout-highlights-submit{
+#layout-html-submit, #layout-highlights-submit, #layout-content-submit{
   margin: 0 10px 10px;
   @extend .btn-submit;
   height: 28px;
