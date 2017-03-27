@@ -7,7 +7,7 @@
     attach: function() {
       $("#edit-metatags-und-advanced, #edit-metatags-en-advanced").hide();
       $(".form-item-metatags-und-abstract-value").hide();
-     // $("#edit-metatags-und-title-value").val("");
+      $("#edit-metatags-und-title-value").val("");
       $(".vertical-tabs-list").hide();
       $("#edit-metatags").show();//temp
       $("#edit-metatags a").hide();
