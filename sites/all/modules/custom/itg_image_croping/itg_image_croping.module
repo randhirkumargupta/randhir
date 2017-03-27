@@ -838,7 +838,7 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
         else if ($content_name == 'videogallery') {
             $extralargsize2 = '(' . $imgdim[$content_name]['field_story_player_image']['width'] . 'X' . $imgdim[$content_name]['field_story_player_image']['height'] . ')';
             $checkoption = array(
-                'field_story_player_image' => t("Extra large Image 2  $extralargsize2"),
+               // 'field_story_player_image' => t("Extra large Image 2  $extralargsize2"),
                 'field_story_large_image' => t("Large Image  $largsize"),
                 'field_story_medium_image' => t("Medium Image $mediumsize"),
                 'field_story_small_image' => t("Small Image  $smallsize"),
