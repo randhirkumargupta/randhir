@@ -8,19 +8,24 @@
  * Get itg layout list for admin
  * @return array $output
  */
+/*
+ * Inc file contains the common functions
+ */
+
 function itg_layout_list_delete() {
   // configure the table header columns
   $header = array(
-      array('data' => t('ID')),
-      array('data' => t('Section name')),
-      array('data' => t('Template name')),
-      array('data' => t('Delete')),
-      array('data' => t('Edit')),
+    array('data' => t('ID')),
+    array('data' => t('Section name')),
+    array('data' => t('Template name')),
+    array('data' => t('Delete')),
+    array('data' => t('Edit')),
   );
 
   if ($_GET['items_per_page']) {
     $items_per_page = $_GET['items_per_page'];
-  } else {
+  }
+  else {
     $items_per_page = 10;
   }
   if (arg(1) == 'home') {
@@ -30,7 +35,8 @@ function itg_layout_list_delete() {
     $itg_query->condition('layout_tpl.section_name', 'home_page', '=');
 
     $itg_query->extend('PagerDefault')->limit($items_per_page);
-  } else {
+  }
+  else {
     $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
     $itg_query->fields('layout_tpl', array('id', 'section_name', 'template_name', 'status', 'created_date'));
     $itg_query->join('taxonomy_term_data', 'ttd', 'ttd.tid = layout_tpl.section_name');
@@ -54,11 +60,11 @@ function itg_layout_list_delete() {
 
   foreach ($itg_result as $row) {
     $rows[] = array(
-        array('data' => $count + 1),
-        array('data' => $row->name),
-        array('data' => $row->template_name),
-        array('data' => l(t('delete'), 'itg-delete-layout/' . $row->id)),
-        array('data' => l(t('Edit'), 'itg-layout-manager/section', array('query' => array('section' => $row->section_name, 'template_name' => $row->template_name)))),
+      array('data' => $count + 1),
+      array('data' => $row->name),
+      array('data' => $row->template_name),
+      array('data' => l(t('delete'), 'itg-delete-layout/' . $row->id)),
+      array('data' => l(t('Edit'), 'itg-layout-manager/section', array('query' => array('section' => $row->section_name, 'template_name' => $row->template_name)))),
     );
     $count++;
   }
@@ -215,62 +221,139 @@ function create_poll_table() {
 }
 
 /**
- * Implements create_section_category_in_mongo()
+ * Map byline with DataBase.
+ *
+ * @param type $stories
  */
-// Code started for sending the section and it category data into mongo DB
-
-
-function create_section_category_in_mongo() {
-
-  $form['submit_button'] = array(
-      '#type' => 'submit',
-      '#value' => t('Please submit for bulk insert section and its category'),
-  );
-
-  return $form;
-}
-
-/**
- * Implements create_section_category_in_mongo_submit().
- */
-function create_section_category_in_mongo_submit($form, &$form_state) {
-
-  $query = db_select('taxonomy_term_data', 'td');
-  $query->leftJoin('taxonomy_term_hierarchy', 'th', 'th.tid = td.tid');
-  $query->leftJoin('itg_category_manager', 'icm', 'icm.tid = td.tid');
-  $query->leftJoin('taxonomy_vocabulary', 'tv', 'tv.vid=td.vid');
-  $result = $query
-          ->condition('td.vid', CATEGORY_MANAGMENT)
-          ->fields('td', array('tid', 'name', 'vid'))
-          ->fields('th', array('parent'))
-          ->fields('tv', array('machine_name'))
-          ->fields('icm', array('status'))
-          ->execute();
-
-
-  foreach ($result as $chunk_data) {
-    if (!empty($chunk_data) && isset($chunk_data)) {
-      $operations[] = array('create_section_cat_op', array($chunk_data));
+function _map_xml_byline(&$stories) {
+  if (isset($stories->bylines->byline) && !empty($stories->bylines->byline)) {
+    $i = 0;
+    foreach ($stories->bylines->byline as $final_byline) {
+      $source_bid = (string) $final_byline;
+      if (!empty($source_bid)) {
+        $orignal_byline = get_itg_destination_id('migrate_map_itgbyline', $source_bid);
+        $stories->bylines->byline[$i] = $orignal_byline;
+        ++$i;
+      }
     }
   }
-
-  $batch = array(
-      'title' => t('Migrating data finally....please wait....!'),
-      'operations' => $operations,
-      'finished' => 'create_section_cat_op_batch_finished',
-      'init_message' => t('Migration started...please wait....!'),
-      'progress_message' => t('Processed @current out of @total.'),
-      'error_message' => t('Migration checking process has encountered an error.'),
-      'file' => drupal_get_path('module', 'itg_miscellaneous') . '/includes/itg_miscellaneous.inc',
-  );
-
-  batch_set($batch);
-  batch_process('create-section-category-in-mongo');
 }
 
 /**
- * Implements create_section_cat_op().
+ * Map tag name.
+ *
+ * @param stdObject $stories
  */
+function _map_xml_tags(&$stories) {
+  if (isset($stories->tags->tag) && !empty($stories->tags->tag)) {
+    $i = 0;
+    foreach ($stories->tags->tag as $final_tags) {
+      $source_tags = (string) $final_tags;
+      try {
+        $orignal_tag = get_itg_destination_id('migrate_map_itgtags', $source_tags);
+      }
+      catch (Exception $ex) {
+        drupal_set_message($ex->getMessage(), 'error');
+      }
+      $stories->tags->tag[$i] = $orignal_tag;
+      ++$i;
+    }
+  }
+}
+
+/**
+ * Map primary category.
+ *
+ * @param stdObject $stories
+ */
+function _map_xml_primary_category(&$stories) {
+  if (isset($stories->primarycategory) && !empty($stories->primarycategory)) {
+    $source_cid = (string) $stories->primarycategory;
+    $pcategory_array = explode('#', $source_cid);
+    $parray_count = count($pcategory_array);
+    $table_name = itg_migrate_category_table($parray_count);
+    $last_value = end($pcategory_array);
+    $source_cid = (string) $last_value;
+    $orignal_pcategory = get_itg_destination_id($table_name, $source_cid);
+    $stories->primarycategory = $orignal_pcategory;
+  }
+}
+
+/**
+ * Map category to original category.
+ * 
+ * @param stdObject $stories
+ */
+function _map_xml_category(&$stories, $pti_section = NULL) {
+  $data_category = '';
+  if (isset($stories->categories->category) && !empty($stories->categories->category)) {
+    $i = 0;
+    foreach ($stories->categories->category as $final_category) {
+      $category_array = explode('#', $final_category);
+      $array_count = count($category_array);
+      $table_name = itg_migrate_category_table($array_count);
+      $last_value = end($category_array);
+      $source_cid = (string) $last_value;      
+      if ($pti_section != NULL) {
+        $table_name = 'migrate_map_itgsection';
+        $source_cid = $pti_section;
+        $orignal_category = get_itg_destination_id($table_name, $source_cid);
+      }
+      else {
+        $orignal_category = get_itg_destination_id($table_name, $source_cid);
+      }      
+      $stories->categories->category[$i] = $orignal_category;
+      ++$i;
+    }    
+  }
+}
+
+/**
+ * Map Author id to original DB id.
+ *
+ * @param stdObject $stories
+ */
+function _map_xml_user(&$stories, $op) {
+  // manage created user
+  if (isset($stories->{$op}) && !empty($stories->{$op})) {
+
+    $created_uid = (string) $stories->{$op};
+    try {
+      $orignal_crated_uid = get_itg_destination_id('migrate_map_itguser', $created_uid);
+    }
+    catch (Exception $ex) {
+      drupal_set_message($ex->getMessage(), 'error');
+    }
+    $stories->{$op} = $orignal_crated_uid;
+  }
+  else {
+    $stories->{$op} = 0;
+  }
+}
+
+/**
+ * Map city to original id.
+ *
+ * @param array $xml_city_id
+ * @param stdObject $stories
+ */
+function _map_xml_city($xml_city_id, &$stories) {
+  // Get city original id.
+  $errors = array_filter($xml_city_id);
+  if (!empty($errors)) {
+    foreach ($xml_city_id as $source_city) {
+      $original_id[] = get_itg_destination_id('migrate_map_itgcity', $source_city);
+    }
+
+    // Map xml city id from databaase city id.
+    $j = 0;
+    foreach ($stories->cities->city as $key => $new_city) {
+      $stories->cities->city[$j] = $original_id[$j];
+      ++$j;
+    }
+  }
+}
+  
 function create_section_cat_op($data, &$context) {
 // Mongo code will be here
   if (function_exists('mongodb')) {
@@ -286,7 +369,7 @@ function create_section_cat_op($data, &$context) {
           "vid" => (int) $data->vid,
           "machine_name" => $data->machine_name,
           "content_type" => get_content_type_list_for_this_term($data->tid),
-          "status" => (int)$data->status,
+          "status" => 1,
           'parent_data' => taxonomy_get_parents_all($data->tid),
       );
       $result = $people->insert($qry);
