@@ -22,8 +22,9 @@ function itg_ians_content() {
     $xml_file_path = $xm_file;
     $xml_filename = basename($xml_file_path);
     $ans_xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
-
-    if (!empty($ans_xml)) {
+    // check file entry in table
+    if(empty(itg_api_get_xml_info($xml_filename))) {
+     if (!empty($ans_xml)) {
       $ians = 0;
 
       foreach ($ans_xml as $ans_value) {
@@ -134,5 +135,6 @@ function itg_ians_content() {
         $ians++;
       }
     }
+  }
   }
 }

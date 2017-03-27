@@ -178,6 +178,16 @@ function itg_api_insert_xml_info($nid, $file, $type, $source) {
 }
 
 /**
+ * Implements function for check file info in table (itg_api_xml_info)
+  * @param string $filename
+ */
+function itg_api_get_xml_info($filename) {
+  $result = db_query("SELECT t.id FROM {itg_api_xml_info} t WHERE t.filename = :name", array(":name" => $filename));
+  $id = $result->fetchField();
+  return $id;
+}
+
+/**
  * Implements function for get all files from directory
  * @param string $dir
  * @param array $results
