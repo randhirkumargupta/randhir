@@ -211,8 +211,8 @@ function itg_fia_xml_node_feed($query) {
     }
     $node_body_content = implode(" ", $body_vals);
     $node->link = url("node/$node->nid", ['absolute' => TRUE]);
-    $subtitle = $node->field_story_short_headline[LANGUAGE_NONE][0]['value'];
-    $items .= itg_fia_xml_format_rss_item($target_nids, $img_path, $guid, $node_body_content, $node->title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
+    $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
+    $items .= itg_fia_xml_format_rss_item($kicker, $target_nids, $img_path, $guid, $node_body_content, $node->title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
   }
   
   global $base_url;
@@ -249,7 +249,7 @@ function itg_fia_xml_format_rss_channel($title, $link, $items) {
 /**
  * Creates the xml item.
  */
-function itg_fia_xml_format_rss_item($target_nids, $img_path, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
+function itg_fia_xml_format_rss_item($kicker, $target_nids, $img_path, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
   $output = "    <item>\n";
   
   $output .= '      <title>' . $title . "</title>\n";
@@ -278,9 +278,9 @@ function itg_fia_xml_format_rss_item($target_nids, $img_path, $guid, $node_body_
 //  $output .= "    </video>\n\n";
   $output .= "    </figure>\n\n";
   $output .= "      <h1>" . $title . "</h1>\n";
-  $output .= "      <h2>" . $subtitle . "</h2>\n";
+  $output .= "      <h2>" . $kicker . "</h2>\n";
   // <!-- A kicker for your article -->
-  $output .= "      <h3 class='op-kicker'>" . $subtitle . "</h3>\n";
+  $output .= "      <h3 class='op-kicker'>" . $kicker . "</h3>\n";
   // <!-- The author of your article -->
   $output .= "      <address>" . $name . "</address>\n";
   $output .= "      <time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>\n";

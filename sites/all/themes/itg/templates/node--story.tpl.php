@@ -615,33 +615,32 @@ if (!empty($content)):
                           }
 
                           if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
-                            $wrapper = entity_metadata_wrapper('node', $node);
-                            $num = 1;
-                            if (!empty($wrapper->field_story_listicle)) {
-                              foreach ($wrapper->field_story_listicle as $i):
-                                $listicletype = '';
-
-                                print '<div class="listicle-detail">';
-                                $type = $i->field_story_listicle_type->value();
-                                $description = $i->field_story_listicle_description->value();
-                                $color = $i->field_listicle_color->value();
-                                $li_type = $node->field_story_templates[LANGUAGE_NONE][0]['value'];
-                                $color = ($color) ? $color : '#000000';
-                                if ($li_type == 'bullet_points') {
-                                  print '<span class="bullet_points"></span>';
-                                }
-                                else {
-                                  print '<span>' . $num . '</span>';
-                                }
-
-                                if (isset($type)) {
-                                  $listicletype = '<span class="listicle-type" style="color: ' . $color . '">' . $type . ': </span>';
-                                }
-                                print '<div class="listicle-description">' . $listicletype . $description . '</div>';
-                                print '</div>';
-                                $num++;
-                              endforeach;
-                            }
+                          $buzz_output.= '';
+                          $num = 1;
+                          foreach ($node->field_story_listicle['und'] as $buzz_item) {
+                          $listicletype = '';
+                          $listicle_output.= '<div class="listicle-detail">';
+                              $field_collection_id = $buzz_item['value'];
+                              $entity = entity_load('field_collection_item', array($field_collection_id));
+                              $type = $entity[$field_collection_id]->field_story_listicle_type['und'][0]['value'];
+                              $description = $entity[$field_collection_id]->field_story_listicle_description['und'][0]['value'];
+                              $color = $entity[$field_collection_id]->field_listicle_color['und'][0]['value'];
+                              $li_type = $node->field_story_templates[LANGUAGE_NONE][0]['value'];
+                              $color = ($color) ? $color : '#000000';
+                              if ($li_type == 'bullet_points') {
+                              $listicle_output.= '<span class="bullet_points"></span>';
+                              }
+                              else {
+                              $listicle_output.= '<span>' . $num . '</span>';
+                              }
+                              if (isset($type)) {
+                              $listicletype = '<span class="listicle-type" style="color: ' . $color . '">' . $type . ': </span>';
+                              }
+                              $listicle_output.= '<div class="listicle-description">' . $listicletype . $description . '</div>';
+                              $listicle_output.= '</div>';
+                          $num++;
+                          }
+                          print $listicle_output;
                           }
                           else {
                             // Print story body
