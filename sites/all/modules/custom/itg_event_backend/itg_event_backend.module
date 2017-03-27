@@ -994,12 +994,12 @@ function itg_event_backend_node_insert($node) {
 function itg_event_backend_node_update($node) {
   if ($node->type == 'event_backend') {
     
-    $event_title = str_replace(' ', '-', $node->title);
+    /*$event_title = str_replace(' ', '-', $node->title);
     //$source = drupal_get_path_alias('node/' . $node->nid);
     $source = '';
     $redirect = $event_title.'/'.date('Y');
     
-    itg_save_redirect($source, $redirect);
+    itg_save_redirect($source, $redirect);*/
     
     if ($node->domains != '1' && $_GET['step'] == 'step_configuration') {
       //itg_event_backend_insert_into_redirect($node); me
