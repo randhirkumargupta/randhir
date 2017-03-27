@@ -374,7 +374,7 @@ function create_section_cat_op($data, &$context) {
       );
       $result = $people->insert($qry);
     }
-    drupal_set_message('data inserted successfully for ' . json_encode($result));
+    //drupal_set_message('data inserted successfully for ' . json_encode($result));
   }
 }
 
