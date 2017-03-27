@@ -56,7 +56,8 @@
         <!--          <div class="ftp_browse_field"><label for="edit-field-upload-video-und-0-upload">Video <span title="This field is required." class="form-required">*</span></label><span class="browse-ftp-click">Browse Video</span></div>-->
                     <span class="error vid-error"></span>
                 </div>
-                <?php print drupal_render($form['field_story_expert_name']); ?>
+                <?php //print drupal_render($form['field_story_expert_name']); ?>
+                <?php print drupal_render($form['field_video_kicker']); ?>
                 <?php print drupal_render($form['field_story_expert_description']); ?>
             </div>
         </div>

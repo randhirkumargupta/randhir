@@ -107,10 +107,12 @@ define('POLITICIAN_TID', variable_get('tid_politician'));
 define('ANCHOR_TID', variable_get('anchor_tid'));
 define('REPORTER_TID', variable_get('reporter_tid'));
 define('TAG_ID', 1);
+define('VIDEO_MAIN_URL', 'http://medias3d.intoday.in');
+define('VIDEO_BITRATE_URL', 'http://indiatoday-vh.akamaihd.net/i');
 
 define('NEWSLETTER_EDUCATION_TID', variable_get('newsletter_education_tid'));
 
-define('PARENT_SSO', 'uat-sso.indiatodayonline.in');
+define('PARENT_SSO', 'itgcms.drupallocal.dev');
 
 define('FRONT_URL', 'http://uat-it.indiatodayonline.in');
 define('BACKEND_URL', 'http://uat-it-backend.indiatodayonline.in');

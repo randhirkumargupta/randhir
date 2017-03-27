@@ -108,7 +108,7 @@ function itg_flag_details() {
       }
     }
     else {
-      $response = array('type' => $typ, 'count' => $pre_count, 'nd_id' => $nd_id);
+      $response = array('type' => $typ, 'count' => $mig_count, 'nd_id' => $nd_id);
     }
     print json_encode($response);
   }

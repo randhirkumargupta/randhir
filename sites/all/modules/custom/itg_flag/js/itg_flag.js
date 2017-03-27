@@ -106,6 +106,7 @@ jQuery(document).ready(function () {
                 jQuery('#widget-ajex-loader').hide();
                 if (obj.type == 'like_count') {
                     jQuery("#no-of-likes_" + obj.nd_id).html("(" + obj.count + ")");
+                    jQuery("#vno-of-likes_" + obj.nd_id).html(obj.count);
                 }
                 if (obj.chk == 'sty') {
                     jQuery("#sty-dv").show(0);

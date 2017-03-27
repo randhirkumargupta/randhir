@@ -269,7 +269,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     $form['term_state']['#access'] = false;
     drupal_add_js('jQuery(document).ready(function() {
              //code to check unchek checkbox when all search engine checkbox is checked
-             jQuery(".form-item-term-state").hide();
+            // jQuery(".form-item-term-state").hide();
            
               
            });', array('type' => 'inline', 'scope' => 'footer'));

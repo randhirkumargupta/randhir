@@ -64,10 +64,11 @@
               ?>
               <div class="uploaded-video-list flexslider"><ul class="slides"><?php print $output; ?></ul></div>
               <?php
-              $short_des = render($content['field_story_expert_name']);
+              $short_des = render($content['field_video_kicker']);
               if (!empty($short_des)):
                 ?>
-                <?php print render($content['field_story_expert_name']); ?>
+                <?php //print render($content['field_story_expert_name']); ?>
+                <?php print render($content['field_video_kicker']); ?>
                 <?php
               endif;
               $short_des = render($content['field_story_expert_description']);

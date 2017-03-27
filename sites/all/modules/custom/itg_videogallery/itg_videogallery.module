@@ -197,6 +197,12 @@ function itg_videogallery_custom_submit($form, &$form_state) {
   foreach ($form_state['values']['field_story_itg_tags'][LANGUAGE_NONE] as $tags) {
     $tag[] = $tags['name'];
   }
+  $request_destination = $_REQUEST['destination'];
+
+  if ($request_destination == 'published-video') {
+    $redirect_path .= "?field_story_syndication_value_op=all";
+    $form_state['redirect'] = $redirect_path;
+  }
   // code insert image in custom table
   $node_id = $form_state['node']->nid;
   if ($form_state['input']['original_image_fids'] != "") {
@@ -386,6 +392,11 @@ function itg_videogallery_custom_submit($form, &$form_state) {
       }
     }
   }
+  if ($_GET['destination'] == 'published-video') {
+    unset($_GET['destination']);
+    $redirect_path = 'published-video?field_story_syndication_value_op=all';
+    $_GET['destination'] = $redirect_path;
+  }
   // here first video duration assign
   if (empty($form_state['values']['field_video_duration'][LANGUAGE_NONE][0]['value'])) {
 
@@ -480,68 +491,69 @@ function itg_videogallery_node_publish_video_to_unpublish($nid, $main_fids) {
  * impliment hook node insert
  */
 function itg_videogallery_node_insert($node) {
-
-  switch ($node->type) {
-    case 'videogallery':
-      $node_id = $node->nid;
-      foreach ($node->field_story_itg_tags[LANGUAGE_NONE] as $tags) {
-        $tag[] = $tags['name'];
-      }
-      $tag_value = implode(', ', $tag);
-      $tags_value = trim($tag_value, ",");
-
-      foreach ($node->field_video_upload['und'] as $keys => $videofields) {
-        $video_details = entity_load('field_collection_item', array($videofields['value']));
-
-        $priv_status = $video_details[$videofields['value']]->field_video_private[LANGUAGE_NONE][0]['value'];
-        foreach ($video_details[$videofields['value']]->field_videogallery_video_upload as $filed_val) {
-
-          $fids = $filed_val[0]['fid'];
+  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+    switch ($node->type) {
+      case 'videogallery':
+        $node_id = $node->nid;
+        foreach ($node->field_story_itg_tags[LANGUAGE_NONE] as $tags) {
+          $tag[] = $tags['name'];
         }
-        if ((int) $fids != 0) {
+        $tag_value = implode(', ', $tag);
+        $tags_value = trim($tag_value, ",");
 
-          $video_image = itg_videogallery_get_video_info_by_fid($fids);
+        foreach ($node->field_video_upload['und'] as $keys => $videofields) {
+          $video_details = entity_load('field_collection_item', array($videofields['value']));
 
-          if (empty($video_image)) {
-            $video_fid = $fids;
-            $file_details = file_load($fids);
+          $priv_status = $video_details[$videofields['value']]->field_video_private[LANGUAGE_NONE][0]['value'];
+          foreach ($video_details[$videofields['value']]->field_videogallery_video_upload as $filed_val) {
 
-            $real_path = drupal_realpath($file_details->uri);
-            if (file_exists($file_details->uri)) {
-              if ($real_path == "") {
-                $real_path = file_create_url($file_details->uri);
+            $fids = $filed_val[0]['fid'];
+          }
+          if ((int) $fids != 0) {
+
+            $video_image = itg_videogallery_get_video_info_by_fid($fids);
+
+            if (empty($video_image)) {
+              $video_fid = $fids;
+              $file_details = file_load($fids);
+
+              $real_path = drupal_realpath($file_details->uri);
+              if (file_exists($file_details->uri)) {
+                if ($real_path == "") {
+                  $real_path = file_create_url($file_details->uri);
+                }
+
+                // use for upload local video to DM
+                itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details, $video_fid, $tags_value, $node_id, 'is_draft', $priv_status);
               }
-
-              // use for upload local video to DM
-              itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details, $video_fid, $tags_value, $node_id, 'is_draft', $priv_status);
+            }
+            else {
+              $file_video = itg_videogallery_get_video_info_by_fid($fids);
+              itg_videogallery_update_tags_video_private($tag_value, $file_video[0]->solr_video_id, $priv_status);
+              $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
+                      ->fields(array(
+                          'dailymotion_published' => 1,
+                      ))
+                      ->condition('video_id', $file_video[0]->solr_video_id, '=')
+                      ->execute();
+              // update nid in video
+              $num_updated = db_update('itg_solr_video_info') // Table name no longer needs {}
+                      ->fields(array(
+                          'nid' => $node_id,
+                      ))
+                      ->condition('fid', $fids, '=')
+                      ->execute();
             }
           }
-          else {
-            $file_video = itg_videogallery_get_video_info_by_fid($fids);
-            itg_videogallery_update_tags_video_private($tag_value, $file_video[0]->solr_video_id, $priv_status);
-            $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
-                    ->fields(array(
-                        'dailymotion_published' => 1,
-                    ))
-                    ->condition('video_id', $file_video[0]->solr_video_id, '=')
-                    ->execute();
-            // update nid in video
-            $num_updated = db_update('itg_solr_video_info') // Table name no longer needs {}
-                    ->fields(array(
-                        'nid' => $node_id,
-                    ))
-                    ->condition('fid', $fids, '=')
-                    ->execute();
-          }
         }
-      }
-      if ($node->field_story_facebook_video[LANGUAGE_NONE][0]['fid'] != 0) {
-        itg_videogallery_update_node_id_for_video_fid($node_id, $node->field_story_facebook_video[LANGUAGE_NONE][0]['fid']);
-      }
-      if ($node->field_story_twitter_video[LANGUAGE_NONE][0]['fid'] != 0) {
-        itg_videogallery_update_node_id_for_video_fid($node_id, $node->field_story_twitter_video[LANGUAGE_NONE][0]['fid']);
-      }
-      break;
+        if ($node->field_story_facebook_video[LANGUAGE_NONE][0]['fid'] != 0) {
+          itg_videogallery_update_node_id_for_video_fid($node_id, $node->field_story_facebook_video[LANGUAGE_NONE][0]['fid']);
+        }
+        if ($node->field_story_twitter_video[LANGUAGE_NONE][0]['fid'] != 0) {
+          itg_videogallery_update_node_id_for_video_fid($node_id, $node->field_story_twitter_video[LANGUAGE_NONE][0]['fid']);
+        }
+        break;
+    }
   }
 }
 
@@ -760,7 +772,7 @@ function itg_videogallery_dailymotion($real_path, $uri, $fid, $tags_value, $node
     $result = $api->post(
             '/me/videos', array(
         'url' => $url,
-        'title' => $uri,
+        'title' => $ftp_file[1],
         'tags' => $tags_value,
         'channel' => 'tv',
         'private' => $is_private,
@@ -1163,7 +1175,7 @@ function itg_videogallery_remove_video_with_child() {
  */
 function itg_videogallery_make_bitrate_url($video_url, $bitrates) {
 
-  $firestparet_replace = str_replace('http://medias3d.intoday.in', 'http://indiatoday-vh.akamaihd.net/i', $video_url);
+  $firestparet_replace = str_replace(VIDEO_MAIN_URL, VIDEO_BITRATE_URL, $video_url);
   $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $firestparet_replace);
   $returnstring = substr($withoutExt, 0, strpos($withoutExt, '1024_512'));
   $returnstring = $returnstring . '1024_,' . $bitrates . ',.mp4.csmil/master.m3u8';
@@ -1320,6 +1332,14 @@ function daily_motion_video_dashboard_submit($form, &$form_state) {
  */
 function daily_motion_video_dashboard_rows() {
   global $base_url;
+  drupal_add_js('jQuery(document).ready(function() {                  
+            
+              jQuery(".dalymotion-video-delete").on("click",function(e) {
+    if (!confirm("Are you sure you want to delete this video ?")) {
+        e.preventDefault();
+    }
+    });
+          });', array('type' => 'inline', 'scope' => 'footer'));
   $filtertype = isset($_GET['filtertype']) ? $_GET['filtertype'] : '';
   $video_id = isset($_GET['video_id']) ? $_GET['video_id'] : '';
 
@@ -1363,14 +1383,14 @@ function daily_motion_video_dashboard_rows() {
       if ($record->encoding_progress == '100') {
         $status_flag = '<span class="ready-to-use-video">Ready To Use</span>';
         if (strtoupper($record->type) != 'LOCAL') {
-          $delete_link = "<a  href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' onClick=return confirm(Do you really want to delete this);> Delete </a>";
+          $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' > Delete </a>";
         }
       }
       if ($record->encoding_progress != '100' && $record->publishing_progress != '100') {
 
         $status_flag = '<span class="under-precess">Publishing Processing (' . $record->publishing_progress . ')%</span>';
         if (strtoupper($record->type) != 'LOCAL') {
-          $delete_link = "<a  href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' onClick='return confirm(Do you really want to delete this);'> Delete </a>";
+          $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' > Delete </a>";
         }
       }
       if ($record->encoding_progress != '100' && $record->publishing_progress == '100') {
@@ -1378,7 +1398,7 @@ function daily_motion_video_dashboard_rows() {
         $status_flag = '<span class="under-precess">Ready to Use</span>';
 
         if (strtoupper($record->type) != 'LOCAL') {
-          $delete_link = "<a  href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' onClick='return confirm(Do you really want to delete this);'> Delete </a>";
+          $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' > Delete </a>";
         }
       }
       if ($record->encoding_progress == '100' && $record->publishing_progress == '100') {
@@ -1386,7 +1406,7 @@ function daily_motion_video_dashboard_rows() {
         $status_flag = '<span class="under-precess">Completed</span>';
 
         if (strtoupper($record->type) != 'LOCAL') {
-          $delete_link = "<a  href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' onClick='return confirm(Do you really want to delete this);'> Delete </a>";
+          $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' > Delete </a>";
         }
       }
     }
@@ -2031,10 +2051,8 @@ function get_video_in_fieldcollection_by_nid($nid) {
 function get_video_in_fieldcollection_by_nid_mirtaed($nid) {
   $query = db_select('field_data_field_video_upload', 'up_video');
   $query->join('field_data_field_migrated_video_url', 'fvu', 'up_video.field_video_upload_value = fvu.entity_id');
-
   $query->leftJoin('field_data_field_include_ads', 'ads_inc', 'ads_inc.entity_id = fvu.entity_id');
   $query->leftJoin('field_data_field_videogallery_description', 'desc_inc', 'desc_inc.entity_id = fvu.entity_id');
-
   $query->fields('up_video', array('entity_id'));
   $query->fields('fvu', array('field_migrated_video_url_value'));
   $query->fields('ads_inc', array('field_include_ads_value'));
@@ -2887,7 +2905,7 @@ function itg_videogallery_dailymotion_add_video($real_path, $name, $realfilename
     $result = $api->post(
             '/me/videos', array(
         'url' => $url,
-        'title' => $uri,
+        'title' => $realfilename,
         'channel' => 'tv',
         'published' => TRUE,
             )
