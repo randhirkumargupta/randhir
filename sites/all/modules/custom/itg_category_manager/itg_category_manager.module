@@ -187,17 +187,17 @@ function itg_category_manager_form($form, &$form_state) {
  */
 
 function itg_category_manager_term_state($tid, $vid = CATEGORY_MANAGMENT) {
-//  $itg_query = db_select('itg_category_manager', 'itg')
-//      ->fields('itg', array('status'))
-//      ->condition('tid', $tid, '=')
-//      ->condition('vid', $vid, '=');
-//  $itg_result = $itg_query->execute()->fetchField();
-//
-//  $flag = FALSE;
-//  if (isset($itg_result) && $itg_result == 1) {
-//    $flag = TRUE;
-//  }
-  $flag = TRUE;
+  $itg_query = db_select('itg_category_manager', 'itg')
+      ->fields('itg', array('status'))
+      ->condition('tid', $tid, '=')
+      ->condition('vid', $vid, '=');
+  $itg_result = $itg_query->execute()->fetchField();
+
+  $flag = FALSE;
+  if (isset($itg_result) && $itg_result == 1) {
+    $flag = TRUE;
+  }
+  //$flag = TRUE;
 
   return $flag;
 }
