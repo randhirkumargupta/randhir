@@ -46,34 +46,30 @@ function itg_fia_xml_node_feed($query) {
     $img_path = file_create_url($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri']);
     $map_pos = $node->field_facebook_map_position[LANGUAGE_NONE][0]['value'];
     if (isset($node->field_map_embed_code[LANGUAGE_NONE][0]['value']) && !empty($node->field_map_embed_code[LANGUAGE_NONE][0]['value'])) {
-      $map_data_url = $node->field_map_embed_code[LANGUAGE_NONE][0]['value'];
-    }
-    if (isset($node->field_map_embed_code[LANGUAGE_NONE][0]['safe_value']) && !empty($node->field_map_embed_code[LANGUAGE_NONE][0]['safe_value'])) {
-      $map_data_iframe = $node->field_map_embed_code[LANGUAGE_NONE][0]['safe_value'];
-    }
-    
-    // getting map data from map <iframe>
-    if (!empty($map_data_iframe)) {
-      unset($map_data_url);
-      $get_map_iframe = explode(" ", $map_data_iframe);
-      $get_map_data = explode("!", $get_map_iframe[1]);
-      $get_map_lat = explode("2d", $get_map_data[5]);
-      $get_map_lng = explode("3d", $get_map_data[6]);
-      $lat = number_format($get_map_lat[1], 6);
-      $lng = number_format($get_map_lng[1], 6);
-      $get_iframe_place = $get_map_data[18];
-      $get_iframe_places = explode('2s', $get_map_data[18]);
-      $get_place_name = str_replace("+", " ", $get_iframe_places[1]);
-    }
-    // getting map data from map url
-    if (!empty($map_data_url)) {
-      $get_map = explode("place", $map_data_url);
-      $get_map_coordinate = explode("@", $get_map[1]);
-      $get_place = str_replace("/", "", $get_map_coordinate[0]);
-      $get_place_name = str_replace("+", " ", $get_place);
-      $coordinate_map = explode(",", $get_map_coordinate[1]);
-      $lat = $coordinate_map[0];
-      $lng = $coordinate_map[1];
+      $map_data = $node->field_map_embed_code[LANGUAGE_NONE][0]['value'];
+      // getting map data from map <iframe>
+      if (strpos($map_data, '<iframe') !== false) {
+        $map_data_iframe = $map_data;
+        $get_map_iframe = explode(" ", $map_data_iframe);
+        $get_map_data = explode("!", $get_map_iframe[1]);
+        $get_map_lat = explode("2d", $get_map_data[5]);
+        $get_map_lng = explode("3d", $get_map_data[6]);
+        $lat = number_format($get_map_lat[1], 6);
+        $lng = number_format($get_map_lng[1], 6);
+        $get_iframe_place = $get_map_data[18];
+        $get_iframe_places = explode('2s', $get_map_data[18]);
+        $get_place_name = str_replace("+", " ", $get_iframe_places[1]).'<iframe>';
+      } 
+      else {
+        // getting map data from map url
+        $get_map = explode("place", $map_data);
+        $get_map_coordinate = explode("@", $get_map[1]);
+        $get_place = str_replace("/", "", $get_map_coordinate[0]);
+        $get_place_name = str_replace("+", " ", $get_place).'url';
+        $coordinate_map = explode(",", $get_map_coordinate[1]);
+        $lat = $coordinate_map[0];
+        $lng = $coordinate_map[1];
+      }
     }
     
     // getting gallery data
@@ -102,82 +98,88 @@ function itg_fia_xml_node_feed($query) {
     }
     
     // facebook instant article audio placement
-    if (in_array($audio_pos, $bk)) {
-      $body_vals[$audio_pos] = $body_vals[$audio_pos] . 
-              '<figure>
-                 <audio muted title="audio title">
-                   <source src="' . $audio_url . '">
-                </audio>
-               </figure>';
-    } else {
-      $last_postion = end($bk);
-      $body_vals[$last_postion] = $body_vals[$last_postion] . 
-             '<figure>
-                <audio muted title="audio title">
-                  <source src="' . $audio_url . '">
-                </audio>
-              </figure>';
+    if (!empty($audio_url)) {
+      if (in_array($audio_pos, $bk)) {
+        $body_vals[$audio_pos] = $body_vals[$audio_pos] . 
+                '<figure>
+                   <audio muted title="audio title">
+                     <source src="' . $audio_url . '">
+                  </audio>
+                 </figure>';
+      } else {
+        $last_postion = end($bk);
+        $body_vals[$last_postion] = $body_vals[$last_postion] . 
+               '<figure>
+                  <audio muted title="audio title">
+                    <source src="' . $audio_url . '">
+                  </audio>
+                </figure>';
+      }
     }
     
     // facebook instant article animated image placement
-    if (in_array($img_position, $bk)) {
-      $body_vals[$img_position] = $body_vals[$img_position] . 
-             '<figure>
-                <img src="'.$img_path.'" />
-              </figure>';
-    } else {
-      $last_postion = end($bk);
-      $body_vals[$last_postion] = $body_vals[$last_postion] . 
-             '<figure>
-                <img src="'.$img_path.'" />
-              </figure>';
+    if (!empty($img_path)) {
+      if (in_array($img_position, $bk)) {
+        $body_vals[$img_position] = $body_vals[$img_position] . 
+               '<figure>
+                  <img src="'.$img_path.'" />
+                </figure>';
+      } else {
+        $last_postion = end($bk);
+        $body_vals[$last_postion] = $body_vals[$last_postion] . 
+               '<figure>
+                  <img src="'.$img_path.'" />
+                </figure>';
+      }
     }
     
     // facebook instant article map placement
-    if (in_array($map_pos, $bk)) {
-      $body_vals[$map_pos] = $body_vals[$map_pos] . 
-              '<figure class="op-map">
-                <script type="application/json" class="op-geotag">
-                  {
-                    "type": "Feature",
-                    "geometry":
-                      {
-                        "type": "Point",
-                        "coordinates": ['.$lat.', '.$lng.']
-                      },
-                    "properties":
-                      {
-                        "title": "'.$get_place_name.'",
-                        "radius": 10000,
-                        "pivot": true,   
-                        "style": "satellite",
-                      }
-                   }
-                </script>
-              </figure>';
-    } else {
-      $last_postion = end($bk);
-      $body_vals[$last_postion] = $body_vals[$last_postion] . 
-              '<figure class="op-map">
-                <script type="application/json" class="op-geotag">
-                  {
-                    "type": "Feature",
-                    "geometry":
-                      {
-                        "type": "Point",
-                        "coordinates": ['.$lat.', '.$lng.']
-                      },
-                    "properties":
-                      {
-                        "title": "'.$get_place_name.'",
-                        "radius": 10000,
-                        "pivot": true,   
-                        "style": "satellite",
-                      }
-                   }
-                </script>
-              </figure>';
+    if (!empty($get_place_name)) {
+      if (in_array($map_pos, $bk)) {
+        $body_vals[$map_pos] = $body_vals[$map_pos] . 
+                '<figure class="op-map">
+                  <script type="application/json" class="op-geotag">
+                    {
+                      "type": "Feature",
+                      "geometry":
+                        {
+                          "type": "Point",
+                          "coordinates": ['.$lat.', '.$lng.']
+                        },
+                      "properties":
+                        {
+                          "title": "'.$get_place_name.'",
+                          "radius": 10000,
+                          "pivot": true,   
+                          "style": "satellite",
+                        }
+                     }
+                  </script>
+                </figure>';
+      } else {
+        $last_postion = end($bk);
+        $body_vals[$last_postion] = $body_vals[$last_postion] . 
+                '<figure class="op-map">
+                  <script type="application/json" class="op-geotag">
+                    {
+                      "type": "Feature",
+                      "geometry":
+                        {
+                          "type": "Point",
+                          "coordinates": ['.$lat.', '.$lng.']
+                        },
+                      "properties":
+                        {
+                          "title": "'.$get_place_name.'",
+                          "radius": 10000,
+                          "pivot": true,   
+                          "style": "satellite",
+                        }
+                     }
+                  </script>
+                </figure>';
 
+      }
     }
 
     // Creating Slideshow for facebook instant article data
@@ -271,9 +273,9 @@ function itg_fia_xml_format_rss_item($target_nids, $img_path, $guid, $node_body_
   
   // <!-- The header image shown inside your article --> 
   $output .= "    <figure data-mode=aspect-fit>\n";
-  $output .= "    <video loop>\n";
-  $output .= "    <source src='" . $img_path . "' type='video/mov' />\n";
-  $output .= "    </video>\n\n";
+//  $output .= "    <video loop>\n";
+//  $output .= "    <source src='" . $img_path . "' type='video/mov' />\n";
+//  $output .= "    </video>\n\n";
   $output .= "    </figure>\n\n";
   $output .= "      <h1>" . $title . "</h1>\n";
   $output .= "      <h2>" . $subtitle . "</h2>\n";
