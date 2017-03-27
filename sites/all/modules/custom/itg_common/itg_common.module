@@ -467,11 +467,25 @@ function itg_common_node_insert($node) {
   // custom alias cnditions
   if (in_array($node->type, $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
      itg_common_custompath_insert_load($node);
-  }elseif ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
+  } elseif ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
 //    p($node);
     itg_common_custompath_migrated_load($node);
   }
 }
+
+/**
+ * Implementation of hook_node_insert().
+ * @param object $node
+ */
+function itg_common_node_update($node) {
+    
+  $ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
+  // custom alias cnditions
+  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
+    itg_common_custompath_migrated_load($node);
+  }
+}
+
 
 /**
  * Implements hook_form_FORMID_alter().
