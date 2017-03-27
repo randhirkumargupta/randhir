@@ -167,11 +167,15 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
 
                     <div class="social-likes mhide">
                         <ul>
-                            <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span><?php
-                                        if (function_exists(itg_flag_get_count)) {
-                                            $like_count = itg_flag_get_count(arg(1), 'like_count');
-                                            print $like_count['like_count'];
-                                        }
+                            <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span id="vno-of-likes_<?php print arg(1);?>"><?php
+                                            if (function_exists(itg_flag_get_count)) {
+                                                $like_count = itg_flag_get_count(arg(1), 'like_count');
+                                            }
+                                            // get migrated count 
+                                            if(function_exists('itg_get_migrated_like_count')) {
+                                                $migrated_count = itg_get_migrated_like_count(arg(1));
+                                            }
+                                            print $like_count['like_count'] + $migrated_count[0]['like_count'];
                                         ?></span></a></li>
                             <?php
                             if ($user->uid > 0) {
@@ -246,11 +250,16 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                     <div class="top-section">
                         <div class="social-likes desktop-hide">
                             <ul>
-                                <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span><?php
+                                <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span id="vno-of-likes_<?php print arg(1);?>"><?php
                                             if (function_exists(itg_flag_get_count)) {
                                                 $like_count = itg_flag_get_count(arg(1), 'like_count');
-                                                print $like_count['like_count'];
                                             }
+                                            // get migrated count 
+                                            if(function_exists('itg_get_migrated_like_count')) {
+                                                $migrated_count = itg_get_migrated_like_count(arg(1));
+                                            }
+                                                print $like_count['like_count'] + $migrated_count[0]['like_count'];
+                                            
                                             ?></span></a></li>
                                 <li><?php print $row['ops']; ?></li>
                                 <li><a class="def-cur-pointer" title ="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i> <span>Share</span></a></li>
