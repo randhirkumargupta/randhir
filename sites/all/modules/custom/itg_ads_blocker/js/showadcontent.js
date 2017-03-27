@@ -60,8 +60,7 @@ function openPopup() {
 
 }
 
-function gup(name)
-{
+function gup(name) {
     //console.log('called');
     var str = window.location.href;
     var story = str.includes("/story/");
