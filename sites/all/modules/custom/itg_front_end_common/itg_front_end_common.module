@@ -659,7 +659,11 @@ function _latest_from_aajtak() {
       if (!empty($value->title)) {
         $related_title = mb_strimwidth($value->title, 0, 200, "..");
         $path = $value->story_url;
-        $img_url = $value->thumb_image;
+        if(url_exists($value->thumb_image)) {
+          $img_url = $value->thumb_image;
+        } else {
+        $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg'; 
+        }
         $related_dt.= "<li class='third-party-list'><a class='pic' href='$path' target='_blank' title='$related_title'><img src='$img_url' alt='$related_title' /></a>";
         $related_dt.= "<div class='title'>" . l($related_title, $path, array("attributes" => array("target" => "_blank"))) . "</div></li>";
       }
@@ -692,7 +696,11 @@ function _latest_from_businesstoday() {
       if (!empty($value->title)) {
         $related_title = mb_strimwidth($value->title, 0, 200, "..");
         $path = $value->story_url;
-        $img_url = $value->thumb_image;
+        if(url_exists($value->thumb_image)) {
+          $img_url = $value->thumb_image;
+        } else {
+        $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg'; 
+        }
         $related_dt.= "<li class='third-party-list'><a class='pic' href='$path' target='_blank' title='$related_title'><img src='$img_url' alt='$related_title' /></a>";
         $related_dt.= "<div class='tile'>" . l($related_title, $path, array("attributes" => array("target" => "_blank"))) . "</div></li>";
       }
@@ -721,4 +729,15 @@ function itg_third_party_section_card_content($type, $limit) {
   $query->orderBy('n.created', 'DESC'); //ORDER BY created
   $result = $query->execute();
   return $record = $result->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Helper funcion to check url exist or not
+ */
+function url_exists($url) {
+    $hdrs = @get_headers($url);
+
+   // echo @$hdrs[1]."\n";
+
+    return is_array($hdrs) ? preg_match('/^HTTP\\/\\d+\\.\\d+\\s+2\\d\\d\\s+.*$/',$hdrs[0]) : false;
 }
