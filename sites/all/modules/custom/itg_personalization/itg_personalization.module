@@ -554,11 +554,11 @@ function _personalization_show_content() {
       {
         $ntype = 'photogallery';
       }
-      $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'ntype' => $ntype, 'activity' => 'read_later'));
+      $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'ntype' => $ntype, 'activity' => 'read_later'))->sort(array('timestamp' => -1));
     }
     else
     {
-      $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'activity' => 'read_later'));
+      $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'activity' => 'read_later'))->sort(array('timestamp' => -1));
     }
 
     $output = '';
