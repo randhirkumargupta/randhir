@@ -292,12 +292,9 @@ function features_for_event_registration_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'online_payment' => 'Online Payment',
         'icici' => ' ICICI',
-        'amex' => ' Amex',
         'paytm' => ' Paytm',
         'billdesk' => 'Billdesk',
-        'other_banks' => ' Other Banks',
       ),
       'allowed_values_function' => '',
     ),
