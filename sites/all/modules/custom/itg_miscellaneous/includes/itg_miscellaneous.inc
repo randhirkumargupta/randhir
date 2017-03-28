@@ -368,6 +368,12 @@ function itg_get_mongo_detail() {
       $cursor = $people->count($cond);
       print 'Comment : ' . $cursor;
     }
+    if ($type == 'view') {
+      $people = $con->pagedetails;
+      $cond = array('nid' => $id);
+      $cursor = $people->count($cond);
+      print 'Number of View : ' . $cursor;
+    }
   }
   if ($type == 'f_share') {
     $fb_share = itg_get_fb_share($id, 'Facebook Share');
