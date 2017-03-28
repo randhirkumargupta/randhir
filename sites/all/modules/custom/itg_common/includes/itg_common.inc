@@ -554,47 +554,48 @@ function itg_common_custompath_insert_load($node) {
  * Creating Custom path alias for story, photogallery and videogallery
  */
 
-function itg_common_custompath_migrated_load($node) {
-    if(!empty ($node->path['alias'])) {
-      
-           $node_sef = $node->path['alias'];
-        
-    } else {
-        $title_lenght = strlen($node->title);
-        if($title_lenght >= 160){
-           $node_sef = substr($node->title, 0, 160);
-        } else {
-           $node_sef = $node->title;
-        }
+function itg_common_custompath_migrated_load($node, $type = NULL) {
+  if (!empty($node->path['alias'])) {
+
+    $node_sef = $node->path['alias'];
+  }
+  else {
+    $title_lenght = strlen($node->title);
+    if ($title_lenght >= 160) {
+      $node_sef = substr($node->title, 0, 160);
     }
-    
-    
-    if($node->type == 'photogallery') {
-      $published_date = date('Y-m-d', $node->created);
-    }else {
-      $published_dat = explode(' ', $node->field_itg_content_publish_date['und'][0]['value']);
-      $published_date = $published_dat[0];
+    else {
+      $node_sef = $node->title;
     }
-    $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
-    if (!empty($getsection)) {
-      $parents = taxonomy_get_parents_all($getsection);
-      if (isset($parents) && !empty($parents)) {
-        foreach ($parents as $key => $val) {
-          $section_hierarchy[] = $val->name;
-        }
+  }
+
+
+  if ($node->type == 'photogallery') {
+    $published_date = date('Y-m-d', $node->created);
+  }
+  else {
+    $published_dat = explode(' ', $node->field_itg_content_publish_date['und'][0]['value']);
+    $published_date = $published_dat[0];
+  }
+  $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
+  if (!empty($getsection)) {
+    $parents = taxonomy_get_parents_all($getsection);
+    if (isset($parents) && !empty($parents)) {
+      foreach ($parents as $key => $val) {
+        $section_hierarchy[] = $val->name;
       }
-      $set_hierarchy = array_reverse($section_hierarchy);
-      $pathdata = strtolower(implode("/", $set_hierarchy)) . '/'. $node->type . '/' . trim($node_sef). '-'. $node->nid .'-'. $published_date;
-      $newpath = itg_common_custompath_insert_val($pathdata);
-      $node->path = array('alias' => $newpath, 'pathauto' => FALSE);
     }
+    $set_hierarchy = array_reverse($section_hierarchy);
+    if ($type != 'update_migrated') {
+      $pathdata = strtolower(implode("/", $set_hierarchy)) . '/' . $node->type . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
+      $newpath = itg_common_custompath_insert_val($pathdata);
+    }
+    else {
+      $newpath = $node_sef;
+    }
+    $node->path = array('alias' => $newpath, 'pathauto' => FALSE);
+  }
 }
-
-
-
-
-
-
 
 /** 
  * Implementing 'itg_common_custompath_insert_val'.
