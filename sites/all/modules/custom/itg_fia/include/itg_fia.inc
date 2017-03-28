@@ -38,8 +38,9 @@ function itg_fia_xml_node_feed($query) {
     $modified = date('Y-m-d\Th:i:s\Z', $node->changed);
     $auth_name = get_author_name($node->field_story_reporter[LANGUAGE_NONE][0]['target_id']);
     $desc = $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'];
-    
-    
+
+    $embed_code_pos = $node->field_social_embed_code_position[LANGUAGE_NONE][0]['value'];
+    $embed_code_data = $node->field_social_embed_code[LANGUAGE_NONE][0]['value'];
     $audio_pos = $node->field_facebook_audio_position[LANGUAGE_NONE][0]['value'];
     $audio_url = $node->field_facebook_instant_audio_url[LANGUAGE_NONE][0]['value'];
     $img_position =  $node->field_animated_image_position[LANGUAGE_NONE][0]['value'];
@@ -209,6 +210,20 @@ function itg_fia_xml_node_feed($query) {
         }
       }
     }
+    
+    // Creating Social Embed Code for facebook instant article data
+    if(!empty($embed_code_data)) {
+      if (in_array($embed_code_pos, $bk)) {
+        $body_vals[$embed_code_pos] = $body_vals[$embed_code_pos] . 
+                '<figure class="op-interactive">' . $embed_code_data . '</figure>';
+      } else {
+        $last_postion = end($bk);
+        $body_vals[$last_postion] = $body_vals[$last_postion] . 
+               '<figure class="op-interactive">' . $embed_code_data . '</figure>';
+      }
+    }
+
+    
     $node_body_content = implode(" ", $body_vals);
     $node->link = url("node/$node->nid", ['absolute' => TRUE]);
     $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
