@@ -13042,6 +13042,10 @@ span.smilies-title img {
   color: red;
 }
 
+.jw-sharing-dock-btn {
+  display: none;
+}
+
 /* CSS For Story Modal Popup and Carousel */
 .story-section iframe.embedgalleryt {
   min-height: 200px;

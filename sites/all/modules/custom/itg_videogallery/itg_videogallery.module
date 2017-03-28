@@ -1579,14 +1579,15 @@ function itg_videogallery_node_presave($node) {
       $playlist[$playlist_val['tid']] = $playlist_val['name'];
     }
 
-    // condition for source type field
+    $node->field_story_source_id = $playlist;
+    $_SESSION['old_playlist'] = itg_videogallery_get_old_playlist($node->nid);
+  }
+  
+  // condition for source type field
     if ($node->type == 'videogallery' && empty($node->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
       $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'videogallery';
     }
 
-    $node->field_story_source_id = $playlist;
-    $_SESSION['old_playlist'] = itg_videogallery_get_old_playlist($node->nid);
-  }
 }
 
 /**
@@ -2543,6 +2544,25 @@ function itg_videogallery_views_query_alter(&$view, &$query) {
       if (!empty($parent[$key]->name) && $parent[$key]->name == 'program' && empty($_GET['sid']) && empty($_GET['category'])) {
         $query->where[0]['conditions'][0]['value'][':field_data_field_story_category_field_story_category_tid'] = NULL;
       }
+    }
+  }
+  // Handle filter for videogallery views
+  if($view->name == 'videogallery_management' && $view->current_display == 'page_1') {
+    if(isset($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == 'migrated') {
+      $query->add_where(1,'field_data_field_story_source_type.field_story_source_type_value', 'migrated', '=');
+    }
+    if(isset($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == 'videogallery') {
+      $query->add_where(1,'field_data_field_story_source_type.field_story_source_type_value', 'migrated', '!=');
+    }
+  }
+  
+  // Handle filter for photogallery views
+  if($view->name == 'photo_gallery_management' && $view->current_display == 'page_1') {
+    if(isset($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == 'migrated') {
+      $query->add_where(1,'field_data_field_story_source_type.field_story_source_type_value', 'migrated', '=');
+    }
+    if(isset($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == 'photogallery') {
+      $query->add_where(1,'field_data_field_story_source_type.field_story_source_type_value', 'migrated', '!=');
     }
   }
 }
