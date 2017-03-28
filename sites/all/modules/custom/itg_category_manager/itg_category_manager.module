@@ -1136,7 +1136,8 @@ function itg_categor_form_edit_category_radio($form, &$form_state) {
   }
 
 
-  if ($type == 'story' || $type == 'photogallery' || $type == 'videogallery') {
+  //if ($type == 'story' || $type == 'photogallery' || $type == 'videogallery') {
+  if ($type == 'story') {
     
   }
   else {
