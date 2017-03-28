@@ -1117,6 +1117,53 @@ function itg_videogallery_menu() {
 }
 
 /**
+ * This function use for remove video iframe form story body
+ */
+function itg_videogallery_remove_delete_video_form_body_html_body($story_body) {
+  preg_match_all('/src="([^"]+)"/', $story_body, $match);
+  $video_url = $match[1];
+  if (!empty($video_url)) {
+    
+    foreach ($video_url as $video_value) {
+
+      $post_check = strpos($video_value, 'www.dailymotion.com/embed/video/');
+      if ($post_check !== FALSE) {
+        $vid_id = end(explode('/', $video_value));
+        $vid_id = explode('?', $vid_id);
+        $check_video = itg_videogallery_check_video_url($vid_id[0]);
+        if ($check_video) {
+          drupal_add_js('jQuery(document).ready(function() {                  
+            jQuery("#video_frame_' . $vid_id[0] . '").remove();
+          });', array('type' => 'inline', 'scope' => 'footer'));
+        }
+      }
+    }
+  }
+}
+
+/**
+ * This function check this video is delete or note 
+ */
+function itg_videogallery_check_video_url($vid) {
+
+  $query = db_select('itg_solr_video_info', 'drd');
+  $query->fields('drd', array('is_delete'));
+  $query->condition('content_type', 'video_gallery', '=');
+  $query->condition('solr_video_id', $vid, '=');
+  $query->isNotNull('drd.nid');
+  $video_data = $query->execute()->fetchAll();
+  if (empty($video_data)) {
+    return true;
+  }
+  else if ($video_data[0]->is_delete == 1) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+/**
  * This function use for removed or replaced video from other content
  * 
  */
@@ -1464,7 +1511,7 @@ function itg_videogallery_get_file_details() {
   $responce = "";
   foreach ($getids as $key => $file_value) {
     $video_id = explode('#', $file_value);
-    $responce.=' <iframe class="video_data" frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_id[0] . '?autoplay=0&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
+    $responce.=' <iframe class="video_data" id="video_frame_'.$video_id.'" frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_id[0] . '?autoplay=0&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
   }
   exit($responce);
 }
@@ -1582,12 +1629,11 @@ function itg_videogallery_node_presave($node) {
     $node->field_story_source_id = $playlist;
     $_SESSION['old_playlist'] = itg_videogallery_get_old_playlist($node->nid);
   }
-  
-  // condition for source type field
-    if ($node->type == 'videogallery' && empty($node->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
-      $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'videogallery';
-    }
 
+  // condition for source type field
+  if ($node->type == 'videogallery' && empty($node->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
+    $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'videogallery';
+  }
 }
 
 /**
@@ -2547,22 +2593,22 @@ function itg_videogallery_views_query_alter(&$view, &$query) {
     }
   }
   // Handle filter for videogallery views
-  if($view->name == 'videogallery_management' && $view->current_display == 'page_1') {
-    if(isset($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == 'migrated') {
-      $query->add_where(1,'field_data_field_story_source_type.field_story_source_type_value', 'migrated', '=');
+  if ($view->name == 'videogallery_management' && $view->current_display == 'page_1') {
+    if (isset($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == 'migrated') {
+      $query->add_where(1, 'field_data_field_story_source_type.field_story_source_type_value', 'migrated', '=');
     }
-    if(isset($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == 'videogallery') {
-      $query->add_where(1,'field_data_field_story_source_type.field_story_source_type_value', 'migrated', '!=');
+    if (isset($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == 'videogallery') {
+      $query->add_where(1, 'field_data_field_story_source_type.field_story_source_type_value', 'migrated', '!=');
     }
   }
-  
+
   // Handle filter for photogallery views
-  if($view->name == 'photo_gallery_management' && $view->current_display == 'page_1') {
-    if(isset($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == 'migrated') {
-      $query->add_where(1,'field_data_field_story_source_type.field_story_source_type_value', 'migrated', '=');
+  if ($view->name == 'photo_gallery_management' && $view->current_display == 'page_1') {
+    if (isset($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == 'migrated') {
+      $query->add_where(1, 'field_data_field_story_source_type.field_story_source_type_value', 'migrated', '=');
     }
-    if(isset($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == 'photogallery') {
-      $query->add_where(1,'field_data_field_story_source_type.field_story_source_type_value', 'migrated', '!=');
+    if (isset($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == 'photogallery') {
+      $query->add_where(1, 'field_data_field_story_source_type.field_story_source_type_value', 'migrated', '!=');
     }
   }
 }
