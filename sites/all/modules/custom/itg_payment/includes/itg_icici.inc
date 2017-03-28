@@ -74,10 +74,19 @@ function itg_icici_order_form($form , &$form_state , $args) {
 
   $form['SUBMIT'] = array(
     "#type" => "submit" ,
-    "#value" => t("Submit") ,
+    "#value" => t("Continue..") ,
     '#attributes' => array("class" => array("hide")) ,
   );
+  
+//  drupal_add_js('myFunction();
+//      function myFunction() {
+//          document.getElementById("itg-icici-order-form").submit();
+//      }','inline');
 
+  
+    drupal_add_js('jQuery(document).ready(function () { jQuery("#itg-icici-order-form").submit(); });',
+    array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+  );
   return $form;
 }
 
@@ -85,33 +94,33 @@ function itg_icici_order_form($form , &$form_state , $args) {
  * {@inheritdoc}
  */
 function itg_icici_order_form_validate($form , &$form_state) {
-  $session_value_array = drupal_json_decode($_SESSION['event_registration_payment']['event_key']);
-  if ($session_value_array['redeemed_payment'] != $form_state['values']['TXN_AMOUNT']) {
-    $error[] = t("Something wrong happen with order amount");
-  }
-
-  if ($session_value_array['event_id'] != $form_state['values']['EVENT_ID']) {
-    $error[] = t("Something wrong happen with event id");
-  }
-
-  if ($session_value_array['total_payment'] != $form_state['values']['AMOUNT']) {
-    $error[] = t("Something wrong happen with total amount");
-  }
-
-  if ($session_value_array['reg_id'] != $form_state['values']['REGISTRATION_ID']) {
-    $error[] = t("Something wrong happen with reg_id");
-  }
-
-  if (!empty($form_state['values']['COUPON_ID']) && $session_value_array['coupon_code'] != $form_state['values']['COUPON_ID']) {
-    $error[] = t("Something wrong happen with coupon code");
-  }
-
-  if (!empty($error)) {
-    foreach ($error as $messages) {
-      drupal_set_message($messages , 'error');
-    }
-    drupal_goto($_SERVER['HTTP_REFERER']);
-  }
+//  $session_value_array = drupal_json_decode($_SESSION['event_registration_payment']['event_key']);
+//  if ($session_value_array['redeemed_payment'] != $form_state['values']['TXN_AMOUNT']) {
+//    $error[] = t("Something wrong happen with order amount");
+//  }
+//
+//  if ($session_value_array['event_id'] != $form_state['values']['EVENT_ID']) {
+//    $error[] = t("Something wrong happen with event id");
+//  }
+//
+//  if ($session_value_array['total_payment'] != $form_state['values']['AMOUNT']) {
+//    $error[] = t("Something wrong happen with total amount");
+//  }
+//
+//  if ($session_value_array['reg_id'] != $form_state['values']['REGISTRATION_ID']) {
+//    $error[] = t("Something wrong happen with reg_id");
+//  }
+//
+//  if (!empty($form_state['values']['COUPON_ID']) && $session_value_array['coupon_code'] != $form_state['values']['COUPON_ID']) {
+//    $error[] = t("Something wrong happen with coupon code");
+//  }
+//
+//  if (!empty($error)) {
+//    foreach ($error as $messages) {
+//      drupal_set_message($messages , 'error');
+//    }
+//    drupal_goto($_SERVER['HTTP_REFERER']);
+//  }
 }
 
 function getDateTime() {  // Here we are returning the current date time that will be further used to generate the salted hashed.
@@ -143,9 +152,13 @@ function itg_icici_order_form_submit($form , &$form_state , $args) {
   global $base_url;
   //module_load_include('php', 'itg_payment', 'lib/icici/ipg-util');
 
-  $responseSuccessURL = "http://127.0.0.1/itgcms/itg-payment/icici-payment-success";
-  $responseFailURL = "http://127.0.0.1/itgcms/itg-payment/response-fail";
+  
+//  $responseSuccessURL = "http://127.0.0.1/itgcms/itg-payment/icici-payment-success";
+//  $responseFailURL = "http://127.0.0.1/itgcms/itg-payment/response-fail";
 
+   $responseSuccessURL = $base_url."/itg-payment/icici-payment-success";
+  $responseFailURL = $base_url."/itg-payment/response-fail";
+  
   $db_data = array();
 
   // Get required form value.
