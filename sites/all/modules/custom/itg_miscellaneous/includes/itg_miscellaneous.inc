@@ -8,10 +8,6 @@
  * Get itg layout list for admin
  * @return array $output
  */
-/*
- * Inc file contains the common functions
- */
-
 function itg_layout_list_delete() {
   // configure the table header columns
   $header = array(
@@ -113,30 +109,30 @@ function itg_section_widgets_list_delete() {
 /**
  * Implement function for create index.xml
  */
-function create_index_xml(){
+function create_index_xml() {
   $xml_path = 'sites/default/files/xml_file_chunk/';
   $foldername = 'story/';
-  $path = $xml_path.$foldername;
+  $path = $xml_path . $foldername;
   foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as $filename) {
     $rest = substr($filename, -4);
-    if($rest == ".xml"){
+    if ($rest == ".xml") {
       $xml_file = $filename->getFilename();
       //$files = end(explode($foldername, (string) $filename));
       $xml_id = explode('.xml', $xml_file);
       $file_id[$xml_id[0]] = $xml_id[0];
-    }        
+    }
   }
   ksort($file_id);
   $domDocument = new DOMDocument('1.0', "UTF-8");
   $domElement = $domDocument->createElement('content');
   $domDocument->appendChild($domElement);
-  foreach($file_id as $new_file){
-      $domElement1 = $domDocument->createElement('sourceid', $new_file);
-      $domElement->appendChild($domElement1);
+  foreach ($file_id as $new_file) {
+    $domElement1 = $domDocument->createElement('sourceid', $new_file);
+    $domElement->appendChild($domElement1);
   }
   //echo count($file_id);
   //p($file_id);
-  $domDocument->save($xml_path.'index/index.xml');
+  $domDocument->save($xml_path . 'index/index.xml');
 }
 
 /**
@@ -151,9 +147,9 @@ function create_poll_table() {
     `content_type` varchar(250) NOT NULL,
     PRIMARY KEY (`id`)
     ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;';
-    db_query($query); */ 
+    db_query($query); */
 
-   $file_name = 'indiatoday-story_2016-06-01.xml';
+  $file_name = 'indiatoday-story_2016-06-01.xml';
   //$file_name = 'indiatoday-story_2016-06-11.xml';
   //$file_name = 'indiatoday-story_2016-06-21.xml';
   //$file_name = 'indiatoday-story_2016-07-01.xml';
@@ -161,13 +157,13 @@ function create_poll_table() {
   //$file_name = 'indiatoday-story_2016-09-01.xml';
   //$file_name = 'indiatoday-story_2016-10-01.xml';
   //$file_name = 'indiatoday-story_2016-11-01.xml';
- // $file_name = 'indiatoday-story_2016-12-01.xml';
+  // $file_name = 'indiatoday-story_2016-12-01.xml';
   $xml_path = 'sites/default/files/xml_file_chunk/';
-  $xml = simplexml_load_file($xml_path . $file_name, 'SimpleXMLElement');  
+  $xml = simplexml_load_file($xml_path . $file_name, 'SimpleXMLElement');
   $i = 0;
   foreach ($xml->story as $stories) {
     $xml_city_id = (array) $stories->cities->city;
-    $original_id = array();    
+    $original_id = array();
     // map city
     _map_xml_city($xml_city_id, $stories);
 
@@ -194,10 +190,10 @@ function create_poll_table() {
     }
     // Map category.      
     if ($pti_section) {
-      _map_xml_all_category($stories, $pti_section);
+      _map_xml_category($stories, $pti_section);
     }
     else {
-      _map_xml_all_category($stories);
+      _map_xml_category($stories);
     }
 
     // Map primary category.
@@ -207,13 +203,13 @@ function create_poll_table() {
     _map_xml_tags($stories);
 
     // Map byline
-    _map_xml_byline($stories);    
+    _map_xml_byline($stories);
     if (!empty($folder_name)) {
       $stories->asXml($xml_path . $folder_name . '/' . $stories->id . '.xml');
     }
     else {
       $stories->asXml($xml_path . 'story/' . $stories->id . '.xml');
-    }    
+    }
     ++$i;
   }
 
@@ -221,183 +217,62 @@ function create_poll_table() {
 }
 
 /**
- * Map byline with DataBase.
- *
- * @param type $stories
+ * Implements create_section_category_in_mongo()
  */
-function _map_xml_byline(&$stories) {
-  if (isset($stories->bylines->byline) && !empty($stories->bylines->byline)) {
-    $i = 0;
-    foreach ($stories->bylines->byline as $final_byline) {
-      $source_bid = (string) $final_byline;
-      if (!empty($source_bid)) {
-        $orignal_byline = get_itg_destination_id('migrate_map_itgbyline', $source_bid);
-        $stories->bylines->byline[$i] = $orignal_byline;
-        ++$i;
-      }
-    }
-  }
+// Code started for sending the section and it category data into mongo DB
+
+
+function create_section_category_in_mongo() {
+
+  $form['submit_button'] = array(
+    '#type' => 'submit',
+    '#value' => t('Please submit for bulk insert section and its category'),
+  );
+
+  return $form;
 }
 
 /**
- * Map tag name.
- *
- * @param stdObject $stories
+ * Implements create_section_category_in_mongo_submit().
  */
-function _map_xml_tags(&$stories) {
-  if (isset($stories->tags->tag) && !empty($stories->tags->tag)) {
-    $i = 0;
-    foreach ($stories->tags->tag as $final_tags) {
-      $source_tags = (string) $final_tags;
-      try {
-        $orignal_tag = get_itg_destination_id('migrate_map_itgtags', $source_tags);
-      }
-      catch (Exception $ex) {
-        drupal_set_message($ex->getMessage(), 'error');
-      }
-      $stories->tags->tag[$i] = $orignal_tag;
-      ++$i;
+function create_section_category_in_mongo_submit($form, &$form_state) {
+
+  $query = db_select('taxonomy_term_data', 'td');
+  $query->leftJoin('taxonomy_term_hierarchy', 'th', 'th.tid = td.tid');
+  $query->leftJoin('itg_category_manager', 'icm', 'icm.tid = td.tid');
+  $query->leftJoin('taxonomy_vocabulary', 'tv', 'tv.vid=td.vid');
+  $result = $query
+      ->condition('td.vid', CATEGORY_MANAGMENT)
+      ->fields('td', array('tid', 'name', 'vid'))
+      ->fields('th', array('parent'))
+      ->fields('tv', array('machine_name'))
+      ->fields('icm', array('status'))
+      ->execute();
+
+
+  foreach ($result as $chunk_data) {
+    if (!empty($chunk_data) && isset($chunk_data)) {
+      $operations[] = array('create_section_cat_op', array($chunk_data));
     }
   }
+
+  $batch = array(
+    'title' => t('Migrating data finally....please wait....!'),
+    'operations' => $operations,
+    'finished' => 'create_section_cat_op_batch_finished',
+    'init_message' => t('Migration started...please wait....!'),
+    'progress_message' => t('Processed @current out of @total.'),
+    'error_message' => t('Migration checking process has encountered an error.'),
+    'file' => drupal_get_path('module', 'itg_miscellaneous') . '/includes/itg_miscellaneous.inc',
+  );
+
+  batch_set($batch);
+  batch_process('create-section-category-in-mongo');
 }
 
 /**
- * Map primary category.
- *
- * @param stdObject $stories
+ * Implements create_section_cat_op().
  */
-function _map_xml_primary_category(&$stories) {
-  if (isset($stories->primarycategory) && !empty($stories->primarycategory)) {
-    $source_cid = (string) $stories->primarycategory;
-    $pcategory_array = explode('#', $source_cid);
-    $parray_count = count($pcategory_array);
-    $table_name = itg_migrate_category_table($parray_count);
-    $last_value = end($pcategory_array);
-    $source_cid = (string) $last_value;
-    $orignal_pcategory = get_itg_destination_id($table_name, $source_cid);
-    $stories->primarycategory = $orignal_pcategory;
-  }
-}
-
-/**
- * Map category to original category.
- * 
- * @param stdObject $stories
- */
-function _map_xml_category(&$stories, $pti_section = NULL) {
-  $data_category = '';
-  if (isset($stories->categories->category) && !empty($stories->categories->category)) {
-    $i = 0;
-    foreach ($stories->categories->category as $final_category) {
-      $category_array = explode('#', $final_category);
-      $array_count = count($category_array);
-      $table_name = itg_migrate_category_table($array_count);
-      $last_value = end($category_array);
-      $source_cid = (string) $last_value;      
-      if ($pti_section != NULL) {
-        $table_name = 'migrate_map_itgsection';
-        $source_cid = $pti_section;
-        $orignal_category = get_itg_destination_id($table_name, $source_cid);
-      }
-      else {
-        $orignal_category = get_itg_destination_id($table_name, $source_cid);
-      }      
-      $stories->categories->category[$i] = $orignal_category;
-      ++$i;
-    }    
-  }
-}
-
-/**
- * Map category to original category.
- * 
- * @param stdObject $stories
- */
-function _map_xml_all_category(&$stories, $pti_section = NULL) {
-  $data_category = '';
- 
-  if (isset($stories->categories->category) && !empty($stories->categories->category)) {
-    $i = 0;
-     $str = '';
-    foreach ($stories->categories->category as $final_category) {
-      $category_array = explode('#', $final_category);
-      $k = 1;
-      $orignal_category = array();
-      foreach($category_array as $individal_cat) {
-
-        $array_count = $k;
-        $source_cid = (string) $individal_cat;      
-        if ($pti_section != NULL) {
-          $table_name = 'migrate_map_itgsection';
-          $source_cid = $pti_section;
-          $orignal_category[] = get_itg_destination_id($table_name, $source_cid);
-        }
-        else {
-          $table_name = itg_migrate_category_table($array_count);
-          if ($k != 1) {
-            $str = '#';
-          }
-          
-          //$orignal_category .= $str.get_itg_destination_id($table_name, $source_cid);
-          $orignal_category[] = get_itg_destination_id($table_name, $source_cid);
-          //$orignal_category[] = implode('#', $orignal_category);
-        }
-        $k++;
-      } 
-       //$stories->categories->category[$i] = $orignal_category;   
-      $stories->categories->category[$i] = implode('#', $orignal_category);
-      ++$i;
-    }    
-  }
-}
-
-
-/**
- * Map Author id to original DB id.
- *
- * @param stdObject $stories
- */
-function _map_xml_user(&$stories, $op) {
-  // manage created user
-  if (isset($stories->{$op}) && !empty($stories->{$op})) {
-
-    $created_uid = (string) $stories->{$op};
-    try {
-      $orignal_crated_uid = get_itg_destination_id('migrate_map_itguser', $created_uid);
-    }
-    catch (Exception $ex) {
-      drupal_set_message($ex->getMessage(), 'error');
-    }
-    $stories->{$op} = $orignal_crated_uid;
-  }
-  else {
-    $stories->{$op} = 0;
-  }
-}
-
-/**
- * Map city to original id.
- *
- * @param array $xml_city_id
- * @param stdObject $stories
- */
-function _map_xml_city($xml_city_id, &$stories) {
-  // Get city original id.
-  $errors = array_filter($xml_city_id);
-  if (!empty($errors)) {
-    foreach ($xml_city_id as $source_city) {
-      $original_id[] = get_itg_destination_id('migrate_map_itgcity', $source_city);
-    }
-
-    // Map xml city id from databaase city id.
-    $j = 0;
-    foreach ($stories->cities->city as $key => $new_city) {
-      $stories->cities->city[$j] = $original_id[$j];
-      ++$j;
-    }
-  }
-}
-  
 function create_section_cat_op($data, &$context) {
 // Mongo code will be here
   if (function_exists('mongodb')) {
@@ -407,18 +282,18 @@ function create_section_cat_op($data, &$context) {
     // check connection
     if ($con) {
       $qry = array(
-          "tid" => (int) $data->tid,
-          "name" => $data->name,
-          "parent" => (int) $data->parent,
-          "vid" => (int) $data->vid,
-          "machine_name" => $data->machine_name,
-          "content_type" => get_content_type_list_for_this_term($data->tid),
-          "status" => 1,
-          'parent_data' => taxonomy_get_parents_all($data->tid),
+        "tid" => (int) $data->tid,
+        "name" => $data->name,
+        "parent" => (int) $data->parent,
+        "vid" => (int) $data->vid,
+        "machine_name" => $data->machine_name,
+        "content_type" => get_content_type_list_for_this_term($data->tid),
+        "status" => (int) $data->status,
+        'parent_data' => taxonomy_get_parents_all($data->tid),
       );
       $result = $people->insert($qry);
     }
-    drupal_set_message('data inserted successfully for ' . json_encode($result));
+    //drupal_set_message('data inserted successfully for ' . json_encode($result));
   }
 }
 
@@ -428,7 +303,8 @@ function create_section_cat_op($data, &$context) {
 function create_section_cat_op_batch_finished($success, $results, $operations) {
   if ($success) {
     drupal_set_message(t('migration processed successfully.'));
-  } else {
+  }
+  else {
     drupal_set_message(t('An error occurred while processing.'));
   }
 }
@@ -440,9 +316,9 @@ function get_content_type_list_for_this_term($tid) {
   $data = array();
   $query = db_select('field_data_field_cm_select_type', 'td');
   $res = $query
-          ->condition('td.entity_id', $tid)
-          ->fields('td', array('field_cm_select_type_value',))
-          ->execute();
+      ->condition('td.entity_id', $tid)
+      ->fields('td', array('field_cm_select_type_value',))
+      ->execute();
 
   foreach ($res as $result) {
     $data[] = $result->field_cm_select_type_value;
@@ -451,4 +327,57 @@ function get_content_type_list_for_this_term($tid) {
     return implode(',', $data);
   }
   return '';
+}
+
+/**
+ * Helper function to show mongo detail
+ */
+function itg_get_mongo_detail() {
+  $type = arg(1);
+  $id = arg(2);
+  $data = '';
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    if ($type == 'likedislike') {
+      $people = $con->itg_custom_flag_count;
+      $cond = array('nid' => $id);
+      $cursor = $people->find($cond);
+      foreach ($cursor as $document) {
+        print 'Like : ' . $document['like_count'];
+        print '<br/>';
+        print 'DisLike : ' . $document['dislike_count'];
+      }
+    }
+    if ($type == 't_share') {
+      $people = $con->front_user_activity;
+      $cond = array('nid' => $id, 'activity' => 'twitter_share');
+      $cursor = $people->count($cond);
+      print 'Twitter share : ' . $cursor;
+    }
+
+    if ($type == 'g_share') {
+      $people = $con->front_user_activity;
+      $cond = array('nid' => $id, 'activity' => 'google_share');
+      $cursor = $people->count($cond);
+      print 'Google share : ' . $cursor;
+    }
+    
+    if ($type == 'comment') {
+      $people = $con->itgcms_comment;
+      $cond = array('page_id' => $id);
+      $cursor = $people->count($cond);
+      print 'Comment : ' . $cursor;
+    }
+    if ($type == 'view') {
+      $people = $con->pagedetails;
+      $cond = array('nid' => $id);
+      $cursor = $people->count($cond);
+      print 'Number of View : ' . $cursor;
+    }
+  }
+  if ($type == 'f_share') {
+    $fb_share = itg_get_fb_share($id, 'Facebook Share');
+    print 'Facebook Share : '.$fb_share;
+  }
+  
 }
