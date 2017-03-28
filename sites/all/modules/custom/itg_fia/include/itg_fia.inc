@@ -58,14 +58,14 @@ function itg_fia_xml_node_feed($query) {
         $lng = number_format($get_map_lng[1], 6);
         $get_iframe_place = $get_map_data[18];
         $get_iframe_places = explode('2s', $get_map_data[18]);
-        $get_place_name = str_replace("+", " ", $get_iframe_places[1]).'<iframe>';
+        $get_place_name = str_replace("+", " ", $get_iframe_places[1]);
       } 
       else {
         // getting map data from map url
         $get_map = explode("place", $map_data);
         $get_map_coordinate = explode("@", $get_map[1]);
         $get_place = str_replace("/", "", $get_map_coordinate[0]);
-        $get_place_name = str_replace("+", " ", $get_place).'url';
+        $get_place_name = str_replace("+", " ", $get_place);
         $coordinate_map = explode(",", $get_map_coordinate[1]);
         $lat = $coordinate_map[0];
         $lng = $coordinate_map[1];
