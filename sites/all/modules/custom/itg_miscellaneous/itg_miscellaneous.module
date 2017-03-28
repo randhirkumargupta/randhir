@@ -64,7 +64,12 @@ function itg_miscellaneous_menu() {
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_miscellaneous.inc',
   );
-  
+  $items['get-mongo-detail/%/%'] = array(
+      'page callback' => 'itg_get_mongo_detail',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_miscellaneous.inc',
+  );
   
 
   return $items;
