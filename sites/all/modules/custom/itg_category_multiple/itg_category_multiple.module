@@ -15,8 +15,8 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   switch ($form_id) {
     case 'story_node_form':        // Story
-    case 'photogallery_node_form': // Photo gallery
-    case 'videogallery_node_form': // Video Gallery
+    //case 'photogallery_node_form': // Photo gallery
+    //case 'videogallery_node_form': // Video Gallery
 
 
       $content_type = '';
@@ -26,12 +26,42 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
 
       //pr($form_state['build_info']['args'][0]->field_story_extra_data[LANGUAGE_NONE][0]['value']);
 
-      $itg_category_multiple_prev_data = NULL; //p($form_state['build_info']['args'][0]);
-      if (isset($form_state['build_info']['args'][0]->field_story_extra_data[LANGUAGE_NONE][0]['value']) &&
-          !empty($form_state['build_info']['args'][0]->field_story_extra_data[LANGUAGE_NONE][0]['value'])
-      ) {
-        $itg_category_multiple_prev_data = json_decode(base64_decode($form_state['build_info']['args'][0]->field_story_extra_data[LANGUAGE_NONE][0]['value']));
+//      $itg_category_multiple_prev_data = NULL; //p($form_state['build_info']['args'][0]);
+//      if (isset($form_state['build_info']['args'][0]->field_story_extra_data[LANGUAGE_NONE][0]['value']) &&
+//          !empty($form_state['build_info']['args'][0]->field_story_extra_data[LANGUAGE_NONE][0]['value'])
+//      ) {
+//        $itg_category_multiple_prev_data = json_decode(base64_decode($form_state['build_info']['args'][0]->field_story_extra_data[LANGUAGE_NONE][0]['value']));
+//      } else
+
+      if (isset($form_state['build_info']['args'][0]->field_story_category[LANGUAGE_NONE]) && !empty($form_state['build_info']['args'][0]->field_story_category[LANGUAGE_NONE])) {
+        $all_selected_tids = $form_state['build_info']['args'][0]->field_story_category[LANGUAGE_NONE];
+
+        if (isset($all_selected_tids) && !empty($all_selected_tids)) {
+          $itg_category_multiple_prev_data = new stdClass();
+          foreach ($all_selected_tids as $chunk_tid) {
+            $level = itg_category_multiple_get_term_level($chunk_tid['tid']);
+
+            switch ($level) {
+              case 1:
+                $itg_category_multiple_prev_data->section[] = $chunk_tid['tid'];
+                break;
+              case 2:
+                $itg_category_multiple_prev_data->category[] = $chunk_tid['tid'];
+                break;
+              case 3:
+                $itg_category_multiple_prev_data->sub_category[] = $chunk_tid['tid'];
+                break;
+              case 4:
+                $itg_category_multiple_prev_data->sub_sub_category[] = $chunk_tid['tid'];
+                break;
+              case 5:
+                $itg_category_multiple_prev_data->sub_sub_sub_category[] = $chunk_tid['tid'];
+                break;
+            }
+          }
+        }
       }
+
 
       // Code stared for the SECTION so that we can get the default sections options
 
@@ -676,4 +706,28 @@ function itg_category_multiple_taxonomy_term_delete($term) {
       $people->remove(array("tid" => (int) $id));
     }
   }
+}
+
+/**
+ * Returns all term with its depth level
+ * @param int $tid
+ */
+function itg_category_multiple_get_term_level($tid) {
+  static $depths = array();
+
+  if (!isset($depths[$tid])) {
+    $parent = db_select('taxonomy_term_hierarchy', 'th')
+            ->fields('th', array('parent'))
+            ->condition('tid', $tid)
+            ->execute()->fetchField();
+
+    if ($parent == 0) {
+      $depths[$tid] = 1;
+    }
+    else {
+      $depths[$tid] = 1 + itg_category_multiple_get_term_level($parent);
+    }
+  }
+
+  return $depths[$tid];
 }

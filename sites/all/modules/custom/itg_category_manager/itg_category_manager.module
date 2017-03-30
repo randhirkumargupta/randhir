@@ -185,19 +185,18 @@ function itg_category_manager_form($form, &$form_state) {
  * @param int $tid
  * @return boolean
  */
-
 function itg_category_manager_term_state($tid, $vid = CATEGORY_MANAGMENT) {
-//  $itg_query = db_select('itg_category_manager', 'itg')
-//      ->fields('itg', array('status'))
-//      ->condition('tid', $tid, '=')
-//      ->condition('vid', $vid, '=');
-//  $itg_result = $itg_query->execute()->fetchField();
-//
-//  $flag = FALSE;
-//  if (isset($itg_result) && $itg_result == 1) {
-//    $flag = TRUE;
-//  }
-  $flag = TRUE;
+  $itg_query = db_select('itg_category_manager', 'itg')
+      ->fields('itg', array('status'))
+      ->condition('tid', $tid, '=')
+      ->condition('vid', $vid, '=');
+  $itg_result = $itg_query->execute()->fetchField();
+
+  $flag = FALSE;
+  if (isset($itg_result) && $itg_result == 1) {
+    $flag = TRUE;
+  }
+  //$flag = TRUE;
 
   return $flag;
 }
@@ -838,7 +837,7 @@ function itg_category_manager_get_mail_content($entity) {
  */
 function itg_category_manager_taxonomy_term_insert($term) {
   global $user;
-  
+
   if ($term->vid == CATEGORY_MANAGMENT) {
     $vid = $term->vid;
     $data = array(
@@ -1139,6 +1138,11 @@ function itg_categor_form_edit_category_radio($form, &$form_state) {
   }
 
 
+  //if ($type == 'story' || $type == 'photogallery' || $type == 'videogallery') {
+  if ($type == 'story') {
+    
+  }
+  else {
     drupal_add_js('jQuery(document).ready(function() {
     jQuery("#prim_' . $editid . '").attr("checked", true);
         jQuery( "form" ).submit(function( event ) {
@@ -1154,7 +1158,7 @@ function itg_categor_form_edit_category_radio($form, &$form_state) {
   });
 });
      });', array('type' => 'inline', 'scope' => 'footer'));
-  
+  }
   drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/primary_category.js', array('type' => 'file', 'scope' => 'footer'));
 
   return $form;

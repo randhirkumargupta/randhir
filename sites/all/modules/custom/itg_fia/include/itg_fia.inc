@@ -38,8 +38,9 @@ function itg_fia_xml_node_feed($query) {
     $modified = date('Y-m-d\Th:i:s\Z', $node->changed);
     $auth_name = get_author_name($node->field_story_reporter[LANGUAGE_NONE][0]['target_id']);
     $desc = $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'];
-    
-    
+
+    $embed_code_pos = $node->field_social_embed_code_position[LANGUAGE_NONE][0]['value'];
+    $embed_code_data = $node->field_social_embed_code[LANGUAGE_NONE][0]['value'];
     $audio_pos = $node->field_facebook_audio_position[LANGUAGE_NONE][0]['value'];
     $audio_url = $node->field_facebook_instant_audio_url[LANGUAGE_NONE][0]['value'];
     $img_position =  $node->field_animated_image_position[LANGUAGE_NONE][0]['value'];
@@ -58,14 +59,14 @@ function itg_fia_xml_node_feed($query) {
         $lng = number_format($get_map_lng[1], 6);
         $get_iframe_place = $get_map_data[18];
         $get_iframe_places = explode('2s', $get_map_data[18]);
-        $get_place_name = str_replace("+", " ", $get_iframe_places[1]).'<iframe>';
+        $get_place_name = str_replace("+", " ", $get_iframe_places[1]);
       } 
       else {
         // getting map data from map url
         $get_map = explode("place", $map_data);
         $get_map_coordinate = explode("@", $get_map[1]);
         $get_place = str_replace("/", "", $get_map_coordinate[0]);
-        $get_place_name = str_replace("+", " ", $get_place).'url';
+        $get_place_name = str_replace("+", " ", $get_place);
         $coordinate_map = explode(",", $get_map_coordinate[1]);
         $lat = $coordinate_map[0];
         $lng = $coordinate_map[1];
@@ -209,10 +210,24 @@ function itg_fia_xml_node_feed($query) {
         }
       }
     }
+    
+    // Creating Social Embed Code for facebook instant article data
+    if(!empty($embed_code_data)) {
+      if (in_array($embed_code_pos, $bk)) {
+        $body_vals[$embed_code_pos] = $body_vals[$embed_code_pos] . 
+                '<figure class="op-interactive">' . $embed_code_data . '</figure>';
+      } else {
+        $last_postion = end($bk);
+        $body_vals[$last_postion] = $body_vals[$last_postion] . 
+               '<figure class="op-interactive">' . $embed_code_data . '</figure>';
+      }
+    }
+
+    
     $node_body_content = implode(" ", $body_vals);
     $node->link = url("node/$node->nid", ['absolute' => TRUE]);
-    $subtitle = $node->field_story_short_headline[LANGUAGE_NONE][0]['value'];
-    $items .= itg_fia_xml_format_rss_item($target_nids, $img_path, $guid, $node_body_content, $node->title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
+    $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
+    $items .= itg_fia_xml_format_rss_item($kicker, $target_nids, $img_path, $guid, $node_body_content, $node->title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
   }
   
   global $base_url;
@@ -249,7 +264,7 @@ function itg_fia_xml_format_rss_channel($title, $link, $items) {
 /**
  * Creates the xml item.
  */
-function itg_fia_xml_format_rss_item($target_nids, $img_path, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
+function itg_fia_xml_format_rss_item($kicker, $target_nids, $img_path, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
   $output = "    <item>\n";
   
   $output .= '      <title>' . $title . "</title>\n";
@@ -278,9 +293,9 @@ function itg_fia_xml_format_rss_item($target_nids, $img_path, $guid, $node_body_
 //  $output .= "    </video>\n\n";
   $output .= "    </figure>\n\n";
   $output .= "      <h1>" . $title . "</h1>\n";
-  $output .= "      <h2>" . $subtitle . "</h2>\n";
+  $output .= "      <h2>" . $kicker . "</h2>\n";
   // <!-- A kicker for your article -->
-  $output .= "      <h3 class='op-kicker'>" . $subtitle . "</h3>\n";
+  $output .= "      <h3 class='op-kicker'>" . $kicker . "</h3>\n";
   // <!-- The author of your article -->
   $output .= "      <address>" . $name . "</address>\n";
   $output .= "      <time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>\n";

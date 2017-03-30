@@ -9,6 +9,21 @@
  */
 
 /**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_reporter_cronapi($op, $job = NULL) {
+  
+  $items['itg-remove-byline-content'] = array(
+    'description' => 'Remove junk byline.',
+    'callback' => 'itg_remove_byline_content',
+    'file' => 'include/itg_remove_byline_content.inc',
+  );
+  
+  return $items;
+}
+
+/**
  * Implements hook_menu().
  * @return array
  */

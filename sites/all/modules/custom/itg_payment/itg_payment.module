@@ -5,65 +5,65 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-module_load_include('inc', 'itg_payment', 'includes/itg_paytm.helper');
-module_load_include('inc', 'itg_payment', 'includes/itg_icici');
+module_load_include('inc' , 'itg_payment' , 'includes/itg_paytm.helper');
+module_load_include('inc' , 'itg_payment' , 'includes/itg_icici');
 
 function itg_payment_menu() {
   $items = array();
   // Start Form For Payment.
   $items['itg-payment/%'] = array(
-    'title' => t('Payment Checkout'),
-    'description' => t('Payment Checkout'),
-    'page callback' => 'itg_payment_checkout',
-    'access callback' => TRUE,
+    'title' => t('Payment Checkout') ,
+    'description' => t('Payment Checkout') ,
+    'page callback' => 'itg_payment_checkout' ,
+    'access callback' => TRUE ,
   );
 
   $items['itg_payment_success'] = array(
-    'title' => 'Payment success',
-    'page callback' => 'itg_payment_success_page',
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
+    'title' => 'Payment success' ,
+    'page callback' => 'itg_payment_success_page' ,
+    'access callback' => TRUE ,
+    'type' => MENU_CALLBACK ,
   );
 
   $items['itg-payment/billdesk-payment-success'] = array(
-    'title' => 'Payment success',
-    'page callback' => 'itg_billdesk_payment_success_page',
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
+    'title' => 'Payment success' ,
+    'page callback' => 'itg_billdesk_payment_success_page' ,
+    'access callback' => TRUE ,
+    'type' => MENU_CALLBACK ,
   );
 
   $items['itg-payment/icici-payment-success'] = array(
-    'title' => 'Payment success',
-    'page callback' => 'itg_icici_payment_success_page',
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
+    'title' => 'Payment success' ,
+    'page callback' => 'itg_icici_payment_success_page' ,
+    'access callback' => TRUE ,
+    'type' => MENU_CALLBACK ,
   );
 
   $items['itg-payment/icici-payment-fail'] = array(
-    'title' => 'Payment success',
-    'page callback' => 'itg_icici_payment_fail_page',
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
+    'title' => 'Payment success' ,
+    'page callback' => 'itg_icici_payment_fail_page' ,
+    'access callback' => TRUE ,
+    'type' => MENU_CALLBACK ,
   );
 
   // Order payment request url
   $items['itg_payment_order_form_request_url'] = array(
-    'page callback' => 'itg_payment_order_form_request_url',
-    'type' => MENU_CALLBACK,
-    'access arguments' => array('access content'),
+    'page callback' => 'itg_payment_order_form_request_url' ,
+    'type' => MENU_CALLBACK ,
+    'access arguments' => array('access content') ,
   );
   // Order payment response url
   $items['itg_payment_order_form_response_url'] = array(
-    'page callback' => 'itg_payment_order_form_response_url',
-    'type' => MENU_CALLBACK,
-    'access arguments' => array('access content'),
+    'page callback' => 'itg_payment_order_form_response_url' ,
+    'type' => MENU_CALLBACK ,
+    'access arguments' => array('access content') ,
   );
 
   // Order payment response fail
   $items['itg-payment/response-fail'] = array(
-    'page callback' => 'itg_payment_response_fail',
-    'type' => MENU_CALLBACK,
-    'access arguments' => array('access content'),
+    'page callback' => 'itg_payment_response_fail' ,
+    'type' => MENU_CALLBACK ,
+    'access arguments' => array('access content') ,
   );
   return $items;
 }
@@ -74,29 +74,29 @@ function itg_payment_menu() {
 function itg_payment_theme() {
   return array(
     'itg_payment_order_form' => array(
-      'render element' => 'form',
-      'template' => 'templates/itg-paytm-order-form',
-    ),
+      'render element' => 'form' ,
+      'template' => 'templates/itg-paytm-order-form' ,
+    ) ,
     'itg_payment_merchant_form' => array(
-      'render element' => 'form',
-      'template' => 'templates/itg-paytm-merchant-form',
-    ),
+      'render element' => 'form' ,
+      'template' => 'templates/itg-paytm-merchant-form' ,
+    ) ,
     'itg_payment_success_page' => array(
-      'render element' => 'form',
-      'template' => 'templates/itg-paytm-success-page',
-    ),
+      'render element' => 'form' ,
+      'template' => 'templates/itg-paytm-success-page' ,
+    ) ,
     'itg_payment_response_fail' => array(
-      'render element' => 'form',
-      'template' => 'templates/itg-payment-response-fail',
-    ),
+      'render element' => 'form' ,
+      'template' => 'templates/itg-payment-response-fail' ,
+    ) ,
     'itg_icici_merchant_form' => array(
-      'render element' => 'form',
-      'template' => 'templates/itg-icici-merchant-form',
-    ),
+      'render element' => 'form' ,
+      'template' => 'templates/itg-icici-merchant-form' ,
+    ) ,
     'itg_payment_billdesk_order_form' => array(
-      'render element' => 'form',
-      'template' => 'templates/itg-payment-billdesk-order-form',
-    ),
+      'render element' => 'form' ,
+      'template' => 'templates/itg-payment-billdesk-order-form' ,
+    ) ,
   );
 }
 
@@ -108,65 +108,65 @@ function itg_payment_success_page() {
  * Form for order process.
  * @return type
  */
-function itg_payment_order_form($form, &$form_state, $args) {
+function itg_payment_order_form($form , &$form_state , $args) {
   $form['ORDER_ID'] = array(
-    "#type" => "hidden",
-    "#title" => t("Order Id"),
-    "#value" => "ODR-" . time() . rand(0, 1000),
+    "#type" => "hidden" ,
+    "#title" => t("Order Id") ,
+    "#value" => "ODR-" . time() . rand(0 , 1000) ,
   );
   $form['CUST_ID'] = array(
-    "#type" => "hidden",
-    "#title" => t("Customer Id"),
-    "#value" => "CUS-" . time() . rand(0, 1000),
+    "#type" => "hidden" ,
+    "#title" => t("Customer Id") ,
+    "#value" => "CUS-" . time() . rand(0 , 1000) ,
   );
   $form['INDUSTRY_TYPE_ID'] = array(
-    "#type" => "hidden",
-    "#value" => INDUSTRY_TYPE_ID,
+    "#type" => "hidden" ,
+    "#value" => INDUSTRY_TYPE_ID ,
   );
   $form['CHANNEL_ID'] = array(
-    "#type" => "hidden",
-    "#value" => CHANNEL_ID,
+    "#type" => "hidden" ,
+    "#value" => CHANNEL_ID ,
   );
 
   $form['TXN_AMOUNT'] = array(
-    "#type" => "hidden",
-    "#title" => t("Final Amount to pay."),
-    "#value" => $args['redeemed_payment'],
-    "#default_value" => $args['redeemed_payment'],
+    "#type" => "hidden" ,
+    "#title" => t("Final Amount to pay.") ,
+    "#value" => $args['redeemed_payment'] ,
+    "#default_value" => $args['redeemed_payment'] ,
   );
 
   $form['EVENT_ID'] = array(
-    "#type" => "hidden",
-    "#title" => t("event id."),
-    "#value" => !empty($args['event_id']) ? $args['event_id'] : NULL,
-    "#default_value" => $args['event_id'],
+    "#type" => "hidden" ,
+    "#title" => t("event id.") ,
+    "#value" => !empty($args['event_id']) ? $args['event_id'] : NULL ,
+    "#default_value" => $args['event_id'] ,
   );
 
   $form['COUPON_ID'] = array(
-    "#type" => "hidden",
-    "#title" => t("Coupon id"),
-    "#value" => !empty($args['coupon_code']) ? $args['coupon_code'] : NULL,
-    "#default_value" => !empty($args['coupon_code']) ? $args['coupon_code'] : NULL,
+    "#type" => "hidden" ,
+    "#title" => t("Coupon id") ,
+    "#value" => !empty($args['coupon_code']) ? $args['coupon_code'] : NULL ,
+    "#default_value" => !empty($args['coupon_code']) ? $args['coupon_code'] : NULL ,
   );
 
   $form['AMOUNT'] = array(
-    "#type" => "hidden",
-    "#title" => t("Amount"),
-    "#value" => $args['total_payment'],
-    "#default_value" => $args['total_payment'],
+    "#type" => "hidden" ,
+    "#title" => t("Amount") ,
+    "#value" => $args['total_payment'] ,
+    "#default_value" => $args['total_payment'] ,
   );
 
   $form['REGISTRATION_ID'] = array(
-    "#type" => "hidden",
-    "#title" => t("Registration id."),
-    "#value" => $args['reg_id'],
-    "#default_value" => $args['reg_id'],
+    "#type" => "hidden" ,
+    "#title" => t("Registration id.") ,
+    "#value" => $args['reg_id'] ,
+    "#default_value" => $args['reg_id'] ,
   );
 
   $form['SUBMIT'] = array(
-    "#type" => "submit",
-    "#value" => t("Submit"),
-    '#attributes' => array("class" => array("hide")),
+    "#type" => "submit" ,
+    "#value" => t("Submit") ,
+    '#attributes' => array("class" => array("hide")) ,
   );
 
   return $form;
@@ -179,7 +179,7 @@ function itg_payment_order_form_response_url() {
   // Prepare data.
   $data = array();
   $param_list = array();
-  module_load_include('php', 'itg_payment', 'lib/encdec_paytm');
+  module_load_include('php' , 'itg_payment' , 'lib/encdec_paytm');
   $paytm_check_sum = "";
   $is_valid_checksum = "FALSE";
 
@@ -210,7 +210,7 @@ function itg_payment_order_form_response_url() {
 function itg_payment_merchant_form() {
   $form = array();
   $form['markup'] = array(
-    '#markup' => t("Merchant Check Out Page"),
+    '#markup' => t("Merchant Check Out Page") ,
   );
   return $form;
 }
@@ -218,7 +218,7 @@ function itg_payment_merchant_form() {
 /**
  * {@inheritdoc}
  */
-function itg_payment_order_form_validate($form, &$form_state) {
+function itg_payment_order_form_validate($form , &$form_state) {
   $session_value_array = drupal_json_decode($_SESSION['event_registration_payment']['event_key']);
   if ($session_value_array['redeemed_payment'] !== $form_state['values']['TXN_AMOUNT']) {
     $error[] = t("Something wrong happen with order amount");
@@ -230,7 +230,7 @@ function itg_payment_order_form_validate($form, &$form_state) {
 
   if (!empty($error)) {
     foreach ($error as $messages) {
-      drupal_set_message($messages, 'error');
+      drupal_set_message($messages , 'error');
     }
     drupal_goto($_SERVER['HTTP_REFERER']);
   }
@@ -243,11 +243,11 @@ function itg_payment_order_form_validate($form, &$form_state) {
  * @param array $form_state
  * @param array $args
  */
-function itg_payment_order_form_submit($form, &$form_state, $args) {
+function itg_payment_order_form_submit($form , &$form_state , $args) {
   global $user;
 
   $db_data = array();
-  module_load_include('php', 'itg_payment', 'lib/encdec_paytm');
+  module_load_include('php' , 'itg_payment' , 'lib/encdec_paytm');
   // Get required form value.
   $order_id = $form_state['values']['ORDER_ID'];
   $customer_id = $form_state['values']['CUST_ID'];
@@ -296,11 +296,11 @@ function itg_payment_order_form_submit($form, &$form_state, $args) {
 
   $merchant_checkout_form = drupal_get_form('itg_payment_merchant_form');
 
-  $check_sum = getChecksumFromArray($param_list, PAYTM_MERCHANT_KEY);
-  echo theme('itg_payment_merchant_form', array(
-    'param_list' => $param_list,
-    'check_sum' => $check_sum,
-    'form_data' => $merchant_checkout_form,
+  $check_sum = getChecksumFromArray($param_list , PAYTM_MERCHANT_KEY);
+  echo theme('itg_payment_merchant_form' , array(
+    'param_list' => $param_list ,
+    'check_sum' => $check_sum ,
+    'form_data' => $merchant_checkout_form ,
   ));
   drupal_exit();
 }
@@ -313,29 +313,28 @@ function itg_payment_initial_info_update($data) {
   try {
     db_insert('itg_payment_order_details')
         ->fields(array(
-          'order_id' => isset($data['ORDER_ID']) ? $data['ORDER_ID'] : "0",
-          'event_id' => !empty($data['EVENT_ID']) ? $data['EVENT_ID'] : "0",
-          'total_amount' => isset($data['TOTAL_AMOUNT']) ? $data['TOTAL_AMOUNT'] : "0",
-          'discount_amount' => isset($data['DESCOUNTED_AMOUNT']) ? $data['DESCOUNTED_AMOUNT'] : "0",
-          'total_order_amount' => isset($data['TXN_AMOUNT']) ? $data['TXN_AMOUNT'] : "0",
-          'coupon_id' => isset($data['COUPON_ID']) ? $data['COUPON_ID'] : "0",
-          'coupon_amount' => isset($data['COUPON_AMOUNT']) ? $data['COUPON_AMOUNT'] : "0",
-          'coupon_detail' => isset($data['COUPON_DETAIL']) ? $data['COUPON_DETAIL'] : "0",
-          'user_type' => isset($data['USER_TYPE']) ? $data['USER_TYPE'] : "0",
-          'registration_id' => isset($data['REGISTRATION_ID']) ? $data['REGISTRATION_ID'] : "0",
-          'user_id' => isset($data['CUST_ID']) ? $data['CUST_ID'] : "0",
-          'payment_gateway' => isset($data['PAYMENT_GATEWAY']) ? $data['PAYMENT_GATEWAY'] : "0",
-          'transaction_id' => isset($data['TRANSACTION_ID']) ? $data['TRANSACTION_ID'] : "0",
-          'order_status' => PAYTM_ORDER_PAYMENT_PENDING_STATUS,
-          'transaction_history' => isset($data['TRANSACTION_HISTORY']) ? $data['TRANSACTION_HISTORY'] : "0",
-          'payment_gateway_status' => isset($data['PAYMENT_GATEWAY_STATUS']) ? $data['PAYMENT_GATEWAY_STATUS'] : "0",
-          'payment_gateway_history' => isset($data['PAYMENT_GATEWAY_HISTORY']) ? $data['PAYMENT_GATEWAY_HISTORY'] : "0",
-          'order_created_on' => REQUEST_TIME,
+          'order_id' => isset($data['ORDER_ID']) ? $data['ORDER_ID'] : "0" ,
+          'event_id' => !empty($data['EVENT_ID']) ? $data['EVENT_ID'] : "0" ,
+          'total_amount' => isset($data['TOTAL_AMOUNT']) ? $data['TOTAL_AMOUNT'] : "0" ,
+          'discount_amount' => isset($data['DESCOUNTED_AMOUNT']) ? $data['DESCOUNTED_AMOUNT'] : "0" ,
+          'total_order_amount' => isset($data['TXN_AMOUNT']) ? $data['TXN_AMOUNT'] : "0" ,
+          'coupon_id' => isset($data['COUPON_ID']) ? $data['COUPON_ID'] : "0" ,
+          'coupon_amount' => isset($data['COUPON_AMOUNT']) ? $data['COUPON_AMOUNT'] : "0" ,
+          'coupon_detail' => isset($data['COUPON_DETAIL']) ? $data['COUPON_DETAIL'] : "0" ,
+          'user_type' => isset($data['USER_TYPE']) ? $data['USER_TYPE'] : "0" ,
+          'registration_id' => isset($data['REGISTRATION_ID']) ? $data['REGISTRATION_ID'] : "0" ,
+          'user_id' => isset($data['CUST_ID']) ? $data['CUST_ID'] : "0" ,
+          'payment_gateway' => isset($data['PAYMENT_GATEWAY']) ? $data['PAYMENT_GATEWAY'] : "0" ,
+          'transaction_id' => isset($data['TRANSACTION_ID']) ? $data['TRANSACTION_ID'] : "0" ,
+          'order_status' => PAYTM_ORDER_PAYMENT_PENDING_STATUS ,
+          'transaction_history' => isset($data['TRANSACTION_HISTORY']) ? $data['TRANSACTION_HISTORY'] : "0" ,
+          'payment_gateway_status' => isset($data['PAYMENT_GATEWAY_STATUS']) ? $data['PAYMENT_GATEWAY_STATUS'] : "0" ,
+          'payment_gateway_history' => isset($data['PAYMENT_GATEWAY_HISTORY']) ? $data['PAYMENT_GATEWAY_HISTORY'] : "0" ,
+          'order_created_on' => REQUEST_TIME ,
         ))->execute();
   }
   catch (Exception $ex) {
-    die($ex->getMessage());
-    drupal_set_message($ex->getMessage(), 'error');
+    drupal_set_message($ex->getMessage() , 'error');
   }
 }
 
@@ -349,14 +348,14 @@ function itg_payment_response_info_update($data) {
     db_merge('itg_payment_order_details')
         ->key(array("order_id" => $data['order_id']))
         ->fields(array(
-          'transaction_history' => $data['transaction_history'],
-          'transaction_id' => $data['transaction_id'],
-          'payment_gateway_status' => $data['transaction_status'],
-          'order_status' => $data['order_status'],
+          'transaction_history' => $data['transaction_history'] ,
+          'transaction_id' => $data['transaction_id'] ,
+          'payment_gateway_status' => $data['transaction_status'] ,
+          'order_status' => $data['order_status'] ,
         ))->execute();
   }
   catch (Exception $ex) {
-    drupal_set_message($ex->getMessage(), 'error');
+    drupal_set_message($ex->getMessage() , 'error');
   }
   unset($_SESSION['event_registration_payment']);
 }
@@ -373,24 +372,25 @@ function itg_payment_checkout() {
     case 'paytm':
       if (isset($_SESSION['event_registration_payment']['event_key'])) {
         $args = itg_payment_decode_data($_SESSION['event_registration_payment']['event_key']);
-        return drupal_render(drupal_get_form('itg_payment_order_form', $args));
+        return drupal_render(drupal_get_form('itg_payment_order_form' , $args));
       }
       //Prevent direct access the checkout url, if user is not procced the payment button.
-      drupal_set_message(t("Something went wrong"), 'error');
+      drupal_set_message(t("Something went wrong") , 'error');
       drupal_goto('<front>');
       break;
 
     case 'billdesk':
-      return drupal_render(drupal_get_form('itg_payment_billdesk_order_form'));
+      $args = itg_payment_decode_data($_SESSION['event_registration_payment']['event_key']);
+      return drupal_render(drupal_get_form('itg_payment_billdesk_order_form' , $args));
       break;
 
     case 'icici':
-      //if (isset($_SESSION['event_registration_payment']['event_key'])) {
-      //$args = itg_payment_decode_data($_SESSION['event_registration_payment']['event_key']);
-      return drupal_render(drupal_get_form('itg_icici_order_form', $args));
-      //}
+      if (isset($_SESSION['event_registration_payment']['event_key'])) {
+      $args = itg_payment_decode_data($_SESSION['event_registration_payment']['event_key']);
+      return drupal_render(drupal_get_form('itg_icici_order_form' , $args));
+      }
       //Prevent direct access the checkout url, if user is not procced the payment button.
-      drupal_set_message(t("Something went wrong"), 'error');
+      drupal_set_message(t("Something went wrong") , 'error');
       drupal_goto('<front>');
       break;
 
@@ -424,7 +424,7 @@ function itg_payment_decode_data($array) {
  * @return array
  */
 function itg_payment_get_coupon_details_json($coupon_code) {
-  module_load_include('inc', 'itg_event_registration', 'includes/itg_event_coupons');
+  module_load_include('inc' , 'itg_event_registration' , 'includes/itg_event_coupons');
   if (get_coupondetail_by_coupon_code($coupon_code) != NULL) {
     return drupal_json_encode(node_load(get_coupondetail_by_coupon_code($coupon_code)));
   }
@@ -433,109 +433,116 @@ function itg_payment_get_coupon_details_json($coupon_code) {
 /**
  * Ask for Billdesk redirect form.
  */
-function itg_payment_billdesk_order_form($form, &$form_state) {
+function itg_payment_billdesk_order_form($form , &$form_state , $args) {
   global $base_url;
-  $amount = 2.00;
-  $amount = number_format($amount, 2, '.', '');
+  global $user;
+  $amount = number_format($args['redeemed_payment'] , 2 , '.' , '');
+  $event_id = $args['event_id'];
+  $reg_id = $args['reg_id'];
   // Build the data array that will be translated into hidden form values.
   $merchant_id = ITG_BILLDESK_MERCHANT_ID;
   $checksumkey = ITG_BILLDESK_CHECKSUM;
   $security_id = ITG_BILLDESK_SECURITY_KEY;
   $bdposturl = ITG_BILLDESK_POST_URL;
-  $order_id = "ODR-" . time() . rand(0, 100);
-  $value = $merchant_id . '|' . $order_id .'|NA|' . $amount . '|NA|NA|NA|INR|NA|R|indiatoday|NA|NA|F|NA|NA|NA|NA|NA|NA|NA|' . 'http://qa.indiatodayonline.in/itg-payment/billdesk-payment-success';
+  $order_id = "ODR-" . time() . rand(0 , 1000);
+  $value = $merchant_id . '|' . $order_id . '|NA|' . $amount . '|NA|NA|NA|INR|NA|R|indiatoday|NA|NA|F|NA|NA|' . $reg_id . '|' . $event_id . '|NA|NA|NA|' . 'http://qa.indiatodayonline.in/itg-payment/billdesk-payment-success';
   // Generate Checksum.
   $common_string = $security_id;
 
   $string_new = $value . "|" . $common_string;
   $checksum = crc32($string_new);
+  $_SESSION['billdesk_checksum'] = $checksum;
   $datawithchecksumvalue = $value . "|" . $checksum;
   $msg = $datawithchecksumvalue;
 
   $form['msg'] = array(
-    '#type' => 'hidden',
-    '#value' => $msg,
-  );
-  $form['#action'] = $bdposturl;
-  $form['submit'] = array(
-    "#type" => 'submit',
-    "#value" => 'Continue Payment',
+    '#type' => 'hidden' ,
+    '#value' => $msg ,
   );
 
+  $form['#action'] = $bdposturl;
+
+  $form['submit'] = array(
+    "#type" => 'submit' ,
+    "#value" => 'Continue Payment' ,
+  );
+  $data = array();
+  $data['ORDER_ID'] = $order_id;
+  $data['TOTAL_AMOUNT'] = $args['total_payment'];
+
+  $db_data["COUPON_AMOUNT"] = 0;
+  $db_data["COUPON_ID"] = "";
+  $coupon_code = !empty($args['coupon_code']) ? $args['coupon_code'] : NULL;
+  $total_amount = $args['total_payment'];
+  $final_amount = $args['redeemed_payment'];
+  $registration_id = $args['reg_id'];
+  // handel coupon details for database.
+  if (!empty($coupon_code)) {
+    $db_data["COUPON_ID"] = $coupon_code;
+    $db_data["COUPON_AMOUNT"] = floatval($total_amount - $final_amount);
+    $db_data["COUPON_DETAIL"] = itg_payment_get_coupon_details_json($coupon_code);
+  }
+
+  $db_data['CUST_ID'] = "CUS-" . time() . rand(0 , 1000);
+  $db_data["USER_TYPE"] = ($user->uid) ? "authenticated" : "guest";
+  $db_data["REGISTRATION_ID"] = $registration_id;
+  $db_data["PAYMENT_GATEWAY"] = BILLDESK_PAYMENT_GATEWAY_NAME;
+  $db_data["PAYMENT_GATEWAY_STATUS"] = BILLDESK_TRANSACTION_PENDING_STATUS;
+  $db_data["TRANSACTION_ID"] = BILLDESK_TRANSACTION_PENDING_STATUS;
+  $db_data["ORDER_STATUS"] = BILLDESK_ORDER_PAYMENT_PENDING_STATUS;
+  $db_data["TRANSACTION_HISTORY"] = serialize(BILLDESK_GATEWAY_HISTORY);
+  $db_data["PAYMENT_GATEWAY_HISTORY"] = serialize(BILLDESK_GATEWAY_HISTORY);
+  $db_data["TOTAL_AMOUNT"] = floatval($total_amount);
+  $db_data["DESCOUNTED_AMOUNT"] = !empty($db_data["COUPON_AMOUNT"]) ? floatval($db_data["COUPON_AMOUNT"]) : 0;
+  $db_data["EVENT_ID"] = $event_id;
+  $db_data["TXN_AMOUNT"] = floatval($final_amount);
+  itg_payment_initial_info_update($db_data);
   return $form;
 }
 
 function itg_billdesk_payment_success_page() {
-  watchdog('billdeskpayment', '<pre>' . print_r($_POST, true) . '</pre>');
   if (empty($_POST)) {
     return t("'There was a problem with your payment'");
   }
   if (isset($_POST['msg']) && $_POST['msg'] != '') {
-    $values = explode('|', $_POST['msg']);
-    watchdog('billdeskpayment', '<pre>' . print_r($_POST['msg'], true) . '</pre>');
-
-    // Payment Failed transactions for BillDesk.
-    if (($values['24'] == 'Canceled By User') || ($values[14] == '0399') || ($values[14] == 'NA') || ($values[14] == '0002') || ($values[14] == '0001')) {
-      if ($values[14] == '0399') {
-        $cancelled = 'Invalid Authentication at Bank';
+    $data['order_id'] = $values[1];
+    $data['transaction_id'] = $values[1];
+    $data['transaction_status'] = 1;
+    $values = explode('|' , $_POST['msg']);
+    if (end($values) == $_SESSION['billdesk_checksum']) {
+      // Payment Failed transactions for BillDesk.
+      if (($values['24'] == 'Canceled By User') || ($values[14] == '0399') || ($values[14] == 'NA') || ($values[14] == '0002') || ($values[14] == '0001')) {
+        if ($values[14] == '0399') {
+          $data['order_status'] = 0;
+          $cancelled = 'Invalid Authentication at Bank';
+        }
+        if ($values[14] == 'NA') {
+          $data['order_status'] = 0;
+          $cancelled = 'Invalid Input in the Request Message ';
+        }
+        if ($values[14] == '0002') {
+          $data['order_status'] = 0;
+          $cancelled = 'BillDesk is waiting for Response from Bank';
+        }
+        if ($values[14] == '0001') {
+          $data['order_status'] = 0;
+          $cancelled = 'Error at BillDesk ';
+        }
+        drupal_set_message(t('Transaction denied due to @error' , array('@error' => $cancelled)) , 'error');
+        drupal_goto('<front>');
       }
-      if ($values[14] == 'NA') {
-        $cancelled = 'Invalid Input in the Request Message ';
+      // Payment Success transactions for BillDesk.
+      elseif (($values['24'] == 'Completed successfully.') || ($values['24'] == 'PGS10001-Success') || ($values[14] == '0300')) {
+        $data['order_status'] = 1;
+        // Update order after response.
       }
-      if ($values[14] == '0002') {
-        $cancelled = 'BillDesk is waiting for Response from Bank';
-      }
-      if ($values[14] == '0001') {
-        $cancelled = 'Error at BillDesk ';
-      }
-      drupal_set_message(t('Transaction denied') . $cancelled, 'error');
-      drupal_goto('<front>');
+      $data['transaction_history'] = serialize($values);
     }
-    // Payment Success transactions for BillDesk.
-    elseif (($values['24'] == 'Completed successfully.') || ($values['24'] == 'PGS10001-Success') || ($values[14] == '0300')) {
-      // payment success code needs to put here for database update.
-      drupal_set_message(t('Transaction successfully Completed'), 'success');
-    }
+    itg_payment_response_info_update($data);
+    return drupal_set_message("Your payment is complete");
   }
 }
 
 function itg_payment_response_fail() {
   return theme("itg_payment_response_fail");
-}
-
-function itg_icici_payment_success_page() {
-  if (empty($_POST)) {
-    return t("'There was a problem with your payment'");
-  }
-  if (isset($_POST['msg']) && $_POST['msg'] != '') {
-    $values = explode('|', $_POST['msg']);
-    watchdog('billdeskpayment', '<pre>' . print_r($_POST['msg'], true) . '</pre>');
-
-    // Payment Failed transactions for BillDesk.
-    if (($values['24'] == 'Canceled By User') || ($values[14] == '0399') || ($values[14] == 'NA') || ($values[14] == '0002') || ($values[14] == '0001')) {
-      if ($values[14] == '0399') {
-        $cancelled = 'Invalid Authentication at Bank';
-      }
-      if ($values[14] == 'NA') {
-        $cancelled = 'Invalid Input in the Request Message ';
-      }
-      if ($values[14] == '0002') {
-        $cancelled = 'BillDesk is waiting for Response from Bank';
-      }
-      if ($values[14] == '0001') {
-        $cancelled = 'Error at BillDesk ';
-      }
-      drupal_set_message(t('Transaction denied') . $cancelled, 'error');
-      drupal_goto('<front>');
-    }
-    // Payment Success transactions for BillDesk.
-    elseif (($values['24'] == 'Completed successfully.') || ($values['24'] == 'PGS10001-Success') || ($values[14] == '0300')) {
-      // payment success code needs to put here for database update.
-      drupal_set_message(t('Transaction successfully Completed'), 'success');
-    }
-  }
-}
-
-function itg_icici_payment_fail_page() {
-  
 }
