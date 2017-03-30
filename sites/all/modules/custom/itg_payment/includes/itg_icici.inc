@@ -4,14 +4,14 @@
 
 global $base_url;
 
-define('ICICI_TXNTYPE', 'sale');
-define('ICICI_CURRENCY', 'INR');
-define('ICICI_MODE', 'payonly');
-define('ICICI_STORENAME', '3344000184'); //3344000184
-define('ICICI_SHAREDSECRET', 'asdf1234');
-define('ICICI_EN', 'English');
-define('ICICI_ACTION_URL', 'https://test.ipg-online.com/connect/gateway/processing');
-define('ICICI_FORM_ID', 'frm1');
+define('ICICI_TXNTYPE' , 'sale');
+define('ICICI_CURRENCY' , 'INR');
+define('ICICI_MODE' , 'payonly');
+define('ICICI_STORENAME' , '3344000184'); //3344000184
+define('ICICI_SHAREDSECRET' , 'asdf1234');
+define('ICICI_EN' , 'English');
+define('ICICI_ACTION_URL' , 'https://test.ipg-online.com/connect/gateway/processing');
+define('ICICI_FORM_ID' , 'frm1');
 
 date_default_timezone_set('Asia/Kolkata');
 $_SESSION['dateTime'] = date('Y:m:d-H:i:s');
@@ -24,58 +24,58 @@ function itg_payment_icici($db_data) {
  * Form for order process.
  * @return type
  */
-function itg_icici_order_form($form, &$form_state, $args) {
+function itg_icici_order_form($form , &$form_state , $args) {
 
   $form['ORDER_ID'] = array(
-    "#type" => "hidden",
-    "#title" => t("Order Id"),
-    "#value" => rand(),
+    "#type" => "hidden" ,
+    "#title" => t("Order Id") ,
+    "#value" => rand() ,
   );
   $form['TXNDATETIME'] = array(
-    "#type" => "hidden",
-    "#title" => t("Txn date"),
-    "#value" => getDateTime(),
+    "#type" => "hidden" ,
+    "#title" => t("Txn date") ,
+    "#value" => getDateTime() ,
   );
   $form['TXN_AMOUNT'] = array(
-    "#type" => "hidden",
-    "#title" => t("Final Amount to pay."),
-//    "#value" => $args['redeemed_payment'],
-//    "#default_value" => $args['redeemed_payment'],
-    "#default_value" => 1.00,
+    "#type" => "hidden" ,
+    "#title" => t("Final Amount to pay.") ,
+    "#value" => $args['redeemed_payment'] ,
+    "#default_value" => $args['redeemed_payment'] ,
+//    "#default_value" => 1.00 ,
   );
   $form['EVENT_ID'] = array(
-    "#type" => "hidden",
-    "#title" => t("event id."),
-//    "#value" => !empty($args['event_id']) ? $args['event_id'] : NULL,
-//    "#default_value" => $args['event_id'],
-    "#default_value" => 123,
+    "#type" => "hidden" ,
+    "#title" => t("event id.") ,
+    "#value" => !empty($args['event_id']) ? $args['event_id'] : NULL ,
+    "#default_value" => $args['event_id'] ,
+//    "#default_value" => 123 ,
   );
   $form['AMOUNT'] = array(
-    "#type" => "hidden",
-    "#title" => t("Amount"),
-//    "#value" => $args['total_payment'],
-//    "#default_value" => $args['total_payment'],
-    "#default_value" => 1.00,
+    "#type" => "hidden" ,
+    "#title" => t("Amount") ,
+    "#value" => $args['total_payment'] ,
+    "#default_value" => $args['total_payment'] ,
+//    "#default_value" => 1.00 ,
   );
   $form['REGISTRATION_ID'] = array(
-    "#type" => "hidden",
-    "#title" => t("Registration id."),
-//    "#value" => $args['reg_id'],
-//    "#default_value" => $args['reg_id'],
-    "#default_value" => 'abc',
+    "#type" => "hidden" ,
+    "#title" => t("Registration id.") ,
+    "#value" => $args['reg_id'] ,
+    "#default_value" => $args['reg_id'] ,
+//    "#default_value" => 'abc' ,
   );
   $form['COUPON_ID'] = array(
-    "#type" => "hidden",
-    "#title" => t("Coupon id"),
-//    "#value" => !empty($args['coupon_code']) ? $args['coupon_code'] : NULL,
-//    "#default_value" => !empty($args['coupon_code']) ? $args['coupon_code'] : NULL,
-    "#default_value" => 'abb',
+    "#type" => "hidden" ,
+    "#title" => t("Coupon id") ,
+    "#value" => !empty($args['coupon_code']) ? $args['coupon_code'] : NULL ,
+    "#default_value" => !empty($args['coupon_code']) ? $args['coupon_code'] : NULL ,
+//    "#default_value" => 'abb' ,
   );
 
   $form['SUBMIT'] = array(
-    "#type" => "submit",
-    "#value" => t("Submit"),
-      //'#attributes' => array("class" => array("hide")),
+    "#type" => "submit" ,
+    "#value" => t("Submit") ,
+    '#attributes' => array("class" => array("hide")) ,
   );
 
   return $form;
@@ -84,43 +84,43 @@ function itg_icici_order_form($form, &$form_state, $args) {
 /**
  * {@inheritdoc}
  */
-function itg_icici_order_form_validate($form, &$form_state) {
-//  $session_value_array = drupal_json_decode($_SESSION['event_registration_payment']['event_key']);
-//  if ($session_value_array['redeemed_payment'] != $form_state['values']['TXN_AMOUNT']) {
-//    $error[] = t("Something wrong happen with order amount");
-//  }
-//
-//  if ($session_value_array['event_id'] != $form_state['values']['EVENT_ID']) {
-//    $error[] = t("Something wrong happen with event id");
-//  }
-//
-//  if ($session_value_array['total_payment'] != $form_state['values']['AMOUNT']) {
-//    $error[] = t("Something wrong happen with total amount");
-//  }
-//
-//  if ($session_value_array['reg_id'] != $form_state['values']['REGISTRATION_ID']) {
-//    $error[] = t("Something wrong happen with reg_id");
-//  }
-//
-//  if (!empty($form_state['values']['COUPON_ID']) && $session_value_array['coupon_code'] != $form_state['values']['COUPON_ID']) {
-//    $error[] = t("Something wrong happen with coupon code");
-//  }
-//
-//  if (!empty($error)) {
-//    foreach ($error as $messages) {
-//      drupal_set_message($messages, 'error');
-//    }
-//    drupal_goto($_SERVER['HTTP_REFERER']);
-//  }
+function itg_icici_order_form_validate($form , &$form_state) {
+  $session_value_array = drupal_json_decode($_SESSION['event_registration_payment']['event_key']);
+  if ($session_value_array['redeemed_payment'] != $form_state['values']['TXN_AMOUNT']) {
+    $error[] = t("Something wrong happen with order amount");
+  }
+
+  if ($session_value_array['event_id'] != $form_state['values']['EVENT_ID']) {
+    $error[] = t("Something wrong happen with event id");
+  }
+
+  if ($session_value_array['total_payment'] != $form_state['values']['AMOUNT']) {
+    $error[] = t("Something wrong happen with total amount");
+  }
+
+  if ($session_value_array['reg_id'] != $form_state['values']['REGISTRATION_ID']) {
+    $error[] = t("Something wrong happen with reg_id");
+  }
+
+  if (!empty($form_state['values']['COUPON_ID']) && $session_value_array['coupon_code'] != $form_state['values']['COUPON_ID']) {
+    $error[] = t("Something wrong happen with coupon code");
+  }
+
+  if (!empty($error)) {
+    foreach ($error as $messages) {
+      drupal_set_message($messages , 'error');
+    }
+    drupal_goto($_SERVER['HTTP_REFERER']);
+  }
 }
 
 function getDateTime() {  // Here we are returning the current date time that will be further used to generate the salted hashed.
   //global $dateTime;
- // return $dateTime;
+  // return $dateTime;
   return $_SESSION['dateTime'];
 }
 
-function createHash($chargetotal, $Currency, $storeId, $sharedSecret) {
+function createHash($chargetotal , $Currency , $storeId , $sharedSecret) {
   // Please change the store Id to your individual Store ID
   // NOTE: Please DO NOT hardcode the secret in that script. For example read it from a database.
 
@@ -138,7 +138,7 @@ function createHash($chargetotal, $Currency, $storeId, $sharedSecret) {
  * @param array $form_state
  * @param array $args
  */
-function itg_icici_order_form_submit($form, &$form_state, $args) {
+function itg_icici_order_form_submit($form , &$form_state , $args) {
   global $user;
   global $base_url;
   //module_load_include('php', 'itg_payment', 'lib/icici/ipg-util');
@@ -183,21 +183,7 @@ function itg_icici_order_form_submit($form, &$form_state, $args) {
 
   $CT = 1;
 
-  $hash = createHash($CT, "356", '3344000184', 'asdf1234');
-
-  /* $pay_data['timezone'] = array('size' => '', 'val' => 'IST');
-    $pay_data['authenticateTransaction'] = array('size' => '', 'val' => 'true');
-    $pay_data['txntype'] = array('size' => 50, 'val' => ICICI_TXNTYPE);
-    $pay_data['txndatetime'] = array('size' => 50, 'val' => $form_state['values']['TXNDATETIME']);
-    $pay_data['hash'] = array('size' => 50, 'val' => $hash);
-    $pay_data['currency'] = array('size' => 50, 'val' => ICICI_CURRENCY);
-    $pay_data['mode'] = array('size' => 50, 'val' => ICICI_MODE);
-    $pay_data['storename'] = array('size' => 50, 'val' => ICICI_STORENAME);
-    $pay_data['chargetotal'] = array('size' => 50, 'val' => $CT);
-    $pay_data['sharedsecret'] = array('size' => 50, 'val' => ICICI_SHAREDSECRET);
-    $pay_data['responseSuccessURL'] = array('size' => '', 'val' => $responseSuccessURL);
-    $pay_data['responseFailURL'] = array('size' => '', 'val' => $responseFailURL);
-    $pay_data['hash_algorithm'] = array('size' => '', 'val' => 'SHA1'); */
+  $hash = createHash($CT , "356" , '3344000184' , 'asdf1234');
 
   $pay_data['timezone'] = 'IST';
   $pay_data['authenticateTransaction'] = 'true';
@@ -213,11 +199,19 @@ function itg_icici_order_form_submit($form, &$form_state, $args) {
   $pay_data['responseFailURL'] = $responseFailURL;
   $pay_data['hash_algorithm'] = 'SHA1';
 
-  print theme('itg_icici_merchant_form', array(
-    'param_list' => $pay_data,
-    'form_id' => ICICI_FORM_ID,
-    'form_action' => ICICI_ACTION_URL,
+  print theme('itg_icici_merchant_form' , array(
+    'param_list' => $pay_data ,
+    'form_id' => ICICI_FORM_ID ,
+    'form_action' => ICICI_ACTION_URL ,
   ));
 
   drupal_exit();
+}
+
+function itg_icici_payment_success_page() {
+  return t("Payment successfull");
+}
+
+function itg_icici_payment_fail_page() {
+  return t("Payment successfull");
 }

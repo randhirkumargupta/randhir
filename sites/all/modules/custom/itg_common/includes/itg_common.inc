@@ -615,3 +615,16 @@ function itg_common_custompath_insert_val($pathdata) {
     }
     return $pathdata;
 }
+
+/**
+ * Helper function to show fb share count.
+ * @param int $id
+ */
+function itg_get_fb_share($id, $type) {
+  $result = db_select('itg_lrp_loyalty_points', 'n')
+    ->fields('n', array('id'))
+    ->condition('n.loyalty_type', $type)
+    ->condition('n.node_id', $id)
+    ->execute();
+  return $result->rowCount();
+}

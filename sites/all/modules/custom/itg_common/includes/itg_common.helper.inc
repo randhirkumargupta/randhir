@@ -112,7 +112,7 @@ define('VIDEO_BITRATE_URL', 'http://indiatoday-vh.akamaihd.net/i');
 
 define('NEWSLETTER_EDUCATION_TID', variable_get('newsletter_education_tid'));
 
-define('PARENT_SSO', 'itgcms.drupallocal.dev');
+define('PARENT_SSO', 'uat-sso.indiatodayonline.in');
 
 define('FRONT_URL', 'http://uat-it.indiatodayonline.in');
 define('BACKEND_URL', 'http://uat-it-backend.indiatodayonline.in');
