@@ -36,13 +36,7 @@ function itg_widget_init() {
   $settings['base_url'] = $base_url;
   drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));
-  // set cookie for recommended chunk.
-  if ($user->uid == 0 && !isset($_COOKIE['recomended_for_you'])) {
-    setcookie('recomended_for_you', uniqid(), time() + (86400 * 30), "/"); // 1 day
-  }
-  elseif (isset($_COOKIE['recomended_for_you']) && $user->uid) {
-    unset($_COOKIE['recomended_for_you']);
-  }
+  
 }
 
 /**
