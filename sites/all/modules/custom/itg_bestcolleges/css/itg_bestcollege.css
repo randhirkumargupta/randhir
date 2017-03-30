@@ -582,11 +582,16 @@
  .list-group-item .thumbnail { height: 135px;
     position: relative;}
 .list-group-item .thumbnail img {
-     max-height: 100px;
-     min-height: 100px;
+     max-height: 80px;
+     min-height: 80px;
      border-left:1px solid #ccc; padding-left: 10px; 
     
  }
+ .list-group-item .thumbnail .list-group-item-text a{ font-size: 17px;padding-bottom: 5px;margin-bottom: 0px;}
+ .grid-group-item .thumbnail .list-group-item-text a{ font-size: 15px;padding-bottom: 5px;}
+ .list-group-item .cl a,.list-group-item .cl1 a{font-size: 15px;} 
+ .grid-group-item .cl a,.grid-group-item .cl1 a{font-size: 14px;}
+ .list-group-item .cl1 a,.grid-group-item .cl1 a{ font-weight: 600;}
  .slider_besrCollage img {
      width: 100%;
      min-height: 450px;
@@ -664,28 +669,44 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 .rightAssociateSponsor{float: left; width:335px;; box-sizing: border-box; }
 .assSponsorTxt{float: left; font:normal 12px/14px Arial, Helvetica, sans-serif; color:#525252; margin:11px 0px 0 15px}
 .assSponsorImg1{float: left; margin:0px 0 0 30px;}
-@media screen and (min-width: 768px) and (max-width:1000px) {
+
+/* ranking section css */
+
+.ranking-section .wishranking,.ranking-section .prvlink{ width:50%; float:left;}
+.ranking-section .wishranking .midcontitles,.ranking-section .prvlink .prvarrtxt{ font-weight:bold; padding-top:10px;}
+.ranking-section ul li{ list-style:none; padding:3px 0;}
+@media screen and (max-width: 1024px){
+    .sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li.watch-right-now-list .pic{ width: 100px;}
+}
+
+@media screen and (min-width: 768px) and (max-width:1024px) {
 .sponsorContainer{ width:100%}
 .leftPresentingSponsor{ width:250px}
 .rightAssociateSponsor{ width:250px}
+.detail_box .stream .control-label label {position: static; top: 0;}
+.grid-group-item .thumbnail{height: 395px;} 
 }
 @media screen and (min-width: 481px) and (max-width:767px) {
+.grid-group-item .thumbnail{ height: auto;}
 .sponsorContainer{ width:100%; height: 107px;}
 .leftPresentingSponsor{ width:100%; height:48px}
 .leftPresentingSponsor:after{ display: none}
 .rightAssociateSponsor{ width:100%; border-top:1px solid #000}
 .assSponsorImg1{ height:48px}
+.detail_box .stream .control-label label{position: static;top: 0;}
 }
 @media screen and (min-width: 320px) and (max-width:480px) {
 .sponsorContainer{ width:100%; height: 107px; text-align: center; border:0px; overflow: inherit}
 .leftFirstLogo{ position: relative; width:100%}
 .leftPresentingSponsor{ width:95%; height:48px; margin-left:0px; position: absolute;  left:50%; top:6px; margin:0 0 0 -125px; height:48px}
 .leftPresentingSponsor:after{ display: none}
+.detail_box .stream .control-label label{position: static;top: 0;}
 .rightAssociateSponsor{ width:95%;position: absolute;  left:50%; top:55px; margin:0 0 0 -125px; height:48px;}
 .assSponsorImg1{ height:48px}
 .mobileCenterSec{ float: left; width:100%; position: relative; }
 .mobileCenterSec + .mobileCenterSec{border-top:1px solid #000;}
 .mobileCenterSec + .mobileCenterSec:after{ position: absolute; left:0; bottom:-52px; height:1px; width:100%; content:""; background:#000}
+.grid-group-item .thumbnail{ height: auto;}
 }
 
 /* Media Query for same */
@@ -716,4 +737,5 @@ text-align: left;}
 .list-group-item .thumbnail-img{ display: none;}
 .slider_outer1 h1{ width:100%;}
 .slider_outer1 span.rank{ margin-bottom:10px;}
+.grid-group-item .thumbnail{ height: auto;}
 }

@@ -83,18 +83,22 @@ if(isset($related_story_value['relatedstory_count']) && $related_story_value['re
 
 
 <!-- ranking-section start-->
-<div class="col-sm-12 col-xs-12 view1">
-<div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("Ranking Section ") ; ?></div>
-</div>
-<?php
+<?php 
     $page_data = bestCollegesrank();
+    if(isset($page_data['flag-rank'])){
+?>
+<div class="col-sm-12 col-xs-12 view1">
+<div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("Ranking Section ") ; ?></div>        
+</div>
+<?php 
+    //$page_data = bestCollegesrank();
     $str_fulldata = "";
     $data_parameterwise_rank = $page_data['parameterwise-rank'];
     $data_previous_rank = $page_data['previous-rank'];
-
-
+    
+    
     // parameterwise data string building
-
+  
     $str_parameterwise_rank = "<div class='wishranking'>
         <div class='midcontitles'>PARAMETER-WISE RANKING <span style='float:right;'></span></div>
         <div class='midmorestories'>
@@ -106,30 +110,79 @@ if(isset($related_story_value['relatedstory_count']) && $related_story_value['re
              <li>Placement: ".$data_parameterwise_rank[0]['placement']."</li>
              <li>Perceptual Rank: ".$data_parameterwise_rank[0]['preceptual_rank']."</li>
              <li>Factual Rank: ".$data_parameterwise_rank[0]['factual_rank']."</li>
-
+                    
           </ul>
-        <div class='clear'></div>
+        <div class='clear'></div>   
         </div>
       </div>";
-
+    
     // yearwisewise data string building
-
+    
     $str_yearwise_rank= "<div class='prvlink'>
-    <div class='prvarrtxt'>PREVIOUS RANKING:</div>
+	<div class='prvarrtxt'>PREVIOUS RANKING:</div>
     <div class='prvyrs'>
-     <ul>";
-
-    foreach ($data_previous_rank as $key => $value){
+	 <ul>";
+	
+    foreach ($data_previous_rank as $key => $value){ 
         $year = $value['year'];
         $rank = $value['rank'];
         $str_yearwise_rank .= "<li>".$year." - <span>".$rank."</span></li>";
     }
     $str_yearwise_rank .= "</ul></div></div>";
-
+	
     $str_fulldata = "<div class='col-sm-12 ranking-section'><div class='ranking-section'>".$str_parameterwise_rank." ".$str_yearwise_rank."</div></div>";
     print $str_fulldata;
+    }
 ?>
 <!-- ranking-section end-->
+
+<!-- Related image start-->
+<?php 
+$related_image_value = bestCollegesRelatedImgList();
+//echo "<pre>on tpl"; print_r($data_value); echo "</pre>";
+//echo $data_value['relatedimg_count'];
+
+if(isset($related_image_value['relatedimg_count']) && $related_image_value['relatedimg_count'] > 0){
+    unset($related_image_value['relatedimg_count']);   
+
+
+?>
+
+<div class="col-sm-12 col-xs-12 view1 related-img-head">
+<div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("MORE IMAGES ") ; ?></div>
+
+
+        
+</div>
+<div class="col-sm-12 related-story-list related-img-body">
+    <div class="row">
+    <div class="clearfix">
+    <?php 
+     foreach ($related_image_value as $key => $value){ 
+         //$img_ob = file_load($value['field_story_small_image_fid']);
+         
+         $file = file_load($value['field_story_large_image_fid']);
+                
+         ?>
+        
+                <div class="midstoryleft">
+                    <a href="<?php print $base_url; ?>/node/<?php print $value['nid']; ?>" target="_blank"><img alt="" title="" src="<?php print file_create_url($file->uri); ?>" width="125" align="left" height="93"></a>
+                    <div class="midstorydetail">
+                      <div class="midstoryintro"><a href="<?php print $base_url; ?>/node/<?php print $value['nid']; ?>" target="_blank"><?php print $value['title']; ?></a></div></div>
+                </div>
+    <?php
+         
+     }
+    ?> </div>
+        </div>
+
+</div>    
+
+<?php 
+} 
+?>
+
+<!-- Related image end-->
 
 
 
@@ -174,7 +227,7 @@ if(isset($related_story_value['relatedstory_count']) && $related_story_value['re
 
 
 <!-- code for like dislike -->
-
+<div class="col-sm-12 col-xs-12 col-md-12">
   <?php
       $get_val = '0' . arg(1);
       $get_val = '844705';
@@ -213,7 +266,7 @@ if(isset($related_story_value['relatedstory_count']) && $related_story_value['re
     </div>
     <!--- End Like Dis-Like -->
  <!-- code for like dislike -->
-
+</div>
 <!-- Grid View End-->
 
     <div class="vukkul-comment">
