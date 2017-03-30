@@ -891,21 +891,6 @@ function itg_category_manager_taxonomy_term_insert($term) {
  *   An object of type term.
  */
 function itg_category_manager_taxonomy_term_presave($term) {
-//  p($term);
-//  if ($term->vid == 4) {
-//    
-//    $parents = taxonomy_get_parents_all($term->tid);
-//    p($parents);
-//    if (isset($parents) && !empty($parents)) {
-//      foreach ($parents as $key => $val) {
-//        $section_hierarchy[] = $val->name;
-//      }
-//    }
-//    $set_hierarchy = array_reverse($section_hierarchy);
-//    $pathdata = strtolower(implode("/", $set_hierarchy));
-//    $newpath = itg_category_manager_custom_path($pathdata);
-//    $term->path = array('alias' => $newpath, 'pathauto' => FALSE);
-//  }
   if (!empty($term->tid) && $term->tid !== NULL && $term->path['pathauto'] == 0) {
     global $user;
     $term->path['alias'] = rtrim($term->path['alias'], '/');
