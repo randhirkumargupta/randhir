@@ -883,11 +883,13 @@ function itg_category_manager_taxonomy_term_presave($term) {
     drupal_write_record('itg_sef_url', $data);
 
 // Update modified date on itg_category_manager table
-    $status = isset($term->term_state) ? $term->term_state : 1;
-    db_update('itg_category_manager')
-        ->fields(array('changed' => time(), 'status' => $status))
-        ->condition('tid', $term->tid)
-        ->execute();
+    if ($term->vid == CATEGORY_MANAGMENT) {
+      $status = isset($term->term_state) ? $term->term_state : 1;
+      db_update('itg_category_manager')
+          ->fields(array('changed' => time(), 'status' => $status))
+          ->condition('tid', $term->tid)
+          ->execute();
+    }
   }
 }
 
@@ -1136,7 +1138,8 @@ function itg_categor_form_edit_category_radio($form, &$form_state) {
   }
 
 
-  if ($type == 'story' || $type == 'photogallery' || $type == 'videogallery') {
+  //if ($type == 'story' || $type == 'photogallery' || $type == 'videogallery') {
+  if ($type == 'story') {
     
   }
   else {
