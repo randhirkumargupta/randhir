@@ -11912,3 +11912,7 @@ span.file a {
 [id*="itg-registred-user-report-form"] .form-submit {
   margin-left: 150px;
 }
+
+#idIssue {
+  color: red;
+}
