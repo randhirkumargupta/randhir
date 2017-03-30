@@ -2715,25 +2715,27 @@ function manage_widget_order_during_node_update($nid , $category_tid , $node_typ
  * {@inheritdoc}
  */
 function itg_widget_taxonomy_term_insert($term) {
-  $flag = FALSE;
-  foreach ($term->parent as $parents) {
-    if ( $parents == variable_get('so_sorry_category_id_for_widget') ) {
-      $flag = TRUE;
-      continue;
+  if ($term->vid == CATEGORY_MANAGMENT) {
+    $flag = FALSE;
+    foreach ($term->parent as $parents) {
+      if ( $parents == variable_get('so_sorry_category_id_for_widget') ) {
+        $flag = TRUE;
+        continue;
+      }
     }
-  }
-  if ( $flag ) {
-    $max_weight = get_max_weight_of_politoons();
-    db_insert('draggableviews_structure')
-        ->fields(array(
-          'entity_id' => $term->tid ,
-          'view_name' => 'so_sorry_politoons' ,
-          'view_display' => 'so_sorry_politoons' ,
-          'args' => '[]' ,
-          'parent' => 0 ,
-          'weight' => ++$max_weight ,
-        ))
-        ->execute();
+    if ( $flag ) {
+      $max_weight = get_max_weight_of_politoons();
+      db_insert('draggableviews_structure')
+          ->fields(array(
+            'entity_id' => $term->tid ,
+            'view_name' => 'so_sorry_politoons' ,
+            'view_display' => 'so_sorry_politoons' ,
+            'args' => '[]' ,
+            'parent' => 0 ,
+            'weight' => ++$max_weight ,
+          ))
+          ->execute();
+    }
   }
 }
 
