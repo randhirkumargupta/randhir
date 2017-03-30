@@ -257,6 +257,7 @@ function itg_registered_user_display_report($user_id) {
     }
   }
 }
+
 function get_term_name_from_tid($tid) {
   $data = array();
   $query = db_select('taxonomy_term_data' ,'ttd')
