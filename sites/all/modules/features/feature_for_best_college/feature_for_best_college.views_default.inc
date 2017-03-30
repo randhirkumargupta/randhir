@@ -124,7 +124,8 @@ function feature_for_best_college_views_default_views() {
   $handler->display->display_options['arguments']['tid']['field'] = 'tid';
   $handler->display->display_options['arguments']['tid']['relationship'] = 'term_node_tid';
   $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'taxonomy_tid';
+  $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['argument'] = '844517';
   $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
@@ -227,7 +228,7 @@ function feature_for_best_college_views_default_views() {
   $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'photgallery_landing_slider_753x543',
+    'image_style' => 'event_post_364x205',
     'image_link' => '',
   );
   /* Field: Content: Section */
@@ -299,23 +300,33 @@ print itg_city_option($year,$tid);
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="item col-xs-12 col-sm-6 col-lg-3">
-                <div class="thumbnail">
-                    [field_story_extra_large_image]
-                    <div class="caption">
-                      <h4 class="list-group-item-heading"><a href="/bestcolleges/[field_bestcollege_year]/ranks/[tid]">  [field_story_category]</a></h4>
-                      <p class="group inner list-group-item-text"> <a href="/bestcolleges/[field_bestcollege_year] /ranks/[tid]"> 
-                        [title]</a></p> 
-                       <div class="cl1"> <a href="/bestcolleges/[field_bestcollege_year]/ranks/[tid]">Rank :  [field_bestcollege_rank]</a></div>
-                       <div class="cl"> <a href="/bestcolleges/[field_bestcollege_year]/ranks/[tid]">SEE COMPLETE LIST | DIRECTORY</a></div>
-
-                       [php] 
-
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-              </div>';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="item col-xs-12 col-sm-6 col-lg-3 grid-group-item">
+  <div class="thumbnail">
+      <div class="thumbnail-img">[field_story_extra_large_image]</div>
+        <h4 class="list-group-item-heading"><a href="/bestcolleges/[field_bestcollege_year]/ranks/[tid]">  [field_story_category]</a></h4>
+        <div class="caption">            
+            <p class="group inner list-group-item-text"> <a href="/bestcolleges/[field_bestcollege_year]/ranks/[tid]"> 
+            [title]</a></p> 
+            <div class="cl1"> <a href="/bestcolleges/[field_bestcollege_year]/ranks/[tid]">Rank :  [field_bestcollege_rank]</a></div>
+            <div class="cl"> <a href="/bestcolleges/[field_bestcollege_year]/ranks/[tid]">SEE COMPLETE LIST | DIRECTORY</a></div>
+           [php] 
+        </div>
+      <div class="clearfix"></div>
+  </div>
+</div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Year (field_bestcollege_year) */
+  $handler->display->display_options['arguments']['field_bestcollege_year_value']['id'] = 'field_bestcollege_year_value';
+  $handler->display->display_options['arguments']['field_bestcollege_year_value']['table'] = 'field_data_field_bestcollege_year';
+  $handler->display->display_options['arguments']['field_bestcollege_year_value']['field'] = 'field_bestcollege_year_value';
+  $handler->display->display_options['arguments']['field_bestcollege_year_value']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_bestcollege_year_value']['default_argument_type'] = 'raw';
+  $handler->display->display_options['arguments']['field_bestcollege_year_value']['default_argument_options']['index'] = '1';
+  $handler->display->display_options['arguments']['field_bestcollege_year_value']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_bestcollege_year_value']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_bestcollege_year_value']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_bestcollege_year_value']['limit'] = '0';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -361,44 +372,10 @@ print itg_city_option($year,$tid);
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['total_pages'] = '10';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'table';
-  $handler->display->display_options['style_options']['columns'] = array(
-    'field_story_category' => 'field_story_category',
-    'field_story_extra_large_image' => 'field_story_extra_large_image',
-    'title' => 'title',
-    'field_bestcollege_rank' => 'field_bestcollege_rank',
-  );
-  $handler->display->display_options['style_options']['default'] = '-1';
-  $handler->display->display_options['style_options']['info'] = array(
-    'field_story_category' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_story_extra_large_image' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'title' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_bestcollege_rank' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-  );
+  $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Extra large image */
@@ -459,7 +436,7 @@ print itg_city_option($year,$tid);
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_output'] = '<?php
 $website_url = $data->_field_data[\'nid\'][\'entity\']->field_bestcollege_website_url[\'und\'][0][\'value\'];
-print "<a href=\'$website_url\' target=\'_blank\'><img src=\'http://media2.intoday.in/indiatoday/bestcollegespoll/website-button.png\' border=\'0\'></a>";
+print "<a href=\'$website_url\' target=\'_blank\' class=\'btn-link\'>Website</a>";
 ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
@@ -469,10 +446,12 @@ print "<a href=\'$website_url\' target=\'_blank\'><img src=\'http://media2.intod
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="item-college">
-  <span class="rank">Rank : [field_bestcollege_rank]</span><h1>[title]</h1>
-    <div class="col-md-6 remove_padd_right">[field_story_extra_large_image]</div>
+<div class="clearfix">  
+<span class="rank">Rank : [field_bestcollege_rank]</span><h1>[title]</h1>
+</div>
+    <div class="col-md-6 col-sm-6 remove_padd_right">[field_story_extra_large_image] </div>
 
-   <div class="col-md-6"> <div class="carousel-caption">
+   <div class="col-md-6 col-sm-6"> <div class="carousel-caption">
 
      <strong>CITY: [field_bestcollege_city] </strong>
     [body]

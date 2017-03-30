@@ -484,6 +484,7 @@ function feature_for_best_college_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
