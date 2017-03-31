@@ -2566,6 +2566,12 @@ footer .multiple-items-footer i.slick-next {
   list-style: disc;
   padding-left: 18px;
 }
+.story-section .story-right .description a {
+  color: #1a3c8d;
+}
+.story-section .story-right .description a:hover {
+  text-decoration: underline;
+}
 .story-section .story-right .briefcase {
   margin-top: 20px;
 }
