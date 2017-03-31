@@ -32,7 +32,7 @@ function itg_user_log_node_view($node, $view_mode, $langcode) {
   }
 
   // code start for recommended for you
-  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type = 'videogallery' || $node->type == 'blog') {
+  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'videogallery' || $node->type == 'blog') {
     $section_tids = taxonomy_get_parents_all($node->field_primary_category[LANGUAGE_NONE][0]['value']);
     $section_tids = array_reverse($section_tids);
     $created = time();
