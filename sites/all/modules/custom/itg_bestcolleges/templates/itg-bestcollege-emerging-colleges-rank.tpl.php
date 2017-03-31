@@ -36,8 +36,8 @@
         <div class="right_Section pull-right  col-md-6  col-sm-6 col-xs-12 text-right hidden-xs">
         <strong>view as</strong>
         <div class="btn-group">
-            <a href="#" class="btn btn-default btn-sm list"><span class="fa fa-th-list"></span> List</a>
-            <a href="#" class="btn btn-default btn-sm active_btn grid"><span class="fa fa-th"></span> Grid</a>
+            <a href="#" class="btn btn-default btn-sm grid"><span class="fa fa-th"></span> Grid</a>
+            <a href="#" class="btn btn-default btn-sm active_btn list"><span class="fa fa-th-list"></span> List</a>
         </div>
         </div>
 </div>

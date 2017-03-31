@@ -182,7 +182,8 @@ if ($theme != 'itgadmin') {
 
 <!--- list / grid -->
 <div class="col-sm-12 col-xs-12 view1">
-<div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("Best of The Best ") . arg(1);; ?></div>
+<?php $url_get = explode('/',$_SERVER['REQUEST_URI']);?>
+<div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("Best of The Best ") . $url_get[2]; ?></div>
 
         <div class="right_Section pull-right  col-md-6  col-sm-6 col-xs-12 text-right hidden-xs">
         <strong>view as</strong>
@@ -199,7 +200,7 @@ if ($theme != 'itgadmin') {
                             <div class="row list-group college">
                               <div class="clr_chn">
                                <?php
-                               $url_get = explode('/',$_SERVER['REQUEST_URI']);
+
                                 if (array_filter(views_get_view_result('best_college_image_slider', 'block_1', $url_get[2]))) {
                                     print views_embed_view('best_college_image_slider', 'block_1', $url_get[2]);
                                 }
