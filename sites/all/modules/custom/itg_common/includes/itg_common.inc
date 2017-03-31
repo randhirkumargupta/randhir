@@ -398,13 +398,15 @@ function itg_common_get_story_status($nid) {
  * @param int $entity_id
  */
 function itg_get_related_story_content($entity_id) {
-  $solr = apachesolr_get_solr();
-  $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$entity_id"));
-  $query->addParam('rows', '4'); // How many rows of result to display default it is 10.
-  $query->addParam('qf', 'entity_id'); // Only search in id
-  $query->addParam('bs_status', 'true'); // Only search in title
-  $resp_search = $query->search();
-  return isset($resp_search->response->docs[0]) ? $resp_search->response->docs[0] : "";
+  if (function_exists('apachesolr_get_solr')) {
+    $solr = apachesolr_get_solr();
+    $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$entity_id"));
+    $query->addParam('rows', '4'); // How many rows of result to display default it is 10.
+    $query->addParam('qf', 'entity_id'); // Only search in id
+    $query->addParam('bs_status', 'true'); // Only search in title
+    $resp_search = $query->search();
+    return isset($resp_search->response->docs[0]) ? $resp_search->response->docs[0] : "";
+  }
 }
 
 /**

@@ -212,7 +212,7 @@ function itg_user_activity_front_highlight() {
           }
           $qry = array("nid" => $nd_id, "uid" => $user->uid, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus);
           $result = $people->insert($qry);
-          $expire = time() + 60 * 60 * 24 * 30;
+          $expire = time() + 86400;
           setcookie("hightlights_emoji" . "_" . $nd_id, $expire);
           $response = array('ok' => 'hightlights_emoji_true', 'nd_id' => $emoji_id[0], 'count' => $pre_count, 'rel' => $nd_id);
           print json_encode($response);
