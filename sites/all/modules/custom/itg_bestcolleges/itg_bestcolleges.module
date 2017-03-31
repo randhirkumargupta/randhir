@@ -57,29 +57,6 @@ function itg_bestcolleges_menu() {
     'type' => MENU_NORMAL_ITEM,
   );
 
-  /* $items['bestcolleges/%/%'] = array(
-    'page callback' => 'itg_zone_wise_list',
-    'page arguments' => array(1, 2),
-    'access callback' => TRUE,
-    );
-    $items['bestcolleges/%/campus-wise-list'] = array(
-    'page callback' => 'itg_campus_wise_list',
-    'page arguments' => array(1, 2),
-    'access callback' => TRUE,
-    );
-   */
-/*  $items['bestcolleges/%/%'] = array(
-    'page callback' => 'itg_city_wise_list',
-    'page arguments' => array(1, 2),
-    'access callback' => TRUE,
-  );
-
-   $items['bestcolleges/%/zonewiselist/%'] = array(
-    'page callback' => 'itg_common_redirect_list',
-    'page arguments' => array(1, 2),
-    'access callback' => TRUE,
-  );*/
-
   return $items;
 }
 
@@ -545,6 +522,7 @@ function itg_bestcollege_getStreamYear($type, $byear) {
         ->orderBy('bce.stream', 'ASC');
     $results = $query->execute()->fetchAll();
 
+    $data['_none'] = t("---Select Course---");
     foreach ($results as $results_key => $results_val) {
       $data[drupal_strtolower($results_val->stream)] = $results_val->stream;
     }
@@ -560,6 +538,7 @@ function itg_bestcollege_getStreamYear($type, $byear) {
         ->condition('bcr.rank', 0, '!=')
         ->orderBy('bcr.year', 'DESC');
     $results = $query->execute()->fetchAll();
+
     foreach ($results as $results_key => $results_val) {
       $data['year'][drupal_strtolower($results_val->year)] = $results_val->year;
     }
@@ -572,6 +551,7 @@ function itg_bestcollege_getStreamYear($type, $byear) {
         ->condition('bcr.rank', 0, '!=')
         ->orderBy('bcr.stream', 'ASC');
     $results1 = $query1->execute()->fetchAll();
+    $data['stream']['_none'] = t("---Select---");
     foreach ($results1 as $results1_key => $results1_val) {
       $data['stream'][drupal_strtolower($results1_val->stream)] = $results1_val->stream;
     }
@@ -587,6 +567,7 @@ function itg_bestcollege_getStreamYear($type, $byear) {
         ->condition('brd.rank', 0, '!=')
         ->orderBy('brd.stream', 'ASC');
     $results = $query->execute()->fetchAll();
+    $data['_none'] = t("---Select Course---");
     foreach ($results as $results_key => $results_val) {
       $data[drupal_strtolower($results_val->stream)] = $results_val->stream;
     }
@@ -1534,3 +1515,74 @@ function bestCollegesRelatedImgList(){
         // return final result
         return $data;
     }
+
+
+function bestcollege_set_option_val($url) {
+  $url_arr = explode('/', $url);
+  // http://qa.localhost.com/bestcolleges/2016/compare-college/arts/2016-2015
+  // http://qa.localhost.com/bestcolleges/2016/compare-college/2014-arts-bba
+  // http://itgddev.indiatodayonline.in/bestcolleges/2016/zonewiselist-medical
+  // http://qa.localhost.com/bestcolleges/2016/arts-bestcollege
+  $compare_data = array();
+  if($url_arr[2] == 'emerging-colleges-rank') {
+    $compare_data['emerging_stream'] = isset($url_arr[3]) ? $url_arr[3] : '';
+  } elseif($url_arr[2] == 'compare-college') {
+      if($url_arr[4]) {
+        $compare_data['year_stream'] = isset($url_arr[3]) ? $url_arr[3] : '';
+        $compare_data_arr = explode('-', $url_arr[4]);
+        $compare_data['year_fy'] = $compare_data_arr[0];
+        $compare_data['year_sy'] = $compare_data_arr[1];
+      } else {
+        $compare_data_arr = explode('-', $url_arr[3]);
+        $compare_data['stream_year'] = $compare_data_arr[0];
+        $compare_data['stream_fstream'] = $compare_data_arr[1];
+        $compare_data['stream_sstream'] = $compare_data_arr[2];
+      }
+
+  } else {
+    if(strstr($url_arr[2], '-')) {
+        $zone_arr = explode('-', $url_arr[2]);
+        if($zone_arr[0] == 'zonewiselist') {
+          $compare_data['zonewise_stream'] = isset($zone_arr[1]) ? $zone_arr[1] : '';
+        } elseif($zone_arr[1] == 'bestcollege') {
+           $compare_data['directory_stream'] = isset($zone_arr[0]) ? $zone_arr[0] : '';
+        }
+    }
+  }
+  return $compare_data;
+}
+
+/*if($url_arr[2] != 'compare-college' && $url_arr[2] !='emerging-colleges-rank') {
+    if(strstr($url_arr[2], '-')) {
+        $zone_arr = explode('-', $url_arr[2]);
+        if($zone_arr[0] == 'zonewiselist') {
+            $url_arr[2] = $zone_arr[0];
+
+        } elseif($zone_arr[1] == 'bestcollege') {
+            $url_arr[2] = $zone_arr[1];
+
+        }
+
+    }
+  }*/
+
+/*  $option = '';
+  switch ($url_arr[2]) {
+    case 'emerging-colleges-rank':
+      $option = isset($url_arr[3]) ? $url_arr[3] : '';
+      break;
+    case 'compare-college':
+      $option = isset($url_arr[3]) ? $url_arr[3] : '';
+      break;
+    case 'zonewiselist':
+      $option = isset($zone_arr[1]) ? $zone_arr[1] : '';
+    break;
+    case 'bestcollege':
+      $option = isset($zone_arr[0]) ? $zone_arr[0] : '';
+    break;
+    default:
+      # code...
+      break;
+  }
+  return $option;*/
+

@@ -103,7 +103,7 @@ if ($theme != 'itgadmin') {
     <?php endif; ?>
    <div class="row">
    	  <div class="col-md-12 col-sm-12 col-xs-12">
-   	  	
+
    	  	<!-- sponsor for static -->
        <div class="sponsorContainer">
       <span class="leftFirstLogo"><a href="http://indiatoday.intoday.in/bestcolleges/2016/" target="_blank" title="India Today Best Colleges 2016"><img src="http://media2.intoday.in/aajtak/resources/images/sopnsor1.jpg" alt=""></a></span>
@@ -167,7 +167,7 @@ if ($theme != 'itgadmin') {
             </div>
         </div>
        -->
-   
+
 
        <?php
                 if (array_filter(views_get_view_result('best_college_image_slider', 'block'))) {
@@ -187,8 +187,8 @@ if ($theme != 'itgadmin') {
         <div class="right_Section pull-right  col-md-6  col-sm-6 col-xs-12 text-right hidden-xs">
         <strong>view as</strong>
         <div class="btn-group">
-            <a href="#" class="btn btn-default btn-sm list"><span class="fa fa-th-list"></span> List</a>
-            <a href="#" class="btn btn-default btn-sm active_btn grid"><span class="fa fa-th"></span> Grid</a>
+            <a href="#" class="btn btn-default btn-sm grid"><span class="fa fa-th"></span> Grid</a>
+            <a href="#" class="btn btn-default btn-sm active_btn list"><span class="fa fa-th-list"></span> List</a>
         </div>
         </div>
 </div>

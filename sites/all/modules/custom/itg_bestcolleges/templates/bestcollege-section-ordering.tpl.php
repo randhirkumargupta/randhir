@@ -2,7 +2,7 @@
   <div class="watch-right-now-video bestcollege-rhs-video">
     <?php $is_fron_page = drupal_is_front_page();
     if (empty($is_fron_page)) {
-      ?><h3><span><?php print t("VIDEOS") ?></span></h3><?php } ?>
+      ?><h3><span><?php print t("VIDEOS") ?></span></h3><?php print l('More', 'video/', array('attributes' => array('class' => 'bestcollege-more-video"'))); ?><?php } ?>
     <ul>
         <?php foreach ($data as $video_key => $video_data) { ?>
         <li id="watch-right-now-<?php echo $video_data['nid'] ?>" class="watch-right-now-list watch-right-now-<?php echo $video_key ?>">
