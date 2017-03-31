@@ -384,7 +384,7 @@ function itg_widget_form_alter(&$form , &$form_state , $form_id) {
   global $base_url;
 
   if ( $form['#id'] == 'taxonomy-form-term' ) {
-    drupal_add_css("#edit-field-set-as-featured-cate {display:none !important}" , "inline");
+    //drupal_add_css("#edit-field-set-as-featured-cate {display:none !important}" , "inline");
   }
   // Alter form for confirm message during bulk operation.
   $form_id_array_to_alter = array(
