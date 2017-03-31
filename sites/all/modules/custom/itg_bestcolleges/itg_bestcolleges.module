@@ -616,12 +616,13 @@ function itg_bestcolleges_form_alter(&$form, &$form_state, $form_id) {
  * @param type $tid
  * @return string
  */
-function itg_city_option($byear, $tid) {
+function itg_city_option($byear, $tid, $selected, $rstream) {
+
   drupal_load('module', 'taxonomy');
   $term = taxonomy_term_load($tid);
   $bstream = strtolower($term->name);
   $itg_query = db_select('bestcolleges_citywiseranking', 'bcr')->distinct();
-  $itg_query->fields('bcr', array('city'))
+  $itg_query->fields('bcr', array('city','stream'))
       ->condition('bcr.year', $byear, '=')
       ->condition('bcr.stream', $bstream, '=')
       ->condition('bcr.published', 1)
@@ -635,7 +636,12 @@ function itg_city_option($byear, $tid) {
   foreach ($itg_result as $row) {
     // bestcolleges/2016/citycolleges-arts-coimbatore
     $custom_url = "/bestcolleges/" . $byear . "/citycolleges-" . strtolower($bstream) . "-" . strtolower($row->city);
-    $htm .= "<option value = " . $custom_url . ">" . $row->city . "</option>";
+    if (strtolower($row->city) == $selected && strtolower($row->stream) == $rstream) {
+      $htm .= "<option value = " . $custom_url . " selected='selected' >" . $row->city . "</option>";
+    } else {
+      $htm .= "<option value = " . $custom_url . ">" . $row->city . "</option>";
+    }
+
   }
   $htm .= "</select></div>";
   if (empty($count)) {
@@ -1523,6 +1529,7 @@ function bestcollege_set_option_val($url) {
   // http://qa.localhost.com/bestcolleges/2016/compare-college/2014-arts-bba
   // http://itgddev.indiatodayonline.in/bestcolleges/2016/zonewiselist-medical
   // http://qa.localhost.com/bestcolleges/2016/arts-bestcollege
+  // http://qa.localhost.com/bestcolleges/2016/citycolleges-commerce-mumbai
   $compare_data = array();
   if($url_arr[2] == 'emerging-colleges-rank') {
     $compare_data['emerging_stream'] = isset($url_arr[3]) ? $url_arr[3] : '';
@@ -1546,43 +1553,11 @@ function bestcollege_set_option_val($url) {
           $compare_data['zonewise_stream'] = isset($zone_arr[1]) ? $zone_arr[1] : '';
         } elseif($zone_arr[1] == 'bestcollege') {
            $compare_data['directory_stream'] = isset($zone_arr[0]) ? $zone_arr[0] : '';
+        } elseif($zone_arr[0] == 'citycolleges') {
+           $compare_data['city_stream'] = isset($zone_arr[1]) ? $zone_arr[1] : '';
+           $compare_data['city_city'] = isset($zone_arr[2]) ? $zone_arr[2] : '';
         }
     }
   }
   return $compare_data;
 }
-
-/*if($url_arr[2] != 'compare-college' && $url_arr[2] !='emerging-colleges-rank') {
-    if(strstr($url_arr[2], '-')) {
-        $zone_arr = explode('-', $url_arr[2]);
-        if($zone_arr[0] == 'zonewiselist') {
-            $url_arr[2] = $zone_arr[0];
-
-        } elseif($zone_arr[1] == 'bestcollege') {
-            $url_arr[2] = $zone_arr[1];
-
-        }
-
-    }
-  }*/
-
-/*  $option = '';
-  switch ($url_arr[2]) {
-    case 'emerging-colleges-rank':
-      $option = isset($url_arr[3]) ? $url_arr[3] : '';
-      break;
-    case 'compare-college':
-      $option = isset($url_arr[3]) ? $url_arr[3] : '';
-      break;
-    case 'zonewiselist':
-      $option = isset($zone_arr[1]) ? $zone_arr[1] : '';
-    break;
-    case 'bestcollege':
-      $option = isset($zone_arr[0]) ? $zone_arr[0] : '';
-    break;
-    default:
-      # code...
-      break;
-  }
-  return $option;*/
-
