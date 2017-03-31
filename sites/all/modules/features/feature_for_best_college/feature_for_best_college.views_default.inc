@@ -289,9 +289,18 @@ function feature_for_best_college_views_default_views() {
   $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_output'] = '<?php
+$url_arr = explode(\'/\', $_GET[\'q\']);
+if(strstr($url_arr[2], \'-\')) {
+    $zone_arr = explode(\'-\', $url_arr[2]);
+    if($zone_arr[0] == \'citycolleges\') {
+      $rstream = isset($zone_arr[1]) ? $zone_arr[1] : \'\';
+      $city = isset($zone_arr[2]) ? $zone_arr[2] : \'\';
+    }
+  }
+
 $tid = $data->_field_data[\'nid\'][\'entity\']->field_story_category[\'und\'][0][\'tid\'];
 $year = $data->_field_data[\'nid\'][\'entity\']->field_bestcollege_year[\'und\'][0][\'value\'];
-print itg_city_option($year,$tid); 
+print itg_city_option($year,$tid, $city, $rstream); 
 ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
@@ -300,7 +309,7 @@ print itg_city_option($year,$tid);
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="item col-xs-12 col-sm-6 col-lg-3 grid-group-item">
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="item col-xs-12 col-sm-6 col-lg-3 list-group-item">
   <div class="thumbnail">
       <div class="thumbnail-img">[field_story_extra_large_image]</div>
         <h4 class="list-group-item-heading"><a href="/bestcolleges/[field_bestcollege_year]/ranks/[tid]">  [field_story_category]</a></h4>
@@ -315,6 +324,12 @@ print itg_city_option($year,$tid);
   </div>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Taxonomy term: Weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['relationship'] = 'term_node_tid';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Year (field_bestcollege_year) */
   $handler->display->display_options['arguments']['field_bestcollege_year_value']['id'] = 'field_bestcollege_year_value';
