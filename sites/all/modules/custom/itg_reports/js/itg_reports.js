@@ -131,4 +131,20 @@ jQuery( document ).ready(function() {
         changeYear: true,
         dateFormat: 'dd-mm-yy',
     });
+    jQuery('#itg-section-wise-breakup-form #edit-date-from').datepicker({
+        // Get 5 year previous and next year data.
+        maxDate: new Date(date_used),
+        minDate: new Date(date_used.getFullYear()-5, 01, 01),
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'dd-mm-yy',
+    });
+    jQuery('#itg-section-wise-breakup-form #edit-date-to').datepicker({
+        // Get 5 year previous and next year data.
+        maxDate: new Date(date_used),
+        minDate: new Date(date_used.getFullYear()-5, 01, 01),
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'dd-mm-yy',
+    });
 });
