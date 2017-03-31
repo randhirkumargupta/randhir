@@ -78,6 +78,8 @@ function bestcollege_rhssearch_form($form, &$form_state) {
       '#suffix' => '</div>',
     );
 
+
+
   // get first array element
   $year_com = $getsyears['year'];
   $first_year_key = key($year_com);
@@ -109,7 +111,7 @@ function bestcollege_rhssearch_form($form, &$form_state) {
     '#default_value' => $search_option['year_stream'],
     '#attributes' => array('class' => array('city_wise')),
     '#prefix' => '<div class ="col-lg-8 col-sm-12 col-md-12 remove_padd_left remove_padd_right">',
-    '#suffix' => '</div></div><div class="clearfix"></div></div>',
+    '#suffix' => '</div></div><p><small>*Not available for new streams</small></p><div class="clearfix"></div></div>',
   );
   $form['streamcompare_rhs'] = array(
     '#type' => 'item',
@@ -167,7 +169,7 @@ function bestcollege_rhssearch_form($form, &$form_state) {
     '#default_value' => $search_option['stream_year'],
     '#attributes' => array('class' => array('city_wise')),
     '#prefix' => '<div class ="col-lg-8 col-sm-12 col-md-12 remove_padd_left remove_padd_right">',
-    '#suffix' => '</div></div><div class="clearfix"></div></div>',
+    '#suffix' => '</div></div><p><small>*Not available for new streams</small></p><div class="clearfix"></div></div>',
   );
   if (count($directory_stream) > 0) {
     $form['clgdir_rhs'] = array(
