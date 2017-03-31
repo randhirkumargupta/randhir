@@ -39,14 +39,12 @@ function itg_user_log_node_view($node, $view_mode, $langcode) {
     $expiry = time() + (86400);
 
     if ($user->uid == 0 && !isset($_COOKIE['recomended_for_you'])) {
-      print 'ankush';
       $visit_value = rand(1, 999);
       setcookie('recomended_for_you', $visit_value, time() + (86400), "/"); // 1 day
        itg_set_recommended_data($created, $expiry, $section_tids[0]->tid, $visit_value);
     }
     elseif ($user->uid == 0 && isset($_COOKIE['recomended_for_you'])) {
-      print 'ankush1';
-       itg_set_recommended_data($created, $expiry, $section_tids[0]->tid, $_COOKIE['recomended_for_you']);
+     itg_set_recommended_data($created, $expiry, $section_tids[0]->tid, $_COOKIE['recomended_for_you']);
     }
     elseif (isset($_COOKIE['recomended_for_you']) && $user->uid) {
       unset($_COOKIE['recomended_for_you']);
