@@ -754,8 +754,8 @@ function url_exists($url) {
  */
 function recommended_for_you_anonymous_user() {
   if (isset($_COOKIE['recomended_for_you'])) {
-    $sections = itg_user_log_get_sections($_COOKIE['recomended_for_you']);
-    $get_nids = itg_get_recommended_data($sections);
+   $sections = itg_user_log_get_sections($_COOKIE['recomended_for_you']);
+   $get_nids = itg_get_recommended_data($sections);
     $related_dt = '';
     if (!empty($get_nids)) {
       $related_dt = '<span class="widget-title">' . t('RECOMMENDED FOR YOU') . '</span>';
