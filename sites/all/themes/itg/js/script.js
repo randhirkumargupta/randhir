@@ -322,23 +322,23 @@ jQuery(document).ready(function () {
             jQuery('.footer-expand-icon').toggleClass('footer-open-icon');
         });
         //footer add more link
-        jQuery('.footer-bottom .cell ul').each(function () {
-            var countList = jQuery(this).children('li').length;
-            if (countList > 8) {
-                jQuery(this).find('li:gt(7)').hide().addClass('hidelist');
-                jQuery(this).append("<li><span class='more-link'>More</span></li>");
-            }
-        });
-        jQuery('.footer-bottom .more-link').click(function () {
-            jQuery(this).parents('ul').find('li.hidelist').slideToggle();
-            jQuery(this).toggleClass('active');
-            jQuery("html, body").animate({scrollTop: jQuery(document).height()}, 800);
-            if (jQuery(this).hasClass('active')) {
-                jQuery('.footer-bottom .more-link').text('Less');
-            } else {
-                jQuery('.footer-bottom .more-link').text('More');
-            }
-        });
+//        jQuery('.footer-bottom .cell ul').each(function () {
+//            var countList = jQuery(this).children('li').length;
+//            if (countList > 8) {
+//                jQuery(this).find('li:gt(7)').hide().addClass('hidelist');
+//                jQuery(this).append("<li><span class='more-link'>More</span></li>");
+//            }
+//        });
+//        jQuery('.footer-bottom .more-link').click(function () {
+//            jQuery(this).parents('ul').find('li.hidelist').slideToggle();
+//            jQuery(this).toggleClass('active');
+//            jQuery("html, body").animate({scrollTop: jQuery(document).height()}, 800);
+//            if (jQuery(this).hasClass('active')) {
+//                jQuery('.footer-bottom .more-link').text('Less');
+//            } else {
+//                jQuery('.footer-bottom .more-link').text('More');
+//            }
+//        });
     }
     jQuery('body').on('click', '.personal-share', function(){
       jQuery('.personal-social-share-links').slideToggle();

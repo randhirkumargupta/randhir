@@ -261,7 +261,15 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
                         </div>
                       <?php } ?>  
 
-                      <div class="data-holder" id="itg-block-21"><?php print $widget_data['itg-block-21']['widget']; ?></div>
+                      <div class="data-holder" id="itg-block-21">
+                        <?php 
+                        if (isset($widget_data['itg-block-21']['widget'])) {
+                          print $widget_data['itg-block-21']['widget']; 
+                        } else{
+                          print '<div class="widget-placeholder"><span>May we suggest</span></div>';
+                        } 
+                        ?>
+                      </div>
                     </div>             
                   </div>               
                 </div>
@@ -282,7 +290,15 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
                         </div>
                       <?php } ?>  
 
-                      <div class="data-holder" id="itg-block-22"><?php print $widget_data['itg-block-22']['widget']; ?></div>
+                      <div class="data-holder" id="itg-block-22">
+                        <?php
+                          if (isset($widget_data['itg-block-22']['widget'])) {
+                            print print $widget_data['itg-block-22']['widget']; 
+                          } else{
+                            print '<div class="widget-placeholder"><span>Watch right now</span></div>';
+                          } 
+                        ?>
+                      </div>
                     </div>             
                   </div>               
                 </div>
