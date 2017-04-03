@@ -160,7 +160,7 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
        unset($form['field_story_short_headline']);
        unset($form['field_story_long_head_line']);
       }
-       $form['field_story_big_image']['#attributes']['class'][] = 'element-hidden';
+       // $form['field_story_big_image']['#attributes']['class'][] = 'element-hidden';
        
       // code for multiple byline
       if (empty($form['#node']->nid))
