@@ -355,6 +355,24 @@ function feature_for_video_field_default_field_bases() {
     'type' => 'list_text',
   );
 
+  // Exported field_base: 'field_video_is_delete'.
+  $field_bases['field_video_is_delete'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_video_is_delete',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'number_integer',
+  );
+
   // Exported field_base: 'field_video_kicker'.
   $field_bases['field_video_kicker'] = array(
     'active' => 1,
