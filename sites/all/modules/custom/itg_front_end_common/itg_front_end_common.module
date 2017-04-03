@@ -64,7 +64,7 @@ function itg_front_end_common_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
-  $blocks['recommended_for_you_anonymous_user'] = array(
+  $blocks['recommended_anonymous_user'] = array(
     'info' => t('Recommended for you anonymous user'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
@@ -123,8 +123,8 @@ function itg_front_end_common_block_view($delta = '') {
       $block['content'] = _latest_from_pti();
       break;
     
-    case 'recommended_for_you_anonymous_user':
-      $block['content'] = recommended_for_you_anonymous_user();
+    case 'recommended_anonymous_user':
+      $block['content'] = recommended_anonymous_user();
       break;
   }
 
@@ -752,7 +752,7 @@ function url_exists($url) {
 /**
  * Implements recommended anonymous user block.
  */
-function recommended_for_you_anonymous_user() {
+function recommended_anonymous_user() {
   if (isset($_COOKIE['recomended_for_you'])) {
    $sections = itg_user_log_get_sections($_COOKIE['recomended_for_you']);
    $get_nids = itg_get_recommended_data($sections);
