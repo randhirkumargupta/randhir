@@ -136,7 +136,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                                     }],
                                                 primary: "flash",
                                                 width: "622",
-                                                height: "370",
+                                                height: "446",
                                                 aspectratio: "4:3",
                                                 "stretching": "exactfit",
                                                 androidhls: "true",
