@@ -629,7 +629,7 @@ function itg_workflow_node_presave($node) {
       $items = field_get_items('node', $node, 'field_video_upload');
 
       foreach ($items as $imagecollection) {
-        if ($node->state == 0 && $node->workbench_moderation['current']->state == 'published') {
+        if ($node->status == 0 && $node->workbench_moderation['current']->state == 'published') {
           $entitydata = entity_load('field_collection_item', $imagecollection);
           $v_fid = $entitydata[$imagecollection['value']]->field_videogallery_video_upload;
           $fids = $v_fid[LANGUAGE_NONE][0]['fid'];
