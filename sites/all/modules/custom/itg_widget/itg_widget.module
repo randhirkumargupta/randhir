@@ -344,6 +344,7 @@ function itg_widget_block_info() {
  * {@inheritdoc}
  */
 function itg_widget_block_view($delta = '') {
+  global $user;
   $block = array();
   switch ($delta) {
     // Big Story Content.
@@ -666,6 +667,7 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_personalization');
       $data = get_personlization_front_block_data();
       $block['content'] = theme("personlization_front_end", array("data" => $data));
+      if($user->uid) {
       drupal_add_js('jQuery(document).ready(function() {
     jQuery(".recommended-slider").slick({
       slidesToShow: 3,
@@ -691,6 +693,7 @@ function itg_widget_block_view($delta = '') {
       ]
     });
   });', array("type" => "inline"));
+      }
       break;
     case 'home_page_poll_widget_block':
       $selected_poll_widget = get_homepage_current_poll_widget('poll', 'poll_widget');

@@ -165,8 +165,21 @@ function get_node_ids_assoicated_with_tid($tid, $is_front = FALSE) {
 /**
  * function is used to return array for front end.
  */
-function get_personlization_front_block_data() {
-  $persionalization = get_personalization_front_data();
+function get_personlization_front_block_data($flag = TRUE) {
+  global $user;
+  if ($flag && $user->uid != 0) {
+    $persionalization = get_personalization_front_data();
+    //p($persionalization);
+  }
+  else {
+    if (isset($_COOKIE['recomended_for_you'])) {
+      $sections = itg_user_log_get_sections($_COOKIE['recomended_for_you']);
+      $persionalization = itg_get_recommended_data($sections);
+      //p($persionalization);
+       
+    }
+  }
+  //$persionalization = get_personalization_front_data();
   //pr($persionalization);
   $front_end_data = array();
   foreach ($persionalization as $persionalization_key => $persionalization_data) {
