@@ -486,7 +486,7 @@ input[type="file"], input[type="submit"], input[type="text"] {
   font-family: Roboto;
 }
 .view-photo-list-of-category .view-content .photo-list li .tile figure figcaption .fa, .view-podcasts-listing.podcast-detail-page .view-content .photo-list li .tile figure figcaption .fa {
-  font-size: 14px;
+  font-size: 16.5px;
   margin-right: 5px;
 }
 .view-photo-list-of-category .view-content .photo-list li .tile .posted-on, .view-podcasts-listing.podcast-detail-page .view-content .photo-list li .tile .posted-on {

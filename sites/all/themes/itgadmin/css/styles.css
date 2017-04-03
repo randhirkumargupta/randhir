@@ -7006,6 +7006,7 @@ div.node #comments h2 {
   position: relative;
   top: 0;
   vertical-align: top;
+  z-index: 9;
 }
 .widget-settings .widget-title-wrapper {
   display: inline-block;
@@ -11911,4 +11912,8 @@ span.file a {
 }
 [id*="itg-registred-user-report-form"] .form-submit {
   margin-left: 150px;
+}
+
+#idIssue {
+  color: red;
 }

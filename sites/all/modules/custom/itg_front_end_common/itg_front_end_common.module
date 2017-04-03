@@ -64,8 +64,8 @@ function itg_front_end_common_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
-  $blocks['recommended_for_you_anonymous_user'] = array(
-    'info' => t('Recommended for you anonymous user'),
+  $blocks['recommended_anonymous_user'] = array(
+    'info' => t('Recommended anonymous user'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   return $blocks;
@@ -123,8 +123,38 @@ function itg_front_end_common_block_view($delta = '') {
       $block['content'] = _latest_from_pti();
       break;
     
-    case 'recommended_for_you_anonymous_user':
-      $block['content'] = recommended_for_you_anonymous_user();
+    case 'recommended_anonymous_user':
+      global $user;
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_personalization');
+      $data = get_personlization_front_block_data(FALSE);
+      $block['content'] = theme("personlization_front_end", array("data" => $data));
+      if($user->uid == 0) {
+      drupal_add_js('jQuery(document).ready(function() {
+    jQuery(".recommended-slider").slick({
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      centerPadding: "40px",
+      prevArrow: "<button class = \'slick-prev\'><i class = \'fa fa-angle-left\'></i></button>",
+      nextArrow: "<button class = \'slick-next\'><i class = \'fa fa-angle-right\'></i></button>",
+      responsive: [    
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+         {
+          breakpoint: 680,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }       
+      ]
+    });
+  });', array("type" => "inline"));
+      }
       break;
   }
 
@@ -752,26 +782,7 @@ function url_exists($url) {
 /**
  * Implements recommended anonymous user block.
  */
-function recommended_for_you_anonymous_user() {
-  if (isset($_COOKIE['recomended_for_you'])) {
-    $sections = itg_user_log_get_sections($_COOKIE['recomended_for_you']);
-    $get_nids = itg_get_recommended_data($sections);
-    $related_dt = '';
-    if (!empty($get_nids)) {
-      $related_dt = '<span class="widget-title">' . t('RECOMMENDED FOR YOU') . '</span>';
-      $related_dt.= "<ul>";
-      $i = 0;
-      foreach ($get_nids as $key => $value) {
-        $detail = itg_user_log_get_details($value, 'pagedetails');
-        if (!empty($detail['title'])) {
-          $may_be_title = mb_strimwidth($detail['title'], 0, 200, "..");
-          $may_be_path = $detail['url'];
-          $related_dt.= "<div class='tile'>" . l($may_be_title, $may_be_path) . "</div></li>";
-        }
-        $i++;
-      }
-      $related_dt.= "</ul>";
-    }
-    return $related_dt;
-  }
+function recommended_anonymous_user() {
+  $str_data = get_personlization_front_block_data(FALSE);
+  return $str_data;
 }

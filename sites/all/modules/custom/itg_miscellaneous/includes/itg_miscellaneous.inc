@@ -8,6 +8,10 @@
  * Get itg layout list for admin
  * @return array $output
  */
+/*
+ * Inc file contains the common functions
+ */
+
 function itg_layout_list_delete() {
   // configure the table header columns
   $header = array(
@@ -217,24 +221,94 @@ function create_poll_table() {
 }
 
 /**
- * Implements create_section_category_in_mongo()
+ * Map byline with DataBase.
+ *
+ * @param type $stories
  */
-// Code started for sending the section and it category data into mongo DB
-
-
-function create_section_category_in_mongo() {
-
-  $form['submit_button'] = array(
-    '#type' => 'submit',
-    '#value' => t('Please submit for bulk insert section and its category'),
-  );
-
-  return $form;
+function _map_xml_byline(&$stories) {
+  if (isset($stories->bylines->byline) && !empty($stories->bylines->byline)) {
+    $i = 0;
+    foreach ($stories->bylines->byline as $final_byline) {
+      $source_bid = (string) $final_byline;
+      if (!empty($source_bid)) {
+        $orignal_byline = get_itg_destination_id('migrate_map_itgbyline', $source_bid);
+        $stories->bylines->byline[$i] = $orignal_byline;
+        ++$i;
+      }
+    }
+  }
 }
 
 /**
- * Implements create_section_category_in_mongo_submit().
+ * Map tag name.
+ *
+ * @param stdObject $stories
  */
+function _map_xml_tags(&$stories) {
+  if (isset($stories->tags->tag) && !empty($stories->tags->tag)) {
+    $i = 0;
+    foreach ($stories->tags->tag as $final_tags) {
+      $source_tags = (string) $final_tags;
+      try {
+        $orignal_tag = get_itg_destination_id('migrate_map_itgtags', $source_tags);
+      }
+      catch (Exception $ex) {
+        drupal_set_message($ex->getMessage(), 'error');
+      }
+      $stories->tags->tag[$i] = $orignal_tag;
+      ++$i;
+    }
+  }
+}
+
+
+/**
+ * Map primary category.
+ *
+ * @param stdObject $stories
+ */
+function _map_xml_primary_category(&$stories) {
+  if (isset($stories->primarycategory) && !empty($stories->primarycategory)) {
+    $source_cid = (string) $stories->primarycategory;
+    $pcategory_array = explode('#', $source_cid);
+    $parray_count = count($pcategory_array);
+    $table_name = itg_migrate_category_table($parray_count);
+    $last_value = end($pcategory_array);
+    $source_cid = (string) $last_value;
+    $orignal_pcategory = get_itg_destination_id($table_name, $source_cid);
+    $stories->primarycategory = $orignal_pcategory;
+  }
+}
+
+/**
+ * Map category to original category.
+ * 
+ * @param stdObject $stories
+ */
+function _map_xml_category(&$stories, $pti_section = NULL) {
+  $data_category = '';
+  if (isset($stories->categories->category) && !empty($stories->categories->category)) {
+    $i = 0;
+    foreach ($stories->categories->category as $final_category) {
+      $category_array = explode('#', $final_category);
+      $array_count = count($category_array);
+      $table_name = itg_migrate_category_table($array_count);
+      $last_value = end($category_array);
+      $source_cid = (string) $last_value;      
+      if ($pti_section != NULL) {
+        $table_name = 'migrate_map_itgsection';
+        $source_cid = $pti_section;
+        $orignal_category = get_itg_destination_id($table_name, $source_cid);
+      }
+      else {
+        $orignal_category = get_itg_destination_id($table_name, $source_cid);
+      }      
+      $stories->categories->category[$i] = $orignal_category;
+      ++$i;
+    }    
+  }
+}
+
 function create_section_category_in_mongo_submit($form, &$form_state) {
 
   $query = db_select('taxonomy_term_data', 'td');
@@ -248,13 +322,29 @@ function create_section_category_in_mongo_submit($form, &$form_state) {
       ->fields('tv', array('machine_name'))
       ->fields('icm', array('status'))
       ->execute();
+}
+/**
+ * Map Author id to original DB id.
+ *
+ * @param stdObject $stories
+ */
+function _map_xml_user(&$stories, $op) {
+  // manage created user
+  if (isset($stories->{$op}) && !empty($stories->{$op})) {
 
-
-  foreach ($result as $chunk_data) {
-    if (!empty($chunk_data) && isset($chunk_data)) {
-      $operations[] = array('create_section_cat_op', array($chunk_data));
+    $created_uid = (string) $stories->{$op};
+    try {
+      $orignal_crated_uid = get_itg_destination_id('migrate_map_itguser', $created_uid);
     }
+    catch (Exception $ex) {
+      drupal_set_message($ex->getMessage(), 'error');
+    }
+    $stories->{$op} = $orignal_crated_uid;
   }
+  else {
+    $stories->{$op} = 0;
+  }
+
 
   $batch = array(
     'title' => t('Migrating data finally....please wait....!'),
@@ -271,8 +361,28 @@ function create_section_category_in_mongo_submit($form, &$form_state) {
 }
 
 /**
- * Implements create_section_cat_op().
+ * Map city to original id.
+ *
+ * @param array $xml_city_id
+ * @param stdObject $stories
  */
+function _map_xml_city($xml_city_id, &$stories) {
+  // Get city original id.
+  $errors = array_filter($xml_city_id);
+  if (!empty($errors)) {
+    foreach ($xml_city_id as $source_city) {
+      $original_id[] = get_itg_destination_id('migrate_map_itgcity', $source_city);
+    }
+
+    // Map xml city id from databaase city id.
+    $j = 0;
+    foreach ($stories->cities->city as $key => $new_city) {
+      $stories->cities->city[$j] = $original_id[$j];
+      ++$j;
+    }
+  }
+}
+  
 function create_section_cat_op($data, &$context) {
 // Mongo code will be here
   if (function_exists('mongodb')) {
@@ -282,6 +392,16 @@ function create_section_cat_op($data, &$context) {
     // check connection
     if ($con) {
       $qry = array(
+
+//          "tid" => (int) $data->tid,
+//          "name" => $data->name,
+//          "parent" => (int) $data->parent,
+//          "vid" => (int) $data->vid,
+//          "machine_name" => $data->machine_name,
+//          "content_type" => get_content_type_list_for_this_term($data->tid),
+//          "status" => 1,
+//          'parent_data' => taxonomy_get_parents_all($data->tid),
+
         "tid" => (int) $data->tid,
         "name" => $data->name,
         "parent" => (int) $data->parent,
