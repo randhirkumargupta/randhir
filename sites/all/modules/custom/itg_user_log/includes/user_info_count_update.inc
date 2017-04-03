@@ -225,6 +225,8 @@ function itg_logged_in_user_node_insert_data($node) {
   if (function_exists('mongodb')) {
     $con = mongodb();
     if ($con) {
+      $section_tids = taxonomy_get_parents_all($node->field_primary_category[LANGUAGE_NONE][0]['value']);
+      $section_tids = array_reverse($section_tids);
       $people = $con->pagedetails;
       $qry = array(
         "nid" => $node->nid,
@@ -232,6 +234,7 @@ function itg_logged_in_user_node_insert_data($node) {
         "url" => url(drupal_get_path_alias('node/' . $node->nid), array('absolute' => TRUE)),
         "uid" => ($user->uid) ? $user->uid : 0,
         "email" => ($user->mail) ? $user->mail : "",
+        "section" => $section_tids[0]->tid,
         "name" => ($user->name) ? $user->name : "",
         "type" => $node->type,
         "viewtime" => REQUEST_TIME
@@ -240,7 +243,6 @@ function itg_logged_in_user_node_insert_data($node) {
     }
   }
 }
-
 function itg_logged_in_user_section_breakup() {
   //print_r($node);
   # configure the table header columns
@@ -280,20 +282,7 @@ function itg_logged_in_user_section_breakup() {
       }
 
       $rows = array();
-//      foreach ($userData as $row) {
-//        if ($first_start_date && $first_end_date) {
-//          $count = itg_user_log_api_form_section_breakup_count($row['uuid'], null, new MongoDate(strtotime($c_week_first_date . " 00:00:00")), new MongoDate(strtotime($c_week_first_date . " 23:59:59")));
-//        }
-//        elseif ($first_start_date && !$first_end_date) {
-//          $count = itg_user_log_api_form_section_breakup_count($row['uuid'], null, new MongoDate(strtotime($c_week_first_date. " 00:00:00")));
-//        }
-//        elseif (!$first_start_date && $first_end_date) {
-//          $count = itg_user_log_api_form_section_breakup_count($row['uuid'], null, null, new MongoDate(strtotime($c_week_first_date . " 23:59:59")));
-//        }
-//        else {
-//          $count = itg_user_log_api_form_section_breakup_count($row['uuid'], $row['viewtime']->sec);
-//        }
-//      }
+
       if (is_array($query) && empty($query)) {
         $userData = $people->find()->limit($limit);
       }
