@@ -1236,9 +1236,9 @@ function itg_videogallery_remove_video_id_parent_site_delete() {
             $deleted = db_delete('file_managed')
                     ->condition('fid', $node_by_videop['fid'][$key][$nkey])
                     ->execute();
-             $deleted = db_delete('itg_solr_video_info')
-              ->condition('fid', $node_by_videop['fid'][$key][$nkey], '=')
-              ->execute();
+            $deleted = db_delete('itg_solr_video_info')
+                    ->condition('fid', $node_by_videop['fid'][$key][$nkey], '=')
+                    ->execute();
           } catch (Exception $e) {
             watchdog_exception('file manage delete', $e);
           }
@@ -1300,10 +1300,10 @@ function itg_videogallery_remove_video_with_child() {
         }
       }
 
+
       if ($data_delete->property == VIDEO_PROPERTY) {
 
         $is_video_exist = itg_videogallery_get_video_info_video_id($data_delete->solr_video_id);
-
         $query = db_update('dailymotion_response_details');
         $query->fields(array('dailymotion_published' => 0));
         $query->condition('video_id', $data_delete->solr_video_id, '=');
@@ -1321,15 +1321,14 @@ function itg_videogallery_remove_video_with_child() {
           $node->status = 1; //(1 or 0): Published or not
           $node->promote = 0; //(1 or 0): Promoted to front page
           $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
-// p($node);
+          node_save($node);
+          $node_data = itg_videogallery_get_video_solrcontent($data_delete->solr_video_id);
+          $node = node_load($node_data[0]->nid);
+          $node->field_video_used [LANGUAGE_NONE][0]['value'] = 0;
           node_save($node);
         }
-
-        $node_data = itg_videogallery_get_video_solrcontent($data_delete->solr_video_id);
-        $node = node_load($node_data[0]->nid);
-        $node->field_video_used [LANGUAGE_NONE][0]['value'] = 0;
-        node_save($node);
       }
+     
 // delete from itg_solr_video_info table
       $deleted = db_delete('itg_solr_video_info')
               ->condition('solr_video_id', $data_delete->solr_video_id, '=')
@@ -1736,6 +1735,20 @@ function itg_videogallery_get_old_playlist($nid) {
     $output[$value->field_dailymotion_playlist_tid] = $value->name;
   }
   return $output;
+}
+
+/**
+ * This function use for unpublish cideo content delete video
+ */
+function itg_videogallery_unpublish_content_delete_video($fid) {
+  $query = db_update('itg_solr_video_info')
+          ->fields(array('is_delete' => 1));
+  $query->condition('fid', $fid);
+  $query->condition('content_type', 'video_gallery', '=');
+  $query->execute();
+  $deleted = db_delete('file_managed')
+          ->condition('fid', $fid)
+          ->execute();
 }
 
 /**
