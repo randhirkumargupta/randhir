@@ -448,11 +448,11 @@ function itg_get_recommended_data($section) {
       $cursor = $con->command(
           array(
             "distinct" => "pagedetails",
-            "key" => "nid",
+            "key" => "section",
             "query" => array('section' => (string) $key)
       ));
       foreach ($cursor['values'] as $document) {
-        $ar_document[] = $document;
+        $ar_document[] = (int)$document;
       }
     }
       return $ar_document;
@@ -472,6 +472,7 @@ function itg_user_log_get_details($nid, $collection) {
     foreach ($cursor as $document) {
       $data['title'] = $document['title'];
       $data['url'] = $document['url'];
+      $data['section'] = $document['section'];
     }
     return $data;
   }

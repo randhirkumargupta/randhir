@@ -6,10 +6,13 @@ $args = drush_get_arguments(); // Get the arguments.
 //delete_itg_widget_table();
 //update_itg_widget_table();
 //update_meta_description_in_photo();
-print_name();
+//print_name_story();
+print_name_photo();
 
-
-function print_name() {
+/**
+ * shift marking for story
+ */
+function print_name_story() {
   $query = db_select('migrate_map_itgstorylist', 'mmi');
   $query->fields('mmi', array('destid1', 'sourceid1'));
   $query->range(0,10);
@@ -33,6 +36,35 @@ function print_name() {
   }
 }
 
+/**
+ * shift marking for photo
+ */
+function print_name_photo() {
+  $xml_path = 'sites/default/files/photogallery/indiatoday-galleries.xml';
+  $xml = simplexml_load_file($xml_path, 'SimpleXMLElement');
+  foreach($xml as $xm){
+    if (isset($xm->categories->category) && !empty($xm->categories->category)) {
+        $cat = array();
+        $tid_array = array();
+        foreach ($xm->categories->category as $final_category) {
+          $cat = explode('#', $final_category);
+          foreach($cat as $cc){
+            $tid_array[] = get_itg_destination_id('migrate_map_itgphoto', (string) $cc);
+          }
+        }
+      }
+      $query = db_select('migrate_map_itgphotogallery', 'mmy');
+      $query->fields('mmy', array('destid1'));
+      $query->condition('sourceid1', (string) $xm->id, '=');
+      $result = $query->execute()->fetchField();
+      if(!empty($tid_array) && !empty($result)){
+      $ishwar = array_unique($tid_array);
+       updating_term_for_migration($result, $ishwar);
+      echo $result.'-'.(string) $xm->id.', ';
+      }
+      
+      }
+   }
 
 /**
  * 
