@@ -833,6 +833,21 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story_front.js');
     }
     
+    if(function_exists('itg_common_get_latest_byline')) {
+      $node->content['byline_id'] = itg_common_get_latest_byline($node->nid, '1');
+    }
+    
+    if (function_exists('itg_get_front_activity_info')) {
+      $node->content['front_activity_info'] = itg_get_front_activity_info($node->nid, $node->type, $user->uid, 'read_later', $status = '');
+    }
+    
+    if (function_exists('itg_common_get_smiley_title')) {
+      $node->content['story_title'] = itg_common_get_smiley_title($node->nid, 0, 255);
+    }
+    else {
+      $node->content['story_title'] = $node->title;
+    }
+    
   }
 }
 
