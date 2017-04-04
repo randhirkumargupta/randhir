@@ -1080,6 +1080,11 @@ function itg_videogallery_menu() {
       'access arguments' => array('access content'),
       'type' => MENU_CALLBACK,
   );
+   $items['delete-itg-solr'] = array(
+      'page callback' => 'itg_videogallery_delete_itg_solr',
+      'access arguments' => array('access content'),
+      'type' => MENU_CALLBACK,
+  );
   $items['solr-video-make-fid'] = array(
       'page callback' => 'itg_videogallery_solr_video_insert_in_for_fid',
       'access arguments' => array('access content'),
@@ -1123,6 +1128,24 @@ function itg_videogallery_menu() {
 
 
   return $items;
+}
+
+/**
+ * Temp function to delete itg solr
+ */
+function itg_videogallery_delete_itg_solr() {
+    $result = db_select('node', 'n')
+            ->fields('n', array('nid'))
+            ->condition('type', 'itg_solr_video', '=')
+            ->execute();
+
+    $deleted_count = 0;
+    foreach ($result as $record) {
+        node_delete($record->nid);
+        $deleted_count++;
+    }
+    pr($deleted_count);
+    exit();
 }
 
 /**

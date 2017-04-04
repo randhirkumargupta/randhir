@@ -248,7 +248,7 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['fields']['field_story_kicker_text']['alter']['max_length'] = '261';
   $handler->display->display_options['fields']['field_story_kicker_text']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['field_story_kicker_text']['element_label_colon'] = FALSE;
-  /* Field: Field: iOS */
+  /* Field: Field: Long Description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -278,6 +278,10 @@ function feature_for_category_wise_content_list_views_default_views() {
     'image_style' => '',
     'image_link' => '',
   );
+  /* Field: Content: Kicker */
+  $handler->display->display_options['fields']['field_video_kicker']['id'] = 'field_video_kicker';
+  $handler->display->display_options['fields']['field_video_kicker']['table'] = 'field_data_field_video_kicker';
+  $handler->display->display_options['fields']['field_video_kicker']['field'] = 'field_video_kicker';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -361,7 +365,7 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['fields']['field_story_kicker_text']['alter']['max_length'] = '70';
   $handler->display->display_options['fields']['field_story_kicker_text']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['field_story_kicker_text']['element_label_colon'] = FALSE;
-  /* Field: Field: iOS */
+  /* Field: Field: Long Description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -392,6 +396,12 @@ function feature_for_category_wise_content_list_views_default_views() {
     'image_style' => '',
     'image_link' => '',
   );
+  /* Field: Content: Kicker */
+  $handler->display->display_options['fields']['field_video_kicker']['id'] = 'field_video_kicker';
+  $handler->display->display_options['fields']['field_video_kicker']['table'] = 'field_data_field_video_kicker';
+  $handler->display->display_options['fields']['field_video_kicker']['field'] = 'field_video_kicker';
+  $handler->display->display_options['fields']['field_video_kicker']['label'] = '';
+  $handler->display->display_options['fields']['field_video_kicker']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
