@@ -182,7 +182,9 @@ function get_personlization_front_block_data($flag = TRUE) {
   }
   else {
     if (isset($_COOKIE['recomended_for_you'])) {
+      if(function_exists('itg_user_log_get_sections')) {
       $sections = itg_user_log_get_sections($_COOKIE['recomended_for_you']);
+      }
       $persionalization = itg_get_recommended_data($sections);
       //p($persionalization);
        $query_flag = FALSE;
