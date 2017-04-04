@@ -336,7 +336,11 @@ function itg_widget_block_info() {
   $blocks['podcast_header'] = array(
     'info' => t('Podcast: Header for podcast.')
   );
-
+  
+  $blocks['accord'] = array(
+    'info' => t('Accord'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   return $blocks;
 }
 
@@ -935,7 +939,13 @@ function itg_widget_block_view($delta = '') {
         $block['content'] = theme("podcast_banner", array("podcast_banner_array" => $podcast_banner_array, "podcast_title" => $podcast_title));
       }
       break;
+      
+      case 'accord':
+        $block['content'] = '<iframe src="'.ACCORD_URL.'" marginwidth="0" scrolling="no" align="left" frameborder="0" height="91" width="670"></iframe>';
+      break;
   }
+  
+  
 
 
   return $block;
