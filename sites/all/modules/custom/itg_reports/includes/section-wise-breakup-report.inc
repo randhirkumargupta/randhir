@@ -80,7 +80,7 @@ function itg_section_wise_breakup_form($form , &$form_state) {
     '#type' => 'submit' ,
     '#attributes' => array('class' => array('user-all-content')) ,
     '#prefix' => '<div class = "user-log-filter-btn">' ,
-    '#suffix' => '<a class="user-log-reset" href="' . base_path() . 'itg-section-wise-breakup-report">' . t('Reset') . '</a></div>' ,
+    '#suffix' => '<a class="user-log-reset btn-reset" href="' . base_path() . 'itg-section-wise-breakup-report">' . t('Reset') . '</a></div>' ,
   );
 
   $form['markup'] = array(
