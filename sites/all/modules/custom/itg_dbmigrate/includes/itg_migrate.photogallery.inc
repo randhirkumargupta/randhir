@@ -79,7 +79,8 @@ class ItgPhotogalleryMigration extends XMLMigration {
       'created' => t('created'),
       'modified' => t('modified'),
       'featured_ordering' => t('featured_ordering'),
-      'description' => 'description',
+      'description' => t('description'),
+      'metatags/description' => t('metatags/description'),
     );
 
 
@@ -167,6 +168,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
     $this->addFieldMapping('created', 'created')->xpath('created');
     $this->addFieldMapping('changed', 'modified')->xpath('modified');
     $this->addFieldMapping('status', 'published')->xpath('published');
+   
 
     $this->addFieldMapping('field_common_audio', 'commonaudio')->xpath('commonaudio');
     $this->addFieldMapping('field_common_audio_file', 'commonaudiofile')->xpath('commonaudiofile');
@@ -212,7 +214,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
     $this->addFieldMapping('pathauto')->defaultValue(0);
     $this->addFieldMapping('path', 'sef_url')->xpath('metatags/sef_url');
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
-    $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
+    $this->addFieldMapping('metatag_description', 'metatags/description')->xpath('metatags/description');
     $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
     //For New field
     $this->addFieldMapping('field_story_expert_description', 'short_description')->xpath('short_description');
@@ -508,6 +510,13 @@ class ItgPhotogalleryMigration extends XMLMigration {
       $node->field_story_social_media_integ[LANGUAGE_NONE] = $row->final_social_checkbox;
     }
 
+    // modified by
+    if (isset($row->xml->modified_by) && !empty($row->xml->modified_by)) {
+      $modified_uid = (string) $row->xml->modified_by;
+      $orignal_modified_uid = get_itg_destination_id('migrate_map_itguser', $modified_uid);
+      $node->field_modify_by[LANGUAGE_NONE][0]['value'] = $orignal_modified_uid;
+    }
+    
     // manage created user
     if (isset($row->xml->created_by) && !empty($row->xml->created_by)) {
       $created_uid = (string) $row->xml->created_by;

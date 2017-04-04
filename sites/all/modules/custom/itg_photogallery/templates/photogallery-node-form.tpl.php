@@ -53,7 +53,14 @@
 </div>
 
     <div class="col-md-4">
-        <div class="itg-sidebar-form">
+            <div class="itg-sidebar-form">
+<!--            <div id="Sidebarsectioncategory" class="itg-sidebar-form-section">
+                <h2 class="story-title"><?php //print t('Section/Category'); ?></h2>
+                <div class="itg-form-section">
+                    <?php //print drupal_render($form['category_holder']); ?>
+                </div>
+            </div>-->
+          
         <div id="Configuration" class="itg-sidebar-form-section">
   <h2 class="story-title">Configuration</h2>
   <div class="itg-form-section hide">

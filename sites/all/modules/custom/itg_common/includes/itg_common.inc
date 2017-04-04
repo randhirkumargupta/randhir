@@ -398,13 +398,15 @@ function itg_common_get_story_status($nid) {
  * @param int $entity_id
  */
 function itg_get_related_story_content($entity_id) {
-  $solr = apachesolr_get_solr();
-  $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$entity_id"));
-  $query->addParam('rows', '4'); // How many rows of result to display default it is 10.
-  $query->addParam('qf', 'entity_id'); // Only search in id
-  $query->addParam('bs_status', 'true'); // Only search in title
-  $resp_search = $query->search();
-  return isset($resp_search->response->docs[0]) ? $resp_search->response->docs[0] : "";
+  if (function_exists('apachesolr_get_solr')) {
+    $solr = apachesolr_get_solr();
+    $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$entity_id"));
+    $query->addParam('rows', '4'); // How many rows of result to display default it is 10.
+    $query->addParam('qf', 'entity_id'); // Only search in id
+    $query->addParam('bs_status', 'true'); // Only search in title
+    $resp_search = $query->search();
+    return isset($resp_search->response->docs[0]) ? $resp_search->response->docs[0] : "";
+  }
 }
 
 /**
@@ -554,47 +556,48 @@ function itg_common_custompath_insert_load($node) {
  * Creating Custom path alias for story, photogallery and videogallery
  */
 
-function itg_common_custompath_migrated_load($node) {
-    if(!empty ($node->path['alias'])) {
-      
-           $node_sef = $node->path['alias'];
-        
-    } else {
-        $title_lenght = strlen($node->title);
-        if($title_lenght >= 160){
-           $node_sef = substr($node->title, 0, 160);
-        } else {
-           $node_sef = $node->title;
-        }
+function itg_common_custompath_migrated_load($node, $type = NULL) {
+  if (!empty($node->path['alias'])) {
+
+    $node_sef = $node->path['alias'];
+  }
+  else {
+    $title_lenght = strlen($node->title);
+    if ($title_lenght >= 160) {
+      $node_sef = substr($node->title, 0, 160);
     }
-    
-    
-    if($node->type == 'photogallery') {
-      $published_date = date('Y-m-d', $node->created);
-    }else {
-      $published_dat = explode(' ', $node->field_itg_content_publish_date['und'][0]['value']);
-      $published_date = $published_dat[0];
+    else {
+      $node_sef = $node->title;
     }
-    $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
-    if (!empty($getsection)) {
-      $parents = taxonomy_get_parents_all($getsection);
-      if (isset($parents) && !empty($parents)) {
-        foreach ($parents as $key => $val) {
-          $section_hierarchy[] = $val->name;
-        }
+  }
+
+
+  if ($node->type == 'photogallery') {
+    $published_date = date('Y-m-d', $node->created);
+  }
+  else {
+    $published_dat = explode(' ', $node->field_itg_content_publish_date['und'][0]['value']);
+    $published_date = $published_dat[0];
+  }
+  $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
+  if (!empty($getsection)) {
+    $parents = taxonomy_get_parents_all($getsection);
+    if (isset($parents) && !empty($parents)) {
+      foreach ($parents as $key => $val) {
+        $section_hierarchy[] = $val->name;
       }
-      $set_hierarchy = array_reverse($section_hierarchy);
-      $pathdata = strtolower(implode("/", $set_hierarchy)) . '/'. $node->type . '/' . trim($node_sef). '-'. $node->nid .'-'. $published_date;
-      $newpath = itg_common_custompath_insert_val($pathdata);
-      $node->path = array('alias' => $newpath, 'pathauto' => FALSE);
     }
+    $set_hierarchy = array_reverse($section_hierarchy);
+    if ($type != 'update_migrated') {
+      $pathdata = strtolower(implode("/", $set_hierarchy)) . '/' . $node->type . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
+      $newpath = itg_common_custompath_insert_val($pathdata);
+    }
+    else {
+      $newpath = $node_sef;
+    }
+    $node->path = array('alias' => $newpath, 'pathauto' => FALSE);
+  }
 }
-
-
-
-
-
-
 
 /** 
  * Implementing 'itg_common_custompath_insert_val'.
@@ -614,4 +617,17 @@ function itg_common_custompath_insert_val($pathdata) {
         $pathdata = str_replace(array(':','*', '"', "'", '#'), "-", $pathdata);
     }
     return $pathdata;
+}
+
+/**
+ * Helper function to show fb share count.
+ * @param int $id
+ */
+function itg_get_fb_share($id, $type) {
+  $result = db_select('itg_lrp_loyalty_points', 'n')
+    ->fields('n', array('id'))
+    ->condition('n.loyalty_type', $type)
+    ->condition('n.node_id', $id)
+    ->execute();
+  return $result->rowCount();
 }

@@ -206,6 +206,9 @@ function itg_menu_manager_form($form, &$form_state) {
       'callback' => 'get_url_of_current_term',
       'wrapper' => 'entire_form',
     ),
+    '#attributes' => array(
+      'onkeydown' => array("return isValidKey(event)"),
+    ),
     '#default_value' => isset($default_values['title']) ? $default_values['title'] : "",
     '#required' => TRUE,
   );
@@ -301,6 +304,13 @@ function itg_menu_manager_form($form, &$form_state) {
     unset($form['title']['#ajax']);
   }
 
+  drupal_add_css('#autocomplete {
+height: 300px;
+max-height: 400px;
+overflow: auto;
+overflow-y: auto;
+overflow-x: hidden;
+}', 'inline');
 ##############################################################################
 ########### Condtion removed fornow for file title in case of second #########
 ##############################################################################
@@ -420,7 +430,8 @@ function itg_menu_manager_get_child_under_category_management($string) {
   $match_terms_query = db_select('taxonomy_term_data', 'ttd')
       ->fields('ttd', array('tid', 'name'))
       ->condition('ttd.tid', array($options), 'IN')
-      ->condition('ttd.name', '%' . db_like($string) . '%', 'LIKE');
+      ->condition('ttd.name', '%' . db_like($string) . '%', 'LIKE')
+      ->range(0,20);
 
   $match_terms = $match_terms_query->execute()->fetchAll();
 

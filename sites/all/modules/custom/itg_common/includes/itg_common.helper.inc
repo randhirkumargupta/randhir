@@ -87,6 +87,7 @@ define('ISSUE_LARGE_IMAGE_WIDTH', 300);
 define('ISSUE_LARGE_IMAGE_HEIGHT', 225);
 define('ISSUE_SMALL_WIDTH', 210);
 define('ISSUE_SMALL_HEIGHT', 145);
+define('VIDEO_PROPERTY', 'indiatoday');
 
 /**
  * value define for Ad.
@@ -107,6 +108,8 @@ define('POLITICIAN_TID', variable_get('tid_politician'));
 define('ANCHOR_TID', variable_get('anchor_tid'));
 define('REPORTER_TID', variable_get('reporter_tid'));
 define('TAG_ID', 1);
+define('VIDEO_MAIN_URL', 'http://medias3d.intoday.in');
+define('VIDEO_BITRATE_URL', 'http://indiatoday-vh.akamaihd.net/i');
 
 define('NEWSLETTER_EDUCATION_TID', variable_get('newsletter_education_tid'));
 

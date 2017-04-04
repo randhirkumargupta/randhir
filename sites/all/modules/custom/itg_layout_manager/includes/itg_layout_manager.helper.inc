@@ -115,6 +115,12 @@ function get_itg_widget($widget_name, $widget_info = 'custom', $filter_url = NUL
   else if ($widget_info[0] == 'view') {
     return views_embed_view($widget_name, $widget_info[1], $widget_info[2]);
   }
+  elseif (isset($widget_name) && $widget_name == 'recommended_anonymous_user') {
+    //itg_front_end_common/recommended_anonymous_user
+    $block = block_load('itg_front_end_common', $widget_name);
+    $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+    return render($render_array);
+  }
   else {  
       
       if($widget_name=='custom_ask_expert_form_block')

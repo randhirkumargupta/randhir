@@ -57,6 +57,23 @@ function itg_reports_menu() {
         'file' => 'includes/itg_users_reports.inc',
     );
     
+    // Menu for section wise breakup.
+    $items['itg-section-wise-breakup-report'] = array(
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('itg_section_wise_breakup_form'),
+        'access arguments' => array('administer nodequeue'),
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/section-wise-breakup-report.inc',
+    );
+    
+    $items['itg-registered-vs-anonymous-user-content-visited-report'] = array(
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('itg_registered_vs_anonymous_user_form'),
+        'access arguments' => array('administer nodequeue'),
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/registered-vs-anonymous-user-content-visited-report.inc',
+    );
+    
     return $items;
 }
 
@@ -489,4 +506,16 @@ function itg_reports_user_login(&$edit, $account) {
   $user_required_data['mobile'] =  $account->field_mobile_number['und'][0]['value'];
   module_load_include('inc', 'itg_reports', 'includes/itg_users_reports');
   _itg_report_save_active_user_data($user_required_data);
+}
+
+/**
+ * Implements hook_node_view()
+ */
+function itg_reports_node_view($node, $view_mode, $langcode) {
+  global $user;
+  module_load_include('inc', 'itg_reports', 'includes/section-wise-breakup-report');
+  $nodes_catagories = $node->field_story_category[LANGUAGE_NONE];
+  foreach($nodes_catagories as $cat) {
+    itg_reports_save_section_wise_report_data((int)$cat['tid'] , $user->uid , $node);
+  }
 }

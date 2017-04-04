@@ -1,9 +1,9 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @file
+ * File provide personalization functionality.
+ *
  */
 
 /**
@@ -18,23 +18,23 @@ function save_itg_widget_personalization_data($updates) {
   // Delete all the tids from table if they are not in $updates variable
   // unsued tid should be delete
   db_delete('itg_widget_order')
-        ->condition('widget', $widget_name)
-        ->condition('nid', $nids, "NOT IN")
-        ->condition('extra', $user->uid)
-        ->execute();
+      ->condition('widget', $widget_name)
+      ->condition('nid', $nids, "NOT IN")
+      ->condition('extra', $user->uid)
+      ->execute();
   // Update the weight of tids if exists or insert if dont exists.
-  foreach ($updates as $termId => $weight) {
+  foreach ($updates as $term_id => $weight) {
     db_merge('itg_widget_order')
-        ->key(array('nid' => $termId, 'widget' => $widget_name, 'extra' => $user->uid))
+        ->key(array('nid' => $term_id, 'widget' => $widget_name, 'extra' => $user->uid))
         ->fields(array(
-          'nid' => $termId,
+          'nid' => $term_id,
           'widget' => $widget_name,
           'weight' => $weight,
           'extra' => $user->uid,
         ))
         ->execute();
   }
-  drupal_set_message("My Preferences Has Been Save.");
+  drupal_set_message(t("My Preferences Has Been Save."));
 }
 
 /**
@@ -62,26 +62,26 @@ function get_personalization_front_data() {
       // Orderby weight or taxonomyterm id.
       ->orderBy('iwo.weight', 'DESC')
       ->orderBy('iwo.nid', 'DESC')
-      ->range(0,30);
+      ->range(0, 30);
   $result = $query->execute()->fetchAllAssoc('nid');
   $new_array_of_terms = array_keys($result);
   // case handled if perferences is not saved.
   if (count($result) == 0) {
     $weight_count_loop = TRUE;
     $query = db_select('itg_widget_order', 'iwo');
-    $query->leftJoin('field_data_field_set_as_featured_cate' ,'fc' ,'fc.entity_id=iwo.cat_id');
+    $query->leftJoin('field_data_field_set_as_featured_cate', 'fc', 'fc.entity_id=iwo.cat_id');
     $query->fields('iwo', array('cat_id'))
         ->condition('iwo.widget', "section_wise_widget")
-        ->condition('fc.field_set_as_featured_cate_value','Yes')
+        ->condition('fc.field_set_as_featured_cate_value', 'Yes')
         ->groupBy('iwo.cat_id')
-        ->range(0,30);
+        ->range(0, 30);
     $result = $query->execute()->fetchAllAssoc('cat_id');
   }
-  if($weight_count_loop) {
+  if ($weight_count_loop) {
     $new_array_of_terms = array();
     // Get only tids.
     $tids_array = array_keys($result);
-    foreach($tids_array as $term_id) {
+    foreach ($tids_array as $term_id) {
       $new_array_of_terms[$term_id] = count_node_under_tid($term_id);
     }
     krsort($new_array_of_terms);
@@ -102,7 +102,7 @@ function count_node_under_tid($tid) {
   $query->condition('n.status', 1);
   $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
   $query->orderBy('n.created', 'DESC');
-  return $query->execute()->rowCount();  
+  return $query->execute()->rowCount();
 }
 
 function get_array_in_decending_mode($temp_tid_array_baised_on_node_count) {
@@ -126,14 +126,18 @@ function get_array_in_decending_mode($temp_tid_array_baised_on_node_count) {
  * @param nid $nid
  * @return array
  */
-function get_personlization_node_data_for_front($nid) {
+function get_personlization_node_data_for_front($nid, $is_blog_true = TRUE) {
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
   $query->leftJoin('file_managed', 'fm', 'fm.fid=eli.field_story_extra_large_image_fid');
   $query->fields('n', array('title', 'nid'));
   $query->fields('fm', array('uri'));
   $query->condition('n.nid', $nid);
-  $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
+    if(!$is_blog_true) {
+    $query->condition('n.type', array('story', 'videogallery', 'photogallery' , 'blog'), 'IN');
+  } else {
+    $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
+  }
   $query->condition('n.status', 1);
   $query->orderBy('n.created', 'DESC');
   return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -145,7 +149,7 @@ function get_personlization_node_data_for_front($nid) {
  * @param int $tid
  * @return array
  */
-function get_node_ids_assoicated_with_tid($tid, $is_front = FALSE) {
+function get_node_ids_assoicated_with_tid($tid, $is_front = FALSE , $is_blog_true = TRUE) {
   $query = db_select('taxonomy_index', 'ti');
   $query->leftJoin('node', 'n', 'n.nid=ti.nid');
   $query->leftJoin('taxonomy_term_data', 'ttd', 'ttd.tid=ti.tid');
@@ -154,7 +158,11 @@ function get_node_ids_assoicated_with_tid($tid, $is_front = FALSE) {
   $query->addField('ti', 'nid');
   $query->condition('ti.tid', $tid);
   $query->condition('n.status', 1);
-  $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
+  if(!$is_blog_true) {
+    $query->condition('n.type', array('story', 'videogallery', 'photogallery' , 'blog'), 'IN');
+  } else {
+    $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
+  }
   $query->orderBy('n.created', 'DESC');
   if ($is_front) {
     $query->range(0, 2);
@@ -165,17 +173,33 @@ function get_node_ids_assoicated_with_tid($tid, $is_front = FALSE) {
 /**
  * function is used to return array for front end.
  */
-function get_personlization_front_block_data() {
-  $persionalization = get_personalization_front_data();
+function get_personlization_front_block_data($flag = TRUE) {
+  global $user;
+  $query_flag = TRUE;
+  if ($flag && $user->uid != 0) {
+    $persionalization = get_personalization_front_data();
+    //p($persionalization);
+  }
+  else {
+    if (isset($_COOKIE['recomended_for_you'])) {
+      if(function_exists('itg_user_log_get_sections')) {
+      $sections = itg_user_log_get_sections($_COOKIE['recomended_for_you']);
+      }
+      $persionalization = itg_get_recommended_data($sections);
+      //p($persionalization);
+       $query_flag = FALSE;
+    }
+  }
+  //$persionalization = get_personalization_front_data();
   //pr($persionalization);
   $front_end_data = array();
   foreach ($persionalization as $persionalization_key => $persionalization_data) {
     // tid saved in nid colom in itg_widget_order table
-    $nodes_associate_with_taxonomy = get_node_ids_assoicated_with_tid($persionalization_data, TRUE);
+    $nodes_associate_with_taxonomy = get_node_ids_assoicated_with_tid($persionalization_data, TRUE, $query_flag);
     foreach ($nodes_associate_with_taxonomy as $key => $nid_array) {
       $nid = $nid_array['nid'];
       $tid = $persionalization_data;
-      $temp_node_data = get_personlization_node_data_for_front($nid);
+      $temp_node_data = get_personlization_node_data_for_front($nid, $query_flag);
       // Create term details object.
       $temp_term = new stdClass();
       $temp_term->name = $nid_array['name'];
@@ -187,6 +211,7 @@ function get_personlization_front_block_data() {
   }
   return $front_end_data;
 }
+
 //
 ///**
 // * Function gives only name and tid.

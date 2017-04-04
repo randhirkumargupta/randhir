@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * itg_widget.module
@@ -29,10 +30,13 @@ function itg_widget_init() {
 // Js for move funtionality.
 // This is use in case of nodequeue in case of custom table we calls a callback funtion.
   global $base_url;
+  global $user;
+
   $settings = array();
   $settings['base_url'] = $base_url;
   drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));
+  
 }
 
 /**
@@ -159,6 +163,7 @@ function itg_widget_menu() {
     'description' => 'Custom variables settings page',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_widgets_custom_variables'),
+    'file' => 'includes/itg_widgets_custom_variables.inc',
     'access arguments' => array('access administrator'),
     'type' => MENU_NORMAL_ITEM,
   );
@@ -172,6 +177,8 @@ function itg_widget_menu() {
   $items['site-map'] = array(
     'page callback' => 'itg_widget_site_map',
     'type' => MENU_CALLBACK,
+    'file' => 'includes/itg-site-map.inc',
+    'file path' => drupal_get_path('module', 'itg_widget'),
     'access arguments' => array('access content'),
   );
 
@@ -184,103 +191,6 @@ function itg_widget_menu() {
 }
 
 /**
- * function to get sitemap.
- * @return type
- */
-function itg_widget_site_map() {
-  drupal_add_css(".nested-taxonomy-tree a:hover {color: #a00606 !important}", array("type" => "inline", "scope" => "footer"));
-  $tree = extranet_get_nested_tree((int) CATEGORY_MANAGMENT);
-  $keys = array_keys($tree);
-  foreach ($keys as $index => $data) {
-    $term_array = array($keys[$index] => $tree[$keys[$index]]);
-    if ($index % 2 == 0) {
-      $left_tree .= extranet_output_nested_tree($term_array);
-    }
-    else {
-      $right_tree .= extranet_output_nested_tree($term_array);
-    }
-  }
-  $print_tree = '<div class="row site-map"><div class="col-md-6">' . $left_tree . '</div> <div class="col-md-6">' . $right_tree . '</div></div>';
-  return $print_tree;
-}
-
-/**
- * Function create nested tree ul li for given array format.
- * @param array $tree
- * @return string
- */
-function extranet_output_nested_tree($tree) {
-  if (count($tree)) {
-    $output = '<ul class="nested-taxonomy-tree">';
-    foreach ($tree as $term) {
-      if (function_exists('itg_category_manager_term_state')) {
-        if (itg_category_manager_term_state($term->tid)) {
-          $output .= '<li class="taxonomy-term">';
-          $output .= l($term->name, "taxonomy/term/$term->tid");
-          if ($term->children) {
-            $output .= extranet_output_nested_tree($term->children);
-          }
-          $output .= '</li>';
-        }
-      }
-      else {
-        $output .= '<li class="taxonomy-term">';
-        $output .= l($term->name, "taxonomy/term/$term->tid");
-        if ($term->children) {
-          $output .= extranet_output_nested_tree($term->children);
-        }
-        $output .= '</li>';
-      }
-    }
-    $output .= '</ul>';
-  }
-  return $output;
-}
-
-/**
- * Function to get array of active category tree array format.
- * @param array $terms
- * @param int $max_depth
- * @param int $parent
- * @param array $parents_index
- * @param int $depth
- * @return array
- */
-function extranet_get_nested_tree($terms = array(), $max_depth = NULL, $parent = 0, $parents_index = array(), $depth = 0) {
-  if (is_int($terms)) {
-    $terms = taxonomy_get_tree($terms);
-  }
-
-  foreach ($terms as $term) {
-    foreach ($term->parents as $term_parent) {
-      if ($term_parent == $parent) {
-        if (function_exists('itg_category_manager_term_state') && itg_category_manager_term_state($term->tid)) {
-          $return[$term->tid] = $term;
-        }
-        else {
-          $return[$term->tid] = $term;
-        }
-      }
-      else {
-        if (function_exists('itg_category_manager_term_state') && itg_category_manager_term_state($term->tid)) {
-          $parents_index[$term_parent][$term->tid] = $term;
-        }
-        else {
-          $parents_index[$term_parent][$term->tid] = $term;
-        }
-      }
-    }
-  }
-
-  foreach ($return as &$term) {
-    if (isset($parents_index[$term->tid]) && (is_null($max_depth) || $depth < $max_depth)) {
-      $term->children = extranet_get_nested_tree($parents_index[$term->tid], $max_depth, $term->tid, $parents_index, $depth + 1);
-    }
-  }
-  return $return;
-}
-
-/**
  * This function use for update key candidate election status
  */
 function update_keycandidate_status() {
@@ -288,7 +198,7 @@ function update_keycandidate_status() {
   $fields_name = $_POST['fname'];
   $fields_name = explode('-', $fields_name);
   db_update('itg_widget_order')
-      ->fields(array('extra' => $status,))
+      ->fields(array('extra' => $status, ))
       ->condition('widget', 'key_candidate')
       ->condition('nid', $fields_name[1])
       ->condition('cat_id', $fields_name[2])
@@ -434,6 +344,7 @@ function itg_widget_block_info() {
  * {@inheritdoc}
  */
 function itg_widget_block_view($delta = '') {
+  global $user;
   $block = array();
   switch ($delta) {
     // Big Story Content.
@@ -723,20 +634,6 @@ function itg_widget_block_view($delta = '') {
             }
           });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
       );
-      /* drupal_add_js($base_url . '/sites/all/libraries/rollingslider/script/jquery.rollingslider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
-        );
-        drupal_add_css($base_url . '/sites/all/libraries/rollingslider/style/index.css', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
-        );
-
-        drupal_add_js("jQuery('#featuredvideo').RollingSlider({
-        showArea:'#example',
-        prev:'#jprev',
-        next:'#jnext',
-        moveSpeed:500,
-        autoPlay:false
-        });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-        );
-        drupal_add_js('misc/jquery.js'); */
       module_load_include('inc', 'itg_widget', 'includes/featured_video_carousel');
       $info['widget'] = 'video_carousel_list_widget';
       $info['order'] = 'ASC';
@@ -770,6 +667,7 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_personalization');
       $data = get_personlization_front_block_data();
       $block['content'] = theme("personlization_front_end", array("data" => $data));
+      if($user->uid) {
       drupal_add_js('jQuery(document).ready(function() {
     jQuery(".recommended-slider").slick({
       slidesToShow: 3,
@@ -795,6 +693,7 @@ function itg_widget_block_view($delta = '') {
       ]
     });
   });', array("type" => "inline"));
+      }
       break;
     case 'home_page_poll_widget_block':
       $selected_poll_widget = get_homepage_current_poll_widget('poll', 'poll_widget');
@@ -1146,18 +1045,6 @@ function itg_get_video_display_for_big_story($nid) {
   print '<div class="big-story-popup"><span id="close-big-story"><a href="#">X</a></span>';
   itg_widget_dailymotion_get_videogallery_slider($nid);
   print '</div>';
-//  $node = node_load($nid);
-//  if (module_exists('itg_videogallery')) {
-//    $fid = $node->field_upload_video['und'][0]['fid'];
-//    $vid = itg_videogallery_get_videoid($fid);
-//  }
-//  $content = '<span id="close-big-story"><a href="#">X</a></span>
-//    <iframe frameborder="0"
-//            src="https://www.dailymotion.com/embed/video/' . $vid . '?autoplay=0&mute=1&ui-start-screen-info"
-//            allowfullscreen>
-//   </iframe>
-//  ';
-//  print $content;
 }
 
 /**
@@ -1352,7 +1239,7 @@ function itg_widget_delete_data_from_widget($widget_name, $nid = 0, $stateid = 0
 }
 
 /**
- * Comman function to insert widget data.
+ * Common function to insert widget data.
  * @param int $node
  * @param string $widget_name
  * @param string $category_tid
@@ -1420,6 +1307,7 @@ function itg_widget_get_primary_cat($nid) {
 function itg_widget_node_delete($node) {
   itg_widget_handle_unpublished_node($node->nid, FALSE);
 }
+
 /**
  * Function to delete nodes from widget and nodequeue.
  * @param int $nid
@@ -1433,23 +1321,14 @@ function itg_widget_handle_unpublished_node($nid, $magazin_widget_condition = TR
     try {
       $query = db_delete('itg_widget_order');
       $query->condition('nid', $nid);
-      if($magazin_widget_condition) {
-        $query->condition('widget', 'issue_primary_category_magazin_widget' ,'!=');
+      if ($magazin_widget_condition) {
+        $query->condition('widget', 'issue_primary_category_magazin_widget', '!=');
       }
       $query->execute();
     }
     catch (Exception $ex) {
-      //watchdog("widget_delete", "From itg_widget_order " + $ex->getMessage());
+      drupal_set_message($ex->getMessage(), 'error');
     }
-    // Delete from nodequeue. As we have used nodequeue only for widgets. So we can remove from nodeid.
-//    try {
-//      db_delete('nodequeue_nodes')
-//          ->condition('nid', $nid)
-//          ->execute();
-//    }
-//    catch (Exception $ex) {
-//      //watchdog("widget_delete", "From nodequeue_nodes " + $ex->getMessage());
-//    }
   }
 }
 
@@ -1578,7 +1457,7 @@ function itg_widget_update_weight_during_order_reorder($form, &$form_state) {
     }
   }
   else {
-    drupal_set_message("This order already saved.");
+    drupal_set_message(t("This order already saved."));
   }
 }
 
@@ -1630,49 +1509,49 @@ function _get_widget_name($view_name, $page_name) {
   if (($view_name == 'views_form_section_wise_draggable_content_order_page' || $view_name == 'views_form_section_wise_content_ordering_list_page') && $page_name == 'page') {
     $widget = 'section_wise_widget';
   }
-  else if ($view_name == "views_form_story_widget_page" && $page_name == "page_1") {
+  elseif ($view_name == "views_form_story_widget_page" && $page_name == "page_1") {
     $widget = 'top_stories_widget';
   }
-  else if ($view_name == "views_form_story_widget_page" && $page_name == "trending_videos") {
+  elseif ($view_name == "views_form_story_widget_page" && $page_name == "trending_videos") {
     $widget = 'trending_videos_widget';
   }
-  else if ($view_name == "views_form_story_widget_page" && $page_name == "most_popular") {
+  elseif ($view_name == "views_form_story_widget_page" && $page_name == "most_popular") {
     $widget = 'most_popular_widget';
   }
-  else if ($view_name == "views_form_story_widget_page" && $page_name == "top_takes_video") {
+  elseif ($view_name == "views_form_story_widget_page" && $page_name == "top_takes_video") {
     $widget = 'top_takes_video_widget';
   }
-  else if ($view_name == "views_form_story_widget_page" && $page_name == "watch_right_now") {
+  elseif ($view_name == "views_form_story_widget_page" && $page_name == "watch_right_now") {
     $widget = 'watch_right_now_widget';
   }
-  else if ($view_name == "views_form_widget_anchors_listing_page" && $page_name == "anchors_listing_page") {
+  elseif ($view_name == "views_form_widget_anchors_listing_page" && $page_name == "anchors_listing_page") {
     $widget = 'anchors_listing_widget';
   }
-  else if ($view_name == "views_form_home_page_feature_widget_page" && $page_name == "page_1") {
+  elseif ($view_name == "views_form_home_page_feature_widget_page" && $page_name == "page_1") {
     $widget = 'home_page_feature_widget';
   }
-  else if ($view_name == "views_form_photo_carousel_widget_page" && $page_name == "photo_carousel_list") {
+  elseif ($view_name == "views_form_photo_carousel_widget_page" && $page_name == "photo_carousel_list") {
     $widget = 'photo_carousel_list_widget';
   }
-  else if ($view_name == "views_form_photo_carousel_widget_page" && $page_name == "video_carousel_list") {
+  elseif ($view_name == "views_form_photo_carousel_widget_page" && $page_name == "video_carousel_list") {
     $widget = 'video_carousel_list_widget';
   }
-  else if ($page_name == 'we_may_suggest_widget') {
+  elseif ($page_name == 'we_may_suggest_widget') {
     $widget = 'we_may_suggest_widget';
   }
-  else if ($page_name == 'most_popular_widget') {
+  elseif ($page_name == 'most_popular_widget') {
     $widget = 'we_may_suggest_widget';
   }
-  else if ($page_name == 'big_story_format') {
+  elseif ($page_name == 'big_story_format') {
     $widget = 'big_story_format_widget';
   }
-  else if ($page_name == 'photo_carousel_list') {
+  elseif ($page_name == 'photo_carousel_list') {
     $widget = 'photo_carousel_list_widget';
   }
-  else if ($page_name == 'video_carousel_list') {
+  elseif ($page_name == 'video_carousel_list') {
     $widget = 'video_carousel_list_widget';
   }
-  else if ($page_name == 'dont_miss_content') {
+  elseif ($page_name == 'dont_miss_content') {
     $widget = 'dont_miss_content_widget';
   }
   return $widget;

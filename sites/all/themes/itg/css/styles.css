@@ -248,14 +248,20 @@ img {
   margin-bottom: 40px;
 }
 
-.zoom-image {
+.zoom-image, #block-itg-front-end-common-latest-from-aajtak ul li a.pic,
+#block-itg-front-end-common-latest-from-pti ul li a.pic,
+#block-itg-front-end-common-latest-from-businesstoday ul li a.pic {
   overflow: hidden;
   display: block;
 }
-.zoom-image img {
+.zoom-image img, #block-itg-front-end-common-latest-from-aajtak ul li a.pic img,
+#block-itg-front-end-common-latest-from-pti ul li a.pic img,
+#block-itg-front-end-common-latest-from-businesstoday ul li a.pic img {
   transition: all 500ms ease 0s;
 }
-.zoom-image img:hover {
+.zoom-image img:hover, #block-itg-front-end-common-latest-from-aajtak ul li a.pic img:hover,
+#block-itg-front-end-common-latest-from-pti ul li a.pic img:hover,
+#block-itg-front-end-common-latest-from-businesstoday ul li a.pic img:hover {
   transform: scale(1.2);
 }
 
@@ -2555,6 +2561,16 @@ footer .multiple-items-footer i.slick-next {
 }
 .story-section .story-right .description video {
   max-width: 100%;
+}
+.story-section .story-right .description ul {
+  list-style: disc;
+  padding-left: 18px;
+}
+.story-section .story-right .description a {
+  color: #1a3c8d;
+}
+.story-section .story-right .description a:hover {
+  text-decoration: underline;
 }
 .story-section .story-right .briefcase {
   margin-top: 20px;
@@ -5224,7 +5240,7 @@ h1.category-heading {
   border: 1px solid #242424;
 }
 #block-views-video-landing-header-block .video-header-left .iframe-video {
-  padding-bottom: 59.9%;
+  padding-bottom: 72.3%;
 }
 #block-views-video-landing-header-block .video-header-left .social-likes {
   float: none;
@@ -12988,6 +13004,7 @@ span.smilies-title img {
 #block-itg-front-end-common-latest-from-pti ul,
 #block-itg-front-end-common-latest-from-businesstoday ul {
   border: 1px solid #dddddd;
+  min-height: 381px;
 }
 #block-itg-front-end-common-latest-from-aajtak ul .third-party-list,
 #block-itg-front-end-common-latest-from-pti ul .third-party-list,
@@ -13012,8 +13029,405 @@ span.smilies-title img {
   line-height: 19px;
   color: #323232;
 }
+#block-itg-front-end-common-latest-from-aajtak ul li a.pic,
+#block-itg-front-end-common-latest-from-pti ul li a.pic,
+#block-itg-front-end-common-latest-from-businesstoday ul li a.pic {
+  max-height: 55px;
+}
 #block-itg-front-end-common-latest-from-aajtak ul li + li,
 #block-itg-front-end-common-latest-from-pti ul li + li,
 #block-itg-front-end-common-latest-from-businesstoday ul li + li {
   border-top: 1px solid #dddddd;
 }
+
+#block-itg-front-end-common-latest-from-businesstoday a.pic img {
+  max-width: 56px;
+}
+
+.agbutton .error-msg {
+  color: red;
+}
+
+.jw-sharing-dock-btn {
+  display: none;
+}
+
+/* CSS For Story Modal Popup and Carousel */
+.story-section iframe.embedgalleryt {
+  min-height: 200px;
+  height: auto;
+}
+
+.ifrme_photo .box_frm {
+  position: relative;
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  display: none;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+}
+
+.modal.fade .modal-dialog {
+  -webkit-transition: -webkit-transform .3s ease-out;
+  -o-transition: -o-transform .3s ease-out;
+  transition: transform .3s ease-out;
+  -webkit-transform: translate(0, -25%);
+  -ms-transform: translate(0, -25%);
+  -o-transform: translate(0, -25%);
+  transform: translate(0, -25%);
+}
+
+.modal.in .modal-dialog {
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+
+.modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.modal-dialog {
+  position: relative;
+  width: auto;
+  margin: 10px;
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  outline: 0;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  background-color: #000;
+}
+
+.modal-backdrop.fade {
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+
+.modal-backdrop.in {
+  filter: alpha(opacity=50);
+  opacity: .5;
+}
+
+.modal-header {
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.modal-header .close {
+  margin-top: -2px;
+}
+
+.modal-title {
+  margin: 0;
+  line-height: 1.42857143;
+}
+
+.modal-body {
+  position: relative;
+  padding: 15px;
+}
+
+.modal-footer {
+  padding: 15px;
+  text-align: right;
+  border-top: 1px solid #e5e5e5;
+}
+
+.modal-footer .btn + .btn, .modal-footer .page-user form .form-submit + .btn, .page-user form .modal-footer .form-submit + .btn, .modal-footer #block-formblock-ask-an-expert .form-submit + .btn, #block-formblock-ask-an-expert .modal-footer .form-submit + .btn, .modal-footer .question-container .form-submit + .btn, .question-container .modal-footer .form-submit + .btn, .modal-footer #content .node-form .form-actions .form-submit + .btn, #content .node-form .form-actions .modal-footer .form-submit + .btn, .modal-footer #content #comments .comment-form .form-actions .form-submit + .btn, #content #comments .comment-form .form-actions .modal-footer .form-submit + .btn, .modal-footer #comments #content .comment-form .form-actions .form-submit + .btn, #comments #content .comment-form .form-actions .modal-footer .form-submit + .btn, .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .btn, .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .form-submit + .btn, .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .btn, .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .form-submit + .btn, .modal-footer .page-user form .btn + .form-submit, .page-user form .modal-footer .btn + .form-submit, .modal-footer .page-user form .form-submit + .form-submit, .page-user form .modal-footer .form-submit + .form-submit, .modal-footer #block-formblock-ask-an-expert .page-user form .form-submit + .form-submit, .modal-footer #content .node-form .form-actions .page-user form .form-submit + .form-submit, .modal-footer #content #comments .comment-form .form-actions .page-user form .form-submit + .form-submit, .modal-footer #comments #content .comment-form .form-actions .page-user form .form-submit + .form-submit, .modal-footer #block-formblock-ask-an-expert .btn + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn + .form-submit, #block-formblock-ask-an-expert .modal-footer .page-user form .form-submit + .form-submit, .modal-footer #block-formblock-ask-an-expert .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert td > .form-submit + .form-submit, #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert td > .ajax-new-content > .form-submit + .form-submit, #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .question-container .btn + .form-submit, .question-container .modal-footer .btn + .form-submit, .modal-footer #block-formblock-ask-an-expert .question-container .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .question-container .form-submit + .form-submit, .modal-footer .question-container .form-submit + .form-submit, .question-container .modal-footer .form-submit + .form-submit, .modal-footer #content .node-form .form-actions .question-container .form-submit + .form-submit, .modal-footer #content #comments .comment-form .form-actions .question-container .form-submit + .form-submit, .modal-footer #comments #content .comment-form .form-actions .question-container .form-submit + .form-submit, .modal-footer #content .node-form .form-actions .btn + .form-submit, #content .node-form .form-actions .modal-footer .btn + .form-submit, #content .node-form .form-actions .modal-footer .page-user form .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .question-container .form-submit + .form-submit, .modal-footer #content .node-form .form-actions .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions td > .form-submit + .form-submit, #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer #content #comments .comment-form .form-actions .btn + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn + .form-submit, #content #comments .comment-form .form-actions .modal-footer .page-user form .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .question-container .form-submit + .form-submit, .modal-footer #content #comments .comment-form .form-actions .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions td > .form-submit + .form-submit, #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer #comments #content .comment-form .form-actions .btn + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn + .form-submit, #comments #content .comment-form .form-actions .modal-footer .page-user form .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .question-container .form-submit + .form-submit, .modal-footer #comments #content .comment-form .form-actions .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions td > .form-submit + .form-submit, #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .btn + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .btn + .form-submit, .modal-footer #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #block-formblock-ask-an-expert td > .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert .modal-footer td > .form-submit + .form-submit, .modal-footer #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #content .node-form .form-actions td > .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions .modal-footer td > .form-submit + .form-submit, .modal-footer #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #content #comments .comment-form .form-actions td > .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions .modal-footer td > .form-submit + .form-submit, .modal-footer #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #comments #content .comment-form .form-actions td > .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions .modal-footer td > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .btn + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .btn + .form-submit, .modal-footer #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #block-formblock-ask-an-expert td > .ajax-new-content > .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #content .node-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #content #comments .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #comments #content .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .form-submit + .form-submit {
+  margin-bottom: 0;
+  margin-left: 5px;
+}
+
+.modal-footer .btn-group .btn + .btn, .modal-footer .btn-group .page-user form .form-submit + .btn, .page-user form .modal-footer .btn-group .form-submit + .btn, .modal-footer .btn-group #block-formblock-ask-an-expert .form-submit + .btn, #block-formblock-ask-an-expert .modal-footer .btn-group .form-submit + .btn, .modal-footer .btn-group .question-container .form-submit + .btn, .question-container .modal-footer .btn-group .form-submit + .btn, .modal-footer .btn-group #content .node-form .form-actions .form-submit + .btn, #content .node-form .form-actions .modal-footer .btn-group .form-submit + .btn, .modal-footer .btn-group #content #comments .comment-form .form-actions .form-submit + .btn, #content #comments .comment-form .form-actions .modal-footer .btn-group .form-submit + .btn, .modal-footer .btn-group #comments #content .comment-form .form-actions .form-submit + .btn, #comments #content .comment-form .form-actions .modal-footer .btn-group .form-submit + .btn, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .btn, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .form-submit + .btn, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .btn, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .form-submit + .btn, .modal-footer .btn-group .page-user form .btn + .form-submit, .page-user form .modal-footer .btn-group .btn + .form-submit, .modal-footer .btn-group .page-user form .form-submit + .form-submit, .page-user form .modal-footer .btn-group .form-submit + .form-submit, .modal-footer .btn-group #block-formblock-ask-an-expert .page-user form .form-submit + .form-submit, .modal-footer .btn-group #content .node-form .form-actions .page-user form .form-submit + .form-submit, .modal-footer .btn-group #content #comments .comment-form .form-actions .page-user form .form-submit + .form-submit, .modal-footer .btn-group #comments #content .comment-form .form-actions .page-user form .form-submit + .form-submit, .modal-footer .btn-group #block-formblock-ask-an-expert .btn + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn-group .btn + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn-group .page-user form .form-submit + .form-submit, .modal-footer .btn-group #block-formblock-ask-an-expert .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn-group .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert td > .form-submit + .form-submit, #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert td > .ajax-new-content > .form-submit + .form-submit, #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group .question-container .btn + .form-submit, .question-container .modal-footer .btn-group .btn + .form-submit, .modal-footer .btn-group #block-formblock-ask-an-expert .question-container .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn-group .question-container .form-submit + .form-submit, .modal-footer .btn-group .question-container .form-submit + .form-submit, .question-container .modal-footer .btn-group .form-submit + .form-submit, .modal-footer .btn-group #content .node-form .form-actions .question-container .form-submit + .form-submit, .modal-footer .btn-group #content #comments .comment-form .form-actions .question-container .form-submit + .form-submit, .modal-footer .btn-group #comments #content .comment-form .form-actions .question-container .form-submit + .form-submit, .modal-footer .btn-group #content .node-form .form-actions .btn + .form-submit, #content .node-form .form-actions .modal-footer .btn-group .btn + .form-submit, #content .node-form .form-actions .modal-footer .btn-group .page-user form .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .btn-group .question-container .form-submit + .form-submit, .modal-footer .btn-group #content .node-form .form-actions .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .btn-group .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions td > .form-submit + .form-submit, #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group #content #comments .comment-form .form-actions .btn + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn-group .btn + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn-group .page-user form .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn-group .question-container .form-submit + .form-submit, .modal-footer .btn-group #content #comments .comment-form .form-actions .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn-group .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions td > .form-submit + .form-submit, #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group #comments #content .comment-form .form-actions .btn + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn-group .btn + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn-group .page-user form .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn-group .question-container .form-submit + .form-submit, .modal-footer .btn-group #comments #content .comment-form .form-actions .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn-group .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions td > .form-submit + .form-submit, #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .btn + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .btn + .form-submit, .modal-footer .btn-group #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #block-formblock-ask-an-expert td > .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #content .node-form .form-actions td > .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #content #comments .comment-form .form-actions td > .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #comments #content .comment-form .form-actions td > .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .btn + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .btn + .form-submit, .modal-footer .btn-group #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #block-formblock-ask-an-expert td > .ajax-new-content > .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #content .node-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #content #comments .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #comments #content .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit {
+  margin-left: -1px;
+}
+
+.modal-footer .btn-block + .btn-block {
+  margin-left: 0;
+}
+
+.modal-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll;
+}
+
+.hd1 {
+  display: none;
+}
+
+.pos_rel {
+  position: relative;
+}
+
+.pos_rel .seemore {
+  position: absolute;
+  top: 0;
+  left: 15px;
+  right: 0;
+  margin: 0 auto;
+  width: 81%;
+  margin: 0;
+  height: 100%;
+}
+
+.pos_rel .seemore img {
+  height: 100%;
+}
+
+.img-gal-box.container {
+  padding: 0;
+}
+
+.img-gal-box .glr {
+  margin-bottom: 10px;
+}
+
+.dtv {
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px 0;
+  overflow-Y: auto;
+  width: 100%;
+}
+
+.dtv ul {
+  list-style: none !important;
+  padding: 0 15px !important;
+  width: 100%;
+  display: table;
+  text-align: right;
+}
+
+.dtv li {
+  display: inline-block;
+  margin-left: 7px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.dtv li img {
+  max-width: 50px;
+}
+
+span.close_btt {
+  position: absolute;
+  right: -15px;
+  top: -15px;
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  text-align: center;
+  background: #000;
+  z-index: 9999;
+  border-radius: 50%;
+  line-height: 28px;
+  box-shadow: 0 0 5px 0px #fff;
+  cursor: pointer;
+}
+
+.carousel .seemore {
+  display: none;
+}
+
+.carousel {
+  position: relative;
+}
+
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-inner > .item {
+  position: relative;
+  display: none;
+  -webkit-transition: .6s ease-in-out left;
+  -o-transition: .6s ease-in-out left;
+  transition: .6s ease-in-out left;
+}
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  line-height: 1;
+}
+
+@media all and (transform-3d), (-webkit-transform-3d) {
+  .carousel-inner > .item {
+    -webkit-transition: -webkit-transform .6s ease-in-out;
+    -o-transition: -o-transform .6s ease-in-out;
+    transition: transform .6s ease-in-out;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+  }
+
+  .carousel-inner > .item.next,
+  .carousel-inner > .item.active.right {
+    left: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+
+  .carousel-inner > .item.prev,
+  .carousel-inner > .item.active.left {
+    left: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  .carousel-inner > .item.next.left,
+  .carousel-inner > .item.prev.right,
+  .carousel-inner > .item.active {
+    left: 0;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+.carousel-inner > .active,
+.carousel-inner > .next,
+.carousel-inner > .prev {
+  display: block;
+}
+
+.carousel-inner > .active {
+  left: 0;
+}
+
+.carousel-inner > .next,
+.carousel-inner > .prev {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.carousel-inner > .next {
+  left: 100%;
+}
+
+.carousel-inner > .prev {
+  left: -100%;
+}
+
+.carousel-inner > .next.left,
+.carousel-inner > .prev.right {
+  left: 0;
+}
+
+.carousel-inner > .active.left {
+  left: -100%;
+}
+
+.carousel-inner > .active.right {
+  left: 100%;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  bottom: 0;
+  height: 100px;
+  width: 50px;
+  font-size: 0;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-top: -100px;
+  cursor: pointer;
+}
+
+.carousel-control span {
+  display: none;
+}
+
+.carousel-control.left {
+  font: normal normal normal 14px/1 FontAwesome;
+  border-radius: 0 90px 90px 0;
+  left: 0;
+}
+
+.carousel-control.left:before {
+  content: '\f053';
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 30px;
+  left: 10px;
+  position: absolute;
+  top: 38px;
+}
+
+.carousel-control.right {
+  border-radius: 90px 0px 0px 90px;
+  right: 0;
+}
+
+.carousel-control.right:before {
+  content: '\f054';
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 30px;
+  right: 10px;
+  position: absolute;
+  top: 38px;
+}
+
+.carousel-control:hover, .carousel-control:focus {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 960px;
+    margin: 30px auto;
+  }
+
+  .modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-sm {
+    width: 300px;
+  }
+}
+@media (min-width: 992px) {
+  .modal-lg {
+    width: 900px;
+  }
+}
+/* End of CSS For Story Modal Popup and Carousel */

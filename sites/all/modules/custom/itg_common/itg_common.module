@@ -113,7 +113,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     }
 
     // hide source relation and type field from other users 
-    if ($form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'recipe_node_form' || $form_id == 'photogallery_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form' || $form_id == 'poll_node_form') {
+    if ($form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'recipe_node_form' || $form_id == 'photogallery_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form' || $form_id == 'poll_node_form' || $form_id == 'breaking_news_node_form') {
       $form['field_story_source_id']['#attributes']['class'][] = 'element-hidden';
       $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
       $form['field_story_ugc_source_id']['#attributes']['class'][] = 'element-hidden';
@@ -462,14 +462,26 @@ function itg_common_node_presave($node) {
  * @param object $node
  */
 function itg_common_node_insert($node) {
-    
-  $ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
+  $ctype_array = array('photogallery', 'story', 'videogallery', 'podcast', 'food_news', 'cooking_tips', 'recipe');
   // custom alias cnditions
   if (in_array($node->type, $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-     itg_common_custompath_insert_load($node);
-  }elseif ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
-//    p($node);
+    itg_common_custompath_insert_load($node);
+  }
+  elseif ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
+
     itg_common_custompath_migrated_load($node);
+  }
+}
+
+/**
+ * Implementation of hook_node_insert().
+ * @param object $node
+ */
+function itg_common_node_update($node) {
+  $ctype_array = array('photogallery', 'story', 'videogallery', 'podcast', 'food_news', 'cooking_tips', 'recipe');
+  // custom alias cnditions
+  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
+    itg_common_custompath_migrated_load($node, 'update_migrated');
   }
 }
 
@@ -711,9 +723,9 @@ function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255) {
     }
   }
   if(in_array('left', $positions_array)) {
-    if(!empty($result[0]['field_emoji_value'])) {
+    if(!empty($result[0]['field_emoji_2_value'])) {
       // Get all the smiley images.
-      preg_match_all('/<img[^>]*>/s', $result[0]['field_emoji_value'], $images);
+      preg_match_all('/<img[^>]*>/s', $result[0]['field_emoji_2_value'], $images);
       $left_smiles = '<span class="smilies-title">';
       // Implode all images in case of muliple smiley.
       $left_smiles .= implode("", $images[0]);
@@ -722,9 +734,9 @@ function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255) {
     }
   }
   if (in_array('right', $positions_array)) {
-    if(!empty($result[0]['field_emoji_2_value'])) {
+    if(!empty($result[0]['field_emoji_value'])) {
       // Get all the smiley images.
-      preg_match_all('/<img[^>]*>/s', $result[0]['field_emoji_2_value'], $images_2);
+      preg_match_all('/<img[^>]*>/s', $result[0]['field_emoji_value'], $images_2);
       // Implode all images in case of muliple smiley.
       
       $right_smiles = '<span class="smilies-title">';
@@ -733,7 +745,7 @@ function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255) {
       
       $right_smiles .='</span>';
     }
-  }
+  }  
   if (count($result)) {
     if(!empty($left_smiles) || !empty($right_smiles)) {
       $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));    
@@ -743,7 +755,7 @@ function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255) {
       $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));    
     }
     // Add smiley to right;
-    $titlte =  $right_smiles . $titlte .  $left_smiles ;
+    $titlte =  $left_smiles . $titlte . $right_smiles ;
     
     return $titlte;
   }
@@ -836,4 +848,19 @@ function itg_funalytics_popup() {
   
   echo views_embed_view('front_funalytics_list', 'block_1');
   //exit;
+}
+
+/**
+ * 
+ * @param type $tid
+ * @param type $vid
+ * @return type
+ */
+function get_term_name_from_tid($tid, $vid) {
+  $data = array();
+  $query = db_select('taxonomy_term_data' ,'ttd')
+      ->fields('ttd' ,array('name'))
+      ->condition('ttd.tid' ,$tid)
+      ->condition('ttd.vid' ,$vid);
+  return $query->execute()->fetchObject();
 }

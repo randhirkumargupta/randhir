@@ -557,6 +557,49 @@ function photogallery_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-photogallery-field_cm_related_content_detail'.
+  $field_instances['node-photogallery-field_cm_related_content_detail'] = array(
+    'bundle' => 'photogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 68,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_cm_related_content_detail',
+    'label' => 'Related Content Detail',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 75,
+    ),
+  );
+
   // Exported field_instance: 'node-photogallery-field_common_audio'.
   $field_instances['node-photogallery-field_common_audio'] = array(
     'bundle' => 'photogallery',
@@ -1385,9 +1428,9 @@ function photogallery_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'hs_taxonomy',
+      'module' => 'options',
       'settings' => array(),
-      'type' => 'taxonomy_hs',
+      'type' => 'options_select',
       'weight' => 8,
     ),
   );
@@ -1432,6 +1475,48 @@ function photogallery_field_default_field_instances() {
       ),
       'type' => 'text_textarea',
       'weight' => 58,
+    ),
+  );
+
+  // Exported field_instance: 'node-photogallery-field_story_extra_data'.
+  $field_instances['node-photogallery-field_story_extra_data'] = array(
+    'bundle' => 'photogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 69,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_extra_data',
+    'label' => 'Story Extra Data',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 77,
     ),
   );
 
@@ -2879,6 +2964,7 @@ function photogallery_field_default_field_instances() {
   t('Posted by facebook');
   t('Preview_unique_id');
   t('Related Content');
+  t('Related Content Detail');
   t('Section');
   t('Set As Featured');
   t('Short description');
@@ -2886,6 +2972,7 @@ function photogallery_field_default_field_instances() {
   t('Social media integration');
   t('Source id');
   t('Source type');
+  t('Story Extra Data');
   t('Strap headline');
   t('Syndication');
   t('Tags');

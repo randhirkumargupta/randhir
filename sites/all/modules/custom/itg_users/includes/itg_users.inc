@@ -109,16 +109,16 @@ function itg_users_cms_user_dashboard() {
  */
 
 function itg_users_block_user() {
-  $users = entity_load('user');
-  $current_date = date('Y-m-d');
-  foreach ($users as $user) {
-    if ($user->uid != 0 && !empty($user->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {
-      $user_exp_date = strtotime($user->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
-      $user_exp_date = date('Y-m-d', $user_exp_date);
-      if ($user_exp_date == $current_date) {
-        $user->status = 0;
-        entity_save('user', $user);
-      }
-    }
+  $current_time = date("Y-m-d H:i:s");
+  $itg_query = db_select('field_data_field_story_expiry_date', 'u');
+  $itg_query->fields('u', array('entity_id'));
+  $itg_query->condition('u.bundle', 'user', '=');
+  $itg_query->condition('u.field_story_expiry_date_value', $current_time, '<');
+  $itg_result = $itg_query->execute()->fetchAll();
+
+  foreach ($itg_result as $itg_val) {
+    $user = user_load($itg_val->entity_id);
+    $user->status = 0;
+    user_save($user);
   }
 }

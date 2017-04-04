@@ -4973,6 +4973,10 @@ div.node{
       }
       .fa-times{cursor: pointer; color: red;}
     }
+    .ui-state-default{
+      span.item-value{cursor: default;}
+      a:hover{color: #0c8bb1;}
+    } 
   }
 }
 .view-manage-users{
@@ -6815,7 +6819,8 @@ div.node{
   max-width: 100%;
   position: relative;
   top: 0;
-  vertical-align: top;;
+  vertical-align: top;
+  z-index: 9;
   .widget-title-wrapper{
     display: inline-block;
     vertical-align: top;
@@ -9965,7 +9970,7 @@ div.node{
     padding-top: 10px;
   } 
 }
-#layout-html-submit, #layout-highlights-submit{
+#layout-html-submit, #layout-highlights-submit, #layout-content-submit{
   margin: 0 10px 10px;
   @extend .btn-submit;
   height: 28px;
@@ -11085,15 +11090,15 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   .view-filters{
     padding-bottom: 20px;
     .views-exposed-form{
-        .views-exposed-widget{
-          vertical-align: top;
-          &.views-submit-button{
-            position: relative;
-            padding-right: 85px;
+      .views-exposed-widget{
+        vertical-align: top;
+        &.views-submit-button{
+          position: relative;
+          padding-right: 85px;
           .form-submit{
-              position: absolute;
-              right: 5px;
-              top: 38px;
+            position: absolute;
+            right: 5px;
+            top: 38px;
           }
         } 
         &.views-reset-button{
@@ -11103,11 +11108,14 @@ span.file a{pointer-events: none; color: #2f2f2f;}
         }
         &.views-widget-filter-bundle_name{
           display: none;
-        }        
-      }      
-      }      
-    }     
-  } 
+        }  
+        &.views-widget-filter-keyword{
+          width: 350px;
+        }
+      } 
+    }      
+  }     
+} 
 .ftp-server > iframe {
     border: 1px solid #ccc;
     width: 100%;
@@ -11320,3 +11328,4 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   .node-supplement-form{
     @extend .image-repo-browse;
   }
+  #idIssue{color: red;}
