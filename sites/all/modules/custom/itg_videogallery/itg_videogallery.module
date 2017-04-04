@@ -1147,7 +1147,7 @@ function itg_videogallery_delete_itg_solr() {
     pr($deleted_count);
     exit();
 }
-}
+
 /**
  * This function use for remove video iframe form story body
  */
