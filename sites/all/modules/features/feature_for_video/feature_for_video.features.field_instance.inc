@@ -218,6 +218,59 @@ function feature_for_video_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'node-itg_delete_solr_video-field_video_is_delete'.
+  $field_instances['node-itg_delete_solr_video-field_video_is_delete'] = array(
+    'bundle' => 'itg_delete_solr_video',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_video_is_delete',
+    'label' => 'video_is_delete',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 41,
+    ),
+  );
+
+  // Exported field_instance:
   // 'node-videogallery-field_cm_related_content_detail'.
   $field_instances['node-videogallery-field_cm_related_content_detail'] = array(
     'bundle' => 'videogallery',
@@ -2764,6 +2817,7 @@ function feature_for_video_field_default_field_instances() {
   t('common by line twitter');
   t('primary category');
   t('video_duration');
+  t('video_is_delete');
 
   return $field_instances;
 }

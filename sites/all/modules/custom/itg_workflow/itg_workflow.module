@@ -16,12 +16,12 @@
  * {@inheridoc}.
  */
 function itg_workflow_permission() {
-    return array(
-        'administer itg_preview_log settings' => array(
-            'title' => t('administer itg_preview_log settings'),
-            'description' => t('administer itg_preview_log settings'),
-        ),
-    );
+  return array(
+      'administer itg_preview_log settings' => array(
+          'title' => t('administer itg_preview_log settings'),
+          'description' => t('administer itg_preview_log settings'),
+      ),
+  );
 }
 
 /**
@@ -30,38 +30,38 @@ function itg_workflow_permission() {
  */
 function itg_workflow_menu() {
 
-    $items['preview-content-logs-report'] = array(
-        'title' => "Audit Logs",
-        'page callback' => 'itg_workflow_logs_detailis',
-        'access arguments' => array('administer itg_preview_log settings'),
-        'type' => MENU_CALLBACK,
-    );
+  $items['preview-content-logs-report'] = array(
+      'title' => "Audit Logs",
+      'page callback' => 'itg_workflow_logs_detailis',
+      'access arguments' => array('administer itg_preview_log settings'),
+      'type' => MENU_CALLBACK,
+  );
 
-    $items['preview-content-logs-report/nid/autocomplete'] = array(
-        'page callback' => 'itg_workflow_content_nid',
-        'access arguments' => array('administer itg_preview_log settings'),
-        'type' => MENU_CALLBACK
-    );
+  $items['preview-content-logs-report/nid/autocomplete'] = array(
+      'page callback' => 'itg_workflow_content_nid',
+      'access arguments' => array('administer itg_preview_log settings'),
+      'type' => MENU_CALLBACK
+  );
 
-    $items['preview-content-logs-report/title/autocomplete'] = array(
-        'page callback' => 'itg_workflow_content_title',
-        'access arguments' => array('administer itg_preview_log settings'),
-        'type' => MENU_CALLBACK
-    );
+  $items['preview-content-logs-report/title/autocomplete'] = array(
+      'page callback' => 'itg_workflow_content_title',
+      'access arguments' => array('administer itg_preview_log settings'),
+      'type' => MENU_CALLBACK
+  );
 
-    $items['preview-content-logs-report/username/autocomplete'] = array(
-        'page callback' => 'itg_workflow_content_username',
-        'access arguments' => array('administer itg_preview_log settings'),
-        'type' => MENU_CALLBACK
-    );
+  $items['preview-content-logs-report/username/autocomplete'] = array(
+      'page callback' => 'itg_workflow_content_username',
+      'access arguments' => array('administer itg_preview_log settings'),
+      'type' => MENU_CALLBACK
+  );
 
-    $items['preview-content-logs-report/email/autocomplete'] = array(
-        'page callback' => 'itg_workflow_content_email',
-        'access arguments' => array('administer itg_preview_log settings'),
-        'type' => MENU_CALLBACK
-    );
+  $items['preview-content-logs-report/email/autocomplete'] = array(
+      'page callback' => 'itg_workflow_content_email',
+      'access arguments' => array('administer itg_preview_log settings'),
+      'type' => MENU_CALLBACK
+  );
 
-    return $items;
+  return $items;
 }
 
 /**
@@ -69,21 +69,21 @@ function itg_workflow_menu() {
  * @param int $nid
  */
 function itg_workflow_content_nid($nid) {
-    $matches = array();
-    $content_type = itg_workflow_valid_content_type();
-    $itg_query = db_select("node", "n");
-    $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
-    $itg_query->fields('n', array('nid'));
-    $itg_query->condition('n.nid', '%' . db_like($nid) . '%', 'LIKE');
-    $itg_query->condition('n.type', array($content_type), 'IN');
-    $itg_query->isNull('iwf.nid');
-    $itg_query->range(0, 50);
-    $return = $itg_query->execute();
-    foreach ($return as $row) {
-        $matches[$row->nid] = check_plain($row->nid);
-    }
+  $matches = array();
+  $content_type = itg_workflow_valid_content_type();
+  $itg_query = db_select("node", "n");
+  $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
+  $itg_query->fields('n', array('nid'));
+  $itg_query->condition('n.nid', '%' . db_like($nid) . '%', 'LIKE');
+  $itg_query->condition('n.type', array($content_type), 'IN');
+  $itg_query->isNull('iwf.nid');
+  $itg_query->range(0, 50);
+  $return = $itg_query->execute();
+  foreach ($return as $row) {
+    $matches[$row->nid] = check_plain($row->nid);
+  }
 
-    drupal_json_output($matches);
+  drupal_json_output($matches);
 }
 
 /**
@@ -91,21 +91,21 @@ function itg_workflow_content_nid($nid) {
  * @param title $title
  */
 function itg_workflow_content_title($title) {
-    $matches = array();
-    $content_type = itg_workflow_valid_content_type();
-    $itg_query = db_select("node", "n");
-    $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
-    $itg_query->fields('n', array('title'));
-    $itg_query->condition('n.title', '%' . db_like($title) . '%', 'LIKE');
-    $itg_query->condition('n.type', array($content_type), 'IN');
-    $itg_query->isNull('iwf.nid');
-    $itg_query->range(0, 50);
-    $return = $itg_query->execute();
-    foreach ($return as $row) {
-        $matches[$row->title] = check_plain($row->title);
-    }
+  $matches = array();
+  $content_type = itg_workflow_valid_content_type();
+  $itg_query = db_select("node", "n");
+  $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
+  $itg_query->fields('n', array('title'));
+  $itg_query->condition('n.title', '%' . db_like($title) . '%', 'LIKE');
+  $itg_query->condition('n.type', array($content_type), 'IN');
+  $itg_query->isNull('iwf.nid');
+  $itg_query->range(0, 50);
+  $return = $itg_query->execute();
+  foreach ($return as $row) {
+    $matches[$row->title] = check_plain($row->title);
+  }
 
-    drupal_json_output($matches);
+  drupal_json_output($matches);
 }
 
 /**
@@ -113,22 +113,22 @@ function itg_workflow_content_title($title) {
  * @param string $username
  */
 function itg_workflow_content_username($username) {
-    $matches = array();
-    $content_type = itg_workflow_valid_content_type();
-    $itg_query = db_select("node", "n");
-    $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
-    $itg_query->leftJoin('users', 'u', 'u.uid=n.uid');
-    $itg_query->fields('u', array('name'));
-    $itg_query->condition('u.name', '%' . db_like($username) . '%', 'LIKE');
-    $itg_query->condition('n.type', array($content_type), 'IN');
-    $itg_query->isNull('iwf.nid');
-    $itg_query->range(0, 50);
-    $return = $itg_query->execute();
-    foreach ($return as $row) {
-        $matches[$row->name] = check_plain($row->name);
-    }
+  $matches = array();
+  $content_type = itg_workflow_valid_content_type();
+  $itg_query = db_select("node", "n");
+  $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
+  $itg_query->leftJoin('users', 'u', 'u.uid=n.uid');
+  $itg_query->fields('u', array('name'));
+  $itg_query->condition('u.name', '%' . db_like($username) . '%', 'LIKE');
+  $itg_query->condition('n.type', array($content_type), 'IN');
+  $itg_query->isNull('iwf.nid');
+  $itg_query->range(0, 50);
+  $return = $itg_query->execute();
+  foreach ($return as $row) {
+    $matches[$row->name] = check_plain($row->name);
+  }
 
-    drupal_json_output($matches);
+  drupal_json_output($matches);
 }
 
 /**
@@ -136,22 +136,22 @@ function itg_workflow_content_username($username) {
  * @param title $email.
  */
 function itg_workflow_content_email($email) {
-    $matches = array();
-    $content_type = itg_workflow_valid_content_type();
-    $itg_query = db_select("node", "n");
-    $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
-    $itg_query->leftJoin('users', 'u', 'u.uid=n.uid');
-    $itg_query->fields('u', array('mail'));
-    $itg_query->condition('u.mail', '%' . db_like($email) . '%', 'LIKE');
-    $itg_query->condition('n.type', array($content_type), 'IN');
-    $itg_query->isNull('iwf.nid');
-    $itg_query->range(0, 50);
-    $return = $itg_query->execute();
-    foreach ($return as $row) {
-        $matches[$row->mail] = check_plain($row->mail);
-    }
+  $matches = array();
+  $content_type = itg_workflow_valid_content_type();
+  $itg_query = db_select("node", "n");
+  $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
+  $itg_query->leftJoin('users', 'u', 'u.uid=n.uid');
+  $itg_query->fields('u', array('mail'));
+  $itg_query->condition('u.mail', '%' . db_like($email) . '%', 'LIKE');
+  $itg_query->condition('n.type', array($content_type), 'IN');
+  $itg_query->isNull('iwf.nid');
+  $itg_query->range(0, 50);
+  $return = $itg_query->execute();
+  foreach ($return as $row) {
+    $matches[$row->mail] = check_plain($row->mail);
+  }
 
-    drupal_json_output($matches);
+  drupal_json_output($matches);
 }
 
 /**
@@ -159,7 +159,7 @@ function itg_workflow_content_email($email) {
  * @return array
  */
 function itg_workflow_valid_content_type() {
-    return array("blog", "story", "videogallery", "photogallery", "podcast");
+  return array("blog", "story", "videogallery", "photogallery", "podcast");
 }
 
 /**
@@ -167,63 +167,63 @@ function itg_workflow_valid_content_type() {
  * {@inheritdoc}
  */
 function itg_workflow_preview_log_filter_form($form, &$form_state) {
-    $form = array();
+  $form = array();
 
-    $form['nid'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Content Id'),
-        '#default_value' => isset($_GET['nid']) ? $_GET['nid'] : "",
-        '#autocomplete_path' => 'preview-content-logs-report/nid/autocomplete',
-        '#attributes' => array('placeholder' => array("Enter Content ID"))
-    );
+  $form['nid'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Content Id'),
+      '#default_value' => isset($_GET['nid']) ? $_GET['nid'] : "",
+      '#autocomplete_path' => 'preview-content-logs-report/nid/autocomplete',
+      '#attributes' => array('placeholder' => array("Enter Content ID"))
+  );
 
-    $form['title'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Content Title'),
-        '#default_value' => isset($_GET['title']) ? $_GET['title'] : "",
-        '#autocomplete_path' => 'preview-content-logs-report/title/autocomplete',
-        '#attributes' => array('placeholder' => array("Enter Content Title"))
-    );
+  $form['title'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Content Title'),
+      '#default_value' => isset($_GET['title']) ? $_GET['title'] : "",
+      '#autocomplete_path' => 'preview-content-logs-report/title/autocomplete',
+      '#attributes' => array('placeholder' => array("Enter Content Title"))
+  );
 
-    $form['username'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Username'),
-        '#default_value' => isset($_GET['username']) ? $_GET['username'] : "",
-        '#autocomplete_path' => 'preview-content-logs-report/username/autocomplete',
-        '#attributes' => array('placeholder' => array("Enter Username"))
-    );
+  $form['username'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Username'),
+      '#default_value' => isset($_GET['username']) ? $_GET['username'] : "",
+      '#autocomplete_path' => 'preview-content-logs-report/username/autocomplete',
+      '#attributes' => array('placeholder' => array("Enter Username"))
+  );
 
-    $form['email'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Email'),
-        '#default_value' => isset($_GET['email']) ? $_GET['email'] : "",
-        '#autocomplete_path' => 'preview-content-logs-report/email/autocomplete',
-        '#attributes' => array('placeholder' => array("Enter Email"))
-    );
+  $form['email'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Email'),
+      '#default_value' => isset($_GET['email']) ? $_GET['email'] : "",
+      '#autocomplete_path' => 'preview-content-logs-report/email/autocomplete',
+      '#attributes' => array('placeholder' => array("Enter Email"))
+  );
 
-    $form['type'] = array(
-        '#type' => 'select',
-        '#title' => t('Content type'),
-        '#options' => array("All" => "All", "blog" => "Blog", "story" => "Story", "videogallery" => "Videogallery", "photogallery" => "Photogallery", "podcast" => "Podcast"),
-        '#default_value' => isset($_GET['type']) ? $_GET['type'] : "",
-    );
+  $form['type'] = array(
+      '#type' => 'select',
+      '#title' => t('Content type'),
+      '#options' => array("All" => "All", "blog" => "Blog", "story" => "Story", "videogallery" => "Videogallery", "photogallery" => "Photogallery", "podcast" => "Podcast"),
+      '#default_value' => isset($_GET['type']) ? $_GET['type'] : "",
+  );
 
-    $form['items_per_page'] = array(
-        '#type' => 'select',
-        '#title' => t('Items per page'),
-        '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
-        '#default_value' => isset($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
-    );
+  $form['items_per_page'] = array(
+      '#type' => 'select',
+      '#title' => t('Items per page'),
+      '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
+      '#default_value' => isset($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
+  );
 
-    $form['submit'] = array(
-        '#value' => 'Apply',
-        '#type' => 'submit',
-        '#attributes' => array('class' => array(' layout-apply', ' btn-small' . ' form-submit')),
-        '#prefix' => '<div class = "layout-filter-btn">',
-        '#suffix' => '<a class="layout-reset btn-small btn-reset" href="' . base_path() . 'preview-content-logs-report">Reset</a></div>',
-    );
+  $form['submit'] = array(
+      '#value' => 'Apply',
+      '#type' => 'submit',
+      '#attributes' => array('class' => array(' layout-apply', ' btn-small' . ' form-submit')),
+      '#prefix' => '<div class = "layout-filter-btn">',
+      '#suffix' => '<a class="layout-reset btn-small btn-reset" href="' . base_path() . 'preview-content-logs-report">Reset</a></div>',
+  );
 
-    return $form;
+  return $form;
 }
 
 /**
@@ -231,39 +231,39 @@ function itg_workflow_preview_log_filter_form($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_workflow_preview_log_filter_form_submit($form, &$form_state) {
-    $item_per_page = $form_state['values']['items_per_page'];
-    $nid = $form_state['values']['nid'];
-    $title = $form_state['values']['title'];
-    $type = $form_state['values']['type'];
-    $username = $form_state['values']['username'];
-    $email = $form_state['values']['email'];
-    $form_state['redirect'] = array(
-        'preview-content-logs-report',
-        array(
-            'query' => array(
-                'nid' => $nid,
-                'title' => $title,
-                'type' => $type,
-                'username' => $username,
-                'email' => $email,
-                'items_per_page' => $item_per_page,
-            ),
-        ),
-    );
+  $item_per_page = $form_state['values']['items_per_page'];
+  $nid = $form_state['values']['nid'];
+  $title = $form_state['values']['title'];
+  $type = $form_state['values']['type'];
+  $username = $form_state['values']['username'];
+  $email = $form_state['values']['email'];
+  $form_state['redirect'] = array(
+      'preview-content-logs-report',
+      array(
+          'query' => array(
+              'nid' => $nid,
+              'title' => $title,
+              'type' => $type,
+              'username' => $username,
+              'email' => $email,
+              'items_per_page' => $item_per_page,
+          ),
+      ),
+  );
 }
 
 function itg_workflow_logs_detailis() {
   // configure the table header columns
   $header = array(
-    array('data' => t('ID')),
-    array('data' => t('Nid')),
-    array('data' => t('Title')),
-    array('data' => t('Created By')),
-    array('data' => t('Published by')),
-    array('data' => t('Type')),
-    array('data' => t('Created Date')),
-    array('data' => t('Modified Date')),
-    array('data' => t('Action')),
+      array('data' => t('ID')),
+      array('data' => t('Nid')),
+      array('data' => t('Title')),
+      array('data' => t('Created By')),
+      array('data' => t('Published by')),
+      array('data' => t('Type')),
+      array('data' => t('Created Date')),
+      array('data' => t('Modified Date')),
+      array('data' => t('Action')),
   );
   //if (!empty($_GET['items_per_page']) && (!empty($_GET['username']) || !empty($_GET['email']))) {
   if (isset($_GET['items_per_page'])) {
@@ -322,15 +322,15 @@ function itg_workflow_logs_detailis() {
   $count = 0;
   foreach ($itg_result as $row) {
     $rows[] = array(
-      array('data' => $count + 1),
-      array('data' => $row->nid),
-      array('data' => $row->title),
-      array('data' => l($row->name, "user/$row->uid")),
-      array('data' => l($row->wbh_user_name, "user/$row->wbh_uid")),
-      array('data' => $row->type),
-      array('data' => date('d/m/Y', $row->created)),
-      array('data' => date('d/m/Y', $row->changed)),
-      array('data' => l("<span class='view-link'>View</span>", "node/$row->nid", array("html" => TRUE, "attributes" => array("target" => "_blank")))),
+        array('data' => $count + 1),
+        array('data' => $row->nid),
+        array('data' => $row->title),
+        array('data' => l($row->name, "user/$row->uid")),
+        array('data' => l($row->wbh_user_name, "user/$row->wbh_uid")),
+        array('data' => $row->type),
+        array('data' => date('d/m/Y', $row->created)),
+        array('data' => date('d/m/Y', $row->changed)),
+        array('data' => l("<span class='view-link'>View</span>", "node/$row->nid", array("html" => TRUE, "attributes" => array("target" => "_blank")))),
     );
     $count++;
   }
@@ -365,29 +365,29 @@ function itg_workflow_logs_detailis() {
  * {@inheritdoc}
  */
 function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
-    global $user;
-    switch ($form_id) {
-        case 'story_node_form':
-        case 'photogallery_node_form':
-        case 'blog_node_form':
-        case 'podcast_node_form':
-        case 'videogallery_node_form':
-            $form['field_preview_unique_id']['#attributes']['class'][] = 'hide';
-            module_load_include('inc', 'itg_workflow', 'includes/itg_workflow_preview_log');
-            $preview_id = _get_unique_id_for_node_field();
-            $form['field_preview_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $preview_id;
-            // Condition to check valid user to perform preview log submit.
-            if (_is_preview_log_submit_true($user)) {
-                $form['actions']['submit']['#submit'][] = 'itg_workflow_preview_log_submit';
-                $form['actions']['preview']['#submit'][] = 'itg_workflow_preview_log_submit';
-            }
-            $form['#after_build'][] = 'itg_workflow_after_build';
-            break;
+  global $user;
+  switch ($form_id) {
+    case 'story_node_form':
+    case 'photogallery_node_form':
+    case 'blog_node_form':
+    case 'podcast_node_form':
+    case 'videogallery_node_form':
+      $form['field_preview_unique_id']['#attributes']['class'][] = 'hide';
+      module_load_include('inc', 'itg_workflow', 'includes/itg_workflow_preview_log');
+      $preview_id = _get_unique_id_for_node_field();
+      $form['field_preview_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $preview_id;
+      // Condition to check valid user to perform preview log submit.
+      if (_is_preview_log_submit_true($user)) {
+        $form['actions']['submit']['#submit'][] = 'itg_workflow_preview_log_submit';
+        $form['actions']['preview']['#submit'][] = 'itg_workflow_preview_log_submit';
+      }
+      $form['#after_build'][] = 'itg_workflow_after_build';
+      break;
 
-        case 'views_exposed_form':
-            $form['#after_build'][] = 'itg_workflow_views_exposed_form_after_build';
-            break;
-    }
+    case 'views_exposed_form':
+      $form['#after_build'][] = 'itg_workflow_views_exposed_form_after_build';
+      break;
+  }
 }
 
 /**
@@ -397,38 +397,38 @@ function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
  * @return boolean
  */
 function _is_preview_log_submit_true($user) {
-    $access_log_submit = FALSE;
-    $access_users_roles = array(
-        'administrator',
-        'Site Admin',
-        'Section Editor/Anchor',
-        'Copy Editor',
-        'Editor'
-    );
-    $current_user_roles_array = array_values($user->roles);
-    foreach ($current_user_roles_array as $role) {
-        if (in_array($role, $access_users_roles)) {
-            $access_log_submit = TRUE;
-        }
+  $access_log_submit = FALSE;
+  $access_users_roles = array(
+      'administrator',
+      'Site Admin',
+      'Section Editor/Anchor',
+      'Copy Editor',
+      'Editor'
+  );
+  $current_user_roles_array = array_values($user->roles);
+  foreach ($current_user_roles_array as $role) {
+    if (in_array($role, $access_users_roles)) {
+      $access_log_submit = TRUE;
     }
-    return $access_log_submit;
+  }
+  return $access_log_submit;
 }
 
 /**
  * {@inheritdoc}
  */
 function itg_workflow_preview_log_submit($form, $form_state) {
-    global $user;
+  global $user;
 //  watchdog("preview_log", $form_state['values']['op']);
-    // validation for preview button only.
-    if ($form_state['values']['op'] == 'Preview') {
-        $preview_unique_id = $form_state['values']['field_preview_unique_id']['und'][0]['value'];
-        $user_id = $user->uid;
-        //if ($arg[0] == 'node' && $arg[1] == 'add') {
-        // Give nid default value 0.
-        itg_workflow_preview_db_merge($preview_unique_id, $user_id, 0);
-        //}
-    }
+  // validation for preview button only.
+  if ($form_state['values']['op'] == 'Preview') {
+    $preview_unique_id = $form_state['values']['field_preview_unique_id']['und'][0]['value'];
+    $user_id = $user->uid;
+    //if ($arg[0] == 'node' && $arg[1] == 'add') {
+    // Give nid default value 0.
+    itg_workflow_preview_db_merge($preview_unique_id, $user_id, 0);
+    //}
+  }
 }
 
 /**
@@ -439,20 +439,20 @@ function itg_workflow_preview_log_submit($form, $form_state) {
  * @param ind $nid
  */
 function itg_workflow_preview_db_merge($preview_unique_id, $user_id, $nid = 0) {
-    try {
-        db_merge('itg_workflow_preview_log')
-                ->key(array(
-                    'preview_id' => $preview_unique_id,
-                    'uid' => $user_id,
-                ))
-                ->fields(array(
-                    'preview_id' => $preview_unique_id,
-                    'uid' => $user_id,
-                    'nid' => $nid,
-                ))->execute();
-    } catch (Exception $ex) {
-        drupal_set_message($ex->getMessage(), 'error');
-    }
+  try {
+    db_merge('itg_workflow_preview_log')
+            ->key(array(
+                'preview_id' => $preview_unique_id,
+                'uid' => $user_id,
+            ))
+            ->fields(array(
+                'preview_id' => $preview_unique_id,
+                'uid' => $user_id,
+                'nid' => $nid,
+            ))->execute();
+  } catch (Exception $ex) {
+    drupal_set_message($ex->getMessage(), 'error');
+  }
 }
 
 /**
@@ -461,64 +461,64 @@ function itg_workflow_preview_db_merge($preview_unique_id, $user_id, $nid = 0) {
  * @param array $form_state
  */
 function itg_workflow_after_build($form, &$form_state) {
-    global $user, $base_url;
+  global $user, $base_url;
 
-    // code for sequence change of modration field
-    $form['additional_settings']['group']['#groups']['additional_settings'][0]['#weight'] = -1;
-    $log = $form['revision_information']['log'];
-    $state = $form['revision_information']['workbench_moderation_state_new'];
+  // code for sequence change of modration field
+  $form['additional_settings']['group']['#groups']['additional_settings'][0]['#weight'] = -1;
+  $log = $form['revision_information']['log'];
+  $state = $form['revision_information']['workbench_moderation_state_new'];
 
-    unset($form['revision_information']['log']);
-    unset($form['revision_information']['workbench_moderation_state_new']);
+  unset($form['revision_information']['log']);
+  unset($form['revision_information']['workbench_moderation_state_new']);
 
-    $form['revision_information']['workbench_moderation_state_new'] = $state;
+  $form['revision_information']['workbench_moderation_state_new'] = $state;
 
-    // Code for rejection master message
-    if (!empty($form['#entity']->workbench_moderation['current']->state) && $form['#entity']->workbench_moderation['current']->state == 'needs_review') {
-        $vid = taxonomy_vocabulary_machine_name_load('reasons_for_reject');
-        $terms = taxonomy_get_tree($vid->vid);
-        foreach ($terms as $key => $val) {
-            $term_name[$val->name] = $val->name;
-        }
-        $form['revision_information']['reject_msg'] = array(
-            '#type' => 'select',
-            '#title' => t('Remarks'),
-            '#options' => $term_name,
-            '#attributes' => array('class' => array('reasons-form-msg')),
-            '#prefix' => '<div class="reasons-form">',
-            '#suffix' => '</div>',
-        );
+  // Code for rejection master message
+  if (!empty($form['#entity']->workbench_moderation['current']->state) && $form['#entity']->workbench_moderation['current']->state == 'needs_review') {
+    $vid = taxonomy_vocabulary_machine_name_load('reasons_for_reject');
+    $terms = taxonomy_get_tree($vid->vid);
+    foreach ($terms as $key => $val) {
+      $term_name[$val->name] = $val->name;
     }
+    $form['revision_information']['reject_msg'] = array(
+        '#type' => 'select',
+        '#title' => t('Remarks'),
+        '#options' => $term_name,
+        '#attributes' => array('class' => array('reasons-form-msg')),
+        '#prefix' => '<div class="reasons-form">',
+        '#suffix' => '</div>',
+    );
+  }
 
-    $form['revision_information']['log'] = $log;
+  $form['revision_information']['log'] = $log;
 
-    $form['revision_information']['log']['#title'] = t('Remarks');
+  $form['revision_information']['log']['#title'] = t('Remarks');
 
-    // hide workbench dropdown
-    /* drupal_add_js('jQuery(document).ready(function() {
-      jQuery("#edit-revision-information").show();
-      jQuery(".form-item-workbench-moderation-state-new").hide();
-      jQuery("#edit-field-story-archive").hide();
-      });', array('type' => 'inline', 'scope' => 'footer')); */
+  // hide workbench dropdown
+  /* drupal_add_js('jQuery(document).ready(function() {
+    jQuery("#edit-revision-information").show();
+    jQuery(".form-item-workbench-moderation-state-new").hide();
+    jQuery("#edit-field-story-archive").hide();
+    });', array('type' => 'inline', 'scope' => 'footer')); */
 
-    if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(EDITOR, $user->roles) || array_key_exists(UGC_MODERATOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles)) {
-        if (!isset($form['#node']->workbench_moderation['current'])) {
-            $state_class = ' published';
-            $submit_name = 'Publish';
-            $form['actions']['submit']['#value'] = t('Save as Draft');
-        }
-        elseif (isset($form['#node']->workbench_moderation['current'])) {
-            if ($form['#node']->workbench_moderation['current']->state == 'draft' && $form['#node']->status == 0) {
-                $state_class = ' published';
-                $submit_name = 'Publish';
-                $form['actions']['submit']['#value'] = t('Save as Draft');
-            }
-            elseif ($form['#node']->workbench_moderation['current']->state == 'needs_review') {
-                $submit_name = '';
-                $state_class = ' published';
-                $form['actions']['submit']['#attributes']['class'][] = 'edit-submit-class';
+  if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(EDITOR, $user->roles) || array_key_exists(UGC_MODERATOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles)) {
+    if (!isset($form['#node']->workbench_moderation['current'])) {
+      $state_class = ' published';
+      $submit_name = 'Publish';
+      $form['actions']['submit']['#value'] = t('Save as Draft');
+    }
+    elseif (isset($form['#node']->workbench_moderation['current'])) {
+      if ($form['#node']->workbench_moderation['current']->state == 'draft' && $form['#node']->status == 0) {
+        $state_class = ' published';
+        $submit_name = 'Publish';
+        $form['actions']['submit']['#value'] = t('Save as Draft');
+      }
+      elseif ($form['#node']->workbench_moderation['current']->state == 'needs_review') {
+        $submit_name = '';
+        $state_class = ' published';
+        $form['actions']['submit']['#attributes']['class'][] = 'edit-submit-class';
 
-                drupal_add_js('jQuery(document).ready(function() {              
+        drupal_add_js('jQuery(document).ready(function() {              
                     jQuery(".form-item-workbench-moderation-state-new").show();
                     jQuery(".reasons-form").hide();              
                     jQuery("#edit-log").val("");
@@ -539,67 +539,67 @@ function itg_workflow_after_build($form, &$form_state) {
                       }
                     });
                 });', array('type' => 'inline', 'scope' => 'footer'));
-            }
-        }
+      }
     }
-    elseif (array_key_exists(AUTHOR_GUEST, $user->roles) || array_key_exists(INTERN, $user->roles) || array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
-        if (!isset($form['#node']->workbench_moderation['current'])) {
-            $submit_name = 'Submit for Review';
-            $state_class = ' needs_review';
-            $form['actions']['submit']['#value'] = t('Save as Draft');
-        }
-        elseif (isset($form['#node']->workbench_moderation['current']) && ($form['#node']->workbench_moderation['current']->state == 'draft' || $form['#node']->workbench_moderation['current']->state == 'needs_review' || $form['#node']->workbench_moderation['current']->state == 'needs_modification')) {
-            if ($form['#node']->workbench_moderation['current']->state == 'needs_review') {
-                $submit_name = '';
-            }
-            elseif ($form['#node']->workbench_moderation['current']->state == 'needs_modification') {
-                $submit_name = 'Submit for Review';
-                $state_class = ' needs_review';
-                $form['actions']['submit']['#value'] = t('Save as Draft');
+  }
+  elseif (array_key_exists(AUTHOR_GUEST, $user->roles) || array_key_exists(INTERN, $user->roles) || array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
+    if (!isset($form['#node']->workbench_moderation['current'])) {
+      $submit_name = 'Submit for Review';
+      $state_class = ' needs_review';
+      $form['actions']['submit']['#value'] = t('Save as Draft');
+    }
+    elseif (isset($form['#node']->workbench_moderation['current']) && ($form['#node']->workbench_moderation['current']->state == 'draft' || $form['#node']->workbench_moderation['current']->state == 'needs_review' || $form['#node']->workbench_moderation['current']->state == 'needs_modification')) {
+      if ($form['#node']->workbench_moderation['current']->state == 'needs_review') {
+        $submit_name = '';
+      }
+      elseif ($form['#node']->workbench_moderation['current']->state == 'needs_modification') {
+        $submit_name = 'Submit for Review';
+        $state_class = ' needs_review';
+        $form['actions']['submit']['#value'] = t('Save as Draft');
 
-                drupal_add_js('jQuery(document).ready(function() {
+        drupal_add_js('jQuery(document).ready(function() {
                       jQuery("#edit-workbench-moderation-state-new").val("needs_modification");              
                 });', array('type' => 'inline', 'scope' => 'footer'));
-            }
-            elseif ($form['#node']->workbench_moderation['current']->state == 'published') {
-                $submit_name = '';
-            }
-            elseif ($form['#node']->workbench_moderation['current']->state == 'draft') {
-                $submit_name = 'Submit for Review';
-                $state_class = ' needs_review';
-                $form['actions']['submit']['#value'] = t('Save as Draft');
-            }
-        }
-    }
-
-    if (!empty($submit_name)) {
-        $form['actions']['submit_link'] = array(
-            '#markup' => '<a href="javascript:void(0)" id="story_submit_link" class="button' . $state_class . ' btn-submit">' . t($submit_name) . '</a>',
-            '#weight' => 20,
-        );
-    }
-
-    $settings['base_url'] = $base_url;
-    $settings['uid'] = $user->uid;
-    $settings['ntype'] = $form['type']['#value'];
-
-    drupal_add_js(array('itg_workflow' => array('settings' => $settings)), array('type' => 'setting'));
-
-    drupal_add_js(drupal_get_path('module', 'itg_workflow') . '/js/itg_workflow.js', array('weight' => 1));
-
-    // Code for UGC. For now below code is commented may be we need it in future.
-    /*
-      $arg3 = arg(3);
-
-      if (arg(1) == 'add' && isset($arg3) && is_numeric($arg3)) {
-      drupal_add_js('jQuery(document).ready(function() {
-      jQuery("#edit-submit").hide();
-      });', array('type' => 'inline', 'scope' => 'footer'));
       }
-     * 
-     */
+      elseif ($form['#node']->workbench_moderation['current']->state == 'published') {
+        $submit_name = '';
+      }
+      elseif ($form['#node']->workbench_moderation['current']->state == 'draft') {
+        $submit_name = 'Submit for Review';
+        $state_class = ' needs_review';
+        $form['actions']['submit']['#value'] = t('Save as Draft');
+      }
+    }
+  }
 
-    return $form;
+  if (!empty($submit_name)) {
+    $form['actions']['submit_link'] = array(
+        '#markup' => '<a href="javascript:void(0)" id="story_submit_link" class="button' . $state_class . ' btn-submit">' . t($submit_name) . '</a>',
+        '#weight' => 20,
+    );
+  }
+
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+  $settings['ntype'] = $form['type']['#value'];
+
+  drupal_add_js(array('itg_workflow' => array('settings' => $settings)), array('type' => 'setting'));
+
+  drupal_add_js(drupal_get_path('module', 'itg_workflow') . '/js/itg_workflow.js', array('weight' => 1));
+
+  // Code for UGC. For now below code is commented may be we need it in future.
+  /*
+    $arg3 = arg(3);
+
+    if (arg(1) == 'add' && isset($arg3) && is_numeric($arg3)) {
+    drupal_add_js('jQuery(document).ready(function() {
+    jQuery("#edit-submit").hide();
+    });', array('type' => 'inline', 'scope' => 'footer'));
+    }
+   * 
+   */
+
+  return $form;
 }
 
 /**
@@ -607,95 +607,107 @@ function itg_workflow_after_build($form, &$form_state) {
  * @param object $node
  */
 function itg_workflow_node_presave($node) {
-    if ((isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') || (empty($node->field_story_source_type[LANGUAGE_NONE][0]['value']))) {
-        if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast') {
-            if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
-                $node->workbench_moderation_state_new = 'published';
-            }
-            if ($node->workbench_moderation_state_new == 'published' && $node->workbench_moderation_state_current != 'published') {
-                $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i'); //2017-02-21 23:45
-            }
+  if ((isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') || (empty($node->field_story_source_type[LANGUAGE_NONE][0]['value']))) {
+    if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast') {
+      if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
+        $node->workbench_moderation_state_new = 'published';
+      }
+      if ($node->workbench_moderation_state_new == 'published' && $node->workbench_moderation_state_current != 'published') {
+        $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i'); //2017-02-21 23:45
+      }
+    }
+
+    if ($node->type == 'videogallery') {
+
+      $is_draft = 0;
+      $node_id = $node->nid;
+      foreach ($node->field_story_itg_tags[LANGUAGE_NONE] as $tags) {
+        $tag[] = $tags['name'];
+      }
+      $tag_value = implode(', ', $tag);
+      $tags_value = trim($tag_value, ",");
+      $items = field_get_items('node', $node, 'field_video_upload');
+
+      foreach ($items as $imagecollection) {
+        if ($node->status == 0 && $node->workbench_moderation['current']->state == 'published') {
+          $entitydata = entity_load('field_collection_item', $imagecollection);
+          $v_fid = $entitydata[$imagecollection['value']]->field_videogallery_video_upload;
+          $fids = $v_fid[LANGUAGE_NONE][0]['fid'];
+          if (function_exists('itg_videogallery_unpublish_content_delete_video')) {
+            itg_videogallery_unpublish_content_delete_video($fids);
+          }
         }
+        else {
 
-        if ($node->type == 'videogallery') {
-            $is_draft = 0;
-            $node_id = $node->nid;
-            foreach ($node->field_story_itg_tags[LANGUAGE_NONE] as $tags) {
-                $tag[] = $tags['name'];
-            }
-            $tag_value = implode(', ', $tag);
-            $tags_value = trim($tag_value, ",");
-            $items = field_get_items('node', $node, 'field_video_upload');
+          if ($imagecollection['field_videogallery_video_upload'][LANGUAGE_NONE][0]['fid']) {
+            $fids = $imagecollection['field_videogallery_video_upload'][LANGUAGE_NONE][0]['fid'];
+            $priv_status = $imagecollection['field_video_private'][LANGUAGE_NONE][0]['value'];
+          }
+          else {
+            $entitydata = entity_load('field_collection_item', $imagecollection);
+            $v_fid = $entitydata[$imagecollection['value']]->field_videogallery_video_upload;
+            $fids = $v_fid[LANGUAGE_NONE][0]['fid'];
+            $priv_data = $entitydata[$imagecollection['value']]->field_video_private;
+            $priv_status = $imagecollection['field_video_private'][LANGUAGE_NONE][0]['value'];
+          }
 
-            foreach ($items as $imagecollection) {
+          if ((int) $fids != 0) {
+            $video_image = itg_videogallery_get_video_info_by_fid($fids);
+            if (empty($video_image)) {
+              $video_fid = $fids;
+              $file_details = file_load($fids);
 
-                if ($imagecollection['field_videogallery_video_upload'][LANGUAGE_NONE][0]['fid']) {
-                    $fids = $imagecollection['field_videogallery_video_upload'][LANGUAGE_NONE][0]['fid'];
-                    $priv_status = $imagecollection['field_video_private'][LANGUAGE_NONE][0]['value'];
+              $real_path = drupal_realpath($file_details->uri);
+              if (file_exists($file_details->uri)) {
+                if ($real_path == "") {
+                  $real_path = file_create_url($file_details->uri);
                 }
-                else {
-                    $entitydata = entity_load('field_collection_item', $imagecollection);
-                    $v_fid = $entitydata[$imagecollection['value']]->field_videogallery_video_upload;
-                    $fids = $v_fid[LANGUAGE_NONE]['und'][0]['fid'];
-                    $priv_data = $entitydata[$imagecollection['value']]->field_video_private;
-                    $priv_status = $imagecollection['field_video_private'][LANGUAGE_NONE][0]['value'];
+                $is_draft = 1;
+
+                if ($node_id) {
+                  // use for upload local video to DM
+                  itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details, $video_fid, $tags_value, $node_id, 'is_draft', $priv_status);
                 }
-
-                if ((int) $fids != 0) {
-                    $video_image = itg_videogallery_get_video_info_by_fid($fids);
-                    if (empty($video_image)) {
-                        $video_fid = $fids;
-                        $file_details = file_load($fids);
-
-                        $real_path = drupal_realpath($file_details->uri);
-                        if (file_exists($file_details->uri)) {
-                            if ($real_path == "") {
-                                $real_path = file_create_url($file_details->uri);
-                            }
-                            $is_draft = 1;
-
-                            if ($node_id) {
-                                // use for upload local video to DM
-                                itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details, $video_fid, $tags_value, $node_id, 'is_draft', $priv_status);
-                            }
-                        }
-                    }
-                    else {
-                        $video_image = itg_videogallery_get_video_all($fids);
-                        
-                        if ($video_image) {
-                            $is_draft = 1;
-                        }
-                    }
-                }
-            }
-
-// Need to chenge this for redirect
-            if ($is_draft == 1) {
-
-                if ($node->workbench_moderation['current']->state == 'published') {
-                    $node->status = 0;
-                    //$node->workbench_moderation['published']->published = 0;
-                }
-                else {
-                    $node->workbench_moderation_state_new = 'draft';
-                }
+              }
             }
             else {
-                if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
-                    $node->workbench_moderation_state_new = 'published';
-                }
-            }
+              $video_image = itg_videogallery_get_video_all($fids);
 
-            if ($node->workbench_moderation_state_new == 'published' && $node->workbench_moderation_state_current != 'published') {
-                $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i'); //2017-02-21 23:45
-            }            
+              if ($video_image) {
+                $is_draft = 1;
+              }
+            }
+          }
         }
-    } else if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated') { //comment this code before migrate        
-        if ($node->status == 1) {
-          $node->workbench_moderation_state_new = 'published'; 
-        }      
+      }
+
+// Need to chenge this for redirect
+      if ($is_draft == 1) {
+
+        if ($node->workbench_moderation['current']->state == 'published') {
+          $node->status = 0;
+          //$node->workbench_moderation['published']->published = 0;
+        }
+        else {
+          $node->workbench_moderation_state_new = 'draft';
+        }
+      }
+      else {
+        if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
+          $node->workbench_moderation_state_new = 'published';
+        }
+      }
+
+      if ($node->workbench_moderation_state_new == 'published' && $node->workbench_moderation_state_current != 'published') {
+        $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i'); //2017-02-21 23:45
+      }
     }
+  }
+  else if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated') { //comment this code before migrate        
+    if ($node->status == 1) {
+      $node->workbench_moderation_state_new = 'published';
+    }
+  }
 }
 
 /* After build for views exposed form.
@@ -705,30 +717,30 @@ function itg_workflow_node_presave($node) {
  */
 
 function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
-    global $user, $base_url;
+  global $user, $base_url;
 
-    $settings = array();
+  $settings = array();
 
-    $settings['form_id'] = $form['#id'];
-    drupal_add_js(array('itg_workflow' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_workflow') . '/js/itg_workflow_form.js');
+  $settings['form_id'] = $form['#id'];
+  drupal_add_js(array('itg_workflow' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_workflow') . '/js/itg_workflow_form.js');
 
-    if ($form['#id'] == 'views-exposed-form-strory-menegment-page-6' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-6') {
-        $form['state']['#options'] = array('All' => '-All-',
-            'needs_review' => 'Submitted for Review',
-            'rejected' => 'Rejected',
-            'needs_modification' => 'Needs Modification');
-    }
-    elseif ($form['#id'] == 'views-exposed-form-strory-menegment-page-5') {
-        $form['field_story_schedule_date_time_value_1_op']['#options'] = array('empty' => t('-All-'), '<' => 'Published', '>=' => t('To Be Live'));
+  if ($form['#id'] == 'views-exposed-form-strory-menegment-page-6' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-6') {
+    $form['state']['#options'] = array('All' => '-All-',
+        'needs_review' => 'Submitted for Review',
+        'rejected' => 'Rejected',
+        'needs_modification' => 'Needs Modification');
+  }
+  elseif ($form['#id'] == 'views-exposed-form-strory-menegment-page-5') {
+    $form['field_story_schedule_date_time_value_1_op']['#options'] = array('empty' => t('-All-'), '<' => 'Published', '>=' => t('To Be Live'));
 
 //    drupal_add_js('jQuery(document).ready(function() {
 //              jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();              
 //            });', array('type' => 'inline', 'scope' => 'footer'));
-    }
-    elseif ($form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12') {
+  }
+  elseif ($form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12') {
 
-        $form['field_story_schedule_date_time_value_op']['#options'] = array('empty' => t('-All-'), '<' => 'Published', '>=' => t('To Be Live'));
+    $form['field_story_schedule_date_time_value_op']['#options'] = array('empty' => t('-All-'), '<' => 'Published', '>=' => t('To Be Live'));
 
 //    drupal_add_js('jQuery(document).ready(function() {
 //              jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();
@@ -736,9 +748,9 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
 //                     jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();                     
 //                 });
 //            });', array('type' => 'inline', 'scope' => 'footer'));
-    }
+  }
 
-    return $form;
+  return $form;
 }
 
 /**
@@ -747,33 +759,33 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
  */
 function itg_workflow_views_query_alter(&$view, &$query) {
 
-    // < published and >= approved
-    // for story list
+  // < published and >= approved
+  // for story list
 
-    if ($view->name != 'related_photo_video_content') {
-        if ((!isset($_REQUEST['field_story_schedule_date_time_value_1_op'])) && $view->current_display == 'page_5') {
-            unset($view->query->where[1]['conditions'][4]);
-        }
-
-        if ($view->name == 'strory_menegment' || $view->name == 'photo_gallery_management' || $view->name == 'videogallery_management' || $view->name == 'blogs_management' || $view->name == 'podcast_management') {
-
-            if ((!isset($_REQUEST['field_story_schedule_date_time_value_op'])) && $view->current_display == 'page_1') {
-                unset($view->query->where[1]['conditions'][4]);
-            }
-        }
+  if ($view->name != 'related_photo_video_content') {
+    if ((!isset($_REQUEST['field_story_schedule_date_time_value_1_op'])) && $view->current_display == 'page_5') {
+      unset($view->query->where[1]['conditions'][4]);
     }
 
-    if ($view->name == 'preview_content_report' && $view->current_display == 'page') {
-        $query->add_where(1, 'itg_workflow_preview_log.nid', NULL);
+    if ($view->name == 'strory_menegment' || $view->name == 'photo_gallery_management' || $view->name == 'videogallery_management' || $view->name == 'blogs_management' || $view->name == 'podcast_management') {
+
+      if ((!isset($_REQUEST['field_story_schedule_date_time_value_op'])) && $view->current_display == 'page_1') {
+        unset($view->query->where[1]['conditions'][4]);
+      }
     }
+  }
+
+  if ($view->name == 'preview_content_report' && $view->current_display == 'page') {
+    $query->add_where(1, 'itg_workflow_preview_log.nid', NULL);
+  }
 }
 
 function itg_workflow_views_pre_render(&$view) {
 
-    if ($view->name == "preview_content_report" && $view->current_display == 'page') {
-        $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-        $view->attachment_before = $header_content;
-    }
+  if ($view->name == "preview_content_report" && $view->current_display == 'page') {
+    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $view->attachment_before = $header_content;
+  }
 }
 
 /**
@@ -781,14 +793,14 @@ function itg_workflow_views_pre_render(&$view) {
  * {@inheritdoc} 
  */
 function itg_workflow_query_alter(QueryAlterableInterface $query) {
-    if (isset($query->hasTag) && $query->hasTag('views')) {
-        static $count;
-        $view = & $query->getMetaData('view');
+  if (isset($query->hasTag) && $query->hasTag('views')) {
+    static $count;
+    $view = & $query->getMetaData('view');
 
-        if ($view->name == 'view_moderation_history' || $view->current_display == 'block_1' || $view->current_display == 'page_1') {
-            $query->groupBy('node_revision_vid');
-        }
+    if ($view->name == 'view_moderation_history' || $view->current_display == 'block_1' || $view->current_display == 'page_1') {
+      $query->groupBy('node_revision_vid');
     }
+  }
 }
 
 /**
@@ -797,44 +809,44 @@ function itg_workflow_query_alter(QueryAlterableInterface $query) {
  * {@inheritdoc}
  */
 function itg_workflow_node_access($node, $op, $account) {
-    global $user;
-    $story_expiry_date = '';
-    $arr_source_type = array('issue', 'supplement');
+  global $user;
+  $story_expiry_date = '';
+  $arr_source_type = array('issue', 'supplement');
 
-    if (isset($node->type) && $node->type == 'story' && $op == 'update' && (isset($node->field_story_source_type[LANGUAGE_NONE]) && !in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $arr_source_type))) {
-        if (!empty($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {
-            $story_expiry_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
-        }
-
-        $current_time = time();
-
-        if ($node->status == 0 && (($node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected')) {
-            return NODE_ACCESS_DENY;
-        }
-        elseif ((!empty($story_expiry_date) && $story_expiry_date < $current_time) && (arg(0) != 'issue-listing')) {
-            return NODE_ACCESS_DENY;
-        }
-    }
-    elseif (isset($node->type) && $op == 'update' && ($node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery')) {
-        if (!empty($node) && $node->status == 0 && ((!empty($node->field_story_archive[LANGUAGE_NONE][0]['value']) && $node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected')) { //shravan
-            return NODE_ACCESS_DENY;
-        }
+  if (isset($node->type) && $node->type == 'story' && $op == 'update' && (isset($node->field_story_source_type[LANGUAGE_NONE]) && !in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $arr_source_type))) {
+    if (!empty($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {
+      $story_expiry_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
     }
 
-    // code for lock story  
-    if (isset($node->type) && $node->type == 'story' && $node->status == 1) {
-        if (!array_key_exists(COPY_EDITOR, $user->roles) && !array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) && !array_key_exists(EDITOR, $user->roles)) {
-            if (!empty($node->field_story_configurations[LANGUAGE_NONE])) {
-                foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
-                    if ($val['value'] == 'display_lock') {
-                        return NODE_ACCESS_DENY;
-                    }
-                }
-            }
-        }
-    }
+    $current_time = time();
 
-    return NODE_ACCESS_IGNORE;
+    if ($node->status == 0 && (($node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected')) {
+      return NODE_ACCESS_DENY;
+    }
+    elseif ((!empty($story_expiry_date) && $story_expiry_date < $current_time) && (arg(0) != 'issue-listing')) {
+      return NODE_ACCESS_DENY;
+    }
+  }
+  elseif (isset($node->type) && $op == 'update' && ($node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery')) {
+    if (!empty($node) && $node->status == 0 && ((!empty($node->field_story_archive[LANGUAGE_NONE][0]['value']) && $node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected')) { //shravan
+      return NODE_ACCESS_DENY;
+    }
+  }
+
+  // code for lock story  
+  if (isset($node->type) && $node->type == 'story' && $node->status == 1) {
+    if (!array_key_exists(COPY_EDITOR, $user->roles) && !array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) && !array_key_exists(EDITOR, $user->roles)) {
+      if (!empty($node->field_story_configurations[LANGUAGE_NONE])) {
+        foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
+          if ($val['value'] == 'display_lock') {
+            return NODE_ACCESS_DENY;
+          }
+        }
+      }
+    }
+  }
+
+  return NODE_ACCESS_IGNORE;
 }
 
 /**
@@ -842,9 +854,9 @@ function itg_workflow_node_access($node, $op, $account) {
  * {@inheritdoc}
  */
 function itg_workflow_node_view($node, $view_mode, $langcode) {
-    if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
-        $node->moderation_history_block = views_embed_view('view_moderation_history', 'block_2');
-    }
+  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
+    $node->moderation_history_block = views_embed_view('view_moderation_history', 'block_2');
+  }
 }
 
 /**
@@ -852,12 +864,12 @@ function itg_workflow_node_view($node, $view_mode, $langcode) {
  * {@inheritdoc}   
  */
 function itg_workflow_node_validate($node, $form, &$form_state) {
-    // Code for check remarks field is empty or not
-    if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
-        if (empty($node->log) && (($node->workbench_moderation_state_new == 'needs_modification') || ($node->workbench_moderation_state_new == 'rejected'))) {
-            form_set_error('log', t("Remarks field is required."));
-        }
+  // Code for check remarks field is empty or not
+  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
+    if (empty($node->log) && (($node->workbench_moderation_state_new == 'needs_modification') || ($node->workbench_moderation_state_new == 'rejected'))) {
+      form_set_error('log', t("Remarks field is required."));
     }
+  }
 }
 
 /**
@@ -866,7 +878,7 @@ function itg_workflow_node_validate($node, $form, &$form_state) {
  * @param type $field2:edit-bundle-blog-field-story-archive-und    
  */
 function itg_workflow_bulk_opration_related($field1, $field2) {
-    drupal_add_js('jQuery(document).ready(function() {
+  drupal_add_js('jQuery(document).ready(function() {
                 jQuery("#edit-actionviews-bulk-operations-modify-action").val("Archive");
                 var myInputBoxID = ' . $field1 . ';
                 jQuery("label[for=" + myInputBoxID + "]").hide();
@@ -884,28 +896,28 @@ function itg_workflow_bulk_opration_related($field1, $field2) {
  * @param object $node
  */
 function itg_workflow_node_insert($node) {
-    global $user;
+  global $user;
 
-    if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
-        //drupal_set_message("under itg_workflow_node_insert");
-        // for code email
-        /* if (!array_key_exists(COPY_EDITOR, $user->roles) &&
-          !array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) &&
-          !array_key_exists(EDITOR, $user->roles) &&
-          !array_key_exists(SITE_ADMIN, $user->roles) &&
-          !($node->workbench_moderation_state_new == 'draft')) {
+  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
+    //drupal_set_message("under itg_workflow_node_insert");
+    // for code email
+    /* if (!array_key_exists(COPY_EDITOR, $user->roles) &&
+      !array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) &&
+      !array_key_exists(EDITOR, $user->roles) &&
+      !array_key_exists(SITE_ADMIN, $user->roles) &&
+      !($node->workbench_moderation_state_new == 'draft')) {
 
-          //getting mail id's of high level users
-          $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
-          $user_email = get_email_by_roll($rid);
-          workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
-          } */
-        //   drupal_set_message("unser node insert");
-        //unset session if exists during node insert.
-        if (isset($_SESSION['node_preview_unique'])) {
-            unset($_SESSION['node_preview_unique']);
-        }
+      //getting mail id's of high level users
+      $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
+      $user_email = get_email_by_roll($rid);
+      workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
+      } */
+    //   drupal_set_message("unser node insert");
+    //unset session if exists during node insert.
+    if (isset($_SESSION['node_preview_unique'])) {
+      unset($_SESSION['node_preview_unique']);
     }
+  }
 }
 
 /**
@@ -913,91 +925,91 @@ function itg_workflow_node_insert($node) {
  * @param object $node
  */
 function itg_workflow_node_update($node) {
-    global $user;
-    //watchdog("email_test", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
-    if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
-        //drupal_set_message("under itg_workflow_node_update");
-        // get preview log ID.
-        $preview_unique_id = $node->field_preview_unique_id['und'][0]['value'];
-        $user_id = $user->uid;
-        $node_id = $node->nid;
-        if (_is_preview_log_submit_true($user)) {
-            // Delete entry of node if user is previously previewed the node.
-            try {
-                db_delete('itg_workflow_preview_log')
-                        ->condition('nid', $node_id)
-                        ->condition('uid', $user_id)
-                        ->condition('preview_id', $preview_unique_id, "!=")
-                        ->execute();
-            } catch (Exception $ex) {
-                //drupal_set_message("Direct published node cache block");
-                drupal_set_message($ex->getMessage());
-            }
+  global $user;
+  //watchdog("email_test", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
+  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
+    //drupal_set_message("under itg_workflow_node_update");
+    // get preview log ID.
+    $preview_unique_id = $node->field_preview_unique_id['und'][0]['value'];
+    $user_id = $user->uid;
+    $node_id = $node->nid;
+    if (_is_preview_log_submit_true($user)) {
+      // Delete entry of node if user is previously previewed the node.
+      try {
+        db_delete('itg_workflow_preview_log')
+                ->condition('nid', $node_id)
+                ->condition('uid', $user_id)
+                ->condition('preview_id', $preview_unique_id, "!=")
+                ->execute();
+      } catch (Exception $ex) {
+        //drupal_set_message("Direct published node cache block");
+        drupal_set_message($ex->getMessage());
+      }
 
-            try {
-                db_update('itg_workflow_preview_log')
-                        ->fields(array(
-                            'nid' => $node_id,
-                            'preview_id' => $preview_unique_id,
-                            'uid' => $user_id,
-                        ))
-                        ->condition('preview_id', $preview_unique_id)
-                        ->condition('uid', $user_id)
-                        ->execute();
-            } catch (Exception $ex) {
-                //drupal_set_message("Direct published node cache block");
-                drupal_set_message($ex->getMessage());
-            }
-        }
-        unset($_SESSION['node_preview_unique']);
+      try {
+        db_update('itg_workflow_preview_log')
+                ->fields(array(
+                    'nid' => $node_id,
+                    'preview_id' => $preview_unique_id,
+                    'uid' => $user_id,
+                ))
+                ->condition('preview_id', $preview_unique_id)
+                ->condition('uid', $user_id)
+                ->execute();
+      } catch (Exception $ex) {
+        //drupal_set_message("Direct published node cache block");
+        drupal_set_message($ex->getMessage());
+      }
+    }
+    unset($_SESSION['node_preview_unique']);
 
-        if ($node->workbench_moderation_state_new != 'draft') {
+    if ($node->workbench_moderation_state_new != 'draft') {
+      $itguser = user_load($node->uid);
+      //getting mail id's of high level users
+      if ($node->type == 'story' && $node->workbench_moderation_state_new == 'published') {
+        //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR, SEO);
+        $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, SEO);
+      }
+      else {
+        $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR);
+        //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
+      }
+
+      //$user_email = get_email_by_roll($rid);
+      $user_email[] = $itguser->mail;
+
+      if (itg_workflow_stop_email_during_bulk_operation($_REQUEST)) {
+        //workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
+      }
+      if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+        if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
+
+          $preview_unique_id = $node->field_preview_unique_id['und'][0]['value'];
+
+          if ($node->workbench_moderation_state_new != 'draft') {
             $itguser = user_load($node->uid);
             //getting mail id's of high level users
             if ($node->type == 'story' && $node->workbench_moderation_state_new == 'published') {
-                //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR, SEO);
-                $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, SEO);
+              //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR, SEO);
+              $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, SEO);
             }
             else {
-                $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR);
-                //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
+              $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR);
+              //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
             }
 
             //$user_email = get_email_by_roll($rid);
             $user_email[] = $itguser->mail;
 
+            unset($_SESSION['node_preview_unique']);
             if (itg_workflow_stop_email_during_bulk_operation($_REQUEST)) {
-                //workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
+              //workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
             }
-            if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-                if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
-
-                    $preview_unique_id = $node->field_preview_unique_id['und'][0]['value'];
-
-                    if ($node->workbench_moderation_state_new != 'draft') {
-                        $itguser = user_load($node->uid);
-                        //getting mail id's of high level users
-                        if ($node->type == 'story' && $node->workbench_moderation_state_new == 'published') {
-                            //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR, SEO);
-                            $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, SEO);
-                        }
-                        else {
-                            $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR);
-                            //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
-                        }
-
-                        //$user_email = get_email_by_roll($rid);
-                        $user_email[] = $itguser->mail;
-
-                        unset($_SESSION['node_preview_unique']);
-                        if (itg_workflow_stop_email_during_bulk_operation($_REQUEST)) {
-                            //workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
-                        }
-                    }
-                }
-            }
+          }
         }
+      }
     }
+  }
 }
 
 /**
@@ -1006,10 +1018,10 @@ function itg_workflow_node_update($node) {
  * @return boolean
  */
 function itg_workflow_stop_email_during_bulk_operation($request) {
-    if (isset($request['op']) && $request['op'] == 'do') {
-        return FALSE;
-    }
-    return TRUE;
+  if (isset($request['op']) && $request['op'] == 'do') {
+    return FALSE;
+  }
+  return TRUE;
 }
 
 /**
@@ -1024,62 +1036,62 @@ function itg_workflow_stop_email_during_bulk_operation($request) {
  */
 function workflow_get_mail_content($node, $event, $to, $user_name, $current_user_name) {
 
-    global $base_url;
+  global $base_url;
 
-    $content_type = $node->type;
-    $review = $node->workbench_moderation_state_new;
-    if ($event == 'create') {
-        $task_subject = 'A new ' . $content_type . ' has been submitted for your review, please find details below.';
-        $submitted_by = 'Submitted By: ' . $current_user_name;
-        $subject = ucfirst($content_type) . ' Submitted ' . $node->title;
+  $content_type = $node->type;
+  $review = $node->workbench_moderation_state_new;
+  if ($event == 'create') {
+    $task_subject = 'A new ' . $content_type . ' has been submitted for your review, please find details below.';
+    $submitted_by = 'Submitted By: ' . $current_user_name;
+    $subject = ucfirst($content_type) . ' Submitted ' . $node->title;
+  }
+  elseif ($event == 'update') {
+    if ($review == 'needs_review') {
+      $task_subject = 'A new ' . $content_type . ' has been updated and submitted for your review, please find details below.';
     }
-    elseif ($event == 'update') {
-        if ($review == 'needs_review') {
-            $task_subject = 'A new ' . $content_type . ' has been updated and submitted for your review, please find details below.';
-        }
-        else if ($review == 'rejected') {
-            $task_subject = 'Your ' . $content_type . ' has been rejected, please find details below.';
-        }
-        else if ($review == 'needs_modification') {
-            $task_subject = 'Your ' . $content_type . ' has been required some modification, please find details below.';
-        }
-        else if ($review == 'published') {
-            $task_subject = 'Your ' . $content_type . ' has been published, please find details below.';
-        }
-
-        $submitted_by = 'Updated By: ' . $current_user_name;
-        $subject = ucfirst($content_type) . ' Updation ' . $node->title;
+    else if ($review == 'rejected') {
+      $task_subject = 'Your ' . $content_type . ' has been rejected, please find details below.';
+    }
+    else if ($review == 'needs_modification') {
+      $task_subject = 'Your ' . $content_type . ' has been required some modification, please find details below.';
+    }
+    else if ($review == 'published') {
+      $task_subject = 'Your ' . $content_type . ' has been published, please find details below.';
     }
 
-    $node_url = $base_url . '/node/' . $node->nid;
-    $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+    $submitted_by = 'Updated By: ' . $current_user_name;
+    $subject = ucfirst($content_type) . ' Updation ' . $node->title;
+  }
+
+  $node_url = $base_url . '/node/' . $node->nid;
+  $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
               <html xmlns:v="urn:schemas-microsoft-com:vml">
                 <head><title></title></head>
                 <body style="margin:0; padding:0;">';
-    $content .= 'Dear Team,';
-    $content .= '<br /><br />' . $task_subject;
-    $content .= '<br /><br />' . ucfirst($content_type) . ' Title: ' . $node->title;
-    $content .= '<br />URL: ' . $node_url;
-    $content .= '<br />' . $submitted_by;
-    $content .= '<br /><br /><br />Thanks,<br>ITG Team';
-    $content .= '</body>';
-    $content .= '</html>';
+  $content .= 'Dear Team,';
+  $content .= '<br /><br />' . $task_subject;
+  $content .= '<br /><br />' . ucfirst($content_type) . ' Title: ' . $node->title;
+  $content .= '<br />URL: ' . $node_url;
+  $content .= '<br />' . $submitted_by;
+  $content .= '<br /><br /><br />Thanks,<br>ITG Team';
+  $content .= '</body>';
+  $content .= '</html>';
 
 
-    $params = array(
-        'body' => $content,
-        'subject' => $subject,
-    );
+  $params = array(
+      'body' => $content,
+      'subject' => $subject,
+  );
 
-    $mail = drupal_mail('itg_workflow', 'send_mail_to_task', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
-    if ($mail['result']) {
-        return TRUE;
-    }
-    else {
-        $error_msg = 'Failed to send the email!';
-        watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
-        return FALSE;
-    }
+  $mail = drupal_mail('itg_workflow', 'send_mail_to_task', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  if ($mail['result']) {
+    return TRUE;
+  }
+  else {
+    $error_msg = 'Failed to send the email!';
+    watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+    return FALSE;
+  }
 }
 
 /**
@@ -1089,22 +1101,22 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
  * @param array $params
  */
 function itg_workflow_mail($key, &$message, $params) {
-    switch ($key) {
-        case 'send_mail_to_task':
-            $headers = array(
-                'MIME-Version' => '1.0',
-                'Content-Type' => 'text/html; charset=iso-8859-1;',
-                'Content-Transfer-Encoding' => '8Bit',
-                'X-Mailer' => 'Drupal'
-            );
+  switch ($key) {
+    case 'send_mail_to_task':
+      $headers = array(
+          'MIME-Version' => '1.0',
+          'Content-Type' => 'text/html; charset=iso-8859-1;',
+          'Content-Transfer-Encoding' => '8Bit',
+          'X-Mailer' => 'Drupal'
+      );
 
-            $message['subject'] = $params['subject'];
-            $message['body'][] = $params['body'];
-            foreach ($headers as $key => $value) {
-                $message['headers'][$key] = $value;
-            }
-            break;
-    }
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['body'];
+      foreach ($headers as $key => $value) {
+        $message['headers'][$key] = $value;
+      }
+      break;
+  }
 }
 
 /**
@@ -1114,16 +1126,16 @@ function itg_workflow_mail($key, &$message, $params) {
  * @param array $params
  */
 function get_email_by_roll($id) {
-    $query = db_select('users', 'u');
-    $query->fields('u', array('mail'));
-    $query->join('users_roles', 'ur', 'ur.uid = u.uid');
-    $query->condition('ur.rid', $id, IN);
-    $result = $query->execute();
+  $query = db_select('users', 'u');
+  $query->fields('u', array('mail'));
+  $query->join('users_roles', 'ur', 'ur.uid = u.uid');
+  $query->condition('ur.rid', $id, IN);
+  $result = $query->execute();
 
-    foreach ($result as $val) {
-        $value[] = $val->mail;
-    }
-    return $value;
+  foreach ($result as $val) {
+    $value[] = $val->mail;
+  }
+  return $value;
 }
 
 /**
@@ -1135,8 +1147,8 @@ function get_email_by_roll($id) {
  * {@inheritdoc}
  */
 function itg_workflow_views_api() {
-    return array(
-        'api' => 3,
-        'path' => drupal_get_path('module', 'itg_workflow') . '/includes/views',
-    );
+  return array(
+      'api' => 3,
+      'path' => drupal_get_path('module', 'itg_workflow') . '/includes/views',
+  );
 }

@@ -52,6 +52,14 @@ function feature_for_video_image_default_styles() {
  */
 function feature_for_video_node_info() {
   $items = array(
+    'itg_delete_solr_video' => array(
+      'name' => t('ITG Delete Solr Video'),
+      'base' => 'node_content',
+      'description' => '',
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
     'videogallery' => array(
       'name' => t('Upload Video'),
       'base' => 'node_content',
