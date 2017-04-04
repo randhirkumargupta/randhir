@@ -271,5 +271,9 @@ function itg_widget_views_pre_render(&$view) {
       drupal_set_message(t("Please select section first."), 'error');
       drupal_goto('user-selection');
     }
+    if(isset($_POST['views_bulk_operations']) && isset($_GET['field_user_section_tid']) && !is_integer(isset($_GET['field_user_section_tid']))) {
+      drupal_set_message(t("Please select section first."), 'error');
+      drupal_goto('user-selection');
+    }
   }
 }

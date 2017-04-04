@@ -21,7 +21,7 @@ $fb_share_image = '';
 // end here
 // Related node
 $related_content = $data['related_content'];
-if (isset($related_content) && !empty($related_content)) {
+if (isset($related_content) && !empty($related_content[0])) {
   $related_stories = '<div class="related-story relative-active"><span>' . t('RELATED STORY') . '</span><ul class="related-stories">';
 
   foreach ($related_content as $related_stories_data) {

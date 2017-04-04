@@ -1020,10 +1020,12 @@ function features_for_story_field_default_field_instances() {
             'attach' => 0,
             'clipboard' => 0,
             'imce' => 0,
-            'itg_image_repository' => 0,
+            'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
-            'upload' => 'upload',
+            'upload' => 0,
           ),
           'source_attach' => array(
             'absolute' => 0,
@@ -2002,7 +2004,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_big_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (1024 x 1024)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2022,9 +2024,10 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_big_image',
-    'label' => 'Big image',
-    'required' => FALSE,
+    'label' => 'Facebook instant image',
+    'required' => 0,
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
@@ -2038,10 +2041,21 @@ function features_for_story_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'image',
       'settings' => array(
         'filefield_sources' => array(
-          'filefield_sources' => array(),
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
           'source_attach' => array(
             'absolute' => 0,
             'attach_mode' => 'move',
@@ -2052,6 +2066,7 @@ function features_for_story_field_default_field_instances() {
           ),
           'source_reference' => array(
             'autocomplete' => 0,
+            'search_all_fields' => 0,
           ),
         ),
         'imce_filefield_on' => 0,
@@ -3737,9 +3752,10 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_quote_image',
     'label' => 'Quote image',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
@@ -3753,10 +3769,21 @@ function features_for_story_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'image',
       'settings' => array(
         'filefield_sources' => array(
-          'filefield_sources' => array(),
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
           'source_attach' => array(
             'absolute' => 0,
             'attach_mode' => 'move',
@@ -3767,6 +3794,7 @@ function features_for_story_field_default_field_instances() {
           ),
           'source_reference' => array(
             'autocomplete' => 0,
+            'search_all_fields' => 0,
           ),
         ),
         'imce_filefield_on' => 0,
@@ -4631,10 +4659,12 @@ function features_for_story_field_default_field_instances() {
             'attach' => 0,
             'clipboard' => 0,
             'imce' => 0,
-            'itg_image_repository' => 0,
+            'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
-            'upload' => 'upload',
+            'upload' => 0,
           ),
           'source_attach' => array(
             'absolute' => 0,
@@ -4707,10 +4737,12 @@ function features_for_story_field_default_field_instances() {
             'attach' => 0,
             'clipboard' => 0,
             'imce' => 0,
-            'itg_image_repository' => 0,
+            'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
-            'upload' => 'upload',
+            'upload' => 0,
           ),
           'source_attach' => array(
             'absolute' => 0,
@@ -5644,7 +5676,6 @@ function features_for_story_field_default_field_instances() {
   t('Associate lead gallery/video');
   t('Audio Position');
   t('Audio URL');
-  t('Big image');
   t('Buzz');
   t('Buzz Description');
   t('Byline');
@@ -5670,6 +5701,7 @@ function features_for_story_field_default_field_instances() {
   t('Facebook Narrative');
   t('Facebook Video');
   t('Facebook image');
+  t('Facebook instant image');
   t('Facebook narrative');
   t('Factoids');
   t('Factoids title');
@@ -5679,6 +5711,7 @@ function features_for_story_field_default_field_instances() {
   t('HeadLine');
   t('Highlights');
   t('Image');
+  t('Image Size (1024 x 1024)');
   t('Image Size (170 x 127)');
   t('Image Size (370 x 208)');
   t('Image Size (483x271)');

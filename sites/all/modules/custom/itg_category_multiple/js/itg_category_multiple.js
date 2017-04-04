@@ -16,6 +16,24 @@ $(document).ready(function() {
 
     // Hiding category
     $('.form-field-name-field-story-category').hide();
+
+
+    if (!$('#edit-itg-category').val()) {
+        $('.form-item-itg-category').hide();
+    }
+
+    if (!$('#edit-itg-sub-category').val()) {
+        $('.form-item-itg-sub-category').hide();
+    }
+
+    if (!$('#edit-itg-sub-sub-category').val()) {
+        $('.form-item-itg-sub-sub-category').hide();
+    }
+
+    if (!$('#edit-itg-sub-sub-sub-category').val()) {
+        $('.form-item-itg-sub-sub-sub-category').hide();
+    }
+
     //Adding css for  primary category
     $("#edit-itg-primary-category").css("height", "100px");
     $("#edit-itg-primary-category").css("overflow-x", "auto");
@@ -34,6 +52,12 @@ $(document).ready(function() {
             $('#edit-field-story-category-und').val('');
             $('#edit-field-story-category-und').val($('#edit-itg-section').val());
 
+            // show/hiding some fields  
+            $('.form-item-itg-sub-category').hide();
+            $('.form-item-itg-sub-sub-category').hide();
+            $('.form-item-itg-sub-sub-sub-category').hide();
+
+
             currentSectionRequest = $.ajax({
                 type: 'POST',
                 url: Drupal.settings.basePath + 'itg-category-multiple-find',
@@ -44,6 +68,7 @@ $(document).ready(function() {
                 },
                 data: {type: $(this).attr('name'), section: JSON.stringify(categoryies)},
                 success: function(html) {
+                    $('.form-item-itg-category').show();
                     var item = JSON.parse(html);
                     $('#edit-itg-category').empty();
                     $('#edit-itg-sub-category').empty();
@@ -82,6 +107,9 @@ $(document).ready(function() {
             jQuery('#edit-field-story-category-und').val('');
             jQuery('#edit-field-story-category-und').val(jQuery('#edit-itg-section').val().concat(jQuery('#edit-itg-category').val()));
 
+            $('.form-item-itg-sub-sub-category').hide();
+            $('.form-item-itg-sub-sub-sub-category').hide();
+
             currentCategoryRequest = $.ajax({
                 type: 'POST',
                 url: Drupal.settings.basePath + 'itg-category-multiple-find',
@@ -96,6 +124,7 @@ $(document).ready(function() {
                     category: JSON.stringify(categoryies),
                 },
                 success: function(html) {
+                    $('.form-item-itg-sub-category').show();
                     var item = JSON.parse(html);
                     $('#edit-itg-sub-category').empty();
                     $('#edit-itg-sub-sub-category').empty();
@@ -129,7 +158,7 @@ $(document).ready(function() {
             jQuery('#edit-field-story-category-und').val('');
             jQuery('#edit-field-story-category-und').val(jQuery('#edit-itg-section').val().concat(jQuery('#edit-itg-category').val()).concat($(this).val()));
 
-
+            $('.form-item-itg-sub-sub-sub-category').hide();
             currentsubCategoryRequest = $.ajax({
                 type: 'POST',
                 url: Drupal.settings.basePath + 'itg-category-multiple-find',
@@ -138,7 +167,6 @@ $(document).ready(function() {
                         currentsubCategoryRequest.abort();
                     }
                 },
-                
                 data: {
                     type: $(this).attr('name'),
                     section: JSON.stringify($('#edit-itg-section').val()),
@@ -146,6 +174,8 @@ $(document).ready(function() {
                     sub_category: JSON.stringify(categoryies),
                 },
                 success: function(html) {
+                    $('.form-item-itg-sub-sub-category').show();
+
                     var item = JSON.parse(html);
                     $('#edit-itg-sub-sub-category').empty();
                     $('#edit-itg-sub-sub-sub-category').empty();
@@ -200,9 +230,9 @@ $(document).ready(function() {
                     category: JSON.stringify($('#edit-itg-category').val()),
                     sub_category: JSON.stringify($('#edit-itg-sub-category').val()),
                     sub_sub_category: JSON.stringify(categoryies),
-                    
                 },
                 success: function(html) {
+                    $('.form-item-itg-sub-sub-sub-category').show();
                     var item = JSON.parse(html);
                     $('#edit-itg-sub-sub-sub-category').empty();
                     $('#edit-itg-primary-category').empty();

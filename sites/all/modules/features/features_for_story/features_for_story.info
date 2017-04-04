@@ -12,7 +12,6 @@ dependencies[] = conditional_fields
 dependencies[] = date
 dependencies[] = draggableviews
 dependencies[] = feature_category_management
-dependencies[] = file
 dependencies[] = imagefield_crop
 dependencies[] = itg_story
 dependencies[] = number

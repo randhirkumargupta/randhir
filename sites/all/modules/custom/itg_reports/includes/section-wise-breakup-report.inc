@@ -33,9 +33,9 @@ function itg_section_wise_breakup_form($form , &$form_state) {
   );
 
   $form['range_group_one'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'fieldset' ,
     '#title' => 'Date range'
-  );  
+  );
   $form['range_group_one']['date_from'] = array(
     '#type' => 'textfield' ,
     '#title' => t('Date from') ,
@@ -49,23 +49,23 @@ function itg_section_wise_breakup_form($form , &$form_state) {
     '#attributes' => array("placeholder" => array("Enter Date To")) ,
     '#default_value' => isset($_GET['date_to']) ? date('d-m-Y' , $_GET['date_to']) : "" ,
   );
-  
+
   $form['range_group_two'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'fieldset' ,
     '#title' => 'Date range'
-  );  
+  );
   $form['range_group_two']['date_from_two'] = array(
     '#type' => 'textfield' ,
     '#title' => t('Date from') ,
     '#attributes' => array("placeholder" => array("Enter Date From")) ,
-    '#default_value' => isset($_GET['date_from']) ? date('d-m-Y' , $_GET['date_from']) : "" ,
+    '#default_value' => isset($_GET['date_from_two']) ? date('d-m-Y' , $_GET['date_from_two']) : "" ,
   );
 
   $form['range_group_two']['date_to_two'] = array(
     '#type' => 'textfield' ,
     '#title' => t('Date to') ,
     '#attributes' => array("placeholder" => array("Enter Date To")) ,
-    '#default_value' => isset($_GET['date_to']) ? date('d-m-Y' , $_GET['date_to']) : "" ,
+    '#default_value' => isset($_GET['date_to_two']) ? date('d-m-Y' , $_GET['date_to_two']) : "" ,
   );
 
   $form['items_per_page'] = array(
@@ -80,7 +80,7 @@ function itg_section_wise_breakup_form($form , &$form_state) {
     '#type' => 'submit' ,
     '#attributes' => array('class' => array('user-all-content')) ,
     '#prefix' => '<div class = "user-log-filter-btn">' ,
-    '#suffix' => '<a class="user-log-reset" href="' . base_path() . 'itg-section-wise-breakup-report">' . t('Reset') . '</a></div>' ,
+    '#suffix' => '<a class="user-log-reset btn-reset" href="' . base_path() . 'itg-section-wise-breakup-report">' . t('Reset') . '</a></div>' ,
   );
 
   $form['markup'] = array(
@@ -105,10 +105,10 @@ function itg_section_wise_breakup_form_submit($form , $form_state) {
   $path = 'itg-section-wise-breakup-report';
   $options = array(
     'query' => array(
-      'date_from' => strtotime('-1day' , strtotime($date_from)) ,
-      'date_to' => strtotime('+1day' , strtotime($date_to)) ,
-      'date_from_two' => strtotime('-1day' , strtotime($date_from_two)) ,
-      'date_to_two' => strtotime('+1day' , strtotime($date_to_two)) ,
+      'date_from' => (!empty($date_from)) ? strtotime($date_from) : "" ,
+      'date_to' => (!empty($date_to)) ? strtotime($date_to) : "" ,
+      'date_from_two' => (!empty($date_from_two)) ? strtotime($date_from_two) : "" ,
+      'date_to_two' => (!empty($date_to_two)) ? strtotime($date_to_two) : "" ,
       'type' => $content_type ,
       'item_per_page' => $item_per_page ,
     )
@@ -122,54 +122,79 @@ function itg_section_wise_breakup_table() {
 
   $start_date = isset($_GET['date_from']) ? $_GET['date_from'] : NULL;
   $end_date = isset($_GET['date_to']) ? $_GET['date_to'] : NULL;
-
   $start_date_two = isset($_GET['date_from_two']) ? $_GET['date_from_two'] : NULL;
   $end_date_two = isset($_GET['date_to_two']) ? $_GET['date_to_two'] : NULL;
-  
   $type = isset($_GET['type']) ? $_GET['type'] : NULL;
 
+  $start_date = strtotime('-1day' , $start_date);
+  $end_date = strtotime('+1day' , $end_date);
+  $start_date_two = strtotime('-1day' , $start_date_two);
+  $end_date_two = strtotime('+1day' , $end_date_two);
+
   $table_data = itg_section_wise_breakup_mongo_data($start_date , $end_date , $type);
-  
   $table_data_two = itg_section_wise_breakup_mongo_data($start_date_two , $end_date_two , $type);
-  
-  arsort($table_data);
-  foreach ($table_data as $section => $count) {
+
+  $all_sections = array_unique(array_merge(array_keys($table_data_two) , array_keys($table_data)));
+  $full_table = array_unique(array_merge(array_keys($table_data) , array_keys($table_data_two)));
+
+  $output_table_array = array();
+  foreach ($full_table as $key => $unique_section) {
+    $output_table_array[$unique_section] = array(
+      "DR_1" => $table_data[$unique_section] ,
+      "DR_2" => $table_data_two[$unique_section] ,
+    );
+  }
+
+  foreach ($output_table_array as $section => $count) {
+    $DR_1 = (int) $count['DR_1'] + 1;
+    $DR_2 = (int) $count['DR_2'] + 1;
+    if ($DR_1) {
+      $percentage_growth = ((($DR_2 - $DR_1))/$DR_1)*100;
+    }
+    else {
+      $percentage_growth = ($DR_2)*10;
+    }
     $new_table_data[] = array(
       'section' => $section ,
-      'count' => $count+1 ,
+      'viewed' => $DR_1 . '-' . $DR_2 ,
+      'count' => $percentage_growth . '%' ,
     );
   }
   $products = $new_table_data;
   // Create the pagination object
   $pagination = new pagination;
   $count = 0;
+  $date_from_1 = date('d-m-Y' , $_GET['date_from']);
+  $date_from_2 = date('d-m-Y' , $_GET['date_from_two']);
+  $date_to_1 = date('d-m-Y' , $_GET['date_to']);
+  $date_to_2 = date('d-m-Y' , $_GET['date_to_two']);
+  $string = $date_from_1 . " to " . $date_from_2;
+  $string .= "<br/>";
+  $string .= $date_to_1 . " to " . $date_to_2;
   $header = array(
-    array('data' => t('ID')) ,
-    array('data' => t('Section')) ,
+    array('data' => t('S.No')) ,
     array('data' => t('Section ID')) ,
-    array('data' => t('Nodes Viewd')) ,
-    array('data' => t('Action')) ,
+    array('data' => t('Section')) ,
+    array('data' => t("Node Viewed <br/>" . $string)) ,
+    array('data' => t('Actions')) ,
   );
   // If we have an array with items
   if (count($products)) {
     // Parse through the pagination class
     $item_per_page = isset($_GET['item_per_page']) ? $_GET['item_per_page'] : 20;
     $user_details_pages = $pagination->generate($products , $item_per_page);
-    //p($user_details_pages);
     // Load users report data.
     // If we have items 
     if (count($user_details_pages) != 0) {
       // Get pagination.
       $pageNumbers = '<div class="numbers">' . $pagination->links() . '</div>';
-
       foreach ($user_details_pages as $row) {
-        //p(taxonomy_term_load($row['section']));
         // Prepare rows as per pagination.
         $rows[] = array(
           array('data' => $count + 1) ,
           array('data' => $row['section']) ,
-          array('data' => get_term_name_from_tid($row['section'])->name),
-          array('data' => $row['count']) ,
+          array('data' => get_term_name_from_tid($row['section'])->name) ,
+          array('data' => '<' . $row['viewed'] . '> ' . $row['count']) ,
           array('data' => l('View Section' , 'taxonomy/term/' . $row['section'] , array("attributes" => array("target" => array("_blank"))))) ,
         );
         $count++;
@@ -186,6 +211,7 @@ function itg_section_wise_breakup_table() {
 }
 
 function itg_section_wise_breakup_mongo_data($start_date , $end_date , $type) {
+  $final_data_array_count = array();
   if (function_exists('mongodb')) {
     $conn = mongodb();
     if ($conn) {
@@ -195,7 +221,7 @@ function itg_section_wise_breakup_mongo_data($start_date , $end_date , $type) {
       }
 
       if (empty($end_date)) {
-        $end_date = time() + 100;
+        $end_date = time() + 1;
       }
 
       $condition = array(
