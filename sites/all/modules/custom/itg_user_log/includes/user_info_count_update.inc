@@ -145,6 +145,9 @@ function itg_logged_in_user_active_user() {
  * Implements function for visited user listing
  */
 function itg_logged_in_user_visited_node() {
+  $final_array = array();
+  //Add pagination class.
+  module_load_include('php' , 'itg_reports' , 'includes/pagination');
   $output = render(drupal_get_form('itg_user_content_visit_report_form'));
 
   $header = array(
@@ -175,8 +178,8 @@ function itg_logged_in_user_visited_node() {
       }
       if (!empty($_GET['min_date']) && !empty($_GET['max_date'])) {
         $condition['viewtime'] = array(
-          '$gte' => (int) $_GET['min_date'] ,
-          '$lte' => (int) $_GET['max_date'] ,
+          '$gte' => strtotime('-1 day' , $_GET['min_date']) ,
+          '$lte' => strtotime('+1 day' , $_GET['max_date']) ,
         );
       }
       $user_data = $content_visits->find($condition)->sort(array('nid' => -1));
@@ -193,27 +196,49 @@ function itg_logged_in_user_visited_node() {
       }
     }
   }
-  $cou = 1;
-  foreach ($final_array as $row) {
-    $rows[] = array(
-      array('data' => $cou) ,
-      array('data' => $row['nid']) ,
-      array('data' => $row['title']) ,
-      array('data' => $row['url']) ,
-      array('data' => $row['name']) ,
-      array('data' => $row['count']) ,
-    );
-    $cou++;
-  }
+  $pagination = new pagination;
+  // If we have an array with items
+  if (count($final_array)) {
+    // Parse through the pagination class
+    $item_per_page = isset($_GET['item_per_page']) ? $_GET['item_per_page'] : 20;
+    $user_details_pages = $pagination->generate($final_array , $item_per_page);
+    // Load users report data.
+    // If we have items 
+    if (count($user_details_pages) != 0) {
+      // Get pagination.
+      $pageNumbers = '<div class="numbers">' . $pagination->links() . '</div>';
+      $cou = 1;
+      foreach ($user_details_pages as $row) {
+        $rows[] = array(
+          array('data' => $cou) ,
+          array('data' => $row['nid']) ,
+          array('data' => $row['title']) ,
+          array('data' => $row['url']) ,
+          array('data' => $row['name']) ,
+          array('data' => $row['count']) ,
+        );
+        $cou++;
+      }
 
-  //get the header in table
-  //$output = render(drupal_get_form('itg_user_log_api_form'));
-  $output .= theme('table' , array(
-    'header' => $header , 'rows' => $rows ,
-    'attributes' => array('class' => array('views-table')) ,
-    'empty' => t('No results found')));
-  $output .= theme('pager');
-  return $output;
+      //get the header in table
+      //$output = render(drupal_get_form('itg_user_log_api_form'));
+      $output .= theme('table' , array(
+        'header' => $header , 'rows' => $rows ,
+        'attributes' => array('class' => array('views-table')) ,
+        'empty' => t('No results found')));
+      $output .= theme('pager');
+      $output .= '<ul class="pager">' . $pageNumbers . '</ul>';
+      return $output;
+    }
+  }
+  else {
+    $rows = array();
+    $output .= theme('table' , array(
+      'header' => $header , 'rows' => $rows ,
+      'attributes' => array('class' => array('views-table')) ,
+      'empty' => t('No results found')));
+    return $output;
+  }
 }
 
 function itg_logged_in_user_node_insert_data($node) {
