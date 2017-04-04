@@ -66,6 +66,14 @@ function itg_reports_menu() {
         'file' => 'includes/section-wise-breakup-report.inc',
     );
     
+    $items['itg-registered-vs-anonymous-user-content-visited-report'] = array(
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('itg_registered_vs_anonymous_user_form'),
+        'access arguments' => array('administer nodequeue'),
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/registered-vs-anonymous-user-content-visited-report.inc',
+    );
+    
     return $items;
 }
 
