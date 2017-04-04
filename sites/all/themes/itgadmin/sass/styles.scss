@@ -6819,7 +6819,8 @@ div.node{
   max-width: 100%;
   position: relative;
   top: 0;
-  vertical-align: top;;
+  vertical-align: top;
+  z-index: 9;
   .widget-title-wrapper{
     display: inline-block;
     vertical-align: top;
@@ -11327,3 +11328,4 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   .node-supplement-form{
     @extend .image-repo-browse;
   }
+  #idIssue{color: red;}
