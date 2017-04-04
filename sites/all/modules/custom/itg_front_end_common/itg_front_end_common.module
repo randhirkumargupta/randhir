@@ -68,6 +68,11 @@ function itg_front_end_common_block_info() {
     'info' => t('Recommended anonymous user'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  
+  $blocks['accord'] = array(
+    'info' => t('Accord'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   return $blocks;
 }
 
@@ -121,6 +126,10 @@ function itg_front_end_common_block_view($delta = '') {
     
     case 'latest_from_pti':
       $block['content'] = _latest_from_pti();
+      break;
+    
+    case 'accord':
+      $block['content'] = '<iframe src="http://businesstoday.accordhostings.com/TopIndicesCtrl.aspx" marginwidth="0" scrolling="no" align="left" frameborder="0" height="91" width="670"></iframe>';
       break;
     
     case 'recommended_anonymous_user':
