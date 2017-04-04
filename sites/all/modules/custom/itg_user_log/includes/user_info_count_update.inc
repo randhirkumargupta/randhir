@@ -197,6 +197,9 @@ function itg_logged_in_user_visited_node() {
     }
   }
   $pagination = new pagination;
+  if(empty($_GET['items_per_page'])) {
+    $final_array = array_slice($final_array , 0 , 50);
+  }
   // If we have an array with items
   if (count($final_array)) {
     // Parse through the pagination class
