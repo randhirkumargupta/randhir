@@ -79,7 +79,8 @@ class ItgPhotogalleryMigration extends XMLMigration {
       'created' => t('created'),
       'modified' => t('modified'),
       'featured_ordering' => t('featured_ordering'),
-      'description' => 'description',
+      'description' => t('description'),
+      'metatags/description' => t('metatags/description'),
     );
 
 
@@ -213,7 +214,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
     $this->addFieldMapping('pathauto')->defaultValue(0);
     $this->addFieldMapping('path', 'sef_url')->xpath('metatags/sef_url');
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
-    $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
+    $this->addFieldMapping('metatag_description', 'metatags/description')->xpath('metatags/description');
     $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
     //For New field
     $this->addFieldMapping('field_story_expert_description', 'short_description')->xpath('short_description');

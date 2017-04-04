@@ -126,14 +126,18 @@ function get_array_in_decending_mode($temp_tid_array_baised_on_node_count) {
  * @param nid $nid
  * @return array
  */
-function get_personlization_node_data_for_front($nid) {
+function get_personlization_node_data_for_front($nid, $is_blog_true = TRUE) {
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
   $query->leftJoin('file_managed', 'fm', 'fm.fid=eli.field_story_extra_large_image_fid');
   $query->fields('n', array('title', 'nid'));
   $query->fields('fm', array('uri'));
   $query->condition('n.nid', $nid);
-  $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
+    if(!$is_blog_true) {
+    $query->condition('n.type', array('story', 'videogallery', 'photogallery' , 'blog'), 'IN');
+  } else {
+    $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
+  }
   $query->condition('n.status', 1);
   $query->orderBy('n.created', 'DESC');
   return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -145,7 +149,7 @@ function get_personlization_node_data_for_front($nid) {
  * @param int $tid
  * @return array
  */
-function get_node_ids_assoicated_with_tid($tid, $is_front = FALSE) {
+function get_node_ids_assoicated_with_tid($tid, $is_front = FALSE , $is_blog_true = TRUE) {
   $query = db_select('taxonomy_index', 'ti');
   $query->leftJoin('node', 'n', 'n.nid=ti.nid');
   $query->leftJoin('taxonomy_term_data', 'ttd', 'ttd.tid=ti.tid');
@@ -154,7 +158,11 @@ function get_node_ids_assoicated_with_tid($tid, $is_front = FALSE) {
   $query->addField('ti', 'nid');
   $query->condition('ti.tid', $tid);
   $query->condition('n.status', 1);
-  $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
+  if(!$is_blog_true) {
+    $query->condition('n.type', array('story', 'videogallery', 'photogallery' , 'blog'), 'IN');
+  } else {
+    $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
+  }
   $query->orderBy('n.created', 'DESC');
   if ($is_front) {
     $query->range(0, 2);
@@ -165,17 +173,31 @@ function get_node_ids_assoicated_with_tid($tid, $is_front = FALSE) {
 /**
  * function is used to return array for front end.
  */
-function get_personlization_front_block_data() {
-  $persionalization = get_personalization_front_data();
+function get_personlization_front_block_data($flag = TRUE) {
+  global $user;
+  $query_flag = TRUE;
+  if ($flag && $user->uid != 0) {
+    $persionalization = get_personalization_front_data();
+    //p($persionalization);
+  }
+  else {
+    if (isset($_COOKIE['recomended_for_you'])) {
+      $sections = itg_user_log_get_sections($_COOKIE['recomended_for_you']);
+      $persionalization = itg_get_recommended_data($sections);
+      //p($persionalization);
+       $query_flag = FALSE;
+    }
+  }
+  //$persionalization = get_personalization_front_data();
   //pr($persionalization);
   $front_end_data = array();
   foreach ($persionalization as $persionalization_key => $persionalization_data) {
     // tid saved in nid colom in itg_widget_order table
-    $nodes_associate_with_taxonomy = get_node_ids_assoicated_with_tid($persionalization_data, TRUE);
+    $nodes_associate_with_taxonomy = get_node_ids_assoicated_with_tid($persionalization_data, TRUE, $query_flag);
     foreach ($nodes_associate_with_taxonomy as $key => $nid_array) {
       $nid = $nid_array['nid'];
       $tid = $persionalization_data;
-      $temp_node_data = get_personlization_node_data_for_front($nid);
+      $temp_node_data = get_personlization_node_data_for_front($nid, $query_flag);
       // Create term details object.
       $temp_term = new stdClass();
       $temp_term->name = $nid_array['name'];
