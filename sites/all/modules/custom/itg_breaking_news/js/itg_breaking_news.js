@@ -86,7 +86,7 @@
       });
       
       
-      $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox:checked').parents('tr').siblings().find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false, disabled: true});
+      $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox:checked').parents('tr').siblings().find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false});
       $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox:checked').parents('tr').find('.collapsed .fieldset-legend a').css('background-color', '#bcf2fc');
       $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox:checked').parents('tr').find('.collapsible .fieldset-legend a').css('background-color', '#bcf2fc');
       $(document).ajaxComplete(function(){
@@ -97,11 +97,11 @@
     $('body').on('change', '.field-name-field-mark-as-breaking-band .form-checkbox', function () {
     var el_check = $(this).is(':checked');
     if(el_check == true){
-      $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false, disabled: true});
-      $(this).attr({checked: true, disabled: false});
+      $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false});
+      $(this).attr({checked: true});
     }
     else{
-      $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false, disabled: false});
+      $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false});
     }
   });
   $('#edit-field-section > .form-type-select > label').html('Section<span class="form-required">*</span>');

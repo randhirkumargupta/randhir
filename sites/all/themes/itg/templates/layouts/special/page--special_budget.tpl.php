@@ -261,7 +261,15 @@ if (!empty($device[0])) {
                 
                                     
 
-                    <div class="data-holder" id="itg-block-2"><?php print $widget_data['itg-block-2']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-2">
+                      <?php
+                        if (isset($widget_data['itg-block-2']['widget'])) {
+                          print print $widget_data['itg-block-2']['widget']; 
+                        } else{
+                          print '<div class="widget-placeholder"><span>'.t('Highlights').'</span></div>';
+                        } 
+                      ?>
+                    </div>
                                   </div>             
                               </div>
                           </div>
@@ -311,7 +319,15 @@ if (!empty($device[0])) {
                                         </div>
                                       <?php } ?>  
 
-                                      <div class="data-holder" id="itg-block-4"><?php print $widget_data['itg-block-4']['widget']; ?></div>
+                                      <div class="data-holder" id="itg-block-4">
+                                        <?php
+                                          if (isset($widget_data['itg-block-4']['widget'])) {
+                                            print print $widget_data['itg-block-4']['widget']; 
+                                          } else{
+                                            print '<div class="widget-placeholder"><span>'.t('Top news').'</span></div>';
+                                          } 
+                                        ?>
+                                      </div>
                                   </div>             
                               </div>
                           </div>                       
@@ -373,7 +389,15 @@ if (!empty($device[0])) {
                                         </div>
   <?php } ?>  
 
-                                      <div class="data-holder" id="itg-block-7" widget-style="india-inc-on-budget"><?php print $widget_data['itg-block-7']['widget']; ?></div>
+                                      <div class="data-holder" id="itg-block-7" widget-style="india-inc-on-budget">
+                                        <?php
+                                          if (isset($widget_data['itg-block-7']['widget'])) {
+                                            print print $widget_data['itg-block-7']['widget']; 
+                                          } else{
+                                            print '<div class="widget-placeholder"><span>'.t('India inc on budget').'</span></div>';
+                                          } 
+                                        ?>
+                                      </div>
                                   </div>             
                               </div>
                           </div>
@@ -398,7 +422,15 @@ if (!empty($device[0])) {
                                         </div>
   <?php } ?>  
 
-                                      <div class="data-holder" id="itg-block-8" widget-style="budget-decoded"><?php print $widget_data['itg-block-8']['widget']; ?></div>
+                                      <div class="data-holder" id="itg-block-8" widget-style="budget-decoded">
+                                        <?php
+                                          if (isset($widget_data['itg-block-8']['widget'])) {
+                                            print print $widget_data['itg-block-8']['widget']; 
+                                          } else{
+                                            print '<div class="widget-placeholder"><span>'.t('Budget decoded').'</span></div>';
+                                          } 
+                                        ?>
+                                      </div>
                                   </div>             
                               </div>
                           </div>
@@ -423,7 +455,15 @@ if (!empty($device[0])) {
                                         </div>
   <?php } ?>  
 
-                                      <div class="data-holder" id="itg-block-9" widget-style="budget-reactions"><?php print $widget_data['itg-block-9']['widget']; ?></div>
+                                      <div class="data-holder" id="itg-block-9" widget-style="budget-reactions">
+                                        <?php
+                                          if (isset($widget_data['itg-block-9']['widget'])) {
+                                            print print $widget_data['itg-block-9']['widget']; 
+                                          } else{
+                                            print '<div class="widget-placeholder"><span>'.t('Budget reactions').'</span></div>';
+                                          } 
+                                        ?>
+                                      </div>
                                   </div>             
                               </div>
                           </div>
@@ -457,7 +497,15 @@ if (!empty($device[0])) {
                                                 </div>
   <?php } ?>  
 
-                                              <div class="data-holder" id="itg-block-10"><?php print $widget_data['itg-block-10']['widget']; ?></div>
+                                              <div class="data-holder" id="itg-block-10">
+                                                <?php
+                                                  if (isset($widget_data['itg-block-10']['widget'])) {
+                                                    print print $widget_data['itg-block-10']['widget']; 
+                                                  } else{
+                                                    print '<div class="widget-placeholder"><span>'.t('Cheaper / Dearer').'</span></div>';
+                                                  } 
+                                                ?>
+                                              </div>
                                           </div>             
                                       </div>
                                   </div>
@@ -483,7 +531,15 @@ if (!empty($device[0])) {
                                                 </div>
   <?php } ?>  
 
-                                              <div class="data-holder" id="itg-block-11"><?php print $widget_data['itg-block-11']['widget']; ?></div>
+                                              <div class="data-holder" id="itg-block-11">
+                                                <?php
+                                                  if (isset($widget_data['itg-block-11']['widget'])) {
+                                                    print print $widget_data['itg-block-11']['widget']; 
+                                                  } else{
+                                                    print '<div class="widget-placeholder"><span>'.t('Infographics').'</span></div>';
+                                                  } 
+                                                ?>
+                                              </div>
                                           </div>             
                                       </div>
                                   </div>
@@ -509,7 +565,15 @@ if (!empty($device[0])) {
                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                         </div>
   <?php } ?>  
-                                      <div class="data-holder" id="itg-block-12"><?php print $widget_data['itg-block-12']['widget']; ?></div>
+                                      <div class="data-holder" id="itg-block-12">
+                                        <?php
+                                          if (isset($widget_data['itg-block-12']['widget'])) {
+                                            print print $widget_data['itg-block-12']['widget']; 
+                                          } else{
+                                            print '<div class="widget-placeholder"><span>'.t('Videos').'</span></div>';
+                                          } 
+                                        ?>
+                                      </div>
                                   </div>             
                               </div>
                           </div>
@@ -539,7 +603,15 @@ if (!empty($device[0])) {
                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                         </div>
   <?php } ?>  
-                                      <div class="data-holder" id="itg-block-13"><?php print $widget_data['itg-block-13']['widget']; ?></div>
+                                      <div class="data-holder" id="itg-block-13">
+                                        <?php
+                                          if (isset($widget_data['itg-block-13']['widget'])) {
+                                            print print $widget_data['itg-block-13']['widget']; 
+                                          } else{
+                                            print '<div class="widget-placeholder"><span>'.t('Latest').'</span></div>';
+                                          } 
+                                        ?>
+                                      </div>
                                   </div>             
                               </div>
                           </div>
@@ -583,7 +655,15 @@ if (!empty($device[0])) {
                                                 </div>
   <?php } ?>  
 
-                                              <div class="data-holder" id="itg-block-15"><?php print $widget_data['itg-block-15']['widget']; ?></div>
+                                              <div class="data-holder" id="itg-block-15">
+                                                <?php
+                                                  if (isset($widget_data['itg-block-15']['widget'])) {
+                                                    print print $widget_data['itg-block-15']['widget']; 
+                                                  } else{
+                                                    print '<div class="widget-placeholder"><span>'.t('Previous budget').'</span></div>';
+                                                  } 
+                                                ?>
+                                              </div>
                                           </div>             
                                       </div>
                                   </div>

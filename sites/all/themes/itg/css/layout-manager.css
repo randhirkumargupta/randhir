@@ -3381,3 +3381,7 @@ img {
   font-weight: 500;
   margin-top: -10px;
 }
+
+.election-page .right-side .itg-320 .droppable {
+  height: 320px;
+}
