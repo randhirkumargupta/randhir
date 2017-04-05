@@ -130,7 +130,15 @@ if ($theme != 'itgadmin') {
                                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                         </div>  
     <?php } ?>    
-                                                    <div class="data-holder" id="itg-block-1"><?php print $widget_data['itg-block-1']['widget']; ?></div>
+                                                    <div class="data-holder" id="itg-block-1">
+                                                      <?php
+                                                        if (isset($widget_data['itg-block-1']['widget'])) {
+                                                          print print $widget_data['itg-block-1']['widget']; 
+                                                        } else{
+                                                          print '<div class="widget-placeholder"><span>Sport Featured</span></div>';
+                                                        } 
+                                                      ?>
+                                                    </div>
                                                 </div>                     
                                             </div>
                                         </div>
@@ -158,7 +166,15 @@ if ($theme != 'itgadmin') {
                                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                         </div>  
     <?php } ?>    
-                                                    <div class="data-holder" id="itg-block-2"><?php print $widget_data['itg-block-2']['widget']; ?></div>
+                                                    <div class="data-holder" id="itg-block-2">
+                                                      <?php
+                                                        if (isset($widget_data['itg-block-2']['widget'])) {
+                                                          print print $widget_data['itg-block-2']['widget']; 
+                                                        } else{
+                                                          print '<div class="widget-placeholder"><span>Videos</span></div>';
+                                                        } 
+                                                      ?>
+                                                    </div>
                                                 </div>                     
                                             </div>
                                         </div>
@@ -187,7 +203,15 @@ if ($theme != 'itgadmin') {
                                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                         </div>  
     <?php } ?>    
-                                                    <div class="data-holder" id="itg-block-3" widget-style="sport-column"><?php print $widget_data['itg-block-3']['widget']; ?></div>
+                                                    <div class="data-holder" id="itg-block-3" widget-style="sport-column">
+                                                      <?php
+                                                        if (isset($widget_data['itg-block-3']['widget'])) {
+                                                          print print $widget_data['itg-block-3']['widget']; 
+                                                        } else{
+                                                          print '<div class="widget-placeholder"><span>Sport columns</span></div>';
+                                                        } 
+                                                      ?>
+                                                    </div>
                                                 </div>                     
                                             </div>
                                         </div>
@@ -211,7 +235,15 @@ if ($theme != 'itgadmin') {
                                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                         </div>  
     <?php } ?>    
-                                                    <div class="data-holder" id="itg-block-4"><?php print $widget_data['itg-block-4']['widget']; ?></div>
+                                                    <div class="data-holder" id="itg-block-4">
+                                                      <?php
+                                                        if (isset($widget_data['itg-block-4']['widget'])) {
+                                                          print print $widget_data['itg-block-4']['widget']; 
+                                                        } else{
+                                                          print '<div class="widget-placeholder"><span>Podcasts</span></div>';
+                                                        } 
+                                                      ?>
+                                                    </div>
                                                 </div>                     
                                             </div>
                                         </div>
@@ -238,7 +270,15 @@ if ($theme != 'itgadmin') {
                                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                         </div>  
     <?php } ?>    
-                                                    <div class="data-holder" id="itg-block-5"><?php print $widget_data['itg-block-5']['widget']; ?></div>
+                                                    <div class="data-holder" id="itg-block-5">
+                                                      <?php
+                                                        if (isset($widget_data['itg-block-5']['widget'])) {
+                                                          print print $widget_data['itg-block-5']['widget']; 
+                                                        } else{
+                                                          print '<div class="widget-placeholder"><span>Photo carousel</span></div>';
+                                                        } 
+                                                      ?>
+                                                    </div>
                                                 </div>                     
                                             </div>
                                         </div>
@@ -279,8 +319,8 @@ if ($theme != 'itgadmin') {
                                                 <!-- for admin  -->
                                                
 
-                                                <div class="data-holder" id="itg-block-6" widget-style="oscar-news"><?php $block = module_invoke('itg_widget', 'block_view', 'live_score');print render($block['content']); ?>
-                                                 
+                                                <div class="data-holder" id="itg-block-6" widget-style="oscar-news">
+                                                  <?php $block = module_invoke('itg_widget', 'block_view', 'live_score');print render($block['content']); ?>
                                                 </div>
                                             </div>             
                                         </div>               
@@ -307,9 +347,8 @@ if ($theme != 'itgadmin') {
     <?php } ?>  
 
                                                 <div class="data-holder" id="itg-block-7">
-                                                   
-                                                    
-                                                    <?php print views_embed_view('sport_ipl','points_tally',""); ?></div>
+                                                    <?php print views_embed_view('sport_ipl','points_tally',""); ?>
+                                                </div>
                                             </div>             
                                         </div>               
                                     </div>  
@@ -334,8 +373,8 @@ if ($theme != 'itgadmin') {
                                                     </div>
     <?php } ?>  
 
-                                                <div class="data-holder" id="itg-block-8"><?php print views_embed_view('sport_ipl','top_performers',""); ?>
-
+                                                <div class="data-holder" id="itg-block-8">
+                                                  <?php print views_embed_view('sport_ipl','top_performers',""); ?>
                                                 </div>
                                             </div>             
                                         </div>               
@@ -362,7 +401,15 @@ if ($theme != 'itgadmin') {
                                                     </div>
     <?php } ?>  
 
-                                                <div class="data-holder" id="itg-block-9"><?php print $widget_data['itg-block-9']['widget']; ?></div>
+                                                <div class="data-holder" id="itg-block-9">
+                                                  <?php
+                                                    if (isset($widget_data['itg-block-9']['widget'])) {
+                                                      print print $widget_data['itg-block-9']['widget']; 
+                                                    } else{
+                                                      print '<div class="widget-placeholder"><span>Poll</span></div>';
+                                                    } 
+                                                  ?>
+                                                </div>
                                             </div>             
                                         </div>               
                                     </div>  
