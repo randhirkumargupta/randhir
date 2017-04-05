@@ -10638,15 +10638,27 @@ section.sidebar .block-itg-ads {
 
 /*eND CSS LIVE tv */
 /*vertical menu fixed position*/
+/*body.not-front{display: table; width: 100%;}*/
+.front #content {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+}
+
+.region-vertical-menu {
+  float: left;
+  margin-left: -75px !important;
+  padding: 100px 0 50px;
+}
+
 #block-itg-menu-manager-vertical-menu {
-  left: -60px;
-  position: absolute;
-  top: 100px;
   background: #f2f2f2;
   border-radius: 3px;
   box-shadow: 0px 0px 4px #ccc;
   text-align: center;
   border-right: 1px solid #b3b3b3;
+  /*margin-top: 100px;*/
+  width: 60px;
 }
 #block-itg-menu-manager-vertical-menu ul {
   -webkit-transition: all 1s ease-in-out;
@@ -12177,6 +12189,12 @@ h1.about-us-heading + div p {
 
 /*css End common highlight */
 /*css start home page breaking new */
+.region-breaking-news {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+}
+
 .breakingnew-home {
   margin-bottom: 40px;
   font-family: roboto;
@@ -12744,7 +12762,7 @@ span.smilies-title img {
   vertical-align: top;
 }
 
-.node-type-photogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-videogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-podcast #block-itg-layout-manager-front-end-breadcrumb, .section-videos #block-itg-layout-manager-front-end-breadcrumb, .section-photo #block-itg-layout-manager-front-end-breadcrumb {
+.node-type-photogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-videogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-podcast #block-itg-layout-manager-front-end-breadcrumb, [class*="section-videos"] #block-itg-layout-manager-front-end-breadcrumb, [class*="section-photo"] #block-itg-layout-manager-front-end-breadcrumb {
   background: #171717;
 }
 
