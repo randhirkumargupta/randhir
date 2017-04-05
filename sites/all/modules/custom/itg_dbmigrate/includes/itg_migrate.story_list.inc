@@ -648,13 +648,21 @@ class ItgStoryListMigration extends XMLMigration {
     }
     $row->factoids_new = $data_factoids;
     // end prepare row for factoids
-    // Category migrate
+    
+    // Category migrate with shift marking
     $data_category = '';
-
     if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {
+      $cat = array();
+      $tid_array = array();
       foreach ($row->xml->categories->category as $final_category) {
-        $source_cid = (string) $final_category;
-        $data_category[]['tid'] = $source_cid;
+        $cat = explode('#', $final_category);
+        foreach ($cat as $cc) {
+          $tid_array[] = (string) $cc;
+        }
+      }
+      $all_category = array_unique($tid_array);
+      foreach ($all_category as $chunk_data) {
+        $data_category[]['tid'] = $chunk_data;
       }
     }
     $row->category_new = $data_category;
