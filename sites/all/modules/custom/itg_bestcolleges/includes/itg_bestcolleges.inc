@@ -159,10 +159,9 @@ function bestcollege_rhssearch_form($form, &$form_state) {
 
   // get first array element
   $stream_com = $getsyears['stream'];
-  $second_year_key = array_slice($stream_com, 1, 1);
+  $second_stream_key = key(array_slice($stream_com, 1, 1));
   // unset year value
-  unset($stream_com[$second_year_key[0]]);
-
+  unset($stream_com[$second_stream_key]);
 
   $form['streamcompare_rhs_stream2'] = array(
     '#type' => 'select',
