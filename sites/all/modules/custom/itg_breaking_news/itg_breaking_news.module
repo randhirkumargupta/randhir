@@ -295,3 +295,14 @@ function itg_breaking_news_node_presave($node) {
         }
     }
 }
+
+/**
+ * Implements hook_views_api().
+ *
+ * {@inheritdoc}.
+ */
+function itg_breaking_news_views_api() {
+    return array(
+        'api' => 3,
+    );
+}
