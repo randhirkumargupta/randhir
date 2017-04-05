@@ -1,30 +1,55 @@
 <div class="emergingCollege-section textwrap">
-    <?php
-      foreach($data as $data_key => $data_val) {
-    ?>
-    <div class="streamtitle"><?php print t('CITY '.drupal_strtoupper($data_key)); ?></div>
+
+    <div class="streamtitle"><?php print t('CITY '.drupal_strtoupper($data['city_name'])); ?></div>
         <table style="border-collapse: collapse;" width="100%" align="CENTER" border="1" bordercolor="#c4c4c4" cellpadding="0" cellspacing="0">
     <tr>
     <th><?php print t('Rank'); ?></th>
     <th><?php print t('Name of the college'); ?></th>
   </tr>
             <?php
-              foreach($data_val as $data_val_stream) {
+              foreach($data['city_result'] as $data_val_stream) {
             ?>
 
             <tr>
-    <td data-title="Rank"><?php print $data_val_stream[0]; ?>.</td>
-    <td data-title="Name of the college"><?php print $data_val_stream[1]; ?></td>
-</tr>
+                <td data-title="Rank"><?php print $data_val_stream[0]; ?>.</td>
+                <td data-title="Name of the college"><?php print $data_val_stream[1]; ?></td>
+            </tr>
 
             <?php
               }
             ?>
         </table>
   <?php
-      }
+
   ?>
 </div>
+
+<!--- city list -->
+  <div class="citywmiddbg">
+        <div class="middlecont">
+              <div class="cityhead"><span class="b-head">SEE RANKINGS FROM OTHER CITIES</span></div>
+                    <div class="citymaincont">
+                          <?php
+                              $table = "<table><tr>";
+                              foreach($data['city'] as $key => $value) {
+                                foreach($value as $a => $v) {
+                                  $url = "/bestcolleges/2016/citycolleges-".strtolower($key)."-cochin";
+                                    $table .= "<td><a href='".$url."'>".$v."</a></td>";
+                                    if(($a+1) % 4 == 0)
+                                        $table .= "</tr><tr>";
+                                }
+                             }
+                              $table .= "</tr></table>";
+
+                              echo $table;
+                            ?>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+        </div>
+  </div>
+
+<!--- List city list -->
 
 <!-- Grid View-->
 <div class="col-sm-12 col-xs-12 view1">

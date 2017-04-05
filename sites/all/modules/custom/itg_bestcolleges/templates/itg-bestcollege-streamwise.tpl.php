@@ -2,6 +2,7 @@
     <?php
       $incr = 0;
       $incr_div = '';
+      if(is_array($data) && count($data) > 0) {
       foreach($data as $data_key => $data_val) {
         if ($incr == 1) {
           $incr_div = 1;
@@ -20,6 +21,10 @@
         </div>
   <?php
       $incr++;
+      }
+    } else {
+          print "<div class='bestcollege_empty_message'>".t("No record founds")."</div>";
+
       }
   ?>
 </div>

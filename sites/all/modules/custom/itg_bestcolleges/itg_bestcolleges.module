@@ -56,6 +56,11 @@ function itg_bestcolleges_menu() {
     'page callback' => 'csvImporter_pagecallback',
     'type' => MENU_NORMAL_ITEM,
   );
+  $items['bestcollege_create_taxonomy'] = array(
+    'title' => "Create taxonomy",
+    'page callback' =>  'bestcollege_create_taxonomy',
+    'access callback' => TRUE,
+  );
 
   return $items;
 }
@@ -201,7 +206,10 @@ function itg_bestcolleges_block_view($delta = '') {
       $block['content'] = theme('bestcollege_rhssearch', array('data' => $data));
       break;
     case 'bestcollege_rhsstatic':
-      $year = 2016; //arg(1); // Need to revert once feature done.
+      $path_request = request_path();
+      $path_request_array = explode('/', $path_request);
+
+      $year = $path_request_array[1]; // Need to revert once feature done.
       $data = bestcollege_getStaticWidgetData($year);
       //$block['title'] = t('LAST 19 YEARS BEST COLLEGE SURVEYS');
       $block['content'] = $data;
@@ -214,11 +222,8 @@ function itg_bestcolleges_block_view($delta = '') {
       $info['content_type'] = ''; // content type machine name
       // view name which is stored in draggableviews_structure table
       $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
-      //$block['subject'] = t('Section wise ordering from custom table');
       $data = itg_widget_section_wise_ordering_from_custom_table($info);
       $block['content'] = theme("bestcollege_section_ordering", array("data" => $data));
-      // bestcollege_section-ordering.tpl.php
-      //$block['content'] = theme("itg_widget_watch_right_now_videos_widget", array("data" => $data));
       break;
   }
   return $block;
@@ -260,15 +265,32 @@ function itg_bestcollege_streamcompare($year, $type, $stream_year) {
   $result_data_stream2 = itg_bestcollege_getData('stream-comparecollege', $year, $stream2);
 
   $data = array();
-  foreach ($result_data_stream1 as $result_data_stream1_key => $result_data_stream1_val) {
-    $clgname_city = $result_data_stream1_val->collegename . ', ' . $result_data_stream1_val->city;
-    $data[$stream1][] = array('rank' => $result_data_stream1_val->rank, 'college_name' => $clgname_city);
+  if(is_array($result_data_stream1) && count($result_data_stream1) > 0) {
+    foreach ($result_data_stream1 as $result_data_stream1_key => $result_data_stream1_val) {
+      $clgname_city = $result_data_stream1_val->collegename . ', ' . $result_data_stream1_val->city;
+      $data[$stream1][] = array('rank' => $result_data_stream1_val->rank, 'college_name' => $clgname_city);
+    }
+    $data_stream1 = 1;
+  } else {
+    $data_stream1 = '';
   }
-  foreach ($result_data_stream2 as $result_data_stream2_key => $result_data_stream2_val) {
-    $clgname_city2 = $result_data_stream2_val->collegename . ', ' . $result_data_stream2_val->city;
-    $data[$stream2][] = array('rank' => $result_data_stream2_val->rank, 'college_name' => $clgname_city2);
+  if(is_array($result_data_stream2) && count($result_data_stream2) > 0) {
+    foreach ($result_data_stream2 as $result_data_stream2_key => $result_data_stream2_val) {
+      $clgname_city2 = $result_data_stream2_val->collegename . ', ' . $result_data_stream2_val->city;
+      $data[$stream2][] = array('rank' => $result_data_stream2_val->rank, 'college_name' => $clgname_city2);
+    }
+    $data_stream2 = 1;
+  } else {
+    $data_stream2 = '';
   }
+
+  if(empty($data_stream1) || empty($data_stream2)) {
+     $data = '';
+  }
+
   $output = theme('itg_bestcollege_streamwise', array('data' => $data));
+
+
   return $output;
 }
 
@@ -288,14 +310,30 @@ function itg_bestcollege_yearcompare($year, $type, $stream, $years) {
   $result_data_yr2 = itg_bestcollege_getData('year-comparecollege', $years_exp[1], $stream);
 
   $data = array();
-  foreach ($result_data_yr1 as $result_data_yr1_key => $result_data_yr1_val) {
-    $clgname_city = $result_data_yr1_val->collegename . ', ' . $result_data_yr1_val->city;
-    $data[$years_exp[0]][] = array('rank' => $result_data_yr1_val->rank, 'college_name' => $clgname_city);
+  if(is_array($result_data_yr1) && count($result_data_yr1) > 0) {
+      foreach ($result_data_yr1 as $result_data_yr1_key => $result_data_yr1_val) {
+        $clgname_city = $result_data_yr1_val->collegename . ', ' . $result_data_yr1_val->city;
+        $data[$years_exp[0]][] = array('rank' => $result_data_yr1_val->rank, 'college_name' => $clgname_city);
+      }
+    $data_yr1 = 1;
+  } else {
+    $data_yr1 = '';
   }
-  foreach ($result_data_yr2 as $result_data_yr2_key => $result_data_yr2_val) {
-    $clgname_city2 = $result_data_yr2_val->collegename . ', ' . $result_data_yr2_val->city;
-    $data[$years_exp[1]][] = array('rank' => $result_data_yr2_val->rank, 'college_name' => $clgname_city2);
+
+  if(is_array($result_data_yr2) && count($result_data_yr2) > 0) {
+    foreach ($result_data_yr2 as $result_data_yr2_key => $result_data_yr2_val) {
+      $clgname_city2 = $result_data_yr2_val->collegename . ', ' . $result_data_yr2_val->city;
+      $data[$years_exp[1]][] = array('rank' => $result_data_yr2_val->rank, 'college_name' => $clgname_city2);
+    }
+    $data_yr2 = 1;
+  } else {
+    $data_yr2 = '';
   }
+
+  if(empty($data_yr1) || empty($data_yr2)) {
+    $data = '';
+  }
+
   $output = theme('itg_bestcollege_yearwise', array('data' => $data));
   return $output;
 }
@@ -399,10 +437,34 @@ function itg_city_wise_list($year, $scity) {
   drupal_set_title(t('CITYWISE RANKING: BEST ' . drupal_strtoupper($stream) . ' COLLEGES'));
   $result_data = itg_bestcollege_getData('citywise-list', $year, $stream, $city);
   $data = array();
+  $data['city_name'] = $city;
   foreach ($result_data as $result_data_key => $result_data_val) {
-    $data[$city][] = array($result_data_val->rank, $result_data_val->collegename);
+    $data['city_result'][] = array($result_data_val->rank, $result_data_val->collegename);
   }
+
+  $data['city'] = list_of_city($year, $stream);
+
   return theme('itg_city_wise_list', array('data' => $data));
+}
+
+function list_of_city($year, $stream) {
+  $itg_query = db_select('bestcolleges_citywiseranking', 'bcr')->distinct();
+  $itg_query->fields('bcr', array('city','stream'))
+      ->condition('bcr.year', $year, '=')
+      ->condition('bcr.stream', $stream, '=')
+      ->condition('bcr.published', 1)
+      ->condition('bcr.rank', 0, '!=')
+      ->orderBy('bcr.rank', 'ASC');
+  $result =  $itg_query->execute();
+  $nodes = array();
+
+  // We can use a foreach loop on the $results object.
+  while ($n = $result->fetchAssoc()) {
+    // Each $n is an object.
+    $results[$n['stream']][] = $n['city'];
+    //$results[]['stream'] = ;
+  }
+ return $results;
 }
 
 /**
@@ -538,7 +600,7 @@ function itg_bestcollege_getStreamYear($type, $byear) {
         ->condition('bcr.rank', 0, '!=')
         ->orderBy('bcr.year', 'DESC');
     $results = $query->execute()->fetchAll();
-
+    $data['year']['_none'] = t("---Select---");
     foreach ($results as $results_key => $results_val) {
       $data['year'][drupal_strtolower($results_val->year)] = $results_val->year;
     }
@@ -1158,7 +1220,7 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
   $stream = $line[15];
 
 
-  /*$node = new stdClass();
+  $node = new stdClass();
   $node->title = $collegename;
   $node->type = "bestcolleges";
 
@@ -1173,64 +1235,23 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
   $node->field_bestcollege_rank[LANGUAGE_NONE][0]['value'] = $rank;
   $node->field_bestcollege_year[LANGUAGE_NONE][0]['value'] = $year;
   $node->field_college_id[LANGUAGE_NONE][0]['value'] = $collegeid;
-*/
+
   if ($year) {
-    if ($year == '2014') {
-      $tid = '844720';
-
-      if ($stream == 'Arts') {
-        $stream = 'Art';
-      }
-
-      if ($stream == 'Science') {
-        $stream = 'science';
-      }
-      if ($stream == 'Commerce') {
-        $stream = 'Art';
-      }
-      if ($stream == 'Arts') {
-        $stream = 'Art';
-      }
-      if ($stream == 'Arts') {
-        $stream = 'Art';
-      }
-      if ($stream == 'Arts') {
-        $stream = 'Art';
-      }
-      if ($stream == 'Arts') {
-        $stream = 'Art';
-      }
-      if ($stream == 'Arts') {
-        $stream = 'Art';
-      }
-      if ($stream == 'Arts') {
-        $stream = 'Art';
-      }
-      if ($stream == 'Arts') {
-        $stream = 'Art';
-      }
+    if ($year == '2005') {
+      $tid = '844733';
 
       /*
-      if ($stream == 'Education') {
+      if ($stream == 'Engineering') {
         $stream = 'education1';
       }
-
-      if ($stream == 'Fine Arts') {
-        $stream = 'Fine-Arts';
-      }
-      if ($stream == 'Hotel Management') {
-        $stream = 'Hotel-Management';
-      }
-      if ($stream == 'Mass Comm') {
-        $stream = 'Mass-Comm';
-      }*/
+      */
 
       $final_tid = itg_bestcollege_get_term_tid($tid, $stream);
     }
   }
 
   // Term reference (taxonomy) field
- /* if (!empty($final_tid)) {
+  if (!empty($final_tid)) {
     $node->field_story_category[LANGUAGE_NONE][]['tid'] = $final_tid;
   }
 
@@ -1242,13 +1263,13 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
 
   if ($file_info->fid) {
     $node->field_story_extra_large_image[LANGUAGE_NONE]['0']['fid'] = $file_info->fid; //assign fid
-  }*/
-/*
+  }
+
   $node->uid = 3;
   $node->status = 1; //(1 or 0): published or not*/
   if (!empty($final_tid)) {
 
-    /* if ($node = node_submit($node)) {
+     if ($node = node_submit($node)) {
       node_save($node);
       drupal_set_message('submitted successfully');
 
@@ -1275,7 +1296,7 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
           ->condition('collegeid', $collegeid)
           ->condition('year', $year)
           ->execute();
-    }*/
+    }
     drupal_set_message("Pass line for 2015 {$line[0]} college id = {$collegeid}");
   }
   else {
@@ -1560,4 +1581,61 @@ function bestcollege_set_option_val($url) {
     }
   }
   return $compare_data;
+}
+
+
+function bestcollege_create_taxonomy() {
+  $tid = '844733';
+  $term = taxonomy_term_load($tid);
+  // bestcollege for 2005
+ // $children = array('1' => 'ARTS', '2' => 'COMMERCE', '3' => 'SCIENCE', '4' => 'LAW', '5' => 'MEDICINE', '6' => 'ENGINEERING');
+
+  foreach ($children as $term_name) {
+    $exist_tid = itg_bestcollege_exist_tid($tid, $term->vid, $term_name);
+
+    if(empty($exist_tid)) {
+        $term1 = (object) array(
+          'name' => $term_name,
+          'vid' => $term->vid,
+          'parent' => array($tid),
+        );
+
+        if(taxonomy_term_save($term1)) {
+          print 'yes';
+        } else {
+          print "No";
+        }
+    } else {
+      echo $term_name . "<br>";
+    }
+
+  }
+}
+
+/**
+ * Get total number of tids by term name for a texonomy.
+ * @param int $nid
+ * @return int
+ */
+function itg_bestcollege_exist_tid($tid, $vid, $term_name){
+
+  $query =db_select('taxonomy_term_data', 't');
+  $query->join('taxonomy_term_hierarchy', 'r', 'r.tid = t.tid');
+  $query->fields('t', array('name'));
+  $query->condition('t.vid', $vid, '=');
+  $query->condition('t.name', $term_name, '=');
+  $query->condition('r.parent', $tid, '=');
+  $result = $query->execute();
+
+ /*  dpq($query); // Display the query.
+   dpr($result); // Display the query result.
+   exit;*/
+
+  $number_of_rows = $result->rowCount();
+  if ($number_of_rows) {
+    return $number_of_rows;
+  } else {
+    return 0;
+  }
+
 }

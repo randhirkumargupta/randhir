@@ -13,7 +13,9 @@
 */
 function bestcollege_rhssearch_form($form, &$form_state) {
   global $base_url;
-  $year = 2016;//arg(1); // Need to revert once feature done.
+  $path_request = request_path();
+  $path_request_array = explode('/', $path_request);
+  $year = $path_request_array[1];
   $settings['base_url'] = $base_url;
   $settings['year'] = $year;
   drupal_add_js(array('itg_bestcolleges' => array('settings' => $settings)), array('type' => 'setting'));
@@ -26,6 +28,17 @@ function bestcollege_rhssearch_form($form, &$form_state) {
   $getsyears = itg_bestcollege_getStreamYear('year-comparecollege', NULL);
   $directory_stream = itg_bestcollege_getStreamYear('readyrecnor-directory-list', $year);
   $form = array();
+/*
+  $form['bestcollege_year_select'] = array(
+    '#type' => 'select',
+    '#title' => t('BEST COLLEGES YEAR'),
+    '#weight' => -5,
+    '#options' => $getsyears['year'],
+    '#attributes' => array('class' => array('bestcollege_year_wise')),
+    '#prefix' => '<div class = "detail_box">',
+    '#suffix' => '</div>',
+  );
+*/
   if (count($getstream) > 0) {
     $form['emerging_rhs'] = array(
       '#type' => 'item',
@@ -79,12 +92,11 @@ function bestcollege_rhssearch_form($form, &$form_state) {
     );
 
 
-
   // get first array element
   $year_com = $getsyears['year'];
-  $first_year_key = key($year_com);
+  $second_year_key = array_slice($year_com, 1, 1);
   // unset year value
-  unset($year_com[$first_year_key]);
+  unset($year_com[$second_year_key[0]]);
 
   $form['yearcompare_yr2'] = array(
     '#type' => 'select',
@@ -144,11 +156,19 @@ function bestcollege_rhssearch_form($form, &$form_state) {
       '#prefix' => '<div class = "col-md-1 col-sm-1 col-xs-1 control-label remove_padd_left">',
       '#suffix' => '</div>',
   );
+
+  // get first array element
+  $stream_com = $getsyears['stream'];
+  $second_year_key = array_slice($stream_com, 1, 1);
+  // unset year value
+  unset($stream_com[$second_year_key[0]]);
+
+
   $form['streamcompare_rhs_stream2'] = array(
     '#type' => 'select',
     '#title' => t(''),
     '#weight' => 8,
-    '#options' => $getsyears['stream'],
+    '#options' => $stream_com,
     '#default_value' => $search_option['stream_sstream'],
     '#attributes' => array('class' => array('city_wise')),
     '#prefix' => '<div class = "col-sm-4 col-xs-4 remove_padd_left remove_padd_right">',
