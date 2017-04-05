@@ -7,8 +7,8 @@ $args = drush_get_arguments(); // Get the arguments.
 //update_itg_widget_table();
 //update_meta_description_in_photo();
 //print_name_story();
-print_name_photo();
-
+//print_name_photo();
+print_name_video();
 /**
  * shift marking for story
  */
@@ -74,8 +74,63 @@ function print_name_photo() {
 function updating_term_for_migration($nid, $tids) {
  $node = node_load($nid);
  unset($node->field_story_category[LANGUAGE_NONE]);
+ $tids[] = 1208521; // for photo category
   foreach($tids as $chunk_data){
   $node->field_story_category[LANGUAGE_NONE][]['tid'] = $chunk_data;
   }
   field_attach_update('node', $node); 
+}
+
+/**
+ * video shift marking
+ */
+function print_name_video() {
+  $xml_path = 'sites/default/files/video/indiatoday_video_2016-06.xml';
+  //$xml_path = 'sites/default/files/video/indiatoday_video_2016-07.xml';
+  $xml = simplexml_load_file($xml_path, 'SimpleXMLElement');
+  $str = '';
+
+  foreach ($xml as $xm) {
+    $category_array = array();
+    $tid_array = array();
+    foreach ($xm->categories->category as $xm_cat) {
+      $category_array = explode('#', $xm_cat);
+      $k = 1;
+      foreach ($category_array as $individal_cat) {
+
+        $array_count = $k;
+        $source_cid = (string) $individal_cat;
+
+        $table_name = itg_migrate_category_table($array_count);
+        if ($k != 1) {
+          $str = '#';
+        }
+        $tid_array[] = get_itg_destination_id($table_name, $source_cid);
+        $k++;
+      }
+    }
+    $query = db_select('migrate_map_itgvideogallery', 'mmy');
+    $query->fields('mmy', array('destid1'));
+    $query->condition('sourceid1', (string) $xm->id, '=');
+    $result = $query->execute()->fetchField();
+    if (!empty($tid_array) && !empty($result)) {
+      $ishwar = array_unique($tid_array);
+      updating_term_for_migration_video($result, $ishwar);
+      echo $result . '-' . (string) $xm->id . ', ';
+    }
+  }
+}
+
+/**
+ * 
+ * @param type $nid
+ */
+
+function updating_term_for_migration_video($nid, $tids) {
+  $node = node_load($nid);
+  unset($node->field_story_category[LANGUAGE_NONE]);
+  foreach ($tids as $chunk_data) {
+    $node->field_story_category[LANGUAGE_NONE][]['tid'] = $chunk_data;
+  }
+  field_attach_update('node', $node);
 }
