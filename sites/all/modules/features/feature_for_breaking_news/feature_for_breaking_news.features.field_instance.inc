@@ -103,7 +103,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'bundle' => 'field_breaking_content_details',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'EX: www.yourdomainname.com',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1182,6 +1182,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Content Type');
   t('Content details');
   t('Display on');
+  t('EX: www.yourdomainname.com');
   t('Extra large image');
   t('Extra small image');
   t('Highlights');
