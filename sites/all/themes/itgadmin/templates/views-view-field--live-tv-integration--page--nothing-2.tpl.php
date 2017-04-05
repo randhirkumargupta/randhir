@@ -21,7 +21,11 @@
  * regardless of any changes in the aliasing that might happen if
  * the view is modified.
  */
-
+$web = $row->_field_data['nid']['entity']->field_ads_ad_code['und'][0]['value'];
+$web_mobile = $row->_field_data['nid']['entity']->field_ads_header_script['und'][0]['value'];
+$ios = $row->_field_data['nid']['entity']->field_story_expert_description['und'][0]['value'];
+$android = $row->_field_data['nid']['entity']->field_mega_review_description['und'][0]['value'];
+$window = $row->_field_data['nid']['entity']->field_recipe_ingredients['und'][0]['value'];
 $class = 'live-tv-button';
 $row_nid = $row->nid;
 ?>
