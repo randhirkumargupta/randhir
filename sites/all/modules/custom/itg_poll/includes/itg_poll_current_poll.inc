@@ -76,6 +76,7 @@ function itg_poll_get_all_current_poll_qry() {
     $query->condition('n.type', 'poll', '=');
     $query->condition('n.status', 1, '=');
     $query->condition('sd.field_poll_start_date_value', $cur_date, '<=');
+    $query->orderBy('n.changed', 'DESC');
     $query->condition(db_or()->isNull('ed.field_poll_end_date_value')->condition('ed.field_poll_end_date_value', $cur_date, '>='));
     $query->range($current_index, 1);
 
