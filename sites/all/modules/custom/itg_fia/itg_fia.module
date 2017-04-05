@@ -56,3 +56,11 @@ function itg_fia_html_head_alter(&$head_elements) {
     );
   }
 }
+
+/**
+ * Implements hook_uninstall().
+ */
+function itg_fia_uninstall() {
+  // Delete variables.
+  variable_del('itg_fia_config');
+}

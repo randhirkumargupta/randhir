@@ -19,7 +19,7 @@ jQuery(document).ready(function () {
     relatedContent();
     function relatedContent() {
         var solr = Drupal.settings.itg_common.settings.solr;
-        console.log(solr);
+        //console.log(solr);
         if (solr != null && solr != undefined) {
             var solr_explict = solr.split(',');
 
