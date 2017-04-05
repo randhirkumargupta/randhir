@@ -220,11 +220,10 @@ function feature_for_personalization_views_default_views() {
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
   $handler->display->display_options['empty']['area']['content'] = 'No result found!';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
-  /* Relationship: Flags: my_saved_content */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
   $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'node';
   $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
-  $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'my_saved_content';
   /* Field: Content: Section */
   $handler->display->display_options['fields']['field_story_category']['id'] = 'field_story_category';
   $handler->display->display_options['fields']['field_story_category']['table'] = 'field_data_field_story_category';
@@ -244,7 +243,7 @@ function feature_for_personalization_views_default_views() {
   $handler->display->display_options['fields']['field_primary_category']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_primary_category']['empty'] = '[field_story_category]';
   $handler->display->display_options['fields']['field_primary_category']['type'] = 'text_plain';
-  /* Field: Flags: Flag link */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['ops']['id'] = 'ops';
   $handler->display->display_options['fields']['ops']['table'] = 'flagging';
   $handler->display->display_options['fields']['ops']['field'] = 'ops';
@@ -252,7 +251,6 @@ function feature_for_personalization_views_default_views() {
   $handler->display->display_options['fields']['ops']['label'] = '';
   $handler->display->display_options['fields']['ops']['exclude'] = TRUE;
   $handler->display->display_options['fields']['ops']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['ops']['link_type'] = 'normal';
   /* Field: Content: Extra large image */
   $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
@@ -290,7 +288,7 @@ function feature_for_personalization_views_default_views() {
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nothing']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
-  /* Sort criterion: Flags: Flagged time */
+  /* Sort criterion: Broken/missing handler */
   $handler->display->display_options['sorts']['timestamp']['id'] = 'timestamp';
   $handler->display->display_options['sorts']['timestamp']['table'] = 'flagging';
   $handler->display->display_options['sorts']['timestamp']['field'] = 'timestamp';
@@ -394,13 +392,12 @@ function feature_for_personalization_views_default_views() {
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['total_pages'] = '5';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: Flags: follow */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
   $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'node';
   $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
-  $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'follow';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Flags: Flag link */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['ops']['id'] = 'ops';
   $handler->display->display_options['fields']['ops']['table'] = 'flagging';
   $handler->display->display_options['fields']['ops']['field'] = 'ops';
