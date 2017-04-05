@@ -134,7 +134,7 @@ if ($theme != 'itgadmin') {
                     <div class="data-holder" id="itg-block-1">
                       <?php
                         if (isset($widget_data['itg-block-1']['widget'])) {
-                          print print $widget_data['itg-block-1']['widget']; 
+                          print $widget_data['itg-block-1']['widget']; 
                         } else{
                           print '<div class="widget-placeholder"><span>'.t('Auto featured').'</span></div>';
                         } 
@@ -180,7 +180,7 @@ if ($theme != 'itgadmin') {
                             <div class="data-holder" widget-style="auto-road-trip" id="itg-block-3">
                               <?php
                                 if (isset($widget_data['itg-block-3']['widget'])) {
-                                  print print $widget_data['itg-block-3']['widget']; 
+                                  print $widget_data['itg-block-3']['widget']; 
                                 } else{
                                   print '<div class="widget-placeholder"><span>'.t('Road trips').'</span></div>';
                                 } 
@@ -221,7 +221,7 @@ if ($theme != 'itgadmin') {
                     <div class="data-holder" id="itg-block-4">
                       <?php
                         if (isset($widget_data['itg-block-4']['widget'])) {
-                          print print $widget_data['itg-block-4']['widget']; 
+                          print $widget_data['itg-block-4']['widget']; 
                         } else{
                           print '<div class="widget-placeholder"><span>'.t('Section card').'</span></div>';
                         } 
@@ -253,7 +253,7 @@ if ($theme != 'itgadmin') {
                     <div class="data-holder" id="itg-block-5">
                       <?php
                         if (isset($widget_data['itg-block-5']['widget'])) {
-                          print print $widget_data['itg-block-5']['widget']; 
+                          print $widget_data['itg-block-5']['widget']; 
                         } else{
                           print '<div class="widget-placeholder"><span>'.t('Section card').'</span></div>';
                         } 
@@ -285,7 +285,7 @@ if ($theme != 'itgadmin') {
                     <div class="data-holder" id="itg-block-6">
                       <?php
                         if (isset($widget_data['itg-block-6']['widget'])) {
-                          print print $widget_data['itg-block-6']['widget']; 
+                          print $widget_data['itg-block-6']['widget']; 
                         } else{
                           print '<div class="widget-placeholder"><span>'.t('Section card').'</span></div>';
                         } 
@@ -325,7 +325,7 @@ if ($theme != 'itgadmin') {
                     <div class="data-holder" id="itg-block-7">
                       <?php
                         if (isset($widget_data['itg-block-7']['widget'])) {
-                          print print $widget_data['itg-block-7']['widget']; 
+                          print $widget_data['itg-block-7']['widget']; 
                         } else{
                           print '<div class="widget-placeholder"><span>'.t('Auto Reviews').'</span></div>';
                         } 
@@ -376,7 +376,7 @@ if ($theme != 'itgadmin') {
                     <div class="data-holder" id="itg-block-8">
                       <?php
                         if (isset($widget_data['itg-block-8']['widget'])) {
-                          print print $widget_data['itg-block-8']['widget']; 
+                          print $widget_data['itg-block-8']['widget']; 
                         } else{
                           print '<div class="widget-placeholder"><span>'.t('Photo carousel').'</span></div>';
                         } 
@@ -407,7 +407,7 @@ if ($theme != 'itgadmin') {
                     <div class="data-holder" id="itg-block-9" widget-style="auto-tips-and-tricks">
                       <?php
                         if (isset($widget_data['itg-block-9']['widget'])) {
-                          print print $widget_data['itg-block-9']['widget']; 
+                          print $widget_data['itg-block-9']['widget']; 
                         } else{
                           print '<div class="widget-placeholder"><span>'.t('Tips and tricks').'</span></div>';
                         } 

@@ -293,7 +293,7 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
                       <div class="data-holder" id="itg-block-22">
                         <?php
                           if (isset($widget_data['itg-block-22']['widget'])) {
-                            print print $widget_data['itg-block-22']['widget']; 
+                            print $widget_data['itg-block-22']['widget']; 
                           } else{
                             print '<div class="widget-placeholder"><span>Watch right now</span></div>';
                           } 
