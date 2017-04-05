@@ -87,13 +87,16 @@ window.addEventListener("message", function(ev) {
       <?php $arg = arg(); ?>
       <?php
           $flag = '';
-          switch ($arg[0]) {
-              case 'product':
-              case 'cart':
-              case 'order':
-              case 'order-summary':
-                  $flag = TRUE;
-                  break;
+//          switch ($arg[0]) {
+//              case 'product':
+//              case 'cart':
+//              case 'order':
+//              case 'order-summary':
+//                  $flag = TRUE;
+//                  break;
+//          }
+          if(empty($node->type)) {
+            $flag = TRUE;
           }
       ?>
       <?php print render($title_prefix); ?>
