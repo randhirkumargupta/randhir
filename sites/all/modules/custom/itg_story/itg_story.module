@@ -641,6 +641,11 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
             ':input[name="field_story_social_media_integ[und][facebook_instant_article]"]' => array('checked' => TRUE),
         )
     );
+    $form['field_story_big_image']['#states'] = array(
+        'visible' => array(
+            ':input[name="field_story_social_media_integ[und][facebook_instant_article]"]' => array('checked' => TRUE),
+        )
+    );
     $form['field_animated_image_position']['#states'] = array(
         'visible' => array(
             ':input[name="field_story_social_media_integ[und][facebook_instant_article]"]' => array('checked' => TRUE),

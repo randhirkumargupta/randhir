@@ -211,8 +211,8 @@ function itg_preprocess_html(&$vars) {
  * page head alter for update the meta keywords
  */
 function itg_html_head_alter(&$head_elements) {
+  $arg = arg();
   global $base_url;
-
   if (!empty(arg(1)) && is_numeric(arg(1))) {
     $arg_data = node_load(arg(1));
     if ($arg_data->type == 'videogallery') {
@@ -277,6 +277,38 @@ function itg_html_head_alter(&$head_elements) {
       }
     }
   }
-
-  $head_elements['metatag_keywords_0']['#name'] = 'news_keyword';
+  // Updating meta name keywords to news_keyword sitewide
+  $meta_name_keyword = array_keys($head_elements);
+  if (in_array('metatag_keywords_0', $meta_name_keyword)) {
+    $head_elements['metatag_keywords_0']['#name'] = 'news_keyword';
+  } 
+  else {
+    if ($arg[0] == 'node' && is_numeric($arg[1])) {
+      $node = node_load($arg[1]);
+      $meta_keywords = $node->metatags[LANGUAGE_NONE]['keywords']['value'];
+      if (!empty($meta_keywords)) {
+        $head_elements['metatag_keywords_0'] = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'name' => 'news_keyword',
+            'content' => $meta_keywords
+          ),
+        );
+      }
+    } elseif ($arg[0] == 'taxonomy' && is_numeric($arg[2])) {
+      $term = taxonomy_term_load($arg[2]);
+      $meta_keywords = $term->metatags[LANGUAGE_NONE]['keywords']['value'];
+      if (!empty($meta_keywords)) {
+        $head_elements['metatag_keywords_0'] = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'name' => 'news_keyword',
+            'content' => $meta_keywords
+          ),
+        );
+      }
+    }
+  }
 }

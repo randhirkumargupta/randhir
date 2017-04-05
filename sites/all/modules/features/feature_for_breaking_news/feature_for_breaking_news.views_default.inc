@@ -538,6 +538,12 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['relationships']['field_breaking_content_details_value']['required'] = TRUE;
   $handler->display->display_options['relationships']['field_breaking_content_details_value']['delta'] = '-1';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Field collection item: Redirection url */
+  $handler->display->display_options['fields']['field_breaking_redirection_url']['id'] = 'field_breaking_redirection_url';
+  $handler->display->display_options['fields']['field_breaking_redirection_url']['table'] = 'field_data_field_breaking_redirection_url';
+  $handler->display->display_options['fields']['field_breaking_redirection_url']['field'] = 'field_breaking_redirection_url';
+  $handler->display->display_options['fields']['field_breaking_redirection_url']['relationship'] = 'field_breaking_content_details_value';
+  $handler->display->display_options['fields']['field_breaking_redirection_url']['exclude'] = TRUE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -551,6 +557,7 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_breaking_tile']['field'] = 'field_breaking_tile';
   $handler->display->display_options['fields']['field_breaking_tile']['relationship'] = 'field_breaking_content_details_value';
   $handler->display->display_options['fields']['field_breaking_tile']['label'] = '';
+  $handler->display->display_options['fields']['field_breaking_tile']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_breaking_tile']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['field_breaking_tile']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['field_breaking_tile']['alter']['trim_whitespace'] = TRUE;
@@ -571,6 +578,12 @@ function feature_for_breaking_news_views_default_views() {
     'image_style' => '',
     'image_link' => '',
   );
+  /* Field: Global: Dynamic Band Link */
+  $handler->display->display_options['fields']['dynamic_band_link']['id'] = 'dynamic_band_link';
+  $handler->display->display_options['fields']['dynamic_band_link']['table'] = 'views';
+  $handler->display->display_options['fields']['dynamic_band_link']['field'] = 'dynamic_band_link';
+  $handler->display->display_options['fields']['dynamic_band_link']['label'] = '';
+  $handler->display->display_options['fields']['dynamic_band_link']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -631,6 +644,12 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['relationships']['field_breaking_content_details_value']['required'] = TRUE;
   $handler->display->display_options['relationships']['field_breaking_content_details_value']['delta'] = '-1';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Field collection item: Redirection url */
+  $handler->display->display_options['fields']['field_breaking_redirection_url']['id'] = 'field_breaking_redirection_url';
+  $handler->display->display_options['fields']['field_breaking_redirection_url']['table'] = 'field_data_field_breaking_redirection_url';
+  $handler->display->display_options['fields']['field_breaking_redirection_url']['field'] = 'field_breaking_redirection_url';
+  $handler->display->display_options['fields']['field_breaking_redirection_url']['relationship'] = 'field_breaking_content_details_value';
+  $handler->display->display_options['fields']['field_breaking_redirection_url']['exclude'] = TRUE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -644,6 +663,7 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_breaking_tile']['field'] = 'field_breaking_tile';
   $handler->display->display_options['fields']['field_breaking_tile']['relationship'] = 'field_breaking_content_details_value';
   $handler->display->display_options['fields']['field_breaking_tile']['label'] = '';
+  $handler->display->display_options['fields']['field_breaking_tile']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_breaking_tile']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['field_breaking_tile']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['field_breaking_tile']['alter']['trim_whitespace'] = TRUE;
@@ -663,6 +683,12 @@ function feature_for_breaking_news_views_default_views() {
     'image_style' => '',
     'image_link' => '',
   );
+  /* Field: Global: Dynamic Band Link */
+  $handler->display->display_options['fields']['dynamic_band_link']['id'] = 'dynamic_band_link';
+  $handler->display->display_options['fields']['dynamic_band_link']['table'] = 'views';
+  $handler->display->display_options['fields']['dynamic_band_link']['field'] = 'dynamic_band_link';
+  $handler->display->display_options['fields']['dynamic_band_link']['label'] = '';
+  $handler->display->display_options['fields']['dynamic_band_link']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Field: Category (field_section) */
   $handler->display->display_options['arguments']['field_section_tid']['id'] = 'field_section_tid';
