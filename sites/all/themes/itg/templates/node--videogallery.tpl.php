@@ -1,4 +1,4 @@
-
+<script type="text/javascript">var __at__ = 0;</script>
 <div style="display:none"><?php //print render($content); 
 ?> </div>
 <?php print $node->view_output; ?>

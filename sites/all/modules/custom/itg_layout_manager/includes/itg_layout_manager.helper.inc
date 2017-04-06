@@ -115,16 +115,20 @@ function get_itg_widget($widget_name, $widget_info = 'custom', $filter_url = NUL
   else if ($widget_info[0] == 'view') {
     return views_embed_view($widget_name, $widget_info[1], $widget_info[2]);
   }
-  else {  
-      
-      if($widget_name=='custom_ask_expert_form_block')
-      {
-           $block = block_load('itg_ask_expert', $widget_name);
-      } else {
-           $block = block_load('itg_widget', $widget_name);
-      }
-   
+  elseif (isset($widget_name) && $widget_name == 'recommended_anonymous_user') {
+    //itg_front_end_common/recommended_anonymous_user
+    $block = block_load('itg_front_end_common', $widget_name);
     $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+    return render($render_array);
+  }
+  else {
+    if($widget_name=='custom_ask_expert_form_block') {
+      $block = block_load('itg_ask_expert', $widget_name);
+    } else {
+        $block = block_load('itg_widget', $widget_name);
+    }   
+    $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+    
     return render($render_array);
   }
   
@@ -266,7 +270,7 @@ function get_layout_details_by_block_name($section_name, $template_name, $status
  * @return array $data
  */
 function get_layout_details($section_name, $template_name, $status) {
-  
+ 
   if ($status == 'admin') {
     //Get last layout setting
     $query = db_select('itg_layout_tpl', 'tpl');
@@ -296,6 +300,7 @@ function get_layout_details($section_name, $template_name, $status) {
   $itg_result = $itg_query->execute()->fetchAll();
   $data = array();
   foreach ($itg_result as $itg_val) {
+   
     $filter_url = $itg_val->filter_url;
     // for widget display name
     if (!empty($itg_val->widget_name)) {

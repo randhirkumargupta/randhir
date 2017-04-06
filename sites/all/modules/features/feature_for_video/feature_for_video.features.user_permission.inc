@@ -48,18 +48,14 @@ function feature_for_video_user_default_permissions() {
   // Exported permission: 'delete any videogallery content'.
   $permissions['delete any videogallery content'] = array(
     'name' => 'delete any videogallery content',
-    'roles' => array(
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own videogallery content'.
   $permissions['delete own videogallery content'] = array(
     'name' => 'delete own videogallery content',
-    'roles' => array(
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 

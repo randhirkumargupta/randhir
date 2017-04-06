@@ -206,6 +206,9 @@ function itg_menu_manager_form($form, &$form_state) {
       'callback' => 'get_url_of_current_term',
       'wrapper' => 'entire_form',
     ),
+    '#attributes' => array(
+      'onkeydown' => array("return isValidKey(event)"),
+    ),
     '#default_value' => isset($default_values['title']) ? $default_values['title'] : "",
     '#required' => TRUE,
   );
@@ -301,9 +304,21 @@ function itg_menu_manager_form($form, &$form_state) {
     unset($form['title']['#ajax']);
   }
 
-  if (isset($default_values['menu_level']) && ($default_values['menu_level'] == 'second')) {
-    unset($form['title']['#autocomplete_path']);
-  }
+  drupal_add_css('#autocomplete {
+height: 300px;
+max-height: 400px;
+overflow: auto;
+overflow-y: auto;
+overflow-x: hidden;
+}', 'inline');
+##############################################################################
+########### Condtion removed fornow for file title in case of second #########
+##############################################################################
+
+//  if (isset($default_values['menu_level']) && ($default_values['menu_level'] == 'second')) {
+//    unset($form['title']['#autocomplete_path']);
+//  }
+
   drupal_add_js(drupal_get_path('module', 'itg_menu_manager') . '/js/itg-menu-main.js', 'file');
   return $form;
 }
@@ -401,8 +416,8 @@ function itg_menu_manager_form_validate($form, &$form_state) {
  * @return json
  */
 function itg_menu_manager_get_child_under_category_management($string) {
-  $vocuvolary = taxonomy_vocabulary_machine_name_load('category_management');
-  $options_source = taxonomy_get_tree($vocuvolary->vid);
+  //$vocuvolary = taxonomy_vocabulary_machine_name_load('category_management');
+  $options_source = _get_all_terms_under_vocabulary(CATEGORY_MANAGMENT);
 
   foreach ($options_source as $item) {
     if (itg_category_manager_term_state($item->tid) && module_exists('itg_category_manager') && function_exists('itg_category_manager_term_state')) {
@@ -415,7 +430,8 @@ function itg_menu_manager_get_child_under_category_management($string) {
   $match_terms_query = db_select('taxonomy_term_data', 'ttd')
       ->fields('ttd', array('tid', 'name'))
       ->condition('ttd.tid', array($options), 'IN')
-      ->condition('ttd.name', '%' . db_like($string) . '%', 'LIKE');
+      ->condition('ttd.name', '%' . db_like($string) . '%', 'LIKE')
+      ->range(0,20);
 
   $match_terms = $match_terms_query->execute()->fetchAll();
 
@@ -426,6 +442,20 @@ function itg_menu_manager_get_child_under_category_management($string) {
 }
 
 /**
+ * Function to get under vocabulary.
+ * @param int $vid
+ * @return array
+ */
+function _get_all_terms_under_vocabulary($vid) {
+  if(!empty($vid)) {
+    $query = db_select('taxonomy_term_data' , 'tdd');
+    $query->fields('tdd',array('tid'));
+    $query->condition('tdd.vid' , $vid);
+    return $query->execute()->fetchAll();
+  }
+  return array();
+}
+/**
  * Function create options for itg_menu_manager field.
  * @param string $machine_name
  * @return array
@@ -433,9 +463,7 @@ function itg_menu_manager_get_child_under_category_management($string) {
 function itg_menu_manager_get_taxonomy_term_options($machine_name) {
   $options = array();
 
-  $vid = taxonomy_vocabulary_machine_name_load($machine_name)->vid;
-
-  $options_source = taxonomy_get_tree($vid, 0, 1);
+  $options_source = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, 1);
   $options[0] = '-Select-';
   foreach ($options_source as $item) {
     if (itg_category_manager_term_state($item->tid) && module_exists('itg_category_manager') && function_exists('itg_category_manager_term_state')) {

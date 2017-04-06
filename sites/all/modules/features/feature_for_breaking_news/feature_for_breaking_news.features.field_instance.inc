@@ -103,7 +103,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'bundle' => 'field_breaking_content_details',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'EX: www.yourdomainname.com',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -324,6 +324,49 @@ function feature_for_breaking_news_field_default_field_instances() {
       ),
       'type' => 'field_collection_embed',
       'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-breaking_news-field_cm_related_content_detail'.
+  $field_instances['node-breaking_news-field_cm_related_content_detail'] = array(
+    'bundle' => 'breaking_news',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 30,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_cm_related_content_detail',
+    'label' => 'Related Content Detail',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 32,
     ),
   );
 
@@ -1139,6 +1182,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Content Type');
   t('Content details');
   t('Display on');
+  t('EX: www.yourdomainname.com');
   t('Extra large image');
   t('Extra small image');
   t('Highlights');
@@ -1156,6 +1200,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Publish time should be 24 hr format');
   t('Redirection url');
   t('Related Content');
+  t('Related Content Detail');
   t('Section');
   t('Short Description');
   t('Small image');

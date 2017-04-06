@@ -87,15 +87,11 @@ window.addEventListener("message", function(ev) {
       <?php $arg = arg(); ?>
       <?php
           $flag = '';
-          switch ($arg[0]) {
-              case 'product':
-              case 'cart':
-              case 'order':
-              case 'order-summary':
-                  $flag = TRUE;
-                  break;
-          }
-      ?>
+          $node_array = array('story', 'photogallery', 'videogallery', 'podacast', 'breaking_news', 'blog', 'survey', 'quiz', 'poll');
+          if(!in_array($node->type , $node_array)) {
+            $flag = TRUE;
+          } 
+    ?>
       <?php print render($title_prefix); ?>
       <?php if ($title): ?>
         <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>

@@ -14,13 +14,13 @@
 function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
 
     if ($form_id == 'photogallery_node_form') {
-
+      $form['field_featured']['und']['#title'] = NULL;
+      $form['field_photogallery_configuration']['und']['#title'] = NULL;
 
 
         $form['field_story_category'][LANGUAGE_NONE]['#title'] = '<label for="edit-title">' . $form['field_story_category'][LANGUAGE_NONE]['#title'] . ' <span title="This field is required." class="form-required">*</span></label>';
         //code for common syndication field hide
         drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-story-syndication").hide();
               jQuery("#edit-field-story-expert-description").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
 
@@ -604,6 +604,11 @@ function itg_photogallery_node_presave($node) {
                 $node->field_story_syndication[LANGUAGE_NONE][0]['value'] = 'yes';
             }
         }
+    }
+    
+    // add source type
+    if ($node->type == 'photogallery' && empty($node->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
+      $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'photogallery';
     }
 }
 

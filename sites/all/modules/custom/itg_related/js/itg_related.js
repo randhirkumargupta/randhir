@@ -66,32 +66,55 @@ jQuery(document).ready(function(){
             });
    // var itemString = parent.jQuery('#edit-field-story-kicker-text-und-0-value').val();
     var itemString = parent.jQuery('#edit-field-common-related-content-und-0-value').val();
+    var detailString = parent.jQuery('#edit-field-cm-related-content-detail-und-0-value').val();
+    //console.log(detailString);
     var insvalue = '';
+    var relatedtit = '';
     jQuery('#insvalue').val(itemString);
+    jQuery('#relatedtit').text(detailString);
     jQuery('#insvalue').attr('title', itemString);
     var insvalue = jQuery('#insvalue').val();
+    var relatedtit = jQuery('#relatedtit').text();
     var item = [];
+    var detail = [];
     if(insvalue){
         item = insvalue.split(",");
+    }
+    if(relatedtit){
+        detail = relatedtit.split(",");
     }
     jQuery('body').on('change', '.itg-row-selector-select', function () {
         var isCheck = jQuery(this).is(':checked');
         var url = jQuery(this).parent().parent().parent().find('.views-field-entity-id span').html();
         var site = jQuery(this).parent().parent().parent().find('.views-field-site').html();
+        var label = jQuery(this).parent().parent().parent().find('.views-field-label a').html().replace(/,/g, "");
+        var bundle = jQuery(this).parent().parent().parent().find('.views-field-bundle-name').html();
         var urlval = jQuery.trim(url);
         var siteval = jQuery.trim(site);
+        var labelval = jQuery.trim(label);
+        var bundleval = jQuery.trim(bundle);
         var url_site = siteval + '_' + urlval;
+        var site_detail = siteval + '_' + urlval+ '@' + bundleval+'@' + labelval;
+        
         if (isCheck) {
             var hasurl = jQuery.inArray(url_site, item);
             if (hasurl == -1) {
                 item.push(url_site);
             }
+            var hastitle = jQuery.inArray(site_detail, detail);
+            if (hastitle == -1) {
+                detail.push(site_detail);
+            }
         }
         else {
             var hasurl = jQuery.inArray(url_site, item);
             item.splice(hasurl, 1);
+            var hastitle = jQuery.inArray(site_detail, detail);
+            detail.splice(hastitle, 1);
         }
+        
         jQuery('#insvalue').val(item);
+        jQuery('#relatedtit').text(detail);
         jQuery('#insvalue').attr('title', item);
         //console.log("hasurl index = " + item);
     });
@@ -112,11 +135,25 @@ jQuery(document).ready(function(){
             
            // parent.jQuery('#edit-field-story-kicker-text-und-0-value').val(item);
             parent.jQuery('#edit-field-common-related-content-und-0-value').val(item);
+            parent.jQuery('#edit-field-cm-related-content-detail-und-0-value').val(detail);
             var checkedlist = '';
             for ( var i = 0, l = item.length; i < l; i++ ) {
                 var site = item[i].split('_');
+                var rel_tit = detail[i].split('@');
+                if(rel_tit[0] == item[i]) {
+                    var final_tit = detail[i].split('@');
+                    
+                }
+                if(final_tit[2] != null && final_tit[2] != undefined) {
+                    var display_tit;
+                    display_tit = final_tit[2];
+                }
+                if(final_tit[1] != null && final_tit[1] != undefined) {
+                    var display_type;
+                    display_type = final_tit[1];
+                }
                 var solr_uri = slr[site[0]]+'/node/'+site[1];
-                checkedlist += '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value">' + item[i] + '</span><a href="'+solr_uri+'" target="_blank"> <i class="fa fa-eye" aria-hidden="true"></i> </a><i class="fa fa-times fright" aria-hidden="true"></i></li>';
+                checkedlist += '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value" title="'+display_tit+'">' + item[i] + '</span> | '+ display_type +' | <a href="'+solr_uri+'" target="_blank"> view </a><i class="fa fa-times fright" aria-hidden="true"></i></li>';
             }
             parent.jQuery('.checked-list').html(checkedlist);
             if(item.length){

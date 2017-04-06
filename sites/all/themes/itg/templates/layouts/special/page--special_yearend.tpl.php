@@ -131,7 +131,15 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">                                  
-                    <div class="data-holder" id="itg-block-1"><?php print $widget_data['itg-block-1']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-1">
+                      <?php
+                        if (isset($widget_data['itg-block-1']['widget'])) {
+                          print $widget_data['itg-block-1']['widget']; 
+                        } else{
+                          print '<div class="widget-placeholder"><span>Yearender featured</span></div>';
+                        } 
+                      ?>
+                    </div>
                   </div>             
                 </div>               
             </div>  
@@ -158,7 +166,15 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-2"><?php print $widget_data['itg-block-2']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-2">
+                      <?php
+                        if (isset($widget_data['itg-block-2']['widget'])) {
+                          print $widget_data['itg-block-2']['widget']; 
+                        } else{
+                          print '<div class="widget-placeholder"><span>Year Ender</span></div>';
+                        } 
+                      ?>
+                    </div>
                   </div>             
                 </div>               
             </div>  
@@ -202,7 +218,15 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                 </div>
                             <?php } ?>  
 
-                            <div class="data-holder" id="itg-block-3"><?php print $widget_data['itg-block-3']['widget']; ?></div>
+                            <div class="data-holder" id="itg-block-3">
+                              <?php
+                                if (isset($widget_data['itg-block-3']['widget'])) {
+                                  print $widget_data['itg-block-3']['widget']; 
+                                } else{
+                                  print '<div class="widget-placeholder"><span>Top news</span></div>';
+                                } 
+                              ?>
+                            </div>
                         </div>             
                     </div>               
                 </div>  
@@ -242,7 +266,15 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                 </div>
                             <?php } ?>  
 
-                            <div class="data-holder" id="itg-block-4"><?php print $widget_data['itg-block-4']['widget']; ?></div>
+                            <div class="data-holder" id="itg-block-4">
+                              <?php
+                                if (isset($widget_data['itg-block-2']['widget'])) {
+                                  print $widget_data['itg-block-2']['widget']; 
+                                } else{
+                                  print '<div class="widget-placeholder"><span>Top videos</span></div>';
+                                } 
+                              ?>
+                            </div>
                         </div>             
                     </div>               
                 </div>

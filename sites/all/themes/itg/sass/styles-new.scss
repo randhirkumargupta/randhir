@@ -126,6 +126,18 @@ input[type="file"], input[type="submit"], input[type="text"]{
         border: none;   
         .slick-slide{
             position: relative;
+            .photo-landing-slider-pic{
+              text-align: center;
+              height: 543px;
+              img{
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+              }
+            }
         }
         .slick-prev{
             font: normal normal normal 14px/1 FontAwesome;
@@ -454,7 +466,7 @@ input[type="file"], input[type="submit"], input[type="text"]{
                             font-size: 12px;
                             font-family: Roboto;
                             .fa{
-                                font-size: 14px;
+                                font-size: 16.5px;
                                 margin-right: 5px;
                             }
                         }
@@ -2896,6 +2908,11 @@ body.has-cart-popup{
 .rippleEffect {
     animation: rippleDrop .8s linear;
 }
+.trending-list{
+  .rippleEffect {
+    animation: rippleDrop .8s linear;
+  }
+}
 
 @keyframes rippleDrop {
   100% {
@@ -3349,6 +3366,7 @@ body{
     }
   }
 }
+.multiple-photo-disc .fa-chevron-left.slick-disabled + div .prev-story-link{display: block;}
 .story-associate-content{
   .view-photo-landing-slider{
     .videogallery-slider{
@@ -6032,6 +6050,13 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
 }
 @media all and(max-width: 767px){
+  .movie-layout-page .itg-widget.trending-list{overflow: hidden;}
+  .education-layout-page .section_wise_order-edu-tips-and-trick, .section_wise_order-edu-tips-and-trick{
+    max-height: 400px;
+  }
+  .featured-news .featured-post h3{
+    max-height: none;
+  }
   .personal-list{
     margin: 0 -15px;
   }
@@ -6320,6 +6345,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     img{max-width: 100%;}
   }
   .podcast-detail .jw-controlbar{padding: 0;}
+  #block-views-photo-landing-slider-block .slick-slider .slick-slide .photo-landing-slider-pic{
+    height: auto;
+    img{position: static;}
+  }
 }
 @media all and (max-width: 480px){
   .photos-videos-wrapper .movie-videos, 

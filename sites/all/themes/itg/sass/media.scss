@@ -263,7 +263,7 @@
   }
   /*css start osscar page */
   /* css start vertical bar */
-  #block-itg-menu-manager-vertical-menu{
+  .region-vertical-menu{
     display: none;
   }
   /*end css vertical bar */
@@ -716,7 +716,8 @@
     }
     .head-live-tv{
       text-align:right;
-      padding: 0 10px;            
+      padding: 0 10px;   
+      z-index: 99999;
       @include pos(relative);
       ul{
         list-style-type: none;
@@ -3030,13 +3031,13 @@
   #block-views-video-landing-header-block{
     .video-landing-header{
       background: #000;
-      padding: 0 15px 15px 15px;    
+      padding: 0 15px 20px 15px;    
     }
     .video-header-left{
       .video{
         @include float(left);
         width: 84.5%;
-        padding: 10px;
+        padding: 15px 10px;
         border: 1px solid #242424;
       }
       .social-likes  {
@@ -3050,7 +3051,7 @@
           li{
             @include float(none);
             a{
-              padding:  20px 5px 19px 10px;
+              padding:  20.2px 5px 20.2px 10px;
               span{
                 display: inline-block;    
               }
@@ -3128,7 +3129,14 @@
     border: 1px solid #ddd;   
   }     
   /*css for tech page end*/
-
+  
+  .node-type-videogallery{
+    header{margin-bottom: 0;}
+    #block-itg-videogallery-videogallery-menu-video-block{margin-top: 22px;}
+  }
+  .second-level-menu.before-load{
+    height: 37px; overflow: hidden;
+  }
 }
 /*End CSS Desktop version*/
 

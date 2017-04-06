@@ -2564,7 +2564,7 @@ function event_backend_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 24,
+        'weight' => 51,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -2577,7 +2577,7 @@ function event_backend_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_kicker_text',
     'label' => 'Event Location',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -2587,9 +2587,9 @@ function event_backend_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'size' => 60,
+        'rows' => 5,
       ),
-      'type' => 'text_textfield',
+      'type' => 'text_textarea',
       'weight' => 36,
     ),
   );

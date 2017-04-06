@@ -157,6 +157,18 @@ input[type="file"], input[type="submit"], input[type="text"] {
 #block-views-photo-landing-slider-block .slick-slider .slick-slide {
   position: relative;
 }
+#block-views-photo-landing-slider-block .slick-slider .slick-slide .photo-landing-slider-pic {
+  text-align: center;
+  height: 543px;
+}
+#block-views-photo-landing-slider-block .slick-slider .slick-slide .photo-landing-slider-pic img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
 #block-views-photo-landing-slider-block .slick-slider .slick-prev {
   font: normal normal normal 14px/1 FontAwesome;
   cursor: pointer;
@@ -474,7 +486,7 @@ input[type="file"], input[type="submit"], input[type="text"] {
   font-family: Roboto;
 }
 .view-photo-list-of-category .view-content .photo-list li .tile figure figcaption .fa, .view-podcasts-listing.podcast-detail-page .view-content .photo-list li .tile figure figcaption .fa {
-  font-size: 14px;
+  font-size: 16.5px;
   margin-right: 5px;
 }
 .view-photo-list-of-category .view-content .photo-list li .tile .posted-on, .view-podcasts-listing.podcast-detail-page .view-content .photo-list li .tile .posted-on {
@@ -2962,6 +2974,10 @@ body.has-cart-popup {
   animation: rippleDrop .8s linear;
 }
 
+.trending-list .rippleEffect {
+  animation: rippleDrop .8s linear;
+}
+
 @keyframes rippleDrop {
   100% {
     transform: scale(2);
@@ -3482,6 +3498,10 @@ body .program-livetv.effect-added .light-on-text {
 }
 .multiple-photo-disc .slick-list + .fa-chevron-right.slick-disabled {
   display: none !important;
+}
+
+.multiple-photo-disc .fa-chevron-left.slick-disabled + div .prev-story-link {
+  display: block;
 }
 
 .story-associate-content .view-photo-landing-slider .videogallery-slider .fa-chevron-left, .story-associate-content .view-photo-landing-slider .videogallery-slider .fa-chevron-right {
@@ -6418,6 +6438,18 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
 }
 @media all and (max-width: 767px) {
+  .movie-layout-page .itg-widget.trending-list {
+    overflow: hidden;
+  }
+
+  .education-layout-page .section_wise_order-edu-tips-and-trick, .section_wise_order-edu-tips-and-trick {
+    max-height: 400px;
+  }
+
+  .featured-news .featured-post h3 {
+    max-height: none;
+  }
+
   .personal-list {
     margin: 0 -15px;
   }
@@ -6758,6 +6790,13 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 
   .podcast-detail .jw-controlbar {
     padding: 0;
+  }
+
+  #block-views-photo-landing-slider-block .slick-slider .slick-slide .photo-landing-slider-pic {
+    height: auto;
+  }
+  #block-views-photo-landing-slider-block .slick-slider .slick-slide .photo-landing-slider-pic img {
+    position: static;
   }
 }
 @media all and (max-width: 480px) {

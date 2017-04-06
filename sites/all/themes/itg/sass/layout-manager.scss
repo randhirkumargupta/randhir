@@ -3056,3 +3056,25 @@ img{
     }
   }
 }
+
+.widget-placeholder {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #f1f1f1;
+  z-index: 1;
+  span{
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    text-align: center;
+    font-size: 28px;
+    text-transform: uppercase;
+    color: #ababab;
+    font-weight: 500;
+    margin-top: -10px;
+  }
+}
+.election-page .right-side .itg-320 .droppable{height: 320px;}

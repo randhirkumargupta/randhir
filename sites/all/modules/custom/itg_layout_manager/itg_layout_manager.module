@@ -376,7 +376,7 @@ function itg_layout_manager_block_view($delta = '') {
               'blog-listing' => 'Blog',
               'podcasts-listing' => 'Podcast',
               'programmes' => 'Programmes',
-              'snappost' => 'Snappost', 
+              'snap-post' => 'Snappost', 
               'itg-quiz' => 'Quiz',
               'itg-survey' => 'Survey',
               'online-archive-story' => 'Online Story Archive',
@@ -583,6 +583,7 @@ function itg_layout_manager_preprocess_page(&$vars) {
     $data = get_layout_details($section, $template_name, 'front');
     $data['big_story'] = get_itg_widget('big_story_format');
     $data['personlization'] = get_itg_widget('personlization');
+    $data['non_personlization'] = get_itg_widget('recommended_anonymous_user');
     $vars['widget_data'] = $data;
     //$vars['itg_ad'] = get_ad_script('Home');
   }

@@ -536,7 +536,7 @@ function itg_event_registration_form_custom_submit_callback($form, &$form_state)
 
   //$form_state['redirect'] = $baseurl . '/registration';
   $event_name = itg_common_get_node_title($current_event_nid);
-  drupal_set_message(t('Congratulations! You have successfully registered yourself for the event <strong>@eventname</strong>.', array('@eventname' => $event_name)));
+  //drupal_set_message(t('Congratulations! You have successfully registered yourself for the event <strong>@eventname</strong>.', array('@eventname' => $event_name)));
   
   $type = isset($form_state['values']['field_erf_payment_gateway'][LANGUAGE_NONE][0]['value'])?$form_state['values']['field_erf_payment_gateway'][LANGUAGE_NONE][0]['value']:'';
   $form_state['redirect'] = 'itg-payment/'.$type;
@@ -905,3 +905,19 @@ function _get_unique_id_for_registration_unique_field() {
   }
   return $reporter_id;
 }
+
+
+/**
+ * Implement function for redirect save.
+ * @param str $source, $new_redirect
+ * 
+ */
+
+function itg_save_redirect($source, $new_redirect) {
+  $redirect = new StdClass();
+  redirect_object_prepare($redirect);
+  $redirect->source = $new_redirect;
+  $redirect->redirect = $source;
+  redirect_save($redirect);
+}
+ 
