@@ -3149,6 +3149,7 @@ h1.category-heading{
         @include pager;        
     }    
 }
+.view-blog-listing .catagory-listing .detail .blog-anchor{color: #bb0a0a;}
 /*End category wise content list css*/
 /*Start anchors listing css*/
 .view-widget-anchors-listing{    
@@ -8872,8 +8873,6 @@ section.sidebar{
     box-shadow: 0px 0px 4px #ccc;
     text-align: center;
     border-right: 1px solid #b3b3b3;
-    /*margin-top: 100px;*/
-    width: 60px;
     ul{       
         -webkit-transition: all 1s ease-in-out;
         -moz-transition: all 1s ease-in-out;
