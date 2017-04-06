@@ -779,6 +779,13 @@ function itg_story_node_presave($node) {
         }
       }
     }
+    
+    // Prevent expiry date to save if expiry checkbox is unchecked
+    
+    if(empty($node->field_story_expires[LANGUAGE_NONE][0]['value'])) {
+      unset($node->field_story_expiry_date);
+    }
+    
   }
 }
 
@@ -894,8 +901,11 @@ function itg_story_movie_image_plugin_data($node_id = '') {
  */
 function itg_story_photo_story_redirect($node_id , $type = 'prev') {
   global $base_url;
-
+  $current_time = date("Y-m-d H:i:s");
   $query = db_select('field_data_field_story_type' , 'fst');
+  $query->leftJoin('node','n','n.nid=fst.entity_id');
+  $query->leftJoin('field_data_field_story_expiry_date', 'expiry', 'fst.entity_id = expiry.entity_id');
+  $query->leftJoin('field_data_field_story_expires', 'expiry_status', 'n.nid = expiry_status.entity_id');
   $query->fields('fst' , array('entity_id'));
   $query->condition('fst.field_story_type_value' , 'photo_story');
   if ($type == 'next') {
@@ -908,8 +918,12 @@ function itg_story_photo_story_redirect($node_id , $type = 'prev') {
   }
 
   $query->range(0 , 1);
+  $query->condition('n.status', 1);
+  $query->condition('n.type', array('story'), 'IN');
+  $or = db_or()->isNull('expiry.field_story_expiry_date_value')->condition('expiry.field_story_expiry_date_value', $current_time, '>=');
+  $query->condition($or);
   $result = $query->execute()->fetchAll();
-
+  //print strtr((string) $query, $query->arguments());
   if ($result[0]->entity_id) {
     $required_node_id = 'node/' . $result[0]->entity_id;
     $href = $base_url . '/' . $required_node_id;
