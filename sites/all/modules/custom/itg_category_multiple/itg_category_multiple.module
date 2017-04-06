@@ -15,8 +15,8 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   switch ($form_id) {
     case 'story_node_form':        // Story
-    case 'photogallery_node_form': // Photo gallery
-    case 'videogallery_node_form': // Video Gallery
+      case 'photogallery_node_form': // Photo gallery
+      case 'videogallery_node_form': // Video Gallery
 
 
       $content_type = '';
@@ -756,7 +756,25 @@ function create_section_category_in_mongo_mig() {
  */
 function create_section_category_in_mongo_mig_submit($form, &$form_state) {
 
-  $operations[] = array('create_section_cat_op_mig', array('data'));
+  $query = db_select('taxonomy_term_data', 'td');
+  $query->leftJoin('taxonomy_term_hierarchy', 'th', 'th.tid = td.tid');
+  $query->leftJoin('itg_category_manager', 'icm', 'icm.tid = td.tid');
+  $query->leftJoin('taxonomy_vocabulary', 'tv', 'tv.vid=td.vid');
+  $result = $query
+      ->condition('td.vid', CATEGORY_MANAGMENT)
+      ->fields('td', array('tid', 'name', 'vid'))
+      ->fields('th', array('parent'))
+      ->fields('tv', array('machine_name'))
+      ->fields('icm', array('status'))
+      ->execute();
+
+
+  foreach ($result as $chunk_data) {
+    if (!empty($chunk_data) && isset($chunk_data)) {
+      $operations[] = array('create_section_cat_op_mig', array($chunk_data));
+    }
+  }
+
   $batch = array(
     'title' => t('Migrating data finally....please wait....!'),
     'operations' => $operations,
@@ -773,40 +791,25 @@ function create_section_category_in_mongo_mig_submit($form, &$form_state) {
 /**
  * Implements create_section_cat_op_mig().
  */
-function create_section_cat_op_mig($data123, &$context) {
+function create_section_cat_op_mig($data, &$context) {
 // Mongo code will be here
-  
-     $query = db_select('taxonomy_term_data', 'td');
-    $query->leftJoin('taxonomy_term_hierarchy', 'th', 'th.tid = td.tid');
-    $query->leftJoin('itg_category_manager', 'icm', 'icm.tid = td.tid');
-    $query->leftJoin('taxonomy_vocabulary', 'tv', 'tv.vid=td.vid');
-    $result = $query
-        ->condition('td.vid', CATEGORY_MANAGMENT)
-        ->fields('td', array('tid', 'name', 'vid'))
-        ->fields('th', array('parent'))
-        ->fields('tv', array('machine_name'))
-        ->fields('icm', array('status'))
-        ->execute();
-
-    foreach ($result as $data) {
   if (function_exists('mongodb')) {
     $con = mongodb();
     $people = $con->taxonomy_term_data_mongo;
 
-      // check connection
-      if ($con) {
-        $qry = array(
-          "tid" => (int) $data->tid,
-          "name" => $data->name,
-          "parent" => (int) $data->parent,
-          "vid" => (int) $data->vid,
-          "machine_name" => $data->machine_name,
-          "content_type" => get_content_type_list_for_this_term_mig($data->tid),
-          "status" => (int) $data->status,
-          'parent_data' => taxonomy_get_parents_all($data->tid),
-        );
-        $result = $people->insert($qry);
-      }
+    // check connection
+    if ($con) {
+      $qry = array(
+        "tid" => (int) $data->tid,
+        "name" => $data->name,
+        "parent" => (int) $data->parent,
+        "vid" => (int) $data->vid,
+        "machine_name" => $data->machine_name,
+        "content_type" => get_content_type_list_for_this_term_mig($data->tid),
+        "status" => (int) $data->status,
+        'parent_data' => taxonomy_get_parents_all($data->tid),
+      );
+      $result = $people->insert($qry);
     }
     //drupal_set_message('data inserted successfully for ' . json_encode($result));
   }
