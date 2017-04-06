@@ -2974,6 +2974,10 @@ body.has-cart-popup {
   animation: rippleDrop .8s linear;
 }
 
+.trending-list .rippleEffect {
+  animation: rippleDrop .8s linear;
+}
+
 @keyframes rippleDrop {
   100% {
     transform: scale(2);
@@ -3494,6 +3498,10 @@ body .program-livetv.effect-added .light-on-text {
 }
 .multiple-photo-disc .slick-list + .fa-chevron-right.slick-disabled {
   display: none !important;
+}
+
+.multiple-photo-disc .fa-chevron-left.slick-disabled + div .prev-story-link {
+  display: block;
 }
 
 .story-associate-content .view-photo-landing-slider .videogallery-slider .fa-chevron-left, .story-associate-content .view-photo-landing-slider .videogallery-slider .fa-chevron-right {

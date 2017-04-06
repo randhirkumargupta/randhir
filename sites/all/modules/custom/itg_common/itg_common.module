@@ -18,7 +18,8 @@ module_load_include('inc', 'itg_common', 'includes/itg_common');
  * {@inheritdoc}
  */
 function itg_common_init() {
-  global $user, $base_url, $theme;
+  global $user, $base_url, $theme; 
+ 
   
   //code for multidomain
   if (arg(0) != 'user' && $base_url == BACKEND_URL && ($user->uid == 0 || array_key_exists(FRONT_USER, $user->roles))) {    

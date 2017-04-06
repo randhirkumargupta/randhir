@@ -67,7 +67,8 @@ function itg_front_end_common_block_info() {
   $blocks['recommended_anonymous_user'] = array(
     'info' => t('Recommended anonymous user'),
     'cache' => DRUPAL_CACHE_GLOBAL,
-  );
+  );  
+  
   return $blocks;
 }
 

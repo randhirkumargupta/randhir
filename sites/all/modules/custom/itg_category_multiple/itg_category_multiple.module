@@ -15,8 +15,8 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   switch ($form_id) {
     case 'story_node_form':        // Story
-    //case 'photogallery_node_form': // Photo gallery
-    //case 'videogallery_node_form': // Video Gallery
+      case 'photogallery_node_form': // Photo gallery
+      case 'videogallery_node_form': // Video Gallery
 
 
       $content_type = '';
@@ -25,7 +25,6 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
       }
 
       //pr($form_state['build_info']['args'][0]->field_story_extra_data[LANGUAGE_NONE][0]['value']);
-
 //      $itg_category_multiple_prev_data = NULL; //p($form_state['build_info']['args'][0]);
 //      if (isset($form_state['build_info']['args'][0]->field_story_extra_data[LANGUAGE_NONE][0]['value']) &&
 //          !empty($form_state['build_info']['args'][0]->field_story_extra_data[LANGUAGE_NONE][0]['value'])
@@ -315,6 +314,13 @@ function itg_category_multiple_menu() {
   $items['itg-category-primary-category'] = array(
     'page callback' => 'itg_category_primary_category',
     'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['create-section-category-in-mongo-mig'] = array(
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('create_section_category_in_mongo_mig'),
+    'access arguments' => array('access administrator'),
     'type' => MENU_CALLBACK,
   );
 
@@ -730,4 +736,113 @@ function itg_category_multiple_get_term_level($tid) {
   }
 
   return $depths[$tid];
+}
+
+/**
+ * Creating create_section_category_in_mongo_mig form
+ */
+function create_section_category_in_mongo_mig() {
+
+  $form['submit_button'] = array(
+    '#type' => 'submit',
+    '#value' => t('Please submit for bulk insert section and its category'),
+  );
+
+  return $form;
+}
+
+/**
+ * Implements create_section_category_in_mongo_mig_submit().
+ */
+function create_section_category_in_mongo_mig_submit($form, &$form_state) {
+
+  $query = db_select('taxonomy_term_data', 'td');
+  $query->leftJoin('taxonomy_term_hierarchy', 'th', 'th.tid = td.tid');
+  $query->leftJoin('itg_category_manager', 'icm', 'icm.tid = td.tid');
+  $query->leftJoin('taxonomy_vocabulary', 'tv', 'tv.vid=td.vid');
+  $result = $query
+      ->condition('td.vid', CATEGORY_MANAGMENT)
+      ->fields('td', array('tid', 'name', 'vid'))
+      ->fields('th', array('parent'))
+      ->fields('tv', array('machine_name'))
+      ->fields('icm', array('status'))
+      ->execute();
+
+
+  foreach ($result as $chunk_data) {
+    if (!empty($chunk_data) && isset($chunk_data)) {
+      $operations[] = array('create_section_cat_op_mig', array($chunk_data));
+    }
+  }
+
+  $batch = array(
+    'title' => t('Migrating data finally....please wait....!'),
+    'operations' => $operations,
+    'finished' => 'create_section_cat_op_batch_finished_mig',
+    'init_message' => t('Migration started...please wait....!'),
+    'progress_message' => t('Processed @current out of @total.'),
+    'error_message' => t('Migration checking process has encountered an error.'),
+  );
+
+  batch_set($batch);
+  batch_process('create-section-category-in-mongo-mig');
+}
+
+/**
+ * Implements create_section_cat_op_mig().
+ */
+function create_section_cat_op_mig($data, &$context) {
+// Mongo code will be here
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $people = $con->taxonomy_term_data_mongo;
+
+    // check connection
+    if ($con) {
+      $qry = array(
+        "tid" => (int) $data->tid,
+        "name" => $data->name,
+        "parent" => (int) $data->parent,
+        "vid" => (int) $data->vid,
+        "machine_name" => $data->machine_name,
+        "content_type" => get_content_type_list_for_this_term_mig($data->tid),
+        "status" => (int) $data->status,
+        'parent_data' => taxonomy_get_parents_all($data->tid),
+      );
+      $result = $people->insert($qry);
+    }
+    //drupal_set_message('data inserted successfully for ' . json_encode($result));
+  }
+}
+
+/**
+ * Implements create_section_cat_op_batch_finished().
+ */
+function create_section_cat_op_batch_finished_mig($success, $results, $operations) {
+  if ($success) {
+    drupal_set_message(t('migration processed successfully.'));
+  }
+  else {
+    drupal_set_message(t('An error occurred while processing.'));
+  }
+}
+
+/**
+ * Implements get_content_type_list_for_this_term_mig()
+ */
+function get_content_type_list_for_this_term_mig($tid) {
+  $data = array();
+  $query = db_select('field_data_field_cm_select_type', 'td');
+  $res = $query
+      ->condition('td.entity_id', $tid)
+      ->fields('td', array('field_cm_select_type_value',))
+      ->execute();
+
+  foreach ($res as $result) {
+    $data[] = $result->field_cm_select_type_value;
+  }
+  if (!empty($data)) {
+    return implode(',', $data);
+  }
+  return '';
 }

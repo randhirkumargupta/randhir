@@ -267,7 +267,7 @@
 
   /*css start osscar page */
   /* css start vertical bar */
-  #block-itg-menu-manager-vertical-menu {
+  .region-vertical-menu {
     display: none;
   }
 
@@ -3026,6 +3026,17 @@
   }
 
   /*css for tech page end*/
+  .node-type-videogallery header {
+    margin-bottom: 0;
+  }
+  .node-type-videogallery #block-itg-videogallery-videogallery-menu-video-block {
+    margin-top: 22px;
+  }
+
+  .second-level-menu.before-load {
+    height: 37px;
+    overflow: hidden;
+  }
 }
 /*End CSS Desktop version*/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {

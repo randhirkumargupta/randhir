@@ -1,7 +1,8 @@
 <script type="text/javascript">var __at__ = 0;</script>
 <?php
+global $base_url, $user;
 if (!empty($content)):
-  global $base_url, $user;
+  
   // get related content associated with story
   $related_content = $content['related_content'];
   // condition for buzz
@@ -50,18 +51,21 @@ if (!empty($content)):
     $reporter_node = node_load($byline_id);
   }
 
-  if (function_exists('itg_get_front_activity_info')) {
-    $opt = itg_get_front_activity_info($node->nid, $node->type, $user->uid, 'read_later', $status = '');
+  /*if (function_exists('itg_get_front_activity_info')) {
+    $opt = $content["front_activity_info"];
+  }*/
+  $opt = $content["front_activity_info"];
+  
+  if ($node->field_story_type[LANGUAGE_NONE][0]['value'] == 'photo_story') {
+    $photo_story_section_class = ' photo-story-section';
+  }
+  
+  if (function_exists(itg_sso_url)) {
+    $itg_sso_url = itg_sso_url('<i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span>', t('READ LATER'));
   }
   ?>
-  <div class="story-section <?php
-  print $class_buzz . "" . $class_related . "" . $class_listicle;
-  if ($node->field_story_type[LANGUAGE_NONE][0]['value'] == 'photo_story') {
-    echo ' photo-story-section';
-  }
-  ?>">
-    <div class='<?php print $classes ?>'>
-      <?php //pr($node);   ?> 
+  <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle. $photo_story_section_class;?>">
+    <div class='<?php print $classes ?>'>      
       <div class="comment-mobile desktop-hide">
         <ul>
           <li class="later">
@@ -79,17 +83,13 @@ if (!empty($content)):
               }
             }
             else {
-              if (function_exists(itg_sso_url)) {
-                print itg_sso_url('<i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span>', t('READ LATER'));
-              }
+              echo $itg_sso_url;
             }
             ?>
           </li>
-          <li class="mail-to-author"><a title ="Mail to author" href="mailto:support@indiatoday.in"><i class="fa fa-envelope"></i><?php //print t('Mail to author');     ?></a></li>
+          <li class="mail-to-author"><a title ="Mail to author" href="mailto:<?php echo ITG_SUPPORT_EMAIL;?>"><i class="fa fa-envelope"></i><?php //print t('Mail to author');     ?></a></li>
           <li><a href="#" title = "whatsapp"><i class="fa fa-whatsapp"></i></a></li>
-          <?php
-          if ($config_name == 'vukkul') {
-            ?>
+          <?php if ($config_name == 'vukkul') { ?>
             <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
           <?php } if ($config_name == 'other') { ?> 
             <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
@@ -110,31 +110,14 @@ if (!empty($content)):
       }
       if (!empty($get_develop_story_status)) {
         ?>
-        <h1><?php
-          if (function_exists('itg_common_get_smiley_title')) {
-            print itg_common_get_smiley_title($node->nid, 0, 255) . $pipelinetext;
-          }
-          else {
-            print $node->title . $pipelinetext;
-          }
-          ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
+        <h1><?php print $content['story_title'] . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
           <?php
         }
         else {
           ?>
-        <h1><?php
-          if (function_exists('itg_common_get_smiley_title')) {
-            print itg_common_get_smiley_title($node->nid, 0, 255) . $pipelinetext;
-          }
-          else {
-            print $node->title . $pipelinetext;
-          }
-          ?></h1>
-        <?php
-        global $user;
-        if (in_array('Social Media', $user->roles)) {
-          ?>
-          <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $node->nid; ?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span>promote</span></a>   
+        <h1><?php print $content['story_title'] . $pipelinetext; ?></h1>
+        <?php if (in_array('Social Media', $user->roles)) { ?>
+          <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $node->nid; ?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span><?php t('promote'); ?></span></a>   
         <?php } ?>
       <?php } ?>
       <?php
@@ -167,51 +150,57 @@ if (!empty($content)):
           <div class="story-left">
             <div class="byline">              
               <div class="profile-pic">
-
                 <?php
-                $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                if (!empty($file)) {
-                  print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
-                }
-                else {
-                  $file = 'default_images/user-default.png';
-                  print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
-                }
+                  $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                  if (!empty($file)) {
+                    print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
+                  }
+                  else {
+                    $file = 'default_images/user-default.png';
+                    print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
+                  }
                 ?>
               </div>
               <div class="profile-detail">                  
                 <ul>
                   <li class="title"><?php print t($reporter_node->title); ?></li>
                   <?php
-                  $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
-                  $twitter_handle = str_replace('@', '', $twitter_handle);
-                  if (!empty($twitter_handle)) {
+                    $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
+                    $twitter_handle = str_replace('@', '', $twitter_handle);
+                    if (!empty($twitter_handle)) {
                     ?>
                     <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                             ?></li>                
                   <?php } ?>
                 </ul>
                 <ul class="date-update">
-                  <li class="mailto mhide"><i class="fa fa-envelope-o"></i> &nbsp;<?php
+                  <li class="mailto mhide">
+                    <i class="fa fa-envelope-o"></i> &nbsp;<?php
                     $email = $reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
-                    print "<a title ='Mail To Author' href='mailto:support@indiatoday.in'>" . t('Mail To Author') . "</a>";
-                    ?></li>
-                  <li class="mhide"><span class="share-count"><?php
-                      if (!empty($tot_count)) {
-                        print $tot_count;
-                      }
-                      else {
-                        print 0;
-                      }
-                      ?></span><?php print t('SHARES'); ?></li>
+                    print "<a title ='Mail To Author' href='mailto:".ITG_SUPPORT_EMAIL."'>" . t('Mail To Author') . "</a>";
+                    ?>
+                  </li>
+                  <li class="mhide">
+                    <span class="share-count">
+                      <?php
+                        if (!empty($tot_count)) {
+                          print $tot_count;
+                        }
+                        else {
+                          print 0;
+                        }
+                      ?>
+                    </span>
+                    <?php print t('SHARES'); ?>
+                  </li>
                   <li><?php print date('F j, Y', $node->created); ?>   </li>
-                  <li><?php print t('UPDATED'); ?> <?php
-                    print date('H:i', $node->changed);
-                    print t(' IST');
-                    ?></li>
+                  <li>
+                    <?php print t('UPDATED'); 
+                      print date('H:i', $node->changed);
+                      print t(' IST');
+                    ?>
+                  </li>
                   <?php if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
-                    <li>
-                      <?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?>
-                    </li>
+                    <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
                   <?php } ?>
                 </ul>
                 <ul class="social-links mhide">
@@ -223,9 +212,9 @@ if (!empty($content)):
                     ?>
                     <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
                   <?php } if ($config_name == 'other') { ?> 
-                    <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
-                    <?php
-                  }
+                            <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
+                          <?php
+                          }
                   if ($user->uid > 0) {
                     if (empty($opt['status']) || $opt['status'] == 0) {
                       ?> 
@@ -239,9 +228,7 @@ if (!empty($content)):
                     }
                   }
                   else {
-                    if (function_exists(itg_sso_url)) {
-                      print '<li>' . itg_sso_url('<i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span>', t('READ LATER')) . '</li>';
-                    }
+                    print '<li>' . $itg_sso_url . '</li>';
                   }
                   ?>
                 </ul>
@@ -291,20 +278,19 @@ if (!empty($content)):
                 <ul>
                   <li class="title"><?php print $reporter_node->title; ?></li>
                   <?php
-                  $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
-                  $twitter_handle = str_replace('@', '', $twitter_handle);
-                  if (!empty($twitter_handle)) {
+                    $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
+                    $twitter_handle = str_replace('@', '', $twitter_handle);
+                    if (!empty($twitter_handle)) {
                     ?>
                     <li class="twitter"><a title="Follow on Twitter" href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                           ?></li>                
                   <?php } ?>
                 </ul>
                 <ul class="date-update">
                   <li><?php print date('F j, Y', $node->created); ?>   </li>
-                  <li>UPDATED <?php print date('H:i', $node->changed); ?> IST</li>
-                  <?php if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
-                    ?>
+                  <li><?php t('UPDATED'); ?><?php print date('H:i', $node->changed); ?> IST</li>
+                  <?php if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {?>
                     <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
-                  <?php } ?>
+                  <?php } ?> 
                 </ul>
 
               </div>
@@ -335,9 +321,7 @@ if (!empty($content)):
                       }
                     }
                     else {
-                      if (function_exists(itg_sso_url)) {
-                        print itg_sso_url('<i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span>', t('READ LATER'));
-                      }
+                      print $itg_sso_url;
                     }
                     ?>
                   </li>
@@ -355,16 +339,16 @@ if (!empty($content)):
             echo 'listicle-page';
           }
           ?>">
-                 <?php
-                 //associate_lead
-                 $associate_lead = $node->field_story_associate_lead[LANGUAGE_NONE][0]['value'];
-                 $associate_photo = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
-                 $associate_video = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
+          <?php
+             //associate_lead
+             $associate_lead = $node->field_story_associate_lead[LANGUAGE_NONE][0]['value'];
+             $associate_photo = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
+             $associate_video = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
 
-                 if (!empty($associate_lead) && (isset($associate_photo) || isset($associate_video))) {
-                   $class = 'story-associate-content';
-                 }
-                 ?>
+             if (!empty($associate_lead) && (isset($associate_photo) || isset($associate_video))) {
+               $class = 'story-associate-content';
+             }
+          ?>
             <div class="<?php echo $class; ?>">
               <?php if (!empty($associate_lead) && (isset($associate_photo) || isset($associate_video))) { ?>
                 <div id="videogallery-iframe">
@@ -834,9 +818,9 @@ if (!empty($content)):
               else:
                 ?>
                 <li class="mhide"><?php
-            if (function_exists(itg_sso_url)) {
-              print itg_sso_url('follow story');
-            }
+                if (function_exists(itg_sso_url)) {
+                  print itg_sso_url('follow story');
+                }
                 ?></li>
                 <?php endif; ?>
 

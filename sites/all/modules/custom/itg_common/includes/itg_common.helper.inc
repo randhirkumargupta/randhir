@@ -69,6 +69,8 @@ define('MARKETING_MANAGER', $role_array['Marketing Manager']);
 define('FRONT_USER', $role_array['Front User']);
 define('KNOWLEDGE_CENTRE', $role_array['Knowledge Centre']);
 define('QUIZ_TAXONOMY_TID', variable_get('quiz_taxonomy_tid'));
+define('ITG_SUPPORT_EMAIL', 'support@indiatoday.in');
+
 
 /**
  * value define for image.
@@ -118,6 +120,8 @@ define('PARENT_SSO', 'uat-sso.indiatodayonline.in');
 define('FRONT_URL', 'http://uat-it.indiatodayonline.in');
 define('BACKEND_URL', 'http://uat-it-backend.indiatodayonline.in');
 define('SSO_URL', 'http://uat-sso.indiatodayonline.in');
+define('ACCORD_URL', 'http://businesstoday.accordhostings.com/TopIndicesCtrl.aspx');
+
 
 
 //define('FRONT_URL', 'http://itgd-mum-lb-dev-frontend-app-1144451114.ap-south-1.elb.amazonaws.com');
