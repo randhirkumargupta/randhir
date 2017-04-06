@@ -741,6 +741,14 @@ function itg_videogallery_edit_dailymotion($vid_res_result, $playlist_name, $nod
 }
 
 /**
+ * This function use for chane video privat or public
+ */
+function itg_videogallery_vilde_private_public($videid, $status) {
+  $api = itg_videogallery_dailymotion_api();
+  $api->post('/video/' . $videid . '?tags=' . $tags_value . '&private=' . $status);
+}
+
+/**
  * Implement dailymotion api call
  * @param string $real_path
  * @param int $key
@@ -1337,6 +1345,7 @@ function itg_videogallery_remove_video_with_child() {
         $query->fields(array('dailymotion_published' => 0));
         $query->condition('video_id', $data_delete->solr_video_id, '=');
         $query->execute();
+        itg_videogallery_vilde_private_public($data_delete->solr_video_id, false);
       }
 
 // delete from itg_solr_video_info table
