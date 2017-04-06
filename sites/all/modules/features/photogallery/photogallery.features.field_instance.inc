@@ -836,7 +836,7 @@ function photogallery_field_default_field_instances() {
     'bundle' => 'photogallery',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Set As Featured',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
