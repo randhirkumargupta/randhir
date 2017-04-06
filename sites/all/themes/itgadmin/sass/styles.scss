@@ -11329,3 +11329,69 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     @extend .image-repo-browse;
   }
   #idIssue{color: red;}
+  [id*="itg-user-content-visit-report-form"]{
+    .form-type-textfield, .form-type-select{
+      float: left;
+      width: 100%;
+      margin-right: 10px;
+      padding: 0;
+      &.form-item-username, &.form-item-email{max-width: 200px;}
+      &.form-item-content-type{max-width: 150px;}
+      &.form-item-max-date, &.form-item-min-date{max-width: 150px;}
+      &.form-item-items-per-page{max-width: 100px;}
+      > label{
+        float: none;
+        padding: 5px 0;
+        width: 100%;
+        display: block;
+      }
+      .form-text, .form-select{width: 100%;}
+    }
+    .user-log-filter-btn{
+      display: inline-block;
+      margin-top: 38px;
+      vertical-align: top;
+      .form-submit{
+        @extend .btn-small;
+      }
+      .user-log-reset{
+        @extend .btn-reset;
+        @extend .btn-small;
+      }
+    }
+  }
+  [id*="itg-section-wise-breakup-form"]{
+    fieldset.form-wrapper {
+      border: none;
+      float: left;
+      legend{display: none;}
+    }
+    .form-type-textfield, .form-type-select{
+      float: left;
+      width: 100%;
+      margin-right: 10px;
+      padding: 0;
+      &.form-item-content-type{max-width: 150px;}
+      &.form-item-date-from, &.form-item-date-to, &.form-item-date-from-two, &.form-item-date-to-two{max-width: 150px;}
+      &.form-item-items-per-page{max-width: 100px;}
+      > label{
+        float: none;
+        padding: 5px 0;
+        width: 100%;
+        display: block;
+      }
+      .form-text, .form-select{width: 100%;}
+    }
+    .user-log-filter-btn{
+      display: inline-block;
+      margin-top: 38px;
+      vertical-align: top;
+      .form-submit{
+        @extend .btn-small;
+      }
+      .user-log-reset{
+        @extend .btn-reset;
+        @extend .btn-small;
+      }
+    }
+  }
