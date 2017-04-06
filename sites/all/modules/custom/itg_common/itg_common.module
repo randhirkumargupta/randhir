@@ -79,7 +79,29 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  $items['third-party-widget-config'] = array(
+    'title' => 'Third party configuration form',
+    'description' => 'Third party configuration form',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('third_party_widget_form_setting'),
+    'access arguments' => array('access third party config form'),
+    'file' => 'includes/itg_thirdparty_widget_form.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
   return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function itg_common_permission() {
+  return array(
+    'access third party config form' => array(
+      'title' => t('Access third party config form'),
+      'description' => t('Access third party config form'),
+    ),
+  );
 }
 
 /**

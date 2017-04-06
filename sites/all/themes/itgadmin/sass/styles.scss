@@ -10395,7 +10395,11 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       padding: 10px;
       cursor: move;
       min-height: 38px;
+      font-size: 12px;
       position: relative;
+      .fa-arrows{
+        
+      }
       .byline_publish {
         float: left;
         margin: 2px 5px;
@@ -10404,6 +10408,14 @@ span.file a{pointer-events: none; color: #2f2f2f;}
         display: inline-block;
         margin-right: 10px;
         vertical-align: top;
+        &:nth-child(4){
+          white-space: nowrap;
+          display: inline-block;
+          vertical-align: top;
+          max-width: 125px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
         .remove-byline {
           color: red;
           position: absolute;
@@ -11394,4 +11406,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
         @extend .btn-small;
       }
     }
+  }
+  .page-admin-structure-taxonomy-live-tv{
+    [id*="edit-relations"] .fieldset-title{display: none;}
   }
