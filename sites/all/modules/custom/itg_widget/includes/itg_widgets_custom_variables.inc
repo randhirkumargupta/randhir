@@ -122,7 +122,7 @@ function itg_widgets_custom_variables() {
   $form['apache_solr_sites_prefix_values'] = array(
     '#type' => 'textfield',
     '#title' => t('Apache solr sites prefix and has values'),
-    '#description' => t("Ex: dev|eoshds,stage|asdasd"),
+    '#description' => t("Ex: eoshds|IndiaToday,asdasd|AAJtak"),
     '#default_value' => variable_get('apache_solr_sites_prefix_values'),
   );
   $form['newsletter_education_tid'] = array(
