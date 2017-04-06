@@ -801,14 +801,20 @@ if ($theme != 'itgadmin') {
 
         <!--Common section strat here-->
                 <?php if (isset($widget_data['itg-block-14']['widget_name']) || isset($widget_data['itg-block-15']['widget_name']) || isset($widget_data['itg-block-16']['widget_name']) || $theme == 'itgadmin') { ?>
-          <div class="row itg-common-section itg-third-party-section" >
+        <?php // get configuration for widget
+        $widget_choice = variable_get('widget-choice');
+        if($widget_choice['aajtak'] != '0' || $widget_choice['business'] != '0' || $widget_choice['pti'] != '0') {
+        ?>
+        <div class="row itg-common-section itg-third-party-section" >
             <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
               <div class="itg-widget">
                 <div class="widget-wrapper">
   <?php
+  if($widget_choice['aajtak'] != '0') {
   $block = block_load('itg_front_end_common', 'latest_from_aajtak');
   $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
   print render($render_array);
+  }
   ?>
                 </div>             
               </div>               
@@ -817,9 +823,11 @@ if ($theme != 'itgadmin') {
               <div class="itg-widget">
                 <div class="widget-wrapper">
   <?php
+  if($widget_choice['business'] != '0') {
   $block = block_load('itg_front_end_common', 'latest_from_businesstoday');
   $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
   print render($render_array);
+  }
   ?>
                 </div>             
               </div>               
@@ -828,15 +836,17 @@ if ($theme != 'itgadmin') {
               <div class="itg-widget">
                 <div class="widget-wrapper">
           <?php
+          if($widget_choice['pti'] != '0') {
           $block = block_load('itg_front_end_common', 'latest_from_pti');
           $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
           print render($render_array);
+          }
           ?>
                 </div>             
               </div>               
             </div>
           </div>
-        <?php } ?>
+                <?php } }?>
         <!--End of Common section-->
 
         <!--Load More Loader

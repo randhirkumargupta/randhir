@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Installation file for the ITG Common module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function itg_common_uninstall() {
+  variable_del('widget-choice');
+}
