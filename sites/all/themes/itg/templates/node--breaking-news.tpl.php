@@ -22,9 +22,11 @@ if (!empty($content)):
     $type = $node->field_type['und']['0']['value'];
     if ($type == 'Live Blog' || $type == 'Breaking News') {
         $title = $node->title;
-        $share_title = $type.':'.$title;
+        //$share_title = $type.':'.$title;
+        $share_title = $title;
         ?>
-    <h1><?php if($type == 'Breaking News') { ?><span><?php print ($type) ?></span>: <?php } print ($title) ?></h1>
+    <!--<h1><?php if($type == 'Breaking News') { ?><span><?php print ($type) ?></span>: <?php } print ($title) ?></h1>-->
+    <h1><?php print ($title) ?></h1>
     <p class="short-discription"> <?php print ($node->field_label['und']['0']['value'])?></p>
     <div class="social-share">
         <ul>
