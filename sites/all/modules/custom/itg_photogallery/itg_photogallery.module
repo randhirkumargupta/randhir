@@ -14,7 +14,6 @@
 function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
 
     if ($form_id == 'photogallery_node_form') {
-      //pr($form['field_featured']['und']['#title']);
       $form['field_featured']['und']['#title'] = NULL;
       $form['field_photogallery_configuration']['und']['#title'] = NULL;
 
