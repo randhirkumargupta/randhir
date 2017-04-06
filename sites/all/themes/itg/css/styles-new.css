@@ -2973,6 +2973,11 @@ body.has-cart-popup {
 .rippleEffect {
   animation: rippleDrop .8s linear;
 }
+.trending-list{
+  .rippleEffect {
+    animation: rippleDrop .5s linear;
+  }
+}
 
 @keyframes rippleDrop {
   100% {

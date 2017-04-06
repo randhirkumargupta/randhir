@@ -528,7 +528,8 @@ function itg_poll_form_views_exposed_form_alter(&$form, &$form_state, $form_id) 
     $form['poll_status'] = array(
         '#title' => 'Poll Status',
         '#type' => 'select',
-        '#options' => array('all' => t('- Any -'),
+        //'#options' => array('all' => t('- Any -'),
+        '#options' => array('' => t('- Any -'),
             'active' => t('Active'),
             'inactive' => t('Inactive'),
         ),

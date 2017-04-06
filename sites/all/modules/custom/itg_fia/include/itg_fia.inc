@@ -45,6 +45,7 @@ function itg_fia_xml_node_feed($query) {
     $audio_url = $node->field_facebook_instant_audio_url[LANGUAGE_NONE][0]['value'];
     $img_position =  $node->field_animated_image_position[LANGUAGE_NONE][0]['value'];
     $img_path = file_create_url($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri']);
+    $fb_instant_image = file_create_url($node->field_story_big_image[LANGUAGE_NONE][0]['uri']);
     $map_pos = $node->field_facebook_map_position[LANGUAGE_NONE][0]['value'];
     if (isset($node->field_map_embed_code[LANGUAGE_NONE][0]['value']) && !empty($node->field_map_embed_code[LANGUAGE_NONE][0]['value'])) {
       $map_data = $node->field_map_embed_code[LANGUAGE_NONE][0]['value'];
@@ -227,7 +228,7 @@ function itg_fia_xml_node_feed($query) {
     $node_body_content = implode(" ", $body_vals);
     $node->link = url("node/$node->nid", ['absolute' => TRUE]);
     $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
-    $items .= itg_fia_xml_format_rss_item($kicker, $target_nids, $img_path, $guid, $node_body_content, $node->title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
+    $items .= itg_fia_xml_format_rss_item($kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $node->title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
   }
   
   global $base_url;
@@ -264,7 +265,7 @@ function itg_fia_xml_format_rss_channel($title, $link, $items) {
 /**
  * Creates the xml item.
  */
-function itg_fia_xml_format_rss_item($kicker, $target_nids, $img_path, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
+function itg_fia_xml_format_rss_item($kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
   $output = "    <item>\n";
   
   $output .= '      <title>' . $title . "</title>\n";
@@ -288,9 +289,9 @@ function itg_fia_xml_format_rss_item($kicker, $target_nids, $img_path, $guid, $n
   
   // <!-- The header image shown inside your article --> 
   $output .= "    <figure data-mode=aspect-fit>\n";
-//  $output .= "    <video loop>\n";
-//  $output .= "    <source src='" . $img_path . "' type='video/mov' />\n";
-//  $output .= "    </video>\n\n";
+  $output .= "    <video loop>\n";
+  $output .= "    <source src='" . $fb_instant_image . "' type='video/mov' />\n";
+  $output .= "    </video>\n\n";
   $output .= "    </figure>\n\n";
   $output .= "      <h1>" . $title . "</h1>\n";
   $output .= "      <h2>" . $kicker . "</h2>\n";

@@ -134,7 +134,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                     <div class="data-holder" id="itg-block-1">
                       <?php
                         if (isset($widget_data['itg-block-1']['widget'])) {
-                          print print $widget_data['itg-block-1']['widget']; 
+                          print $widget_data['itg-block-1']['widget']; 
                         } else{
                           print '<div class="widget-placeholder"><span>Yearender featured</span></div>';
                         } 
@@ -169,7 +169,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                     <div class="data-holder" id="itg-block-2">
                       <?php
                         if (isset($widget_data['itg-block-2']['widget'])) {
-                          print print $widget_data['itg-block-2']['widget']; 
+                          print $widget_data['itg-block-2']['widget']; 
                         } else{
                           print '<div class="widget-placeholder"><span>Year Ender</span></div>';
                         } 
@@ -221,7 +221,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                             <div class="data-holder" id="itg-block-3">
                               <?php
                                 if (isset($widget_data['itg-block-3']['widget'])) {
-                                  print print $widget_data['itg-block-3']['widget']; 
+                                  print $widget_data['itg-block-3']['widget']; 
                                 } else{
                                   print '<div class="widget-placeholder"><span>Top news</span></div>';
                                 } 
@@ -269,7 +269,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                             <div class="data-holder" id="itg-block-4">
                               <?php
                                 if (isset($widget_data['itg-block-2']['widget'])) {
-                                  print print $widget_data['itg-block-2']['widget']; 
+                                  print $widget_data['itg-block-2']['widget']; 
                                 } else{
                                   print '<div class="widget-placeholder"><span>Top videos</span></div>';
                                 } 

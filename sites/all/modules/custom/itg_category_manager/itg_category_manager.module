@@ -848,6 +848,7 @@ function itg_category_manager_taxonomy_term_insert($term) {
       'changed' => time(),
       'status' => isset($term->term_state) ? $term->term_state : 1,
     );
+    
     drupal_write_record('itg_category_manager', $data);
     $data = array();
     $data = array(
@@ -855,11 +856,31 @@ function itg_category_manager_taxonomy_term_insert($term) {
       'uid' => $user->uid,
       'changed' => time(),
     );
+//    if (!empty($term->path['alias'])) {
+//      $term->path['alias'] = rtrim($term->path['alias'], '/');
+//      $data['sef_url'] = $term->path['alias'];
+//      $pathdata = $data['sef_url'];
+//      
+//    }
+    
+    $get_parents = taxonomy_get_parents($term->tid);
+    $parents = reset($get_parents);
+    if (isset($parents) && !empty($parents)) {
+      $parent_path = drupal_get_path_alias('taxonomy/term/'. $parents->tid);
     if (!empty($term->path['alias'])) {
-      $term->path['alias'] = rtrim($term->path['alias'], '/');
-      $data['sef_url'] = $term->path['alias'];
+      $path_name = $term->path['alias'];
+    } else {
+      $path_name = $term->name;
     }
+    $pathdata = $parent_path . '/' . strtolower($path_name);
+    $newpath = itg_category_manager_custom_path($pathdata);
+    $term->path = array('alias' => $newpath, 'pathauto' => FALSE);
+    $term->path['alias'] = $newpath;
+    }
+    $data['sef_url'] = $term->path['alias'];    
+    
     drupal_write_record('itg_sef_url', $data);
+
   }
 }
 
@@ -892,6 +913,28 @@ function itg_category_manager_taxonomy_term_presave($term) {
     }
   }
 }
+
+/** 
+ * Implementing 'itg_category_manager_custom_path'.
+ * @param $pathdata path alias content
+ * Creating custom path alias 
+ */
+
+function itg_category_manager_custom_path($pathdata) {
+
+    if (preg_match("![^a-z0-9]!i", $pathdata)) {
+        $pathdata = preg_replace('/[^a-zA-Z0-9\/\\.\']/', '-', $pathdata);
+        while (preg_match('/--/', $pathdata)) {
+            $pathdata = preg_replace('/--/', '-', $pathdata);
+        }
+        $pathdata = rtrim($pathdata, "-");
+        $pathdata = strtolower($pathdata);
+        $pathdata = str_replace(array(':','*', '"', "'", '#'), "-", $pathdata);
+    }
+    return $pathdata;
+}
+
+
 
 /**
  * Implements hook_pathauto_alias_alter().

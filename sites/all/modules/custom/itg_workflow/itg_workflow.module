@@ -665,12 +665,15 @@ function itg_workflow_node_presave($node) {
                 $is_draft = 1;
 
                 if ($node_id) {
+
                   // use for upload local video to DM
                   itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details, $video_fid, $tags_value, $node_id, 'is_draft', $priv_status);
                 }
               }
             }
             else {
+              $file_video = itg_videogallery_get_video_info_by_fid($fids);
+              itg_videogallery_update_tags_video_private($tag_value, $file_video[0]->solr_video_id, $priv_status);
               $video_image = itg_videogallery_get_video_all($fids);
 
               if ($video_image) {
