@@ -103,7 +103,7 @@ else {
   </div>
   <nav class="navigation">
     <div class="container">
-      <ul class="second-level-menu menu">
+      <ul class="second-level-menu before-load menu">
         <?php
         $menu_manager = !empty($data['menu_manager']) ? $data['menu_manager'] : '';
         // Contion to check fucntion isset.

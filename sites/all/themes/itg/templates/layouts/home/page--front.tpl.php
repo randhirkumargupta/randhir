@@ -67,7 +67,7 @@ if ($theme != 'itgadmin') {
     $cls = 'col-md-9';
   endif;
   ?>    
-    <main id="main" class="container pos-rel">
+    <main id="main" class="container">
     <?php print render($page['vertical_menu']); ?>
       <section id="content" role="main">
       <?php print render($page['highlighted']); ?>
@@ -271,21 +271,21 @@ if ($theme != 'itgadmin') {
             </div>
           </div>
         </div>
-      <?php if ($user->uid == 0 && $arg[0] != "itg-layout-manager") {?>
+      <?php if ($user->uid == 0 && $arg[0] != "itg-layout-manager") { if (isset($_COOKIE['recomended_for_you'])) {?>
         <section class="recommended-for-you">
          <div class="container"><span class="widget-title">RECOMMENDED FOR YOU</span> <?php print $widget_data['non_personlization']?></div>
         </section>
-      <?php } ?>
+      <?php } }?>
       
- <main id="main" class="container pos-rel">
+<!-- <main id="main" class="container pos-rel">
      <div class="home-bottom-vertical">
-      <?php print render($page['vertical_menu']); ?></div>
+      <?php //print render($page['vertical_menu']); ?></div>
       <section id="content" role="main">
 
 
       </div>
     </section>
-  </main>
+  </main>-->
 
 <?php if (!empty($user->uid) && $arg[0] != "itg-layout-manager") { ?>
     <section class="recommended-for-you">
@@ -293,10 +293,11 @@ if ($theme != 'itgadmin') {
     </section>
 <?php } ?>
 
-  <main id="main" class="container pos-rel">
-    <div class="home-bottom-vertical">
-        <?php print render($page['vertical_menu']); ?></div>
-    <section id="content" role="main">
+  <!--<main id="main" class="container pos-rel">-->
+<!--    <div class="home-bottom-vertical">
+        <?php //print render($page['vertical_menu']); ?>
+    </div>-->
+<!--    <section id="content" role="main">-->
 
       <div class="itg-layout-container itg-front">
         <!--Common section strat here-->
@@ -899,10 +900,10 @@ if (function_exists('vukkul_view')) {
   <?php } ?>
 
     <?php if ($sidebar_first || $sidebar_second): ?>
-        <aside class="sidebars">
+        <!--<aside class="sidebars">-->
     <?php //print $sidebar_first;  ?>
     <?php //print $sidebar_second;  ?>
-        </aside>
+        <!--</aside>-->
   <?php endif; ?>
     </main>      
 

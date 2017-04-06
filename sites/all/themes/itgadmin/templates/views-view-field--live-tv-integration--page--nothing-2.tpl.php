@@ -28,10 +28,25 @@ $android = $row->_field_data['nid']['entity']->field_mega_review_description['un
 $window = $row->_field_data['nid']['entity']->field_recipe_ingredients['und'][0]['value'];
 $class = 'live-tv-button';
 $row_nid = $row->nid;
+if(empty($web)) {
+$attr = 'disabled';
+}
+if(empty($web_mobile)) {
+$m_attr = 'disabled';
+}
+if(empty($ios)) {
+$ios_attr = 'disabled';
+}
+if(empty($android)) {
+$android_attr = 'disabled';
+}
+if(empty($window)) {
+$window_attr = 'disabled';
+}
 ?>
 <?php 
 if($view->name == 'live_tv_integration') {
-$output  = "<Input type = 'Radio' Name ='Web' value= 'Web' class = '$class' rel='$row_nid'> Web <Input type = 'Radio' Name ='Web Mobile' value= 'Web Mobile' class = '$class' rel='$row_nid'> Web Mobile <Input type = 'Radio' Name ='iOS' value= 'iOS' class = '$class' rel='$row_nid'> iOS <Input type = 'Radio' Name ='Android' value= 'Android' class = '$class' rel='$row_nid'> Android <Input type = 'Radio' Name ='Window' value= 'Window' class = '$class' rel='$row_nid'> Window";
+$output  = "<Input type = 'Radio' Name ='Web' value= 'Web' class = '$class' rel='$row_nid' $attr> Web <Input type = 'Radio' Name ='Web Mobile' value= 'Web Mobile' class = '$class' rel='$row_nid' $m_attr> Web Mobile <Input type = 'Radio' Name ='iOS' value= 'iOS' class = '$class' rel='$row_nid' $ios_attr> iOS <Input type = 'Radio' Name ='Android' value= 'Android' class = '$class' rel='$row_nid' $android_attr> Android <Input type = 'Radio' Name ='Window' value= 'Window' class = '$class' rel='$row_nid' $window_attr> Window";
 } 
 print $output; ?>
 

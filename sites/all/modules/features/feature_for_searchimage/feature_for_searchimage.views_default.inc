@@ -46,15 +46,15 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_blog_image']['id'] = 'sm_thumb_thumbnail_field_blog_image';
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_blog_image']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_blog_image']['field'] = 'sm_thumb_thumbnail_field_blog_image';
-  /* Field: Apache Solr: sm_thumb_thumbnail_field_story_extra_large_image */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_extra_large_image']['id'] = 'sm_thumb_thumbnail_field_story_extra_large_image';
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_extra_large_image']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_extra_large_image']['field'] = 'sm_thumb_thumbnail_field_story_extra_large_image';
-  /* Field: Apache Solr: sm_thumb_thumbnail_field_story_large_image */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_large_image']['id'] = 'sm_thumb_thumbnail_field_story_large_image';
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_large_image']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_large_image']['field'] = 'sm_thumb_thumbnail_field_story_large_image';
-  /* Field: Apache Solr: sm_thumb_thumbnail_field_story_small_image */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_small_image']['id'] = 'sm_thumb_thumbnail_field_story_small_image';
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_small_image']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['sm_thumb_thumbnail_field_story_small_image']['field'] = 'sm_thumb_thumbnail_field_story_small_image';
@@ -90,7 +90,7 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'No Image Found';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Apache Solr: sm_original_image_url */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['sm_original_image_url']['id'] = 'sm_original_image_url';
   $handler->display->display_options['fields']['sm_original_image_url']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['sm_original_image_url']['field'] = 'sm_original_image_url';
@@ -135,7 +135,7 @@ function feature_for_searchimage_views_default_views() {
     25 => 0,
     26 => 0,
   );
-  /* Filter criterion: Apache Solr: sm_image_title */
+  /* Filter criterion: Broken/missing handler */
   $handler->display->display_options['filters']['sm_image_title']['id'] = 'sm_image_title';
   $handler->display->display_options['filters']['sm_image_title']['table'] = 'apachesolr__solr';
   $handler->display->display_options['filters']['sm_image_title']['field'] = 'sm_image_title';
@@ -173,7 +173,7 @@ function feature_for_searchimage_views_default_views() {
     25 => 0,
     26 => 0,
   );
-  /* Filter criterion: Apache Solr: sm_alttext */
+  /* Filter criterion: Broken/missing handler */
   $handler->display->display_options['filters']['sm_alttext']['id'] = 'sm_alttext';
   $handler->display->display_options['filters']['sm_alttext']['table'] = 'apachesolr__solr';
   $handler->display->display_options['filters']['sm_alttext']['field'] = 'sm_alttext';
@@ -209,7 +209,7 @@ function feature_for_searchimage_views_default_views() {
     22 => 0,
     24 => 0,
   );
-  /* Filter criterion: Apache Solr: tm_vid_14_names */
+  /* Filter criterion: Broken/missing handler */
   $handler->display->display_options['filters']['tm_vid_14_names']['id'] = 'tm_vid_14_names';
   $handler->display->display_options['filters']['tm_vid_14_names']['table'] = 'apachesolr__solr';
   $handler->display->display_options['filters']['tm_vid_14_names']['field'] = 'tm_vid_14_names';
@@ -396,6 +396,12 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['sm_field_property']['field'] = 'sm_field_property';
   $handler->display->display_options['fields']['sm_field_property']['label'] = '';
   $handler->display->display_options['fields']['sm_field_property']['element_label_colon'] = FALSE;
+  /* Field: Apache Solr: sm_field_video_used */
+  $handler->display->display_options['fields']['sm_field_video_used_1']['id'] = 'sm_field_video_used_1';
+  $handler->display->display_options['fields']['sm_field_video_used_1']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_field_video_used_1']['field'] = 'sm_field_video_used';
+  $handler->display->display_options['fields']['sm_field_video_used_1']['label'] = '';
+  $handler->display->display_options['fields']['sm_field_video_used_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Apache Solr: Search */
@@ -470,6 +476,42 @@ function feature_for_searchimage_views_default_views() {
     23 => 0,
     22 => 0,
     24 => 0,
+  );
+  /* Filter criterion: Apache Solr: sm_field_video_used */
+  $handler->display->display_options['filters']['sm_field_video_used']['id'] = 'sm_field_video_used';
+  $handler->display->display_options['filters']['sm_field_video_used']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['sm_field_video_used']['field'] = 'sm_field_video_used';
+  $handler->display->display_options['filters']['sm_field_video_used']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['sm_field_video_used']['expose']['operator_id'] = 'sm_field_video_used_op';
+  $handler->display->display_options['filters']['sm_field_video_used']['expose']['label'] = 'Publish/Unpublish';
+  $handler->display->display_options['filters']['sm_field_video_used']['expose']['operator'] = 'sm_field_video_used_op';
+  $handler->display->display_options['filters']['sm_field_video_used']['expose']['identifier'] = 'sm_field_video_used';
+  $handler->display->display_options['filters']['sm_field_video_used']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   $handler->display->display_options['path'] = 'search-unpublish-video';
 
@@ -658,6 +700,42 @@ function feature_for_searchimage_views_default_views() {
     23 => 0,
     22 => 0,
     24 => 0,
+  );
+  /* Filter criterion: Apache Solr: sm_field_video_used */
+  $handler->display->display_options['filters']['sm_field_video_used']['id'] = 'sm_field_video_used';
+  $handler->display->display_options['filters']['sm_field_video_used']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['sm_field_video_used']['field'] = 'sm_field_video_used';
+  $handler->display->display_options['filters']['sm_field_video_used']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['sm_field_video_used']['expose']['operator_id'] = 'sm_field_video_used_op';
+  $handler->display->display_options['filters']['sm_field_video_used']['expose']['label'] = 'Publish/Unpublish';
+  $handler->display->display_options['filters']['sm_field_video_used']['expose']['operator'] = 'sm_field_video_used_op';
+  $handler->display->display_options['filters']['sm_field_video_used']['expose']['identifier'] = 'sm_field_video_used';
+  $handler->display->display_options['filters']['sm_field_video_used']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   $handler->display->display_options['path'] = 'search-unpublish-video-radio';
 

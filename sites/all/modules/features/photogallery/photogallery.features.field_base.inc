@@ -235,7 +235,7 @@ function photogallery_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'yes' => 'yes',
+        'yes' => 'Set As Featured',
       ),
       'allowed_values_function' => '',
     ),

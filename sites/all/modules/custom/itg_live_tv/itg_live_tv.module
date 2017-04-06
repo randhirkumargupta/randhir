@@ -141,10 +141,12 @@ function itg_live_tv_after_build($form, &$form_state) {
 
   global $user, $base_url;
 
-  // hide device field on add form 
+  // hide device field on add form
+  if($user->uid != 1) {
   drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-live-tv-device").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
+  }
 
   // alter label name
   if (isset($form['#node']->nid)) {
