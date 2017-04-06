@@ -155,10 +155,11 @@ function itg_breaking_news_form_custom_callback($form, &$form_state) {
         $op = 'created';
     }
     else {
-        $op = 'updated';
+        $op = 'edited/updated';
     }
     $breaking_news_title = $form_state['node']->title;
-    drupal_set_message(t('Breaking News <b>' . $breaking_news_title . '</b> has been ' . $op . '.'));
+    $ctype = $form_state['node']->field_type[LANGUAGE_NONE][0]['value'];
+    drupal_set_message(t($ctype.' <b>' . $breaking_news_title . '</b> has been ' . $op . '.'));
     $_GET['destination'] = $_REQUEST['destination'];
 }
 
