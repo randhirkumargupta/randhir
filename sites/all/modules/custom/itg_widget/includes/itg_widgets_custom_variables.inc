@@ -144,7 +144,7 @@ function itg_widgets_custom_variables() {
   );
   $form['quiz_taxonomy_tid'] = array(
     '#type' => 'textfield',
-    '#title' => t('quiz_taxonomy_tid'),
+    '#title' => t('Quiz taxonomy vid'),
     '#default_value' => variable_get('quiz_taxonomy_tid'),
     '#size' => 20,
     '#maxlength' => 20,
