@@ -28,7 +28,6 @@ if($clicked_day == "")
    $clicked_day= $day;
 }
 ?>
-<div class = "tv_schedule">  <h1>TV Schedule</h1> </div>
 <!-- Listing shows and days option -->
 <div class="tv-schedule-parent">
     <ul class="no-bullet schedule-days">
