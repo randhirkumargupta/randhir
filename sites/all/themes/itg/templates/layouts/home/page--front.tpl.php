@@ -575,7 +575,7 @@ if ($theme != 'itgadmin') {
 
         <?php
         if ($theme != 'itgadmin') {
-          print '<div id="second-section-card">';
+          //print '<div id="second-section-card">';
         }
         ?>
         <!--Common section strat here-->
@@ -661,20 +661,13 @@ if ($theme != 'itgadmin') {
               </div>
             <?php
             }
-            else {
-              if (!empty($widget_data['itg-block-20']['widget']) || !empty($widget_data['itg-block-21']['widget']) || !empty($widget_data['itg-block-22']['widget'])) {
-                ?>
-                <div class="load-more-wrapper-front">
-                  <a href="javascript:void(0)" class="add-more-block-front">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
-                </div>
-            <?php }
-          } ?>
+             ?>
           </div>
         <?php } ?>
         <!--End of Common section-->  
         <?php
         if ($theme != 'itgadmin') {
-          print '</div>';
+          //print '</div>';
         }
         ?>
         <!--Common section add more strat here-->
@@ -836,7 +829,18 @@ if ($theme != 'itgadmin') {
               </div>               
             </div>
           </div>
-        <?php } ?>
+        <?php }
+       
+       
+        if($theme != 'itgadmin' ){
+          print '<div id="second-section-card"></div>';
+              if (!empty($widget_data['itg-block-20']['widget']) || !empty($widget_data['itg-block-21']['widget']) || !empty($widget_data['itg-block-22']['widget'])) {
+                ?>
+                <div class="load-more-wrapper-front">
+                  <a href="javascript:void(0)" class="add-more-block-front">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
+                </div>
+            <?php }
+          } ?>
         <!--End of Common section-->
 
         <!--Load More Loader
