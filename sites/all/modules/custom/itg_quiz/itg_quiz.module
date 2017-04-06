@@ -197,6 +197,7 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
  */
  function itg_quiz_form_custom_submit_callback($form, &$form_state) {
   
+  $status = $form_state['node']->status;
   // Unset drupal redirection and add custom redirection URL.
   if (isset($_GET['destination'])) {
     unset($_GET['destination']);
@@ -210,9 +211,20 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
   
   $title = $form_state['node']->title;
   if (arg(2) == 'edit') {
-    drupal_set_message(t('Quiz <strong>'.$title.'</strong> has been updated.'));
-  } else {
-    drupal_set_message(t('Quiz <strong>'.$title.'</strong> has been submitted for further review and approval.'));
+    if ($status == 1) {
+      drupal_set_message(t('Quiz <strong>' . $title . '</strong> has been Published.'));
+    }
+    else {
+      drupal_set_message(t('Quiz <strong>' . $title . '</strong> has been updated.'));
+    }
+  }
+  else {
+    if ($status == 1) {
+      drupal_set_message(t('Quiz <strong>' . $title . '</strong> has been Published.'));
+    }
+    else {
+      drupal_set_message(t('Quiz <strong>' . $title . '</strong> has been submitted for further review and approval.'));
+    }
   }
 }
 
