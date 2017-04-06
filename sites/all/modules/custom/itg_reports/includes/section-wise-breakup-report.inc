@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Function which insert section wise report data in mongo
+ * @global array $user
+ * @param int $tid
+ * @param int $uid
+ * @param array $node
+ */
 function itg_reports_save_section_wise_report_data($tid , $uid , $node) {
   global $user;
   if (function_exists('mongodb')) {
@@ -18,6 +25,9 @@ function itg_reports_save_section_wise_report_data($tid , $uid , $node) {
   }
 }
 
+/**
+ * Implements hook_form.
+ */
 function itg_section_wise_breakup_form($form , &$form_state) {
   $form = array();
   $form['content_type'] = array(
@@ -95,6 +105,9 @@ function itg_section_wise_breakup_form($form , &$form_state) {
   return $form;
 }
 
+/**
+ * Implements hook_form_submit().
+ */
 function itg_section_wise_breakup_form_submit($form , $form_state) {
   $date_from = $form_state['values']['date_from'];
   $date_to = $form_state['values']['date_to'];
@@ -116,6 +129,10 @@ function itg_section_wise_breakup_form_submit($form , $form_state) {
   drupal_goto($path , $options);
 }
 
+/**
+ * Function which returns table of report.
+ * @return string
+ */
 function itg_section_wise_breakup_table() {
   module_load_include('php' , 'itg_reports' , 'includes/pagination');
   module_load_include('inc' , 'itg_reports' , 'includes/itg_reports.helper');
@@ -193,7 +210,7 @@ function itg_section_wise_breakup_table() {
         $rows[] = array(
           array('data' => $count + 1) ,
           array('data' => $row['section']) ,
-          array('data' => get_term_name_from_tid($row['section'])->name) ,
+          array('data' => get_term_name_from_tid_for_report($row['section'])->name) ,
           array('data' => '<' . $row['viewed'] . '> ' . $row['count']) ,
           array('data' => l('View Section' , 'taxonomy/term/' . $row['section'] , array("attributes" => array("target" => array("_blank"))))) ,
         );
@@ -210,6 +227,28 @@ function itg_section_wise_breakup_table() {
   }
 }
 
+/**
+ * 
+ * @param type $tid
+ * @param type $vid
+ * @return type
+ */
+function get_term_name_from_tid_for_report($tid) {
+  $data = array();
+  $query = db_select('taxonomy_term_data' ,'ttd')
+      ->fields('ttd' ,array('name'))
+      ->condition('ttd.tid' ,$tid);
+  return $query->execute()->fetchObject();
+}
+
+/**
+ * Main function to return report.
+ * 
+ * @param int $start_date
+ * @param int $end_date
+ * @param string $type
+ * @return mixed
+ */
 function itg_section_wise_breakup_mongo_data($start_date , $end_date , $type) {
   $final_data_array_count = array();
   if (function_exists('mongodb')) {
