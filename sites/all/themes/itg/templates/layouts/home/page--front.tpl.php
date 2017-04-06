@@ -271,11 +271,11 @@ if ($theme != 'itgadmin') {
             </div>
           </div>
         </div>
-      <?php if ($user->uid == 0 && $arg[0] != "itg-layout-manager") {?>
+      <?php if ($user->uid == 0 && $arg[0] != "itg-layout-manager") { if (isset($_COOKIE['recomended_for_you'])) {?>
         <section class="recommended-for-you">
          <div class="container"><span class="widget-title">RECOMMENDED FOR YOU</span> <?php print $widget_data['non_personlization']?></div>
         </section>
-      <?php } ?>
+      <?php } }?>
       
 <!-- <main id="main" class="container pos-rel">
      <div class="home-bottom-vertical">
