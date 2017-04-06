@@ -3129,7 +3129,14 @@
     border: 1px solid #ddd;   
   }     
   /*css for tech page end*/
-
+  
+  .node-type-videogallery{
+    header{margin-bottom: 0;}
+    #block-itg-videogallery-videogallery-menu-video-block{margin-top: 22px;}
+  }
+  .second-level-menu.before-load{
+    height: 37px; overflow: hidden;
+  }
 }
 /*End CSS Desktop version*/
 
