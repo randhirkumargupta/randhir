@@ -118,7 +118,6 @@ function itg_preprocess_page(&$variables) {
   global $base_url;
   $base_root;
   $arg = arg();
-
   // add condition to hide header and footer for signup, forgot-password page
   if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
@@ -154,6 +153,9 @@ function itg_preprocess_page(&$variables) {
   // Call Event Parent TPL
   if (!empty($variables['node']->type) && $variables['node']->type == 'event_backend' || $arg[0] == 'event') {
     $variables['theme_hook_suggestions'][] = 'page__event_domain';
+  }
+  if($arg[0] == 'blog-listing') {
+    drupal_add_css('#page-title  {display: none !important}' ,'inline');
   }
 }
 

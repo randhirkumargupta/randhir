@@ -71,8 +71,8 @@ class ItgStoryListMigration extends XMLMigration {
       'featuredname' => t('featuredname'), //id
       //'relatedcontents' => t('relatedcontents'), //multi
       //'scheduledatetime' => t('scheduledatetime'),
-      'storyexpires' => t('storyexpires'),
-      'storyexpirydate' => t('storyexpirydate'),
+      //'storyexpires' => t('storyexpires'),
+      //'storyexpirydate' => t('storyexpirydate'),
       'selectlisticletemplates' => t('selectlisticletemplates'),
       //'listicle_content' => t('listicle_content'), //multi
       //'quotes' => t('quotes'), //multi
@@ -87,7 +87,7 @@ class ItgStoryListMigration extends XMLMigration {
       'archive' => t('archive'),
       //'common_by_line_name' => t('common_by_line_name'),
       //'common_by_line_twitter' => t('common_by_line_twitter'),
-      'associatetvdate' => t('associatetvdate'),
+      //'associatetvdate' => t('associatetvdate'),
       //'field_story_syndications_photo' => t('field_story_syndications_photo'),
       'kicker_image_caption' => t('kicker_image_caption'),
       'short_introtext' => t('short_introtext'),
@@ -182,8 +182,8 @@ class ItgStoryListMigration extends XMLMigration {
     $this->addFieldMapping('changed', 'modifieddate')->xpath('modifieddate');
     $this->addFieldMapping('field_story_schedule_date_time', 'publisheddate')->xpath('publisheddate');
     $this->addFieldMapping('field_itg_content_publish_date', 'publisheddate')->xpath('publisheddate');
-    $this->addFieldMapping('field_story_expires', 'storyexpires')->xpath('storyexpires');
-    $this->addFieldMapping('field_story_expiry_date', 'storyexpirydate')->xpath('storyexpirydate');
+    //$this->addFieldMapping('field_story_expires', 'storyexpires')->xpath('storyexpires');
+    //$this->addFieldMapping('field_story_expiry_date', 'storyexpirydate')->xpath('storyexpirydate');
 
     //code for user
     //<createdby>2345</createdby><modifiedby>2345</modifiedby>//save in custom table
@@ -192,8 +192,8 @@ class ItgStoryListMigration extends XMLMigration {
     $this->addFieldMapping('field_story_magazine_story_issue', 'story_issue')->xpath('story_issue');
     $this->addFieldMapping('field_story_select_magazine', 'select_magazine')->xpath('select_magazine');
     $this->addFieldMapping('field_story_select_supplement', 'select_supplement')->xpath('select_supplement');
-    /*$this->addFieldMapping('field_story_issue_date', 'issue_date')->xpath('issue_date');*/
-    $this->addFieldMapping('field_poll_start_date', 'associatetvdate')->xpath('associatetvdate');
+    $this->addFieldMapping('field_story_issue_date', 'issue_date')->xpath('issue_date'); //for issue date migration*/
+    //$this->addFieldMapping('field_poll_start_date', 'associatetvdate')->xpath('associatetvdate');
     
     $this->addFieldMapping('title', 'longheadline')->xpath('longheadline');
     $this->addFieldMapping('field_story_short_headline', 'shortheadline')->xpath('shortheadline');
@@ -552,15 +552,30 @@ class ItgStoryListMigration extends XMLMigration {
       'timestamp',
       'field_story_facebook_video',
       'field_story_twitter_video',
+      'field_story_expiry_date',
+      'field_story_expires',
+      'field_story_medium_image:destination_dir',
+      'field_poll_start_date',
+      'field_story_category',
+      'field_story_category:source_type',
+      'field_story_category:create_term',
+      'field_story_category:ignore_case',
+      'field_itg_content_publish_date:timezone',
+      'field_itg_content_publish_date:rrule',
+      'field_itg_content_publish_date:to',
+      'field_story_big_image:file_class',
+      'field_story_big_image:destination_dir',
+      'field_story_big_image:destination_file',
+      'field_story_big_image:source_dir',
+      'field_story_big_image:urlencode',
+      'field_emoji_2',
+      'field_emoji_2:format',
+      'field_cm_related_content_detail',
+      'field_story_extra_data',
       ));
   }
 
   public function prepareRow($row) {
-    //tech rating
-    if(!empty($row->xml->pros_cons->tech_pros_cons_main->rating)) {
-      $rating = explode('/', $row->xml->pros_cons->tech_pros_cons_main->rating);
-      $row->xml->pros_cons->tech_pros_cons_main->rating = $rating[0];
-    }
     if(!empty($row->xml->pros_cons->tech_pros_cons_main->pron_cons_img)) {
       $row->xml->pros_cons->tech_pros_cons_main->pron_cons_img = itg_dbmigrate_imagepath_url((string)$row->xml->pros_cons->tech_pros_cons_main->pron_cons_img);
     }
@@ -580,16 +595,6 @@ class ItgStoryListMigration extends XMLMigration {
       }
     }
     
-    if((string) $row->xml->syndications_photo == '1') {
-      $row->xml->syndications_photo = 'Yes';
-    }
-    
-    //syndication
-    if ((string) $row->xml->syndication == '1') {
-      $row->xml->syndication = 'Yes';
-    }else{
-      $row->xml->syndication = '';
-    }
     // Image prepare
     if(!empty($row->xml->facebook_instant_article_integration->animated_image)) {
       $row->xml->facebook_instant_article_integration->animated_image = itg_dbmigrate_imagepath_url((string)$row->xml->facebook_instant_article_integration->animated_image);
@@ -724,13 +729,13 @@ class ItgStoryListMigration extends XMLMigration {
     //social media integration checkboxes
     if (isset($row->xml->socialmediaintegration) && !empty($row->xml->socialmediaintegration)) {
       foreach ($row->xml->socialmediaintegration as $key => $social_option) {
-        if ((string) $social_option->facebook == true) {
+        if ((string) $social_option->facebook == 1) {
           $final_social[]['value'] = 'facebook';
         }
         if ((string) $social_option->facebook_instant_article == 1) {
           $final_social[]['value'] = 'facebook_instant_article';
         }
-        if ((string) $social_option->twitter == true) {
+        if ((string) $social_option->twitter == 1) {
           $final_social[]['value'] = 'twitter';
         }
       }
@@ -770,29 +775,7 @@ class ItgStoryListMigration extends XMLMigration {
     if ((string) $row->xml->noindex_nofollow == 1) {
       $final_option[]['value'] = 'noindex_nofollow';
     }
-    
     $row->final_config_option = $final_option;
-    
-    if (isset($row->xml->storyexpirydate) && !empty($row->xml->storyexpirydate)) {
-      $expire_time = (string) $row->xml->storyexpirydate;
-      $expire_date_time = date('m/d/Y H:i', $expire_time);
-      $row->xml->storyexpirydate = $expire_date_time;
-    }
-     /* if (isset($row->xml->issue_date) && !empty($row->xml->issue_date)) {
-      $issue_time = (string) $row->xml->issue_date;
-      $issue_date_time = date('m/d/Y H:i', $issue_time);
-      $row->xml->issue_date = $issue_date_time;
-    }*/
-    if (isset($row->xml->scheduledatetime) && !empty($row->xml->scheduledatetime)) {
-      $schedule_time = (string) $row->xml->scheduledatetime;
-      $schedule_date_time = date('m/d/Y H:i', $schedule_time);
-      $row->xml->scheduledatetime = $schedule_date_time;
-    }
-    if (isset($row->xml->associatetvdate) && !empty($row->xml->associatetvdate)) {
-      $associate_time = (string) $row->xml->associatetvdate;
-      $associate_date_time = date('m/d/Y H:i', $associate_time);
-      $row->xml->associatetvdate = $associate_date_time;
-    }
     return TRUE;
   }
 
@@ -920,7 +903,7 @@ class ItgStoryListMigration extends XMLMigration {
    //}
    
    // Related content save in db
-     if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
+     /*if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
      //$arr = array();
       foreach ($row->xml->relatedcontents->relatedcontent as $value) {
         $chk_variable = (string) $value;
@@ -936,7 +919,7 @@ class ItgStoryListMigration extends XMLMigration {
                             ->execute();
         }
       }
-    }
+    }*/
      if (isset($row->xml->bylines->byline) && !empty($row->xml->bylines->byline)) {
        
       foreach ($row->xml->bylines->byline as $final_byline) {
@@ -975,3 +958,33 @@ class ItgStoryListMigration extends XMLMigration {
       ))->execute();
   }
 }
+
+/*
+ below tags will remain blank in the story xml file provide by santosh in mail
+
+ 
+
+<featuredname></featuredname> 
+
+<scheduledatetime></scheduledatetime>
+
+<storyexpires></storyexpires>
+
+<storyexpirydate></storyexpirydate>
+
+<selectlisticletemplates></selectlisticletemplates>
+
+<expertname></expertname>
+
+<expertimage></expertimage>
+
+<expertdescription></expertdescription>
+
+<archive></archive>
+
+<associatetvdate></associatetvdate>
+
+<facebookvideo/>
+
+<twittervideo/>
+ */

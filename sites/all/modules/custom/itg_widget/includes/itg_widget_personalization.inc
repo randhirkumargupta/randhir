@@ -185,7 +185,9 @@ function get_personlization_front_block_data($flag = TRUE) {
       if(function_exists('itg_user_log_get_sections')) {
       $sections = itg_user_log_get_sections($_COOKIE['recomended_for_you']);
       }
+      if(function_exists('itg_get_recommended_data')) {
       $persionalization = itg_get_recommended_data($sections);
+      }
       //p($persionalization);
        $query_flag = FALSE;
     }

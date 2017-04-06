@@ -88,7 +88,7 @@ $config_name = trim($global_comment_last_record[0]->config_name);
   <?php print render($title_prefix); ?>
 
   <!-- TITLE -->
-  <h2<?php print $title_attributes; ?>><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
+  <h2<?php print $title_attributes; ?>><?php print $title; ?></h2>
 
   <!-- Image handel-->
   <?php if (!empty($node->field_story_extra_large_image['und'][0]['uri'])) : ?>
