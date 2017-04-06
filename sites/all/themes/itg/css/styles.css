@@ -13431,6 +13431,10 @@ span.close_btt {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+.sidebar-section-photo .we_may_suggest .widget-title {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .modal-dialog {
     width: 960px;
