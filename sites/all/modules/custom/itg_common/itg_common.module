@@ -111,7 +111,18 @@ function itg_common_permission() {
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
   $arg = arg();
-  
+  // get category machine name
+  if ($form_id == 'taxonomy_form_term' && $form['#vocabulary']->machine_name != 'category_management') {
+    if (!in_array('administrator', $user->roles)) {
+      $form['actions']['delete']['#access'] = FALSE;
+      $form['description']['#access'] = FALSE;
+    }
+
+    drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery("#edit-relations .fieldset-title").hide();
+                        });', array('type' => 'inline', 'scope' => 'footer'));
+  }
+
   $settings = array();
   
   $settings['formid'] = $form_id;
@@ -597,6 +608,11 @@ function itg_common_views_pre_render(&$view) {
   if ($view->name == "election_xml_list") {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content .= '<span class="create_cooking_tips">' . l(t('Create Election JSON'), 'node/add/election-graph-xml', array('query' => array('destination' => 'election-xml-list'))) . '&nbsp;</span>';
+    $view->attachment_before = $header_content;
+  }
+  if ($view->name == "common_master") {
+    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $header_content .= '<span class="create_cooking_tips">' . l(t('Create'), 'admin/structure/taxonomy/'.arg(1).'/add') . '&nbsp;</span>';
     $view->attachment_before = $header_content;
   }
 }

@@ -197,11 +197,5 @@ function itg_widgets_custom_variables() {
     '#title' => t('Business today json url'),
     '#default_value' => variable_get('business_today_json_url'),
   );
-  
-  $form['all_category_form_machine_name'] = array(
-    '#type' => 'textfield',
-    '#title' => t('All category form machine name'),
-    '#default_value' => variable_get('all_category_form_machine_name'),
-  );
   return system_settings_form($form);
 }
