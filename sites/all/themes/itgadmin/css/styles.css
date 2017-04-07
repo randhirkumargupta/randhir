@@ -12001,6 +12001,10 @@ span.file a {
   vertical-align: top;
 }
 
-.page-admin-structure-taxonomy-live-tv [id*="edit-relations"] .fieldset-title {
+.page-admin-structure-taxonomy-live-tv [id*="edit-relations"] .fieldset-title, .page-admin-structure-taxonomy-itg-occupation [id*="edit-relations"] .fieldset-title {
   display: none;
+}
+
+body.taxonomy-form-term-tags {
+  margin-top: 0;
 }
