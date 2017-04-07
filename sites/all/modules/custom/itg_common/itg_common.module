@@ -79,7 +79,29 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  $items['third-party-widget-config'] = array(
+    'title' => 'Third party configuration form',
+    'description' => 'Third party configuration form',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('third_party_widget_form_setting'),
+    'access arguments' => array('access third party config form'),
+    'file' => 'includes/itg_thirdparty_widget_form.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
   return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function itg_common_permission() {
+  return array(
+    'access third party config form' => array(
+      'title' => t('Access third party config form'),
+      'description' => t('Access third party config form'),
+    ),
+  );
 }
 
 /**
@@ -89,7 +111,18 @@ function itg_common_menu() {
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
   $arg = arg();
-  
+  // get category machine name
+  if ($form_id == 'taxonomy_form_term' && $form['#vocabulary']->machine_name != 'category_management') {
+    if (!in_array('administrator', $user->roles)) {
+      $form['actions']['delete']['#access'] = FALSE;
+      $form['description']['#access'] = FALSE;
+    }
+
+    drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery("#edit-relations .fieldset-title").hide();
+                        });', array('type' => 'inline', 'scope' => 'footer'));
+  }
+
   $settings = array();
   
   $settings['formid'] = $form_id;
@@ -577,6 +610,11 @@ function itg_common_views_pre_render(&$view) {
     $header_content .= '<span class="create_cooking_tips">' . l(t('Create Election JSON'), 'node/add/election-graph-xml', array('query' => array('destination' => 'election-xml-list'))) . '&nbsp;</span>';
     $view->attachment_before = $header_content;
   }
+  if ($view->name == "common_master") {
+    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $header_content .= '<span class="create_cooking_tips">' . l(t('Create'), 'admin/structure/taxonomy/'.arg(1).'/add') . '&nbsp;</span>';
+    $view->attachment_before = $header_content;
+  }
 }
 
 /**
@@ -857,7 +895,7 @@ function itg_funalytics_popup() {
  * @param type $vid
  * @return type
  */
-function get_term_name_from_tid($tid, $vid) {
+function get_term_name_from_tid($tid, $vid = CATEGORY_MANAGMENT) {
   $data = array();
   $query = db_select('taxonomy_term_data' ,'ttd')
       ->fields('ttd' ,array('name'))

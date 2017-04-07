@@ -741,6 +741,14 @@ function itg_videogallery_edit_dailymotion($vid_res_result, $playlist_name, $nod
 }
 
 /**
+ * This function use for chane video privat or public
+ */
+function itg_videogallery_vilde_private_public($videid, $status) {
+  $api = itg_videogallery_dailymotion_api();
+  $api->post('/video/' . $videid . '?tags=' . $tags_value . '&private=' . $status);
+}
+
+/**
  * Implement dailymotion api call
  * @param string $real_path
  * @param int $key
@@ -769,18 +777,23 @@ function itg_videogallery_dailymotion($real_path, $uri, $fid, $tags_value, $node
     else {
       $url = $real_path;
     }
-
+    $file_name = $ftp_file[1];
+    if ($ftp_file[1] == "") {
+      $file_name = file_load($fid);
+      $file_name = $file_name->filename;
+    }
 // $url = $real_path;
     $result = $api->post(
             '/me/videos', array(
         'url' => $url,
-        'title' => $ftp_file[1],
+        'title' => $file_name,
         'tags' => $tags_value,
         'channel' => 'tv',
         'private' => $is_private,
         'published' => TRUE,
             )
     );
+
     $resp = $api->post('/playlist/x4u3b1/videos/' . $result['id']);
     $dur = $api->get(
             '/video/' . $result['id'], array('fields' => array('duration'))
@@ -792,6 +805,7 @@ function itg_videogallery_dailymotion($real_path, $uri, $fid, $tags_value, $node
     $result['fid'] = $fid;
     $result['tags'] = $tags_value;
   } catch (Exception $e) {
+
     if ($e->getMessage() == "This `client_id' doesn't exist.") {
       if (isset($_GET['destination'])) {
         unset($_GET['destination']);
@@ -1080,7 +1094,7 @@ function itg_videogallery_menu() {
       'access arguments' => array('access content'),
       'type' => MENU_CALLBACK,
   );
-   $items['delete-itg-solr'] = array(
+  $items['delete-itg-solr'] = array(
       'page callback' => 'itg_videogallery_delete_itg_solr',
       'access arguments' => array('access content'),
       'type' => MENU_CALLBACK,
@@ -1134,18 +1148,18 @@ function itg_videogallery_menu() {
  * Temp function to delete itg solr
  */
 function itg_videogallery_delete_itg_solr() {
-    $result = db_select('node', 'n')
-            ->fields('n', array('nid'))
-            ->condition('type', 'itg_solr_video', '=')
-            ->execute();
+  $result = db_select('node', 'n')
+          ->fields('n', array('nid'))
+          ->condition('type', 'itg_solr_video', '=')
+          ->execute();
 
-    $deleted_count = 0;
-    foreach ($result as $record) {
-        node_delete($record->nid);
-        $deleted_count++;
-    }
-    pr($deleted_count);
-    exit();
+  $deleted_count = 0;
+  foreach ($result as $record) {
+    node_delete($record->nid);
+    $deleted_count++;
+  }
+  pr($deleted_count);
+  exit();
 }
 
 /**
@@ -1180,15 +1194,19 @@ function itg_videogallery_check_video_url($vid) {
 
   $query = db_select('itg_solr_video_info', 'drd');
   $query->fields('drd', array('is_delete'));
-  $query->condition('content_type', 'video_gallery', '=');
   $query->condition('solr_video_id', $vid, '=');
-  $query->isNotNull('drd.nid');
   $video_data = $query->execute()->fetchAll();
   if (empty($video_data)) {
     return true;
   }
-  else if ($video_data[0]->is_delete == 1) {
-    return true;
+  else if (!empty ($video_data)) {
+    foreach ($video_data  as $dvideo) {
+      if($dvideo->is_delete == 1) {
+         return true;
+         break;
+      }
+    }
+    
   }
   else {
     return false;
@@ -1326,32 +1344,14 @@ function itg_videogallery_remove_video_with_child() {
 
       if ($data_delete->property == VIDEO_PROPERTY) {
 
-        $is_video_exist = itg_videogallery_get_video_info_video_id($data_delete->solr_video_id);
+        // $is_video_exist = itg_videogallery_get_video_info_video_id($data_delete->solr_video_id);
         $query = db_update('dailymotion_response_details');
         $query->fields(array('dailymotion_published' => 0));
         $query->condition('video_id', $data_delete->solr_video_id, '=');
         $query->execute();
-// insert delete video in content type
-        if ($is_video_exist) {
-
-          $node = new stdClass();
-          $node->title = $data_delete->solr_video_id;
-          $node->type = "itg_delete_solr_video";
-          node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
-          $node->language = LANGUAGE_NONE;
-          $node->uid = $user->uid;
-          $node->field_video_is_delete[LANGUAGE_NONE][0]['value'] = 1;
-          $node->status = 1; //(1 or 0): Published or not
-          $node->promote = 0; //(1 or 0): Promoted to front page
-          $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
-          node_save($node);
-          $node_data = itg_videogallery_get_video_solrcontent($data_delete->solr_video_id);
-          $node = node_load($node_data[0]->nid);
-          $node->field_video_used [LANGUAGE_NONE][0]['value'] = 0;
-          node_save($node);
-        }
+        itg_videogallery_vilde_private_public($data_delete->solr_video_id, false);
       }
-     
+
 // delete from itg_solr_video_info table
       $deleted = db_delete('itg_solr_video_info')
               ->condition('solr_video_id', $data_delete->solr_video_id, '=')
@@ -1447,6 +1447,20 @@ function delete_daily_motion_video_callback() {
     if (!empty($video_exist_innode[0]->nid)) {
       node_delete($video_exist_innode[0]->nid);
     }
+    // insert delete video in content type
+    global $user;
+    $node = new stdClass();
+    $node->title = $video_id;
+    $node->type = "itg_delete_solr_video";
+    node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
+    $node->language = LANGUAGE_NONE;
+    $node->uid = $user->uid;
+    $node->field_video_is_delete[LANGUAGE_NONE][0]['value'] = 1;
+    $node->status = 1; //(1 or 0): Published or not
+    $node->promote = 0; //(1 or 0): Promoted to front page
+    $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
+    node_save($node);
+
     drupal_set_message('Video has been deleted successfully');
     drupal_goto('daily-motion-video-dashboard');
   }
@@ -1655,7 +1669,7 @@ function itg_videogallery_get_file_details() {
   $responce = "";
   foreach ($getids as $key => $file_value) {
     $video_id = explode('#', $file_value);
-    $responce.=' <iframe class="video_data" id="video_frame_' . $video_id . '" frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_id[0] . '?autoplay=0&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
+    $responce.=' <iframe class="video_data" id="video_frame_' . $video_id[0] . '" frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_id[0] . '?autoplay=0&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
   }
   exit($responce);
 }
@@ -3150,6 +3164,7 @@ function itg_videogallery_dailymotion_add_video($real_path, $name, $realfilename
         'published' => TRUE,
             )
     );
+
     $dur = $api->get(
             '/video/' . $result['id'], array('fields' => array('duration', 'encoding_progress', 'publishing_progress'))
     );

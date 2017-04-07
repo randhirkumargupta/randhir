@@ -1,4 +1,4 @@
-<ul class="second-level-menu menu">
+<ul class="second-level-menu before-load menu">
   <?php foreach ($data as $key => $menu_data) : ?>
     <?php
     $link_url = "";
