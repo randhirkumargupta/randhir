@@ -11408,6 +11408,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       }
     }
   }
-  .page-admin-structure-taxonomy-live-tv{
+  .page-admin-structure-taxonomy-live-tv, .page-admin-structure-taxonomy-itg-occupation{
     [id*="edit-relations"] .fieldset-title{display: none;}
   }
+  body.taxonomy-form-term-tags{margin-top: 0;}
