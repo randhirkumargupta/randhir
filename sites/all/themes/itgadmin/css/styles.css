@@ -10882,6 +10882,10 @@ span.file a {
   font-size: 12px;
   position: relative;
 }
+.byline-list .byline-ul li .fa-arrows {
+  float: left;
+  margin: 2px 2px 0 0;
+}
 .byline-list .byline-ul li .byline_publish {
   float: left;
   margin: 2px 5px;
