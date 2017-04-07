@@ -29,7 +29,7 @@ function itg_tv_schedule_menu() {
   );
 
   $items['tv-show'] = array(
-    'title' => 'Tv Show Schedule',
+    'title' => 'Tv Schedule',
     'page callback' => 'tv_schedule_listing',
     'page arguments' => array('itg_tv_schedule_search_form'),
     'access callback' => TRUE,

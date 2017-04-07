@@ -66,7 +66,7 @@ function itg_story_byline_save() {
       {
         $byline_type = '<span>' . $byline_type . '</span>';
       }
-      $byline_res = '<li id="' . $qry . '"><input type="checkbox" name="bylinepublish" data-tag="' . $qry . '" value="' . $byline_nid . '" class="byline_publish"><span>' . t('Publish') . '</span><span>' . $byline_name . '</span>' . $byline_type . '<span>' . $remove . '</span></li>';
+      $byline_res = '<li id="' . $qry . '"><i class="fa fa-arrows" aria-hidden="true"></i><input type="checkbox" name="bylinepublish" data-tag="' . $qry . '" value="' . $byline_nid . '" class="byline_publish"><span>' . t('Publish') . '</span><span>' . $byline_name . '</span>' . $byline_type . '<span>' . $remove . '</span></li>';
       $response = array('msg' => 'success', 'lnk' => $byline_res);
       print json_encode($response);
     }
@@ -136,11 +136,11 @@ function itg_byline_info($reporter_id) {
       $remove = '<a href="javascript:void(0)" data-val="' . $record['byline_id'] . '" data-tag="' . $record['id'] . '" class="remove-byline">' . t('Remove') . '</a>';
       if ($record['publish_status'] == 1)
       {
-        $val .= '<li id="' . $record['id'] . '"><input type="checkbox" name="bylinepublish" data-tag="' . $record['id'] . '" value="' . $record['byline_id'] . '" class="byline_publish" checked><span>' . t('Publish') . '</span><span>' . $byline_name . '</span>' . $byline_type . '<span>' . $remove . '</span></li>';
+        $val .= '<li id="' . $record['id'] . '"><i class="fa fa-arrows" aria-hidden="true"></i><input type="checkbox" name="bylinepublish" data-tag="' . $record['id'] . '" value="' . $record['byline_id'] . '" class="byline_publish" checked><span>' . t('Publish') . '</span><span>' . $byline_name . '</span>' . $byline_type . '<span>' . $remove . '</span></li>';
       }
       else
       {
-        $val .= '<li id="' . $record['id'] . '"><input type="checkbox" name="bylinepublish" data-tag="' . $record['id'] . '" value="' . $record['byline_id'] . '" class="byline_publish"><span>' . t('Publish') . '</span><span>' . $byline_name . '</span>' . $byline_type . '<span>' . $remove . '</span></li>';
+        $val .= '<li id="' . $record['id'] . '"><i class="fa fa-arrows" aria-hidden="true"></i><input type="checkbox" name="bylinepublish" data-tag="' . $record['id'] . '" value="' . $record['byline_id'] . '" class="byline_publish"><span>' . t('Publish') . '</span><span>' . $byline_name . '</span>' . $byline_type . '<span>' . $remove . '</span></li>';
       }
     }
     return $val;
