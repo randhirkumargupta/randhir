@@ -34,7 +34,7 @@ function create_index_xml(){
  */
 function create_story_xml_clean() {
  //$file_name = 'indiatoday-story_2016-06-01.xml';
-  $file_name = 'indiatoday-story_2016-06-01_one.xml';
+  //$file_name = 'indiatoday-story_2016-06-01_one.xml';
   //$file_name = 'indiatoday-story_2016-06-21.xml';
   //$file_name = 'indiatoday-story_2016-07-01.xml';
   //$file_name = 'indiatoday-story_2016-08-01.xml';
@@ -42,6 +42,9 @@ function create_story_xml_clean() {
   //$file_name = 'indiatoday-story_2016-10-01.xml';
   //$file_name = 'indiatoday-story_2016-11-01.xml';
  // $file_name = 'indiatoday-story_2016-12-01.xml';
+  
+  //$file_name = 'indiatoday-story_2007-01-01.xml';
+  $file_name = 'indiatoday-story_2009-01-01.xml';
   $xml_path = 'sites/default/files/xml_file_chunk/';
   $xml = simplexml_load_file($xml_path . $file_name, 'SimpleXMLElement');
   $i = 0;
@@ -174,6 +177,12 @@ function create_story_xml_clean() {
       $associate_time = (string) $stories->associatetvdate;
       $associate_date_time = date('Y-m-d H:i', $associate_time);
       $stories->associatetvdate = $associate_date_time;
+    }
+    
+    
+    //created by blank
+    if(empty($stories->createdby)){
+      $stories->createdby = 970; //siteadmin
     }
     
     // syndication cleanup

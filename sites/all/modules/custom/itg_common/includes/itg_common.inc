@@ -590,7 +590,8 @@ function itg_common_custompath_migrated_load($node, $type = NULL) {
     $set_hierarchy = array_reverse($section_hierarchy);
     if ($type != 'update_migrated') {
       $pathdata = strtolower(implode("/", $set_hierarchy)) . '/' . $node->type . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
-      $newpath = itg_common_custompath_insert_val($pathdata);
+     // $newpath = itg_common_custompath_insert_val($pathdata);
+      $newpath = $pathdata;
     }
     else {
       $newpath = $node_sef;
