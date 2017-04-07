@@ -68,8 +68,13 @@ $(document).ready(function() {
                 },
                 data: {type: $(this).attr('name'), section: JSON.stringify(categoryies)},
                 success: function(html) {
-                    $('.form-item-itg-category').show();
                     var item = JSON.parse(html);
+                    if (item.main.length > 0) {
+                        $('.form-item-itg-category').show();
+                    }
+                    else {
+                        $('.form-item-itg-category').hide();
+                    }
                     $('#edit-itg-category').empty();
                     $('#edit-itg-sub-category').empty();
                     $('#edit-itg-sub-sub-category').empty();
@@ -124,8 +129,15 @@ $(document).ready(function() {
                     category: JSON.stringify(categoryies),
                 },
                 success: function(html) {
-                    $('.form-item-itg-sub-category').show();
                     var item = JSON.parse(html);
+
+                    if (item.main.length > 0) {
+                        $('.form-item-itg-sub-category').show();
+                    }
+                    else {
+                        $('.form-item-itg-sub-category').hide();
+                    }
+
                     $('#edit-itg-sub-category').empty();
                     $('#edit-itg-sub-sub-category').empty();
                     $('#edit-itg-sub-sub-sub-category').empty();
@@ -174,9 +186,13 @@ $(document).ready(function() {
                     sub_category: JSON.stringify(categoryies),
                 },
                 success: function(html) {
-                    $('.form-item-itg-sub-sub-category').show();
-
                     var item = JSON.parse(html);
+                    if (item.main.length > 0) {
+                        $('.form-item-itg-sub-sub-category').show();
+                    }
+                    else {
+                        $('.form-item-itg-sub-sub-category').hide();
+                    }
                     $('#edit-itg-sub-sub-category').empty();
                     $('#edit-itg-sub-sub-sub-category').empty();
                     $('#edit-itg-primary-category').empty();
@@ -232,8 +248,15 @@ $(document).ready(function() {
                     sub_sub_category: JSON.stringify(categoryies),
                 },
                 success: function(html) {
-                    $('.form-item-itg-sub-sub-sub-category').show();
                     var item = JSON.parse(html);
+                    
+                    if (item.main.length > 0) {
+                        $('.form-item-itg-sub-sub-sub-category').show();
+                    }
+                    else {
+                        $('.form-item-itg-sub-sub-sub-category').hide();
+                    }
+                    
                     $('#edit-itg-sub-sub-sub-category').empty();
                     $('#edit-itg-primary-category').empty();
                     $('#edit-itg-sub-sub-sub-category').append(item.main);
