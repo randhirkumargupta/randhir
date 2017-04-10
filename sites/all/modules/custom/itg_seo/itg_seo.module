@@ -271,6 +271,7 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
                     . l('<span itemprop="title">'.$chunks->name.'</span>', drupal_get_path_alias('taxonomy/term/' . $chunks->tid), array('html'=>TRUE, 'attributes' => array('itemprop' => 'url'))).'</div>';            
         }
     }
+    //p($entity_object->type);
     if (!empty($entity_object->type) && $entity_object->type == 'story') {
         $section_link .= ' / ' . $node_title;
     } else if (!empty($entity_object->type) && $entity_object->type == 'videogallery') {
@@ -285,6 +286,8 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
         $section_link .= ' / Blog / ' . $node_title;
     } else if (!empty($entity_object->type) && $entity_object->type == 'reporter') {
         $section_link .= ' / ' . l("Anchors", "anchors-list") . ' / ' .$node_title;
+    } else if (!empty($entity_object->type) && $entity_object->type == 'breaking_news') {
+        $section_link .= ' / ' .$entity_object->field_type[LANGUAGE_NONE][0]['value'];
     } else if (!empty($entity_object->type)) {
         $section_link .= ' / ' . $node_title;
     } else if (!empty($single_url)) {
