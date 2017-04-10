@@ -295,6 +295,8 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'reporter') {
     $section_link .= ' / ' . l("Anchors" , "anchors-list") . ' / ' . $node_title;
+  }else if (!empty($entity_object->type) && $entity_object->type == 'breaking_news') {
+      $section_link .= ' / ' .$entity_object->field_type[LANGUAGE_NONE][0]['value'];
   }
   elseif (!empty($entity_object->type)) {
     $section_link .= ' / ' . $node_title;
