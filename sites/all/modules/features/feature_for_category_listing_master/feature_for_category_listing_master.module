@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature for category listing master feature.
+ */
+
+include_once 'feature_for_category_listing_master.features.inc';

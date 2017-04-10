@@ -2,7 +2,7 @@
  * Copyright (c) 2014-2016, CKSource - Frederico Knabben. All rights reserved.
  * Licensed under the terms of the MIT License (see LICENSE.md).
  *
- * The dropcap plugin dialog window definition.
+ * The editorquotes plugin dialog window definition.
  *
  * Created out of the CKEditor Plugin SDK:
  * http://docs.ckeditor.com/#!/guide/plugin_sdk_sample_1
@@ -42,7 +42,7 @@ CKEDITOR.dialog.add( 'editorquotesDialog', function( editor ) {
 						type: 'text',
 						id: 'author',
 						label: 'Author Name',
-						validate: CKEDITOR.dialog.validate.notEmpty( "Author field cannot be empty." )
+						//validate: CKEDITOR.dialog.validate.notEmpty( "Author field cannot be empty." )
 					}
 
 
@@ -59,12 +59,16 @@ CKEDITOR.dialog.add( 'editorquotesDialog', function( editor ) {
 
 			// The context of this function is the dialog object itself.
 			// http://docs.ckeditor.com/#!/api/CKEDITOR.dialog
+                        author_check = '';
 			var dialog = this;
                         var div = editor.document.createElement( 'div' );
                         div.setAttribute( 'class', 'quotes' );
                         var quotestext=dialog.getValueOf( 'tab-basic', 'quotes-text' );
                         var author=dialog.getValueOf( 'tab-basic', 'author' );
-                        var first_element = '<blockquote>'+quotestext+'</blockquote><div style="text-align:right" class="author"> - '+author+'</span>'
+                        if(author) {
+                         author_check = '<div style="text-align:right" class="author"> - '+author+'</div>'   
+                        } 
+                        var first_element = '<blockquote>'+quotestext+'</blockquote>'+author_check
 			div.setHtml(first_element);
 			// Finally, insert the element into the editor at the caret position.
 			editor.insertElement( div );

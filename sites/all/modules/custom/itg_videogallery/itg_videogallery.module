@@ -1194,15 +1194,19 @@ function itg_videogallery_check_video_url($vid) {
 
   $query = db_select('itg_solr_video_info', 'drd');
   $query->fields('drd', array('is_delete'));
-  $query->condition('content_type', 'video_gallery', '=');
   $query->condition('solr_video_id', $vid, '=');
-  $query->isNotNull('drd.nid');
   $video_data = $query->execute()->fetchAll();
   if (empty($video_data)) {
     return true;
   }
-  else if ($video_data[0]->is_delete == 1) {
-    return true;
+  else if (!empty ($video_data)) {
+    foreach ($video_data  as $dvideo) {
+      if($dvideo->is_delete == 1) {
+         return true;
+         break;
+      }
+    }
+    
   }
   else {
     return false;
@@ -1665,7 +1669,7 @@ function itg_videogallery_get_file_details() {
   $responce = "";
   foreach ($getids as $key => $file_value) {
     $video_id = explode('#', $file_value);
-    $responce.=' <iframe class="video_data" id="video_frame_' . $video_id . '" frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_id[0] . '?autoplay=0&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
+    $responce.=' <iframe class="video_data" id="video_frame_' . $video_id[0] . '" frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_id[0] . '?autoplay=0&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
   }
   exit($responce);
 }

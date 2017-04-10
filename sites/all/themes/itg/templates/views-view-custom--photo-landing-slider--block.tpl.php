@@ -36,16 +36,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                   <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
                   <div class="show-embed-code-div">
                     <div class="copy-sample-code">
-                     <textarea readonly="true">
-                      <div id='IndiaToday_gallery' data-type='UAT'></div>
-                          <script src='<?php print $base_url;?>/sites/all/themes/itg/js/photo_iframeResizer.js'>
-                          </script>
-                          <script> 
-                          <?php 
-                           echo "iFrameResize({galleryid: $photo_node->nid})";
-                          ?>
-                          </script>
-                      </textarea>  
+                     <textarea readonly="true"><div id='IndiaToday_gallery' data-type='UAT'></div><script src='<?php print $base_url;?>/sites/all/themes/itg/js/photo_iframeResizer.js'></script><script><?php echo "iFrameResize({galleryid: $photo_node->nid})"; ?></script></textarea> 
                     </div>
                   </div>
                 </li>
@@ -166,16 +157,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                   <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
                   <div class="show-embed-code-div">
                     <div class="copy-sample-code">
-                        <textarea readonly="true">
-                      <div id='IndiaToday_gallery' data-type='UAT'></div>
-                          <script src='<?php print $base_url;?>/sites/all/themes/itg/js/photo_iframeResizer.js'>
-                          </script>
-                          <script> 
-                          <?php 
-                           echo "iFrameResize({galleryid: $photo_node->nid})";
-                          ?>
-                          </script>
-                      </textarea>
+                    <textarea readonly="true"><div id='IndiaToday_gallery' data-type='UAT'></div><script src='<?php print $base_url;?>/sites/all/themes/itg/js/photo_iframeResizer.js'></script><script><?php echo "iFrameResize({galleryid: $photo_node->nid})"; ?></script></textarea>
                     </div>
                   </div>
                 </li>

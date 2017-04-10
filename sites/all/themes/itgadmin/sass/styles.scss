@@ -11330,13 +11330,20 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   [id*="itg-registred-user-report-form"]{
     h2{margin-bottom: 30px;}
     .form-type-textfield{
-      > label{width: 120px;}
-      .form-text{max-width: 200px;}
+      float: left;
+      margin-right: 10px;
+      > label{
+        width: auto;
+        display: block;
+        float: none;
+      }
+      .form-text{max-width: 200px; width: 100%;}
     }
-    .form-submit {
-      margin-left: 150px;
+    .form-submit, a.btn-reset{
       @extend .btn-small;
+      margin-top: 28px;
     }
+    #piechart{max-width: 100%;}
   }
   .node-supplement-form{
     @extend .image-repo-browse;
@@ -11408,6 +11415,14 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       }
     }
   }
-  .page-admin-structure-taxonomy-live-tv{
+  .page-admin-structure-taxonomy-live-tv, .page-admin-structure-taxonomy-itg-occupation{
     [id*="edit-relations"] .fieldset-title{display: none;}
+  }
+  body.taxonomy-form-term-tags{margin-top: 0;}
+ .view .view-filters [id*="views-exposed-form-readers-reports-page"]{
+   .views-exposed-form{
+      .views-exposed-widget.views-widget-filter-field_mobile_number_value{
+        width: 200px;
+      }
+    } 
   }

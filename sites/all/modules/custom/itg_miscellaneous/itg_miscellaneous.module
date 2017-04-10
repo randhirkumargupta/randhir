@@ -76,6 +76,12 @@ function itg_miscellaneous_menu() {
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_miscellaneous.inc',
   );
+  $items['create-video-xml-clean'] = array(
+      'page callback' => 'create_video_xml_clean',
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_video_clean.inc',
+  );
   
 
   return $items;

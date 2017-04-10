@@ -228,20 +228,6 @@ function itg_section_wise_breakup_table() {
 }
 
 /**
- * 
- * @param type $tid
- * @param type $vid
- * @return type
- */
-function get_term_name_from_tid_for_report($tid) {
-  $data = array();
-  $query = db_select('taxonomy_term_data' ,'ttd')
-      ->fields('ttd' ,array('name'))
-      ->condition('ttd.tid' ,$tid);
-  return $query->execute()->fetchObject();
-}
-
-/**
  * Main function to return report.
  * 
  * @param int $start_date
