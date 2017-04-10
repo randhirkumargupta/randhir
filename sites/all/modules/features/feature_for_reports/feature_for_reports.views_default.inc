@@ -812,10 +812,6 @@ function feature_for_reports_views_default_views() {
   $handler->display->display_options['fields']['mail']['table'] = 'users';
   $handler->display->display_options['fields']['mail']['field'] = 'mail';
   $handler->display->display_options['fields']['mail']['link_to_user'] = '0';
-  /* Field: User: Roles */
-  $handler->display->display_options['fields']['rid']['id'] = 'rid';
-  $handler->display->display_options['fields']['rid']['table'] = 'users_roles';
-  $handler->display->display_options['fields']['rid']['field'] = 'rid';
   /* Field: Field: Mobile number */
   $handler->display->display_options['fields']['field_mobile_number']['id'] = 'field_mobile_number';
   $handler->display->display_options['fields']['field_mobile_number']['table'] = 'field_data_field_mobile_number';
@@ -910,7 +906,9 @@ function feature_for_reports_views_default_views() {
   $handler->display->display_options['filters']['rid']['id'] = 'rid';
   $handler->display->display_options['filters']['rid']['table'] = 'users_roles';
   $handler->display->display_options['filters']['rid']['field'] = 'rid';
-  $handler->display->display_options['filters']['rid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['rid']['value'] = array(
+    25 => '25',
+  );
   $handler->display->display_options['filters']['rid']['expose']['operator_id'] = 'rid_op';
   $handler->display->display_options['filters']['rid']['expose']['label'] = 'Roles';
   $handler->display->display_options['filters']['rid']['expose']['operator'] = 'rid_op';
