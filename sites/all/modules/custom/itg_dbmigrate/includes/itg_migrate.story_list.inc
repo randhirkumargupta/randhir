@@ -576,6 +576,10 @@ class ItgStoryListMigration extends XMLMigration {
   }
 
   public function prepareRow($row) {
+    if(empty($row->xml->modifieddate) || ((string) $row->xml->modifieddate == 0)) {
+      $row->xml->modifieddate = $row->xml->createddate;
+    }
+    
     if(!empty($row->xml->pros_cons->tech_pros_cons_main->pron_cons_img)) {
       $row->xml->pros_cons->tech_pros_cons_main->pron_cons_img = itg_dbmigrate_imagepath_url((string)$row->xml->pros_cons->tech_pros_cons_main->pron_cons_img);
     }
