@@ -52,16 +52,15 @@ function itg_reports_email_autocomplete($string) {
 }
 
 function itg_registered_user_report($user_id) {
-  if(isset($_GET['dispaly_report']) && $_GET['dispaly_report'] == 'true') {
-    itg_registered_user_display_report($user_id);
-  }
-  else {
-    drupal_add_js(drupal_get_path('module', 'itg_reports') . '/js/itg_reports.js', array('type' => 'file'));
-    return drupal_get_form('itg_registred_user_report_form');
-  }
+  drupal_add_js(drupal_get_path('module', 'itg_reports') . '/js/itg_reports.js', array('type' => 'file'));
+  return drupal_get_form('itg_registred_user_report_form');
 }
 
 function itg_registred_user_report_form($form , $form_state) {
+  $report_data = "";
+  if(isset($_GET['dispaly_report']) && $_GET['dispaly_report'] == 'true') {
+    $report_data .=  itg_registered_user_display_report(arg(1));
+  }
   // Add date/time field with Pop-up calendar to the form.
   $form['markup'] = array(
     '#markup' => t("<h2>Please select date from and to for display report</h2>"),
@@ -69,15 +68,27 @@ function itg_registred_user_report_form($form , $form_state) {
   $form['date_from'] = array(
     '#type' => 'textfield',
     '#title' => t('Date from'),
+    '#default_value' => (!empty($_GET['date_from'])) ? date('d-m-Y' , $_GET['date_from']) : "",
   );
   $form['date_to'] = array(
     '#type' => 'textfield',
     '#title' => t('Date to'),
+    '#default_value' => (!empty($_GET['date_to'])) ? date('d-m-Y' , $_GET['date_to']) : "",
   );
 
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Submit'),
+  );
+
+  $form['reset'] = array(
+    '#type' => 'markup',
+    '#markup' => l('Reset' , 'itg-registered-user-report/'.arg(1), array('attributes' => array('class' => array('btn-reset')) , 'query' => array('report_type' => 'section_wise_report'))),
+  );
+  
+  $form['report_markup'] = array(
+    '#type' => 'markup',
+    '#markup' => $report_data,
   );
   return $form;
 }
@@ -163,6 +174,7 @@ function itg_registered_user_display_report($user_id) {
       //$total_node_visted =  count($visited_nodes_array);
       $total_section_node_visited = count($node_visied_by_user_under_his_personalize_section);
       $total_other_node_visited = count($nodes_visited_by_user_other_than_personalize_section);
+      
       //$section_node_percentage = ($total_section_node_visited/$total_node_visted)*100;
       //$other_node_percentage = 100-$section_node_percentage;
       // END.
@@ -191,11 +203,12 @@ function itg_registered_user_display_report($user_id) {
 
       // Chart to display nodes viewed by users.
       if($_GET['report_type'] == 'personalized') {
+        $chart = "";
         if(!$total_section_node_visited && !$total_other_node_visited) {
-          print t("No data found");
-          exit;
+          $chart .= "<div class='form-item'>" . t("No data found") . "</div>";
+          return $chart;
         }
-        print '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        $chart .= '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
           google.charts.load(\'current\', {\'packages\':[\'corechart\']});
           google.charts.setOnLoadCallback(drawChart);
@@ -218,14 +231,16 @@ function itg_registered_user_display_report($user_id) {
           }
         </script>
         <div id="piechart" style="width: 900px; height: 600px;"></div>';
+        return $chart;
       }
 
       else if($_GET['report_type'] == 'section_wise_report') {
+        $chart = "";
         if(empty($node_under_section_visited)) {
-          print t("No data found");
-          exit;
+          $chart .= "<div class='form-item'>" . t("No data found") . "</div>";
+          return $chart;
         }
-        print '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        $chart .= '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
           google.charts.load(\'current\', {\'packages\':[\'corechart\']});
           google.charts.setOnLoadCallback(drawChart);
@@ -233,14 +248,14 @@ function itg_registered_user_display_report($user_id) {
           function drawChart() {
 
           var data = google.visualization.arrayToDataTable([';
-          print '[\''.t("Sections").'\', \''.t("Visited nodes").'\'],';
+           $chart .='[\''.t("Sections").'\', \''.t("Visited nodes").'\'],';
           //pr($node_under_section_visited);
           foreach($node_under_section_visited as $section => $count) {
             $total = $count+1;
-            print '[\''.t(get_term_name_from_tid($section)->name).'\', '.$total.'],';
+            $chart .= '[\''.t(get_term_name_from_tid_for_report($section)->name).'\', '.$total.'],';
           }
-          print ']);';
-          print 'var options = {
+           $chart .=']);';
+          $chart .= 'var options = {
               title: \''.t("Section Wise User Node Visit Activity").'\'
             };
 
@@ -250,10 +265,16 @@ function itg_registered_user_display_report($user_id) {
           }
         </script>
         <div id="piechart" style="width: 900px; height: 600px;"></div>';
+          return $chart;
       }
       else {
-        print t("Please choose report type.");
+        $chart .= "<div class='form-item'>" . t("Please choose report type.") . "</div>";
+        return $chart;
       }
     }
+  }
+  else {
+    $chart .= "<div class='form-item'>" . t("Please select date range.") . "</div>";
+    return $chart;
   }
 }
