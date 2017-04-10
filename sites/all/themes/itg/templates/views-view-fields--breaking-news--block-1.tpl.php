@@ -32,7 +32,8 @@
   $share_desc = '';
   if (!empty($row->field_field_story_extra_large_image[0]['raw']['uri'])) {
     $image = file_create_url($row->field_field_story_extra_large_image[0]['raw']['uri']);
-  } 
+  }
+  $display_title = $row->field_field_story_snap_post[0]['rendered']['#markup'];
 ?>
 <?php foreach ($fields as $id => $field): ?>
   <?php if (!empty($field->separator)): ?>
@@ -42,7 +43,11 @@
   <?php print $field->wrapper_prefix; ?>
   <?php print $field->label_html; ?>
   <div class="breakingnew-home">
-      <div class="title">Breaking</div>    
+      <?php if(!empty($display_title)) { ?>
+      <div class="title"><?php print $display_title; ?></div>
+      <?php } else { ?>
+      <div class="title">Breaking</div>
+      <?php } ?>
       <div class="new-detail">  
           <div class="marquee-container">
             <div class="marquee-child">
