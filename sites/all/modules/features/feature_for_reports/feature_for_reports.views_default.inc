@@ -708,6 +708,16 @@ function feature_for_reports_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+    5 => '5',
+    6 => '6',
+    7 => '7',
+    20 => '20',
+    10 => '10',
+  );
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
@@ -757,7 +767,7 @@ function feature_for_reports_views_default_views() {
   $handler->display->display_options['fields']['created']['table'] = 'users';
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = 'Registered On';
-  $handler->display->display_options['fields']['created']['date_format'] = 'itg';
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom_date_d_m_y_';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: User: E-mail */
   $handler->display->display_options['fields']['mail']['id'] = 'mail';
@@ -767,7 +777,7 @@ function feature_for_reports_views_default_views() {
   $handler->display->display_options['fields']['login']['id'] = 'login';
   $handler->display->display_options['fields']['login']['table'] = 'users';
   $handler->display->display_options['fields']['login']['field'] = 'login';
-  $handler->display->display_options['fields']['login']['date_format'] = 'itg';
+  $handler->display->display_options['fields']['login']['date_format'] = 'custom_date_d_m_y_';
   $handler->display->display_options['fields']['login']['second_date_format'] = 'long';
   /* Field: User: Active */
   $handler->display->display_options['fields']['status']['id'] = 'status';
