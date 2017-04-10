@@ -167,4 +167,22 @@ jQuery( document ).ready(function() {
         changeYear: true,
         dateFormat: 'dd-mm-yy',
     });
+    jQuery('#views-exposed-form-itg-active-users-report-page #edit-created-min').datepicker({
+        // Get 5 year previous and next year data.
+        maxDate: new Date(date_used),
+        // maxDate: new Date(date_used.getFullYear()+5 , 01 , 01),
+        //minDate: new Date(date_used.getFullYear()-5, 01, 01),
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'dd-mm-yy',
+    });
+    jQuery('#views-exposed-form-itg-active-users-report-page #edit-created-max').datepicker({
+        // Get 5 year previous and next year data.
+        maxDate: new Date(date_used),
+        // maxDate: new Date(date_used.getFullYear()+5 , 01 , 01),
+        //minDate: new Date(date_used.getFullYear()-5, 01, 01),
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'dd-mm-yy',
+    });
 });
