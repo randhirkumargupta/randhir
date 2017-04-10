@@ -624,7 +624,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                             </div>  
                         </div>
 
-                        <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
+                        <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-itg-block-15">
                             <div class="itg-widget">
                                 <div class="droppable <?php print $gray_bg_layout; ?>">
                                     <div class="widget-wrapper <?php print $widget_data['itg-block-15']['widget_name']; ?>">
@@ -656,7 +656,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                             </div>
                         </div>
 
-                        <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
+                        <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-itg-block-16">
                             <div class="itg-widget">
                                 <div class="droppable <?php print $gray_bg_layout; ?>">
                                     <div class="widget-wrapper <?php print $widget_data['itg-block-16']['widget_name']; ?>">
@@ -809,6 +809,17 @@ if ($theme == 'itgadmin' && !isset($preview)) {
         $divcounter++; ?>
     <?php }
 } ?>
+                 <?php
+          if ($theme != 'itgadmin') {
+            print '<div id="second-section-card"></div>';
+            if (!empty($widget_data['itg-block-20']['widget']) || !empty($widget_data['itg-block-21']['widget']) || !empty($widget_data['itg-block-22']['widget'])) {
+              ?>
+              <div class="load-more-wrapper-front">
+                <a href="javascript:void(0)" class="add-more-block-front">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
+              </div>
+  <?php
+  }
+}?>
                 <!--End of Common section-->
                 <div class="no-more-card" style="display:none">No More Result Found.</div>
 
