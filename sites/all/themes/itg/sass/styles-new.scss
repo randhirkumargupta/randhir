@@ -2908,6 +2908,11 @@ body.has-cart-popup{
 .rippleEffect {
     animation: rippleDrop .8s linear;
 }
+.trending-list{
+  .rippleEffect {
+    animation: rippleDrop .8s linear;
+  }
+}
 
 @keyframes rippleDrop {
   100% {
@@ -3361,6 +3366,7 @@ body{
     }
   }
 }
+.multiple-photo-disc .fa-chevron-left.slick-disabled + div .prev-story-link{display: block;}
 .story-associate-content{
   .view-photo-landing-slider{
     .videogallery-slider{

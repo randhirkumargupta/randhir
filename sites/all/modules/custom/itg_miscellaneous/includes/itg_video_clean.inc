@@ -32,175 +32,45 @@ function create_index_xml(){
  * Callback for story xml cleanup
  * @param 
  */
-function create_story_xml_clean() {
- //$file_name = 'indiatoday-story_2016-06-01.xml';
-  //$file_name = 'indiatoday-story_2016-06-01_one.xml';
-  //$file_name = 'indiatoday-story_2016-06-21.xml';
-  //$file_name = 'indiatoday-story_2016-07-01.xml';
-  //$file_name = 'indiatoday-story_2016-08-01.xml';
-  //$file_name = 'indiatoday-story_2016-09-01.xml';
-  //$file_name = 'indiatoday-story_2016-10-01.xml';
-  //$file_name = 'indiatoday-story_2016-11-01.xml';
- // $file_name = 'indiatoday-story_2016-12-01.xml';
+function create_video_xml_clean() {
+ $file_name = 'indiatoday_video_2016-06.xml';
   
-  //$file_name = 'indiatoday-story_2007-01-01.xml';
-  $file_name = 'indiatoday-story_2009-01-01.xml';
   $xml_path = 'sites/default/files/xml_file_chunk/';
-  $xml = simplexml_load_file($xml_path . $file_name, 'SimpleXMLElement');
+  $xml = simplexml_load_file($xml_path . $file_name, 'SimpleXMLElement');  
   $i = 0;
-  foreach ($xml->story as $stories) {
+  foreach ($xml->videogallery as $stories) {
     $xml_city_id = (array) $stories->cities->city;
-    $original_id = array();    
-    // map city
-    _map_xml_city($xml_city_id, $stories);
-
+    $original_id = array();
+    
+    // Map byline
+    _map_xml_byline($stories);
+    
+    // Map anchor
+    _map_xml_anchor($stories);
+    
     // Map createdby
     _map_xml_user($stories, 'createdby');
 
     // Map modifiedby
     _map_xml_user($stories, 'modifiedby');
-    // Get folder name.
-    $category_ids = (string) $stories->categories->category;
-    $split_category = explode('#', $category_ids);
-    $folder_name = '';
-    $pti_section = 0;
-    //if (count($split_category) == 2 && $split_category[0] == 177 && $split_category[1] == 1) {
-    if (count($split_category) == 2 && $split_category[0] == 177) {
-      $folder_name = 'pti';
-      $pti_section = 177;
-    }
-    if ($split_category[0] == 177) {
-      $folder_name = 'pti';
-    }
-    $issue_based_story = (string) $stories->story_issue;
-    if ($issue_based_story == 'yes') {
-      $folder_name = 'issue_based_story';
-    }
-    // Map category.      
-    if ($pti_section) {
-      //_map_xml_category($stories, $pti_section);
-      _map_xml_all_category($stories, $pti_section);
-    }
-    else {
-     // _map_xml_category($stories);
-      _map_xml_all_category($stories);
-    }
-
+    
     // Map primary category.
-    _map_xml_primary_category($stories);
+    _map_xml_primary_category($stories);//###
+    
+    // map city
+    _map_xml_city($xml_city_id, $stories);
+
+    
+    // _map_xml_category($stories);
+    _map_xml_all_category($stories);
+
+    
 
     // Map tags.
     _map_xml_tags($stories);
 
-    // map images
-    /*if(!empty($stories->extralargeimage)) {
-      $xpath = 'extralargeimage';
-      _map_xml_image_path($stories, $xpath);
-    }
-    
-    if(!empty($stories->facebook_instant_article_integration->animated_image)) {
-      $xpath = 'animated_image';
-      _map_xml_image_path($stories->facebook_instant_article_integration, $xpath);
-    }
-    
-    if(!empty($stories->pros_cons->tech_pros_cons_main->pron_cons_img)) {
-      $xpath = 'pron_cons_img';
-      _map_xml_image_path($stories->pros_cons->tech_pros_cons_main, $xpath);
-    }
-    
-    if(!empty($stories->tech_image_gallery->image)) {
-      $xpath = 'image';
-      _map_xml_tech_image_path($stories->tech_image_gallery, $xpath);
-    }
     
     
-    if(!empty($stories->largeimage)) {
-      $xpath = 'largeimage';
-      _map_xml_image_path($stories, $xpath);
-    }
-    
-    if(!empty($stories->mediumimage)) {
-      $xpath = 'mediumimage';
-      _map_xml_image_path($stories, $xpath);
-    }
-    if(!empty($stories->smallimage)) {
-      $xpath = 'smallimage';
-      _map_xml_image_path($stories, $xpath);
-    }
-    
-    if(!empty($stories->extrasmallimage)) {
-      $xpath = 'extrasmallimage';
-      _map_xml_image_path($stories, $xpath);
-    }
-    if(!empty($stories->bigimage)) {
-      $xpath = 'bigimage';
-      _map_xml_image_path($stories, $xpath);
-    }
-    
-    if(!empty($stories->facebookimage)) {
-      $xpath = 'facebookimage';
-      _map_xml_image_path($stories, $xpath);
-    }
-    if(!empty($stories->twitterimage)) {
-      $xpath = 'twitterimage';
-      _map_xml_image_path($stories, $xpath);
-    }
-    
-    if(!empty($stories->quote_image)) {
-      $xpath = 'quote_image';
-      _map_xml_image_path($stories, $xpath);
-    }*/
-    
-    // tech pros cons rating
-    if(!empty($stories->pros_cons->tech_pros_cons_main->rating)) {
-      $rating = explode('/', $stories->pros_cons->tech_pros_cons_main->rating);
-      $stories->pros_cons->tech_pros_cons_main->rating = $rating[0];
-    }
-    
-    // Date clean
-    if (isset($stories->storyexpirydate) && !empty($stories->storyexpirydate)) {
-      $expire_time = (string) $stories->storyexpirydate;
-      $expire_date_time = date('Y-m-d H:i', $expire_time);
-      $stories->storyexpirydate = $expire_date_time;
-    }
-    if (isset($stories->issue_date) && !empty($stories->issue_date)) {
-      $issue_time = (string) $stories->issue_date;
-      $issue_date_time = date('Y-m-d H:i', $issue_time);
-      $stories->issue_date = $issue_date_time;
-    }
-    if (isset($stories->scheduledatetime) && !empty($stories->scheduledatetime)) {
-      $schedule_time = (string) $stories->scheduledatetime;
-      $schedule_date_time = date('Y-m-d H:i', $schedule_time);
-      $stories->scheduledatetime = $schedule_date_time;
-    }
-    if (isset($stories->associatetvdate) && !empty($stories->associatetvdate)) {
-      $associate_time = (string) $stories->associatetvdate;
-      $associate_date_time = date('Y-m-d H:i', $associate_time);
-      $stories->associatetvdate = $associate_date_time;
-    }
-    
-    
-    //created by blank
-    if(empty($stories->createdby)){
-      $stories->createdby = 970; //siteadmin
-    }
-    
-    // syndication cleanup
-    if((string) $stories->syndications_photo == '1') {
-      $stories->syndications_photo = 'Yes';
-    }else{
-      $stories->syndications_photo = '';
-    }
-    
-    //syndication
-    if ((string) $stories->syndication == '1') {
-      $stories->syndication = 'Yes';
-    }else{
-      $stories->syndication = '';
-    }
-    
-    // Map byline
-    _map_xml_byline($stories);    
     if (!empty($folder_name)) {
       $stories->asXml($xml_path . $folder_name . '/' . $stories->id . '.xml');
     }
@@ -393,33 +263,11 @@ function _map_xml_city($xml_city_id, &$stories) {
   }
 }
 
-
-/**
- * Implements function for images folder path
- */
-function _map_xml_image_path(&$stories, $xpath) {
-  $img = explode('/indiatoday/' , $stories->$xpath);
-  //return '/var/www/itgcms/sites/default/files/indiatoday/'.$img[1];
-  //migration server image path
-   $stories->$xpath = '/home/sites/media/indiatoday/'.$img[1];
-
-}
-
-/**
- * Implements function for images folder path
- */
-function _map_xml_tech_image_path(&$stories, $xpath) {
-  $key = 0;
-  foreach($stories->$xpath as $image) {
-     $img_val = (string) $image;
-        if(!empty($img_val)){
-          try{
-            $img = explode('/indiatoday/' , $img_val);
-            $stories->image[$key] = '<![CDATA[/home/sites/media/indiatoday/'.$img[1].']]>';
-            $key++;
-          } catch(Exception $e) {
-            
-          }
-        }
+function _map_xml_anchor($stories) {
+  if (isset($stories->anchor) && !empty($stories->anchor)) {
+    $source_aid = (string) $stories->anchor;
+    $data_anchor = get_itg_destination_id('migrate_map_itgbyline', $source_aid);
   }
+  
+  $stories->anchor = $data_anchor;
 }

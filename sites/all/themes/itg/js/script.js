@@ -815,6 +815,7 @@ function smilyanimation(facetype){
     jQuery(window).load(function(){
       winWidth = jQuery(window).width();
       if (winWidth > 770) {
+        jQuery('body').find('.second-level-menu').removeClass('before-load');
         menuBuilder();
         jQuery(window).resize(menuBuilder);
       }

@@ -216,7 +216,7 @@ function update_search_title($title, $combined_data, $uid, $type) {
  */
 function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
 
-  $page_condition = array('related-content', 'site-search', 'searchimage', 'online-archive-story', 'clone-story');
+  $page_condition = array('related-content', 'site-search', 'searchimage', 'online-archive-story', 'clone-story', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio');
 
   if (in_array(arg(0), $page_condition)) {
     $i = 1;
@@ -225,9 +225,9 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       if ($i > 1) {
         $and = ' AND ';
       }
-      $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'site-search', 'ds_changed_max', 'custom_drp', 'exact_match', 'searchimage', 'online-archive-story', 'clone-story', 'sname');
+      $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'site-search', 'ds_changed_max', 'custom_drp', 'exact_match', 'searchimage', 'online-archive-story', 'clone-story', 'sname', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio');
 
-      if (!empty($val) && $val != 'related-content' && $val != 'site-search' && $val != 'searchimage' && $val != 'online-archive-story' && $val != 'clone-story' && !in_array($key, $remove_key)) {
+      if (!empty($val) && $val != 'related-content' && $val != 'site-search' && $val != 'searchimage' && $val != 'online-archive-story' && $val != 'clone-story' && $val != 'search-unpublish-video' && $val != 'search-unpublish-video-radio' && $val != 'search-publish-video' && $val != 'search-publish-video-radio' && !in_array($key, $remove_key)) {
 
         if (is_array($val)) {
 
@@ -359,7 +359,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
         $query->replaceParam("fq", '(' . $str . ')');
       }
     }
-    // pr($query->getSolrParams());
+     //pr($query->getSolrParams());
   }
 }
 
