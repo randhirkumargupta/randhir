@@ -1,4 +1,3 @@
-
 <?php
 /**
  * @file
@@ -26,6 +25,7 @@ if ($theme != 'itgadmin') {
 }
 
 ?>
+
 <!--------------------------------Code for Front tpl---------------------------------------->
 <?php if ($theme != 'itgadmin') {?>
   <div id="page">
@@ -101,10 +101,9 @@ if ($theme != 'itgadmin') {
         </div>
     </div>
     <?php endif; ?>
-   <div class="row">
-   	  <div class="col-md-12 col-sm-12 col-xs-12">
-
-   	  	<!-- sponsor for static -->
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <!-- sponsor for static -->
        <div class="sponsorContainer">
       <span class="leftFirstLogo"><a href="http://indiatoday.intoday.in/bestcolleges/2016/" target="_blank" title="India Today Best Colleges 2016"><img src="http://media2.intoday.in/aajtak/resources/images/sopnsor1.jpg" alt=""></a></span>
         <div class="mobileCenterSec">
@@ -143,48 +142,44 @@ if ($theme != 'itgadmin') {
         </div>
         </div>
     </div>
-
       <!-- end sponsor for static -->
-   	  </div>
-
-   </div>
+      </div>
 
 
 
-    <div class="row">
+
+
         <div class="col-md-8 col-sm-12 col-xs-12 left-side">
+           <?php if (isset($widget_data['itg-block-1']['widget_name']) || isset($widget_data['itg-block-2']['widget_name']) || isset($widget_data['itg-block-3']['widget_name']) || $theme == 'itgadmin') { ?>
+            <div class="row">
+              <?php if ($theme == 'itgadmin') { ?>
 
-    <?php if (isset($widget_data['itg-block-1']['widget_name']) || isset($widget_data['itg-block-2']['widget_name']) || isset($widget_data['itg-block-3']['widget_name']) || $theme == 'itgadmin') { ?>
-    <div>
-      <!--
-        <div class="itg-h747-section">
-            <div class="itg-widget">
-              <div class="droppable <?php //print $gray_bg_layout; ?>">
-               <div class="widget-wrapper <?php //print $widget_data['itg-block-1']['widget_name'].$widget_data['itg-block-1']['widget_display_name']; ?>">
-                    <div class="data-holder" id="itg-block-1"><?php //print $widget_data['itg-block-1']['widget']; ?></div>
-                  </div>
+                <div class="col-md-12 itg-h747-section">
+                    <div class="itg-widget">
+                      <div class="droppable <?php print $gray_bg_layout; ?>">
+                      <?php
+                        if (array_filter(views_get_view_result('best_college_image_slider', 'block'))) {
+                            print views_embed_view('best_college_image_slider', 'block');
+                        }
+                      ?>
+
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-       -->
+              <?php } else {
 
+                      if (array_filter(views_get_view_result('best_college_image_slider', 'block'))) {
+                          print views_embed_view('best_college_image_slider', 'block');
+                      }
 
-       <?php
-                if (array_filter(views_get_view_result('best_college_image_slider', 'block'))) {
-                    print views_embed_view('best_college_image_slider', 'block');
-                }
-         ?>
-
-
+               } ?>
 
         <div>
 
-
-<!--- list / grid -->
+        <!--- list / grid -->
 <div class="col-sm-12 col-xs-12 view1">
 <?php $url_get = explode('/',$_SERVER['REQUEST_URI']);?>
 <div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("Best of The Best ") . $url_get[2]; ?></div>
-
         <div class="right_Section pull-right  col-md-6  col-sm-6 col-xs-12 text-right hidden-xs">
         <strong>view as</strong>
         <div class="btn-group">
@@ -194,55 +189,46 @@ if ($theme != 'itgadmin') {
         </div>
 </div>
 <!--- list / grid -->
-        <div class="col-md-12 itg-h625-section  remove_padd_left remove_padd_right ">
-           <div class="itg-widget">
-                          <div class="col-sm-12 remove_padd_right">
-                            <div class="row list-group college">
-                              <div class="clr_chn">
-                               <?php
 
-                                if (array_filter(views_get_view_result('best_college_image_slider', 'block_1', $url_get[2]))) {
-                                    print views_embed_view('best_college_image_slider', 'block_1', $url_get[2]);
-                                }
-                               ?>
-                              </div>
-                            </div>
-                          </div>
+<div class="col-md-12 itg-h625-section remove_padd_left remove_padd_right ">
+  <div class="itg-widget">
+    <div class="col-sm-12 remove_padd_right">
+      <div class="row list-group college">
+        <div class="clr_chn">
+          <?php if ($theme == 'itgadmin') { ?>
+
+          <div class="droppable <?php print $gray_bg_layout; ?>">
+
+          <?php
+          if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-3']['block_title'])) {
+              if (array_filter(views_get_view_result('best_college_image_slider', 'block_1', $url_get[2])))
+              {
+                print views_embed_view('best_college_image_slider', 'block_1', $url_get[2]);
+              }
+          }
+          ?>
+
+            <div class="data-holder" id="itg-block-3">
+              <?php print $widget_data['itg-block-3']['widget']; ?>
             </div>
-         </div>
 
-        <!--  <div class="col-md-12 itg-h625-section  remove_padd_left remove_padd_right ">
-            <div class="itg-widget">
-              <div class="droppable <?php //print $gray_bg_layout; ?>">
-               <div class="widget-wrapper <?php //print $widget_data['itg-block-3']['widget_name'].$widget_data['itg-block-3']['widget_display_name']; ?>"> -->
-
-                  <?php //if ($theme == 'itgadmin'  && !isset($preview)) { ?>
-                   <!--  <div class="widget-settings">
-                      <div class="widget-title-wrapper">
-                        <span class="widget-title" data-id="itg-block-3"><?php print $widget_data['itg-block-3']['block_title']; ?></span>
-                        <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-3']['block_title']; ?>" name="itg-block-3" class="block_title_id" placeholder="Enter Title" />
-                      </div>
-                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                    </div> -->
-                   <?php //} ?>
-
-                  <!--   <div class="data-holder" id="itg-block-3">
-                          <div class="col-sm-12 remove_padd_right">
-                            <div class="row list-group college">
-                                  <div class="clr_chn">
-
-                          <?php //print $widget_data['itg-block-3']['widget']; ?>
-                                   </div>
-                            </div>
-                        </div>
-
-                    </div> -->
-                 <!--  </div>
-                </div>
-            </div>
-        </div> -->
+          </div>
+          <?php } else {
+            if (array_filter(views_get_view_result('best_college_image_slider', 'block_1', $url_get[2])))
+            {
+                print views_embed_view('best_college_image_slider', 'block_1', $url_get[2]);
+            }
+          }
+        ?>
 
 
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 
         </div>
@@ -255,10 +241,9 @@ if ($theme != 'itgadmin') {
         </div>
 
 
-
-
         <div class="col-md-4 col-sm-12 col-xs-12 right-side">
-           <div class="col-md-12 mt-50 itg-h735-section">
+
+          <div class="col-md-12 mt-50 itg-h1735-section">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-4']['widget_name'].$widget_data['itg-block-4']['widget_display_name']; ?>">
@@ -269,7 +254,17 @@ if ($theme != 'itgadmin') {
                                       <?php
                                         $block = block_load('itg_ads', ADS_RHS1);
                                         $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-                                        print render($render_array);
+                                        if(is_array($render_array)) {
+                                          print render($render_array);
+                                        } else {
+                                           if (!empty($itg_ad['200*200_right_bar_ad1'])) {
+                                            print $itg_ad['200*200_right_bar_ad1'];
+                                          }
+                                        }
+
+
+
+
                                        ?></div>
                                 </div>
 
@@ -295,6 +290,7 @@ if ($theme != 'itgadmin') {
             </div>
         </div>
 
+
             <?php if (isset($widget_data['itg-block-4']['widget_name']) || isset($widget_data['itg-block-5']['widget_name']) || $theme == 'itgadmin') { ?>
             <div class="row">
                 <div class="col-md-12">
@@ -312,37 +308,9 @@ if ($theme != 'itgadmin') {
                         </div>
                     </div>
 
-
-
-
-            <div class="itg-h624-section">
-            <div class="itg-widget">
-              <div class="droppable <?php print $gray_bg_layout; ?>">
-               <div class="widget-wrapper <?php print $widget_data['itg-block-5']['widget_name'].$widget_data['itg-block-5']['widget_display_name']; ?>">
-                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-5']['block_title'])) { ?>
-                    <div class="right_view"><?php print $widget_data['itg-block-5']['block_title']; ?></div>
-                  <?php } ?>
-                     <!-- for admin  -->
-                  <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
-                    <div class="widget-settings">
-                      <div class="widget-title-wrapper">
-                        <span class="widget-title" data-id="itg-block-5"><?php print $widget_data['itg-block-5']['block_title']; ?></span>
-                        <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-5']['block_title']; ?>" name="itg-block-5" class="block_title_id" placeholder="Enter Title" />
-                      </div>
-                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                    </div>
-                   <?php } ?>
-
-                    <div class="data-holder" id="itg-block-5 detail_box"><?php print $widget_data['itg-block-5']['widget']; ?></div>
-                  </div>
-                </div>
-            </div>
-        </div>
             </div>
 
             <?php } ?>
-
-
         </div>
 
     </div>
@@ -456,15 +424,7 @@ if($theme != 'itgadmin')
                 jQuery(this).parent('.itg-common-section').prev('.itg-common-section').find('.add-more-block').show();
             });
 
-
-            jQuery('.college .view-id-best_college_image_slider img').each(function($) {
-                var urlRelative = jQuery(this).attr('src');
-                var urlAbsolute = urlRelative.replace('http://itgddev.indiatodayonline.in/s3/files/', 'http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/');
-
-                jQuery(this).attr('src',urlAbsolute);
-            });
-
     });", array('type' => 'inline', 'scope' => 'footer'));
 }
-?>
 
+?>

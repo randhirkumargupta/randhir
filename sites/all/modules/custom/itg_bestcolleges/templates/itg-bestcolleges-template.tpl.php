@@ -139,13 +139,8 @@ if(isset($related_story_value['relatedstory_count']) && $related_story_value['re
 <!-- Related image start-->
 <?php
 $related_image_value = bestCollegesRelatedImgList();
-//echo "<pre>on tpl"; print_r($data_value); echo "</pre>";
-//echo $data_value['relatedimg_count'];
-
 if(isset($related_image_value['relatedimg_count']) && $related_image_value['relatedimg_count'] > 0){
     unset($related_image_value['relatedimg_count']);
-
-
 ?>
 
 <div class="col-sm-12 col-xs-12 view1 related-img-head">
