@@ -67,7 +67,6 @@ function itg_user_log_menu() {
   );
   $items['active-users'] = array(
     'page callback' => 'itg_logged_in_user_active_user' ,
-    'access callback' => TRUE ,
     'type' => MENU_CALLBACK ,
     'file' => 'includes/user_info_count_update.inc' ,
     'access arguments' => array('view report dashboard') ,
@@ -88,18 +87,16 @@ function itg_user_log_menu() {
   $items['content-visits-by-user'] = array(
     'page callback' => 'itg_logged_in_user_visited_node' ,
     'title' => 'Content Visits' ,
-    'access callback' => TRUE ,
     'type' => MENU_CALLBACK ,
     'file' => 'includes/user_info_count_update.inc' ,
-    'access arguments' => array('view report dashboard') ,
+    'access arguments' => array('administer itg custom widget') ,
   );
   
   $items['section-breakup'] = array(
     'page callback' => 'itg_logged_in_user_section_breakup' ,
-    'access callback' => TRUE ,
     'type' => MENU_CALLBACK ,
     'file' => 'includes/user_info_count_update.inc' ,
-    'access arguments' => array('view report dashboard') ,
+    'access arguments' => array('administer itg custom widget') ,
   );
   return $items;
 }
