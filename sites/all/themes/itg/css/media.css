@@ -1254,7 +1254,6 @@
   }
   .breakingnew-home .title {
     float: none;
-    width: 80px;
     font-size: 14px;
     line-height: 22px;
     height: 20px;
@@ -1285,11 +1284,6 @@
   }
   .breakingnew-home .new-detail .live-tv-link .live-tv-icon {
     display: none;
-  }
-  .breakingnew-home .new-detail .live-tv-link .breaking-new-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
   }
 
   /*story page comment section*/
