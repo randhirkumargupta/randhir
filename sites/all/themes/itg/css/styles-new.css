@@ -397,6 +397,10 @@ input[type="file"], input[type="submit"], input[type="text"] {
   height: auto;
 }
 
+.itg-common-section .widget-wrapper.top_stories_ordering .block-itg-widget, .itg-common-section .widget-wrapper.most_popular .block-itg-widget {
+  overflow-y: auto;
+}
+
 .widget-title {
   display: inline-block;
   vertical-align: top;

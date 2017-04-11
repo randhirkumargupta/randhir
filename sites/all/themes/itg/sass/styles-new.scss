@@ -377,7 +377,13 @@ input[type="file"], input[type="submit"], input[type="text"]{
         }
     }
 }
-
+.itg-common-section{
+  .widget-wrapper{
+    &.top_stories_ordering, &.most_popular{
+      .block-itg-widget{overflow-y: auto;}
+    }
+  }
+}
 .widget-title{
     display: inline-block;
     vertical-align: top;

@@ -11452,3 +11452,10 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       }
     }
   }
+  .itg-common-section{
+    .widget-wrapper{
+      &.top_stories_ordering, &.most_popular{
+        .block-itg-widget{overflow-y: auto;}
+      }
+    }
+  }
