@@ -5277,7 +5277,7 @@ section.sidebar{
     ul{
         @extend .list-none;
     }
-    #block-itg-widget-personlization{
+    #block-itg-widget-personlization, #block-itg-front-end-common-recommended-anonymous-user{
         ul.common-list{
             padding: 0 15px;
             @include listing-with-image(recom-listing,left,15px,pic,detail);            
