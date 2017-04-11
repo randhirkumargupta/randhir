@@ -4525,6 +4525,8 @@ div.node{
     margin-bottom: 30px;
   }
   .newsletter-banner{
+    height: 100px;
+    overflow: hidden;
     img{
       width: 100%;
       height: 100px;
@@ -7896,8 +7898,8 @@ div.node{
     @extend .vtop;
     padding: 10px 20px;
     font: 14px/18px Roboto;
-    color: #fff;
-    background-color: #666;
+    color: #666;
+    background-color: #d1d1d1;
     border-radius: 5px;
     margin: 0 10px;
     text-transform: uppercase;
@@ -8300,6 +8302,10 @@ div.node{
       }
       &#Configuration{
         overflow: hidden;
+        .form-field-name-field-photogallery-configuration{
+          @extend .dib;
+          @extend .full;
+        }
       }
     }
     .itg-form-section{
@@ -11425,4 +11431,33 @@ span.file a{pointer-events: none; color: #2f2f2f;}
         width: 200px;
       }
     } 
+  }
+  .view .view-filters [id*="views-exposed-form-itg-active-users-report-page"]{
+    .views-exposed-form{
+      .views-exposed-widget{
+        &.views-widget-filter-uid{width: 215px;}
+        &.views-widget-filter-created{
+          width: auto;
+          .form-item-created-min{
+            float: left;
+            width: 140px;
+            margin-right: 10px;
+          }
+          .form-item-created-max{
+            float: left;
+            width: 140px;
+            label{
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+  .itg-common-section{
+    .widget-wrapper{
+      &.top_stories_ordering, &.most_popular{
+        .block-itg-widget{overflow-y: auto;}
+      }
+    }
   }
