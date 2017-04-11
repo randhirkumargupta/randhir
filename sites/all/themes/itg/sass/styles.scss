@@ -10135,9 +10135,7 @@ h1.about-us-heading{
         background:#ffc106;                
         height: 33px;
         line-height: 33px;
-        padding: 0 10px;
-        width:89.7%;
-        @include float(left);        
+        padding: 0 10px; 
         .marquee-container {    
             width: 78%;
             height: 33px;
@@ -11144,6 +11142,14 @@ span.close_btt {
 .sidebar-section-photo{
   .we_may_suggest{
     .widget-title{display: none;}
+  }
+}
+.widget-placeholder{display: none;}
+.itg-layout-container{
+  &.election-page{
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
   }
 }
 

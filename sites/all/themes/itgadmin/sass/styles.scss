@@ -8300,6 +8300,10 @@ div.node{
       }
       &#Configuration{
         overflow: hidden;
+        .form-field-name-field-photogallery-configuration{
+          @extend .dib;
+          @extend .full;
+        }
       }
     }
     .itg-form-section{
@@ -11425,4 +11429,26 @@ span.file a{pointer-events: none; color: #2f2f2f;}
         width: 200px;
       }
     } 
+  }
+  .view .view-filters [id*="views-exposed-form-itg-active-users-report-page"]{
+    .views-exposed-form{
+      .views-exposed-widget{
+        &.views-widget-filter-uid{width: 215px;}
+        &.views-widget-filter-created{
+          width: auto;
+          .form-item-created-min{
+            float: left;
+            width: 140px;
+            margin-right: 10px;
+          }
+          .form-item-created-max{
+            float: left;
+            width: 140px;
+            label{
+              display: none;
+            }
+          }
+        }
+      }
+    }
   }
