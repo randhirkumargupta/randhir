@@ -1741,7 +1741,6 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       background-color: #000;
       float: left;
       width: 100%;
-      margin-bottom: 16px;
       overflow: hidden;
       h2{
         color: #fff;
@@ -1803,7 +1802,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     z-index: 99;
   }
   .poll-wrapper .poll-data .poll-replace-id{
-    margin-top: 0;
+    padding: 10px 0 0;
+    max-height: 115px;
+    overflow-y: auto;
   }
   .poll-wrapper .poll-data .poll-replace-id .past-poll li:last-child,
   .poll-wrapper .poll-data .poll-replace-id .past-poll li{
