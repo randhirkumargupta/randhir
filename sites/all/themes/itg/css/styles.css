@@ -2451,7 +2451,14 @@ footer .multiple-items-footer i.slick-next {
 }
 .story-section .byline .profile-detail ul.social-links li:last-child i {
   vertical-align: top;
-  margin-right: 5px;
+  margin: 0 9px;
+  float: left;
+  font-size: 22px;
+}
+.story-section .byline .profile-detail ul.social-links li:last-child span {
+  margin-top: 0;
+  line-height: 22px;
+  text-align: left;
 }
 .story-section .byline .profile-detail ul.social-links li a.unflag-action .fa-bookmark:after {
   content: "\f00c";
@@ -7004,18 +7011,18 @@ section.sidebar .block-itg-ads {
 .recommended-for-you .widget-title a {
   color: #fff;
 }
-.recommended-for-you #block-itg-widget-personlization ul.common-list {
+.recommended-for-you #block-itg-widget-personlization ul.common-list, .recommended-for-you #block-itg-front-end-common-recommended-anonymous-user ul.common-list {
   padding: 0 15px;
 }
-.recommended-for-you #block-itg-widget-personlization ul.common-list .recom-listing {
+.recommended-for-you #block-itg-widget-personlization ul.common-list .recom-listing, .recommended-for-you #block-itg-front-end-common-recommended-anonymous-user ul.common-list .recom-listing {
   overflow: hidden;
   padding: 10px;
 }
-.recommended-for-you #block-itg-widget-personlization ul.common-list .recom-listing .pic {
+.recommended-for-you #block-itg-widget-personlization ul.common-list .recom-listing .pic, .recommended-for-you #block-itg-front-end-common-recommended-anonymous-user ul.common-list .recom-listing .pic {
   float: left;
   margin-right: 15px;
 }
-.recommended-for-you #block-itg-widget-personlization ul.common-list .recom-listing .detail {
+.recommended-for-you #block-itg-widget-personlization ul.common-list .recom-listing .detail, .recommended-for-you #block-itg-front-end-common-recommended-anonymous-user ul.common-list .recom-listing .detail {
   display: block;
   overflow: hidden;
   word-wrap: break-word;
@@ -7024,27 +7031,27 @@ section.sidebar .block-itg-ads {
   line-height: 19px;
   color: #323232;
 }
-.recommended-for-you #block-itg-widget-personlization ul.common-list li.recom-listing {
+.recommended-for-you #block-itg-widget-personlization ul.common-list li.recom-listing, .recommended-for-you #block-itg-front-end-common-recommended-anonymous-user ul.common-list li.recom-listing {
   padding: 0 0 30px 0;
 }
-.recommended-for-you #block-itg-widget-personlization ul.common-list li.recom-listing .pic {
+.recommended-for-you #block-itg-widget-personlization ul.common-list li.recom-listing .pic, .recommended-for-you #block-itg-front-end-common-recommended-anonymous-user ul.common-list li.recom-listing .pic {
   width: 144px;
 }
-.recommended-for-you #block-itg-widget-personlization ul.common-list h4 {
+.recommended-for-you #block-itg-widget-personlization ul.common-list h4, .recommended-for-you #block-itg-front-end-common-recommended-anonymous-user ul.common-list h4 {
   font-size: 12px;
   font-size: 0.75rem;
   font-weight: 700;
   color: #048cb9;
   text-transform: uppercase;
 }
-.recommended-for-you #block-itg-widget-personlization ul.frist-ul li:first-child h4 {
+.recommended-for-you #block-itg-widget-personlization ul.frist-ul li:first-child h4, .recommended-for-you #block-itg-front-end-common-recommended-anonymous-user ul.frist-ul li:first-child h4 {
   display: none;
 }
-.recommended-for-you #block-itg-widget-personlization ul.frist-ul li:first-child .pic {
+.recommended-for-you #block-itg-widget-personlization ul.frist-ul li:first-child .pic, .recommended-for-you #block-itg-front-end-common-recommended-anonymous-user ul.frist-ul li:first-child .pic {
   float: none;
   margin: 0;
 }
-.recommended-for-you #block-itg-widget-personlization ul.frist-ul li:first-child .detail {
+.recommended-for-you #block-itg-widget-personlization ul.frist-ul li:first-child .detail, .recommended-for-you #block-itg-front-end-common-recommended-anonymous-user ul.frist-ul li:first-child .detail {
   background: #fff;
   padding: 13px 10px;
   font-size: 18px;
@@ -7052,10 +7059,10 @@ section.sidebar .block-itg-ads {
   font-family: roboto;
   font-weight: 500;
 }
-.recommended-for-you #block-itg-widget-personlization .recommended-slider {
+.recommended-for-you #block-itg-widget-personlization .recommended-slider, .recommended-for-you #block-itg-front-end-common-recommended-anonymous-user .recommended-slider {
   margin: 0 -15px;
 }
-.recommended-for-you #block-itg-widget-personlization .recommended-slider button.slick-prev, .recommended-for-you #block-itg-widget-personlization .recommended-slider button.slick-next {
+.recommended-for-you #block-itg-widget-personlization .recommended-slider button.slick-prev, .recommended-for-you #block-itg-widget-personlization .recommended-slider button.slick-next, .recommended-for-you #block-itg-front-end-common-recommended-anonymous-user .recommended-slider button.slick-prev, .recommended-for-you #block-itg-front-end-common-recommended-anonymous-user .recommended-slider button.slick-next {
   background: transparent;
   border: none;
   font-size: 60px;
@@ -7067,10 +7074,10 @@ section.sidebar .block-itg-ads {
   cursor: pointer;
   display: none !important;
 }
-.recommended-for-you #block-itg-widget-personlization .recommended-slider button.slick-next {
+.recommended-for-you #block-itg-widget-personlization .recommended-slider button.slick-next, .recommended-for-you #block-itg-front-end-common-recommended-anonymous-user .recommended-slider button.slick-next {
   right: -50px;
 }
-.recommended-for-you #block-itg-widget-personlization .recommended-slider button.slick-prev {
+.recommended-for-you #block-itg-widget-personlization .recommended-slider button.slick-prev, .recommended-for-you #block-itg-front-end-common-recommended-anonymous-user .recommended-slider button.slick-prev {
   left: -50px;
 }
 

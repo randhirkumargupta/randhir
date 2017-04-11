@@ -5024,6 +5024,10 @@ div.node #comments h2 {
 .newsletter-templates .newsletter-header {
   margin-bottom: 30px;
 }
+.newsletter-templates .newsletter-banner {
+  height: 100px;
+  overflow: hidden;
+}
 .newsletter-templates .newsletter-banner img {
   width: 100%;
   height: 100px;
@@ -8063,8 +8067,8 @@ div.node #comments h2 {
 .load-more-wrapper .add-more-block, .load-more-wrapper .removes-more-block {
   padding: 10px 20px;
   font: 14px/18px Roboto;
-  color: #fff;
-  background-color: #666;
+  color: #666;
+  background-color: #d1d1d1;
   border-radius: 5px;
   margin: 0 10px;
   text-transform: uppercase;
@@ -12120,4 +12124,8 @@ body.taxonomy-form-term-tags {
 }
 .view .view-filters [id*="views-exposed-form-itg-active-users-report-page"] .views-exposed-form .views-exposed-widget.views-widget-filter-created .form-item-created-max label {
   display: none;
+}
+
+.itg-common-section .widget-wrapper.top_stories_ordering .block-itg-widget, .itg-common-section .widget-wrapper.most_popular .block-itg-widget {
+  overflow-y: auto;
 }
