@@ -378,10 +378,10 @@
       jqObject.val('');
     };
 
-    parent.mouseup(function() {
+    /*parent.mouseup(function() {
       jqObject.autocomplete('search', '');
       jqObject.focus();
-    });
+    });*/
 
     jqObject.bind("autocompleteselect", function(event, ui) {
       self.addValue(ui.item);
