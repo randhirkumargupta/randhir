@@ -12209,9 +12209,10 @@ h1.about-us-heading + div p {
 }
 
 .breakingnew-home {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   font-family: roboto;
   zoom: 1;
+  position: relative;
 }
 .breakingnew-home:before, .breakingnew-home:after {
   content: "";
@@ -12229,20 +12230,25 @@ h1.about-us-heading + div p {
   height: 33px;
   line-height: 35px;
   padding: 0 10px;
-  width: 10.3%;
+  min-width: 100px;
   font-size: 18px;
   font-weight: 600;
   float: left;
+  position: relative;
+  z-index: 9;
   text-align: center;
+  max-width: 350px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  min-width: 100px;
 }
 .breakingnew-home .new-detail {
   zoom: 1;
   background: #ffc106;
   height: 33px;
   line-height: 33px;
-  padding: 0 10px;
-  width: 89.7%;
-  float: left;
+  padding-right: 215px;
 }
 .breakingnew-home .new-detail:before, .breakingnew-home .new-detail:after {
   content: "";
@@ -12254,10 +12260,8 @@ h1.about-us-heading + div p {
   clear: both;
 }
 .breakingnew-home .new-detail .marquee-container {
-  width: 78%;
   height: 33px;
   position: relative;
-  float: left;
   overflow: hidden;
 }
 .breakingnew-home .new-detail .marquee-container .marquee-child {
@@ -12275,6 +12279,11 @@ h1.about-us-heading + div p {
   display: inline-block;
   vertical-align: top;
   padding-right: 20px;
+}
+.breakingnew-home .new-detail .ltv-and-ss {
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 .breakingnew-home .new-detail .social-share {
   float: right;
@@ -12333,7 +12342,7 @@ h1.about-us-heading + div p {
 .breakingnew-home .new-detail .live-tv-link a {
   color: #fff;
   font-size: 14px;
-  padding-left: 15px;
+  padding: 7px;
 }
 .breakingnew-home .new-detail .live-tv-link a img {
   padding-top: 5px;
@@ -13445,6 +13454,16 @@ span.close_btt {
 
 .sidebar-section-photo .we_may_suggest .widget-title {
   display: none;
+}
+
+.widget-placeholder {
+  display: none;
+}
+
+.itg-layout-container.election-page {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
 }
 
 @media (min-width: 768px) {

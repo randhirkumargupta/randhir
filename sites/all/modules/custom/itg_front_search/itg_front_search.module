@@ -388,7 +388,7 @@ function highlight($text, $words, $color = 'yellow', $case = '1') {
 function itg_front_search_node_presave($node) {
 
   //if ($node->type == 'story' || $node->type == 'recipe' || $node->type == 'cooking_tips' || $node->type == 'videogallery' || $node->type == 'food_news') {
-  if ($node->type == 'videogallery') {
+  if ($node->type == 'videogallery' && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
     if (isset($node->field_story_reporter['und'])) {
       foreach ($node->field_story_reporter['und'] as $high) {
         $reporter_id = $high['target_id'];
@@ -417,6 +417,49 @@ function itg_front_search_node_presave($node) {
       $reporter_node = node_load($photo_by_id);
       $node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'] = strtolower($reporter_node->title);
     }
+  }
+  else if ($node->type == 'story' && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+    $reporter_unique_id = itg_get_all_bylineinfo($node->field_reporter_unique_id[LANGUAGE_NONE][0]['value']);
+    if (!empty($reporter_unique_id)) {
+      foreach ($reporter_unique_id as $reporter_id) {
+        $reporter_node_id = node_load($reporter_id);
+        $reporter_arr_value[] = strtolower($reporter_id);
+        $common_by_line_name[] = strtolower($reporter_node_id->title);
+        $common_by_line_twitter[] = strtolower($reporter_node_id->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']);
+      }
+      if (!empty($reporter_arr_value)) {
+        $final_repoter_nid_list = implode(',', $reporter_arr_value);
+        $node->field_common_by_line_reporter_id[LANGUAGE_NONE][0]['value'] = $final_repoter_nid_list;
+      }
+      if (!empty($common_by_line_name)) {
+        $final_by_line_name = implode(',', $common_by_line_name);
+        $node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'] = $final_by_line_name;
+      }
+      if (!empty($common_by_line_twitter)) {
+        $final_by_line_twitter = implode(',', $common_by_line_twitter);
+        $node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'] = trim($final_by_line_twitter,",");
+      }
+    }
+  }
+  // close here
+}
+
+/**
+ * Implements itg_get_all_bylineinfo().
+ * @param int $reporter_id
+ */
+function itg_get_all_bylineinfo($reporter_unique_id) {
+  $val = array();
+  if (!empty($reporter_unique_id)) {
+    $query = db_select('itg_multi_byline_info', 'c');
+    $query->fields('c');
+    $query->condition('c.uniqueid', $reporter_unique_id);
+    $query->orderBy("byline_weight", "ASC");
+    $result = $query->execute();
+    while ($record = $result->fetchAssoc()) {
+      $val[] = $record['byline_id'];
+    }
+    return $val;
   }
 }
 

@@ -38,11 +38,17 @@ function itg_story_byline($title) {
  * Implements itg_story_byline_save().
  */
 function itg_story_byline_save() {
-  preg_match_all('!\d+!', $_POST['nd_id'], $matches);
-  $byline_nid = $matches[0][0];
+//  preg_match_all('!\d+!', $_POST['nd_id'], $matches);
+//  $byline_nid = $matches[0][0];
+  $trigger_event = $_POST['byline_event'];
+  preg_match_all('/\(([A-Za-z0-9 ]+?)\)/', $_POST['nd_id'], $matches);
+  if($trigger_event == 'unpublish') {
+  $byline_nid = trim($matches[1][1]);
+  } else {
+    $byline_nid = $_POST['nd_id'];
+  }
   $nid = $_POST['nd_id'];
   $unique_id = $_POST['unique_id'];
-  $trigger_event = $_POST['byline_event'];
   $byline_arr = itg_get_byline_detail($byline_nid);
   $byline_name = $byline_arr[0]['title'];
   $byline_type = $byline_arr[0]['field_reporter_profile_type_value'];
