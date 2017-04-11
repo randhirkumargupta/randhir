@@ -2451,7 +2451,14 @@ footer .multiple-items-footer i.slick-next {
 }
 .story-section .byline .profile-detail ul.social-links li:last-child i {
   vertical-align: top;
-  margin-right: 5px;
+  margin: 0 9px;
+  float: left;
+  font-size: 22px;
+}
+.story-section .byline .profile-detail ul.social-links li:last-child span {
+  margin-top: 0;
+  line-height: 22px;
+  text-align: left;
 }
 .story-section .byline .profile-detail ul.social-links li a.unflag-action .fa-bookmark:after {
   content: "\f00c";
