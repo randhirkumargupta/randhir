@@ -217,6 +217,7 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
         $form['tab']['import_format']['#options'] = array(
           'fields' => 'Fields'
         );
+        //p($form);
         $form['tab']['format']['#access'] = FALSE;
         $form['tab']['csv_format']['#access'] = FALSE;
         $form['tab']['import_options']['#access'] = FALSE;
@@ -226,11 +227,15 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
           'fields' => 'Fields'
         );
         $form['tab']['import']['#title'] = FALSE;
-        $form['tab']['import']['source_choice']['#options']['#access'] = FALSE;
+       // $form['tab']['import']['source_choice']['#options']['#access'] = FALSE;
+        
+        $form['tab']['import']['source_choice']['#access'] = FALSE;
+        
         $form['tab']['import']['source_choice']['#options'] = array(
           'file' => 'In a local file'
         );
-        $form['tab']['import']['source_choice']['#access'] = FALSE;
+        $form['tab']['import']['source_choice']['#default_value'] = 'file';
+        $form['tab']['import']['source_choice']['#validated'] = TRUE;
         $form['tab']['import']['text']['#access'] = FALSE;
         $form['tab']['import']['url']['#access'] = FALSE;
         $form['tab']['destination']['vocabulary_target']['#options']['#access'] = FALSE;
