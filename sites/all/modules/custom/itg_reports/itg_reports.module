@@ -576,13 +576,31 @@ function _get_loggedin_count_of_user($uid , $start_date = 0 , $end_date = REQUES
         $collection = $conn->active_users;
         $condition = array(
           'login' => array(
-            '$gte' => $start_date,
-            '$lte' => $end_date,
+            '$gte' => $start_date ,
+            '$lte' => $end_date ,
           ) ,
           'uid' => (string) $uid ,
         );
         $logged_in_count = $collection->find($condition)->count();
         return !empty($logged_in_count) ? $logged_in_count : 0;
+      }
+    }
+  }
+}
+
+function itg_reports_taxonomy_term_view($term , $view_mode , $langcode) {
+  global $user;
+  if ($term->vid == CATEGORY_MANAGMENT) {
+    if (function_exists('mongodb')) {
+      $con = mongodb();
+      if ($con) {
+        $people = $con->term_view_info;
+        $qry = array(
+          "term_id" => $term->tid,
+          "user_id" => $user->uid,
+          "viewtime" => REQUEST_TIME,
+        );
+        $people->insert($qry);
       }
     }
   }
