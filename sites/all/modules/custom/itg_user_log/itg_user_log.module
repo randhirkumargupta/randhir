@@ -73,14 +73,27 @@ function itg_user_log_menu() {
     'access arguments' => array('view report dashboard') ,
   );
 
+  $items['itg-users-output-for-report/autocomplete'] = array(
+    'page callback' => 'itg_users_output_for_report' ,
+    'page arguments' => array(2) ,
+    'access arguments' => array('administer itg custom widget') ,
+  );
+  
+  $items['itg-users-email-output-for-report/autocomplete'] = array(
+    'page callback' => 'itg_users_email_output_for_report' ,
+    'page arguments' => array(2) ,
+    'access arguments' => array('administer itg custom widget') ,
+  );
+
   $items['content-visits-by-user'] = array(
     'page callback' => 'itg_logged_in_user_visited_node' ,
-    'title' => 'Content Visits',
+    'title' => 'Content Visits' ,
     'access callback' => TRUE ,
     'type' => MENU_CALLBACK ,
     'file' => 'includes/user_info_count_update.inc' ,
     'access arguments' => array('view report dashboard') ,
   );
+  
   $items['section-breakup'] = array(
     'page callback' => 'itg_logged_in_user_section_breakup' ,
     'access callback' => TRUE ,
@@ -89,6 +102,52 @@ function itg_user_log_menu() {
     'access arguments' => array('view report dashboard') ,
   );
   return $items;
+}
+
+/**
+ * Function to get json output for name.
+ * @param string $name
+ */
+function itg_users_output_for_report($name) {
+  $roles = user_roles();
+  $fornt_user_role_id = array_search('Front User' , $roles);
+  $query = db_select('users' , 'u');
+  $query->leftJoin('users_roles' , 'ur' , 'ur.uid = u.uid');
+  $query->fields('u' , array('name'));
+  $query->condition('u.name' , '%' . db_like($name) . '%' , 'LIKE');
+  $query->condition('status' , 1);
+  $query->condition('ur.rid' , $fornt_user_role_id);
+  $query->range(0 , 20);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+  foreach($result as $record) {
+    $options[$record['name']] = $record['name'];
+  }
+
+  drupal_json_output($options);
+}
+
+/**
+ * Function to get json output for email.
+ * @param string $name
+ */
+function itg_users_email_output_for_report($name) {
+  $roles = user_roles();
+  $fornt_user_role_id = array_search('Front User' , $roles);
+  $query = db_select('users' , 'u');
+  $query->leftJoin('users_roles' , 'ur' , 'ur.uid = u.uid');
+  $query->fields('u' , array('mail'));
+  $query->condition('u.mail' , '%' . db_like($name) . '%' , 'LIKE');
+  $query->condition('status' , 1);
+  $query->condition('ur.rid' , $fornt_user_role_id);
+  $query->range(0 , 20);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  
+  foreach($result as $record) {
+    $options[$record['mail']] = $record['mail'];
+  }
+
+  drupal_json_output($options);
 }
 
 /**
@@ -229,6 +288,7 @@ function itg_user_content_visit_report_form($form , &$form_state) {
   $form['username'] = array(
     '#type' => 'textfield' ,
     '#title' => t('Username') ,
+    '#autocomplete_path' => 'itg-users-output-for-report/autocomplete' ,
     '#attributes' => array("placeholder" => array("Enter username")) ,
     '#default_value' => isset($_GET['username']) ? $_GET['username'] : "" ,
   );
@@ -236,6 +296,7 @@ function itg_user_content_visit_report_form($form , &$form_state) {
   $form['email'] = array(
     '#type' => 'textfield' ,
     '#title' => t('Email') ,
+    '#autocomplete_path' => 'itg-users-email-output-for-report/autocomplete' ,
     '#attributes' => array("placeholder" => array("Enter Email")) ,
     '#default_value' => isset($_GET['email']) ? $_GET['email'] : "" ,
   );
@@ -244,10 +305,12 @@ function itg_user_content_visit_report_form($form , &$form_state) {
     '#type' => 'select' ,
     '#options' => array(
       '' => 'Any' ,
-      'story' => 'Story' ,
-      'photogallery' => 'Photogallery' ,
-      'videogallery' => 'Videogallery' ,
       'blog' => 'Blog' ,
+      'story' => 'Story' ,
+      'mega_review_critic' => 'Mega Review' ,
+      'photogallery' => 'Photogallery' ,
+      'podcast' => 'Podcast' ,
+      'videogallery' => 'Videogallery' ,
     ) ,
     '#title' => t('Content Type') ,
     '#default_value' => isset($_GET['content_type']) ? $_GET['content_type'] : "" ,
@@ -504,4 +567,10 @@ function itg_user_log_get_sections($c_name) {
     $cursor = $people->findOne($cond , array('section'));
     return $cursor['section'];
   }
+}
+
+function get_front_page_nid() {
+  $node_url = drupal_get_normal_path(variable_get('site_frontpage', 'node'));
+  $node_chunk = explode('/', $node_url);
+  return $node_chunk[1];
 }
