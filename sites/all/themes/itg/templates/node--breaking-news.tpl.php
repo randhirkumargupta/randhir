@@ -28,7 +28,7 @@ if (!empty($content)):
       }
         //$title = $node->title;
         //$share_title = $type.':'.$title;
-        $share_title = $title;
+        $share_title = $node->title;
         ?>
     <!--<h1><?php if($type == 'Breaking News') { ?><span><?php print ($type) ?></span>: <?php } print ($title) ?></h1>-->
     <?php print ($title) ?>

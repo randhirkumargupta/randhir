@@ -1,15 +1,56 @@
 <?php
 
 /**
- * Main function to render chart.
- * @return string
+ * Main function for reports.
+ * {@inheritdoc}.
  */
 function itg_registered_vs_anonymous_user_form() {
   $form = array();
+
+  $form['date_from'] = array(
+    '#type' => 'textfield' ,
+    '#title' => t('Date from') ,
+    '#default_value' => (!empty($_GET['date_from'])) ? date('d-m-Y' , $_GET['date_from']) : "" ,
+  );
+
+  $form['date_to'] = array(
+    '#type' => 'textfield' ,
+    '#title' => t('Date to') ,
+    '#default_value' => (!empty($_GET['date_to'])) ? date('d-m-Y' , $_GET['date_to']) : "" ,
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit' ,
+    '#value' => t('Submit') ,
+  );
+
+  $form['reset'] = array(
+    '#type' => 'markup' ,
+    '#markup' => l('Reset' , 'itg-registered-vs-anonymous-user-content-visited-report' , array('attributes' => array('class' => array('btn-reset')) , 'query' => array('report_type' => 'section_wise_report'))) ,
+  );
+
   $form['chart'] = array(
     '#markup' => print_registered_vs_anonymous_chart() ,
   );
+
+  drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file'));
   return $form;
+}
+
+/**
+ * {@inheritdoc}.
+ */
+function itg_registered_vs_anonymous_user_form_submit($form , $form_state) {
+  $date_from = $form_state['values']['date_from'];
+  $date_to = $form_state['values']['date_to'];
+  $path = "itg-registered-vs-anonymous-user-content-visited-report";
+  $options = array(
+    'query' => array(
+      'date_from' => strtotime($date_from) ,
+      'date_to' => strtotime($date_to) ,
+    ) ,
+  );
+  drupal_goto($path , $options);
 }
 
 /**
@@ -17,8 +58,21 @@ function itg_registered_vs_anonymous_user_form() {
  * @return html
  */
 function print_registered_vs_anonymous_chart() {
-  $chart = get_registered_vs_anonymous_user_node_visit_count();
-  return '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  $start_date = 0;
+  $end_date = time();
+  if (!empty($_GET['date_from'])) {
+    $start_date = strtotime('-1day' , $_GET['date_from']);
+  }
+  if (!empty($_GET['date_to'])) {
+    $end_date = strtotime('+1day' , $_GET['date_to']);
+  }
+  $chart = get_registered_vs_anonymous_user_node_visit_count($start_date , $end_date);
+  $user_data = "<ul>"
+      . "<li>Total count : " . $chart['total_count'] . "</li>"
+      . "<li>Registred users count : " . $chart['registred'] . "</li>"
+      . "<li>Anonymous users count : " . $chart['anonymous'] . "</li>"
+      . "</ul>";
+  return $user_data . '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load(\'current\', {\'packages\':[\'corechart\']});
       google.charts.setOnLoadCallback(drawChart);
@@ -45,10 +99,12 @@ function print_registered_vs_anonymous_chart() {
 }
 
 /**
- * Function which calculate the registered and anonymous.
+ * Function which calculate the registered and anonymous count for report.
+ * @param int $start_date
+ * @param int $end_date
  * @return array
  */
-function get_registered_vs_anonymous_user_node_visit_count() {
+function get_registered_vs_anonymous_user_node_visit_count($start_date = 0 , $end_date = REQUEST_TIME) {
   $final_data_array_count = array();
   if (function_exists('mongodb')) {
     $conn = mongodb();
@@ -57,20 +113,56 @@ function get_registered_vs_anonymous_user_node_visit_count() {
       $condition = array(
         'uid' => array(
           '$eq' => 0 ,
-        )
+        ) ,
+        'viewtime' => array(
+          '$gte' => $start_date ,
+          '$lte' => $end_date ,
+        ) ,
       );
       $anonymous_user_count = $collection->find($condition)->count();
 
       $condition_2 = array(
         'uid' => array(
           '$ne' => 0 ,
-        )
+        ) ,
+        'viewtime' => array(
+          '$gte' => $start_date ,
+          '$lte' => $end_date ,
+        ) ,
       );
       $registered_user_count = $collection->find($condition_2)->count();
 
+      //Handel case for terms.
+
+      $collection_term = $conn->term_view_info;
+      // Calculate for anyonomus users.
+      $condition_term = array(
+        'viewtime' => array(
+          '$gte' => $start_date ,
+          '$lte' => $end_date ,
+        ) ,
+        'user_id' => array(
+          '$eq' => 0
+        ) ,
+      );
+      $term_view_count_reg = $collection_term->find($condition_term)->count();
+      // Calculate for registred users.
+      $condition_term = array(
+        'viewtime' => array(
+          '$gte' => $start_date ,
+          '$lte' => $end_date ,
+        ) ,
+        'user_id' => array(
+          '$ne' => 0
+        ) ,
+      );
+      $term_view_count_ann = $collection_term->find($condition_term)->count();
+      $only_registred_count = $registered_user_count + $term_view_count_reg;
+      $only_ann_count = $anonymous_user_count + $term_view_count_ann;
       $final_data_array_count = array(
-        'registred' => $registered_user_count ,
-        'anonymous' => $anonymous_user_count ,
+        'registred' => $only_registred_count ,
+        'anonymous' => $only_ann_count ,
+        'total_count' => $only_registred_count + $only_ann_count ,
       );
       return $final_data_array_count;
     }

@@ -6715,6 +6715,9 @@ div.node #comments h2 {
 .sidebar-section-photo .itg-widget .ad-widget .droppable {
   min-height: 0;
 }
+.sidebar-section-photo .itg-widget .itg-widget-inner {
+  position: relative;
+}
 
 [id*="views-exposed-form-byline-list-page"] .views-widget-filter-field_celebrity_pro_occupation_tid .form-type-select .form-select + div.description {
   left: 148px;
@@ -6819,9 +6822,22 @@ div.node #comments h2 {
   padding: 10px 5px 7px;
   border-bottom: 3px solid #d9d9d9;
   background-color: #d9d9d9;
+  border-top: 1px solid #d9d9d9;
+  border-left: 1px solid #d9d9d9;
+  border-right: 1px solid #d9d9d9;
+  border-radius: 5px 5px 0 0;
+  color: #d9d9d9;
 }
-.itg-region ul li a:hover {
+.itg-region ul li a.active {
+  color: #000 !important;
+  background-color: #fff;
+  border-bottom: 3px solid #d9d9d9;
+}
+.itg-region ul li a.current-active {
   border-bottom: 3px solid #d00b26;
+}
+.itg-region ul li.active + li a {
+  color: #ababab;
 }
 .itg-region .slide-icon {
   position: absolute;
@@ -11524,6 +11540,10 @@ span.file a {
   margin-top: 20px;
 }
 
+.node-event_backend-form .form-field-name-field-no-of-tickets {
+  margin-bottom: 140px;
+}
+
 [id*="field-ticket-group-type-values"] .form-type-textfield > label, [id*="field-ticket-group-type-values"] .form-type-select > label {
   width: 280px;
 }
@@ -12128,4 +12148,31 @@ body.taxonomy-form-term-tags {
 
 .itg-common-section .widget-wrapper.top_stories_ordering .block-itg-widget, .itg-common-section .widget-wrapper.most_popular .block-itg-widget {
   overflow-y: auto;
+}
+
+.view .view-filters [id*="views-exposed-form-section-wiser-breakup-report-page"] .views-exposed-form .views-exposed-widget.views-submit-button {
+  width: 560px;
+}
+.view .view-filters [id*="views-exposed-form-section-wiser-breakup-report-page"] .views-exposed-form .views-exposed-widget.views-submit-button fieldset {
+  float: left;
+  width: 235px;
+  border: none;
+  margin-right: 10px;
+}
+.view .view-filters [id*="views-exposed-form-section-wiser-breakup-report-page"] .views-exposed-form .views-exposed-widget.views-submit-button fieldset legend {
+  display: block;
+  padding: 5px 0;
+}
+.view .view-filters [id*="views-exposed-form-section-wiser-breakup-report-page"] .views-exposed-form .views-exposed-widget.views-submit-button fieldset .form-type-textfield {
+  float: left;
+  width: 112px;
+}
+.view .view-filters [id*="views-exposed-form-section-wiser-breakup-report-page"] .views-exposed-form .views-exposed-widget.views-submit-button fieldset .form-type-textfield.form-item-week1-date-from, .view .view-filters [id*="views-exposed-form-section-wiser-breakup-report-page"] .views-exposed-form .views-exposed-widget.views-submit-button fieldset .form-type-textfield.form-item-week2-date-from {
+  margin-right: 10px;
+}
+.view .view-filters [id*="views-exposed-form-section-wiser-breakup-report-page"] .views-exposed-form .views-exposed-widget.views-submit-button fieldset .form-type-textfield label {
+  display: none;
+}
+.view .view-filters [id*="views-exposed-form-section-wiser-breakup-report-page"] .views-exposed-form .views-exposed-widget.views-submit-button .form-submit {
+  margin-top: 28px;
 }
