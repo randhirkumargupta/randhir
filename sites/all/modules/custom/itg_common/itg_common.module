@@ -277,10 +277,10 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
 
 function itg_common_meta_token_remove($form, &$form_state) {
-//  drupal_add_js('jQuery(document).ready(function() {                  
-//                 jQuery("#edit-metatags-und-description-value").val("");
-//              
-//          });', array('type' => 'inline', 'scope' => 'footer'));
+  drupal_add_js('jQuery(document).ready(function() {                  
+                // jQuery("#edit-metatags-und-description-value").val("");
+              jQuery("#edit-metatags-und-title-value").val("");
+          });', array('type' => 'inline', 'scope' => 'footer'));
   
   return $form;
 }
