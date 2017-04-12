@@ -16,6 +16,7 @@ function _itg_report_save_active_user_data($user_data) {
         "mobile" => $user_data['mobile'],
         "created" => $user_data['created'],
         "login" => $user_data['login'],
+        "role" => $user_data['role'],
         "access" => $user_data['access'],
       );
       $active_users->insert($qry);
@@ -235,8 +236,14 @@ function _get_most_active_users_id_from_mongo($start_date, $end_date, $email, $n
       if (empty($start_date)) {
         $start_date = 0;
       }
+      else {
+        $start_date = strtotime('-1 day' , $start_date);
+      }
       if (empty($end_date)) {
         $end_date = time() + 100;
+      }
+      else {
+        $end_date = strtotime('+1 day' , $end_date);
       }
       $condition = array(
         'condition' => array(
@@ -244,6 +251,7 @@ function _get_most_active_users_id_from_mongo($start_date, $end_date, $email, $n
             '$gte' => (int) $start_date,
             '$lte' => (int) $end_date,
           ),
+          'role' => 'Front User',
         )
       );
       $keys = array("uid" => true);

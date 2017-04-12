@@ -53,7 +53,8 @@
             <div class="marquee-child">
                 <?php print $field->content; ?>        
             </div>
-          </div>                      
+          </div> 
+        <div class="ltv-and-ss">
           <div class="live-tv-link">
               <?php $live_tv_img = '<img src="'. $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/imgpsh_fullsize.png" alt="LiveTV" title="LiveTV" />'; ?>
               <?php print l($live_tv_img, 'livetv', array('html' => TRUE, 'attributes' => array('class' => array('live-tv-icon')))); ?>              
@@ -67,6 +68,7 @@
                   <li><a href="javascript:;" title="share on google+" class="user-activity google def-cur-pointer" rel="1" data-tag="homepage-breaking-news" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"></a></li>                  
               </ul>
           </div> 
+        </div>
       </div>
   </div>  
   <?php print $field->wrapper_suffix; ?>

@@ -175,7 +175,6 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['fields']['label']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['label']['field'] = 'label';
   $handler->display->display_options['fields']['label']['label'] = 'Title';
-  $handler->display->display_options['fields']['label']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['label']['alter']['path'] = '[url]';
   $handler->display->display_options['fields']['label']['alter']['target'] = '_blank';
   /* Field: Apache Solr: bundle_name */
