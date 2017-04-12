@@ -647,8 +647,8 @@ function itg_workflow_node_presave($node) {
             $entitydata = entity_load('field_collection_item', $imagecollection);
             $v_fid = $entitydata[$imagecollection['value']]->field_videogallery_video_upload;
             $fids = $v_fid[LANGUAGE_NONE][0]['fid'];
-            $priv_data = $entitydata[$imagecollection['value']]->field_video_private;
-            $priv_status = $imagecollection['field_video_private'][LANGUAGE_NONE][0]['value'];
+            $priv_status = $entitydata[$imagecollection['value']]->field_video_private;
+            
           }
 
           if ((int) $fids != 0) {
@@ -672,8 +672,8 @@ function itg_workflow_node_presave($node) {
               }
             }
             else {
-              $file_video = itg_videogallery_get_video_info_by_fid($fids);
-              itg_videogallery_update_tags_video_private($tag_value, $file_video[0]->solr_video_id, $priv_status);
+              
+             
               $video_image = itg_videogallery_get_video_all($fids);
 
               if ($video_image) {
@@ -682,6 +682,9 @@ function itg_workflow_node_presave($node) {
             }
           }
         }
+         $file_video = itg_videogallery_get_video_info_by_fid($fids);
+        
+            //  itg_videogallery_update_tags_video_private($tag_value, $file_video[0]->solr_video_id, $priv_status);
       }
 
 // Need to chenge this for redirect
@@ -711,6 +714,7 @@ function itg_workflow_node_presave($node) {
       $node->workbench_moderation_state_new = 'published';
     }
   }
+  
 }
 
 /* After build for views exposed form.
