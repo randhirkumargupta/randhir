@@ -4525,6 +4525,8 @@ div.node{
     margin-bottom: 30px;
   }
   .newsletter-banner{
+    height: 100px;
+    overflow: hidden;
     img{
       width: 100%;
       height: 100px;
@@ -7896,8 +7898,8 @@ div.node{
     @extend .vtop;
     padding: 10px 20px;
     font: 14px/18px Roboto;
-    color: #fff;
-    background-color: #666;
+    color: #666;
+    background-color: #d1d1d1;
     border-radius: 5px;
     margin: 0 10px;
     text-transform: uppercase;
@@ -8300,6 +8302,10 @@ div.node{
       }
       &#Configuration{
         overflow: hidden;
+        .form-field-name-field-photogallery-configuration{
+          @extend .dib;
+          @extend .full;
+        }
       }
     }
     .itg-form-section{
@@ -11330,13 +11336,20 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   [id*="itg-registred-user-report-form"]{
     h2{margin-bottom: 30px;}
     .form-type-textfield{
-      > label{width: 120px;}
-      .form-text{max-width: 200px;}
+      float: left;
+      margin-right: 10px;
+      > label{
+        width: auto;
+        display: block;
+        float: none;
+      }
+      .form-text{max-width: 200px; width: 100%;}
     }
-    .form-submit {
-      margin-left: 150px;
+    .form-submit, a.btn-reset{
       @extend .btn-small;
+      margin-top: 28px;
     }
+    #piechart{max-width: 100%;}
   }
   .node-supplement-form{
     @extend .image-repo-browse;
@@ -11412,3 +11425,39 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     [id*="edit-relations"] .fieldset-title{display: none;}
   }
   body.taxonomy-form-term-tags{margin-top: 0;}
+ .view .view-filters [id*="views-exposed-form-readers-reports-page"]{
+   .views-exposed-form{
+      .views-exposed-widget.views-widget-filter-field_mobile_number_value{
+        width: 200px;
+      }
+    } 
+  }
+  .view .view-filters [id*="views-exposed-form-itg-active-users-report-page"]{
+    .views-exposed-form{
+      .views-exposed-widget{
+        &.views-widget-filter-uid{width: 215px;}
+        &.views-widget-filter-created{
+          width: auto;
+          .form-item-created-min{
+            float: left;
+            width: 140px;
+            margin-right: 10px;
+          }
+          .form-item-created-max{
+            float: left;
+            width: 140px;
+            label{
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+  .itg-common-section{
+    .widget-wrapper{
+      &.top_stories_ordering, &.most_popular{
+        .block-itg-widget{overflow-y: auto;}
+      }
+    }
+  }

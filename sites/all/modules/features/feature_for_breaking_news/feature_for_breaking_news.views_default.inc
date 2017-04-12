@@ -584,6 +584,13 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['dynamic_band_link']['field'] = 'dynamic_band_link';
   $handler->display->display_options['fields']['dynamic_band_link']['label'] = '';
   $handler->display->display_options['fields']['dynamic_band_link']['element_label_colon'] = FALSE;
+  /* Field: Content: Snap post */
+  $handler->display->display_options['fields']['field_story_snap_post']['id'] = 'field_story_snap_post';
+  $handler->display->display_options['fields']['field_story_snap_post']['table'] = 'field_data_field_story_snap_post';
+  $handler->display->display_options['fields']['field_story_snap_post']['field'] = 'field_story_snap_post';
+  $handler->display->display_options['fields']['field_story_snap_post']['label'] = '';
+  $handler->display->display_options['fields']['field_story_snap_post']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_story_snap_post']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -689,6 +696,11 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['dynamic_band_link']['field'] = 'dynamic_band_link';
   $handler->display->display_options['fields']['dynamic_band_link']['label'] = '';
   $handler->display->display_options['fields']['dynamic_band_link']['element_label_colon'] = FALSE;
+  /* Field: Content: Snap post */
+  $handler->display->display_options['fields']['field_story_snap_post']['id'] = 'field_story_snap_post';
+  $handler->display->display_options['fields']['field_story_snap_post']['table'] = 'field_data_field_story_snap_post';
+  $handler->display->display_options['fields']['field_story_snap_post']['field'] = 'field_story_snap_post';
+  $handler->display->display_options['fields']['field_story_snap_post']['exclude'] = TRUE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Field: Category (field_section) */
   $handler->display->display_options['arguments']['field_section_tid']['id'] = 'field_section_tid';

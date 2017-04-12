@@ -12,6 +12,7 @@
   <h2 class="breaking-title">Basic Details</h2>
   <?php print drupal_render($form['field_type']); ?>
   <?php print drupal_render($form['field_story_expires']); ?>
+  <?php print drupal_render($form['field_story_snap_post']); ?>
   <?php //print drupal_render($form['field_content_type']); ?>
   <?php print drupal_render($form['title']); ?>
            </div>
