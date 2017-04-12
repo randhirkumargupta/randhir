@@ -23,7 +23,13 @@
  */
 if(function_exists('itg_get_related_story_content')) {
 $related_data = itg_get_related_story_content($row->entity_id);
-$front_url = str_replace('-backend', '', $related_data->url);
+//$front_url = str_replace('-backend', '', $related_data->url);
+  if (strpos($related_data->url, BACKEND_URL) !== false) {
+    $front_url = str_replace(BACKEND_URL, FRONT_URL, $related_data->url);
+  }
+  else {
+    $front_url = $related_data->url;
+  }
 }
 if(!empty($related_data->sm_field_magazine_small_url[0]) && $related_data->bundle == 'magazine') {
 ?>

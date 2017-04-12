@@ -164,13 +164,12 @@
         <?php $num_of_ratings = 0; ?>
       <!------------------------------------------------------------------------------------------------------->
         <?php $external_review = $internal_review = FALSE; ?>
-        <?php foreach ($node->field_mega_review_review[LANGUAGE_NONE] as $field_collection): ?>   
+        <?php foreach ($node->field_mega_review_review[LANGUAGE_NONE] as $field_collection):$reviews = entity_load('field_collection_item', array($field_collection['value']));    
+
+         if ($reviews[$field_collection['value']]->field_story_review_type[LANGUAGE_NONE][0]['value'] != 'external') { ?>
           <div class="other-reviews-row">
-              <?php $reviews = entity_load('field_collection_item', array($field_collection['value'])) ?>     
               <!-- Review Headline -->
-              <?php if ($reviews[$field_collection['value']]->field_story_review_type[LANGUAGE_NONE][0]['value'] == 'external'): ?>
-                <?php print '<h2>' . t('Other Reviewers') . '</h2>'; ?>
-              <?php endif; ?>
+              
               
               <h2><?php print l($reviews[$field_collection['value']]->field_buzz_headline[LANGUAGE_NONE][0]['value'], $reviews[$field_collection['value']]->field_mega_review_url_link[LANGUAGE_NONE][0]['value']); ?></h2>
               <div class="other-reviews-posted-on">
@@ -238,7 +237,87 @@
                   </div>
               </div>
           </div>
-        <?php endforeach; ?> 
+         <?php  } endforeach; ?> 
+      
+      
+       <?php foreach ($node->field_mega_review_review[LANGUAGE_NONE] as $field_collection): 
+                    $reviews = entity_load('field_collection_item', array($field_collection['value']));    
+
+         if ($reviews[$field_collection['value']]->field_story_review_type[LANGUAGE_NONE][0]['value'] == 'external') { ?>
+         
+         <div class="other-reviews-row">
+              <!-- Review Headline -->
+            
+                <?php print '<h2>' . t('Other Reviewers') . '</h2>'; ?>
+             
+              
+              <h2><?php print l($reviews[$field_collection['value']]->field_buzz_headline[LANGUAGE_NONE][0]['value'], $reviews[$field_collection['value']]->field_mega_review_url_link[LANGUAGE_NONE][0]['value']); ?></h2>
+              <div class="other-reviews-posted-on">
+                  <!-- Byline reporter -->
+                  <!-- Get Multiple reviewers name -->
+                  <?php $reviewers = array(); ?>                  
+                  <?php foreach ($reviews[$field_collection['value']]->field_story_reporter[LANGUAGE_NONE] as $reviewer_name): ?>                  
+                    <?php $reviewers[] = $reviewer_name['entity']->title ?>
+                  <?php endforeach; ?>
+                  
+                  <!-- Print External review. -->
+                  <?php if ($reviews[$field_collection['value']]->field_story_review_type[LANGUAGE_NONE][0]['value'] == 'external'): ?>
+                    <!--<div id="external-review" style="display:none;">-->
+                    <?php
+                      $external = $reviews[$field_collection['value']]->field_story_reporter[LANGUAGE_NONE][0]['entity']->title;
+                      $external_rating = $reviews[$field_collection['value']]->field_story_rating[LANGUAGE_NONE][0]['value'] * 20;
+                      $external_review .='<p>'.$external.'</p>                      
+                      <span class="other-reviews-rating" data-star-value="'.$external_rating.'%"></span>';                        
+                    ?>
+
+                    <!--<p><?php //print $reviews[$field_collection['value']]->field_story_reporter['und'][0]['entity']->title; ?></p>                      
+                          <span class="other-reviews-rating" data-star-value="<?php //print $reviews[$field_collection['value']]->field_story_rating['und'][0]['value'] * 20; ?>%"></span>-->
+                   <!--</div>-->
+                   <?php //$external_review == TRUE; ?>
+                  <?php endif; ?>
+
+                  <!-- Print internal review. -->
+                  <?php if ($reviews[$field_collection['value']]->field_story_review_type[LANGUAGE_NONE][0]['value'] == 'internal'): ?>
+                    <!--<div id="internal-review" style="display:none;">-->
+                    <?php
+                      $internal = $reviews[$field_collection['value']]->field_story_reporter[LANGUAGE_NONE][0]['entity']->title;
+                      $internal_rating = $reviews[$field_collection['value']]->field_story_rating[LANGUAGE_NONE][0]['value'] * 20;
+                      $internal_review .='<p>'.$internal.'</p>                      
+                      <span class="other-reviews-rating" data-star-value="'.$internal_rating.'%"></span>';                        
+                    ?>                      
+                    <!--<p><?php //print implode(', ', $reviewers); ?></p>
+                          <span class="other-reviews-rating" data-star-value="<?php //print $reviews[$field_collection['value']]->field_story_rating['und'][0]['value'] * 20; ?>%"></span>-->
+                    <!--</div>-->
+                    <?php //$internal_review == TRUE; ?>
+                  <?php endif; ?>
+
+                  <span class="other-reviews-by"><?php print t('By') . ' ' . implode(', ', $reviewers); ?></span>
+                  <!-- Created date -->
+                  <span class="other-reviews-date"><?php print format_date($node->created, 'custom', 'F d, Y'); ?></span>
+                  <!-- Ratings -->    
+                  <?php $average_ratings += $reviews[$field_collection['value']]->field_story_rating[LANGUAGE_NONE][0]['value']; ?>
+                  <?php ++$num_of_ratings; ?>
+                  <span class="other-reviews-rating" data-star-value="<?php print $reviews[$field_collection['value']]->field_story_rating[LANGUAGE_NONE][0]['value'] * 20; ?>%"></span>
+              </div>
+              <?php $full_desc = $reviews[$field_collection['value']]->field_mega_review_description[LANGUAGE_NONE][0]['value'] ?>
+              <!-- Review description -->
+              <div class="other-reviews-desc">
+                  <div class="less-content">
+                      <?php
+                      echo mb_strimwidth(strip_tags($full_desc), 0, 245, "..");
+                      ?>
+                      <?php if (strlen($full_desc) > 245) { ?>
+                        <a href="javascript:void(0)" class="anchor-action read-more"> More[+]</a>
+                    </div>
+
+                    <div class="full-content" style="display: none">
+                        <?php echo $full_desc; ?>
+                        <a href="javascript:void(0)" class="anchor-action read-less"> Less[-]</a>
+                      <?php } ?>
+                  </div>
+              </div>
+          </div>
+         <?php } endforeach; ?> 
       <!------------------------------------------------------------------------------------------------------->
       <div id="internal-review" style="display:none;"><?php echo $internal_review; ?></div>
       <div id="external-review" style="display:none;"><?php echo $external_review; ?></div>
