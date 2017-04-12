@@ -334,7 +334,7 @@ function ckeditor_scayt_langcode($lang) {
 function ckeditor_load_plugins($render = FALSE) {
   $plugins = module_invoke_all('ckeditor_plugin');
   // Editor plugins hidden on server after cache clean
-  /*$custom_plug = array('dropcap', 'quiz', 'expertchunk', 'movieimage', 'itgvideo', 'blurb', 'factoids', 'itgimage', 'survey', 'editorquotes', 'poll');
+  $custom_plug = array('dropcap', 'quiz', 'expertchunk', 'movieimage', 'itgvideo', 'blurb', 'factoids', 'itgimage', 'survey', 'editorquotes', 'poll');
   foreach($custom_plug as $cus_plug) {
     if(empty($plugins[$cus_plug])) {
       $plugins[$cus_plug]['name'] = $cus_plug;
@@ -344,7 +344,7 @@ function ckeditor_load_plugins($render = FALSE) {
       $plugins[$cus_plug]['buttons'][$cus_plug]['icon'] = 'icons/'.$cus_plug.'.png';
       $plugins[$cus_plug]['default'] = 'f';
     }
-  }*/
+  }
   // [#2159403] introduced a slight change in CKEditor API, expecting the path
   // to a plugin returned by hook_ckeditor_plugin() to be a full URL. This
   // breaks backward compatibility for external plugins, so we're fixing it
