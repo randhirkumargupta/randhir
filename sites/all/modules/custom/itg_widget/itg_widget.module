@@ -36,6 +36,7 @@ function itg_widget_init() {
   $settings['base_url'] = $base_url;
   drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));
+  //pr(taxonomy_get_parents_all(1208571));
 }
 
 /**
