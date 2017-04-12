@@ -181,6 +181,35 @@ function itg_reports_form_views_exposed_form_alter(&$form , &$form_state , $form
       $form['uid']['#attributes']['placeholder'] = 'Search By Name';
       $form['mail']['#autocomplete_path'] = 'itg-reports-mail/autocomplete';
       break;
+    case 'views-exposed-form-section-wiser-breakup-report-page':
+      drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file'));
+      $form['week1'] = array(
+        '#type' => 'fieldset' ,
+        "#title" => 'Week1' ,
+        "#weight" => -99 ,
+      );
+      $form['week1']['week1_date_from'] = array(
+        '#type' => 'textfield' ,
+        "#title" => 'Date from' ,
+      );
+      $form['week1']['week1_date_to'] = array(
+        '#type' => 'textfield' ,
+        "#title" => 'Date to' ,
+      );
+      $form['week2'] = array(
+        '#type' => 'fieldset' ,
+        "#title" => 'Week2' ,
+        "#weight" => -98 ,
+      );
+      $form['week2']['week2_date_from'] = array(
+        '#type' => 'textfield' ,
+        "#title" => 'Date from' ,
+      );
+      $form['week2']['week2_date_to'] = array(
+        '#type' => 'textfield' ,
+        "#title" => 'Date to' ,
+      );
+      break;
   }
 }
 
@@ -576,8 +605,8 @@ function _get_loggedin_count_of_user($uid , $start_date = 0 , $end_date = REQUES
         $collection = $conn->active_users;
         $condition = array(
           'login' => array(
-            '$gte' => $start_date,
-            '$lte' => $end_date,
+            '$gte' => $start_date ,
+            '$lte' => $end_date ,
           ) ,
           'uid' => (string) $uid ,
         );
@@ -586,4 +615,64 @@ function _get_loggedin_count_of_user($uid , $start_date = 0 , $end_date = REQUES
       }
     }
   }
+}
+
+/**
+ * Function returns count of term views.
+ * @param int $tid
+ * @param int $start_date
+ * @param int $end_date
+ * @return int
+ */
+function _get_term_report_view_count_data($tid , $start_date = 0 , $end_date = REQUEST_TIME) {
+  if ($tid) {
+    if (function_exists('mongodb')) {
+      $conn = mongodb();
+      if ($conn) {
+        $collection = $conn->term_view_info;
+        $condition = array(
+          'viewtime' => array(
+            '$gte' => $start_date ,
+            '$lte' => $end_date ,
+          ) ,
+          'term_id' => (string) $tid ,
+        );
+        $term_view_count = $collection->find($condition)->count();
+        return !empty($term_view_count) ? $term_view_count : 0;
+      }
+    }
+  }
+}
+
+function _get_report_data_of_week($tid , $date_from , $date_to) {
+  if (!empty($tid) && $date_from != 'N/A' && $date_to != 'N/A') {
+    $real_date_from = strtotime('-1day' , strtotime($date_from));
+    $real_date_to = strtotime('+1day' , strtotime($date_to));
+    return _get_term_report_view_count_data($tid , $real_date_from , $real_date_to);
+  }
+  else {
+    return t('N/A');
+  }
+}
+
+function _get_percentage_growth($week1 , $week2) {
+  if ($week1 == 0 && $week2 == 0) {
+   return t("N/A"); 
+  }
+  else {
+    $total = $week1 + $week2;
+    try {
+      return ((($week2 - $week1) / $total) * 100) . '%';
+    }
+    catch (Exception $ex) {
+      return $ex->getMessage();
+    }
+  }
+}
+
+/**
+ * {inheritdoc}
+ */
+function itg_reports_taxonomy_term_view($term , $view_mode , $langcode) {
+  
 }
