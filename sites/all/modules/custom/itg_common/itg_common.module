@@ -153,7 +153,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
       $form['field_story_ugc_source_id']['#attributes']['class'][] = 'element-hidden';
       $form['field_story_node_identity']['#attributes']['class'][] = 'element-hidden';
       $form['field_common_related_content']['#attributes']['class'][] = 'element-hidden';
-      //$form['field_cm_related_content_detail']['#attributes']['class'][] = 'element-hidden';
+      $form['field_cm_related_content_detail']['#attributes']['class'][] = 'element-hidden';
 
       // add common hidden type field
       $type = $form['type']['#value'];
