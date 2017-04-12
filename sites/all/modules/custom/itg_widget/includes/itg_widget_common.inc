@@ -458,15 +458,18 @@ function itg_widget_form_alter(&$form , &$form_state , $form_id) {
     }
 
 // Prepare weights in array. 
-    $select_map_array_weight = array();
-    foreach ($itg_widget_order_data as $order_data) {
-      $select_map_array_weight[] = $order_data->weight;
-    }
-
+//    $select_map_array_weight = array();
+//    foreach ($itg_widget_order_data as $order_data) {
+//      $select_map_array_weight[] = $order_data->weight;
+//    }
+    //pr($form['draggableviews']);
     foreach ($form['draggableviews'] as $key => $weight) {
+    
+      
 // echo $key."</br>";
 // make options to weight drop down equal to saved weight value.
-      $form['draggableviews'][$key]['weight']['#options'] = drupal_map_assoc($select_map_array_weight);
+      //$form['draggableviews'][$key]['weight']['#options'] = drupal_map_assoc($select_map_array_weight);
+      $form['draggableviews'][$key]['weight']['#options'] = drupal_map_assoc(array($select_map_array[$form['draggableviews'][$key]['id']['#value']] => $select_map_array[$form['draggableviews'][$key]['id']['#value']]));
 //$form['draggableviews'][$key]['weight']['#options'] = array($key => $key);
 // make default selected value as saved in database.
       $form['draggableviews'][$key]['weight']['#default_value'] = $select_map_array[$form['draggableviews'][$key]['id']['#value']];

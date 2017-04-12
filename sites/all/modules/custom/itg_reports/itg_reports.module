@@ -734,3 +734,10 @@ function _get_percentage_growth($week1 , $week2) {
 function itg_reports_taxonomy_term_view($term , $view_mode , $langcode) {
   
 }
+
+
+function itg_reports_views_post_execute(&$view) {
+  if($view->name == 'section_wiser_breakup_report' && $view->current_display == 'page') {
+    
+  }
+}
