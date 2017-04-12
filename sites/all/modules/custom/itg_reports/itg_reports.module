@@ -39,7 +39,8 @@ function itg_reports_menu() {
     'type' => MENU_CALLBACK ,
     'file' => 'includes/itg_reports.helper.inc' ,
   );
-  // Menu form email autocomplete.
+
+  // Menu form registered autocomplete.
   $items['itg-registered-user-report/%'] = array(
     'page callback' => 'itg_registered_user_report' ,
     'page arguments' => array(1) ,
@@ -66,6 +67,20 @@ function itg_reports_menu() {
     'file' => 'includes/section-wise-breakup-report.inc' ,
   );
 
+  $items['itg-reports-sections/autocomplete'] = array(
+    'page callback' => 'itg_reports_sections_autocomplete' ,
+    'access arguments' => array('view report dashboard') ,
+    'type' => MENU_CALLBACK ,
+    'file' => 'includes/itg_reports.helper.inc' ,
+  );
+  
+  $items['itg-reports-sections-tid/autocomplete'] = array(
+    'page callback' => 'itg_reports_sections_autocomplete_for_tid' ,
+    'access arguments' => array('view report dashboard') ,
+    'type' => MENU_CALLBACK ,
+    'file' => 'includes/itg_reports.helper.inc' ,
+  );
+
   $items['itg-registered-vs-anonymous-user-content-visited-report'] = array(
     'page callback' => 'drupal_get_form' ,
     'page arguments' => array('itg_registered_vs_anonymous_user_form') ,
@@ -75,6 +90,44 @@ function itg_reports_menu() {
   );
 
   return $items;
+}
+
+function itg_reports_sections_autocomplete($name) {
+  $query = db_select('taxonomy_term_data' , 'td');
+  $query->fields('td' , array('name' , 'tid'));
+  $query->condition('td.vid' , CATEGORY_MANAGMENT);
+  $query->condition('td.name' , '%' . db_like($name) . '%' , 'LIKE');
+  $query->range(0 , 40);
+  $result = $query->execute()->fetchAll();
+  //pr($result);
+  foreach ($result as $data) {
+    if (module_exists('itg_category_manager') && function_exists('itg_category_manager_term_state') && itg_category_manager_term_state($data->tid)) {
+      $parents = taxonomy_get_parents_all($data->tid);
+      foreach(array_reverse($parents) as $parent) {
+        $display_option[] = $parent->name;
+      }
+      $option[$data->name] = implode(" >> ", $display_option);
+      unset($display_option);
+    }
+  }
+  //sort($option);
+  return drupal_json_output($option);
+}
+
+function itg_reports_sections_autocomplete_for_tid($tid) {
+  $query = db_select('taxonomy_term_data' , 'td');
+  $query->fields('td' , array('name' , 'tid'));
+  $query->condition('td.vid' , CATEGORY_MANAGMENT);
+  $query->condition('td.tid' , '%' . db_like($tid) . '%' , 'LIKE');
+  $query->range(0 , 40);
+  $result = $query->execute()->fetchAll();
+
+  foreach ($result as $data) {
+    if (module_exists('itg_category_manager') && function_exists('itg_category_manager_term_state') && itg_category_manager_term_state($data->tid)) {
+      $option[$data->tid] = $data->tid;
+    }
+  }
+  return drupal_json_output($option);
 }
 
 /**
@@ -180,6 +233,40 @@ function itg_reports_form_views_exposed_form_alter(&$form , &$form_state , $form
       $form['mail']['#attributes']['placeholder'] = 'Search By Email';
       $form['uid']['#attributes']['placeholder'] = 'Search By Name';
       $form['mail']['#autocomplete_path'] = 'itg-reports-mail/autocomplete';
+      break;
+    case 'views-exposed-form-section-wiser-breakup-report-page':
+      drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file'));
+      drupal_add_css("#autocomplete {max-height : 400px; max-width: 400px; overflow-x : auto; overflow-y: auto;}" , 'inline');
+      $form['name']['#autocomplete_path'] = 'itg-reports-sections/autocomplete';
+      $form['tid_raw']['#autocomplete_path'] = 'itg-reports-sections-tid/autocomplete';
+      $form['tid_raw']['#attributes']['placeholder'] = 'Search By Term Id';
+      $form['name']['#attributes']['placeholder'] = 'Search By Name';
+      $form['week1'] = array(
+        '#type' => 'fieldset' ,
+        "#title" => 'Week1' ,
+        "#weight" => -99 ,
+      );
+      $form['week1']['week1_date_from'] = array(
+        '#type' => 'textfield' ,
+        "#title" => 'Date from' ,
+      );
+      $form['week1']['week1_date_to'] = array(
+        '#type' => 'textfield' ,
+        "#title" => 'Date to' ,
+      );
+      $form['week2'] = array(
+        '#type' => 'fieldset' ,
+        "#title" => 'Week2' ,
+        "#weight" => -98 ,
+      );
+      $form['week2']['week2_date_from'] = array(
+        '#type' => 'textfield' ,
+        "#title" => 'Date from' ,
+      );
+      $form['week2']['week2_date_to'] = array(
+        '#type' => 'textfield' ,
+        "#title" => 'Date to' ,
+      );
       break;
   }
 }
@@ -576,8 +663,8 @@ function _get_loggedin_count_of_user($uid , $start_date = 0 , $end_date = REQUES
         $collection = $conn->active_users;
         $condition = array(
           'login' => array(
-            '$gte' => $start_date,
-            '$lte' => $end_date,
+            '$gte' => $start_date ,
+            '$lte' => $end_date ,
           ) ,
           'uid' => (string) $uid ,
         );
@@ -585,5 +672,72 @@ function _get_loggedin_count_of_user($uid , $start_date = 0 , $end_date = REQUES
         return !empty($logged_in_count) ? $logged_in_count : 0;
       }
     }
+  }
+}
+
+/**
+ * Function returns count of term views.
+ * @param int $tid
+ * @param int $start_date
+ * @param int $end_date
+ * @return int
+ */
+function _get_term_report_view_count_data($tid , $start_date = 0 , $end_date = REQUEST_TIME) {
+  if ($tid) {
+    if (function_exists('mongodb')) {
+      $conn = mongodb();
+      if ($conn) {
+        $collection = $conn->term_view_info;
+        $condition = array(
+          'viewtime' => array(
+            '$gte' => $start_date ,
+            '$lte' => $end_date ,
+          ) ,
+          'term_id' => (string) $tid ,
+        );
+        $term_view_count = $collection->find($condition)->count();
+        return !empty($term_view_count) ? $term_view_count : 0;
+      }
+    }
+  }
+}
+
+function _get_report_data_of_week($tid , $date_from , $date_to) {
+  if (!empty($tid) && $date_from != 'N/A' && $date_to != 'N/A') {
+    $real_date_from = strtotime('-1day' , strtotime($date_from));
+    $real_date_to = strtotime('+1day' , strtotime($date_to));
+    return _get_term_report_view_count_data($tid , $real_date_from , $real_date_to);
+  }
+  else {
+    return t('N/A');
+  }
+}
+
+function _get_percentage_growth($week1 , $week2) {
+  if ($week1 == 0 && $week2 == 0) {
+    return t("N/A");
+  }
+  else {
+    $total = $week1 + $week2;
+    try {
+      return ((($week2 - $week1) / $total) * 100) . '%';
+    }
+    catch (Exception $ex) {
+      return $ex->getMessage();
+    }
+  }
+}
+
+/**
+ * {inheritdoc}
+ */
+function itg_reports_taxonomy_term_view($term , $view_mode , $langcode) {
+  
+}
+
+
+function itg_reports_views_post_execute(&$view) {
+  if($view->name == 'section_wiser_breakup_report' && $view->current_display == 'page') {
+    
   }
 }
