@@ -39,7 +39,8 @@ function itg_reports_menu() {
     'type' => MENU_CALLBACK ,
     'file' => 'includes/itg_reports.helper.inc' ,
   );
-  // Menu form email autocomplete.
+
+  // Menu form registered autocomplete.
   $items['itg-registered-user-report/%'] = array(
     'page callback' => 'itg_registered_user_report' ,
     'page arguments' => array(1) ,
@@ -66,6 +67,20 @@ function itg_reports_menu() {
     'file' => 'includes/section-wise-breakup-report.inc' ,
   );
 
+  $items['itg-reports-sections/autocomplete'] = array(
+    'page callback' => 'itg_reports_sections_autocomplete' ,
+    'access arguments' => array('view report dashboard') ,
+    'type' => MENU_CALLBACK ,
+    'file' => 'includes/itg_reports.helper.inc' ,
+  );
+  
+  $items['itg-reports-sections-tid/autocomplete'] = array(
+    'page callback' => 'itg_reports_sections_autocomplete_for_tid' ,
+    'access arguments' => array('view report dashboard') ,
+    'type' => MENU_CALLBACK ,
+    'file' => 'includes/itg_reports.helper.inc' ,
+  );
+
   $items['itg-registered-vs-anonymous-user-content-visited-report'] = array(
     'page callback' => 'drupal_get_form' ,
     'page arguments' => array('itg_registered_vs_anonymous_user_form') ,
@@ -75,6 +90,44 @@ function itg_reports_menu() {
   );
 
   return $items;
+}
+
+function itg_reports_sections_autocomplete($name) {
+  $query = db_select('taxonomy_term_data' , 'td');
+  $query->fields('td' , array('name' , 'tid'));
+  $query->condition('td.vid' , CATEGORY_MANAGMENT);
+  $query->condition('td.name' , '%' . db_like($name) . '%' , 'LIKE');
+  $query->range(0 , 40);
+  $result = $query->execute()->fetchAll();
+  //pr($result);
+  foreach ($result as $data) {
+    if (module_exists('itg_category_manager') && function_exists('itg_category_manager_term_state') && itg_category_manager_term_state($data->tid)) {
+      $parents = taxonomy_get_parents_all($data->tid);
+      foreach(array_reverse($parents) as $parent) {
+        $display_option[] = $parent->name;
+      }
+      $option[$data->name] = implode(" >> ", $display_option);
+      unset($display_option);
+    }
+  }
+  //sort($option);
+  return drupal_json_output($option);
+}
+
+function itg_reports_sections_autocomplete_for_tid($tid) {
+  $query = db_select('taxonomy_term_data' , 'td');
+  $query->fields('td' , array('name' , 'tid'));
+  $query->condition('td.vid' , CATEGORY_MANAGMENT);
+  $query->condition('td.tid' , '%' . db_like($tid) . '%' , 'LIKE');
+  $query->range(0 , 40);
+  $result = $query->execute()->fetchAll();
+
+  foreach ($result as $data) {
+    if (module_exists('itg_category_manager') && function_exists('itg_category_manager_term_state') && itg_category_manager_term_state($data->tid)) {
+      $option[$data->tid] = $data->tid;
+    }
+  }
+  return drupal_json_output($option);
 }
 
 /**
@@ -183,6 +236,11 @@ function itg_reports_form_views_exposed_form_alter(&$form , &$form_state , $form
       break;
     case 'views-exposed-form-section-wiser-breakup-report-page':
       drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file'));
+      drupal_add_css("#autocomplete {max-height : 400px; max-width: 400px; overflow-x : auto; overflow-y: auto;}" , 'inline');
+      $form['name']['#autocomplete_path'] = 'itg-reports-sections/autocomplete';
+      $form['tid_raw']['#autocomplete_path'] = 'itg-reports-sections-tid/autocomplete';
+      $form['tid_raw']['#attributes']['placeholder'] = 'Search By Term Id';
+      $form['name']['#attributes']['placeholder'] = 'Search By Name';
       $form['week1'] = array(
         '#type' => 'fieldset' ,
         "#title" => 'Week1' ,
@@ -657,7 +715,7 @@ function _get_report_data_of_week($tid , $date_from , $date_to) {
 
 function _get_percentage_growth($week1 , $week2) {
   if ($week1 == 0 && $week2 == 0) {
-   return t("N/A"); 
+    return t("N/A");
   }
   else {
     $total = $week1 + $week2;
