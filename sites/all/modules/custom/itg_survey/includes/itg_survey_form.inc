@@ -11,6 +11,11 @@
 function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
   global $base_url;
   global $user;
+  if($user->uid) {
+  $cookie = $_COOKIE['Drupal_visitor_itgcms_survey_'.arg(1).'_'.$user->uid];
+  } else {
+   $cookie = $_COOKIE['Drupal_visitor_itgcms_survey_'.arg(1)];  
+  }
   
   //Get node of current survey
   if($node_id) {
@@ -269,6 +274,11 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
               '#type' => 'markup',
               '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>This Survey has been expired. So you can not submit!</strong></div>',
           );
+        } elseif(isset($cookie)){
+        $form['survey_has_been_already_taken' . $num] = array(
+            '#type' => 'markup',
+            '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>Sorry! You can not proceed, you have already taken this survey!</strong></div>',
+        );
         } else {
           $form['survey_submit_' . $num] = array(
               '#type' => 'submit',
@@ -373,6 +383,12 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
         $form['survey_has_been_expired' . $num] = array(
             '#type' => 'markup',
             '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>This Survey has been expired. So you can not submit!</strong></div>',
+        );
+      } 
+      elseif(isset($cookie)){
+        $form['survey_has_been_already_taken' . $num] = array(
+            '#type' => 'markup',
+            '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>Sorry! You can not proceed, you have already taken this survey!</strong></div>',
         );
       } else {
         $form['survey_submit_' . $num] = array(
