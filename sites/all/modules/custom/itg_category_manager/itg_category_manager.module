@@ -1389,6 +1389,7 @@ function itg_category_manager_autocomplete_name($string) {
 function itg_category_manager_autocomplete_tid($string) {
   $itg_query = db_select('taxonomy_term_data', 'itg');
   $itg_query->condition('tid', $string . '%', 'LIKE')
+  ->condition('vid', CATEGORY_MANAGMENT, '=')
       ->fields('itg', array('tid'));
   $itg_result = $itg_query->execute();
   $result = array();
