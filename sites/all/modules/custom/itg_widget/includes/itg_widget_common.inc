@@ -441,15 +441,20 @@ function itg_widget_form_alter(&$form , &$form_state , $form_id) {
     if ( in_array($type_in_url , $types) ) {
       $actual_weight_type = $type_in_url;
     }
-//    $view = views_get_current_view();
-//    $total_rows = $view->total_rows;
-
+    
+    $views_current_nid = array();
+    $view = views_get_current_view();   
+    $taxonomy_term_data_comma = implode(",", $views_current_nid);
     $itg_widget_order_data = db_select('itg_widget_order' , 'iwo')
             ->fields('iwo' , array('weight' , 'nid'))
-            ->condition('cat_id' , $_GET['category_tid'])
-            ->condition('content_type' , $actual_weight_type)
-            ->condition('widget' , 'section_wise_widget')
-            ->execute()->fetchAll();
+            ->condition('cat_id' , $_GET['category_tid']);
+    foreach ($view->result as $view_result_data) {
+      //$views_current_nid[] = $view_result_data->node_itg_widget_order_nid;
+      $itg_widget_order_data->condition('nid' , $view_result_data->node_itg_widget_order_nid);
+    }
+      $itg_widget_order_data->condition('content_type' , $actual_weight_type)
+      ->condition('widget' , 'section_wise_widget')
+      ->execute()->fetchAll();
 //pr($itg_widget_order_data);
 //Prepare weight crosspond to nid.
     $select_map_array = array();
