@@ -626,12 +626,12 @@ function itg_msi_node_validate($node, $form, &$form_state) {
                 if (empty($section_tid) && !empty($section)) {
                     form_set_error($field . '5' . $result['fid'], t('Section <strong>@sectionname</strong> in the file @xmlfilename doesn\'t exist in our database. Please choose another section and try again.', array('@sectionname' => $section, '@xmlfilename' => $xml_file->filename)));
                 }
-                if (empty($byline)) {
+                /*if (empty($byline)) {
                     form_set_error($field . '6' . $result['fid'], t('No Author found in the file <strong>@xmlfilename</strong>. Please upload file with author name and try again.', array('@xmlfilename' => $xml_file->filename)));
                 }
                 if (empty($byline_id) && !empty($byline)) {
                     form_set_error($field . '7' . $result['fid'], t('Author <strong>@byline</strong> in the file @xmlfilename doesn\'t exist in our database. Please choose another Author and try again.', array('@byline' => $byline, '@xmlfilename' => $xml_file->filename)));
-                }
+                }*/
                 if (empty($headline) || $headline == 'NA') {
                     form_set_error($field . '8' . $result['fid'], t('No story headline found in the file <strong>@xmlfilename</strong>. Please upload file with story headline and try again.', array('@xmlfilename' => $xml_file->filename)));
                 }
