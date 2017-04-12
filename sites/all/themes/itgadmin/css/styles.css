@@ -11540,6 +11540,10 @@ span.file a {
   margin-top: 20px;
 }
 
+.node-event_backend-form .form-field-name-field-no-of-tickets {
+  margin-bottom: 140px;
+}
+
 [id*="field-ticket-group-type-values"] .form-type-textfield > label, [id*="field-ticket-group-type-values"] .form-type-select > label {
   width: 280px;
 }
