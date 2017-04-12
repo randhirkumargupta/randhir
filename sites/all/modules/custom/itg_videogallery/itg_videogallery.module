@@ -573,6 +573,68 @@ function itg_videogallery_update_node_id_for_video_fid($node_id, $fids) {
           ->execute();
 }
 
+function itg_videogallery_entity_insert($entity, $type) {
+  
+  if ($type == 'node') {
+    if($entity ->type =='itg_solr_video' || $entity ->type =='itg_delete_solr_video' ) {
+    
+    _custom_helper_apachesolr_index_immediately($entity, $type);  
+    }// Need to do this in hook_entity_insert, rather than hook_node_insert, because that's what filefield_paths uses, and otherwise image uri is not set yet
+  }
+}
+
+function itg_videogallery_entity_update($entity, $type) {
+  
+  if ($type == 'node') {
+    if($entity ->type =='itg_solr_video' || $entity ->type =='itg_delete_solr_video' ) {
+    
+    _custom_helper_apachesolr_index_immediately($entity, $type);  
+    }// Need to do this in hook_entity_insert, rather than hook_node_insert, because that's what filefield_paths uses, and otherwise image uri is not set yet
+  }
+}
+
+/**
+ * Helper function to send entities to apachesolr for immediate index.
+ */
+function _custom_helper_apachesolr_index_immediately($entity, $type) {
+  // Don't index unpublished entities
+
+
+  $env_id = apachesolr_default_environment();
+  $bundles_to_index = apachesolr_get_index_bundles($env_id, $type);
+
+  // Check if entity should be indexed
+  $info = entity_get_info($type);
+  if (!empty($info['entity keys']['bundle'])) {
+    $bundle = $entity->{$info['entity keys']['bundle']};
+  }
+  else {
+    $bundle = $type;
+  }
+
+  if (!in_array($bundle, $bundles_to_index)) {
+    return;
+  }
+
+  // Entity should be indexed, so send it to solr
+  $ids = entity_extract_ids($type, $entity);
+  $id = $ids[0];
+
+  // If this entity is unpublished, remove from index
+  if ($entity->status != 1) {
+    apachesolr_remove_entity($env_id, $type, $id);
+    return;
+  }
+
+  $item = new stdClass();
+  $item->entity_type = $type;
+  $item->entity_id = $id;
+
+  module_load_include('inc', 'apachesolr', 'apachesolr.index');
+  $doc = apachesolr_index_entity_to_documents($item, $env_id);
+  apachesolr_index_send_to_solr($env_id, $doc);
+}
+
 /**
  * Function use for upload local video to dailymotion
  */
