@@ -44,7 +44,7 @@ function create_story_xml_clean() {
  // $file_name = 'indiatoday-story_2016-12-01.xml';
   
   //$file_name = 'indiatoday-story_2007-01-01.xml';
-  $file_name = 'indiatoday-story_2009-01-01.xml';
+  $file_name = 'indiatoday-story_2016-12-01.xml';
   $xml_path = 'sites/default/files/xml_file_chunk/';
   $xml = simplexml_load_file($xml_path . $file_name, 'SimpleXMLElement');
   $i = 0;
