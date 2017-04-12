@@ -191,6 +191,19 @@ function itg_ask_expert_form_views_exposed_form_alter(&$form, &$form_state, $for
         $form['title']['#autocomplete_path'] = 'content-title-list/ask_an_expert/autocomplete';
         $form['title']['#attributes'] = array('placeholder' => t('Question'));
     }
+    
+    if ($form['#id'] == 'views-exposed-form-user-selection-user-selection-for-section') {
+    // code to add taxonomy parent terms with no child
+    $op = array("All" => "Select Section");
+    $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = TRUE);
+    foreach ($tax as $key => $val) {
+      if (itg_category_manager_term_state($val->tid)) {
+        $op[$val->tid] = $val->name;
+      }
+    }
+
+    $form['field_user_section_tid']['#options'] = $op;
+  }
 }
 
 /**
