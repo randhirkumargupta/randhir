@@ -224,4 +224,16 @@ jQuery(document).ready(function () {
         changeYear: true,
         dateFormat: 'dd-mm-yy',
     });
+    jQuery('#itg-registered-vs-anonymous-user-form #edit-date-from').datepicker({
+        maxDate: new Date(date_used),
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'dd-mm-yy',
+    });
+    jQuery('#itg-registered-vs-anonymous-user-form #edit-date-to').datepicker({
+        maxDate: new Date(date_used),
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'dd-mm-yy',
+    });
 });

@@ -582,7 +582,7 @@ function update_itg_widget_order_table_data($form , &$form_state) {
             'content_type' => $actual_weight_type ,
           ))
           ->fields(array(
-            'weight' => $node_data['weight'] ,
+            'weight' => (int) $node_data['weight'] ,
             'nid' => $node_data['id'] ,
             'widget' => $widget ,
             'cat_id' => $cat_id ,

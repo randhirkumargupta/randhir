@@ -423,6 +423,13 @@ function itg_term_views_pre_render(&$view) {
     drupal_add_js("jQuery(document).ready(function(){ jQuery('.feed-icon').hide();});", 'inline');
     $view->attachment_before = $header_content_term;
   }
+  
+  if (isset($view->name) && $view->name == "tags_listing") {
+    // Add "Create Tag" button on listing page of Tags Management
+    $header_content_term = '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $header_content_term .= l(t('Create Tag'), 'admin/structure/taxonomy/tags/add');
+    $view->attachment_before = $header_content_term;
+  }
 }
 
 /**
