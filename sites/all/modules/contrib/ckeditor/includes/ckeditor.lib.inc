@@ -334,7 +334,7 @@ function ckeditor_scayt_langcode($lang) {
 function ckeditor_load_plugins($render = FALSE) {
   $plugins = module_invoke_all('ckeditor_plugin');
   // Editor plugins hidden on server after cache clean
-  $custom_plug = array('dropcap', 'quiz', 'expertchunk', 'movieimage', 'itgvideo', 'blurb', 'factoids', 'itgimage', 'survey', 'editorquotes', 'poll');
+  $custom_plug = array('dropcap', 'quiz', 'expertchunk', 'movieimage', 'itgvideo', 'blurb', 'factoids', 'itgimage', 'survey', 'editorquotes', 'poll', 'youtube');
   foreach($custom_plug as $cus_plug) {
     if(empty($plugins[$cus_plug])) {
       $plugins[$cus_plug]['name'] = $cus_plug;
