@@ -50,7 +50,13 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
                 ':input[name="field_credit_to_all[und][1]"]' => array('checked' => TRUE),
             ),
         );
-
+        
+        $form['field_story_comment_question']['#states'] = array(
+            'visible' => array(
+                ':input[name="field_photogallery_configuration[und][commentbox]"]' => array('checked' => TRUE),
+            )
+        );
+        
         if (!isset($_REQUEST['destination'])) {
             $destination = '';
         }
@@ -242,6 +248,14 @@ function itg_photogallery_form_custom_callback($form, &$form_state) {
  */
 function itg_photogallery_after_build($form, &$form_state) {
     $query_array = array();
+    // bydefault click checkbox comment
+    if (!isset($form['#node']->nid)) {
+        // hide remove button of first field on add form 
+        drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-photogallery-configuration-und-commentbox").trigger("click");
+            });', array('type' => 'inline', 'scope' => 'footer'));
+    }
+    
     $form['field_gallery_image'][LANGUAGE_NONE]['#title'] = $form['field_gallery_image'][LANGUAGE_NONE]['#title'] . ' <span title="This field is required." class="form-required">*</span>';
     $orignal_img_id = "";
     if (isset($form_state['input']['original_image_fids']) && !empty($form_state['input']['original_image_fids'])) {

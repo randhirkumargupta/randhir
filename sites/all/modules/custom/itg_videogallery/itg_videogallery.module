@@ -881,14 +881,14 @@ function itg_videogallery_custom_validate($form, &$form_state) {
     $form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] = "";
   }
 //comment question validation
-  $comment_checkbox = $form_state['values']['field_video_configurations'][LANGUAGE_NONE][0]['value'];
-  if (isset($comment_checkbox) && $form_state['values']['field_story_comment_question'][LANGUAGE_NONE][0]['value'] == '') {
-    foreach ($form_state['values']['field_video_configurations'][LANGUAGE_NONE] as $key => $val) {
-      if ($val['value'] == 'comment') {
-        form_set_error('field_story_comment_question', t("Please enter the comment question."));
-      }
-    }
-  }
+//  $comment_checkbox = $form_state['values']['field_video_configurations'][LANGUAGE_NONE][0]['value'];
+//  if (isset($comment_checkbox) && $form_state['values']['field_story_comment_question'][LANGUAGE_NONE][0]['value'] == '') {
+//    foreach ($form_state['values']['field_video_configurations'][LANGUAGE_NONE] as $key => $val) {
+//      if ($val['value'] == 'comment_box') {
+//        form_set_error('field_story_comment_question', t("Please enter the comment question."));
+//      }
+//    }
+//  }
 }
 
 /**

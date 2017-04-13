@@ -46,7 +46,7 @@
                 }
             });
             
-            // Code for client Title field value set Null
+            // Code for comment question field hide and show
             $('#edit-field-video-configurations-und-comment-box').click(function() {
                 if ($("#edit-field-video-configurations-und-comment-box").is(":not(:checked)")) {
                     $("#edit-field-story-comment-question-und-0-value").val('');
