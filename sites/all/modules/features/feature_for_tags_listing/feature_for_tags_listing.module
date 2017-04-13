@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the feature for tags listing feature.
+ */
+
+include_once 'feature_for_tags_listing.features.inc';

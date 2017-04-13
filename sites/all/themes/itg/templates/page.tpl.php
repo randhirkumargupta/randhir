@@ -84,13 +84,16 @@ window.addEventListener("message", function(ev) {
      
       <a id="main-content"></a>
       <!-- Page title for specific page -->
-      <?php $arg = arg(); ?>
+      <?php $arg = arg();?>
       <?php
-          $flag = '';
-          $node_array = array('story', 'photogallery', 'videogallery', 'podacast', 'breaking_news', 'blog', 'survey', 'quiz', 'poll');
-          if(!in_array($node->type , $node_array)) {
-            $flag = TRUE;
-          } 
+          $flag = TRUE;
+          $node_array = array('story', 'photogallery', 'videogallery', 'podacast', 'breaking_news', 'blog', 'survey', 'quiz', 'poll', 'mega_review_critic');
+          $node_arg = array('site-search', 'blog-listing', 'anchors-list', 'sosorry', 'programmes', 'online-archive-story', 'personalization');
+          if(isset($node->type) && in_array($node->type , $node_array)) {
+            $flag = FALSE;
+          }else if(isset($arg[0]) && in_array($arg[0], $node_arg)) {
+            $flag = FALSE;
+          }
     ?>
       <?php print render($title_prefix); ?>
       <?php if ($title && $flag): ?>

@@ -894,7 +894,7 @@ function itg_survey_pqs_associate_with_story($token) {
 function itg_survey_pqs_associate_poll_with_story($nid) {
 
   $node = node_load($nid);
-  if(!empty($node->nid)) {
+  if(!empty($node->nid) && $node->type == 'poll') {
   $poll_banner_image = '';
   if (isset($node->field_poll_banner[$node->language][0]['uri']) && !empty($node->field_poll_banner[$node->language][0]['uri'])) {
     $poll_banner_image = theme('image_style', array('style_name' => 'home_page_poll_images_style', 'path' => $node->field_poll_banner[$node->language][0]['uri']));
