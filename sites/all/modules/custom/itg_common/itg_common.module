@@ -121,6 +121,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     drupal_add_js('jQuery(document).ready(function() {                  
                  jQuery("#edit-relations .fieldset-title").hide();
                         });', array('type' => 'inline', 'scope' => 'footer'));
+    drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery(".form-item-weight").hide();
+                        });', array('type' => 'inline', 'scope' => 'footer'));
   }
 
   $settings = array();
@@ -147,7 +150,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     }
 
     // hide source relation and type field from other users 
-    if ($form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'recipe_node_form' || $form_id == 'photogallery_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form' || $form_id == 'poll_node_form' || $form_id == 'breaking_news_node_form') {
+    if ($form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'recipe_node_form' || $form_id == 'photogallery_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form' || $form_id == 'poll_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'survey_node_form') {
       $form['field_story_source_id']['#attributes']['class'][] = 'element-hidden';
       $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
       $form['field_story_ugc_source_id']['#attributes']['class'][] = 'element-hidden';
@@ -277,10 +280,10 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
 
 function itg_common_meta_token_remove($form, &$form_state) {
-//  drupal_add_js('jQuery(document).ready(function() {                  
-//                 jQuery("#edit-metatags-und-description-value").val("");
-//              
-//          });', array('type' => 'inline', 'scope' => 'footer'));
+  drupal_add_js('jQuery(document).ready(function() {                  
+                // jQuery("#edit-metatags-und-description-value").val("");
+              jQuery("#edit-metatags-und-title-value").val("");
+          });', array('type' => 'inline', 'scope' => 'footer'));
   
   return $form;
 }

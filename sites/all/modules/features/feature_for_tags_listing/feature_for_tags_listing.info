@@ -1,10 +1,10 @@
-name = Feature for related content
-description = Feature for related content
+name = feature for tags listing
+description = feature for tags listing
 core = 7.x
 package = Features
-version = 7.x-1.2
+version = 7.x-1.0
 dependencies[] = views
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
-features[views_view][] = related_content_new
+features[views_view][] = tags_listing
 features_exclude[dependencies][ctools] = ctools

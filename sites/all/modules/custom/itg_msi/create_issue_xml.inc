@@ -69,11 +69,11 @@ function _create_issue_process($fid, $node_info, $parent_node) {
     }
 
     //Get City
-    $city = trim($xml->City);
+    $city = trim((string) $xml->City);
     $city_tid = itg_msi_get_term_from_name($city, 'city');
 
     //Get Parent Category
-    $section = trim($xml->Section);
+    $section = trim((string) $xml->Section);
     $section_tid = itg_msi_get_term_from_name($section, 'category_management');
 
     //Get kicker, headline, byline and body from this array($xml_other)
@@ -85,8 +85,13 @@ function _create_issue_process($fid, $node_info, $parent_node) {
     $byline_id = itg_msi_get_nid_using_title_type(trim($xml_other['byline']->p), 'reporter');
 
     $headline = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $xml_other['headline']->p))));
-    $kicker = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $xml_other['kicker']->p))));
-
+    //$kicker =  htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $xml_other['kicker']->p)))); 
+    
+    //Prepare kicker
+    foreach ($xml_other['kicker']->p as $kickerr) {
+      $kick = (string) $kickerr;
+        $kicker .= htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', (string) $kickerr)))); ;
+    }
 
 
     $issue_date_xml = str_replace('/', '-', trim($xml->IssueDate));
@@ -97,11 +102,12 @@ function _create_issue_process($fid, $node_info, $parent_node) {
       $node_issue_date = date('Y-m-d 00:00:00', strtotime($node_info['issue_date']));
       
     }
+    
     //Prepare body
     foreach ($xml_other['body']->p as $bodyTxt) {
-      $body .= '<p>' . ucfirst(htmlentities($bodyTxt)) . '</p>';
+      $bodyTxtt = (string) $bodyTxt;
+        $body .= '<p>' . ucfirst(htmlentities($bodyTxtt)) . '</p>';
     }
-
     //Set values to node
     $node = new stdClass();
     $node->title = trim($headline);
@@ -116,7 +122,9 @@ function _create_issue_process($fid, $node_info, $parent_node) {
     $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline) ? trim($headline) : 'NA';
     $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim($headline) ? trim($headline) : 'NA';
     $node->body[$node->language][0]['value'] = $body ? $body : 'NA';
-    $node->field_stroy_city[LANGUAGE_NONE][0]['tid'] = $city_tid; // 58: New Delhi
+    if(!empty($city_tid)) {
+      $node->field_stroy_city[LANGUAGE_NONE][0]['tid'] = $city_tid; // 58: New Delhi
+    }
     $node->field_story_issue_date[LANGUAGE_NONE][0]['value'] = !empty($issue_date) ? $issue_date : $node_issue_date;
     //Issue, magazine and supplement
     $node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'] = 'magazine_issue_story';
@@ -127,20 +135,24 @@ function _create_issue_process($fid, $node_info, $parent_node) {
       $node->field_story_select_supplement[LANGUAGE_NONE][0]['target_id'] = $node_info['supplement'];
     }
 
-    $publish_date = date('Y-m-d', time());
+    $publish_date = date('Y-m-d');
     $exp_date = strtotime('+90 years', strtotime($publish_date));
     $exp_date = date('Y-m-d', $exp_date);
 
     //Insert Kicker
     $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'] = $kicker ? $kicker : 'NA';
-    $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = $kicker ? $kicker : 'NA';
+    //$node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = $kicker ? $kicker : 'NA';
 
     //Insert Author(Byline)
-    $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = $byline_id;
+    if(!empty($byline_id)){
+      $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = $byline_id;
+    }
 
     //Insert Section and sub-section
-    $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $section_tid;
-    $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_tid;
+    if(!empty($section_tid)) {
+      $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $section_tid;
+      $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_tid;
+    }
 
 
     //Set source variables in to story content type

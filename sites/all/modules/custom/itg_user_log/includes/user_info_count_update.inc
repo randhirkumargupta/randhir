@@ -155,7 +155,7 @@ function itg_logged_in_user_visited_node() {
     array('data' => t('N ID')) ,
     array('data' => t('Title ')) ,
     array('data' => t('URL')) ,
-    array('data' => t('Username')) ,
+    array('data' => t('Type')) ,
     array('data' => t('No of Users Visited')) ,
   );
   if (function_exists('mongodb')) {
@@ -184,18 +184,24 @@ function itg_logged_in_user_visited_node() {
       }
       $user_data = $content_visits->find($condition)->sort(array('nid' => -1));
       foreach ($user_data as $info) {
-        $array_data[$info['url']][] = count($array_data[$info['url']]);
-        $tmp_array = array();
-        $tmp_array['url'] = $info['url'];
-        $tmp_array['nid'] = $info['nid'];
-        $tmp_array['title'] = $info['title'];
-        $tmp_array['name'] = $info['name'];
-        $tmp_array['count'] = end($array_data[$info['url']]) + 1;
-        $final_array[$info['url']] = $tmp_array;
-        unset($tmp_array);
+        if(get_front_page_nid() != $info['nid']) {
+          array_unshift($array_data[$info['url']],"");
+          unset($array_data[$info['url']][0]);
+          $array_data[$info['url']][] = count($array_data[$info['url']]);
+          $tmp_array = array();
+          $tmp_array['url'] = $info['url'];
+          $tmp_array['nid'] = $info['nid'];
+          $tmp_array['title'] = $info['title'];
+          $tmp_array['name'] = $info['type'];
+          $tmp_array['count'] = end($array_data[$info['url']])+1;
+          $final_array[$info['url']] = $tmp_array;
+          unset($tmp_array);
+        }
       }
     }
   }
+  // Sort final array as count descending mode.
+  $final_array = itg_array_sort($final_array, 'count', SORT_DESC);
   $pagination = new pagination;
   if(empty($_GET['items_per_page'])) {
     $final_array = array_slice($final_array , 0 , 50);
@@ -242,6 +248,41 @@ function itg_logged_in_user_visited_node() {
       'empty' => t('No results found')));
     return $output;
   }
+}
+
+function itg_array_sort($array , $on , $order = SORT_ASC) {
+  $new_array = array();
+  $sortable_array = array();
+
+  if (count($array) > 0) {
+    foreach ($array as $k => $v) {
+      if (is_array($v)) {
+        foreach ($v as $k2 => $v2) {
+          if ($k2 == $on) {
+            $sortable_array[$k] = $v2;
+          }
+        }
+      }
+      else {
+        $sortable_array[$k] = $v;
+      }
+    }
+
+    switch ($order) {
+      case SORT_ASC:
+        asort($sortable_array);
+        break;
+      case SORT_DESC:
+        arsort($sortable_array);
+        break;
+    }
+
+    foreach ($sortable_array as $k => $v) {
+      $new_array[$k] = $array[$k];
+    }
+  }
+
+  return $new_array;
 }
 
 function itg_logged_in_user_node_insert_data($node) {

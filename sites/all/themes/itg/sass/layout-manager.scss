@@ -3078,3 +3078,49 @@ img{
   }
 }
 .election-page .right-side .itg-320 .droppable{height: 320px;}
+#block-itg-front-end-common-latest-from-aajtak, 
+#block-itg-front-end-common-latest-from-pti,
+#block-itg-front-end-common-latest-from-businesstoday{
+  .widget-title{
+    display: inline-block;
+    vertical-align: top;
+  }
+  ul{
+    border: 1px solid #dddddd;
+    min-height: 381px;
+    list-style: none;
+    .third-party-list{ 
+        overflow: hidden;
+        padding: 10px;        
+        .pic {
+            float: left;
+            margin-right: 10px;
+        }
+        .title{
+            display: block;     
+            overflow: hidden;
+            word-wrap: break-word;
+            font-size: 14px;
+            line-height: 19px;
+            color: #000;            
+        }    
+    }
+    li{
+      a.pic{
+        max-height: 55px;
+      }
+    }
+    li + li{border-top: 1px solid #dddddd;}
+  }
+}
+#block-itg-front-end-common-latest-from-businesstoday{
+  a.pic{
+    img{max-width: 56px;}
+  }
+}
+.widget-help-text {
+    text-align: right;
+    padding: 5px 10px;
+    font-size: 16px;
+    /* background: #ddd; */
+}

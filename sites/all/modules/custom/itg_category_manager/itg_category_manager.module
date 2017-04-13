@@ -110,6 +110,21 @@ function itg_category_manager_menu_alter(&$menu) {
  * @return array
  */
 function itg_category_manager_taxonomy_view_page($term) {
+  global $user;
+  if ($term->vid == CATEGORY_MANAGMENT) {
+    if (function_exists('mongodb')) {
+      $con = mongodb();
+      if ($con) {
+        $people = $con->term_view_info;
+        $qry = array(
+          "term_id" => $term->tid,
+          "user_id" => $user->uid,
+          "viewtime" => REQUEST_TIME,
+        );
+        $people->insert($qry);
+      }
+    }
+  }
   $voc = taxonomy_vocabulary_load($term->vid);
   switch ($voc->machine_name) {
     case 'category_management':
@@ -848,7 +863,7 @@ function itg_category_manager_taxonomy_term_insert($term) {
       'changed' => time(),
       'status' => isset($term->term_state) ? $term->term_state : 1,
     );
-    
+
     drupal_write_record('itg_category_manager', $data);
     $data = array();
     $data = array(
@@ -862,25 +877,25 @@ function itg_category_manager_taxonomy_term_insert($term) {
 //      $pathdata = $data['sef_url'];
 //      
 //    }
-    
+
     $get_parents = taxonomy_get_parents($term->tid);
     $parents = reset($get_parents);
     if (isset($parents) && !empty($parents)) {
-      $parent_path = drupal_get_path_alias('taxonomy/term/'. $parents->tid);
-    if (!empty($term->path['alias'])) {
-      $path_name = $term->path['alias'];
-    } else {
-      $path_name = $term->name;
+      $parent_path = drupal_get_path_alias('taxonomy/term/' . $parents->tid);
+      if (!empty($term->path['alias'])) {
+        $path_name = $term->path['alias'];
+      }
+      else {
+        $path_name = $term->name;
+      }
+      $pathdata = $parent_path . '/' . strtolower($path_name);
+      $newpath = itg_category_manager_custom_path($pathdata);
+      $term->path = array('alias' => $newpath, 'pathauto' => FALSE);
+      $term->path['alias'] = $newpath;
     }
-    $pathdata = $parent_path . '/' . strtolower($path_name);
-    $newpath = itg_category_manager_custom_path($pathdata);
-    $term->path = array('alias' => $newpath, 'pathauto' => FALSE);
-    $term->path['alias'] = $newpath;
-    }
-    $data['sef_url'] = $term->path['alias'];    
-    
-    drupal_write_record('itg_sef_url', $data);
+    $data['sef_url'] = $term->path['alias'];
 
+    drupal_write_record('itg_sef_url', $data);
   }
 }
 
@@ -914,27 +929,24 @@ function itg_category_manager_taxonomy_term_presave($term) {
   }
 }
 
-/** 
+/**
  * Implementing 'itg_category_manager_custom_path'.
  * @param $pathdata path alias content
  * Creating custom path alias 
  */
-
 function itg_category_manager_custom_path($pathdata) {
 
-    if (preg_match("![^a-z0-9]!i", $pathdata)) {
-        $pathdata = preg_replace('/[^a-zA-Z0-9\/\\.\']/', '-', $pathdata);
-        while (preg_match('/--/', $pathdata)) {
-            $pathdata = preg_replace('/--/', '-', $pathdata);
-        }
-        $pathdata = rtrim($pathdata, "-");
-        $pathdata = strtolower($pathdata);
-        $pathdata = str_replace(array(':','*', '"', "'", '#'), "-", $pathdata);
+  if (preg_match("![^a-z0-9]!i", $pathdata)) {
+    $pathdata = preg_replace('/[^a-zA-Z0-9\/\\.\']/', '-', $pathdata);
+    while (preg_match('/--/', $pathdata)) {
+      $pathdata = preg_replace('/--/', '-', $pathdata);
     }
-    return $pathdata;
+    $pathdata = rtrim($pathdata, "-");
+    $pathdata = strtolower($pathdata);
+    $pathdata = str_replace(array(':', '*', '"', "'", '#'), "-", $pathdata);
+  }
+  return $pathdata;
 }
-
-
 
 /**
  * Implements hook_pathauto_alias_alter().
@@ -1181,11 +1193,9 @@ function itg_categor_form_edit_category_radio($form, &$form_state) {
   }
 
 
-  if ($type == 'story' || $type == 'photogallery' || $type == 'videogallery') {
-  //if ($type == 'story') {
-    
-  }
-  else {
+  $content_types_lists = array("story", "photogallery", "videogallery");
+  
+  if (!in_array($type, $content_types_lists)) {
     drupal_add_js('jQuery(document).ready(function() {
     jQuery("#prim_' . $editid . '").attr("checked", true);
         jQuery( "form" ).submit(function( event ) {
@@ -1389,6 +1399,7 @@ function itg_category_manager_autocomplete_name($string) {
 function itg_category_manager_autocomplete_tid($string) {
   $itg_query = db_select('taxonomy_term_data', 'itg');
   $itg_query->condition('tid', $string . '%', 'LIKE')
+      ->condition('vid', CATEGORY_MANAGMENT, '=')
       ->fields('itg', array('tid'));
   $itg_result = $itg_query->execute();
   $result = array();

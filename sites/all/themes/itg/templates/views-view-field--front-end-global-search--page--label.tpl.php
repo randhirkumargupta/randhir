@@ -33,7 +33,12 @@ if (function_exists(itg_story_clone_data))
   preg_match_all('/<img[^>]*>/s', $emoji_image, $images);
   $smilies = implode("", $images[0]);
   $label = html_entity_decode($clone_arr_response->label, ENT_QUOTES);
-  $front_url = str_replace('-backend', '', $clone_arr_response->url);
+  if (strpos($clone_arr_response->url, BACKEND_URL) !== false) {
+    $front_url = str_replace(BACKEND_URL, FRONT_URL, $clone_arr_response->url);
+  }
+  else {
+    $front_url = $clone_arr_response->url;
+  }
 }
 if(!empty($position) && $position == 'left') {
   ?>

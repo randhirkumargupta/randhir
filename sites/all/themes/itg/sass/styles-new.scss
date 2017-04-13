@@ -377,7 +377,13 @@ input[type="file"], input[type="submit"], input[type="text"]{
         }
     }
 }
-
+.itg-common-section{
+  .widget-wrapper{
+    &.top_stories_ordering, &.most_popular{
+      .block-itg-widget{overflow-y: auto;}
+    }
+  }
+}
 .widget-title{
     display: inline-block;
     vertical-align: top;
@@ -1735,7 +1741,6 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       background-color: #000;
       float: left;
       width: 100%;
-      margin-bottom: 16px;
       overflow: hidden;
       h2{
         color: #fff;
@@ -1797,7 +1802,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     z-index: 99;
   }
   .poll-wrapper .poll-data .poll-replace-id{
-    margin-top: 0;
+    padding: 10px 0 0;
+    max-height: 115px;
+    overflow-y: auto;
   }
   .poll-wrapper .poll-data .poll-replace-id .past-poll li:last-child,
   .poll-wrapper .poll-data .poll-replace-id .past-poll li{
@@ -1828,8 +1835,8 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     vertical-align: top;
     padding: 10px 20px;
     font: 14px/18px Roboto;
-    color: #fff;
-    background-color: #666;
+    color: #666;
+    background-color: #d1d1d1;
     border-radius: 5px;
     margin: 0 10px;
     text-transform: uppercase;
