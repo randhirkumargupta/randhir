@@ -910,7 +910,7 @@ if (!empty($content)):
           </div>
           <?php
         }
-        if ($config_name == 'other' && in_array('comment', $config)) {
+        if ($config_name == 'other' && in_array('commentbox', $config)) {
           ?>
           <div id="other-comment">
             <?php

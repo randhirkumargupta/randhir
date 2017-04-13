@@ -121,6 +121,12 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     drupal_add_js('jQuery(document).ready(function() {                  
                  jQuery("#edit-relations .fieldset-title").hide();
                         });', array('type' => 'inline', 'scope' => 'footer'));
+    drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery(".form-item-weight").hide();
+                        });', array('type' => 'inline', 'scope' => 'footer'));
+    drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery(".form-item-parent").hide();
+                        });', array('type' => 'inline', 'scope' => 'footer'));
   }
 
   $settings = array();

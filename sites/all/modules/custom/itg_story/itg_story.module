@@ -578,7 +578,7 @@ function itg_story_form_story_node_form_alter(&$form , &$form_state , $form_id) 
   // code for Comment Question field hide and show
   $form['field_story_comment_question']['#states'] = array(
     'visible' => array(
-      ':input[name="field_story_configurations[und][comment]"]' => array('checked' => TRUE) ,
+      ':input[name="field_story_configurations[und][commentbox]"]' => array('checked' => TRUE) ,
     )
   );
 
