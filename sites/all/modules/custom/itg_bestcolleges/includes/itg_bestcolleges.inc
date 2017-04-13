@@ -20,9 +20,7 @@ function bestcollege_rhssearch_form($form, &$form_state) {
   $settings['year'] = $year;
   drupal_add_js(array('itg_bestcolleges' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_bestcolleges') . '/js/itg_bestcolleges.js', array('weight' => 1));
-
   $search_option = bestcollege_set_option_val($_GET['q']);
-
   $getstream = itg_bestcollege_getStreamYear('emerging', $year);
   $getsyears = itg_bestcollege_getStreamYear('year-comparecollege', NULL);
   $directory_stream = itg_bestcollege_getStreamYear('readyrecnor-directory-list', $year);
@@ -31,10 +29,9 @@ function bestcollege_rhssearch_form($form, &$form_state) {
   $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
 
    $form['bestcolleg_adds_rhs'] = array(
-    '#markup' => '<div class = "bestcolleg_adds_rhs">'.render($render_array).'</div>',
+    '#markup' => '<div class = "bestcolleg_adds_rhs">' . render($render_array) . '</div>',
     '#weight' => -7,
   );
-  
   $form['bestcollege_year_item'] = array(
      '#type' => 'item',
      '#title' => t('BEST COLLEGES YEAR'),
@@ -42,7 +39,6 @@ function bestcollege_rhssearch_form($form, &$form_state) {
      '#prefix' => '<div class = "right_view">',
      '#suffix' => '</div>',
    );
-   
   $form['bestcollege_year_select'] = array(
     '#type' => 'select',
     '#weight' => -5,
@@ -72,7 +68,6 @@ function bestcollege_rhssearch_form($form, &$form_state) {
       '#suffix' => '</div>',
     );
   }
-
   $form['yearcompare_rhs'] = array(
     '#type' => 'item',
     '#title' => t('YEAR-WISE COMPARISON'),
@@ -110,7 +105,6 @@ function bestcollege_rhssearch_form($form, &$form_state) {
   $second_year_key = array_slice($year_com, 1, 1);
   // unset year value
   unset($year_com[$second_year_key[0]]);
-
   $form['yearcompare_yr2'] = array(
     '#type' => 'select',
     '#title' => t(''),
