@@ -516,7 +516,7 @@ function itg_get_recommended_data($section) {
     }
     //pr($data);
     arsort($data);
-    $three = array_slice($data , 0 , 3 , true);
+    $three = array_slice($data , 0 , 4 , true);
     //p($three);
     foreach ($three as $key => $value) {
       $people = $con->pagedetails;
