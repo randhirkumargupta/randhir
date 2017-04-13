@@ -891,7 +891,7 @@ if (!empty($content)):
         ?>
 
         <?php
-        if ($config_name == 'vukkul' && in_array('comment', $config)) {
+        if ($config_name == 'vukkul' && in_array('commentbox', $config)) {
           if (!empty($node->field_story_comment_question['und'][0]['value'])) {
             $question = 'Q:' . $node->field_story_comment_question['und'][0]['value'];
           }
