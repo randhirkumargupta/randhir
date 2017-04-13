@@ -103,47 +103,16 @@ if ($theme != 'itgadmin') {
     <?php endif; ?>
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
-        <!-- sponsor for static -->
-       <div class="sponsorContainer">
-      <span class="leftFirstLogo"><a href="http://indiatoday.intoday.in/bestcolleges/2016/" target="_blank" title="India Today Best Colleges 2016"><img src="http://media2.intoday.in/aajtak/resources/images/sopnsor1.jpg" alt=""></a></span>
-        <div class="mobileCenterSec">
-          <div class="leftPresentingSponsor">
-          <span class="PreSponsorTxt">Presenting<br>sponsor</span>
-            <span class="PreSponsorImg">
-              <a href="http://yads.zedo.com/ads2/c?a=2556978;g=0;c=821003262;i=0;x=23040;n=821;s=2;k=http://www.amity.edu/webcampaign/default.asp?id=IndTday23052016E" target="_blank" title="">
-                <img src="http://media2.intoday.in/aajtak/resources/images/sopnsor2.jpg" alt=""></a>
-                <!-- Begin ZEDO -->
-                <script language="JavaScript">
-          var zzp=new Image();
-          zzp.src="http://m4.zedo.com/log/p.gif?a=2556978;c=821003262;x=23040;n=821;e=i;i=0;s=2;z="+Math.random();
-                </script>
-        <noscript>
-          &lt;img width=1 height=1 border=0 src="http://m4.zedo.com/log/p.gif?a=2556978;g=0;c=821003262;x=23040;n=821;i=0;e=i;s=2;z=[timestamp]"&gt;
-              </noscript>
-            <!-- End ZEDO -->
-            </span>
-        </div>
-        </div>
-        <div class="mobileCenterSec">
-          <div class="rightAssociateSponsor">
-          <span class="assSponsorTxt">Associate<br>sponsor</span>
-            <span class="assSponsorImg1">
-              <a href="http://yads.zedo.com/ads2/c?a=2556802;g=0;c=821003242;i=0;x=23040;n=821;s=2;k=http://www.lpu.in/landing-pages/btech.php?utm_source=Indiatoday&amp;utm_medium=website&amp;utm_campaign=lpu_brand-Indiatoday" target="_blank" title=""><img src="http://media2.intoday.in/aajtak/resources/images/sopnsor4.jpg" alt=""></a>
-            <!-- Begin ZEDO -->
-        <script language="JavaScript">
-          var zzp=new Image();
-          zzp.src="http://m4.zedo.com/log/p.gif?a=2556802;c=821003242;x=23040;n=821;e=i;i=0;s=2;z="+Math.random();
-                </script>
-                <noscript>
-                   &lt;img width=1 height=1 border=0 src="http://m4.zedo.com/log/p.gif?a=2556802;g=0;c=821003242;x=23040;n=821;i=0;e=i;s=2;z=[timestamp]"&gt;
-                </noscript>
-            <!-- End ZEDO -->
-            </span>
-        </div>
-        </div>
-    </div>
+      <?php $url_get = explode('/',$_SERVER['REQUEST_URI']);?>
+      <!-- sponsor for static -->
+        <?php
+          if($url_get[2] == '2016') {
+            print bestcollege_get_sponser_data('Best college Sponser');
+          }
+        ?>
       <!-- end sponsor for static -->
       </div>
+
 
 
 
@@ -167,9 +136,13 @@ if ($theme != 'itgadmin') {
                     </div>
                 </div>
               <?php } else {
+                      if($url_get[2] != '2014' && $url_get[2] != '2013') {
+                          if (array_filter(views_get_view_result('best_college_image_slider', 'block'))) {
+                              print views_embed_view('best_college_image_slider', 'block');
+                          }
+                      } else {
+                          print bestcollege_get_sponser_data('Best college graph');
 
-                      if (array_filter(views_get_view_result('best_college_image_slider', 'block'))) {
-                          print views_embed_view('best_college_image_slider', 'block');
                       }
 
                } ?>
@@ -178,7 +151,7 @@ if ($theme != 'itgadmin') {
 
         <!--- list / grid -->
 <div class="col-sm-12 col-xs-12 view1">
-<?php $url_get = explode('/',$_SERVER['REQUEST_URI']);?>
+
 <div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("Best of The Best ") . $url_get[2]; ?></div>
         <div class="right_Section pull-right  col-md-6  col-sm-6 col-xs-12 text-right hidden-xs">
         <strong>view as</strong>
@@ -282,6 +255,12 @@ if ($theme != 'itgadmin') {
                           $block_video = block_load('itg_bestcolleges','bestcollege_rhs_videos_widget');
                           $render_video = _block_get_renderable_array(_block_render_blocks(array($block_video)));
                           print render($render_video);
+
+
+                          // RHS Adds 2
+                          $block1 = block_load('itg_ads', ADS_RHS2);
+                          $render_array1 = _block_get_renderable_array(_block_render_blocks(array($block1)));
+                          print render($render_array1);
 
                     ?>
                     </div>

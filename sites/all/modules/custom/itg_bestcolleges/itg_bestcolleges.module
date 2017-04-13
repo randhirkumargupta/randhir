@@ -203,7 +203,6 @@ function itg_bestcolleges_block_view($delta = '') {
 
       $year = $path_request_array[1]; // Need to revert once feature done.
       $data = bestcollege_getStaticWidgetData($year);
-      //$block['title'] = t('LAST 19 YEARS BEST COLLEGE SURVEYS');
       $block['content'] = $data;
       break;
     case 'bestcollege_rhs_videos_widget':
@@ -317,7 +316,7 @@ function itg_bestcollege_yearcompare($year, $type, $stream, $years) {
   else {
     $data_yr2 = '';
   }
-  
+
   if (empty($data_yr1) || empty($data_yr2)) {
     $data = '';
   }
@@ -635,6 +634,23 @@ function bestcollege_getStaticWidgetData($year) {
   return $best_html;
 }
 
+/*
+ * Get HTML Sponser data for bestcolleges.
+ * @param string $title
+ * @return string
+ */
+function bestcollege_get_sponser_data($title) {
+  $query = db_select('node', 'n');
+  $query->join('field_data_body', 'b', 'n.nid = b.entity_id');
+  $query->fields('b', array('body_value'))
+      ->condition('n.status', 1)
+      ->condition('n.title', $title, '=')
+      ->condition('n.type', 'custom_html_widgets');
+  $results = $query->execute()->fetchAll();
+  $best_html = $results[0]->body_value;
+  return $best_html;              
+}
+
 /**
  * Implementation of hook_form_alter().
  * {@inheritdoc}
@@ -729,7 +745,7 @@ function itg_bestcolleges_views_query_alter(&$view, &$query) {
   if (isset($view->name) && $view->name === 'best_college_image_slider') {
     if (isset($_GET['page'])) {
       $page_type = $_GET['page'];
-      if (!empty($page_type)) {        
+      if (!empty($page_type)) {
           if (isset($view->query->where[1]['conditions'][2]['field'])) {
             if($view->query->where[1]['conditions'][2]['operator'] == 'IN') {
               $year = arg(1);
@@ -745,12 +761,12 @@ function itg_bestcolleges_views_query_alter(&$view, &$query) {
                 $rank_array[] = $results_val->field_bestcollege_rank_value;
               }
               $pre_array = $view->query->where[1]['conditions'][2]['value'];
-              $final_array = array_merge($pre_array,$rank_array);  
+              $final_array = array_merge($pre_array,$rank_array);
               $view->query->where[1]['conditions'][2]['value'] = $final_array;
             }
           }
       }
-    } 
+    }
   }
 }
 
@@ -1124,8 +1140,6 @@ function best_college_master_data_migrate($line, $session_nid, &$context) {
   if (!empty($final_tid)) {
     $node->field_story_category[LANGUAGE_NONE][]['tid'] = $final_tid;
   }
-  // watchdog("test arun@", '<pre>'. print_r($node, TRUE) .'</pre>');
-  // watchdog("test arun line@", '<pre>'. print_r($line, TRUE) .'</pre>');
   $url = $image; //'https://ssl.gstatic.com/gb/images/k1_a31af7ac.png';
   //I have used picture folder to store images using image field settings
 
@@ -1142,13 +1156,7 @@ function best_college_master_data_migrate($line, $session_nid, &$context) {
     if ($node = node_submit($node)) {
       node_save($node);
       drupal_set_message('submitted successfully');
-      /*
-        $num_updated = db_update('bestcolleges_master')
-        ->fields(array('node_id' => $node->nid))
-        ->condition('collegeid', $collegeid)
-        ->execute();
-       */
-
+     
       // bestcolleges_ranking
       db_update('bestcolleges_ranking')
           ->fields(array('CollegeNewNid' => $node->nid))
@@ -1179,7 +1187,7 @@ function best_college_master_data_migrate($line, $session_nid, &$context) {
 }
 
 /**
- *
+ * Migrate for previous data
  * @param type $line
  * @param type $session_nid
  * @param type $context
@@ -1310,6 +1318,12 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
   }
 }
 
+/**
+ * Testing for previous data
+ * @param type $line
+ * @param type $session_nid
+ * @param type $context
+ */
 function best_college_previous_data_migrate_test($line, $session_nid, &$context) {
   $context['results']['rows_imported'] ++;
   $line = $cleaned_line = array_map('base64_decode', $line);
@@ -1328,8 +1342,6 @@ function best_college_previous_data_migrate_test($line, $session_nid, &$context)
   $rank = $line[14];
   $stream = $line[15];
 
-  /*  print $year ." = " . $stream;
-    exit; */
   if ($year) {
     if ($year == '2005') {
       $tid = '844717';
@@ -1384,7 +1396,7 @@ function best_college_previous_data_migrate_test($line, $session_nid, &$context)
 }
 
 /**
- *
+ * Migrate for themebasedranking data
  * @param type $line
  * @param type $session_nid
  * @param type $context
@@ -1488,16 +1500,17 @@ function bestCollegesRelatedStoryList() {
  * best colleges related PARAMETER-WISE RANKING
  * @return array
  */
-function bestCollegesrank() {
+function bestCollegesrank($arg) {
   // variable declaration
   $collegeid = "";
   $stream = "";
+
+  $year = $arg[1];
   $result_best_college_image_slider = views_get_view_result('best_college_image_slider', 'block_2');
-  //print_ar($result_best_college_image_slider);
-  //pr($result_best_college_image_slider[0]->_field_data['nid']['entity']);
   $college_id = $result_best_college_image_slider[0]->_field_data['nid']['entity']->field_college_id['und'][0]['value'];
+
   $nid = $result_best_college_image_slider[0]->nid;
-  $tid = arg(3);
+  $tid = $arg[3];
   $term = taxonomy_term_load($tid);
   $name = $term->name;
   $data_previous_rank = array();
@@ -1514,6 +1527,7 @@ function bestCollegesrank() {
   $query->condition('published', '1', '=');
   $query->condition('stream', $name, '=');
   $query->condition('collegeid', $college_id, '=');
+  $query->condition('year', $year, '<');
   $query->orderBy('year', 'DESC');
   $result = $query->execute();
 
@@ -1523,10 +1537,11 @@ function bestCollegesrank() {
   }
 
   // query for PARAMETER-WISE RANKING
-  $query = db_select('bestcolleges_emergingranking', 'bcr');
-  $query->fields('bcr', array('year', 'reputation', 'academic_input', 'studentcare', 'infrastructure', 'placement', 'preceptual_rank', 'factual_rank', 'overall_score', 'overall_rank'));
+  $query = db_select('bestcolleges_themebasedranking', 'bcr');
+  $query->fields('bcr', array('year', 'reputation', 'academic_input', 'studentcare', 'infrastructure', 'placement', 'preceptual_rank', 'factual_rank', 'overall_score'));
   $query->condition('published', '1', '=');
   $query->condition('stream', $name, '=');
+  $query->condition('year', $year, '=');
   $query->condition('collegeid', $college_id, '=');
   $query->orderBy('year', 'DESC');
   $result = $query->execute();
@@ -1535,12 +1550,10 @@ function bestCollegesrank() {
     $data_parameterwise_rank[$count_parameterwise_rank] = $record;
     $count_parameterwise_rank++;
   }
-  //print_ar($data_parameterwise_rank, "parameterwise rank");
+
   $page_data['previous-rank'] = $data_previous_rank;
   $page_data['parameterwise-rank'] = $data_parameterwise_rank;
   $page_data['flag-rank'] = 1;
-
-  // return final result
   return $page_data;
 }
 
@@ -1590,13 +1603,13 @@ function bestCollegesRelatedImgList() {
   return $data;
 }
 
+/**
+ * option value set for RHS Search.
+ * @param string $url
+ * @return array
+ */
 function bestcollege_set_option_val($url) {
   $url_arr = explode('/', $url);
-  // http://qa.localhost.com/bestcolleges/2016/compare-college/arts/2016-2015
-  // http://qa.localhost.com/bestcolleges/2016/compare-college/2014-arts-bba
-  // http://itgddev.indiatodayonline.in/bestcolleges/2016/zonewiselist-medical
-  // http://qa.localhost.com/bestcolleges/2016/arts-bestcollege
-  // http://qa.localhost.com/bestcolleges/2016/citycolleges-commerce-mumbai
   $compare_data = array();
   if ($url_arr[2] == 'emerging-colleges-rank') {
     $compare_data['emerging_stream'] = isset($url_arr[3]) ? $url_arr[3] : '';
@@ -1633,6 +1646,9 @@ function bestcollege_set_option_val($url) {
   return $compare_data;
 }
 
+/**
+ * Callback for Create taxonomy.
+ */
 function bestcollege_create_taxonomy() {
   $tid = '844708';
   $term = taxonomy_term_load($tid);
@@ -1673,7 +1689,6 @@ function bestcollege_create_taxonomy() {
  * @return int
  */
 function itg_bestcollege_exist_tid($tid, $vid, $term_name) {
-
   $query = db_select('taxonomy_term_data', 't');
   $query->join('taxonomy_term_hierarchy', 'r', 'r.tid = t.tid');
   $query->fields('t', array('name'));

@@ -60,55 +60,103 @@
             </div>
         </div>
 </div>
+
 <!-- code for like dislike -->
 <div class="col-sm-12 col-xs-12 col-md-12">
   <?php
-      $get_val = '0' . arg(1);
-      $get_val = '844705';
+       $arg = arg();
+      // get global comment config
+      //$config_name = trim($global_comment_last_record[0]->config_name);
+      $config_name = 'vukkul';
+      if($arg && $arg[0] == "bestcolleges") {
+        $term_name = "Bestcolleges " . $arg[1];
+        $term_data = taxonomy_get_term_by_name($term_name);
+      }
+      $tid = array_pop($term_data)->tid;
+
+      $get_val = $tid;
       if (function_exists('itg_flag_get_count')) {
         $like = itg_flag_get_count($get_val, 'like_count');
         $dislike = itg_flag_get_count($get_val, 'dislike_count');
       }
-      if (!empty($like['like_count'])) {
-        $like_count = $like['like_count'];
-      }
-      if (!empty($dislike['dislike_count'])) {
-        $dislike_count = $dislike['dislike_count'];
-      }
+
+      $like_count_like = $like['like_count'] + $migrated_count[0]['like_count'];
+      $dislike_count_like = $dislike['dislike_count'] + $migrated_count[0]['dislike_count'];
+
       $pid = "voted_" . $get_val;
       $like = "no-of-likes_" . $get_val;
       $dislike = "no-of-dislikes_" . $get_val;
   ?>
 
     <!--- Like Dis-Like -->
-    <div class="agbutton story-like-dislike">
-        <div id="name-dv">
-            <?php print t('Do You Like This Story'); ?>
-                <span id="lky">
-                    <button title="Like" id="like_count" rel="<?php print $get_val; ?>" data-tag="sty">
-                        <i class="fa fa-thumbs-o-up"></i>
-                        <span id="<?php print $like; ?>"><?php print $like_count; ?></span>
-                    </button>
-                </span>
-                <span id="dlky">
-                    <button title="Dislike" id="dislike_count" rel="<?php print $get_val; ?>" data-tag="dsty">
-                        <i class="fa fa-thumbs-o-down"></i>
-                        <span id="<?php print $dislike; ?>"><?php print $dislike_count; ?></span>
-                    </button>
-                </span>
-        </div>
-    </div>
-    <!--- End Like Dis-Like -->
- <!-- code for like dislike -->
-</div>
- <div class="vukkul-comment">
-        <div id="vuukle-emote"></div>
-        <div id="vuukle_div"></div>
+     <div class="agbutton story-like-dislike">
+          <div id="name-dv"><?php print t('Do You Like This Bestcolleges'); ?>
+            <span id="lky"><button title="Like" id="like_count" rel="<?php print $get_val; ?>" data-tag="sty"><i class="fa fa-thumbs-o-up"></i> <span id="<?php print $like; ?>"><?php print $like_count_like; ?></span> </button>
+              <span id="sty-dv" style="display:none">Awesome! </br> Now share the story </br> <a title="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a>
+                <a title="share on twitter" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>
+                <a title="share on google+" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a>
+                <?php
+                if ($config_name == 'vukkul') {
+                  ?>
+                  <a onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment" class="def-cur-pointer"><i class="fa fa-comment"></i></a>
+                <?php } if ($config_name == 'other') { ?>
+                  <a onclick ="scrollToAnchor('other-comment');" title="comment" class="def-cur-pointer"><i class="fa fa-comment"></i></a>
+                <?php } ?>
+              </span></span>
+            <span id="dlky"> <button title="Dislike" id="dislike_count" rel="<?php print $get_val; ?>" data-tag="dsty"><i class="fa fa-thumbs-o-down"></i> <span id="<?php print $dislike; ?>"><?php print $dislike_count_like; ?></span></button>
+              <?php
+              if ($config_name == 'vukkul') {
+                ?>
+                <span id="dsty-dv" style="display:none"><?php print t('Too bad.'); ?></br> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><?php print t('comments'); ?></a></span>
 
-        <?php
-        if (function_exists('vukkul_view')) {
-          vukkul_view();
+              <?php } if ($config_name == 'other') { ?>
+                <span id="dsty-dv" style="display:none"><?php print t('Too bad.'); ?></br> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><?php print t('comments'); ?></a></span>
+              <?php } ?>
+
+            </span>
+          </div>
+          <p class="error-msg" id="<?php print $pid; ?>"></p>
+        </div>
+
+    <!--- End Like Dis-Like -->
+</div>
+<!-- Grid View End-->
+
+      <?php
+        if (function_exists('taboola_view')) {
+          //taboola_view();
         }
         ?>
 
-</div>
+        <?php
+        if ($config_name == 'vukkul') {
+          if (!empty($node->field_story_comment_question['und'][0]['value'])) {
+            $question = 'Q:' . $node->field_story_comment_question['und'][0]['value'];
+          }
+          ?>
+          <div class="c_ques"><?php print $question; ?></div>
+          <div class="vukkul-comment">
+            <div id="vuukle-emote"></div>
+            <div id="vuukle_div"></div>
+
+            <?php
+            if (function_exists('vukkul_view')) {
+              vukkul_view();
+            }
+            ?>
+
+          </div>
+          <?php
+        }
+        if ($config_name == 'other' && in_array('comment', $config)) {
+          ?>
+          <div id="other-comment">
+            <?php
+            $block = module_invoke('itg_ugc_comment', 'block_view', 'ugc_form_comment_block');
+            print render($block['content']);
+            ?>
+          </div>
+        <?php }
+        ?>
+
+

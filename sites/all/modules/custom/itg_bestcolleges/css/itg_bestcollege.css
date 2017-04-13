@@ -411,8 +411,9 @@
  }
  .stream {
      padding-top: 15px;
-     clear: both;
+     clear: both; overflow: hidden;
  }
+
  .detail_box td:last-child {
      padding-right: 0;
  }
@@ -544,8 +545,7 @@
      float: right;
      margin-right: 0px;
      background: #000;
-     color: #fff;
-     padding: 10px;
+     color: #fff;     
      position: relative;
      bottom: -10px;
  }
@@ -568,7 +568,7 @@
      display: none !important;
  }
  .slider_outer1 .pager li a {
-     color: #fff !important;
+     color: #fff !important;padding: 10px; display: block;
  }
  .slider_outer1 .btn-group {
      width: 100%
@@ -627,7 +627,7 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 .emergingCollege-section table tr td:nth-child(1),.emergingCollege-section table tr td:nth-child(2){ color:#D72A3E; font-weight: bold;}
 .emergingCollege-section table tr td:nth-child(1){ font-size:15px;}
 .emergingCollege-section table tr td:nth-child(2){ text-align: left;}
-
+.emergingCollege-section.citywiselist table tr td:nth-child(2){ color:#036C8E}
 /*Collage Ranking Inner page more Story Section */
 
 .related-story-list .midstoryleft {float: left;width: 46%; padding: 8px;}
@@ -675,6 +675,16 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 .ranking-section .wishranking,.ranking-section .prvlink{ width:50%; float:left;}
 .ranking-section .wishranking .midcontitles,.ranking-section .prvlink .prvarrtxt{ font-weight:bold; padding-top:10px;}
 .ranking-section ul li{ list-style:none; padding:3px 0;}
+
+.bestcollege-rhs-video {position: relative;}
+.bestcollege-rhs-video .bestcollege-more-video{position: absolute;top: 12px;right: 10px;color: #fff;}
+
+/*Rank from other city */
+.cityhead{background: #3176a0; margin-top: 30px; font-size: 18px; color: #fff; text-transform: uppercase; font-family: "Roboto",sans-serif; padding: 9px; font-weight: bold;}
+.citymaincont table{ width:100%}
+.citymaincont table tr td { width:25%; padding:5px 0;}
+.citymaincont table tr td a{text-decoration: none;outline: none;color: #323232; font-size:16px;}
+
 @media screen and (max-width: 1024px){
     .sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li.watch-right-now-list .pic{ width: 100px;}
 }
@@ -694,6 +704,14 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 .rightAssociateSponsor{ width:100%; border-top:1px solid #000}
 .assSponsorImg1{ height:48px}
 .detail_box .stream .control-label label{position: static;top: 0;}
+
+.list-group-item .thumbnail{ height:auto;    position: static;}
+.list-group-item .thumbnail .thumbnail-img{    position: static;    left: 0px;}
+.list-group-item .thumbnail img{    width: 100%;  min-height: auto; max-height: 100%;}
+.list-group-item .list-group-item-heading{position: static;  top: 0px;transform: translateY(0%);-webkit-transform: translateY(0%);}
+
+
+
 }
 @media screen and (min-width: 320px) and (max-width:480px) {
 .sponsorContainer{ width:100%; height: 107px; text-align: center; border:0px; overflow: inherit}
@@ -711,7 +729,7 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 
 /* Media Query for same */
 @media only screen  and (min-device-width: 320px)  and (max-device-width: 736px){ 
-.slider_besrCollage img{ min-height:100%; max-height: 100%;}
+.slider_besrCollage img{ min-height:inherit; max-height:inherit;}
 .slider_outer .carousel-caption{position: relative;font-size: 20px;line-height: 25px;}
 .slider_outer1 span.rank{font-size: 18px; padding:10px;}
 .slider_outer1 h1{ font-size:25px !important; margin-bottom:10px;}
@@ -733,9 +751,47 @@ text-align: left;}
 .emergingCollege-section table tr td:nth-child(1):before{color:#fff;font-size:20px;}
 .related-story-list .midstoryleft {width:100%;}
 .related-story-list .midstoryright {width: 100%;}
+.view1 .right_Section { display: none;}
+
 .list-group-item .caption {left: 175px;width: calc(100% - 175px);}
-.list-group-item .thumbnail-img{ display: none;}
+.list-group-item .thumbnail-img{}
 .slider_outer1 h1{ width:100%;}
 .slider_outer1 span.rank{ margin-bottom:10px;}
 .grid-group-item .thumbnail{ height: auto;}
+
+
+.list-group-item .thumbnail{ height:auto;position: static; border: 1px solid #ddd;padding: 0px;margin-bottom: 20px;}
+.list-group-item .thumbnail .thumbnail-img{position: static;left: 0px; padding:0px; border:0px;}
+.list-group-item .thumbnail img{width: 100%;  max-height: inherit;padding:0px;border:0px;}
+.list-group-item .list-group-item-heading{position: static;  top: 0px;transform: translateY(0%);-webkit-transform: translateY(0%);    padding: 10px 0 0 10px!important;}
+.list-group-item .thumbnail a, .list-group-item .thumbnail p{ margin-bottom:10px;}
+.list-group-item .caption{ position:static; width:100%;padding: 9px!important;}
+.list-group-item .caption .best-college-city{ float:none;}
+.list-group-item .city_wise{width: auto; float: none; min-width: 100%; }
+.remove_padd_right{padding-right: 15px!important;}
+.field-content{ display:block;}
+.list-group-item{ max-width: 100%;}
+.citymaincont table tr{ width: 100%; display: block;}
+.citymaincont table tr td{ display: inline-block; width:50%;}
+.vuukle-ads{ margin-left:-15px;}
+.slick-slide{height: auto!important;} .slider_outer .slick-slide{ position: static;}
+.slick-slide a{ display: block; width:100%;}
 }
+
+
+
+
+.divtopbest { margin-bottom:20px; width:680px; float:left}
+.topimgtxt {font:normal 18px arial; color:#666666; margin-bottom:10px;}
+.bestbox {width:220px; float:left;}
+.bestbox .info1 { background:url(../images/Info-1-BW.jpg) no-repeat top left; width:220px; height:216px; text-indent:-9999px;}
+.bestbox .info1:hover, .bestbox .active1 { background:url(../images/Info-1-Colour.jpg) no-repeat top left; width:220px; height:216px; text-indent:-9999px;}
+.bestbox .info2 { background:url(../images/Info-2-BW.jpg) no-repeat top left; width:220px; height:216px; text-indent:-9999px;}
+.bestbox .info2:hover, .bestbox .active2 { background:url(../images/Info-2-Colour.jpg) no-repeat top left; width:220px; height:216px; text-indent:-9999px;}
+.bestbox .info3 { background:url(../images/Info-3-BW.jpg) no-repeat top left; width:220px; height:216px; text-indent:-9999px;}
+.bestbox .info3:hover, .bestbox .active3 { background:url(../images/Info-3-Colour.jpg) no-repeat top left; width:220px; height:216px; text-indent:-9999px;}
+.besthead {text-align:center; margin-top:10px; text-transform:uppercase; color:#666666; font:normal 18px arial;}
+.besthead a {text-decoration:none; color:#666666;}
+.besthead a:hover { text-decoration:underline}
+
+ 

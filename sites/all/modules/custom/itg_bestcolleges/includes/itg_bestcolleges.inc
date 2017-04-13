@@ -21,30 +21,44 @@ function bestcollege_rhssearch_form($form, &$form_state) {
   drupal_add_js(array('itg_bestcolleges' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_bestcolleges') . '/js/itg_bestcolleges.js', array('weight' => 1));
 
-
   $search_option = bestcollege_set_option_val($_GET['q']);
 
   $getstream = itg_bestcollege_getStreamYear('emerging', $year);
   $getsyears = itg_bestcollege_getStreamYear('year-comparecollege', NULL);
   $directory_stream = itg_bestcollege_getStreamYear('readyrecnor-directory-list', $year);
   $form = array();
-/*
+  $block = block_load('itg_ads', ADS_RHS1);
+  $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+
+   $form['bestcolleg_adds_rhs'] = array(
+    '#markup' => '<div class = "bestcolleg_adds_rhs">'.render($render_array).'</div>',
+    '#weight' => -7,
+  );
+  
+  $form['bestcollege_year_item'] = array(
+     '#type' => 'item',
+     '#title' => t('BEST COLLEGES YEAR'),
+     '#weight' => -6,
+     '#prefix' => '<div class = "right_view">',
+     '#suffix' => '</div>',
+   );
+   
   $form['bestcollege_year_select'] = array(
     '#type' => 'select',
-    '#title' => t('BEST COLLEGES YEAR'),
     '#weight' => -5,
     '#options' => $getsyears['year'],
+    '#default_value' => $year,
     '#attributes' => array('class' => array('bestcollege_year_wise')),
-    '#prefix' => '<div class = "detail_box">',
+    '#prefix' => '<div class = "right_side"><div class = "detail_box">',
     '#suffix' => '</div>',
   );
-*/
+
   if (count($getstream) > 0) {
     $form['emerging_rhs'] = array(
       '#type' => 'item',
       '#title' => t('EMERGING BEST COLLEGES'),
       '#weight' => 0,
-      '#prefix' => '<div class = "right_side"><div class = "right_view">',
+      '#prefix' => '<div class = "right_view">',
       '#suffix' => '</div>',
     );
     $form['emerging_select'] = array(
@@ -90,7 +104,6 @@ function bestcollege_rhssearch_form($form, &$form_state) {
       '#prefix' => '<div class = "col-md-2 col-sm-1 col-xs-2 control-label remove_padd_left">',
       '#suffix' => '</div>',
     );
-
 
   // get first array element
   $year_com = $getsyears['year'];
