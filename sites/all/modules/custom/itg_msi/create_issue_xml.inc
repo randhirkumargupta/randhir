@@ -135,7 +135,7 @@ function _create_issue_process($fid, $node_info, $parent_node) {
       $node->field_story_select_supplement[LANGUAGE_NONE][0]['target_id'] = $node_info['supplement'];
     }
 
-    $publish_date = date('Y-m-d', time());
+    $publish_date = date('Y-m-d');
     $exp_date = strtotime('+90 years', strtotime($publish_date));
     $exp_date = date('Y-m-d', $exp_date);
 
@@ -144,7 +144,9 @@ function _create_issue_process($fid, $node_info, $parent_node) {
     //$node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = $kicker ? $kicker : 'NA';
 
     //Insert Author(Byline)
-    $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = $byline_id;
+    if(!empty($byline_id)){
+      $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = $byline_id;
+    }
 
     //Insert Section and sub-section
     if(!empty($section_tid)) {
