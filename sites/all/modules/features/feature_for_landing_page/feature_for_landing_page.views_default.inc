@@ -52,7 +52,7 @@ function feature_for_landing_page_views_default_views() {
     'image_style' => 'anchors_landing',
     'image_link' => 'content',
   );
-  /* Field: Content: Body */
+  /* Field: Content: Description */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -118,7 +118,7 @@ function feature_for_landing_page_views_default_views() {
     'image_style' => 'anchors_landing',
     'image_link' => 'content',
   );
-  /* Field: Content: Body */
+  /* Field: Content: Description */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -400,18 +400,16 @@ function feature_for_landing_page_views_default_views() {
     'category_management' => 'category_management',
   );
   $handler->display->display_options['filters']['machine_name']['group'] = 1;
-  $handler->display->display_options['path'] = 'programmes';
+  $handler->display->display_options['path'] = 'itg-programmes';
 
   /* Display: RHS Program Block */
   $handler = $view->new_display('block', 'RHS Program Block', 'rhs_programmes');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = '<none>';
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '9';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Taxonomy term: Parent term */
   $handler->display->display_options['relationships']['parent']['id'] = 'parent';
