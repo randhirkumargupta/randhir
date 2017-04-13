@@ -77,7 +77,8 @@ function itg_poll_schema() {
       ),
       'poll_id' => array(
         'description' => 'TODO: please describe this field!',
-        'type' => 'int',
+        'type' => 'varchar',
+        'length' => '250',
         'not null' => TRUE,
       ),
       'content_type' => array(
