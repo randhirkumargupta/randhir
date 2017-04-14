@@ -12,12 +12,12 @@ function itg_event_registration_form($form, &$form_state) {
   $arg = arg();
   $event_id = itg_event_registration_get_event_nid();
   if ($arg[0] == 'event') {
-    $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
+    $path = drupal_lookup_path("source", $arg[1] . '/' . $arg[2]);
     $event_nid = explode('/', $path);
     $node = node_load($event_nid[1]);
     //$node = menu_get_object("node", 1, $path);
 
-  } elseif (is_numeric($arg[1])) {
+  } elseif (is_numeric($arg[1]) && $arg[0] == "node") {
     $node = node_load($arg[1]);
   } else {
     //$event_id = itg_event_registration_get_event_nid();

@@ -4,10 +4,10 @@
  * Theme implementation for poll form in tab display. 
  */
 global $base_url;
-$arg1 = arg(1);
+$arg = arg();
 
-if (!empty($arg1) && is_numeric($arg1)) {
-  $host_node = node_load($arg1);
+if (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
+  $host_node = node_load($arg[1]);
 }
 
 /*$host_detail = itg_event_backend_get_redirect_record('redirect', $base_url); me

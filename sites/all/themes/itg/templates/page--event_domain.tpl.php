@@ -6,10 +6,11 @@
 
 global $base_url;
 $arg = arg();
-if (!empty($arg[1]) && is_numeric($arg[1])) {
+if (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
   $host_node = node_load($arg[1]);
 }elseif($arg[0] == 'event' && !empty($arg[0])){
-  $path = drupal_lookup_path("source", $arg[0].'/'.$arg[1]);
+  //$path = drupal_lookup_path("source", $arg[0].'/'.$arg[1]);
+  $path = drupal_lookup_path("source", $arg[1].'/'.$arg[2]);
   $host_node = menu_get_object("node", 1, $path);
   if((!empty($arg[2]) && $arg[2] == 'registration') && empty($host_node)){ // unpublish condition
     $nid = explode('/', $path);
@@ -28,8 +29,8 @@ if (empty($host_detail) && $arg[0] == 'event') {
   $host_node_arr = explode('/', $host_detail['source']);
   $host_node = node_load($host_node_arr[1]);
 }*/
-
-$banner_image = $base_url.'/'.str_replace('public://', 'sites/default/files/', $host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri']);
+//$banner_image = $base_url.'/'.str_replace('public://', 'sites/default/files/', $host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri']);
+$banner_image = file_create_url($host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri']);
 $banner_image = $host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri'] ? $banner_image : $base_url.'/'.drupal_get_path('module', 'itg_event_backend').'/event_banner.jpeg';
 $menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['rgb'] : '#000';
 ?>
