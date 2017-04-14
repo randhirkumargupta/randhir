@@ -48,6 +48,11 @@ function itg_blog_form_alter(&$form, &$form_state, $form_id) {
 
     switch ($form_id) {
         case 'blog_node_form':
+            $form['field_story_comment_question']['#states'] = array(
+                'visible' => array(
+                ':input[name="field_blog_configuration[und][commentbox]"]' => array('checked' => TRUE) ,
+              )
+            );
             if (!isset($_REQUEST['destination'])) {
                 $destination = '';
             }
@@ -107,7 +112,12 @@ function itg_blog_form_custom_callback($form, &$form_state) {
 function itg_blog_after_build($form, &$form_state) {
 
     global $user, $base_url;
-
+    if (!isset($form['#node']->nid)) {
+        // hide remove button of first field on add form 
+        drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-blog-configuration-und-commentbox").trigger("click");
+            });', array('type' => 'inline', 'scope' => 'footer'));
+    }
     $form['original_image_fids'] = array(
         '#type' => 'hidden',
         '#value' => $form_state['input']['original_image_fids'],

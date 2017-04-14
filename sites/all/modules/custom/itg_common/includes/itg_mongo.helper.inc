@@ -47,8 +47,8 @@ function itg_common_tv_time($id = '') {
     $cond = array('program date' => $date);
     $cursor = $people->find($cond);
     // Fetch query for supplements
-    $select = t('- None -');
-    $data = array('_none' => $select);
+    //$select = t('- None -');
+    //$data = array('_none' => $select);
     foreach ($cursor as $document) {
       $data[$document['time']] = $document['time'];
     }

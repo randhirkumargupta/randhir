@@ -477,6 +477,7 @@ function itg_get_comment_question($nid) {
     $db_or->condition('uc.bundle', 'story');
     $db_or->condition('uc.bundle', 'videogallery');
     $db_or->condition('uc.bundle', 'photogallery');
+    $db_or->condition('uc.bundle', 'blog');
     $query = db_select('field_data_field_story_comment_question', 'uc')
         ->fields('uc', array('field_story_comment_question_value'))
         ->condition($db_or)

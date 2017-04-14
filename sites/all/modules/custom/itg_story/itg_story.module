@@ -411,7 +411,12 @@ function itg_story_node_validate($node , $form , &$form_state) {
 function itg_story_after_build($form , &$form_state) {
 
   global $user , $base_url;
-
+  if (!isset($form['#node']->nid)) {
+        // jquery to open question field.
+        drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-story-configurations-und-commentbox").trigger("click");
+            });', array('type' => 'inline', 'scope' => 'footer'));
+  }
   if (empty($form_state['input']['op'])) {
     unset($_SESSION['unique']);
   }
