@@ -10,14 +10,17 @@
 <?php if (!empty($title)): ?>
   <h3><?php print $title; ?></h3>
 <?php endif; ?>
-<?php foreach ($rows as $id => $row): 
+<?php foreach ($rows as $id => $row):
+$fb_share_image = '';
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $short_url = shorten_url($actual_link, 'goo.gl');
 $factoidsSocialShare_title = preg_replace("/'/", "\\'", $row['title']);
 $fb_share_title = htmlentities($factoidsSocialShare_title, ENT_QUOTES);
+preg_match('/(src=["\'](.*?)["\'])/', $row['field_poll_banner'], $match);  //find src="X" or src='X'
+$split = preg_split('/["\']/', $match[0]); // split by quotes
+$fb_share_image = $split[1]; // X between quotes
 $fb_share_desc = '';
-$fb_share_image = '';
-    ?>
+?>
         <div class="poll-banner test">
 <div class="poll-list">
 	<div class="pic"><?php echo $row['field_poll_banner'];?> </div>

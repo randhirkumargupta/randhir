@@ -101,8 +101,8 @@
           
 
             // Code for client Title field value set Null
-            $('#edit-field-story-configurations-und-comment').click(function() {
-                if ($("#edit-field-story-configurations-und-comment").is(":not(:checked)")) {
+            $('#edit-field-story-configurations-und-commentbox').click(function() {
+                if ($("#edit-field-story-configurations-und-commentbox").is(":not(:checked)")) {
                     $("#edit-field-story-comment-question-und-0-value").val('');
                 }
             });

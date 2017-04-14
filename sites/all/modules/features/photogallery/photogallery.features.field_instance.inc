@@ -1435,6 +1435,48 @@ function photogallery_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-photogallery-field_story_comment_question'.
+  $field_instances['node-photogallery-field_story_comment_question'] = array(
+    'bundle' => 'photogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 70,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_comment_question',
+    'label' => 'Comment question',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 79,
+    ),
+  );
+
   // Exported field_instance:
   // 'node-photogallery-field_story_expert_description'.
   $field_instances['node-photogallery-field_story_expert_description'] = array(
@@ -2932,6 +2974,7 @@ function photogallery_field_default_field_instances() {
   t('Audio');
   t('Bulk media upload');
   t('Caption');
+  t('Comment question');
   t('Common Audio');
   t('Common Audio file');
   t('Common by line');
