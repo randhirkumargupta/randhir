@@ -993,14 +993,7 @@ function itg_event_backend_node_insert($node) {
  */
 function itg_event_backend_node_update($node) {
   if ($node->type == 'event_backend') {
-    
-    /*$event_title = str_replace(' ', '-', $node->title);
-    //$source = drupal_get_path_alias('node/' . $node->nid);
-    $source = '';
-    $redirect = $event_title.'/'.date('Y');
-    
-    itg_save_redirect($source, $redirect);*/
-    
+      event_url_save($node);    
     if ($node->domains != '1' && $_GET['step'] == 'step_configuration') {
       //itg_event_backend_insert_into_redirect($node); me
     }
@@ -1211,7 +1204,7 @@ function itg_event_backend_menu() {
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
   );
-  $items['event/%/programme'] = array(
+  $items['event/%/%/programme'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
@@ -1221,7 +1214,7 @@ function itg_event_backend_menu() {
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
   );
-  $items['event/%/speakers'] = array(
+  $items['event/%/%/speakers'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
@@ -1231,7 +1224,7 @@ function itg_event_backend_menu() {
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
   );
-  $items['event/%/sponsors'] = array(
+  $items['event/%/%/sponsors'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
@@ -1241,7 +1234,7 @@ function itg_event_backend_menu() {
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
   );
-  $items['event/%/sing-and-win'] = array(
+  $items['event/%/%/sing-and-win'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
@@ -1251,7 +1244,7 @@ function itg_event_backend_menu() {
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
   );
-  $items['event/%/flashback'] = array(
+  $items['event/%/%/flashback'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
@@ -1262,7 +1255,7 @@ function itg_event_backend_menu() {
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
   );
-  $items['event/%/speaker-details'] = array(
+  $items['event/%/%/speaker-details'] = array(
     'page callback' => 'itg_event_backend_page',
     'title' => 'Speaker Details',
     'access callback' => TRUE,
@@ -1274,7 +1267,7 @@ function itg_event_backend_menu() {
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
   );
-  $items['event/%/sponsor-details'] = array(
+  $items['event/%/%/sponsor-details'] = array(
     'page callback' => 'itg_event_backend_page',
     'title' => 'Sponsor Details',
     'access callback' => TRUE,
@@ -1419,11 +1412,12 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
 
     if (!empty($whole_node)) {
       if ($arg[0] == 'event') {
-        $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
+        //$path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
+        $path = drupal_lookup_path("source", $arg[1] . '/' . $arg[2]);
         $event_nid = explode('/', $path);
         $node = node_load($event_nid[1]);
       }
-      elseif (!empty($arg[1]) && is_numeric($arg[1])) {
+      elseif (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
         $node = node_load($arg[1]);
       }
       /* else { me
@@ -1435,12 +1429,13 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
     }
     else {
       if ($arg[0] == 'event') {
-        $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
+        //$path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
+        $path = drupal_lookup_path("source", $arg[1] . '/' . $arg[2]);
         $event_nid = explode('/', $path);
         $node = node_load($event_nid[1]);
         return $node->nid;
       }
-      elseif (!empty($arg[1]) && is_numeric($arg[1])) {//shravan
+      elseif (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {//shravan
         return $arg[1];
       }
       /* else { me
@@ -1460,9 +1455,10 @@ function itg_event_get_host_name() {
   global $base_url;
   $arg = arg();
   if ($arg[0] == 'event') {
-    $host = $base_url . '/' . $arg[0] . '/' . $arg[1];
+    //$host = $base_url . '/' . $arg[0] . '/' . $arg[1];
+    $host = $base_url . '/' . $arg[1] . '/' . $arg[2];
   }
-  elseif (!empty($arg[1]) && is_numeric($arg[1])) {
+  elseif (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
     $host = $base_url . '/' . drupal_get_path_alias('node/' . $arg[1]);
   }
   /* else { me
@@ -2220,4 +2216,84 @@ function itg_event_backend_node_status($nid) {
   $query->condition('n.nid', $nid, '=');
   $result = $query->execute()->fetchField();
   return $result;
+}
+
+
+/**
+ * {@inheritdoc}
+ * Implement for url structure in event
+ */
+//function itg_event_backend_node_presave($node) {
+//  if ($node->type == 'event_backend') {
+//    //code by shravan alias
+//    
+//    if ($_GET['step'] == 'step_configuration') {
+//      $alias_title_new = explode('event/', $node->path['alias']);    
+//      if (empty($alias_title_new[1])) {
+//        $node->path['alias'] = 'event/'.$node->path['alias'];
+//      }
+//    }
+//    
+//    
+//  }
+//}
+
+/**
+ * Implements function for alias save in event according custom menu (working on node update).
+ * @param type object
+ */
+function event_url_save($node) {
+  $steps = array('home', 'programme', 'sponsors', 'speakers', 'registration', 'sponsor-details', 'speaker-details', 'sing-and-win', 'flashback');
+  $created_year = date('Y', $node->created);
+  if ($_GET['step'] == 'step_first') {
+    $event_title = $node->path['alias'];
+  }
+  else {
+    $event_title = $node->path['alias'];
+  }
+
+  foreach ($steps as $step) {
+    if ($step == 'home') {
+      $check_alias = $event_title;
+    }
+    else {
+      $check_alias = $event_title . '/' . $step;
+    }
+    if (itg_event_backend_alias_check($check_alias)) {
+      if ($step == 'home') {
+        
+      }
+      else {
+        $alias_s = $event_title . '/' . $step;
+        $source = 'event/' . $event_title . '/' . $step;
+        itg_event_backend_save_alias($source, $alias_s);
+      }
+    }
+  }
+}
+
+/**
+ * Implement function for check existing alias
+ * @param type str
+ * @return boolean
+ */
+function itg_event_backend_alias_check($alias) {
+  $query = db_select('url_alias', 'ua');
+  $query->fields('ua', array('pid'));
+  //$query->condition('alias', $alias, '=');
+  $query->condition('alias', '%' . db_like($alias), 'LIKE');
+  $result = $query->execute()->fetchField();
+  if(empty($result)){
+    return TRUE;
+  }
+}
+
+/**
+ * Implement function for path alias save events
+ * @param type str
+ * @param type str
+ */
+function itg_event_backend_save_alias($source, $alias) {
+    $path = array('source' => $source, 'alias' => $alias);
+    path_save($path);
 }

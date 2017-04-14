@@ -11508,3 +11508,8 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       }
     } 
   }
+  
+  /*For Edit Quiz*/
+  .form-type-managed-file > label + div.file-widget.form-managed-file {
+    height: 28px;
+  }

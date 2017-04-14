@@ -37,7 +37,7 @@ function itg_event_registration_menu() {
      'theme callback' => 'itg_event_registration_default_node_theme',
   );
 
-  $items['event/%/registration'] = array(
+  $items['event/%/%/registration'] = array(
     'title' => 'Event Registration',
     'page callback' => 'itg_event_reg_form',
     'access callback' => TRUE,
@@ -717,13 +717,13 @@ function itg_event_registration_get_event_nid() {
   global $base_url;
   $arg = arg();
   if ($arg[0] == 'event') {
-    $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
+    $path = drupal_lookup_path("source", $arg[1] . '/' . $arg[2]);
     //$node = menu_get_object("node", 1, $path);
     $event_nid = explode('/', $path);
     $node = node_load($event_nid[1]);
     return $node->nid;
   }
-  elseif (is_numeric($arg[1])) {
+  elseif (is_numeric($arg[1]) && $arg[0] == "node") {
     return $arg[1];
   } /* else {
     $host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
