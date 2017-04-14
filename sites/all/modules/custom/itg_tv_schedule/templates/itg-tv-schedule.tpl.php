@@ -107,10 +107,10 @@ if($clicked_day == "")
                        </tr>
                     <tbody>
                         <?php foreach ($search as $val1): ?>  
-
+                        <?php $days_array = array('sun' => 'Sunday', 'mon' => 'Monday', 'tue' => 'Tuesday', 'wed' => 'Wednesday', 'thu' => 'Thursday', 'fri' => 'Friday', 'sat' => 'Saturday'); ?>  
                             <tr>
                                 <td><?php print $val1['time'].' (IST)'; ?></td>
-                                <td><?php print $val1['day']; ?></td>
+                                <td><?php print $days_array[strtolower($val1['day'])]; ?></td>
                                 <td><?php print ucfirst($val1['program']); ?></td>
                             </tr>
 
