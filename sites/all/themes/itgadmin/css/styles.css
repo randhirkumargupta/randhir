@@ -12176,3 +12176,8 @@ body.taxonomy-form-term-tags {
 .view .view-filters [id*="views-exposed-form-section-wiser-breakup-report-page"] .views-exposed-form .views-exposed-widget.views-submit-button .form-submit {
   margin-top: 28px;
 }
+
+/*For Edit Quiz*/
+.form-type-managed-file > label + div.file-widget.form-managed-file {
+  height: 28px;
+}
