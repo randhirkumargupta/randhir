@@ -29,8 +29,8 @@ foreach ($rows as $index => $row): ?>
       
 
       <p class="blog-description blog-description-<?php print $key ?>">
-        <?php if (!empty($row['field_blog_long_description'])) : ?>
-          <?php print $row['field_blog_long_description']; ?>
+        <?php if (!empty($row['field_common_short_description'])) : ?>
+          <?php print $row['field_common_short_description']; ?>
         <?php endif; ?>
       </p>
       
