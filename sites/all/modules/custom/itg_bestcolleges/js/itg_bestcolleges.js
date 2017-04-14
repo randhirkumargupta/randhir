@@ -183,8 +183,13 @@
             // for year
             $(".bestcollege_year_wise").change(function() {
                 var bestcollege_year = $(this).val();
+                var stream_arr = {2011:"844764", 2010:"844770", 2009:"844776", 2008:"844782", 2007:"844788", 2006:"844794", 2005:"844800"}
                 if(bestcollege_year != '_none') {
-                    url = baseurl+'/bestcolleges/'+bestcollege_year;
+                    if(bestcollege_year > 2011) {
+                        url = baseurl+'/bestcolleges/'+bestcollege_year;
+                    } else {
+                        url = baseurl+'/bestcolleges/'+bestcollege_year+'/ranks/'+stream_arr[bestcollege_year];
+                    }
                     window.location.href = url;
                 }
             });

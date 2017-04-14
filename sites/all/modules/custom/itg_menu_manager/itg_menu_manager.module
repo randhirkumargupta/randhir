@@ -874,17 +874,23 @@ function get_third_level_menu() {
   }
 
   // for best college
-     if (isset($arg[2])) {
-    if ($arg[0] == 'bestcolleges' && $arg[1]) {
-      if($arg[1]) {
-        $section_id = '844693';
-      }
-      $parents = taxonomy_get_parents_all($section_id);
-      if (count($parents) > 1) {
-        $section_id = end($parents)->tid;
-      }
+    $url_get = explode('/',$_SERVER['REQUEST_URI']);
+    if (isset($url_get[2]) && $url_get[1] == 'bestcolleges') {
+        if($arg[0] == 'taxonomy') {
+          $section_id = $arg[2];
+        } else {
+          $term_name = "Bestcolleges " . $url_get[2];
+          $term_data = taxonomy_get_term_by_name($term_name);
+          $tid = array_pop($term_data)->tid;
+          $section_id = ($tid) ? $tid : '';
+        }
+
+        $parents = taxonomy_get_parents_all($section_id);
+        if (count($parents) > 1) {
+          $section_id = end($parents)->tid;
+        }
     }
-  }
+
   // end best collehe
 
   // condition for itg theme

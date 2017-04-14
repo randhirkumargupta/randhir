@@ -1,5 +1,6 @@
 <div class="emergingCollege-section">
 <div class="streamtitle"><?php print t('STREAM: '.drupal_strtoupper(arg(3))); ?></div>
+<?php if(is_array($data) && count($data) > 0) { ?>
 <table style="border-collapse: collapse;" width="100%" align="CENTER" border="1" bordercolor="#c4c4c4" cellpadding="0" cellspacing="0">
   <tr>
     <th width="50"><?php print t('Rank'); ?></th>
@@ -27,6 +28,7 @@
   </tr>
   <?php } ?>
 </table>
+<?php } else { print "<div class='bestcollege_empty_message'>".t("No record founds")."</div>"; } ?>
 </div>
 
 <!-- Grid View-->

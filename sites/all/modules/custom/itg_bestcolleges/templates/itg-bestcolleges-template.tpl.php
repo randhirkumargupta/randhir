@@ -56,8 +56,6 @@ if(isset($related_story_value['relatedstory_count']) && $related_story_value['re
      foreach ($related_story_value as $key => $value){
 
          ?>
-
-
          <div class="midstoryleft">
            <a href="<?php print $base_url; ?>/node/<?php print $value['nid']; ?>" target="_blank"><img alt="" title="" src="http://media2.intoday.in/indiatoday/images/stories/bc-arts-jun29-1_180_061915094528.jpg" width="125" align="left" height="93"></a>
            <div class="midstorydetail">

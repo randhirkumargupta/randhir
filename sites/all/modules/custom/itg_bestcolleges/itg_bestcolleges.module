@@ -746,7 +746,7 @@ function itg_bestcollege_get_term_tid($tid, $stream) {
  */
 function itg_bestcolleges_views_query_alter(&$view, &$query) {
   if (isset($view->name) && $view->name === 'best_college_image_slider') {
-     $page_type = isset($_GET['page']) ? $_GET['page'] : '';     
+     $page_type = isset($_GET['page']) ? $_GET['page'] : '';
       if (!empty($page_type)) {
         if (isset($view->query->where[1]['conditions'][2]['field'])) {
           if ($view->query->where[1]['conditions'][2]['operator'] == 'IN') {
@@ -759,16 +759,18 @@ function itg_bestcolleges_views_query_alter(&$view, &$query) {
                 ->condition('r.field_bestcollege_rank_value', 10, '>')
                 ->orderBy('r.field_bestcollege_rank_value', 'ASC');
             $results = $query->execute()->fetchAll();
-            foreach ($results as $results_key => $results_val) {
-              $rank_array[] = $results_val->field_bestcollege_rank_value;
+            if(is_array($results) && count($results) > 0) {
+              foreach ($results as $results_key => $results_val) {
+                $rank_array[] = $results_val->field_bestcollege_rank_value;
+              }
+              $pre_array = $view->query->where[1]['conditions'][2]['value'];
+              $final_array = array_merge($pre_array, $rank_array);
+              $view->query->where[1]['conditions'][2]['value'] = $final_array;
             }
-            $pre_array = $view->query->where[1]['conditions'][2]['value'];
-            $final_array = array_merge($pre_array, $rank_array);
-            $view->query->where[1]['conditions'][2]['value'] = $final_array;
           }
         }
       }
-    
+
   }
 }
 
@@ -1004,7 +1006,7 @@ function best_college_citywiseranking_data_migrate($line, $session_nid, &$contex
   $context['results']['rows_imported'] ++;
   $line = $cleaned_line = array_map('base64_decode', $line);
   watchdog("test arun@", '<pre>' . print_r($line, TRUE) . '</pre>');
-  drupal_set_message(check_plain(t('Pass line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid)); 
+  drupal_set_message(check_plain(t('Pass line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
   $rank = trim($line[0]);
   $collegename = trim($line[1]);
   $city = trim($line[2]);
@@ -1025,11 +1027,11 @@ function best_college_citywiseranking_data_migrate($line, $session_nid, &$contex
             ))->execute();
 
     // No exception thrown; PDO thinks the record was inserted correctly.
-    drupal_set_message(check_plain(t('Pass line !var city = !var1')), array('!var' => $line[0], '!var1' => $city)); 
+    drupal_set_message(check_plain(t('Pass line !var city = !var1')), array('!var' => $line[0], '!var1' => $city));
   }
   catch (PDOException $e) {
     // Query failed; recover based on $e->getMessage()
-    drupal_set_message(check_plain(t('Fail line !var city = !var1')), array('!var' => $line[0], '!var1' => $city)); 
+    drupal_set_message(check_plain(t('Fail line !var city = !var1')), array('!var' => $line[0], '!var1' => $city));
   }
 }
 
@@ -1043,7 +1045,7 @@ function best_college_city_data_migrate($line, $session_nid, &$context) {
   $context['results']['rows_imported'] ++;
   $line = $cleaned_line = array_map('base64_decode', $line);
   watchdog("test arun@", '<pre>' . print_r($line, TRUE) . '</pre>');
-  drupal_set_message(check_plain(t('Pass line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid)); 
+  drupal_set_message(check_plain(t('Pass line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
   $collegeid = trim($line[0]);
   $rank = trim($line[1]);
   $city = trim($line[3]);
@@ -1061,11 +1063,11 @@ function best_college_city_data_migrate($line, $session_nid, &$context) {
               'published' => '1',
             ))->execute();
     // No exception thrown; PDO thinks the record was inserted correctly.
-    drupal_set_message(check_plain(t('Pass line !var city = !var1')), array('!var' => $line[0], '!var1' => $city)); 
+    drupal_set_message(check_plain(t('Pass line !var city = !var1')), array('!var' => $line[0], '!var1' => $city));
   }
   catch (PDOException $e) {
     // Query failed; recover based on $e->getMessage()
-    drupal_set_message(check_plain(t('Fail line !var college id = !var1')), array('!var' => $line[0], '!var1' => $city)); 
+    drupal_set_message(check_plain(t('Fail line !var college id = !var1')), array('!var' => $line[0], '!var1' => $city));
   }
 }
 
@@ -1078,7 +1080,7 @@ function best_college_city_data_migrate($line, $session_nid, &$context) {
 function best_college_master_data_migrate($line, $session_nid, &$context) {
   $context['results']['rows_imported'] ++;
   $line = $cleaned_line = array_map('base64_decode', $line);
-  drupal_set_message(check_plain(t('Pass line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid)); 
+  drupal_set_message(check_plain(t('Pass line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
 
   $collegeid = $line[0];
   $collegename = $line[1];
@@ -1173,11 +1175,11 @@ function best_college_master_data_migrate($line, $session_nid, &$context) {
           ->condition('year', $year)
           ->execute();
     }
-    drupal_set_message(check_plain(t('Pass line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid)); 
+    drupal_set_message(check_plain(t('Pass line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
   }
   else {
-    drupal_set_message(check_plain(t('Fail line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid)); 
-    drupal_set_message(check_plain(t('Fail line !var stream = !var1')), array('!var' => $line[0], '!var1' => $stream)); 
+    drupal_set_message(check_plain(t('Fail line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+    drupal_set_message(check_plain(t('Fail line !var stream = !var1')), array('!var' => $line[0], '!var1' => $stream));
   }
 }
 
@@ -1304,11 +1306,11 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
           ->condition('year', $year)
           ->execute();
     }
-    drupal_set_message(check_plain(t('Pass line 2015 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid)); 
+    drupal_set_message(check_plain(t('Pass line 2015 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
   }
   else {
-    drupal_set_message(check_plain(t('Fail line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid)); 
-    drupal_set_message(check_plain(t('Fail line !var stream = !var1')), array('!var' => $line[0], '!var1' => $stream)); 
+    drupal_set_message(check_plain(t('Fail line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+    drupal_set_message(check_plain(t('Fail line !var stream = !var1')), array('!var' => $line[0], '!var1' => $stream));
   }
 }
 
@@ -1380,11 +1382,11 @@ function best_college_previous_data_migrate_test($line, $session_nid, &$context)
   }
 
   if (!empty($final_tid)) {
-    drupal_set_message(check_plain(t('Pass line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid)); 
+    drupal_set_message(check_plain(t('Pass line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
   }
   else {
-    drupal_set_message(check_plain(t('Fail line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid)); 
-    drupal_set_message(check_plain(t('Fail line !var stream = !var1')), array('!var' => $line[0], '!var1' => $stream)); 
+    drupal_set_message(check_plain(t('Fail line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+    drupal_set_message(check_plain(t('Fail line !var stream = !var1')), array('!var' => $line[0], '!var1' => $stream));
   }
 }
 
@@ -1397,7 +1399,7 @@ function best_college_previous_data_migrate_test($line, $session_nid, &$context)
 function best_college_theme_data_migrate($line, $session_nid, &$context) {
   $context['results']['rows_imported'] ++;
   $line = $cleaned_line = array_map('base64_decode', $line);
- 
+
   $stream = trim($line[0]);
   $collegeid = trim($line[1]);
   $reputation = trim($line[2]);
@@ -1429,11 +1431,11 @@ function best_college_theme_data_migrate($line, $session_nid, &$context) {
             ))->execute();
 
     // No exception thrown; PDO thinks the record was inserted correctly.
-    drupal_set_message(check_plain(t('Pass line !var city = !var1')), array('!var' => $line[0], '!var1' => $city)); 
+    drupal_set_message(check_plain(t('Pass line !var city = !var1')), array('!var' => $line[0], '!var1' => $city));
   }
   catch (PDOException $e) {
     // Query failed; recover based on $e->getMessage()
-    drupal_set_message(check_plain(t('Fail line !var college id = !var1')), array('!var' => $line[0], '!var1' => $city)); 
+    drupal_set_message(check_plain(t('Fail line !var college id = !var1')), array('!var' => $line[0], '!var1' => $city));
   }
 }
 

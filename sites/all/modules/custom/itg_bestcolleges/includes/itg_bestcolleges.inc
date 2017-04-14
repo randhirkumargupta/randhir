@@ -39,6 +39,7 @@ function bestcollege_rhssearch_form($form, &$form_state) {
      '#prefix' => '<div class = "right_view">',
      '#suffix' => '</div>',
    );
+
   $form['bestcollege_year_select'] = array(
     '#type' => 'select',
     '#weight' => -5,
