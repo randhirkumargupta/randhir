@@ -71,6 +71,12 @@ function itg_category_manager_menu() {
     'type' => MENU_CALLBACK
   );
   // Autocomplete callback for category name
+  $items['getsection_content'] = array(
+    'page callback' => 'itg_category_getsection_content',
+    'access arguments' => array('administer taxonomy'),
+    'type' => MENU_CALLBACK
+  );
+  
   $items['itg_category_manager_autocomplete_tid'] = array(
     'page callback' => 'itg_category_manager_autocomplete_tid',
     'access arguments' => array('administer taxonomy'),
@@ -215,6 +221,29 @@ function itg_category_manager_term_state($tid, $vid = CATEGORY_MANAGMENT) {
 
   return $flag;
 }
+
+
+/**
+ * Get term state drom db
+ * 
+ * @param int $tid
+ * @return boolean
+ */
+function itg_category_getsection_content() {
+  $key = $_POST['getthisvalue'];
+  $return_res = array();
+  $itg_query = db_select('field_data_field_cm_select_type', 'itg')
+      ->fields('itg')
+      ->condition('entity_id', $key, '=');
+  $itg_result = $itg_query->execute()->fetchAll();
+  foreach($itg_result as $content) {
+   $return_res[] = $content->field_cm_select_type_value;
+ }
+ print json_encode($return_res);
+}
+
+
+
 
 /**
  * Get term state drom db
