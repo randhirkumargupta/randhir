@@ -126,6 +126,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
     <?php endif; ?>
     <div class="row yearend-page">
         <div class="col-md-8 col-sm-12 col-sx-12 left-side">
+          <div class="widget-help-text">Special widgets ( <strong>Yearender featured</strong> )</div>
             <div class="itg-643">
                 
                 <div class="itg-widget">
@@ -146,7 +147,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 
             </div> 
             <div class="itg-1550 mt-50">
-                
+                <div class="widget-help-text">Special widgets ( <strong>Yearender Galleries</strong> )</div>
               <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-2']['widget_name']; ?>">
@@ -183,7 +184,8 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             
             </div> 
         </div>    
-        <div class="col-md-4 col-sm-12 col-sx-12 right-side">        
+        <div class="col-md-4 col-sm-12 col-sx-12 right-side">    
+          <div class="widget-help-text">Non Draggable ( <strong>Ad widget</strong> )</div>
             <div class="">
               <div class="itg-widget">
                     <div class="ad-widget droppable">
@@ -199,6 +201,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 
             </div> 
             <div class="itg-785 mt-50">
+              <div class="widget-help-text">Special widgets ( <strong>Top News</strong> )</div>
                 <div class="itg-widget">
                     <div class="droppable <?php print $gray_bg_layout; ?>">
                         <div class="widget-wrapper <?php print $widget_data['itg-block-3']['widget_name']; ?>">
@@ -234,6 +237,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 
             </div> 
             <div class="mt-50">
+              <div class="widget-help-text">Non Draggable ( <strong>Ad widget</strong> )</div>
                 <div class="itg-widget">
                     <div class="ad-widget droppable">
                       <div class="sidebar-ad">
@@ -247,6 +251,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             </div> 
             
             <div class="itg-628 mt-50">
+               <div class="widget-help-text">Special widgets ( <strong>Top videos</strong> )</div>
                 <div class="itg-widget">
                     <div class="droppable <?php print $gray_bg_layout; ?>">
                         <div class="widget-wrapper <?php print $widget_data['itg-block-4']['widget_name']; ?>">
