@@ -603,35 +603,35 @@ function itg_msi_node_validate($node, $form, &$form_state) {
                 if (empty($xml_supplement) && ($node->type != 'issue')) { // empty supplement in file
                     form_set_error($field . '10' . $result['fid'], t('No Supplement found in the file <strong>@xmlfilename</strong>. Please upload file with correct Supplement and try again.', array('@xmlfilename' => $xml_file->filename)));
                 }
-                elseif ((!empty($xml_supplement) && itg_msi_exist_supplement($xml_supplement) == 0) && ($node_supplement_name != $xml_supplement)) {
+                elseif ((!empty($xml_supplement) && itg_msi_exist_supplement($xml_supplement) == 0) && ($node_supplement_name != $xml_supplement) && (($node->type != 'issue'))) {
                     form_set_error($field . '10' . $result['fid'], t('Supplement in the file <strong>@xmlfilename</strong> is not exists in system. Please upload file with correct Supplement and try again.', array('@xmlfilename' => $xml_file->filename)));
                 }
-                elseif (!empty($xml_supplement) && !in_array($xml_supplement , $node_supplement_name_for_issue)) { //xml supplement is not equal to node supple
+                /*elseif (!empty($xml_supplement) && !in_array($xml_supplement , $node_supplement_name_for_issue)) { //xml supplement is not equal to node supple
                     form_set_error($field . '10' . $result['fid'], t('Node supplement and  <strong>@xmlfilename</strong> file supplement do not match. Please upload file with correct Supplement and try again.', array('@xmlfilename' => $xml_file->filename)));
-                }
+                }*/
 
                 if ($node_issue_date != $xm_issue_date_timestamp) { // Xml file issue date is not equal to node issue date.
                     form_set_error($field . '9' . $result['fid'], t('No Date found in the file <strong>@xmlfilename</strong>. Please upload file with correct IssueDate and try again.', array('@xmlfilename' => $xml_file->filename)));
                 }
 
-                if (empty($city)) {
+                /*if (empty($city)) {
                     form_set_error($field . '2' . $result['fid'], t('No city found in the file <strong>@xmlfilename</strong>. Please upload file with city name and try again.', array('@xmlfilename' => $xml_file->filename)));
                 }
                 if (empty($city_tid) && !empty($city)) {
                     form_set_error($field . '3' . $result['fid'], t('City <strong>@cityname</strong> in the file @xmlfilename doesn\'t exist in our database. Please choose another city and try again.', array('@cityname' => $city, '@xmlfilename' => $xml_file->filename)));
-                }
+                }*/
                 if (empty($section)) {
                     form_set_error($field . '4' . $result['fid'], t('No section found in the file <strong>@xmlfilename</strong>. Please upload file with section and try again.', array('@xmlfilename' => $xml_file->filename)));
                 }
                 if (empty($section_tid) && !empty($section)) {
                     form_set_error($field . '5' . $result['fid'], t('Section <strong>@sectionname</strong> in the file @xmlfilename doesn\'t exist in our database. Please choose another section and try again.', array('@sectionname' => $section, '@xmlfilename' => $xml_file->filename)));
                 }
-                if (empty($byline)) {
+                /*if (empty($byline)) {
                     form_set_error($field . '6' . $result['fid'], t('No Author found in the file <strong>@xmlfilename</strong>. Please upload file with author name and try again.', array('@xmlfilename' => $xml_file->filename)));
                 }
                 if (empty($byline_id) && !empty($byline)) {
                     form_set_error($field . '7' . $result['fid'], t('Author <strong>@byline</strong> in the file @xmlfilename doesn\'t exist in our database. Please choose another Author and try again.', array('@byline' => $byline, '@xmlfilename' => $xml_file->filename)));
-                }
+                }*/
                 if (empty($headline) || $headline == 'NA') {
                     form_set_error($field . '8' . $result['fid'], t('No story headline found in the file <strong>@xmlfilename</strong>. Please upload file with story headline and try again.', array('@xmlfilename' => $xml_file->filename)));
                 }

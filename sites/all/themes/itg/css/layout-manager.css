@@ -3435,3 +3435,10 @@ img {
 #block-itg-front-end-common-latest-from-businesstoday a.pic img {
   max-width: 56px;
 }
+
+.widget-help-text {
+  text-align: right;
+  padding: 5px 10px;
+  font-size: 16px;
+  /* background: #ddd; */
+}

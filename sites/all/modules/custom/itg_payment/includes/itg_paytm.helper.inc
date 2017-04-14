@@ -46,3 +46,8 @@ define('BILLDESK_LABELS' , 'MerchantID|CustomerID|TxnReferenceNo|BankReferenceNo
     'ErrorStatus|ErrorDescription|CheckSum');
 ###########################################################
 
+#########################AMEX##############################
+define('VIRTUAL_PAYMENT_CLIENT_URL' , 'https://vpos.amxvpos.com/vpcpay');
+define('VPC_VERSION' , 1);
+define('VPC_COMMAND' , 'pay');
+define('VPC_RETURN_URL' , 'http://localhost/amex_3party/PHP_VPC_3Party_Order_DR.php');
