@@ -45,6 +45,13 @@
                     $("#edit-field-story-expiry-date").val('');
                 }
             });
+            
+            // Code for comment question field hide and show
+            $('#edit-field-video-configurations-und-comment-box').click(function() {
+                if ($("#edit-field-video-configurations-und-comment-box").is(":not(:checked)")) {
+                    $("#edit-field-story-comment-question-und-0-value").val('');
+                }
+            });
 
             // code to copy story longheadline to story title
 //            $('#edit-title').blur(function() {

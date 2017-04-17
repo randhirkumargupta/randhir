@@ -880,11 +880,14 @@ function itg_survey_pqs_associate_with_story($token) {
   $token_arr = explode(':', $token);
   $nid = rtrim($token_arr[2], ']');
   $type = strtolower($token_arr[1]);
-  if ($type == 'survey') {
+  if(function_exists('itg_common_get_node_type')) {
+    $exist_type = itg_common_get_node_type($nid);
+  }
+  if ($type == 'survey' && $exist_type == 'survey') {
     module_load_include('inc', 'itg_survey', 'includes/itg_survey_form');
     $form = drupal_get_form('itg_survey_survey_form', $nid);
   }
-  if ($type == 'quiz') {
+  if ($type == 'quiz' && $exist_type == 'quiz') {
     module_load_include('inc', 'itg_quiz', 'includes/itg_quiz_form');
     $form = drupal_get_form('itg_quiz_quiz_form', $nid);
   }

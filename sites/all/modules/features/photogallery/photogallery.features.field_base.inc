@@ -550,6 +550,7 @@ function photogallery_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         'google_standout' => 'Google Standout',
+        'commentbox' => 'Comment Box',
       ),
       'allowed_values_function' => '',
     ),

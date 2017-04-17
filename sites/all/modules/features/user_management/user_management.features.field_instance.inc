@@ -96,6 +96,46 @@ function user_management_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'user-user-field_logged_in_count'.
+  $field_instances['user-user-field_logged_in_count'] = array(
+    'bundle' => 'user',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 15,
+      ),
+    ),
+    'entity_type' => 'user',
+    'exclude_cv' => 0,
+    'field_name' => 'field_logged_in_count',
+    'label' => 'Logged in count',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => 0,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 41,
+    ),
+  );
+
   // Exported field_instance: 'user-user-field_mark_as_expert'.
   $field_instances['user-user-field_mark_as_expert'] = array(
     'bundle' => 'user',
@@ -597,6 +637,7 @@ function user_management_field_default_field_instances() {
   t('First name');
   t('Gender');
   t('Last name');
+  t('Logged in count');
   t('Mark as Expert');
   t('Mobile number');
   t('Notify user of update account');

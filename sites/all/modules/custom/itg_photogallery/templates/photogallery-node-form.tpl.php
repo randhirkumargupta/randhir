@@ -67,6 +67,7 @@
   <?php print drupal_render($form['field_featured']); ?>
   <?php print drupal_render($form['field_common_related_content']); ?>
   <?php print drupal_render($form['field_photogallery_configuration']); ?>
+  <?php print drupal_render($form['field_story_comment_question']); ?>    
   </div>
 </div>
 <!--<div id="Categorization" class="itg-sidebar-form-section">
