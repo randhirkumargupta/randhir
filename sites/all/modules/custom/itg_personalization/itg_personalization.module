@@ -298,6 +298,7 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
     if (!empty($form['field_ugc_ctype']['und']['#options'])) {
       $icone = "";
       $i = 0;
+      unset($form['field_ugc_ctype']['und']['#options']['recipe']);
       foreach ($form['field_ugc_ctype']['und']['#options'] as $key => $values) {
 
         if ($key == '_none') {

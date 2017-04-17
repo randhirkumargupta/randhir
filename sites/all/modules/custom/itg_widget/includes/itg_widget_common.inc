@@ -441,15 +441,20 @@ function itg_widget_form_alter(&$form , &$form_state , $form_id) {
     if ( in_array($type_in_url , $types) ) {
       $actual_weight_type = $type_in_url;
     }
-//    $view = views_get_current_view();
-//    $total_rows = $view->total_rows;
-
+    
+    $views_current_nid = array();
+    $view = views_get_current_view();   
+    $taxonomy_term_data_comma = implode(",", $views_current_nid);
     $itg_widget_order_data = db_select('itg_widget_order' , 'iwo')
             ->fields('iwo' , array('weight' , 'nid'))
-            ->condition('cat_id' , $_GET['category_tid'])
-            ->condition('content_type' , $actual_weight_type)
-            ->condition('widget' , 'section_wise_widget')
-            ->execute()->fetchAll();
+            ->condition('cat_id' , $_GET['category_tid']);
+    foreach ($view->result as $view_result_data) {
+      //$views_current_nid[] = $view_result_data->node_itg_widget_order_nid;
+      $itg_widget_order_data->condition('nid' , $view_result_data->node_itg_widget_order_nid);
+    }
+      $itg_widget_order_data->condition('content_type' , $actual_weight_type)
+      ->condition('widget' , 'section_wise_widget')
+      ->execute()->fetchAll();
 //pr($itg_widget_order_data);
 //Prepare weight crosspond to nid.
     $select_map_array = array();
@@ -458,15 +463,18 @@ function itg_widget_form_alter(&$form , &$form_state , $form_id) {
     }
 
 // Prepare weights in array. 
-    $select_map_array_weight = array();
-    foreach ($itg_widget_order_data as $order_data) {
-      $select_map_array_weight[] = $order_data->weight;
-    }
-
+//    $select_map_array_weight = array();
+//    foreach ($itg_widget_order_data as $order_data) {
+//      $select_map_array_weight[] = $order_data->weight;
+//    }
+    //pr($form['draggableviews']);
     foreach ($form['draggableviews'] as $key => $weight) {
+    
+      
 // echo $key."</br>";
 // make options to weight drop down equal to saved weight value.
-      $form['draggableviews'][$key]['weight']['#options'] = drupal_map_assoc($select_map_array_weight);
+      //$form['draggableviews'][$key]['weight']['#options'] = drupal_map_assoc($select_map_array_weight);
+      $form['draggableviews'][$key]['weight']['#options'] = drupal_map_assoc(array($select_map_array[$form['draggableviews'][$key]['id']['#value']] => $select_map_array[$form['draggableviews'][$key]['id']['#value']]));
 //$form['draggableviews'][$key]['weight']['#options'] = array($key => $key);
 // make default selected value as saved in database.
       $form['draggableviews'][$key]['weight']['#default_value'] = $select_map_array[$form['draggableviews'][$key]['id']['#value']];
@@ -1118,6 +1126,19 @@ function itg_widget_views_query_alter(&$view , &$query) {
     array_push($query->where[1]['conditions'] , $program_where_condition);
   }
 
+  if ($view->name == 'programmes' && ($view->current_display == 'page' || $view->current_display == 'rhs_programmes')) {
+    $join = new views_join();
+    $join->table = 'itg_category_manager';
+    $join->field = 'tid';
+    $join->left_table = 'taxonomy_term_data';
+    $join->left_field = 'tid';
+    $join->type = 'LEFT';
+    //add the join the the view query
+    $view->query->add_relationship('itg_category_manager' , $join , 'taxonomy_term_data');
+    $view->query->add_field('itg_category_manager' , 'status');
+    $query->add_where(0,'itg_category_manager.status' ,'1' ,'=');
+  }
+  
   if ( $view->name == 'anchor_option_view' ) {
     $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
   }
@@ -2471,17 +2492,17 @@ function get_rhs_block_display_condtion($delta = '') {
 
     switch ($delta) {
       case 'watch_right_now_videos_widget':
-        if ( (!empty($arg[1]) && in_array($arg[1] , $watch_right_now_node_array)) || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'blog-listing' || $arg[0] == 'podcasts-listing' || $arg[0] == 'programmes' || $arg[0] == 'site-search' || $arg[0] == 'online-archive-story' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE ) {
+        if ( (!empty($arg[1]) && in_array($arg[1] , $watch_right_now_node_array)) || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'blog-listing' || $arg[0] == 'podcasts-listing' || $arg[0] == 'itg-programmes' || $arg[0] == 'site-search' || $arg[0] == 'online-archive-story' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE ) {
           return TRUE;
         }
         break;
       case 'top_takes_videos_widget':
-        if ( (!empty($arg[1]) && in_array($arg[1] , $top_takes_node_array)) || $arg[0] == 'itg_active_polls' || $arg[0] == 'itg-quiz' || $arg[0] == 'programmes' || $arg[0] == 'site-search' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || $display_block == TRUE ) {
+        if ( (!empty($arg[1]) && in_array($arg[1] , $top_takes_node_array)) || $arg[0] == 'itg_active_polls' || $arg[0] == 'itg-quiz' || $arg[0] == 'itg-programmes' || $arg[0] == 'site-search' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || $display_block == TRUE ) {
           return TRUE;
         }
         break;
       case 'we_may_suggest':
-        if ( (!empty($arg[1]) && in_array($arg[1] , $we_may_suggest_node_array)) || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'itg-quiz' || $arg[0] == 'blog-listing' || $arg[0] == 'podcasts-listing' || $arg[0] == 'site-search' || $arg[0] == 'livetv' || $arg[0] == 'online-archive-story' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE ) {
+        if ( (!empty($arg[1]) && in_array($arg[1] , $we_may_suggest_node_array)) || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'itg-quiz' || $arg[0] == 'blog-listing' || $arg[0] == 'podcasts-listing' || $arg[0] == 'site-search' || $arg[0] == 'livetv' || $arg[0] == 'online-archive-story' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'itg-programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE ) {
           return TRUE;
         }
         break;

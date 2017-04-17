@@ -30,7 +30,7 @@
                   $ads_flag = 1;
               }
               ?>
-            <li><div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->solr_video_id; ?>"><div class="iframe-video"><iframe frameborder="0" scrolling="no" src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=0&ui-logo=1&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info" allowfullscreen></iframe></div></div>  
+            <li><div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->solr_video_id; ?>"><div class="iframe-video"><iframe frameborder="0" scrolling="no" src="https://www.dailymotion.com/embed/video/<?php print $video_value->solr_video_id; ?>?autoplay=0&ui-logo=1&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info" allowfullscreen></iframe></div></div>  
               
             <?php
             echo '<div class="embed-desc" id="video_dec_' . $video_value->solr_video_id . '" >'.  ucfirst($video_value->field_videogallery_description_value).'</div></li>';

@@ -95,6 +95,18 @@ function itg_image_croping_schema() {
                 'length' => '255',
                 'not null' => FALSE,
             ),
+             'alt' => array(
+                'description' => t('Image Alt'),
+                'type' => 'varchar',
+                'length' => '255',
+                'not null' => FALSE,
+            ),
+             'title' => array(
+                'description' => t('Image Title'),
+                'type' => 'varchar',
+                'length' => '255',
+                'not null' => FALSE,
+            ),
             'image_date' => array(
                 'description' => t('Image Date'),
                 'type' => 'varchar',

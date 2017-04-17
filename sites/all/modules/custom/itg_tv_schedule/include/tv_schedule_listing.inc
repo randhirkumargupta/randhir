@@ -43,6 +43,7 @@ function tv_schedule_listing() {
                 $search[$key]['time'] = $document["time"];
                 $search[$key]['day'] = $document["day"];
                 $search[$key]['program'] = $document["program"];
+                $search[$key]['program date'] = $document["program date"];
                 $key++;
                 $search_counter++;
             }

@@ -46,3 +46,14 @@ define('BILLDESK_LABELS' , 'MerchantID|CustomerID|TxnReferenceNo|BankReferenceNo
     'ErrorStatus|ErrorDescription|CheckSum');
 ###########################################################
 
+#########################AMEX##############################
+define('VIRTUAL_PAYMENT_CLIENT_URL' , 'https://vpos.amxvpos.com/vpcpay');
+define('VPC_VERSION' , 1);
+define('VPC_COMMAND' , 'pay');
+define('VPC_RETURN_URL' , $base_url .'/itg-payment-amex-pay-form-page');
+define('AMEX_MERCHANT_ACCESS_CODE' , '0EA9FF0B');
+define('AMEX_MERCHANT_ID' , 'TEST9820008712');
+define('AMXEX_GATEWAY_NAME' , 'amex');
+define('AMXEX_TRANSACTION_PENDING_STATUS' , 'pending');
+define('AMXEX_TRANSACTION_PENDING_STATUS' , 0);
+define('AMXEX_GATEWAY_HISTORY' , "");

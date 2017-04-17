@@ -507,10 +507,12 @@ function itg_videogallery_node_insert($node) {
           $video_details = entity_load('field_collection_item', array($videofields['value']));
 
           $priv_status = $video_details[$videofields['value']]->field_video_private[LANGUAGE_NONE][0]['value'];
+          
           foreach ($video_details[$videofields['value']]->field_videogallery_video_upload as $filed_val) {
 
             $fids = $filed_val[0]['fid'];
           }
+         
           if ((int) $fids != 0) {
 
             $video_image = itg_videogallery_get_video_info_by_fid($fids);
@@ -569,6 +571,68 @@ function itg_videogallery_update_node_id_for_video_fid($node_id, $fids) {
           ))
           ->condition('fid', $fids, '=')
           ->execute();
+}
+
+function itg_videogallery_entity_insert($entity, $type) {
+  
+  if ($type == 'node') {
+    if($entity ->type =='itg_solr_video' || $entity ->type =='itg_delete_solr_video' ) {
+    
+    _custom_helper_apachesolr_index_immediately($entity, $type);  
+    }// Need to do this in hook_entity_insert, rather than hook_node_insert, because that's what filefield_paths uses, and otherwise image uri is not set yet
+  }
+}
+
+function itg_videogallery_entity_update($entity, $type) {
+  
+  if ($type == 'node') {
+    if($entity ->type =='itg_solr_video' || $entity ->type =='itg_delete_solr_video' ) {
+    
+    _custom_helper_apachesolr_index_immediately($entity, $type);  
+    }// Need to do this in hook_entity_insert, rather than hook_node_insert, because that's what filefield_paths uses, and otherwise image uri is not set yet
+  }
+}
+
+/**
+ * Helper function to send entities to apachesolr for immediate index.
+ */
+function _custom_helper_apachesolr_index_immediately($entity, $type) {
+  // Don't index unpublished entities
+
+
+  $env_id = apachesolr_default_environment();
+  $bundles_to_index = apachesolr_get_index_bundles($env_id, $type);
+
+  // Check if entity should be indexed
+  $info = entity_get_info($type);
+  if (!empty($info['entity keys']['bundle'])) {
+    $bundle = $entity->{$info['entity keys']['bundle']};
+  }
+  else {
+    $bundle = $type;
+  }
+
+  if (!in_array($bundle, $bundles_to_index)) {
+    return;
+  }
+
+  // Entity should be indexed, so send it to solr
+  $ids = entity_extract_ids($type, $entity);
+  $id = $ids[0];
+
+  // If this entity is unpublished, remove from index
+  if ($entity->status != 1) {
+    apachesolr_remove_entity($env_id, $type, $id);
+    return;
+  }
+
+  $item = new stdClass();
+  $item->entity_type = $type;
+  $item->entity_id = $id;
+
+  module_load_include('inc', 'apachesolr', 'apachesolr.index');
+  $doc = apachesolr_index_entity_to_documents($item, $env_id);
+  apachesolr_index_send_to_solr($env_id, $doc);
 }
 
 /**
@@ -881,14 +945,14 @@ function itg_videogallery_custom_validate($form, &$form_state) {
     $form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] = "";
   }
 //comment question validation
-  $comment_checkbox = $form_state['values']['field_video_configurations'][LANGUAGE_NONE][0]['value'];
-  if (isset($comment_checkbox) && $form_state['values']['field_story_comment_question'][LANGUAGE_NONE][0]['value'] == '') {
-    foreach ($form_state['values']['field_video_configurations'][LANGUAGE_NONE] as $key => $val) {
-      if ($val['value'] == 'comment') {
-        form_set_error('field_story_comment_question', t("Please enter the comment question."));
-      }
-    }
-  }
+//  $comment_checkbox = $form_state['values']['field_video_configurations'][LANGUAGE_NONE][0]['value'];
+//  if (isset($comment_checkbox) && $form_state['values']['field_story_comment_question'][LANGUAGE_NONE][0]['value'] == '') {
+//    foreach ($form_state['values']['field_video_configurations'][LANGUAGE_NONE] as $key => $val) {
+//      if ($val['value'] == 'comment_box') {
+//        form_set_error('field_story_comment_question', t("Please enter the comment question."));
+//      }
+//    }
+//  }
 }
 
 /**
@@ -898,7 +962,14 @@ function itg_videogallery_custom_validate($form, &$form_state) {
 function itg_videogallery_after_build($form, &$form_state) {
 
   global $user, $base_url;
-
+  
+  if (!isset($form['#node']->nid)) {
+        // hide remove button of first field on add form 
+        drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-video-configurations-und-comment-box").trigger("click");
+            });', array('type' => 'inline', 'scope' => 'footer'));
+    }
+    
   if ($form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] != 'migrated') {
     foreach ($form['field_video_upload']['und'] as $delta => $field) {
       if (is_numeric($delta)) {
@@ -946,12 +1017,18 @@ function itg_videogallery_form_videogallery_node_form_alter(&$form, &$form_state
 // code for Comment Question field hide and show
   $form['field_story_comment_question']['#states'] = array(
       'visible' => array(
-          ':input[name="field_video_configurations[und][comment]"]' => array('checked' => TRUE),
-      ),
-      'required' => array(
-          ':input[name="field_video_configurations[und][comment]"]' => array('checked' => TRUE),
+          ':input[name="field_video_configurations[und][comment_box]"]' => array('checked' => TRUE),
       )
   );
+  
+//  $form['field_story_comment_question']['#states'] = array(
+//      'visible' => array(
+//          ':input[name="field_video_configurations[und][comment]"]' => array('checked' => TRUE),
+//      ),
+//      'required' => array(
+//          ':input[name="field_video_configurations[und][comment]"]' => array('checked' => TRUE),
+//      )
+//  );
 
   $form['field_story_posted_by_twitter']['#default_value'] = $user->mail;
   $form['field_story_posted_by_instagram']['#default_value'] = $user->mail;

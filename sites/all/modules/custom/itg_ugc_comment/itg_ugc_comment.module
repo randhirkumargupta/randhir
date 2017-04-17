@@ -472,11 +472,16 @@ function itg_ugc_get_user_email($text) {
  * @param int $nid
  */
 function itg_get_comment_question($nid) {
-  if(!empty($nid)) {
+  if (!empty($nid)) {
+    $db_or = db_or();
+    $db_or->condition('uc.bundle', 'story');
+    $db_or->condition('uc.bundle', 'videogallery');
+    $db_or->condition('uc.bundle', 'photogallery');
+    $db_or->condition('uc.bundle', 'blog');
     $query = db_select('field_data_field_story_comment_question', 'uc')
-            ->fields('uc', array('field_story_comment_question_value'))
-            ->condition('uc.bundle', 'story')
-            ->condition('uc.entity_id', $nid);
+        ->fields('uc', array('field_story_comment_question_value'))
+        ->condition($db_or)
+        ->condition('uc.entity_id', $nid);
 
     return $query->execute()->fetchField();
   }

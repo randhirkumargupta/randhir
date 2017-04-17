@@ -14,93 +14,93 @@
  */
 function itg_image_croping_menu() {
 
-    $items = array();
-    $items['getimagetocroper'] = array(
-        'page callback' => 'itg_image_croping_ajax_make_ajax', // load the croper according to size!.
-        'type' => MENU_CALLBACK,
-        'access arguments' => array('access content'),
-    );
+  $items = array();
+  $items['getimagetocroper'] = array(
+      'page callback' => 'itg_image_croping_ajax_make_ajax', // load the croper according to size!.
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
 
-    $items['change_image_aspect_ratio'] = array(
-        'page callback' => 'itg_image_croping_change_image_aspect_ratio', // load the croper according to aspect ratio!.
-        'type' => MENU_CALLBACK,
-        'access arguments' => array('access content'),
-    );
+  $items['change_image_aspect_ratio'] = array(
+      'page callback' => 'itg_image_croping_change_image_aspect_ratio', // load the croper according to aspect ratio!.
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
 
-    $items['savecropedimage'] = array(
-        'page callback' => 'itg_image_croping_crop_image', // save croped image by form the image dataurl (base64).
-        'type' => MENU_CALLBACK,
-        'access arguments' => array('access content'),
-    );
-    $items['saveimageinfo'] = array(
-        'page callback' => 'itg_image_saveimage_info', // save croped image by form the image dataurl (base64).
-        'type' => MENU_CALLBACK,
-        'access arguments' => array('access content'),
-    );
-    $items['savecropedimage_orignal'] = array(
-        'page callback' => 'itg_image_croping_crop_image_orignal', // save croped image by form the image dataurl (base64).
-        'type' => MENU_CALLBACK,
-        'access arguments' => array('access content'),
-    );
+  $items['savecropedimage'] = array(
+      'page callback' => 'itg_image_croping_crop_image', // save croped image by form the image dataurl (base64).
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
+  $items['saveimageinfo'] = array(
+      'page callback' => 'itg_image_saveimage_info', // save croped image by form the image dataurl (base64).
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
+  $items['savecropedimage_orignal'] = array(
+      'page callback' => 'itg_image_croping_crop_image_orignal', // save croped image by form the image dataurl (base64).
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
 
-    $items['imagetotag'] = array(
-        'page callback' => 'itg_image_croping_getimagetotag', // make image to tagging
-        'type' => MENU_CALLBACK,
-        'access arguments' => array('access content'),
-    );
+  $items['imagetotag'] = array(
+      'page callback' => 'itg_image_croping_getimagetotag', // make image to tagging
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
 
-    $items['imagetagedit'] = array(
-        'page callback' => 'itg_image_croping_imagetagedit', // make image tags edit
-        'type' => MENU_CALLBACK,
-        'access arguments' => array('access content'),
-    );
-    $items['front_imagetag'] = array(
-        'page callback' => 'itg_image_croping_front_imagetag', // make image tags edit
-        'type' => MENU_CALLBACK,
-        'access arguments' => array('access content'),
-    );
+  $items['imagetagedit'] = array(
+      'page callback' => 'itg_image_croping_imagetagedit', // make image tags edit
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
+  $items['front_imagetag'] = array(
+      'page callback' => 'itg_image_croping_front_imagetag', // make image tags edit
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
 
 
-    $items['savetags'] = array(
-        'page callback' => 'itg_image_croping_save_tags', // save the tags on images.
-        'type' => MENU_CALLBACK,
-        'access arguments' => array('access content'),
-    );
+  $items['savetags'] = array(
+      'page callback' => 'itg_image_croping_save_tags', // save the tags on images.
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
 
-    $items['edittags'] = array(
-        'page callback' => 'itg_image_croping_edit_tags', // save the tags on images.
-        'type' => MENU_CALLBACK,
-        'access arguments' => array('access content'),
-    );
-    $items['gettaglist'] = array(
-        'page callback' => 'itg_image_croping_get_image_tags', // use for get the all tags on image.
-        'type' => MENU_CALLBACK,
-        'access arguments' => array('access content'),
-    );
-    $items['gettaglist_front'] = array(
-        'page callback' => 'itg_image_croping_get_image_tags_front', // use for get the all tags on image.
-        'type' => MENU_CALLBACK,
-        'access arguments' => array('access content'),
-    );
+  $items['edittags'] = array(
+      'page callback' => 'itg_image_croping_edit_tags', // save the tags on images.
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
+  $items['gettaglist'] = array(
+      'page callback' => 'itg_image_croping_get_image_tags', // use for get the all tags on image.
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
+  $items['gettaglist_front'] = array(
+      'page callback' => 'itg_image_croping_get_image_tags_front', // use for get the all tags on image.
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
 
-    $items['removetags'] = array(
-        'page callback' => 'itg_image_croping_remove_image_tag', // se for remove the tags on image.
-        'type' => MENU_CALLBACK,
-        'access arguments' => array('access content'),
-    );
+  $items['removetags'] = array(
+      'page callback' => 'itg_image_croping_remove_image_tag', // se for remove the tags on image.
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
 
-    $items['gettags'] = array(
-        'page callback' => 'itg_image_croping_get_image_tag', // se for get the tags by tagid on image.
-        'type' => MENU_CALLBACK,
-        'access arguments' => array('access content'),
-    );
-    $items['itg_videogallery_ftp_file_insert_cron'] = array(
-        'page callback' => 'itg_videogallery_ftp_file_insert_cron',
-        'type' => MENU_CALLBACK,
-        'access arguments' => array('access content'),
-    );
+  $items['gettags'] = array(
+      'page callback' => 'itg_image_croping_get_image_tag', // se for get the tags by tagid on image.
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
+  $items['itg_videogallery_ftp_file_insert_cron'] = array(
+      'page callback' => 'itg_videogallery_ftp_file_insert_cron',
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
 
-    return $items;
+  return $items;
 }
 
 /**
@@ -109,29 +109,29 @@ function itg_image_croping_menu() {
 function itg_image_croping_change_image_aspect_ratio() {
 
 
-    $image_id = $_POST['imageId'];
-    $field_name = $_POST['field_id'];
-    if ($_POST['original_height'] && $_POST['origninal_width']) {
-        $image_height = trim($_POST['original_height']);
-        $image_width = trim($_POST['origninal_width']);
-    }
-    $aspect_ratio = trim($_POST['aspect_ratio']);
+  $image_id = $_POST['imageId'];
+  $field_name = $_POST['field_id'];
+  if ($_POST['original_height'] && $_POST['origninal_width']) {
+    $image_height = trim($_POST['original_height']);
+    $image_width = trim($_POST['origninal_width']);
+  }
+  $aspect_ratio = trim($_POST['aspect_ratio']);
 
-    $file = file_load($image_id);
-    if (empty($file)) {
-        drupal_set_message(t('This image is not valid!'));
-    }
-    $imagedata = base64_encode(file_get_contents($file->uri));
-    $drupal_form = drupal_render(drupal_get_form('itg_image_croping_crop_form', $field_name, $imagedata, $image_height, $image_width, $aspect_ratio));
+  $file = file_load($image_id);
+  if (empty($file)) {
+    drupal_set_message(t('This image is not valid!'));
+  }
+  $imagedata = base64_encode(file_get_contents($file->uri));
+  $drupal_form = drupal_render(drupal_get_form('itg_image_croping_crop_form', $field_name, $imagedata, $image_height, $image_width, $aspect_ratio));
 
-    drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_crop.js', array('
+  drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_crop.js', array('
   type' => 'file', 'scope' => 'content'));
-    $aspect_ratio_data = itg_image_croping_data_aspect_ratio($aspect_ratio, $image_height, $image_width);
-    print theme('image_repository', array('data' => $file,
-        'field_name' => $field_name,
-        'image_height' => $aspect_ratio_data['height'],
-        'image_width' => $aspect_ratio_data['width'],
-        'form' => $drupal_form));
+  $aspect_ratio_data = itg_image_croping_data_aspect_ratio($aspect_ratio, $image_height, $image_width);
+  print theme('image_repository', array('data' => $file,
+      'field_name' => $field_name,
+      'image_height' => $aspect_ratio_data['height'],
+      'image_width' => $aspect_ratio_data['width'],
+      'form' => $drupal_form));
 }
 
 /**
@@ -139,13 +139,13 @@ function itg_image_croping_change_image_aspect_ratio() {
  * 
  */
 function itg_image_croping_data_aspect_ratio($aspect_ratio, $image_height, $image_width) {
-    $ratioarray = explode(':', $aspect_ratio);
-    $ratio = $ratioarray[0] / $ratioarray[1];
-    $new_height = $image_width / $ratio;
-    $new_width = $image_height * $ratio;
-    $returndata['height'] = $new_height;
-    $returndata['width'] = $new_width;
-    return $returndata;
+  $ratioarray = explode(':', $aspect_ratio);
+  $ratio = $ratioarray[0] / $ratioarray[1];
+  $new_height = $image_width / $ratio;
+  $new_width = $image_height * $ratio;
+  $returndata['height'] = $new_height;
+  $returndata['width'] = $new_width;
+  return $returndata;
 }
 
 /**
@@ -154,45 +154,45 @@ function itg_image_croping_data_aspect_ratio($aspect_ratio, $image_height, $imag
 function itg_image_croping_ajax_make_ajax() {
 
 
-    $image_id = $_POST['imageId'];
-    $field_name = $_POST['field_id'];
-    $is_solr = "";
+  $image_id = $_POST['imageId'];
+  $field_name = $_POST['field_id'];
+  $is_solr = "";
 
-    if ($_POST['solr']) {
-        $is_solr = $_POST['solr'];
-    }
+  if ($_POST['solr']) {
+    $is_solr = $_POST['solr'];
+  }
 
-    if ($_POST['img_height'] && $_POST['img_width']) {
-        $image_height = trim($_POST['img_height']);
-        $image_width = trim($_POST['img_width']);
-    }
+  if ($_POST['img_height'] && $_POST['img_width']) {
+    $image_height = trim($_POST['img_height']);
+    $image_width = trim($_POST['img_width']);
+  }
 
-    $file = file_load($image_id);
-    if ($_POST['img_width'] != "" && $_POST['img_height'] == "") {
-        $imagedata_info = image_get_info($file->uri);
-        $image_height = $imagedata_info['height'];
-        $image_width = trim($_POST['img_width']);
-    }
-    if ($image_height == "" && $image_width == "") {
-        $image_height = EXTRA_LARGE_IMAGE_HEIGHT;  //set the inital height of croper
-        $image_width = EXTRA_LARGE_IMAGE_WIDTH;    //set the inital width of croper 
-    }
-    if (empty($file)) {
-        drupal_set_message(t('This image is not valid!'));
-    }
-    $imagedata = base64_encode(file_get_contents($file->uri));
-    $drupal_form = drupal_render(drupal_get_form('itg_image_croping_crop_form', $field_name, $imagedata, $image_height, $image_width, '', $_POST['content_type'], $is_solr));
+  $file = file_load($image_id);
+  if ($_POST['img_width'] != "" && $_POST['img_height'] == "") {
+    $imagedata_info = image_get_info($file->uri);
+    $image_height = $imagedata_info['height'];
+    $image_width = trim($_POST['img_width']);
+  }
+  if ($image_height == "" && $image_width == "") {
+    $image_height = EXTRA_LARGE_IMAGE_HEIGHT;  //set the inital height of croper
+    $image_width = EXTRA_LARGE_IMAGE_WIDTH;    //set the inital width of croper 
+  }
+  if (empty($file)) {
+    drupal_set_message(t('This image is not valid!'));
+  }
+  $imagedata = base64_encode(file_get_contents($file->uri));
+  $drupal_form = drupal_render(drupal_get_form('itg_image_croping_crop_form', $field_name, $imagedata, $image_height, $image_width, '', $_POST['content_type'], $is_solr));
 
-    drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_crop.js', array('
+  drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_crop.js', array('
   type' => 'file', 'scope' => 'content'));
 
-    print theme('image_repository', array('data' => $file,
-        'field_name' => $field_name,
-        'image_height' => $image_height,
-        'image_width' => $image_width,
-        'content_type' => $_POST['content_type'],
-        //'genrate' => ($field_name == 'field_story_extra_large_image') ? 1 : 0,
-        'form' => $drupal_form));
+  print theme('image_repository', array('data' => $file,
+      'field_name' => $field_name,
+      'image_height' => $image_height,
+      'image_width' => $image_width,
+      'content_type' => $_POST['content_type'],
+      //'genrate' => ($field_name == 'field_story_extra_large_image') ? 1 : 0,
+      'form' => $drupal_form));
 }
 
 /**
@@ -200,19 +200,19 @@ function itg_image_croping_ajax_make_ajax() {
  *
  */
 function itg_image_croping_getimagetotag() {
-    $image_id = json_decode($_POST['fid']);
-    $content_name = $_POST['content_name'];
-    $original_img_id = $_POST['original_img_id'];
-    if ($_POST['is_solr'] == 1) {
-        $file = file_load($original_img_id);
-        $result = file_delete($file, TRUE);
-    }
+  $image_id = json_decode($_POST['fid']);
+  $content_name = $_POST['content_name'];
+  $original_img_id = $_POST['original_img_id'];
+  if ($_POST['is_solr'] == 1) {
+    $file = file_load($original_img_id);
+    $result = file_delete($file, TRUE);
+  }
 
-    print theme('image_tagging', array('data' => $image_id, 'content_name' => $content_name,
-        'field_name' => $_POST['field_name'],
-        'original_img_id' => $original_img_id,
-        'is_solr' => $_POST['is_solr'],
-    ));
+  print theme('image_tagging', array('data' => $image_id, 'content_name' => $content_name,
+      'field_name' => $_POST['field_name'],
+      'original_img_id' => $original_img_id,
+      'is_solr' => $_POST['is_solr'],
+  ));
 }
 
 /**
@@ -220,11 +220,11 @@ function itg_image_croping_getimagetotag() {
  * 
  */
 function itg_image_croping_imagetagedit() {
-    $image_id = $_POST['fid'];
-    $file = file_load($image_id);
-    return theme('image_taggingedit', array('data' => $file,
-        'field_name' => $_POST['field_name']
-    ));
+  $image_id = $_POST['fid'];
+  $file = file_load($image_id);
+  return theme('image_taggingedit', array('data' => $file,
+      'field_name' => $_POST['field_name']
+  ));
 }
 
 /**
@@ -232,13 +232,13 @@ function itg_image_croping_imagetagedit() {
  * 
  */
 function itg_image_croping_front_imagetag() {
-    $image_id = $_POST['fid'];
-    $original_img_id = $_POST['original_img_id'];
+  $image_id = $_POST['fid'];
+  $original_img_id = $_POST['original_img_id'];
 
-    $file = file_load($image_id);
-    print theme('image_tagging_front', array('data' => $file,
-        'field_name' => $_POST['field_name'],
-    ));
+  $file = file_load($image_id);
+  print theme('image_tagging_front', array('data' => $file,
+      'field_name' => $_POST['field_name'],
+  ));
 }
 
 /**
@@ -247,12 +247,12 @@ function itg_image_croping_front_imagetag() {
  */
 function itg_image_croping_remove_image_tag() {
 
-    $tag_id = $_POST['tag_id'];
-    $data = db_delete('image_tags')
-            ->condition('id', $tag_id, '=')
-            ->execute();
-    print $data;
-    exit();
+  $tag_id = $_POST['tag_id'];
+  $data = db_delete('image_tags')
+          ->condition('id', $tag_id, '=')
+          ->execute();
+  print $data;
+  exit();
 }
 
 /**
@@ -261,13 +261,13 @@ function itg_image_croping_remove_image_tag() {
  */
 function itg_image_croping_get_image_tag() {
 
-    $tag_id = $_POST['tag_id'];
-    $data = db_select('image_tags', 'c')
-                    ->fields('c')
-                    ->condition('id', $tag_id, '=')
-                    ->execute()->fetchAssoc();
-    print json_encode($data);
-    exit();
+  $tag_id = $_POST['tag_id'];
+  $data = db_select('image_tags', 'c')
+                  ->fields('c')
+                  ->condition('id', $tag_id, '=')
+                  ->execute()->fetchAssoc();
+  print json_encode($data);
+  exit();
 }
 
 /**
@@ -275,30 +275,30 @@ function itg_image_croping_get_image_tag() {
  */
 function itg_image_croping_get_image_tags() {
 
-    $image_id = $_POST['fid'];
-    $data['boxes'] = '';
-    $data['lists'] = '';
-    $query = db_select('image_tags', 'tags')
-            ->fields('tags')
-            ->condition('image_id', $image_id, '=');
-    $result = $query->execute();
+  $image_id = $_POST['fid'];
+  $data['boxes'] = '';
+  $data['lists'] = '';
+  $query = db_select('image_tags', 'tags')
+          ->fields('tags')
+          ->condition('image_id', $image_id, '=');
+  $result = $query->execute();
 
-    while ($record = $result->fetchAssoc()) {
-        $data['boxes'] .= '<div class="square-tag" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><i class="fa fa-tag"></i></div><div class="tagview" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><div class="square"></div><div id="tag_' . $record['id'] . '" class="person" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;">' . $record['tag_title'] . '</div><a  class="edit">Edit</a><a  class="remove">X</a></div>';
-        $data['lists'] .= ' ';
-    }
-    echo json_encode($data);
-    exit();
+  while ($record = $result->fetchAssoc()) {
+    $data['boxes'] .= '<div class="square-tag" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><i class="fa fa-tag"></i></div><div class="tagview" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><div class="square"></div><div id="tag_' . $record['id'] . '" class="person" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;">' . $record['tag_title'] . '</div><a  class="edit">Edit</a><a  class="remove">X</a></div>';
+    $data['lists'] .= ' ';
+  }
+  echo json_encode($data);
+  exit();
 }
 
 /**
  * This function use for add http in url
  */
 function addhttp($url) {
-    if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
-        $url = "http://" . $url;
-    }
-    return $url;
+  if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+    $url = "http://" . $url;
+  }
+  return $url;
 }
 
 /**
@@ -306,11 +306,11 @@ function addhttp($url) {
  * $resuly array
  */
 function itg_image_croping_get_image_tags_by_fid($fid) {
-    $query = db_select('image_tags', 'tags')
-            ->fields('tags')
-            ->condition('image_id', $fid, '=');
-    $result = $query->execute()->fetchAll();
-    return $result;
+  $query = db_select('image_tags', 'tags')
+          ->fields('tags')
+          ->condition('image_id', $fid, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
 }
 
 /**
@@ -318,20 +318,20 @@ function itg_image_croping_get_image_tags_by_fid($fid) {
  */
 function itg_image_croping_get_image_tags_front() {
 
-    $image_id = $_POST['fid'];
-    $data['boxes'] = '';
-    $data['lists'] = '';
-    $query = db_select('image_tags', 'tags')
-            ->fields('tags')
-            ->condition('image_id', $image_id, '=');
-    $result = $query->execute();
+  $image_id = $_POST['fid'];
+  $data['boxes'] = '';
+  $data['lists'] = '';
+  $query = db_select('image_tags', 'tags')
+          ->fields('tags')
+          ->condition('image_id', $image_id, '=');
+  $result = $query->execute();
 
-    while ($record = $result->fetchAssoc()) {
-        $data['boxes'] .= '<div class="square-tag" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><i class="fa fa-tag"></i></div><div class="tagview" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><div class="square"></div><div id="tag_' . $record['id'] . '" class="person" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;"><a target="_blank" href="' . $record['tag_url'] . '" >' . $record['tag_title'] . '</a></div></div>';
-        $data['lists'] .= ' ';
-    }
-    echo json_encode($data);
-    exit();
+  while ($record = $result->fetchAssoc()) {
+    $data['boxes'] .= '<div class="square-tag" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><i class="fa fa-tag"></i></div><div class="tagview" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><div class="square"></div><div id="tag_' . $record['id'] . '" class="person" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;"><a target="_blank" href="' . $record['tag_url'] . '" >' . $record['tag_title'] . '</a></div></div>';
+    $data['lists'] .= ' ';
+  }
+  echo json_encode($data);
+  exit();
 }
 
 /**
@@ -340,38 +340,38 @@ function itg_image_croping_get_image_tags_front() {
  */
 function itg_image_croping_save_tags() {
 
-    $fid = $_POST['pic_id'];
-    $tag = $_POST['name'];
-    $tag_url = $_POST['url'];
-    $x_coordinate = $_POST['pic_x'];
-    $y_coordinate = $_POST['pic_y'];
-    $type = $_POST['type'];
-    $result = db_select('image_tags', 'tags')
-                    ->fields('tags')
-                    ->condition('image_id', $fid, '=')
-                    ->condition('x_coordinate', $x_coordinate, '=')
-                    ->condition('y_coordinate', $y_coordinate, '=')
-                    ->execute()->fetchAssoc();
-    if (empty($result)) {
+  $fid = $_POST['pic_id'];
+  $tag = $_POST['name'];
+  $tag_url = $_POST['url'];
+  $x_coordinate = $_POST['pic_x'];
+  $y_coordinate = $_POST['pic_y'];
+  $type = $_POST['type'];
+  $result = db_select('image_tags', 'tags')
+                  ->fields('tags')
+                  ->condition('image_id', $fid, '=')
+                  ->condition('x_coordinate', $x_coordinate, '=')
+                  ->condition('y_coordinate', $y_coordinate, '=')
+                  ->execute()->fetchAssoc();
+  if (empty($result)) {
 
-        $inserted_data = db_insert('image_tags')->fields(array(
-                    'image_id' => $fid,
-                    'tag_title' => $tag,
-                    'tag_url' => $tag_url,
-                    'x_coordinate' => $x_coordinate,
-                    'y_coordinate' => $y_coordinate,
-                ))->execute();
-    }
-    if ($inserted_data) {
+    $inserted_data = db_insert('image_tags')->fields(array(
+                'image_id' => $fid,
+                'tag_title' => $tag,
+                'tag_url' => $tag_url,
+                'x_coordinate' => $x_coordinate,
+                'y_coordinate' => $y_coordinate,
+            ))->execute();
+  }
+  if ($inserted_data) {
 
-        $return = array('status' => '1', 'id' => $inserted_data);
-        print json_encode($return);
-    }
-    else {
-        $return = array('status' => '0', 'id' => '');
-        print json_encode($return);
-    }
-    exit();
+    $return = array('status' => '1', 'id' => $inserted_data);
+    print json_encode($return);
+  }
+  else {
+    $return = array('status' => '0', 'id' => '');
+    print json_encode($return);
+  }
+  exit();
 }
 
 /**
@@ -380,31 +380,31 @@ function itg_image_croping_save_tags() {
  */
 function itg_image_croping_edit_tags() {
 
-    $fid = $_POST['tagid'];
-    $tag = $_POST['name'];
-    $tag_url = $_POST['url'];
+  $fid = $_POST['tagid'];
+  $tag = $_POST['name'];
+  $tag_url = $_POST['url'];
 //    $x_coordinate = $_POST['pic_x'];
 //    $y_coordinate = $_POST['pic_y'];
-    $type = $_POST['type'];
+  $type = $_POST['type'];
 
 
-    $inserted_data = db_update('image_tags')->fields(array(
-                'tag_title' => $tag,
-                'tag_url' => $tag_url,
+  $inserted_data = db_update('image_tags')->fields(array(
+              'tag_title' => $tag,
+              'tag_url' => $tag_url,
 //                'x_coordinate' => $x_coordinate,
 //                'y_coordinate' => $y_coordinate,
-            ))->condition('id', $fid, '=')
-            ->execute();
-    if ($inserted_data) {
+          ))->condition('id', $fid, '=')
+          ->execute();
+  if ($inserted_data) {
 
-        $return = array('status' => '1', 'id' => $inserted_data);
-        print json_encode($return);
-    }
-    else {
-        $return = array('status' => '0', 'id' => '');
-        print json_encode($return);
-    }
-    exit();
+    $return = array('status' => '1', 'id' => $inserted_data);
+    print json_encode($return);
+  }
+  else {
+    $return = array('status' => '0', 'id' => '');
+    print json_encode($return);
+  }
+  exit();
 }
 
 /**
@@ -413,100 +413,100 @@ function itg_image_croping_edit_tags() {
  */
 function itg_image_croping_theme($existing, $type, $theme, $path) {
 
-    return array(
-        'image_repository' => array(
-            'template' => 'templates/image_croper',
-        ),
-        'image_tagging' => array(
-            'template' => 'templates/image_tagger',
-        ),
-        'image_taggingedit' => array(
-            'template' => 'templates/image_taggeredit',
-        ),
-        'image_tagging_front' => array(
-            'template' => 'templates/image_tagger_front',
-        ),
-    );
+  return array(
+      'image_repository' => array(
+          'template' => 'templates/image_croper',
+      ),
+      'image_tagging' => array(
+          'template' => 'templates/image_tagger',
+      ),
+      'image_taggingedit' => array(
+          'template' => 'templates/image_taggeredit',
+      ),
+      'image_tagging_front' => array(
+          'template' => 'templates/image_tagger_front',
+      ),
+  );
 }
 
 /**
  * This function use for save croped image by form the image dataurl (base64)!
  */
 function itg_image_croping_crop_image() {
-    global $user;
-    $image_data_url = $_POST['image_data'];
-    $image_name = $_POST['field_name'];
-    $content_type = $_POST['content_name'];
-    $image_fields = $_POST['image_fields'];
-    $fileids = array();
-    $img_dim = mageimagedimesion();
-    if ($image_name == "") {
-        $image_name = time();
-    }
-    $image_name = $image_name . rand(111, 999);
-    $extendata = substr($image_data_url, 5, strpos($image_data_url, ';') - 5);
-    $extention = end(explode('/', $extendata));
-    if ($extention == "") {
-        $extention = 'png';
-    }
+  global $user;
+  $image_data_url = $_POST['image_data'];
+  $image_name = $_POST['field_name'];
+  $content_type = $_POST['content_name'];
+  $image_fields = $_POST['image_fields'];
+  $fileids = array();
+  $img_dim = mageimagedimesion();
+  if ($image_name == "") {
+    $image_name = time();
+  }
+  $image_name = $image_name . rand(111, 999);
+  $extendata = substr($image_data_url, 5, strpos($image_data_url, ';') - 5);
+  $extention = end(explode('/', $extendata));
+  if ($extention == "") {
+    $extention = 'png';
+  }
 //Load orignal image 
-    if (!empty($_POST['original_img_id'])) {
-        $orignal_img = file_load($_POST['original_img_id']);
+  if (!empty($_POST['original_img_id'])) {
+    $orignal_img = file_load($_POST['original_img_id']);
 
-        $orignal_file_name = $orignal_img->filename;
-        $orignal_file_name = substr($orignal_file_name, 0, (strrpos($orignal_file_name, ".")));
-    }
-    if ($orignal_file_name != "") {
-        $image_name = $orignal_file_name;
-    }
-    $image_data_url = str_replace('data:image/' . $extention . ';base64,', '', $image_data_url);
-    $imagedata = base64_decode($image_data_url);
-    if (!file_exists(file_default_scheme() . '://crop_image')) {
+    $orignal_file_name = $orignal_img->filename;
+    $orignal_file_name = substr($orignal_file_name, 0, (strrpos($orignal_file_name, ".")));
+  }
+  if ($orignal_file_name != "") {
+    $image_name = $orignal_file_name;
+  }
+  $image_data_url = str_replace('data:image/' . $extention . ';base64,', '', $image_data_url);
+  $imagedata = base64_decode($image_data_url);
+  if (!file_exists(file_default_scheme() . '://crop_image')) {
+    mkdir(file_default_scheme() . '://crop_image', 0777, TRUE);
+  }
+  $file = file_save_data($imagedata, file_default_scheme() . '://crop_image/' . $image_name . '.' . $extention);
+  file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
+  $image = image_load($file->uri);
+
+
+  $fileids['fid'][] = $file->fid . '#' . $_POST['field_name'];
+  if (!empty($image_fields) && !empty($image)) {
+    foreach ($image_fields as $fields_name) {
+      $file = array();
+      if (!file_exists(file_default_scheme() . '://crop_image')) {
         mkdir(file_default_scheme() . '://crop_image', 0777, TRUE);
-    }
-    $file = file_save_data($imagedata, file_default_scheme() . '://crop_image/' . $image_name . '.' . $extention);
-    file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
-    $image = image_load($file->uri);
-
-
-    $fileids['fid'][] = $file->fid . '#' . $_POST['field_name'];
-    if (!empty($image_fields) && !empty($image)) {
-        foreach ($image_fields as $fields_name) {
-            $file = array();
-            if (!file_exists(file_default_scheme() . '://crop_image')) {
-                mkdir(file_default_scheme() . '://crop_image', 0777, TRUE);
-            }
-            // echo is_writable(file_default_scheme() . '://crop_image');
-            $filepath = file_default_scheme() . '://crop_image';
-            $scaled = image_resize($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height']);
-            if ($scaled) {
-                $image_name = $fields_name . time();
-                if ($orignal_file_name != "") {
-                    $image_name = $orignal_file_name . rand(111, 9999) . time();
-                }
-
-                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $extention);
-                $uri = $filepath . '/' . $image_name . '.' . $extention;
-                $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
-                $file = new StdClass;
-                $file->uid = $user->uid;
-                $file->filename = basename($uri);
-                $file->uri = $uri;
-                $file->filemime = file_get_mimetype($uri);
-                $file->filesize = @filesize($uri);
-                $file->timestamp = REQUEST_TIME;
-                // $file->status = FILE_STATUS_PERMANENT;
-                $file->is_new = TRUE;
-                $file->status = FILE_STATUS_PERMANENT;
-                $file = file_save($file);
-                file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
-                $fileids['fid'][] = $file->fid . '#' . $fields_name;
-            }
+      }
+      // echo is_writable(file_default_scheme() . '://crop_image');
+      $filepath = file_default_scheme() . '://crop_image';
+      $scaled = image_resize($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height']);
+      if ($scaled) {
+        $image_name = $fields_name . time();
+        if ($orignal_file_name != "") {
+          $image_name = $orignal_file_name . rand(111, 9999) . time();
         }
-    }
 
-    print json_encode($fileids);
-    exit();
+        $sav = image_save($image, $filepath . '/' . $image_name . '.' . $extention);
+        $uri = $filepath . '/' . $image_name . '.' . $extention;
+        $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
+        $file = new StdClass;
+        $file->uid = $user->uid;
+        $file->filename = basename($uri);
+        $file->uri = $uri;
+        $file->filemime = file_get_mimetype($uri);
+        $file->filesize = @filesize($uri);
+        $file->timestamp = REQUEST_TIME;
+        // $file->status = FILE_STATUS_PERMANENT;
+        $file->is_new = TRUE;
+        $file->status = FILE_STATUS_PERMANENT;
+        $file = file_save($file);
+        file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
+        $fileids['fid'][] = $file->fid . '#' . $fields_name;
+      }
+    }
+  }
+
+  print json_encode($fileids);
+  exit();
 }
 
 /**
@@ -514,42 +514,44 @@ function itg_image_croping_crop_image() {
  */
 function itg_image_saveimage_info() {
 
-    $imageino = $_POST['form_value'];
-    parse_str($imageino, $output_info);
+  $imageino = $_POST['form_value'];
+  parse_str($imageino, $output_info);
 
-    if (!empty($output_info['fids'])) {
-        for ($i = 0; $i < count($output_info['fids']); $i++) {
-            $fid = explode('#', $output_info['fids'][$i]);
-            $syndicatin_name = 'syndicate_' . $fid[0];
-            if ($output_info['courtesy'][$i] != "" || $output_info[$syndicatin_name] != "")
-                $image_date = "";
-            if ($output_info['image_date'][$i] != "") {
-                $imagedate = explode('/', $output_info['image_date'][$i]);
-                $image_date = $imagedate[2] . '-' . $imagedate[1] . '-' . $imagedate[0];
-            }
-            if ($image_date == "") {
-                $image_date = date('Y-m-d');
-            }
-            $inserted_data = db_insert('image_info')->fields(array(
-                        'fid' => $fid[0],
-                        'image_courtesy' => $output_info['courtesy'][$i],
-                        'image_keyword' => $output_info['keyword'][$i],
-                        'image_tags' => $output_info['tags'][$i],
-                        'image_place' => $output_info['place'][$i],
-                        'image_photo_grapher' => $output_info['photo_grapher'][$i],
-                        'image_date' => $image_date,
-                        'image_desc' => $output_info['image_description'][$i],
-                        'image_syndicate' => $output_info[$syndicatin_name],
-                    ))->execute();
-        }
+  if (!empty($output_info['fids'])) {
+    for ($i = 0; $i < count($output_info['fids']); $i++) {
+      $fid = explode('#', $output_info['fids'][$i]);
+      $syndicatin_name = 'syndicate_' . $fid[0];
+      if ($output_info['courtesy'][$i] != "" || $output_info[$syndicatin_name] != "")
+        $image_date = "";
+      if ($output_info['image_date'][$i] != "") {
+        $imagedate = explode('/', $output_info['image_date'][$i]);
+        $image_date = $imagedate[2] . '-' . $imagedate[1] . '-' . $imagedate[0];
+      }
+      if ($image_date == "") {
+        $image_date = date('Y-m-d');
+      }
+      $inserted_data = db_insert('image_info')->fields(array(
+                  'fid' => $fid[0],
+                  'image_courtesy' => $output_info['courtesy'][$i],
+                  'image_keyword' => $output_info['keyword'][$i],
+                  'alt' => $output_info['image_alt'][$i],
+                  'title' => $output_info['image_title'][$i],
+                  'image_tags' => $output_info['tags'][$i],
+                  'image_place' => $output_info['place'][$i],
+                  'image_photo_grapher' => $output_info['photo_grapher'][$i],
+                  'image_date' => $image_date,
+                  'image_desc' => $output_info['image_description'][$i],
+                  'image_syndicate' => $output_info[$syndicatin_name],
+              ))->execute();
     }
-    if ($inserted_data) {
-        print 1;
-    }
-    else {
-        print 0;
-    }
-    exit();
+  }
+  if ($inserted_data) {
+    print 1;
+  }
+  else {
+    print 0;
+  }
+  exit();
 }
 
 /**
@@ -557,222 +559,223 @@ function itg_image_saveimage_info() {
  */
 function itg_image_croping_crop_image_orignal() {
 
-    $image_fiedlid = $_POST['image_fiedlid'];
-    $image_name = $_POST['field_name'];
-    $content_type = $_POST['content_name'];
-    $image_fields = $_POST['image_fields'];
-    $fileids = array();
-    $img_dim = mageimagedimesion();
+  $image_fiedlid = $_POST['image_fiedlid'];
+  $image_name = $_POST['field_name'];
+  $content_type = $_POST['content_name'];
+  $image_fields = $_POST['image_fields'];
+  $fileids = array();
+  $img_dim = mageimagedimesion();
 
-    $image_width = $img_dim[$content_type][$_POST['field_name']]['width'];
-    $image_height = $img_dim[$content_type][$_POST['field_name']]['height'];
+  $image_width = $img_dim[$content_type][$_POST['field_name']]['width'];
+  $image_height = $img_dim[$content_type][$_POST['field_name']]['height'];
 
 
-    if ($image_width == "" && $image_height == "") {
-        $image_width = $_POST['resize_image_width'];
-        $image_height = $_POST['resize_image_height'];
+  if ($image_width == "" && $image_height == "") {
+    $image_width = $_POST['resize_image_width'];
+    $image_height = $_POST['resize_image_height'];
+  }
+
+  $file_image = file_load($image_fiedlid);
+  $image = image_load($file_image->uri);
+  $image_exten = end(explode('.', $file_image->uri));
+  $filepath = file_default_scheme() . '://crop_image';
+  $orig_width = $image->info['width'];
+  $orig_height = $image->info['height'];
+
+  if ($image->info['width'] < $image_width || $image->info['height'] < $image_height) {
+    $scaled = image_scale($image, $image_width, $image_height, true);
+  }
+  else {
+    $scaled = image_scale_and_crop($image, $image_width, $image_height);
+  }
+
+  $image_name_orignal = $file_image->filename;
+  $image_name_orignal = substr($image_name_orignal, 0, (strrpos($image_name_orignal, ".")));
+  $image_name = $image_name_orignal . rand(111, 999) . time();
+  $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten);
+  $uri = $filepath . '/' . $image_name . '.' . $image_exten;
+  $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
+  $file = new StdClass;
+  $file->uid = $user->uid;
+  $file->filename = basename($uri);
+  $file->uri = $uri;
+  $file->filemime = file_get_mimetype($uri);
+  $file->filesize = @filesize($uri);
+  $file->timestamp = REQUEST_TIME;
+  $file->is_new = TRUE;
+  $file->status = FILE_STATUS_PERMANENT;
+  $file = file_save($file);
+  file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
+  $fileids['fid'][] = $file->fid . '#' . $fields_name;
+
+
+  if (!empty($image_fields) && !empty($image)) {
+    foreach ($image_fields as $fields_name) {
+
+      $filepath = file_default_scheme() . '://crop_image';
+
+      if ($orig_width < $img_dim[$content_type][$fields_name]['width'] || $image->info['height'] < $img_dim[$content_type][$fields_name]['height']) {
+
+        $scaled = image_scale($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height'], true);
+      }
+      else {
+        $scaled = image_scale($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height'], false);
+      }
+
+      if ($scaled) {
+        $image_name = $image_name_orignal . rand(111, 999) . time();
+        $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten);
+        $uri = $filepath . '/' . $image_name . '.' . $image_exten;
+        $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
+        $file = new StdClass;
+        $file->uid = $user->uid;
+        $file->filename = basename($uri);
+        $file->uri = $uri;
+        $file->filemime = file_get_mimetype($uri);
+        $file->filesize = @filesize($uri);
+        $file->timestamp = REQUEST_TIME;
+        // $file->status = FILE_STATUS_PERMANENT;
+        $file->is_new = TRUE;
+        $file->status = FILE_STATUS_PERMANENT;
+        $file = file_save($file);
+        file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
+        $fileids['fid'][] = $file->fid . '#' . $fields_name;
+      }
     }
+  }
 
-    $file_image = file_load($image_fiedlid);
-    $image = image_load($file_image->uri);
-    $image_exten = end(explode('.', $file_image->uri));
-    $filepath = file_default_scheme() . '://crop_image';
-    $orig_width = $image->info['width'];
-     $orig_height = $image->info['height'];
-    
-    if($image->info['width'] < $image_width || $image->info['height'] < $image_height) {
-        $scaled = image_scale($image, $image_width, $image_height,true); 
-    } else{
-        $scaled = image_scale_and_crop($image, $image_width, $image_height); 
-    }
-  
-    $image_name_orignal = $file_image->filename;
-    $image_name_orignal = substr($image_name_orignal, 0, (strrpos($image_name_orignal, ".")));
-    $image_name = $image_name_orignal . rand(111, 999) . time();
-    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten);
-    $uri = $filepath . '/' . $image_name . '.' . $image_exten;
-    $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
-    $file = new StdClass;
-    $file->uid = $user->uid;
-    $file->filename = basename($uri);
-    $file->uri = $uri;
-    $file->filemime = file_get_mimetype($uri);
-    $file->filesize = @filesize($uri);
-    $file->timestamp = REQUEST_TIME;
-    $file->is_new = TRUE;
-    $file->status = FILE_STATUS_PERMANENT;
-    $file = file_save($file);
-    file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
-    $fileids['fid'][] = $file->fid . '#' . $fields_name;
-   
-
-    if (!empty($image_fields) && !empty($image)) {
-        foreach ($image_fields as $fields_name) {
-
-            $filepath = file_default_scheme() . '://crop_image';
-           
-            if ($orig_width < $img_dim[$content_type][$fields_name]['width'] || $image->info['height'] < $img_dim[$content_type][$fields_name]['height']) {
-                
-                $scaled = image_scale($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height'], true);
-            }
-            else {
-                $scaled = image_scale($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height'],false);
-            }
-
-            if ($scaled) {
-                $image_name = $image_name_orignal . rand(111, 999) . time();
-                $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten);
-                $uri = $filepath . '/' . $image_name . '.' . $image_exten;
-                $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
-                $file = new StdClass;
-                $file->uid = $user->uid;
-                $file->filename = basename($uri);
-                $file->uri = $uri;
-                $file->filemime = file_get_mimetype($uri);
-                $file->filesize = @filesize($uri);
-                $file->timestamp = REQUEST_TIME;
-                // $file->status = FILE_STATUS_PERMANENT;
-                $file->is_new = TRUE;
-                $file->status = FILE_STATUS_PERMANENT;
-                $file = file_save($file);
-                file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
-                $fileids['fid'][] = $file->fid . '#' . $fields_name;
-            }
-        }
-    }
-
-    print json_encode($fileids);
-    exit();
+  print json_encode($fileids);
+  exit();
 }
 
 /**
  * This function use for image dimesion!
  */
 function mageimagedimesion() {
-    $image_dim = array();
+  $image_dim = array();
 
-    $image_dim['magazine']['field_magazine_cover_photo']['width'] = 172;
-    $image_dim['magazine']['field_magazine_cover_photo']['height'] = 240;
-    // Dimension for videogallery
-    $image_dim['videogallery']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
-    $image_dim['videogallery']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
-    $image_dim['videogallery']['field_story_player_image']['width'] = 613;
-    $image_dim['videogallery']['field_story_player_image']['height'] = 460;
-    $image_dim['videogallery']['field_story_large_image']['width'] = LARGE_IMAGE_WIDTH;
-    $image_dim['videogallery']['field_story_large_image']['height'] = LARGE_IMAGE_HEIGHT;
-    $image_dim['videogallery']['field_story_medium_image']['width'] = MEDIUM_IMAGE_WIDTH;
-    $image_dim['videogallery']['field_story_medium_image']['height'] = MEDIUM_IMAGE_HEIGHT;
-    $image_dim['videogallery']['field_story_small_image']['width'] = SMALL_IMAGE_WIDTH;
-    $image_dim['videogallery']['field_story_small_image']['height'] = SMALL_IMAGE_HEIGHT;
-    $image_dim['videogallery']['field_story_extra_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
-    $image_dim['videogallery']['field_story_extra_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
+  $image_dim['magazine']['field_magazine_cover_photo']['width'] = 172;
+  $image_dim['magazine']['field_magazine_cover_photo']['height'] = 240;
+  // Dimension for videogallery
+  $image_dim['videogallery']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
+  $image_dim['videogallery']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
+  $image_dim['videogallery']['field_story_player_image']['width'] = 613;
+  $image_dim['videogallery']['field_story_player_image']['height'] = 460;
+  $image_dim['videogallery']['field_story_large_image']['width'] = LARGE_IMAGE_WIDTH;
+  $image_dim['videogallery']['field_story_large_image']['height'] = LARGE_IMAGE_HEIGHT;
+  $image_dim['videogallery']['field_story_medium_image']['width'] = MEDIUM_IMAGE_WIDTH;
+  $image_dim['videogallery']['field_story_medium_image']['height'] = MEDIUM_IMAGE_HEIGHT;
+  $image_dim['videogallery']['field_story_small_image']['width'] = SMALL_IMAGE_WIDTH;
+  $image_dim['videogallery']['field_story_small_image']['height'] = SMALL_IMAGE_HEIGHT;
+  $image_dim['videogallery']['field_story_extra_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
+  $image_dim['videogallery']['field_story_extra_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
 
-    // Dimension for photogallery
-    $image_dim['photogallery']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
-    $image_dim['photogallery']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
-    $image_dim['photogallery']['field_story_large_image']['width'] = LARGE_IMAGE_WIDTH;
-    $image_dim['photogallery']['field_story_large_image']['height'] = LARGE_IMAGE_HEIGHT;
-    $image_dim['photogallery']['field_story_small_image']['width'] = SMALL_IMAGE_WIDTH;
-    $image_dim['photogallery']['field_story_small_image']['height'] = SMALL_IMAGE_HEIGHT;
-    $image_dim['photogallery']['field_story_medium_image']['width'] = MEDIUM_IMAGE_WIDTH;
-    $image_dim['photogallery']['field_story_medium_image']['height'] = MEDIUM_IMAGE_HEIGHT;
-    $image_dim['photogallery']['field_story_extra_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
-    $image_dim['photogallery']['field_story_extra_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
+  // Dimension for photogallery
+  $image_dim['photogallery']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
+  $image_dim['photogallery']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
+  $image_dim['photogallery']['field_story_large_image']['width'] = LARGE_IMAGE_WIDTH;
+  $image_dim['photogallery']['field_story_large_image']['height'] = LARGE_IMAGE_HEIGHT;
+  $image_dim['photogallery']['field_story_small_image']['width'] = SMALL_IMAGE_WIDTH;
+  $image_dim['photogallery']['field_story_small_image']['height'] = SMALL_IMAGE_HEIGHT;
+  $image_dim['photogallery']['field_story_medium_image']['width'] = MEDIUM_IMAGE_WIDTH;
+  $image_dim['photogallery']['field_story_medium_image']['height'] = MEDIUM_IMAGE_HEIGHT;
+  $image_dim['photogallery']['field_story_extra_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
+  $image_dim['photogallery']['field_story_extra_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
 
-    // Dimension for story
-    $image_dim['story']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
-    $image_dim['story']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
-    $image_dim['story']['field_story_large_image']['width'] = LARGE_IMAGE_WIDTH;
-    $image_dim['story']['field_story_large_image']['height'] = LARGE_IMAGE_HEIGHT;
-    $image_dim['story']['field_story_medium_image']['width'] = MEDIUM_IMAGE_WIDTH;
-    $image_dim['story']['field_story_medium_image']['height'] = MEDIUM_IMAGE_HEIGHT;
-    $image_dim['story']['field_story_small_image']['width'] = SMALL_IMAGE_WIDTH;
-    $image_dim['story']['field_story_small_image']['height'] = SMALL_IMAGE_HEIGHT;
-    $image_dim['story']['field_story_extra_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
-    $image_dim['story']['field_story_extra_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
+  // Dimension for story
+  $image_dim['story']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
+  $image_dim['story']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
+  $image_dim['story']['field_story_large_image']['width'] = LARGE_IMAGE_WIDTH;
+  $image_dim['story']['field_story_large_image']['height'] = LARGE_IMAGE_HEIGHT;
+  $image_dim['story']['field_story_medium_image']['width'] = MEDIUM_IMAGE_WIDTH;
+  $image_dim['story']['field_story_medium_image']['height'] = MEDIUM_IMAGE_HEIGHT;
+  $image_dim['story']['field_story_small_image']['width'] = SMALL_IMAGE_WIDTH;
+  $image_dim['story']['field_story_small_image']['height'] = SMALL_IMAGE_HEIGHT;
+  $image_dim['story']['field_story_extra_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
+  $image_dim['story']['field_story_extra_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
 
-    // Dimension for story
-    $image_dim['mega_review_critic']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
-    $image_dim['mega_review_critic']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
-    $image_dim['mega_review_critic']['field_story_large_image']['width'] = LARGE_IMAGE_WIDTH;
-    $image_dim['mega_review_critic']['field_story_large_image']['height'] = LARGE_IMAGE_HEIGHT;
-    $image_dim['mega_review_critic']['field_story_medium_image']['width'] = MEDIUM_IMAGE_WIDTH;
-    $image_dim['mega_review_critic']['field_story_medium_image']['height'] = MEDIUM_IMAGE_HEIGHT;
-    $image_dim['mega_review_critic']['field_story_small_image']['width'] = SMALL_IMAGE_WIDTH;
-    $image_dim['mega_review_critic']['field_story_small_image']['height'] = SMALL_IMAGE_HEIGHT;
-    $image_dim['mega_review_critic']['field_story_extra_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
-    $image_dim['mega_review_critic']['field_story_extra_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
-    // Dimension for recipe
-    $image_dim['recipe']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
-    $image_dim['recipe']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
-    $image_dim['recipe']['field_story_large_image']['width'] = LARGE_IMAGE_WIDTH;
-    $image_dim['recipe']['field_story_large_image']['height'] = LARGE_IMAGE_HEIGHT;
-    $image_dim['recipe']['field_story_medium_image']['width'] = MEDIUM_IMAGE_WIDTH;
-    $image_dim['recipe']['field_story_medium_image']['height'] = MEDIUM_IMAGE_HEIGHT;
-    $image_dim['recipe']['field_story_small_image']['width'] = SMALL_IMAGE_WIDTH;
-    $image_dim['recipe']['field_story_small_image']['height'] = SMALL_IMAGE_HEIGHT;
-    $image_dim['recipe']['field_story_extra_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
-    $image_dim['recipe']['field_story_extra_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
-    // Dimension for recipe
-    $image_dim['breaking_news']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
-    $image_dim['breaking_news']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
-    $image_dim['breaking_news']['field_story_large_image']['width'] = LARGE_IMAGE_WIDTH;
-    $image_dim['breaking_news']['field_story_large_image']['height'] = LARGE_IMAGE_HEIGHT;
-    $image_dim['breaking_news']['field_story_medium_image']['width'] = MEDIUM_IMAGE_WIDTH;
-    $image_dim['breaking_news']['field_story_medium_image']['height'] = MEDIUM_IMAGE_HEIGHT;
-    $image_dim['breaking_news']['field_story_small_image']['width'] = SMALL_IMAGE_WIDTH;
-    $image_dim['breaking_news']['field_story_small_image']['height'] = SMALL_IMAGE_HEIGHT;
-    $image_dim['breaking_news']['field_story_extra_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
-    $image_dim['breaking_news']['field_story_extra_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
+  // Dimension for story
+  $image_dim['mega_review_critic']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
+  $image_dim['mega_review_critic']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
+  $image_dim['mega_review_critic']['field_story_large_image']['width'] = LARGE_IMAGE_WIDTH;
+  $image_dim['mega_review_critic']['field_story_large_image']['height'] = LARGE_IMAGE_HEIGHT;
+  $image_dim['mega_review_critic']['field_story_medium_image']['width'] = MEDIUM_IMAGE_WIDTH;
+  $image_dim['mega_review_critic']['field_story_medium_image']['height'] = MEDIUM_IMAGE_HEIGHT;
+  $image_dim['mega_review_critic']['field_story_small_image']['width'] = SMALL_IMAGE_WIDTH;
+  $image_dim['mega_review_critic']['field_story_small_image']['height'] = SMALL_IMAGE_HEIGHT;
+  $image_dim['mega_review_critic']['field_story_extra_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
+  $image_dim['mega_review_critic']['field_story_extra_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
+  // Dimension for recipe
+  $image_dim['recipe']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
+  $image_dim['recipe']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
+  $image_dim['recipe']['field_story_large_image']['width'] = LARGE_IMAGE_WIDTH;
+  $image_dim['recipe']['field_story_large_image']['height'] = LARGE_IMAGE_HEIGHT;
+  $image_dim['recipe']['field_story_medium_image']['width'] = MEDIUM_IMAGE_WIDTH;
+  $image_dim['recipe']['field_story_medium_image']['height'] = MEDIUM_IMAGE_HEIGHT;
+  $image_dim['recipe']['field_story_small_image']['width'] = SMALL_IMAGE_WIDTH;
+  $image_dim['recipe']['field_story_small_image']['height'] = SMALL_IMAGE_HEIGHT;
+  $image_dim['recipe']['field_story_extra_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
+  $image_dim['recipe']['field_story_extra_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
+  // Dimension for recipe
+  $image_dim['breaking_news']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
+  $image_dim['breaking_news']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
+  $image_dim['breaking_news']['field_story_large_image']['width'] = LARGE_IMAGE_WIDTH;
+  $image_dim['breaking_news']['field_story_large_image']['height'] = LARGE_IMAGE_HEIGHT;
+  $image_dim['breaking_news']['field_story_medium_image']['width'] = MEDIUM_IMAGE_WIDTH;
+  $image_dim['breaking_news']['field_story_medium_image']['height'] = MEDIUM_IMAGE_HEIGHT;
+  $image_dim['breaking_news']['field_story_small_image']['width'] = SMALL_IMAGE_WIDTH;
+  $image_dim['breaking_news']['field_story_small_image']['height'] = SMALL_IMAGE_HEIGHT;
+  $image_dim['breaking_news']['field_story_extra_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
+  $image_dim['breaking_news']['field_story_extra_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
 
-    $image_dim['podcast']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
-    $image_dim['podcast']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
-    $image_dim['podcast']['field_story_large_image']['width'] = LARGE_IMAGE_WIDTH;
-    $image_dim['podcast']['field_story_large_image']['height'] = LARGE_IMAGE_HEIGHT;
-    $image_dim['podcast']['field_story_medium_image']['width'] = MEDIUM_IMAGE_WIDTH;
-    $image_dim['podcast']['field_story_medium_image']['height'] = MEDIUM_IMAGE_HEIGHT;
-    $image_dim['podcast']['field_story_small_image']['width'] = SMALL_IMAGE_WIDTH;
-    $image_dim['podcast']['field_story_small_image']['height'] = SMALL_IMAGE_HEIGHT;
-    $image_dim['podcast']['field_story_extra_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
-    $image_dim['podcast']['field_story_extra_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
+  $image_dim['podcast']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
+  $image_dim['podcast']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
+  $image_dim['podcast']['field_story_large_image']['width'] = LARGE_IMAGE_WIDTH;
+  $image_dim['podcast']['field_story_large_image']['height'] = LARGE_IMAGE_HEIGHT;
+  $image_dim['podcast']['field_story_medium_image']['width'] = MEDIUM_IMAGE_WIDTH;
+  $image_dim['podcast']['field_story_medium_image']['height'] = MEDIUM_IMAGE_HEIGHT;
+  $image_dim['podcast']['field_story_small_image']['width'] = SMALL_IMAGE_WIDTH;
+  $image_dim['podcast']['field_story_small_image']['height'] = SMALL_IMAGE_HEIGHT;
+  $image_dim['podcast']['field_story_extra_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
+  $image_dim['podcast']['field_story_extra_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
 
-    $image_dim['cooking_tips']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
-    $image_dim['cooking_tips']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
-    $image_dim['cooking_tips']['field_story_large_image']['width'] = LARGE_IMAGE_WIDTH;
-    $image_dim['cooking_tips']['field_story_large_image']['height'] = LARGE_IMAGE_HEIGHT;
-    $image_dim['cooking_tips']['field_story_medium_image']['width'] = MEDIUM_IMAGE_WIDTH;
-    $image_dim['cooking_tips']['field_story_medium_image']['height'] = MEDIUM_IMAGE_HEIGHT;
-    $image_dim['cooking_tips']['field_story_small_image']['width'] = SMALL_IMAGE_WIDTH;
-    $image_dim['cooking_tips']['field_story_small_image']['height'] = SMALL_IMAGE_HEIGHT;
-    $image_dim['cooking_tips']['field_recipe_writer_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
-    $image_dim['cooking_tips']['field_recipe_writer_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
+  $image_dim['cooking_tips']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
+  $image_dim['cooking_tips']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
+  $image_dim['cooking_tips']['field_story_large_image']['width'] = LARGE_IMAGE_WIDTH;
+  $image_dim['cooking_tips']['field_story_large_image']['height'] = LARGE_IMAGE_HEIGHT;
+  $image_dim['cooking_tips']['field_story_medium_image']['width'] = MEDIUM_IMAGE_WIDTH;
+  $image_dim['cooking_tips']['field_story_medium_image']['height'] = MEDIUM_IMAGE_HEIGHT;
+  $image_dim['cooking_tips']['field_story_small_image']['width'] = SMALL_IMAGE_WIDTH;
+  $image_dim['cooking_tips']['field_story_small_image']['height'] = SMALL_IMAGE_HEIGHT;
+  $image_dim['cooking_tips']['field_recipe_writer_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
+  $image_dim['cooking_tips']['field_recipe_writer_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
 
-    $image_dim['food_news']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
-    $image_dim['food_news']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
-    $image_dim['food_news']['field_story_large_image']['width'] = LARGE_IMAGE_WIDTH;
-    $image_dim['food_news']['field_story_large_image']['height'] = LARGE_IMAGE_HEIGHT;
-    $image_dim['food_news']['field_story_medium_image']['width'] = MEDIUM_IMAGE_WIDTH;
-    $image_dim['food_news']['field_story_medium_image']['height'] = MEDIUM_IMAGE_HEIGHT;
-    $image_dim['food_news']['field_story_small_image']['width'] = SMALL_IMAGE_WIDTH;
-    $image_dim['food_news']['field_story_small_image']['height'] = SMALL_IMAGE_HEIGHT;
-    $image_dim['food_news']['field_recipe_writer_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
-    $image_dim['food_news']['field_recipe_writer_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
+  $image_dim['food_news']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
+  $image_dim['food_news']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
+  $image_dim['food_news']['field_story_large_image']['width'] = LARGE_IMAGE_WIDTH;
+  $image_dim['food_news']['field_story_large_image']['height'] = LARGE_IMAGE_HEIGHT;
+  $image_dim['food_news']['field_story_medium_image']['width'] = MEDIUM_IMAGE_WIDTH;
+  $image_dim['food_news']['field_story_medium_image']['height'] = MEDIUM_IMAGE_HEIGHT;
+  $image_dim['food_news']['field_story_small_image']['width'] = SMALL_IMAGE_WIDTH;
+  $image_dim['food_news']['field_story_small_image']['height'] = SMALL_IMAGE_HEIGHT;
+  $image_dim['food_news']['field_recipe_writer_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
+  $image_dim['food_news']['field_recipe_writer_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
 
-    $image_dim['issue']['field_issue_large_cover_image']['width'] = ISSUE_LARGE_IMAGE_WIDTH;
-    $image_dim['issue']['field_issue_large_cover_image']['height'] = ISSUE_LARGE_IMAGE_HEIGHT;
-    $image_dim['issue']['field_issue_small_cover_image']['width'] = ISSUE_SMALL_WIDTH;
-    $image_dim['issue']['field_issue_small_cover_image']['height'] = ISSUE_SMALL_HEIGHT;
-    $image_dim['issue']['field_issue_supp_large_image']['width'] = ISSUE_LARGE_IMAGE_WIDTH;
-    $image_dim['issue']['field_issue_supp_large_image']['height'] = ISSUE_LARGE_IMAGE_HEIGHT;
-    $image_dim['issue']['field_issue_supp_small_image']['width'] = ISSUE_SMALL_WIDTH;
-    $image_dim['issue']['field_issue_supp_small_image']['height'] = ISSUE_SMALL_HEIGHT;
-    $image_dim['supplement']['field_issue_supp_large_image']['width'] = ISSUE_LARGE_IMAGE_WIDTH;
-    $image_dim['supplement']['field_issue_supp_large_image']['height'] = ISSUE_LARGE_IMAGE_HEIGHT;
-    $image_dim['supplement']['field_issue_supp_small_image']['width'] = ISSUE_SMALL_WIDTH;
-    $image_dim['supplement']['field_issue_supp_small_image']['height'] = ISSUE_SMALL_HEIGHT;
-    
+  $image_dim['issue']['field_issue_large_cover_image']['width'] = ISSUE_LARGE_IMAGE_WIDTH;
+  $image_dim['issue']['field_issue_large_cover_image']['height'] = ISSUE_LARGE_IMAGE_HEIGHT;
+  $image_dim['issue']['field_issue_small_cover_image']['width'] = ISSUE_SMALL_WIDTH;
+  $image_dim['issue']['field_issue_small_cover_image']['height'] = ISSUE_SMALL_HEIGHT;
+  $image_dim['issue']['field_issue_supp_large_image']['width'] = ISSUE_LARGE_IMAGE_WIDTH;
+  $image_dim['issue']['field_issue_supp_large_image']['height'] = ISSUE_LARGE_IMAGE_HEIGHT;
+  $image_dim['issue']['field_issue_supp_small_image']['width'] = ISSUE_SMALL_WIDTH;
+  $image_dim['issue']['field_issue_supp_small_image']['height'] = ISSUE_SMALL_HEIGHT;
+  $image_dim['supplement']['field_issue_supp_large_image']['width'] = ISSUE_LARGE_IMAGE_WIDTH;
+  $image_dim['supplement']['field_issue_supp_large_image']['height'] = ISSUE_LARGE_IMAGE_HEIGHT;
+  $image_dim['supplement']['field_issue_supp_small_image']['width'] = ISSUE_SMALL_WIDTH;
+  $image_dim['supplement']['field_issue_supp_small_image']['height'] = ISSUE_SMALL_HEIGHT;
 
-    return $image_dim;
+
+  return $image_dim;
 }
 
 /**
@@ -781,8 +784,8 @@ function mageimagedimesion() {
  */
 function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata, $image_height, $image_width, $aspectratio = null, $content_name = null, $is_solr = null) {
 
-    //$orignal_ratio = number_format($image_width / $image_height, 2);
-    // $orignal_ratio = $orignal_ratio . ':1';
+  //$orignal_ratio = number_format($image_width / $image_height, 2);
+  // $orignal_ratio = $orignal_ratio . ':1';
 //    $form['aspect ratio'] = array(
 //        '#title' => t('Aspect ratio'),
 //        '#type' => 'select',
@@ -792,133 +795,130 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
 //        '#attributes' => array('id' => 'select-aspect-ratio'),
 //    );
 
-    $imgdim = mageimagedimesion();
-    $form['cropit_image_zoom_input'] = array(
-        '#type' => 'markup',
-        '#markup' => '<div class="image-editor">
+  $imgdim = mageimagedimesion();
+  $form['cropit_image_zoom_input'] = array(
+      '#type' => 'markup',
+      '#markup' => '<div class="image-editor">
         <div class="cropit-preview"></div>
         <div class="cropit-image-zoom">
         <input type="range" class="cropit-image-zoom-input">
         </div>',
-    );
+  );
 
-    if (($content_name == 'photogallery' || $content_name == 'videogallery' || $content_name == 'food_news' || $content_name == 'cooking_tips' || $content_name == 'recipe' || $content_name == 'podcast' || $content_name == 'mega_review_critic' || $content_name == 'breaking_news' || $content_name == 'story') && ($field_name == 'field_story_extra_large_image') || ($field_name == 'field_issue_large_cover_image' || $field_name == 'field_issue_supp_large_image' )) {
-        $largsize = '(' . $imgdim[$content_name]['field_story_large_image']['width'] . 'X' . $imgdim[$content_name]['field_story_large_image']['height'] . ')';
-        $mediumsize = '(' . $imgdim[$content_name]['field_story_medium_image']['width'] . 'X' . $imgdim[$content_name]['field_story_medium_image']['height'] . ')';
-        $extrasmallsize = '(' . $imgdim[$content_name]['field_story_extra_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_extra_small_image']['height'] . ')';
-        $writer_image = '(' . $imgdim[$content_name]['field_recipe_writer_image']['width'] . 'X' . $imgdim[$content_name]['field_recipe_writer_image']['height'] . ')';
-        $issue_img_size = '(' . $imgdim[$content_name]['field_issue_supp_small_image']['width'] . 'X' . $imgdim[$content_name]['field_issue_supp_small_image']['height'] . ')'; 
-        $smallsize = '(' . $imgdim[$content_name]['field_story_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_small_image']['height'] . ')';
-        if ($content_name == 'photogallery') {
+  if (($content_name == 'photogallery' || $content_name == 'videogallery' || $content_name == 'food_news' || $content_name == 'cooking_tips' || $content_name == 'recipe' || $content_name == 'podcast' || $content_name == 'mega_review_critic' || $content_name == 'breaking_news' || $content_name == 'story') && ($field_name == 'field_story_extra_large_image') || ($field_name == 'field_issue_large_cover_image' || $field_name == 'field_issue_supp_large_image' )) {
+    $largsize = '(' . $imgdim[$content_name]['field_story_large_image']['width'] . 'X' . $imgdim[$content_name]['field_story_large_image']['height'] . ')';
+    $mediumsize = '(' . $imgdim[$content_name]['field_story_medium_image']['width'] . 'X' . $imgdim[$content_name]['field_story_medium_image']['height'] . ')';
+    $extrasmallsize = '(' . $imgdim[$content_name]['field_story_extra_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_extra_small_image']['height'] . ')';
+    $writer_image = '(' . $imgdim[$content_name]['field_recipe_writer_image']['width'] . 'X' . $imgdim[$content_name]['field_recipe_writer_image']['height'] . ')';
+    $issue_img_size = '(' . $imgdim[$content_name]['field_issue_supp_small_image']['width'] . 'X' . $imgdim[$content_name]['field_issue_supp_small_image']['height'] . ')';
+    $smallsize = '(' . $imgdim[$content_name]['field_story_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_small_image']['height'] . ')';
+    if ($content_name == 'photogallery') {
 
-            $checkoption = array(
-                'field_story_large_image' => t("Large Image  $largsize"),
-                'field_story_medium_image' => t("Medium Image $mediumsize"),
-                'field_story_small_image' => t("Small Image  $smallsize"),
-                'field_story_extra_small_image' => t("Extra Small Image $extrasmallsize"));
-        }
-        else if ($content_name == 'issue' || $content_name == 'supplement' ) {
-            if($field_name == 'field_issue_large_cover_image') {
-            $checkoption = array(
-                'field_issue_small_cover_image' => t("Issue Cover Small Image  $issue_img_size"));
-               
-            }
-             if($field_name == 'field_issue_supp_large_image') {
-            $checkoption = array(
-                'field_issue_supp_small_image' => t("Supplement Cover Small Image  $issue_img_size"));
-               
-            }
-        }
-         else if ($content_name == 'recipe') {
-            $checkoption = array(
-                'field_story_large_image' => t("Large Image  $largsize"),
-                'field_story_medium_image' => t("Medium Image $mediumsize"),
-                'field_story_small_image' => t("Small Image  $smallsize"));
-        }
-        else if ($content_name == 'videogallery') {
-            $extralargsize2 = '(' . $imgdim[$content_name]['field_story_player_image']['width'] . 'X' . $imgdim[$content_name]['field_story_player_image']['height'] . ')';
-            $checkoption = array(
-               // 'field_story_player_image' => t("Extra large Image 2  $extralargsize2"),
-                'field_story_large_image' => t("Large Image  $largsize"),
-                'field_story_medium_image' => t("Medium Image $mediumsize"),
-                'field_story_small_image' => t("Small Image  $smallsize"),
-                'field_story_extra_small_image' => t("Extra Small Image $extrasmallsize")
-            );
-        }
-        else if ($content_name == 'cooking_tips' || $content_name == 'food_news') {
-            $checkoption = array(
-                'field_story_large_image' => t("Large Image  $largsize"),
-                'field_story_medium_image' => t("Medium Image $mediumsize"),
-                'field_story_small_image' => t("Small Image  $smallsize"),
-                'field_recipe_writer_image' => t("Writer's image  $writer_image")
-            );
-        }
-        else {
+      $checkoption = array(
+          'field_story_large_image' => t("Large Image  $largsize"),
+          'field_story_medium_image' => t("Medium Image $mediumsize"),
+          'field_story_small_image' => t("Small Image  $smallsize"),
+          'field_story_extra_small_image' => t("Extra Small Image $extrasmallsize"));
+    }
+    else if ($content_name == 'issue' || $content_name == 'supplement') {
+      if ($field_name == 'field_issue_large_cover_image') {
+        $checkoption = array(
+            'field_issue_small_cover_image' => t("Issue Cover Small Image  $issue_img_size"));
+      }
+      if ($field_name == 'field_issue_supp_large_image') {
+        $checkoption = array(
+            'field_issue_supp_small_image' => t("Supplement Cover Small Image  $issue_img_size"));
+      }
+    }
+    else if ($content_name == 'recipe') {
+      $checkoption = array(
+          'field_story_large_image' => t("Large Image  $largsize"),
+          'field_story_medium_image' => t("Medium Image $mediumsize"),
+          'field_story_small_image' => t("Small Image  $smallsize"));
+    }
+    else if ($content_name == 'videogallery') {
+      $extralargsize2 = '(' . $imgdim[$content_name]['field_story_player_image']['width'] . 'X' . $imgdim[$content_name]['field_story_player_image']['height'] . ')';
+      $checkoption = array(
+          // 'field_story_player_image' => t("Extra large Image 2  $extralargsize2"),
+          'field_story_large_image' => t("Large Image  $largsize"),
+          'field_story_medium_image' => t("Medium Image $mediumsize"),
+          'field_story_small_image' => t("Small Image  $smallsize"),
+          'field_story_extra_small_image' => t("Extra Small Image $extrasmallsize")
+      );
+    }
+    else if ($content_name == 'cooking_tips' || $content_name == 'food_news') {
+      $checkoption = array(
+          'field_story_large_image' => t("Large Image  $largsize"),
+          'field_story_medium_image' => t("Medium Image $mediumsize"),
+          'field_story_small_image' => t("Small Image  $smallsize"),
+          'field_recipe_writer_image' => t("Writer's image  $writer_image")
+      );
+    }
+    else {
 
-            $checkoption = array(
-                'field_story_large_image' => t("Large Image  $largsize"),
-                'field_story_medium_image' => t("Medium Image $mediumsize"),
-                'field_story_small_image' => t("Small Image  $smallsize"),
-                'field_story_extra_small_image' => t("Extra Small Image $extrasmallsize")
-            );
-        }
-
-        $prefix = '<div class="image-fiels-style" >';
-        $suffix = '</div>';
-# the drupal checkboxes form field definition
-        $form['images'] = array(
-            '#title' => t('Select images'),
-            '#type' => 'checkboxes',
-            '#attributes' => array('class' => array('checkbox-image-size')),
-            '#options' => $checkoption,
-            '#prefix' => $prefix,
-            '#suffix' => $suffix,
-        );
+      $checkoption = array(
+          'field_story_large_image' => t("Large Image  $largsize"),
+          'field_story_medium_image' => t("Medium Image $mediumsize"),
+          'field_story_small_image' => t("Small Image  $smallsize"),
+          'field_story_extra_small_image' => t("Extra Small Image $extrasmallsize")
+      );
     }
 
-    $form['image_data'] = array(
-        '#type' => 'hidden',
-        '#value' => '',
-        '#attributes' => array('class' => 'hidden-image-data', 'id' => 'data_first_image', 'name' => 'image-data'),
+    $prefix = '<div class="image-fiels-style" >';
+    $suffix = '</div>';
+# the drupal checkboxes form field definition
+    $form['images'] = array(
+        '#title' => t('Select images'),
+        '#type' => 'checkboxes',
+        '#attributes' => array('class' => array('checkbox-image-size')),
+        '#options' => $checkoption,
+        '#prefix' => $prefix,
+        '#suffix' => $suffix,
     );
+  }
 
-    $form['data_field_name'] = array(
-        '#type' => 'hidden',
-        '#value' => ($field_name) ? $field_name : '',
-        '#attributes' => array('id' => 'data_field_name', 'name' => 'data_field_name'),
-    );
-    $form['data_content_name'] = array(
-        '#type' => 'hidden',
-        '#value' => ($content_name) ? $content_name : '',
-        '#attributes' => array('id' => 'data_content_name', 'name' => 'data_content_name'),
-    );
-    $form['is_solr'] = array(
-        '#type' => 'hidden',
-        '#value' => ($is_solr == 1) ? $is_solr : '',
-        '#attributes' => array('id' => 'is_solr', 'name' => 'is_solr'),
-    );
-    $form['image_original_hight'] = array(
-        '#type' => 'hidden',
-        '#value' => ($image_height) ? $image_height : '',
-        '#attributes' => array('id' => 'image_original_hight', 'name' => 'image_original_hight'),
-    );
-    $form['image_original_width'] = array(
-        '#type' => 'hidden',
-        '#value' => ($image_width) ? $image_width : '',
-        '#attributes' => array('id' => 'image_original_width', 'name' => 'image_original_width'),
-    );
-    $form['data_field_name'] = array(
-        '#type' => 'hidden',
-        '#value' => ($field_name) ? $field_name : '',
-        '#attributes' => array('id' => 'data_field_name', 'name' => 'data_field_name'),
-    );
-    $form['image_enc_data'] = array(
-        '#type' => 'hidden',
-        '#value' => 'data:image/png;base64,' . $imagedata,
-        '#attributes' => array('id' => 'image-enc-data', 'name' => 'image_enc_data'),
-    );
+  $form['image_data'] = array(
+      '#type' => 'hidden',
+      '#value' => '',
+      '#attributes' => array('class' => 'hidden-image-data', 'id' => 'data_first_image', 'name' => 'image-data'),
+  );
+
+  $form['data_field_name'] = array(
+      '#type' => 'hidden',
+      '#value' => ($field_name) ? $field_name : '',
+      '#attributes' => array('id' => 'data_field_name', 'name' => 'data_field_name'),
+  );
+  $form['data_content_name'] = array(
+      '#type' => 'hidden',
+      '#value' => ($content_name) ? $content_name : '',
+      '#attributes' => array('id' => 'data_content_name', 'name' => 'data_content_name'),
+  );
+  $form['is_solr'] = array(
+      '#type' => 'hidden',
+      '#value' => ($is_solr == 1) ? $is_solr : '',
+      '#attributes' => array('id' => 'is_solr', 'name' => 'is_solr'),
+  );
+  $form['image_original_hight'] = array(
+      '#type' => 'hidden',
+      '#value' => ($image_height) ? $image_height : '',
+      '#attributes' => array('id' => 'image_original_hight', 'name' => 'image_original_hight'),
+  );
+  $form['image_original_width'] = array(
+      '#type' => 'hidden',
+      '#value' => ($image_width) ? $image_width : '',
+      '#attributes' => array('id' => 'image_original_width', 'name' => 'image_original_width'),
+  );
+  $form['data_field_name'] = array(
+      '#type' => 'hidden',
+      '#value' => ($field_name) ? $field_name : '',
+      '#attributes' => array('id' => 'data_field_name', 'name' => 'data_field_name'),
+  );
+  $form['image_enc_data'] = array(
+      '#type' => 'hidden',
+      '#value' => 'data:image/png;base64,' . $imagedata,
+      '#attributes' => array('id' => 'image-enc-data', 'name' => 'image_enc_data'),
+  );
 
 
-    return $form;
+  return $form;
 }
-
