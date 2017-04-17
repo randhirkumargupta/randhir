@@ -295,13 +295,13 @@
                                 setTimeout(function() {
                                     if (image_alttext != "")
                                     {
-                                        parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
-                                        parent.jQuery('[name="' + replaced + '[alt]"]').val(image_alttext);
+                                       // parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
+                                       // parent.jQuery('[name="' + replaced + '[alt]"]').val(image_alttext);
                                     }
                                     if (image_title != "")
                                     {
-                                        parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
-                                        parent.jQuery('[name="' + replaced + '[title]"]').val(image_title);
+                                        //parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
+                                       // parent.jQuery('[name="' + replaced + '[title]"]').val(image_title);
                                     }
 
                                     var credit = parent.jQuery('#edit-field-credit-name-und-0-value').val();
@@ -318,7 +318,7 @@
                                     parent.jQuery('[name="' + captionid1 + '"]').val(credit);
                                     hideloader();
                                     parent.jQuery.colorbox.close();
-                                }, 1000);
+                                }, 500);
                             }
 
                         });
