@@ -10,10 +10,20 @@
  * @param object $node
  */
 function itg_print_team_send_idea_status_mail($node, $source, $op_type = FALSE) {
-  
+  global $base_url;
+  $idea_link = l("here", $base_url.'/node/'.$node->nid.'/edit');
   //Mail content: In case of "insert", "update" and "association"
   if ($source == 'insert') {
-    $mail_content = itg_print_team_approval_mail_content($node);
+    if (function_exists('itg_mail_templates_get_mailcontent')) {
+      $mail_template_data = itg_mail_templates_get_mailcontent($node);
+      $mail_subject = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_template_data->field_mail_subject_print_t[LANGUAGE_NONE][0]['value']);
+      $body_data = $mail_template_data->field_mail_body_print_team[LANGUAGE_NONE][0]['value'];
+      $body_datas = str_replace('[itg_mail_token:itg_node_title]', $node->title, $body_data);
+      $mail_content = str_replace('Click here for more details', 'Click ' . $idea_link . ' for more details', $body_datas);
+      $mail_content .= '<p>Thanks,</p>';
+      $mail_content .= '<p>India Today Group</p>';
+    }
+//    $mail_content = itg_print_team_approval_mail_content($node);
     $user_emails = itg_print_team_get_approval_user_emails('approval_users');
     $user_email_ids = implode(",", $user_emails);
   }
@@ -31,12 +41,19 @@ function itg_print_team_send_idea_status_mail($node, $source, $op_type = FALSE) 
   // Array of email subject and body 
   $params = array(
     'body' => $mail_content,
-    'subject' => 'India Today | ' . $node->title . ' status!',
+    'subject' => $mail_subject,
   );
-
   // Send mail function
   // for code email
-  //drupal_mail('itg_print_team_status', 'print_team_mail', $user_email_ids, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  $mail = drupal_mail('itg_print_team_status', 'print_team_mail', $user_email_ids, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  if ($mail['result']) {
+    return TRUE;
+  }
+  else {
+    $error_msg = 'Failed to send the email!';
+    watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+    return FALSE;
+  }
 }
 
 /**

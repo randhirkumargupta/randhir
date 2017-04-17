@@ -772,6 +772,7 @@ function itg_ugc_node_status_update($nid, $title) {
       if (function_exists('itg_ugc_content_details'))
       {
         if(!empty($title)) {
+          print "title";
         $ugc_content_details = itg_ugc_content_details($nid, 1);
         } else {
         $ugc_content_details = itg_ugc_content_details($nid);
@@ -785,12 +786,14 @@ function itg_ugc_node_status_update($nid, $title) {
       $people = $con->ugc_details;
     }
   }
+    print "qwqwqw";
+    die;
   $node_author = user_load($user->uid);
   $rejected_by = $node_author->field_first_name[LANGUAGE_NONE][0]['value'] . ' ' . $node_author->field_last_name[LANGUAGE_NONE][0]['value'];
 
   if (!empty($title))
   {
-
+print "title not empty";
     $newdata = array('$set' => array('publish_status' => 1, 'updated_by' => trim($rejected_by)));
     $people->update(array("unid" => (int)$nid), $newdata);
     module_load_include('inc', 'itg_ugc', 'include/itg_ugc_mail');
@@ -800,6 +803,7 @@ function itg_ugc_node_status_update($nid, $title) {
   }
   else
   {
+    print "not empety else";
     $pid = new MongoId($nid);
     $rejected_date = date('d/m/Y');
     $newdata = array('$set' => array('status' => 0, 'updated_by' => trim($rejected_by), 'rejected_date' => $rejected_date));
@@ -809,6 +813,7 @@ function itg_ugc_node_status_update($nid, $title) {
     drupal_set_message(t($ugc_content_details['title'] . ' has been rejected successfully.'));
     drupal_goto('ugc-inqueue-content');
   }
+  die;
 }
 
 /**
