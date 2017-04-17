@@ -108,6 +108,7 @@ jQuery(document).ready(function () {
         changeMonth: true,
         changeYear: true,
         dateFormat: 'dd-mm-yy',
+        firstDay: 1,
     });
     jQuery('#itg-registred-user-report-form #edit-date-to').datepicker({
         // Get 5 year previous and next year data.
@@ -116,6 +117,7 @@ jQuery(document).ready(function () {
         changeMonth: true,
         changeYear: true,
         dateFormat: 'dd-mm-yy',
+        firstDay: 1,
     });
     jQuery('#itg-active-user-report-form #edit-date-from').datepicker({
         // Get 5 year previous and next year data.

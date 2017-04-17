@@ -7,7 +7,7 @@
             <?php endif; ?>
 
             <?php if (!empty($submitted)): ?>
-                <div class='<?php print $hook ?>-submitted clearfix'><?php print $submitted ?></div>
+                <div class='<?php print $hook ?>-submitted clearfix'><?php //print $submitted ?></div>
             <?php endif; ?>
 
             <?php if (!empty($links)): ?>
@@ -57,9 +57,9 @@
 
                                 <?php endif; ?>
                                 <?php
-                                $short_description = render($content['field_blog_short_description']);
+                                $short_description = render($content['field_common_short_description']);
                                 if (!empty($short_description)):
-                                    print render($content['field_blog_short_description']);
+                                    print render($content['field_common_short_description']);
                                     ?>
                                 <?php endif; ?>
                             </div></div>
@@ -95,7 +95,7 @@
                                 if ($node->field_primary_category['und'][0]['value'] != "" && isset($node->field_primary_category['und'])) {
                                     $termdata = itg_videogallery_get_term_name($node->field_primary_category['und'][0]['value']);
                                 }
-                                print render($content['field_story_category']);
+                                //print render($content['field_story_category']);
                                 $selection = render($content['field_story_category']);
                                 if (!empty($selection)):
                                     print render($content['field_story_category']);
@@ -108,8 +108,8 @@
 
                     <?php endif; ?>
                     <?php
-                    print render($content['comment_form']);
-                    print render($content['comments']);
+                    //print render($content['comment_form']);
+                    //print render($content['comments']);
                     ?>
                 </div>
             <?php endif; ?>

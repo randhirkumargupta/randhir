@@ -49,6 +49,15 @@ function itg_reports_menu() {
     'file' => 'includes/itg_reports.helper.inc' ,
   );
 
+  // Menu form registered autocomplete.
+  $items['itg-registered-user-section-wise-breakup/%'] = array(
+    'page callback' => 'itg_registered_user_report_section_wise_breakup' ,
+    'page arguments' => array(1) ,
+    'access arguments' => array('administer nodequeue') ,
+    'type' => MENU_CALLBACK ,
+    'file' => 'includes/itg_reports.helper.inc' ,
+  );
+
   // Menu form active users reports.
   $items['itg-active-user-report-mongo'] = array(
     'page callback' => 'drupal_get_form' ,
@@ -73,7 +82,7 @@ function itg_reports_menu() {
     'type' => MENU_CALLBACK ,
     'file' => 'includes/itg_reports.helper.inc' ,
   );
-  
+
   $items['itg-reports-sections-tid/autocomplete'] = array(
     'page callback' => 'itg_reports_sections_autocomplete_for_tid' ,
     'access arguments' => array('view report dashboard') ,
@@ -84,7 +93,7 @@ function itg_reports_menu() {
   $items['itg-registered-vs-anonymous-user-content-visited-report'] = array(
     'page callback' => 'drupal_get_form' ,
     'page arguments' => array('itg_registered_vs_anonymous_user_form') ,
-    'title' => 'Registered vs Anonymous',
+    'title' => 'Registered vs Anonymous' ,
     'access arguments' => array('administer nodequeue') ,
     'type' => MENU_CALLBACK ,
     'file' => 'includes/registered-vs-anonymous-user-content-visited-report.inc' ,
@@ -104,10 +113,10 @@ function itg_reports_sections_autocomplete($name) {
   foreach ($result as $data) {
     if (module_exists('itg_category_manager') && function_exists('itg_category_manager_term_state') && itg_category_manager_term_state($data->tid)) {
       $parents = taxonomy_get_parents_all($data->tid);
-      foreach(array_reverse($parents) as $parent) {
+      foreach (array_reverse($parents) as $parent) {
         $display_option[] = $parent->name;
       }
-      $option[$data->name] = implode(" >> ", $display_option);
+      $option[$data->name] = implode(" >> " , $display_option);
       unset($display_option);
     }
   }
@@ -144,6 +153,12 @@ function itg_reports_theme($existing , $type , $theme , $path) {
     'itg_reports_career_graph' => array(
       'variables' => array('output' => NULL , 'actor' => NULL) ,
       'template' => 'templates/itg-reports-career-graph' ,
+    ) ,
+    'itg_reports_personalized_data_chart' => array(
+      'template' => 'templates/itg-reports-personalized-data-chart' ,
+    ) ,
+    'itg_reports_sections_data_chart' => array(
+      'template' => 'templates/itg-reports-sections-data-chart' ,
     ) ,
   );
 
@@ -584,6 +599,10 @@ function itg_reports_form_alter(&$form , &$form_state , $form_id) {
       }
     }
   }
+  if ($form_id == 'user_profile_form') {
+    //Hide logged in field from progile
+    $form['field_logged_in_count']['#attributes']['class'][] = 'hide';
+  }
 }
 
 /**
@@ -605,7 +624,14 @@ function itg_reports_user_login(&$edit , $account) {
     $user_required_data['role'] = 'Front User';
   }
   module_load_include('inc' , 'itg_reports' , 'includes/itg_users_reports');
+  // Save data in mongo.
   _itg_report_save_active_user_data($user_required_data);
+  // get data from mongo.
+  $login_count = _get_loggedin_count_of_user($account->uid , 0 , REQUEST_TIME);
+  // Update user Field value.
+  $user_fields = user_load($account->uid);
+  $user_fields->field_logged_in_count['und'][0]['value'] = ++$login_count;
+  user_save($user_fields);
 }
 
 /**
@@ -649,11 +675,8 @@ function itg_reports_views_query_alter(&$view , &$query) {
  * @return type
  */
 function get_term_name_from_tid_for_report($tid) {
-  $data = array();
-  $query = db_select('taxonomy_term_data' , 'ttd')
-      ->fields('ttd' , array('name'))
-      ->condition('ttd.tid' , $tid);
-  return $query->execute()->fetchObject();
+  $term_data = taxonomy_term_load($tid);
+  return $term_data->name;
 }
 
 /**
@@ -753,9 +776,8 @@ function itg_reports_taxonomy_term_view($term , $view_mode , $langcode) {
   
 }
 
-
 function itg_reports_views_post_execute(&$view) {
-  if($view->name == 'section_wiser_breakup_report' && $view->current_display == 'page') {
+  if ($view->name == 'section_wiser_breakup_report' && $view->current_display == 'page') {
     
   }
 }
