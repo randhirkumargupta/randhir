@@ -47,10 +47,10 @@
         <?php endforeach; ?>
           <td>
             <?php echo l("View" , "user/".$row['uid'], array("attributes" =>array("target" =>array("_blank")))) ?>
-            | 
-            <?php echo l("Sections wise graph" , "itg-registered-user-report/".$row['uid'], array("query"=>array("report_type" => "section_wise_report", "width" => "900", "height" => "600", "iframe" => "true") , "attributes" =>array("target" =>array("_blank") , "class" => array("colorbox-load")))) ?>
-            | 
-            <?php echo l("Personalized sections graph" , "itg-registered-user-report/".$row['uid'], array("query"=>array("report_type" => "personalized" , "width" => "900", "height" => "600", "iframe" => "true") , "attributes" =>array("target" =>array("_blank") , "class" => array("colorbox-load")))) ?>
+            |
+            <?php echo l('Section wise breakup' , "itg-registered-user-section-wise-breakup/" .$row['uid'] ,  array("attributes" => array("class" => array("colorbox-load")) ,  "query"=>array("width" => "900", "height" => "600", "iframe" => "true"))); ?>
+            <?php //echo l("Sections wise graph" , "itg-registered-user-report/".$row['uid'], array("query"=>array("report_type" => "section_wise_report", "width" => "900", "height" => "600", "iframe" => "true") , "attributes" =>array("target" =>array("_blank") , "class" => array("colorbox-load")))) ?>
+            <?php //echo l("Personalized sections graph" , "itg-registered-user-report/".$row['uid'], array("query"=>array("report_type" => "personalized" , "width" => "900", "height" => "600", "iframe" => "true") , "attributes" =>array("target" =>array("_blank") , "class" => array("colorbox-load")))) ?>
           </td>
       </tr>
     <?php endforeach; ?>

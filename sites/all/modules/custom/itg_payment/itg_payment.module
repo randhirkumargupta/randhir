@@ -72,13 +72,12 @@ function itg_payment_menu() {
     'type' => MENU_CALLBACK ,
     'access arguments' => array('access content') ,
   );
-  
-   $items['itg-payment-amex-pay-form-page'] = array(
+
+  $items['itg-payment-amex-pay-form-page'] = array(
     'page callback' => 'itg_payment_amex_payment_page' ,
     'type' => MENU_CALLBACK ,
     'access arguments' => array('access content') ,
   );
-  
 
   // Order payment response fail
   $items['itg-payment-amex-order-form-action-response'] = array(
@@ -90,67 +89,8 @@ function itg_payment_menu() {
   return $items;
 }
 
-
 function itg_payment_amex_payment_page() {
-  global $base_url;
-  return '<form action="'.$base_url.'/itg-payment-amex-order-form-action" method="post" accept-charset="UTF-8">
-<input type="hidden" name="Title" value = "PHP VPC 3 Party Transacion">
-<!-- get user input -->
-<table width="80%" align="center" border="0" cellpadding=\'0\' cellspacing=\'0\'>
-
-<tr class="shade">
-    <td align="right"><strong><em>Virtual Payment Client URL:&nbsp;</em></strong></td>
-    <td><input name="virtualPaymentClientURL" size="65" value=" https://vpos.amxvpos.com/vpcpay" maxlength="250"/></td>
-</tr>
-<tr><td colspan="2">&nbsp;<hr width="75%">&nbsp;</td></tr>
-<tr>
-    <td align="right"><strong><em> VPC Version: </em></strong></td>
-    <td><input name="vpc_Version" value="1" size="20" maxlength="8"/></td>
-</tr>
-<tr class="shade">
-    <td align="right"><strong><em>Command Type: </em></strong></td>
-    <td><input name="vpc_Command" value="pay" size="20" maxlength="16"/></td>
-</tr>
-<tr>
-    <td align="right"><strong><em>Merchant AccessCode: </em></strong></td>
-    <td><input name="vpc_AccessCode" value="" size="20" maxlength="8"/></td>
-</tr>
-<tr class="shade">
-    <td align="right"><strong><em>Merchant Transaction Reference: </em></strong></td>
-    <td><input name="vpc_MerchTxnRef" value="" size="20" maxlength="40"/></td>
-</tr>
-<tr>
-    <td align="right"><strong><em>MerchantID: </em></strong></td>
-    <td><input name="vpc_Merchant" value="" size="20" maxlength="16"/></td>
-</tr>
-<tr class="shade">
-    <td align="right"><strong><em>Transaction OrderInfo: </em></strong></td>
-    <td><input name="vpc_OrderInfo" value="" size="20" maxlength="34"/></td>
-</tr>
-<tr>
-    <td align="right"><strong><em>Purchase Amount: </em></strong></td>
-    <td><input name="vpc_Amount" value="" maxlength="10"/></td>
-</tr>
-<tr class="shade">
-    <td align="right"><strong><em>Receipt ReturnURL: </em></strong></td>
-    <td><input name="vpc_ReturnURL" size="65" value="http://localhost/amex_3party/PHP_VPC_3Party_Order_DR.php" maxlength="250"/></td>
-</tr>
-<tr>
-    <td align="right"><strong><em>Payment Server Display Language Locale: </em></strong></td>
-    <td><select name="vpc_Locale"><option SELECTED>en</option><option>en</option></select></td>
-</tr>
-<tr class="shade">
-    <td align="right"><strong><em>Currency: </em></strong></td>
-    <td><select name="vpc_Currency"><option SELECTED>INR</option></select></td>
-</tr>
-
-<tr>    <td colspan="2">&nbsp;</td></tr>
-<tr>
-    <td>&nbsp;</td>
-    <td><input type="submit" NAME="SubButL" value="Pay Now!"></td>
-</tr>
-</table>
-</form>';
+  pr($_REQUEST);
 }
 
 /**
@@ -181,6 +121,10 @@ function itg_payment_theme() {
     'itg_payment_billdesk_order_form' => array(
       'render element' => 'form' ,
       'template' => 'templates/itg-payment-billdesk-order-form' ,
+    ) ,
+    'itg_payment_amex_payment_page' => array(
+      'render element' => 'form' ,
+      'template' => 'templates/itg-payment-amex-payment-page' ,
     ) ,
   );
 }
@@ -382,7 +326,26 @@ function itg_payment_amex_order_form_action() {
 }
 
 function itg_payment_amex_order_form_action_response() {
-  
+  p($_GET);
+  $param_list = $_POST;
+  $paytm_check_sum = isset($_POST["CHECKSUMHASH"]) ? $_POST["CHECKSUMHASH"] : "";
+
+  $transaction_id = $_POST['TXNID'];
+  $transaction_status = 0;
+  $data['order_status'] = 0;
+  if ($_POST["STATUS"] == "TXN_SUCCESS") {
+    $transaction_status = PAYTM_TXN_SUCCESS_STATUS;
+    $data['order_status'] = PAYTM_ORDER_SUCCESS_STATUS;
+  }
+
+  $data['order_id'] = $_POST['ORDERID'];
+  $data['transaction_id'] = $_POST['TXNID'];
+  $data['transaction_status'] = $transaction_status;
+  $data['transaction_history'] = serialize($_POST);
+
+  // Update order after response.
+  itg_payment_response_info_update($data);
+  drupal_goto('itg_payment_success');
 }
 
 /**
@@ -593,8 +556,13 @@ function itg_payment_checkout() {
       break;
 
     case 'billdesk':
-      $args = itg_payment_decode_data($_SESSION['event_registration_payment']['event_key']);
-      return drupal_render(drupal_get_form('itg_payment_billdesk_order_form' , $args));
+      if (isset($_SESSION['event_registration_payment']['event_key'])) {
+        $args = itg_payment_decode_data($_SESSION['event_registration_payment']['event_key']);
+        return drupal_render(drupal_get_form('itg_payment_billdesk_order_form' , $args));
+      }
+      //Prevent direct access the checkout url, if user is not procced the payment button.
+      drupal_set_message(t("Something went wrong") , 'error');
+      drupal_goto('<front>');
       break;
 
     case 'icici':
@@ -608,9 +576,38 @@ function itg_payment_checkout() {
       break;
 
     case 'amex':
+      global $user;
       if (isset($_SESSION['event_registration_payment']['event_key'])) {
         $args = itg_payment_decode_data($_SESSION['event_registration_payment']['event_key']);
-        return drupal_render(drupal_get_form('itg_payment_amex_order_form' , $args));
+        $event_id = $args['event_id'];
+        $db_data["COUPON_AMOUNT"] = 0;
+        $db_data["COUPON_ID"] = "";
+        $coupon_code = !empty($args['coupon_code']) ? $args['coupon_code'] : NULL;
+        $total_amount = $args['total_payment'];
+        $final_amount = $args['redeemed_payment'];
+        $registration_id = $args['reg_id'];
+        // handel coupon details for database.
+        if (!empty($coupon_code)) {
+          $db_data["COUPON_ID"] = $coupon_code;
+          $db_data["COUPON_AMOUNT"] = floatval($total_amount - $final_amount);
+          $db_data["COUPON_DETAIL"] = itg_payment_get_coupon_details_json($coupon_code);
+        }
+
+        $db_data['CUST_ID'] = "CUS-" . time() . rand(0 , 1000);
+        $db_data["USER_TYPE"] = ($user->uid) ? "authenticated" : "guest";
+        $db_data["REGISTRATION_ID"] = $registration_id;
+        $db_data["PAYMENT_GATEWAY"] = AMXEX_GATEWAY_NAME;
+        $db_data["PAYMENT_GATEWAY_STATUS"] = AMXEX_TRANSACTION_PENDING_STATUS;
+        $db_data["TRANSACTION_ID"] = BILLDESK_TRANSACTION_PENDING_STATUS;
+        $db_data["ORDER_STATUS"] = AMXEX_TRANSACTION_PENDING_STATUS;
+        $db_data["TRANSACTION_HISTORY"] = serialize(AMXEX_GATEWAY_HISTORY);
+        $db_data["PAYMENT_GATEWAY_HISTORY"] = serialize(AMXEX_GATEWAY_HISTORY);
+        $db_data["TOTAL_AMOUNT"] = floatval($total_amount);
+        $db_data["DESCOUNTED_AMOUNT"] = !empty($db_data["COUPON_AMOUNT"]) ? floatval($db_data["COUPON_AMOUNT"]) : 0;
+        $db_data["EVENT_ID"] = $event_id;
+        $db_data["TXN_AMOUNT"] = floatval($final_amount);
+        itg_payment_initial_info_update($db_data);
+        return theme("itg_payment_amex_payment_page" , array("data" => $args));
       }
       //Prevent direct access the checkout url, if user is not procced the payment button.
       drupal_set_message(t("Something went wrong") , 'error');
