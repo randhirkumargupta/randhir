@@ -101,13 +101,15 @@
 
 
       $('select[name="parent[hierarchical_select][selects][0]"]').on('change', function() {
+       
         $("#edit-field-cm-select-type-und > option").each(function() {
 
           $(this).removeAttr("selected");
 
         });
         var getthisvalue = $(this).val();
-        if(getthisvalue !="" && getthisvalue == 'undefined') { 
+    
+        if(getthisvalue !="" && getthisvalue != 'undefined') { 
         $.ajax({
           url: Drupal.settings.basePath + 'getsection_content',
           type: 'post',
