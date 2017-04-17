@@ -28,11 +28,13 @@
           $(".field-name-field-breaking-publish-time").hide();
           $("input[id*=field-mark-as-breaking-band]").removeAttr('checked');
           $(".highlight-title").show();
+          $('#edit-field-section > .form-type-select > label').html('Section');
         }
         else {
           $(".highlight-title").hide();
           $(".field-name-field-mark-as-breaking-band").show();
           $(".field-name-field-breaking-publish-time").show();
+          $('#edit-field-section > .form-type-select > label').html('Section<span class="form-required">*</span>');
         }
         
         // hide Live tv checkbox if type is breaking news
@@ -51,6 +53,7 @@
       // type check for edit form
       if (type == 'Breaking News') {
         $(".highlight-title").hide();
+        $('#edit-field-section > .form-type-select > label').html('Section<span class="form-required">*</span>');
       }
 
       $('body').on('change', '.field-name-field-mobile-subscribers .form-checkbox', function () {
@@ -104,7 +107,7 @@
       $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false});
     }
   });
-  $('#edit-field-section > .form-type-select > label').html('Section<span class="form-required">*</span>');
+  //$('#edit-field-section > .form-type-select > label').html('Section<span class="form-required">*</span>');
   
   
 //  $( 'input[name="field_breaking_content_details_add_more"]' ).ajaxComplete(function() {
