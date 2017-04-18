@@ -9,9 +9,7 @@ function itg_ask_expert_get_mail_content($node) {
   if (function_exists('itg_mail_templates_get_mailcontent')) {
     $ask_expert_submit_query = itg_mail_templates_get_mailcontent($node);
     $body = $ask_expert_submit_query->field_mail_body_expert;
-    p($ask_expert_submit_query->field_mail_body_expert);
   }
-//  die;
   $uname = $node->field_user_name[LANGUAGE_NONE][0]['value'];
   $uemail = $node->field_user_email[LANGUAGE_NONE][0]['value'];
   $ucity = $node->field_user_city[LANGUAGE_NONE][0]['value'];

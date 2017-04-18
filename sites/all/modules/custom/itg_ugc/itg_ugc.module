@@ -341,7 +341,6 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   }
 
   if ($form_id == 'ugc_node_form') {
-    //pr($form);
     $form['field_user_name'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('Name'));
     $form['field_user_email'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('Email'));
     $form['field_user_city'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('City'));
@@ -509,7 +508,6 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
  * {@inheritdoc}
  */
 function ugc_form_submit_handler($form, &$form_state) {
-  //p($form['field_ugc_personalization_photo']);
   global $user;
   $arg = arg();
   $unique_id = time();
@@ -772,7 +770,6 @@ function itg_ugc_node_status_update($nid, $title) {
       if (function_exists('itg_ugc_content_details'))
       {
         if(!empty($title)) {
-          print "title";
         $ugc_content_details = itg_ugc_content_details($nid, 1);
         } else {
         $ugc_content_details = itg_ugc_content_details($nid);
@@ -786,14 +783,11 @@ function itg_ugc_node_status_update($nid, $title) {
       $people = $con->ugc_details;
     }
   }
-    print "qwqwqw";
-    die;
   $node_author = user_load($user->uid);
   $rejected_by = $node_author->field_first_name[LANGUAGE_NONE][0]['value'] . ' ' . $node_author->field_last_name[LANGUAGE_NONE][0]['value'];
 
   if (!empty($title))
   {
-print "title not empty";
     $newdata = array('$set' => array('publish_status' => 1, 'updated_by' => trim($rejected_by)));
     $people->update(array("unid" => (int)$nid), $newdata);
     module_load_include('inc', 'itg_ugc', 'include/itg_ugc_mail');
@@ -803,7 +797,6 @@ print "title not empty";
   }
   else
   {
-    print "not empety else";
     $pid = new MongoId($nid);
     $rejected_date = date('d/m/Y');
     $newdata = array('$set' => array('status' => 0, 'updated_by' => trim($rejected_by), 'rejected_date' => $rejected_date));
@@ -813,7 +806,6 @@ print "title not empty";
     drupal_set_message(t($ugc_content_details['title'] . ' has been rejected successfully.'));
     drupal_goto('ugc-inqueue-content');
   }
-  die;
 }
 
 /**
