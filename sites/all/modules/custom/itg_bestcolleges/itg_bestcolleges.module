@@ -8,6 +8,20 @@
  */
 
 /**
+ * {@inheritdoc}
+ */
+function itg_bestcolleges_init() {
+  $path_request = request_path();
+  $path_request_array = explode('/', $path_request);
+  $path = $path_request_array[0];
+  if ($path == 'bestcolleges') {
+    drupal_add_css(drupal_get_path('module', 'itg_bestcolleges') . '/css/itg_bestcollege.css', array('type' => 'file'));
+    drupal_add_js(drupal_get_path('module', 'itg_bestcolleges') . '/js/custom.js', array('type' => 'file', 'scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_bestcolleges') . '/js/scroll_top.js', array('type' => 'file', 'scope' => 'footer'));
+  }
+}
+
+/**
  * Implements hook_menu().
  * {@inheritdoc}
  */
@@ -37,15 +51,7 @@ function itg_bestcolleges_menu() {
     'page arguments' => array(1, 2),
     'access callback' => TRUE,
   );
-  $items['update-college-data'] = array(
-    'title' => 'Update college nid',
-    'description' => 'Update college node id with old id',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('update_college_data_form'),
-    'file' => 'includes/itg_update_college_data.inc',
-    'file path' => drupal_get_path('module', 'itg_bestcolleges'),
-    'access callback' => TRUE,
-  );
+
   $items['csvImporter'] = array(
     'title' => 'Import Data from CSV File',
     'description' => 'Import content from a <abbr title="Comma Separated Values">CSV</abbr> file.',
@@ -67,7 +73,6 @@ function itg_bestcolleges_menu() {
  * @return type
  */
 function itg_bestcolleges_deatils() {
-  drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', array('type' => 'external'));
   return theme('itg_bestcolleges_template');
 }
 
@@ -208,7 +213,22 @@ function itg_bestcolleges_block_view($delta = '') {
     case 'bestcollege_rhs_videos_widget':
       module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
       // value is hardcoded need to be change for dyanamic functionality
-      $info['section'] = '844517'; //'844693'; //'787'; //'240'; 844693 // tid of section
+      $arg = arg();
+      if ($arg[0] == 'taxonomy') {
+        $tid = $arg[2];
+      }
+      else {
+        $path_request = request_path();
+        $path_request_array = explode('/', $path_request);
+
+        if ($path_request_array && $path_request_array[0] == "bestcolleges") {
+          $term_name = "Bestcolleges " . $path_request_array[1];
+          $term_data = taxonomy_get_term_by_name($term_name);
+        }
+        $tid = array_pop($term_data)->tid;
+      }
+
+      $info['section'] = $tid; //844693 / (auto) 844517'; // tid of section
       $info['content_type'] = ''; // content type machine name
       // view name which is stored in draggableviews_structure table
       $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
@@ -746,31 +766,30 @@ function itg_bestcollege_get_term_tid($tid, $stream) {
  */
 function itg_bestcolleges_views_query_alter(&$view, &$query) {
   if (isset($view->name) && $view->name === 'best_college_image_slider') {
-     $page_type = isset($_GET['page']) ? $_GET['page'] : '';
-      if (!empty($page_type)) {
-        if (isset($view->query->where[1]['conditions'][2]['field'])) {
-          if ($view->query->where[1]['conditions'][2]['operator'] == 'IN') {
-            $year = arg(1);
-            $query = db_select('field_data_field_bestcollege_year', 'y');
-            $query->join('field_data_field_bestcollege_rank', 'r', 'y.entity_id = r.entity_id');
-            $query->distinct();
-            $query->fields('r', array('field_bestcollege_rank_value'))
-                ->condition('y.field_bestcollege_year_value', $year)
-                ->condition('r.field_bestcollege_rank_value', 10, '>')
-                ->orderBy('r.field_bestcollege_rank_value', 'ASC');
-            $results = $query->execute()->fetchAll();
-            if(is_array($results) && count($results) > 0) {
-              foreach ($results as $results_key => $results_val) {
-                $rank_array[] = $results_val->field_bestcollege_rank_value;
-              }
-              $pre_array = $view->query->where[1]['conditions'][2]['value'];
-              $final_array = array_merge($pre_array, $rank_array);
-              $view->query->where[1]['conditions'][2]['value'] = $final_array;
+    $page_type = isset($_GET['page']) ? $_GET['page'] : '';
+    if (!empty($page_type)) {
+      if (isset($view->query->where[1]['conditions'][2]['field'])) {
+        if ($view->query->where[1]['conditions'][2]['operator'] == 'IN') {
+          $year = arg(1);
+          $query = db_select('field_data_field_bestcollege_year', 'y');
+          $query->join('field_data_field_bestcollege_rank', 'r', 'y.entity_id = r.entity_id');
+          $query->distinct();
+          $query->fields('r', array('field_bestcollege_rank_value'))
+              ->condition('y.field_bestcollege_year_value', $year)
+              ->condition('r.field_bestcollege_rank_value', 10, '>')
+              ->orderBy('r.field_bestcollege_rank_value', 'ASC');
+          $results = $query->execute()->fetchAll();
+          if (is_array($results) && count($results) > 0) {
+            foreach ($results as $results_key => $results_val) {
+              $rank_array[] = $results_val->field_bestcollege_rank_value;
             }
+            $pre_array = $view->query->where[1]['conditions'][2]['value'];
+            $final_array = array_merge($pre_array, $rank_array);
+            $view->query->where[1]['conditions'][2]['value'] = $final_array;
           }
         }
       }
-
+    }
   }
 }
 
@@ -1645,14 +1664,7 @@ function bestcollege_set_option_val($url) {
 function bestcollege_create_taxonomy() {
   $tid = '844708';
   $term = taxonomy_term_load($tid);
-  // bestcollege for 2015
-//$children = array('1' => 'Art', '2' => 'commerce', '3' => 'science', '4' => 'law', '5' => 'medicine', '6' => 'engineering', '7' => 'bba', '8' => 'bca', '9' => 'mass comm', '10' => 'fashion', '11' => 'fine arts', '12' => 'hotel management');
-// bestcollege for 2014 / 2013 / 2012
   $children = array('1' => 'Art', '2' => 'commerce', '3' => 'science', '4' => 'law', '5' => 'medicine', '6' => 'engineering', '7' => 'bba', '8' => 'bca', '9' => 'mass comm', '10' => 'fashion', '11' => 'fine arts', "12" => "Hotel Management");
-
-// bestcollege for 2011 / 2010 / 2009 / 2008 / 2007 / 2006 / 2005
-//$children = array('1' => 'Art', '2' => 'commerce', '3' => 'science', '4' => 'law', '5' => 'medicine', '6' => 'engineering');
-
   foreach ($children as $term_name) {
     $exist_tid = itg_bestcollege_exist_tid($tid, $term->vid, $term_name);
 

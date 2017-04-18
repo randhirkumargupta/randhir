@@ -29,7 +29,7 @@
     <?php } ?>
     </ul>
   <?php else : ?>
-    <span class="no-result-found"><?php print t("Content Not Found") ?></span>
+    <span class="no-result-found"><?php //print t("Content Not Found") ?></span>
 <?php endif; ?>
 </div>
 

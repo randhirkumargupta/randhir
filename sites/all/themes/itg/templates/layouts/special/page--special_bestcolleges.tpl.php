@@ -149,7 +149,7 @@ if ($theme != 'itgadmin') {
 
         <div>
 
-        <!--- list / grid -->
+  <div class="clearfix"></div>      <!--- list / grid -->
 <div class="col-sm-12 col-xs-12 view1">
 
 <div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("Best of The Best ") . $url_get[2]; ?></div>
@@ -162,8 +162,8 @@ if ($theme != 'itgadmin') {
         </div>
 </div>
 <!--- list / grid -->
-
-<div class="col-md-12 itg-h625-section remove_padd_left remove_padd_right ">
+<div class="clearfix"></div>
+<div class="col-md-12 itg-h625-section">
   <div class="itg-widget">
     <div class="col-sm-12 remove_padd_right">
       <div class="row list-group college">
