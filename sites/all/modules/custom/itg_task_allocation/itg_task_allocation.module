@@ -607,8 +607,6 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
   }
   
   if (!empty($var->mail)) {
-    print "sss";
-    die;
     $node_url = l('URL', 'node/'.$var->nid);
     $body = $get_mail_data->field_mail_body_task_idea_assign[LANGUAGE_NONE][0]['value'];
     
@@ -625,8 +623,6 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
       'body' => $content,
       'subject' => $subject,
     );
-pr($params);
-die;
     $mail = drupal_mail('itg_task_allocation', 'exp_task_rem', $to_assigner, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
       return TRUE;

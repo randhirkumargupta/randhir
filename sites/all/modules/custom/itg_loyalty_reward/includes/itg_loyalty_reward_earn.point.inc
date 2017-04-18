@@ -318,8 +318,8 @@ function itg_loyalty_reward_points_expire_notification_callback() {
     $itg_query->fields('u', array('mail', 'name'));
     $itg_query->fields('ph', array('remaining_point'));
     $itg_query->fields('pk', array('expiry_date'));
-//    $itg_query->addExpression('DATEDIFF(from_unixtime(pk.expiry_date), CURDATE())', 'date_diff_real');
-//    $itg_query->havingCondition('date_diff_real', 1);
+    $itg_query->addExpression('DATEDIFF(from_unixtime(pk.expiry_date), CURDATE())', 'date_diff_real');
+    $itg_query->havingCondition('date_diff_real', 1);
     $itg_result = $itg_query->execute()->fetchAll();
   } catch (Exception $ex) {
     watchdog('Point Expiry Notification', $ex->getMessage());
