@@ -39,12 +39,20 @@
                   $output .= "<li class='view-item'>";
 
                   if ($video_fid_data[0]->field_videogallery_video_upload_fid != "") {
+                     if($video_fid_data[0]->field_video_private_value == 'Yes') {
+                      $video_data1 = itg_videogallery_get_videoid_new($video_fid);
+                     itg_videogallery_update_embedcode_url($video_data1);
+                    $video_data = itg_videogallery_get_videoid_new_private($video_fid);
+                 }else {
+                  //$video_data = itg_videogallery_get_videoid($video_fid);
+                  $video_data = itg_videogallery_get_videoid_new($video_fid);
+                 }
                     // $video_data = itg_videogallery_get_videoid($video_fid_data[0]->field_videogallery_video_upload_fid);
                     $video_data = itg_videogallery_get_videoid_new($video_fid_data[0]->field_videogallery_video_upload_fid);
                   }
-                  $ads_flag = 0;
+                  $ads_flag = 1;
                   if ($video_fid_data[0]->field_include_ads_valu == 'yes') {
-                    $ads_flag = 1;
+                    $ads_flag = 0;
                   }
                   if (!empty($video_data)) {
 
@@ -56,7 +64,7 @@
                   }
 
                   if (isset($video_fid_data) && !empty($video_fid_data[0]->field_include_ads_valu)) {
-                    $output .= '<p><strong>Ads: </strong><strong>' . $video_fid_data[0]->field_videogallery_description_value . '</strong></p>';
+                    $output .= '<p><strong>Exclude Ads : </strong><strong>' . $video_fid_data[0]->field_videogallery_description_value . '</strong></p>';
                   }
                   $output .= "</li>";
                 }
@@ -86,17 +94,24 @@
               $items = field_get_items('node', $node, 'field_video_upload');
 
               foreach ($items as $key => $imagecollection):
+                
                 $video_fid = $imagecollection['field_videogallery_video_upload'][LANGUAGE_NONE][0]['fid'];
                  
                 $output .= "<li class='view-item'>";
 
                 if ($video_fid != "") {
+                  if($imagecollection['field_video_private'][LANGUAGE_NONE][0]['value'] == 'Yes') {
+                   $video_data1 = itg_videogallery_get_videoid_new($video_fid);
+                   itg_videogallery_update_embedcode_url($video_data1);
+                    $video_data = itg_videogallery_get_videoid_new_private($video_fid);
+                 }else {
                   //$video_data = itg_videogallery_get_videoid($video_fid);
                   $video_data = itg_videogallery_get_videoid_new($video_fid);
+                 }
                 }
-                $ads_flag = 0;
+                $ads_flag = 1;
                 if ($imagecollection['field_include_ads'][LANGUAGE_NONE][0]['value'] == 'yes') {
-                  $ads_flag = 1;
+                  $ads_flag = 0;
                 }
 
                 if (!empty($video_data) && empty($imagecollection['field_migrated_video_url'][LANGUAGE_NONE][0]['value'])) {

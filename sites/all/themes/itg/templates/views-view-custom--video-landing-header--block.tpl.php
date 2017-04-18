@@ -67,14 +67,20 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                                 else {
                                     $newimageds.= '<li><img data-tag="video_' . $video_value->solr_video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt=""></li>';
                                 }
-                                $ads_flag = 0;
+                                $ads_flag = 1;
                                 if ($video_value->field_include_ads_value == 'yes') {
-                                    $ads_flag = 1;
+                                    $ads_flag = 0;
                                 }
+                                if($video_value->video_embedded_url !="") {
+                                   $vide_dm_id = $video_value->video_embedded_url;
+                                }else {
+                                   $vide_dm_id = $video_value->solr_video_id;
+                                }
+                               
                                 ?>
                                     <div class="iframe-video">
                                         <iframe frameborder="0" scrolling="no"
-                                                src="https://www.dailymotion.com/embed/video/<?php print $video_value->solr_video_id; ?>?autoplay=<?php echo $autoplay; ?>&player_next_video=x5d9tu3&ui-logo=1&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
+                                                src="https://www.dailymotion.com/embed/video/<?php print $vide_dm_id; ?>?autoplay=<?php echo $autoplay; ?>&player_next_video=x5d9tu3&ui-logo=1&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
                                                 allowfullscreen></iframe></div>
 
                                 </div>
