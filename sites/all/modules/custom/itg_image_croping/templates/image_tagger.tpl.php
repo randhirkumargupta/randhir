@@ -45,9 +45,9 @@ list($width, $height) = getimagesize($url);
         print' <div class="image_info">' . $counter . ' ' . ucwords($imagename) . ' (' . $imagewidth . 'x' . $imagehight . ')</div>';
       }
       print ' <div class="syndicate-lable"><input type="checkbox" class ="is_synd" name="syndicate_' . $explodedata[0] . '" value="1"> Syndicate</div>';
-      if ($counter == 1) {
-        print '<input type="text" name="image_alt" placeholder="Alt Text" id="alt_text_image"  value=""></br><input type="text" name="image_title" placeholder="Title" id="image_title_exta"  value=""></br>';
-      }
+     
+        print '<input type="text" name="image_alt[]" placeholder="Alt Text" id="alt_text_image"  value=""></br><input type="text" name="image_title[]" placeholder="Title" id="image_title_exta"  value=""></br>';
+    
 
       print'<input type="text" name="courtesy[]" placeholder="Courtesy"  value=""></br>'
               . '<input type="text" name="keyword[]" placeholder="Keyword"  value=""></br>'
