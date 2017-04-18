@@ -197,5 +197,12 @@ function itg_widgets_custom_variables() {
     '#title' => t('Business today json url'),
     '#default_value' => variable_get('business_today_json_url'),
   );
+  
+  $form['read_later_days_config'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Read Later days configuration'),
+    '#attributes' => array('placeholder' => t('Enter no of days')),
+    '#default_value' => variable_get('read_later_days_config'),
+  );
   return system_settings_form($form);
 }

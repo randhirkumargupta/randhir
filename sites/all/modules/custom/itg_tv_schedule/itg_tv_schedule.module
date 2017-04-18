@@ -205,10 +205,12 @@ function itg_tv_schedule_uploadmongo($file_id) {
         $db = mongodb();
         if ($db) {
             $people = $db->tv_schedule;
+            $ret = $people->remove();
         }
         else {
             return FALSE;
         }
+        
 
         while (($data = fgetcsv($file)) !== FALSE) {
 

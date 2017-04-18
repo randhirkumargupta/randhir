@@ -533,7 +533,7 @@ function feature_for_ugc_field_default_field_instances() {
     'label' => 'Upload Photo',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 1,
+      'alt_field' => 0,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -541,7 +541,7 @@ function feature_for_ugc_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 1,
+      'title_field' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -553,6 +553,8 @@ function feature_for_ugc_field_default_field_instances() {
             'attach' => 0,
             'clipboard' => 0,
             'imce' => 0,
+            'itg_image_repository' => 0,
+            'itg_image_video' => 0,
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
