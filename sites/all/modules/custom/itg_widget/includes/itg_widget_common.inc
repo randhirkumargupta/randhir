@@ -753,6 +753,13 @@ function get_required_data_from_entity_id($entity_id) {
  * {@inheritdoc}
  */
 function itg_widget_form_views_exposed_form_alter(&$form , &$form_state , $form_id) {
+ if(isset($form['type']) && !empty($form['type'])) {
+   foreach ($form['type']['#options'] as $optionkey=>$optiondata) {
+     if($optionkey=='videogallery') {
+       $form['type']['#options'][$optionkey] = 'Video';
+     }
+   }
+ }
   switch ($form['#id']) {
     case 'views-exposed-form-home-page-feature-widget-page-1':
       $form['title']['#attributes']['placeholder'] = t('Content Title');

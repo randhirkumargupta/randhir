@@ -9,7 +9,7 @@ if (function_exists('itg_common_mongo_activity_user_count'))
 {
   $submit_ugc_content = itg_common_mongo_activity_user_count($user->uid, 'ugc_details');
   $follow_ugc_content = itg_common_mongo_activity_user_count($user->uid, 'front_user_activity', 'follow_story', '1');
-  $read_later_content = itg_common_mongo_activity_user_count($user->uid, 'front_user_activity', 'read_later', '1');
+  $read_later_content = itg_common_mongo_activity_user_count_date_wise($user->uid, 'front_user_activity', 'read_later', '1');
   $comment_count = itg_common_mongo_activity_user_count($user->uid, 'itgcms_comment', 'comment', 1);
   $google_share_count = itg_common_mongo_activity_user_count($user->uid, 'front_user_activity', 'google_share', '1');
   $twitter_share_count = itg_common_mongo_activity_user_count($user->uid, 'front_user_activity', 'twitter_share', '1');
