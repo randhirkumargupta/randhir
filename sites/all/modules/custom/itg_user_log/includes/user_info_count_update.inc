@@ -218,7 +218,7 @@ function itg_logged_in_user_visited_node() {
     // If we have items 
     if (count($user_details_pages) != 0) {
       // Get pagination.
-      $pageNumbers = '<div class="numbers">' . $pagination->links() . '</div>';
+      $pageNumbers = $pagination->links();
       $cou = 1;
       foreach ($user_details_pages as $row) {
         $rows[] = array(
@@ -239,7 +239,7 @@ function itg_logged_in_user_visited_node() {
         'attributes' => array('class' => array('views-table')) ,
         'empty' => t('No results found')));
       $output .= theme('pager');
-      $output .= '<ul class="pager">' . $pageNumbers . '</ul>';
+      $output .= '<ul class="custom-pagger">' . $pageNumbers . '</ul>';
       return $output;
     }
   }

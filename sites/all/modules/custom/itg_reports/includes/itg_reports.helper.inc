@@ -217,9 +217,9 @@ function itg_registered_user_display_report($user_id) {
     //if ($_GET['report_type'] == 'personalized') {
     $chart = '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>';
     $chart .= '<div>
-                    <ul class="nav nav-pills report-chart-tabs">
-                      <li class="active"><a data-toggle="pill" href="#report2">Personalized Sections</a></li>
-                      <li><a data-toggle="pill" href="#report1">Sections</a></li>
+                    <ul class="report-chart-tabs">
+                      <li class="active"><a data-toggle="report1" href="javascript:void(0);">Personalized Sections</a></li>
+                      <li><a data-toggle="report2" href="javascript:void(0);">Sections</a></li>
                     </ul>
                 </div>';
     $chart .= '<div class="tab-content">';
