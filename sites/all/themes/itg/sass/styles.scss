@@ -4514,6 +4514,9 @@ h1.category-heading{
         }
     }
 }
+.view-programmes.view-display-id-page{
+  @include pager;
+}
 
 /*css start archive-story */
 .view-archive-story{
@@ -5265,6 +5268,11 @@ section.sidebar{
 }
 /*CSS End video setting Ifram*/
 
+.ugc-success {
+    height: 100%;
+    background-color: #fff;
+}
+
 /*CSS Start for recommended for you home page*/
 .recommended-for-you{
     background: #f3f3f3;
@@ -5302,6 +5310,7 @@ section.sidebar{
                     .pic{
                         float: none;
                         margin: 0;
+                        width: auto;
                     }
                     .detail{
                         background: #fff;
