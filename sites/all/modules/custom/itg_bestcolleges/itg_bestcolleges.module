@@ -186,6 +186,9 @@ function itg_bestcolleges_block_info() {
   $blocks['bestcollege_rhs_videos_widget'] = array(
     'info' => t('Widget: Bestcolleges RHS Videos'),
   );
+   $blocks['bestcollege_sponser'] = array(
+    'info' => t('Widget: Bestcolleges Sponser'),
+  );
   return $blocks;
 }
 
@@ -235,6 +238,15 @@ function itg_bestcolleges_block_view($delta = '') {
       $data = itg_widget_section_wise_ordering_from_custom_table($info);
       $block['content'] = theme("bestcollege_section_ordering", array("data" => $data));
       break;
+    case 'bestcollege_sponser':
+      $path_request = request_path();
+      $path_request_array = explode('/', $path_request);
+      if ($path_request_array[1] == '2016' && $path_request_array[2] == 'ranks') {
+        $data = bestcollege_get_sponser_data('Best college Sponser');
+        $block['content'] = $data;
+      }
+
+      break;  
   }
   return $block;
 }

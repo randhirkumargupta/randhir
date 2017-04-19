@@ -194,22 +194,7 @@
                 }
             });
 
-            // replace url for image
-             jQuery('.right_align_bestcollege .thumbnail-img img').each(function($) {
-                var urlRelative = jQuery(this).attr("src");
-                var urlAbsolute = urlRelative.replace('http://itgddev.indiatodayonline.in/s3/files/', "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/");
-
-                jQuery(this).attr("src",urlAbsolute);
-            });
-
-             jQuery('.item-college img').each(function($) {
-                var urlRelative = jQuery(this).attr("src");
-                var urlAbsolute = urlRelative.replace('http://itgddev.indiatodayonline.in/s3/files/', "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/");
-
-                jQuery(this).attr("src",urlAbsolute);
-            });
-
-
+            jQuery('.vertical-menu-parent').hide();
 
         }
     };

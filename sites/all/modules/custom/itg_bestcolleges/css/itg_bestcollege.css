@@ -661,12 +661,12 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 
 /* Sponser strip css */
 .sponsorContainer{ margin:10px auto; width:100%; border:1px solid #000; height:auto; overflow:hidden; position: relative;  box-sizing: border-box}
-.leftFirstLogo{ position: absolute; left:0; top:0;x}
-.leftPresentingSponsor{ float: left; width:335px;; box-sizing: border-box; margin-left:220px; position: relative }
+.leftFirstLogo{ position: absolute; left:0; top:0;}
+.leftPresentingSponsor{ float: left; width:335px; box-sizing: border-box; margin-left:220px; position: relative }
 .leftPresentingSponsor:after{ content:""; position: absolute; right:0; top:2px; height:44px; width:1px; background:#c5c5c5}
 .PreSponsorTxt{ float: left; font:normal 12px/14px Arial, Helvetica, sans-serif; color:#525252; margin:11px 0 0 15px}
 .PreSponsorImg{ float: left; margin-left:12px;}
-.rightAssociateSponsor{float: left; width:335px;; box-sizing: border-box; }
+.rightAssociateSponsor{float: left; width:335px; box-sizing: border-box; }
 .assSponsorTxt{float: left; font:normal 12px/14px Arial, Helvetica, sans-serif; color:#525252; margin:11px 0px 0 15px}
 .assSponsorImg1{float: left; margin:0px 0 0 30px;}
 
