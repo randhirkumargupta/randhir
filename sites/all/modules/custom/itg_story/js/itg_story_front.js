@@ -25,42 +25,42 @@
         }); 
         
         
-        var maxValueInArray = $('.multiple-photo-disc .photo-slider').length;         
+        //var maxValueInArray = $('.multiple-photo-disc .photo-slider').length;         
         $('.multiple-photo-disc').on('afterChange', function(event, slick, currentSlide){
             var hash_text = $(this).find('.slick-current img').attr('title');
-            window.location.hash = "#" + hash_text;
-            if(currentSlide === maxValueInArray) {
-                if (Drupal.settings.itg_story_front.next) {
-                    $(".multiple-photo-disc i.fa-chevron-right").css("visibility","visible").removeClass("hide")
-                    var next = Drupal.settings.itg_story_front.next;
-                    window.location.href = next;
-                  } else {
-                    $(".multiple-photo-disc i.fa-chevron-right").css("visibility","hidden").addClass("hide");
-                }
-            }
-            if (currentSlide === 0) {
-                if (Drupal.settings.itg_story_front.previous) {
-                    $(".multiple-photo-disc i.fa-chevron-left").css("visibility","visible").removeClass("hide");
-                    var previous = Drupal.settings.itg_story_front.previous;
-                    window.location.href = previous;
-                  } else {
-                    $(".multiple-photo-disc i.fa-chevron-left").css("visibility","hidden").addClass("hide");
-                }
-            }
+            window.location.hash = "?PhotoStory=" + hash_text;
+//            if(currentSlide === maxValueInArray) {
+//                if (Drupal.settings.itg_story_front.next) {
+//                    $(".multiple-photo-disc i.fa-chevron-right").css("visibility","visible").removeClass("hide")
+//                    var next = Drupal.settings.itg_story_front.next;
+//                    window.location.href = next;
+//                  } else {
+//                    $(".multiple-photo-disc i.fa-chevron-right").css("visibility","hidden").addClass("hide");
+//                }
+//            }
+//            if (currentSlide === 0) {
+//                if (Drupal.settings.itg_story_front.previous) {
+//                    $(".multiple-photo-disc i.fa-chevron-left").css("visibility","visible").removeClass("hide");
+//                    var previous = Drupal.settings.itg_story_front.previous;
+//                    window.location.href = previous;
+//                  } else {
+//                    $(".multiple-photo-disc i.fa-chevron-left").css("visibility","hidden").addClass("hide");
+//                }
+//            }
         });             
-        var maxValueInArray = $('.multiple-photo .photo-slider').length;         
-        $('.multiple-photo').on('afterChange', function(event, slick, currentSlide) {               
-            if(currentSlide === maxValueInArray-1){
-              if (Drupal.settings.itg_story_front.next) {
-                  $(".multiple-photo-disc i.fa-chevron-right").css("visibility","visible").removeClass("hide");
-                    var next = Drupal.settings.itg_story_front.next;
-                    window.location.href = next;
-                  } else {
-                    $(".multiple-photo-disc i.fa-chevron-right").css("visibility","hidden").addClass("hide");
-                }
-            }
-        });  
-        $('.multiple-photo .slick-prev').text("Prev");
+//        var maxValueInArray = $('.multiple-photo .photo-slider').length;         
+////        $('.multiple-photo').on('afterChange', function(event, slick, currentSlide) {               
+////            if(currentSlide === maxValueInArray-1){
+////              if (Drupal.settings.itg_story_front.next) {
+////                  $(".multiple-photo-disc i.fa-chevron-right").css("visibility","visible").removeClass("hide");
+////                    var next = Drupal.settings.itg_story_front.next;
+////                    window.location.href = next;
+////                  } else {
+////                    $(".multiple-photo-disc i.fa-chevron-right").css("visibility","hidden").addClass("hide");
+////                }
+////            }
+////        });  
+//        $('.multiple-photo .slick-prev').text("Prev");
       }
   };
   

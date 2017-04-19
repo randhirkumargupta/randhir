@@ -546,22 +546,7 @@ function itg_common_custompath_insert_load($node) {
     }
     if (is_issue_baised_magazine($node)) {
       $pathdata = 'magazine';
-      // Get parent of primary category.
-      $all_terms = taxonomy_get_parents_all($getsection);
-      $terms_bunch = array_reverse($all_terms);
-      $section_name = $terms_bunch[0]->name;
-      // Get parent of primary category.
-      $primary_cat_array = taxonomy_term_load($getsection);
-      $primary_cat_name = $primary_cat_array->name;
-      // Handle case if section and parimary category are same.
-      if ($section_name == $primary_cat_name) {
-        //prepare ur with parimary cat only.
-        $pathdata .= '/' . strtolower($primary_cat_name);
-      }
-      else {
-        //prepare ur with parimary cat and section both.
-        $pathdata .= '/' . strtolower($section_name) . '/' . strtolower($primary_cat_name);
-      }
+      $pathdata .= '/'. get_path_from_category($getsection);
       //Get node type.
       $pathdata .= '/' . $node->type;
       // Get issue date.
@@ -570,11 +555,27 @@ function itg_common_custompath_insert_load($node) {
       // preapreurl with issue date.
       $pathdata .= '/' . $issue_date_sef_format;
       // Add node title.
-      $pathdata .= '-'.trim($node_sef);
+      $pathdata .= '-' . trim($node_sef);
       // Add node id.
-      $pathdata .= '-'.$node->nid;
+      $pathdata .= '-' . $node->nid;
       // Add workbanch date.
-      $pathdata .= '-'.$published_date;
+      $pathdata .= '-' . $published_date;
+      // Prepare SEO friendly node url
+      $newpath = itg_common_custompath_insert_val($pathdata);
+      // Create url alise for magazine type story.
+      $node->path = array('alias' => $newpath , 'pathauto' => FALSE);
+    }
+    elseif (is_photo_story($node)) {
+      //Add path from category.
+      $pathdata = get_path_from_category($getsection);
+      // Add static value for photo story.
+      $pathdata .= '/photo-story';
+      // Add node title.
+      $pathdata .= '/' . trim($node_sef);
+      // Add node id.
+      $pathdata .= '/' . $node->nid;
+      // Add workbanch date.
+      $pathdata .= '/' . $published_date;
       // Prepare SEO friendly node url
       $newpath = itg_common_custompath_insert_val($pathdata);
       // Create url alise for magazine type story.
@@ -589,12 +590,41 @@ function itg_common_custompath_insert_load($node) {
   }
 }
 
-function is_issue_baised_magazine($node) {
+function is_photo_story($node) {
   $flag = FALSE;
-  if (!empty($node->field_story_magazine_story_issue['und'][0]['value']) && $node->field_story_magazine_story_issue['und'][0]['value'] == 'magazine_issue_story') {
+  if (!empty($node->field_story_type['und'][0]['value']) && $node->field_story_type['und'][0]['value'] == 'photo_story' && empty($node->field_story_magazine_story_issue['und'][0]['value'])) {
     $flag = TRUE;
   }
   return $flag;
+}
+
+function is_issue_baised_magazine($node) {
+  $flag = FALSE;
+  if (!is_photo_story($node) && !empty($node->field_story_magazine_story_issue['und'][0]['value']) && $node->field_story_magazine_story_issue['und'][0]['value'] == 'magazine_issue_story') {
+    $flag = TRUE;
+  }
+  return $flag;
+}
+
+function get_path_from_category($getsection) {
+  $pathdata = '';
+  // Get parent of primary category.
+  $all_terms = taxonomy_get_parents_all($getsection);
+  $terms_bunch = array_reverse($all_terms);
+  $section_name = $terms_bunch[0]->name;
+  // Get parent of primary category.
+  $primary_cat_array = taxonomy_term_load($getsection);
+  $primary_cat_name = $primary_cat_array->name;
+  // Handle case if section and parimary category are same.
+  if ($section_name == $primary_cat_name) {
+    //prepare ur with parimary cat only.
+    $pathdata .= strtolower($primary_cat_name);
+  }
+  else {
+    //prepare ur with parimary cat and section both.
+    $pathdata .= strtolower($section_name) . '/' . strtolower($primary_cat_name);
+  }
+  return $pathdata;
 }
 
 /**
