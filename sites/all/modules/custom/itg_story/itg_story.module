@@ -1014,3 +1014,14 @@ function itg_story_photo_story_bottom_html($node_id) {
     return $html;
   }
 }
+
+/**
+ * Implements hook_views_api().
+ *
+ * {@inheritdoc}.
+ */
+function itg_story_views_api() {
+    return array(
+        'api' => 3,
+    );
+}

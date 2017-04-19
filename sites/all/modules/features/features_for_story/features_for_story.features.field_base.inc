@@ -1165,6 +1165,9 @@ function features_for_story_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_comment_question',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -1698,11 +1701,9 @@ function features_for_story_field_default_field_bases() {
     ),
     'locked' => 0,
     'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
+    'settings' => array(),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'text_long',
   );
 
   // Exported field_base: 'field_story_large_image'.
@@ -2571,21 +2572,31 @@ function features_for_story_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
+        '0.5' => 0.5,
         1 => 1,
+        '1.5' => 1.5,
         2 => 2,
+        '2.5' => 2.5,
         3 => 3,
+        '3.5' => 3.5,
         4 => 4,
+        '4.5' => 4.5,
         5 => 5,
+        '5.5' => 5.5,
         6 => 6,
+        '6.5' => 6.5,
         7 => 7,
+        '7.5' => 7.5,
         8 => 8,
+        '8.5' => 8.5,
         9 => 9,
+        '9.5' => 9.5,
         10 => 10,
       ),
       'allowed_values_function' => '',
     ),
     'translatable' => 0,
-    'type' => 'list_integer',
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_story_tech_pros_cons_title'.
