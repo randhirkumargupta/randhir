@@ -6,7 +6,7 @@
  */
 
 /**
- * Implments callback function for "itg-report-dashboard".
+ * Implements callback function for "itg-report-dashboard".
  *
  * @return
  *   Themed html output.
@@ -32,7 +32,7 @@ function itg_report_user_dashboard() {
 /**
  * Implements callback function for email auto complete widget.
  *
- * @param string $string'
+ * @param string $string
  *   String for auto complete search.
  */
 function itg_reports_email_autocomplete($string) {
@@ -51,18 +51,27 @@ function itg_reports_email_autocomplete($string) {
   return drupal_json_output($result);
 }
 
+/**
+ * Function which returns registred users form.
+ * @param int $user_id
+ */
 function itg_registered_user_report($user_id) {
   drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file'));
   return drupal_get_form('itg_registred_user_report_form');
 }
 
+/**
+ * Second form which is resonsible to display report.
+ * Implements Hook_form.
+ * {@inheritdocs}
+ */
 function itg_registred_user_report_form($form , $form_state) {
   $report_data = "";
 
   // current date
   $sunday = date('d-m-Y');
-  //Prev 7 days.
-  $monday = date('d-m-Y' , strtotime('-7days' , strtotime($sunday)));
+  //Prev 6 days i.e. total 7 days including today.
+  $monday = date('d-m-Y' , strtotime('-6days' , strtotime($sunday)));
 
 
   if (isset($_GET['dispaly_report']) && $_GET['dispaly_report'] == 'true') {
@@ -100,6 +109,10 @@ function itg_registred_user_report_form($form , $form_state) {
   return $form;
 }
 
+/**
+ * Implements Hook_form_validate.
+ * {@inheritdocs}
+ */
 function itg_registred_user_report_form_validate($form , &$form_state) {
   $date_from = $form_state['values']['date_from'];
   $date_to = $form_state['values']['date_to'];
@@ -112,6 +125,10 @@ function itg_registred_user_report_form_validate($form , &$form_state) {
   }
 }
 
+/**
+ * Implements Hook_form_submit.
+ * {@inheritdocs}
+ */
 function itg_registred_user_report_form_submit($form , $form_state) {
   $date_from = $form_state['values']['date_from'];
   $date_to = $form_state['values']['date_to'];
@@ -130,6 +147,11 @@ function itg_registred_user_report_form_submit($form , $form_state) {
   drupal_goto($path , $options);
 }
 
+/**
+ * Function which is used to display readers reports.
+ * @param int $user_id
+ * @return string
+ */
 function itg_registered_user_display_report($user_id) {
   $report_display = FALSE;
   if (isset($_GET['date_from']) && isset($_GET['date_to']) && !empty($_GET['date_from']) && !empty($_GET['date_to'])) {
@@ -231,6 +253,11 @@ function itg_registered_user_display_report($user_id) {
   }
 }
 
+/**
+ * Main function which is comes first and auto submit.
+ * @param int $user_id
+ * @return string
+ */
 function itg_registered_user_report_section_wise_breakup($user_id) {
   if(!empty($user_id)) {
     drupal_add_js('
