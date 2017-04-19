@@ -96,6 +96,12 @@ function itg_event_registration_users_list() {
             $data[$i][$j]['city'] = $entity[$field_collection_id]->field_erf_city[LANGUAGE_NONE][0]['value'] ? $entity[$field_collection_id]->field_erf_city[LANGUAGE_NONE][0]['value'] : '-';
             $data[$i][$j]['state'] = $entity[$field_collection_id]->field_erf_state[LANGUAGE_NONE][0]['value'] ? $entity[$field_collection_id]->field_erf_state[LANGUAGE_NONE][0]['value'] : '-';
             $data[$i][$j]['rdate'] = $node->created ? $node->created : '-';
+            if ($node->status == 0) {
+             $node_status = 'Not complete'; 
+            } else {
+                $node_status = 'Complete';
+            }
+            $data[$i][$j]['status'] = $node_status;
             $j++;
           }
         }
@@ -116,6 +122,7 @@ function itg_event_registration_users_list() {
         <th>City</th>
         <th>State</th>
         <th>Registration Date</th>
+        <th>Status</th>
       </tr></thead><tbody>';
       
       $output_data = '';
@@ -128,8 +135,9 @@ function itg_event_registration_users_list() {
             <td>' . $user_list[$k]['company'] . '</td>
             <td>' . $user_list[$k]['designation'] . '</td>
             <td>' . $user_list[$k]['city'] . '</td>
-            <td>' . $user_list[$k]['state'] . '</td>
+            <td>' . $user_list[$k]['state'] . '</td>            
             <td>' . format_date($user_list[$k]['rdate'], $type = 'custom_date_d_m_y_', $format = '', $timezone = NULL, $langcode = NULL) . '</td>
+            <td>' . $user_list[$k]['status'] . '</td>
           </tr>';
         }
       }
