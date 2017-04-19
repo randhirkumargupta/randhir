@@ -15,9 +15,11 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   switch ($form_id) {
     case 'story_node_form':        // Story
-      case 'photogallery_node_form': // Photo gallery
-      case 'videogallery_node_form': // Video Gallery
-
+    case 'photogallery_node_form': // Photo gallery
+    case 'videogallery_node_form': // Video Gallery
+    case 'breaking_news_node_form': // Breaking News
+    case 'blog_node_form': // Blog
+    case 'podcast_node_form': // Podcast
 
       $content_type = '';
       if (isset($form['#node']->type) && !empty($form['#node']->type)) {
@@ -627,6 +629,7 @@ function get_parent_structure_in_complete($tids, $return_data_chunk) {
 function itg_category_multiple_taxonomy_term_insert($term) {
 
   if ($term->vid == CATEGORY_MANAGMENT) {
+    //p($term);
     if (function_exists('mongodb')) {
       $con = mongodb();
       $people = $con->taxonomy_term_data_mongo;
@@ -656,7 +659,6 @@ function itg_category_multiple_taxonomy_term_update($term) {
   if ($term->vid == CATEGORY_MANAGMENT) {
 // First removing term 
     $id = $term->tid;
-
     if (function_exists('mongodb') && !empty($id)) {
       $con = mongodb();
       $people = $con->taxonomy_term_data_mongo;
@@ -845,4 +847,41 @@ function get_content_type_list_for_this_term_mig($tid) {
     return implode(',', $data);
   }
   return '';
+}
+
+function itg_category_sink_active_inactive_category($tid, $status) {
+  $term = taxonomy_term_load($tid);
+
+  $status = (int) $status;
+  if ($term->vid == CATEGORY_MANAGMENT) {
+// First removing term 
+    $id = $term->tid;
+    if (function_exists('mongodb') && !empty($id)) {
+      $con = mongodb();
+      $people = $con->taxonomy_term_data_mongo;
+      $people->remove(array("tid" => (int) $id));
+    }
+    // Inserting data into taxonomy 
+
+    if (function_exists('mongodb')) {
+      $con = mongodb();
+      $people = $con->taxonomy_term_data_mongo;
+      $status_data = $status;
+
+      // check connection
+      if ($con) {
+        $qry = array(
+          "tid" => (int) $term->tid,
+          "name" => $term->name,
+          "parent" => (int) $term->parent[0],
+          "vid" => (int) $term->vid,
+          "machine_name" => $term->vocabulary_machine_name,
+          "content_type" => get_content_type_combined_list_term($term->field_cm_select_type[LANGUAGE_NONE]),
+          "status" => (int) $status_data,
+          'parent_data' => taxonomy_get_parents_all($term->tid),
+        );
+        $result = $people->insert($qry);
+      }
+    }
+  }
 }
