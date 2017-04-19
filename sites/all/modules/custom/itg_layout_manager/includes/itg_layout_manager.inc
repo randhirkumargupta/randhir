@@ -195,6 +195,95 @@ function itg_layout_gethomecarddata() {
     exit();
 }
 
+
+
+/**
+ * callback for gethomecarddata
+ * {@inheritdoc}
+ */
+function itg_layout_getsecttioncarddata() {
+    global $theme;
+
+    $arg = arg();
+
+    $sectinno = end(explode('-', $_POST['section_ids']));
+
+    $is_fron_page = drupal_is_front_page();
+
+    if ($sectinno == 16) {
+        $sectinno = 20;
+    }
+
+    if ($sectinno == 20) {
+        $widget_name1 = 'itg-block-' . ($sectinno);
+        $widget_name2 = 'itg-block-' . ($sectinno + 1);
+        $widget_name3 = 'itg-block-' . ($sectinno + 2);
+    }
+    else {
+        $widget_name1 = 'itg-block-' . ($sectinno + 1);
+        $widget_name2 = 'itg-block-' . ($sectinno + 2);
+        $widget_name3 = 'itg-block-' . ($sectinno + 3);
+    }
+
+    $block_name = array($widget_name1, $widget_name2, $widget_name3);
+    $section = $_POST['getsectionid'];
+    $template_name = 'page--section_default';
+    $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
+    $nextdata = itg_layout_getsectioncarddata_new_pre($sectinno + 3 ,$section);
+
+    $widget_data = $data;
+
+    if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name'])) {
+
+        print '<div class="row itg-common-section"  id="content-section-widget">
+            <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name1 . '">
+            <div class="itg-widget">
+            <div class="droppable ' . $gray_bg_layout . '">
+            <div class="widget-wrapper ' . $widget_data[$widget_name1]['widget_name'] . '">';
+
+        if (!empty($widget_data[$widget_name1]['block_title'])) {
+            print '<span class="widget-title">' . $widget_data[$widget_name1]['block_title'] . '</span>';
+        }
+
+        print' <div class="data-holder" id="' . $widget_name1 . '">' . $widget_data[$widget_name1]['widget'] . '</div></div></div></div></div>
+            <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name2 . '">
+            <div class="itg-widget">
+            <div class="droppable ' . $gray_bg_layout . '">
+            <div class="widget-wrapper ' . $widget_data[$widget_name2]['widget_name'] . '">';
+
+        if (!empty($widget_data[$widget_name2]['block_title'])) {
+            print' <span class="widget-title">' . $widget_data[$widget_name2]['block_title'] . '</span>';
+        }
+
+        print '<div class="data-holder" id="' . $widget_name2 . '">' . $widget_data[$widget_name2]['widget'] . '</div></div></div></div></div>';
+
+        print '<div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name3 . '">
+            <div class="itg-widget">
+            <div class="droppable ' . $gray_bg_layout . '">
+            <div class="widget-wrapper ' . $widget_data[$widget_name3]['widget_name'] . '">';
+
+        if (!empty($widget_data[$widget_name3]['block_title'])) {
+            print' <span class="widget-title">' . $widget_data[$widget_name3]['block_title'] . '</span>';
+        }
+
+        print '<div class="data-holder" id="' . $widget_name3 . '">' . $widget_data[$widget_name3]['widget'] . '</div></div></div></div></div>';
+
+        if ($nextdata != 0 && $sectinno + 3 < 40) {
+
+            print '<div class="load-more-wrapper-front">
+        <a href="javascript:void(0)" section_id ="'.$section.'" class="add-more-block-front-section">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
+        </div>';
+        }
+
+        print '</div>';
+    }
+    else {
+        itg_layout_getsectioncarddata_new($sectinno + 4,$section);
+    }
+
+    exit();
+}
+
 /**
  * Implements hook_manager_preprocess_page().
  * {@inheritdoc}
@@ -256,6 +345,79 @@ function itg_layout_gethomecarddata_new($sectinno) {
         if ($nextdata != 0 && $sectinno + 3 < 40) {
             print '<div class="load-more-wrapper-front">
               <a href="javascript:void(0)" class="add-more-block-front">' . t("Load More") . ' <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
+              </div>';
+        }
+        print'</div>';
+    }
+    else {
+        
+    }
+
+    exit();
+}
+
+
+/**
+ * Implements hook_manager_preprocess_page().
+ * {@inheritdoc}
+ */
+function itg_layout_getsectioncarddata_new($sectinno,$section) {
+    global $theme;
+    $arg = arg();
+
+    $widget_name1 = 'itg-block-' . ($sectinno);
+    $widget_name2 = 'itg-block-' . ($sectinno + 1);
+    $widget_name3 = 'itg-block-' . ($sectinno + 2);
+
+    $block_name = array($widget_name1, $widget_name2, $widget_name3);
+    
+    $template_name = 'page--section_default';
+
+    $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
+    if ($data == "" && $sectinno < 80) {
+      itg_layout_getsectioncarddata_new($sectinno + 3,$section);
+    }
+
+    $nextdata = itg_layout_getsectioncarddata_new_pre($sectinno + 3,$section);
+    $widget_data = $data;
+
+    if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name'])) {
+        print '<div class="row itg-common-section"  id="content-section-widget">
+
+    <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name1 . '">
+    <div class="itg-widget">
+    <div class="droppable ' . $gray_bg_layout . '">
+    <div class="widget-wrapper ' . $widget_data[$widget_name1]['widget_name'] . '">';
+
+        if (!empty($widget_data[$widget_name1]['block_title'])) {
+            print '<span class="widget-title">' . $widget_data[$widget_name1]['block_title'] . '</span>';
+        }
+
+        print '<div class="data-holder" id="' . $widget_name1 . '">' . $widget_data[$widget_name1]['widget'] . '</div></div></div></div></div>
+
+          <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name2 . '">
+          <div class="itg-widget">
+          <div class="droppable ' . $gray_bg_layout . '">
+          <div class="widget-wrapper ' . $widget_data[$widget_name2]['widget_name'] . '">';
+
+        if (!empty($widget_data[$widget_name2]['block_title'])) {
+            print' <span class="widget-title">' . $widget_data[$widget_name2]['block_title'] . '</span>';
+        }
+
+        print '<div class="data-holder" id="' . $widget_name2 . '">' . $widget_data[$widget_name2]['widget'] . '</div></div></div></div></div>';
+
+        print '<div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name3 . '">
+           <div class="itg-widget">
+           <div class="droppable ' . $gray_bg_layout . '">
+           <div class="widget-wrapper ' . $widget_data[$widget_name3]['widget_name'] . '">';
+        if (!empty($widget_data[$widget_name3]['block_title'])) {
+            print' <span class="widget-title">' . $widget_data[$widget_name3]['block_title'] . '</span>';
+        }
+
+        print '<div class="data-holder" id="' . $widget_name3 . '">' . $widget_data[$widget_name3]['widget'] . '</div></div></div></div></div>';
+        if ($nextdata != 0 && $sectinno + 3 < 40) {
+            print '<div class="load-more-wrapper-front">
+              <a href="javascript:void(0)" section_id ="'.$section.'" class="add-more-block-front-section">' . t("Load More") . ' <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
               </div>';
         }
         print'</div>';

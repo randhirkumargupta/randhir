@@ -869,11 +869,12 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 } ?>
                  <?php
           if ($theme != 'itgadmin') {
+       
             print '<div id="second-section-card"></div>';
             if (!empty($widget_data['itg-block-20']['widget']) || !empty($widget_data['itg-block-21']['widget']) || !empty($widget_data['itg-block-22']['widget'])) {
               ?>
               <div class="load-more-wrapper-front">
-                <a href="javascript:void(0)" class="add-more-block-front">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
+                <a href="javascript:void(0)" section_id ="<?php echo arg(2);?>" class="add-more-block-front-section">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
               </div>
   <?php
   }

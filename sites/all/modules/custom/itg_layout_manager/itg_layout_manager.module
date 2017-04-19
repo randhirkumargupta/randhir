@@ -62,6 +62,12 @@ function itg_layout_manager_menu() {
     'access arguments' => array('access content'),
     'file' => 'includes/itg_layout_manager.inc',
   );
+  $items['getsecttioncarddata'] = array(
+    'page callback' => 'itg_layout_getsecttioncarddata', // se for get the tags by tagid on image.
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_layout_manager.inc',
+  );
   $items['get_map_data'] = array(
     'page callback' => 'itg_layout_getterm_detials', // se for get the tags by tagid on image.
     'type' => MENU_CALLBACK,
@@ -555,6 +561,47 @@ function itg_layout_gethomecarddata_new_pre($sectinno) {
   if($data=="" && $sectinno<80)
   {
   return itg_layout_gethomecarddata_new_pre($sectinno + 3); 
+  }
+
+  $widget_data = $data;
+
+  if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name'])) {
+    return 1;
+  } else {
+    return 0;  
+  }
+    
+  
+}
+
+
+/**
+ * Implements hook_manager_preprocess_page().
+ * {@inheritdoc}
+ */
+function itg_layout_getsectioncarddata_new_pre($sectinno,$section) {
+    
+  global $theme;
+
+ if($sectinno >= '25')
+ {
+     
+     $sectinno = $sectinno+1;
+ }
+
+  $arg = arg();
+  $widget_name1 = 'itg-block-' . ($sectinno);
+  $widget_name2 = 'itg-block-' . ($sectinno + 1);
+  $widget_name3 = 'itg-block-' . ($sectinno + 2);
+  $block_name = array($widget_name1, $widget_name2, $widget_name3);
+
+  $template_name = 'page--section_default';
+
+  $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
+
+  if($data=="" && $sectinno<80)
+  {
+  return itg_layout_getsectioncarddata_new_pre($sectinno + 3,$section); 
   }
 
   $widget_data = $data;
