@@ -232,6 +232,12 @@ function itg_videogallery_schema() {
               'length' => '250',
               'null' => TRUE,
           ),
+          'video_embedded_url' => array(
+              'description' => 'video_embedded_url',
+              'type' => 'varchar',
+              'length' => '250',
+              'null' => TRUE,
+          ),
           'is_delete' => array(
               'description' => 'Need to delete video',
               'type' => 'int',
