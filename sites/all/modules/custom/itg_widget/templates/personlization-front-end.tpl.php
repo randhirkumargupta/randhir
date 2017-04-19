@@ -64,7 +64,7 @@
               }
               else {
                 ?>
-                <img width="170" height="127" src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg" alt="" />
+                <img width="170" height="127" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg" alt="" />
               <?php } ?>
             </a>
           </div>

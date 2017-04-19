@@ -218,7 +218,7 @@ function itg_logged_in_user_visited_node() {
     // If we have items 
     if (count($user_details_pages) != 0) {
       // Get pagination.
-      $pageNumbers = '<div class="numbers">' . $pagination->links() . '</div>';
+      $pageNumbers = $pagination->links();
       $cou = 1;
       foreach ($user_details_pages as $row) {
         $rows[] = array(
@@ -239,7 +239,7 @@ function itg_logged_in_user_visited_node() {
         'attributes' => array('class' => array('views-table')) ,
         'empty' => t('No results found')));
       $output .= theme('pager');
-      $output .= '<ul class="pager">' . $pageNumbers . '</ul>';
+      $output .= '<ul class="custom-pagger">' . $pageNumbers . '</ul>';
       return $output;
     }
   }
@@ -288,6 +288,12 @@ function itg_array_sort($array , $on , $order = SORT_ASC) {
   return $new_array;
 }
 
+/**
+ * Function which is responsible to insert mongo data.
+ * 
+ * @global array $user
+ * @param array $node
+ */
 function itg_logged_in_user_node_insert_data($node) {
   global $user;
   $user_roles = $user->roles;
@@ -319,92 +325,96 @@ function itg_logged_in_user_node_insert_data($node) {
   }
 }
 
-function itg_logged_in_user_section_breakup() {
-  //print_r($node);
-  # configure the table header columns
-  $header = array(
-    array('data' => t('Title')) ,
-    array('data' => t('Current Week')) ,
-    array('data' => t('Last Week')) ,
-    array('data' => t('Percentage ')) ,
-  );
-  if (function_exists('mongodb')) {
-    $con = mongodb();
-    if ($con) {
-      $people = $con->pagedetails;
-      $query = array();
-      $limit = 0;
-      if (!empty($_GET['items_per_page'])) {
-        $limit = $_GET['items_per_page'];
-      }
-      if (!empty($_GET['title'])) {
-        $query['name'] = $_GET['title'];
-      }
-
-      $first_start_date = FALSE;
-      $first_end_date = FALSE;
-
-      if (isset($_GET['From']) && !empty($_GET['From'])) {
-        $first_start_date = $_GET['From'];
-      }
-      if (isset($_GET['To']) && !empty($_GET['To'])) {
-        $first_end_date = $_GET['To'];
-      }
-      if (isset($_GET['lwfrom']) && !empty($_GET['lwfrom'])) {
-        $first_start_date = $_GET['lwfrom'];
-      }
-      if (isset($_GET['lwto']) && !empty($_GET['lwto'])) {
-        $first_end_date = $_GET['lwto'];
-      }
-
-      $rows = array();
-
-      if (is_array($query) && empty($query)) {
-        $userData = $people->find()->limit($limit);
-      }
-      else {
-        $userData = $people->find($query)->limit($limit);
-      }
-
-      $rows_temp = array();
-      $count = array();
-
-      if ($userData && count($_GET) > 1) {
-        foreach ($userData as $row) {
-
-          if (!isset($count[$row['nid']])) {
-
-            $count[$row['nid']] = 0;
-          }
-          $rows_temp[$row['nid']] = array(
-            'nid' => $row['nid'] ,
-            'title' => $row['title'] ,
-            'url' => $row['url'] ,
-            'count' => ++$count[$row['nid']] ,
-          );
-        }
-      }
-      //p($rows_temp);
-      foreach ($rows_temp as $row) {
-        $rows[] = array(
-          array('data' => $row['title']) ,
-          array('data' => $row['count']) ,
-          array('data' => $row['count']) ,
-        );
-      }
-    }
-  }
-  //get the header in table
-  //$output = render(drupal_get_form('itg_user_log_api_form'));
-  //p($rows);
-  $output .= theme('table' , array(
-    'header' => $header , 'rows' => $rows ,
-    'attributes' => array('class' => array('views-table')) ,
-    'empty' => t('No results found')));
-  $output = render(drupal_get_form('itg_user_log_api_form_section_breakup'));
-  $output .= theme('table' , array('header' => $header , 'rows' => $rows , 'attributes' => array('class' => array('views-table')) , 'empty' => t('No results found')));
-
-  # add the pager
-  $output .= theme('pager');
-  return $output;
-}
+/**
+ * 
+ * @return type
+ */
+//function itg_logged_in_user_section_breakup() {
+//  //print_r($node);
+//  # configure the table header columns
+//  $header = array(
+//    array('data' => t('Title')) ,
+//    array('data' => t('Current Week')) ,
+//    array('data' => t('Last Week')) ,
+//    array('data' => t('Percentage ')) ,
+//  );
+//  if (function_exists('mongodb')) {
+//    $con = mongodb();
+//    if ($con) {
+//      $people = $con->pagedetails;
+//      $query = array();
+//      $limit = 0;
+//      if (!empty($_GET['items_per_page'])) {
+//        $limit = $_GET['items_per_page'];
+//      }
+//      if (!empty($_GET['title'])) {
+//        $query['name'] = $_GET['title'];
+//      }
+//
+//      $first_start_date = FALSE;
+//      $first_end_date = FALSE;
+//
+//      if (isset($_GET['From']) && !empty($_GET['From'])) {
+//        $first_start_date = $_GET['From'];
+//      }
+//      if (isset($_GET['To']) && !empty($_GET['To'])) {
+//        $first_end_date = $_GET['To'];
+//      }
+//      if (isset($_GET['lwfrom']) && !empty($_GET['lwfrom'])) {
+//        $first_start_date = $_GET['lwfrom'];
+//      }
+//      if (isset($_GET['lwto']) && !empty($_GET['lwto'])) {
+//        $first_end_date = $_GET['lwto'];
+//      }
+//
+//      $rows = array();
+//
+//      if (is_array($query) && empty($query)) {
+//        $userData = $people->find()->limit($limit);
+//      }
+//      else {
+//        $userData = $people->find($query)->limit($limit);
+//      }
+//
+//      $rows_temp = array();
+//      $count = array();
+//
+//      if ($userData && count($_GET) > 1) {
+//        foreach ($userData as $row) {
+//
+//          if (!isset($count[$row['nid']])) {
+//
+//            $count[$row['nid']] = 0;
+//          }
+//          $rows_temp[$row['nid']] = array(
+//            'nid' => $row['nid'] ,
+//            'title' => $row['title'] ,
+//            'url' => $row['url'] ,
+//            'count' => ++$count[$row['nid']] ,
+//          );
+//        }
+//      }
+//      //p($rows_temp);
+//      foreach ($rows_temp as $row) {
+//        $rows[] = array(
+//          array('data' => $row['title']) ,
+//          array('data' => $row['count']) ,
+//          array('data' => $row['count']) ,
+//        );
+//      }
+//    }
+//  }
+//  //get the header in table
+//  //$output = render(drupal_get_form('itg_user_log_api_form'));
+//  //p($rows);
+//  $output .= theme('table' , array(
+//    'header' => $header , 'rows' => $rows ,
+//    'attributes' => array('class' => array('views-table')) ,
+//    'empty' => t('No results found')));
+//  $output = render(drupal_get_form('itg_user_log_api_form_section_breakup'));
+//  $output .= theme('table' , array('header' => $header , 'rows' => $rows , 'attributes' => array('class' => array('views-table')) , 'empty' => t('No results found')));
+//
+//  # add the pager
+//  $output .= theme('pager');
+//  return $output;
+//}
