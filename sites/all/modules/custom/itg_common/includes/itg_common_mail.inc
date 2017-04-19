@@ -21,10 +21,13 @@
  */
 function itg_common_get_mail_content($data, $to, $key = NULL, $subject = NULL) {
   $mail_content = itg_common_notification_mail_content($data, $key);
+  $mail_subject = $mail_content->field_mail_subject_loyalty[LANGUAGE_NONE][0]['value'];
+  $body = str_replace("[itg_mail_token:itg_loyalty_user]", $data['name'], $mail_content->field_mail_body_loyalty[LANGUAGE_NONE][0]['value']);
+  $body1 = str_replace("[itg_mail_token:itg_loyalty_expiry]", date("Y-m-d", $data['expiry_date']), $body);
+  $body2 = str_replace("[itg_mail_token:itg_loyalty_points]", $data['remaining_point'], $body1);
   $params = array(
-    'body' => $mail_content,
-    //'subject' => 'India Today | Refer a friend',
-    'subject' => $subject,
+    'body' => $body2,
+    'subject' => $mail_subject,
   );
   //$mail = drupal_mail('itg_common', 'refer_a_friend', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
@@ -54,8 +57,12 @@ function itg_common_notification_mail_content($data , $key) {
     case 'refer_friend':
       return theme('itg_personalization_refer_friend_mail', array('data' => $data));
       break;
-    case 'lrp_point':      
-      return theme('itg_loyalty_point_notification', array('data' => $data));    
+    case 'lrp_point':   
+      if (function_exists('itg_mail_templates_get_mailcontent')) {
+        $mail_content_data = itg_mail_templates_get_mailcontent('lrp_point');
+        return $mail_content_data;
+      }
+//      return theme('itg_loyalty_point_notification', array('data' => $data));    
       break;
     case 'personalization_mail':
       return theme('itg_personalization_personalization_mail', array('data' => $data));

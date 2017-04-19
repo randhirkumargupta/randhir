@@ -94,38 +94,37 @@ function itg_icici_order_form($form , &$form_state , $args) {
  * {@inheritdoc}
  */
 function itg_icici_order_form_validate($form , &$form_state) {
-//  $session_value_array = drupal_json_decode($_SESSION['event_registration_payment']['event_key']);
-//  if ($session_value_array['redeemed_payment'] != $form_state['values']['TXN_AMOUNT']) {
-//    $error[] = t("Something wrong happen with order amount");
-//  }
-//
-//  if ($session_value_array['event_id'] != $form_state['values']['EVENT_ID']) {
-//    $error[] = t("Something wrong happen with event id");
-//  }
-//
-//  if ($session_value_array['total_payment'] != $form_state['values']['AMOUNT']) {
-//    $error[] = t("Something wrong happen with total amount");
-//  }
-//
-//  if ($session_value_array['reg_id'] != $form_state['values']['REGISTRATION_ID']) {
-//    $error[] = t("Something wrong happen with reg_id");
-//  }
-//
-//  if (!empty($form_state['values']['COUPON_ID']) && $session_value_array['coupon_code'] != $form_state['values']['COUPON_ID']) {
-//    $error[] = t("Something wrong happen with coupon code");
-//  }
-//
-//  if (!empty($error)) {
-//    foreach ($error as $messages) {
-//      drupal_set_message($messages , 'error');
-//    }
-//    drupal_goto($_SERVER['HTTP_REFERER']);
-//  }
+  $session_value_array = drupal_json_decode($_SESSION['event_registration_payment']['event_key']);
+  if ($session_value_array['redeemed_payment'] != $form_state['values']['TXN_AMOUNT']) {
+    $error[] = t("Something wrong happen with order amount");
+  }
+
+  if ($session_value_array['event_id'] != $form_state['values']['EVENT_ID']) {
+    $error[] = t("Something wrong happen with event id");
+  }
+
+  if ($session_value_array['total_payment'] != $form_state['values']['AMOUNT']) {
+    $error[] = t("Something wrong happen with total amount");
+  }
+
+  if ($session_value_array['reg_id'] != $form_state['values']['REGISTRATION_ID']) {
+    $error[] = t("Something wrong happen with reg_id");
+  }
+
+  if (!empty($form_state['values']['COUPON_ID']) && $session_value_array['coupon_code'] != $form_state['values']['COUPON_ID']) {
+    $error[] = t("Something wrong happen with coupon code");
+  }
+
+  if (!empty($error)) {
+    foreach ($error as $messages) {
+      drupal_set_message($messages , 'error');
+    }
+    drupal_goto($_SERVER['HTTP_REFERER']);
+  }
 }
 
-function getDateTime() {  // Here we are returning the current date time that will be further used to generate the salted hashed.
-  //global $dateTime;
-  // return $dateTime;
+function getDateTime() { // Here we are returning the current date time that will be further used to generate the salted hashed.
+  
   return $_SESSION['dateTime'];
 }
 
@@ -153,11 +152,11 @@ function itg_icici_order_form_submit($form , &$form_state , $args) {
   //module_load_include('php', 'itg_payment', 'lib/icici/ipg-util');
 
   
-//  $responseSuccessURL = "http://127.0.0.1/itgcms/itg-payment/icici-payment-success";
-//  $responseFailURL = "http://127.0.0.1/itgcms/itg-payment/response-fail";
+  //$responseSuccessURL = "http://127.0.0.1/itg-cms/itg-payment/icici-payment-success";
+  //$responseFailURL = "http://127.0.0.1/itg-cms/itg-payment/icici-payment-fail";
 
-   $responseSuccessURL = $base_url."/itg-payment/icici-payment-success";
-  $responseFailURL = $base_url."/itg-payment/response-fail";
+  $responseSuccessURL = $base_url."/itg-payment/icici-payment-success";
+  $responseFailURL = $base_url."/itg-payment/icici-payment-fail";
   
   $db_data = array();
 
@@ -177,13 +176,14 @@ function itg_icici_order_form_submit($form , &$form_state , $args) {
     $db_data["COUPON_AMOUNT"] = floatval($total_amount - $final_amount);
     $db_data["COUPON_DETAIL"] = itg_payment_get_coupon_details_json($form_state['values']['COUPON_ID']);
   }
-
+  
+  $db_data['ORDER_ID'] = $order_id;
   $db_data['CUST_ID'] = $user->uid;
   $db_data["USER_TYPE"] = ($user->uid) ? "authenticated" : "guest";
   $db_data["REGISTRATION_ID"] = $form_state['values']['REGISTRATION_ID'];
   $db_data["PAYMENT_GATEWAY"] = 'icici';
   $db_data["PAYMENT_GATEWAY_STATUS"] = PAYTM_TRANSACTION_PENDING_STATUS;
-  $db_data["TRANSACTION_ID"] = ICICI_TXNTYPE;
+ // $db_data["TRANSACTION_ID"] = ICICI_TXNTYPE;
   $db_data["ORDER_STATUS"] = PAYTM_ORDER_PAYMENT_PENDING_STATUS;
   $db_data["TRANSACTION_HISTORY"] = serialize(PAYTM_TRANSACTION_HISTORY);
   $db_data["PAYMENT_GATEWAY_HISTORY"] = serialize(PAYMENT_GATEWAY_HISTORY);
@@ -194,7 +194,7 @@ function itg_icici_order_form_submit($form , &$form_state , $args) {
 
   itg_payment_initial_info_update($db_data);
 
-  $CT = 1;
+  $CT = $final_amount;
 
   $hash = createHash($CT , "356" , '3344000184' , 'asdf1234');
 
@@ -211,6 +211,7 @@ function itg_icici_order_form_submit($form , &$form_state , $args) {
   $pay_data['responseSuccessURL'] = $responseSuccessURL;
   $pay_data['responseFailURL'] = $responseFailURL;
   $pay_data['hash_algorithm'] = 'SHA1';
+  $pay_data['order_id'] = $order_id;
 
   print theme('itg_icici_merchant_form' , array(
     'param_list' => $pay_data ,
@@ -222,9 +223,40 @@ function itg_icici_order_form_submit($form , &$form_state , $args) {
 }
 
 function itg_icici_payment_success_page() {
-  return t("Payment successfull");
+  
+  if (empty($_POST)) {
+    return t("'There was a problem with your payment'");
+  } else {  
+    $data['order_id'] = $_POST['order_id'];
+    $data['transaction_id'] = $_POST['endpointTransactionId'];
+    $data['transaction_status'] = 1;
+    
+    if ($_POST['status'] == 'APPROVED') {
+      $data['order_status'] = 1;
+      // Update order after response.
+      update_event_registration_after_success($_POST['order_id']);
+    }
+      
+    $data['transaction_history'] = serialize($_POST);
+    
+    itg_payment_response_info_update($data);
+    //watchdog("icici", '<pre>' . print_r($_POST, TRUE) . '</pre>');
+    return drupal_set_message("Your payment is complete");
+  }
 }
 
 function itg_icici_payment_fail_page() {
-  return t("Payment successfull");
+  if (empty($_POST)) {
+    return t("'There was a problem with your payment'");
+  } else {  
+    $data['order_id'] = $_POST['order_id'];
+    $data['transaction_id'] = $_POST['endpointTransactionId'];
+    $data['transaction_status'] = 0;
+    $data['order_status'] = 0;
+    $data['transaction_history'] = serialize($_POST);
+    
+    itg_payment_response_info_update($data);
+    watchdog("icici_fail", '<pre>' . print_r($_POST, TRUE) . '</pre>');
+    return drupal_set_message("Your payment failed");
+  }
 }

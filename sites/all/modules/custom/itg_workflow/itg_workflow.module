@@ -913,12 +913,11 @@ function itg_workflow_node_insert($node) {
       !array_key_exists(EDITOR, $user->roles) &&
       !array_key_exists(SITE_ADMIN, $user->roles) &&
       !($node->workbench_moderation_state_new == 'draft')) {
-
+      }*/
       //getting mail id's of high level users
       $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
       $user_email = get_email_by_roll($rid);
       workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
-      } */
     //   drupal_set_message("unser node insert");
     //unset session if exists during node insert.
     if (isset($_SESSION['node_preview_unique'])) {
@@ -999,9 +998,13 @@ function itg_workflow_node_update($node) {
             if ($node->type == 'story' && $node->workbench_moderation_state_new == 'published') {
               //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR, SEO);
               $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, SEO);
+              $user_email = get_email_by_roll($rid);
+              workflow_get_mail_content($node, 'update', $user_email, $node->name, $user->name);
             }
             else {
               $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR);
+              $user_email = get_email_by_roll($rid);
+              workflow_get_mail_content($node, 'update', $user_email, $node->name, $user->name);
               //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
             }
 
@@ -1042,17 +1045,27 @@ function itg_workflow_stop_email_during_bulk_operation($request) {
  * @return 
  */
 function workflow_get_mail_content($node, $event, $to, $user_name, $current_user_name) {
-
   global $base_url;
 
   $content_type = $node->type;
   $review = $node->workbench_moderation_state_new;
-  if ($event == 'create') {
-    $task_subject = 'A new ' . $content_type . ' has been submitted for your review, please find details below.';
-    $submitted_by = 'Submitted By: ' . $current_user_name;
-    $subject = ucfirst($content_type) . ' Submitted ' . $node->title;
+  $node_url = l($node->title, $base_url . '/node/' . $node->nid);
+  if ($event == 'create' && $review == 'published') {
+    if (function_exists('itg_mail_templates_get_mailcontent')) {
+      $mail_data = itg_mail_templates_get_mailcontent($content_type, 'create');
+      $subject = $mail_data->field_mail_subject_cms_mail[LANGUAGE_NONE][0]['value'];
+      $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_cms_mail[LANGUAGE_NONE][0]['value']);
+      $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
+      $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_url);
+      $mail_content = $mail_node_author;
+    }
+
+//    $task_subject = 'A new ' . $content_type . ' has been submitted for your review, please find details below.';
+//    $submitted_by = 'Submitted By: ' . $current_user_name;
+//    $subject = ucfirst($content_type) . ' Submitted ' . $node->title;
   }
   elseif ($event == 'update') {
+    
     if ($review == 'needs_review') {
       $task_subject = 'A new ' . $content_type . ' has been updated and submitted for your review, please find details below.';
     }
@@ -1063,33 +1076,37 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
       $task_subject = 'Your ' . $content_type . ' has been required some modification, please find details below.';
     }
     else if ($review == 'published') {
-      $task_subject = 'Your ' . $content_type . ' has been published, please find details below.';
+      if (function_exists('itg_mail_templates_get_mailcontent')) {
+        $mail_data = itg_mail_templates_get_mailcontent($content_type, 'update');
+        $subject = $mail_data->field_mail_subject_cms_mail[LANGUAGE_NONE][0]['value'];
+        $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_cms_mail[LANGUAGE_NONE][0]['value']);
+        $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
+        $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_url);
+        $mail_content = $mail_node_author;
+      }
+
+//      $task_subject = 'Your ' . $content_type . ' has been published, please find details below.';
     }
 
-    $submitted_by = 'Updated By: ' . $current_user_name;
-    $subject = ucfirst($content_type) . ' Updation ' . $node->title;
+//    $submitted_by = 'Updated By: ' . $current_user_name;
+//    $subject = ucfirst($content_type) . ' Updation ' . $node->title;
   }
 
-  $node_url = $base_url . '/node/' . $node->nid;
+//  $node_url = $base_url . '/node/' . $node->nid;
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
               <html xmlns:v="urn:schemas-microsoft-com:vml">
                 <head><title></title></head>
                 <body style="margin:0; padding:0;">';
-  $content .= 'Dear Team,';
-  $content .= '<br /><br />' . $task_subject;
-  $content .= '<br /><br />' . ucfirst($content_type) . ' Title: ' . $node->title;
-  $content .= '<br />URL: ' . $node_url;
-  $content .= '<br />' . $submitted_by;
-  $content .= '<br /><br /><br />Thanks,<br>ITG Team';
+  $content .= $mail_content;
+
+  $content .= '<br />Thanks,<br>ITG Team';
   $content .= '</body>';
   $content .= '</html>';
-
 
   $params = array(
       'body' => $content,
       'subject' => $subject,
   );
-
   $mail = drupal_mail('itg_workflow', 'send_mail_to_task', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
     return TRUE;
