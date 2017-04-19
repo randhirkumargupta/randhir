@@ -468,13 +468,13 @@ function itg_get_all_bylineinfo($reporter_unique_id) {
  * @param string $name
  */
 function itg_get_reporter_list($name) {
-  $term_array = taxonomy_get_term_by_name('reporter');
-  $term = reset($term_array); # get the first element of the array which is our term object
+  //$term_array = taxonomy_get_term_by_name('reporter');
+  //$term = reset($term_array); # get the first element of the array which is our term object
 
   $reporter_name = db_select('node', 'n');
   $reporter_name->join('field_data_field_celebrity_pro_occupation', 'rpn', 'n.nid = rpn.entity_id');
   $reporter_name->fields('n', array('title', 'nid'));
-  $reporter_name->condition('field_celebrity_pro_occupation_tid', $term->tid, '=');
+  //$reporter_name->condition('field_celebrity_pro_occupation_tid', $term->tid, '=');
   $reporter_name->condition('n.type', 'reporter', '=');
   $reporter_name->condition('n.title', '%' . $name . '%', 'LIKE');
   $result = $reporter_name->execute();
