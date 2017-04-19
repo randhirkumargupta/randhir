@@ -479,20 +479,11 @@ function itg_common_node_presave($node) {
       
         
   }
-  
    if (!empty($node->nid)) {
-    //$ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
-      // custom alias cnditions
     if (in_array($node->type, $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated'){
        itg_common_custompath_insert_load($node);
     }
   }
-  
-//  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
-////    p($node);
-//    itg_common_custompath_migrated_load($node);
-//  }
-
 
 }
 

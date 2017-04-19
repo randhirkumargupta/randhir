@@ -45,26 +45,29 @@ function itg_task_allocation_menu() {
  */
 function itg_task_allocation_expirestatus_enddatemail() {
   $current_time = date('Y-m-d H:i:s');
-  $query = db_select('node', 'n');
-  $query->leftjoin('field_data_field_task_finish_date_and_time', 'f', 'n.nid = f.entity_id');
-  $query->leftjoin('field_data_field_task_comment_change_status', 's', 'n.nid = s.entity_id');
-  $query->leftjoin('field_data_field_task_team_member', 'ttm', 'n.nid = ttm.entity_id');
-  $query->fields('n', array('nid'));
-  $query->condition('n.status', 1);
-  $query->fields('f', array('field_task_finish_date_and_time_value'));
-  $query->fields('s', array('field_task_comment_change_status_value'));
-  $query->join('users', 'u', 'u.uid = n.uid');
-  $query->join('users', 'ur', 'ur.uid = ttm.field_task_team_member_target_id');
-  $query->fields('u', array('mail'));
-  $query->fields('ur', array('mail'));
-  $query->condition('s.field_task_comment_change_status_value', 'open', '=');
-  $query->condition('f.field_task_finish_date_and_time_value', $current_time, '<=');
-  $result = $query->execute();
-  foreach ($result as $value) {    
+  
+  
+    $query = db_select('node', 'n');
+    $query->leftjoin('field_data_field_task_finish_date_and_time', 'f', 'n.nid = f.entity_id');
+    $query->leftjoin('field_data_field_task_comment_change_status', 's', 'n.nid = s.entity_id');
+    $query->leftjoin('field_data_field_task_team_member', 'ttm', 'n.nid = ttm.entity_id');
+    $query->join('users', 'u', 'u.uid = n.uid');
+    $query->join('users', 'ur', 'ur.uid = ttm.field_task_team_member_target_id');
+    $query->fields('n', array('nid'));
+    $query->condition('n.status', 1, '=');
+    $query->condition('n.type', 'task_idea_allocation_tracking', '=');
+    $query->fields('f', array('field_task_finish_date_and_time_value'));
+    $query->fields('s', array('field_task_comment_change_status_value'));
+    $query->fields('u', array('mail'));
+    $query->fields('ur', array('mail'));
+//    $query->condition('s.field_task_comment_change_status_value', 'open', '=');
+    $query->condition('f.field_task_finish_date_and_time_value', $current_time, '<=');
+    $result = $query->execute();
+  foreach ($result as $value) {   
     $node = node_load($value->nid);
     $node->field_task_comment_change_status['und'][0]['value'] = 'expired';
     field_attach_update('node', $node);
-    expiredtask_authormail_content($value);
+    expiredtask_authormail_content($value, 'task_expiry', 'task_idea_allocation_tracking');
   }
 }
 
@@ -220,7 +223,6 @@ function itg_task_allocation_form_custom_callback($form, &$form_state) {
  *  
  */
 function itg_task_allocation_comment_insert($comment) {
-  
   if ($comment->node_type == 'comment_node_task_idea_allocation_tracking') {
     $node = node_load($comment->nid);
     $uid_array = array($node->uid => $node->uid, $node->field_task_team_member[LANGUAGE_NONE][0]['target_id'] => $node->field_task_team_member[LANGUAGE_NONE][0]['target_id']);
@@ -327,48 +329,52 @@ function itg_task_allocation_node_update($node) {
  * @return 
  */
 function task_get_mail_content($node, $event, $to, $user_name) {
-
   global $base_url;
-
-  if ($event == 'create') {
-    $task_subject = t('New Task has been assigned, please find below detail.');
-  }
-  else if ($event == 'update') {
-    $task_subject = t('Your Task has been updated, please find below detail.');
-  }
-  else if ($event == 'comment') {
-    $task_subject = t('New Comment has been added, please find below detail.');
-  }
-
-  $node_url = l($node->title, 'node/'.$node->nid);
-  //watchdog('shr', $node_url);
+  $your_idea = $node->field_task_task_idea[LANGUAGE_NONE][0]['value'];
   $finish_date = date("d/m/Y H:i:s", strtotime($node->field_task_finish_date_and_time[LANGUAGE_NONE][0]['value']));
 
+  if ($event == 'create') {
+    if (function_exists('itg_mail_templates_get_mailcontent')) {
+      $mail_data = itg_mail_templates_get_mailcontent($node, 'create');
+      $task_subject = $mail_data->field_mail_subject_task_idea[LANGUAGE_NONE][0]['value'];
+    }
+  }
+  else if ($event == 'update') {
+    if (function_exists('itg_mail_templates_get_mailcontent')) {
+      $mail_data = itg_mail_templates_get_mailcontent($node, 'update');
+      $task_subject = $mail_data->field_mail_subject_task_idea[LANGUAGE_NONE][0]['value'];
+    }
+  }
+  else if ($event == 'comment') {
+    if (function_exists('itg_mail_templates_get_mailcontent')) {
+      $mail_data = itg_mail_templates_get_mailcontent($node, 'comment');
+      $task_subject = $mail_data->field_mail_subject_task_idea[LANGUAGE_NONE][0]['value'];
+    }
+  }
+  if ($event != 'comment') {
+    $body = str_replace('[itg_mail_token:itg_node_title]', l($node->title, 'node/'.$node->nid), $mail_data->field_mail_subject_body[LANGUAGE_NONE][0]['value']);
+    $assigned_by = str_replace('[itg_mail_token:itg_loggedin_user]', $user_name, $body);
+    $idea = str_replace('[itg_mail_token:itg_node_body]', $your_idea, $assigned_by);
+    $idea_last_date = str_replace('[itg_mail_token:itg_task_date_time]', $finish_date, $idea);
+    $mail_content = $idea_last_date;
+  } else {
+    $body = str_replace('[itg_mail_token:itg_node_title]', l($node->title, 'node/'.$node->nid), $mail_data->field_mail_subject_body[LANGUAGE_NONE][0]['value']);
+    $assigned_by = str_replace('[itg_mail_token:itg_task_comment]', $node->comment_value, $body);
+    $mail_content = $assigned_by;
+  }
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
               <html xmlns:v="urn:schemas-microsoft-com:vml">
                 <head><title></title></head>
                 <body style="margin:0; padding:0;">';
-  $content .= 'Hi,';
-  $content .= '<br /><br />   ' . $task_subject;
-  $content .= '<br />Task: ' . $node_url;
-  //$content .= '<br />URL: ' . $node_url;
-  if ($event != 'comment') {
-    $content .= '<br />Assigned By: ' . $user_name;
-    $content .= '<br />Task / idea: ' . $node->field_task_task_idea[LANGUAGE_NONE][0]['value'];
-    $content .= '<br />Finish Date and time: ' . $finish_date;
-  }
-  else {
-    $content .= '<br /><br />Comment: ' . $node->comment_value;
-  }
+  $content .= $mail_content;
   $content .= '<br /><br />Thanks,<br>ITG Team';
   $content .= '</body>';
   $content .= '</html>';
-
+  
   $params = array(
     'body' => $content,
-    'subject' => $node->title,
+    'subject' => $task_subject,
   );
-
   $mail = drupal_mail('itg_task_allocation', 'send_mail_to_task', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
     return TRUE;
@@ -563,36 +569,69 @@ function expiredmail_mail_content($to) {
  * @param type $to
  * @return 
  */
-function expiredtask_authormail_content($var) {
-  global $base_url;
-  $task_subject = t('A task has been expired that was created by you');
-  $subject = t('Task Expired');
-  $node_url = l('URL', 'node/'.$node->nid);
-  
-  $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-              <html xmlns:v="urn:schemas-microsoft-com:vml">
-                <head><title></title></head>
-                <body style="margin:0; padding:0;">';
-  $content .= 'Dear Team,';
-  $content .= '<br /><br />' . $task_subject;
-  $content .= '<br />' . $node_url;
-  $content .= '</body>';
-  $content .= '</html>';
-  $params = array(
-    'body' => $content,
-    'subject' => $subject,
-  );
-  
-  $to_user_mail = array($var->mail, $var->ur_mail);
-  
-  $mail = drupal_mail('itg_task_allocation', 'exp_task_rem', $to_user_mail, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
-  if ($mail['result']) {
-    return TRUE;
+function expiredtask_authormail_content($var, $expiry_task, $task_type) {
+  if (function_exists("itg_mail_templates_get_mailcontent")) {
+    $get_mail_data = itg_mail_templates_get_mailcontent($task_type, $expiry_task);
+    $subject = $get_mail_data->field_mail_subject_task_idea[LANGUAGE_NONE][0]['value'];
+    $to_assignee = str_replace('[itg_mail_token:itg_task_assignee]', $var->ur_mail, $get_mail_data->field_to_assignee[LANGUAGE_NONE][0]['value']);
+    $to_assigner = str_replace('[itg_mail_token:itg_task_assigner]', $var->mail, $get_mail_data->field_to_assigner[LANGUAGE_NONE][0]['value']);
   }
-  else {
-    $error_msg = 'Failed to send the email!';
-    watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
-    return FALSE;
+  
+  global $base_url;
+  if (!empty($var->ur_mail) || !empty($var->mail)) {
+    $node_url = l('URL', 'node/'.$var->nid);
+    $body = $get_mail_data->field_mail_subject_body[LANGUAGE_NONE][0]['value'];
+    $body_data = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $body);
+
+    $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+                <html xmlns:v="urn:schemas-microsoft-com:vml">
+                  <head><title></title></head>
+                  <body style="margin:0; padding:0;">';
+    $content .= $body_data;
+    $content .= '</body>';
+    $content .= '</html>';
+    $params = array(
+      'body' => $content,
+      'subject' => $subject,
+    );
+    $mail = drupal_mail('itg_task_allocation', 'exp_task_rem', $to_assignee, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    if ($mail['result']) {
+      return TRUE;
+    }
+    else {
+      $error_msg = 'Failed to send the email!';
+      watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+      return FALSE;
+    }
+    
+  }
+  
+  if (!empty($var->mail)) {
+    $node_url = l('URL', 'node/'.$var->nid);
+    $body = $get_mail_data->field_mail_body_task_idea_assign[LANGUAGE_NONE][0]['value'];
+    
+    $body_data = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $body);
+
+    $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+                <html xmlns:v="urn:schemas-microsoft-com:vml">
+                  <head><title></title></head>
+                  <body style="margin:0; padding:0;">';
+    $content .= $body_data;
+    $content .= '</body>';
+    $content .= '</html>';
+    $params = array(
+      'body' => $content,
+      'subject' => $subject,
+    );
+    $mail = drupal_mail('itg_task_allocation', 'exp_task_rem', $to_assigner, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    if ($mail['result']) {
+      return TRUE;
+    }
+    else {
+      $error_msg = 'Failed to send the email!';
+      watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+      return FALSE;
+    }
   }
 }
 

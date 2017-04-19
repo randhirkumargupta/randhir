@@ -341,7 +341,6 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   }
 
   if ($form_id == 'ugc_node_form') {
-    //pr($form);
     $form['field_user_name'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('Name'));
     $form['field_user_email'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('Email'));
     $form['field_user_city'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('City'));
@@ -509,7 +508,6 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
  * {@inheritdoc}
  */
 function ugc_form_submit_handler($form, &$form_state) {
-  //p($form['field_ugc_personalization_photo']);
   global $user;
   $arg = arg();
   $unique_id = time();
@@ -790,7 +788,6 @@ function itg_ugc_node_status_update($nid, $title) {
 
   if (!empty($title))
   {
-
     $newdata = array('$set' => array('publish_status' => 1, 'updated_by' => trim($rejected_by)));
     $people->update(array("unid" => (int)$nid), $newdata);
     module_load_include('inc', 'itg_ugc', 'include/itg_ugc_mail');

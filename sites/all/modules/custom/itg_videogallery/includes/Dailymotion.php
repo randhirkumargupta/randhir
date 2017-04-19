@@ -495,7 +495,7 @@ class Dailymotion
         }
         
         $session = $this->getSession();
-       pr($session);
+      
        //p(file_get_contents('https://www.dailymotion.com/cdn/H264-1920x1080/video/x5e49py.mp4?auth='.$session['access_token'].'')) ;
 
         // Check if session is present and if it was created for the same grant type

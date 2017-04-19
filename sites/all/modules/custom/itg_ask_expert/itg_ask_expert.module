@@ -216,17 +216,29 @@ function itg_ask_expert_node_insert($node) {
 
         // get term id to fetch all role related to term id
         $term_id = $node->field_user_source_term_id[LANGUAGE_NONE][0]['value'];
-
         module_load_include('inc', 'itg_ask_expert', 'include/itg_ask_expert_mail');
 
         $expert_arr = itg_expert_mail($term_id);
-
-        $mail_content = itg_ask_expert_get_mail_content($node);
+        if (function_exists('itg_mail_templates_get_mailcontent')) {
+          $name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
+          $uemail = $node->field_user_email[LANGUAGE_NONE][0]['value'];
+          $ucity = $node->field_user_city[LANGUAGE_NONE][0]['value'];
+          $ustate = $node->field_user_state[LANGUAGE_NONE][0]['value'];
+          $ask_expert_submit_query = itg_mail_templates_get_mailcontent($node);
+          $body_value = $ask_expert_submit_query->field_mail_body_expert[LANGUAGE_NONE][0]['value'];
+          $body_question = str_replace('[itg_mail_token:itg_expert_question]', $node->title, $body_value);
+          $body_name = str_replace('[itg_mail_token:itg_expert_name]', $name, $body_question);
+          $body_email = str_replace('[itg_mail_token:itg_expert_email]', $uemail, $body_name);
+          $body_city = str_replace('[itg_mail_token:itg_expert_city]', $ucity, $body_email);
+          $body_state = str_replace('[itg_mail_token:itg_expert_state]', $ustate, $body_city);
+          $mail_content = $body_state;
+          $mail_subject = $ask_expert_submit_query->field_mail_subject_expert[LANGUAGE_NONE][0]['value'];
+        }
+//        $mail_content = itg_ask_expert_get_mail_content($node);
         $params = array(
             'body' => $mail_content,
-            'subject' => 'India Today | New Query Received!',
+            'subject' => $mail_subject,
         );
-
         $to = implode(',', $expert_arr);
 
         $mail = drupal_mail('itg_ask_expert', 'send_mail_to_expert', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
@@ -281,7 +293,6 @@ function itg_expert_mail($get_term_id) {
     foreach ($itg_expert_role_arr as $expert_mail_arr) {
         $itg_final_mail[] = $expert_mail_arr->mail;
     }
-
     return $itg_final_mail;
 }
 

@@ -59,9 +59,10 @@ function itg_registered_user_report($user_id) {
 function itg_registred_user_report_form($form , $form_state) {
   $report_data = "";
 
-
-  $monday = date('d-m-Y' , strtotime('monday this week'));
-  $sunday = date('d-m-Y' , strtotime('sunday this week'));
+  // current date
+  $sunday = date('d-m-Y');
+  //Prev 7 days.
+  $monday = date('d-m-Y' , strtotime('-7days' , strtotime($sunday)));
 
 
   if (isset($_GET['dispaly_report']) && $_GET['dispaly_report'] == 'true') {

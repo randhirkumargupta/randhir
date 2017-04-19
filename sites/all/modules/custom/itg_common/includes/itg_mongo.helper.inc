@@ -194,6 +194,36 @@ function itg_common_mongo_activity_user_count($uid, $collection, $event = NULL, 
 }
 
 /**
+ * Implements itg_common_mongo_activity_user_count_date_wise().
+ * @param int $uid
+ * @param string $collection
+ * @param string $event
+ * @param int $status
+ */
+function itg_common_mongo_activity_user_count_date_wise($uid, $collection, $event = NULL, $status = NULL) {
+  if (function_exists('mongodb') && !empty($uid)) {
+    if(!empty(variable_get('read_later_days_config'))) {
+      $expiry_days = '-'.variable_get('read_later_days_config').' days';
+    } else {
+      $expiry_days = '-30 days';
+    }
+    $start_date = strtotime(date('d-m-Y', strtotime($expiry_days)));
+    $con = mongodb();
+    $people = $con->$collection;
+    if(empty($event) && empty($status)) {
+    $cond = array('uid' => $uid, 'timestamp' => array('$gte' => $start_date));
+    } else {
+    $cond = array('uid' => $uid, 'activity' => $event, 'status' => $status, 'timestamp' => array('$gte' => $start_date));
+    }
+    $cursor = $people->count($cond);
+    return $cursor;
+  } else {
+    return 0;
+  }
+  
+}
+
+/**
  * Implements itg_mongo_delete_ugc_content().
  * @param string $id
  * @param string $collection
