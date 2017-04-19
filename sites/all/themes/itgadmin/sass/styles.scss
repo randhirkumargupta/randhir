@@ -11368,6 +11368,9 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       margin-top: 28px;
     }
     #piechart{max-width: 100%;}
+    .tab-content{
+      #report2{display: none;}
+    }
   }
   .node-supplement-form{
     @extend .image-repo-browse;
@@ -11536,6 +11539,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       }
     }
   }
+  
   .page-content-visits-by-user{
    .custom-pagger{
      display: inline-block;

@@ -12041,6 +12041,9 @@ span.file a {
 [id*="itg-registred-user-report-form"] #piechart {
   max-width: 100%;
 }
+[id*="itg-registred-user-report-form"] .tab-content #report2 {
+  display: none;
+}
 
 #idIssue {
   color: red;
