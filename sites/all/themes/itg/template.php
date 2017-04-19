@@ -118,6 +118,7 @@ function itg_preprocess_page(&$variables) {
   global $base_url;
   $base_root;
   $arg = arg();
+  //unset($variables['page']['content']);
   // add condition to hide header and footer for signup, forgot-password page
   if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
@@ -154,9 +155,18 @@ function itg_preprocess_page(&$variables) {
   if (!empty($variables['node']->type) && $variables['node']->type == 'event_backend' || $arg[0] == 'event') {
     $variables['theme_hook_suggestions'][] = 'page__event_domain';
   }
+  
   if($arg[0] == 'blog-listing') {
     drupal_add_css('#page-title  {display: none !important}' ,'inline');
   }
+  
+  if($arg[0] == 'blog') {
+    drupal_add_css('#page-title , .feed-icon  {display: none !important}' ,'inline');
+    unset($variables['page']['content']);
+    //pr($variables['theme_hook_suggestions']);
+    $variables['theme_hook_suggestions'][] = 'page__itg_blog_page';
+  }
+  
 }
 
 /**
