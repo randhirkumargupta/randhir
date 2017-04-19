@@ -572,6 +572,9 @@ function itg_event_registration_form_views_exposed_form_alter(&$form, &$form_sta
  */
 function itg_event_registration_node_presave($node) {
   if ($node->type == 'event_registration') {
+    if (!empty($node->total_value) && !empty($node->field_erf_payment_gateway[LANGUAGE_NONE][0]['value'])) {
+      $node->status = 0; 
+    }
     $node->title = itg_common_get_node_title(itg_event_registration_get_event_nid());
   }
 }

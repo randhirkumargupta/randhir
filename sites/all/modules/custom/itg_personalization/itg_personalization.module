@@ -298,6 +298,7 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
     if (!empty($form['field_ugc_ctype']['und']['#options'])) {
       $icone = "";
       $i = 0;
+      unset($form['field_ugc_ctype']['und']['#options']['recipe']);
       foreach ($form['field_ugc_ctype']['und']['#options'] as $key => $values) {
 
         if ($key == '_none') {
@@ -536,6 +537,13 @@ function _personalization_show_content() {
   $arg = arg();
   if (function_exists('mongodb'))
   {
+    if(!empty(variable_get('read_later_days_config'))) {
+      $expiry_days = '-'.variable_get('read_later_days_config').' days';
+    } else {
+      $expiry_days = '-30 days';
+    }
+    
+    $start_date = strtotime(date('d-m-Y', strtotime($expiry_days)));
     $url_arg = array('articles', 'videos', 'photogalleries');
     $con = mongodb();
     $people = $con->front_user_activity;
@@ -554,11 +562,11 @@ function _personalization_show_content() {
       {
         $ntype = 'photogallery';
       }
-      $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'ntype' => $ntype, 'activity' => 'read_later'))->sort(array('timestamp' => -1));
+      $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'ntype' => $ntype, 'activity' => 'read_later', 'timestamp' => array('$gte' => $start_date)))->sort(array('timestamp' => -1));
     }
     else
     {
-      $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'activity' => 'read_later'))->sort(array('timestamp' => -1));
+      $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'activity' => 'read_later', 'timestamp' => array('$gte' => $start_date)))->sort(array('timestamp' => -1));
     }
 
     $output = '';

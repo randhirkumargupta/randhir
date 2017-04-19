@@ -154,6 +154,15 @@
         });
     });
 
+// extra lagre
+
+jQuery('.alt_text').on('keyup',function() {
+  jQuery('.alt_text_image').val(jQuery(this).val());
+});
+jQuery('.image_title').on('keyup',function() {
+  jQuery('.image_title_exta').val(jQuery(this).val());
+});
+
     // Remove tags.
     jQuery('#taglist').on('click', '.remove', function() {
         id = jQuery(this).parent().attr("id");

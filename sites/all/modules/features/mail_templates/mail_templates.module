@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Mail Templates feature.
+ */
+
+include_once 'mail_templates.features.inc';

@@ -104,6 +104,7 @@ if($clicked_day == "")
                          <td><b><?php print 'Schedule Time'; ?></b></td>
                          <td><b><?php print 'Days'; ?></b></td>
                          <td><b><?php print 'Program Name'; ?></b></td>
+                         <td><b><?php print 'Program Date'; ?></b></td>
                        </tr>
                     <tbody>
                         <?php foreach ($search as $val1): ?>  
@@ -112,6 +113,7 @@ if($clicked_day == "")
                                 <td><?php print $val1['time'].' (IST)'; ?></td>
                                 <td><?php print $days_array[strtolower($val1['day'])]; ?></td>
                                 <td><?php print ucfirst($val1['program']); ?></td>
+                                <td><?php print ucfirst($val1['program date']); ?></td>
                             </tr>
 
                         <?php endforeach; ?>
