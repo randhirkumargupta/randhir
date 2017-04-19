@@ -10518,6 +10518,9 @@ div.node #comments h2 {
   padding: 0 10px;
 }
 
+[id*="daily-motion-video-dashboard"] {
+  position: relative;
+}
 [id*="daily-motion-video-dashboard"] fieldset {
   border: none;
 }
@@ -10534,11 +10537,39 @@ div.node #comments h2 {
   display: block;
   padding: 0 0 5px;
 }
+[id*="daily-motion-video-dashboard"] fieldset .form-item.form-item-channel {
+  width: 100px;
+}
+[id*="daily-motion-video-dashboard"] fieldset .form-item.form-item-video-id {
+  width: 140px;
+}
+[id*="daily-motion-video-dashboard"] fieldset .form-item.form-item-filtertype {
+  width: 220px;
+}
+[id*="daily-motion-video-dashboard"] fieldset .container-inline-date {
+  clear: none;
+  margin: 10px 0;
+  float: left;
+}
+[id*="daily-motion-video-dashboard"] fieldset .container-inline-date .date-padding .form-type-textfield {
+  max-width: 100px;
+  margin: 0;
+}
+[id*="daily-motion-video-dashboard"] fieldset .container-inline-date .date-padding .form-type-textfield > label {
+  display: none !important;
+}
+[id*="daily-motion-video-dashboard"] fieldset .container-inline-date .date-padding .form-type-textfield.form-item-from-time-date, [id*="daily-motion-video-dashboard"] fieldset .container-inline-date .date-padding .form-type-textfield.form-item-to-time {
+  margin-right: 10px;
+}
 [id*="daily-motion-video-dashboard"] fieldset #edit-display-button {
   margin-top: 33px;
 }
 [id*="daily-motion-video-dashboard"] #edit-reset {
   margin-top: 33px;
+  position: absolute;
+  left: 0;
+  top: 71px;
+  left: 316px;
 }
 
 [id*="podcast-node-form"] .form-managed-file .image-widget-data {

@@ -10001,6 +10001,7 @@ div.node{
 }
 [id*="daily-motion-video-dashboard"]{
   @extend .node-form;
+  position: relative;
   fieldset{
     @extend .fleft;
     border: none;
@@ -10016,6 +10017,28 @@ div.node{
         display: block;
         padding: 0 0 5px;
       }
+      &.form-item-channel{
+        width: 100px;
+      }
+      &.form-item-video-id{
+        width: 140px;
+      }
+      &.form-item-filtertype{
+        width: 220px;
+      }
+    }
+    .container-inline-date{
+      clear: none;
+      margin: 10px 0;
+      float: left;
+      .date-padding{
+        .form-type-textfield{
+          max-width: 100px;
+          margin: 0;
+          > label{display: none !important;}
+          &.form-item-from-time-date, &.form-item-to-time{margin-right: 10px;}
+        }
+      }
     }
     #edit-display-button{
       @extend .btn-small;
@@ -10025,6 +10048,10 @@ div.node{
   #edit-reset{
     @extend .btn-small;
     margin-top: 33px;
+    position: absolute;
+    left: 0;
+    top: 71px;
+    left: 316px;
   }
   table{
     @extend .views-table;
@@ -11563,4 +11590,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
         }
       }
     } 
+  }
+  [id*="daily-motion-video-dashboard"]{
+    
   }
