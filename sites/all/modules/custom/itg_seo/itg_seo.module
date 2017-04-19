@@ -6,6 +6,7 @@
  * {@inheritdoc}
  */
 module_load_include('inc', 'itg_seo', 'includes/itg_seo_rich_snippet');
+module_load_include('inc', 'itg_common', 'includes/itg_common');
 
 function itg_seo_menu() {
     $items['itg-access-denied'] = array(
@@ -166,14 +167,41 @@ function itg_meta_tags_alias_set($form, &$form_state) {
  */
 function itg_get_sef_url($sef_path, $nodeid) {
   if (isset($sef_path) && !empty($sef_path)) {
-    $path_alias_set = $sef_path;
-    $path_data = explode("/", $path_alias_set);
-    $set_hierarchy = array_reverse($path_data);
-    $seftitle = $set_hierarchy[0];
-    $sef_url = explode($nodeid, $seftitle);
-    $edited_sef_url = rtrim($sef_url[0], '-');
+    $node_object = node_load($nodeid);
+    // Handel edit case for issue baised story.
+    $is_issue_magazine = is_issue_baised_magazine($node_object);
+    $is_photo_story = is_photo_story($node_object);
+    if($is_issue_magazine) {
+      $path_alias_set = $sef_path;
+      $path_data = explode("/", $path_alias_set);
+      $edit_path_data = end($path_data);
+      $new_url_array = explode('-', $edit_path_data);
+      $array_size = count($new_url_array);
+      unset($new_url_array[0]);
+      unset($new_url_array[$array_size-4]);
+      unset($new_url_array[$array_size-3]);
+      unset($new_url_array[$array_size-2]);
+      unset($new_url_array[$array_size-1]);
+      $edited_sef_url = implode('-', $new_url_array);
+    }
+    elseif ($is_photo_story) {
+      $path_data = explode("/", $sef_path);
+      $edited_sef_url = rtrim($path_data[2]);
+    }
+    else {
+      $path_alias_set = $sef_path;
+      $path_data = explode("/", $path_alias_set);
+      $set_hierarchy = array_reverse($path_data);
+      $seftitle = $set_hierarchy[0];
+      $sef_url = explode($nodeid, $seftitle);
+      $edited_sef_url = rtrim($sef_url[0], '-');
+    }
     return $edited_sef_url;
   }
+}
+
+function itg_seo_mb_substr($str , $start , $end) {
+  return mb_substr($str , $start , $end - $start);
 }
 
 /**

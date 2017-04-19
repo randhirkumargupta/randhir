@@ -11,7 +11,7 @@ if (isset($_GET['sid']) && !empty($_GET['sid'])) {
     $output .= '<li value="' . $menu->filter_url . '"><a href="javascript:void(0)" class="NULL">' . $menu->name . '</a></li>';
   endforeach;
 }
-if (itg_videogallery_get_categoryparent($_GET['category']) == FALSE && isset($_GET['category']) && isset($_GET['sid'])) {
+if (itg_videogallery_get_categoryparent($_GET['category']) != TRUE && isset($_GET['category']) && isset($_GET['sid'])) {
   print '<ul class="video_landing_menu">' . $output . '</ul>';
 }elseif (itg_videogallery_get_categoryparent($_GET['category']) == TRUE && isset($_GET['category']) && isset($_GET['sid'])) {
   print '<ul class="video_landing_menu">' . $output . '</ul>';

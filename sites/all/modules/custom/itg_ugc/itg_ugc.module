@@ -201,6 +201,8 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     // prefill input value in videogallery form
     if ($form_id == 'videogallery_node_form' && !empty($url_nid)) {
       // get node values
+      drupal_add_css(".page-node-add-videogallery #field-video-upload-values tbody tr:first-child {display:block !important};
+      ", 'inline');
       $mongo_details = itg_ugc_content_details($url_nid);
       $ugc_user_name = $mongo_details['name'];
       $form['title']['#default_value'] = $mongo_details['title'];
