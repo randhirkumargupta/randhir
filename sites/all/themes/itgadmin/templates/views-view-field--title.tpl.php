@@ -21,16 +21,19 @@
  * regardless of any changes in the aliasing that might happen if
  * the view is modified.
  */
-?>
-
-<?php
 
 global $base_url;
 $arg = arg();
-if ( $field->view->name == 'autocomplete_for_event' || $field->view->name == 'autocomplete_event_photo' || $field->view->name == 'podcast_for_event' || $field->view->name == 'manage_survey' || $field->view->name == 'manage_quiz' ) {
+
+if ($field->view->name == 'speaker_option_for_event' 
+        || $field->view->name == 'autocomplete_for_event' 
+        || $field->view->name == 'autocomplete_event_photo' 
+        || $field->view->name == 'podcast_for_event' 
+        || $field->view->name == 'manage_survey' 
+        || $field->view->name == 'manage_quiz' ) {
   print $output;
-}
-elseif (
+  
+} elseif (
     (isset($arg[0]) && $arg[0] == 'itg-custom-widget-content') || isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['nid']['entity']->type == 'event_backend' || $row->_field_data['nid']['entity']->type == 'itg_funalytics'
     ) || $arg[0] == 'menu-manager'
  ) {
@@ -60,5 +63,3 @@ elseif ( isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['
 else {
   print l(strip_tags($output) , 'node/' . $row->nid);
 }
-?>
-
