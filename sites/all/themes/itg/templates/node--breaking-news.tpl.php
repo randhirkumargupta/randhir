@@ -32,7 +32,7 @@ if (!empty($content)):
         ?>
     <!--<h1><?php if($type == 'Breaking News') { ?><span><?php print ($type) ?></span>: <?php } print ($title) ?></h1>-->
     <?php print ($title) ?>
-    <p class="short-discription"> <?php print ($node->field_label['und']['0']['value'])?></p>
+    <p class="short-discription"> <?php print ($node->field_common_short_description[LANGUAGE_NONE][0]['value'])?></p>
     <div class="social-share">
         <ul>
             <li><a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li>

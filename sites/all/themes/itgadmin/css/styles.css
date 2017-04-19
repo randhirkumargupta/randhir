@@ -10518,6 +10518,9 @@ div.node #comments h2 {
   padding: 0 10px;
 }
 
+[id*="daily-motion-video-dashboard"] {
+  position: relative;
+}
 [id*="daily-motion-video-dashboard"] fieldset {
   border: none;
 }
@@ -10534,11 +10537,39 @@ div.node #comments h2 {
   display: block;
   padding: 0 0 5px;
 }
+[id*="daily-motion-video-dashboard"] fieldset .form-item.form-item-channel {
+  width: 100px;
+}
+[id*="daily-motion-video-dashboard"] fieldset .form-item.form-item-video-id {
+  width: 140px;
+}
+[id*="daily-motion-video-dashboard"] fieldset .form-item.form-item-filtertype {
+  width: 220px;
+}
+[id*="daily-motion-video-dashboard"] fieldset .container-inline-date {
+  clear: none;
+  margin: 10px 0;
+  float: left;
+}
+[id*="daily-motion-video-dashboard"] fieldset .container-inline-date .date-padding .form-type-textfield {
+  max-width: 100px;
+  margin: 0;
+}
+[id*="daily-motion-video-dashboard"] fieldset .container-inline-date .date-padding .form-type-textfield > label {
+  display: none !important;
+}
+[id*="daily-motion-video-dashboard"] fieldset .container-inline-date .date-padding .form-type-textfield.form-item-from-time-date, [id*="daily-motion-video-dashboard"] fieldset .container-inline-date .date-padding .form-type-textfield.form-item-to-time {
+  margin-right: 10px;
+}
 [id*="daily-motion-video-dashboard"] fieldset #edit-display-button {
   margin-top: 33px;
 }
 [id*="daily-motion-video-dashboard"] #edit-reset {
   margin-top: 33px;
+  position: absolute;
+  left: 0;
+  top: 71px;
+  left: 316px;
 }
 
 [id*="podcast-node-form"] .form-managed-file .image-widget-data {
@@ -11985,7 +12016,8 @@ span.file a {
 }
 [id*="itg-registred-user-report-form"] .form-type-textfield {
   float: left;
-  margin-right: 10px;
+  margin: 0 10px 0 0;
+  padding: 0;
 }
 [id*="itg-registred-user-report-form"] .form-type-textfield > label {
   width: auto;
@@ -12039,6 +12071,9 @@ span.file a {
 }
 [id*="itg-registred-user-report-form"] #piechart {
   max-width: 100%;
+}
+[id*="itg-registred-user-report-form"] .tab-content #report2 {
+  display: none;
 }
 
 #idIssue {
@@ -12180,4 +12215,50 @@ body.taxonomy-form-term-tags {
 /*For Edit Quiz*/
 .form-type-managed-file > label + div.file-widget.form-managed-file {
   height: 28px;
+}
+
+.report-chart-tabs {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  list-style: none;
+  margin-top: 30px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.report-chart-tabs li {
+  float: left;
+  margin-right: 5px;
+}
+.report-chart-tabs li a {
+  padding: 10px;
+  display: block;
+  background-color: #e5e5e5;
+  color: #323232;
+}
+.report-chart-tabs li.active a, .report-chart-tabs li:hover a {
+  background-color: #323232;
+  color: #fff;
+}
+
+.page-content-visits-by-user .custom-pagger {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+}
+.page-content-visits-by-user .custom-pagger a {
+  border: 1px solid #1fb5ad;
+  display: inline-block;
+  padding: 0 5px;
+  margin: 0 3px;
+  color: #1fb5ad;
+}
+.page-content-visits-by-user .custom-pagger a:hover, .page-content-visits-by-user .custom-pagger a.selected {
+  background-color: #1fb5ad;
+  color: #fff;
+}
+.page-content-visits-by-user .custom-pagger a.pagger-txt {
+  background-color: #fff !important;
+  color: #1fb5ad !important;
 }
