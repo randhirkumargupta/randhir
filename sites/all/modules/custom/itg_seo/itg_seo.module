@@ -74,6 +74,9 @@ function itg_seo_theme() {
 function itg_seo_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   
+  if ($form_id == 'event_registration_node_form') {
+    $form['#after_build'][] = 'event_registration_extra_element_hide';
+  }
   // Extra meta tags element hide from form
   if ($form_id == 'mega_review_critic_node_form' 
           || $form_id == 'story_node_form' 
@@ -313,4 +316,19 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
 
 function itg_seo_node_view($node, $view_mode, $langcode) {
   itg_seo_node_data($node);
+}
+
+/**
+ * Extra meta tags element hide from form
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function event_registration_extra_element_hide($form, &$form_state) {
+  
+   drupal_add_js('jQuery(document).ready(function() {              
+              jQuery(".vertical-tabs").hide();                
+            });', array('type' => 'inline', 'scope' => 'footer'));  
+
+  return $form;
 }
