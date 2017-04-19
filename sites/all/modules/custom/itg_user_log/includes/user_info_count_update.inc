@@ -164,6 +164,9 @@ function itg_logged_in_user_visited_node() {
 
       $content_visits = $connection->pagedetails;
       $condition = array();
+      
+      $condition['roles'] = 'Front User';
+      
       if (!empty($_GET['items_per_page'])) {
         $limit = $_GET['items_per_page'];
       }
@@ -287,6 +290,12 @@ function itg_array_sort($array , $on , $order = SORT_ASC) {
 
 function itg_logged_in_user_node_insert_data($node) {
   global $user;
+  $user_roles = $user->roles;
+  if(in_array('Front User', $user_roles)) {
+    $user_roles = 'Front User';
+  }else {
+    $user_roles = json_encode($user_roles);
+  }
   if (function_exists('mongodb')) {
     $con = mongodb();
     if ($con) {
@@ -302,6 +311,7 @@ function itg_logged_in_user_node_insert_data($node) {
         "section" => $section_tids[0]->tid ,
         "name" => ($user->name) ? $user->name : "" ,
         "type" => $node->type ,
+        "roles" => $user_roles ,
         "viewtime" => REQUEST_TIME
       );
       $people->insert($qry);

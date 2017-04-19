@@ -278,6 +278,13 @@ function itg_survey_node_presave($node) {
    * '0' for save as draft
    * '1' for publish and '2' for unpublish
    */
+  /*if ($node->type == 'survey') {
+    if ($node->status == 1) {
+      $node->field_supp_publish[LANGUAGE_NONE][0]['value'] = 1;
+    }
+    
+  }*/
+  
   if ($node->type == 'survey' && isset($node->field_supp_publish)) {
     switch ($node->field_supp_publish[LANGUAGE_NONE][0]['value']) {
       case '0':
