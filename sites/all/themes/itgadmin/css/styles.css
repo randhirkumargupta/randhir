@@ -9161,6 +9161,11 @@ div.node #comments h2 {
   vertical-align: top;
   width: 48%;
 }
+.node-story-form .itg-sidebar-form .form-field-name-field-story-tv-time .form-field-name-field-story-tv-time,
+.node-videogallery-form .itg-sidebar-form .form-field-name-field-story-tv-time .form-field-name-field-story-tv-time,
+.node-photogallery-form .itg-sidebar-form .form-field-name-field-story-tv-time .form-field-name-field-story-tv-time {
+  width: 100%;
+}
 .node-story-form .itg-sidebar-form .form-field-name-field-story-tv-time .form-type-select,
 .node-videogallery-form .itg-sidebar-form .form-field-name-field-story-tv-time .form-type-select,
 .node-photogallery-form .itg-sidebar-form .form-field-name-field-story-tv-time .form-type-select {
