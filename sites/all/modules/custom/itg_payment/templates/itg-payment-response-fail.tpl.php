@@ -1,4 +1,4 @@
-<h1><font color="red">Your Transaction finished with errors
+<!--<h1><font color="red">Your Transaction finished with errors
 </font></h1>
 <p><b>Here are the confirmation fields:</b></p>
 
@@ -7,20 +7,20 @@
 		     		
 		
 			
-				<!--<tr>
+				<tr>
 		           <td>response_code_3dsecure</td>
 		          <td><input id="response_code_3dsecure" name="response_code_3dsecure" class="x25" size="40"
 			           type="text" value="<?php echo $_POST['response_code_3dsecure']; ?>"/></td>
-	            </tr>-->
+	            </tr>
 			
-			              <!--   <tr>
+			                 <tr>
 							<td>endpointTransactionId</td>
 							<td>
 								<input id="endpointTransactionId" name="endpointTransactionId" class="x25" size="40" type="text" value="<?php echo $_POST['endpointTransactionId']; ?>">
 							</td>
 						</tr>
 			
-			-->
+			
 			
 			<tr>
 							<td>approval_code</td>
@@ -33,14 +33,14 @@
 			
 
 						
-					<!--
+					
 						<tr>
 							<td>terminal_id</td>
 							<td>
 								<input id="terminal_id" name="terminal_id" class="x25" size="40" type="text" value="<?php echo $_POST['terminal_id']; ?>">
 							</td>
 						</tr>
-					-->
+					
 						<tr>
 							<td>ipgTransactionId</td>
 							<td>
@@ -139,13 +139,13 @@
 								<input id="cardnumber" name="cardnumber" class="x25" size="40" type="text" value="<?php echo $_POST['cardnumber']; ?>">
 							</td>
 						</tr>
-					<!--
+					
 						<tr>
 							<td>processor_response_code</td>
 							<td>
 								<input id="processor_response_code" name="processor_response_code" class="x25" size="40" type="text" value="<?php echo $_POST['processor_response_code']; ?>">
 							</td>
-						</tr>-->
+						</tr>
 					</td>
 					
 					<tr>
@@ -186,14 +186,14 @@
 					
 						
 					
-				<!--	<tr>
+					<tr>
 		
 		
 		<td>responseFailureURL</td>
 		<td><input id="responseFailURL" name="responseFailURL" class="x25" size="40"
 			type="text" value="<?php echo $_POST['responseFailURL']; ?>"></td>
 	</tr>
-	-->
+	
 					
 					
 					
@@ -212,4 +212,4 @@
 						</tr>
 					
 			
-		</table>
+		</table>-->

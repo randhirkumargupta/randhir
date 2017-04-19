@@ -150,6 +150,8 @@ function itg_personalization_edit_profile_form() {
     foreach ($user_detail->field_subscribe_for_newsletter['und'] as $option) {
       $data[] = $option['value'];
     }
+  } else {
+    $data = array('India Today', 'Aaj Tak', 'Business Today');
   }
   $form['news_letter'] = array(
     '#title' => t('Subscribe Our Newsletters'),

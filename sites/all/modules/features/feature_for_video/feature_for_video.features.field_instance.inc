@@ -29,7 +29,7 @@ function feature_for_video_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_include_ads',
-    'label' => 'Include Ads',
+    'label' => 'Exclude Ads',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -729,7 +729,7 @@ function feature_for_video_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_primary_category',
     'label' => 'primary category',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -2766,6 +2766,7 @@ function feature_for_video_field_default_field_instances() {
   t('Content Publish date');
   t('Courtesy');
   t('Description');
+  t('Exclude Ads');
   t('Expiry Date');
   t('Extra large image');
   t('Extra large image 2');
@@ -2779,7 +2780,6 @@ function feature_for_video_field_default_field_instances() {
   t('Image Size (613x460)');
   t('Image Size (647 x 363)');
   t('Image Size (88 x 66)');
-  t('Include Ads');
   t('Kicker');
   t('Large image');
   t('Long Description');

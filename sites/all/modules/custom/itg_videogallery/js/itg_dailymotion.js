@@ -82,6 +82,7 @@
                 if (selected_check_boxes_index == 0) {
                     alert("Please select video file.");
                 } else {
+                  jQuery('#loader-data img').show().parent().addClass('loader_overlay');
                     jQuery.ajax({
                         url: base_url + '/solr-video-make-fid',
                         type: 'post',

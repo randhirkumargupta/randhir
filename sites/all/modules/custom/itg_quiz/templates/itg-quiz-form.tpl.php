@@ -36,7 +36,10 @@ $config_name = $comment_value[0]->config_name;
     <div class="profile-pic">
        <?php
        if (!empty($byline_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
-         print file_create_url($byline_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+         $byline_uri = file_create_url($byline_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+       ?>
+        <img src="<?php echo $byline_uri; ?>" alt="" title=""/>
+        <?php
        }
        else {
          $file = 'default_images/user-default.png';

@@ -57,6 +57,46 @@
                 });
 
             });
+             jQuery('.add-more-block-front-section').live('click', function () {
+                var section_ids = "";
+                var elementobj = jQuery(this);
+                jQuery(this).parent('.load-more-wrapper-front').addClass('new-load').html('<img src="./sites/all/themes/itg/images/tab-loading.gif" alt="" />')
+                //jQuery(this).remove();
+                jQuery('.sectioncart').each(function () {
+                    section_ids = jQuery(this).attr('id');
+                });
+                  var getsectionid = jQuery(this).attr('section_id');
+                jQuery.ajax({
+                    url: Drupal.settings.basePath + 'getsecttioncarddata',
+                    type: 'post',
+                    beforeSend: function () {
+                        // jQuery('#widget-ajex-loader').show();
+                    },
+                    data: {'section_ids': section_ids,getsectionid:getsectionid },
+                    success: function (data) {
+                        if (data == "")
+                        {
+                            jQuery('.no-more-card').show();
+                            jQuery('.new-load').hide();
+                        } else {
+                            jQuery('.new-load').hide();
+
+                            jQuery('#second-section-card').append(data);
+
+                        }
+                        elementobj.remove();
+                        //  alert(data);  
+
+                    },
+                    complete: function () {
+                    },
+                    error: function (xhr, desc, err) {
+                        console.log(xhr);
+                        console.log("Details: " + desc + "\nError:" + err);
+                    }
+                });
+
+            });
             jQuery('#question textarea.charcount').keyup(function () {
                 if (jQuery(this).val().length > 160) {
                     jQuery(this).val(jQuery(this).val().substring(0, 160));
