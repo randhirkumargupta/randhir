@@ -22,7 +22,7 @@
      </div>
 
 <div id="Shortdescriptions">
-    <?php print drupal_render($form['field_label']); ?>
+    <?php print drupal_render($form['field_common_short_description']); ?>
         </div>
 
 
