@@ -2218,6 +2218,321 @@ function mail_templates_conditional_fields_default_fields() {
   $items["node:mail_templates:7"] = array(
     'entity' => 'node',
     'bundle' => 'mail_templates',
+    'dependent' => 'field_mail_body_password_changed',
+    'dependee' => 'field_mail_template_category',
+    'options' => array(
+      'state' => 'visible',
+      'condition' => 'value',
+      'grouping' => 'AND',
+      'effect' => 'show',
+      'effect_options' => array(),
+      'element_view' => array(
+        1 => 1,
+        2 => 2,
+        5 => 0,
+        3 => 0,
+        4 => 0,
+      ),
+      'element_view_per_role' => 0,
+      'element_view_roles' => array(
+        1 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        2 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        3 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        4 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        7 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        9 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        5 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        20 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        6 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        21 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        19 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        10 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        13 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        11 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        16 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        17 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        14 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        12 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        15 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        18 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        23 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        22 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        24 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        25 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        26 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+      ),
+      'element_edit' => array(
+        1 => 1,
+        3 => 0,
+      ),
+      'element_edit_per_role' => 0,
+      'element_edit_roles' => array(
+        1 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        2 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        3 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        4 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        7 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        9 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        5 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        20 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        6 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        21 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        19 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        10 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        13 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        11 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        16 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        17 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        14 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        12 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        15 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        18 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        23 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        22 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        24 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        25 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        26 => array(
+          1 => 1,
+          3 => 0,
+        ),
+      ),
+      'selector' => '',
+      'values_set' => 1,
+      'value_form' => 1208773,
+      'value' => array(
+        0 => array(
+          'tid' => 1208773,
+        ),
+      ),
+      'values' => array(),
+    ),
+  );
+
+  $items["node:mail_templates:8"] = array(
+    'entity' => 'node',
+    'bundle' => 'mail_templates',
     'dependent' => 'field_mail_body_print_team',
     'dependee' => 'field_mail_template_category',
     'options' => array(
@@ -2530,7 +2845,7 @@ function mail_templates_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:mail_templates:8"] = array(
+  $items["node:mail_templates:9"] = array(
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_body_product_expirati',
@@ -2845,7 +3160,322 @@ function mail_templates_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:mail_templates:9"] = array(
+  $items["node:mail_templates:10"] = array(
+    'entity' => 'node',
+    'bundle' => 'mail_templates',
+    'dependent' => 'field_mail_body_sign_up',
+    'dependee' => 'field_mail_template_category',
+    'options' => array(
+      'state' => 'visible',
+      'condition' => 'value',
+      'grouping' => 'AND',
+      'effect' => 'show',
+      'effect_options' => array(),
+      'element_view' => array(
+        1 => 1,
+        2 => 2,
+        5 => 0,
+        3 => 0,
+        4 => 0,
+      ),
+      'element_view_per_role' => 0,
+      'element_view_roles' => array(
+        1 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        2 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        3 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        4 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        7 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        9 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        5 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        20 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        6 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        21 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        19 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        10 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        13 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        11 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        16 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        17 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        14 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        12 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        15 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        18 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        23 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        22 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        24 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        25 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        26 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+      ),
+      'element_edit' => array(
+        1 => 1,
+        3 => 0,
+      ),
+      'element_edit_per_role' => 0,
+      'element_edit_roles' => array(
+        1 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        2 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        3 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        4 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        7 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        9 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        5 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        20 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        6 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        21 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        19 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        10 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        13 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        11 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        16 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        17 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        14 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        12 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        15 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        18 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        23 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        22 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        24 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        25 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        26 => array(
+          1 => 1,
+          3 => 0,
+        ),
+      ),
+      'selector' => '',
+      'values_set' => 1,
+      'value_form' => 1208772,
+      'value' => array(
+        0 => array(
+          'tid' => 1208772,
+        ),
+      ),
+      'values' => array(),
+    ),
+  );
+
+  $items["node:mail_templates:11"] = array(
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_body_task_idea_assign',
@@ -3160,7 +3790,7 @@ function mail_templates_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:mail_templates:10"] = array(
+  $items["node:mail_templates:12"] = array(
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_body_ugc',
@@ -3475,7 +4105,7 @@ function mail_templates_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:mail_templates:11"] = array(
+  $items["node:mail_templates:13"] = array(
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_subject',
@@ -3790,7 +4420,7 @@ function mail_templates_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:mail_templates:12"] = array(
+  $items["node:mail_templates:14"] = array(
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_subject_body',
@@ -4105,7 +4735,7 @@ function mail_templates_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:mail_templates:13"] = array(
+  $items["node:mail_templates:15"] = array(
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_subject_cms_mail',
@@ -4420,7 +5050,7 @@ function mail_templates_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:mail_templates:14"] = array(
+  $items["node:mail_templates:16"] = array(
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_subject_expert',
@@ -4735,7 +5365,7 @@ function mail_templates_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:mail_templates:15"] = array(
+  $items["node:mail_templates:17"] = array(
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_subject_follwo_story',
@@ -5050,7 +5680,7 @@ function mail_templates_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:mail_templates:16"] = array(
+  $items["node:mail_templates:18"] = array(
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_subject_loyalty',
@@ -5365,7 +5995,322 @@ function mail_templates_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:mail_templates:17"] = array(
+  $items["node:mail_templates:19"] = array(
+    'entity' => 'node',
+    'bundle' => 'mail_templates',
+    'dependent' => 'field_mail_subject_password_chan',
+    'dependee' => 'field_mail_template_category',
+    'options' => array(
+      'state' => 'visible',
+      'condition' => 'value',
+      'grouping' => 'AND',
+      'effect' => 'show',
+      'effect_options' => array(),
+      'element_view' => array(
+        1 => 1,
+        2 => 2,
+        5 => 0,
+        3 => 0,
+        4 => 0,
+      ),
+      'element_view_per_role' => 0,
+      'element_view_roles' => array(
+        1 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        2 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        3 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        4 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        7 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        9 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        5 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        20 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        6 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        21 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        19 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        10 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        13 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        11 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        16 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        17 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        14 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        12 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        15 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        18 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        23 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        22 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        24 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        25 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        26 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+      ),
+      'element_edit' => array(
+        1 => 1,
+        3 => 0,
+      ),
+      'element_edit_per_role' => 0,
+      'element_edit_roles' => array(
+        1 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        2 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        3 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        4 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        7 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        9 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        5 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        20 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        6 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        21 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        19 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        10 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        13 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        11 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        16 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        17 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        14 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        12 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        15 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        18 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        23 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        22 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        24 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        25 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        26 => array(
+          1 => 1,
+          3 => 0,
+        ),
+      ),
+      'selector' => '',
+      'values_set' => 1,
+      'value_form' => 1208773,
+      'value' => array(
+        0 => array(
+          'tid' => 1208773,
+        ),
+      ),
+      'values' => array(),
+    ),
+  );
+
+  $items["node:mail_templates:20"] = array(
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_subject_print_t',
@@ -5680,7 +6625,7 @@ function mail_templates_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:mail_templates:18"] = array(
+  $items["node:mail_templates:21"] = array(
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_subject_product_expir',
@@ -5995,7 +6940,322 @@ function mail_templates_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:mail_templates:19"] = array(
+  $items["node:mail_templates:22"] = array(
+    'entity' => 'node',
+    'bundle' => 'mail_templates',
+    'dependent' => 'field_mail_subject_sign_up',
+    'dependee' => 'field_mail_template_category',
+    'options' => array(
+      'state' => 'visible',
+      'condition' => 'value',
+      'grouping' => 'AND',
+      'effect' => 'show',
+      'effect_options' => array(),
+      'element_view' => array(
+        1 => 1,
+        2 => 2,
+        5 => 0,
+        3 => 0,
+        4 => 0,
+      ),
+      'element_view_per_role' => 0,
+      'element_view_roles' => array(
+        1 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        2 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        3 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        4 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        7 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        9 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        5 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        20 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        6 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        21 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        19 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        10 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        13 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        11 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        16 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        17 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        14 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        12 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        15 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        18 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        23 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        22 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        24 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        25 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        26 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+      ),
+      'element_edit' => array(
+        1 => 1,
+        3 => 0,
+      ),
+      'element_edit_per_role' => 0,
+      'element_edit_roles' => array(
+        1 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        2 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        3 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        4 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        7 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        9 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        5 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        20 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        6 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        21 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        19 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        10 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        13 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        11 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        16 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        17 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        14 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        12 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        15 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        18 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        23 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        22 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        24 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        25 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        26 => array(
+          1 => 1,
+          3 => 0,
+        ),
+      ),
+      'selector' => '',
+      'values_set' => 1,
+      'value_form' => 1208772,
+      'value' => array(
+        0 => array(
+          'tid' => 1208772,
+        ),
+      ),
+      'values' => array(),
+    ),
+  );
+
+  $items["node:mail_templates:23"] = array(
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_subject_task_idea',
@@ -6310,7 +7570,7 @@ function mail_templates_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:mail_templates:20"] = array(
+  $items["node:mail_templates:24"] = array(
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_new_task_status',
@@ -6625,7 +7885,7 @@ function mail_templates_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:mail_templates:21"] = array(
+  $items["node:mail_templates:25"] = array(
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_product_expiration_status',
@@ -6940,7 +8200,7 @@ function mail_templates_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:mail_templates:22"] = array(
+  $items["node:mail_templates:26"] = array(
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_to_assignee',
@@ -7255,7 +8515,7 @@ function mail_templates_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:mail_templates:23"] = array(
+  $items["node:mail_templates:27"] = array(
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_to_assigner',
@@ -7570,7 +8830,7 @@ function mail_templates_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:mail_templates:24"] = array(
+  $items["node:mail_templates:28"] = array(
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_ugc_comments_status',
