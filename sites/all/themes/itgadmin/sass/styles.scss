@@ -11354,7 +11354,8 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     h2{margin-bottom: 30px;}
     .form-type-textfield{
       float: left;
-      margin-right: 10px;
+      margin: 0 10px 0 0;
+      padding: 0;
       > label{
         width: auto;
         display: block;
@@ -11512,4 +11513,50 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   /*For Edit Quiz*/
   .form-type-managed-file > label + div.file-widget.form-managed-file {
     height: 28px;
+  }
+  .report-chart-tabs{
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    list-style: none;
+    margin-top: 30px;
+    border-bottom: 1px solid #e5e5e5;
+    li {
+      float: left;
+      margin-right: 5px;
+      a {
+        padding: 10px;
+        display: block;
+        background-color: #e5e5e5;
+        color: #323232;
+      }
+      &.active a, &:hover a{
+        background-color: #323232;
+        color: #fff;
+      }
+    }
+  }
+  .page-content-visits-by-user{
+   .custom-pagger{
+     display: inline-block;
+     vertical-align: top;
+     width: 100%;
+     padding: 10px 0;
+     text-align: center;
+      a{
+        border: 1px solid #1fb5ad;
+        display: inline-block;
+        padding: 0 5px;
+        margin: 0 3px;
+        color: #1fb5ad;
+        &:hover, &.selected{
+          background-color: #1fb5ad;
+          color: #fff;
+        }
+        &.pagger-txt{
+          background-color: #fff !important;
+          color: #1fb5ad !important;
+        }
+      }
+    } 
   }
