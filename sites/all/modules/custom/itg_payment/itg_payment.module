@@ -141,6 +141,7 @@ function itg_payment_success_page() {
  * @param array $data
  */
 function itg_payment_initial_info_update($data) {
+  watchdog($data['PAYMENT_GATEWAY']."_insert", '<pre>' . print_r($data, TRUE) . '</pre>');
   try {
     db_insert('itg_payment_order_details')
         ->fields(array(
@@ -174,7 +175,7 @@ function itg_payment_initial_info_update($data) {
  * @param array $data
  */
 function itg_payment_response_info_update($data) {
-
+  
   try {
     db_merge('itg_payment_order_details')
         ->key(array("order_id" => $data['order_id']))

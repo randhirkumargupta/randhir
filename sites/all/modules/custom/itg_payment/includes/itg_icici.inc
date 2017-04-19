@@ -155,8 +155,8 @@ function itg_icici_order_form_submit($form , &$form_state , $args) {
   //$responseSuccessURL = "http://127.0.0.1/itg-cms/itg-payment/icici-payment-success";
   //$responseFailURL = "http://127.0.0.1/itg-cms/itg-payment/icici-payment-fail";
 
-  $responseSuccessURL = $base_url."/itg-payment/icici-payment-success";
-  $responseFailURL = $base_url."/itg-payment/icici-payment-fail";
+  //$responseSuccessURL = $base_url."/itg-payment/icici-payment-success";
+  //$responseFailURL = $base_url."/itg-payment/icici-payment-fail";
   
   $db_data = array();
 
@@ -246,11 +246,12 @@ function itg_icici_payment_success_page() {
 }
 
 function itg_icici_payment_fail_page() {
+  //p($_POST);
   if (empty($_POST)) {
     return t("'There was a problem with your payment'");
   } else {  
     $data['order_id'] = $_POST['order_id'];
-    $data['transaction_id'] = $_POST['endpointTransactionId'];
+    $data['transaction_id'] = $_POST['ipgTransactionId'];
     $data['transaction_status'] = 0;
     $data['order_status'] = 0;
     $data['transaction_history'] = serialize($_POST);
