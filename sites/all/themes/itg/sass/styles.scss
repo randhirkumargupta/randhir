@@ -8934,12 +8934,9 @@ section.sidebar{
         word-wrap: break-word;
         color:#383838;    
         height:100%;
-        &:hover{
+        &:hover, &.sponsored-active{
              background: #fff;
                 color: #b00202;
-        }
-        &.sponsored-active{
-            background: #ffc106;
         }
     }
     .vertical-menu-parent{  

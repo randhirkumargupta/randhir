@@ -10766,12 +10766,9 @@ section.sidebar .block-itg-ads {
   color: #383838;
   height: 100%;
 }
-#block-itg-menu-manager-vertical-menu a:hover {
+#block-itg-menu-manager-vertical-menu a:hover, #block-itg-menu-manager-vertical-menu a.sponsored-active {
   background: #fff;
   color: #b00202;
-}
-#block-itg-menu-manager-vertical-menu a.sponsored-active {
-  background: #ffc106;
 }
 #block-itg-menu-manager-vertical-menu .vertical-menu-parent {
   height: 375px;
