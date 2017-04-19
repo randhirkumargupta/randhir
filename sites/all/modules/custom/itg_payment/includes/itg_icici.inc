@@ -152,11 +152,11 @@ function itg_icici_order_form_submit($form , &$form_state , $args) {
   //module_load_include('php', 'itg_payment', 'lib/icici/ipg-util');
 
   
-  $responseSuccessURL = "http://127.0.0.1/itg-cms/itg-payment/icici-payment-success";
-  $responseFailURL = "http://127.0.0.1/itg-cms/itg-payment/icici-payment-fail";
+  //$responseSuccessURL = "http://127.0.0.1/itg-cms/itg-payment/icici-payment-success";
+  //$responseFailURL = "http://127.0.0.1/itg-cms/itg-payment/icici-payment-fail";
 
-  //$responseSuccessURL = $base_url."/itg-payment/icici-payment-success";
-  //$responseFailURL = $base_url."/itg-payment/icici-payment-fail";
+  $responseSuccessURL = $base_url."/itg-payment/icici-payment-success";
+  $responseFailURL = $base_url."/itg-payment/icici-payment-fail";
   
   $db_data = array();
 
