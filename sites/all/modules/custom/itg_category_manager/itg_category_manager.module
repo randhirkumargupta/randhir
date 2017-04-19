@@ -1224,7 +1224,7 @@ function itg_categor_form_edit_category_radio($form, &$form_state) {
   }
 
 
-  $content_types_lists = array("story", "photogallery", "videogallery");
+  $content_types_lists = array("story", "photogallery", "videogallery", "podcast", "blog");
 
   if (!in_array($type, $content_types_lists)) {
     drupal_add_js('jQuery(document).ready(function() {
