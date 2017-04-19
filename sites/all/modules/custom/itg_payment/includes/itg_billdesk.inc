@@ -21,12 +21,18 @@ function itg_billdesk_payment_success_page() {
   if (empty($_POST)) {
     return t("'There was a problem with your payment'");
   }
+   watchdog("BillDesk post", '<pre>' . print_r($_POST, TRUE) . '</pre>');
   if (isset($_POST['msg']) && $_POST['msg'] != '') {
     
     $values = explode('|' , $_POST['msg']);
+    
     $data['order_id'] = $values[1];
     $data['transaction_id'] = $values[1];
     $data['transaction_status'] = 1;
+    
+    watchdog("BillDesk update", '<pre>' . print_r($values, TRUE) . '</pre>');
+    watchdog("billdesk_checksum", '<pre>' . print_r($_SESSION['billdesk_checksum'], TRUE) . '</pre>');
+    
     if (end($values) == $_SESSION['billdesk_checksum']) {
       // Payment Failed transactions for BillDesk.
       if (($values['24'] == 'Canceled By User') || ($values[14] == '0399') || ($values[14] == 'NA') || ($values[14] == '0002') || ($values[14] == '0001')) {
@@ -59,7 +65,7 @@ function itg_billdesk_payment_success_page() {
       }
       $data['transaction_history'] = serialize($values);
     }
-    watchdog("BillDesk update", '<pre>' . print_r($data, TRUE) . '</pre>');
+    //watchdog("BillDesk update", '<pre>' . print_r($data, TRUE) . '</pre>');
     itg_payment_response_info_update($data);
     return drupal_set_message("Your payment is complete");
   }
