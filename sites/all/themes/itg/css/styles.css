@@ -13473,6 +13473,10 @@ span.close_btt {
   width: 100%;
 }
 
+.widget-help-text {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .modal-dialog {
     width: 960px;
