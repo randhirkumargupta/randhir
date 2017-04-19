@@ -17,7 +17,7 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
     case 'story_node_form':        // Story
     case 'photogallery_node_form': // Photo gallery
     case 'videogallery_node_form': // Video Gallery
-    case 'breaking_news_node_form': // Breaking News
+    //case 'breaking_news_node_form': // Breaking News
     case 'blog_node_form': // Blog
     case 'podcast_node_form': // Podcast
 
@@ -757,7 +757,7 @@ function create_section_category_in_mongo_mig() {
  * Implements create_section_category_in_mongo_mig_submit().
  */
 function create_section_category_in_mongo_mig_submit($form, &$form_state) {
-
+    
   $query = db_select('taxonomy_term_data', 'td');
   $query->leftJoin('taxonomy_term_hierarchy', 'th', 'th.tid = td.tid');
   $query->leftJoin('itg_category_manager', 'icm', 'icm.tid = td.tid');
