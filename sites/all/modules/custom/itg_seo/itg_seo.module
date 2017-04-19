@@ -170,6 +170,7 @@ function itg_get_sef_url($sef_path, $nodeid) {
     $node_object = node_load($nodeid);
     // Handel edit case for issue baised story.
     $is_issue_magazine = is_issue_baised_magazine($node_object);
+    $is_photo_story = is_photo_story($node_object);
     if($is_issue_magazine) {
       $path_alias_set = $sef_path;
       $path_data = explode("/", $path_alias_set);
@@ -182,6 +183,10 @@ function itg_get_sef_url($sef_path, $nodeid) {
       unset($new_url_array[$array_size-2]);
       unset($new_url_array[$array_size-1]);
       $edited_sef_url = implode('-', $new_url_array);
+    }
+    elseif ($is_photo_story) {
+      $path_data = explode("/", $sef_path);
+      $edited_sef_url = rtrim($path_data[2]);
     }
     else {
       $path_alias_set = $sef_path;
