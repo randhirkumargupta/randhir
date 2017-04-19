@@ -1,0 +1,4 @@
+name = ITG Mail Templates
+description = This module adds/updates the functionality for ITG Mail Templates
+package = custom
+core = 7.x
