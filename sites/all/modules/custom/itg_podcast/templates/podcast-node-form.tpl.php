@@ -28,7 +28,12 @@
     <?php print drupal_render($form['field_primary_cat_data']); ?>
 
 </div>
-
+ <div id="Briefcase" class="itg-sidebar-form-section">
+                <h2 class="story-title active"><?php print t('Section/Category'); ?></h2>
+                <div class="itg-form-section">
+                    <?php print drupal_render($form['category_holder']); ?>
+                </div>
+            </div>
 <h2 id="title-metatags" class="story-title"><?php print t('Remarks'); ?></h2>
 <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>

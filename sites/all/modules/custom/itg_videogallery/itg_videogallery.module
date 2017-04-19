@@ -2707,7 +2707,7 @@ jQuery('#edit-field-story-category-tid').trigger('change');
 jQuery(this).find('a').addClass('active');
 });", array('type' => 'inline', 'scope' => 'footer'));
     if (!empty($_GET['category'])) {
-      drupal_add_js("jQuery(document).ready(function(){
+     /* drupal_add_js("jQuery(document).ready(function(){
 jQuery('#edit-field-story-category-tid').val(" . $_GET['category'] . "); 
 jQuery('#edit-field-story-category-tid').trigger('change');
 jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li').each(function() {
@@ -2715,17 +2715,26 @@ if(jQuery(this).val() == " . $_GET['category'] . "){
 jQuery(this).find('a').addClass('active');
 }
 });
+});", array('type' => 'inline', 'scope' => 'footer'));*/
+           drupal_add_js("jQuery(document).ready(function(){
+jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li').each(function() {
+if(jQuery(this).val() == " . $_GET['category'] . "){
+jQuery(this).find('a').addClass('active');
+}
+});
 });", array('type' => 'inline', 'scope' => 'footer'));
     }
+    
 // Views render on video template
     if (itg_videogallery_get_categoryparent(@$_GET['category']) == TRUE && empty($_GET['sid'])) {
       $view_output = views_embed_view('video_list_of_category', 'block_3', $_GET['category']);
     }
-    elseif ((itg_videogallery_get_categoryparent(@$_GET['category']) == FALSE || itg_videogallery_get_categoryparent($_GET['category']) == TRUE) && isset($_GET['category']) && isset($_GET['sid'])) {
+    //elseif ((itg_videogallery_get_categoryparent(@$_GET['category']) == FALSE || itg_videogallery_get_categoryparent($_GET['category']) == TRUE) && isset($_GET['category']) && isset($_GET['sid'])) {
+    elseif (isset($_GET['category']) && isset($_GET['sid'])) {
       $view_output = views_embed_view('video_list_of_category', 'block');
     }
     elseif (empty($_GET['sid'])) {
-      if (isset($_GET['category']) && itg_videogallery_get_categoryparent($_GET['category']) == FALSE) {
+      if (isset($_GET['category']) && itg_videogallery_get_categoryparent($_GET['category']) != TRUE) {
         $view_output = views_embed_view('video_list_of_category', 'block_3', $_GET['category']);
       }
       elseif (empty($_GET['category'])) {
@@ -2983,6 +2992,13 @@ function itg_videogallery_views_query_alter(&$view, &$query) {
     }
     if (isset($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == 'photogallery') {
       $query->add_where(1, 'field_data_field_story_source_type.field_story_source_type_value', 'migrated', '!=');
+    }
+  }
+  
+   // video loading issue resolve
+  if ($view->name == "video_list_of_category" && $view->current_display == 'block') {
+    if (!empty($query->where[1]['conditions'][2]['value']) && isset($query->where[1]['conditions'][2])) {
+      unset($query->where[0]);
     }
   }
 }
