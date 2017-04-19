@@ -246,7 +246,7 @@ function itg_bestcolleges_block_view($delta = '') {
         $block['content'] = $data;
       }
 
-      break;  
+      break;
   }
   return $block;
 }
@@ -712,6 +712,9 @@ function itg_city_option($byear, $tid, $selected, $rstream) {
   drupal_load('module', 'taxonomy');
   $term = taxonomy_term_load($tid);
   $bstream = strtolower($term->name);
+  if($bstream == 'art') {
+    $bstream = 'Arts';
+  }
   $itg_query = db_select('bestcolleges_citywiseranking', 'bcr')->distinct();
   $itg_query->fields('bcr', array('city', 'stream'))
       ->condition('bcr.year', $byear, '=')
