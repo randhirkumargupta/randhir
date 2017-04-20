@@ -6,14 +6,6 @@
 function itg_akamai_settings() {
   $form = array();
 
-//  define('AKAMAI_BASE_URI', 'https://akab-m5dvvyeoipksje5b-khfwrc7yvl364fml.purge.akamaiapis.net/');
-//  define('AKAMAI_API_ENDPOINT', '/ccu/v3/delete/url/production');
-//  define('AKAMAI_CLIENT_TOKEN', 'akab-ry7625oyq5l3sw5l-v6ywajzmatezae6b');
-//  define('AKAMAI_CLIENT_SECRET', '+M3t+LXDncrTblwmHrJpoaeqv9N6Gz2JTsngv6oVB7s=');
-//  define('AKAMAI_ACCESS_TOKEN', 'akab-q4ksytw26xwt5d56-zwhjtxiwaxfqeasj');
-
-
-
   $form['itg_akamai_host_map'] = array(
     '#type' => 'fieldset',
     '#title' => 'Akamai Cache Host Map URL',
