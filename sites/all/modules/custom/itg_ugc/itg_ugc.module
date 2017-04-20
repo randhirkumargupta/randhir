@@ -100,12 +100,17 @@ function itg_ugc_send_follow_story_content_mail($node) {
       foreach ($get_user_id as $follow_user) {
 
         module_load_include('inc', 'itg_ugc', 'include/itg_follow_story_mail');
+        
+        if (function_exists('itg_mail_templates_get_mailcontent')) {
+          $mail_data = itg_mail_templates_get_mailcontent($node, 'Follow Story');
+          $mail_subject = $mail_data->field_mail_subject_follwo_story[LANGUAGE_NONE][0]['value'];
+        }
 
         $mail_content = itg_follow_story_get_mail_content($node);
 
         $params = array(
           'body' => $mail_content,
-          'subject' => 'India Today | Story updated',
+          'subject' => $mail_subject,
         );
 
         $to = itg_get_user_email_by_id($follow_user);
@@ -943,7 +948,7 @@ function itg_ugc_views_pre_render(&$view) {
  * Implements itg_ugc_thank_you
  */
 function itg_ugc_thank_you() {
- print '<div class="ugc-success"><h2>Thank you !</h2><p>UGC content has been submitted successfully for further review and approval.</p></div>';
+ print '<div class="ugc-success" style="height:100%; background-color:#fff;"><h2>Thank you !</h2><p>UGC content has been submitted successfully for further review and approval.</p></div>';
 }
 
 /**
@@ -965,32 +970,32 @@ function itg_ugc_view_content($unique_id) {
         $people = $con->ugc_details;
         $userData = $people->find(array("_id" => $pid))->limit($limit);
         $output = '';
-        $output.= '<div id="ugc-content-view">';
+        $output.= '<div id="ugc-content-view"><ul>';
 
         foreach ($userData as $final_view) {
           $user_message = itg_ugc_bad_words($final_view['description']);
-          $output.= t('Content Type : ') . $final_view['content_type'] . '<br/>';
-          $output.= t('Name : ') . $final_view['name'] . '<br/>';
-          $output.= t('Email : ') . $final_view['email'] . '<br/>';
-          $output.= t('Description : ') . $user_message;
-          $output.= t('City : ') . $final_view['city'] . '<br/>';
+          $output.= '<li>'.t('<strong>Content Type :</strong> <span>') . $final_view['content_type'] . '</span></li>';
+          $output.= '<li>'.t('<strong>Name :</strong> <span>') . $final_view['name'] . '</span></li>';
+          $output.= '<li>'.t('<strong>Email :</strong><span>') . $final_view['email'] . '</span></li>';
+          $output.= '<li>'.t('<strong>Description :</strong> <span>') . $user_message .'</span></li>';
+          $output.= '<li>'.t('<strong>City :</strong> <span>') . $final_view['city'] . '</span></li>';
           if(!empty($final_view['image'])) {
           $file = file_load($final_view['image']);
-          $output.= 'Image : <img src="'.file_create_url($file->uri).'" alt="'.  file_create_url($file->uri).'"/><br/>';
+          $output.= '<li>'.'<strong>Image :</strong><span> <img src="'.file_create_url($file->uri).'" alt="'.  file_create_url($file->uri).'"/></span></li>';
           }
           if(!empty($final_view['video'])) {
           $file = file_load($final_view['video']);
-          $output.= 'Video : <a href="'.file_create_url($file->uri).'">'.file_create_url($file->uri).'</a><br/>';
+          $output.= '<li>'.'<strong>Video :</strong><span> <a target="_blank" href="'.file_create_url($file->uri).'">'.file_create_url($file->uri).'</a></span></li>';
           }
           if(!empty($final_view['audio'])) {
           $file = file_load($final_view['audio']);
-          $output.= 'Audio : <a href="'.file_create_url($file->uri).'">'.file_create_url($file->uri).'</a><br/>';
+          $output.= '<li>'.'<strong>Audio :</strong><span> <a target="_blank" href="'.file_create_url($file->uri).'">'.file_create_url($file->uri).'</a></span></li>';
           }
-          $output.= 'Post date : ' . $final_view['publish_date'] . '<br/>';
-          $output.= '<a href="'.$path.'">'.t('Back').'</a>';
+          $output.= '<li>'.'<strong>Post date :</strong><span> ' . $final_view['publish_date'] . '</span></li>';
+          //$output.= '<a href="'.$path.'">'.t('Back').'</a>';
         }
 
-        $output.= '</div>';
+        $output.= '</ul></div>';
 
         return $output;
       }

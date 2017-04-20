@@ -2257,6 +2257,9 @@ footer .multiple-items-footer i.slick-next {
   width: 100%;
   height: 40vh;
 }
+.story-section .description iframe {
+  min-height: 480px;
+}
 .story-section h1 {
   font-size: 24px;
   font-size: 1.5rem;
@@ -5961,6 +5964,47 @@ h1.category-heading {
   z-index: 9;
 }
 
+.view-programmes.view-display-id-page ul.pager {
+  margin: 10px 0;
+  list-style-type: none;
+  text-align: center;
+}
+.view-programmes.view-display-id-page ul.pager li {
+  display: inline-block;
+  vertical-align: top;
+}
+.view-programmes.view-display-id-page ul.pager li.pager-current {
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+  font-family: "Roboto", sans-serif;
+}
+.view-programmes.view-display-id-page ul.pager li.pager-item a {
+  display: block;
+  height: 25px;
+  width: 25px;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 25px;
+  color: #323232;
+  font-family: "Roboto", sans-serif;
+}
+.view-programmes.view-display-id-page ul.pager li.pager-item a:hover {
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+}
+.view-programmes.view-display-id-page ul.pager li.pager-next a, .view-programmes.view-display-id-page ul.pager li.pager-last a, .view-programmes.view-display-id-page ul.pager li.pager-first a, .view-programmes.view-display-id-page ul.pager li.pager-previous a {
+  color: #323232;
+  line-height: 25px;
+}
+.view-programmes.view-display-id-page ul.pager li.pager-next.pager-first.first, .view-programmes.view-display-id-page ul.pager li.pager-next.pager-last.last, .view-programmes.view-display-id-page ul.pager li.pager-last.pager-first.first, .view-programmes.view-display-id-page ul.pager li.pager-last.pager-last.last, .view-programmes.view-display-id-page ul.pager li.pager-first.pager-first.first, .view-programmes.view-display-id-page ul.pager li.pager-first.pager-last.last, .view-programmes.view-display-id-page ul.pager li.pager-previous.pager-first.first, .view-programmes.view-display-id-page ul.pager li.pager-previous.pager-last.last {
+  display: none;
+}
+
 /*css start archive-story */
 .view-archive-story .view-content .itg-search-list {
   overflow: hidden;
@@ -6984,6 +7028,11 @@ section.sidebar .block-itg-ads {
 }
 
 /*CSS End video setting Ifram*/
+.ugc-success {
+  height: 100%;
+  background-color: #fff;
+}
+
 /*CSS Start for recommended for you home page*/
 .recommended-for-you {
   background: #f3f3f3;
@@ -7050,6 +7099,7 @@ section.sidebar .block-itg-ads {
 .recommended-for-you #block-itg-widget-personlization ul.frist-ul li:first-child .pic, .recommended-for-you #block-itg-front-end-common-recommended-anonymous-user ul.frist-ul li:first-child .pic {
   float: none;
   margin: 0;
+  width: auto;
 }
 .recommended-for-you #block-itg-widget-personlization ul.frist-ul li:first-child .detail, .recommended-for-you #block-itg-front-end-common-recommended-anonymous-user ul.frist-ul li:first-child .detail {
   background: #fff;
@@ -8181,7 +8231,7 @@ section.sidebar .block-itg-ads {
   width: 190px;
   height: 54px;
   line-height: 54px;
-  padding-right: 15px;
+  padding-right: 10px;
 }
 #block-views-program-schedule-block-1 .program-sch-sponcor div:before {
   width: 0;
@@ -10689,22 +10739,23 @@ section.sidebar .block-itg-ads {
 }
 #block-itg-menu-manager-vertical-menu li {
   border-bottom: 1px solid #c4c4c4;
-  display: block;
-  min-width: 100%;
+  display: table;
+  width: 100%;
   height: 75px;
   overflow: hidden;
 }
 #block-itg-menu-manager-vertical-menu li a {
   vertical-align: middle;
   display: table-cell;
-  height: 75px;
+  height: 100%;
+  padding: 5px;
   text-align: center;
-  width: 58px;
+  width: 56px;
 }
 #block-itg-menu-manager-vertical-menu img {
   margin: 0 auto;
   display: block;
-  margin-bottom: 8px;
+  /*margin-bottom: 5px;*/
 }
 #block-itg-menu-manager-vertical-menu a {
   font-size: 12px;
@@ -10719,12 +10770,9 @@ section.sidebar .block-itg-ads {
   color: #383838;
   height: 100%;
 }
-#block-itg-menu-manager-vertical-menu a:hover {
+#block-itg-menu-manager-vertical-menu a:hover, #block-itg-menu-manager-vertical-menu a.sponsored-active {
   background: #fff;
   color: #b00202;
-}
-#block-itg-menu-manager-vertical-menu a.sponsored-active {
-  background: #ffc106;
 }
 #block-itg-menu-manager-vertical-menu .vertical-menu-parent {
   height: 375px;
@@ -10749,15 +10797,20 @@ section.sidebar .block-itg-ads {
 }
 #block-itg-menu-manager-vertical-menu .vertical-more {
   display: none;
+  height: 75px;
 }
 #block-itg-menu-manager-vertical-menu .vertical-more a {
   display: block;
-  padding: 5px;
+  padding: 15px 5px;
 }
 #block-itg-menu-manager-vertical-menu .vertical-more a i {
   display: block;
   color: #959595;
   font-size: 20px;
+  margin-bottom: 3px;
+}
+#block-itg-menu-manager-vertical-menu .vertical-more a:hover i {
+  color: #b00202;
 }
 
 /*email and change password start*/
@@ -13471,6 +13524,11 @@ span.close_btt {
   display: inline-block;
   vertical-align: top;
   width: 100%;
+}
+
+.ugc_success {
+  margin: 20px 0 0;
+  color: green;
 }
 
 .widget-help-text {

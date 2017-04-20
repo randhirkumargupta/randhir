@@ -1,0 +1,71 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the ITG Akamai module.
+ */
+
+/**
+ * Implementation of hook_schema
+ * @access public
+ * @return array
+ */
+function itg_akamai_schema() {
+  $schema = array();
+
+  $schema['itg_akamai_log'] = array(
+    'description' => 'Save the Akamai response.',
+    'fields' => array(
+      'aid' => array(
+        'description' => 'aid auto incremented',
+        'type' => 'serial',
+        'null' => TRUE,
+      ),
+      'timestamp' => array(
+        'description' => 'Upload time',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+      'status' => array(
+        'description' => 'Status',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'purge_id' => array(
+        'description' => 'Status',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'Uid',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'akamai_request' => array(
+        'description' => 'Akamai Request Data',
+        'type' => 'text',
+        'size' => 'big',
+        'null' => TRUE
+      ),
+      'akamai_response' => array(
+        'description' => 'Akamai Response Data',
+        'type' => 'text',
+        'size' => 'big',
+        'null' => TRUE
+      ),
+    ),
+    'primary key' => array('aid'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implemens hook_uninstall().
+ */
+function itg_akamai_uninstall() {
+  //variable_del('XXXXXXXXXX');
+  drupal_set_message(t('ITG Akamai module was successfully uninstalled.'));
+}

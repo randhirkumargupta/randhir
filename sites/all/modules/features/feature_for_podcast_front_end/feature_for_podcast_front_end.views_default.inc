@@ -124,7 +124,7 @@ function feature_for_podcast_front_end_views_default_views() {
   $handler->display->display_options['fields']['field_podcast_kicker_message']['alter']['strip_tags'] = TRUE;
   $handler->display->display_options['fields']['field_podcast_kicker_message']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['field_podcast_kicker_message']['element_label_colon'] = FALSE;
-  $handler->display->display_options['path'] = 'podcasts-listing';
+  $handler->display->display_options['path'] = 'podcast';
 
   /* Display: Other podcasts */
   $handler = $view->new_display('block', 'Other podcasts', 'block');

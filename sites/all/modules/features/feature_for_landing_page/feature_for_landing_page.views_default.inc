@@ -400,7 +400,7 @@ function feature_for_landing_page_views_default_views() {
     'category_management' => 'category_management',
   );
   $handler->display->display_options['filters']['machine_name']['group'] = 1;
-  $handler->display->display_options['path'] = 'itg-programmes';
+  $handler->display->display_options['path'] = 'programmes';
 
   /* Display: RHS Program Block */
   $handler = $view->new_display('block', 'RHS Program Block', 'rhs_programmes');
