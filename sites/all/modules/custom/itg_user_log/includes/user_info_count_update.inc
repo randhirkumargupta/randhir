@@ -151,12 +151,12 @@ function itg_logged_in_user_visited_node() {
   $output = render(drupal_get_form('itg_user_content_visit_report_form'));
 
   $header = array(
-    array('data' => t('S No')) ,
-    array('data' => t('N ID')) ,
+    array('data' => t('S. No')) ,
+    array('data' => t('Node Id')) ,
     array('data' => t('Title ')) ,
     array('data' => t('URL')) ,
     array('data' => t('Type')) ,
-    array('data' => t('No of Users Visited')) ,
+    array('data' => t('No Of Users Visited')) ,
   );
   if (function_exists('mongodb')) {
     $connection = mongodb();

@@ -271,32 +271,42 @@ function itg_reports_form_views_exposed_form_alter(&$form , &$form_state , $form
       $form['tid_raw']['#autocomplete_path'] = 'itg-reports-sections-tid/autocomplete';
       $form['tid_raw']['#attributes']['placeholder'] = 'Search By Term Id';
       $form['name']['#attributes']['placeholder'] = 'Search By Name';
+      
       $form['week1'] = array(
         '#type' => 'fieldset' ,
         "#title" => 'Week1' ,
-        "#weight" => -99 ,
+        "#weight" => -13,
+        '#prefix' => '<div>',
+        '#suffix' => '</div>',
       );
       $form['week1']['week1_date_from'] = array(
         '#type' => 'textfield' ,
         "#title" => 'Date from' ,
+        '#attributes' => array('placeholder' => 'Date From' ,'readonly' => 'readonly'),
       );
       $form['week1']['week1_date_to'] = array(
         '#type' => 'textfield' ,
         "#title" => 'Date to' ,
+        '#attributes' => array('placeholder' => 'Date To','readonly' => 'readonly'),
       );
       $form['week2'] = array(
         '#type' => 'fieldset' ,
         "#title" => 'Week2' ,
-        "#weight" => -98 ,
+        "#weight" => 4 ,
       );
       $form['week2']['week2_date_from'] = array(
         '#type' => 'textfield' ,
         "#title" => 'Date from' ,
+        '#attributes' => array('placeholder' => 'Date From','readonly' => 'readonly'),
       );
       $form['week2']['week2_date_to'] = array(
         '#type' => 'textfield' ,
         "#title" => 'Date to' ,
+        '#attributes' => array('placeholder' => 'Date To','readonly' => 'readonly'),
       );
+      $form['items_per_page']['#weight'] = 9;
+      $form['name']['#weight'] = 1;
+      $form['tid_raw']['#weight'] = 2;
       break;
   }
 }
