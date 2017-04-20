@@ -21,21 +21,26 @@ function mail_templates_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Ask an Expert',
-    'weight' => '7',
+    'weight' => '4',
     'children' => array(
       0 => 'field_ask_an_expert_case',
-      1 => 'field_mail_subject_expert',
-      2 => 'field_mail_body_expert',
+      1 => 'field_mail_body_expert',
+      2 => 'field_mail_subject_expert',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Ask an Expert',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-ask-an-expert field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'mail-template-category',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_ask_an_expert|node|mail_templates|form'] = $field_group;
@@ -51,22 +56,27 @@ function mail_templates_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'CMS mail template',
-    'weight' => '8',
+    'weight' => '5',
     'children' => array(
       0 => 'field_cms_mail_template_category',
-      1 => 'field_mail_subject_cms_mail',
+      1 => 'field_cms_status',
       2 => 'field_mail_body_cms_mail',
-      3 => 'field_cms_status',
+      3 => 'field_mail_subject_cms_mail',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'CMS mail template',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-cms-mail-template field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'mail-template-category',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_cms_mail_template|node|mail_templates|form'] = $field_group;
@@ -82,21 +92,25 @@ function mail_templates_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Follow Story',
-    'weight' => '6',
+    'weight' => '3',
     'children' => array(
-      0 => 'field_mail_subject_follwo_story',
-      1 => 'field_mail_body_follow_story',
+      0 => 'field_mail_body_follow_story',
+      1 => 'field_mail_subject_follwo_story',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Follow Story',
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
-        'classes' => 'group-follow-story field-group-fieldset',
+        'classes' => 'mail-template-category',
         'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
-      'formatter' => 'collapsible',
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_follow_story|node|mail_templates|form'] = $field_group;
@@ -112,20 +126,25 @@ function mail_templates_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Loyalty Points',
-    'weight' => '11',
+    'weight' => '8',
     'children' => array(
-      0 => 'field_mail_subject_loyalty',
-      1 => 'field_mail_body_loyalty',
+      0 => 'field_mail_body_loyalty',
+      1 => 'field_mail_subject_loyalty',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Loyalty Points',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-loyalty-points field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'mail-template-category',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_loyalty_points|node|mail_templates|form'] = $field_group;
@@ -141,20 +160,25 @@ function mail_templates_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Password Changed',
-    'weight' => '14',
+    'weight' => '11',
     'children' => array(
-      0 => 'field_mail_subject_password_chan',
-      1 => 'field_mail_body_password_changed',
+      0 => 'field_mail_body_password_changed',
+      1 => 'field_mail_subject_password_chan',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Password Changed',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-password-changed field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'mail-template-category',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_password_changed|node|mail_templates|form'] = $field_group;
@@ -170,20 +194,25 @@ function mail_templates_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Print Team',
-    'weight' => '12',
+    'weight' => '9',
     'children' => array(
-      0 => 'field_mail_subject_print_t',
-      1 => 'field_mail_body_print_team',
+      0 => 'field_mail_body_print_team',
+      1 => 'field_mail_subject_print_t',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Print Team',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-print-team field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'mail-template-category',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_print_team|node|mail_templates|form'] = $field_group;
@@ -199,21 +228,26 @@ function mail_templates_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Product Expiration',
-    'weight' => '10',
+    'weight' => '7',
     'children' => array(
-      0 => 'field_product_expiration_status',
+      0 => 'field_mail_body_product_expirati',
       1 => 'field_mail_subject_product_expir',
-      2 => 'field_mail_body_product_expirati',
+      2 => 'field_product_expiration_status',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Product Expiration',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-product-expiration field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'mail-template-category',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_product_expiration|node|mail_templates|form'] = $field_group;
@@ -229,20 +263,25 @@ function mail_templates_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Sign Up',
-    'weight' => '13',
+    'weight' => '10',
     'children' => array(
-      0 => 'field_mail_subject_sign_up',
-      1 => 'field_mail_body_sign_up',
+      0 => 'field_mail_body_sign_up',
+      1 => 'field_mail_subject_sign_up',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Sign Up',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-sign-up field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'mail-template-category',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_sign_up|node|mail_templates|form'] = $field_group;
@@ -258,24 +297,29 @@ function mail_templates_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Task/Idea',
-    'weight' => '9',
+    'weight' => '6',
     'children' => array(
-      0 => 'field_new_task_status',
-      1 => 'field_mail_subject_task_idea',
-      2 => 'field_mail_subject_body',
-      3 => 'field_to_assigner',
+      0 => 'field_mail_body_task_idea_assign',
+      1 => 'field_mail_subject_body',
+      2 => 'field_mail_subject_task_idea',
+      3 => 'field_new_task_status',
       4 => 'field_to_assignee',
-      5 => 'field_mail_body_task_idea_assign',
+      5 => 'field_to_assigner',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Task/Idea',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-task-idea field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'mail-template-category',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_task_idea|node|mail_templates|form'] = $field_group;
@@ -291,22 +335,26 @@ function mail_templates_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'UGC',
-    'weight' => '5',
+    'weight' => '2',
     'children' => array(
-      0 => 'field_mail_subject',
-      1 => 'field_ugc_comments_status',
-      2 => 'field_mail_body_ugc',
+      0 => 'field_mail_body_ugc',
+      1 => 'field_mail_subject',
+      2 => 'field_ugc_comments_status',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
       'label' => 'UGC',
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
-        'classes' => 'group-ugc field-group-fieldset',
+        'classes' => 'mail-template-category',
         'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
-      'formatter' => 'collapsible',
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_ugc|node|mail_templates|form'] = $field_group;
