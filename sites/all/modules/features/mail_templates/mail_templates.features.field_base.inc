@@ -30,7 +30,7 @@ function mail_templates_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         'when_user_submit_query' => 'When user submit query',
-        'please_check_screen_shot' => 'Please check screen shot',
+        'please_check_screen_shot' => 'When Review',
       ),
       'allowed_values_function' => '',
     ),
@@ -582,33 +582,40 @@ function mail_templates_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_mail_template_category'.
-  $field_bases['field_mail_template_category'] = array(
+  // Exported field_base: 'field_mail_templates_category'.
+  $field_bases['field_mail_templates_category'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_mail_template_category',
+    'field_name' => 'field_mail_templates_category',
     'field_permissions' => array(
       'type' => 0,
     ),
     'indexes' => array(
-      'tid' => array(
-        0 => 'tid',
+      'value' => array(
+        0 => 'value',
       ),
     ),
     'locked' => 0,
-    'module' => 'taxonomy',
+    'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        0 => array(
-          'vocabulary' => 'mail_template_category',
-          'parent' => 0,
-        ),
+        'ask_an_expert' => 'Ask an Expert',
+        'cms_mail_template' => 'CMS Mail Template',
+        'follow_story' => 'Follow Story',
+        'loyalty_points_expiration' => 'Loyalty Points Expiration',
+        'password_changed' => 'Password Changed',
+        'print_team' => 'Print Team',
+        'product_expiration' => 'Product Expiration',
+        'sign_up' => 'Sign up',
+        'task_idea' => 'Task/Idea',
+        'ugc' => 'UGC',
       ),
+      'allowed_values_function' => '',
     ),
     'translatable' => 0,
-    'type' => 'taxonomy_term_reference',
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_new_task_status'.
