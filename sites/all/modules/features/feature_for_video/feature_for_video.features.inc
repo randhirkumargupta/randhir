@@ -61,7 +61,7 @@ function feature_for_video_node_info() {
       'help' => '',
     ),
     'videogallery' => array(
-      'name' => t('Upload Video'),
+      'name' => t('Video'),
       'base' => 'node_content',
       'description' => t('This content type using for Video Gallery.'),
       'has_title' => '1',

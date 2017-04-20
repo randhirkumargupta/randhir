@@ -3672,7 +3672,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_new_title',
-    'label' => 'New title',
+    'label' => 'Addon Story Title',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -3915,7 +3915,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_redirection_url_titl',
-    'label' => 'Redirection URL',
+    'label' => 'Addon Story Title URL',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -5671,6 +5671,8 @@ function features_for_story_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Addon Story Title');
+  t('Addon Story Title URL');
   t('Animated Image');
   t('Animated Image Position');
   t('Are you sure you want to Archive?');
@@ -5739,7 +5741,6 @@ function features_for_story_field_default_field_instances() {
   t('Medium image');
   t('Mosimage');
   t('Movie Plot');
-  t('New title');
   t('Node Identity');
   t('Photo story');
   t('Please Provide Value like :  #060606');
@@ -5748,7 +5749,6 @@ function features_for_story_field_default_field_instances() {
   t('Quote image');
   t('Quote title');
   t('Quotes');
-  t('Redirection URL');
   t('Related Content');
   t('Related Content Detail');
   t('Right Emoji');
