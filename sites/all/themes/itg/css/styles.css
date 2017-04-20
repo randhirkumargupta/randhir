@@ -8228,7 +8228,7 @@ section.sidebar .block-itg-ads {
   width: 190px;
   height: 54px;
   line-height: 54px;
-  padding-right: 15px;
+  padding-right: 10px;
 }
 #block-views-program-schedule-block-1 .program-sch-sponcor div:before {
   width: 0;
@@ -10736,22 +10736,23 @@ section.sidebar .block-itg-ads {
 }
 #block-itg-menu-manager-vertical-menu li {
   border-bottom: 1px solid #c4c4c4;
-  display: block;
-  min-width: 100%;
+  display: table;
+  width: 100%;
   height: 75px;
   overflow: hidden;
 }
 #block-itg-menu-manager-vertical-menu li a {
   vertical-align: middle;
   display: table-cell;
-  height: 75px;
+  height: 100%;
+  padding: 5px;
   text-align: center;
-  width: 58px;
+  width: 56px;
 }
 #block-itg-menu-manager-vertical-menu img {
   margin: 0 auto;
   display: block;
-  margin-bottom: 8px;
+  /*margin-bottom: 5px;*/
 }
 #block-itg-menu-manager-vertical-menu a {
   font-size: 12px;
@@ -10793,15 +10794,20 @@ section.sidebar .block-itg-ads {
 }
 #block-itg-menu-manager-vertical-menu .vertical-more {
   display: none;
+  height: 75px;
 }
 #block-itg-menu-manager-vertical-menu .vertical-more a {
   display: block;
-  padding: 5px;
+  padding: 15px 5px;
 }
 #block-itg-menu-manager-vertical-menu .vertical-more a i {
   display: block;
   color: #959595;
   font-size: 20px;
+  margin-bottom: 3px;
+}
+#block-itg-menu-manager-vertical-menu .vertical-more a:hover i {
+  color: #b00202;
 }
 
 /*email and change password start*/
@@ -13515,6 +13521,11 @@ span.close_btt {
   display: inline-block;
   vertical-align: top;
   width: 100%;
+}
+
+.ugc_success {
+  margin: 20px 0 0;
+  color: green;
 }
 
 .widget-help-text {

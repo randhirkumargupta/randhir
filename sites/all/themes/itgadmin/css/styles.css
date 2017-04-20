@@ -12190,6 +12190,12 @@ body.taxonomy-form-term-tags {
   overflow-y: auto;
 }
 
+.view .view-filters [id*="views-exposed-form-section-wiser-breakup-report-page"] .views-exposed-form .views-widget-filter-name {
+  width: 280px;
+}
+.view .view-filters [id*="views-exposed-form-section-wiser-breakup-report-page"] .views-exposed-form .views-widget-per-page {
+  width: 100px;
+}
 .view .view-filters [id*="views-exposed-form-section-wiser-breakup-report-page"] .views-exposed-form .views-exposed-widget.views-submit-button {
   width: 560px;
 }
@@ -12266,4 +12272,32 @@ body.taxonomy-form-term-tags {
 .page-content-visits-by-user .custom-pagger a.pagger-txt {
   background-color: #fff !important;
   color: #1fb5ad !important;
+}
+
+[id*="itg-registered-vs-anonymous-user-form"] ul {
+  float: right;
+}
+
+.page-itg-registered-vs-anonymous-user-content-visited-report #ui-datepicker-div,
+.page-section-wise-breakup-report #ui-datepicker-div {
+  display: none;
+}
+
+#ugc-content-view ul {
+  list-style: none;
+}
+#ugc-content-view ul li {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  padding: 5px 0;
+}
+#ugc-content-view ul li strong {
+  float: left;
+  width: 200px;
+  padding-right: 20px;
+}
+#ugc-content-view ul li span {
+  display: block;
+  overflow: hidden;
 }
