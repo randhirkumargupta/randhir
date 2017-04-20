@@ -102,6 +102,11 @@ function itg_reports_menu() {
   return $items;
 }
 
+/**
+ * Function which gives auto-complete result form views expose form for taxonomy using Name.
+ * @param string $name
+ * @return json
+ */
 function itg_reports_sections_autocomplete($name) {
   $query = db_select('taxonomy_term_data' , 'td');
   $query->fields('td' , array('name' , 'tid'));
@@ -124,6 +129,11 @@ function itg_reports_sections_autocomplete($name) {
   return drupal_json_output($option);
 }
 
+/**
+ * Function which gives auto-complete result form views expose form for taxonomy using TID.
+ * @param string $name
+ * @return json
+ */
 function itg_reports_sections_autocomplete_for_tid($tid) {
   $query = db_select('taxonomy_term_data' , 'td');
   $query->fields('td' , array('name' , 'tid'));
@@ -261,32 +271,42 @@ function itg_reports_form_views_exposed_form_alter(&$form , &$form_state , $form
       $form['tid_raw']['#autocomplete_path'] = 'itg-reports-sections-tid/autocomplete';
       $form['tid_raw']['#attributes']['placeholder'] = 'Search By Term Id';
       $form['name']['#attributes']['placeholder'] = 'Search By Name';
+      
       $form['week1'] = array(
         '#type' => 'fieldset' ,
         "#title" => 'Week1' ,
-        "#weight" => -99 ,
+        "#weight" => -13,
+        '#prefix' => '<div>',
+        '#suffix' => '</div>',
       );
       $form['week1']['week1_date_from'] = array(
         '#type' => 'textfield' ,
         "#title" => 'Date from' ,
+        '#attributes' => array('placeholder' => 'Date From' ,'readonly' => 'readonly'),
       );
       $form['week1']['week1_date_to'] = array(
         '#type' => 'textfield' ,
         "#title" => 'Date to' ,
+        '#attributes' => array('placeholder' => 'Date To','readonly' => 'readonly'),
       );
       $form['week2'] = array(
         '#type' => 'fieldset' ,
         "#title" => 'Week2' ,
-        "#weight" => -98 ,
+        "#weight" => 4 ,
       );
       $form['week2']['week2_date_from'] = array(
         '#type' => 'textfield' ,
         "#title" => 'Date from' ,
+        '#attributes' => array('placeholder' => 'Date From','readonly' => 'readonly'),
       );
       $form['week2']['week2_date_to'] = array(
         '#type' => 'textfield' ,
         "#title" => 'Date to' ,
+        '#attributes' => array('placeholder' => 'Date To','readonly' => 'readonly'),
       );
+      $form['items_per_page']['#weight'] = 9;
+      $form['name']['#weight'] = 1;
+      $form['tid_raw']['#weight'] = 2;
       break;
   }
 }
@@ -430,47 +450,6 @@ function itg_report_get_graph_data() {
   return $chart_data;
 }
 
-/**
- * Ad missing year to the chart data.
- *
- * @param array $chart_data
- *   Array containing year wise data of celebrity career graph.
- *
- * @return array
- *   Sorted array with missing intervals.
- */
-//function itg_reports_missing_year(&$chart_data) {
-//  $data = array();
-//  array_multisort($chart_data);
-//  $temp = NULL;
-//  foreach ($chart_data as $value) {
-//    if (!empty($temp) && ($temp + 1) != $value[0]) {
-//      ++$temp;
-//      while ($temp < $value[0]) {
-//        $data[] = array(
-//          $temp++,
-//          NULL
-//        );
-//      }
-//    }
-//    $temp = $value[0];
-//  }
-//  $chart_data = array_merge($chart_data, $data);
-//  array_multisort($chart_data);
-//  $min_step = count($chart_data);
-//  $data = array();
-//  if ($min_step < 6) {
-//    while ($min_step <= 6) {
-//      $data[] = array(
-//        $temp++,
-//        NULL
-//      );
-//      ++$min_step;
-//    }
-//    $chart_data = array_merge($chart_data, $data);
-//    array_multisort($chart_data);
-//  }
-//}
 /**
  * Ad missing year to the chart data.
  *
@@ -766,18 +745,5 @@ function _get_percentage_growth($week1 , $week2) {
     catch (Exception $ex) {
       return $ex->getMessage();
     }
-  }
-}
-
-/**
- * {inheritdoc}
- */
-function itg_reports_taxonomy_term_view($term , $view_mode , $langcode) {
-  
-}
-
-function itg_reports_views_post_execute(&$view) {
-  if ($view->name == 'section_wiser_breakup_report' && $view->current_display == 'page') {
-    
   }
 }

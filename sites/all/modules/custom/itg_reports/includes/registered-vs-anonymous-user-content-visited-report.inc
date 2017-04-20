@@ -9,13 +9,15 @@ function itg_registered_vs_anonymous_user_form() {
 
   $form['date_from'] = array(
     '#type' => 'textfield' ,
-    '#title' => t('Date from') ,
+    '#title' => t('Date From') ,
+    '#attributes' => array("placeholder" => 'Enter Date From'),
     '#default_value' => (!empty($_GET['date_from'])) ? date('d-m-Y' , $_GET['date_from']) : "" ,
   );
 
   $form['date_to'] = array(
     '#type' => 'textfield' ,
-    '#title' => t('Date to') ,
+    '#title' => t('Date From') ,
+    '#attributes' => array("placeholder" => 'Enter Date To'),
     '#default_value' => (!empty($_GET['date_to'])) ? date('d-m-Y' , $_GET['date_to']) : "" ,
   );
 
@@ -68,9 +70,9 @@ function print_registered_vs_anonymous_chart() {
   }
   $chart = get_registered_vs_anonymous_user_node_visit_count($start_date , $end_date);
   $user_data = "<ul>"
-      . "<li>Total count : " . $chart['total_count'] . "</li>"
-      . "<li>Registred users count : " . $chart['registred'] . "</li>"
-      . "<li>Anonymous users count : " . $chart['anonymous'] . "</li>"
+      . "<li>Total Count : " . $chart['total_count'] . "</li>"
+      . "<li>Registred Users count : " . $chart['registred'] . "</li>"
+      . "<li>Anonymous Users count : " . $chart['anonymous'] . "</li>"
       . "</ul>";
   return $user_data . '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -86,7 +88,7 @@ function print_registered_vs_anonymous_chart() {
         ]);
 
         var options = {
-          title: \'Registered Vs Anonymous user content visited chart\'
+          title: \'Registered Vs Anonymous User Content Visited Chart\'
         };
 
         var chart = new google.visualization.PieChart(document.getElementById(\'piechart\'));

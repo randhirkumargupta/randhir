@@ -100,12 +100,17 @@ function itg_ugc_send_follow_story_content_mail($node) {
       foreach ($get_user_id as $follow_user) {
 
         module_load_include('inc', 'itg_ugc', 'include/itg_follow_story_mail');
+        
+        if (function_exists('itg_mail_templates_get_mailcontent')) {
+          $mail_data = itg_mail_templates_get_mailcontent($node, 'Follow Story');
+          $mail_subject = $mail_data->field_mail_subject_follwo_story[LANGUAGE_NONE][0]['value'];
+        }
 
         $mail_content = itg_follow_story_get_mail_content($node);
 
         $params = array(
           'body' => $mail_content,
-          'subject' => 'India Today | Story updated',
+          'subject' => $mail_subject,
         );
 
         $to = itg_get_user_email_by_id($follow_user);
@@ -201,6 +206,8 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     // prefill input value in videogallery form
     if ($form_id == 'videogallery_node_form' && !empty($url_nid)) {
       // get node values
+      drupal_add_css(".page-node-add-videogallery #field-video-upload-values tbody tr:first-child {display:block !important};
+      ", 'inline');
       $mongo_details = itg_ugc_content_details($url_nid);
       $ugc_user_name = $mongo_details['name'];
       $form['title']['#default_value'] = $mongo_details['title'];

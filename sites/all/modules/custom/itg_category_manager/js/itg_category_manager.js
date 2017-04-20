@@ -64,7 +64,7 @@
         {
           $('#edit-field-set-as-featured-cate-und-yes').prop('checked', false);
           $('#edit-field-set-as-featured-cate').hide();
-           $('#edit-field-cm-select-type-und').attr('disabled', true);
+          $('#edit-field-cm-select-type-und').attr('disabled', true);
           $('#edit-field-cm-select-type-und').removeAttr('required');
         } else {
           jQuery('#edit-field-set-as-featured-cate').show();
@@ -74,11 +74,11 @@
         }
       })
 
-       
-        var getthisvalue = $('select[name="parent[hierarchical_select][selects][0]"]').val();
 
-      if(getthisvalue !="" && getthisvalue != 'undefined') { 
-      $.ajax({
+      var getthisvalue = $('select[name="parent[hierarchical_select][selects][0]"]').val();
+
+      if (getthisvalue != "" && getthisvalue != 'undefined') {
+        $.ajax({
           url: Drupal.settings.basePath + 'getsection_content',
           type: 'post',
           data: {'getthisvalue': getthisvalue},
@@ -101,37 +101,48 @@
 
 
       $('select[name="parent[hierarchical_select][selects][0]"]').on('change', function() {
-       
+
         $("#edit-field-cm-select-type-und > option").each(function() {
 
           $(this).removeAttr("selected");
 
         });
         var getthisvalue = $(this).val();
-    
-        if(getthisvalue !="" && getthisvalue != 'undefined') { 
-        $.ajax({
-          url: Drupal.settings.basePath + 'getsection_content',
-          type: 'post',
-          data: {'getthisvalue': getthisvalue},
-          success: function(data) {
-            var myArr = $.parseJSON(data);
-            $("#edit-field-cm-select-type-und > option").each(function() {
-              var thisvalue = $(this).val();
-              var inarray_data = $.inArray(thisvalue, myArr);
-              if (inarray_data >= 0) {
-                $(this).attr("selected", "selected");
-              }
-            });
-          },
-          error: function(xhr, desc, err) {
-            console.log(xhr);
-            console.log("Details: " + desc + "\nError:" + err);
-          }
-        });
-      }
+
+        if (getthisvalue != "" && getthisvalue != 'undefined') {
+          $.ajax({
+            url: Drupal.settings.basePath + 'getsection_content',
+            type: 'post',
+            data: {'getthisvalue': getthisvalue},
+            success: function(data) {
+              var myArr = $.parseJSON(data);
+              $("#edit-field-cm-select-type-und > option").each(function() {
+                var thisvalue = $(this).val();
+                var inarray_data = $.inArray(thisvalue, myArr);
+                if (inarray_data >= 0) {
+                  $(this).attr("selected", "selected");
+                }
+              });
+            },
+            error: function(xhr, desc, err) {
+              console.log(xhr);
+              console.log("Details: " + desc + "\nError:" + err);
+            }
+          });
+        }
 
       })
+      var getdec = jQuery('.text-format-wrapper').html();
+      getdec = '<div class="text-format-wrapper" >' + getdec + '</div>';
+      var getsechedulehtml = jQuery('#edit-field-user-name').html();
+      getsechedulehtml = getdec + '<div class="field-type-text field-name-field-user-name field-widget-text-textfield form-wrapper" id="edit-field-user-name">' + getsechedulehtml + '</div>';
+      jQuery('#edit-field-user-name').remove();
+      jQuery('.text-format-wrapper').remove();
+      jQuery("#edit-field-user-city").after(getsechedulehtml);
+
+      // jQuery('.setting-div').prepend(getsechedulehtml);
+
+      //jQuery('.setting-div').prepend(getsechedulehtml);
       // Pager settings
       var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
       var d = new Date();

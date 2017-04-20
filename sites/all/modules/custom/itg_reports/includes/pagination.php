@@ -76,9 +76,9 @@ class pagination {
       // Assign the 'previous page' link into the array if we are not on the first page
       if ($this->page != 1) {
         if ($this->showFirstAndLast) {
-          $plinks[] = ' <a href="?page=1' . $queryURL . '">&laquo;&laquo; First </a> ';
+          $plinks[] = ' <a class="pagger-txt" href="?page=1' . $queryURL . '">&laquo;&laquo; First </a> ';
         }
-        $plinks[] = ' <a href="?page=' . ($this->page - 1) . $queryURL . '">&laquo; Prev</a> ';
+        $plinks[] = ' <a class="pagger-txt" href="?page=' . ($this->page - 1) . $queryURL . '">&laquo; Prev</a> ';
       }
 
       // Assign all the page numbers & links to the array
@@ -93,9 +93,9 @@ class pagination {
 
       // Assign the 'next page' if we are not on the last page
       if ($this->page < $this->pages) {
-        $slinks[] = ' <a href="?page=' . ($this->page + 1) . $queryURL . '"> Next &raquo; </a> ';
+        $slinks[] = ' <a class="pagger-txt" href="?page=' . ($this->page + 1) . $queryURL . '"> Next &raquo; </a> ';
         if ($this->showFirstAndLast) {
-          $slinks[] = ' <a href="?page=' . ($this->pages) . $queryURL . '"> Last &raquo;&raquo; </a> ';
+          $slinks[] = ' <a class="pagger-txt" href="?page=' . ($this->pages) . $queryURL . '"> Last &raquo;&raquo; </a> ';
         }
       }
 
