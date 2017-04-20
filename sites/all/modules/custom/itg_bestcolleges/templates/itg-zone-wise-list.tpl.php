@@ -1,5 +1,6 @@
 <div class="emergingCollege-section textwrap">
     <?php
+    if(is_array($data) && count($data) > 0) {
       foreach($data as $data_key => $data_val) {
     ?>
 <table style="border-collapse: collapse;" width="100%" align="CENTER" border="1" bordercolor="#c4c4c4" cellpadding="0" cellspacing="0">
@@ -13,7 +14,7 @@
             ?>
             <tr>
     <td data-title="Rank"><?php print $data_val_stream[0]; ?>.</td>
-    <td data-title="Name of the college"><?php print $data_val_stream[2]; ?></td>
+    <td data-title="Name of the college" class="bestcollege-data-value"><?php print $data_val_stream[2]; ?></td>
     <td data-title="Zone"><?php print $data_val_stream[1]; ?></td>
 </tr>
 
@@ -22,6 +23,10 @@
             ?>
         </table>
   <?php
+      }
+    } else {
+          print "<div class='bestcollege_empty_message'>".t("No record founds")."</div>";
+
       }
   ?>
 </div>

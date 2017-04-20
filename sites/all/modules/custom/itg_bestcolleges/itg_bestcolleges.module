@@ -1548,6 +1548,9 @@ function bestCollegesrank($arg) {
   $str_parameterwise_rank = "";
   $str_yearwise_rank = "";
 
+  if($name = 'Art') {
+    $name = 'Arts';
+  }
   // query for previous_rank
   $query = db_select('bestcolleges_ranking', 'bcr');
   $query->fields('bcr', array('year', 'rank'));
