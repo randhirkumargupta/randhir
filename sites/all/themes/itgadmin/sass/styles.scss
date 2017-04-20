@@ -5799,6 +5799,7 @@ div.node{
 }
 .node-podcast-form{
   #audioupload{
+    padding-bottom: 15px;
     .form-type-plupload{
       margin-top: 80px;
     }
@@ -9225,7 +9226,7 @@ div.node{
   .form-field-name-field-common-audio, 
   .form-field-name-field-common-audio-file{@extend .hide;}
 }
-.node-videogallery-form, .node-photogallery-form, .node-story-form, .node-breaking_news-form{
+.node-videogallery-form, .node-photogallery-form, .node-story-form, .node-breaking_news-form, .node-podcast-form{
   .browse-media-file{
     .itg-form-section{
       height: 250px;
