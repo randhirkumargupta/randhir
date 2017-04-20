@@ -365,14 +365,16 @@ jQuery(document).ready(function () {
 
         $('.field-name-field-question-media').on('change', 'select', function () {
             var selvalue = $(this).val();
+            if (selvalue == '_none') {
+                $(this).parent().parent().parent().find('.field-name-field-question-video').hide();
+                $(this).parent().parent().parent().find('.field-name-field-question-image').hide();
+            }
             if (selvalue == "Video") {
                 $(this).parent().parent().parent().find('.field-name-field-question-video').show();
-
                 $(this).parent().parent().parent().find('.field-name-field-question-image').hide();
             }
             if (selvalue == "Photo") {
                 $(this).parent().parent().parent().find('.field-name-field-question-image').show();
-
                 $(this).parent().parent().parent().find('.field-name-field-question-video').hide();
             }
         });
