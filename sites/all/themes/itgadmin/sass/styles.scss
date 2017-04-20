@@ -11603,3 +11603,21 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   .page-section-wise-breakup-report{
     #ui-datepicker-div{display: none;}
   }
+  #ugc-content-view{
+    ul{
+      list-style: none;
+      li{
+        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+        padding: 5px 0;
+        strong{
+          float: left; width: 200px; padding-right: 20px;
+        }
+        span{
+          display: block;
+          overflow: hidden;
+        }
+      }
+    }
+  }
