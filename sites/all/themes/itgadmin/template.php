@@ -434,6 +434,7 @@ function itgadmin_preprocess_page(&$vars) {
     , 'search-publish-video'
     , 'itg-registered-user-report'
     , 'itg-registered-user-section-wise-breakup'
+    ,  'embed'
   );
 
   if ( in_array(arg(0) , $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview') ) {
