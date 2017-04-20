@@ -70,13 +70,12 @@ function mail_templates_listing_views_default_views() {
 [field_new_task_status]
 [field_ugc_comments_status]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
-  /* Field: Content: Mail Template Category */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_mail_template_category']['id'] = 'field_mail_template_category';
   $handler->display->display_options['fields']['field_mail_template_category']['table'] = 'field_data_field_mail_template_category';
   $handler->display->display_options['fields']['field_mail_template_category']['field'] = 'field_mail_template_category';
   $handler->display->display_options['fields']['field_mail_template_category']['label'] = 'Template Category';
   $handler->display->display_options['fields']['field_mail_template_category']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_mail_template_category']['type'] = 'taxonomy_term_reference_plain';
   /* Sort criterion: Content: CMS mail template category (field_cms_mail_template_category) */
   $handler->display->display_options['sorts']['field_cms_mail_template_category_value']['id'] = 'field_cms_mail_template_category_value';
   $handler->display->display_options['sorts']['field_cms_mail_template_category_value']['table'] = 'field_data_field_cms_mail_template_category';
@@ -120,20 +119,12 @@ function mail_templates_listing_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: CMS mail template category */
-  $handler->display->display_options['fields']['field_cms_mail_template_category']['id'] = 'field_cms_mail_template_category';
-  $handler->display->display_options['fields']['field_cms_mail_template_category']['table'] = 'field_data_field_cms_mail_template_category';
-  $handler->display->display_options['fields']['field_cms_mail_template_category']['field'] = 'field_cms_mail_template_category';
-  $handler->display->display_options['fields']['field_cms_mail_template_category']['label'] = '';
-  $handler->display->display_options['fields']['field_cms_mail_template_category']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_cms_mail_template_category']['element_label_colon'] = FALSE;
-  /* Field: Content: Mail Template Category */
-  $handler->display->display_options['fields']['field_mail_template_category']['id'] = 'field_mail_template_category';
-  $handler->display->display_options['fields']['field_mail_template_category']['table'] = 'field_data_field_mail_template_category';
-  $handler->display->display_options['fields']['field_mail_template_category']['field'] = 'field_mail_template_category';
-  $handler->display->display_options['fields']['field_mail_template_category']['label'] = 'Templates';
-  $handler->display->display_options['fields']['field_mail_template_category']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_mail_template_category']['type'] = 'taxonomy_term_reference_plain';
+  /* Field: Content: Mail Templates Category */
+  $handler->display->display_options['fields']['field_mail_templates_category']['id'] = 'field_mail_templates_category';
+  $handler->display->display_options['fields']['field_mail_templates_category']['table'] = 'field_data_field_mail_templates_category';
+  $handler->display->display_options['fields']['field_mail_templates_category']['field'] = 'field_mail_templates_category';
+  $handler->display->display_options['fields']['field_mail_templates_category']['label'] = 'Mail Templates';
+  $handler->display->display_options['fields']['field_mail_templates_category']['element_label_colon'] = FALSE;
   /* Field: Content: CMS Status */
   $handler->display->display_options['fields']['field_cms_status']['id'] = 'field_cms_status';
   $handler->display->display_options['fields']['field_cms_status']['table'] = 'field_data_field_cms_status';
@@ -203,17 +194,16 @@ function mail_templates_listing_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'mail_templates' => 'mail_templates',
   );
-  /* Filter criterion: Content: Mail Template Category (field_mail_template_category) */
-  $handler->display->display_options['filters']['field_mail_template_category_tid']['id'] = 'field_mail_template_category_tid';
-  $handler->display->display_options['filters']['field_mail_template_category_tid']['table'] = 'field_data_field_mail_template_category';
-  $handler->display->display_options['filters']['field_mail_template_category_tid']['field'] = 'field_mail_template_category_tid';
-  $handler->display->display_options['filters']['field_mail_template_category_tid']['value'] = '';
-  $handler->display->display_options['filters']['field_mail_template_category_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_mail_template_category_tid']['expose']['operator_id'] = 'field_mail_template_category_tid_op';
-  $handler->display->display_options['filters']['field_mail_template_category_tid']['expose']['label'] = 'Mail Template Category';
-  $handler->display->display_options['filters']['field_mail_template_category_tid']['expose']['operator'] = 'field_mail_template_category_tid_op';
-  $handler->display->display_options['filters']['field_mail_template_category_tid']['expose']['identifier'] = 'field_mail_template_category_tid';
-  $handler->display->display_options['filters']['field_mail_template_category_tid']['expose']['remember_roles'] = array(
+  /* Filter criterion: Content: Mail Templates Category (field_mail_templates_category) */
+  $handler->display->display_options['filters']['field_mail_templates_category_value']['id'] = 'field_mail_templates_category_value';
+  $handler->display->display_options['filters']['field_mail_templates_category_value']['table'] = 'field_data_field_mail_templates_category';
+  $handler->display->display_options['filters']['field_mail_templates_category_value']['field'] = 'field_mail_templates_category_value';
+  $handler->display->display_options['filters']['field_mail_templates_category_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_mail_templates_category_value']['expose']['operator_id'] = 'field_mail_templates_category_value_op';
+  $handler->display->display_options['filters']['field_mail_templates_category_value']['expose']['label'] = 'Mail Templates';
+  $handler->display->display_options['filters']['field_mail_templates_category_value']['expose']['operator'] = 'field_mail_templates_category_value_op';
+  $handler->display->display_options['filters']['field_mail_templates_category_value']['expose']['identifier'] = 'field_mail_templates_category_value';
+  $handler->display->display_options['filters']['field_mail_templates_category_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -240,7 +230,6 @@ function mail_templates_listing_views_default_views() {
     25 => 0,
     26 => 0,
   );
-  $handler->display->display_options['filters']['field_mail_template_category_tid']['vocabulary'] = 'mail_template_category';
   $handler->display->display_options['path'] = 'mail-templates';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Mail Templates';
