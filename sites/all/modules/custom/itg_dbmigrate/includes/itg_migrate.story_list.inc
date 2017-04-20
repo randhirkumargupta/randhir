@@ -242,12 +242,12 @@ class ItgStoryListMigration extends XMLMigration {
     $this->addFieldMapping('field_story_magazine_headline', 'magazineheadline')->xpath('magazineheadline');
     $this->addFieldMapping('field_story_rating', 'storyrating')->xpath('storyrating');
     $this->addFieldMapping('field_story_new_title', 'newtitle')->xpath('newtitle');
-    $this->addFieldMapping('field_story_redirection_url_titl', 'redirectionurl')->xpath('redirectionurl');
+    //$this->addFieldMapping('field_story_redirection_url_titl', 'redirectionurl')->xpath('redirectionurl');
     $this->addFieldMapping('field_story_courtesy', 'courtesy')->xpath('courtesy');
     $this->addFieldMapping('field_story_snap_post', 'snappost')->xpath('snappost');
     
     //code for social media
-    $this->addFieldMapping('field_story_facebook_narrative', 'facebooknarrative')->xpath('facebooknarrative');
+   /* $this->addFieldMapping('field_story_facebook_narrative', 'facebooknarrative')->xpath('facebooknarrative');
     $this->addFieldMapping('field_story_facebook_image', 'facebookimage')->xpath('facebookimage');
     $this->addFieldMapping('field_story_facebook_image:file_replace')
          ->defaultValue(FILE_EXISTS_REPLACE);
@@ -264,7 +264,7 @@ class ItgStoryListMigration extends XMLMigration {
     $this->addFieldMapping('field_story_tweet_image:preserve_files')
          ->defaultValue(TRUE);
     $this->addFieldMapping('field_story_tweet_image:alt', 'twitterimage_alt')->xpath('twitterimage_alt');
-    $this->addFieldMapping('field_story_tweet_image:title', 'twitterimage_title')->xpath('twitterimage_title');
+    $this->addFieldMapping('field_story_tweet_image:title', 'twitterimage_title')->xpath('twitterimage_title');*/
     //$this->addFieldMapping('field_story_twitter_video_desc', 'twittervideodescription')->xpath('twittervideodescription');
     //$this->addFieldMapping('field_story_twitter_video', 'twittervideo')->xpath('twittervideo'); confirmed no data in xml    
     //$this->addFieldMapping('field_story_media_files_syndicat', 'mediafiles')->xpath('mediafiles');
