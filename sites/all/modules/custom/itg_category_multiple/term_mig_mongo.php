@@ -7,6 +7,8 @@ $args = drush_get_arguments();
 migrate_all_terms_in_mongo();
 
 function migrate_all_terms_in_mongo() {
+
+print "Start....";
   $query = db_select('taxonomy_term_data', 'td');
   $query->leftJoin('taxonomy_term_hierarchy', 'th', 'th.tid = td.tid');
   $query->leftJoin('itg_category_manager', 'icm', 'icm.tid = td.tid');

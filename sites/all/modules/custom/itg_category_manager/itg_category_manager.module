@@ -305,7 +305,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     );
     $form['field_user_city'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('HH:MM');
     //$form['relations']['parent']['#config']['module'] = 'itg_category_manager';
-    $form['relations']['parent']['#weight'] = -1;
+   // $form['relations']['parent']['#weight'] = -1;
     $form['term_state']['#access'] = false;
     drupal_add_js('jQuery(document).ready(function() {
              //code to check unchek checkbox when all search engine checkbox is checked
@@ -393,7 +393,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
       $form['relations']['parent']['#title'] = t('Select Section');
       $form['relations']['parent']['#description'] = '<p>' . t('Please select &#60;root&#62; for section.') . '</p>';
       $form['relations']['#collapsible'] = 0;
-      $form['relations']['#weight'] = 5;
+      $form['relations']['#weight'] = 6;
 
       unset($form['relations']['weight']);
 //Non-editable fields in edit mode
@@ -401,8 +401,8 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         $form['name']['#attributes'] = array('readonly' => 'readonly');
         $form['field_cm_redirection_url']['#disabled'] = TRUE;
         $form['field_cm_hide_cat_from_home']['#disabled'] = TRUE;
-        $form['field_cm_hide_cat_from_search']['#disabled'] = TRUE;
-        $form['field_cm_no_follow']['#disabled'] = TRUE;
+        //$form['field_cm_hide_cat_from_search']['#disabled'] = TRUE;
+        //$form['field_cm_no_follow']['#disabled'] = TRUE;
         $form['field_cm_sponsored_category']['#disabled'] = TRUE;
       }
 // Taxonomy active deactive logic
@@ -599,7 +599,13 @@ function itg_category_manager_add_form_after_build(&$form, &$form_state) {
     ),
   );
   if ($user->uid != 1 && $arg[3] == 'edit') {
-    drupal_add_js('jQuery(document).ready(function () {jQuery("#edit-field-cm-select-type-und option:not(:selected)").attr("disabled", true);jQuery("#edit-relations option:not(:selected)").attr("disabled", true);});', 'inline');
+   if($form_state['values']['parent'][0] == 0) {
+         drupal_add_js('jQuery(document).ready(function () { jQuery("#edit-relations option:not(:selected)").attr("disabled", true);});', 'inline');
+
+   }else {
+         drupal_add_js('jQuery(document).ready(function () { jQuery("#edit-field-cm-select-type-und option:not(:selected)").attr("disabled", true);jQuery("#edit-relations option:not(:selected)").attr("disabled", true);});', 'inline');
+
+   }
   }
 
   unset($form['description']['format']['format']);
@@ -1218,7 +1224,7 @@ function itg_categor_form_edit_category_radio($form, &$form_state) {
   }
 
 
-  $content_types_lists = array("story", "photogallery", "videogallery");
+  $content_types_lists = array("story", "photogallery", "videogallery", "podcast", "blog");
 
   if (!in_array($type, $content_types_lists)) {
     drupal_add_js('jQuery(document).ready(function() {
@@ -1444,29 +1450,28 @@ function itg_category_manager_disable_forcefully() {
     drupal_set_message(t('Category has child categories can not be inactivated.'), 'error');
   }
   else {
-    watchdog('sadjhsakdjhaskjd123', '<pre>' .  print_r($_POST, true) .'</pre>');
-
+   
     $all_parent = taxonomy_get_parents_all($current_term);
     $nodes_used_by_current_tid = taxonomy_select_nodes($current_term);
     if (count($all_parent) > 1) {
       $updated_term = $all_parent[1]->tid;
       if (count($nodes_used_by_current_tid) > 0) {
-            watchdog('sadjhsakdjhaskjd1234', '<pre>' .  print_r($_POST, true) .'</pre>');
-
+           
         foreach ($nodes_used_by_current_tid as $key => $value) {
           $node = node_load($value);
           $node->field_story_category['und'][0]['tid'] = $updated_term;
           node_save($node);
         }
+
         db_update('itg_category_manager')
             ->fields(array('status' => 0))
             ->condition('tid', $current_term)
             ->execute();
-            watchdog('sadjhsakdjhaskjd12345', '<pre>' .  print_r($_POST, true) .'</pre>');
+
 
         // Inactive category for category shift , sinking terms data for mongo
         if (function_exists('itg_category_sink_active_inactive_category')) {
-          watchdog('test123', $current_term);
+        
           itg_category_sink_active_inactive_category($current_term, 0);
         }
 
@@ -1483,8 +1488,7 @@ function itg_category_manager_disable_forcefully() {
         
          // Inactive category for category shift , sinking terms data for mongo
         if (function_exists('itg_category_sink_active_inactive_category')) {
-                    watchdog('test1234', $current_term);
-
+             
           itg_category_sink_active_inactive_category($current_term, 0);
         }
         
@@ -1509,6 +1513,11 @@ function itg_category_manager_disable_forcefully() {
             ->fields(array('status' => 0))
             ->condition('tid', $current_term)
             ->execute();
+        
+        if (function_exists('itg_category_sink_active_inactive_category')) {
+                    
+          itg_category_sink_active_inactive_category($current_term, 0);
+        }
         drupal_set_message(t('Section has been disabled succesfully.'), 'status');
         if (function_exists('_delete_term_from_menu_manager')) {
           _delete_term_from_menu_manager($current_term);

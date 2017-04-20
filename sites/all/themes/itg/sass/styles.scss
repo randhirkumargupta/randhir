@@ -1814,6 +1814,11 @@ footer{
         width: 100%;
         height: 40vh;
     }
+    .description{
+      iframe{
+        min-height: 480px;
+      }
+    }
     ul{
         @extend .list-none;
     }
@@ -4514,6 +4519,9 @@ h1.category-heading{
         }
     }
 }
+.view-programmes.view-display-id-page{
+  @include pager;
+}
 
 /*css start archive-story */
 .view-archive-story{
@@ -5265,6 +5273,11 @@ section.sidebar{
 }
 /*CSS End video setting Ifram*/
 
+.ugc-success {
+    height: 100%;
+    background-color: #fff;
+}
+
 /*CSS Start for recommended for you home page*/
 .recommended-for-you{
     background: #f3f3f3;
@@ -5302,6 +5315,7 @@ section.sidebar{
                     .pic{
                         float: none;
                         margin: 0;
+                        width: auto;
                     }
                     .detail{
                         background: #fff;
@@ -6409,7 +6423,7 @@ section.sidebar{
             width: 190px;
             height: 54px;
             line-height:54px;
-            padding-right:15px;
+            padding-right:10px;
             &:before{
                 width: 0;
                 height: 0;
@@ -8898,22 +8912,23 @@ section.sidebar{
     }
     li{        
         border-bottom: 1px solid #c4c4c4;       
-        display: block;      
-        min-width: 100%;
+        display: table;      
+        width: 100%;
         height: 75px;
         overflow: hidden;
         a{
             vertical-align: middle;
             display: table-cell;
-            height: 75px;
+            height: 100%;
+            padding: 5px;
             text-align: center;
-            width: 58px;
+            width: 56px;
         }       
     }
     img{
         margin: 0 auto;
         display: block;
-        margin-bottom: 8px;
+        /*margin-bottom: 5px;*/
     }
     a{
         @include font(12px,null,500);
@@ -8925,12 +8940,9 @@ section.sidebar{
         word-wrap: break-word;
         color:#383838;    
         height:100%;
-        &:hover{
-             background: #fff;
-                color: #b00202;
-        }
-        &.sponsored-active{
-            background: #ffc106;
+        &:hover, &.sponsored-active{
+          background: #fff;
+          color: #b00202;
         }
     }
     .vertical-menu-parent{  
@@ -8956,14 +8968,19 @@ section.sidebar{
     }
     .vertical-more{        
         display:none;
+        height: 75px;
         a{
-            display: block;
-            padding: 5px;
-            i{
-                display: block;
-                color: #959595;
-                font-size: 20px;
-            }            
+          display: block;
+          padding: 15px 5px;
+          i{
+              display: block;
+              color: #959595;
+              font-size: 20px;
+              margin-bottom: 3px;
+          }
+          &:hover{
+            i{color: #b00202;}
+          }  
         }
     }
 }
@@ -11168,6 +11185,12 @@ span.close_btt {
 }
 
 
+
+.ugc_success {
+    margin: 20px 0 0;
+    color: green;
+}
+.widget-help-text{display: none;}
 @media (min-width: 768px) {
   .modal-dialog {
     width: 960px;

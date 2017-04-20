@@ -34,12 +34,12 @@
             <div class="field-items"><h1><?php print $title; ?></h1></div>
           </div>
 
-          <?php $short_des = render($content['field_label']);
+          <?php $short_des = render($content['field_common_short_description']);
           ?>
           <?php if (!empty($short_des)): ?>
             <?php
             if (!empty($short_des)):
-              print render($content['field_label']);
+              print render($content['field_common_short_description']);
               ?>
             <?php endif; ?>
 
