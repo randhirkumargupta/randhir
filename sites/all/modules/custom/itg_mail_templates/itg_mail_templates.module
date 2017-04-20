@@ -4,7 +4,6 @@
  * Implements hook_form_alter
  */
 function itg_mail_templates_form_alter(&$form, &$form_state, $form_id) {
-
   if ($form_id == 'mail_templates_node_form') { 
       $form['#prefix'] = '<p>Click <a href="#">here</a> to get tokens</p><div class="token-table"><table border="1" cellpadding="1" cellspacing="1" style="width: 873px;">
         <tbody>
@@ -127,8 +126,8 @@ function itg_mail_templates_form_alter(&$form, &$form_state, $form_id) {
       </table>';
     $form['#suffix'] = '</div>';
     $form['title']['#attributes'] = array('readonly' => 'readonly');
-    drupal_add_js("jQuery('#edit-field-mail-template-category-und').change(function(){
-          var select_option = jQuery('#edit-field-mail-template-category-und option:selected').text(); 
+    drupal_add_js("jQuery('#edit-field-mail-templates-category-und').change(function(){
+          var select_option = jQuery('#edit-field-mail-templates-category-und option:selected').text(); 
           jQuery('#edit-title').val(select_option);
         });", array('type' => 'inline', 'scope' => 'footer'));
   }

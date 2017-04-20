@@ -45,7 +45,7 @@ function mail_templates_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 8,
+      'weight' => 11,
     ),
   );
 
@@ -124,7 +124,7 @@ function mail_templates_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -166,7 +166,7 @@ function mail_templates_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -208,7 +208,7 @@ function mail_templates_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 10,
+      'weight' => 13,
     ),
   );
 
@@ -368,7 +368,7 @@ function mail_templates_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'text_processing' => 0,
+      'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -378,7 +378,7 @@ function mail_templates_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 14,
+      'weight' => 19,
     ),
   );
 
@@ -463,7 +463,7 @@ function mail_templates_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 15,
+      'weight' => 19,
     ),
   );
 
@@ -506,7 +506,7 @@ function mail_templates_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
@@ -548,7 +548,7 @@ function mail_templates_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -632,7 +632,7 @@ function mail_templates_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -674,7 +674,7 @@ function mail_templates_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -716,7 +716,7 @@ function mail_templates_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 12,
     ),
   );
 
@@ -886,7 +886,7 @@ function mail_templates_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 18,
     ),
   );
 
@@ -971,7 +971,7 @@ function mail_templates_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 14,
+      'weight' => 18,
     ),
   );
 
@@ -1014,13 +1014,13 @@ function mail_templates_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
   // Exported field_instance:
-  // 'node-mail_templates-field_mail_template_category'.
-  $field_instances['node-mail_templates-field_mail_template_category'] = array(
+  // 'node-mail_templates-field_mail_templates_category'.
+  $field_instances['node-mail_templates-field_mail_templates_category'] = array(
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
@@ -1028,10 +1028,10 @@ function mail_templates_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'taxonomy',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 2,
+        'type' => 'list_default',
+        'weight' => 31,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1042,8 +1042,8 @@ function mail_templates_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_mail_template_category',
-    'label' => 'Mail Template Category',
+    'field_name' => 'field_mail_templates_category',
+    'label' => 'Mail Templates Category',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1175,7 +1175,7 @@ function mail_templates_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -1274,7 +1274,7 @@ function mail_templates_field_default_field_instances() {
   t('Mail Body UGC');
   t('Mail Subject');
   t('Mail Subject Task/Idea');
-  t('Mail Template Category');
+  t('Mail Templates Category');
   t('New Task Status');
   t('Product Expiration Status');
   t('To Assignee');
