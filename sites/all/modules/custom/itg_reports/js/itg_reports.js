@@ -95,6 +95,7 @@
 })(jQuery, Drupal, this, this.document);
 
 jQuery(document).ready(function () {
+    //jQuery("#ui-datepicker-div").style('display','none');
     jQuery('#edit-field-story-archive-value-wrapper').hide();
     if (jQuery('#edit-field-story-archive-value').val() == 'Yes') {
 
@@ -198,6 +199,13 @@ jQuery(document).ready(function () {
         changeMonth: true,
         changeYear: true,
         dateFormat: 'dd-mm-yy',
+        onSelect: function (selected) {
+            var dateParts = selected.split("-");
+            var dt = new Date(dateParts[1] + '/' + dateParts[0] + '/' + dateParts[2]);
+            dt.setDate(dt.getDate());
+            console.log(dt);
+            jQuery("#views-exposed-form-section-wiser-breakup-report-page #edit-week1-date-to").datepicker("option", "minDate", dt);
+        }
     });
     jQuery('#views-exposed-form-section-wiser-breakup-report-page #edit-week1-date-to').datepicker({
         // Get 5 year previous and next year data.
@@ -207,6 +215,13 @@ jQuery(document).ready(function () {
         changeMonth: true,
         changeYear: true,
         dateFormat: 'dd-mm-yy',
+        onSelect: function (selected) {
+            var dateParts = selected.split("-");
+            var dt = new Date(dateParts[1] + '/' + dateParts[0] + '/' + dateParts[2]);
+            dt.setDate(dt.getDate());
+            console.log(dt);
+            jQuery("#views-exposed-form-section-wiser-breakup-report-page #edit-week2-date-from").datepicker("option", "minDate", dt);
+        }
     });
     jQuery('#views-exposed-form-section-wiser-breakup-report-page #edit-week2-date-from').datepicker({
         // Get 5 year previous and next year data.
@@ -216,6 +231,13 @@ jQuery(document).ready(function () {
         changeMonth: true,
         changeYear: true,
         dateFormat: 'dd-mm-yy',
+        onSelect: function (selected) {
+            var dateParts = selected.split("-");
+            var dt = new Date(dateParts[1] + '/' + dateParts[0] + '/' + dateParts[2]);
+            dt.setDate(dt.getDate());
+            console.log(dt);
+            jQuery("#views-exposed-form-section-wiser-breakup-report-page #edit-week2-date-to").datepicker("option", "minDate", dt);
+        }
     });
     jQuery('#views-exposed-form-section-wiser-breakup-report-page #edit-week2-date-to').datepicker({
         // Get 5 year previous and next year data.
