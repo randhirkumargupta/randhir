@@ -11514,6 +11514,8 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   }
   .view .view-filters [id*="views-exposed-form-section-wiser-breakup-report-page"]{
     .views-exposed-form{
+      .views-widget-filter-name{width: 280px;}
+      .views-widget-per-page{width: 100px;}
       .views-exposed-widget.views-submit-button{
         width: 560px;
         fieldset{
@@ -11594,6 +11596,28 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       }
     } 
   }
-  [id*="daily-motion-video-dashboard"]{
-    
+  [id*="itg-registered-vs-anonymous-user-form"]{
+    ul{float: right;}
+  }
+  .page-itg-registered-vs-anonymous-user-content-visited-report, 
+  .page-section-wise-breakup-report{
+    #ui-datepicker-div{display: none;}
+  }
+  #ugc-content-view{
+    ul{
+      list-style: none;
+      li{
+        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+        padding: 5px 0;
+        strong{
+          float: left; width: 200px; padding-right: 20px;
+        }
+        span{
+          display: block;
+          overflow: hidden;
+        }
+      }
+    }
   }

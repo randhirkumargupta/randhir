@@ -1082,10 +1082,18 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Story Title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Story Title';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '[title]';
   /* Field: Content: Syndication */
   $handler->display->display_options['fields']['field_story_syndication']['id'] = 'field_story_syndication';
   $handler->display->display_options['fields']['field_story_syndication']['table'] = 'field_data_field_story_syndication';
@@ -1155,14 +1163,6 @@ function features_for_story_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['label'] = 'Action';
-  $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
   /* Field: Global: Story custom view link */
   $handler->display->display_options['fields']['story_custom_view_link']['id'] = 'story_custom_view_link';
   $handler->display->display_options['fields']['story_custom_view_link']['table'] = 'views';
@@ -1955,15 +1955,14 @@ function features_for_story_views_default_views() {
     'title' => 'title',
     'nid' => 'nid',
     'uid' => 'uid',
-    'field_first_name' => 'field_first_name',
-    'field_last_name' => 'field_last_name',
     'field_story_category' => 'field_story_category',
-    'nothing' => 'nothing',
+    'name' => 'name',
     'changed' => 'changed',
     'state' => 'state',
-    'edit_node' => 'nothing_1',
+    'edit_node' => 'edit_node',
     'delete_node' => 'delete_node',
     'nothing_1' => 'nothing_1',
+    'story_custom_view_link' => 'story_custom_view_link',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -1991,26 +1990,14 @@ function features_for_story_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_first_name' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_last_name' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'field_story_category' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'nothing' => array(
+    'name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -2044,6 +2031,11 @@ function features_for_story_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'story_custom_view_link' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
   );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
@@ -2071,10 +2063,19 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Story Title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Story Title';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '[title]';
+  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -2114,13 +2115,6 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['label'] = 'Status';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
-  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
   /* Field: Content: Delete link */
   $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
@@ -2819,14 +2813,13 @@ function features_for_story_views_default_views() {
     'title' => 'title',
     'nid' => 'nid',
     'uid' => 'uid',
-    'field_first_name' => 'field_first_name',
-    'field_last_name' => 'field_last_name',
     'field_story_category' => 'field_story_category',
-    'nothing' => 'nothing',
+    'name' => 'name',
     'changed' => 'changed',
     'state' => 'state',
-    'edit_node' => 'nothing_1',
+    'edit_node' => 'edit_node',
     'nothing_1' => 'nothing_1',
+    'story_custom_view_link' => 'story_custom_view_link',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -2854,26 +2847,14 @@ function features_for_story_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_first_name' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_last_name' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'field_story_category' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'nothing' => array(
+    'name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -2898,6 +2879,11 @@ function features_for_story_views_default_views() {
       'empty_column' => 0,
     ),
     'nothing_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'story_custom_view_link' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -2929,10 +2915,19 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Story Title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Story Title';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '[title]';
+  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -2972,13 +2967,6 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['label'] = 'Status';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
-  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
@@ -3263,14 +3251,14 @@ function features_for_story_views_default_views() {
     'title' => 'title',
     'nid' => 'nid',
     'uid' => 'uid',
-    'field_first_name' => 'field_first_name',
-    'field_last_name' => 'field_last_name',
     'field_story_category' => 'field_story_category',
-    'nothing' => 'nothing',
+    'field_story_source_type' => 'field_story_source_type',
+    'name' => 'name',
     'changed' => 'changed',
     'state' => 'state',
-    'edit_node' => 'nothing_1',
+    'edit_node' => 'edit_node',
     'nothing_1' => 'nothing_1',
+    'story_custom_view_link' => 'story_custom_view_link',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -3298,26 +3286,21 @@ function features_for_story_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_first_name' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_last_name' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'field_story_category' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'nothing' => array(
+    'field_story_source_type' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -3342,6 +3325,11 @@ function features_for_story_views_default_views() {
       'empty_column' => 0,
     ),
     'nothing_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'story_custom_view_link' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -3373,10 +3361,19 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Story Title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Story Title';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '[title]';
+  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -3421,13 +3418,6 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['label'] = 'Status';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
-  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';

@@ -433,6 +433,7 @@ function itgadmin_preprocess_page(&$vars) {
     , 'search-publish-video-radio'
     , 'search-publish-video'
     , 'itg-registered-user-report'
+    ,'ugc-view-content'
     , 'itg-registered-user-section-wise-breakup'
     ,  'embed'
   );
