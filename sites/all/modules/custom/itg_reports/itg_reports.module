@@ -266,7 +266,7 @@ function itg_reports_form_views_exposed_form_alter(&$form , &$form_state , $form
       break;
     case 'views-exposed-form-section-wiser-breakup-report-page':
       drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file'));
-      drupal_add_css("#autocomplete {max-height : 400px; max-width: 400px; overflow-x : auto; overflow-y: auto;}" , 'inline');
+      drupal_add_css("#ui-datepicker-div {display:none} , #autocomplete {max-height : 400px; max-width: 400px; overflow-x : auto; overflow-y: auto;}" , 'inline');
       $form['name']['#autocomplete_path'] = 'itg-reports-sections/autocomplete';
       $form['tid_raw']['#autocomplete_path'] = 'itg-reports-sections-tid/autocomplete';
       $form['tid_raw']['#attributes']['placeholder'] = 'Search By Term Id';

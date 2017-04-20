@@ -713,7 +713,7 @@ function feature_for_reports_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Active Users Report';
+  $handler->display->display_options['title'] = 'Registered Users Report';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -853,6 +853,11 @@ function feature_for_reports_views_default_views() {
   $handler->display->display_options['fields']['field_logged_in_count']['table'] = 'field_data_field_logged_in_count';
   $handler->display->display_options['fields']['field_logged_in_count']['field'] = 'field_logged_in_count';
   $handler->display->display_options['fields']['field_logged_in_count']['empty'] = '0';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: User: Logged in count (field_logged_in_count) */
   $handler->display->display_options['sorts']['field_logged_in_count_value']['id'] = 'field_logged_in_count_value';
@@ -2165,7 +2170,7 @@ function feature_for_reports_views_default_views() {
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['label'] = 'Term name';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Category name';
   /* Field: Taxonomy term: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
@@ -2178,6 +2183,7 @@ function feature_for_reports_views_default_views() {
   $handler->display->display_options['fields']['tid']['id'] = 'tid';
   $handler->display->display_options['fields']['tid']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['fields']['tid']['field'] = 'tid';
+  $handler->display->display_options['fields']['tid']['label'] = 'Category ID';
   $handler->display->display_options['fields']['tid']['separator'] = '';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
