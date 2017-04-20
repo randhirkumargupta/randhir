@@ -1814,6 +1814,11 @@ footer{
         width: 100%;
         height: 40vh;
     }
+    .description{
+      iframe{
+        min-height: 480px;
+      }
+    }
     ul{
         @extend .list-none;
     }
