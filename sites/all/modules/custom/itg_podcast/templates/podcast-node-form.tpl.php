@@ -13,7 +13,7 @@
                     <?php print drupal_render($form['category_holder']); ?>
                 </div>
 </div>
-<div id="audioupload">
+<div id="audioupload" class="browse-media-file">
   <h2 class="story-title"><?php print t('Audio Upload'); ?></h2>
   <?php print drupal_render($form['upload']); ?>
   <?php print drupal_render($form['field_podcast_audio_upload']); ?>

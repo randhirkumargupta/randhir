@@ -16,7 +16,12 @@ function itg_event_registration_permission() {
   return array(
     'event registered users' => array(
       'title' => t('View Event Registered User List'),
-    )
+    ),
+    
+    'tab wise permission' => array(
+      'title' => t('Tabwise permission'),
+      'description' => t('Tab wise permission configuration.'),
+    ),
   );
 }
 
@@ -83,8 +88,18 @@ function itg_event_registration_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_event_registration_configuration.inc',
   );
+   $items['itg-event-tab-permission'] = array(
+    'title' => 'Event Tab Permission Configuration',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_event_registration_tabwise_form'),
+    'access callback' => 'user_access',
+    'access arguments' => array('tab wise permission'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_event_tab_permission.inc',
+  );
   return $items;
 }
+
 
 function itg_event_reg_form() {
   return '';
@@ -352,7 +367,56 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
       }
     }
   }
+  
+  // Tab wise permission
+  if ($form_id == 'event_backend_node_form') {
+    $event_tabs = array('step_first' => 'Basic Details', 'step_second' => 'Registration Fees', 'step_program_schedule' => 'Program Schedule', 'step_sponsor' => 'Sponsor', 'step_highlights' => 'Highlights', 'step_media' => 'Media', 'step_configuration' => 'Configuration');
+    global $user;
+    foreach ($user->roles as $key => $role) {
+      $roles[] = variable_get($key . '-tabwise');
+    }
 
+    foreach ($roles as $rids) {
+      foreach ($rids as $red) {
+        $value[$red] = $red;
+      }
+    }
+    $allow_step = array_unique($value);
+    ksort($allow_step);
+
+    foreach ($allow_step as $steps) {
+      $step_array[substr($steps, 3)] = substr($steps, 3);
+    }
+    $current_step = $form_state['storage']['step'];
+    if (!in_array($current_step, $step_array)) {
+      if ($current_step == 'step_configuration') {
+        drupal_add_css('.step-configuration {display:none;}', array('type' => 'inline'));
+      }
+      foreach ($form['#steps'][$current_step]->children as $field_name) {
+        // pr($field_name);
+        $form[$field_name]['#access'] = FALSE;
+        $form[$field_name]['#limit_validation_errors'] = array();
+        $form[$field_name]['#tabwise'] = 'skip';
+      }
+      foreach ($step_array as $allow_stepss) {
+        $msg_step .= $event_tabs[$allow_stepss] . ', ';
+      }
+
+      $msg = 'You are not authorised to access this step. Your allowed steps are <strong>' . rtrim($msg_step, ', ') . '.</strong>';
+    }
+//    foreach($form['#steps'] as $step){
+//      if(!in_array($step->step_name, $step_array)){
+//        $msg = 'You are not authorised to access this step.';
+//        foreach($step->children as $field_name) {
+//          $form[$field_name]['#access'] = FALSE;
+//          
+//        }
+//      }
+//    }
+    if (!empty($msg)) {
+      drupal_set_message($msg, 'error');
+    }
+  }
 }
 
 

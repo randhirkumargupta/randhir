@@ -19,6 +19,7 @@ function itg_personalization_all_content_form($form, &$form_state) {
   $form['status'] = array(
     '#type' => 'select',
     '#title' => 'Status',
+    '#required' => TRUE,
     '#options' => array('_none' => 'Select', 'review' => 'Under Review', 'approve' => 'Approved', 'reject' => 'Rejected'),
     '#default_value' => ($_GET['status']) ? $_GET['status'] : '_none',
   );

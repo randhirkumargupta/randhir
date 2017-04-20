@@ -39,8 +39,14 @@
       <tr <?php if ($row_classes[$row_count]) { print 'class="' . implode(' ', $row_classes[$row_count]) .'"';  } ?>>
         <?php foreach ($row as $field => $content): ?>
           <td <?php if ($field_classes[$field][$row_count]) { print 'class="'. $field_classes[$field][$row_count] . '" '; } ?><?php print drupal_attributes($field_attributes[$field][$row_count]); ?>>
+          <?php if($field == 'nothing') : ?>
+          <?php echo l("View" , "user/".$row['uid'], array("attributes" =>array("target" =>array("_blank")))) ?>
+            |
+          <?php echo l('Section Wise Breakup' , "itg-registered-user-section-wise-breakup/" .$row['uid'] ,  array("attributes" => array("class" => array("colorbox-load")) ,  "query"=>array("width" => "900", "height" => "600", "iframe" => "true"))); ?>
+          <?php else : ?>
             <?php print $content; ?>
           </td>
+          <?php endif; ?>
         <?php endforeach; ?>
       </tr>
     <?php endforeach; ?>
