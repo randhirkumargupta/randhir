@@ -160,6 +160,7 @@ function itg_story_form_alter(&$form , &$form_state , $form_id) {
       if ($user->uid != 1) {
         unset($form['field_story_short_headline']);
         unset($form['field_story_long_head_line']);
+        unset($form['field_story_select_templates']['und']['#options']['quote']);
       }
       if ($user->uid) {
         $form['body']['und'][0]['#format'] = 'icon_format';
