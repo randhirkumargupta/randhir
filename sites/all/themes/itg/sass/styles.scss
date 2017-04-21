@@ -352,13 +352,16 @@ header{
                     }
                 }  
                 .globle-search{
-                    @include pos(absolute,null,40px,null,null);
-                    @include transition(all 0.5s ease-in-out );
-                    width:0px;
-                    overflow:hidden;
-                    .search-text{
-                        @include calculate-width(1);
-                    }                    
+                  @include pos(absolute,-5px,40px,null,null);
+                  @include transition(all 0.5s ease-in-out );
+                  width:0px;
+                  overflow:hidden;
+                  .search-text{
+                    @include calculate-width(1);
+                  }
+                  &.active{
+                    width: 225px;
+                  }
                 }
             }
 
@@ -2329,8 +2332,11 @@ footer{
             &:nth-child(7){
                 @include text-align(left);
                 border-left: none;
-                span{
+                span.posted-by{
                     color:#4d4d4d;
+                }
+                span.posted-name{
+                    color:#bebebe;
                 }
             }            
             &:last-child{
@@ -11186,6 +11192,14 @@ span.close_btt {
 
 
 
+
+
+.search-icon-parent{
+  position: relative;
+  .search-icon-search{
+    display: none;
+  }
+}
 .ugc_success {
     margin: 20px 0 0;
     color: green;
