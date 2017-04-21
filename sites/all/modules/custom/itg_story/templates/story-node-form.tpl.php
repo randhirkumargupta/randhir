@@ -141,12 +141,12 @@
                     ?></h2>
                 <div class="itg-form-section hide">
                     <?php print drupal_render($form['field_story_configurations']); ?>
+                    <?php print drupal_render($form['field_story_comment_question']); ?>
                     <?php print drupal_render($form['field_poll_start_date']); ?>
                     <?php print drupal_render($form['field_story_tv_time']); ?>
                     <?php print drupal_render($form['field_story_featured_name']); ?>
                     <?php print drupal_render($form['field_story_syndication']); ?>
                     <?php print drupal_render($form['field_story_syndications_photo']); ?>
-                    <?php print drupal_render($form['field_story_comment_question']); ?>
                     <?php print drupal_render($form['field_story_client_title']); ?>
                     <?php print drupal_render($form['field_story_media_files_syndicat']); ?>
                     <?php print drupal_render($form['field_common_related_content']); ?>

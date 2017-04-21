@@ -12080,8 +12080,19 @@ span.file a {
 [id*="itg-registred-user-report-form"] #piechart {
   max-width: 100%;
 }
+[id*="itg-registred-user-report-form"] .tab-content {
+  position: relative;
+  min-height: 400px;
+}
+[id*="itg-registred-user-report-form"] .tab-content #report1, [id*="itg-registred-user-report-form"] .tab-content #report2 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
 [id*="itg-registred-user-report-form"] .tab-content #report2 {
-  display: none;
+  opacity: 0;
 }
 
 #idIssue {
