@@ -158,7 +158,13 @@
                     'title': {
                         required: true
 
-                    },    
+                    },
+                    
+                     'field_reporter_email_id[und][0][value]': {
+                         email: true
+
+                    },
+                   
                     'field_celebrity_pro_occupation[und][]': {
                         required: true
 

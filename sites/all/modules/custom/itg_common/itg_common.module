@@ -67,7 +67,7 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
   );
   
-  $items['videogallery-embed'] = array(
+  $items['embed/videogallery-embed'] = array(
     'page callback' => 'itg_videogallery_embed',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
@@ -888,8 +888,9 @@ function itg_photogallery_embed() {
  */
 function itg_videogallery_embed() {
   if (!empty($_GET['gid'])) {
+    $gid = base64_decode($_GET['gid']);
     if (function_exists('get_video_in_fieldcollection_by_nid')) {
-      $videoids = get_video_in_fieldcollection_by_nid($_GET['gid']);
+      $videoids = get_video_in_fieldcollection_by_nid($gid);
     }
     return theme('itg_videogallery_embed', array('data' => $videoids));
   }

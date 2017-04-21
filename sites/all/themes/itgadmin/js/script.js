@@ -990,6 +990,15 @@ jQuery(document).ready(function () {
       jQuery(this).parent().addClass('active').parent().parent().next().find('#'+getId).show().siblings().hide();
     });
     
+    // jQuery code to show-hide mail templates token popup
+    jQuery('.get-tokens').on('click', 'a', function(){
+      var getId = jQuery(this).attr('data-id');
+      jQuery('body').find('#' + getId).show();
+    });
+    jQuery('.itgadmin-popup').on('click', '.close-itgadmin-popup', function(){
+      jQuery(this).parent().parent().hide();
+    });
+    
 
 });
 jQuery(document).ready(function () {
