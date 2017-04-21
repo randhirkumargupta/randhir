@@ -854,6 +854,10 @@ function itg_story_node_view($node , $view_mode , $langcode) {
     if (function_exists('itg_get_front_activity_info')) {
       $node->content['front_activity_info'] = itg_get_front_activity_info($node->nid , $node->type , $user->uid , 'read_later' , $status = '');
     }
+    
+    if (function_exists('itg_custom_get_user_details')) {
+      $node->content['author'] = itg_custom_get_user_details($node->uid);
+    }
 
     if (function_exists('itg_common_get_smiley_title')) {
       $node->content['story_title'] = itg_common_get_smiley_title($node->nid , 0 , 255);
