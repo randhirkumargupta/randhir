@@ -1,5 +1,5 @@
 <?php
-//exit;
+//exit;z
 /**
  * @file
  * Because the name of this file is the module name plus '.migrate.inc', when
@@ -255,11 +255,6 @@ function itg_dbmigrate_migrate_api() {
         'class_name' => 'ItgMegareviewMigration',
         'group_name' => 'itg_megareview',
       ),*/
-
-      'ItgBestcollege' => array(
-        'class_name' => 'ItgBestcollegeMigration',
-        'group_name' => 'itg_best_college',
-      ),
 
     ),
 
