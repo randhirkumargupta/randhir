@@ -363,7 +363,7 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
         form_set_error('mail', t("Email Id Already Exist!"));
       }
 
-      if (!empty($get_user_check_mobile)) {
+      if (!empty($get_user_check_mobile) && !empty($form_state['values']['mobile'])) {
         form_set_error('mobile', t("Mobile Number Already Exist!"));
       }
 
