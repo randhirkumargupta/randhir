@@ -1851,7 +1851,7 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name , $range_max 
       $query->fields('esi_file' , array('uri'));
   }
   
-  if ($widget_name == 'featured_photo_carousel') {
+  if ($widget_name == 'featured_photo_carousel' || $widget_name == 'video_carousel_list_widget') {
       $query->leftJoin('file_managed' , 'eli_file' , 'eli_file.fid=eli.field_story_extra_large_image_fid');
       $query->fields('eli_file' , array('uri'));
   }
