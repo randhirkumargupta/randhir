@@ -1629,3 +1629,17 @@ function itg_widget_query_poll_widget_alter_tag_alter(QueryAlterableInterface $q
   $query->condition('sd.field_poll_start_date_value', $cur_date, '<=');
   $query->condition(db_or()->isNull('ed.field_poll_end_date_value')->condition('ed.field_poll_end_date_value', $cur_date, '>='));
 }
+
+/**
+ * _get_content_type_for_widget
+ * 
+ */
+function _get_content_type_for_widget($widget_name) {
+  $content_type = array('story' , 'videogallery' , 'photogallery');
+  switch ($widget_name) {
+    case 'top_stories_widget':
+      $content_type = array('story');
+      break;
+  }
+  return $content_type;
+}
