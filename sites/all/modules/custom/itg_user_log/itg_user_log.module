@@ -56,7 +56,9 @@ function itg_user_log_node_view($node , $view_mode , $langcode) {
 }
 
 /**
- * hooke menu to check the count in URL
+ * Impletemets Hook_Menu.
+ * 
+ * {@inheritdoc}
  */
 function itg_user_log_menu() {
   // temp code 
@@ -566,6 +568,10 @@ function itg_user_log_get_sections($c_name) {
   }
 }
 
+/**
+ * Function which gives front page nid if there is any node.
+ * @return int
+ */
 function get_front_page_nid() {
   $node_url = drupal_get_normal_path(variable_get('site_frontpage', 'node'));
   $node_chunk = explode('/', $node_url);

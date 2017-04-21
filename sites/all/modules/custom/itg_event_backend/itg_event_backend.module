@@ -261,6 +261,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
       }
     }
   }
+  if(!isset($form['field_event_highlights']['#tabwise'])){
   foreach ($form_state['values']['field_event_highlights'][LANGUAGE_NONE] as $key => $event_highlights) {
     if (is_numeric($key)) {
       $event_high_value[$key] = $form_state['values']['field_event_highlights'][LANGUAGE_NONE][$key]['field_associate_story_event_high'][LANGUAGE_NONE][0]['target_id'];
@@ -268,6 +269,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
         form_set_error('field_event_highlights][' . LANGUAGE_NONE . '][' . $key . '][field_associate_story_event_high', 'You have already selected this story');
       }
     }
+  }
   }
 
 
@@ -355,7 +357,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
     }
   } 
   
-  if (($event_type == 'paid' || $event_type == 'free') && $form_state['values']['field_no_of_tickets'][LANGUAGE_NONE][0]['value'] == '' && (isset($form_state['storage']['step']) && $form_state['storage']['step'] == "step_second")) {
+  if (($event_type == 'paid' || $event_type == 'free') && $form_state['values']['field_no_of_tickets'][LANGUAGE_NONE][0]['value'] == '' && (isset($form_state['storage']['step']) && $form_state['storage']['step'] == "step_second") && (!isset($form['field_no_of_tickets']['#tabwise']))) {
     form_set_error('field_no_of_tickets', t('Please enter No. of Tickets'));
   }
 
@@ -369,7 +371,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
     }
   }
   // media validation
-  if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_media')) {
+  if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_media') && (!isset($form['field_event_media']['#tabwise']))) {
     foreach ($form_state['values']['field_event_media'][LANGUAGE_NONE] as $key => $value) {
       if (is_numeric($key)) {
         if ($form_state['values']['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE][0]['value'] == '') {
