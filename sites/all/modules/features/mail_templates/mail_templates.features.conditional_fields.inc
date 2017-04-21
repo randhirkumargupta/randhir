@@ -14,7 +14,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_ask_an_expert_case',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -315,10 +315,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208822,
+      'value_form' => 'ask_an_expert',
       'value' => array(
         0 => array(
-          'tid' => 1208822,
+          'value' => 'ask_an_expert',
         ),
       ),
       'values' => array(),
@@ -329,7 +329,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_cms_mail_template_category',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -630,10 +630,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208823,
+      'value_form' => 'cms_mail_template',
       'value' => array(
         0 => array(
-          'tid' => 1208823,
+          'value' => 'cms_mail_template',
         ),
       ),
       'values' => array(),
@@ -644,7 +644,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_cms_status',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -945,10 +945,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208823,
+      'value_form' => 'cms_mail_template',
       'value' => array(
         0 => array(
-          'tid' => 1208823,
+          'value' => 'cms_mail_template',
         ),
       ),
       'values' => array(),
@@ -959,7 +959,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_body_cms_mail',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -1260,10 +1260,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208823,
+      'value_form' => 'cms_mail_template',
       'value' => array(
         0 => array(
-          'tid' => 1208823,
+          'value' => 'cms_mail_template',
         ),
       ),
       'values' => array(),
@@ -1274,7 +1274,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_body_expert',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -1575,10 +1575,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208822,
+      'value_form' => 'ask_an_expert',
       'value' => array(
         0 => array(
-          'tid' => 1208822,
+          'value' => 'ask_an_expert',
         ),
       ),
       'values' => array(),
@@ -1589,7 +1589,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_body_follow_story',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -1890,10 +1890,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208824,
+      'value_form' => 'follow_story',
       'value' => array(
         0 => array(
-          'tid' => 1208824,
+          'value' => 'follow_story',
         ),
       ),
       'values' => array(),
@@ -1904,7 +1904,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_body_loyalty',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -2205,10 +2205,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208825,
+      'value_form' => 'loyalty_points_expiration',
       'value' => array(
         0 => array(
-          'tid' => 1208825,
+          'value' => 'loyalty_points_expiration',
         ),
       ),
       'values' => array(),
@@ -2219,7 +2219,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_body_password_changed',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -2520,10 +2520,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208826,
+      'value_form' => 'password_changed',
       'value' => array(
         0 => array(
-          'tid' => 1208826,
+          'value' => 'password_changed',
         ),
       ),
       'values' => array(),
@@ -2534,7 +2534,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_body_print_team',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -2835,10 +2835,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208827,
+      'value_form' => 'print_team',
       'value' => array(
         0 => array(
-          'tid' => 1208827,
+          'value' => 'print_team',
         ),
       ),
       'values' => array(),
@@ -2849,7 +2849,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_body_product_expirati',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -3150,10 +3150,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208828,
+      'value_form' => 'product_expiration',
       'value' => array(
         0 => array(
-          'tid' => 1208828,
+          'value' => 'product_expiration',
         ),
       ),
       'values' => array(),
@@ -3164,7 +3164,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_body_sign_up',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -3465,10 +3465,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208829,
+      'value_form' => 'sign_up',
       'value' => array(
         0 => array(
-          'tid' => 1208829,
+          'value' => 'sign_up',
         ),
       ),
       'values' => array(),
@@ -3479,7 +3479,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_body_task_idea_assign',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -3780,10 +3780,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208830,
+      'value_form' => 'task_idea',
       'value' => array(
         0 => array(
-          'tid' => 1208830,
+          'value' => 'task_idea',
         ),
       ),
       'values' => array(),
@@ -3794,7 +3794,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_body_ugc',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -4095,10 +4095,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208831,
+      'value_form' => 'ugc',
       'value' => array(
         0 => array(
-          'tid' => 1208831,
+          'value' => 'ugc',
         ),
       ),
       'values' => array(),
@@ -4109,7 +4109,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_subject',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -4410,10 +4410,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208831,
+      'value_form' => 'ugc',
       'value' => array(
         0 => array(
-          'tid' => 1208831,
+          'value' => 'ugc',
         ),
       ),
       'values' => array(),
@@ -4424,7 +4424,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_subject_body',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -4725,10 +4725,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208830,
+      'value_form' => 'task_idea',
       'value' => array(
         0 => array(
-          'tid' => 1208830,
+          'value' => 'task_idea',
         ),
       ),
       'values' => array(),
@@ -4739,7 +4739,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_subject_cms_mail',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -5040,10 +5040,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208823,
+      'value_form' => 'cms_mail_template',
       'value' => array(
         0 => array(
-          'tid' => 1208823,
+          'value' => 'cms_mail_template',
         ),
       ),
       'values' => array(),
@@ -5054,7 +5054,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_subject_expert',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -5355,10 +5355,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208822,
+      'value_form' => 'ask_an_expert',
       'value' => array(
         0 => array(
-          'tid' => 1208822,
+          'value' => 'ask_an_expert',
         ),
       ),
       'values' => array(),
@@ -5369,7 +5369,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_subject_follwo_story',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -5670,10 +5670,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208824,
+      'value_form' => 'follow_story',
       'value' => array(
         0 => array(
-          'tid' => 1208824,
+          'value' => 'follow_story',
         ),
       ),
       'values' => array(),
@@ -5684,7 +5684,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_subject_loyalty',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -5985,10 +5985,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208825,
+      'value_form' => 'loyalty_points_expiration',
       'value' => array(
         0 => array(
-          'tid' => 1208825,
+          'value' => 'loyalty_points_expiration',
         ),
       ),
       'values' => array(),
@@ -5999,7 +5999,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_subject_password_chan',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -6300,10 +6300,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208826,
+      'value_form' => 'password_changed',
       'value' => array(
         0 => array(
-          'tid' => 1208826,
+          'value' => 'password_changed',
         ),
       ),
       'values' => array(),
@@ -6314,7 +6314,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_subject_print_t',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -6615,10 +6615,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208827,
+      'value_form' => 'print_team',
       'value' => array(
         0 => array(
-          'tid' => 1208827,
+          'value' => 'print_team',
         ),
       ),
       'values' => array(),
@@ -6629,7 +6629,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_subject_product_expir',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -6930,10 +6930,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208828,
+      'value_form' => 'product_expiration',
       'value' => array(
         0 => array(
-          'tid' => 1208828,
+          'value' => 'product_expiration',
         ),
       ),
       'values' => array(),
@@ -6944,7 +6944,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_subject_sign_up',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -7245,10 +7245,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208829,
+      'value_form' => 'sign_up',
       'value' => array(
         0 => array(
-          'tid' => 1208829,
+          'value' => 'sign_up',
         ),
       ),
       'values' => array(),
@@ -7259,7 +7259,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_mail_subject_task_idea',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -7560,10 +7560,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208830,
+      'value_form' => 'task_idea',
       'value' => array(
         0 => array(
-          'tid' => 1208830,
+          'value' => 'task_idea',
         ),
       ),
       'values' => array(),
@@ -7574,7 +7574,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_new_task_status',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -7875,10 +7875,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208830,
+      'value_form' => 'task_idea',
       'value' => array(
         0 => array(
-          'tid' => 1208830,
+          'value' => 'task_idea',
         ),
       ),
       'values' => array(),
@@ -7889,7 +7889,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_product_expiration_status',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -8190,10 +8190,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208828,
+      'value_form' => 'product_expiration',
       'value' => array(
         0 => array(
-          'tid' => 1208828,
+          'value' => 'product_expiration',
         ),
       ),
       'values' => array(),
@@ -8834,7 +8834,7 @@ function mail_templates_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'mail_templates',
     'dependent' => 'field_ugc_comments_status',
-    'dependee' => 'field_mail_template_category',
+    'dependee' => 'field_mail_templates_category',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -9135,10 +9135,10 @@ function mail_templates_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 1208831,
+      'value_form' => 'ugc',
       'value' => array(
         0 => array(
-          'tid' => 1208831,
+          'value' => 'ugc',
         ),
       ),
       'values' => array(),
