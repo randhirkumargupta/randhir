@@ -57,4 +57,3 @@ features[variable][] = node_options_bestcolleges
 features[variable][] = node_preview_bestcolleges
 features[variable][] = node_submitted_bestcolleges
 features[views_view][] = best_college_image_slider
-project path = /home/arun/Downloads/college/

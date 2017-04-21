@@ -315,7 +315,7 @@ print itg_city_option($year,$tid, $city, $rstream);
         <h4 class="list-group-item-heading"><a href="/bestcolleges/[field_bestcollege_year]/ranks/[tid]">  [field_story_category]</a></h4>
         <div class="caption">            
             <p class="group inner list-group-item-text"> <a href="/bestcolleges/[field_bestcollege_year]/ranks/[tid]"> 
-            [title]</a></p> 
+            [title], [field_bestcollege_city]</a></p> 
             <div class="cl1"> <a href="/bestcolleges/[field_bestcollege_year]/ranks/[tid]">Rank :  [field_bestcollege_rank]</a></div>
             <div class="cl"> <a href="/bestcolleges/[field_bestcollege_year]/ranks/[tid]">SEE COMPLETE LIST | DIRECTORY</a></div>
            [php] 
