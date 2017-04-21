@@ -987,7 +987,8 @@ jQuery(document).ready(function () {
     // jQuery code for report-chart-tabs
     jQuery('.report-chart-tabs').on('click', 'a', function(){
       var getId = jQuery(this).attr('data-toggle');
-      jQuery(this).parent().addClass('active').parent().parent().next().find('#'+getId).show().siblings().hide();
+      jQuery(this).parent().addClass('active').parent().parent().next().find('#'+getId).css('opacity', 1).siblings().css('opacity', 0);
+      jQuery(this).parent().siblings().removeClass('active');
     });
     
     // jQuery code to show-hide mail templates token popup

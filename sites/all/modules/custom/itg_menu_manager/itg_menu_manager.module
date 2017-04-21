@@ -96,6 +96,7 @@ function itg_menu_manager_permission() {
  * {@inheritdoc}
  */
 function itg_menu_manager_form($form, &$form_state) {
+  drupal_add_js(drupal_get_path('module' , 'itg_menu_manager') . '/js/jscolor.min.js' , 'file');
   $menu_arg = arg();
   // Change title during edit operation.
   if (isset($_GET['edit_id'])) {
@@ -244,13 +245,20 @@ function itg_menu_manager_form($form, &$form_state) {
   );
 
   $form['sponsored_category'] = array(
-    '#title' => t('Sponsored category'),
+    '#title' => t('Sponsored Category'),
     '#type' => 'checkboxes',
     '#description' => t('Sponsored category is applicable for only second level menu. Value saved for third level menu will not appear on front end.'),
     '#default_value' => (isset($default_values['extra']) && ($default_values['extra'] == "Yes")) ? array("Yes") : array(),
     '#options' => array('Yes' => t('Yes')),
   );
 
+  $form['bk_color'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Background Color'),
+    '#default_value' => isset($default_values['bk_color']) ? $default_values['bk_color'] : "",
+    '#attributes' => array('class' => array('jscolor {hash:true}')),
+  );
+    
   $form['display_icon'] = array(
     '#title' => t('Display'),
     '#type' => 'radios',
@@ -304,13 +312,7 @@ function itg_menu_manager_form($form, &$form_state) {
     unset($form['title']['#ajax']);
   }
 
-  drupal_add_css('#autocomplete {
-height: 300px;
-max-height: 400px;
-overflow: auto;
-overflow-y: auto;
-overflow-x: hidden;
-}', 'inline');
+  drupal_add_css('#autocomplete { height: 300px; max-height: 400px; overflow: auto; overflow-y: auto; overflow-x: hidden;}', 'inline');
 ##############################################################################
 ########### Condtion removed fornow for file title in case of second #########
 ##############################################################################
@@ -338,7 +340,7 @@ function itg_menu_manager_form_validate($form, &$form_state) {
     $url = $values['url'];
 
     // Validation for dublicate menu and sub menu.
-    if ($url_type == 'internal' && !isset($_GET['edit_id'])) {
+    if ($url_type == 'internal') {
       // get values beween squre breaket.
       preg_match_all("/\[([^\]]*)\]/", $values['title'], $matches);
       // get tid
@@ -365,6 +367,22 @@ function itg_menu_manager_form_validate($form, &$form_state) {
           $display_message = $section_link;
         }
         $errors[] = t("Menu <b>" . $values['title'] . "</b> Already Exists. $display_message");
+      }
+      // Handle edit case if same.
+      if(isset($_GET['edit_id'])) {
+        try {
+            $get_term_id_from_db = db_select('itg_menu_manager' ,'imm');
+            $get_term_id_from_db->fields('imm' , array('title'));
+            $get_term_id_from_db->condition('imm.id' , $_GET['edit_id'] , '=');
+            $title_data = $get_term_id_from_db->execute()->fetchField();
+            
+            if($values['title'] == $title_data) {
+              $errors = array();
+            }
+            
+        } catch (Exception $ex) {
+            watchdog('menu_manager', $ex->getMessage());
+        }
       }
     }
     
@@ -641,6 +659,7 @@ function itg_menu_manager_form_submit($form, &$form_state) {
   $url = filter_xss($values['url']);
   $target = filter_xss($values['url_window']);
   $category_icon = $values['category_icon'];
+  $bk_color = $values['bk_color'];
   $sponsored_category = $values['sponsored_category']['Yes'];
   $is_sponsored = ($sponsored_category) ? $sponsored_category : "No";
   $file_id = 'notFound';
@@ -677,6 +696,7 @@ function itg_menu_manager_form_submit($form, &$form_state) {
             'extra' => $is_sponsored,
             'menu_name' => $file_id,
             'display_icon' => $display_icon,
+            'bk_color' => $bk_color,
               )
           )->condition('id', $edit_id, "=")->execute();
 
@@ -690,7 +710,7 @@ function itg_menu_manager_form_submit($form, &$form_state) {
         $query = array("section_id" => $sections, "section_child" => $sections);
         drupal_goto('menu-manager/third', array("query" => $query));
       }
-      drupal_set_message("$menu_level menu has been updated");
+      drupal_set_message("@level menu has been updated" , array("@level" => $menu_level));
     }
     catch (Exception $ex) {
       drupal_set_message($ex->getMessage());
@@ -732,6 +752,7 @@ function itg_menu_manager_form_submit($form, &$form_state) {
             'extra' => $is_sponsored,
             'menu_name' => $file_id,
             'display_icon' => $display_icon,
+            'bk_color' => $bk_color,
           ))
           ->execute();
       if ($menu_level == 'second') {
