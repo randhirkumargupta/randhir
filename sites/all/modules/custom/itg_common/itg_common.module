@@ -67,7 +67,7 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
   );
   
-  $items['videogallery-embed'] = array(
+  $items['embed/videogallery-embed'] = array(
     'page callback' => 'itg_videogallery_embed',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
@@ -570,7 +570,7 @@ function itg_custom_message($type, $workbench_current_state, $case, $title, $des
  */
 function itg_common_node_view($node, $view_mode, $langcode) {
   $arg = arg();
-
+  $expiry_condition = FALSE;
   if ($node->type == 'ask_an_expert') {
     $node_title = "Question : " . $node->title;
     drupal_set_title(t($node_title));
@@ -581,6 +581,19 @@ function itg_common_node_view($node, $view_mode, $langcode) {
       $node->content['comment_count'] = totalcomments($arg[1]);
     }
   }
+  
+  // Handle case of story expiry.
+ if(!empty($node->field_story_expires['und'][0]['value']) && $node->field_story_expires['und'][0]['value'] == 'Yes') {
+    $expiry_condition = TRUE;
+ }
+
+ if($expiry_condition && isset($node->field_story_expiry_date['und'][0]['value']) && !empty($node->field_story_expiry_date['und'][0]['value'])) {
+   $expiry_date_time = strtotime($node->field_story_expiry_date['und'][0]['value']);
+   $current_date_time = time();
+   if($current_date_time >= $expiry_date_time) {
+    //return drupal_access_denied();
+   }
+ }
 }
 
 /**
@@ -875,8 +888,9 @@ function itg_photogallery_embed() {
  */
 function itg_videogallery_embed() {
   if (!empty($_GET['gid'])) {
+    $gid = base64_decode($_GET['gid']);
     if (function_exists('get_video_in_fieldcollection_by_nid')) {
-      $videoids = get_video_in_fieldcollection_by_nid($_GET['gid']);
+      $videoids = get_video_in_fieldcollection_by_nid($gid);
     }
     return theme('itg_videogallery_embed', array('data' => $videoids));
   }
@@ -904,4 +918,32 @@ function get_term_name_from_tid($tid, $vid = CATEGORY_MANAGMENT) {
       ->condition('ttd.tid' ,$tid)
       ->condition('ttd.vid' ,$vid);
   return $query->execute()->fetchObject();
+}
+
+/**
+ * Helper function to get user details
+ * @param int $uid 
+ */
+function itg_custom_get_user_details($uid) {
+  if(!empty($uid)) {
+  $query = db_select('users', 'u');
+  $query->join('field_data_field_first_name', 'f', 'u.uid = f.entity_id');
+  $query->join('field_data_field_last_name', 'g', 'u.uid = g.entity_id');
+  $query->fields('u', array('uid'))
+          ->fields('u', array('mail'))
+          ->fields('u', array('name'))
+          ->fields('f', array('field_first_name_value'))
+          ->fields('g', array('field_last_name_value'))
+          ->condition('u.uid', $uid);
+  $result = $query->execute();
+  
+  while ($record = $result->fetchAssoc()) {
+    $user_list['mail'] = $record['mail'];
+    $user_list['name'] = $record['name'];
+    $user_list['fname'] = $record['field_first_name_value'];
+    $user_list['lname'] = $record['field_last_name_value'];
+  }
+  
+  return $user_list;
+  }
 }

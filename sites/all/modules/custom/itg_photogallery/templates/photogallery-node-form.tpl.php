@@ -6,7 +6,7 @@
  */
 //p($page);
 ?>
-<!--<div class=""><?php //print drupal_render($form['actions']);   ?></div>-->
+<!--<div class=""><?php //print drupal_render($form['actions']);    ?></div>-->
 <div class="row">
   <div class="col-md-8 itg-form-main">
     <div id="Element" class="itg-form-section-wrapper">
@@ -65,9 +65,9 @@
         <h2 class="story-title">Configuration</h2>
         <div class="itg-form-section hide">
           <?php print drupal_render($form['field_featured']); ?>
-          <?php echo drupal_render($form['field_story_syndication']); ?>
-          <?php print drupal_render($form['field_common_related_content']); ?>
 
+          <?php print drupal_render($form['field_common_related_content']); ?>
+          <?php print drupal_render($form['field_story_syndication']); ?>
           <?php print drupal_render($form['field_photogallery_configuration']); ?>
           <?php print drupal_render($form['field_story_comment_question']); ?>    
         </div>

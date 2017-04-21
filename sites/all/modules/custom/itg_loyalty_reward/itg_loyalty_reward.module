@@ -386,7 +386,7 @@ function itg_loyalty_reward_node_validate($node, $form, &$form_state) {
  * {@inheritdoc}
  */
   function itg_loyalty_reward_cronapi($op, $job = NULL) {
-    $items['itg_loyalty_reward_product_expiry_notification'] = array(
+      $items['itg_loyalty_reward_product_expiry_notification'] = array(
         'description' => 'Send mail before 24 hours for product expiration (Loyalty) ',
         'callback' => 'itg_loyalty_reward_product_expiry_notification_callback',
     );
@@ -403,8 +403,23 @@ function itg_loyalty_reward_node_validate($node, $form, &$form_state) {
  * Send mail to siteadmin and editor before 24 hours of product expiration
  */
 function itg_loyalty_reward_product_expiry_notification_callback() {
-    // Include itg_loyalty_reward mail file to send mail
     module_load_include('inc', 'itg_loyalty_reward', 'includes/itg_loyalty_reward_mail');
+    
+    $rid = array(SITE_ADMIN, MARKETING_MANAGER);
+    $user_email = get_email_by_roll($rid);
+    $query = db_select('field_data_field_lrp_product_count', 'flpc');
+    $query->fields('flpc', array('entity_id'));
+    $query->condition('flpc.field_lrp_product_count_value', 0, '=');
+    $query->condition('flpc.bundle', 'loyalty_and_rewards', '=');
+    $result = $query->execute();
+    while ($record = $result->fetchAssoc()) {
+      if (!empty($record['entity_id'])) {
+        itg_loyalty_reward_send_mail_product_expiration($record['entity_id'], $user_email, 'inventory_status');
+      }
+    }
+    
+    // Include itg_loyalty_reward mail file to send mail
+    
     $current_time = time();
     $query = db_select('itg_loyalty_reward_cron', 'c');
     $query->fields('c')

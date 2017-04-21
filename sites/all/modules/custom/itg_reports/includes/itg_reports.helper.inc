@@ -223,25 +223,25 @@ function itg_registered_user_display_report($user_id) {
                     </ul>
                 </div>';
     $chart .= '<div class="tab-content">';
-    $chart .= '<div id="report1" class="tab-pane fade in">';
+    $chart .= '<div style="display:block" id="report1" class="tab-pane fade in">';
     if(!empty($views_nodes['under_personalized_section'])) {
       $chart .= theme('itg_reports_personalized_data_chart' , array(
         "total_section_node_visited" => $views_nodes['under_personalized_section'] ,
           )
       );
     } else {
-      $chart .= t("Data not found.");
+      $chart .= '<p>' . t("Data not found.") . '<p>';
     }
     $chart .= "</div>";
 
-    $chart .= '<div id="report2" class="tab-pane fade in active">';
+    $chart .= '<div style="display:block" id="report2" class="tab-pane fade in active">';
     if(!empty($views_nodes['other_personalized_section'])) {
       $chart .= theme('itg_reports_sections_data_chart' , array(
         'node_under_section_visited' => $views_nodes['other_personalized_section'] ,
       ));
     }
     else {
-      $chart .= t("Data not found.");
+      $chart .= '<p>' . t("Data not found.") . '<p>';
     }
     $chart .= "</div>";
     $chart .= "</div>";

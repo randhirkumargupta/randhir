@@ -50,7 +50,9 @@ if (!empty($content)):
   if (!empty($byline_id)) {
     $reporter_node = node_load($byline_id);
   }
-
+  
+  // get posted by info
+  $node_author = $content["author"];
   /*if (function_exists('itg_get_front_activity_info')) {
     $opt = $content["front_activity_info"];
   }*/
@@ -809,7 +811,10 @@ if (!empty($content)):
                 print 0;
               }
               ?></span> SHARES</li>
-                  <?php if ($user->uid > 0): if (!empty($follow_status['nid']) && $follow_status['status'] == '1'): ?>  
+              <?php if(!empty($node_author['fname'])) { ?>
+              <li class="mhide"><span class="posted-by"><?php print t('Posted by'); ?></span><span class="posted-name"><?php print $node_author['fname'].' '.$node_author['lname']; ?></span></li>
+              <?php } ?>   
+                <?php if ($user->uid > 0): if (!empty($follow_status['nid']) && $follow_status['status'] == '1'): ?>  
                   <li class="mhide follow-story"><a title = "Unfollow Story" href="javascript:" id="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="follow_story" data-status="0" class="def-cur-pointer">Unfollow Story</a></li>
                 <?php else: ?>
                   <li class="mhide follow-story"><a title = "Follow the Story" href="javascript:" id="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="follow_story" data-status="1" class="def-cur-pointer">Follow the Story</a></li>
