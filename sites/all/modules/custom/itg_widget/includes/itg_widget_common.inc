@@ -1817,7 +1817,7 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name , $range_max 
     $query->leftJoin('field_data_field_story_extra_small_image' , 'esi' , 'esi.entity_id=n.nid');
   }
   
-  if ($widget_name == 'featured_photo_carousel') {
+  if ($widget_name == 'featured_photo_carousel' || $widget_name == 'video_carousel_list_widget') {
     $query->leftJoin('field_data_field_story_extra_large_image' , 'eli' , 'eli.entity_id=n.nid');
   }
   //we_may_suggest_widget
