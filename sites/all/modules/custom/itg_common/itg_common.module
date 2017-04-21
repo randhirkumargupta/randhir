@@ -906,3 +906,31 @@ function get_term_name_from_tid($tid, $vid = CATEGORY_MANAGMENT) {
       ->condition('ttd.vid' ,$vid);
   return $query->execute()->fetchObject();
 }
+
+/**
+ * Helper function to get user details
+ * @param int $uid 
+ */
+function itg_custom_get_user_details($uid) {
+  if(!empty($uid)) {
+  $query = db_select('users', 'u');
+  $query->join('field_data_field_first_name', 'f', 'u.uid = f.entity_id');
+  $query->join('field_data_field_last_name', 'g', 'u.uid = g.entity_id');
+  $query->fields('u', array('uid'))
+          ->fields('u', array('mail'))
+          ->fields('u', array('name'))
+          ->fields('f', array('field_first_name_value'))
+          ->fields('g', array('field_last_name_value'))
+          ->condition('u.uid', $uid);
+  $result = $query->execute();
+  
+  while ($record = $result->fetchAssoc()) {
+    $user_list['mail'] = $record['mail'];
+    $user_list['name'] = $record['name'];
+    $user_list['fname'] = $record['field_first_name_value'];
+    $user_list['lname'] = $record['field_last_name_value'];
+  }
+  
+  return $user_list;
+  }
+}
