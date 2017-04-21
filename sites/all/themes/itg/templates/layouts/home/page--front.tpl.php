@@ -112,7 +112,7 @@ if ($theme != 'itgadmin') {
           <div class="top-block">
 
             <div class="top-colum-2">
-              <div class="widget-help-text">Template widgets ( <strong>Featured Story</strong> )</div>
+              <div class="widget-help-text">Template widgets ( <strong>Home Page Feature</strong> )</div>
               <div class="itg-widget">
                 <div class="droppable <?php print $gray_bg_layout; ?>">
                   <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
@@ -586,7 +586,7 @@ if ($theme != 'itgadmin') {
                 </div>  
               </div>
               <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
-                <div class="widget-help-text">Template widgets ( <strong>Watch Right Now</strong> )</div>
+                <div class="widget-help-text">Section card ( <strong>Watch</strong> )</div>
                 <div class="itg-widget">
                   <div class="droppable <?php print $gray_bg_layout; ?>">
                     <div class="widget-wrapper watch-video-home <?php print $widget_data['itg-block-13']['widget_name']; ?>">
