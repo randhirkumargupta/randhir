@@ -61,6 +61,8 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
     $cat_id = $info['section'];
     $view_name = $info['view_name'];
     $widget_name = _get_widget_name($view_name, 'page');
+    $valid_content_type = _get_content_type_for_widget($widget_name);
+
     $query = db_select('itg_widget_order', 'iwo');
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     //join  for field value
@@ -92,6 +94,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
         // fix for getting all content type
         ->condition('iwo.widget', $widget_name)
         ->condition('iwo.content_type', 'All')
+        ->condition('n.type' , $valid_content_type)
         ->condition('n.status', '1')
         ->orderBy('iwo.weight', 'DESC')
         ->orderBy('n.nid', 'DESC')
@@ -211,6 +214,8 @@ function itg_widget_section_wise_ordering_for_rhs_from_custom_table($info) {
     $cat_id = $info['section'];
     $view_name = $info['view_name'];
     $widget_name = _get_widget_name($view_name, 'page');
+    $valid_content_type = _get_content_type_for_widget($widget_name);
+
     $query = db_select('itg_widget_order', 'iwo');
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     //join  for field value
@@ -224,6 +229,7 @@ function itg_widget_section_wise_ordering_for_rhs_from_custom_table($info) {
         ->condition('iwo.cat_id', $cat_id)
         // fix for getting all content type
         ->condition('iwo.widget', $widget_name)
+        ->condition('n.type' , $valid_content_type)
         ->condition('n.status', '1')
         ->orderBy('iwo.weight', 'DESC')
         ->range(0, 5);
