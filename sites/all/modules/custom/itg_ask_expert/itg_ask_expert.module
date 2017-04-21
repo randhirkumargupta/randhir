@@ -224,7 +224,7 @@ function itg_ask_expert_node_insert($node) {
           $uemail = $node->field_user_email[LANGUAGE_NONE][0]['value'];
           $ucity = $node->field_user_city[LANGUAGE_NONE][0]['value'];
           $ustate = $node->field_user_state[LANGUAGE_NONE][0]['value'];
-          $ask_expert_submit_query = itg_mail_templates_get_mailcontent($node);
+          $ask_expert_submit_query = itg_mail_templates_get_mailcontent($node, 'When user submit query');
           $body_value = $ask_expert_submit_query->field_mail_body_expert[LANGUAGE_NONE][0]['value'];
           $body_question = str_replace('[itg_mail_token:itg_expert_question]', $node->title, $body_value);
           $body_name = str_replace('[itg_mail_token:itg_expert_name]', $name, $body_question);
@@ -241,6 +241,45 @@ function itg_ask_expert_node_insert($node) {
         );
         $to = implode(',', $expert_arr);
 
+        $mail = drupal_mail('itg_ask_expert', 'send_mail_to_expert', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+        if ($mail['result']) {
+            return TRUE;
+        }
+        else {
+            $error_msg = 'Failed to send the email!';
+            watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+            return FALSE;
+        }
+    }
+}
+
+
+/**
+ * Implements hook_node_update
+ * {@inheritdoc}
+ */
+function itg_ask_expert_node_update($node) {
+  global $base_url;
+    if ($node->type == 'ask_an_expert') {
+        module_load_include('inc', 'itg_ask_expert', 'include/itg_ask_expert_mail');
+        // get term id to fetch all role related to term id
+        $to = $node->field_user_email[LANGUAGE_NONE][0]['value'];
+        $name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
+        $node_url = l($node->title, $base_url . '/node/' . $node->nid);
+        
+        if (function_exists('itg_mail_templates_get_mailcontent')) {
+          $ask_expert_submit_query = itg_mail_templates_get_mailcontent($node, 'When Review');
+          $mail_subject = $ask_expert_submit_query->field_mail_subject_expert[LANGUAGE_NONE][0]['value'];
+          $body_value = $ask_expert_submit_query->field_mail_body_expert[LANGUAGE_NONE][0]['value'];
+          $body_name = str_replace('[itg_mail_token:itg_expert_name]', $name, $body_value);
+          $body_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $body_name);
+          $mail_content = $body_url;
+        }
+        
+        $params = array(
+            'body' => $mail_content,
+            'subject' => $mail_subject,
+        );
         $mail = drupal_mail('itg_ask_expert', 'send_mail_to_expert', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
         if ($mail['result']) {
             return TRUE;
