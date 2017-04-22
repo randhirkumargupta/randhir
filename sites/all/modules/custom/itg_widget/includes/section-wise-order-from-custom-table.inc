@@ -106,11 +106,11 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
       $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
     }
     
-    if ($widget_style == 'standpoint' || $widget_style == 'edu-from-the-magazine') {
+    if ($widget_style == 'standpoint' ) {
       $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
     }
     
-    if ($widget_style == 'undefined' || $widget_style == '') {
+    if ($widget_style == 'undefined' || $widget_style == '' || $widget_style == 'edu-from-the-magazine') {
       $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
     }
     
@@ -155,13 +155,13 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
       $query->addExpression("si_file.uri", 'si_file_uri');
     }
     
-    if ($widget_style == 'standpoint' || $widget_style == 'edu-from-the-magazine') {
+    if ($widget_style == 'standpoint') {
       $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
       $query->fields('eli_file', array('uri'));
-      $query->addExpression("eli_file.uri", 'eli_file_uri');
+     
     }
     
-    if ($widget_style == 'undefined' || $widget_style == '') {
+    if ($widget_style == 'undefined' || $widget_style == '' || $widget_style == 'edu-from-the-magazine') {
       $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
       $query->fields('mi_file', array('uri'));
       $query->addExpression("mi_file.uri", 'mi_file_uri');
