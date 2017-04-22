@@ -6,7 +6,7 @@
 function itg_mail_templates_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'mail_templates_node_form') { 
       $form['#prefix'] = '<div class="get-tokens">Click <a href="javascript:;" data-id="mail-templates-token">here</a> to get tokens</div><div class="token-table">
-        <div class="itgadmin-popup-wrapper" id="mail-templates-token">
+        <div class="itgadmin-popup-wrapper" id="mail-templates-token" style="display:none">
           <div class="itgadmin-popup">
             <span class="close-itgadmin-popup"><i class="fa fa-times" aria-hidden="true"></i></span>
             <h2>ITG mail templates token</h2>
@@ -566,5 +566,18 @@ function itg_mail_templates_get_mailcontent($key, $task_event, $ugc_status) {
     $records = $result->fetchAssoc();
     $get_mail_content = node_load($records['nid']);
     return $get_mail_content;
+  }
+}
+
+/**
+ * Implement hook_views_pre_render
+ * {@inheritdoc}
+ */
+function itg_mail_templates_views_pre_render(&$view) {
+  // Add "Create Breaking news" on listing page of Breaking news
+  if ($view->name == "mail_templates" && $view->current_display == 'page') {
+    $header_content_mail_template = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+    $header_content_mail_template .= l('Create Mail Templates', 'node/add/mail-templates', array('query' => array('destination' => 'mail-templates')));
+    $view->attachment_before = $header_content_mail_template;
   }
 }
