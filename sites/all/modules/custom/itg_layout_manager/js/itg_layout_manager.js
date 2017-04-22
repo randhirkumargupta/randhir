@@ -227,6 +227,7 @@
 
             $('#layout-button-cancel').click(function() {
                 var base_url = settings.itg_story.settings.base_url;
+                
                 var section_name = $('#edit-section').val();
                 var template_name = $('#edit-template-name').val();
                 $.ajax({
@@ -240,7 +241,8 @@
                         if (section_name == 'home_page') {
                             var dis_url = "/itg-layout-manager/home?section=home_page&template_name=page--front";
                         } else {
-                            var dis_url = "/itg-layout-list/section";
+                            var layout_type = settings.itg_story.settings.layout_type;
+                            var dis_url = "/itg-layout-list/"+layout_type;
                         }
                         window.location.href = base_url + dis_url;
                     }
