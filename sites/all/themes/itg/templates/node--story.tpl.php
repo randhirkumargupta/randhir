@@ -318,7 +318,7 @@ if (!empty($content)):
                       }
                       else {
                         ?>
-                        <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer active"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
+                        <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
                         <?php
                       }
                     }
