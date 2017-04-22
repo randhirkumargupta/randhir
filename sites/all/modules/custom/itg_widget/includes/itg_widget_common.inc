@@ -1848,7 +1848,7 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name , $range_max 
       $query->addExpression("si_file.uri", 'si_file_uri');
   }
   
-  if ($widget_name == 'trending_videos_widget' || $widget_name == 'watch_right_now_widget') {
+  if ($widget_name == 'trending_videos_widget' || $widget_name == 'watch_right_now_widget' || $widget_name == 'we_may_suggest_widget' || $widget_name == 'top_takes_video_widget') {
       $query->leftJoin('file_managed' , 'esi_file' , 'esi_file.fid=esi.field_story_extra_small_image_fid');
       $query->fields('esi_file' , array('uri'));
       $query->addExpression("esi_file.uri", 'esi_file_uri');
