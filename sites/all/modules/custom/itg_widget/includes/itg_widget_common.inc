@@ -1618,26 +1618,25 @@ function itg_widget_preprocess_views_view(&$vars) {
  * {@inheritdoc}
  */
 function itg_widget_preprocess_node(&$vars) {
-
-// Get all terms of vocabulary occupation.
-  $itg_occupation = taxonomy_vocabulary_machine_name_load('itg_occupation');
-  $itg_occupation_tree = taxonomy_get_tree($itg_occupation->vid);
-  foreach ($itg_occupation_tree as $term) {
-    $occupation[] = $term->name;
-  }
-
-  if ( $vars['type'] == 'reporter' && in_array('Anchor' , $occupation) ) {
-
-    drupal_add_js(
-        "jQuery(document).ready(function(){
-jQuery('.read-more , .full-content').click(function(){
-jQuery('.less-content').toggle();
-jQuery('.full-content').toggle();
-});
-})" , 'inline'
-    );
-    $vars['theme_hook_suggestions'][] = 'node__reporter__anchor';
-  }
+  if ($vars['type'] == 'reporter') {
+  // Get all terms of vocabulary occupation.
+    $itg_occupation = taxonomy_vocabulary_machine_name_load('itg_occupation');
+    $itg_occupation_tree = taxonomy_get_tree($itg_occupation->vid);
+    foreach ($itg_occupation_tree as $term) {
+      $occupation[] = $term->name;
+    }
+    
+    if (in_array(strtolower('Anchor') , $occupation) ) {
+      drupal_add_js("jQuery(document).ready(function(){
+              jQuery('.read-more , .full-content').click(function(){
+              jQuery('.less-content').toggle();
+              jQuery('.full-content').toggle();
+              });
+              })" , 'inline'
+      );
+      $vars['theme_hook_suggestions'][] = 'node__reporter__anchor';
+    }
+  }  
 }
 
 /**
