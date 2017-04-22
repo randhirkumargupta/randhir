@@ -1808,7 +1808,6 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name , $range_max 
     $query->leftJoin('field_data_field_story_medium_image' , 'mi' , 'mi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_large_image' , 'li' , 'li.entity_id=n.nid');
   } 
-  
   if ($widget_name == 'dont_miss_content_widget') {
     $query->leftJoin('field_data_field_story_small_image' , 'si' , 'si.entity_id=n.nid');
   }
@@ -1839,21 +1838,26 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name , $range_max 
     $query->leftJoin('file_managed' , 'mi_file' , 'mi_file.fid=mi.field_story_medium_image_fid');
     $query->fields('li_file' , array('uri'));
     $query->fields('mi_file' , array('uri')); 
+    $query->addExpression("li_file.uri", 'li_file_uri');
+    $query->addExpression("mi_file.uri", 'mi_file_uri');
   }
   
   if ($widget_name == 'dont_miss_content_widget') {
       $query->leftJoin('file_managed' , 'si_file' , 'si_file.fid=si.field_story_small_image_fid');
       $query->fields('si_file' , array('uri'));
+      $query->addExpression("si_file.uri", 'si_file_uri');
   }
   
   if ($widget_name == 'trending_videos_widget' || $widget_name == 'watch_right_now_widget') {
       $query->leftJoin('file_managed' , 'esi_file' , 'esi_file.fid=esi.field_story_extra_small_image_fid');
       $query->fields('esi_file' , array('uri'));
+      $query->addExpression("esi_file.uri", 'esi_file_uri');
   }
   
   if ($widget_name == 'featured_photo_carousel' || $widget_name == 'video_carousel_list_widget') {
       $query->leftJoin('file_managed' , 'eli_file' , 'eli_file.fid=eli.field_story_extra_large_image_fid');
       $query->fields('eli_file' , array('uri'));
+      $query->addExpression("eli_file.uri", 'eli_file_uri');
   }
   
   //$query->fields('eli_file' , array('uri'));  
@@ -1872,7 +1876,6 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name , $range_max 
       ->range($range_min , $range_max)
       ->fields('iwo' , array('nid' , 'extra' , 'weight'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  
   return $result;
 }
 
