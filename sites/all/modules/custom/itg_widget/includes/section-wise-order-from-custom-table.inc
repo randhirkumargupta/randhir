@@ -106,11 +106,11 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
       $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
     }
     
-    if ($widget_style == 'standpoint' || $widget_style == 'edu-from-the-magazine') {
+    if ($widget_style == 'standpoint' ) {
       $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
     }
     
-    if ($widget_style == 'undefined' || $widget_style == '') {
+    if ($widget_style == 'undefined' || $widget_style == '' || $widget_style == 'edu-from-the-magazine') {
       $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
     }
     
@@ -133,6 +133,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
             || $widget_style == 'budget-decoded') {
       $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
       $query->fields('esi_file', array('uri'));
+      $query->addExpression("esi_file.uri", 'esi_file_uri');
     } 
     if ( $widget_style == 'edu-exam' 
             || $widget_style == 'edu-gov-jobs' 
@@ -144,22 +145,26 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
             || $widget_name == 'movies-lifestyle') {
       $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
       $query->fields('mi_file', array('uri'));
+      $query->addExpression("mi_file.uri", 'mi_file_uri');
     }
     
     if ($widget_name == 'oscar-news' 
             || $widget_name == 'home-watch') {
       $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
-      $query->fields('si_file', array('uri'));      
+      $query->fields('si_file', array('uri')); 
+      $query->addExpression("si_file.uri", 'si_file_uri');
     }
     
-    if ($widget_style == 'standpoint' || $widget_style == 'edu-from-the-magazine') {
+    if ($widget_style == 'standpoint') {
       $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
       $query->fields('eli_file', array('uri'));
+     
     }
     
-    if ($widget_style == 'undefined' || $widget_style == '') {
+    if ($widget_style == 'undefined' || $widget_style == '' || $widget_style == 'edu-from-the-magazine') {
       $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
       $query->fields('mi_file', array('uri'));
+      $query->addExpression("mi_file.uri", 'mi_file_uri');
     }    
     
     $query->fields('kt', array('field_story_kicker_text_value'));
