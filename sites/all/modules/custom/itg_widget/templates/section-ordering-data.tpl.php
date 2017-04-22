@@ -693,7 +693,7 @@ else if ($widget_style == 'oscar-features') {
         }
         ?>
         <div class="col-md-6 col-sm-6 col-xs-12">
-          <span> <a <?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
+          <span> <a <?php echo $video_class; ?> href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
               <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>" alt="" />
             </a></span>
 

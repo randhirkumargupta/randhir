@@ -23,7 +23,7 @@
                     lineNumbers: true
                 });
             };
-            
+        
              // hide vertical-tabs
             jQuery('.vertical-tabs').hide();
             

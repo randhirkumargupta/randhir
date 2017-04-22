@@ -1094,3 +1094,8 @@ if (function_exists('vukkul_view')) {
             <p>Your Account Activated Successfully!</p>
           </div>
         </div>
+          <style>
+            .flexslider .slides img {
+   max-height: 363px;
+}
+          </style>
