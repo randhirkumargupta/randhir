@@ -12366,6 +12366,12 @@ body.taxonomy-form-term-tags {
   cursor: pointer;
 }
 
+.node-mail_templates-form .form-item-title {
+  display: none;
+}
+.node-mail_templates-form .vertical-tabs {
+  display: none;
+}
 .node-mail_templates-form .vertical-tabs .vertical-tabs-list {
   display: none;
 }
