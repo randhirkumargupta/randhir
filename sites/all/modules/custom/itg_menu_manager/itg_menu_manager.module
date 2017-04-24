@@ -124,26 +124,26 @@ function itg_menu_manager_form($form, &$form_state) {
   $section = isset($form_state['values']['sections']) ? $form_state['values']['sections'] : $frist_section;
 
   $menu_level = isset($form_state['values']['menu_level']) ? $form_state['values']['menu_level'] : "second";
-  
+
   ########################################
   #                                      #
   # Handel case when user come form menu #
   #                                      #
   ########################################
-  
+
   if($menu_arg[0] == 'itg-menu-manager' && $menu_arg[1] == 'second') {
     $default_values['menu_level'] = "second";
   }
-  
+
   if($menu_arg[0] == 'itg-menu-manager' && $menu_arg[1] == 'vertical') {
     $default_values['menu_level'] = "vertical";
   }
-  
+
   if($menu_arg[0] == 'itg-menu-manager' && $menu_arg[1] == 'third') {
     $default_values['menu_level'] = "third";
     $menu_level = 'third';
   }
-  
+
   if ($menu_level == 'third') {
     //drupal_add_css('#decided-section {display:inline-block !important;}', array('type' => 'inline'));
     $options = itg_menu_manager_get_taxonomy_term_options('category_management');
@@ -348,7 +348,7 @@ function itg_menu_manager_form_validate($form, &$form_state) {
       $term_tid_array = explode("tid:", $matches[1][0]);
       // In case of external url we didnt got tid so mannualy give a tid.
       $term_id = ($term_tid_array[1]) ? trim($term_tid_array[1]) : time();
-      
+
       $count = _get_itg_menu_data($menu_level, $section_id, $url_type, $term_id);
 
       if ($count) {
@@ -386,7 +386,7 @@ function itg_menu_manager_form_validate($form, &$form_state) {
         }
       }
     }
-    
+
     if ($url_type == 'external' && !empty($url)) {
       if ((strpos($url, 'http') === 0) && filter_var($url, FILTER_VALIDATE_URL)) {
         //watchdog("menu_manager", "Url validated in case of external");
@@ -577,7 +577,7 @@ function get_section_update($form, &$form_state) {
 
 /**
  * returns drupal path of perticular term.
- * 
+ *
  * @param array $form
  * @param array $form_state
  * @return string
@@ -596,7 +596,7 @@ function get_url_of_current_term($form, &$form_state) {
 
 /**
  * Function is callback, which decide section is menadatory or not according to level.
- * 
+ *
  * @param array $form
  * @param array $form_state
  * @return array
@@ -632,7 +632,7 @@ function decide_section($form, &$form_state) {
 
 /**
  * Function is callback, which decide title autosuggest.
- * 
+ *
  * @param array $form
  * @param type $form_state
  * @return array
@@ -670,7 +670,7 @@ function itg_menu_manager_form_submit($form, &$form_state) {
 
     $file->status = FILE_STATUS_PERMANENT;
     $file_saved = file_save($file);
-    // Record that the module is using the file. 
+    // Record that the module is using the file.
     // If we dont do , then file will remove if a cron run.
     file_usage_add($file_saved, 'itg_menu_manager', 'category_icon_image', $file_saved->fid);
     $file_id = $file_saved->fid;
@@ -824,6 +824,8 @@ function itg_menu_manager_block_view($delta = '') {
     case 'third_level_menu':
       $data = array();
       $third_level_menu = get_third_level_menu();
+      //pr($third_level_menu);
+      //exit;
       $node_data = array();
 
       // handling for ip pages
@@ -892,6 +894,26 @@ function get_third_level_menu() {
   if (in_array(arg(1), $links_array)) {
     $node_data = node_load(arg(1));
   }
+
+  // for best college
+    $url_get = explode('/',$_SERVER['REQUEST_URI']);
+    if (isset($url_get[2]) && $url_get[1] == 'bestcolleges') {
+        if($arg[0] == 'taxonomy') {
+          $section_id = $arg[2];
+        } else {
+          $term_name = "Bestcolleges " . $url_get[2];
+          $term_data = taxonomy_get_term_by_name($term_name);
+          $tid = array_pop($term_data)->tid;
+          $section_id = ($tid) ? $tid : '';
+        }
+
+        $parents = taxonomy_get_parents_all($section_id);
+        if (count($parents) > 1) {
+          $section_id = end($parents)->tid;
+        }
+    }
+
+  // end best collehe
 
   // condition for itg theme
   if (isset($arg[2])) {
@@ -980,7 +1002,7 @@ function itg_menu_manager_views_data() {
     'help' => t('Log information about taxonomy term.'),
     'relationship' => array(
       'base' => 'taxonomy_term_data', // The name of the table to join with.
-      'base field' => 'tid', // The name of the field on the joined table.      
+      'base field' => 'tid', // The name of the field on the joined table.
       'handler' => 'views_handler_relationship',
       'label' => t('Menu Category manager'),
       'title' => t('ITG'),
@@ -1319,7 +1341,7 @@ function itg_menu_manager_views_pre_render(&$view) {
     else {
       $count = $view->total_rows;
     }
-    
+
 
     // Handel case for inactive category.
     // Here altered result of $views->result i.e. skip rowa which have inactive tid.
@@ -1371,7 +1393,7 @@ function itg_menu_manager_form_views_exposed_form_alter(&$form, &$form_state, $f
 
 /**
  * Function handling link output of menus.
- * 
+ *
  * @global global $base_url
  * @param array $menu_data
  * @param array $argument
@@ -1490,7 +1512,7 @@ function _delete_term_from_menu_manager($tid) {
 
 /**
  * Function which returns count of rows w.r.t menu_manager data.
- * 
+ *
  * @param string $menu_level
  * @param int $section_id
  * @param string $url_type
