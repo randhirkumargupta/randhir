@@ -1274,10 +1274,11 @@ function itg_mobile_services_get_service_list() {
   $query->distinct();
   $query->fields('node', array('nid', 'title'));
 
-  $query->join('field_data_field_story_expiry_date', 'expiry_date', "node.nid= expiry_date.entity_id");
+  $query->leftJoin('field_data_field_story_expiry_date', 'expiry_date', "node.nid= expiry_date.entity_id");
   if (empty($node_nid)) {
-    $query->where("expiry_date.field_story_expiry_date_value >= CURDATE()");
-  }
+    $query->where("expiry_date.field_story_expiry_date_value >= CURDATE() or expiry_date.field_story_expiry_date_value IS NULL");
+   // $query->db_or()->condition()->isNull('expiry_date.field_story_expiry_date_value');
+  } //print strtr((string) $query, $query->arguments());die;
   $query->condition('node.type', 'service_creation', '=');
   $result = $query->execute();
   $record = $result->fetchAll();

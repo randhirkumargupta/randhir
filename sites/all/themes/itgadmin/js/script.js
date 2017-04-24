@@ -277,7 +277,7 @@ jQuery(document).ready(function () {
 
         // jQuery code to hide select option whenever user hover on ITGCMS navbar
         $('#block-menu-menu-admin-left-menu').mouseover(function () {
-            $('select').blur();
+           // $('select').blur();
         });
 
         $('#edit-field-gallery-image .field-name-field-images').find('.image-widget-data .file-size').each(function () {

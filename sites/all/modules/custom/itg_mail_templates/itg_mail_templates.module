@@ -6,7 +6,7 @@
 function itg_mail_templates_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'mail_templates_node_form') { 
       $form['#prefix'] = '<div class="get-tokens">Click <a href="javascript:;" data-id="mail-templates-token">here</a> to get tokens</div><div class="token-table">
-        <div class="itgadmin-popup-wrapper" id="mail-templates-token">
+        <div class="itgadmin-popup-wrapper" id="mail-templates-token" style="display:none">
           <div class="itgadmin-popup">
             <span class="close-itgadmin-popup"><i class="fa fa-times" aria-hidden="true"></i></span>
             <h2>ITG mail templates token</h2>
@@ -82,6 +82,11 @@ function itg_mail_templates_form_alter(&$form, &$form_state, $form_id) {
                 <td>ITG Node Title</td>
                 <td>[itg_mail_token:itg_node_title]    </td>
                 <td>A token that will be used for ITG Content Title in Mail Body.</td>
+              </tr>
+              <tr>
+                <td>ITG Node Nid</td>
+                <td>[itg_mail_token:itg_node_nid]    </td>
+                <td>A token that will be used for ITG Content Nid in Mail Body.</td>
               </tr>
               <tr>
                 <td>ITG Node Title With Link</td>
@@ -385,6 +390,21 @@ function itg_mail_templates_node_validate($node, $form, &$form_state) {
 
 function itg_mail_templates_get_mailcontent($key, $task_event, $ugc_status) {
   
+  if ($key->type == 'loyalty_and_rewards' && $task_event == 'inventory_status') {
+    $title = "Product Expiration";
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_product_expiration_status', 'pes', 'n.nid = pes.entity_id');
+    $query->fields('n');
+    $query->condition('pes.field_product_expiration_status_value', $task_event, '=');
+    $query->condition('n.status', 1, '=');
+    $query->condition('n.title', '%' . db_like($title) . '%', 'LIKE');
+    $query->condition('n.type', 'mail_templates', '=');
+    $result = $query->execute();
+    $records = $result->fetchAssoc();
+    $get_mail_content = node_load($records['nid']);
+    return $get_mail_content;
+  }
+  
   if ($key->type == 'story' && $task_event == 'Follow Story') {
     $query = db_select('node', 'n');
     $query->fields('n');
@@ -501,12 +521,20 @@ function itg_mail_templates_get_mailcontent($key, $task_event, $ugc_status) {
     return $get_mail_content;
   }
   if ($key->type == 'ask_an_expert') {
+    if ($task_event == 'When user submit query') {
+      $task_status = 'when_user_submit_query';
+    } elseif ($task_event == 'When Review') {
+      $task_status = 'please_check_screen_shot';
+    }
+    
     $key_type = str_replace("_", " ", $key->type);
     $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_ask_an_expert_case', 'aaec', 'n.nid = aaec.entity_id');
     $query->fields('n');
     $query->condition('n.status', 1, '=');
     $query->condition('n.title', '%' . db_like($key_type) . '%', 'LIKE');
     $query->condition('n.type', 'mail_templates', '=');
+    $query->condition('aaec.field_ask_an_expert_case_value', $task_status, '=');
     $result = $query->execute();
     $records = $result->fetchAssoc();
     $get_mail_content = node_load($records['nid']);
@@ -538,5 +566,18 @@ function itg_mail_templates_get_mailcontent($key, $task_event, $ugc_status) {
     $records = $result->fetchAssoc();
     $get_mail_content = node_load($records['nid']);
     return $get_mail_content;
+  }
+}
+
+/**
+ * Implement hook_views_pre_render
+ * {@inheritdoc}
+ */
+function itg_mail_templates_views_pre_render(&$view) {
+  // Add "Create Breaking news" on listing page of Breaking news
+  if ($view->name == "mail_templates" && $view->current_display == 'page') {
+    $header_content_mail_template = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+    $header_content_mail_template .= l('Create Mail Templates', 'node/add/mail-templates', array('query' => array('destination' => 'mail-templates')));
+    $view->attachment_before = $header_content_mail_template;
   }
 }

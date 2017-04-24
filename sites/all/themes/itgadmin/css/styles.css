@@ -10566,7 +10566,7 @@ div.node #comments h2 {
 [id*="daily-motion-video-dashboard"] fieldset .container-inline-date .date-padding .form-type-textfield > label {
   display: none !important;
 }
-[id*="daily-motion-video-dashboard"] fieldset .container-inline-date .date-padding .form-type-textfield.form-item-from-time-date, [id*="daily-motion-video-dashboard"] fieldset .container-inline-date .date-padding .form-type-textfield.form-item-to-time {
+[id*="daily-motion-video-dashboard"] fieldset .container-inline-date .date-padding .form-type-textfield.form-item-from-time-date, [id*="daily-motion-video-dashboard"] fieldset .container-inline-date .date-padding .form-type-textfield.form-item-to-time, [id*="daily-motion-video-dashboard"] fieldset .container-inline-date .date-padding .form-type-textfield.form-item-to-time-date {
   margin-right: 10px;
 }
 [id*="daily-motion-video-dashboard"] fieldset #edit-display-button {
@@ -10577,7 +10577,7 @@ div.node #comments h2 {
   position: absolute;
   left: 0;
   top: 71px;
-  left: 316px;
+  left: 229px;
 }
 
 [id*="podcast-node-form"] .form-managed-file .image-widget-data {
@@ -10788,6 +10788,11 @@ div.node #comments h2 {
 }
 .node-photogallery-form [id*="field-gallery-image-values"] tbody .field-multiple-drag {
   display: block;
+}
+.node-photogallery-form .form-field-name-field-story-syndication {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
 }
 
 .messages em {

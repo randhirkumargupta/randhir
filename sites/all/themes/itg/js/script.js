@@ -160,37 +160,7 @@
                 $(this).prev('label').hide();
             });
 
-            headerMain();
-            function headerMain() {
-                //var logotxt = $('.container.header-logo').html();
-                $('.container.header-logo').prependTo('.itg-logo-container');
-                
-                var mouse_is_inside = false;
-                $('.globle-search').hover(function(){ 
-                    mouse_is_inside=true; 
-                }, function(){ 
-                    mouse_is_inside=false; 
-                });
-
-                $("body").mouseup(function(){ 
-                    if(! mouse_is_inside) $('.globle-search').css('width', '0px');
-                });
-                
-                $('header .search-icon').click(function () {
-                    $('header').find('.globle-search').css('width', '255px').find('.search-text').focus();
-                });                
-                $('footer .search-icon').click(function () {
-                    $('footer').find('.globle-search').css('width', '255px').find('.search-text').focus();
-                }); 
-                
-                $('#block-itg-layout-manager-header-block .menu-login .user-menu').hover(function(){                    
-                    $('#newlist').hide();
-                });
-                
-                $('.head-live-tv .mobile-user').click(function(){
-                    $(this).next('ul.menu').toggle();
-                });                
-            }            
+                        
             // jQuery Code for tabbing
             $('.tab-buttons').on('click', 'span', function () {
                 var dataID = '.' + $(this).attr('data-id');
@@ -388,18 +358,39 @@ jQuery(document).ready(function () {
 
 // code to copy serach text into search page
 jQuery(document).ready(function () {
+  
+  var elmt = jQuery('.search-text');
+  jQuery('.search-text').keypress(function (e) {
+    el = jQuery(this);
+    value = el.val();
+    var code = e.keyCode || e.which;
+    if ((value.length === 0 && code == 32)) {
+        e.preventDefault();
+    }
+  });
 
-    jQuery('.search-text').keyup(function (e) {
-
-        var code = e.keyCode || e.which;
-
-        if (code == 13) { //Enter keycode
-            //Do something
-            var urldata = Drupal.settings.basePath + 'site-search?keyword=' + jQuery(this).val();
-            window.location.href = urldata;
-        }
-
-    });
+  jQuery('.search-text').keyup(function (e) {
+    el = jQuery(this);
+    value = el.val();
+    var code = e.keyCode || e.which;
+    if (code == 13 && value.length != 0) { //Enter keycode
+      //Do something
+      var urldata = Drupal.settings.basePath + 'site-search?keyword=' + jQuery(this).val();
+      window.location.href = urldata;
+    }
+    if(value.length != 0){
+      jQuery('#header .search-icon-parent').find('.search-icon-search').show().prev().hide();
+    } else{
+      jQuery('#header .search-icon-parent').find('.search-icon-header').show().next().hide();
+    }
+  });
+  jQuery('.search-icon-search').click(function () {
+    search_value = jQuery('#header-search-box').val();
+    if (search_value.length != 0) {
+      var urldata = Drupal.settings.basePath + 'site-search?keyword=' + search_value;
+      window.location.href = urldata;
+    }
+  });
 
 //    jQuery(window).scroll(function () {
 //      var winH = jQuery(window).height() + jQuery('#footer').height() + 40;
@@ -925,6 +916,41 @@ jQuery(window).load(function(){
 //  }
   sticky.stickyMojo({footerID: '#footer', contentID: '#main'});
 });
-  
+  headerMain();
+  function headerMain() {
+      //var logotxt = $('.container.header-logo').html();
+      jQuery('.container.header-logo').prependTo('.itg-logo-container');
+
+      var mouse_is_inside = false;
+      jQuery('.search-icon-parent').hover(function(){ 
+          mouse_is_inside=true; 
+      }, function(){ 
+          mouse_is_inside=false; 
+      });
+
+      jQuery("body").mouseup(function(){
+          if(! mouse_is_inside){
+            jQuery('.search-icon-search').hide().prev().show();
+            jQuery('.globle-search').removeClass('active');
+          } 
+          e.stopPropagation();
+      });
+
+      jQuery('.search-icon-header').click(function () {
+        search_value = jQuery('#header-search-box').val();
+        if(search_value.length != 0){
+          jQuery(this).hide().next().show();
+        }
+        jQuery('header').find('.globle-search').toggleClass('active');
+      });  
+
+      jQuery('#block-itg-layout-manager-header-block .menu-login .user-menu').hover(function(){                    
+          jQuery('#newlist').hide();
+      });
+
+      jQuery('.head-live-tv .mobile-user').click(function(){
+          jQuery(this).next('ul.menu').toggle();
+      });                
+  }
   
 });

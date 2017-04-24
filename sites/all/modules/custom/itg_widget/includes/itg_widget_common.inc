@@ -1593,26 +1593,25 @@ function itg_widget_preprocess_views_view(&$vars) {
  * {@inheritdoc}
  */
 function itg_widget_preprocess_node(&$vars) {
-
-// Get all terms of vocabulary occupation.
-  $itg_occupation = taxonomy_vocabulary_machine_name_load('itg_occupation');
-  $itg_occupation_tree = taxonomy_get_tree($itg_occupation->vid);
-  foreach ($itg_occupation_tree as $term) {
-    $occupation[] = $term->name;
-  }
-
-  if ( $vars['type'] == 'reporter' && in_array('Anchor' , $occupation) ) {
-
-    drupal_add_js(
-        "jQuery(document).ready(function(){
-jQuery('.read-more , .full-content').click(function(){
-jQuery('.less-content').toggle();
-jQuery('.full-content').toggle();
-});
-})" , 'inline'
-    );
-    $vars['theme_hook_suggestions'][] = 'node__reporter__anchor';
-  }
+  if ($vars['type'] == 'reporter') {
+  // Get all terms of vocabulary occupation.
+    $itg_occupation = taxonomy_vocabulary_machine_name_load('itg_occupation');
+    $itg_occupation_tree = taxonomy_get_tree($itg_occupation->vid);
+    foreach ($itg_occupation_tree as $term) {
+      $occupation[] = $term->name;
+    }
+    
+    if (in_array(strtolower('Anchor') , $occupation) ) {
+      drupal_add_js("jQuery(document).ready(function(){
+              jQuery('.read-more , .full-content').click(function(){
+              jQuery('.less-content').toggle();
+              jQuery('.full-content').toggle();
+              });
+              })" , 'inline'
+      );
+      $vars['theme_hook_suggestions'][] = 'node__reporter__anchor';
+    }
+  }  
 }
 
 /**
@@ -1772,33 +1771,77 @@ function draggable_views_nodes_for_widgets($view_name , $page , $expire_date , $
  * @param int $range_min
  * @return array
  */
-function get_view_nodes_form_custom_table_for_widgets($widget_name , $range_max , $range_min = 0 , $order_by = 'DESC') {
+function get_view_nodes_form_custom_table_for_widgets($widget_name , $range_max , $range_min = 0 , $order_by = 'DESC') {  
+  
   $valid_content_type = _get_content_type_for_widget($widget_name);
+  
   $query = db_select('itg_widget_order' , 'iwo');
   $query->leftJoin('node' , 'n' , 'n.nid=iwo.nid');
+  
+  if ($widget_name == 'home_page_feature_widget') {
+    $query->leftJoin('field_data_field_story_medium_image' , 'mi' , 'mi.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_large_image' , 'li' , 'li.entity_id=n.nid');
+  } 
+  if ($widget_name == 'dont_miss_content_widget') {
+    $query->leftJoin('field_data_field_story_small_image' , 'si' , 'si.entity_id=n.nid');
+  }
+  
+  if ($widget_name == 'trending_videos_widget' || $widget_name == 'watch_right_now_widget' || $widget_name == 'we_may_suggest_widget' || $widget_name == 'top_takes_video_widget') {
+    $query->leftJoin('field_data_field_story_extra_small_image' , 'esi' , 'esi.entity_id=n.nid');
+  }
+  
+  if ($widget_name == 'featured_photo_carousel' || $widget_name == 'video_carousel_list_widget') {
+    $query->leftJoin('field_data_field_story_extra_large_image' , 'eli' , 'eli.entity_id=n.nid');
+  }
+  //we_may_suggest_widget
   //join  for field value
-  $query->leftJoin('field_data_field_story_extra_large_image' , 'eli' , 'eli.entity_id=n.nid');
-  $query->leftJoin('field_data_field_story_large_image' , 'li' , 'li.entity_id=n.nid');
-  $query->leftJoin('field_data_field_story_medium_image' , 'mi' , 'mi.entity_id=n.nid');
-  $query->leftJoin('field_data_field_story_small_image' , 'si' , 'si.entity_id=n.nid');
-  $query->leftJoin('field_data_field_story_extra_small_image' , 'esi' , 'esi.entity_id=n.nid');
+  //$query->leftJoin('field_data_field_story_extra_large_image' , 'eli' , 'eli.entity_id=n.nid');
+  //$query->leftJoin('field_data_field_story_small_image' , 'si' , 'si.entity_id=n.nid');
+  //$query->leftJoin('field_data_field_story_extra_small_image' , 'esi' , 'esi.entity_id=n.nid');
+  
   $query->leftJoin('field_data_field_story_kicker_text' , 'kt' , 'kt.entity_id=n.nid');
-  $query->leftJoin('field_data_body' , 'dbody' , 'dbody.entity_id=n.nid');
+  //$query->leftJoin('field_data_body' , 'dbody' , 'dbody.entity_id=n.nid');
   $query->leftJoin('field_data_field_video_duration' , 'vd' , 'vd.entity_id=n.nid');
-  $query->leftJoin('file_managed' , 'eli_file' , 'eli_file.fid=eli.field_story_extra_large_image_fid');
-  $query->leftJoin('file_managed' , 'li_file' , 'li_file.fid=li.field_story_large_image_fid');
-  $query->leftJoin('file_managed' , 'mi_file' , 'mi_file.fid=mi.field_story_medium_image_fid');
-  $query->leftJoin('file_managed' , 'si_file' , 'si_file.fid=si.field_story_small_image_fid');
-  $query->leftJoin('file_managed' , 'esi_file' , 'esi_file.fid=esi.field_story_extra_small_image_fid');
-  $query->fields('eli_file' , array('uri'));
-  $query->fields('li_file' , array('uri'));
-  $query->fields('mi_file' , array('uri'));
-  $query->fields('si_file' , array('uri'));
-  $query->fields('esi_file' , array('uri'));
+  
+  //$query->leftJoin('file_managed' , 'eli_file' , 'eli_file.fid=eli.field_story_extra_large_image_fid');  
+  //$query->leftJoin('file_managed' , 'si_file' , 'si_file.fid=si.field_story_small_image_fid');
+  //$query->leftJoin('file_managed' , 'esi_file' , 'esi_file.fid=esi.field_story_extra_small_image_fid');
+  
+  if ($widget_name == 'home_page_feature_widget') {
+    $query->leftJoin('file_managed' , 'li_file' , 'li_file.fid=li.field_story_large_image_fid');
+    $query->leftJoin('file_managed' , 'mi_file' , 'mi_file.fid=mi.field_story_medium_image_fid');
+    $query->fields('li_file' , array('uri'));
+    $query->fields('mi_file' , array('uri')); 
+    $query->addExpression("li_file.uri", 'li_file_uri');
+    $query->addExpression("mi_file.uri", 'mi_file_uri');
+  }
+  
+  if ($widget_name == 'dont_miss_content_widget') {
+      $query->leftJoin('file_managed' , 'si_file' , 'si_file.fid=si.field_story_small_image_fid');
+      $query->fields('si_file' , array('uri'));
+      $query->addExpression("si_file.uri", 'si_file_uri');
+  }
+  
+  if ($widget_name == 'trending_videos_widget' || $widget_name == 'watch_right_now_widget' || $widget_name == 'we_may_suggest_widget' || $widget_name == 'top_takes_video_widget') {
+      $query->leftJoin('file_managed' , 'esi_file' , 'esi_file.fid=esi.field_story_extra_small_image_fid');
+      $query->fields('esi_file' , array('uri'));
+      $query->addExpression("esi_file.uri", 'esi_file_uri');
+  }
+  
+  if ($widget_name == 'featured_photo_carousel' || $widget_name == 'video_carousel_list_widget') {
+      $query->leftJoin('file_managed' , 'eli_file' , 'eli_file.fid=eli.field_story_extra_large_image_fid');
+      $query->fields('eli_file' , array('uri'));
+      $query->addExpression("eli_file.uri", 'eli_file_uri');
+  }
+  
+  //$query->fields('eli_file' , array('uri'));  
+  //$query->fields('si_file' , array('uri'));
+  //$query->fields('esi_file' , array('uri'));
+  
   $query->fields('kt' , array('field_story_kicker_text_value'));
   $query->fields('vd' , array('field_video_duration_value'));
   $query->fields('n' , array('nid' , 'title' , 'created' , 'type' , 'uid'));
-  //end
+  
   $query->condition('iwo.widget' , $widget_name)
       ->condition('n.status' , 1)
       ->condition('n.type' , $valid_content_type)
@@ -1865,35 +1908,18 @@ function get_view_nodes_form_custom_table_for_widgets_by_category($widget_name ,
 function get_view_nodes_form_custom_table_for_widgets_special($widget_name , $cat_id , $range_max , $range_min = 0 , $order_by = 'ASC') {
   $valid_content_type = _get_content_type_for_widget($widget_name);
 
-  $query = db_select('itg_widget_order' , 'iwo'); //
+  $query = db_select('itg_widget_order' , 'iwo'); 
   $query->leftJoin('node' , 'n' , 'n.nid=iwo.nid');
   $query->Join('taxonomy_index' , 'tx' , 'n.nid=tx.nid');
-  //join  for field value
-  $query->leftJoin('field_data_field_story_extra_large_image' , 'eli' , 'eli.entity_id=n.nid');
-  $query->leftJoin('field_data_field_story_large_image' , 'li' , 'li.entity_id=n.nid');
-  $query->leftJoin('field_data_field_story_medium_image' , 'mi' , 'mi.entity_id=n.nid');
-  $query->leftJoin('field_data_field_story_small_image' , 'si' , 'si.entity_id=n.nid');
-  $query->leftJoin('field_data_field_story_extra_small_image' , 'esi' , 'esi.entity_id=n.nid');
-  $query->leftJoin('field_data_field_story_kicker_text' , 'kt' , 'kt.entity_id=n.nid');
-  $query->leftJoin('field_data_body' , 'dbody' , 'dbody.entity_id=n.nid');
-  $query->leftJoin('field_data_field_video_duration' , 'vd' , 'vd.entity_id=n.nid');
-  $query->leftJoin('file_managed' , 'eli_file' , 'eli_file.fid=eli.field_story_extra_large_image_fid');
-  $query->leftJoin('file_managed' , 'li_file' , 'li_file.fid=li.field_story_large_image_fid');
-  $query->leftJoin('file_managed' , 'mi_file' , 'mi_file.fid=mi.field_story_medium_image_fid');
-  $query->leftJoin('file_managed' , 'si_file' , 'si_file.fid=si.field_story_small_image_fid');
-  $query->leftJoin('file_managed' , 'esi_file' , 'esi_file.fid=esi.field_story_extra_small_image_fid');
-  $query->fields('eli_file' , array('uri'));
-  $query->fields('li_file' , array('uri'));
-  $query->fields('mi_file' , array('uri'));
-  $query->fields('si_file' , array('uri'));
-  $query->fields('esi_file' , array('uri'));
-  $query->fields('kt' , array('field_story_kicker_text_value'));
-  $query->fields('vd' , array('field_video_duration_value'));
-  $query->fields('n' , array('nid' , 'title' , 'created' , 'type' , 'uid'));
-
-  $query->fields('vd' , array('field_video_duration_value'));
-  $query->fields('n' , array('nid' , 'title' , 'created' , 'type' , 'uid'));
-  //end
+  
+  if ($widget_name == 'special_how_made_it_content') {
+    $query->leftJoin('field_data_field_story_extra_small_image' , 'esi' , 'esi.entity_id=n.nid'); 
+    $query->leftJoin('file_managed' , 'esi_file' , 'esi_file.fid=esi.field_story_extra_small_image_fid');
+    $query->fields('esi_file' , array('uri'));
+  }
+  
+  $query->fields('n' , array('nid' , 'title' , 'created' , 'type' , 'uid'));  
+  
   $query->condition('iwo.widget' , $widget_name)
       ->condition('n.status' , 1)
       ->condition('n.type' , $valid_content_type)

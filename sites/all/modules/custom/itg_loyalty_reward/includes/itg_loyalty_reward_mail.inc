@@ -9,22 +9,33 @@
  * Send mail to editor and siteadmin on expiration of product
  * @param int $nid
  */
-function itg_loyalty_reward_send_mail_product_expiration($nid ,$node_user) {
+function itg_loyalty_reward_send_mail_product_expiration($nid ,$node_user , $product_count) {
   $mail_content = '';
   $node = node_load($nid);
   $product_name = $node->title;
   $exp_data = explode(" ",$node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
   if (function_exists('itg_mail_templates_get_mailcontent')) {
-    $mail_content_data = itg_mail_templates_get_mailcontent($node);
+    $mail_content_data = itg_mail_templates_get_mailcontent($node, $product_count);
     $mail_subject = $mail_content_data->field_mail_subject_product_expir[LANGUAGE_NONE][0]['value'];
-    $body = str_replace("[itg_mail_token:itg_product_name]", $product_name, $mail_content_data->field_mail_body_product_expirati[LANGUAGE_NONE][0]['value']);
-    $mail_body = str_replace("[itg_mail_token:itg_loyalty_expiry]", $exp_data[0], $body);
+    if ($product_count == 'inventory_status') { 
+      $body = str_replace("[itg_mail_token:itg_product_name]", $product_name, $mail_content_data->field_mail_body_product_expirati[LANGUAGE_NONE][0]['value']);
+      $mail_body = str_replace("[itg_mail_token:itg_node_nid]", $nid, $body);
+    } else {
+      $body = str_replace("[itg_mail_token:itg_product_name]", $product_name, $mail_content_data->field_mail_body_product_expirati[LANGUAGE_NONE][0]['value']);
+      $mail_body = str_replace("[itg_mail_token:itg_loyalty_expiry]", $exp_data[0], $body);
+    }
   }
+  
   $mail_content .= $mail_body;
   $mail_content .= "<div><p>Thanks,</p><p>India Today Group</p></div>";
 //  $mail_content = itg_loyalty_reward_product_expiration_mail_content($mail_content_data);
-  $user_emails = itg_loyalty_reward_product_expiration_user_emails('association',$node_user);
-  $user_email_ids = implode(", ", $user_emails);
+  if ($product_count == 'inventory_status') {
+    $user_emails = itg_loyalty_reward_product_expiration_user_emails('association',$node_user);
+    $user_email_ids = implode(", ", $user_emails[0]);
+  } else { 
+    $user_emails = itg_loyalty_reward_product_expiration_user_emails('association',$node_user);
+    $user_email_ids = implode(", ", $user_emails);
+  }
   // Array of email subject and body 
   $params = array(
     'body' => $mail_content,

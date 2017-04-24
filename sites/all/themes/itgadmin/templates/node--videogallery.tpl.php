@@ -141,7 +141,7 @@
                   $output .= '<p><strong>Description: </strong><strong>' . $imagecollection['field_videogallery_description'][LANGUAGE_NONE][0]['value'] . '</strong></p>';
                 }
                 if (isset($imagecollection['field_include_ads'][LANGUAGE_NONE]) && !empty($imagecollection['field_include_ads'][LANGUAGE_NONE][0]['value'])) {
-                  $output .= '<p><strong>Ads: </strong><strong>' . $imagecollection['field_include_ads'][LANGUAGE_NONE][0]['value'] . '</strong></p>';
+                  $output .= '<p><strong>Exclude Ads: </strong><strong>' . $imagecollection['field_include_ads'][LANGUAGE_NONE][0]['value'] . '</strong></p>';
                 }
                 $output .= "</li>";
               endforeach;

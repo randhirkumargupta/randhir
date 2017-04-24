@@ -92,10 +92,14 @@ else {
         <li><a href="#" title=""><i class="fa fa-rss"></i></a></li>
         <li><a href="#" title=""><i class="fa fa-mobile"></i></a></li>
         <li><a href="#" title=""><i class="fa fa-volume-up"></i></a></li>
-        <li><a href="javascript:void(0)" class="search-icon" title=""><i class="fa fa-search"></i></a></li>                            
+        <li class="search-icon-parent">
+          <a href="javascript:void(0)" class="search-icon-header" title=""><i class="fa fa-search"></i></a>
+          <a href="javascript:void(0)" class="search-icon-search" title=""><i class="fa fa-search"></i></a>
+          <div class="globle-search">
+            <input id="header-search-box" class="search-text" placeholder="Type here" type="text" value="">
+          </div>
+        </li>                            
       </ul>
-      <div class="globle-search">
-        <input class="search-text" placeholder="Type here" type="text" value=""></div>
     </div>
     <div class="main-nav">
       <?php print drupal_render($data['itg_top_manu_header']); ?>

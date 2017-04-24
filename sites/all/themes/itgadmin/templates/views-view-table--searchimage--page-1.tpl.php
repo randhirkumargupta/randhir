@@ -45,14 +45,22 @@ $video_data = "";
     }
     
      if (VIDEO_PROPERTY != $row['sm_field_property']) {
+       if($_GET['sm_field_video_used'] == "") {
      // if (!in_array($row['sm_field_video_id'], $all_used_video)) {
+        $video_value = $row['sm_field_video_id'] . '#' . $row['sm_field_video_size'] . '#' . $row['label'] . '#' . $row['sm_field_video_thumb_url'] . '#' . $row['sm_field_video_duration'] . '#' . $row['sm_field_property']. '#video_gallery';
+        if (!empty($row['sm_field_video_thumb_url']) && $row['sm_field_video_used'] == 0) {
+          $video_image = '<img  width="100" height="44" src="' . $row['sm_field_video_thumb_url'] . '">';
+          $file_size = number_format($row['sm_field_video_size'] / (1024 * 1024), 2);
+          $video_data .= '<span class="ftp_video_radio"><input id = "video_id_' . $row['sm_field_video_id'] . '" type="radio" name="video-form" class="form-radio" value="' . $video_value . '"/><label for = "video_id_' . $key . '"><span class="show_video_id">'.$row['sm_field_video_id'].'</span><br>' . $video_image . $row['label'] . '<span class="file_size">' . $file_size . 'MB</span><span class="file_size_duration">' . $row['sm_field_video_duration'] . '</span></label></span>';
+        }
+      } else {
         $video_value = $row['sm_field_video_id'] . '#' . $row['sm_field_video_size'] . '#' . $row['label'] . '#' . $row['sm_field_video_thumb_url'] . '#' . $row['sm_field_video_duration'] . '#' . $row['sm_field_property']. '#video_gallery';
         if (!empty($row['sm_field_video_thumb_url'])) {
           $video_image = '<img  width="100" height="44" src="' . $row['sm_field_video_thumb_url'] . '">';
           $file_size = number_format($row['sm_field_video_size'] / (1024 * 1024), 2);
           $video_data .= '<span class="ftp_video_radio"><input id = "video_id_' . $row['sm_field_video_id'] . '" type="radio" name="video-form" class="form-radio" value="' . $video_value . '"/><label for = "video_id_' . $key . '"><span class="show_video_id">'.$row['sm_field_video_id'].'</span><br>' . $video_image . $row['label'] . '<span class="file_size">' . $file_size . 'MB</span><span class="file_size_duration">' . $row['sm_field_video_duration'] . '</span></label></span>';
         }
-      //}
+      }
     }
   }
   echo '<div id="edit-video-browse-select">' . $video_data . '</div><script>jQuery("#edit-video-browse-select").easyPaginate({
@@ -63,3 +71,6 @@ $video_data = "";
   ?>
 
 </div>
+<script>
+jQuery("#edit-sm-field-video-used option[value='']").remove();
+</script>
