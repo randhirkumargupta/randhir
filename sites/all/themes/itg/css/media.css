@@ -755,8 +755,8 @@
   }
   #block-itg-layout-manager-header-block .head-live-tv .globle-search {
     position: absolute;
-    top: 0px;
-    right: 94px;
+    top: -2px;
+    right: 25px;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     -ms-transition: all 0.5s ease-in-out;
@@ -769,6 +769,10 @@
   #block-itg-layout-manager-header-block .head-live-tv .globle-search .search-text {
     height: 25px;
     line-height: 25px;
+    width: 100%;
+  }
+  #block-itg-layout-manager-header-block .head-live-tv .globle-search.active {
+    width: 140px;
   }
 
   /*footer*/
