@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the feature for best college feature.
+ */
+
+include_once 'feature_for_best_college.features.inc';
