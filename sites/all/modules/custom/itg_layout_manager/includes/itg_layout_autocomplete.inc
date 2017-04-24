@@ -264,13 +264,13 @@ function content_custom_widgets_title($title) {
 function custom_content_widgets() {
   $query = db_select('itg_custom_widgets_data', 'icw');
         $query->fields('icw', array('widget'));
-        $query->condition('title', $_GET['content_title']);
+        $query->condition('widget', $_GET['content_title']);
   $itg_result = $query->execute()->fetchAll();
-  
-  foreach ($itg_result as $key => $val) {
-    $content .= '<li id="'.$val->widget.'" data-widget="'.arg(1).'#'.$val->nid.'" data-widget-info="">
+  $val = $itg_result[0];
+  //foreach ($itg_result as $key => $val) {
+    $content .= '<li id="'.$val->widget.'" data-widget="custom_content_widgets#'.$val->widget.'" data-widget-info="">
     <span>'.$val->widget.'</span></li>';
-  }
+  //}
   
   echo $content;
   exit;

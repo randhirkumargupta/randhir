@@ -292,12 +292,9 @@ function features_for_event_registration_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'online_payment' => 'Online Payment',
         'icici' => ' ICICI',
-        'amex' => ' Amex',
         'paytm' => ' Paytm',
         'billdesk' => 'Billdesk',
-        'other_banks' => ' Other Banks',
       ),
       'allowed_values_function' => '',
     ),
@@ -414,7 +411,7 @@ function features_for_event_registration_field_default_field_bases() {
       'allowed_values_function' => '',
     ),
     'translatable' => 0,
-    'type' => 'list_integer',
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_erf_total_fee'.

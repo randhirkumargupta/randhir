@@ -38,11 +38,17 @@ function itg_story_byline($title) {
  * Implements itg_story_byline_save().
  */
 function itg_story_byline_save() {
-  preg_match_all('!\d+!', $_POST['nd_id'], $matches);
-  $byline_nid = $matches[0][0];
+//  preg_match_all('!\d+!', $_POST['nd_id'], $matches);
+//  $byline_nid = $matches[0][0];
+  $trigger_event = $_POST['byline_event'];
+  preg_match_all('/\(([A-Za-z0-9 ]+?)\)/', $_POST['nd_id'], $matches);
+  if($trigger_event == 'unpublish') {
+  $byline_nid = trim($matches[1][1]);
+  } else {
+    $byline_nid = $_POST['nd_id'];
+  }
   $nid = $_POST['nd_id'];
   $unique_id = $_POST['unique_id'];
-  $trigger_event = $_POST['byline_event'];
   $byline_arr = itg_get_byline_detail($byline_nid);
   $byline_name = $byline_arr[0]['title'];
   $byline_type = $byline_arr[0]['field_reporter_profile_type_value'];
@@ -61,12 +67,12 @@ function itg_story_byline_save() {
             'created' => REQUEST_TIME
           ))
           ->execute();
-      $remove = '<a href="javascript:void(0)" data-val="' . $byline_nid . '" data-tag="' . $qry . '" class="remove-byline">'.t('Remove').'</a>';
+      $remove = '<a href="javascript:void(0)" data-val="' . $byline_nid . '" data-tag="' . $qry . '" class="remove-byline">' . t('Remove') . '</a>';
       if (!empty($byline_type))
       {
         $byline_type = '<span>' . $byline_type . '</span>';
       }
-      $byline_res = '<li id="' . $qry . '"><input type="checkbox" name="bylinepublish" data-tag="' . $qry . '" value="' . $byline_nid . '" class="byline_publish"><span>'.t('Publish').'</span><span>' . $byline_name . '</span>' . $byline_type . '<span>' . $remove . '</span></li>';
+      $byline_res = '<li id="' . $qry . '"><i class="fa fa-arrows" aria-hidden="true"></i><input type="checkbox" name="bylinepublish" data-tag="' . $qry . '" value="' . $byline_nid . '" class="byline_publish"><span>' . t('Publish') . '</span><span>' . $byline_name . '</span>' . $byline_type . '<span>' . $remove . '</span></li>';
       $response = array('msg' => 'success', 'lnk' => $byline_res);
       print json_encode($response);
     }
@@ -133,14 +139,14 @@ function itg_byline_info($reporter_id) {
       {
         $byline_type = '<span>' . $byline_type . '</span>';
       }
-      $remove = '<a href="javascript:void(0)" data-val="' . $record['byline_id'] . '" data-tag="' . $record['id'] . '" class="remove-byline">'.t('Remove').'</a>';
+      $remove = '<a href="javascript:void(0)" data-val="' . $record['byline_id'] . '" data-tag="' . $record['id'] . '" class="remove-byline">' . t('Remove') . '</a>';
       if ($record['publish_status'] == 1)
       {
-        $val .= '<li id="' . $record['id'] . '"><input type="checkbox" name="bylinepublish" data-tag="' . $record['id'] . '" value="' . $record['byline_id'] . '" class="byline_publish" checked><span>'.t('Publish').'</span><span>' . $byline_name . '</span>' . $byline_type . '<span>' . $remove . '</span></li>';
+        $val .= '<li id="' . $record['id'] . '"><i class="fa fa-arrows" aria-hidden="true"></i><input type="checkbox" name="bylinepublish" data-tag="' . $record['id'] . '" value="' . $record['byline_id'] . '" class="byline_publish" checked><span>' . t('Publish') . '</span><span>' . $byline_name . '</span>' . $byline_type . '<span>' . $remove . '</span></li>';
       }
       else
       {
-        $val .= '<li id="' . $record['id'] . '"><input type="checkbox" name="bylinepublish" data-tag="' . $record['id'] . '" value="' . $record['byline_id'] . '" class="byline_publish"><span>'.t('Publish').'</span><span>' . $byline_name . '</span>' . $byline_type . '<span>' . $remove . '</span></li>';
+        $val .= '<li id="' . $record['id'] . '"><i class="fa fa-arrows" aria-hidden="true"></i><input type="checkbox" name="bylinepublish" data-tag="' . $record['id'] . '" value="' . $record['byline_id'] . '" class="byline_publish"><span>' . t('Publish') . '</span><span>' . $byline_name . '</span>' . $byline_type . '<span>' . $remove . '</span></li>';
       }
     }
     return $val;
@@ -191,17 +197,13 @@ function itg_get_previous_byline_detail($unique_id, $nid) {
  * @param string $uniqueid
  */
 function itg_get_byline_row($uniqueid) {
-  $options = '';
-  if (!empty($uniqueid)) {
+  if (!empty($uniqueid))
+  {
     $query = db_select('itg_multi_byline_info', 'c');
-    $query->fields('c', array('id'));
+    $query->fields('c', array('byline_id'));
     $query->condition('c.uniqueid', $uniqueid);
-    $result = $query->execute();
-    while ($record = $result->fetchAssoc()) {
-      $options[] = $record['id'];
-    }
-
-    return $options;
+    $result = $query->execute()->fetchField();
+    return $result;
   }
 }
 
@@ -210,28 +212,23 @@ function itg_get_byline_row($uniqueid) {
  * {@inheritdoc}
  */
 function itg_story_node_insert($node) {
-  if ($node->type == 'story' && !empty($node->type)) {
+  if ($node->type == 'story' && !empty($node->type))
+  {
     $nid = $node->nid;
     $unique_id = '';
-    if(!empty($node->field_reporter_unique_id[LANGUAGE_NONE])){
+    $publish_id = '';
+    if (!empty($node->field_reporter_unique_id[LANGUAGE_NONE]))
+    {
       $unique_id = $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'];
     }
-    $row_count = itg_get_byline_row($unique_id);
-    if (!empty($row_count)) {
-      foreach ($row_count as $id) {
-        db_update('itg_multi_byline_info')
-            ->fields(array(
-              'nid' => $nid,
-            ))
-            ->condition('id', $id, '=')
-            ->execute();
-      }
-    }
-    if(!empty($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'])) {
-      itg_byline_order_update($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'], $nid);
+    if (!empty($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value']))
+    {
+      $publish_id = $node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'];
     }
 
-    //unset($_SESSION['unique']);
+    itg_byline_order_update($publish_id, $nid, $unique_id);
+
+    unset($_SESSION['unique']);
   }
 }
 
@@ -240,24 +237,19 @@ function itg_story_node_insert($node) {
  * {@inheritdoc}
  */
 function itg_story_node_update($node) {
-  if ($node->type == 'story') {
+  if ($node->type == 'story')
+  {
     $nid = $node->nid;
-    $unique_id = $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'];
-    $row_count = itg_get_byline_row($unique_id);
-    if (!empty($row_count)) {
-      foreach ($row_count as $id) {
-        db_update('itg_multi_byline_info')
-            ->fields(array(
-              'nid' => $nid,
-            ))
-            ->condition('id', $id, '=')
-            ->execute();
-      }
+    if (!empty($node->field_reporter_unique_id[LANGUAGE_NONE]))
+    {
+      $unique_id = $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'];
     }
-    
-    if(!empty($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'])) {
-      itg_byline_order_update($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'], $nid);
+    if (!empty($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value']))
+    {
+      $publish_id = $node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'];
     }
+
+    itg_byline_order_update($publish_id, $nid, $unique_id);
   }
 }
 
@@ -266,17 +258,19 @@ function itg_story_node_update($node) {
  * @param string $byline
  * @param int $nid
  */
-function itg_byline_order_update($byline, $nid) {
+function itg_byline_order_update($byline, $nid, $uniqueid) {
   $byline_arr = explode(',', $byline);
   $i = 0;
-  if (!empty($byline_arr)) {
+  if (!empty($byline_arr))
+  {
     foreach ($byline_arr as $value) {
       db_update('itg_multi_byline_info')
           ->fields(array(
             'byline_weight' => $i,
+            'nid' => $nid,
           ))
           ->condition('byline_id', $value, '=')
-          ->condition('nid', $nid, '=')
+          ->condition('uniqueid', $uniqueid, '=')
           ->execute();
       $i++;
     }

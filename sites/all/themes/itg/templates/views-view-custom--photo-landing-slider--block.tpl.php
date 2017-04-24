@@ -11,7 +11,10 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
 ?>
 <div class="row">
     <div class="col-md-12">
-        <h1 class="photo-heading"><?php print $rows[0]['title']; ?></h1>    
+        <h1 class="photo-heading"><?php print $rows[0]['title']; ?></h1>    <?php global $user;
+        if(in_array('Social Media', $user->roles)) {?>
+         <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $photo_node->nid;?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span>promote</span></a>   
+        <?php }?>
         <div class="social-icon desktop-hide">
             <ul>
                 <li><a title="share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
@@ -33,16 +36,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                   <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
                   <div class="show-embed-code-div">
                     <div class="copy-sample-code">
-                     <textarea readonly="true">
-                      <div id='IndiaToday_gallery' data-type='UAT'></div>
-                          <script src='<?php print $base_url;?>/sites/all/themes/itg/js/photo_iframeResizer.js'>
-                          </script>
-                          <script> 
-                          <?php 
-                           echo "iFrameResize({galleryid: $photo_node->nid})";
-                          ?>
-                          </script>
-                      </textarea>  
+                     <textarea readonly="true"><div id='IndiaToday_gallery' data-type='UAT'></div><script src='<?php print $base_url;?>/sites/all/themes/itg/js/photo_iframeResizer.js'></script><script><?php echo "iFrameResize({galleryid: $photo_node->nid})"; ?></script></textarea> 
                     </div>
                   </div>
                 </li>
@@ -58,11 +52,11 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                                             if (empty($opt['status']) || $opt['status'] == 0)
                                             {
                                               ?> 
-                                          <li class="later"><a title = "Save" href="javascript:void(0)" class="user-activity" rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i></a></li>
+                                          <li class="later" title = "Saved"><a title = "Save" href="javascript:void(0)" class="user-activity" rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i></a></li>
                                             <?php }
                                             else
                                             { ?>
-                                          <li><a title = "Save" href="javascript:" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i></a></li>
+                                          <li title = "Saved"><a title = "Save" href="javascript:" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i></a></li>
                                             <?php
                                             }
                                           }
@@ -88,7 +82,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                 
                 ?>
                 <li >
-                    <figure class="" img-fid=" <?php print $row['fid'];?>">
+                    <figure class="photo-landing-slider-pic" img-fid=" <?php print $row['fid'];?>">
 
                         <?php print $row['field_images']; ?>                    
                     </figure>
@@ -163,16 +157,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                   <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
                   <div class="show-embed-code-div">
                     <div class="copy-sample-code">
-                        <textarea readonly="true">
-                      <div id='IndiaToday_gallery' data-type='UAT'></div>
-                          <script src='<?php print $base_url;?>/sites/all/themes/itg/js/photo_iframeResizer.js'>
-                          </script>
-                          <script> 
-                          <?php 
-                           echo "iFrameResize({galleryid: $photo_node->nid})";
-                          ?>
-                          </script>
-                      </textarea>
+                    <textarea readonly="true"><div id='IndiaToday_gallery' data-type='UAT'></div><script src='<?php print $base_url;?>/sites/all/themes/itg/js/photo_iframeResizer.js'></script><script><?php echo "iFrameResize({galleryid: $photo_node->nid})"; ?></script></textarea>
                     </div>
                   </div>
                 </li>
@@ -193,11 +178,11 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                                             if (empty($opt['status']) || $opt['status'] == 0)
                                             {
                                               ?> 
-                                          <li class="later"><a title = "Save" href="javascript:void(0)" class="user-activity" rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i></a></li>
+                                          <li class="later" title = "Saved"><a title = "Save" href="javascript:void(0)" class="user-activity" rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i></a></li>
                                             <?php }
                                             else
                                             { ?>
-                                          <li><a title = "Save" href="javascript:" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i></a></li>
+                                          <li title = "Saved"><a title = "Save" href="javascript:" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i></a></li>
                                             <?php
                                             }
                                           }

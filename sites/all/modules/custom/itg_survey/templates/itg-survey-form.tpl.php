@@ -9,7 +9,6 @@ $byline_node = node_load($node->field_story_reporter[LANGUAGE_NONE][0]['target_i
 
 $byline_name = $byline_node->title;
 $byline_twitter_handler = $byline_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
-$byline_image = $base_url . str_replace('public://', '/sites/default/files/', $byline_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
 $created_date = date('M d, Y', $node->created);
 $updated_date = date('h:i', $node->created);
 
@@ -27,7 +26,18 @@ else {
   <div class="survey-description"><?php echo $node->body[LANGUAGE_NONE][0]['value']; ?></div>
   <div class="byline">
     <div class="profile-pic">
-      <img src="<?php echo $byline_image; ?>" alt="" title=""/>
+     <?php
+       if (!empty($byline_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
+         $byline_uri = file_create_url($byline_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+         ?>
+       <img src="<?php echo $byline_uri; ?>" alt="" title=""/>
+         <?php 
+       }
+       else {
+         $file = 'default_images/user-default.png';
+         print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
+       }
+       ?>
     </div>
     <div class="profile-detail">
       <ul>

@@ -452,7 +452,7 @@ function features_for_event_registration_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 16,
+        'weight' => 25,
       ),
     ),
     'entity_type' => 'field_collection_item',

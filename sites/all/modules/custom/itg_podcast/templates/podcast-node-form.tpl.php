@@ -6,7 +6,14 @@
     <?php print drupal_render($form['field_story_source_id']); ?>
     <?php print drupal_render($form['field_story_source_type']); ?>
 </div>
-<div id="audioupload">
+
+<div id="SectionCategory">
+ <h2 class="story-title"><?php print t('Section'); ?></h2>
+            <div class="itg-form-section">
+                    <?php print drupal_render($form['category_holder']); ?>
+                </div>
+</div>
+<div id="audioupload" class="browse-media-file">
   <h2 class="story-title"><?php print t('Audio Upload'); ?></h2>
   <?php print drupal_render($form['upload']); ?>
   <?php print drupal_render($form['field_podcast_audio_upload']); ?>
@@ -28,7 +35,7 @@
     <?php print drupal_render($form['field_primary_cat_data']); ?>
 
 </div>
-
+ 
 <h2 id="title-metatags" class="story-title"><?php print t('Remarks'); ?></h2>
 <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>

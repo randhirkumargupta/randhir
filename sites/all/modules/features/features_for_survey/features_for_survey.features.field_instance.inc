@@ -412,6 +412,48 @@ function features_for_survey_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-survey-field_cm_related_content_detail'.
+  $field_instances['node-survey-field_cm_related_content_detail'] = array(
+    'bundle' => 'survey',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_cm_related_content_detail',
+    'label' => 'Related Content Detail',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 32,
+    ),
+  );
+
   // Exported field_instance: 'node-survey-field_common_related_content'.
   $field_instances['node-survey-field_common_related_content'] = array(
     'bundle' => 'survey',
@@ -933,6 +975,7 @@ function features_for_survey_field_default_field_instances() {
   t('Question Media');
   t('Question Video');
   t('Related Content');
+  t('Related Content Detail');
   t('Section');
   t('Skip');
   t('Survey End Date');

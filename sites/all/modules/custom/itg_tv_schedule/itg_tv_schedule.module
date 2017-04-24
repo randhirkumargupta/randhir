@@ -29,7 +29,7 @@ function itg_tv_schedule_menu() {
   );
 
   $items['tv-show'] = array(
-    'title' => 'Tv Show Schedule',
+    'title' => 'Tv Schedule',
     'page callback' => 'tv_schedule_listing',
     'page arguments' => array('itg_tv_schedule_search_form'),
     'access callback' => TRUE,
@@ -63,14 +63,21 @@ function itg_tv_schedule_form($form, &$form_state) {
       '#suffix' => '</div>',
       '#value' => t('Submit'),
     );
+    $form['#after_build'][] = 'itg_tv_schedule_after_build';
     
-    drupal_add_js('jQuery(document).ready(function () {
-      jQuery("#edit-file-upload-button").hide();
-    jQuery("body").on("change", "#edit-file-upload", function () {
-        jQuery("#edit-file-upload-button").mousedown();
-    });
-    });', array('type' => 'inline', 'scope' => 'footer'));
-    
+  return $form;
+}
+
+/**
+ * After build for tv schedule form.
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_tv_schedule_after_build($form, &$form_state) {
+  drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-file-upload-button").hide("");
+            });', array('type' => 'inline', 'scope' => 'footer'));
   return $form;
 }
 
@@ -198,10 +205,12 @@ function itg_tv_schedule_uploadmongo($file_id) {
         $db = mongodb();
         if ($db) {
             $people = $db->tv_schedule;
+            $ret = $people->remove();
         }
         else {
             return FALSE;
         }
+        
 
         while (($data = fgetcsv($file)) !== FALSE) {
 
@@ -267,13 +276,15 @@ function itg_tv_schedule_form_submit($form, &$form_state) {
     $file->status = FILE_STATUS_PERMANENT;
     file_save($file);
     file_usage_add($file, 'user', 'user', $user->uid);
-    if ($file_id === '0') {
+    //if ($file_id === '0') {
+    if ($file->fid === '0') {
         drupal_set_message(t('Before submit please upload the file'));
     }
     else {
-        $value = itg_tv_schedule_uploadmongo($file_id);
+        //$value = itg_tv_schedule_uploadmongo($file_id);
+        $value = itg_tv_schedule_uploadmongo($file->fid);
         if ($value == TRUE) {
-            drupal_set_message(t('The file has been submitted successfully, filename: @filename.', array('@filename' => $file->filename)));
+            drupal_set_message(t('The file has been submitted successfully, Filename: @filename.', array('@filename' => $file->filename)));
         }
         else {
             drupal_set_message(t('Inappropriate csv file'));

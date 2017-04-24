@@ -193,20 +193,32 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
               <div class="slide-icon scroll-arrow-right"><i class="fa fa-angle-left ll"></i></div>
               <ul>
                 <?php for ($count = 1; $count < 21; $count++) { ?>
-                  <?php $blockid = 'itg-block-' . $count; ?>
+                <?php 
+                  $blockid = 'itg-block-' . $count; 
+                  $clsli = '';
+                  if (isset($widget_data[$blockid]['block_title'])) {
+                    $clsli = 'active';
+                  } 
+                ?>
                   
-                    <li>
-                      <?php $blockid = 'itg-block-' . $count; ?>
-                      <a class="droppable" data-tabwidget_display="region-section-content" id="<?php print $blockid; ?>" href="javascript:;">
+                    <li class='<?php print $clsli; ?>'>
+                      <?php 
+                        $blockid = 'itg-block-' . $count; 
+                        $cls = '';
+                        if (isset($widget_data[$blockid]['block_title'])) {
+                          $cls = 'active';
+                        } 
+                      ?>
+                      
+                      <a class="droppable <?php print $cls; ?>" data-tabwidget_display="region-section-content" id="<?php print $blockid; ?>" href="javascript:;">
                         <div class="data-holder" id="<?php print $blockid; ?>">
-                          <?php
-                          if (isset($widget_data[$blockid]['block_title'])) {
+                          <?php if (isset($widget_data[$blockid]['block_title'])) {
                             print $widget_data[$blockid]['block_title'];
                           } else {
                             echo 'Drag Category';
                           }
                           ?>
-                        </div>
+                          </div>
                       </a>
                     </li>
                   
@@ -233,7 +245,12 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
           </div>
           <div class="col-md-4">
               <div class="sidebar-section-photo">
+                
                 <div class="itg-widget">
+                  <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                    <div class="widget-help-text">Non Draggable ( <strong>Ad widget</strong> )</div>
+                  <?php } ?>
+                  <div class="itg-widget-inner">
                     <div class="ad-widget">
                       <div class="sidebar-ad droppable">
                        <?php
@@ -242,9 +259,14 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
                           print render($render_array);
                          ?>
                       </div>
-                    </div>              
+                    </div> 
+                    </div>
                   </div>
                 <div class="itg-widget">
+                  <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                    <div class="widget-help-text">Template widgets ( <strong>May We Suggest</strong> )</div>
+                  <?php } ?>
+                  <div class="itg-widget-inner">
                   <div class="droppable <?php print $gray_bg_layout; ?>">
                     <div class="widget-wrapper <?php print $widget_data['itg-block-21']['widget_name']; ?>">
                      <?php if (($theme != 'itgadmin' || isset($preview)) && !empty($widget_data['itg-block-21']['block_title'])) { ?>
@@ -261,11 +283,24 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
                         </div>
                       <?php } ?>  
 
-                      <div class="data-holder" id="itg-block-21"><?php print $widget_data['itg-block-21']['widget']; ?></div>
+                      <div class="data-holder" id="itg-block-21">
+                        <?php 
+                        if (isset($widget_data['itg-block-21']['widget'])) {
+                          print $widget_data['itg-block-21']['widget']; 
+                        } else{
+                          print '<div class="widget-placeholder"><span>May we suggest</span></div>';
+                        } 
+                        ?>
+                      </div>
                     </div>             
+                  </div>               
                   </div>               
                 </div>
                 <div class="itg-widget">
+                  <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                    <div class="widget-help-text">Template widgets ( <strong>Watch Right Now</strong> )</div>
+                  <?php } ?>
+                  <div class="itg-widget-inner">
                   <div class="droppable <?php print $gray_bg_layout; ?>">
                     <div class="widget-wrapper <?php print $widget_data['itg-block-22']['widget_name']; ?>">
                       <?php if (($theme != 'itgadmin' || isset($preview)) && !empty($widget_data['itg-block-22']['block_title'])) { ?>
@@ -282,9 +317,18 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
                         </div>
                       <?php } ?>  
 
-                      <div class="data-holder" id="itg-block-22"><?php print $widget_data['itg-block-22']['widget']; ?></div>
+                      <div class="data-holder" id="itg-block-22">
+                        <?php
+                          if (isset($widget_data['itg-block-22']['widget'])) {
+                            print $widget_data['itg-block-22']['widget']; 
+                          } else{
+                            print '<div class="widget-placeholder"><span>Watch right now</span></div>';
+                          } 
+                        ?>
+                      </div>
                     </div>             
-                  </div>               
+                  </div> 
+                  </div>
                 </div>
 <!--                <div class="itg-widget">
                   <div class="droppable <?php //print $gray_bg_layout; ?>">
@@ -329,17 +373,23 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
                   </div>               
                 </div>-->
                 <?php if ($theme == 'itg') { ?>
-<!--                  <div class="">
-                    <div class="ask-question-sidebar ask-question">
-                        <h3><span>Ask a Question</span></h3>
-                      <div class="data-holder ask-question" id="itg-block-19">
-                        <?php $block = module_invoke('itg_ask_expert', 'block_view', 'custom_ask_expert_form_block');
-                             // print render($block['content']); ?>
-                      </div>
-                    </div>              
-                  </div>-->
+                  <?php $block_ask_expert = module_invoke('itg_ask_expert', 'block_view', 'custom_ask_expert_form_block');?>
+                  <?php if (!empty($block_ask_expert['content'])) {?>
+<!--                    <div class="">
+                      <div class="ask-question-sidebar ask-question">
+                          <h3><span>Ask a Question</span></h3>
+                        <div class="data-holder ask-question" id="itg-block-19">                          
+                          <?php //print render($block_ask_expert['content']); ?>
+                        </div>
+                      </div>              
+                    </div>-->
+                  <?php } ?>
                 <?php } ?>
                 <div class="itg-widget">
+                  <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                    <div class="widget-help-text">Non Draggable ( <strong>Ad widget</strong> )</div>
+                  <?php } ?>
+                  <div class="itg-widget-inner">
                     <div class="ad-widget">
                       <div class="sidebar-ad droppable">
                         <?php
@@ -349,6 +399,7 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
                         ?>
                       </div>
                     </div>              
+                  </div>
                   </div>
               </div>
           </div>

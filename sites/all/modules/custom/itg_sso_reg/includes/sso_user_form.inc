@@ -363,7 +363,7 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
         form_set_error('mail', t("Email Id Already Exist!"));
       }
 
-      if (!empty($get_user_check_mobile)) {
+      if (!empty($get_user_check_mobile) && !empty($form_state['values']['mobile'])) {
         form_set_error('mobile', t("Mobile Number Already Exist!"));
       }
 
@@ -535,6 +535,9 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
           if (function_exists('itg_sso_first_time_otp_insert')) {
             itg_sso_first_time_otp_insert($mobile, $mail, $rand_otp, 'register');
             itg_sso_sms_send($rand_otp, $mobile);
+          }
+          if(!empty($form_state['values']['mail'])) {
+            itg_sso_otp_mail_content($rand_otp, $mail);
           }
         }
 

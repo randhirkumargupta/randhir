@@ -76,6 +76,9 @@ function itg_sso_reg_otp_callback() {
     if (!empty($mobile)) {
       $mail_content = itg_sso_sms_send($rand_otp, $mobile);
     }
+    if (!empty($mobile) && !empty($email)) {
+      $mail_content = itg_sso_otp_mail_content($rand_otp, $email);
+    }
     //$mail_content = itg_sso_get_mail_content($otp, $email);
   }
 }

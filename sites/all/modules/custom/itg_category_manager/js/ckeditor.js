@@ -16809,7 +16809,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         command: "anchor",
                         toolbar: "links,30"
                     }));
-                    CKEDITOR.dialog.add("link", this.path + "dialogs/link.js");
+                    
+                     var link_url_js= Drupal.settings.baseUrl.baseUrl+'/sites/all/modules/contrib/ckeditor/link.js';
+                   
+                    CKEDITOR.dialog.add("link", link_url_js);
                     CKEDITOR.dialog.add("anchor", this.path + "dialogs/anchor.js");
                     a.on("doubleclick", function(b) {
                         var c = CKEDITOR.plugins.link.getSelectedLink(a) || b.data.element;

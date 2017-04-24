@@ -16,7 +16,18 @@
             }
             // jquery for front user activity
             $('.multi-byline').click(function (event) {
+                var repo_id = [];
                 var nd_id = jQuery('#edit-field-story-reporter-und-0-target-id').val();
+                //var someText="don't extract(value_a) but extract(value_b)";
+                var insval = nd_id.match(/\(([^)]*)\)[^(]*$/)[1];
+                var cur_val = jQuery('#edit-field-reporter-publish-id-und-0-value').val();
+                if (cur_val) {
+                    jQuery('#edit-field-reporter-publish-id-und-0-value').val(cur_val + "," + insval);
+                }
+                else {
+                    jQuery('#edit-field-reporter-publish-id-und-0-value').val(insval);
+                }
+                
                 var unique_id = jQuery('#edit-field-reporter-unique-id-und-0-value').val();
                 byline_event = 'unpublish';
                 var post_data = "&nd_id=" + nd_id + "&unique_id=" + unique_id + "&byline_event=" + byline_event;
@@ -62,6 +73,10 @@
                 //byline_event = 'publish';
                 if (jQuery(this).is(":checked")) {
                     status = '1';
+                    byline_event = 'publish';
+                }
+                
+                if (!jQuery(this).is(":checked")) {
                     byline_event = 'publish';
                 }
                 var post_data = "&nd_id=" + nd_id + "&unique_id=" + unique_id + "&byline_event=" + byline_event + "&status=" + status + "&bl_id=" + bl_id;

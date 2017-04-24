@@ -1274,10 +1274,11 @@ function itg_mobile_services_get_service_list() {
   $query->distinct();
   $query->fields('node', array('nid', 'title'));
 
-  $query->join('field_data_field_story_expiry_date', 'expiry_date', "node.nid= expiry_date.entity_id");
+  $query->leftJoin('field_data_field_story_expiry_date', 'expiry_date', "node.nid= expiry_date.entity_id");
   if (empty($node_nid)) {
-    $query->where("expiry_date.field_story_expiry_date_value >= CURDATE()");
-  }
+    $query->where("expiry_date.field_story_expiry_date_value >= CURDATE() or expiry_date.field_story_expiry_date_value IS NULL");
+   // $query->db_or()->condition()->isNull('expiry_date.field_story_expiry_date_value');
+  } //print strtr((string) $query, $query->arguments());die;
   $query->condition('node.type', 'service_creation', '=');
   $result = $query->execute();
   $record = $result->fetchAll();
@@ -1351,7 +1352,7 @@ function itg_mobile_services_field_add_more_submit($form, &$form_state) {
   $end_date = str_replace('/', '-', $form_state['input']['field_service_frequency_date'][LANGUAGE_NONE][0]['value2']['date']);
   $sid = trim($form_state['values']['field_service_association_title'][LANGUAGE_NONE]);
   $service_frequency_id = trim($form_state['values']['field_service_frequency'][LANGUAGE_NONE][0]['value']);
-  session_start();
+  //session_start();
   $_SESSION['service_title_id'] = $sid;
   $_SESSION['service_frequency_id'] = $service_frequency_id;
   $get_exist_content = itg_mobile_services_get_exist_content($sid, $start_date, $end_date);

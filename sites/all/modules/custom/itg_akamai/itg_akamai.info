@@ -1,0 +1,6 @@
+name = ITG Akamai
+description = "ITG Akamai Module"
+core = 7.x
+package = ITG
+
+files[] = itg_akamai.module

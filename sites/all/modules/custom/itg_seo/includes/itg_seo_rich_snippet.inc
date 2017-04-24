@@ -40,10 +40,12 @@ function itg_seo_node_data($node) {
            ),
         );
       }
-      
+     if (!empty($element)) {
+      drupal_add_html_head($element, 'robots');
+     }
     }
   } 
-  drupal_add_html_head($element, 'robots');
+  
   
   // Rich Snippet for Story
   if ($node->type == 'story') {
@@ -56,7 +58,9 @@ function itg_seo_node_data($node) {
     }
     $modified_date = date('Y-m-d\Th:i:s+5:30', $node->changed);
     $description = strip_tags(substr($node->body[LANGUAGE_NONE][0]['value'],0,120));
-    $get_author_name = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+    if (isset($node->field_story_reporter[LANGUAGE_NONE][0]['target_id'])) {
+      $get_author_name = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+    }
     if(!empty($get_author_name) && ($get_author_name > 0)){
       $auth_name = itg_get_story_author_name($get_author_name);
     } else {

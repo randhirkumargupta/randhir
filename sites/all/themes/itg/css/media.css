@@ -267,7 +267,7 @@
 
   /*css start osscar page */
   /* css start vertical bar */
-  #block-itg-menu-manager-vertical-menu {
+  .region-vertical-menu {
     display: none;
   }
 
@@ -579,6 +579,10 @@
   /*budget page css end*/
 }
 @media only screen and (max-width: 768px) {
+  .widget-wrapper {
+    overflow: initial;
+  }
+
   header {
     margin-bottom: 15px;
   }
@@ -717,6 +721,7 @@
   #block-itg-layout-manager-header-block .head-live-tv {
     text-align: right;
     padding: 0 10px;
+    z-index: 99999;
     position: relative;
   }
   #block-itg-layout-manager-header-block .head-live-tv ul {
@@ -1249,7 +1254,6 @@
   }
   .breakingnew-home .title {
     float: none;
-    width: 80px;
     font-size: 14px;
     line-height: 22px;
     height: 20px;
@@ -1280,11 +1284,6 @@
   }
   .breakingnew-home .new-detail .live-tv-link .live-tv-icon {
     display: none;
-  }
-  .breakingnew-home .new-detail .live-tv-link .breaking-new-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
   }
 
   /*story page comment section*/
@@ -1409,7 +1408,7 @@
   [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form {
     height: 90px;
   }
-  [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper .views-widget {
+  [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-14-names-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper .views-widget {
     display: none;
     position: relative;
     left: auto;
@@ -2158,9 +2157,6 @@
   #content [id*="ugc-node-form"].ugc-custom-wrapper .captcha .form-item-captcha-response div.description {
     padding-left: 0px;
   }
-  #content [id*="ugc-node-form"].ugc-custom-wrapper .captcha img {
-    margin: 0 0 5px 0px;
-  }
   #content [id*="ugc-node-form"].ugc-custom-wrapper .form-actions {
     text-align: left;
   }
@@ -2214,12 +2210,6 @@
     float: none;
     display: block;
     text-align: left;
-  }
-
-  .sign-in-link a {
-    display: block;
-    text-align: left;
-    margin-bottom: 10px;
   }
 }
 @media only screen and (max-width: 680px) {
@@ -2946,12 +2936,12 @@
   /*CSS start program landing page*/
   #block-views-video-landing-header-block .video-landing-header {
     background: #000;
-    padding: 0 15px 15px 15px;
+    padding: 0 15px 20px 15px;
   }
   #block-views-video-landing-header-block .video-header-left .video {
     float: left;
     width: 84.5%;
-    padding: 10px;
+    padding: 15px 10px;
     border: 1px solid #242424;
   }
   #block-views-video-landing-header-block .video-header-left .social-likes {
@@ -2968,13 +2958,14 @@
     float: none;
   }
   #block-views-video-landing-header-block .video-header-left .social-likes ul li a {
-    padding: 20px 5px 19px 10px;
+    padding: 20.2px 5px 20.2px 10px;
   }
   #block-views-video-landing-header-block .video-header-left .social-likes ul li a span {
     display: inline-block;
   }
   #block-views-video-landing-header-block .video-header-left .social-likes ul li a i {
-    margin-right: 5px;
+    margin-right: 8px;
+    float: left;
   }
   #block-views-video-landing-header-block .video-header-left .social-likes ul li + li a {
     border-top: 1px solid #000;
@@ -3029,6 +3020,17 @@
   }
 
   /*css for tech page end*/
+  .node-type-videogallery header {
+    margin-bottom: 0;
+  }
+  .node-type-videogallery #block-itg-videogallery-videogallery-menu-video-block {
+    margin-top: 22px;
+  }
+
+  .second-level-menu.before-load {
+    height: 37px;
+    overflow: hidden;
+  }
 }
 /*End CSS Desktop version*/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {

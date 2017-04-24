@@ -87,10 +87,12 @@ function itg_preprocess_comment(&$variables) {
       $user = user_load($comment->uid);
       if (!empty($user->field_first_name[LANGUAGE_NONE][0]['value'])) {
         $submit_name = $user->field_first_name[LANGUAGE_NONE][0]['value'];
-      } else {
+      }
+      else {
         $submit_name = $variables['author'];
       }
-    } else {
+    }
+    else {
       $submit_name = $variables['author'];
     }
     $variables['submitted'] = t('Submitted by !username on !datetime', array('!username' => $submit_name, '!datetime' => $variables['created']));
@@ -118,13 +120,13 @@ function itg_preprocess_page(&$variables) {
   global $base_url;
   $base_root;
   $arg = arg();
-
+  //unset($variables['page']['content']);
   // add condition to hide header and footer for signup, forgot-password page
   if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
 
-  if ((!empty($arg[2]) && $arg[2] == 'ugc') || $arg[0] == 'signup' || $arg[0] == 'forgot-password' || $arg[0] == 'sso-user' || $arg[0] == 'sso' || $arg[0] == 'password-success' || $arg[0] == 'complete-page' || $arg[0] == 'associate-photo-video-content' || $arg[0] == 'funalytics-popup') {
+  if ((!empty($arg[2]) && $arg[2] == 'ugc') || $arg[0] == 'signup' || $arg[0] == 'forgot-password' || $arg[0] == 'sso-user' || $arg[0] == 'sso' || $arg[0] == 'password-success' || $arg[0] == 'complete-page' || $arg[0] == 'associate-photo-video-content' || $arg[0] == 'funalytics-popup' || $arg[1] == 'videogallery-embed') {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
 
@@ -155,6 +157,18 @@ function itg_preprocess_page(&$variables) {
   if (!empty($variables['node']->type) && $variables['node']->type == 'event_backend' || $arg[0] == 'event') {
     $variables['theme_hook_suggestions'][] = 'page__event_domain';
   }
+
+  if ($arg[0] == 'blog-listing') {
+    drupal_add_css('#page-title  {display: none !important}', 'inline');
+  }
+  
+  if($arg[0] == 'blog') {
+    drupal_add_css('#page-title , .feed-icon  {display: none !important}' ,'inline');
+    unset($variables['page']['content']);
+    //pr($variables['theme_hook_suggestions']);
+    $variables['theme_hook_suggestions'][] = 'page__itg_blog_page';
+  }
+  
 }
 
 /**
@@ -175,7 +189,8 @@ function itg_breadcrumb($variables) {
       }
 
       $crumbs .= '<li>Search</li>' . $keyword . '</li></ul></div>';
-    } else {
+    }
+    else {
       $crumbs .= '<li>' . drupal_get_title() . '</li></ul></div>';
     }
   }
@@ -211,13 +226,17 @@ function itg_preprocess_html(&$vars) {
  * page head alter for update the meta keywords
  */
 function itg_html_head_alter(&$head_elements) {
+  $arg = arg();
   global $base_url;
-
   if (!empty(arg(1)) && is_numeric(arg(1))) {
     $arg_data = node_load(arg(1));
     if ($arg_data->type == 'videogallery') {
       if (is_array($arg_data->field_video_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_video_configurations[LANGUAGE_NONE])) {
-        if ($arg_data->field_video_configurations[LANGUAGE_NONE][0]['value'] == 'google_standout') {
+        $configurableopt = $arg_data->field_video_configurations[LANGUAGE_NONE];
+        foreach ($configurableopt as $key => $value) {
+          $opt_value[] = $value['value'];
+        }
+        if (in_array("google_standout", $opt_value)) {
           $standout_path = $base_url . '/' . $arg_data->path['alias'];
           $head_elements['google_standout'] = array(
               '#type' => 'html_tag',
@@ -226,9 +245,14 @@ function itg_html_head_alter(&$head_elements) {
           );
         }
       }
-    } else if ($arg_data->type == 'photogallery') {
+    }
+    else if ($arg_data->type == 'photogallery') {
       if (is_array($arg_data->field_photogallery_configuration[LANGUAGE_NONE]) && !empty($arg_data->field_photogallery_configuration[LANGUAGE_NONE])) {
-        if ($arg_data->field_photogallery_configuration[LANGUAGE_NONE][0]['value'] == 'google_standout') {
+        $configurableopt = $arg_data->field_photogallery_configuration[LANGUAGE_NONE];
+        foreach ($configurableopt as $key => $value) {
+          $opt_value[] = $value['value'];
+        }
+        if (in_array("google_standout", $opt_value)) {
           $standout_path = $base_url . '/' . $arg_data->path['alias'];
           $head_elements['google_standout'] = array(
               '#type' => 'html_tag',
@@ -237,9 +261,14 @@ function itg_html_head_alter(&$head_elements) {
           );
         }
       }
-    } else if ($arg_data->type == 'podcast') {
+    }
+    else if ($arg_data->type == 'podcast') {
       if (is_array($arg_data->field_podcast_configuration[LANGUAGE_NONE]) && !empty($arg_data->field_podcast_configuration[LANGUAGE_NONE])) {
-        if ($arg_data->field_podcast_configuration[LANGUAGE_NONE][0]['value'] == 'google_standout') {
+        $configurableopt = $arg_data->field_podcast_configuration[LANGUAGE_NONE];
+        foreach ($configurableopt as $key => $value) {
+          $opt_value[] = $value['value'];
+        }
+        if (in_array("google_standout", $opt_value)) {
           $standout_path = $base_url . '/' . $arg_data->path['alias'];
           $head_elements['google_standout'] = array(
               '#type' => 'html_tag',
@@ -248,9 +277,14 @@ function itg_html_head_alter(&$head_elements) {
           );
         }
       }
-    } else if ($arg_data->type == 'story') {
+    }
+    else if ($arg_data->type == 'story') {
       if (is_array($arg_data->field_story_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_story_configurations[LANGUAGE_NONE])) {
-        if ($arg_data->field_story_configurations[LANGUAGE_NONE][0]['value'] == 'google_standout') {
+        $configurableopt = $arg_data->field_story_configurations[LANGUAGE_NONE];
+        foreach ($configurableopt as $key => $value) {
+          $opt_value[] = $value['value'];
+        }
+        if (in_array("google_standout", $opt_value)) {
           $standout_path = $base_url . '/' . $arg_data->path['alias'];
           $head_elements['google_standout'] = array(
               '#type' => 'html_tag',
@@ -261,6 +295,75 @@ function itg_html_head_alter(&$head_elements) {
       }
     }
   }
+  // Updating meta name keywords to news_keyword sitewide
+  $meta_name_keyword = array_keys($head_elements);
+  if (in_array('metatag_keywords_0', $meta_name_keyword)) {
+    $head_elements['metatag_keywords_0']['#name'] = 'news_keyword';
+  }
+  else {
+    if ($arg[0] == 'node' && is_numeric($arg[1])) {
+      $node = node_load($arg[1]);
+      $meta_keywords = $node->metatags[LANGUAGE_NONE]['keywords']['value'];
+      if (!empty($meta_keywords)) {
+        $head_elements['metatag_keywords_0'] = array(
+            '#type' => 'html_tag',
+            '#tag' => 'meta',
+            '#attributes' => array(
+                'name' => 'news_keyword',
+                'content' => $meta_keywords
+            ),
+        );
+      }
+    }
+    elseif ($arg[0] == 'taxonomy' && is_numeric($arg[2])) {
+      $term = taxonomy_term_load($arg[2]);
+      $meta_keywords = $term->metatags[LANGUAGE_NONE]['keywords']['value'];
+      if (!empty($meta_keywords)) {
+        $head_elements['metatag_keywords_0'] = array(
+            '#type' => 'html_tag',
+            '#tag' => 'meta',
+            '#attributes' => array(
+                'name' => 'news_keyword',
+                'content' => $meta_keywords
+            ),
+        );
+      }
 
-  $head_elements['metatag_keywords_0']['#name'] = 'news_keyword';
+      if ($term->vid == CATEGORY_MANAGMENT) {
+       
+        if (!empty($term->field_cm_hide_cat_from_search[LANGUAGE_NONE]) && $term->field_cm_hide_cat_from_search[LANGUAGE_NONE][0]['value'] == 1) {
+          if ($term->field_cm_no_follow[LANGUAGE_NONE][0]['value'] == 1) {
+            $head_elements['nofollow'] = array(
+                '#tag' => 'meta',
+                '#type' => 'html_tag',
+                '#attributes' => array(
+                    'name' => 'robots',
+                    'content' => 'nofollow'
+                )
+            );
+          }
+          if ($term->field_cm_no_follow[LANGUAGE_NONE][1]['value'] == 2) {
+            $head_elements['noindex_nofollow'] = array(
+                '#tag' => 'meta',
+                '#type' => 'html_tag',
+                '#attributes' => array(
+                    'name' => 'robots',
+                    'content' => 'noindex'
+                )
+            );
+          }
+          if ($term->field_cm_no_follow[LANGUAGE_NONE][0]['value'] == 2) {
+            $head_elements['noindex_nofollow'] = array(
+                '#tag' => 'meta',
+                '#type' => 'html_tag',
+                '#attributes' => array(
+                    'name' => 'robots',
+                    'content' => 'noindex'
+                )
+            );
+          }
+        }
+      }
+    }
+  }
 }

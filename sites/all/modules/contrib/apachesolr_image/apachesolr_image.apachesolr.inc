@@ -32,14 +32,14 @@ function apachesolr_image_indexing_callback($entity, $field_name, $index_key, ar
         'key' => "sm_image_uri_$field_name",
         'value' => $values[$i]['uri'],
       );
-      foreach ($index_styles as $style) {
-        if (array_key_exists($style, $all_styles)) {
-          $fields[] = array(
-            'key' => "sm_thumb_{$style}_{$field_name}",
-            'value' => theme('image_formatter', array('image_style' => $style, 'item' => $values[$i])),
-          );
-        }
-      }
+//      foreach ($index_styles as $style) {
+//        if (array_key_exists($style, $all_styles)) {
+//          $fields[] = array(
+//            'key' => "sm_thumb_{$style}_{$field_name}",
+//            'value' => theme('image_formatter', array('image_style' => $style, 'item' => $values[$i])),
+//          );
+//        }
+//      }
     }
   }
   return $fields;

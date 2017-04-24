@@ -16,7 +16,12 @@ function itg_event_registration_permission() {
   return array(
     'event registered users' => array(
       'title' => t('View Event Registered User List'),
-    )
+    ),
+    
+    'tab wise permission' => array(
+      'title' => t('Tabwise permission'),
+      'description' => t('Tab wise permission configuration.'),
+    ),
   );
 }
 
@@ -37,7 +42,7 @@ function itg_event_registration_menu() {
      'theme callback' => 'itg_event_registration_default_node_theme',
   );
 
-  $items['event/%/registration'] = array(
+  $items['event/%/%/registration'] = array(
     'title' => 'Event Registration',
     'page callback' => 'itg_event_reg_form',
     'access callback' => TRUE,
@@ -83,8 +88,18 @@ function itg_event_registration_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_event_registration_configuration.inc',
   );
+   $items['itg-event-tab-permission'] = array(
+    'title' => 'Event Tab Permission Configuration',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_event_registration_tabwise_form'),
+    'access callback' => 'user_access',
+    'access arguments' => array('tab wise permission'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_event_tab_permission.inc',
+  );
   return $items;
 }
+
 
 function itg_event_reg_form() {
   return '';
@@ -352,7 +367,56 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
       }
     }
   }
+  
+  // Tab wise permission
+  if ($form_id == 'event_backend_node_form') {
+    $event_tabs = array('step_first' => 'Basic Details', 'step_second' => 'Registration Fees', 'step_program_schedule' => 'Program Schedule', 'step_sponsor' => 'Sponsor', 'step_highlights' => 'Highlights', 'step_media' => 'Media', 'step_configuration' => 'Configuration');
+    global $user;
+    foreach ($user->roles as $key => $role) {
+      $roles[] = variable_get($key . '-tabwise');
+    }
 
+    foreach ($roles as $rids) {
+      foreach ($rids as $red) {
+        $value[$red] = $red;
+      }
+    }
+    $allow_step = array_unique($value);
+    ksort($allow_step);
+
+    foreach ($allow_step as $steps) {
+      $step_array[substr($steps, 3)] = substr($steps, 3);
+    }
+    $current_step = $form_state['storage']['step'];
+    if (!in_array($current_step, $step_array)) {
+      if ($current_step == 'step_configuration') {
+        drupal_add_css('.step-configuration {display:none;}', array('type' => 'inline'));
+      }
+      foreach ($form['#steps'][$current_step]->children as $field_name) {
+        // pr($field_name);
+        $form[$field_name]['#access'] = FALSE;
+        $form[$field_name]['#limit_validation_errors'] = array();
+        $form[$field_name]['#tabwise'] = 'skip';
+      }
+      foreach ($step_array as $allow_stepss) {
+        $msg_step .= $event_tabs[$allow_stepss] . ', ';
+      }
+
+      $msg = 'You are not authorised to access this step. Your allowed steps are <strong>' . rtrim($msg_step, ', ') . '.</strong>';
+    }
+//    foreach($form['#steps'] as $step){
+//      if(!in_array($step->step_name, $step_array)){
+//        $msg = 'You are not authorised to access this step.';
+//        foreach($step->children as $field_name) {
+//          $form[$field_name]['#access'] = FALSE;
+//          
+//        }
+//      }
+//    }
+    if (!empty($msg)) {
+      drupal_set_message($msg, 'error');
+    }
+  }
 }
 
 
@@ -536,7 +600,7 @@ function itg_event_registration_form_custom_submit_callback($form, &$form_state)
 
   //$form_state['redirect'] = $baseurl . '/registration';
   $event_name = itg_common_get_node_title($current_event_nid);
-  drupal_set_message(t('Congratulations! You have successfully registered yourself for the event <strong>@eventname</strong>.', array('@eventname' => $event_name)));
+  //drupal_set_message(t('Congratulations! You have successfully registered yourself for the event <strong>@eventname</strong>.', array('@eventname' => $event_name)));
   
   $type = isset($form_state['values']['field_erf_payment_gateway'][LANGUAGE_NONE][0]['value'])?$form_state['values']['field_erf_payment_gateway'][LANGUAGE_NONE][0]['value']:'';
   $form_state['redirect'] = 'itg-payment/'.$type;
@@ -572,6 +636,9 @@ function itg_event_registration_form_views_exposed_form_alter(&$form, &$form_sta
  */
 function itg_event_registration_node_presave($node) {
   if ($node->type == 'event_registration') {
+    if (!empty($node->total_value) && !empty($node->field_erf_payment_gateway[LANGUAGE_NONE][0]['value'])) {
+      $node->status = 0; 
+    }
     $node->title = itg_common_get_node_title(itg_event_registration_get_event_nid());
   }
 }
@@ -717,13 +784,13 @@ function itg_event_registration_get_event_nid() {
   global $base_url;
   $arg = arg();
   if ($arg[0] == 'event') {
-    $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
+    $path = drupal_lookup_path("source", $arg[1] . '/' . $arg[2]);
     //$node = menu_get_object("node", 1, $path);
     $event_nid = explode('/', $path);
     $node = node_load($event_nid[1]);
     return $node->nid;
   }
-  elseif (is_numeric($arg[1])) {
+  elseif (is_numeric($arg[1]) && $arg[0] == "node") {
     return $arg[1];
   } /* else {
     $host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
@@ -859,6 +926,7 @@ function itg_event_registration_vocab_id($vocab_name) {
 function itg_event_registration_node_insert($node) {
 
   if ($node->type == 'event_registration') {
+    global $user;
     try {
       $coupon_values = array(
         'coupon_code' => $node->coupon_code,
@@ -882,6 +950,10 @@ function itg_event_registration_node_insert($node) {
     catch (Exception $e) {
       //die('ERROR:'.$e->getMessage());
     }
+    //loyalti points
+    if($user->uid != 0){
+      itg_loyalty_reward_earnpoint($node->nid, 'ol-register', $user->uid);
+    }
   }
 }
 
@@ -900,3 +972,19 @@ function _get_unique_id_for_registration_unique_field() {
   }
   return $reporter_id;
 }
+
+
+/**
+ * Implement function for redirect save.
+ * @param str $source, $new_redirect
+ * 
+ */
+
+function itg_save_redirect($source, $new_redirect) {
+  $redirect = new StdClass();
+  redirect_object_prepare($redirect);
+  $redirect->source = $new_redirect;
+  $redirect->redirect = $source;
+  redirect_save($redirect);
+}
+ 

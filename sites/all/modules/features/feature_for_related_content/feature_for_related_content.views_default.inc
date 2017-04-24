@@ -139,7 +139,7 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<div id="head-val"><input class="insert-url add-more form-submit" type="button" name="Insert" value="Add Selected Content" /> &nbsp; <input type="text" name="insvalue" id="insvalue" size="40" class="form-text valid">
+  $handler->display->display_options['header']['area']['content'] = '<div id="head-val"><input class="insert-url add-more form-submit" type="button" name="Insert" value="Add Selected Content" /> &nbsp; <input type="text" name="insvalue" id="insvalue" size="40" class="form-text valid">&nbsp; <div id="relatedtit"></div>
 </div>
 <div id="clickme">Save Search</div>
 <div class="search-criteria" style="display:none"><input class="form-text valid" type="text" name="search-title" id="search-title"><input class="insert-save add-more form-submit" id="filter-save" type="button" name="save" value="save" /></div><div class="success" style="display:none">Search saved successfully</div>';
@@ -175,7 +175,6 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['fields']['label']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['label']['field'] = 'label';
   $handler->display->display_options['fields']['label']['label'] = 'Title';
-  $handler->display->display_options['fields']['label']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['label']['alter']['path'] = '[url]';
   $handler->display->display_options['fields']['label']['alter']['target'] = '_blank';
   /* Field: Apache Solr: bundle_name */

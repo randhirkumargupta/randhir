@@ -11,6 +11,7 @@
  * {@inheritdoc}
  */
 function itg_social_media_schema() {
+    
     $schema['itg_social_media_logs'] = array(
         'description' => 'The base table for social media log.',
         'fields' => array(
@@ -30,7 +31,7 @@ function itg_social_media_schema() {
             'node_title' => array(
                 'description' => 'The node title of the story.',
                 'type' => 'varchar',
-                'length' => 128,
+                'length' => 255,
                 'not null' => TRUE,
                 'default' => '',
             ),

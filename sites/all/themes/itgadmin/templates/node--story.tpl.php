@@ -162,14 +162,14 @@
                 </div>
 
         <?php
-        $templates = render($content['field_story_templates']);
+        $templates = render($content['field_story_select_templates']);
         if (!empty($templates)):
             ?>
                     <div class="Templates">
                         <h2><?php print t('Templates'); ?></h2>
 
                         <div class="content-details">
-                                    <?php print render($content['field_story_templates']); ?>
+                                    <?php print render($content['field_story_select_templates']); ?>
                                     <?php $vr = $content['field_story_templates']['#items']['0']['value']; ?>    
                                     <?php $fr = $node->field_story_template_guru[LANGUAGE_NONE]; ?>
                             <div class="field">
@@ -256,8 +256,11 @@
                     </div>
                         <?php endif; ?>
                 <!-- render story movie fields -->
+                <?php $movie = render($content['field_story_rating']);
+                        if (!empty($movie)):
+                    ?>
                 <div class="movie-details content-box">
-                    <h2><?php print t('Movies'); ?></h2>
+                   <h2><?php print t('Movies'); ?></h2>
                     <div class="content-details">
         <?php print render($content['field_story_rating']); ?>
         <?php print render($content['field_mega_review_cast']); ?>
@@ -265,7 +268,11 @@
         <?php print render($content['field_mega_review_movie_plot']); ?>
                     </div>
                 </div>
+               <?php endif; ?>
                 <!-- render story technology fields -->
+                <?php $tech = render($content['field_story_technology_rating']);
+                        if (!empty($tech)):
+                    ?>
                 <div class="tech-details content-box">
                     <h2><?php print t('Technology'); ?></h2>
                     <div class="content-details">
@@ -273,9 +280,10 @@
         <?php print render($content['field_story_tech_review_chunk']); ?>
                     </div>
                 </div>
+                <?php endif; ?>
                 <!-- render photo story fields -->
                 <div class="photo-story-details content-box">
-                    <h2><?php print t('photo story'); ?></h2>
+                    <h2><?php print t('Story type'); ?></h2>
                     <div class="content-details">
                         <?php print render($content['field_story_type']); ?>
                         <?php

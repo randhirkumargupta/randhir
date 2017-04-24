@@ -18,7 +18,7 @@ function itg_ugc_inqueue_form($form, &$form_state) {
   $form['content_type'] = array(
       '#type' => 'select',
       '#title' => t('Content Type'),
-      '#options' => array('' => 'none', 'story' => 'story', 'photogallery' => 'photogallery', 'videogallery' => 'videogallery', 'recepie' => 'recepie', 'podcast' => 'podcast', 'blog' => 'blog'),
+      '#options' => array('' => 'none', 'story' => 'story', 'photogallery' => 'photogallery', 'videogallery' => 'videogallery', 'podcast' => 'podcast', 'blog' => 'blog'),
       '#default_value' => isset($_GET['content_type']) ? $_GET['content_type']:"",
   );
   
@@ -69,7 +69,6 @@ function itg_ugc_inqueue_content() {
     array('data' => t('Content Type')),
     array('data' => t('Name')),
     array('data' => t('Email')),
-    array('data' => t('Description')),
     array('data' => t('Status')),
     array('data' => t('Posted Date')),
     array('data' => t('Actions')),
@@ -103,38 +102,24 @@ function itg_ugc_inqueue_content() {
 
       if (is_array($query) && empty($query))
       {
-
-        $userData = $people->find(array("publish_status" => array('$ne' => 1), "status" => 1))->limit($limit)->sort(array('publish_date_time' => -1));
+        $userData = $people->find(array("publish_status" => array('$ne' => 1), "status" => 1))->limit($limit)->sort(array('_id' => -1));
       }
       else
       {
-        $userData = $people->find($query)->limit($limit)->sort(array('publish_date_time' => -1));
+        $userData = $people->find($query)->limit($limit)->sort(array('_id' => -1));
       }
 
       $rows = array();
       $sl_no = 1;
       
       foreach ($userData as $row) {
-        $link = '<span class="view-link"><a href="ugc-view-content/'.$row['_id'].'/'.$arg[0].'">'.t('view').'</a></span> | <span class="edit-link"><a href="'.$base_url.'/node/add/'.$row['content_type'].'/'.$row['_id'].'?destination=ugc-inqueue-content">'.t('Approve').'</a></span> | <a href="ugc-title/'.$row['_id'].'/reject" class="ugc-reject">'.t('Reject').'</a>';
+        $link = '<span class="view-link"><a class="colorbox-load" href="ugc-view-content/'.$row['_id'].'/'.$arg[0].'?width=500&height=300">'.t('view').'</a></span> | <span class="edit-link"><a href="'.$base_url.'/node/add/'.$row['content_type'].'/'.$row['_id'].'?destination=ugc-inqueue-content">'.t('Approve').'</a></span> | <a href="ugc-title/'.$row['_id'].'/reject" class="ugc-reject">'.t('Reject').'</a>';
         
         if ($row['status'] == 1)
         {
           $status = 'Active';
         }
         
-        
-        $user_message_raw_value = strip_tags($row['description']);
-        $user_message_lenth = strlen($user_message_raw_value);
-        if ($user_message_lenth > 100)
-        {
-          $user_message_raw_value = substr($user_message_raw_value, 0, 99) . "...";
-          $user_message_raw_value = itg_ugc_bad_words($user_message_raw_value);
-        }
-        else
-        {
-          $user_message_raw_value = itg_ugc_bad_words($user_message_raw_value);
-          $user_message_raw_value = $user_message_raw_value;
-        }
         //get the value in table
         $rows[] = array(
           array('data' => $sl_no),
@@ -142,7 +127,6 @@ function itg_ugc_inqueue_content() {
           array('data' => $row['content_type']),
           array('data' => $row['name']),
           array('data' => $row['email']),
-          array('data' => $user_message_raw_value),
           array('data' => $status),
           array('data' => $row['publish_date']),
           array('data' => $link),

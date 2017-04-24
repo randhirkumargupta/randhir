@@ -9,29 +9,6 @@
  */
 
 /**
- * Implements hook_menu().
- */
-function itg_api_menu() {
-  $items = array();
-      
-  $items['itg-nifty-feed'] = array(
-    'title' => 'api callback menu',
-    'page callback' => 'itg_nifty_feed',
-    'access arguments' => array('access Api content'),
-    'type' => MENU_CALLBACK,
-  );
-  
-  $items['itg-reuters-content'] = array(
-    'title' => 'api callback menu',
-    'page callback' => 'itg_reuters_content',
-    'access arguments' => array('access Api content'),
-    'type' => MENU_CALLBACK,
-    'file' => 'include/itg_api_reuters.inc',
-  );
-  return $items;
-}
-
-/**
  * Implements hook_cronapi().
  * {@inheritdoc}
  */
@@ -67,6 +44,17 @@ function itg_api_cronapi($op, $job = NULL) {
     'file' => 'include/itg_api_ap.inc',
   );
   
+  $items['itg-reuters-content'] = array(
+    'description' => 'Import Reuters Feed',
+    'callback' => 'itg_reuters_content',
+    'file' => 'include/itg_api_reuters.inc',
+  );
+  
+  $items['itg-nifty-feed'] = array(
+    'description' => 'Import Nifty Feed',
+    'callback' => 'itg_nifty_feed',
+  );
+
   return $items;
 }
 
@@ -97,10 +85,7 @@ function workbench_moderation_state_review() {
  * Implement itg_nifty_feed
  */
 function itg_nifty_feed() {
-  $base_path_set = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-  $base_path_set = explode('/', $base_path_set);
-  $path_instance = $base_path_set[1];
-  $direc = $_SERVER['DOCUMENT_ROOT'] . '/' . $path_instance . '/sites/default/files/gallery/nifty/';
+  $direc = getcwd() . '/sites/all/modules/custom/itg_api/feeds/nifty/';
   $new_file_name = $direc . 'SensexNiftyFeed.txt';
   $response_xml_data = get_content_from_xml_loc('http://businesstoday.accordhostings.com/SensexNiftyFeed.aspx');
 
@@ -121,6 +106,7 @@ function itg_nifty_feed() {
       chmod($file, 777);
     }
   }
+  print 'Saved Successfully';
 }
 
 /**
@@ -130,6 +116,7 @@ function itg_nifty_feed() {
  */
 
 function itg_api_check_title($title) {
+  $title = html_entity_decode($title);
   $result = db_select('node', 'node')
     ->fields('node', array('title'))
     ->condition('title', $title, '=')
@@ -188,6 +175,16 @@ function itg_api_insert_xml_info($nid, $file, $type, $source) {
     'created' => $created
   ))
     ->execute();
+}
+
+/**
+ * Implements function for check file info in table (itg_api_xml_info)
+  * @param string $filename
+ */
+function itg_api_get_xml_info($filename) {
+  $result = db_query("SELECT t.id FROM {itg_api_xml_info} t WHERE t.filename = :name", array(":name" => $filename));
+  $id = $result->fetchField();
+  return $id;
 }
 
 /**

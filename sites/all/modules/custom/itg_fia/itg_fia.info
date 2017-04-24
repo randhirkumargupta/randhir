@@ -1,0 +1,4 @@
+name = ITG FIA
+description = Generating Facebook Instant Article Data
+package = custom
+core = 7.x

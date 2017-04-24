@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+SUMMARY: 
+- Structure: NML2 SNI Text 
+- Based On: NML2 v2.10
+
+AUTHOR: thomsonreuters.com
+-->
+<!-- ========================================================= -->
+<newsMessage xmlns="http://iptc.org/std/nar/2006-10-01/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rtr="http://www.reuters.com/ns/2003/08/content" xmlns:x="http://www.w3.org/1999/xhtml">
+  <header>
+    <sent>2016-09-10T20:29:24.000Z</sent>
+    <sender>reuters.com</sender>
+    <transmitId>tag:reuters.com,0000:newsml_L8N1BM0KC:1809581328</transmitId>
+    <priority>3</priority>
+    <destination>ABN</destination>
+    <destination>E</destination>
+    <destination>RBN</destination>
+    <destination>UKI</destination>
+    <destination>G</destination>
+    <destination>M</destination>
+    <destination>D</destination>
+    <destination>RNP</destination>
+    <destination>DNP</destination>
+    <destination>PGE</destination>
+    <channel>TXT</channel>
+  </header>
+  <itemSet>
+    <newsItem guid="tag:reuters.com,0000:newsml_L8N1BM0KC" version="1809581328" standard="NewsML-G2" standardversion="2.10" conformance="power" xml:lang="en">
+      <catalogRef href="http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_3.xml" />
+      <rightsInfo>
+        <copyrightHolder literal="Thomson Reuters" />
+        <copyrightNotice xml:lang="en">(c) Copyright Thomson Reuters 2016. Click For Restrictions - http://about.reuters.com/fulllegal.asp</copyrightNotice>
+      </rightsInfo>
+      <itemMeta>
+        <itemClass qcode="icls:text" rtr:msgType="S" />
+        <provider literal="reuters.com" />
+        <versionCreated>2016-09-10T20:29:24.000Z</versionCreated>
+        <firstCreated>2016-09-10T20:29:24.000Z</firstCreated>
+        <pubStatus qcode="stat:usable" />
+        <role qcode="itemRole:N" />
+        <fileName>2016-09-10T202924Z_1809581328_L8N1BM0KC_RTRMADT_0_ROLLS-ROYCE-KIRBY.XML</fileName>
+        <generator versioninfo="00.00.01">G3:IIM:FH</generator>
+        <profile versioninfo="00.00.01">SNI-Text</profile>
+        <service qcode="svc:RTR_TNS" />
+        <memberOf creator="trRule:rule1" modified="2016-09-10T20:29:25.000Z" literal="Business">
+          <name>Business</name>
+        </memberOf>
+        <memberOf creator="trRule:rule11" modified="2016-09-10T20:29:25.000Z" literal="Politics">
+          <name>Politics</name>
+        </memberOf>
+        <memberOf creator="trRule:rule25" modified="2016-09-10T20:29:25.000Z" literal="World-Europe">
+          <name>Europe</name>
+        </memberOf>
+        <memberOf creator="trRule:rule33" modified="2016-09-10T20:29:25.000Z" literal="World-UK">
+          <name>UK</name>
+        </memberOf>
+        <signal qcode="edStat:N" />
+        <signal qcode="sic:CPX" />
+        <signal qcode="prodId:TXT" />
+        <signal qcode="pmt:text" />
+        <rtr:versionedId guid="tag:reuters.com,0000:newsml_L8N1BM0KC:1809581328" />
+      </itemMeta>
+      <contentMeta>
+        <urgency>3</urgency>
+        <infoSource role="cRole:origProv" literal="Reuters" />
+        <creator literal="Reuters" />
+        <altId type="idType:USN" rtr:isOriginal="1">L8N1BM0KC</altId>
+        <altId type="idType:OTR">L8N1BM0KC</altId>
+        <language tag="en" />
+        <subject qcode="MCC:OEC" />
+        <subject qcode="N2:COEN" />
+        <subject qcode="N2:TRAN" />
+        <subject qcode="N2:RRLP" />
+        <subject qcode="N2:RRLF" />
+        <subject qcode="N2:ROAD" />
+        <subject qcode="N2:WEU" />
+        <subject qcode="N2:EUROP" />
+        <subject qcode="N2:POL" />
+        <subject qcode="N2:AERO" />
+        <subject qcode="N2:GB" />
+        <subject qcode="N2:CMPNY" />
+        <subject qcode="N2:BOSS1" />
+        <subject qcode="N2:INDS" />
+        <subject qcode="N2:INDG" />
+        <subject qcode="N2:ISER" />
+        <subject qcode="N2:RORA" />
+        <subject qcode="N2:BACT" />
+        <subject qcode="N2:MNGISS" />
+        <subject qcode="N2:GEN" />
+        <subject qcode="R:RR.L" />
+        <subject qcode="subj:04004001" />
+        <subject qcode="subj:04015000" />
+        <subject qcode="subj:11000000" />
+        <subject qcode="subj:04011001" />
+        <subject qcode="subj:04016000" />
+        <subject qcode="subj:09000000" />
+        <subject qcode="subj:04000000" />
+        <subject qcode="subj:04011000" />
+        <subject qcode="subj:10000000" />
+        <subject qcode="N2:TPT" />
+        <subject qcode="N2:AER" />
+        <subject qcode="N2:GBR" />
+        <subject qcode="N2:UK" />
+        <subject qcode="N2:PIA" />
+        <subject qcode="a1312cat:f" />
+        <subject qcode="a1312cat:i" />
+        <subject qcode="MCCL:OVR" />
+        <subject qcode="MCCL:OEC" />
+        <slugline separator="-">ROLLS-ROYCE-KIRBY/</slugline>
+        <headline>Rolls-Royce appoints high-speed rail boss Kirby as COO</headline>
+        <creditline>Reuters</creditline>
+        <description role="descRole:caption">ROLLS-ROYCE-KIRBY/:Rolls-Royce appoints high-speed rail boss Kirby as COO</description>
+      </contentMeta>
+      <assert qcode="R:RR.L">
+        <name>Rolls-Royce Holding PLC</name>
+        <sameAs qcode="NDAID:23672" />
+        <organisationDetails>
+          <rtr:companydata name="Rolls-Royce Holding PLC" ric="RR.L" exchange="LSE" exchangecv="MDNA" tickersymbol="RR." />
+        </organisationDetails>
+      </assert>
+      <contentSet>
+        <inlineXML contenttype="application/xhtml+html" wordcount="397">
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+              <title />
+            </head>
+            <body>
+              <p>LONDON, Sept 10 (Reuters) - Rolls-Royce has appointed
+Simon Kirby, the head of British high-speed rail project HS2, as
+chief operating officer, the aerospace and engineering group
+said on Saturday.</p>
+              <p>British media said Kirby's unexpected departure from HS2
+would add to the uncertainty over a 55 billion pound ($73
+billion) project that has been controversial both among the
+public and within the ruling Conservative Party.</p>
+              <p>Rolls-Royce said Kirby would take up the newly created post
+in the coming months and would take responsibility for the
+"group-wide transformation agenda".</p>
+              <p>The company is part-way through a turnaround plan after a
+string of profit downgrades last year, attributed to cancelled
+orders from oil industry customers after an oil price plunge and
+a slowdown in aftermarket servicing for aircraft engines.</p>
+              <p>The group said in July the plan was starting to take hold
+and it stuck to its full-year profit forecast.</p>
+              <p>"(Kirby's) exceptional track record in delivering complex
+major programmes is highly relevant to Rolls-Royce and will
+strengthen management capability ahead of a period of
+significant expansion," Chief Executive Warren East said in a
+statement.</p>
+              <p>"We are doubling our production of large civil aircraft
+engines and substantially growing our nuclear division while at
+the same time driving a transformation programme that will make
+us a more resilient and cash generative business," he said.</p>
+              <p>Kirby is chief executive of HS2 Ltd, the company in charge
+of planning and delivering a new high-speed rail network linking
+London to cities in the Midlands and the north.</p>
+              <p>He joined HS2 in May 2014 from Network Rail, the body that
+controls Britain's railway infrastructure, where he was a board
+member. He will not join the Rolls-Royce board.</p>
+              <p>"I am hugely proud to be joining one of the world's great
+engineering companies at an exciting time in its development,"
+Kirby was quoted as saying in the statement from Rolls-Royce.</p>
+              <p>The first phase of HS2, which will run from London to
+Birmingham, is due to be completed in 2026, although there have
+been multiple warnings from critics of the project that it would
+not be completed on time or on budget.</p>
+              <p>Opponents of HS2 say it is far too costly and will not
+deliver the economic benefits promised by successive
+governments, while advocates of the project say it will
+stimulate growth in the Midlands and northern England.
+ ($1 = 0.7533 pounds)
+
+ (Reporting by Estelle Shirbon; Editing by Robin Pomeroy)</p>
+            </body>
+          </html>
+        </inlineXML>
+      </contentSet>
+    </newsItem>
+  </itemSet>
+</newsMessage>
+

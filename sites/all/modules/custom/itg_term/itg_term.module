@@ -217,6 +217,7 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
         $form['tab']['import_format']['#options'] = array(
           'fields' => 'Fields'
         );
+        //p($form);
         $form['tab']['format']['#access'] = FALSE;
         $form['tab']['csv_format']['#access'] = FALSE;
         $form['tab']['import_options']['#access'] = FALSE;
@@ -226,11 +227,15 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
           'fields' => 'Fields'
         );
         $form['tab']['import']['#title'] = FALSE;
-        $form['tab']['import']['source_choice']['#options']['#access'] = FALSE;
+       // $form['tab']['import']['source_choice']['#options']['#access'] = FALSE;
+        
+        $form['tab']['import']['source_choice']['#access'] = FALSE;
+        
         $form['tab']['import']['source_choice']['#options'] = array(
           'file' => 'In a local file'
         );
-        $form['tab']['import']['source_choice']['#access'] = FALSE;
+        $form['tab']['import']['source_choice']['#default_value'] = 'file';
+        $form['tab']['import']['source_choice']['#validated'] = TRUE;
         $form['tab']['import']['text']['#access'] = FALSE;
         $form['tab']['import']['url']['#access'] = FALSE;
         $form['tab']['destination']['vocabulary_target']['#options']['#access'] = FALSE;
@@ -416,6 +421,13 @@ function itg_term_views_pre_render(&$view) {
     $header_content_term .= l(t('Export CSV'), 'download-tags', array('query' => array('name' => $_GET['name'],'field_tags_display_value' => $_GET['field_tags_display_value'],'field_tags_status_value' => $_GET['field_tags_status_value'],'created[min][date]' => $_GET['created']['min']['date'],'created[max][date]' => $_GET['created']['max']['date'],'items_per_page' => $_GET['items_per_page'], 'page' => $_GET['page'], 'attach' => 'page')));
 
     drupal_add_js("jQuery(document).ready(function(){ jQuery('.feed-icon').hide();});", 'inline');
+    $view->attachment_before = $header_content_term;
+  }
+  
+  if (isset($view->name) && $view->name == "tags_listing") {
+    // Add "Create Tag" button on listing page of Tags Management
+    $header_content_term = '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $header_content_term .= l(t('Create Tag'), 'admin/structure/taxonomy/tags/add');
     $view->attachment_before = $header_content_term;
   }
 }

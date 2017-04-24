@@ -24,7 +24,7 @@ function feature_for_blog_front_end_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Blog listing';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -78,15 +78,6 @@ function feature_for_blog_front_end_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['strip_tags'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  /* Field: Content: Long description */
-  $handler->display->display_options['fields']['field_blog_long_description']['id'] = 'field_blog_long_description';
-  $handler->display->display_options['fields']['field_blog_long_description']['table'] = 'field_data_field_blog_long_description';
-  $handler->display->display_options['fields']['field_blog_long_description']['field'] = 'field_blog_long_description';
-  $handler->display->display_options['fields']['field_blog_long_description']['label'] = '';
-  $handler->display->display_options['fields']['field_blog_long_description']['alter']['max_length'] = '180';
-  $handler->display->display_options['fields']['field_blog_long_description']['alter']['strip_tags'] = TRUE;
-  $handler->display->display_options['fields']['field_blog_long_description']['alter']['trim'] = TRUE;
-  $handler->display->display_options['fields']['field_blog_long_description']['element_label_colon'] = FALSE;
   /* Field: Content: Extra large image */
   $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
@@ -99,6 +90,14 @@ function feature_for_blog_front_end_views_default_views() {
     'image_style' => 'widget_small',
     'image_link' => 'content',
   );
+  /* Field: Content: Short description */
+  $handler->display->display_options['fields']['field_common_short_description']['id'] = 'field_common_short_description';
+  $handler->display->display_options['fields']['field_common_short_description']['table'] = 'field_data_field_common_short_description';
+  $handler->display->display_options['fields']['field_common_short_description']['field'] = 'field_common_short_description';
+  $handler->display->display_options['fields']['field_common_short_description']['label'] = '';
+  $handler->display->display_options['fields']['field_common_short_description']['alter']['max_length'] = '180';
+  $handler->display->display_options['fields']['field_common_short_description']['alter']['trim'] = TRUE;
+  $handler->display->display_options['fields']['field_common_short_description']['element_label_colon'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';

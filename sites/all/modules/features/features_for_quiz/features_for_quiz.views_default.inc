@@ -277,6 +277,14 @@ function features_for_quiz_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
+  /* Field: Content: Survey Expiry Date */
+  $handler->display->display_options['fields']['field_survey_expity_date_1']['id'] = 'field_survey_expity_date_1';
+  $handler->display->display_options['fields']['field_survey_expity_date_1']['table'] = 'field_data_field_survey_expity_date';
+  $handler->display->display_options['fields']['field_survey_expity_date_1']['field'] = 'field_survey_expity_date';
+  $handler->display->display_options['fields']['field_survey_expity_date_1']['label'] = '';
+  $handler->display->display_options['fields']['field_survey_expity_date_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_survey_expity_date_1']['type'] = 'list_key';
+  $handler->display->display_options['fields']['field_survey_expity_date_1']['delta_offset'] = '0';
   /* Sort criterion: Content: Updated date */
   $handler->display->display_options['sorts']['changed']['id'] = 'changed';
   $handler->display->display_options['sorts']['changed']['table'] = 'node';

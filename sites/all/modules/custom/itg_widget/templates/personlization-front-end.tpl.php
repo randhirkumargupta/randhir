@@ -18,16 +18,12 @@
             <?php
             if (isset($node_info['node_data']['uri'])) {
               $style_name = ($frist_key == 0) ? 'recommended_for_you_large' : "video_landing_page_170_x_127";
-              print theme('image_style', array(
-                'style_name' => $style_name,
-                'path' => $node_info['node_data']['uri'],
-                      )
-              );
+              print theme('image_style', array('style_name' => $style_name,'path' => $node_info['node_data']['uri'],));
             }
             else {
-              $height_width = ($frist_key == 0) ? 'width="370" height="208"' : 'width="170" height="127"';
+              $right_img = ($frist_key == 0) ? 'itg_image370x208.jpg' : 'itg_image170x127.jpg';
               ?>
-              <img <?php print $height_width; ?> src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" alt="" />
+              <img src="<?php echo $base_url . "/" . drupal_get_path('theme', 'itg') ?>/images/<?php echo $right_img; ?>" alt="" />
             <?php } ?>
           </a>
         </div>
@@ -68,7 +64,7 @@
               }
               else {
                 ?>
-                <img width="170" height="127" src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg" alt="" />
+                <img width="170" height="127" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg" alt="" />
               <?php } ?>
             </a>
           </div>

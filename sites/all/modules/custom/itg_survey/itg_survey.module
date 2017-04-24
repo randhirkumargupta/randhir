@@ -90,7 +90,7 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
 
   // Set destination for survey form
   if ($form_id == 'survey_node_form') {
-    $form['field_survey_category']['und']['#config']['module'] = 'itg_category_manager';
+    //$form['field_survey_category']['und']['#config']['module'] = 'itg_category_manager';
     unset($form['field_supp_publish']['und']['#options']['_none']);
     if (is_numeric(arg(1))) {
       $publish_value = itg_survey_get_publish_status(arg(1));
@@ -109,13 +109,13 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
     $form['title']['#description'] = '<p>' . t('Please enter survey title.') . '</p>';
     unset($form['field_supp_publish'][LANGUAGE_NONE]['#title']);
 
-    if (is_numeric(arg(1)) && arg(2) == 'edit') {
-      $form['actions']['view_survey_result'] = array(
-        '#markup' => l(t('View Survey Result'), 'survey-result/' . arg(1), array('attributes' => array('class' => 'survey-view-result-btn', 'target' => '_blank'))),
-        '#weight' => 20,
-        '#value' => t('View Survey Result'),
-      );
-    }
+//    if (is_numeric(arg(1)) && arg(2) == 'edit') {
+//      $form['actions']['view_survey_result'] = array(
+//        '#markup' => l(t('View Survey Result'), 'survey-result/' . arg(1), array('attributes' => array('class' => 'survey-view-result-btn', 'target' => '_blank'))),
+//        '#weight' => 20,
+//        '#value' => t('View Survey Result'),
+//      );
+//    }
 
     $form['actions']['cancel'] = array(
       '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
@@ -278,6 +278,13 @@ function itg_survey_node_presave($node) {
    * '0' for save as draft
    * '1' for publish and '2' for unpublish
    */
+  /*if ($node->type == 'survey') {
+    if ($node->status == 1) {
+      $node->field_supp_publish[LANGUAGE_NONE][0]['value'] = 1;
+    }
+    
+  }*/
+  
   if ($node->type == 'survey' && isset($node->field_supp_publish)) {
     switch ($node->field_supp_publish[LANGUAGE_NONE][0]['value']) {
       case '0':
@@ -880,11 +887,14 @@ function itg_survey_pqs_associate_with_story($token) {
   $token_arr = explode(':', $token);
   $nid = rtrim($token_arr[2], ']');
   $type = strtolower($token_arr[1]);
-  if ($type == 'survey') {
+  if(function_exists('itg_common_get_node_type')) {
+    $exist_type = itg_common_get_node_type($nid);
+  }
+  if ($type == 'survey' && $exist_type == 'survey') {
     module_load_include('inc', 'itg_survey', 'includes/itg_survey_form');
     $form = drupal_get_form('itg_survey_survey_form', $nid);
   }
-  if ($type == 'quiz') {
+  if ($type == 'quiz' && $exist_type == 'quiz') {
     module_load_include('inc', 'itg_quiz', 'includes/itg_quiz_form');
     $form = drupal_get_form('itg_quiz_quiz_form', $nid);
   }
@@ -894,6 +904,7 @@ function itg_survey_pqs_associate_with_story($token) {
 function itg_survey_pqs_associate_poll_with_story($nid) {
 
   $node = node_load($nid);
+  if(!empty($node->nid) && $node->type == 'poll') {
   $poll_banner_image = '';
   if (isset($node->field_poll_banner[$node->language][0]['uri']) && !empty($node->field_poll_banner[$node->language][0]['uri'])) {
     $poll_banner_image = theme('image_style', array('style_name' => 'home_page_poll_images_style', 'path' => $node->field_poll_banner[$node->language][0]['uri']));
@@ -928,6 +939,7 @@ function itg_survey_pqs_associate_poll_with_story($nid) {
   $polls_info['updated'] = t('Updated: ') . date('M d Y H:i', $node->changed);
   $polls_info['poll_image_exist_class'] = $poll_image_exist_class;
   return theme('itg_poll_homepage_forms', array('data' => $polls_info));
+  }
 }
 
 /**
@@ -1218,7 +1230,7 @@ function itg_survey_survey_form_submit($form, &$form_state) {
     // Call loyalty & rewards function to save points for a user
     if (function_exists('itg_loyalty_reward_earnpoint')) {
       if ($user->uid) {
-        itg_loyalty_reward_earnpoint($form_state['values']['nid'], 'participate', $user->uid);
+        //itg_loyalty_reward_earnpoint($form_state['values']['nid'], 'participate', $user->uid);
       }
     }
   }

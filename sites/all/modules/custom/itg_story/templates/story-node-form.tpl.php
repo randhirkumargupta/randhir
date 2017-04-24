@@ -65,8 +65,8 @@
             <div class="itg-form-section hide">
                 <?php print drupal_render($form['field_story_short_headline']); ?>
                 <?php print drupal_render($form['field_story_long_head_line']); ?>
-              <!--<div class="pre-desc"><?php //print t('This title shows on the section page');      ?></div> -->
-                
+              <!--<div class="pre-desc"><?php //print t('This title shows on the section page');       ?></div> -->
+
                 <?php print drupal_render($form['field_story_new_title']); ?>
                 <?php print drupal_render($form['field_story_redirection_url_titl']); ?>
                 <?php print drupal_render($form['field_story_courtesy']); ?>
@@ -89,39 +89,46 @@
                 <?php //unset($form['revision_information']); ?>
             </div>
         </div>
-      
-       <div id="StoryMovie" class="itg-form-section-wrapper">
+
+        <div id="StoryMovie" class="itg-form-section-wrapper">
             <h2 class="story-title"><?php print t('Story Movie'); ?></h2> 
             <div class="itg-form-section hide">
-              <?php print drupal_render($form['field_story_rating']); ?>
-              <?php print drupal_render($form['field_mega_review_cast']); ?>
-              <?php print drupal_render($form['field_mega_review_director']); ?>
-              <?php print drupal_render($form['field_mega_review_movie_plot']); ?>
+                <?php print drupal_render($form['field_story_rating']); ?>
+                <?php print drupal_render($form['field_mega_review_cast']); ?>
+                <?php print drupal_render($form['field_mega_review_director']); ?>
+                <?php print drupal_render($form['field_mega_review_movie_plot']); ?>
             </div>
         </div>
-      
-         <div id="StoryTech" class="itg-form-section-wrapper">
+
+        <div id="StoryTech" class="itg-form-section-wrapper">
             <h2 class="story-title"><?php print t('Story Technology'); ?></h2> 
             <div class="itg-form-section hide">
-              <?php print drupal_render($form['field_story_technology']); ?>
-              <?php print drupal_render($form['field_story_technology_rating']); ?>
-              <?php print drupal_render($form['field_story_tech_review_chunk']); ?>
+                <?php print drupal_render($form['field_story_technology']); ?>
+                <?php print drupal_render($form['field_story_technology_rating']); ?>
+                <?php print drupal_render($form['field_story_tech_review_chunk']); ?>
             </div>
         </div>
-        
+
         <div id="StoryPhoto" class="itg-form-section-wrapper">
             <h2 class="story-title"><?php print t('Photo Story'); ?></h2> 
             <div class="itg-form-section hide">
-              <?php print drupal_render($form['field_photo_story']); ?>
+                <?php print drupal_render($form['field_photo_story']); ?>
             </div>
         </div>
-      
+
         <div class="itg-form-action">
             <?php print drupal_render($form['actions']); ?>
         </div>
     </div>
     <div class="col-md-4">
         <div class="itg-sidebar-form">
+            <div id="Briefcase" class="itg-sidebar-form-section">
+                <h2 class="story-title active"><?php print t('Section/Category'); ?></h2>
+                <div class="itg-form-section">
+                    <?php print drupal_render($form['category_holder']); ?>
+                </div>
+            </div>
+
             <div id="Briefcase" class="itg-sidebar-form-section">
                 <h2 class="story-title"><?php print t('Highlights'); ?></h2>
                 <div class="itg-form-section hide">
@@ -134,12 +141,12 @@
                     ?></h2>
                 <div class="itg-form-section hide">
                     <?php print drupal_render($form['field_story_configurations']); ?>
+                    <?php print drupal_render($form['field_story_comment_question']); ?>
                     <?php print drupal_render($form['field_poll_start_date']); ?>
                     <?php print drupal_render($form['field_story_tv_time']); ?>
                     <?php print drupal_render($form['field_story_featured_name']); ?>
                     <?php print drupal_render($form['field_story_syndication']); ?>
                     <?php print drupal_render($form['field_story_syndications_photo']); ?>
-                    <?php print drupal_render($form['field_story_comment_question']); ?>
                     <?php print drupal_render($form['field_story_client_title']); ?>
                     <?php print drupal_render($form['field_story_media_files_syndicat']); ?>
                     <?php print drupal_render($form['field_common_related_content']); ?>
@@ -163,6 +170,8 @@
                     <?php print drupal_render($form['field_story_facebook_video']); ?>                    <!-- Facebook Instant Article -->
                     <?php print drupal_render($form['field_facebook_audio_position']); ?>
                     <?php print drupal_render($form['field_facebook_instant_audio_url']); ?>
+                    <?php print drupal_render($form['field_story_big_image']); ?>
+
                     <?php print drupal_render($form['field_animated_image_position']); ?>
                     <?php print drupal_render($form['field_facebook_animated_image']); ?>
                     <?php print drupal_render($form['field_facebook_map_position']); ?>

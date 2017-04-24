@@ -6,6 +6,7 @@
  * {@inheritdoc}
  */
 module_load_include('inc', 'itg_seo', 'includes/itg_seo_rich_snippet');
+module_load_include('inc', 'itg_common', 'includes/itg_common');
 
 function itg_seo_menu() {
     $items['itg-access-denied'] = array(
@@ -74,6 +75,9 @@ function itg_seo_theme() {
 function itg_seo_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   
+  if ($form_id == 'event_registration_node_form') {
+    $form['#after_build'][] = 'event_registration_extra_element_hide';
+  }
   // Extra meta tags element hide from form
   if ($form_id == 'mega_review_critic_node_form' 
           || $form_id == 'story_node_form' 
@@ -149,18 +153,55 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
  * @return array
  */
 function itg_meta_tags_alias_set($form, &$form_state) {
-  global $edited_sef_url;
+ global $edited_sef_url;
   $nodeid = arg(1);
   if (isset($form['path']) && !empty($form['path'])) {
-      $path_alias_set = $form['path']['alias']['#value'];
+    $edited_sef_url = itg_get_sef_url($form['path']['alias']['#value'], $nodeid);
+    $form['path']['alias']['#value'] = $edited_sef_url;
+  }
+  return $form;
+}
+
+/**
+ * Return SEF Url
+ */
+function itg_get_sef_url($sef_path, $nodeid) {
+  if (isset($sef_path) && !empty($sef_path)) {
+    $node_object = node_load($nodeid);
+    // Handel edit case for issue baised story.
+    $is_issue_magazine = is_issue_baised_magazine($node_object);
+    $is_photo_story = is_photo_story($node_object);
+    if($is_issue_magazine) {
+      $path_alias_set = $sef_path;
+      $path_data = explode("/", $path_alias_set);
+      $edit_path_data = end($path_data);
+      $new_url_array = explode('-', $edit_path_data);
+      $array_size = count($new_url_array);
+      unset($new_url_array[0]);
+      unset($new_url_array[$array_size-4]);
+      unset($new_url_array[$array_size-3]);
+      unset($new_url_array[$array_size-2]);
+      unset($new_url_array[$array_size-1]);
+      $edited_sef_url = implode('-', $new_url_array);
+    }
+    elseif ($is_photo_story) {
+      $path_data = explode("/", $sef_path);
+      $edited_sef_url = rtrim($path_data[2]);
+    }
+    else {
+      $path_alias_set = $sef_path;
       $path_data = explode("/", $path_alias_set);
       $set_hierarchy = array_reverse($path_data);
       $seftitle = $set_hierarchy[0];
       $sef_url = explode($nodeid, $seftitle);
       $edited_sef_url = rtrim($sef_url[0], '-');
-      $form['path']['alias']['#value'] = $edited_sef_url;
+    }
+    return $edited_sef_url;
   }
-  return $form;
+}
+
+function itg_seo_mb_substr($str , $start , $end) {
+  return mb_substr($str , $start , $end - $start);
 }
 
 /**
@@ -240,47 +281,61 @@ function itg_additional_settings_element_hide($form, &$form_state, $form_id) {
  * @param object $entity_object
  */
 function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_url = NULL) {
-    
-    $str_breadcrumb = 'http://data-vocabulary.org/Breadcrumb';
-    $title_val = substr(check_plain($entity_object->title), 0, 100);
-    $node_title = '<div itemscope itemtype="'.$str_breadcrumb.'" class="lft pathtwo">'.l('<span itemprop="title">'.t($title_val), 'node/'.$entity_object->nid, array('html'=>TRUE, 'attributes' => array('itemprop' => 'url'))).'</span>';
-    
-    $section_link = '<div itemscope itemtype="'.$str_breadcrumb.'" class="lft pathone">'
-        .l('<span itemprop="title">News</span>', '<front>', array('html'=>TRUE, 'attributes' => array('itemprop' => 'url'))).'</div>';
-    
-    //for Magazine Story
-    if (!empty($entity_object->type) && $entity_object->type == 'story' && !empty($entity_object->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'])) {
-        $section_link .= ' / ' . l('Magazine', 'calendar/0/0/magazine.html');
-    }
+  $str_breadcrumb = 'http://data-vocabulary.org/Breadcrumb';
+  $title_val = substr(check_plain($entity_object->title) , 0 , 100);
+  
+//  if($entity_object->type == 'story' || $entity_object->type == 'photogallery' || $entity_object->type == 'videogallery') {
+//  $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo"><span itemprop="title">' . t($title_val)  . '</span>';  
+//  } else {
+//  $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo">' . l('<span itemprop="title">' . t($title_val) , 'node/' . $entity_object->nid , array('html' => TRUE , 'attributes' => array('itemprop' => 'url'))) . '</span>';
+//  }
+  $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo"><span itemprop="title">' . t($title_val)  . '</span>';  
+  $section_link = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">'
+      . l('<span itemprop="title">News</span>' , '<front>' , array('html' => TRUE , 'attributes' => array('itemprop' => 'url'))) . '</div>';
 
-    if (!empty($id)) {
-        $section_tids = taxonomy_get_parents_all($id);
-        $section_tids = array_reverse($section_tids);
-        foreach ($section_tids as $chunks) {
-          $section_link .= '<div itemscope itemtype="'.$str_breadcrumb.'" class="lft pathone"> /'
-                    . l('<span itemprop="title">'.$chunks->name.'</span>', drupal_get_path_alias('taxonomy/term/' . $chunks->tid), array('html'=>TRUE, 'attributes' => array('itemprop' => 'url'))).'</div>';            
-        }
+  //for Magazine Story
+  if (!empty($entity_object->type) && $entity_object->type == 'story' && !empty($entity_object->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'])) {
+    $section_link .= ' / ' . l('Magazine' , 'calendar/0/0/magazine.html');
+  }
+
+  if (!empty($id)) {
+    $section_tids = taxonomy_get_parents_all($id);
+    $section_tids = array_reverse($section_tids);
+    foreach ($section_tids as $chunks) {
+      $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone"> /'
+          . l('<span itemprop="title">' . $chunks->name . '</span>' , drupal_get_path_alias('taxonomy/term/' . $chunks->tid) , array('html' => TRUE , 'attributes' => array('itemprop' => 'url'))) . '</div>';
     }
-    if (!empty($entity_object->type) && $entity_object->type == 'story') {
-        $section_link .= ' / ' . $node_title;
-    } else if (!empty($entity_object->type) && $entity_object->type == 'videogallery') {
-        $section_link .= ' / Video / ' . $node_title;
-    } else if (!empty($entity_object->type) && $entity_object->type == 'photogallery') {
-        $section_link .= ' / Gallery / ' . $node_title;
-    } else if (!empty($entity_object->type) && $entity_object->type == 'podcast') {
-        $section_link .= ' / ' . l("Podcast", "podcasts-listing") . ' / ' . $node_title;
-    } else if (!empty($entity_object->type) && $entity_object->type == 'poll') {
-        $section_link .= ' / Poll';
-    } else if (!empty($entity_object->type) && $entity_object->type == 'blog') {
-        $section_link .= ' / Blog / ' . $node_title;
-    } else if (!empty($entity_object->type) && $entity_object->type == 'reporter') {
-        $section_link .= ' / ' . l("Anchors", "anchors-list") . ' / ' .$node_title;
-    } else if (!empty($entity_object->type)) {
-        $section_link .= ' / ' . $node_title;
-    } else if (!empty($single_url)) {
-        $section_link .= ' / ' . t($single_url);
-    }
-    return $section_link;
+  }
+  if (!empty($entity_object->type) && $entity_object->type == 'story') {
+    $section_link .= ' / ' . $node_title;
+  }
+  elseif (!empty($entity_object->type) && $entity_object->type == 'videogallery') {
+    $section_link .= ' / Video / ' . $node_title;
+  }
+  elseif (!empty($entity_object->type) && $entity_object->type == 'photogallery') {
+    $section_link .= ' / Gallery / ' . $node_title;
+  }
+  elseif (!empty($entity_object->type) && $entity_object->type == 'podcast') {
+    $section_link .= ' / ' . l("Podcast" , "podcasts-listing") . ' / ' . $node_title;
+  }
+  elseif (!empty($entity_object->type) && $entity_object->type == 'poll') {
+    $section_link .= ' / Poll';
+  }
+  elseif (!empty($entity_object->type) && $entity_object->type == 'blog') {
+    $section_link .= ' / '.l('Blog' , 'blog-listing').' / ' . $node_title;
+  }
+  elseif (!empty($entity_object->type) && $entity_object->type == 'reporter') {
+    $section_link .= ' / ' . l("Anchors" , "anchors-list") . ' / ' . $node_title;
+  }else if (!empty($entity_object->type) && $entity_object->type == 'breaking_news') {
+      $section_link .= ' / ' .$entity_object->field_type[LANGUAGE_NONE][0]['value'];
+  }
+  elseif (!empty($entity_object->type)) {
+    $section_link .= ' / ' . $node_title;
+  }
+  elseif (!empty($single_url)) {
+    $section_link .= ' / ' . t($single_url);
+  }
+  return $section_link;
 }
 
 /*
@@ -289,4 +344,19 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
 
 function itg_seo_node_view($node, $view_mode, $langcode) {
   itg_seo_node_data($node);
+}
+
+/**
+ * Extra meta tags element hide from form
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function event_registration_extra_element_hide($form, &$form_state) {
+  
+   drupal_add_js('jQuery(document).ready(function() {              
+              jQuery(".vertical-tabs").hide();                
+            });', array('type' => 'inline', 'scope' => 'footer'));  
+
+  return $form;
 }

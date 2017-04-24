@@ -152,10 +152,17 @@ function hs_taxonomy_form_taxonomy_form_term_alter(&$form, &$form_state) {
   if (isset($form_state['confirm_delete']) || isset($form_state['confirm_parents'])) {
     return;
   }
+  
 
   // Build an appropriate config.
   $vocabulary = $form['#vocabulary'];
   $vid = $vocabulary->vid;
+  
+  // code for tag form by shravan
+  if (TAG_ID == $vid) {
+    return;
+  }
+  
   module_load_include('inc', 'hierarchical_select', 'includes/common');
   $config = array(
     'module' => 'hs_taxonomy',

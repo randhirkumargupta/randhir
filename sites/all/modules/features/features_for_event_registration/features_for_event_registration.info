@@ -1,7 +1,7 @@
 name = Features for Event Registration
 core = 7.x
 package = Features
-version = 7.x-1.6
+version = 7.x-1.8
 dependencies[] = date
 dependencies[] = entityreference
 dependencies[] = feature_for_mobile_services
@@ -87,6 +87,7 @@ features[variable][] = node_preview_event_registration
 features[variable][] = node_submitted_event_registration
 features[variable][] = pathauto_node_event_registration_pattern
 features[variable][] = pathauto_taxonomy_term_country_pattern
+features[variable][] = pathauto_taxonomy_term_event_registration_configuration_pattern
 features[variable][] = pathauto_taxonomy_term_itg_city_pattern
 features[variable][] = pathauto_taxonomy_term_state_pattern
 features[views_view][] = event_users_list

@@ -260,6 +260,28 @@ function features_for_story_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_cm_related_content_detail'.
+  $field_bases['field_cm_related_content_detail'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_cm_related_content_detail',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
   // Exported field_base: 'field_cm_select_type'.
   $field_bases['field_cm_select_type'] = array(
     'active' => 1,
@@ -280,7 +302,6 @@ function features_for_story_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         'newsletter' => 'Newsletter',
-        'breaking-news' => 'Breaking News',
         'magazine' => 'Magazine',
         'story' => 'Story',
         'supplement' => 'Supplement',
@@ -290,13 +311,14 @@ function features_for_story_field_default_field_bases() {
         'blog' => 'blogs',
         'videogallery' => 'videogallery',
         'podcast' => 'podcast',
-        'reporter' => 'reporter',
+        'reporter' => 'Byline',
         'print_team_integration' => 'print Team',
         'survey' => 'survey',
         'cooking-tips' => 'cooking-tips',
         'food-news' => 'food-news',
         'quiz' => 'quiz',
         'ugc' => 'ugc',
+        'breaking_news' => 'Breaking News',
         'manage-budget-predictor' => 'Budget-Predictor',
       ),
       'allowed_values_function' => '',
@@ -1065,6 +1087,9 @@ function features_for_story_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_big_image',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'fid' => array(
         0 => 'fid',
@@ -1140,6 +1165,9 @@ function features_for_story_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_comment_question',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -1176,6 +1204,7 @@ function features_for_story_field_default_field_bases() {
         'breaking_news' => 'Breaking News',
         'google_standout' => 'Google Standout',
         'comment' => 'Comment',
+        'commentbox' => 'Comment Box',
         'medium_style_comment' => 'Medium Style Comment',
         'display_lock' => 'Display Lock',
         'set_as_featured' => 'Set As Featured',
@@ -1672,11 +1701,9 @@ function features_for_story_field_default_field_bases() {
     ),
     'locked' => 0,
     'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
+    'settings' => array(),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'text_long',
   );
 
   // Exported field_base: 'field_story_large_image'.
@@ -1810,6 +1837,9 @@ function features_for_story_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_magazine_headline',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -1955,6 +1985,9 @@ function features_for_story_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_quote_image',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'fid' => array(
         0 => 'fid',
@@ -2539,21 +2572,31 @@ function features_for_story_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
+        '0.5' => 0.5,
         1 => 1,
+        '1.5' => 1.5,
         2 => 2,
+        '2.5' => 2.5,
         3 => 3,
+        '3.5' => 3.5,
         4 => 4,
+        '4.5' => 4.5,
         5 => 5,
+        '5.5' => 5.5,
         6 => 6,
+        '6.5' => 6.5,
         7 => 7,
+        '7.5' => 7.5,
         8 => 8,
+        '8.5' => 8.5,
         9 => 9,
+        '9.5' => 9.5,
         10 => 10,
       ),
       'allowed_values_function' => '',
     ),
     'translatable' => 0,
-    'type' => 'list_integer',
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_story_tech_pros_cons_title'.
@@ -2956,7 +2999,7 @@ function features_for_story_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         'photo_story' => 'Photo Story',
-        'other_story' => 'Other Story',
+        'other_story' => 'Default',
       ),
       'allowed_values_function' => '',
     ),

@@ -385,6 +385,7 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['tid']['label'] = '';
   $handler->display->display_options['fields']['tid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['tid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['tid']['separator'] = '';
   /* Field: Taxonomy term: Time Period */
   $handler->display->display_options['fields']['field_time_period']['id'] = 'field_time_period';
   $handler->display->display_options['fields']['field_time_period']['table'] = 'field_data_field_time_period';
@@ -406,11 +407,9 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = '<none>';
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '9';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Taxonomy term: Parent term */
   $handler->display->display_options['relationships']['parent']['id'] = 'parent';
@@ -423,6 +422,7 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['tid']['field'] = 'tid';
   $handler->display->display_options['fields']['tid']['label'] = '';
   $handler->display->display_options['fields']['tid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['tid']['separator'] = '';
   /* Field: Taxonomy term: Display Title */
   $handler->display->display_options['fields']['field_cm_display_title']['id'] = 'field_cm_display_title';
   $handler->display->display_options['fields']['field_cm_display_title']['table'] = 'field_data_field_cm_display_title';

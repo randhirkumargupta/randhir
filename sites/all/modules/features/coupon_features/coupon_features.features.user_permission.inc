@@ -10,34 +10,34 @@
 function coupon_features_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: 'create coupon content on assigned domains'.
-  $permissions['create coupon content on assigned domains'] = array(
-    'name' => 'create coupon content on assigned domains',
+  // Exported permission: 'create coupon content'.
+  $permissions['create coupon content'] = array(
+    'name' => 'create coupon content',
     'roles' => array(
       'Marketing Manager' => 'Marketing Manager',
       'Site Admin' => 'Site Admin',
     ),
-    'module' => 'domain',
+    'module' => 'node',
   );
 
-  // Exported permission: 'delete coupon content on assigned domains'.
-  $permissions['delete coupon content on assigned domains'] = array(
-    'name' => 'delete coupon content on assigned domains',
+  // Exported permission: 'edit any coupon content'.
+  $permissions['edit any coupon content'] = array(
+    'name' => 'edit any coupon content',
     'roles' => array(
       'Marketing Manager' => 'Marketing Manager',
       'Site Admin' => 'Site Admin',
     ),
-    'module' => 'domain',
+    'module' => 'node',
   );
 
-  // Exported permission: 'update coupon content on assigned domains'.
-  $permissions['update coupon content on assigned domains'] = array(
-    'name' => 'update coupon content on assigned domains',
+  // Exported permission: 'edit own coupon content'.
+  $permissions['edit own coupon content'] = array(
+    'name' => 'edit own coupon content',
     'roles' => array(
       'Marketing Manager' => 'Marketing Manager',
       'Site Admin' => 'Site Admin',
     ),
-    'module' => 'domain',
+    'module' => 'node',
   );
 
   // Exported permission: 'upload third party coupon'.

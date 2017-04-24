@@ -132,6 +132,24 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       drupal_add_css("a.anchor-order-reorder {text-decoration:underline !important}", "inline");
       $form['field_e_associate_highlights']['#suffix'] = "<div class='form-wrapper speaker-order-reorder'>$link</div>";
     }
+    
+    $form['field_config_photo']['#access'] = FALSE;
+    $form['field_config_video']['#access'] = FALSE;
+    $color_box_query_config = array("width" => "900", "height" => "600", "iframe" => "true");
+    $color_box_class_config = array("class" => array("colorbox-load anchor-order-reorder"));
+    $link_text_config = l(t('Click here'), "event-registration-config/" . arg(1), array('query' => $color_box_query_config, 'attributes' => $color_box_class_config));
+    if (isset($_GET['step']) && $_GET['step'] == 'step_second' && is_numeric(arg(1))) {
+      $form['registration_config'] = array(
+        '#type' => 'item',
+        '#title' => t('Registration form configuration'),
+        '#markup' => $link_text_config,
+        '#weight' => 10,
+      );
+      // add field in step
+      $form['#steps']['step_second']->children[] = 'registration_config';
+      $form['#step_children']['registration_config'] = 'step_second';
+    }
+    
   }
 
   // Form alter for sponsor node
@@ -157,21 +175,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => 20,
     );
   }
-  $form['field_config_photo']['#access'] = FALSE;
-  $form['field_config_video']['#access'] = FALSE;
-  $color_box_query_config = array("width" => "900", "height" => "600", "iframe" => "true");
-  $color_box_class_config = array("class" => array("colorbox-load anchor-order-reorder"));
-  $link_text_config = l(t('Click here'), "event-registration-config/" . arg(1), array('query' => $color_box_query_config, 'attributes' => $color_box_class_config));
-  if (isset($_GET['step']) && $_GET['step'] == 'step_second' && is_numeric(arg(1))) {
-    $form['registration_config'] = array(
-      '#type' => 'item',
-      '#title' => t('Registration form configuration'),
-      '#markup' => $link_text_config,
-      '#weight' => 10,
-    );
-    $form['#steps']['step_second']->children[] = 'registration_config';
-    $form['#step_children']['registration_config'] = 'step_second';
-  }
+  
 }
 
 /**
@@ -257,6 +261,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
       }
     }
   }
+  if(!isset($form['field_event_highlights']['#tabwise'])){
   foreach ($form_state['values']['field_event_highlights'][LANGUAGE_NONE] as $key => $event_highlights) {
     if (is_numeric($key)) {
       $event_high_value[$key] = $form_state['values']['field_event_highlights'][LANGUAGE_NONE][$key]['field_associate_story_event_high'][LANGUAGE_NONE][0]['target_id'];
@@ -264,6 +269,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
         form_set_error('field_event_highlights][' . LANGUAGE_NONE . '][' . $key . '][field_associate_story_event_high', 'You have already selected this story');
       }
     }
+  }
   }
 
 
@@ -351,7 +357,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
     }
   } 
   
-  if (($event_type == 'paid' || $event_type == 'free') && $form_state['values']['field_no_of_tickets'][LANGUAGE_NONE][0]['value'] == '' && (isset($form_state['storage']['step']) && $form_state['storage']['step'] == "step_second")) {
+  if (($event_type == 'paid' || $event_type == 'free') && $form_state['values']['field_no_of_tickets'][LANGUAGE_NONE][0]['value'] == '' && (isset($form_state['storage']['step']) && $form_state['storage']['step'] == "step_second") && (!isset($form['field_no_of_tickets']['#tabwise']))) {
     form_set_error('field_no_of_tickets', t('Please enter No. of Tickets'));
   }
 
@@ -365,7 +371,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
     }
   }
   // media validation
-  if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_media')) {
+  if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_media') && (!isset($form['field_event_media']['#tabwise']))) {
     foreach ($form_state['values']['field_event_media'][LANGUAGE_NONE] as $key => $value) {
       if (is_numeric($key)) {
         if ($form_state['values']['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE][0]['value'] == '') {
@@ -507,10 +513,10 @@ function itg_event_backend_after_build($form, &$form_state) {
   
   foreach ($form['field_associate_sponsors'][LANGUAGE_NONE] as $key => $program) {
     if (is_numeric($key)) {
-      $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] . '<span title="This field is required." class="form-required"></span>';
+      $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] . '<span title="This field is required." class="form-required"></span>';
       if (isset($form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
-        $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
-        $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+        $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+        $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
       }
 
       $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $media_options;
@@ -977,7 +983,7 @@ function itg_event_backend_node_access($node, $op, $account) {
  * {@inheritdoc}
  */
 function itg_event_backend_node_insert($node) {
-  if ($node->type == 'event_backend') {
+  if ($node->type == 'event_backend') {    
     $event_start_date_time = strtotime($node->field_event_start_date[LANGUAGE_NONE][0]['value']);
     itg_event_backend_insert_event_publish_details($node->nid, $event_start_date_time, 'insert');
   }
@@ -989,6 +995,7 @@ function itg_event_backend_node_insert($node) {
  */
 function itg_event_backend_node_update($node) {
   if ($node->type == 'event_backend') {
+      event_url_save($node);    
     if ($node->domains != '1' && $_GET['step'] == 'step_configuration') {
       //itg_event_backend_insert_into_redirect($node); me
     }
@@ -996,7 +1003,7 @@ function itg_event_backend_node_update($node) {
     itg_event_backend_insert_event_publish_details($node->nid, $event_start_date_time, 'update');
     $query_param = drupal_get_query_parameters();
     if ($query_param['step'] == 'step_configuration') {
-      $node->field_step_completion['und'][0]['value'] = '2';
+      $node->field_step_completion[LANGUAGE_NONE][0]['value'] = '2';
       field_attach_update('node', $node);
     }
   }
@@ -1199,7 +1206,7 @@ function itg_event_backend_menu() {
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
   );
-  $items['event/%/programme'] = array(
+  $items['event/%/%/programme'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
@@ -1209,7 +1216,7 @@ function itg_event_backend_menu() {
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
   );
-  $items['event/%/speakers'] = array(
+  $items['event/%/%/speakers'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
@@ -1219,7 +1226,7 @@ function itg_event_backend_menu() {
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
   );
-  $items['event/%/sponsors'] = array(
+  $items['event/%/%/sponsors'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
@@ -1229,7 +1236,7 @@ function itg_event_backend_menu() {
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
   );
-  $items['event/%/sing-and-win'] = array(
+  $items['event/%/%/sing-and-win'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
@@ -1239,7 +1246,7 @@ function itg_event_backend_menu() {
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
   );
-  $items['event/%/flashback'] = array(
+  $items['event/%/%/flashback'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
@@ -1250,7 +1257,7 @@ function itg_event_backend_menu() {
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
   );
-  $items['event/%/speaker-details'] = array(
+  $items['event/%/%/speaker-details'] = array(
     'page callback' => 'itg_event_backend_page',
     'title' => 'Speaker Details',
     'access callback' => TRUE,
@@ -1262,7 +1269,7 @@ function itg_event_backend_menu() {
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
   );
-  $items['event/%/sponsor-details'] = array(
+  $items['event/%/%/sponsor-details'] = array(
     'page callback' => 'itg_event_backend_page',
     'title' => 'Sponsor Details',
     'access callback' => TRUE,
@@ -1407,11 +1414,12 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
 
     if (!empty($whole_node)) {
       if ($arg[0] == 'event') {
-        $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
+        //$path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
+        $path = drupal_lookup_path("source", $arg[1] . '/' . $arg[2]);
         $event_nid = explode('/', $path);
         $node = node_load($event_nid[1]);
       }
-      elseif (!empty($arg[1]) && is_numeric($arg[1])) {
+      elseif (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
         $node = node_load($arg[1]);
       }
       /* else { me
@@ -1423,12 +1431,13 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
     }
     else {
       if ($arg[0] == 'event') {
-        $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
+        //$path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
+        $path = drupal_lookup_path("source", $arg[1] . '/' . $arg[2]);
         $event_nid = explode('/', $path);
         $node = node_load($event_nid[1]);
         return $node->nid;
       }
-      elseif (!empty($arg[1]) && is_numeric($arg[1])) {//shravan
+      elseif (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {//shravan
         return $arg[1];
       }
       /* else { me
@@ -1448,9 +1457,10 @@ function itg_event_get_host_name() {
   global $base_url;
   $arg = arg();
   if ($arg[0] == 'event') {
-    $host = $base_url . '/' . $arg[0] . '/' . $arg[1];
+    //$host = $base_url . '/' . $arg[0] . '/' . $arg[1];
+    $host = $base_url . '/' . $arg[1] . '/' . $arg[2];
   }
-  elseif (!empty($arg[1]) && is_numeric($arg[1])) {
+  elseif (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
     $host = $base_url . '/' . drupal_get_path_alias('node/' . $arg[1]);
   }
   /* else { me
@@ -1880,22 +1890,27 @@ function itg_event_backend_highlights_block_content() {
  * @return string
  */
 function itg_event_backend_highlights_like_dislike($unique_id) {
+  
   if (function_exists('itg_flag_get_count')) {
     $like = itg_flag_get_count($unique_id, 'like_count');
     $dislike = itg_flag_get_count($unique_id, 'dislike_count');
   }
-  if (!empty($like['like_count'])) {
-    $like_count = '(' . $like['like_count'] . ')';
+  // get migrated count 
+  if(function_exists('itg_get_migrated_like_count')) {
+      $migrated_count = itg_get_migrated_like_count($unique_id);
   }
-  if (!empty($dislike['dislike_count'])) {
-    $dislike_count = '(' . $dislike['dislike_count'] . ')';
-  }
+  
+  $sum_of_likes = $like['like_count']+ $migrated_count[0]['like_count'];  
+  $sum_of_dislikes = $dislike['dislike_count']+ $migrated_count[0]['dislike_count'];  
+  $like_count_common = '(' . $sum_of_likes . ')';
+  $dislike_count_common = '(' . $sum_of_dislikes . ')';
+  
   $pid = "voted_" . $unique_id;
   $like = "no-of-likes_" . $unique_id;
   $dislike = "no-of-dislikes_" . $unique_id;
 
-  $like_btn = '<div class="agbutton"><button class="btn-highlights-like" id="like_count" rel="' . $unique_id . '"><i class="fa fa-thumbs-o-up"></i> <span id="' . $like . '">' . $like_count . '</span></button>';
-  $dislike_btn = '<button class="btn-highlights-dislike" id="dislike_count" rel="' . $unique_id . '"><i class="fa fa-thumbs-o-down"></i> <span id="' . $dislike . '">' . $dislike_count . '</span></button>';
+  $like_btn = '<div class="agbutton"><button class="btn-highlights-like" id="like_count" rel="' . $unique_id . '"><i class="fa fa-thumbs-o-up"></i> <span id="' . $like . '">' . $like_count_common . '</span></button>';
+  $dislike_btn = '<button class="btn-highlights-dislike" id="dislike_count" rel="' . $unique_id . '"><i class="fa fa-thumbs-o-down"></i> <span id="' . $dislike . '">' . $dislike_count_common . '</span></button>';
   $error_msg = '<p class="error-msg" id="' . $pid . '"></p></div>';
   return $like_btn . $dislike_btn . $error_msg;
 }
@@ -2203,4 +2218,84 @@ function itg_event_backend_node_status($nid) {
   $query->condition('n.nid', $nid, '=');
   $result = $query->execute()->fetchField();
   return $result;
+}
+
+
+/**
+ * {@inheritdoc}
+ * Implement for url structure in event
+ */
+//function itg_event_backend_node_presave($node) {
+//  if ($node->type == 'event_backend') {
+//    //code by shravan alias
+//    
+//    if ($_GET['step'] == 'step_configuration') {
+//      $alias_title_new = explode('event/', $node->path['alias']);    
+//      if (empty($alias_title_new[1])) {
+//        $node->path['alias'] = 'event/'.$node->path['alias'];
+//      }
+//    }
+//    
+//    
+//  }
+//}
+
+/**
+ * Implements function for alias save in event according custom menu (working on node update).
+ * @param type object
+ */
+function event_url_save($node) {
+  $steps = array('home', 'programme', 'sponsors', 'speakers', 'registration', 'sponsor-details', 'speaker-details', 'sing-and-win', 'flashback');
+  $created_year = date('Y', $node->created);
+  if ($_GET['step'] == 'step_first') {
+    $event_title = $node->path['alias'];
+  }
+  else {
+    $event_title = $node->path['alias'];
+  }
+
+  foreach ($steps as $step) {
+    if ($step == 'home') {
+      $check_alias = $event_title;
+    }
+    else {
+      $check_alias = $event_title . '/' . $step;
+    }
+    if (itg_event_backend_alias_check($check_alias)) {
+      if ($step == 'home') {
+        
+      }
+      else {
+        $alias_s = $event_title . '/' . $step;
+        $source = 'event/' . $event_title . '/' . $step;
+        itg_event_backend_save_alias($source, $alias_s);
+      }
+    }
+  }
+}
+
+/**
+ * Implement function for check existing alias
+ * @param type str
+ * @return boolean
+ */
+function itg_event_backend_alias_check($alias) {
+  $query = db_select('url_alias', 'ua');
+  $query->fields('ua', array('pid'));
+  //$query->condition('alias', $alias, '=');
+  $query->condition('alias', '%' . db_like($alias), 'LIKE');
+  $result = $query->execute()->fetchField();
+  if(empty($result)){
+    return TRUE;
+  }
+}
+
+/**
+ * Implement function for path alias save events
+ * @param type str
+ * @param type str
+ */
+function itg_event_backend_save_alias($source, $alias) {
+    $path = array('source' => $source, 'alias' => $alias);
+    path_save($path);
 }

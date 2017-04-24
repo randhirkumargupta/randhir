@@ -39,6 +39,33 @@ function feature_for_blog_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
+  // Exported field_base: 'field_blog_configuration'.
+  $field_bases['field_blog_configuration'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_blog_configuration',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'commentbox' => 'Comment Box',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_blog_long_description'.
   $field_bases['field_blog_long_description'] = array(
     'active' => 1,
@@ -61,13 +88,13 @@ function feature_for_blog_field_default_field_bases() {
     'type' => 'text_long',
   );
 
-  // Exported field_base: 'field_blog_short_description'.
-  $field_bases['field_blog_short_description'] = array(
+  // Exported field_base: 'field_common_short_description'.
+  $field_bases['field_common_short_description'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_blog_short_description',
+    'field_name' => 'field_common_short_description',
     'field_permissions' => array(
       'type' => 0,
     ),
@@ -78,11 +105,9 @@ function feature_for_blog_field_default_field_bases() {
     ),
     'locked' => 0,
     'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
+    'settings' => array(),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'text_long',
   );
 
   return $field_bases;

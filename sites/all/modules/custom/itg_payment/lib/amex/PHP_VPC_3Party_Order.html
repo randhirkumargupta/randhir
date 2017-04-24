@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head><title>Virtual Payment</title>
+</head>
+<body>
+<form action="PHP_VPC_3Party_Order_DO.php" method="post" accept-charset="UTF-8">
+<input type="hidden" name="Title" value = "PHP VPC 3 Party Transacion">
+<!-- get user input -->
+<table width="80%" align="center" border="0" cellpadding='0' cellspacing='0'>
+
+<tr class="shade">
+    <td align="right"><strong><em>Virtual Payment Client URL:&nbsp;</em></strong></td>
+    <td><input name="virtualPaymentClientURL" size="65" value=" https://vpos.amxvpos.com/vpcpay" maxlength="250"/></td>
+</tr>
+<tr><td colspan="2">&nbsp;<hr width="75%">&nbsp;</td></tr>
+<tr>
+    <td align="right"><strong><em> VPC Version: </em></strong></td>
+    <td><input name="vpc_Version" value="1" size="20" maxlength="8"/></td>
+</tr>
+<tr class="shade">
+    <td align="right"><strong><em>Command Type: </em></strong></td>
+    <td><input name="vpc_Command" value="pay" size="20" maxlength="16"/></td>
+</tr>
+<tr>
+    <td align="right"><strong><em>Merchant AccessCode: </em></strong></td>
+    <td><input name="vpc_AccessCode" value="" size="20" maxlength="8"/></td>
+</tr>
+<tr class="shade">
+    <td align="right"><strong><em>Merchant Transaction Reference: </em></strong></td>
+    <td><input name="vpc_MerchTxnRef" value="" size="20" maxlength="40"/></td>
+</tr>
+<tr>
+    <td align="right"><strong><em>MerchantID: </em></strong></td>
+    <td><input name="vpc_Merchant" value="" size="20" maxlength="16"/></td>
+</tr>
+<tr class="shade">
+    <td align="right"><strong><em>Transaction OrderInfo: </em></strong></td>
+    <td><input name="vpc_OrderInfo" value="" size="20" maxlength="34"/></td>
+</tr>
+<tr>
+    <td align="right"><strong><em>Purchase Amount: </em></strong></td>
+    <td><input name="vpc_Amount" value="" maxlength="10"/></td>
+</tr>
+<tr class="shade">
+    <td align="right"><strong><em>Receipt ReturnURL: </em></strong></td>
+    <td><input name="vpc_ReturnURL" size="65" value="http://localhost/amex_3party/PHP_VPC_3Party_Order_DR.php" maxlength="250"/></td>
+</tr>
+<tr>
+    <td align="right"><strong><em>Payment Server Display Language Locale: </em></strong></td>
+    <td><select name="vpc_Locale"><option SELECTED>en</option><option>en</option></select></td>
+</tr>
+<tr class="shade">
+    <td align="right"><strong><em>Currency: </em></strong></td>
+    <td><select name="vpc_Currency"><option SELECTED>INR</option></select></td>
+</tr>
+
+<tr>    <td colspan="2">&nbsp;</td></tr>
+<tr>
+    <td>&nbsp;</td>
+    <td><input type="submit" NAME="SubButL" value="Pay Now!"></td>
+</tr>
+</table>
+</form>
+</body>
+</html>

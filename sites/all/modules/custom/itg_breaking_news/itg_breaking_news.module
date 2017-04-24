@@ -137,7 +137,7 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
                 ':input[name="field_type[und]"]' => array('value' => 'Live Blog'),
             )
         );
-
+        $form['actions']['submit']['#value'] = 'Publish';
         $form['#after_build'][] = 'itg_breaking_news_after_build';
         $form['actions']['submit']['#submit'][] = 'itg_breaking_news_form_custom_callback';
     }
@@ -155,10 +155,11 @@ function itg_breaking_news_form_custom_callback($form, &$form_state) {
         $op = 'created';
     }
     else {
-        $op = 'updated';
+        $op = 'edited/updated';
     }
     $breaking_news_title = $form_state['node']->title;
-    drupal_set_message(t('Breaking News <b>' . $breaking_news_title . '</b> has been ' . $op . '.'));
+    $ctype = $form_state['node']->field_type[LANGUAGE_NONE][0]['value'];
+    drupal_set_message(t($ctype.' <b>' . $breaking_news_title . '</b> has been ' . $op . '.'));
     $_GET['destination'] = $_REQUEST['destination'];
 }
 
@@ -256,12 +257,12 @@ function itg_breaking_news_node_validate($node, $form, &$form_state) {
         $type = $node->field_type[LANGUAGE_NONE][0]['value'];
         $display_on = $node->field_display_on[LANGUAGE_NONE][0]['value'];
 
-        if ($type == 'Live Blog') {
-            // filter empty array if type is live blog
-            if (empty($section[0]['tid'])) {
-                form_set_error('field_section', t("Section Field is required"));
-            }
-        }
+//        if ($type == 'Live Blog') {
+//            // filter empty array if type is live blog
+//            if (empty($section[0]['tid'])) {
+//                form_set_error('field_section', t("Section Field is required"));
+//            }
+//        }
         // check if section is selected and category not select
         if ($type == 'Breaking News' && $display_on == 'Section') {
             if (empty($section[0]['tid'])) {
@@ -294,4 +295,15 @@ function itg_breaking_news_node_presave($node) {
             $node->field_display_on[LANGUAGE_NONE][0]['value'] = 'Section';
         }
     }
+}
+
+/**
+ * Implements hook_views_api().
+ *
+ * {@inheritdoc}.
+ */
+function itg_breaking_news_views_api() {
+    return array(
+        'api' => 3,
+    );
 }

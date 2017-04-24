@@ -74,7 +74,7 @@ function itg_quiz_menu() {
   );
  $items['quiz-response-checkbox'] = array(
       'title' => t('Quiz Response'),
-      'page callback' => 'show_answer',
+      'page callback' => 'multiple_show_answer',
       'access arguments' => array('access content'),
       'type' => MENU_CALLBACK,
 
@@ -197,6 +197,7 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
  */
  function itg_quiz_form_custom_submit_callback($form, &$form_state) {
   
+  $status = $form_state['node']->status;
   // Unset drupal redirection and add custom redirection URL.
   if (isset($_GET['destination'])) {
     unset($_GET['destination']);
@@ -210,9 +211,20 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
   
   $title = $form_state['node']->title;
   if (arg(2) == 'edit') {
-    drupal_set_message(t('Quiz <strong>'.$title.'</strong> has been updated.'));
-  } else {
-    drupal_set_message(t('Quiz <strong>'.$title.'</strong> has been submitted for further review and approval.'));
+    if ($status == 1) {
+      drupal_set_message(t('Quiz <strong>' . $title . '</strong> has been Published.'));
+    }
+    else {
+      drupal_set_message(t('Quiz <strong>' . $title . '</strong> has been updated.'));
+    }
+  }
+  else {
+    if ($status == 1) {
+      drupal_set_message(t('Quiz <strong>' . $title . '</strong> has been Published.'));
+    }
+    else {
+      drupal_set_message(t('Quiz <strong>' . $title . '</strong> has been submitted for further review and approval.'));
+    }
   }
 }
 
@@ -551,6 +563,7 @@ function itg_quiz_get_total_quiz($nid){
  * @return int
  */
 function itg_quiz_contest_result($nid, $unique_key, $param = NULL){
+  
   if (empty($param)) {
     $result = db_select('itg_quiz_detail', 'qd')
             ->fields('qd')
@@ -754,15 +767,15 @@ function itg_quiz_quiz_form_validate($form, &$form_state) {
  * @param Array $form_state
  */
 function itg_quiz_quiz_form_submit($form, &$form_state) {
+  
   global $user;
-
   // Form variable
   $form_detail = $form_state['values'];
   $quiz_type = $form_detail['quiz_type'];
   $quiz_result_type = $form_detail['quiz_resut_type'];
   $question_total = $form_detail['question_total'];
   $question_format = $form_detail['question_format'];
-
+ 
   // Extract user type
   if ($user->uid) {
     $user_type = 'authenticated';
@@ -801,7 +814,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state) {
         $currect_ans = 'no';
       }
 
-      if (!empty($ans_op_arr[1])) {
+      if (!empty($ans_op_arr[1])) { 
         db_insert('itg_quiz_detail')
                 ->fields(array(
                     'nid' => $form_state['values']['nid'],
@@ -875,7 +888,8 @@ function itg_quiz_quiz_form_submit($form, &$form_state) {
   // At the end, after finishing quiz
   if ($form_state['clicked_button']['#value'] == 'Submit') {
     $output = '';
-    if ($quiz_type == 'immediate') {
+    //if ($quiz_result_type == 'ate') {
+    if ($quiz_type == 'immediate') { 
         $total_ques_attempt = itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], NULL);
         $correct_answer = itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], 'yes');
         $incorrect_answer = $total_ques_attempt - $correct_answer;
@@ -936,7 +950,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state) {
       // Call loyalty & rewards function to save points for a user
       if(function_exists('itg_loyalty_reward_earnpoint')) {
         if($user->uid) {
-          itg_loyalty_reward_earnpoint($form_state['values']['nid'], 'participate', $user->uid);
+          //itg_loyalty_reward_earnpoint($form_state['values']['nid'], 'participate', $user->uid);
         }
       }
   }
@@ -957,148 +971,69 @@ function quiz_form_ajax_handler(&$form, &$form_state){
   );
 }
 
-// Quiz answer response for Sigle Correct Answer
 
-
+/**
+ * Quiz answer response for single Correct Answer 
+ */
 function itg_quiz_response(){
-    global $ans_value;
+  global $ans_value;
 
-     $nid= $_GET['nid'];
-     $ans= $_GET['ans_val'];
+  $nid= $_GET['nid'];
+  $ans= $_GET['ans_val'];
+  $correct_ans = $_GET['correct_ans'];
      
-     
-     $ans_value= explode("-",$ans);
-    $query="select f3.field_quiz_correct_answer_value as correct_answer from  node as n
-inner join field_data_field_quiz_add_questions as f1  on f1.entity_id = n.nid
-inner join field_data_field_quiz_options_answer as f2  on f2.entity_id = f1.field_quiz_add_questions_value
-inner join field_data_field_quiz_correct_answer as f3  on f3.entity_id = f2.field_quiz_options_answer_value
-where 
-f3.entity_type = 'field_collection_item'
- and f3.bundle = 'field_quiz_options_answer' 
- and  n.nid = $nid
- and  f3.entity_id = $ans_value[0]";
-$result=db_query($query);
-
-$record = $result->fetchObject();  
-
-$record->correct_answer;
-    
-    if ($record->correct_answer=='Yes'){
-        $choice  = 'correct';
-        $query =db_select('taxonomy_term_data', 't');
-        $query->join('field_data_field_radio_button', 'r', 'r.entity_id = t.tid');
-        $query->fields('t', array('name'));
-        $query->condition('r.field_radio_button_value', $choice, '=');
-        $query->condition('t.vid',QUIZ_TAXONOMY_TID, '=');
-        $res = $query->execute();        
-	$result = $res->fetchAll();
-        if(is_array($result) && !empty($result)){
-          shuffle($result);
-        }        
-        print $result[0]->name.'-Correct';
-        //print 'Correct';
-    }         
-        else { 
-        $choice  = 'Incorrect';
-        $query =db_select('taxonomy_term_data', 't');
-        $query->join('field_data_field_radio_button', 'r', 'r.entity_id = t.tid');
-        $query->fields('t', array('name'));
-        $query->condition('r.field_radio_button_value', $choice, '=');
-        $query->condition('t.vid',QUIZ_TAXONOMY_TID, '=');
-        $res = $query->execute();        
-	$result = $res->fetchAll();
-        if(is_array($result) && !empty($result)){
-          shuffle($result);
-        }        
-        print $result[0]->name.'-Incorrect';
-        //print 'Incorrect';
-    }
-     
-    }
-    
-    // Quiz answer response for Multiple Correct Answer
-    
-  function show_answer() {
-    $nid = $_GET['nid'];
-    $ans = json_decode(stripslashes($_GET['ans_val']));
-    $not_selected = json_decode(stripslashes($_GET['not_select']));
-      foreach($not_selected as $key=>$value) {
-       $ansval = explode("-",$value);
-      
-        $query="select f3.field_quiz_correct_answer_value as correct_answer from  node as n
-	inner join field_data_field_quiz_add_questions as f1  on f1.entity_id = n.nid
-	inner join field_data_field_quiz_options_answer as f2  on f2.entity_id = f1.field_quiz_add_questions_value
-	inner join field_data_field_quiz_correct_answer as f3  on f3.entity_id = f2.field_quiz_options_answer_value
-	where 
-	f3.entity_type = 'field_collection_item'
-	 and f3.bundle = 'field_quiz_options_answer' 
-	 and  n.nid = $nid
-	 and  f3.entity_id = $ansval[0]";
-    $result=db_query($query);
-
-    $record = $result->fetchObject();  
-    $answer[] = $record->correct_answer;
-  }
-  if(in_array('Yes', $answer)) {
-   	$choice  = 'Incorrect';
-	$query =db_select('taxonomy_term_data', 't');
-	$query->join('field_data_field_radio_button', 'r', 'r.entity_id = t.tid');
-	$query->fields('t', array('name'));
-	$query->condition('r.field_radio_button_value', $choice, '=');
-	$query->condition('t.vid',QUIZ_TAXONOMY_TID, '=');
-	$res = $query->execute();        
-	$result = $res->fetchAll();
-	if(is_array($result) && !empty($result)){
-	  shuffle($result);
-	}        
-	print $result[0]->name.'-Incorrect';
+  $ans_value= explode("-",$ans);
+  if ($ans_value[0] == $correct_ans) {
+    $choice  = 'correct';
   } else {
-	  foreach($ans as $key=>$value) {
-	    $ansval = field_data_field_quiz_add_questions_explode("-",$value);
-	    $query="select f3.field_quiz_correct_answer_value as correct_answer from  node as n
-		inner join field_data_field_quiz_add_questions as f1  on f1.entity_id = n.nid
-		inner join field_data_field_quiz_options_answer as f2  on f2.entity_id = f1.field_quiz_add_questions_value
-		inner join field_data_field_quiz_correct_answer as f3  on f3.entity_id = f2.field_quiz_options_answer_value
-		where 
-		f3.entity_type = 'field_collection_item'
-		 and f3.bundle = 'field_quiz_options_answer' 
-		 and  n.nid = $nid
-		 and  f3.entity_id = $ansval[0]";
-	    $result=db_query($query);
-
-	    $record = $result->fetchObject();
-            $answer_checked[] = $record->correct_answer;    
-	  }
-          if(in_array('', $answer_checked)) {
-	        $choice  = 'incorrect';
-		$query =db_select('taxonomy_term_data', 't');
-		$query->join('field_data_field_radio_button', 'r', 'r.entity_id = t.tid');
-		$query->fields('t', array('name'));
-		$query->condition('r.field_radio_button_value', $choice, '=');
-		$query->condition('t.vid',QUIZ_TAXONOMY_TID, '=');
-		$res = $query->execute();        
-		$result = $res->fetchAll();
-		if(is_array($result) && !empty($result)){
-		  shuffle($result);
-		}        
-		print $result[0]->name.'-incorrect';
-	    } else {
-                $choice  = 'correct';
-		$query =db_select('taxonomy_term_data', 't');
-		$query->join('field_data_field_radio_button', 'r', 'r.entity_id = t.tid');
-		$query->fields('t', array('name'));
-		$query->condition('r.field_radio_button_value', $choice, '=');
-		$query->condition('t.vid',QUIZ_TAXONOMY_TID, '=');
-		$res = $query->execute();        
-		$result = $res->fetchAll();
-		if(is_array($result) && !empty($result)){
-		  shuffle($result);
-		}        
-		print $result[0]->name.'-correct';
-            }
+      $choice  = 'Incorrect';
   }
+  
+  echo get_answer_response_msg($choice);
+    
+ }
+ 
+ /**
+ * Quiz answer response for Multiple Correct Answer 
+ */
+  function multiple_show_answer() {
+    $nid = $_GET['nid'];
+    $correct_ans = $_GET['correct_ans'];
+    
+    $correct_ans_array = explode(' ', $correct_ans);    
+    $ans = json_decode(stripslashes($_GET['ans_val']));
+    foreach($ans as $key => $val) {
+      $c_ans =  explode("-",$val);
+      $c_ans_array[] = $c_ans[0];
+    }
+    
+    $ans_result=array_diff($correct_ans_array,$c_ans_array);
+    if(!empty($ans_result)) {
+      $choice  = 'Incorrect';    
+    }else {
+      $choice  = 'correct';
+    }
+    echo get_answer_response_msg($choice);
 }
 
+/**
+ * Quiz answer response
+ * @param string $choice
+ * @return string
+ */
+function get_answer_response_msg($choice) {
+  $query =db_select('taxonomy_term_data', 't');
+  $query->join('field_data_field_radio_button', 'r', 'r.entity_id = t.tid');
+  $query->fields('t', array('name'));
+  $query->condition('r.field_radio_button_value', $choice, '=');
+  $query->condition('t.vid',QUIZ_TAXONOMY_TID, '=');
+  $res = $query->execute();        
+  $result = $res->fetchAll();
+  if(is_array($result) && !empty($result)){
+    shuffle($result);
+  }        
+  return $result[0]->name.'-'.$choice;
+}
     
     
     

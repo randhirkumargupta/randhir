@@ -1,7 +1,7 @@
 <div class="techwatch osscar-video">
     <ul class="">  
         <?php
-       
+       global $base_url;
         foreach ($rows as $index => $row) {
             $desc = $row['title'];
              $video_class = '';

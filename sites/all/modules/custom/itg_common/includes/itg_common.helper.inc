@@ -69,6 +69,8 @@ define('MARKETING_MANAGER', $role_array['Marketing Manager']);
 define('FRONT_USER', $role_array['Front User']);
 define('KNOWLEDGE_CENTRE', $role_array['Knowledge Centre']);
 define('QUIZ_TAXONOMY_TID', variable_get('quiz_taxonomy_tid'));
+define('ITG_SUPPORT_EMAIL', 'support@indiatoday.in');
+
 
 /**
  * value define for image.
@@ -87,6 +89,7 @@ define('ISSUE_LARGE_IMAGE_WIDTH', 300);
 define('ISSUE_LARGE_IMAGE_HEIGHT', 225);
 define('ISSUE_SMALL_WIDTH', 210);
 define('ISSUE_SMALL_HEIGHT', 145);
+define('VIDEO_PROPERTY', 'indiatoday_local');
 
 /**
  * value define for Ad.
@@ -106,14 +109,19 @@ define('CITY_MANAGMENT', variable_get('city_manager_vid'));
 define('POLITICIAN_TID', variable_get('tid_politician'));
 define('ANCHOR_TID', variable_get('anchor_tid'));
 define('REPORTER_TID', variable_get('reporter_tid'));
+define('TAG_ID', 1);
+define('VIDEO_MAIN_URL', 'http://medias3d.intoday.in');
+define('VIDEO_BITRATE_URL', 'http://indiatoday-vh.akamaihd.net/i');
 
 define('NEWSLETTER_EDUCATION_TID', variable_get('newsletter_education_tid'));
 
-define('PARENT_SSO', 'dev.indiatodayonline.in');
+define('PARENT_SSO', 'uat-sso.indiatodayonline.in');
 
 define('FRONT_URL', 'http://uat-it.indiatodayonline.in');
 define('BACKEND_URL', 'http://uat-it-backend.indiatodayonline.in');
 define('SSO_URL', 'http://uat-sso.indiatodayonline.in');
+define('ACCORD_URL', 'http://businesstoday.accordhostings.com/TopIndicesCtrl.aspx');
+
 
 
 //define('FRONT_URL', 'http://itgd-mum-lb-dev-frontend-app-1144451114.ap-south-1.elb.amazonaws.com');

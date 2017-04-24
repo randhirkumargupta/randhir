@@ -116,10 +116,23 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
     $form['hash']['#options'] = $hash;
     $form['hash']['#size'] = 5;
     $form['hash']['#multiple'] = TRUE;
-  } if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'archive_story') {
+  } 
+
+  if($form_state['view']->current_display == 'search_unpublish_video' || ($form_state['view']->name == 'searchimage' && $form_state['view']->current_display == 'page_1')) {
+    $video_publish_un_option = array(""=>"",'0' => 'Unpublish','1' => 'Publish' );
+    
+    $form['sm_field_video_used'] = array(
+    '#type' => 'select',
+    '#options' => $video_publish_un_option,
+   
+  );
+ 
+  }
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'archive_story') {
     
     $dat_1_day_ago = date('Y-m-d', strtotime('-1 days'));
-    $hash = array('5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'e49it8' => 'Stage Server');
+    //$hash = array('5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'e49it8' => 'Stage Server');
+    $hash = array('9m4hke' => 'UAT');
     $request_url_array = explode('/', $_SERVER['REQUEST_URI']);
     if (is_array($request_url_array) && count($request_url_array) > 0) {
       if (in_array('dev', $request_url_array)) {
@@ -132,7 +145,8 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
         $hash = 'e49it8';
       }
       else {
-        $hash = '2e1u4m';
+        //$hash = '2e1u4m';
+        $hash = '9m4hke';
       }
     }
     
@@ -198,33 +212,8 @@ function itg_front_search_views_pre_render(&$view) {
     drupal_add_js(drupal_get_path('module', 'itg_front_search') . '/js/itg_front_search.js', array('weight' => 1));
 
     foreach ($view->result as $related_result) {
-      // dpm($related_result);
-      if ($related_result->bs_status == '1') {
+       if ($related_result->bs_status == '1') {
         $related_result->bs_status = 'Published';
-      }
-
-      // image condition when image not image
-      //$image = $related_result->sm_thumb_medium_field_story_extra_large_image[0];
-      $image = $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0];
-      $blog_image = $related_result->sm_thumb_medium_field_blog_image[0];
-      $magazine_image = $related_result->sm_thumb_medium_field_magazine_cover_photo[0];
-
-      $pattern = '/src="([^"]*)"/';
-
-      if (preg_match($pattern, $image, $matches)) {
-        $src = $matches[1];
-        if (getimagesize($src) !== false) {
-          $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0] = $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0];
-        }
-        else {
-          $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-          $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0] = "<img src='$img_url' alt='' />";
-        }
-      }
-
-      if (empty($image) && empty($magazine_image)) {
-        $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-        $related_result->sm_thumb_video_landing_page_170_x_127_field_story_small_image[0] = "<img src='$img_url' alt='' />";
       }
 
       $words = $_GET['keyword'];
@@ -399,7 +388,7 @@ function highlight($text, $words, $color = 'yellow', $case = '1') {
 function itg_front_search_node_presave($node) {
 
   //if ($node->type == 'story' || $node->type == 'recipe' || $node->type == 'cooking_tips' || $node->type == 'videogallery' || $node->type == 'food_news') {
-  if ($node->type == 'videogallery') {
+  if ($node->type == 'videogallery' && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
     if (isset($node->field_story_reporter['und'])) {
       foreach ($node->field_story_reporter['und'] as $high) {
         $reporter_id = $high['target_id'];
@@ -429,6 +418,49 @@ function itg_front_search_node_presave($node) {
       $node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'] = strtolower($reporter_node->title);
     }
   }
+  else if ($node->type == 'story' && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+    $reporter_unique_id = itg_get_all_bylineinfo($node->field_reporter_unique_id[LANGUAGE_NONE][0]['value']);
+    if (!empty($reporter_unique_id)) {
+      foreach ($reporter_unique_id as $reporter_id) {
+        $reporter_node_id = node_load($reporter_id);
+        $reporter_arr_value[] = strtolower($reporter_id);
+        $common_by_line_name[] = strtolower($reporter_node_id->title);
+        $common_by_line_twitter[] = strtolower($reporter_node_id->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']);
+      }
+      if (!empty($reporter_arr_value)) {
+        $final_repoter_nid_list = implode(',', $reporter_arr_value);
+        $node->field_common_by_line_reporter_id[LANGUAGE_NONE][0]['value'] = $final_repoter_nid_list;
+      }
+      if (!empty($common_by_line_name)) {
+        $final_by_line_name = implode(',', $common_by_line_name);
+        $node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'] = $final_by_line_name;
+      }
+      if (!empty($common_by_line_twitter)) {
+        $final_by_line_twitter = implode(',', $common_by_line_twitter);
+        $node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'] = trim($final_by_line_twitter,",");
+      }
+    }
+  }
+  // close here
+}
+
+/**
+ * Implements itg_get_all_bylineinfo().
+ * @param int $reporter_id
+ */
+function itg_get_all_bylineinfo($reporter_unique_id) {
+  $val = array();
+  if (!empty($reporter_unique_id)) {
+    $query = db_select('itg_multi_byline_info', 'c');
+    $query->fields('c');
+    $query->condition('c.uniqueid', $reporter_unique_id);
+    $query->orderBy("byline_weight", "ASC");
+    $result = $query->execute();
+    while ($record = $result->fetchAssoc()) {
+      $val[] = $record['byline_id'];
+    }
+    return $val;
+  }
 }
 
 /**
@@ -436,13 +468,13 @@ function itg_front_search_node_presave($node) {
  * @param string $name
  */
 function itg_get_reporter_list($name) {
-  $term_array = taxonomy_get_term_by_name('reporter');
-  $term = reset($term_array); # get the first element of the array which is our term object
+  //$term_array = taxonomy_get_term_by_name('reporter');
+  //$term = reset($term_array); # get the first element of the array which is our term object
 
   $reporter_name = db_select('node', 'n');
   $reporter_name->join('field_data_field_celebrity_pro_occupation', 'rpn', 'n.nid = rpn.entity_id');
   $reporter_name->fields('n', array('title', 'nid'));
-  $reporter_name->condition('field_celebrity_pro_occupation_tid', $term->tid, '=');
+  //$reporter_name->condition('field_celebrity_pro_occupation_tid', $term->tid, '=');
   $reporter_name->condition('n.type', 'reporter', '=');
   $reporter_name->condition('n.title', '%' . $name . '%', 'LIKE');
   $result = $reporter_name->execute();

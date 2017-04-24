@@ -9,6 +9,9 @@ function _personalization_all_content() {
   return drupal_get_form('itg_personalization_all_content_form');
 }
 
+/**
+ * Implements hook_form().
+ */
 function itg_personalization_all_content_form($form, &$form_state) {
   global $base_url;
   $form = array();
@@ -19,6 +22,7 @@ function itg_personalization_all_content_form($form, &$form_state) {
   $form['status'] = array(
     '#type' => 'select',
     '#title' => 'Status',
+    '#required' => TRUE,
     '#options' => array('_none' => 'Select', 'review' => 'Under Review', 'approve' => 'Approved', 'reject' => 'Rejected'),
     '#default_value' => ($_GET['status']) ? $_GET['status'] : '_none',
   );
@@ -37,6 +41,15 @@ function itg_personalization_all_content_form($form, &$form_state) {
   );
   
   return $form;
+}
+
+/**
+ * Implements hook_form_validate().
+ */
+function itg_personalization_all_content_form_validate($form, &$form_state) {
+  if(empty($form_state['values']['status']) || $form_state['values']['status'] == '_none') {
+    form_set_error('status', t('Please select status!'));
+  }
 }
 
 /**
@@ -104,11 +117,11 @@ function itg_personalization_all_content_display() {
       if (is_array($query) && empty($query))
       {
 
-        $userData = $people->find(array("publish_status" => array('$ne' => 1), "status" => 1, "uid" => $user->uid))->limit($limit)->sort(array('publish_date_time' => -1));
+        $userData = $people->find(array("publish_status" => array('$ne' => 1), "status" => 1, "uid" => $user->uid))->limit($limit)->sort(array('_id' => -1));
       }
       else
       {
-        $userData = $people->find($query)->limit($limit)->sort(array('publish_date_time' => -1));
+        $userData = $people->find($query)->limit($limit)->sort(array('_id' => -1));
       }
 
       $rows = array();

@@ -140,16 +140,16 @@ function itgadmin_preprocess_comment(&$vars) {
   $comment = $vars['elements']['#comment'];
   $node = $vars['elements']['#node'];
 
-  if ($node->type == 'story' || $node->type == 'blog') {
-    $vars['created'] = format_date($comment->created, 'custom', 'D, d/m/Y h:i');
-    $vars['changed'] = format_date($comment->changed, 'custom', 'D, d/m/Y h:i');
+  if ( $node->type == 'story' || $node->type == 'blog' ) {
+    $vars['created'] = format_date($comment->created , 'custom' , 'D, d/m/Y h:i');
+    $vars['changed'] = format_date($comment->changed , 'custom' , 'D, d/m/Y h:i');
 
-    $vars['submitted'] = t('Submitted by !username on !datetime', array('!username' => $vars['author'], '!datetime' => $vars['created']));
+    $vars['submitted'] = t('Submitted by !username on !datetime' , array('!username' => $vars['author'] , '!datetime' => $vars['created']));
   }
-  else if ($node->type == 'task_idea_allocation_tracking') {
-    $vars['created'] = format_date($comment->created, 'custom', 'D, d/m/Y h:i');
-    $vars['changed'] = format_date($comment->changed, 'custom', 'D, d/m/Y h:i');
-    $vars['submitted'] = t('Commented by !username on !datetime', array('!username' => $vars['author'], '!datetime' => $vars['created']));
+  else if ( $node->type == 'task_idea_allocation_tracking' ) {
+    $vars['created'] = format_date($comment->created , 'custom' , 'D, d/m/Y h:i');
+    $vars['changed'] = format_date($comment->changed , 'custom' , 'D, d/m/Y h:i');
+    $vars['submitted'] = t('Commented by !username on !datetime' , array('!username' => $vars['author'] , '!datetime' => $vars['created']));
   }
 }
 
@@ -192,17 +192,17 @@ function itgadmin_menu_link(array $variables) {
   $sub_menu = '';
 
 
-  if ($element['#theme'] == 'menu_link__menu_menu_manager') {
+  if ( $element['#theme'] == 'menu_link__menu_menu_manager' ) {
     $element['#localized_options']['attributes']['class'][] = "colorbox-load";
   }
 
-  if ($element['#below']) {
+  if ( $element['#below'] ) {
     $sub_menu = drupal_render($element['#below']);
   }
-  $output = l($element['#title'], $element['#href'], $element['#localized_options']);
+  $output = l($element['#title'] , $element['#href'] , $element['#localized_options']);
 
   // if link class is active, make li class as active too
-  if (strpos($output, "active") > 0) {
+  if ( strpos($output , "active") > 0 ) {
     $element['#attributes']['class'][] = "active";
   }
   return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
@@ -215,26 +215,26 @@ function itgadmin_node_preview($variables) {
 //  itg_newsletter_content_preview_data($node);
   $output = '<div class="preview-wrapper"><div class="preview">';
   $preview_trimmed_version = FALSE;
-  $elements = node_view(clone $node, 'teaser');
+  $elements = node_view(clone $node , 'teaser');
   $trimmed = drupal_render($elements);
-  $elements = node_view($node, 'full');
+  $elements = node_view($node , 'full');
   $full = drupal_render($elements);
 
   // Do we need to preview trimmed version of post as well as full version?
-  if ($trimmed != $full) {
+  if ( $trimmed != $full ) {
     //drupal_set_message(t('The trimmed version of your post shows what your post looks like when promoted to the main page or when exported for syndication.<span class="no-js"> You can insert the delimiter "&lt;!--break--&gt;" (without the quotes) to fine-tune where your post gets split.</span>'));
     $output .= '<h3>' . t('Preview trimmed version') . '</h3>';
     $output .= $trimmed;
     $output .= '<h3>' . t('Preview full version') . '</h3>';
     $output .= $full;
-    if ($node->type == 'newsletter') {
+    if ( $node->type == 'newsletter' ) {
       $selectedTemplatenid = $node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id'];
       $newletterContents = $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];
       foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $values) {
         $cat_array[] = $values['tid'];
       }
-      $tid_val = implode(',', $cat_array);
-      $output .= l(t('Download HTML'), 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $tid_val, array('attributes' => array('class' => 'download-html'), 'html' => true));
+      $tid_val = implode(',' , $cat_array);
+      $output .= l(t('Download HTML') , 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $tid_val , array('attributes' => array('class' => 'download-html') , 'html' => true));
     }
   }
   else {
@@ -255,17 +255,17 @@ function itgadmin_breadcrumb($vars) {
   $output = '';
 
   // Add current page onto the end.
-  if (!drupal_is_front_page()) {
+  if ( !drupal_is_front_page() ) {
     $item = menu_get_item();
     $end = end($vars['breadcrumb']);
     $title = drupal_get_title();
-    if ($end && strip_tags($end) !== $title) {
+    if ( $end && strip_tags($end) !== $title ) {
       //$vars['breadcrumb'][] = (isset($item['localized_options']['html']) && $item['localized_options']['html']) ? $item['title'] : check_plain($item['title']);
-      if (arg(2) == 'edit') {
+      if ( arg(2) == 'edit' ) {
         $node = node_load(arg(1));
-        if ($node->type == 'issue') {
-          $title_arr = explode('00:', $node->title);
-          $vars['breadcrumb'][1] = date('d/m/Y', strtotime($title_arr[0]));
+        if ( $node->type == 'issue' ) {
+          $title_arr = explode('00:' , $node->title);
+          $vars['breadcrumb'][1] = date('d/m/Y' , strtotime($title_arr[0]));
         }
 
         $vars['breadcrumb'][] = (isset($item['localized_options']['html']) && $item['localized_options']['html']) ? $item['title'] : check_plain($item['title']);
@@ -275,13 +275,13 @@ function itgadmin_breadcrumb($vars) {
         $node = node_load(arg(1));
 
         //Set issue view page breadcrumb
-        if (!empty($node->type) && $node->type == 'issue') {
-          $title_arr = explode('00:', $node->title);
-          $vars['breadcrumb'][1] = date('d/m/Y', strtotime($title_arr[0]));
+        if ( !empty($node->type) && $node->type == 'issue' ) {
+          $title_arr = explode('00:' , $node->title);
+          $vars['breadcrumb'][1] = date('d/m/Y' , strtotime($title_arr[0]));
         }
 
         //Set UGC view page breadcrumb
-        if (!empty($node->type) && $node->type == 'ugc') {
+        if ( !empty($node->type) && $node->type == 'ugc' ) {
           $vars['breadcrumb'][1] = $node->title;
         }
       }
@@ -289,61 +289,61 @@ function itgadmin_breadcrumb($vars) {
 
 
     //Story Listing
-    if (arg(0) == 'issue-listing') {
+    if ( arg(0) == 'issue-listing' ) {
       $list_story_parent_link = 'manage-' . arg(1) . 's';
       ;
       $list_story_link = 'issue-listing' . '/' . arg(1) . '/' . arg(2);
-      $breadcrumb[] = '<li>' . l('Home', 'cms-user-dashboard') . '</li><li>' . l('List ' . ucfirst(arg(1)) . 's', $list_story_parent_link) . '</li><li>' . l('List Stories', $list_story_link) . '</li>';
-      return '<div class="breadcrumb"><ol>' . implode(' » ', $breadcrumb) . '</ol></div>';
+      $breadcrumb[] = '<li>' . l('Home' , 'cms-user-dashboard') . '</li><li>' . l('List ' . ucfirst(arg(1)) . 's' , $list_story_parent_link) . '</li><li>' . l('List Stories' , $list_story_link) . '</li>';
+      return '<div class="breadcrumb"><ol>' . implode(' » ' , $breadcrumb) . '</ol></div>';
     }
 
     // get first argument from url 
     $content_url = arg(0);
     // make title for breadcrumb
-    $content_title = ucfirst(str_replace('-', ' ', $content_url));
+    $content_title = ucfirst(str_replace('-' , ' ' , $content_url));
 
-    $story_tab = array('in-queue-story', 'published-story', 'expired-story', 'unpublished-story', 'archive-story');
-    $photogallery_tab = array('in-queue-photogallery', 'published-photogallery', 'unpublished-photogallery', 'archive-photogallery');
-    $bolg_tab = array('published-blogs', 'unpublished-blogs', 'my-queue-blogs', 'in-queue-blogs', 'archive-blogs', 'my-unpublished-blogs', 'mydraft-blogs', 'my-rejected-blogs', 'my-published-blogs');
-    $podcast_tab = array('published-podcast', 'unpublished-podcast', 'my-unpublished-podcast', 'mydraft-podcast', 'my-published-podcast', 'my-queue-podcast', 'in-queue-podcast', 'archive-podcast', 'my-rejected-podcast');
-    $videogallery_tab = array('published-video', 'unpublished-video', 'my-unpublished-video', 'mydraft-video', 'my-published-video', 'my-queue-video', 'in-queue-video', 'archive-video', 'my-rejected-video');
+    $story_tab = array('in-queue-story' , 'published-story' , 'expired-story' , 'unpublished-story' , 'archive-story');
+    $photogallery_tab = array('in-queue-photogallery' , 'published-photogallery' , 'unpublished-photogallery' , 'archive-photogallery');
+    $bolg_tab = array('published-blogs' , 'unpublished-blogs' , 'my-queue-blogs' , 'in-queue-blogs' , 'archive-blogs' , 'my-unpublished-blogs' , 'mydraft-blogs' , 'my-rejected-blogs' , 'my-published-blogs');
+    $podcast_tab = array('published-podcast' , 'unpublished-podcast' , 'my-unpublished-podcast' , 'mydraft-podcast' , 'my-published-podcast' , 'my-queue-podcast' , 'in-queue-podcast' , 'archive-podcast' , 'my-rejected-podcast');
+    $videogallery_tab = array('published-video' , 'unpublished-video' , 'my-unpublished-video' , 'mydraft-video' , 'my-published-video' , 'my-queue-video' , 'in-queue-video' , 'archive-video' , 'my-rejected-video');
 
     //story tab breadcrumb
-    if (in_array($content_url, $story_tab)) {
-      $breadcrumb[] = '<li>' . l('Home', 'cms-user-dashboard') . '</li><li>' . l('Content Management ', $content_url) . '</li><li>' . l($content_title, $content_url) . '</li>';
-      return '<div class="breadcrumb"><ol>' . implode('  ', $breadcrumb) . '</ol></div>';
+    if ( in_array($content_url , $story_tab) ) {
+      $breadcrumb[] = '<li>' . l('Home' , 'cms-user-dashboard') . '</li><li>' . l('Content Management ' , $content_url) . '</li><li>' . l($content_title , $content_url) . '</li>';
+      return '<div class="breadcrumb"><ol>' . implode('  ' , $breadcrumb) . '</ol></div>';
     }
 
     //Photogallery tab breadcrumb
-    if (in_array($content_url, $photogallery_tab)) {
-      $breadcrumb[] = '<li>' . l('Home', 'cms-user-dashboard') . '</li><li>' . l('Content Management ', $content_url) . '</li><li>' . l($content_title, $content_url) . '</li>';
-      return '<div class="breadcrumb"><ol>' . implode('  ', $breadcrumb) . '</ol></div>';
+    if ( in_array($content_url , $photogallery_tab) ) {
+      $breadcrumb[] = '<li>' . l('Home' , 'cms-user-dashboard') . '</li><li>' . l('Content Management ' , $content_url) . '</li><li>' . l($content_title , $content_url) . '</li>';
+      return '<div class="breadcrumb"><ol>' . implode('  ' , $breadcrumb) . '</ol></div>';
     }
 
 
     //Blog tab breadcrumb
-    if (in_array($content_url, $bolg_tab)) {
-      $breadcrumb[] = '<li>' . l('Home', 'cms-user-dashboard') . '</li><li>' . l('Content Management ', $content_url) . '</li><li>' . l($content_title, $content_url) . '</li>';
-      return '<div class="breadcrumb"><ol>' . implode('  ', $breadcrumb) . '</ol></div>';
+    if ( in_array($content_url , $bolg_tab) ) {
+      $breadcrumb[] = '<li>' . l('Home' , 'cms-user-dashboard') . '</li><li>' . l('Content Management ' , $content_url) . '</li><li>' . l($content_title , $content_url) . '</li>';
+      return '<div class="breadcrumb"><ol>' . implode('  ' , $breadcrumb) . '</ol></div>';
     }
 
     //podcast tab breadcrumb
-    if (in_array($content_url, $podcast_tab)) {
-      $breadcrumb[] = '<li>' . l('Home', 'cms-user-dashboard') . '</li><li>' . l('Content Management ', $content_url) . '</li><li>' . l($content_title, $content_url) . '</li>';
-      return '<div class="breadcrumb"><ol>' . implode('  ', $breadcrumb) . '</ol></div>';
+    if ( in_array($content_url , $podcast_tab) ) {
+      $breadcrumb[] = '<li>' . l('Home' , 'cms-user-dashboard') . '</li><li>' . l('Content Management ' , $content_url) . '</li><li>' . l($content_title , $content_url) . '</li>';
+      return '<div class="breadcrumb"><ol>' . implode('  ' , $breadcrumb) . '</ol></div>';
     }
 
     //videogallery tab breadcrumb
-    if (in_array($content_url, $videogallery_tab)) {
-      $breadcrumb[] = '<li>' . l('Home', 'cms-user-dashboard') . '</li><li>' . l('Content Management ', $content_url) . '</li><li>' . l($content_title, $content_url) . '</li>';
-      return '<div class="breadcrumb"><ol>' . implode('  ', $breadcrumb) . '</ol></div>';
+    if ( in_array($content_url , $videogallery_tab) ) {
+      $breadcrumb[] = '<li>' . l('Home' , 'cms-user-dashboard') . '</li><li>' . l('Content Management ' , $content_url) . '</li><li>' . l($content_title , $content_url) . '</li>';
+      return '<div class="breadcrumb"><ol>' . implode('  ' , $breadcrumb) . '</ol></div>';
     }
   }
 
   // Optional: Add the site name to the front of the stack.
-  if (!empty($vars['prepend'])) {
-    $site_name = empty($vars['breadcrumb']) ? "<strong>" . check_plain(variable_get('site_name', '')) . "</strong>" : l(variable_get('site_name', ''), '<front>', array('purl' => array('disabled' => TRUE)));
-    array_unshift($vars['breadcrumb'], $site_name);
+  if ( !empty($vars['prepend']) ) {
+    $site_name = empty($vars['breadcrumb']) ? "<strong>" . check_plain(variable_get('site_name' , '')) . "</strong>" : l(variable_get('site_name' , '') , '<front>' , array('purl' => array('disabled' => TRUE)));
+    array_unshift($vars['breadcrumb'] , $site_name);
   }
 
   $depth = 0;
@@ -351,7 +351,7 @@ function itgadmin_breadcrumb($vars) {
 
     // If the item isn't a link, surround it with a strong tag to format it like
     // one.
-    if (!preg_match('/^<a/', $link) && !preg_match('/^<strong/', $link)) {
+    if ( !preg_match('/^<a/' , $link) && !preg_match('/^<strong/' , $link) ) {
       $link = '<span>' . $link . '</span>';
     }
 
@@ -368,26 +368,26 @@ function itgadmin_preprocess_page(&$vars) {
   global $base_url;
   // Handel theme for custom widget batch processing.
   $referal_page = $_SERVER['HTTP_REFERER'];
-  $pos = strpos($referal_page, "itg-custom-widget-content");
-  if(isset($_GET['op']) && isset($_GET['id']) && $pos !== false) {
+  $pos = strpos($referal_page , "itg-custom-widget-content");
+  if ( isset($_GET['op']) && isset($_GET['id']) && $pos !== false ) {
     $vars['theme_hook_suggestions'][] = 'page__relatedcontent';
   }
   // Change create category page title.
   $arg0 = arg(0);
-  if (arg(2) == 'taxonomy' && arg(3) == 'category_management' && arg(4) == 'add') {
+  if ( arg(2) == 'taxonomy' && arg(3) == 'category_management' && arg(4) == 'add' ) {
     drupal_set_title('Create Category');
   }
   //  // Change create Tag page title.
-  if (arg(2) == 'taxonomy' && arg(3) == 'tags' && arg(4) == 'add') {
+  if ( arg(2) == 'taxonomy' && arg(3) == 'tags' && arg(4) == 'add' ) {
     drupal_set_title('Create Tag');
   }
 
-  if ($arg0 == 'survey-result' && is_numeric(arg(1))) {
+  if ( $arg0 == 'survey-result' && is_numeric(arg(1)) ) {
     $node = node_load(arg(1));
     drupal_set_title('Survey Result: ' . ucwords($node->title));
   }
 
-  if (!empty($vars['node']) && $vars['node']->type == 'ugc') {
+  if ( !empty($vars['node']) && $vars['node']->type == 'ugc' ) {
     drupal_set_title('');
   }
 
@@ -428,24 +428,33 @@ function itgadmin_preprocess_page(&$vars) {
     , 'speaker-order-reorder'
     , 'event-according-type'
     , 'itg-social-log'
-    , 'itg-custom-widget-content'
-    , 'itg-custom-widget-content-order'
+    , 'search-unpublish-video'
+    , 'search-unpublish-video-radio'
+    , 'search-publish-video-radio'
+    , 'search-publish-video'
+    , 'itg-registered-user-report'
+    ,'ugc-view-content'
+    , 'itg-registered-user-section-wise-breakup'
+    ,  'embed'
   );
 
-  if (in_array(arg(0), $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {
+  if ( in_array(arg(0) , $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview') ) {
     $vars['theme_hook_suggestions'][] = 'page__relatedcontent';
   }
-  
-  if(arg(0) == "itg-custom-widget-content" && isset($_REQUEST['widget_name_delete']) && !empty($_SESSION['widget_name'])) {
+
+  if ( arg(0) == "itg-custom-widget-content" && isset($_REQUEST['widget_name_delete']) && !empty($_SESSION['widget_name']) ) {
     unset($_SESSION['widget_name']);
+  }
+  if ( arg(0) == "itg-custom-widget-content" || arg(0) == "itg-custom-widget-content-order" ) {
+    $vars['theme_hook_suggestions'][] = 'page__customwidget';
   }
 
   //Add tpl for event registration view page
-  if ((!empty($vars['node']->type) && $vars['node']->type == 'event_registration') || $arg0 == 'comment_view' || $arg0 == 'event-users-list' || arg(1) == 'associate-with-story' || $arg0 == 'comment_edit' || $arg0 === 'social-media-logs' || (!empty($vars['node']->type) && $vars['node']->type == 'print_team_integration' && $_GET['type'] == 'commentform' )) {
+  if ( (!empty($vars['node']->type) && $vars['node']->type == 'event_registration') || $arg0 == 'comment_view' || $arg0 == 'event-users-list' || arg(1) == 'associate-with-story' || $arg0 == 'comment_edit' || $arg0 === 'social-media-logs' || (!empty($vars['node']->type) && $vars['node']->type == 'print_team_integration' && $_GET['type'] == 'commentform' ) ) {
     $vars['theme_hook_suggestions'][] = 'page__event_registration';
   }
 
-  if (arg(0) == 'event-registration-config' && is_numeric(arg(1))) {
+  if ( arg(0) == 'event-registration-config' && is_numeric(arg(1)) ) {
     $vars['theme_hook_suggestions'][] = 'page__registration_config';
   }
 }
@@ -454,18 +463,18 @@ function itgadmin_preprocess_page(&$vars) {
  * Override the video field
  */
 function itgadmin_preprocess_field(&$vars) {
-  if ($vars['element']['#field_name'] == 'field_upload_video') {
+  if ( $vars['element']['#field_name'] == 'field_upload_video' ) {
     $file_id = $vars['element']['#items'][0]['fid'];
-    if (module_exists('itg_videogallery')) {
+    if ( module_exists('itg_videogallery') ) {
       $video_id = itg_videogallery_get_video($file_id);
       $vars['element'][0]['#file']->video_id = $video_id;
     }
   }
 
   // For Audio field
-  if ($vars['element']['#field_name'] == 'field_podcast_upload_audio_file') {
+  if ( $vars['element']['#field_name'] == 'field_podcast_upload_audio_file' ) {
     $file_id = $vars['element']['#items'][0]['fid'];
-    if (module_exists('itg_podcast')) {
+    if ( module_exists('itg_podcast') ) {
       $audio_id = itg_videogallery_get_video($file_id);
       $vars['element'][0]['#file']->audio_id = $audio_id;
     }

@@ -28,6 +28,14 @@ function itg_personalization_edit_profile_form() {
   else {
     $mobile = $user_detail->field_mobile_number['und'][0]['value'];
   }
+  // email setting
+  if (strpos($user_detail->mail, 'nowhere.com') !== false) {
+    $email = '';
+  }
+  else {
+    $email = $user_detail->mail;
+  }
+  
   $form['fname'] = array(
     '#title' => t('First Name'),
     '#type' => 'textfield',
@@ -54,7 +62,7 @@ function itg_personalization_edit_profile_form() {
       'readonly' => TRUE
     ),
     '#prefix' => '<div class="change-email">',
-    '#default_value' => $user_detail->mail,
+    '#default_value' => $email,
     '#suffix' => $edit_email_link . '</div>',
   );
   $form['mobile'] = array(
@@ -142,6 +150,8 @@ function itg_personalization_edit_profile_form() {
     foreach ($user_detail->field_subscribe_for_newsletter['und'] as $option) {
       $data[] = $option['value'];
     }
+  } else {
+    $data = array('India Today', 'Aaj Tak', 'Business Today');
   }
   $form['news_letter'] = array(
     '#title' => t('Subscribe Our Newsletters'),

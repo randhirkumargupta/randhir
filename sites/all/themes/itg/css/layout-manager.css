@@ -329,6 +329,7 @@ img {
 .dont-miss ul .dont-miss-listing .dm-detail, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-detail, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-detail, .osscar-video ul .dont-miss-listing .dm-detail {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -423,6 +424,7 @@ img {
 .may-be-suggest-container ul .may-we-suggest .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -483,6 +485,7 @@ img {
 .top-takes-video-container ul .top-takes-video .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -552,6 +555,7 @@ img {
 .trending-videos .trending-videos-list .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -578,6 +582,7 @@ img {
 .watch-right-now-video ul .watch-right-now-list .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -606,6 +611,7 @@ img {
 .rhs-section-ordering ul .rhs-section-item-container .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -765,6 +771,7 @@ img {
 .may-be-suggest-container ul .may-we-suggest .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -825,6 +832,7 @@ img {
 .top-takes-video-container ul .top-takes-video .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -923,6 +931,7 @@ img {
 .watch-right-now-video ul .watch-right-now-list .title {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
@@ -3175,4 +3184,261 @@ img {
 /*css End common highlight */
 .featured-news .featured-post span.smilies-title img {
   width: inherit;
+}
+
+.itg-layout-container.default-section [id*="block-itg-ask-expert-custom-ask-expert-form-block"] {
+  height: 100%;
+  padding-top: 25px;
+  border: 1px solid #f1f1f1;
+}
+.itg-layout-container.default-section [id*="block-itg-ask-expert-custom-ask-expert-form-block"] .section-user-details, .itg-layout-container.default-section [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] {
+  background-color: #fff;
+}
+.itg-layout-container.default-section [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] input[type="submit"] {
+  margin-top: 10px;
+}
+.itg-layout-container.default-section .custom_ask_expert_form_block .widget-settings {
+  position: absolute;
+}
+.itg-layout-container.default-section .ask-question {
+  padding: 15px;
+  font-family: roboto-slab;
+  overflow: auto;
+}
+.itg-layout-container.default-section .ask-question .form-type-textarea, .itg-layout-container.default-section .ask-question .form-type-textfield {
+  margin: 0;
+  padding: 0;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] {
+  zoom: 1;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"]:before, .itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"]:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"]:after {
+  clear: both;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] input[type="text"] {
+  width: 100%;
+  font-family: roboto-slab;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] textarea {
+  font-family: roboto-slab;
+  height: 65px;
+  margin-bottom: 10px;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] #question p {
+  color: #000;
+  font-size: 12px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] #question p.chtr-limit {
+  margin-bottom: 10px;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] #askname {
+  zoom: 1;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] #askname:before, .itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] #askname:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] #askname:after {
+  clear: both;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] #askname .form-item-askname, .itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] #askname .form-item-askemail {
+  float: left;
+  width: 50%;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] #askname .form-item-askname input[type="text"], .itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] #askname .form-item-askemail input[type="text"] {
+  width: 100%;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] #askname .form-item-askname {
+  padding-right: 10px;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] #askname .form-item-askemail {
+  padding-left: 10px;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] input[type="submit"] {
+  background: #000 none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  height: 32px;
+  text-transform: uppercase;
+  width: 90px;
+  cursor: pointer;
+  font-family: roboto-slab;
+  margin-top: 10px;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] .captcha {
+  border: none;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] .captcha legend, .itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] .captcha .fieldset-description {
+  display: none;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] .captcha img {
+  width: 120px;
+  margin-top: 15px;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response label {
+  width: 47%;
+  float: left;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response input[type="text"] {
+  width: 47%;
+  font-family: roboto-slab;
+  float: right;
+}
+.itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response .description {
+  display: none;
+}
+.itg-layout-container.default-section .ask-question .expert-question {
+  position: relative;
+  font-size: 14px;
+  color: #323232;
+  margin: 15px 0;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+  padding-left: 30px;
+}
+.itg-layout-container.default-section .ask-question .expert-question:before {
+  content: 'Q';
+  width: 20px;
+  height: 20px;
+  background: #000;
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  font-family: roboto;
+  margin-right: 10px;
+  position: absolute;
+  top: 20px;
+  left: 0;
+}
+.itg-layout-container.default-section .ask-question .question-link {
+  text-align: center;
+}
+.itg-layout-container.default-section .ask-question .question-link a {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: #000;
+  text-decoration: underline;
+  letter-spacing: 0;
+  margin-bottom: 20px;
+  display: block;
+}
+.itg-layout-container.default-section .ask-question .ask-user-detail h4 {
+  display: block;
+  margin-bottom: 10px;
+}
+.itg-layout-container.default-section .ask-question .section-user-details {
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.itg-layout-container.default-section .ask-question .section-user-details img {
+  float: right;
+  border: 2px solid #ddd;
+  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+}
+.itg-layout-container.default-section .ask-question .section-user-details .section-user-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #585858;
+}
+
+.widget-placeholder {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #f1f1f1;
+  z-index: 1;
+}
+.widget-placeholder span {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  text-align: center;
+  font-size: 28px;
+  text-transform: uppercase;
+  color: #ababab;
+  font-weight: 500;
+  margin-top: -10px;
+}
+
+.election-page .right-side .itg-320 .droppable {
+  height: 320px;
+}
+
+#block-itg-front-end-common-latest-from-aajtak .widget-title,
+#block-itg-front-end-common-latest-from-pti .widget-title,
+#block-itg-front-end-common-latest-from-businesstoday .widget-title {
+  display: inline-block;
+  vertical-align: top;
+}
+#block-itg-front-end-common-latest-from-aajtak ul,
+#block-itg-front-end-common-latest-from-pti ul,
+#block-itg-front-end-common-latest-from-businesstoday ul {
+  border: 1px solid #dddddd;
+  min-height: 381px;
+  list-style: none;
+}
+#block-itg-front-end-common-latest-from-aajtak ul .third-party-list,
+#block-itg-front-end-common-latest-from-pti ul .third-party-list,
+#block-itg-front-end-common-latest-from-businesstoday ul .third-party-list {
+  overflow: hidden;
+  padding: 10px;
+}
+#block-itg-front-end-common-latest-from-aajtak ul .third-party-list .pic,
+#block-itg-front-end-common-latest-from-pti ul .third-party-list .pic,
+#block-itg-front-end-common-latest-from-businesstoday ul .third-party-list .pic {
+  float: left;
+  margin-right: 10px;
+}
+#block-itg-front-end-common-latest-from-aajtak ul .third-party-list .title,
+#block-itg-front-end-common-latest-from-pti ul .third-party-list .title,
+#block-itg-front-end-common-latest-from-businesstoday ul .third-party-list .title {
+  display: block;
+  overflow: hidden;
+  word-wrap: break-word;
+  font-size: 14px;
+  line-height: 19px;
+  color: #000;
+}
+#block-itg-front-end-common-latest-from-aajtak ul li a.pic,
+#block-itg-front-end-common-latest-from-pti ul li a.pic,
+#block-itg-front-end-common-latest-from-businesstoday ul li a.pic {
+  max-height: 55px;
+}
+#block-itg-front-end-common-latest-from-aajtak ul li + li,
+#block-itg-front-end-common-latest-from-pti ul li + li,
+#block-itg-front-end-common-latest-from-businesstoday ul li + li {
+  border-top: 1px solid #dddddd;
+}
+
+#block-itg-front-end-common-latest-from-businesstoday a.pic img {
+  max-width: 56px;
+}
+
+.widget-help-text {
+  text-align: right;
+  padding: 5px 10px;
+  font-size: 16px;
+  /* background: #ddd; */
 }

@@ -581,7 +581,6 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -663,6 +662,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
     2 => 'OR',
+    3 => 'OR',
   );
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
@@ -801,14 +801,6 @@ function features_for_story_views_default_views() {
     'draft' => 'draft',
   );
   $handler->display->display_options['filters']['state_1']['group'] = 1;
-  /* Filter criterion: Workbench Moderation: From state */
-  $handler->display->display_options['filters']['from_state']['id'] = 'from_state';
-  $handler->display->display_options['filters']['from_state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['from_state']['field'] = 'from_state';
-  $handler->display->display_options['filters']['from_state']['value'] = array(
-    'published' => 'published',
-  );
-  $handler->display->display_options['filters']['from_state']['group'] = 1;
   /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
   $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
@@ -905,6 +897,25 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_expiry_date_value_1']['field'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value_1']['operator'] = 'empty';
   $handler->display->display_options['filters']['field_story_expiry_date_value_1']['group'] = 2;
+  /* Filter criterion: Workbench Moderation: From state */
+  $handler->display->display_options['filters']['from_state']['id'] = 'from_state';
+  $handler->display->display_options['filters']['from_state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['from_state']['field'] = 'from_state';
+  $handler->display->display_options['filters']['from_state']['value'] = array(
+    'published' => 'published',
+  );
+  $handler->display->display_options['filters']['from_state']['group'] = 3;
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['id'] = 'field_story_source_type_value_1';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['value'] = 'migrated';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['group'] = 3;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '0';
   $handler->display->display_options['path'] = 'unpublished-story';
 
   /* Display: Published Story */
@@ -1071,11 +1082,18 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Story Title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Story Title';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '[title]';
   /* Field: Content: Syndication */
   $handler->display->display_options['fields']['field_story_syndication']['id'] = 'field_story_syndication';
   $handler->display->display_options['fields']['field_story_syndication']['table'] = 'field_data_field_story_syndication';
@@ -1145,13 +1163,11 @@ function features_for_story_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['label'] = 'Action';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
+  /* Field: Global: Story custom view link */
+  $handler->display->display_options['fields']['story_custom_view_link']['id'] = 'story_custom_view_link';
+  $handler->display->display_options['fields']['story_custom_view_link']['table'] = 'views';
+  $handler->display->display_options['fields']['story_custom_view_link']['field'] = 'story_custom_view_link';
+  $handler->display->display_options['fields']['story_custom_view_link']['label'] = 'View';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Updated date */
   $handler->display->display_options['sorts']['changed']['id'] = 'changed';
@@ -1162,6 +1178,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
     2 => 'OR',
+    3 => 'OR',
   );
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
@@ -1292,14 +1309,6 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
   $handler->display->display_options['filters']['is_current']['value'] = '1';
   $handler->display->display_options['filters']['is_current']['group'] = 1;
-  /* Filter criterion: Workbench Moderation: State */
-  $handler->display->display_options['filters']['state']['id'] = 'state';
-  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['state']['field'] = 'state';
-  $handler->display->display_options['filters']['state']['value'] = array(
-    'published' => 'published',
-  );
-  $handler->display->display_options['filters']['state']['group'] = 1;
   /* Filter criterion: Content: Schedule date &amp; time (field_story_schedule_date_time) */
   $handler->display->display_options['filters']['field_story_schedule_date_time_value']['id'] = 'field_story_schedule_date_time_value';
   $handler->display->display_options['filters']['field_story_schedule_date_time_value']['table'] = 'field_data_field_story_schedule_date_time';
@@ -1491,6 +1500,12 @@ function features_for_story_views_default_views() {
     25 => 0,
     26 => 0,
   );
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
   /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
   $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
@@ -1506,6 +1521,20 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_expiry_date_value_1']['field'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value_1']['operator'] = 'empty';
   $handler->display->display_options['filters']['field_story_expiry_date_value_1']['group'] = 2;
+  /* Filter criterion: Workbench Moderation: State */
+  $handler->display->display_options['filters']['state']['id'] = 'state';
+  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['value'] = array(
+    'published' => 'published',
+  );
+  $handler->display->display_options['filters']['state']['group'] = 3;
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['id'] = 'field_story_source_type_value_1';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['value'] = 'migrated';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['group'] = 3;
   $handler->display->display_options['path'] = 'published-story';
 
   /* Display: My Un Published Story */
@@ -1553,7 +1582,6 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -1640,6 +1668,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
     2 => 'OR',
+    3 => 'OR',
   );
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
@@ -1778,14 +1807,6 @@ function features_for_story_views_default_views() {
     'draft' => 'draft',
   );
   $handler->display->display_options['filters']['state_1']['group'] = 1;
-  /* Filter criterion: Workbench Moderation: From state */
-  $handler->display->display_options['filters']['from_state']['id'] = 'from_state';
-  $handler->display->display_options['filters']['from_state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['from_state']['field'] = 'from_state';
-  $handler->display->display_options['filters']['from_state']['value'] = array(
-    'published' => 'published',
-  );
-  $handler->display->display_options['filters']['from_state']['group'] = 1;
   /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
   $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
@@ -1882,6 +1903,25 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_expiry_date_value_1']['field'] = 'field_story_expiry_date_value';
   $handler->display->display_options['filters']['field_story_expiry_date_value_1']['operator'] = 'empty';
   $handler->display->display_options['filters']['field_story_expiry_date_value_1']['group'] = 2;
+  /* Filter criterion: Workbench Moderation: From state */
+  $handler->display->display_options['filters']['from_state']['id'] = 'from_state';
+  $handler->display->display_options['filters']['from_state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['from_state']['field'] = 'from_state';
+  $handler->display->display_options['filters']['from_state']['value'] = array(
+    'published' => 'published',
+  );
+  $handler->display->display_options['filters']['from_state']['group'] = 3;
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['id'] = 'field_story_source_type_value_1';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['value'] = 'migrated';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['group'] = 3;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '0';
   $handler->display->display_options['path'] = 'my-unpublished-story';
 
   /* Display: My Draft Of Story */
@@ -1915,15 +1955,14 @@ function features_for_story_views_default_views() {
     'title' => 'title',
     'nid' => 'nid',
     'uid' => 'uid',
-    'field_first_name' => 'field_first_name',
-    'field_last_name' => 'field_last_name',
     'field_story_category' => 'field_story_category',
-    'nothing' => 'nothing',
+    'name' => 'name',
     'changed' => 'changed',
     'state' => 'state',
-    'edit_node' => 'nothing_1',
+    'edit_node' => 'edit_node',
     'delete_node' => 'delete_node',
     'nothing_1' => 'nothing_1',
+    'story_custom_view_link' => 'story_custom_view_link',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -1951,26 +1990,14 @@ function features_for_story_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_first_name' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_last_name' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'field_story_category' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'nothing' => array(
+    'name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -2004,6 +2031,11 @@ function features_for_story_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'story_custom_view_link' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
   );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
@@ -2031,11 +2063,19 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Story Title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Story Title';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '[title]';
+  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -2075,13 +2115,6 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['label'] = 'Status';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
-  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
   /* Field: Content: Delete link */
   $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
@@ -2092,6 +2125,12 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
+  $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
+  /* Field: Global: Story custom view link */
+  $handler->display->display_options['fields']['story_custom_view_link']['id'] = 'story_custom_view_link';
+  $handler->display->display_options['fields']['story_custom_view_link']['table'] = 'views';
+  $handler->display->display_options['fields']['story_custom_view_link']['field'] = 'story_custom_view_link';
+  $handler->display->display_options['fields']['story_custom_view_link']['label'] = 'View';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
@@ -2366,7 +2405,6 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -2393,6 +2431,11 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = 'Posted by';
+  /* Field: Content: Source type */
+  $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'story';
   /* Field: Content: Schedule date & time */
   $handler->display->display_options['fields']['field_story_schedule_date_time']['id'] = 'field_story_schedule_date_time';
   $handler->display->display_options['fields']['field_story_schedule_date_time']['table'] = 'field_data_field_story_schedule_date_time';
@@ -2431,8 +2474,14 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Action';
+  $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
+  /* Field: Global: Story custom view link */
+  $handler->display->display_options['fields']['story_custom_view_link']['id'] = 'story_custom_view_link';
+  $handler->display->display_options['fields']['story_custom_view_link']['table'] = 'views';
+  $handler->display->display_options['fields']['story_custom_view_link']['field'] = 'story_custom_view_link';
+  $handler->display->display_options['fields']['story_custom_view_link']['label'] = 'View';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
@@ -2441,6 +2490,11 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+    3 => 'OR',
+  );
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
@@ -2449,11 +2503,13 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'story' => 'story',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
   $handler->display->display_options['filters']['title']['operator'] = 'allwords';
+  $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Story Title';
@@ -2498,6 +2554,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['nid']['id'] = 'nid';
   $handler->display->display_options['filters']['nid']['table'] = 'node';
   $handler->display->display_options['filters']['nid']['field'] = 'nid';
+  $handler->display->display_options['filters']['nid']['group'] = 1;
   $handler->display->display_options['filters']['nid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['nid']['expose']['operator_id'] = 'nid_op';
   $handler->display->display_options['filters']['nid']['expose']['label'] = 'Story ID';
@@ -2531,6 +2588,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_category_tid']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['filters']['field_story_category_tid']['field'] = 'field_story_category_tid';
   $handler->display->display_options['filters']['field_story_category_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_story_category_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_story_category_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_story_category_tid']['expose']['operator_id'] = 'field_story_category_tid_op';
   $handler->display->display_options['filters']['field_story_category_tid']['expose']['label'] = 'Category';
@@ -2565,26 +2623,13 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
   $handler->display->display_options['filters']['is_current']['value'] = '1';
-  /* Filter criterion: Workbench Moderation: State */
-  $handler->display->display_options['filters']['state']['id'] = 'state';
-  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['state']['field'] = 'state';
-  $handler->display->display_options['filters']['state']['value'] = array(
-    'published' => 'published',
-  );
-  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['operator'] = '>=';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['granularity'] = 'minute';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['form_type'] = 'date_text';
-  $handler->display->display_options['filters']['field_story_expiry_date_value']['default_date'] = 'now';
+  $handler->display->display_options['filters']['is_current']['group'] = 1;
   /* Filter criterion: Content: Schedule date &amp; time (field_story_schedule_date_time) */
   $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['id'] = 'field_story_schedule_date_time_value_1';
   $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['table'] = 'field_data_field_story_schedule_date_time';
   $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['field'] = 'field_story_schedule_date_time_value';
   $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['group'] = 1;
   $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['expose']['operator_id'] = 'field_story_schedule_date_time_value_1_op';
   $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['expose']['label'] = 'Status';
@@ -2621,6 +2666,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_story_archive_value']['group'] = 1;
   /* Filter criterion: Content: Configurations (field_story_configurations) */
   $handler->display->display_options['filters']['field_story_configurations_value']['id'] = 'field_story_configurations_value';
   $handler->display->display_options['filters']['field_story_configurations_value']['table'] = 'field_data_field_story_configurations';
@@ -2629,6 +2675,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_configurations_value']['value'] = array(
     'display_lock' => 'display_lock',
   );
+  $handler->display->display_options['filters']['field_story_configurations_value']['group'] = 1;
   /* Filter criterion: Content: Configurations (field_story_configurations) */
   $handler->display->display_options['filters']['field_story_configurations_value_1']['id'] = 'field_story_configurations_value_1';
   $handler->display->display_options['filters']['field_story_configurations_value_1']['table'] = 'field_data_field_story_configurations';
@@ -2636,6 +2683,7 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_configurations_value_1']['value'] = array(
     'set_as_featured' => 'set_as_featured',
   );
+  $handler->display->display_options['filters']['field_story_configurations_value_1']['group'] = 1;
   $handler->display->display_options['filters']['field_story_configurations_value_1']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_story_configurations_value_1']['expose']['operator_id'] = 'field_story_configurations_value_1_op';
   $handler->display->display_options['filters']['field_story_configurations_value_1']['expose']['label'] = 'Featured Story';
@@ -2666,6 +2714,78 @@ function features_for_story_views_default_views() {
     22 => 0,
   );
   $handler->display->display_options['filters']['field_story_configurations_value_1']['expose']['reduce'] = TRUE;
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_story_source_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['operator_id'] = 'field_story_source_type_value_op';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['label'] = 'Source type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['operator'] = 'field_story_source_type_value_op';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['identifier'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
+  $handler->display->display_options['filters']['field_story_expiry_date_value']['id'] = 'field_story_expiry_date_value';
+  $handler->display->display_options['filters']['field_story_expiry_date_value']['table'] = 'field_data_field_story_expiry_date';
+  $handler->display->display_options['filters']['field_story_expiry_date_value']['field'] = 'field_story_expiry_date_value';
+  $handler->display->display_options['filters']['field_story_expiry_date_value']['operator'] = '>=';
+  $handler->display->display_options['filters']['field_story_expiry_date_value']['group'] = 2;
+  $handler->display->display_options['filters']['field_story_expiry_date_value']['granularity'] = 'minute';
+  $handler->display->display_options['filters']['field_story_expiry_date_value']['form_type'] = 'date_text';
+  $handler->display->display_options['filters']['field_story_expiry_date_value']['default_date'] = 'now';
+  /* Filter criterion: Field: Expiry Date (field_story_expiry_date) */
+  $handler->display->display_options['filters']['field_story_expiry_date_value_1']['id'] = 'field_story_expiry_date_value_1';
+  $handler->display->display_options['filters']['field_story_expiry_date_value_1']['table'] = 'field_data_field_story_expiry_date';
+  $handler->display->display_options['filters']['field_story_expiry_date_value_1']['field'] = 'field_story_expiry_date_value';
+  $handler->display->display_options['filters']['field_story_expiry_date_value_1']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_story_expiry_date_value_1']['group'] = 2;
+  /* Filter criterion: Workbench Moderation: State */
+  $handler->display->display_options['filters']['state']['id'] = 'state';
+  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['value'] = array(
+    'published' => 'published',
+  );
+  $handler->display->display_options['filters']['state']['group'] = 3;
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['id'] = 'field_story_source_type_value_1';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['value'] = 'migrated';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['group'] = 3;
   $handler->display->display_options['path'] = 'my-published-story';
 
   /* Display: My queue */
@@ -2693,14 +2813,13 @@ function features_for_story_views_default_views() {
     'title' => 'title',
     'nid' => 'nid',
     'uid' => 'uid',
-    'field_first_name' => 'field_first_name',
-    'field_last_name' => 'field_last_name',
     'field_story_category' => 'field_story_category',
-    'nothing' => 'nothing',
+    'name' => 'name',
     'changed' => 'changed',
     'state' => 'state',
-    'edit_node' => 'nothing_1',
+    'edit_node' => 'edit_node',
     'nothing_1' => 'nothing_1',
+    'story_custom_view_link' => 'story_custom_view_link',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -2728,26 +2847,14 @@ function features_for_story_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_first_name' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_last_name' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'field_story_category' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'nothing' => array(
+    'name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -2772,6 +2879,11 @@ function features_for_story_views_default_views() {
       'empty_column' => 0,
     ),
     'nothing_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'story_custom_view_link' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -2803,11 +2915,19 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Story Title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Story Title';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '[title]';
+  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -2847,18 +2967,17 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['label'] = 'Status';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
-  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
+  $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
+  /* Field: Global: Story custom view link */
+  $handler->display->display_options['fields']['story_custom_view_link']['id'] = 'story_custom_view_link';
+  $handler->display->display_options['fields']['story_custom_view_link']['table'] = 'views';
+  $handler->display->display_options['fields']['story_custom_view_link']['field'] = 'story_custom_view_link';
+  $handler->display->display_options['fields']['story_custom_view_link']['label'] = 'View';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
@@ -3132,14 +3251,14 @@ function features_for_story_views_default_views() {
     'title' => 'title',
     'nid' => 'nid',
     'uid' => 'uid',
-    'field_first_name' => 'field_first_name',
-    'field_last_name' => 'field_last_name',
     'field_story_category' => 'field_story_category',
-    'nothing' => 'nothing',
+    'field_story_source_type' => 'field_story_source_type',
+    'name' => 'name',
     'changed' => 'changed',
     'state' => 'state',
-    'edit_node' => 'nothing_1',
+    'edit_node' => 'edit_node',
     'nothing_1' => 'nothing_1',
+    'story_custom_view_link' => 'story_custom_view_link',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -3167,26 +3286,21 @@ function features_for_story_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_first_name' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_last_name' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'field_story_category' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'nothing' => array(
+    'field_story_source_type' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -3211,6 +3325,11 @@ function features_for_story_views_default_views() {
       'empty_column' => 0,
     ),
     'nothing_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'story_custom_view_link' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -3242,11 +3361,19 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Story Title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Story Title';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '[title]';
+  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -3291,18 +3418,17 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['label'] = 'Status';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
-  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
+  $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
+  /* Field: Global: Story custom view link */
+  $handler->display->display_options['fields']['story_custom_view_link']['id'] = 'story_custom_view_link';
+  $handler->display->display_options['fields']['story_custom_view_link']['table'] = 'views';
+  $handler->display->display_options['fields']['story_custom_view_link']['field'] = 'story_custom_view_link';
+  $handler->display->display_options['fields']['story_custom_view_link']['label'] = 'View';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
@@ -3575,7 +3701,6 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -4002,7 +4127,6 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -4334,7 +4458,6 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -4737,7 +4860,6 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -5051,7 +5173,6 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -5373,7 +5494,6 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';

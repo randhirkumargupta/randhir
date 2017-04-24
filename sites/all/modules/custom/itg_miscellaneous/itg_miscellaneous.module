@@ -12,10 +12,10 @@
  * Implements hook_init.
  * {@inheritdoc}
  */
-function itg_miscellaneous_init() {
-  global $user;
-  //p(node_load(2540));
-}
+//function itg_miscellaneous_init() {
+//  global $user;
+//  //p(node_load(2540));
+//}
 
 /**
  * Implements hook_menu().
@@ -58,7 +58,30 @@ function itg_miscellaneous_menu() {
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_miscellaneous.inc',
   );
-  
+  $items['create-index-for-story-migration'] = array(
+      'page callback' => 'create_index_xml',
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_story_clean.inc',
+  );
+   $items['create-story-xml-clean'] = array(
+      'page callback' => 'create_story_xml_clean',
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_story_clean.inc',
+  );
+  $items['get-mongo-detail/%/%'] = array(
+      'page callback' => 'itg_get_mongo_detail',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_miscellaneous.inc',
+  );
+  $items['create-video-xml-clean'] = array(
+      'page callback' => 'create_video_xml_clean',
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_video_clean.inc',
+  );
   
 
   return $items;

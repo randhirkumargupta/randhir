@@ -77,14 +77,14 @@ class ItgVideogalleryMigration extends XMLMigration {
 //      'scheduledatetime' => t('scheduledatetime'),
       'sefurl' => t('Sefurl'),
       'pagetitle' => t('Page title'),
-      'description' => t('Description'),
+      'metadescription' => t('metadescription'),
       'keywords' => t('Keywords'),
     );
 
 
     // This can also be an URL instead of a local file path.
-    $file_path = drupal_realpath('public://');
-
+    //$file_path = drupal_realpath('public://');
+    $file_path = DRUPAL_ROOT . '/' .'sites/default/files'; 
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
     $items_url = $xml_folder . 'videogallery.xml';
@@ -123,7 +123,6 @@ class ItgVideogalleryMigration extends XMLMigration {
     // /categories/category/name).
     $this->addFieldMapping('title', 'longheadline')->xpath('longheadline');
     $this->addFieldMapping('field_story_short_headline', 'title')->xpath('title');
-    //$this->addFieldMapping('field_story_reporter', 'byline')->xpath('byline');
     // Byline mapped in prepare
     //$this->addFieldMapping('field_stroy_city', 'city')->xpath('city');
     $this->addFieldMapping('field_story_courtesy', 'courtesy')->xpath('courtesy');
@@ -131,22 +130,38 @@ class ItgVideogalleryMigration extends XMLMigration {
     // configuration mapped in prepare
     $this->addFieldMapping('field_story_comment_question', 'commentquestion')->xpath('commentquestion');
     $this->addFieldMapping('field_story_schedule_date_time', 'publisheddate')->xpath('publisheddate'); // published date
+    $this->addFieldMapping('field_itg_content_publish_date', 'publisheddate')->xpath('publisheddate'); // published date
     $this->addFieldMapping('field_story_expiry_date', 'expirydate')->xpath('expirydate');
     $this->addFieldMapping('field_story_expires', 'videoexpires')->xpath('videoexpires');
     // Image field 
     $this->addFieldMapping('field_story_extra_large_image', 'extralargeimage')->xpath('extralargeimage');
+    $this->addFieldMapping('field_story_extra_large_image:preserve_files')
+         ->defaultValue(TRUE);
     $this->addFieldMapping('field_story_extra_large_image:alt', 'extra_large_alt')->xpath('extra_large_alt');
     $this->addFieldMapping('field_story_extra_large_image:title', 'extra_large_title')->xpath('extra_large_title');
     $this->addFieldMapping('field_story_large_image', 'largeimage')->xpath('largeimage');
+    $this->addFieldMapping('field_story_large_image:preserve_files')
+         ->defaultValue(TRUE);
     $this->addFieldMapping('field_story_large_image:alt', 'large_alt')->xpath('large_alt');
     $this->addFieldMapping('field_story_large_image:title', 'large_title')->xpath('large_title');
     $this->addFieldMapping('field_story_medium_image', 'mediumimage')->xpath('mediumimage');
+    $this->addFieldMapping('field_story_medium_image:preserve_files')
+         ->defaultValue(TRUE);
     $this->addFieldMapping('field_story_medium_image:alt', 'mediumimage_alt')->xpath('mediumimage_alt');
     $this->addFieldMapping('field_story_medium_image:title', 'mediumimage_title')->xpath('mediumimage_title');
     $this->addFieldMapping('field_story_small_image', 'smallimage')->xpath('smallimage');
+    $this->addFieldMapping('field_story_small_image:preserve_files')
+         ->defaultValue(TRUE);
+    $this->addFieldMapping('field_story_player_image', 'bigimage')->xpath('bigimage');
+    $this->addFieldMapping('field_story_player_image:preserve_files')
+         ->defaultValue(TRUE);
     $this->addFieldMapping('field_story_small_image:alt', 'smallimage_alt')->xpath('smallimage_alt');
     $this->addFieldMapping('field_story_small_image:title', 'smallimage_title')->xpath('smallimage_title');
     $this->addFieldMapping('field_story_extra_small_image', 'extrasmallimage')->xpath('extrasmallimage');
+    $this->addFieldMapping('field_story_extra_small_image:preserve_files')
+         ->defaultValue(TRUE);
+    $this->addFieldMapping('field_story_extra_small_image:file_replace')
+         ->defaultValue(FILE_EXISTS_REPLACE);
     $this->addFieldMapping('field_story_extra_small_image:alt', 'extra_small_alt')->xpath('extra_small_alt');
     $this->addFieldMapping('field_story_extra_small_image:title', 'extra_small_title')->xpath('extra_small_title');
 
@@ -157,17 +172,26 @@ class ItgVideogalleryMigration extends XMLMigration {
     // Facebook and twitter image
     $this->addFieldMapping('field_story_facebook_narrative', 'facebooknarrative')->xpath('facebooknarrative');
     $this->addFieldMapping('field_story_facebook_image', 'facebookimage')->xpath('facebookimage');
+    $this->addFieldMapping('field_story_facebook_image:file_replace')
+         ->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_story_facebook_image:preserve_files')
+         ->defaultValue(TRUE);
     $this->addFieldMapping('field_story_facebook_image:alt', 'facebookimage_alt')->xpath('facebookimage_alt');
     $this->addFieldMapping('field_story_facebook_image:title', 'facebookimage_title')->xpath('facebookimage_title');
     $this->addFieldMapping('field_story_tweet', 'twitternarrative')->xpath('twitternarrative');
     $this->addFieldMapping('field_story_tweet_image', 'twitterimage')->xpath('twitterimage');
+     $this->addFieldMapping('field_story_tweet_image:file_replace')
+         ->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_story_tweet_image:preserve_files')
+         ->defaultValue(TRUE);
     $this->addFieldMapping('field_story_tweet_image:alt', 'twitterimage_alt')->xpath('twitterimage_alt');
     $this->addFieldMapping('field_story_tweet_image:title', 'twitterimage_title')->xpath('twitterimage_title');
 
     // Video migrate
     // $this->addFieldMapping('field_upload_video', 'video')->xpath('video');
 
-    $this->addFieldMapping('field_story_expert_name', 'shortdescription')->xpath('shortdescription');
+    //$this->addFieldMapping('field_story_expert_name', 'shortdescription')->xpath('shortdescription');
+    $this->addFieldMapping('field_video_kicker', 'shortdescription')->xpath('shortdescription');
     $this->addFieldMapping('field_story_expert_description', 'longdescription')->xpath('longdescription');
 
     // Section mapped in prepare
@@ -175,27 +199,150 @@ class ItgVideogalleryMigration extends XMLMigration {
     $this->addFieldMapping('field_story_syndication', 'syndications')->xpath('syndications');
     $this->addFieldMapping('field_story_archive', 'archive')->xpath('archive');
     $this->addFieldMapping('field_primary_category', 'primarycategory')->xpath('primarycategory');
-//    $this->addFieldMapping('pathauto')->defaultValue(0);
-//    $this->addFieldMapping('path', 'sefurl')->xpath('metatags/sefurl');
+    $this->addFieldMapping('pathauto')->defaultValue(0);
+    $this->addFieldMapping('path', 'sefurl')->xpath('metatags/sefurl');
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
-    $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
+    $this->addFieldMapping('metatag_description', 'metadescription')->xpath('metatags/metadescription');
     $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
-    $this->addFieldMapping('workbench_moderation_state_new', 'workbench_moderation_state_new')->xpath('workbench_moderation_state_new');
+    //$this->addFieldMapping('workbench_moderation_state_new', 'workbench_moderation_state_new')->xpath('workbench_moderation_state_new');
     $this->addFieldMapping('created', 'createddate')->xpath('createddate');
     $this->addFieldMapping('changed', 'modifieddate')->xpath('modifieddate');
+    $this->addFieldMapping('field_modified_by_video', 'modifiedby')->xpath('modifiedby');
+    $this->addFieldMapping('status', 'state')->xpath('state');
     $this->addFieldMapping('field_noindex_nofollow', 'noindex_nofollow')->xpath('noindex_nofollow');
+    $this->addFieldMapping('field_syndication_photo_video', 'syndications_photo')->xpath('syndications_photo');
+    $this->addFieldMapping('migrate_redirects', 'weburl')->xpath('weburl');
+    
+    
+   /* $this->addUnmigratedDestinations(array('promote', 'sticky', 'revision', 'log', 'language', 'tnid', 'translate', 'revision_uid', 'is_new',
+      'status',
+      'field_common_by_line_reporter_id',
+      'field_common_related_content',
+      'field_itg_common_by_line_name',
+      'field_itg_common_by_line_twitter',
+      'field_story_category',
+      'field_story_category:source_type',
+      'field_story_category:create_term',
+      'field_story_category:ignore_case',
+      'field_story_expiry_date:timezone',
+      'field_story_expiry_date:rrule',
+      'field_story_expiry_date:to',
+      'field_story_extra_large_image:destination_dir',
+      'field_story_extra_large_image:destination_file',
+      'field_story_extra_large_image:file_replace',
+      'field_story_extra_large_image:source_dir',
+      'field_story_extra_large_image:urlencode',
+      'field_story_extra_small_image:file_class',
+      'field_story_extra_small_image:destination_dir',
+      'field_story_extra_small_image:destination_file',
+      'field_story_extra_small_image:source_dir',
+      'field_story_extra_small_image:urlencode',
+      'field_story_facebook_image:file_class',
+      'field_story_large_image:destination_dir',
+      'field_story_large_image:destination_file',
+      'field_story_large_image:file_replace',
+      'field_story_large_image:source_dir',
+      'field_story_large_image:urlencode',
+      'field_story_listicle',
+      'field_story_listicle:revision_id',
+      'field_story_medium_image:file_class',
+      
+      'field_story_itg_tags',
+      'field_story_itg_tags:source_type',
+      'field_story_itg_tags:create_term',
+      'field_story_itg_tags:ignore_case',
+      'field_story_large_image:file_class',
+      
+      'field_story_large_image:destination_dir',
+      'field_story_large_image:destination_file',
+      'field_story_large_image:file_replace',
+      'field_story_large_image:source_dir',
+      'field_story_large_image:urlencode',
+      'field_story_listicle',
+      'field_story_listicle:revision_id',
+      'field_story_medium_image:file_class',
+      //'field_story_medium_image:preserve_files',
+      'field_story_medium_image:destination_dir ',
+      'field_story_medium_image:destination_file',
+      'field_story_medium_image:file_replace',
+      'field_story_medium_image:source_dir',
+      'field_story_medium_image:urlencode',
+      'field_story_small_image:file_class',
+      //'field_story_small_image:preserve_files',
+      'field_story_small_image:destination_dir',
+      'field_story_small_image:destination_file',
+      'field_story_small_image:file_replace',
+      'field_story_small_image:source_dir',
+      'field_story_small_image:urlencode',
+      'migrate_redirects_language',
+      'metatag_abstract',
+      'metatag_robots',
+      'metatag_news_keywords',
+      'metatag_standout',
+      'metatag_rating',
+      'metatag_referrer',
+      'metatag_generator',
+      'metatag_rights',
+      'metatag_image_src',
+      'metatag_canonical',
+      'metatag_shortlink',
+      'metatag_publisher',
+      'metatag_author',
+      'metatag_original-source',
+      'metatag_prev',
+      'metatag_next',
+      'metatag_content-language',
+      'metatag_geo.position',
+      'metatag_geo.placename',
+      'metatag_geo.region',
+      'metatag_icbm',
+      'metatag_refresh',
+      'metatag_revisit-after',
+      'metatag_pragma',
+      'metatag_cache-control',
+      'metatag_expires',
+      'comment',
+      'totalcount',
+      'daycount',
+      'timestamp',
+      ));*/
   }
 
   public function prepareRow($row) {
+    if(!empty($row->xml->extralargeimage)) {
+      $row->xml->extralargeimage = itg_dbmigrate_imagepath_url((string)$row->xml->extralargeimage);
+    }
+    
+    if(!empty($row->xml->largeimage)) {
+      $row->xml->largeimage = itg_dbmigrate_imagepath_url((string)$row->xml->largeimage);
+    }    
+    if(!empty($row->xml->mediumimage)) {
+      $row->xml->mediumimage = itg_dbmigrate_imagepath_url((string)$row->xml->mediumimage);
+    }
+    
+    if(!empty($row->xml->smallimage)) {
+      $row->xml->smallimage = itg_dbmigrate_imagepath_url((string)$row->xml->smallimage);
+    }
+    
+    if(!empty($row->xml->extrasmallimage)) {
+      $row->xml->extrasmallimage = itg_dbmigrate_imagepath_url((string)$row->xml->extrasmallimage);
+    }
+     if(!empty($row->xml->facebookimage)) {
+      $row->xml->facebookimage = itg_dbmigrate_imagepath_url((string)$row->xml->facebookimage);
+    }
+    
+    if(!empty($row->xml->twitterimage)) {
+      $row->xml->twitterimage = itg_dbmigrate_imagepath_url((string)$row->xml->twitterimage);
+    }
+    
+    
+    
     if((string) $row->xml->longheadline){
       $row->xml->longheadline = trim((string) $row->xml->longheadline);
     }
-    //Workbench 
-    if ((string) $row->xml->state == '1') {
-      $row->xml->workbench_moderation_state_new = 'published';
-    }
-    else {
-      $row->xml->workbench_moderation_state_new = 'draft';
+    
+    if ((string) $row->xml->syndications_photo == '1') {
+      $row->xml->syndications_photo = 'syndications_photo';
     }
 
     //syndication
@@ -275,18 +422,20 @@ class ItgVideogalleryMigration extends XMLMigration {
     if(!empty($row->xml->commentbox) && (string) $row->xml->commentbox == 1){
       $final_option[]['value'] = 'comment_box';
     }
+    $row->final_config_option = $final_option;
+    
     // No follo no index
     if ((string) $row->xml->noindex_nofollow == 1) {
       $row->xml->noindex_nofollow = 'noindex_nofollow';
     }
-    $row->final_config_option = $final_option;
+    
     
     // Multipart and bitrate flags
     if(!empty($row->xml->multibitrate_flag) && (string) $row->xml->multibitrate_flag == 1){
-      $multipart[]['value'] = 'multipart_flag';
+      $multipart[]['value'] = 'multibitrate_flag';
     }
     if(!empty($row->xml->multipart_flag) && (string) $row->xml->multipart_flag == 1){
-      $multipart[]['value'] = 'multibitrate_flag';
+      $multipart[]['value'] = 'multipart_flag';
     }
     $row->multipart_bitrate = $multipart;
     // City migrate
@@ -315,6 +464,12 @@ class ItgVideogalleryMigration extends XMLMigration {
     }
     $row->byline_new = $data_byline;
     
+    
+    if (isset($row->xml->anchor) && !empty($row->xml->anchor)) {
+      $source_aid = (string) $row->xml->anchor;
+      $data_anchor = get_itg_destination_id('migrate_map_itgbyline', $source_aid);
+    }
+    $row->xml->anchor = $data_anchor;
     //multi bitrates
     $row->bitrates = '';
     if (isset($row->xml->multi_bitrates) && !empty($row->xml->multi_bitrates)) {
@@ -330,6 +485,12 @@ class ItgVideogalleryMigration extends XMLMigration {
     }
     $row->bitrates = $data_bitrate;
     
+    // Modified by
+    if(isset($row->xml->modifiedby) && !empty($row->xml->modifiedby)) {
+      $modi_uid = (string) $row->xml->modifiedby;
+      $row->xml->modifiedby = get_itg_destination_id('migrate_map_itguser', $modi_uid);
+    }
+    
     // manage created user
     if (isset($row->xml->createdby) && !empty($row->xml->createdby)) {
       $created_uid = (string) $row->xml->createdby;
@@ -343,7 +504,7 @@ class ItgVideogalleryMigration extends XMLMigration {
     return TRUE;
   }
 
-  public function prepare($node, stdClass $row) {
+  public function prepare($node, stdClass $row) {   
     $node->teaser = (string) $row->xml->description;
     if (!empty($row->category_new)) {
       $node->field_story_category[LANGUAGE_NONE] = $row->category_new;
@@ -375,7 +536,7 @@ class ItgVideogalleryMigration extends XMLMigration {
   }
 
   public function complete($entity, $row) {
-    $node = node_load($entity->nid);
+    $node = $entity;
 
     //Video url migrate
     if (isset($row->xml->videoparts) && !empty($row->xml->videoparts)) {
@@ -406,9 +567,9 @@ class ItgVideogalleryMigration extends XMLMigration {
 
 
     //code for order set
-    if (isset($row->xml->ordering)) {
-      ordering_set_of_content($node, $row->xml->ordering);
-    }
+    //if (isset($row->xml->ordering)) {
+      ordering_set_of_content($node, (string) $row->xml->ordering);
+    //}
     // Related content save in db
     if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
      //$arr = array();

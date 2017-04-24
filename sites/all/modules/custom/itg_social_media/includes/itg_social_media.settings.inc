@@ -33,7 +33,7 @@ function itg_social_media_fb_connection() {
     'app_secret' => variable_get('facebook_app_secret'),
     'default_graph_version' => 'v2.5',
   ]);
-
+  
   return $fb;
 }
 
@@ -45,8 +45,8 @@ function itg_social_media_fb_connection() {
 function itg_social_media_twitter_connection() {
   global $base_url;
   \Codebird\Codebird::setConsumerKey(variable_get('twitter_app_key'), variable_get('twitter_app_secret'));
-
   $cb = \Codebird\Codebird::getInstance();
+ 
   if (variable_get('oauth_token', '') !== '' && variable_get('oauth_token_secret', '') !== '') {
     $cb->setToken(variable_get('oauth_token', ''), variable_get('oauth_token_secret', ''));
   }

@@ -928,12 +928,10 @@ allowfullscreen></iframe>';
   $handler->display->display_options['relationships']['node_to_file']['id'] = 'node_to_file';
   $handler->display->display_options['relationships']['node_to_file']['table'] = 'file_usage';
   $handler->display->display_options['relationships']['node_to_file']['field'] = 'node_to_file';
-  /* Relationship: Flags: my_saved_content */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
   $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'node';
   $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
-  $handler->display->display_options['relationships']['flag_content_rel']['required'] = 0;
-  $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'my_saved_content';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -964,16 +962,6 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['timestamp']['date_format'] = 'custom';
   $handler->display->display_options['fields']['timestamp']['custom_date_format'] = 'M d, Y,  h:i a';
   $handler->display->display_options['fields']['timestamp']['second_date_format'] = 'long';
-  /* Field: Flags: Flag link */
-  $handler->display->display_options['fields']['ops']['id'] = 'ops';
-  $handler->display->display_options['fields']['ops']['table'] = 'flagging';
-  $handler->display->display_options['fields']['ops']['field'] = 'ops';
-  $handler->display->display_options['fields']['ops']['relationship'] = 'flag_content_rel';
-  $handler->display->display_options['fields']['ops']['label'] = '';
-  $handler->display->display_options['fields']['ops']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['ops']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['ops']['empty'] = 'ITG';
-  $handler->display->display_options['fields']['ops']['link_type'] = 'normal';
 
   /* Display: video landing page header scroll */
   $handler = $view->new_display('block', 'video landing page header scroll', 'block_1');
@@ -985,7 +973,8 @@ allowfullscreen></iframe>';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'customstyle';
@@ -1239,20 +1228,18 @@ print \'Status not found.\';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'counter' => 'counter',
-    'views_bulk_operations' => 'views_bulk_operations',
     'title' => 'title',
+    'edit_node' => 'edit_node',
     'nid' => 'nid',
     'uid' => 'uid',
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
-    'field_blog_category_selection' => 'field_blog_category_selection',
-    'nothing' => 'nothing',
-    'created' => 'created',
+    'field_story_category' => 'field_story_category',
+    'name' => 'name',
     'changed' => 'changed',
-    'field_story_schedule_date_time' => 'field_story_schedule_date_time',
-    'field_story_schedule_date_time_1' => 'field_story_schedule_date_time_1',
-    'view_node' => 'nothing_1',
-    'edit_node' => 'nothing_1',
+    'state' => 'state',
+    'status' => 'status',
+    'field_story_source_type' => 'field_story_source_type',
     'delete_node' => 'nothing_1',
     'nothing_1' => 'nothing_1',
   );
@@ -1263,14 +1250,14 @@ print \'Status not found.\';
       'separator' => '',
       'empty_column' => 0,
     ),
-    'views_bulk_operations' => array(
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'title' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
+    'edit_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -1301,17 +1288,12 @@ print \'Status not found.\';
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_blog_category_selection' => array(
+    'field_story_category' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'nothing' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'created' => array(
+    'name' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -1325,26 +1307,23 @@ print \'Status not found.\';
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_story_schedule_date_time' => array(
+    'state' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_story_schedule_date_time_1' => array(
+    'status' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'view_node' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'edit_node' => array(
+    'field_story_source_type' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -1607,6 +1586,130 @@ print \'Status not found.\';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'counter' => 'counter',
+    'views_bulk_operations' => 'views_bulk_operations',
+    'title' => 'title',
+    'nid' => 'nid',
+    'uid' => 'uid',
+    'field_first_name' => 'field_first_name',
+    'field_last_name' => 'field_last_name',
+    'field_story_category' => 'field_story_category',
+    'name' => 'name',
+    'changed' => 'changed',
+    'state' => 'state',
+    'status' => 'status',
+    'field_story_source_type' => 'field_story_source_type',
+    'edit_node' => 'edit_node',
+    'delete_node' => 'nothing_1',
+    'nothing_1' => 'nothing_1',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'counter' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'views_bulk_operations' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'uid' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_first_name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_last_name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_story_category' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'changed' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'state' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'status' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_story_source_type' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'delete_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nothing_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: Text area */
   $handler->display->display_options['header']['area']['id'] = 'area';
@@ -1660,11 +1763,18 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Title';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '[title]';
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -1722,13 +1832,11 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['status']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['status']['alter']['text'] = 'Un published';
   $handler->display->display_options['fields']['status']['not'] = 0;
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
+  /* Field: Content: Source type */
+  $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'Video';
   /* Field: Content: Delete link */
   $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
@@ -1741,6 +1849,10 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
@@ -1749,11 +1861,13 @@ print \'Status not found.\';
   $handler->display->display_options['filters']['type']['value'] = array(
     'videogallery' => 'videogallery',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
   $handler->display->display_options['filters']['title']['operator'] = 'allwords';
+  $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
@@ -1798,6 +1912,7 @@ print \'Status not found.\';
   $handler->display->display_options['filters']['nid']['id'] = 'nid';
   $handler->display->display_options['filters']['nid']['table'] = 'node';
   $handler->display->display_options['filters']['nid']['field'] = 'nid';
+  $handler->display->display_options['filters']['nid']['group'] = 1;
   $handler->display->display_options['filters']['nid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['nid']['expose']['operator_id'] = 'nid_op';
   $handler->display->display_options['filters']['nid']['expose']['label'] = 'video ID';
@@ -1833,6 +1948,7 @@ print \'Status not found.\';
   $handler->display->display_options['filters']['field_story_category_tid']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['filters']['field_story_category_tid']['field'] = 'field_story_category_tid';
   $handler->display->display_options['filters']['field_story_category_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_story_category_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_story_category_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_story_category_tid']['expose']['operator_id'] = 'field_story_category_tid_op';
   $handler->display->display_options['filters']['field_story_category_tid']['expose']['label'] = 'Category';
@@ -1867,6 +1983,7 @@ print \'Status not found.\';
   $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
   $handler->display->display_options['filters']['is_current']['value'] = '1';
+  $handler->display->display_options['filters']['is_current']['group'] = 1;
   /* Filter criterion: Workbench Moderation: State */
   $handler->display->display_options['filters']['state_1']['id'] = 'state_1';
   $handler->display->display_options['filters']['state_1']['table'] = 'workbench_moderation_node_history';
@@ -1874,6 +1991,62 @@ print \'Status not found.\';
   $handler->display->display_options['filters']['state_1']['value'] = array(
     'draft' => 'draft',
   );
+  $handler->display->display_options['filters']['state_1']['group'] = 1;
+  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
+  $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
+  $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
+  $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
+  $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_story_archive_value']['group'] = 1;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '0';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_story_source_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['operator_id'] = 'field_story_source_type_value_op';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['label'] = 'Source type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['operator'] = 'field_story_source_type_value_op';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['identifier'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['id'] = 'field_story_source_type_value_1';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['value'] = 'migrated';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['group'] = 2;
   /* Filter criterion: Workbench Moderation: From state */
   $handler->display->display_options['filters']['from_state']['id'] = 'from_state';
   $handler->display->display_options['filters']['from_state']['table'] = 'workbench_moderation_node_history';
@@ -1881,11 +2054,7 @@ print \'Status not found.\';
   $handler->display->display_options['filters']['from_state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
-  $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
-  $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
-  $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
-  $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['from_state']['group'] = 2;
   $handler->display->display_options['path'] = 'unpublished-video';
 
   /* Display: Published video */
@@ -1909,6 +2078,150 @@ print \'Status not found.\';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'counter' => 'counter',
+    'views_bulk_operations' => 'views_bulk_operations',
+    'title' => 'title',
+    'edit_node' => 'edit_node',
+    'field_story_syndication' => 'field_story_syndication',
+    'nid' => 'nid',
+    'uid' => 'uid',
+    'field_first_name' => 'field_first_name',
+    'field_last_name' => 'field_last_name',
+    'name' => 'name',
+    'created' => 'created',
+    'changed' => 'changed',
+    'field_story_category' => 'field_story_category',
+    'field_story_schedule_date_time' => 'field_story_schedule_date_time',
+    'field_story_schedule_date_time_1' => 'field_story_schedule_date_time_1',
+    'field_story_source_type' => 'field_story_source_type',
+    'view_node' => 'nothing_1',
+    'nothing_1' => 'nothing_1',
+    'story_custom_view_link' => 'story_custom_view_link',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'counter' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'views_bulk_operations' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_story_syndication' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'uid' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_first_name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_last_name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'created' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'changed' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_story_category' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_story_schedule_date_time' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_story_schedule_date_time_1' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_story_source_type' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'view_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nothing_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'story_custom_view_link' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: Text area */
   $handler->display->display_options['header']['area']['id'] = 'area';
@@ -1949,11 +2262,18 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Title';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '[title]';
   /* Field: Content: Syndication */
   $handler->display->display_options['fields']['field_story_syndication']['id'] = 'field_story_syndication';
   $handler->display->display_options['fields']['field_story_syndication']['table'] = 'field_data_field_story_syndication';
@@ -2037,26 +2357,35 @@ print \'Status not found.\';
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
+  /* Field: Content: Source type */
+  $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'Video';
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['label'] = 'View';
+  $handler->display->display_options['fields']['view_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]</span>';
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['label'] = 'edit';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class ="views-action-separator"> | </span> <span class="edit-link">[edit_node]</span>';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
+  $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
+  /* Field: Global: Story custom view link */
+  $handler->display->display_options['fields']['story_custom_view_link']['id'] = 'story_custom_view_link';
+  $handler->display->display_options['fields']['story_custom_view_link']['table'] = 'views';
+  $handler->display->display_options['fields']['story_custom_view_link']['field'] = 'story_custom_view_link';
+  $handler->display->display_options['fields']['story_custom_view_link']['label'] = 'View';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
@@ -2229,6 +2558,65 @@ print \'Status not found.\';
   $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
   $handler->display->display_options['filters']['is_current']['value'] = '1';
   $handler->display->display_options['filters']['is_current']['group'] = 1;
+  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
+  $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
+  $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
+  $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
+  $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_story_archive_value']['group'] = 1;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_story_source_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['operator_id'] = 'field_story_source_type_value_op';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['label'] = 'Source type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['operator'] = 'field_story_source_type_value_op';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['identifier'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['id'] = 'field_story_source_type_value_1';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['value'] = 'migrated';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['group'] = 2;
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['operator_id'] = 'field_story_source_type_value_1_op';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['label'] = 'Source type (field_story_source_type)';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['operator'] = 'field_story_source_type_value_1_op';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['identifier'] = 'field_story_source_type_value_1';
   /* Filter criterion: Workbench Moderation: State */
   $handler->display->display_options['filters']['state']['id'] = 'state';
   $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
@@ -2236,18 +2624,7 @@ print \'Status not found.\';
   $handler->display->display_options['filters']['state']['value'] = array(
     'published' => 'published',
   );
-  $handler->display->display_options['filters']['state']['group'] = 1;
-  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
-  $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
-  $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
-  $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
-  $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
-  $handler->display->display_options['filters']['field_story_archive_value']['group'] = 1;
-  /* Filter criterion: Content: Source type (field_story_source_type) */
-  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
-  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
-  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
-  $handler->display->display_options['filters']['field_story_source_type_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['state']['group'] = 2;
   $handler->display->display_options['path'] = 'published-video';
 
   /* Display: My Un Published video */
@@ -2291,11 +2668,18 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Title';
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '[title]';
+  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -2357,12 +2741,11 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['status']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['status']['alter']['text'] = 'Un published';
   $handler->display->display_options['fields']['status']['not'] = 0;
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
+  /* Field: Content: Source type */
+  $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'Video';
   /* Field: Content: Delete link */
   $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
@@ -2391,6 +2774,10 @@ print \'Status not found.\';
   $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
@@ -2399,11 +2786,13 @@ print \'Status not found.\';
   $handler->display->display_options['filters']['type']['value'] = array(
     'videogallery' => 'videogallery',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
   $handler->display->display_options['filters']['title']['operator'] = 'allwords';
+  $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
@@ -2448,6 +2837,7 @@ print \'Status not found.\';
   $handler->display->display_options['filters']['nid']['id'] = 'nid';
   $handler->display->display_options['filters']['nid']['table'] = 'node';
   $handler->display->display_options['filters']['nid']['field'] = 'nid';
+  $handler->display->display_options['filters']['nid']['group'] = 1;
   $handler->display->display_options['filters']['nid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['nid']['expose']['operator_id'] = 'nid_op';
   $handler->display->display_options['filters']['nid']['expose']['label'] = 'podcast ID';
@@ -2482,6 +2872,7 @@ print \'Status not found.\';
   $handler->display->display_options['filters']['field_story_category_tid']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['filters']['field_story_category_tid']['field'] = 'field_story_category_tid';
   $handler->display->display_options['filters']['field_story_category_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_story_category_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_story_category_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_story_category_tid']['expose']['operator_id'] = 'field_story_category_tid_op';
   $handler->display->display_options['filters']['field_story_category_tid']['expose']['label'] = 'Category';
@@ -2516,12 +2907,63 @@ print \'Status not found.\';
   $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
   $handler->display->display_options['filters']['is_current']['value'] = '1';
+  $handler->display->display_options['filters']['is_current']['group'] = 1;
   /* Filter criterion: Workbench Moderation: State */
   $handler->display->display_options['filters']['state_1']['id'] = 'state_1';
   $handler->display->display_options['filters']['state_1']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['state_1']['field'] = 'state';
   $handler->display->display_options['filters']['state_1']['value'] = array(
     'draft' => 'draft',
+  );
+  $handler->display->display_options['filters']['state_1']['group'] = 1;
+  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
+  $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
+  $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
+  $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
+  $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_story_archive_value']['group'] = 1;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '0';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_story_source_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['operator_id'] = 'field_story_source_type_value_op';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['label'] = 'Source type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['operator'] = 'field_story_source_type_value_op';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['identifier'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   /* Filter criterion: Workbench Moderation: From state */
   $handler->display->display_options['filters']['from_state']['id'] = 'from_state';
@@ -2530,11 +2972,44 @@ print \'Status not found.\';
   $handler->display->display_options['filters']['from_state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
-  $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
-  $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
-  $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
-  $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['from_state']['group'] = 2;
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['id'] = 'field_story_source_type_value_1';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['value'] = 'migrated';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['group'] = 2;
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['operator_id'] = 'field_story_source_type_value_1_op';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['label'] = 'Source type';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['operator'] = 'field_story_source_type_value_1_op';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['identifier'] = 'field_story_source_type_value_1';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
   $handler->display->display_options['path'] = 'my-unpublished-video';
 
   /* Display: My Draft Of video */
@@ -2566,17 +3041,18 @@ print \'Status not found.\';
   $handler->display->display_options['style_options']['columns'] = array(
     'counter' => 'counter',
     'title' => 'title',
+    'edit_node' => 'edit_node',
     'nid' => 'nid',
     'uid' => 'uid',
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
     'field_story_category' => 'field_story_category',
-    'nothing' => 'nothing',
+    'name' => 'name',
     'changed' => 'changed',
     'state' => 'state',
-    'edit_node' => 'nothing_1',
     'delete_node' => 'delete_node',
     'nothing_1' => 'nothing_1',
+    'story_custom_view_link' => 'story_custom_view_link',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -2588,6 +3064,11 @@ print \'Status not found.\';
     'title' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -2623,7 +3104,9 @@ print \'Status not found.\';
       'separator' => '',
       'empty_column' => 0,
     ),
-    'nothing' => array(
+    'name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -2642,11 +3125,6 @@ print \'Status not found.\';
       'separator' => '',
       'empty_column' => 0,
     ),
-    'edit_node' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'delete_node' => array(
       'align' => '',
       'separator' => '',
@@ -2654,6 +3132,11 @@ print \'Status not found.\';
     ),
     'nothing_1' => array(
       'align' => 'views-align-center',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'story_custom_view_link' => array(
+      'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
@@ -2686,8 +3169,15 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Title';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '[title]';
+  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -2739,13 +3229,6 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['label'] = 'Status';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
-  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
   /* Field: Content: Delete link */
   $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
@@ -2757,6 +3240,12 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
+  $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
+  /* Field: Global: Story custom view link */
+  $handler->display->display_options['fields']['story_custom_view_link']['id'] = 'story_custom_view_link';
+  $handler->display->display_options['fields']['story_custom_view_link']['table'] = 'views';
+  $handler->display->display_options['fields']['story_custom_view_link']['field'] = 'story_custom_view_link';
+  $handler->display->display_options['fields']['story_custom_view_link']['label'] = 'View';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
@@ -2941,6 +3430,118 @@ print \'Status not found.\';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'counter' => 'counter',
+    'title' => 'title',
+    'edit_node' => 'edit_node',
+    'nid' => 'nid',
+    'uid' => 'uid',
+    'field_first_name' => 'field_first_name',
+    'field_last_name' => 'field_last_name',
+    'field_story_category' => 'field_story_category',
+    'name' => 'name',
+    'field_story_schedule_date_time' => 'field_story_schedule_date_time',
+    'changed' => 'changed',
+    'field_story_schedule_date_time_1' => 'field_story_schedule_date_time_1',
+    'field_story_source_type' => 'field_story_source_type',
+    'story_custom_view_link' => 'story_custom_view_link',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'counter' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'uid' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_first_name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_last_name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_story_category' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_story_schedule_date_time' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'changed' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_story_schedule_date_time_1' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_story_source_type' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'story_custom_view_link' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: Text area */
   $handler->display->display_options['header']['area']['id'] = 'area';
@@ -2964,11 +3565,18 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Title';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '[title]';
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -3041,13 +3649,16 @@ print \'Status not found.\';
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['label'] = 'Action';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
+  /* Field: Content: Source type */
+  $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'Video';
+  /* Field: Global: Story custom view link */
+  $handler->display->display_options['fields']['story_custom_view_link']['id'] = 'story_custom_view_link';
+  $handler->display->display_options['fields']['story_custom_view_link']['table'] = 'views';
+  $handler->display->display_options['fields']['story_custom_view_link']['field'] = 'story_custom_view_link';
+  $handler->display->display_options['fields']['story_custom_view_link']['label'] = 'View';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
@@ -3056,6 +3667,10 @@ print \'Status not found.\';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
@@ -3064,11 +3679,13 @@ print \'Status not found.\';
   $handler->display->display_options['filters']['type']['value'] = array(
     'videogallery' => 'videogallery',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
   $handler->display->display_options['filters']['title']['operator'] = 'allwords';
+  $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
@@ -3113,6 +3730,7 @@ print \'Status not found.\';
   $handler->display->display_options['filters']['nid']['id'] = 'nid';
   $handler->display->display_options['filters']['nid']['table'] = 'node';
   $handler->display->display_options['filters']['nid']['field'] = 'nid';
+  $handler->display->display_options['filters']['nid']['group'] = 1;
   $handler->display->display_options['filters']['nid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['nid']['expose']['operator_id'] = 'nid_op';
   $handler->display->display_options['filters']['nid']['expose']['label'] = 'video ID';
@@ -3148,6 +3766,7 @@ print \'Status not found.\';
   $handler->display->display_options['filters']['field_story_category_tid']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['filters']['field_story_category_tid']['field'] = 'field_story_category_tid';
   $handler->display->display_options['filters']['field_story_category_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_story_category_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_story_category_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_story_category_tid']['expose']['operator_id'] = 'field_story_category_tid_op';
   $handler->display->display_options['filters']['field_story_category_tid']['expose']['label'] = 'Category';
@@ -3182,6 +3801,56 @@ print \'Status not found.\';
   $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
   $handler->display->display_options['filters']['is_current']['value'] = '1';
+  $handler->display->display_options['filters']['is_current']['group'] = 1;
+  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
+  $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
+  $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
+  $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
+  $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_story_archive_value']['group'] = 1;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_story_source_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['operator_id'] = 'field_story_source_type_value_op';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['label'] = 'Source type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['operator'] = 'field_story_source_type_value_op';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['identifier'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
   /* Filter criterion: Workbench Moderation: State */
   $handler->display->display_options['filters']['state']['id'] = 'state';
   $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
@@ -3189,11 +3858,17 @@ print \'Status not found.\';
   $handler->display->display_options['filters']['state']['value'] = array(
     'published' => 'published',
   );
-  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
-  $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
-  $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
-  $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
-  $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['state']['group'] = 2;
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['id'] = 'field_story_source_type_value_1';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['value'] = 'migrated';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['group'] = 2;
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['operator_id'] = 'field_story_source_type_value_1_op';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['label'] = 'Source type (field_story_source_type)';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['operator'] = 'field_story_source_type_value_1_op';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['identifier'] = 'field_story_source_type_value_1';
   $handler->display->display_options['path'] = 'my-published-video';
 
   /* Display: My video queue */
@@ -3219,16 +3894,17 @@ print \'Status not found.\';
   $handler->display->display_options['style_options']['columns'] = array(
     'counter' => 'counter',
     'title' => 'title',
+    'edit_node' => 'edit_node',
     'nid' => 'nid',
     'uid' => 'uid',
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
     'field_story_category' => 'field_story_category',
-    'nothing' => 'nothing',
+    'name' => 'name',
     'changed' => 'changed',
     'state' => 'state',
-    'edit_node' => 'nothing_1',
     'nothing_1' => 'nothing_1',
+    'story_custom_view_link' => 'story_custom_view_link',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -3240,6 +3916,11 @@ print \'Status not found.\';
     'title' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -3275,7 +3956,9 @@ print \'Status not found.\';
       'separator' => '',
       'empty_column' => 0,
     ),
-    'nothing' => array(
+    'name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -3294,12 +3977,12 @@ print \'Status not found.\';
       'separator' => '',
       'empty_column' => 0,
     ),
-    'edit_node' => array(
+    'nothing_1' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'nothing_1' => array(
+    'story_custom_view_link' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -3330,11 +4013,19 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Title';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '[title]';
+  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -3387,18 +4078,17 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['label'] = 'Status';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
-  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
+  $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
+  /* Field: Global: Story custom view link */
+  $handler->display->display_options['fields']['story_custom_view_link']['id'] = 'story_custom_view_link';
+  $handler->display->display_options['fields']['story_custom_view_link']['table'] = 'views';
+  $handler->display->display_options['fields']['story_custom_view_link']['field'] = 'story_custom_view_link';
+  $handler->display->display_options['fields']['story_custom_view_link']['label'] = 'View';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
@@ -3608,16 +4298,17 @@ print \'Status not found.\';
   $handler->display->display_options['style_options']['columns'] = array(
     'counter' => 'counter',
     'title' => 'title',
+    'edit_node' => 'edit_node',
     'nid' => 'nid',
     'uid' => 'uid',
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
     'field_story_category' => 'field_story_category',
-    'nothing' => 'nothing',
+    'name' => 'name',
     'changed' => 'changed',
     'state' => 'state',
-    'edit_node' => 'nothing_1',
     'nothing_1' => 'nothing_1',
+    'story_custom_view_link' => 'story_custom_view_link',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -3629,6 +4320,11 @@ print \'Status not found.\';
     'title' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -3664,7 +4360,9 @@ print \'Status not found.\';
       'separator' => '',
       'empty_column' => 0,
     ),
-    'nothing' => array(
+    'name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -3683,12 +4381,12 @@ print \'Status not found.\';
       'separator' => '',
       'empty_column' => 0,
     ),
-    'edit_node' => array(
+    'nothing_1' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'nothing_1' => array(
+    'story_custom_view_link' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -3719,11 +4417,19 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Title';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '[title]';
+  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -3776,18 +4482,17 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['label'] = 'Status';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
-  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = TRUE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
+  $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
+  /* Field: Global: Story custom view link */
+  $handler->display->display_options['fields']['story_custom_view_link']['id'] = 'story_custom_view_link';
+  $handler->display->display_options['fields']['story_custom_view_link']['table'] = 'views';
+  $handler->display->display_options['fields']['story_custom_view_link']['field'] = 'story_custom_view_link';
+  $handler->display->display_options['fields']['story_custom_view_link']['label'] = 'View';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
@@ -3990,7 +4695,6 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -4329,7 +5033,6 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -4637,7 +5340,6 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Syndication */
   $handler->display->display_options['fields']['field_story_syndication']['id'] = 'field_story_syndication';

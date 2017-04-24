@@ -28,13 +28,13 @@
                 }
             });
             
-            $('#edit-path-pathauto').click(function() {
+           /* $('#edit-path-pathauto').click(function() {
               if ($("#edit-path-pathauto").is(":checked")) {                
                 $("#edit-path-alias").attr('readonly', 'readonly');
               } else {                
                 $("#edit-path-alias").removeAttr('readonly');
               }  
-            });
+            });*/
             
             
             jQuery('input[name="field_story_schedule_date_time[und][0][value][date]"]').keydown(false);
@@ -101,8 +101,8 @@
           
 
             // Code for client Title field value set Null
-            $('#edit-field-story-configurations-und-comment').click(function() {
-                if ($("#edit-field-story-configurations-und-comment").is(":not(:checked)")) {
+            $('#edit-field-story-configurations-und-commentbox').click(function() {
+                if ($("#edit-field-story-configurations-und-commentbox").is(":not(:checked)")) {
                     $("#edit-field-story-comment-question-und-0-value").val('');
                 }
             });
@@ -238,9 +238,3 @@
     });
 });
 
-// open save search in popup
-function showrelatedpopup(iframeurl)
-{
-    jQuery.colorbox({href: iframeurl, iframe: true, width: "1030", height: "730", fixed: true});
-
-}

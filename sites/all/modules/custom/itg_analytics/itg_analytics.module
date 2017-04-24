@@ -246,6 +246,125 @@ function _get_last_24_hour_visited_node_ids_for_analytics_data() {
 }
 
 /**
+ * Function returns nodeids array based on analytics data within 24 hour for 
+ * newsletter data for top_20_shared story
+ */
+function _get_last_24_hour_visited_node_ids_for_top_20_shared_story() {
+  $current_time_stamp = time();
+  $final_nodeid_array = array();
+  $data_count_node_share = array(
+    'twitter_share' => array(),
+    'facebook_share' => array(),
+    'google_share' => array(),
+  );
+  $timestamp_24_hour_before = strtotime('-24 hours', $current_time_stamp);
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    if ($con) {
+      //Query to get nodeids which is shared within 24 hour START.
+      $front_user_activity = $con->front_user_activity;
+      $front_user_activity_condition = array('timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $front_user_activity_result = $front_user_activity->find($front_user_activity_condition);
+
+      foreach ($front_user_activity_result as $front_user_activity_document) {
+        if ($front_user_activity_document['activity'] == 'twitter_share') {
+          $data_count_node_share['twitter_share'][] = $front_user_activity_document['nid'];
+        }
+
+        if ($front_user_activity_document['activity'] == 'google_share') {
+          $data_count_node_share['google_share'][] = $front_user_activity_document['nid'];
+        }
+
+        if ($front_user_activity_document['activity'] == 'facebook_share') {
+          $data_count_node_share['facebook_share'][] = $front_user_activity_document['nid'];
+        }
+      }
+      $array_merge = array_merge($data_count_node_share['twitter_share'], $data_count_node_share['google_share']);
+      $analytics_data_array['data_count_node_share'] = array_merge($array_merge, $data_count_node_share['facebook_share']);
+      //END.
+    }
+  }
+  // Process entire associative array and prepare single array of nodeids.
+  foreach ($analytics_data_array as $array_key => $values) {
+    if (is_array($analytics_data_array[$array_key])) {
+      foreach ($analytics_data_array[$array_key] as $node_id) {
+        $final_nodeid_array[] = $node_id;
+      }
+    }
+  }
+  // Get unique nodeids which is shared liked and commented within 24 hour.
+  return array_unique($final_nodeid_array);
+}
+
+/**
+ * Function returns nodeids array based on analytics data within 24 hour for 
+ * newsletter data for top_20_trending story
+ */
+function _get_last_24_hour_visited_node_ids_for_top_20_trending_story() {
+  $current_time_stamp = time();
+  $data_count_node_like = array();
+  $final_nodeid_array = array();
+  $data_count_node_share = array(
+    'twitter_share' => array(),
+    'facebook_share' => array(),
+    'google_share' => array(),
+  );
+  $timestamp_24_hour_before = strtotime('-24 hours', $current_time_stamp);
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    if ($con) {
+      // Query to get node views count which is viewed within 24 hour START.
+      $pagedetails_collection = $con->pagedetails;
+      $condition = array('viewtime' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $result = $pagedetails_collection->find($condition);
+      foreach ($result as $document) {
+        $data_count_node_view[] = $document['nid'];
+      }
+      $analytics_data_array['node_view_count'] = $data_count_node_view;
+      //END.
+      // Query to get nodeids which is liked within 24 hour START.
+      $count_collection = $con->itg_custom_flag_count;
+      // Appended 0 as in mongo database 0 is going.
+      $count_condition = array('timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $count_result = $count_collection->find($count_condition);
+      foreach ($count_result as $count_document) {
+        // Remove 0 which is appended during insert in mongo only case on story.
+        if (_get_node_type_from($count_document['nid']) == "story") {
+          $actualy_node_id = substr($count_document['nid'], 1);
+        }
+        else {
+          $actualy_node_id = $count_document['nid'];
+        }
+        $data_count_node_like[] = $actualy_node_id;
+      }
+      $analytics_data_array['data_count_node_like'] = $data_count_node_like;
+      //END.
+      //Query to get nodeids which got comments within 24 HOUR START.
+      $comment_count = $con->itgcms_comment;
+      $comment_condition = array('timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $comment_count_result = $comment_count->find($comment_condition);
+
+      foreach ($comment_count_result as $comment_document) {
+        $data_count_node_comment[] = $comment_document['page_id'];
+      }
+
+      $analytics_data_array['data_count_node_comment'] = $data_count_node_comment;
+      //END.
+    }
+  }
+  // Process entire associative array and prepare single array of nodeids.
+  foreach ($analytics_data_array as $array_key => $values) {
+    if (is_array($analytics_data_array[$array_key])) {
+      foreach ($analytics_data_array[$array_key] as $node_id) {
+        $final_nodeid_array[] = $node_id;
+      }
+    }
+  }
+  // Get unique nodeids which is shared liked and commented within 24 hour.
+  return array_unique($final_nodeid_array);
+}
+
+/**
  * Function which gives sorted nodeids according to analytics data.
  * Hight weight is on top and low weight in on low.
  * @return array
@@ -261,10 +380,49 @@ function _get_most_popular_nodes_based_on_analytics() {
   return $data;
 }
 
+
+/**
+ * Function which gives sorted nodeids according to analytics data based on shared and trending.
+ * Hight weight is on top and low weight in on low.
+ * @return array
+ */
+function _get_most_popular_nodes_based_on_trending_shared_analytics($newsletter_content) {
+  $data = array();
+  
+  //  Top 20 Shared story within 24 hours are returning from here
+  if ($newsletter_content == 'top_20_shared') { 
+    $nodes_shared = _get_last_24_hour_visited_node_ids_for_top_20_shared_story();
+    foreach ($nodes_shared as $sh_node) {
+      $data_sh[$sh_node] = itg_analytics_get_node_analytics_data($sh_node);
+    }
+  }
+  
+  //  Top 20 Trending story within 24 hours are returning from here
+  if ($newsletter_content == 'top_20_trending') {
+    $nodes_trending = _get_last_24_hour_visited_node_ids_for_top_20_trending_story();
+    foreach ($nodes_trending as $tr_node) {
+      $data_tr[$tr_node] = itg_analytics_get_node_analytics_data($tr_node);
+    }
+  }
+
+  $data_merge = array_merge($data_sh, $data_tr);
+  $data_unique = array_unique($data_merge);
+  $data = array_slice($data_unique, 0, 20);
+  
+  // Sort according to analytics data.
+  arsort($data);
+  return $data;
+}
+
+
 /**
  * Function is responsible to updating analytics data into table.
  */
-function itg_update_analytics_node_count_data() {
+function itg_update_analytics_node_count_data($newsletter_content) {
+  if (!empty($newsletter_content) && $newsletter_content == 'top_20_shared' || $newsletter_content == 'top_20_trending') {
+    $most_popular_nodes = _get_most_popular_nodes_based_on_trending_shared_analytics($newsletter_content);
+  }
+  
   $most_popular_nodes = _get_most_popular_nodes_based_on_analytics();
   // Frist delete all the data from table.
   try {
@@ -291,7 +449,7 @@ function itg_update_analytics_node_count_data() {
 }
 
 /**
- * 
+ * Implementation of _get_node_type_from
  * @param int $nid
  */
 function _get_node_type_from($nid) {
@@ -300,21 +458,4 @@ function _get_node_type_from($nid) {
       ->condition('n.nid', $nid, '=');
 
   return $query->execute()->fetchField();
-}
-
-/**
- * Implementation of hook_views_query_alter
- * {@inheritdoc}
- */
-function itg_analytics_views_query_alter(&$view, &$query) {
-  if ($view->name == 'story_widget' && $view->current_display == 'most_popular') {
-//    $query = (string)$view->build_info['query'];
-//    echo $query;
-  }
-}
-
-
-function itg_analytics_views_pre_execute(&$view) {
-//  $query = (string)$view->build_info['query'];
-//  echo $query;
 }

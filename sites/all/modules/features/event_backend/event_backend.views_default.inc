@@ -183,6 +183,7 @@ function event_backend_views_default_views() {
   $handler->display->display_options['style_options']['columns'] = array(
     'views_bulk_operations' => 'views_bulk_operations',
     'nid' => 'nid',
+    'php_1' => 'php_1',
     'counter' => 'counter',
     'title' => 'title',
     'created' => 'created',
@@ -196,7 +197,7 @@ function event_backend_views_default_views() {
     'status' => 'status',
     'view_node' => 'nothing',
     'edit_node' => 'nothing',
-    'delete_node' => 'nothing',
+    'delete_node' => 'delete_node',
     'nothing' => 'nothing',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
@@ -209,6 +210,11 @@ function event_backend_views_default_views() {
     'nid' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'php_1' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -499,6 +505,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['label'] = '';
+  $handler->display->display_options['fields']['delete_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['delete_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['delete_node']['alter']['text'] = '<span class="delete-link">Delete </span>';
   $handler->display->display_options['fields']['delete_node']['element_label_colon'] = FALSE;
@@ -510,11 +517,11 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Content: Updated date */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'node';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -605,7 +612,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
     'status' => 'status',
     'view_node' => 'nothing',
     'edit_node' => 'nothing',
-    'delete_node' => 'nothing',
+    'delete_node' => 'delete_node',
     'nothing' => 'nothing',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
@@ -878,11 +885,11 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Content: Updated date */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'node';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -964,6 +971,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
     'views_bulk_operations' => 'views_bulk_operations',
     'nid' => 'nid',
     'counter' => 'counter',
+    'path' => 'path',
     'title' => 'title',
     'created' => 'created',
     'changed' => 'changed',
@@ -976,7 +984,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
     'status' => 'status',
     'view_node' => 'nothing',
     'edit_node' => 'nothing',
-    'delete_node' => 'nothing',
+    'delete_node' => 'delete_node',
     'nothing' => 'nothing',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
@@ -994,6 +1002,11 @@ echo itg_event_registration_registered_user_detail($row->nid);
       'empty_column' => 0,
     ),
     'counter' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'path' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -1275,6 +1288,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['label'] = '';
+  $handler->display->display_options['fields']['delete_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['delete_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['delete_node']['alter']['text'] = '<span class="delete-link">Delete </span>';
   $handler->display->display_options['fields']['delete_node']['element_label_colon'] = FALSE;
@@ -1286,11 +1300,11 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Content: Updated date */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'node';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -1371,6 +1385,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['style_options']['columns'] = array(
     'views_bulk_operations' => 'views_bulk_operations',
     'nid' => 'nid',
+    'php_1' => 'php_1',
     'counter' => 'counter',
     'title' => 'title',
     'created' => 'created',
@@ -1384,7 +1399,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
     'status' => 'status',
     'view_node' => 'nothing',
     'edit_node' => 'nothing',
-    'delete_node' => 'nothing',
+    'delete_node' => 'delete_node',
     'nothing' => 'nothing',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
@@ -1397,6 +1412,11 @@ echo itg_event_registration_registered_user_detail($row->nid);
     'nid' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'php_1' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -1687,6 +1707,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['label'] = '';
+  $handler->display->display_options['fields']['delete_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['delete_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['delete_node']['alter']['text'] = '<span class="delete-link">Delete </span>';
   $handler->display->display_options['fields']['delete_node']['element_label_colon'] = FALSE;
@@ -1698,11 +1719,11 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Content: Updated date */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'node';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -3263,7 +3284,7 @@ echo  $baseurl;
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: New title */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -3334,7 +3355,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: New title */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -3704,7 +3725,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['relationships']['field_program_schedule_value']['table'] = 'field_data_field_program_schedule';
   $handler->display->display_options['relationships']['field_program_schedule_value']['field'] = 'field_program_schedule_value';
   $handler->display->display_options['relationships']['field_program_schedule_value']['delta'] = '-1';
-  /* Field: Field: Kicker */
+  /* Field: Field: Session Title  */
   $handler->display->display_options['fields']['field_story_expert_name']['id'] = 'field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['table'] = 'field_data_field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['field'] = 'field_story_expert_name';
@@ -3812,7 +3833,7 @@ return itg_event_backend_get_event_node();
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Field: Kicker */
+  /* Field: Field: Session Title  */
   $handler->display->display_options['fields']['field_story_expert_name']['id'] = 'field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['table'] = 'field_data_field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['field'] = 'field_story_expert_name';
@@ -3851,7 +3872,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['title']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: New title */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -3931,7 +3952,7 @@ return itg_event_backend_get_event_node();
     'image_style' => 'event_speaker_program_72x72',
     'image_link' => '',
   );
-  /* Field: Content: New title */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -4219,7 +4240,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['title']['alter']['path'] = '[php]/speaker-details?speaker=[nid]';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: New title */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';

@@ -683,7 +683,7 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = 'POSTED BY';
   $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
-  /* Field: Content: Start Date */
+  /* Field: Content: Date */
   $handler->display->display_options['fields']['field_poll_start_date']['id'] = 'field_poll_start_date';
   $handler->display->display_options['fields']['field_poll_start_date']['table'] = 'field_data_field_poll_start_date';
   $handler->display->display_options['fields']['field_poll_start_date']['field'] = 'field_poll_start_date';
@@ -965,7 +965,7 @@ function feature_for_poll_views_default_views() {
     'poll' => 'poll',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Start Date (field_poll_start_date) */
+  /* Filter criterion: Content: Date (field_poll_start_date) */
   $handler->display->display_options['filters']['field_poll_start_date_value']['id'] = 'field_poll_start_date_value';
   $handler->display->display_options['filters']['field_poll_start_date_value']['table'] = 'field_data_field_poll_start_date';
   $handler->display->display_options['filters']['field_poll_start_date_value']['field'] = 'field_poll_start_date_value';
@@ -1067,7 +1067,7 @@ function feature_for_poll_views_default_views() {
     'poll' => 'poll',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Start Date (field_poll_start_date) */
+  /* Filter criterion: Content: Date (field_poll_start_date) */
   $handler->display->display_options['filters']['field_poll_start_date_value']['id'] = 'field_poll_start_date_value';
   $handler->display->display_options['filters']['field_poll_start_date_value']['table'] = 'field_data_field_poll_start_date';
   $handler->display->display_options['filters']['field_poll_start_date_value']['field'] = 'field_poll_start_date_value';
@@ -1235,31 +1235,6 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Bulk operations: Content */
-  $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
-  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
-  $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '0';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['row_clickable'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
-    'action::node_publish_action' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 1,
-      'override_label' => 0,
-      'label' => '',
-    ),
-    'action::node_unpublish_action' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 1,
-      'override_label' => 0,
-      'label' => '',
-    ),
-  );
   /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
   $handler->display->display_options['fields']['counter']['table'] = 'views';
@@ -1297,7 +1272,7 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = 'POSTED BY';
   $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
-  /* Field: Content: Start Date */
+  /* Field: Content: Date */
   $handler->display->display_options['fields']['field_poll_start_date']['id'] = 'field_poll_start_date';
   $handler->display->display_options['fields']['field_poll_start_date']['table'] = 'field_data_field_poll_start_date';
   $handler->display->display_options['fields']['field_poll_start_date']['field'] = 'field_poll_start_date';
@@ -1501,7 +1476,7 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['filters']['uid_current']['field'] = 'uid_current';
   $handler->display->display_options['filters']['uid_current']['relationship'] = 'uid';
   $handler->display->display_options['filters']['uid_current']['value'] = '1';
-  /* Filter criterion: Content: ITG State (field_poll_itg_state) */
+  /* Filter criterion: Content: Other Item (field_poll_itg_state) */
   $handler->display->display_options['filters']['field_poll_itg_state_value']['id'] = 'field_poll_itg_state_value';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['table'] = 'field_data_field_poll_itg_state';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['field'] = 'field_poll_itg_state_value';
@@ -1731,7 +1706,7 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = 'POSTED BY';
   $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
-  /* Field: Content: Start Date */
+  /* Field: Content: Date */
   $handler->display->display_options['fields']['field_poll_start_date']['id'] = 'field_poll_start_date';
   $handler->display->display_options['fields']['field_poll_start_date']['table'] = 'field_data_field_poll_start_date';
   $handler->display->display_options['fields']['field_poll_start_date']['field'] = 'field_poll_start_date';
@@ -1929,7 +1904,7 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '0';
-  /* Filter criterion: Content: ITG State (field_poll_itg_state) */
+  /* Filter criterion: Content: Other Item (field_poll_itg_state) */
   $handler->display->display_options['filters']['field_poll_itg_state_value']['id'] = 'field_poll_itg_state_value';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['table'] = 'field_data_field_poll_itg_state';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['field'] = 'field_poll_itg_state_value';

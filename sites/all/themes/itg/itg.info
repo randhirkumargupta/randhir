@@ -77,6 +77,8 @@ stylesheets[all][] = css/media.css
 scripts[] = js/slick.js
 scripts[] = js/jquery.liMarquee.js
 scripts[] = js/ripple.js
+scripts[] = js/bootstrap.min.js
+scripts[] = js/stickyMojo.js
 scripts[] = js/script.js
 
 

@@ -1,11 +1,13 @@
 <?php
-if (!empty($data)) :
+// Handel case if there is not any bigstory selected in widget then hide all bug story.
+if (!empty($data['node_data'])) :
   global $base_url, $user;
   $is_videogallery = FALSE;
   $href = $base_url . '/' . drupal_get_path_alias("node/{$data['node_data']->nid}");
   $data_nid = "";
   $has_ajax = "";
   $photo_icon = "";
+  $video_icon = "";
   $image = "<img src='" . $base_url . drupal_get_path('theme', 'itg') . "/images/default_for_all.png' alt='' />";
   $share_desc = $share_desc_fb = "";
   if ($data['node_data']->type == 'videogallery') {
@@ -158,8 +160,9 @@ if (!empty($data)) :
                 $current_site_hash = strtolower($nodes_array_with_prefix[0]);
                 $current_entity_id = $nodes_array_with_prefix[1];
                 $related_data = itg_get_link_from_hash_and_entity_solr_search($current_entity_id, $current_site_hash);
+                $front_url = str_replace('-backend', '', $related_data->url);
                 if (!empty($related_data)) {
-                  print "<li>" . l($related_data->label, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</li>";
+                  print "<li>" . l($related_data->label, $front_url, array("attributes" => array("target" => "_blank"))) . "</li>";
                 }
               }
               ?>                       

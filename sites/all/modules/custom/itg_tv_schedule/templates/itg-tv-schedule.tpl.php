@@ -28,7 +28,6 @@ if($clicked_day == "")
    $clicked_day= $day;
 }
 ?>
-<div class = "tv_schedule">  <h1>TV Schedule</h1> </div>
 <!-- Listing shows and days option -->
 <div class="tv-schedule-parent">
     <ul class="no-bullet schedule-days">
@@ -105,14 +104,16 @@ if($clicked_day == "")
                          <td><b><?php print 'Schedule Time'; ?></b></td>
                          <td><b><?php print 'Days'; ?></b></td>
                          <td><b><?php print 'Program Name'; ?></b></td>
+                         <td><b><?php print 'Program Date'; ?></b></td>
                        </tr>
                     <tbody>
                         <?php foreach ($search as $val1): ?>  
-
+                        <?php $days_array = array('sun' => 'Sunday', 'mon' => 'Monday', 'tue' => 'Tuesday', 'wed' => 'Wednesday', 'thu' => 'Thursday', 'fri' => 'Friday', 'sat' => 'Saturday'); ?>  
                             <tr>
                                 <td><?php print $val1['time'].' (IST)'; ?></td>
-                                <td><?php print $val1['day']; ?></td>
+                                <td><?php print $days_array[strtolower($val1['day'])]; ?></td>
                                 <td><?php print ucfirst($val1['program']); ?></td>
+                                <td><?php print ucfirst($val1['program date']); ?></td>
                             </tr>
 
                         <?php endforeach; ?>

@@ -28,21 +28,33 @@ function get_itg_destination_id($table_name, $sourceid) {
 function ordering_set_of_content($node, $count) {  
   
   $nid = $node->nid;
-  $cat_id = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
-  
-  if (!empty($cat_id)) {
-    $query = db_insert('itg_widget_order')
+ // $cat_id = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+  if (isset($node->field_story_category['und'])) {
+    $cat_id = $node->field_story_category['und'];
+      foreach ($cat_id as $category) {
+         $query = db_insert('itg_widget_order')
         ->fields(array(
           'nid' => $nid,
           'widget' => 'section_wise_widget',
           'content_type' => $node->type,
-          'cat_id' => $cat_id,
+          'cat_id' => $category['tid'],
           'weight' => $count,
           'extra' => "",
         ))
-        ->execute();        
-  }
-    
+        ->execute();
+         
+       $query = db_insert('itg_widget_order')
+        ->fields(array(
+          'nid' => $nid,
+            'widget' => 'section_wise_widget',
+            'content_type' => 'All',
+            'cat_id' => $category['tid'],
+            'weight' => $count,
+            'extra' => '',
+        ))
+        ->execute();          
+      }
+    }   
 }    
  
 
@@ -186,8 +198,8 @@ function itg_db_migrate_bylines($byline_nid, $story_nid){
  * Implement function for image
  */
 function itg_dbmigrate_imagepath_url($img_url) {
-  $img = explode('/images/' , $img_url);
-  return '/var/www/itgcms/sites/default/files/images/'.$img[1];
+  $img = explode('/indiatoday/' , $img_url);
+  return '/var/www/itgcms/sites/default/files/indiatoday/'.$img[1];
 }
 
 /**
@@ -196,10 +208,26 @@ function itg_dbmigrate_imagepath_url($img_url) {
 function itg_dbmigrate_menu() {
   $items['itg-clean-story'] = array(
     'title' => 'api callback menu',
-    'page callback' => '_aviationweekly_pluck_author_xml_create',
+    'page callback' => 'itg_db_migrate_index',
     'access callback' => TRUE,
-    //'access arguments' => array('access rundown content'),
-    'file' => 'scripts/clean_userxml.inc',
   );
   return $items;
+}
+
+function itg_db_migrate_index() {
+  $xml_path = 'sites/default/files' . '/xml_file_newcutxml/index/';
+  $path = 'sites/default/files/migrate/xml_file/stories';
+  $dom = new DOMDocument('1.0', 'utf-8');
+  $element = $dom->createElement('content');
+  foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as $filename) {
+    $rest = substr($filename, -4);
+    if($rest == ".xml"){
+      $filesd = end(explode('/', $filename));
+      $filess = str_replace('.xml', '', $filesd);
+      $source = $dom->createElement('sourceid', $filess);
+      $element->appendChild($source);
+    }        
+  }
+  $dom->appendChild($element);
+  $dom->save($xml_path . 'index.xml');
 }

@@ -11,6 +11,11 @@
 function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
   global $base_url;
   global $user;
+  if($user->uid) {
+  $cookie = $_COOKIE['Drupal_visitor_itgcms_survey_'.arg(1).'_'.$user->uid];
+  } else {
+   $cookie = $_COOKIE['Drupal_visitor_itgcms_survey_'.arg(1)];  
+  }
   
   //Get node of current survey
   if($node_id) {
@@ -110,10 +115,27 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
       
       
       //Media info
-      $media = $question_detail[$question_arr['value']]->field_survey_add_media[LANGUAGE_NONE][0]['uri'];
-      $media_type = strtolower(substr(strrchr($media, '.'), 1));
-      $media_path = $base_url.str_replace('public://', '/sites/default/files/', $media);
-      
+//      $media = $question_detail[$question_arr['value']]->field_survey_add_media[LANGUAGE_NONE][0]['uri'];
+//      $media_type = strtolower(substr(strrchr($media, '.'), 1));
+//      $media_path = $base_url.str_replace('public://', '/sites/default/files/', $media);
+       if ($question_detail[$question_arr['value']]->field_question_media[LANGUAGE_NONE][0]['value'] == 'Video') {
+
+         $videid = $question_detail[$question_arr['value']]->field_question_video[LANGUAGE_NONE][0]['fid'];
+
+         if (function_exists('itg_videogallery_get_videoid_new')) {
+          $video_ids = itg_videogallery_get_videoid_new($videid);
+           $question_media = '<iframe width="740" height="447" frameborder="0" scrolling="no"
+                                                src="https://www.dailymotion.com/embed/video/'.$video_ids.'?autoplay=0&ui-logo=1&mute=1&ui-start-screen-info"
+                                                allowfullscreen></iframe>';
+        }
+      }
+      if ($question_detail[$question_arr['value']]->field_question_media[LANGUAGE_NONE][0]['value'] == 'Photo') {
+         $question_media_uri = $question_detail[$question_arr['value']]->field_question_image[LANGUAGE_NONE][0]['uri'];
+                   $extra_large_image_url = image_style_url("image750x447", $question_media_uri);
+
+        $question_media = '<img src="' . $extra_large_image_url . '" width="750" alt="" />';
+        }
+
       //Submit button text
       if(($total_num_of_ques-1) === $num){
         $button_text = 'Submit';
@@ -235,29 +257,14 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
         );
       }
       
-      if (!empty($media_type)) {
-        if ($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif') {
-          $form['media' . $num] = array(
+    
+         $form['media' . $num] = array(
               '#type' => 'markup',
-              '#prefix' => '<div class="survey-media">',
-              '#markup' => '<img src="' . $media_path . '" height="100" width="130" alt="" />',
+              '#prefix' => '<div>',
+              '#markup' => $question_media,
               '#suffix' => '</div>',
           );
-        }
-        else {
-          $form['media' . $num] = array(
-              '#type' => 'markup',
-              '#prefix' => '<div class="survey-media">',
-              '#markup' => '<video width="140" height="145" controls="controls">
-                <source src="' . $media . '" type="video/mp4"> 
-                 <object> 
-                   <embed  src="' . $media . '"> 
-                 </object> 
-               </video>',
-              '#suffix' => '</div>',
-          );
-        }
-      }
+      
       $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
       
       // Render multiple submit buttons, if questions are displaying one-by-one
@@ -267,6 +274,11 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
               '#type' => 'markup',
               '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>This Survey has been expired. So you can not submit!</strong></div>',
           );
+        } elseif(isset($cookie)){
+        $form['survey_has_been_already_taken' . $num] = array(
+            '#type' => 'markup',
+            '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>Sorry! You can not proceed, you have already taken this survey!</strong></div>',
+        );
         } else {
           $form['survey_submit_' . $num] = array(
               '#type' => 'submit',
@@ -371,6 +383,12 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
         $form['survey_has_been_expired' . $num] = array(
             '#type' => 'markup',
             '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>This Survey has been expired. So you can not submit!</strong></div>',
+        );
+      } 
+      elseif(isset($cookie)){
+        $form['survey_has_been_already_taken' . $num] = array(
+            '#type' => 'markup',
+            '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>Sorry! You can not proceed, you have already taken this survey!</strong></div>',
         );
       } else {
         $form['survey_submit_' . $num] = array(
