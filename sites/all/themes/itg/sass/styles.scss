@@ -1531,6 +1531,11 @@ footer{
         }
     }
 }
+.trending-list{
+  .top-takes-video-container{
+    border: 1px solid $border-color;
+  }
+}
 /*End CSS trending-videos Home  page*/
 /*Start Search page css*/
 .view-front-end-global-search{
