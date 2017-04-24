@@ -5,7 +5,6 @@
  * The ITG Print Team Integration module.
  *
  */
-
 // Load print_team_story_xml.inc from the itg_print_team module.
 module_load_include('inc', 'itg_print_team', 'includes/print_team_story_xml');
 
@@ -41,7 +40,7 @@ function itg_print_team_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/print_team_submit_idea.inc',
   );
-  
+
   $items['print-team-ideas/csv'] = array(
     'title' => 'Submit Idea',
     'page callback' => 'itg_print_team_ideas_csv',
@@ -49,7 +48,7 @@ function itg_print_team_menu() {
     'access arguments' => array('submit idea for story'),
     'type' => MENU_CALLBACK,
   );
-  
+
   return $items;
 }
 
@@ -70,25 +69,23 @@ function itg_print_team_theme($existing, $type, $theme, $path) {
     'itg_print_team_idea_association_mail' => array(
       'variables' => array('node' => NULL, 'op_type' => NULL),
       'template' => 'templates/print-team-idea-association-mail',
-    ), 
+    ),
     'itg_print_team_notification_mail' => array(
       'variables' => array('node' => NULL),
       'template' => 'templates/print-team-notification-mail',
     ),
-      
-   'print_team_integration_node_form' => array(
+    'print_team_integration_node_form' => array(
       'arguments' => array('form' => NULL),
       'template' => 'print-team-integration-node-form',
       'path' => drupal_get_path('module', 'itg_print_team') . '/templates',
       'render element' => 'form',
     ),
-      
   );
 
   return $themes;
 }
 
-/**************************Form Related hooks******************************** */
+/* * ************************Form Related hooks******************************** */
 
 /**
  * Implement hook_form_alter
@@ -98,33 +95,62 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
   global $base_url, $user;
 
   if ($form_id == 'print_team_integration_node_form') {
+    //code by shravan
+    $magazine_field = 'field_pti_magazine';
+    $pti_issue_field = 'field_pti_issue';
+    
+    if (isset($form[$magazine_field][LANGUAGE_NONE]['#default_value'][0]) && !isset($form_state['triggering_element'])) {
+        $magazine_id = $form[$magazine_field][LANGUAGE_NONE]['#default_value'][0];
+    }
+    else {
+        $magazine_id = !empty($form_state['input'][$magazine_field][LANGUAGE_NONE]) ? $form_state['input'][$magazine_field][LANGUAGE_NONE] : '' ;
+    }
+    
+    // add ajax on magazine field
+    $form[$magazine_field][LANGUAGE_NONE]['#ajax'] = array(
+        'event' => 'change',
+        'callback' => 'itg_magazine_ajax_callback',
+        'wrapper' => $pti_issue_field . '_replace',
+    );
+    
+    // Setup supplement select
+    $form[$pti_issue_field][LANGUAGE_NONE]['#prefix'] = '<div id="' . $pti_issue_field . '_replace">';
+    $form[$pti_issue_field][LANGUAGE_NONE]['#suffix'] = '</div>';
 
+    if (function_exists('get_issue_by_magazine')) {
+        $form[$pti_issue_field][LANGUAGE_NONE]['#options'] = get_issue_by_magazine($magazine_id);
+    }
+    //end
+    
     // Change page title
     drupal_set_title(t('Submit Your Idea'));
-
     // Add cancel button
     $form['title']['#description'] = '<p>' . t('Please enter idea headline .') . '</p>';
 
     // After approve, show rule to user
-    if ($form['#node']->nid && $form['#node']->field_pti_words_limit[LANGUAGE_NONE][0]['value']) {
+    if (!empty($form['#node']->nid) && !empty($form['#node']->field_pti_words_limit[LANGUAGE_NONE][0]['value'])) {
       $form['brief_idea_limit'] = array(
-          '#type' => 'item',
-          '#markup' => '<div class="idea-brief-limit">Idea Brief Limit: <strong>' . $form['#node']->field_pti_words_limit[LANGUAGE_NONE][0]['value'] . ' Words</strong></div><div class="idea-last-day-submission">Last Day of submission: <strong>' . date('d/m/Y', strtotime($form['#node']->field_survey_end_date[LANGUAGE_NONE][0]['value'])) . '</strong></div>',
-          '#weight' => -9,
+        '#type' => 'item',
+        '#markup' => '<div class="idea-brief-limit">Idea Brief Limit: <strong>' . $form['#node']->field_pti_words_limit[LANGUAGE_NONE][0]['value'] . ' Words</strong></div><div class="idea-last-day-submission">Last Day of submission: <strong>' . date('d/m/Y', strtotime($form['#node']->field_survey_end_date[LANGUAGE_NONE][0]['value'])) . '</strong></div>',
+        '#weight' => -9,
       );
     }
 
     // Add cancel button
     $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), 'manage-print-team-not-decided', array('attributes' => array('class' => 'button'))),
-        '#weight' => 21,
-        '#value' => t('Cancel'),
+      '#markup' => l(t('Cancel'), 'manage-print-team-not-decided', array('attributes' => array('class' => 'button'))),
+      '#weight' => 21,
+      '#value' => t('Cancel'),
     );
 
     // Hide issue and magazine form edit page
-    $form['field_pti_issue']['#access'] = FALSE;
-    $form['field_pti_magazine']['#access'] = FALSE;
-    $form['actions']['submit']['#value'] = 'Submit';
+    //$form['field_pti_issue']['#access'] = FALSE;
+    //$form['field_pti_magazine']['#access'] = FALSE;
+    $form['field_pti_supplement']['#access'] = FALSE;
+    //$form['actions']['submit']['#value'] = 'Submit';
+    // Hide Rating and Mark as complete fields from node edit page
+    $form['field_pti_mark_as_complete']['#access'] = FALSE;
+    $form['field_story_rating']['#access'] = FALSE;
 
     // Unset meta tags
     unset($form['#metatags']);
@@ -135,21 +161,22 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
     $idea_review_flag = itg_print_team_check_approval_users();
 
     // Enable/Disable fields according to status and role
-    if ($form['#node']->nid) {
+    if (!empty($form['#node']->nid)) {
       if ($idea_review_flag) {
         if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] != 'Approved') {
-          $form['field_story_category']['#access'] = FALSE;
+//          $form['field_story_category']['#access'] = FALSE;
           $form['field_primary_cat_data']['#access'] = FALSE;
           unset($form['field_pti_print_media']);
-          $form['field_pti_issue']['#access'] = FALSE;
-          $form['field_pti_magazine']['#access'] = FALSE;
+          //$form['field_pti_issue']['#access'] = FALSE;
+          //$form['field_pti_magazine']['#access'] = FALSE;
+          $form['field_pti_supplement']['#access'] = FALSE;
           $form['field_story_rating']['#access'] = FALSE;
           $form['field_pti_magazine_kicker']['#access'] = FALSE;
         }
       }
       else {
         if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] != 'Approved') {
-          $form['field_story_category']['#access'] = FALSE;
+//          $form['field_story_category']['#access'] = FALSE;
           $form['field_primary_cat_data']['#access'] = FALSE;
           $form['field_pti_magazine_kicker']['#access'] = FALSE;
           unset($form['field_pti_print_media']);
@@ -159,18 +186,27 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         $form['field_pti_words_limit']['#access'] = FALSE;
         $form['field_survey_end_date']['#access'] = FALSE;
         $form['field_pti_issue']['#access'] = FALSE;
-        $form['field_pti_magazine']['#access'] = FALSE;
+        //$form['field_pti_magazine']['#access'] = FALSE;
+        $form['field_pti_supplement']['#access'] = FALSE;
         $form['field_story_rating']['#access'] = FALSE;
       }
-      
+
       // Disable change status radio button if status is "Approved" OR "Rejected"
       if ($form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved' || $form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Rejected') {
         $form['field_pti_idea_status']['#disabled'] = TRUE;
+        if (!array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) 
+                && !array_key_exists(EDITOR, $user->roles) 
+                && !array_key_exists(CO_ORDINATOR, $user->roles) 
+                && !array_key_exists(SITE_ADMIN, $user->roles)) {
+          $form['field_pti_issue']['#access'] = TRUE;
+          $form['field_pti_issue']['#disabled'] = TRUE;
+          $form['field_pti_magazine']['#disabled'] = TRUE;
+        }
       }
 
       // Get mark as completed type users arr
-      $mark_task_comp_users_only = itg_print_team_mark_complete_users_arr();
-      foreach($user->roles as $user_roles_arr) {
+      $mark_task_comp_users_only = itg_print_team_mark_complete_users_arr('Approve');
+      foreach ($user->roles as $user_roles_arr) {
         if (in_array($user_roles_arr, $mark_task_comp_users_only)) {
           $mark_task_comp_users_flag = TRUE;
         }
@@ -178,13 +214,14 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
           $mark_task_comp_users_flag = FALSE;
         }
       }
-
       // Put all fileds in non-editable mode, if task is completed OR mark type users
-      if ($form['#node']->field_pti_mark_as_complete[LANGUAGE_NONE][0]['value'] == 'completed' || $mark_task_comp_users_flag) {
+      if ((!empty($form['#node']->field_pti_mark_as_complete[LANGUAGE_NONE][0]['value']) && $form['#node']->field_pti_mark_as_complete[LANGUAGE_NONE][0]['value'] == 'completed') || $mark_task_comp_users_flag) {
         $form['title']['#disabled'] = TRUE;
         $form['field_pti_words_limit']['#disabled'] = TRUE;
         $form['field_survey_end_date']['#disabled'] = TRUE;
         $form['field_pti_magazine_kicker']['#disabled'] = TRUE;
+        $form['field_pti_issue']['#disabled'] = TRUE;
+        $form['field_pti_magazine']['#disabled'] = TRUE;
         $form['body']['#attributes'] = array('class' => array('itg-disabled-radio'));
         $form['field_story_category']['#attributes'] = array('class' => array('itg-disabled-radio'));
         $form['field_primary_cat_data']['#attributes'] = array('class' => array('itg-disabled-radio'));
@@ -195,47 +232,46 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
            jQuery(".text-summary-wrapper").hide();
           });', array('type' => 'inline', 'scope' => 'footer'));
       }
-  
+
       // Hide mark as complete field in case of completed only
-      if($form['#node']->field_pti_mark_as_complete[LANGUAGE_NONE][0]['value'] == 'completed'){
-         $form['field_pti_mark_as_complete']['#disabled'] = TRUE;
-      }
-      
+//      if($form['#node']->field_pti_mark_as_complete[LANGUAGE_NONE][0]['value'] == 'completed'){
+//         $form['field_pti_mark_as_complete']['#disabled'] = TRUE;
+//      }
       // Not allow to edit rating field for mark type users
-      if($mark_task_comp_users_flag) {
+      if ($mark_task_comp_users_flag) {
         $form['field_story_rating']['#disabled'] = TRUE;
       }
-    
+
       // Show mark as complete field to allowed users only
       $mark_task_as_complted_users = itg_print_team_check_mark_complete_users();
-      if ($mark_task_as_complted_users && $form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved') {
-        $form['field_pti_mark_as_complete']['#access'] = TRUE;
-      } else {
-        $form['field_pti_mark_as_complete']['#access'] = FALSE;
-      }
-      
+//      if ($mark_task_as_complted_users && $form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved') {
+//        $form['field_pti_mark_as_complete']['#access'] = TRUE;
+//      } else {
+//        $form['field_pti_mark_as_complete']['#access'] = FALSE;
+//      }
       // Show comment section in iframe
       $node_view_url = $base_url . '/node/' . $form['#node']->nid;
       $form['print_team_comment_form'] = array(
-          '#type' => 'item',
-          '#markup' => '<iframe src="' . $node_view_url . '?type=commentform" width="100%" height="600px" class="print-team-iframe-comment-form" frameBorder="0"></iframe>',
-          '#weight' => 100,
+        '#type' => 'item',
+        '#markup' => '<iframe src="' . $node_view_url . '?type=commentform" width="100%" height="600px" class="print-team-iframe-comment-form" frameBorder="0"></iframe>',
+        '#weight' => 100,
       );
-      
-    } else {
-      $form['field_story_category']['#access'] = FALSE;
+    }
+    else {
+//      $form['field_story_category']['#access'] = FALSE;
       $form['field_primary_cat_data']['#access'] = FALSE;
       $form['field_pti_words_limit']['#access'] = FALSE;
       $form['field_survey_end_date']['#access'] = FALSE;
       $form['field_pti_idea_status']['#access'] = FALSE;
       $form['field_pti_issue']['#access'] = FALSE;
-      $form['field_pti_magazine']['#access'] = FALSE;
+      //$form['field_pti_magazine']['#access'] = FALSE;
+      $form['field_pti_supplement']['#access'] = FALSE;
       $form['field_story_rating']['#access'] = FALSE;
       $form['field_pti_mark_as_complete']['#access'] = FALSE;
       $form['field_pti_magazine_kicker']['#access'] = FALSE;
       unset($form['field_pti_print_media']);
     }
-    
+
     $form['field_primary_cat_data']['#weight'] = 2;
     $form['field_pti_idea_submit_status']['#access'] = FALSE;
     $form['field_story_category'][LANGUAGE_NONE]['#title'] = 'Select Section <span class="form-required" title="This field is required.">*</span>';
@@ -260,7 +296,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
     $settings['base_url'] = $base_url;
     drupal_add_js(array('itg_print_team' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_print_team') . '/js/itg_print_team.js', array('weight' => 1));
-    
+
     $filtered_result = count($form['#substitutions']['#value']);
     if (arg(0) == 'manage-print-team-rejected' || arg(0) == 'manage-print-team-needs-modification' || arg(0) == 'manage-print-team-not-decided') {
 
@@ -270,10 +306,10 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       });', array('type' => 'inline', 'scope' => 'footer'));
     }
     else {
-      
-    $idea_review_flag = itg_print_team_check_approval_users();
-    $mark_task_comp_users_only = itg_print_team_mark_complete_users_arr();
-      foreach($user->roles as $user_roles_arr) {
+
+      $idea_review_flag = itg_print_team_check_approval_users();
+      $mark_task_comp_users_only = itg_print_team_mark_complete_users_arr();
+      foreach ($user->roles as $user_roles_arr) {
         if (in_array($user_roles_arr, $mark_task_comp_users_only)) {
           $mark_task_comp_users_flag = TRUE;
         }
@@ -281,71 +317,122 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
           $mark_task_comp_users_flag = FALSE;
         }
       }
-
-    if ($idea_review_flag && $filtered_result) {
-      
-      // User should not be of mark as complete type
-      if (!$mark_task_comp_users_flag) {
-        
-          // Disable idea's association option for all except "Approved"
-          for ($bulk_op = 0; $bulk_op < $filtered_result; $bulk_op++) {
-            $node_idea = node_load($form['views_bulk_operations'][$bulk_op]['#return_value']);
-            if ($node_idea->field_pti_mark_as_complete[LANGUAGE_NONE][0]['value'] !== 'completed') {
-              $form['views_bulk_operations'][$bulk_op]['#disabled'] = TRUE;
-            }
-          }
-
+      if ($idea_review_flag && $filtered_result) {
+        // User should not be of mark as complete type
+        if ($mark_task_comp_users_flag) {
           $magazine_options = itg_print_team_get_magazine_title();
           $selected = isset($form_state['values']['pti_magazine']) ? $form_state['values']['pti_magazine'] : key($magazine_options);
 
-          $form['pti_magazine'] = array(
-              '#type' => 'select',
-              '#title' => 'Magazine',
-              '#options' => $magazine_options,
-              '#default_value' => $selected,
-              '#weight' => 98,
-              '#ajax' => array(
-                  'event' => 'change',
-                  'callback' => 'itg_print_team_magazine_ajax_callback',
-                  'wrapper' => 'pti-issue-replace',
-              )
+          $form['#attached']['js'] = array(
+            drupal_get_path('module', 'itg_print_team') . '/js/itg_print_team_vbo.js',
           );
 
-          $form['pti_issue'] = array(
-              '#type' => 'select',
-              '#title' => t('Issue'),
-              '#prefix' => '<div id="pti-issue-replace">',
-              '#suffix' => '</div>',
-              '#options' => itg_print_team_magazine_issue($selected),
-              '#default_value' => isset($form_state['values']['pti_issue']) ? $form_state['values']['pti_issue'] : '_none',
-              '#weight' => 99,
-              '#attributes' => array('class' => array('associate-pti-magazine')),
+          $form['pti_container'] = array(
+            '#type' => 'container',
+            '#attributes' => array(
+              'id' => 'pti-container-data',
+            ),
+            '#weight' => 98,
+          );
+
+          /*$form['pti_container']['pti_magazine'] = array(
+            '#type' => 'select',
+            '#title' => 'Magazine',
+            '#options' => $magazine_options,
+            '#default_value' => $selected,
+            '#weight' => 99,
+            '#ajax' => array(
+              'event' => 'change',
+              'callback' => 'itg_print_team_magazine_ajax_callback',
+              'wrapper' => 'pti-container-data',
+            )
+          );
+
+          $form['pti_container']['pti_issue'] = array(
+            '#type' => 'select',
+            '#title' => t('Issue'),
+//              '#prefix' => '<div id="pti-issue-replace">',
+//              '#suffix' => '</div>',
+            '#options' => itg_print_team_magazine_issue($selected),
+            '#default_value' => isset($form_state['values']['pti_issue']) ? $form_state['values']['pti_issue'] : '_none',
+            '#weight' => 100,
+            '#attributes' => array('class' => array('associate-pti-magazine')),
+          );
+          $form['pti_container']['pti_supplement'] = array(
+            '#type' => 'select',
+            '#title' => t('Supplement'),
+//              '#prefix' => '<div id="pti-supplement-replace">',
+//              '#suffix' => '</div>',
+            '#options' => itg_print_team_magazine_supplement($selected),
+            '#default_value' => isset($form_state['values']['pti_supplement']) ? $form_state['values']['pti_supplement'] : '_none',
+            '#weight' => 101,
+            '#attributes' => array('class' => array('associate-pti-magazine')),
           );
           $form['submit'] = array(
-              '#type' => 'submit',
-              '#value' => t('Associate'),
-              '#weight' => 100,
-              '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:30px'),
+            '#type' => 'submit',
+            '#value' => t('Associate'),
+            '#weight' => 102,
+            '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:70px'),
+          );*/
+
+          $field_rating_info = field_info_field('field_story_rating');
+          $field_rating_values = $field_rating_info['settings']['allowed_values'];
+          $form['pti_rating'] = array(
+            //'#prefix' => l('ASSOCIATE', '#', array('attributes' => array('class' =>array('btn-save', 'itg-associate')))),
+            '#type' => 'container',
+            '#attributes' => array(
+              'id' => 'pti-container-data',
+            ),
+            '#weight' => 99,
+            '#suffix' => l('SUBMIT RATING', '#', array('attributes' => array('class' =>array('btn-save', 'itg-rating')))),
           );
+          $form['pti_rating']['story_rating'] = array(
+            '#type' => 'select',
+            '#title' => t('Rating'),
+            '#options' => $field_rating_values,
+            '#default_value' => isset($form_state['values']['story_rating']) ? $form_state['values']['story_rating'] : '_none',
+            '#attributes' => array('class' => array('associate-pti-magazine')),
+            '#weight' => 103,
+          );
+          $form['submit_rating'] = array(
+            '#type' => 'submit',
+            '#value' => t('Submit Rating'),
+            '#weight' => 104,
+            '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:40px'),
+          );
+          $form['extra_button'] = array(
+            '#type' => 'container',
+            '#weight' => 100,
+          );
+          $form['mark_as_complete'] = array(
+            '#type' => 'submit',
+            '#value' => t('Mark as Complete'),
+            '#weight' => 105,
+            '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:40px'),
+          );
+
           $form['download_csv'] = array(
-              '#markup' => l(t('Download CSV'), 'print-team-ideas/csv', array('attributes' => array('class' => 'button', 'style' => 'margin-top:30px'))),
-              '#weight' => 101,
-              '#value' => t('Download CSV'),
+            '#markup' => l(t('Download CSV'), 'print-team-ideas/csv', array('attributes' => array('class' => 'btn-save', 'style' => 'margin-top:40px'))),
+            '#weight' => 106,
+            '#value' => t('Download CSV'),
           );
 
           $form['#validate'][] = 'itg_print_team_association_custom_validate';
           $form['submit']['#submit'][] = 'itg_print_team_association_custom_submit';
+          $form['mark_as_complete']['#submit'][] = 'itg_print_team_markascomplete_custom_submit';
+          $form['submit_rating']['#submit'][] = 'itg_print_team_rating_custom_submit';
+          
         }
+      }
     }
-  }
   }
 
   if ($form_id == 'views_form_strory_menegment_page_1') {
     $form['submit'] = array(
-        '#type' => 'submit',
-        '#value' => t('Generate XML'),
-        '#weight' => 100,
-        '#attributes' => array('class' => array('btn-generate-xml'))
+      '#type' => 'submit',
+      '#value' => t('Generate XML'),
+      '#weight' => 100,
+      '#attributes' => array('class' => array('btn-generate-xml'))
     );
 
     $form['#validate'][] = 'itg_story_xml_validate';
@@ -359,8 +446,8 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
  * @param array $form_state
  * @return array
  */
-function itg_print_team_magazine_ajax_callback($form, $form_state) {
-    return $form['pti_issue'];
+function itg_print_team_magazine_ajax_callback($form, &$form_state) {
+  return $form['pti_container'];
 }
 
 /**
@@ -381,12 +468,12 @@ function itg_print_team_magazine_issue($id = '') {
   $result = $query->execute();
   while ($record = $result->fetchAssoc()) {
     /*
-    $issue_month = explode('-', $val->title);
-    $month_before_curr = date('m') - 1;
+      $issue_month = explode('-', $val->title);
+      $month_before_curr = date('m') - 1;
 
-    if ($issue_month[1] >= $month_before_curr) {
+      if ($issue_month[1] >= $month_before_curr) {
       $options[$record['entity_id']] = date('d/m/Y', strtotime($record['title']));
-    } */
+      } */
     $options[$record['entity_id']] = date('d/m/Y', strtotime($record['title']));
   }
 
@@ -394,10 +481,32 @@ function itg_print_team_magazine_issue($id = '') {
 }
 
 /**
+ * Implements itg_print_team_magazine_supplement()
+ * @param type $id
+ */
+function itg_print_team_magazine_supplement($id = '') {
+
+  $query = db_select('field_data_field_supp_select_magazine', 'm');
+  $query->join('node', 'n', 'm.entity_id = n.nid');
+  $query->fields('m', array('entity_id'));
+  $query->fields('n', array('title'));
+  $query->condition('field_supp_select_magazine_target_id', $id, '=');
+  $query->condition('n.status', 1, '=');
+  $result = $query->execute();
+
+  $options = array();
+  $options['_none'] = '-Select Supplement-';
+  foreach ($result as $val) {
+    $options[$val->entity_id] = $val->title;
+  }
+  return $options;
+}
+
+/**
  * Custom submit callback for alter message after operation.
  */
 function itg_print_team_submit_handler_for_redirect($form, &$form_state) {
-  
+
   // Unset drupal default messages
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
@@ -410,8 +519,8 @@ function itg_print_team_submit_handler_for_redirect($form, &$form_state) {
   else {
     $op = 'submitted successfully';
   }
-  
-  if($_GET['destination']) {
+
+  if (!empty($_GET['destination'])) {
     $destination = $_GET['destination'];
   }
   else {
@@ -429,20 +538,25 @@ function itg_print_team_form_after_build($form, &$form_state) {
   global $user, $base_url;
 
   //Extract type of node
-  if (arg(0) == 'node') {
+  $type = $nid = '';
+  $arg = arg();
+  if (!empty($arg[0]) && $arg[0] == 'node') {
     if (arg(1) == 'add') {
-      $type = arg(2);
+      $type = check_plain($arg[2]);
       $nid = '';
     }
     else {
-      $node = node_load(arg(1));
+      $nid = check_plain($arg[1]);
+      $node = node_load($nid);
       $type = $node->type;
-      $nid = arg(1);
     }
   }
-  
-  // Check print media content is there OR not?  
-  $print_media_value = $form['#node']->field_pti_print_media[LANGUAGE_NONE][0]['value'];
+
+  // Check print media content is there OR not?
+  $print_media_value = FALSE;
+  if (!empty($form['#node']->field_pti_print_media[LANGUAGE_NONE][0]['value'])) {
+    $print_media_value = $form['#node']->field_pti_print_media[LANGUAGE_NONE][0]['value'];
+  }
 
   //Array used in itg_print_team.js
   $settings = array();
@@ -459,31 +573,43 @@ function itg_print_team_form_after_build($form, &$form_state) {
 
   // Unset SEF URL field
   $form['path']['#access'] = FALSE;
-
+  $form['actions']['submit']['#value'] = t('Submit');
   // Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags'][LANGUAGE_NONE]['basic']['#title']);
   unset($form['metatags'][LANGUAGE_NONE]['basic']['#description']);
+
   return $form;
 }
 
-/******************************View Related hooks*****************************/
+/* * ****************************View Related hooks**************************** */
 
 /**
  * Implement hook_views_pre_render
  * {@inheritdoc}
  */
-
 function itg_print_team_views_pre_render(&$view) {
-  
-  global $base_url;
-  
+  global $base_url, $user;
   // Add "Submit Idea" button on listing page of ideas
   if ($view->name == "manage_print_team") {
     $header_content_print_team = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-    $header_content_print_team .= l('Submit Idea', $base_url.'/submit-idea');
+    // These role can not submit the idea.
+    $restricted_roles = array(
+      'Photo Coordinator',
+      'Photo Head',
+      'Design Head',
+      'Copy Desk',
+      'Designer',
+      'Photographer',
+    );
+    // Current user has above role or not.
+    $matched_restricted_role = array_intersect($restricted_roles, $user->roles);
+    // If Current user does not have above role then print submit idea button.
+    $matched_restricted_role = array_filter($matched_restricted_role);
+    if (empty($matched_restricted_role)) {
+      $header_content_print_team .= l('File Story', $base_url . '/submit-idea');
+    }
     $view->attachment_before = $header_content_print_team;
-
   }
 }
 
@@ -508,7 +634,7 @@ function itg_print_team_form_views_exposed_form_alter(&$form, &$form_state, $for
  */
 function itg_print_team_views_query_alter(&$view, &$query) {
   global $user;
-  
+
   // Unset Contextual filter for story approval users
   if ($view->name == 'manage_print_team') {
     $idea_review_flag_user = itg_print_team_check_approval_users();
@@ -518,7 +644,8 @@ function itg_print_team_views_query_alter(&$view, &$query) {
   }
 }
 
-/******************************Node Related hooks*****************************/
+/* * ****************************Node Related hooks**************************** */
+
 /**
  * Implementation of hook_node_insert
  * {@inheritdoc}
@@ -540,7 +667,7 @@ function itg_print_team_node_insert($node) {
  * {@inheritdoc}
  */
 function itg_print_team_node_update($node) {
-  
+
   global $user;
   switch ($node->type) {
     case 'print_team_integration':
@@ -555,38 +682,38 @@ function itg_print_team_node_update($node) {
           itg_print_team_send_idea_status_mail($node, 'update');
         }
       }
-      
+
       /*
-      // Update story, if any idea is updated
-      $associated_source_id = itg_print_team_check_association_print_to_story($node->nid);
-      if ($associated_source_id) {
+        // Update story, if any idea is updated
+        $associated_source_id = itg_print_team_check_association_print_to_story($node->nid);
+        if ($associated_source_id) {
         itg_print_team_association_update($node, NULL, NULL, $associated_source_id, FALSE);
-      } */
-      
+        } */
+
       // Insert in to print team cron table to send mail
       if ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved') {
         $check_for_nid = itg_print_team_check_cron_nid($node->nid);
-        
+
         // Insert only if nid does not exist in to cron table 
         if (!$check_for_nid) {
           $query = db_insert('itg_cron_print_team');
           $query->fields(array(
-              'nid' => $node->nid,
-              'type' => $node->type,
-              'scheduled_time' => strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours'),
-              'status' => 0,
-              'created' => time()
+            'nid' => $node->nid,
+            'type' => $node->type,
+            'scheduled_time' => strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours'),
+            'status' => 0,
+            'created' => time()
           ));
           $query->execute();
         }
-        
+
         // Update idea submit field status, if story finally submitted by a user
         if ($node->field_story_category[LANGUAGE_NONE][0]['tid'] && $node->field_pti_magazine_kicker[LANGUAGE_NONE][0]['value']) {
           $node->field_pti_idea_submit_status[LANGUAGE_NONE][0]['value'] = 'submitted';
           field_attach_update('node', $node);
         }
       }
-      
+
       break;
 
     default:
@@ -599,46 +726,46 @@ function itg_print_team_node_update($node) {
  * {@inheritdoc}
  */
 function itg_print_team_node_validate($node, $form, &$form_state) {
-global $user;
+  global $user;
 
   if ($node->type == 'print_team_integration' && $node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved') {
-      
-      // Validation of word limit for valid number
-      $words_limit = (int) $node->field_pti_words_limit[LANGUAGE_NONE][0]['value'];
-      if (empty($words_limit) || !is_numeric($words_limit)) {
-        form_set_error('field_pti_words_limit', t('Words limit must be numeric and greater than zero.'));
-      } 
-      else {
-        
-        // Validate word limit to restrict user for story body
-        if (str_word_count(strip_tags($node->body[LANGUAGE_NONE][0]['value'])) > $node->field_pti_words_limit[LANGUAGE_NONE][0]['value']) {
-          form_set_error('body', t('Limit exceeded! Your idea brief limit is: @idealimit words.', array('@idealimit' => $node->field_pti_words_limit[LANGUAGE_NONE][0]['value'])));
-        }
+
+    // Validation of word limit for valid number
+    $words_limit = (int) $node->field_pti_words_limit[LANGUAGE_NONE][0]['value'];
+    if (empty($words_limit) || !is_numeric($words_limit)) {
+      form_set_error('field_pti_words_limit', t('Words limit must be numeric and greater than zero.'));
+    }
+    else {
+
+      // Validate word limit to restrict user for story body
+      if (str_word_count(strip_tags($node->body[LANGUAGE_NONE][0]['value'])) > $node->field_pti_words_limit[LANGUAGE_NONE][0]['value']) {
+        form_set_error('body', t('Limit exceeded! Your idea brief limit is: @idealimit words.', array('@idealimit' => $node->field_pti_words_limit[LANGUAGE_NONE][0]['value'])));
       }
-    
-      // Validate time limit
-      /*$current_date = time();
+    }
+
+    // Validate time limit
+    /* $current_date = time();
       $timeline = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'] . ' + 47 hours');
       if ($current_date > $timeline) {
-        form_set_error('field_survey_end_date', t('Sorry! You can not submit your idea now. You have exceeded your last date of idea submission.'));
+      form_set_error('field_survey_end_date', t('Sorry! You can not submit your idea now. You have exceeded your last date of idea submission.'));
       }
-       * */
-      
-      // Validate section
-      $check_for_nid = itg_print_team_check_cron_nid($node->nid);
-      if (empty($node->field_story_category[LANGUAGE_NONE][0]['tid']) && $check_for_nid) {
-        form_set_error('field_story_category', t('Section field is required'));
-      }
-      
-      // Validate magazine kicker
-      if (empty($node->field_pti_magazine_kicker[LANGUAGE_NONE][0]['value']) && $check_for_nid && ($node->uid == $user->uid)) {
-        form_set_error('field_pti_magazine_kicker', t('Magazine kicker field is required.'));
-      }
-      
-      // Validate timeline
-      if(empty($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])) {
-        form_set_error('field_survey_end_date', t('Timeline field is required.'));
-      }
+     * */
+
+    // Validate section
+    $check_for_nid = itg_print_team_check_cron_nid($node->nid);
+    if (empty($node->field_story_category[LANGUAGE_NONE][0]['tid']) && $check_for_nid) {
+      form_set_error('field_story_category', t('Section field is required'));
+    }
+
+    // Validate magazine kicker
+    if (empty($node->field_pti_magazine_kicker[LANGUAGE_NONE][0]['value']) && $check_for_nid && ($node->uid == $user->uid)) {
+      form_set_error('field_pti_magazine_kicker', t('Magazine kicker field is required.'));
+    }
+
+    // Validate timeline
+    if (empty($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])) {
+      form_set_error('field_survey_end_date', t('Timeline field is required.'));
+    }
   }
 }
 
@@ -647,11 +774,11 @@ global $user;
  * {@inheritdoc}
  */
 function itg_print_team_node_view($node, $view_mode) {
-    if ($node->type=="print_team_integration") {
-     drupal_add_js('jQuery(document).ready(function() {                  
+  if ($node->type == "print_team_integration") {
+    drupal_add_js('jQuery(document).ready(function() {                  
        jQuery("#page-title").hide();
      });', array('type' => 'inline', 'scope' => 'footer'));
-    }    
+  }
 }
 
 /**
@@ -660,34 +787,40 @@ function itg_print_team_node_view($node, $view_mode) {
  * @param array $form_state
  */
 function itg_print_team_association_custom_validate($form, &$form_state) {
-  
+
   // Array used in itg_print_team.js
   global $base_url;
   $settings = array();
   $settings['base_url'] = $base_url;
 
   drupal_add_js(array('itg_print_team' => array('settings' => $settings)), array('type' => 'setting'));
-  
+
   // Add JS for itg_print_team
   drupal_add_js(drupal_get_path('module', 'itg_print_team') . '/js/itg_print_team.js', array('weight' => 1));
 
   $views_bulk_operations = $form_state['values']['views_bulk_operations'];
   $issue = $form_state['values']['pti_issue'];
   $magazine = check_plain($form_state['values']['pti_magazine']);
-  
+  $supplement = $form_state['values']['pti_supplement'];
 
   if (is_array($views_bulk_operations) && count($views_bulk_operations) > 0) {
     if (!max($views_bulk_operations) > 0) {
-      form_set_error('views_bulk_operations', t('Please select atleast one checkbox to associate with magazine and issue.'));
+      form_set_error('views_bulk_operations', t('Please select atleast one checkbox to perform operations.'));
     }
   }
+  $op_value = $form_state['values']['op'];
+  if ($op_value == 'Associate') {
+    if ($magazine == '_none') {
+      form_set_error('magazine', t('Please select magazine.'));
+    }
 
-  if ($magazine == '_none') {
-    form_set_error('magazine', t('Please select magazine.'));
-  }
+    if ($issue == '_none') {
+      form_set_error('issue', t('Please select issue.'));
+    }
 
-  if ($issue == '_none') {
-    form_set_error('issue', t('Please select issue.'));
+//    if ($supplement == '_none') {
+//      form_set_error('supplement', t('Please select supplement.'));
+//    }
   }
 }
 
@@ -696,22 +829,85 @@ function itg_print_team_association_custom_validate($form, &$form_state) {
  * @param array $form
  * @param array $form_state
  */
-function itg_print_team_association_custom_submit($form, &$form_state) {
-  
-  $views_bulk_operations = $form_state['values']['views_bulk_operations'];
+function itg_print_team_association_custom_submit($form, &$form_state) {  
+  // remove dublicate.
+  $views_bulk_operations = array_unique($form_state['values']['views_bulk_operations']);
+  // Remove all 0 , as it is not a nodeid.
+  unset($views_bulk_operations[array_search(0, $views_bulk_operations)]);
   $issue = check_plain($form_state['values']['pti_issue']);
   $magazine = check_plain($form_state['values']['pti_magazine']);
-  
+  $supplement = check_plain($form_state['values']['pti_supplement']);
+
   if (is_array($views_bulk_operations) && count($views_bulk_operations) > 0) {
     foreach ($views_bulk_operations as $source_id) {
       if (!empty($source_id)) {
         $associated_source_id = itg_print_team_check_association_print_to_story($source_id);
         if (!empty($associated_source_id)) {
-          itg_print_team_association_update($source_id, $issue, $magazine, $associated_source_id, TRUE);
+          itg_print_team_association_update($source_id, $issue, $magazine, $associated_source_id, TRUE, $supplement);
         }
         else {
-          itg_print_team_association_save($source_id, $issue, $magazine);
+          itg_print_team_association_save($source_id, $issue, $magazine, $supplement);
+        }
+      }
+    }
+  }
+}
 
+/**
+ * Submit handler for mark as complete
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_print_team_markascomplete_custom_submit($form, &$form_state) {
+  $filtered_result = count($form['#substitutions']['#value']);
+  // remove dublicate.
+  $views_bulk_operations = array_unique($form_state['values']['views_bulk_operations']);
+  foreach ($views_bulk_operations as $bulk_key => $bulk_value) {
+    if($bulk_value == 0) {
+      unset($views_bulk_operations[$bulk_key]);
+    }
+  }
+  // Remove all 0 , as it is not a nodeid.
+  //unset($views_bulk_operations[array_search(0, $views_bulk_operations)]);
+  if (is_array($views_bulk_operations) && count($views_bulk_operations) > 0) {
+    foreach ($views_bulk_operations as $source_id) {
+      if (!empty($source_id)) {
+
+        $node_details = node_load($source_id);
+        if (empty($node_details->field_pti_mark_as_complete)) {
+          $node_details->field_pti_mark_as_complete['und'][0]['value'] = 'completed';
+          field_attach_presave('node', $node_details);
+          field_attach_update('node', $node_details);
+          drupal_set_message(t($node_details->title . ' has been successfully marked as complete.'), 'status');
+        }
+        else {
+          drupal_set_message(t($node_details->title . ' has been already marked as complete.'), 'error');
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Submit handler for story rating
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_print_team_rating_custom_submit($form, &$form_state) {  
+  $rating = $form_state['values']['story_rating'];
+  $views_bulk_operations = $form_state['values']['views_bulk_operations'];
+  if (is_array($views_bulk_operations) && count($views_bulk_operations) > 0) {
+    foreach ($views_bulk_operations as $source_id) {
+      if (!empty($source_id)) {
+
+        $node_details = node_load($source_id);
+        if (empty($node_details->field_story_rating)) {
+          $node_details->field_story_rating['und'][0]['value'] = $rating;
+          field_attach_update('node', $node_details);
+          drupal_set_message(t($node_details->title . ' has been given ratings successfully.'), 'status');
+        }
+        else {
+          drupal_set_message(t($node_details->title . ' Rating has already been given.'), 'error');
         }
       }
     }
@@ -725,19 +921,22 @@ function itg_print_team_association_custom_submit($form, &$form_state) {
  * @param string $issue
  * @param string $magazine
  */
-function itg_print_team_association_save($nid, $issue, $magazine) {
-  
+function itg_print_team_association_save($nid, $issue, $magazine, $supplement) {
+
   global $user;
   module_load_include('inc', 'itg_print_team', 'includes/print_team_mail');
   $node = node_load($nid);
   $issue_node = $node;
-  
+
   // Update print team node with issue and magazine
   $node->field_pti_issue[LANGUAGE_NONE][0]['target_id'] = $issue;
   $node->field_pti_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
+  if ($supplement != '_none') {
+    $node->field_pti_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
+  }
   field_attach_update('node', $node);
-  
-  
+
+
   // Varibles for story node
   $issue_title = itg_common_get_node_title($issue);
   $section = $node->field_story_category[LANGUAGE_NONE][0]['tid'];
@@ -745,7 +944,7 @@ function itg_print_team_association_save($nid, $issue, $magazine) {
   $headline = $node->title;
   $body = $node->body[LANGUAGE_NONE][0]['value'];
   $magazine_kicker = $node->field_pti_magazine_kicker[LANGUAGE_NONE][0]['value'];
-  
+
   $primary_category = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
   $primary_category_html = $node->field_primary_category_html[LANGUAGE_NONE][0]['value'];
 
@@ -753,7 +952,7 @@ function itg_print_team_association_save($nid, $issue, $magazine) {
   $print_media_fcollection_id = $node->field_pti_print_media[LANGUAGE_NONE][0]['value'];
   $print_media = entity_load('field_collection_item', array($print_media_fcollection_id));
   $fid = $print_media[$print_media_fcollection_id]->field_pti_upload_image[LANGUAGE_NONE][0]['fid'];
-  
+
   // Generate new node for story
   $node = new stdClass();
   $node->title = trim($headline);
@@ -768,32 +967,35 @@ function itg_print_team_association_save($nid, $issue, $magazine) {
   $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline) ? trim($headline) : 'NA';
   $node->body[$node->language][0]['value'] = $body ? $body : 'NA';
   $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = $magazine_kicker ? $magazine_kicker : 'NA';
-  
+
   $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $primary_category;
   $node->field_primary_category_html[LANGUAGE_NONE][0]['value'] = $primary_category_html;
-  
-  if(!empty($rating)) {
-   $node->field_story_rating[LANGUAGE_NONE][0]['value'] = $rating;
+
+  if (!empty($rating)) {
+    $node->field_story_rating[LANGUAGE_NONE][0]['value'] = $rating;
   }
-  
-  if(!empty($section)) {
+
+  if (!empty($section)) {
     $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $section;
   }
-  
+
   //Association of issue with story
   $node->field_story_issue_date[LANGUAGE_NONE][0]['value'] = isset($issue_title) ? $issue_title : date('Y-m-d h:i:s', time());
-  
+
   //Association of magazine with story
   $node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'] = 'magazine_issue_story';
-  
+
   if ($magazine) {
     $node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
   }
-  
-  if($fid){
+
+  if ($supplement != '_none') {
+    $node->field_story_select_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
+  }
+  if ($fid) {
     $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid;
   }
-  
+
   $publish_date = date('Y-m-d', time());
   $exp_date = strtotime('+90 years', strtotime($publish_date));
   $exp_date = date('Y-m-d', $exp_date);
@@ -806,10 +1008,9 @@ function itg_print_team_association_save($nid, $issue, $magazine) {
   $node->revision = 1;
   $node->log = 'State Changed to Review';
   $node->workbench_moderation_state_new = workbench_moderation_state_review();
-            
+
   $node = node_submit($node); // Prepare node for saving
   node_save($node); // Finally save node
-  
   //Send mail to print team users after association
   itg_print_team_send_idea_status_mail($issue_node, 'association');
   drupal_set_message('Selected ideas have been associated to selected issue and magazine successfully.');
@@ -837,7 +1038,7 @@ function itg_print_team_get_magazine_title() {
  * Get issue option value
  * @return array
  */
-function itg_print_team_issue_options(){
+function itg_print_team_issue_options() {
   $query = db_select('node', 'node');
   $query->fields('node', array('nid', 'title'));
   $query->condition('node.status', 1, '=');
@@ -847,9 +1048,9 @@ function itg_print_team_issue_options(){
   $options['_none'] = '-Select Issue-';
   foreach ($record as $val) {
     $issue_month = explode('-', $val->title);
-    $month_before_curr = date('m')-1;
-    
-    if($issue_month[1] >= $month_before_curr){
+    $month_before_curr = date('m') - 1;
+
+    if ($issue_month[1] >= $month_before_curr) {
       $options[$val->nid] = date('d/m/Y', strtotime($val->title));
     }
   }
@@ -863,7 +1064,7 @@ function itg_print_team_issue_options(){
 function itg_print_team_cronapi($op, $job = NULL) {
   $items['itg_print_team_expiry_notification'] = array(
     'description' => 'Send mail before 24 hours for story expiration ',
-    'callback' => 'itg_print_team_expiry_notification_callback', 
+    'callback' => 'itg_print_team_expiry_notification_callback',
   );
   return $items;
 }
@@ -872,7 +1073,7 @@ function itg_print_team_cronapi($op, $job = NULL) {
  * Send mail to user before 24 hours of story expiration
  */
 function itg_print_team_expiry_notification_callback() {
-  
+
   // Include print team mail file to send mail
   module_load_include('inc', 'itg_print_team', 'includes/print_team_mail');
 
@@ -880,7 +1081,7 @@ function itg_print_team_expiry_notification_callback() {
 
   $query = db_select('itg_cron_print_team', 'c');
   $query->fields('c')
-          ->condition('c.status', 0, '=');
+      ->condition('c.status', 0, '=');
   $result = $query->execute();
 
   // Fetch node to send notification
@@ -916,23 +1117,12 @@ function itg_print_team_check_cron_nid($nid) {
  * @global array $user
  * @return boolean
  */
-function itg_print_team_check_approval_users(){
-  
+function itg_print_team_check_approval_users() {
   global $user;
   $idea_review_flag_user = FALSE;
   foreach ($user->roles as $roles) {
-    if ($roles == 'Site Admin'
-          || $roles == 'Co-ordinator' 
-          || $roles == 'Section Editor/Anchor'
-          || $roles == 'Editor'
-          || $roles == 'Photo Coordinator'
-          || $roles == 'Photo Head'
-          || $roles == 'Design Head'
-          || $roles == 'Copy Desk'
-          || $roles == 'Designer'
-          || $roles == 'Photographer'
-          || $roles == 'Knowledge Centre'  
-     ) {
+    if ($roles == 'Site Admin' || $roles == 'Co-ordinator' || $roles == 'Section Editor/Anchor' || $roles == 'Editor' || $roles == 'Photo Coordinator' || $roles == 'Photo Head' || $roles == 'Design Head' || $roles == 'Copy Desk' || $roles == 'Designer' || $roles == 'Photographer' || $roles == 'Knowledge Centre'
+    ) {
       $idea_review_flag_user = TRUE;
     }
   }
@@ -944,20 +1134,13 @@ function itg_print_team_check_approval_users(){
  * @global array $user
  * @return boolean
  */
-function itg_print_team_check_mark_complete_users(){
-  
+function itg_print_team_check_mark_complete_users() {
+
   global $user;
   $idea_mark_complete_user = FALSE;
   foreach ($user->roles as $roles) {
-    if ($roles == 'Site Admin'
-          || $roles == 'Co-ordinator' 
-          || $roles == 'Photo Coordinator'
-          || $roles == 'Photo Head'
-          || $roles == 'Design Head'
-          || $roles == 'Copy Desk'
-          || $roles == 'Designer'
-          || $roles == 'Photographer'    
-     ) {
+    if ($roles == 'Site Admin' || $roles == 'Co-ordinator' || $roles == 'Photo Coordinator' || $roles == 'Photo Head' || $roles == 'Design Head' || $roles == 'Copy Desk' || $roles == 'Designer' || $roles == 'Photographer'
+    ) {
       $idea_mark_complete_user = TRUE;
     }
   }
@@ -968,35 +1151,43 @@ function itg_print_team_check_mark_complete_users(){
  * Get array of mark complete type users
  * @return array
  */
-function itg_print_team_mark_complete_users_arr() {
-  return array('Photo Coordinator', 'Photo Head', 'Design Head', 'Copy Desk', 'Designer', 'Photographer');
+function itg_print_team_mark_complete_users_arr($op = NULL) {
+  if ($op == 'Approve') {
+    return array('Photo Coordinator', 'Photo Head', 'Design Head', 'Copy Desk', 'Designer', 'Photographer');
+  }
+  else {
+    return array('Co-ordinator', 'Photo Coordinator', 'Photo Head', 'Design Head', 'Copy Desk', 'Designer', 'Photographer');
+  }
 }
 
 /**
  * Get uids of users having role "correspondent"
  */
-function itg_print_team_ideas_csv(){
-  
+function itg_print_team_ideas_csv() {
+
   $role = user_role_load_by_name('Correspondent');
   $result_user = db_select('users_roles', 'ur')
-          ->fields('ur', array('uid'))
-          ->condition('rid', $role->rid)
-          ->execute();
+      ->fields('ur', array('uid'))
+      ->condition('rid', $role->rid)
+      ->execute();
 
   foreach ($result_user as $record) {
     $uids[] = $record->uid;
   }
-  
+
   // CSV file header
   $file = 'ideas_csv';
-  $idea_csv = "Idea Title" . "," . "Created Date" . "," . "User Type" . "," . "Status" . "," . "Rating" . "|\n\r\0";
+  $idea_csv = "Idea Title" . "," . "Magazine Kicker" . "," . "Section" 
+          . "," . "Status" . "," . "Word Limit" . "," . "Timeline" . "," 
+          . "Magazine" . "," . "Issue" . "," . "Created" . "," . "Rating" 
+          . "," . "User Type" . "," . "Brief" . "\n\r\0";
 
   $query = db_select('node', 'n');
   $query->join('field_data_field_pti_idea_status', 'ps', 'n.nid = ps.entity_id'); //JOIN node with magazines
   $query->condition('n.type', 'print_team_integration')
-          ->condition('n.uid', $uids, 'IN')
-          ->fields('n')
-          ->orderBy('ps.field_pti_idea_status_value', 'ASC');
+      ->condition('n.uid', $uids, 'IN')
+      ->fields('n')
+      ->orderBy('ps.field_pti_idea_status_value', 'ASC');
 
   $result = $query->execute();
 
@@ -1004,27 +1195,106 @@ function itg_print_team_ideas_csv(){
   foreach ($result as $row) {
     $node = node_load($row->nid);
     $title = $node->title;
-    $created_date = date('d/m/Y', $node->created);
+    $brief_body = strip_tags($node->body[LANGUAGE_NONE][0]['value']);
+    $brief = $brief_body;
+    $kicker = $node->field_pti_magazine_kicker[LANGUAGE_NONE][0]['value'];
+    $section_tid = itg_print_tem_get_section($node->field_story_category[LANGUAGE_NONE][0]['tid']);
     $status = $node->field_pti_idea_status[LANGUAGE_NONE][0]['value'];
+    $word_limit = $node->field_pti_words_limit[LANGUAGE_NONE][0]['value'];
+    $time_line = explode(" ", $node->field_survey_end_date[LANGUAGE_NONE][0]['value']);
+    $get_magazine = itg_print_tem_get_magazine($node->field_pti_magazine[LANGUAGE_NONE][0]['target_id']);
+    $getissue = itg_print_tem_get_magazine($node->field_pti_issue[LANGUAGE_NONE][0]['target_id']);
+    $get_issue = explode(" ", $getissue);    
+    
+    $created_date = date('d/m/Y', $node->created);
     $rating = $node->field_story_rating[LANGUAGE_NONE][0]['value'] ? $node->field_story_rating[LANGUAGE_NONE][0]['value'] : '0';
-    $idea_csv .= $title . "," . $created_date . "," . "Correspondent" . ",". $status . "," . $rating . "|\n\r\0";
+    $idea_csv .= $title . "," . $kicker . "," . $section_tid 
+            . "," . $status . "," . $word_limit . "," . $time_line[0] . "," . $get_magazine 
+            . "," . $get_issue[0] . "," . $created_date . "," . $rating . "," 
+            . "Correspondent" . "," . $brief . "\n\r\0";
+    
   }
 
   $filename = $file . "_" . date("d-m-Y:i", time());
   header('Content-Description: File Transfer');
   header('Content-Type: application/force-download');
-  header('Content-Disposition: attachment; filename='.$filename.'.csv');
+  header('Content-Disposition: attachment; filename=' . $filename . '.csv');
   print $idea_csv;
 }
+
+/*
+ * Get team section name
+ * @param $get_tid
+ * @return str
+ */
+function itg_print_tem_get_section($get_tid) {
+  $section_name = db_query("SELECT name from {taxonomy_term_data} WHERE tid = :tid ", array(":tid" => $get_tid))->fetchField();
+  return $section_name;
+}
+
+/*
+ * Get team magazine name
+ * @param $get_nid
+ * @return str
+ */
+function itg_print_tem_get_magazine($get_nid) {
+  $magazine_name = db_query("SELECT title from {node} WHERE nid = :nid ", array(":nid" => $get_nid))->fetchField();
+  return $magazine_name;
+}
+
+
 
 /**
  * Implements hook_form_comment_form_alter
  * {@inheritdoc}
  */
-function itg_print_team_form_comment_form_alter(&$form, &$form_state, $form_id) {                                                
-  switch($form_id) {
+function itg_print_team_form_comment_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form_id) {
     case 'comment_node_print_team_integration_form':
       hide($form['author']);
+      drupal_add_js('jQuery(document).ready(function() {                  
+          jQuery(".top-actions").hide();
+     });', array('type' => 'inline', 'scope' => 'footer'));
       break;
   }
+}
+
+/**
+ * Ajax callback for Event roles dropdown
+ * @param array $form
+ * @param array $form_state
+ * @return int
+ */
+function itg_magazine_ajax_callback($form, $form_state) {
+    return $form['field_pti_issue'];
+}
+
+/**
+ * Fetch issue list using magazine
+ * @param int $id
+ * @return array
+ */
+function get_issue_by_magazine($id = '') {
+
+  $options['_none'] = '-Select Issue-';
+  $query = db_select('field_data_field_issue_magazine', 'm');
+  $query->join('node', 'n', 'm.entity_id = n.nid');
+  $query->fields('m', array('entity_id'));
+  $query->fields('n', array('title'));
+  $query->condition('field_issue_magazine_target_id', $id, '=');
+  $query->condition('n.status', 1, '=');
+
+  $result = $query->execute();
+  while ($record = $result->fetchAssoc()) {
+    /*
+      $issue_month = explode('-', $val->title);
+      $month_before_curr = date('m') - 1;
+
+      if ($issue_month[1] >= $month_before_curr) {
+      $options[$record['entity_id']] = date('d/m/Y', strtotime($record['title']));
+      } */
+    $options[$record['entity_id']] = date('d/m/Y', strtotime($record['title']));
+  }
+
+  return $options;
 }

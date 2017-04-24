@@ -24,7 +24,13 @@ function feature_for_issue_magazin_widget_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Issue Magazine widget List';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+    6 => '6',
+    20 => '20',
+    10 => '10',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'input_required';
@@ -131,7 +137,6 @@ function feature_for_issue_magazin_widget_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
-    5 => '5',
     6 => '6',
     20 => '20',
     10 => '10',
@@ -264,7 +269,7 @@ function feature_for_issue_magazin_widget_views_default_views() {
   $handler->display->display_options['fields']['counter']['label'] = 'S. No.';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
-  /* Field: Content: Issue date */
+  /* Field: Field: Issue date */
   $handler->display->display_options['fields']['field_story_issue_date']['id'] = 'field_story_issue_date';
   $handler->display->display_options['fields']['field_story_issue_date']['table'] = 'field_data_field_story_issue_date';
   $handler->display->display_options['fields']['field_story_issue_date']['field'] = 'field_story_issue_date';
@@ -297,12 +302,12 @@ function feature_for_issue_magazin_widget_views_default_views() {
   $handler->display->display_options['fields']['field_display_on']['id'] = 'field_display_on';
   $handler->display->display_options['fields']['field_display_on']['table'] = 'field_data_field_display_on';
   $handler->display->display_options['fields']['field_display_on']['field'] = 'field_display_on';
-  /* Field: Field: First name */
-  $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
-  $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
-  $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
-  $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
-  $handler->display->display_options['fields']['field_first_name']['label'] = 'Posted By';
+  /* Field: User: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['name']['label'] = 'Posted by';
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
@@ -317,6 +322,17 @@ function feature_for_issue_magazin_widget_views_default_views() {
   $handler->display->display_options['fields']['view_node']['label'] = 'Action';
   $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]  </span> ';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Updated date */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'node';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
@@ -365,7 +381,7 @@ function feature_for_issue_magazin_widget_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Issue date (field_story_issue_date) */
+  /* Filter criterion: Field: Issue date (field_story_issue_date) */
   $handler->display->display_options['filters']['field_story_issue_date_value']['id'] = 'field_story_issue_date_value';
   $handler->display->display_options['filters']['field_story_issue_date_value']['table'] = 'field_data_field_story_issue_date';
   $handler->display->display_options['filters']['field_story_issue_date_value']['field'] = 'field_story_issue_date_value';
@@ -433,7 +449,7 @@ function feature_for_issue_magazin_widget_views_default_views() {
   $handler->display->display_options['fields']['counter']['label'] = 'S. No';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
-  /* Field: Content: Issue date */
+  /* Field: Field: Issue date */
   $handler->display->display_options['fields']['field_story_issue_date']['id'] = 'field_story_issue_date';
   $handler->display->display_options['fields']['field_story_issue_date']['table'] = 'field_data_field_story_issue_date';
   $handler->display->display_options['fields']['field_story_issue_date']['field'] = 'field_story_issue_date';
@@ -462,11 +478,11 @@ function feature_for_issue_magazin_widget_views_default_views() {
   $handler->display->display_options['fields']['type']['table'] = 'node';
   $handler->display->display_options['fields']['type']['field'] = 'type';
   /* Field: User: Name */
-  $handler->display->display_options['fields']['name']['id'] = 'name';
-  $handler->display->display_options['fields']['name']['table'] = 'users';
-  $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
-  $handler->display->display_options['fields']['name']['label'] = 'Posted By';
+  $handler->display->display_options['fields']['name_1']['id'] = 'name_1';
+  $handler->display->display_options['fields']['name_1']['table'] = 'users';
+  $handler->display->display_options['fields']['name_1']['field'] = 'name';
+  $handler->display->display_options['fields']['name_1']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['name_1']['label'] = 'Posted by';
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
@@ -478,6 +494,8 @@ function feature_for_issue_magazin_widget_views_default_views() {
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]  </span>';
   /* Field: Global: PHP */
   $handler->display->display_options['fields']['php']['id'] = 'php';
   $handler->display->display_options['fields']['php']['table'] = 'views';
@@ -515,7 +533,7 @@ print \' <a href="move-dont-miss-widget-node/issue_magazin_widget/0/0/\'.$row->n
   $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'issue_magazin_widget';
-  /* Filter criterion: Content: Issue date (field_story_issue_date) */
+  /* Filter criterion: Field: Issue date (field_story_issue_date) */
   $handler->display->display_options['filters']['field_story_issue_date_value']['id'] = 'field_story_issue_date_value';
   $handler->display->display_options['filters']['field_story_issue_date_value']['table'] = 'field_data_field_story_issue_date';
   $handler->display->display_options['filters']['field_story_issue_date_value']['field'] = 'field_story_issue_date_value';

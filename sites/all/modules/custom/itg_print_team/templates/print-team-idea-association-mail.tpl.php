@@ -28,7 +28,7 @@
       <?php } ?>
 
       <tr>
-        <td style="padding: 10px 20px;">Associated Issue and Magazine:</td>
+        <td style="padding: 10px 20px;">Associated Issue, Magazine and Supplement:</td>
       </tr>
       <tr>
         <td style="padding: 10px 20px;">Issue: <strong><?php echo date('d/m/Y', strtotime(itg_common_get_node_title($node->field_pti_issue[LANGUAGE_NONE][0]['target_id']))); ?></strong></td>
@@ -36,7 +36,9 @@
       <tr>
         <td style="padding: 10px 20px;">Magazine: <strong><?php echo itg_common_get_node_title($node->field_pti_magazine[LANGUAGE_NONE][0]['target_id']); ?></strong></td>
       </tr>
-
+      <tr>
+        <td style="padding: 10px 20px;">Supplement: <strong><?php echo itg_common_get_node_title($node->field_pti_supplement[LANGUAGE_NONE][0]['target_id']); ?></strong></td>
+      </tr>
       <tr>
         <td style="padding: 10px 20px;">&nbsp;</td>
       </tr>

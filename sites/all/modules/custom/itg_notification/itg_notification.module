@@ -15,17 +15,20 @@ function itg_notification_form_alter(&$form, &$form_state, $form_id) {
 
   // Alter for "notification"
   if ($form_id == 'notification_node_form') {
-    
-    // Unset metatags
-    unset($form['#metatags']);
-    
+    $node_obj = $form_state['node'];
+    $default_values = $form['field_ntf_select_device']['und']['#default_value'];
+    if ($form['field_ntf_select_device']['und']['#default_value'][0] == 'all') {
+      foreach($form['field_ntf_select_device']['und']['#options'] as $option_key=> $option) {
+        $form['field_ntf_select_device']['und']['#default_value'][] = $option_key;
+      }
+    }
     // Add cancel button
     $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), 'manage-notifications', array('attributes' => array('class' => 'button'))),
-        '#weight' => 21,
-        '#value' => t('Cancel'),
+      '#markup' => l(t('Cancel'), 'manage-notifications', array('attributes' => array('class' => 'button'))),
+      '#weight' => 21,
+      '#value' => t('Cancel'),
     );
-    
+
     $form['title']['#description'] = '';
     $form['title']['#prefix'] = '<div class="main-cont">';
     $form['title']['#suffix'] = '<span class="byline" id= "notification-text-counter"></span></div>';
@@ -38,7 +41,7 @@ function itg_notification_form_alter(&$form, &$form_state, $form_id) {
  * Custom submit callback for alter message after operation.
  */
 function itg_notification_submit_handler_for_redirect($form, &$form_state) {
-  
+
   // Unset drupal default messages
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
@@ -54,7 +57,7 @@ function itg_notification_submit_handler_for_redirect($form, &$form_state) {
   else {
     $op = 'successfully published';
   }
-  
+
   $form_state['redirect'] = 'manage-notifications';
   drupal_set_message(t('Notification <strong>@notificationtitle</strong> has been @operation.', array('@notificationtitle' => $form_state['node']->title, '@operation' => $op)));
 }
@@ -91,14 +94,7 @@ function itg_notification_form_after_build($form, &$form_state) {
   // Add JS for itg_notification
   drupal_add_js(drupal_get_path('module', 'itg_notification') . '/js/itg_notification.js', array('weight' => 1));
 
-  // Unset SEF URL field
-  $form['path']['#access'] = FALSE;
 
-  // Unset metatag description
-  unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags'][LANGUAGE_NONE]['basic']['#title']);
-  unset($form['metatags'][LANGUAGE_NONE]['basic']['#description']);
-  
   return $form;
 }
 
@@ -107,7 +103,7 @@ function itg_notification_form_after_build($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_notification_views_pre_render(&$view) {
-  
+
   // "Add Notification" button on listing page of items
   if ($view->name == "manage_notifications") {
     $header_content_notification = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
@@ -122,12 +118,12 @@ function itg_notification_views_pre_render(&$view) {
  */
 function itg_notification_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
 
-   if ($form['#id'] == 'views-exposed-form-manage-notifications-page') {
-     
-     // Call function autocomplete to show matching titles
-     $form['title']['#autocomplete_path'] = 'content-title-list/notification/autocomplete';
-     $form['title']['#attributes'] = array('placeholder' => t('Message Title'));     
-   }
+  if ($form['#id'] == 'views-exposed-form-manage-notifications-page') {
+
+    // Call function autocomplete to show matching titles
+    $form['title']['#autocomplete_path'] = 'content-title-list/notification/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Message Title'));
+  }
 }
 
 /**
@@ -135,9 +131,9 @@ function itg_notification_form_views_exposed_form_alter(&$form, &$form_state, $f
  * {@inheritdoc}
  */
 function itg_notification_node_validate($node, $form, &$form_state) {
-  $message_url = $node->field_cm_redirection_url[LANGUAGE_NONE][0]['value'];
-  if (!empty($message_url)) {
-    if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $message_url)) {
+  if (!empty($node->field_cm_redirection_url[LANGUAGE_NONE][0]['value'])) {
+    $message_url = $node->field_cm_redirection_url[LANGUAGE_NONE][0]['value'];
+    if (!preg_match("/^(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]$/i", $message_url)) {
       form_set_error('field_cm_redirection_url', t('Please enter a valid message URL.'));
     }
   }
@@ -175,30 +171,51 @@ function itg_notification_node_update($node) {
 }
 
 /**
+ * Implements hook_node_presave
+ * {@inheritdoc}
+ */
+function itg_notification_node_presave($node) {
+  if ($node->type == 'notification') {
+    $notification_all = FALSE;
+    foreach ($node->field_ntf_select_device['und'] as $values) {
+      // Now if found all option.
+      if ($values['value'] == 'all') {
+        $notification_all = TRUE;
+        unset($node->field_ntf_select_device['und']);
+      }
+    }
+
+    if ($notification_all) {
+      $node->field_ntf_select_device['und'][0]['value'] = 'all';
+    }
+  }
+}
+
+/**
  * Insert/Update notification details
  * @param object $node
  * @param string $op
  */
 function itg_notification_details($node, $op) {
-  
+
   $scheduled = strtotime($node->field_ntf_schedule[LANGUAGE_NONE][0]['value']);
   if ($op == 'insert') {
     db_insert('itg_notification')
-            ->fields(array(
-                'nid' => $node->nid,
-                'scheduled' => $scheduled,
-                'status' => 'N',
-                'created' => time()
-            ))
-            ->execute();
+        ->fields(array(
+          'nid' => $node->nid,
+          'scheduled' => $scheduled,
+          'status' => 'N',
+          'created' => time()
+        ))
+        ->execute();
   }
   else {
     db_update('itg_notification')
-            ->fields(array(
-                'scheduled' => $scheduled,
-            ))
-            ->condition('nid', $node->nid, '=')
-            ->execute();
+        ->fields(array(
+          'scheduled' => $scheduled,
+        ))
+        ->condition('nid', $node->nid, '=')
+        ->execute();
   }
 }
 
@@ -209,7 +226,7 @@ function itg_notification_details($node, $op) {
 function itg_notification_cronapi($op, $job = NULL) {
   $items['itg_notification'] = array(
     'description' => 'Send notification to mobile',
-    'callback' => 'itg_notification_send_callback', 
+    'callback' => 'itg_notification_send_callback',
   );
   return $items;
 }
@@ -218,18 +235,18 @@ function itg_notification_cronapi($op, $job = NULL) {
  * Custom callback to fetch node for send notification
  */
 function itg_notification_send_callback() {
-  
+
   $current_date = time();
   $query = db_select('itg_notification', 'ntf');
   $query->fields('ntf')
-          ->condition('ntf.status', 'N', '=');
+      ->condition('ntf.status', 'N', '=');
   $result = $query->execute();
 
   // Fetch node to send notification
   while ($record = $result->fetchAssoc()) {
     $scheduled_date = $record['scheduled'];
     if ($scheduled_date <= $current_date) {
-        itg_notification_send_notification($record['nid']);
+      itg_notification_send_notification($record['nid']);
     }
   }
 }
@@ -239,6 +256,6 @@ function itg_notification_send_callback() {
  * @param int $nid
  */
 function itg_notification_send_notification($nid) {
-  
+
 //TO DO : Load node and fetch mobile numbers on the basis of device and send SMS 
 }

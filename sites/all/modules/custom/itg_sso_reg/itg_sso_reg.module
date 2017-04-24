@@ -1,18 +1,23 @@
 <?php
 
 module_load_include('inc', 'itg_sso_reg', 'includes/itg_sso_mail');
+module_load_include('inc', 'itg_sso_reg', 'includes/itg_sso_otp_mail');
 module_load_include('inc', 'itg_sso_reg', 'includes/common_fn');
 module_load_include('inc', 'itg_sso_reg', 'includes/sso_user_form');
+module_load_include('inc', 'itg_sso_reg', 'includes/sso_user_change_password');
+module_load_include('inc', 'itg_sso_reg', 'includes/sso_user_email_mobile_change_form');
 module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
+
 
 /*
  * Implement hook_init
  */
 
 function itg_sso_reg_init() {
-
-  global $user;
+ /* required for future */ 
+/*  global $user, $base_url;
   if (array_key_exists(FRONT_USER, $user->roles)) {
+    print $user->uid;
     $settings = array();
     if ($user->uid > 0) {
 
@@ -26,13 +31,15 @@ function itg_sso_reg_init() {
       $fin = arg(2);
     }
 
-
     $settings['uid'] = $user->uid ? $user->uid : 0;
     $settings['check_sso_url'] = $fin;
+    $settings['base_url'] = $base_url;
     drupal_add_js(array('itg_sso_login' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js');
-  }
-  drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_popup.js');
+    drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js', array('cache' => FALSE));
+  } */
+  
+    drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_popup.js');
+  
 }
 
 /**
@@ -46,6 +53,36 @@ function itg_sso_reg_menu() {
     'title' => 'Sign up',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_sso_reg_multistep_form'),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['sso/change-password'] = array(
+    'title' => 'Change Password',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_sso_reg_password_form'),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['sso-user/%/%'] = array(
+    'title' => 'Change Email/Mobile',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_sso_user_email_form'),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['complete-page'] = array(
+    'title' => 'sso',
+    'page callback' => 'itg_sso_user_email_complete',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['password-success'] = array(
+    'title' => '',
+    'page callback' => 'itg_sso_reg_password_success',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
@@ -63,8 +100,37 @@ function itg_sso_reg_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  
+  $items['admin/config/administration/logout-config'] = array(
+    'title' => 'ITG SSO logout Setting Form',
+    'description' => 'ITG SSO logout Setting Form ',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_sso_logout_form'),
+    'access arguments' => array('administer itg_sso_logout settings'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
+   $items['itguserlogout'] = array(
+    'page callback' => 'itguser_logout',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
+}
+
+/**
+ * Implement hook_permissions()
+ * 
+ * @return array
+ */
+function itg_sso_reg_permission() {
+  return array(
+    'administer itg_sso_logout settings' => array(
+      'title' => t('Edit sso signout setting'),
+      'description' => t('Using this permission user can edit signout setting.'),
+    )
+  );
 }
 
 /**
@@ -74,16 +140,20 @@ function itg_sso_reg_menu() {
 function itg_sso_reg_theme($existing, $type, $theme, $path) {
   $themes = array(
     'itg_sso_notification_mail' => array(
-      'variables' => array('account' => NULL),
+      'variables' => array('account' => NULL, 'url_info' => NULL),
       'template' => 'templates/sso-notification-mail',
-    )
+    ),
+   'itg_sso_otp_mail' => array(
+      'variables' => array('rand_otp' => NULL),
+      'template' => 'templates/sso-otp-mail',
+    ),
   );
 
   return $themes;
 }
 
 /**
- * Send mail to sso user, when email id is valid
+ * Implements hook_mail
  * @param string $key
  * @param string $message
  * @param array $params
@@ -103,5 +173,127 @@ function itg_sso_reg_user_mail($key, &$message, $params) {
         $message['headers'][$key] = $value;
       }
       break;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ * {@inheritdoc}
+ */
+function itg_sso_reg_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'user_login' && !empty($_GET['ReturnTo'])) {
+    $form['#after_build'][] = 'itg_user_login_after_build';
+    array_unshift($form['#validate'], 'itg_sso_user_login_form_validate');
+    $form['#attributes'] = array('autocomplete' => 'off');
+  }
+  if ($form_id == 'user_login' && empty($_GET['ReturnTo'])) {
+    drupal_add_js('jQuery(document).ready(function() {                  
+                          jQuery("#user-login .form-item-remember-me").hide();
+                          jQuery("#user-login #edit-remember-me").prop("checked", false);
+                          
+          });', array('type' => 'inline', 'scope' => 'footer'));
+  }
+}
+
+/**
+ * Implements itg_user_login_after_build().
+ */
+function itg_user_login_after_build($form, &$form_state) {
+ $form['name']['#title'] = t('Enter your email/mobile number'); 
+ $form['name']['#description'] = t('You may login with either your assigned mobile or your e-mail address.'); 
+ return $form; 
+}
+
+/**
+ * Implements itg_sso_user_login_form_validate().
+ */
+function itg_sso_user_login_form_validate(&$form, &$form_state) {
+  $sso_role_id = itg_sso_get_user_id(trim($form_state['values']['name']));
+  $sso_user = user_load($sso_role_id);
+  if (!array_key_exists(FRONT_USER, $sso_user->roles)) {
+    form_set_error('name', 'Invalid credentials !');
+  }
+}
+
+/**
+ * Get uid by name
+ * @param sring $name
+ */
+function itg_sso_get_user_id($name) {
+  $itg_query = db_select('users', 'su')
+      ->fields('su', array('uid'))
+      ->condition('name', $name, '=');
+  $itg_result = $itg_query->execute()->fetchField();
+
+  return $itg_result;
+}
+
+/**
+ * Implements hook_form().
+ * {@inheritdoc}
+ */
+function itg_sso_logout_form($form, &$form_state) {
+  $form = array();
+  $form['signout'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Enter Domain'),
+    '#default_value' => variable_get('signout-domain', ''),
+    '#description' => t("Please enter domain with comma seprated list (Ex: http://www.example.com)"),
+  );
+  
+  $form['submit_button'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save!'),
+  );
+  
+  return $form;
+
+}
+
+/**
+ * Implements hook_form_submit().
+ * {@inheritdoc}
+ */
+function itg_sso_logout_form_submit(&$form, &$form_state) {
+  variable_set('signout-domain', $form_state['values']['signout']);
+  $id_event = variable_get('signout-domain', '');
+  drupal_set_message($id_event.' saved successfully!');
+}
+
+/**
+ * Implements callback for itguserlogout.
+ * {@inheritdoc}
+ */
+function itguser_logout() {
+  global $user;
+
+  if ($user->uid > 0) {
+    $domains = variable_get('signout-domain', '');
+    $domain_array = explode(',', $domains);
+    foreach ($domain_array as $key => $val) {
+      $content .= '<iframe src="' . $val . '/user/logout" id="iframe"></iframe>';
+    }
+
+    echo $content;
+  }
+  else {
+    drupal_access_denied();
+  }
+}
+
+/**
+ * Implements itg_sso_reg_password_success().
+ */
+function itg_sso_reg_password_success() {
+  if (user_is_anonymous()) {
+    return drupal_access_denied();
+  }
+  else {
+    $form['password_success'] = array(
+      '#prefix' => '<div class="password-success">',
+      '#markup' => 'Your passsword has been changed successfully</div>',
+    );
+
+    return $form;
   }
 }

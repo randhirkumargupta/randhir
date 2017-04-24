@@ -1,0 +1,8 @@
+name = ITG Clone story
+description = "ITG Clone story Module"
+core = 7.x
+package = ITG
+
+files[] = itg_clone_story.module
+
+

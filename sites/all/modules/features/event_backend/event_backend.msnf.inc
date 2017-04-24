@@ -21,18 +21,30 @@ function event_backend_msnf_step_info() {
     'label' => 'Step7-Configuration',
     'weight' => '7',
     'children' => array(
-      0 => 'field_config_flashback',
-      1 => 'field_config_home',
-      2 => 'field_config_photo',
-      3 => 'field_config_programme',
-      4 => 'field_config_speakers',
-      5 => 'field_config_sponsors',
-      6 => 'field_config_video',
-      7 => 'field_force_registration_open',
-      8 => 'field_associate_event_photo',
-      9 => 'field_associate_event_video',
-      10 => 'path',
-      11 => 'additional_settings',
+      0 => 'field_associate_event_photo',
+      1 => 'field_associate_event_video',
+      2 => 'field_config_flashback',
+      3 => 'field_config_home',
+      4 => 'field_config_photo',
+      5 => 'field_config_programme',
+      6 => 'field_config_speakers',
+      7 => 'field_config_sponsors',
+      8 => 'field_config_video',
+      9 => 'field_e_associate_highlights',
+      10 => 'field_e_content_font_color',
+      11 => 'field_e_event_banner',
+      12 => 'field_e_heading_bck_color',
+      13 => 'field_e_highlighted_font_color',
+      14 => 'field_e_menu_bck_color',
+      15 => 'field_e_menu_font_color',
+      16 => 'field_e_program_title_color',
+      17 => 'field_e_tab_color',
+      18 => 'field_event_twitter',
+      19 => 'field_force_registration_open',
+      20 => 'field_story_expert_description',
+      21 => 'metatags',
+      22 => 'path',
+      23 => 'additional_settings',
     ),
     'format_type' => 'default',
     'format_settings' => array(
@@ -69,10 +81,11 @@ function event_backend_msnf_step_info() {
       1 => 'field_event_close_date',
       2 => 'field_event_short_description',
       3 => 'field_event_start_date',
-      4 => 'field_registration_close_date',
-      5 => 'field_story_expiry_date',
-      6 => 'field_story_kicker_text',
-      7 => 'title',
+      4 => 'field_event_types',
+      5 => 'field_registration_close_date',
+      6 => 'field_story_expiry_date',
+      7 => 'field_story_kicker_text',
+      8 => 'title',
     ),
     'format_type' => 'default',
     'format_settings' => array(
@@ -128,7 +141,7 @@ function event_backend_msnf_step_info() {
   $export['step_highlights|node|event_backend'] = $msnf;
 
   $msnf = new stdClass();
-  $msnf->disabled = FALSE; /* Edit this to true to make a default msnf disabled initially */
+  $msnf->disabled = TRUE; /* Edit this to true to make a default msnf disabled initially */
   $msnf->api_version = 1;
   $msnf->identifier = 'step_last|node|event_backend';
   $msnf->step_name = 'step_last';
@@ -248,10 +261,8 @@ function event_backend_msnf_step_info() {
     'weight' => '1',
     'children' => array(
       0 => 'field_event_type',
-      1 => 'field_group_registration_fee_10',
-      2 => 'field_group_registration_fee_5',
-      3 => 'field_individual_registration_fe',
-      4 => 'field_no_of_tickets',
+      1 => 'field_no_of_tickets',
+      2 => 'field_ticket_group_type',
     ),
     'format_type' => 'default',
     'format_settings' => array(

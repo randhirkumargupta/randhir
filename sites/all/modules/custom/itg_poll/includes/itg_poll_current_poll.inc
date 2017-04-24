@@ -9,6 +9,10 @@ function itg_poll_get_all_current_poll() {
   $total_polls = get_total_count_polls();
   $list = itg_poll_get_all_current_poll_qry();
   $related_nids = get_polls_related_story($list->nid);
+  $related_content = itg_get_related_content($list->nid);
+  if (function_exists('itg_get_related_story_id')) {
+    $related_result = itg_get_related_story_id($related_content);
+  }
   $node = node_load($list->nid);
   $poll_banner_image = '';
   if (isset($node->field_poll_banner[$node->language][0]['uri']) && !empty($node->field_poll_banner[$node->language][0]['uri'])) {
@@ -47,6 +51,7 @@ function itg_poll_get_all_current_poll() {
   $polls_info['title'] = $node->title;
   $polls_info['updated'] = t('Updated: ') . date('M d Y H:i', $node->changed);
   $polls_info['poll_image_exist_class'] = $poll_image_exist_class;
+  $polls_info['related_content'] = $related_result;
 
   return theme('itg_poll_list_all_forms', array('data' => $polls_info));
 }
@@ -71,6 +76,7 @@ function itg_poll_get_all_current_poll_qry() {
     $query->condition('n.type', 'poll', '=');
     $query->condition('n.status', 1, '=');
     $query->condition('sd.field_poll_start_date_value', $cur_date, '<=');
+    $query->orderBy('n.changed', 'DESC');
     $query->condition(db_or()->isNull('ed.field_poll_end_date_value')->condition('ed.field_poll_end_date_value', $cur_date, '>='));
     $query->range($current_index, 1);
 
@@ -120,7 +126,7 @@ function itg_poll_form_new($form, &$form_state, $nid) {
         $poll_answer[$key] = isset($poll_image) ? $poll_image : '';
       }
       else {
-        $poll_answer[$key] = isset($poll_answer_text) ? t($poll_answer_text) . '<br /><span class="poll-ans-caption">' . t($poll_caption_text) . '</span>' : '';
+        $poll_answer[$key] = isset($poll_answer_text) ? t($poll_answer_text) . '<span class="poll-ans-caption">' . t($poll_caption_text) . '</span>' : '';
       }
     }
   }

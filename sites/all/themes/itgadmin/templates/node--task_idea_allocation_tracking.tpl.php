@@ -36,14 +36,18 @@
 
   <?php if (!empty($content)): ?>
     <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
-       <div class="field">
+<!--       <div class="field">
           <div class="field-label"><?php print t('Task Name:'); ?></div>
           <div class="field-items"><?php print render($title); ?></div>
-        </div>
+        </div>-->
       <?php
+       hide($content['field_task_team_member']);
       //p($content['field_task_finish_date_and_time']['#items']);
+      hide($content['comments']);
       ?>
       <?php print render($content) ?>
+      <?php  print render($content['comment_form']);
+                    print render($content['comments']); ?>
     </div>
   <?php endif; ?>
 

@@ -47,6 +47,10 @@ class itg_personalization_field_handler_tid_edit extends views_handler_field {
       // Adding a slider field into form.      
       $tid_weight = get_personalization_saved_value($row->tid , $user->uid);
       $default_value = isset($tid_weight->weight) ? $tid_weight->weight : 50;
+      $form['markup'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div class="personalization-low-high"><span>Low</span><span>High</span></div>',
+      );
       $form[$this->options['id']][$row_index] = array(                
         '#type' => 'slider',
         '#default_value' => $default_value,        

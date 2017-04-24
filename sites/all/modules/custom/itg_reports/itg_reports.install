@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Create table itg_social_media_log table on back end.
+ * It will holds the logs of social media
+ */
+
+/**
+ * Implements hook_schema()
+ * {@inheritdoc}
+ */
+function itg_reports_schema() {
+    $schema['itg_node_share_count'] = array(
+        'description' => 'The base table for node share count.',
+        'fields' => array(
+            'id' => array(
+                'description' => 'The primary identifier for a log.',
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+            ),
+            'nid' => array(
+                'description' => t('Node id of the shared content.'),
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'default' => 0,
+            ),
+            
+            'share_count' => array(
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => false,
+                'default' => 0,
+            ),
+            
+        ),
+        
+        'primary key' => array('id'),
+    );
+
+
+
+    return $schema;
+}

@@ -1,0 +1,11 @@
+name = Feature for static pages
+description = Feature for static pages
+core = 7.x
+package = Features
+version = 7.x-1.2
+dependencies[] = features
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = static_pages
+features_exclude[dependencies][ctools] = ctools

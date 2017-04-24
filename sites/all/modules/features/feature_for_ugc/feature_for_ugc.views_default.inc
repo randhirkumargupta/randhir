@@ -208,7 +208,7 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['field_ugc_ctype']['id'] = 'field_ugc_ctype';
   $handler->display->display_options['fields']['field_ugc_ctype']['table'] = 'field_data_field_ugc_ctype';
   $handler->display->display_options['fields']['field_ugc_ctype']['field'] = 'field_ugc_ctype';
-  /* Field: Content: Name */
+  /* Field: Field: Name */
   $handler->display->display_options['fields']['field_user_name']['id'] = 'field_user_name';
   $handler->display->display_options['fields']['field_user_name']['table'] = 'field_data_field_user_name';
   $handler->display->display_options['fields']['field_user_name']['field'] = 'field_user_name';
@@ -221,7 +221,7 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
-  /* Field: Content: Source id */
+  /* Field: Field: Source id */
   $handler->display->display_options['fields']['field_story_source_id']['id'] = 'field_story_source_id';
   $handler->display->display_options['fields']['field_story_source_id']['table'] = 'field_data_field_story_source_id';
   $handler->display->display_options['fields']['field_story_source_id']['field'] = 'field_story_source_id';
@@ -533,7 +533,7 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['field_ugc_ctype']['id'] = 'field_ugc_ctype';
   $handler->display->display_options['fields']['field_ugc_ctype']['table'] = 'field_data_field_ugc_ctype';
   $handler->display->display_options['fields']['field_ugc_ctype']['field'] = 'field_ugc_ctype';
-  /* Field: Content: Name */
+  /* Field: Field: Name */
   $handler->display->display_options['fields']['field_user_name']['id'] = 'field_user_name';
   $handler->display->display_options['fields']['field_user_name']['table'] = 'field_data_field_user_name';
   $handler->display->display_options['fields']['field_user_name']['field'] = 'field_user_name';
@@ -546,7 +546,7 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
-  /* Field: Content: Source id */
+  /* Field: Field: Source id */
   $handler->display->display_options['fields']['field_story_source_id']['id'] = 'field_story_source_id';
   $handler->display->display_options['fields']['field_story_source_id']['table'] = 'field_data_field_story_source_id';
   $handler->display->display_options['fields']['field_story_source_id']['field'] = 'field_story_source_id';

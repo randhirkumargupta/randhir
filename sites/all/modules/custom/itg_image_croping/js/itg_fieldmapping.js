@@ -1,5 +1,3 @@
-
-
 /*
  * @file itg_field_mapping.js
  * Contains all the functionality of mapping image to field 
@@ -20,49 +18,50 @@
         jQuery('#tagit').css({top: mouseY, left: mouseX});
         jQuery('#tagname').focus();
     });
-var mTimer=null;
+    var mTimer = null;
     // Save button click - save tags
     jQuery('#file-preview').on('click', '#btnsavetag', function() {
-          window.clearTimeout(mTimer); 
-          mTimer=window.setTimeout(function() {
-          
-        name = jQuery('#tagname').val();
-        tagurl = jQuery('#tagurl').val();
-      
-     if(tagurl!="")
-     {
-        if (/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(tagurl)) {
-            jQuery('.web-error').hide();
-            showloader();
-            jQuery.ajax({
-                url: Drupal.settings.basePath + 'savetags',
-                type: 'post',
-                data: {'pic_id': image_fiedlid, 'name': name, 'url': tagurl, 'pic_x': mouseX, 'pic_y': mouseY, 'type': 'insert'},
-                success: function(data) {
-                    var objdata = jQuery.parseJSON(data);
-                    if (objdata.status == 1)
-                    {
+        window.clearTimeout(mTimer);
+        mTimer = window.setTimeout(function() {
 
-                        jQuery('#tagit').remove();
-                        viewtag(image_fiedlid);
+            name = jQuery('#tagname').val();
+            tagurl = jQuery('#tagurl').val();
 
-                    }
+            if (tagurl != "")
+            {
+                if (/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(tagurl)) {
+                    jQuery('.web-error').hide();
+                    showloader();
+                    jQuery.ajax({
+                        url: Drupal.settings.basePath + 'savetags',
+                        type: 'post',
+                        data: {'pic_id': image_fiedlid, 'name': name, 'url': tagurl, 'pic_x': mouseX, 'pic_y': mouseY, 'type': 'insert'},
+                        success: function(data) {
+                            var objdata = jQuery.parseJSON(data);
+                            if (objdata.status == 1)
+                            {
 
-                },
-                error: function(xhr, desc, err) {
-                    console.log(xhr);
-                    console.log("Details: " + desc + "\nError:" + err);
+                                jQuery('#tagit').remove();
+                                viewtag(image_fiedlid);
+
+                            }
+
+                        },
+                        error: function(xhr, desc, err) {
+                            console.log(xhr);
+                            console.log("Details: " + desc + "\nError:" + err);
+                        }
+                    });
+                } else {
+                    jQuery('.web-error').html('Enter currect url').show();
+                    return false;
                 }
-            });
-        }else {
-            jQuery('.web-error').html('Enter currect url').show();
-            return false;
-        }} else {
-            jQuery('.web-error').html('Enter url').show();
-            return false;
-        }
+            } else {
+                jQuery('.web-error').html('Enter url').show();
+                return false;
+            }
 
- }, 200);
+        }, 200);
     });
 //  cancel image
     jQuery('.cancel-image').click(function() {
@@ -80,8 +79,6 @@ var mTimer=null;
         name = jQuery('#tagname').val();
         tagurl = jQuery('#tagurl').val();
         tagid = jQuery('#tagid').val();
-
-
 
         var img = jQuery('#imgtag').find('img');
         if (/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(tagurl)) {
@@ -112,9 +109,6 @@ var mTimer=null;
 
 
     });
-
-
-
 
     // Cancel the tag box.
     jQuery(document).on('click', '#tagit #btncancel', function() {
@@ -152,15 +146,22 @@ var mTimer=null;
                 var img = jQuery('#imgtag').find('img');
                 var id = jQuery(img).attr('id');
                 //get tags if present
-                
+
                 jQuery('#tagit').remove();
                 viewtag(image_fiedlid);
-           
-
 
             }
         });
     });
+
+// extra lagre
+
+jQuery('.alt_text').on('keyup',function() {
+  jQuery('.alt_text_image').val(jQuery(this).val());
+});
+jQuery('.image_title').on('keyup',function() {
+  jQuery('.image_title_exta').val(jQuery(this).val());
+});
 
     // Remove tags.
     jQuery('#taglist').on('click', '.remove', function() {
@@ -178,7 +179,6 @@ var mTimer=null;
                 //get tags if present
                 jQuery('#tagit').remove();
                 viewtag(image_fiedlid);
-
 
             }
         });
@@ -206,10 +206,6 @@ var mTimer=null;
     });
 
 
-
-
-
-
     viewtag(image_fiedlid); // view all tags available on page load
 //
     function viewtag(pic_id)
@@ -235,54 +231,115 @@ var mTimer=null;
     }
     jQuery('.maptofield').click(function() {
         showloader();
-        var getbame = jQuery('#btn_name').val();
-        parent.jQuery('[name="' + getbame + '[fid]"]').val(image_fiedlid);
-
-
-        if (jQuery('#ckeditor_yes').val() == 1)
-        {
-            parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(0)').val(jQuery('#imcurl').val());
-            parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(2)').val(jQuery('#imcwidth').val());
-            parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(3)').val(jQuery('#imcheigth').val());
-            parent.jQuery.colorbox.close();
-        } else {
-            parent.jQuery("body").find("input[name='" + getbame + "[filefield_itg_image_repository][button]").trigger('mousedown');
-            parent.jQuery(document).ajaxComplete(function(event, request, settings) {
-
-                if (settings.url.indexOf(field_name) >= 0) {
-
-                    var image_alttext = jQuery('#img_alttext').val();
-                    var image_title = jQuery('#img_title').val();
-                    if (image_alttext == "")
-                    {
-                        var imagealt = jQuery('#imgtag img').attr('src');
-                        var image_alttext = imagealt.substring(imagealt.lastIndexOf("/") + 1, imagealt.length);
+        var form_value = jQuery('#image_teg_form').serialize();
+        jQuery.ajax({
+            url: Drupal.settings.basePath + 'saveimageinfo',
+            type: 'post',
+            data: {'form_value': form_value},
+            success: function(data) {
+                var getbame = jQuery('#btn_name').val();
+                var getis_custom_form = jQuery('#is_custom_form').val();
+                var original_img_id = jQuery('#orig_image_fiedlid').val();
+                var exist_original_id = parent.jQuery('#original_image_fids').val();
+                var is_solr = jQuery('#is_solr').val();
+                if (original_img_id != "" && is_solr != '1') {
+                    if (exist_original_id == "") {
+                        parent.jQuery('#original_image_fids').val(original_img_id);
+                    } else {
+                        original_img_id = exist_original_id + '#' + original_img_id
+                        parent.jQuery('#original_image_fids').val(original_img_id);
                     }
-                    if (image_title == "")
-                    {
-                        var imagetitle = jQuery('#imgtag img').attr('src');
-                        var image_title = imagetitle.substring(imagetitle.lastIndexOf("/") + 1, imagetitle.length);
+                }
+                parent.jQuery('#')
+                if (jQuery('#ckeditor_yes').val() == 1)
+                {
+                    if (jQuery('.is_synd').is(':checked')) {
+                        var synd_class = "data-syndication='yes'";
+                    } else {
+                        synd_class = "data-syndication='no'";
                     }
- 
-                    image_title=image_title.replace(/%20/g, " ");
-                    image_alttext=image_alttext.replace(/%20/g, " ");
+                    var imagename = jQuery('#imcurl').val();
+                    var getimagename = '<img ' + synd_class + ' src="' + imagename + '"  alt="" />';
+                    parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text').val(getimagename);
+//
+//                    parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(0)').val(jQuery('#imcurl').val());
+//                    parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(2)').val(jQuery('#imcwidth').val());
+//                    parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(3)').val(jQuery('#imcheigth').val());
+                    parent.jQuery.colorbox.close();
+                } else {
 
-                    setTimeout(function() {
-                        parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
-                        parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
-                        var captionid = getbame + '[field_image_caption][und][0][value]';
-                        captionid = captionid.replace('[field_images][und][0]', "");
-                        parent.jQuery('[name="' + captionid + '"]').val(image_title);
-                        hideloader();
-                        parent.jQuery.colorbox.close();
-                    }, 500);
+                    jQuery('.imagefid').each(function() {
+                        var getvalue = jQuery(this).val();
+                        getvalue = getvalue.split('#');
+                        var newbname = getbame;
+                        var replaced = newbname.substring(newbname.indexOf("[") + 1);
+                        replaced = getvalue[1] + '[' + replaced;
+                        var field_name = jQuery('#field_name').val();
+                        if (getis_custom_form == 1) {
+                            parent.jQuery('[name="' + field_name + '[fid]"]').val(image_fiedlid);
+                            parent.jQuery('.div_' + field_name).hide();
+                            parent.jQuery("body").find("input[name='" + getbame).trigger('mousedown');
+                        }
+                        parent.jQuery('[name="' + replaced + '[fid]"]').val(getvalue[0]);
+                        parent.jQuery("body").find("input[name='" + replaced + "[filefield_itg_image_repository][button]").trigger('mousedown');
+                        parent.jQuery('[name="' + getbame + '[fid]"]').val(image_fiedlid);
+                        parent.jQuery("body").find("input[name='" + getbame + "[filefield_itg_image_repository][button]").trigger('mousedown');
+                        parent.jQuery(document).ajaxComplete(function(event, request, settings) {
+
+                            if (settings.url.indexOf(field_name) >= 0) {
+                                if (image_alttext == "")
+                                {
+                                    var imagealt = jQuery('#imgtag img').attr('src');
+                                    var image_alttext = imagealt.substring(imagealt.lastIndexOf("/") + 1, imagealt.length);
+                                    image_alttext = image_alttext.substr(0, image_alttext.lastIndexOf('.'));
+                                }
+                                if (image_title == "")
+                                {
+                                    var imagetitle = jQuery('#imgtag img').attr('src');
+                                    var image_title = imagetitle.substring(imagetitle.lastIndexOf("/") + 1, imagetitle.length);
+                                    image_title = image_title.substr(0, image_title.lastIndexOf('.'));
+                                }
+                                var image_alttext = jQuery('#alt_text_image').val();
+                                var image_title = jQuery('#image_title_exta').val();
+                                setTimeout(function() {
+                                    if (image_alttext != "")
+                                    {
+                                       // parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
+                                       // parent.jQuery('[name="' + replaced + '[alt]"]').val(image_alttext);
+                                    }
+                                    if (image_title != "")
+                                    {
+                                        //parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
+                                       // parent.jQuery('[name="' + replaced + '[title]"]').val(image_title);
+                                    }
+
+                                    var credit = parent.jQuery('#edit-field-credit-name-und-0-value').val();
+                                    var captionid = getbame + '[field_image_caption][und][0][value]';
+                                    captionid = captionid.replace('[field_images][und][0]', "");
+                                    var captionid1 = getbame + '[field_credit][und][0][value]';
+                                    captionid1 = captionid1.replace('[field_images][und][0]', "");
+                                    var syndi = getbame + '[field_image_syndication][und][yes]';
+                                    syndi = syndi.replace('[field_images][und][0]', "");
+                                    //  parent.jQuery('[name="' + captionid + '"]').val(image_title);
+                                    if (jQuery('.is_synd').is(':checked')) {
+                                        parent.jQuery('[name="' + syndi + '"]').prop('checked', true);
+                                    }
+                                    parent.jQuery('[name="' + captionid1 + '"]').val(credit);
+                                    hideloader();
+                                    parent.jQuery.colorbox.close();
+                                }, 500);
+                            }
+
+                        });
+                    });
                 }
 
-
-            });
-        }
-
-
+            },
+            error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Details: " + desc + "\nError:" + err);
+            }
+        });
 
     })
 
@@ -297,3 +354,4 @@ function hideloader()
 {
     jQuery('#loader-data').hide();
 }
+

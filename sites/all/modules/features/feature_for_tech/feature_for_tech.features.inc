@@ -21,10 +21,10 @@ function feature_for_tech_image_default_styles() {
   $styles['image_750x363'] = array(
     'label' => 'Image_750X363',
     'effects' => array(
-      4 => array(
+      5 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => 750,
+          'width' => 650,
           'height' => 363,
         ),
         'weight' => 1,

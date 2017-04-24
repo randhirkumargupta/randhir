@@ -1,6 +1,7 @@
 name = Custom html widgets
 core = 7.x
 package = Features
+version = 7.x-1.2
 dependencies[] = features
 dependencies[] = features_for_story
 dependencies[] = node
@@ -14,7 +15,9 @@ features[field_instance][] = node-custom_html_widgets-body
 features[node][] = custom_html_widgets
 features[user_permission][] = create custom_html_widgets content
 features[user_permission][] = delete any custom_html_widgets content
+features[user_permission][] = delete any page content
 features[user_permission][] = delete own custom_html_widgets content
+features[user_permission][] = delete own page content
 features[user_permission][] = edit any custom_html_widgets content
 features[user_permission][] = edit own custom_html_widgets content
 features[views_view][] = custom_html_widgets_list

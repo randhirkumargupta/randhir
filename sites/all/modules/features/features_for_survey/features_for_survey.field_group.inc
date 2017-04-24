@@ -24,9 +24,9 @@ function features_for_survey_field_group_info() {
     'weight' => '0',
     'children' => array(
       0 => 'body',
-      1 => 'field_survey_question_display',
-      2 => 'field_story_reporter',
-      3 => 'field_supp_publish',
+      1 => 'field_story_reporter',
+      2 => 'field_supp_publish',
+      3 => 'field_survey_question_display',
       4 => 'field_survey_questions_format',
       5 => 'title',
     ),
@@ -62,8 +62,8 @@ function features_for_survey_field_group_info() {
     'weight' => '2',
     'children' => array(
       0 => 'field_survey_end_date',
-      1 => 'field_survey_start_date',
-      2 => 'field_survey_expity_date',
+      1 => 'field_survey_expity_date',
+      2 => 'field_survey_start_date',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -152,7 +152,7 @@ function features_for_survey_field_group_info() {
   $field_groups['group_survey_question|node|survey|form'] = $field_group;
 
   $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_survey_related_content|node|survey|form';
   $field_group->group_name = 'group_survey_related_content';

@@ -1,0 +1,11 @@
+name = Feature for magazine widget
+description = magazine widget according supplement and category
+core = 7.x
+package = Features
+version = 7.x-1.1
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = category_of_stroy_base_magazin_widget
+features[views_view][] = supplement_base_magazin_widget
+features_exclude[dependencies][ctools] = ctools

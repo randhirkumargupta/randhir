@@ -33,7 +33,44 @@ function itg_theme() {
  * {@inheritdoc}
  */
 function itg_preprocess_node(&$variables) {
+  $node = $variables['node'];
   unset($variables['content']['links']['node']['#links']['node-readmore']);
+  // Inclue pathauto module
+  module_load_all_includes('inc', 'pathauto', 'pathauto');
+  if (function_exists('pathauto_cleanstring')) {
+    // This assumes that you are using Pathauto for generating clean URLs.
+    // Get the "clean" title.
+    $title = pathauto_cleanstring($variables['node']->title);
+    // Replace all dashes with underscores. This is necessary for recognizing the
+    // template filenames.
+    $title = str_replace('-', '_', $title);
+    // Add new template variation.
+    $variables['theme_hook_suggestions'][] = 'node__' . $title;
+    $variables['static_page_menu'] = itg_block_render('menu', 'menu-about-us-page-menu');
+    if (function_exists('global_comment_last_record')) {
+      $variables['global_comment_last_record'] = global_comment_last_record();
+    }
+  }
+
+  if ($variables['type'] == 'webform') {
+    unset($variables['submitted']);
+    //$variables['submitted'] = t('Submitted by !username on !datetime', array('!username' => $variables['name'], '!datetime' => $variables['date']));
+  }
+}
+
+/**
+ * Returns blocks.
+ * @param string $module
+ * @param string $block_id
+ * @return array
+ */
+function itg_block_render($module, $block_id) {
+  $block = block_load($module, $block_id);
+  $block_content = _block_render_blocks(array($block));
+  unset($block_content['menu_menu-about-us-page-menu']->subject);
+  $build = _block_get_renderable_array($block_content);
+  $block_rendered = drupal_render($build);
+  return $block_rendered;
 }
 
 /**
@@ -43,11 +80,22 @@ function itg_preprocess_node(&$variables) {
 function itg_preprocess_comment(&$variables) {
   $comment = $variables['elements']['#comment'];
   $node = $variables['elements']['#node'];
-  if ($node->type == 'story' || $node->type == 'blog') {
+  if ($node->type == 'story' || $node->type == 'blog' || $node->type == 'photogallery' || $node->type == 'videogallery') {
     $variables['created'] = format_date($comment->created, 'custom', 'D, d/m/Y h:i');
     $variables['changed'] = format_date($comment->changed, 'custom', 'D, d/m/Y h:i');
-
-    $variables['submitted'] = t('Submitted by !username on !datetime', array('!username' => $variables['author'], '!datetime' => $variables['created']));
+    if ($comment->uid != 0) {
+      $user = user_load($comment->uid);
+      if (!empty($user->field_first_name[LANGUAGE_NONE][0]['value'])) {
+        $submit_name = $user->field_first_name[LANGUAGE_NONE][0]['value'];
+      }
+      else {
+        $submit_name = $variables['author'];
+      }
+    }
+    else {
+      $submit_name = $variables['author'];
+    }
+    $variables['submitted'] = t('Submitted by !username on !datetime', array('!username' => $submit_name, '!datetime' => $variables['created']));
   }
 }
 
@@ -69,23 +117,58 @@ function itg_preprocess_field(&$vars) {
  * {@inheritdoc}
  */
 function itg_preprocess_page(&$variables) {
+  global $base_url;
+  $base_root;
   $arg = arg();
-  if ($arg[0] == 'taxonomy' && $arg[1] == 'term') {
-    $term = taxonomy_term_load($arg[2]);
-    if ($term->vocabulary_machine_name = 'category_management') {
-      // remove the extra vocavolary information on page buttom.
-      unset($variables['page']['content']['system_main']);
-    }
-  }
-  
+  //unset($variables['page']['content']);
   // add condition to hide header and footer for signup, forgot-password page
   if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
-  
-  if ($arg[0] == 'signup' || $arg[0] == 'forgot-password') {
+
+  if ((!empty($arg[2]) && $arg[2] == 'ugc') || $arg[0] == 'signup' || $arg[0] == 'forgot-password' || $arg[0] == 'sso-user' || $arg[0] == 'sso' || $arg[0] == 'password-success' || $arg[0] == 'complete-page' || $arg[0] == 'associate-photo-video-content' || $arg[0] == 'funalytics-popup' || $arg[1] == 'videogallery-embed') {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
+
+  if ($arg[0] == 'photogallery-embed' || $arg[0] == 'videogallery-embed') {
+    $variables['theme_hook_suggestions'][] = 'page__itgembed';
+  }
+
+  // Access domain
+  if (function_exists('domain_select_format')) {
+    $format = domain_select_format();
+    foreach (domain_domains() as $data) {
+      if ($data['valid'] || user_access('access inactive domains')) {
+        $options[$data['domain_id']] = empty($format) ? check_plain($data['sitename']) : $data['sitename'];
+      }
+    }
+
+    // Add another page.tpl file for existing domains
+    $parse = parse_url($base_url);
+
+    // Call Event Parent TPL
+    if (in_array($parse['host'], $options)) {
+      $variables['theme_hook_suggestions'][] = 'page__event_domain';
+    }
+  }
+
+
+  // Call Event Parent TPL
+  if (!empty($variables['node']->type) && $variables['node']->type == 'event_backend' || $arg[0] == 'event') {
+    $variables['theme_hook_suggestions'][] = 'page__event_domain';
+  }
+
+  if ($arg[0] == 'blog-listing') {
+    drupal_add_css('#page-title  {display: none !important}', 'inline');
+  }
+  
+  if($arg[0] == 'blog') {
+    drupal_add_css('#page-title , .feed-icon  {display: none !important}' ,'inline');
+    unset($variables['page']['content']);
+    //pr($variables['theme_hook_suggestions']);
+    $variables['theme_hook_suggestions'][] = 'page__itg_blog_page';
+  }
+  
 }
 
 /**
@@ -114,3 +197,173 @@ function itg_breadcrumb($variables) {
   return $crumbs;
 }
 
+/**
+ * {@inheritdoc}
+ */
+function itg_preprocess_html(&$vars) {
+  global $base_url, $user;
+  if ($base_url == BACKEND_URL && !empty($user->uid)) {
+    $vars['classes_array'][] = 'pointer-event-none';
+  }
+  // Code started for adding header , body start , body close for ads module
+
+  if (function_exists('get_header_body_start_end_code')) {
+    $ads_code = get_header_body_start_end_code();
+    foreach ($ads_code as $ads_key => $ads_chunk) {
+      $code = implode(' ', $ads_chunk);
+      $script_code = array(
+          '#type' => 'markup',
+          '#markup' => $code,
+      );
+      drupal_add_html_head($script_code, $ads_key);
+    }
+  }
+
+  // Code ends for adding header, body start, body close for ads module
+}
+
+/**
+ * page head alter for update the meta keywords
+ */
+function itg_html_head_alter(&$head_elements) {
+  $arg = arg();
+  global $base_url;
+  if (!empty(arg(1)) && is_numeric(arg(1))) {
+    $arg_data = node_load(arg(1));
+    if ($arg_data->type == 'videogallery') {
+      if (is_array($arg_data->field_video_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_video_configurations[LANGUAGE_NONE])) {
+        $configurableopt = $arg_data->field_video_configurations[LANGUAGE_NONE];
+        foreach ($configurableopt as $key => $value) {
+          $opt_value[] = $value['value'];
+        }
+        if (in_array("google_standout", $opt_value)) {
+          $standout_path = $base_url . '/' . $arg_data->path['alias'];
+          $head_elements['google_standout'] = array(
+              '#type' => 'html_tag',
+              '#tag' => 'link',
+              '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
+          );
+        }
+      }
+    }
+    else if ($arg_data->type == 'photogallery') {
+      if (is_array($arg_data->field_photogallery_configuration[LANGUAGE_NONE]) && !empty($arg_data->field_photogallery_configuration[LANGUAGE_NONE])) {
+        $configurableopt = $arg_data->field_photogallery_configuration[LANGUAGE_NONE];
+        foreach ($configurableopt as $key => $value) {
+          $opt_value[] = $value['value'];
+        }
+        if (in_array("google_standout", $opt_value)) {
+          $standout_path = $base_url . '/' . $arg_data->path['alias'];
+          $head_elements['google_standout'] = array(
+              '#type' => 'html_tag',
+              '#tag' => 'link',
+              '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
+          );
+        }
+      }
+    }
+    else if ($arg_data->type == 'podcast') {
+      if (is_array($arg_data->field_podcast_configuration[LANGUAGE_NONE]) && !empty($arg_data->field_podcast_configuration[LANGUAGE_NONE])) {
+        $configurableopt = $arg_data->field_podcast_configuration[LANGUAGE_NONE];
+        foreach ($configurableopt as $key => $value) {
+          $opt_value[] = $value['value'];
+        }
+        if (in_array("google_standout", $opt_value)) {
+          $standout_path = $base_url . '/' . $arg_data->path['alias'];
+          $head_elements['google_standout'] = array(
+              '#type' => 'html_tag',
+              '#tag' => 'link',
+              '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
+          );
+        }
+      }
+    }
+    else if ($arg_data->type == 'story') {
+      if (is_array($arg_data->field_story_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_story_configurations[LANGUAGE_NONE])) {
+        $configurableopt = $arg_data->field_story_configurations[LANGUAGE_NONE];
+        foreach ($configurableopt as $key => $value) {
+          $opt_value[] = $value['value'];
+        }
+        if (in_array("google_standout", $opt_value)) {
+          $standout_path = $base_url . '/' . $arg_data->path['alias'];
+          $head_elements['google_standout'] = array(
+              '#type' => 'html_tag',
+              '#tag' => 'link',
+              '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
+          );
+        }
+      }
+    }
+  }
+  // Updating meta name keywords to news_keyword sitewide
+  $meta_name_keyword = array_keys($head_elements);
+  if (in_array('metatag_keywords_0', $meta_name_keyword)) {
+    $head_elements['metatag_keywords_0']['#name'] = 'news_keyword';
+  }
+  else {
+    if ($arg[0] == 'node' && is_numeric($arg[1])) {
+      $node = node_load($arg[1]);
+      $meta_keywords = $node->metatags[LANGUAGE_NONE]['keywords']['value'];
+      if (!empty($meta_keywords)) {
+        $head_elements['metatag_keywords_0'] = array(
+            '#type' => 'html_tag',
+            '#tag' => 'meta',
+            '#attributes' => array(
+                'name' => 'news_keyword',
+                'content' => $meta_keywords
+            ),
+        );
+      }
+    }
+    elseif ($arg[0] == 'taxonomy' && is_numeric($arg[2])) {
+      $term = taxonomy_term_load($arg[2]);
+      $meta_keywords = $term->metatags[LANGUAGE_NONE]['keywords']['value'];
+      if (!empty($meta_keywords)) {
+        $head_elements['metatag_keywords_0'] = array(
+            '#type' => 'html_tag',
+            '#tag' => 'meta',
+            '#attributes' => array(
+                'name' => 'news_keyword',
+                'content' => $meta_keywords
+            ),
+        );
+      }
+
+      if ($term->vid == CATEGORY_MANAGMENT) {
+       
+        if (!empty($term->field_cm_hide_cat_from_search[LANGUAGE_NONE]) && $term->field_cm_hide_cat_from_search[LANGUAGE_NONE][0]['value'] == 1) {
+          if ($term->field_cm_no_follow[LANGUAGE_NONE][0]['value'] == 1) {
+            $head_elements['nofollow'] = array(
+                '#tag' => 'meta',
+                '#type' => 'html_tag',
+                '#attributes' => array(
+                    'name' => 'robots',
+                    'content' => 'nofollow'
+                )
+            );
+          }
+          if ($term->field_cm_no_follow[LANGUAGE_NONE][1]['value'] == 2) {
+            $head_elements['noindex_nofollow'] = array(
+                '#tag' => 'meta',
+                '#type' => 'html_tag',
+                '#attributes' => array(
+                    'name' => 'robots',
+                    'content' => 'noindex'
+                )
+            );
+          }
+          if ($term->field_cm_no_follow[LANGUAGE_NONE][0]['value'] == 2) {
+            $head_elements['noindex_nofollow'] = array(
+                '#tag' => 'meta',
+                '#type' => 'html_tag',
+                '#attributes' => array(
+                    'name' => 'robots',
+                    'content' => 'noindex'
+                )
+            );
+          }
+        }
+      }
+    }
+  }
+}

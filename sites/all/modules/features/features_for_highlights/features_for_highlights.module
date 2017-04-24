@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Features for Highlights feature.
+ */
+
+include_once 'features_for_highlights.features.inc';

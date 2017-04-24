@@ -10,7 +10,7 @@ $remix_data = $rows[0];
     </a>
   <?php else : ?>
     <a href="<?php print $base_url . '/' . "sosorry/video/" . $remix_data['nid'] . "" ?>" class="pic">
-      <img  src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+      <img width='170' height='127'  src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg' alt='' />
     </a>
   <?php endif; ?>
 </div>

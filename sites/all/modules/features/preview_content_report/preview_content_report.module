@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the preview content report feature.
+ */
+
+include_once 'preview_content_report.features.inc';

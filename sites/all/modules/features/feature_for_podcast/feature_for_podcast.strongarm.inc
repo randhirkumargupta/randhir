@@ -98,6 +98,12 @@ function feature_for_podcast_strongarm() {
         'path' => array(
           'weight' => '1',
         ),
+        'domain' => array(
+          'weight' => '1',
+        ),
+        'redirect' => array(
+          'weight' => '30',
+        ),
       ),
       'display' => array(),
     ),
@@ -143,6 +149,13 @@ function feature_for_podcast_strongarm() {
   $strongarm->name = 'node_submitted_podcast';
   $strongarm->value = 0;
   $export['node_submitted_podcast'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_podcast_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_podcast_pattern'] = $strongarm;
 
   return $export;
 }

@@ -13,9 +13,9 @@
  * {@inheritdoc}
  */
 function itg_blog_node_presave($node) {
-  if ($node->type == 'blog') {
-    $node->title = trim($node->title);
-  }
+    if ($node->type == 'blog') {
+        $node->title = trim($node->title);
+    }
 }
 
 /**
@@ -23,17 +23,21 @@ function itg_blog_node_presave($node) {
  * {@inheritdoc}
  */
 function itg_blog_views_pre_render(&$view) {
-
-  if ($view->name == "manage_blogs") {
-    $header_content_blog = '<span class="count">Count (' . $view->total_rows . ') </span>';
-    $header_content_blog .= l(t('Post new Blog'), 'node/add/blog', array('query' => array('destination' => 'manage-blogs')));
-    $view->attachment_before = $header_content_blog;
-  }
-
-  if ($view->name == "blogs_management") {
-    $header_content_blog = '<span class="count">Count (' . $view->total_rows . ') </span>';
-    $view->attachment_before = $header_content_blog;
-  }
+    if ($view->name == "manage_blogs") {
+        $header_content_blog = '<span class="count">Count (' . $view->total_rows . ') </span>';
+        $header_content_blog .= l(t('Post new Blog'), 'node/add/blog', array('query' => array('destination' => 'manage-blogs')));
+        $view->attachment_before = $header_content_blog;
+    }
+    if ($view->name == "blogs_management") {
+        $header_content_blog = '<span class="count">Count (' . $view->total_rows . ') </span>';
+        $view->attachment_before = $header_content_blog;
+    }
+    // Add create link on header of the ugc tab view.
+    if ($view->name == 'blog_ugc_tab') {
+        $header_content_blog = '<span class="count">Count (' . $view->total_rows . ') </span>';
+        $header_content_blog .= l(t('Post new Blog'), 'node/add/blog', array('query' => array('destination' => 'manage-blogs')));
+        $view->attachment_before = $header_content_blog;
+    }
 }
 
 /**
@@ -42,26 +46,31 @@ function itg_blog_views_pre_render(&$view) {
  */
 function itg_blog_form_alter(&$form, &$form_state, $form_id) {
 
-  switch ($form_id) {
-    case 'blog_node_form':
-      if (!isset($_REQUEST['destination'])) {
-        $destination = '';
-      }
-      else {
-        $destination_array = explode('?', $_REQUEST['destination']);
-        $destination = $destination_array[0];
-      }
+    switch ($form_id) {
+        case 'blog_node_form':
+            $form['field_story_comment_question']['#states'] = array(
+                'visible' => array(
+                ':input[name="field_blog_configuration[und][commentbox]"]' => array('checked' => TRUE) ,
+              )
+            );
+            if (!isset($_REQUEST['destination'])) {
+                $destination = '';
+            }
+            else {
+                $destination_array = explode('?', $_REQUEST['destination']);
+                $destination = $destination_array[0];
+            }
 
-      $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-        '#weight' => 20,
-      );
+            $form['actions']['cancel'] = array(
+                '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+                '#weight' => 20,
+            );
 
-      $form['#after_build'][] = 'itg_blog_after_build';
-      $form['actions']['submit']['#submit'][] = 'itg_blog_form_custom_callback';
+            $form['#after_build'][] = 'itg_blog_after_build';
+            $form['actions']['submit']['#submit'][] = 'itg_blog_form_custom_callback';
 
-      break;
-  }
+            break;
+    }
 }
 
 /**
@@ -70,17 +79,28 @@ function itg_blog_form_alter(&$form, &$form_state, $form_id) {
  * @param array $form_state
  */
 function itg_blog_form_custom_callback($form, &$form_state) {
+// code insert image in custom table
+    $node_id = $form_state['node']->nid;
+    if ($form_state['input']['original_image_fids'] != "") {
+        $image_ids = explode('#', $form_state['input']['original_image_fids']);
 
-  $workbench_current_state = $form_state['node']->workbench_moderation_state_new;
-  $node_type = ucfirst($form_state['node']->type);
-  $node_type = str_replace("_", " ", $node_type);
-  $title = ucfirst($form_state['node']->title);
+        if (!empty($image_ids)) {
+            if (function_exists('itg_photogallery_insert_image_data'))
+                itg_photogallery_insert_image_data($image_ids, $node_id);
+        }
+    }
+    $workbench_current_state = $form_state['node']->workbench_moderation_state_new;
+    $node_type = ucfirst($form_state['node']->type);
+    $node_type = str_replace("_", " ", $node_type);
+    $title = ucfirst($form_state['node']->title);
 
-  if (isset($_SESSION['messages']['status'])) {
-    unset($_SESSION['messages']['status']);
-  }
-
-  itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $_REQUEST['destination']);
+    if (isset($_SESSION['messages']['status'])) {
+        unset($_SESSION['messages']['status']);
+    }
+    
+    if ($form_state['input']['op'] != 'Save as Draft') {
+      itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $_REQUEST['destination']);
+    }
 }
 
 /**
@@ -91,18 +111,26 @@ function itg_blog_form_custom_callback($form, &$form_state) {
  */
 function itg_blog_after_build($form, &$form_state) {
 
-  global $user, $base_url;
-  unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags']['#description']);
+    global $user, $base_url;
+    if (!isset($form['#node']->nid)) {
+        // hide remove button of first field on add form 
+        drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-blog-configuration-und-commentbox").trigger("click");
+            });', array('type' => 'inline', 'scope' => 'footer'));
+    }
+    $form['original_image_fids'] = array(
+        '#type' => 'hidden',
+        '#value' => $form_state['input']['original_image_fids'],
+        '#attributes' => array('id' => 'original_image_fids', 'name' => 'original_image_fids'),
+    );
+    $settings = array();
+    $settings['base_url'] = $base_url;
+    $settings['uid'] = $user->uid;
 
-  $settings = array();
-  $settings['base_url'] = $base_url;
-  $settings['uid'] = $user->uid;
+    drupal_add_js(array('itg_blog' => array('settings' => $settings)), array('type' => 'setting','scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_blog') . '/js/itg_blog.js', array('weight' => 1,'scope' => 'footer'));
 
-  drupal_add_js(array('itg_blog' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_blog') . '/js/itg_blog.js', array('weight' => 1));
-
-  return $form;
+    return $form;
 }
 
 /**
@@ -110,21 +138,21 @@ function itg_blog_after_build($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_blog_theme($existing, $type, $theme, $path) {
-  $themes = array(
-    'blog_node_form' => array(
-      'arguments' => array('form' => NULL),
-      'template' => 'blog-node-form',
-      'path' => drupal_get_path('module', 'itg_blog') . '/templates',
-      'render element' => 'form',
-    ),
-    'itg_blog_tab_form_display_block' => array(
-      'template' => 'itg-blog-form-tab-template',
-      'path' => drupal_get_path('module', 'itg_blog') . '/templates',
-      'variables' => array('data' => NULL),
-    ),
-  );
+    $themes = array(
+        'blog_node_form' => array(
+            'arguments' => array('form' => NULL),
+            'template' => 'blog-node-form',
+            'path' => drupal_get_path('module', 'itg_blog') . '/templates',
+            'render element' => 'form',
+        ),
+        'itg_blog_tab_form_display_block' => array(
+            'template' => 'itg-blog-form-tab-template',
+            'path' => drupal_get_path('module', 'itg_blog') . '/templates',
+            'variables' => array('data' => NULL),
+        ),
+    );
 
-  return $themes;
+    return $themes;
 }
 
 /**
@@ -132,12 +160,12 @@ function itg_blog_theme($existing, $type, $theme, $path) {
  * {@inheritdoc}
  */
 function itg_blog_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  if ($form["#id"] == 'views-exposed-form-manage-blogs-page' || $form["#id"] == 'views-exposed-form-blogs-management-page' || $form['#id'] == 'views-exposed-form-blogs-management-page-1' || $form['#id'] == 'views-exposed-form-blogs-management-page-2' || $form['#id'] == 'views-exposed-form-blogs-management-page-3' || $form['#id'] == 'views-exposed-form-blogs-management-page-5' || $form['#id'] == 'views-exposed-form-blogs-management-page-6' || $form['#id'] == 'views-exposed-form-blogs-management-page-7' || $form['#id'] == 'views-exposed-form-blogs-management-page-4' || $form['#id'] == 'views-exposed-form-blogs-management-page-10') {
-    $form['title']['#autocomplete_path'] = 'content-title-list/blog/autocomplete';
-    $form['title']['#attributes'] = array('placeholder' => t('Title'));
-    $form['nid']['#autocomplete_path'] = 'content-nid-list/blog/autocomplete';
-    $form['nid']['#attributes'] = array('placeholder' => t('Blogs ID'));
-  }
+    if ($form["#id"] == 'views-exposed-form-manage-blogs-page' || $form["#id"] == 'views-exposed-form-blogs-management-page' || $form['#id'] == 'views-exposed-form-blogs-management-page-1' || $form['#id'] == 'views-exposed-form-blogs-management-page-2' || $form['#id'] == 'views-exposed-form-blogs-management-page-3' || $form['#id'] == 'views-exposed-form-blogs-management-page-5' || $form['#id'] == 'views-exposed-form-blogs-management-page-6' || $form['#id'] == 'views-exposed-form-blogs-management-page-7' || $form['#id'] == 'views-exposed-form-blogs-management-page-4' || $form['#id'] == 'views-exposed-form-blogs-management-page-10' || $form['#id'] == 'views-exposed-form-blog-ugc-tab-page') {
+        $form['title']['#autocomplete_path'] = 'content-title-list/blog/autocomplete';
+        $form['title']['#attributes'] = array('placeholder' => t('Title'));
+        $form['nid']['#autocomplete_path'] = 'content-nid-list/blog/autocomplete';
+        $form['nid']['#attributes'] = array('placeholder' => t('Blogs ID'));
+    }
 }
 
 /**
@@ -145,12 +173,12 @@ function itg_blog_form_views_exposed_form_alter(&$form, &$form_state, $form_id) 
  * @return array $blocks
  */
 function itg_blog_block_info() {
-  $blocks['blog_tab_form_block'] = array(
-    'info' => t('Blog Form Tab Block'),
-    'cache' => DRUPAL_CACHE_GLOBAL,
-  );
+    $blocks['blog_tab_form_block'] = array(
+        'info' => t('Blog Form Tab Block'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
 
-  return $blocks;
+    return $blocks;
 }
 
 /**
@@ -158,14 +186,13 @@ function itg_blog_block_info() {
  * {@inheritdoc}
  */
 function itg_blog_block_view($delta = '') {
-  $block = array();
+    $block = array();
 
-  switch ($delta) {
-    case 'blog_tab_form_block':
-      $block['content'] = theme('itg_blog_tab_form_display_block', array('data' => ''));
-      break;
-  }
+    switch ($delta) {
+        case 'blog_tab_form_block':
+            $block['content'] = theme('itg_blog_tab_form_display_block', array('data' => ''));
+            break;
+    }
 
-  return $block;
+    return $block;
 }
-

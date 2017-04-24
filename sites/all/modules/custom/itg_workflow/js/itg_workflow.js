@@ -39,6 +39,7 @@ jQuery(document).ready(function() {
        jQuery("#edit-submit").click();*/
        
        var story_state = jQuery('#story_submit_link').attr('class').split(' ')[1];
+       var title = jQuery('#edit-title').val();
        var ndtype = jQuery('[name="ndtype"]').val();
        
        if (story_state == 'published' || story_state == 'needs_review') {
@@ -48,7 +49,9 @@ jQuery(document).ready(function() {
        }
        
            if (msg == true) {
+               if(title != '') {
                 jQuery("#edit-workbench-moderation-state-new").val(story_state);
+            }
                 jQuery("#edit-submit").click();
                 return true;
            }
@@ -81,6 +84,13 @@ jQuery(document).ready(function() {
     }
     
     });                  
+});
+
+// hide workbench dropdown
+jQuery(document).ready(function() {
+    jQuery("#edit-revision-information").show();
+    jQuery(".form-item-workbench-moderation-state-new").hide();
+    jQuery("#edit-field-story-archive").hide();              
 });
 
 //jQuery(document).ready(function() {

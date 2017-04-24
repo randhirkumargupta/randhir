@@ -1,0 +1,223 @@
+<?php
+
+/**
+ * @file
+ * The ITG Flag module.
+ *
+ * Contains functionality for Flag.
+ */
+
+/**
+ * Tmplements hook_init()
+ */
+function itg_flag_init() {
+  global $user, $base_url;  
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+  if (isset($_GET['referral_key']) && !empty($_GET['referral_key'])) {
+    $_SESSION['referral_key'] = check_plain($_GET['referral_key']);
+    drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery(".register-icon").trigger("click");             
+          });', array('type' => 'inline', 'scope' => 'footer'));
+  }
+  
+  drupal_add_js(array('itg_flag' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_flag') . '/js/itg_flag.js', array('weight' => 1));
+}
+
+/**
+ * Implements hook_menu().
+ * @return array
+ */
+function itg_flag_menu() {
+  $items['flag-details-ajax'] = array(
+    'page callback' => 'itg_flag_details',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  $items['user-activity-front-end'] = array(
+    'page callback' => 'itg_user_activity_front',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  $items['user-activity-front-highlight'] = array(
+    'page callback' => 'itg_user_activity_front_highlight',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements itg_flag_details
+ */
+function itg_flag_details() {
+  global $user;
+  
+  $nd_id = $_POST['nd_id'];
+  $typ = $_POST['typ'];
+  $dtag = $_POST['dtag'];
+  if(isset($_COOKIE['likeDislike'."_".$nd_id])) {
+    $response = array('error' => 'error', 'nd_id' => $nd_id);
+    print json_encode($response);
+  }
+  else {
+    if (function_exists('itg_get_migrated_like_count')) {
+      $migrated_count = itg_get_migrated_like_count(ltrim($nd_id, '0'));
+    }
+
+    if ($typ == 'like_count') {
+      $pre_mig_count = $migrated_count[0]['like_count'];
+    }
+
+    if ($typ == 'dislike_count') {
+      $pre_mig_count = $migrated_count[0]['dislike_count'];
+    }
+    if (function_exists('itg_flag_get_count')) {
+    $pre_count = itg_flag_get_count($nd_id, $typ);
+    }
+  $nid = itg_flag_get_nid($nd_id);
+  if (!empty($pre_count[$typ])) {
+    $pre_count = $pre_count[$typ] + 1;
+    $mig_count = $pre_mig_count + $pre_count;
+  }
+  else {
+    
+    $pre_count = 1;
+    $mig_count = $pre_mig_count + $pre_count;
+  }
+  if (!empty($nid)) {
+    itg_flag_upd_count($nd_id, $typ, $pre_count);
+    if (in_array('Front User', $user->roles) && $typ == 'like_count') {
+      itg_loyalty_reward_earnpoint($nd_id, 'like', $user->uid);
+    }
+  }
+  if (empty($nid)) {
+    itg_flag_insert_count($nd_id, $typ, $pre_count);
+    if (in_array('Front User', $user->roles) && $typ == 'like_count') {
+      itg_loyalty_reward_earnpoint($nd_id, 'like', $user->uid);
+    }
+  }
+  if ($dtag != 'undefined') {
+      if ($dtag == 'sty') {
+        $response = array('type' => $typ, 'count' => $mig_count, 'nd_id' => $nd_id, 'chk' => 'sty');
+      }
+      if ($dtag == 'dsty') {
+        $response = array('type' => $typ, 'count' => $pre_count, 'nd_id' => $nd_id, 'chk' => 'dsty');
+      }
+    }
+    else {
+      $response = array('type' => $typ, 'count' => $mig_count, 'nd_id' => $nd_id);
+    }
+    print json_encode($response);
+  }
+}
+
+/**
+ * Implements itg_user_activity_front
+ */
+function itg_user_activity_front() {
+  global $user;
+
+  $nd_id = $_POST['nd_id'];
+  $emoji_id = explode('-', $nd_id);
+  $dtag = $_POST['dtag'];
+  $dstatus = $_POST['dstatus'];
+  $user_activity = $_POST['data_activity'];
+  $activity_date = date('d-m-Y');
+  $activity_date_time = date('d-m-Y h:i:s');
+
+  if (function_exists('mongodb'))
+  {
+    $con = mongodb();
+    // check connection
+    if ($con)
+    {
+      if($user_activity == 'twitter_share' || $user_activity == 'google_share' || $user_activity == 'fb_follow' || $user_activity == 'twitter_follow' || $user_activity == 'google_follow') {
+       if($user->uid) { 
+       $people = $con->front_user_activity;
+       $qry = array("nid" => $nd_id, "uid" => $user->uid, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus ,"timestamp" =>time());
+       $result = $people->insert($qry);
+       $response = array('success' => $dstatus, 'activity' => $user_activity, 'type' => $dtag);
+       itg_loyalty_reward_earnpoint($nd_id, $user_activity, $user->uid);
+       print json_encode($response);
+       } else {
+         $response = array('success' => 'anonymous', 'activity' => $user_activity, 'type' => $dtag);
+         print json_encode($response);
+       }
+      }
+      else {
+        $people = $con->front_user_activity;
+        $get_previous_info = itg_get_front_activity_info($nd_id, $dtag, $user->uid, $user_activity, $status = '');
+        if (empty($get_previous_info['nid']))
+        {
+          $actual_data = node_load($nd_id);
+          $primary_cat_id = $actual_data->field_primary_category[LANGUAGE_NONE][0]['value'];
+          $primary_cat_name = taxonomy_term_load($actual_data->field_primary_category[LANGUAGE_NONE][0]['value']);
+          $extra_image = $actual_data->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+          $path = $actual_data->path['source'];
+          $qry = array("nid" => $nd_id, "uid" => $user->uid, "title" => $actual_data->title, "path" => $path, "image" => $extra_image, "primary_category_id" => $primary_cat_id, "primary_category_name" => $primary_cat_name->name, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus, "timestamp" =>time());
+          $result = $people->insert($qry);
+          $response = array('success' => $dstatus, 'activity' => $user_activity, 'type' => $dtag);
+          print json_encode($response);
+        }
+        else
+        {
+          try {
+            $newdata = array('$set' => array("status" => $dstatus, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time , "timestamp" =>time()));
+            $people->update(array("nid" => $nd_id, "activity" => $user_activity, "uid" => $user->uid), $newdata);
+            $response = array("success" => $dstatus, 'activity' => $user_activity, 'type' => $dtag);
+            print json_encode($response);
+          }
+          catch (Exception $e) {
+            print $e->getMessage() . $nd_id;
+          }
+        }
+      }
+    } //close connection
+  }
+}
+
+/**
+ * Implement itg_user_activity_front_highlight().
+ */
+function itg_user_activity_front_highlight() {
+  
+  $nd_id = $_POST['nd_id'];
+  $emoji_id = explode('-', $nd_id);
+  $dtag = $_POST['dtag'];
+  $dstatus = $_POST['dstatus'];
+  $user_activity = $_POST['data_activity'];
+  $activity_date = date('d-m-Y');
+  $activity_date_time = date('d-m-Y h:i:s');
+  
+  
+  if (isset($_COOKIE['hightlights_emoji' . "_" . $nd_id])) {
+    $response = array('ok' => 'error', 'nd_id' => $emoji_id[0]);
+    print json_encode($response);
+  }
+  else {
+    if (function_exists('mongodb')) {
+      $con = mongodb();
+      if ($con) {
+        $people = $con->front_user_activity_highlight;
+        if (!empty($nd_id)) {
+          $emoji_count = itg_common_mongo_activity_count($nd_id, 'front_user_activity_highlight');
+          if (!empty($emoji_count)) {
+            $pre_count = $emoji_count + 1;
+          }
+          else {
+            $pre_count = 1;
+          }
+          $qry = array("nid" => $nd_id, "uid" => $user->uid, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus);
+          $result = $people->insert($qry);
+          $expire = time() + 86400;
+          setcookie("hightlights_emoji" . "_" . $nd_id, $expire);
+          $response = array('ok' => 'hightlights_emoji_true', 'nd_id' => $emoji_id[0], 'count' => $pre_count, 'rel' => $nd_id);
+          print json_encode($response);
+        }
+      }
+    }
+  }
+}

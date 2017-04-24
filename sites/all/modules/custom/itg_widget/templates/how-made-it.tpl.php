@@ -1,14 +1,15 @@
 <?php if (!empty($data)) : global $base_url; ?>
   <div class="how-made-it">
     <ul>
-      <?php foreach ($data as $key => $node_data) { 
-       
-          ?>
+      <?php foreach ($data as $key => $entity) {
+         
+        ?>
         <li class="" id="dont-miss-<?php print $key ?>">
-          <?php if (!empty($node_data['node_load_data']->field_story_extra_large_image['und'][0]['uri'])) { ?>
+          <?php if (!empty($entity['esi_file_uri'])) { ?>
             <span class="dm-pic">
-              <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}") ?>">
-                <img src="<?php print image_style_url("widget_very_small", $node_data['node_load_data']->field_story_extra_large_image['und'][0]['uri']); ?>" />
+              <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$entity['nid']}") ?>">
+                <?php $file_uri = file_create_url($entity['esi_file_uri']); ?>
+                <img src="<?php print $file_uri; ?>" alt="" />
               </a>
             </span>
             <?php
@@ -16,41 +17,40 @@
           else {
             ?>
             <span class="dm-pic">
-              <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}") ?>">
-                 <img height="66" width="88" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+              <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$entity['nid']}") ?>">
+                <img height="66" width="88" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" alt="" />
               </a>
             </span>
           <?php } ?>
 
           <span class="dm-detail">
 
-            <?php $title=$node_data['node_load_data']->title; 
-            if (!empty($node_data['custom_label'])) : ?>
-            <?php $title= $node_data['custom_label']; ?>
+            <?php if (!empty($entity['extra'])) : ?>
+              <p class="title"><?php print $entity['extra']; ?></p>
             <?php endif; ?>
 
-            <?php if (!empty($title)) : ?>    
-              <p class="title">
-                <?php echo l(mb_strimwidth($title, 0, 30, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}")) ?>
-              </p>
-              <p><?php 
-                $desc=$node_data['node_load_data']->field_story_kicker_text['und'][0]['value'];
-                            if($desc=="")
-                            {
-                                $desc=$node_data['node_load_data']->body['und'][0]['value'];
-                            }
-                                
-                            echo mb_strimwidth(strip_tags($desc), 0, 70, "..") ;?>
+            <?php if (!empty($entity['title'])) : ?> 
+
+              <p>
+                <?php
+                $desc = $entity['title'];
+                if (function_exists('itg_common_get_smiley_title')) {
+                  echo l(itg_common_get_smiley_title($entity['nid'], 0, 70), "node/" . $entity['nid'], array('html' => TRUE));
+                }
+                else {
+                  echo l(mb_strimwidth($desc, 0, 70, ".."), "node/" . $entity['nid']);
+                }
+                ?>
+              </p>           
             <?php endif; ?>
-              </p>
 
           </span>
-            <span class="more"><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}") ?>">More[+]</a></span>
+          <span class="more"><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$entity['nid']}") ?>">More[+]</a></span>
         </li>
       <?php } ?>
     </ul>
   </div>
 <?php else : ?>
   <span class="no-result-found"><?php print t("Content Not Found") ?></span>
-  
+
 <?php endif; ?>

@@ -7,6 +7,7 @@
 global $user;
 global $base_url;
 $nid = $data['nid'];
+$poll_image_exist_class = '';
 
 // Title
 
@@ -33,7 +34,8 @@ $isCookies = itg_poll_isCookies($nid);
 $poll_uid = itg_poll_getcurrent_userpoll($nid, $user->uid);
 if (($isCookies != 'yes' && user_is_anonymous()) || (user_is_logged_in() && $poll_uid != $user->uid)) {
   if (isset($nid) && !empty($nid)) {
-    print '<div class="poll-data' . $no_image_class . '">' . $poll_banner_image . $title . '<div class="poll-replace-id ' . $poll_image_exist_class . '">' . drupal_render(drupal_get_form('itg_poll_form_home_page', $nid)) . '</div></div>';
+    $poll_form_home = drupal_get_form('itg_poll_form_home_page', $nid);
+    print '<div class="poll-data' . $no_image_class . '">' . $poll_banner_image . $title . '<div class="poll-replace-id ' . $poll_image_exist_class . '">' . drupal_render($poll_form_home) . '</div></div>';
   }
 }
 else {

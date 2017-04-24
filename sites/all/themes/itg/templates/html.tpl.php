@@ -14,14 +14,14 @@
 <!--[if (gte IE 9)|(gt IEMobile 7)]><!--><html <?php print $html_attributes . $rdf_namespaces; ?>><!--<![endif]-->
 
 <head>
-  <?php print $head; ?>
   <title><?php print $head_title; ?></title>
+  <?php print $head; ?>
   <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
   <?php if ($default_mobile_metatags): ?>
-    <meta name="MobileOptimized" content="width">
-    <meta name="HandheldFriendly" content="true">
-    <meta name="viewport" content="width=device-width">
+<!--    <meta name="MobileOptimized" content="width">
+    <meta name="HandheldFriendly" content="true">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <?php endif; ?>
   <!--[if IEMobile]><meta http-equiv="cleartype" content="on"><![endif]-->
   <?php print $styles; ?>

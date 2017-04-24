@@ -19,11 +19,13 @@
             jQuery.ajax({
                 url: Drupal.settings.basePath + 'getimagetocroper',
                 type: 'post',
-                data: {'imageId': imageId, 'field_id': fieldname, 'img_height': height, 'img_width': width},
+                data: {'imageId': imageId, 'field_id': fieldname, 'img_height': height, 'img_width': width, 'content_type': content_type},
                 success: function(data) {
                     //  itg_image_repository.processResponse
                     hideloader();
-
+                    if (!jQuery('#itg_image_repository-content').hasClass('after-croper')) {
+                        jQuery('#itg_image_repository-content').addClass('after-croper');
+                    }
                     jQuery('#file-preview').show().html(data);
                 },
                 error: function(xhr, desc, err) {
@@ -50,10 +52,13 @@
             jQuery.ajax({
                 url: Drupal.settings.basePath + 'getimagetocroper',
                 type: 'post',
-                data: {'imageId': imageId, 'field_id': fieldname, 'img_height': height, 'img_width': width},
+                data: {'imageId': imageId, 'field_id': fieldname, 'img_height': height, 'img_width': width, 'content_type': content_type},
                 success: function(data) {
                     //  itg_image_repository.processResponse
                     hideloader();
+                    if (!jQuery('#itg_image_repository-content').hasClass('after-croper')) {
+                        jQuery('#itg_image_repository-content').addClass('after-croper');
+                    }
                     jQuery('#file-preview').show().html(data);
                 },
                 error: function(xhr, desc, err) {
@@ -96,10 +101,13 @@
                     jQuery.ajax({
                         url: Drupal.settings.basePath + 'getimagetocroper',
                         type: 'post',
-                        data: {'imageId': imageId, 'field_id': fieldname, 'img_height': height, 'img_width': width},
+                        data: {'imageId': imageId, 'field_id': fieldname, 'img_height': height, 'img_width': width, 'content_type': content_type},
                         success: function(data) {
                             //  itg_image_repository.processResponse
                             hideloader();
+                            if (!jQuery('#itg_image_repository-content').hasClass('after-croper')) {
+                                jQuery('#itg_image_repository-content').addClass('after-croper');
+                            }
                             jQuery('#file-preview').show().html(data);
                         },
                         error: function(xhr, desc, err) {

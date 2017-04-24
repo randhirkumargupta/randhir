@@ -388,8 +388,8 @@ function itg_mobile_get_feed_byurl() {
   $build = array();
   $request_url = explode('/', $_SERVER['REQUEST_URI']);
   unset($request_url[0]);
-  unset($request_url[1]);
-  $url = $base_url . $request_url[1] . '/' . $request_url[2] . '/' . $request_url[3];
+  
+  $url = $base_url . '/' . $request_url[1] . '/' . $request_url[2] . '/' . $request_url[3];
   $path = file_create_url('public://');
 
   $query = db_select('itg_syndication_feed_url', 'feed')->extend('PagerDefault');

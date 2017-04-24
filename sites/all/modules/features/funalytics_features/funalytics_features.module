@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Funalytics features feature.
+ */
+
+include_once 'funalytics_features.features.inc';

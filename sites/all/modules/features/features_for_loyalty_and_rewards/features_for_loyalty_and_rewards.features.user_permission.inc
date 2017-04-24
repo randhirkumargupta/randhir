@@ -14,7 +14,28 @@ function features_for_loyalty_and_rewards_user_default_permissions() {
   $permissions['create loyalty_and_rewards content'] = array(
     'name' => 'create loyalty_and_rewards content',
     'roles' => array(
+      'Editor' => 'Editor',
       'Marketing Manager' => 'Marketing Manager',
+      'Site Admin' => 'Site Admin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any loyalty_and_rewards content'.
+  $permissions['delete any loyalty_and_rewards content'] = array(
+    'name' => 'delete any loyalty_and_rewards content',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own loyalty_and_rewards content'.
+  $permissions['delete own loyalty_and_rewards content'] = array(
+    'name' => 'delete own loyalty_and_rewards content',
+    'roles' => array(
+      'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',
@@ -24,6 +45,7 @@ function features_for_loyalty_and_rewards_user_default_permissions() {
   $permissions['edit any loyalty_and_rewards content'] = array(
     'name' => 'edit any loyalty_and_rewards content',
     'roles' => array(
+      'Editor' => 'Editor',
       'Marketing Manager' => 'Marketing Manager',
       'Site Admin' => 'Site Admin',
     ),
@@ -34,6 +56,7 @@ function features_for_loyalty_and_rewards_user_default_permissions() {
   $permissions['edit own loyalty_and_rewards content'] = array(
     'name' => 'edit own loyalty_and_rewards content',
     'roles' => array(
+      'Editor' => 'Editor',
       'Marketing Manager' => 'Marketing Manager',
       'Site Admin' => 'Site Admin',
     ),

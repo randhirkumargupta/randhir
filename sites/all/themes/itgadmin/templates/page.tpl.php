@@ -15,8 +15,7 @@
  */
 global $base_url, $user;
 if (!in_array('administrator', $user->roles)) {
-    if (arg(3) == 'category_management') {
-        //$action_links = '<li><a href="'.$base_url.'/admin/structure/taxonomy/category_management/add">Add Category</a></li>';
+    if (arg(3) == 'category_management') {        
         $primary_local_tasks = '';
     }
 
@@ -34,14 +33,11 @@ if (!in_array('administrator', $user->roles)) {
 ?>
 <div id="widget-ajex-loader" style="display: none"><img class="widget-loader" align="center" src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
 <div id="page">
-
     <header class="header" id="header" role="banner">
         <section class="container">
             <?php if ($logo): global $base_url; ?>
-
                 <a href="<?php print $base_url . '/cms-user-dashboard'; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
             <?php endif; ?>
-
             <?php if ($site_name || $site_slogan): ?>
                 <div class="header__name-and-slogan" id="name-and-slogan">
                     <?php if ($site_name): ?>
@@ -55,79 +51,89 @@ if (!in_array('administrator', $user->roles)) {
                     <?php endif; ?>
                 </div>
             <?php endif; ?>
-
-            <?php if ($secondary_menu): ?>
+            <?php //if ($secondary_menu): ?>
                 <nav class="header__secondary-menu" id="secondary-menu" role="navigation">
                     <?php
-                    print theme('links__system_secondary_menu', array(
-                        'links' => $secondary_menu,
-                        'attributes' => array(
-                            'class' => array('links', 'inline', 'clearfix'),
-                        ),
-                        'heading' => array(
-                            'text' => $secondary_menu_heading,
-                            'level' => 'h2',
-                            'class' => array('element-invisible'),
-                        ),
-                    ));
+                      $menu = menu_navigation_links('user-menu');                    
+                      print theme('links__user_menu', array('links' => $menu));
+                    
+                       /* print theme('links__system_secondary_menu', array(
+                          'links' => $secondary_menu,
+                          'attributes' => array(
+                              'class' => array('links', 'inline', 'clearfix'),
+                          ),
+                          'heading' => array(
+                              'text' => $secondary_menu_heading,
+                              'level' => 'h2',
+                              'class' => array('element-invisible'),
+                          ),
+                        ));*/
+                     
                     ?>
                 </nav>
-<?php endif; ?>
-            <div class="user-role">
-                <a href="<?php print $base_url . '/assigned-task-list'; ?>">
-                    <i class="fa fa-bell-o"></i>
-                    <dfn><?php if (function_exists('get_task_count_of_user')) {
-    print get_task_count_of_user();
-} ?></dfn>
-                </a> 
-                <span>
-                    User role - 
-                    <?php
-                    // get role array
-                    $role_display = $user->roles;
-                    // skip key for authenticated user
-                    //$role_display = array_slice($role_display,1);
-                    unset($role_display[2]);
-                    // get value in comma seprated
-                    $role_display = implode(',', $role_display);
-                    print $role_display;
-                    ?>
-                </span>
-            </div>
+<?php //endif; ?>
+
+<?php if (!empty($user->uid)) { ?>                
+<div class="user-role">
+  <a id="belly" href="javascript:void(0);" class="notifi">
+    <i class="fa fa-bell-o"></i>
+    <dfn>
+      <?php 
+        if (function_exists('get_task_count_of_user')) {
+          print get_task_count_of_user();
+        } 
+      ?>
+    </dfn>
+  </a> 
+<span>                     
+  <?php
+    // get role array
+    $role_display = $user->roles;
+    // skip key for authenticated user
+    
+    unset($role_display[2]);
+    // get value in comma seprated
+    $role_display = implode(',', $role_display);
+    
+    print 'User role - '.$role_display;
+   ?>
+</span>                                                  
+<div class="bell-notice"></div>
+</div>
+<?php } ?>
+
 <?php print render($page['header']); ?>
         </section>
     </header>
 
     <main id="main">
         <section class="container">
-                    <?php print $breadcrumb; ?>
+            <?php print $breadcrumb; ?>
             <div id="navigation">
-                    <?php if ($main_menu): ?>
-                    <nav id="main-menu" role="navigation" tabindex="-1">
-                        <?php
-                        // This code snippet is hard to modify. We recommend turning off the
-                        // "Main menu" on your sub-theme's settings form, deleting this PHP
-                        // code block, and, instead, using the "Menu block" module.
-                        // @see https://drupal.org/project/menu_block
-                        print theme('links__system_main_menu', array(
-                            'links' => $main_menu,
-                            'attributes' => array(
-                                'class' => array('links', 'inline', 'clearfix'),
-                            ),
-                            'heading' => array(
-                                'text' => t('Main menu'),
-                                'level' => 'h2',
-                                'class' => array('element-invisible'),
-                            ),
-                        ));
-                        ?>
-                    </nav>
-<?php endif; ?>
-<?php print render($page['navigation']); ?>
-
-            </div>
-
-        </section>
+                <?php if ($main_menu): ?>
+                <nav id="main-menu" role="navigation" tabindex="-1">
+                    <?php
+                    // This code snippet is hard to modify. We recommend turning off the
+                    // "Main menu" on your sub-theme's settings form, deleting this PHP
+                    // code block, and, instead, using the "Menu block" module.
+                    // @see https://drupal.org/project/menu_block
+                    print theme('links__system_main_menu', array(
+                        'links' => $main_menu,
+                        'attributes' => array(
+                            'class' => array('links', 'inline', 'clearfix'),
+                        ),
+                        'heading' => array(
+                            'text' => t('Main menu'),
+                            'level' => 'h2',
+                            'class' => array('element-invisible'),
+                        ),
+                    ));
+                    ?>
+                </nav>
+            <?php endif; ?>
+            <?php print render($page['navigation']); ?>
+          </div>
+       </section>
         <section id="content" class="container" role="main">
             <?php print render($page['highlighted']); ?>
             <a id="main-content"></a>
@@ -144,11 +150,7 @@ if (!in_array('administrator', $user->roles)) {
                     <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
                     <?php endif; ?>
                         <?php print render($title_suffix); ?>
-<!--                    <div class="top-actions">
-                        <span class="btn btn-save" data-id="edit-submit">Save</span>
-                        <span class="btn btn-preview" data-id="edit-preview">Preview</span>
-                        <a class="btn btn-cancel mr-0" href="<?php print $base_url;  ?>/mydraft-story">Cancel</a>
-                    </div>-->
+
                     <?php print render($page['form_tab']); ?>
                 </div>
             <?php } else { ?>
@@ -194,6 +196,3 @@ if (!in_array('administrator', $user->roles)) {
 </div>
 
 <?php print render($page['bottom']); ?>
-<!--<div class="ajax-loader">
-  <img src="<?php  //echo base_path().path_to_theme(); ?>/images/loader.svg" alt=""/>
-</div>-->

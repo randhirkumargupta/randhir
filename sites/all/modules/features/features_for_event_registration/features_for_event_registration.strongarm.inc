@@ -14,7 +14,7 @@ function features_for_event_registration_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_anonymous_event_registration';
-  $strongarm->value = 0;
+  $strongarm->value = '0';
   $export['comment_anonymous_event_registration'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -68,16 +68,22 @@ function features_for_event_registration_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '5',
+          'weight' => '4',
         ),
         'title' => array(
-          'weight' => '2',
+          'weight' => '0',
         ),
         'path' => array(
-          'weight' => '7',
+          'weight' => '5',
         ),
         'additional_settings' => array(
           'weight' => '6',
+        ),
+        'domain' => array(
+          'weight' => '8',
+        ),
+        'redirect' => array(
+          'weight' => '7',
         ),
       ),
       'display' => array(),
@@ -123,6 +129,41 @@ function features_for_event_registration_strongarm() {
   $strongarm->name = 'node_submitted_event_registration';
   $strongarm->value = 0;
   $export['node_submitted_event_registration'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_event_registration_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_event_registration_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_country_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_country_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_event_registration_configuration_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_event_registration_configuration_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_itg_city_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_itg_city_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_state_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_state_pattern'] = $strongarm;
 
   return $export;
 }

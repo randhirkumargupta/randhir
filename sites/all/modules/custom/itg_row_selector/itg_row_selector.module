@@ -142,12 +142,12 @@ function itg_row_selector_permission() {
       'description' => t('Send e-mails to a list created with Views.'),
     ),
   );
-  if (views_row_selector_MIMEMAIL) {
-    $perms['attachments with views_row_selector'] = array(
-      'title' => t('Use attachments with Views Send'),
-      'description' => t('Attach files to e-mails sent with Views Send.'),
-    );
-  }
+//  if (views_row_selector_MIMEMAIL) {
+//    $perms['attachments with views_row_selector'] = array(
+//      'title' => t('Use attachments with Views Send'),
+//      'description' => t('Attach files to e-mails sent with Views Send.'),
+//    );
+//  }
   return $perms;
 }
 
@@ -220,4 +220,37 @@ function _views_row_selector_get_from_views_result($views_result, $field, $key =
     $value = $views_result->{$field};
   }
   return $value;
+}
+
+/**
+ * Implements 'itg_row_selector_complete_product'.
+ * @param array $form
+ *   Array of form elements. 
+ * @param array $form_state
+ *   Array of form submitted values.
+ */
+function itg_row_selector_complete_product($form, &$form_state) {  
+  $values = $form_state['values']['itg_row_selector'];  
+  $errors = array_filter($values);
+  if (!empty($errors)) {
+    foreach ($values as $order_id) {
+      if ($order_id) {
+        $presave = array(
+          'status' => 1,          
+        );
+        try {
+          $itg_query = db_update('itg_loyalty_reward_order');
+          $itg_query->condition('order_id', $order_id);
+          $itg_query->fields($presave);
+          $itg_result = $itg_query->execute();
+        }
+        catch (Exception $ex) {
+          drupal_set_message($ex->getMessage(), 'error');
+        }
+        if ($itg_result) {
+          drupal_set_message(t('Order status has been updated.'), 'status');
+        }
+      }
+    }
+  }
 }

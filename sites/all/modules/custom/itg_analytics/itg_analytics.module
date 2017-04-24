@@ -1,0 +1,461 @@
+<?php
+
+/**
+ * @file
+ * Main functionality for itg analytics module.
+ */
+
+/**
+ * Implements HOOK_view_menu.
+ * {@inheritdoc}
+ */
+function itg_analytics_menu() {
+  $items = array();
+  $items['itg-update-analytics-node-count-data'] = array(
+    'page callback' => 'itg_update_analytics_node_count_data',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('administer itg analytics widget'),
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_analytics_cronapi($op, $job = NULL) {
+  $items['itg-update-analytics-node-count-data'] = array(
+    'description' => 'This cron is responsible for updating analytics data , which is used for sotring in widgets',
+    'callback' => 'itg_update_analytics_node_count_data',
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ * {@inheritdoc}
+ */
+function itg_analytics_permission() {
+  return array(
+    'administer itg analytics widget' => array(
+      'title' => t('administer itg analytics widget'),
+      'description' => t('administer administer itg analytics widget permission'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_views_api().
+ * {@inheritdoc}
+ */
+function itg_analytics_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'itg_analytics') . '/includes/views',
+  );
+}
+
+/**
+ * Function which returns analytics data w.r.t nid.
+ * @param int $nid
+ * @return int
+ */
+function itg_analytics_get_node_analytics_data($nid) {
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $analytics_data_array = array();
+    $data_count_node_view = array();
+    $data_count_node_like = array();
+    $data_count_node_comment = array();
+    $data_count_node_share = array(
+      'facebook_share' => 0,
+      'twitter_share' => 0,
+      'google_share' => 0,
+    );
+    $data_count_node_share_number = 0;
+    $final_count_result = 0;
+    $current_time_stamp = time();
+    $timestamp_24_hour_before = strtotime('-24 hours', $current_time_stamp);
+    if ($con) {
+      // Query to get node views count START.
+      $pagedetails_collection = $con->pagedetails;
+      $condition = array('nid' => "$nid");
+      $result = $pagedetails_collection->find($condition);
+      foreach ($result as $document) {
+        $data_count_node_view[] = $document['nid'];
+      }
+      $analytics_data_array['node_view_count'] = count($data_count_node_view);
+      //END.
+      // Query to get node like count START
+      $count_collection = $con->itg_custom_flag_count;
+
+      // Appended 0 as in mongo database 0 is going.
+      $count_condition = array('nid' => "0$nid", 'timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $count_result = $count_collection->find($count_condition);
+      foreach ($count_result as $count_document) {
+        $data_count_node_like = $count_document['like_count'];
+      }
+      $analytics_data_array['data_count_node_like'] = $data_count_node_like;
+      //END
+      //Query to get comment count of node START.
+      $comment_count = $con->itgcms_comment;
+      $comment_condition = array('page_id' => "$nid", 'timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $comment_count_result = $comment_count->find($comment_condition);
+
+      foreach ($comment_count_result as $comment_document) {
+        $data_count_node_comment[] = $comment_document['nid'];
+      }
+
+      $analytics_data_array['data_count_node_comment'] = count($data_count_node_comment);
+      // Now add vukkle comments count.
+      $analytics_data_array['data_count_node_comment'] = $analytics_data_array['data_count_node_comment'] + _get_vukkle_comment_count($nid);
+      // END
+      //Query to get number of share START
+      $front_user_activity = $con->front_user_activity;
+      $front_user_activity_condition = array('nid' => "$nid", 'timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $front_user_activity_result = $front_user_activity->find($front_user_activity_condition);
+
+      foreach ($front_user_activity_result as $front_user_activity_document) {
+        if ($front_user_activity_document['activity'] == 'twitter_share') {
+          $data_count_node_share['twitter_share'] = $data_count_node_share['twitter_share'] + 1;
+        }
+
+        if ($front_user_activity_document['activity'] == 'google_share') {
+          $data_count_node_share['google_share'] = $data_count_node_share['google_share'] + 1;
+        }
+
+        if ($front_user_activity_document['activity'] == 'facebook_share') {
+          $data_count_node_share['facebook_share'] = $data_count_node_share['facebook_share'] + 1;
+        }
+      }
+      // Add all share data.
+      $data_count_node_share_number = $data_count_node_share['twitter_share'] + $data_count_node_share['google_share'] + $data_count_node_share['facebook_share'];
+
+      $analytics_data_array['data_count_node_share'] = $data_count_node_share_number;
+      //END
+    }
+
+    // Caculate sum of all data.
+    foreach ($analytics_data_array as $counting) {
+      if (is_int($counting)) {
+        $final_count_result = $final_count_result + $counting;
+      }
+    }
+
+    return $final_count_result;
+  }
+  return 0;
+}
+
+/**
+ * Function which returns total number of comment w.r.t nid.
+ * @param int $nid
+ * @return int
+ */
+function _get_vukkle_comment_count($nid) {
+  $json_array = file_get_contents("http://vuukle.com/api.asmx/getCommentCountListJSON?id=&list=$nid");
+  return !empty(json_decode($json_array)->$nid) ? json_decode($json_array)->$nid : 0;
+}
+
+/**
+ * Function returns nodeids array based on analytics data within 24 hour.
+ */
+function _get_last_24_hour_visited_node_ids_for_analytics_data() {
+  $current_time_stamp = time();
+  $data_count_node_like = array();
+  $final_nodeid_array = array();
+  $data_count_node_share = array(
+    'twitter_share' => array(),
+    'facebook_share' => array(),
+    'google_share' => array(),
+  );
+  $timestamp_24_hour_before = strtotime('-24 hours', $current_time_stamp);
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    if ($con) {
+      // Query to get node views count which is viewed within 24 hour START.
+      $pagedetails_collection = $con->pagedetails;
+      $condition = array('viewtime' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $result = $pagedetails_collection->find($condition);
+      foreach ($result as $document) {
+        $data_count_node_view[] = $document['nid'];
+      }
+      $analytics_data_array['node_view_count'] = $data_count_node_view;
+      //END.
+      // Query to get nodeids which is liked within 24 hour START.
+      $count_collection = $con->itg_custom_flag_count;
+      // Appended 0 as in mongo database 0 is going.
+      $count_condition = array('timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $count_result = $count_collection->find($count_condition);
+      foreach ($count_result as $count_document) {
+        // Remove 0 which is appended during insert in mongo only case on story.
+        if (_get_node_type_from($count_document['nid']) == "story") {
+          $actualy_node_id = substr($count_document['nid'], 1);
+        }
+        else {
+          $actualy_node_id = $count_document['nid'];
+        }
+        $data_count_node_like[] = $actualy_node_id;
+      }
+      $analytics_data_array['data_count_node_like'] = $data_count_node_like;
+      //END.
+      //Query to get nodeids which got comments within 24 HOUR START.
+      $comment_count = $con->itgcms_comment;
+      $comment_condition = array('timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $comment_count_result = $comment_count->find($comment_condition);
+
+      foreach ($comment_count_result as $comment_document) {
+        $data_count_node_comment[] = $comment_document['page_id'];
+      }
+
+      $analytics_data_array['data_count_node_comment'] = $data_count_node_comment;
+      //END.
+      //Query to get nodeids which is shared within 24 hour START.
+      $front_user_activity = $con->front_user_activity;
+      $front_user_activity_condition = array('timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $front_user_activity_result = $front_user_activity->find($front_user_activity_condition);
+
+      foreach ($front_user_activity_result as $front_user_activity_document) {
+        if ($front_user_activity_document['activity'] == 'twitter_share') {
+          $data_count_node_share['twitter_share'][] = $front_user_activity_document['nid'];
+        }
+
+        if ($front_user_activity_document['activity'] == 'google_share') {
+          $data_count_node_share['google_share'][] = $front_user_activity_document['nid'];
+        }
+
+        if ($front_user_activity_document['activity'] == 'facebook_share') {
+          $data_count_node_share['facebook_share'][] = $front_user_activity_document['nid'];
+        }
+      }
+      $array_merge = array_merge($data_count_node_share['twitter_share'], $data_count_node_share['google_share']);
+      $analytics_data_array['data_count_node_share'] = array_merge($array_merge, $data_count_node_share['facebook_share']);
+      //END.
+    }
+  }
+  // Process entire associative array and prepare single array of nodeids.
+  foreach ($analytics_data_array as $array_key => $values) {
+    if (is_array($analytics_data_array[$array_key])) {
+      foreach ($analytics_data_array[$array_key] as $node_id) {
+        $final_nodeid_array[] = $node_id;
+      }
+    }
+  }
+  // Get unique nodeids which is shared liked and commented within 24 hour.
+  return array_unique($final_nodeid_array);
+}
+
+/**
+ * Function returns nodeids array based on analytics data within 24 hour for 
+ * newsletter data for top_20_shared story
+ */
+function _get_last_24_hour_visited_node_ids_for_top_20_shared_story() {
+  $current_time_stamp = time();
+  $final_nodeid_array = array();
+  $data_count_node_share = array(
+    'twitter_share' => array(),
+    'facebook_share' => array(),
+    'google_share' => array(),
+  );
+  $timestamp_24_hour_before = strtotime('-24 hours', $current_time_stamp);
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    if ($con) {
+      //Query to get nodeids which is shared within 24 hour START.
+      $front_user_activity = $con->front_user_activity;
+      $front_user_activity_condition = array('timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $front_user_activity_result = $front_user_activity->find($front_user_activity_condition);
+
+      foreach ($front_user_activity_result as $front_user_activity_document) {
+        if ($front_user_activity_document['activity'] == 'twitter_share') {
+          $data_count_node_share['twitter_share'][] = $front_user_activity_document['nid'];
+        }
+
+        if ($front_user_activity_document['activity'] == 'google_share') {
+          $data_count_node_share['google_share'][] = $front_user_activity_document['nid'];
+        }
+
+        if ($front_user_activity_document['activity'] == 'facebook_share') {
+          $data_count_node_share['facebook_share'][] = $front_user_activity_document['nid'];
+        }
+      }
+      $array_merge = array_merge($data_count_node_share['twitter_share'], $data_count_node_share['google_share']);
+      $analytics_data_array['data_count_node_share'] = array_merge($array_merge, $data_count_node_share['facebook_share']);
+      //END.
+    }
+  }
+  // Process entire associative array and prepare single array of nodeids.
+  foreach ($analytics_data_array as $array_key => $values) {
+    if (is_array($analytics_data_array[$array_key])) {
+      foreach ($analytics_data_array[$array_key] as $node_id) {
+        $final_nodeid_array[] = $node_id;
+      }
+    }
+  }
+  // Get unique nodeids which is shared liked and commented within 24 hour.
+  return array_unique($final_nodeid_array);
+}
+
+/**
+ * Function returns nodeids array based on analytics data within 24 hour for 
+ * newsletter data for top_20_trending story
+ */
+function _get_last_24_hour_visited_node_ids_for_top_20_trending_story() {
+  $current_time_stamp = time();
+  $data_count_node_like = array();
+  $final_nodeid_array = array();
+  $data_count_node_share = array(
+    'twitter_share' => array(),
+    'facebook_share' => array(),
+    'google_share' => array(),
+  );
+  $timestamp_24_hour_before = strtotime('-24 hours', $current_time_stamp);
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    if ($con) {
+      // Query to get node views count which is viewed within 24 hour START.
+      $pagedetails_collection = $con->pagedetails;
+      $condition = array('viewtime' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $result = $pagedetails_collection->find($condition);
+      foreach ($result as $document) {
+        $data_count_node_view[] = $document['nid'];
+      }
+      $analytics_data_array['node_view_count'] = $data_count_node_view;
+      //END.
+      // Query to get nodeids which is liked within 24 hour START.
+      $count_collection = $con->itg_custom_flag_count;
+      // Appended 0 as in mongo database 0 is going.
+      $count_condition = array('timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $count_result = $count_collection->find($count_condition);
+      foreach ($count_result as $count_document) {
+        // Remove 0 which is appended during insert in mongo only case on story.
+        if (_get_node_type_from($count_document['nid']) == "story") {
+          $actualy_node_id = substr($count_document['nid'], 1);
+        }
+        else {
+          $actualy_node_id = $count_document['nid'];
+        }
+        $data_count_node_like[] = $actualy_node_id;
+      }
+      $analytics_data_array['data_count_node_like'] = $data_count_node_like;
+      //END.
+      //Query to get nodeids which got comments within 24 HOUR START.
+      $comment_count = $con->itgcms_comment;
+      $comment_condition = array('timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $comment_count_result = $comment_count->find($comment_condition);
+
+      foreach ($comment_count_result as $comment_document) {
+        $data_count_node_comment[] = $comment_document['page_id'];
+      }
+
+      $analytics_data_array['data_count_node_comment'] = $data_count_node_comment;
+      //END.
+    }
+  }
+  // Process entire associative array and prepare single array of nodeids.
+  foreach ($analytics_data_array as $array_key => $values) {
+    if (is_array($analytics_data_array[$array_key])) {
+      foreach ($analytics_data_array[$array_key] as $node_id) {
+        $final_nodeid_array[] = $node_id;
+      }
+    }
+  }
+  // Get unique nodeids which is shared liked and commented within 24 hour.
+  return array_unique($final_nodeid_array);
+}
+
+/**
+ * Function which gives sorted nodeids according to analytics data.
+ * Hight weight is on top and low weight in on low.
+ * @return array
+ */
+function _get_most_popular_nodes_based_on_analytics() {
+  $data = array();
+  $nodes = _get_last_24_hour_visited_node_ids_for_analytics_data();
+  foreach ($nodes as $node) {
+    $data[$node] = itg_analytics_get_node_analytics_data($node);
+  }
+  // Sort according to analytics data.
+  arsort($data);
+  return $data;
+}
+
+
+/**
+ * Function which gives sorted nodeids according to analytics data based on shared and trending.
+ * Hight weight is on top and low weight in on low.
+ * @return array
+ */
+function _get_most_popular_nodes_based_on_trending_shared_analytics($newsletter_content) {
+  $data = array();
+  
+  //  Top 20 Shared story within 24 hours are returning from here
+  if ($newsletter_content == 'top_20_shared') { 
+    $nodes_shared = _get_last_24_hour_visited_node_ids_for_top_20_shared_story();
+    foreach ($nodes_shared as $sh_node) {
+      $data_sh[$sh_node] = itg_analytics_get_node_analytics_data($sh_node);
+    }
+  }
+  
+  //  Top 20 Trending story within 24 hours are returning from here
+  if ($newsletter_content == 'top_20_trending') {
+    $nodes_trending = _get_last_24_hour_visited_node_ids_for_top_20_trending_story();
+    foreach ($nodes_trending as $tr_node) {
+      $data_tr[$tr_node] = itg_analytics_get_node_analytics_data($tr_node);
+    }
+  }
+
+  $data_merge = array_merge($data_sh, $data_tr);
+  $data_unique = array_unique($data_merge);
+  $data = array_slice($data_unique, 0, 20);
+  
+  // Sort according to analytics data.
+  arsort($data);
+  return $data;
+}
+
+
+/**
+ * Function is responsible to updating analytics data into table.
+ */
+function itg_update_analytics_node_count_data($newsletter_content) {
+  if (!empty($newsletter_content) && $newsletter_content == 'top_20_shared' || $newsletter_content == 'top_20_trending') {
+    $most_popular_nodes = _get_most_popular_nodes_based_on_trending_shared_analytics($newsletter_content);
+  }
+  
+  $most_popular_nodes = _get_most_popular_nodes_based_on_analytics();
+  // Frist delete all the data from table.
+  try {
+    db_delete('itg_node_analytics_count_data')
+        ->execute();
+  }
+  catch (Exception $ex) {
+    drupal_set_message($ex->getMessage(), 'error');
+  }
+  // Insert node and analytics data into table.
+  foreach ($most_popular_nodes as $node => $weight) {
+    try {
+      db_insert('itg_node_analytics_count_data')
+          ->fields(array(
+            'nid' => $node,
+            'count' => $weight,
+          ))
+          ->execute();
+    }
+    catch (Exception $ex) {
+      drupal_set_message($ex->getMessage());
+    }
+  }
+}
+
+/**
+ * Implementation of _get_node_type_from
+ * @param int $nid
+ */
+function _get_node_type_from($nid) {
+  $query = db_select('node', 'n')
+      ->fields('n', array('type'))
+      ->condition('n.nid', $nid, '=');
+
+  return $query->execute()->fetchField();
+}

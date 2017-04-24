@@ -10,26 +10,6 @@
 function feature_for_personalization_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: 'flag my_saved_content'.
-  $permissions['flag my_saved_content'] = array(
-    'name' => 'flag my_saved_content',
-    'roles' => array(
-      'Front User' => 'Front User',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'flag',
-  );
-
-  // Exported permission: 'unflag my_saved_content'.
-  $permissions['unflag my_saved_content'] = array(
-    'name' => 'unflag my_saved_content',
-    'roles' => array(
-      'Front User' => 'Front User',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'flag',
-  );
-
   // Exported permission: 'view personalized content'.
   $permissions['view personalized content'] = array(
     'name' => 'view personalized content',

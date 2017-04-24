@@ -10,12 +10,22 @@
 function feature_for_top_story_widget_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'administer itg analytics widget'.
+  $permissions['administer itg analytics widget'] = array(
+    'name' => 'administer itg analytics widget',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'itg_analytics',
+  );
+
   // Exported permission: 'administer nodequeue'.
   $permissions['administer nodequeue'] = array(
     'name' => 'administer nodequeue',
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -28,6 +38,7 @@ function feature_for_top_story_widget_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -40,6 +51,7 @@ function feature_for_top_story_widget_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),

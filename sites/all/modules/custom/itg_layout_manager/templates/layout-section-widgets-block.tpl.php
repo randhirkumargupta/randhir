@@ -3,5 +3,11 @@
 <?php
   print $data['section_widgets_form'];
 ?>
-<div id="section_widgets_list"><?php print $data['widgets_list'];?></div>
+<div id="section_widgets_list">
+  <?php  
+    if (!empty($data['widgets_list'])) {
+      print $data['widgets_list'];
+    }    
+  ?>
+</div>
 </div>

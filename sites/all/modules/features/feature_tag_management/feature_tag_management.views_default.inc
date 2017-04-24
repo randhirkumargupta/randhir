@@ -11,6 +11,149 @@ function feature_tag_management_views_default_views() {
   $export = array();
 
   $view = new view();
+  $view->name = 'follow_tags';
+  $view->description = 'List of featured tag.';
+  $view->tag = 'default';
+  $view->base_table = 'taxonomy_term_data';
+  $view->human_name = 'Follow Tags';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Followed By Me';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'view personalized content';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No result found!';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  /* Relationship: Flags: itg_follow */
+  $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'itg_follow';
+  /* Field: Taxonomy term: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  /* Field: Flags: Flag link */
+  $handler->display->display_options['fields']['ops']['id'] = 'ops';
+  $handler->display->display_options['fields']['ops']['table'] = 'flagging';
+  $handler->display->display_options['fields']['ops']['field'] = 'ops';
+  $handler->display->display_options['fields']['ops']['relationship'] = 'flag_content_rel';
+  $handler->display->display_options['fields']['ops']['label'] = '';
+  $handler->display->display_options['fields']['ops']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['ops']['link_type'] = 'normal';
+  /* Filter criterion: Taxonomy vocabulary: Machine name */
+  $handler->display->display_options['filters']['machine_name']['id'] = 'machine_name';
+  $handler->display->display_options['filters']['machine_name']['table'] = 'taxonomy_vocabulary';
+  $handler->display->display_options['filters']['machine_name']['field'] = 'machine_name';
+  $handler->display->display_options['filters']['machine_name']['value'] = array(
+    'tags' => 'tags',
+  );
+  /* Filter criterion: Taxonomy term: Feature Tags (field_tags_display) */
+  $handler->display->display_options['filters']['field_tags_display_value']['id'] = 'field_tags_display_value';
+  $handler->display->display_options['filters']['field_tags_display_value']['table'] = 'field_data_field_tags_display';
+  $handler->display->display_options['filters']['field_tags_display_value']['field'] = 'field_tags_display_value';
+  $handler->display->display_options['filters']['field_tags_display_value']['value'] = array(
+    'Yes' => 'Yes',
+  );
+  /* Filter criterion: Taxonomy term: Tag Status (field_tags_status) */
+  $handler->display->display_options['filters']['field_tags_status_value']['id'] = 'field_tags_status_value';
+  $handler->display->display_options['filters']['field_tags_status_value']['table'] = 'field_data_field_tags_status';
+  $handler->display->display_options['filters']['field_tags_status_value']['field'] = 'field_tags_status_value';
+  $handler->display->display_options['filters']['field_tags_status_value']['value'] = array(
+    'Published' => 'Published',
+  );
+
+  /* Display: Follow View */
+  $handler = $view->new_display('block', 'Follow View', 'block');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'To be Follow';
+  $handler->display->display_options['display_description'] = 'List of tags to follow.';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Flags: itg_follow */
+  $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['required'] = 0;
+  $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'itg_follow';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Taxonomy vocabulary: Machine name */
+  $handler->display->display_options['filters']['machine_name']['id'] = 'machine_name';
+  $handler->display->display_options['filters']['machine_name']['table'] = 'taxonomy_vocabulary';
+  $handler->display->display_options['filters']['machine_name']['field'] = 'machine_name';
+  $handler->display->display_options['filters']['machine_name']['value'] = array(
+    'tags' => 'tags',
+  );
+  /* Filter criterion: Taxonomy term: Feature Tags (field_tags_display) */
+  $handler->display->display_options['filters']['field_tags_display_value']['id'] = 'field_tags_display_value';
+  $handler->display->display_options['filters']['field_tags_display_value']['table'] = 'field_data_field_tags_display';
+  $handler->display->display_options['filters']['field_tags_display_value']['field'] = 'field_tags_display_value';
+  $handler->display->display_options['filters']['field_tags_display_value']['value'] = array(
+    'Yes' => 'Yes',
+  );
+  /* Filter criterion: Flags: Flagged */
+  $handler->display->display_options['filters']['flagged']['id'] = 'flagged';
+  $handler->display->display_options['filters']['flagged']['table'] = 'flagging';
+  $handler->display->display_options['filters']['flagged']['field'] = 'flagged';
+  $handler->display->display_options['filters']['flagged']['relationship'] = 'flag_content_rel';
+  $handler->display->display_options['filters']['flagged']['value'] = '0';
+  /* Filter criterion: Taxonomy term: Tag Status (field_tags_status) */
+  $handler->display->display_options['filters']['field_tags_status_value']['id'] = 'field_tags_status_value';
+  $handler->display->display_options['filters']['field_tags_status_value']['table'] = 'field_data_field_tags_status';
+  $handler->display->display_options['filters']['field_tags_status_value']['field'] = 'field_tags_status_value';
+  $handler->display->display_options['filters']['field_tags_status_value']['value'] = array(
+    'Published' => 'Published',
+  );
+
+  /* Display: Following */
+  $handler = $view->new_display('block', 'Following', 'block_1');
+  $handler->display->display_options['display_description'] = 'My following tags. ';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Flags: itg_follow */
+  $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'itg_follow';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Taxonomy term: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  /* Field: Flags: Flag link */
+  $handler->display->display_options['fields']['ops']['id'] = 'ops';
+  $handler->display->display_options['fields']['ops']['table'] = 'flagging';
+  $handler->display->display_options['fields']['ops']['field'] = 'ops';
+  $handler->display->display_options['fields']['ops']['relationship'] = 'flag_content_rel';
+  $handler->display->display_options['fields']['ops']['label'] = '';
+  $handler->display->display_options['fields']['ops']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['ops']['link_type'] = 'normal';
+  $export['follow_tags'] = $view;
+
+  $view = new view();
   $view->name = 'tags_management';
   $view->description = '';
   $view->tag = 'default';
@@ -40,6 +183,7 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = TRUE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'counter' => 'counter',
@@ -346,6 +490,7 @@ function feature_tag_management_views_default_views() {
   $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'ITG_download_taxonomy';
+  $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
   $handler->display->display_options['style_options']['attach_text'] = 'Exports CSV';
   $handler->display->display_options['style_options']['provide_file'] = 1;

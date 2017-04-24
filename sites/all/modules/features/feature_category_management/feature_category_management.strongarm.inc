@@ -19,16 +19,19 @@ function feature_category_management_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '12',
+          'weight' => '9',
         ),
         'path' => array(
-          'weight' => '24',
+          'weight' => '8',
         ),
         'name' => array(
-          'weight' => '11',
+          'weight' => '9',
         ),
         'description' => array(
-          'weight' => '16',
+          'weight' => '5',
+        ),
+        'redirect' => array(
+          'weight' => '7',
         ),
       ),
       'display' => array(),
@@ -51,7 +54,7 @@ function feature_category_management_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'metatag_enable_taxonomy_term__category_management';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['metatag_enable_taxonomy_term__category_management'] = $strongarm;
 
   return $export;

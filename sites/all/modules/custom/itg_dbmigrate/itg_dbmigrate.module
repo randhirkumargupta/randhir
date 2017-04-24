@@ -3,7 +3,6 @@
 /**
  * @file
  */
-
 module_load_include('inc', 'itg_dbmigrate', 'includes/itg_migrate');
 
 
@@ -19,4 +18,216 @@ function get_itg_destination_id($table_name, $sourceid) {
   $query->condition('sourceid1', $sourceid);
   
   return $query->execute()->fetchField();
+}
+
+/**
+ * Order set of content
+ * @param array $node
+ * @return
+ */
+function ordering_set_of_content($node, $count) {  
+  
+  $nid = $node->nid;
+ // $cat_id = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+  if (isset($node->field_story_category['und'])) {
+    $cat_id = $node->field_story_category['und'];
+      foreach ($cat_id as $category) {
+         $query = db_insert('itg_widget_order')
+        ->fields(array(
+          'nid' => $nid,
+          'widget' => 'section_wise_widget',
+          'content_type' => $node->type,
+          'cat_id' => $category['tid'],
+          'weight' => $count,
+          'extra' => "",
+        ))
+        ->execute();
+         
+       $query = db_insert('itg_widget_order')
+        ->fields(array(
+          'nid' => $nid,
+            'widget' => 'section_wise_widget',
+            'content_type' => 'All',
+            'cat_id' => $category['tid'],
+            'weight' => $count,
+            'extra' => '',
+        ))
+        ->execute();          
+      }
+    }   
+}    
+ 
+
+/**
+ * insert value of flag count in db.
+ * @param int $nid
+ * @param string $type
+ * @param string $val
+ */
+function itg_flag_insert_like_dislike($nid, $like, $dis_like) {
+  
+  $active = db_insert('itg_custom_flag_count')
+      ->fields(array(
+        'nid' => $nid,
+        'like_count' => $like,
+        'dislike_count' => $dis_like,
+        'created' => date('Y-m-d G:i:s'),
+      ))
+      ->execute();
+  
+}
+
+/**
+ * Implements function for mosimage replace
+ * @param string $body_string
+ * @param array $mosimage_array
+ * @return string
+ */
+function itg_dbmigrate_mosimage_replace($body_string, $mosimage_array, $token){
+  $str = str_replace(array('%', $token), array('%%', '%s'), $body_string);
+  $newstr = vsprintf($str, $mosimage_array);
+  return $newstr;
+}
+
+/**
+ * Order set for byline
+ * @param array $node
+ * @return
+ */
+function ordering_set_for_byline($nid, $weight) {
+    db_insert('draggableviews_structure')->fields(array(
+    'view_name' => 'widget_anchors_listing',
+    'view_display' => 'anchors_listing_widget',
+    'args' => '[]',
+    'entity_id' => $nid,
+    'weight' => $weight,
+    'parent' => 0,
+    ))->execute();
+  }
+  
+  /**
+   * Implements function for get term name
+   * @param int $tid
+   * @return
+   */
+  function itg_db_migrate_term_name($tid){
+   $query = db_select('taxonomy_term_data', 'ttd');
+   $query = $query->fields('ttd',array('name'));
+   $query = $query->condition('tid', $tid, '=');
+   $result = $query->execute()->fetchField();
+   return $result;
+  }
+  
+  /**
+   * Implements function for get parent section id for photo category
+   * @param string $term_name
+   * @return
+   */
+  function itg_db_migrate_parent_term($term_name, $vid) {
+    $query = db_select('taxonomy_term_data', 'ttd');
+    $query -> fields('ttd', array('tid'));
+    $query -> condition('vid', $vid, '=');
+    $query -> condition('name', '%' . db_like($term_name), LIKE);
+    $result = $query->execute()->fetchField();
+    return $result;
+  }
+  
+  /**
+ * implement function to get category table
+ */
+function itg_migrate_category_table($level){
+  $table = array(
+    '1' => 'migrate_map_itgsection',
+    '2' => 'migrate_map_itgcategory',
+    '3' => 'migrate_map_itgsubcategory',
+    '4' => 'migrate_map_itgsubsubcategory',
+  );
+  
+  return $table[$level];
+}
+
+/**
+   * Implements function for get term sef
+   * @param str $url
+   * @return
+   */
+  function itg_db_migrate_term_sef($url){
+   $query = db_select('url_alias', 'ul');
+   $query = $query->fields('ul',array('alias'));
+   $query = $query->condition('source', $url, '=');
+   $query->condition('source', '%' . db_like($url), LIKE);
+   $result = $query->execute()->fetchField();
+   return $result;
+  }
+  
+/**
+ * Implement function for return vocab id.
+ * @param str $vocab_name
+ * @return
+ */
+function itg_db_migrate_vocab_id($vocab_name) {
+  $query = db_select('taxonomy_vocabulary', 'tv');
+  $query->fields('tv', array('vid'));
+  $query->condition('tv.machine_name', $vocab_name, '=');
+  $result = $query->execute()->fetchField();
+  return $result;
+}
+
+/**
+ * Implement function for migrate bylines
+ */
+function itg_db_migrate_bylines($byline_nid, $story_nid){
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid', 'status'));
+  $query->condition('type', 'reporter', '=');
+  $query->condition('nid', $byline_nid, '=');
+  $result = $query->execute()->fetchAll();
+  db_insert('itg_multi_byline_info')
+          ->fields(array(
+            'byline_id' => $byline_nid,
+            'uniqueid' => 'migrated-'.$story_nid,
+            'created' => REQUEST_TIME,
+            'nid' => $story_nid,
+           'publish_status' => $result[0]->status,
+          ))
+          ->execute();
+}
+
+
+/**
+ * Implement function for image
+ */
+function itg_dbmigrate_imagepath_url($img_url) {
+  $img = explode('/indiatoday/' , $img_url);
+  return '/var/www/itgcms/sites/default/files/indiatoday/'.$img[1];
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_dbmigrate_menu() {
+  $items['itg-clean-story'] = array(
+    'title' => 'api callback menu',
+    'page callback' => 'itg_db_migrate_index',
+    'access callback' => TRUE,
+  );
+  return $items;
+}
+
+function itg_db_migrate_index() {
+  $xml_path = 'sites/default/files' . '/xml_file_newcutxml/index/';
+  $path = 'sites/default/files/migrate/xml_file/stories';
+  $dom = new DOMDocument('1.0', 'utf-8');
+  $element = $dom->createElement('content');
+  foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as $filename) {
+    $rest = substr($filename, -4);
+    if($rest == ".xml"){
+      $filesd = end(explode('/', $filename));
+      $filess = str_replace('.xml', '', $filesd);
+      $source = $dom->createElement('sourceid', $filess);
+      $element->appendChild($source);
+    }        
+  }
+  $dom->appendChild($element);
+  $dom->save($xml_path . 'index.xml');
 }

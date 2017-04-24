@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function itg_fia_menu() {
+  // Implementing the menu item for itg_fia.
+  $items['itg_fia.xml'] = array(
+    'title' => 'Taxonomy Comments',
+    'description' => 'list fia data',
+    'page callback' => 'itg_fia_data',
+    'access callback' => TRUE,
+    'page arguments' => array('itg_fia_data'),
+    'file' => 'include/itg_fia.inc',
+  );
+  $items['admin/structure/itg_fia_config'] = array(
+    'title' => 'ITG FIA Configuration',
+    'description' => 'Add your appid',
+    'page callback' => 'drupal_get_form',
+    'access callback' => 'user_access',
+    'page arguments' => array('itg_fia_config_form'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 100,
+  );
+
+  return $items;
+}
+
+/*
+ * ITG FIA Configuration form
+ */
+function itg_fia_config_form($form, &$form_state) {
+  $form['itg_fia_config'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Add the App Id'),
+    '#description' => t('Add Your Facebook Application Id'),
+    '#default_value' => variable_get('itg_fia_config'),
+  );
+  $form = system_settings_form($form);
+  return $form;
+}
+
+/**
+ * Implements hook_html_head_alter().
+ */
+function itg_fia_html_head_alter(&$head_elements) {
+  $fia_pagesid = variable_get('itg_fia_config', '');
+  if (!empty($fia_pagesid)) {
+    $head_elements['fia_pagesid'] = array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'property' => 'fb:pages',
+        'content' => $fia_pagesid
+      ),
+    );
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function itg_fia_uninstall() {
+  // Delete variables.
+  variable_del('itg_fia_config');
+}

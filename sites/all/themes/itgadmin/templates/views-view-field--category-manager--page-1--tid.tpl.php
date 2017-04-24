@@ -22,4 +22,4 @@
  * the view is modified.
  */
 ?>
-<?php print itg_autosave_custom_tree($output); ?>
+<?php print itg_category_manager_custom_tree($output); ?>

@@ -270,7 +270,7 @@ function features_for_event_registration_views_default_views() {
   $handler->display->display_options['fields']['php']['php_output'] = '<?php echo itg_event_registration_get_registered_user($row->nid); ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
-  /* Field: Field: Gender Title */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_erf_gender']['id'] = 'field_erf_gender';
   $handler->display->display_options['fields']['field_erf_gender']['table'] = 'field_data_field_erf_gender';
   $handler->display->display_options['fields']['field_erf_gender']['field'] = 'field_erf_gender';
@@ -293,37 +293,36 @@ function features_for_event_registration_views_default_views() {
   $handler->display->display_options['fields']['nothing']['label'] = 'Name';
   $handler->display->display_options['fields']['nothing']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_erf_gender] [title] [field_last_name]';
-  /* Field: Field: Mobile */
+  /* Field: Field collection item: Mobile */
   $handler->display->display_options['fields']['field_erf_mobile']['id'] = 'field_erf_mobile';
   $handler->display->display_options['fields']['field_erf_mobile']['table'] = 'field_data_field_erf_mobile';
   $handler->display->display_options['fields']['field_erf_mobile']['field'] = 'field_erf_mobile';
   $handler->display->display_options['fields']['field_erf_mobile']['label'] = 'Mobile No.';
-  /* Field: Field: Email */
+  /* Field: Content: Via Mail */
   $handler->display->display_options['fields']['field_email_address']['id'] = 'field_email_address';
   $handler->display->display_options['fields']['field_email_address']['table'] = 'field_data_field_email_address';
   $handler->display->display_options['fields']['field_email_address']['field'] = 'field_email_address';
   $handler->display->display_options['fields']['field_email_address']['empty'] = '-';
-  /* Field: Field: Company/Organization Name */
+  /* Field: Field collection item: Company Name */
   $handler->display->display_options['fields']['field_erf_company_name']['id'] = 'field_erf_company_name';
   $handler->display->display_options['fields']['field_erf_company_name']['table'] = 'field_data_field_erf_company_name';
   $handler->display->display_options['fields']['field_erf_company_name']['field'] = 'field_erf_company_name';
   $handler->display->display_options['fields']['field_erf_company_name']['label'] = 'Organization Name';
-  /* Field: Field: Designation */
+  /* Field: Field collection item: Designation */
   $handler->display->display_options['fields']['field_erf_designation']['id'] = 'field_erf_designation';
   $handler->display->display_options['fields']['field_erf_designation']['table'] = 'field_data_field_erf_designation';
   $handler->display->display_options['fields']['field_erf_designation']['field'] = 'field_erf_designation';
-  /* Field: Field: City */
+  /* Field: Field collection item: City */
   $handler->display->display_options['fields']['field_erf_city']['id'] = 'field_erf_city';
   $handler->display->display_options['fields']['field_erf_city']['table'] = 'field_data_field_erf_city';
   $handler->display->display_options['fields']['field_erf_city']['field'] = 'field_erf_city';
   $handler->display->display_options['fields']['field_erf_city']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_erf_city']['type'] = 'taxonomy_term_reference_plain';
-  /* Field: Field: Country */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_erf_country']['id'] = 'field_erf_country';
   $handler->display->display_options['fields']['field_erf_country']['table'] = 'field_data_field_erf_country';
   $handler->display->display_options['fields']['field_erf_country']['field'] = 'field_erf_country';
   $handler->display->display_options['fields']['field_erf_country']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_erf_country']['type'] = 'taxonomy_term_reference_plain';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';

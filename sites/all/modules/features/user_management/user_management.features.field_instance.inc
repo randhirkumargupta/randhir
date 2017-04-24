@@ -96,6 +96,46 @@ function user_management_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'user-user-field_logged_in_count'.
+  $field_instances['user-user-field_logged_in_count'] = array(
+    'bundle' => 'user',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 15,
+      ),
+    ),
+    'entity_type' => 'user',
+    'exclude_cv' => 0,
+    'field_name' => 'field_logged_in_count',
+    'label' => 'Logged in count',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => 0,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 41,
+    ),
+  );
+
   // Exported field_instance: 'user-user-field_mark_as_expert'.
   $field_instances['user-user-field_mark_as_expert'] = array(
     'bundle' => 'user',
@@ -205,6 +245,42 @@ function user_management_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'user-user-field_short_description'.
+  $field_instances['user-user-field_short_description'] = array(
+    'bundle' => 'user',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 13,
+      ),
+    ),
+    'entity_type' => 'user',
+    'exclude_cv' => 0,
+    'field_name' => 'field_short_description',
+    'label' => 'Address',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => 0,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 3,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 12,
+    ),
+  );
+
   // Exported field_instance: 'user-user-field_story_expiry_date'.
   $field_instances['user-user-field_story_expiry_date'] = array(
     'bundle' => 'user',
@@ -257,6 +333,58 @@ function user_management_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'user-user-field_story_issue_date'.
+  $field_instances['user-user-field_story_issue_date'] = array(
+    'bundle' => 'user',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 10,
+      ),
+    ),
+    'entity_type' => 'user',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_issue_date',
+    'label' => 'DOB',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'exclude_cv' => FALSE,
+      'user_register_form' => 0,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'display_all_day' => 0,
+        'increment' => 15,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 8,
+    ),
+  );
+
   // Exported field_instance: 'user-user-field_subscribe_for_newsletter'.
   $field_instances['user-user-field_subscribe_for_newsletter'] = array(
     'bundle' => 'user',
@@ -287,6 +415,39 @@ function user_management_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'user-user-field_user_gender'.
+  $field_instances['user-user-field_user_gender'] = array(
+    'bundle' => 'user',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 11,
+      ),
+    ),
+    'entity_type' => 'user',
+    'exclude_cv' => 0,
+    'field_name' => 'field_user_gender',
+    'label' => 'Gender',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => 0,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 9,
     ),
   );
 
@@ -333,10 +494,10 @@ function user_management_field_default_field_instances() {
             'attach' => 0,
             'clipboard' => 0,
             'imce' => 0,
-            'plupload' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'reference' => 0,
             'remote' => 0,
-            'upload' => 'upload',
+            'upload' => 0,
           ),
           'source_attach' => array(
             'absolute' => 0,
@@ -357,6 +518,81 @@ function user_management_field_default_field_instances() {
       ),
       'type' => 'image_image',
       'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'user-user-field_user_pincode'.
+  $field_instances['user-user-field_user_pincode'] = array(
+    'bundle' => 'user',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 14,
+      ),
+    ),
+    'entity_type' => 'user',
+    'exclude_cv' => 0,
+    'field_name' => 'field_user_pincode',
+    'label' => 'Pincode',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => 0,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 31,
+    ),
+  );
+
+  // Exported field_instance: 'user-user-field_user_qualification'.
+  $field_instances['user-user-field_user_qualification'] = array(
+    'bundle' => 'user',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 12,
+      ),
+    ),
+    'entity_type' => 'user',
+    'exclude_cv' => 0,
+    'field_name' => 'field_user_qualification',
+    'label' => 'Qualification',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => 0,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 10,
     ),
   );
 
@@ -395,16 +631,22 @@ function user_management_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Address');
+  t('DOB');
   t('Expiry date');
   t('First name');
+  t('Gender');
   t('Last name');
+  t('Logged in count');
   t('Mark as Expert');
   t('Mobile number');
   t('Notify user of update account');
   t('Picture');
+  t('Pincode');
   t('Please enter your first name.');
   t('Please enter your last name.');
   t('Please enter your mobile number.');
+  t('Qualification');
   t('Section');
   t('Subscribe for newsletter');
 

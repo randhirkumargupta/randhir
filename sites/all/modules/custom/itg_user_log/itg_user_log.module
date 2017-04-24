@@ -1,0 +1,579 @@
+<?php
+
+/**
+ * @file
+ * The ITG USER module.
+ *
+ * Contains functionality for User.
+ */
+
+/**
+ * Tmplements hook_user_log()
+ */
+function itg_user_log_user_login(&$edit , $account) {
+  module_load_include('inc' , 'itg_user_log' , 'includes/user_info_count_update');
+  if ($account->status) {
+    user_data_insert_in_mongodb($account);
+  }
+}
+
+/**
+ * Tmplements hook_node_view()
+ * use for the insert data in mongoDB when user click for view
+ */
+function itg_user_log_node_view($node , $view_mode , $langcode) {
+  global $user;
+
+  // code start for user log
+  module_load_include('inc' , 'itg_user_log' , 'includes/user_info_count_update');
+  global $theme;
+
+  if ($theme == 'itg' && $view_mode == 'full') {
+    itg_logged_in_user_node_insert_data($node); //funstion written for insert the value in mongodb 
+  }
+
+  // code start for recommended for you
+  if ($theme == 'itg' && $view_mode == 'full') {
+    if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'videogallery' || $node->type == 'blog') {
+      $section_tids = taxonomy_get_parents_all($node->field_primary_category[LANGUAGE_NONE][0]['value']);
+      $section_tids = array_reverse($section_tids);
+      $created = time();
+      $expiry = time() + (86400);
+
+      if ($user->uid == 0 && !isset($_COOKIE['recomended_for_you'])) {
+        $visit_value = rand(1 , 999);
+        setcookie('recomended_for_you' , $visit_value , time() + (86400) , "/"); // 1 day
+        itg_set_recommended_data($created , $expiry , $section_tids[0]->tid , $visit_value);
+      }
+      elseif ($user->uid == 0 && isset($_COOKIE['recomended_for_you'])) {
+        itg_set_recommended_data($created , $expiry , $section_tids[0]->tid , $_COOKIE['recomended_for_you']);
+      }
+      elseif (isset($_COOKIE['recomended_for_you']) && $user->uid) {
+        unset($_COOKIE['recomended_for_you']);
+      }
+    }
+  }
+}
+
+/**
+ * Impletemets Hook_Menu.
+ * 
+ * {@inheritdoc}
+ */
+function itg_user_log_menu() {
+  // temp code 
+  $items['count'] = array(
+    'page callback' => 'itg_logged_in_user_activity' ,
+    'access callback' => TRUE ,
+    'type' => MENU_CALLBACK ,
+  );
+  $items['active-users'] = array(
+    'page callback' => 'itg_logged_in_user_active_user' ,
+    'type' => MENU_CALLBACK ,
+    'file' => 'includes/user_info_count_update.inc' ,
+    'access arguments' => array('view report dashboard') ,
+  );
+
+  $items['itg-users-output-for-report/autocomplete'] = array(
+    'page callback' => 'itg_users_output_for_report' ,
+    'page arguments' => array(2) ,
+    'access arguments' => array('administer itg custom widget') ,
+  );
+  
+  $items['itg-users-email-output-for-report/autocomplete'] = array(
+    'page callback' => 'itg_users_email_output_for_report' ,
+    'page arguments' => array(2) ,
+    'access arguments' => array('administer itg custom widget') ,
+  );
+
+  $items['content-visits-by-user'] = array(
+    'page callback' => 'itg_logged_in_user_visited_node' ,
+    'title' => 'Content Visits' ,
+    'type' => MENU_CALLBACK ,
+    'file' => 'includes/user_info_count_update.inc' ,
+    'access arguments' => array('administer itg custom widget') ,
+  );
+  
+  $items['section-breakup'] = array(
+    'page callback' => 'itg_logged_in_user_section_breakup' ,
+    'type' => MENU_CALLBACK ,
+    'file' => 'includes/user_info_count_update.inc' ,
+    'access arguments' => array('administer itg custom widget') ,
+  );
+  return $items;
+}
+
+/**
+ * Function to get json output for name.
+ * @param string $name
+ */
+function itg_users_output_for_report($name) {
+  $roles = user_roles();
+  $fornt_user_role_id = array_search('Front User' , $roles);
+  $query = db_select('users' , 'u');
+  $query->leftJoin('users_roles' , 'ur' , 'ur.uid = u.uid');
+  $query->fields('u' , array('name'));
+  $query->condition('u.name' , '%' . db_like($name) . '%' , 'LIKE');
+  $query->condition('status' , 1);
+  $query->condition('ur.rid' , $fornt_user_role_id);
+  $query->range(0 , 20);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+  foreach($result as $record) {
+    $options[$record['name']] = $record['name'];
+  }
+
+  drupal_json_output($options);
+}
+
+/**
+ * Function to get json output for email.
+ * @param string $name
+ */
+function itg_users_email_output_for_report($name) {
+  $roles = user_roles();
+  $fornt_user_role_id = array_search('Front User' , $roles);
+  $query = db_select('users' , 'u');
+  $query->leftJoin('users_roles' , 'ur' , 'ur.uid = u.uid');
+  $query->fields('u' , array('mail'));
+  $query->condition('u.mail' , '%' . db_like($name) . '%' , 'LIKE');
+  $query->condition('status' , 1);
+  $query->condition('ur.rid' , $fornt_user_role_id);
+  $query->range(0 , 20);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  
+  foreach($result as $record) {
+    $options[$record['mail']] = $record['mail'];
+  }
+
+  drupal_json_output($options);
+}
+
+/**
+ * function write for the count value and also added for condtion when the user make it filter.  itg_user_log_get_count()
+ */
+function itg_user_log_get_count($uid , $createdDate = null , $startDate = null , $endDate = null) {
+
+  if (function_exists('mongodb')) {
+
+    $con = mongodb();
+    if ($con) {
+      try {
+        $people = $con->userslog;
+
+        if (is_null($startDate) && is_null($endDate) && !is_null($createdDate)) {
+          // no filter
+          return $people->count(array('uuid' => $uid , 'login_time' => array('$gte' => $createdDate)));
+        }
+        elseif (!is_null($startDate) && !is_null($endDate) && is_null($createdDate)) {
+          // start -end filter
+          return $people->count(array('uuid' => $uid , 'login_time' => array('$gte' => $startDate , '$lte' => $endDate)));
+        }
+        elseif (!is_null($startDate) && is_null($endDate) && is_null($createdDate)) {
+          // only from
+          return $people->count(array('uuid' => $uid , 'login_time' => array('$gte' => $startDate)));
+        }
+        elseif (is_null($startDate) && !is_null($endDate) && is_null($createdDate)) {
+          // only end
+          return $people->count(array('uuid' => $uid , 'login_time' => array('$lte' => $endDate)));
+        }
+        else {
+          throw new Exception('Login/logout date range missing...!');
+        }
+      }
+      catch (Exception $e) {
+        drupal_set_message($e->getMessage() , 'error');
+      }
+      return $count;
+    }
+  }
+}
+
+/**
+ * Implements hook_views_api().
+ *
+ * {@inheritdoc}.
+ */
+function itg_user_log_views_api() {
+  return array(
+    'api' => 3 ,
+  );
+}
+
+/**
+ * Implements hook_form().
+ * {@inheritdoc}
+ */
+function itg_user_log_api_form($form , &$form_state) {
+  $form = array();
+  $form['title'] = array(
+    '#type' => 'textfield' ,
+    '#title' => t('Name') ,
+    '#maxlength' => 255 ,
+    '#size' => 30 ,
+    '#default_value' => isset($_GET['title']) ? $_GET['title'] : "" ,
+  );
+  $form['email'] = array(
+    '#type' => 'textfield' ,
+    '#title' => t('Email') ,
+    '#maxlength' => 255 ,
+    '#size' => 30 ,
+    '#default_value' => isset($_GET['email']) ? $_GET['email'] : "" ,
+  );
+  $form['#info']['filter-created']['label'] = '';
+  $form['edit-min-datepicker-popup-1']['min'] = array(
+    '#type' => 'date_popup' ,
+    '#title' => t('From') ,
+    '#date_format' => 'd/m/Y' ,
+    //'#date_year_range' => '-10 + 10',
+    '#default_value' => ($_GET['From']) ? $_GET['From'] : 10 ,
+    '#attributes' => array(
+      'readonly' => 'readonly'
+    ) ,
+  );
+
+  $form['edit-max-datepicker-popup-1']['max'] = array(
+    '#type' => 'date_popup' ,
+    '#title' => t('To') ,
+    '#date_format' => 'd/m/Y' ,
+    //'#date_year_range' => '-10:+10',
+    '#default_value' => isset($_GET['To']) ? $_GET['To'] : 10 ,
+    '#attributes' => array(
+      'readonly' => 'readonly'
+    ) ,
+  );
+  $form['items_per_page'] = array(
+    '#type' => 'select' ,
+    '#title' => 'Items per page' ,
+    '#options' => array(5 => 5 , 10 => 10 , 20 => 20 , 40 => 40 , 60 => 60) ,
+    '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20 ,
+  );
+  $form['submit'] = array(
+    '#value' => 'Apply' ,
+    '#type' => 'submit' ,
+    '#attributes' => array('class' => array('user-log-apply')) ,
+    '#prefix' => '<div class = "user-log-filter-btn">' ,
+    '#suffix' => '<a class="user-log-reset" href="' . base_path() . 'active/users">Reset</a></div>' ,
+  );
+
+  return $form;
+}
+
+/**
+ * Implements hook_submit()
+ * {@inheritdoc}
+ */
+function itg_user_log_api_form_submit($form , &$form_state) {
+  $form_state['redirect'] = array(
+    'active-users' ,
+    array(
+      'query' => array(
+        'title' => $form_state['values']['title'] ,
+        'email' => $form_state['values']['email'] ,
+        'items_per_page' => $form_state['values']['items_per_page'] ,
+        'From' => $form_state['values']['min'] ,
+        'To' => $form_state['values']['max'] ,
+      ) ,
+    ) ,
+  );
+}
+
+/**
+ * Implements hook_form().
+ * add expose filter to visited content
+ */
+function itg_user_content_visit_report_form($form , &$form_state) {
+  $form = array();
+  $form['username'] = array(
+    '#type' => 'textfield' ,
+    '#title' => t('Username') ,
+    '#autocomplete_path' => 'itg-users-output-for-report/autocomplete' ,
+    '#attributes' => array("placeholder" => array("Enter username")) ,
+    '#default_value' => isset($_GET['username']) ? $_GET['username'] : "" ,
+  );
+
+  $form['email'] = array(
+    '#type' => 'textfield' ,
+    '#title' => t('Email') ,
+    '#autocomplete_path' => 'itg-users-email-output-for-report/autocomplete' ,
+    '#attributes' => array("placeholder" => array("Enter Email")) ,
+    '#default_value' => isset($_GET['email']) ? $_GET['email'] : "" ,
+  );
+
+  $form['content_type'] = array(
+    '#type' => 'select' ,
+    '#options' => array(
+      '' => 'Any' ,
+      'blog' => 'Blog' ,
+      'story' => 'Story' ,
+      'mega_review_critic' => 'Mega Review' ,
+      'photogallery' => 'Photogallery' ,
+      'podcast' => 'Podcast' ,
+      'videogallery' => 'Videogallery' ,
+    ) ,
+    '#title' => t('Content Type') ,
+    '#default_value' => isset($_GET['content_type']) ? $_GET['content_type'] : "" ,
+  );
+
+  $form['min_date'] = array(
+    '#type' => 'textfield' ,
+    '#title' => t('Date from') ,
+    '#default_value' => isset($_GET['min_date']) ? date('d-m-Y' , $_GET['min_date']) : "" ,
+    '#attributes' => array("placeholder" => array("Date From")) ,
+  );
+
+  $form['max_date'] = array(
+    '#type' => 'textfield' ,
+    '#title' => t('Date from') ,
+    '#attributes' => array("placeholder" => array("Date To")) ,
+    '#default_value' => isset($_GET['max_date']) ? date('d-m-Y' , $_GET['max_date']) : "" ,
+  );
+
+  $form['items_per_page'] = array(
+    '#type' => 'select' ,
+    '#title' => 'Items per page' ,
+    '#options' => array(5 => 5 , 10 => 10 , 20 => 20 , 40 => 40 , 60 => 60) ,
+    '#default_value' => isset($_GET['items_per_page']) ? $_GET['items_per_page'] : 20 ,
+  );
+
+  $form['submit'] = array(
+    '#value' => 'Apply' ,
+    '#type' => 'submit' ,
+    '#attributes' => array('class' => array('user-log-apply')) ,
+    '#prefix' => '<div class = "user-log-filter-btn">' ,
+    '#suffix' => '<a class="user-log-reset" href="' . base_path() . 'content-visits-by-user">Reset</a></div>' ,
+  );
+  drupal_add_js(drupal_get_path('module' , 'itg_user_log') . '/js/itg-user-log-filter-form.js' , 'file');
+  return $form;
+}
+
+/**
+ * Implements hook_form_submit
+ */
+function itg_user_content_visit_report_form_submit($form , &$form_state) {
+  $date_from = $form_state['values']['min_date'];
+  $date_to = $form_state['values']['max_date'];
+  $content_type = $form_state['values']['content_type'];
+  $username = $form_state['values']['username'];
+  $email = $form_state['values']['email'];
+  $item_per_page = $form_state['values']['items_per_page'];
+  $path = 'content-visits-by-user';
+  $options = array(
+    'query' => array(
+      'min_date' => !empty($date_from) ? strtotime($date_from) : "" ,
+      'max_date' => !empty($date_to) ? strtotime($date_to) : "" ,
+      'email' => !empty($email) ? $email : "" ,
+      'username' => !empty($username) ? $username : "" ,
+      'content_type' => !empty($content_type) ? $content_type : "" ,
+      'item_per_page' => $item_per_page ,
+    )
+  );
+  drupal_goto($path , $options);
+}
+
+/**
+ * Implements hook_form().
+ * add expose filter to
+ */
+function itg_user_log_api_form_section_breakup($form , &$form_state) {
+
+  $form = array();
+  $form['#info']['filter-created']['label'] = '';
+  $form['edit-min-datepicker-popup-1']['min'] = array(
+    '#type' => 'date_popup' ,
+    '#title' => t('Date Range (Current Week)  (From - to)') ,
+    '#date_format' => 'd/m/Y' ,
+    //'#date_year_range' => '-10 + 10',
+    '#default_value' => ($_GET['From']) ? $_GET['From'] : 10 ,
+    '#attributes' => array(
+      'readonly' => 'readonly'
+    ) ,
+  );
+
+  $form['edit-max-datepicker-popup-1']['max'] = array(
+    '#type' => 'date_popup' ,
+    '#title' => t('To') ,
+    '#date_format' => 'd/m/Y' ,
+    //'#date_year_range' => '-10:+10',
+    '#default_value' => isset($_GET['To']) ? $_GET['To'] : 10 ,
+    '#attributes' => array(
+      'readonly' => 'readonly'
+    ) ,
+  );
+
+  $form['edit-min-datepicker-popup-1']['lwmin'] = array(
+    '#type' => 'date_popup' ,
+    '#title' => t('Date Range (Last Week)  (From - to)') ,
+    '#date_format' => 'd/m/Y' ,
+    //'#date_year_range' => '-10 + 10',
+    '#default_value' => ($_GET['From']) ? $_GET['From'] : 10 ,
+    '#attributes' => array(
+      'readonly' => 'readonly'
+    ) ,
+  );
+
+  $form['edit-max-datepicker-popup-1']['lwmax'] = array(
+    '#type' => 'date_popup' ,
+    '#title' => t('To') ,
+    '#date_format' => 'd/m/Y' ,
+    //'#date_year_range' => '-10:+10',
+    '#default_value' => isset($_GET['To']) ? $_GET['To'] : 10 ,
+    '#attributes' => array(
+      'readonly' => 'readonly'
+    ) ,
+  );
+
+  $form['items_per_page'] = array(
+    '#type' => 'select' ,
+    '#title' => 'Items per page' ,
+    '#options' => array(5 => 5 , 10 => 10 , 20 => 20 , 40 => 40 , 60 => 60) ,
+    '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20 ,
+  );
+  $form['submit'] = array(
+    '#value' => 'Apply' ,
+    '#type' => 'submit' ,
+    '#attributes' => array('class' => array('user-log-apply')) ,
+    '#prefix' => '<div class = "user-log-filter-btn">' ,
+    '#suffix' => '<a class="user-log-reset btn-reset" href="' . base_path() . 'active/users">Reset</a></div>' ,
+  );
+
+  return $form;
+}
+
+function itg_user_log_api_form_section_breakup_submit($form , &$form_state) {
+  $form_state['redirect'] = array(
+    'section-breakup' ,
+    array(
+      'query' => array(
+        'title' => $form_state['values']['title'] ,
+        'items_per_page' => $form_state['values']['items_per_page'] ,
+        'From' => $form_state['values']['min'] ,
+        'To' => $form_state['values']['max'] ,
+        'lwfrom' => $form_state['values']['lwmin'] ,
+        'lwto' => $form_state['values']['lwmax'] ,
+      ) ,
+    ) ,
+  );
+}
+
+/**
+ * Helper function to insert recommemded data
+ */
+function itg_set_recommended_data($created , $expiry , $section , $unique) {
+  global $user;
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    if ($con) {
+      $people = $con->may_we_recommend_data;
+      $cond = array('unique_id' => (int) $unique);
+      $cursor = $people->find($cond);
+      foreach ($cursor as $document) {
+        $options['unique_id'] = $document['unique_id'];
+        $options['section'] = $document['section'];
+      }
+      if (!empty($options['unique_id'])) {
+        $HiddenProducts = explode(',' , $options['section']);
+        if (in_array($section , $HiddenProducts)) {
+          $final_section = $options['section'];
+        }
+        else {
+          $final_section = $options['section'] . ',' . $section;
+        }
+        $final_section = trim($final_section , ',');
+        $people = $con->may_we_recommend_data;
+        $newdata = array('$set' => array('section' => $final_section));
+        $people->update(array('unique_id' => (int) $unique) , $newdata);
+      }
+      else {
+        $people = $con->may_we_recommend_data;
+        $qry = array(
+          "unique_id" => (int) $unique ,
+          "uid" => ($user->uid) ? $user->uid : 0 ,
+          "section" => $section ,
+          "cookie_created" => $created ,
+          "cookie_expiry" => $expiry
+        );
+        $people->insert($qry);
+      }
+    }
+  }
+}
+
+/**
+ * Helper function to get latest recommended data  
+ */
+function itg_get_recommended_data($section) {
+
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $sections = explode(',' , $section);
+    $data = array();
+    $ar_document = array();
+
+    foreach ($sections as $tid) {
+      $people = $con->pagedetails;
+      $cond = array('section' => $tid);
+      $cursor = $people->count($cond);
+      $data[$tid] = $cursor;
+    }
+    //pr($data);
+    arsort($data);
+    $three = array_slice($data , 0 , 4 , true);
+    //p($three);
+    foreach ($three as $key => $value) {
+      $people = $con->pagedetails;
+      $cursor = $con->command(
+          array(
+            "distinct" => "pagedetails" ,
+            "key" => "section" ,
+            "query" => array('section' => (string) $key)
+      ));
+      foreach ($cursor['values'] as $document) {
+        $ar_document[] = (int) $document;
+      }
+    }
+    return $ar_document;
+  }
+}
+
+/**
+ * Helper function to get title and url by nid
+ */
+function itg_user_log_get_details($nid , $collection) {
+  $data = '';
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $people = $con->$collection;
+    $cond = array('nid' => $nid);
+    $cursor = $people->find($cond);
+    foreach ($cursor as $document) {
+      $data['title'] = $document['title'];
+      $data['url'] = $document['url'];
+      $data['section'] = $document['section'];
+    }
+    return $data;
+  }
+}
+
+/**
+ * Helper function to get section by cookie name
+ */
+function itg_user_log_get_sections($c_name) {
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $people = $con->may_we_recommend_data;
+    $cond = array('unique_id' => (int) $c_name);
+    $cursor = $people->findOne($cond , array('section'));
+    return $cursor['section'];
+  }
+}
+
+/**
+ * Function which gives front page nid if there is any node.
+ * @return int
+ */
+function get_front_page_nid() {
+  $node_url = drupal_get_normal_path(variable_get('site_frontpage', 'node'));
+  $node_chunk = explode('/', $node_url);
+  return $node_chunk[1];
+}

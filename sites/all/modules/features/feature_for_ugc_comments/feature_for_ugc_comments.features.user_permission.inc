@@ -14,6 +14,7 @@ function feature_for_ugc_comments_user_default_permissions() {
   $permissions['access comments'] = array(
     'name' => 'access comments',
     'roles' => array(
+      'Front User' => 'Front User',
       'administrator' => 'administrator',
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
@@ -28,8 +29,19 @@ function feature_for_ugc_comments_user_default_permissions() {
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
       'UGC Moderator' => 'UGC Moderator',
       'administrator' => 'administrator',
+    ),
+    'module' => 'itg_comments_ugc',
+  );
+
+  // Exported permission: 'access global comment configuration'.
+  $permissions['access global comment configuration'] = array(
+    'name' => 'access global comment configuration',
+    'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
     ),
     'module' => 'itg_comments_ugc',
   );
@@ -41,6 +53,7 @@ function feature_for_ugc_comments_user_default_permissions() {
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
       'UGC Moderator' => 'UGC Moderator',
       'administrator' => 'administrator',
     ),
@@ -54,6 +67,7 @@ function feature_for_ugc_comments_user_default_permissions() {
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
+      'Site Admin' => 'Site Admin',
       'UGC Moderator' => 'UGC Moderator',
       'administrator' => 'administrator',
     ),
@@ -76,10 +90,12 @@ function feature_for_ugc_comments_user_default_permissions() {
       'Co-ordinator' => 'Co-ordinator',
       'Correspondent' => 'Correspondent',
       'Editor' => 'Editor',
+      'Front User' => 'Front User',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
       'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
   );

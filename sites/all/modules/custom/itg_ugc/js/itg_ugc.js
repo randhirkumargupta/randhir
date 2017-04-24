@@ -9,12 +9,9 @@
             var uid = settings.itg_ugc.settings.uid;
             // code to hide body text format filter 
             if (uid != 1) {
-
-                $('.vertical-tabs-list').hide();
+                
                 $('#edit-field-user-message-und-0-format').hide();
-                $('.vertical-tabs').hide();
-                $('#edit-metatags').show();
-                $('#edit-metatags-und-advanced').hide();
+                
             }
 
 
@@ -92,6 +89,11 @@
                         required: true,
                         email: true
                     },
+                    'field_user_message[und][0][value]': {
+                        required: function (element) {
+                            return $("#edit-field-ugc-ctype-und").val() == 'story';
+                        }
+                    },
                     'title': {
                         required: true
 
@@ -112,6 +114,10 @@
                     },
                     'field_user_email[und][0][value]': {
                         required: 'Email field is required.'
+
+                    },
+                    'field_user_message[und][0][value]': {
+                        required: 'Description field is required.'
 
                     },
                     'title': {

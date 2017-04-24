@@ -43,6 +43,7 @@ function tv_schedule_listing() {
                 $search[$key]['time'] = $document["time"];
                 $search[$key]['day'] = $document["day"];
                 $search[$key]['program'] = $document["program"];
+                $search[$key]['program date'] = $document["program date"];
                 $key++;
                 $search_counter++;
             }
@@ -99,8 +100,9 @@ function tv_schedule_listing() {
               $ass_search_date = date('Y/m/d');
             }
             $node_detail = node_load(tv_story_list($ass_search_date, $document['time']));
-            $out[$keys]['story_attach'] = l(t($node_detail->title), 'node/'.$node_detail->nid, array('options' => array('absolute' => TRUE), 'attributes'=> array('target'=>'blank')));
-            
+            if(!empty($node_detail->nid)) {
+            $out[$keys]['story_attach'] = l('', 'node/'.$node_detail->nid, array('options' => array('absolute' => TRUE), 'attributes'=> array('target'=>'_blank', 'class' => array('fa', 'fa-file-text'), 'title' => $node_detail->title)));
+            }
             $keys++;
 
             //counter required for current time slot display.

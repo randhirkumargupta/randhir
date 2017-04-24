@@ -54,6 +54,13 @@ function itg_loyalty_reward_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
+      'newsletter' => array(
+        'description' => 'Name of the newsletter subscribed by user.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
       'created' => array(
         'type' => 'int',
         'not null' => TRUE,
@@ -101,37 +108,58 @@ function itg_loyalty_reward_schema() {
     'primary key' => array('id'),
   );
 
-//  $schema['itg_lrp_redeemed_points'] = array(
-//    'description' => 'Table for Redeemed Points.',
-//    'fields' => array(
-//      'id' => array(
-//        'description' => 'Primary id.',
-//        'type' => 'serial',
-//        'unsigned' => TRUE,
-//        'not null' => TRUE,
-//      ),
-//      'uid' => array(
-//        'description' => 'User id.',
-//        'type' => 'int',
-//        'unsigned' => TRUE,
-//        'not null' => TRUE,
-//        'default' => 0,
-//      ),
-//      'redeemed_points' => array(
-//        'description' => 'Redeemed points.',
-//        'type' => 'int',
-//        'unsigned' => TRUE,
-//        'not null' => TRUE,
-//        'default' => 0,
-//      ),
-//      'created' => array(
-//        'type' => 'int',
-//        'not null' => TRUE,
-//        'default' => 0
-//      ),
-//    ),
-//    'primary key' => array('id'),
-//  );
+  $schema['itg_lrp_refer_friend'] = array(
+    'description' => 'Keep track of refer a friend record.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Primary id.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'User id.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'referral_key' => array(
+        'description' => 'Referral Key sent to friend.',
+        'type' => 'varchar',
+        'length' => 100,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'friend_name' => array(
+        'description' => 'Name of the friend who has been referred.',
+        'type' => 'varchar',
+        'length' => 100,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'mail' => array(
+        'description' => 'Email of the friend who has been referred.',
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'status' => array(
+        'description' => 'Boolean indicating whether the user redeem the link or not.).',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the referral link was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0
+      ),
+    ),
+    'primary key' => array('id'),
+  );
 
   $schema['itg_loyalty_reward_cron'] = array(
     'description' => 'Table for itg_loyalty_reward module',
@@ -255,12 +283,26 @@ function itg_loyalty_reward_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
+      'status' => array(
+        'description' => 'Order status 1 for complete and 0 for pending.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
       'product_information' => array(
         'type' => 'blob',
         'size' => 'big',
         'not null' => TRUE,
         'serialize' => TRUE,
         'description' => 'Serialized data containing the product complete information.',
+      ),
+      'nids' => array(
+        'description' => 'Comma separated nids',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
       ),
       'created' => array(
         'type' => 'int',

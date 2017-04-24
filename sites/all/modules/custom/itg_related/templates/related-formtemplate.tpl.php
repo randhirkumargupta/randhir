@@ -12,7 +12,7 @@ global $user, $base_url;
 <div class="rel-link">
     <span class="add-more saved-search-link">Saved Search</span> 
     <div class="my-saved-search"><?php itg_related_save_search(); ?></div>
-    <a class="colorbox-load add-more add-related-content-link" href="<?php print $base_url.'/related-content?width=900&height=700&iframe=true&type='.$type; ?>">+</a>
+    <a class="colorbox-load add-more add-related-content-link" oncontextmenu="return false;" href="<?php print $base_url.'/related-content?width=1000&height=700&iframe=true&type='.$type; ?>">+</a>
 </div>
 <div class="checked-list-parent">
     <ul class="checked-list"></ul>

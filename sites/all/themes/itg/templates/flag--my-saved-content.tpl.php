@@ -51,6 +51,8 @@
 <?php $arg = arg(); ?>
 <?php 
   $node_type = itg_personalization_flag_text($arg[1]);   
+  $flag_icon = '';
+  $flag_text = '';
   switch ($node_type) {
     case 'story':
       $flag_text = 'READ LATER';

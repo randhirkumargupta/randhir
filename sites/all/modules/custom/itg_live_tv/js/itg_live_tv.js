@@ -7,15 +7,7 @@
     Drupal.behaviors.itg_live_tv = {
         attach: function (context, settings) {
             var uid = settings.itg_live_tv.settings.uid;
-            var base_url = settings.itg_live_tv.settings.base_url;
-
-            if (uid != 1) {
-                $('.vertical-tabs-list').hide();
-                $('#edit-metatags').show();
-                $('#edit-metatags-und-advanced').hide();
-
-
-            }
+            var base_url = settings.itg_live_tv.settings.base_url;            
 
             $('.live-tv-button', context).click(function (event) {
                 if (jQuery(this).is(':checked'))
@@ -39,7 +31,8 @@
                         {
 
                             $('#widget-ajex-loader').hide();
-                            $("#successMessage").html("Saved Sucessfully");
+                            //$("#successMessage").html("Saved Sucessfully");
+                            window.location.reload('true');
                         }
                     });
                 }

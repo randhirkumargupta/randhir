@@ -12,43 +12,36 @@
     attach: function (context, settings) {
       var uid = settings.itg_breaking_news.settings.uid;
       var type = $('#edit-field-type-und').val();
-
-
-      // code to hide body text format filter 
-      if (uid != 1) {
-        $('.vertical-tabs-list').hide();
-        $('#edit-metatags').show();
-        $('#edit-metatags-und-advanced').hide();
-
-      }
-
+      
+       $('#custom_add_another_item').click(function() {         
+         //edit-field-breaking-content-details
+         //ajax-new-content
+         $('input[name="field_breaking_content_details_add_more"]').mousedown();
+       })
+      
+      
       // type check for add form
       $("#edit-field-type-und").change(function () {
         
         if (this.value == 'Live Blog') {
-
           $(".field-name-field-mark-as-breaking-band").hide();
           $(".field-name-field-breaking-publish-time").hide();
           $("input[id*=field-mark-as-breaking-band]").removeAttr('checked');
           $(".highlight-title").show();
-
-
-
+          $('#edit-field-section > .form-type-select > label').html('Section');
         }
-        else
-        {
+        else {
           $(".highlight-title").hide();
           $(".field-name-field-mark-as-breaking-band").show();
           $(".field-name-field-breaking-publish-time").show();
-
+          $('#edit-field-section > .form-type-select > label').html('Section<span class="form-required">*</span>');
         }
         
         // hide Live tv checkbox if type is breaking news
         var typevalue = $('#edit-field-type-und').val();
-                if (typevalue == 'Breaking News') {
-                    $('#edit-field-story-expires-und-yes').attr('checked', false);
-
-                }
+        if (typevalue == 'Breaking News') {
+          $('#edit-field-story-expires-und-yes').attr('checked', false);
+        }
       });
 
       // type check for edit form
@@ -60,6 +53,7 @@
       // type check for edit form
       if (type == 'Breaking News') {
         $(".highlight-title").hide();
+        $('#edit-field-section > .form-type-select > label').html('Section<span class="form-required">*</span>');
       }
 
       $('body').on('change', '.field-name-field-mobile-subscribers .form-checkbox', function () {
@@ -95,7 +89,7 @@
       });
       
       
-      $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox:checked').parents('tr').siblings().find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false, disabled: true});
+      $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox:checked').parents('tr').siblings().find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false});
       $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox:checked').parents('tr').find('.collapsed .fieldset-legend a').css('background-color', '#bcf2fc');
       $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox:checked').parents('tr').find('.collapsible .fieldset-legend a').css('background-color', '#bcf2fc');
       $(document).ajaxComplete(function(){
@@ -103,17 +97,25 @@
         $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox:checked').parents('tr').find('.collapsible .fieldset-legend a').css('background-color', '#bcf2fc');
       });
       $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox:checked').parents('tr').find('#edit-field-breaking-content-details-und-0 .fieldset-legend a').css('background-color', '#bcf2fc');
-  $('body').on('change', '.field-name-field-mark-as-breaking-band .form-checkbox', function () {
+    $('body').on('change', '.field-name-field-mark-as-breaking-band .form-checkbox', function () {
     var el_check = $(this).is(':checked');
     if(el_check == true){
-      $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false, disabled: true});
-      $(this).attr({checked: true, disabled: false});
+      $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false});
+      $(this).attr({checked: true});
     }
     else{
-      $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false, disabled: false});
+      $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false});
     }
   });
-  $('#edit-field-section > .form-type-select > label').html('Section<span class="form-required">*</span>');
+  //$('#edit-field-section > .form-type-select > label').html('Section<span class="form-required">*</span>');
+  
+  
+//  $( 'input[name="field_breaking_content_details_add_more"]' ).ajaxComplete(function() {
+//    var offSet = 200;
+//    var dataOffset = $(this).offset().top;
+//    var targetOffset = dataOffset - offSet;
+//    $("body, html").animate({scrollTop: targetOffset}, 300);
+//  });
 
 
     }

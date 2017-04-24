@@ -35,7 +35,7 @@ function feature_for_recipe_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'body',
     'label' => 'Description',
     'required' => 1,
@@ -81,7 +81,7 @@ function feature_for_recipe_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_primary_category',
     'label' => 'primary category',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -94,90 +94,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 57,
-    ),
-  );
-
-  // Exported field_instance: 'node-cooking_tips-field_primary_category_html'.
-  $field_instances['node-cooking_tips-field_primary_category_html'] = array(
-    'bundle' => 'cooking_tips',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 14,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_primary_category_html',
-    'label' => 'Primary category html',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 59,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-cooking_tips-field_primary_category_html_text'.
-  $field_instances['node-cooking_tips-field_primary_category_html_text'] = array(
-    'bundle' => 'cooking_tips',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 15,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_primary_category_html_text',
-    'label' => 'Primary category textarea',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 61,
+      'weight' => 18,
     ),
   );
 
@@ -266,7 +183,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-cooking_tips-field_recipe_writer_image'] = array(
     'bundle' => 'cooking_tips',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (88 x 66)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -312,7 +229,6 @@ function feature_for_recipe_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -416,7 +332,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 55,
+      'weight' => 17,
     ),
   );
 
@@ -424,7 +340,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-cooking_tips-field_story_extra_large_image'] = array(
     'bundle' => 'cooking_tips',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (647 x 363)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -470,7 +386,6 @@ function feature_for_recipe_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -509,7 +424,7 @@ function feature_for_recipe_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 11,
+        'weight' => 14,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -532,9 +447,9 @@ function feature_for_recipe_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'size' => 60,
+        'rows' => 5,
       ),
-      'type' => 'text_textfield',
+      'type' => 'text_textarea',
       'weight' => 5,
     ),
   );
@@ -543,7 +458,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-cooking_tips-field_story_large_image'] = array(
     'bundle' => 'cooking_tips',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (483 x 271)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -589,7 +504,6 @@ function feature_for_recipe_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -620,7 +534,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-cooking_tips-field_story_medium_image'] = array(
     'bundle' => 'cooking_tips',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (370 x 208)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -666,7 +580,6 @@ function feature_for_recipe_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -733,7 +646,7 @@ function feature_for_recipe_field_default_field_instances() {
         'path' => '',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete_tags',
+      'type' => 'entityreference_autocomplete',
       'weight' => 6,
     ),
   );
@@ -784,7 +697,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-cooking_tips-field_story_small_image'] = array(
     'bundle' => 'cooking_tips',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (170 x 127)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -830,7 +743,6 @@ function feature_for_recipe_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -921,7 +833,7 @@ function feature_for_recipe_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'body',
     'label' => 'Description',
     'required' => 1,
@@ -967,7 +879,7 @@ function feature_for_recipe_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_primary_category',
     'label' => 'primary category',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -980,7 +892,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 18,
+      'weight' => 17,
     ),
   );
 
@@ -992,9 +904,10 @@ function feature_for_recipe_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'above',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_default',
         'weight' => 15,
       ),
       'teaser' => array(
@@ -1019,7 +932,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 20,
+      'weight' => 18,
     ),
   );
 
@@ -1058,7 +971,7 @@ function feature_for_recipe_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 22,
+      'weight' => 5,
     ),
   );
 
@@ -1147,7 +1060,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-food_news-field_recipe_writer_image'] = array(
     'bundle' => 'food_news',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (88 x 66)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1262,7 +1175,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-food_news-field_story_extra_large_image'] = array(
     'bundle' => 'food_news',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (647 x 363)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1346,7 +1259,7 @@ function feature_for_recipe_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 17,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1369,10 +1282,10 @@ function feature_for_recipe_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'size' => 60,
+        'rows' => 5,
       ),
-      'type' => 'text_textfield',
-      'weight' => 5,
+      'type' => 'text_textarea',
+      'weight' => 20,
     ),
   );
 
@@ -1380,7 +1293,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-food_news-field_story_large_image'] = array(
     'bundle' => 'food_news',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (483 x 271)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1456,7 +1369,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-food_news-field_story_medium_image'] = array(
     'bundle' => 'food_news',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (370 x 208)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1568,7 +1481,7 @@ function feature_for_recipe_field_default_field_instances() {
         'path' => '',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete_tags',
+      'type' => 'entityreference_autocomplete',
       'weight' => 6,
     ),
   );
@@ -1619,7 +1532,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-food_news-field_story_small_image'] = array(
     'bundle' => 'food_news',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (170 x 127)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1813,7 +1726,104 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete_tags',
-      'weight' => 31,
+      'weight' => 33,
+    ),
+  );
+
+  // Exported field_instance: 'node-recipe-field_cm_related_content_detail'.
+  $field_instances['node-recipe-field_cm_related_content_detail'] = array(
+    'bundle' => 'recipe',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 52,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_cm_related_content_detail',
+    'label' => 'Related Content Detail',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 48,
+    ),
+  );
+
+  // Exported field_instance: 'node-recipe-field_itg_content_publish_date'.
+  $field_instances['node-recipe-field_itg_content_publish_date'] = array(
+    'bundle' => 'recipe',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 51,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_itg_content_publish_date',
+    'label' => 'Content Publish date',
+    'required' => FALSE,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'date',
+      'settings' => array(
+        'display_all_day' => 0,
+        'increment' => 15,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_text',
+      'weight' => 47,
     ),
   );
 
@@ -1825,9 +1835,10 @@ function feature_for_recipe_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'above',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_default',
         'weight' => 50,
       ),
       'teaser' => array(
@@ -1854,89 +1865,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 50,
-    ),
-  );
-
-  // Exported field_instance: 'node-recipe-field_primary_category_html'.
-  $field_instances['node-recipe-field_primary_category_html'] = array(
-    'bundle' => 'recipe',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 51,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_primary_category_html',
-    'label' => 'Primary category html',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 52,
-    ),
-  );
-
-  // Exported field_instance: 'node-recipe-field_primary_category_html_text'.
-  $field_instances['node-recipe-field_primary_category_html_text'] = array(
-    'bundle' => 'recipe',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 52,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_primary_category_html_text',
-    'label' => 'Primary category textarea',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 54,
+      'weight' => 46,
     ),
   );
 
@@ -1978,7 +1907,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 20,
+      'weight' => 19,
     ),
   );
 
@@ -2089,7 +2018,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 18,
+      'weight' => 17,
     ),
   );
 
@@ -2128,7 +2057,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 17,
+      'weight' => 16,
     ),
   );
 
@@ -2210,7 +2139,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 15,
+      'weight' => 14,
     ),
   );
 
@@ -2252,7 +2181,7 @@ function feature_for_recipe_field_default_field_instances() {
         'rows' => 20,
       ),
       'type' => 'text_textarea',
-      'weight' => 23,
+      'weight' => 22,
     ),
   );
 
@@ -2294,7 +2223,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 22,
+      'weight' => 21,
     ),
   );
 
@@ -2375,7 +2304,7 @@ function feature_for_recipe_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 14,
+      'weight' => 13,
     ),
   );
 
@@ -2417,7 +2346,7 @@ function feature_for_recipe_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 13,
+      'weight' => 12,
     ),
   );
 
@@ -2498,7 +2427,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 16,
+      'weight' => 15,
     ),
   );
 
@@ -2537,7 +2466,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 21,
+      'weight' => 20,
     ),
   );
 
@@ -2576,7 +2505,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 29,
+      'weight' => 30,
     ),
   );
 
@@ -2615,7 +2544,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 19,
+      'weight' => 18,
     ),
   );
 
@@ -2660,7 +2589,9 @@ function feature_for_recipe_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
+            'imce' => 0,
+            'itg_image_repository' => 0,
+            'itg_image_video' => 'itg_image_video',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -2725,7 +2656,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -2733,7 +2664,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-recipe-field_recipe_writer_image'] = array(
     'bundle' => 'recipe',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (88 x 66)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2801,7 +2732,7 @@ function feature_for_recipe_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 28,
+      'weight' => 27,
     ),
   );
 
@@ -2840,7 +2771,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'hs_taxonomy',
       'settings' => array(),
       'type' => 'taxonomy_hs',
-      'weight' => 30,
+      'weight' => 32,
     ),
   );
 
@@ -2882,7 +2813,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 29,
+      'weight' => 28,
     ),
   );
 
@@ -2924,7 +2855,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 12,
+      'weight' => 11,
     ),
   );
 
@@ -2932,7 +2863,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-recipe-field_story_extra_large_image'] = array(
     'bundle' => 'recipe',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (647 x 363)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3000,7 +2931,7 @@ function feature_for_recipe_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 24,
+      'weight' => 23,
     ),
   );
 
@@ -3076,7 +3007,7 @@ function feature_for_recipe_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 36,
+      'weight' => 38,
     ),
   );
 
@@ -3118,7 +3049,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 35,
+      'weight' => 37,
     ),
   );
 
@@ -3160,7 +3091,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 40,
+      'weight' => 41,
     ),
   );
 
@@ -3205,8 +3136,8 @@ function feature_for_recipe_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -3237,14 +3168,14 @@ function feature_for_recipe_field_default_field_instances() {
     'bundle' => 'recipe',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please enter kicker headline.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 24,
+        'weight' => 53,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3257,7 +3188,7 @@ function feature_for_recipe_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_kicker_text',
     'label' => 'Kicker',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -3267,10 +3198,10 @@ function feature_for_recipe_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'size' => 60,
+        'rows' => 5,
       ),
-      'type' => 'text_textfield',
-      'weight' => 10,
+      'type' => 'text_textarea',
+      'weight' => 9,
     ),
   );
 
@@ -3278,7 +3209,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-recipe-field_story_large_image'] = array(
     'bundle' => 'recipe',
     'deleted' => 0,
-    'description' => 'Please upload Large Image.',
+    'description' => 'Image Size (483 x 271)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3346,7 +3277,7 @@ function feature_for_recipe_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 25,
+      'weight' => 24,
     ),
   );
 
@@ -3354,7 +3285,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-recipe-field_story_medium_image'] = array(
     'bundle' => 'recipe',
     'deleted' => 0,
-    'description' => 'Please upload medium Image.',
+    'description' => 'Image Size (370 x 208)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3422,7 +3353,7 @@ function feature_for_recipe_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 26,
+      'weight' => 25,
     ),
   );
 
@@ -3464,7 +3395,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 48,
+      'weight' => 45,
     ),
   );
 
@@ -3473,7 +3404,7 @@ function feature_for_recipe_field_default_field_instances() {
     'bundle' => 'recipe',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please enter Byline.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3508,50 +3439,8 @@ function feature_for_recipe_field_default_field_instances() {
         'path' => '',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete_tags',
-      'weight' => 11,
-    ),
-  );
-
-  // Exported field_instance: 'node-recipe-field_story_short_headline'.
-  $field_instances['node-recipe-field_story_short_headline'] = array(
-    'bundle' => 'recipe',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please enter strap headline.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 23,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_short_headline',
-    'label' => 'Strap headline (Short Headline)',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 8,
+      'type' => 'entityreference_autocomplete',
+      'weight' => 10,
     ),
   );
 
@@ -3559,7 +3448,7 @@ function feature_for_recipe_field_default_field_instances() {
   $field_instances['node-recipe-field_story_small_image'] = array(
     'bundle' => 'recipe',
     'deleted' => 0,
-    'description' => 'Please upload small Image.',
+    'description' => 'Image Size (170 x 127)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3627,7 +3516,7 @@ function feature_for_recipe_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 27,
+      'weight' => 26,
     ),
   );
 
@@ -3666,7 +3555,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 34,
+      'weight' => 36,
     ),
   );
 
@@ -3714,7 +3603,7 @@ function feature_for_recipe_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 32,
+      'weight' => 34,
     ),
   );
 
@@ -3756,7 +3645,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 33,
+      'weight' => 35,
     ),
   );
 
@@ -3837,7 +3726,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 37,
+      'weight' => 39,
     ),
   );
 
@@ -3913,7 +3802,7 @@ function feature_for_recipe_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 38,
+      'weight' => 40,
     ),
   );
 
@@ -3958,8 +3847,8 @@ function feature_for_recipe_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -3981,7 +3870,7 @@ function feature_for_recipe_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 46,
+      'weight' => 44,
     ),
   );
 
@@ -4023,7 +3912,7 @@ function feature_for_recipe_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 44,
+      'weight' => 43,
     ),
   );
 
@@ -4037,6 +3926,7 @@ function feature_for_recipe_field_default_field_instances() {
   t('Calorie type');
   t('City');
   t('Client title');
+  t('Content Publish date');
   t('Content type');
   t('Courtesy');
   t('Cuisine type');
@@ -4051,6 +3941,11 @@ function feature_for_recipe_field_default_field_instances() {
   t('Festivals');
   t('Food type');
   t('Garnishing');
+  t('Image Size (170 x 127)');
+  t('Image Size (370 x 208)');
+  t('Image Size (483 x 271)');
+  t('Image Size (647 x 363)');
+  t('Image Size (88 x 66)');
   t('Ingredients');
   t('Kicker');
   t('Large image');
@@ -4059,17 +3954,14 @@ function feature_for_recipe_field_default_field_instances() {
   t('Meal type');
   t('Medium image');
   t('Node Identity');
-  t('Please enter Byline.');
   t('Please enter Calorie Count, Numeric value will be entered.
 ');
   t('Please enter Courtesy.');
   t('Please enter Long headline.');
   t('Please enter Time (e.g.15-30 min, 30 min - 1hr etc.)');
   t('Please enter WAP headline.');
-  t('Please enter kicker headline.');
   t('Please enter recipe garnishing.');
   t('Please enter recipe ingredients one value per line.');
-  t('Please enter strap headline.');
   t('Please select Ailment (e.g. Cancer, Hypertension etc.)');
   t('Please select Calorie Type (e.g. Medium etc.)');
   t('Please select Content type.');
@@ -4080,20 +3972,17 @@ function feature_for_recipe_field_default_field_instances() {
   t('Please select festivals (e.g. Holi, Christmas etc.) ');
   t('Please select food type.');
   t('Please select section.');
-  t('Please upload Large Image.');
   t('Please upload audio');
-  t('Please upload medium Image.');
-  t('Please upload small Image.');
   t('Please upload video.');
   t('Primary category html');
   t('Primary category textarea');
+  t('Related Content Detail');
   t('Section');
   t('Short headline');
   t('Small image');
   t('Social media integration');
   t('Source id');
   t('Source type');
-  t('Strap headline (Short Headline)');
   t('Syndication');
   t('Time');
   t('Tweet');

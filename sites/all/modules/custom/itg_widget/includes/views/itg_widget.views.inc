@@ -68,10 +68,81 @@ function itg_widget_views_data() {
             'handler' => 'views_handler_sort',
         ),
     );
+    $data['itg_widget_order']['state'] = array(
+        'title' => t('state'),
+        'help' => t('state name.'),
+        'field' => array(
+            'handler' => 'views_handler_field',
+            'click sortable' => TRUE,
+        ),
+        'filter' => array(
+            'handler' => 'views_handler_filter_string',
+        ),
+        'sort' => array(
+            'handler' => 'views_handler_sort',
+        ),
+    );
+      $data['itg_widget_order']['id'] = array(
+        'title' => t('id'),
+        'help' => t('id.'),
+        'field' => array(
+            'handler' => 'views_handler_field',
+            'click sortable' => TRUE,
+        ),
+        'filter' => array(
+            'handler' => 'views_handler_filter_string',
+        ),
+        'sort' => array(
+            'handler' => 'views_handler_sort',
+        ),
+    );
+       $data['itg_widget_order']['id'] = array(
+        'title' => t('id'),
+        'help' => t('id.'),
+        'field' => array(
+            'handler' => 'views_handler_field',
+            'click sortable' => TRUE,
+        ),
+        'filter' => array(
+            'handler' => 'views_handler_filter_string',
+        ),
+        'sort' => array(
+            'handler' => 'views_handler_sort',
+        ),
+    );
+       $data['itg_widget_order']['nid'] = array(
+        'title' => t('nid'),
+        'help' => t('nid.'),
+        'field' => array(
+            'handler' => 'views_handler_field',
+            'click sortable' => TRUE,
+        ),
+        'filter' => array(
+            'handler' => 'views_handler_filter_string',
+        ),
+        'sort' => array(
+            'handler' => 'views_handler_sort',
+        ),
+    );
     
-    $data['itg_widget_order']['extra'] = array(
+      $data['itg_widget_order']['extra'] = array(
         'title' => t('extra'),
-        'help' => t('extra field value'),
+        'help' => t('extra.'),
+        'field' => array(
+            'handler' => 'views_handler_field',
+            'click sortable' => TRUE,
+        ),
+        'filter' => array(
+            'handler' => 'views_handler_filter_string',
+        ),
+        'sort' => array(
+            'handler' => 'views_handler_sort',
+        ),
+    );
+    
+    $data['itg_widget_order']['constituency'] = array(
+        'title' => t('constituency'),
+        'help' => t('constituency field value'),
         'field' => array(
             'handler' => 'views_handler_field',
             'click sortable' => TRUE,

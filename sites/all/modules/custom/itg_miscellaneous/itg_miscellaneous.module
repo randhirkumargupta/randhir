@@ -1,0 +1,88 @@
+<?php
+
+/**
+ * @file
+ * The ITG miscellaneousn module.
+ *
+ * Provides common functionality and customizations.
+ *
+ */
+
+/**
+ * Implements hook_init.
+ * {@inheritdoc}
+ */
+//function itg_miscellaneous_init() {
+//  global $user;
+//  //p(node_load(2540));
+//}
+
+/**
+ * Implements hook_menu().
+ * @return array $items
+ */
+function itg_miscellaneous_menu() {
+
+  $items['itg-admin-layout-list'] = array(
+      'page callback' => 'itg_layout_list_delete',
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_miscellaneous.inc',
+  );
+
+  $items['itg-delete-layout/%'] = array(
+      'page callback' => 'itg_layout_delete',
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_miscellaneous.inc',
+  );
+
+  $items['section-widgets-list-delete'] = array(
+      'page callback' => 'itg_section_widgets_list_delete',
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_miscellaneous.inc',
+  );
+
+  $items['create-poll-table'] = array(
+      'page callback' => 'create_poll_table',
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_miscellaneous.inc',
+  );
+
+  $items['create-section-category-in-mongo'] = array(
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('create_section_category_in_mongo'),
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_miscellaneous.inc',
+  );
+  $items['create-index-for-story-migration'] = array(
+      'page callback' => 'create_index_xml',
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_story_clean.inc',
+  );
+   $items['create-story-xml-clean'] = array(
+      'page callback' => 'create_story_xml_clean',
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_story_clean.inc',
+  );
+  $items['get-mongo-detail/%/%'] = array(
+      'page callback' => 'itg_get_mongo_detail',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_miscellaneous.inc',
+  );
+  $items['create-video-xml-clean'] = array(
+      'page callback' => 'create_video_xml_clean',
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_video_clean.inc',
+  );
+  
+
+  return $items;
+}

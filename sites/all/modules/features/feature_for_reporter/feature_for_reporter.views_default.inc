@@ -92,12 +92,23 @@ function feature_for_reporter_views_default_views() {
   $handler->display->display_options['fields']['field_reporter_email_id']['table'] = 'field_data_field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['field'] = 'field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_reporter_email_id']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_reporter_email_id']['alter']['text'] = '([field_reporter_email_id])';
+  /* Field: Content: Occupation */
+  $handler->display->display_options['fields']['field_celebrity_pro_occupation']['id'] = 'field_celebrity_pro_occupation';
+  $handler->display->display_options['fields']['field_celebrity_pro_occupation']['table'] = 'field_data_field_celebrity_pro_occupation';
+  $handler->display->display_options['fields']['field_celebrity_pro_occupation']['field'] = 'field_celebrity_pro_occupation';
+  $handler->display->display_options['fields']['field_celebrity_pro_occupation']['label'] = '';
+  $handler->display->display_options['fields']['field_celebrity_pro_occupation']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_celebrity_pro_occupation']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_celebrity_pro_occupation']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_celebrity_pro_occupation']['delta_offset'] = '0';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[title] ([field_reporter_email_id])';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[title] [field_reporter_email_id] ([field_celebrity_pro_occupation])';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Has taxonomy term ID */
@@ -106,9 +117,7 @@ function feature_for_reporter_views_default_views() {
   $handler->display->display_options['arguments']['tid']['field'] = 'tid';
   $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
   $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'php';
-  $handler->display->display_options['arguments']['tid']['default_argument_options']['code'] = '$tem_tid = taxonomy_get_term_by_name(\'reporter\',NULL);
-$tid = array_pop($tem_tid)->tid;
-return $tid;';
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['code'] = 'return REPORTER_TID;';
   $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
@@ -407,6 +416,10 @@ return $tid;';
   $handler->display->display_options['fields']['field_celebrity_pro_occupation']['field'] = 'field_celebrity_pro_occupation';
   $handler->display->display_options['fields']['field_celebrity_pro_occupation']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_celebrity_pro_occupation']['delta_offset'] = '0';
+  /* Field: Content: Profile type */
+  $handler->display->display_options['fields']['field_reporter_profile_type']['id'] = 'field_reporter_profile_type';
+  $handler->display->display_options['fields']['field_reporter_profile_type']['table'] = 'field_data_field_reporter_profile_type';
+  $handler->display->display_options['fields']['field_reporter_profile_type']['field'] = 'field_reporter_profile_type';
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';

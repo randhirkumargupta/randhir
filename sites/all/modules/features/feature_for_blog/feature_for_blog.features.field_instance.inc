@@ -15,7 +15,7 @@ function feature_for_blog_field_default_field_instances() {
     'bundle' => 'blog',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please enter bloggers name (e.g. Ankush, Sumit etc.)',
+    'description' => 'Please enter bloggers name.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -49,6 +49,45 @@ function feature_for_blog_field_default_field_instances() {
       ),
       'type' => 'taxonomy_autocomplete',
       'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-blog-field_blog_configuration'.
+  $field_instances['node-blog-field_blog_configuration'] = array(
+    'bundle' => 'blog',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 22,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_blog_configuration',
+    'label' => 'Configuration',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 51,
     ),
   );
 
@@ -94,19 +133,19 @@ function feature_for_blog_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-blog-field_blog_short_description'.
-  $field_instances['node-blog-field_blog_short_description'] = array(
+  // Exported field_instance: 'node-blog-field_cm_related_content_detail'.
+  $field_instances['node-blog-field_cm_related_content_detail'] = array(
     'bundle' => 'blog',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please enter Short description.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 19,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -117,8 +156,8 @@ function feature_for_blog_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_blog_short_description',
-    'label' => 'Short description',
+    'field_name' => 'field_cm_related_content_detail',
+    'label' => 'Related Content Detail',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -129,10 +168,10 @@ function feature_for_blog_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'size' => 60,
+        'rows' => 5,
       ),
-      'type' => 'text_textfield',
-      'weight' => 3,
+      'type' => 'text_textarea',
+      'weight' => 47,
     ),
   );
 
@@ -178,18 +217,19 @@ function feature_for_blog_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-blog-field_primary_category_html_text'.
-  $field_instances['node-blog-field_primary_category_html_text'] = array(
+  // Exported field_instance: 'node-blog-field_common_short_description'.
+  $field_instances['node-blog-field_common_short_description'] = array(
     'bundle' => 'blog',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'above',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 15,
+        'type' => 'text_default',
+        'weight' => 21,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -200,8 +240,8 @@ function feature_for_blog_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_primary_category_html_text',
-    'label' => 'Primary category textarea',
+    'field_name' => 'field_common_short_description',
+    'label' => 'Short description',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -215,7 +255,49 @@ function feature_for_blog_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 15,
+      'weight' => 50,
+    ),
+  );
+
+  // Exported field_instance: 'node-blog-field_preview_unique_id'.
+  $field_instances['node-blog-field_preview_unique_id'] = array(
+    'bundle' => 'blog',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 16,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_preview_unique_id',
+    'label' => 'Preview_unique_id',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 34,
     ),
   );
 
@@ -280,7 +362,7 @@ function feature_for_blog_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'field_story_category',
     'label' => 'Section',
     'required' => 1,
@@ -290,10 +372,52 @@ function feature_for_blog_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'hs_taxonomy',
+      'module' => 'options',
       'settings' => array(),
-      'type' => 'taxonomy_hs',
+      'type' => 'options_select',
       'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-blog-field_story_comment_question'.
+  $field_instances['node-blog-field_story_comment_question'] = array(
+    'bundle' => 'blog',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 23,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_comment_question',
+    'label' => 'Comment question',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 53,
     ),
   );
 
@@ -326,7 +450,7 @@ function feature_for_blog_field_default_field_instances() {
     'label' => 'Image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -334,7 +458,7 @@ function feature_for_blog_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -347,6 +471,7 @@ function feature_for_blog_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -419,13 +544,15 @@ function feature_for_blog_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Are you sure you want to Archive?');
   t('Bloggers');
+  t('Comment question');
+  t('Configuration');
   t('Image');
   t('Long description');
   t('Node Identity');
-  t('Please enter Short description.');
-  t('Please enter bloggers name (e.g. Ankush, Sumit etc.)');
-  t('Primary category textarea');
+  t('Please enter bloggers name.');
+  t('Preview_unique_id');
   t('Related Content');
+  t('Related Content Detail');
   t('Section');
   t('Short description');
 

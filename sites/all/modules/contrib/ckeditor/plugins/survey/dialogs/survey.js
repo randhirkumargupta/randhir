@@ -28,6 +28,7 @@ CKEDITOR.dialog.add('surveyDialog', function(editor) {
             type: 'text',
             id: 'inset-survey-nid',
             label: 'Survey',
+            className: 'survey-txt',
             validate: CKEDITOR.dialog.validate.notEmpty("This field cannot be empty.")
           },
           {
@@ -36,6 +37,9 @@ CKEDITOR.dialog.add('surveyDialog', function(editor) {
             title: 'Survey',
             onClick: function() {
               var bas_path = window.location.origin?window.location.origin+'/':window.location.protocol+'/'+window.location.host+'/';
+              if(bas_path == 'http://localhost/') {
+                bas_path = bas_path+'itgcms/';
+              }
               editor.popup(bas_path + 'pqs/associate-with-story/survey', 400, 600);
             }
           }

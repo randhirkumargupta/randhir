@@ -8,12 +8,25 @@
 /**
  * Create survey form
  */
-function itg_survey_survey_form() {
-  global $base_url, $user;
+function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
+  global $base_url;
+  global $user;
+  if($user->uid) {
+  $cookie = $_COOKIE['Drupal_visitor_itgcms_survey_'.arg(1).'_'.$user->uid];
+  } else {
+   $cookie = $_COOKIE['Drupal_visitor_itgcms_survey_'.arg(1)];  
+  }
   
   //Get node of current survey
-  $arg = arg();
-  $node = node_load($arg[1]);
+  if($node_id) {
+    $current_nid = $node_id;
+    $from_story = 'yes';
+  }
+  else {
+    $current_nid = arg(1);
+    $from_story = 'no';
+  }
+  $node = node_load($current_nid);
   
   // Check node type
   if ($node->type == 'survey') {
@@ -28,19 +41,19 @@ function itg_survey_survey_form() {
     if(!$node->status) {
       $form['survey_status'] = array(
         '#type' => 'markup',
-        '#markup' => '<h2>This survey is not published!</h2>',
+        '#markup' => '<div style="margin-top:10px"><h2>This survey is not published!</h2></div>',
      );
       return $form;
     }
     
    // If survey has been expired. 
-   if(time() > $survey_expiry_date) {
-      $form['survey_expiry_status'] = array(
-        '#type' => 'markup',
-        '#markup' => '<h2>This survey has been expired!</h2>',
-     );
-      return $form;
-    }
+//   if(time() > $survey_expiry_date) {
+//      $form['survey_expiry_status'] = array(
+//        '#type' => 'markup',
+//        '#markup' => '<div style="margin-top:10px"><h2>This survey has been expired!</h2></div>',
+//     );
+//      return $form;
+//    }
     
     $survey_question_format = $node->field_survey_questions_format[LANGUAGE_NONE][0]['value'];
     
@@ -53,7 +66,11 @@ function itg_survey_survey_form() {
     $form = array();
     
     // Generate cookie
-    $cookie_name = 'Drupal_visitor_itgcms_survey_' . $node->nid;
+    if($user->uid) {
+      $cookie_name = 'Drupal_visitor_itgcms_survey_' .$node->nid . '_' . $user->uid;
+    } else {
+      $cookie_name = 'Drupal_visitor_itgcms_survey_' . $node->nid;
+    }
     
     // Check this survey has been attempted by current user OR not.
     if (isset($_COOKIE[$cookie_name])) {
@@ -98,10 +115,27 @@ function itg_survey_survey_form() {
       
       
       //Media info
-      $media = $question_detail[$question_arr['value']]->field_survey_add_media[LANGUAGE_NONE][0]['uri'];
-      $media_type = strtolower(substr(strrchr($media, '.'), 1));
-      $media_path = $base_url.str_replace('public://', '/sites/default/files/', $media);
-      
+//      $media = $question_detail[$question_arr['value']]->field_survey_add_media[LANGUAGE_NONE][0]['uri'];
+//      $media_type = strtolower(substr(strrchr($media, '.'), 1));
+//      $media_path = $base_url.str_replace('public://', '/sites/default/files/', $media);
+       if ($question_detail[$question_arr['value']]->field_question_media[LANGUAGE_NONE][0]['value'] == 'Video') {
+
+         $videid = $question_detail[$question_arr['value']]->field_question_video[LANGUAGE_NONE][0]['fid'];
+
+         if (function_exists('itg_videogallery_get_videoid_new')) {
+          $video_ids = itg_videogallery_get_videoid_new($videid);
+           $question_media = '<iframe width="740" height="447" frameborder="0" scrolling="no"
+                                                src="https://www.dailymotion.com/embed/video/'.$video_ids.'?autoplay=0&ui-logo=1&mute=1&ui-start-screen-info"
+                                                allowfullscreen></iframe>';
+        }
+      }
+      if ($question_detail[$question_arr['value']]->field_question_media[LANGUAGE_NONE][0]['value'] == 'Photo') {
+         $question_media_uri = $question_detail[$question_arr['value']]->field_question_image[LANGUAGE_NONE][0]['uri'];
+                   $extra_large_image_url = image_style_url("image750x447", $question_media_uri);
+
+        $question_media = '<img src="' . $extra_large_image_url . '" width="750" alt="" />';
+        }
+
       //Submit button text
       if(($total_num_of_ques-1) === $num){
         $button_text = 'Submit';
@@ -177,7 +211,6 @@ function itg_survey_survey_form() {
       $form['answer' . $num] = array(
           '#type' => 'markup',
           '#prefix' => '<div id="answer-container-'.$num.'" class="answer-container">',
-          //'#markup' => '<div class="answer-heading">Answer: ' . $required . '</div> ',
       ); 
 
       if ($answer_type == 'textfield') { // Answer options for textfield
@@ -196,7 +229,6 @@ function itg_survey_survey_form() {
           
           $txt_num++;
         }
-//        $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
         
       } elseif ($answer_type == 'rating') { // Answer option for rating
         $rating_num = 0;
@@ -207,6 +239,7 @@ function itg_survey_survey_form() {
               '#type' => 'checkboxes',
               '#options' => $arr,
               '#attributes' => array('class' => array('rating'))
+               
           );
           $form['answer_option' . $num . '_' . $rating_num.'_name'] = array(
               '#type' => 'hidden',
@@ -215,54 +248,50 @@ function itg_survey_survey_form() {
           
           $rating_num++;
         }
-//        $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
         
       } else {  //Answer option for radios and checkboxes
         $form['answer_option' . $num] = array(
             '#title' => t(''),
             '#type' => $answer_type,
             '#options' => $all_ans_options[$num],
-//            '#suffix' => '</div>',
         );
       }
       
-      if (!empty($media_type)) {
-        if ($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif') {
-          $form['media' . $num] = array(
+    
+         $form['media' . $num] = array(
               '#type' => 'markup',
-              '#prefix' => '<div class="survey-media">',
-              '#markup' => '<img src="' . $media_path . '" height="100" width="130"/>',
+              '#prefix' => '<div>',
+              '#markup' => $question_media,
               '#suffix' => '</div>',
           );
-        }
-        else {
-          $form['media' . $num] = array(
-              '#type' => 'markup',
-              '#prefix' => '<div class="survey-media">',
-              '#markup' => '<video width="140" height="145" controls="controls">
-                <source src="' . $media . '" type="video/mp4"> 
-                 <object> 
-                   <embed  src="' . $media . '"> 
-                 </object> 
-               </video>',
-              '#suffix' => '</div>',
-          );
-        }
-      }
+      
       $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
+      
       // Render multiple submit buttons, if questions are displaying one-by-one
       if ($survey_question_format == 'One question at a time') {
-        $form['survey_submit_' . $num] = array(
-            '#type' => 'submit',
-            '#value' => $button_text,
-            '#name' => 'surveysubmit_' . $num,
-            '#ajax' => array(
-                'callback' => 'survey_form_ajax_handler',
-                'effect' => 'fade',
-            ),
-            '#attributes' => array('class' => array('survey-submit'))
+        if ($button_text == 'Submit' && time() > $survey_expiry_date) {
+          $form['survey_has_been_expired' . $num] = array(
+              '#type' => 'markup',
+              '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>This Survey has been expired. So you can not submit!</strong></div>',
+          );
+        } elseif(isset($cookie)){
+        $form['survey_has_been_already_taken' . $num] = array(
+            '#type' => 'markup',
+            '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>Sorry! You can not proceed, you have already taken this survey!</strong></div>',
         );
-
+        } else {
+          $form['survey_submit_' . $num] = array(
+              '#type' => 'submit',
+              '#value' => $button_text,
+              '#name' => 'surveysubmit_' . $num,
+              '#ajax' => array(
+                  'callback' => 'survey_form_ajax_handler',
+                  'effect' => 'fade',
+              ),
+              '#attributes' => array('class' => array('survey-submit'))
+          );
+        }
+    
         // Skip button for all qustions except last one
         if ($skip_question[$num] == 'yes') {
           if (($total_num_of_ques - 1) !== $num) {
@@ -338,6 +367,11 @@ function itg_survey_survey_form() {
         '#value' => $node->title,
     );
     
+    $form['from_story'] = array(
+        '#type' => 'hidden',
+        '#value' => $from_story,
+    );
+    
    $form['survey_taken'] = array(
         '#type' => 'hidden',
         '#value' => $survey_taken
@@ -345,16 +379,31 @@ function itg_survey_survey_form() {
    
    // Render a single submit button, if all questions are showing at once
    if($survey_question_format == 'All questions at a time') {
-     $form['survey_submit_' . $num] = array(
-          '#type' => 'submit',
-          '#value' => 'Submit',
-          '#name' => 'surveysubmit_' . $num,
-          '#ajax' => array(
-              'callback' => 'survey_form_ajax_handler',
-              'effect' => 'fade',
-          ),
-          '#attributes' => array('class' => array('survey-submit'))
-      );
+     if (time() > $survey_expiry_date) {
+        $form['survey_has_been_expired' . $num] = array(
+            '#type' => 'markup',
+            '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>This Survey has been expired. So you can not submit!</strong></div>',
+        );
+      } 
+      elseif(isset($cookie)){
+        $form['survey_has_been_already_taken' . $num] = array(
+            '#type' => 'markup',
+            '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>Sorry! You can not proceed, you have already taken this survey!</strong></div>',
+        );
+      } else {
+        $form['survey_submit_' . $num] = array(
+            '#type' => 'submit',
+            '#value' => 'Submit',
+            '#prefix' => '<div class="survey-submit-btn-wrapper">',
+            '#name' => 'surveysubmit_' . $num,
+            '#ajax' => array(
+                'callback' => 'survey_form_ajax_handler',
+                'effect' => 'fade',
+            ),
+            '#attributes' => array('class' => array('survey-submit')),
+            '#suffix' => '</div>'
+        );
+      }
     }
   }
   else {
@@ -365,288 +414,3 @@ function itg_survey_survey_form() {
   return $form;
 }
 
-/**
- * Validate function of survey form
- * @param array $form
- * @param array $form_state
- */
-function itg_survey_survey_form_validate($form, &$form_state) {
-  
-  $form_detail = $form_state['values'];
-  $cookie_name = 'Drupal_visitor_itgcms_survey_' . $form_state['values']['nid'];
-
-  if (isset($_COOKIE[$cookie_name])) {
-    form_set_error('answer_option', t('Sorry! You can not proceed, you have already taken this survey!'));
-  } 
-  else {
-
-    $btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
-    $num = $btn_num_arr[1];
-    
-    $question_total = $form_detail['question_total'];
-    $question_format = $form_detail['question_format'];
-
-    if ($question_format == 'All questions at a time') {
-      $loop_start_num = 0;
-      $loop_end_num = $question_total - 1;
-    } 
-    else {
-      $loop_start_num = $num;
-      $loop_end_num = $num;
-    }
-
-    for ($ques_num = $loop_start_num; $ques_num <= $loop_end_num; $ques_num++) {
-
-      // Checkbox validation
-      if ($form_detail['question_type' . $ques_num] === 'checkboxes') {
-        if ($form_detail['question_skip' . $ques_num] !== 'yes') {
-          $ans_flag = FALSE;
-          foreach ($form_detail['answer_option' . $ques_num] as $key => $value) {
-            if ($value !== 0) {
-              $ans_flag = TRUE;
-            }
-          }
-          if (!$ans_flag) {
-            form_set_error('answer_option' . $ques_num, t('Question "@questiontitle" is required.', array('@questiontitle' => $form_detail['question' . $ques_num])));
-          }
-        }
-      }
-
-      // Radio Button validation
-      if ($form_detail['question_type' . $ques_num] === 'radios') {
-        if ($form_detail['question_skip' . $ques_num] !== 'yes') {
-          if (empty($form_detail['answer_option' . $ques_num])) {
-            form_set_error('answer_option' . $ques_num, t('Question "@questiontitle" is required.', array('@questiontitle' => $form_detail['question' . $ques_num])));
-          }
-        }
-      }
-
-      // Rating validation
-      if ($form_detail['question_type' . $ques_num] === 'rating') {
-        if ($form_detail['question_skip' . $ques_num] !== 'yes') {
-          $rating_ans_flag = FALSE;
-          for ($rating_field = 0; $rating_field < $form_detail['rating_total_count']; $rating_field++) {
-            for ($rating_field_val = 1; $rating_field_val <= 5; $rating_field_val++) {
-              if ($form_detail['answer_option' . $ques_num . '_' . $rating_field][$rating_field_val] !== 0) {
-                $rating_ans_flag = TRUE;
-              }
-            }
-          }
-          if (!$rating_ans_flag) {
-            form_set_error('answer_option' . $ques_num, t('Question "@questiontitle" is required.', array('@questiontitle' => $form_detail['question' . $ques_num])));
-          }
-        }
-      }
-
-      // Textfield validation
-      if ($form_detail['question_type' . $ques_num] === 'textfield') {
-        if ($form_detail['question_skip' . $ques_num] !== 'yes') {
-          $txt_ans_flag = FALSE;
-          for ($text_field = 0; $text_field < $form_detail['textfield_total_count']; $text_field++) {
-            if ($form_detail['answer_option' . $ques_num . '_' . $text_field] !== '') {
-              $txt_ans_flag = TRUE;
-            }
-          }
-          if (!$txt_ans_flag) {
-            form_set_error('answer_option' . $ques_num, t('Question "@questiontitle" is required.', array('@questiontitle' => $form_detail['question' . $ques_num])));
-          }
-        }
-      }
-    }
-  }
-}
-
-/**
- * Submit handler for survey form
- * @param array $form
- * @param array $form_state
- */
-function itg_survey_survey_form_submit($form, &$form_state) {
-  global $user;
-
-  //Form variable
-  $form_detail = $form_state['values'];
-  $btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
-  $num = $btn_num_arr[1];
-  $question_total = $form_detail['question_total'];
-  $question_format = $form_detail['question_format'];
-  
-  // Extract user type
-  if ($user->uid) {
-    $user_type = 'authenticated';
-  } else {
-    $user_type = 'anonymous';
-  }
-  
-  // Set a session for a survey (Will be same for all questions during a survey) 
-  if (!isset($_SESSION['survey_unique_key'])) {
-    $_SESSION['survey_unique_key'] = user_password(6);
-  }
-  
-  // Set loop variables for both scenario (all/one-by-one)
-  if ($question_format == 'All questions at a time') {
-    $loop_start_num = 0;
-    $loop_end_num = $question_total - 1;
-  } else {
-    $loop_start_num = $num;
-    $loop_end_num = $num;
-  }
-  
-  // Save answer into DB
-  if ($btn_num_arr[0] == 'surveysubmit') {
-
-      for ($ques_num = $loop_start_num; $ques_num <= $loop_end_num; $ques_num++) {
-
-        // Insert for radio button type answer
-        if ($form_state['values']['question_type' . $ques_num] == 'radios') {
-
-          db_insert('itg_survey_detail')
-                  ->fields(array(
-                      'nid' => $form_state['values']['nid'],
-                      'uid' => $user->uid,
-                      'ques_id' => $form_state['values']['question_id' . $ques_num],
-                      'question' => $form_state['values']['question' . $ques_num],
-                      'answer' => strtolower($form_state['values']['answer_option' . $ques_num]),
-                      'ans_type' => $form_state['values']['question_type' . $ques_num],
-                      'user_type' => $user_type,
-                      'page_url' => $form_state['values']['survey_url'],
-                      'survey_title' => $form_state['values']['survey_title'],
-                      'survey_key' => $_SESSION['survey_unique_key'],
-                      'survey_info' => 0,
-                      'created' => time(),
-                  ))
-                  ->execute();
-        }
-
-        // Insert for checkboxs type answer
-        if ($form_state['values']['question_type' . $ques_num] == 'checkboxes') {
-
-          foreach ($form_state['values']['answer_option' . $ques_num] as $key => $value) {
-            if ($value) {
-              db_insert('itg_survey_detail')
-                      ->fields(array(
-                          'nid' => $form_state['values']['nid'],
-                          'uid' => $user->uid,
-                          'ques_id' => $form_state['values']['question_id' . $ques_num],
-                          'question' => $form_state['values']['question' . $ques_num],
-                          'answer' => strtolower($value),
-                          'ans_type' => $form_state['values']['question_type' . $ques_num],
-                          'user_type' => $user_type,
-                          'page_url' => $form_state['values']['survey_url'],
-                          'survey_title' => $form_state['values']['survey_title'],
-                          'survey_key' => $_SESSION['survey_unique_key'],
-                          'survey_info' => 0,
-                          'created' => time(),
-                      ))
-                      ->execute();
-            }
-          }
-        }
-
-        // Insert for textfield type answer
-        if ($form_state['values']['question_type' . $ques_num] == 'textfield') {
-
-          for ($text_field = 0; $text_field < $form_detail['textfield_total_count']; $text_field++) {
-            if ($form_detail['answer_option' . $ques_num . '_' . $text_field] !== '') {
-              db_insert('itg_survey_detail')
-                      ->fields(array(
-                          'nid' => $form_state['values']['nid'],
-                          'uid' => $user->uid,
-                          'ques_id' => $form_state['values']['question_id' . $ques_num],
-                          'question' => $form_state['values']['question' . $ques_num],
-                          'answer' => strtolower($form_detail['answer_option_name' . $ques_num . '_' . $text_field]),
-                          'ans_type' => $form_state['values']['question_type' . $ques_num],
-                          'user_type' => $user_type,
-                          'page_url' => $form_state['values']['survey_url'],
-                          'survey_title' => $form_state['values']['survey_title'],
-                          'survey_key' => $_SESSION['survey_unique_key'],
-                          'survey_info' => 0,
-                          'created' => time(),
-                      ))
-                      ->execute();
-            }
-          }
-        }
-
-        // Insert for rating type answer
-        if ($form_state['values']['question_type' . $ques_num] == 'rating') {
-
-          for ($rating_field = 0; $rating_field < $form_detail['rating_total_count']; $rating_field++) {
-            for ($rating_field_val = 1; $rating_field_val <= 5; $rating_field_val++) {
-              if ($form_detail['answer_option' . $ques_num . '_' . $rating_field][$rating_field_val] == 1) {
-                db_insert('itg_survey_detail')
-                        ->fields(array(
-                            'nid' => $form_state['values']['nid'],
-                            'uid' => $user->uid,
-                            'ques_id' => $form_state['values']['question_id' . $ques_num],
-                            'question' => $form_state['values']['question' . $ques_num],
-                            'answer' => $form_detail['answer_option' . $ques_num . '_' . $rating_field . '_name'] ? strtolower($form_detail['answer_option' . $ques_num . '_' . $rating_field . '_name']) : $form_state['values']['question' . $ques_num],
-                            'ans_type' => $form_state['values']['question_type' . $ques_num],
-                            'user_type' => $user_type,
-                            'page_url' => $form_state['values']['survey_url'],
-                            'survey_title' => $form_state['values']['survey_title'],
-                            'survey_key' => $_SESSION['survey_unique_key'],
-                            'survey_info' => 0,
-                            'created' => time(),
-                        ))
-                        ->execute();
-              }
-            }
-          }
-        }
-    }
-  }
- 
-  // On final survey submit
-  if(strtolower($form_state['clicked_button']['#value']) == 'submit') {
-    
-    // Set cookie for survey
-    user_cookie_save(array('itgcms_survey_'.$form_state['values']['nid'] => 1));
-    
-    // Insert in to survey user table
-    db_insert('itg_survey_user')
-            ->fields(array(
-                'nid' => $form_state['values']['nid'],
-                'uid' => $user->uid,
-                'user_type' => $user_type,
-                'page_url' => $_GET['q'],
-                'created' => time(),
-            ))
-            ->execute();
-    
-    // Update table and set survey_info(status) = 1(means this survey has been completed by a user) 
-    db_update('itg_survey_detail')
-            ->fields(array(
-                'survey_info' => 1,
-            ))
-            ->condition('survey_key', $_SESSION['survey_unique_key'], '=')
-            ->execute();
-    
-    unset($_SESSION['survey_unique_key']);
-  }
-
-  // Display message on final submit.
-  if ($question_format == 'All questions at a time') {
-    drupal_set_message(t('Survey has been saved successfully. Thank you for taking our survey!'));
-  } else {
-    if ($num == ($form_detail['question_total'] - 1)) {
-      drupal_set_message(t('Survey has been saved successfully. Thank you for taking our survey!'));
-    }
-  }
-}
-
-/**
- * Submit handler of Ajax
- * @param array $form
- * @param array $form_state
- * @return array
- */
-function survey_form_ajax_handler(&$form, &$form_state){
-  $commands = array();
-  $commands[] = ajax_command_replace('#messages', '<div id="messages">' . theme('status_messages') . '</div>');
-  return array(
-      '#type' => 'ajax',
-      '#commands' => $commands);
-}
-
-?>

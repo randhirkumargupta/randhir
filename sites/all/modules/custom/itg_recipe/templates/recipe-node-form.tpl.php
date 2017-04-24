@@ -20,6 +20,8 @@
   <?php print drupal_render($form['field_recipe_ingredients']); ?>
   <?php print drupal_render($form['field_recipe_garnishing']); ?>
   <?php print drupal_render($form['field_associate_photo_gallery']); ?>
+
+  
 </div>
 
 <div id="RecipeDetails">
@@ -42,6 +44,7 @@
   <?php print drupal_render($form['field_story_large_image']); ?>
   <?php print drupal_render($form['field_story_medium_image']); ?>
   <?php print drupal_render($form['field_story_small_image']); ?>
+     <?php print drupal_render($form['field_recipe_writer_image']); ?>
 </div>
 <div id="SocialMedia">
   <h2 class="story-title"><?php print t('Social Media'); ?></h2>
@@ -69,6 +72,6 @@
    <?php print drupal_render($form['field_primary_cat_data']); ?>
   
 </div>
-<h2 id="title-metatags" class="story-title"><?php echo t('SEO Meta Tags'); ?></h2>
+
 <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>

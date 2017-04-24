@@ -1,0 +1,72 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the ITG Coupon module.
+ */
+
+/**
+ * Implementation of hook_schema
+ * @access public
+ * @return array
+ */
+function itg_coupon_schema() {
+  $schema = array();
+  $schema['coupons_activity_details'] = array(
+      'description' => 'Save the coupon activity detail.',
+      'fields' => array(
+          'cid' => array(
+              'description' => 'Coupons activity id',
+              'type' => 'serial',
+              'not null' => TRUE,
+          ),
+          'coupon_code' => array(
+              'description' => 'Coupon Code',
+              'type' => 'varchar',
+              'length' => '255',
+              'null' => TRUE,
+          ),
+          'event_id' => array(
+              'description' => 'Event Id',
+              'type' => 'int',
+              'null' => TRUE,
+          ),
+          'reg_id' => array(
+              'description' => 'Registration Id',
+              'type' => 'int',
+              'null' => TRUE,
+          ),
+          'total_payment' => array(
+              'description' => 'Total Payment',
+              'type' => 'float',
+              'null' => TRUE,
+          ),
+          'redeemed_payment' => array(
+              'description' => 'Redeemed Payment',
+              'type' => 'float',
+              'null' => TRUE,
+          ),
+          'status' => array(
+              'description' => 'Boolean indicating whether the coupon active or not',
+              'type' => 'int',
+              'not null' => TRUE,
+              'default' => 1,
+          ),
+          'created' => array(
+              'description' => 'The Unix timestamp when the activity was created.',
+              'type' => 'int',
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'changed' => array(
+              'description' => 'The Unix timestamp when the activity was most recently saved.',
+              'type' => 'int',
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+      ),
+      'primary key' => array('cid'),
+  );
+
+  return $schema;
+}

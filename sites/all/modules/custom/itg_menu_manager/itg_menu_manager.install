@@ -1,0 +1,120 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+function itg_menu_manager_schema() {
+  $schema['itg_menu_manager'] = array(
+      'description' => 'TODO: please describe this table!',
+      'fields' => array(
+          'id' => array(
+              'description' => 'Table id to describe each row',
+              'type' => 'serial',
+              'not null' => TRUE,
+          ),
+          'tid' => array(
+              'description' => 'taxonomy term tid',
+              'type' => 'int',
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'title' => array(
+              'description' => 'title of menu',
+              'type' => 'varchar',
+              'length' => '100',
+              'not null' => TRUE,
+          ),
+          'url' => array(
+              'description' => 'url of menu',
+              'type' => 'text',
+              'not null' => TRUE,
+          ),
+          'target' => array(
+              'description' => 'target of menu',
+              'type' => 'varchar',
+              'length' => '255',
+              'not null' => TRUE,
+          ),
+          'menu_level' => array(
+              'description' => 'level of menu',
+              'type' => 'varchar',
+              'length' => '100',
+              'not null' => TRUE,
+          ),
+          'menu_name' => array(
+              'description' => 'Menu name',
+              'type' => 'varchar',
+              'length' => '100',
+              'not null' => TRUE,
+          ),
+          'url_type' => array(
+              'description' => 'url type',
+              'type' => 'varchar',
+              'length' => '20',
+              'not null' => TRUE,
+          ),
+          'section_id' => array(
+              'description' => 'section id',
+              'type' => 'varchar',
+              'length' => '255',
+              'not null' => TRUE,
+          ),
+          'display_icon' => array(
+              'description' => 'display icon',
+              'type' => 'varchar',
+              'length' => '255',
+              'not null' => TRUE,
+          ),
+          'weight' => array(
+              'description' => 'weight of menu',
+              'type' => 'int',
+              'not null' => TRUE,
+          ),
+          'extra' => array(
+              'description' => 'extra field can be used in for nay purpose',
+              'type' => 'varchar',
+              'length' => '100',
+              'not null' => FALSE,
+          ),
+          'created' => array(
+              'description' => 'created time',
+              'type' => 'int',
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+      ),
+      'primary key' => array('id'),
+  );
+
+  $schema['itg_workflow_preview_log'] = array(
+    'description' => 'Preview logs',
+    'fields' => array(
+      'tid' => array(
+        'description' => 'parimary key',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'node id',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'preview_id' => array(
+        'description' => 'Preview id',
+        'type' => 'varchar',
+        'length' => '100',
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'user id',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('tid'),
+  );
+  return $schema;
+}

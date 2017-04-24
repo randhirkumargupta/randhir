@@ -18,21 +18,17 @@
             <?php
             if (isset($node_info['node_data']['uri'])) {
               $style_name = ($frist_key == 0) ? 'recommended_for_you_large' : "video_landing_page_170_x_127";
-              print theme('image_style', array(
-                  'style_name' => $style_name,
-                  'path' => $node_info['node_data']['uri'],
-                              )
-              );
+              print theme('image_style', array('style_name' => $style_name,'path' => $node_info['node_data']['uri'],));
             }
             else {
-              $height_width = ($frist_key == 0) ? 'width="370" height="208"' : 'width="170" height="127"';
+              $right_img = ($frist_key == 0) ? 'itg_image370x208.jpg' : 'itg_image170x127.jpg';
               ?>
-              <img <?php print $height_width; ?> src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+              <img src="<?php echo $base_url . "/" . drupal_get_path('theme', 'itg') ?>/images/<?php echo $right_img; ?>" alt="" />
             <?php } ?>
           </a>
         </div>
         <div class="detail">
-          <h4><?php print $node_info['taxonomy_name']; ?>  </h4>
+          <h4><?php print l($node_info['taxonomy_name']->name, "taxonomy/term/" . $node_info['taxonomy_name']->tid) ?>  </h4>
           <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_info['node_data']['nid']}"); ?>">
             <?php
             if ($frist_key == 0) {
@@ -61,20 +57,20 @@
               <?php
               if (isset($node_info['node_data']['uri'])) {
                 print theme('image_style', array(
-                    'style_name' => 'video_landing_page_170_x_127',
-                    'path' => $node_info['node_data']['uri'],
-                                )
+                  'style_name' => 'video_landing_page_170_x_127',
+                  'path' => $node_info['node_data']['uri'],
+                        )
                 );
               }
               else {
                 ?>
-                <img width="170" height="127" src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                <img width="170" height="127" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg" alt="" />
               <?php } ?>
             </a>
           </div>
 
           <div class="detail">
-            <h4><?php print $node_info['taxonomy_name']; ?></h4>
+            <h4><?php print l($node_info['taxonomy_name']->name, "taxonomy/term/" . $node_info['taxonomy_name']->tid) ?>  </h4>
             <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_info['node_data']['nid']}"); ?>">
               <?php echo mb_strimwidth($node_info['node_data']['title'], 0, 80, ".."); ?>
             </a>

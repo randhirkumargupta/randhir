@@ -24,8 +24,8 @@ function itg_widget_home_page_feature_data($info) {
       }
       $entity_data = array();
       foreach ($result as $entity_data_node) {
-        $entity_info = get_required_data_from_entity_id($entity_data_node['entity_id']);
-        $entity_data[] = $entity_info[$entity_data_node['entity_id']];
+        //$entity_info = get_required_data_from_entity_id($entity_data_node['entity_id']);
+        $entity_data[] = $entity_data_node;
       }
       return $entity_data;
     }

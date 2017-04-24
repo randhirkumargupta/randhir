@@ -11,11 +11,11 @@ if (!empty($data)) {
         $countd = 1;
         foreach ($data as $entity_data_node) {
           ?>
-
           <div class="slideItem"> 
-            <a href="<?php echo $base_url ?>/node/<?php print $entity_data_node['nid']; ?>">
-              <?php print $entity_data_node['file_url']; ?>
-            <!--<img src="/itgcms/sites/all/themes/itg/images/demo-photo.jpg">-->
+            <a href="<?php print $entity_data_node['node_url']; ?>?category=<?php print $entity_data_node['cat']; ?>&sid=<?php print $entity_data_node['sid']; ?>&pcat=<?php print $entity_data_node['primary_category']; ?>">
+              <?php //print $entity_data_node['file_url']; ?>
+                <img src="<?php print $entity_data_node['file_url']; ?>" alt="" />
+            <!--<img src="/itgcms/sites/all/themes/itg/images/demo-photo.jpg" alt="" />-->
               <span class="flex-count" style="text-align: right"><i class="fa fa-play-circle"></i></span>
               <span class="pic-tit"><?php print $entity_data_node['title']; ?></span>
               <span class="overlay"></span>

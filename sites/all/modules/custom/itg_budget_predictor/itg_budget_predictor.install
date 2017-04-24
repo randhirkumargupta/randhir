@@ -1,0 +1,161 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the ITG budget predictor.
+ */
+
+/**
+ * Implementation of hook_schema
+ * @access public
+ * @return array
+ */
+function itg_budget_predictor_schema() {
+    $schema = array();
+    $schema['itg_budget_predictor'] = array(
+        'description' => 'Table to save custom predictor of budget',
+        'fields' => array(
+          'budget_id' => array(
+            'description' => t('budget id'),
+            'type' => 'serial',
+            'not null' => TRUE,
+          ),
+          'entity_id' => array(
+            'description' => t('entity id'),
+            'type' => 'int',
+            'not null' => TRUE,
+          ),
+          'ranking_value' => array(
+            'description' => t('ranking value'),
+            'type' => 'int',
+            'size' => 'tiny',
+            'not null' => TRUE,
+          ),
+          'ranking_column' => array(
+            'description' => t('ranking column'),
+            'type' => 'int',
+            'size' => 'tiny',
+            'not null' => TRUE,
+          ),
+          'budget_type' => array(
+            'description' => t('budget type'),
+            'type' => 'int',
+            'size' => 'tiny',
+            'not null' => TRUE,
+          ),
+          'user_id' => array(
+            'description' => t('user id'),
+            'type' => 'int',
+            'not null' => TRUE,
+          ),
+          'cookies_id' => array(
+            'description' => t('user id'),
+            'type' => 'varchar',
+            'length' => '255',
+            'not null' => TRUE,
+          ),
+          'section_id' => array(
+            'description' => t('section id'),
+            'type' => 'int',
+            'not null' => TRUE,
+          ),
+          'file_name' => array(
+            'description' => t('file name'),
+            'type' => 'varchar',
+            'length' => '255',
+            'not null' => TRUE,
+          ),
+          'status' => array(
+            'description' => t('status'),
+            'type' => 'int',
+            'size' => 'tiny',
+            'not null' => TRUE,
+          ),
+          'timestamp' => array(
+            'description' => t('timestamp'),
+            'type' => 'varchar',
+            'length' => '100',
+            'not null' => TRUE,
+          ),
+          'ip_address' => array(
+            'description' => t('ip address'),
+            'type' => 'varchar',
+            'length' => '15',
+            'not null' => TRUE,
+          ),
+        ),
+        'primary key' => array('budget_id'),
+      );
+    
+    // manage budget
+    $schema['itg_manage_budget'] = array(
+        'description' => 'Table to manage budget',
+        'fields' => array(
+          'id' => array(
+            'description' => t('budget_id'),
+            'type' => 'serial',
+            'not null' => TRUE,
+          ),
+          'budget_title' => array(
+            'description' => t('Title'),
+            'type' => 'varchar',
+            'length' => '255',
+            'not null' => TRUE,
+          ),
+          'budget_description' => array(
+            'description' => t('Description'),
+            'type' => 'text',
+            'not null' => TRUE,
+          ),
+          'budget_message' => array(
+            'description' => t('Success message'),
+            'type' => 'text',
+            'not null' => TRUE,
+          ),
+          'budget_social_message' => array(
+            'description' => t('Social message'),
+            'type' => 'text',
+            'not null' => TRUE,
+          ),
+          'budget_section' => array(
+            'description' => t('Budget section'),
+            'type' => 'int',
+            'not null' => TRUE,
+          ),  
+          'file_id' => array(
+            'description' => t('file_id'),
+            'type' => 'int',
+            'not null' => TRUE,
+          ),
+          'status' => array(
+            'description' => t('status'),
+            'type' => 'int',
+            'size' => 'tiny',
+            'not null' => TRUE,
+          ),
+          'created_date' => array(
+            'description' => t('Created date'),
+            'type' => 'varchar',
+            'length' => '100',
+            'not null' => TRUE,
+          ),
+        ),
+        'primary key' => array('id'),
+      );
+    return $schema;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function itg_budget_predictor_uninstall() {
+    drupal_uninstall_schema('itg_budget_predictor');
+    drupal_uninstall_schema('itg_manage_budget');
+}
+
+/**
+ * Clear menu cache to match new configuration place
+ */
+function itg_budget_predictor_update_7001() {
+    cache_clear_all(NULL, 'cache_menu');
+}

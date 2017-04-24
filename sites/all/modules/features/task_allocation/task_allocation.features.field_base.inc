@@ -31,6 +31,7 @@ function task_allocation_field_default_field_bases() {
       'allowed_values' => array(
         'open' => 'Open',
         'closed' => 'Closed',
+        'expired' => 'Expired',
       ),
       'allowed_values_function' => '',
     ),

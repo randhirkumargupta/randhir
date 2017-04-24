@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file field.tpl.php
  * Default template implementation to display the value of a field.
@@ -56,13 +55,23 @@ HTML comment.
   <?php endif; ?>
   <div class="field-items"<?php print $content_attributes; ?>>
     <?php foreach ($items as $delta => $item): ?>
-    <?php $audio_id = $item['#file']->audio_id; ?>
-     <div class="field-item <?php print $delta % 2 ? 'odd' : 'even'; ?>"<?php print $item_attributes[$delta]; ?>>
-     <iframe frameborder="0" width="480" height="70"
-src="https://www.dailymotion.com/embed/video/<?php print $audio_id; ?>?autoplay=0&mute=1"
-allowfullscreen></iframe>
-     
-     </div>
+      <?php $audio_id = $item['#file']->fid; ?>
+      <div class="field-item <?php print $delta % 2 ? 'odd' : 'even'; ?>"<?php print $item_attributes[$delta]; ?>>
+        <script src="<?php global $base_url;
+        print $base_url . '/' . drupal_get_path('module', 'itg_podcast'); ?>/jwplayer/jwplayer.js"></script>
+        <script>jwplayer.key = "Cbz5fuKQAlYHtZgBSR0G/4GgYFO7YTb0k8Ankg==";</script>
+        <div id="podcast-<?php print $audio_id; ?>">Loading the player...</div>
+        <script type="text/javascript">
+          var playerInstance = jwplayer("podcast-<?php print $audio_id; ?>");
+          playerInstance.setup({
+            file: "<?php print file_create_url($item['#file']->uri); ?>",
+            width: 640,
+            height: 40
+          });
+        </script>
+
+
+      </div>
     <?php endforeach; ?>
   </div>
 </div>

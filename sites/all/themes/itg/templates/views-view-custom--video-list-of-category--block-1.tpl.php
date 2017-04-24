@@ -7,7 +7,13 @@ if (isset($_GET['category'])) {
 ?>
 <ul class="photo-list">
 <?php foreach($rows as $index => $row): ?>
-<?php $img = $row['field_story_extra_large_image']; 
+<?php if(!empty($row['field_story_small_image'])){
+    $img = $row['field_story_small_image'];
+    }else{
+      global $base_url;
+      $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt='' />";
+      
+    }
   $section_cat_id = $row['field_story_category']; 
 ?>
     <li class="col-md-3">

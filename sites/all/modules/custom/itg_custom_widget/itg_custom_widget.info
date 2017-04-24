@@ -1,0 +1,4 @@
+name = ITG Custom widget
+description = "ITG Custom widget"
+core = 7.x
+package = ITG

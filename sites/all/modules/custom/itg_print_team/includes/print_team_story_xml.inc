@@ -11,10 +11,12 @@
  * @param array $form_state
  */
 function itg_story_xml_validate($form, &$form_state) {
-  $views_bulk_operations = $form_state['values']['views_bulk_operations'];
-  if (is_array($views_bulk_operations) && count($views_bulk_operations) > 0) {
-    if (!max($views_bulk_operations) > 0) {
-      form_set_error('views_bulk_operations', t('Please select atleast one checkbox to generate story xml.'));
+  if ($form_state['input']['op'] == 'Generate XML') {
+    $views_bulk_operations = $form_state['values']['views_bulk_operations'];
+    if (is_array($views_bulk_operations) && count($views_bulk_operations) > 0) {
+      if (!max($views_bulk_operations) > 0) {
+        form_set_error('views_bulk_operations', t('Please select atleast one checkbox to generate story xml.'));
+      }
     }
   }
 }
@@ -39,8 +41,8 @@ function itg_story_xml_submit($form, &$form_state) {
     }
     $xml = "<root>";
     foreach ($views_bulk_operations as $nid) {
-      if (!empty($nid)) {
-        $xml .= get_custom_feeds_files($nid, $feed_pattern);
+      if (!empty($nid) && $nid>0) {
+        $xml .= get_custom_feeds_files($nid, $feed_pattern ,'xml');
       }
     }
     $xml .= "</root>";
@@ -78,7 +80,7 @@ function itg_print_team_check_association_print_to_story($source_id) {
  * @param int $associated_source_id
  * @param boolean $print_update
  */
-function itg_print_team_association_update($node_info, $issue_nid, $magazine, $associated_source_id, $print_update = FALSE) {
+function itg_print_team_association_update($node_info, $issue_nid, $magazine, $associated_source_id, $print_update = FALSE, $supplement) {
 
   if ($print_update) {
     
@@ -88,6 +90,10 @@ function itg_print_team_association_update($node_info, $issue_nid, $magazine, $a
     $node = node_load($node_info);
     $node->field_pti_issue[LANGUAGE_NONE][0]['target_id'] = $issue_nid;
     $node->field_pti_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
+    if ($supplement != '_none') {
+      $node->field_pti_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
+    }
+    
     field_attach_update('node', $node);
     
     // Update story node with selected issue and magazine
@@ -96,6 +102,10 @@ function itg_print_team_association_update($node_info, $issue_nid, $magazine, $a
     $story_node->type = 'story';
     $story_node->field_story_issue_date[LANGUAGE_NONE][0]['value'] = itg_common_get_node_title($issue_nid);
     $story_node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
+    if ($supplement != '_none') {
+      $story_node->field_story_select_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
+    }    
+    field_attach_update('node', $story_node);
   }
   else {
     

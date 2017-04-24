@@ -14,7 +14,7 @@ function photogallery_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_anonymous_photogallery';
-  $strongarm->value = 0;
+  $strongarm->value = '2';
   $export['comment_anonymous_photogallery'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -42,7 +42,7 @@ function photogallery_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_photogallery';
-  $strongarm->value = '1';
+  $strongarm->value = '2';
   $export['comment_photogallery'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -86,6 +86,9 @@ function photogallery_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'print' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -98,8 +101,21 @@ function photogallery_strongarm() {
         'path' => array(
           'weight' => '31',
         ),
+        'domain' => array(
+          'weight' => '1',
+        ),
+        'redirect' => array(
+          'weight' => '30',
+        ),
       ),
-      'display' => array(),
+      'display' => array(
+        'flag_my_saved_content' => array(
+          'default' => array(
+            'weight' => '10',
+            'visible' => TRUE,
+          ),
+        ),
+      ),
     ),
   );
   $export['field_bundle_settings_node__photogallery'] = $strongarm;
@@ -148,6 +164,20 @@ function photogallery_strongarm() {
   $strongarm->name = 'node_submitted_photogallery';
   $strongarm->value = 0;
   $export['node_submitted_photogallery'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_photogallery_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_photogallery_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_photo_by_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_photo_by_pattern'] = $strongarm;
 
   return $export;
 }

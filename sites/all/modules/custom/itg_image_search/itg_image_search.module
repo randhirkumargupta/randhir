@@ -26,6 +26,11 @@ function itg_image_search_menu() {
         'type' => MENU_CALLBACK,
         'access arguments' => array('access content'),
     );
+ $items['get_dimension'] = array(
+        'page callback' => 'itg_image_search_get_dimension', // make image tags edit
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
 
 
     return $items;
@@ -73,6 +78,23 @@ function itg_image_search_theme($existing, $type, $theme, $path) {
 function itg_image_search_saveimage() {
 
     $image_url = $_POST['imageurl'];
+  
+    $image_name = end(explode('/', $image_url));
+    
+    $imagedata = file_get_contents($image_url);
+    if (!file_exists(file_default_scheme() . '://crop_image')) {
+        mkdir(file_default_scheme() . '://crop_image', 0777, TRUE);
+    }
+    $file = file_save_data($imagedata, file_default_scheme() . '://crop_image/' .$image_name);
+    file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
+    (array) $file;
+    print json_encode($file);
+    exit();
+}
+
+function itg_image_search_get_dimension() {
+
+    $image_url = $_POST['imageurl'];
     if (strpos($image_url, 'styles/thumbnail')) {
         $image_url = str_replace('styles/thumbnail/public/', '', $image_url);
     }
@@ -80,14 +102,10 @@ function itg_image_search_saveimage() {
     if ($image_name == "") {
         $image_name = time();
     }
-    $imagedata = file_get_contents($image_url);
-    if (!file_exists(file_default_scheme() . '://crop_image')) {
-        mkdir(file_default_scheme() . '://crop_image', 0777, TRUE);
-    }
-    $file = file_save_data($imagedata, file_default_scheme() . '://crop_image/' . $image_name . '.png');
-    file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
-
-    (array) $file;
-    print json_encode($file);
+    list($width, $height) = getimagesize($image_url);
+    $returndata=array('Width'=>$width,'height'=>$height);
+      print '<span class="image-dim">'.$width.'X'.$height.'</span>';
+    
+  
     exit();
 }

@@ -1,0 +1,150 @@
+<?php
+
+/**
+ * Implements hook_form_alter().
+ * {@inheritdoc}
+ */
+function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form_id) {
+    case 'story_node_form':
+      // code for clone story start here
+      if (!empty($_GET['clone_id']))
+      {
+        $clone_arr = itg_story_clone_data($_GET['clone_id'], 'story');
+        $clone_arr_response = $clone_arr->response->docs[0];
+        $label = html_entity_decode($clone_arr_response->label, ENT_QUOTES);
+        $kicker = html_entity_decode($clone_arr_response->sm_field_story_kicker_text[0], ENT_QUOTES);
+
+        // code to assign image on clone story
+        $image_array = array('sm_field_custom_story_extra_large_url',
+          'sm_field_custom_story_large_url',
+          'sm_field_custom_story_medium_large_url',
+          'sm_field_custom_story_small_large_url',
+          'sm_field_custom_story_extra_small_url'
+        );
+
+        foreach ($image_array as $value) {
+          if (!empty($clone_arr_response->{$value}[0])) {
+            $image = $clone_arr_response->{$value}[0];
+            $extra_large_fid = itg_clone_image_mapping($image);
+            if ($value == 'sm_field_custom_story_extra_large_url') {
+              $form['field_story_extra_large_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $extra_large_fid;
+            }
+            if ($value == 'sm_field_custom_story_large_url') {
+              $form['field_story_large_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $extra_large_fid;
+            }
+            if ($value == 'sm_field_custom_story_medium_large_url') {
+              $form['field_story_medium_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $extra_large_fid;
+            }
+            if ($value == 'sm_field_custom_story_small_large_url') {
+              $form['field_story_small_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $extra_large_fid;
+            }
+            if ($value == 'sm_field_custom_story_extra_small_url') {
+              $form['field_story_extra_small_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $extra_large_fid;
+            }
+          }
+        }
+
+
+        $form['title']['#default_value'] = $label;
+        $form['body'][LANGUAGE_NONE][0]['#default_value'] = $clone_arr_response->sm_field_custom_story_description_text[0];
+        $form['field_story_rating'][LANGUAGE_NONE]['#default_value'] = $clone_arr_response->fm_field_story_rating[0];
+        $form['field_story_kicker_text'][LANGUAGE_NONE][0]['value']['#default_value'] = $kicker;
+        $form['field_story_long_head_line'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_long_head_line[0];
+        $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_short_headline[0];
+        $form['field_story_snap_post'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_snap_post[0];
+        $form['field_story_expert_name'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_expert_name[0];
+        $form['field_story_expert_description'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_custom_expert_description[0];
+        $form['field_story_magazine_headline'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_magazine_headline[0];
+        $form['field_story_magazine_kicker_text'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_magazine_kicker_t[0];
+        $form['field_story_redirection_url_titl'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_redirection_url_t[0];
+        $form['field_story_facebook_narrative'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_facebook_narrativ[0];
+        $form['field_story_facebook_vdescripti'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_facebook_vdescrip[0];
+        $form['field_story_tweet'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_tweet[0];
+        $form['field_story_twitter_video_desc'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_twitter_video_des[0];
+        $form['field_story_new_title'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_new_title[0];
+        $form['field_story_courtesy'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_courtesy[0];
+        $form['field_story_configurations'][LANGUAGE_NONE]['#default_value'] = $clone_arr_response->sm_field_story_configurations;
+        $form['field_story_social_media_integ'][LANGUAGE_NONE]['#default_value'] = $clone_arr_response->sm_field_story_social_media_inte;
+        $form['field_story_syndication'][LANGUAGE_NONE]['#default_value'] = array($clone_arr_response->sm_field_story_syndication[0]);
+        $form['field_story_templates'][LANGUAGE_NONE]['#default_value'] = $clone_arr_response->sm_field_story_templates[0];
+        $form['field_story_associate_lead'][LANGUAGE_NONE]['#default_value'] = $clone_arr_response->sm_field_story_associate_lead[0];
+        $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#default_value'] = array($clone_arr_response->sm_field_story_magazine_story_is[0]);
+        $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'Clone Story';
+      }
+  }
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'story_clone')
+  {
+
+    $form['keyword']['#attributes'] = array('placeholder' => array(t('Ex: Title')));
+
+    $form['bundle_name']['#value'] = 'Story';
+    $form['bundle_name']['#attributes']['class'][] = 'element-hidden';
+    //'iibckc' => 'Dev'
+    if (function_exists('itg_apache_solr_get_site_hash'))
+    {
+      $hash = itg_apache_solr_get_site_hash();
+    }
+    $form['hash']['#type'] = 'select';
+    $form['hash']['#options'] = $hash;
+    $form['hash']['#size'] = 5;
+    $form['hash']['#multiple'] = TRUE;
+  }
+}
+
+/**
+ * Implement itg_clone_story_data
+ * @param int $keyword
+ * @param string $type
+ */
+function itg_story_clone_data($keyword, $type) {
+
+  // apachesolr_site_hash();
+  if (!empty($keyword))
+  {
+    $solr = apachesolr_get_solr();
+    $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$keyword"));
+    $query->addParam('rows', '10'); // How many rows of result to display default it is 10.
+    $query->addParam('qf', 'entity_id'); // Only search in title
+    //The bundle which you want to search
+    if (!empty($type))
+    {
+      $query->addFilter("bundle", "story");
+    }
+    $query->setSolrsort('sort_label', 'asc');
+    $resp_search = $query->search();
+    return $resp_search;
+  }
+}
+
+/**
+ * Implement hook_views_pre_render
+ * @param Array $view
+ */
+function itg_clone_story_views_pre_render(&$view) {
+
+  if ($view->name == "story_clone") {
+    if (function_exists('itg_apache_solr_get_site_hash')) {
+      $hash = itg_apache_solr_get_site_hash();
+    }
+
+    foreach ($view->result as $related_result) {
+      $key = $related_result->hash;
+      $related_result->site = $hash[$key];
+    }
+  }
+}
+
+/**
+ * Helper function to clone image
+ */
+function itg_clone_image_mapping($url) {
+  $imagedata = file_get_contents($url);
+  $image_url = 'itg' . time() . end(explode('/', $url));
+  $image_extension = end(explode('.', $image_url));
+  $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
+  $file = file_load($file_data_temp->fid);
+  file_usage_add($file, 'itg_clone_image', 'file', 3);
+
+  return $file_data_temp->fid;
+}

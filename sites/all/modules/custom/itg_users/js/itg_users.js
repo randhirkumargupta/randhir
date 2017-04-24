@@ -98,7 +98,10 @@
                       
                     }
                 });
-
+                var mark_as_expert = $('.field-name-field-mark-as-expert').find('.form-checkbox').is(':checked');
+                if(mark_as_expert){
+                  $('.field-name-field-user-section').show();
+                }
                 $('.field-name-field-mark-as-expert').on('change', '.form-checkbox', function () {
                     var check = $(this).is(':checked');
                     if (check == true) {
@@ -111,6 +114,7 @@
                 });
 
             }
+            
     }
   };
 })(jQuery, Drupal, this, this.document);

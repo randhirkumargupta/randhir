@@ -9,8 +9,7 @@
  * Implements hook_install().
  */
 function itg_image_repository_install() {
-  module_load_include('inc', 'itg_image_repository', 'inc/itg_image_repository.core.profiles');
-  itg_image_repository_install_profiles();
+
 }
 
 /**

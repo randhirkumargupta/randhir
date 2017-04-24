@@ -4,15 +4,15 @@
  */
 
 (function($) {
-
     Drupal.behaviors.itg_blog = {
        attach: function(context, settings) {
          $('.tabledrag-toggle-weight-wrapper a.tabledrag-toggle-weight').hide();
-               var uid = settings.itg_blog.settings.uid;
-                        // code to hide body text format filter 
-                        if (uid != 1) {
-                          $('#edit-path').show();
-                        }        
-        }
+         // Code for client Title field value set Null
+            $('#edit-field-blog-configuration-und-commentbox').click(function() {
+                if ($("#edit-field-blog-configuration-und-commentbox").is(":not(:checked)")) {
+                    $("#edit-field-story-comment-question-und-0-value").val('');
+                }
+            });
+       }
     };
 })(jQuery, Drupal, this, this.document);

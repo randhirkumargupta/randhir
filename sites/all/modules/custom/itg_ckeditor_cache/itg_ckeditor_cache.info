@@ -1,0 +1,5 @@
+name = itg_ckeditor_cache
+description = Itg_ckeditor cache
+core = 7.x
+package = Custom
+dependencies[] = ckeditor

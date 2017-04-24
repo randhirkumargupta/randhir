@@ -1,0 +1,13 @@
+name = Rule for Send Mail to SEO
+description = This rule is written to send mail to the seo team if a new section to be added to the Category Management Vocabulary
+core = 7.x
+package = Features
+dependencies[] = entity
+dependencies[] = features
+dependencies[] = metatag
+dependencies[] = rules
+dependencies[] = taxonomy
+features[features_api][] = api:2
+features[rules_config][] = rules_send_mail_to_seo
+features[user_permission][] = administer meta tags
+features[user_permission][] = edit meta tags

@@ -108,9 +108,7 @@ function features_for_story_user_default_permissions() {
   // Exported permission: 'delete any story content'.
   $permissions['delete any story content'] = array(
     'name' => 'delete any story content',
-    'roles' => array(
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -205,6 +203,8 @@ function features_for_story_user_default_permissions() {
   $permissions['view moderation history'] = array(
     'name' => 'view moderation history',
     'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',

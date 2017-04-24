@@ -1,14 +1,30 @@
 <?php 
 /**
- * Template file to send mail on user registeration
+ * Template file to send mail on user Activation
  * @file: sso-notification-mail.tpl.php
  */
 
 global $base_url;
 
 $user_id = base64_encode($account->uid);
-$activate_link = $base_url.'/user-activate/'.$user_id;
+$url_info = base64_decode($url_info);
+if (!empty($url_info)) {
+  $activate_url_info = rtrim($url_info,"/");;
+}
+else {
+  $activate_url_info = PARENT_SSO;
+}
+$activate_link = $activate_url_info.'/user-activate/'.$user_id;
 
+if ($act_type != 'Password Changed') {
+  $activelink = l('here', $activate_link, array('attributes' => array('target' => '_blank')));
+  $get_body_val = str_replace('[itg_mail_token:itg_account_activation_link]', $activelink, $mail_body);
+  $get_body = explode("<p>",$get_body_val);
+  unset($get_body[0]);
+} else {
+  $get_body = explode("<p>",$mail_body);
+  unset($get_body[0]);
+}
 ?> 
 
 <!DOCTYPE html> 
@@ -20,15 +36,11 @@ $activate_link = $base_url.'/user-activate/'.$user_id;
   </head>
   <body>
     <table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; font-family: Arial">
-      <tr>
-        <td style="padding: 10px 20px;">Dear User,</td>
-      </tr>
-      <tr>
-        <td style="padding: 10px 20px;">You are registered successfully.</td>
-      </tr>
-      <tr>
-        <td style="padding: 10px 20px;"><?php echo l('Click here to activate your account', $activate_link, array('attributes' => array('target' => '_blank'))); ?></td>
-      </tr>
+      <?php 
+      foreach ($get_body as $bk => $bv) {
+        print '<tr> <td style="padding: 10px 20px;">' . $bv . '</td></tr>';
+      } 
+      ?>
       <tr>
         <td style="padding: 10px 20px;">Thanks,</td>
       </tr>

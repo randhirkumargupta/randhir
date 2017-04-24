@@ -1,0 +1,4 @@
+name = ITG Reports
+description = ITG CMS admin user should be able to view the report of all CMS users.
+core = 7.x
+package = ITG

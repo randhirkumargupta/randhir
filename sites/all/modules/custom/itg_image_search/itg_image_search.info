@@ -3,3 +3,4 @@ description = "This module use for search the image
 package = "ITG"
 core = 7.x
 scripts[]=js/imagesearch.js
+

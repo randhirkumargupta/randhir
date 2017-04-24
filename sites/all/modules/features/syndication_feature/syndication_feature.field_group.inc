@@ -11,7 +11,7 @@ function syndication_feature_field_group_info() {
   $field_groups = array();
 
   $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_syndication_ftp|node|syndication_client|form';
   $field_group->group_name = 'group_syndication_ftp';

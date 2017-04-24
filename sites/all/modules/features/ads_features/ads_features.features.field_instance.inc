@@ -10,9 +10,10 @@
 function ads_features_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-ads_management-field_ads_ad_code'.
-  $field_instances['node-ads_management-field_ads_ad_code'] = array(
-    'bundle' => 'ads_management',
+  // Exported field_instance:
+  // 'field_collection_item-field_adds_code_holder-field_ads_ad_code'.
+  $field_instances['field_collection_item-field_adds_code_holder-field_ads_ad_code'] = array(
+    'bundle' => 'field_adds_code_holder',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -22,16 +23,10 @@ function ads_features_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 2,
       ),
     ),
-    'entity_type' => 'node',
+    'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_ads_ad_code',
     'label' => 'Ad Code',
@@ -45,10 +40,123 @@ function ads_features_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 8,
+        'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 10,
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_adds_code_holder-field_ads_device_selection'.
+  $field_instances['field_collection_item-field_adds_code_holder-field_ads_device_selection'] = array(
+    'bundle' => 'field_adds_code_holder',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ads_device_selection',
+    'label' => 'Device Selection',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_adds_code_holder-field_ads_placeholder'.
+  $field_instances['field_collection_item-field_adds_code_holder-field_ads_placeholder'] = array(
+    'bundle' => 'field_adds_code_holder',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ads_placeholder',
+    'label' => 'Ads Placeholder',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance: 'node-ads_management-field_adds_code_holder'.
+  $field_instances['node-ads_management-field_adds_code_holder'] = array(
+    'bundle' => 'ads_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 14,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_adds_code_holder',
+    'label' => 'Adds code holder',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 6,
     ),
   );
 
@@ -57,7 +165,7 @@ function ads_features_field_default_field_instances() {
     'bundle' => 'ads_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please enter script code with Javascript <b>script</b> tag.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -76,7 +184,7 @@ function ads_features_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_ads_body_close',
-    'label' => 'Body close',
+    'label' => 'Internal Body close script',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -90,23 +198,23 @@ function ads_features_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 12,
+      'weight' => 10,
     ),
   );
 
-  // Exported field_instance: 'node-ads_management-field_ads_device_selection'.
-  $field_instances['node-ads_management-field_ads_device_selection'] = array(
+  // Exported field_instance: 'node-ads_management-field_ads_body_start'.
+  $field_instances['node-ads_management-field_ads_body_start'] = array(
     'bundle' => 'ads_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please enter script code with Javascript <b>script</b> tag.',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 13,
+        'type' => 'text_default',
+        'weight' => 16,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -117,18 +225,21 @@ function ads_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_ads_device_selection',
-    'label' => 'Device Selection',
-    'required' => 1,
+    'field_name' => 'field_ads_body_start',
+    'label' => 'Internal Body start script',
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
       'weight' => 9,
     ),
   );
@@ -163,8 +274,8 @@ function ads_features_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_ads_end_date',
-    'label' => 'End Date',
-    'required' => 1,
+    'label' => 'Expiry Date',
+    'required' => 0,
     'settings' => array(
       'default_value' => 'blank',
       'default_value2' => 'same',
@@ -187,12 +298,12 @@ function ads_features_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 14,
+      'weight' => 16,
     ),
   );
 
-  // Exported field_instance: 'node-ads_management-field_ads_header_script'.
-  $field_instances['node-ads_management-field_ads_header_script'] = array(
+  // Exported field_instance: 'node-ads_management-field_ads_ex_body_close'.
+  $field_instances['node-ads_management-field_ads_ex_body_close'] = array(
     'bundle' => 'ads_management',
     'default_value' => NULL,
     'deleted' => 0,
@@ -203,7 +314,7 @@ function ads_features_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 6,
+        'weight' => 21,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -214,8 +325,92 @@ function ads_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_ads_header_script',
-    'label' => 'Header script',
+    'field_name' => 'field_ads_ex_body_close',
+    'label' => 'External Body close script',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 13,
+    ),
+  );
+
+  // Exported field_instance: 'node-ads_management-field_ads_ex_body_start'.
+  $field_instances['node-ads_management-field_ads_ex_body_start'] = array(
+    'bundle' => 'ads_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 20,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ads_ex_body_start',
+    'label' => 'External Body start script',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 12,
+    ),
+  );
+
+  // Exported field_instance: 'node-ads_management-field_ads_ex_headerscript'.
+  $field_instances['node-ads_management-field_ads_ex_headerscript'] = array(
+    'bundle' => 'ads_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 19,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ads_ex_headerscript',
+    'label' => 'External Header script',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -233,137 +428,19 @@ function ads_features_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-ads_management-field_ads_placeholder'.
-  $field_instances['node-ads_management-field_ads_placeholder'] = array(
+  // Exported field_instance: 'node-ads_management-field_ads_headerscript'.
+  $field_instances['node-ads_management-field_ads_headerscript'] = array(
     'bundle' => 'ads_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 4,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_ads_placeholder',
-    'label' => 'Ads Placeholder',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 8,
-    ),
-  );
-
-  // Exported field_instance: 'node-ads_management-field_ads_section_selection'.
-  $field_instances['node-ads_management-field_ads_section_selection'] = array(
-    'bundle' => 'ads_management',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 9,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_ads_section_selection',
-    'label' => 'Section Template',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 5,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-ads_management-field_ads_select_secton_option'.
-  $field_instances['node-ads_management-field_ads_select_secton_option'] = array(
-    'bundle' => 'ads_management',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 11,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_ads_select_secton_option',
-    'label' => 'Section Selection',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 6,
-    ),
-  );
-
-  // Exported field_instance: 'node-ads_management-field_ads_short_description'.
-  $field_instances['node-ads_management-field_ads_short_description'] = array(
-    'bundle' => 'ads_management',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
+    'description' => 'Please enter script code with Javascript <b>script</b> tag.',
     'display' => array(
       'default' => array(
         'label' => 'above',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 17,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -374,9 +451,9 @@ function ads_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_ads_short_description',
-    'label' => 'Short Description',
-    'required' => 0,
+    'field_name' => 'field_ads_headerscript',
+    'label' => 'Internal Header script (Website)',
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -386,10 +463,52 @@ function ads_features_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'size' => 60,
+        'rows' => 5,
       ),
-      'type' => 'text_textfield',
-      'weight' => 3,
+      'type' => 'text_textarea',
+      'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance: 'node-ads_management-field_ads_headerscript_mob'.
+  $field_instances['node-ads_management-field_ads_headerscript_mob'] = array(
+    'bundle' => 'ads_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please enter script code with Javascript <b>script</b> tag.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 22,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ads_headerscript_mob',
+    'label' => 'Internal Header script (Mobile)',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 8,
     ),
   );
 
@@ -447,7 +566,7 @@ function ads_features_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 13,
+      'weight' => 15,
     ),
   );
 
@@ -476,7 +595,7 @@ function ads_features_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_ads_template_selection',
-    'label' => 'Template Selection',
+    'label' => 'Select Section',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -487,23 +606,23 @@ function ads_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
-  // Exported field_instance: 'node-ads_management-field_ads_template_variants'.
-  $field_instances['node-ads_management-field_ads_template_variants'] = array(
+  // Exported field_instance: 'node-ads_management-field_code_visibility_flag'.
+  $field_instances['node-ads_management-field_code_visibility_flag'] = array(
     'bundle' => 'ads_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'If you want to include external script on Category Listing Page and Node Detail Page, please check <b>visibility flag  for external script</b>.',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'taxonomy',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_plain',
-        'weight' => 3,
+        'type' => 'list_default',
+        'weight' => 15,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -514,8 +633,81 @@ function ads_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_ads_template_variants',
-    'label' => 'Template Variants',
+    'field_name' => 'field_code_visibility_flag',
+    'label' => 'Code visibility flag for external script',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 14,
+    ),
+  );
+
+  // Exported field_instance: 'node-ads_management-field_select_template_type'.
+  $field_instances['node-ads_management-field_select_template_type'] = array(
+    'bundle' => 'ads_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 18,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_select_template_type',
+    'label' => 'Select template type',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'taxonomy_term-ads_template_placeholder-field_ad_master_template_section'.
+  $field_instances['taxonomy_term-ads_template_placeholder-field_ad_master_template_section'] = array(
+    'bundle' => 'ads_template_placeholder',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ad_master_template_section',
+    'label' => 'Template section',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -526,24 +718,69 @@ function ads_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 7,
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'taxonomy_term-ads_template_placeholder-field_ads_placeholder_values'.
+  $field_instances['taxonomy_term-ads_template_placeholder-field_ads_placeholder_values'] = array(
+    'bundle' => 'ads_template_placeholder',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ads_placeholder_values',
+    'label' => 'Ads Placeholder values',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 2,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
   t('Ad Code');
+  t('Adds code holder');
   t('Ads Placeholder');
-  t('Body close');
+  t('Ads Placeholder values');
+  t('Code visibility flag for external script');
   t('Device Selection');
-  t('End Date');
-  t('Header script');
-  t('Section Selection');
-  t('Section Template');
-  t('Short Description');
+  t('Expiry Date');
+  t('External Body close script');
+  t('External Body start script');
+  t('External Header script');
+  t('If you want to include external script on Category Listing Page and Node Detail Page, please check <b>visibility flag  for external script</b>.');
+  t('Internal Body close script');
+  t('Internal Body start script');
+  t('Internal Header script (Mobile)');
+  t('Internal Header script (Website)');
+  t('Please enter script code with Javascript <b>script</b> tag.');
+  t('Select Section');
+  t('Select template type');
   t('Start Date');
-  t('Template Selection');
-  t('Template Variants');
+  t('Template section');
 
   return $field_instances;
 }

@@ -98,6 +98,12 @@ function feature_for_ugc_strongarm() {
         'metatags' => array(
           'weight' => '14',
         ),
+        'domain' => array(
+          'weight' => '1',
+        ),
+        'redirect' => array(
+          'weight' => '30',
+        ),
       ),
       'display' => array(),
     ),
@@ -140,6 +146,13 @@ function feature_for_ugc_strongarm() {
   $strongarm->name = 'node_submitted_ugc';
   $strongarm->value = 1;
   $export['node_submitted_ugc'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_ugc_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_ugc_pattern'] = $strongarm;
 
   return $export;
 }

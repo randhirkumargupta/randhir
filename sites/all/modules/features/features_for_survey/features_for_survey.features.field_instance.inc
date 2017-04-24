@@ -11,42 +11,51 @@ function features_for_survey_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
-  // 'field_collection_item-field_survey_add_questions-field_survey_add_media'.
-  $field_instances['field_collection_item-field_survey_add_questions-field_survey_add_media'] = array(
+  // 'field_collection_item-field_survey_add_questions-field_question_image'.
+  $field_instances['field_collection_item-field_survey_add_questions-field_question_image'] = array(
     'bundle' => 'field_survey_add_questions',
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'file',
-        'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 3,
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 7,
       ),
     ),
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
-    'field_name' => 'field_survey_add_media',
-    'label' => 'Add Media',
+    'field_name' => 'field_question_image',
+    'label' => 'Question Image',
     'required' => 0,
     'settings' => array(
-      'description_field' => 0,
+      'alt_field' => 0,
+      'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
-      'file_extensions' => 'jpg jpeg gif png mp3 mp4 mov mpg wmv smf svi 3gp flv avi mkv',
+      'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'file',
+      'module' => 'image',
       'settings' => array(
         'filefield_sources' => array(
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -58,7 +67,107 @@ function features_for_survey_field_default_field_instances() {
             'path' => 'file_attach',
           ),
           'source_imce' => array(
-            'imce_mode' => 1,
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'imce_filefield_on' => 0,
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_image',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_survey_add_questions-field_question_media'.
+  $field_instances['field_collection_item-field_survey_add_questions-field_question_media'] = array(
+    'bundle' => 'field_survey_add_questions',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 6,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_question_media',
+    'label' => 'Question Media',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_survey_add_questions-field_question_video'.
+  $field_instances['field_collection_item-field_survey_add_questions-field_question_video'] = array(
+    'bundle' => 'field_survey_add_questions',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 8,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_question_video',
+    'label' => 'Question Video',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'txt',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 0,
+            'itg_image_video' => 'itg_image_video',
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
           ),
           'source_reference' => array(
             'autocomplete' => 0,
@@ -69,7 +178,7 @@ function features_for_survey_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 3,
+      'weight' => 5,
     ),
   );
 
@@ -106,7 +215,7 @@ function features_for_survey_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 7,
     ),
   );
 
@@ -143,7 +252,7 @@ function features_for_survey_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 8,
     ),
   );
 
@@ -303,6 +412,48 @@ function features_for_survey_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-survey-field_cm_related_content_detail'.
+  $field_instances['node-survey-field_cm_related_content_detail'] = array(
+    'bundle' => 'survey',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_cm_related_content_detail',
+    'label' => 'Related Content Detail',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 32,
+    ),
+  );
+
   // Exported field_instance: 'node-survey-field_common_related_content'.
   $field_instances['node-survey-field_common_related_content'] = array(
     'bundle' => 'survey',
@@ -427,7 +578,7 @@ function features_for_survey_field_default_field_instances() {
         'path' => '',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete_tags',
+      'type' => 'entityreference_autocomplete',
       'weight' => 3,
     ),
   );
@@ -437,7 +588,7 @@ function features_for_survey_field_default_field_instances() {
     'bundle' => 'survey',
     'default_value' => array(
       0 => array(
-        'value' => 1,
+        'value' => 0,
       ),
     ),
     'deleted' => 0,
@@ -470,7 +621,7 @@ function features_for_survey_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(),
-      'type' => 'options_buttons',
+      'type' => 'options_select',
       'weight' => 6,
     ),
   );
@@ -808,7 +959,6 @@ function features_for_survey_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Add Media');
   t('Add Survey Question');
   t('Add Token');
   t('Answer Option 2');
@@ -821,7 +971,11 @@ function features_for_survey_field_default_field_instances() {
   t('Please select the start date.');
   t('Publish');
   t('Question');
+  t('Question Image');
+  t('Question Media');
+  t('Question Video');
   t('Related Content');
+  t('Related Content Detail');
   t('Section');
   t('Skip');
   t('Survey End Date');

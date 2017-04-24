@@ -1,0 +1,17 @@
+name = Feature for photo and video related content
+description = Feature for photo and video related content, related story, custom image style for related story and photo
+core = 7.x
+package = Features
+version = 7.x-1.2
+dependencies[] = image
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[image][] = story_related_content_138x103
+features[rules_config][] = rules_send_mail_to_users_on_follow_story
+features[views_view][] = related_photo_video_content
+features[views_view][] = related_story
+features_exclude[dependencies][ctools] = ctools
+features_exclude[dependencies][entity] = entity
+features_exclude[dependencies][itg_ugc] = itg_ugc
+features_exclude[dependencies][rules] = rules

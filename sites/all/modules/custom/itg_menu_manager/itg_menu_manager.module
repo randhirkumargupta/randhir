@@ -5,6 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+module_load_include('inc', 'itg_menu_manager', 'include/itg_menu_manager');
 
 /**
  * {@inheritdoc}
@@ -12,134 +13,209 @@
 function itg_menu_manager_menu() {
 
   $items['itg-menu-manager'] = array(
-      'title' => t('Menu Manager'),
-      'description' => t('Menu Manager'),
-      'page callback' => 'drupal_get_form',
-      'page arguments' => array('itg_menu_manager_form'),
-      'access arguments' => array('administer itg menu manager'),
+    'title' => t('Create Menu'),
+    'description' => t('Create Menu'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_menu_manager_form'),
+    'access arguments' => array('administer itg menu manager'),
   );
 
   $items['itg-menu-manager-remove'] = array(
-      'page callback' => 'remove_from_menu_manager',
-      'page arguments' => array(1),
-      'access arguments' => array('administer itg menu manager'),
+    'page callback' => 'remove_from_menu_manager',
+    'page arguments' => array(1),
+    'access arguments' => array('administer itg menu manager'),
   );
 
   $items['itg-menu-manager/get-child/autocomplete'] = array(
-      'page callback' => 'itg_menu_manager_get_child',
-      'access arguments' => array('administer itg menu manager'),
+    'page callback' => 'itg_menu_manager_get_child',
+    'access arguments' => array('administer itg menu manager'),
   );
 
   $items['admin/config/user-interface/itg_menu_manager'] = array(
-      'title' => 'Slideshow',
-      'description' => 'Manage itg_menu_manager list.',
-      'page callback' => 'drupal_get_form',
-      'page arguments' => array('itg_menu_manager_manage'),
-      'access arguments' => array('administer content'),
+    'title' => 'Slideshow',
+    'description' => 'Manage itg_menu_manager list.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_menu_manager_manage'),
+    'access arguments' => array('administer content'),
   );
 
   $items['itg-menu-manager/get-child-under-category-management/autocomplete'] = array(
-      'page callback' => 'itg_menu_manager_get_child_under_category_management',
-      'access arguments' => array('administer itg menu manager'),
+    'page callback' => 'itg_menu_manager_get_child_under_category_management',
+    'access arguments' => array('administer itg menu manager'),
+  );
+
+  $items['admin/settings/menu-manager'] = array(
+    'title' => 'Menu manager',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_menu_manager_custom_variables'),
+    'access arguments' => array('access administrator'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  $items['itg-menu-manager-search-second'] = array(
+    'page callback' => 'itg_menu_manager_autosuggest',
+    'page arguments' => array(2),
+    'access arguments' => array('administer itg menu manager'),
+  );
+
+  $items['itg-menu-manager-search-third/%'] = array(
+    'page callback' => 'itg_menu_manager_autosuggest_third',
+    'page arguments' => array(2),
+    'access arguments' => array('administer itg menu manager'),
+  );
+
+  $items['insert_all_node_in_widegt_table'] = array(
+    'page callback' => 'create_new_column', // load the croper according to size!.
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access administrator'),
   );
 
   return $items;
 }
 
-function remove_from_menu_manager($tid) {
-  if (is_numeric($tid)) {
-    db_delete('itg_menu_manager')->condition('id', $tid)->execute();
-  }
-  else {
-    drupal_set_message("Please enter tid");
-  }
-  drupal_goto($_GET['destination']);
-  return;
-}
+/**
+ * Script to add new column in itg_menu_manager
+ */
+//function create_new_column() {
+//  db_query('alter table itg_menu_manager add column display_icon varchar(200) DEFAULT FALSE after extra')->execute();
+//}
 
 /**
  * {@inheritdoc}
  */
 function itg_menu_manager_permission() {
   return array(
-      'administer itg menu manager' => array(
-          'title' => t('administer itg menu manager'),
-          'description' => t('Perform administration tasks for administer itg menu manager'),
-      ),
+    'administer itg menu manager' => array(
+      'title' => t('administer itg menu manager'),
+      'description' => t('Perform administration tasks for administer itg menu manager'),
+    ),
   );
 }
 
+/**
+ * {@inheritdoc}
+ */
 function itg_menu_manager_form($form, &$form_state) {
+  $menu_arg = arg();
+  // Change title during edit operation.
+  if (isset($_GET['edit_id'])) {
+    drupal_set_title("Edit menu");
+  }
 
-  reset($options);
-  // Get only frist tid
-  $frist_section = key($options);
+  $default_values = array();
+  $edit_id = isset($_GET['edit_id']) ? intval(trim($_GET['edit_id'])) : FALSE;
+  $term_id = isset($_GET['term_id']) ? intval(trim($_GET['term_id'])) : FALSE;
+  //$doc_id = variable_get('document_variable_name');
+  $frist_section = FALSE;
+  // condition to check operation
+  if ($edit_id && $term_id) {
+    $query = db_select('itg_menu_manager', 'imm')
+        ->fields('imm')
+        ->condition('imm.id', $edit_id);
+    $default_values = $query->execute()->fetchAssoc();
+  }
+  if (!empty($options)) {
+    reset($options);
+    // Get only frist tid
+    $frist_section = key($options);
+  }
 
   $section = isset($form_state['values']['sections']) ? $form_state['values']['sections'] : $frist_section;
 
-  $menu_level = $form_state['values']['menu_level'];
+  $menu_level = isset($form_state['values']['menu_level']) ? $form_state['values']['menu_level'] : "second";
+  
+  ########################################
+  #                                      #
+  # Handel case when user come form menu #
+  #                                      #
+  ########################################
+  
+  if($menu_arg[0] == 'itg-menu-manager' && $menu_arg[1] == 'second') {
+    $default_values['menu_level'] = "second";
+  }
+  
+  if($menu_arg[0] == 'itg-menu-manager' && $menu_arg[1] == 'vertical') {
+    $default_values['menu_level'] = "vertical";
+  }
+  
+  if($menu_arg[0] == 'itg-menu-manager' && $menu_arg[1] == 'third') {
+    $default_values['menu_level'] = "third";
+    $menu_level = 'third';
+  }
+  
   if ($menu_level == 'third') {
-    drupal_add_css('#decided-section {display:inline-block !important;}', array('type' => 'inline'));
+    //drupal_add_css('#decided-section {display:inline-block !important;}', array('type' => 'inline'));
     $options = itg_menu_manager_get_taxonomy_term_options('category_management');
   }
   else {
     $options = array(0 => "Home Page");
   }
-
   $form['url_type'] = array(
-      '#type' => 'radios',
-      '#title' => t('Menu Type'),
-      '#options' => array(
-          'internal' => 'Internal',
-          'external' => 'External',
-      ),
-      '#default_value' => 'internal',
-      '#ajax' => array(
-          'callback' => 'add_or_remove_autocomplete',
-          'wrapper' => 'entire_form',
-      ),
-      '#required' => TRUE,
+    '#type' => 'radios',
+    '#title' => t('Menu Type'),
+    '#options' => array(
+      'internal' => 'Internal',
+      'external' => 'External',
+    ),
+    '#default_value' => isset($default_values['url_type']) ? $default_values['url_type'] : 'internal',
+    '#ajax' => array(
+      'callback' => 'add_or_remove_autocomplete',
+      'wrapper' => 'entire_form',
+    ),
+    '#description' => t('internal menu type will search "title" from category pool and external will not search.'),
+    '#required' => TRUE,
   );
 
   $form['menu_level'] = array(
-      '#type' => 'select',
-      '#title' => t('Menu Level'),
-      '#options' => array(
-          'second' => 'Second',
-          'third' => 'Third',
-      ),
-      '#required' => TRUE,
-      '#ajax' => array(
-          'callback' => 'decide_section',
-          'wrapper' => 'entire_form',
-      ),
+    '#type' => 'select',
+    '#title' => t('Menu Level'),
+    '#options' => array(
+      '' => '--Select--',
+      'second' => 'Second',
+      'third' => 'Third',
+      'vertical' => 'Vertical menu',
+    ),
+    '#default_value' => isset($default_values['menu_level']) ? $default_values['menu_level'] : "",
+    '#required' => TRUE,
+    '#ajax' => array(
+      'callback' => 'decide_section',
+      'wrapper' => 'entire_form',
+    ),
   );
+
   $form['sections'] = array(
-      '#type' => 'select',
-      '#title' => t('Section'),
-      '#ajax' => array(
-          'callback' => 'get_section_update',
-          'wrapper' => 'referral_provider',
-      ),
-      '#options' => $options,
-      '#prefix' => '<div id="decided-section">',
-      '#suffix' => '</div>',
-      '#validated' => TRUE
+    '#type' => 'select',
+    '#title' => t('Section'),
+    '#ajax' => array(
+      'callback' => 'get_section_update',
+      'wrapper' => 'entire_form',
+    ),
+    '#options' => ($edit_id && (isset($default_values['menu_level']) && $default_values['menu_level'] == 'third')) ? itg_menu_manager_get_taxonomy_term_options('category_management') : $options,
+    '#prefix' => '<div id="decided-section">',
+    '#suffix' => '</div>',
+    '#default_value' => isset($default_values['section_id']) ? $default_values['section_id'] : "",
+    '#validated' => TRUE
   );
 
   $form['title'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Title / Category'),
-      '#prefix' => '<div id="referral_provider">',
-      '#suffix' => '</div>',
-      '#ajax' => array(
-          'callback' => 'get_url_of_current_term',
-          'wrapper' => 'url-of-current-term',
-      ),
-      '#required' => TRUE,
+    '#type' => 'textfield',
+    '#title' => t('Title / Category'),
+    '#prefix' => '<div id="referral_provider">',
+    '#suffix' => '</div>',
+    '#ajax' => array(
+      'callback' => 'get_url_of_current_term',
+      'wrapper' => 'entire_form',
+    ),
+    '#attributes' => array(
+      'onkeydown' => array("return isValidKey(event)"),
+    ),
+    '#default_value' => isset($default_values['title']) ? $default_values['title'] : "",
+    '#required' => TRUE,
   );
-
-  if ($menu_level == 'third') {
+  if ($menu_level == 'third' || (isset($default_values['section_id']) && $default_values['section_id'])) {
+    if (isset($default_values['section_id']) && $default_values['section_id']) {
+      $section = $default_values['section_id'];
+    }
     $form['title']['#autocomplete_path'] = 'itg-menu-manager/get-child/autocomplete/' . $section;
   }
   else {
@@ -147,78 +223,201 @@ function itg_menu_manager_form($form, &$form_state) {
   }
 
   $form['url'] = array(
-      '#type' => 'textfield',
-      '#title' => t('URL'),
-      '#prefix' => '<div id="url-of-current-term">',
-      '#suffix' => '</div>',
-      '#required' => TRUE,
+    '#type' => 'textfield',
+    '#title' => t('URL'),
+    '#prefix' => '<div id="url-of-current-term">',
+    '#suffix' => '</div>',
+    '#required' => TRUE,
+    '#default_value' => isset($default_values['url']) ? $default_values['url'] : "",
   );
 
   $form['url_window'] = array(
-      '#type' => 'radios',
-      '#title' => t('Target'),
-      '#options' => array(
-          'same_window' => 'Same Window',
-          'new_window' => 'New Window',
-      ),
-      '#default_value' => 'same_window',
-      '#required' => TRUE,
+    '#type' => 'radios',
+    '#title' => t('Target'),
+    '#options' => array(
+      'same_window' => 'Same Window',
+      'new_window' => 'New Window',
+    ),
+    '#description' => t('Same window will open "MENU" in current tab and New window will open "MENU" in new tab'),
+    '#default_value' => isset($default_values['target']) ? $default_values['target'] : "same_window",
+    '#required' => TRUE,
   );
 
+  $form['sponsored_category'] = array(
+    '#title' => t('Sponsored category'),
+    '#type' => 'checkboxes',
+    '#description' => t('Sponsored category is applicable for only second level menu. Value saved for third level menu will not appear on front end.'),
+    '#default_value' => (isset($default_values['extra']) && ($default_values['extra'] == "Yes")) ? array("Yes") : array(),
+    '#options' => array('Yes' => t('Yes')),
+  );
 
+  $form['display_icon'] = array(
+    '#title' => t('Display'),
+    '#type' => 'radios',
+    '#description' => t('Show title will display "title" field value insteed of icon.'),
+    '#default_value' => isset($default_values['display_icon']) ? $default_values['display_icon'] : 0,
+    '#options' => array(0 => t('Show title'), 1 => t('Show icon')),
+  );
+
+  $form['category_icon'] = array(
+    '#title' => t('Upload the icon'),
+    '#type' => 'managed_file',
+    '#name' => 'category_icon',
+    '#title' => t('Upload external menu icon'),
+    '#description' => t('Category icon applicable for <br/>only external link. For internal icon <br/>will come from category manager. <br/> Preferred image size 46x37.'),
+    '#file_validate_extensions' => array(
+      'png gif jpg jpeg'
+    ),
+    '#default_value' => (isset($default_values['menu_name']) && (int) $default_values['menu_name']) ? $default_values['menu_name'] : NULL,
+    '#upload_location' => 'public://category_icon/',
+  );
   // Submit Button
   $form['submit'] = array(
-      '#type' => 'submit',
-      '#value' => t('Save Menu'),
+    '#type' => 'submit',
+    '#value' => t('Save Menu'),
+  );
+
+  $destination = "menu-manager/second";
+  if (isset($_GET['destination'])) {
+    $destination = $_GET['destination'];
+  }
+  else if (isset($_GET['prev_page'])) {
+    $destination = $_GET['prev_page'];
+  }
+  $form['cancle'] = array(
+    '#type' => 'markup',
+    '#markup' => l('Cancel', $destination, array("attributes" => array("class" => array("button")))),
   );
 
   $form['#attributes'] = array(
-      'class' => array('itg_menu_manager_form'),
+    'class' => array('itg_menu_manager_form'),
   );
 
   $form['#prefix'] = '<div id="entire_form">';
   $form['#suffix'] = '</div>';
 
+  if (!$edit_id) {
+    drupal_add_js(drupal_get_path('module', 'itg_menu_manager') . '/js/itg_menu_manager.js', 'file');
+  }
 
-  drupal_add_js(drupal_get_path('module', 'itg_menu_manager') . '/js/itg_menu_manager.js', 'file');
+  if ((isset($form_state['values']['url_type']) && $form_state['values']['url_type'] == 'external') || (isset($default_values['url_type']) && $default_values['url_type'] == 'external')) {
+    unset($form['title']['#ajax']);
+  }
+
+  drupal_add_css('#autocomplete {
+height: 300px;
+max-height: 400px;
+overflow: auto;
+overflow-y: auto;
+overflow-x: hidden;
+}', 'inline');
+##############################################################################
+########### Condtion removed fornow for file title in case of second #########
+##############################################################################
+
+//  if (isset($default_values['menu_level']) && ($default_values['menu_level'] == 'second')) {
+//    unset($form['title']['#autocomplete_path']);
+//  }
+
+  drupal_add_js(drupal_get_path('module', 'itg_menu_manager') . '/js/itg-menu-main.js', 'file');
   return $form;
 }
 
+/**
+ * {@inheritdoc}
+ */
 function itg_menu_manager_form_validate($form, &$form_state) {
-  $values = $form_state['values'];
-  $url_type = $values['url_type'];
-  $url = $values['url'];
-  $errors = array();
+  if (isset($form_state['clicked_button']) && $form_state['clicked_button']['#type'] == 'submit') {
+    $errors = array();
+    $values = $form_state['values'];
+    // Section id.
+    $section_id = $values['sections'];
+    $menu_level = $values['menu_level'];
+    $url_type = $values['url_type'];
+    // Validate here for dublicasy.
+    $url = $values['url'];
 
-  if ($url_type == 'external' && !empty($url)) {
-    if ((strpos($url, 'http') === 0) && filter_var($url, FILTER_VALIDATE_URL)) {
-      watchdog("menu_manager", "Url validated in case of external");
-    }
-    else {
-      $errors[] = "Please enter valid external url  eg: http://www.example.com";
-    }
-  }
+    // Validation for dublicate menu and sub menu.
+    if ($url_type == 'internal' && !isset($_GET['edit_id'])) {
+      // get values beween squre breaket.
+      preg_match_all("/\[([^\]]*)\]/", $values['title'], $matches);
+      // get tid
+      $term_tid_array = explode("tid:", $matches[1][0]);
+      // In case of external url we didnt got tid so mannualy give a tid.
+      $term_id = ($term_tid_array[1]) ? trim($term_tid_array[1]) : time();
+      
+      $count = _get_itg_menu_data($menu_level, $section_id, $url_type, $term_id);
 
-  if ($url_type == 'internal' && !empty($url)) {
-    if (!drupal_valid_path($url)) {
-      // Not a system URL.
-      if (!drupal_lookup_path('source', $url)) {
-        $errors[] = "Please enter valid internal url";
+      if ($count) {
+        $display_message = "";
+        if ($menu_level == 'third') {
+          $section_link = l("Click here", "menu-manager/third", array("attributes" => array("target" => array("_blank")), "query" => array("section_child" => $section_id, "tid" => "", "section_id" => $section_id)));
+          $taxonomy_term_data = taxonomy_term_load($section_id);
+          $display_message = "Under <b> $taxonomy_term_data->name </b> Section. $section_link";
+        }
+        else if ($menu_level == 'second') {
+          $section_link = l("Click Here", "menu-manager/second", array("attributes" => array("target" => array("_blank"))));
+          $display_message = $section_link;
+        }
+        else if ($menu_level == 'vertical') {
+          drupal_add_css("#decided-section {display:none !important}", "inline");
+          $section_link = l("Click Here", "menu-manager/vertical", array("attributes" => array("target" => array("_blank"))));
+          $display_message = $section_link;
+        }
+        $errors[] = t("Menu <b>" . $values['title'] . "</b> Already Exists. $display_message");
       }
     }
-  }
+    
+    if ($url_type == 'external' && !empty($url)) {
+      if ((strpos($url, 'http') === 0) && filter_var($url, FILTER_VALIDATE_URL)) {
+        //watchdog("menu_manager", "Url validated in case of external");
+      }
+      else {
+        $errors[] = t("Please enter valid external url  eg: http://www.example.com");
+      }
+    }
 
-  if (!empty($errors)) {
-    drupal_set_message(implode("][", $errors), "error");
-    foreach ($errors as $error) {
-      form_set_error($error);
+    if ($url_type == 'internal' && !empty($url)) {
+      if (!drupal_valid_path($url)) {
+        // Not a system URL.
+        if (!drupal_lookup_path('source', $url)) {
+          $errors[] = t("Please enter valid internal url");
+        }
+      }
+      else {
+        $url_parse = parse_url($url);
+        if (!empty($url_parse['scheme'])) {
+          $errors[] = t("It seems you entered external url.");
+        }
+      }
+    }
+
+    if ($values['display_icon'] == 1 && $values['url_type'] == 'external' && $values['menu_level'] == 'vertical' && !$values['category_icon']) {
+      $errors[] = t("For external vertical menu category icon is required.");
+      drupal_add_css(".form-item-sections {display:none !important}", "inline");
+    }
+
+    if ($values['menu_level'] == '') {
+      $errors[] = t("Please select menu level");
+    }
+
+    if (!empty($errors)) {
+      drupal_set_message(implode("][", $errors), "error");
+      foreach ($errors as $error) {
+        form_set_error($error);
+      }
     }
   }
 }
 
+/**
+ * Function return string matched child element of vocuvolary category_management.
+ * @param string $string
+ * @return json
+ */
 function itg_menu_manager_get_child_under_category_management($string) {
-  $vocuvolary = taxonomy_vocabulary_machine_name_load('category_management');
-  $options_source = taxonomy_get_tree($vocuvolary->vid);
+  //$vocuvolary = taxonomy_vocabulary_machine_name_load('category_management');
+  $options_source = _get_all_terms_under_vocabulary(CATEGORY_MANAGMENT);
 
   foreach ($options_source as $item) {
     if (itg_category_manager_term_state($item->tid) && module_exists('itg_category_manager') && function_exists('itg_category_manager_term_state')) {
@@ -229,9 +428,10 @@ function itg_menu_manager_get_child_under_category_management($string) {
 
   // Get autocomplete string matched children.
   $match_terms_query = db_select('taxonomy_term_data', 'ttd')
-          ->fields('ttd', array('tid', 'name'))
-          ->condition('ttd.tid', array($options), 'IN')
-          ->condition('ttd.name', '%' . db_like($string) . '%', 'LIKE');
+      ->fields('ttd', array('tid', 'name'))
+      ->condition('ttd.tid', array($options), 'IN')
+      ->condition('ttd.name', '%' . db_like($string) . '%', 'LIKE')
+      ->range(0,20);
 
   $match_terms = $match_terms_query->execute()->fetchAll();
 
@@ -241,12 +441,29 @@ function itg_menu_manager_get_child_under_category_management($string) {
   return drupal_json_output($children);
 }
 
+/**
+ * Function to get under vocabulary.
+ * @param int $vid
+ * @return array
+ */
+function _get_all_terms_under_vocabulary($vid) {
+  if(!empty($vid)) {
+    $query = db_select('taxonomy_term_data' , 'tdd');
+    $query->fields('tdd',array('tid'));
+    $query->condition('tdd.vid' , $vid);
+    return $query->execute()->fetchAll();
+  }
+  return array();
+}
+/**
+ * Function create options for itg_menu_manager field.
+ * @param string $machine_name
+ * @return array
+ */
 function itg_menu_manager_get_taxonomy_term_options($machine_name) {
   $options = array();
 
-  $vid = taxonomy_vocabulary_machine_name_load($machine_name)->vid;
-
-  $options_source = taxonomy_get_tree($vid, 0, 1);
+  $options_source = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, 1);
   $options[0] = '-Select-';
   foreach ($options_source as $item) {
     if (itg_category_manager_term_state($item->tid) && module_exists('itg_category_manager') && function_exists('itg_category_manager_term_state')) {
@@ -260,22 +477,27 @@ function itg_menu_manager_get_taxonomy_term_options($machine_name) {
   return $options;
 }
 
+/**
+ * Function returns matched child of term.
+ * @param int $tid
+ * @param string $string
+ * @return json
+ */
 function itg_menu_manager_get_child($tid, $string) {
   if (!empty($tid) && $tid) {
     $term = array();
     $children = array();
     // Get all child under the section.
-    $all_children = taxonomy_get_children($tid);
+    $all_children = itg_menu_manager_taxonomy_get_children_all($tid, CATEGORY_MANAGMENT);
     foreach ($all_children as $term_data) {
       $term[] = $term_data->tid;
     }
-
     if (!empty($term)) {
       // Get autocomplete string matched children.
       $match_terms_query = db_select('taxonomy_term_data', 'ttd')
-              ->fields('ttd', array('tid', 'name'))
-              ->condition('ttd.tid', array($term), 'IN')
-              ->condition('ttd.name', '%' . db_like($string) . '%', 'LIKE');
+          ->fields('ttd', array('tid', 'name'))
+          ->condition('ttd.tid', array($term), 'IN')
+          ->condition('ttd.name', '%' . db_like($string) . '%', 'LIKE');
 
       $match_terms = $match_terms_query->execute()->fetchAll();
 
@@ -288,33 +510,76 @@ function itg_menu_manager_get_child($tid, $string) {
   }
 }
 
+/**
+ * Function to get all child of tid.
+ * @param int $tid
+ * @param int $vid
+ * @param string $key
+ * @return array
+ */
+function itg_menu_manager_taxonomy_get_children_all($tid, $vid = 0, $key = 'tid') {
+  $child = taxonomy_get_children($tid, $vid, $key);
+  $result = array();
+  foreach ($child as $term_key => $data) {
+    $result[$term_key] = $data;
+    $below = itg_menu_manager_taxonomy_get_children_all($term_key, $vid, $key);
+    if (!empty($below)) {
+      foreach ($below as $nt => $nd) {
+        $result[$nt] = $nd;
+      }
+    }
+  }
+  return $result;
+}
+
+/**
+ * Ajax callback funtion which replace tite field for autocomplete path.
+ * @global array $messages
+ * @param array $form
+ * @param type $form_state
+ * @return array
+ */
 function get_section_update($form, &$form_state) {
   global $messages;
   unset($messages);
   unset($form_state['input']['title'], $form_state['values']['title']);
   $section = $form_state['values']['sections'];
-  $form['title']['#autocomplete_path'] = 'itg-menu-manager/get-child/autocomplete/' . $section;
-  return form_builder($form['#id'], $form['title'], $form_state);
+  // In case of internal category pool search is reaquired but not in external case.
+  if ($form_state['values']['url_type'] == 'internal') {
+    //p($form_state['values']['url_type']);
+    $form['title']['#autocomplete_path'] = 'itg-menu-manager/get-child/autocomplete/' . $section;
+  }
+  else {
+    // Unset autocomplete_path if already attached from ajax.
+    unset($form['title']['#autocomplete_path']);
+  }
+  return $form;
 }
 
+/**
+ * returns drupal path of perticular term.
+ * 
+ * @param array $form
+ * @param array $form_state
+ * @return string
+ */
 function get_url_of_current_term($form, &$form_state) {
-  unset($form_state['input']['url'], $form_state['values']['url']);
+  //unset($form_state['input']['url'], $form_state['values']['url']);
   $title = $form_state['values']['title'];
   // get values beween squre breaket.
   preg_match_all("/\[([^\]]*)\]/", $title, $matches);
   // get tid
   $term_tid_array = explode("tid:", $matches[1][0]);
   $link = drupal_lookup_path('alias', 'taxonomy/term/' . trim($term_tid_array[1]));
-  $form['url']['#value'] = $link;
-  $form_builder = form_builder($form['#id'], $form['url'], $form_state);
-  return $form_builder;
+  $form['url']['#value'] = !empty($link) ? $link : $form_state['values']['url'];
+  return $form;
 }
 
 /**
  * Function is callback, which decide section is menadatory or not according to level.
  * 
  * @param array $form
- * @param type $form_state
+ * @param array $form_state
  * @return array
  */
 function decide_section($form, &$form_state) {
@@ -333,13 +598,13 @@ function decide_section($form, &$form_state) {
   if ($url_type == 'external') {
     unset($form['title']['#ajax']);
     unset($form['title']['#autocomplete_path']);
-    $form['sections']['#prefix'] = '<div style="display:none">';
-    $form['sections']['#sufix'] = '</div>';
+//    $form['sections']['#prefix'] = '<div style="display:none">';
+//    $form['sections']['#sufix'] = '</div>';
   }
 
   if ($sections == 0 && $menu_level == 'third' && $url_type == 'internal') {
     $form['title']['#attributes'] = array(
-        'disabled' => "disabled",
+      'disabled' => "disabled",
     );
   }
   return $form;
@@ -362,47 +627,128 @@ function add_or_remove_autocomplete($form, $form_state) {
   return $form;
 }
 
+/**
+ * {@inheritdoc}
+ */
 function itg_menu_manager_form_submit($form, &$form_state) {
+  $edit_id = (null !== filter_input(INPUT_GET, 'edit_id')) ? filter_input(INPUT_GET, 'edit_id') : 0;
   $values = $form_state['values'];
+  $display_icon = $values['display_icon'];
   $url_type = filter_xss($values['url_type']);
   $menu_level = filter_xss($values['menu_level']);
   $sections = filter_xss($values['sections']);
   $title = filter_xss($values['title']);
   $url = filter_xss($values['url']);
   $target = filter_xss($values['url_window']);
+  $category_icon = $values['category_icon'];
+  $sponsored_category = $values['sponsored_category']['Yes'];
+  $is_sponsored = ($sponsored_category) ? $sponsored_category : "No";
+  $file_id = 'notFound';
+  if ($category_icon != 0) {
+    // Upload and save file.
+    $file = file_load($category_icon);
 
-  $max_query = db_select('itg_menu_manager');
-  $max_query->addExpression('MAX(weight)');
-  $max_query->condition('menu_level', $menu_level);
-  $max_result = $max_query->execute()->fetchField();
+    $file->status = FILE_STATUS_PERMANENT;
+    $file_saved = file_save($file);
+    // Record that the module is using the file. 
+    // If we dont do , then file will remove if a cron run.
+    file_usage_add($file_saved, 'itg_menu_manager', 'category_icon_image', $file_saved->fid);
+    $file_id = $file_saved->fid;
+  }
+  if ($edit_id) {
+    // Handle update
+    try {
+      // get values beween squre breaket.
+      preg_match_all("/\[([^\]]*)\]/", $title, $matches);
+      // get tid
+      $term_tid_array = explode("tid:", $matches[1][0]);
+      // In case of external url we didnt got tid so mannualy give a tid.
+      $term_id = ($term_tid_array[1]) ? trim($term_tid_array[1]) : time();
+      db_update('itg_menu_manager')
+          ->fields(array(
+            'title' => $title,
+            'url' => $url,
+            'target' => $target,
+            'menu_level' => $menu_level,
+            'url_type' => $url_type,
+            'section_id' => $sections,
+            'tid' => $term_id,
+            'created' => time(),
+            'extra' => $is_sponsored,
+            'menu_name' => $file_id,
+            'display_icon' => $display_icon,
+              )
+          )->condition('id', $edit_id, "=")->execute();
 
-  $order = ++$max_result;
+      if ($menu_level == 'second') {
+        drupal_goto('menu-manager/second');
+      }
+      else if ($menu_level == 'vertical') {
+        drupal_goto('menu-manager/vertical');
+      }
+      else {
+        $query = array("section_id" => $sections, "section_child" => $sections);
+        drupal_goto('menu-manager/third', array("query" => $query));
+      }
+      drupal_set_message("$menu_level menu has been updated");
+    }
+    catch (Exception $ex) {
+      drupal_set_message($ex->getMessage());
+    }
+  }
+  else {
+    // handle insert
+    $max_query = db_select('itg_menu_manager');
+    $max_query->addExpression('MAX(weight)');
+    $max_query->condition('menu_level', $menu_level);
+    // condition during menu level
+    if ($menu_level == 'third') {
+      $max_query->condition('section_id', $sections);
+    }
+    $max_result = $max_query->execute()->fetchField();
 
-  // get values beween squre breaket.
-  preg_match_all("/\[([^\]]*)\]/", $title, $matches);
-  // get tid
-  $term_tid_array = explode("tid:", $matches[1][0]);
-  // In case of external url we didnt got tid so mannualy give a tid.
-  $term_id = ($term_tid_array[1]) ? $term_tid_array[1] : 0;
+    $order = ++$max_result;
 
-  try {
-    db_insert('itg_menu_manager')
-            ->fields(array(
-                'title' => $title,
-                'url' => $url,
-                'target' => $target,
-                'menu_level' => $menu_level,
-                'weight' => $order,
-                'url_type' => $url_type,
-                'menu_name' => "blank",
-                'section_id' => $sections,
-                'tid' => $term_id
-            ))
-            ->execute();
+    // get values beween squre breaket.
+    preg_match_all("/\[([^\]]*)\]/", $title, $matches);
+    // get tid
+    $term_tid_array = explode("tid:", $matches[1][0]);
+    // In case of external url we didnt got tid so mannualy give a tid.
+    $term_id = ($term_tid_array[1]) ? trim($term_tid_array[1]) : time();
 
-    drupal_set_message("Menu has been saved");
-  } catch (Exception $ex) {
-    drupal_set_message($ex->getMessage());
+    try {
+
+      db_insert('itg_menu_manager')
+          ->fields(array(
+            'title' => $title,
+            'url' => $url,
+            'target' => $target,
+            'menu_level' => $menu_level,
+            'weight' => $order,
+            'url_type' => $url_type,
+            'section_id' => $sections,
+            'tid' => trim($term_id),
+            'created' => time(),
+            'extra' => $is_sponsored,
+            'menu_name' => $file_id,
+            'display_icon' => $display_icon,
+          ))
+          ->execute();
+      if ($menu_level == 'second') {
+        drupal_goto('menu-manager/second');
+      }
+      else if ($menu_level == 'vertical') {
+        drupal_goto('menu-manager/vertical');
+      }
+      else {
+        $query = array("section_id" => $sections, "section_child" => $sections);
+        drupal_goto('menu-manager/third', array("query" => $query));
+      }
+      drupal_set_message("$menu_level menu has been created");
+    }
+    catch (Exception $ex) {
+      drupal_set_message($ex->getMessage());
+    }
   }
 }
 
@@ -410,8 +756,19 @@ function itg_menu_manager_form_submit($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_menu_manager_block_info() {
-  $blocks['menu_manager'] = array(
-      'info' => t('Menu manager'),
+  $blocks['second_level_menu'] = array(
+    'info' => t('Second Level Menu'),
+    'cache' => DRUPAL_NO_CACHE
+  );
+
+  $blocks['third_level_menu'] = array(
+    'info' => t('Third Level Menu'),
+    'cache' => DRUPAL_NO_CACHE
+  );
+
+  $blocks['vertical_menu'] = array(
+    'info' => t('Vertical Menu'),
+    'cache' => DRUPAL_NO_CACHE
   );
   return $blocks;
 }
@@ -422,10 +779,152 @@ function itg_menu_manager_block_info() {
 function itg_menu_manager_block_view($delta = '') {
   $block = array();
   switch ($delta) {
-    // Big Story Content.
-    case 'menu_manager':
-      $block['content'] = "asdasd"; //drupal_get_form('tabledrag_example_simple_form');
+    case 'second_level_menu':
+      $second_level_menu = get_second_level_menu();
+      foreach ($second_level_menu as $db_data) {
+        $temp_data = array();
+        $temp_data['db_data'] = $db_data;
+        $temp_data['term_load'] = taxonomy_term_load($db_data['tid']);
+        $data[] = $temp_data;
+      }
+      $block['content'] = theme('second_level_menu', array("data" => $data));
       break;
+    case 'vertical_menu':
+      $vertical_menu = get_second_level_menu('vertical');
+      foreach ($vertical_menu as $db_data) {
+        $temp_data = array();
+        $temp_data['db_data'] = $db_data;
+        $temp_data['term_load'] = taxonomy_term_load($db_data['tid']);
+        $data[] = $temp_data;
+      }
+      $block['content'] = theme('vertical_level_menu', array("data" => $data));
+      break;
+    case 'third_level_menu':
+      $data = array();
+      $third_level_menu = get_third_level_menu();
+      $node_data = array();
+
+      // handling for ip pages
+      $links_string = variable_get('menu_manager_custom_url');
+      $links_array = explode(",", $links_string);
+      if (in_array(arg(1), $links_array)) {
+        $node_data = node_load(arg(1));
+      }
+
+      if (!empty($third_level_menu) && isset($third_level_menu)) {
+        foreach ($third_level_menu as $db_data) {
+          $temp_data = array();
+          $temp_data['db_data'] = $db_data;
+          $temp_data['term_load'] = taxonomy_term_load($db_data['tid']);
+          $data[] = $temp_data;
+        }
+      }
+
+      $block['content'] = theme('third_level_menu', array("data" => $data, "node_load" => $node_data));
+      break;
+  }
+  return $block;
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_menu_manager_theme() {
+  return array(
+    'second_level_menu' => array(
+      'template' => 'templates/second-level-menu',
+    ),
+    'third_level_menu' => array(
+      'template' => 'templates/third-level-menu',
+    ),
+    'vertical_level_menu' => array(
+      'template' => 'templates/vertical-level-menu',
+    ),
+  );
+}
+
+/**
+ * function returns array of second level menu
+ * @return type
+ */
+function get_second_level_menu($level = 'second') {
+  $query = db_select('itg_menu_manager', 'imm')
+      ->fields('imm')
+      ->condition('imm.menu_level', $level)
+      ->orderBy('imm.weight', 'ASC');
+  return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * function returns array of third level menu
+ * @return type
+ */
+function get_third_level_menu() {
+  $arg = arg();
+  $node_data = array();
+  $section_id = 0;
+
+  // handling for ip pages
+  $links_string = variable_get('menu_manager_custom_url');
+  $links_array = explode(",", $links_string);
+  if (in_array(arg(1), $links_array)) {
+    $node_data = node_load(arg(1));
+  }
+
+  // condition for itg theme
+  if (isset($arg[2])) {
+    if ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) {
+      $section_id = $arg[2];
+      $parents = taxonomy_get_parents_all($section_id);
+      if (count($parents) > 1) {
+        $section_id = end($parents)->tid;
+      }
+    }
+  }
+  if ($arg[0] == 'node' && is_numeric($arg[1])) {
+    $data = db_select('field_data_field_primary_category', 'fpc')
+            ->fields('fpc', array('field_primary_category_value'))
+            ->condition('fpc.entity_id', $arg[1])
+            ->execute()->fetchField();
+    if (!empty($data)) {
+      $parents = taxonomy_get_parents_all($data);
+      if (count($parents) > 1) {
+        $section_id = end($parents)->tid;
+      }
+      else {
+        $section_id = $data;
+      }
+    }
+  }
+  // condition for itgadmin theme
+  else if (isset($_GET['section'])) {
+    $section_id = $_GET['section'];
+  }
+  else if (isset($node_data->field_page_section['und'][0]['tid']) && $node_data->field_page_section['und'][0]['tid'] == variable_get('ipl_for_widget')) {
+    $section_id = variable_get('ipl_for_widget');
+  }
+  else if ($arg[0] == 'photo-list' || $arg[0] == 'video-list') {
+    $section_id = variable_get('ipl_for_widget');
+  }
+  else if ($section_id == "") {
+    $node = itg_videogallery_get_term(arg(1));
+
+    if (in_array(variable_get('ipl_for_widget'), $node)) {
+      $section_id = variable_get('ipl_for_widget');
+    }
+  }
+
+//  if (in_array(arg(1), $links_array)) {
+//    return;
+//  }
+
+  if ($section_id) {
+    $query = db_select('itg_menu_manager', 'imm')
+        ->fields('imm')
+        ->condition('imm.menu_level', 'third')
+        ->condition('imm.section_id', $section_id)
+        ->orderBy('imm.weight', 'ASC');
+    return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   }
 }
 
@@ -435,206 +934,554 @@ function itg_menu_manager_block_view($delta = '') {
  */
 function itg_menu_manager_views_api() {
   return array(
-      'api' => 3,
+    'api' => 3,
   );
 }
 
+/**
+ * {@inheritdoc}
+ */
 function itg_menu_manager_views_data() {
 
   $data['itg_menu_manager']['table']['group'] = t('Menu Manager');
 
   $data['itg_menu_manager']['table']['base'] = array(
-      'field' => 'tid',
-      'title' => t('Menu Manager'),
-      'help' => t('ITG Menu Manager Data'),
+    'field' => 'tid',
+    'title' => t('Menu Manager'),
+    'help' => t('ITG Menu Manager Data'),
   );
 
 
 
   $data['itg_menu_manager']['tid'] = array(
-      'title' => t('Category Manager Table'),
-      'help' => t('Log information about taxonomy term.'),
-      'relationship' => array(
-          'base' => 'taxonomy_term_data', // The name of the table to join with.
-          'base field' => 'tid', // The name of the field on the joined table.      
-          'handler' => 'views_handler_relationship',
-          'label' => t('Menu Category manager'),
-          'title' => t('ITG'),
-          'help' => t('Relate taxonomy to view.'),
-      ),
-      'field' => array(
-          'handler' => 'views_handler_field_numeric',
-          'click sortable' => TRUE,
-      ),
-      'filter' => array(
-          'handler' => 'views_handler_filter_numeric',
-      ),
-      'sort' => array(
-          'handler' => 'views_handler_sort',
-      ),
+    'title' => t('Category Manager Table'),
+    'help' => t('Log information about taxonomy term.'),
+    'relationship' => array(
+      'base' => 'taxonomy_term_data', // The name of the table to join with.
+      'base field' => 'tid', // The name of the field on the joined table.      
+      'handler' => 'views_handler_relationship',
+      'label' => t('Menu Category manager'),
+      'title' => t('ITG'),
+      'help' => t('Relate taxonomy to view.'),
+    ),
+    'field' => array(
+      'handler' => 'views_handler_field_numeric',
+      'click sortable' => TRUE,
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_numeric',
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
   );
 
   $data['itg_menu_manager']['url'] = array(
-      'title' => t('url'),
-      'help' => t('Menu url'),
-      'field' => array(
-          'handler' => 'views_handler_field',
-          'click sortable' => TRUE,
-      ),
-      'sort' => array(
-          'handler' => 'views_handler_sort',
-      ),
-      'filter' => array(
-          'handler' => 'views_handler_filter_string',
-      ),
-      'argument' => array(
-          'handler' => 'views_handler_argument_string',
-      ),
+    'title' => t('url'),
+    'help' => t('Menu url'),
+    'field' => array(
+      'handler' => 'views_handler_field',
+      'click sortable' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_string',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_string',
+    ),
   );
 
   $data['itg_menu_manager']['title'] = array(
-      'title' => t('title'),
-      'help' => t('Menu title'),
-      'field' => array(
-          'handler' => 'views_handler_field',
-          'click sortable' => TRUE,
-      ),
-      'sort' => array(
-          'handler' => 'views_handler_sort',
-      ),
-      'filter' => array(
-          'handler' => 'views_handler_filter_string',
-      ),
-      'argument' => array(
-          'handler' => 'views_handler_argument_string',
-      ),
+    'title' => t('title'),
+    'help' => t('Menu title'),
+    'field' => array(
+      'handler' => 'views_handler_field',
+      'click sortable' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_string',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_string',
+    ),
   );
 
   $data['itg_menu_manager']['menu_level'] = array(
-      'title' => t('Menu Level'),
-      'help' => t('Menu Level'),
-      'field' => array(
-          'handler' => 'views_handler_field',
-          'click sortable' => TRUE,
-      ),
-      'sort' => array(
-          'handler' => 'views_handler_sort',
-      ),
-      'filter' => array(
-          'handler' => 'views_handler_filter_string',
-      ),
-      'argument' => array(
-          'handler' => 'views_handler_argument_string',
-      ),
+    'title' => t('Menu Level'),
+    'help' => t('Menu Level'),
+    'field' => array(
+      'handler' => 'views_handler_field',
+      'click sortable' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_string',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_string',
+    ),
   );
-  
+
   $data['itg_menu_manager']['url_type'] = array(
-      'title' => t('Url Type'),
-      'help' => t('Its stores url type value internal or external'),
-      'field' => array(
-          'handler' => 'views_handler_field',
-          'click sortable' => TRUE,
-      ),
-      'sort' => array(
-          'handler' => 'views_handler_sort',
-      ),
-      'filter' => array(
-          'handler' => 'views_handler_filter_string',
-      ),
-      'argument' => array(
-          'handler' => 'views_handler_argument_string',
-      ),
+    'title' => t('Url Type'),
+    'help' => t('Its stores url type value internal or external'),
+    'field' => array(
+      'handler' => 'views_handler_field',
+      'click sortable' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_string',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_string',
+    ),
+  );
+
+  $data['itg_menu_manager']['menu_name'] = array(
+    'title' => t('Menu name'),
+    'help' => t('Here we are storing icon of menu manager'),
+    'field' => array(
+      'handler' => 'views_handler_field',
+      'click sortable' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_string',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_string',
+    ),
   );
 
 
   // Example numeric text field.
   $data['itg_menu_manager']['weight'] = array(
-      'title' => t('Weight'),
-      'help' => t('Weight'),
-      'field' => array(
-          'handler' => 'views_handler_field_numeric',
-          'click sortable' => TRUE,
-      ),
-      'filter' => array(
-          'handler' => 'views_handler_filter_numeric',
-      ),
-      'sort' => array(
-          'handler' => 'views_handler_sort',
-      ),
+    'title' => t('Weight'),
+    'help' => t('Weight'),
+    'field' => array(
+      'handler' => 'views_handler_field_numeric',
+      'click sortable' => TRUE,
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_numeric',
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
   );
 
   // Example numeric text field.
   $data['itg_menu_manager']['id'] = array(
-      'title' => t('ID'),
-      'help' => t('table id can be use for actions'),
-      'field' => array(
-          'handler' => 'views_handler_field_numeric',
-          'click sortable' => TRUE,
-      ),
-      'filter' => array(
-          'handler' => 'views_handler_filter_numeric',
-      ),
-      'sort' => array(
-          'handler' => 'views_handler_sort',
-      ),
+    'title' => t('ID'),
+    'help' => t('table id can be use for actions'),
+    'field' => array(
+      'handler' => 'views_handler_field_numeric',
+      'click sortable' => TRUE,
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_numeric',
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
   );
 
   // Example numeric text field.
   $data['itg_menu_manager']['section_id'] = array(
-      'title' => t('Section'),
-      'help' => t('Section id is saved if menu level is third'),
-      'field' => array(
-          'handler' => 'views_handler_field_numeric',
-          'click sortable' => TRUE,
-      ),
-      'filter' => array(
-          'handler' => 'views_handler_filter_numeric',
-      ),
-      'sort' => array(
-          'handler' => 'views_handler_sort',
-      ),
+    'title' => t('Section'),
+    'help' => t('Section id is saved if menu level is third'),
+    'field' => array(
+      'handler' => 'views_handler_field_numeric',
+      'click sortable' => TRUE,
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_numeric',
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
   );
 
 
   return $data;
 }
 
+/**
+ * {@inheritdoc}
+ */
 function itg_menu_manager_form_alter(&$form, &$form_state, $form_id) {
+
   if ($form_id == 'views_form_menu_manager_menu_manager_page') {
     $form['actions']['submit']['#submit'][] = 'itg_menu_manager_custom_submit';
   }
+
+  if ($form_id == 'views_exposed_form') {
+    $view = $form_state['view'];
+    if ($view->name == "menu_manager" && $view->current_display == 'menu_manager_page') {
+      drupal_add_css("#edit-section-id-wrapper {display:none}", "inline");
+      drupal_add_css("label[for=edit-tid] {display:none !important}", "inline");
+      drupal_add_css("#draggableviews-table-menu-manager-menu-manager-page td img {max-width:48px; max-height:30px}", "inline");
+      if (arg(1) == 'third') {
+        drupal_add_js(drupal_get_path('module', 'itg_menu_manager') . '/js/itg_menu_manager.js', 'file');
+        $options = itg_menu_manager_get_taxonomy_term_options('category_management');
+//        $form['section_child'] = array(
+//          '#title' => 'Section',
+//          '#type' => 'select',
+//          '#options' => $options,
+//          '#weight' => -99,
+//        );
+        $new_select = '<div class="third-label-menu-section"><label for="edit-section-child">Section </label><select id="edit-section-child" name="section_child" class="form-select valid">';
+        foreach ($options as $key => $value) {
+          if (isset($_GET['section_child']) && $_GET['section_child'] == $key) {
+            $selcted = "selected='selected'";
+          }
+          else {
+            $selcted = "";
+          }
+          $new_select .= '<option value="' . $key . '" ' . $selcted . '>' . $value . '</option>';
+        }
+        $new_select .= '</select></div>';
+
+        $auto_complete_label = '<div class="third-label-menu-term"><label for="edit-edit-tid">' . t("Term Id") . '</label>';
+
+        if (!isset($_GET['section_child']) || $_GET['section_child'] == "0") {
+          $form['tid']['#attributes']['class'] = array('hide');
+          $auto_complete_label = '<div class="third-label-menu-term">';
+        }
+
+        $new_select .= $auto_complete_label;
+        $form['tid']['#prefix'] = $new_select;
+        $form['tid']['#suffix'] = "</div>";
+      }
+    }
+  }
+
+  // see if webform_client_form_ is in the form_id
+  if (strstr($form_id, 'webform_client_form_')) {
+    // get the nid so we can use it in the wrapper value
+    $nid = $form['#node']->nid;
+    // add the ajax properties to the submit button
+    $form['actions']['submit']['#attributes'] = array("class" => array("btn"));
+    $form['actions']['submit']['#ajax'] = array(
+      'callback' => 'itg_menu_manager_webform_js_submit',
+      'wrapper' => 'webform-client-form-' . $nid,
+      'method' => 'replace',
+      'effect' => 'fade',
+    );
+  }
+
+  if ($form_id == 'menu_edit_item' && (arg(4) == 'menu-about-us-page-menu' || arg(5) == 'edit')) {
+    $form['actions']['submit']['#suffix'] = l("Cancel", "admin/structure/menu/manage/menu-about-us-page-menu", array("attributes" => array("class" => array("button"))));
+    drupal_add_css(".form-item-expanded {display:block !important}", "inline");
+  }
 }
 
+function itg_menu_manager_webform_js_submit(&$form, &$form_state) {
+  // define the $sid variable (submission id from webform)
+  $sid = $form_state['values']['details']['sid'];
+  // if we have a sid then we know the form was properly submitted, otherwise, we'll just return the existing $form array
+  if ($sid) {
+    // create an array up with the confirmation message, retreived from the webform node
+    $confirmation = t("You feedback has been recived. Thank you!");
+    drupal_set_message($confirmation);
+    $form['submitted']['feedback']['#default_value'] = "";
+    $form['submitted']['feedback']['#value'] = "";
+    // return the confirmation message
+    return $form;
+  }
+  else {
+    // return the form
+    return $form;
+  }
+}
+
+/**
+ * {@inheritdoc}
+ */
 function itg_menu_manager_custom_submit($form, &$form_state) {
   // Current display for indentifing the view page (Widget name).
-  $current_display = $form_state['build_info']['args'][0]->current_display;
+  //$current_display = $form_state['build_info']['args'][0]->current_display;
   // Below view_name will use to get widget name.
   // Take draggable view input value after submit the form.
   $draggable_view_data = $form_state['input']['draggableviews'];
   // Category tid from url.
   $menu_level = arg(1);
-  // Now insert new entry in itg_widget_order table of combination
-  foreach ($draggable_view_data as $key => $menu_data) {
-    try {
-      db_merge('itg_menu_manager')
+  if ($menu_level == 'second' || $menu_level == 'vertical') {
+    $total_changed_weight = 0;
+
+    foreach ($draggable_view_data as $weight_cal_key => $weight) {
+      $total_changed_weight = $weight['weight'] + $total_changed_weight;
+    }
+
+    if ($total_changed_weight) {
+      // Now insert new entry in itg_widget_order table of combination
+      foreach ($draggable_view_data as $key => $menu_data) {
+        try {
+          db_merge('itg_menu_manager')
               ->key(array(
-                  'tid' => $menu_data['id'],
-                  'menu_level' => $menu_level,
+                'tid' => $menu_data['id'],
+                'menu_level' => $menu_level,
               ))
               ->fields(array(
-                  'weight' => $menu_data['weight'],
+                'weight' => $menu_data['weight'],
               ))
               ->execute();
-    } catch (Exception $ex) {
-      drupal_set_message($ex->getMessage());
+          //drupal_set_message("Order has been updated");
+        }
+        catch (Exception $ex) {
+          drupal_set_message($ex->getMessage());
+        }
+      }
+    }
+  }
+  else if ($menu_level == 'third') {
+    $section_id = $_GET['section_id'];
+    $total_changed_weight = 0;
+
+    foreach ($draggable_view_data as $weight_cal_key => $weight) {
+      $total_changed_weight = $weight['weight'] + $total_changed_weight;
+    }
+
+    if ($total_changed_weight) {
+      // Now insert new entry in itg_widget_order table of combination
+      foreach ($draggable_view_data as $key => $menu_data) {
+        try {
+          db_merge('itg_menu_manager')
+              ->key(array(
+                'tid' => trim($menu_data['id']),
+//                'menu_level' => trim($menu_level),
+//                'section_id' => trim($section_id),
+              ))
+              ->fields(array(
+                'weight' => $menu_data['weight'],
+              ))
+              ->execute();
+          drupal_set_message("Order has been updated");
+        }
+        catch (Exception $ex) {
+          drupal_set_message($ex->getMessage());
+        }
+      }
     }
   }
 }
 
+/**
+ * {@inheritdoc}
+ */
 function itg_menu_manager_views_pre_render(&$view) {
   if ($view->name == "menu_manager" && $view->current_display == 'menu_manager_page') {
-    $header_content = "<h2>" . arg(1) . " level menu ordering</h2>";
-    $header_content .= '<span class="count">Count (' . $view->total_rows . ') </span>';
+    drupal_add_js('jQuery(document).ready(function(){jQuery("#edit-section-child").on(\'change\', function() {
+                var section_chlid = jQuery(this).val();
+                jQuery("#edit-section-id").val(section_chlid);
+            });});', array('type' => 'inline', 'scope' => 'footer'));
+    $arg = arg();
+    $view->build_info['title'] = ucfirst(arg(1)) . t(" level menu ordering");
+    $count = 0;
+    if ((arg(1) == 'third' && !isset($_GET['section_child'])) && $_GET['section_child'] == 0) {
+      unset($view->result);
+    }
+    else {
+      $count = $view->total_rows;
+    }
+    
+
+    // Handel case for inactive category.
+    // Here altered result of $views->result i.e. skip rowa which have inactive tid.
+    $correct_view_result = array();
+    foreach ($view->result as $keys => $result) {
+      $tid = $result->tid;
+      // Procceed if tid is not timestamp.
+      // current unix timestamp 1484910494 for Jan 01 1970.
+      if ($tid < 1484910494) {
+        if (function_exists('itg_category_manager_term_state') && !itg_category_manager_term_state($tid)) {
+          continue;
+        }
+        else {
+          $correct_view_result[] = $view->result[$keys];
+        }
+      }
+      else {
+        $correct_view_result[] = $view->result[$keys];
+      }
+    }
+    $view->result = $correct_view_result;
+    $header_content = "";
+    $header_content .= '<span class="count">Count (' . count($correct_view_result) . ') </span>';
+    $header_content .= l(t('Create Menu'), 'itg-menu-manager/'.$arg[1], array("query" => array("destination" => $arg[0] . "/" . $arg[1])));
     $view->attachment_before = $header_content;
   }
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_menu_manager_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form['#id']) {
+    case 'views-exposed-form-menu-manager-menu-manager-page':
+      $arg = arg();
+      $form['tid']['#attributes']['placeholder'] = t('Term Id');
+      if ($arg[1] == 'second') {
+        $form['tid']['#autocomplete_path'] = 'itg-menu-manager-search-second/autocomplete';
+      }
+      else {
+        if (isset($_GET['section_id'])) {
+          $section_id = $_GET['section_id'];
+          $form['tid']['#autocomplete_path'] = "itg-menu-manager-search-third/$section_id/autocomplete";
+        }
+      }
+      break;
+  }
+}
+
+/**
+ * Function handling link output of menus.
+ * 
+ * @global global $base_url
+ * @param array $menu_data
+ * @param array $argument
+ * @param array $load_parent
+ * @return array
+ */
+function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()) {
+  global $base_url;
+  $menu_link_data_array = array();
+  $parent_key_of_third_level = !empty($load_parent) ? array_keys($load_parent)[0] : 0;
+  $title_array = explode("[tid", $menu_data['db_data']['title']);
+  $link_url = $active = $image_class = "";
+  $target = "_self";
+  $link_text = $link_title_for_vertical = isset($menu_data['term_load']->name) ? $menu_data['term_load']->name : $title_array[0];
+  $url_type = isset($menu_data['db_data']['url_type']) ? $menu_data['db_data']['url_type'] : "";
+  $display_icon = isset($menu_data['db_data']['display_icon']) ? $menu_data['db_data']['display_icon'] : "";
+  $db_target = isset($menu_data['db_data']['target']) ? $menu_data['db_data']['target'] : "";
+  $tid = isset($menu_data['db_data']['tid']) ? $menu_data['db_data']['tid'] : 0;
+  $active_cls = $parent_class = "notactive";
+  $icon_fid = (int) $menu_data['db_data']['menu_name'];
+  $display_icon_attribute = $display_icon;
+  $sponser_logo_uri = !empty($menu_data['term_load']->field_sponser_logo['und'][0]['uri']) ? $menu_data['term_load']->field_sponser_logo['und'][0]['uri'] : 0;
+  $vertical_menu_icon = "";
+  // handel case for external menu.
+  // display_icon is true and icon_fid is set then show icon other wise title.
+  if ($url_type == 'external' && $display_icon && $icon_fid) {
+    $int_value = (int) $icon_fid;
+    if ($int_value) {
+      $icon_object = file_load((int) $icon_fid);
+      // Set icon for internal menu used for vertical menu.
+      $link_text = $vertical_menu_icon = "<img title='" . $link_title_for_vertical . "'  src='" . file_create_url($icon_object->uri) . "' alt='' />"; //theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $icon_object->uri));
+      if (!empty($icon_object->uri)) {
+        $image_class = "has-image";
+      }
+    }
+  }
+  // Handle case for default image
+  if ($url_type == 'external' && $display_icon && $icon_fid == "notFound") {
+    $link_text = $vertical_menu_icon = "<img  title='" . $link_title_for_vertical . "' src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all_110_37.jpeg' alt='' />";
+  }
+
+  if ($url_type == 'internal' && $display_icon) {
+    if (is_string($sponser_logo_uri) && !empty($sponser_logo_uri)) {
+      $link_text = $vertical_menu_icon = "<img  src='" . file_create_url($sponser_logo_uri) . "' alt='' />"; //theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $sponser_logo_uri));
+      $image_class = "has-image";
+    }
+  }
+
+  $sponsored_class = ($menu_data['db_data']['extra'] == 'Yes') ? "sponsored-active" : "";
+  // if tid is not 0 then its internal url
+  if (($tid && $url_type == 'internal')) {
+    $link_url = "taxonomy/term/$tid";
+    if ($link_url == current_path()) {
+      $active_cls = "active";
+    }
+  }
+  else {
+    $link_url = $menu_data['db_data']['url'];
+  }
+
+  // manage target
+  if (trim($db_target) == 'new_window') {
+    $target = "_blank";
+  }
+
+  if ($tid == $parent_key_of_third_level) {
+    $parent_class = "active";
+  }
+
+  if (!empty($argument[1]) && isset($argument[1])) {
+    $arg1 = $argument[1];
+    $urlalise = drupal_get_path_alias("node/$arg1");
+    $real_path_alise = ($urlalise) ? $urlalise : "node/$arg1";
+    if (!empty($link_url)) {
+      $link_url_array = explode('/', $link_url);
+      $link_url_end = end($link_url_array); //shravan
+      if ($link_url_end == $real_path_alise) {
+        $active = 'active';
+      }
+    }
+  }
+
+  // Prepare variables
+  $menu_link_data_array['image_class'] = $image_class;
+  $menu_link_data_array['link_text'] = $link_text;
+  $menu_link_data_array['link_url'] = $link_url;
+  $menu_link_data_array['target'] = $target;
+  $menu_link_data_array['active'] = $active;
+  $menu_link_data_array['sponsored_class'] = $sponsored_class;
+  $menu_link_data_array['parent_class'] = $parent_class;
+  $menu_link_data_array['active_cls'] = $active_cls;
+  $menu_link_data_array['icon'] = $vertical_menu_icon;
+  $menu_link_data_array['link_title_for_vertical'] = $link_title_for_vertical;
+  $menu_link_data_array['url_type'] = "url-type-" . $url_type;
+  $menu_link_data_array['display_icon'] = $display_icon_attribute;
+  return $menu_link_data_array;
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_menu_manager_taxonomy_term_delete($term) {
+  _delete_term_from_menu_manager($tid);
+}
+
+function _delete_term_from_menu_manager($tid) {
+  try {
+    db_delete('itg_menu_manager')
+        ->condition('tid', $tid)
+        ->execute();
+  }
+  catch (Exception $ex) {
+    drupal_set_message($ex->getMessage());
+  }
+}
+
+/**
+ * Function which returns count of rows w.r.t menu_manager data.
+ * 
+ * @param string $menu_level
+ * @param int $section_id
+ * @param string $url_type
+ * @param string $term_id
+ * @return int
+ */
+function _get_itg_menu_data($menu_level, $section_id, $url_type, $term_id) {
+  $db_query = db_select('itg_menu_manager', 'imm')
+      ->fields('imm', array('tid'))
+      ->condition('imm.menu_level', $menu_level)
+      ->condition('imm.section_id', $section_id)
+      ->condition('imm.url_type', $url_type)
+      ->condition('imm.tid', $term_id);
+  $result = $db_query->execute()->rowCount();
+  return $result;
 }

@@ -79,33 +79,21 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['fields']['url']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['url']['field'] = 'url';
   $handler->display->display_options['fields']['url']['exclude'] = TRUE;
-  /* Field: Apache Solr: sm_thumb_medium_field_story_extra_large_image */
-  $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['id'] = 'sm_thumb_medium_field_story_extra_large_image';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['field'] = 'sm_thumb_medium_field_story_extra_large_image';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['label'] = '';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_type'] = '0';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_wrapper_type'] = 'div';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_wrapper_class'] = 'search-pic';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_default_classes'] = FALSE;
-  /* Field: Apache Solr: sm_thumb_medium_field_magazine_cover_photo */
-  $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['id'] = 'sm_thumb_medium_field_magazine_cover_photo';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['field'] = 'sm_thumb_medium_field_magazine_cover_photo';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['label'] = '';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['element_type'] = '0';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['element_wrapper_type'] = 'div';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['element_wrapper_class'] = 'search-pic';
-  $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['element_default_classes'] = FALSE;
+  /* Field: Apache Solr: sm_field_custom_story_small_large_url */
+  $handler->display->display_options['fields']['sm_field_custom_story_small_large_url']['id'] = 'sm_field_custom_story_small_large_url';
+  $handler->display->display_options['fields']['sm_field_custom_story_small_large_url']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_field_custom_story_small_large_url']['field'] = 'sm_field_custom_story_small_large_url';
+  $handler->display->display_options['fields']['sm_field_custom_story_small_large_url']['label'] = '';
+  $handler->display->display_options['fields']['sm_field_custom_story_small_large_url']['element_type'] = '0';
+  $handler->display->display_options['fields']['sm_field_custom_story_small_large_url']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['sm_field_custom_story_small_large_url']['element_wrapper_type'] = 'div';
+  $handler->display->display_options['fields']['sm_field_custom_story_small_large_url']['element_wrapper_class'] = 'search-pic';
+  $handler->display->display_options['fields']['sm_field_custom_story_small_large_url']['element_default_classes'] = FALSE;
   /* Field: Apache Solr: label */
   $handler->display->display_options['fields']['label']['id'] = 'label';
   $handler->display->display_options['fields']['label']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['label']['field'] = 'label';
   $handler->display->display_options['fields']['label']['label'] = '';
-  $handler->display->display_options['fields']['label']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['label']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['label']['alter']['text'] = '<a href="[url] " target="_blank">[label]</a>';
   $handler->display->display_options['fields']['label']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['label']['element_wrapper_type'] = 'div';
@@ -142,7 +130,6 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="search-detail">
-<h2>[label]</h2>
 <p>[content]</p>
 <div class="other-info">Updated : [ds_changed]</div>
 </div>';
@@ -347,6 +334,10 @@ function feature_for_front_search_views_default_views() {
       'value' => '',
     ),
   );
+  /* Filter criterion: Apache Solr: label */
+  $handler->display->display_options['filters']['label']['id'] = 'label';
+  $handler->display->display_options['filters']['label']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['label']['field'] = 'label';
   $handler->display->display_options['path'] = 'site-search';
   $export['front_end_global_search'] = $view;
 

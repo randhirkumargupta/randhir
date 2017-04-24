@@ -1,3 +1,6 @@
+<?php
+global $base_url;
+?>
 <div class="year-slider">    
     <?php foreach($rows as $index => $row): ?>
     <div><?php print $row['field_story_extra_large_image'];?>

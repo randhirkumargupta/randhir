@@ -1,0 +1,11 @@
+name = Feature for social media report
+description = Feature for social media report
+core = 7.x
+package = Features
+version = 7.x-1.5
+dependencies[] = views
+dependencies[] = views_data_export
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = social_media_report
+features_exclude[dependencies][ctools] = ctools

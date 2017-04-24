@@ -11,8 +11,8 @@ function features_for_event_registration_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
-  // 'field_collection_item-field_erf_registration_fee-field_email_address'.
-  $field_instances['field_collection_item-field_erf_registration_fee-field_email_address'] = array(
+  // 'field_collection_item-field_erf_registration_fee-field_comments_remarks_'.
+  $field_instances['field_collection_item-field_erf_registration_fee-field_comments_remarks_'] = array(
     'bundle' => 'field_erf_registration_fee',
     'default_value' => NULL,
     'deleted' => 0,
@@ -23,13 +23,13 @@ function features_for_event_registration_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 19,
       ),
     ),
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
-    'field_name' => 'field_email_address',
-    'label' => 'Email',
+    'field_name' => 'field_comments_remarks_',
+    'label' => 'Comments',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -40,10 +40,10 @@ function features_for_event_registration_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'size' => 60,
+        'rows' => 5,
       ),
-      'type' => 'text_textfield',
-      'weight' => 3,
+      'type' => 'text_textarea',
+      'weight' => 13,
     ),
   );
 
@@ -57,10 +57,12 @@ function features_for_event_registration_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 11,
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 22,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -73,14 +75,15 @@ function features_for_event_registration_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
-      'module' => 'taxonomy',
+      'active' => 1,
+      'module' => 'entityreference',
       'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
+        'match_operator' => 'CONTAINS',
+        'path' => '',
         'size' => 60,
       ),
-      'type' => 'taxonomy_autocomplete',
-      'weight' => 11,
+      'type' => 'entityreference_autocomplete',
+      'weight' => 8,
     ),
   );
 
@@ -103,7 +106,7 @@ function features_for_event_registration_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_erf_company_name',
-    'label' => 'Company/Organization Name',
+    'label' => 'Company Name',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -122,39 +125,55 @@ function features_for_event_registration_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'field_collection_item-field_erf_registration_fee-field_erf_country'.
-  $field_instances['field_collection_item-field_erf_registration_fee-field_erf_country'] = array(
+  // 'field_collection_item-field_erf_registration_fee-field_erf_date_of_birth'.
+  $field_instances['field_collection_item-field_erf_registration_fee-field_erf_date_of_birth'] = array(
     'bundle' => 'field_erf_registration_fee',
-    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 9,
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 15,
       ),
     ),
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
-    'field_name' => 'field_erf_country',
-    'label' => 'Country',
+    'field_name' => 'field_erf_date_of_birth',
+    'label' => 'Date of Birth',
     'required' => 0,
     'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
-      'module' => 'taxonomy',
+      'active' => 1,
+      'module' => 'date',
       'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
+        'display_all_day' => 0,
+        'increment' => 15,
+        'input_format' => 'd/m/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'within',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '1950:+0',
       ),
-      'type' => 'taxonomy_autocomplete',
-      'weight' => 9,
+      'type' => 'date_select',
+      'weight' => 12,
     ),
   );
 
@@ -196,8 +215,8 @@ function features_for_event_registration_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'field_collection_item-field_erf_registration_fee-field_erf_gender'.
-  $field_instances['field_collection_item-field_erf_registration_fee-field_erf_gender'] = array(
+  // 'field_collection_item-field_erf_registration_fee-field_erf_email'.
+  $field_instances['field_collection_item-field_erf_registration_fee-field_erf_email'] = array(
     'bundle' => 'field_erf_registration_fee',
     'default_value' => NULL,
     'deleted' => 0,
@@ -205,27 +224,30 @@ function features_for_event_registration_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 0,
+        'type' => 'text_default',
+        'weight' => 17,
       ),
     ),
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
-    'field_name' => 'field_erf_gender',
-    'label' => 'Gender Title',
-    'required' => 1,
+    'field_name' => 'field_erf_email',
+    'label' => 'Email',
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 0,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 4,
     ),
   );
 
@@ -248,7 +270,7 @@ function features_for_event_registration_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_erf_mailing_address',
-    'label' => 'Mailing Address',
+    'label' => 'Address',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -299,7 +321,44 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_erf_registration_fee-field_erf_name'.
+  $field_instances['field_collection_item-field_erf_registration_fee-field_erf_name'] = array(
+    'bundle' => 'field_erf_registration_fee',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 12,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 1,
+    'field_name' => 'field_erf_name',
+    'label' => 'Name',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 2,
     ),
   );
 
@@ -322,7 +381,7 @@ function features_for_event_registration_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_erf_postal_code',
-    'label' => 'Postal Code',
+    'label' => 'Pincode',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -336,7 +395,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 11,
     ),
   );
 
@@ -350,10 +409,12 @@ function features_for_event_registration_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 10,
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 23,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -366,330 +427,112 @@ function features_for_event_registration_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
-      'module' => 'taxonomy',
+      'active' => 1,
+      'module' => 'entityreference',
       'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
+        'match_operator' => 'CONTAINS',
+        'path' => '',
         'size' => 60,
       ),
-      'type' => 'taxonomy_autocomplete',
-      'weight' => 10,
+      'type' => 'entityreference_autocomplete',
+      'weight' => 9,
     ),
   );
 
   // Exported field_instance:
-  // 'field_collection_item-field_erf_registration_fee-field_first_name'.
-  $field_instances['field_collection_item-field_erf_registration_fee-field_first_name'] = array(
+  // 'field_collection_item-field_erf_registration_fee-field_erf_ticket_type'.
+  $field_instances['field_collection_item-field_erf_registration_fee-field_erf_ticket_type'] = array(
     'bundle' => 'field_erf_registration_fee',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 1,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_first_name',
-    'label' => 'First name',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 1,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'field_collection_item-field_erf_registration_fee-field_last_name'.
-  $field_instances['field_collection_item-field_erf_registration_fee-field_last_name'] = array(
-    'bundle' => 'field_erf_registration_fee',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 2,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_last_name',
-    'label' => 'Last name',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance: 'node-event_registration-field_email_address'.
-  $field_instances['node-event_registration-field_email_address'] = array(
-    'bundle' => 'event_registration',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please enter a valid email id.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 15,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_email_address',
-    'label' => 'Email',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 4,
-    ),
-  );
-
-  // Exported field_instance: 'node-event_registration-field_erf_city'.
-  $field_instances['node-event_registration-field_erf_city'] = array(
-    'bundle' => 'event_registration',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please select city.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 9,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_erf_city',
-    'label' => 'City',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'taxonomy',
-      'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
-      ),
-      'type' => 'taxonomy_autocomplete',
-      'weight' => 23,
-    ),
-  );
-
-  // Exported field_instance: 'node-event_registration-field_erf_company_name'.
-  $field_instances['node-event_registration-field_erf_company_name'] = array(
-    'bundle' => 'event_registration',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please enter your company/organization name.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 2,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_erf_company_name',
-    'label' => 'Company/Organization Name',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 17,
-    ),
-  );
-
-  // Exported field_instance: 'node-event_registration-field_erf_country'.
-  $field_instances['node-event_registration-field_erf_country'] = array(
-    'bundle' => 'event_registration',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please select country.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 7,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_erf_country',
-    'label' => 'Country',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'taxonomy',
-      'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
-      ),
-      'type' => 'taxonomy_autocomplete',
-      'weight' => 21,
-    ),
-  );
-
-  // Exported field_instance: 'node-event_registration-field_erf_designation'.
-  $field_instances['node-event_registration-field_erf_designation'] = array(
-    'bundle' => 'event_registration',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please enter designation.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 4,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_erf_designation',
-    'label' => 'Designation',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 18,
-    ),
-  );
-
-  // Exported field_instance: 'node-event_registration-field_erf_gender'.
-  $field_instances['node-event_registration-field_erf_gender'] = array(
-    'bundle' => 'event_registration',
-    'default_value' => array(
-      0 => array(
-        'value' => 'Mr',
-      ),
-    ),
-    'deleted' => 0,
-    'description' => 'Please select gender title.',
     'display' => array(
       'default' => array(
         'label' => 'above',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 1,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 25,
       ),
     ),
-    'entity_type' => 'node',
+    'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
-    'field_name' => 'field_erf_gender',
-    'label' => 'Gender Title',
+    'field_name' => 'field_erf_ticket_type',
+    'label' => 'Ticket Type',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 0,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_erf_registration_fee-field_event_country'.
+  $field_instances['field_collection_item-field_erf_registration_fee-field_event_country'] = array(
+    'bundle' => 'field_erf_registration_fee',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 24,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_event_country',
+    'label' => 'Country',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 10,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_erf_registration_fee-field_event_name_title'.
+  $field_instances['field_collection_item-field_erf_registration_fee-field_event_name_title'] = array(
+    'bundle' => 'field_erf_registration_fee',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 18,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 1,
+    'field_name' => 'field_event_name_title',
+    'label' => 'Title',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -701,133 +544,6 @@ function features_for_event_registration_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_select',
       'weight' => 1,
-    ),
-  );
-
-  // Exported field_instance: 'node-event_registration-field_erf_id_number'.
-  $field_instances['node-event_registration-field_erf_id_number'] = array(
-    'bundle' => 'event_registration',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please enter your valid ID number.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 17,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_erf_id_number',
-    'label' => 'ID Number',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 7,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-event_registration-field_erf_mailing_address'.
-  $field_instances['node-event_registration-field_erf_mailing_address'] = array(
-    'bundle' => 'event_registration',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please enter your mailing address.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_erf_mailing_address',
-    'label' => 'Mailing Address',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 19,
-    ),
-  );
-
-  // Exported field_instance: 'node-event_registration-field_erf_mobile'.
-  $field_instances['node-event_registration-field_erf_mobile'] = array(
-    'bundle' => 'event_registration',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please enter mobile number.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 3,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_erf_mobile',
-    'label' => 'Mobile',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 5,
     ),
   );
 
@@ -860,7 +576,7 @@ function features_for_event_registration_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_erf_payment_gateway',
-    'label' => 'Select Payment Gateway',
+    'label' => 'Payment Mode',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -871,50 +587,7 @@ function features_for_event_registration_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 12,
-    ),
-  );
-
-  // Exported field_instance: 'node-event_registration-field_erf_postal_code'.
-  $field_instances['node-event_registration-field_erf_postal_code'] = array(
-    'bundle' => 'event_registration',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please enter postal code.
-<b>Allowed:</b> 6 digit numeric value.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 6,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_erf_postal_code',
-    'label' => 'Postal Code',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 20,
+      'weight' => 2,
     ),
   );
 
@@ -958,95 +631,15 @@ function features_for_event_registration_field_default_field_instances() {
     'widget' => array(
       'active' => 0,
       'module' => 'field_collection',
-      'settings' => array(),
-      'type' => 'field_collection_embed',
-      'weight' => 11,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-event_registration-field_erf_select_id_type'.
-  $field_instances['node-event_registration-field_erf_select_id_type'] = array(
-    'bundle' => 'event_registration',
-    'default_value' => array(
-      0 => array(
-        'value' => 'pan',
-      ),
-    ),
-    'deleted' => 0,
-    'description' => 'Please select your id type.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 16,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_erf_select_id_type',
-    'label' => 'Select ID Type',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 6,
-    ),
-  );
-
-  // Exported field_instance: 'node-event_registration-field_erf_state'.
-  $field_instances['node-event_registration-field_erf_state'] = array(
-    'bundle' => 'event_registration',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please select state.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 8,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_erf_state',
-    'label' => 'State',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'taxonomy',
       'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
+        'collapsed' => FALSE,
+        'field_as_label' => array(),
+        'last_item_collapsed' => FALSE,
+        'new_item_open' => FALSE,
+        'replace_label' => FALSE,
       ),
-      'type' => 'taxonomy_autocomplete',
-      'weight' => 22,
+      'type' => 'field_collection_embed',
+      'weight' => 1,
     ),
   );
 
@@ -1092,26 +685,22 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 3,
     ),
   );
 
-  // Exported field_instance: 'node-event_registration-field_erf_type'.
-  $field_instances['node-event_registration-field_erf_type'] = array(
+  // Exported field_instance: 'node-event_registration-field_preview_unique_id'.
+  $field_instances['node-event_registration-field_preview_unique_id'] = array(
     'bundle' => 'event_registration',
-    'default_value' => array(
-      0 => array(
-        'value' => 'self',
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'list_default',
+        'type' => 'text_default',
         'weight' => 14,
       ),
       'teaser' => array(
@@ -1123,48 +712,9 @@ function features_for_event_registration_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_erf_type',
-    'label' => 'Type',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 10,
-    ),
-  );
-
-  // Exported field_instance: 'node-event_registration-field_last_name'.
-  $field_instances['node-event_registration-field_last_name'] = array(
-    'bundle' => 'event_registration',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please enter last name.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_last_name',
-    'label' => 'Last name',
-    'required' => 1,
+    'field_name' => 'field_preview_unique_id',
+    'label' => 'Preview_unique_id',
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -1177,7 +727,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 10,
     ),
   );
 
@@ -1225,7 +775,7 @@ function features_for_event_registration_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 8,
+      'weight' => 6,
     ),
   );
 
@@ -1303,43 +853,29 @@ function features_for_event_registration_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Address');
   t('City');
-  t('Company/Organization Name');
+  t('Comments');
+  t('Company Name');
   t('Country');
+  t('Date of Birth');
   t('Designation');
   t('Email');
-  t('First name');
-  t('Gender Title');
-  t('ID Number');
-  t('Last name');
-  t('Mailing Address');
   t('Mobile');
-  t('Please enter a valid email id.');
-  t('Please enter designation.');
-  t('Please enter last name.');
-  t('Please enter mobile number.');
-  t('Please enter postal code.
-<b>Allowed:</b> 6 digit numeric value.');
-  t('Please enter your company/organization name.');
-  t('Please enter your mailing address.');
-  t('Please enter your valid ID number.');
-  t('Please select city.');
+  t('Name');
+  t('Payment Mode');
+  t('Pincode');
   t('Please select country for this state.');
-  t('Please select country.');
-  t('Please select gender title.');
   t('Please select state for this city.');
-  t('Please select state.');
-  t('Please select your id type.');
-  t('Postal Code');
+  t('Preview_unique_id');
   t('Registration Fee');
   t('Select County');
-  t('Select ID Type');
-  t('Select Payment Gateway');
   t('Select State');
   t('Source id');
   t('State');
+  t('Ticket Type');
+  t('Title');
   t('Total Fee');
-  t('Type');
 
   return $field_instances;
 }

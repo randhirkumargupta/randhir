@@ -1,0 +1,243 @@
+<?php
+
+/**
+ * {@inheritdoc}
+ */
+function itg_budget_predictor_menu() {
+  $items = array();
+  $items['budget/predictor/%'] = array(
+    'page callback' => 'itg_budget_predictor_custom',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('administer itg_term settings'),
+  );
+
+  $items['ajax/budget-ranking/%'] = array(
+    'page callback' => 'itg_budget_predictor_update_budget',
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_budget_predictor.inc',
+    'access arguments' => array('access content'),
+  );
+  $items['budget-save/%'] = array(
+    'page callback' => 'itg_budget_crop_image',
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_budget_predictor.inc',
+    'access callback' => 'user_is_logged_in',
+  );
+  $items['ajax/reset-budget-data/%'] = array(
+    'page callback' => 'itg_budget_reset_image',
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_budget_predictor.inc',
+    'access callback' => 'user_is_logged_in',
+  );
+  $items['budget-download'] = array(
+    'page callback' => 'itg_budget_download_image',
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_budget_predictor.inc',
+    'access callback' => 'user_is_logged_in',
+  );
+  $items['budget-predictor-list'] = array(
+    'title' => t('Budget Users List'),
+    'page callback' => 'itg_budget_predictor_list',
+    'access arguments' => array('administer itg_term settings'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_budget_predictor.inc',
+  );
+  $items['manage-budget-list'] = array(
+    'page callback' => 'itg_budget_manage_list',
+    'access arguments' => array('administer itg_term settings'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_budget_predictor.inc',
+  );
+  $items['budget-download-excel'] = array(
+    'page callback' => 'itg_budget_download_excel',
+    'access callback' => 'user_is_logged_in',
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_budget_predictor.inc',
+  );
+  $items['manage-budget-predictor'] = array(
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_manage_budget'),
+    'access arguments' => array('administer itg_term settings'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'includes/itg_budget_predictor.inc',
+  );
+  return $items;
+}
+
+/**
+ * Custom callback for itg_budget_predictor
+ * @global string $base_url
+ * @global array $user
+ * @return type
+ */
+function itg_budget_predictor_custom() {
+  module_load_include('inc', 'itg_budget_predictor', 'includes/itg_budget_predictor');
+  global $base_url, $user;
+  $user_id = $user->uid;
+  $allowed_roles = array('Editor', 'Site Admin', 'administrator');
+  $arg = arg();
+  $section_id = isset($arg[2]) ? $arg[2] : '';
+  $budget_status = check_budget($section_id);
+  $settings = array();
+
+  if (!empty($user_id)) {
+    if (!empty($_SESSION['present_budget'])) {
+      unset($_SESSION['present_budget']);
+    }
+  }
+  else {
+    if (empty($_SESSION['pre_budget'])) {
+      $budget_predictor_cookies_id = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz"), 0, 2) . time();
+      $settings['budget_predictor_cookies_id'] = $budget_predictor_cookies_id;
+
+      $_SESSION['pre_budget'] = $budget_predictor_cookies_id;
+      $_SESSION['present_budget'] = $budget_predictor_cookies_id;
+      $settings['pre_budget'] = $budget_predictor_cookies_id;
+    }
+    elseif (empty($_SESSION['present_budget'])) {
+      $budget_predictor_cookies_id = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz"), 0, 2) . time();
+      $settings['budget_predictor_cookies_id'] = $budget_predictor_cookies_id;
+      unset($_SESSION['pre_budget']);
+      unset($_SESSION['present_budget']);
+      $_SESSION['pre_budget'] = $budget_predictor_cookies_id;
+      $_SESSION['present_budget'] = $budget_predictor_cookies_id;
+      $settings['present_budget'] = $budget_predictor_cookies_id;
+    }
+    elseif (!empty($_SESSION['pre_budget']) && !empty($_SESSION['present_budget'])) {
+      $settings['budget_predictor_cookies_id'] = $_SESSION['pre_budget'];
+      $settings['pre_budget'] = $_SESSION['pre_budget'];
+      $settings['present_budget'] = $_SESSION['present_budget'];
+    }
+  }
+
+  $data = itg_budget_predictor_get_taxonomy();
+  $settings['stopPredictor'] = '1';
+
+  if ($budget_status['status'] == 1 && empty($data['file_names']) && (empty($user->uid) || empty($cookies_id))) {
+    $settings['stopPredictor'] = '2';
+  }
+
+  if ($budget_status['status'] == 1 && empty($data['file_names']) && (!empty($user->uid) || !empty($cookies_id))) {
+    $settings['stopPredictor'] = '2';
+  }
+  else {
+    $data['file_name'] = $base_url . '/sites/default/files/' . $data['file_names'];
+  }
+  $cookies_name = "COOKIES_IT_" . $section_id;
+  /* JS library  added to Cheaper dearer */
+  $settings['basePath'] = $base_url;
+  $settings['section_id'] = $section_id;
+  $settings['user_id'] = $user_id;
+  if (count(array_intersect($user->roles, $allowed_roles)) > 0) {
+    $data['admin_user'] = 1;
+    $settings['admin_user'] = 1;
+    $settings['cookies_name'] = $_COOKIE[$cookies_name];
+  }
+
+
+  $data['user_id'] = $user_id;
+  drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', external);
+  drupal_add_js('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js', external);
+  drupal_add_js(array('itg_budget_predictor' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
+  drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/itg_budget_predictor.js', array('weight' => 4, 'scope' => 'footer'));
+  drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/html2canvas.js', 'file');
+  drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/jquery.cookie.js', 'file');
+  return theme('itg_budget_predictor_cheaper', array('data' => $data));
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_budget_predictor_theme() {
+  $themes = array(
+    'itg_budget_predictor_cheaper' => array(
+      'variables' => array('data' => NULL),
+      'template' => 'templates/itg-budget-predictor',
+    ),
+  );
+  return $themes;
+}
+
+/**
+ * Implement hook_views_pre_render
+ * @param Object $view
+ */
+function itg_budget_predictor_views_pre_render(&$view) {
+  if (isset($view->name) && $view->name == "budget_predictor_image") {
+    if (arg(0) == 'budget-predictor-image') {
+      // Add "Create Predictor Image" button on listing page of Budget Predictor Image
+      $header_content_term = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content_term .= l(t('Create Predictor Image'), 'admin/structure/taxonomy/cheaper_dearer/add') . " " . l(t('Manage Budget'), 'manage-budget-list');
+      $view->attachment_before = $header_content_term;
+    }
+  }
+}
+
+/*
+ * Implementation of hook_form_FORM_ID_alter
+ * @param array $form
+ * @param array reference $form_state
+ * Hiding taxonomy term description field
+ */
+
+function itg_budget_predictor_form_taxonomy_form_term_alter(&$form, &$form_state) {
+  if (is_array($form['#term']) && count($form['#term']) > 0) {
+    if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'cheaper_dearer') {
+      $destination = 'budget-predictor-image';
+
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $destination, array(
+          'attributes' => array(
+            'class' => 'button'
+          )
+        )),
+        '#weight' => 21,
+        '#value' => t('Cancel')
+      );
+      unset($form['#metatags']);
+      $form['description']['#access'] = FALSE;
+      $form['relations']['#access'] = FALSE;
+    }
+  }
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_budget_predictor_block_info() {
+  $blocks = array();
+  $blocks['budget_pradictor'] = array(
+    'info' => t('Widget: Budget Predictor'),
+  );
+  return $blocks;
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_budget_predictor_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'budget_pradictor':
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_budget_predictor');
+      $data = itg_budget_predictor_custom();
+      $block['content'] = $data;
+      break;
+  }
+  return $block;
+}
+
+/**
+ * Implementation of hook_form_views_exposed_form_alter().
+ * @param array $form
+ * @param array reference $form_state
+ */
+function itg_budget_predictor_form_views_exposed_form_alter(&$form, &$form_state) {
+  if (isset($form['#id']) && $form['#id'] == 'views-exposed-form-budget-predictor-image-page') {
+    $vocuvolary = taxonomy_vocabulary_machine_name_load('cheaper_dearer');
+    $form['name']['#autocomplete_path'] = 'texonomy/' . $vocuvolary->vid . '/autocomplete';
+    $form['name']['#attributes'] = array(
+      'placeholder' => t('Name')
+    );
+  }
+}

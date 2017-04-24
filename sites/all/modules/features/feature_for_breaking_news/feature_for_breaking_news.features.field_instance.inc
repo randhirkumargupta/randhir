@@ -103,7 +103,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'bundle' => 'field_breaking_content_details',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'EX: www.yourdomainname.com',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -327,6 +327,49 @@ function feature_for_breaking_news_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-breaking_news-field_cm_related_content_detail'.
+  $field_instances['node-breaking_news-field_cm_related_content_detail'] = array(
+    'bundle' => 'breaking_news',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 30,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_cm_related_content_detail',
+    'label' => 'Related Content Detail',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 32,
+    ),
+  );
+
   // Exported field_instance: 'node-breaking_news-field_common_related_content'.
   $field_instances['node-breaking_news-field_common_related_content'] = array(
     'bundle' => 'breaking_news',
@@ -366,6 +409,49 @@ function feature_for_breaking_news_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 18,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-breaking_news-field_common_short_description'.
+  $field_instances['node-breaking_news-field_common_short_description'] = array(
+    'bundle' => 'breaking_news',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 32,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_common_short_description',
+    'label' => 'Short description',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 36,
     ),
   );
 
@@ -452,48 +538,6 @@ function feature_for_breaking_news_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 6,
-    ),
-  );
-
-  // Exported field_instance: 'node-breaking_news-field_label'.
-  $field_instances['node-breaking_news-field_label'] = array(
-    'bundle' => 'breaking_news',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Short Description',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 7,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_label',
-    'label' => 'Short Description',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 5,
     ),
   );
 
@@ -622,7 +666,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   $field_instances['node-breaking_news-field_story_extra_large_image'] = array(
     'bundle' => 'breaking_news',
     'deleted' => 0,
-    'description' => 'Image Size (650 x 445)',
+    'description' => 'Image Size (647 x 363)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -668,7 +712,6 @@ function feature_for_breaking_news_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -865,7 +908,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   $field_instances['node-breaking_news-field_story_large_image'] = array(
     'bundle' => 'breaking_news',
     'deleted' => 0,
-    'description' => 'Image Size (300x350)',
+    'description' => 'Image Size (483x271)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -911,7 +954,6 @@ function feature_for_breaking_news_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -942,7 +984,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   $field_instances['node-breaking_news-field_story_medium_image'] = array(
     'bundle' => 'breaking_news',
     'deleted' => 0,
-    'description' => 'Image Size (300x225)',
+    'description' => 'Image Size (370x208)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -988,7 +1030,6 @@ function feature_for_breaking_news_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -1019,7 +1060,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   $field_instances['node-breaking_news-field_story_small_image'] = array(
     'bundle' => 'breaking_news',
     'deleted' => 0,
-    'description' => 'Image Size (210 x 145)',
+    'description' => 'Image Size (170 x 127)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1065,7 +1106,6 @@ function feature_for_breaking_news_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -1092,12 +1132,54 @@ function feature_for_breaking_news_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-breaking_news-field_story_snap_post'.
+  $field_instances['node-breaking_news-field_story_snap_post'] = array(
+    'bundle' => 'breaking_news',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 31,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_snap_post',
+    'label' => 'Display title',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 34,
+    ),
+  );
+
   // Exported field_instance: 'node-breaking_news-field_type'.
   $field_instances['node-breaking_news-field_type'] = array(
     'bundle' => 'breaking_news',
     'default_value' => array(
       0 => array(
-        'value' => 'Live Blog',
+        'value' => 'Breaking News',
       ),
     ),
     'deleted' => 0,
@@ -1143,13 +1225,15 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Content Type');
   t('Content details');
   t('Display on');
+  t('Display title');
+  t('EX: www.yourdomainname.com');
   t('Extra large image');
   t('Extra small image');
   t('Highlights');
-  t('Image Size (210 x 145)');
-  t('Image Size (300x225)');
-  t('Image Size (300x350)');
-  t('Image Size (650 x 445)');
+  t('Image Size (170 x 127)');
+  t('Image Size (370x208)');
+  t('Image Size (483x271)');
+  t('Image Size (647 x 363)');
   t('Image Size (88 x 66)');
   t('Large image');
   t('Mark as Breaking band');
@@ -1160,8 +1244,9 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Publish time should be 24 hr format');
   t('Redirection url');
   t('Related Content');
+  t('Related Content Detail');
   t('Section');
-  t('Short Description');
+  t('Short description');
   t('Small image');
   t('Tags');
   t('Title');

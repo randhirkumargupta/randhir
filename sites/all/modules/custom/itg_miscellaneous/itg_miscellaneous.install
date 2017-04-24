@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Install file for preview log.
+ */
+
+/**
+ * Implementation of hook_schema
+ * 
+ * @access public
+ * @return array
+ */
+function itg_miscellaneous_schema() {
+  $schema = array();
+  return $schema;
+}

@@ -13,3 +13,4 @@
   <span class="target-link" data-target-id="category"><?php print t('Categorization'); ?></span>  
   <span class="target-link" data-target-id="edit-metatags"><?php print t('SEO Meta Details'); ?></span>  
 </div>
+ 

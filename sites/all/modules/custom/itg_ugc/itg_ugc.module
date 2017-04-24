@@ -8,6 +8,9 @@
  *
  */
 
+module_load_include('inc', 'itg_ugc', 'include/ugc_inqueue_content_list');
+module_load_include('inc', 'itg_ugc', 'include/ugc_reject_content_list');
+
 /**
  * Implements hook_menu().
  */
@@ -16,6 +19,36 @@ function itg_ugc_menu() {
     'page callback' => 'itg_ugc_node_status_update',
     'page arguments' => array(1),
     'access arguments' => array('access reject ugc content link'),
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['ugc-inqueue-content'] = array(
+    'title' => 'Manage UGC',
+    'page callback' => 'itg_ugc_inqueue_content',
+    'access arguments' => array('access ugc list link'),
+    'type' => MENU_CALLBACK,
+    'file' => 'include/ugc_inqueue_content_list.inc',
+  );
+  
+  $items['ugc-reject-content'] = array(
+    'title' => 'Manage UGC',
+    'page callback' => 'itg_ugc_reject_content',
+    'access arguments' => array('access ugc list link'),
+    'type' => MENU_CALLBACK,
+    'file' => 'include/ugc_reject_content_list.inc',
+  );
+  
+  $items['ugc-view-content/%'] = array(
+    'title' => 'Manage UGC',
+    'page callback' => 'itg_ugc_view_content',
+    'page arguments' => array(1),
+    'access arguments' => array('access ugc list link'),
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['ugc-thank-you'] = array(
+    'page callback' => 'itg_ugc_thank_you',
+    'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
 
@@ -31,7 +64,84 @@ function itg_ugc_permission() {
       'title' => t('Ugc reject permission'),
       'description' => t('Ugc reject permission.'),
     ),
+    'access ugc list link' => array(
+      'title' => t('Ugc list link  permission'),
+      'description' => t('Ugc list link permission.'),
+    ),
   );
+}
+
+/**
+ * Implements hook_rules_action_info().
+ *
+ * @return array
+ */
+function itg_ugc_rules_action_info() {
+  return array(
+    'itg_ugc_send_follow_story_content_mail' => array(
+      'label' => t('Send Mail to users for story content'),
+      'parameter' => array(
+        'node' => array('type' => 'node', 'label' => t('Current Node')),
+      ),
+      'group' => t('ITG'),            
+    ),
+  );
+}
+
+/**
+ * Implements callback function for 'itg_ugc_send_follow_story_content_mail'
+ * @param type $node
+ */
+function itg_ugc_send_follow_story_content_mail($node) {
+  if ($node->type == 'story')
+  {
+    $get_user_id = itg_get_follow_story_user($node->nid, 1);
+    if(!empty($get_user_id)) {
+      foreach ($get_user_id as $follow_user) {
+
+        module_load_include('inc', 'itg_ugc', 'include/itg_follow_story_mail');
+        
+        if (function_exists('itg_mail_templates_get_mailcontent')) {
+          $mail_data = itg_mail_templates_get_mailcontent($node, 'Follow Story');
+          $mail_subject = $mail_data->field_mail_subject_follwo_story[LANGUAGE_NONE][0]['value'];
+        }
+
+        $mail_content = itg_follow_story_get_mail_content($node);
+
+        $params = array(
+          'body' => $mail_content,
+          'subject' => $mail_subject,
+        );
+
+        $to = itg_get_user_email_by_id($follow_user);
+        if (!empty($to))
+        {
+          $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+          if ($mail['result'])
+          {
+            return TRUE;
+          }
+          else
+          {
+            $error_msg = 'Failed to send the email!';
+            watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+            return FALSE;
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements itg_get_user_email_by_id
+ * @param int $uid
+ */
+function itg_get_user_email_by_id($uid) {
+  $query = db_select('users', 'u')
+            ->fields('u', array('mail'))
+            ->condition('u.uid', $uid, '=');
+  return $query->execute()->fetchField();
 }
 
 /**
@@ -40,38 +150,53 @@ function itg_ugc_permission() {
  */
 function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-
-  // get id of ugc content
+  
+// get id of ugc content
   $url_nid = arg(3);
+  $ugc_heading = '';
+  // condition for front user 
+  if ($user->uid == 0 && !empty($_GET['type']) && $form_id == 'ugc_node_form') {
+    $form['field_ugc_ctype']['#attributes']['class'][] = 'element-hidden';
+    if (isset($_GET['type'])) {
+      $form['ugc_head'] = array(
+       '#weight' => -1,   
+       '#markup' => '<div class="ugc-top-heading"><h2>Post Your Content</h2></div>');
+      $form['field_ugc_ctype'][LANGUAGE_NONE]['#default_value'] = $_GET['type'];
+    }
+    $form['field_section']['#weight'] = 3;
+    $form['#attributes']['class'][] = 'ugc-custom-wrapper';
+  }
+
 
   if (empty($form['nid']['#value'])) {
     // prefill input value in blog form
     if ($form_id == 'blog_node_form' && !empty($url_nid)) {
       // get node values
-      $node = node_load($url_nid);
+     // $node = node_load($url_nid);
+      $mongo_details = itg_ugc_content_details($url_nid);
 
-      $form['title']['#default_value'] = $node->title;
-      $form['field_blog_long_description'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
-      $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
+      $form['title']['#default_value'] = $mongo_details['title'];
+      $form['field_blog_long_description'][LANGUAGE_NONE][0]['#default_value'] = $mongo_details['description'];
+      $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['unid'];
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
-      $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $node->field_section[LANGUAGE_NONE][0]['tid'];
+      $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
     }
 
     // prefill input value in story form
     if ($form_id == 'story_node_form' && !empty($url_nid)) {
       // get node values
-      $node = node_load($url_nid);
-      $ugc_user_name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
-      $form['title']['#default_value'] = $node->title;
-      $form['field_story_long_head_line'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
-      $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
-      $form['body'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
-      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
+      $mongo_details = itg_ugc_content_details($url_nid);
+      $ugc_user_name = $mongo_details['name'];
+      $form['title']['#default_value'] = $mongo_details['title'];
+      $form['field_story_long_head_line'][LANGUAGE_NONE][0]['value']['#value'] = $mongo_details['title'];
+      $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#value'] = $mongo_details['title'];
+      $form['body'][LANGUAGE_NONE][0]['#default_value'] = $mongo_details['description'];
+      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['unid'];
       $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#prefix'] = '<div style="display: none">';
       $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#suffix'] = '</div>';
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
-      $form['field_stroy_city'][LANGUAGE_NONE]['#default_value'] = $node->field_user_city[LANGUAGE_NONE][0]['value'];
-      $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $node->field_section[LANGUAGE_NONE][0]['tid'];
+      $form['field_stroy_city'][LANGUAGE_NONE]['#default_value'] = $mongo_details['city'];
+      $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
       if (!empty($ugc_user_name)) {
         $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
         $form['field_story_reporter']['#suffix'] = '<span class="byline">' . $ugc_user_name . ' (UGC User)</span></div>';
@@ -81,40 +206,48 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     // prefill input value in videogallery form
     if ($form_id == 'videogallery_node_form' && !empty($url_nid)) {
       // get node values
-      $node = node_load($url_nid);
-      $ugc_user_name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
-      $form['title']['#default_value'] = $node->title;
-      $form['field_story_long_head_line'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
-      $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#default_value'] = $node->title;
-      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
+      drupal_add_css(".page-node-add-videogallery #field-video-upload-values tbody tr:first-child {display:block !important};
+      ", 'inline');
+      $mongo_details = itg_ugc_content_details($url_nid);
+      $ugc_user_name = $mongo_details['name'];
+      $form['title']['#default_value'] = $mongo_details['title'];
+      $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['title'];
+      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['unid'];
       $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#prefix'] = '<div style="display: none">';
       $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#suffix'] = '</div>';
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
-      $form['field_stroy_city'][LANGUAGE_NONE]['#default_value'] = $node->field_user_city[LANGUAGE_NONE][0]['value'];
-      $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $node->field_section[LANGUAGE_NONE][0]['tid'];
+      $form['field_stroy_city'][LANGUAGE_NONE]['#default_value'] = $mongo_details['city'];
+      $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
       if (!empty($ugc_user_name)) {
         $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
         $form['field_story_reporter']['#suffix'] = '<span class="byline">' . $ugc_user_name . ' (UGC User)</span></div>';
       }
       // assign value in first field collection item
-      $form['field_upload_video']['und'][0]['#default_value']['fid'] = $node->field_astro_video[LANGUAGE_NONE][0]['fid'];
+      foreach ($form['field_video_upload']['und'] as $delta => $field) {
+        if (is_numeric($delta)) {
+          // assign value in first field collection item
+          $form['field_video_upload'][LANGUAGE_NONE][$delta]['field_videogallery_video_upload'][LANGUAGE_NONE][0]['#default_value']['fid'] = $mongo_details['video'];
+        }
+      }
     }
 
     // prefill input value in podcast form
     if ($form_id == 'podcast_node_form' && !empty($url_nid)) {
       // get node values
-      $node = node_load($url_nid);
-      $ugc_user_name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
-      $form['title']['#default_value'] = $node->title;
-      $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#default_value'] = $node->title;
-      $form['field_story_kicker_text'][LANGUAGE_NONE][0]['value']['#default_value'] = $node->title;
-      $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
+      $mongo_details = itg_ugc_content_details($url_nid);
+      $ugc_user_name = $mongo_details['name'];
+      $form['title']['#default_value'] = $mongo_details['title'];
+      $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['title'];
+      $form['field_podcast_kicker_message'][LANGUAGE_NONE][0]['#default_value'] = $mongo_details['description'];
+      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['unid'];
+      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#prefix'] = '<div style="display: none">';
+      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#suffix'] = '</div>';
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
-      $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $node->field_section[LANGUAGE_NONE][0]['tid'];
+      $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
       foreach ($form['field_podcast_audio_upload']['und'] as $delta => $field) {
         if (is_numeric($delta)) {
           // assign value in first field collection item
-          $form['field_podcast_audio_upload'][LANGUAGE_NONE][$delta]['field_podcast_upload_audio_file'][LANGUAGE_NONE][0]['#default_value']['fid'] = $node->field_recipe_audio[LANGUAGE_NONE][0]['fid'];
+          $form['field_podcast_audio_upload'][LANGUAGE_NONE][$delta]['field_podcast_upload_audio_file'][LANGUAGE_NONE][0]['#default_value']['fid'] = $mongo_details['audio'];
         }
       }
     }
@@ -122,20 +255,20 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     // prefill input value in recipe form
     if ($form_id == 'recipe_node_form' && !empty($url_nid)) {
       // get node values
-      $node = node_load($url_nid);
-      $ugc_user_name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
-      $form['title']['#default_value'] = $node->title;
+      $mongo_details = itg_ugc_content_details($url_nid);
+      $ugc_user_name = $mongo_details['name'];
+      $form['title']['#default_value'] = $mongo_details['title'];
 
-      if (!empty($node->field_astro_video[LANGUAGE_NONE][0]['fid'])) {
+      if (!empty($mongo_details['video'])) {
         $form['field_recipe_content_type'][LANGUAGE_NONE]['#default_value'] = 'Video';
-        $form['field_recipe_video'][LANGUAGE_NONE][0]['#default_value']['fid'] = $node->field_astro_video[LANGUAGE_NONE][0]['fid'];
+        $form['field_recipe_video'][LANGUAGE_NONE][0]['#default_value']['fid'] = $mongo_details['video'];
       }
 
-      $form['field_recipe_description'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
-      $form['field_story_extra_large_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $node->field_ugc_upload_photo[LANGUAGE_NONE][0]['fid'];
-      $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
+      $form['field_recipe_description'][LANGUAGE_NONE][0]['#default_value'] = $mongo_details['description'];
+      $form['field_story_extra_large_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $mongo_details['image'];
+      $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['unid'];
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
-      $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $node->field_section[LANGUAGE_NONE][0]['tid'];
+      $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
       if (!empty($ugc_user_name)) {
         $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
         $form['field_story_reporter']['#suffix'] = '<span class="byline">' . $ugc_user_name . ' (UGC User)</span></div>';
@@ -143,46 +276,96 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     }
 
     // prefill input value in photogallery form
-    if ($form_id == 'photogallery_node_form' && !empty($url_nid)) {
+    if ($form_id == 'photogallery_node_form' && !empty($url_nid))
+    {
       // get node values
-      $node = node_load($url_nid);
-
-      $form['title']['#default_value'] = $node->title;
-      $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
+      $mongo_details = itg_ugc_content_details($url_nid);
+      $form['title']['#default_value'] = $mongo_details['title'];
+      $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['unid'];
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
-      $form['field_gallery_kicer'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
-      $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $node->field_section[LANGUAGE_NONE][0]['tid'];
+      $form['field_gallery_kicer'][LANGUAGE_NONE][0]['#default_value'] = $mongo_details['description'];
+      $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
 
-      if (empty($node->field_ugc_personalization_photo['und'][0]['value'])) {
+      if (!empty($mongo_details['image']))
+      {
         foreach ($form['field_gallery_image']['und'] as $delta => $field) {
-          if (is_numeric($delta)) {
+          if (is_numeric($delta))
+          {
             // assign value in first field collection item
-            $form['field_gallery_image'][LANGUAGE_NONE][$delta]['field_images'][LANGUAGE_NONE][0]['#default_value']['fid'] = $node->field_ugc_upload_photo[LANGUAGE_NONE][0]['fid'];
-            $form['field_gallery_image'][LANGUAGE_NONE][$delta]['field_image_caption'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
+            $form['field_gallery_image'][LANGUAGE_NONE][$delta]['field_images'][LANGUAGE_NONE][0]['#default_value']['fid'] = $mongo_details['image'];
+            if ($mongo_details['title'] != "")
+            {
+              $form['field_gallery_image'][LANGUAGE_NONE][$delta]['field_image_caption'][LANGUAGE_NONE][0]['value']['#value'] = $mongo_details['title'];
+            }
           }
         }
       }
-      else {
-        $collection_id = $node->field_ugc_personalization_photo['und'][0]['value'];
-        $collection_value = field_collection_item_load($collection_id);
-        $form['field_gallery_image'][LANGUAGE_NONE][0]['field_images'][LANGUAGE_NONE][0]['#default_value']['fid'] = $collection_value->field_ugc_upload_photo['und'][0]['fid'];
-        $form['field_gallery_image']['und'][0]['field_image_caption']['und'][0]['value']['#default_value'] = $collection_value->field_story_short_headline['und'][0]['value'];
+      else
+      {
+        $multiple_image = explode(',', $mongo_details['multiple_image']);
+        $multiple_caption = explode(',', $mongo_details['image_caption']);
+        //$collection_id = $node->field_ugc_personalization_photo['und'][0]['value'];
+        //$collection_value = field_collection_item_load($collection_id);
+        //$form['field_gallery_image'][LANGUAGE_NONE][0]['field_images'][LANGUAGE_NONE][0]['#default_value']['fid'] = $collection_value->field_ugc_upload_photo['und'][0]['fid'];
+        foreach($multiple_image as $key => $value) {
+        $form['field_gallery_image'][LANGUAGE_NONE][$key]['field_images'][LANGUAGE_NONE][0]['#default_value']['fid'] = $value;
+        }
+        foreach($multiple_caption as $key => $value) {
+        $form['field_gallery_image']['und'][$key]['field_image_caption']['und'][0]['value']['#default_value'] = $value;
+        }
+//        if ($collection_value->field_story_short_headline['und'][0]['value'] != "")
+//        {
+//          $form['field_gallery_image']['und'][0]['field_image_caption']['und'][0]['value']['#default_value'] = $collection_value->field_story_short_headline['und'][0]['value'];
+//        }
+
         drupal_add_js('jQuery(document).ready(function() {
                     jQuery("#edit-field-gallery-image-und-add-more").mousedown();});', array('type' => 'inline', 'scope' => 'footer'));
       }
     }
   }
 
-  $user_fields = user_load($user->uid);
+  
+  // alter the section for election xml 
+  if ($form_id == 'election_graph_xml_node_form') {
+    
+   
+    $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+    foreach ($tax as $key => $term) {
+
+      if (!itg_category_manager_term_state($term->tid)) {
+        unset($tax[$key]);
+      }
+      
+    }
+
+    $op = array("_none" => "Select Category");
+    foreach ($tax as $key => $val) {
+      $op[$val->tid] = $val->name;
+    }
+
+    $form['field_section']['#title'] = array('All' => '- Any -');
+    $form['field_section']['und']['#options'] = $op;
+  }
 
   if ($form_id == 'ugc_node_form') {
-    if ($user->uid != '1') {
+    $form['field_user_name'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('Name'));
+    $form['field_user_email'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('Email'));
+    $form['field_user_city'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('City'));
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+    $form['field_user_message']['#attributes'] = array('placeholder' => t('Description'));
+    if($user->uid && $user->uid != 0) {
+    $form['field_user_message']['und'][0]['#format'] = 'front_user';
+    }
+    $user_fields = user_load($user->uid);
+   
+   if ($user->uid != '1') {
       // hide source and type field from other users
       if ($form_id == 'ugc_node_form') {
         $form['field_story_source_type']['#access'] = FALSE;
         $form['field_source']['#access'] = FALSE;
       }
     }
+    
     $type = "ugc";
     $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
     foreach ($tax as $key => $term) {
@@ -268,7 +451,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
           ),
         ),
         'invisible' => array(
-          ':input[name="field_ugc_ctype[und]"]' => array('value' => 'photogallery'),
+          ':input[name="field_ugc_ctype[und]"]' => array(array('value' => 'photogallery'), array('value' => '_none')),
         ),
       );
 
@@ -321,6 +504,141 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
         );
       }
     }
+    unset($form['actions']['submit']['#submit']);
+    $form['#submit'] = array('ugc_form_submit_handler');
+  }
+}
+
+/**
+ * Implements ugc_form_submit_handler().
+ *
+ * {@inheritdoc}
+ */
+function ugc_form_submit_handler($form, &$form_state) {
+  global $user;
+  $arg = arg();
+  $unique_id = time();
+  $source_type = $form_state['values']['field_ugc_ctype'][LANGUAGE_NONE][0]['value'];
+  $name = $form_state['values']['field_user_name'][LANGUAGE_NONE][0]['value'];
+  $email = $form_state['values']['field_user_email'][LANGUAGE_NONE][0]['value'];
+  $city = $form_state['values']['field_user_city'][LANGUAGE_NONE][0]['value'];
+  $section = $form_state['values']['field_section'][LANGUAGE_NONE][0]['tid'];
+  $content_type = $form_state['values']['field_ugc_ctype'][LANGUAGE_NONE][0]['value'];
+  $title = $form_state['values']['title'];
+  $description = $form_state['values']['field_user_message'][LANGUAGE_NONE][0]['value'];
+  $image = $form_state['values']['field_ugc_upload_photo'][LANGUAGE_NONE][0]['fid'];
+  $video = $form_state['values']['field_astro_video'][LANGUAGE_NONE][0]['fid'];
+  $audio = $form_state['values']['field_recipe_audio'][LANGUAGE_NONE][0]['fid'];
+  $publish_date = date('d/m/Y');
+  $publish_date_time = date('d-m-Y H:i:s');
+  
+  // check for city and byline
+    $cat_check = itg_category_manager_get_term_from_name($city, CITY_MANAGMENT);
+    if (!empty($cat_check)) {
+      $city = $city;
+    }
+    else {
+      $term = new stdClass();
+      $term->name = $city;
+      $term->vid = CITY_MANAGMENT;
+      taxonomy_term_save($term);
+      $new_cat = itg_category_manager_get_term_from_name($city, CITY_MANAGMENT);
+      $city = $city;
+    }
+    
+    // multi photo condition
+  if (!empty($form['field_ugc_personalization_photo']['und']))
+  {
+    foreach ($form['field_ugc_personalization_photo']['und'] as $delta => $field) {
+      if (is_numeric($delta))
+      {
+        // assign value in first field collection item
+        $photo_array[] = $form['field_ugc_personalization_photo'][LANGUAGE_NONE][$delta]['field_ugc_upload_photo'][LANGUAGE_NONE][0]['fid']['#value'];
+        $photo_caption[] = $form['field_ugc_personalization_photo'][LANGUAGE_NONE][$delta]['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#value'];
+      }
+    }
+    
+    $multiple_image = implode(',', $photo_array);
+    $multiple_caption = implode(',', $photo_caption);
+  }
+
+  if (!empty($image))
+  {
+    $file = file_load($image);
+    file_usage_add($file, 'itg_custom_mongo', 'file', 1);
+    ugc_form_file_status($image);
+  }
+  if (!empty($video))
+  {
+    $file = file_load($video);
+    file_usage_add($file, 'itg_custom_mongo', 'file', 2);
+    ugc_form_file_status($video);
+  }
+  if (!empty($audio))
+  {
+    $file = file_load($audio);
+    file_usage_add($file, 'itg_custom_mongo', 'file', 3);
+    ugc_form_file_status($audio);
+  }
+  if (!empty($multiple_image))
+  {
+    ugc_form_file_status($multiple_image, 'yes');
+  }
+
+  if (function_exists('mongodb'))
+  {
+    $con = mongodb();
+    $people = $con->ugc_details;
+    $qry = array("unid" => $unique_id,"name" => $name, "email" => $email, "city" => $city, "section" => $section, "content_type" => $content_type, "title" => $title, "description" => $description, "image" => $image, "video" => $video, "audio" => $audio, "publish_date" => $publish_date, "publish_date_time" => $publish_date_time, "publish_status" => "", "updated_by" => "", "status" => 1, "rejected_date" => "", "uid" => $user->uid, "multiple_image" => $multiple_image, "image_caption" => $multiple_caption);
+    $result = $people->insert($qry);
+  }
+  
+  if (isset($_SESSION['messages']['status']))
+  {
+    unset($_SESSION['messages']['status']);
+  }
+  // Set redirection after submit.
+  if ($arg[0] == 'personalization' && $arg[1] == 'my-content') {
+    $_REQUEST['destination'] = 'personalization/my-content';
+    $form_state['redirect'] = array(
+      'personalization/my-content',
+      array('query' => array('ugc' => 'success'))
+    );
+  }
+  else
+  {
+    $_REQUEST['destination'] = 'ugc-thank-you';
+    $form_state['redirect'] = 'ugc-thank-you';
+  }
+}
+
+/**
+ * Implements ugc_form_submit_handler().
+ *
+ * {@inheritdoc}
+ * @param int $fid
+ * @param string $multiple
+ */
+function ugc_form_file_status($fid, $multiple = NULL) {
+  if (!empty($fid) && empty($multiple))
+  {
+    db_update('file_managed') // Table name no longer needs {}
+        ->fields(array('status' => 1))
+        ->condition('fid', $fid)
+        ->execute();
+  }
+
+  if (!empty($fid) && !empty($multiple))
+  {
+    $fid_exp = explode(',', $fid);
+    foreach($fid_exp as $value) {
+      $file = file_load($value);
+      file_usage_add($file, 'itg_custom_mongo', 'file', 4);
+      db_update('file_managed') // Table name no longer needs {}
+          ->fields(array('status' => 1))
+          ->condition('fid', $value)
+          ->execute();
+    }
   }
 }
 
@@ -344,8 +662,9 @@ function itg_ugc_form_custom_callback($form, &$form_state) {
     $form_state['redirect'] = 'personalization/my-content';
   }
   else {
-    $_REQUEST['destination'] = 'node/add/ugc';
-    $msg = itg_custom_message($node_type, $workbench_current_state = NULL, arg(1), $title, $_REQUEST['destination']);
+    $_REQUEST['destination'] = 'ugc-thank-you';
+    $form_state['redirect'] = 'ugc-thank-you';
+    //$msg = itg_custom_message($node_type, $workbench_current_state = NULL, arg(1), $title, $_REQUEST['destination']);
   }
 }
 
@@ -441,52 +760,6 @@ function itg_ugc_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
     $form['title']['#autocomplete_path'] = 'content-title-list/ugc/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
-
-  // code to open alert box when click on reject link in ugc listing
-  if ($form['#id'] == 'views-exposed-form-manage-ugc-page') {
-    drupal_add_js('jQuery(document).ready(function() {
-                    jQuery(".ugc-reject").click(function() {
-                    var reject_status = "reject";
-                    if (reject_status == "reject") {
-                       var msg = confirm("Are you sure you want to reject this content?");
-                       if (msg == true) {
-                           return true;
-                       }
-                       return false;
-                    }
-                    return true;
-                 });
-          });', array('type' => 'inline', 'scope' => 'footer'));
-  }
-}
-
-/**
- * Implement hook_node_presave
- * {@inheritdoc}
- */
-function itg_ugc_node_presave($node) {
-  if ($node->type == 'ugc') {
-    if (function_exists('itg_ugc_bad_words')) {
-      $ugc_description = itg_ugc_bad_words($node->field_user_message[LANGUAGE_NONE][0]['value']);
-      $node->field_user_message[LANGUAGE_NONE][0]['value'] = $ugc_description;
-      $node->field_user_message[LANGUAGE_NONE][0]['format'] = 'full_html';
-    }
-
-    // check for city and byline
-    $user_city = $node->field_user_city[LANGUAGE_NONE][0]['value'];
-    $cat_check = itg_category_manager_get_term_from_name($user_city, 2);
-    if (!empty($cat_check)) {
-      $node->field_user_city[LANGUAGE_NONE][0]['value'] = $user_city;
-    }
-    else {
-      $term = new stdClass();
-      $term->name = $user_city;
-      $term->vid = 2;
-      taxonomy_term_save($term);
-      $new_cat = itg_category_manager_get_term_from_name($user_city, 2);
-      $node->field_user_city[LANGUAGE_NONE][0]['value'] = $user_city;
-    }
-  }
 }
 
 /**
@@ -496,37 +769,49 @@ function itg_ugc_node_presave($node) {
  */
 function itg_ugc_node_status_update($nid, $title) {
   global $user;
-  $node = node_load($nid);
+  if (function_exists('mongodb'))
+  {
+    $con = mongodb();
+    if ($con)
+    {
+      if (function_exists('itg_ugc_content_details'))
+      {
+        if(!empty($title)) {
+        $ugc_content_details = itg_ugc_content_details($nid, 1);
+        } else {
+        $ugc_content_details = itg_ugc_content_details($nid);
+        }
+        
+        $to = trim($ugc_content_details['email']);
+        $uname = trim($ugc_content_details['name']);
+        $type = trim($ugc_content_details['content_type']);
+      }
+      
+      $people = $con->ugc_details;
+    }
+  }
   $node_author = user_load($user->uid);
   $rejected_by = $node_author->field_first_name[LANGUAGE_NONE][0]['value'] . ' ' . $node_author->field_last_name[LANGUAGE_NONE][0]['value'];
-  // set status property to 0
-  $node->status = 0;
-  if (!empty($title)) {
-    $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 1;
-  }
-  $node->field_source[LANGUAGE_NONE][0]['value'] = $rejected_by;
-  // re-save the node
-  node_save($node);
 
-  // code for redirect after node save or reject
-  if (!empty($title)) {
+  if (!empty($title))
+  {
+    $newdata = array('$set' => array('publish_status' => 1, 'updated_by' => trim($rejected_by)));
+    $people->update(array("unid" => (int)$nid), $newdata);
     module_load_include('inc', 'itg_ugc', 'include/itg_ugc_mail');
-    $to = $node->field_user_email[LANGUAGE_NONE][0]['value'];
-    $uname = $node->field_user_name[LANGUAGE_NONE][0]['value'];
-    $type = $node->field_ugc_ctype[LANGUAGE_NONE][0]['value'];
     $mail_content = itg_ugc_get_mail_content($uname, $type, 'Published', $to);
-
-    $_GET['destination'] = 'manage-ugc';
+    drupal_set_message(t($ugc_content_details['title'] . ' has been Published successfully.'));
+    $_GET['destination'] = 'ugc-inqueue-content';
   }
-  else {
+  else
+  {
+    $pid = new MongoId($nid);
+    $rejected_date = date('d/m/Y');
+    $newdata = array('$set' => array('status' => 0, 'updated_by' => trim($rejected_by), 'rejected_date' => $rejected_date));
+    $people->update(array("_id" => $pid), $newdata);
     module_load_include('inc', 'itg_ugc', 'include/itg_ugc_mail');
-    $to = $node->field_user_email[LANGUAGE_NONE][0]['value'];
-    $uname = $node->field_user_name[LANGUAGE_NONE][0]['value'];
-    $type = $node->field_ugc_ctype[LANGUAGE_NONE][0]['value'];
     $mail_content = itg_ugc_get_mail_content($uname, $type, 'Rejected', $to);
-
-    drupal_set_message(t($node->title . ' has been rejected successfully.'));
-    drupal_goto('manage-ugc');
+    drupal_set_message(t($ugc_content_details['title'] . ' has been rejected successfully.'));
+    drupal_goto('ugc-inqueue-content');
   }
 }
 
@@ -541,7 +826,7 @@ function itg_ugc_user_mail($key, &$message, $params) {
     case 'send_Rejected_mail_to_ugc_user':
       $headers = array(
         'MIME-Version' => '1.0',
-        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
         'Content-Transfer-Encoding' => '8Bit',
         'X-Mailer' => 'Drupal'
       );
@@ -555,7 +840,21 @@ function itg_ugc_user_mail($key, &$message, $params) {
     case 'send_Published_mail_to_ugc_user':
       $headers = array(
         'MIME-Version' => '1.0',
-        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Transfer-Encoding' => '8Bit',
+        'X-Mailer' => 'Drupal'
+      );
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['body'];
+      foreach ($headers as $key => $value) {
+        $message['headers'][$key] = $value;
+      }
+      break;
+    
+      case 'send_mail_to_follow_story_user':
+      $headers = array(
+        'MIME-Version' => '1.0',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
         'Content-Transfer-Encoding' => '8Bit',
         'X-Mailer' => 'Drupal'
       );
@@ -588,17 +887,29 @@ function itg_ugc_node_view($node, $view_mode, $langcode) {
  * @param type $node
  */
 function itg_ugc_node_insert($node) {
-  if ($node->type == 'story' || $node->type == 'blog' || $node->type == 'recipe' || $node->type == 'photogallery' || $node->type == 'videogallery' || $node->type == 'podcast') {
+  if ($node->type == 'story' || $node->type == 'blog' || $node->type == 'recipe' || $node->type == 'photogallery' || $node->type == 'videogallery' || $node->type == 'podcast')
+  {
     $title = $node->title;
-
-    $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
-    if ($node->type == 'story' || $node->type == 'videogallery') {
-      $source_id = $node->field_story_ugc_source_id[LANGUAGE_NONE][0]['value'];
+    $source_type = '';
+    if (!empty($node->field_story_source_type[LANGUAGE_NONE][0]['value']))
+    {
+      $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
     }
-    else {
+    if (!empty($node->field_story_ugc_source_id[LANGUAGE_NONE][0]['value']))
+    {
+      if ($node->type == 'story' || $node->type == 'videogallery' || $node->type = 'podcast')
+      {
+        $source_id = $node->field_story_ugc_source_id[LANGUAGE_NONE][0]['value'];
+      }
+    }
+    else
+    {
+      if(!empty($node->field_story_source_id[LANGUAGE_NONE])){
       $source_id = $node->field_story_source_id[LANGUAGE_NONE][0]['value'];
+      }
     }
-    if ($source_type == 'UGC' && !empty($source_id)) {
+    if ($source_type == 'UGC' && !empty($source_id))
+    {
       itg_ugc_node_status_update($source_id, $title);
     }
   }
@@ -630,5 +941,106 @@ function itg_ugc_views_pre_render(&$view) {
   if ($view->name == "manage_ugc") {
     $header_content_ugc = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $view->attachment_before = $header_content_ugc;
+  }
+}
+
+/**
+ * Implements itg_ugc_thank_you
+ */
+function itg_ugc_thank_you() {
+ print '<div class="ugc-success" style="height:100%; background-color:#fff;"><h2>Thank you !</h2><p>UGC content has been submitted successfully for further review and approval.</p></div>';
+}
+
+/**
+ * Implements itg_ugc_view_content().
+ * @param string $unique_id
+ */
+function itg_ugc_view_content($unique_id) {
+  global $base_url;
+  $arg = arg();
+  $path = $base_url.'/'.$arg[2];
+  if (!empty($unique_id))
+  {
+    if (function_exists('mongodb'))
+    {
+      $con = mongodb();
+      if ($con)
+      {
+        $pid = new MongoId($unique_id);
+        $people = $con->ugc_details;
+        $userData = $people->find(array("_id" => $pid))->limit($limit);
+        $output = '';
+        $output.= '<div id="ugc-content-view"><ul>';
+
+        foreach ($userData as $final_view) {
+          $user_message = itg_ugc_bad_words($final_view['description']);
+          $output.= '<li>'.t('<strong>Content Type :</strong> <span>') . $final_view['content_type'] . '</span></li>';
+          $output.= '<li>'.t('<strong>Name :</strong> <span>') . $final_view['name'] . '</span></li>';
+          $output.= '<li>'.t('<strong>Email :</strong><span>') . $final_view['email'] . '</span></li>';
+          $output.= '<li>'.t('<strong>Description :</strong> <span>') . $user_message .'</span></li>';
+          $output.= '<li>'.t('<strong>City :</strong> <span>') . $final_view['city'] . '</span></li>';
+          if(!empty($final_view['image'])) {
+          $file = file_load($final_view['image']);
+          $output.= '<li>'.'<strong>Image :</strong><span> <img src="'.file_create_url($file->uri).'" alt="'.  file_create_url($file->uri).'"/></span></li>';
+          }
+          if(!empty($final_view['video'])) {
+          $file = file_load($final_view['video']);
+          $output.= '<li>'.'<strong>Video :</strong><span> <a target="_blank" href="'.file_create_url($file->uri).'">'.file_create_url($file->uri).'</a></span></li>';
+          }
+          if(!empty($final_view['audio'])) {
+          $file = file_load($final_view['audio']);
+          $output.= '<li>'.'<strong>Audio :</strong><span> <a target="_blank" href="'.file_create_url($file->uri).'">'.file_create_url($file->uri).'</a></span></li>';
+          }
+          $output.= '<li>'.'<strong>Post date :</strong><span> ' . $final_view['publish_date'] . '</span></li>';
+          //$output.= '<a href="'.$path.'">'.t('Back').'</a>';
+        }
+
+        $output.= '</ul></div>';
+
+        return $output;
+      }
+    }
+  }
+}
+
+/**
+ * Implements itg_ugc_content_details().
+ *   Get details value by passing id.
+ * @param int $nid
+ */
+function itg_ugc_content_details($nid, $un = NULL) {
+  $data = '';
+  if (function_exists('mongodb') && !empty(trim($nid))) {
+    $con = mongodb();
+    $people = $con->ugc_details;
+    if(!empty($un)) {
+    $cond = array('unid' => (int)$nid);  
+    } else {
+   try {
+        $pid = new MongoId($nid);
+        $cond = array('_id' => $pid);
+      }
+      catch (Exception $ex) {
+        drupal_set_message($ex->getMessage(), 'error');
+      }
+    }
+    $cursor = $people->find($cond);
+    foreach ($cursor as $document) {
+      $data['name'] = $document['name'];
+      $data['email'] = $document['email'];
+      $data['city'] = $document['city'];
+      $data['title'] = $document['title'];
+      $data['content_type'] = $document['content_type'];
+      $data['image'] = $document['image'];
+      $data['multiple_image'] = $document['multiple_image'];
+      $data['image_caption'] = $document['image_caption'];
+      $data['video'] = $document['video'];
+      $data['audio'] = $document['audio'];
+      $data['description'] = $document['description'];
+      $data['section'] = $document['section'];
+      $data['unid'] = $document['unid'];
+      $data['_id'] = $document['_id'];
+    }
+    return $data;
   }
 }

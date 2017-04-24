@@ -1,0 +1,11 @@
+name = Feature for most election popular
+description = Feature for most election popular
+core = 7.x
+package = Features
+version = 7.x-1.10
+dependencies[] = views
+dependencies[] = views_customstyle
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = most_popular
+features_exclude[dependencies][ctools] = ctools

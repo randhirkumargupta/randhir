@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the itg analytics module.
+ */
+
+/**
+ * Implements HOOK_view_schema.
+ * {@inheritdoc}
+ */
+function itg_analytics_schema() {
+  $schema = array();
+  $schema['itg_node_analytics_count_data'] = array(
+    'description' => 'table holdes analytics',
+    'fields' => array(
+      'tid' => array(
+        'description' => 'primary key',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'nodeid',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'count' => array(
+        'description' => 'analytics count',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('tid'),
+  );
+  return $schema;
+}

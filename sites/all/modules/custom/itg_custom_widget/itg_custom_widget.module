@@ -1,0 +1,357 @@
+<?php
+
+/**
+ * Implements hook_permission().
+ */
+function itg_custom_widget_permission() {
+  return array(
+    'administer itg custom widget' => array(
+      'title' => t('administer itg custom widget') ,
+      'description' => t('administer itg custom widget module permission') ,
+    ) ,
+  );
+}
+
+/**
+ * Implements hook_views_api().
+ * {@inheritdoc}
+ */
+function itg_custom_widget_views_api() {
+  return array(
+    'api' => 3 ,
+    'path' => drupal_get_path('module' , 'itg_custom_widget') . '/includes/views' ,
+  );
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_custom_widget_menu() {
+  $items = array();
+  $items['remove_from_custom_widget/%/%'] = array(
+    'page callback' => 'remove_from_custom_widget' ,
+    'page arguments' => array(1 , 2) ,
+    'access arguments' => array('administer itg custom widget') ,
+  );
+  $items['custom_widget_name_list/%'] = array(
+    'page callback' => 'itg_custom_widget_name_list' ,
+    'page arguments' => array(1) ,
+    'access arguments' => array('administer itg custom widget') ,
+  );
+  return $items;
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_custom_widget_block_info() {
+  $blocks['custom_content_widget'] = array(
+    'info' => t('Widget: Custom content widget') ,
+  );
+  return $blocks;
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_custom_widget_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    // section ordering reordering widget case
+    case 'custom_content_widget':
+      $data = itg_custom_widget_ordering_data_from_title("asd12312312");
+      $block['content'] = theme("itg_custom_widget_ordering_data" , array("data" => $data));
+      break;
+  }
+  return $block;
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_custom_widget_theme() {
+
+  return array(
+    'itg_custom_widget_ordering_data' => array(
+      'template' => 'templates/itg-custom-widget-ordering-data' ,
+    ) ,
+  );
+}
+
+/**
+ * Function to return custom content widget array.
+ * 
+ * @param string $title
+ * @return array
+ */
+function itg_custom_widget_ordering_data_from_title($title) {
+  if ( !empty($title) ) {
+
+    $query = db_select('itg_custom_widgets_data' , 'icw');
+    $query->leftJoin('node' , 'n' , 'n.nid=icw.nid');
+    //join  for field value
+    $query->leftJoin('field_data_field_story_extra_large_image' , 'eli' , 'eli.entity_id=n.nid');
+    $query->leftJoin('file_managed' , 'eli_file' , 'eli_file.fid=eli.field_story_extra_large_image_fid');
+    $query->leftJoin('field_data_field_story_kicker_text' , 'kt' , 'kt.entity_id=n.nid');
+    $query->fields('eli_file' , array('uri'));
+    $query->fields('kt' , array('field_story_kicker_text_value'));
+    $query->fields('n' , array('nid' , 'title' , 'created' , 'type' , 'uid'));
+    //end
+    $query->fields('icw' , array('nid' , 'weight'))
+        ->condition('icw.widget' , $title)
+        ->condition('n.status' , '1')
+        ->orderBy('icw.weight' , 'ASC')
+        ->orderBy('n.nid' , 'DESC')
+        ->groupBy('icw.nid')
+        ->range(0 , 3);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $entity_data = array();
+    foreach ($result as $entity_data_node) {
+      $entity_data[] = $entity_data_node;
+    }
+
+    return theme("itg_custom_widget_ordering_data" , array("data" => $entity_data));
+  }
+  return array();
+}
+
+/**
+ * Function gives widget title json.
+ * @param string $widget_title
+ */
+function itg_custom_widget_name_list($widget_title) {
+
+  $query = db_select('itg_custom_widgets_data' , 'n');
+  $query->condition('widget' , $widget_title);
+  $query->fields('n' , array('widget'));
+  $query->distinct();
+  $result = $query->execute();
+
+  while ($record = $result->fetchAssoc()) {
+    $options[] = $record['widget'];
+  }
+
+  drupal_json_output($options);
+}
+
+/**
+ * Function used to remove nodeid from widget.
+ * @param string $widget
+ * @param int $nid
+ */
+function remove_from_custom_widget($widget , $nid) {
+  try {
+    db_delete('itg_custom_widgets_data')
+        ->condition('nid' , $nid)
+        ->condition('widget' , $widget)
+        ->execute();
+  }
+  catch (Exception $ex) {
+    drupal_set_message($ex->getMessage());
+  }
+  drupal_goto($_SERVER['HTTP_REFERER']);
+}
+
+/**
+ * This file provide an extra action bulk operation to add nodes into our custom table.
+ * {@inheritdoc}
+ */
+function itg_custom_widget_action_info() {
+  return array(
+    'itg_custom_widget_categories_wise_node_group' => array(
+      'type' => 'entity' ,
+      'label' => t('Add nodes to custom widget') ,
+      'configurable' => TRUE ,
+      'vbo_configurable' => FALSE ,
+      'triggers' => array('any') ,
+    ) ,
+  );
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_custom_widget_categories_wise_node_group_form($form , &$form_state) {
+
+  $form = array();
+
+  $form['confirm_message'] = array(
+    '#markup' => t("<p class='widget-confirm-message'>Are you sure you want add this content ?</p>") ,
+  );
+
+  return $form;
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_custom_widget_form_views_form_itg_custom_widget_page_alter(&$form , &$form_state , $form_id) {
+  $form['widget_name'] = array(
+    '#type' => 'textfield' ,
+    '#title' => t('Enter custom widget name') ,
+    '#default_value' => isset($_SESSION['widget_name']) ? $_SESSION['widget_name'] : "" ,
+    '#attributes' => array("placeholder" => array("Enter custom widget name")),
+    '#weight' => -2 ,
+  );
+
+  if ( !empty($_GET['widget_name']) || !empty($_POST['widget_name']) ) {
+    $form['widget_name']['#prefix'] = "<div style='display:none'>";
+    $form['widget_name']['#suffix'] = "</div>";
+  }
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_custom_widget_categories_wise_node_group_validate($form , &$form_state) {
+  if ( empty($form_state['values']['widget_name']) ) {
+    drupal_set_message(t("Please enter widget name.") , 'error');
+    drupal_goto('itg-custom-widget-content');
+  }
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_custom_widget_form_views_exposed_form_alter(&$form , &$form_state , $form_id) {
+  switch ($form['#id']) {
+    case 'views-exposed-form-itg-custom-widget-page':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets($_GET['type']);
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      break;
+    case 'views-exposed-form-itg-custom-widget-page-2':
+      $form['widget']['#attributes']['placeholder'] = t('Widget Title');
+      break;
+  }
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_custom_widget_categories_wise_node_group_submit($form , &$form_state) {
+  $selected_nodes = $form_state['selection'];
+  $custom_widget_name = $form_state['values']['widget_name'];
+  foreach ($selected_nodes as $nid) {
+    // Merge table with condition NID and WIDGET NAME , As node already saved then skip.
+    try {
+      $weight = itg_custom_widget_get_min_weight($custom_widget_name);
+      db_merge('itg_custom_widgets_data')
+          ->key(array(
+            'nid' => $nid ,
+            'widget' => $custom_widget_name ,
+          ))
+          ->fields(array(
+            'nid' => $nid ,
+            'widget' => $custom_widget_name ,
+            'weight' => --$weight ,
+            'extra' => $custom_widget_name ,
+          ))
+          ->execute();
+    }
+    catch (Exception $ex) {
+      drupal_set_message($ex->getMessage() , 'error');
+    }
+  }
+    unset($_SESSION['widget_name']);
+  // Unset widget name session. As it is done to add content in widget.
+  //unset($_SESSION['widget_name']);
+  // Return form_value to prevent bulk operation fail.
+  return array(
+    'form_values' => $form_state['values'] ,
+  );
+}
+
+/**
+ * Function used to return widget specific minimum weight
+ * @param string $custom_widget_name
+ * @return int
+ */
+function itg_custom_widget_get_min_weight($custom_widget_name) {
+  $min_query = db_select('itg_custom_widgets_data');
+  $min_query->addExpression('MIN(weight)');
+  $min_query->condition('widget' , $custom_widget_name);
+  $min_query = $min_query->execute()->fetchField();
+  return isset($min_query) ? $min_query : 1;
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_custom_widget_form_alter(&$form , &$form_state , $form_id) {
+  if ( $form_id == 'views_exposed_form' ) {
+    $view = $form_state['view'];
+    if ( $view->name == 'itg_custom_widget' && $view->current_display == 'page' ) {
+      $form['#submit'][] = 'itg_custom_widget_submit';
+    }
+  }
+  if ( $form_id == "views_form_itg_custom_widget_page_1" ) {
+    $form['actions']['submit']['#submit'][] = "itg_custom_widget_update_order_reorder_data";
+    //pr($form);
+  }
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_custom_widget_update_order_reorder_data($form , &$form_state) {
+  $arg = arg();
+  // Take draggable view input value after submit the form.
+  $draggable_view_data = $form_state['input']['draggableviews'];
+
+  // Now insert new entry in itg_widget_order table of combination
+  foreach ($draggable_view_data as $key => $node_data) {
+    try {
+      db_merge('itg_custom_widgets_data')
+          ->key(array(
+            'nid' => $node_data['id'] ,
+            'widget' => $arg[1] ,
+          ))
+          ->fields(array(
+            'weight' => $node_data['weight'] ,
+            'nid' => $node_data['id'] ,
+            'widget' => $arg[1] ,
+          ))
+          ->execute();
+    }
+    catch (Exception $ex) {
+      drupal_set_message($ex->getMessage());
+    }
+  }
+}
+
+/**
+ * Function to set session name of widget.
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_custom_widget_submit($form , &$form_state) {
+  if ( isset($_REQUEST['widget_name']) ) {
+    $_SESSION['widget_name'] = $_REQUEST['widget_name'];
+  }
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_custom_widget_views_pre_render(&$view) {
+  $color_box_query = array("widget_name_delete" => "true");
+  $color_box_class = array("id" => array("create-view-custom-widget"));
+  if ( $view->name == "itg_custom_widget" && $view->current_display == 'page_2' ) {
+    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $header_content .= l(t("Create New Widget") , "itg-custom-widget-content" , array('query' => $color_box_query , 'attributes' => $color_box_class));
+    $view->attachment_before = $header_content;
+  }
+  if ( $view->name == "itg_custom_widget" && $view->current_display == 'page_1' ) {
+    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $view->attachment_before = $header_content;
+  }
+  if ( $view->name == "itg_custom_widget" && $view->current_display == 'page' ) {
+    if ( !isset($_POST['views_bulk_operations_1']) ) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $view->attachment_before = $header_content;
+    }
+  }
+}

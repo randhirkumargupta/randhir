@@ -1,0 +1,49 @@
+<?php
+/**
+ * @file
+ * feature_for_sport.features.field_base.inc
+ */
+
+/**
+ * Implements hook_field_default_field_bases().
+ */
+function feature_for_sport_field_default_field_bases() {
+  $field_bases = array();
+
+  // Exported field_base: 'field_page_section'.
+  $field_bases['field_page_section'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_page_section',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'tid' => array(
+        0 => 'tid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'taxonomy',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => array(
+          'vocabulary' => 'category_management',
+          'parent' => 0,
+        ),
+      ),
+    ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
+    'translatable' => 0,
+    'type' => 'taxonomy_term_reference',
+  );
+
+  return $field_bases;
+}

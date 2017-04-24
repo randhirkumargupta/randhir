@@ -1,0 +1,751 @@
+<?php
+
+/**
+ * @file
+ *   Display front user reports to administrator user.
+ */
+
+/**
+ * Implements hook_permission().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reports_permission() {
+  return array(
+    'view report dashboard' => array(
+      'title' => t('ITG Reports')
+    ) ,
+  );
+}
+
+/**
+ * Implements hook_menu().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reports_menu() {
+  // Menu links for cms report user dashboard.
+  $items['itg-report-dashboard'] = array(
+    'title' => 'User Dashboard' ,
+    'page callback' => 'itg_report_user_dashboard' ,
+    'access arguments' => array('view report dashboard') ,
+    'type' => MENU_NORMAL_ITEM ,
+    'file' => 'includes/itg_reports.helper.inc' ,
+  );
+  // Menu form email autocomplete.
+  $items['itg-reports-mail/autocomplete'] = array(
+    'page callback' => 'itg_reports_email_autocomplete' ,
+    'access arguments' => array('view report dashboard') ,
+    'type' => MENU_CALLBACK ,
+    'file' => 'includes/itg_reports.helper.inc' ,
+  );
+
+  // Menu form registered autocomplete.
+  $items['itg-registered-user-report/%'] = array(
+    'page callback' => 'itg_registered_user_report' ,
+    'page arguments' => array(1) ,
+    'access arguments' => array('administer nodequeue') ,
+    'type' => MENU_CALLBACK ,
+    'file' => 'includes/itg_reports.helper.inc' ,
+  );
+
+  // Menu form registered autocomplete.
+  $items['itg-registered-user-section-wise-breakup/%'] = array(
+    'page callback' => 'itg_registered_user_report_section_wise_breakup' ,
+    'page arguments' => array(1) ,
+    'access arguments' => array('administer nodequeue') ,
+    'type' => MENU_CALLBACK ,
+    'file' => 'includes/itg_reports.helper.inc' ,
+  );
+
+  // Menu form active users reports.
+  $items['itg-active-user-report-mongo'] = array(
+    'page callback' => 'drupal_get_form' ,
+    'page arguments' => array('itg_active_user_report_form') ,
+    'access arguments' => array('administer nodequeue') ,
+    'type' => MENU_CALLBACK ,
+    'file' => 'includes/itg_users_reports.inc' ,
+  );
+
+  // Menu for section wise breakup.
+  $items['itg-section-wise-breakup-report'] = array(
+    'page callback' => 'drupal_get_form' ,
+    'page arguments' => array('itg_section_wise_breakup_form') ,
+    'access arguments' => array('administer nodequeue') ,
+    'type' => MENU_CALLBACK ,
+    'file' => 'includes/section-wise-breakup-report.inc' ,
+  );
+
+  $items['itg-reports-sections/autocomplete'] = array(
+    'page callback' => 'itg_reports_sections_autocomplete' ,
+    'access arguments' => array('view report dashboard') ,
+    'type' => MENU_CALLBACK ,
+    'file' => 'includes/itg_reports.helper.inc' ,
+  );
+
+  $items['itg-reports-sections-tid/autocomplete'] = array(
+    'page callback' => 'itg_reports_sections_autocomplete_for_tid' ,
+    'access arguments' => array('view report dashboard') ,
+    'type' => MENU_CALLBACK ,
+    'file' => 'includes/itg_reports.helper.inc' ,
+  );
+
+  $items['itg-registered-vs-anonymous-user-content-visited-report'] = array(
+    'page callback' => 'drupal_get_form' ,
+    'page arguments' => array('itg_registered_vs_anonymous_user_form') ,
+    'title' => 'Registered vs Anonymous' ,
+    'access arguments' => array('administer nodequeue') ,
+    'type' => MENU_CALLBACK ,
+    'file' => 'includes/registered-vs-anonymous-user-content-visited-report.inc' ,
+  );
+
+  return $items;
+}
+
+/**
+ * Function which gives auto-complete result form views expose form for taxonomy using Name.
+ * @param string $name
+ * @return json
+ */
+function itg_reports_sections_autocomplete($name) {
+  $query = db_select('taxonomy_term_data' , 'td');
+  $query->fields('td' , array('name' , 'tid'));
+  $query->condition('td.vid' , CATEGORY_MANAGMENT);
+  $query->condition('td.name' , '%' . db_like($name) . '%' , 'LIKE');
+  $query->range(0 , 40);
+  $result = $query->execute()->fetchAll();
+  //pr($result);
+  foreach ($result as $data) {
+    if (module_exists('itg_category_manager') && function_exists('itg_category_manager_term_state') && itg_category_manager_term_state($data->tid)) {
+      $parents = taxonomy_get_parents_all($data->tid);
+      foreach (array_reverse($parents) as $parent) {
+        $display_option[] = $parent->name;
+      }
+      $option[$data->name] = implode(" >> " , $display_option);
+      unset($display_option);
+    }
+  }
+  //sort($option);
+  return drupal_json_output($option);
+}
+
+/**
+ * Function which gives auto-complete result form views expose form for taxonomy using TID.
+ * @param string $name
+ * @return json
+ */
+function itg_reports_sections_autocomplete_for_tid($tid) {
+  $query = db_select('taxonomy_term_data' , 'td');
+  $query->fields('td' , array('name' , 'tid'));
+  $query->condition('td.vid' , CATEGORY_MANAGMENT);
+  $query->condition('td.tid' , '%' . db_like($tid) . '%' , 'LIKE');
+  $query->range(0 , 40);
+  $result = $query->execute()->fetchAll();
+
+  foreach ($result as $data) {
+    if (module_exists('itg_category_manager') && function_exists('itg_category_manager_term_state') && itg_category_manager_term_state($data->tid)) {
+      $option[$data->tid] = $data->tid;
+    }
+  }
+  return drupal_json_output($option);
+}
+
+/**
+ * Implements hook_theme().
+ * {@inheritdoc}
+ */
+function itg_reports_theme($existing , $type , $theme , $path) {
+  $themes = array(
+    'itg_reports_dashboard' => array(
+      'variables' => array('data' => NULL) ,
+      'template' => 'templates/itg-reports-dashboard' ,
+    ) ,
+    'itg_reports_career_graph' => array(
+      'variables' => array('output' => NULL , 'actor' => NULL) ,
+      'template' => 'templates/itg-reports-career-graph' ,
+    ) ,
+    'itg_reports_personalized_data_chart' => array(
+      'template' => 'templates/itg-reports-personalized-data-chart' ,
+    ) ,
+    'itg_reports_sections_data_chart' => array(
+      'template' => 'templates/itg-reports-sections-data-chart' ,
+    ) ,
+  );
+
+  return $themes;
+}
+
+/**
+ * Implements  hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reports_form_views_exposed_form_alter(&$form , &$form_state , $form_id) {
+
+  switch ($form['#id']) {
+
+    case 'views-exposed-form-comparative-report-cm-page':
+      $form['uid']['#attributes'] = array('placeholder' => 'Search by user name');
+      $form['mail']['#attributes'] = array('placeholder' => 'Search by user email');
+      $form['mail']['#autocomplete_path'] = 'itg-reports-mail/autocomplete';
+      break;
+    case 'views-exposed-form-report-filed-content-page':
+      // remove archive and unpublish on list
+      $option = array();
+
+      foreach ($form['state']['#options'] as $key => $option_val) {
+
+        if ($key != 'un_published' && $key != 'archive') {
+          $option[$key] = $option_val;
+        }
+      }
+      $form['node_status']['#options'] = $form['node_status']['#options'] + array("" => 'Archive');
+      $form['state']['#options'] = $option;
+      $form['field_story_category_tid']['#attributes'] = array('placeholder' => 'Search by section name');
+      $form['uid']['#attributes'] = array('placeholder' => 'Search by user name');
+      $form['mail']['#attributes'] = array('placeholder' => 'Search by user email');
+      $form['node_status']['#options'][1] = t('Published');
+      $form['node_status']['#options'][0] = t('Not published');
+      $form['moderation'] = array(
+        '#title' => t('Moderation') ,
+        '#type' => 'select' ,
+        '#options' => array('all' => 'Any' , 'yes' => 'Yes' , 'no' => 'No') ,
+        '#default_value' => 'all' ,
+      );
+      $form['mail']['#autocomplete_path'] = 'itg-reports-mail/autocomplete';
+      $form['date_filter']['min']['#attributes'] = array('autocomplete' => 'off' , 'readonly' => 'readonly' , 'placeholder' => t('Start Date'));
+      unset($form['date_filter']['min']['#title']);
+      $form['date_filter']['max']['#attributes'] = array('autocomplete' => 'off' , 'readonly' => 'readonly' , 'placeholder' => t('End Date'));
+      unset($form['date_filter']['max']['#title']);
+      $form['from_state']['#prefix'] = '<div style="display: none;">';
+      $form['from_state']['#suffix'] = '</div>';
+      $form['#after_build'][] = 'itg_reports_view_after_build';
+
+      break;
+    case 'views-exposed-form-comparative-report-cm-page':
+      $form['tid']['#attributes'] = array('placeholder' => 'Search by section name');
+      $form['date_filter']['min']['#attributes'] = array('autocomplete' => 'off' , 'readonly' => 'readonly' , 'placeholder' => t('Start Date'));
+      unset($form['date_filter']['min']['#title']);
+      $form['date_filter']['max']['#attributes'] = array('autocomplete' => 'off' , 'readonly' => 'readonly' , 'placeholder' => t('End Date'));
+      unset($form['date_filter']['max']['#title']);
+      $form['#after_build'][] = 'itg_reports_view_after_build';
+
+      break;
+    case 'views-exposed-form-readers-reports-page':
+      $form['mail']['#attributes'] = array('placeholder' => t('Search By Email'));
+      $form['mail']['#autocomplete_path'] = 'itg-reports-mail/autocomplete';
+      $form['uid']['#attributes'] = array('placeholder' => t('Search By Name'));
+      $form['field_mobile_number_value']['#attributes'] = array('placeholder' => t('Search by mobile number'));
+      break;
+    case 'views-exposed-form-movies-master-page':
+      $form['tid']['#attributes'] = array('placeholder' => t('Search by movie name'));
+      $form['field_movie_earning_value']['min']['#attributes'] = array('placeholder' => t('Start range'));
+      $form['field_movie_earning_value']['max']['#attributes'] = array('placeholder' => t('End range'));
+      unset($form['field_movie_earning_value']['max']['#title']);
+      break;
+    case 'views-exposed-form-users-reports-page':
+      $form['created']['min']['#type'] = 'date_popup';
+      $form['created']['min']['#date_format'] = 'd/m/Y';
+      $form['created']['max']['#attributes']['placeholder'] = 'Date To';
+      $form['created']['min']['#attributes']['placeholder'] = 'Date From';
+      $form['created']['max']['#type'] = 'date_popup';
+      $form['created']['max']['#date_format'] = 'd/m/Y';
+      break;
+    case 'views-exposed-form-itg-active-users-report-page':
+      drupal_add_css("#ui-datepicker-div {display:none} " , 'inline');
+      drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file'));
+      $form['created']['max']['#attributes']['placeholder'] = 'Date To';
+      $form['created']['min']['#attributes']['placeholder'] = 'Date From';
+      $form['field_mobile_number_value']['#attributes']['placeholder'] = 'Search By Mobile  ';
+      $form['mail']['#attributes']['placeholder'] = 'Search By Email';
+      $form['uid']['#attributes']['placeholder'] = 'Search By Name';
+      $form['mail']['#autocomplete_path'] = 'itg-reports-mail/autocomplete';
+      break;
+    case 'itg-registered-vs-anonymous-user-form':
+      drupal_add_css("#ui-datepicker-div {display:none} " , 'inline');
+      $form['date_to']['#attributes']['placeholder'] = 'Date To';
+      $form['date_from']['#attributes']['placeholder'] = 'Date From';
+      break;
+    case 'views-exposed-form-section-wiser-breakup-report-page':
+      drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file'));
+      drupal_add_css("#ui-datepicker-div {display:none} , #autocomplete {max-height : 400px; max-width: 400px; overflow-x : auto; overflow-y: auto;}" , 'inline');
+      $form['name']['#autocomplete_path'] = 'itg-reports-sections/autocomplete';
+      $form['tid_raw']['#autocomplete_path'] = 'itg-reports-sections-tid/autocomplete';
+      $form['tid_raw']['#attributes']['placeholder'] = 'Search By Term Id';
+      $form['name']['#attributes']['placeholder'] = 'Search By Name';
+      
+      $form['week1'] = array(
+        '#type' => 'fieldset' ,
+        "#title" => 'Week1' ,
+        "#weight" => -13,
+        '#prefix' => '<div>',
+        '#suffix' => '</div>',
+      );
+      $form['week1']['week1_date_from'] = array(
+        '#type' => 'textfield' ,
+        "#title" => 'Date from' ,
+        '#attributes' => array('placeholder' => 'Date From' ,'readonly' => 'readonly'),
+      );
+      $form['week1']['week1_date_to'] = array(
+        '#type' => 'textfield' ,
+        "#title" => 'Date to' ,
+        '#attributes' => array('placeholder' => 'Date To','readonly' => 'readonly'),
+      );
+      $form['week2'] = array(
+        '#type' => 'fieldset' ,
+        "#title" => 'Week2' ,
+        "#weight" => 4 ,
+      );
+      $form['week2']['week2_date_from'] = array(
+        '#type' => 'textfield' ,
+        "#title" => 'Date from' ,
+        '#attributes' => array('placeholder' => 'Date From','readonly' => 'readonly'),
+      );
+      $form['week2']['week2_date_to'] = array(
+        '#type' => 'textfield' ,
+        "#title" => 'Date to' ,
+        '#attributes' => array('placeholder' => 'Date To','readonly' => 'readonly'),
+      );
+      $form['items_per_page']['#weight'] = 9;
+      $form['name']['#weight'] = 1;
+      $form['tid_raw']['#weight'] = 2;
+      break;
+  }
+}
+
+/**
+ * Implements after build function for views exposed form.
+ * {@inheritdoc}.
+ */
+function itg_reports_view_after_build($form , &$form_state) {
+  $form['#attached']['js'] = array(
+    drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' ,
+  );
+
+  return $form;
+}
+
+/**
+ * Implements hook_block_info().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reports_block_info() {
+  // Career graph.
+  $blocks['itg_report_career_graph'] = array(
+    'info' => t('Career Graph') ,
+    'cache' => DRUPAL_CACHE_GLOBAL ,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reports_block_view($delta = '') {
+  switch ($delta) {
+    case 'itg_report_career_graph':
+      $output = array();
+      $data = itg_report_get_graph_data();
+      drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/canvasjs.min.js');
+      $errors = array_filter($data);
+      if (!empty($errors)) {
+        foreach ($data as $key => $chart_data) {
+          $errors = array_filter($chart_data['graph']);
+          if (empty($errors)) {
+            continue;
+          }
+          $chart = array(
+            '#type' => 'chart' ,
+            '#chart_type' => 'line' ,
+            '#chart_library' => 'highcharts' ,
+            '#legend' => FALSE ,
+          );
+
+          // Add missing year.
+          itg_reports_missing_year($chart_data['graph']);
+          if (!empty($chart_data['graph'])) {
+            foreach ($chart_data['graph'] as $g_data) {
+
+              $graph_d[$g_data[0]] = $g_data;
+            }
+          }
+
+          $chart['career'] = array(
+            '#type' => 'chart_data' ,
+            '#data' => $chart_data['graph'] ,
+            '#title' => t($chart_data['actor'][$key]['actor_name']) ,
+          );
+          $chart['xaxis'] = array(
+            '#type' => 'chart_xaxis' ,
+            '#title' => t('Year') ,
+          );
+
+
+          $chart['yaxis'] = array(
+            '#type' => 'chart_yaxis' ,
+            '#title' => t('Earning') ,
+          );
+          $career_graph['chart'] = $chart;
+
+          $output[] = $career_graph;
+          $actor_info[] = array(
+            'name' => $chart_data['actor'][0]['actor_name'] ,
+            'pic_uri' => $chart_data['actor'][0]['actor_pic'] ,
+          );
+        }
+      }
+      $block['content'] = theme('itg_reports_career_graph' , array('output' => $output , 'actor' => $actor_info));
+
+      break;
+  }
+
+  return $block;
+}
+
+/**
+ * Get graph data from database.
+ * 
+ * @return array
+ *   Array of chart data.
+ */
+function itg_report_get_graph_data() {
+  global $base_url;
+  $arg = arg();
+  $chart_data = array();
+  $node = node_load($arg[1]);
+  foreach ($node->field_mega_review_career_graph['und'] as $field_collection) {
+    $data = array();
+    $actor_data = array();
+    foreach ($field_collection['entity']->field_reporter_movie_name['und'] as $key => $tids) {
+      $movie_details = taxonomy_term_load($tids['tid']);
+      $movie_name = $movie_details->name;
+      $timestamp = $movie_details->field_reporter_movie_year['und'][0]['value'];
+      $movie_year = format_date($timestamp , 'custom' , 'Y');
+      $actor_pic_uri = $field_collection['entity']->field_story_extra_large_image['und'][0]['uri'];
+      if (empty($actor_pic_uri)) {
+        $actor_pic_real_uri = file_create_url($base_url . '/' . drupal_get_path('theme' , 'itg') . '/images/default_career_graph.png');
+      }
+      else {
+        $actor_pic_real_uri = $actor_pic_uri;
+      }
+      $actor_data[] = array(
+        'actor_name' => $field_collection['entity']->title ,
+        'movie_name' => $movie_name ,
+        'actor_pic' => $actor_pic_real_uri ,
+      );
+      $data[] = array(
+        (int) $movie_year ,
+        (int) $movie_details->field_movie_earning['und'][0]['value'] ,
+        $movie_name
+      );
+    }
+    $chart_data[] = array(
+      'actor' => $actor_data ,
+      'graph' => $data ,
+    );
+  }
+
+  return $chart_data;
+}
+
+/**
+ * Ad missing year to the chart data.
+ *
+ * @param array $chart_data
+ *   Array containing year wise data of celebrity career graph.
+ *
+ * @return array
+ *   Sorted array with missing intervals.
+ */
+function itg_reports_missing_year(&$chart_data) {
+  $data = array();
+  array_multisort($chart_data);
+  $temp = NULL;
+  foreach ($chart_data as $value) {
+    if (!empty($temp) && ($temp + 1) != $value[0]) {
+      ++$temp;
+      while ($temp < $value[0]) {
+        $data[] = array(
+          $temp++ ,
+          NULL
+        );
+      }
+    }
+    $temp = $value[0];
+  }
+  $chart_data = array_merge($chart_data , $data);
+  array_multisort($chart_data);
+  $min_step = count($chart_data);
+  $data = array();
+  if ($min_step < 6) {
+    while ($min_step <= 6) {
+      $data[] = array(
+        $temp++ ,
+        NULL
+      );
+      ++$min_step;
+    }
+    $chart_data = array_merge($chart_data , $data);
+    array_multisort($chart_data);
+  }
+}
+
+/**
+ * This function use for entry user on social node share 
+ */
+function itg_report_get_node_share($nid , $count = 0) {
+
+  $query = db_select('itg_node_share_count' , 'insc')
+      ->fields('insc' , array('share_count'))
+      ->condition('insc.nid' , $nid , '=');
+  $result = $query->execute()->fetchField();
+  if (!empty($result) && $count < $result) {
+    $count = (int) $count + (int) $result;
+  }
+
+  $pre_save = array(
+    'nid' => $nid ,
+    'share_count' => $count
+  );
+
+  // iNSERT INTO DATABASE
+  db_merge('itg_node_share_count')
+      ->key(array(
+        'nid' => $nid))
+      ->fields($pre_save)
+      ->execute();
+  $query1 = db_select('itg_node_share_count' , 'insc')
+      ->fields('insc' , array('share_count'))
+      ->condition('insc.nid' , $nid , '=');
+  $result1 = $query1->execute()->fetchField();
+  return $result1;
+}
+
+/**
+ * Get node edit count from revision table.
+ *
+ * @param int $output
+ *   Unique node id of the node.
+ * 
+ * @return int
+ *   Total count of the node edit.
+ */
+function itg_report_node_edit_count($output) {
+  $result = 0;
+  try {
+    $itg_query = db_select('node_revision' , 'n');
+    $itg_query->fields('n' , array('nid'))
+        ->condition('nid' , $output);
+    $result = $itg_query->execute()->rowCount();
+  }
+  catch (Exception $ex) {
+    drupal_set_message($ex->getMessage() , 'error');
+  }
+
+  return $result;
+}
+
+/**
+ * Implements hook_views_pre_render().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reports_views_pre_render(&$view) {
+  if ($view->name == 'itg_active_users_report' && $view->current_display == 'page') {
+    
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reports_form_alter(&$form , &$form_state , $form_id) {
+  if ($form_id == 'taxonomy_form_term') {
+    if (is_array($form['#term'])) {
+      if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'movies') {
+        $form['relations']['#prefix'] = '<div style="display:none;">';
+        $form['relations']['#suffix'] = '</div>';
+      }
+    }
+    if (is_object($form['#term'])) {
+      if (isset($form['#term']->vocabulary_machine_name) && $form['#term']->vocabulary_machine_name == 'movies') {
+        $form['relations']['#prefix'] = '<div style="display:none;">';
+        $form['relations']['#suffix'] = '</div>';
+      }
+    }
+  }
+  if ($form_id == 'user_profile_form') {
+    //Hide logged in field from progile
+    $form['field_logged_in_count']['#attributes']['class'][] = 'hide';
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reports_user_login(&$edit , $account) {
+  $user_required_data = array();
+  $user_required_data['uid'] = $account->uid;
+  $user_required_data['name'] = $account->name;
+  $user_required_data['mail'] = $account->mail;
+  $user_required_data['created'] = (int) $account->created;
+  $user_required_data['access'] = (int) $account->access;
+  $user_required_data['login'] = (int) $account->login;
+  $user_required_data['mobile'] = $account->field_mobile_number['und'][0]['value'];
+  $user_required_data['role'] = 'authenticated user';
+  if (in_array('Front User' , $account->roles)) {
+    $user_required_data['role'] = 'Front User';
+  }
+  module_load_include('inc' , 'itg_reports' , 'includes/itg_users_reports');
+  // Save data in mongo.
+  _itg_report_save_active_user_data($user_required_data);
+  // get data from mongo.
+  $login_count = _get_loggedin_count_of_user($account->uid , 0 , REQUEST_TIME);
+  // Update user Field value.
+  $user_fields = user_load($account->uid);
+  $user_fields->field_logged_in_count['und'][0]['value'] = ++$login_count;
+  user_save($user_fields);
+}
+
+/**
+ * Implements hook_node_view()
+ */
+function itg_reports_node_view($node , $view_mode , $langcode) {
+  global $user;
+  module_load_include('inc' , 'itg_reports' , 'includes/section-wise-breakup-report');
+  $nodes_catagories = $node->field_story_category[LANGUAGE_NONE];
+  foreach ($nodes_catagories as $cat) {
+    itg_reports_save_section_wise_report_data((int) $cat['tid'] , $user->uid , $node);
+  }
+}
+
+/**
+ * {@inheritdoc}. 
+ */
+function itg_reports_views_query_alter(&$view , &$query) {
+  if ($view->name == 'itg_active_users_report' && $view->current_display == 'page') {
+    // Exclude aynonumus user.
+    $query->add_where(0 , "users.uid" , 0 , '!=');
+    // Handel between date case.
+    if (isset($_GET['created']['max'])) {
+      $max_conditions_array = array();
+      $max_date = strtotime('+1 day' , strtotime($_GET['created']['max']));
+      $max_date_condition = " AND " . $max_date;
+      foreach ($query->where[1]['conditions'] as $idx => $condition) {
+        if (!is_object($condition['field']) && $condition['operator'] == 'formula') {
+          $max_conditions_array = explode('AND' , $view->query->where[1]['conditions'][$idx]['field']);
+          $view->query->where[1]['conditions'][$idx]['field'] = $max_conditions_array[0] . $max_date_condition;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * 
+ * @param type $tid
+ * @param type $vid
+ * @return type
+ */
+function get_term_name_from_tid_for_report($tid) {
+  $term_data = taxonomy_term_load($tid);
+  return $term_data->name;
+}
+
+/**
+ * Get user logged-in count between two timestamp.
+ * @return array
+ */
+function _get_loggedin_count_of_user($uid , $start_date = 0 , $end_date = REQUEST_TIME) {
+  if (!empty($uid)) {
+    if (function_exists('mongodb')) {
+      $conn = mongodb();
+      if ($conn) {
+        $collection = $conn->active_users;
+        $condition = array(
+          'login' => array(
+            '$gte' => $start_date ,
+            '$lte' => $end_date ,
+          ) ,
+          'uid' => (string) $uid ,
+        );
+        $logged_in_count = $collection->find($condition)->count();
+        return !empty($logged_in_count) ? $logged_in_count : 0;
+      }
+    }
+  }
+}
+
+/**
+ * Function returns count of term views.
+ * @param int $tid
+ * @param int $start_date
+ * @param int $end_date
+ * @return int
+ */
+function _get_term_report_view_count_data($tid , $start_date = 0 , $end_date = REQUEST_TIME) {
+  if ($tid) {
+    if (function_exists('mongodb')) {
+      $conn = mongodb();
+      if ($conn) {
+        $collection = $conn->term_view_info;
+        $condition = array(
+          'viewtime' => array(
+            '$gte' => $start_date ,
+            '$lte' => $end_date ,
+          ) ,
+          'term_id' => (string) $tid ,
+        );
+        $term_view_count = $collection->find($condition)->count();
+        return !empty($term_view_count) ? $term_view_count : 0;
+      }
+    }
+  }
+}
+
+/**
+ * Function to get data count between two dates of term viewed.
+ * @param int $tid
+ * @param string $date_from
+ * @param string $date_to
+ * @return string
+ */
+function _get_report_data_of_week($tid , $date_from , $date_to) {
+  if (!empty($tid) && $date_from != 'N/A' && $date_to != 'N/A') {
+    $real_date_from = strtotime('-1day' , strtotime($date_from));
+    $real_date_to = strtotime('+1day' , strtotime($date_to));
+    return _get_term_report_view_count_data($tid , $real_date_from , $real_date_to);
+  }
+  else {
+    return t('N/A');
+  }
+}
+
+/**
+ * Function to calculate percentage between two weeks.
+ * @param int $week1
+ * @param int $week2
+ * @return string
+ */
+function _get_percentage_growth($week1 , $week2) {
+  if ($week1 == 0 && $week2 == 0) {
+    return t("N/A");
+  }
+  else {
+    $total = $week1 + $week2;
+    try {
+      return ((($week2 - $week1) / $total) * 100) . '%';
+    }
+    catch (Exception $ex) {
+      return $ex->getMessage();
+    }
+  }
+}

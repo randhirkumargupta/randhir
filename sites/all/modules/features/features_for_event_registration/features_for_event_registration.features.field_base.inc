@@ -39,6 +39,28 @@ function features_for_event_registration_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
+  // Exported field_base: 'field_comments_remarks_'.
+  $field_bases['field_comments_remarks_'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_comments_remarks_',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
   // Exported field_base: 'field_erf_city'.
   $field_bases['field_erf_city'] = array(
     'active' => 1,
@@ -50,22 +72,31 @@ function features_for_event_registration_field_default_field_bases() {
       'type' => 0,
     ),
     'indexes' => array(
-      'tid' => array(
-        0 => 'tid',
+      'target_id' => array(
+        0 => 'target_id',
       ),
     ),
     'locked' => 0,
-    'module' => 'taxonomy',
+    'module' => 'entityreference',
     'settings' => array(
-      'allowed_values' => array(
-        0 => array(
-          'vocabulary' => 'itg_city',
-          'parent' => 0,
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'city' => 'city',
         ),
       ),
+      'target_type' => 'taxonomy_term',
     ),
     'translatable' => 0,
-    'type' => 'taxonomy_term_reference',
+    'type' => 'entityreference',
   );
 
   // Exported field_base: 'field_erf_company_name'.
@@ -92,33 +123,36 @@ function features_for_event_registration_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_erf_country'.
-  $field_bases['field_erf_country'] = array(
+  // Exported field_base: 'field_erf_date_of_birth'.
+  $field_bases['field_erf_date_of_birth'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_erf_country',
+    'field_name' => 'field_erf_date_of_birth',
     'field_permissions' => array(
       'type' => 0,
     ),
-    'indexes' => array(
-      'tid' => array(
-        0 => 'tid',
-      ),
-    ),
+    'indexes' => array(),
     'locked' => 0,
-    'module' => 'taxonomy',
+    'module' => 'date',
     'settings' => array(
-      'allowed_values' => array(
-        0 => array(
-          'vocabulary' => 'country',
-          'parent' => 0,
-        ),
+      'cache_count' => 4,
+      'cache_enabled' => 0,
+      'granularity' => array(
+        'day' => 'day',
+        'hour' => 0,
+        'minute' => 0,
+        'month' => 'month',
+        'second' => 0,
+        'year' => 'year',
       ),
+      'timezone_db' => '',
+      'todate' => '',
+      'tz_handling' => 'none',
     ),
     'translatable' => 0,
-    'type' => 'taxonomy_term_reference',
+    'type' => 'datetime',
   );
 
   // Exported field_base: 'field_erf_designation'.
@@ -145,42 +179,13 @@ function features_for_event_registration_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_erf_gender'.
-  $field_bases['field_erf_gender'] = array(
+  // Exported field_base: 'field_erf_email'.
+  $field_bases['field_erf_email'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_erf_gender',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        'Mr' => 'Mr.',
-        'Ms' => 'Ms.',
-        'Mrs' => 'Mrs.',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_text',
-  );
-
-  // Exported field_base: 'field_erf_id_number'.
-  $field_bases['field_erf_id_number'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_erf_id_number',
+    'field_name' => 'field_erf_email',
     'field_permissions' => array(
       'type' => 0,
     ),
@@ -244,6 +249,30 @@ function features_for_event_registration_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_erf_name'.
+  $field_bases['field_erf_name'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_erf_name',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_erf_payment_gateway'.
   $field_bases['field_erf_payment_gateway'] = array(
     'active' => 1,
@@ -264,8 +293,8 @@ function features_for_event_registration_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         'icici' => ' ICICI',
-        'amex' => ' Amex',
-        'other_banks' => ' Other Banks',
+        'paytm' => ' Paytm',
+        'billdesk' => 'Billdesk',
       ),
       'allowed_values_function' => '',
     ),
@@ -315,42 +344,11 @@ function features_for_event_registration_field_default_field_bases() {
     'locked' => 0,
     'module' => 'field_collection',
     'settings' => array(
-      'hide_blank_items' => 1,
+      'hide_blank_items' => 0,
       'path' => '',
     ),
     'translatable' => 0,
     'type' => 'field_collection',
-  );
-
-  // Exported field_base: 'field_erf_select_id_type'.
-  $field_bases['field_erf_select_id_type'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_erf_select_id_type',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        'aadhar_card' => ' Aadhar Card',
-        'driving_licence' => ' Driving Licence',
-        'pan' => ' PAN Card',
-        'passport' => ' Passport',
-        'voter_id' => ' Voter Id Card',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_erf_state'.
@@ -364,22 +362,56 @@ function features_for_event_registration_field_default_field_bases() {
       'type' => 0,
     ),
     'indexes' => array(
-      'tid' => array(
-        0 => 'tid',
+      'target_id' => array(
+        0 => 'target_id',
       ),
     ),
     'locked' => 0,
-    'module' => 'taxonomy',
+    'module' => 'entityreference',
     'settings' => array(
-      'allowed_values' => array(
-        0 => array(
-          'vocabulary' => 'state',
-          'parent' => 0,
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'state' => 'state',
         ),
       ),
+      'target_type' => 'taxonomy_term',
     ),
     'translatable' => 0,
-    'type' => 'taxonomy_term_reference',
+    'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field_erf_ticket_type'.
+  $field_bases['field_erf_ticket_type'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_erf_ticket_type',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_erf_total_fee'.
@@ -406,13 +438,51 @@ function features_for_event_registration_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_erf_type'.
-  $field_bases['field_erf_type'] = array(
+  // Exported field_base: 'field_event_country'.
+  $field_bases['field_event_country'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_erf_type',
+    'field_name' => 'field_event_country',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'country' => 'country',
+        ),
+      ),
+      'target_type' => 'taxonomy_term',
+    ),
+    'translatable' => 0,
+    'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field_event_name_title'.
+  $field_bases['field_event_name_title'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_event_name_title',
     'field_permissions' => array(
       'type' => 0,
     ),
@@ -425,8 +495,10 @@ function features_for_event_registration_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'self' => 'Self',
-        'group' => 'Group',
+        'Mr' => 'Mr',
+        'Miss' => 'Miss',
+        'Mrs' => 'Mrs',
+        'Dr' => 'Dr',
       ),
       'allowed_values_function' => '',
     ),

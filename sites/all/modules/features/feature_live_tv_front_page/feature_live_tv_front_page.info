@@ -1,0 +1,12 @@
+name = Feature Live tv front page
+description = Live tv front page
+core = 7.x
+package = Features
+version = 7.x-1.4
+dependencies[] = views
+dependencies[] = views_customstyle
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = live_tv_programs
+features[views_view][] = programme_content_live_tv
+features_exclude[dependencies][ctools] = ctools

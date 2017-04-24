@@ -1,19 +1,36 @@
 <?php
 /**
  * Get Mail content
- * @param array $node
+ * @param array $account
+ * @param string $to
  * @return string
  */
-function itg_sso_get_mail_content($account, $to) {
+function itg_sso_get_mail_content($account, $to, $url_info) {
   
-   $mail_content = itg_sso_notification_mail_content($account);
+    if (function_exists('itg_mail_templates_get_mailcontent')) {
+      if (is_string($account) && $account == 'Password Changed'){
+        $action = 'Password Changed';
+      } else {
+        $action = 'Sign up';
+      }
+      $mail_data = itg_mail_templates_get_mailcontent($action);
+      $tid = $mail_data->field_mail_template_category[LANGUAGE_NONE][0]['tid'];
+      $term_name = taxonomy_term_load($tid);
+      $name = $term_name->name;
+      if ($name == 'Password Changed') {
+        $mail_subject = $mail_data->field_mail_subject_password_chan[LANGUAGE_NONE][0]['value'];
+        $mail_body = $mail_data->field_mail_body_password_changed[LANGUAGE_NONE][0]['value'];
+      } else {
+        $mail_subject = $mail_data->field_mail_subject_sign_up[LANGUAGE_NONE][0]['value'];
+        $mail_body = $mail_data->field_mail_body_sign_up[LANGUAGE_NONE][0]['value'];
+      }
+    }
+    $mail_content = itg_sso_notification_mail_content($account, $url_info, $mail_body, $name);
 
-  $params = array(
+    $params = array(
       'body' => $mail_content,
-      'subject' => 'India Today | Activate Account',
+      'subject' => $mail_subject,
     );
-
-   
     $mail = drupal_mail('itg_sso_reg_user', 'send_mail_to_sso_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
       return TRUE;
@@ -31,6 +48,6 @@ function itg_sso_get_mail_content($account, $to) {
  * @param object $node
  * @return type
  */
-function itg_sso_notification_mail_content($account) {
-  return theme('itg_sso_notification_mail', array('account' => $account));
+function itg_sso_notification_mail_content($account, $url_info, $mail_body, $name) {
+  return theme('itg_sso_notification_mail', array('account' => $account, 'url_info' => $url_info, 'mail_body' => $mail_body, 'act_type' => $name));
 }

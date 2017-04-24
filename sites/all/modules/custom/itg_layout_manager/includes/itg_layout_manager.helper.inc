@@ -83,14 +83,20 @@ function check_template_of_section($section_name, $template_name) {
  * @return array $render_array
  */
 function get_itg_widget($widget_name, $widget_info = 'custom', $filter_url = NULL) {
-  
+
   $widget_info = explode('|', $widget_info);
   
   if (isset($widget_name) && $widget_name == 'section_wise_order') {
     return create_setion_widgets($filter_url, $widget_info[1]);
   }
-  else if (isset($widget_name) && $widget_name == 'custom_html_widget') {
+  else if (isset($widget_name) && $widget_name == 'custom_html_widgets') {
     return get_html_custom_widget($filter_url);    
+  }
+  else if (isset($widget_name) && $widget_name == 'custom_content_widgets') {
+    return itg_custom_widget_ordering_data_from_title($filter_url);    
+  }
+  else if (isset($widget_name) && $widget_name == 'highlights') {
+    return get_highlights_widget($filter_url);    
   }
   else if (isset($widget_name) && $widget_name == 'section_widget2_wise_order') {
     return create_setion_widget2($filter_url);
@@ -109,9 +115,20 @@ function get_itg_widget($widget_name, $widget_info = 'custom', $filter_url = NUL
   else if ($widget_info[0] == 'view') {
     return views_embed_view($widget_name, $widget_info[1], $widget_info[2]);
   }
-  else {      
-    $block = block_load('itg_widget', $widget_name);
+  elseif (isset($widget_name) && $widget_name == 'recommended_anonymous_user') {
+    //itg_front_end_common/recommended_anonymous_user
+    $block = block_load('itg_front_end_common', $widget_name);
     $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+    return render($render_array);
+  }
+  else {
+    if($widget_name=='custom_ask_expert_form_block') {
+      $block = block_load('itg_ask_expert', $widget_name);
+    } else {
+        $block = block_load('itg_widget', $widget_name);
+    }   
+    $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+    
     return render($render_array);
   }
   
@@ -154,6 +171,98 @@ function get_template_name($tpl_dir) {
   return $data;
 }
 
+
+/**
+ * Get layout details by section_name and template_name for front and admin
+ * @param string $section_name
+ * @param string $template_name 
+ * @return array $data
+ */
+function get_layout_details_by_block_name($section_name, $template_name, $status,$block_name) {
+  
+  if ($status == 'admin') {
+    //Get last layout setting
+    $query = db_select('itg_layout_tpl', 'tpl');
+    $query->fields('tpl', array('id', 'status'));  
+    $query->condition('section_name', $section_name)
+          ->condition('template_name', $template_name)
+          ->condition('block_name',$block_name,'IN');
+    $query->orderBy('tpl.id', 'DESC')->range(0,1);
+
+    $last_tpl = $query->execute()->fetchField();
+  }
+  
+  //Get layout setting details info
+  $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
+  $itg_query->fields('layout_manager', array('widget_name', 'block_name', 'block_title', 'widget_info', 'filter_url'));  
+  $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');  
+  $itg_query->condition('layout_tpl.section_name', $section_name);    
+  $itg_query->condition('layout_tpl.template_name', $template_name);
+  $itg_query->condition('block_name',$block_name,'IN');
+  
+  //condition for front
+  if ($status == 'front') {
+    $itg_query->condition('layout_tpl.status', 1);
+  } //condition for admin
+  elseif ($status == 'admin') {
+    $itg_query->condition('layout_tpl.id', $last_tpl);     
+  }
+  
+  $itg_result = $itg_query->execute()->fetchAll();
+  
+  foreach ($itg_result as $itg_val) {
+    $filter_url = $itg_val->filter_url;
+    // for widget display name
+    if (!empty($itg_val->widget_name)) {
+      $widget_info_array = explode('|', $itg_val->widget_info);
+      if($widget_info_array[1] !="" &&  $widget_info_array[1] !="undefined") {
+        $result['widget_display_name'] = '-'.$widget_info_array[1];  
+      } else {
+          $result['widget_display_name'] = "";  
+      }
+    }
+    
+    $result['widget_name'] = $itg_val->widget_name;
+    $result['block_title'] = "";
+    if ($status == 'front' && $itg_val->widget_name == 'section_wise_order') { // for section card widgets
+      if (!empty($itg_val->block_title)) {
+        $result['block_title'] = l($itg_val->block_title, 'taxonomy/term/'.$filter_url);
+      }
+      $result['more_url'] = l('More[+]', 'taxonomy/term/'.$filter_url);
+    }else {
+      $result['block_title'] = $itg_val->block_title; //for default widgets
+    }
+    
+    // for photo section and video section
+    if ($status == 'front' && ($itg_val->widget_name == 'photo_list_of_category' || $itg_val->widget_name == 'video_list_of_category')) {
+      $result['cat_id'] = $filter_url; // category id
+      
+      if (isset($_GET['category'])) {
+        $filter_url = $_GET['category'];
+      }
+      else {
+        // Temp code
+       $filter_url =  get_first_category_of_media_widget(arg(2), $template_name, $itg_val->widget_name);
+      }
+    }
+    
+    if (isset($itg_val->widget_name)) {
+      // get widget block     
+      $widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url);
+    } 
+    else {
+      $widget = '<p>Drag template widgets here !</p>';
+    }
+    
+    $result['widget'] = $widget;
+    
+    $data[$itg_val->block_name] = $result;
+  }
+  
+  return $data; 
+  
+}
+
 /**
  * Get layout details by section_name and template_name for front and admin
  * @param string $section_name
@@ -161,7 +270,7 @@ function get_template_name($tpl_dir) {
  * @return array $data
  */
 function get_layout_details($section_name, $template_name, $status) {
-  
+ 
   if ($status == 'admin') {
     //Get last layout setting
     $query = db_select('itg_layout_tpl', 'tpl');
@@ -189,23 +298,28 @@ function get_layout_details($section_name, $template_name, $status) {
   }
   
   $itg_result = $itg_query->execute()->fetchAll();
-  
+  $data = array();
   foreach ($itg_result as $itg_val) {
+   
     $filter_url = $itg_val->filter_url;
     // for widget display name
     if (!empty($itg_val->widget_name)) {
       $widget_info_array = explode('|', $itg_val->widget_info);
-      if($widget_info_array[1] !="" &&  $widget_info_array[1] !="undefined")
-      {
-      $result['widget_display_name'] = '-'.$widget_info_array[1];  
-      }else{
+      
+      if(!empty($widget_info_array[1]) &&  $widget_info_array[1] !="undefined") {
+        $result['widget_display_name'] = '-'.$widget_info_array[1];  
+      } else{
           $result['widget_display_name'] = "";  
       }
     }
     
     $result['widget_name'] = $itg_val->widget_name;
+    $result['block_title'] = "";
+    
     if ($status == 'front' && $itg_val->widget_name == 'section_wise_order') { // for section card widgets
-      $result['block_title'] = l($itg_val->block_title, 'taxonomy/term/'.$filter_url);
+      if (!empty($itg_val->block_title)) {
+        $result['block_title'] = l($itg_val->block_title, 'taxonomy/term/'.$filter_url);
+      }
       $result['more_url'] = l('More[+]', 'taxonomy/term/'.$filter_url);
     }else {
       $result['block_title'] = $itg_val->block_title; //for default widgets
@@ -227,8 +341,7 @@ function get_layout_details($section_name, $template_name, $status) {
     }
     
     if (isset($itg_val->widget_name)) {
-      // get widget block
-      //p($filter_url);
+      // get widget block     
       $widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url);
     } 
     else {
@@ -260,6 +373,7 @@ function display_section_widgets_list($section_name, $template_name, $widget_typ
   $itg_query->condition('layout_tpl.template_section_name', $section_name);
   $itg_query->condition('layout_tpl.template_name', $template_name);
   $itg_query->condition('layout_tpl.widget_type', $widget_type);
+  $itg_query->orderBy('id', 'DESC');
   $itg_result = $itg_query->execute()->fetchAll();
   
   $content = category_widget_list($itg_result, $widget_type);
@@ -330,7 +444,7 @@ function get_section_widgets_id($cid, $section, $widget_type) {
  * @return array
  */
 function get_widgets_poll_list() {
-  
+  $widget_type = '';
   $date = date('Y-m-d H:i:s');
   //echo $date;
   $query = db_select('node', 'n');
@@ -498,4 +612,138 @@ function get_html_custom_widget($nid) {
   $node = node_load($nid); 
   $html_code = $node->body[LANGUAGE_NONE][0]['value'];  
   return theme("html_custom_widget", array("data" => $html_code));  
+}
+
+/**
+ * Get highlights widgets for layout
+ * @return theme
+ */
+function get_highlights_widget($nid) {  
+    global $theme , $base_url;
+    $highlights_node = node_load($nid);
+    
+    $output = '';
+    $text = '';
+    $output .= '<div class="wrap-listing">';
+    foreach ($highlights_node->field_highlights[LANGUAGE_NONE] as $highlights_arr) {
+      $highlights_detail = entity_load('field_collection_item', array($highlights_arr['value']));
+      
+      
+      if(!empty($highlights_detail[$highlights_arr['value']]->field_highlights_url[LANGUAGE_NONE][0]['value'])) {
+        $highlight_title = l($highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'], $highlights_detail[$highlights_arr['value']]->field_highlights_url[LANGUAGE_NONE][0]['value'], array('attributes' => array('target' => '_blank')));
+      }
+      
+      else {
+          $highlight_title = $highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'];
+      }
+      
+      $like_dislike = '';
+      
+      $associate_emoji = $highlights_detail[$highlights_arr['value']]->field_emoji_condition['und'][0]['value'];
+      
+      //If none is deifne then not show any emoji or thumb.
+      
+      if($associate_emoji != "none") {
+        
+        //Show only like displike.
+        
+        if($associate_emoji == 0) {
+          if (function_exists('itg_event_backend_highlights_like_dislike')) {
+            if ($theme != 'itgadmin') {
+              $like_dislike = itg_event_backend_highlights_like_dislike($highlights_arr['value']);
+            }
+          }
+        }
+
+
+        $emoji_reaction = '<span class="emoji-container">';
+        $anchor_pointer_class = "def-cur-pointer";
+        // Handel No case start.
+        // IF associate emoji is No then dont show otherwise display on front end.
+
+        if($associate_emoji == 1) {
+          // Possible cookie for same line emoji on hightlight.
+          $cookie_array = array(
+            'hightlights_emoji_'.$highlights_arr['value'].'-field_field_emoji_highlights_1',
+            'hightlights_emoji_'.$highlights_arr['value'].'-field_field_emoji_highlights_2',
+            'hightlights_emoji_'.$highlights_arr['value'].'-field_field_emoji_highlights_3',
+          );
+          // Make emoji disable if cookie cookie is Set.
+          if(isset($_COOKIE[$cookie_array[0]]) || isset($_COOKIE[$cookie_array[1]]) || isset($_COOKIE[$cookie_array[2]])) {
+            $anchor_pointer_class = "def-cur-none-pointer";
+          }
+          // First emoji logic.
+          if (!empty($highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_1[LANGUAGE_NONE][0]['value']) && $highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_1[LANGUAGE_NONE][0]['value'] == 1) {
+            $emoji1_src = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/highlights_icons/Good.png";
+            $emoji1_title = $highlights_detail[$highlights_arr['value']]->field_field_emoji1_title[LANGUAGE_NONE][0]['value'];
+            $field_class = $highlights_arr['value'].'-field_field_emoji_highlights_1';
+            // Count user click from mongodb.
+            if(function_exists('itg_common_mongo_activity_count')) {
+              $emoji_count = itg_common_mongo_activity_count($field_class, 'front_user_activity_highlight');
+            }
+            $emoji_image = "<img src='".$emoji1_src."' title= '".$emoji1_title."' alt='' /> ";
+            $count_message = ' <span class="'.$field_class.'">('.$emoji_count.')</span> ';
+            // Prepare reaction link.
+            $emoji_reaction .= l($emoji_image , 'javascript:void(0)' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $field_class , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "data-click" => "nice" , "data-nodeid" => $highlights_arr['value'] , "class" => array($anchor_pointer_class ,  "user-activity-highlight"))));
+            $emoji_reaction .= $count_message;
+          }
+
+          if (!empty($highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_2[LANGUAGE_NONE][0]['value']) && $highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_2[LANGUAGE_NONE][0]['value'] == 1) {
+            $emoji2_src = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/highlights_icons/Bad.png";
+            $emoji2_title = $highlights_detail[$highlights_arr['value']]->field_field_emoji2_title[LANGUAGE_NONE][0]['value'];
+            $field_class = $highlights_arr['value'].'-field_field_emoji_highlights_2';
+            if(function_exists('itg_common_mongo_activity_count')) {
+              $emoji_count = itg_common_mongo_activity_count($field_class, 'front_user_activity_highlight');
+            }
+            $emoji_image = "<img src='".$emoji2_src."' title= '".$emoji2_title."' alt='' /> ";
+            $emoji_reaction .= l($emoji_image , 'javascript:void(0)' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $field_class , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "data-click" => "no", "data-nodeid" => $highlights_arr['value'], "class" => array($anchor_pointer_class ,  "user-activity-highlight"))));
+            $count_message = ' <span class="'.$field_class.'">('.$emoji_count.')</span> ';
+            $emoji_reaction .= $count_message;
+          }
+
+          if (!empty($highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_3[LANGUAGE_NONE][0]['value']) && $highlights_detail[$highlights_arr['value']]->field_field_emoji_highlights_3[LANGUAGE_NONE][0]['value'] == 1) {
+            $emoji3_src = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/highlights_icons/WGMF.png";
+            $emoji3_title = $highlights_detail[$highlights_arr['value']]->field_field_emoji3_title[LANGUAGE_NONE][0]['value'];
+            $field_class = $highlights_arr['value'].'-field_field_emoji_highlights_3';
+            if(function_exists('itg_common_mongo_activity_count')) {
+              $emoji_count = itg_common_mongo_activity_count($field_class, 'front_user_activity_highlight');
+            }
+            $emoji_image = "<img src='".$emoji3_src."' title= '".$emoji3_title."' alt='' />";
+            $emoji_reaction .= l($emoji_image , 'javascript:void(0)' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $field_class , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji", "data-click" => "whatever" ,"data-nodeid" => $highlights_arr['value'], "class" => array($anchor_pointer_class ,  "user-activity-highlight"))));
+            $count_message = ' <span class="'.$field_class.'">('.$emoji_count.')</span>';
+            $emoji_reaction .= $count_message;
+          }
+          // Add span for for vote messsage.
+          $emoji_reaction .= '</span><p class="hightlights_emoji_msg_'.$highlights_arr['value'].'"></p>';
+        }
+      }
+      // Handel No case END.
+      // Prepare link dislike and emoji.
+      $text .= '<div class="h-list">' . $highlight_title . $like_dislike . $emoji_reaction . '</div>';      
+
+    }
+
+    $output .= $text. '</div>';
+  
+  
+  return theme("itg_highlights_widget", array("data" => $output));  
+}
+
+/**
+ * Get all html_custom widgets list for layout setting page
+ * @return array
+ */
+function get_highlights_widget_list() {
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid', 'title'));  
+  $query->condition('type', 'heighlights');        
+  $itg_result = $query->execute()->fetchAll();
+  
+  $rows = array();
+  
+  foreach ($itg_result as $row) {
+    $widget[$row->nid] = $row->title;
+  }
+  
+  return $widget;
 }

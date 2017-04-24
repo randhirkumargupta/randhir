@@ -1,0 +1,61 @@
+<?php
+/**
+ * @file: itg_dbmigrate.install 
+ */
+
+/**
+ * Implements hook_schema()
+ * Defining table structure to store event node information
+ * @return array
+ */
+function itg_dbmigrate_schema() {  
+  $schema['itg_dbmigrate_related_content'] = array(
+      'description' => 'Table for save related content story, photo and video',
+      'fields' => array(
+          'id' => array(
+              'description' => 'The Primary Id',
+              'type' => 'serial',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+          ),
+          'migrated_nid' => array(
+              'description' => 'migrated node id which created in system',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'source_id' => array(
+              'description' => 'Xml node source id',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'type' => array(
+              'description' => 'Story, video, photo (text, photo, video)',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'xml_id' => array(
+              'description' => 'XML content id',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+           'migration_node_type' => array(
+              'description' => 'Story, videogallery, photogallery',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+      ),
+      'primary key' => array('id'),
+  );
+
+  return $schema;
+}

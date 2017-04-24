@@ -1959,8 +1959,10 @@ function apachesolr_get_index_bundles($env_id, $entity_type) {
  * Implements hook_entity_insert().
  */
 function apachesolr_entity_insert($entity, $type) {
+  if($type != 'taxonomy_term'){ //ved
   // For our purposes there's really no difference between insert and update.
   return apachesolr_entity_update($entity, $type);
+  }
 }
 
 /**
@@ -1977,6 +1979,7 @@ function apachesolr_entity_insert($entity, $type) {
  *   TRUE if this entity should be indexed, FALSE otherwise.
  */
 function apachesolr_entity_should_index($entity, $type) {
+  if($type != 'taxonomy_term'){ //ved
   $info = entity_get_info($type);
   list($id, $vid, $bundle) = entity_extract_ids($type, $entity);
 
@@ -1984,12 +1987,14 @@ function apachesolr_entity_should_index($entity, $type) {
     return TRUE;
   }
   return FALSE;
+  }
 }
 
 /**
  * Implements hook_entity_update().
  */
 function apachesolr_entity_update($entity, $type) {
+  if($type != 'taxonomy_term'){ //ved
   // Include the index file for the status callback
   module_load_include('inc', 'apachesolr', 'apachesolr.index');
   if (apachesolr_entity_should_index($entity, $type)) {
@@ -2036,12 +2041,14 @@ function apachesolr_entity_update($entity, $type) {
       ))
       ->execute();
   }
+  }
 }
 
 /**
  * Retrieve the indexer table for an entity type.
  */
 function apachesolr_get_indexer_table($type) {
+  if($type != 'taxonomy_term'){ //ved
   $entity_info = entity_get_info();
   if (isset($entity_info[$type]['apachesolr']['index_table'])) {
     $indexer_table = $entity_info[$type]['apachesolr']['index_table'];
@@ -2050,6 +2057,7 @@ function apachesolr_get_indexer_table($type) {
     $indexer_table = 'apachesolr_index_entities';
   }
   return $indexer_table;
+  }
 }
 
 /**
@@ -2058,11 +2066,13 @@ function apachesolr_get_indexer_table($type) {
  * Delete the entity's entry from a fictional table of all entities.
  */
 function apachesolr_entity_delete($entity, $entity_type) {
+  if($entity_type != 'taxonomy_term'){ //ved
   list($entity_id) = entity_extract_ids($entity_type, $entity);
   // Get all environments and delete it from their table and index
   $environments = apachesolr_load_all_environments();
   foreach ($environments as $environment) {
     apachesolr_remove_entity($environment['env_id'], $entity_type, $entity_id);
+  }
   }
 }
 

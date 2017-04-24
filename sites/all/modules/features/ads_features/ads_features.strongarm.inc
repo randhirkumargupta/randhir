@@ -90,13 +90,19 @@ function ads_features_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '2',
+          'weight' => '3',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
+          'weight' => '2',
+        ),
+        'domain' => array(
           'weight' => '1',
+        ),
+        'redirect' => array(
+          'weight' => '17',
         ),
       ),
       'display' => array(),

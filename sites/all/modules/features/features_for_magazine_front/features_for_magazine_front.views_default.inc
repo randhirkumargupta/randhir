@@ -333,7 +333,7 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['sorts']['extra']['id'] = 'extra';
   $handler->display->display_options['sorts']['extra']['table'] = 'itg_widget_order';
   $handler->display->display_options['sorts']['extra']['field'] = 'extra';
-  /* Contextual filter: Content: Issue date (field_story_issue_date) */
+  /* Contextual filter: Field: DOB (field_story_issue_date) */
   $handler->display->display_options['arguments']['field_story_issue_date_value']['id'] = 'field_story_issue_date_value';
   $handler->display->display_options['arguments']['field_story_issue_date_value']['table'] = 'field_data_field_story_issue_date';
   $handler->display->display_options['arguments']['field_story_issue_date_value']['field'] = 'field_story_issue_date_value';
@@ -365,7 +365,7 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['filters']['field_story_magazine_story_issue_value']['value'] = array(
     'magazine_issue_story' => 'magazine_issue_story',
   );
-  /* Filter criterion: Content: Issue date (field_story_issue_date) */
+  /* Filter criterion: Field: DOB (field_story_issue_date) */
   $handler->display->display_options['filters']['field_story_issue_date_value']['id'] = 'field_story_issue_date_value';
   $handler->display->display_options['filters']['field_story_issue_date_value']['table'] = 'field_data_field_story_issue_date';
   $handler->display->display_options['filters']['field_story_issue_date_value']['field'] = 'field_story_issue_date_value';
@@ -379,6 +379,7 @@ function features_for_magazine_front_views_default_views() {
 
   /* Display: Magzine bottom story block */
   $handler = $view->new_display('block', 'Magzine bottom story block', 'block');
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
   $handler->display->display_options['defaults']['query'] = FALSE;
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
@@ -399,6 +400,13 @@ function features_for_magazine_front_views_default_views() {
     'image_style' => 'magazine_top_three_story_237x133',
     'image_link' => 'content',
   );
+  /* Field: Global: Dynamic Clone Link */
+  $handler->display->display_options['fields']['dynamic_clone_link']['id'] = 'dynamic_clone_link';
+  $handler->display->display_options['fields']['dynamic_clone_link']['table'] = 'views';
+  $handler->display->display_options['fields']['dynamic_clone_link']['field'] = 'dynamic_clone_link';
+  $handler->display->display_options['fields']['dynamic_clone_link']['label'] = '';
+  $handler->display->display_options['fields']['dynamic_clone_link']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['dynamic_clone_link']['element_label_colon'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -416,9 +424,17 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="magazin-post">
 [field_story_extra_large_image]
-<h3>[title]</h3>
+<h3>[dynamic_clone_link]</h3>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['group_type'] = 'count_distinct';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Section wise ordering content: weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
@@ -449,6 +465,13 @@ function features_for_magazine_front_views_default_views() {
     'image_style' => 'magazine_top_story_483x271',
     'image_link' => 'content',
   );
+  /* Field: Global: Dynamic Clone Link */
+  $handler->display->display_options['fields']['dynamic_clone_link']['id'] = 'dynamic_clone_link';
+  $handler->display->display_options['fields']['dynamic_clone_link']['table'] = 'views';
+  $handler->display->display_options['fields']['dynamic_clone_link']['field'] = 'dynamic_clone_link';
+  $handler->display->display_options['fields']['dynamic_clone_link']['label'] = '';
+  $handler->display->display_options['fields']['dynamic_clone_link']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['dynamic_clone_link']['element_label_colon'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -466,9 +489,16 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="magazin-post">
 [field_story_extra_large_image]
-<h2>[title]</h2>
+<h2>[dynamic_clone_link]</h2>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Section wise ordering content: weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';

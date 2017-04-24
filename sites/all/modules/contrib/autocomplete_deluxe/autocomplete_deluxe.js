@@ -294,9 +294,12 @@
     if (item.newTerm === true) {
       item.label = item.value;
     }
-
+    // add patch for blank tags
+    if($.trim(item.value).length > 0) {
+      this.element = $('<span class="autocomplete-deluxe-item">' + item.label + '</span>');
+    }
     this.value = item.value;
-    this.element = $('<span class="autocomplete-deluxe-item">' + item.label + '</span>');
+    // this.element = $('<span class="autocomplete-deluxe-item">' + item.label + '</span>');
     this.widget = widget;
     this.item = item;
     var self = this;
@@ -375,10 +378,10 @@
       jqObject.val('');
     };
 
-    parent.mouseup(function() {
+    /*parent.mouseup(function() {
       jqObject.autocomplete('search', '');
       jqObject.focus();
-    });
+    });*/
 
     jqObject.bind("autocompleteselect", function(event, ui) {
       self.addValue(ui.item);

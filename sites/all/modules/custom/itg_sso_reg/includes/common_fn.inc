@@ -76,6 +76,9 @@ function itg_sso_reg_otp_callback() {
     if (!empty($mobile)) {
       $mail_content = itg_sso_sms_send($rand_otp, $mobile);
     }
+    if (!empty($mobile) && !empty($email)) {
+      $mail_content = itg_sso_otp_mail_content($rand_otp, $email);
+    }
     //$mail_content = itg_sso_get_mail_content($otp, $email);
   }
 }
@@ -151,7 +154,7 @@ function itg_user_mapping_activate($uid) {
  */
 function itg_sso_user_activate_callback() {
   $user_id = base64_decode(arg(1));
-
+  $redirect_url = 'http://'.$_SERVER['HTTP_HOST'].'?active=true';
   if (isset($user_id)) {
     $user_updated = db_update('itg_user_activate_info') // Table name no longer needs {}
         ->fields(array(
@@ -161,8 +164,8 @@ function itg_sso_user_activate_callback() {
         ->condition('uid', $user_id, '=')
         ->execute();
     
-    print '<div class="activate-message">Your Account Activated Sucessfully, Please login to continue !</div>';
-    drupal_goto('http://dev.indiatodayonline.in/');
+    print '<div class="activate-message">Your Account Activated Sucessfully!</div>';
+    drupal_goto($redirect_url);
   }
 }
 

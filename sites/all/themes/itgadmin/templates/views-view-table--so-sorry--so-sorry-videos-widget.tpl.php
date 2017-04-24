@@ -47,7 +47,10 @@
                     $new_text .= "The ";
                   }
                   $new_text .= ucwords($content);
-                  print "<a class='remove-so-sorry-extra-data' href='remove-so-sorry-extra-data/".$row['nid']."'>" .t("Remove From $new_text"). "</a>";
+                  $node_id = $row['nid'];
+                  $remove_lebel = t("Remove From @title", array("@title" => $new_text));
+                  $url_to_remove = "remove-so-sorry-extra-data/$node_id";
+                  print l($remove_lebel,$url_to_remove, array("attributes"=>array("class" => array('remove-so-sorry-extra-data'))));
                 } else {
                   ?>
                 <input type="radio" data-nid='<?php print $row['nid'] ?>' class="add-so-sorry-extra-data" name='feature_or_remix' value="feature"> Feature

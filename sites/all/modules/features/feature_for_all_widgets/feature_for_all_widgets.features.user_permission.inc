@@ -14,7 +14,6 @@ function feature_for_all_widgets_user_default_permissions() {
   $permissions['execute itg_widget_categories_wise_node_group'] = array(
     'name' => 'execute itg_widget_categories_wise_node_group',
     'roles' => array(
-      'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',

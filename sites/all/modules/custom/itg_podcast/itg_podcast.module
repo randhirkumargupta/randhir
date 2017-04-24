@@ -71,6 +71,7 @@ function itg_podcast_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
 
     case 'podcast_node_form':
+      $arg = arg();
       unset($form['actions']['preview_changes']);
       $form['#after_build'][] = 'itg_podcast_after_build';
       $form['#validate'][] = 'itg_podcast_custom_validate';
@@ -93,6 +94,7 @@ function itg_podcast_form_alter(&$form, &$form_state, $form_id) {
       }
       $form['actions']['submit']['#submit'][] = 'itg_podcast_submit_status_message';
       $form['actions']['submit']['#submit'][] = 'itg_podcast_custom_submit';
+      drupal_add_css("#field-primary-category-html-text-add-more-wrapper, #edit-field-story-category .description , .field-name-field-podcast-audio-length {display:none !important}", array("type" => "inline", "scope" => "footer"));
       break;
   }
 }
@@ -123,11 +125,11 @@ function itg_audio_check_exist_file($filename) {
   $results = $query->execute()->fetchAll();
 
   if (!isset($results[0])) {
-    $res = 'public://dailymotion_audio_dir/' . $filename;
+    $res = 'public://podcast_audio_dir/' . $filename;
     return $res;
   }
   else {
-    $result = explode('public://dailymotion_audio_dir/', $results[0]->uri);
+    $result = explode('public://podcast_audio_dir/', $results[0]->uri);
     $path_info = pathinfo($results[0]->filename);
     $extension = $path_info['extension'];
     $file_name = $path_info['filename'];
@@ -142,7 +144,7 @@ function itg_audio_check_exist_file($filename) {
       $value = '_0';
     }
     $file_info = pathinfo($filename);
-    $result = 'public://dailymotion_audio_dir/' . $file_info['filename'] . $value . '.' . $extension;
+    $result = 'public://podcast_audio_dir/' . $file_info['filename'] . $value . '.' . $extension;
     return $result;
   }
 }
@@ -153,255 +155,17 @@ function itg_audio_check_exist_file($filename) {
  * @param array $form_state
  */
 function itg_podcast_custom_submit($form, &$form_state) {
-  foreach ($form_state['values']['field_story_itg_tags'][LANGUAGE_NONE] as $tags) {
-    $tag[] = $tags['name'];
-  }
-  $tag_value = implode(', ', $tag);
-  $tags_value = trim($tag_value, ", ");
-  $node_id = $form_state['values']['nid'];
-  foreach ($form_state['values']['field_dailymotion_playlist'][LANGUAGE_NONE] as $playlist_term) {
-    $playlist_name[] = $playlist_term['name'];
-  }
-  foreach ($form_state['values']['field_podcast_audio_upload'][LANGUAGE_NONE] as $key => $fieldcollection) {
-    if (is_numeric($key)) {
-      $fid = $form_state['values']['field_podcast_audio_upload'][LANGUAGE_NONE][$key]['field_podcast_upload_audio_file'][LANGUAGE_NONE][0]['fid'];
-      if ($fid != '' && is_numeric($fid)) {
-        $query = db_select('dailymotion_response_details', 'drd');
-        $query->fields('drd', array('fid', 'video_id'));
-        $query->condition('fid', $fid, '=');
-        $result_fid = $query->execute()->fetchAssoc();
-        if ($result_fid == '') {
-          $new_fid_array[$key] = $fid;
-        }
-        else {
-          // perform edit operation when node edit
-          $result_video_fid .= $result_fid['video_id'] . ', ';
-          //$playlist_response = itg_podcast_edit_dailymotion($result_fid, $playlist_name, $tags_value, $node_id);
-          itg_podcast_unlink_video_playlist($result_fid, $playlist_name, $tags_value);
-        }
-      }
-    }
-  }
-  if ($result_video_fid != '') {
-    $final_exist_video = trim($result_video_fid, ", ");
-    itg_podcast_edit_dailymotion($final_exist_video, $playlist_name, $node_id);
-  }
+  module_load_include('php', 'itg_podcast', 'includes/getid3/getid3');
+  // code insert image in custom table
+  $node_id = $form_state['node']->nid;
+  if ($form_state['input']['original_image_fids'] != "") {
+    $image_ids = explode('#', $form_state['input']['original_image_fids']);
 
-  foreach ($new_fid_array as $key => $value) {
-    if (is_numeric($key)) {
-      $file_details = file_load($value);
-      $real_path = drupal_realpath($file_details->uri);
-      $response = itg_podcast_dailymotion($real_path, $key, $file_details->uri, $value, $tags_value);
-      $response_result['video_id'] = $response['id'];
-      $response_result['fid'] = $response['fid'];
-      db_insert('dailymotion_response_details')
-          ->fields(array(
-            'title' => $response['title'],
-            'channel' => $response['channel'],
-            'fid' => $response['fid'],
-            'tags' => $response['tags'],
-            'video_id' => $response['id'],
-            'nid' => $node_id,
-            'upload_time' => REQUEST_TIME,
-            'video_duration' => $response['duration'],
-          ))
-          ->execute();
-      itg_podcast_unlink_video_playlist($response_result, $playlist_name, $tags_value);
-      $playlist_response = itg_podcast_edit_dailymotion($response_result, $playlist_name, $node_id);
+    if (!empty($image_ids)) {
+      if (function_exists('itg_photogallery_insert_image_data'))
+        itg_photogallery_insert_image_data($image_ids, $node_id);
     }
   }
-}
-
-/**
- * Implements function for dailymotion api
- * @return object
- */
-function itg_podcast_dailymotion_api() {
-require_once 'includes/Dailymotion.php';
-  $user_name = variable_get('dailymotion_username', '');
-  $password = variable_get('dailymotion_password', '');
-  $api_key = variable_get('dailymotion_apikey', '');
-  $api_secret = variable_get('dailymotion_secretkey', '');
-
-  try {
-    $api = new Dailymotion();
-    $scopes = array(
-      'userinfo',
-      'feed',
-      'manage_videos',
-      'manage_subtitles',
-      'read',
-      'write',
-      'delete',
-    );
-    $api->setGrantType(
-        Dailymotion::GRANT_TYPE_PASSWORD, $api_key, $api_secret, $scopes, array(
-      'username' => $user_name,
-      'password' => $password,
-        )
-    );
-  }
-  catch (Exception $e) {
-    if ($e->getMessage() == "Missing API key") {
-      if (isset($_GET['destination'])) {
-        unset($_GET['destination']);
-      }
-      drupal_set_message(t('Please enter API Key.'), 'error');
-      drupal_goto('dailymotion/config');
-    }
-    else {
-      drupal_set_message($e->getMessage(), 'error');
-    }
-  }
-  return $api;
-}
-
-/**
- * Implements function for remove video from playlist
- */
-function itg_podcast_unlink_video_playlist($vid_res_result, $playlist_name, $tags_value) {
-  $video_id = $vid_res_result['video_id'];
-  $api = itg_podcast_dailymotion_api();
-  // Tags assign to node
-  $api->post('/video/' . $video_id . '?tags=' . $tags_value);
-  $old_playlist = array_diff($_SESSION['old_playlist_audio'], $playlist_name);
-  // Delete playlist with video
-  if (isset($old_playlist)) {
-    foreach ($old_playlist as $old_play) {
-      $del_play_id = itg_videogallery_get_playlist_id($old_play);
-      if ($del_play_id[0]->pid != '') {
-        $api->delete('/playlist/' . $del_play_id[0]->pid . '/videos/' . $video_id);
-      }
-    }
-  }
-}
-
-/**
- * Implements dailymotion video edit function
- * @param array $vid_res_result
- * @param array $playlist_name
- * @param array $tags_value
- * @param int $node_id
- */
-function itg_podcast_edit_dailymotion($vid_res_result, $playlist_name, $node_id) {
-  if (is_array($vid_res_result)) {
-    $video_id = $vid_res_result['video_id'];
-    $fid = $vid_res_result['fid'];
-  }
-  else {
-    $video_id = $vid_res_result;
-  }
-  $api = itg_podcast_dailymotion_api();
-  // create playlist
-  foreach ($playlist_name as $name) {
-    // local saved playlist check
-    $exist_playlist = itg_videogallery_get_playlist_id($name);
-    if ($exist_playlist[0]->pid == '') {
-      try {
-        $result = $api->post(
-            '/me/playlists', array(
-          'name' => $name,
-            )
-        );
-        // Insert data in dailymotion_playlist_details table
-        $query = db_insert('dailymotion_playlist_details')
-            ->fields(array(
-          'pid' => $result['id'],
-          'playlist_name' => $result['name'],
-          'node_id' => $node_id,
-          'video_id' => $video_id,
-        ));
-        $query->execute();
-        if (is_array($vid_res_result)) {
-          $api->post('/playlist/' . $result["id"] . '/videos/' . $video_id);
-        }
-        else {
-          $api->post('/playlist/' . $result["id"] . '/videos?ids=' . $video_id);
-        }
-      }
-      catch (Exception $e) {
-        if ($e->getCode() == 500) {
-          $playlist_id = itg_videogallery_get_playlist_id($name);
-          $api->post('/playlist/' . $playlist_id[0]->pid . '/videos/' . $video_id);
-          if (is_array($vid_res_result)) {
-            $api->post('/playlist/' . $playlist_id[0]->pid . '/videos/' . $video_id);
-          }
-          else {
-            $api->post('/playlist/' . $playlist_id[0]->pid . '/videos?ids=' . $video_id);
-          }
-        }
-      }
-    }
-    else {
-      $playlist_id = itg_videogallery_get_playlist_id($name);
-      if (is_array($vid_res_result)) {
-        $api->post('/playlist/' . $playlist_id[0]->pid . '/videos/' . $video_id);
-      }
-      else {
-        $api->post('/playlist/' . $playlist_id[0]->pid . '/videos?ids=' . $video_id);
-      }
-    }
-  }
-}
-
-/**
- * Implement dailymotion api call
- * @param string $real_path
- * @param int $key
- * @param string $uri
- * @param int $fid
- * @return array
- */
-function itg_podcast_dailymotion($real_path, $key, $uri, $fid, $tags_value) {
-  $api = itg_podcast_dailymotion_api();
-
-  //$filePath = $real_path;
-  // Temporarily upload a file on Dailymotion' servers
-  // This does not create a video, it only offers you a public URL to work with.
-  try {
-    $url = $api->uploadFile($real_path);
-    $result = $api->post(
-        '/me/videos', array(
-      'url' => $url,
-      'title' => $uri,
-      'tags' => $tags_value,
-      'channel' => 'tv',
-      'published' => TRUE,
-        )
-    );
-    $dur = $api->get(
-        '/video/' . $result['id'], array('fields' => array('duration'))
-    );
-    $result['duration'] = $dur['duration'];
-    $a = new Dailymotion();
-    $a->logout();
-    $result['fid'] = $fid;
-    $result['tags'] = $tags_value;
-  }
-  catch (Exception $e) {
-    if ($e->getMessage() == "This `client_id' doesn't exist.") {
-      if (isset($_GET['destination'])) {
-        unset($_GET['destination']);
-      }
-      drupal_set_message('API Key is wrong.', 'error');
-      drupal_goto('dailymotion/config');
-    }
-    elseif ($e->getMessage() == "Invalid `client_secret'") {
-      if (isset($_GET['destination'])) {
-        unset($_GET['destination']);
-      }
-      drupal_set_message('Secret Key is wrong.', 'error');
-      drupal_goto('dailymotion/config');
-    }
-    elseif ($e->getCode() == 6) {
-      drupal_set_message('There is some issue with internet connection.', 'error');
-      drupal_goto();
-    }
-    else {
-      drupal_set_message($e->getMessage() . $e->getCode(), 'error');
-    }
-  }
-  return $result;
 }
 
 /**
@@ -434,6 +198,11 @@ function itg_podcast_custom_validate($form, &$form_state) {
  */
 function itg_podcast_after_build($form, &$form_state) {
   global $user, $base_url;
+  $form['original_image_fids'] = array(
+    '#type' => 'hidden',
+    '#value' => $form_state['input']['original_image_fids'],
+    '#attributes' => array('id' => 'original_image_fids', 'name' => 'original_image_fids'),
+  );
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
@@ -447,7 +216,19 @@ function itg_podcast_after_build($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_podcast_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  $form_id_arr = array('views-exposed-form-manage-podcast-page', 'views-exposed-form-podcast-management-page', 'views-exposed-form-podcast-management-page-1', 'views-exposed-form-podcast-management-page-2', 'views-exposed-form-podcast-management-page-3', 'views-exposed-form-podcast-management-page-5', 'views-exposed-form-podcast-management-page-6', 'views-exposed-form-podcast-management-page-7', 'views-exposed-form-podcast-management-page-4', 'views-exposed-form-podcast-management-page-10');
+  $form_id_arr = array(
+    'views-exposed-form-manage-podcast-page',
+    'views-exposed-form-podcast-management-page',
+    'views-exposed-form-podcast-management-page-1',
+    'views-exposed-form-podcast-management-page-2',
+    'views-exposed-form-podcast-management-page-3',
+    'views-exposed-form-podcast-management-page-5',
+    'views-exposed-form-podcast-management-page-6',
+    'views-exposed-form-podcast-management-page-7',
+    'views-exposed-form-podcast-management-page-4',
+    'views-exposed-form-podcast-management-page-10',
+    'views-exposed-form-podcast-management-page-8',
+  );
   if (in_array($form['#id'], $form_id_arr)) {
     $form['title']['#autocomplete_path'] = 'content-title-list/podcast/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
@@ -538,13 +319,13 @@ function itg_podcast_field_add_more_submit($form, &$form_state) {
   }
   $node = drupal_rebuild_form('podcast_node_form', $form_state, $old_form = NULL);
   $fids = array();
-  $mydir = 'public://dailymotion_audio_dir';
+  $mydir = 'public://podcast_audio_dir';
   file_prepare_directory($mydir, FILE_CREATE_DIRECTORY);
   foreach ($node['upload']['#value'] as $audio) {
-    $scheme = variable_get('file_default_scheme', 'public') . '://dailymotion_audio_dir/';
+    $scheme = variable_get('file_default_scheme', 'public') . '://podcast_audio_dir/';
     $source = $audio['tmppath'];
     $uri = itg_audio_check_exist_file($audio['name']);
-    $newuri = explode('//dailymotion_audio_dir/', $uri);
+    $newuri = explode('//podcast_audio_dir/', $uri);
     $directory = '';
     $destination = file_stream_wrapper_uri_normalize($scheme . $directory . $newuri[1]);
     $destination = file_unmanaged_move($source, $destination);
@@ -591,21 +372,9 @@ function itg_podcast_submit_status_message(&$form, $form_state) {
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
   }
-
-  itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $_REQUEST['destination']);
-}
-
-/**
- * Implement function get dailymotion audio id by fid
- * @param int $fid
- * @return int
- */
-function itg_podcast_get_video($fid) {
-  $query = db_select('dailymotion_response_details', 'dm')
-      ->fields('dm', array('video_id'))
-      ->condition('fid', $fid, '=');
-  $result = $query->execute()->fetchField();
-  return $result;
+  if ($form_state['input']['op'] != 'Save as Draft') {
+    itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $_REQUEST['destination']);
+  }
 }
 
 /**
@@ -624,57 +393,40 @@ function itg_podcast_node_validate($node, $form, &$form_state) {
 }
 
 /**
- * Implements hook_cronapi().
- * {@inheritdoc}
- */
-function itg_podcast_cronapi($op, $job = NULL) {
-  $items['audio_file_delete'] = array(
-    'description' => 'Audio file delete in files folder.',
-    'callback' => 'itg_podcast_remove_audio',
-  );
-  return $items;
-}
-
-/**
- * Implement function for remove files
- */
-function itg_podcast_remove_audio() {
-  $files = glob('sites/default/files/dailymotion_audio_dir/*');
-  foreach ($files as $file) {
-    if (is_file($file))
-      unlink($file);
-  }
-}
-
-/**
- * Implements function for get old playlist for remove video
- * @param int $nid
- * @return array
- */
-function itg_podcast_get_old_playlist($nid) {
-  $query = db_select('field_data_field_dailymotion_playlist', 'fdp');
-  $query->fields('fdp', array('field_dailymotion_playlist_tid', 'entity_id'));
-  $query->join('taxonomy_term_data', 'ttd', 'fdp.field_dailymotion_playlist_tid = ttd.tid');
-  $query->fields('ttd', array('name', 'tid'));
-  $query->condition('fdp.bundle', 'podcast', '=');
-  $query->condition('fdp.entity_id', $nid, '=');
-  $result = $query->execute();
-  foreach ($result as $value) {
-    $output[$value->field_dailymotion_playlist_tid] = $value->name;
-  }
-  return $output;
-}
-
-/**
  * Implements hook_node_presave()
  * {@inheritdoc}
  */
-function itg_podcast_node_presave($node) {
-  if ($node->type == 'podcast') {
-    foreach ($node->field_dailymotion_playlist[LANGUAGE_NONE] as $playlist_val) {
-      $playlist[$playlist_val['tid']] = $playlist_val['name'];
+function itg_podcast_node_presave($node) {  
+  
+  // Set audio length.
+  if ($node->type == "podcast") {
+    module_load_include('php', 'itg_podcast', 'includes/getid3/getid3');
+    foreach ($node->field_podcast_audio_upload['und'] as $audio_key => $audio_files_data) {
+      $fid = $audio_files_data['field_podcast_upload_audio_file']['und'][0]['fid'];
+      $file_data = file_load($fid);
+      $file_url = file_create_url($file_data->uri);
+//      $getID3 = new getID3;
+//      //$head = array_change_key_case(get_headers($file_url, TRUE));
+//      $meta = $getID3->analyze($file_url);
+//      $duration = $meta['playtime_string'];
+      // Handel field collection.
+      // Add value in entity fieldcollection too.
+      $node->field_podcast_audio_upload['und'][$audio_key]['field_podcast_audio_length']['und'][0]['value'] = $file_url;
+      $node->field_podcast_audio_upload['und'][$audio_key]['field_podcast_audio_length']['und'][0]['value']['#default_value'] = $file_url;
+      $node->field_podcast_audio_upload['und'][$audio_key]['field_podcast_audio_length']['und'][0]['value']['#value'] = $file_url;
+      $node->field_podcast_audio_upload['und'][$audio_key]['entity']->field_podcast_audio_length['und'][0]['value'] = $file_url;
+      $node->field_podcast_audio_upload['und'][$audio_key]['entity']->field_podcast_audio_length['und'][0]['value']['#default_value'] = $file_url;
     }
-    $node->field_story_source_id = $playlist;
-    $_SESSION['old_playlist_audio'] = itg_podcast_get_old_playlist($node->nid);
   }
+}
+
+
+function _get_audio_file_url($nid) {
+  $node_data = node_load($nid);
+  $filed_collection_value = $node_data->field_podcast_audio_upload['und'][0]['value'];
+  $entity = entity_load('field_collection_item', array($filed_collection_value))[$filed_collection_value];
+  $file_id = $entity->field_podcast_upload_audio_file['und'][0]['fid'];
+  $file_data = file_load($file_id);
+  $file_url = file_create_url($file_data->uri);
+  return $file_url;
 }

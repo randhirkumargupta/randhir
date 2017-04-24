@@ -5,37 +5,39 @@
  * ItgTagsMigration extends XMLMigration 
  */
 class ItgTagsMigration extends XMLMigration {
+  //public $xml_folder = '/tag/tagss';
   public function __construct($arguments) {
     parent::__construct($arguments);
     $this->description = t('XML feed (multi items) of terms (tags)');
-
+    
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
-      'name' => t('tag name'),
-      'metatitle' => t('metatitle'),
-      'metadesc' => t('metadesc'),
-      'metakey' => t('metakey'),      
-      'sef_url' => t('sef_url'),      
+      'metatag' => t('tag name'),
+      //'metatitle' => t('metatitle'),
+      //'metadesc' => t('metadesc'),
+      //'metakey' => t('metakey'),      
+      //'sef_url' => t('sef_url'),      
     );
 
     
     // This can also be an URL instead of a local file path.
-    $file_path = drupal_realpath('public://');
+    $file_path = 'sites/default/files';
+    //$xml_path = $file_path . '/migrate/xml_file';
+    $xml_folder = $file_path . '/' . 'migrate/xml_file/tags_chunk/';
     
-    $xml_folder = $file_path . '/' . 'migrate/xml_file/';
-    
-    $items_url = $xml_folder . 'tags.xml';
+    $items_url = $xml_folder . 'tags-master.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
-    $item_xpath = '/item/tags';
+    $item_xpath = '/data/row';
     
     // This is the xpath relative to the individual items - thus the full xpath
     // of an ID will be /categories/category/id.
     $item_ID_xpath = 'id';
 
-    $items_class = new MigrateItemsXML($items_url, $item_xpath, $item_ID_xpath);
-    $this->source = new MigrateSourceMultiItems($items_class, $fields);
+    //$items_class = new MigrateItemsXML($items_url, $item_xpath, $item_ID_xpath);
+    //$this->source = new MigrateSourceMultiItems($items_class, $fields);
+    $this->source = new MigrateSourceXML($items_url, $item_xpath, $item_ID_xpath, $fields);
     
     $destination_options = array(
       'allow_duplicate_terms' => TRUE,
@@ -64,17 +66,10 @@ class ItgTagsMigration extends XMLMigration {
     // (ex. xpath=name is equivalent to a full xpath of
     // /categories/category/name).
     
-    $this->addFieldMapping('name', 'name')->xpath('name'); 
-    $this->addFieldMapping('field_tags_display', 'tags_display')->xpath('tags_display');
-    $this->addFieldMapping('field_tags_status', 'tags_status')->xpath('tags_status');
-    $this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
-    $this->addFieldMapping('metatag_title', 'metatitle')->xpath('metatitle');
-    $this->addFieldMapping('metatag_description', 'metadesc')->xpath('metadesc');
-    $this->addFieldMapping('metatag_keywords', 'metakey')->xpath('metakey');
-    
-    
-    //$this->addFieldMapping('metatag_abstract', 'nodeword_abstract');    
-    //$this->addFieldMapping('metatag_robots', 'nodeword_robots');
-
+    $this->addFieldMapping('name', 'metatag')->xpath('metatag');
+    $this->addUnmigratedDestinations(array('path', 'description', 'format', 'weight', 'parent', 'parent_name'));
+  }
+  public function prepareRow($row) {
+    print $row->xml->id . ' ';
   }
 }

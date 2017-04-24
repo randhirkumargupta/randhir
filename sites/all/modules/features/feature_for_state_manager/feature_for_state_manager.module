@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature for state manager feature.
+ */
+
+include_once 'feature_for_state_manager.features.inc';

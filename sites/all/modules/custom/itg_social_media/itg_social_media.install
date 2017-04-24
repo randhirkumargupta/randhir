@@ -11,70 +11,177 @@
  * {@inheritdoc}
  */
 function itg_social_media_schema() {
-  $schema['itg_social_media_logs'] = array(
-    'description' => 'The base table for social media log.',
-    'fields' => array(
-      'id' => array(
-        'description' => 'The primary identifier for a log.',
-        'type' => 'serial',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'nid' => array(
-        'description' => t('Node id of the shared content.'),
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-        'default' => 0,
-      ),
-      'node_title' => array(
-        'description' => 'The node title of the story.',
-        'type' => 'varchar',
-        'length' => 128,
-        'not null' => TRUE,
-        'default' => '',
-      ),      
-      'username' => array(
-        'description' => 'Username of the user who have promoted the content.',
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => TRUE,
-        'default' => '',
-      ),
-      'social_media' => array(
-        'description' => 'Name of the social media where content has been published.',
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => TRUE,
-        'default' => '',
-      ),      
-      'created' => array(
-        'description' => t('The created date for the single record'),
-        'type' => 'int', 
-        'not null' => TRUE, 
-        'default' => 0
-      ),
-      'scheduled_time' => array(
-        'description' => t('The scheduled date for the single record'),
-        'type' => 'int', 
-        'not null' => TRUE, 
-        'default' => 0
-      ),
-      'status' => array(
-        'description' => t('Status of the post 1 for posted and 0 for not posted.'),
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-        'default' => 0,
-      ),
-    ),
-    'indexes' => array(
-      'username' => array('username'),
-      'log_created' => array('created'),
-      'scheduled_time' => array('scheduled_time'),
-    ),
-    'primary key' => array('id'),
-  );  
+    
+    $schema['itg_social_media_logs'] = array(
+        'description' => 'The base table for social media log.',
+        'fields' => array(
+            'id' => array(
+                'description' => 'The primary identifier for a log.',
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+            ),
+            'nid' => array(
+                'description' => t('Node id of the shared content.'),
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'default' => 0,
+            ),
+            'node_title' => array(
+                'description' => 'The node title of the story.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+            'post_id' => array(
+                'description' => 'The post id.',
+                'type' => 'varchar',
+                'length' => 128,
+                'not null' => false,
+                'default' => '',
+            ),
+            'fb_likes' => array(
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => false,
+                'default' => 0,
+            ),
+            'fb_comment' => array(
+                'description' => 'The Fecebook Comment Count.',
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => false,
+                'default' => 0,
+            ),
+            'fb_shares' => array(
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => false,
+                'default' => 0,
+            ),
+            'twitter_retweet' => array(
+                'description' => 'The Twitter retweet Count.',
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => false,
+                'default' => 0,
+            ),
+            'twitter_likes' => array(
+                'description' => 'The Twitter likes Count.',
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => false,
+                'default' => 0,
+            ),
+            'click_on_post' => array(
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => false,
+                'default' => 0,
+            ),
+            'video_views' => array(
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => false,
+                'default' => 0,
+            ),
+            'photo_views' => array(
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => false,
+                'default' => 0,
+            ),
+            'fan_reach' => array(
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => false,
+                'default' => 0,
+            ),
+            'impressions' => array(
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => false,
+                'default' => 0,
+            ),
+            'username' => array(
+                'description' => 'Username of the user who have promoted the content.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+            'social_media' => array(
+                'description' => 'Name of the social media where content has been published.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+            'created' => array(
+                'description' => t('The created date for the single record'),
+                'type' => 'int',
+                'not null' => TRUE,
+                'default' => 0
+            ),
+            'scheduled_time' => array(
+                'description' => t('The scheduled date for the single record'),
+                'type' => 'int',
+                'not null' => TRUE,
+                'default' => 0
+            ),
+            'status' => array(
+                'description' => t('Status of the post 1 for posted and 0 for not posted.'),
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'default' => 0,
+            ),
+        ),
+        'indexes' => array(
+            'username' => array('username'),
+            'log_created' => array('created'),
+            'scheduled_time' => array('scheduled_time'),
+        ),
+        'primary key' => array('id'),
+    );
 
-  return $schema;
+
+    $schema['itg_social_media_node_lock'] = array(
+        'description' => 'The base table for social media lock.',
+        'fields' => array(
+            'id' => array(
+                'description' => 'The primary identifier for a log.',
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+            ),
+            'nid' => array(
+                'description' => t('Node id of the shared content.'),
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'default' => 0,
+            ),
+            'uid' => array(
+                'description' => t('User id of the shared content.'),
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'default' => 0,
+            ),
+            'lock_time' => array(
+                'description' => 'The node title of the story.',
+                'type' => 'datetime',
+                'mysql_type' => 'DATETIME',
+                'not null' => TRUE,
+            ),
+        ),
+        'primary key' => array('id'),
+    );
+
+
+
+    return $schema;
 }

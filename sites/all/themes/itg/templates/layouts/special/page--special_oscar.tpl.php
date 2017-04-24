@@ -70,7 +70,8 @@ if ($theme != 'itgadmin') {
           $cls = 'col-md-9';
         endif;
     ?>
-    <main id="main" class="container">
+    <main id="main" class="container pos-rel">
+      <?php print render($page['vertical_menu']); ?>
       <section id="content" role="main">
         <?php print render($page['highlighted']); ?>
         <?php print $breadcrumb; ?>
@@ -79,6 +80,9 @@ if ($theme != 'itgadmin') {
         <?php if ($title): ?>
           <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
         <?php endif; ?>
+         <div class="front-end-breadcrumb">
+           <?php print render($page['front_end_breadcrumb']);?>
+         </div>
         <?php print render($title_suffix); ?>
         <?php print $messages; ?>
         <?php print render($tabs); ?>
@@ -91,36 +95,39 @@ if ($theme != 'itgadmin') {
 <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
  
 
-<div class="itg-layout-container <?php echo $itg_class; ?> oscar-layout-page">   
-    
+<div class="itg-layout-container <?php echo $itg_class; ?> oscar-layout-page ">
+    <!-- Breaking news band -->    
+    <?php if (!empty($page['breaking_news'])): ?>
+    <div class="row">
+        <div class="col-md-12">
+          <?php print render($page['breaking_news']); ?>
+        </div>      
+    </div>    
+    <?php endif; ?>
     <div class="row">
         <div class="col-md-8 col-sm-12 col-xs-12 left-side">
    <?php if (isset($widget_data['itg-block-1']['widget_name']) || isset($widget_data['itg-block-2']['widget_name']) || isset($widget_data['itg-block-3']['widget_name']) || $theme == 'itgadmin') { ?>
     <div class="row">
         <div class="col-md-12 itg-h747-section">
+          <div class="widget-help-text">Special widgets ( <strong>Featured</strong> )</div>
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name'].$widget_data['itg-block-1']['widget_display_name']; ?>">
-                 <?php /*<?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-1']['block_title'])) { ?>
-                   <h4 class="heading"><?php print $widget_data['itg-block-1']['block_title']; ?></h4>
-                  <?php } ?>
-                     <!-- for admin  -->
-                  <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
-                    <div class="widget-settings">
-                      <div class="widget-title-wrapper">
-                        <span class="widget-title" data-id="itg-block-1"><?php print $widget_data['itg-block-1']['block_title']; ?></span>
-                        <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-1']['block_title']; ?>" name="itg-block-1" class="block_title_id" placeholder="Enter Title" />
-                      </div>
-                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    <div class="data-holder" id="itg-block-1">
+                      <?php
+                        if (isset($widget_data['itg-block-1']['widget'])) {
+                          print $widget_data['itg-block-1']['widget']; 
+                        } else{
+                          print '<div class="widget-placeholder"><span>Special Oscar Featured</span></div>';
+                        } 
+                      ?>
                     </div>
-                   <?php } ?>  */ ?>
-                  
-                    <div class="data-holder" id="itg-block-1"><?php print $widget_data['itg-block-1']['widget']; ?></div>
                   </div>             
                 </div>               
             </div>  
         </div>
          <div class="col-md-12 mt-50 itg-h305-section">
+           <div class="widget-help-text">Section Card</div>
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-2']['widget_name'].$widget_data['itg-block-2']['widget_display_name']; ?>">
@@ -138,12 +145,21 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-2" widget-style="oscar-features"><?php print $widget_data['itg-block-2']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-2" widget-style="oscar-features">
+                      <?php
+                        if (isset($widget_data['itg-block-2']['widget'])) {
+                          print $widget_data['itg-block-2']['widget']; 
+                        } else{
+                          print '<div class="widget-placeholder"><span>Oscar features</span></div>';
+                        } 
+                      ?>
+                    </div>
                   </div>             
                 </div>               
             </div>  
         </div>
         <div class="col-md-12 mt-50 itg-h625-section">
+          <div class="widget-help-text">Special widgets ( <strong>Photo</strong> )</div>
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-3']['widget_name'].$widget_data['itg-block-3']['widget_display_name']; ?>">
@@ -161,7 +177,15 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-3"><?php print $widget_data['itg-block-3']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-3">
+                      <?php
+                        if (isset($widget_data['itg-block-3']['widget'])) {
+                          print $widget_data['itg-block-3']['widget']; 
+                        } else{
+                          print '<div class="widget-placeholder"><span>Oscar photos</span></div>';
+                        } 
+                      ?>
+                    </div>
                   </div>             
                 </div>               
             </div>  
@@ -173,13 +197,19 @@ if ($theme != 'itgadmin') {
         
         
         <div class="col-md-4 col-sm-12 col-xs-12 right-side">
+          <div class="widget-help-text">Non Draggable ( <strong>Ad widget</strong> )</div>          
             <?php if (isset($widget_data['itg-block-4']['widget_name']) || isset($widget_data['itg-block-5']['widget_name']) || $theme == 'itgadmin') { ?>
             <div class="row">
-                <div class="col-md-12">                    
+                <div class="col-md-12">                         
                         <div class="itg-widget-parent">
                             <div class="itg-widget">
                                 <div class="ad-widget">
-                                    <div class="sidebar-ad"><?php print ($itg_ad['200*200_right_bar_ad1']); ?></div>
+                                    <div class="sidebar-ad"> 
+                                      <?php
+                                        $block = block_load('itg_ads', ADS_RHS1);   
+                                        $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                        print render($render_array);
+                                       ?></div>
                                 </div>
                             </div>
                         </div>                    
@@ -187,6 +217,7 @@ if ($theme != 'itgadmin') {
                 
                 
             <div class="col-md-12 mt-50 itg-h735-section">
+              <div class="widget-help-text">Section Card</div>
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-4']['widget_name'].$widget_data['itg-block-4']['widget_display_name']; ?>">
@@ -204,13 +235,22 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-4" widget-style="oscar-news"><?php print $widget_data['itg-block-4']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-4" widget-style="oscar-news">
+                      <?php
+                        if (isset($widget_data['itg-block-4']['widget'])) {
+                          print $widget_data['itg-block-4']['widget']; 
+                        } else{
+                          print '<div class="widget-placeholder"><span>Oscar news</span></div>';
+                        } 
+                      ?>
+                    </div>
                   </div>             
                 </div>               
             </div>  
         </div>
                 
             <div class="col-md-12 mt-50 itg-h625-section">
+              <div class="widget-help-text">Special widgets ( <strong>Videos</strong> )</div>
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-5']['widget_name'].$widget_data['itg-block-5']['widget_display_name']; ?>">
@@ -228,7 +268,15 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-5"><?php print $widget_data['itg-block-5']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-5">
+                      <?php
+                        if (isset($widget_data['itg-block-5']['widget'])) {
+                          print $widget_data['itg-block-5']['widget']; 
+                        } else{
+                          print '<div class="widget-placeholder"><span>Oscar videos</span></div>';
+                        } 
+                      ?>
+                    </div>
                   </div>             
                 </div>               
             </div>  

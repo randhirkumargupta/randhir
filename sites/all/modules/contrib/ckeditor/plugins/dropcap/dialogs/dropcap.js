@@ -39,23 +39,24 @@ CKEDITOR.dialog.add( 'dropcapDialog', function( editor ) {
 
 						// Validation checking whether the field is not empty.
 						validate: CKEDITOR.dialog.validate.notEmpty( "Text field cannot be empty." )
-					},
-
-{
-						// Text input field for the abbreviation title (explanation).
-						type: 'text',
-						id: 'size',
-						label: 'Font Size',
-						validate: CKEDITOR.dialog.validate.notEmpty( "Size field cannot be empty." )
-					},
-
-{
-						// Text input field for the abbreviation title (explanation).
-						type: 'text',
-						id: 'color',
-						label: 'Font Color',
-						validate: CKEDITOR.dialog.validate.notEmpty( "Color field cannot be empty." )
 					}
+//                                        ,
+//
+//{
+//						// Text input field for the abbreviation title (explanation).
+//						type: 'text',
+//						id: 'size',
+//						label: 'Font Size',
+//						validate: CKEDITOR.dialog.validate.notEmpty( "Size field cannot be empty." )
+//					},
+//
+//{
+//						// Text input field for the abbreviation title (explanation).
+//						type: 'text',
+//						id: 'color',
+//						label: 'Font Color',
+//						validate: CKEDITOR.dialog.validate.notEmpty( "Color field cannot be empty." )
+//					}
 
 
 
@@ -83,9 +84,11 @@ CKEDITOR.dialog.add( 'dropcapDialog', function( editor ) {
 			//get other string excluding first character
 			var other_string=str.slice(1)
 			//get size value
-			var size=dialog.getValueOf( 'tab-basic', 'size' );
+			//var size=dialog.getValueOf( 'tab-basic', 'size' );
+			var size= '58';
 			//get color value
-			var color=dialog.getValueOf( 'tab-basic', 'color' )
+			//var color=dialog.getValueOf( 'tab-basic', 'color' )
+			var color= '#777879';
 
 			//style for first element
 			var drp_first_element = '<span style="font-size:'+size+'px;color:'+color+';">'+first+'</span>'

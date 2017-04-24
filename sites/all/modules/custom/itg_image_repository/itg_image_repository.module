@@ -47,8 +47,8 @@ function itg_image_repository_menu() {
     $items['file/itg_image_repository/%/%/%'] = array(
         'page callback' => 'filefield_source_itg_image_repository_page',
         'page arguments' => array(2, 3, 4),
-        'access callback' => '_filefield_sources_field_access',
-        'access arguments' => array(2, 3, 4),
+       // 'access arguments' => $access,
+        'access arguments' => array('access content'),
         'type' => MENU_CALLBACK,
     );
     return $items;
@@ -67,6 +67,15 @@ function itg_image_repository_filefield_sources_info() {
         'description' => t('Select a file to use from a file browser.'),
         'process' => 'filefield_source_itg_image_repository_process',
         'value' => 'filefield_source_itg_image_repository_value',
+        'weight' => -1,
+            //'file' => 'sources/itg_image_repository.inc',
+    );
+    
+    $source['itg_image_video'] = array(
+        'name' => t('ITG Video Repository'),
+        'label' => t('ITG Video Repository'),
+        'description' => t('Select a Video to daily motion.'),
+        'process' => 'filefield_source_itg_image_video_process',
         'weight' => -1,
             //'file' => 'sources/itg_image_repository.inc',
     );
@@ -144,10 +153,18 @@ function filefield_source_itg_image_repository_process($element, &$form_state, $
         ),
     );
 
-    $getimageoptions = explode('(', $element['#description']);
-    $getimageoptions = explode(')', $getimageoptions[1]);
-    $getimagehightwidth = explode('x', $getimageoptions[0]);
-     $url=url('file/itg_image_repository/' . $element['#entity_type'] . '/' . $element['#bundle'] . '/' . $element['#field_name'], array('query' => array('app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'height' => $getimagehightwidth[1], 'width' => $getimagehightwidth[0],'btn_name'=>$element['#name'])));
+    $getimageoptions = explode('(', @$element['#description']);
+    $getimageoptions = explode(')', @$getimageoptions[1]);
+    $getimagehightwidth = explode('x', @$getimageoptions[0]);
+
+//if($element['#field_name']=='field_story_facebook_video' || $element['#field_name']=='field_story_twitter_video' || $element['#field_name']=='field_videogallery_video_upload' )
+//    {
+//            $url=url('dailymotion-ftp-template/' . $element['#entity_type'] . '/' . $element['#bundle'] . '/' . $element['#field_name'], array('query' => array('app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'no_value' => 'single','btn_name'=>$element['#name'])));
+// 
+//    } else {
+             $url=url('file/itg_image_repository/' . $element['#entity_type'] . '/' . $element['#bundle'] . '/' . $element['#field_name'], array('query' => array('app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'height' => @$getimagehightwidth[1], 'width' => @$getimagehightwidth[0],'btn_name'=>$element['#name'])));
+
+   // }   
     $itg_image_repository_function="showimagerepopopu('".$url."')";
     $element['filefield_itg_image_repository']['display_path'] = array(
         '#type' => 'markup',
@@ -175,6 +192,66 @@ function filefield_source_itg_image_repository_process($element, &$form_state, $
 
     return $element;
 }
+
+
+/**
+ * A #process callback to extend the filefield_widget element type.
+ * @param array $element
+ * @param reference $form_state
+ * @return array $element
+ * 
+ */
+function filefield_source_itg_image_video_process($element, &$form_state, $form) {
+    $instance = field_widget_instance($element, $form_state);
+  $element['filefield_itg_image_video'] = array(
+        '#weight' => 100.5,
+        '#theme' => 'filefield_source_itg_image_repository_element',
+        '#filefield_source' => TRUE, // Required for proper theming.
+        '#description' => filefield_sources_element_validation_help($element['#upload_validators']),
+    );
+
+    $filepath_id = $element['#id'] . '-itg_image_repository-path';
+    $display_id = $element['#id'] . '-itg_image_repository-display';
+    $select_id = $element['#id'] . '-itg_image_repository-select';
+   
+   
+
+    $getimageoptions = explode('(', @$element['#description']);
+    $getimageoptions = explode(')', @$getimageoptions[1]);
+    $getimagehightwidth = explode('x', @$getimageoptions[0]);
+
+
+            $url=url('dailymotion-ftp-template/' . $element['#entity_type'] . '/' . $element['#bundle'] . '/' . $element['#field_name'], array('query' => array('app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'no_value' => 'single','btn_name'=>$element['#name'])));
+ 
+     $itg_image_repository_function="showimagerepopopu('".$url."')";
+    $element['filefield_itg_image_video']['display_path'] = array(
+        '#type' => 'markup',
+        '#markup' => '<span id="' . $display_id . '" class="filefield-sources-imce-display">' . t('No file selected') . '</span> (<a class="filefield-sources-imce-browse" href="javascript:void(0)" onclick="' . $itg_image_repository_function . '">' . t('browse') . '</a>)',
+    );
+
+
+    $element['filefield_itg_image_video']['select'] = array(
+        '#name' => implode('_', $element['#array_parents']) . '_itg_image_repository_select',
+        '#type' => 'submit',
+        '#value' => t('Select'),
+        '#validate' => array(),
+        '#submit' => array('filefield_sources_field_submit'),
+        '#limit_validation_errors' => array($element['#parents']),
+        '#name' => $element['#name'] . '[filefield_itg_image_video][button]',
+        '#id' => $select_id,
+        '#attributes' => array('style' => 'display: none;'),
+        '#ajax' => array(
+            'path' => 'file/ajax/' . implode('/', $element['#array_parents']) . '/' . $form['form_build_id']['#value'],
+            'wrapper' => $element['upload_button']['#ajax']['wrapper'],
+            'method' => 'replace',
+            'effect' => 'fade',
+        ),
+    );
+
+    return $element;
+}
+
+
 
 /**
  * A #filefield_value_callback function.
@@ -234,25 +311,26 @@ function filefield_source_itg_image_repository_page($entity_type, $bundle_name, 
     global $conf;
 
     // Check access.
-    if (!module_exists('itg_image_repository') || !itg_image_repository_access() || !$instance = field_info_instance($entity_type, $field_name, $bundle_name)) {
-        return drupal_access_denied();
-    }
+//    if (!module_exists('itg_image_repository') || !itg_image_repository_access() || !$instance = field_info_instance($entity_type, $field_name, $bundle_name)) {
+//        return drupal_access_denied();
+//    }
     $field = field_info_field($field_name);
 
-    // Full mode
-    if (!empty($instance['widget']['settings']['filefield_sources']['source_itg_image_repository']['itg_image_repository_mode'])) {
-        $conf['itg_image_repository_custom_scan'] = 'filefield_source_itg_image_repository_custom_scan_full';
-    }
-    // Restricted mode
-    else {
-        $conf['itg_image_repository_custom_scan'] = 'filefield_source_itg_image_repository_custom_scan_restricted';
-        $conf['itg_image_repository_custom_field'] = $field + array('_uri' => file_field_widget_uri($field, $instance));
-    }
+//    // Full mode
+//    if (!empty($instance['widget']['settings']['filefield_sources']['source_itg_image_repository']['itg_image_repository_mode'])) {
+//        $conf['itg_image_repository_custom_scan'] = 'filefield_source_itg_image_repository_custom_scan_full';
+//    }
+//    // Restricted mode
+//    else {
+//        $conf['itg_image_repository_custom_scan'] = 'filefield_source_itg_image_repository_custom_scan_restricted';
+//        $conf['itg_image_repository_custom_field'] = $field + array('_uri' => file_field_widget_uri($field, $instance));
+//    }
 
     // Disable absolute URLs.
     $conf['itg_image_repository_settings_absurls'] = 0;
 
     module_load_include('inc', 'itg_image_repository', 'inc/itg_image_repository.page');
+  
     return itg_image_repository($field['settings']['uri_scheme']);
 }
 

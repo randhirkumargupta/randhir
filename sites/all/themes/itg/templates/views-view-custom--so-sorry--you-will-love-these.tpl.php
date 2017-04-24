@@ -1,9 +1,16 @@
 <?php
 global $base_url;
+$skip_nid = FALSE;
+$count_feature = count_sosorry_feature();
+$nid = get_recent_created_node_for_sosorry();
+$arg = arg();
 ?>
-
 <ul class="photo-list">
     <?php foreach ($rows as $key => $value) : ?>
+      <?php if($value['nid'] == $nid && $count_feature == 0 && empty($arg[1])) {
+          // Do not print this node because we dont want to display dublicate videos on page.
+          continue;
+      } ?>
         <li class="col-md-3">
             <div class="tile">
                 <figure>
@@ -14,7 +21,8 @@ global $base_url;
                             </a>
                         <?php else : ?>
                             <a href="<?php print $base_url . '/' . "sosorry/ " . $value['nid'] . "" ?>" class="pic">
-                                <img  src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                                
+                                <img width='170' height='127'  src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg' alt='' />
                             </a>
                         <?php endif; ?>
                         <figcaption><i class="fa fa-play-circle"></i> <?php print $value['field_video_duration']; ?></figcaption>

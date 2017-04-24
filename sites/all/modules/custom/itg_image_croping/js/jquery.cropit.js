@@ -671,7 +671,7 @@ var imgdata=$('#image-enc-data').val();
 	      }
 
 	      var exportDefaults = {
-	        type: 'image/png',
+	        type: 'image/jpg',
 	        quality: 0.75,
 	        originalSize: false,
 	        fillBg: '#fff'

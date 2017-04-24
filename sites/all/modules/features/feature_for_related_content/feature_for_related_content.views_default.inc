@@ -139,7 +139,7 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<div id="head-val"><input class="insert-url add-more form-submit" type="button" name="Insert" value="Add Selected Content" /> &nbsp; <input type="text" name="insvalue" id="insvalue" size="40" class="form-text valid">
+  $handler->display->display_options['header']['area']['content'] = '<div id="head-val"><input class="insert-url add-more form-submit" type="button" name="Insert" value="Add Selected Content" /> &nbsp; <input type="text" name="insvalue" id="insvalue" size="40" class="form-text valid">&nbsp; <div id="relatedtit"></div>
 </div>
 <div id="clickme">Save Search</div>
 <div class="search-criteria" style="display:none"><input class="form-text valid" type="text" name="search-title" id="search-title"><input class="insert-save add-more form-submit" id="filter-save" type="button" name="save" value="save" /></div><div class="success" style="display:none">Search saved successfully</div>';
@@ -165,16 +165,18 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['fields']['counter']['label'] = 'S. No';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
+  /* Field: Apache Solr: url */
+  $handler->display->display_options['fields']['url']['id'] = 'url';
+  $handler->display->display_options['fields']['url']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['url']['field'] = 'url';
+  $handler->display->display_options['fields']['url']['exclude'] = TRUE;
   /* Field: Apache Solr: label */
   $handler->display->display_options['fields']['label']['id'] = 'label';
   $handler->display->display_options['fields']['label']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['label']['field'] = 'label';
   $handler->display->display_options['fields']['label']['label'] = 'Title';
-  /* Field: Apache Solr: sm_field_story_kicker_text */
-  $handler->display->display_options['fields']['sm_field_story_kicker_text']['id'] = 'sm_field_story_kicker_text';
-  $handler->display->display_options['fields']['sm_field_story_kicker_text']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['fields']['sm_field_story_kicker_text']['field'] = 'sm_field_story_kicker_text';
-  $handler->display->display_options['fields']['sm_field_story_kicker_text']['label'] = 'Kicker text';
+  $handler->display->display_options['fields']['label']['alter']['path'] = '[url]';
+  $handler->display->display_options['fields']['label']['alter']['target'] = '_blank';
   /* Field: Apache Solr: bundle_name */
   $handler->display->display_options['fields']['bundle_name']['id'] = 'bundle_name';
   $handler->display->display_options['fields']['bundle_name']['table'] = 'apachesolr__solr';
@@ -187,11 +189,6 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['fields']['entity_id']['label'] = 'Nid';
   $handler->display->display_options['fields']['entity_id']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['entity_id']['alter']['text'] = '<span class="seid-[counter]">[entity_id]</span>';
-  /* Field: Apache Solr: url */
-  $handler->display->display_options['fields']['url']['id'] = 'url';
-  $handler->display->display_options['fields']['url']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['fields']['url']['field'] = 'url';
-  $handler->display->display_options['fields']['url']['exclude'] = TRUE;
   /* Field: Apache Solr: site */
   $handler->display->display_options['fields']['site']['id'] = 'site';
   $handler->display->display_options['fields']['site']['table'] = 'apachesolr__solr';
@@ -202,16 +199,16 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['fields']['hash']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['hash']['field'] = 'hash';
   $handler->display->display_options['fields']['hash']['exclude'] = TRUE;
-  /* Field: Apache Solr: tm_vid_4_names */
-  $handler->display->display_options['fields']['tm_vid_4_names']['id'] = 'tm_vid_4_names';
-  $handler->display->display_options['fields']['tm_vid_4_names']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['fields']['tm_vid_4_names']['field'] = 'tm_vid_4_names';
-  $handler->display->display_options['fields']['tm_vid_4_names']['label'] = 'Section';
-  /* Field: Apache Solr: im_vid_4 */
-  $handler->display->display_options['fields']['im_vid_4']['id'] = 'im_vid_4';
-  $handler->display->display_options['fields']['im_vid_4']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['fields']['im_vid_4']['field'] = 'im_vid_4';
-  $handler->display->display_options['fields']['im_vid_4']['exclude'] = TRUE;
+  /* Field: Apache Solr: sm_vid_Category_Management */
+  $handler->display->display_options['fields']['sm_vid_Category_Management']['id'] = 'sm_vid_Category_Management';
+  $handler->display->display_options['fields']['sm_vid_Category_Management']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_vid_Category_Management']['field'] = 'sm_vid_Category_Management';
+  $handler->display->display_options['fields']['sm_vid_Category_Management']['label'] = 'Section';
+  /* Field: Apache Solr: im_vid_14 */
+  $handler->display->display_options['fields']['im_vid_14']['id'] = 'im_vid_14';
+  $handler->display->display_options['fields']['im_vid_14']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['im_vid_14']['field'] = 'im_vid_14';
+  $handler->display->display_options['fields']['im_vid_14']['exclude'] = TRUE;
   /* Field: Apache Solr: im_field_story_itg_tags */
   $handler->display->display_options['fields']['im_field_story_itg_tags']['id'] = 'im_field_story_itg_tags';
   $handler->display->display_options['fields']['im_field_story_itg_tags']['table'] = 'apachesolr__solr';
@@ -224,11 +221,6 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['fields']['tm_vid_1_names']['field'] = 'tm_vid_1_names';
   $handler->display->display_options['fields']['tm_vid_1_names']['label'] = 'Tag name';
   $handler->display->display_options['fields']['tm_vid_1_names']['exclude'] = TRUE;
-  /* Field: Apache Solr: sm_vid_Tags */
-  $handler->display->display_options['fields']['sm_vid_Tags']['id'] = 'sm_vid_Tags';
-  $handler->display->display_options['fields']['sm_vid_Tags']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['fields']['sm_vid_Tags']['field'] = 'sm_vid_Tags';
-  $handler->display->display_options['fields']['sm_vid_Tags']['label'] = 'Tags';
   /* Field: Apache Solr: bs_status */
   $handler->display->display_options['fields']['bs_status']['id'] = 'bs_status';
   $handler->display->display_options['fields']['bs_status']['table'] = 'apachesolr__solr';
@@ -236,11 +228,11 @@ function feature_for_related_content_views_default_views() {
   $handler->display->display_options['fields']['bs_status']['label'] = 'status';
   $handler->display->display_options['fields']['bs_status']['empty'] = 'Unpublished';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Apache Solr: entity_id */
-  $handler->display->display_options['sorts']['entity_id']['id'] = 'entity_id';
-  $handler->display->display_options['sorts']['entity_id']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['sorts']['entity_id']['field'] = 'entity_id';
-  $handler->display->display_options['sorts']['entity_id']['order'] = 'DESC';
+  /* Sort criterion: Apache Solr: ds_changed */
+  $handler->display->display_options['sorts']['ds_changed']['id'] = 'ds_changed';
+  $handler->display->display_options['sorts']['ds_changed']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['sorts']['ds_changed']['field'] = 'ds_changed';
+  $handler->display->display_options['sorts']['ds_changed']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -277,18 +269,18 @@ function feature_for_related_content_views_default_views() {
     18 => 0,
     23 => 0,
   );
-  /* Filter criterion: Apache Solr: tm_vid_4_names */
-  $handler->display->display_options['filters']['tm_vid_4_names']['id'] = 'tm_vid_4_names';
-  $handler->display->display_options['filters']['tm_vid_4_names']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['filters']['tm_vid_4_names']['field'] = 'tm_vid_4_names';
-  $handler->display->display_options['filters']['tm_vid_4_names']['operator'] = 'word';
-  $handler->display->display_options['filters']['tm_vid_4_names']['group'] = 1;
-  $handler->display->display_options['filters']['tm_vid_4_names']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['tm_vid_4_names']['expose']['operator_id'] = 'tm_vid_4_names_op';
-  $handler->display->display_options['filters']['tm_vid_4_names']['expose']['label'] = 'Section';
-  $handler->display->display_options['filters']['tm_vid_4_names']['expose']['operator'] = 'tm_vid_4_names_op';
-  $handler->display->display_options['filters']['tm_vid_4_names']['expose']['identifier'] = 'tm_vid_4_names';
-  $handler->display->display_options['filters']['tm_vid_4_names']['expose']['remember_roles'] = array(
+  /* Filter criterion: Apache Solr: tm_vid_14_names */
+  $handler->display->display_options['filters']['tm_vid_14_names']['id'] = 'tm_vid_14_names';
+  $handler->display->display_options['filters']['tm_vid_14_names']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['tm_vid_14_names']['field'] = 'tm_vid_14_names';
+  $handler->display->display_options['filters']['tm_vid_14_names']['operator'] = 'word';
+  $handler->display->display_options['filters']['tm_vid_14_names']['group'] = 1;
+  $handler->display->display_options['filters']['tm_vid_14_names']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['tm_vid_14_names']['expose']['operator_id'] = 'tm_vid_14_names_op';
+  $handler->display->display_options['filters']['tm_vid_14_names']['expose']['label'] = 'Section';
+  $handler->display->display_options['filters']['tm_vid_14_names']['expose']['operator'] = 'tm_vid_14_names_op';
+  $handler->display->display_options['filters']['tm_vid_14_names']['expose']['identifier'] = 'tm_vid_14_names';
+  $handler->display->display_options['filters']['tm_vid_14_names']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -299,6 +291,7 @@ function feature_for_related_content_views_default_views() {
     20 => 0,
     6 => 0,
     21 => 0,
+    19 => 0,
     10 => 0,
     13 => 0,
     11 => 0,
@@ -306,10 +299,13 @@ function feature_for_related_content_views_default_views() {
     17 => 0,
     14 => 0,
     12 => 0,
-    19 => 0,
     15 => 0,
     18 => 0,
     23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   /* Filter criterion: Apache Solr: sm_field_itg_common_by_line_name */
   $handler->display->display_options['filters']['sm_field_itg_common_by_line_name']['id'] = 'sm_field_itg_common_by_line_name';
@@ -383,17 +379,17 @@ function feature_for_related_content_views_default_views() {
     22 => 0,
     24 => 0,
   );
-  /* Filter criterion: Apache Solr: bundle_name */
-  $handler->display->display_options['filters']['bundle_name']['id'] = 'bundle_name';
-  $handler->display->display_options['filters']['bundle_name']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['filters']['bundle_name']['field'] = 'bundle_name';
-  $handler->display->display_options['filters']['bundle_name']['group'] = 1;
-  $handler->display->display_options['filters']['bundle_name']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['bundle_name']['expose']['operator_id'] = 'bundle_name_op';
-  $handler->display->display_options['filters']['bundle_name']['expose']['label'] = 'Content type';
-  $handler->display->display_options['filters']['bundle_name']['expose']['operator'] = 'bundle_name_op';
-  $handler->display->display_options['filters']['bundle_name']['expose']['identifier'] = 'bundle_name';
-  $handler->display->display_options['filters']['bundle_name']['expose']['remember_roles'] = array(
+  /* Filter criterion: Apache Solr: bundle */
+  $handler->display->display_options['filters']['bundle']['id'] = 'bundle';
+  $handler->display->display_options['filters']['bundle']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['bundle']['field'] = 'bundle';
+  $handler->display->display_options['filters']['bundle']['group'] = 1;
+  $handler->display->display_options['filters']['bundle']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['bundle']['expose']['operator_id'] = 'bundle_op';
+  $handler->display->display_options['filters']['bundle']['expose']['label'] = 'Content type';
+  $handler->display->display_options['filters']['bundle']['expose']['operator'] = 'bundle_op';
+  $handler->display->display_options['filters']['bundle']['expose']['identifier'] = 'bundle';
+  $handler->display->display_options['filters']['bundle']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -404,6 +400,7 @@ function feature_for_related_content_views_default_views() {
     20 => 0,
     6 => 0,
     21 => 0,
+    19 => 0,
     10 => 0,
     13 => 0,
     11 => 0,
@@ -411,10 +408,13 @@ function feature_for_related_content_views_default_views() {
     17 => 0,
     14 => 0,
     12 => 0,
-    19 => 0,
     15 => 0,
     18 => 0,
     23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   /* Filter criterion: Apache Solr: hash */
   $handler->display->display_options['filters']['hash']['id'] = 'hash';

@@ -10,6 +10,31 @@
 function photogallery_field_default_field_bases() {
   $field_bases = array();
 
+  // Exported field_base: 'field_api_image'.
+  $field_bases['field_api_image'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_api_image',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'image',
+    'settings' => array(
+      'default_image' => 0,
+      'uri_scheme' => 'public',
+    ),
+    'translatable' => 0,
+    'type' => 'image',
+  );
+
   // Exported field_base: 'field_audio'.
   $field_bases['field_audio'] = array(
     'active' => 1,
@@ -210,12 +235,36 @@ function photogallery_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'yes' => '',
+        'yes' => 'Set As Featured',
       ),
       'allowed_values_function' => '',
     ),
     'translatable' => 0,
     'type' => 'list_text',
+  );
+
+  // Exported field_base: 'field_featured_ordering'.
+  $field_bases['field_featured_ordering'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_featured_ordering',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
   );
 
   // Exported field_base: 'field_gallery_image'.
@@ -251,7 +300,7 @@ function photogallery_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_gallery_kicer',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'format' => array(
@@ -262,7 +311,7 @@ function photogallery_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(),
     'translatable' => 0,
-    'type' => 'text_with_summary',
+    'type' => 'text_long',
   );
 
   // Exported field_base: 'field_image_caption'.
@@ -274,6 +323,52 @@ function photogallery_field_default_field_bases() {
     'field_name' => 'field_image_caption',
     'field_permissions' => array(
       'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
+  // Exported field_base: 'field_image_id'.
+  $field_bases['field_image_id'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_image_id',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_image_metakey'.
+  $field_bases['field_image_metakey'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_image_metakey',
+    'field_permissions' => array(
+      'type' => 2,
     ),
     'indexes' => array(
       'format' => array(
@@ -339,15 +434,15 @@ function photogallery_field_default_field_bases() {
     'type' => 'image',
   );
 
-  // Exported field_base: 'field_people_tag'.
-  $field_bases['field_people_tag'] = array(
+  // Exported field_base: 'field_large_image_description'.
+  $field_bases['field_large_image_description'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_people_tag',
+    'field_name' => 'field_large_image_description',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'format' => array(
@@ -356,11 +451,9 @@ function photogallery_field_default_field_bases() {
     ),
     'locked' => 0,
     'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
+    'settings' => array(),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'text_long',
   );
 
   // Exported field_base: 'field_photo_by'.
@@ -381,21 +474,20 @@ function photogallery_field_default_field_bases() {
     'locked' => 0,
     'module' => 'entityreference',
     'settings' => array(
-      'handler' => 'base',
+      'handler' => 'views',
       'handler_settings' => array(
         'behaviors' => array(
           'views-select-list' => array(
             'status' => 0,
           ),
         ),
-        'sort' => array(
-          'type' => 'none',
-        ),
-        'target_bundles' => array(
-          'photo_by' => 'photo_by',
+        'view' => array(
+          'args' => array(),
+          'display_name' => 'entityreference_1',
+          'view_name' => 'autocomplete_for_byline',
         ),
       ),
-      'target_type' => 'taxonomy_term',
+      'target_type' => 'node',
     ),
     'translatable' => 0,
     'type' => 'entityreference',
@@ -404,7 +496,7 @@ function photogallery_field_default_field_bases() {
   // Exported field_base: 'field_photo_byline'.
   $field_bases['field_photo_byline'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_photo_byline',
@@ -436,6 +528,34 @@ function photogallery_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field_photogallery_configuration'.
+  $field_bases['field_photogallery_configuration'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_photogallery_configuration',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'google_standout' => 'Google Standout',
+        'commentbox' => 'Comment Box',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_primary_category_html_text'.

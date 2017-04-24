@@ -33,7 +33,7 @@ function features_for_event_registration_node_info() {
       'base' => 'node_content',
       'description' => t('Created to manage registration form for events.'),
       'has_title' => '1',
-      'title_label' => t('First Name'),
+      'title_label' => t('Title'),
       'help' => '',
     ),
   );

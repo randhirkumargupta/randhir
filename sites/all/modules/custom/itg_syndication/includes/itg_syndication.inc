@@ -211,3 +211,112 @@ function get_ftp_details_by_client($client_name, $ftp_name) {
   return $itg_result;
 }
 
+/**
+ * function for syndication content details
+ * @return array $data
+ */
+function get_syndication_content_details() {
+  $current_time = time();
+  $cron_type = 'syndication_rule';
+  
+  $itg_query = db_select('itg_cron_time_scheduler', 'ts');
+  $itg_query->fields('ts', array('cron_details'));
+  $itg_query->fields('ts', array('last_cron_time'));
+  $itg_query->fields('ts', array('scheduler_time'));
+  $itg_query->fields('ts', array('id'));
+  $itg_query->fields('ts', array('fid'));
+  $itg_query->condition('ts.scheduler_time', $current_time, '<');  
+  $itg_query->condition('ts.status', 1, '=');
+  $itg_query->condition('ts.cron_type', $cron_type, '=');  
+  $itg_query->condition(db_or()->isNull('ts.expiry_date')->condition('ts.expiry_date', $current_time, '>'));
+  
+  $itg_result = $itg_query->execute()->fetchAll();
+  
+  foreach ($itg_result as $itg_val) {    
+    if (!empty($itg_val->cron_details)) {
+      $data = unserialize($itg_val->cron_details);
+      $data['fid'] = $itg_val->fid;
+      
+      watchdog("Syndication", "Rule id : $itg_val->id");
+     
+      $content_value = get_content_id_for_syndication($data, $itg_val->last_cron_time);
+      
+      //code for update cron time
+      update_cron_time_after_feed_generate($data, $itg_val->id, $itg_val->scheduler_time);
+      
+    }
+  }
+  
+  return $data;
+}
+
+/**
+ * function for gat feed by url
+ * @return type  
+ */
+
+function get_syndication_feed_byurl() {
+  global $base_url;
+  $url = $base_url.'/'.arg(0).'/'.arg(1).'/'.  arg(2);
+  
+  $itg_query = db_select('itg_syndication_feed_url', 'feed');
+  $itg_query->fields('feed', array('xml_name'));
+  $itg_query->fields('feed', array('created_date'));
+  $itg_query->condition('feed.client_feed_url', $url);
+  $itg_result = $itg_query->execute()->fetchAll();
+  
+  if (!empty($itg_result)) {
+    foreach ($itg_result as $itg_val) {    
+      $realpath = file_create_url($itg_val->xml_name);    
+      $xml_date = date('d/m/Y',$itg_val->created_date);
+      // $file_url = $itg_val->xml_name;
+      echo 'Click to Download. <a href="'.$realpath.'" download>'.$xml_date.'</a>';
+      echo '</br>';    
+    }
+  }
+  exit;
+ 
+}
+
+/**
+ * Implement itg_magazine_custom_callback
+ */
+function itg_magazine_custom_callback($mag_id = NULL) {
+
+  if (isset($mag_id)) {
+    $mag_id = $mag_id;
+  }
+  else {
+    $mag_id = $_POST['magazine'];
+  }
+
+  $itg_query = db_select('node', 'n');
+  $itg_query->fields('n', array('nid', 'title'));
+  $itg_query->join('field_data_field_issue_magazine', 'sc', 'n.nid = sc.entity_id');
+  $itg_query->condition('sc.field_issue_magazine_target_id', $mag_id);
+  $itg_query->condition('n.type', 'issue');
+
+  $itg_result = $itg_query->execute()->fetchAll();
+
+
+  if (empty($_POST['magazine'])) {
+    $select = t('- None -');
+    $data = array('' => $select);
+    foreach ($itg_result as $itg_val) {
+      $dt = date('Y-m-d', strtotime($itg_val->title));
+      $data[$dt] = date('d/m/Y', strtotime($itg_val->title));
+    }
+    return $data;
+  }
+  else {
+    $drop = '<option value="">- Select -</option>';
+    foreach ($itg_result as $itg_val) {
+      $dt = date('Y-m-d', strtotime($itg_val->title));
+      $data[$dt] = date('d/m/Y', strtotime($itg_val->title));
+      $drop .= '<option value="' . $dt . '">' . date('d/m/Y', strtotime($itg_val->title)) . '</option>';
+    }
+
+    echo $drop;
+  }
+}
+

@@ -50,9 +50,12 @@
                   if (!empty($field_ads_template_selection)): print render($content['field_ads_header_script']);
                   endif;
                   ?>
+                    <?php   $field_ads_section_selection = render($content['field_story_expert_description']); 
+                    if (!empty($field_ads_section_selection)) {
+                    ?>
                  <h2><?php print t('App'); ?></h2>
                   <?php
-                  $field_ads_section_selection = render($content['field_story_expert_description']);
+                    }
                   if (!empty($field_ads_section_selection)): print render($content['field_story_expert_description']);
                   endif;
                   ?>

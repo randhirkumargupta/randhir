@@ -90,8 +90,20 @@ function itg_fields_remove_button_field_widget_form_alter(&$element, &$form_stat
     );
     // Add extra widgets with the help of others modules.
     drupal_alter('itg_field_remove_button_field_widgets', $fieldwidgets);
-
-    if (($form_state['node']->type == 'syndication_client' || $form_state['node']->type == 'task_idea_allocation_tracking' || $form_state['node']->type == 'story' || $form_state['node']->type == 'breaking_news') && $context['field']['cardinality'] == FIELD_CARDINALITY_UNLIMITED && in_array($context['instance']['widget']['type'], $fieldwidgets)) {
+    //p($form_state['node']->type);
+    if ((!empty($form_state['node']->type) && ($form_state['node']->type == 'syndication_client' 
+            || $form_state['node']->type == 'task_idea_allocation_tracking' 
+            || $form_state['node']->type == 'story' 
+            || $form_state['node']->type == 'recipe' 
+            || $form_state['node']->type == 'cooking_tips' 
+            || $form_state['node']->type == 'food_news' 
+            || $form_state['node']->type == 'videogallery' 
+            || $form_state['node']->type == 'survey' 
+            || $form_state['node']->type == 'quiz' 
+            || $form_state['node']->type == 'breaking_news'
+            || $form_state['node']->type == 'ads_management'
+            || $form_state['node']->type == 'syndication_rule')) 
+            && $context['field']['cardinality'] == FIELD_CARDINALITY_UNLIMITED && in_array($context['instance']['widget']['type'], $fieldwidgets)) {
 
         $original_element = $element;
 

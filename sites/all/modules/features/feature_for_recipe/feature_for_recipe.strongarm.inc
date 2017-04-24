@@ -245,6 +245,9 @@ function feature_for_recipe_strongarm() {
         'path' => array(
           'weight' => '1',
         ),
+        'redirect' => array(
+          'weight' => '16',
+        ),
       ),
       'display' => array(),
     ),
@@ -289,6 +292,9 @@ function feature_for_recipe_strongarm() {
         ),
         'path' => array(
           'weight' => '1',
+        ),
+        'redirect' => array(
+          'weight' => '19',
         ),
       ),
       'display' => array(),
@@ -335,6 +341,12 @@ function feature_for_recipe_strongarm() {
         'path' => array(
           'weight' => '1',
         ),
+        'domain' => array(
+          'weight' => '1',
+        ),
+        'redirect' => array(
+          'weight' => '31',
+        ),
       ),
       'display' => array(),
     ),
@@ -379,6 +391,12 @@ function feature_for_recipe_strongarm() {
         ),
         'path' => array(
           'weight' => '7',
+        ),
+        'domain' => array(
+          'weight' => '1',
+        ),
+        'redirect' => array(
+          'weight' => '30',
         ),
       ),
       'display' => array(),
@@ -512,6 +530,76 @@ function feature_for_recipe_strongarm() {
   $strongarm->name = 'node_submitted_recipe';
   $strongarm->value = 0;
   $export['node_submitted_recipe'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_cooking_tips_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_cooking_tips_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_food_news_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_food_news_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_recipe_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_recipe_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_recipe_ailment_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_recipe_ailment_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_recipe_calorie_type_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_recipe_calorie_type_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_recipe_cuisine_type_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_recipe_cuisine_type_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_recipe_festivals_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_recipe_festivals_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_recipe_meal_for_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_recipe_meal_for_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_recipe_meal_type_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_recipe_meal_type_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_recipe_time_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_recipe_time_pattern'] = $strongarm;
 
   return $export;
 }

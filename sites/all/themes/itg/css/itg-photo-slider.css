@@ -82,7 +82,7 @@ Version   :  1.0
     height: 100%;
     display: block;
     z-index: 99;
-    opacity: .5;
+    opacity: .2;
 }
 .carousel .slides .slideItem[style*="width: 645px"] span{
     opacity: 1;
@@ -243,7 +243,17 @@ Version   :  1.0
         line-height: 22px;
     }
     .carousel .slides .slideItem span.flex-count{
-        display: none;
+        bottom: auto;
+        right: auto;
+        font-size: 10px;
+        margin-top: -35px;
+        position: relative;
+        display: block;
+        font-size: 15px;
+    }
+    .carousel .slides .slideItem span.flex-count i{
+        font-size: 30px;
+        margin-right: 10px;
     }
     .carousel .slick-dots{
         padding:20px 10px 10px;

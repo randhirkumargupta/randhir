@@ -76,11 +76,11 @@ class ItgSupplementMigration extends XMLMigration {
   }
   
   public function prepare($node, stdClass $row) {
-    
+   if (isset($row->xml->magazine) && !empty($row->xml->magazine)) { 
     $old_magazine = (string) $row->xml->magazine;
     $new_magazine = get_itg_destination_id('migrate_map_itgmagazine', $old_magazine);
     $node->field_supp_select_magazine[LANGUAGE_NONE][]['target_id'] = $new_magazine;
-    
+   }
     $node->uid = 1;
   }
 }

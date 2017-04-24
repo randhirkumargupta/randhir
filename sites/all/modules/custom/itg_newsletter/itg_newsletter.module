@@ -26,6 +26,13 @@ function itg_newsletter_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['newsletter_data_preview'] = array(
+    'title' => 'Download Newsletter Preview',
+    'page callback' => 'itg_newsletter_content_preview_data',
+    'access callback' => TRUE,
+    'file' => 'includes/itg_newsletter_content_preview_data.inc',
+  );
+
   return $items;
 }
 
@@ -91,10 +98,11 @@ function itg_newsletter_theme($existing, $type, $theme, $path) {
  * {@inheritdoc}
  */
 function itg_newsletter_form_alter(&$form, &$form_state, $form_id) {
-
+  if($form_id == 'newsletter_templates_node_form') {
+    $form['field_newst_banner'][LANGUAGE_NONE][0]['#required'] = FALSE;
+  }
   // Set destination for newsletter form
   if ($form_id == 'newsletter_node_form') {
-
     // Modify content id(show content id only instead of title and content id)
     if (arg(0) == 'node' && arg(2) == 'edit') {
       for ($delta_counter = 0; $delta_counter <= $form['field_newsl_add_news']['und']['#max_delta']; $delta_counter++) {
@@ -114,7 +122,8 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => 21,
       '#value' => t('Cancel'),
     );
-
+      
+    $form['actions']['submit']['#value'] = t('Publish');
     unset($form['title']);
     unset($form['field_newsl_website_name']);
 
@@ -163,6 +172,7 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
+
 /**
  * Custom submit callback for alter message after operation.
  * @param array $form
@@ -203,7 +213,7 @@ function itg_newsletter_submit_handler_for_redirect($form, &$form_state) {
  */
 function itg_newsletter_form_after_build($form, &$form_state) {
 
-  global $user, $base_url;
+    global $user, $base_url;
 
   // Hide default level and add dynamic label
   if ($form_state['node']->type == 'newsletter') {
@@ -295,6 +305,9 @@ function itg_newsletter_form_views_exposed_form_alter(&$form, &$form_state, $for
     // Call function autocomplete to show matching titles
     $form['title']['#autocomplete_path'] = 'content-title-list/newsletter/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Subject Line'));
+    $form['date_filter']['min']['#date_format'] = 'd/m/Y';
+    $form['date_filter']['max']['#date_format'] = 'd/m/Y';
+    $form['#validate'][] = 'itg_newsletter_shedule_date_validate';
   }
 
   if ($form['#id'] == 'views-exposed-form-manage-newsletter-templates-page') {
@@ -306,13 +319,57 @@ function itg_newsletter_form_views_exposed_form_alter(&$form, &$form_state, $for
 }
 
 /**
+ * Function to validate expose form
+ * {@inheritdoc}
+ */
+function itg_newsletter_shedule_date_validate($form, &$form_state) {
+
+  if ($form['#id'] == 'views-exposed-form-manage-newsletter-page') {
+    $min = $form_state['values']['date_filter']['min'];
+    $max = $form_state['values']['date_filter']['max'];
+
+    if (!empty($min) && empty($max)) {
+      form_set_error('date_filter', 'Please select End date.');
+    }
+
+    if (!empty($max) && empty($min)) {
+      form_set_error('date_filter', 'Please select Start date.');
+    }
+
+    if (!empty($min) && !empty($max) && (strtotime($min) > strtotime($max))) {
+      form_set_error('date_filter', 'Start date can\'t be greater then End date.');
+    }
+    // Reset button handling
+    if (!empty($form_state['clicked_button']['#value']) && $form_state['clicked_button']['#value'] == 'Reset') {
+      // Remove error message
+      drupal_get_messages("error");
+      drupal_goto('manage-newsletter');
+    }
+  }
+}
+
+/**
  * Implementation of hook_node_presave
  * {@inheritdoc}
  */
 function itg_newsletter_node_presave($node) {
   if ($node->type == 'newsletter') {
+
     $template_title = itg_common_get_node_title($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
     $node->title = $template_title;
+    $arg = arg();
+    //field_newsl_schedule
+    if (($node->field_newsl_newsletter_type['und'][0]['value'] == 'automatic' || ($node->field_newsl_newsletter_type['und'][0]['value'] == 'manual' && $node->field_newsl_schedule['und'][0]['value'] == 'now')
+        ) && $arg[2] == 'edit') {
+      $date = date('Y-m-d 00:00:00');
+      $survery_date = $node->field_survey_start_date['und'][0]['value'];
+      // Survey start time is less then current date than update the time.
+      // Otherwise keep saved time.
+      if (strtotime($date) > strtotime($survery_date)) {
+        $node->field_survey_start_date['und'][0]['value'] = $date;
+        $node->field_survey_start_date['und'][0]['value2'] = $date;
+      }
+    }
   }
 }
 
@@ -321,11 +378,12 @@ function itg_newsletter_node_presave($node) {
  * @param object $node
  */
 function itg_newsletter_node_insert($node) {
+
   switch ($node->type) {
     case 'newsletter':
+
       module_load_include('inc', 'itg_newsletter', 'includes/newsletter_mail');
       $newsletter_type = $node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'];
-
       //Send mail in case of manual process and schedule is "now"
       if ($newsletter_type == 'manual' && $node->field_newsl_schedule[LANGUAGE_NONE][0]['value'] == 'now') {
         itg_send_mail_newsletter($node, 'manually');
@@ -338,7 +396,9 @@ function itg_newsletter_node_insert($node) {
         }
         else {
 
+
           $frequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
+
 
           if ($frequency == 'daily') {
             $date_time = date('Y-m-d') . ' ' . $node->field_newsl_time[LANGUAGE_NONE][0]['value'] . ':00:00';
@@ -357,6 +417,7 @@ function itg_newsletter_node_insert($node) {
               $scheduled_time = strtotime($date_time);
             }
           }
+
 
           if ($frequency == 'monthly') {
             $node->field_newsl_day[LANGUAGE_NONE][0]['value'];
@@ -461,19 +522,18 @@ function itg_newsletter_node_update($node) {
  * {@inheritdoc}
  */
 function itg_newsletter_node_validate($node, $form, &$form_state) {
-
   // Validation for automatic type newsletter
   if ($node->type == 'newsletter') {
 
     if ($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'automatic') {
       $frequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
       $newsletter_content = $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];
-      $check_existence = itg_newsletter_check_existence_frequency($frequency, $newsletter_content);
+      // $check_existence = itg_newsletter_check_existence_frequency($frequency, $newsletter_content);
 
       // If record already exist for this frequency through an error
-      if (isset($check_existence) && arg(1) != $check_existence) {
-        form_set_error('field_newsl_newsletter_content', t('Newsletter content <strong>@newslettercontent</strong> is already assigned for the frequency <strong>@frequency</strong> ' . l(t('Click here'), 'node/' . $check_existence . '/edit', array('attributes' => array('target' => '_blank'))) . ' to see existing newsletter.', array('@newslettercontent' => ucfirst(str_replace('_', ' ', $newsletter_content)) . ' news', '@frequency' => $frequency)));
-      }
+//      if (isset($check_existence) && arg(1) != $check_existence) {
+//        form_set_error('field_newsl_newsletter_content', t('Newsletter content <strong>@newslettercontent</strong> is already assigned for the frequency <strong>@frequency</strong> ' . l(t('Click here'), 'node/' . $check_existence . '/edit', array('attributes' => array('target' => '_blank'))) . ' to see existing newsletter.', array('@newslettercontent' => ucfirst(str_replace('_', ' ', $newsletter_content)) . ' news', '@frequency' => $frequency)));
+//      }
     }
     else {
       if ($node->field_newsl_schedule[LANGUAGE_NONE][0]['value'] == 'later') {
@@ -486,6 +546,25 @@ function itg_newsletter_node_validate($node, $form, &$form_state) {
           form_set_error('field_newsl_time', t('Time should be greater than current time for current date.'));
         }
       }
+    }
+
+    //Validate content id
+    $i = 1;
+    foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news) {
+      if ($news['field_news_type'][LANGUAGE_NONE][0]['value'] == 'internal') {
+        $story_id = $news['field_news_cid'][LANGUAGE_NONE][0]['target_id'];
+        $story_status = itg_common_get_story_status($story_id);
+        if (!empty($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value']) &&
+            ($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'manual')) {
+          if (empty($story_id) || $story_status != 'published') {
+            form_set_error('field_news_cid', t('Please enter valid and published Content ID for Title @titlenum.', array('@titlenum' => $i)));
+          }
+          else {
+            return TRUE;
+          }
+        }
+      }
+      $i++;
     }
   }
 }
@@ -522,15 +601,13 @@ function itg_newsletter_check_existence_frequency($frequency, $newsletter_conten
  */
 function itg_newsletter_content_data() {
   $node = node_load($_POST['content_id']);
-
   if ($node->type == 'story') {
     $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
   }
   else {
     $kicker = '';
   }
-
-  echo drupal_json_encode(array('title' => $node->title, 'kicker' => $kicker, 'uri' => $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']));
+  echo drupal_json_encode(array('title' => $node->title, 'kicker' => $kicker, 'fid' => $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']));
   exit;
 }
 
@@ -574,12 +651,11 @@ function itg_newsletter_cronapi($op, $job = NULL) {
  * Automation: Send newsletter in case of manual and automatic
  */
 function itg_newsletter_send_automatic_newsletter() {
-
   // TODO: Add queueing for email before Deployment. ~ Mahesh Salaria
   // Include newsletter mail file to send mail
   module_load_include('inc', 'itg_newsletter', 'includes/newsletter_mail');
 
-  // For manual
+  // For manual get ids of latter newsletter.
   $query = db_select('itg_cron_newsletter', 'cn');
   $query->fields('cn')
       ->condition('cn.status', 0, '=')
@@ -591,11 +667,13 @@ function itg_newsletter_send_automatic_newsletter() {
     $manual_nids[] = $record['nid'];
   }
 
-  // Send manual mail in case of later
+  // Send manual mail in case of later.
   if (!empty($manual_nids)) {
     foreach ($manual_nids as $nids) {
       $node = node_load($nids);
-      itg_send_mail_newsletter($node, 'automatically');
+      if (!empty($node)) {
+        itg_send_mail_newsletter($node, 'automatically');
+      }
     }
   }
 
@@ -604,18 +682,19 @@ function itg_newsletter_send_automatic_newsletter() {
   $query_auto->fields('cn')
       ->condition('cn.status', 0, '=')
       ->condition('cn.type', 'automatic', '=')
-      ->condition('cn.scheduled_time', time(), '<=');
+      ->condition('cn.scheduled_time', time(), '>=');
   $result_auto = $query_auto->execute();
 
   while ($record_auto = $result_auto->fetchAssoc()) {
     $automatic_nids[] = $record_auto['nid'];
   }
-
   // Send automatic mail
   if (!empty($automatic_nids)) {
     foreach ($automatic_nids as $auto_nids) {
       $node_auto = node_load($auto_nids);
-      itg_send_mail_newsletter($node_auto, 'automatically', 'stories');
+      if (!empty($node_auto)) {
+        itg_send_mail_newsletter($node_auto, 'automatically', 'stories');
+      }
     }
   }
 }
@@ -654,6 +733,7 @@ function register_for_more_updates() {
  * Create register_for_more_updates form
  */
 function itg_newslatter_register_form() {
+  
   $form = array();
 
   $form['messages'] = array(
@@ -664,21 +744,26 @@ function itg_newslatter_register_form() {
   $form['name'] = array(
     '#type' => 'textfield',
     '#title' => 'Name',
-    '#attributes' => array('placeholder' => 'Name'),
+    '#attributes' => array('placeholder' => t('Name')),
     '#required' => TRUE,
   );
 
   $form['email'] = array(
     '#type' => 'textfield',
     '#title' => 'Email Id',
-    '#attributes' => array('placeholder' => 'Email Id'),
+    '#attributes' => array('placeholder' => t('Email Id')),
     '#required' => TRUE,
   );
   $form['mobile'] = array(
     '#type' => 'textfield',
     '#title' => 'Mobile No',
-    '#attributes' => array('placeholder' => 'Mobile No'),
+    '#attributes' => array('placeholder' => t('Mobile No')),
     '#required' => TRUE,
+  );
+  $form['page_name'] = array(
+    '#type' => 'hidden',
+    '#title' => 'page name',
+    '#default_value' => arg(2),
   );
 
   $form['submit'] = array(
@@ -689,8 +774,10 @@ function itg_newslatter_register_form() {
       'effect' => "fade",
     ),
   );
-
+  
   drupal_add_js("jQuery(document).ready(function(){ jQuery('#itg-newslatter-register-form label').hide(); });", 'inline');
+  drupal_add_js("jQuery(document).ajaxSuccess (function () { jQuery('#edit-email').val(''); 
+                 jQuery('#edit-name').val(''); jQuery('#edit-mobile').val(''); });", 'inline');
   return $form;
 }
 
@@ -706,12 +793,14 @@ function itg_newslatter_register_form_validate($form, &$form_state) {
     form_set_error('mobile', t('Your Mobile Numbers should contain 10 digits'));
   }
   if (!empty($email) && !valid_email_address($email)) {
-    form_set_error('email', 'Invalid email address!');
+    form_set_error('email', t('Invalid email address!'));
   }
-
   if (!empty($email)) {
-    $updates_check = itg_newslatter_register_more_updates_check($email);
-    if (!empty($updates_check) && $updates_check > 0) {
+    $query = db_select('itg_newslatter_update_details', 'd')
+        ->fields('d', array('id'));
+    $query->condition('email', $email, '=');
+    $result = $query->range(0, 1)->execute()->rowCount();
+    if (!empty($result) && $result > 0) {
       form_set_error('email', 'This email address is already registered!');
     }
   }
@@ -722,18 +811,20 @@ function itg_newslatter_register_form_validate($form, &$form_state) {
  * @param Array $form
  * @param Array $form_state
  */
-function itg_newslatter_register_form_submit($form, &$form_state) {
+function itg_newslatter_register_form_submit(&$form, &$form_state) {
+  
   $name = $form_state['values']['name'];
   $email = $form_state['values']['email'];
   $mobile = $form_state['values']['mobile'];
-
+  $page_name = $form_state['values']['page_name'];
+  
   // Insert data in to itg_newslatter_update_details table
   $query = db_insert('itg_newslatter_update_details');
   $query->fields(array(
     'name' => $name,
     'email' => $email,
     'mobile' => $mobile,
-    'section' => 'newslatter',
+    'section' => $page_name,
     'created' => time()
   ));
   $query->execute();
@@ -746,8 +837,7 @@ function itg_newslatter_register_form_submit($form, &$form_state) {
  * @param Array $form_state
  * @return Array
  */
-function itg_newslatter_register_custom_submit($form, &$form_state) {
-
+function itg_newslatter_register_custom_submit(&$form, &$form_state) {
   $commands = array();
   $commands[] = ajax_command_replace('#messages', '<div id="messages">' . theme('status_messages') . '</div>');
   return array(
@@ -757,14 +847,53 @@ function itg_newslatter_register_custom_submit($form, &$form_state) {
 }
 
 /**
- * Get check register more updates for mobile & email.
- * @param string $email
- * @param int $mobile
- * @return int
+ * Get Email address of users who has subscribed for newsletter
+ * @return array
  */
-function itg_newslatter_register_more_updates_check($email) {
-  return $query = db_select('itg_newslatter_update_details', 'd')
-      ->fields('d', array('id'));
-  $query->condition('email', $email, '=');
-  $query->range(0, 1)->execute()->rowCount();
+function itg_newslatter_get_subscribe_users_email() {
+  $query = db_select('users', 'u');
+  $query->join('field_data_field_subscribe_for_newsletter', 'ns', 'ns.entity_id = u.uid');
+  $query->fields('u', array('mail'));
+  $result = $query->execute();
+  while ($records = $result->fetchAssoc()) {
+    $user_emails[] = $records['mail'];
+  }
+  return $user_emails;
+}
+
+/**
+ * Get Email address of users who has subscribed for newsletter via education page
+ * @return array
+ */
+function itg_newslatter_get_subscribe_page_users_email($getsection) {
+  $query = db_select('itg_newslatter_update_details', 'nud');
+  $query->fields('nud', array('email'));
+  $query->condition('section', $getsection, '=');
+  $result = $query->execute();
+  while ($records = $result->fetchAssoc()) {
+    $useremails[] = $records['email'];
+  }
+  return $useremails;
+}
+
+/**
+ * Get top 20 stories
+ * @return array
+ */
+function itg_newsletter_get_section_stories($section, $crontime, $previoustime) {
+    
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_story_category', 'fsc', 'n.nid = fsc.entity_id');
+  $query->condition('n.status', 1, '=');
+  $query->fields('n');
+  $query->condition('n.type', 'story', '=');
+  $query->condition('fsc.field_story_category_tid', $section, 'IN');
+  $query->condition('changed', $previoustime, '>=');
+  $query->orderBy('n.nid', 'DESC');
+  $query->range(0, 20);
+  $result = $query->execute();
+  while ($records = $result->fetchAssoc()) {
+    $nids[] = $records['nid'];
+  }
+  return $nids;
 }

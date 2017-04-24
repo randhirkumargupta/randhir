@@ -1,0 +1,6 @@
+Coupon,Coupon Discount Type,Discounted Value,Allow Min Cart amount,Minimum Cart amount,Third party Coupon Type,Coupon uses limit
+c1,% discount,10,1,200,paytm,10
+c2,fix amount discount,20,0,,goibgo,1
+c3,% discount,10,1,300,flipcart,12
+c4,fix amount discount,20,0,,snapdeal,1
+c5,fix amount discount,30,1,400,amazon,1

@@ -7,20 +7,30 @@
  */
 
 /**
- * Implements hook_views_pre_render
- * {@inheritdoc}
+ * Implements hook_views_pre_render().
+ *
+ * {@inheritdoc}.
  */
 function itg_mega_reviews_critics_views_pre_render(&$view) {
+  switch ($view->name) {
+    case 'movies_master':
+      $header_content_mr = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+      $header_content_mr .= l(t('Create Movie'), 'admin/structure/taxonomy/movies/add', array('query' => array('destination' => arg(0))));
+      $view->attachment_before = $header_content_mr;
 
-  if ($view->name == "movie_review_list") {
-    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-    $header_content .= l(t('Create Mega Review & Critic'), 'node/add/mega-review-critic', array('query' => array('destination' => arg(0))));
-    $view->attachment_before = $header_content;
-  }
-  elseif ($view->name == "celebrity_profile_list") {
-    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-    $header_content .= l(t('Create profile'), 'node/add/itg-celebrity-profile', array('query' => array('destination' => 'celebrity-profile-list')));
-    $view->attachment_before = $header_content;
+      break;
+
+    case 'movie_review_list':
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Create Mega Review & Critic'), 'node/add/mega-review-critic', array('query' => array('destination' => arg(0))));
+      $view->attachment_before = $header_content;
+      
+      break;
+
+    case 'celebrity_profile_list':
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Create profile'), 'node/add/itg-celebrity-profile', array('query' => array('destination' => 'celebrity-profile-list')));
+      $view->attachment_before = $header_content;
   }
 }
 
@@ -57,7 +67,6 @@ function itg_mega_reviews_critics_form_after_build($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_mega_reviews_critics') . '/js/itg_mega_reviews_critics.js', array('weight' => 1));
 
   return $form;
-
 }
 
 /**
@@ -78,7 +87,6 @@ function itg_mega_reviews_critics_form_views_exposed_form_alter(&$form, &$form_s
     $form['nid']['#autocomplete_path'] = 'content-nid-list/itg_celebrity_profile/autocomplete';
     $form['nid']['#attributes'] = array('placeholder' => t('Profile ID'));
   }
-
 }
 
 /**
@@ -105,14 +113,12 @@ function itg_mega_reviews_critics_form_custom_callback($form, &$form_state) {
 
   drupal_set_message(t('Mega review <b>' . $mega_title . '</b> has been ' . $op . '.'));
 
-    if ($form_state['node']->status == 0) {
-     $form_state['redirect'] = 'movie-review-draft-list';
-    }
-     if ($form_state['node']->status == 1) {
-      $form_state['redirect'] = 'movie-review-list';
-    }
-  
-
+  if ($form_state['node']->status == 0) {
+    $form_state['redirect'] = 'movie-review-draft-list';
+  }
+  if ($form_state['node']->status == 1) {
+    $form_state['redirect'] = 'movie-review-list';
+  }
 }
 
 /**
@@ -120,12 +126,13 @@ function itg_mega_reviews_critics_form_custom_callback($form, &$form_state) {
  * @param array $form
  * @param array $form_state
  */
-function itg_mega_reviews_critics_form_draft_callback($form, &$form_state){
-   if (isset($_GET['destination'])) {
+function itg_mega_reviews_critics_form_draft_callback($form, &$form_state) {
+  if (isset($_GET['destination'])) {
     unset($_GET['destination']);
   }
-
-  $form_state['redirect'] = 'movie-review-draft-list';
+  $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination='.$_GET['destination'];   
+  $_GET['destination'] = $redirect_path;
+  //$form_state['redirect'] = 'movie-review-draft-list';
 }
 
 /**

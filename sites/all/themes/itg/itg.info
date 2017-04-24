@@ -52,6 +52,7 @@ stylesheets[all][] = system.theme.css
 ; Then we add our own stylesheet.
 stylesheets[all][] = css/layout.css
 stylesheets[all][] = css/font-awesome.css
+stylesheets[all][] = css/liMarquee.css
 stylesheets[all][] = css/slick.css
 stylesheets[all][] = css/itg-photo-slider.css
 stylesheets[all][] = css/layout.css
@@ -74,6 +75,10 @@ stylesheets[all][] = css/media.css
 ; Optionally add some JavaScripts to your theme.
 
 scripts[] = js/slick.js
+scripts[] = js/jquery.liMarquee.js
+scripts[] = js/ripple.js
+scripts[] = js/bootstrap.min.js
+scripts[] = js/stickyMojo.js
 scripts[] = js/script.js
 
 
@@ -93,6 +98,7 @@ scripts[] = js/script.js
 ; And you'll use this variable in maintenance-page.tpl.php:
 ;   <?php print $header_top; ?>
 
+regions[breaking_news]  = Breaking News
 regions[header]         = Header
 regions[navigation]     = Navigation bar
 regions[highlighted]    = Highlighted
@@ -106,6 +112,12 @@ regions[footer]         = Footer
 regions[bottom]         = Page bottom
 regions[top]            = Page top
 regions[my_cart]        = My Cart
+regions[sidebar_second_event] = Second sidebar event
+regions[content_event]        = Content event
+regions[header_event]         = Header event
+regions[vertical_menu]        = Vertical Menu
+regions[static_page_menu]     = Static page Menu
+regions[front_end_breadcrumb]     = Front end breadcrumb
 
 ; The page_top and page_bottom regions are hidden, which means they will not
 ; show up on the blocks administration page. But they are required in order for

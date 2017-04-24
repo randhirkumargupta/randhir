@@ -57,7 +57,7 @@ function feature_for_podcast_node_info() {
       'base' => 'node_content',
       'description' => t('This content type using for  Podcast/Audio Creation.'),
       'has_title' => '1',
-      'title_label' => t('Audio Title'),
+      'title_label' => t('Gallery Title'),
       'help' => '',
     ),
   );

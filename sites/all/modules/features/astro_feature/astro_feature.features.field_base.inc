@@ -256,6 +256,44 @@ function astro_feature_field_default_field_bases() {
     'type' => 'field_collection',
   );
 
+  // Exported field_base: 'field_astro_zodiac_sign_name'.
+  $field_bases['field_astro_zodiac_sign_name'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_astro_zodiac_sign_name',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'aries' => 'Aries',
+        'taurus' => 'Taurus',
+        'gemini' => 'Gemini',
+        'cancer' => 'Cancer',
+        'leo' => 'Leo',
+        'virgo' => 'Virgo',
+        'libra' => 'Libra',
+        'scorpio' => 'Scorpio',
+        'sagittarius' => 'Sagittarius',
+        'capricorn' => 'Capricorn',
+        'aquarius' => 'Aquarius',
+        'pisces' => 'Pisces',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_story_node_identity'.
   $field_bases['field_story_node_identity'] = array(
     'active' => 1,

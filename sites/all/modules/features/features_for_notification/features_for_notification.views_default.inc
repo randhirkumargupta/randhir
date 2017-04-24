@@ -141,13 +141,13 @@ function features_for_notification_views_default_views() {
   $handler->display->display_options['fields']['field_ntf_select_device']['table'] = 'field_data_field_ntf_select_device';
   $handler->display->display_options['fields']['field_ntf_select_device']['field'] = 'field_ntf_select_device';
   $handler->display->display_options['fields']['field_ntf_select_device']['label'] = 'Device';
-  /* Field: Content: Date */
-  $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
-  $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
-  $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
-  $handler->display->display_options['fields']['field_survey_start_date']['label'] = 'Scheduled Date';
-  $handler->display->display_options['fields']['field_survey_start_date']['settings'] = array(
-    'format_type' => 'itg_date_with_time',
+  /* Field: Content: Schedule */
+  $handler->display->display_options['fields']['field_ntf_schedule']['id'] = 'field_ntf_schedule';
+  $handler->display->display_options['fields']['field_ntf_schedule']['table'] = 'field_data_field_ntf_schedule';
+  $handler->display->display_options['fields']['field_ntf_schedule']['field'] = 'field_ntf_schedule';
+  $handler->display->display_options['fields']['field_ntf_schedule']['label'] = 'Schedule date';
+  $handler->display->display_options['fields']['field_ntf_schedule']['settings'] = array(
+    'format_type' => 'long',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',

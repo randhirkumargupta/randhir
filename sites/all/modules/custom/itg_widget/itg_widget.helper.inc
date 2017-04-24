@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * @file
+ * Helper file for widget module.
+ *
+ */
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,7 +19,7 @@ define('DONT_MISS_MIN_RANGE', 0);
 define('MOST_POPULAR_MAX_RANGE', 15);
 define('MOST_POPULAR_MIN_RANGE', 0);
 
-define('TOP_TAKES_MAX_RANGE', 4);
+define('TOP_TAKES_MAX_RANGE', 3);
 define('TOP_TAKES_MIN_RANGE', 0);
 
 define('WATCH_RIGHT_NOW_MAX_RANGE', 4);
@@ -24,7 +28,7 @@ define('WATCH_RIGHT_NOW_MIN_RANGE', 0);
 define('MAY_WE_SUGGEST_MAX_RANGE', 4);
 define('MAY_WE_SUGGEST_MIN_RANGE', 0);
 
-define('TREANDING_VIDEO_MAX_RANGE', 15);
+define('TREANDING_VIDEO_MAX_RANGE', 3);
 define('TREANDING_VIDEO_MIN_RANGE', 0);
 
 define('PHOTO_CAROUSEL_MAX_RANGE', 5);

@@ -1,0 +1,6 @@
+name = ITG Category Multiple
+description = "ITG Category Multiple"
+core = 7.x
+package = ITG
+;dependencies[] = mongodb
+files[] = itg_category_multiple.module

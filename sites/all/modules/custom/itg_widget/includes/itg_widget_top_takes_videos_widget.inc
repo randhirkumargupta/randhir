@@ -24,10 +24,10 @@ function itg_widget_top_takes_videos_widget_ordering_data($info) {
         $top_takes_videos = itg_widget_nodes_from_nodequeue($nodequeue_name , TRUE , TOP_TAKES_MIN_RANGE, TOP_TAKES_MAX_RANGE);
       }
       foreach ($top_takes_videos as $video) {
-        $video_entity_id = $video['entity_id'];
+        /*$video_entity_id = $video['entity_id'];
         $temp_result = array();
-        $temp_result = get_required_data_from_entity_id($video_entity_id);
-        $result[] = $temp_result[$video_entity_id];
+        $temp_result = get_required_data_from_entity_id($video_entity_id);*/
+        $result[] = $video;
       }
       return $result;
     }

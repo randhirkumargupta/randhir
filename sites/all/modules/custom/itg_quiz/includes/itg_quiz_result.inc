@@ -46,11 +46,17 @@ function itg_quiz_user_list() {
       $result = $query->execute();
       
        while ($record = $result->fetchObject()) {
-         $correct_answer = itg_quiz_contest_result($node->nid, $record->quiz_key, 'yes');
+         if (strpos($record->user_email, 'nowhere.com') !== false) {
+            $email = '';
+          }
+          else {
+            $email = $record->user_email;
+          }
+      $correct_answer = itg_quiz_contest_result($node->nid, $record->quiz_key, 'yes');
          $incorrect_answer = $record->ques_attempt - $correct_answer;
          $answer_op_tbl .= '<tr>
           <td>' . $record->user_name . '</td>
-          <td>'.$record->user_email.'</td>
+          <td>'.$email.'</td>
           <td>'.$record->quiz_title.'</td>
           <td>'.date('d/m/Y', $record->created).'</td>
           <td>'.$record->ques_total.'</td>

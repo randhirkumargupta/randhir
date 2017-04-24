@@ -173,22 +173,31 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="poll-banner">
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="poll-banner test">
 <div class="poll-list">
-<div class="pic">[field_poll_banner] </div>
-<div class="detail">
-<div class="detail-content">
-<h4>[title]</h4>
-<div class="vota">[php_1]</div>
-<div class="time">Updated: [changed]</div>
+	<div class="pic">[field_poll_banner] </div>
+	<div class="detail">
+		<div class="detail-content">
+			<h4>[title]</h4>
+			<div class="vota-time mhide">
+				<div class="vota">[php_1]</div>
+				<div class="time">Updated: [changed] <div class="social-share"><ul><li><span class="share"><i class="fa fa-share-alt"></i></span></li><li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li><li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li><li><a href="#" class="google"></a></li></ul></div>			</div>								
+			</div>
+			
+			
+		</div>		
+	</div>
+	<div class="vota-time desktop-hide">
+				<div class="vota">[php_1] | </div>
+				<div class="time">Updated: [changed]</div>
+				
+				<div class="social-share"><ul><li><span class="share"><i class="fa fa-share-alt"></i></span></li><li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li><li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li><li><a href="#" class="google"></a></li></ul></div>			
+				
+			</div>
+	<div class="voting-data">
+		[php]
+		</div>
 </div>
-<div class="voting-data">
-[php]
-</div>
-
-</div>
-</div>
-
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Sort criterion: Content: Post date */
@@ -206,6 +215,100 @@ function feature_for_poll_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'customstyle';
+  $handler->display->display_options['style_options']['custom-class-columncount'] = '0';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Poll Banner */
+  $handler->display->display_options['fields']['field_poll_banner']['id'] = 'field_poll_banner';
+  $handler->display->display_options['fields']['field_poll_banner']['table'] = 'field_data_field_poll_banner';
+  $handler->display->display_options['fields']['field_poll_banner']['field'] = 'field_poll_banner';
+  $handler->display->display_options['fields']['field_poll_banner']['label'] = '';
+  $handler->display->display_options['fields']['field_poll_banner']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_poll_banner']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_poll_banner']['settings'] = array(
+    'image_style' => 'past_poll_images_style_front_end',
+    'image_link' => '',
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['php_1']['id'] = 'php_1';
+  $handler->display->display_options['fields']['php_1']['table'] = 'views';
+  $handler->display->display_options['fields']['php_1']['field'] = 'php';
+  $handler->display->display_options['fields']['php_1']['label'] = '';
+  $handler->display->display_options['fields']['php_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php_1']['php_output'] = '<?php  print itg_poll_getTotalPoll($row->nid);  ?> Votes counted';
+  $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = '';
+  $handler->display->display_options['fields']['changed']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['changed']['date_format'] = 'itg';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['php']['id'] = 'php';
+  $handler->display->display_options['fields']['php']['table'] = 'views';
+  $handler->display->display_options['fields']['php']['field'] = 'php';
+  $handler->display->display_options['fields']['php']['label'] = '';
+  $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php']['php_output'] = '<?php  print itg_poll_get_past_data($row->nid);  ?>';
+  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="poll-banner test">
+<div class="poll-list">
+	<div class="pic">[field_poll_banner] </div>
+	<div class="detail">
+		<div class="detail-content">
+			<h4>[title]</h4>
+			<div class="vota-time mhide">
+				<div class="vota">[php_1]</div>
+				<div class="time">Updated: [changed] <div class="social-share"><ul><li><span class="share"><i class="fa fa-share-alt"></i></span></li><li><a href="#"  onclick="" class="facebook"><i class="fa fa-facebook"></i></a></li><li><a href="#"    onclick="" class="twitter"><i class="fa fa-twitter"></i></a></li><li><a href="#" [title]  class="google"></a></li></ul></div>			</div>								
+			</div>
+			
+			
+		</div>		
+	</div>
+	<div class="vota-time desktop-hide">
+				<div class="vota">[php_1] | </div>
+				<div class="time">Updated: [changed]</div>
+				
+				<div class="social-share"><ul><li><span class="share"><i class="fa fa-share-alt"></i></span></li><li><a href="#"  onclick="" class="facebook"><i class="fa fa-facebook"></i></a></li><li><a href="#"  [title] class="twitter"><i class="fa fa-twitter"></i></a></li><li><a href="#"  class="google"></a></li></ul></div>			
+				
+			</div>
+	<div class="voting-data">
+		[php]
+		</div>
+</div>
+</div>';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $export['past_polls'] = $view;
 
   $view = new view();
@@ -365,6 +468,12 @@ function feature_for_poll_views_default_views() {
     6 => '6',
     20 => '20',
     10 => '10',
+  );
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['query']['options']['query_tags'] = array(
+    0 => 'manage_poll_query_tag',
   );
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -1126,31 +1235,6 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Bulk operations: Content */
-  $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
-  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
-  $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '0';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['row_clickable'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
-    'action::node_publish_action' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 1,
-      'override_label' => 0,
-      'label' => '',
-    ),
-    'action::node_unpublish_action' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 1,
-      'override_label' => 0,
-      'label' => '',
-    ),
-  );
   /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
   $handler->display->display_options['fields']['counter']['table'] = 'views';

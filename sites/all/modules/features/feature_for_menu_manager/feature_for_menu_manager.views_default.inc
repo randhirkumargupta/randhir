@@ -36,6 +36,7 @@ function feature_for_menu_manager_views_default_views() {
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '30';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -133,6 +134,80 @@ function feature_for_menu_manager_views_default_views() {
   $handler->display->display_options['arguments']['menu_level']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['menu_level']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['menu_level']['limit'] = '0';
+  /* Filter criterion: Menu Manager: Category Manager Table */
+  $handler->display->display_options['filters']['tid']['id'] = 'tid';
+  $handler->display->display_options['filters']['tid']['table'] = 'itg_menu_manager';
+  $handler->display->display_options['filters']['tid']['field'] = 'tid';
+  $handler->display->display_options['filters']['tid']['group'] = 1;
+  $handler->display->display_options['filters']['tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['tid']['expose']['operator_id'] = 'tid_op';
+  $handler->display->display_options['filters']['tid']['expose']['label'] = 'Term Id';
+  $handler->display->display_options['filters']['tid']['expose']['operator'] = 'tid_op';
+  $handler->display->display_options['filters']['tid']['expose']['identifier'] = 'tid';
+  $handler->display->display_options['filters']['tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
+  /* Filter criterion: Menu Manager: Section */
+  $handler->display->display_options['filters']['section_id']['id'] = 'section_id';
+  $handler->display->display_options['filters']['section_id']['table'] = 'itg_menu_manager';
+  $handler->display->display_options['filters']['section_id']['field'] = 'section_id';
+  $handler->display->display_options['filters']['section_id']['group'] = 1;
+  $handler->display->display_options['filters']['section_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['section_id']['expose']['operator_id'] = 'section_id_op';
+  $handler->display->display_options['filters']['section_id']['expose']['label'] = 'Section';
+  $handler->display->display_options['filters']['section_id']['expose']['operator'] = 'section_id_op';
+  $handler->display->display_options['filters']['section_id']['expose']['identifier'] = 'section_id';
+  $handler->display->display_options['filters']['section_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
 
   /* Display: Menu manager */
   $handler = $view->new_display('page', 'Menu manager', 'menu_manager_page');
@@ -170,6 +245,11 @@ function feature_for_menu_manager_views_default_views() {
   $handler->display->display_options['fields']['url']['table'] = 'itg_menu_manager';
   $handler->display->display_options['fields']['url']['field'] = 'url';
   $handler->display->display_options['fields']['url']['label'] = 'Link';
+  /* Field: Menu Manager: Menu name */
+  $handler->display->display_options['fields']['menu_name']['id'] = 'menu_name';
+  $handler->display->display_options['fields']['menu_name']['table'] = 'itg_menu_manager';
+  $handler->display->display_options['fields']['menu_name']['field'] = 'menu_name';
+  $handler->display->display_options['fields']['menu_name']['label'] = 'Icon';
   /* Field: Menu Manager: Url Type */
   $handler->display->display_options['fields']['url_type']['id'] = 'url_type';
   $handler->display->display_options['fields']['url_type']['table'] = 'itg_menu_manager';

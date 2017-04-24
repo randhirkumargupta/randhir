@@ -4,7 +4,7 @@
  */
 
 
-function Go(windowWidth, windowHeight, windowOuterHeight, wname, features) {
+function Go(windowWidth, windowHeight, windowOuterHeight, wname, features, site_url, pass_arg) {
 
     var centerLeft = parseInt((window.screen.availWidth - windowWidth) / 2);
     var centerTop = parseInt(((window.screen.availHeight - windowHeight) / 2) - windowOuterHeight);
@@ -16,7 +16,11 @@ function Go(windowWidth, windowHeight, windowOuterHeight, wname, features) {
     else {
         misc_features = ', status=no, location=no, scrollbars=yes, resizable=yes';
     }
-    var child = window.open("http://dev.indiatodayonline.in/saml_login/other", wname, windowFeatures);
+    
+    if (pass_arg){
+        pass_arg = pass_arg;
+    }
+    var child = window.open("http://"+site_url+ pass_arg, wname, windowFeatures);
 
     var leftDomain = false;
     var interval = setInterval(function () {
@@ -43,7 +47,7 @@ function Go(windowWidth, windowHeight, windowOuterHeight, wname, features) {
             // we're here when the child window has been navigated away or closed
             if (child.closed) {
                 clearInterval(interval);
-                window.location.reload();
+                window.location.reload(true);
                 return;
             }
             // navigated to another domain  

@@ -90,13 +90,19 @@ function features_for_print_team_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '7',
+          'weight' => '8',
         ),
         'title' => array(
           'weight' => '1',
         ),
         'path' => array(
-          'weight' => '6',
+          'weight' => '7',
+        ),
+        'domain' => array(
+          'weight' => '2',
+        ),
+        'redirect' => array(
+          'weight' => '11',
         ),
       ),
       'display' => array(),

@@ -9,6 +9,21 @@
  */
 
 /**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_reporter_cronapi($op, $job = NULL) {
+  
+  $items['itg-remove-byline-content'] = array(
+    'description' => 'Remove junk byline.',
+    'callback' => 'itg_remove_byline_content',
+    'file' => 'include/itg_remove_byline_content.inc',
+  );
+  
+  return $items;
+}
+
+/**
  * Implements hook_menu().
  * @return array
  */
@@ -113,22 +128,35 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
       '#value' => t('Cancel'),
     );
   }
-  
-  $frm_array = array('cooking_tips_node_form', 'story_node_form', 'videogallery_node_form', 'food_news_node_form', 'recipe_node_form', 'survey_node_form', 'quiz_node_form');
-  if (in_array($form_id, $frm_array)) {
 
-    if (isset($form['field_story_reporter'][LANGUAGE_NONE]['#default_value']) && !empty($form['field_story_reporter'][LANGUAGE_NONE]['#default_value'])) {
-      $exp_val = explode(',', $form['field_story_reporter'][LANGUAGE_NONE]['#default_value']);
-      $final_name = array();
-      foreach ($exp_val as $chuck) {
-        preg_match('#\((.*?)\)#', $chuck, $match);
-        $final_name[] = itg_autocomplete_byline($match[1]);
+  $frm_array = array('cooking_tips_node_form', 'story_node_form', 'videogallery_node_form', 'food_news_node_form', 'recipe_node_form', 'survey_node_form', 'quiz_node_form', 'photogallery_node_form');
+  if (in_array($form_id, $frm_array)) {
+    if (!empty($form['field_story_reporter'][LANGUAGE_NONE])) {
+      foreach ($form['field_story_reporter'][LANGUAGE_NONE] as $key => $buzz_item) {
+        if (!empty($buzz_item['target_id']['#default_value'])) {
+          preg_match('#\((.*?)\)#', $buzz_item['target_id']['#default_value'], $match);
+          $form['field_story_reporter'][LANGUAGE_NONE][$key]['target_id']['#default_value'] = itg_autocomplete_byline($match[1]);
+        }
       }
-      $final_implode = implode(', ', $final_name);
-      $form['field_story_reporter'][LANGUAGE_NONE]['#default_value'] = $final_implode;
+    }
+
+    if (!empty($form['field_photo_by'][LANGUAGE_NONE]['#default_value'])) {
+      preg_match('#\((.*?)\)#', $form['field_photo_by'][LANGUAGE_NONE]['#default_value'], $match);
+      $form['field_photo_by'][LANGUAGE_NONE]['#default_value'] = itg_autocomplete_byline($match[1]);
     }
   }
-  
+
+  if($form_id == 'videogallery_node_form') {
+     if (!empty($form['field_video_anchor'][LANGUAGE_NONE])) {
+      foreach ($form['field_video_anchor'][LANGUAGE_NONE] as $key => $buzz_item) {
+        if (!empty($buzz_item['target_id']['#default_value'])) {
+          preg_match('#\((.*?)\)#', $buzz_item['target_id']['#default_value'], $match);
+          $form['field_video_anchor'][LANGUAGE_NONE][$key]['target_id']['#default_value'] = itg_autocomplete_byline($match[1]);
+        }
+      }
+    }
+  }
+
   if ($form_id == 'photogallery_node_form') {
     foreach ($form['field_gallery_image']['und'] as $key => $val) {
       if (isset($val['field_photo_byline']['und'])) {
@@ -141,6 +169,21 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
           }
           $final_implode = implode(', ', $final_name);
           $form['field_gallery_image']['und'][$key]['field_photo_byline']['und']['#default_value'] = $final_implode;
+        }
+      }
+    }
+
+    foreach ($form['field_gallery_image']['und'] as $key => $val) {
+      if (isset($val['field_photo_by']['und'])) {
+        if (isset($val['field_photo_by']['und']['#default_value']) && !empty($val['field_photo_by']['und']['#default_value'])) {
+          $exp_val = explode(',', $val['field_photo_by']['und']['#default_value']);
+          $final_name = array();
+          foreach ($exp_val as $chuck) {
+            preg_match('#\((.*?)\)#', $chuck, $match);
+            $final_name[] = itg_autocomplete_byline($match[1]);
+          }
+          $final_implode = implode(', ', $final_name);
+          $form['field_gallery_image']['und'][$key]['field_photo_by']['und']['#default_value'] = $final_implode;
         }
       }
     }
@@ -158,25 +201,22 @@ function itg_reporter_after_build($form, &$form_state) {
   global $user, $base_url;
 
   // get anchor id based on category name
-
-  $tem_tid = taxonomy_get_term_by_name('anchor', NULL);
-  $tid = array_pop($tem_tid)->tid;
-
+  $tid = ANCHOR_TID;
+  $tid_poli = POLITICIAN_TID;
+  $tid_repo = REPORTER_TID;
   // alter label name
   $form['title']['#title'] = t('Name');
-  // update automatic alias name
-  $form['path']['pathauto']['#title'] = 'Generate automatic Sef URL';
-  //Unset metatag description
-  unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags']['#description']);
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
+  $settings['politician'] = $tid_poli;
   $settings['anchor'] = $tid;
+  $settings['reporter'] = $tid_repo;
   $settings['ntype'] = $form['type']['#value'];
   drupal_add_js(array('itg_reporter' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_reporter') . '/js/itg_reporter.js');
-
+  $form['#attached']['js'] = array(
+    drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js');
   return $form;
 }
 
@@ -260,11 +300,12 @@ function itg_reporter_get_twitter_handle($twitter) {
 }
 
 /**
- * Implement hook_node_presave
- * @param Object $node
+ * Implements hook_node_presave().
+ *
+ * {@inheritdoc}.
  */
 function itg_reporter_node_presave($node) {
-  if ($node->type == 'reporter') {
+  if ($node->type == 'reporter' && !empty($node->nid)) {
     $previous_value = node_load($node->nid);
     $previous_title = $previous_value->title;
     $new_title = $node->title;
@@ -330,25 +371,53 @@ function itg_reporter_get_all_story_nid($source_id) {
   return $options;
 }
 
-
 /**
  * Implement itg_autocomplete_byline
  * @param array $id
  */
 function itg_autocomplete_byline($id) {
-  
   $reporter_name = db_select('node', 'n');
-  $reporter_name->join('field_data_field_reporter_email_id', 're', 'n.nid = re.entity_id');
+  $reporter_name->leftJoin('field_data_field_reporter_email_id', 're', 'n.nid = re.entity_id');
   $reporter_name->fields('n', array('title', 'nid'));
   $reporter_name->fields('re', array('field_reporter_email_id_value'));
   $reporter_name->condition('n.type', 'reporter', '=');
-  $reporter_name->condition('n.nid', $id , '=');
+  $reporter_name->condition('n.nid', $id, '=');
   $result = $reporter_name->execute();
   //$name_format = array();
-   $record = $result->fetchAssoc();
-   $r_title = ucfirst($record['title']);
-   $r_nid = strtolower($record['nid']);
-   $name_format = $r_title.'('.$record['field_reporter_email_id_value'].')('.$r_nid.')';
-  
- return $name_format;
+  $record = $result->fetchAssoc();
+  $r_title = ucfirst($record['title']);
+  $r_nid = strtolower($record['nid']);
+  if (!empty($record['field_reporter_email_id_value'])) {
+    $name_format = $r_title . '(' . $record['field_reporter_email_id_value'] . ')(' . $r_nid . ')';
+  }
+  else {
+    $name_format = $r_title . '(' . $r_nid . ')';
+  }
+
+  return $name_format;
+}
+
+/**
+ * Implements hook_node_validate().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reporter_node_validate($node, $form, &$form_state) {
+  if ($node->type == 'reporter') {
+    $occupation = $node->field_celebrity_pro_occupation['und'];
+    $flag = FALSE;
+    if (count($occupation) >= 1) {
+      foreach ($occupation as $term) {
+        $occ_name = taxonomy_term_load($term['tid']);
+        if ($occ_name->name == 'Celebrity') {
+          $flag = TRUE;
+        }
+      }
+    }
+    // make moview field mandotory.
+    $errors = array_filter($node->field_reporter_movie_name['und']);
+    if ($flag && empty($errors)) {
+      form_set_error('field_reporter_movie_name', 'Movie name is required.');
+    }
+  }
 }
