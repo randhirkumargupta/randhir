@@ -1835,6 +1835,10 @@ footer .multiple-items-footer i.slick-next {
   display: block;
 }
 
+.trending-list .top-takes-video-container {
+  border: 1px solid #dddddd;
+}
+
 /*End CSS trending-videos Home  page*/
 /*Start Search page css*/
 .view-front-end-global-search .searh-all-filters {
