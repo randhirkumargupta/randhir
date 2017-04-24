@@ -1462,11 +1462,19 @@ function itg_videogallery_remove_video_with_child() {
  * This function use for make video bitrate url:
  */
 function itg_videogallery_make_bitrate_url($video_url, $bitrates) {
-
+//pr($bitrates);
+//pr($video_url);
   $firestparet_replace = str_replace(VIDEO_MAIN_URL, VIDEO_BITRATE_URL, $video_url);
+  //p($firestparet_replace);
   $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $firestparet_replace);
-  $returnstring = substr($withoutExt, 0, strpos($withoutExt, '1024_512'));
+  if(strpos($withoutExt, '1024_512')) {
+    $returnstring = substr($withoutExt, 0, strpos($withoutExt, '1024_512'));
+  }else {
+        $returnstring = substr($withoutExt, 0, strpos($withoutExt, '512'));
+
+  }
   $returnstring = $returnstring . '1024_,' . $bitrates . ',.mp4.csmil/master.m3u8';
+  //p($returnstring);
   return $returnstring;
 }
 

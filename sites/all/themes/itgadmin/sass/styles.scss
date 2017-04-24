@@ -10040,7 +10040,7 @@ div.node{
           max-width: 100px;
           margin: 0;
           > label{display: none !important;}
-          &.form-item-from-time-date, &.form-item-to-time{margin-right: 10px;}
+          &.form-item-from-time-date, &.form-item-to-time, &.form-item-to-time-date{margin-right: 10px;}
         }
       }
     }
@@ -10055,7 +10055,7 @@ div.node{
     position: absolute;
     left: 0;
     top: 71px;
-    left: 316px;
+    left: 229px;
   }
   table{
     @extend .views-table;
@@ -10254,6 +10254,11 @@ div.node{
   }
   [id*="field-gallery-image-values"] tbody .field-multiple-drag{
     display: block;
+  }
+  .form-field-name-field-story-syndication{
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
   }
 } 
 .messages em{font-weight: 600;}
