@@ -32,6 +32,13 @@ function itg_newsletter_menu() {
     'access callback' => TRUE,
     'file' => 'includes/itg_newsletter_content_preview_data.inc',
   );
+  
+  $items['newsletter-data-preview-before-download/%'] = array(
+    'title' => 'Download Newsletter Preview',
+    'page callback' => 'itg_newsletter_content_preview_data_before_download',
+    'access arguments' => array('access itg story') ,
+    'file' => 'includes/itg_newsletter_content_preview_data.inc',
+  );
 
   return $items;
 }
@@ -122,8 +129,8 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => 21,
       '#value' => t('Cancel'),
     );
-      
     $form['actions']['submit']['#value'] = t('Publish');
+    unset($form['actions']['preview']);
     unset($form['title']);
     unset($form['field_newsl_website_name']);
 
