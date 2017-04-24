@@ -137,10 +137,9 @@ else {
               $style_tag = '';
               if(!empty($sponsored_class)) {
                 $color_value = $menu_data['db_data']['bk_color'];
-                $style_tag = 'style="background:'.$color_value.'"';
               }
               ?>
-              <li <?php echo $style_tag; ?> class="<?php print $image_class; ?>"><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)))); ?></li>
+              <li <?php echo $style_tag; ?> class="<?php print $image_class; ?>"><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('style' => array("background : $color_value" ) , 'target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)))); ?></li>
               <?php
             }
           endforeach;
