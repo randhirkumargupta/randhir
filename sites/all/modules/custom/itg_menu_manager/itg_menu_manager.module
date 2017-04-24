@@ -247,18 +247,19 @@ function itg_menu_manager_form($form, &$form_state) {
   $form['sponsored_category'] = array(
     '#title' => t('Sponsored Category'),
     '#type' => 'checkboxes',
-    '#description' => t('Sponsored category is applicable for only second level menu. Value saved for third level menu will not appear on front end.'),
+    '#description' => t('If menu is sponsored the the background color will apply.'),
     '#default_value' => (isset($default_values['extra']) && ($default_values['extra'] == "Yes")) ? array("Yes") : array(),
     '#options' => array('Yes' => t('Yes')),
   );
-
+  $default_color_value = isset($default_values['bk_color']) ? $default_values['bk_color'] : "#000000";
   $form['bk_color'] = array(
     '#type' => 'textfield',
     '#title' => t('Background Color'),
-    '#default_value' => isset($default_values['bk_color']) ? $default_values['bk_color'] : "",
+    '#default_value' => $default_color_value,
     '#attributes' => array('class' => array('jscolor {hash:true}')),
+    '#suffix' => '<input type="color" id="color-picker" value="'.$default_color_value.'">',
   );
-    
+  drupal_add_css("input[name=bk_color] {display:none}" , "inline");
   $form['display_icon'] = array(
     '#title' => t('Display'),
     '#type' => 'radios',
