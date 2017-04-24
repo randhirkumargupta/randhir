@@ -12838,7 +12838,7 @@ span.smilies-title img {
 /*css breadcrumb start*/
 #block-itg-layout-manager-front-end-breadcrumb {
   position: relative;
-  z-index: 9999;
+  z-index: 9998;
   color: #a1a1a1;
   font-family: roboto;
   padding-top: 15px;
