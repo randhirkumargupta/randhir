@@ -342,16 +342,18 @@ function itg_akamai_block_info() {
  */
 function itg_akamai_block_view($delta) {
   if ($delta == 'itg_akamai') {
+    global $user;
+    if (in_array('administrator', $user->roles) || in_array('Site Admin', $user->roles)) {
+      if (arg(0) == 'admin') // preventing this form for admin pages 
+        return;
 
-    if (arg(0) == 'admin') // preventing this form for admin pages 
-      return;
-
-    $cache_control_form = drupal_get_form('itg_akamai_page_cache_control_form');
-    $block = array(
-      'subject' => '<none>',
-      'content' => $cache_control_form,
-    );
-    return $block;
+      $cache_control_form = drupal_get_form('itg_akamai_page_cache_control_form');
+      $block = array(
+        'subject' => '<none>',
+        'content' => $cache_control_form,
+      );
+      return $block;
+    }
   }
 }
 
@@ -540,7 +542,7 @@ function itg_akamai_exit() {
     drupal_add_http_header('Cache-Control', 'public, max-age=' . $max_age);
     //drupal_add_http_header('Edge-control', 'cache-maxage=' . $max_age);
     //drupal_add_http_header('Expires', 'Sun, 20 Nov 1978 05:00:00 GMT');
-   // drupal_add_http_header('Expires', itg_akamai_translate_time($formated_expire_date));
+    // drupal_add_http_header('Expires', itg_akamai_translate_time($formated_expire_date));
     drupal_add_http_header('Expires', $formated_expire_date);
   }
 }
@@ -669,7 +671,6 @@ function itg_akamai_set_expiration_date($max_age) {
  * @param string $max_age
  * @return string
  */
-
 function itg_akamai_translate_time($timestring) {
   if (preg_match('/^(?:(?<hours>\d+)h\s*)?(?:(?<minutes>\d+)m\s*)?(?:(?<seconds>\d+)s\s*)?$/', $timestring, $matches)) {
     $time = 0;
