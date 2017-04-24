@@ -285,7 +285,7 @@ function itg_layout_getsecttioncarddata() {
 }
 
 /**
- * Implements hook_manager_preprocess_page().
+ * Implements itg_layout_gethomecarddata_new().
  * {@inheritdoc}
  */
 function itg_layout_gethomecarddata_new($sectinno) {
