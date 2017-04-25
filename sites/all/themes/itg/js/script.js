@@ -681,7 +681,8 @@ jQuery(document).ready(function () {
         // third-level-menu on mobile
         var tlmenu = jQuery('#block-itg-menu-manager-third-level-menu .select-menu');
         tlmenu.click(function(){
-            jQuery(this).next('ul').stop().slideToggle();
+          jQuery('.mobile-nav .fa-times').trigger('click');
+          jQuery(this).next('ul').stop().slideToggle();
         });
         jQuery(document).on('click', function () {
             jQuery('#block-itg-menu-manager-third-level-menu ul.third-level-menu').slideUp();;
@@ -932,8 +933,7 @@ jQuery(window).load(function(){
           if(! mouse_is_inside){
             jQuery('.search-icon-search').hide().prev().show();
             jQuery('.globle-search').removeClass('active');
-          } 
-          e.stopPropagation();
+          }
       });
 
       jQuery('.search-icon-header').click(function () {

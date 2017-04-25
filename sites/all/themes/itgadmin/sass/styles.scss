@@ -7106,7 +7106,7 @@ div.node{
   height: 674px;
 }
 .itg-layout-container .top-colum-3 .droppable{
-  height: 277px;
+  height: 262px;
 }
 .itg-h450-section{
   .widget-wrapper{
@@ -11672,7 +11672,9 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     }
   }
   .node-mail_templates-form{
+    .form-item-title{display: none;}
     .vertical-tabs{
+      display: none;
       .vertical-tabs-list{display: none;}
     }
   }
