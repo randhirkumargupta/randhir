@@ -5394,7 +5394,9 @@ div.node #comments h2 {
   top: -24px;
 }
 .block-itg-related .checked-list {
-  padding: 5px 10px;
+  margin: 5px 10px;
+  max-height: 210px;
+  overflow-y: auto;
 }
 .block-itg-related .checked-list li {
   background-color: #f0f0f0;
