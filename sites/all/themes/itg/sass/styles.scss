@@ -1093,24 +1093,27 @@ footer{
             margin-right: 50px;
         }
         .footer-social-link{
-            @include font(24px,null,null);
+          @include font(24px,null,null);
+          vertical-align: middle;
+          @include float(right);
+          padding-right: 50px;
+          .globle-search{
+            @include pos(absolute,3px,45px,null,null);
+            @include transition(all 0.5s ease-in-out );
+            width:0px;
+            overflow:hidden;
+            height:30px;
+            .search-text{
+              @include calculate-width(1);
+            } 
+            &.active{
+              width: 225px;
+            }
+          }
+          .fa{
+            @include font(24px);
             vertical-align: middle;
-            @include float(right);
-            padding-right: 50px;
-            .globle-search{
-                    @include pos(absolute,6px,110px,null,null);
-                    @include transition(all 0.5s ease-in-out );
-                    width:0px;
-                    overflow:hidden;
-                    height:30px;
-                    .search-text{
-                        @include calculate-width(1);
-                    }                    
-                }
-                .fa{
-                    @include font(24px);
-                    vertical-align: middle;
-                }
+          }
         }
         ul{
             li{
@@ -1531,6 +1534,11 @@ footer{
         }
     }
 }
+.trending-list{
+  .top-takes-video-container{
+    border: 1px solid $border-color;
+  }
+}
 /*End CSS trending-videos Home  page*/
 /*Start Search page css*/
 .view-front-end-global-search{
@@ -1819,7 +1827,7 @@ footer{
     }
     .description{
       iframe{
-        min-height: 480px;
+        min-height: 495px;
       }
     }
     ul{
@@ -2081,7 +2089,7 @@ footer{
               padding-left: 18px;
             }
             a{
-              color: #1a3c8d;
+              color: #026bc5;
               &:hover{text-decoration: underline;}
             }
         }
@@ -6426,7 +6434,7 @@ section.sidebar{
             @include display-inline;
             position: relative;            
             background: #d1d1d1;
-            width: 190px;
+            width: 195px;
             height: 54px;
             line-height:54px;
             padding-right:10px;
@@ -10579,7 +10587,7 @@ span.smilies-title {
 /*css breadcrumb start*/
 #block-itg-layout-manager-front-end-breadcrumb{
   position: relative;
-  z-index: 9999;  
+  z-index: 9998;  
   color: #a1a1a1;
   font-family: roboto;
   padding-top:15px;
@@ -10847,17 +10855,14 @@ span.smilies-title {
     li{
       a.pic{
         @extend .zoom-image;
-        max-height: 55px;
+        width: 88px;
+        height: 66px;
       }
     }
     li + li{border-top: 1px solid #dddddd;}
   }
 }
-#block-itg-front-end-common-latest-from-businesstoday{
-  a.pic{
-    img{max-width: 56px;}
-  }
-}
+
 .agbutton .error-msg{color: red;}
 .jw-sharing-dock-btn {
   display: none;

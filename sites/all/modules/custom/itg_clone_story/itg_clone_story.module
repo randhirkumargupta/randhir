@@ -127,7 +127,8 @@ function itg_clone_story_views_pre_render(&$view) {
     if (function_exists('itg_apache_solr_get_site_hash')) {
       $hash = itg_apache_solr_get_site_hash();
     }
-
+    $header_content_clone = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+    $view->attachment_before = $header_content_clone;
     foreach ($view->result as $related_result) {
       $key = $related_result->hash;
       $related_result->site = $hash[$key];

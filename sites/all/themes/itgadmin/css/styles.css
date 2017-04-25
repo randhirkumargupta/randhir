@@ -5394,7 +5394,9 @@ div.node #comments h2 {
   top: -24px;
 }
 .block-itg-related .checked-list {
-  padding: 5px 10px;
+  margin: 5px 10px;
+  max-height: 210px;
+  overflow-y: auto;
 }
 .block-itg-related .checked-list li {
   background-color: #f0f0f0;
@@ -7295,7 +7297,7 @@ div.node #comments h2 {
 }
 
 .itg-layout-container .top-colum-3 .droppable {
-  height: 277px;
+  height: 262px;
 }
 
 .itg-h450-section .widget-wrapper {
@@ -12366,6 +12368,12 @@ body.taxonomy-form-term-tags {
   cursor: pointer;
 }
 
+.node-mail_templates-form .form-item-title {
+  display: none;
+}
+.node-mail_templates-form .vertical-tabs {
+  display: none;
+}
 .node-mail_templates-form .vertical-tabs .vertical-tabs-list {
   display: none;
 }

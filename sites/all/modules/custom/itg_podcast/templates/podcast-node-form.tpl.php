@@ -35,7 +35,13 @@
     <?php print drupal_render($form['field_primary_cat_data']); ?>
 
 </div>
- 
+ <div id="AkamaiSettings" class="itg-sidebar-form-section">
+                <h2 class="story-title"><?php print t('Akamai Setting'); ?></h2>
+                <div class="itg-form-section">
+                    <?php print drupal_render($form['akamai_timeout']); ?>
+                </div>
+          </div>
+
 <h2 id="title-metatags" class="story-title"><?php print t('Remarks'); ?></h2>
 <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>
