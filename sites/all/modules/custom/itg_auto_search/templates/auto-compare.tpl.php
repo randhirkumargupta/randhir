@@ -1,4 +1,4 @@
-<div id="compare-section">
+<div id="compare-section" class="auto-compare-section">
     <?php
     $class = 'col-md-5';
     $tableClass = 'col-md-4';

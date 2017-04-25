@@ -75,10 +75,21 @@ function import_auto_csv_validate($form, &$form_state) {
 function import_auto_form_submit($form, &$form_state) {
   $handle = fopen(drupal_realpath($form_state['values']['csvupload']), 'r');
   $values = array();
+  $already_exist = array();
   while ($line = fgetcsv($handle)) {
     if ($line[1] == 'price_range') {
       continue;
     }
+    $validate_data = get_data_from_autoindia(array('brand' => $line[2],
+      'vehicle' => $line[3]), array('brand', 'vehicle'));
+    if (count($validate_data) > 0) {
+      $already_exist[] = array(
+        'brand' => $line[2],
+        'model' => $line[3]
+      );
+      continue;
+    }
+
     $values[] = array(
       "price_range" => $line[1],
       "brand" => $line[2],
@@ -132,13 +143,22 @@ function import_auto_form_submit($form, &$form_state) {
       "description" => (empty($line[50]) ? "NULL" : $line[50]),
     );
   }
-  $fields = array_keys($values[0]);
-  $query = db_insert('itg_autotoday')->fields($fields);
-  foreach ($values as $record) {
-    $query->values($record);
+  if (count($values) > 0) {
+    $fields = array_keys($values[0]);
+    $query = db_insert('itg_autotoday')->fields($fields);
+    foreach ($values as $record) {
+      $query->values($record);
+    }
+    $query->execute();
   }
-  $query->execute();
-  drupal_set_message(t('Successfully import :' . count($values)) . ' item(s)', 'status');
+  if ((count($values)) > 0) {
+    drupal_set_message(t('Successfully import :' . count($values)) . 'item(s)', 'status');
+  }
+  if (count($already_exist) > 0) {
+    foreach ($already_exist as $auto) {
+      drupal_set_message(t("Brand: " . check_plain($auto['brand']) . ",Model: " . check_plain($auto['model']) . " already exists"), 'warning');
+    }
+  }
 }
 
 /**
@@ -272,6 +292,11 @@ function auto_master_form($form, $form_state) {
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'itg_auto_search') . '/js/itg_auto_search.js',
   );
+  
+  $form['#attached']['css'] = array(
+    drupal_get_path('module', 'itg_auto_search') . '/css/itg_auto_search.css',
+  );
+
   $form['auto_brand'] = array(
     '#type' => 'select',
     '#title' => 'Brand',
