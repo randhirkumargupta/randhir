@@ -1069,3 +1069,14 @@ jQuery(document).ready(function () {
 
 });
 
+jQuery(document).ready(function(){
+    jQuery("#edit-field-newsl-newsletter-content-und-select-section").on('change', function(){
+        var CT = jQuery("#edit-field-cm-select-type-und").val();
+        if (typeof CT === "undefined" || CT == null || CT == '_none') {
+            jQuery("#edit-field-story-category").css("display","none");
+        }
+        else {
+            jQuery("#edit-field-story-category").css("display","block");
+        }
+    });
+});
