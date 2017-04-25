@@ -154,7 +154,7 @@ if (function_exists('itg_common_get_node_title') && !empty($_GET['gid'])) {
 <style>
   .page-videogallery-embed{background-color: #171717;}
   h1{font-size: 32px; margin: 25px 0; color: #fff; text-align: center;}
-  .itg-embed-photo-wrapper{padding: 10px; background-color: #000; max-width: 773px; margin: 0 auto;}
+  .itg-embed-photo-wrapper{padding: 10px; background-color: #000; max-width: 773px; margin: 0 auto; width: 100%;}
   .itg-embed-photo-thumb{margin-top: 10px;}
   .itg-embed-photo-thumb .slick-slide{outline: none;}
   .itg-embed-photo-thumb img{width: 88px; max-width: 100%; height: 66px; border: 1px solid #000; outline: none;}

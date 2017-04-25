@@ -2269,7 +2269,7 @@ footer .multiple-items-footer i.slick-next {
   height: 40vh;
 }
 .story-section .description iframe {
-  min-height: 480px;
+  min-height: 495px;
 }
 .story-section h1 {
   font-size: 24px;
@@ -2588,7 +2588,7 @@ footer .multiple-items-footer i.slick-next {
   padding-left: 18px;
 }
 .story-section .story-right .description a {
-  color: #1a3c8d;
+  color: #026bc5;
 }
 .story-section .story-right .description a:hover {
   text-decoration: underline;
