@@ -199,7 +199,8 @@ function itg_db_migrate_bylines($byline_nid, $story_nid){
  */
 function itg_dbmigrate_imagepath_url($img_url) {
   $img = explode('/indiatoday/' , $img_url);
-  return '/var/www/itgcms/sites/default/files/indiatoday/'.$img[1];
+  //return '/var/www/itgcms/sites/default/files/indiatoday/'.$img[1];
+  return '/opt/sites/media/indiatoday/'.$img[1];
 }
 
 /**
