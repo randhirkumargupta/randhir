@@ -309,7 +309,7 @@ function features_for_newsletter_field_default_field_instances() {
     'bundle' => 'newsletter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Content Type',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -532,7 +532,7 @@ function features_for_newsletter_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Newsletter Content',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -780,7 +780,7 @@ function features_for_newsletter_field_default_field_instances() {
     'bundle' => 'newsletter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Section',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1238,6 +1238,9 @@ function features_for_newsletter_field_default_field_instances() {
   t('Property (Website Name)');
   t('Schedule');
   t('Section');
+  t('Select Content Type');
+  t('Select Newsletter Content');
+  t('Select Section');
   t('Select Template');
   t('Subject Line');
   t('Thumbnail');
