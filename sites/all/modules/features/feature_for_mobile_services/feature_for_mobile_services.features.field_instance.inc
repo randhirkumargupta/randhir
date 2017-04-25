@@ -520,7 +520,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_header',
     'label' => 'Header',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,

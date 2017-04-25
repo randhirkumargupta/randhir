@@ -133,6 +133,35 @@ function itg_mobile_services_schema() {
     ),
     'primary key' => array('id'),
   );
+  
+
+    $schema['itg_astro_last_image'] = array(
+    'description' => t('Astro last images!'),
+    'fields' => array(
+      'id' => array(
+        'description' => t('id'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      
+      'image_fid' => array(
+        'description' => t('Image Fid'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'default' => NULL,
+      ),
+        
+      'key_index' => array(
+        'description' => t('Key Index'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'default' => NULL,
+      ),
+     
+    ),
+    'primary key' => array('id'),
+  );
   return $schema;
 }
 

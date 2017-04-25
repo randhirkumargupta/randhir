@@ -243,3 +243,36 @@ function itg_mongo_delete_ugc_content($id, $collection) {
     drupal_goto('personalization/my-content',$options);
   }
 }
+
+/**
+ * Helper function to get follow tag.
+ * @param int $uid
+ */
+function itg_personalization_get_followed_tag($uid) {
+  $data = '';
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $people = $con->following_personalization;
+    $cond = array('uid' => $uid);
+    $cursor = $people->find($cond);
+    foreach ($cursor as $key => $document) {
+      $data[]['tid'] = $document['tid'];
+    }
+    return $data;
+  }
+}
+
+/**
+ * Helper function to get follow tag status.
+ * @param int $uid
+ */
+function itg_personalization_get_followed_status($tid) {
+  $data = '';
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $people = $con->following_personalization;
+    $cond = array('tid' => $tid);
+    $cursor = $people->count($cond);
+    return $cursor;
+  }
+}

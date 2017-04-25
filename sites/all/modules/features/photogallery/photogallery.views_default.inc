@@ -2230,7 +2230,8 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['id'] = 'field_story_category';
   $handler->display->display_options['fields']['field_story_category']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['fields']['field_story_category']['field'] = 'field_story_category';
-  $handler->display->display_options['fields']['field_story_category']['label'] = 'Category';
+  $handler->display->display_options['fields']['field_story_category']['label'] = '';
+  $handler->display->display_options['fields']['field_story_category']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_category']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '2';
@@ -2239,7 +2240,8 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['field_story_category_1']['id'] = 'field_story_category_1';
   $handler->display->display_options['fields']['field_story_category_1']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['fields']['field_story_category_1']['field'] = 'field_story_category';
-  $handler->display->display_options['fields']['field_story_category_1']['label'] = 'Sections';
+  $handler->display->display_options['fields']['field_story_category_1']['label'] = 'Category';
+  $handler->display->display_options['fields']['field_story_category_1']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category_1']['delta_offset'] = '0';
   /* Field: Content: Set As Featured */
   $handler->display->display_options['fields']['field_featured']['id'] = 'field_featured';
