@@ -242,7 +242,7 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
 }
 
 /**
- * Ajax callback for country dropdown
+ * Ajax callback for state dropdown
  * @param array $form
  * @param array $form_state
  * @return int
@@ -252,7 +252,7 @@ function itg_personalization_state_ajax_callback($form, &$form_state) {
 }
 
 /**
- * Ajax callback for country dropdown
+ * Ajax callback for city dropdown
  * @param array $form
  * @param array $form_state
  * @return int
