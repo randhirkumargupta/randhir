@@ -501,5 +501,47 @@ function feature_for_mobile_services_strongarm() {
   $strongarm->value = 0;
   $export['node_submitted_vas_service_content'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_clients_creation_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_clients_creation_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_client_service_association_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_client_service_association_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_service_creation_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_service_creation_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_vas_service_content_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_vas_service_content_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_client_title_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_client_title_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_regional_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_regional_pattern'] = $strongarm;
+
   return $export;
 }
