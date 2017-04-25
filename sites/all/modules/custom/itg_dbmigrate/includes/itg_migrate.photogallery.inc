@@ -569,8 +569,14 @@ class ItgPhotogalleryMigration extends XMLMigration {
           $strap_headline = (string) $value->strap_headline;
           $image_id = (string) $value->imageid;
           $img_meta_key = (string) $value->image_metakey;
-          $api_image_url = itg_dbmigrate_imagepath_url((string) $value->api_image);
-          $small_image_url = itg_dbmigrate_imagepath_url((string) $value->gallery_smallimage);
+          $api_image_url = '';
+          if(!empty($value->api_image)){
+            $api_image_url = itg_dbmigrate_imagepath_url((string) $value->api_image);
+          }
+           $small_image_url = '';
+          if(!empty($value->gallery_smallimage)){
+            $small_image_url = itg_dbmigrate_imagepath_url((string) $value->gallery_smallimage);
+          }
           $enable = (string) $value->enable;
           // photoby
           $data_byline = '';
@@ -644,7 +650,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
             'field_image_metakey' => array(LANGUAGE_NONE => array(array('value' => $img_meta_key))),
             'field_api_image' => $api_image_files,
             'field_photo_small_image' => $small_image_files,
-            'field_photo_enable' => $enable
+            'field_photo_enable' => array(LANGUAGE_NONE => array(array( 'value' => $enable))),
           );
           $field_collection_item = entity_create('field_collection_item', $values);
           $field_collection_item->setHostEntity('node', $node);
