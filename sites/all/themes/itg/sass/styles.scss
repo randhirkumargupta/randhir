@@ -10855,17 +10855,14 @@ span.smilies-title {
     li{
       a.pic{
         @extend .zoom-image;
-        max-height: 55px;
+        width: 88px;
+        height: 66px;
       }
     }
     li + li{border-top: 1px solid #dddddd;}
   }
 }
-#block-itg-front-end-common-latest-from-businesstoday{
-  a.pic{
-    img{max-width: 56px;}
-  }
-}
+
 .agbutton .error-msg{color: red;}
 .jw-sharing-dock-btn {
   display: none;

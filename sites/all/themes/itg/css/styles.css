@@ -13148,16 +13148,13 @@ span.smilies-title img {
 #block-itg-front-end-common-latest-from-aajtak ul li a.pic,
 #block-itg-front-end-common-latest-from-pti ul li a.pic,
 #block-itg-front-end-common-latest-from-businesstoday ul li a.pic {
-  max-height: 55px;
+  width: 88px;
+  height: 66px;
 }
 #block-itg-front-end-common-latest-from-aajtak ul li + li,
 #block-itg-front-end-common-latest-from-pti ul li + li,
 #block-itg-front-end-common-latest-from-businesstoday ul li + li {
   border-top: 1px solid #dddddd;
-}
-
-#block-itg-front-end-common-latest-from-businesstoday a.pic img {
-  max-width: 56px;
 }
 
 .agbutton .error-msg {
