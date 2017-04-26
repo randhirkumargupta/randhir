@@ -23,7 +23,7 @@
                     
                     </a></div>
 
-                <div class="dm-detail">
+                <div class="dm-detail" title="<?php echo strip_tags($desc);?>">
                   <?php //echo l(mb_strimwidth(strip_tags($desc), 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")); ?>
                 <?php
                   if (function_exists('itg_common_get_smiley_title')) {

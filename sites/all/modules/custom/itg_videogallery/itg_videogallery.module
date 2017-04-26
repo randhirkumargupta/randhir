@@ -2402,7 +2402,7 @@ function itg_videogallery_video_bitrate() {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $content = curl_exec($ch);
     curl_close($ch);
-
+p($content);
     db_merge('itg_video_bitrates_data')
             ->key(array('video_id' => $vid->solr_video_id))
             ->fields(array(
