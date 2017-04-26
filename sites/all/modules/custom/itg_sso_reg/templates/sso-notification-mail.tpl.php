@@ -4,7 +4,16 @@
  * @file: sso-notification-mail.tpl.php
  */
 
-global $base_url;
+global $base_url, $user;
+
+if (is_string($account) && $account == 'Password Changed'){
+  $get_user = user_load($user->uid);
+  $fname = $get_user->field_first_name[LANGUAGE_NONE][0]['value'];
+  $lname = $get_user->field_last_name[LANGUAGE_NONE][0]['value'];
+} else {
+  $fname = $account->field_first_name[LANGUAGE_NONE][0]['value'];
+  $lname = $account->field_last_name[LANGUAGE_NONE][0]['value'];
+}
 
 $user_id = base64_encode($account->uid);
 $url_info = base64_decode($url_info);
@@ -16,14 +25,14 @@ else {
 }
 $activate_link = $activate_url_info.'/user-activate/'.$user_id;
 
-if ($act_type != 'Password Changed') {
+if ($act_type != 'password_changed') {
   $activelink = l('here', $activate_link, array('attributes' => array('target' => '_blank')));
-  $get_body_val = str_replace('[itg_mail_token:itg_account_activation_link]', $activelink, $mail_body);
-  $get_body = explode("<p>",$get_body_val);
-  unset($get_body[0]);
+  $get_body = str_replace("[itg_mail_token:itg_account_user_fname]", $fname, $mail_body);
+  $get_body_val = str_replace('[itg_mail_token:itg_account_activation_link]', $activelink, $get_body);
+  $get_body_vals = explode(",",$get_body_val);
 } else {
-  $get_body = explode("<p>",$mail_body);
-  unset($get_body[0]);
+  $get_body = str_replace("[itg_mail_token:itg_account_user_fname]", $fname, $mail_body);
+  $get_body_vals = explode(',', $get_body);
 }
 ?> 
 
@@ -37,7 +46,7 @@ if ($act_type != 'Password Changed') {
   <body>
     <table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; font-family: Arial">
       <?php 
-      foreach ($get_body as $bk => $bv) {
+      foreach ($get_body_vals as $bk => $bv) {
         print '<tr> <td style="padding: 10px 20px;">' . $bv . '</td></tr>';
       } 
       ?>

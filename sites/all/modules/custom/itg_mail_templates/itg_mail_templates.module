@@ -4,24 +4,22 @@
  * Implements hook_form_alter
  */
 function itg_mail_templates_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'mail_templates_node_form') { 
+  if ($form_id == 'mail_templates_node_form') {
       $form['#prefix'] = '<div class="get-tokens">Click <a href="javascript:;" data-id="mail-templates-token">here</a> to get tokens</div><div class="token-table">
         <div class="itgadmin-popup-wrapper" id="mail-templates-token" style="display:none">
           <div class="itgadmin-popup">
             <span class="close-itgadmin-popup"><i class="fa fa-times" aria-hidden="true"></i></span>
             <h2>ITG mail templates token</h2>
             <div class="mail-table">
-            <table class="views-table">
+        		<table class="views-table">
             <thead>
               <th> Token name</th>
               <th> Token value</th>
               <th> Token description</th>
             </thead>
             <tbody>
-              <tr>
-                <td>ITG Account Activation</td>
-                <td>[itg_mail_token:itg_account_activation_link]</td>
-                <td>A token that will be used for ITG Account Activation.</td>
+      			  <tr>
+                <td colspan="3"><b>Tokens For Ask an Expert</b></td>
               </tr>
               <tr>
                 <td>ITG Ask an Expert City</td>
@@ -59,6 +57,9 @@ function itg_mail_templates_form_alter(&$form, &$form_state, $form_id) {
                 <td>A token that will be used for ITG Logged In User Name.</td>
               </tr>
               <tr>
+                <td colspan="3"><b>Tokens For Loyalty Points</b></td>
+              </tr>
+              <tr>
                 <td>ITG Loyalty Points</td>
                 <td>[itg_mail_token:itg_loyalty_points]</td>
                 <td>A token that will be used for ITG Loyalty Expiry.</td>
@@ -72,6 +73,9 @@ function itg_mail_templates_form_alter(&$form, &$form_state, $form_id) {
                 <td>ITG Loyalty and Reward Expiry</td>
                 <td>[itg_mail_token:itg_loyalty_expiry]</td>
                 <td>A token that will be used for ITG Loyalty and Reward Expiry.</td>
+              </tr>
+              <tr>
+                <td colspan="3"><b>Tokens For Node</b></td>
               </tr>
               <tr>
                 <td>ITG NODE TYPE</td>
@@ -94,6 +98,14 @@ function itg_mail_templates_form_alter(&$form, &$form_state, $form_id) {
                 <td>A token that will be used for ITG Node Title With Link.</td>
               </tr>
               <tr>
+                <td>ITG Task/Idea</td>
+                <td>[itg_mail_token:itg_node_body]</td>
+                <td>A token that will be used for ITG Task/Idea.</td>
+              </tr>
+              <tr>
+                <td colspan="3"><b>Tokens For Product</b></td>
+              </tr>
+              <tr>
                 <td>ITG Product/Inventry Count</td>
                 <td>[itg_mail_token:itg_product_count]</td>
                 <td>A token that will be used for ITG Product/Inventry Count.</td>
@@ -109,14 +121,30 @@ function itg_mail_templates_form_alter(&$form, &$form_state, $form_id) {
                 <td>A token that will be used for ITG Product Name.</td>
               </tr>
               <tr>
+                <td colspan="3"><b>Tokens For User/Site</b></td>
+              </tr>
+              <tr>
+                <td>ITG User First Name</td>
+                <td>[itg_mail_token:itg_account_user_fname]</td>
+                <td>A token that will be used for ITG Account User First Name.</td>
+              </tr>
+              <tr>
+                <td>ITG User Last Name</td>
+                <td>[itg_mail_token:itg_account_user_lname]</td>
+                <td>A token that will be used for ITG Account User First Name.</td>
+              </tr>
+              <tr>
+                <td>ITG Account Activation</td>
+                <td>[itg_mail_token:itg_account_activation_link]</td>
+                <td>A token that will be used for ITG Account Activation.</td>
+              </tr>
+              <tr>
                 <td>ITG Site Name</td>
                 <td>[itg_mail_token:itg_site_name]</td>
                 <td>A token that will be used for ITG Site Name.</td>
               </tr>
               <tr>
-                <td>ITG Task/Idea</td>
-                <td>[itg_mail_token:itg_node_body]</td>
-                <td>A token that will be used for ITG Task/Idea.</td>
+                <td colspan="3"><b>Tokens For Task/Idea</b></td>
               </tr>
               <tr>
                 <td>ITG Task Assignee</td>
@@ -139,16 +167,39 @@ function itg_mail_templates_form_alter(&$form, &$form_state, $form_id) {
                 <td>A token that will be used for ITG Task Expiry Date Time</td>
               </tr>
             </tbody>
-          </table>
+            </table>
           </div>
         </div>
       </div>';
+      
+    unset($form['field_mail_templates_category']['und']['#options']['_none']);
+    $form['actions']['preview']['#access'] = FALSE;
+    $form['actions']['delete']['#access'] = FALSE;
     $form['#suffix'] = '</div>';
     $form['title']['#attributes'] = array('readonly' => 'readonly');
     drupal_add_js("jQuery('#edit-field-mail-templates-category-und').change(function(){
           var select_option = jQuery('#edit-field-mail-templates-category-und option:selected').text(); 
           jQuery('#edit-title').val(select_option);
         });", array('type' => 'inline', 'scope' => 'footer'));
+    drupal_add_js("var selected_value = jQuery('.form-field-name-field-mail-templates-category select option:selected').val();
+        jQuery('.node-mail_templates-form').find('.mail-template-category').hide().siblings('.' + selected_value).show();
+        jQuery('.form-field-name-field-mail-templates-category').on('change', 'select', function(){
+        var selected_value = jQuery(this).val();
+        jQuery('.node-mail_templates-form').find('.mail-template-category').hide().siblings('.' + selected_value).show();
+      });", array('type' => 'inline', 'scope' => 'footer'));
+    
+    if (!isset($_REQUEST['destination'])) {
+        $destination = '';
+    }
+    else {
+        $destination_array = explode('?', $_REQUEST['destination']);
+        $destination = $destination_array[0];
+    }
+
+    $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+        '#weight' => 20,
+    );
   }
 }
 
@@ -177,28 +228,28 @@ function itg_mail_templates_node_validate($node, $form, &$form_state) {
         $data_val['field_ask_an_expert_case_value'][] = $data_vals->field_ask_an_expert_case_value;
       }
       if ($data_val['title'] == $title && in_array($expert_case, $data_val['field_ask_an_expert_case_value'])) {
-        form_set_error('title', t("Mail Template for @title against @expert_case is already Exists, You can only update this mail template", array('@title' => $title, '@expert_case' => ucwords(str_replace('_', " ", $expert_case)))));
+        form_set_error('title', t("Mail Template for @title against @expert_case already Exists, You can only update this mail template", array('@title' => $title, '@expert_case' => ucwords(str_replace('_', " ", $expert_case)))));
       }
     }
 
     if ($node->title == 'Follow Story') {
       $result = db_query("SELECT title from {node} n WHERE n.title = :title AND n.type = :type", array(":title" => $title, ":type" => "mail_templates"))->fetchField();
       if (!empty($result)) {
-        form_set_error('title', t("Mail Template for @title is already Exists, you can only update this mail template", array('@title' => $title)));
+        form_set_error('title', t("Mail Template for @title already Exists, you can only update this mail template", array('@title' => $title)));
       }
     }
 
     if ($node->title == 'Sign up') {
       $result = db_query("SELECT title from {node} n WHERE n.title = :title AND n.type = :type", array(":title" => $title, ":type" => "mail_templates"))->fetchField();
       if (!empty($result)) {
-        form_set_error('title', t("Mail Template for @title is already Exists, you can only update this mail template", array('@title' => $title)));
+        form_set_error('title', t("Mail Template for @title already Exists, you can only update this mail template", array('@title' => $title)));
       }
     }
 
     if ($node->title == 'Loyalty Points Expiration') {
       $result = db_query("SELECT title from {node} n WHERE n.title = :title AND n.type = :type", array(":title" => $title, ":type" => "mail_templates"))->fetchField();
       if (!empty($result)) {
-        form_set_error('title', t("Mail Template for @title is already Exists, you can only update this mail template", array('@title' => $title)));
+        form_set_error('title', t("Mail Template for @title already Exists, you can only update this mail template", array('@title' => $title)));
       }
     }
 
@@ -219,7 +270,7 @@ function itg_mail_templates_node_validate($node, $form, &$form_state) {
         $data_val['field_product_expiration_status_value'][] = $data_vals->field_product_expiration_status_value;
       }
       if ($data_val['title'] == $title && in_array($offer_period, $data_val['field_product_expiration_status_value'])) {
-        form_set_error('title', t("Mail Template for @title against @offer_period is already Exists, You can only update this mail template", array('@title' => $title, '@offer_period' => ucwords(str_replace('_', " ", $offer_period)))));
+        form_set_error('title', t("Mail Template for @title against @offer_period already Exists, You can only update this mail template", array('@title' => $title, '@offer_period' => ucwords(str_replace('_', " ", $offer_period)))));
       }
     }
 
@@ -240,7 +291,7 @@ function itg_mail_templates_node_validate($node, $form, &$form_state) {
         $data_val['field_ugc_comments_status_value'][] = $data_vals->field_ugc_comments_status_value;
       }
       if ($data_val['title'] == $title && in_array($ugc_comment, $data_val['field_ugc_comments_status_value'])) {
-        form_set_error('title', t("Mail Template for @title against @ugc_comment is already Exists, You can only update this mail template", array('@title' => $title, '@ugc_comment' => ucwords(str_replace('_', " ", $ugc_comment)))));
+        form_set_error('title', t("Mail Template for @title against @ugc_comment already Exists, You can only update this mail template", array('@title' => $title, '@ugc_comment' => ucwords(str_replace('_', " ", $ugc_comment)))));
       }
     }
 
@@ -261,124 +312,47 @@ function itg_mail_templates_node_validate($node, $form, &$form_state) {
         $data_val['field_new_task_status_value'][] = $data_vals->field_new_task_status_value;
       }
       if ($data_val['title'] == $title && in_array($task_status, $data_val['field_new_task_status_value'])) {
-        form_set_error('title', t("Mail Template for @title against @task_status is already Exists, You can only update this mail template", array('@title' => $title, '@task_status' => ucwords(str_replace('_', " ", $task_status)))));
+        form_set_error('title', t("Mail Template for @title against @task_status already Exists, You can only update this mail template", array('@title' => $title, '@task_status' => ucwords(str_replace('_', " ", $task_status)))));
       }
     }
 
-    if ($node->title == 'CMS Mail Template') {
-
-      $template_cat = $node->field_cms_mail_template_category[LANGUAGE_NONE][0]['value'];
-      $cms_status = $node->field_cms_status[LANGUAGE_NONE][0]['value'];
-      if ($cms_status == 'updated') {
-        $query = db_select('node', 'n');
-        $query->leftJoin('field_data_field_cms_mail_template_category', 'cmtc', 'n.nid = cmtc.entity_id');
-        $query->leftJoin('field_data_field_cms_status', 'cs', 'n.nid = cs.entity_id');
-        $query->condition('n.status', 1, '=');
-        $query->fields('n', array('title', 'nid'));
-        $query->fields('cmtc', array('field_cms_mail_template_category_value'));
-        $query->fields('cs', array('field_cms_status_value'));
-
-        $query->condition('n.title', $title, '=');
-        $query->condition('n.type', 'mail_templates', '=');
-        $query->condition('cmtc.field_cms_mail_template_category_value', $template_cat, '=');
-        $query->condition('cs.field_cms_status_value', $cms_status, '=');
-        $result = $query->execute();
-        $num_of_results = $result->rowCount();
-        if ($num_of_results >= 1) {
-          form_set_error('title', t("Mail Template for @title against @template_cat in status of @cms_status is already Exists, You can only update this mail template", array(
-              '@title' => $title,
-              '@cms_status' => ucwords(str_replace('_', " ", $cms_status)),
-              '@template_cat' => ucwords(str_replace('_', " ", $template_cat)),
-          )));
-        }
-      } elseif ($cms_status == 'New_created') {
-        $query = db_select('node', 'n');
-        $query->leftJoin('field_data_field_cms_mail_template_category', 'cmtc', 'n.nid = cmtc.entity_id');
-        $query->leftJoin('field_data_field_cms_status', 'cs', 'n.nid = cs.entity_id');
-        $query->condition('n.status', 1, '=');
-        $query->fields('n', array('title', 'nid'));
-        $query->fields('cmtc', array('field_cms_mail_template_category_value'));
-        $query->fields('cs', array('field_cms_status_value'));
-
-        $query->condition('n.title', $title, '=');
-        $query->condition('n.type', 'mail_templates', '=');
-        $query->condition('cmtc.field_cms_mail_template_category_value', $template_cat, '=');
-        $query->condition('cs.field_cms_status_value', $cms_status, '=');
-        $result = $query->execute();
-        $num_of_results = $result->rowCount();
-        if ($num_of_results >= 1) {
-          form_set_error('title', t("Mail Template for @title against @template_cat in status of @cms_status is already Exists, You can only update this mail template", array(
-              '@title' => $title,
-              '@cms_status' => ucwords(str_replace('_', " ", $cms_status)),
-              '@template_cat' => ucwords(str_replace('_', " ", $template_cat)),
-          )));
-        }
-      } elseif ($cms_status == 'needs_review') {
-        $query = db_select('node', 'n');
-        $query->leftJoin('field_data_field_cms_mail_template_category', 'cmtc', 'n.nid = cmtc.entity_id');
-        $query->leftJoin('field_data_field_cms_status', 'cs', 'n.nid = cs.entity_id');
-        $query->condition('n.status', 1, '=');
-        $query->fields('n', array('title', 'nid'));
-        $query->fields('cmtc', array('field_cms_mail_template_category_value'));
-        $query->fields('cs', array('field_cms_status_value'));
-
-        $query->condition('n.title', $title, '=');
-        $query->condition('n.type', 'mail_templates', '=');
-        $query->condition('cmtc.field_cms_mail_template_category_value', $template_cat, '=');
-        $query->condition('cs.field_cms_status_value', $cms_status, '=');
-        $result = $query->execute();
-        $num_of_results = $result->rowCount();
-        if ($num_of_results >= 1) {
-          form_set_error('title', t("Mail Template for @title against @template_cat in status of @cms_status is already Exists, You can only update this mail template", array(
-              '@title' => $title,
-              '@cms_status' => ucwords(str_replace('_', " ", $cms_status)),
-              '@template_cat' => ucwords(str_replace('_', " ", $template_cat)),
-          )));
-        }
-      } elseif ($cms_status == 'rejected') {
-        $query = db_select('node', 'n');
-        $query->leftJoin('field_data_field_cms_mail_template_category', 'cmtc', 'n.nid = cmtc.entity_id');
-        $query->leftJoin('field_data_field_cms_status', 'cs', 'n.nid = cs.entity_id');
-        $query->condition('n.status', 1, '=');
-        $query->fields('n', array('title', 'nid'));
-        $query->fields('cmtc', array('field_cms_mail_template_category_value'));
-        $query->fields('cs', array('field_cms_status_value'));
-
-        $query->condition('n.title', $title, '=');
-        $query->condition('n.type', 'mail_templates', '=');
-        $query->condition('cmtc.field_cms_mail_template_category_value', $template_cat, '=');
-        $query->condition('cs.field_cms_status_value', $cms_status, '=');
-        $result = $query->execute();
-        $num_of_results = $result->rowCount();
-        if ($num_of_results >= 1) {
-          form_set_error('title', t("Mail Template for @title against @template_cat in status of @cms_status is already Exists, You can only update this mail template", array(
-              '@title' => $title,
-              '@cms_status' => ucwords(str_replace('_', " ", $cms_status)),
-              '@template_cat' => ucwords(str_replace('_', " ", $template_cat)),
-          )));
-        }
-      } elseif ($cms_status == 'needs_modification') {
-        $query = db_select('node', 'n');
-        $query->leftJoin('field_data_field_cms_mail_template_category', 'cmtc', 'n.nid = cmtc.entity_id');
-        $query->leftJoin('field_data_field_cms_status', 'cs', 'n.nid = cs.entity_id');
-        $query->condition('n.status', 1, '=');
-        $query->fields('n', array('title', 'nid'));
-        $query->fields('cmtc', array('field_cms_mail_template_category_value'));
-        $query->fields('cs', array('field_cms_status_value'));
-
-        $query->condition('n.title', $title, '=');
-        $query->condition('n.type', 'mail_templates', '=');
-        $query->condition('cmtc.field_cms_mail_template_category_value', $template_cat, '=');
-        $query->condition('cs.field_cms_status_value', $cms_status, '=');
-        $result = $query->execute();
-        $num_of_results = $result->rowCount();
-        if ($num_of_results >= 1) {
-          form_set_error('title', t("Mail Template for @title against @template_cat in status of @cms_status is already Exists, You can only update this mail template", array(
-              '@title' => $title,
-              '@cms_status' => ucwords(str_replace('_', " ", $cms_status)),
-              '@template_cat' => ucwords(str_replace('_', " ", $template_cat)),
-          )));
-        }
+    if ($node->title == 'Blog' || $node->title == 'Story' || $node->title == 'Photo Gallery' || $node->title == 'Podcast' || $node->title == 'Video') {
+      if (!empty($node->field_story_status[LANGUAGE_NONE][0]['value'])) {
+        $cms_status = $node->field_story_status[LANGUAGE_NONE][0]['value'];
+        $status_table = 'field_data_field_story_status';
+        $status_table_value = 'field_story_status_value';
+      } elseif (!empty($node->field_blog_status[LANGUAGE_NONE][0]['value'])) {
+        $cms_status = $node->field_blog_status[LANGUAGE_NONE][0]['value'];
+        $status_table = 'field_data_field_blog_status';
+        $status_table_value = 'field_blog_status_value';
+      } elseif (!empty($node->field_podcast_status[LANGUAGE_NONE][0]['value'])) {
+        $cms_status = $node->field_podcast_status[LANGUAGE_NONE][0]['value'];
+        $status_table = 'field_data_field_podcast_status';
+        $status_table_value = 'field_podcast_status_value';
+      } elseif (!empty($node->field_photo_gallery_status[LANGUAGE_NONE][0]['value'])) {
+        $cms_status = $node->field_photo_gallery_status[LANGUAGE_NONE][0]['value'];
+        $status_table = 'field_data_field_photo_gallery_status';
+        $status_table_value = 'field_photo_gallery_status_value';
+      } elseif (!empty($node->field_video_status[LANGUAGE_NONE][0]['value'])) {
+        $cms_status = $node->field_video_status[LANGUAGE_NONE][0]['value'];
+        $status_table = 'field_data_field_video_status';
+        $status_table_value = 'field_video_status_value';
+      }
+      $query = db_select('node', 'n');
+      $query->leftJoin($status_table, 'cs', 'n.nid = cs.entity_id');
+      $query->condition('n.status', 1, '=');
+      $query->fields('n', array('title', 'nid'));
+      $query->fields('cs', array($status_table_value));
+      $query->condition('n.title', $title, '=');
+      $query->condition('n.type', 'mail_templates', '=');
+      $query->condition('cs.'.$status_table_value, $cms_status, '=');
+      $result = $query->execute();
+      $num_of_results = $result->rowCount();
+      if ($num_of_results >= 1) {
+        form_set_error('title', t("Mail Template for @title against status of @cms_status already Exists, You can only update this mail template", array(
+            '@title' => $title,
+            '@cms_status' => ucwords(str_replace('_', " ", $cms_status)),
+        )));
       }
     }
   }
@@ -456,6 +430,22 @@ function itg_mail_templates_get_mailcontent($key, $task_event, $ugc_status) {
   }
 
   if ($key == 'blog' || $key == 'story' || $key == 'photogallery' || $key == 'videogallery' || $key == 'podcast' && !empty($task_event)) {
+    if ($key == 'photogallery') {
+      $template_title = 'Photo Gallery';
+      $table_cat = 'photo_gallery';
+      $status_table = 'field_data_field_' . $table_cat . '_status';
+      $status_table_value = 'field_' . $table_cat . '_status_value';
+    } elseif ($key == 'videogallery') {
+      $template_title = 'Video';
+      $table_cat = 'video';
+      $status_table = 'field_data_field_' . $table_cat . '_status';
+      $status_table_value = 'field_' . $table_cat . '_status_value';
+    } else {
+      $template_title = ucwords($key);
+      $status_table = 'field_data_field_' . $key . '_status';
+      $status_table_value = 'field_' . $key . '_status_value';
+    }
+    
     if ($task_event == 'create') {
       $cms = "New_created";
     } elseif ($task_event == 'update') {
@@ -467,16 +457,14 @@ function itg_mail_templates_get_mailcontent($key, $task_event, $ugc_status) {
     } elseif ($task_event == 'needs_modification') {
       $cms = "needs_modification";
     }
-
+    
     $query = db_select('node', 'n');
-    $query->leftJoin('field_data_field_cms_mail_template_category', 'cmtc', 'n.nid = cmtc.entity_id');
-    $query->leftJoin('field_data_field_cms_status', 'fcs', 'n.nid = fcs.entity_id');
+    $query->leftJoin($status_table, 'fcs', 'n.nid = fcs.entity_id');
     $query->fields('n');
     $query->condition('n.status', 1, '=');
-    $query->condition('n.title', '%' . db_like('CMS Mail Template') . '%', 'LIKE');
+    $query->condition('n.title', '%' . db_like($template_title) . '%', 'LIKE');
     $query->condition('n.type', 'mail_templates', '=');
-    $query->condition('fcs.field_cms_status_value', $cms, '=');
-    $query->condition('cmtc.field_cms_mail_template_category_value', $key, '=');
+    $query->condition('fcs.' . $status_table_value, $cms, '=');
     $result = $query->execute();
     $records = $result->fetchAssoc();
     $get_mail_content = node_load($records['nid']);
