@@ -56,6 +56,8 @@ stylesheets[all][] = css/liMarquee.css
 stylesheets[all][] = css/slick.css
 stylesheets[all][] = css/itg-photo-slider.css
 stylesheets[all][] = css/layout.css
+stylesheets[all][] = css/ion.rangeSlider.css
+stylesheets[all][] = css/ion.rangeSlider.skinFlat.css
 stylesheets[all][] = css/styles.css
 stylesheets[all][] = css/styles-new.css
 stylesheets[all][] = css/media.css
@@ -79,6 +81,7 @@ scripts[] = js/jquery.liMarquee.js
 scripts[] = js/ripple.js
 scripts[] = js/bootstrap.min.js
 scripts[] = js/stickyMojo.js
+scripts[] = js/ion.rangeSlider.js
 scripts[] = js/script.js
 
 
