@@ -1268,8 +1268,8 @@ footer .footer-top .footer-social-link {
 }
 footer .footer-top .footer-social-link .globle-search {
   position: absolute;
-  top: 6px;
-  right: 110px;
+  top: 3px;
+  right: 45px;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -ms-transition: all 0.5s ease-in-out;
@@ -1281,6 +1281,9 @@ footer .footer-top .footer-social-link .globle-search {
 }
 footer .footer-top .footer-social-link .globle-search .search-text {
   width: 100%;
+}
+footer .footer-top .footer-social-link .globle-search.active {
+  width: 225px;
 }
 footer .footer-top .footer-social-link .fa {
   font-size: 24px;
@@ -1835,6 +1838,10 @@ footer .multiple-items-footer i.slick-next {
   display: block;
 }
 
+.trending-list .top-takes-video-container {
+  border: 1px solid #dddddd;
+}
+
 /*End CSS trending-videos Home  page*/
 /*Start Search page css*/
 .view-front-end-global-search .searh-all-filters {
@@ -2262,7 +2269,7 @@ footer .multiple-items-footer i.slick-next {
   height: 40vh;
 }
 .story-section .description iframe {
-  min-height: 480px;
+  min-height: 495px;
 }
 .story-section h1 {
   font-size: 24px;
@@ -2581,7 +2588,7 @@ footer .multiple-items-footer i.slick-next {
   padding-left: 18px;
 }
 .story-section .story-right .description a {
-  color: #1a3c8d;
+  color: #026bc5;
 }
 .story-section .story-right .description a:hover {
   text-decoration: underline;
@@ -8235,7 +8242,7 @@ section.sidebar .block-itg-ads {
   vertical-align: top;
   position: relative;
   background: #d1d1d1;
-  width: 190px;
+  width: 195px;
   height: 54px;
   line-height: 54px;
   padding-right: 10px;
@@ -12834,7 +12841,7 @@ span.smilies-title img {
 /*css breadcrumb start*/
 #block-itg-layout-manager-front-end-breadcrumb {
   position: relative;
-  z-index: 9999;
+  z-index: 9998;
   color: #a1a1a1;
   font-family: roboto;
   padding-top: 15px;
@@ -13141,16 +13148,13 @@ span.smilies-title img {
 #block-itg-front-end-common-latest-from-aajtak ul li a.pic,
 #block-itg-front-end-common-latest-from-pti ul li a.pic,
 #block-itg-front-end-common-latest-from-businesstoday ul li a.pic {
-  max-height: 55px;
+  width: 88px;
+  height: 66px;
 }
 #block-itg-front-end-common-latest-from-aajtak ul li + li,
 #block-itg-front-end-common-latest-from-pti ul li + li,
 #block-itg-front-end-common-latest-from-businesstoday ul li + li {
   border-top: 1px solid #dddddd;
-}
-
-#block-itg-front-end-common-latest-from-businesstoday a.pic img {
-  max-width: 56px;
 }
 
 .agbutton .error-msg {

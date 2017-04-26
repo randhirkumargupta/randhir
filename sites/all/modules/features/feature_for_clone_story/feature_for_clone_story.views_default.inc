@@ -57,6 +57,8 @@ function feature_for_clone_story_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options'] = '5, 10, 20, 40, 60,80,100';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
@@ -147,7 +149,7 @@ function feature_for_clone_story_views_default_views() {
   $handler->display->display_options['fields']['entity_id']['id'] = 'entity_id';
   $handler->display->display_options['fields']['entity_id']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['entity_id']['field'] = 'entity_id';
-  $handler->display->display_options['fields']['entity_id']['label'] = 'Nid';
+  $handler->display->display_options['fields']['entity_id']['label'] = 'Content id';
   $handler->display->display_options['fields']['entity_id']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['entity_id']['alter']['text'] = '<span class="seid-[counter]">[entity_id]</span>';
   /* Field: Apache Solr: label */
@@ -206,7 +208,7 @@ function feature_for_clone_story_views_default_views() {
   $handler->display->display_options['filters']['entity_id']['group'] = 1;
   $handler->display->display_options['filters']['entity_id']['exposed'] = TRUE;
   $handler->display->display_options['filters']['entity_id']['expose']['operator_id'] = '';
-  $handler->display->display_options['filters']['entity_id']['expose']['label'] = 'Nid';
+  $handler->display->display_options['filters']['entity_id']['expose']['label'] = 'Content id';
   $handler->display->display_options['filters']['entity_id']['expose']['operator'] = 'entity_id_op';
   $handler->display->display_options['filters']['entity_id']['expose']['identifier'] = 'entity_id';
   $handler->display->display_options['filters']['entity_id']['expose']['remember_roles'] = array(
