@@ -922,6 +922,7 @@ function itg_category_manager_taxonomy_term_insert($term) {
 //      $pathdata = $data['sef_url'];
 //      
 //    }
+    
 
     $get_parents = taxonomy_get_parents($term->tid);
     $parents = reset($get_parents);
