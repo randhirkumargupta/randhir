@@ -590,6 +590,9 @@ function get_url_of_current_term($form, &$form_state) {
   // get tid
   $term_tid_array = explode("tid:", $matches[1][0]);
   $link = drupal_lookup_path('alias', 'taxonomy/term/' . trim($term_tid_array[1]));
+  if(empty($link)) {
+    $link = 'taxonomy/term/' . trim($term_tid_array[1]);
+  }
   $form['url']['#value'] = !empty($link) ? $link : $form_state['values']['url'];
   return $form;
 }
