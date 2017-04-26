@@ -64,6 +64,11 @@ function itg_personalization_menu() {
     'access arguments' => array('access personalization all content link'),
     'type' => MENU_CALLBACK,
   );
+  $items['following-details-ajax'] = array(
+    'page callback' => 'itg_following_details_callback',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -188,7 +193,16 @@ function itg_personalization_block_info() {
     'info' => t('Personalized All Content'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  
+  $blocks['personalization_to_be_follow'] = array(
+    'info' => t('Personalized To BE Follow'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
+  $blocks['personalization_following'] = array(
+    'info' => t('Personalized Following'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   return $blocks;
 }
 
@@ -261,6 +275,12 @@ function itg_personalization_block_view($delta = '') {
       break;
     case 'personalization_all_content':
       $block['content'] = _personalization_all_content();
+      break;
+    case 'personalization_to_be_follow':
+      $block['content'] = _personalization_to_be_follow_content();
+      break;
+    case 'personalization_following':
+      $block['content'] = _personalization_following_content();
       break;
     case 'user_saved_content':
       $block['content'] = '<div id="target"></div>';
@@ -622,6 +642,43 @@ function _personalization_show_content() {
 }
 
 /**
+ * Implements _personalization_to_be_follow_content().
+ */
+function _personalization_to_be_follow_content() {
+  $featured_tag = get_featured_tag();
+  $output = '<div class="to_be_follow"><h2>To Be Follow</h2>';
+  foreach ($featured_tag as $key => $value) {
+    if (get_featured_tag_status($value['entity_id']) == 'Published' && itg_personalization_get_followed_status($value['entity_id']) == 0) {
+      if (function_exists('get_term_name_from_tid_for_report')) {
+        $link = '<a class="tobe-follow" href="javascript:void(0)" data-tag="follow" data-value="'.$value['entity_id'].'"> Follow</a>';
+        $output .='<div class="featured-name">' . get_term_name_from_tid_for_report($value['entity_id']) . '<span>'.$link.'</span></div>';
+      }
+    }
+  }
+  $output .= '</div>';
+
+  return $output;
+}
+
+/**
+ * Implements _personalization_following_content().
+ */
+function _personalization_following_content() {
+  global $user;
+  $featured_tag = itg_personalization_get_followed_tag($user->uid);
+  $output = '<div class="to_be_follow"><h2>Following</h2>';
+  foreach ($featured_tag as $key => $value) {
+      if (function_exists('get_term_name_from_tid_for_report')) {
+        $link = '<a class="tobe-follow" href="javascript:void(0)" data-tag="unfollow" data-value="'.$value['tid'].'"> Un Follow</a>';
+        $output .='<div class="featured-name">' . get_term_name_from_tid_for_report($value['tid']) . '<span>'.$link.'</span></div>';
+      }
+  }
+  $output .= '</div>';
+
+  return $output;
+}
+
+/**
  * Helper function to get facebook share count
  * @param int $uid
  * @param string $type
@@ -636,5 +693,58 @@ function itg_user_fb_share_count($uid, $type) {
         ->execute();
     $num_of_results = $result->rowCount();
     return $num_of_results;
+  }
+}
+
+/**
+ * Helper function to get featured tag
+ */
+function get_featured_tag() {
+   $result = db_select('field_data_field_tags_display', 'ts')
+        ->fields('ts', array('entity_id'))
+        ->condition('field_tags_display_value', 'Yes')
+        ->execute();
+    $featured_data = $result->fetchAll(PDO::FETCH_ASSOC);
+    return $featured_data;
+}
+
+/**
+ * Helper function to get featured tag status
+ */
+function get_featured_tag_status($entity_id) {
+   $result = db_select('field_data_field_tags_status', 'ts')
+        ->fields('ts', array('field_tags_status_value'))
+        ->condition('ts.entity_id', $entity_id)
+        ->execute();
+    $featured_data = $result->fetchField();
+    return $featured_data;
+}
+
+/*
+ * Helper function for follwing personalization
+ */
+function itg_following_details_callback() {
+  global $user;
+  $tid = $_POST['tid'];
+  $dtag = $_POST['dtag'];
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    // check connection
+    if ($con && !empty($tid)) {
+      if($dtag == 'follow') {
+      $people = $con->following_personalization;
+      $qry = array("tid" => $tid, "uid" => $user->uid, "tag-status" => $dtag, "timestamp" =>time());
+      $result = $people->insert($qry);
+      $response = array('success' => 'true');
+      print json_encode($response);
+      }
+      
+      if($dtag == 'unfollow') {
+      $people = $con->following_personalization;
+      $people->remove(array("tid" => $tid, "uid" => $user->uid));
+      $response = array('success' => 'fail');
+      print json_encode($response);
+      }
+    } //close connection
   }
 }

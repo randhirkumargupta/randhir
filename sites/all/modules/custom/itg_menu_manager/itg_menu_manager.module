@@ -96,6 +96,7 @@ function itg_menu_manager_permission() {
  * {@inheritdoc}
  */
 function itg_menu_manager_form($form, &$form_state) {
+  drupal_add_js(drupal_get_path('module' , 'itg_menu_manager') . '/js/jscolor.min.js' , 'file');
   $menu_arg = arg();
   // Change title during edit operation.
   if (isset($_GET['edit_id'])) {
@@ -123,26 +124,26 @@ function itg_menu_manager_form($form, &$form_state) {
   $section = isset($form_state['values']['sections']) ? $form_state['values']['sections'] : $frist_section;
 
   $menu_level = isset($form_state['values']['menu_level']) ? $form_state['values']['menu_level'] : "second";
-  
+
   ########################################
   #                                      #
   # Handel case when user come form menu #
   #                                      #
   ########################################
-  
+
   if($menu_arg[0] == 'itg-menu-manager' && $menu_arg[1] == 'second') {
     $default_values['menu_level'] = "second";
   }
-  
+
   if($menu_arg[0] == 'itg-menu-manager' && $menu_arg[1] == 'vertical') {
     $default_values['menu_level'] = "vertical";
   }
-  
+
   if($menu_arg[0] == 'itg-menu-manager' && $menu_arg[1] == 'third') {
     $default_values['menu_level'] = "third";
     $menu_level = 'third';
   }
-  
+
   if ($menu_level == 'third') {
     //drupal_add_css('#decided-section {display:inline-block !important;}', array('type' => 'inline'));
     $options = itg_menu_manager_get_taxonomy_term_options('category_management');
@@ -244,13 +245,21 @@ function itg_menu_manager_form($form, &$form_state) {
   );
 
   $form['sponsored_category'] = array(
-    '#title' => t('Sponsored category'),
+    '#title' => t('Sponsored Category'),
     '#type' => 'checkboxes',
-    '#description' => t('Sponsored category is applicable for only second level menu. Value saved for third level menu will not appear on front end.'),
+    '#description' => t('If menu is sponsored the the background color will apply.'),
     '#default_value' => (isset($default_values['extra']) && ($default_values['extra'] == "Yes")) ? array("Yes") : array(),
     '#options' => array('Yes' => t('Yes')),
   );
-
+  $default_color_value = isset($default_values['bk_color']) ? $default_values['bk_color'] : "#000000";
+  $form['bk_color'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Background Color'),
+    '#default_value' => $default_color_value,
+    '#attributes' => array('class' => array('jscolor {hash:true}')),
+    '#suffix' => '<input type="color" id="color-picker" value="'.$default_color_value.'">',
+  );
+  drupal_add_css("input[name=bk_color] {display:none}" , "inline");
   $form['display_icon'] = array(
     '#title' => t('Display'),
     '#type' => 'radios',
@@ -304,13 +313,7 @@ function itg_menu_manager_form($form, &$form_state) {
     unset($form['title']['#ajax']);
   }
 
-  drupal_add_css('#autocomplete {
-height: 300px;
-max-height: 400px;
-overflow: auto;
-overflow-y: auto;
-overflow-x: hidden;
-}', 'inline');
+  drupal_add_css('#autocomplete { height: 300px; max-height: 400px; overflow: auto; overflow-y: auto; overflow-x: hidden;}', 'inline');
 ##############################################################################
 ########### Condtion removed fornow for file title in case of second #########
 ##############################################################################
@@ -338,14 +341,14 @@ function itg_menu_manager_form_validate($form, &$form_state) {
     $url = $values['url'];
 
     // Validation for dublicate menu and sub menu.
-    if ($url_type == 'internal' && !isset($_GET['edit_id'])) {
+    if ($url_type == 'internal') {
       // get values beween squre breaket.
       preg_match_all("/\[([^\]]*)\]/", $values['title'], $matches);
       // get tid
       $term_tid_array = explode("tid:", $matches[1][0]);
       // In case of external url we didnt got tid so mannualy give a tid.
       $term_id = ($term_tid_array[1]) ? trim($term_tid_array[1]) : time();
-      
+
       $count = _get_itg_menu_data($menu_level, $section_id, $url_type, $term_id);
 
       if ($count) {
@@ -366,8 +369,24 @@ function itg_menu_manager_form_validate($form, &$form_state) {
         }
         $errors[] = t("Menu <b>" . $values['title'] . "</b> Already Exists. $display_message");
       }
+      // Handle edit case if same.
+      if(isset($_GET['edit_id'])) {
+        try {
+            $get_term_id_from_db = db_select('itg_menu_manager' ,'imm');
+            $get_term_id_from_db->fields('imm' , array('title'));
+            $get_term_id_from_db->condition('imm.id' , $_GET['edit_id'] , '=');
+            $title_data = $get_term_id_from_db->execute()->fetchField();
+            
+            if($values['title'] == $title_data) {
+              $errors = array();
+            }
+            
+        } catch (Exception $ex) {
+            watchdog('menu_manager', $ex->getMessage());
+        }
+      }
     }
-    
+
     if ($url_type == 'external' && !empty($url)) {
       if ((strpos($url, 'http') === 0) && filter_var($url, FILTER_VALIDATE_URL)) {
         //watchdog("menu_manager", "Url validated in case of external");
@@ -558,7 +577,7 @@ function get_section_update($form, &$form_state) {
 
 /**
  * returns drupal path of perticular term.
- * 
+ *
  * @param array $form
  * @param array $form_state
  * @return string
@@ -571,13 +590,16 @@ function get_url_of_current_term($form, &$form_state) {
   // get tid
   $term_tid_array = explode("tid:", $matches[1][0]);
   $link = drupal_lookup_path('alias', 'taxonomy/term/' . trim($term_tid_array[1]));
+  if(empty($link)) {
+    $link = 'taxonomy/term/' . trim($term_tid_array[1]);
+  }
   $form['url']['#value'] = !empty($link) ? $link : $form_state['values']['url'];
   return $form;
 }
 
 /**
  * Function is callback, which decide section is menadatory or not according to level.
- * 
+ *
  * @param array $form
  * @param array $form_state
  * @return array
@@ -613,7 +635,7 @@ function decide_section($form, &$form_state) {
 
 /**
  * Function is callback, which decide title autosuggest.
- * 
+ *
  * @param array $form
  * @param type $form_state
  * @return array
@@ -641,6 +663,7 @@ function itg_menu_manager_form_submit($form, &$form_state) {
   $url = filter_xss($values['url']);
   $target = filter_xss($values['url_window']);
   $category_icon = $values['category_icon'];
+  $bk_color = $values['bk_color'];
   $sponsored_category = $values['sponsored_category']['Yes'];
   $is_sponsored = ($sponsored_category) ? $sponsored_category : "No";
   $file_id = 'notFound';
@@ -650,7 +673,7 @@ function itg_menu_manager_form_submit($form, &$form_state) {
 
     $file->status = FILE_STATUS_PERMANENT;
     $file_saved = file_save($file);
-    // Record that the module is using the file. 
+    // Record that the module is using the file.
     // If we dont do , then file will remove if a cron run.
     file_usage_add($file_saved, 'itg_menu_manager', 'category_icon_image', $file_saved->fid);
     $file_id = $file_saved->fid;
@@ -677,6 +700,7 @@ function itg_menu_manager_form_submit($form, &$form_state) {
             'extra' => $is_sponsored,
             'menu_name' => $file_id,
             'display_icon' => $display_icon,
+            'bk_color' => $bk_color,
               )
           )->condition('id', $edit_id, "=")->execute();
 
@@ -690,7 +714,7 @@ function itg_menu_manager_form_submit($form, &$form_state) {
         $query = array("section_id" => $sections, "section_child" => $sections);
         drupal_goto('menu-manager/third', array("query" => $query));
       }
-      drupal_set_message("$menu_level menu has been updated");
+      drupal_set_message("@level menu has been updated" , array("@level" => $menu_level));
     }
     catch (Exception $ex) {
       drupal_set_message($ex->getMessage());
@@ -732,6 +756,7 @@ function itg_menu_manager_form_submit($form, &$form_state) {
             'extra' => $is_sponsored,
             'menu_name' => $file_id,
             'display_icon' => $display_icon,
+            'bk_color' => $bk_color,
           ))
           ->execute();
       if ($menu_level == 'second') {
@@ -802,6 +827,8 @@ function itg_menu_manager_block_view($delta = '') {
     case 'third_level_menu':
       $data = array();
       $third_level_menu = get_third_level_menu();
+      //pr($third_level_menu);
+      //exit;
       $node_data = array();
 
       // handling for ip pages
@@ -870,6 +897,26 @@ function get_third_level_menu() {
   if (in_array(arg(1), $links_array)) {
     $node_data = node_load(arg(1));
   }
+
+  // for best college
+    $url_get = explode('/',$_SERVER['REQUEST_URI']);
+    if (isset($url_get[2]) && $url_get[1] == 'bestcolleges') {
+        if($arg[0] == 'taxonomy') {
+          $section_id = $arg[2];
+        } else {
+          $term_name = "Bestcolleges " . $url_get[2];
+          $term_data = taxonomy_get_term_by_name($term_name);
+          $tid = array_pop($term_data)->tid;
+          $section_id = ($tid) ? $tid : '';
+        }
+
+        $parents = taxonomy_get_parents_all($section_id);
+        if (count($parents) > 1) {
+          $section_id = end($parents)->tid;
+        }
+    }
+
+  // end best collehe
 
   // condition for itg theme
   if (isset($arg[2])) {
@@ -958,7 +1005,7 @@ function itg_menu_manager_views_data() {
     'help' => t('Log information about taxonomy term.'),
     'relationship' => array(
       'base' => 'taxonomy_term_data', // The name of the table to join with.
-      'base field' => 'tid', // The name of the field on the joined table.      
+      'base field' => 'tid', // The name of the field on the joined table.
       'handler' => 'views_handler_relationship',
       'label' => t('Menu Category manager'),
       'title' => t('ITG'),
@@ -1297,7 +1344,7 @@ function itg_menu_manager_views_pre_render(&$view) {
     else {
       $count = $view->total_rows;
     }
-    
+
 
     // Handel case for inactive category.
     // Here altered result of $views->result i.e. skip rowa which have inactive tid.
@@ -1349,7 +1396,7 @@ function itg_menu_manager_form_views_exposed_form_alter(&$form, &$form_state, $f
 
 /**
  * Function handling link output of menus.
- * 
+ *
  * @global global $base_url
  * @param array $menu_data
  * @param array $argument
@@ -1468,7 +1515,7 @@ function _delete_term_from_menu_manager($tid) {
 
 /**
  * Function which returns count of rows w.r.t menu_manager data.
- * 
+ *
  * @param string $menu_level
  * @param int $section_id
  * @param string $url_type

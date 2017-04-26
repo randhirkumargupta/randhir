@@ -4963,7 +4963,9 @@ div.node{
     }
   }
   .checked-list {
-    padding: 5px 10px;
+    margin: 5px 10px;
+    max-height: 210px;
+    overflow-y: auto;
     li {
       background-color: #f0f0f0;
       color: #2f2f2f;
@@ -7106,7 +7108,7 @@ div.node{
   height: 674px;
 }
 .itg-layout-container .top-colum-3 .droppable{
-  height: 277px;
+  height: 262px;
 }
 .itg-h450-section{
   .widget-wrapper{
@@ -11672,7 +11674,9 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     }
   }
   .node-mail_templates-form{
+    .form-item-title{display: none;}
     .vertical-tabs{
+      display: none;
       .vertical-tabs-list{display: none;}
     }
   }

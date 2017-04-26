@@ -12,16 +12,22 @@
                 var menu_level_val = jQuery("select[name=menu_level]").val();
                 if (url_type == 'internal') {
                     $('#edit-category-icon-ajax-wrapper').css("display", "none");
-                }
-                else {
+                } else {
                     $('#edit-category-icon-ajax-wrapper').css("display", "block");
                 }
 
-                console.log(menu_level_val);
                 if (menu_level_val == 'vertical') {
                     //jQuery("input[name=title]").removeAttr("disabled");
                     jQuery(".form-item-sections").css("display", "none");
                 }
+
+                var spnr_val = jQuery("input[name='sponsored_category[Yes]']").is(':checked');
+                color_picker_condition(spnr_val);
+                jQuery("input[name='sponsored_category[Yes]']").on('click', function () {
+                    var spnr_val = jQuery("input[name='sponsored_category[Yes]']").is(':checked');
+                    color_picker_condition(spnr_val);
+                });
+                
             });
 
 
@@ -35,8 +41,7 @@
                 var menu_level_val = jQuery("select[name=menu_level]").val();
                 if (url_type == 'internal') {
                     $('#edit-category-icon-ajax-wrapper').css("display", "none");
-                }
-                else {
+                } else {
                     $('#edit-category-icon-ajax-wrapper').css("display", "block");
                 }
 
