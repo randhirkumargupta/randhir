@@ -8,10 +8,12 @@
         }
           ?>
         <li class="dont-miss-listing" id="dont-miss-<?php print $key ?>">
-          <?php if (!empty($node_data['uri'])) { ?>
+          <?php if (!empty($node_data['uri'])) {
+           
+            ?>
             <div class="dm-pic">
               <a class="<?php echo $video_class;?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['nid']}") ?>">
-                <img src="<?php print image_style_url("widget_very_small", $node_data['uri']); ?>" alt="" />
+                <img src="<?php print image_style_url("widget_very_small", $node_data['uri']); ?>" alt="<?php echo $node_data['field_story_extra_small_image_alt'];?>" title="<?php echo $node_data['field_story_extra_small_image_title'];?>" />
               </a>
             </div>
             <?php
@@ -33,7 +35,7 @@
             <?php endif; ?>
 
             <?php if (!empty($title)) : ?>    
-              <p class="dont-miss-widget dont-miss-<?php echo $node_data['nid'] ?>">
+              <p title="<?php echo strip_tags($title);?>" class="dont-miss-widget dont-miss-<?php echo $node_data['nid'] ?>">
                 <?php //echo l(mb_strimwidth($title, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['nid']}")) ?>
               <?php
             if (function_exists('itg_common_get_smiley_title')) {
