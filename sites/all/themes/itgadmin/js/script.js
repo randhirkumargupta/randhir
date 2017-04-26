@@ -987,7 +987,8 @@ jQuery(document).ready(function () {
     // jQuery code for report-chart-tabs
     jQuery('.report-chart-tabs').on('click', 'a', function(){
       var getId = jQuery(this).attr('data-toggle');
-      jQuery(this).parent().addClass('active').parent().parent().next().find('#'+getId).show().siblings().hide();
+      jQuery(this).parent().addClass('active').parent().parent().next().find('#'+getId).css('opacity', 1).siblings().css('opacity', 0);
+      jQuery(this).parent().siblings().removeClass('active');
     });
     
     // jQuery code to show-hide mail templates token popup
@@ -1068,3 +1069,14 @@ jQuery(document).ready(function () {
 
 });
 
+jQuery(document).ready(function(){
+    jQuery("#edit-field-newsl-newsletter-content-und-select-section").on('change', function(){
+        var CT = jQuery("#edit-field-cm-select-type-und").val();
+        if (typeof CT === "undefined" || CT == null || CT == '_none') {
+            jQuery("#edit-field-story-category").css("display","none");
+        }
+        else {
+            jQuery("#edit-field-story-category").css("display","block");
+        }
+    });
+});
