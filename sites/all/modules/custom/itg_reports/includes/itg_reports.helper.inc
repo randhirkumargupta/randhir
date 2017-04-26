@@ -223,7 +223,7 @@ function itg_registered_user_display_report($user_id) {
                     </ul>
                 </div>';
     $chart .= '<div class="tab-content">';
-    $chart .= '<div style="display:block" id="report1" class="tab-pane fade in">';
+    $chart .= '<div id="report1">';
     if(!empty($views_nodes['under_personalized_section'])) {
       $chart .= theme('itg_reports_personalized_data_chart' , array(
         "total_section_node_visited" => $views_nodes['under_personalized_section'] ,
@@ -234,7 +234,7 @@ function itg_registered_user_display_report($user_id) {
     }
     $chart .= "</div>";
 
-    $chart .= '<div style="display:block;opacity: 1 !important;" id="report2" class="tab-pane fade in active">';
+    $chart .= '<div id="report2">';
     if(!empty($views_nodes['other_personalized_section'])) {
       $chart .= theme('itg_reports_sections_data_chart' , array(
         'node_under_section_visited' => $views_nodes['other_personalized_section'] ,

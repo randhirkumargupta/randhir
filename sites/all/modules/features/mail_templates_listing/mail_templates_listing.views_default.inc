@@ -35,6 +35,13 @@ function mail_templates_listing_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'node';
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = '<p>No Records Found</p>';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -200,7 +207,7 @@ function mail_templates_listing_views_default_views() {
   $handler->display->display_options['filters']['field_mail_templates_category_value']['field'] = 'field_mail_templates_category_value';
   $handler->display->display_options['filters']['field_mail_templates_category_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_mail_templates_category_value']['expose']['operator_id'] = 'field_mail_templates_category_value_op';
-  $handler->display->display_options['filters']['field_mail_templates_category_value']['expose']['label'] = 'Mail Templates';
+  $handler->display->display_options['filters']['field_mail_templates_category_value']['expose']['label'] = 'Select Mail Events';
   $handler->display->display_options['filters']['field_mail_templates_category_value']['expose']['operator'] = 'field_mail_templates_category_value_op';
   $handler->display->display_options['filters']['field_mail_templates_category_value']['expose']['identifier'] = 'field_mail_templates_category_value';
   $handler->display->display_options['filters']['field_mail_templates_category_value']['expose']['remember_roles'] = array(

@@ -101,6 +101,14 @@ function itg_common_permission() {
       'title' => t('Access third party config form'),
       'description' => t('Access third party config form'),
     ),
+    'access itg siteadmin' => array(
+      'title' => t('itg siteadmin permission') ,
+      'description' => t('itg siteadmin permission.') ,
+    ) ,
+    'access itg high level' => array(
+      'title' => t('itg high level permission') ,
+      'description' => t('itg high level permission.') ,
+    ) ,
   );
 }
 

@@ -48,32 +48,35 @@ function itg_widget_setids() {
 }
 
 function remove_extra_data() {
-  $widget = array(
-//      'widget_anchors_listing',
-//      'home_page_feature_widget',
-//      'story_widget',
-//        'section_wise_content_ordering_list',
-//      'section_wise_draggable_content_order',
-//      'big_story_format_widget',
-      'dont_miss_content_widget',
-      'dont_miss_content',
-      'section_wise_widget',
-//      'we_may_suggest_widget',
-//      'section_wise_content_ordering',
-//      'widget_anchors_listing',
-//      'category_wise_content_list',
-//     'photo_carousel_widget',
-  );
-  foreach ($widget as $view_name) {
-    $num_deleted = db_delete('draggableviews_structure')
-            ->condition('view_name', $view_name)
-            ->condition('view_display', 'dont_miss_content')
-            ->execute();
+//  $widget = array(
+////      'widget_anchors_listing',
+////      'home_page_feature_widget',
+////      'story_widget',
+////        'section_wise_content_ordering_list',
+////      'section_wise_draggable_content_order',
+////      'big_story_format_widget',
+//      'dont_miss_content_widget',
+//      'dont_miss_content',
+//      'section_wise_widget',
+////      'we_may_suggest_widget',
+////      'section_wise_content_ordering',
+////      'widget_anchors_listing',
+////      'category_wise_content_list',
+////     'photo_carousel_widget',
+//  );
+//  foreach ($widget as $view_name) {
+//    $num_deleted = db_delete('draggableviews_structure')
+//            ->condition('view_name', $view_name)
+//            ->condition('view_display', 'dont_miss_content')
+//            ->execute();
+//
+//    $num_deleted = db_delete('itg_widget_order')
+//            ->condition('widget', $view_name)
+//            ->execute();
+//  }
 
-    $num_deleted = db_delete('itg_widget_order')
-            ->condition('widget', $view_name)
-            ->execute();
-  }
+  db_query("ALTER TABLE  itg_menu_manager ADD  bk_color VARCHAR( 100 ) NOT NULL DEFAULT  '#cccccc'")->execute();
+
 }
 
 /**
