@@ -51,7 +51,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                         <div class="logo">
                             <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
                         </div>
-                    <?php endif; ?>         
+                    <?php endif; ?>
                 </div>
 
                 <?php if ($site_name || $site_slogan): ?>
@@ -67,7 +67,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>
-                <!--  
+                <!--
                 <?php if ($secondary_menu): ?>
                                     <nav class="header__secondary-menu" id="secondary-menu" role="navigation">
                     <?php
@@ -121,7 +121,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 <?php print render($page['help']); ?>
                 <?php if ($action_links): ?>
                     <ul class="action-links"><?php print render($action_links); ?></ul>
-                <?php endif; ?>       
+                <?php endif; ?>
 
             <?php } ?>
             <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
@@ -133,13 +133,13 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             }
             ?>
             <div class="itg-layout-container election-page <?php echo $itg_class; ?> ">
-                <!-- Breaking news band -->    
+                <!-- Breaking news band -->
                 <?php if (!empty($page['breaking_news'])): ?>
                     <div class="row">
                         <div class="col-md-12">
                             <?php print render($page['breaking_news']); ?>
-                        </div>      
-                    </div>    
+                        </div>
+                    </div>
                 <?php endif; ?>
                 <?php
                 $display_title = "";
@@ -202,12 +202,12 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                         </div>
                                                         <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                     </div>
-                                                <?php } ?>  
+                                                <?php } ?>
 
                                                 <div class="data-holder" id="itg-block-3">
                                                   <?php print $live_url; ?>
                                                 </div>
-                                            </div>             
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -229,18 +229,18 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                         </div>
                                                         <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                     </div>
-                                                <?php } ?> 
+                                                <?php } ?>
                                                 <div class="data-holder" id="itg-block-4">
                                                   <?php
                                                     if (isset($widget_data['itg-block-4']['widget'])) {
-                                                      print $widget_data['itg-block-4']['widget']; 
+                                                      print $widget_data['itg-block-4']['widget'];
                                                     } else{
                                                       print '<div class="widget-placeholder"><span>'.t('Highlights').'</span></div>';
-                                                    } 
+                                                    }
                                                   ?>
                                                 </div>
 
-                                            </div>             
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -277,8 +277,8 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                             }
                                             $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
                                             $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
-                                           
-                                            ?>  
+
+                                            ?>
                                             <select id="map-state" name="map_state">
 
                                             <?php
@@ -308,7 +308,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 <div id = "conssvg"></div>
                                                 <script>getconssvg(<?php echo json_encode($urlarray); ?>, "0");</script>
                                             </div>
-                                        </div>             
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -330,18 +330,18 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                     </div>
                                                     <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                 </div>
-<?php } ?>  
+<?php } ?>
 
                                             <div class="data-holder" widget-style="election-other-story" id="itg-block-6">
                                               <?php
                                                 if (isset($widget_data['itg-block-6']['widget'])) {
-                                                  print $widget_data['itg-block-6']['widget']; 
+                                                  print $widget_data['itg-block-6']['widget'];
                                                 } else{
                                                   print '<div class="widget-placeholder"><span>'.t('Other Story').'</span></div>';
-                                                } 
+                                                }
                                               ?>
                                             </div>
-                                        </div>             
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -365,18 +365,18 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                     </div>
                                                     <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                 </div>
-<?php } ?>  
+<?php } ?>
 
                                             <div class="data-holder" id="itg-block-7">
                                               <?php
                                                 if (isset($widget_data['itg-block-7']['widget'])) {
-                                                  print $widget_data['itg-block-7']['widget']; 
+                                                  print $widget_data['itg-block-7']['widget'];
                                                 } else{
                                                   print '<div class="widget-placeholder"><span>'.t('Most popular').'</span></div>';
-                                                } 
+                                                }
                                               ?>
                                             </div>
-                                        </div>             
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -400,18 +400,18 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                     </div>
                                                     <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                 </div>
-<?php } ?>  
+<?php } ?>
 
                                             <div class="data-holder" id="itg-block-8">
                                               <?php
                                                 if (isset($widget_data['itg-block-8']['widget'])) {
-                                                  print $widget_data['itg-block-8']['widget']; 
+                                                  print $widget_data['itg-block-8']['widget'];
                                                 } else{
                                                   print '<div class="widget-placeholder"><span>'.t('Photo carousel').'</span></div>';
-                                                } 
+                                                }
                                               ?>
                                             </div>
-                                        </div>             
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -419,8 +419,8 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 
 
 
-                    </div>    
-                    <div class="col-md-4 col-sm-12 col-sx-12 right-side">        
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-sx-12 right-side">
 <?php
 $adsclass = "";
 $key_candidate_extra_block = "";
@@ -431,13 +431,13 @@ if (count($graphdata) > 2) {
 ?>
                         <div class="row">
 
-                        
+
                         <div class="<?php echo $adsclass; ?> col-md-12 col-sm-6 mt-50">
                             <div class="itg-widget election-topadd">
                                 <div class="ad-widget droppable">
                                     <div class="sidebar-ad">
                                         <?php
-                                          $block = block_load('itg_ads', ADS_RHS1);   
+                                          $block = block_load('itg_ads', ADS_RHS1);
                                           $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                                           print render($render_array);
                                          ?></div>
@@ -445,7 +445,7 @@ if (count($graphdata) > 2) {
                                     </div>
 
                                 </div>
-                            </div> 
+                            </div>
 
                             <div class="itg-325 mt-50 <?php echo $key_candidate_extra_block; ?> col-md-12 col-sm-6">
                                 <div class="itg-widget">
@@ -465,20 +465,20 @@ if (count($graphdata) > 2) {
                                                     </div>
                                                     <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                 </div>
-<?php } ?> 
+<?php } ?>
                                             <div class="data-holder" id="itg-block-9">
                                               <?php
                                                 if (isset($widget_data['itg-block-9']['widget'])) {
-                                                  print $widget_data['itg-block-9']['widget']; 
+                                                  print $widget_data['itg-block-9']['widget'];
                                                 } else{
                                                   print '<div class="widget-placeholder"><span>'.t('Key candidate').'</span></div>';
-                                                } 
+                                                }
                                               ?>
                                             </div>
-                                        </div>             
-                                    </div>               
+                                        </div>
+                                    </div>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="itg-320 col-md-12 col-sm-6 mt-50">
                                 <div class="itg-widget">
                                     <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -497,21 +497,21 @@ if (count($graphdata) > 2) {
                                                     </div>
                                                     <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                 </div>
-<?php } ?>  
+<?php } ?>
 
                                             <div class="data-holder" id="itg-block-10" widget-style="election-so-sorry">
                                               <?php
                                                 if (isset($widget_data['itg-block-10']['widget'])) {
-                                                  print $widget_data['itg-block-10']['widget']; 
+                                                  print $widget_data['itg-block-10']['widget'];
                                                 } else{
                                                   print '<div class="widget-placeholder"><span>'.t('So sorry').'</span></div>';
-                                                } 
+                                                }
                                               ?>
                                             </div>
-                                        </div>             
-                                    </div>               
-                                </div> 
-                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="itg-460 col-md-12 col-sm-6 mt-50">
                                 <div class="itg-widget">
                                     <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -530,7 +530,7 @@ if (count($graphdata) > 2) {
                                                     </div>
                                                     <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                 </div>
-<?php } ?>  
+<?php } ?>
 
                                             <div class="data-holder" id="itg-block-11">
                                               <?php
@@ -539,15 +539,15 @@ if (count($graphdata) > 2) {
                                               ?>
                                               <?php
                                                 if (isset($widget_data['itg-block-11']['widget'])) {
-                                                  print $widget_data['itg-block-11']['widget']; 
+                                                  print $widget_data['itg-block-11']['widget'];
                                                 } else{
                                                   print '<div class="widget-placeholder"><span>'.t('View on twitter').'</span></div>';
-                                                } 
+                                                }
                                               ?>
                                             </div>
-                                        </div>             
-                                    </div>               
-                                </div> 
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-12 col-sm-6 mt-50">
                                 <div class="itg-widget">
@@ -561,7 +561,7 @@ print render($render_array);
                                         </div>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="itg-484 col-md-12 col-sm-6 mt-50">
                                 <div class="itg-widget">
                                     <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -580,25 +580,25 @@ print render($render_array);
                                                     </div>
                                                     <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                 </div>
-<?php } ?>  
+<?php } ?>
 
                                             <div class="data-holder" id="itg-block-12">
                                               <?php
                                                 if (isset($widget_data['itg-block-10']['widget'])) {
-                                                  print $widget_data['itg-block-10']['widget']; 
+                                                  print $widget_data['itg-block-10']['widget'];
                                                 } else{
                                                   print '<div class="widget-placeholder"><span>'.t('Videos').'</span></div>';
-                                                } 
+                                                }
                                               ?>
                                             </div>
-                                        </div>             
-                                    </div>               
-                                </div> 
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>    
+                    </div>
                 </div>
-                <!--End of Common add more section--> 
+                <!--End of Common add more section-->
             </div>
 
 
@@ -610,7 +610,7 @@ print render($render_array);
     <?php //print $feed_icons;       ?>
             </section>
 
-                <?php if (false) { ?> 
+                <?php if (false) { ?>
                 <div id="navigation">
 
                 <?php if ($main_menu): ?>
@@ -657,3 +657,5 @@ print render($render_array);
         <img src="<?php echo base_path() . drupal_get_path('theme', $theme); ?>/images/loader.svg" alt=""/>
     </div>
 <?php } ?>
+
+<div style="position:fixed; bottom:0; right:-25px; z-index:99999"><iframe src="https://electionresults.intoday.in/elections/2017/json/mcd/tally/mcd-election-result-cube.html" border="0" overflow="auto" style="border:0;" height="266"></iframe></div>
