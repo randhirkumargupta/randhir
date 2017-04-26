@@ -365,7 +365,7 @@ function features_for_newsletter_field_default_field_bases() {
         'top_20_trending' => ' Top 20 Trending News',
         'top_20_shared' => ' Top 20 Shared News',
         'top_20_most_viewed' => ' Top 20 Most Viewed News',
-        'select_section' => 'Select Section',
+        'select_section' => 'Select Content Type & Section',
       ),
       'allowed_values_function' => '',
     ),

@@ -267,6 +267,9 @@ function itg_widget_views_pre_render(&$view) {
     }
   }
   elseif ($view->name == "user_selection" && $view->current_display == 'user_selection_for_section') {
+    if(!isset($_GET['field_user_section_tid'])) {
+      drupal_add_css("#views-form-user-selection-user-selection-for-section fieldset.container-inline , td.views-field-views-bulk-operations , th.views-field-views-bulk-operations {display:none}" , 'inline');
+    }
     if (isset($_POST['views_bulk_operations']) && !isset($_GET['field_user_section_tid'])) {
       drupal_set_message(t("Please select section first."), 'error');
       drupal_goto('user-selection');

@@ -5,8 +5,8 @@
     <?php if ($layout && (!empty($submitted) || !empty($links))): ?>
         <div class='column-side'><div class='column-wrapper'>
             <?php endif; ?>
-
-            <?php if (!empty($submitted)): ?>
+                
+            <?php if (!empty($submitted) && !isset($_POST['op'])): ?>
                 <div class='<?php print $hook ?>-submitted clearfix'><?php print $submitted ?></div>
             <?php endif; ?>
 
