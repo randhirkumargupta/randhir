@@ -866,8 +866,11 @@ function itg_draft_form_custom_callback($form, &$form_state) {
   
   if ($form_state['node']->workbench_moderation_state_new == 'draft') {    
     $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination='.$_GET['destination'];    
-    drupal_set_message(t($form_state['values']['type'] . ' <b>' . $form_state['values']['title'] . '</b> has been save successfully.'));
-    $_GET['destination'] = $redirect_path;    
+   // drupal_set_message(t($form_state['values']['type'] . ' <b>' . $form_state['values']['title'] . '</b> has been save successfully.'));
+   $_GET['destination'] = $redirect_path;
+    drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
+    
+        
   }
   
 }
