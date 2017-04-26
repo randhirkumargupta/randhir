@@ -100,7 +100,7 @@ function associate_gallery_data_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[title] ([nid])';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[title]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -125,12 +125,6 @@ function associate_gallery_data_views_default_views() {
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
   $handler->display->display_options['filters']['field_story_archive_value']['group'] = 1;
-  /* Filter criterion: Content: Source type (field_story_source_type) */
-  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
-  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
-  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
-  $handler->display->display_options['filters']['field_story_source_type_value']['operator'] = 'empty';
-  $handler->display->display_options['filters']['field_story_source_type_value']['group'] = 1;
   /* Filter criterion: Workbench Moderation: Current */
   $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
   $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
@@ -185,7 +179,7 @@ function associate_gallery_data_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[title] ([nid])';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[title]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -210,12 +204,6 @@ function associate_gallery_data_views_default_views() {
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
   $handler->display->display_options['filters']['field_story_archive_value']['group'] = 1;
-  /* Filter criterion: Content: Source type (field_story_source_type) */
-  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
-  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
-  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
-  $handler->display->display_options['filters']['field_story_source_type_value']['operator'] = 'empty';
-  $handler->display->display_options['filters']['field_story_source_type_value']['group'] = 1;
   /* Filter criterion: Workbench Moderation: Current */
   $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
   $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
