@@ -204,6 +204,10 @@ function itg_widget_views_pre_render(&$view) {
     }
   }
   elseif ($view->name == "special_auto_review_widget" && $view->current_display == 'special_auto_review_widget_contents') {
+    if(isset($_POST['views_bulk_operations']) && empty($_GET['category_tid'])) {
+      drupal_set_message(t("Please select Section first.") , 'error');
+      drupal_goto('special-auto-review-widget-contents');
+    }
     if (!isset($_POST['views_bulk_operations'])) {
       $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Special Review Widget'), 'special-auto-review-widget-lsit', array('query' => $color_box_query, 'attributes' => $color_box_class));
