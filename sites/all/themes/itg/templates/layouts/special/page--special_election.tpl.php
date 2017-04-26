@@ -657,5 +657,3 @@ print render($render_array);
         <img src="<?php echo base_path() . drupal_get_path('theme', $theme); ?>/images/loader.svg" alt=""/>
     </div>
 <?php } ?>
-
-<div style="position:fixed; bottom:0; right:-25px; z-index:99999"><iframe src="https://electionresults.intoday.in/elections/2017/json/mcd/tally/mcd-election-result-cube.html" border="0" overflow="auto" style="border:0;" height="266"></iframe></div>
