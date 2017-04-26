@@ -509,7 +509,7 @@ function itg_common_get_latest_byline($nid , $status) {
  * Creating Custom path alias for story, photogallery and videogallery
  */
 function itg_common_custompath_insert_load($node) {
-  global $edited_sef_url;
+  $edited_sef_url = $node->path['alias'];
   if (!empty($edited_sef_url)) {
     $lencount_sef = strlen($edited_sef_url);
     if ($lencount_sef >= 160) {
