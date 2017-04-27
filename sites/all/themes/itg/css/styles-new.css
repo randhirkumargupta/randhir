@@ -946,6 +946,36 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   opacity: 1;
 }
 
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset {
+  border: none;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset legend {
+  float: left;
+  width: 200px;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset legend:after {
+  content: '*';
+  color: #f00;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset .fieldset-wrapper {
+  overflow: hidden;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset .fieldset-wrapper .tabledrag-toggle-weight-wrapper, .node-ugc-form .form-field-name-field-ugc-photo-image fieldset .fieldset-wrapper table thead {
+  display: none;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset .fieldset-wrapper table tbody tr td .tabledrag-handle {
+  display: none;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset .fieldset-wrapper table tbody tr td .form-submit {
+  border: none;
+  background: #fff;
+  color: #F00;
+  font-size: 12px;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset .fieldset-wrapper table + .form-type-managed-file {
+  margin-top: 10px;
+}
+
 .view-personalization-my-content .views-table {
   width: 100%;
   max-width: 860px;
@@ -1916,7 +1946,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   padding: 10px;
   text-align: center;
 }
-.load-more-wrapper .add-more-block, .load-more-wrapper .add-more-block-front, .load-more-wrapper .removes-more-block, .load-more-wrapper-front .add-more-block, .load-more-wrapper-front .add-more-block-front, .load-more-wrapper-front .removes-more-block {
+.load-more-wrapper .add-more-block, .load-more-wrapper .add-more-block-front, .load-more-wrapper .removes-more-block, .load-more-wrapper .add-more-block-front-section, .load-more-wrapper-front .add-more-block, .load-more-wrapper-front .add-more-block-front, .load-more-wrapper-front .removes-more-block, .load-more-wrapper-front .add-more-block-front-section {
   display: inline-block;
   vertical-align: top;
   padding: 10px 20px;
@@ -1927,12 +1957,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   margin: 0 10px;
   text-transform: uppercase;
 }
-.load-more-wrapper .add-more-block .fa, .load-more-wrapper .add-more-block-front .fa, .load-more-wrapper .removes-more-block .fa, .load-more-wrapper-front .add-more-block .fa, .load-more-wrapper-front .add-more-block-front .fa, .load-more-wrapper-front .removes-more-block .fa {
+.load-more-wrapper .add-more-block .fa, .load-more-wrapper .add-more-block-front .fa, .load-more-wrapper .removes-more-block .fa, .load-more-wrapper .add-more-block-front-section .fa, .load-more-wrapper-front .add-more-block .fa, .load-more-wrapper-front .add-more-block-front .fa, .load-more-wrapper-front .removes-more-block .fa, .load-more-wrapper-front .add-more-block-front-section .fa {
   font-size: 16px;
   vertical-align: bottom;
   margin-left: 5px;
 }
-.load-more-wrapper .add-more-block:hover, .load-more-wrapper .add-more-block-front:hover, .load-more-wrapper .removes-more-block:hover, .load-more-wrapper-front .add-more-block:hover, .load-more-wrapper-front .add-more-block-front:hover, .load-more-wrapper-front .removes-more-block:hover {
+.load-more-wrapper .add-more-block:hover, .load-more-wrapper .add-more-block-front:hover, .load-more-wrapper .removes-more-block:hover, .load-more-wrapper .add-more-block-front-section:hover, .load-more-wrapper-front .add-more-block:hover, .load-more-wrapper-front .add-more-block-front:hover, .load-more-wrapper-front .removes-more-block:hover, .load-more-wrapper-front .add-more-block-front-section:hover {
   box-shadow: 0 0 5px 0 #666;
 }
 

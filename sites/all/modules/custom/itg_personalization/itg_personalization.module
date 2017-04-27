@@ -360,6 +360,8 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
     $content_type_for_icon .= '</ul>';
     $form['field_user_name']['#prefix'] = '<div style="display: none;">';
     $form['field_user_name']['#suffix'] = '</div>';
+    $form['field_ugc_photo_image']['#prefix'] = '<div style="display: none;">';
+    $form['field_ugc_photo_image']['#suffix'] = '</div>';
     // Hide user email field.
     $form['field_user_email']['#prefix'] = '<div style="display: none;">';
     $form['field_user_email']['#suffix'] = '</div>';
