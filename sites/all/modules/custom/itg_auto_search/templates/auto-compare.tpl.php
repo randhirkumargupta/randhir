@@ -1,5 +1,6 @@
 <div id="compare-section" class="auto-compare-section">
     <?php
+    global $base_url;
     $class = 'col-md-5';
     $tableClass = 'col-md-4';
     $tableClass2 = 'col-md-4';
@@ -13,7 +14,7 @@
         <img src="<?php echo $data['first'][0]->image; ?>" alt="<?php echo $data['first'][0]->brand; ?>" title="<?php echo $data['first'][0]->brand; ?>">
     </div>
     <?php if ($data['second'] != null): ?>
-      <div class="compare-left col-md-2"><div class="vs_text"><img src="http://media2.intoday.in/indiatoday/resources/auto/images/big-vs.jpg" alt="" title=""></div></div>
+    <div class="compare-left col-md-2"><div class="vs_text"><img src="<?php echo $base_url . '/' . drupal_get_path('module', 'itg_auto_search');?>/images/big-vs.jpg" alt="" title=""></div></div>
       <div class="compare-right <?php echo $class; ?>">
           <img src="<?php echo $data['second'][0]->image; ?>" alt="<?php echo $data['second'][0]->brand; ?>" title="<?php echo $data['second'][0]->brand; ?>">
       </div>
@@ -22,18 +23,18 @@
         <div class="lft ltext">
             <h3><?php echo $data['first'][0]->brand; ?></h3>
             <div class="rating_icon">
-                <img src="http://media2.intoday.in/indiatoday/resources/auto/images/rating.jpg" alt="" title="">
+                <img src="<?php echo $base_url . '/' . drupal_get_path('module', 'itg_auto_search');?>/images/rating.jpg" alt="" title="">
             </div>
         </div>
 
         <div class="flr rtext"></div>
     </div>
     <?php if ($data['second'] != null): ?>
-      <div class="compare-left col-md-2"><div class="arrow_bottom"><img src="http://media2.intoday.in/indiatoday/resources/auto/images/v-img.jpg" alt="" title=""></div></div>
+      <div class="compare-left col-md-2"><div class="arrow_bottom"><img src="<?php echo $base_url . '/' . drupal_get_path('module', 'itg_auto_search');?>/images/v-img.jpg" alt="" title=""></div></div>
       <div class="compare-right <?php echo $class; ?>">
           <h3><?php echo $data['second'][0]->brand; ?></h3>
           <div class="rating_icon">
-              <img src="http://media2.intoday.in/indiatoday/resources/auto/images/rating.jpg" alt="" title="">
+              <img src="<?php echo $base_url . '/' . drupal_get_path('module', 'itg_auto_search');?>/images/rating.jpg" alt="" title="">
           </div>
       </div>
     <?php endif; ?>

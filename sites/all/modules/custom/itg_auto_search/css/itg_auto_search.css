@@ -1,0 +1,38 @@
+/* auto search widget css */
+.auto_master_form_widget .flt{float:left}
+.auto_master_form_widget span.widget-title{display:none}
+.auto_master_form_widget .data-holder{background:#dedcdd;width:100%;overflow:hidden;margin-bottom:20px}
+.auto_master_form_widget .master-logo{float:left;margin-right:50px}
+.auto_master_form_widget .left-master-section,.auto_master_form_widget .right-master-section{padding-top:5px}
+.auto_master_form_widget .break-point{float:left;padding:0 40px;height:100px}
+.auto_master_form_widget .m-break-point{display:none}
+.auto_master_form_widget .compare-title{margin:30px 0 0 50px;line-height:35px}
+.auto_master_form_widget select{background:transparent;border:1px solid #b3b1b2;height:24px;font-size:13px;line-height:24px;padding:1px;width:150px}
+.auto_master_form_widget .left-master-section label,.auto_master_form_widget .right-master-section label{width:120px;float:left;padding:3px;font-size:14px}
+.auto_master_form_widget .left-master-section > div,.auto_master_form_widget .right-master-section > div{margin-bottom:5px}
+.auto_master_form_widget .compare-title input[type='submit']{border:0;text-transform:uppercase;font-size:18px;padding-right:50px;background:url(../images/compare-forward.jpg) right top;background-repeat:no-repeat;padding-top:8px;padding-bottom:8px}
+
+@media screen and (min-width: 1000px) and (max-width: 1350px){ 
+	.auto_master_form_widget .master-logo{ margin-right:30px; }
+	.auto_master_form_widget .break-point{ padding: 0px 20px 0 20px; }
+	.auto_master_form_widget .compare-title{ margin:30px 0 0 20px; }
+	.auto_master_form_widget .left-master-section label, .auto_master_form_widget .right-master-section label{ width:100px; }
+}
+
+@media screen and (min-width: 768px) and (max-width: 999px){
+	.auto_master_form_widget .master-logo{ width:130px; margin-top: 15px;margin-right: 5px; }
+	.auto_master_form_widget .left-master-section label, .auto_master_form_widget .right-master-section label{width: 87px;}
+	.auto_master_form_widget select{width: 130px;}
+	.auto_master_form_widget .break-point{padding: 0 10px;}
+	.auto_master_form_widget .compare-title{margin: 30px 0 0 10px;}
+ }
+ @media screen and (min-width: 320px) and (max-width: 787px){
+ 	.widget-wrapper .data-holder{ padding:10px 15px 15px;}
+ 	.auto_master_form_widget .master-logo{ width:100%; text-align: center; float: none; margin-right: 0px; margin-bottom: 10px; }
+    .auto_master_form_widget .left-master-section, .auto_master_form_widget .right-master-section{ width:100%; float: none; }
+    .auto_master_form_widget .break-point img{ display: none;}
+    .auto_master_form_widget .break-point{ width:100%; height:1px; background:#fff; font-size:0px;float: none; margin: 15px 0;}
+    .auto_master_form_widget .left-master-section label, .auto_master_form_widget .right-master-section label{width:50%;}
+    .auto_master_form_widget select{width:50%;}
+    .auto_master_form_widget .compare-title{ width:100%; float: none; margin:15px 0 0 0; text-align: center; }
+ }
