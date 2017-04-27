@@ -1946,7 +1946,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   padding: 10px;
   text-align: center;
 }
-.load-more-wrapper .add-more-block, .load-more-wrapper .add-more-block-front, .load-more-wrapper .removes-more-block, .load-more-wrapper-front .add-more-block, .load-more-wrapper-front .add-more-block-front, .load-more-wrapper-front .removes-more-block {
+.load-more-wrapper .add-more-block, .load-more-wrapper .add-more-block-front, .load-more-wrapper .removes-more-block, .load-more-wrapper .add-more-block-front-section, .load-more-wrapper-front .add-more-block, .load-more-wrapper-front .add-more-block-front, .load-more-wrapper-front .removes-more-block, .load-more-wrapper-front .add-more-block-front-section {
   display: inline-block;
   vertical-align: top;
   padding: 10px 20px;
@@ -1957,12 +1957,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   margin: 0 10px;
   text-transform: uppercase;
 }
-.load-more-wrapper .add-more-block .fa, .load-more-wrapper .add-more-block-front .fa, .load-more-wrapper .removes-more-block .fa, .load-more-wrapper-front .add-more-block .fa, .load-more-wrapper-front .add-more-block-front .fa, .load-more-wrapper-front .removes-more-block .fa {
+.load-more-wrapper .add-more-block .fa, .load-more-wrapper .add-more-block-front .fa, .load-more-wrapper .removes-more-block .fa, .load-more-wrapper .add-more-block-front-section .fa, .load-more-wrapper-front .add-more-block .fa, .load-more-wrapper-front .add-more-block-front .fa, .load-more-wrapper-front .removes-more-block .fa, .load-more-wrapper-front .add-more-block-front-section .fa {
   font-size: 16px;
   vertical-align: bottom;
   margin-left: 5px;
 }
-.load-more-wrapper .add-more-block:hover, .load-more-wrapper .add-more-block-front:hover, .load-more-wrapper .removes-more-block:hover, .load-more-wrapper-front .add-more-block:hover, .load-more-wrapper-front .add-more-block-front:hover, .load-more-wrapper-front .removes-more-block:hover {
+.load-more-wrapper .add-more-block:hover, .load-more-wrapper .add-more-block-front:hover, .load-more-wrapper .removes-more-block:hover, .load-more-wrapper .add-more-block-front-section:hover, .load-more-wrapper-front .add-more-block:hover, .load-more-wrapper-front .add-more-block-front:hover, .load-more-wrapper-front .removes-more-block:hover, .load-more-wrapper-front .add-more-block-front-section:hover {
   box-shadow: 0 0 5px 0 #666;
 }
 
