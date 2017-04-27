@@ -89,6 +89,7 @@ $field_cm_category_color = isset($section_banner_data->field_cm_category_color['
                             $url_type = $menu_link_data['url_type'];
                             $sponsored_class = $menu_link_data['sponsored_class'];
                             $style_tag = '';
+                            $color_value = '';
                             if (!empty($sponsored_class)) {
                               $color_value = $menu_data['db_data']['bk_color'];
                             }
