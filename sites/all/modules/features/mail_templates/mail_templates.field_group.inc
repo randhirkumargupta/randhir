@@ -33,7 +33,7 @@ function mail_templates_field_group_info() {
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
-        'classes' => 'mail-template-category',
+        'classes' => 'mail-template-category ask_an_expert',
         'description' => '',
         'show_label' => '1',
         'label_element' => 'h2',
@@ -46,7 +46,7 @@ function mail_templates_field_group_info() {
   $field_groups['group_ask_an_expert|node|mail_templates|form'] = $field_group;
 
   $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_cms_mail_template|node|mail_templates|form';
   $field_group->group_name = 'group_cms_mail_template';
@@ -103,7 +103,7 @@ function mail_templates_field_group_info() {
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
-        'classes' => 'mail-template-category',
+        'classes' => 'mail-template-category follow_story',
         'description' => '',
         'show_label' => '1',
         'label_element' => 'h2',
@@ -137,7 +137,7 @@ function mail_templates_field_group_info() {
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
-        'classes' => 'mail-template-category',
+        'classes' => 'mail-template-category loyalty_points_expiration',
         'description' => '',
         'show_label' => '1',
         'label_element' => 'h2',
@@ -171,7 +171,7 @@ function mail_templates_field_group_info() {
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
-        'classes' => 'mail-template-category',
+        'classes' => 'mail-template-category password_changed',
         'description' => '',
         'show_label' => '1',
         'label_element' => 'h2',
@@ -205,7 +205,7 @@ function mail_templates_field_group_info() {
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
-        'classes' => 'mail-template-category',
+        'classes' => 'mail-template-category print_team',
         'description' => '',
         'show_label' => '1',
         'label_element' => 'h2',
@@ -240,7 +240,7 @@ function mail_templates_field_group_info() {
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
-        'classes' => 'mail-template-category',
+        'classes' => 'mail-template-category product_expiration',
         'description' => '',
         'show_label' => '1',
         'label_element' => 'h2',
@@ -274,7 +274,7 @@ function mail_templates_field_group_info() {
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
-        'classes' => 'mail-template-category',
+        'classes' => 'mail-template-category sign_up',
         'description' => '',
         'show_label' => '1',
         'label_element' => 'h2',
@@ -312,7 +312,7 @@ function mail_templates_field_group_info() {
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
-        'classes' => 'mail-template-category',
+        'classes' => 'mail-template-category task_idea',
         'description' => '',
         'show_label' => '1',
         'label_element' => 'h2',
@@ -347,7 +347,7 @@ function mail_templates_field_group_info() {
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
-        'classes' => 'mail-template-category',
+        'classes' => 'mail-template-category ugc',
         'description' => '',
         'show_label' => '1',
         'label_element' => 'h2',
