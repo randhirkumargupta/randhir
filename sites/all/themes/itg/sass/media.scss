@@ -436,6 +436,19 @@
     font-size: 11px;
   }
   /*search page css end */
+  
+  #block-itg-live-tv-live-tv-video-page{
+    .program-livetv{
+      .live_tv_video{
+        max-width: 82%;
+        padding-bottom: 46.5%;
+      }
+      .social-icon{
+        width: 18%;
+        padding-top: 10px;
+      }
+    }
+  }
 }   
 
 
@@ -575,7 +588,18 @@
   }
   /*budget page css end*/
 
-
+  #block-itg-live-tv-live-tv-video-page{
+    .program-livetv{
+      .live_tv_video{
+        max-width: 83%;
+        padding-bottom: 47%;
+      }
+      .social-icon{
+        width: 17%;
+        padding-top: 40px;
+      }
+    }
+  }
 
 }
 
@@ -1950,9 +1974,12 @@
     }
     .program-livetv{
       padding: 10px;
-      .social-icon, .live_tv_video{
-        @include calculate-width(1);
-        @include float(none);
+      .social-icon{
+        width: 100%;
+      } 
+      .live_tv_video{
+        max-width: none;
+        padding-bottom: 56.25%;
       }
       .social-icon {
         li{

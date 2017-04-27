@@ -8802,19 +8802,27 @@ section.sidebar{
     }
     .program-livetv{
         background: #000;
-        padding: 15px 0px 75px 15px;
+        padding: 25px 0px 73px 20px;
         @include clearfix;       
         .live_tv_video{
-            @include float(left);
-            width: 82%;
+          float: left;
+          width: 100%;
+          max-width: 642px;
+          height: 0;
+          padding-bottom: 48.3%;
+          position: relative;
             iframe{
-                width: 100%;
-                height: 50vh;
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              left: 0;
+              top: 0;
             }
         }
         .social-icon{
-            @include float(right);   
-            width: 18%;
+            width: 108px;
+            overflow: hidden;
+            padding-top: 65px;
             a{
                 color: #aaa9a9;
                 font-size: 13px;
