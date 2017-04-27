@@ -387,6 +387,7 @@ header{
 /*                        border-right: 1px solid $itg-nav-bordercolor;*/
                         border-top:none;
                         height: 37px;
+                        white-space: nowrap;
                         @include pos(relative);
                         @include font($itg-nav-fontsize,37px,null);    
                         @extend .dib;

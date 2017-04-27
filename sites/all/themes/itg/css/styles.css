@@ -530,6 +530,7 @@ header {
   /*                        border-right: 1px solid $itg-nav-bordercolor;*/
   border-top: none;
   height: 37px;
+  white-space: nowrap;
   position: relative;
   font-size: 14px;
   font-size: 0.875rem;
