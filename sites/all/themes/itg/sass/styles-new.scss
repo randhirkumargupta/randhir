@@ -952,6 +952,43 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   }
 }
 
+.node-ugc-form{
+  .form-field-name-field-ugc-photo-image{
+    fieldset{
+      border: none;
+      legend{
+        float: left;
+        width: 200px;
+        &:after{
+          content:'*';
+          color: #f00;
+        }
+      }
+      .fieldset-wrapper{
+        overflow: hidden;
+        .tabledrag-toggle-weight-wrapper, table thead{display: none;}
+        table{
+          tbody{
+            tr{
+              td{
+                .tabledrag-handle{display: none;}
+                .form-submit{
+                  border: none;
+                  background: #fff;
+                  color: #F00;
+                  font-size: 12px;
+                }
+              }
+            }
+          }
+          & + .form-type-managed-file{margin-top: 10px;}
+        }
+        
+      }
+    }
+  }
+}
+
 .view-personalization-my-content{
   .views-table{
     width: 100%;
@@ -1830,7 +1867,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   width: 100%;
   padding: 10px;
   text-align: center;
-  .add-more-block, .add-more-block-front, .removes-more-block{
+  .add-more-block, .add-more-block-front, .removes-more-block, .add-more-block-front-section{
     display: inline-block;
     vertical-align: top;
     padding: 10px 20px;
