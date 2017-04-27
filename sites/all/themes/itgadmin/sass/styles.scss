@@ -793,6 +793,7 @@ fieldset.date-combo{
   margin-right: 20px;
 }
 .form-type-autocomplete-deluxe{
+  @extend .pos-rel;
   .autocomplete-deluxe-container{
     background: none;
     box-shadow: 0;
@@ -804,6 +805,13 @@ fieldset.date-combo{
       min-width: 332px;
       margin: 0;
     }
+  }
+  div.description{
+    @extend .desc-popup;
+    left: 600px;
+  }
+  &:hover div.description{
+    display: block;
   }
 }
 .form-type-autocomplete-deluxe{
@@ -3322,13 +3330,13 @@ fieldset#edit-select{
             border-bottom: 1px solid #d9d9d9;
             .term-detail{
               padding: 5px;
-              width: 10%;
+              width: 9%;
               float: left;
               &:first-child{
-                width: 30%;
+                width: 28%;
               }
               &:nth-child(2){
-                width: 20%;
+                width: 18%;
               }
               a{color: #1fb5ad;}
             }
@@ -3380,13 +3388,13 @@ fieldset#edit-select{
     height: 34px;
     padding: 8px 5px;
     &.cmt-title{
-      width: 30%;
+      width: 28%;
     }
     &.cmt-other{
       &:nth-child(2){
-        width: 20%;
+        width: 18%;
       }
-      width: 10%;
+      width: 9%;
 
     }
   }
