@@ -292,7 +292,7 @@ function itg_category_manager_term_get_content($key) {
   foreach ($itg_result as $newres) {
     $resurndata .= $newres->field_cm_select_type_value.' , ';
   }
-  return $itg_result[0]->cm_type;
+  return $resurndata;
 }
 /**
  * Implements hook_js_alter() for use custom ckeditor js()

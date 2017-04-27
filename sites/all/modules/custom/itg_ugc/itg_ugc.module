@@ -253,31 +253,30 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     }
 
     // prefill input value in recipe form
-    if ($form_id == 'recipe_node_form' && !empty($url_nid)) {
-      // get node values
-      $mongo_details = itg_ugc_content_details($url_nid);
-      $ugc_user_name = $mongo_details['name'];
-      $form['title']['#default_value'] = $mongo_details['title'];
-
-      if (!empty($mongo_details['video'])) {
-        $form['field_recipe_content_type'][LANGUAGE_NONE]['#default_value'] = 'Video';
-        $form['field_recipe_video'][LANGUAGE_NONE][0]['#default_value']['fid'] = $mongo_details['video'];
-      }
-
-      $form['field_recipe_description'][LANGUAGE_NONE][0]['#default_value'] = $mongo_details['description'];
-      $form['field_story_extra_large_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $mongo_details['image'];
-      $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['unid'];
-      $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
-      $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
-      if (!empty($ugc_user_name)) {
-        $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
-        $form['field_story_reporter']['#suffix'] = '<span class="byline">' . $ugc_user_name . ' (UGC User)</span></div>';
-      }
-    }
+//    if ($form_id == 'recipe_node_form' && !empty($url_nid)) {
+//      // get node values
+//      $mongo_details = itg_ugc_content_details($url_nid);
+//      $ugc_user_name = $mongo_details['name'];
+//      $form['title']['#default_value'] = $mongo_details['title'];
+//
+//      if (!empty($mongo_details['video'])) {
+//        $form['field_recipe_content_type'][LANGUAGE_NONE]['#default_value'] = 'Video';
+//        $form['field_recipe_video'][LANGUAGE_NONE][0]['#default_value']['fid'] = $mongo_details['video'];
+//      }
+//
+//      $form['field_recipe_description'][LANGUAGE_NONE][0]['#default_value'] = $mongo_details['description'];
+//      $form['field_story_extra_large_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $mongo_details['image'];
+//      $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['unid'];
+//      $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
+//      $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
+//      if (!empty($ugc_user_name)) {
+//        $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
+//        $form['field_story_reporter']['#suffix'] = '<span class="byline">' . $ugc_user_name . ' (UGC User)</span></div>';
+//      }
+//    }
 
     // prefill input value in photogallery form
-    if ($form_id == 'photogallery_node_form' && !empty($url_nid))
-    {
+    if ($form_id == 'photogallery_node_form' && !empty($url_nid)) {
       // get node values
       $mongo_details = itg_ugc_content_details($url_nid);
       $form['title']['#default_value'] = $mongo_details['title'];
@@ -285,41 +284,17 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
       $form['field_gallery_kicer'][LANGUAGE_NONE][0]['#default_value'] = $mongo_details['description'];
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
-
-      if (!empty($mongo_details['image']))
-      {
-        foreach ($form['field_gallery_image']['und'] as $delta => $field) {
-          if (is_numeric($delta))
-          {
-            // assign value in first field collection item
-            $form['field_gallery_image'][LANGUAGE_NONE][$delta]['field_images'][LANGUAGE_NONE][0]['#default_value']['fid'] = $mongo_details['image'];
-            if ($mongo_details['title'] != "")
-            {
-              $form['field_gallery_image'][LANGUAGE_NONE][$delta]['field_image_caption'][LANGUAGE_NONE][0]['value']['#value'] = $mongo_details['title'];
-            }
-          }
-        }
-      }
-      else
-      {
+      if(!empty($mongo_details['multiple_image'])) {
         $multiple_image = explode(',', $mongo_details['multiple_image']);
         $multiple_caption = explode(',', $mongo_details['image_caption']);
-        //$collection_id = $node->field_ugc_personalization_photo['und'][0]['value'];
-        //$collection_value = field_collection_item_load($collection_id);
-        //$form['field_gallery_image'][LANGUAGE_NONE][0]['field_images'][LANGUAGE_NONE][0]['#default_value']['fid'] = $collection_value->field_ugc_upload_photo['und'][0]['fid'];
-        foreach($multiple_image as $key => $value) {
-        $form['field_gallery_image'][LANGUAGE_NONE][$key]['field_images'][LANGUAGE_NONE][0]['#default_value']['fid'] = $value;
+        $default_setting_img_array = $form['field_gallery_image'][LANGUAGE_NONE][0];
+        foreach ($multiple_image as $key => $value) {
+          if ($key != 0) {
+            $form['field_gallery_image'][LANGUAGE_NONE][$key] = $default_setting_img_array;
+          }
+          $form['field_gallery_image'][LANGUAGE_NONE][$key]['field_images'][LANGUAGE_NONE][0]['#default_value'] = (array) file_load($value);
+          $form['field_gallery_image']['und'][$key]['field_image_caption'][LANGUAGE_NONE][0]['value']['#default_value'] = $multiple_caption[$key];
         }
-        foreach($multiple_caption as $key => $value) {
-        $form['field_gallery_image']['und'][$key]['field_image_caption']['und'][0]['value']['#default_value'] = $value;
-        }
-//        if ($collection_value->field_story_short_headline['und'][0]['value'] != "")
-//        {
-//          $form['field_gallery_image']['und'][0]['field_image_caption']['und'][0]['value']['#default_value'] = $collection_value->field_story_short_headline['und'][0]['value'];
-//        }
-
-        drupal_add_js('jQuery(document).ready(function() {
-                    jQuery("#edit-field-gallery-image-und-add-more").mousedown();});', array('type' => 'inline', 'scope' => 'footer'));
       }
     }
   }
@@ -348,6 +323,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   }
 
   if ($form_id == 'ugc_node_form') {
+    $form['field_ugc_photo_image']['und']['#file_upload_title'] = t('');
     $form['field_user_name'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('Name'));
     $form['field_user_email'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('Email'));
     $form['field_user_city'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('City'));
@@ -364,6 +340,10 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
         $form['field_story_source_type']['#access'] = FALSE;
         $form['field_source']['#access'] = FALSE;
       }
+    }
+    
+    if (!array_key_exists(FRONT_USER, $user->roles)) {
+      $form['field_ugc_upload_photo']['#access'] = FALSE;
     }
     
     $type = "ugc";
@@ -471,18 +451,10 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       // Hide field video tags.
       $form['field_story_client_title']['#prefix'] = '<div style="display: none;">';
       $form['field_story_client_title']['#suffix'] = '</div>';
-      // Hide show photo field.
-      $form['field_ugc_upload_photo']['#states'] = array(
+      $form['field_ugc_photo_image']['#states'] = array(
         'visible' => array(
-          array(
-            array(':input[name="field_ugc_ctype[und]"]' => array('value' => 'photogallery')),
-            'or',
-            array(':input[name="field_ugc_ctype[und]"]' => array('value' => 'recipe')),
-          ),
-        ),
-        'required' => array(
           ':input[name="field_ugc_ctype[und]"]' => array('value' => 'photogallery'),
-        )
+        ),
       );
       // Hide/show description field
       $form['field_user_message']['#states'] = array(
@@ -526,7 +498,7 @@ function ugc_form_submit_handler($form, &$form_state) {
   $content_type = $form_state['values']['field_ugc_ctype'][LANGUAGE_NONE][0]['value'];
   $title = $form_state['values']['title'];
   $description = $form_state['values']['field_user_message'][LANGUAGE_NONE][0]['value'];
-  $image = $form_state['values']['field_ugc_upload_photo'][LANGUAGE_NONE][0]['fid'];
+  //$image = $form_state['values']['field_ugc_upload_photo'][LANGUAGE_NONE][0]['fid'];
   $video = $form_state['values']['field_astro_video'][LANGUAGE_NONE][0]['fid'];
   $audio = $form_state['values']['field_recipe_audio'][LANGUAGE_NONE][0]['fid'];
   $publish_date = date('d/m/Y');
@@ -561,12 +533,36 @@ function ugc_form_submit_handler($form, &$form_state) {
     $multiple_image = implode(',', $photo_array);
     $multiple_caption = implode(',', $photo_caption);
   }
+  
+  // multi photo caption for anonyous user
+  if (!empty($form_state['values']['field_ugc_photo_image']['und'][0]['fid'])) {
+    foreach ($form_state['values']['field_ugc_photo_image'][LANGUAGE_NONE] as $delta => $field) {
+      if (is_numeric($delta)) {
+        // assign value in first field collection item
+        $fids = $form_state['values']['field_ugc_photo_image'][LANGUAGE_NONE][$delta]['fid'];
+        if($fids != 0) {
+        $anonyphoto_array[] = $fids;
+        }
+      }
+    }
 
-  if (!empty($image))
+    $anony_multiple_image = implode(',', $anonyphoto_array);
+  }
+
+  if(!empty($multiple_image)) {
+   $ins_image = $multiple_image; 
+  }
+  
+  if(!empty($anony_multiple_image)) {
+   $ins_image = $anony_multiple_image; 
+  }
+  
+  if (!empty($anony_multiple_image))
   {
-    $file = file_load($image);
-    file_usage_add($file, 'itg_custom_mongo', 'file', 1);
-    ugc_form_file_status($image);
+//    $file = file_load($image);
+//    file_usage_add($file, 'itg_custom_mongo', 'file', 1);
+//    ugc_form_file_status($image);
+    ugc_form_file_status($anony_multiple_image, 'yes');
   }
   if (!empty($video))
   {
@@ -589,7 +585,7 @@ function ugc_form_submit_handler($form, &$form_state) {
   {
     $con = mongodb();
     $people = $con->ugc_details;
-    $qry = array("unid" => $unique_id,"name" => $name, "email" => $email, "city" => $city, "section" => $section, "content_type" => $content_type, "title" => $title, "description" => $description, "image" => $image, "video" => $video, "audio" => $audio, "publish_date" => $publish_date, "publish_date_time" => $publish_date_time, "publish_status" => "", "updated_by" => "", "status" => 1, "rejected_date" => "", "uid" => $user->uid, "multiple_image" => $multiple_image, "image_caption" => $multiple_caption);
+    $qry = array("unid" => $unique_id,"name" => $name, "email" => $email, "city" => $city, "section" => $section, "content_type" => $content_type, "title" => $title, "description" => $description, "video" => $video, "audio" => $audio, "publish_date" => $publish_date, "publish_date_time" => $publish_date_time, "publish_status" => "", "updated_by" => "", "status" => 1, "rejected_date" => "", "uid" => $user->uid, "multiple_image" => $ins_image, "image_caption" => $multiple_caption);
     $result = $people->insert($qry);
   }
   
@@ -632,12 +628,14 @@ function ugc_form_file_status($fid, $multiple = NULL) {
   {
     $fid_exp = explode(',', $fid);
     foreach($fid_exp as $value) {
+      if($value != 0) {
       $file = file_load($value);
       file_usage_add($file, 'itg_custom_mongo', 'file', 4);
       db_update('file_managed') // Table name no longer needs {}
           ->fields(array('status' => 1))
           ->condition('fid', $value)
           ->execute();
+      }
     }
   }
 }
@@ -704,7 +702,7 @@ function itg_ugc_node_validate($node, $form, &$form_state) {
     // get value of body field
     $description = $node->field_user_message[LANGUAGE_NONE][0]['value'];
     // get fid of upload image
-    $upload_image = $node->field_ugc_upload_photo[LANGUAGE_NONE][0]['fid'];
+    $upload_image = $node->field_ugc_photo_image[LANGUAGE_NONE][0]['fid'];
     // get fid of upload video
     $upload_video = $node->field_astro_video[LANGUAGE_NONE][0]['fid'];
     // get fid of upload audio
@@ -727,7 +725,7 @@ function itg_ugc_node_validate($node, $form, &$form_state) {
     // validate if image field is blank
     if (($type == 'photogallery')) {
       if (empty($upload_image) && $arg[1] !== 'my-content') {
-        form_set_error('field_ugc_upload_photo', t("Image field is required."));
+        form_set_error('field_ugc_photo_image', t("Image field is required."));
       }
       if ($arg[1] === 'my-content' && empty($personal_multi_photo)) {
         form_set_error('field_ugc_personalization_photo', t('Upload photo field is required.'));
@@ -977,11 +975,26 @@ function itg_ugc_view_content($unique_id) {
           $output.= '<li>'.t('<strong>Content Type :</strong> <span>') . $final_view['content_type'] . '</span></li>';
           $output.= '<li>'.t('<strong>Name :</strong> <span>') . $final_view['name'] . '</span></li>';
           $output.= '<li>'.t('<strong>Email :</strong><span>') . $final_view['email'] . '</span></li>';
+          if(!empty($user_message)) {
           $output.= '<li>'.t('<strong>Description :</strong> <span>') . $user_message .'</span></li>';
+          }
+          if(!empty($final_view['city'])) {
           $output.= '<li>'.t('<strong>City :</strong> <span>') . $final_view['city'] . '</span></li>';
+          }
           if(!empty($final_view['image'])) {
           $file = file_load($final_view['image']);
           $output.= '<li>'.'<strong>Image :</strong><span> <img src="'.file_create_url($file->uri).'" alt="'.  file_create_url($file->uri).'"/></span></li>';
+          }
+          if(!empty($final_view['multiple_image'])) {
+          $myimgArray = explode(',', $final_view['multiple_image']);
+          $myimgcaption = explode(',', $final_view['image_caption']);
+          $img_no = 1;
+          foreach($myimgArray as $key => $value) {
+          $file = file_load($value);
+          $caption = 'caption : ' .$myimgcaption[$key];
+          $output.= '<li>'.'<strong>Image'.$img_no.' :</strong><span> <img src="'.file_create_url($file->uri).'" alt="'.  file_create_url($file->uri).'"/></span><span>'.$caption.'</span></li>';
+          $img_no++;
+          }
           }
           if(!empty($final_view['video'])) {
           $file = file_load($final_view['video']);
