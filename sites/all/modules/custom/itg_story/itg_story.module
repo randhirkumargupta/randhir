@@ -802,6 +802,7 @@ function itg_story_node_presave($node) {
  * {@inheritdoc}
  */
 function itg_story_node_view($node , $view_mode , $langcode) {
+  
   if ($node->type == 'story') {
     global $user , $theme;
     // for lock story

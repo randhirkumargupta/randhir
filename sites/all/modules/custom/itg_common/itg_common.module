@@ -18,7 +18,6 @@ module_load_include('inc', 'itg_common', 'includes/itg_common');
  * {@inheritdoc}
  */
 function itg_common_init() {
-  
   global $user, $base_url, $theme;
   
   //code for multidomain
@@ -101,6 +100,14 @@ function itg_common_permission() {
       'title' => t('Access third party config form'),
       'description' => t('Access third party config form'),
     ),
+    'access itg siteadmin' => array(
+      'title' => t('itg siteadmin permission') ,
+      'description' => t('itg siteadmin permission.') ,
+    ) ,
+    'access itg high level' => array(
+      'title' => t('itg high level permission') ,
+      'description' => t('itg high level permission.') ,
+    ) ,
   );
 }
 
@@ -484,12 +491,7 @@ function itg_common_node_presave($node) {
       
         
   }
-   if (!empty($node->nid)) {
-    if (in_array($node->type, $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated'){
-       itg_common_custompath_insert_load($node);
-    }
-  }
-
+ 
 }
 
 
@@ -498,7 +500,7 @@ function itg_common_node_presave($node) {
  * @param object $node
  */
 function itg_common_node_insert($node) {
-  $ctype_array = array('photogallery', 'story', 'videogallery', 'podcast', 'food_news', 'cooking_tips', 'recipe');
+  /*$ctype_array = array('photogallery', 'story', 'videogallery', 'podcast', 'food_news', 'cooking_tips', 'recipe');
   // custom alias cnditions
   if (in_array($node->type, $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
     itg_common_custompath_insert_load($node);
@@ -506,7 +508,7 @@ function itg_common_node_insert($node) {
   elseif ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
 
     itg_common_custompath_migrated_load($node);
-  }
+  }*/
 }
 
 /**
@@ -514,11 +516,11 @@ function itg_common_node_insert($node) {
  * @param object $node
  */
 function itg_common_node_update($node) {
-  $ctype_array = array('photogallery', 'story', 'videogallery', 'podcast', 'food_news', 'cooking_tips', 'recipe');
+ /* $ctype_array = array('photogallery', 'story', 'videogallery', 'podcast', 'food_news', 'cooking_tips', 'recipe');
   // custom alias cnditions
   if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
     itg_common_custompath_migrated_load($node, 'update_migrated');
-  }
+  }*/
 }
 
 /**
@@ -866,8 +868,11 @@ function itg_draft_form_custom_callback($form, &$form_state) {
   
   if ($form_state['node']->workbench_moderation_state_new == 'draft') {    
     $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination='.$_GET['destination'];    
-    drupal_set_message(t($form_state['values']['type'] . ' <b>' . $form_state['values']['title'] . '</b> has been save successfully.'));
-    $_GET['destination'] = $redirect_path;    
+   // drupal_set_message(t($form_state['values']['type'] . ' <b>' . $form_state['values']['title'] . '</b> has been save successfully.'));
+   $_GET['destination'] = $redirect_path;
+    drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
+    
+        
   }
   
 }

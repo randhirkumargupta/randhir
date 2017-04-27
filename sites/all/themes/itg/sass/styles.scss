@@ -3365,36 +3365,7 @@ h1.category-heading{
         }
     }
     #slider-range{
-        border:none;
-        margin: 20px 0 10px 0;
-        @include calculate-width(1);
-        font-family: $itg-roboto;
-        &.ui-slider-horizontal{            
-            height: 30px;
-            .ui-slider-handle{
-                width: 80px;
-                height: 38px;
-                background: #e6e5e3;
-                border: 1px solid #c1c1c1;
-                top: -20px;
-                margin-left: 0;
-                line-height: 38px;
-                text-align: center;
-                font-size: 15px;
-                color: #323232;
-                cursor: move;
-                background-image: linear-gradient(#f5f3f2,#e7e5e4);
-            }
-        }
-        &.ui-widget-content{
-            background: $white-color url(../images/live-block-slider-icon.jpg) repeat-x;
-        }
-        .ui-widget-header{
-            background: $white-color url(../images/live-block-slider-icon.jpg) repeat-x;
-            + a + a{
-                display: none;
-            }
-        }   
+      display: none;
     }
     .live-hightlight{
         h3{
@@ -3417,7 +3388,37 @@ h1.category-heading{
             text-transform: uppercase;
             @include font(16px,null,700);
             margin-top: 30px;
-            padding-bottom: 10px;
+            padding-bottom: 35px;
+        }
+        .irs{
+          .irs-line{
+            height: 30px;
+            top: 0;
+            background: $white-color url(../images/live-block-slider-icon.jpg) repeat-x;
+            span{
+              opacity: 0;
+            }
+          }
+          .irs-min, .irs-max, .irs-from, .irs-to{
+            display: none !important;
+          }
+          .irs-bar, .irs-bar-edge{
+            opacity: 0;
+          }
+          .irs-slider.single{
+            width: 80px;
+            height: 38px;
+            background: #e6e5e3;
+            border: 1px solid #c1c1c1;
+            top: -20px;
+            margin-left: 0;
+            line-height: 38px;
+            text-align: center;
+            font-size: 15px;
+            color: #323232;
+            cursor: move;
+            background-image: linear-gradient(#f5f3f2,#e7e5e4);
+          }
         }
     }
 }

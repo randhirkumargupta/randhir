@@ -31,16 +31,24 @@ function mail_templates_listing_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'node';
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = '<p>No Records Found</p>';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Action';
-  /* Field: Content: CMS Status */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_cms_status']['id'] = 'field_cms_status';
   $handler->display->display_options['fields']['field_cms_status']['table'] = 'field_data_field_cms_status';
   $handler->display->display_options['fields']['field_cms_status']['field'] = 'field_cms_status';
@@ -76,10 +84,6 @@ function mail_templates_listing_views_default_views() {
   $handler->display->display_options['fields']['field_mail_template_category']['field'] = 'field_mail_template_category';
   $handler->display->display_options['fields']['field_mail_template_category']['label'] = 'Template Category';
   $handler->display->display_options['fields']['field_mail_template_category']['element_label_colon'] = FALSE;
-  /* Sort criterion: Content: CMS mail template category (field_cms_mail_template_category) */
-  $handler->display->display_options['sorts']['field_cms_mail_template_category_value']['id'] = 'field_cms_mail_template_category_value';
-  $handler->display->display_options['sorts']['field_cms_mail_template_category_value']['table'] = 'field_data_field_cms_mail_template_category';
-  $handler->display->display_options['sorts']['field_cms_mail_template_category_value']['field'] = 'field_cms_mail_template_category_value';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -125,15 +129,6 @@ function mail_templates_listing_views_default_views() {
   $handler->display->display_options['fields']['field_mail_templates_category']['field'] = 'field_mail_templates_category';
   $handler->display->display_options['fields']['field_mail_templates_category']['label'] = 'Mail Templates';
   $handler->display->display_options['fields']['field_mail_templates_category']['element_label_colon'] = FALSE;
-  /* Field: Content: CMS Status */
-  $handler->display->display_options['fields']['field_cms_status']['id'] = 'field_cms_status';
-  $handler->display->display_options['fields']['field_cms_status']['table'] = 'field_data_field_cms_status';
-  $handler->display->display_options['fields']['field_cms_status']['field'] = 'field_cms_status';
-  $handler->display->display_options['fields']['field_cms_status']['label'] = '';
-  $handler->display->display_options['fields']['field_cms_status']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_cms_status']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_cms_status']['alter']['text'] = '[field_cms_status] ([field_cms_mail_template_category])';
-  $handler->display->display_options['fields']['field_cms_status']['element_label_colon'] = FALSE;
   /* Field: Content: New Task Status */
   $handler->display->display_options['fields']['field_new_task_status']['id'] = 'field_new_task_status';
   $handler->display->display_options['fields']['field_new_task_status']['table'] = 'field_data_field_new_task_status';
@@ -162,12 +157,51 @@ function mail_templates_listing_views_default_views() {
   $handler->display->display_options['fields']['field_product_expiration_status']['label'] = '';
   $handler->display->display_options['fields']['field_product_expiration_status']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_product_expiration_status']['element_label_colon'] = FALSE;
+  /* Field: Content: Blog Status */
+  $handler->display->display_options['fields']['field_blog_status']['id'] = 'field_blog_status';
+  $handler->display->display_options['fields']['field_blog_status']['table'] = 'field_data_field_blog_status';
+  $handler->display->display_options['fields']['field_blog_status']['field'] = 'field_blog_status';
+  $handler->display->display_options['fields']['field_blog_status']['label'] = '';
+  $handler->display->display_options['fields']['field_blog_status']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_blog_status']['element_label_colon'] = FALSE;
+  /* Field: Content: Photo Gallery Status */
+  $handler->display->display_options['fields']['field_photo_gallery_status']['id'] = 'field_photo_gallery_status';
+  $handler->display->display_options['fields']['field_photo_gallery_status']['table'] = 'field_data_field_photo_gallery_status';
+  $handler->display->display_options['fields']['field_photo_gallery_status']['field'] = 'field_photo_gallery_status';
+  $handler->display->display_options['fields']['field_photo_gallery_status']['label'] = '';
+  $handler->display->display_options['fields']['field_photo_gallery_status']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_photo_gallery_status']['element_label_colon'] = FALSE;
+  /* Field: Content: Podcast Status */
+  $handler->display->display_options['fields']['field_podcast_status']['id'] = 'field_podcast_status';
+  $handler->display->display_options['fields']['field_podcast_status']['table'] = 'field_data_field_podcast_status';
+  $handler->display->display_options['fields']['field_podcast_status']['field'] = 'field_podcast_status';
+  $handler->display->display_options['fields']['field_podcast_status']['label'] = '';
+  $handler->display->display_options['fields']['field_podcast_status']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_podcast_status']['element_label_colon'] = FALSE;
+  /* Field: Content: Story Status */
+  $handler->display->display_options['fields']['field_story_status']['id'] = 'field_story_status';
+  $handler->display->display_options['fields']['field_story_status']['table'] = 'field_data_field_story_status';
+  $handler->display->display_options['fields']['field_story_status']['field'] = 'field_story_status';
+  $handler->display->display_options['fields']['field_story_status']['label'] = '';
+  $handler->display->display_options['fields']['field_story_status']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_story_status']['element_label_colon'] = FALSE;
+  /* Field: Content: Video Status */
+  $handler->display->display_options['fields']['field_video_status']['id'] = 'field_video_status';
+  $handler->display->display_options['fields']['field_video_status']['table'] = 'field_data_field_video_status';
+  $handler->display->display_options['fields']['field_video_status']['field'] = 'field_video_status';
+  $handler->display->display_options['fields']['field_video_status']['label'] = '';
+  $handler->display->display_options['fields']['field_video_status']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_video_status']['element_label_colon'] = FALSE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Template Status';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_cms_status]
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_blog_status]
+[field_photo_gallery_status]
+[field_podcast_status]
+[field_story_status]
+[field_video_status]
 [field_new_task_status]
 [field_ugc_comments_status]
 [field_ask_an_expert_case]
@@ -200,7 +234,7 @@ function mail_templates_listing_views_default_views() {
   $handler->display->display_options['filters']['field_mail_templates_category_value']['field'] = 'field_mail_templates_category_value';
   $handler->display->display_options['filters']['field_mail_templates_category_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_mail_templates_category_value']['expose']['operator_id'] = 'field_mail_templates_category_value_op';
-  $handler->display->display_options['filters']['field_mail_templates_category_value']['expose']['label'] = 'Mail Templates';
+  $handler->display->display_options['filters']['field_mail_templates_category_value']['expose']['label'] = 'Select Mail Events';
   $handler->display->display_options['filters']['field_mail_templates_category_value']['expose']['operator'] = 'field_mail_templates_category_value_op';
   $handler->display->display_options['filters']['field_mail_templates_category_value']['expose']['identifier'] = 'field_mail_templates_category_value';
   $handler->display->display_options['filters']['field_mail_templates_category_value']['expose']['remember_roles'] = array(

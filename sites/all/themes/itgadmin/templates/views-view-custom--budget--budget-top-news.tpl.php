@@ -28,7 +28,7 @@
 
 
                             </a>
-                            <h3><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h3>           
+                            <h3 title="<?php echo strip_tags($desc);?>"><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h3>           
                         </div>
 
                     <?php
@@ -45,7 +45,7 @@
                                 }
                                 ?>   
        </a>
-                            <p><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></p>
+                            <p title="<?php echo strip_tags($desc);?>"><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></p>
                         </div>
 
                     <?php } ?>
@@ -67,7 +67,7 @@
 
                         if ($index > 2) {
                             ?>
-                            <li><?php echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></li>
+                            <li title="<?php echo strip_tags($desc);?>"><?php echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></li>
 
 
                         <?php } ?>
