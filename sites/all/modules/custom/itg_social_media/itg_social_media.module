@@ -522,6 +522,17 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
       );
       $form['scheduled_time']['max']['#type'] = 'date_popup';
       $form['scheduled_time']['max']['#date_format'] = 'Y-m-d';
+      
+      drupal_add_js('
+           jQuery(document).ready(function(){
+           var getlandgt = jQuery(".view-social-media-report table").length;
+if(getlandgt==0) {
+jQuery(".feed-icon").hide();
+}
+        });', array(
+          'type' => 'inline',
+          'scope' => 'footer',
+      ));
       drupal_add_js('
            jQuery("#download-pdf-sm").live("click", function () {
             var gersvg = jQuery("svg").html();
