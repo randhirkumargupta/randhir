@@ -11,7 +11,7 @@
           <?php if (!empty($node_data['uri'])) { ?>
             <div class="dm-pic">
               <a class="<?php echo $video_class;?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['nid']}") ?>">
-                <img src="<?php print image_style_url("widget_small", $node_data['uri']); ?>" alt="" />
+                <img src="<?php print image_style_url("widget_small", $node_data['uri']); ?>" alt="<?php echo $node_data['field_story_small_image_alt'];?>" title="<?php echo $node_data['field_story_small_image_title'];?>"/>
               </a>
             </div>
             <?php
@@ -28,11 +28,11 @@
           <div class="dm-detail">
 
             <?php if (!empty($node_data['extra'])) : ?>
-              <h4><?php print $node_data['extra']; ?></h4>
+              <h4 title="<?php print $node_data['extra']; ?>" ><?php print $node_data['extra']; ?></h4>
             <?php endif; ?>
 
             <?php if (!empty($node_data['title'])) : ?> 
-              <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/".$node_data["nid"]); ?>">
+              <a title="<?php print $node_data['title']; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/".$node_data["nid"]); ?>">
               <p class="dont-miss-widget dont-miss-<?php echo $node_data['nid'] ?>">
                
                 <?php //echo mb_strimwidth($node_data['title'], 0, 110, "..");?>

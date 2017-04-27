@@ -37,6 +37,7 @@
 //            $link_title_display = $icon;
 //          }
           $style_tag = '';
+          $color_value = '';
           if(!empty($sponsored_class)) {
             $color_value = $menu_data['db_data']['bk_color'];
           }

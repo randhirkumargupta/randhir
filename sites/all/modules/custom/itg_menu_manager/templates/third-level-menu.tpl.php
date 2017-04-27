@@ -61,7 +61,7 @@ $field_cm_category_color = isset($section_banner_data->field_cm_category_color['
               <div class="col-md-3 col-sm-3 col-xs-6">
                   <?php
                   if (!empty($src) && isset($uri)) {
-                    print "<img src='" . $src . "' alt='' />";
+                    print l("<img src='" . $src . "' />" , "taxonomy/term/" . arg(2) , array("html" => TRUE));
                   }
                   ?>
               </div>
@@ -89,6 +89,7 @@ $field_cm_category_color = isset($section_banner_data->field_cm_category_color['
                             $url_type = $menu_link_data['url_type'];
                             $sponsored_class = $menu_link_data['sponsored_class'];
                             $style_tag = '';
+                            $color_value = '';
                             if (!empty($sponsored_class)) {
                               $color_value = $menu_data['db_data']['bk_color'];
                             }
