@@ -68,12 +68,15 @@ function itg_category_manager_construct_nested_taxonomy_item_list(&$tree, &$item
 
   foreach (array_reverse($tree) as $term) {
     $other_details = itg_category_manager_tree_detail($term->tid);
+   // p($other_details);
+    $content_cat = itg_category_manager_term_get_content($term->tid);
     $output = '<div class="term-wrapper"><div class="term-detail cmd-heading"><i class="fa fa-minus-square-o" aria-hidden="true"></i><i class="fa fa-plus-square-o" aria-hidden="true"></i><p>' . $term->name . '</p></div>';
 
     $output .= '<div class="term-detail" id ="sef-url-' . $term->tid . '">' . $actual_base_url . '/' . $other_details->sef_url;
     $output .= '<span title="Copy to clipboard" class="itg-clipboard" data-clipboard-target="#sef-url-' . $term->tid . '"><i class="fa fa-clipboard" aria-hidden="true"></i></span>';
     $output .= '</div>';
     $output .= '<div class="term-detail">' . $term->tid . '</div>';
+    $output .= '<div class="term-detail">' . $content_cat . '</div>';
     $output .= '<div class="term-detail">' . format_date($other_details->created, 'custom_date_d_m_y_') . '</div>';
     $output .= '<div class="term-detail">' . format_date($other_details->changed, 'custom_date_d_m_y_') . '</div>';
     $term_status = $other_details->status == 1 ? t('Active') : t('Inactive');

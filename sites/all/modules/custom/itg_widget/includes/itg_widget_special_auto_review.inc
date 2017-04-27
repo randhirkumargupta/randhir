@@ -67,7 +67,7 @@ function itg_widget_tech_reviews_ordering_data($info) {
     if ($theme == FRONT_THEME_NAME) {
       $cat_id = arg(2);
     }
-    $result = get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name, $cat_id, DONT_MISS_MAX_RANGE, DONT_MISS_MIN_RANGE);
+    $result = get_view_nodes_form_custom_table_review_widgets($widget_name, $cat_id, DONT_MISS_MAX_RANGE, DONT_MISS_MIN_RANGE);
     $entity_data = array();
     foreach ($result as $entity_data_node) {
       $entity_data[] = $entity_data_node;
