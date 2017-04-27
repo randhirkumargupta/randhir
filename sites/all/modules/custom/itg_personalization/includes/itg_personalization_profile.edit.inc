@@ -266,7 +266,7 @@ function itg_personalization_city_ajax_callback($form, &$form_state) {
  * @param type $country_id
  * @return type
  */
-function get_state_by_country($country_id = NULL) {
+function get_state_by_country($country_id) {
     $query = db_select('field_data_field_state_county', 'c');
     $query->fields('c', array('entity_id'));
     if (!empty($country_id)) {
@@ -289,7 +289,7 @@ function get_state_by_country($country_id = NULL) {
  * @param type $state_id
  * @return type
  */
-function get_city_by_state($state_id = NULL) {
+function get_city_by_state($state_id) {
   
     $query = db_select('field_data_field_city_states', 'c');
     $query->fields('c', array('entity_id'));
