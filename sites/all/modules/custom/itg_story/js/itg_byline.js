@@ -19,7 +19,8 @@
                 var repo_id = [];
                 var nd_id = jQuery('#edit-field-story-reporter-und-0-target-id').val();
                 //var someText="don't extract(value_a) but extract(value_b)";
-                var insval = nd_id.match(/\(([^)]*)\)[^(]*$/)[1];
+                //var insval = nd_id.match(/\(([^)]*)\)[^(]*$/)[1];
+                var insval = nd_id.match(/\{(.*)\}/)[1];
                 var cur_val = jQuery('#edit-field-reporter-publish-id-und-0-value').val();
                 if (cur_val) {
                     jQuery('#edit-field-reporter-publish-id-und-0-value').val(cur_val + "," + insval);

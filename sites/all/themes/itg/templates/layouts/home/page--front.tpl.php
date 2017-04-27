@@ -906,7 +906,7 @@ if ($theme != 'itgadmin') {
     ?>
               <div class="row itg-common-section itg-third-party-section" >
                 <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
-                  <div class="widget-help-text">Section Card</div>
+                  <div class="widget-help-text">Third Party</div>
                   <div class="itg-widget">
                     <div class="widget-wrapper">
                       <?php
@@ -920,7 +920,7 @@ if ($theme != 'itgadmin') {
                   </div>               
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
-                  <div class="widget-help-text">Section Card</div>
+                  <div class="widget-help-text">Third Party</div>
                   <div class="itg-widget">
                     <div class="widget-wrapper">
                       <?php
@@ -934,7 +934,7 @@ if ($theme != 'itgadmin') {
                   </div>               
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
-                  <div class="widget-help-text">Section Card</div>
+                  <div class="widget-help-text">Third Party</div>
                   <div class="itg-widget">
                     <div class="widget-wrapper">
                       <?php
