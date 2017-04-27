@@ -276,6 +276,24 @@ function itg_category_manager_term_state_content($nodeid , $key) {
   return $flag;
 }
 
+
+/**
+ * Get term state drom db
+ * 
+ * @param int $tid
+ * @return boolean
+ */
+function itg_category_manager_term_get_content($key) {
+  $itg_query = db_select('field_data_field_cm_select_type', 'itg')
+          ->fields('itg', array('field_cm_select_type_value'));
+  
+  $itg_query->condition('entity_id', $key, '=');
+  $itg_result = $itg_query->execute()->fetchAll();
+  foreach ($itg_result as $newres) {
+    $resurndata .= $newres->field_cm_select_type_value.' , ';
+  }
+  return $resurndata;
+}
 /**
  * Implements hook_js_alter() for use custom ckeditor js()
  * 

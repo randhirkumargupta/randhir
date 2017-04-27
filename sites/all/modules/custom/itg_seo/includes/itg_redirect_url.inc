@@ -8,7 +8,7 @@
 function itg_get_node_redirect_url($node, $op) {
   global $base_url;
   
-  if ($base_url == FRONT_URL) {
+  //if ($base_url == FRONT_URL) {
     if (isset($node->type) && ($node->type == 'story')) {
       $story_expiry_date = '';
       $current_time = time();
@@ -26,7 +26,7 @@ function itg_get_node_redirect_url($node, $op) {
         //itg_get_redirect_url('1208769');
       }
     }
-  }
+  //}
   
 }
 
@@ -36,7 +36,7 @@ function itg_get_node_redirect_url($node, $op) {
  * @param string $op
  */
 function itg_seo_taxonomy_term_load($terms) {
-  if ($base_url == FRONT_URL) {
+  //if ($base_url == FRONT_URL) {
     if (arg(0) == 'taxonomy' && arg(1) == 'term' && is_numeric(arg(2))) {
       if (function_exists('itg_category_manager_term_state')) { 
         if (!itg_category_manager_term_state(arg(2))) {      
@@ -44,7 +44,7 @@ function itg_seo_taxonomy_term_load($terms) {
         }
       }
     }
-  }
+ // }
 }
 
 /**
