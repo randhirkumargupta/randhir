@@ -93,7 +93,14 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
             <ul class="slick-thumbs-slider">
                 <?php foreach ($rows as $index => $row): ?>
                     <li >
-                        <?php print $row['field_images_1']; ?>
+                        <?php 
+                        if(!empty($row['field_photo_small_image'])) {
+                           print $row['field_photo_small_image'];
+                        }else {
+                          print '<img  height="66" width="88" src="'.$base_url . "/" . drupal_get_path('theme', 'itg').'/images/itg_image88x66.jpg" alt="" />';
+
+                        }
+                        ?>
                     </li>
                 <?php endforeach; ?>
             </ul>
