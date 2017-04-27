@@ -1854,7 +1854,7 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
     $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
     $query->fields('esi_file', array('uri'));
     $query->addExpression("esi_file.uri", 'esi_file_uri');
-     $query->fields('esi', array('field_story_extra_small_imag_image_alt', 'field_story_extra_small_imag_title'));
+    $query->fields('esi', array('field_story_extra_small_image_alt', 'field_story_extra_small_image_title'));
   }
 
   if ($widget_name == 'featured_photo_carousel' || $widget_name == 'video_carousel_list_widget') {
@@ -1947,7 +1947,7 @@ function get_view_nodes_form_custom_table_for_widgets_special($widget_name, $cat
     $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
     $query->fields('esi_file', array('uri'));
     $query->fields('si', array('field_story_small_image_alt', 'field_story_small_image_title'));
-    $query->fields('esi', array('field_story_extra_small_imag_image_alt', 'field_story_extra_small_imag_title'));
+    $query->fields('esi', array('field_story_extra_small_image_alt', 'field_story_extra_small_image_title'));
   }
 
   $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
