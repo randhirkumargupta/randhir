@@ -96,7 +96,7 @@ window.addEventListener("message", function(ev) {
           }
     ?>
       <?php print render($title_prefix); ?>
-      <?php if ($title): ?>
+      <?php if ($title && $flag): ?>
         <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
       <?php endif; ?>
 

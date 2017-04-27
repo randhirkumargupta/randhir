@@ -85,9 +85,10 @@ function itg_layout_list_delete() {
  * @return array $output
  */
 function itg_layout_delete() {
-  //$field_name = '';
-  //$new_length = '';
-  //itg_change_text_field_max_length($field_name, $new_length)
+  $field_name = '';
+  $new_length = '';
+  itg_change_text_field_max_length($field_name, $new_length);
+  
   //phpinfo();
 //  $module_list = module_disable();
 //  echo '@@@';
