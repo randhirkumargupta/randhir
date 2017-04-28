@@ -213,7 +213,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'bundle' => 'field_breaking_content_details',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Mobile Subscribers',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -247,7 +247,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'bundle' => 'field_breaking_content_details',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Notification ',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -418,7 +418,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'bundle' => 'breaking_news',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Short description',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -507,7 +507,7 @@ function feature_for_breaking_news_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Display on',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -546,7 +546,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'bundle' => 'breaking_news',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Section',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -627,7 +627,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'bundle' => 'breaking_news',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Activate Live TV',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -821,7 +821,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'bundle' => 'breaking_news',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Highlights',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -863,7 +863,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'bundle' => 'breaking_news',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Tags',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1137,7 +1137,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'bundle' => 'breaking_news',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Display title',
     'display' => array(
       'default' => array(
         'label' => 'above',
