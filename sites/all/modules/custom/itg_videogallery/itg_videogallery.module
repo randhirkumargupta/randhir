@@ -96,8 +96,8 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'videogallery_node_form':
       unset($form['actions']['preview_changes']);
-       $form['field_story_expert_name']['#access'] = FALSE;
-       $form['field_story_syndication']['und']['#title'] = NULL;
+      $form['field_story_expert_name']['#access'] = FALSE;
+      $form['field_story_syndication']['und']['#title'] = NULL;
       if (arg(1) == 'add') {
         drupal_set_title('Upload Video');
       }
@@ -1468,11 +1468,11 @@ function itg_videogallery_make_bitrate_url($video_url, $bitrates) {
   $firestparet_replace = str_replace(VIDEO_MAIN_URL, VIDEO_BITRATE_URL, $video_url);
   //p($firestparet_replace);
   $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $firestparet_replace);
-  if(strpos($withoutExt, '1024_512')) {
+  if (strpos($withoutExt, '1024_512')) {
     $returnstring = substr($withoutExt, 0, strpos($withoutExt, '1024_512'));
-  }else {
-        $returnstring = substr($withoutExt, 0, strpos($withoutExt, '512'));
-
+  }
+  else {
+    $returnstring = substr($withoutExt, 0, strpos($withoutExt, '512'));
   }
   $returnstring = $returnstring . '1024_,' . $bitrates . ',.mp4.csmil/master.m3u8';
   //p($returnstring);
@@ -1575,37 +1575,35 @@ function daily_motion_video_dashboard($form, &$form_state) {
       '#type' => 'fieldset',
       '#title' => 'Daily Motion Video Dashboard',
   );
- $form['fieldset']['video_title'] = array(
+  $form['fieldset']['video_title'] = array(
       '#type' => 'textfield',
       '#title' => 'Title',
       '#default_value' => isset($_GET['video_title']) ? $_GET['video_title'] : '',
   );
- $form['fieldset']['channel'] = array(
+  $form['fieldset']['channel'] = array(
       '#type' => 'select',
       '#title' => 'Channel',
       '#options' => array('' => '-All-', 'ftp' => 'FTP', 'LOCAL' => 'LOCAL'),
       '#default_value' => isset($_GET['channel']) ? $_GET['channel'] : '',
   );
- 
-    $form['fieldset']['from_time'] = array(
-        '#type' => 'date_popup',
-        '#title' => t("From"),
-        '#date_format' => 'd/m/Y H:i',
-        '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly'),
-        '#default_value' => isset($_GET['from_time']) ? $_GET['from_time'] : format_date(REQUEST_TIME, 'custom', 'd/m/Y H:i'),
-        '#date_timezone' => date_default_timezone(),
-        
-    );
-    // Facebook video schdule time.
-    $form['fieldset']['to_time'] = array(
-        '#type' => 'date_popup',
-        '#title' => t("To"),
-        '#date_format' => 'd/m/Y H:i',
-        '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly'),
-         '#default_value' => isset($_GET['to_time']) ? $_GET['to_time'] : format_date(REQUEST_TIME, 'custom', 'd/m/Y H:i'),
-        '#date_timezone' => date_default_timezone(),
-        
-    );
+
+  $form['fieldset']['from_time'] = array(
+      '#type' => 'date_popup',
+      '#title' => t("From"),
+      '#date_format' => 'd/m/Y H:i',
+      '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly'),
+      '#default_value' => isset($_GET['from_time']) ? $_GET['from_time'] : format_date(REQUEST_TIME, 'custom', 'd/m/Y H:i'),
+      '#date_timezone' => date_default_timezone(),
+  );
+  // Facebook video schdule time.
+  $form['fieldset']['to_time'] = array(
+      '#type' => 'date_popup',
+      '#title' => t("To"),
+      '#date_format' => 'd/m/Y H:i',
+      '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly'),
+      '#default_value' => isset($_GET['to_time']) ? $_GET['to_time'] : format_date(REQUEST_TIME, 'custom', 'd/m/Y H:i'),
+      '#date_timezone' => date_default_timezone(),
+  );
   $form['fieldset']['video_id'] = array(
       '#type' => 'textfield',
       '#title' => 'Daily motion video ID',
@@ -1654,20 +1652,19 @@ function daily_motion_video_dashboard_submit($form, &$form_state) {
   $video_id = $form_state['values']['video_id'];
   $filtertype = $form_state['values']['filtertype'];
   $video_title = $form_state['values']['video_title'];
-  $channel= $form_state['values']['channel'];
-   $video_title = $form_state['values']['video_title'];
-  $channel= $form_state['values']['channel'];
+  $channel = $form_state['values']['channel'];
+  $video_title = $form_state['values']['video_title'];
+  $channel = $form_state['values']['channel'];
   $totime = $form_state['values']['to_time'];
-  $fromtime= $form_state['values']['from_time'];
+  $fromtime = $form_state['values']['from_time'];
 
   drupal_goto('daily-motion-video-dashboard', array('query' => array(
-      'video_title' => $video_title,
+          'video_title' => $video_title,
           'channel' => $channel,
           'filtertype' => $filtertype,
           'video_id' => $video_id,
           'from_time' => $fromtime,
           'to_time' => $totime,
-      
   )));
 }
 
@@ -1714,25 +1711,25 @@ e.preventDefault();
   if (isset($video_id) && !empty($video_id)) {
     $query->condition('n.video_id', $video_id, '=');
   }
-  
+
   if (isset($video_title) && !empty($video_title)) {
 
-    $query->condition('n.title', '%'.db_like($video_title). '%', 'LIKE');
+    $query->condition('n.title', '%' . db_like($video_title) . '%', 'LIKE');
   }
-   if (isset($channel) && !empty($channel)) {
-   
+  if (isset($channel) && !empty($channel)) {
+
     $query->condition('n.type', $channel, '=');
   }
   if (isset($from_time) && !empty($from_time)) {
-   
+
     $query->condition('n.upload_time', $from_time, '>=');
   }
   if (isset($to_time) && !empty($to_time)) {
-   
+
     $query->condition('n.upload_time', $to_time, '<=');
   }
 
- //print strtr((string) $query, $query->arguments());die;
+  //print strtr((string) $query, $query->arguments());die;
   $query = $query->extend('PagerDefault')->limit(50);
   $query->orderBy('n.eid', 'DESC');
 
@@ -1826,11 +1823,15 @@ function itg_videogallery_get_file_details() {
 
   $responce = "";
   foreach ($getids as $key => $file_value) {
+    $video_id = explode('#', $file_value);
     $api = itg_videogallery_dailymotion_api();
     $thumb_url = $api->get(
             '/video/' . $video_id[0], array('fields' => array('embed_url'))
     );
-    $video_id = explode('#', $file_value);
+    
+    if ($thumb_url['embed_url']) {
+      $video_id = end(explode('/', $thumb_url['embed_url']));
+    }
     $responce.=' <iframe class="video_data" id="video_frame_' . $video_id . '" frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_id . '?autoplay=0&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
   }
   exit($responce);
@@ -2402,7 +2403,7 @@ function itg_videogallery_video_bitrate() {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $content = curl_exec($ch);
     curl_close($ch);
-p($content);
+    p($content);
     db_merge('itg_video_bitrates_data')
             ->key(array('video_id' => $vid->solr_video_id))
             ->fields(array(
@@ -2717,16 +2718,16 @@ jQuery('#edit-field-story-category-tid').trigger('change');
 jQuery(this).find('a').addClass('active');
 });", array('type' => 'inline', 'scope' => 'footer'));
     if (!empty($_GET['category'])) {
-     /* drupal_add_js("jQuery(document).ready(function(){
-jQuery('#edit-field-story-category-tid').val(" . $_GET['category'] . "); 
-jQuery('#edit-field-story-category-tid').trigger('change');
-jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li').each(function() {
-if(jQuery(this).val() == " . $_GET['category'] . "){
-jQuery(this).find('a').addClass('active');
-}
-});
-});", array('type' => 'inline', 'scope' => 'footer'));*/
-           drupal_add_js("jQuery(document).ready(function(){
+      /* drupal_add_js("jQuery(document).ready(function(){
+        jQuery('#edit-field-story-category-tid').val(" . $_GET['category'] . ");
+        jQuery('#edit-field-story-category-tid').trigger('change');
+        jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li').each(function() {
+        if(jQuery(this).val() == " . $_GET['category'] . "){
+        jQuery(this).find('a').addClass('active');
+        }
+        });
+        });", array('type' => 'inline', 'scope' => 'footer')); */
+      drupal_add_js("jQuery(document).ready(function(){
 jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li').each(function() {
 if(jQuery(this).val() == " . $_GET['category'] . "){
 jQuery(this).find('a').addClass('active');
@@ -2734,7 +2735,7 @@ jQuery(this).find('a').addClass('active');
 });
 });", array('type' => 'inline', 'scope' => 'footer'));
     }
-    
+
 // Views render on video template
     if (itg_videogallery_get_categoryparent(@$_GET['category']) == TRUE && empty($_GET['sid'])) {
       $view_output = views_embed_view('video_list_of_category', 'block_3', $_GET['category']);
@@ -3004,8 +3005,8 @@ function itg_videogallery_views_query_alter(&$view, &$query) {
       $query->add_where(1, 'field_data_field_story_source_type.field_story_source_type_value', 'migrated', '!=');
     }
   }
-  
-   // video loading issue resolve
+
+  // video loading issue resolve
   if ($view->name == "video_list_of_category" && $view->current_display == 'block') {
     if (!empty($query->where[1]['conditions'][2]['value']) && isset($query->where[1]['conditions'][2])) {
       unset($query->where[0]);
