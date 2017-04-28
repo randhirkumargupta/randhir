@@ -241,6 +241,9 @@ function itg_story_node_insert($node) {
 function itg_story_node_update($node) {
   if ($node->type == 'story')
   {
+    if(itg_workflow_stop_node_update_batch_for_widgets()) {
+      return;
+    }
     $nid = $node->nid;
     if (!empty($node->field_reporter_unique_id[LANGUAGE_NONE]))
     {

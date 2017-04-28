@@ -1839,6 +1839,10 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
     $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
     $query->fields('li_file', array('uri'));
     $query->fields('mi_file', array('uri'));
+    $query->addField('li', 'field_story_large_image_alt');
+    $query->addField('li', 'field_story_large_image_title');
+    $query->addField('mi', 'field_story_medium_image_alt');
+    $query->addField('mi', 'field_story_medium_image_title');
     $query->addExpression("li_file.uri", 'li_file_uri');
     $query->addExpression("mi_file.uri", 'mi_file_uri');
   }
@@ -2771,6 +2775,9 @@ function get_max_weight_for_special($type) {
  */
 function itg_widget_node_update($node) {
   if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
+    if(itg_workflow_stop_node_update_batch_for_widgets()) {
+      return;
+    }
     $nid = $node->nid;
     $cat_id = $node->field_story_category['und'];
     $order = $node->created;
