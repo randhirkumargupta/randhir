@@ -204,8 +204,12 @@ function itg_widget_views_pre_render(&$view) {
     }
   }
   elseif ($view->name == "special_auto_review_widget" && $view->current_display == 'special_auto_review_widget_contents') {
-    if(isset($_POST['views_bulk_operations']) && empty($_GET['category_tid'])) {
+    if(isset($_POST['views_bulk_operations']) && (empty($_GET['category_tid']))) {
       drupal_set_message(t("Please select Section first.") , 'error');
+      drupal_goto('special-auto-review-widget-contents');
+    }
+    if($_GET['category_tid']=='All') {
+       drupal_set_message(t("Please select Section first.") , 'error');
       drupal_goto('special-auto-review-widget-contents');
     }
     if (!isset($_POST['views_bulk_operations'])) {
@@ -222,6 +226,15 @@ function itg_widget_views_pre_render(&$view) {
     }
   }
   elseif ($view->name == "yearender_top_news_and_top_videos" && $view->current_display == 'yearend_left_widget_contents') {
+  if(isset($_POST['views_bulk_operations']) && empty($_GET['tid']) ) {
+      drupal_set_message(t("Please select Section and filter first.") , 'error');
+      drupal_goto('yearend-left-widget-contents');
+    }
+    if($_GET['tid']=='All') {
+       drupal_set_message(t("Please select Section and filter first.") , 'error');
+      drupal_goto('yearend-left-widget-contents');
+    }
+    
     if (!isset($_POST['views_bulk_operations'])) {
       $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Year End Top News & Video'), 'yearend-left-widget-list', array('query' => $color_box_query, 'attributes' => $color_box_class));
