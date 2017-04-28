@@ -97,6 +97,7 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
     case 'videogallery_node_form':
       unset($form['actions']['preview_changes']);
        $form['field_story_expert_name']['#access'] = FALSE;
+       $form['field_story_syndication']['und']['#title'] = NULL;
       if (arg(1) == 'add') {
         drupal_set_title('Upload Video');
       }
@@ -2401,7 +2402,7 @@ function itg_videogallery_video_bitrate() {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $content = curl_exec($ch);
     curl_close($ch);
-
+p($content);
     db_merge('itg_video_bitrates_data')
             ->key(array('video_id' => $vid->solr_video_id))
             ->fields(array(

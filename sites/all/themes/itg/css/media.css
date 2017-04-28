@@ -447,6 +447,14 @@
   }
 
   /*search page css end */
+  #block-itg-live-tv-live-tv-video-page .program-livetv .live_tv_video {
+    max-width: 82%;
+    padding-bottom: 46.5%;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon {
+    width: 18%;
+    padding-top: 10px;
+  }
 }
 @media only screen and (max-width: 991px) {
   /*CSS start education page special*/
@@ -577,6 +585,14 @@
   }
 
   /*budget page css end*/
+  #block-itg-live-tv-live-tv-video-page .program-livetv .live_tv_video {
+    max-width: 83%;
+    padding-bottom: 47%;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon {
+    width: 17%;
+    padding-top: 40px;
+  }
 }
 @media only screen and (max-width: 768px) {
   .widget-wrapper {
@@ -755,8 +771,8 @@
   }
   #block-itg-layout-manager-header-block .head-live-tv .globle-search {
     position: absolute;
-    top: 0px;
-    right: 94px;
+    top: -2px;
+    right: 25px;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     -ms-transition: all 0.5s ease-in-out;
@@ -769,6 +785,10 @@
   #block-itg-layout-manager-header-block .head-live-tv .globle-search .search-text {
     height: 25px;
     line-height: 25px;
+    width: 100%;
+  }
+  #block-itg-layout-manager-header-block .head-live-tv .globle-search.active {
+    width: 140px;
   }
 
   /*footer*/
@@ -1850,9 +1870,12 @@
   #block-itg-live-tv-live-tv-video-page .program-livetv {
     padding: 10px;
   }
-  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon, #block-itg-live-tv-live-tv-video-page .program-livetv .live_tv_video {
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon {
     width: 100%;
-    float: none;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .live_tv_video {
+    max-width: none;
+    padding-bottom: 56.25%;
   }
   #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon li {
     display: inline-block;

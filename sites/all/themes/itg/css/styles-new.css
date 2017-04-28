@@ -946,6 +946,36 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   opacity: 1;
 }
 
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset {
+  border: none;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset legend {
+  float: left;
+  width: 200px;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset legend:after {
+  content: '*';
+  color: #f00;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset .fieldset-wrapper {
+  overflow: hidden;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset .fieldset-wrapper .tabledrag-toggle-weight-wrapper, .node-ugc-form .form-field-name-field-ugc-photo-image fieldset .fieldset-wrapper table thead {
+  display: none;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset .fieldset-wrapper table tbody tr td .tabledrag-handle {
+  display: none;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset .fieldset-wrapper table tbody tr td .form-submit {
+  border: none;
+  background: #fff;
+  color: #F00;
+  font-size: 12px;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset .fieldset-wrapper table + .form-type-managed-file {
+  margin-top: 10px;
+}
+
 .view-personalization-my-content .views-table {
   width: 100%;
   max-width: 860px;
@@ -1916,7 +1946,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   padding: 10px;
   text-align: center;
 }
-.load-more-wrapper .add-more-block, .load-more-wrapper .add-more-block-front, .load-more-wrapper .removes-more-block, .load-more-wrapper-front .add-more-block, .load-more-wrapper-front .add-more-block-front, .load-more-wrapper-front .removes-more-block {
+.load-more-wrapper .add-more-block, .load-more-wrapper .add-more-block-front, .load-more-wrapper .removes-more-block, .load-more-wrapper .add-more-block-front-section, .load-more-wrapper-front .add-more-block, .load-more-wrapper-front .add-more-block-front, .load-more-wrapper-front .removes-more-block, .load-more-wrapper-front .add-more-block-front-section {
   display: inline-block;
   vertical-align: top;
   padding: 10px 20px;
@@ -1927,12 +1957,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   margin: 0 10px;
   text-transform: uppercase;
 }
-.load-more-wrapper .add-more-block .fa, .load-more-wrapper .add-more-block-front .fa, .load-more-wrapper .removes-more-block .fa, .load-more-wrapper-front .add-more-block .fa, .load-more-wrapper-front .add-more-block-front .fa, .load-more-wrapper-front .removes-more-block .fa {
+.load-more-wrapper .add-more-block .fa, .load-more-wrapper .add-more-block-front .fa, .load-more-wrapper .removes-more-block .fa, .load-more-wrapper .add-more-block-front-section .fa, .load-more-wrapper-front .add-more-block .fa, .load-more-wrapper-front .add-more-block-front .fa, .load-more-wrapper-front .removes-more-block .fa, .load-more-wrapper-front .add-more-block-front-section .fa {
   font-size: 16px;
   vertical-align: bottom;
   margin-left: 5px;
 }
-.load-more-wrapper .add-more-block:hover, .load-more-wrapper .add-more-block-front:hover, .load-more-wrapper .removes-more-block:hover, .load-more-wrapper-front .add-more-block:hover, .load-more-wrapper-front .add-more-block-front:hover, .load-more-wrapper-front .removes-more-block:hover {
+.load-more-wrapper .add-more-block:hover, .load-more-wrapper .add-more-block-front:hover, .load-more-wrapper .removes-more-block:hover, .load-more-wrapper .add-more-block-front-section:hover, .load-more-wrapper-front .add-more-block:hover, .load-more-wrapper-front .add-more-block-front:hover, .load-more-wrapper-front .removes-more-block:hover, .load-more-wrapper-front .add-more-block-front-section:hover {
   box-shadow: 0 0 5px 0 #666;
 }
 
@@ -4089,8 +4119,8 @@ span.personal-social-share-links {
 .page-personalization-my-following .region-personalization {
   text-align: center;
 }
-.page-personalization-my-following #block-views-follow-tags-block,
-.page-personalization-my-following #block-views-follow-tags-block-1 {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow,
+.page-personalization-my-following #block-itg-personalization-personalization-following {
   background-color: #f2f2f2;
   margin: 20px 10px 0;
   display: inline-block;
@@ -4098,9 +4128,14 @@ span.personal-social-share-links {
   width: 400px;
   padding: 15px;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row {
-  padding: 10px;
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow h2,
+.page-personalization-my-following #block-itg-personalization-personalization-following h2 {
+  font: 400 24px/28px Roboto;
+  margin: 20px 0;
+}
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow .featured-name,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow .featured-name {
+  padding: 10px 75px 10px 10px;
   text-align: left;
   border: 1px solid #d9d9d9;
   background-color: #fff;
@@ -4108,45 +4143,41 @@ span.personal-social-share-links {
   position: relative;
   margin: 15px;
   border-radius: 5px;
-}
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row:hover,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row:hover {
-  background-color: #efefef;
-}
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row .views-field-name,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-name {
-  padding-right: 75px;
   font: 400 16px/20px Roboto;
   word-wrap: break-word;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row .views-field-ops,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-ops {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow .featured-name:hover,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow .featured-name:hover {
+  background-color: #efefef;
+}
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow .featured-name span,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow .featured-name span {
   font: 400 14px/20px Roboto;
   position: absolute;
   right: 5px;
   top: 10px;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row .views-field-ops a,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-ops a {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow .featured-name span a,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow .featured-name span a {
   color: #1a3c8d;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row .views-field-ops a:hover,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-ops a:hover {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow .featured-name span a:hover,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow .featured-name span a:hover {
   text-decoration: underline;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager {
   margin: 10px 0;
   list-style-type: none;
   text-align: center;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li {
   display: inline-block;
   vertical-align: top;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-current,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-current {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-current,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-current {
   height: 25px;
   width: 25px;
   line-height: 25px;
@@ -4155,8 +4186,8 @@ span.personal-social-share-links {
   border-radius: 50%;
   font-family: "Roboto", sans-serif;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-item a,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-item a {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-item a,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-item a {
   display: block;
   height: 25px;
   width: 25px;
@@ -4166,29 +4197,29 @@ span.personal-social-share-links {
   color: #323232;
   font-family: "Roboto", sans-serif;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-item a:hover,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-item a:hover {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-item a:hover,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-item a:hover {
   background-color: #337ab7;
   color: #fff;
   border-radius: 50%;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-next a, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-last a, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-first a, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-previous a,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-next a,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-last a,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-first a,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-previous a {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-next a, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-last a, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-first a, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-previous a,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-next a,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-last a,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-first a,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-previous a {
   color: #323232;
   line-height: 25px;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-next.pager-first.first, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-next.pager-last.last, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-last.pager-first.first, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-last.pager-last.last, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-first.pager-first.first, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-first.pager-last.last, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-previous.pager-first.first, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-previous.pager-last.last,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-next.pager-first.first,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-next.pager-last.last,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-last.pager-first.first,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-last.pager-last.last,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-first.pager-first.first,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-first.pager-last.last,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-previous.pager-first.first,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-previous.pager-last.last {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-next.pager-first.first, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-next.pager-last.last, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-last.pager-first.first, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-last.pager-last.last, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-first.pager-first.first, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-first.pager-last.last, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-previous.pager-first.first, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-previous.pager-last.last,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-next.pager-first.first,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-next.pager-last.last,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-last.pager-first.first,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-last.pager-last.last,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-first.pager-first.first,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-first.pager-last.last,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-previous.pager-first.first,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-previous.pager-last.last {
   display: none;
 }
 
@@ -6211,8 +6242,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     margin: 0 10px;
   }
 
-  .page-personalization-my-following #block-views-follow-tags-block,
-  .page-personalization-my-following #block-views-follow-tags-block-1 {
+  .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow,
+  .page-personalization-my-following #block-itg-personalization-personalization-following {
     width: 100%;
     float: left;
     margin: 20px 0 0;

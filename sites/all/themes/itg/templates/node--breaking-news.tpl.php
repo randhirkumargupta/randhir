@@ -107,9 +107,15 @@ if (!empty($content)):
     <?php } ?>
     <div class="timeline">
     <h3>Timeline</h3>
-    <div id="slider-range"></div>
-        <!--<span id="time"></span>-->
-   </div>
+<!--    <div id="time-range">
+      <p>Time Range: <span class="slider-time">00:00 AM</span></p>
+      <div class="sliders_step1">
+        <div id="slider-range">
+          <div id="custom-handle" class="ui-slider-handle"><span></span></div>
+        </div>
+      </div>
+    </div>-->
+    <input id="slider-range" class="irs-hidden-input" readonly="">
     <?php
         if (!empty($node->field_breaking_content_details[LANGUAGE_NONE])) {
             $breaking_output.= '';

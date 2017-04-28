@@ -20,7 +20,7 @@
                         print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt='' />";
                     }
                     ?>   </a>
-                <p>
+                <p title="<?php echo $desc;?>>
                   <?php //echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
                   <?php
                   if (function_exists('itg_common_get_smiley_title')) {
