@@ -158,8 +158,12 @@ jQuery(document).ready(function () {
         }
 
         // scroll-to-top animate
+        var at_offset = $('.action-with-title').offset();
+        var at_height = $('.action-with-title').outerHeight(true);
+        var at_top = at_offset.top;
+        $('.action-with-title').closest('#content').css('padding-top', at_height);
         $(window).scroll(function () {
-            if ($(this).scrollTop() > 90) {
+            if ($(this).scrollTop() >= at_top) {
                 $('.action-with-title').addClass('fixed');
             } else {
                 $('.action-with-title').removeClass('fixed');
