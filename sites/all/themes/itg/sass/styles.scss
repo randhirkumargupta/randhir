@@ -3186,6 +3186,7 @@ h1.category-heading{
 /*Start anchors listing css*/
 .view-widget-anchors-listing{    
     @include listing-with-image(anchor-listing,left,22px,pic,detail);
+    @include pager;
     .anchor-listing{
         padding:20px 0;
         border-bottom:1px solid $border-color;

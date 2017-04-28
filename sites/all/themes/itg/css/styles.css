@@ -4205,6 +4205,46 @@ h1.category-heading {
   line-height: 19px;
   color: #323232;
 }
+.view-widget-anchors-listing ul.pager {
+  margin: 10px 0;
+  list-style-type: none;
+  text-align: center;
+}
+.view-widget-anchors-listing ul.pager li {
+  display: inline-block;
+  vertical-align: top;
+}
+.view-widget-anchors-listing ul.pager li.pager-current {
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+  font-family: "Roboto", sans-serif;
+}
+.view-widget-anchors-listing ul.pager li.pager-item a {
+  display: block;
+  height: 25px;
+  width: 25px;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 25px;
+  color: #323232;
+  font-family: "Roboto", sans-serif;
+}
+.view-widget-anchors-listing ul.pager li.pager-item a:hover {
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+}
+.view-widget-anchors-listing ul.pager li.pager-next a, .view-widget-anchors-listing ul.pager li.pager-last a, .view-widget-anchors-listing ul.pager li.pager-first a, .view-widget-anchors-listing ul.pager li.pager-previous a {
+  color: #323232;
+  line-height: 25px;
+}
+.view-widget-anchors-listing ul.pager li.pager-next.pager-first.first, .view-widget-anchors-listing ul.pager li.pager-next.pager-last.last, .view-widget-anchors-listing ul.pager li.pager-last.pager-first.first, .view-widget-anchors-listing ul.pager li.pager-last.pager-last.last, .view-widget-anchors-listing ul.pager li.pager-first.pager-first.first, .view-widget-anchors-listing ul.pager li.pager-first.pager-last.last, .view-widget-anchors-listing ul.pager li.pager-previous.pager-first.first, .view-widget-anchors-listing ul.pager li.pager-previous.pager-last.last {
+  display: none;
+}
 .view-widget-anchors-listing .anchor-listing {
   padding: 20px 0;
   border-bottom: 1px solid #dddddd;
