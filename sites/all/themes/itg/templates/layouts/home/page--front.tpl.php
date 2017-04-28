@@ -254,12 +254,14 @@ if ($theme != 'itgadmin') {
           </div>
         </div>
         <?php if ($user->uid == 0 && $arg[0] != "itg-layout-manager") {
-          if (isset($_COOKIE['recomended_for_you'])) { ?>
+          if (isset($_COOKIE['recomended_for_you'])) {
+          $value = itg_user_log_get_sections($_COOKIE['recomended_for_you']);
+          $recomended_array_count = count(explode(",", $value));
+          if($recomended_array_count >= 4) {?>
             <section class="recommended-for-you">
               <div class="container"><span class="widget-title">RECOMMENDED FOR YOU</span> <?php print $widget_data['non_personlization'] ?></div>
             </section>
-  <?php }
-} ?>
+          <?php } } } ?>
 
         <!-- <main id="main" class="container pos-rel">
              <div class="home-bottom-vertical">
