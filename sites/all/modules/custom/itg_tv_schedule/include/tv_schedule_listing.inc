@@ -113,7 +113,7 @@ function tv_schedule_listing() {
     }
 
     if ($sel_date == 0 && $search_date != '') {
-        $no_result = 'No program details found on this date ' . $search_date;
+        $no_result = '<div class"no-tv-program">No program details found on this date ' . $search_date . '</div>';
     }
 
 
