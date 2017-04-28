@@ -506,7 +506,7 @@ ul.pager{
   }
 }
 #page-title{
-  @extend .mb-10;
+  margin: 20px 0;
 }
 .success-message, .messages--status{
   color:#009c00;
@@ -636,6 +636,7 @@ body.sidebar-second{
   }
 }
 #content{
+  position: relative;
   > ul.tabs-primary{
     display: none;
   }
@@ -5305,21 +5306,23 @@ div.node{
   }
 }
 .action-with-title{
+  background: #fff none repeat scroll 0 0;
+  left: 0;
+  margin: 0 auto;
+  padding: 10px 0 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 1170px;
+  z-index: 1;
   &.fixed{
-    background: #fff none repeat scroll 0 0;
-    left: 0;
-    margin: 0 auto;
-    padding: 10px 0 0;
     position: fixed;
-    right: 0;
-    top: 0;
-    width: 1170px;
     z-index: 9999;
   }
   #page-title{
     @extend .fleft;
     line-height: 32px;
-    margin-bottom: 0;
+    margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

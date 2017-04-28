@@ -40,7 +40,7 @@ img {
   margin-left: 10px;
 }
 
-.mb-10, #page-title, [id*="field-poll-answer-values"] tbody tr td, [id*="taxonomy-csv-import-form"] .term-main-wrap, [id*="field-astro-zodiac-values"] > tbody > tr > td,
+.mb-10, [id*="field-poll-answer-values"] tbody tr td, [id*="taxonomy-csv-import-form"] .term-main-wrap, [id*="field-astro-zodiac-values"] > tbody > tr > td,
 [id*="field-astro-numerology-values-values"] > tbody > tr > td, .node-syndication_rule-form tbody td {
   margin-bottom: 10px;
 }
@@ -1314,6 +1314,10 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
   width: 134px;
 }
 
+#page-title {
+  margin: 20px 0;
+}
+
 .success-message, .search-criteria + .success, .messages--status {
   color: #009c00;
   font-size: 13px;
@@ -1436,6 +1440,9 @@ body.sidebar-second .sidebars.active {
   background-color: #e4e3e5;
 }
 
+#content {
+  position: relative;
+}
 #content > ul.tabs-primary {
   display: none;
 }
@@ -5722,20 +5729,24 @@ div.node #comments h2 {
   margin-right: 0;
 }
 
-.action-with-title.fixed {
+.action-with-title {
   background: #fff none repeat scroll 0 0;
   left: 0;
   margin: 0 auto;
   padding: 10px 0 0;
-  position: fixed;
+  position: absolute;
   right: 0;
   top: 0;
   width: 1170px;
+  z-index: 1;
+}
+.action-with-title.fixed {
+  position: fixed;
   z-index: 9999;
 }
 .action-with-title #page-title {
   line-height: 32px;
-  margin-bottom: 0;
+  margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
