@@ -3186,6 +3186,7 @@ h1.category-heading{
 /*Start anchors listing css*/
 .view-widget-anchors-listing{    
     @include listing-with-image(anchor-listing,left,22px,pic,detail);
+    @include pager;
     .anchor-listing{
         padding:20px 0;
         border-bottom:1px solid $border-color;
@@ -6586,7 +6587,7 @@ section.sidebar{
 #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration{
     h1{
         font-family: $itg-robotoslab;
-        font-size: 50px;
+        font-size: 40px;
         margin-bottom: 40px;
     }
 }
@@ -11208,7 +11209,7 @@ span.close_btt {
 
 
 
-
+.no-tv-program{padding-bottom: 20px;}
 .search-icon-parent{
   position: relative;
   .search-icon-search{
