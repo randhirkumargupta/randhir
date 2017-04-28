@@ -6,6 +6,7 @@
  * @return string
  */
 function itg_sso_get_mail_content($account, $to, $url_info) {
+  
     if (function_exists('itg_mail_templates_get_mailcontent')) {
       if (is_string($account) && $account == 'Password Changed'){
         $action = 'Password Changed';

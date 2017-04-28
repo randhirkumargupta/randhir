@@ -78,11 +78,12 @@ function itg_sso_reg_password_form_validate(&$form, &$form_state) {
  * @param array $form_state
  */
 function itg_sso_reg_password_form_submit($form, &$form_state) {
+  global $user;
   $edit = array('pass' => $form_state['values']['pass']);
   $domain_info_url = $form_state['values']['domain_info_url'];
   user_save($form['#account'], $edit);
   if (function_exists('itg_sso_get_mail_content')) {
-    $mail_content = itg_sso_get_mail_content('Password Changed');
+    $mail_content = itg_sso_get_mail_content('Password Changed', $user->mail);
   }
   drupal_goto('password-success/'.$domain_info_url);
 }
