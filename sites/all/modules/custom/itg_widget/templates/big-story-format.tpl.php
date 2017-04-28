@@ -36,8 +36,8 @@ if (!empty($data['node_data'])) :
         <?php else : ?>
           <!-- EXTRA LARGE IMAGE IS PUT -->
           <?php if (!empty($data['node_data']->field_story_extra_large_image['und'][0]['uri'])) { ?>
-            <a href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>
-              <img src="<?php print image_style_url("big_story_widget", $data['node_data']->field_story_extra_large_image['und'][0]['uri']); ?>" alt="" />
+          <a title="<?php echo $data['node_data']->title; ?>" href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>
+                <img alt="<?php echo $data['node_data']->field_story_extra_large_image['und'][0]['alt'] ?>" title="<?php echo $data['node_data']->field_story_extra_large_image['und'][0]['title'] ?>" src="<?php print image_style_url("big_story_widget", $data['node_data']->field_story_extra_large_image['und'][0]['uri']); ?>"/>
               <?php print $video_icon; ?>
               <?php print $photo_icon; ?>
             </a>
@@ -49,7 +49,7 @@ if (!empty($data['node_data'])) :
           }
           else {
             ?>
-            <a href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>
+            <a title="<?php echo $data['node_data']->title; ?>" href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>
               <img width="647" height="363" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image647x363.jpg" alt="" />
             </a>  
             <div class="story-tag"><?php echo t("Big Story") ?></div>          
@@ -86,7 +86,7 @@ if (!empty($data['node_data'])) :
           $short_url = shorten_url($actual_link, 'goo.gl');
           ?>
           <h1 class="big-story-first big-story-<?php print $data['node_data']->nid . ' ' . $red_dot_class ?>">
-            <?php echo l($node_title, "node/" . $data['node_data']->nid, array('html' => TRUE)); ?>
+            <?php echo l($node_title, "node/" . $data['node_data']->nid, array('html' => TRUE , "attributes" => array("title" => $node_title))); ?>
           </h1>
         <?php endif; ?>
         <p>
@@ -162,7 +162,7 @@ if (!empty($data['node_data'])) :
                 $related_data = itg_get_link_from_hash_and_entity_solr_search($current_entity_id, $current_site_hash);
                 $front_url = str_replace('-backend', '', $related_data->url);
                 if (!empty($related_data)) {
-                  print "<li>" . l($related_data->label, $front_url, array("attributes" => array("target" => "_blank"))) . "</li>";
+                  print "<li>" . l($related_data->label, $front_url, array("attributes" => array("target" => "_blank" ,'title' => $related_data->label))) . "</li>";
                 }
               }
               ?>                       
