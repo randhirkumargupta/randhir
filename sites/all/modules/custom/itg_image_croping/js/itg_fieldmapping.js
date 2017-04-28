@@ -156,6 +156,37 @@
 
 // extra lagre
 
+jQuery('.image_courtesy').on('keyup',function() {
+  jQuery('.image_courtesy_img').val(jQuery(this).val());
+});
+jQuery('.image_keyword').on('keyup',function() {
+  jQuery('.image_keyword_img').val(jQuery(this).val());
+});
+
+jQuery('.image_tags').on('keyup',function() {
+  jQuery('.image_tags_img').val(jQuery(this).val());
+});
+jQuery('.image_place').on('keyup',function() {
+  jQuery('.image_place_img').val(jQuery(this).val());
+});
+jQuery('.image_photo_grapher').on('keyup',function() {
+  jQuery('.image_photo_grapher_img').val(jQuery(this).val());
+});
+jQuery('.image_date').on('keyup',function() {
+  jQuery('.image_date_img').val(jQuery(this).val());
+});
+jQuery('.image_description').on('keyup',function() {
+  jQuery('.image_description_img').val(jQuery(this).val());
+});
+jQuery('.is_synd_all').click(function() {
+  if(jQuery(this).is(':checked')) {
+    
+    jQuery('.is_synd_all_for').prop('checked',true);
+  }else {
+   jQuery('.is_synd_all_for').prop('checked',false);
+  }
+});
+
 jQuery('.alt_text').on('keyup',function() {
   jQuery('.alt_text_image').val(jQuery(this).val());
 });
@@ -272,14 +303,27 @@ jQuery('.image_title').on('keyup',function() {
                         var getvalue = jQuery(this).val();
                         getvalue = getvalue.split('#');
                         var newbname = getbame;
+                    
+                     if(getbame.indexOf("field_gallery_image") >=0)
+                     {
+                      if(getbame.indexOf(getvalue[1])<0) {
+                       var replaced = getbame.replace(/field_images/g, getvalue[1]);
+                     }else{
+                       replaced = newbname;
+                     }
+                       
+                     }else {
                         var replaced = newbname.substring(newbname.indexOf("[") + 1);
                         replaced = getvalue[1] + '[' + replaced;
+                      }
+                       
                         var field_name = jQuery('#field_name').val();
                         if (getis_custom_form == 1) {
                             parent.jQuery('[name="' + field_name + '[fid]"]').val(image_fiedlid);
                             parent.jQuery('.div_' + field_name).hide();
                             parent.jQuery("body").find("input[name='" + getbame).trigger('mousedown');
                         }
+                       
                         parent.jQuery('[name="' + replaced + '[fid]"]').val(getvalue[0]);
                         parent.jQuery("body").find("input[name='" + replaced + "[filefield_itg_image_repository][button]").trigger('mousedown');
                         parent.jQuery('[name="' + getbame + '[fid]"]').val(image_fiedlid);

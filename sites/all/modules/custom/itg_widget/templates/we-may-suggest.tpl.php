@@ -9,7 +9,7 @@
             <?php if (!empty($entity_info['esi_file_uri'])) { ?>
             <a href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $entity_info['nid']); ?>" class="pic">
       <?php $file_uri = file_create_url($entity_info['esi_file_uri']); ?>
-              <img src="<?php print $file_uri; ?>" alt="" />
+              <img src="<?php print $file_uri; ?>" title="<?php echo $entity_info['field_story_extra_small_image_title'] ?>" alt="<?php echo $entity_info['field_story_extra_small_image_alt'] ?>" />
             </a>
             <?php
           }
@@ -23,10 +23,10 @@
             <p class="title may-be-suggest-<?php echo $entity_info['nid'] ?>">
             <?php 
             if(function_exists('itg_common_get_smiley_title')) {
-              echo l(itg_common_get_smiley_title($entity_info['nid'], 0, 90, ".."), "node/" . $entity_info['nid'] , array('html' => TRUE)); 
+              echo l(itg_common_get_smiley_title($entity_info['nid'], 0, 90, ".."), "node/" . $entity_info['nid'] , array('html' => TRUE , "attributes" => array("title" => $entity_info['title']))); 
             }
             else {
-              echo l(mb_strimwidth($entity_info['title'], 0, 90, ".."), "node/" . $entity_info['nid']); 
+              echo l(mb_strimwidth($entity_info['title'], 0, 90, ".."), "node/" . $entity_info['nid'] , array("attributes" => array("title" => $entity_info['title']))); 
             }
             
             ?>

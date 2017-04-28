@@ -53,7 +53,7 @@
                   $cat_array[] = $values['tid'];
                 }
                 $tid_val = implode(',' , $cat_array);
-                echo '|' . l( '<span class="preview-class">' .t(' preview') . '</span>' , 'newsletter-data-preview-before-download/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $tid_val , array("attributes" => array("class" => array("colorbox-load")) ,  "query"=>array("width" => "900", "height" => "600", "iframe" => "true" , "nid" => $node->nid) , 'html' => true));
+                echo  l( '| <span class="view-link">' .t(' preview') . '</span>' , 'newsletter-data-preview-before-download/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $tid_val , array("attributes" => array("class" => array("colorbox-load")) ,  "query"=>array("width" => "900", "height" => "600", "iframe" => "true" , "nid" => $node->nid) , 'html' => true));
              } ?>
           </td>
         <?php endforeach; ?>
