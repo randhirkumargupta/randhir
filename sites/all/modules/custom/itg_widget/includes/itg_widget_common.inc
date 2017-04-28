@@ -2775,6 +2775,9 @@ function get_max_weight_for_special($type) {
  */
 function itg_widget_node_update($node) {
   if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
+    if(itg_workflow_stop_node_update_batch_for_widgets()) {
+      return;
+    }
     $nid = $node->nid;
     $cat_id = $node->field_story_category['und'];
     $order = $node->created;
