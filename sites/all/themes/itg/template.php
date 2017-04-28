@@ -134,6 +134,12 @@ function itg_preprocess_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__itgembed';
   }
 
+  // auto compare template
+  if ($arg[0] == 'auto' && $arg[1] == 'compare') {
+    $variables['theme_hook_suggestions'][] = 'page__autocompare';
+  }
+
+
   // Access domain
   if (function_exists('domain_select_format')) {
     $format = domain_select_format();
