@@ -83,6 +83,24 @@ function itg_payment_menu() {
     'type' => MENU_CALLBACK ,
     'access arguments' => array('access content') ,
   );
+  
+  $items['itg-payment-amex-payment-success'] = array(
+    'page callback' => 'itg_payment_amex_payment_success' ,
+    'type' => MENU_CALLBACK ,
+    'access arguments' => array('access content') ,
+  );
+  
+  $items['itg-payment-amex-payment-cancle'] = array(
+    'page callback' => 'itg_payment_amex_payment_cancle' ,
+    'type' => MENU_CALLBACK ,
+    'access arguments' => array('access content') ,
+  );
+  
+  $items['itg-payment-amex-payment-fail'] = array(
+    'page callback' => 'itg_payment_amex_payment_fail' ,
+    'type' => MENU_CALLBACK ,
+    'access arguments' => array('access content') ,
+  );
 
   // Order payment response fail
   $items['itg-payment-amex-order-form-action-response'] = array(
@@ -234,6 +252,7 @@ function itg_payment_checkout() {
     case 'amex':
       global $user;
       if (isset($_SESSION['event_registration_payment']['event_key'])) {
+        $_SESSION['event_registration_payment']['amex_order_id'] = "ODR-" . time() . rand(0 , 1000);
         $args = itg_payment_decode_data($_SESSION['event_registration_payment']['event_key']);
         $event_id = $args['event_id'];
         $db_data["COUPON_AMOUNT"] = 0;
@@ -250,6 +269,7 @@ function itg_payment_checkout() {
         }
 
         $db_data['CUST_ID'] = "CUS-" . time() . rand(0 , 1000);
+        $db_data['ORDER_ID'] = $_SESSION['event_registration_payment']['amex_order_id'];
         $db_data["USER_TYPE"] = ($user->uid) ? "authenticated" : "guest";
         $db_data["REGISTRATION_ID"] = $registration_id;
         $db_data["PAYMENT_GATEWAY"] = AMXEX_GATEWAY_NAME;
