@@ -926,10 +926,22 @@ jQuery(document).ready(function () {
     var img_src = jQuery(this).children('img').attr('src');
     jQuery('.active > a > img').attr({'src':img_src});
   });
-
+  
+  jQuery(window).bind({
+    'load': setSidebarHeight,
+    'scroll': setSidebarHeight,
+    'resize': setSidebarHeight
+  });
 
 jQuery(window).load(function(){
   var sticky = jQuery('.region-vertical-menu');
+  var sticky_sidebar = jQuery('.region-sidebar-second');
   sticky.stickyMojo({footerID: '#footer', contentID: '#main'});
+  sticky_sidebar.stickyMojo({footerID: '#footer', contentID: '#main'});
 });
 });
+function setSidebarHeight(){
+  var sticky_sidebar = jQuery('.region-sidebar-second');
+  var sticky_sidebar_height = sticky_sidebar.outerHeight(true);
+  sticky_sidebar.closest('.sidebars').css('height', sticky_sidebar_height);
+}
