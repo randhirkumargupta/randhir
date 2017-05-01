@@ -336,6 +336,7 @@ if($clicked_day == "")
 
         jQuery('body').on('click', '.itg-close-popup', function() {
             jQuery(this).parent().parent().parent().hide();
+            window.location.href =  window.location.href.split("?")[0];
         });
 
     });
