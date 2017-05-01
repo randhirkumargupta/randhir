@@ -822,9 +822,11 @@ function itg_workflow_node_access($node, $op, $account) {
   $arr_source_type = array('issue', 'supplement');
   
   // code for redirect_url
-  if (function_exists('itg_get_node_redirect_url')) {
-    itg_get_node_redirect_url($node, $op);
-  } 
+  if (arg(0) == 'node' && is_numeric(arg(1))) {
+    if (function_exists('itg_get_node_redirect_url')) {
+      itg_get_node_redirect_url($node, $op);
+    }
+  }
   
   if (isset($node->type) && $node->type == 'story' && $op == 'update' && (isset($node->field_story_source_type[LANGUAGE_NONE]) && !in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $arr_source_type))) {
     if (!empty($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {

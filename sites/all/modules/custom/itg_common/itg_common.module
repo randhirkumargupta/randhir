@@ -496,34 +496,6 @@ function itg_common_node_presave($node) {
 
 
 /**
- * Implementation of hook_node_insert().
- * @param object $node
- */
-function itg_common_node_insert($node) {
-  /*$ctype_array = array('photogallery', 'story', 'videogallery', 'podcast', 'food_news', 'cooking_tips', 'recipe');
-  // custom alias cnditions
-  if (in_array($node->type, $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-    itg_common_custompath_insert_load($node);
-  }
-  elseif ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
-
-    itg_common_custompath_migrated_load($node);
-  }*/
-}
-
-/**
- * Implementation of hook_node_insert().
- * @param object $node
- */
-function itg_common_node_update($node) {
- /* $ctype_array = array('photogallery', 'story', 'videogallery', 'podcast', 'food_news', 'cooking_tips', 'recipe');
-  // custom alias cnditions
-  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
-    itg_common_custompath_migrated_load($node, 'update_migrated');
-  }*/
-}
-
-/**
  * Implements hook_form_FORMID_alter().
  * {@inheritdoc}
  */
@@ -852,7 +824,7 @@ function itg_apache_solr_get_site_hash() {
 function itg_common_mail_alter(&$message) {
   
   global $user, $base_url;  
- 
+ $message['send'] = FALSE;
   if (FRONT_URL == $base_url || BACKEND_URL == $base_url) {
     //$message['send'] = FALSE;
   }
@@ -868,11 +840,9 @@ function itg_draft_form_custom_callback($form, &$form_state) {
   
   if ($form_state['node']->workbench_moderation_state_new == 'draft') {    
     $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination='.$_GET['destination'];    
-   // drupal_set_message(t($form_state['values']['type'] . ' <b>' . $form_state['values']['title'] . '</b> has been save successfully.'));
-   $_GET['destination'] = $redirect_path;
+    // drupal_set_message(t($form_state['values']['type'] . ' <b>' . $form_state['values']['title'] . '</b> has been save successfully.'));
+    $_GET['destination'] = $redirect_path;
     drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
-    
-        
   }
   
 }
@@ -881,8 +851,7 @@ function itg_draft_form_custom_callback($form, &$form_state) {
  * Helper function to get photogallery.
  */
 function itg_photogallery_embed() {
-  if (!empty($_GET['gid']))
-  {
+  if (!empty($_GET['gid'])) {
     $data = node_load($_GET['gid']);
     return theme('itg_photogallery_embed', array('data' => $data));
   }
@@ -904,10 +873,8 @@ function itg_videogallery_embed() {
 /**
  * callback for funalytics-popup.
  */
-function itg_funalytics_popup() {
-  
-  echo views_embed_view('front_funalytics_list', 'block_1');
-  //exit;
+function itg_funalytics_popup() {  
+  echo views_embed_view('front_funalytics_list', 'block_1');  
 }
 
 /**

@@ -85,8 +85,9 @@ function itg_layout_list_delete() {
  * @return array $output
  */
 function itg_layout_delete() {
-  $field_name = '';
-  $new_length = '';
+  //field_story_template_guru
+  $field_name = 'field_story_template_guru';
+  $new_length = '3000';
   itg_change_text_field_max_length($field_name, $new_length);
   
   //phpinfo();
