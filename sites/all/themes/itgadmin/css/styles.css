@@ -40,7 +40,7 @@ img {
   margin-left: 10px;
 }
 
-.mb-10, #page-title, [id*="field-poll-answer-values"] tbody tr td, [id*="taxonomy-csv-import-form"] .term-main-wrap, [id*="field-astro-zodiac-values"] > tbody > tr > td,
+.mb-10, [id*="field-poll-answer-values"] tbody tr td, [id*="taxonomy-csv-import-form"] .term-main-wrap, [id*="field-astro-zodiac-values"] > tbody > tr > td,
 [id*="field-astro-numerology-values-values"] > tbody > tr > td, .node-syndication_rule-form tbody td {
   margin-bottom: 10px;
 }
@@ -386,7 +386,7 @@ img {
 .page-admin-people form .field-type-image .image-widget-data,
 .page-user form .field-type-image .image-widget-data,
 .node-newsletter_templates-form .field-type-image .image-widget-data,
-.node-mega_review_critic-form .field-type-image .image-widget-data, #taxonomy-form-term .field-type-image .image-widget-data, .node-loyalty_and_rewards-form .field-type-image .image-widget-data, [id*="node-itg_funalytics-form"] .field-type-image .image-widget-data, .node-supplement-form .field-type-image .image-widget-data, #main, .header, .header .container, .form-type-autocomplete-deluxe div.autocomplete-deluxe-container, .form-type-password, div.form-type-password-confirm, div.vertical-tabs, .form-type-textfield, .form-field-type-taxonomy-term-reference, .form-type-select, .form-type-checkboxes, .form-type-radios, .form-type-textarea, .form-type-managed-file, .form-type-managed-file .filefield-source, .generate-image, .generate-image-error, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .image-widget-data, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .path-form .fieldset-wrapper, .form-type-plupload, #block-menu-menu-admin-left-menu, #block-menu-menu-admin-left-menu > .menu > li, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded > a, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded, .breadcrumb ol li, .user-role, .user-role a, .dashboard-tab li, .field-name-field-story-reporter, .form-field-name-field-story-reporter, .form-field-name-field-task-task-idea, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), .form-field-name-field-quiz-add-questions, .node-ads_management-form .form-field-name-field-ads-headerscript,
+.node-mega_review_critic-form .field-type-image .image-widget-data, #taxonomy-form-term .field-type-image .image-widget-data, .node-loyalty_and_rewards-form .field-type-image .image-widget-data, [id*="node-itg_funalytics-form"] .field-type-image .image-widget-data, .node-supplement-form .field-type-image .image-widget-data, #main, .header, .header .container, .form-type-autocomplete-deluxe, .form-type-autocomplete-deluxe div.autocomplete-deluxe-container, .form-type-password, div.form-type-password-confirm, div.vertical-tabs, .form-type-textfield, .form-field-type-taxonomy-term-reference, .form-type-select, .form-type-checkboxes, .form-type-radios, .form-type-textarea, .form-type-managed-file, .form-type-managed-file .filefield-source, .generate-image, .generate-image-error, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .image-widget-data, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .path-form .fieldset-wrapper, .form-type-plupload, #block-menu-menu-admin-left-menu, #block-menu-menu-admin-left-menu > .menu > li, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded > a, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded, .breadcrumb ol li, .user-role, .user-role a, .dashboard-tab li, .field-name-field-story-reporter, .form-field-name-field-story-reporter, .form-field-name-field-task-task-idea, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), .form-field-name-field-quiz-add-questions, .node-ads_management-form .form-field-name-field-ads-headerscript,
 .node-ads_management-form .form-field-name-field-ads-body-start,
 .node-ads_management-form .form-field-name-field-ads-ad-code,
 .node-ads_management-form .form-field-name-field-ads-header-script,
@@ -784,7 +784,7 @@ a.ckeditor_links:hover {
   cursor: pointer;
 }
 
-.desc-popup, .form-type-textfield .form-text + div.description, .form-type-textfield .form-text + span.error + div.description, .form-type-textfield .form-text + span.error + .autocomplete + div.description, .form-type-textfield .form-text + .autocomplete + div.description, .form-field-type-taxonomy-term-reference .form-text + .autocomplete + div.description, .form-field-type-taxonomy-term-reference .form-text + span.error + div.description, .form-type-select .form-select + div.description, .form-type-select .form-select + span.error + div.description, .form-type-checkboxes .form-checkboxes + div.description, .form-item-path-pathauto div.description, .form-type-radios div.description, .form-type-textarea div.description, .form-type-managed-file .form-managed-file + div.description, .img-crt + .pre-desc, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname, .node-category-form #edit-term-state-wrap .itg-term-state .form-type-checkbox .form-checkbox + label + .description, [id*="taxonomy-csv-import-form"] .form-type-file .description, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname, [id*="menu-edit-item"] .form-type-checkbox div.description {
+.desc-popup, .form-type-autocomplete-deluxe div.description, .form-type-textfield .form-text + div.description, .form-type-textfield .form-text + span.error + div.description, .form-type-textfield .form-text + span.error + .autocomplete + div.description, .form-type-textfield .form-text + .autocomplete + div.description, .form-field-type-taxonomy-term-reference .form-text + .autocomplete + div.description, .form-field-type-taxonomy-term-reference .form-text + span.error + div.description, .form-type-select .form-select + div.description, .form-type-select .form-select + span.error + div.description, .form-type-checkboxes .form-checkboxes + div.description, .form-item-path-pathauto div.description, .form-type-radios div.description, .form-type-textarea div.description, .form-type-managed-file .form-managed-file + div.description, .img-crt + .pre-desc, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname, .node-category-form #edit-term-state-wrap .itg-term-state .form-type-checkbox .form-checkbox + label + .description, [id*="taxonomy-csv-import-form"] .form-type-file .description, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname, [id*="menu-edit-item"] .form-type-checkbox div.description {
   border: 1px solid #d9d9d9;
   border-radius: 8px;
   color: #8d8d8d;
@@ -797,7 +797,7 @@ a.ckeditor_links:hover {
   background-color: #fff;
   z-index: 9999;
 }
-.desc-popup:before, .form-type-textfield .form-text + div.description:before, .form-type-textfield .form-text + span.error + div.description:before, .form-type-textfield .form-text + span.error + .autocomplete + div.description:before, .form-type-textfield .form-text + .autocomplete + div.description:before, .form-field-type-taxonomy-term-reference .form-text + .autocomplete + div.description:before, .form-field-type-taxonomy-term-reference .form-text + span.error + div.description:before, .form-type-select .form-select + div.description:before, .form-type-select .form-select + span.error + div.description:before, .form-type-checkboxes .form-checkboxes + div.description:before, .form-item-path-pathauto div.description:before, .form-type-radios div.description:before, .form-type-textarea div.description:before, .form-type-managed-file .form-managed-file + div.description:before, .img-crt + .pre-desc:before, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:before, .node-category-form #edit-term-state-wrap .itg-term-state .form-type-checkbox .form-checkbox + label + .description:before, [id*="taxonomy-csv-import-form"] .form-type-file .description:before, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:before, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:before, [id*="menu-edit-item"] .form-type-checkbox div.description:before {
+.desc-popup:before, .form-type-autocomplete-deluxe div.description:before, .form-type-textfield .form-text + div.description:before, .form-type-textfield .form-text + span.error + div.description:before, .form-type-textfield .form-text + span.error + .autocomplete + div.description:before, .form-type-textfield .form-text + .autocomplete + div.description:before, .form-field-type-taxonomy-term-reference .form-text + .autocomplete + div.description:before, .form-field-type-taxonomy-term-reference .form-text + span.error + div.description:before, .form-type-select .form-select + div.description:before, .form-type-select .form-select + span.error + div.description:before, .form-type-checkboxes .form-checkboxes + div.description:before, .form-item-path-pathauto div.description:before, .form-type-radios div.description:before, .form-type-textarea div.description:before, .form-type-managed-file .form-managed-file + div.description:before, .img-crt + .pre-desc:before, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:before, .node-category-form #edit-term-state-wrap .itg-term-state .form-type-checkbox .form-checkbox + label + .description:before, [id*="taxonomy-csv-import-form"] .form-type-file .description:before, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:before, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:before, [id*="menu-edit-item"] .form-type-checkbox div.description:before {
   border-width: 7px 13px 7px 7px;
   border-style: solid;
   border-color: transparent #d9d9d9 transparent transparent;
@@ -810,7 +810,7 @@ a.ckeditor_links:hover {
   bottom: 0;
   margin: auto;
 }
-.desc-popup:after, .form-type-textfield .form-text + div.description:after, .form-type-textfield .form-text + span.error + div.description:after, .form-type-textfield .form-text + span.error + .autocomplete + div.description:after, .form-type-textfield .form-text + .autocomplete + div.description:after, .form-field-type-taxonomy-term-reference .form-text + .autocomplete + div.description:after, .form-field-type-taxonomy-term-reference .form-text + span.error + div.description:after, .form-type-select .form-select + div.description:after, .form-type-select .form-select + span.error + div.description:after, .form-type-checkboxes .form-checkboxes + div.description:after, .form-item-path-pathauto div.description:after, .form-type-radios div.description:after, .form-type-textarea div.description:after, .form-type-managed-file .form-managed-file + div.description:after, .img-crt + .pre-desc:after, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:after, .node-category-form #edit-term-state-wrap .itg-term-state .form-type-checkbox .form-checkbox + label + .description:after, [id*="taxonomy-csv-import-form"] .form-type-file .description:after, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:after, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:after, [id*="menu-edit-item"] .form-type-checkbox div.description:after {
+.desc-popup:after, .form-type-autocomplete-deluxe div.description:after, .form-type-textfield .form-text + div.description:after, .form-type-textfield .form-text + span.error + div.description:after, .form-type-textfield .form-text + span.error + .autocomplete + div.description:after, .form-type-textfield .form-text + .autocomplete + div.description:after, .form-field-type-taxonomy-term-reference .form-text + .autocomplete + div.description:after, .form-field-type-taxonomy-term-reference .form-text + span.error + div.description:after, .form-type-select .form-select + div.description:after, .form-type-select .form-select + span.error + div.description:after, .form-type-checkboxes .form-checkboxes + div.description:after, .form-item-path-pathauto div.description:after, .form-type-radios div.description:after, .form-type-textarea div.description:after, .form-type-managed-file .form-managed-file + div.description:after, .img-crt + .pre-desc:after, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:after, .node-category-form #edit-term-state-wrap .itg-term-state .form-type-checkbox .form-checkbox + label + .description:after, [id*="taxonomy-csv-import-form"] .form-type-file .description:after, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:after, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview .image-fullname:after, [id*="menu-edit-item"] .form-type-checkbox div.description:after {
   border-width: 7px 13px 7px 7px;
   border-style: solid;
   border-color: transparent #fff transparent transparent;
@@ -1314,6 +1314,10 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
   width: 134px;
 }
 
+#page-title {
+  margin: 20px 0;
+}
+
 .success-message, .search-criteria + .success, .messages--status {
   color: #009c00;
   font-size: 13px;
@@ -1436,6 +1440,9 @@ body.sidebar-second .sidebars.active {
   background-color: #e4e3e5;
 }
 
+#content {
+  position: relative;
+}
 #content > ul.tabs-primary {
   display: none;
 }
@@ -1614,6 +1621,12 @@ fieldset.date-combo .container-inline-date .date-padding .form-item div.descript
 .form-type-autocomplete-deluxe .autocomplete-deluxe-container input.form-text {
   min-width: 332px;
   margin: 0;
+}
+.form-type-autocomplete-deluxe div.description {
+  left: 600px;
+}
+.form-type-autocomplete-deluxe:hover div.description {
+  display: block;
 }
 
 .form-type-autocomplete-deluxe div.autocomplete-deluxe-container {
@@ -3937,14 +3950,14 @@ fieldset#edit-select .form-submit {
 }
 .view-category-manager .view-content .item-list ul li .term-wrapper .term-detail {
   padding: 5px;
-  width: 10%;
+  width: 9%;
   float: left;
 }
 .view-category-manager .view-content .item-list ul li .term-wrapper .term-detail:first-child {
-  width: 30%;
+  width: 28%;
 }
 .view-category-manager .view-content .item-list ul li .term-wrapper .term-detail:nth-child(2) {
-  width: 20%;
+  width: 18%;
 }
 .view-category-manager .view-content .item-list ul li .term-wrapper .term-detail a {
   color: #1fb5ad;
@@ -3992,17 +4005,16 @@ fieldset#edit-select .form-submit {
 }
 .category-manager-thead div {
   line-height: 18px;
-  height: 34px;
   padding: 8px 5px;
 }
 .category-manager-thead div.cmt-title {
-  width: 30%;
+  width: 28%;
 }
 .category-manager-thead div.cmt-other {
-  width: 10%;
+  width: 9%;
 }
 .category-manager-thead div.cmt-other:nth-child(2) {
-  width: 20%;
+  width: 18%;
 }
 
 .details-parent {
@@ -5716,20 +5728,24 @@ div.node #comments h2 {
   margin-right: 0;
 }
 
-.action-with-title.fixed {
+.action-with-title {
   background: #fff none repeat scroll 0 0;
   left: 0;
   margin: 0 auto;
   padding: 10px 0 0;
-  position: fixed;
+  position: absolute;
   right: 0;
   top: 0;
   width: 1170px;
+  z-index: 1;
+}
+.action-with-title.fixed {
+  position: fixed;
   z-index: 9999;
 }
 .action-with-title #page-title {
   line-height: 32px;
-  margin-bottom: 0;
+  margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

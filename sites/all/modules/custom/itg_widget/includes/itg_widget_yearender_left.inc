@@ -22,8 +22,9 @@ function save_yearender_left_widget_data($yearender_left) {
   $widget_name = "yearender_left_news_video";
   if (count($selected_node)) {
     foreach ($selected_node as $node) {
-      itg_widget_delete_data_from_widget($widget_name, $node);
-      itg_widget_insert_widget_data($node, $widget_name, 0);
+      
+      //itg_widget_delete_data_from_widget($widget_name, $node,"",$_GET['tid']);
+     // itg_widget_insert_widget_data($node, $widget_name, $_GET['tid']);
     }
     drupal_set_message(t("Nodes has been saved"));
   }

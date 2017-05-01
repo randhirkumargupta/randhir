@@ -357,8 +357,13 @@ function itg_seo_node_insert($node) {
  * Implementation of hook_node_insert().
  * @param object $node
  */
+
 function itg_seo_node_update($node) { 
   //set custom path alias  
+  if(itg_workflow_stop_node_update_batch_for_widgets()) {
+    return;
+  }
+
   $ctype_array = array('photogallery' , 'story' , 'videogallery' , 'podcast' , 'food_news' , 'cooking_tips' , 'recipe');
   if (in_array($node->type , $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
     $newpath = itg_common_custompath_insert_load($node);

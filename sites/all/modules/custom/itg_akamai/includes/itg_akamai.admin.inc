@@ -24,7 +24,7 @@ function itg_akamai_settings() {
     '#description' => 'Set this field to temporarity disable cache clearing during imports, migrations, or other batch processes.',
   );
 
-  $form['itg_disable_fieldset']['akamai_disabled'] = array(
+  $form['itg_disable_fieldset']['itg_akamai_disabled'] = array(
     '#type' => 'checkbox',
     '#title' => t('Disable cache clearing'),
     '#default_value' => variable_get('itg_akamai_disabled', FALSE),
@@ -84,14 +84,11 @@ function itg_akamai_settings() {
 //    '#type' => 'fieldset',
 //    '#title' => 'Timeout Length for all content type',
 //  );
-
 //  $form['itg_cctype_fieldset_holder'] = array(
 //    '#type' => 'fieldset',
 //    '#title' => 'Timeout Length for all content type',
 //  );
-  
 //  $allnodes = node_type_get_types();
-
 //  foreach ($allnodes as $key => $values) {
 //
 //    $form['itg_cctype_fieldset']['akamai_timeout_' . $key] = array(
@@ -204,6 +201,21 @@ function itg_akamai_cache_akamai_log($form, &$form_state) {
     '#default_value' => isset($_GET['purge_id']) ? $_GET['purge_id'] : '',
   );
 
+  $form['fieldset']['url'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Url'),
+    '#description' => t('Enter Url'),
+    '#default_value' => isset($_GET['url']) ? $_GET['url'] : '',
+  );
+
+  $form['fieldset']['user'] = array(
+    '#type' => 'textfield',
+    '#title' => t('User Name'),
+    '#description' => t('Enter User Name'),
+    '#default_value' => isset($_GET['user']) ? $_GET['user'] : '',
+    '#autocomplete_path' => 'user/autocomplete',
+  );
+
   $form['fieldset']['display_button'] = array(
     '#prefix' => '<div class="submit">',
     '#suffix' => l(t('Reset'), 'admin/config/system/itg_akamai/akamai_log', array('attributes' => array('class' => array('reset')))) . '</div">',
@@ -226,10 +238,14 @@ function itg_akamai_cache_akamai_log($form, &$form_state) {
 function itg_akamai_cache_akamai_log_submit($form, &$form_state) {
 
   $purge_id = isset($form_state['values']['purge_id']) ? trim($form_state['values']['purge_id']) : '';
+  $user = isset($form_state['values']['user']) ? trim($form_state['values']['user']) : '';
+  $url = isset($form_state['values']['url']) ? trim($form_state['values']['url']) : '';
 
   drupal_goto('admin/config/system/itg_akamai/akamai_log', array(
     'query' => array(
       'purge_id' => $purge_id,
+      'user' => $user,
+      'url' => $url,
     ),
       )
   );
@@ -243,10 +259,13 @@ function itg_akamai_all_logs_rows() {
   $rows = array();
   $parameters = drupal_get_query_parameters();
   $purge_id = isset($parameters['purge_id']) ? $parameters['purge_id'] : '';
+  $user = isset($parameters['user']) ? $parameters['user'] : '';
+  $url = isset($parameters['url']) ? $parameters['url'] : '';
 
   $header = array(
     t('Sn no.'),
     t('Purge id'),
+    t('Url'),
     t('Akamai Request'),
     t('Akamai Response'),
     t('User'),
@@ -264,6 +283,14 @@ function itg_akamai_all_logs_rows() {
     $query->condition('a.purge_id', $purge_id);
   }
 
+  if (isset($user) && !empty($user)) {
+    $query->condition('u.name', $user);
+  }
+
+  if (isset($url) && !empty($url)) {
+    $query->condition('a.url', $url);
+  }
+
   $query = $query->extend('PagerDefault')->limit(50);
   if (isset($parameters['sort']) && !empty($parameters['sort'])) {
     $query->orderBy('a.timestamp', $parameters['sort']);
@@ -279,10 +306,11 @@ function itg_akamai_all_logs_rows() {
     $rows[] = array(
       ++$sn,
       $record->purge_id,
+      $record->url,
       $record->akamai_request,
       $record->akamai_response,
       $record->name,
-      $record->status,
+      $record->status == 201 ? "Success" : 'Fail',
       date('Y-m-d h:i', $record->timestamp),
     );
   }
@@ -494,9 +522,9 @@ function akamai_cc_clear_frm_form($form, $form_state) {
 function akamai_cc_clear_frm_form_validate(&$form, &$form_state) {
   $akamai_config_cctype_type = $form_state['values']['contenttype'];
   $config_flag = variable_get('akamai_config_cctype_flag_' . $akamai_config_cctype_type);
-  $setting_link = l(t('Click here'),'admin/config/system/itg_akamai/akamai_ccpurge');
-  if($config_flag != 'yes'){
-    form_set_error('contenttype',t('You can not purge the content for this content type becuase for this content type you have choosen flag value as "Yes", please '.$setting_link.' to change the settings.'));
+  $setting_link = l(t('Click here'), 'admin/config/system/itg_akamai/akamai_ccpurge');
+  if ($config_flag != 'yes') {
+    form_set_error('contenttype', t('You can not purge the content for this content type becuase for this content type you have choosen flag value as "Yes", please ' . $setting_link . ' to change the settings.'));
   }
 }
 
@@ -559,4 +587,56 @@ function akamai_cc_clear_ct_op_batch_finished($success, $results, $operations) {
     $message = t('An error occurred while processing %error_operation with arguments: @arguments', array('%error_operation' => $error_operation[0], '@arguments' => print_r($error_operation[1], TRUE)));
     drupal_set_message($message, 'error');
   }
+}
+
+/**
+ * General Settings for section or category
+ */
+function itg_akamai_cache_akamai_section() {
+  $form = array();
+
+  $form['itg_akamai_section'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Akamai Cache Setting For Section/Category',
+  );
+
+  $form['itg_akamai_section']['itg_akamai_section'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Enter TTL for Section/Category'),
+    '#default_value' => variable_get('itg_akamai_section', ''),
+    '#description' => t('Enter TTL for Section/Category for akamai cache'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * General Settings for Akamai miscellaneous
+ */
+function itg_akamai_cache_akamai_other() {
+  $form = array();
+
+  $form['itg_akamai_homepage'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Akamai Cache TTL Setting for Some Other URL/Component',
+  );
+
+  $form['itg_akamai_homepage']['itg_akamai_other_hpage'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Enter TTL for Home Page'),
+    '#default_value' => variable_get('itg_akamai_other_hpage', ''),
+    '#description' => t('Enter TTL for Home Page for akamai cache'),
+    '#required' => TRUE,
+  );
+
+  $form['itg_akamai_homepage']['itg_akamai_other_hpage'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Enter TTL for Home Page'),
+    '#default_value' => variable_get('itg_akamai_other_hpage', ''),
+    '#description' => t('Enter TTL for Home Page for akamai cache'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
 }

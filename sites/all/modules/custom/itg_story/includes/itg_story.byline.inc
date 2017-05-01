@@ -28,7 +28,7 @@ function itg_story_byline($title) {
     {
       $reporter_email = '(' . $record['field_reporter_email_id_value'] . ')';
     }
-    $name_format = $record['title'] . $reporter_type . $reporter_email . '(' . $record['nid'] . ')';
+    $name_format = $record['title'] . $reporter_type . $reporter_email . '{' . $record['nid'] . '}';
     $options[$name_format] = $name_format;
   }
   drupal_json_output($options);
@@ -41,9 +41,11 @@ function itg_story_byline_save() {
 //  preg_match_all('!\d+!', $_POST['nd_id'], $matches);
 //  $byline_nid = $matches[0][0];
   $trigger_event = $_POST['byline_event'];
-  preg_match_all('/\(([A-Za-z0-9 ]+?)\)/', $_POST['nd_id'], $matches);
+  //preg_match_all('/\(([A-Za-z0-9 ]+?)\)/', $_POST['nd_id'], $matches);
+  preg_match_all('/{(.*?)}/', $_POST['nd_id'], $matches);
   if($trigger_event == 'unpublish') {
-  $byline_nid = trim($matches[1][1]);
+  //$byline_nid = trim($matches[1][1]);
+    $byline_nid = trim($matches[1][0]);
   } else {
     $byline_nid = $_POST['nd_id'];
   }
@@ -239,6 +241,9 @@ function itg_story_node_insert($node) {
 function itg_story_node_update($node) {
   if ($node->type == 'story')
   {
+    if(itg_workflow_stop_node_update_batch_for_widgets()) {
+      return;
+    }
     $nid = $node->nid;
     if (!empty($node->field_reporter_unique_id[LANGUAGE_NONE]))
     {

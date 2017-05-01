@@ -387,6 +387,7 @@ header{
 /*                        border-right: 1px solid $itg-nav-bordercolor;*/
                         border-top:none;
                         height: 37px;
+                        white-space: nowrap;
                         @include pos(relative);
                         @include font($itg-nav-fontsize,37px,null);    
                         @extend .dib;
@@ -3185,6 +3186,7 @@ h1.category-heading{
 /*Start anchors listing css*/
 .view-widget-anchors-listing{    
     @include listing-with-image(anchor-listing,left,22px,pic,detail);
+    @include pager;
     .anchor-listing{
         padding:20px 0;
         border-bottom:1px solid $border-color;
@@ -6585,7 +6587,7 @@ section.sidebar{
 #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration{
     h1{
         font-family: $itg-robotoslab;
-        font-size: 50px;
+        font-size: 40px;
         margin-bottom: 40px;
     }
 }
@@ -8801,19 +8803,27 @@ section.sidebar{
     }
     .program-livetv{
         background: #000;
-        padding: 15px 0px 75px 15px;
+        padding: 25px 0px 73px 20px;
         @include clearfix;       
         .live_tv_video{
-            @include float(left);
-            width: 82%;
+          float: left;
+          width: 100%;
+          max-width: 642px;
+          height: 0;
+          padding-bottom: 48.3%;
+          position: relative;
             iframe{
-                width: 100%;
-                height: 50vh;
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              left: 0;
+              top: 0;
             }
         }
         .social-icon{
-            @include float(right);   
-            width: 18%;
+            width: 108px;
+            overflow: hidden;
+            padding-top: 65px;
             a{
                 color: #aaa9a9;
                 font-size: 13px;
@@ -11199,7 +11209,7 @@ span.close_btt {
 
 
 
-
+.no-tv-program{padding-bottom: 20px;}
 .search-icon-parent{
   position: relative;
   .search-icon-search{
