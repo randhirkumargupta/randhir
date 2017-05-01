@@ -1259,12 +1259,13 @@ function itg_mobile_services_get_assoc_service() {
   $query->distinct();
   $query->fields('node', array('nid', 'title'));
   $query->join('field_data_field_service_association_title', 'sat', "node.nid = sat.field_service_association_title_target_id");
-  $query->join('field_data_field_story_expiry_date', 'expiry_date', "node.nid= expiry_date.entity_id");
+  $query->leftJoin('field_data_field_story_expiry_date', 'expiry_date', "node.nid= expiry_date.entity_id");
   $query->join('field_data_field_astro_service', 'astro_service', "node.nid= astro_service.entity_id");
   if (empty($node_nid)) {
-    $query->where("expiry_date.field_story_expiry_date_value >= CURDATE()");
+    $query->where("expiry_date.field_story_expiry_date_value >= CURDATE() or expiry_date.field_story_expiry_date_value IS NULL");
     $query->condition('astro_service.field_astro_service_value', $astry_type, '=');
   }
+  
   $query->condition('node.type', 'service_creation', '=');
 
   $result = $query->execute();

@@ -930,32 +930,6 @@ jQuery(document).ready(function () {
 
 jQuery(window).load(function(){
   var sticky = jQuery('.region-vertical-menu');
-//  var stickyrStopper = jQuery('#footer');
-//  if (!!sticky.offset()) { // make sure ".sticky" element exists
-//
-//    var generalSidebarHeight = sticky.innerHeight();
-//    var stickyTop = jQuery('#main').offset().top;
-//    var stickOffset = 0;
-//    var stickyStopperPosition = stickyrStopper.offset().top;
-//    var stopPoint = stickyStopperPosition - generalSidebarHeight - 150;
-//    var diff = stopPoint;
-//    console.log('gsh = ' + generalSidebarHeight);
-//    console.log("ssp = " + stickyStopperPosition);
-//    console.log("diff = " + diff);
-//    jQuery(window).scroll(function(){ // scroll event
-//      var windowTop = jQuery(window).scrollTop(); // returns number
-//      console.log("stickyTop = " + stickyTop);
-//      if (stopPoint < windowTop) {
-//          sticky.css({ position: 'absolute', top: diff });
-//      } else
-//      if (stickyTop <= windowTop) {
-//          sticky.css({ position: 'fixed', top: stickOffset });
-//      } else {
-//          sticky.css({position: 'absolute', top: 'initial'});
-//      }
-//    });
-//
-//  }
   sticky.stickyMojo({footerID: '#footer', contentID: '#main'});
 });
 });

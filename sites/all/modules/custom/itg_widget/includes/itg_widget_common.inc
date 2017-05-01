@@ -358,6 +358,7 @@ function getsaction_list() {
 function get_all_state($cat) {
   $states_neame = array();
   $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
+ 
   $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
   $states_neame[] = 'Select';
   foreach ($terms as $values) {
@@ -756,6 +757,7 @@ function get_required_data_from_entity_id($entity_id) {
  * {@inheritdoc}
  */
 function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+
   if (isset($form['type']) && !empty($form['type'])) {
     foreach ($form['type']['#options'] as $optionkey => $optiondata) {
       if ($optionkey == 'videogallery') {
@@ -764,6 +766,7 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
     }
   }
   switch ($form['#id']) {
+     
     case 'views-exposed-form-home-page-feature-widget-page-1':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
       $form['nid']['#attributes']['placeholder'] = t('Content ID');
@@ -902,7 +905,7 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
       $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
       $form['#validate'][] = 'custom_section_wise_validate';
-      $states_name = get_all_state();
+      $states_name = get_all_state($_GET['cat_id']);
 
       $form['state_val'] = array(
           '#type' => 'select',

@@ -59,8 +59,6 @@ function feature_for_mobile_services_user_default_permissions() {
   $permissions['delete any client_service_association content'] = array(
     'name' => 'delete any client_service_association content',
     'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -70,8 +68,6 @@ function feature_for_mobile_services_user_default_permissions() {
   $permissions['delete any clients_creation content'] = array(
     'name' => 'delete any clients_creation content',
     'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -81,8 +77,6 @@ function feature_for_mobile_services_user_default_permissions() {
   $permissions['delete any service_creation content'] = array(
     'name' => 'delete any service_creation content',
     'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -92,8 +86,6 @@ function feature_for_mobile_services_user_default_permissions() {
   $permissions['delete any vas_service_content content'] = array(
     'name' => 'delete any vas_service_content content',
     'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -103,8 +95,6 @@ function feature_for_mobile_services_user_default_permissions() {
   $permissions['delete own client_service_association content'] = array(
     'name' => 'delete own client_service_association content',
     'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -114,8 +104,6 @@ function feature_for_mobile_services_user_default_permissions() {
   $permissions['delete own clients_creation content'] = array(
     'name' => 'delete own clients_creation content',
     'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -125,8 +113,6 @@ function feature_for_mobile_services_user_default_permissions() {
   $permissions['delete own service_creation content'] = array(
     'name' => 'delete own service_creation content',
     'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -137,8 +123,6 @@ function feature_for_mobile_services_user_default_permissions() {
     'name' => 'delete own vas_service_content content',
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
