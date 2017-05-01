@@ -88,7 +88,7 @@ window.addEventListener("message", function(ev) {
       <?php
           $flag = TRUE;
           $node_array = array('story', 'photogallery', 'videogallery', 'podacast', 'breaking_news', 'blog', 'survey', 'quiz', 'poll', 'mega_review_critic');
-          $node_arg = array('site-search', 'blog-listing', 'anchors-list', 'sosorry', 'programmes', 'online-archive-story', 'personalization', 'itg_active_polls');
+          $node_arg = array('topic', 'blog-listing', 'anchors-list', 'sosorry', 'programmes', 'online-archive-story', 'personalization', 'itg_active_polls');
           if(isset($node->type) && in_array($node->type , $node_array)) {
             $flag = FALSE;
           }else if(isset($arg[0]) && in_array($arg[0], $node_arg)) {
