@@ -311,7 +311,7 @@ function frontend_breadcrumb_display($id = NULL , $entity_object = NULL , $singl
 
 function itg_seo_node_view($node , $view_mode , $langcode) {
   itg_seo_node_data($node);
-  pathauto_create_alias();
+  //pathauto_create_alias();
 }
 
 /**

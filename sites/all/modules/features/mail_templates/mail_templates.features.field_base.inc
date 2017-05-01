@@ -267,6 +267,28 @@ function mail_templates_field_default_field_bases() {
     'type' => 'text_long',
   );
 
+  // Exported field_base: 'field_mail_body_quiz_completion'.
+  $field_bases['field_mail_body_quiz_completion'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_mail_body_quiz_completion',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
   // Exported field_base: 'field_mail_body_sign_up'.
   $field_bases['field_mail_body_sign_up'] = array(
     'active' => 1,
@@ -639,6 +661,30 @@ function mail_templates_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_mail_subject_quiz_completi'.
+  $field_bases['field_mail_subject_quiz_completi'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_mail_subject_quiz_completi',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_mail_subject_sign_up'.
   $field_bases['field_mail_subject_sign_up'] = array(
     'active' => 1,
@@ -768,6 +814,7 @@ function mail_templates_field_default_field_bases() {
         'sign_up' => 'Sign up',
         'task_idea' => 'Task/Idea',
         'ugc' => 'UGC',
+        'quiz_completion' => 'Quiz Completion',
       ),
       'allowed_values_function' => '',
     ),

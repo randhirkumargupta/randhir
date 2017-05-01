@@ -861,7 +861,7 @@ if (!empty($content)):
                   $term = taxonomy_term_load($tags['tid']);
                   $t_name = $term->name;
                   $comma_sep_tag[] = $t_name;
-                  print '<li><a target="_blank" href="' . $base_url . '/site-search?keyword=' . $t_name . '">#' . $t_name . '</a></li>';
+                  print '<li><a target="_blank" href="' . $base_url . '/topic?keyword=' . $t_name . '">#' . $t_name . '</a></li>';
                 }
               }
               ?>
