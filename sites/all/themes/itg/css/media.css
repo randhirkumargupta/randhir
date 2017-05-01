@@ -2724,6 +2724,8 @@
   /*CSS start sidebar */
   section.sidebar {
     border: 1px solid #ddd;
+    width: 100%;
+    max-width: 370px;
   }
 
   .sidebars {
