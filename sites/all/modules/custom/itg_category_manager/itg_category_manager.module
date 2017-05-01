@@ -953,7 +953,7 @@ function itg_category_manager_taxonomy_term_insert($term) {
       }
       $pathdata = $parent_path . '/' . strtolower($path_name);
       $newpath = itg_category_manager_custom_path($pathdata);
-      $term->path = array('alias' => $newpath , 'pathauto' => FALSE);
+//      $term->path = array('alias' => $newpath , 'pathauto' => FALSE);
       $term->path['alias'] = $newpath;
     }
     $data['sef_url'] = $term->path['alias'];

@@ -470,6 +470,49 @@ function mail_templates_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-mail_templates-field_mail_body_quiz_completion'.
+  $field_instances['node-mail_templates-field_mail_body_quiz_completion'] = array(
+    'bundle' => 'mail_templates',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 48,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_mail_body_quiz_completion',
+    'label' => 'Mail Body',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 21,
+    ),
+  );
+
   // Exported field_instance: 'node-mail_templates-field_mail_body_sign_up'.
   $field_instances['node-mail_templates-field_mail_body_sign_up'] = array(
     'bundle' => 'mail_templates',
@@ -1144,6 +1187,49 @@ function mail_templates_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 12,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-mail_templates-field_mail_subject_quiz_completi'.
+  $field_instances['node-mail_templates-field_mail_subject_quiz_completi'] = array(
+    'bundle' => 'mail_templates',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 47,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_mail_subject_quiz_completi',
+    'label' => 'Mail Subject',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 20,
     ),
   );
 
