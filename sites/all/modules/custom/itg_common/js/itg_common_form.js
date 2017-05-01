@@ -110,12 +110,14 @@ jQuery(document).ready(function () {
         jQuery(".views-table").tableToCSV();
     });
 
-    jQuery("#data-export-tags").tableExport({
-        bootstrap: false,
-        headings: false,
-        footers: false,
-        formats: ["csv"],
-        fileName: "tags",
-        ignoreCols: [0, 2, 5],
-    });
+    if (jQuery('table').hasClass('data-export-tags')) {
+        jQuery("#data-export-tags").tableExport({
+            bootstrap: false,
+            headings: false,
+            footers: false,
+            formats: ["csv"],
+            fileName: "tags",
+            ignoreCols: [0, 2, 5],
+        });
+    }
 });

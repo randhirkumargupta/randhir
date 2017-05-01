@@ -973,6 +973,28 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['nid']['#attributes']['placeholder'] = t('Page ID');
       $form['nid']['#autocomplete_path'] = 'content-nid-list/page/autocomplete';
       break;
+    case 'views-exposed-form-story-widget-trending-videos-widget':
+    case 'views-exposed-form-special-auto-review-widget-special-auto-review-widget-list':
+    case 'views-exposed-form-section-wise-content-ordering-list-dont-miss-content':
+    case 'views-exposed-form-section-wise-content-ordering-list-we-may-suggest-widget':
+    case 'views-exposed-form-story-widget-most-popular-widget':
+    case 'views-exposed-form-story-widget-page-2':
+    case 'views-exposed-form-story-widget-top-takes-video-widget':
+    case 'views-exposed-form-story-widget-watch-right-now-widget':
+    case 'views-exposed-form-home-page-feature-widget-page-2':
+    case 'views-exposed-form-photo-carousel-widget-photo-carousel':
+    case 'views-exposed-form-photo-carousel-widget-video-carousel':
+    case 'itg-widget-issuewidgetlist-filter-form':
+    case 'views-exposed-form-category-of-stroy-base-magazin-widget-issue-magazin-widget-list':
+    case 'views-exposed-form-supplement-base-magazin-widget-supplement-base-magazin-widget-list':
+    case 'views-exposed-form-yearender-top-news-and-top-videos-yearend-left-widget-list':
+    case 'views-exposed-form-most-read-widget-most-read-widget-list':
+      $form['items_per_page']['#options'] = array(
+        '10' => 10,
+        '20' => 20,
+        '30' => 30
+      );
+      break;
   }
   if (isset($form['#info']['filter-shs_term_node_tid_depth']) && !empty($form['#info']['filter-shs_term_node_tid_depth'])) {
     $form['#info']['filter-shs_term_node_tid_depth']['label'] = 'Section';
@@ -2511,7 +2533,7 @@ function itg_widget_issuewidgetlist_filter_form($form, $form_state) {
       '#title' => t('Items per page'),
       '#type' => 'select',
       '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
-      '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
+      '#options' => array(10 => 10, 20 => 20, 30 => 30),
   );
   $form['alt_button'] = array(
       '#type' => 'submit',

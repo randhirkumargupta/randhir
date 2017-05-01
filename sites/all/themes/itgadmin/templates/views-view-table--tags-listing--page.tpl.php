@@ -19,7 +19,7 @@
  * @ingroup views_templates
  */
 ?>
-<table id="data-export-tags" <?php if ($classes) { print 'class="'. $classes . '" '; } ?><?php print $attributes; ?>>
+<table id="data-export-tags" <?php if ($classes) { print 'class="data-export-tags '. $classes . '" '; } ?><?php print $attributes; ?>>
    <?php if (!empty($title) || !empty($caption)) : ?>
      <caption><?php print $caption . $title; ?></caption>
   <?php endif; ?>
