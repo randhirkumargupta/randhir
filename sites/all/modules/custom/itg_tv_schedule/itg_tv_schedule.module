@@ -309,7 +309,7 @@ function itg_tv_schedule_search_form_validate($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_tv_schedule_search_form_submit($form, &$form_state) {
-  // check if title field is blank
+  // check if title field is blank befor submit
   if(!empty($form_state['input']['title'])) {
   $options = array('query' => array('title' => $form_state['input']['title']));
   drupal_goto('tv-show/' . arg(1), $options);
