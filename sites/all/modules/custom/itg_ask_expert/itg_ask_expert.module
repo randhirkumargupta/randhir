@@ -61,7 +61,7 @@ function itg_ask_expert_form_alter(&$form, &$form_state, $form_id) {
 
         // set term_id from url in hidden field
         if (empty($form['nid']['#value'])) {
-            $form['field_user_source_term_id'][LANGUAGE_NONE][0]['value']['#value'] = 147; //130
+            $form['field_user_source_term_id'][LANGUAGE_NONE][0]['value']['#value'] = ''; //130
         }
         $form['actions']['submit']['#value'] = 'Submit';
         $form['#after_build'][] = 'itg_ask_expert_after_build';

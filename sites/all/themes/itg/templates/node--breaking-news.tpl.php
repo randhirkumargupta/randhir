@@ -136,7 +136,7 @@ if (!empty($content)):
                 $current_time =  str_replace(":", "", date('H:i'));
                 if(!empty($entity[$field_collection_id]->field_breaking_redirection_url['und'][0]['value'])) {
                   $url = preg_replace('#^https?://#', '', $entity[$field_collection_id]->field_breaking_redirection_url['und'][0]['value']);
-                  $redirection_url = l($entity[$field_collection_id]->field_breaking_tile['und'][0]['value'], 'http://'.$url, array("attributes" => array("target" => "_blank"), 'html' => TRUE));
+                  $redirection_url = l($entity[$field_collection_id]->field_breaking_tile['und'][0]['value'], 'http://'.$url, array("attributes" => array("target" => "_blank", "title" => $entity[$field_collection_id]->field_breaking_tile['und'][0]['value']), 'html' => TRUE));
                 } else {
                   $redirection_url = $entity[$field_collection_id]->field_breaking_tile['und'][0]['value'];
                 }

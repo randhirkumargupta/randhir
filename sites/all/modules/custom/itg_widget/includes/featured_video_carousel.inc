@@ -55,6 +55,8 @@ function itg_widget_featured_video_carousel_data_fetch($result, $slider_type) {
         $data_render[$data['nid']]['primary_category'] = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
         $data_render[$data['nid']]['sid'] = $sid;
         $data_render[$data['nid']]['cat'] = $section_cat_id;
+        $data_render[$data['nid']]['image_alt'] = $node->field_story_extra_large_image[$node->language][0]['alt'];
+        $data_render[$data['nid']]['image_title'] = $node->field_story_extra_large_image[$node->language][0]['title'];
     }
     return $data_render;
 }

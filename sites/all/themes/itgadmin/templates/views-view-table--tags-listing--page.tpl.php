@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Template to display a view as a table.
@@ -18,17 +19,14 @@
  * @ingroup views_templates
  */
 ?>
-<table <?php if ($classes) { print 'class="'. $classes . '" '; } ?><?php print $attributes; ?>>
+<table id="data-export-tags" <?php if ($classes) { print 'class="data-export-tags '. $classes . '" '; } ?><?php print $attributes; ?>>
    <?php if (!empty($title) || !empty($caption)) : ?>
      <caption><?php print $caption . $title; ?></caption>
   <?php endif; ?>
   <?php if (!empty($header)) : ?>
     <thead>
       <tr>
-        <?php foreach ($header as $field => $label): 
-           if($field == 'nid')
-             continue;
-          ?>
+        <?php foreach ($header as $field => $label): ?>
           <th <?php if ($header_classes[$field]) { print 'class="'. $header_classes[$field] . '" '; } ?> scope="col">
             <?php print $label; ?>
           </th>
@@ -39,22 +37,15 @@
   <tbody>
     <?php foreach ($rows as $row_count => $row): ?>
       <tr <?php if ($row_classes[$row_count]) { print 'class="' . implode(' ', $row_classes[$row_count]) .'"';  } ?>>
-        <?php foreach ($row as $field => $content):
-          if($field == 'nid')
-             continue;
-          ?>
+        <?php foreach ($row as $field => $content): ?>
           <td <?php if ($field_classes[$field][$row_count]) { print 'class="'. $field_classes[$field][$row_count] . '" '; } ?><?php print drupal_attributes($field_attributes[$field][$row_count]); ?>>
-            <?php print $content; ?>
-            <?php if($field == 'nothing_1') {
-                $node = node_load($row['nid']);
-                $selectedTemplatenid = $node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id'];
-                $newletterContents = $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];
-                foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $values) {
-                  $cat_array[] = $values['tid'];
-                }
-                $tid_val = implode(',' , $cat_array);
-                echo  l( '| <span class="view-link">' .t(' preview') . '</span>' , 'newsletter-data-preview-before-download/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $tid_val , array("attributes" => array("class" => array("colorbox-load")) ,  "query"=>array("width" => "900", "height" => "600", "iframe" => "true" , "nid" => $node->nid) , 'html' => true));
-             } ?>
+            <?php 
+            print $content; 
+            
+            if($field == 'nothing') {
+            print  l(' | Remove' , 'texonomy/confirm/ajax/'.$row['tid']);
+            }
+            ?>
           </td>
         <?php endforeach; ?>
       </tr>
