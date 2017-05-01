@@ -973,6 +973,28 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['nid']['#attributes']['placeholder'] = t('Page ID');
       $form['nid']['#autocomplete_path'] = 'content-nid-list/page/autocomplete';
       break;
+    case 'views-exposed-form-story-widget-trending-videos-widget':
+    case 'views-exposed-form-special-auto-review-widget-special-auto-review-widget-list':
+    case 'views-exposed-form-section-wise-content-ordering-list-dont-miss-content':
+    case 'views-exposed-form-section-wise-content-ordering-list-we-may-suggest-widget':
+    case 'views-exposed-form-story-widget-most-popular-widget':
+    case 'views-exposed-form-story-widget-page-2':
+    case 'views-exposed-form-story-widget-top-takes-video-widget':
+    case 'views-exposed-form-story-widget-watch-right-now-widget':
+    case 'views-exposed-form-home-page-feature-widget-page-2':
+    case 'views-exposed-form-photo-carousel-widget-photo-carousel':
+    case 'views-exposed-form-photo-carousel-widget-video-carousel':
+    case 'itg-widget-issuewidgetlist-filter-form':
+    case 'views-exposed-form-category-of-stroy-base-magazin-widget-issue-magazin-widget-list':
+    case 'views-exposed-form-supplement-base-magazin-widget-supplement-base-magazin-widget-list':
+    case 'views-exposed-form-yearender-top-news-and-top-videos-yearend-left-widget-list':
+    case 'views-exposed-form-most-read-widget-most-read-widget-list':
+      $form['items_per_page']['#options'] = array(
+        '10' => 10,
+        '20' => 20,
+        '30' => 30
+      );
+      break;
   }
   if (isset($form['#info']['filter-shs_term_node_tid_depth']) && !empty($form['#info']['filter-shs_term_node_tid_depth'])) {
     $form['#info']['filter-shs_term_node_tid_depth']['label'] = 'Section';
@@ -2511,7 +2533,7 @@ function itg_widget_issuewidgetlist_filter_form($form, $form_state) {
       '#title' => t('Items per page'),
       '#type' => 'select',
       '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
-      '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
+      '#options' => array(10 => 10, 20 => 20, 30 => 30),
   );
   $form['alt_button'] = array(
       '#type' => 'submit',
@@ -2603,7 +2625,7 @@ function get_rhs_block_display_condtion($delta = '') {
        if($arg[0] =='gethomecarddata') {
           return TRUE;
        }
-        if ((!empty($arg[1]) && in_array($arg[1], $watch_right_now_node_array)) || $arg[0] == 'blog' || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'blog-listing' || $arg[0] == 'podcasts-listing' || $arg[0] == 'programmes' || $arg[0] == 'site-search' || $arg[0] == 'online-archive-story' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE) {
+        if ((!empty($arg[1]) && in_array($arg[1], $watch_right_now_node_array)) || $arg[0] == 'blog' || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'blog-listing' || $arg[0] == 'podcasts-listing' || $arg[0] == 'programmes' || $arg[0] == 'topic' || $arg[0] == 'online-archive-story' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE) {
           return TRUE;
         }
         break;
@@ -2612,7 +2634,7 @@ function get_rhs_block_display_condtion($delta = '') {
        if($arg[0] =='gethomecarddata') {
           return TRUE;
        }
-        if ((!empty($arg[1]) && in_array($arg[1], $top_takes_node_array)) || $arg[0] == 'blog' || $arg[0] == 'itg_active_polls' || $arg[0] == 'itg-quiz' || $arg[0] == 'programmes' || $arg[0] == 'site-search' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
+        if ((!empty($arg[1]) && in_array($arg[1], $top_takes_node_array)) || $arg[0] == 'blog' || $arg[0] == 'itg_active_polls' || $arg[0] == 'itg-quiz' || $arg[0] == 'programmes' || $arg[0] == 'topic' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
           return TRUE;
         }
         break;
@@ -2621,7 +2643,7 @@ function get_rhs_block_display_condtion($delta = '') {
        if($arg[0] =='gethomecarddata') {
           return TRUE;
        }
-        if ((!empty($arg[1]) && in_array($arg[1], $we_may_suggest_node_array)) || $arg[0] == 'blog' || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'itg-quiz' || $arg[0] == 'blog-listing' || $arg[0] == 'podcasts-listing' || $arg[0] == 'site-search' || $arg[0] == 'livetv' || $arg[0] == 'online-archive-story' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
+        if ((!empty($arg[1]) && in_array($arg[1], $we_may_suggest_node_array)) || $arg[0] == 'blog' || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'itg-quiz' || $arg[0] == 'blog-listing' || $arg[0] == 'podcasts-listing' || $arg[0] == 'topic' || $arg[0] == 'livetv' || $arg[0] == 'online-archive-story' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
           return TRUE;
         }
         break;

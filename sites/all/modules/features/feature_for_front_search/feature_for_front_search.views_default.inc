@@ -338,7 +338,7 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['filters']['label']['id'] = 'label';
   $handler->display->display_options['filters']['label']['table'] = 'apachesolr__solr';
   $handler->display->display_options['filters']['label']['field'] = 'label';
-  $handler->display->display_options['path'] = 'site-search';
+  $handler->display->display_options['path'] = 'topic';
   $export['front_end_global_search'] = $view;
 
   return $export;

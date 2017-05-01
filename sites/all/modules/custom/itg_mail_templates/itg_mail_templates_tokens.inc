@@ -121,6 +121,7 @@ function itg_mail_templates_tokenstable() {
                 <td>[itg_mail_token:itg_product_name]</td>
                 <td>A token that will be used for ITG Product Name.</td>
               </tr>
+              
               <tr>
                 <td colspan="3"><b>Tokens For User/Site</b></td>
               </tr>
@@ -143,6 +144,14 @@ function itg_mail_templates_tokenstable() {
                 <td>ITG Site Name</td>
                 <td>[itg_mail_token:itg_site_name]</td>
                 <td>A token that will be used for ITG Site Name.</td>
+              </tr>
+              <tr>
+                <td colspan="3"><b>Tokens For Quiz Completion</b></td>
+              </tr>
+              <tr>
+                <td>ITG Quiz Winner List</td>
+                <td>[itg_mail_token:itg_quiz_winner_list]</td>
+                <td>A token that will be used for ITG Quiz Winner List.</td>
               </tr>
               <tr>
                 <td colspan="3"><b>Tokens For Task/Idea</b></td>

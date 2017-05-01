@@ -13586,7 +13586,8 @@ span.close_btt {
 }
 
 .no-tv-program {
-  padding-bottom: 20px;
+  padding-bottom: 15px;
+  color: red;
 }
 
 .search-icon-parent {
