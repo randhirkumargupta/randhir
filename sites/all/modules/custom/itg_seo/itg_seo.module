@@ -94,13 +94,11 @@ function itg_seo_form_alter(&$form , &$form_state , $form_id) {
     }
   }
 
-
   if ($form_id == 'syndication_client_node_form' || $form_id == 'syndication_rule_node_form' || $form_id == 'syndication_feed_from_pattern_node_form' || $form_id == 'ads_management_node_form' || $form_id == 'task_idea_allocation_tracking_node_form' || $form_id == 'ugc_node_form' || $form_id == 'notification_node_form' || $form_id == 'coupon_node_form') {
     //$form['additional_settings']['#access'] = FALSE;
     $form['#after_build'][] = 'itg_additional_settings_element_hide';
   }
 
-//p($form['#node']->path['alias']);
   $node_form_array = array('photogallery_node_form' ,
     'story_node_form' ,
     'videogallery_node_form' ,
@@ -256,6 +254,7 @@ function frontend_breadcrumb_display($id = NULL , $entity_object = NULL , $singl
 //  } else {
 //  $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo">' . l('<span itemprop="title">' . t($title_val) , 'node/' . $entity_object->nid , array('html' => TRUE , 'attributes' => array('itemprop' => 'url'))) . '</span>';
 //  }
+  
   $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo"><span itemprop="title">' . t($title_val) . '</span>';
   $section_link = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">'
       . l('<span itemprop="title">News</span>' , '<front>' , array('html' => TRUE , 'attributes' => array('itemprop' => 'url'))) . '</div>';
@@ -312,6 +311,7 @@ function frontend_breadcrumb_display($id = NULL , $entity_object = NULL , $singl
 
 function itg_seo_node_view($node , $view_mode , $langcode) {
   itg_seo_node_data($node);
+  pathauto_create_alias();
 }
 
 /**
@@ -328,33 +328,26 @@ function event_registration_extra_element_hide($form , &$form_state) {
   return $form;
 }
 
-/**
- * Implementation of hook_node_presave().
- * @param object $node
- */
-function itg_seo_node_presave($node) {
-  // for update 
-// if (!empty($node->nid)) {
-//    $ctype_array = array('photogallery', 'story', 'videogallery', 'podcast', 'food_news', 'cooking_tips', 'recipe');
-//    if (in_array($node->type, $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated'){
-//       $newpath = itg_common_custompath_insert_load($node);
-//       watchdog('shra' , $node->type);
-//       $node->path = array('alias' => $newpath , 'pathauto' => FALSE);
-//    }
-//  }
-}
 
 /**
  * Implementation of hook_node_insert().
  * @param object $node
  */
 function itg_seo_node_insert($node) {
-  $ctype_array = array('photogallery' , 'story' , 'videogallery' , 'podcast' , 'food_news' , 'cooking_tips' , 'recipe');
-  // custom alias cnditions
+  //set custom path alias
+  
+  $ctype_array = array('photogallery' , 
+      'story', 
+      'videogallery',
+      'podcast',
+      'food_news',
+      'cooking_tips',
+      'recipe');
+  
   if (in_array($node->type , $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-//    $newpath = itg_common_custompath_insert_load($node);
-//    $node->path = array('alias' => $newpath , 'pathauto' => FALSE);
-  }
+    $newpath = itg_common_custompath_insert_load($node);    
+    $node->path['alias'] = $newpath;    
+  } // custom alias conditions for migration
   elseif ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type , $ctype_array)) {
     itg_common_custompath_migrated_load($node);
   }
@@ -364,18 +357,19 @@ function itg_seo_node_insert($node) {
  * Implementation of hook_node_insert().
  * @param object $node
  */
-function itg_seo_node_update($node) {
+
+function itg_seo_node_update($node) { 
+  //set custom path alias  
   if(itg_workflow_stop_node_update_batch_for_widgets()) {
     return;
   }
+
   $ctype_array = array('photogallery' , 'story' , 'videogallery' , 'podcast' , 'food_news' , 'cooking_tips' , 'recipe');
   if (in_array($node->type , $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
     $newpath = itg_common_custompath_insert_load($node);
-    //watchdog('shra' , $node->type);
-    $node->path = array('alias' => $newpath , 'pathauto' => FALSE);
+    $node->path['alias'] = $newpath;   
   }
-
-  // custom alias cnditions
+  // custom alias conditions for migration
   if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type , $ctype_array)) {
     itg_common_custompath_migrated_load($node , 'update_migrated');
   }
