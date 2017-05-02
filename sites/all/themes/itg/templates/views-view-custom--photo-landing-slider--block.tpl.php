@@ -11,7 +11,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
 ?>
 <div class="row">
     <div class="col-md-12">
-        <h1 class="photo-heading"><?php print $rows[0]['title']; ?></h1>    <?php global $user;
+      <h1 class="photo-heading" title="<?php print $rows[0]['title']; ?>"><?php print $rows[0]['title']; ?></h1>    <?php global $user;
         if(in_array('Social Media', $user->roles)) {?>
          <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $photo_node->nid;?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span>promote</span></a>   
         <?php }?>
