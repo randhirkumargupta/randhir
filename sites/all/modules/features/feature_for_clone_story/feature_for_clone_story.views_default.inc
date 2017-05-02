@@ -191,6 +191,7 @@ function feature_for_clone_story_views_default_views() {
   $handler->display->display_options['fields']['nothing']['alter']['text'] = 'Clone';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['path'] = 'node/add/story?destination=clone-story&clone_id=[entity_id]';
+  $handler->display->display_options['fields']['nothing']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Apache Solr: entity_id */
