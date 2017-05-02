@@ -599,8 +599,10 @@ header {
 #block-itg-layout-manager-header-block .navigation ul#newlist li a {
   display: block;
   line-height: normal;
+  height: auto;
   padding: 7px 10px;
   white-space: normal;
+  word-wrap: break-word;
 }
 
 /*End header css*/
