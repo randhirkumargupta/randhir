@@ -9730,6 +9730,9 @@ div.node #comments h2 {
 .node-story-form .form-field-name-field-emoji-position .form-checkboxes .form-type-checkbox .form-checkbox {
   margin: 3px;
 }
+.node-story-form [class*="form-field-name-field-emoji"] iframe.cke_wysiwyg_frame {
+  pointer-events: none;
+}
 .node-story-form .form-field-name-field-story-technology {
   margin: 0 10px;
 }

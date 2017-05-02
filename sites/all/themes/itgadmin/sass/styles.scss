@@ -9131,6 +9131,9 @@ div.node{
       }
     }
   }
+  [class*="form-field-name-field-emoji"]{
+    iframe.cke_wysiwyg_frame{pointer-events: none;}
+  }
   .form-field-name-field-story-technology{
     margin: 0 10px;   
     [id*="field-story-technology-values"]{
