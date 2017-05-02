@@ -86,7 +86,7 @@ function itg_akamai_menu() {
     'file' => 'includes/itg_akamai.admin.inc',
     'type' => MENU_LOCAL_TASK,
   );
-  
+
   $items['admin/config/system/itg_akamai/other_conf'] = array(
     'title' => 'Other Settings',
     'description' => 'Admin interface for Akamai Other Setting',
@@ -140,7 +140,7 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
   module_load_include('inc', 'itg_akamai', 'includes/akamai_purge');
   if (variable_get('itg_akamai_disabled', FALSE)) {
     watchdog('itg_akamai', 'Request to clear paths ignored because clearing is disabled. Check ITG Akamai module settings.');
-    drupal_set_message(t('Request to clear paths ignored because clearing is disabled. Check ITG Akamai module settings.'),'warning');
+    drupal_set_message(t('Request to clear paths ignored because clearing is disabled. Check ITG Akamai module settings.'), 'warning');
     return FALSE;
   }
 
@@ -224,7 +224,7 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
     $response_data_decoded = json_decode($e->getMessage());
     $data_for_log = ItgAkamaiUtility::itgAkamaiSetDataForLog($data, $e->getMessage(), $user->uid, $response_data_decoded->httpStatus, 0);
     $activity_log = ItgAkamaiUtility::itgAkamaiSetActivityLog($data_for_log);
-    watchdog('ITG-Akamai log', 'OOPS unable to purge URL and error is : '.$e->getMessage());
+    watchdog('ITG-Akamai log', 'OOPS unable to purge URL and error is : ' . $e->getMessage());
     drupal_set_message(t("OOPS unable to purge URL and error is :$e->getMessage()"), 'error');
     $request_success_flag = 0;
 
@@ -520,6 +520,13 @@ function itg_akamai_taxonomy_term_update($term) {
       itg_akamai_clear_url($url, array(), $term);
     }
   }
+
+  // Setting TTL for category manager taxonomy
+  if (user_access("administer itg akamai")) {
+    if ($term->vid == CATEGORY_MANAGMENT) { // Akamai setting for taxonomy content level 
+      itg_akamai_taxonomy_setting($term);
+    }
+  }
 }
 
 /**
@@ -575,6 +582,7 @@ function akamai_max_age($age = NULL) {
  */
 function itg_akamai_exit() {
   $max_age = akamai_max_age();
+  //watchdog('hdasdjd',$max_age);
   if (!empty($max_age)) {
     $formated_expire_date = itg_akamai_set_expiration_date($max_age);
     drupal_add_http_header('Edge-control', 'cache-maxage=' . $max_age . 's');
@@ -733,13 +741,14 @@ function itg_akamai_translate_time($timestring) {
  */
 function itg_akamai_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
   if ($form['#vocabulary']->machine_name == 'category_management') {
+
     $akamai_timeout_default = NULL;
-    $akamai_timeout_default = get_itg_akamai_content_setting($form['#node']->nid, $form['#node']->type);
+    $akamai_timeout_default = get_itg_akamai_content_setting($form['#term']['tid'], 'taxonomy');
 
     $form['itg_akamai_fieldset'] = array(
       '#type' => 'fieldset',
       '#title' => t('Akamak Settings'),
-      '#weight' => 5,
+      '#weight' => 15,
       '#collapsible' => TRUE,
       '#collapsed' => FALSE,
     );
@@ -750,5 +759,65 @@ function itg_akamai_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id
       '#default_value' => $akamai_timeout_default,
       '#description' => t("Timeout Length, the timeout used by when sending the cache clear request to Akamai's servers"),
     );
+  }
+}
+
+/**
+ * Setting the metadata for taxonomy level content (TTL) for Akamai
+ * @param object $term
+ */
+function itg_akamai_taxonomy_setting($term) {
+  if (isset($term->akamai_timeout) && !empty($term->akamai_timeout)) {
+    try {
+      $url = 'taxonomy/term/' . $term->tid;
+
+      db_merge('itg_akamai_content_setting')
+          ->key(array('entity_id' => $term->tid, 'entity_type' => 'taxonomy'))
+          ->fields(array(
+            'timestamp' => REQUEST_TIME,
+            'entity_id' => $term->tid,
+            'entity_type' => 'taxonomy',
+            'url' => $url,
+            'cache_time' => $term->akamai_timeout,
+          ))
+          ->execute();
+    }
+    catch (Exception $e) {
+      watchdog('ITG Akamai', 'Error:' . $e->getMessage());
+    }
+  }
+}
+
+/**
+ * Implements hook_taxonomy_term_insert().
+ *
+ * When term are insrted, setting Akamai TTL 
+ * cache. Clear base taxonomy/term/% url as well as aliases.
+ */
+function itg_akamai_taxonomy_term_insert($term) {
+  // Setting TTL for category manager taxonomy
+  if (user_access("administer itg akamai")) {
+    if ($term->vid == CATEGORY_MANAGMENT) { // Akamai setting for taxonomy content level 
+      itg_akamai_taxonomy_setting($term);
+    }
+  }
+}
+
+/**
+ * Implements hook_init()
+ */
+function itg_akamai_init() {
+// Adding TTL for some specified pages
+  $parm = isset($_GET['q']) ? $_GET['q'] : NULL;
+  switch ($_GET['q']) {
+    // Checking if page is Taxonomy page
+    case stristr($parm, 'taxonomy/term/'):
+      $parms = explode('/', $parm);
+      if ($parms[0] == "taxonomy" && $parms[1] == "term" && is_numeric($parms[2]) && $parms[3] == "") {
+        $max_age = get_itg_akamai_content_setting($parms[2], 'taxonomy');
+        akamai_max_age($max_age);
+      }
+
+      break;
   }
 }
