@@ -52,7 +52,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'field_facebook_gallery_associate',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Associate Gallery Id',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -92,7 +92,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'field_facebook_gallery_associate',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Gallery position',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -275,7 +275,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'field_story_listicle',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Listicle description',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -312,7 +312,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'field_story_listicle',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Listicle type',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -346,7 +346,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'field_story_technology',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Sample Photo Title',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -382,7 +382,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['field_collection_item-field_story_technology-field_technology_sample_photo'] = array(
     'bundle' => 'field_story_technology',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Sample Photo',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -493,7 +493,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'field_story_template_buzz',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'HeadLine',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -504,6 +504,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
     'field_name' => 'field_buzz_headline',
     'label' => 'HeadLine',
     'required' => 0,
@@ -647,7 +648,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Animated Image Position',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -686,7 +687,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Associate Photo Gallery',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -857,7 +858,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Right Emoji',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -899,7 +900,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Left Emoji',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -941,7 +942,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Emoji position',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1058,7 +1059,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Audio Position',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1142,7 +1143,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Audio URL',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1184,7 +1185,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Map Position',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1363,7 +1364,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Map Embed Code',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1405,7 +1406,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Cast',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1450,7 +1451,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Director',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1492,7 +1493,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Movie Plot',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1578,7 +1579,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_poll_start_date'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Date',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1805,7 +1806,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Social embed code',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1847,7 +1848,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Social embed code position',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1925,7 +1926,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Associate lead gallery/video',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1964,7 +1965,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Associate Video',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2168,7 +2169,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Configurations',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2410,7 +2411,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Expertise',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2452,7 +2453,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Story expires',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2490,7 +2491,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_expiry_date'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Story expiry date',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2537,54 +2538,11 @@ function features_for_story_field_default_field_instances() {
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
-        'repeat_collapsed' => 0,
         'text_parts' => array(),
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
       'weight' => 17,
-    ),
-  );
-
-  // Exported field_instance: 'node-story-field_story_extra_data'.
-  $field_instances['node-story-field_story_extra_data'] = array(
-    'bundle' => 'story',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 129,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_extra_data',
-    'label' => 'Story Extra Data',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 110,
     ),
   );
 
@@ -2933,7 +2891,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Factoids title',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2975,7 +2933,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Featured Name',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3017,7 +2975,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Highlights',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3058,7 +3016,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_issue_date'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Issue date',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3105,7 +3063,6 @@ function features_for_story_field_default_field_instances() {
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
-        'repeat_collapsed' => 0,
         'text_parts' => array(),
         'year_range' => '-0:+3',
       ),
@@ -3119,7 +3076,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Tags',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3207,7 +3164,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Story Kicker',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3325,7 +3282,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Listicle',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3496,7 +3453,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Issue based story',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3815,7 +3772,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Quote title',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3857,7 +3814,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Story rating',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3938,7 +3895,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Byline',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3982,7 +3939,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_schedule_date_time'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Schedule date & time',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -4029,7 +3986,6 @@ function features_for_story_field_default_field_instances() {
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
-        'repeat_collapsed' => 0,
         'text_parts' => array(),
         'year_range' => '-0:+3',
       ),
@@ -4043,7 +3999,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select magazine',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -4084,7 +4040,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select supplement',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -4129,7 +4085,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select templates',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -4370,7 +4326,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Social media integration',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -4541,7 +4497,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Syndication',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -4580,7 +4536,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Syndications photo',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -4856,7 +4812,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Tech Review Widget',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -5029,7 +4985,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Technology rating',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -5068,7 +5024,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Buzz',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -5155,7 +5111,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Listicle',
+    'description' => 'Listicle title',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -5243,7 +5199,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select listicle templates',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -5282,7 +5238,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Time',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -5321,7 +5277,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Tweet',
+    'description' => 'Twitter narrative',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -5511,7 +5467,7 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Story type',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -5596,7 +5552,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'City',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -5770,7 +5726,6 @@ function features_for_story_field_default_field_instances() {
   t('Social media integration');
   t('Source id');
   t('Source type');
-  t('Story Extra Data');
   t('Story Kicker');
   t('Story Technology');
   t('Story body');
@@ -5795,7 +5750,6 @@ function features_for_story_field_default_field_instances() {
   t('This is the redirection URL for the New Title added above (url format: https://www.w3schools.com)');
   t('This title will append after the main Story headline on the homepage');
   t('Time');
-  t('Tweet');
   t('Twitter Image');
   t('Twitter Video');
   t('Twitter narrative');

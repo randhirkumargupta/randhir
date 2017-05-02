@@ -143,7 +143,7 @@ function photogallery_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -180,7 +180,7 @@ function photogallery_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -217,7 +217,7 @@ function photogallery_field_default_field_instances() {
         'rows' => 3,
       ),
       'type' => 'text_textarea',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -325,7 +325,7 @@ function photogallery_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -402,6 +402,46 @@ function photogallery_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'field_collection_item-field_gallery_image-field_photo_by'.
+  $field_instances['field_collection_item-field_gallery_image-field_photo_by'] = array(
+    'bundle' => 'field_gallery_image',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 8,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_photo_by',
+    'label' => 'Photo By',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 0,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_gallery_image-field_photo_byline'.
   $field_instances['field_collection_item-field_gallery_image-field_photo_byline'] = array(
     'bundle' => 'field_gallery_image',
@@ -437,7 +477,7 @@ function photogallery_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete_tags',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -471,7 +511,7 @@ function photogallery_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 12,
+      'weight' => 11,
     ),
   );
 
@@ -480,7 +520,7 @@ function photogallery_field_default_field_instances() {
   $field_instances['field_collection_item-field_gallery_image-field_photo_small_image'] = array(
     'bundle' => 'field_gallery_image',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (88x66)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -496,7 +536,7 @@ function photogallery_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_photo_small_image',
-    'label' => 'Small Image',
+    'label' => 'Thumb Image',
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
@@ -544,7 +584,7 @@ function photogallery_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 11,
+      'weight' => 1,
     ),
   );
 
@@ -1679,6 +1719,8 @@ function photogallery_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -3067,6 +3109,7 @@ function photogallery_field_default_field_instances() {
   t('Image Size (483 x 271)');
   t('Image Size (647 x 363)');
   t('Image Size (88 x 66)');
+  t('Image Size (88x66)');
   t('Image Syndication');
   t('Image_id');
   t('Large image');
@@ -3083,7 +3126,6 @@ function photogallery_field_default_field_instances() {
   t('Section');
   t('Set As Featured');
   t('Short description');
-  t('Small Image');
   t('Small image');
   t('Social media');
   t('Social media integration');
@@ -3093,6 +3135,7 @@ function photogallery_field_default_field_instances() {
   t('Strap headline');
   t('Syndication');
   t('Tags');
+  t('Thumb Image');
   t('Time Facebook');
   t('Time Instagram');
   t('Time Twitter');

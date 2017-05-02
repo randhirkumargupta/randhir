@@ -108,10 +108,10 @@
     $output .= '<span class="widget-title">' . t($value->name) . '</span>';
     
     if(!empty($lock_story)) {
-      $output .= '<h3 class="lock">' . $title . '</h3>';  
+      $output .= '<h3 class="lock" title="'.  strip_tags($title).'">' . $title . '</h3>';  
     }
     else {
-      $output .= '<h3>' . $title . '</h3>';  
+      $output .= '<h3 title="'.  strip_tags($title).'">' . $title . '</h3>';  
     }
     
     if (!empty($sub_title)) {

@@ -5,7 +5,6 @@
 
 function itg_quiz_winners_mail_list() {
  $nid = arg(1);
-
   $user_email = itg_quiz_winners_user_list($nid);
   
   foreach ($user_email as $key => $value) {
@@ -13,11 +12,16 @@ function itg_quiz_winners_mail_list() {
   }
   $user_email_arr_unique = array_unique($user_email_arr);
   $user_email_str = implode(',',$user_email_arr_unique);
-  $mail_content = itg_quiz_get_mail_content($nid);
+  
+  if (function_exists('itg_mail_templates_get_mailcontent')) {
+    $mail_data = itg_mail_templates_get_mailcontent('Quiz');
+    $mail_subject = $mail_data->field_mail_subject_quiz_completi[LANGUAGE_NONE][0]['value'];
+    $mail_content = itg_quiz_get_mail_content($nid, $mail_data);
+  }
   
     $params = array(
       'body' => $mail_content,
-      'subject' => 'India Today | Quiz Winners',
+      'subject' => $mail_subject,
     );
 
     $mail = drupal_mail('itg_quiz_winners_list', 'send_mail_to_winners', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
@@ -94,7 +98,8 @@ function itg_quiz_winners_list_mail($key, &$message, $params) {
  * @param array $node
  * @return string
  */
-function itg_quiz_get_mail_content($nid) {
+function itg_quiz_get_mail_content($nid, $get_mail_data) {
+
   global $base_url;
   $winner_count = itg_quiz_winners_count($nid);
   $no_of_winner = $winner_count['field_quiz_winners_value'];
@@ -102,18 +107,18 @@ function itg_quiz_get_mail_content($nid) {
   
   $result_link = $base_url.'/quiz-user-list/'.$nid;
   $winners = '';
-  $content = '<p>Dear user, </p><p>Thanks for taking our quiz. Winners list is given below:</p>';
+  
+  $get_mail_content = $get_mail_data->field_mail_body_quiz_completion[LANGUAGE_NONE][0]['value'];
+  $content_link = '<a href="'.$result_link.'">here</a>';
+  $content = str_replace('[itg_mail_token:itg_quiz_winner_list]', $content_link, $get_mail_content);
+//  $content = '<p>Dear user, </p><p>Thanks for taking our quiz. Winners list is given below:</p>';
   $i = 1;
   foreach ($winner_records as $key => $value) {
     $winners .= '<p>' . $i . '. ' . $value['user_name'] . '(' . $value['quiz_score'] . ')' . '</p>';
     $i++;
   }
-  
-  $content_link = '<p><a href="'.$result_link.'">Click here to see result</a></p>';
-  
   $content_end ='<p>&nbsp;</p><p>Thanks,</p><p>India Today Team</p>';
-  $final_output = $content . $winners . $content_link . $content_end;
-
+  $final_output = $content . $winners .  $content_end;
   return $final_output;
 }
 

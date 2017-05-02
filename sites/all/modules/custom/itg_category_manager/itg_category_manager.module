@@ -292,7 +292,7 @@ function itg_category_manager_term_get_content($key) {
   foreach ($itg_result as $newres) {
     $resurndata .= $newres->field_cm_select_type_value.' , ';
   }
-  return $resurndata;
+  return rtrim($resurndata,' ,');
 }
 /**
  * Implements hook_js_alter() for use custom ckeditor js()
@@ -953,7 +953,7 @@ function itg_category_manager_taxonomy_term_insert($term) {
       }
       $pathdata = $parent_path . '/' . strtolower($path_name);
       $newpath = itg_category_manager_custom_path($pathdata);
-      $term->path = array('alias' => $newpath , 'pathauto' => FALSE);
+//      $term->path = array('alias' => $newpath , 'pathauto' => FALSE);
       $term->path['alias'] = $newpath;
     }
     $data['sef_url'] = $term->path['alias'];

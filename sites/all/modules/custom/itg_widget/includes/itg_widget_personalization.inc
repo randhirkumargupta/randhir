@@ -132,6 +132,7 @@ function get_personlization_node_data_for_front($nid, $is_blog_true = TRUE) {
   $query->leftJoin('file_managed', 'fm', 'fm.fid=eli.field_story_extra_large_image_fid');
   $query->fields('n', array('title', 'nid'));
   $query->fields('fm', array('uri'));
+  $query->fields('eli', array('field_story_extra_large_image_alt', 'field_story_extra_large_image_title'));
   $query->condition('n.nid', $nid);
     if(!$is_blog_true) {
     $query->condition('n.type', array('story', 'videogallery', 'photogallery' , 'blog'), 'IN');

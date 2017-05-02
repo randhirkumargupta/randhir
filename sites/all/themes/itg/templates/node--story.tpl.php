@@ -112,12 +112,12 @@ if (!empty($content)):
       }
       if (!empty($get_develop_story_status)) {
         ?>
-        <h1><?php print $content['story_title'] . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
+        <h1  title="<?php echo $content['story_title'];?>"><?php print $content['story_title'] . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
           <?php
         }
         else {
           ?>
-        <h1><?php print $content['story_title'] . $pipelinetext; ?></h1>
+        <h1 title="<?php echo $content['story_title'];?>"><?php print $content['story_title'] . $pipelinetext; ?></h1>
         <?php if (in_array('Social Media', $user->roles)) { ?>
           <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $node->nid; ?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span><?php t('promote'); ?></span></a>   
         <?php } ?>
@@ -861,7 +861,7 @@ if (!empty($content)):
                   $term = taxonomy_term_load($tags['tid']);
                   $t_name = $term->name;
                   $comma_sep_tag[] = $t_name;
-                  print '<li><a target="_blank" href="' . $base_url . '/site-search?keyword=' . $t_name . '">#' . $t_name . '</a></li>';
+                  print '<li><a target="_blank" href="' . $base_url . '/topic?keyword=' . $t_name . '">#' . $t_name . '</a></li>';
                 }
               }
               ?>
