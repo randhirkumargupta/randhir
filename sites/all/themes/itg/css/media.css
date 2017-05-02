@@ -2370,6 +2370,22 @@
   }
 
   /*CSS End Photo landing page*/
+  .story-section .story-right.photo-story .fa-chevron-left, .story-section .story-right.photo-story .fa-chevron-right {
+    width: 25px;
+    height: 35px;
+    top: 55px;
+    font-size: 18px;
+    line-height: 37px;
+  }
+}
+@media only screen and (max-width: 340px) {
+  .story-section .story-right.photo-story .fa-chevron-left, .story-section .story-right.photo-story .fa-chevron-right {
+    width: 25px;
+    height: 35px;
+    top: 40px;
+    font-size: 18px;
+    line-height: 37px;
+  }
 }
 /*Start header CSS Desktop version*/
 @media only screen and (min-width: 769px) {
@@ -2724,6 +2740,8 @@
   /*CSS start sidebar */
   section.sidebar {
     border: 1px solid #ddd;
+    width: 100%;
+    max-width: 370px;
   }
 
   .sidebars {
