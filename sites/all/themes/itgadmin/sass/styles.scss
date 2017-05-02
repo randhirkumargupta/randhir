@@ -11693,3 +11693,22 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   .get-tokens > a {
     color: #0c8bb1;
   }
+  .ftp-center #itg_video_content .video-ftp{
+    border-right: none;
+    width: 100%;
+  }
+  .view-tags-listing{
+    .attachment{
+      padding-right: 155px !important;
+    }
+    .view-content{
+      position: relative;
+      .button-default{
+        @extend .btn-submit;
+        position: absolute;
+        right: 0;
+        top: -46px;
+        margin-right: 0;
+      }
+    }
+  }
