@@ -28,7 +28,7 @@ global $base_url;
 
       </div>
       <div class="detail">
-        <h3>
+        <h3 title="<?php echo $row['title'];?>">
           <?php
           if (function_exists('itg_common_get_smiley_title')) {
             print l(itg_common_get_smiley_title($row['nid'], 0, 35), "node/" . $row['nid'], array("html" => TRUE));

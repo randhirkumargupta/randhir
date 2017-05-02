@@ -4691,7 +4691,7 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_photo_byline']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Content: Photo By */
+  /* Field: Field: Photo By */
   $handler->display->display_options['fields']['field_photo_by']['id'] = 'field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['table'] = 'field_data_field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['field'] = 'field_photo_by';
@@ -4803,7 +4803,7 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_photo_byline']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Content: Photo By */
+  /* Field: Field: Photo By */
   $handler->display->display_options['fields']['field_photo_by']['id'] = 'field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['table'] = 'field_data_field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['field'] = 'field_photo_by';
@@ -4904,7 +4904,7 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_photo_byline']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Content: Photo By */
+  /* Field: Field: Photo By */
   $handler->display->display_options['fields']['field_photo_by']['id'] = 'field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['table'] = 'field_data_field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['field'] = 'field_photo_by';
