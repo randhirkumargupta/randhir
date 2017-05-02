@@ -7,7 +7,7 @@
  * Provides customizations and functions for Video Gallery.
  *
  */
-define('FTP_URL_VIDEO', 'http://test.kelltontech.net/ftptest1/');
+define('FTP_URL_VIDEO', 'http://test.kelltontech.net/ftptest1/qa_videos/');
 
 //itg_videogallery_ftp_file_insert_cron();
 
@@ -3265,10 +3265,10 @@ function itg_videogallery_ftp_file_insert_cron() {
   $file_path = drupal_realpath('public://');
   $connection_id = itg_videogallery_ftp_video_list();
   ftp_pasv($connection_id, true);
-  $ftp_filess = ftp_nlist($connection_id, "/public_html/videos/");
+  $ftp_filess = ftp_nlist($connection_id, "/public_html/videos/qa_videos/");
   foreach ($ftp_filess as $files_n) {
 
-    $file_data_array = explode('/public_html/videos/', $files_n);
+    $file_data_array = explode('/public_html/videos/qa_videos/', $files_n);
 
     $path_info_data = pathinfo($file_data_array[1]);
     $filename = $path_info_data['filename'];
@@ -3276,13 +3276,13 @@ function itg_videogallery_ftp_file_insert_cron() {
     $exist_space = preg_match('/\s/', $filename);
     if ($exist_space) {
       $newfile = str_replace(' ', '_', $filename);
-      ftp_rename($connection_id, $files_n, '/public_html/videos/' . $newfile . '.' . $extension);
+      ftp_rename($connection_id, $files_n, '/public_html/videos/qa_videos/' . $newfile . '.' . $extension);
     }
   }
 
-  $ftp_files = ftp_nlist($connection_id, "/public_html/videos/");
+  $ftp_files = ftp_nlist($connection_id, "/public_html/videos/qa_videos/");
   foreach ($ftp_files as $files) {
-    $file_array = explode('/public_html/videos/', $files);
+    $file_array = explode('/public_html/videos/qa_videos/', $files);
 
     $path_info = pathinfo($file_array[1]);
     $extension = $path_info['extension'];
@@ -3369,6 +3369,7 @@ function itg_videogallery_dailymotion_add_video($real_path, $name, $realfilename
     $ftp_file = explode('public://dailymotion_video_dir/', $real_path);
     $uri = 'public://dailymotion-ftp/' . $realfilename;
     $url = FTP_URL_VIDEO . $name;
+
     $result = $api->post(
             '/me/videos', array(
         'url' => $url,
