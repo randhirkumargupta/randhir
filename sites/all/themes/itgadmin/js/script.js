@@ -804,10 +804,12 @@ jQuery(document).ready(function () {
         // code to uncheck required field when user click on event registration Fields
         jQuery('#edit-display').on('change', '.form-checkbox', function(){ 
           var isCheck = jQuery(this).is(':checked');
-          var getId = jQuery(this).attr('id');
-          var splitId = getId.substr(23);
+          var getIndex = jQuery(this).parent().index();
+          //var getId = jQuery(this).attr('id');
+          //var splitId = getId.substr(23);
           if(!isCheck){
-            jQuery(this).parent().parent().next().find('#edit-requied-field-field-erf-' + splitId + splitId).attr('checked', false);	
+            //jQuery(this).parent().parent().next().find('#edit-requied-field-field-erf-' + splitId + splitId).attr('checked', false);
+            jQuery(this).parent().parent().next().find('.form-item').eq(getIndex).find('.form-checkbox').attr('checked', false);
           }
         });
         
