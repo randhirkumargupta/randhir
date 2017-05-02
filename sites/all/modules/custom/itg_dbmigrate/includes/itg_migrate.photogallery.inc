@@ -89,7 +89,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
 
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
-    $items_url = $xml_folder . 'indiatoday-galleries-2009-04-01.xml';
+    $items_url = $xml_folder . 'indiatoday-galleries.xml';
 
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -392,6 +392,10 @@ class ItgPhotogalleryMigration extends XMLMigration {
 
   public function prepareRow($row) {
 
+    if(empty($row->xml->modified) || (string) $row->xml->modified == 0) {
+      $row->xml->modified = (string) $row->xml->created;
+    }
+    
     if (!empty($row->xml->extralargeimage)) {
       $row->xml->extralargeimage = itg_dbmigrate_imagepath_url((string) $row->xml->extralargeimage);
     }
@@ -429,7 +433,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
     }
 
     // Category migrate
-    $data_category = '';
+   /* $data_category = '';
 
     if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {
       foreach ($row->xml->categories->category as $final_category) {
@@ -440,8 +444,29 @@ class ItgPhotogalleryMigration extends XMLMigration {
         $data_category[]['tid'] = $orignal_category;
       }
     }
+    $row->category_new = $data_category;*/
+    
+     $data_category = '';
+    if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {
+      $cat = array();
+      $tid_array = array();
+      foreach ($row->xml->categories->category as $final_category) {
+        $cat = explode('#', $final_category);
+        foreach ($cat as $cc) {
+          if(!empty($cc)) {
+            $tid_array[] = get_itg_destination_id('migrate_map_itgphoto', $cc);
+          }
+        }
+      }
+      $tid_array[] = 1208521;
+      $all_category = array_unique($tid_array);
+      foreach ($all_category as $chunk_data) {
+        $data_category[]['tid'] = $chunk_data;
+      }
+    }
     $row->category_new = $data_category;
-
+    
+    
     // Story tags migration
     $data_tags = '';
 
