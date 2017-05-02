@@ -414,6 +414,7 @@ function itgadmin_preprocess_page(&$vars) {
     , 'special-how-made-it-widget-list'
     , 'video-status'
     , 'related-content'
+    , 'clone-story'
     , 'feature-content-section-widget-list'
     , 'most-read-widget-list'
     , 'yearend-left-widget-list'
