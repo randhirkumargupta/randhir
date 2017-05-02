@@ -56,28 +56,29 @@ function itg_payment_amex_payment_page() {
   $txnResponseCode = array_key_exists("vpc_TxnResponseCode" , $_GET) ? $_GET["vpc_TxnResponseCode"] : "";
   $transaction_status = 0;
   $data = array();
+  $goto_url = 'itg-payment-amex-payment-fail';
   $data['order_status'] = 0;
   $data['order_id'] = $orderInfo;
-  
+
   // Process if error does not exists.
   if (!$errorsExist) {
-    $transaction_status = AMEX_SUCCESS_STATUS;
-    $data['order_status'] = AMEX_ORDER_SUCCESS_STATUS;
-    update_event_registration_after_success($data['order_id']);
+    if ($txnResponseCode == 'C') {
+      $transaction_status = 0;
+      $data['order_status'] = 0;
+      $goto_url = 'itg-payment-amex-payment-cancle';
+    }
+    elseif ($txnResponseCode == 0) {
+      $transaction_status = AMEX_SUCCESS_STATUS;
+      $data['order_status'] = AMEX_ORDER_SUCCESS_STATUS;
+      $goto_url = 'itg-payment-amex-payment-success';
+      update_event_registration_after_success($data['order_id']);
+    }
   }
   $data['transaction_id'] = $receiptNo;
   $data['transaction_status'] = $transaction_status;
   $data['transaction_history'] = serialize($_GET);
   itg_payment_response_info_update($data);
-  if ($txnResponseCode == 'C') {
-    drupal_goto('itg-payment-amex-payment-cancle');
-  }
-  elseif ($txnResponseCode == 0) {
-    drupal_goto('itg-payment-amex-payment-success');
-  }
-  else {
-    drupal_goto('itg-payment-amex-payment-fail');
-  }
+  drupal_goto($goto_url);
 }
 
 function itg_payment_amex_payment_success() {
