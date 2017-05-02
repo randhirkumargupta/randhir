@@ -27,7 +27,7 @@ global $base_url;
       <?php endif; ?>
 
     </div>
-    <div class="detail"><h3><?php
+    <div class="detail"><h3 title="<?php echo $row['title'];?>"><?php
       if (function_exists('itg_common_get_smiley_title')) {
         print l(itg_common_get_smiley_title($row['nid'], 0, 100), "node/" . $row['nid'], array("html" => TRUE));
       }
