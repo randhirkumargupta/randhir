@@ -12397,3 +12397,8 @@ body.taxonomy-form-term-tags {
 .get-tokens > a {
   color: #0c8bb1;
 }
+
+.ftp-center #itg_video_content .video-ftp {
+  border-right: none;
+  width: 100%;
+}
