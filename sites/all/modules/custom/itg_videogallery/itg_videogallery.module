@@ -1294,6 +1294,9 @@ function itg_videogallery_check_video_url($vid) {
   $query = db_select('itg_solr_video_info', 'drd');
   $query->fields('drd', array('is_delete'));
   $query->condition('solr_video_id', $vid, '=');
+  $db_or = db_or();
+  $db_or->condition('video_embedded_url', $vid, '=');
+  $query->condition($db_or);
   $video_data = $query->execute()->fetchAll();
   if (empty($video_data)) {
     return true;
@@ -1828,9 +1831,13 @@ function itg_videogallery_get_file_details() {
     $thumb_url = $api->get(
             '/video/' . $video_id[0], array('fields' => array('embed_url'))
     );
-    
+
     if ($thumb_url['embed_url']) {
       $video_id = end(explode('/', $thumb_url['embed_url']));
+      $query = db_update('itg_solr_video_info')
+              ->fields(array('video_embedded_url' => $video_id));
+      $query->condition('solr_video_id', $video_id[0]);
+      $query->execute();
     }
     $responce.=' <iframe class="video_data" id="video_frame_' . $video_id . '" frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_id . '?autoplay=0&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
   }
