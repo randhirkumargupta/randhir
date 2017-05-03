@@ -95,6 +95,9 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
   switch ($form_id) {
     case 'videogallery_node_form':
+      if ($user->uid != 1) {
+       unset($form['field_video_configurations']['und']['#options']['comment']);
+      }
       unset($form['actions']['preview_changes']);
       $form['field_story_expert_name']['#access'] = FALSE;
       $form['field_story_syndication']['und']['#title'] = NULL;

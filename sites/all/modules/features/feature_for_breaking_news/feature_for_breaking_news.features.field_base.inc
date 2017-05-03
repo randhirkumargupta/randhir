@@ -35,6 +35,35 @@ function feature_for_breaking_news_field_default_field_bases() {
     'type' => 'field_collection',
   );
 
+  // Exported field_base: 'field_breaking_display_on'.
+  $field_bases['field_breaking_display_on'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_breaking_display_on',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'home' => 'Home page',
+        'section' => 'Section',
+        'both' => 'Both',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_breaking_publish_time'.
   $field_bases['field_breaking_publish_time'] = array(
     'active' => 1,
@@ -135,34 +164,6 @@ function feature_for_breaking_news_field_default_field_bases() {
         'Story' => 'Story',
         'Photo' => 'Photo',
         'Video' => 'Video',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_text',
-  );
-
-  // Exported field_base: 'field_display_on'.
-  $field_bases['field_display_on'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_display_on',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        'Home Page' => 'Home Page',
-        'Section' => 'Section',
       ),
       'allowed_values_function' => '',
     ),
