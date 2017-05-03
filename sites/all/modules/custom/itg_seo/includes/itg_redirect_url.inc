@@ -9,7 +9,7 @@ function itg_get_node_redirect_url($node, $op) {
   global $base_url;
   
   //if ($base_url == FRONT_URL) {
-    if (isset($node->type) && ($node->type == 'story')) {
+    if (isset($node->type) && ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'videogallery' || $node->type == 'podcast' || $node->type == 'blog')) {
       $story_expiry_date = '';
       $current_time = time();
 
@@ -22,9 +22,12 @@ function itg_get_node_redirect_url($node, $op) {
           itg_get_redirect_url($node->field_primary_category[LANGUAGE_NONE][0]['value']);
         } else {
             drupal_goto('<front>');
-        }
-        //itg_get_redirect_url('1208769');
+        }       
       }
+    } else {
+        if ($op == 'view' && ($node->status == 0)) {
+          drupal_goto('<front>');
+        }
     }
  // }
   
@@ -72,8 +75,7 @@ function itg_get_taxonomy_redirect_url($tid) {
  * itg_get_redirect_url 
  * @param init $tid
  */
-function itg_get_redirect_url($val) {
-  
+function itg_get_redirect_url($val) {  
   $red_url = drupal_get_path_alias('taxonomy/term/'.$val);   
   drupal_goto($red_url);
   exit;

@@ -365,6 +365,9 @@ function get_all_state($cat) {
     if ($cat == $values->field_section[LANGUAGE_NONE][0]['tid']) {
       $states_neame[$values->tid] = $values->name;
     }
+    if (empty($cat)) {
+      $states_neame[$values->tid] = $values->name;
+    }
   }
   return $states_neame;
 }
