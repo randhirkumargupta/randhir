@@ -458,12 +458,19 @@ header{
                 display:none;
                 margin-left:0;
                 margin-right:0;
+                right: 0 !important;
+                width: 172px;
                 li{                    
                     float: none;
                     border: none;
                     border-bottom: 1px solid #000;
                     a{
                         display: block;
+                        line-height: normal;
+                        height: auto;
+                        padding: 7px 10px;
+                        white-space: normal;
+                        word-wrap: break-word;
                     }
                 }
             }

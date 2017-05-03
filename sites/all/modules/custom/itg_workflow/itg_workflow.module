@@ -607,6 +607,7 @@ function itg_workflow_after_build($form, &$form_state) {
  * @param object $node
  */
 function itg_workflow_node_presave($node) {
+  
   if ((isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') || (empty($node->field_story_source_type[LANGUAGE_NONE][0]['value']))) {
     if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast') {
       if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
@@ -709,7 +710,7 @@ function itg_workflow_node_presave($node) {
       }
     }
   }
-  else if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated') { //comment this code before migrate        
+  else if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && arg(0) == 'node' && arg(2) == 'edit' && is_numeric(arg(1))) { //comment this code before migrate        
     if ($node->status == 1) {
       $node->workbench_moderation_state_new = 'published';
     }
