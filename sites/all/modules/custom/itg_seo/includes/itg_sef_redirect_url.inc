@@ -24,7 +24,7 @@ function itg_common_custompath_insert_load($node) {
       $node_sef = $node->title;
     }
   }
-  
+   
   if (!empty($node->workbench_moderation_state_new)) {
     if ($node->workbench_moderation_state_new == 'draft') {
       $published_date = date('Y-m-d' , $node->created);
