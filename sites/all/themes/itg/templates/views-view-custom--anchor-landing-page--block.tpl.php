@@ -21,7 +21,7 @@ $src = '';
         <img width="370" height="208" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" alt=""/>
       <?php } ?>
     </div>
-    <div class="anchor-right">
+    <div class="anchor-right" >
       <?php echo $anchor['title']; ?>
       <div class="less-content">
         <?php 

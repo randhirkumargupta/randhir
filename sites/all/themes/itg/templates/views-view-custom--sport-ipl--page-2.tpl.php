@@ -18,7 +18,9 @@
               <figcaption><i class="fa fa-play-circle"></i> <?php echo $row['field_video_duration']; ?></figcaption>
             </figure>
             <span class="posted-on"><?php echo $row['created']; ?></span>
-            <?php echo l(mb_strimwidth(strip_tags($desc), 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
+            <p title="<?php print $row['title']; ?>">
+              <?php echo l(mb_strimwidth(strip_tags($desc), 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
+            </p>
           </div>           
         </li>
       <?php }; ?>

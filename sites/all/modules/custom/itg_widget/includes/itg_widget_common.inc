@@ -365,6 +365,9 @@ function get_all_state($cat) {
     if ($cat == $values->field_section[LANGUAGE_NONE][0]['tid']) {
       $states_neame[$values->tid] = $values->name;
     }
+    if (empty($cat)) {
+      $states_neame[$values->tid] = $values->name;
+    }
   }
   return $states_neame;
 }
@@ -1975,7 +1978,6 @@ function get_view_nodes_form_custom_table_for_widgets_special($widget_name, $cat
     $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
     $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
     $query->fields('esi_file', array('uri'));
-    $query->fields('si', array('field_story_small_image_alt', 'field_story_small_image_title'));
     $query->fields('esi', array('field_story_extra_small_image_alt', 'field_story_extra_small_image_title'));
   }
 

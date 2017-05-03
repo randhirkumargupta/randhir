@@ -5,11 +5,11 @@ header("Cache-Control: no-cache");
 header("Expires: 0");
 echo t("Please wait we are redirecting payment gateway...");
 ?>
-<div class='hide'>
+<div class="hide">
     <form id="amex-form" action="<?php echo $base_url; ?>/itg-payment-amex-order-form-action" method="post" accept-charset="UTF-8">
         <input type="hidden" name="Title" value = "PHP VPC 3 Party Transacion">
         <!-- get user input -->
-        <table width="80%" align="center" border="0" cellpadding='0' cellspacing='0'>
+        <table width="100%" align="center" border="0" cellpadding='0' cellspacing='0'>
 
             <tr class="shade">
                 <td align="right"><strong><em>Virtual Payment Client URL:&nbsp;</em></strong></td>
@@ -38,7 +38,7 @@ echo t("Please wait we are redirecting payment gateway...");
             </tr>
             <tr class="shade">
                 <td align="right"><strong><em>Transaction OrderInfo: </em></strong></td>
-                <td><input name="vpc_OrderInfo" value="ODR-<?php echo time() . rand(0 , 999); ?>" size="20" maxlength="34"/></td>
+                <td><input name="vpc_OrderInfo" value="<?php echo $_SESSION['event_registration_payment']['amex_order_id']; ?>" size="20" maxlength="34"/></td>
             </tr>
             <tr>
                 <td align="right"><strong><em>Purchase Amount: </em></strong></td>

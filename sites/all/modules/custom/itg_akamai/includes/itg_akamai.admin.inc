@@ -600,10 +600,10 @@ function itg_akamai_cache_akamai_section() {
     '#title' => 'Akamai Cache Setting For Section/Category',
   );
 
-  $form['itg_akamai_section']['itg_akamai_section'] = array(
+  $form['itg_akamai_section']['akamai_timeout_taxonomy'] = array(
     '#type' => 'textfield',
     '#title' => t('Enter TTL for Section/Category'),
-    '#default_value' => variable_get('itg_akamai_section', ''),
+    '#default_value' => variable_get('akamai_timeout_taxonomy', ''),
     '#description' => t('Enter TTL for Section/Category for akamai cache'),
     '#required' => TRUE,
   );
@@ -637,6 +637,7 @@ function itg_akamai_cache_akamai_other() {
     '#description' => t('Enter TTL for Home Page for akamai cache'),
     '#required' => TRUE,
   );
+  
 
   return system_settings_form($form);
 }
