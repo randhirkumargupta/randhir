@@ -23,9 +23,6 @@ global $base_url;
                 </li>
                 <li class="footer-expand-icon"></li>
             </ul>
-            <div class="globle-search">
-                <input class="search-text" placeholder="Type here" type="text" value="">
-            </div>
         </div>
         <div class="footer-expand-icon"></div>
     </div>

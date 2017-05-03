@@ -379,9 +379,10 @@ jQuery(document).ready(function () {
       window.location.href = urldata;
     }
     if(value.length != 0){
-      jQuery('#header .search-icon-parent').find('.search-icon-search').show().prev().hide();
+      el.closest('.search-icon-parent').find('.search-icon-search').show().prev().hide();
+      
     } else{
-      jQuery('#header .search-icon-parent').find('.search-icon-default').show().next().hide();
+      el.closest('.search-icon-parent').find('.search-icon-default').show().next().hide();
     }
   });
   jQuery('.search-icon-search').click(function () {
@@ -398,7 +399,7 @@ jQuery(document).ready(function () {
       jQuery('.container.header-logo').prependTo('.itg-logo-container');
 
       var mouse_is_inside = false;
-      jQuery('.search-icon-parent').hover(function(){ 
+      jQuery('#header .search-icon-parent, #footer .search-icon-parent').hover(function(){ 
           mouse_is_inside=true; 
       }, function(){ 
           mouse_is_inside=false; 
