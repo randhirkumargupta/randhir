@@ -13,6 +13,7 @@
   <?php print drupal_render($form['field_type']); ?>
   <?php print drupal_render($form['field_story_expires']); ?>
   <?php print drupal_render($form['field_story_snap_post']); ?>
+  <?php print drupal_render($form['field_constituancy']); ?>
   <?php //print drupal_render($form['field_content_type']); ?>
   <?php print drupal_render($form['title']); ?>
            </div>
@@ -27,7 +28,7 @@
 
 
 <div id="DisplayOn">
-  <?php print drupal_render($form['field_display_on']); ?>
+  <?php print drupal_render($form['field_breaking_display_on']); ?>
   <?php print drupal_render($form['field_section']); ?>
              </div>
 <?php print drupal_render($form['field_story_itg_tags']); ?>
