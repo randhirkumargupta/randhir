@@ -293,7 +293,7 @@ function frontend_breadcrumb_display($id = NULL , $entity_object = NULL , $singl
     $section_link .= ' / ' . l("Anchors" , "anchors-list") . ' / ' . $node_title;
   }
   else if (!empty($entity_object->type) && $entity_object->type == 'breaking_news') {
-    $section_link .= ' / ' . $entity_object->field_type[LANGUAGE_NONE][0]['value'] . '/' . $node_title;
+    $section_link .= ' / ' . $entity_object->field_type[LANGUAGE_NONE][0]['value'].'/'.$node_title;
   }
   elseif (!empty($entity_object->type)) {
     $section_link .= ' / ' . $node_title;
@@ -358,19 +358,19 @@ function itg_seo_node_presave($node) {
   //Handel case for fresh created node.
   if (empty($node->nid)) {
     // As if alise is not set from textfield the assign title of node to alise.
-//    if (empty($node->path['alias'])) {
-//      $node->path['alias'] = $node->title;
-//    }
+    if (empty($node->path['alias'])) {
+      $node->path['alias'] = $node->title;
+    }
   }
-//  if($node->path['pathauto']) {
-//    $node->path['alias'] = $node->title;
-//  }
+  if($node->path['pathauto']) {
+    $node->path['alias'] = $node->title;
+  }
 }
 
 /**
  * {@inheritdocs}
  */
-function itg_seo_pathauto_alias_alter(&$alias , array &$context) {
+function itg_seo_pathauto_alias_alter(&$alias, array &$context) {
   // Handel case if user selected  Generate automatic Sef URL
   // $alias is overridden
   // If you don't want to overridden then use conatinate.
