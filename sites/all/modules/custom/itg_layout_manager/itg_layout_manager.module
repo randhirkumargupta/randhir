@@ -102,6 +102,13 @@ function itg_layout_manager_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_layout_autocomplete.inc',
   );
+  
+  $items['itg-delete-layout/%'] = array(
+    'page callback' => 'itg_layout_delete',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_layout_manager.delete.inc',
+  );
   return $items;
 }
 

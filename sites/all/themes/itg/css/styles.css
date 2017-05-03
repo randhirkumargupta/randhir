@@ -530,6 +530,7 @@ header {
   /*                        border-right: 1px solid $itg-nav-bordercolor;*/
   border-top: none;
   height: 37px;
+  white-space: nowrap;
   position: relative;
   font-size: 14px;
   font-size: 0.875rem;
@@ -587,6 +588,8 @@ header {
   display: none;
   margin-left: 0;
   margin-right: 0;
+  right: 0 !important;
+  width: 172px;
 }
 #block-itg-layout-manager-header-block .navigation ul#newlist li {
   float: none;
@@ -595,6 +598,11 @@ header {
 }
 #block-itg-layout-manager-header-block .navigation ul#newlist li a {
   display: block;
+  line-height: normal;
+  height: auto;
+  padding: 7px 10px;
+  white-space: normal;
+  word-wrap: break-word;
 }
 
 /*End header css*/
@@ -1268,8 +1276,8 @@ footer .footer-top .footer-social-link {
 }
 footer .footer-top .footer-social-link .globle-search {
   position: absolute;
-  top: 6px;
-  right: 110px;
+  top: 3px;
+  right: 45px;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -ms-transition: all 0.5s ease-in-out;
@@ -1281,6 +1289,9 @@ footer .footer-top .footer-social-link .globle-search {
 }
 footer .footer-top .footer-social-link .globle-search .search-text {
   width: 100%;
+}
+footer .footer-top .footer-social-link .globle-search.active {
+  width: 225px;
 }
 footer .footer-top .footer-social-link .fa {
   font-size: 24px;
@@ -1835,6 +1846,10 @@ footer .multiple-items-footer i.slick-next {
   display: block;
 }
 
+.trending-list .top-takes-video-container {
+  border: 1px solid #dddddd;
+}
+
 /*End CSS trending-videos Home  page*/
 /*Start Search page css*/
 .view-front-end-global-search .searh-all-filters {
@@ -2262,7 +2277,7 @@ footer .multiple-items-footer i.slick-next {
   height: 40vh;
 }
 .story-section .description iframe {
-  min-height: 480px;
+  min-height: 495px;
 }
 .story-section h1 {
   font-size: 24px;
@@ -2581,7 +2596,7 @@ footer .multiple-items-footer i.slick-next {
   padding-left: 18px;
 }
 .story-section .story-right .description a {
-  color: #1a3c8d;
+  color: #026bc5;
 }
 .story-section .story-right .description a:hover {
   text-decoration: underline;
@@ -4197,6 +4212,46 @@ h1.category-heading {
   line-height: 19px;
   color: #323232;
 }
+.view-widget-anchors-listing ul.pager {
+  margin: 10px 0;
+  list-style-type: none;
+  text-align: center;
+}
+.view-widget-anchors-listing ul.pager li {
+  display: inline-block;
+  vertical-align: top;
+}
+.view-widget-anchors-listing ul.pager li.pager-current {
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+  font-family: "Roboto", sans-serif;
+}
+.view-widget-anchors-listing ul.pager li.pager-item a {
+  display: block;
+  height: 25px;
+  width: 25px;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 25px;
+  color: #323232;
+  font-family: "Roboto", sans-serif;
+}
+.view-widget-anchors-listing ul.pager li.pager-item a:hover {
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+}
+.view-widget-anchors-listing ul.pager li.pager-next a, .view-widget-anchors-listing ul.pager li.pager-last a, .view-widget-anchors-listing ul.pager li.pager-first a, .view-widget-anchors-listing ul.pager li.pager-previous a {
+  color: #323232;
+  line-height: 25px;
+}
+.view-widget-anchors-listing ul.pager li.pager-next.pager-first.first, .view-widget-anchors-listing ul.pager li.pager-next.pager-last.last, .view-widget-anchors-listing ul.pager li.pager-last.pager-first.first, .view-widget-anchors-listing ul.pager li.pager-last.pager-last.last, .view-widget-anchors-listing ul.pager li.pager-first.pager-first.first, .view-widget-anchors-listing ul.pager li.pager-first.pager-last.last, .view-widget-anchors-listing ul.pager li.pager-previous.pager-first.first, .view-widget-anchors-listing ul.pager li.pager-previous.pager-last.last {
+  display: none;
+}
 .view-widget-anchors-listing .anchor-listing {
   padding: 20px 0;
   border-bottom: 1px solid #dddddd;
@@ -4459,35 +4514,6 @@ h1.category-heading {
   background: url(../images/google-icon.jpg) no-repeat center center;
 }
 .live-block #slider-range {
-  border: none;
-  margin: 20px 0 10px 0;
-  width: 100%;
-  font-family: "Roboto", sans-serif;
-}
-.live-block #slider-range.ui-slider-horizontal {
-  height: 30px;
-}
-.live-block #slider-range.ui-slider-horizontal .ui-slider-handle {
-  width: 80px;
-  height: 38px;
-  background: #e6e5e3;
-  border: 1px solid #c1c1c1;
-  top: -20px;
-  margin-left: 0;
-  line-height: 38px;
-  text-align: center;
-  font-size: 15px;
-  color: #323232;
-  cursor: move;
-  background-image: linear-gradient(#f5f3f2, #e7e5e4);
-}
-.live-block #slider-range.ui-widget-content {
-  background: #fff url(../images/live-block-slider-icon.jpg) repeat-x;
-}
-.live-block #slider-range .ui-widget-header {
-  background: #fff url(../images/live-block-slider-icon.jpg) repeat-x;
-}
-.live-block #slider-range .ui-widget-header + a + a {
   display: none;
 }
 .live-block .live-hightlight h3 {
@@ -4522,7 +4548,35 @@ h1.category-heading {
   font-size: 1rem;
   font-weight: 700;
   margin-top: 30px;
-  padding-bottom: 10px;
+  padding-bottom: 35px;
+}
+.live-block .timeline .irs .irs-line {
+  height: 30px;
+  top: 0;
+  background: #fff url(../images/live-block-slider-icon.jpg) repeat-x;
+}
+.live-block .timeline .irs .irs-line span {
+  opacity: 0;
+}
+.live-block .timeline .irs .irs-min, .live-block .timeline .irs .irs-max, .live-block .timeline .irs .irs-from, .live-block .timeline .irs .irs-to {
+  display: none !important;
+}
+.live-block .timeline .irs .irs-bar, .live-block .timeline .irs .irs-bar-edge {
+  opacity: 0;
+}
+.live-block .timeline .irs .irs-slider.single {
+  width: 80px;
+  height: 38px;
+  background: #e6e5e3;
+  border: 1px solid #c1c1c1;
+  top: -20px;
+  margin-left: 0;
+  line-height: 38px;
+  text-align: center;
+  font-size: 15px;
+  color: #323232;
+  cursor: move;
+  background-image: linear-gradient(#f5f3f2, #e7e5e4);
 }
 
 /*End live block css*/
@@ -8235,7 +8289,7 @@ section.sidebar .block-itg-ads {
   vertical-align: top;
   position: relative;
   background: #d1d1d1;
-  width: 190px;
+  width: 195px;
   height: 54px;
   line-height: 54px;
   padding-right: 10px;
@@ -8387,7 +8441,7 @@ section.sidebar .block-itg-ads {
 
 #block-itg-event-backend-event-sign-and-win h1, #block-itg-event-backend-event-registration h1 {
   font-family: "Roboto Slab", sans-serif;
-  font-size: 50px;
+  font-size: 40px;
   margin-bottom: 40px;
 }
 
@@ -10587,7 +10641,7 @@ section.sidebar .block-itg-ads {
 /*Start CSS LIVE tv */
 #block-itg-live-tv-live-tv-video-page .program-livetv {
   background: #000;
-  padding: 15px 0px 75px 15px;
+  padding: 25px 0px 73px 20px;
   zoom: 1;
 }
 #block-itg-live-tv-live-tv-video-page .program-livetv:before, #block-itg-live-tv-live-tv-video-page .program-livetv:after {
@@ -10601,15 +10655,23 @@ section.sidebar .block-itg-ads {
 }
 #block-itg-live-tv-live-tv-video-page .program-livetv .live_tv_video {
   float: left;
-  width: 82%;
+  width: 100%;
+  max-width: 642px;
+  height: 0;
+  padding-bottom: 48.3%;
+  position: relative;
 }
 #block-itg-live-tv-live-tv-video-page .program-livetv .live_tv_video iframe {
   width: 100%;
-  height: 50vh;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon {
-  float: right;
-  width: 18%;
+  width: 108px;
+  overflow: hidden;
+  padding-top: 65px;
 }
 #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon a {
   color: #aaa9a9;
@@ -12834,7 +12896,7 @@ span.smilies-title img {
 /*css breadcrumb start*/
 #block-itg-layout-manager-front-end-breadcrumb {
   position: relative;
-  z-index: 9999;
+  z-index: 9998;
   color: #a1a1a1;
   font-family: roboto;
   padding-top: 15px;
@@ -13141,16 +13203,13 @@ span.smilies-title img {
 #block-itg-front-end-common-latest-from-aajtak ul li a.pic,
 #block-itg-front-end-common-latest-from-pti ul li a.pic,
 #block-itg-front-end-common-latest-from-businesstoday ul li a.pic {
-  max-height: 55px;
+  width: 88px;
+  height: 66px;
 }
 #block-itg-front-end-common-latest-from-aajtak ul li + li,
 #block-itg-front-end-common-latest-from-pti ul li + li,
 #block-itg-front-end-common-latest-from-businesstoday ul li + li {
   border-top: 1px solid #dddddd;
-}
-
-#block-itg-front-end-common-latest-from-businesstoday a.pic img {
-  max-width: 56px;
 }
 
 .agbutton .error-msg {
@@ -13531,6 +13590,11 @@ span.close_btt {
   display: inline-block;
   vertical-align: top;
   width: 100%;
+}
+
+.no-tv-program {
+  padding-bottom: 15px;
+  color: red;
 }
 
 .search-icon-parent {

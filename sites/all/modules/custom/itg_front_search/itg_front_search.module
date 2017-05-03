@@ -252,7 +252,7 @@ function itg_front_search_views_pre_render(&$view) {
       }
 
       $bundle_name = array('All' => 'All', 'Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery', 'Podcast' => 'Podcast', 'Magazine' => 'Magazine');
-      $search_url = 'site-search';
+      $search_url = 'topic';
     }
 
 
@@ -276,7 +276,9 @@ function itg_front_search_views_pre_render(&$view) {
       
       $lnk_class = '';
 
-
+      if($key == 'All' && empty($all_bundle)) {
+       $lnk_class = "active"; 
+      }
       if (in_array($key, $all_bundle)) {
         $lnk_class = "active";
       }

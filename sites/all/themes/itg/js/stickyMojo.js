@@ -38,9 +38,12 @@
 
           sticky.win.bind({
             'load': stick,
-            'scroll': stick,
+            'scroll': function() {
+              sticky['stickyHeight'] = sticky.el.outerHeight(true);
+              stick();
+            },
             'resize': function() {
-//              sticky.el.css('left', sticky.stickyLeft);
+              sticky['stickyHeight'] = sticky.el.outerHeight(true);
               stick();
             }
           });
@@ -104,7 +107,8 @@
       //determines whether sidebar should stick and applies appropriate settings to make it stick
       function stick() {
         var tops = calculateLimits();
-        var hitBreakPoint = tops.stickyTop < tops.windowTop + settings.offsetTop && (sticky.win.width() >= sticky.breakPoint);
+//        var hitBreakPoint = tops.stickyTop < tops.windowTop + settings.offsetTop && (sticky.win.width() >= sticky.breakPoint);
+        var hitBreakPoint = tops.stickyTop < tops.windowTop + settings.offsetTop && (sticky.win.width() > 1024);
         if (hitBreakPoint) {
           setFixedSidebar();
 //          checkOrientation();

@@ -19,10 +19,12 @@
               <figcaption><i class="fa fa-camera"></i> <?php echo $row['delta']; ?></figcaption>
             </figure>
             <span class="posted-on"><?php echo $row['created']; ?></span>
-  <?php print ucfirst($row['title']); ?>
+            <p  title="<?php print $row['title']; ?>">
+              <?php echo l(mb_strimwidth(strip_tags($desc), 0, 60, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>   </span>
+            </p>
           </div>         
         </li>
-<?php }; ?>
+      <?php }; ?>
     </ul>
   </div>
 </div>

@@ -35,7 +35,7 @@ function itg_akamai_menu() {
     'description' => 'Akamai integration settings and cache clearing utility',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_akamai_settings'),
-    'access arguments' => array('administer akamai'),
+    'access arguments' => array('administer itg akamai'),
     'file' => 'includes/itg_akamai.admin.inc',
   );
 
@@ -50,7 +50,7 @@ function itg_akamai_menu() {
     'description' => 'Admin interface to flush Drupal resources from the Akamai cache',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_akamai_cache_control'),
-    'access arguments' => array('purge akamai cache'),
+    'access arguments' => array('purge itg akamai cache'),
     'file' => 'includes/itg_akamai.admin.inc',
     'type' => MENU_LOCAL_TASK,
   );
@@ -61,7 +61,7 @@ function itg_akamai_menu() {
     'description' => 'Admin interface to view Cache Activity Log',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_akamai_cache_akamai_log'),
-    'access arguments' => array('purge akamai cache'),
+    'access arguments' => array('purge itg akamai cache'),
     'file' => 'includes/itg_akamai.admin.inc',
     'type' => MENU_LOCAL_TASK,
   );
@@ -71,7 +71,28 @@ function itg_akamai_menu() {
     'description' => 'Admin interface to clear Akamai Purge Content type Node',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_akamai_cache_akamai_ccpurge'),
-    'access arguments' => array('purge akamai cache'),
+    'access arguments' => array('purge itg akamai cache'),
+    'file' => 'includes/itg_akamai.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+
+  $items['admin/config/system/itg_akamai/akamai_section'] = array(
+    'title' => 'Akamai Section/Category Setting',
+    'description' => 'Admin interface for Akamai Section/Category Setting',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_akamai_cache_akamai_section'),
+    'access arguments' => array('administer itg akamai'),
+    'file' => 'includes/itg_akamai.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  $items['admin/config/system/itg_akamai/other_conf'] = array(
+    'title' => 'Other Settings',
+    'description' => 'Admin interface for Akamai Other Setting',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_akamai_cache_akamai_other'),
+    'access arguments' => array('administer itg akamai'),
     'file' => 'includes/itg_akamai.admin.inc',
     'type' => MENU_LOCAL_TASK,
   );
@@ -82,7 +103,7 @@ function itg_akamai_menu() {
     'description' => '',
     'page callback' => 'itg_akamai_cache_akamai_ccpurge_settings',
     'page arguments' => array(5, 6),
-    'access callback' => TRUE,
+    'access arguments' => array('administer itg akamai'),
     'file' => 'includes/itg_akamai.admin.inc',
     'type' => MENU_CALLBACK,
   );
@@ -92,7 +113,7 @@ function itg_akamai_menu() {
     'description' => '',
     'page callback' => 'itg_akamai_cache_akamai_ccpurge_clear',
     'page arguments' => array(5),
-    'access callback' => TRUE,
+    'access arguments' => array('administer itg akamai'),
     'file' => 'includes/itg_akamai.admin.inc',
     'type' => MENU_CALLBACK,
   );
@@ -119,6 +140,7 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
   module_load_include('inc', 'itg_akamai', 'includes/akamai_purge');
   if (variable_get('itg_akamai_disabled', FALSE)) {
     watchdog('itg_akamai', 'Request to clear paths ignored because clearing is disabled. Check ITG Akamai module settings.');
+    drupal_set_message(t('Request to clear paths ignored because clearing is disabled. Check ITG Akamai module settings.'), 'warning');
     return FALSE;
   }
 
@@ -129,7 +151,8 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
   $paths = array();
 
   foreach ($paths_in as $path) {
-    $paths = array_merge($paths, itg_akamai_get_all_paths($path, $node));
+    // $paths = array_merge($paths, itg_akamai_get_all_paths($path, $node));
+    $paths[] = $path;
   }
 
   // It is possible to have no paths at this point if other modules have
@@ -144,6 +167,7 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
   $paths = array_map('trim', $paths);
 
   $paths = itg_akamai_send_for_host_mapping($paths);
+  $paths_data = $paths;
 
   if (!empty($paths)) {
     $url = implode(',', $paths);
@@ -184,9 +208,10 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
     //echo $response->getBody();
     //echo '<pre>';
     $response_data_decoded = json_decode($response->getBody());
-    $data_for_log = ItgAkamaiUtility::itgAkamaiSetDataForLog($data, $response->getBody(), $user->uid, $response_data_decoded->httpStatus, $response_data_decoded->purgeId);
+    //$data_for_log = ItgAkamaiUtility::itgAkamaiSetDataForLog($data, $response->getBody(), $user->uid, $response_data_decoded->httpStatus, $response_data_decoded->purgeId);
+    $data_for_log = ItgAkamaiUtility::itgAkamaiGetDataForLog($paths_data, $data, $response->getBody(), $user->uid, $response_data_decoded->httpStatus, $response_data_decoded->purgeId);
     $activity_log = ItgAkamaiUtility::itgAkamaiSetActivityLog($data_for_log);
-    //die($activity_log);
+
     $request_success_flag = 1;
 
     // Passing / Saving akamai purging log to drupal watchdog 
@@ -199,7 +224,8 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
     $response_data_decoded = json_decode($e->getMessage());
     $data_for_log = ItgAkamaiUtility::itgAkamaiSetDataForLog($data, $e->getMessage(), $user->uid, $response_data_decoded->httpStatus, 0);
     $activity_log = ItgAkamaiUtility::itgAkamaiSetActivityLog($data_for_log);
-    watchdog('ITG-Akamai log', 'OOPS unable to purge URL');
+    watchdog('ITG-Akamai log', 'OOPS unable to purge URL and error is : ' . $e->getMessage());
+    drupal_set_message(t("OOPS unable to purge URL and error is :$e->getMessage()"), 'error');
     $request_success_flag = 0;
 
     //die;
@@ -262,7 +288,7 @@ function itg_akamai_send_for_host_mapping($paths) {
   //$host = 'http://dev.indiatodayonline.in/';
   $lastchar = substr($host, -1);
   if ($lastchar != '/') {
-    $host .= $host . '/';
+    $host .= '/';
   }
   $path_new_array = array();
   if (isset($paths) && !empty($paths)) {
@@ -282,37 +308,40 @@ function itg_akamai_send_for_host_mapping($paths) {
 function itg_akamai_form_node_type_form_alter(&$form, &$form_state) {
   $default_value = TRUE; // auto_nodetitle_get_setting($form['#node_type']->type);
 
-  $type = $form['#node_type'];
-  $form['itg_akamai_setting'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Akamai Cache Setting'),
-    '#weight' => 12,
-    '#collapsible' => TRUE,
-    '#collapsed' => false,
-    '#group' => 'additional_settings',
-    '#attached' => array(
-    ),
-  );
-  $key = $form['#node_type']->type;
-  $name = $form['#node_type']->name;
+  if (user_access("administer itg akamai")) {
 
-  $form['itg_akamai_setting']['akamai_timeout_' . $key] = array(
-    '#type' => 'textfield',
-    '#title' => t("$name (in seconds)"),
-    '#default_value' => variable_get('akamai_timeout_' . $key, ''),
-    '#description' => t("Timeout Length for <strong>$name</strong>, the timeout used by when sending the cache clear request to Akamai's servers"),
-  );
+    $type = $form['#node_type'];
+    $form['itg_akamai_setting'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Akamai Cache Setting'),
+      '#weight' => 12,
+      '#collapsible' => TRUE,
+      '#collapsed' => false,
+      '#group' => 'additional_settings',
+      '#attached' => array(
+      ),
+    );
+    $key = $form['#node_type']->type;
+    $name = $form['#node_type']->name;
 
-  $form['itg_akamai_setting']['akamai_config_cctype_flag_' . $key] = array(
-    '#type' => 'select',
-    '#options' => array('_none' => '-Select-', 'yes' => 'Yes', 'no' => 'No'),
-    '#title' => t("You want to use this configuration for $name"),
-    '#default_value' => variable_get('akamai_config_cctype_flag_' . $key, ''),
-    '#description' => t("Please select content type flag whether you want to use with akamai cache or not!"),
-  );
+    $form['itg_akamai_setting']['akamai_timeout_' . $key] = array(
+      '#type' => 'textfield',
+      '#title' => t("$name (in seconds)"),
+      '#default_value' => variable_get('akamai_timeout_' . $key, ''),
+      '#description' => t("Timeout Length for <strong>$name</strong>, the timeout used by when sending the cache clear request to Akamai's servers"),
+    );
 
-  // Adding own submit for handling the configuration for Akamai Cache
-  $form['#submit'][] = 'itg_akamai_node_form_submit';
+    $form['itg_akamai_setting']['akamai_config_cctype_flag_' . $key] = array(
+      '#type' => 'select',
+      '#options' => array('_none' => '-Select-', 'yes' => 'Yes', 'no' => 'No'),
+      '#title' => t("You want to use this configuration for $name"),
+      '#default_value' => variable_get('akamai_config_cctype_flag_' . $key, ''),
+      '#description' => t("Please select content type flag whether you want to use with akamai cache or not!"),
+    );
+
+    // Adding own submit for handling the configuration for Akamai Cache
+    $form['#submit'][] = 'itg_akamai_node_form_submit';
+  }
 }
 
 /**
@@ -342,16 +371,18 @@ function itg_akamai_block_info() {
  */
 function itg_akamai_block_view($delta) {
   if ($delta == 'itg_akamai') {
+    global $user;
+    if (user_access("purge itg akamai cache")) {
+      if (arg(0) == 'admin') // preventing this form for admin pages 
+        return;
 
-    if (arg(0) == 'admin') // preventing this form for admin pages 
-      return;
-
-    $cache_control_form = drupal_get_form('itg_akamai_page_cache_control_form');
-    $block = array(
-      'subject' => t('ITG Akamai Cache Control'),
-      'content' => $cache_control_form,
-    );
-    return $block;
+      $cache_control_form = drupal_get_form('itg_akamai_page_cache_control_form');
+      $block = array(
+        'subject' => '<none>',
+        'content' => $cache_control_form,
+      );
+      return $block;
+    }
   }
 }
 
@@ -382,11 +413,11 @@ function itg_akamai_page_cache_control_form() {
     '#type' => 'hidden',
     '#value' => $path
   );
-  $form['message'] = array(
-    '#type' => 'item',
-    '#title' => t('Refresh URL'),
-    '#markup' => $path_label,
-  );
+//  $form['message'] = array(
+//    '#type' => 'item',
+//    '#title' => t('Refresh URL'),
+//    '#markup' => $path_label,
+//  );
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Refresh Akamai Cache'),
@@ -405,7 +436,7 @@ function itg_akamai_page_cache_control_form_submit($form, &$form_state) {
   $path = $values['path'];
   $did_clear = itg_akamai_clear_url($path, array(), $form['#node']);
   if ($did_clear) {
-    $message = t("Akamai Cache Request has been made successfully, please allow 10 minutes for changes to take effect.");
+    $message = t("Akamai Cache Request has been made successfully.");
     drupal_set_message($message);
   }
   else {
@@ -420,9 +451,17 @@ function itg_akamai_page_cache_control_form_submit($form, &$form_state) {
  * cache. Clear base node/% url as well as aliases.
  */
 function itg_akamai_node_update($node) {
-  if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-    $url = base_path() . "node/{$node->nid}";
-    itg_akamai_clear_url($url, array(), $node);
+  if (user_access("purge itg akamai cache")) {
+    if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+      $url = base_path() . "node/{$node->nid}";
+      itg_akamai_clear_url($url, array(), $node);
+    }
+  }
+  if (user_access("administer itg akamai")) {
+    // Setting metadata for the TTL for each node id 
+    if ($node->status == 1) { // Akamai setting for node content level if node is published 
+      itg_akamai_content_setting($node);
+    }
   }
 }
 
@@ -433,9 +472,11 @@ function itg_akamai_node_update($node) {
  * cache. Clear base node/% url as well as aliases.
  */
 function itg_akamai_node_delete($node) {
-  if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-    $url = base_path() . "node/{$node->nid}";
-    itg_akamai_clear_url($url, array(), $node);
+  if (user_access("purge itg akamai cache")) {
+    if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+      $url = base_path() . "node/{$node->nid}";
+      itg_akamai_clear_url($url, array(), $node);
+    }
   }
 }
 
@@ -452,7 +493,6 @@ function itg_akamai_cronapi($op, $job = NULL) {
   return $items;
 }
 
-
 function itg_akamai_auto_purge_cc_type_callback() {
 
   $allnodes = node_type_get_types();
@@ -465,14 +505,7 @@ function itg_akamai_auto_purge_cc_type_callback() {
     $all_node_settings[$key]['akamai_max_nodelimit'] = variable_get('akamai_max_nodelimit_' . $key, '');
     $all_node_settings[$key]['akamai_config_cctype_flag'] = variable_get('akamai_config_cctype_flag_' . $key, '');
   }
-  
-  
-  
-  
-   
-  
 }
-
 
 /**
  * Implements hook_taxonomy_term_update().
@@ -481,9 +514,18 @@ function itg_akamai_auto_purge_cc_type_callback() {
  * cache. Clear base taxonomy/term/% url as well as aliases.
  */
 function itg_akamai_taxonomy_term_update($term) {
-  if (isset($term->field_story_source_type[LANGUAGE_NONE][0]['value']) && $term->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-    $url = base_path() . "taxonomy/term/{$term->tid}";
-    itg_akamai_clear_url($url, array(), $term);
+  if (user_access("purge itg akamai cache")) {
+    if (isset($term->field_story_source_type[LANGUAGE_NONE][0]['value']) && $term->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+      $url = base_path() . "taxonomy/term/{$term->tid}";
+      itg_akamai_clear_url($url, array(), $term);
+    }
+  }
+
+  // Setting TTL for category manager taxonomy
+  if (user_access("administer itg akamai")) {
+    if ($term->vid == CATEGORY_MANAGMENT) { // Akamai setting for taxonomy content level 
+      itg_akamai_taxonomy_setting($term);
+    }
   }
 }
 
@@ -494,13 +536,13 @@ function itg_akamai_taxonomy_term_update($term) {
  * cache. Clear base taxonomy/term/% url as well as aliases.
  */
 function itg_akamai_taxonomy_term_delete($term) {
-  if (isset($term->field_story_source_type[LANGUAGE_NONE][0]['value']) &&  $term->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-    $url = base_path() . "taxonomy/term/{$term->nid}";
-    itg_akamai_clear_url($url, array(), $term);
+  if (user_access("purge itg akamai cache")) {
+    if (isset($term->field_story_source_type[LANGUAGE_NONE][0]['value']) && $term->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+      $url = base_path() . "taxonomy/term/{$term->nid}";
+      itg_akamai_clear_url($url, array(), $term);
+    }
   }
 }
-
-
 
 //###################### Code started for header expirtion  ##########################/
 
@@ -509,16 +551,17 @@ function itg_akamai_taxonomy_term_delete($term) {
  * Allows finer grained control over page cache maximum age.
  */
 
-
 /**
  * Implements hook_node_view().
  */
 function itg_akamai_node_view($node, $view_type) {
   // Use the global page cache maximum age variable if none is set.
-  $max_age = variable_get('akamai_timeout_' . $node->type, '');
-  if (drupal_page_is_cacheable()) {
-    akamai_max_age($max_age);
-  }
+  $max_age = get_itg_akamai_content_setting($node->nid, $node->type);
+  //die($max_age);
+//  $max_age = variable_get('akamai_timeout_' . $node->type, '');
+  //if (drupal_page_is_cacheable()) {
+  akamai_max_age($max_age);
+  ///}
 }
 
 /**
@@ -539,12 +582,242 @@ function akamai_max_age($age = NULL) {
  */
 function itg_akamai_exit() {
   $max_age = akamai_max_age();
+  //watchdog('hdasdjd',$max_age);
   if (!empty($max_age)) {
-     drupal_add_http_header('Cache-Control', 'public, max-age=' . $max_age);
+    $formated_expire_date = itg_akamai_set_expiration_date($max_age);
+    drupal_add_http_header('Edge-control', 'cache-maxage=' . $max_age . 's');
+    drupal_add_http_header('Cache-Control', 'public, max-age=' . $max_age);
+    //drupal_add_http_header('Expires', 'Sun, 20 Nov 1978 05:00:00 GMT');
+    // drupal_add_http_header('Expires', itg_akamai_translate_time($formated_expire_date));
+    drupal_add_http_header('Expires', $formated_expire_date);
   }
 }
 
+/**
+ * Implements hook_form_alter()
+ */
+function itg_akamai_form_alter(&$form, &$form_state, $form_id) {
+
+  if (user_access("administer itg akamai")) {
+
+    if (strpos($form_id, '_node_form') !== false) {
+      //p($form['field_story_configurations']);
+      //switch ($form_id) {
+//    case 'story_node_form':        // Story
+//    case 'photogallery_node_form': // Photo gallery
+//    case 'videogallery_node_form': // Video Gallery
+//    case 'breaking_news_node_form': // Breaking News
+//    case 'blog_node_form': // Blog
+//    case 'podcast_node_form': // Podcast
+      // Code started for storing the akamai timeout and config cc type flag
+
+      $akamai_timeout_default = NULL;
+      $akamai_config_cctype_flag = NULL;
+
+      // Checking whether the Akamai content level configration have been saved or not 
+      $akamai_timeout_default = get_itg_akamai_content_setting($form['#node']->nid, $form['#node']->type);
+//      $form['itg_akamai_setting'] = array(
+//        '#type' => 'fieldset',
+//        '#title' => t('Akamai Cache Setting'),
+//        '#weight' => 12,
+//        '#collapsible' => TRUE,
+//        '#collapsed' => false,
+////        '#group' => 'additional_settings',
+//        '#attached' => array(
+//        ),
+//      );
+
+      $form['akamai_timeout'] = array(
+        '#type' => 'textfield',
+        '#title' => t("Enter TTL"),
+        '#default_value' => $akamai_timeout_default,
+        '#description' => t("Timeout Length, the timeout used by when sending the cache clear request to Akamai's servers"),
+      );
+    }
+    //break;
+  }
+}
+
+/**
+ * Implements hook_node_insert()
+ * @param type $node
+ */
+function itg_akamai_node_insert($node) {
+  // Setting metadata for the TTL for each node id 
+  if (user_access("administer itg akamai")) {
+    if ($node->status == 1) { // Akamai setting for node content level if node is published 
+      itg_akamai_content_setting($node);
+    }
+  }
+}
+
+/**
+ * Setting the metadata for node level content (TTL) for Akamai
+ * @param object $node
+ */
+function itg_akamai_content_setting($node) {
 
 
+  switch ($node->type) {
+    case 'story':
+    case 'photogallery':
+    case 'videogallery':
+    case 'breaking_news':
+    case 'blog':
+    case 'podcast':
 
+      // $akamai_timeout_default = variable_get('akamai_timeout_' . $node->type);
+      //if ($akamai_timeout_default != $node->akamai_timeout) {
+      if (isset($node->akamai_timeout) && !empty($node->akamai_timeout)) {
+        try {
+          $url = 'node/' . $node->nid;
 
+          db_merge('itg_akamai_content_setting')
+              ->key(array('entity_id' => $node->nid, 'entity_type' => $node->type))
+              ->fields(array(
+                'timestamp' => time(),
+                'entity_id' => $node->nid,
+                'entity_type' => $node->type,
+                'url' => $url,
+                'cache_time' => $node->akamai_timeout,
+              ))
+              ->execute();
+        }
+        catch (Exception $e) {
+          watchdog('ITG Akamai', 'Error:' . $e->getMessage());
+        }
+        // }
+      }
+      break;
+  }
+}
+
+/**
+ * Get TTL for specific content from itg_akamai_content_setting
+ */
+function get_itg_akamai_content_setting($entity_id, $entity_type) {
+  $cache_time = db_query("SELECT cache_time from {itg_akamai_content_setting} WHERE entity_id = :entity_id and entity_type = :entity_type LIMIT 1", array(":entity_id" => $entity_id, ":entity_type" => $entity_type))->fetchField();
+
+  // Returning TTL if Cache is available for specific entity id
+  if (isset($cache_time) && !empty($cache_time)) {
+    return $cache_time;
+  }
+  // Returning default cache timeout
+  return variable_get('akamai_timeout_' . $entity_type, '');
+}
+
+/**
+ * Returning expiration header by adding max age
+ * @param string $max_age
+ * @return string
+ */
+function itg_akamai_set_expiration_date($max_age) {
+  return gmdate(DATE_RFC7231, time() + $max_age);
+}
+
+/**
+ * Returning itg akamai translate time
+ * @param string $max_age
+ * @return string
+ */
+function itg_akamai_translate_time($timestring) {
+  if (preg_match('/^(?:(?<hours>\d+)h\s*)?(?:(?<minutes>\d+)m\s*)?(?:(?<seconds>\d+)s\s*)?$/', $timestring, $matches)) {
+    $time = 0;
+    if (isset($matches['hours']) && !empty($matches['hours'])) {
+      $time = (int) $matches['hours'] * 60 * 60;
+    }
+    if (isset($matches['minutes']) && !empty($matches['minutes'])) {
+      $time = (int) $matches['minutes'] * 60;
+    }
+    if (isset($matches['seconds']) && !empty($matches['seconds'])) {
+      $time = (int) $matches['seconds'];
+    }
+    return $time;
+  }
+}
+
+/**
+ *  Implements hook_form_FORM_ID_alter().
+ */
+function itg_akamai_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
+  if ($form['#vocabulary']->machine_name == 'category_management') {
+
+    $akamai_timeout_default = NULL;
+    $akamai_timeout_default = get_itg_akamai_content_setting($form['#term']['tid'], 'taxonomy');
+
+    $form['itg_akamai_fieldset'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Akamak Settings'),
+      '#weight' => 15,
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE,
+    );
+
+    $form['itg_akamai_fieldset']['akamai_timeout'] = array(
+      '#type' => 'textfield',
+      '#title' => t("Enter TTL"),
+      '#default_value' => $akamai_timeout_default,
+      '#description' => t("Timeout Length, the timeout used by when sending the cache clear request to Akamai's servers"),
+    );
+  }
+}
+
+/**
+ * Setting the metadata for taxonomy level content (TTL) for Akamai
+ * @param object $term
+ */
+function itg_akamai_taxonomy_setting($term) {
+  if (isset($term->akamai_timeout) && !empty($term->akamai_timeout)) {
+    try {
+      $url = 'taxonomy/term/' . $term->tid;
+
+      db_merge('itg_akamai_content_setting')
+          ->key(array('entity_id' => $term->tid, 'entity_type' => 'taxonomy'))
+          ->fields(array(
+            'timestamp' => REQUEST_TIME,
+            'entity_id' => $term->tid,
+            'entity_type' => 'taxonomy',
+            'url' => $url,
+            'cache_time' => $term->akamai_timeout,
+          ))
+          ->execute();
+    }
+    catch (Exception $e) {
+      watchdog('ITG Akamai', 'Error:' . $e->getMessage());
+    }
+  }
+}
+
+/**
+ * Implements hook_taxonomy_term_insert().
+ *
+ * When term are insrted, setting Akamai TTL 
+ * cache. Clear base taxonomy/term/% url as well as aliases.
+ */
+function itg_akamai_taxonomy_term_insert($term) {
+  // Setting TTL for category manager taxonomy
+  if (user_access("administer itg akamai")) {
+    if ($term->vid == CATEGORY_MANAGMENT) { // Akamai setting for taxonomy content level 
+      itg_akamai_taxonomy_setting($term);
+    }
+  }
+}
+
+/**
+ * Implements hook_init()
+ */
+function itg_akamai_init() {
+// Adding TTL for some specified pages
+  $parm = isset($_GET['q']) ? $_GET['q'] : NULL;
+  switch ($_GET['q']) {
+    // Checking if page is Taxonomy page
+    case stristr($parm, 'taxonomy/term/'):
+      $parms = explode('/', $parm);
+      if ($parms[0] == "taxonomy" && $parms[1] == "term" && is_numeric($parms[2]) && $parms[3] == "") {
+        $max_age = get_itg_akamai_content_setting($parms[2], 'taxonomy');
+        akamai_max_age($max_age);
+      }
+
+      break;
+  }
+}

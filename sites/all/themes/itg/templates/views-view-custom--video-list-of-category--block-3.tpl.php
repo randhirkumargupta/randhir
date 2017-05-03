@@ -26,7 +26,8 @@
         </figure>
 
         <span class="posted-on"><?php print $row['created']; ?></span>
-        <?php
+        <p title="<?php print $row['title']; ?>">       
+ <?php
         if (isset($_GET['category'])) {
           print l($row['title'], 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id)));
         }
@@ -34,6 +35,7 @@
           print l($row['title'], 'node/' . $row['nid']);
         }
         ?>
+        </p>
       </div>
     </li>
 <?php endforeach; ?>

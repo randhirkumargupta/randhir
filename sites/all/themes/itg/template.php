@@ -177,13 +177,13 @@ function itg_preprocess_page(&$variables) {
 function itg_breadcrumb($variables) {
   $breadcrumb = $variables['breadcrumb'];
   $crumbs = '';
-  if (!empty($breadcrumb) && arg(0) == 'site-search') {
+  if (!empty($breadcrumb) && arg(0) == 'topic') {
     $crumbs = '<div id="breadcrumbs"><ul><li></li>';
     foreach ($breadcrumb as $value) {
       $crumbs .= '<li>' . $value . '</li>';
     }
 
-    if (arg(0) == 'site-search') {
+    if (arg(0) == 'topic') {
       if (!empty($_GET['keyword'])) {
         $keyword = '<li>' . $_GET['keyword'] . '</li>';
       }

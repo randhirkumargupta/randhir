@@ -375,22 +375,63 @@ jQuery(document).ready(function () {
     var code = e.keyCode || e.which;
     if (code == 13 && value.length != 0) { //Enter keycode
       //Do something
-      var urldata = Drupal.settings.basePath + 'site-search?keyword=' + jQuery(this).val();
+      var urldata = Drupal.settings.basePath + 'topic?keyword=' + jQuery(this).val();
       window.location.href = urldata;
     }
     if(value.length != 0){
       jQuery('#header .search-icon-parent').find('.search-icon-search').show().prev().hide();
     } else{
-      jQuery('#header .search-icon-parent').find('.search-icon-header').show().next().hide();
+      jQuery('#header .search-icon-parent').find('.search-icon-default').show().next().hide();
     }
   });
   jQuery('.search-icon-search').click(function () {
-    search_value = jQuery('#header-search-box').val();
+    search_value = jQuery(this).parent().find('.search-text').val();
     if (search_value.length != 0) {
-      var urldata = Drupal.settings.basePath + 'site-search?keyword=' + search_value;
+      var urldata = Drupal.settings.basePath + 'topic?keyword=' + search_value;
       window.location.href = urldata;
     }
   });
+  
+  headerMain();
+  function headerMain() {
+      //var logotxt = $('.container.header-logo').html();
+      jQuery('.container.header-logo').prependTo('.itg-logo-container');
+
+      var mouse_is_inside = false;
+      jQuery('.search-icon-parent').hover(function(){ 
+          mouse_is_inside=true; 
+      }, function(){ 
+          mouse_is_inside=false; 
+      });
+
+      jQuery("body").mouseup(function(){
+          if(! mouse_is_inside){
+            jQuery('.search-icon-search').hide().prev().show();
+            jQuery('.globle-search').removeClass('active');
+          }
+      });
+
+      jQuery('.search-icon-default').click(function () {
+        search_value = jQuery(this).parent().find('.search-text').val();
+        if(search_value.length != 0){
+          jQuery(this).hide().next().show();
+        }
+        jQuery(this).parent().find('.globle-search').toggleClass('active');
+      });  
+
+      jQuery('#block-itg-layout-manager-header-block .menu-login .user-menu').hover(function(){                    
+          jQuery('#newlist').hide();
+      });
+
+      jQuery('.head-live-tv .mobile-user').click(function(){
+          jQuery(this).next('ul.menu').toggle();
+      });                
+  }
+  
+  
+  
+  
+  
 
 //    jQuery(window).scroll(function () {
 //      var winH = jQuery(window).height() + jQuery('#footer').height() + 40;
@@ -681,7 +722,8 @@ jQuery(document).ready(function () {
         // third-level-menu on mobile
         var tlmenu = jQuery('#block-itg-menu-manager-third-level-menu .select-menu');
         tlmenu.click(function(){
-            jQuery(this).next('ul').stop().slideToggle();
+          jQuery('.mobile-nav .fa-times').trigger('click');
+          jQuery(this).next('ul').stop().slideToggle();
         });
         jQuery(document).on('click', function () {
             jQuery('#block-itg-menu-manager-third-level-menu ul.third-level-menu').slideUp();;
@@ -884,73 +926,22 @@ jQuery(document).ready(function () {
     var img_src = jQuery(this).children('img').attr('src');
     jQuery('.active > a > img').attr({'src':img_src});
   });
-
+  
+  jQuery(window).bind({
+    'load': setSidebarHeight,
+    'scroll': setSidebarHeight,
+    'resize': setSidebarHeight
+  });
 
 jQuery(window).load(function(){
   var sticky = jQuery('.region-vertical-menu');
-//  var stickyrStopper = jQuery('#footer');
-//  if (!!sticky.offset()) { // make sure ".sticky" element exists
-//
-//    var generalSidebarHeight = sticky.innerHeight();
-//    var stickyTop = jQuery('#main').offset().top;
-//    var stickOffset = 0;
-//    var stickyStopperPosition = stickyrStopper.offset().top;
-//    var stopPoint = stickyStopperPosition - generalSidebarHeight - 150;
-//    var diff = stopPoint;
-//    console.log('gsh = ' + generalSidebarHeight);
-//    console.log("ssp = " + stickyStopperPosition);
-//    console.log("diff = " + diff);
-//    jQuery(window).scroll(function(){ // scroll event
-//      var windowTop = jQuery(window).scrollTop(); // returns number
-//      console.log("stickyTop = " + stickyTop);
-//      if (stopPoint < windowTop) {
-//          sticky.css({ position: 'absolute', top: diff });
-//      } else
-//      if (stickyTop <= windowTop) {
-//          sticky.css({ position: 'fixed', top: stickOffset });
-//      } else {
-//          sticky.css({position: 'absolute', top: 'initial'});
-//      }
-//    });
-//
-//  }
+  var sticky_sidebar = jQuery('.region-sidebar-second');
   sticky.stickyMojo({footerID: '#footer', contentID: '#main'});
+  sticky_sidebar.stickyMojo({footerID: '#footer', contentID: '#main'});
 });
-  headerMain();
-  function headerMain() {
-      //var logotxt = $('.container.header-logo').html();
-      jQuery('.container.header-logo').prependTo('.itg-logo-container');
-
-      var mouse_is_inside = false;
-      jQuery('.search-icon-parent').hover(function(){ 
-          mouse_is_inside=true; 
-      }, function(){ 
-          mouse_is_inside=false; 
-      });
-
-      jQuery("body").mouseup(function(){
-          if(! mouse_is_inside){
-            jQuery('.search-icon-search').hide().prev().show();
-            jQuery('.globle-search').removeClass('active');
-          } 
-          e.stopPropagation();
-      });
-
-      jQuery('.search-icon-header').click(function () {
-        search_value = jQuery('#header-search-box').val();
-        if(search_value.length != 0){
-          jQuery(this).hide().next().show();
-        }
-        jQuery('header').find('.globle-search').toggleClass('active');
-      });  
-
-      jQuery('#block-itg-layout-manager-header-block .menu-login .user-menu').hover(function(){                    
-          jQuery('#newlist').hide();
-      });
-
-      jQuery('.head-live-tv .mobile-user').click(function(){
-          jQuery(this).next('ul.menu').toggle();
-      });                
-  }
-  
 });
+function setSidebarHeight(){
+  var sticky_sidebar = jQuery('.region-sidebar-second');
+  var sticky_sidebar_height = sticky_sidebar.outerHeight(true);
+  sticky_sidebar.closest('.sidebars').css('height', sticky_sidebar_height);
+}

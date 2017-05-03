@@ -307,3 +307,17 @@ function itg_breaking_news_views_api() {
         'api' => 3,
     );
 }
+
+/**
+ * Implementation of hook_views_query_alter
+ * @param array reference $view
+ * @param array reference $query
+ */
+function itg_breaking_news_views_query_alter(&$view, &$query) {
+  if (isset($view->name) && $view->name === 'breaking_news' && $view->current_display == 'block_1') {
+    $query->add_where(5, 'node.created', strtotime(date('d-m-Y 00:00:00')), '>=');
+  }
+  if (isset($view->name) && $view->name === 'breaking_news' && $view->current_display == 'block_2') {
+    $query->add_where(5, 'node.created', strtotime(date('d-m-Y 00:00:00')), '>=');
+  }
+}

@@ -158,13 +158,19 @@ jQuery(document).ready(function () {
         }
 
         // scroll-to-top animate
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 90) {
-                $('.action-with-title').addClass('fixed');
-            } else {
-                $('.action-with-title').removeClass('fixed');
-            }
-        });
+        if($('div').hasClass('action-with-title')){
+          var at_offset = $('.action-with-title').offset();
+          var at_height = $('.action-with-title').outerHeight(true);
+          var at_top = at_offset.top;
+          $('.action-with-title').closest('#content').css('padding-top', at_height);
+          $(window).scroll(function () {
+              if ($(this).scrollTop() >= at_top) {
+                  $('.action-with-title').addClass('fixed');
+              } else {
+                  $('.action-with-title').removeClass('fixed');
+              }
+          });
+        }
         $('body').on('click', '.target-link', function (e) {
             var offSet = 194;
             if ($('.region-form-tab .block').hasClass('fixed') || $('.action-with-title').hasClass('fixed')) {
@@ -794,7 +800,19 @@ jQuery(document).ready(function () {
                 $('.node-story-form #StoryPhoto').hide();
             }
         }
-        ;
+        
+        // code to uncheck required field when user click on event registration Fields
+        jQuery('#edit-display').on('change', '.form-checkbox', function(){ 
+          var isCheck = jQuery(this).is(':checked');
+          var getIndex = jQuery(this).parent().index();
+          //var getId = jQuery(this).attr('id');
+          //var splitId = getId.substr(23);
+          if(!isCheck){
+            //jQuery(this).parent().parent().next().find('#edit-requied-field-field-erf-' + splitId + splitId).attr('checked', false);
+            jQuery(this).parent().parent().next().find('.form-item').eq(getIndex).find('.form-checkbox').attr('checked', false);
+          }
+        });
+        
 
     };
 })(jQuery);
@@ -987,7 +1005,8 @@ jQuery(document).ready(function () {
     // jQuery code for report-chart-tabs
     jQuery('.report-chart-tabs').on('click', 'a', function(){
       var getId = jQuery(this).attr('data-toggle');
-      jQuery(this).parent().addClass('active').parent().parent().next().find('#'+getId).show().siblings().hide();
+      jQuery(this).parent().addClass('active').parent().parent().next().find('#'+getId).css('opacity', 1).siblings().css('opacity', 0);
+      jQuery(this).parent().siblings().removeClass('active');
     });
     
     // jQuery code to show-hide mail templates token popup
@@ -1068,3 +1087,14 @@ jQuery(document).ready(function () {
 
 });
 
+jQuery(document).ready(function(){
+    jQuery("#edit-field-newsl-newsletter-content-und-select-section").on('change', function(){
+        var CT = jQuery("#edit-field-cm-select-type-und").val();
+        if (typeof CT === "undefined" || CT == null || CT == '_none') {
+            jQuery("#edit-field-story-category").css("display","none");
+        }
+        else {
+            jQuery("#edit-field-story-category").css("display","block");
+        }
+    });
+});

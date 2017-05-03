@@ -107,9 +107,15 @@ if (!empty($content)):
     <?php } ?>
     <div class="timeline">
     <h3>Timeline</h3>
-    <div id="slider-range"></div>
-        <!--<span id="time"></span>-->
-   </div>
+<!--    <div id="time-range">
+      <p>Time Range: <span class="slider-time">00:00 AM</span></p>
+      <div class="sliders_step1">
+        <div id="slider-range">
+          <div id="custom-handle" class="ui-slider-handle"><span></span></div>
+        </div>
+      </div>
+    </div>-->
+    <input id="slider-range" class="irs-hidden-input" readonly="">
     <?php
         if (!empty($node->field_breaking_content_details[LANGUAGE_NONE])) {
             $breaking_output.= '';
@@ -130,7 +136,7 @@ if (!empty($content)):
                 $current_time =  str_replace(":", "", date('H:i'));
                 if(!empty($entity[$field_collection_id]->field_breaking_redirection_url['und'][0]['value'])) {
                   $url = preg_replace('#^https?://#', '', $entity[$field_collection_id]->field_breaking_redirection_url['und'][0]['value']);
-                  $redirection_url = l($entity[$field_collection_id]->field_breaking_tile['und'][0]['value'], 'http://'.$url, array("attributes" => array("target" => "_blank"), 'html' => TRUE));
+                  $redirection_url = l($entity[$field_collection_id]->field_breaking_tile['und'][0]['value'], 'http://'.$url, array("attributes" => array("target" => "_blank", "title" => $entity[$field_collection_id]->field_breaking_tile['und'][0]['value']), 'html' => TRUE));
                 } else {
                   $redirection_url = $entity[$field_collection_id]->field_breaking_tile['und'][0]['value'];
                 }

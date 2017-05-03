@@ -157,7 +157,7 @@ function itg_widgets_custom_variables() {
   );
   $form['reporter_tid'] = array(
     '#type' => 'textfield',
-    '#title' => t('Reporter Tid'),
+    '#title' => t('Anchor occupation tid for anchors-listing page.'),
     '#default_value' => variable_get('reporter_tid'),
     '#size' => 20,
   );
