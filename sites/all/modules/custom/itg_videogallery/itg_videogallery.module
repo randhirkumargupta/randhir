@@ -7,7 +7,7 @@
  * Provides customizations and functions for Video Gallery.
  *
  */
-define('FTP_URL_VIDEO', 'http://test.kelltontech.net/ftptest1/');
+define('FTP_URL_VIDEO', 'http://test.kelltontech.net/ftptest1/qa_videos/');
 
 //itg_videogallery_ftp_file_insert_cron();
 
@@ -1294,6 +1294,9 @@ function itg_videogallery_check_video_url($vid) {
   $query = db_select('itg_solr_video_info', 'drd');
   $query->fields('drd', array('is_delete'));
   $query->condition('solr_video_id', $vid, '=');
+  $db_or = db_or();
+  $db_or->condition('video_embedded_url', $vid, '=');
+  $query->condition($db_or);
   $video_data = $query->execute()->fetchAll();
   if (empty($video_data)) {
     return true;
@@ -1828,9 +1831,13 @@ function itg_videogallery_get_file_details() {
     $thumb_url = $api->get(
             '/video/' . $video_id[0], array('fields' => array('embed_url'))
     );
-    
+
     if ($thumb_url['embed_url']) {
       $video_id = end(explode('/', $thumb_url['embed_url']));
+      $query = db_update('itg_solr_video_info')
+              ->fields(array('video_embedded_url' => $video_id));
+      $query->condition('solr_video_id', $video_id[0]);
+      $query->execute();
     }
     $responce.=' <iframe class="video_data" id="video_frame_' . $video_id . '" frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_id . '?autoplay=0&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
   }
@@ -3265,10 +3272,10 @@ function itg_videogallery_ftp_file_insert_cron() {
   $file_path = drupal_realpath('public://');
   $connection_id = itg_videogallery_ftp_video_list();
   ftp_pasv($connection_id, true);
-  $ftp_filess = ftp_nlist($connection_id, "/public_html/videos/");
+  $ftp_filess = ftp_nlist($connection_id, "/public_html/videos/qa_videos/");
   foreach ($ftp_filess as $files_n) {
 
-    $file_data_array = explode('/public_html/videos/', $files_n);
+    $file_data_array = explode('/public_html/videos/qa_videos/', $files_n);
 
     $path_info_data = pathinfo($file_data_array[1]);
     $filename = $path_info_data['filename'];
@@ -3276,13 +3283,13 @@ function itg_videogallery_ftp_file_insert_cron() {
     $exist_space = preg_match('/\s/', $filename);
     if ($exist_space) {
       $newfile = str_replace(' ', '_', $filename);
-      ftp_rename($connection_id, $files_n, '/public_html/videos/' . $newfile . '.' . $extension);
+      ftp_rename($connection_id, $files_n, '/public_html/videos/qa_videos/' . $newfile . '.' . $extension);
     }
   }
 
-  $ftp_files = ftp_nlist($connection_id, "/public_html/videos/");
+  $ftp_files = ftp_nlist($connection_id, "/public_html/videos/qa_videos/");
   foreach ($ftp_files as $files) {
-    $file_array = explode('/public_html/videos/', $files);
+    $file_array = explode('/public_html/videos/qa_videos/', $files);
 
     $path_info = pathinfo($file_array[1]);
     $extension = $path_info['extension'];
@@ -3369,6 +3376,7 @@ function itg_videogallery_dailymotion_add_video($real_path, $name, $realfilename
     $ftp_file = explode('public://dailymotion_video_dir/', $real_path);
     $uri = 'public://dailymotion-ftp/' . $realfilename;
     $url = FTP_URL_VIDEO . $name;
+
     $result = $api->post(
             '/me/videos', array(
         'url' => $url,
