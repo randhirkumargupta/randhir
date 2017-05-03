@@ -607,6 +607,7 @@ function itg_workflow_after_build($form, &$form_state) {
  * @param object $node
  */
 function itg_workflow_node_presave($node) {
+  
   if ((isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') || (empty($node->field_story_source_type[LANGUAGE_NONE][0]['value']))) {
     if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast') {
       if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
@@ -709,7 +710,7 @@ function itg_workflow_node_presave($node) {
       }
     }
   }
-  else if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated') { //comment this code before migrate        
+  else if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && arg(0) == 'node' && arg(2) == 'edit' && is_numeric(arg(1))) { //comment this code before migrate        
     if ($node->status == 1) {
       $node->workbench_moderation_state_new = 'published';
     }
@@ -982,14 +983,31 @@ function itg_workflow_node_update($node) {
       }
     }
     unset($_SESSION['node_preview_unique']);
-
+    
+    if ($node->type == 'story' && $node->workbench_moderation['current']->state == 'published') {
+      $query = db_select('node', 'n');
+      $query->condition('n.status', 0, '=');
+      $query->fields('n', array('title', 'nid'));
+      $query->condition('n.type', 'story', '=');
+      $query->condition('n.nid', $node->nid, '=');
+      $result = $query->execute();
+      $num_of_results = $result->rowCount();
+      if ($num_of_results >= 1) {
+        $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, SEO);
+        $user_email = get_email_by_roll($rid);
+        workflow_get_mail_content($node, 'update', $user_email, $node->name, $user->name, 'pub-unpub');
+      }
+    }
+    
+    
+    
     if ($node->workbench_moderation_state_new != 'draft') {
       $itguser = user_load($node->uid);
       //getting mail id's of high level users
       if ($node->type == 'story' && $node->workbench_moderation_state_new == 'published') {
         //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR, SEO);
         $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, SEO);
-      }
+      } 
       else {
         $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR);
         //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
@@ -1078,7 +1096,7 @@ function itg_workflow_stop_node_update_batch_for_widgets() {
  * @param string $current_user_name
  * @return 
  */
-function workflow_get_mail_content($node, $event, $to, $user_name, $current_user_name) {
+function workflow_get_mail_content($node, $event, $to, $user_name, $current_user_name, $vbo_state) {
   
   global $base_url;
   $author_mail = array();
@@ -1086,6 +1104,12 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
   $content_type = $node->type;
   $review = $node->workbench_moderation_state_new;
   $node_url = l($node->title, $base_url . '/node/' . $node->nid);
+  
+  if ($event == 'update' && $vbo_state == 'pub-unpub') {
+    $subject = 'A new ' . $content_type . ' has been unpublished, please find details below.';
+    $mail_content = '<p>Dear SEO Team,<br/> New ' . $content_type . ' title ' . $node_url . ' has been unpublished.</p>';
+  }
+  
   if ($event == 'create' && $review == 'published') {
     $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid ", array(":uid" => $node->uid))->fetchField();
     $to_mail = $author_mail[0];
@@ -1352,7 +1376,13 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
     
 //    $submitted_by = 'Updated By: ' . $current_user_name;
 //    $subject = ucfirst($content_type) . ' Updation ' . $node->title;
-  } 
+  }
+  
+  
+  
+  
+  
+  
 //  $node_url = $base_url . '/node/' . $node->nid;
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
               <html xmlns:v="urn:schemas-microsoft-com:vml">

@@ -76,17 +76,17 @@
                 }
             });
 
-//            // code for lock story check uncheck based on condition
-//            $('#edit-field-story-magazine-story-issue-und-magazine-issue-story').click(function () {
-//                if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(":checked")) {
-//                    $(".form-item-field-story-configurations-und-lock-story").show('');
-//                    $('#edit-field-story-configurations-und-lock-story').attr('checked', true);
-//                }
-//                else {
-//                    $(".form-item-field-story-configurations-und-lock-story").hide('');
-//                    $('#edit-field-story-configurations-und-lock-story').attr('checked', false);
-//                }
-//            });
+
+            // code for lock story check uncheck based on condition
+            $('#edit-field-story-magazine-story-issue-und-magazine-issue-story').click(function () {
+                if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(":checked")) {
+                    //$(".form-item-field-story-configurations-und-lock-story").show('');
+                    $('#edit-field-story-configurations-und-lock-story').attr('checked', true);
+                } else {
+                    //$(".form-item-field-story-configurations-und-lock-story").hide('');
+                    $('#edit-field-story-configurations-und-lock-story').attr('checked', false);
+                }
+            });
 //
 //
 ////            if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(":checked")) {
@@ -195,28 +195,27 @@
 })(jQuery, Drupal, this, this.document);
 
 jQuery(document).ready(function () {
+
     // Alias Handling.
     var alise_value = jQuery('input[name="path[alias]"]').val().replace(/[^a-z]/gi, '').toLowerCase();
     var title_value = jQuery("input[name=title]").val().replace(/[^a-z]/gi, '').toLowerCase();
-    if(alise_value == title_value) {
-        jQuery('input[name="path[alias]"]').prop('checked' , true);
-        jQuery('input[name="path[pathauto]"]').prop('checked' , true);
+    if (alise_value == title_value) {
+        jQuery('input[name="path[alias]"]').prop('checked', true);
+        jQuery('input[name="path[pathauto]"]').prop('checked', true);
         jQuery('input[name="path[alise]"]').prop("disabled", "disabled");
-        jQuery('input[name="path[alias]"]').css('color','rgb(235, 235, 228)');
-        jQuery('input[name="path[alias]"]').css('background','rgb(235, 235, 228)');
+        jQuery('input[name="path[alias]"]').css('color', 'rgb(235, 235, 228)');
+        jQuery('input[name="path[alias]"]').css('background', 'rgb(235, 235, 228)');
         jQuery('input[name="path[alias]"]').attr('value', ' ');
     }
-    jQuery('input[name="path[pathauto]"]').click(function(){
-        if(!jQuery('input[name="path[pathauto]"]').prop('checked')) {
-            jQuery('input[name="path[alias]"]').css('color','#000000');
-            jQuery('input[name="path[alias]"]').css('background','#FFFFFF');
-        }
-        else {
-            jQuery('input[name="path[alias]"]').css('color','rgb(235, 235, 228)');
-            jQuery('input[name="path[alias]"]').css('background','rgb(235, 235, 228)');
+    jQuery('input[name="path[pathauto]"]').click(function () {
+        if (!jQuery('input[name="path[pathauto]"]').prop('checked')) {
+            jQuery('input[name="path[alias]"]').css('color', '#000000');
+            jQuery('input[name="path[alias]"]').css('background', '#FFFFFF');
+        } else {
+            jQuery('input[name="path[alias]"]').css('color', 'rgb(235, 235, 228)');
+            jQuery('input[name="path[alias]"]').css('background', 'rgb(235, 235, 228)');
         }
     });
-    
     // Code to create breaking news.
     jQuery('#breaking_text').click(function () {
         var title = jQuery('#edit-title').val();
