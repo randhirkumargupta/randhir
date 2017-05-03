@@ -107,7 +107,7 @@ function itg_seo_form_alter(&$form , &$form_state , $form_id) {
     'cooking_tips_node_form' ,
     'recipe_node_form');
   if (in_array($form['#form_id'] , $node_form_array)) {
-    //$form['#after_build'][] = 'itg_meta_tags_alias_set';
+    $form['#after_build'][] = 'itg_meta_tags_alias_set';
   }
 }
 
@@ -118,11 +118,10 @@ function itg_seo_form_alter(&$form , &$form_state , $form_id) {
  * @return array
  */
 function itg_meta_tags_alias_set($form , &$form_state) {
-  $form['#node']->path['alias'] = 'qwert';
   $nodeid = arg(1);
   if (isset($form['path']) && !empty($form['path'])) {
     $edited_sef_url = itg_get_sef_url($form['path']['alias']['#value'] , $nodeid);
-    $form['path']['alias']['#value'] = 'qwert';
+    $form['path']['alias']['#value'] = $edited_sef_url;
   }
   return $form;
 }
@@ -247,14 +246,14 @@ function itg_additional_settings_element_hide($form , &$form_state , $form_id) {
  */
 function frontend_breadcrumb_display($id = NULL , $entity_object = NULL , $single_url = NULL) {
   $str_breadcrumb = 'http://data-vocabulary.org/Breadcrumb';
-  $title_val = substr(check_plain($entity_object->title) , 0 , 100);
+  $title_val = substr(check_plain($entity_object->title) , 0 , 50);
 
 //  if($entity_object->type == 'story' || $entity_object->type == 'photogallery' || $entity_object->type == 'videogallery') {
 //  $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo"><span itemprop="title">' . t($title_val)  . '</span>';  
 //  } else {
 //  $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo">' . l('<span itemprop="title">' . t($title_val) , 'node/' . $entity_object->nid , array('html' => TRUE , 'attributes' => array('itemprop' => 'url'))) . '</span>';
 //  }
-  
+
   $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo"><span itemprop="title">' . t($title_val) . '</span>';
   $section_link = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">'
       . l('<span itemprop="title">News</span>' , '<front>' , array('html' => TRUE , 'attributes' => array('itemprop' => 'url'))) . '</div>';
@@ -328,46 +327,73 @@ function event_registration_extra_element_hide($form , &$form_state) {
   return $form;
 }
 
-
 /**
  * Implementation of hook_node_insert().
  * @param object $node
  */
 function itg_seo_node_insert($node) {
   //set custom path alias
-  
-  $ctype_array = array('photogallery' , 
-      'story', 
-      'videogallery',
-      'podcast',
-      'food_news',
-      'cooking_tips',
-      'recipe');
-  
+
+  $ctype_array = array('photogallery' ,
+    'story' ,
+    'videogallery' ,
+    'podcast' ,
+    'food_news' ,
+    'cooking_tips' ,
+    'recipe');
+
   if (in_array($node->type , $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-    $newpath = itg_common_custompath_insert_load($node);    
-    $node->path['alias'] = $newpath;    
-  } // custom alias conditions for migration
-  elseif ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type , $ctype_array)) {
+    $newpath = itg_common_custompath_insert_load($node);
+    $node->path['alias'] = $newpath;
+  } //    custom alias conditions for migration
+  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type , $ctype_array)) {
     itg_common_custompath_migrated_load($node);
   }
+}
+
+/**
+ * {@inheritdocs}
+ */
+function itg_seo_node_presave($node) {
+  //Handel case for fresh created node.
+  if (empty($node->nid)) {
+    // As if alise is not set from textfield the assign title of node to alise.
+    if (empty($node->path['alias'])) {
+      $node->path['alias'] = $node->title;
+    }
+  }
+  if($node->path['pathauto']) {
+    $node->path['alias'] = $node->title;
+  }
+}
+
+/**
+ * {@inheritdocs}
+ */
+function itg_seo_pathauto_alias_alter(&$alias, array &$context) {
+  // Handel case if user selected  Generate automatic Sef URL
+  // $alias is overridden
+  // If you don't want to overridden then use conatinate.
+  // Example : $alias .= '.html';
+  $alias = $context['data']['node']->path['alias'];
 }
 
 /**
  * Implementation of hook_node_insert().
  * @param object $node
  */
-
-function itg_seo_node_update($node) { 
+function itg_seo_node_update($node) {
   //set custom path alias  
-  if(itg_workflow_stop_node_update_batch_for_widgets()) {
+  if (itg_workflow_stop_node_update_batch_for_widgets()) {
     return;
   }
 
-  $ctype_array = array('photogallery' , 'story' , 'videogallery' , 'podcast' , 'food_news' , 'cooking_tips' , 'recipe');
-  if (in_array($node->type , $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-    $newpath = itg_common_custompath_insert_load($node);
-    $node->path['alias'] = $newpath;   
+  if (isset($node->op)) {
+    $ctype_array = array('photogallery' , 'story' , 'videogallery' , 'podcast' , 'food_news' , 'cooking_tips' , 'recipe');
+    if (in_array($node->type , $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+      $newpath = itg_common_custompath_insert_load($node);
+      $node->path['alias'] = $newpath;
+    }
   }
   // custom alias conditions for migration
   if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type , $ctype_array)) {
