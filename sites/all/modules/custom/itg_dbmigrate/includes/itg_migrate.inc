@@ -112,15 +112,17 @@ function itg_dbmigrate_migrate_api() {
       'itg_story_list' => array(
         'title' => t('Story Migrate by xml chunks'),
       ),
-      /*'itg_magazine' => array(
-        'title' => t('Itg magazine Imports'),
-      ),
        'itg_issue' => array(
         'title' => t('Itg issue Imports'),
       ),
-      'itg_supplement' => array(
+      'itg_supplements' => array(
         'title' => t('Itg Supplement Imports'),
       ),
+      /*'itg_magazine' => array(
+        'title' => t('Itg magazine Imports'),
+      ),
+      
+      
       'itg_foodnews' => array(
         'title' => t('Itg Food News Imports'),
       ),
@@ -211,22 +213,24 @@ function itg_dbmigrate_migrate_api() {
         'class_name' => 'ItgStateMigration',
         'group_name' => 'itg_state',
       ),
+       'ItgIssue' => array(
+        'class_name' => 'ItgIssueMigration',
+        'group_name' => 'itg_issue',
+      ),
       'ItgPhoto' => array(
         'class_name' => 'ItgPhotoMigration',
         'group_name' => 'itg_Photo_category',
       ),
+       'ItgSupplements' => array(
+        'class_name' => 'ItgSupplementsMigration',
+        'group_name' => 'itg_supplement',
+      ),
+     
       /*'ItgMagazine' => array(
         'class_name' => 'ItgMagazineMigration',
         'group_name' => 'itg_magazine',
       ),
-      'ItgIssue' => array(
-        'class_name' => 'ItgIssueMigration',
-        'group_name' => 'itg_issue',
-      ),
-      'ItgSupplement' => array(
-        'class_name' => 'ItgSupplementMigration',
-        'group_name' => 'itg_supplement',
-      ),
+     
       'ItgFoodNews' => array(
         'class_name' => 'ItgFoodNewsMigration',
         'group_name' => 'itg_foodnews',
