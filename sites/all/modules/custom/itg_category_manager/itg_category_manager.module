@@ -1171,7 +1171,7 @@ function itg_category_manager_views_data() {
  */
 function itg_category_manager_form_alter(&$form , &$form_state , $form_id) {
   if ($form_id == 'taxonomy_form_term' && $form['#vocabulary']->machine_name == 'category_management') {
-    $select_template_type = 'field_cm_select_template_type';
+    /*$select_template_type = 'field_cm_select_template_type';
     $select_template = 'field_cm_select_template';
     unset($form[$select_template_type][LANGUAGE_NONE]['#options']['_none']);
 
@@ -1199,6 +1199,11 @@ function itg_category_manager_form_alter(&$form , &$form_state , $form_id) {
       $form[$select_template][LANGUAGE_NONE]['#options'] = get_tplname_on_category($template_type);
       $form[$select_template][LANGUAGE_NONE]['#default_value'] = $form[$select_template][LANGUAGE_NONE]['#entity']->field_cm_select_template[LANGUAGE_NONE][0]['value'];
     }
+    */
+   unset($form['field_cm_select_template_type'][LANGUAGE_NONE]['#options']['_none']);
+   drupal_add_js('jQuery(document).ready(function() {                  
+                  jQuery("#edit-field-cm-select-template").hide();
+                 });', array('type' => 'inline', 'scope' => 'footer'));
   }
   if ($form_id == 'election_graph_xml_node_form') {
     drupal_add_css(
@@ -1222,6 +1227,7 @@ function itg_category_manager_form_alter(&$form , &$form_state , $form_id) {
     $form['field_cm_select_type_value']['#options']['All'] = t('All');
   }
 
+  
 // code use for append field for primary category and category list by contant type
   $code_append_array = array('story_node_form' , 'photogallery_node_form' , 'podcast_node_form' , 'astro_node_form' , 'videogallery_node_form' , 'blog_node_form' , 'recipe_node_form' , 'cooking_tips_node_form' , 'food_news_node_form' , 'print_team_integration_node_form');
   if (in_array($form_id , $code_append_array)) {
