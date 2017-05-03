@@ -27,7 +27,7 @@ global $base_url;
       <?php endif; ?>
 
     </div>
-    <div class="detail"><h3 title="<?php echo $row['title'];?>"><?php
+    <div class="detail"><h3 title="<?php echo strip_tags($row['title']);?>"><?php
       if (function_exists('itg_common_get_smiley_title')) {
         print l(itg_common_get_smiley_title($row['nid'], 0, 100), "node/" . $row['nid'], array("html" => TRUE));
       }
@@ -37,17 +37,17 @@ global $base_url;
       ?></h3>
         <?php if (strtolower($row['type']) == 'story'): ?>
         <p><?php if (isset($row['field_story_kicker_text'])) {
-        print $row['field_story_kicker_text'];
+        print strip_tags($row['field_story_kicker_text']);
       } ?></p>
       <?php
       elseif ($row['type'] == 'photogallery'): ?>
-        <p><?php print $row['field_gallery_kicer']; ?></p>
+        <p><?php print strip_tags($row['field_gallery_kicer']); ?></p>
       <?php elseif ($row['type'] == 'photogallery'): ?>
-        <p><?php print $row['field_story_expert_description']; ?></p>
+        <p><?php print strip_tags($row['field_story_expert_description']); ?></p>
       <?php endif; ?>
       <?php
       if (!empty($row['field_video_kicker'])) {
-        print '<p>' . $row['field_video_kicker'] . '</p>';
+        print '<p>' . strip_tags($row['field_video_kicker']) . '</p>';
       }
       ?>            </div>
   </div>
