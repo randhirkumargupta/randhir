@@ -1105,13 +1105,37 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
   $node_url = l($node->title, $base_url . '/node/' . $node->nid);
   
   if ($event == 'update' && $vbo_state == 'pub-unpub') {
+//    $to_mail = $to;
+    $to_mail = 'gourav.walia@kelltontech.com';
     $subject = 'A new ' . $content_type . ' has been unpublished, please find details below.';
-    $mail_content = '<p>Dear SEO Team,<br/> New ' . $content_type . ' title ' . $node_url . ' has been unpublished.</p>';
+    $mail_content = '<div style="max-width: 502px; margin: 0 auto; font-family: sans-serif; color: #000;">
+                      <table style="border-collapse: collapse; border: 1px solid #ececec;"> 
+                          <tr>
+                              <td style="background-color:#ececec;">
+                                  <img src="template_logo.png" alt="Indiatoday" />
+                              </td>
+                          </tr>
+                          <tr>
+                              <td style="padding: 10px 20px;">
+                                  <h2 style="font-size: 18px; margin: 20px 0 30px;">STORY UNPUBLISHED :</h2>
+                                  <strong style="font-size: 16px;">Dear SEO Team,</strong>
+                                  <p style="font-size: 16px; color: #595959; margin: 20px 0;">' . ucwords($content_type) . ' <strong style="color: #000;">title.</strong></p>
+                                  <p style="font-size: 16px; color: #595959; margin: 20px 0;">' . $node_url . '</p>
+                                  <p style="font-size: 16px; color: #595959; margin: 20px 0;">has been unpublished.</p>
+                                  <p style="font-size: 16px; color: #595959; margin: 20px 0;"><strong style="color: #000;">Thanks,</strong><br>India Today Team</p>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td style="background-color: #000; font-size: 11px; color: #7c7c7c; padding: 10px; text-align: center; font-weight: bold;">COPYRIGHT &copy; 2017 LIVING MEDIA INDIA LIMITED. ALL RIGHT RESERVED.</td>
+                          </tr>
+                      </table>
+                  </div>';
   }
   
   if ($event == 'create' && $review == 'published') {
     $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid ", array(":uid" => $node->uid))->fetchField();
-    $to_mail = $author_mail[0];
+//    $to_mail = $author_mail[0];
+    $to_mail = 'gourav.walia@kelltontech.com';
     
     if (function_exists('itg_mail_templates_get_mailcontent')) {
       $mail_data = itg_mail_templates_get_mailcontent($content_type, 'create');
@@ -1157,9 +1181,11 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
     $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid ", array(":uid" => $node->uid))->fetchField();
     if (!empty($author_mail)) {
       $get_mails = array_merge($author_mail, $to);
-      $to_mail = implode(',', $get_mails);
+//      $to_mail = implode(',', $get_mails);
+      $to_mail = 'gourav.walia@kelltontech.com';
     } else {
-      $to_mail = $to;
+//      $to_mail = $to;
+      $to_mail = 'gourav.walia@kelltontech.com';
     }
 
     if (function_exists('itg_mail_templates_get_mailcontent')) {
@@ -1204,9 +1230,11 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
       $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid ", array(":uid" => $node->uid))->fetchField();
       if (!empty($author_mail)) {
         $get_mails = array_merge($author_mail, $to);
-        $to_mail = implode(',', $get_mails);
+//        $to_mail = implode(',', $get_mails);
+        $to_mail = 'gourav.walia@kelltontech.com';
       } else {
-        $to_mail = $to;
+//        $to_mail = $to;
+        $to_mail = 'gourav.walia@kelltontech.com';
       }
       
       if (function_exists('itg_mail_templates_get_mailcontent')) {
@@ -1250,7 +1278,8 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
     }
     else if ($review == 'rejected') {
       $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid ", array(":uid" => $node->uid))->fetchField();
-      $to_mail = $author_mail[0];
+//      $to_mail = $author_mail[0];
+      $to_mail = 'gourav.walia@kelltontech.com';
 
       if (function_exists('itg_mail_templates_get_mailcontent')) {
         $mail_data = itg_mail_templates_get_mailcontent($content_type, $review);
@@ -1292,7 +1321,8 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
     }
     else if ($review == 'needs_modification') {
       $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid ", array(":uid" => $node->uid))->fetchField();
-      $to_mail = $author_mail[0];
+//      $to_mail = $author_mail[0];
+      $to_mail = 'gourav.walia@kelltontech.com';
       
       if (function_exists('itg_mail_templates_get_mailcontent')) {
         $mail_data = itg_mail_templates_get_mailcontent($content_type, $review);
@@ -1333,7 +1363,8 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
     }
     else if ($review == 'published') {
       $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid ", array(":uid" => $node->uid))->fetchField();
-      $to_mail = $author_mail[0];
+//      $to_mail = $author_mail[0];
+      $to_mail = 'gourav.walia@kelltontech.com';
       
       if (function_exists('itg_mail_templates_get_mailcontent')) {
         $mail_data = itg_mail_templates_get_mailcontent($content_type, 'update');
