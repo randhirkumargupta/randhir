@@ -89,7 +89,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
 
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
-    $items_url = $xml_folder . 'indiatoday-galleries-2009-04-01.xml';
+    $items_url = $xml_folder . 'indiatoday-galleries.xml';
 
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -392,6 +392,10 @@ class ItgPhotogalleryMigration extends XMLMigration {
 
   public function prepareRow($row) {
 
+    if(empty($row->xml->modified) || (string) $row->xml->modified == 0) {
+      $row->xml->modified = (string) $row->xml->created;
+    }
+    
     if (!empty($row->xml->extralargeimage)) {
       $row->xml->extralargeimage = itg_dbmigrate_imagepath_url((string) $row->xml->extralargeimage);
     }
@@ -429,7 +433,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
     }
 
     // Category migrate
-    $data_category = '';
+   /* $data_category = '';
 
     if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {
       foreach ($row->xml->categories->category as $final_category) {
@@ -440,8 +444,29 @@ class ItgPhotogalleryMigration extends XMLMigration {
         $data_category[]['tid'] = $orignal_category;
       }
     }
+    $row->category_new = $data_category;*/
+    
+     $data_category = '';
+    if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {
+      $cat = array();
+      $tid_array = array();
+      foreach ($row->xml->categories->category as $final_category) {
+        $cat = explode('#', $final_category);
+        foreach ($cat as $cc) {
+          if(!empty($cc)) {
+            $tid_array[] = get_itg_destination_id('migrate_map_itgphoto', $cc);
+          }
+        }
+      }
+      $tid_array[] = 1208521;
+      $all_category = array_unique($tid_array);
+      foreach ($all_category as $chunk_data) {
+        $data_category[]['tid'] = $chunk_data;
+      }
+    }
     $row->category_new = $data_category;
-
+    
+    
     // Story tags migration
     $data_tags = '';
 
@@ -569,8 +594,14 @@ class ItgPhotogalleryMigration extends XMLMigration {
           $strap_headline = (string) $value->strap_headline;
           $image_id = (string) $value->imageid;
           $img_meta_key = (string) $value->image_metakey;
-          $api_image_url = itg_dbmigrate_imagepath_url((string) $value->api_image);
-          $small_image_url = itg_dbmigrate_imagepath_url((string) $value->gallery_smallimage);
+          $api_image_url = '';
+          if(!empty($value->api_image)){
+            $api_image_url = itg_dbmigrate_imagepath_url((string) $value->api_image);
+          }
+           $small_image_url = '';
+          if(!empty($value->gallery_smallimage)){
+            $small_image_url = itg_dbmigrate_imagepath_url((string) $value->gallery_smallimage);
+          }
           $enable = (string) $value->enable;
           // photoby
           $data_byline = '';
@@ -644,7 +675,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
             'field_image_metakey' => array(LANGUAGE_NONE => array(array('value' => $img_meta_key))),
             'field_api_image' => $api_image_files,
             'field_photo_small_image' => $small_image_files,
-            'field_photo_enable' => $enable
+            'field_photo_enable' => array(LANGUAGE_NONE => array(array( 'value' => $enable))),
           );
           $field_collection_item = entity_create('field_collection_item', $values);
           $field_collection_item->setHostEntity('node', $node);
