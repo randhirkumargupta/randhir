@@ -41,6 +41,9 @@ function openPopup() {
         'success': function (result)
         {
            jQuery(".ad-blocker").html(result);
+           if(jQuery('body').hasClass('node-type-videogallery')){
+               jQuery('.node-type-videogallery').find('#content').prepend('<div class"ad-blocker">' + result + '</div>');
+           }
             if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
                 jQuery('li#ie').addClass('active');
                 jQuery('#tab13').fadeIn();
