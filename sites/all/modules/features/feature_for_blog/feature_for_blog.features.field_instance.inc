@@ -301,6 +301,48 @@ function feature_for_blog_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-blog-field_primary_category'.
+  $field_instances['node-blog-field_primary_category'] = array(
+    'bundle' => 'blog',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 24,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_primary_category',
+    'label' => 'primary category',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 55,
+    ),
+  );
+
   // Exported field_instance: 'node-blog-field_story_archive'.
   $field_instances['node-blog-field_story_archive'] = array(
     'bundle' => 'blog',
@@ -555,6 +597,7 @@ function feature_for_blog_field_default_field_instances() {
   t('Related Content Detail');
   t('Section');
   t('Short description');
+  t('primary category');
 
   return $field_instances;
 }
