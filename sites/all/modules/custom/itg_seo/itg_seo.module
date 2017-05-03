@@ -121,7 +121,8 @@ function itg_meta_tags_alias_set($form , &$form_state) {
   $nodeid = arg(1);
   if (isset($form['path']) && !empty($form['path'])) {
     $edited_sef_url = itg_get_sef_url($form['path']['alias']['#value'] , $nodeid);
-    $form['path']['alias']['#value'] = $edited_sef_url;
+    //pr($edited_sef_url);
+    $form['path']['alias']['#value'] = $edited_sef_url;// itg_common_custompath_insert_val($form['path']['alias']['#value']);
   }
   return $form;
 }
@@ -362,9 +363,14 @@ function itg_seo_node_presave($node) {
       $node->path['alias'] = $node->title;
     }
   }
-  if($node->path['pathauto']) {
+  if($node->path['pathauto'] == 1) {
     $node->path['alias'] = $node->title;
   }
+  
+  //p($node->path['alias']);
+//  if($node->path['pathauto']) {
+//    $node->path['alias'] = $node->title;
+//  }
 }
 
 /**
@@ -392,6 +398,7 @@ function itg_seo_node_update($node) {
     $ctype_array = array('photogallery' , 'story' , 'videogallery' , 'podcast' , 'food_news' , 'cooking_tips' , 'recipe');
     if (in_array($node->type , $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
       $newpath = itg_common_custompath_insert_load($node);
+      $node->path['alias'] = $newpath;
       $path = array(
         'source' => "node/{$node->nid}" ,
         'alias' => $newpath , // Any alias that you want to set.
