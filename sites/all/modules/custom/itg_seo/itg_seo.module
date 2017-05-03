@@ -293,7 +293,7 @@ function frontend_breadcrumb_display($id = NULL , $entity_object = NULL , $singl
     $section_link .= ' / ' . l("Anchors" , "anchors-list") . ' / ' . $node_title;
   }
   else if (!empty($entity_object->type) && $entity_object->type == 'breaking_news') {
-    $section_link .= ' / ' . $entity_object->field_type[LANGUAGE_NONE][0]['value'];
+    $section_link .= ' / ' . $entity_object->field_type[LANGUAGE_NONE][0]['value'].'/'.$node_title;
   }
   elseif (!empty($entity_object->type)) {
     $section_link .= ' / ' . $node_title;
