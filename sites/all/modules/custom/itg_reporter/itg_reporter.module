@@ -412,12 +412,20 @@ function itg_reporter_node_validate($node, $form, &$form_state) {
         if ($occ_name->name == 'Celebrity') {
           $flag = TRUE;
         }
+        if (strtolower($occ_name->name) == 'reporter') {
+          $reporter_flag = TRUE;
+        }
       }
     }
     // make moview field mandotory.
     $errors = array_filter($node->field_reporter_movie_name['und']);
+    $profile_type = $node->field_reporter_profile_type[LANGUAGE_NONE][0]['value'];
     if ($flag && empty($errors)) {
       form_set_error('field_reporter_movie_name', 'Movie name is required.');
+    }
+    
+    if ($reporter_flag && empty($profile_type)) {
+      form_set_error('field_reporter_profile_type', 'Profile is required.');
     }
   }
 }
