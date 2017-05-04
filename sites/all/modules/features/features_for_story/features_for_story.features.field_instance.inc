@@ -2975,7 +2975,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Highlights',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3282,7 +3282,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Listicle',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -5024,7 +5024,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'story',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Buzz',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
