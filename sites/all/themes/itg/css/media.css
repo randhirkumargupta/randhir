@@ -1578,6 +1578,10 @@
   }
 
   /*election page css end*/
+  #block-itg-menu-manager-third-level-menu {
+    z-index: 999999;
+    position: relative;
+  }
 }
 @media only screen and (max-width: 767px) {
   /*css start oscar-layout-page */
