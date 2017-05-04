@@ -920,3 +920,8 @@ function itg_custom_get_user_details($uid) {
   return $user_list;
   }
 }
+
+function _occupation_from_tid_for_sef_url($tid) {
+  $term_data = taxonomy_term_load($tid);
+  return $term_data->name;
+}
