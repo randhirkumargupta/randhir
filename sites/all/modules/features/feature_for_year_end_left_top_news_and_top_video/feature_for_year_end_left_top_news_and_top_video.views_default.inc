@@ -387,14 +387,47 @@ function feature_for_year_end_left_top_news_and_top_video_views_default_views() 
     'story' => 'story',
     'videogallery' => 'videogallery',
   );
-  /* Filter criterion: Content: Has taxonomy term */
-  $handler->display->display_options['filters']['tid']['id'] = 'tid';
-  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
-  $handler->display->display_options['filters']['tid']['field'] = 'tid';
-  $handler->display->display_options['filters']['tid']['value'] = array(
-    0 => '427',
+  /* Filter criterion: Content: Has taxonomy terms (with depth; <em class="placeholder">Simple hierarchical select</em>) */
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['id'] = 'shs_term_node_tid_depth';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['table'] = 'node';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['field'] = 'shs_term_node_tid_depth';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['value'] = 'All';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator_id'] = 'shs_term_node_tid_depth_op';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['label'] = 'Section';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator'] = 'shs_term_node_tid_depth_op';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['identifier'] = 'shs_term_node_tid_depth';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
-  $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['type'] = 'select';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'category_management';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['hierarchy'] = 1;
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '0';
   $handler->display->display_options['path'] = 'yearend-left-widget-contents';
 
   /* Display: Yearender Left News And Videos Widget Order Reorder */
