@@ -21,7 +21,7 @@ foreach ($rows as $index => $row): ?>
         <?php endif; ?>
       </span>
       
-      <h3 title=" <?php print $row['title']; ?>" class="blog-title blog-title-<?php print $key ?>">
+        <h3 title=" <?php print strip_tags($row['title']); ?>" class="blog-title blog-title-<?php print $key ?>">
         <?php if (!empty($row['title'])) : ?>
           <?php print $row['title']; ?>
         <?php endif; ?>
