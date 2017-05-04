@@ -48,7 +48,7 @@ function itg_common_custompath_insert_load($node) {
 //        $section_hierarchy[] = $val->name;
 //      }
 //    }
-    if (is_issue_baised_magazine($node)) {
+    if ($node->type == 'story' && is_issue_baised_magazine($node)) {
       $pathdata = 'magazine';
       $pathdata .= '/'. get_path_from_category($getsection);
       //Get node type.
@@ -70,7 +70,7 @@ function itg_common_custompath_insert_load($node) {
       // Create url alise for magazine type story.
       //$node->path = array('alias' => $newpath , 'pathauto' => FALSE);
     }
-    elseif (is_photo_story($node)) {
+    elseif ($node->type == 'story' && is_photo_story($node)) {
       //Add path from category.
       $pathdata = get_path_from_category($getsection);
       // Add static value for photo story.
@@ -89,15 +89,16 @@ function itg_common_custompath_insert_load($node) {
     }
     else {
       $set_hierarchy = get_path_from_category($getsection);
-      $pathdata = $set_hierarchy . '/' . $node->type . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
+      $node_CT = $node->type;
+      if($node_CT == 'photogallery') {
+        $node_CT = 'photo';
+      }
+      elseif($node_CT == 'videogallery') {
+        $node_CT = 'videos';
+      }
+      $pathdata = $set_hierarchy . '/' . $node_CT . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
       $newpath = itg_common_custompath_insert_val($pathdata);
       return $newpath;
-      //$node->path = array('alias' => $newpath , 'pathauto' => FALSE);
-      
-      /*$set_hierarchy = array_reverse($section_hierarchy);
-      $pathdata = strtolower(implode("/" , $set_hierarchy)) . '/' . $node->type . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
-      $newpath = itg_common_custompath_insert_val($pathdata);
-      $node->path = array('alias' => $newpath , 'pathauto' => FALSE);*/
     }
   }
 }
