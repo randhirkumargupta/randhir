@@ -1348,7 +1348,7 @@ function itg_widget_delete_data_from_widget($widget_name , $nid = 0 , $stateid =
  */
 function itg_widget_insert_widget_data($node , $widget_name , $category_tid , $extra = NULL , $state = NULL) {
   try {
-    $max_weight = get_min_weight_for_special($widget_name);
+    $max_weight = get_min_weight_for_special($widget_name, $category_tid);
     $node_load_data = itg_widget_get_required_node_data_for_widget($node);
     db_insert('itg_widget_order')
         ->fields(array(
