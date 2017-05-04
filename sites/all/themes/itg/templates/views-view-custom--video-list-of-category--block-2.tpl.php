@@ -19,7 +19,9 @@
       </figure>
 
       <span class="posted-on"><?php print $row['created']; ?></span>
+      <p title="<?php print $row['title']; ?>">
     <?php print l($row['title'], 'node/' . $row['nid_1']); ?>
+      </p>
       </div>
     </li>
 <?php endforeach; ?>

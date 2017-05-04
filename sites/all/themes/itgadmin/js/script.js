@@ -30,6 +30,39 @@ jQuery(document).ready(function () {
     jQuery('.form-field-name-field-emoji , #cke_edit-field-emoji-und-0-value iframe').bind('contextmenu', function (e) {
         return false;
     });
+
+    // Alias Handling.
+    var alise_value_selector = jQuery('input[name="path[alias]"]').val();
+    var title_value_selector = jQuery("input[name=title]").val();
+    if (typeof (alise_value_selector) == 'undefined') {
+        var alise_value = '';
+    } else {
+        var alise_value = alise_value_selector.replace(/[^a-z]/gi, '').toLowerCase()
+    }
+    if (typeof (title_value_selector) == 'undefined') {
+        var title_value = '';
+    } else {
+        var title_value = title_value_selector.replace(/[^a-z]/gi, '').toLowerCase();
+    }
+
+    if (alise_value == title_value && (alise_value !='' || title_value != '')) {
+        jQuery('input[name="path[alias]"]').prop('checked', true);
+        jQuery('input[name="path[pathauto]"]').prop('checked', true);
+        jQuery('input[name="path[alise]"]').prop("disabled", "disabled");
+        jQuery('input[name="path[alias]"]').css('color', 'rgb(235, 235, 228)');
+        jQuery('input[name="path[alias]"]').css('background', 'rgb(235, 235, 228)');
+        jQuery('input[name="path[alias]"]').attr('value', ' ');
+    }
+    jQuery('input[name="path[pathauto]"]').click(function () {
+        if (!jQuery('input[name="path[pathauto]"]').prop('checked')) {
+            jQuery('input[name="path[alias]"]').css('color', '#000000');
+            jQuery('input[name="path[alias]"]').css('background', '#FFFFFF');
+        } else {
+            jQuery('input[name="path[alias]"]').css('color', 'rgb(235, 235, 228)');
+            jQuery('input[name="path[alias]"]').css('background', 'rgb(235, 235, 228)');
+        }
+    });
+
 });
 
 (function ($) {
@@ -158,18 +191,18 @@ jQuery(document).ready(function () {
         }
 
         // scroll-to-top animate
-        if($('div').hasClass('action-with-title')){
-          var at_offset = $('.action-with-title').offset();
-          var at_height = $('.action-with-title').outerHeight(true);
-          var at_top = at_offset.top;
-          $('.action-with-title').closest('#content').css('padding-top', at_height);
-          $(window).scroll(function () {
-              if ($(this).scrollTop() >= at_top) {
-                  $('.action-with-title').addClass('fixed');
-              } else {
-                  $('.action-with-title').removeClass('fixed');
-              }
-          });
+        if ($('div').hasClass('action-with-title')) {
+            var at_offset = $('.action-with-title').offset();
+            var at_height = $('.action-with-title').outerHeight(true);
+            var at_top = at_offset.top;
+            $('.action-with-title').closest('#content').css('padding-top', at_height);
+            $(window).scroll(function () {
+                if ($(this).scrollTop() >= at_top) {
+                    $('.action-with-title').addClass('fixed');
+                } else {
+                    $('.action-with-title').removeClass('fixed');
+                }
+            });
         }
         $('body').on('click', '.target-link', function (e) {
             var offSet = 194;
@@ -283,7 +316,7 @@ jQuery(document).ready(function () {
 
         // jQuery code to hide select option whenever user hover on ITGCMS navbar
         $('#block-menu-menu-admin-left-menu').mouseover(function () {
-           // $('select').blur();
+            // $('select').blur();
         });
 
         $('#edit-field-gallery-image .field-name-field-images').find('.image-widget-data .file-size').each(function () {
@@ -800,17 +833,19 @@ jQuery(document).ready(function () {
                 $('.node-story-form #StoryPhoto').hide();
             }
         }
-        
+
         // code to uncheck required field when user click on event registration Fields
-        jQuery('#edit-display').on('change', '.form-checkbox', function(){ 
-          var isCheck = jQuery(this).is(':checked');
-          var getId = jQuery(this).attr('id');
-          var splitId = getId.substr(23);
-          if(!isCheck){
-            jQuery(this).parent().parent().next().find('#edit-requied-field-field-erf-' + splitId + splitId).attr('checked', false);	
-          }
+        jQuery('#edit-display').on('change', '.form-checkbox', function () {
+            var isCheck = jQuery(this).is(':checked');
+            var getIndex = jQuery(this).parent().index();
+            //var getId = jQuery(this).attr('id');
+            //var splitId = getId.substr(23);
+            if (!isCheck) {
+                //jQuery(this).parent().parent().next().find('#edit-requied-field-field-erf-' + splitId + splitId).attr('checked', false);
+                jQuery(this).parent().parent().next().find('.form-item').eq(getIndex).find('.form-checkbox').attr('checked', false);
+            }
         });
-        
+
 
     };
 })(jQuery);
@@ -998,24 +1033,24 @@ jQuery(document).ready(function () {
 
     //tech and auto new block title tig admin
     jQuery('#auto-new-block .widget-settings, #tech-new-block .widget-settings, #education-new-block .widget-settings, #movie-new-block .widget-settings, #defalt-section-top-block .widget-settings').prependTo('.auto-block-2 .special-top-news');
-    
-    
+
+
     // jQuery code for report-chart-tabs
-    jQuery('.report-chart-tabs').on('click', 'a', function(){
-      var getId = jQuery(this).attr('data-toggle');
-      jQuery(this).parent().addClass('active').parent().parent().next().find('#'+getId).css('opacity', 1).siblings().css('opacity', 0);
-      jQuery(this).parent().siblings().removeClass('active');
+    jQuery('.report-chart-tabs').on('click', 'a', function () {
+        var getId = jQuery(this).attr('data-toggle');
+        jQuery(this).parent().addClass('active').parent().parent().next().find('#' + getId).css('opacity', 1).siblings().css('opacity', 0);
+        jQuery(this).parent().siblings().removeClass('active');
     });
-    
+
     // jQuery code to show-hide mail templates token popup
-    jQuery('.get-tokens').on('click', 'a', function(){
-      var getId = jQuery(this).attr('data-id');
-      jQuery('body').find('#' + getId).show();
+    jQuery('.get-tokens').on('click', 'a', function () {
+        var getId = jQuery(this).attr('data-id');
+        jQuery('body').find('#' + getId).show();
     });
-    jQuery('.itgadmin-popup').on('click', '.close-itgadmin-popup', function(){
-      jQuery(this).parent().parent().hide();
+    jQuery('.itgadmin-popup').on('click', '.close-itgadmin-popup', function () {
+        jQuery(this).parent().parent().hide();
     });
-    
+
 
 });
 jQuery(document).ready(function () {
@@ -1085,14 +1120,13 @@ jQuery(document).ready(function () {
 
 });
 
-jQuery(document).ready(function(){
-    jQuery("#edit-field-newsl-newsletter-content-und-select-section").on('change', function(){
+jQuery(document).ready(function () {
+    jQuery("#edit-field-newsl-newsletter-content-und-select-section").on('change', function () {
         var CT = jQuery("#edit-field-cm-select-type-und").val();
         if (typeof CT === "undefined" || CT == null || CT == '_none') {
-            jQuery("#edit-field-story-category").css("display","none");
-        }
-        else {
-            jQuery("#edit-field-story-category").css("display","block");
+            jQuery("#edit-field-story-category").css("display", "none");
+        } else {
+            jQuery("#edit-field-story-category").css("display", "block");
         }
     });
 });

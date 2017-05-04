@@ -1395,6 +1395,7 @@ div.vertical-tabs {
             }
           }
         }
+        div.description{left: 220px !important;}
       }
     }
   }
@@ -8638,7 +8639,7 @@ div.node{
       }
     }
     div.description{
-      display: none !important;
+      left: 100%;
     }
   }
   .img-crt{
@@ -9130,6 +9131,9 @@ div.node{
         }
       }
     }
+  }
+  [class*="form-field-name-field-emoji"]{
+    iframe.cke_wysiwyg_frame{pointer-events: none;}
   }
   .form-field-name-field-story-technology{
     margin: 0 10px;   
@@ -11692,4 +11696,36 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   }
   .get-tokens > a {
     color: #0c8bb1;
+  }
+  .ftp-center #itg_video_content .video-ftp{
+    border-right: none;
+    width: 100%;
+  }
+  .view-tags-listing{
+    .attachment{
+      padding-right: 155px !important;
+    }
+    .view-content{
+      position: relative;
+      .button-default{
+        @extend .btn-submit;
+        position: absolute;
+        right: 0;
+        top: -46px;
+        margin-right: 0;
+      }
+    }
+  }
+  .itg-sidebar-form-section{
+    .form-type-checkboxes .form-checkboxes + div.description{
+      left: 60%;
+    }
+    .form-type-select .form-select + div.description, .form-type-select .form-select + span.error + div.description{
+      left: 100%;
+    }
+  }
+  .form-field-name-field-story-reporter{
+    .form-type-textfield .form-text + .autocomplete + div.description {
+      left: 635px;
+    }
   }

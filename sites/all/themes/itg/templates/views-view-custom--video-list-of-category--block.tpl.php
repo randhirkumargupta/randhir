@@ -18,8 +18,10 @@
       </figure>
 
       <span class="posted-on"><?php print $row['created']; ?></span>
-    <?php print l($row['title'], 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id, 'sid' => $_GET['sid']), 'html' => TRUE)); ?>
-      </div>
+      <p title="<?php print $row['title']; ?>">
+        <?php print l($row['title'], 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id, 'sid' => $_GET['sid']), 'html' => TRUE)); ?>
+      </p>
+        </div>
     </li>
 <?php endforeach; ?>
 </ul>

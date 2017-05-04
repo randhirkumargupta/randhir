@@ -18,7 +18,9 @@
                 </figure>
                 <span class="posted-on"><?php print $row['created']; ?></span>
                 <?php $title = $row['title']; ?>
+                <p title="<?php print $title; ?>">
                 <?php print l($title, 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id, 'sid' => $_GET['sid']), 'html' => TRUE)); ?>
+                </p>
             </div>
         </li>
     <?php endforeach; ?>

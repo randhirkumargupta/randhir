@@ -98,16 +98,14 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['fields']['label']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['label']['element_wrapper_type'] = 'div';
   $handler->display->display_options['fields']['label']['element_wrapper_class'] = 'front-label';
-  /* Field: Apache Solr: content */
-  $handler->display->display_options['fields']['content']['id'] = 'content';
-  $handler->display->display_options['fields']['content']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['fields']['content']['field'] = 'content';
-  $handler->display->display_options['fields']['content']['label'] = '';
-  $handler->display->display_options['fields']['content']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['content']['alter']['max_length'] = '100';
-  $handler->display->display_options['fields']['content']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['content']['element_wrapper_type'] = 'div';
-  $handler->display->display_options['fields']['content']['element_wrapper_class'] = 'front-content';
+  /* Field: Apache Solr: sm_common_kicker_text */
+  $handler->display->display_options['fields']['sm_common_kicker_text']['id'] = 'sm_common_kicker_text';
+  $handler->display->display_options['fields']['sm_common_kicker_text']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_common_kicker_text']['field'] = 'sm_common_kicker_text';
+  $handler->display->display_options['fields']['sm_common_kicker_text']['label'] = '';
+  $handler->display->display_options['fields']['sm_common_kicker_text']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['sm_common_kicker_text']['alter']['text'] = '[sm_common_kicker_text]';
+  $handler->display->display_options['fields']['sm_common_kicker_text']['element_label_colon'] = FALSE;
   /* Field: Apache Solr: ds_changed */
   $handler->display->display_options['fields']['ds_changed']['id'] = 'ds_changed';
   $handler->display->display_options['fields']['ds_changed']['table'] = 'apachesolr__solr';
@@ -130,7 +128,6 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="search-detail">
-<p>[content]</p>
 <div class="other-info">Updated : [ds_changed]</div>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_type'] = '0';

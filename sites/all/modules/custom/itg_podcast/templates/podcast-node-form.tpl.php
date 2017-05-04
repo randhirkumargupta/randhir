@@ -30,10 +30,10 @@
 <div id="Configuration">
     <h2 class="story-title"><?php print t('Configuration'); ?></h2>
     <?php print drupal_render($form['field_story_itg_tags']); ?>
-    <?php print drupal_render($form['field_dailymotion_playlist']); ?>
     <?php print drupal_render($form['field_story_category']); ?>
-    <?php print drupal_render($form['field_primary_cat_data']); ?>
-
+    <?php print drupal_render($form['field_podcast_configuration']); ?>
+    <?php print drupal_render($form['field_story_comment_question']); ?>
+    
 </div>
  <div id="AkamaiSettings" class="itg-sidebar-form-section">
                 <h2 class="story-title"><?php print t('Akamai Setting'); ?></h2>

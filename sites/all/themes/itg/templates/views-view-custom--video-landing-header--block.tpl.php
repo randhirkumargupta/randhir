@@ -28,7 +28,6 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
 ?>
 <?php foreach ($rows as $row): ?>
     <div class="container">
-        <div class="ad-blocker"></div>
         <div class ="video-landing-header">
             <div class="row">
                 <div class="col-md-12">

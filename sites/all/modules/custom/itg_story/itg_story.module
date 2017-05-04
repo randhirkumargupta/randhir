@@ -157,10 +157,15 @@ function itg_story_form_alter(&$form , &$form_state , $form_id) {
   switch ($form_id) {
     case 'story_node_form':
       global $base_url , $user;
+      // checked comment box by default
+      if (!isset($form['#node']->nid)) {
+        $form['field_story_configurations'][LANGUAGE_NONE]['#default_value'] = array('commentbox');
+      }
       if ($user->uid != 1) {
         unset($form['field_story_short_headline']);
         unset($form['field_story_long_head_line']);
         unset($form['field_story_select_templates']['und']['#options']['quote']);
+         unset($form['field_story_configurations']['und']['#options']['comment']);
       }
       if ($user->uid) {
         $form['body']['und'][0]['#format'] = 'icon_format';
@@ -412,12 +417,6 @@ function itg_story_node_validate($node , $form , &$form_state) {
 function itg_story_after_build($form , &$form_state) {
 
   global $user , $base_url;
-  if (!isset($form['#node']->nid)) {
-        // jquery to open question field.
-        drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-story-configurations-und-commentbox").trigger("click");
-            });', array('type' => 'inline', 'scope' => 'footer'));
-  }
   if (empty($form_state['input']['op'])) {
     unset($_SESSION['unique']);
   }

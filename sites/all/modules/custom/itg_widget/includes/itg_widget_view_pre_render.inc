@@ -226,11 +226,11 @@ function itg_widget_views_pre_render(&$view) {
     }
   }
   elseif ($view->name == "yearender_top_news_and_top_videos" && $view->current_display == 'yearend_left_widget_contents') {
-  if(isset($_POST['views_bulk_operations']) && empty($_GET['tid']) ) {
+  if(isset($_POST['views_bulk_operations']) && empty($_GET['shs_term_node_tid_depth']) ) {
       drupal_set_message(t("Please select Section and filter first.") , 'error');
       drupal_goto('yearend-left-widget-contents');
     }
-    if($_GET['tid']=='All') {
+    if($_GET['shs_term_node_tid_depth']=='All') {
        drupal_set_message(t("Please select Section and filter first.") , 'error');
       drupal_goto('yearend-left-widget-contents');
     }

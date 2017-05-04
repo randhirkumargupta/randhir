@@ -588,6 +588,8 @@ header {
   display: none;
   margin-left: 0;
   margin-right: 0;
+  right: 0 !important;
+  width: 172px;
 }
 #block-itg-layout-manager-header-block .navigation ul#newlist li {
   float: none;
@@ -596,6 +598,11 @@ header {
 }
 #block-itg-layout-manager-header-block .navigation ul#newlist li a {
   display: block;
+  line-height: normal;
+  height: auto;
+  padding: 7px 10px;
+  white-space: normal;
+  word-wrap: break-word;
 }
 
 /*End header css*/
