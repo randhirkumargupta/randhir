@@ -2105,6 +2105,9 @@ div.vertical-tabs .form-textarea-wrapper {
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source .form-type-textfield {
   margin: 0;
 }
+[id*="field-gallery-image-values"] tbody tr td:nth-child(2) div.description {
+  left: 220px !important;
+}
 
 input[name="field_gallery_image_add_more"] {
   margin: 0 0 0 250px;
@@ -9248,7 +9251,7 @@ div.node #comments h2 {
 .node-story-form .metatags-and-remarks div.description,
 .node-videogallery-form .metatags-and-remarks div.description,
 .node-photogallery-form .metatags-and-remarks div.description {
-  display: none !important;
+  left: 100%;
 }
 .node-story-form .img-crt,
 .node-videogallery-form .img-crt,
@@ -12417,4 +12420,15 @@ body.taxonomy-form-term-tags {
   right: 0;
   top: -46px;
   margin-right: 0;
+}
+
+.itg-sidebar-form-section .form-type-checkboxes .form-checkboxes + div.description {
+  left: 60%;
+}
+.itg-sidebar-form-section .form-type-select .form-select + div.description, .itg-sidebar-form-section .form-type-select .form-select + span.error + div.description {
+  left: 100%;
+}
+
+.form-field-name-field-story-reporter .form-type-textfield .form-text + .autocomplete + div.description {
+  left: 635px;
 }

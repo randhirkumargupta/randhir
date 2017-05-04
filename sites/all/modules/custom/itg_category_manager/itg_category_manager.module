@@ -426,7 +426,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form , &$form_stat
       $form['relations']['parent']['#title'] = t('Select Section');
       $form['relations']['parent']['#description'] = '<p>' . t('Please select &#60;root&#62; for section.') . '</p>';
       $form['relations']['#collapsible'] = 0;
-      $form['relations']['#weight'] = 6;
+      $form['relations']['#weight'] = 5;
 
       unset($form['relations']['weight']);
 //Non-editable fields in edit mode
@@ -1200,7 +1200,7 @@ function itg_category_manager_form_alter(&$form , &$form_state , $form_id) {
       $form[$select_template][LANGUAGE_NONE]['#default_value'] = $form[$select_template][LANGUAGE_NONE]['#entity']->field_cm_select_template[LANGUAGE_NONE][0]['value'];
     }
     */
-   unset($form['field_cm_select_template_type'][LANGUAGE_NONE]['#options']['_none']);
+    $form['field_result_format']['#access'] = false;
    drupal_add_js('jQuery(document).ready(function() {                  
                   jQuery("#edit-field-cm-select-template").hide();
                  });', array('type' => 'inline', 'scope' => 'footer'));
