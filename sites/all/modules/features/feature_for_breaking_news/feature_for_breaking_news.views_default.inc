@@ -163,7 +163,7 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: Field: Day */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -307,7 +307,7 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_story_expires']['label'] = 'Activate Live TV ';
   $handler->display->display_options['fields']['field_story_expires']['type'] = 'list_key';
   $handler->display->display_options['fields']['field_story_expires']['delta_offset'] = '0';
-  /* Field: Content: Display on */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_display_on']['id'] = 'field_display_on';
   $handler->display->display_options['fields']['field_display_on']['table'] = 'field_data_field_display_on';
   $handler->display->display_options['fields']['field_display_on']['field'] = 'field_display_on';
@@ -318,7 +318,7 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: Field: Day */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -615,12 +615,13 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['filters']['field_mark_as_breaking_band_value']['value'] = array(
     1 => '1',
   );
-  /* Filter criterion: Content: Display on (field_display_on) */
-  $handler->display->display_options['filters']['field_display_on_value']['id'] = 'field_display_on_value';
-  $handler->display->display_options['filters']['field_display_on_value']['table'] = 'field_data_field_display_on';
-  $handler->display->display_options['filters']['field_display_on_value']['field'] = 'field_display_on_value';
-  $handler->display->display_options['filters']['field_display_on_value']['value'] = array(
-    'Home Page' => 'Home Page',
+  /* Filter criterion: Content: Display on (field_breaking_display_on) */
+  $handler->display->display_options['filters']['field_breaking_display_on_value']['id'] = 'field_breaking_display_on_value';
+  $handler->display->display_options['filters']['field_breaking_display_on_value']['table'] = 'field_data_field_breaking_display_on';
+  $handler->display->display_options['filters']['field_breaking_display_on_value']['field'] = 'field_breaking_display_on_value';
+  $handler->display->display_options['filters']['field_breaking_display_on_value']['value'] = array(
+    'home' => 'home',
+    'both' => 'both',
   );
 
   /* Display: Section Page band */
@@ -735,19 +736,20 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['filters']['field_mark_as_breaking_band_value']['value'] = array(
     1 => '1',
   );
-  /* Filter criterion: Content: Display on (field_display_on) */
-  $handler->display->display_options['filters']['field_display_on_value']['id'] = 'field_display_on_value';
-  $handler->display->display_options['filters']['field_display_on_value']['table'] = 'field_data_field_display_on';
-  $handler->display->display_options['filters']['field_display_on_value']['field'] = 'field_display_on_value';
-  $handler->display->display_options['filters']['field_display_on_value']['value'] = array(
-    'Section' => 'Section',
-  );
   /* Filter criterion: Content: Type (field_type) */
   $handler->display->display_options['filters']['field_type_value']['id'] = 'field_type_value';
   $handler->display->display_options['filters']['field_type_value']['table'] = 'field_data_field_type';
   $handler->display->display_options['filters']['field_type_value']['field'] = 'field_type_value';
   $handler->display->display_options['filters']['field_type_value']['value'] = array(
     'Breaking News' => 'Breaking News',
+  );
+  /* Filter criterion: Content: Display on (field_breaking_display_on) */
+  $handler->display->display_options['filters']['field_breaking_display_on_value']['id'] = 'field_breaking_display_on_value';
+  $handler->display->display_options['filters']['field_breaking_display_on_value']['table'] = 'field_data_field_breaking_display_on';
+  $handler->display->display_options['filters']['field_breaking_display_on_value']['field'] = 'field_breaking_display_on_value';
+  $handler->display->display_options['filters']['field_breaking_display_on_value']['value'] = array(
+    'section' => 'section',
+    'both' => 'both',
   );
   $export['breaking_news'] = $view;
 

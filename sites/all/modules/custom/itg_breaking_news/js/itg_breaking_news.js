@@ -29,6 +29,8 @@
           $(".form-item-field-section-und").hide();
           $("input[id*=field-mark-as-breaking-band]").removeAttr('checked');
           $(".highlight-title").show();
+          $('#edit-field-section-und').prop('selectedIndex',0);
+          $('#edit-field-breaking-display-on-und').prop('selectedIndex',0);
           $('#edit-field-section > .form-type-select > label').html('Section');
         }
         else {

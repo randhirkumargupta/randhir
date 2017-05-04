@@ -21,13 +21,12 @@ $share_image = '';
 if (!empty($content)):
     $type = $node->field_type['und']['0']['value'];
     if ($type == 'Live Blog' || $type == 'Breaking News') {
-      if(!empty($node->field_story_snap_post[LANGUAGE_NONE][0]['value'])) {
-        $title = '<h1><span>'.$node->field_story_snap_post[LANGUAGE_NONE][0]['value'].'</span>: '.$node->title.'</h1>';
+      if(!empty($node->field_constituancy[LANGUAGE_NONE][0]['value'])) {
+        $title = '<h1><span>'.$node->field_constituancy[LANGUAGE_NONE][0]['value'].'</span>: '.$node->title.'</h1>';
       } else {
         $title = '<h1><span>'.$type.'</span>: '.$node->title.'</h1>';
       }
-        //$title = $node->title;
-        //$share_title = $type.':'.$title;
+      
         $share_title = $node->title;
         ?>
     <!--<h1><?php if($type == 'Breaking News') { ?><span><?php print ($type) ?></span>: <?php } print ($title) ?></h1>-->
