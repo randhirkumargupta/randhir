@@ -23,8 +23,8 @@ function save_yearender_left_widget_data($yearender_left) {
   if (count($selected_node)) {
     foreach ($selected_node as $node) {
       
-      //itg_widget_delete_data_from_widget($widget_name, $node,"",$_GET['tid']);
-     // itg_widget_insert_widget_data($node, $widget_name, $_GET['tid']);
+     itg_widget_delete_data_from_widget($widget_name, $node,"",$_GET['shs_term_node_tid_depth']);
+    itg_widget_insert_widget_data($node, $widget_name, $_GET['shs_term_node_tid_depth']);
     }
     drupal_set_message(t("Nodes has been saved"));
   }
