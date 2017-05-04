@@ -17,7 +17,7 @@ function save_special_auto_review_widget_data($auto_review_content) {
   $widget_name = "special_auto_review_content";
   if (count($selected_node)) {
     foreach ($selected_node as $node) {
-      itg_widget_delete_data_from_widget($widget_name, $node);
+      itg_widget_delete_data_from_widget($widget_name, $node, $_GET['category_tid']);
       itg_widget_insert_widget_data($node, $widget_name, $_GET['category_tid']);
     }
     drupal_set_message(t("Nodes has been saved."));
