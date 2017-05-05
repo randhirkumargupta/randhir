@@ -88,7 +88,9 @@ Drupal.behaviors.itg_widgets = {
         }
         var videoIframe = jQuery(".story-associate-content #videogallery-iframe");
         var strImg = jQuery('.story-associate-content .stryimg');
+         
         strImg.click(function () {
+          var strImgHeight = strImg.height();
             videoIframe.show(1000, function () {
                 var widgets_type = jQuery('.associate-content-block').attr('data-widget');
                 var widgets_type_array = widgets_type.split("-");
@@ -106,7 +108,7 @@ Drupal.behaviors.itg_widgets = {
                     success: function (data) {
                         videoIframe.html(data);
                         videoGallery();
-                        videoIframe.css('height', 'auto');
+                        videoIframe.css('height', strImgHeight);
                     }
                 });
             });
@@ -116,7 +118,6 @@ Drupal.behaviors.itg_widgets = {
         videoIframe.on('click', '#close-big-story', function () {
             videoIframe.hide(1000, function () {
                 videoIframe.empty();
-                videoIframe.css('height', '340px');
             });
             strImg.show(1000);
         });

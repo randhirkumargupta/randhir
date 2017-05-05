@@ -49,9 +49,7 @@ jQuery(document).ready(function () {
         jQuery('input[name="path[alias]"]').prop('checked', true);
         jQuery('input[name="path[pathauto]"]').prop('checked', true);
         jQuery('input[name="path[alise]"]').prop("disabled", "disabled");
-        jQuery('input[name="path[alias]"]').css('color', 'rgb(235, 235, 228)');
         jQuery('input[name="path[alias]"]').css('background', 'rgb(235, 235, 228)');
-        jQuery('input[name="path[alias]"]').attr('value', ' ');
     }
     jQuery('input[name="path[pathauto]"]').click(function () {
         if (!jQuery('input[name="path[pathauto]"]').prop('checked')) {

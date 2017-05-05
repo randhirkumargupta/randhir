@@ -1395,6 +1395,7 @@ div.vertical-tabs {
             }
           }
         }
+        div.description{left: 220px !important;}
       }
     }
   }
@@ -8638,7 +8639,7 @@ div.node{
       }
     }
     div.description{
-      display: none !important;
+      left: 100%;
     }
   }
   .img-crt{
@@ -9133,6 +9134,13 @@ div.node{
   }
   [class*="form-field-name-field-emoji"]{
     iframe.cke_wysiwyg_frame{pointer-events: none;}
+    div.description{display: none;}
+    &:hover{
+      div.description{
+        @extend .desc-popup;
+        display: block;
+      }
+    }
   }
   .form-field-name-field-story-technology{
     margin: 0 10px;   
@@ -10112,7 +10120,7 @@ div.node{
     vertical-align: top;
   }
   .view .view-filters .views-exposed-form .views-submit-button, .view .view-filters .views-exposed-form .views-reset-button{
-    margin-top: 18px;
+    margin-top: 28px;
   }
   .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-keyword{width: 300px;}
   .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name{display: none;}
@@ -11713,5 +11721,18 @@ span.file a{pointer-events: none; color: #2f2f2f;}
         top: -46px;
         margin-right: 0;
       }
+    }
+  }
+  .itg-sidebar-form-section{
+    .form-type-checkboxes .form-checkboxes + div.description{
+      left: 60%;
+    }
+    .form-type-select .form-select + div.description, .form-type-select .form-select + span.error + div.description{
+      left: 100%;
+    }
+  }
+  .form-field-name-field-story-reporter{
+    .form-type-textfield .form-text + .autocomplete + div.description {
+      left: 635px;
     }
   }
