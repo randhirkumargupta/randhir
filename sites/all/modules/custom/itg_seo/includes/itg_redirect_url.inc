@@ -8,7 +8,7 @@
 function itg_get_node_redirect_url($node, $op) {
   global $base_url;
   
-  //if ($base_url == FRONT_URL) {
+  if ($base_url == FRONT_URL) {
     if (isset($node->type) && ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'videogallery' || $node->type == 'podcast' || $node->type == 'blog')) {
       $story_expiry_date = '';
       $current_time = time();
@@ -29,7 +29,7 @@ function itg_get_node_redirect_url($node, $op) {
           drupal_goto('<front>');
         }
     }
- // }
+  }
   
 }
 
