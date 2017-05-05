@@ -1,7 +1,7 @@
 <?php
 
 module_load_include('inc', 'itg_mail_templates', 'itg_mail_templates_tokens');
-
+module_load_include('inc', 'itg_mail_templates', 'includes/views_handler_mail_templates');
 /*
  * Implements hook_form_alter
  */
@@ -428,4 +428,23 @@ function itg_mail_templates_views_pre_render(&$view) {
     $header_content_mail_template .= l('Create Mail Templates', 'node/add/mail-templates', array('query' => array('destination' => 'mail-templates')));
     $view->attachment_before = $header_content_mail_template;
   }
+}
+
+/**
+ * Implements hook_views_data().
+ */
+function itg_mail_templates_views_data() {
+  $data['mail_templates']['table']['group'] = t('Mail Templates');
+  $data['mail_templates']['table']['join'] = array(
+    // #global is a special flag which let's a table appear all the time.
+    '#global' => array(),
+  );
+  $data['mail_templates']['custom_handler'] = array(
+    'title' => t('Mail Templates'),
+    'help' => t('Mail Templates handler'),
+    'field' => array(
+      'handler' => 'views_handler_mail_templates',
+    ),
+  );
+  return $data;
 }
