@@ -978,7 +978,7 @@ function navigationResize() {
       navItemMoreLeft, offset, navOverflowWidth;
   
   $navItems.each(function() {
-    navItemWidth += $(this).width();
+    navItemWidth += jQuery(this).width();
   });
   
   navItemWidth > windowWidth ? $navItemMore.show() : $navItemMore.hide();
