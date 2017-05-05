@@ -916,6 +916,7 @@ function itg_workflow_node_insert($node) {
   
   global $user;
 //  
+  if (isset($node->op)) {
   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
     //drupal_set_message("under itg_workflow_node_insert");
     // for code email
@@ -936,6 +937,7 @@ function itg_workflow_node_insert($node) {
       unset($_SESSION['node_preview_unique']);
     }
   }
+  }
 }
 
 /**
@@ -947,6 +949,7 @@ function itg_workflow_node_update($node) {
     return;
   }
   global $user;
+  if (isset($node->op)) {
   //watchdog("email_test", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
     //drupal_set_message("under itg_workflow_node_update");
@@ -1054,6 +1057,9 @@ function itg_workflow_node_update($node) {
       } 
     }
   }
+}
+  
+  
 }
 
 /**
