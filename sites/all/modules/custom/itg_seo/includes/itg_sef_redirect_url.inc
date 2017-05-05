@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Implementing 'itg_common_custompath_insert_load'.
  * @param $node object
@@ -24,33 +25,29 @@ function itg_common_custompath_insert_load($node) {
       $node_sef = $node->title;
     }
   }
-   
+
   if (!empty($node->workbench_moderation_state_new)) {
     if ($node->workbench_moderation_state_new == 'draft') {
       $published_date = date('Y-m-d' , $node->created);
-    } else if ($node->workbench_moderation_state_new == 'published') {
-        $published_date = date('Y-m-d' , $node->changed);
+    }
+    else if ($node->workbench_moderation_state_new == 'published') {
+      $published_date = date('Y-m-d' , $node->changed);
     }
   }
   else {
     if ($node->status == 0) {
       $published_date = date('Y-m-d' , $node->created);
-    } else if ($node->status == 1) {
-        $published_date = date('Y-m-d' , $node->changed);
+    }
+    else if ($node->status == 1) {
+      $published_date = date('Y-m-d' , $node->changed);
     }
   }
-  
+
   $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
-  if (!empty($getsection)) {
-//    $parents = taxonomy_get_parents_all($getsection);
-//    if (isset($parents) && !empty($parents)) {
-//      foreach ($parents as $key => $val) {
-//        $section_hierarchy[] = $val->name;
-//      }
-//    }
+  if (!empty($getsection) && $node->type != 'reporter') {
     if ($node->type == 'story' && is_issue_baised_magazine($node)) {
       $pathdata = 'magazine';
-      $pathdata .= '/'. get_path_from_category($getsection);
+      $pathdata .= '/' . get_path_from_category($getsection);
       //Get node type.
       $pathdata .= '/' . $node->type;
       // Get issue date.
@@ -90,16 +87,33 @@ function itg_common_custompath_insert_load($node) {
     else {
       $set_hierarchy = get_path_from_category($getsection);
       $node_CT = $node->type;
-      if($node_CT == 'photogallery') {
+      if ($node_CT == 'photogallery') {
         $node_CT = 'photo';
       }
-      elseif($node_CT == 'videogallery') {
+      elseif ($node_CT == 'videogallery') {
         $node_CT = 'videos';
       }
       $pathdata = $set_hierarchy . '/' . $node_CT . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
       $newpath = itg_common_custompath_insert_val($pathdata);
       return $newpath;
     }
+  }
+  elseif ($node->type == 'reporter') {
+    $occupation_tid = $node->field_celebrity_pro_occupation['und'][0]['tid'];
+    $occupation = _occupation_from_tid_for_sef_url($occupation_tid);
+    $pathdata =  $occupation . '/' . $edited_sef_url;
+    $newpath = itg_common_custompath_insert_val($pathdata);
+    return $newpath;
+  }
+  elseif ($node->type == 'itg_funalytics') {
+    $pathdata =  'understand' . '/' . $edited_sef_url;
+    $newpath = itg_common_custompath_insert_val($pathdata);
+    return $newpath;
+  }
+  elseif ($node->type == 'mega_review_critic') {
+    $pathdata =  'movie/review/story' . '/' . $edited_sef_url . '-' . $node->nid . '-' . $published_date;
+    $newpath = itg_common_custompath_insert_val($pathdata);
+    return $newpath;
   }
 }
 
@@ -114,6 +128,30 @@ function is_photo_story($node) {
 function is_issue_baised_magazine($node) {
   $flag = FALSE;
   if (!is_photo_story($node) && !empty($node->field_story_magazine_story_issue['und'][0]['value']) && $node->field_story_magazine_story_issue['und'][0]['value'] == 'magazine_issue_story') {
+    $flag = TRUE;
+  }
+  return $flag;
+}
+
+function is_reporter($node) {
+  $flag = FALSE;
+  if ($node->type == 'reporter') {
+    $flag = TRUE;
+  }
+  return $flag;
+}
+
+function is_itg_funalytics($node) {
+  $flag = FALSE;
+  if ($node->type == 'itg_funalytics') {
+    $flag = TRUE;
+  }
+  return $flag;
+}
+
+function is_mega_review_critic($node) {
+  $flag = FALSE;
+  if ($node->type == 'mega_review_critic') {
     $flag = TRUE;
   }
   return $flag;
@@ -188,16 +226,16 @@ function itg_common_custompath_insert_val($pathdata) {
 
 function get_path_from_category($tid) {
   $pathdata = '';
-  
+
   $all_terms = taxonomy_get_parents_all($tid);
-  
+
   foreach ($all_terms as $key => $val) {
     if ($val->tid == $tid) {
-     $primary_cat_name = trim($val->name); 
-    }    
-    $section_name = trim($val->name);    
+      $primary_cat_name = trim($val->name);
+    }
+    $section_name = trim($val->name);
   }
-  
+
   if ($section_name == $primary_cat_name) {
     //prepare ur with parimary cat only.
     $pathdata = strtolower($primary_cat_name);
@@ -206,15 +244,12 @@ function get_path_from_category($tid) {
     //prepare ur with parimary cat and section both.
     $pathdata = strtolower($section_name) . '/' . strtolower($primary_cat_name);
   }
-  
-  
+
+
   // Get parent of primary category.
 //  $all_terms = taxonomy_get_parents_all($getsection);
 //  $terms_bunch = array_reverse($all_terms);
 //  $section_name = $terms_bunch[0]->name; //section
-  
-  
-  
   // Get parent of primary category.
 //  $primary_cat_array = taxonomy_term_load($getsection);
 //  $primary_cat_name = $primary_cat_array->name;

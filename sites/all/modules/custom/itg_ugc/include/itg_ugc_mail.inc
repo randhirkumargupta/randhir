@@ -29,7 +29,7 @@ function itg_ugc_get_mail_content($uname, $type, $status, $to) {
       'body' => $content,
       'subject' => 'India Today | UGC Content ' . $status . '!',
   );
-
+  $to = 'gourav.walia@kelltontech.com';
   $mail = drupal_mail('itg_ugc_user', 'send_' . $status . '_mail_to_ugc_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
     return TRUE;

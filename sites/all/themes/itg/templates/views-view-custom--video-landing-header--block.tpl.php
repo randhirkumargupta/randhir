@@ -134,7 +134,7 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                                 }
                                 $usebitrates = implode(',', $allbitrates);
                                 $getvideo_bitrate_url = itg_videogallery_make_bitrate_url($video_value->field_migrated_video_url_value, $usebitrates);
-                                
+                                //$getfile_its_url = itg_videogallery_get_video_bitrate($nid);
                                 ?>
                                     <div class="iframe-video">
 
@@ -146,9 +146,10 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                                                         title: "<?php print $row['title']; ?>",
                                                         image: "<?php echo $image_url; ?>",
                                                         sources: [
+//                                                            {
+//                                                                file: "<?php echo $getvideo_bitrate_url; ?>"
+//                                                            },
                                                             {
-                                                                file: "<?php echo $getvideo_bitrate_url; ?>"
-                                                            }, {
                                                                 file: "<?php print $video_value->field_migrated_video_url_value; ?>"
                                                             }]
                                                     }],
