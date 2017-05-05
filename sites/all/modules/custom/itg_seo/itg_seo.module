@@ -99,13 +99,19 @@ function itg_seo_form_alter(&$form , &$form_state , $form_id) {
     $form['#after_build'][] = 'itg_additional_settings_element_hide';
   }
 
-  $node_form_array = array('photogallery_node_form' ,
+  $node_form_array = array(
+    'photogallery_node_form' ,
     'story_node_form' ,
     'videogallery_node_form' ,
     'podcast_node_form' ,
     'food_news_node_form' ,
     'cooking_tips_node_form' ,
-    'recipe_node_form');
+    'recipe_node_form' ,
+    'blog_node_form' ,
+    'reporter_node_form',
+    'itg_funalytics_node_form',
+    'mega_review_critic_node_form'
+  );
   if (in_array($form['#form_id'] , $node_form_array)) {
     $form['#after_build'][] = 'itg_meta_tags_alias_set';
   }
@@ -122,7 +128,7 @@ function itg_meta_tags_alias_set($form , &$form_state) {
   if (isset($form['path']) && !empty($form['path'])) {
     $edited_sef_url = itg_get_sef_url($form['path']['alias']['#value'] , $nodeid);
     //pr($edited_sef_url);
-    $form['path']['alias']['#value'] = $edited_sef_url;// itg_common_custompath_insert_val($form['path']['alias']['#value']);
+    $form['path']['alias']['#value'] = $edited_sef_url; // itg_common_custompath_insert_val($form['path']['alias']['#value']);
   }
   return $form;
 }
@@ -136,6 +142,9 @@ function itg_get_sef_url($sef_path , $nodeid) {
     // Handel edit case for issue baised story.
     $is_issue_magazine = is_issue_baised_magazine($node_object);
     $is_photo_story = is_photo_story($node_object);
+    $is_reporter = is_reporter($node_object);
+    $is_itg_funalytics = is_itg_funalytics($node_object);
+    $is_mega_review_critic = is_mega_review_critic($node_object);
     if ($is_issue_magazine) {
       $path_alias_set = $sef_path;
       $path_data = explode("/" , $path_alias_set);
@@ -152,6 +161,10 @@ function itg_get_sef_url($sef_path , $nodeid) {
     elseif ($is_photo_story) {
       $path_data = explode("/" , $sef_path);
       $edited_sef_url = rtrim($path_data[2]);
+    }
+    elseif ($is_reporter || $is_itg_funalytics) {
+      $path_data = explode("/" , $sef_path);
+      $edited_sef_url = rtrim($path_data[1]);
     }
     else {
       $path_alias_set = $sef_path;
@@ -294,7 +307,7 @@ function frontend_breadcrumb_display($id = NULL , $entity_object = NULL , $singl
     $section_link .= ' / ' . l("Anchors" , "anchors-list") . ' / ' . $node_title;
   }
   else if (!empty($entity_object->type) && $entity_object->type == 'breaking_news') {
-    $section_link .= ' / ' . $entity_object->field_type[LANGUAGE_NONE][0]['value'].'/'.$node_title;
+    $section_link .= ' / ' . $entity_object->field_type[LANGUAGE_NONE][0]['value'] . '/' . $node_title;
   }
   elseif (!empty($entity_object->type)) {
     $section_link .= ' / ' . $node_title;
@@ -335,18 +348,20 @@ function event_registration_extra_element_hide($form , &$form_state) {
 function itg_seo_node_insert($node) {
   //set custom path alias
 
-  $ctype_array = array('photogallery' ,
-    'story' ,
-    'videogallery' ,
-    'podcast' ,
-    'food_news' ,
-    'cooking_tips' ,
-    'recipe');
+  $ctype_array = content_types_for_sef_url();
 
-  if (in_array($node->type , $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+  if (in_array($node->type , $ctype_array) && isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
     $newpath = itg_common_custompath_insert_load($node);
     $node->path['alias'] = $newpath;
-  } //    custom alias conditions for migration
+  }
+  if ($node->type == 'reporter' || $node->type == 'itg_funalytics') {
+    $newpath = itg_common_custompath_insert_load($node);
+    $node->path['alias'] = $newpath;
+  }
+  if ($node->type == 'mega_review_critic') {
+    $newpath = itg_common_custompath_insert_load($node);
+    $node->path['alias'] = $newpath;
+  }
   if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type , $ctype_array)) {
     itg_common_custompath_migrated_load($node);
   }
@@ -363,20 +378,15 @@ function itg_seo_node_presave($node) {
       $node->path['alias'] = $node->title;
     }
   }
-  if($node->path['pathauto'] == 1) {
+  if ($node->path['pathauto'] == 1) {
     $node->path['alias'] = $node->title;
   }
-  
-  //p($node->path['alias']);
-//  if($node->path['pathauto']) {
-//    $node->path['alias'] = $node->title;
-//  }
 }
 
 /**
  * {@inheritdocs}
  */
-function itg_seo_pathauto_alias_alter(&$alias, array &$context) {
+function itg_seo_pathauto_alias_alter(&$alias , array &$context) {
   // Handel case if user selected  Generate automatic Sef URL
   // $alias is overridden
   // If you don't want to overridden then use conatinate.
@@ -395,8 +405,27 @@ function itg_seo_node_update($node) {
   }
 
   if (isset($node->op)) {
-    $ctype_array = array('photogallery' , 'story' , 'videogallery' , 'podcast' , 'food_news' , 'cooking_tips' , 'recipe');
-    if (in_array($node->type , $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+    $ctype_array = content_types_for_sef_url();
+    if (in_array($node->type , $ctype_array) && isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+      $newpath = itg_common_custompath_insert_load($node);
+      $node->path['alias'] = $newpath;
+      $path = array(
+        'source' => "node/{$node->nid}" ,
+        'alias' => $newpath , // Any alias that you want to set.
+      );
+      path_save($path);
+    }
+    if ($node->type == 'reporter') {
+      $newpath = itg_common_custompath_insert_load($node);
+      $node->path['alias'] = $newpath;
+      $path = array(
+        'source' => "node/{$node->nid}" ,
+        'alias' => $newpath , // Any alias that you want to set.
+      );
+      path_save($path);
+    }
+    
+    if ($node->type == 'itg_funalytics' || $node->type == 'mega_review_critic') {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
       $path = array(
@@ -410,4 +439,19 @@ function itg_seo_node_update($node) {
   if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type , $ctype_array)) {
     itg_common_custompath_migrated_load($node , 'update_migrated');
   }
+}
+
+function content_types_for_sef_url() {
+  return array(
+    'photogallery' ,
+    'story' ,
+    'videogallery' ,
+    'podcast' ,
+    'food_news' ,
+    'cooking_tips' ,
+    'recipe' ,
+    'blog' ,
+    'reporter',
+    'itg_funalytics'
+  );
 }
