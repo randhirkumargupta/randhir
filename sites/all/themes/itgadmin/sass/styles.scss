@@ -9134,6 +9134,13 @@ div.node{
   }
   [class*="form-field-name-field-emoji"]{
     iframe.cke_wysiwyg_frame{pointer-events: none;}
+    div.description{display: none;}
+    &:hover{
+      div.description{
+        @extend .desc-popup;
+        display: block;
+      }
+    }
   }
   .form-field-name-field-story-technology{
     margin: 0 10px;   
@@ -10113,7 +10120,7 @@ div.node{
     vertical-align: top;
   }
   .view .view-filters .views-exposed-form .views-submit-button, .view .view-filters .views-exposed-form .views-reset-button{
-    margin-top: 18px;
+    margin-top: 28px;
   }
   .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-keyword{width: 300px;}
   .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name{display: none;}

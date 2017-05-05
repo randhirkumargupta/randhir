@@ -1464,6 +1464,25 @@ function itg_videogallery_remove_video_with_child() {
 }
 
 /**
+ * This function use for get video bitrate url
+ * 
+ */
+function itg_videogallery_get_video_bitrate($nid)
+{
+      $query = db_select('itg_video_transcoding', 'ivt');
+      $query->fields('ivt');
+      $query->condition('nid', $nid, '=');
+      $query->orderby('bitrate_ordering','ASC');
+      $video_data1 = $query->execute()->fetchAll();
+      foreach($video_data1 as $key=>$vid) {
+        $bitrate[] = $vid->bitrate;
+      }
+     
+      $hls= $vid->hls_domain;
+  
+}
+
+/**
  * This function use for make video bitrate url:
  */
 function itg_videogallery_make_bitrate_url($video_url, $bitrates) {
