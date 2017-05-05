@@ -53,7 +53,9 @@ function homePageFeed() {
   
   //home page feed file writing
   if ($output) {
-    $feed_file_path = getcwd() . "/sites/all/modules/custom/itg_mobile_feed/xml_it/stories";
+    //$feed_file_path = getcwd() . "/sites/all/modules/custom/itg_mobile_feed/xml_it/stories";
+    $feed_file_path = "public://xml_it/stories";
+    file_prepare_directory($feed_file_path, FILE_CREATE_DIRECTORY);
     $feed_file_name = "home.xml";
     $return_flag = writeFeedFile($feed_file_path, $feed_file_name, $output);
   }
