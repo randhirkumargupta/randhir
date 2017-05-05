@@ -31,10 +31,12 @@ function itg_loyalty_reward_send_mail_product_expiration($nid ,$node_user , $pro
 //  $mail_content = itg_loyalty_reward_product_expiration_mail_content($mail_content_data);
   if ($product_count == 'inventory_status') {
     $user_emails = itg_loyalty_reward_product_expiration_user_emails('association',$node_user);
-    $user_email_ids = implode(", ", $user_emails[0]);
+//    $user_email_ids = implode(", ", $user_emails[0]);
+    $user_email_ids = 'gourav.walia@kelltontech.com';
   } else { 
     $user_emails = itg_loyalty_reward_product_expiration_user_emails('association',$node_user);
-    $user_email_ids = implode(", ", $user_emails);
+//    $user_email_ids = implode(", ", $user_emails);
+    $user_email_ids = 'gourav.walia@kelltontech.com';
   }
   // Array of email subject and body 
   $params = array(

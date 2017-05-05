@@ -99,11 +99,6 @@ function itg_mail_templates_tokenstable() {
                 <td>A token that will be used for ITG Node Title With Link.</td>
               </tr>
               <tr>
-                <td>ITG Task/Idea</td>
-                <td>[itg_mail_token:itg_node_body]</td>
-                <td>A token that will be used for ITG Task/Idea.</td>
-              </tr>
-              <tr>
                 <td colspan="3"><b>Tokens For Product</b></td>
               </tr>
               <tr>
@@ -175,6 +170,11 @@ function itg_mail_templates_tokenstable() {
                 <td>ITG Task Date/Time</td>
                 <td>[itg_mail_token:itg_task_date_time]</td>
                 <td>A token that will be used for ITG Task Expiry Date Time</td>
+              </tr>
+              <tr>
+                <td>ITG Task/Idea</td>
+                <td>[itg_mail_token:itg_node_body]</td>
+                <td>A token that will be used for ITG Task/Idea.</td>
               </tr>
             </tbody>
             </table>
