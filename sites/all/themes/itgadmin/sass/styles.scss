@@ -9134,9 +9134,11 @@ div.node{
   }
   [class*="form-field-name-field-emoji"]{
     iframe.cke_wysiwyg_frame{pointer-events: none;}
+    div.description{display: none;}
     &:hover{
       div.description{
         @extend .desc-popup;
+        display: block;
       }
     }
   }

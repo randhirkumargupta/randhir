@@ -9736,6 +9736,12 @@ div.node #comments h2 {
 .node-story-form [class*="form-field-name-field-emoji"] iframe.cke_wysiwyg_frame {
   pointer-events: none;
 }
+.node-story-form [class*="form-field-name-field-emoji"] div.description {
+  display: none;
+}
+.node-story-form [class*="form-field-name-field-emoji"]:hover div.description {
+  display: block;
+}
 .node-story-form .form-field-name-field-story-technology {
   margin: 0 10px;
 }
