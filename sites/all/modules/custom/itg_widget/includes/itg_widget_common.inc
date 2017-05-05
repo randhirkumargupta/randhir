@@ -1074,7 +1074,7 @@ function autocomplete_for_year_end_widgets() {
     $query = db_select('node', 'n');
     $query->leftJoin('taxonomy_index', 'tti', 'tti.nid=n.nid');
     $query->fields('n', array('title', 'nid'));
-    $query->condition('tid', variable_get('year_end_for_widget'));
+    //$query->condition('tid', variable_get('year_end_for_widget'));
     if ($flag == 'title') {
       $query->condition('n. title', '%' . $title . '%', 'LIKE');
     }
