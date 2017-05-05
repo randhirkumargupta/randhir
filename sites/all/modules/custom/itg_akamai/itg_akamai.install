@@ -107,6 +107,38 @@ function itg_akamai_schema() {
     'primary key' => array('acid'),
   );
 
+
+  $schema['itg_akamai_custom_url_ttl'] = array(
+    'description' => 'Akamai Custom URL TTLs.',
+    'fields' => array(
+      'acid' => array(
+        'description' => 'acid auto incremented',
+        'type' => 'serial',
+        'null' => TRUE,
+      ),
+      'page_name' => array(
+        'description' => 'Page Name',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+      'url' => array(
+        'description' => 'url',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+      'ttl' => array(
+        'description' => 'TTL',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+    ),
+    'primary key' => array('acid'),
+  );
+
+
   return $schema;
 }
 
