@@ -696,7 +696,7 @@ function itg_reports_views_query_alter(&$view , &$query) {
       $query->add_relationship('itg_multi_byline_info' , $join , 'node');
       $query->add_where(0 , "itg_multi_byline_info.byline_id" , $bylines , 'IN');
     }
-    if (isset($_GET['byline_profile_type']) && !empty($_GET['byline_profile_type']) && $_GET['byline_profile_type'] != 'none') {
+    if (isset($_GET['byline_profile_type']) && !empty($_GET['byline_profile_type']) && $_GET['byline_profile_type'] != 'Any') {
       $join = new views_join();
       $join->table = 'field_data_field_reporter_profile_type';
       $join->field = 'entity_id';
