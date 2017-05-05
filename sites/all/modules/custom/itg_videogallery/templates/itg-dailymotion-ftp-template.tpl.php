@@ -5,9 +5,16 @@
  * 
  */
 global $base_url;
+
+if ($_GET['file_filed_name'] == 'field_upload_video[und][0][fid]' || $_GET['field_name'] == 'field_videogallery_video_upload') {
+$singalclass= "";
+  
+}else {
+  $singalcalss= "ftp-center";
+}
 ?>
 <div id="videoupload">
-    <div class="browse-ftp">
+    <div class="browse-ftp <?php echo $singalcalss;?>">
         <div id="itg_video_content">
             <div class="video-ftp active"><?php print t('FTP'); ?></div>
             <?php if ($_GET['input_filed'] != 'ckeditor' && $_GET['no_value'] != 'single'  ) { ?>
