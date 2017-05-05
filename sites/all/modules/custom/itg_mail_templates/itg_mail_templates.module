@@ -27,18 +27,18 @@ function itg_mail_templates_form_alter(&$form, &$form_state, $form_id) {
         jQuery('.node-mail_templates-form').find('.mail-template-category').hide().siblings('.' + selected_value).show();
       });", array('type' => 'inline', 'scope' => 'footer'));
     
-    if (!isset($_REQUEST['destination'])) {
-        $destination = '';
-    }
-    else {
-        $destination_array = explode('?', $_REQUEST['destination']);
-        $destination = $destination_array[0];
-    }
-
-    $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-        '#weight' => 20,
-    );
+//    if (!isset($_REQUEST['destination'])) {
+//        $destination = '';
+//    }
+//    else {
+//        $destination_array = explode('?', $_REQUEST['destination']);
+//        $destination = $destination_array[0];
+//    }
+////    $form['actions']['submit']['#weight'] = 10;
+//    $form['actions']['cancel'] = array(
+//        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+//        '#weight' => 10,
+//    );
   }
 }
 
@@ -51,12 +51,12 @@ function itg_mail_templates_node_validate($node, $form, &$form_state) {
     $title = isset($node->title) ? $node->title : '';
     $data_val['title'] = array();
 
-    if ($node->title == 'Quiz Completion') {
-      $result = db_query("SELECT title from {node} n WHERE n.title = :title AND n.type = :type", array(":title" => $title, ":type" => "mail_templates"))->fetchField();
-      if (!empty($result)) {
-        form_set_error('title', t("Mail Template for @title already Exists, you can only update this mail template", array('@title' => $title)));
-      }
-    }
+//    if ($node->title == 'Quiz Completion') {
+//      $result = db_query("SELECT title from {node} n WHERE n.title = :title AND n.type = :type", array(":title" => $title, ":type" => "mail_templates"))->fetchField();
+//      if (!empty($result)) {
+//        form_set_error('title', t("Mail Template for @title already Exists, you can only update this mail template", array('@title' => $title)));
+//      }
+//    }
     
     if ($node->title == 'Ask an Expert') {
       $expert_case = $node->field_ask_an_expert_case[LANGUAGE_NONE][0]['value'];
@@ -447,4 +447,54 @@ function itg_mail_templates_views_data() {
     ),
   );
   return $data;
+}
+
+/**
+ * Implementation of hook_node_insert().
+ * @param object $node
+ */
+function itg_mail_templates_node_insert($node) {
+  if ($node->type == 'mail_templates') {
+    $newpath = itg_mail_templates_insert_load($node);
+    $node->path['alias'] = $newpath;
+  }
+}
+
+/**
+ * Implementation of hook_node_update().
+ * @param object $node
+ */
+function itg_mail_templates_node_update($node) {
+  if ($node->type == 'mail_templates') {
+    $newpath = itg_mail_templates_insert_load($node);
+    $node->path['alias'] = $newpath;
+  }
+}
+
+/**
+ * Implementing 'itg_mail_templates_insert_load'.
+ * @param $node object
+ */
+function itg_mail_templates_insert_load($node) {
+  $template_cat = $node->field_mail_templates_category[LANGUAGE_NONE][0]['value'];
+  $pathdata =  'mail-templates' . '/' . $template_cat . '/' . $node->nid;
+  $newpath = itg_mail_templates_insert_val($pathdata);
+  return $newpath;
+}
+
+/**
+ * Implementing 'itg_mail_templates_insert_val'.
+ * @param $pathdata path alias content
+ */
+function itg_mail_templates_insert_val($pathdata) {
+  if (preg_match("![^a-z0-9]!i" , $pathdata)) {
+    $pathdata = preg_replace('/[^a-zA-Z0-9\/\\.\']/' , '-' , $pathdata);
+    while (preg_match('/--/' , $pathdata)) {
+      $pathdata = preg_replace('/--/' , '-' , $pathdata);
+    }
+    $pathdata = rtrim($pathdata , "-");
+    $pathdata = strtolower($pathdata);
+    $pathdata = str_replace(array(':' , '*' , '"' , "'" , '#') , "-" , $pathdata);
+  }
+  return $pathdata;
 }

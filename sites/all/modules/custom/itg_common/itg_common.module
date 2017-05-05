@@ -227,7 +227,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // Extra meta tags element hide from form
-  if ($form_id == 'mega_review_critic_node_form' || $form_id == 'custom_html_widgets_node_form' || $form_id == 'story_node_form' || $form_id == 'itg_celebrity_profile_node_form' || $form_id == 'blog_node_form' || $form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'itg_funalytics_node_form') {
+  if ($form_id == 'mega_review_critic_node_form' || $form_id == 'custom_html_widgets_node_form' || $form_id == 'story_node_form' || $form_id == 'itg_celebrity_profile_node_form' || $form_id == 'blog_node_form' || $form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'itg_funalytics_node_form' || $form_id == 'mail_templates_node_form') {
     $form['#after_build'][] = 'itg_common_cancel_button';
   }
   if (!empty($form['#term']) && is_array($form['#term'])) {
