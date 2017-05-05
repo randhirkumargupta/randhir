@@ -51,12 +51,12 @@ function itg_mail_templates_node_validate($node, $form, &$form_state) {
     $title = isset($node->title) ? $node->title : '';
     $data_val['title'] = array();
 
-//    if ($node->title == 'Quiz Completion') {
-//      $result = db_query("SELECT title from {node} n WHERE n.title = :title AND n.type = :type", array(":title" => $title, ":type" => "mail_templates"))->fetchField();
-//      if (!empty($result)) {
-//        form_set_error('title', t("Mail Template for @title already Exists, you can only update this mail template", array('@title' => $title)));
-//      }
-//    }
+    if ($node->title == 'Quiz Completion') {
+      $result = db_query("SELECT title from {node} n WHERE n.title = :title AND n.type = :type", array(":title" => $title, ":type" => "mail_templates"))->fetchField();
+      if (!empty($result)) {
+        form_set_error('title', t("Mail Template for @title already Exists, you can only update this mail template", array('@title' => $title)));
+      }
+    }
     
     if ($node->title == 'Ask an Expert') {
       $expert_case = $node->field_ask_an_expert_case[LANGUAGE_NONE][0]['value'];
