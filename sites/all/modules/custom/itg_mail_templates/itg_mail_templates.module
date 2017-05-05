@@ -1,7 +1,7 @@
 <?php
 
 module_load_include('inc', 'itg_mail_templates', 'itg_mail_templates_tokens');
-
+module_load_include('inc', 'itg_mail_templates', 'includes/views_handler_mail_templates');
 /*
  * Implements hook_form_alter
  */
@@ -27,18 +27,18 @@ function itg_mail_templates_form_alter(&$form, &$form_state, $form_id) {
         jQuery('.node-mail_templates-form').find('.mail-template-category').hide().siblings('.' + selected_value).show();
       });", array('type' => 'inline', 'scope' => 'footer'));
     
-    if (!isset($_REQUEST['destination'])) {
-        $destination = '';
-    }
-    else {
-        $destination_array = explode('?', $_REQUEST['destination']);
-        $destination = $destination_array[0];
-    }
-
-    $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-        '#weight' => 20,
-    );
+//    if (!isset($_REQUEST['destination'])) {
+//        $destination = '';
+//    }
+//    else {
+//        $destination_array = explode('?', $_REQUEST['destination']);
+//        $destination = $destination_array[0];
+//    }
+////    $form['actions']['submit']['#weight'] = 10;
+//    $form['actions']['cancel'] = array(
+//        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+//        '#weight' => 10,
+//    );
   }
 }
 
@@ -428,4 +428,73 @@ function itg_mail_templates_views_pre_render(&$view) {
     $header_content_mail_template .= l('Create Mail Templates', 'node/add/mail-templates', array('query' => array('destination' => 'mail-templates')));
     $view->attachment_before = $header_content_mail_template;
   }
+}
+
+/**
+ * Implements hook_views_data().
+ */
+function itg_mail_templates_views_data() {
+  $data['mail_templates']['table']['group'] = t('Mail Templates');
+  $data['mail_templates']['table']['join'] = array(
+    // #global is a special flag which let's a table appear all the time.
+    '#global' => array(),
+  );
+  $data['mail_templates']['custom_handler'] = array(
+    'title' => t('Mail Templates'),
+    'help' => t('Mail Templates handler'),
+    'field' => array(
+      'handler' => 'views_handler_mail_templates',
+    ),
+  );
+  return $data;
+}
+
+/**
+ * Implementation of hook_node_insert().
+ * @param object $node
+ */
+function itg_mail_templates_node_insert($node) {
+  if ($node->type == 'mail_templates') {
+    $newpath = itg_mail_templates_insert_load($node);
+    $node->path['alias'] = $newpath;
+  }
+}
+
+/**
+ * Implementation of hook_node_update().
+ * @param object $node
+ */
+function itg_mail_templates_node_update($node) {
+  if ($node->type == 'mail_templates') {
+    $newpath = itg_mail_templates_insert_load($node);
+    $node->path['alias'] = $newpath;
+  }
+}
+
+/**
+ * Implementing 'itg_mail_templates_insert_load'.
+ * @param $node object
+ */
+function itg_mail_templates_insert_load($node) {
+  $template_cat = $node->field_mail_templates_category[LANGUAGE_NONE][0]['value'];
+  $pathdata =  'mail-templates' . '/' . $template_cat . '/' . $node->nid;
+  $newpath = itg_mail_templates_insert_val($pathdata);
+  return $newpath;
+}
+
+/**
+ * Implementing 'itg_mail_templates_insert_val'.
+ * @param $pathdata path alias content
+ */
+function itg_mail_templates_insert_val($pathdata) {
+  if (preg_match("![^a-z0-9]!i" , $pathdata)) {
+    $pathdata = preg_replace('/[^a-zA-Z0-9\/\\.\']/' , '-' , $pathdata);
+    while (preg_match('/--/' , $pathdata)) {
+      $pathdata = preg_replace('/--/' , '-' , $pathdata);
+    }
+    $pathdata = rtrim($pathdata , "-");
+    $pathdata = strtolower($pathdata);
+    $pathdata = str_replace(array(':' , '*' , '"' , "'" , '#') , "-" , $pathdata);
+  }
+  return $pathdata;
 }

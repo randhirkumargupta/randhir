@@ -38,9 +38,21 @@ function save_yearender_left_widget_data($yearender_left) {
  */
 function itg_widget_yearend_top_news_ordering_data($info) {
   $data = '';
+  if (isset($_GET['section']) && !empty($_GET['section'])) {
+      $selction_name = 'section';
+    }
+    else {
+      $selction_name = 'section_name';
+    }
+    if (isset($_GET[$selction_name])) {
+      $cat_id = $_GET[$selction_name];
+    }
+    if ($theme == FRONT_THEME_NAME) {
+      $cat_id = arg(2);
+    }
   if (!empty($info)) {
     $widget_name = $info['widget_name'];
-    $result = get_view_nodes_form_custom_table_for_yearend_widgets($widget_name , 'story' , 5 , DONT_MISS_MIN_RANGE);
+    $result = get_view_nodes_form_custom_table_for_yearend_widgets($widget_name , 'story' , 5 , DONT_MISS_MIN_RANGE,$cat_id);
     $entity_data = array();
     foreach ($result as $entity_data_node) {
       $entity_data[] = $entity_data_node;
@@ -57,9 +69,22 @@ function itg_widget_yearend_top_news_ordering_data($info) {
  */
 function itg_widget_yearend_top_videos_ordering_data($info) {
   $data = '';
+  if (isset($_GET['section']) && !empty($_GET['section'])) {
+      $selction_name = 'section';
+    }
+    else {
+      $selction_name = 'section_name';
+    }
+    if (isset($_GET[$selction_name])) {
+      $cat_id = $_GET[$selction_name];
+    }
+    if ($theme == FRONT_THEME_NAME) {
+      $cat_id = arg(2);
+    }
+   
   if (!empty($info)) {
     $widget_name = $info['widget_name'];
-    $result = get_view_nodes_form_custom_table_for_yearend_widgets($widget_name , 'videogallery' , DONT_MISS_MAX_RANGE, DONT_MISS_MIN_RANGE);
+    $result = get_view_nodes_form_custom_table_for_yearend_widgets($widget_name , 'videogallery' , DONT_MISS_MAX_RANGE, DONT_MISS_MIN_RANGE,$cat_id);
     $entity_data = array();
     foreach ($result as $entity_data_node) {
       $entity_data[] = $entity_data_node;
