@@ -113,7 +113,7 @@ function feature_for_blog_front_end_views_default_views() {
   $handler->display->display_options['fields']['field_blog_bloggers']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_blog_bloggers']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_blog_bloggers']['delta_offset'] = '0';
-  $handler->display->display_options['path'] = 'blog-listing';
+  $handler->display->display_options['path'] = 'blog';
   $export['blog_listing'] = $view;
 
   return $export;

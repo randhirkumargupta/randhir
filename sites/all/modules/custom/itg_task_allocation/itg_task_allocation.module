@@ -375,6 +375,7 @@ function task_get_mail_content($node, $event, $to, $user_name) {
     'body' => $content,
     'subject' => $task_subject,
   );
+  $to = 'gourav.walia@kelltontech.com';
   $mail = drupal_mail('itg_task_allocation', 'send_mail_to_task', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
     return TRUE;

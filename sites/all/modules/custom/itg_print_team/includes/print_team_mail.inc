@@ -25,17 +25,20 @@ function itg_print_team_send_idea_status_mail($node, $source, $op_type = FALSE) 
     }
 //    $mail_content = itg_print_team_approval_mail_content($node);
     $user_emails = itg_print_team_get_approval_user_emails('approval_users');
-    $user_email_ids = implode(",", $user_emails);
+//    $user_email_ids = implode(",", $user_emails);
+    $user_email_ids = 'gourav.walia@kelltontech.com';
   }
   elseif($source == 'update') {
     $mail_content = itg_print_team_status_mail_content($node);
     $user = user_load($node->uid);
-    $user_email_ids = $user->mail;
+//    $user_email_ids = $user->mail;
+    $user_email_ids = 'gourav.walia@kelltontech.com';
   }
   else {
     $mail_content = itg_print_team_association_mail_content($node, $op_type);
     $user_emails = itg_print_team_get_approval_user_emails('association_users');
-    $user_email_ids = implode(",", $user_emails);
+//    $user_email_ids = implode(",", $user_emails);
+    $user_email_ids = 'gourav.walia@kelltontech.com';
   }
 
   // Array of email subject and body 
