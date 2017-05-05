@@ -9949,8 +9949,7 @@ section.sidebar .block-itg-ads {
   float: right;
 }
 #block-itg-menu-manager-third-level-menu ul li {
-  display: inline-block;
-  vertical-align: top;
+  float: left;
 }
 #block-itg-menu-manager-third-level-menu ul li a {
   color: #fff;
@@ -9987,6 +9986,38 @@ section.sidebar .block-itg-ads {
   font-size: 8px;
   vertical-align: top;
   padding-top: 5px;
+}
+#block-itg-menu-manager-third-level-menu .third-level-menu li.more {
+  position: relative;
+}
+#block-itg-menu-manager-third-level-menu .third-level-menu li.more span {
+  padding: 5px 10px;
+  float: left;
+  width: 50px;
+  cursor: pointer;
+  height: 30px;
+}
+#block-itg-menu-manager-third-level-menu .third-level-menu li.more span .fa-circle {
+  font-size: 7px;
+  color: #fff;
+  margin: 0 2px;
+}
+#block-itg-menu-manager-third-level-menu .third-level-menu li.more ul#overflow {
+  display: none;
+  position: absolute;
+  right: 0;
+  width: 200px;
+  top: 30px;
+  background: #595959;
+  padding: 0;
+  z-index: 999999;
+}
+#block-itg-menu-manager-third-level-menu .third-level-menu li.more ul#overflow li {
+  float: none;
+}
+#block-itg-menu-manager-third-level-menu .third-level-menu li.more ul#overflow li a {
+  padding: 3px 10px;
+  height: auto;
 }
 
 /*css end special page*/

@@ -8134,7 +8134,7 @@ section.sidebar{
         padding-top: 30px;
         @include float(right);
         li{
-            @include display-inline;
+            float: left;
             a{
                 color: #fff;
                 padding: 0 10px;
@@ -8172,6 +8172,40 @@ section.sidebar{
             vertical-align: top;
             padding-top: 5px;
         }
+    }
+    .third-level-menu{
+      li.more{
+        position: relative;
+        span{
+          padding: 5px 10px;
+          float: left;
+          width: 50px;
+          cursor: pointer;
+          height: 30px;
+          .fa-circle {
+            font-size: 7px;
+            color: #fff;
+            margin: 0 2px;
+          }
+        }
+        ul#overflow{
+          display: none;
+          position: absolute;
+          right: 0;
+          width: 200px;
+          top: 30px;
+          background: #595959;
+          padding: 0;
+          z-index: 999999;
+          li{
+            float: none;
+            a{
+              padding: 3px 10px;
+              height: auto;
+            }
+          }
+        }
+      }
     }
 }
 /*css end special page*/
