@@ -110,8 +110,8 @@ function itg_common_custompath_insert_load($node) {
     $newpath = itg_common_custompath_insert_val($pathdata);
     return $newpath;
   }
-  elseif ($node->type == 'mega_review_critic') {
-    $pathdata =  'movie/review/story' . '/' . $edited_sef_url . '-' . $node->nid . '-' . $published_date;
+  elseif ($node->type == 'page') {
+    $pathdata =  $edited_sef_url;
     $newpath = itg_common_custompath_insert_val($pathdata);
     return $newpath;
   }
@@ -152,6 +152,14 @@ function is_itg_funalytics($node) {
 function is_mega_review_critic($node) {
   $flag = FALSE;
   if ($node->type == 'mega_review_critic') {
+    $flag = TRUE;
+  }
+  return $flag;
+}
+
+function is_basic_page($node) {
+  $flag = FALSE;
+  if ($node->type == 'page') {
     $flag = TRUE;
   }
   return $flag;
