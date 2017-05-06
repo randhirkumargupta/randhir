@@ -101,17 +101,17 @@ function itg_common_custompath_insert_load($node) {
   elseif ($node->type == 'reporter') {
     $occupation_tid = $node->field_celebrity_pro_occupation['und'][0]['tid'];
     $occupation = _occupation_from_tid_for_sef_url($occupation_tid);
-    $pathdata =  $occupation . '/' . $edited_sef_url;
+    $pathdata = $occupation . '/' . $edited_sef_url;
     $newpath = itg_common_custompath_insert_val($pathdata);
     return $newpath;
   }
   elseif ($node->type == 'itg_funalytics') {
-    $pathdata =  'understand' . '/' . $edited_sef_url;
+    $pathdata = 'understand' . '/' . $edited_sef_url;
     $newpath = itg_common_custompath_insert_val($pathdata);
     return $newpath;
   }
   elseif ($node->type == 'page') {
-    $pathdata =  $edited_sef_url;
+    $pathdata = $edited_sef_url;
     $newpath = itg_common_custompath_insert_val($pathdata);
     return $newpath;
   }
@@ -233,42 +233,17 @@ function itg_common_custompath_insert_val($pathdata) {
 }
 
 function get_path_from_category($tid) {
-  $pathdata = '';
-
+  $section = array();
   $all_terms = taxonomy_get_parents_all($tid);
-
-  foreach ($all_terms as $key => $val) {
-    if ($val->tid == $tid) {
-      $primary_cat_name = trim($val->name);
-    }
-    $section_name = trim($val->name);
+  $number_parent = count($all_terms);
+  $section_key = $number_parent - 1;
+  $subsection_key = $number_parent - 2;
+  //Section
+  if (isset($all_terms[$section_key]->name)) {
+    $section[] = strtolower($all_terms[$section_key]->name);
   }
-
-  if ($section_name == $primary_cat_name) {
-    //prepare ur with parimary cat only.
-    $pathdata = strtolower($primary_cat_name);
+  if (isset($all_terms[$subsection_key]->name)) {
+    $section[] = strtolower($all_terms[$subsection_key]->name);
   }
-  else {
-    //prepare ur with parimary cat and section both.
-    $pathdata = strtolower($section_name) . '/' . strtolower($primary_cat_name);
-  }
-
-
-  // Get parent of primary category.
-//  $all_terms = taxonomy_get_parents_all($getsection);
-//  $terms_bunch = array_reverse($all_terms);
-//  $section_name = $terms_bunch[0]->name; //section
-  // Get parent of primary category.
-//  $primary_cat_array = taxonomy_term_load($getsection);
-//  $primary_cat_name = $primary_cat_array->name;
-//  // Handle case if section and parimary category are same.
-//  if ($section_name == $primary_cat_name) {
-//    //prepare ur with parimary cat only.
-//    $pathdata .= strtolower($primary_cat_name);
-//  }
-//  else {
-//    //prepare ur with parimary cat and section both.
-//    $pathdata .= strtolower($section_name) . '/' . strtolower($primary_cat_name);
-//  }
-  return $pathdata;
+  return implode('/' , $section);
 }

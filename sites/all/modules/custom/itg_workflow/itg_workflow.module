@@ -916,7 +916,7 @@ function itg_workflow_node_insert($node) {
   
   global $user;
 //  
-  if (isset($node->op)) {
+//  if (isset($node->op)) {
   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
     //drupal_set_message("under itg_workflow_node_insert");
     // for code email
@@ -937,7 +937,7 @@ function itg_workflow_node_insert($node) {
       unset($_SESSION['node_preview_unique']);
     }
   }
-  }
+//  }
 }
 
 /**
