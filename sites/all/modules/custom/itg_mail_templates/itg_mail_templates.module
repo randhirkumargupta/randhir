@@ -2,7 +2,6 @@
 
 module_load_include('inc', 'itg_mail_templates', 'itg_mail_templates_tokens');
 module_load_include('inc', 'itg_mail_templates', 'includes/views_handler_mail_templates');
-module_load_include('inc', 'itg_mail_templates', 'includes/mail_templates_nodepresave');
 /*
  * Implements hook_form_alter
  */
@@ -28,6 +27,12 @@ function itg_mail_templates_form_alter(&$form, &$form_state, $form_id) {
         jQuery('.node-mail_templates-form').find('.mail-template-category').hide().siblings('.' + selected_value).show();
       });", array('type' => 'inline', 'scope' => 'footer'));
     
+    drupal_add_js("jQuery('#edit-field-mail-templates-category-und').change(function(){
+      var select_option = jQuery('#edit-field-mail-templates-category-und option:selected').val();
+          jQuery('#mail-templates-node-form').trigger('reset');
+          jQuery('#edit-field-mail-templates-category-und').val(select_option);
+        });", array('type' => 'inline', 'scope' => 'footer'));
+
 //    if (!isset($_REQUEST['destination'])) {
 //        $destination = '';
 //    }
@@ -498,14 +503,4 @@ function itg_mail_templates_insert_val($pathdata) {
     $pathdata = str_replace(array(':' , '*' , '"' , "'" , '#') , "-" , $pathdata);
   }
   return $pathdata;
-}
-
-/*
- * Implementation of hook_node_presave().
- * {@inheritdoc}
- */
-function itg_mail_templates_node_presave($node) {
-  if ($node->type == 'mail_templates') {
-    itg_mail_templates_node_fieldvalue($node);
-  }
 }
