@@ -149,5 +149,40 @@ function ads_features_strongarm() {
   $strongarm->value = 0;
   $export['node_submitted_ads_management'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_ads_management_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_ads_management_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_ads_content_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_ads_content_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_ads_section_selection_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_ads_section_selection_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_ads_template_placeholder_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_ads_template_placeholder_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_ad_template_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_ad_template_pattern'] = $strongarm;
+
   return $export;
 }
