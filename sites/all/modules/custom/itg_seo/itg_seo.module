@@ -110,7 +110,8 @@ function itg_seo_form_alter(&$form , &$form_state , $form_id) {
     'blog_node_form' ,
     'reporter_node_form',
     'itg_funalytics_node_form',
-    'mega_review_critic_node_form'
+    'mega_review_critic_node_form',
+    'page_node_form',
   );
   if (in_array($form['#form_id'] , $node_form_array)) {
     $form['#after_build'][] = 'itg_meta_tags_alias_set';
@@ -145,6 +146,7 @@ function itg_get_sef_url($sef_path , $nodeid) {
     $is_reporter = is_reporter($node_object);
     $is_itg_funalytics = is_itg_funalytics($node_object);
     $is_mega_review_critic = is_mega_review_critic($node_object);
+    $is_basic_page = is_basic_page($node_object);
     if ($is_issue_magazine) {
       $path_alias_set = $sef_path;
       $path_data = explode("/" , $path_alias_set);
@@ -165,6 +167,10 @@ function itg_get_sef_url($sef_path , $nodeid) {
     elseif ($is_reporter || $is_itg_funalytics) {
       $path_data = explode("/" , $sef_path);
       $edited_sef_url = rtrim($path_data[1]);
+    }
+    elseif ($is_basic_page) {
+      $path_data = explode("/" , $sef_path);
+      $edited_sef_url = rtrim($path_data[0]);
     }
     else {
       $path_alias_set = $sef_path;
@@ -354,7 +360,7 @@ function itg_seo_node_insert($node) {
     $newpath = itg_common_custompath_insert_load($node);
     $node->path['alias'] = $newpath;
   }
-  if ($node->type == 'reporter' || $node->type == 'itg_funalytics') {
+  if ($node->type == 'reporter' || $node->type == 'itg_funalytics' || $node->type == 'page') {
     $newpath = itg_common_custompath_insert_load($node);
     $node->path['alias'] = $newpath;
   }
@@ -425,7 +431,7 @@ function itg_seo_node_update($node) {
       path_save($path);
     }
     
-    if ($node->type == 'itg_funalytics' || $node->type == 'mega_review_critic') {
+    if ($node->type == 'itg_funalytics' || $node->type == 'mega_review_critic' || $node->type == 'page') {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
       $path = array(
