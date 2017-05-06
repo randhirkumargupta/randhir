@@ -2,6 +2,7 @@
 
 module_load_include('inc', 'itg_mail_templates', 'itg_mail_templates_tokens');
 module_load_include('inc', 'itg_mail_templates', 'includes/views_handler_mail_templates');
+module_load_include('inc', 'itg_mail_templates', 'includes/mail_templates_nodepresave');
 /*
  * Implements hook_form_alter
  */
@@ -497,4 +498,14 @@ function itg_mail_templates_insert_val($pathdata) {
     $pathdata = str_replace(array(':' , '*' , '"' , "'" , '#') , "-" , $pathdata);
   }
   return $pathdata;
+}
+
+/*
+ * Implementation of hook_node_presave().
+ * {@inheritdoc}
+ */
+function itg_mail_templates_node_presave($node) {
+  if ($node->type == 'mail_templates') {
+    itg_mail_templates_node_fieldvalue($node);
+  }
 }
