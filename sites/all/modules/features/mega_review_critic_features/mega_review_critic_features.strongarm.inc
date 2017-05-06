@@ -327,6 +327,34 @@ function mega_review_critic_features_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_itg_celebrity_profile_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_itg_celebrity_profile_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_mega_review_critic_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_mega_review_critic_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_itg_occupation_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_itg_occupation_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_mega_review_type_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_mega_review_type_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'save_continue_mega_review_critic';
   $strongarm->value = 'Save and add fields';
   $export['save_continue_mega_review_critic'] = $strongarm;

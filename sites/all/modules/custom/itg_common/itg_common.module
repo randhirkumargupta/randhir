@@ -116,8 +116,12 @@ function itg_common_permission() {
  * {@inheritdoc}
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
-  global $user, $base_url;
+  global $user, $base_url,$theme;
   $arg = arg();
+  if($theme == 'itgadmin')
+   {
+      $form['actions']['delete']['#access'] = FALSE;
+   }
   // get category machine name
   if ($form_id == 'taxonomy_form_term' && $form['#vocabulary']->machine_name != 'category_management') {
     if (!in_array('administrator', $user->roles)) {

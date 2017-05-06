@@ -88,6 +88,85 @@ function mail_templates_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-mail_templates-field_cms_mail_template_category'.
+  $field_instances['node-mail_templates-field_cms_mail_template_category'] = array(
+    'bundle' => 'mail_templates',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_cms_mail_template_category',
+    'label' => 'CMS mail template category',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 9,
+    ),
+  );
+
+  // Exported field_instance: 'node-mail_templates-field_cms_status'.
+  $field_instances['node-mail_templates-field_cms_status'] = array(
+    'bundle' => 'mail_templates',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_cms_status',
+    'label' => 'CMS Status',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 11,
+    ),
+  );
+
   // Exported field_instance: 'node-mail_templates-field_mail_body_blog'.
   $field_instances['node-mail_templates-field_mail_body_blog'] = array(
     'bundle' => 'mail_templates',
@@ -127,6 +206,48 @@ function mail_templates_field_default_field_instances() {
       ),
       'type' => 'text_textarea',
       'weight' => 22,
+    ),
+  );
+
+  // Exported field_instance: 'node-mail_templates-field_mail_body_cms_mail'.
+  $field_instances['node-mail_templates-field_mail_body_cms_mail'] = array(
+    'bundle' => 'mail_templates',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 12,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_mail_body_cms_mail',
+    'label' => 'Mail Body CMS mail',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 13,
     ),
   );
 
@@ -847,6 +968,48 @@ function mail_templates_field_default_field_instances() {
       ),
       'type' => 'text_textarea',
       'weight' => 15,
+    ),
+  );
+
+  // Exported field_instance: 'node-mail_templates-field_mail_subject_cms_mail'.
+  $field_instances['node-mail_templates-field_mail_subject_cms_mail'] = array(
+    'bundle' => 'mail_templates',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 11,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_mail_subject_cms_mail',
+    'label' => 'Mail Subject',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 12,
     ),
   );
 
@@ -1808,7 +1971,10 @@ function mail_templates_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Ask an Expert Case');
   t('Blog Status');
+  t('CMS Status');
+  t('CMS mail template category');
   t('Mail Body');
+  t('Mail Body CMS mail');
   t('Mail Body Expert');
   t('Mail Body Follow Story');
   t('Mail Body Task/Idea');
