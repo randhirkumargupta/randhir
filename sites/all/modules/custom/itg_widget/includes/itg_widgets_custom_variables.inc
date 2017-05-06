@@ -34,45 +34,45 @@ function itg_widgets_custom_variables() {
     '#size' => 20,
     '#maxlength' => 20,
   );
-  $form['year_end_for_widget'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Enter tid of year end'),
-    '#default_value' => variable_get('year_end_for_widget'),
-    '#size' => 20,
-    '#maxlength' => 20,
-  );
-  $form['auto_for_widget'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Enter tid of Auto'),
-    '#default_value' => variable_get('auto_for_widget'),
-    '#size' => 20,
-    '#maxlength' => 20,
-  );
+//  $form['year_end_for_widget'] = array(
+//    '#type' => 'textfield',
+//    '#title' => t('Enter tid of year end'),
+//    '#default_value' => variable_get('year_end_for_widget'),
+//    '#size' => 20,
+//    '#maxlength' => 20,
+////  );
+//  $form['auto_for_widget'] = array(
+//    '#type' => 'textfield',
+//    '#title' => t('Enter tid of Auto'),
+//    '#default_value' => variable_get('auto_for_widget'),
+//    '#size' => 20,
+//    '#maxlength' => 20,
+//  );
 
 
-  $form['tech_for_widget'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Enter tid of tech'),
-    '#default_value' => variable_get('tech_for_widget'),
-    '#size' => 20,
-    '#maxlength' => 20,
-  );
+//  $form['tech_for_widget'] = array(
+//    '#type' => 'textfield',
+//    '#title' => t('Enter tid of tech'),
+//    '#default_value' => variable_get('tech_for_widget'),
+//    '#size' => 20,
+//    '#maxlength' => 20,
+//  );
 
-  $form['entertainment_oscar_for_widget'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Enter tid of Entertainment Oscar Watch'),
-    '#default_value' => variable_get('entertainment_oscar_for_widget'),
-    '#size' => 20,
-    '#maxlength' => 20,
-  );
+//  $form['entertainment_oscar_for_widget'] = array(
+//    '#type' => 'textfield',
+//    '#title' => t('Enter tid of Entertainment Oscar Watch'),
+//    '#default_value' => variable_get('entertainment_oscar_for_widget'),
+//    '#size' => 20,
+//    '#maxlength' => 20,
+//  );
 
-  $form['movie_for_widget'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Enter tid of movie'),
-    '#default_value' => variable_get('movie_for_widget'),
-    '#size' => 20,
-    '#maxlength' => 20,
-  );
+//  $form['movie_for_widget'] = array(
+//    '#type' => 'textfield',
+//    '#title' => t('Enter tid of movie'),
+//    '#default_value' => variable_get('movie_for_widget'),
+//    '#size' => 20,
+//    '#maxlength' => 20,
+//  );
 
   $form['ipl_points_tally_for_widget'] = array(
     '#type' => 'textfield',
@@ -157,7 +157,7 @@ function itg_widgets_custom_variables() {
   );
   $form['reporter_tid'] = array(
     '#type' => 'textfield',
-    '#title' => t('Anchor occupation tid for anchors-listing page.'),
+    '#title' => t('Reporter tid'),
     '#default_value' => variable_get('reporter_tid'),
     '#size' => 20,
   );

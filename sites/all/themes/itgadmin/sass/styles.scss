@@ -11736,3 +11736,12 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       left: 635px;
     }
   }
+  .group-survey-question{
+    .ajax-progress{
+      display: none !important;
+    }
+  }
+  div#edit-byline-names-wrapper {
+    width: 435px;
+  } 
+  #views-exposed-form-report-filed-content-page #autocomplete {max-height:300px; overflow-y:auto;}

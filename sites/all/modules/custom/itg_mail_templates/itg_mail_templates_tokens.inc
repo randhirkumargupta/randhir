@@ -89,11 +89,6 @@ function itg_mail_templates_tokenstable() {
                 <td>A token that will be used for ITG Content Title in Mail Body.</td>
               </tr>
               <tr>
-                <td>ITG Node Nid</td>
-                <td>[itg_mail_token:itg_node_nid]    </td>
-                <td>A token that will be used for ITG Content Nid in Mail Body.</td>
-              </tr>
-              <tr>
                 <td>ITG Node Title With Link</td>
                 <td>[itg_mail_token:itg_node_title_link]</td>
                 <td>A token that will be used for ITG Node Title With Link.</td>
@@ -105,6 +100,11 @@ function itg_mail_templates_tokenstable() {
                 <td>ITG Product/Inventry Count</td>
                 <td>[itg_mail_token:itg_product_count]</td>
                 <td>A token that will be used for ITG Product/Inventry Count.</td>
+              </tr>
+              <tr>
+                <td>ITG Node Nid</td>
+                <td>[itg_mail_token:itg_node_nid]    </td>
+                <td>A token that will be used for ITG Content Nid in Mail Body.</td>
               </tr>
               <tr>
                 <td>ITG Product Code</td>
