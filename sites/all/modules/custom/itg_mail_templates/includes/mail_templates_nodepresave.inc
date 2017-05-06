@@ -4,8 +4,6 @@
  * @param $token_table is a string that returns the table for tokens
  */
 function itg_mail_templates_node_fieldvalue($node) {
-  print "yes";
-  die;
   if ($node->field_mail_templates_category[LANGUAGE_NONE][0]['value'] == 'ask_an_expert') {
     unset($node->field_ugc_comments_status[LANGUAGE_NONE][0]);
     unset($node->field_mail_subject[LANGUAGE_NONE][0]);
