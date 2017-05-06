@@ -100,11 +100,11 @@
 //          
 //
 //            // Code for client Title field value set Null
-//            $('#edit-field-story-configurations-und-commentbox').click(function() {
-//                if ($("#edit-field-story-configurations-und-commentbox").is(":not(:checked)")) {
-//                    $("#edit-field-story-comment-question-und-0-value").val('');
-//                }
-//            });
+            $('#edit-field-story-configurations-und-commentbox').click(function() {
+                if ($("#edit-field-story-configurations-und-commentbox").is(":not(:checked)")) {
+                    $("#edit-field-story-comment-question-und-0-value").val('');
+                }
+            });
 //
 //            // Code for facebook field value set Null
 //            $('#edit-field-story-social-media-integ-und-facebook').click(function() {
