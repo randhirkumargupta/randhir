@@ -62,7 +62,6 @@ jQuery(document).ready(function () {
             jQuery('#edit-path-alias').attr("readonly", "readonly");
         }
     });
-    console.log("asdasd");
 });
 
 (function ($) {
