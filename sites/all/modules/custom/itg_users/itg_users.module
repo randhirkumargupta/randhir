@@ -56,11 +56,16 @@ function itg_users_menu() {
 function itg_users_form_alter(&$form, &$form_state, $form_id) {  
   global $user, $base_url;
   //code for multidomain
-  if ($form_id == 'user_login') {    
+  if ($form_id == 'user_login') {
     $form['#validate'][] = 'itg_users_backend_validate';
+    if (empty($form['pass']['#attributes'])) {
+      $form['pass']['#attributes'] = array();
+    }
+    $form['pass']['#attributes']['autocomplete'] = 'off';
   }
-  
+
   if ($form_id == 'user_register_form' || $form_id == 'user_profile_form') {
+    $form['#attributes']['autocomplete'] = 'off';
     // hide subscribe checkbox from user page
      if(!in_array(FRONT_USER, $user->roles)) {
        $form['field_subscribe_for_newsletter']['#attributes']['class'][] = 'element-hidden';
