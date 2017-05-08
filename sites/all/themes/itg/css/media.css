@@ -3080,6 +3080,10 @@
     height: 37px;
     overflow: hidden;
   }
+
+  body.section-common .row {
+    overflow: hidden;
+  }
 }
 /*End CSS Desktop version*/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
@@ -3105,5 +3109,17 @@
   }
   #block-views-video-landing-header-block .social-likes ul li {
     float: left;
+  }
+
+  #block-views-photo-landing-slider-block .social-icon ul {
+    display: table;
+  }
+  #block-views-photo-landing-slider-block .social-icon ul li {
+    display: table-cell;
+    text-align: center;
+    float: none;
+  }
+  #block-views-photo-landing-slider-block .social-icon ul li a {
+    padding: 0 5px;
   }
 }
