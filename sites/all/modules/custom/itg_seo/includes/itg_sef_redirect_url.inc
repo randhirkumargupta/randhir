@@ -75,9 +75,9 @@ function itg_common_custompath_insert_load($node) {
       // Add node title.
       $pathdata .= '/' . trim($node_sef);
       // Add node id.
-      $pathdata .= '/' . $node->nid;
+      $pathdata .= '-' . $node->nid;
       // Add workbanch date.
-      $pathdata .= '/' . $published_date;
+      $pathdata .= '-' . $published_date;
       // Prepare SEO friendly node url
       $newpath = itg_common_custompath_insert_val($pathdata);
       return $newpath;
@@ -110,7 +110,7 @@ function itg_common_custompath_insert_load($node) {
     $newpath = itg_common_custompath_insert_val($pathdata);
     return $newpath;
   }
-  elseif ($node->type == 'page') {
+  elseif ($node->type == 'page' || $node->type == 'blog') {
     $pathdata = $edited_sef_url;
     $newpath = itg_common_custompath_insert_val($pathdata);
     return $newpath;

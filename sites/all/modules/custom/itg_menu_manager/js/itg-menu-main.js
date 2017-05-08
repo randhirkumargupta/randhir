@@ -19,7 +19,7 @@
                 if (menu_level_val == 'vertical') {
                     //jQuery("input[name=title]").removeAttr("disabled");
                     jQuery(".form-item-sections").css("display", "none");
-                    jQuery(".form-item-display-icon").css("display", "none");
+                    
                 }
 
                 var spnr_val = jQuery("input[name='sponsored_category[Yes]']").is(':checked');

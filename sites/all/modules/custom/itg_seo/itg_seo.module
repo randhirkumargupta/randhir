@@ -360,7 +360,7 @@ function itg_seo_node_insert($node) {
     $newpath = itg_common_custompath_insert_load($node);
     $node->path['alias'] = $newpath;
   }
-  if ($node->type == 'reporter' || $node->type == 'itg_funalytics' || $node->type == 'page') {
+  if ($node->type == 'reporter' || $node->type == 'itg_funalytics' || $node->type == 'page' || $node->type == 'blog') {
     $newpath = itg_common_custompath_insert_load($node);
     $node->path['alias'] = $newpath;
   }
@@ -431,7 +431,7 @@ function itg_seo_node_update($node) {
       path_save($path);
     }
     
-    if ($node->type == 'itg_funalytics' || $node->type == 'mega_review_critic' || $node->type == 'page') {
+    if ($node->type == 'itg_funalytics' || $node->type == 'mega_review_critic' || $node->type == 'page' || $node->type == 'blog') {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
       $path = array(
