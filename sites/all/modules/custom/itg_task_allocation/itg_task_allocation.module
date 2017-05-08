@@ -60,7 +60,7 @@ function itg_task_allocation_expirestatus_enddatemail() {
     $query->fields('s', array('field_task_comment_change_status_value'));
     $query->fields('u', array('mail'));
     $query->fields('ur', array('mail'));
-//    $query->condition('s.field_task_comment_change_status_value', 'open', '=');
+    $query->condition('s.field_task_comment_change_status_value', 'open', '=');
     $query->condition('f.field_task_finish_date_and_time_value', $current_time, '<=');
     $result = $query->execute();
   foreach ($result as $value) {   
