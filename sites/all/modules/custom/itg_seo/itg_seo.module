@@ -161,8 +161,16 @@ function itg_get_sef_url($sef_path , $nodeid) {
       $edited_sef_url = implode('-' , $new_url_array);
     }
     elseif ($is_photo_story) {
-      $path_data = explode("/" , $sef_path);
-      $edited_sef_url = rtrim($path_data[2]);
+      $path_alias_set = $sef_path;
+      $path_data = explode("/" , $path_alias_set);
+      $edit_path_data = end($path_data);
+      $new_url_array = explode('-' , $edit_path_data);
+      $array_size = count($new_url_array);
+      unset($new_url_array[$array_size - 4]);
+      unset($new_url_array[$array_size - 3]);
+      unset($new_url_array[$array_size - 2]);
+      unset($new_url_array[$array_size - 1]);
+      $edited_sef_url = implode('-' , $new_url_array);
     }
     elseif ($is_reporter || $is_itg_funalytics) {
       $path_data = explode("/" , $sef_path);
@@ -360,7 +368,7 @@ function itg_seo_node_insert($node) {
     $newpath = itg_common_custompath_insert_load($node);
     $node->path['alias'] = $newpath;
   }
-  if ($node->type == 'reporter' || $node->type == 'itg_funalytics' || $node->type == 'page') {
+  if ($node->type == 'reporter' || $node->type == 'itg_funalytics' || $node->type == 'page' || $node->type == 'blog') {
     $newpath = itg_common_custompath_insert_load($node);
     $node->path['alias'] = $newpath;
   }
@@ -431,7 +439,7 @@ function itg_seo_node_update($node) {
       path_save($path);
     }
     
-    if ($node->type == 'itg_funalytics' || $node->type == 'mega_review_critic' || $node->type == 'page') {
+    if ($node->type == 'itg_funalytics' || $node->type == 'mega_review_critic' || $node->type == 'page' || $node->type == 'blog') {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
       $path = array(
