@@ -98,7 +98,7 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
       
       // checked comment box by default
       if (!isset($form['#node']->nid)) {
-        $form['field_video_configurations'][LANGUAGE_NONE]['#default_value'] = array('commentbox');
+        $form['field_video_configurations'][LANGUAGE_NONE]['#default_value'] = array('comment_box');
       }
       
       if ($user->uid != 1) {

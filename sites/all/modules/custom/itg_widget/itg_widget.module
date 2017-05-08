@@ -948,6 +948,7 @@ function itg_widget_block_view($delta = '') {
 
   return $block;
 }
+
 /**
  * Function returns data for cutom tables widgets.
  * 
@@ -967,15 +968,13 @@ function itg_widget_get_graph_data() {
   $itg_query = db_select('node' , 'n');
   $itg_query->join('field_data_field_election_constituency_tall' , 'frq' , 'n.nid = frq.entity_id');
 
-  $itg_query->join('field_data_field_section', 'ast', 'n.nid = ast.entity_id');
-  $itg_query->fields('n', array('nid'));
-  $itg_query->fields('frq', array('field_election_constituency_tall_value'))
-      ->condition('type', 'election_graph_xml')
-      ->condition('ast.field_section_tid', $cat_id, '=')
-      ->condition('status', 1);
-     // ->range(0, 5);
-
-
+  $itg_query->join('field_data_field_section' , 'ast' , 'n.nid = ast.entity_id');
+  $itg_query->fields('n' , array('nid'));
+  $itg_query->fields('frq' , array('field_election_constituency_tall_value'))
+      ->condition('type' , 'election_graph_xml')
+      ->condition('ast.field_section_tid' , $cat_id , '=')
+      ->condition('status' , 1);
+  // ->range(0, 5);
   //$itg_query->condition('ast.field_astro_type_tid', $astro_type);
   $itg_result = $itg_query->execute()->fetchAll();
 
@@ -1096,11 +1095,11 @@ function itg_widget_dailymotion_get_videogallery_slider($nid , $type = 'gallery'
                       src="https://www.dailymotion.com/embed/video/<?php print $vide_dm_id; ?>?autoplay=1&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
                       allowfullscreen></iframe>
           </div>
-      <?php
-      if ($type != 'video') {
-        print ucfirst($video_value->field_videogallery_description_value);
-      }
-      ?>
+          <?php
+          if ($type != 'video') {
+            print ucfirst($video_value->field_videogallery_description_value);
+          }
+          ?>
       </div>
 
       <?php
@@ -1348,7 +1347,7 @@ function itg_widget_delete_data_from_widget($widget_name , $nid = 0 , $stateid =
  */
 function itg_widget_insert_widget_data($node , $widget_name , $category_tid , $extra = NULL , $state = NULL) {
   try {
-    $max_weight = get_min_weight_for_special($widget_name, $category_tid);
+    $max_weight = get_min_weight_for_special($widget_name , $category_tid);
     $node_load_data = itg_widget_get_required_node_data_for_widget($node);
     db_insert('itg_widget_order')
         ->fields(array(
@@ -1756,21 +1755,21 @@ function _widget_batch_urls() {
     'special-key-candidate-widget-contents' ,
     'saction-staticpage-list' ,
     'budget-predictor-image' ,
-    'we-may-suggest-draggable-content-order',
-    'story-list-widget',
-    'trending-video-widget-list',
-    'top-takes-videos-list',
-    'watch-right-now-videos-list',
-    'poll-format-conent',
-    'manage-highlights',
-    'home-page-feature-widget-listing',
-    'photo-list-widget',
-    'video-list-widget',
-    'anchor-list',
-    'so-sorry-video-widget-list',
-    'issue-magazin-primary-cat-widget',
-    'issue-base-magazin-widget',
-    'issue-magazin-primary-cat-widget',
+    'we-may-suggest-draggable-content-order' ,
+    'story-list-widget' ,
+    'trending-video-widget-list' ,
+    'top-takes-videos-list' ,
+    'watch-right-now-videos-list' ,
+    'poll-format-conent' ,
+    'manage-highlights' ,
+    'home-page-feature-widget-listing' ,
+    'photo-list-widget' ,
+    'video-list-widget' ,
+    'anchor-list' ,
+    'so-sorry-video-widget-list' ,
+    'issue-magazin-primary-cat-widget' ,
+    'issue-base-magazin-widget' ,
+    'issue-magazin-primary-cat-widget' ,
     'supplement-base-magazin-widget'
   );
 }
