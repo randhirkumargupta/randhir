@@ -809,7 +809,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'bundle' => 'mega_review_critic',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Twitter handle & tag (widget)',
+    'description' => 'Twitter Widget',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -828,7 +828,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_mega_review_twitter',
-    'label' => 'Twitter handle & tag (widget)',
+    'label' => 'Twitter Widget',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1488,7 +1488,7 @@ function mega_review_critic_features_field_default_field_instances() {
   t('Review type');
   t('Reviewer');
   t('Small image');
-  t('Twitter handle & tag (widget)');
+  t('Twitter Widget');
   t('Youtube url');
 
   return $field_instances;
