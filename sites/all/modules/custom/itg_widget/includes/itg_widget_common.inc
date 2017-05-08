@@ -2208,6 +2208,17 @@ function itg_widget_block_view_alter(&$data , $block) {
       $data['content'] = array();
     }
   }
+  
+  if ($block->delta == 'may_be_recommend_block') {
+    $arg = arg();
+    $ntype = menu_get_object('node');
+    if($ntype->type == 'story' || $ntype->type == 'mega_review_critic' || $arg[0] == 'itg_active_polls') {
+      return TRUE;
+    }
+    else {
+      $data['content'] = array();
+    }
+  }
 }
 
 /**
