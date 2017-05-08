@@ -4469,6 +4469,12 @@ h1.category-heading {
   width: 100%;
   height: 55vh;
 }
+.live-block .breaking-section .breaking-discription a {
+  color: #026bc5;
+}
+.live-block .breaking-section .breaking-discription a:hover {
+  text-decoration: underline;
+}
 .live-block .breaking-section .social-share {
   margin-top: 10px;
 }

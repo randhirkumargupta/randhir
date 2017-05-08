@@ -3367,6 +3367,12 @@ h1.category-heading{
                 width: 100%;
                 height: 55vh;
             }
+            a{
+              color: #026bc5;
+              &:hover{
+                text-decoration: underline;
+              }
+            }
         }
         .social-share{
             margin-top:10px;
