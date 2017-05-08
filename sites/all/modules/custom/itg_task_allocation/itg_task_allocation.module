@@ -367,7 +367,6 @@ function task_get_mail_content($node, $event, $to, $user_name) {
                 <head><title></title></head>
                 <body style="margin:0; padding:0;">';
   $content .= $mail_content;
-  $content .= '<br /><br />Thanks,<br>ITG Team';
   $content .= '</body>';
   $content .= '</html>';
   

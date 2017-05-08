@@ -1451,7 +1451,6 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
                 <head><title></title></head>
                 <body style="margin:0; padding:0;">';
   $content .= $mail_content;
-  $content .= '<br />Thanks,<br>ITG Team';
   $content .= '</body>';
   $content .= '</html>';
   $params = array(
