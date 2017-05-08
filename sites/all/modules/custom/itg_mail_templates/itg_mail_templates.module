@@ -29,9 +29,10 @@ function itg_mail_templates_form_alter(&$form, &$form_state, $form_id) {
     
     drupal_add_js("jQuery('#edit-field-mail-templates-category-und').change(function(){
       var select_option = jQuery('#edit-field-mail-templates-category-und option:selected').val();
+      var select_option_title = jQuery('#edit-field-mail-templates-category-und option:selected').text();
           jQuery('#mail-templates-node-form').trigger('reset');
           jQuery('#edit-field-mail-templates-category-und').val(select_option);
-          jQuery('#edit-title').val(select_option);
+          jQuery('#edit-title').val(select_option_title);
         });", array('type' => 'inline', 'scope' => 'footer'));
 
 //    if (!isset($_REQUEST['destination'])) {
