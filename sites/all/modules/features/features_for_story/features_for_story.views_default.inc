@@ -1535,6 +1535,42 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['filters']['field_story_source_type_value_1']['field'] = 'field_story_source_type_value';
   $handler->display->display_options['filters']['field_story_source_type_value_1']['value'] = 'migrated';
   $handler->display->display_options['filters']['field_story_source_type_value_1']['group'] = 3;
+  /* Filter criterion: Content: Story type (field_story_type) */
+  $handler->display->display_options['filters']['field_story_type_value']['id'] = 'field_story_type_value';
+  $handler->display->display_options['filters']['field_story_type_value']['table'] = 'field_data_field_story_type';
+  $handler->display->display_options['filters']['field_story_type_value']['field'] = 'field_story_type_value';
+  $handler->display->display_options['filters']['field_story_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_type_value']['expose']['operator_id'] = 'field_story_type_value_op';
+  $handler->display->display_options['filters']['field_story_type_value']['expose']['label'] = 'Story type';
+  $handler->display->display_options['filters']['field_story_type_value']['expose']['operator'] = 'field_story_type_value_op';
+  $handler->display->display_options['filters']['field_story_type_value']['expose']['identifier'] = 'field_story_type_value';
+  $handler->display->display_options['filters']['field_story_type_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
   $handler->display->display_options['path'] = 'published-story';
 
   /* Display: My Un Published Story */
