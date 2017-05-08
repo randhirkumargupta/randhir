@@ -31,6 +31,7 @@ function itg_mail_templates_form_alter(&$form, &$form_state, $form_id) {
       var select_option = jQuery('#edit-field-mail-templates-category-und option:selected').val();
           jQuery('#mail-templates-node-form').trigger('reset');
           jQuery('#edit-field-mail-templates-category-und').val(select_option);
+          jQuery('#edit-title').val(select_option);
         });", array('type' => 'inline', 'scope' => 'footer'));
 
 //    if (!isset($_REQUEST['destination'])) {
