@@ -3185,6 +3185,12 @@
   .second-level-menu.before-load{
     height: 37px; overflow: hidden;
   }
+  body.section-common{
+    .row{
+      overflow: hidden;
+    }
+  }
+  
 }
 /*End CSS Desktop version*/
 
@@ -3221,5 +3227,15 @@
       }
     }
   }
-
+  #block-views-photo-landing-slider-block .social-icon ul{
+    display: table;
+    li{
+      display: table-cell;
+      text-align: center;
+      float: none;
+      a{
+        padding: 0 5px;
+      }
+    }
+  }
 }

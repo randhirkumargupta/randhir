@@ -3367,6 +3367,12 @@ h1.category-heading{
                 width: 100%;
                 height: 55vh;
             }
+            a{
+              color: #026bc5;
+              &:hover{
+                text-decoration: underline;
+              }
+            }
         }
         .social-share{
             margin-top:10px;
@@ -8911,6 +8917,7 @@ section.sidebar{
 }
 .view-live-tv-programs{   
     @include sidebar-heading;  
+    @include pager;
     h3{
         display: block;
         margin-bottom: 20px;
@@ -11249,7 +11256,9 @@ span.close_btt {
 
 
 
-
+.front #block-itg-widget-we-may-suggest .may-be-suggest-container h3{
+  display: none;
+}
 .no-tv-program{padding-bottom: 15px; color: red;}
 .search-icon-parent{
   position: relative;
