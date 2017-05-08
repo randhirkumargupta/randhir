@@ -977,11 +977,13 @@ function itg_story_photo_story_html($node_id) {
       }
       $entity_obj = entity_load('field_collection_item' , array($val['value']));
       $photo_story_img_path = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['uri'];
-      $photo_story_file_name = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['filename'];
+      //$photo_story_file_name = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['filename'];
       $photo_story_img = image_style_url('photo_story_771x432' , $photo_story_img_path);
       $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
+      $photo_story_img_title = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['title'];
+      $photo_story_img_alt = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['alt'];
       $html .= '<div class="photo-slider">';
-      $html .= $next_link . '<img src="' . $photo_story_img . '" title="' . $photo_story_file_name . '" alt="photo_story_img" />' . $previous_link;
+      $html .= $next_link . '<img src="' . $photo_story_img . '" title="' . $photo_story_img_title . '" alt="'.$photo_story_img_alt.'" />' . $previous_link;
       $html .= '<div class="description"><p>' . $photo_story_desc . '</p></div>';
       $html .= '</div>';
     }
