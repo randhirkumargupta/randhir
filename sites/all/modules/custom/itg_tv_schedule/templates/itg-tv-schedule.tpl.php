@@ -69,7 +69,8 @@ if (!empty($_GET['date_zone']) && empty(arg(1))) {
             <div class="tv-schedule-task"> 
                 <span><?php
                     if ($total == $counter && $day == $val['day'] && $current_day == $val['program date']) {
-                        echo '<a href = "http://indiatoday.intoday.in/livetv.jsp">' . ucfirst($val['program']) . '</a>';
+                        //echo '<a href = "http://indiatoday.intoday.in/livetv.jsp">' . ucfirst($val['program']) . '</a>';
+                        echo '<a href = "livetv">' . ucfirst($val['program']) . '</a>';
                         //print $val['program'];
                     }
                     else {
