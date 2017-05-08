@@ -11766,3 +11766,19 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       }
     }
   }
+  
+  .colorpicker input {
+    background-color: transparent;
+    border: 1px solid transparent !important;
+    position: absolute;
+    font-size: 10px !important;
+    height: auto !important;
+    line-height: 14px !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+    color: #898989 !important;
+    top: 4px;
+    right: 11px;
+    text-align: right;
+    margin: 0;
+    padding: 0 !important;
+}
