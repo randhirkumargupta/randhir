@@ -26,7 +26,7 @@ else {
 $activate_link = $activate_url_info.'/user-activate/'.$user_id;
 
 if ($act_type != 'password_changed') {
-  $activelink = l('here', $activate_link, array('attributes' => array('target' => '_blank')));
+  $activelink = l('here', $activate_link, array('html' => TRUE, 'external' => TRUE, 'attributes' => array('target' => '_blank')));
   $get_body_fname = str_replace("[itg_mail_token:itg_account_user_fname]", $fname, $mail_body);
   $get_body = str_replace("[itg_mail_token:itg_account_user_lname]", $lname, $get_body_fname);
   $get_body_val = str_replace('[itg_mail_token:itg_account_activation_link]', $activelink, $get_body);
