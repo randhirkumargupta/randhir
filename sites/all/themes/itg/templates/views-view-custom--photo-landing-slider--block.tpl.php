@@ -37,7 +37,7 @@ if (in_array('Social Media', $user->roles)) {
           <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
           <div class="show-embed-code-div">
             <div class="copy-sample-code">
-              <textarea readonly="true"><div id='IndiaToday_gallery' data-type='UAT'></div><script src='<?php print $base_url; ?>/sites/all/themes/itg/js/photo_iframeResizer.js'></script><script><?php echo "iFrameResize({galleryid: $photo_node->nid})"; ?></script></textarea> 
+              <textarea readonly><div id='IndiaToday_gallery' data-type='UAT'></div><script src='<?php print $base_url; ?>/sites/all/themes/itg/js/photo_iframeResizer.js'></script><script><?php echo "iFrameResize({galleryid: $photo_node->nid})"; ?></script></textarea> 
                     </div>
                   </div>
                 </li>
@@ -158,7 +158,7 @@ if (in_array('Social Media', $user->roles)) {
                   <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
                   <div class="show-embed-code-div">
                     <div class="copy-sample-code">
-                    <textarea readonly="true"><div id='IndiaToday_gallery' data-type='UAT'></div><script src='<?php print $base_url; ?>/sites/all/themes/itg/js/photo_iframeResizer.js'></script><script><?php echo "iFrameResize({galleryid: $photo_node->nid})"; ?></script></textarea>
+                    <textarea readonly><div id='IndiaToday_gallery' data-type='UAT'></div><script src='<?php print $base_url; ?>/sites/all/themes/itg/js/photo_iframeResizer.js'></script><script><?php echo "iFrameResize({galleryid: $photo_node->nid})"; ?></script></textarea>
                     </div>
                   </div>
                 </li>
