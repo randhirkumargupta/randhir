@@ -253,7 +253,7 @@ function itg_reports_form_views_exposed_form_alter(&$form , &$form_state , $form
       break;
     case 'views-exposed-form-itg-active-users-report-page':
       drupal_add_css("#ui-datepicker-div {display:none} " , 'inline');
-      drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file'));
+      drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file', 'scope' => 'footer'));
       $form['created']['max']['#attributes']['placeholder'] = 'Date To';
       $form['created']['min']['#attributes']['placeholder'] = 'Date From';
       $form['field_mobile_number_value']['#attributes']['placeholder'] = 'Search By Mobile  ';
@@ -267,7 +267,7 @@ function itg_reports_form_views_exposed_form_alter(&$form , &$form_state , $form
       $form['date_from']['#attributes']['placeholder'] = 'Date From';
       break;
     case 'views-exposed-form-section-wiser-breakup-report-page':
-      drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file'));
+      drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file', 'scope' => 'footer'));
       drupal_add_css("#ui-datepicker-div {display:none} , #autocomplete {max-height : 400px; max-width: 400px; overflow-x : auto; overflow-y: auto;}" , 'inline');
       $form['name']['#autocomplete_path'] = 'itg-reports-sections/autocomplete';
       $form['tid_raw']['#autocomplete_path'] = 'itg-reports-sections-tid/autocomplete';
@@ -350,7 +350,7 @@ function itg_reports_block_view($delta = '') {
     case 'itg_report_career_graph':
       $output = array();
       $data = itg_report_get_graph_data();
-      drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/canvasjs.min.js');
+      drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/canvasjs.min.js', array('scope' => 'footer'));
       $errors = array_filter($data);
       if (!empty($errors)) {
         foreach ($data as $key => $chart_data) {

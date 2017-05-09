@@ -12,7 +12,7 @@
 function itg_task_allocation_init() {
   global $theme;
   if ($theme == 'itgadmin') {
-    drupal_add_js(drupal_get_path('module', 'itg_task_allocation') . '/js/itg_task_allocation.js');
+    drupal_add_js(drupal_get_path('module', 'itg_task_allocation') . '/js/itg_task_allocation.js', array('scope' => 'footer'));
   }
 }
 
@@ -143,7 +143,7 @@ function itg_task_allocation_form_after_build($form, &$form_state) {
     $form['actions']['submit']['#value'] = 'Create';
   }
 
-  drupal_add_js(drupal_get_path('module', 'itg_task_allocation') . '/js/itg_task_allocation.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_task_allocation') . '/js/itg_task_allocation.js', array('weight' => 1, 'scope' => 'footer'));
   if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'task-idea-allocation-tracking') {
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-task-task-idea-und-0-remove-button").hide();              

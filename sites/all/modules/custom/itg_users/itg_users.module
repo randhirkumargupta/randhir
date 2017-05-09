@@ -430,7 +430,7 @@ function itg_users_role_delegation_uid() {
  */
 
 function itg_user_after_build($form, &$form_state) {
-  drupal_add_js(drupal_get_path('module', 'itg_users') . '/js/itg_users.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_users') . '/js/itg_users.js', array('weight' => 1, 'scope' => 'footer'));
   return $form;
 }
 

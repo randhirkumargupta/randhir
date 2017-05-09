@@ -585,7 +585,7 @@ function itg_workflow_after_build($form, &$form_state) {
 
   drupal_add_js(array('itg_workflow' => array('settings' => $settings)), array('type' => 'setting'));
 
-  drupal_add_js(drupal_get_path('module', 'itg_workflow') . '/js/itg_workflow.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_workflow') . '/js/itg_workflow.js', array('weight' => 1, 'scope' => 'footer'));
 
   // Code for UGC. For now below code is commented may be we need it in future.
   /*
@@ -731,7 +731,7 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
 
   $settings['form_id'] = $form['#id'];
   drupal_add_js(array('itg_workflow' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_workflow') . '/js/itg_workflow_form.js');
+  drupal_add_js(drupal_get_path('module', 'itg_workflow') . '/js/itg_workflow_form.js', array('scope' => 'footer'));
 
   if ($form['#id'] == 'views-exposed-form-strory-menegment-page-6' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-6') {
     $form['state']['#options'] = array('All' => '-All-',
@@ -741,21 +741,12 @@ function itg_workflow_views_exposed_form_after_build($form, &$form_state) {
   }
   elseif ($form['#id'] == 'views-exposed-form-strory-menegment-page-5') {
     $form['field_story_schedule_date_time_value_1_op']['#options'] = array('empty' => t('-All-'), '<' => 'Published', '>=' => t('To Be Live'));
-
-//    drupal_add_js('jQuery(document).ready(function() {
-//              jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();              
-//            });', array('type' => 'inline', 'scope' => 'footer'));
   }
   elseif ($form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12') {
 
     $form['field_story_schedule_date_time_value_op']['#options'] = array('empty' => t('-All-'), '<' => 'Published', '>=' => t('To Be Live'));
 
-//    drupal_add_js('jQuery(document).ready(function() {
-//              jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();
-//              jQuery("#edit-field-story-schedule-date-time-value-op").click(function() {                     
-//                     jQuery("#edit-field-story-schedule-date-time-value-value-wrapper").hide();                     
-//                 });
-//            });', array('type' => 'inline', 'scope' => 'footer'));
+
   }
 
   return $form;
