@@ -125,7 +125,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                             <i class="fa fa-camera" aria-hidden="true"></i>
                             <?php print $row['counter']; ?>
                         </div>
-                        <div class="caption"><?php print $row['field_image_caption']; ?>
+                        <div class="caption"><?php print mb_strimwidth(strip_tags($row['field_image_caption']), 0, 125, ".."); ?>
                         
                             <div class="section-like-dislike">
                                   <div id="btn-div">
