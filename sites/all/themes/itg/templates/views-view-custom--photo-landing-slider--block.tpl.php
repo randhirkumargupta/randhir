@@ -77,7 +77,7 @@ if (in_array('Social Media', $user->roles)) {
   <?php foreach ($rows as $index => $row):
     ?>
                   <li >
-                      <figure class="photo-landing-slider-pic" img-fid=" <?php print $row['fid']; ?>">
+                      <figure class="photo-landing-slider-pic" data-img-fid=" <?php print $row['fid']; ?>">
 
         <?php print $row['field_images']; ?>                    
                       </figure>
