@@ -8866,6 +8866,9 @@ section.sidebar{
               left: 0;
               top: 0;
             }
+            #playerContainer{
+              display: none !important;
+            }
         }
         .social-icon{
             width: 108px;

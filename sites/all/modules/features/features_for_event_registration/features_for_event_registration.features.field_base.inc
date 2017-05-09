@@ -295,6 +295,7 @@ function features_for_event_registration_field_default_field_bases() {
         'icici' => ' ICICI',
         'paytm' => ' Paytm',
         'billdesk' => 'Billdesk',
+        'amex' => 'Amex',
       ),
       'allowed_values_function' => '',
     ),
