@@ -112,12 +112,12 @@ if (!empty($content)):
       }
       if (!empty($get_develop_story_status)) {
         ?>
-        <h1  title="<?php echo $content['story_title'];?>"><?php print $content['story_title'] . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
+      <h1  title="<?php echo strip_tags($content['story_title']);?>"><?php print $content['story_title'] . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
           <?php
         }
         else {
           ?>
-        <h1 title="<?php echo $content['story_title'];?>"><?php print $content['story_title'] . $pipelinetext; ?></h1>
+        <h1 title="<?php echo strip_tags($content['story_title']);?>"><?php print $content['story_title'] . $pipelinetext; ?></h1>
         <?php if (in_array('Social Media', $user->roles)) { ?>
           <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $node->nid; ?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span><?php t('promote'); ?></span></a>   
         <?php } ?>
@@ -614,7 +614,8 @@ if (!empty($content)):
                     $entity = entity_load('field_collection_item', array($field_collection_id));
                     $type = $entity[$field_collection_id]->field_story_listicle_type['und'][0]['value'];
                     $description = $entity[$field_collection_id]->field_story_listicle_description['und'][0]['value'];
-                    $color = $entity[$field_collection_id]->field_listicle_color['und'][0]['value'];
+                    //$color = $entity[$field_collection_id]->field_listicle_color['und'][0]['value'];
+                    $color = $entity[$field_collection_id]->field_listicle_color_new['und'][0]['jquery_colorpicker'];
                     $li_type = $node->field_story_templates[LANGUAGE_NONE][0]['value'];
                     $color = ($color) ? $color : '#000000';
                     if ($li_type == 'bullet_points') {
@@ -624,7 +625,7 @@ if (!empty($content)):
                       $listicle_output.= '<span>' . $num . '</span>';
                     }
                     if (isset($type)) {
-                      $listicletype = '<span class="listicle-type" style="color: ' . $color . '">' . $type . ': </span>';
+                      $listicletype = '<span class="listicle-type" style="color: #' . $color . '">' . $type . ': </span>';
                     }
                     $listicle_output.= '<div class="listicle-description">' . $listicletype . $description . '</div>';
                     $listicle_output.= '</div>';

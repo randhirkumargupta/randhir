@@ -595,6 +595,10 @@
   }
 }
 @media only screen and (max-width: 768px) {
+  .block-itg-ads {
+    overflow: hidden;
+  }
+
   .widget-wrapper {
     overflow: initial;
   }
@@ -1574,6 +1578,10 @@
   }
 
   /*election page css end*/
+  #block-itg-menu-manager-third-level-menu {
+    z-index: 999999;
+    position: relative;
+  }
 }
 @media only screen and (max-width: 767px) {
   /*css start oscar-layout-page */
@@ -2377,6 +2385,10 @@
     font-size: 18px;
     line-height: 37px;
   }
+
+  .story-section .story-right.photo-story .multiple-photo {
+    padding: 0;
+  }
 }
 @media only screen and (max-width: 340px) {
   .story-section .story-right.photo-story .fa-chevron-left, .story-section .story-right.photo-story .fa-chevron-right {
@@ -3072,9 +3084,17 @@
     height: 37px;
     overflow: hidden;
   }
+
+  body.section-common .row {
+    overflow: hidden;
+  }
 }
 /*End CSS Desktop version*/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
+  .story-section .snap-post .agbutton, .story-section .snap-post .discription {
+    text-align: center;
+  }
+
   .widget-wrapper.top_stories_ordering .data-holder .block-itg-widget {
     overflow: scroll;
     max-height: 663px;
@@ -3093,5 +3113,17 @@
   }
   #block-views-video-landing-header-block .social-likes ul li {
     float: left;
+  }
+
+  #block-views-photo-landing-slider-block .social-icon ul {
+    display: table;
+  }
+  #block-views-photo-landing-slider-block .social-icon ul li {
+    display: table-cell;
+    text-align: center;
+    float: none;
+  }
+  #block-views-photo-landing-slider-block .social-icon ul li a {
+    padding: 0 5px;
   }
 }

@@ -425,8 +425,8 @@ function itg_menu_manager_form_validate($form , &$form_state) {
     }
 
     if ($values['display_icon'] == 1 && $values['url_type'] == 'external' && $values['menu_level'] == 'vertical' && !$values['category_icon']) {
-      $errors[] = t("For external vertical menu category icon is required.");
-      drupal_add_css(".form-item-sections {display:none !important}" , "inline");
+      //$errors[] = t("For external vertical menu category icon is required.");
+      //drupal_add_css(".form-item-sections {display:none !important}" , "inline");
     }
 
     if ($values['menu_level'] == '') {

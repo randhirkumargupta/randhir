@@ -87,11 +87,21 @@ function itg_podcast_form_alter(&$form, &$form_state, $form_id) {
           'file_validate_size' => array(format_size(file_upload_max_size())),
         ),
       );
+      if (!isset($form['#node']->nid)) {
+       $form['field_podcast_configuration'][LANGUAGE_NONE]['#default_value'] = array('commentbox');
+      }
       foreach ($form['field_podcast_audio_upload'][LANGUAGE_NONE] as $key => $fieldcollection) {
         if (is_numeric($key)) {
           $form['field_podcast_audio_upload'][LANGUAGE_NONE][$key]['field_podcast_upload_audio_file'][LANGUAGE_NONE][0]['#upload_validators']['itg_audio_custom_field_validate'] = array(1, 2);
         }
       }
+      
+      $form['field_story_comment_question']['#states'] = array(
+        'visible' => array(
+            ':input[name="field_podcast_configuration[und][commentbox]"]' => array('checked' => TRUE),
+        )
+      );
+      
       $form['actions']['submit']['#submit'][] = 'itg_podcast_submit_status_message';
       $form['actions']['submit']['#submit'][] = 'itg_podcast_custom_submit';
       drupal_add_css("#field-primary-category-html-text-add-more-wrapper, #edit-field-story-category .description , .field-name-field-podcast-audio-length {display:none !important}", array("type" => "inline", "scope" => "footer"));
@@ -198,6 +208,7 @@ function itg_podcast_custom_validate($form, &$form_state) {
  */
 function itg_podcast_after_build($form, &$form_state) {
   global $user, $base_url;
+  
   $form['original_image_fids'] = array(
     '#type' => 'hidden',
     '#value' => $form_state['input']['original_image_fids'],

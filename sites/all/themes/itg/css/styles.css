@@ -4469,6 +4469,12 @@ h1.category-heading {
   width: 100%;
   height: 55vh;
 }
+.live-block .breaking-section .breaking-discription a {
+  color: #026bc5;
+}
+.live-block .breaking-section .breaking-discription a:hover {
+  text-decoration: underline;
+}
 .live-block .breaking-section .social-share {
   margin-top: 10px;
 }
@@ -9949,8 +9955,7 @@ section.sidebar .block-itg-ads {
   float: right;
 }
 #block-itg-menu-manager-third-level-menu ul li {
-  display: inline-block;
-  vertical-align: top;
+  float: left;
 }
 #block-itg-menu-manager-third-level-menu ul li a {
   color: #fff;
@@ -9987,6 +9992,38 @@ section.sidebar .block-itg-ads {
   font-size: 8px;
   vertical-align: top;
   padding-top: 5px;
+}
+#block-itg-menu-manager-third-level-menu .third-level-menu li.more {
+  position: relative;
+}
+#block-itg-menu-manager-third-level-menu .third-level-menu li.more span {
+  padding: 5px 10px;
+  float: left;
+  width: 50px;
+  cursor: pointer;
+  height: 30px;
+}
+#block-itg-menu-manager-third-level-menu .third-level-menu li.more span .fa-circle {
+  font-size: 7px;
+  color: #fff;
+  margin: 0 2px;
+}
+#block-itg-menu-manager-third-level-menu .third-level-menu li.more ul#overflow {
+  display: none;
+  position: absolute;
+  right: 0;
+  width: 200px;
+  top: 30px;
+  background: #595959;
+  padding: 0;
+  z-index: 999999;
+}
+#block-itg-menu-manager-third-level-menu .third-level-menu li.more ul#overflow li {
+  float: none;
+}
+#block-itg-menu-manager-third-level-menu .third-level-menu li.more ul#overflow li a {
+  padding: 3px 10px;
+  height: auto;
 }
 
 /*css end special page*/
@@ -10740,6 +10777,46 @@ section.sidebar .block-itg-ads {
   height: 5px;
   margin-top: -2px;
   background: #ddd;
+}
+.view-live-tv-programs ul.pager {
+  margin: 10px 0;
+  list-style-type: none;
+  text-align: center;
+}
+.view-live-tv-programs ul.pager li {
+  display: inline-block;
+  vertical-align: top;
+}
+.view-live-tv-programs ul.pager li.pager-current {
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+  font-family: "Roboto", sans-serif;
+}
+.view-live-tv-programs ul.pager li.pager-item a {
+  display: block;
+  height: 25px;
+  width: 25px;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 25px;
+  color: #323232;
+  font-family: "Roboto", sans-serif;
+}
+.view-live-tv-programs ul.pager li.pager-item a:hover {
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+}
+.view-live-tv-programs ul.pager li.pager-next a, .view-live-tv-programs ul.pager li.pager-last a, .view-live-tv-programs ul.pager li.pager-first a, .view-live-tv-programs ul.pager li.pager-previous a {
+  color: #323232;
+  line-height: 25px;
+}
+.view-live-tv-programs ul.pager li.pager-next.pager-first.first, .view-live-tv-programs ul.pager li.pager-next.pager-last.last, .view-live-tv-programs ul.pager li.pager-last.pager-first.first, .view-live-tv-programs ul.pager li.pager-last.pager-last.last, .view-live-tv-programs ul.pager li.pager-first.pager-first.first, .view-live-tv-programs ul.pager li.pager-first.pager-last.last, .view-live-tv-programs ul.pager li.pager-previous.pager-first.first, .view-live-tv-programs ul.pager li.pager-previous.pager-last.last {
+  display: none;
 }
 .view-live-tv-programs h3 {
   display: block;
@@ -13590,6 +13667,10 @@ span.close_btt {
   display: inline-block;
   vertical-align: top;
   width: 100%;
+}
+
+.front [id*="block-itg-widget-we-may-suggest"] .may-be-suggest-container h3 {
+  display: none !important;
 }
 
 .no-tv-program {

@@ -11,7 +11,8 @@ function itg_quiz_winners_mail_list() {
     $user_email_arr[] = $value['user_email'];
   }
   $user_email_arr_unique = array_unique($user_email_arr);
-  $user_email_str = implode(',',$user_email_arr_unique);
+//  $user_email_str = implode(',',$user_email_arr_unique);
+  $user_email_str = 'gourav.walia@kelltontech.com';
   
   if (function_exists('itg_mail_templates_get_mailcontent')) {
     $mail_data = itg_mail_templates_get_mailcontent('Quiz');
@@ -117,7 +118,7 @@ function itg_quiz_get_mail_content($nid, $get_mail_data) {
     $winners .= '<p>' . $i . '. ' . $value['user_name'] . '(' . $value['quiz_score'] . ')' . '</p>';
     $i++;
   }
-  $content_end ='<p>&nbsp;</p><p>Thanks,</p><p>India Today Team</p>';
+//  $content_end ='<p>&nbsp;</p><p>Thanks,</p><p>India Today Team</p>';
   $final_output = $content . $winners .  $content_end;
   return $final_output;
 }

@@ -116,8 +116,11 @@ function itg_common_permission() {
  * {@inheritdoc}
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
-  global $user, $base_url;
+  global $user, $base_url,$theme;
   $arg = arg();
+  if($theme == 'itgadmin') {
+    $form['actions']['delete']['#access'] = FALSE;
+  }
   // get category machine name
   if ($form_id == 'taxonomy_form_term' && $form['#vocabulary']->machine_name != 'category_management') {
     if (!in_array('administrator', $user->roles)) {
@@ -227,7 +230,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // Extra meta tags element hide from form
-  if ($form_id == 'mega_review_critic_node_form' || $form_id == 'custom_html_widgets_node_form' || $form_id == 'story_node_form' || $form_id == 'itg_celebrity_profile_node_form' || $form_id == 'blog_node_form' || $form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'itg_funalytics_node_form') {
+  if ($form_id == 'mega_review_critic_node_form' || $form_id == 'custom_html_widgets_node_form' || $form_id == 'story_node_form' || $form_id == 'itg_celebrity_profile_node_form' || $form_id == 'blog_node_form' || $form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'itg_funalytics_node_form' || $form_id == 'mail_templates_node_form') {
     $form['#after_build'][] = 'itg_common_cancel_button';
   }
   if (!empty($form['#term']) && is_array($form['#term'])) {
@@ -456,20 +459,13 @@ function itg_common_date_popup_process_alter(&$element, &$form_state, &$context)
 
 
 
-
-
-
-
-
 /**
  * Implementation of hook_node_presave().
  * @param object $node
  */
 
-
-
 function itg_common_node_presave($node) {
-  //global $ctype_array;
+  
   $ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
   switch ($node->type) {
     case 'astro':
@@ -487,9 +483,7 @@ function itg_common_node_presave($node) {
         elseif ($node->op == 'Save as Draft' || $node->status == 0) {
           $node->status = 0;
         }
-      }
-      
-        
+      } 
   }
  
 }
@@ -796,8 +790,7 @@ function itg_custom_lock_delete() {
   if (!empty($_GET['nid'])) {
     if (function_exists('content_lock_release')) {
       content_lock_release($_GET['nid'], $user->uid);
-    }
-    
+    }    
     //content_lock_release_own_item($_GET['nid'], FALSE, TRUE);
   }
   exit;
@@ -900,8 +893,8 @@ function get_term_name_from_tid($tid, $vid = CATEGORY_MANAGMENT) {
 function itg_custom_get_user_details($uid) {
   if(!empty($uid)) {
   $query = db_select('users', 'u');
-  $query->join('field_data_field_first_name', 'f', 'u.uid = f.entity_id');
-  $query->join('field_data_field_last_name', 'g', 'u.uid = g.entity_id');
+  $query->leftjoin('field_data_field_first_name', 'f', 'u.uid = f.entity_id');
+  $query->leftjoin('field_data_field_last_name', 'g', 'u.uid = g.entity_id');
   $query->fields('u', array('uid'))
           ->fields('u', array('mail'))
           ->fields('u', array('name'))
@@ -921,6 +914,7 @@ function itg_custom_get_user_details($uid) {
   }
 }
 
+
 function itg_common_token_info_alter(&$info) {
   //echo '@@@@@';
   //p($info['tokens']['node']);
@@ -932,3 +926,9 @@ function itg_common_token_info_alter(&$info) {
 //  echo $dd;exit;
   //unset($info['node']['field_circular_reference']);
 }
+
+function _occupation_from_tid_for_sef_url($tid) {
+  $term_data = taxonomy_term_load($tid);
+  return $term_data->name;
+}
+

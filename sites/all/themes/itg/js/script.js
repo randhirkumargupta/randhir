@@ -379,9 +379,10 @@ jQuery(document).ready(function () {
       window.location.href = urldata;
     }
     if(value.length != 0){
-      jQuery('#header .search-icon-parent').find('.search-icon-search').show().prev().hide();
+      el.closest('.search-icon-parent').find('.search-icon-search').show().prev().hide();
+      
     } else{
-      jQuery('#header .search-icon-parent').find('.search-icon-default').show().next().hide();
+      el.closest('.search-icon-parent').find('.search-icon-default').show().next().hide();
     }
   });
   jQuery('.search-icon-search').click(function () {
@@ -398,7 +399,7 @@ jQuery(document).ready(function () {
       jQuery('.container.header-logo').prependTo('.itg-logo-container');
 
       var mouse_is_inside = false;
-      jQuery('.search-icon-parent').hover(function(){ 
+      jQuery('#header .search-icon-parent, #footer .search-icon-parent').hover(function(){ 
           mouse_is_inside=true; 
       }, function(){ 
           mouse_is_inside=false; 
@@ -944,4 +945,48 @@ function setSidebarHeight(){
   var sticky_sidebar = jQuery('.region-sidebar-second');
   var sticky_sidebar_height = sticky_sidebar.outerHeight(true);
   sticky_sidebar.closest('.sidebars').css('height', sticky_sidebar_height);
+}
+
+
+jQuery(window).load(function(){
+  
+  $navWidth = jQuery('.third-level-menu').width();
+  navItemWidth = 0;
+  $navItems = jQuery('.third-level-menu > li:not(.more)');
+  $navItems.each(function() {
+    navItemWidth += jQuery(this).width();
+  });
+  if(navItemWidth > $navWidth){
+    jQuery('.third-level-menu').append('<li class="more"> <span><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i></span><ul id="overflow"></ul></li>');
+    navigationResize();
+  }
+  
+  jQuery('.third-level-menu li.more span').click(function(){
+    jQuery(this).next().slideToggle();
+  });
+  
+});
+window.onresize = navigationResize;
+
+function navigationResize() {  
+  jQuery('.third-level-menu li.more').before(jQuery('#overflow > li'));
+  
+  var $navItemMore = jQuery('.third-level-menu > li.more'),
+  		$navItems = jQuery('.third-level-menu > li:not(.more)'),
+      navItemMoreWidth = navItemWidth = $navItemMore.width(),
+      windowWidth = jQuery('.third-level-menu').width(),
+      navItemMoreLeft, offset, navOverflowWidth;
+  
+  $navItems.each(function() {
+    navItemWidth += jQuery(this).width();
+  });
+  
+  navItemWidth > windowWidth ? $navItemMore.show() : $navItemMore.hide();
+    
+  while (navItemWidth > windowWidth) {
+    navItemWidth -= $navItems.last().width();
+    $navItems.last().prependTo('#overflow');
+    $navItems.splice(-1,1);
+  }
+  
 }

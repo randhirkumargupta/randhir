@@ -157,6 +157,10 @@ function itg_story_form_alter(&$form , &$form_state , $form_id) {
   switch ($form_id) {
     case 'story_node_form':
       global $base_url , $user;
+      // checked comment box by default
+      if (!isset($form['#node']->nid)) {
+        $form['field_story_configurations'][LANGUAGE_NONE]['#default_value'] = array('commentbox');
+      }
       if ($user->uid != 1) {
         unset($form['field_story_short_headline']);
         unset($form['field_story_long_head_line']);
@@ -413,7 +417,7 @@ function itg_story_node_validate($node , $form , &$form_state) {
 function itg_story_after_build($form , &$form_state) {
 
   global $user , $base_url;
-  
+
   if (empty($form_state['input']['op'])) {
     unset($_SESSION['unique']);
   }
@@ -946,11 +950,13 @@ function itg_story_photo_story_html($node_id) {
       }
       $entity_obj = entity_load('field_collection_item' , array($val['value']));
       $photo_story_img_path = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['uri'];
-      $photo_story_file_name = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['filename'];
+      //$photo_story_file_name = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['filename'];
       $photo_story_img = image_style_url('photo_story_771x432' , $photo_story_img_path);
       $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
+      $photo_story_img_title = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['title'];
+      $photo_story_img_alt = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['alt'];
       $html .= '<div class="photo-slider">';
-      $html .= $next_link . '<img src="' . $photo_story_img . '" title="' . $photo_story_file_name . '" alt="photo_story_img" />' . $previous_link;
+      $html .= $next_link . '<img src="' . $photo_story_img . '" title="' . $photo_story_img_title . '" alt="'.$photo_story_img_alt.'" />' . $previous_link;
       $html .= '<div class="description"><p>' . $photo_story_desc . '</p></div>';
       $html .= '</div>';
     }

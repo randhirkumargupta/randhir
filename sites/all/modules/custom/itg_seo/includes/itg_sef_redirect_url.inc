@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Implementing 'itg_common_custompath_insert_load'.
  * @param $node object
@@ -24,33 +25,29 @@ function itg_common_custompath_insert_load($node) {
       $node_sef = $node->title;
     }
   }
-  
+
   if (!empty($node->workbench_moderation_state_new)) {
     if ($node->workbench_moderation_state_new == 'draft') {
       $published_date = date('Y-m-d' , $node->created);
-    } else if ($node->workbench_moderation_state_new == 'published') {
-        $published_date = date('Y-m-d' , $node->changed);
+    }
+    else if ($node->workbench_moderation_state_new == 'published') {
+      $published_date = date('Y-m-d' , $node->changed);
     }
   }
   else {
     if ($node->status == 0) {
       $published_date = date('Y-m-d' , $node->created);
-    } else if ($node->status == 1) {
-        $published_date = date('Y-m-d' , $node->changed);
+    }
+    else if ($node->status == 1) {
+      $published_date = date('Y-m-d' , $node->changed);
     }
   }
-  
+
   $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
-  if (!empty($getsection)) {
-//    $parents = taxonomy_get_parents_all($getsection);
-//    if (isset($parents) && !empty($parents)) {
-//      foreach ($parents as $key => $val) {
-//        $section_hierarchy[] = $val->name;
-//      }
-//    }
-    if (is_issue_baised_magazine($node)) {
+  if (!empty($getsection) && $node->type != 'reporter') {
+    if ($node->type == 'story' && is_issue_baised_magazine($node)) {
       $pathdata = 'magazine';
-      $pathdata .= '/'. get_path_from_category($getsection);
+      $pathdata .= '/' . get_path_from_category($getsection);
       //Get node type.
       $pathdata .= '/' . $node->type;
       // Get issue date.
@@ -70,7 +67,7 @@ function itg_common_custompath_insert_load($node) {
       // Create url alise for magazine type story.
       //$node->path = array('alias' => $newpath , 'pathauto' => FALSE);
     }
-    elseif (is_photo_story($node)) {
+    elseif ($node->type == 'story' && is_photo_story($node)) {
       //Add path from category.
       $pathdata = get_path_from_category($getsection);
       // Add static value for photo story.
@@ -78,9 +75,9 @@ function itg_common_custompath_insert_load($node) {
       // Add node title.
       $pathdata .= '/' . trim($node_sef);
       // Add node id.
-      $pathdata .= '/' . $node->nid;
+      $pathdata .= '-' . $node->nid;
       // Add workbanch date.
-      $pathdata .= '/' . $published_date;
+      $pathdata .= '-' . $published_date;
       // Prepare SEO friendly node url
       $newpath = itg_common_custompath_insert_val($pathdata);
       return $newpath;
@@ -89,16 +86,34 @@ function itg_common_custompath_insert_load($node) {
     }
     else {
       $set_hierarchy = get_path_from_category($getsection);
-      $pathdata = $set_hierarchy . '/' . $node->type . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
+      $node_CT = $node->type;
+      if ($node_CT == 'photogallery') {
+        $node_CT = 'photo';
+      }
+      elseif ($node_CT == 'videogallery') {
+        $node_CT = 'videos';
+      }
+      $pathdata = $set_hierarchy . '/' . $node_CT . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
       $newpath = itg_common_custompath_insert_val($pathdata);
       return $newpath;
-      //$node->path = array('alias' => $newpath , 'pathauto' => FALSE);
-      
-      /*$set_hierarchy = array_reverse($section_hierarchy);
-      $pathdata = strtolower(implode("/" , $set_hierarchy)) . '/' . $node->type . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
-      $newpath = itg_common_custompath_insert_val($pathdata);
-      $node->path = array('alias' => $newpath , 'pathauto' => FALSE);*/
     }
+  }
+  elseif ($node->type == 'reporter') {
+    $occupation_tid = $node->field_celebrity_pro_occupation['und'][0]['tid'];
+    $occupation = _occupation_from_tid_for_sef_url($occupation_tid);
+    $pathdata = $occupation . '/' . $edited_sef_url;
+    $newpath = itg_common_custompath_insert_val($pathdata);
+    return $newpath;
+  }
+  elseif ($node->type == 'itg_funalytics') {
+    $pathdata = 'understand' . '/' . $edited_sef_url;
+    $newpath = itg_common_custompath_insert_val($pathdata);
+    return $newpath;
+  }
+  elseif ($node->type == 'page' || $node->type == 'blog') {
+    $pathdata = $edited_sef_url;
+    $newpath = itg_common_custompath_insert_val($pathdata);
+    return $newpath;
   }
 }
 
@@ -113,6 +128,38 @@ function is_photo_story($node) {
 function is_issue_baised_magazine($node) {
   $flag = FALSE;
   if (!is_photo_story($node) && !empty($node->field_story_magazine_story_issue['und'][0]['value']) && $node->field_story_magazine_story_issue['und'][0]['value'] == 'magazine_issue_story') {
+    $flag = TRUE;
+  }
+  return $flag;
+}
+
+function is_reporter($node) {
+  $flag = FALSE;
+  if ($node->type == 'reporter') {
+    $flag = TRUE;
+  }
+  return $flag;
+}
+
+function is_itg_funalytics($node) {
+  $flag = FALSE;
+  if ($node->type == 'itg_funalytics') {
+    $flag = TRUE;
+  }
+  return $flag;
+}
+
+function is_mega_review_critic($node) {
+  $flag = FALSE;
+  if ($node->type == 'mega_review_critic') {
+    $flag = TRUE;
+  }
+  return $flag;
+}
+
+function is_basic_page($node) {
+  $flag = FALSE;
+  if ($node->type == 'page') {
     $flag = TRUE;
   }
   return $flag;
@@ -186,45 +233,17 @@ function itg_common_custompath_insert_val($pathdata) {
 }
 
 function get_path_from_category($tid) {
-  $pathdata = '';
-  
+  $section = array();
   $all_terms = taxonomy_get_parents_all($tid);
-  
-  foreach ($all_terms as $key => $val) {
-    if ($val->tid == $tid) {
-     $primary_cat_name = trim($val->name); 
-    }    
-    $section_name = trim($val->name);    
+  $number_parent = count($all_terms);
+  $section_key = $number_parent - 1;
+  $subsection_key = $number_parent - 2;
+  //Section
+  if (isset($all_terms[$section_key]->name)) {
+    $section[] = strtolower($all_terms[$section_key]->name);
   }
-  
-  if ($section_name == $primary_cat_name) {
-    //prepare ur with parimary cat only.
-    $pathdata = strtolower($primary_cat_name);
+  if (isset($all_terms[$subsection_key]->name)) {
+    $section[] = strtolower($all_terms[$subsection_key]->name);
   }
-  else {
-    //prepare ur with parimary cat and section both.
-    $pathdata = strtolower($section_name) . '/' . strtolower($primary_cat_name);
-  }
-  
-  
-  // Get parent of primary category.
-//  $all_terms = taxonomy_get_parents_all($getsection);
-//  $terms_bunch = array_reverse($all_terms);
-//  $section_name = $terms_bunch[0]->name; //section
-  
-  
-  
-  // Get parent of primary category.
-//  $primary_cat_array = taxonomy_term_load($getsection);
-//  $primary_cat_name = $primary_cat_array->name;
-//  // Handle case if section and parimary category are same.
-//  if ($section_name == $primary_cat_name) {
-//    //prepare ur with parimary cat only.
-//    $pathdata .= strtolower($primary_cat_name);
-//  }
-//  else {
-//    //prepare ur with parimary cat and section both.
-//    $pathdata .= strtolower($section_name) . '/' . strtolower($primary_cat_name);
-//  }
-  return $pathdata;
+  return implode('/' , $section);
 }

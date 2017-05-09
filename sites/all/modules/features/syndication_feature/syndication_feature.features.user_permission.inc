@@ -58,11 +58,9 @@ function syndication_feature_user_default_permissions() {
     'roles' => array(
       'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
       'Expert' => 'Expert',
       'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
@@ -74,9 +72,7 @@ function syndication_feature_user_default_permissions() {
     'name' => 'delete any syndication_feed_from_pattern content',
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',
   );
@@ -84,9 +80,7 @@ function syndication_feature_user_default_permissions() {
   // Exported permission: 'delete any syndication_rule content'.
   $permissions['delete any syndication_rule content'] = array(
     'name' => 'delete any syndication_rule content',
-    'roles' => array(
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -96,11 +90,9 @@ function syndication_feature_user_default_permissions() {
     'roles' => array(
       'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
       'Expert' => 'Expert',
       'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
       'administrator' => 'administrator',
     ),
@@ -113,10 +105,8 @@ function syndication_feature_user_default_permissions() {
     'roles' => array(
       'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
       'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
     ),
     'module' => 'node',
@@ -125,9 +115,7 @@ function syndication_feature_user_default_permissions() {
   // Exported permission: 'delete own syndication_rule content'.
   $permissions['delete own syndication_rule content'] = array(
     'name' => 'delete own syndication_rule content',
-    'roles' => array(
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
