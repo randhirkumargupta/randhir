@@ -282,7 +282,7 @@ function frontend_breadcrumb_display($id = NULL , $entity_object = NULL , $singl
 //  $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo">' . l('<span itemprop="title">' . t($title_val) , 'node/' . $entity_object->nid , array('html' => TRUE , 'attributes' => array('itemprop' => 'url'))) . '</span>';
 //  }
 
-  $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo"><span itemprop="title">' . t($title_val) . '</span>';
+  $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo"><span itemprop="title">' . t($title_val) . '</span></div>';
   $section_link = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">'
       . l('<span itemprop="title">News</span>' , '<front>' , array('html' => TRUE , 'attributes' => array('itemprop' => 'url'))) . '</div>';
 
