@@ -234,9 +234,16 @@ function itg_ask_expert_node_insert($node) {
           $mail_content = $body_state;
           $mail_subject = $ask_expert_submit_query->field_mail_subject_expert[LANGUAGE_NONE][0]['value'];
         }
+        $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+            <html xmlns:v="urn:schemas-microsoft-com:vml">
+              <head><title></title></head>
+              <body style="margin:0; padding:0;">';
+        $content .= $mail_content;
+        $content .= '</body>';
+        $content .= '</html>';
 //        $mail_content = itg_ask_expert_get_mail_content($node);
         $params = array(
-            'body' => $mail_content,
+            'body' => $content,
             'subject' => $mail_subject,
         );
 //        $to = implode(',', $expert_arr);
@@ -276,9 +283,15 @@ function itg_ask_expert_node_update($node) {
           $body_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $body_name);
           $mail_content = $body_url;
         }
-        
+        $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+            <html xmlns:v="urn:schemas-microsoft-com:vml">
+              <head><title></title></head>
+              <body style="margin:0; padding:0;">';
+        $content .= $mail_content;
+        $content .= '</body>';
+        $content .= '</html>';
         $params = array(
-            'body' => $mail_content,
+            'body' => $content,
             'subject' => $mail_subject,
         );
         $mail = drupal_mail('itg_ask_expert', 'send_mail_to_expert', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
