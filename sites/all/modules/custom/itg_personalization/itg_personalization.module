@@ -85,7 +85,7 @@ function itg_personalization_menu() {
 function itg_personalization_home_page() {
   global $user;
   $data = array();
-  drupal_add_js(drupal_get_path('module', 'itg_personalization') . '/js/itg_personalization.js');
+  drupal_add_js(drupal_get_path('module', 'itg_personalization') . '/js/itg_personalization.js', array('scope' => 'footer'));
   // Load user fields
   $user_fields = user_load($user->uid);
 

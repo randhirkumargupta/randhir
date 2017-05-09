@@ -290,9 +290,9 @@ function itg_photogallery_after_build($form, &$form_state) {
 
   drupal_add_js(array('itg_photogallery' => array('settings' => $settings)), array('type' => 'setting'));
   if (arg(0) != 'unpublished-photogallery') {
-    drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/upload.js', array('weight' => 2));
+    drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/upload.js', array('weight' => 2, 'scope' => 'footer'));
   }
-  drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/js/itg_photogallery.js', array('weight' => 3));
+  drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/js/itg_photogallery.js', array('weight' => 3, 'scope' => 'footer'));
 
   return $form;
 }
@@ -599,7 +599,7 @@ function itg_photogallery_form_views_exposed_form_alter(&$form, &$form_state, $f
         'empty' => 'No',
     );
     $form['field_featured_value_op']['#options'] = $new_options;
-    drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/js/itg_photogallery_expose_filter.js', 'file');
+    drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/js/itg_photogallery_expose_filter.js', array('scope' => 'footer'));
     drupal_add_css(".form-item-field-featured-value {display:none !important}", "inline");
   }
 }

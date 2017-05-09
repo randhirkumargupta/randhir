@@ -103,7 +103,7 @@ function alter_submit_status_message(&$form, $form_state) {
  * @return array
  */
 function itg_poll_after_build($form, &$form_state) {
-  drupal_add_js(drupal_get_path('module', 'itg_poll') . '/js/itg_pollnew.js', array('weight' => 3));
+  drupal_add_js(drupal_get_path('module', 'itg_poll') . '/js/itg_pollnew.js', array('weight' => 3, 'scope' => 'footer'));
   global $user, $base_url;
 //  unset($form['metatags']['intro_text']['#markup']);
 //  $form['title']['#title'] = 'Poll Question';

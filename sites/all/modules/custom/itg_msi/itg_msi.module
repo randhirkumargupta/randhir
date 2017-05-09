@@ -200,7 +200,7 @@ function itg_msi_form_after_build($form, &$form_state) {
     drupal_add_js(array('itg_msi' => array('settings' => $settings)), array('type' => 'setting'));
 
     //Add JS for magazine, supplement and issue
-    drupal_add_js(drupal_get_path('module', 'itg_msi') . '/js/itg_msi.js', array('weight' => 1));
+    drupal_add_js(drupal_get_path('module', 'itg_msi') . '/js/itg_msi.js', array('weight' => 1, 'scope' => 'footer'));
 
     //Unset metatag description
     unset($form['metatags']['intro_text']['#markup']);
@@ -279,7 +279,7 @@ function itg_msi_views_pre_render(&$view) {
 
     //Add "Create Issue" button on listing page of issue
     if ($view->name == "manage_issues") {
-        drupal_add_js(drupal_get_path('module', 'jquery_update') . '/replace/ui/ui/minified/jquery.ui.datepicker.min.js');
+        drupal_add_js(drupal_get_path('module', 'jquery_update') . '/replace/ui/ui/minified/jquery.ui.datepicker.min.js', array('scope' => 'footer'));
         $header_content_issue = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
         $header_content_issue .= '<a href="./node/add/issue">Create Issue</a>';
         $view->attachment_before = $header_content_issue;

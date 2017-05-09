@@ -109,10 +109,10 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       $form['field_service_title']['#prefix'] = '<div id="service_xml_replace_wrapper">';
       $form['field_service_title']['#suffix'] = '</div>';
 
-      drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', 'file');
+      drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', array('scope' => 'footer'));
 
       /* JS library  added to beutify xml pattern */
-      drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/jquery.format.js', 'file');
+      drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/jquery.format.js', array('scope' => 'footer'));
       /* check for default value */
 
       $form['field_service_delivery_mode'][LANGUAGE_NONE]['#ajax'] = array(

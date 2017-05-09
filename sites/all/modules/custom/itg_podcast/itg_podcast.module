@@ -207,7 +207,7 @@ function itg_podcast_after_build($form, &$form_state) {
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
   drupal_add_js(array('itg_podcast' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_podcast') . '/js/itg_podcast.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_podcast') . '/js/itg_podcast.js', array('weight' => 1, 'scope' => 'footer'));
   return $form;
 }
 
@@ -276,7 +276,7 @@ function itg_podcast_field_attach_form($entity_type, $entity, &$form, &$form_sta
     //If we are looking at our field type and specific widget type, and we are multiple entries
     if (($field['cardinality'] == FIELD_CARDINALITY_UNLIMITED) && ($field['type'] == "field_collection")) {
       if ($field['bundles']['node'][0] == "podcast") {
-        drupal_add_js(drupal_get_path('module', 'itg_podcast') . '/js/upload.js', array('weight' => 2));
+        drupal_add_js(drupal_get_path('module', 'itg_podcast') . '/js/upload.js', array('weight' => 2, 'scope' => 'footer'));
         // Check just in case the button is here, and add another #submit function
         if (isset($form[$field['field_name']]['und']['add_more'])) {
           // add a simple select list, this defaults to numb 3
