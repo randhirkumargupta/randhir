@@ -58,9 +58,9 @@ function mail_templates_field_group_info() {
     'label' => 'Blog',
     'weight' => '11',
     'children' => array(
-      0 => 'field_mail_subject_blog',
+      0 => 'field_blog_status',
       1 => 'field_mail_body_blog',
-      2 => 'field_blog_status',
+      2 => 'field_mail_subject_blog',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -231,9 +231,9 @@ function mail_templates_field_group_info() {
     'label' => 'Photo Gallery',
     'weight' => '14',
     'children' => array(
-      0 => 'field_photo_gallery_status',
+      0 => 'field_mail_body_photo_gallery',
       1 => 'field_mail_subject_photo_gallery',
-      2 => 'field_mail_body_photo_gallery',
+      2 => 'field_photo_gallery_status',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -266,9 +266,9 @@ function mail_templates_field_group_info() {
     'label' => 'Podcast',
     'weight' => '13',
     'children' => array(
-      0 => 'field_podcast_status',
+      0 => 'field_mail_body_podcast',
       1 => 'field_mail_subject_podcast',
-      2 => 'field_mail_body_podcast',
+      2 => 'field_podcast_status',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -370,18 +370,23 @@ function mail_templates_field_group_info() {
     'label' => 'Quiz Completion',
     'weight' => '16',
     'children' => array(
-      0 => 'field_mail_subject_quiz_completi',
-      1 => 'field_mail_body_quiz_completion',
+      0 => 'field_mail_body_quiz_completion',
+      1 => 'field_mail_subject_quiz_completi',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Quiz Completion',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-quiz-completion field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'mail-template-category quiz_completion',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_quiz_completion|node|mail_templates|form'] = $field_group;
@@ -433,9 +438,9 @@ function mail_templates_field_group_info() {
     'label' => 'Story',
     'weight' => '12',
     'children' => array(
-      0 => 'field_story_status',
+      0 => 'field_mail_body_story',
       1 => 'field_mail_subject_story',
-      2 => 'field_mail_body_story',
+      2 => 'field_story_status',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -541,9 +546,9 @@ function mail_templates_field_group_info() {
     'label' => 'Upload Video',
     'weight' => '15',
     'children' => array(
-      0 => 'field_video_status',
+      0 => 'field_mail_body_video',
       1 => 'field_mail_subject_video',
-      2 => 'field_mail_body_video',
+      2 => 'field_video_status',
     ),
     'format_type' => 'div',
     'format_settings' => array(

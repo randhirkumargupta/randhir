@@ -9,7 +9,7 @@
         $byline_id = $ans_detail[$mega_item['value']]->field_images['und'][0]['uri'];
         ?>
         <li>
-          <figure class="" img-fid=" <?php print $ans_detail[$mega_item['value']]->field_images['und'][0]['fid']; ?>">
+          <figure class="" data-img-fid=" <?php print $ans_detail[$mega_item['value']]->field_images['und'][0]['fid']; ?>">
 
             <img src=<?php print file_create_url($byline_id); ?> width="753" height="543" title="" alt="" />
   <?php //theme('image_style', array('style_name' => 'photgallery_landing_slider_753x543', 'path' => $byline_id));  ?> 
