@@ -40,7 +40,7 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='') {
       $file_name = "video".$nid.".xml";
   }
   if(!$term_feed_path){
-    //$term_feed_path = getcwd() . "/sites/all/modules/custom/itg_mobile_feed/xml_it/videos"; 
+    //$term_feed_path = getcwd() . "/sites/default/files/xml_it/videos"; 
     $term_feed_path = "public://xml_it/videos";
     file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
   }
@@ -105,7 +105,7 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='') {
                     <uurl></uurl>";
 
     //get video tag
-    $videotag = getVideoTagDetail($video_path_info);
+    $videotag = getVideoTagDetail($video_path_info,$file_id);
     if ($videotag) {
       $output .= $videotag;
     }
@@ -153,16 +153,31 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='') {
 //echo $output; exit();
 }
 
+
+function all_video_format($file_id){
+	//$fid = '664';
+	$query = db_select('dailymotion_response_details', 'avf');
+	$query->innerJoin('itg_video_bitrates_data','dma','dma.video_id = avf.video_id');
+	$query->fields('dma',array('response'));
+	$query->condition('avf.fid',$file_id);
+	$all_result = $query->execute()->fetchField();
+	return $all_video_data = json_decode($all_result,TRUE);
+}
+
 /**
  * function for generate video xml tag
  *
  * @return array
  */
-function getVideoTagDetail($video_path_info) {
+function getVideoTagDetail($video_path_info,$file_id = NULL) {
     //print_ar($video_path_info);exit();
     $output = "";
     $video_path_mp4 = $video_path_info['video_path_mp4'];
     $filesize = $video_path_info['filesize'];
+
+//to get the video of all the other formats
+    $video_formats = all_video_format($file_id);
+
     if($video_path_info['dailymtion_flag'] == "yes"){
         
         $output .= "<videoparts>
@@ -173,13 +188,13 @@ function getVideoTagDetail($video_path_info) {
                         <part>".$video_path_mp4."</part>
                     </videoparts_mp4>
                     <videoparts_m3u8>
-                        <part></part>
+                        <part>".$video_formats['stream_h264_hd_url']."</part>
                     </videoparts_m3u8>
                     <flvvideoparts>
-                        <part></part>
+                        <part>".$video_formats['stream_h264_hq_url']."</part>
                     </flvvideoparts>
                     <videoparts_3gp>
-                        <part></part>
+                        <part>".$video_formats['stream_h264_ld_url']."</part>
                     </videoparts_3gp>";
     }
     else{
