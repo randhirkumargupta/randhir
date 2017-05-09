@@ -962,7 +962,7 @@ jQuery(window).load(function(){
   }
   
   jQuery('.third-level-menu li.more span').click(function(){
-    jQuery(this).slideToggle();
+    jQuery(this).next().slideToggle();
   });
   
 });
