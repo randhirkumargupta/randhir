@@ -325,9 +325,9 @@ $url_second = url('file/itg_image_repository/node/story/field_story_extra_large_
  *   Altered form element array.
  */
 function itg_social_media_form_after_build($form, &$form_state) {
-    drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/moment.js');
-    drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js');
-    drupal_add_js(drupal_get_path('module', 'itg_social_media') . '/js/itg_social_media.js');
+    drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/moment.js', array('scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js', array('scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_social_media') . '/js/itg_social_media.js', array('scope' => 'footer'));
 
     return $form;
 }

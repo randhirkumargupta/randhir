@@ -248,7 +248,7 @@ function _vukkul_block_content() {
   }
   $unique_id = $node->type . '_' . $node->nid;
   $author = base64_encode($reporter_node);
-  drupal_add_js('http://vuukle.com/js/vuukle.js', external);
+  drupal_add_js('http://vuukle.com/js/vuukle.js', array('type' => 'external', 'scope' => 'footer'));
   $output = '<script type="text/javascript">
 
                var UNIQUE_ARTICLE_ID = "' . $unique_id . '";
@@ -310,10 +310,10 @@ function vukkul_view() {
 function itg_front_end_common_node_view($node, $view_mode, $langcode) {
 
   if ($node->type == 'breaking_news' && !empty($node->nid) && $node->op != 'Preview') {
-    drupal_add_js(drupal_get_path('module', 'itg_front_end_common') . '/js/itg_front_end_common.js', array('weight' => 2));
-    drupal_add_css('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/dot-luv/jquery-ui.css', array('type' => 'external'));
-    drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', external);
-    drupal_add_js('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js', external);
+    drupal_add_js(drupal_get_path('module', 'itg_front_end_common') . '/js/itg_front_end_common.js', array('weight' => 2, 'scope' => 'footer'));
+    drupal_add_css('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/dot-luv/jquery-ui.css', array('type' => 'external', 'scope' => 'footer'));
+    drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', array('type' => 'external', 'scope' => 'footer'));
+    drupal_add_js('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js', array('type' => 'external', 'scope' => 'footer'));
   }
 }
 

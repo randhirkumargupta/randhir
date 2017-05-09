@@ -683,7 +683,7 @@ function itg_ugc_after_build($form, &$form_state) {
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
   drupal_add_js(array('itg_ugc' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_ugc') . '/js/itg_ugc.js');
+  drupal_add_js(drupal_get_path('module', 'itg_ugc') . '/js/itg_ugc.js', array('scope' => 'footer'));
   // Add js file to form.
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
@@ -877,7 +877,7 @@ function itg_ugc_node_view($node, $view_mode, $langcode) {
     $settings['base_url'] = $base_url;
     $settings['uid'] = $user->uid;
     drupal_add_js(array('itg_ugc' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.js');
+    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.js', array('scope' => 'footer'));
   }
 }
 

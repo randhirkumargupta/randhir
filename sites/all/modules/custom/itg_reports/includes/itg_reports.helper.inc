@@ -56,7 +56,7 @@ function itg_reports_email_autocomplete($string) {
  * @param int $user_id
  */
 function itg_registered_user_report($user_id) {
-  drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file'));
+  drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file', 'scope' => 'footer'));
   return drupal_get_form('itg_registred_user_report_form');
 }
 
@@ -268,7 +268,7 @@ function itg_registered_user_report_section_wise_breakup($user_id) {
       }
     ' ,'inline');
   }
-  drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file'));
+  drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file', 'scope' => 'footer'));
   $registred_users_form = drupal_get_form('itg_registred_user_report_form');
   return $registred_users_form;
 }

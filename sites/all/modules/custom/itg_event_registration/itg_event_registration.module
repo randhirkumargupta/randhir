@@ -369,7 +369,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
   }
   
   // Tab wise permission
-  if ($form_id == 'event_backend_node_form') {
+  if ($form_id == '1event_backend_node_form') {
     $event_tabs = array('step_first' => 'Basic Details', 'step_second' => 'Registration Fees', 'step_program_schedule' => 'Program Schedule', 'step_sponsor' => 'Sponsor', 'step_highlights' => 'Highlights', 'step_media' => 'Media', 'step_configuration' => 'Configuration');
     global $user;
     foreach ($user->roles as $key => $role) {
@@ -540,7 +540,7 @@ function itg_event_registration_form_after_build($form, &$form_state) {
   drupal_add_js(array('itg_event_registration' => array('settings' => $settings)), array('type' => 'setting'));
 
   // Add JS for Event Registration
-  drupal_add_js(drupal_get_path('module', 'itg_event_registration') . '/js/itg_event_registration.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_event_registration') . '/js/itg_event_registration.js', array('weight' => 1, 'scope' => 'footer'));
 
   $form['event_registration_title'] = array(
     '#type' => 'item',

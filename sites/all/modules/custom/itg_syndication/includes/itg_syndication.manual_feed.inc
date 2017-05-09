@@ -43,7 +43,7 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
     $settings['base_url'] = $base_url;
     $settings['uid'] = $user->uid;
     drupal_add_js(array('itg_syndication' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication.js', array('weight' => 1));
+    drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication.js', array('weight' => 1, 'scope' => 'footer'));
 
     // hide save button
     if (!(isset($_GET['type']) && $_GET['type'] != 'article')) {
