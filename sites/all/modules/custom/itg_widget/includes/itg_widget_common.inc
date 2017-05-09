@@ -2395,9 +2395,10 @@ function itg_poll_home_page_polls_select($nid) {
         $poll_image_exist_class = '';
       }
     }
+    
     $polls_info['poll_banner_image'] = $poll_banner_image;
     $polls_info['nid'] = isset($nid) ? $nid : "";
-    $polls_info['title'] = isset($node->title) ? t(substr(check_plain($node->title) , 0 , 65)) . '..' : "";
+    $polls_info['title'] = isset($node->title) ? t(check_plain($node->title)) : "";
     $polls_info['updated'] = isset($node->changed) ? t('Updated:') . '&nbsp;' . date('M d Y H:i' , $node->changed) : "";
     $polls_info['poll_image_exist_class'] = $poll_image_exist_class;
     return theme('itg_poll_homepage_forms' , array('data' => $polls_info));

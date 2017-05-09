@@ -12,7 +12,7 @@ $poll_image_exist_class = '';
 // Title
 
 $updated = $data['updated'];
-$title = '<div class="active-poll-title"><h2>' . t($data['title']) . '</h2><div class="updated-msg">' . $updated . '</div></div>';
+$title = '<div class="active-poll-title"><h2 title="'.$data['title'].'">' . t(mb_strimwidth($data['title'],0,70,'...')) . '</h2><div class="updated-msg">' . $updated . '</div></div>';
 
 // Banner Image
 $no_image_class = '';
