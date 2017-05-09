@@ -783,6 +783,11 @@ function mageimagedimesion() {
   $image_dim['supplement']['field_issue_supp_large_image']['height'] = ISSUE_LARGE_IMAGE_HEIGHT;
   $image_dim['supplement']['field_issue_supp_small_image']['width'] = ISSUE_SMALL_WIDTH;
   $image_dim['supplement']['field_issue_supp_small_image']['height'] = ISSUE_SMALL_HEIGHT;
+  
+  $image_dim['category_management']['field_sponser_logo']['width'] = 40;
+  $image_dim['category_management']['field_sponser_logo']['height'] = 35;
+  $image_dim['category_management']['field_cm_category_banner']['width'] = 650;
+  $image_dim['category_management']['field_cm_category_banner']['height'] = 45;
 
 
   return $image_dim;
