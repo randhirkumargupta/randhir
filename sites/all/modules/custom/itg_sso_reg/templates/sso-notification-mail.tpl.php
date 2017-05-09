@@ -52,7 +52,6 @@ if ($act_type != 'password_changed') {
       <?php 
       foreach ($get_body_vals as $bk => $bv) {
         print '<tr> <td style="padding: 10px 20px;">' . $bv . '</td></tr>';
-        die;
       } 
       ?>
       <tr>
