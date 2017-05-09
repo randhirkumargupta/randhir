@@ -20,8 +20,6 @@ function itg_print_team_send_idea_status_mail($node, $source, $op_type = FALSE) 
       $body_data = $mail_template_data->field_mail_body_print_team[LANGUAGE_NONE][0]['value'];
       $body_datas = str_replace('[itg_mail_token:itg_node_title]', $node->title, $body_data);
       $mail_content = str_replace('Click here for more details', 'Click ' . $idea_link . ' for more details', $body_datas);
-      $mail_content .= '<p>Thanks,</p>';
-      $mail_content .= '<p>India Today Group</p>';
     }
 //    $mail_content = itg_print_team_approval_mail_content($node);
     $user_emails = itg_print_team_get_approval_user_emails('approval_users');
