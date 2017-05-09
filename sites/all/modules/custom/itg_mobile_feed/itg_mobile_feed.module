@@ -257,7 +257,7 @@ function writeFeedFile($feed_file_path, $feed_file_name, $output) {
   $status = 0;
   $return_flag = "";
   $file = $feed_file_path . "/" . $feed_file_name;
-  $fileHandle = fopen($file, 'w') or die("can't open file");
+  $fileHandle = fopen($file, 'w+') or die("can't open file");
   chmod($file, 0777);
   if (fwrite($fileHandle, $output)) {
 
