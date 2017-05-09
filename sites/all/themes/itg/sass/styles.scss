@@ -3135,7 +3135,9 @@ h1.category-heading{
                 padding: 0 10px;
             }
         }
-.view-category-wise-content-list, .view-blog-listing, .page-podcasts-listing .view-podcasts-listing{    
+.view-category-wise-content-list, .view-blog-listing, 
+.page-podcast .view-podcasts-listing,    
+.page-podcasts-listing .view-podcasts-listing{    
     @include listing-with-image(catagory-listing,left,10px,pic,detail);
     .catagory-listing{
         padding: 20px 0;
@@ -10420,24 +10422,27 @@ h1.about-us-heading{
 
 
 /*css start Podcast page*/
-.page-podcasts-listing .view-podcasts-listing{
+.page-podcasts-listing, .page-podcast{
+  .view-podcasts-listing{
     .podcast-left{
-        @include pos(relative);
-        span{
-            bottom: 0;
-            left: 0;
-            position: absolute;
-            padding: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: #fff;
-            font-size: 12px;
-            font-family: Roboto;
-            i{
-                font-size: 14px;
-            }
+      @include pos(relative);
+      span{
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        padding: 5px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        font-size: 12px;
+        font-family: Roboto;
+        i{
+          font-size: 14px;
         }
+      }
     }
-}
+  }
+} 
+
 #block-itg-widget-podcast-header{
     .podcast-header-container{    
         h1{
