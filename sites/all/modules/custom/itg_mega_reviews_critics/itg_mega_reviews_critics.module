@@ -64,7 +64,7 @@ function itg_mega_reviews_critics_form_after_build($form, &$form_state) {
     $form['field_mega_review_review']['und'][$i]['#title'] = t('Review ') . $count;
   }
 
-  drupal_add_js(drupal_get_path('module', 'itg_mega_reviews_critics') . '/js/itg_mega_reviews_critics.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_mega_reviews_critics') . '/js/itg_mega_reviews_critics.js', array('weight' => 1, 'scope' => 'footer'));
 
   return $form;
 }
