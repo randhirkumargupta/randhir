@@ -13669,8 +13669,8 @@ span.close_btt {
   width: 100%;
 }
 
-.front #block-itg-widget-we-may-suggest .may-be-suggest-container h3 {
-  display: none;
+.front [id*="block-itg-widget-we-may-suggest"] .may-be-suggest-container h3 {
+  display: none !important;
 }
 
 .no-tv-program {
