@@ -35,7 +35,7 @@ function itg_registered_vs_anonymous_user_form() {
     '#markup' => print_registered_vs_anonymous_chart() ,
   );
 
-  drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file'));
+  drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file', 'scope' => 'footer'));
   return $form;
 }
 

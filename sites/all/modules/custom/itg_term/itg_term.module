@@ -517,7 +517,7 @@ function itg_term_form_views_exposed_form_alter(&$form , &$form_state) {
   }
 
   if (isset($form['#id']) && $form['#id'] == 'views-exposed-form-tags-management-page') {
-    drupal_add_js(drupal_get_path('module' , 'itg_term') . '/itg_term_date_popup.js' , array('weight' => 13));
+    drupal_add_js(drupal_get_path('module' , 'itg_term') . '/itg_term_date_popup.js' , array('weight' => 13, 'scope' => 'footer'));
     $settings = array();
     $settings['base_url'] = $base_url;
 

@@ -351,7 +351,7 @@ function itg_newsletter_form_after_build($form , &$form_state) {
   drupal_add_js(array('itg_newsletter' => array('settings' => $settings)) , array('type' => 'setting'));
 
   //Add JS for itg_newsletter
-  drupal_add_js(drupal_get_path('module' , 'itg_newsletter') . '/js/itg_newsletter.js' , array('weight' => 1));
+  drupal_add_js(drupal_get_path('module' , 'itg_newsletter') . '/js/itg_newsletter.js' , array('weight' => 1, array('scope' => 'footer')));
 
   //Add JS for in-line validation
   $form['#attached']['js'] = array(drupal_get_path('module' , 'itg_astro') . '/js/jquery.validate.min.js');

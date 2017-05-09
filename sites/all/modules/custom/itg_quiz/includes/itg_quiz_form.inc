@@ -31,7 +31,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
   if ($node->type == 'quiz') {
 
     // Add JS for front
-    drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz_front.js');
+    drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz_front.js', array('scope' => 'footer'));
 
     // If quiz is not published
     if (!$node->status) {
@@ -88,7 +88,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
     // Add JS for one question at a time
     $quiz_question_format = $node->field_survey_questions_format[LANGUAGE_NONE][0]['value'];
     if ($quiz_question_format == 'One question at a time') {
-      drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz_questions.js');
+      drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz_questions.js', array('scope' => 'footer'));
     }
 
     // If question display type is "random", shuffle the array

@@ -303,7 +303,7 @@ function itg_category_multiple_after_build($form, &$form_state) {
 
   //   itg_sub_sub_category  itg_sub_sub_sub_category itg_primary_category
 
-  drupal_add_js(drupal_get_path('module', 'itg_category_multiple') . '/js/itg_category_multiple.js');
+  drupal_add_js(drupal_get_path('module', 'itg_category_multiple') . '/js/itg_category_multiple.js', array('scope' => 'footer'));
 
   return $form;
 }
