@@ -41,6 +41,14 @@
                 asNavFor: '.multiple-photo-disc',
                 focusOnSelect: true,
                 centerPadding: '10px',
+                responsive: [  
+                              {
+                                breakpoint: 480,
+                                settings: {
+                                  slidesToShow: 3                                            
+                                }
+                              }
+                            ]
             });
             
             $('.multiple-photo-disc').on('afterChange', function (event, slick, currentSlide) {
