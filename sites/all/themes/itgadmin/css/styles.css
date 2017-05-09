@@ -775,7 +775,7 @@ a.ckeditor_links:hover {
   text-decoration: underline;
 }
 
-.astrick, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-1 .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-pti-words-limit .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-survey-end-date fieldset > legend:after, .edit-field-pti-magazine-kicker .form-type-textfield > label:after, .node-story-form .form-field-name-field-story-category .form-type-hierarchical-select > label:after, .node-story-form .form-field-name-field-story-issue-date .fieldset-legend:after {
+.astrick, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-1 .form-type-textfield > label:after, [id*="field-newsl-add-news-values"] tbody tr:first-child td .field-name-field-news-cid .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-pti-words-limit .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-survey-end-date fieldset > legend:after, .edit-field-pti-magazine-kicker .form-type-textfield > label:after, .node-story-form .form-field-name-field-story-category .form-type-hierarchical-select > label:after, .node-story-form .form-field-name-field-story-issue-date .fieldset-legend:after {
   content: '*';
   color: red;
 }
