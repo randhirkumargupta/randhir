@@ -7,6 +7,19 @@
     Drupal.behaviors.itg_story = {
         attach: function (context, settings) {
             var uid = settings.itg_story.settings.uid;
+            var StoryId = settings.itg_story.settings.storyid;
+            if (StoryId == 0) {
+                // jquery to open question field.
+                jQuery("#edit-field-story-configurations-und-commentbox").trigger("click");
+                
+                // hide remove button of first field on add form
+                jQuery("#edit-field-story-highlights-und-0-remove-button").hide();
+                jQuery("#edit-field-story-template-buzz-und-0-remove-button").hide();
+                jQuery("#edit-field-story-template-guru-und-0-remove-button").hide();
+                jQuery("#edit-field-story-template-quotes-und-0-remove-button").hide();
+                jQuery("#edit-field-story-template-factoids-und-0-remove-button").hide();
+                jQuery("#edit-field-story-reporter-und-0-remove-button").hide();
+            }
             $("#edit-field-itg-content-publish-date").hide();
             $(".form-item-field-story-configurations-und-breaking-news").hide('');
             $("label[for='edit-field-story-configurations-und-tv']").html("Associate Story with TV");

@@ -266,7 +266,7 @@ function itg_cooking_tips_after_build($form, &$form_state) {
   $settings['uid'] = $user->uid;
 
   drupal_add_js(array('itg_recipe' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_recipe') . '/js/itg_recipe.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_recipe') . '/js/itg_recipe.js', array('weight' => 1, 'scope' => 'footer'));
   return $form;
 }
 
@@ -321,7 +321,7 @@ function itg_food_news_after_build($form, &$form_state) {
   $settings['uid'] = $user->uid;
 
   drupal_add_js(array('itg_recipe' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_recipe') . '/js/itg_recipe.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_recipe') . '/js/itg_recipe.js', array('weight' => 1, 'scope' => 'footer'));
   return $form;
 }
 /**
@@ -373,7 +373,7 @@ function itg_recipe_after_build($form, &$form_state) {
   $settings['uid'] = $user->uid;
 
   drupal_add_js(array('itg_recipe' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_recipe') . '/js/itg_recipe.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_recipe') . '/js/itg_recipe.js', array('weight' => 1, 'scope' => 'footer'));
   return $form;
 }
 

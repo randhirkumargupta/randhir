@@ -264,7 +264,7 @@ function itg_loyalty_reward_form_after_build($form, &$form_state) {
     drupal_add_js(array('itg_loyalty_reward' => array('settings' => $settings)), array('type' => 'setting'));
     //Add JS for itg_loyalty_reward
     drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward')
-            . '/js/itg_loyalty_reward.js', array('weight' => 1));
+            . '/js/itg_loyalty_reward.js', array('weight' => 1, 'scope' => 'footer'));
 
     //Unset SEF URL field
     $form['path']['#access'] = FALSE;

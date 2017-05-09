@@ -99,7 +99,7 @@ function itg_ask_expert_after_build($form, &$form_state) {
     $settings['base_url'] = $base_url;
     $settings['uid'] = $user->uid;
     drupal_add_js(array('itg_ask_expert' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_ask_expert') . '/js/itg_ask_expert.js');
+    drupal_add_js(drupal_get_path('module', 'itg_ask_expert') . '/js/itg_ask_expert.js', array('scope' => 'footer'));
     return $form;
 }
 
@@ -317,7 +317,7 @@ function itg_ask_expert_mail($key, &$message, $params) {
         case 'send_mail_to_expert':
             $headers = array(
                 'MIME-Version' => '1.0',
-                'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+                'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
                 'Content-Transfer-Encoding' => '8Bit',
                 'X-Mailer' => 'Drupal'
             );

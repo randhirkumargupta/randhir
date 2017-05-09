@@ -952,7 +952,7 @@ function itg_category_manager_seo_team_mail($key , &$message , $params) {
     case 'send_mail_to_seo':
       $headers = array(
         'MIME-Version' => '1.0' ,
-        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes' ,
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes' ,
         'Content-Transfer-Encoding' => '8Bit' ,
         'X-Mailer' => 'Drupal'
       );
@@ -1321,8 +1321,8 @@ function itg_category_manager_form_alter(&$form , &$form_state , $form_id) {
   }
 
   if ($form_id == 'views_exposed_form' && isset($form['status']['#options'][1])) {
-    drupal_add_js(drupal_get_path('module' , 'itg_category_manager') . '/js/clipboard.min.js' , 'file');
-    drupal_add_js(drupal_get_path('module' , 'itg_category_manager') . '/js/itg_category_manager.js' , 'file');
+    drupal_add_js(drupal_get_path('module' , 'itg_category_manager') . '/js/clipboard.min.js' , array('type' => 'file', 'scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module' , 'itg_category_manager') . '/js/itg_category_manager.js' , array('type' => 'file', 'scope' => 'footer'));
     $form['name']['#autocomplete_path'] = 'itg_category_manager_autocomplete';
     $form['tid_raw']['#autocomplete_path'] = 'itg_category_manager_autocomplete_tid';
     $form['status']['#options'][1] = t('Active');

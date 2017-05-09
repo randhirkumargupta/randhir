@@ -214,7 +214,7 @@ function itg_survey_form_after_build($form, &$form_state) {
   drupal_add_js(array('itg_survey' => array('settings' => $settings)), array('type' => 'setting'));
 
   // Add JS for survey
-  drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_survey.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_survey.js', array('weight' => 1, 'scope' => 'footer'));
 
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
@@ -782,7 +782,7 @@ function itg_survey_send_notification_mail($key, &$message, $params) {
     case 'send_survey_noti':
       $headers = array(
         'MIME-Version' => '1.0',
-        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
         'Content-Transfer-Encoding' => '8Bit',
         'X-Mailer' => 'Drupal'
       );
@@ -818,7 +818,7 @@ function itg_survey_get_mail_content($node, $user) {
  */
 function itg_survey_pqs_generatetokens() {
   $type = arg(2);
-  drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_associate_story_ckeditor.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_associate_story_ckeditor.js', array('weight' => 1, 'scope' => 'footer'));
   $cur_date = date('Y-m-d H:i:s');
   if ($type == 'poll') {
     $query = db_select('node', 'n');

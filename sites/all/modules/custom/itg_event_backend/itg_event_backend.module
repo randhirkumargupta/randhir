@@ -389,7 +389,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
  * @return array
  */
 function itg_event_backend_sponsor($form, &$form_state) {
-  drupal_add_js(drupal_get_path('module', 'itg_event_backend') . '/js/itg_event_sponsor.js', array('weight' => 3));
+  drupal_add_js(drupal_get_path('module', 'itg_event_backend') . '/js/itg_event_sponsor.js', array('weight' => 3, 'scope' => 'footer'));
   global $user, $base_url;
   unset($form['metatags']['intro_text']['#markup']);
   $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
@@ -435,7 +435,7 @@ function itg_event_backend_after_build($form, &$form_state) {
       '#weight' => -9,
     );
   }
-  drupal_add_js(drupal_get_path('module', 'itg_event_backend') . '/js/itg_event_backend.js', array('weight' => 3));
+  drupal_add_js(drupal_get_path('module', 'itg_event_backend') . '/js/itg_event_backend.js', array('weight' => 3, 'scope' => 'footer'));
   if (isset($form_state['values']['nid'])) {
     $settings = array();
     $settings['base_url'] = $base_url;

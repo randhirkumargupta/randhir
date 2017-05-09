@@ -437,7 +437,7 @@ function itg_users_role_delegation_uid() {
  */
 
 function itg_user_after_build($form, &$form_state) {
-  drupal_add_js(drupal_get_path('module', 'itg_users') . '/js/itg_users.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_users') . '/js/itg_users.js', array('weight' => 1, 'scope' => 'footer'));
   return $form;
 }
 
@@ -689,7 +689,7 @@ function itg_users_mail($key, &$message, $params) {
     case 'send_role_mail_to_user':
       $headers = array(
         'MIME-Version' => '1.0',
-        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
         'Content-Transfer-Encoding' => '8Bit',
         'X-Mailer' => 'Drupal'
       );
@@ -703,7 +703,7 @@ function itg_users_mail($key, &$message, $params) {
     case 'send_subscribe_mail_to_user':
       $headers = array(
         'MIME-Version' => '1.0',
-        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
         'Content-Transfer-Encoding' => '8Bit',
         'X-Mailer' => 'Drupal'
       );
@@ -717,7 +717,7 @@ function itg_users_mail($key, &$message, $params) {
     case 'send_password_mail_to_user':
       $headers = array(
         'MIME-Version' => '1.0',
-        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
         'Content-Transfer-Encoding' => '8Bit',
         'X-Mailer' => 'Drupal'
       );

@@ -213,7 +213,7 @@ function itg_story_form_alter(&$form , &$form_state , $form_id) {
       $form['#after_build'][] = 'itg_story_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_story_form_custom_callback';
       drupal_add_js(array('itg_common' => array('base_url' => $base_url)) , 'setting');
-      drupal_add_js(drupal_get_path('module' , 'itg_common') . '/js/itg_common.emoji.js' , 'file');
+      drupal_add_js(drupal_get_path('module' , 'itg_common') . '/js/itg_common.emoji.js' , array('scope' => 'footer'));
       $form['field_emoji_2']['und'][0]['#format'] = 'emoji';
       $form['field_emoji']['und'][0]['#format'] = 'emoji';
       // hide remove button of field collection if there is only single instance of it within the form
@@ -417,6 +417,7 @@ function itg_story_node_validate($node , $form , &$form_state) {
 function itg_story_after_build($form , &$form_state) {
 
   global $user , $base_url;
+
   if (empty($form_state['input']['op'])) {
     unset($_SESSION['unique']);
   }
@@ -435,35 +436,6 @@ function itg_story_after_build($form , &$form_state) {
     '#value' => !empty($form_state['input']['original_image_fids']) ? $form_state['input']['original_image_fids'] : '' ,
     '#attributes' => array('id' => 'original_image_fids' , 'name' => 'original_image_fids') ,
   );
-//  drupal_add_js('jQuery(document).ready(function() {              
-//                if (jQuery("#edit-path-pathauto").is(":checked")) {
-//                
-//                  jQuery("#edit-path-alias").attr("readonly", "readonly");
-//                } else {                
-//                  jQuery("#edit-path-alias").removeAttr("readonly");
-//                }              
-//              });', array('type' => 'inline', 'scope' => 'footer'));
-
-  if (!isset($form['#node']->nid)) {
-    // hide remove button of first field on add form
-    drupal_add_js('jQuery(document).ready(function() {
-          jQuery("#edit-field-story-highlights-und-0-remove-button").hide();
-          jQuery("#edit-field-story-template-buzz-und-0-remove-button").hide();
-          jQuery("#edit-field-story-template-guru-und-0-remove-button").hide();
-          jQuery("#edit-field-story-template-quotes-und-0-remove-button").hide();
-          jQuery("#edit-field-story-template-factoids-und-0-remove-button").hide();
-          jQuery("#edit-field-story-reporter-und-0-remove-button").hide();              
-        });' , array('type' => 'inline' , 'scope' => 'footer'));
-  }
-
-  // checked autoalias checkbox on node edit form
-  //if(arg(0) == 'node' && is_numeric(arg(1)) && )
-
-  if (isset($form['#node']->nid) && $form['#node']->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-//      drupal_add_js('jQuery(document).ready(function() {
-//          jQuery("#edit-path-pathauto").attr("checked", true);            
-//        });', array('type' => 'inline', 'scope' => 'footer'));
-  }
 
   unset($form['field_story_associate_lead'][LANGUAGE_NONE]['_none']);
 
@@ -472,13 +444,14 @@ function itg_story_after_build($form , &$form_state) {
 
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
-
+  $settings['storyid'] = isset($form['#node']->nid) ? $form['#node']->nid : 0;
+  
   drupal_add_js(array('itg_story' => array('settings' => $settings)) , array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module' , 'itg_story') . '/js/itg_story.js' , array('weight' => 1));
+  drupal_add_js(drupal_get_path('module' , 'itg_story') . '/js/itg_story.js' , array('weight' => 1, 'scope' => 'footer'));
 
   // ADD js for multiple byline
   drupal_add_js(array('itg_byline' => array('settings' => $settings)) , array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module' , 'itg_story') . '/js/itg_byline.js');
+  drupal_add_js(drupal_get_path('module' , 'itg_story') . '/js/itg_byline.js', array('scope' => 'footer'));
   return $form;
 }
 
@@ -502,7 +475,7 @@ function itg_story_form_story_node_form_alter(&$form , &$form_state , $form_id) 
             jQuery("#edit-field-story-reporter-und-0-remove-button").hide();              
           });' , array('type' => 'inline' , 'scope' => 'footer'));
     }
-  }
+ }
   $magazine_field = 'field_story_select_magazine';
   $supplement_field = 'field_story_select_supplement';
   $tv_date_field = 'field_poll_start_date';
@@ -844,7 +817,7 @@ function itg_story_node_view($node , $view_mode , $langcode) {
       $next = itg_story_photo_story_redirect($node->nid , 'next');
       $previous = itg_story_photo_story_redirect($node->nid , 'prev');
       drupal_add_js(array('itg_story_front' => array('next' => $next , 'previous' => $previous)) , 'setting');
-      drupal_add_js(drupal_get_path('module' , 'itg_story') . '/js/itg_story_front.js');
+      drupal_add_js(drupal_get_path('module' , 'itg_story') . '/js/itg_story_front.js', array('scope' => 'footer'));
     }
 
     if (function_exists('itg_common_get_latest_byline')) {

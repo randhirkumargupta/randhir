@@ -343,7 +343,7 @@ function itg_user_content_visit_report_form($form , &$form_state) {
     '#prefix' => '<div class = "user-log-filter-btn">' ,
     '#suffix' => '<a class="user-log-reset" href="' . base_path() . 'content-visits-by-user">Reset</a></div>' ,
   );
-  drupal_add_js(drupal_get_path('module' , 'itg_user_log') . '/js/itg-user-log-filter-form.js' , 'file');
+  drupal_add_js(drupal_get_path('module' , 'itg_user_log') . '/js/itg-user-log-filter-form.js' , array('type' => 'file', 'scope' => 'footer'));
   return $form;
 }
 

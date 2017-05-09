@@ -36,15 +36,15 @@ function itg_common_init() {
     $settings['uid'] = $user->uid;
     $settings['solr'] = variable_get('solr_url_config');
     drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.admin.js');
-    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_related_content.admin.js');
+    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.admin.js', array('scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_related_content.admin.js', array('scope' => 'footer'));
   }
   
   if (arg(0) == 'funalytics') {
     $settings = array();
     $settings['base_url'] = $base_url;
     drupal_add_js(array('itg_funalytics' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_funalytics.js');
+    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_funalytics.js', array('scope' => 'footer'));
   }
 }
 
@@ -118,10 +118,9 @@ function itg_common_permission() {
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url,$theme;
   $arg = arg();
-  if($theme == 'itgadmin')
-   {
-      $form['actions']['delete']['#access'] = FALSE;
-   }
+  if($theme == 'itgadmin') {
+    $form['actions']['delete']['#access'] = FALSE;
+  }
   // get category machine name
   if ($form_id == 'taxonomy_form_term' && $form['#vocabulary']->machine_name != 'category_management') {
     if (!in_array('administrator', $user->roles)) {
@@ -145,7 +144,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   $settings['formid'] = $form_id;
   $settings['arg_url'] = $arg[0];
   drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_admin_form.js');
+  drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_admin_form.js', array('scope' => 'footer'));
   
 
   //code for preview_changes button remove
@@ -360,7 +359,7 @@ function itg_common_image_generate($form, &$form_state) {
     $settings['large_uri'] = '';
   }
   drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
-  drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_image.js', array('weight' => 3));
+  drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_image.js', array('weight' => 3,'scope' => 'footer'));
 
   return $form;
 }
@@ -426,7 +425,7 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
 
   $settings['formid'] = $form['#id'];
   drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_form.js');
+  drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_form.js', array('scope' => 'footer'));
 
   if (isset($form['title'])) {
     $form['title']['#maxlength'] = 255;
@@ -460,20 +459,13 @@ function itg_common_date_popup_process_alter(&$element, &$form_state, &$context)
 
 
 
-
-
-
-
-
 /**
  * Implementation of hook_node_presave().
  * @param object $node
  */
 
-
-
 function itg_common_node_presave($node) {
-  //global $ctype_array;
+  
   $ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
   switch ($node->type) {
     case 'astro':
@@ -491,9 +483,7 @@ function itg_common_node_presave($node) {
         elseif ($node->op == 'Save as Draft' || $node->status == 0) {
           $node->status = 0;
         }
-      }
-      
-        
+      } 
   }
  
 }
@@ -800,8 +790,7 @@ function itg_custom_lock_delete() {
   if (!empty($_GET['nid'])) {
     if (function_exists('content_lock_release')) {
       content_lock_release($_GET['nid'], $user->uid);
-    }
-    
+    }    
     //content_lock_release_own_item($_GET['nid'], FALSE, TRUE);
   }
   exit;
@@ -925,7 +914,21 @@ function itg_custom_get_user_details($uid) {
   }
 }
 
+
+function itg_common_token_info_alter(&$info) {
+  //echo '@@@@@';
+  //p($info['tokens']['node']);
+//  $i =0;
+//  foreach ($info['tokens']['node'] as $key => $val) {
+//    $dd = $i;
+//    $i++;
+//  }
+//  echo $dd;exit;
+  //unset($info['node']['field_circular_reference']);
+}
+
 function _occupation_from_tid_for_sef_url($tid) {
   $term_data = taxonomy_term_load($tid);
   return $term_data->name;
 }
+
