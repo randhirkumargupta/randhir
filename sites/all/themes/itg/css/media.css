@@ -3085,7 +3085,7 @@
     overflow: hidden;
   }
 
-  body.section-common .row {
+  body.page-taxonomy-term .row {
     overflow: hidden;
   }
 }
