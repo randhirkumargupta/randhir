@@ -735,9 +735,9 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
         jQuery("#edit-body-und-0-value").css({"min-width":"900px","height":"400px"});
     });', 'inline');
 
-  drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication_custom_feed.js', 'file');
+  drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication_custom_feed.js', array('type' => 'file', 'scope' => 'footer'));
   /* JS library  added to beutify xml pattern */
-  drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/jquery.format.js', 'file');
+  drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/jquery.format.js', array('type' => 'file', 'scope' => 'footer'));
   /* check for default value */
   $client = $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#entity']->field_syndication_feed_clients[LANGUAGE_NONE][0]['value'];
   if (isset($client)) {

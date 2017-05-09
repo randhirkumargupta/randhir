@@ -21,7 +21,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
   $settings['uid'] = $user->uid;
 
   drupal_add_js(array('itg_sso_reg' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_reg.js');
+  drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_reg.js', array('scope' => 'footer'));
   
   $step_ext_div = '';
   

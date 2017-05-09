@@ -295,7 +295,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
     $settings = array();
     $settings['base_url'] = $base_url;
     drupal_add_js(array('itg_print_team' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_print_team') . '/js/itg_print_team.js', array('weight' => 1));
+    drupal_add_js(drupal_get_path('module', 'itg_print_team') . '/js/itg_print_team.js', array('weight' => 1, 'scope' => 'footer'));
 
     $filtered_result = count($form['#substitutions']['#value']);
     if (arg(0) == 'manage-print-team-rejected' || arg(0) == 'manage-print-team-needs-modification' || arg(0) == 'manage-print-team-not-decided') {
@@ -569,7 +569,7 @@ function itg_print_team_form_after_build($form, &$form_state) {
   drupal_add_js(array('itg_print_team' => array('settings' => $settings)), array('type' => 'setting'));
 
   // Add JS for itg_print_team
-  drupal_add_js(drupal_get_path('module', 'itg_print_team') . '/js/itg_print_team.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_print_team') . '/js/itg_print_team.js', array('weight' => 1, 'scope' => 'footer'));
 
   // Unset SEF URL field
   $form['path']['#access'] = FALSE;
@@ -796,7 +796,7 @@ function itg_print_team_association_custom_validate($form, &$form_state) {
   drupal_add_js(array('itg_print_team' => array('settings' => $settings)), array('type' => 'setting'));
 
   // Add JS for itg_print_team
-  drupal_add_js(drupal_get_path('module', 'itg_print_team') . '/js/itg_print_team.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_print_team') . '/js/itg_print_team.js', array('weight' => 1, 'scope' => 'footer'));
 
   $views_bulk_operations = $form_state['values']['views_bulk_operations'];
   $issue = $form_state['values']['pti_issue'];

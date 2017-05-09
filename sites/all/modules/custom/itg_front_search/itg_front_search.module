@@ -209,7 +209,7 @@ function itg_front_search_views_pre_render(&$view) {
     }
 
     drupal_add_js(array('itg_front_search' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_front_search') . '/js/itg_front_search.js', array('weight' => 1));
+    drupal_add_js(drupal_get_path('module', 'itg_front_search') . '/js/itg_front_search.js', array('weight' => 1, 'scope' => 'footer'));
 
     foreach ($view->result as $related_result) {
        if ($related_result->bs_status == '1') {

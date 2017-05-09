@@ -259,7 +259,7 @@ function itg_breaking_news_after_build($form, &$form_state) {
     $settings['base_url'] = $base_url;
     $settings['uid'] = $user->uid;
     drupal_add_js(array('itg_breaking_news' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_breaking_news') . '/js/itg_breaking_news.js');
+    drupal_add_js(drupal_get_path('module', 'itg_breaking_news') . '/js/itg_breaking_news.js', array('scope' => 'footer'));
     return $form;
 }
 

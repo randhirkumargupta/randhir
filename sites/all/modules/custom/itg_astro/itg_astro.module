@@ -203,9 +203,9 @@ function itg_astro_after_build($form, &$form_state) {
   // Initialize globals.
   global $user, $base_url;
   // Pass sign name to js file.
-  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/itg_astro.js');
-  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/moment.js');
-  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js');
+  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/itg_astro.js', array('scope' => 'footer'));
+  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/moment.js', array('scope' => 'footer'));
+  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js', array('scope' => 'footer'));
 
   // Add description of audi/video field to their placeholder.
   if (!empty($form['field_astro_video'][LANGUAGE_NONE][0]['description']['#description'])) {
