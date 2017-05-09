@@ -10705,6 +10705,9 @@ section.sidebar .block-itg-ads {
   left: 0;
   top: 0;
 }
+#block-itg-live-tv-live-tv-video-page .program-livetv .live_tv_video #playerContainer {
+  display: none !important;
+}
 #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon {
   width: 108px;
   overflow: hidden;
