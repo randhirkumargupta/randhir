@@ -35,7 +35,9 @@ function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="") {
       $file_name = "story".$nid.".xml";
   }
   if(!$term_feed_path){
-     $term_feed_path = getcwd() . "/sites/all/modules/custom/itg_mobile_feed/xml_it/stories"; 
+     //$term_feed_path = getcwd() . "/sites/all/modules/custom/itg_mobile_feed/xml_it/stories"; 
+     $term_feed_path = "public://xml_it/stories";
+	 file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
   }
   
   

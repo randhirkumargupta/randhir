@@ -90,7 +90,9 @@ function photoSectionPageFeed() {
  // write xml file - photosectionlisting.xml
   
   if ($output) {
-        $term_feed_path = getcwd() . "/sites/all/modules/custom/itg_mobile_feed/xml_it/photos";  
+        //$term_feed_path = getcwd() . "/sites/all/modules/custom/itg_mobile_feed/xml_it/photos";  
+        $term_feed_path = "public://xml_it/photos";
+		file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
         $file_name = "photosectionlisting.xml";
         $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
       }

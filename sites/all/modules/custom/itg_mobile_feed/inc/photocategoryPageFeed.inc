@@ -27,7 +27,10 @@ function photocategoryPageFeed() {
   }
   $list_count = 0;
   $catFile = "";
-  $term_feed_path = getcwd() . "/sites/all/modules/custom/itg_mobile_feed/xml_it/photos";
+  //$term_feed_path = getcwd() . "/sites/all/modules/custom/itg_mobile_feed/xml_it/photos";
+  $term_feed_path = "public://xml_it/photos";
+  file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
+  
   $return_flag = "";
   // loop on section
   foreach ($section_list as $key => $value) {

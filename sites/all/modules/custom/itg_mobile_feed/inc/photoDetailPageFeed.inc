@@ -38,7 +38,9 @@ function generatePhotoDetailPageFeed($nid, $file_name="", $term_feed_path="") {
       $file_name = "photo" . $nid . ".xml";
   }
   if(!$term_feed_path){
-     $term_feed_path = getcwd() . "/sites/all/modules/custom/itg_mobile_feed/xml_it/photos"; 
+     //$term_feed_path = getcwd() . "/sites/all/modules/custom/itg_mobile_feed/xml_it/photos"; 
+     $term_feed_path = "public://xml_it/photos";
+     file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
   }
   //field_image_caption
   $output = "";

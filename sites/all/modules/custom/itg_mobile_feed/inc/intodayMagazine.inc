@@ -62,7 +62,9 @@ function intodayMagazine() {
     //echo "redis set - ". $result_set['set_flag']; exit();
    }
         if ($output) {
-            $term_feed_path = getcwd() . "/sites/all/modules/custom/itg_mobile_feed/xml_it/stories";
+            //$term_feed_path = getcwd() . "/sites/all/modules/custom/itg_mobile_feed/xml_it/stories";
+            $term_feed_path = "public://xml_it/stories";
+			file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
             $catFile = "fromthemagazine.xml";
             $return_flag .= writeFeedFile($term_feed_path, $catFile, $output);
           }
