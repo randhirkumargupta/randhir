@@ -24,7 +24,8 @@ function itg_quiz_winners_mail_list() {
       'body' => $mail_content,
       'subject' => $mail_subject,
     );
-
+    print "came to mailk";
+    p($params);
     $mail = drupal_mail('itg_quiz_winners_list', 'send_mail_to_winners', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
       drupal_set_message(t('Mail has been sent successfully.'));
@@ -80,7 +81,7 @@ function itg_quiz_winners_list_mail($key, &$message, $params) {
     case 'send_mail_to_winners':
       $headers = array(
         'MIME-Version' => '1.0',
-        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
         'Content-Transfer-Encoding' => '8Bit',
         'X-Mailer' => 'Drupal'
       );
