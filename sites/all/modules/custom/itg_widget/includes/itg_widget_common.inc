@@ -75,7 +75,7 @@ function remove_extra_data() {
 //            ->execute();
 //  }
 
-  db_query("ALTER TABLE  itg_menu_manager ADD  bk_color VARCHAR( 100 ) NOT NULL DEFAULT  '#cccccc'")->execute();
+  //db_query("ALTER TABLE  itg_menu_manager ADD  bk_color VARCHAR( 100 ) NOT NULL DEFAULT  '#cccccc'")->execute();
 }
 
 /**
@@ -1871,7 +1871,8 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name , $range_max 
 
   $query = db_select('itg_widget_order' , 'iwo');
   $query->leftJoin('node' , 'n' , 'n.nid=iwo.nid');
-
+  $query->leftJoin('field_data_field_story_short_headline' , 'sh' , 'sh.entity_id=n.nid');
+  
   if ($widget_name == 'home_page_feature_widget') {
     $query->leftJoin('field_data_field_story_medium_image' , 'mi' , 'mi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_large_image' , 'li' , 'li.entity_id=n.nid');
@@ -1938,7 +1939,7 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name , $range_max 
   //$query->fields('eli_file' , array('uri'));  
   //$query->fields('si_file' , array('uri'));
   //$query->fields('esi_file' , array('uri'));
-
+  $query->fields('sh' , array('field_story_short_headline_value'));
   $query->fields('kt' , array('field_story_kicker_text_value'));
   $query->fields('vd' , array('field_video_duration_value'));
   $query->fields('n' , array('nid' , 'title' , 'created' , 'type' , 'uid'));
@@ -1951,7 +1952,14 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name , $range_max 
       ->range($range_min , $range_max)
       ->fields('iwo' , array('nid' , 'extra' , 'weight'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  return $result;
+  foreach ($result as $key => $entity_data_node) {
+    $entity_data[] = $entity_data_node;
+    if ($entity_data_node['type'] == 'story') {
+      $entity_data[$key]['title'] = $entity_data_node['field_story_short_headline_value'];
+    }
+  }
+  
+  return $entity_data;
 }
 
 /**
@@ -2092,6 +2100,7 @@ function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name 
   $query->leftJoin('node' , 'n' , 'n.nid=iwo.nid');
   $query->Join('taxonomy_index' , 'tx' , 'n.nid=tx.nid');
   //join  for field value
+  $query->leftJoin('field_data_field_story_short_headline' , 'sh' , 'sh.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_extra_small_image' , 'si' , 'si.entity_id=n.nid');
   $query->leftJoin('field_data_field_video_duration' , 'vd' , 'vd.entity_id=n.nid');
   $query->leftJoin('file_managed' , 'si_file' , 'si_file.fid=si.field_story_extra_small_image_fid');
@@ -2110,7 +2119,13 @@ function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name 
       ->range($range_min , $range_max)
       ->fields('iwo' , array('nid' , 'extra' , 'weight'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  return $result;
+  foreach ($result as $key => $entity_data_node) {
+    $entity_data[] = $entity_data_node;
+    if ($entity_data_node['type'] == 'story') {
+      $entity_data[$key]['title'] = $entity_data_node['field_story_short_headline_value'];
+    }
+  }
+  return $entity_data;
 }
 
 /**
@@ -2128,6 +2143,7 @@ function get_view_nodes_form_custom_table_review_widgets($widget_name , $cat_id 
   $query->leftJoin('node' , 'n' , 'n.nid=iwo.nid');
   $query->Join('taxonomy_index' , 'tx' , 'n.nid=tx.nid');
   //join  for field value
+  $query->leftJoin('field_data_field_story_short_headline' , 'sh' , 'sh.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_small_image' , 'si' , 'si.entity_id=n.nid');
   $query->leftJoin('field_data_field_video_duration' , 'vd' , 'vd.entity_id=n.nid');
   $query->leftJoin('file_managed' , 'si_file' , 'si_file.fid=si.field_story_small_image_fid');
@@ -2145,7 +2161,13 @@ function get_view_nodes_form_custom_table_review_widgets($widget_name , $cat_id 
       ->range($range_min , $range_max)
       ->fields('iwo' , array('nid' , 'extra' , 'weight'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  return $result;
+  foreach ($result as $key => $entity_data_node) {
+    $entity_data[] = $entity_data_node;
+    if ($entity_data_node['type'] == 'story') {
+      $entity_data[$key]['title'] = $entity_data_node['field_story_short_headline_value'];
+    }
+  }
+  return $entity_data;
 }
 
 /**
@@ -2684,7 +2706,7 @@ function get_rhs_block_display_condtion($delta = '') {
           return TRUE;
         }
 
-        if ((!empty($arg[1]) && in_array($arg[1], $watch_right_now_node_array)) || $arg[0] == 'blog' || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'blog-listing' || $arg[0] == 'podcasts-listing' || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'topic' || $arg[0] == 'online-archive-story' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE) {
+        if ((!empty($arg[1]) && in_array($arg[1], $watch_right_now_node_array)) || $arg[0] == 'blog' || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'blog-listing' || $arg[0] == 'podcast' || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'topic' || $arg[0] == 'online-archive-story' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE) {
           return TRUE;
         }
         break;
@@ -2702,7 +2724,7 @@ function get_rhs_block_display_condtion($delta = '') {
         if ($arg[0] == 'gethomecarddata') {
           return TRUE;
         }
-        if ((!empty($arg[1]) && in_array($arg[1], $we_may_suggest_node_array)) || $arg[0] == 'blog' || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'itg-quiz' || $arg[0] == 'blog-listing' || $arg[0] == 'podcasts-listing' || $arg[0] == 'topic' || $arg[0] == 'livetv' || $arg[0] == 'online-archive-story' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
+        if ((!empty($arg[1]) && in_array($arg[1], $we_may_suggest_node_array)) || $arg[0] == 'blog' || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'itg-quiz' || $arg[0] == 'blog-listing' || $arg[0] == 'podcast' || $arg[0] == 'topic' || $arg[0] == 'livetv' || $arg[0] == 'online-archive-story' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
           return TRUE;
         }
         break;

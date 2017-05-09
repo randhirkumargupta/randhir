@@ -730,11 +730,13 @@ function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255) {
   $left_smiles = "";
   $right_smiles = "";
   $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_story_short_headline' , 'sh' , 'sh.entity_id=n.nid');
   $query->leftJoin('field_data_field_emoji', 'emoji', 'emoji.entity_id=n.nid');
   $query->leftJoin('field_data_field_emoji_2', 'emoji_2', 'emoji_2.entity_id=n.nid');
   $query->leftJoin('field_data_field_emoji_position', 'emoji_pos', 'emoji_pos.entity_id=n.nid');
   $query->fields('n', array('title'));
   $query->fields('emoji', array('field_emoji_value'));
+  $query->fields('sh' , array('field_story_short_headline_value'));
   $query->fields('emoji_2', array('field_emoji_2_value'));
   $query->fields('emoji_pos', array('field_emoji_position_value'));
   $query->condition('n.nid', $nid);
@@ -770,15 +772,14 @@ function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255) {
   }  
   if (count($result)) {
     if(!empty($left_smiles) || !empty($right_smiles)) {
-      $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));    
+      $titlte = ucfirst(mb_strimwidth($result[0]['field_story_short_headline_value'], $min_limit, $max_limit, ".."));    
     }
     else {
       $max_limit +=10; 
-      $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));    
+      $titlte = ucfirst(mb_strimwidth($result[0]['field_story_short_headline_value'], $min_limit, $max_limit, ".."));    
     }
     // Add smiley to right;
     $titlte =  $left_smiles . $titlte . $right_smiles ;
-    
     return $titlte;
   }
 }
