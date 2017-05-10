@@ -9,6 +9,7 @@ module_load_include('inc' , 'itg_seo' , 'includes/itg_seo_rich_snippet');
 module_load_include('inc' , 'itg_seo' , 'includes/itg_redirect_url');
 module_load_include('inc' , 'itg_seo' , 'includes/itg_sef_redirect_url');
 
+
 function itg_seo_menu() {
   $items['itg-access-denied'] = array(
     'title' => t('Access Denied') ,

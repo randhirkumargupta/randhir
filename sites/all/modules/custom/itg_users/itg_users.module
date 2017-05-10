@@ -626,7 +626,13 @@ function itg_users_user_update(&$edit, $account, $category) {
 
   // send mail when user select notification chekbox
   if (!empty($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value']) && $account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == '1') {
-
+    if (function_exists('custom_netcore_mail_add_user')) {
+      // code for subscribe for newsletter
+      $data['email'] = $account->mail;
+      $data['listId'] = NETCORE_LIST_ID;
+      custom_netcore_mail_add_user($data);
+    }
+    
     $news_info = 'You have sucessfully subscribed for India Today newsletters.';
     $mail_content = itg_users_get_mail_content($news_info);
     $params = array(
@@ -645,6 +651,8 @@ function itg_users_user_update(&$edit, $account, $category) {
       watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
       return FALSE;
     }
+  } else {
+      // code for unsubscribe for newsletter
   }
 }
 
@@ -656,6 +664,12 @@ function itg_users_user_update(&$edit, $account, $category) {
  */
 function itg_users_user_insert(&$edit, $account, $category) {
   if ($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == '1') {
+    if (function_exists('custom_netcore_mail_add_user')) {
+      // code for subscribe for newsletter
+      $data['email'] = $account->mail;
+      $data['listId'] = NETCORE_LIST_ID;
+      custom_netcore_mail_add_user($data);
+    }
     $news_info = 'You have sucessfully subscribed for India Today newsletters.';
     $mail_content = itg_users_get_mail_content($news_info);
     $params = array(
@@ -674,6 +688,8 @@ function itg_users_user_insert(&$edit, $account, $category) {
       watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
       return FALSE;
     }
+  } else {
+      // code for unsubscribe for newsletter
   }
 }
 
