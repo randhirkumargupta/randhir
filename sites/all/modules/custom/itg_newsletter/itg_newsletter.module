@@ -7,7 +7,7 @@
  * Contains functionality related to Newsletter.
  *
  */
-module_load_include('inc' , 'itg_newsletter' , 'includes/itg_netcore_mail');
+//module_load_include('inc' , 'itg_newsletter' , 'includes/itg_netcore_mail');
 
 /**
  * Implementation of hook_menu
