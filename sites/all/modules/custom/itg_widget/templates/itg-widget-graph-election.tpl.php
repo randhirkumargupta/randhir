@@ -10,14 +10,19 @@ if (!empty($data)) : global $base_url; ?>
      $classrow="col-md-$rowcounter";
  } else if(count($data)>2)
  {
-     $classrow="col-el-".count($data);
+   if(count($data) >5) {
+     $datacount =5;
+   }else {
+      $datacount =count($data);
+   }
+     $classrow="col-el-".$datacount;
+    
  }
 foreach ($data as $index => $row):  ?>
     <div class="<?php echo $classrow;?> mt-50">
         <div class="itg-widget">
             <div class="droppable <?php print $gray_bg_layout; ?>">
                 <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
-
 
                     <div class="data-holder"> 
                         <div class="graph-design">
@@ -59,10 +64,6 @@ foreach ($data as $index => $row):  ?>
     </div>
 
    
-    </head>
-    <body>
-        
-
 
       
     <?php endforeach; ?>
