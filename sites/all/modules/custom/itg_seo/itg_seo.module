@@ -160,7 +160,7 @@ function itg_get_sef_url($sef_path , $nodeid) {
       unset($new_url_array[$array_size - 1]);
       $edited_sef_url = implode('-' , $new_url_array);
     }
-    elseif ($is_photo_story) {
+    elseif ($is_photo_story || $is_mega_review_critic) {
       $path_alias_set = $sef_path;
       $path_data = explode("/" , $path_alias_set);
       $edit_path_data = end($path_data);
@@ -473,7 +473,8 @@ function content_types_for_sef_url() {
     'blog' ,
     'reporter' ,
     'itg_funalytics',
-    'page'
+    'page',
+    'mega_review_critic'
   );
 }
 

@@ -4073,15 +4073,21 @@ h1.category-heading {
   padding: 0 10px;
 }
 
-.view-category-wise-content-list .catagory-listing, .view-blog-listing .catagory-listing, .page-podcasts-listing .view-podcasts-listing .catagory-listing {
+.view-category-wise-content-list .catagory-listing, .view-blog-listing .catagory-listing,
+.page-podcast .view-podcasts-listing .catagory-listing,
+.page-podcasts-listing .view-podcasts-listing .catagory-listing {
   overflow: hidden;
   padding: 10px;
 }
-.view-category-wise-content-list .catagory-listing .pic, .view-blog-listing .catagory-listing .pic, .page-podcasts-listing .view-podcasts-listing .catagory-listing .pic {
+.view-category-wise-content-list .catagory-listing .pic, .view-blog-listing .catagory-listing .pic,
+.page-podcast .view-podcasts-listing .catagory-listing .pic,
+.page-podcasts-listing .view-podcasts-listing .catagory-listing .pic {
   float: left;
   margin-right: 10px;
 }
-.view-category-wise-content-list .catagory-listing .detail, .view-blog-listing .catagory-listing .detail, .page-podcasts-listing .view-podcasts-listing .catagory-listing .detail {
+.view-category-wise-content-list .catagory-listing .detail, .view-blog-listing .catagory-listing .detail,
+.page-podcast .view-podcasts-listing .catagory-listing .detail,
+.page-podcasts-listing .view-podcasts-listing .catagory-listing .detail {
   display: block;
   overflow: hidden;
   word-wrap: break-word;
@@ -4090,13 +4096,19 @@ h1.category-heading {
   line-height: 19px;
   color: #323232;
 }
-.view-category-wise-content-list .catagory-listing, .view-blog-listing .catagory-listing, .page-podcasts-listing .view-podcasts-listing .catagory-listing {
+.view-category-wise-content-list .catagory-listing, .view-blog-listing .catagory-listing,
+.page-podcast .view-podcasts-listing .catagory-listing,
+.page-podcasts-listing .view-podcasts-listing .catagory-listing {
   padding: 20px 0;
 }
-.view-category-wise-content-list .catagory-listing .pic, .view-blog-listing .catagory-listing .pic, .page-podcasts-listing .view-podcasts-listing .catagory-listing .pic {
+.view-category-wise-content-list .catagory-listing .pic, .view-blog-listing .catagory-listing .pic,
+.page-podcast .view-podcasts-listing .catagory-listing .pic,
+.page-podcasts-listing .view-podcasts-listing .catagory-listing .pic {
   width: 124px;
 }
-.view-category-wise-content-list .catagory-listing .detail h3, .view-blog-listing .catagory-listing .detail h3, .page-podcasts-listing .view-podcasts-listing .catagory-listing .detail h3 {
+.view-category-wise-content-list .catagory-listing .detail h3, .view-blog-listing .catagory-listing .detail h3,
+.page-podcast .view-podcasts-listing .catagory-listing .detail h3,
+.page-podcasts-listing .view-podcasts-listing .catagory-listing .detail h3 {
   margin-bottom: 10px;
   font-size: 15px;
   font-size: 0.9375rem;
@@ -4104,14 +4116,18 @@ h1.category-heading {
   line-height: 22px;
   color: #323232;
 }
-.view-category-wise-content-list .catagory-listing .detail p, .view-blog-listing .catagory-listing .detail p, .page-podcasts-listing .view-podcasts-listing .catagory-listing .detail p {
+.view-category-wise-content-list .catagory-listing .detail p, .view-blog-listing .catagory-listing .detail p,
+.page-podcast .view-podcasts-listing .catagory-listing .detail p,
+.page-podcasts-listing .view-podcasts-listing .catagory-listing .detail p {
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
   color: #696969;
   display: none;
 }
-.view-category-wise-content-list .catagory-listing span.blog-anchor a, .view-blog-listing .catagory-listing span.blog-anchor a, .page-podcasts-listing .view-podcasts-listing .catagory-listing span.blog-anchor a {
+.view-category-wise-content-list .catagory-listing span.blog-anchor a, .view-blog-listing .catagory-listing span.blog-anchor a,
+.page-podcast .view-podcasts-listing .catagory-listing span.blog-anchor a,
+.page-podcasts-listing .view-podcasts-listing .catagory-listing span.blog-anchor a {
   font-size: 12px;
   font-size: 0.75rem;
   font-family: "Roboto", sans-serif;
@@ -4121,43 +4137,65 @@ h1.category-heading {
   margin-bottom: 8px;
   font-weight: 400;
 }
-.view-category-wise-content-list .catagory-grid, .view-blog-listing .catagory-grid, .page-podcasts-listing .view-podcasts-listing .catagory-grid {
+.view-category-wise-content-list .catagory-grid, .view-blog-listing .catagory-grid,
+.page-podcast .view-podcasts-listing .catagory-grid,
+.page-podcasts-listing .view-podcasts-listing .catagory-grid {
   zoom: 1;
 }
-.view-category-wise-content-list .catagory-grid:before, .view-category-wise-content-list .catagory-grid:after, .view-blog-listing .catagory-grid:before, .view-blog-listing .catagory-grid:after, .page-podcasts-listing .view-podcasts-listing .catagory-grid:before, .page-podcasts-listing .view-podcasts-listing .catagory-grid:after {
+.view-category-wise-content-list .catagory-grid:before, .view-category-wise-content-list .catagory-grid:after, .view-blog-listing .catagory-grid:before, .view-blog-listing .catagory-grid:after,
+.page-podcast .view-podcasts-listing .catagory-grid:before,
+.page-podcast .view-podcasts-listing .catagory-grid:after,
+.page-podcasts-listing .view-podcasts-listing .catagory-grid:before,
+.page-podcasts-listing .view-podcasts-listing .catagory-grid:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-.view-category-wise-content-list .catagory-grid:after, .view-blog-listing .catagory-grid:after, .page-podcasts-listing .view-podcasts-listing .catagory-grid:after {
+.view-category-wise-content-list .catagory-grid:after, .view-blog-listing .catagory-grid:after,
+.page-podcast .view-podcasts-listing .catagory-grid:after,
+.page-podcasts-listing .view-podcasts-listing .catagory-grid:after {
   clear: both;
 }
-.view-category-wise-content-list .catagory-grid h3, .view-blog-listing .catagory-grid h3, .page-podcasts-listing .view-podcasts-listing .catagory-grid h3 {
+.view-category-wise-content-list .catagory-grid h3, .view-blog-listing .catagory-grid h3,
+.page-podcast .view-podcasts-listing .catagory-grid h3,
+.page-podcasts-listing .view-podcasts-listing .catagory-grid h3 {
   font-size: 15px;
   line-height: 20px;
   margin-top: 5px;
 }
-.view-category-wise-content-list .catagory-grid p, .view-blog-listing .catagory-grid p, .page-podcasts-listing .view-podcasts-listing .catagory-grid p {
+.view-category-wise-content-list .catagory-grid p, .view-blog-listing .catagory-grid p,
+.page-podcast .view-podcasts-listing .catagory-grid p,
+.page-podcasts-listing .view-podcasts-listing .catagory-grid p {
   color: #696969;
   margin-top: 10px;
 }
-.view-category-wise-content-list .catagory-grid .col-md-3, .view-blog-listing .catagory-grid .col-md-3, .page-podcasts-listing .view-podcasts-listing .catagory-grid .col-md-3 {
+.view-category-wise-content-list .catagory-grid .col-md-3, .view-blog-listing .catagory-grid .col-md-3,
+.page-podcast .view-podcasts-listing .catagory-grid .col-md-3,
+.page-podcasts-listing .view-podcasts-listing .catagory-grid .col-md-3 {
   margin-bottom: 40px;
 }
-.view-category-wise-content-list .catagory-grid .col-md-3:nth-child(4n+1), .view-blog-listing .catagory-grid .col-md-3:nth-child(4n+1), .page-podcasts-listing .view-podcasts-listing .catagory-grid .col-md-3:nth-child(4n+1) {
+.view-category-wise-content-list .catagory-grid .col-md-3:nth-child(4n+1), .view-blog-listing .catagory-grid .col-md-3:nth-child(4n+1),
+.page-podcast .view-podcasts-listing .catagory-grid .col-md-3:nth-child(4n+1),
+.page-podcasts-listing .view-podcasts-listing .catagory-grid .col-md-3:nth-child(4n+1) {
   clear: left;
 }
-.view-category-wise-content-list .item-list ul.pager, .view-blog-listing .item-list ul.pager, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager {
+.view-category-wise-content-list .item-list ul.pager, .view-blog-listing .item-list ul.pager,
+.page-podcast .view-podcasts-listing .item-list ul.pager,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager {
   margin: 10px 0;
   list-style-type: none;
   text-align: center;
 }
-.view-category-wise-content-list .item-list ul.pager li, .view-blog-listing .item-list ul.pager li, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li {
+.view-category-wise-content-list .item-list ul.pager li, .view-blog-listing .item-list ul.pager li,
+.page-podcast .view-podcasts-listing .item-list ul.pager li,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li {
   display: inline-block;
   vertical-align: top;
 }
-.view-category-wise-content-list .item-list ul.pager li.pager-current, .view-blog-listing .item-list ul.pager li.pager-current, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-current {
+.view-category-wise-content-list .item-list ul.pager li.pager-current, .view-blog-listing .item-list ul.pager li.pager-current,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-current,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-current {
   height: 25px;
   width: 25px;
   line-height: 25px;
@@ -4166,7 +4204,9 @@ h1.category-heading {
   border-radius: 50%;
   font-family: "Roboto", sans-serif;
 }
-.view-category-wise-content-list .item-list ul.pager li.pager-item a, .view-blog-listing .item-list ul.pager li.pager-item a, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-item a {
+.view-category-wise-content-list .item-list ul.pager li.pager-item a, .view-blog-listing .item-list ul.pager li.pager-item a,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-item a,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-item a {
   display: block;
   height: 25px;
   width: 25px;
@@ -4176,16 +4216,42 @@ h1.category-heading {
   color: #323232;
   font-family: "Roboto", sans-serif;
 }
-.view-category-wise-content-list .item-list ul.pager li.pager-item a:hover, .view-blog-listing .item-list ul.pager li.pager-item a:hover, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-item a:hover {
+.view-category-wise-content-list .item-list ul.pager li.pager-item a:hover, .view-blog-listing .item-list ul.pager li.pager-item a:hover,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-item a:hover,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-item a:hover {
   background-color: #337ab7;
   color: #fff;
   border-radius: 50%;
 }
-.view-category-wise-content-list .item-list ul.pager li.pager-next a, .view-category-wise-content-list .item-list ul.pager li.pager-last a, .view-category-wise-content-list .item-list ul.pager li.pager-first a, .view-category-wise-content-list .item-list ul.pager li.pager-previous a, .view-blog-listing .item-list ul.pager li.pager-next a, .view-blog-listing .item-list ul.pager li.pager-last a, .view-blog-listing .item-list ul.pager li.pager-first a, .view-blog-listing .item-list ul.pager li.pager-previous a, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-next a, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last a, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first a, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous a {
+.view-category-wise-content-list .item-list ul.pager li.pager-next a, .view-category-wise-content-list .item-list ul.pager li.pager-last a, .view-category-wise-content-list .item-list ul.pager li.pager-first a, .view-category-wise-content-list .item-list ul.pager li.pager-previous a, .view-blog-listing .item-list ul.pager li.pager-next a, .view-blog-listing .item-list ul.pager li.pager-last a, .view-blog-listing .item-list ul.pager li.pager-first a, .view-blog-listing .item-list ul.pager li.pager-previous a,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-next a,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-last a,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-first a,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-previous a,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-next a,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last a,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first a,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous a {
   color: #323232;
   line-height: 25px;
 }
-.view-category-wise-content-list .item-list ul.pager li.pager-next.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-next.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-last.last, .view-blog-listing .item-list ul.pager li.pager-next.pager-first.first, .view-blog-listing .item-list ul.pager li.pager-next.pager-last.last, .view-blog-listing .item-list ul.pager li.pager-last.pager-first.first, .view-blog-listing .item-list ul.pager li.pager-last.pager-last.last, .view-blog-listing .item-list ul.pager li.pager-first.pager-first.first, .view-blog-listing .item-list ul.pager li.pager-first.pager-last.last, .view-blog-listing .item-list ul.pager li.pager-previous.pager-first.first, .view-blog-listing .item-list ul.pager li.pager-previous.pager-last.last, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-next.pager-first.first, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-next.pager-last.last, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last.pager-first.first, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last.pager-last.last, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first.pager-first.first, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first.pager-last.last, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous.pager-first.first, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous.pager-last.last {
+.view-category-wise-content-list .item-list ul.pager li.pager-next.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-next.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-last.last, .view-blog-listing .item-list ul.pager li.pager-next.pager-first.first, .view-blog-listing .item-list ul.pager li.pager-next.pager-last.last, .view-blog-listing .item-list ul.pager li.pager-last.pager-first.first, .view-blog-listing .item-list ul.pager li.pager-last.pager-last.last, .view-blog-listing .item-list ul.pager li.pager-first.pager-first.first, .view-blog-listing .item-list ul.pager li.pager-first.pager-last.last, .view-blog-listing .item-list ul.pager li.pager-previous.pager-first.first, .view-blog-listing .item-list ul.pager li.pager-previous.pager-last.last,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-next.pager-first.first,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-next.pager-last.last,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-last.pager-first.first,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-last.pager-last.last,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-first.pager-first.first,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-first.pager-last.last,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-previous.pager-first.first,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-previous.pager-last.last,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-next.pager-first.first,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-next.pager-last.last,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last.pager-first.first,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last.pager-last.last,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first.pager-first.first,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first.pager-last.last,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous.pager-first.first,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous.pager-last.last {
   display: none;
 }
 
@@ -5303,7 +5369,8 @@ h1.category-heading {
 #block-views-video-landing-header-block {
   color: #aaa8a9;
   background: #171717;
-  margin-top: 14px;
+  padding-top: 10px;
+  margin: 0;
 }
 #block-views-video-landing-header-block .ad-blocker:empty {
   display: none;
@@ -12662,10 +12729,10 @@ h1.about-us-heading + div p {
 
 /*blog detail page css end*/
 /*css start Podcast page*/
-.page-podcasts-listing .view-podcasts-listing .podcast-left {
+.page-podcasts-listing .view-podcasts-listing .podcast-left, .page-podcast .view-podcasts-listing .podcast-left {
   position: relative;
 }
-.page-podcasts-listing .view-podcasts-listing .podcast-left span {
+.page-podcasts-listing .view-podcasts-listing .podcast-left span, .page-podcast .view-podcasts-listing .podcast-left span {
   bottom: 0;
   left: 0;
   position: absolute;
@@ -12675,7 +12742,7 @@ h1.about-us-heading + div p {
   font-size: 12px;
   font-family: Roboto;
 }
-.page-podcasts-listing .view-podcasts-listing .podcast-left span i {
+.page-podcasts-listing .view-podcasts-listing .podcast-left span i, .page-podcast .view-podcasts-listing .podcast-left span i {
   font-size: 14px;
 }
 

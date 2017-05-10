@@ -24,8 +24,6 @@ function itg_quiz_winners_mail_list() {
       'body' => $mail_content,
       'subject' => $mail_subject,
     );
-    print "came to mailk";
-    p($params);
     $mail = drupal_mail('itg_quiz_winners_list', 'send_mail_to_winners', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
       drupal_set_message(t('Mail has been sent successfully.'));
