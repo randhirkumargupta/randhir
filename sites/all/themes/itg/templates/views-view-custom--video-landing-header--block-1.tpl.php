@@ -17,7 +17,7 @@
             <figcaption><i class="fa fa-play-circle"></i> <?php print $row['field_video_duration']; ?></figcaption>
           </figure>
           <?php $title = $row['title']; ?>
-          <p title="<?php print $row['title']; ?>">
+          <p title="<?php print strip_tags($row['title']); ?>">
           <?php print l($title, 'node/' . $row['nid'], array('query' => array('category' => $_GET['category'], 'sid' => $_GET['sid']), 'html' => TRUE)); ?>
           </p>
         </div>
