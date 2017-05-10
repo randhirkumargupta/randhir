@@ -409,7 +409,7 @@ function itg_loyalty_reward_product_expiry_notification_callback() {
     $user_email = get_email_by_roll($rid);
     $query = db_select('field_data_field_lrp_product_count', 'flpc');
     $query->fields('flpc', array('entity_id'));
-    $query->condition('flpc.field_lrp_product_count_value', 0, '=');
+    $query->condition('flpc.field_lrp_product_count_value', 2, '=');
     $query->condition('flpc.bundle', 'loyalty_and_rewards', '=');
     $result = $query->execute();
     while ($record = $result->fetchAssoc()) {

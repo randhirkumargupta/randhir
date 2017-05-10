@@ -32,7 +32,7 @@ $live_tv_get_details = itg_get_live_tv_code($device[0]);
             <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span>Embed</span></a>
             <div class="show-embed-code-div">
                     <div class="copy-sample-code">
-                     <textarea readonly="true">
+                     <textarea readonly>
                       <?php
                          if (filter_var($live_tv_get_details, FILTER_VALIDATE_URL))
                          {

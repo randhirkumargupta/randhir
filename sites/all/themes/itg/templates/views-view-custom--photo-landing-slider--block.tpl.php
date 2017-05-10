@@ -38,7 +38,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
           <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
           <div class="show-embed-code-div">
             <div class="copy-sample-code">
-              <textarea readonly="true"><div id='IndiaToday_gallery' data-type='UAT'></div><script src='<?php print $base_url; ?>/sites/all/themes/itg/js/photo_iframeResizer.js'></script><script><?php echo "iFrameResize({galleryid: $photo_node->nid})"; ?></script></textarea> 
+              <textarea readonly><div id='IndiaToday_gallery' data-type='UAT'></div><script src='<?php print $base_url; ?>/sites/all/themes/itg/js/photo_iframeResizer.js'></script><script><?php echo "iFrameResize({galleryid: $photo_node->nid})"; ?></script></textarea> 
                     </div>
                   </div>
                 </li>
@@ -77,10 +77,12 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
     
     <div class="col-md-8">
         <ul class="slickslide">
-      <?php foreach ($rows as $index => $row):
-        ?>
-                      <li >
-                          <figure class="photo-landing-slider-pic" img-fid=" <?php print $row['fid']; ?>">
+
+  <?php foreach ($rows as $index => $row):
+    ?>
+                  <li >
+                      <figure class="photo-landing-slider-pic" data-img-fid=" <?php print $row['fid']; ?>">
+
 
             <?php print $row['field_images']; ?>                    
                           </figure>
@@ -147,7 +149,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
         
         <div class="social-icon mhide">
             <ul>
-                <li><a title="share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
+              <li><a title="share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
                 <li><a title="share on google+" class="user-activity def-cur-pointer" rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
                 <li><a title="share on twitter" class="user-activity def-cur-pointer" rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="twitter_share" data-status="1" onclick="twitter_popup('<?php print urlencode($share_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
                 <li><a href="mailto:?body=<?php print urlencode($actual_link); ?>" title="Email"><i class="fa fa-envelope"></i></a></li>
@@ -166,7 +168,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                   <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
                   <div class="show-embed-code-div">
                     <div class="copy-sample-code">
-                    <textarea readonly="true"><div id='IndiaToday_gallery' data-type='UAT'></div><script src='<?php print $base_url; ?>/sites/all/themes/itg/js/photo_iframeResizer.js'></script><script><?php echo "iFrameResize({galleryid: $photo_node->nid})"; ?></script></textarea>
+                    <textarea readonly><div id='IndiaToday_gallery' data-type='UAT'></div><script src='<?php print $base_url; ?>/sites/all/themes/itg/js/photo_iframeResizer.js'></script><script><?php echo "iFrameResize({galleryid: $photo_node->nid})"; ?></script></textarea>
                     </div>
                   </div>
                 </li>

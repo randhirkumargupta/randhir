@@ -1,7 +1,7 @@
 <div class="videogallery-slider"> 
     
     <?php foreach ($rows as $index => $row): ?>
-        <figure class="" img-fid=" <?php print $row['fid']; ?>">
+        <figure class="" data-img-fid=" <?php print $row['fid']; ?>">
             <?php print $row['field_images']; ?>                    
         </figure>
     <?php endforeach; ?>       

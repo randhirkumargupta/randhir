@@ -128,7 +128,7 @@
 
 
     jQuery('.imgtags img').live('click', function(e) {
-        var fid = jQuery(this).parent('.imgtags').attr('img-fid');
+        var fid = jQuery(this).parent('.imgtags').attr('data-img-fid');
         if (fid != "" && fid != 'undefined')
         {
 

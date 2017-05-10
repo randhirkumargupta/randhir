@@ -492,14 +492,7 @@ function itg_workflow_after_build($form, &$form_state) {
 
   $form['revision_information']['log'] = $log;
 
-  $form['revision_information']['log']['#title'] = t('Remarks');
-
-  // hide workbench dropdown
-  /* drupal_add_js('jQuery(document).ready(function() {
-    jQuery("#edit-revision-information").show();
-    jQuery(".form-item-workbench-moderation-state-new").hide();
-    jQuery("#edit-field-story-archive").hide();
-    });', array('type' => 'inline', 'scope' => 'footer')); */
+  $form['revision_information']['log']['#title'] = t('Remarks');  
 
   if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(EDITOR, $user->roles) || array_key_exists(UGC_MODERATOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles)) {
     if (!isset($form['#node']->workbench_moderation['current'])) {
@@ -514,6 +507,7 @@ function itg_workflow_after_build($form, &$form_state) {
         $form['actions']['submit']['#value'] = t('Save as Draft');
       }
       elseif ($form['#node']->workbench_moderation['current']->state == 'needs_review') {
+        
         $submit_name = '';
         $state_class = ' published';
         $form['actions']['submit']['#attributes']['class'][] = 'edit-submit-class';
@@ -538,7 +532,7 @@ function itg_workflow_after_build($form, &$form_state) {
                         jQuery(".reasons-form").hide();
                       }
                     });
-                });', array('type' => 'inline', 'scope' => 'footer'));
+                });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 2));
       }
     }
   }
