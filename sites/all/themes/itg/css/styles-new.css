@@ -1858,6 +1858,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   background-color: #000;
   float: left;
   width: 100%;
+  height: 74px;
   overflow: hidden;
 }
 .home_page_poll_widget_block .poll-data .active-poll-title h2 {
@@ -1920,6 +1921,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   padding: 10px 0 0;
   max-height: 115px;
   overflow-y: auto;
+  margin-top: 0;
 }
 .home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id .past-poll li:last-child,
 .home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id .past-poll li {
