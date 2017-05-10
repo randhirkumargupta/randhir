@@ -20,7 +20,7 @@
           <?php } ?>
 
 
-          <p class="title <?php print $entity['type'] ?> section-order-<?php print $entity['nid'] ?>">
+          <p title="<?php echo $entity['title']; ?>" class="title <?php print $entity['type'] ?> section-order-<?php print $entity['nid'] ?>">
             <?php echo l(mb_strimwidth($entity['title'], 0, 150, ".."), "node/" . $entity['nid']); ?>
           </p>
 

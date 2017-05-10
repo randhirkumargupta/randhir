@@ -36,7 +36,7 @@ if (!empty($data['node_data'])) :
         <?php else : ?>
           <!-- EXTRA LARGE IMAGE IS PUT -->
           <?php if (!empty($data['node_data']->field_story_extra_large_image['und'][0]['uri'])) { ?>
-          <a title="<?php echo $data['node_data']->title; ?>" href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>
+          <a  href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>
                 <img alt="<?php echo $data['node_data']->field_story_extra_large_image['und'][0]['alt'] ?>" title="<?php echo $data['node_data']->field_story_extra_large_image['und'][0]['title'] ?>" src="<?php print image_style_url("big_story_widget", $data['node_data']->field_story_extra_large_image['und'][0]['uri']); ?>"/>
               <?php print $video_icon; ?>
               <?php print $photo_icon; ?>
@@ -85,7 +85,7 @@ if (!empty($data['node_data'])) :
           $actual_link = $base_url . '/' . drupal_get_path_alias("node/{$data['node_data']->nid}");
           $short_url = shorten_url($actual_link, 'goo.gl');
           ?>
-          <h1 class="big-story-first big-story-<?php print $data['node_data']->nid . ' ' . $red_dot_class ?>">
+        <h1 title="<?php echo strip_tags($node_title); ?>" class="big-story-first big-story-<?php print $data['node_data']->nid . ' ' . $red_dot_class ?>">
             <?php echo l($node_title, "node/" . $data['node_data']->nid, array('html' => TRUE , "attributes" => array("title" => $node_title))); ?>
           </h1>
         <?php endif; ?>

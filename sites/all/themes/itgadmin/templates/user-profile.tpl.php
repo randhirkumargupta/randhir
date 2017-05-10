@@ -53,7 +53,7 @@
       print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
     }
     else {
-      $file = $base_url . '/sites/all/themes/rubik/images/user-default.png';
+      $file = $base_url . '/sites/all/themes/itgadmin/images/user-default.png';
       print "<img src= $file>";
     }
     ?>
