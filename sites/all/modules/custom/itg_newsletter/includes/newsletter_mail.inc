@@ -51,8 +51,7 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
   $template_node = node_load($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
   $education_tid = !empty(variable_get('itg_newsletter_education_id'))? variable_get('itg_newsletter_education_id') : NEWSLETTER_EDUCATION_TID;
   // TODO: Define globally
-  if (in_array($education_tid, $cat_array))
-  {
+  if (in_array($education_tid, $cat_array)) {
     $subscriberlist = itg_newslatter_get_subscribe_page_users_email($education_tid);
   }
   $user_email_arr = itg_newslatter_get_subscribe_users_email();
@@ -82,14 +81,29 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
   else {
     $mail_content = itg_get_newsletter_mail_content($node, $template_node);
   }
-  $params = array(
+  
+  // code for netcore
+  if (function_exists('custom_netcore_mail_create_campaign')) {
+    $data_email = array();
+    $data_email['subject'] = t('India Today Newsletter').' | ' . $template_node->field_news_title[LANGUAGE_NONE][0]['value'];
+    $data_email['fromName'] = 'India Today';
+    $data_email['fromEmail'] = ITG_SUPPORT_EMAIL;
+    $data_email['content'] = $mail_content;
+    $create_campaign = custom_netcore_mail_create_campaign($data_email);
+    $campaign = array();
+    $campaign['messageId'] = $create_campaign['OUTPUT']['MID'] ;
+    $campaign['listId'] = NETCORE_LIST_ID;
+    $mail_scehdule = custom_netcore_mail_scehdule_campaign($data);
+  }
+  /*$params = array(
     'body' => $mail_content,
     'subject' => t('India Today Newsletter').' | ' . $template_node->field_news_title[LANGUAGE_NONE][0]['value'],
   );
 
   $mail = drupal_mail('itg_newsletter', 'send_newsletter', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
-
-  if ($mail['result']) {
+  */
+  
+  if ($mail_scehdule['TYPE'] == 'success') {
     drupal_set_message(t('Newsletter has been sent successfully.'));
     if ($news_eng_type == 'automatically') {
       itg_update_newsletter_cron_tbl($node->nid);
