@@ -73,7 +73,8 @@ if($key == 0) {
               . '<input type="text" class="image_tags" name="tags[]" placeholder="Tags"  value=""></br>'
               . '<input type="text" class="image_place" name="place[]" placeholder="Place"  value=""></br>'
               . '<input type="text" class="image_photo_grapher" name="photo_grapher[]" placeholder="Photographer"  value=""></br>'
-              . '<input type="date" class="image_date" name="image_date[]" placeholder="Date (dd/mm/yyyy)"  value=""></br>'
+              . '<input type="text" id="date_validation_'.$key.'" class="image_date datevalidate" name="image_date[]" placeholder="Date (mm/dd/yyyy)"  value=""></br>'
+              . '<span style="display:none" class="error date_validation_'.$key.'">please enter correct date format.</span>'
               . '<input type="text" class="image_description" name="image_description[]" placeholder="Description"  value=""></br>'
               . '</div> </div> ';
 }else {
@@ -82,8 +83,9 @@ if($key == 0) {
               . '<input type="text" class="image_tags_img" name="tags[]" placeholder="Tags"  value=""></br>'
               . '<input type="text" class="image_place_img" name="place[]" placeholder="Place"  value=""></br>'
               . '<input type="text" class="image_photo_grapher_img" name="photo_grapher[]" placeholder="Photographer"  value=""></br>'
-              . '<input type="date" class="image_date_img" name="image_date[]" placeholder="Date (dd/mm/yyyy)"  value=""></br>'
-              . '<input type="text" class="image_description_img" name="image_description[]" placeholder="Description"  value=""></br>'
+              . '<input type="text" id="date_validation_'.$key.'" class="image_date_img datevalidate" name="image_date[]" placeholder="Date (mm/dd/yyyy)"  value=""></br>'
+              . '<span style="display:none" class="error date_validation_' . $key . '">please enter correct date format.</span>'
+            . '<input type="text" class="image_description_img" name="image_description[]" placeholder="Description"  value=""></br>'
               . '</div> </div> ';
 }
 
