@@ -166,6 +166,13 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
 
   $paths = array_map('trim', $paths);
 
+  // Sending for clearing cache for varnish before hitting to Varnish
+  if (module_exists('varnish')) {
+    if (function_exists('varnish_expire_cache')) {
+      varnish_expire_cache($paths);
+    }
+  }  
+  
   $paths = itg_akamai_send_for_host_mapping($paths);
   $paths = itg_akamai_send_for_host_mapping_for_amp($paths);  // Preparing data for AMP URLs
 
