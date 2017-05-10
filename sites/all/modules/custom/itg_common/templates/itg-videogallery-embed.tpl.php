@@ -101,9 +101,9 @@ if (function_exists('itg_common_get_node_title') && !empty($_GET['gid'])) {
       $usebitrates = implode(',', $allbitrates);
       $getvideo_bitrate_url = itg_videogallery_make_bitrate_url($video_value->field_migrated_video_url_value, $usebitrates);
       ?>
-        <div class="iframe-video">
+        <div class="iframe-video-embed">
 
-          <div style="margin:0 auto; width:622px;"><div align="center" id="videoplayer_<?php echo $keys; ?>"></div></div> 
+          <div id="videoplayer_<?php echo $keys; ?>"></div> 
           <script type="text/javascript">
 
             jwplayer('videoplayer_<?php echo $keys; ?>').setup({
@@ -118,9 +118,8 @@ if (function_exists('itg_common_get_node_title') && !empty($_GET['gid'])) {
                     }]
                 }],
               primary: "flash",
-              width: "622",
-              height: "446",
-              aspectratio: "4:3",
+              width: "100%",
+              aspectratio: "16:9",
               "stretching": "exactfit",
               androidhls: "true",
               fallback: "false",

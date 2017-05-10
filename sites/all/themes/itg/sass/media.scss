@@ -2866,7 +2866,10 @@
   h1.category-heading{
     @include font(32px,46px,400);                
   } 
-  .view-category-wise-content-list, .view-blog-listing, .page-podcasts-listing .view-podcasts-listing{           
+  .view-category-wise-content-list, 
+  .view-blog-listing, 
+  .page-podcast .view-podcasts-listing,           
+  .page-podcasts-listing .view-podcasts-listing{           
     .catagory-listing{        
       .pic{
         width: 170px; 
@@ -3188,7 +3191,7 @@
   .second-level-menu.before-load{
     height: 37px; overflow: hidden;
   }
-  body.section-common{
+  body.page-taxonomy-term{
     .row{
       overflow: hidden;
     }

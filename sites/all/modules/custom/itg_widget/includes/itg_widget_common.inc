@@ -2363,6 +2363,7 @@ function get_homepage_current_poll_widget($content_type , $widget_name) {
  * @param type $nid
  */
 function itg_poll_home_page_polls_select($nid) {
+  global $base_url;
   if (isset($nid)) {
     $node = node_load($nid);
     $poll_banner_image = '';
@@ -2371,7 +2372,7 @@ function itg_poll_home_page_polls_select($nid) {
       $poll_banner_image = theme('image_style' , array('style_name' => 'home_page_poll_images_style' , 'path' => $node->field_poll_banner[$node->language][0]['uri']));
     }
     else {
-      $poll_banner_image = '';
+      $poll_banner_image = '<img src ="'.$base_url . "/" . drupal_get_path('theme', 'itg').'/images/itg_image370x208.jpg">';
     }
 
     $poll_image_exist_class = '';
@@ -2395,9 +2396,10 @@ function itg_poll_home_page_polls_select($nid) {
         $poll_image_exist_class = '';
       }
     }
+    
     $polls_info['poll_banner_image'] = $poll_banner_image;
     $polls_info['nid'] = isset($nid) ? $nid : "";
-    $polls_info['title'] = isset($node->title) ? t(substr(check_plain($node->title) , 0 , 65)) . '..' : "";
+    $polls_info['title'] = isset($node->title) ? t(check_plain($node->title)) : "";
     $polls_info['updated'] = isset($node->changed) ? t('Updated:') . '&nbsp;' . date('M d Y H:i' , $node->changed) : "";
     $polls_info['poll_image_exist_class'] = $poll_image_exist_class;
     return theme('itg_poll_homepage_forms' , array('data' => $polls_info));

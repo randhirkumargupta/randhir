@@ -4248,6 +4248,17 @@ div.node{
   & + div.clearfix{
     margin-top: 10px;
   }
+  tbody tr:first-child{
+    td{
+      .field-name-field-news-cid{
+        .form-type-textfield{
+          > label:after{
+            @extend .astrick;
+          }
+        }
+      }
+    }
+  }
 }
 .node-syndication_rule-form{
   .field-name-field-syndication-set-day, 

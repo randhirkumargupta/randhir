@@ -110,6 +110,11 @@ function itg_common_custompath_insert_load($node) {
     $newpath = itg_common_custompath_insert_val($pathdata);
     return $newpath;
   }
+  elseif ($node->type == 'mega_review_critic') {
+    $pathdata = 'movie/review/story' . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
+    $newpath = itg_common_custompath_insert_val($pathdata);
+    return $newpath;
+  }
   elseif ($node->type == 'page' || $node->type == 'blog') {
     $pathdata = $edited_sef_url;
     $newpath = itg_common_custompath_insert_val($pathdata);

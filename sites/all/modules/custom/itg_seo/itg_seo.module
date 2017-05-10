@@ -161,7 +161,7 @@ function itg_get_sef_url($sef_path , $nodeid) {
       unset($new_url_array[$array_size - 1]);
       $edited_sef_url = implode('-' , $new_url_array);
     }
-    elseif ($is_photo_story) {
+    elseif ($is_photo_story || $is_mega_review_critic) {
       $path_alias_set = $sef_path;
       $path_data = explode("/" , $path_alias_set);
       $edit_path_data = end($path_data);
@@ -283,7 +283,7 @@ function frontend_breadcrumb_display($id = NULL , $entity_object = NULL , $singl
 //  $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo">' . l('<span itemprop="title">' . t($title_val) , 'node/' . $entity_object->nid , array('html' => TRUE , 'attributes' => array('itemprop' => 'url'))) . '</span>';
 //  }
 
-  $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo"><span itemprop="title">' . t($title_val) . '</span>';
+  $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo"><span itemprop="title">' . t($title_val) . '</span></div>';
   $section_link = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">'
       . l('<span itemprop="title">News</span>' , '<front>' , array('html' => TRUE , 'attributes' => array('itemprop' => 'url'))) . '</div>';
 
@@ -474,7 +474,8 @@ function content_types_for_sef_url() {
     'blog' ,
     'reporter' ,
     'itg_funalytics',
-    'page'
+    'page',
+    'mega_review_critic'
   );
 }
 
