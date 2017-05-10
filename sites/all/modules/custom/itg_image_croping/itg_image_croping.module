@@ -529,7 +529,7 @@ function itg_image_saveimage_info() {
         $image_date = "";
       if ($output_info['image_date'][$i] != "") {
         $imagedate = explode('/', $output_info['image_date'][$i]);
-        $image_date = $imagedate[2] . '-' . $imagedate[1] . '-' . $imagedate[0];
+        $image_date = $imagedate[2] . '-' . $imagedate[0] . '-' . $imagedate[1];
       }
       if ($image_date == "") {
         $image_date = date('Y-m-d');

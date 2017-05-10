@@ -7,6 +7,18 @@
     Drupal.behaviors.itg_sso_reg = {
         attach: function (context, settings) {
             var base_url = settings.itg_sso_reg.settings.base_url;
+            var error = settings.itg_sso_reg.settings.custom_error;
+            //console.log(error);
+            if (error) {
+                jQuery.each(error, function (index, item) {
+                    if (index == 'mobile') {
+                        jQuery('.mobile-error').html(item);
+                    }
+                    if (index == 'mail') {
+                        jQuery('.email-error').html(item);
+                    }
+                });
+            }
             // ajax for otp
             $('#itg-sso-reg-multistep-form--2 #otpclickme', context).click(function (event) {
 
