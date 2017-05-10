@@ -26,6 +26,10 @@ function apachesolr_image_apachesolr_index_document_build($document, $node, $nam
         }
     }
     
+    if (isset($node->status) && !empty($node->status)) {
+        $document->addField('sm_field_node_status', $node->status);
+    }
+    
     if (isset($node->field_story_extra_large_image['und']['0']['alt'])) {
         $document->addField('sm_alttext', $node->field_story_extra_large_image['und']['0']['alt']);
         $document->addField('sm_image_title', $node->field_story_extra_large_image['und']['0']['title']);
