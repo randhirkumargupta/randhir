@@ -118,16 +118,16 @@ function itg_ugc_send_follow_story_content_mail($node) {
         if (!empty($to))
         {
           $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
-          if ($mail['result'])
-          {
-            return TRUE;
-          }
-          else
-          {
-            $error_msg = 'Failed to send the email!';
-            watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
-            return FALSE;
-          }
+//          if ($mail['result'])
+//          {
+//            return TRUE;
+//          }
+//          else
+//          {
+//            $error_msg = 'Failed to send the email!';
+//            watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+//            return FALSE;
+//          }
         }
       }
     }
