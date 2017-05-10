@@ -17,7 +17,7 @@
             <figure>
               <?php print $img; ?> <figcaption><i class="fa fa-play-circle"></i><?php echo $row['field_video_duration']; ?></figcaption>
             </figure>  
-            <p  title="<?php print $row['title'] ; ?>">
+            <p  title="<?php print strip_tags($row['title']) ; ?>">
             <?php echo l(mb_strimwidth(strip_tags($desc), 0, 60, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>   </span>
           </p>
         </li>

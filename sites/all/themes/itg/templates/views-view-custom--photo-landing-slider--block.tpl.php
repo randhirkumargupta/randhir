@@ -11,7 +11,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
 ?>
 <div class="row">
   <div class="col-md-12">
-    <h1 class="photo-heading" title="<?php print $rows[0]['title']; ?>"><?php print $rows[0]['title']; ?></h1>    <?php
+    <h1 class="photo-heading" title="<?php print strip_tags($rows[0]['title']); ?>"><?php print $rows[0]['title']; ?></h1>    <?php
     global $user;
     if (in_array('Social Media', $user->roles)) {
       ?>
