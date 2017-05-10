@@ -14,7 +14,7 @@
       <li class="recom-listing">
 
         <div class="pic">
-            <a title="<?php echo $node_info['node_data']['title'] ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_info['node_data']['nid']}"); ?>">
+            <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_info['node_data']['nid']}"); ?>">
             <?php
             if (isset($node_info['node_data']['uri'])) {
               $style_name = ($frist_key == 0) ? 'recommended_for_you_large' : "video_landing_page_170_x_127";
