@@ -484,3 +484,13 @@ function is_valid_content_type_for_sef_url($type) {
   }
   return FALSE;
 }
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function itg_seo_theme_registry_alter(&$theme_registry) {
+  $theme_registry['views_data_export_xml_body']['theme paths'] = array(0 => drupal_get_path('module', 'itg_seo') . '/templates');
+  $theme_registry['views_data_export_xml_body']['theme path'] = drupal_get_path('module', 'itg_seo') . '/templates';
+  $theme_registry['views_data_export_xml_body']['path'] = drupal_get_path('module', 'itg_seo') . '/templates';
+  $theme_registry['views_data_export_xml_body']['template'] = 'views-data-export-xml-body';
+}
