@@ -162,7 +162,7 @@ function itg_story_form_alter(&$form , &$form_state , $form_id) {
         $form['field_story_configurations'][LANGUAGE_NONE]['#default_value'] = array('commentbox');
       }
       if ($user->uid != 1) {
-        unset($form['field_story_short_headline']);
+        //unset($form['field_story_short_headline']);
         unset($form['field_story_long_head_line']);
         unset($form['field_story_select_templates']['und']['#options']['quote']);
          unset($form['field_story_configurations']['und']['#options']['comment']);
