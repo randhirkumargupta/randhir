@@ -6552,6 +6552,25 @@ section.sidebar{
             @include display-inline;
         }
     }
+    .search-icon-parent {
+      position: relative;
+      display: inline-block;
+      vertical-align: top;
+      .globle-search{
+        position: absolute;
+        right: 20px;
+        width: 0;
+        transition: all 0.5s ease-in-out;
+        overflow: hidden;
+        top: 4px;
+        .search-text {
+          width: 100%;
+        }
+        &.active{
+          width: 225px;
+        }
+      }
+    }
 }
 #block-itg-event-backend-ad-right-sidebar-event {
     padding: 30px;

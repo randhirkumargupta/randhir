@@ -8464,6 +8464,25 @@ section.sidebar .block-itg-ads {
   display: inline-block;
   vertical-align: top;
 }
+#block-menu-menu-event-menu .search-icon-parent {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+#block-menu-menu-event-menu .search-icon-parent .globle-search {
+  position: absolute;
+  right: 20px;
+  width: 0;
+  transition: all 0.5s ease-in-out;
+  overflow: hidden;
+  top: 4px;
+}
+#block-menu-menu-event-menu .search-icon-parent .globle-search .search-text {
+  width: 100%;
+}
+#block-menu-menu-event-menu .search-icon-parent .globle-search.active {
+  width: 225px;
+}
 
 #block-itg-event-backend-ad-right-sidebar-event {
   padding: 30px;
