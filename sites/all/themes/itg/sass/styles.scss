@@ -11,7 +11,7 @@ body{
     font: 400 14px/18px $itg-robotoslab;
     color: #333;   
 }
-h1, h2, h3, h4{@include itg-font($itg-roboto,$itg-font-medium);}
+h1, h2, h3, h4{@include itg-font($itg-roboto,$itg-font-medium); word-wrap: break-word;}
 button{outline: none;}
 h1{    
         font-size: $h1-font-size;
@@ -6030,6 +6030,7 @@ section.sidebar{
         vertical-align: top;
         width: 100%;
     }
+    .email-error, .mobile-error{font-size: 13px; color: red;}
 }
 .sign-in-link{
     padding: 20px 0;

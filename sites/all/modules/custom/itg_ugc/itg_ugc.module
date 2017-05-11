@@ -95,6 +95,7 @@ function itg_ugc_rules_action_info() {
 function itg_ugc_send_follow_story_content_mail($node) {
   if ($node->type == 'story')
   {
+    if (isset($node->op)) {
     $get_user_id = itg_get_follow_story_user($node->nid, 1);
     if(!empty($get_user_id)) {
       foreach ($get_user_id as $follow_user) {
@@ -130,6 +131,7 @@ function itg_ugc_send_follow_story_content_mail($node) {
 //          }
         }
       }
+    }
     }
   }
 }

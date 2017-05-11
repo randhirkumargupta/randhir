@@ -42,6 +42,7 @@ body {
 h1, h2, h3, h4 {
   font-weight: 500;
   font-family: "Roboto", sans-serif;
+  word-wrap: break-word;
 }
 
 button {
@@ -7920,6 +7921,10 @@ section.sidebar .block-itg-ads {
   padding: 15px 15px 0;
   vertical-align: top;
   width: 100%;
+}
+[id*="itg-sso-reg-multistep-form"] .email-error, [id*="itg-sso-reg-multistep-form"] .mobile-error {
+  font-size: 13px;
+  color: red;
 }
 
 .sign-in-link {
