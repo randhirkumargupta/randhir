@@ -39,8 +39,13 @@ if (!empty($node) && ($node->type == 'event_backend')) {//shravan
             <div class="social-share">
                 <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                <a href="#" class="event-search-icon"><i class="fa fa-search" aria-hidden="true"></i></a>
-                <div class="event-search"><input type="text" placeholder="Search" value=""></div>
+                <div class="search-icon-parent">
+                  <a href="javascript:void(0)" class="search-icon-default" title=""><i class="fa fa-search"></i></a>
+                  <a href="javascript:void(0)" class="search-icon-search" title=""><i class="fa fa-search"></i></a>
+                  <div class="globle-search">
+                    <input class="search-text" placeholder="Type here" type="text" value="">
+                  </div>
+                </div>
             </div>                           
         </div>
       <ul class="menu">
@@ -79,7 +84,7 @@ if (!empty($node) && ($node->type == 'event_backend')) {//shravan
       </ul>
     </div>
     <div class="col-md-4 col-sm-4">
-      <div class="event-detail" style="text-align: center; color:#FFF">
+      <div class="event-detail">
         <span class="event-str-date"><?php print $event_start_date; ?> </span>
         <span class="event-vanue-detail-place" ><?php print $event_location; ?></span>                
       </div>            

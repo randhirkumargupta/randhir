@@ -3506,7 +3506,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_magazine_kicker_text',
-    'label' => 'Magazine kicker',
+    'label' => 'Magazine Headline',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -5765,9 +5765,9 @@ function features_for_story_field_default_field_instances() {
   t('Listicle description');
   t('Listicle title');
   t('Listicle type');
+  t('Magazine Headline');
   t('Magazine Kicker Text');
   t('Magazine headline');
-  t('Magazine kicker');
   t('Map Embed Code');
   t('Map Position');
   t('Medium image');
