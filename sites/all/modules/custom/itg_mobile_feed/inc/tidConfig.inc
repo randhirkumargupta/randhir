@@ -78,6 +78,7 @@ function tidConfig(){
     $tid_config['photo_sec_tid'] = $photo_sec_tid;
     $tid_config['video_sec_tid'] = $video_sec_tid;
     $tid_config['program_sec_tid'] = $program_sec_tid;
+    $tid_config['magazine'] = 844529;
     $tid_config['left_main_tid'] = $left_main_tid;
     return $tid_config;
 }

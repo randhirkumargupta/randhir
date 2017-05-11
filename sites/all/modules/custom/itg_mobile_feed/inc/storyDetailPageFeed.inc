@@ -27,7 +27,7 @@ function storyDetailPageFeed() {
  *
  * @return array
  */
-function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="") {
+function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="", $type) {
   //echo print_ar(arg());exit();
   //$nid = 664;
   $imgtag = "";
@@ -38,6 +38,21 @@ function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="") {
      //$term_feed_path = getcwd() . "/sites/all/modules/custom/itg_mobile_feed/xml_it/stories"; 
      $term_feed_path = "public://xml_it/stories";
 	 file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
+  }
+  elseif($type){
+     if($type == "photogallery"){
+          $term_feed_path = "public://xml_it/photos";
+	 file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
+     } 
+     
+     elseif($type == "story"){
+          $term_feed_path = "public://xml_it/stories";
+	 file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
+     } 
+     elseif($type == "videogallery"){
+          $term_feed_path = "public://xml_it/videos";
+	 file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
+     } 
   }
   
   
@@ -69,7 +84,7 @@ function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="") {
     $comment_cont = $node->comment;
     $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
     $reporter_node = itg_common_get_node_title($byline_id);
-    $related_node = relatedContentNodeType($nid);
+    $related_node = relatedContentNodeType($nid, "story");
     $city = getCityByNid($nid);
     //$weburl = $base_url . "/node/" . $nid;
     $alias = drupal_get_path_alias('node/'.$nid.'');

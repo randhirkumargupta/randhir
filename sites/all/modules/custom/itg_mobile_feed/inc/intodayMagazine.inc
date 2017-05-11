@@ -35,9 +35,12 @@ function intodayMagazine() {
   
     
     
-      
+      $tid_magazine_section = tidConfig();
+      $magazine_tid = $tid_magazine_section['magazine'];
         
-        $storytag = generateIntodayMagazinePage();
+        $cattid = generateIntodayMagazinePage($magazine_tid);
+        $term = taxonomy_term_load($cattid);
+        $term_name = $term->name;
         $list_count = $storytag['lcount'];
         $catFile = "";
         //xml feed file name
@@ -81,7 +84,7 @@ function intodayMagazine() {
  *
  * @return array
  */
-function generateIntodayMagazinePage() {
+function generateIntodayMagazinePage($tid) {
   // variable declaration
   global $base_url;
   $node_count = "";
@@ -162,7 +165,7 @@ function generateIntodayMagazinePage() {
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
 
       //related content
-      $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
+      $related = relatedContentNodeType($resvalue['field_common_related_content_value'], $type);
 
       // create date formating
       $create_date = date("F d, Y", $created);

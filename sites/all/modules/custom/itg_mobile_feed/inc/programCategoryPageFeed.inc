@@ -176,7 +176,7 @@ function generateProgramCategoryPage($tid) {
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
 
       //related content
-      $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
+      $related = relatedContentNodeType($resvalue['field_common_related_content_value'], $type);
 
       // create date formating
       $create_date = date("F d, Y", $created);

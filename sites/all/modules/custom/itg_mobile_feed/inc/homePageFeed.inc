@@ -101,7 +101,7 @@ function bigStoryWidgetData() {
   $file_medium_img_url = completeFilePath($big_story_block_data[1]['node_load_data']->field_story_medium_image['und'][0]['fid']);
 
   //related content
-  $related = relatedContentNodeType($big_story_block_data[1]['node_load_data']->field_common_related_content['und'][0]['value']);
+  $related = relatedContentNodeType($big_story_block_data[1]['node_load_data']->field_common_related_content['und'][0]['value'], $type);
 
   // create date formating
   $create_date = date("F d, Y", $created);
@@ -202,7 +202,7 @@ function homePageFeaturesWidgetData() {
     $file_medium_img_url = completeFilePath($value['field_story_medium_image_fid']);
 
     //related content
-    $related = relatedContentNodeType($value['field_common_related_content_value']);
+    $related = relatedContentNodeType($value['field_common_related_content_value'], $type);
 
     // create date formating
     $create_date = date("F d, Y", $created);
@@ -303,7 +303,7 @@ function topStoriesWidgetData() {
     $file_medium_img_url = completeFilePath($value['field_story_medium_image_fid']);
 
     //related content
-    $related = relatedContentNodeType($value['field_common_related_content_value']);
+    $related = relatedContentNodeType($value['field_common_related_content_value'], $type);
 
     // create date formating
     $create_date = date("F d, Y", $created);

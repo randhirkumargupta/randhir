@@ -72,14 +72,14 @@ function programSectionPageFeed() {
  //write xml node of storysectionlisting
   if ($child_node) {
         // xml feed header
-        $output .= getMobileFeedXmlHeader();
+        $output .= program_section_page_feed_header();
         $output .= "\n<id>1</id>
                             <title><![CDATA[programmes]]></title>
                             <itemcount>" . $listcount . "</itemcount>\n";
         // child node
         $output .= $child_node;
         // xml feed footer
-        $output .= "\n" . getMobileFeedXmlFooter();
+        $output .= "\n" . program_section_page_feed_footer();
       }
        // set into redis
     $result_set = setRedis($redis_key, $output, $ttl);
