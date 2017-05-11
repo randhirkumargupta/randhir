@@ -126,20 +126,16 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     if (!in_array('administrator', $user->roles)) {
       $form['actions']['delete']['#access'] = FALSE;
       $form['description']['#access'] = FALSE;
-    }
-
-    drupal_add_js('jQuery(document).ready(function() {                  
-                 jQuery("#edit-relations .fieldset-title").hide();
-                        });', array('type' => 'inline', 'scope' => 'footer'));
-    drupal_add_js('jQuery(document).ready(function() {                  
-                 jQuery(".form-item-weight").hide();
-                        });', array('type' => 'inline', 'scope' => 'footer'));
-    drupal_add_js('jQuery(document).ready(function() {                  
-                 jQuery(".form-item-parent").hide();
-                        });', array('type' => 'inline', 'scope' => 'footer'));
+    }    
   }
 
   $settings = array();
+  
+  if ($form['#vocabulary']->machine_name != 'category_management') {
+   $settings['formstatus'] = 1; 
+  } else {
+      $settings['formstatus'] = 0;
+  }
   
   $settings['formid'] = $form_id;
   $settings['arg_url'] = $arg[0];
@@ -216,7 +212,6 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     drupal_set_title($edit_title);
   }
 
-
   if ($form_id != 'ask_an_expert_node_form' && $form_id != 'event_registration_node_form') {
     if (isset($form['title']['#title'])) {
       $form['title']['#description'] = $form['title']['#title'];
@@ -225,12 +220,19 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
   // Button name change some content
   if ($form_id == 'mega_review_critic_node_form' && (empty($form['#node']->nid) || (!empty($form['#node']->nid) && $form['#node']->status == 0))) {
-
     $form['actions']['submit']['#value'] = t('Publish');
   }
 
   // Extra meta tags element hide from form
-  if ($form_id == 'mega_review_critic_node_form' || $form_id == 'custom_html_widgets_node_form' || $form_id == 'story_node_form' || $form_id == 'itg_celebrity_profile_node_form' || $form_id == 'blog_node_form' || $form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'itg_funalytics_node_form' || $form_id == 'mail_templates_node_form') {
+  if ($form_id == 'mega_review_critic_node_form' 
+          || $form_id == 'custom_html_widgets_node_form' 
+          || $form_id == 'story_node_form' 
+          || $form_id == 'itg_celebrity_profile_node_form' 
+          || $form_id == 'blog_node_form' 
+          || $form_id == 'podcast_node_form' 
+          || $form_id == 'videogallery_node_form' 
+          || $form_id == 'itg_funalytics_node_form' 
+          || $form_id == 'mail_templates_node_form') {
     $form['#after_build'][] = 'itg_common_cancel_button';
   }
   if (!empty($form['#term']) && is_array($form['#term'])) {
@@ -296,12 +298,13 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
-
-function itg_common_meta_token_remove($form, &$form_state) {
-  drupal_add_js('jQuery(document).ready(function() {                  
-                // jQuery("#edit-metatags-und-description-value").val("");
-              jQuery("#edit-metatags-und-title-value").val("");
-          });', array('type' => 'inline', 'scope' => 'footer'));
+/**
+ * after build
+ * @param array $form
+ * @param array $form_state
+ * @return array $form
+ */
+function itg_common_meta_token_remove($form, &$form_state) { 
   
   return $form;
 }
@@ -582,7 +585,6 @@ function itg_common_managesite_validate($form, &$form_state) {
  * @param Object $view
  */
 function itg_common_views_pre_render(&$view) {
-
   if ($view->name == "custom_html_widgets_list") {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content .= '<span class="create_cooking_tips">' . l(t('Create custom html widgets'), 'node/add/custom-html-widgets', array('query' => array('destination' => 'custom-html-widgets-list'))) . '&nbsp;</span>';
@@ -791,8 +793,7 @@ function itg_custom_lock_delete() {
   if (!empty($_GET['nid'])) {
     if (function_exists('content_lock_release')) {
       content_lock_release($_GET['nid'], $user->uid);
-    }    
-    //content_lock_release_own_item($_GET['nid'], FALSE, TRUE);
+    }
   }
   exit;
 }
@@ -831,11 +832,9 @@ function itg_common_mail_alter(&$message) {
  * @param array $form
  * @param array $form_state
  */
-function itg_draft_form_custom_callback($form, &$form_state) {
-  
+function itg_draft_form_custom_callback($form, &$form_state) {  
   if ($form_state['node']->workbench_moderation_state_new == 'draft') {    
-    $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination='.$_GET['destination'];    
-    // drupal_set_message(t($form_state['values']['type'] . ' <b>' . $form_state['values']['title'] . '</b> has been save successfully.'));
+    $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination='.$_GET['destination'];
     $_GET['destination'] = $redirect_path;
     drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
   }
@@ -915,10 +914,11 @@ function itg_custom_get_user_details($uid) {
   }
 }
 
-
-function itg_common_token_info_alter(&$info) {
-  //echo '@@@@@';
-  //p($info['tokens']['node']);
+/**
+ * Implements hook_init.
+ * {@inheritdoc}
+ */
+function itg_common_token_info_alter(&$info) {  
 //  $i =0;
 //  foreach ($info['tokens']['node'] as $key => $val) {
 //    $dd = $i;
@@ -928,6 +928,10 @@ function itg_common_token_info_alter(&$info) {
   //unset($info['node']['field_circular_reference']);
 }
 
+/**
+ * Implements _occupation_from_tid_for_sef_url.
+ * {@inheritdoc}
+ */
 function _occupation_from_tid_for_sef_url($tid) {
   $term_data = taxonomy_term_load($tid);
   return $term_data->name;

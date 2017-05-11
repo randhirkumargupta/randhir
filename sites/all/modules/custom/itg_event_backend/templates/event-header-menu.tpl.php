@@ -84,7 +84,7 @@ if (!empty($node) && ($node->type == 'event_backend')) {//shravan
       </ul>
     </div>
     <div class="col-md-4 col-sm-4">
-      <div class="event-detail" style="text-align: center; color:#FFF">
+      <div class="event-detail">
         <span class="event-str-date"><?php print $event_start_date; ?> </span>
         <span class="event-vanue-detail-place" ><?php print $event_location; ?></span>                
       </div>            

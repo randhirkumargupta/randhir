@@ -1925,7 +1925,7 @@ function itg_event_backend_live_content() {
   if (module_exists('itg_live_tv')) {
     $banner_video = itg_live_tv_page_video();
   }
-  $video = '<div class="row top-block-highlight"><div class="highlights-video col-md-7"><h2 style="live-event-title">' . $title . '</h2><div class="live-event-video">' . $banner_video . '</div></div>';
+  $video = '<div class="row top-block-highlight"><div class="highlights-video col-md-7"><h2 class="live-event-title">' . $title . '</h2><div class="live-event-video">' . $banner_video . '</div></div>';
   $highlights_content = '<div class="highlights-container col-md-5">' . itg_event_backend_highlights_block_content() . '</div></div>';
   return $video . $highlights_content;
 }
