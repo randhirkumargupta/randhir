@@ -13799,6 +13799,7 @@ span.close_btt {
   display: none;
 }
 
+/* CSS For embedded code */
 .page-videogallery-embed, .page-photogallery-embed {
   background-color: #171717;
 }
@@ -13907,6 +13908,12 @@ span.close_btt {
 .itg-embed-wrapper .itg-embed-photo-thumb-slider .slick-prev:before {
   content: '\f054';
   right: 10px;
+}
+
+/* End Of CSS */
+.api-grid > div {
+  display: inline-block;
+  vertical-align: top;
 }
 
 @media (min-width: 768px) {
