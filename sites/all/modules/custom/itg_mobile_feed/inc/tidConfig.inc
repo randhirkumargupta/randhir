@@ -18,9 +18,9 @@ function tidConfig(){
      * 
      */
 
-    //$photo_sec_tid = array(1206578, 1206749, 1206550, 1206577, 1206567, 1206533, 1206676, 1206719);
+    $photo_sec_tid = array(1206578, 1206749, 1206550, 1206577, 1206567, 1206533, 1206676, 1206719);
     //for my local
-    $photo_sec_tid = array(844517, 844529, 844583, 286531, 844520);
+    //$photo_sec_tid = array(844517, 844529, 844583, 286531, 844520);
     // decalation of video section array
 
     /**
@@ -33,9 +33,9 @@ function tidConfig(){
      * sports - 1206550
      */
 
-    //$video_sec_tid = array(1206578, 1206577, 1207580, 1206749, 1206533, 1206567, 1206550);
+    $video_sec_tid = array(1206578, 1206577, 1207580, 1206749, 1206533, 1206567, 1206550);
     //for my local
-    $video_sec_tid = array(844517, 844693, 844529, 286531, 844520);
+    //$video_sec_tid = array(844517, 844693, 844529, 286531, 844520);
 
 
     // decalation of program section array
@@ -52,9 +52,9 @@ function tidConfig(){
      * Auto Today - 1207972
      */
 
-    //$program_sec_tid = array(1206960, 1207605, 1207722, 1207726, 1207728, 1207755, 1207797, 1207827, 1207972);
+    $program_sec_tid = array(1206960, 1207605, 1207722, 1207726, 1207728, 1207755, 1207797, 1207827, 1207972);
      //for my local
-    $program_sec_tid = array(844517, 844693, 844529, 286531, 844520);
+    //$program_sec_tid = array(844517, 844693, 844529, 286531, 844520);
 
     // decalation of left main array
 
@@ -70,9 +70,9 @@ function tidConfig(){
      * Technology - 1206688
      */
 
-    //$left_main_tid = array(1206578, 1206550, 1206577, 1206795, 1206533, 1206567, 1206689, 1206688);
+    $left_main_tid = array(1206578, 1206550, 1206577, 1206795, 1206533, 1206567, 1206689, 1206688);
      //for my local
-    $left_main_tid = array(844693, 844529, 286531, 844520);
+    //$left_main_tid = array(844693, 844529, 286531, 844520);
 
     
     $tid_config['photo_sec_tid'] = $photo_sec_tid;
