@@ -147,6 +147,7 @@ function itg_get_sef_url($sef_path , $nodeid) {
     $is_itg_funalytics = is_itg_funalytics($node_object);
     $is_mega_review_critic = is_mega_review_critic($node_object);
     $is_basic_page = is_basic_page($node_object);
+    $is_podcast = is_podcast($node_object);
     if ($is_issue_magazine) {
       $path_alias_set = $sef_path;
       $path_data = explode("/" , $path_alias_set);
@@ -160,7 +161,7 @@ function itg_get_sef_url($sef_path , $nodeid) {
       unset($new_url_array[$array_size - 1]);
       $edited_sef_url = implode('-' , $new_url_array);
     }
-    elseif ($is_photo_story || $is_mega_review_critic) {
+    elseif ($is_photo_story || $is_mega_review_critic || $is_podcast) {
       $path_alias_set = $sef_path;
       $path_data = explode("/" , $path_alias_set);
       $edit_path_data = end($path_data);
@@ -275,7 +276,6 @@ function itg_additional_settings_element_hide($form , &$form_state , $form_id) {
 function frontend_breadcrumb_display($id = NULL , $entity_object = NULL , $single_url = NULL) {
   $str_breadcrumb = 'http://data-vocabulary.org/Breadcrumb';
   $title_val = substr(check_plain($entity_object->title) , 0 , 50);
-
 //  if($entity_object->type == 'story' || $entity_object->type == 'photogallery' || $entity_object->type == 'videogallery') {
 //  $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo"><span itemprop="title">' . t($title_val)  . '</span>';  
 //  } else {
@@ -309,13 +309,13 @@ function frontend_breadcrumb_display($id = NULL , $entity_object = NULL , $singl
     $section_link .= ' / Gallery / ' . $node_title;
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'podcast') {
-    $section_link .= ' / ' . l("Podcast" , "podcasts-listing") . ' / ' . $node_title;
+    $section_link .= ' / ' . l("Podcast" , "podcast") . ' / ' . $node_title;
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'poll') {
     $section_link .= ' / Poll';
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'blog') {
-    $section_link .= ' / ' . l('Blog' , 'blog-listing') . ' / ' . $node_title;
+    $section_link .= ' / ' . l('Blog' , 'blog') . ' / ' . $node_title;
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'reporter') {
     $section_link .= ' / ' . l("Anchors" , "anchors-list") . ' / ' . $node_title;
@@ -369,11 +369,7 @@ function itg_seo_node_insert($node) {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
     }
-    if ($node->type == 'reporter' || $node->type == 'itg_funalytics' || $node->type == 'page' || $node->type == 'blog') {
-      $newpath = itg_common_custompath_insert_load($node);
-      $node->path['alias'] = $newpath;
-    }
-    if ($node->type == 'mega_review_critic') {
+    if ($node->type == 'mega_review_critic' || $node->type == 'podcast' || $node->type == 'reporter' || $node->type == 'itg_funalytics' || $node->type == 'page' || $node->type == 'blog') {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
     }
@@ -435,7 +431,7 @@ function itg_seo_node_update($node) {
       );
       path_save($path);
     }
-    if ($node->type == 'reporter') {
+    if ($node->type == 'reporter' || $node->type == 'podcast') {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
       $path = array(

@@ -31,37 +31,37 @@ jQuery(document).ready(function () {
         return false;
     });
 
-    // Alias Handling.
-    var alise_value_selector = jQuery('input[name="path[alias]"]').val();
-    var title_value_selector = jQuery("input[name=title]").val();
-    if (typeof (alise_value_selector) == 'undefined') {
-        var alise_value = '';
-    } else {
-        var alise_value = alise_value_selector.replace(/[^a-z]/gi, '').toLowerCase()
-    }
-    if (typeof (title_value_selector) == 'undefined') {
-        var title_value = '';
-    } else {
-        var title_value = title_value_selector.replace(/[^a-z]/gi, '').toLowerCase();
-    }
-
-    if (alise_value == title_value && (alise_value !='' || title_value != '')) {
-        jQuery('input[name="path[alias]"]').prop('checked', true);
-        jQuery('input[name="path[pathauto]"]').prop('checked', true);
-        jQuery('#edit-path-alias').attr("readonly", "readonly");
-        jQuery('input[name="path[alias]"]').css('background', 'rgb(235, 235, 228)');
-    }
-    jQuery('input[name="path[pathauto]"]').click(function () {
-        if (!jQuery('input[name="path[pathauto]"]').prop('checked')) {
-            jQuery('input[name="path[alias]"]').css('color', '#000000');
-            jQuery('#edit-path-alias').attr("readonly", false);
-            jQuery('input[name="path[alias]"]').css('background', '#FFFFFF');
-        } else {
-            jQuery('input[name="path[alias]"]').css('color', 'rgb(235, 235, 228)');
-            jQuery('input[name="path[alias]"]').css('background', 'rgb(235, 235, 228)');
-            jQuery('#edit-path-alias').attr("readonly", "readonly");
-        }
-    });
+//    // Alias Handling.
+//    var alise_value_selector = jQuery('input[name="path[alias]"]').val();
+//    var title_value_selector = jQuery("input[name=title]").val();
+//    if (typeof (alise_value_selector) == 'undefined') {
+//        var alise_value = '';
+//    } else {
+//        var alise_value = alise_value_selector.replace(/[^a-z]/gi, '').toLowerCase()
+//    }
+//    if (typeof (title_value_selector) == 'undefined') {
+//        var title_value = '';
+//    } else {
+//        var title_value = title_value_selector.replace(/[^a-z]/gi, '').toLowerCase();
+//    }
+//
+//    if (alise_value == title_value && (alise_value !='' || title_value != '')) {
+//        jQuery('input[name="path[alias]"]').prop('checked', true);
+//        jQuery('input[name="path[pathauto]"]').prop('checked', true);
+//        jQuery('#edit-path-alias').attr("readonly", "readonly");
+//        jQuery('input[name="path[alias]"]').css('background', 'rgb(235, 235, 228)');
+//    }
+//    jQuery('input[name="path[pathauto]"]').click(function () {
+//        if (!jQuery('input[name="path[pathauto]"]').prop('checked')) {
+//            jQuery('input[name="path[alias]"]').css('color', '#000000');
+//            jQuery('#edit-path-alias').attr("readonly", false);
+//            jQuery('input[name="path[alias]"]').css('background', '#FFFFFF');
+//        } else {
+//            jQuery('input[name="path[alias]"]').css('color', 'rgb(235, 235, 228)');
+//            jQuery('input[name="path[alias]"]').css('background', 'rgb(235, 235, 228)');
+//            jQuery('#edit-path-alias').attr("readonly", "readonly");
+//        }
+//    });
 });
 
 (function ($) {

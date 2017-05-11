@@ -44,7 +44,7 @@ function itg_common_custompath_insert_load($node) {
   }
 
   $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
-  if (!empty($getsection) && $node->type != 'reporter') {
+  if (!empty($getsection) && $node->type != 'reporter'|| ($node->type == 'podcast')) {
     if ($node->type == 'story' && is_issue_baised_magazine($node)) {
       $pathdata = 'magazine';
       $pathdata .= '/' . get_path_from_category($getsection);
@@ -165,6 +165,14 @@ function is_mega_review_critic($node) {
 function is_basic_page($node) {
   $flag = FALSE;
   if ($node->type == 'page') {
+    $flag = TRUE;
+  }
+  return $flag;
+}
+
+function is_podcast($node) {
+  $flag = FALSE;
+  if ($node->type == 'podcast') {
     $flag = TRUE;
   }
   return $flag;
