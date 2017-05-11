@@ -7,7 +7,7 @@ if (!empty($data)) {
       foreach ($data as $entity_data_node) {
         ?>
         <li>
-            <a  href="<?php echo $entity_data_node['node_url']; ?>">
+            <a title="<?php echo $entity_data_node['image_title']; ?>" href="<?php echo $entity_data_node['node_url']; ?>">
               <img src="<?php print $entity_data_node['file_url']; ?>" title="<?php echo $entity_data_node['image_title']; ?>" alt="<?php echo $entity_data_node['image_alt']; ?>" />
           </a>
           <p class="flex-count"><?php echo $entity_data_node['count']; ?> Images</p>

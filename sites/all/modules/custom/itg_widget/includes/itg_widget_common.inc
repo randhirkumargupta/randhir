@@ -525,7 +525,7 @@ function itg_widget_form_alter(&$form , &$form_state , $form_id) {
   }
 
 
-  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_how_i_made_it' && ($form_state['view']->current_display == 'special_how_made_it_widget_contents' || $form_state['view']->current_display == 'special_how_made_widget_list')) {
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_auto_review_widget' ) {
 
     $tax = taxonomy_get_tree(CATEGORY_MANAGMENT , $parent = 0 , $max_depth = 1 , $load_entities = FALSE);
     // override taxonomy.
@@ -537,6 +537,34 @@ function itg_widget_form_alter(&$form , &$form_state , $form_id) {
     }
     unset($form['category_tid']['#options']);
     $form['category_tid']['#options'] = $op;
+  }
+  
+   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'yearender_top_news_and_top_videos' ) {
+
+    $tax = taxonomy_get_tree(CATEGORY_MANAGMENT , $parent = 0 , $max_depth = 1 , $load_entities = FALSE);
+    // override taxonomy.
+    $tax = itg_widget_get_active_taxonomy($tax);
+
+    $op = array("All" => " - None -");
+    foreach ($tax as $key => $val) {
+      $op[$val->tid] = $val->name;
+    }
+    unset($form['shs_term_node_tid_depth']['#options']);
+    $form['shs_term_node_tid_depth']['#options'] = $op;
+  }
+   if ($form_id == 'taxonomy_form_term' && $form['#term']['vocabulary_machine_name'] == 'state_managment' ) {
+
+    $tax = taxonomy_get_tree(CATEGORY_MANAGMENT , $parent = 0 , $max_depth = 1 , $load_entities = FALSE);
+    // override taxonomy.
+    $tax = itg_widget_get_active_taxonomy($tax);
+
+    $op = array("All" => " - None -");
+    foreach ($tax as $key => $val) {
+      $op[$val->tid] = $val->name;
+    }
+    
+    unset($form['field_section']['und']['#options']);
+   $form['field_section']['und']['#options'] = $op;
   }
 // Hiding section filed from basic page (Static page node form)
   if ($form_id == 'page_node_form') {
@@ -950,8 +978,15 @@ function itg_widget_form_views_exposed_form_alter(&$form , &$form_state , $form_
       $form['cat1_id']['#weight'] = -9999;
       $form['cat1_id']['#default_value'] = $_GET['cat_id'];
       $allstate = get_all_state();
+      foreach ($allstate as $key=>$opvalue) {
+        if($key ==0) {
+          $key = "";
+        }
+        $returnarray[$key] =$opvalue;
+      }
+    
       $form['state1']['#type'] = 'select';
-      $form['state1']['#options'] = $allstate;
+      $form['state1']['#options'] = $returnarray;
       $form['state1']['#weight'] = -99994;
       $form['state1']['#default_value'] = $_GET['state'];
       break;
