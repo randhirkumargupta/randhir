@@ -122,6 +122,10 @@ function itg_common_custompath_insert_load($node) {
   }
 }
 
+/**
+ * @param array $node
+ * @return boolean
+ */
 function is_photo_story($node) {
   $flag = FALSE;
   if (!empty($node->field_story_type['und'][0]['value']) && $node->field_story_type['und'][0]['value'] == 'photo_story' && empty($node->field_story_magazine_story_issue['und'][0]['value'])) {
@@ -130,6 +134,10 @@ function is_photo_story($node) {
   return $flag;
 }
 
+/**
+ * @param array $node
+ * @return boolean
+ */
 function is_issue_baised_magazine($node) {
   $flag = FALSE;
   if (!is_photo_story($node) && !empty($node->field_story_magazine_story_issue['und'][0]['value']) && $node->field_story_magazine_story_issue['und'][0]['value'] == 'magazine_issue_story') {
@@ -138,6 +146,10 @@ function is_issue_baised_magazine($node) {
   return $flag;
 }
 
+/**
+ * @param array $node
+ * @return boolean
+ */
 function is_reporter($node) {
   $flag = FALSE;
   if ($node->type == 'reporter') {
@@ -146,6 +158,10 @@ function is_reporter($node) {
   return $flag;
 }
 
+/**
+ * @param array $node
+ * @return boolean
+ */
 function is_itg_funalytics($node) {
   $flag = FALSE;
   if ($node->type == 'itg_funalytics') {
@@ -154,6 +170,10 @@ function is_itg_funalytics($node) {
   return $flag;
 }
 
+/**
+ * @param array $node
+ * @return boolean
+ */
 function is_mega_review_critic($node) {
   $flag = FALSE;
   if ($node->type == 'mega_review_critic') {
@@ -162,6 +182,10 @@ function is_mega_review_critic($node) {
   return $flag;
 }
 
+/**
+ * @param array $node
+ * @return boolean
+ */
 function is_basic_page($node) {
   $flag = FALSE;
   if ($node->type == 'page') {
@@ -170,6 +194,10 @@ function is_basic_page($node) {
   return $flag;
 }
 
+/**
+ * @param array $node
+ * @return boolean
+ */
 function is_podcast($node) {
   $flag = FALSE;
   if ($node->type == 'podcast') {
@@ -245,6 +273,11 @@ function itg_common_custompath_insert_val($pathdata) {
   return $pathdata;
 }
 
+/**
+ * Function which gives sef url's section/subsection part.
+ * @param int $tid
+ * @return string
+ */
 function get_path_from_category($tid) {
   $section = array();
   $all_terms = taxonomy_get_parents_all($tid);
