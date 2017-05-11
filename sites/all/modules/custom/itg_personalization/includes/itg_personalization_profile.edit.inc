@@ -137,7 +137,7 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
   // Get options.
   $itg_country_vid = taxonomy_vocabulary_machine_name_load('country');
   $itg_country_term = taxonomy_get_tree($itg_country_vid->vid, 0, NULL, TRUE);
-  $country = array('_none' => '- Select -');
+  $country = array('' => '- Select -');
   foreach ($itg_country_term as $term) {
     $country[$term->tid] = $term->name;
   }
@@ -273,7 +273,7 @@ function get_state_by_country($country_id) {
     $query->condition('c.field_state_county_tid', $country_id);
     }
     $result = $query->execute();
-    $state_list = array('_none' => '- Select state -');
+    $state_list = array('' => '- Select state -');
     while ($record = $result->fetchAssoc()) {
       if(function_exists('get_term_name_from_tid_for_report')) {
         $name = get_term_name_from_tid_for_report($record['entity_id']);
@@ -297,7 +297,7 @@ function get_city_by_state($state_id) {
     $query->condition('c.field_city_states_tid', $state_id);
     }
     $result = $query->execute();
-    $city_list = array('_none' => '- Select city -');
+    $city_list = array('' => '- Select city -');
     while ($record = $result->fetchAssoc()) {
       if(function_exists('get_term_name_from_tid_for_report')) {
         $name = get_term_name_from_tid_for_report($record['entity_id']);
