@@ -121,7 +121,6 @@ function itg_newsletter_form_alter(&$form , &$form_state , $form_id) {
     if (arg(0) == 'node' && arg(2) == 'edit') {
       for ($delta_counter = 0; $delta_counter <= $form['field_newsl_add_news']['und']['#max_delta']; $delta_counter++) {
         $content_title_arr[$delta_counter] = explode('(' , $form['field_newsl_add_news'][LANGUAGE_NONE][$delta_counter]['field_news_cid']['und'][0]['target_id']['#default_value']);
-
         if (!empty($content_title_arr[$delta_counter][1])) {
           $form['field_newsl_add_news'][LANGUAGE_NONE][$delta_counter]['field_news_cid']['und'][0]['target_id']['#default_value'] = str_replace(')' , "" , $content_title_arr[$delta_counter][1]) . ' (' . $content_title_arr[$delta_counter][1];
         }
@@ -162,7 +161,6 @@ function itg_newsletter_form_alter(&$form , &$form_state , $form_id) {
     $form['field_survey_start_date']['#prefix'] = '<div id="newsletter-date-time-wrapper">';
     $form['field_newsl_time']['und']['#suffix'] = '</div>';
 
-
     // Add submit handler for redirect form to their corresponding page after node has been created susccessfully.
     $form['actions']['submit']['#submit'][] = 'itg_newsletter_submit_handler_for_redirect';
 
@@ -198,7 +196,6 @@ function itg_newsletter_form_alter(&$form , &$form_state , $form_id) {
       }
       $form['field_story_category']['und']['#options'] = $options;
     }
-//    $form['field_story_category']['#validated'] = TRUE;
   }
 
   if ($form_id == 'newsletter_templates_node_form') {
@@ -223,8 +220,8 @@ function itg_newslatter_section_content_type_validate($form , &$form_state) {
   if($field_newsl_newsletter_content == 'select_section') {
     if(empty($field_cm_select_type)) {
       drupal_add_js('jQuery(document).ready(function(){
-    jQuery("#edit-field-story-category").css("display","none");
-});' , 'inline');
+        jQuery("#edit-field-story-category").css("display","none");
+      });' , 'inline');
       form_set_error("field_cm_select_type" , t('Content type can\'t be empty'));
     }
   }
@@ -320,14 +317,10 @@ function itg_newsletter_form_after_build($form , &$form_state) {
 
   // Hide default level and add dynamic label
   if ($form_state['node']->type == 'newsletter') {
-
     $form['field_newsl_add_news'][LANGUAGE_NONE]['#title'] = '';
-
     for ($news = 0; $news <= $form['field_newsl_add_news']['und']['#max_delta']; $news++) {
-
       $count = $news + 1;
       $form['field_newsl_add_news']['und'][$news]['#title'] = t('Title ') . $count;
-
       $form['field_newsl_add_news']['und'][$news]['get_content_btn'] = array(
         '#type' => 'item' ,
         '#markup' => '<div class = "add-more newsletter-get-content" rel= "' . $news . '">Get Data</div><span class="dib vtop newsletter-loader"></span>' ,
@@ -341,8 +334,7 @@ function itg_newsletter_form_after_build($form , &$form_state) {
   if (arg(0) == 'node' && arg(1) == 'add') {
     $type = arg(2);
     $nid = '';
-  }
-  else {
+  } else {
     $node = node_load(arg(1));
     $type = $node->type;
     $nid = arg(1);
@@ -381,14 +373,12 @@ function itg_newsletter_form_after_build($form , &$form_state) {
  * @param object $view
  */
 function itg_newsletter_views_pre_render(&$view) {
-
   // Add "Create Newsletter" button on listing page of Newsletter
   if ($view->name == "manage_newsletter") {
     $header_content_newsletter = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $header_content_newsletter .= '<a href="./node/add/newsletter">Create Newsletter</a>';
     $view->attachment_before = $header_content_newsletter;
   }
-
   // Add create button for Newsletter Template
   if ($view->name == "manage_newsletter_templates") {
     $header_content_newsletter = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
@@ -402,9 +392,7 @@ function itg_newsletter_views_pre_render(&$view) {
  * {@inheritdoc}
  */
 function itg_newsletter_form_views_exposed_form_alter(&$form , &$form_state , $form_id) {
-
   if ($form['#id'] == 'views-exposed-form-manage-newsletter-page') {
-
     // Call function autocomplete to show matching titles
     $form['title']['#autocomplete_path'] = 'content-title-list/newsletter/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Subject Line'));
@@ -412,9 +400,7 @@ function itg_newsletter_form_views_exposed_form_alter(&$form , &$form_state , $f
     $form['date_filter']['max']['#date_format'] = 'd/m/Y';
     $form['#validate'][] = 'itg_newsletter_shedule_date_validate';
   }
-
   if ($form['#id'] == 'views-exposed-form-manage-newsletter-templates-page') {
-
     // Call function autocomplete to show matching titles
     $form['title']['#autocomplete_path'] = 'content-title-list/newsletter_templates/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Subject Line'));
@@ -426,19 +412,15 @@ function itg_newsletter_form_views_exposed_form_alter(&$form , &$form_state , $f
  * {@inheritdoc}
  */
 function itg_newsletter_shedule_date_validate($form , &$form_state) {
-
   if ($form['#id'] == 'views-exposed-form-manage-newsletter-page') {
     $min = $form_state['values']['date_filter']['min'];
     $max = $form_state['values']['date_filter']['max'];
-
     if (!empty($min) && empty($max)) {
       form_set_error('date_filter' , 'Please select End date.');
     }
-
     if (!empty($max) && empty($min)) {
       form_set_error('date_filter' , 'Please select Start date.');
     }
-
     if (!empty($min) && !empty($max) && (strtotime($min) > strtotime($max))) {
       form_set_error('date_filter' , 'Start date can\'t be greater then End date.');
     }
@@ -457,13 +439,11 @@ function itg_newsletter_shedule_date_validate($form , &$form_state) {
  */
 function itg_newsletter_node_presave($node) {
   if ($node->type == 'newsletter') {
-
     $template_title = itg_common_get_node_title($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
     $node->title = $template_title;
     $arg = arg();
     //field_newsl_schedule
-    if (($node->field_newsl_newsletter_type['und'][0]['value'] == 'automatic' || ($node->field_newsl_newsletter_type['und'][0]['value'] == 'manual' && $node->field_newsl_schedule['und'][0]['value'] == 'now')
-        ) && $arg[2] == 'edit') {
+    if (($node->field_newsl_newsletter_type['und'][0]['value'] == 'automatic' || ($node->field_newsl_newsletter_type['und'][0]['value'] == 'manual' && $node->field_newsl_schedule['und'][0]['value'] == 'now')) && $arg[2] == 'edit') {
       $date = date('Y-m-d 00:00:00');
       $survery_date = $node->field_survey_start_date['und'][0]['value'];
       // Survey start time is less then current date than update the time.
@@ -498,11 +478,7 @@ function itg_newsletter_node_insert($node) {
           $scheduled_time = strtotime($date_arr[0] . ' ' . $node->field_newsl_time[LANGUAGE_NONE][0]['value'] . ':00:00'); // concatenation of date and time
         }
         else {
-
-
           $frequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
-
-
           if ($frequency == 'daily') {
             $date_time = date('Y-m-d') . ' ' . $node->field_newsl_time[LANGUAGE_NONE][0]['value'] . ':00:00';
             $scheduled_time = strtotime($date_time);
@@ -510,7 +486,6 @@ function itg_newsletter_node_insert($node) {
 
           if ($frequency == 'weekly') {
             $current_day = date('l');
-
             if (strtolower($current_day) == strtolower($node->field_newsl_day[LANGUAGE_NONE][0]['value'])) {
               $date_time = date('Y-m-d') . ' ' . $node->field_newsl_time[LANGUAGE_NONE][0]['value'] . ':00:00';
               $scheduled_time = strtotime($date_time);
@@ -520,7 +495,6 @@ function itg_newsletter_node_insert($node) {
               $scheduled_time = strtotime($date_time);
             }
           }
-
 
           if ($frequency == 'monthly') {
             $node->field_newsl_day[LANGUAGE_NONE][0]['value'];
@@ -563,11 +537,10 @@ function itg_newsletter_node_update($node) {
 
       // Send mail in case of manual process and schedule is "now"
       if ($newsletter_type == 'manual' && $node->field_newsl_schedule[LANGUAGE_NONE][0]['value'] == 'now') {
-        // TODO: Code this block.
+        itg_send_mail_newsletter($node , 'manually');
       }
       else {
         if ($newsletter_type == 'manual') {
-
           $frequency = '';
           $date_arr = explode(' ' , $node->field_survey_start_date[LANGUAGE_NONE][0]['value']);
           $scheduled_time = strtotime($date_arr[0] . ' ' . $node->field_newsl_time[LANGUAGE_NONE][0]['value'] . ':00:00'); // concatenation of date and time
@@ -582,7 +555,6 @@ function itg_newsletter_node_update($node) {
 
           if ($frequency == 'weekly') {
             $current_day = date('l');
-
             if (strtolower($current_day) == strtolower($node->field_newsl_day[LANGUAGE_NONE][0]['value'])) {
               $date_time = date('Y-m-d') . ' ' . $node->field_newsl_time[LANGUAGE_NONE][0]['value'] . ':00:00';
               $scheduled_time = strtotime($date_time);
@@ -627,7 +599,6 @@ function itg_newsletter_node_update($node) {
 function itg_newsletter_node_validate($node , $form , &$form_state) {
   // Validation for automatic type newsletter
   if ($node->type == 'newsletter') {
-
     if ($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'automatic') {
       $frequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
       $newsletter_content = $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];
@@ -643,7 +614,6 @@ function itg_newsletter_node_validate($node , $form , &$form_state) {
         $scheduled_time = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
         $current_date = strtotime(date('Y-m-d'));
         $current_time = date('H');
-
         if ($scheduled_date <= $current_date && $scheduled_time <= $current_time) {
           form_set_error('field_newsl_time' , t('Time should be greater than current time for current date.'));
         }
@@ -856,12 +826,14 @@ function itg_newslatter_register_form() {
     '#attributes' => array('placeholder' => t('Email Id')) ,
     '#required' => TRUE ,
   );
+  
   $form['mobile'] = array(
     '#type' => 'textfield' ,
     '#title' => 'Mobile No' ,
     '#attributes' => array('placeholder' => t('Mobile No')) ,
     '#required' => TRUE ,
   );
+  
   $form['page_name'] = array(
     '#type' => 'hidden' ,
     '#title' => 'page name' ,
@@ -891,6 +863,7 @@ function itg_newslatter_register_form() {
 function itg_newslatter_register_form_validate($form , &$form_state) {
   $email = $form_state['values']['email'];
   $mobile = $form_state['values']['mobile'];
+  
   if (isset($mobile) && strlen($mobile) > 0 && !preg_match('/^[0-9]{9,10}$/' , $mobile)) {
     form_set_error('mobile' , t('Your Mobile Numbers should contain 10 digits'));
   }
