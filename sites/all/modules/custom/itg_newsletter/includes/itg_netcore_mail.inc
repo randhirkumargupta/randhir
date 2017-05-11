@@ -11,8 +11,8 @@
 define('APIKEY', 'b88b53a80447bacd974fea36f91c8695');
 define('NETCORE_LIST_ID', 4);
 define('NETCORE_URL', 'https://api.exacttouch.com/API/mailing/');
-define('NETCORE_USER_ID', 5);
-define('MESSAGE_ID', 10);
+//define('NETCORE_USER_ID', 5);
+//define('MESSAGE_ID', 10);
 
 
 
