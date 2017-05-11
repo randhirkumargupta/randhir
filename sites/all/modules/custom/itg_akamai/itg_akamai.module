@@ -477,7 +477,6 @@ function itg_akamai_page_cache_control_form_submit($form, &$form_state) {
 function itg_akamai_node_update($node) {
   if (user_access("purge itg akamai cache")) {
     if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-//      $url = base_path() . "node/{$node->nid}";
       $url = drupal_get_path_alias('node/' . $node->nid);
       itg_akamai_clear_url($url, array(), $node);
     }
@@ -542,7 +541,6 @@ function itg_akamai_auto_purge_cc_type_callback() {
 function itg_akamai_taxonomy_term_update($term) {
   if (user_access("purge itg akamai cache")) {
     if (isset($term->field_story_source_type[LANGUAGE_NONE][0]['value']) && $term->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-      //$url = base_path() . "taxonomy/term/{$term->tid}";
       $url = drupal_get_path_alias('taxonomy/term/' . $term->tid);
       itg_akamai_clear_url($url, array(), $term);
     }
@@ -565,7 +563,6 @@ function itg_akamai_taxonomy_term_update($term) {
 function itg_akamai_taxonomy_term_delete($term) {
   if (user_access("purge itg akamai cache")) {
     if (isset($term->field_story_source_type[LANGUAGE_NONE][0]['value']) && $term->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-      // $url = base_path() . "taxonomy/term/{$term->tid}";
       $url = drupal_get_path_alias('taxonomy/term/' . $term->tid);
       itg_akamai_clear_url($url, array(), $term);
     }
