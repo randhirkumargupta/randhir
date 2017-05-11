@@ -11,9 +11,6 @@
 define('APIKEY', 'b88b53a80447bacd974fea36f91c8695');
 define('NETCORE_LIST_ID', 4); //itgdev
 define('NETCORE_URL', 'https://api.exacttouch.com/API/mailing/');
-//define('NETCORE_USER_ID', 5);
-//define('MESSAGE_ID', 10);
-
 
 
 /**
@@ -34,12 +31,13 @@ function itg_netcore_create_list() {
   $data['listId'] = NETCORE_LIST_ID;
   $netcore_create = itg_netcore_mail_add_user($data);*/
   
-  $data['subject'] = 'Test mail for netcore3';
+  /*$data['subject'] = 'Test mail for netcore3';
   $data['fromName'] = 'itg';
   $data['fromEmail'] = 'care@intoday.in';  
   $data['content'] = 'hello test data [UNSUBSCRIBEURL]';
   $netcore_campaign = itg_netcore_mail_create_campaign($data);
-  p($netcore_campaign);
+  p($netcore_campaign);*/
+  
   /*$data['messageId'] = $netcore_campaign['OUTPUT']['MID'];
   $data['listId'] = NETCORE_LIST_ID;
   $netcore_create = itg_netcore_mail_scehdule_campaign($data);
