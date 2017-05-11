@@ -122,7 +122,7 @@ function generatePhotoCategoryList($tid, $pageno) {
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($result as $reskey => $resvalue) {
-
+//echo "<pre>";  print_r($resvalue);echo "</pre>"; exit();
       // node feed tag
       $listcount++;
 
@@ -132,6 +132,9 @@ function generatePhotoCategoryList($tid, $pageno) {
       $created = $resvalue['created'];
       $changed = $resvalue['changed'];
       $comment_cont = getCommentsCount($nid);
+      $node = node_load($nid);
+      $galleryimg = $node->field_gallery_image['und'];
+      $toptlapics = count($galleryimg);
       $field_gallery_image = $resvalue['field_gallery_image'];
       $field_gallery_image_cont = count($field_gallery_image);
       //$weburl = $base_url . "/node/" . $nid;
@@ -145,14 +148,15 @@ function generatePhotoCategoryList($tid, $pageno) {
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
 
       // create date formating
-      $create_date = date("F d, Y", $created);
-      $changed_datetime = date(DATE_ATOM, $changed);
+      
+      $create_date = date("Y-m-d H:i:s", $created);
+      $changed_datetime = date("Y-m-d H:i:s", $changed);
       // photo detail for listing
        $photo_list_array[$loop_count]['p_id'] = $nid;
        $photo_list_array[$loop_count]['p_title'] = $title;
        $photo_list_array[$loop_count]['p_small_image'] = $file_small_img_url;
        $photo_list_array[$loop_count]['p_large_image'] = $file_medium_img_url;
-       $photo_list_array[$loop_count]['p_count'] = $field_gallery_image_cont;
+       $photo_list_array[$loop_count]['p_count'] = $toptlapics;
        $photo_list_array[$loop_count]['p_comment_count'] = $comment_cont;
        $photo_list_array[$loop_count]['p_share_link'] = "Universal link";
        $photo_list_array[$loop_count]['p_updated_datetime'] = $changed_datetime;
@@ -217,7 +221,7 @@ function generatePhotoDeatilList($id){
     $galleryimg = $node->field_gallery_image['und'];
     $toptlapics = count($galleryimg);
     $changed = $node->changed;
-    $changed_datetime = date(DATE_ATOM, $changed);
+    $changed_datetime = date("Y-m-d H:i:s", $changed);
     $comment_cont = getCommentsCount($nid);
     
     //data array building
