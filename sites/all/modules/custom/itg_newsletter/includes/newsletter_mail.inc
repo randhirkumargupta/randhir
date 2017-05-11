@@ -83,7 +83,7 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
   }
   
   // code for netcore
-  if (function_exists('custom_netcore_mail_create_campaign')) {
+  if (function_exists('itg_netcore_mail_create_campaign')) {
     $data_email = array();
     $data_email['subject'] = t('India Today Newsletter').' | ' . $template_node->field_news_title[LANGUAGE_NONE][0]['value'];
     $data_email['fromName'] = 'India Today';
