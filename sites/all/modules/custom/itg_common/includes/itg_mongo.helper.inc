@@ -65,7 +65,7 @@ function itg_get_follow_story_user($nid, $status) {
   if (function_exists('mongodb')) {
     $con = mongodb();
     $people = $con->front_user_activity;
-    $cond = array('nid' => $nid, 'status' => $status);
+    $cond = array('nid' => (string)$nid, 'status' => (string)$status);
     $cursor = $people->find($cond);
     foreach ($cursor as $document) {
       $options[] = $document['uid'];
