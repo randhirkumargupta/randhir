@@ -7,7 +7,7 @@
  * Contains functionality related to Newsletter.
  *
  */
-//module_load_include('inc' , 'itg_newsletter' , 'includes/itg_netcore_mail');
+module_load_include('inc' , 'itg_newsletter' , 'includes/itg_netcore_mail');
 
 /**
  * Implementation of hook_menu
@@ -39,6 +39,12 @@ function itg_newsletter_menu() {
     'page callback' => 'itg_newsletter_content_preview_data_before_download' ,
     'access arguments' => array('access itg story') ,
     'file' => 'includes/itg_newsletter_content_preview_data.inc' ,
+  );
+  
+  $items['itg-netcore-create-list'] = array(
+    'page callback' => 'itg_netcore_create_list',
+    'access arguments' => array('access administrator'),
+    'type' => MENU_CALLBACK,      
   );
 
   return $items;
