@@ -513,20 +513,7 @@ function itg_widget_block_view($delta = '') {
             });
             });' , array('type' => 'inline' , 'scope' => 'footer' , 'weight' => 5)
       );
-
-      drupal_add_css('.flex-caption {
-              width: 96%;
-              padding: 2%;
-              left: 0;
-              bottom: 0;
-              background: rgba(0,0,0,.5);
-              color: #fff;
-              text-shadow: 0 -1px 0 rgba(0,0,0,.3);
-              font-size: 14px;
-              line-height: 18px;
-            }' , 'inline');
-
-
+      
       $info['widget'] = 'photo_carousel_list_widget';
       $info['order'] = 'ASC';
       $info['max_limit'] = PHOTO_CAROUSEL_MAX_RANGE;
@@ -586,19 +573,6 @@ function itg_widget_block_view($delta = '') {
             });
             });' , array('type' => 'inline' , 'scope' => 'footer' , 'weight' => 5)
       );
-
-      drupal_add_css('.flex-caption {
-              width: 96%;
-              padding: 2%;
-              left: 0;
-              bottom: 0;
-              background: rgba(0,0,0,.5);
-              color: #fff;
-              text-shadow: 0 -1px 0 rgba(0,0,0,.3);
-              font-size: 14px;
-              line-height: 18px;
-            }' , 'inline');
-
 
       module_load_include('inc' , 'itg_widget' , 'includes/featured_video_carousel');
       $info['widget'] = 'video_carousel_list_widget';
