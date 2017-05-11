@@ -142,6 +142,10 @@ img {
   margin-bottom: 10px;
 }
 
+.mb-20 {
+  margin-bottom: 20px;
+}
+
 .mb-5, .answer-heading, .answer-container .form-type-checkbox, .answer-container .form-type-radio {
   margin-bottom: 5px;
 }
@@ -247,6 +251,10 @@ img {
 
 .m-bottom40 {
   margin-bottom: 40px;
+}
+
+.media__video--responsive {
+  z-index: 4;
 }
 
 .zoom-image, #block-itg-front-end-common-latest-from-aajtak ul li a.pic,
