@@ -13924,6 +13924,37 @@ span.close_btt {
   vertical-align: top;
 }
 
+.page-quiz-user-list table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+.page-quiz-user-list table tr {
+  border-bottom: 1px solid #e0e0e0;
+}
+.page-quiz-user-list table th, .page-quiz-user-list table td {
+  padding: 10px;
+  max-width: 300px;
+  font: 300 16px/22px Roboto;
+  text-align: left;
+  word-wrap: break-word;
+}
+.page-quiz-user-list table th {
+  background-color: #1a3c8d;
+  color: #fff;
+  border-top: 1px solid #e0e0e0;
+}
+.page-quiz-user-list table th:first-child {
+  border-radius: 5px 0 0 0;
+  border-left: 1px solid #e0e0e0;
+}
+.page-quiz-user-list table th:last-child {
+  border-radius: 0 5px 0 0;
+  border-right: 1px solid #e0e0e0;
+}
+
 @media (min-width: 768px) {
   .modal-dialog {
     width: 960px;
