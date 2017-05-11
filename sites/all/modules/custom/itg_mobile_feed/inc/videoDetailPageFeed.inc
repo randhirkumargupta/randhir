@@ -173,7 +173,7 @@ function all_video_format($file_id){
 	//$fid = '664';
 	$query = db_select('dailymotion_response_details', 'avf');
 	$query->innerJoin('itg_video_bitrates_data','dma','dma.video_id = avf.video_id');
-	$query->fields('dma',array('response'));
+	$query->fields('dma',array('responce'));
 	$query->condition('avf.fid',$file_id);
 	$all_result = $query->execute()->fetchField();
 	return $all_video_data = json_decode($all_result,TRUE);
