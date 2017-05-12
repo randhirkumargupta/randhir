@@ -10791,6 +10791,10 @@ section.sidebar .block-itg-ads {
 
 /* CSS For Election Page End */
 /*Start CSS LIVE tv */
+div#playerContainer {
+  display: none !important;
+}
+
 #block-itg-live-tv-live-tv-video-page .program-livetv {
   background: #000;
   padding: 25px 0px 73px 20px;
@@ -10819,9 +10823,6 @@ section.sidebar .block-itg-ads {
   position: absolute;
   left: 0;
   top: 0;
-}
-#block-itg-live-tv-live-tv-video-page .program-livetv .live_tv_video #playerContainer {
-  display: none !important;
 }
 #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon {
   width: 108px;

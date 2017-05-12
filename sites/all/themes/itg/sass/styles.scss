@@ -8888,6 +8888,9 @@ section.sidebar{
 
 
 /*Start CSS LIVE tv */
+div#playerContainer{
+  display: none !important;
+}
 #block-itg-live-tv-live-tv-video-page{
     ul{
         @extend .list-none;
@@ -8909,9 +8912,6 @@ section.sidebar{
               position: absolute;
               left: 0;
               top: 0;
-            }
-            #playerContainer{
-              display: none !important;
             }
         }
         .social-icon{
