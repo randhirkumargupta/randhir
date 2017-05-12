@@ -1,10 +1,14 @@
 <?php
 if (function_exists('itg_common_get_node_title') && !empty($_GET['gid'])) {
   $nid = base64_decode($_GET['gid']);
+   global $base_url;
+   $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
+  $videocopy_url =  $base_url.'/embed/videogallery-embed?gid='.$_GET['gid'];
   $title = itg_common_get_node_title($nid);
   $videoids = $data;
   $video_node = node_load($nid);
+  $path_aleas =  $base_url.'/'.drupal_get_path_alias('node/'.$nid);
 }
 ?>
 <div class="itg-embed-wrapper">
@@ -121,7 +125,12 @@ if (function_exists('itg_common_get_node_title') && !empty($_GET['gid'])) {
                 androidhls: "true",
                 fallback: "false",
                 hlslabels: {"156": "lowest", "364": "low", "512": "medium", "864": "high", "996": "Highest"},
-                advertising: {
+            sharing: {
+      code: encodeURI("<iframe src='<?php echo $videocopy_url;?>' width='648' height='396' frameborder='0' scrolling='no' />"),
+      link: "<?php echo $path_aleas;?>",
+      heading: "Share video"
+   },    
+            advertising: {
                   client: "vast",
                   skipoffset: 5,
                   schedule: {"myAds": {"offset": "pre", "tag": "<?php print $ads_url; ?>"}}
