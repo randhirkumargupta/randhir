@@ -167,7 +167,7 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
     }
 
   return $return_flag;
-// header('Content-Type: application/xml; charset=utf-8');
+//header('Content-Type: application/xml; charset=utf-8');
 //echo $output; exit();
 }
 

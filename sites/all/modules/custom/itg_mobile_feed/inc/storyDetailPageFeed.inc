@@ -35,23 +35,26 @@ function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="", $
       $file_name = "story".$nid.".xml";
   }
   if(!$term_feed_path){
-     //$term_feed_path = getcwd() . "/sites/all/modules/custom/itg_mobile_feed/xml_it/stories"; 
-     $term_feed_path = "public://xml_it/stories";
-	 file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
+     $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories"; 
+     //$term_feed_path = "public://xml_it/stories";
+     //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
   }
   elseif($type){
      if($type == "photogallery"){
-          $term_feed_path = "public://xml_it/photos";
-	 file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
+         $term_feed_path = getcwd() . "/sites/default/files/xml_it/photos";
+         //$term_feed_path = "public://xml_it/photos";
+	 //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
      } 
      
      elseif($type == "story"){
-          $term_feed_path = "public://xml_it/stories";
-	 file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
+         $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
+         //$term_feed_path = "public://xml_it/stories";
+	 //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
      } 
      elseif($type == "videogallery"){
-          $term_feed_path = "public://xml_it/videos";
-	 file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
+         $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
+         //$term_feed_path = "public://xml_it/videos";
+	 //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
      } 
   }
   
@@ -137,7 +140,7 @@ function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="", $
      //echo "redis set - ". $result_set['set_flag']; exit();
   } 
   }
-//  header('Content-Type: application/xml; charset=utf-8');
+//header('Content-Type: application/xml; charset=utf-8');
 //echo $output; exit();
     if($output){
         $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
