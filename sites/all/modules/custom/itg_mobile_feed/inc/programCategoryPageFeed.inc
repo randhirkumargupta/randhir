@@ -55,13 +55,13 @@ function programCategoryPageFeed() {
         // generate cat xml file string
         if ($storytag['data'] != "") {
           $output = "";
-          $output .= getMobileFeedXmlHeader();          
+          $output .= program_section_page_feed_header();          
           $output .= "\n<id>".$cattid."</id>
                         <title><![CDATA[".$term_name."]]></title>
                         <description><![CDATA[".$term_description."]]></description>
                         <itemcount>".$list_count."</itemcount>\n";
           $output .= $storytag['data'];
-          $output .= "\n" . getMobileFeedXmlFooter();
+          $output .= "\n" . program_section_page_feed_footer();
           // xml file writing..
           if ($output) {
             
