@@ -29,7 +29,7 @@ function videoDetailPageFeed() {
  * @return array 
  */
 function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $type) {
-  //echo print_ar(arg());exit();
+ echo "<pre>";  print_r(node_load($nid)); echo "</pre>";exit();
 
   //$nid = 571;
   //$nid = 461;
