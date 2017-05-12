@@ -13,7 +13,7 @@ if (!empty($data['node_data'])) :
   if ($data['node_data']->type == 'videogallery') {
     $is_videogallery = TRUE;
     $data_nid = "data-nid='" . $data['node_data']->nid . "'";
-    $has_ajax = "class='has-ajax-big-story'";
+    $has_ajax = " class='has-ajax-big-story'";
     $href = "#";
     $video_icon = "<i class='fa fa-play-circle'></i>";
   }

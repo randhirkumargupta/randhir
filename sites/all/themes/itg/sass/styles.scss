@@ -170,6 +170,9 @@ img{
 .m-bottom40{
     margin-bottom: 40px;
 }
+.text-right{
+  text-align: right;
+}
 .media__video--responsive{
   z-index: 4;
 }
@@ -2211,6 +2214,7 @@ footer{
                 .photo-slider{
                     padding: 0 5px;
                     cursor: pointer;
+                    height: auto;
                 }
                 .slick-prev, .slick-next{
                     background: transparent;

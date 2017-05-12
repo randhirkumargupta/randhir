@@ -3,7 +3,7 @@
         <ul>
             <?php foreach ($data as $key => $node_data) {
                 ?>
-                <li class="dont-miss-listing" id="dont-miss-<?php print $key ?>">
+                <li class="dont-miss-listing">
                     <?php if (!empty($node_data['si_file_uri'])) { ?>
                         <div class="dm-pic">
                             <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['nid']}") ?>">
