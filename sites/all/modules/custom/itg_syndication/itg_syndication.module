@@ -100,19 +100,13 @@ function itg_syndication_after_build($form, &$form_state) {
 
     // for checkbox
     if ($check_rule['mode_type']['FTP'] == 'FTP') {
-      drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-syndication-delivery-mode-und-ftp").on("click", false);              
-            });', array('type' => 'inline', 'scope' => 'footer'));
+      drupal_add_js(drupal_get_path('module' , 'itg_syndication') . '/js/itg-syndication-mode-ftp.js' , array('type' => 'file' , 'scope' => 'footer'));
     }
     if ($check_rule['mode_type']['Email'] == 'Email') {
-      drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-syndication-delivery-mode-und-email").on("click", false);              
-            });', array('type' => 'inline', 'scope' => 'footer'));
+      drupal_add_js(drupal_get_path('module' , 'itg_syndication') . '/js/itg-syndication-mode-email.js' , array('type' => 'file' , 'scope' => 'footer'));
     }
     if ($check_rule['mode_type']['web_url'] == 'web_url') {
-      drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-syndication-delivery-mode-und-web-url").on("click", false);              
-            });', array('type' => 'inline', 'scope' => 'footer'));
+      drupal_add_js(drupal_get_path('module' , 'itg_syndication') . '/js/itg-syndication-mode-web-url.js' , array('type' => 'file' , 'scope' => 'footer'));
     }
     // for email id
     foreach ($form['field_email_address'][LANGUAGE_NONE] as $key1 => $val1) {
@@ -155,11 +149,7 @@ function itg_syndication_after_build($form, &$form_state) {
   );
 
   // hide Web URL 
-  drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-service-fetch-link").hide();
-              jQuery("#edit-field-syndication-ftp-details-und-0-remove-button").hide();
-              jQuery(".date-clear").keydown(false);
-            });', array('type' => 'inline', 'scope' => 'footer'));
+  drupal_add_js(drupal_get_path('module' , 'itg_syndication') . '/js/itg-syndication-after-build.js' , array('type' => 'file' , 'scope' => 'footer'));
 
 
   $form['field_syndication_ftp_details']['#states'] = array(
