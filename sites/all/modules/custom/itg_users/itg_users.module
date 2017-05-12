@@ -193,7 +193,21 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
           );
         }
       }
-
+      
+      $form['field_mark_as_expert']['#states'] = array(
+        'visible' => array(
+          array(
+            array(':input[name="selected"]' => array('value' => SITE_ADMIN)),
+            'or',
+            array(':input[name="selected"]' => array('value' => COPY_EDITOR)),
+            'or',
+            array(':input[name="selected"]' => array('value' => SECTION_EDITOR_ANCHOR)),
+            'or',
+            array(':input[name="selected"]' => array('value' => EDITOR)),
+          ),
+        ),
+      );
+      
       //Check to default when create new user 'Notify User of New Account' checkbox will be checked.
       $form['account']['notify']['#default_value'] = TRUE;
 
@@ -254,11 +268,6 @@ function itg_users_validate_user_register_validate(&$form, &$form_state) {
 
   if ($form_state['values']['selected'] == COPY_EDITOR || $form_state['values']['selected'] == SECTION_EDITOR_ANCHOR || $form_state['values']['selected'] == EDITOR) {
     $mark_expert = $form_state['values']['field_mark_as_expert'][LANGUAGE_NONE][0]['value'];
-
-//    if (empty($mark_expert)) {
-//      form_set_error('field_mark_as_expert', t("Mark as Expert Field is required!"));
-//    }
-
     if (!empty($mark_expert) && empty($section[0]['tid'])) {
       form_set_error('field_user_section', t("Section Field is required!"));
     }
@@ -625,12 +634,12 @@ function itg_users_user_update(&$edit, $account, $category) {
   }
 
   // send mail when user select notification chekbox
-  if (!empty($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value']) && $account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == '1') {
-    if (function_exists('custom_netcore_mail_add_user')) {
+  if (!empty($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value']) && $account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == 'India Today') {
+    if (function_exists('itg_netcore_mail_add_user')) {
       // code for subscribe for newsletter
       $data['email'] = $account->mail;
       $data['listId'] = NETCORE_LIST_ID;
-      custom_netcore_mail_add_user($data);
+      itg_netcore_mail_add_user($data);
     }
     
     $news_info = 'You have sucessfully subscribed for India Today newsletters.';
@@ -653,6 +662,10 @@ function itg_users_user_update(&$edit, $account, $category) {
     }
   } else {
       // code for unsubscribe for newsletter
+      if (function_exists('itg_netcore_mail_unsubscribe_user')) {
+        $data['email'] = $account->mail;
+        itg_netcore_mail_unsubscribe_user($data);
+      }
   }
 }
 
@@ -663,12 +676,12 @@ function itg_users_user_update(&$edit, $account, $category) {
  * @param type $category
  */
 function itg_users_user_insert(&$edit, $account, $category) {
-  if ($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == '1') {
-    if (function_exists('custom_netcore_mail_add_user')) {
+  if ($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == 'India Today') {
+    if (function_exists('itg_netcore_mail_add_user')) {
       // code for subscribe for newsletter
       $data['email'] = $account->mail;
       $data['listId'] = NETCORE_LIST_ID;
-      custom_netcore_mail_add_user($data);
+      itg_netcore_mail_add_user($data);
     }
     $news_info = 'You have sucessfully subscribed for India Today newsletters.';
     $mail_content = itg_users_get_mail_content($news_info);
@@ -690,6 +703,10 @@ function itg_users_user_insert(&$edit, $account, $category) {
     }
   } else {
       // code for unsubscribe for newsletter
+      if (function_exists('itg_netcore_mail_unsubscribe_user')) {
+        $data['email'] = $account->mail;
+        itg_netcore_mail_unsubscribe_user($data);
+      }
   }
 }
 

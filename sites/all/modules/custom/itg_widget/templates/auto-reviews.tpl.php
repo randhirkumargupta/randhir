@@ -7,7 +7,7 @@
             $video_class = 'video-icon';
         }
         ?>
-        <li class="dont-miss-listing" id="dont-miss-<?php print $key ?>">
+        <li class="dont-miss-listing">
           <?php if (!empty($node_data['uri'])) { ?>
             <div class="dm-pic">
               <a class="<?php echo $video_class;?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['nid']}") ?>">
@@ -34,9 +34,6 @@
             <?php if (!empty($node_data['title'])) : ?> 
               <a title="<?php print $node_data['title']; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/".$node_data["nid"]); ?>">
               <p class="dont-miss-widget dont-miss-<?php echo $node_data['nid'] ?>">
-               
-                <?php //echo mb_strimwidth($node_data['title'], 0, 110, "..");?>
-                <?php
                 if(function_exists('itg_common_get_smiley_title')) {
                   echo itg_common_get_smiley_title($node_data['nid'], 0, 100);
                 }
@@ -46,16 +43,7 @@
                 ?>
                    </p></a>
               <?php  
-             endif; 
-            
-            /*        $desc = $node_data['node_load_data']->title;
-                
-                if($desc != "")
-                {?>
-               <p class="review-desc review-desc-<?php echo $node_data['node_load_data']->nid ?>">
-                <?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}")) ?>
-              </p>
-                <?php } */ ?>
+             endif; ?>
           </div>
         </li>
       <?php } ?>

@@ -57,7 +57,7 @@ if ($current_date > $event_start_date && $current_date < $event_close_date) {
 }
 elseif ($current_date < $event_start_date && $current_date < $event_close_date) {
   $output = '<h2 class="block-title">'.$host_node->title.'</h2>';
-  $output .= '<div style="margin-bottom: 20px;">'.$host_node->body[LANGUAGE_NONE][0]['value'].'</div>';
+  $output .= '<div class="mb-20">'.$host_node->body[LANGUAGE_NONE][0]['value'].'</div>';
 }
 //$banner_img = drupal_get_path('module', 'itg_event_backend').'/event_home_banner.jpeg';
 print $output;

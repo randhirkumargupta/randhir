@@ -12,7 +12,13 @@
 
       // Code for astro node form to expand sef url and meta fields.
       var uid = Drupal.settings.uid;      
-
+      var nodeId = settings.itg_astro.settings.nid;
+      
+      if (nodeId) {
+        // Hide remove button of first field on add form.
+        jQuery("#edit-field-astro-numerology-values-und-0-remove-button").hide();
+      }      
+      
       // Map date with frequency.
       $('input[name="field_astro_frequency[und]"]').on('change', function () {
 

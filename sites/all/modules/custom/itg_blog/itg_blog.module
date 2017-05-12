@@ -112,20 +112,17 @@ function itg_blog_form_custom_callback($form, &$form_state) {
 function itg_blog_after_build($form, &$form_state) {
 
     global $user, $base_url;
-    if (!isset($form['#node']->nid)) {
-        // hide remove button of first field on add form 
-        drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-blog-configuration-und-commentbox").trigger("click");
-            });', array('type' => 'inline', 'scope' => 'footer'));
-    }
+    
     $form['original_image_fids'] = array(
         '#type' => 'hidden',
         '#value' => $form_state['input']['original_image_fids'],
         '#attributes' => array('id' => 'original_image_fids', 'name' => 'original_image_fids'),
     );
+    
     $settings = array();
     $settings['base_url'] = $base_url;
     $settings['uid'] = $user->uid;
+    $settings['nodeId'] = isset($form['#node']->nid) ? $form['#node']->nid : '';;
 
     drupal_add_js(array('itg_blog' => array('settings' => $settings)), array('type' => 'setting','scope' => 'footer'));
     drupal_add_js(drupal_get_path('module', 'itg_blog') . '/js/itg_blog.js', array('weight' => 1,'scope' => 'footer'));

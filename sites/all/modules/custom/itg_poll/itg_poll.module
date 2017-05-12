@@ -65,9 +65,9 @@ function itg_poll_form_alter(&$form, &$form_state, $form_id) {
     // Hide ITG State field.
     //$form['field_poll_itg_state']['und']["#prefix"] = '<div style="display: none;">';
     //$form['field_poll_itg_state']['und']["#suffix"] = '</div>';    
-    if ((arg(0) == 'node' && arg(1) == "add" && arg(2) == 'poll') && (isset($form_state['build_info']['args'][0]) && $form_state['build_info']['args'][0]->preview != 'Preview')) {
-      drupal_add_js("jQuery(document).ready(function(){ jQuery('input[name=field_poll_answer_add_more]').mousedown();});", 'inline');
-    }
+//    if ((arg(0) == 'node' && arg(1) == "add" && arg(2) == 'poll') && (isset($form_state['build_info']['args'][0]) && $form_state['build_info']['args'][0]->preview != 'Preview')) {
+//      drupal_add_js("jQuery(document).ready(function(){ jQuery('input[name=field_poll_answer_add_more]').mousedown();});", 'inline');
+//    }
     $form['#after_build'][] = 'itg_poll_after_build';
     $form['#validate'][] = 'itg_poll_node_form_validate';
     $form['actions']['cancel'] = array(
@@ -103,7 +103,7 @@ function alter_submit_status_message(&$form, $form_state) {
  * @return array
  */
 function itg_poll_after_build($form, &$form_state) {
-  drupal_add_js(drupal_get_path('module', 'itg_poll') . '/js/itg_pollnew.js', array('weight' => 3, 'scope' => 'footer'));
+ 
   global $user, $base_url;
 //  unset($form['metatags']['intro_text']['#markup']);
 //  $form['title']['#title'] = 'Poll Question';
@@ -112,8 +112,10 @@ function itg_poll_after_build($form, &$form_state) {
 //  unset($form['metatags']['#description']);
   $settings = array();
   $settings['base_url'] = $base_url;
+  $settings['action_page'] = arg(2);
   $settings['uid'] = $user->uid;
   drupal_add_js(array('itg_poll' => array('settings' => $settings)), array('type' => 'setting'));
+   drupal_add_js(drupal_get_path('module', 'itg_poll') . '/js/itg_pollnew.js', array('weight' => 3, 'scope' => 'footer'));
   global $user;
   foreach ($form['field_poll_answer'][LANGUAGE_NONE] as $key => $item) {
     if (is_numeric($key)) {
@@ -138,8 +140,7 @@ function itg_poll_after_build($form, &$form_state) {
         $form['title']['#attributes'] = array('readonly' => 'readonly');
         drupal_add_js(drupal_get_path('module', 'itg_poll') . '/js/itg_pollnew_disable.js', array('weight' => 4, 'scope' => 'footer'));
       }
-      drupal_add_js("jQuery('document').ready(function(){  jQuery('#edit-field-poll-answer-option').remove();
-            jQuery('#edit-field-poll-question').remove(); });", "inline");
+     
     }
   }
   return $form;
