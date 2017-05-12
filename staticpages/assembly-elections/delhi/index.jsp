@@ -54,7 +54,7 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 
 <!-- disable iPhone inital scale -->
 <meta name="viewport" content="width=device-width; initial-scale=1.0">
-<link href="css/homepage-new.css" type="text/css" rel="stylesheet" />
+<link href="/staticpages/assembly-elections/delhi/css/homepage-new.css" type="text/css" rel="stylesheet" />
 <link rel='shortcut icon' type='image/x-icon' href='http://media2.intoday.in/indiatoday/images/dot-in-fav-icon.ico' />
 <!-- html5.js for IE less than 9 -->
 <!--[if lt IE 9]>
@@ -65,10 +65,10 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 <![endif]-->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<link href="css/jquery.bxslider.css" type="text/css" rel="stylesheet" />
+<link href="/staticpages/assembly-elections/delhi/css/jquery.bxslider.css" type="text/css" rel="stylesheet" />
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css'>
-<link href="css/skin.css" type="text/css" rel="stylesheet" />
-<link href="css/responsive.css" type="text/css" rel="stylesheet" />
+<link href="/staticpages/assembly-elections/css/skin.css" type="text/css" rel="stylesheet" />
+<link href="/staticpages/assembly-elections/delhi/css/responsive.css" type="text/css" rel="stylesheet" />
 <style>
 .itgd_links a:hover{ color:#fff!important;}
 #top-web{ padding:0; margin-top:-20px; background:#3D3D3D!important;}
@@ -145,7 +145,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 	
 
 
-<script type="text/javascript">ajaxinclude("navigation_topnav_global.html")</script>
+<script type="text/javascript">ajaxinclude("/staticpages/assembly-elections/delhi/navigation_topnav_global.html")</script>
 <style>
 nav ul li {padding: 12px 0 11px 0px; font-size:13px; }
 .logoit-holi { float:left;}
@@ -549,7 +549,7 @@ var zflag_nid="821"; var zflag_cid="1218/1137"; var zflag_sid="2"; var zflag_wid
 
 
 <div class="colum">
-<script type="text/javascript">ajaxinclude("chunk_todaysheadline_mustread.jsp")</script>
+<script type="text/javascript">ajaxinclude("/staticpages/assembly-elections/delhi/chunk_todaysheadline_mustread.jsp")</script>
 </div>
 <div class="colum"> 
   
@@ -735,7 +735,7 @@ if (document.body.offsetWidth>=1250) {
 <script src="http://media2.intoday.in/indiatoday/funalytics/jquery.bxslider.min.js"></script> 
 <script src="http://media2.intoday.in/indiatoday/js/jquery.lazyload.js?v=4" type="text/javascript" charset="utf-8"></script>
 <script src="http://media2.intoday.in/indiatoday/js/javascript.js" type="text/javascript" charset="utf-8"></script>
-<script type='text/javascript' src='js/copypaste_common.js' ></script>
+<script type='text/javascript' src='/staticpages/assembly-elections/delhi/js/copypaste_common.js' ></script>
 <script type="text/javascript" >$(document).ready(function(){insertCustomSymbols();copypasteinit();});</script>
 <img height="1" width="1" src="http://s3-pixel.c1exchange.com/pubpixel/82493" style="display:none;">
 <script src="http://tags.crwdcntrl.net/c/9709/cc_af.js"></script>

@@ -153,6 +153,9 @@ DirectoryIndex index.php index.html index.htm
   RewriteCond %{REQUEST_URI} !/state-of-the-states [NC]
   RewriteCond %{REQUEST_URI} !/distribution [NC]
   RewriteCond %{REQUEST_URI} !/applications [NC]
+  RewriteCond %{REQUEST_URI} !/special40 [NC]
+
+
    # test
     RewriteCond %{REQUEST_URI} !/newswiz [NC]
     RewriteCond %{REQUEST_URI} !/static-highlights [NC]
@@ -293,7 +296,7 @@ DirectoryIndex index.php index.html index.htm
     RewriteRule ^womansummit/2009/(.*) /staticpages/womansummit/2009/$1 [L]
     RewriteRule ^best-universities$ /staticpages/best-universities/index.html? [L]
     RewriteRule ^best-universities/(.*) /staticpages/best-universities/$1 [L]
-    RewriteRule ^assembly-elections/delhi$ /staticpages/assembly-elections/delhi/index.html? [L]
+    RewriteRule ^assembly-elections/delhi$ /staticpages/assembly-elections/delhi/index.jsp? [L]
     RewriteRule ^assembly-elections/delhi/(.*) /staticpages/assembly-elections/delhi/$1 [L]
     RewriteRule ^assembly-elections$ /staticpages/assembly-elections/index.html? [L]
     RewriteRule ^assembly-elections/(.*) /staticpages/assembly-elections/$1 [L]

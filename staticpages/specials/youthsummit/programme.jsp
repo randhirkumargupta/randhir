@@ -23,7 +23,7 @@
         </div>
         <div>
         	<!--<a href="http://www.indiatoday.in/youthsummit/registration/" target="_blank"><img src="http://media2.intoday.in/indiatoday/youthsummit/2013/top-banner.jpg" border="0"/></a><br />-->
-            <img src="/youthsummit2012/images/ita.jpg" height="83" border="0"/>
+            <img src="/staticpages/main/images/ita.jpg" height="83" border="0"/>
         </div>
         <div id="banner">
             <a href="/specials/youthsummit/"><img src="/specials/youthsummit/images/logo.jpg" alt="Youth Smmit" width="155" height="130" border="0" align="left" title="India Today Youth Summit 2011 - Mind Rocks"/></a>
