@@ -4382,6 +4382,11 @@ h1.category-heading{
         }
     }
 }
+[id*="block-itg-widget-featured-photo-carousel"]{
+  .flexslider .slides img {
+    max-height: 363px;
+  }
+}
 .view-photo-list-of-category, .view-video-list-of-category{
     @include pos(relative);
     .view-filters{
