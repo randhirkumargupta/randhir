@@ -14,7 +14,7 @@
  */
 function itg_loyalty_reward_testpoints() {
   global $base_url;
-  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js');
+  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js', array('scope' => 'footer'));
 
   // Pass data to js file.
   drupal_add_js(array('itg_loyalty_reward' => array('base_url' => $base_url),

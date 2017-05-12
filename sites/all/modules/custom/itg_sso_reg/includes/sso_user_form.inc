@@ -21,7 +21,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
   $settings['uid'] = $user->uid;
 
   drupal_add_js(array('itg_sso_reg' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_reg.js');
+  drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_reg.js', array('scope' => 'footer'));
   
   $step_ext_div = '';
   
@@ -91,7 +91,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#type' => 'textfield',
         '#attributes' => array('placeholder' => t('Email'), 'autocomplete' => 'off'),
         '#prefix' => '<div class="form-row email-or-mobile"><div id="umail" class="col-xs-6">',
-        '#suffix' => '</div>',
+        '#suffix' => '<div class="email-error"></div></div>',
       );
       
       $form['mobile'] = array(
@@ -101,7 +101,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#type' => 'textfield',
         '#attributes' => array('placeholder' => t('Mobile'), 'autocomplete' => 'off'),
         '#prefix' => '<div id="umobile" class="col-xs-6">',
-        '#suffix' => '</div></div>',
+        '#suffix' => '<div class="mobile-error"></div></div></div>',
       );
 
       $form['password'] = array(
@@ -351,6 +351,7 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
   switch ($form_state['step']) {
 
     case "1":
+      $error = array();
       // Check that the first value is alphabetic
       if (function_exists('itg_sso_user_email_check')) {
         $get_user_check_email = itg_sso_user_email_check($mail);
@@ -360,11 +361,19 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
       }
 
       if (!empty($get_user_check_email)) {
-        form_set_error('mail', t("Email Id Already Exist!"));
+        $error['mail'] = t("Email id Already Exist!");
+        form_set_error('mail', t(""));
+      }
+      else {
+        $error['mail'] = t('');
       }
 
       if (!empty($get_user_check_mobile) && !empty($form_state['values']['mobile'])) {
-        form_set_error('mobile', t("Mobile Number Already Exist!"));
+        $error['mobile'] = t("Mobile Number Already Exist!");
+        form_set_error('mobile', t(""));
+      }
+      else {
+        $error['mobile'] = t('');
       }
 
       $u_mobile = $form_state['values']['mobile'];
@@ -405,17 +414,20 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
       $min_length = 3;
       $max_length = 10;
       
-      if (strlen($pass) < $min_length) {
-        form_set_error('pass', t('password is too short, minimum is '. $min_length. ' characters '));
+      if (!empty($pass)) {
+        if (strlen($pass) < $min_length) {
+          form_set_error('pass', t('password is too short, minimum is ' . $min_length . ' characters '));
+        }
+        elseif (strlen($pass) > $max_length) {
+          form_set_error('pass', t('password is too long, maximum is ' . $max_length . ' characters '));
+        }
       }
-      elseif (strlen($pass) > $max_length) {
-        form_set_error('pass', t('password is too long, maximum is '. $max_length. ' characters '));
-      }
-      
       if ($pass != $cpass) {
         form_set_error('pass', t('Password do not match.'));
       }
-
+      $error_settings = array();
+      $error_settings['custom_error'] = $error;
+      drupal_add_js(array('itg_sso_reg' => array('settings' => $error_settings)), array('type' => 'setting'));
       break;
 
     case "2":

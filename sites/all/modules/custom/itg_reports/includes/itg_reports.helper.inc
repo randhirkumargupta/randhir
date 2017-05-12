@@ -35,6 +35,38 @@ function itg_report_user_dashboard() {
  * @param string $string
  *   String for auto complete search.
  */
+function itg_reports_email_autocomplete_byline($string) {
+  // Add byline email.
+  $itg_query = db_select('node' , 'n');
+  $itg_query->leftJoin('field_data_field_reporter_email_id' , 'ei' , 'ei.entity_id = n.nid');
+  $itg_query->fields('ei' , array('field_reporter_email_id_value'))
+      ->condition('field_reporter_email_id_value' , '%' . db_like($string) . '%' , 'LIKE');
+  $itg_result = $itg_query->execute()->fetchAll();
+  $result = array();
+  foreach ($itg_result as $value) {
+    $result[$value->field_reporter_email_id_value] = $value->field_reporter_email_id_value;
+  }
+  // Add user email too as per the requirment.
+  $itg_query = db_select('users' , 'u')
+      ->fields('u' , array('mail'))
+      ->condition('mail' , '%' . db_like($string) . '%' , 'LIKE');
+  $itg_result = $itg_query->execute()->fetchAll();
+  $errors = array_filter($itg_result);
+  if (!empty($errors)) {
+    foreach ($itg_result as $value) {
+      $result[$value->mail] = $value->mail;
+    }
+  }
+  
+  return drupal_json_output($result);
+}
+
+/**
+ * Implements callback function for email auto complete widget.
+ *
+ * @param string $string
+ *   String for auto complete search.
+ */
 function itg_reports_email_autocomplete($string) {
   $itg_query = db_select('users' , 'u')
       ->fields('u' , array('mail'))
@@ -56,7 +88,7 @@ function itg_reports_email_autocomplete($string) {
  * @param int $user_id
  */
 function itg_registered_user_report($user_id) {
-  drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file'));
+  drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file' , 'scope' => 'footer'));
   return drupal_get_form('itg_registred_user_report_form');
 }
 
@@ -223,19 +255,20 @@ function itg_registered_user_display_report($user_id) {
                     </ul>
                 </div>';
     $chart .= '<div class="tab-content">';
-    $chart .= '<div style="display:block" id="report1" class="tab-pane fade in">';
-    if(!empty($views_nodes['under_personalized_section'])) {
+    $chart .= '<div id="report1">';
+    if (!empty($views_nodes['under_personalized_section'])) {
       $chart .= theme('itg_reports_personalized_data_chart' , array(
         "total_section_node_visited" => $views_nodes['under_personalized_section'] ,
           )
       );
-    } else {
+    }
+    else {
       $chart .= '<p>' . t("Data not found.") . '<p>';
     }
     $chart .= "</div>";
 
-    $chart .= '<div style="display:block;opacity: 1 !important;" id="report2" class="tab-pane fade in active">';
-    if(!empty($views_nodes['other_personalized_section'])) {
+    $chart .= '<div id="report2">';
+    if (!empty($views_nodes['other_personalized_section'])) {
       $chart .= theme('itg_reports_sections_data_chart' , array(
         'node_under_section_visited' => $views_nodes['other_personalized_section'] ,
       ));
@@ -259,16 +292,16 @@ function itg_registered_user_display_report($user_id) {
  * @return string
  */
 function itg_registered_user_report_section_wise_breakup($user_id) {
-  if(!empty($user_id)) {
+  if (!empty($user_id)) {
     drupal_add_js('
       jQuery(document).ready(function(){myFunction(); jQuery(".widget-ajex-loader").show();});
       function myFunction() {
           
           document.getElementById("itg-registred-user-report-form").submit();
       }
-    ' ,'inline');
+    ' , 'inline');
   }
-  drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file'));
+  drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file' , 'scope' => 'footer'));
   $registred_users_form = drupal_get_form('itg_registred_user_report_form');
   return $registred_users_form;
 }

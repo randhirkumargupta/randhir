@@ -506,7 +506,7 @@ ul.pager{
   }
 }
 #page-title{
-  @extend .mb-10;
+  margin: 20px 0;
 }
 .success-message, .messages--status{
   color:#009c00;
@@ -636,6 +636,7 @@ body.sidebar-second{
   }
 }
 #content{
+  position: relative;
   > ul.tabs-primary{
     display: none;
   }
@@ -793,6 +794,7 @@ fieldset.date-combo{
   margin-right: 20px;
 }
 .form-type-autocomplete-deluxe{
+  @extend .pos-rel;
   .autocomplete-deluxe-container{
     background: none;
     box-shadow: 0;
@@ -804,6 +806,13 @@ fieldset.date-combo{
       min-width: 332px;
       margin: 0;
     }
+  }
+  div.description{
+    @extend .desc-popup;
+    left: 600px;
+  }
+  &:hover div.description{
+    display: block;
   }
 }
 .form-type-autocomplete-deluxe{
@@ -1386,6 +1395,7 @@ div.vertical-tabs {
             }
           }
         }
+        div.description{left: 220px !important;}
       }
     }
   }
@@ -3322,13 +3332,13 @@ fieldset#edit-select{
             border-bottom: 1px solid #d9d9d9;
             .term-detail{
               padding: 5px;
-              width: 10%;
+              width: 9%;
               float: left;
               &:first-child{
-                width: 30%;
+                width: 28%;
               }
               &:nth-child(2){
-                width: 20%;
+                width: 18%;
               }
               a{color: #1fb5ad;}
             }
@@ -3376,17 +3386,16 @@ fieldset#edit-select{
   font-weight: bold;
   div{
     @extend .fleft;
-    line-height: 18px; 
-    height: 34px;
+    line-height: 18px;
     padding: 8px 5px;
     &.cmt-title{
-      width: 30%;
+      width: 28%;
     }
     &.cmt-other{
       &:nth-child(2){
-        width: 20%;
+        width: 18%;
       }
-      width: 10%;
+      width: 9%;
 
     }
   }
@@ -4239,6 +4248,17 @@ div.node{
   & + div.clearfix{
     margin-top: 10px;
   }
+  tbody tr:first-child{
+    td{
+      .field-name-field-news-cid{
+        .form-type-textfield{
+          > label:after{
+            @extend .astrick;
+          }
+        }
+      }
+    }
+  }
 }
 .node-syndication_rule-form{
   .field-name-field-syndication-set-day, 
@@ -4963,7 +4983,9 @@ div.node{
     }
   }
   .checked-list {
-    padding: 5px 10px;
+    margin: 5px 10px;
+    max-height: 210px;
+    overflow-y: auto;
     li {
       background-color: #f0f0f0;
       color: #2f2f2f;
@@ -5295,21 +5317,23 @@ div.node{
   }
 }
 .action-with-title{
+  background: #fff none repeat scroll 0 0;
+  left: 0;
+  margin: 0 auto;
+  padding: 10px 0 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 1170px;
+  z-index: 1;
   &.fixed{
-    background: #fff none repeat scroll 0 0;
-    left: 0;
-    margin: 0 auto;
-    padding: 10px 0 0;
     position: fixed;
-    right: 0;
-    top: 0;
-    width: 1170px;
     z-index: 9999;
   }
   #page-title{
     @extend .fleft;
     line-height: 32px;
-    margin-bottom: 0;
+    margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -7106,7 +7130,7 @@ div.node{
   height: 674px;
 }
 .itg-layout-container .top-colum-3 .droppable{
-  height: 277px;
+  height: 262px;
 }
 .itg-h450-section{
   .widget-wrapper{
@@ -8626,7 +8650,7 @@ div.node{
       }
     }
     div.description{
-      display: none !important;
+      left: 100%;
     }
   }
   .img-crt{
@@ -9116,6 +9140,16 @@ div.node{
           @extend .fleft;
           margin: 3px;
         }
+      }
+    }
+  }
+  [class*="form-field-name-field-emoji"]{
+    iframe.cke_wysiwyg_frame{pointer-events: none;}
+    div.description{display: none;}
+    &:hover{
+      div.description{
+        @extend .desc-popup;
+        display: block;
       }
     }
   }
@@ -10097,7 +10131,7 @@ div.node{
     vertical-align: top;
   }
   .view .view-filters .views-exposed-form .views-submit-button, .view .view-filters .views-exposed-form .views-reset-button{
-    margin-top: 18px;
+    margin-top: 28px;
   }
   .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-keyword{width: 300px;}
   .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name{display: none;}
@@ -11672,10 +11706,90 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     }
   }
   .node-mail_templates-form{
+    .form-item-title{display: none;}
     .vertical-tabs{
+      display: none;
       .vertical-tabs-list{display: none;}
     }
   }
   .get-tokens > a {
     color: #0c8bb1;
   }
+  .ftp-center #itg_video_content .video-ftp{
+    border-right: none;
+    width: 100%;
+  }
+  .view-tags-listing{
+    .attachment{
+      padding-right: 155px !important;
+    }
+    .view-content{
+      position: relative;
+      .button-default{
+        @extend .btn-submit;
+        position: absolute;
+        right: 0;
+        top: -46px;
+        margin-right: 0;
+      }
+    }
+  }
+  .itg-sidebar-form-section{
+    .form-type-checkboxes .form-checkboxes + div.description{
+      left: 60%;
+    }
+    .form-type-select .form-select + div.description, .form-type-select .form-select + span.error + div.description{
+      left: 100%;
+    }
+  }
+  .form-field-name-field-story-reporter{
+    .form-type-textfield .form-text + .autocomplete + div.description {
+      left: 635px;
+    }
+  }
+  .group-survey-question{
+    .ajax-progress{
+      display: none !important;
+    }
+  }
+  div#edit-byline-names-wrapper {
+    width: 435px;
+  } 
+  #views-exposed-form-report-filed-content-page #autocomplete {max-height:300px; overflow-y:auto;}
+  .field-type-jquery-colorpicker{
+    .form-type-jquery-colorpicker{
+      padding: 0 10px 10px;
+      > label{
+        float: left;
+        width: 200px;
+        padding: 8px 0;
+      }
+      > .jquery_colorpicker{
+        position: relative;
+        overflow: hidden;
+        .jquery_colorpicker_field_clear_link{
+          @extend .btn-submit;
+          @extend .btn-small;
+          position: absolute;
+          left: 50px;
+          top: 4px;
+        }
+      }
+    }
+  }
+  
+  .colorpicker input {
+    background-color: transparent;
+    border: 1px solid transparent !important;
+    position: absolute;
+    font-size: 10px !important;
+    height: auto !important;
+    line-height: 14px !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+    color: #898989 !important;
+    top: 4px;
+    right: 11px;
+    text-align: right;
+    margin: 0;
+    padding: 0 !important;
+}

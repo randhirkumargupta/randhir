@@ -51,7 +51,6 @@ function features_for_newsletter_user_default_permissions() {
   $permissions['delete any newsletter_templates content'] = array(
     'name' => 'delete any newsletter_templates content',
     'roles' => array(
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -70,7 +69,6 @@ function features_for_newsletter_user_default_permissions() {
   $permissions['delete own newsletter_templates content'] = array(
     'name' => 'delete own newsletter_templates content',
     'roles' => array(
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',

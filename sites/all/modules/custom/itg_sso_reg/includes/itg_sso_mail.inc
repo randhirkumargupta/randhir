@@ -13,11 +13,11 @@ function itg_sso_get_mail_content($account, $to, $url_info) {
       } else {
         $action = 'Sign up';
       }
+      
       $mail_data = itg_mail_templates_get_mailcontent($action);
-      $tid = $mail_data->field_mail_template_category[LANGUAGE_NONE][0]['tid'];
-      $term_name = taxonomy_term_load($tid);
-      $name = $term_name->name;
-      if ($name == 'Password Changed') {
+      $name = $mail_data->field_mail_templates_category[LANGUAGE_NONE][0]['value'];
+
+      if ($name == 'password_changed') {
         $mail_subject = $mail_data->field_mail_subject_password_chan[LANGUAGE_NONE][0]['value'];
         $mail_body = $mail_data->field_mail_body_password_changed[LANGUAGE_NONE][0]['value'];
       } else {
@@ -31,6 +31,7 @@ function itg_sso_get_mail_content($account, $to, $url_info) {
       'body' => $mail_content,
       'subject' => $mail_subject,
     );
+    $to = 'gourav.walia@kelltontech.com';
     $mail = drupal_mail('itg_sso_reg_user', 'send_mail_to_sso_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
       return TRUE;

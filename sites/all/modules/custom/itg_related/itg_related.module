@@ -136,7 +136,7 @@ function itg_related_views_pre_render(&$view) {
     $settings['uid'] = $user->uid;
     $settings['solr'] = variable_get('solr_url_config');
     drupal_add_js(array('itg_related' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_related') . '/js/itg_related.js', array('weight' => 1));
+    drupal_add_js(drupal_get_path('module', 'itg_related') . '/js/itg_related.js', array('weight' => 1, 'scope' => 'footer'));
     $titlename = '';
     if(!empty($_GET['sname'])) {
     $titlename = t('Search Name : ');
@@ -216,7 +216,7 @@ function update_search_title($title, $combined_data, $uid, $type) {
  */
 function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
 
-  $page_condition = array('related-content', 'site-search', 'searchimage', 'online-archive-story', 'clone-story', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio');
+  $page_condition = array('related-content', 'topic', 'searchimage', 'online-archive-story', 'clone-story', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio');
 
   if (in_array(arg(0), $page_condition)) {
     $i = 1;
@@ -225,9 +225,9 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       if ($i > 1) {
         $and = ' AND ';
       }
-      $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'site-search', 'ds_changed_max', 'custom_drp', 'exact_match', 'searchimage', 'online-archive-story', 'clone-story', 'sname', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio');
+      $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'topic', 'ds_changed_max', 'custom_drp', 'exact_match', 'searchimage', 'online-archive-story', 'clone-story', 'sname', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio');
 
-      if (!empty($val) && $val != 'related-content' && $val != 'site-search' && $val != 'searchimage' && $val != 'online-archive-story' && $val != 'clone-story' && $val != 'search-unpublish-video' && $val != 'search-unpublish-video-radio' && $val != 'search-publish-video' && $val != 'search-publish-video-radio' && !in_array($key, $remove_key)) {
+      if (!empty($val) && $val != 'related-content' && $val != 'topic' && $val != 'searchimage' && $val != 'online-archive-story' && $val != 'clone-story' && $val != 'search-unpublish-video' && $val != 'search-unpublish-video-radio' && $val != 'search-publish-video' && $val != 'search-publish-video-radio' && !in_array($key, $remove_key)) {
 
         if (is_array($val)) {
 
@@ -337,7 +337,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
 
 
 
-    if ($_GET['q'] == 'site-search') {
+    if ($_GET['q'] == 'topic') {
       $str = ltrim(trim($str), "AND");
     }
 

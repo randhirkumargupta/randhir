@@ -13,6 +13,12 @@
             catch (e) {
             }
             
+            $('#edit-field-podcast-configuration-und-commentbox').click(function() {
+                if ($("#edit-field-podcast-configuration-und-commentbox").is(":not(:checked)")) {
+                    $("#edit-field-story-comment-question-und-0-value").val('');
+                }
+            });
+            
              jQuery('.plupload_start').on('click', function() {
                 $('#podcast-node-form').ajaxComplete(function(event, request, settings) {  
                     if (jQuery('input[name="files[field_podcast_audio_upload_und_0_field_podcast_upload_audio_file_und_0]"]').val() == 0) {

@@ -470,14 +470,18 @@ function itg_image_croping_crop_image() {
 
 
   $fileids['fid'][] = $file->fid . '#' . $_POST['field_name'];
+
   if (!empty($image_fields) && !empty($image)) {
     foreach ($image_fields as $fields_name) {
+
       $file = array();
       if (!file_exists(file_default_scheme() . '://crop_image')) {
         mkdir(file_default_scheme() . '://crop_image', 0777, TRUE);
       }
+
       // echo is_writable(file_default_scheme() . '://crop_image');
       $filepath = file_default_scheme() . '://crop_image';
+
       $scaled = image_resize($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height']);
       if ($scaled) {
         $image_name = $fields_name . time();
@@ -525,7 +529,7 @@ function itg_image_saveimage_info() {
         $image_date = "";
       if ($output_info['image_date'][$i] != "") {
         $imagedate = explode('/', $output_info['image_date'][$i]);
-        $image_date = $imagedate[2] . '-' . $imagedate[1] . '-' . $imagedate[0];
+        $image_date = $imagedate[2] . '-' . $imagedate[0] . '-' . $imagedate[1];
       }
       if ($image_date == "") {
         $image_date = date('Y-m-d');
@@ -656,6 +660,12 @@ function mageimagedimesion() {
 
   $image_dim['magazine']['field_magazine_cover_photo']['width'] = 172;
   $image_dim['magazine']['field_magazine_cover_photo']['height'] = 240;
+
+  $image_dim['field_gallery_image']['field_images']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
+  $image_dim['field_gallery_image']['field_images']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
+
+  $image_dim['field_gallery_image']['field_photo_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
+  $image_dim['field_gallery_image']['field_photo_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
   // Dimension for videogallery
   $image_dim['videogallery']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
   $image_dim['videogallery']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
@@ -773,6 +783,11 @@ function mageimagedimesion() {
   $image_dim['supplement']['field_issue_supp_large_image']['height'] = ISSUE_LARGE_IMAGE_HEIGHT;
   $image_dim['supplement']['field_issue_supp_small_image']['width'] = ISSUE_SMALL_WIDTH;
   $image_dim['supplement']['field_issue_supp_small_image']['height'] = ISSUE_SMALL_HEIGHT;
+  
+  $image_dim['category_management']['field_sponser_logo']['width'] = 40;
+  $image_dim['category_management']['field_sponser_logo']['height'] = 35;
+  $image_dim['category_management']['field_cm_category_banner']['width'] = 650;
+  $image_dim['category_management']['field_cm_category_banner']['height'] = 45;
 
 
   return $image_dim;
@@ -804,14 +819,40 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
         <input type="range" class="cropit-image-zoom-input">
         </div>',
   );
+  if ($field_name == 'field_images') {
+
+    $gallerythumb = '(' . $imgdim[$content_name]['field_photo_small_image']['width'] . 'X' . $imgdim[$content_name]['field_photo_small_image']['height'] . ')';
+    if ($field_name == 'field_images') {
+      $checkoption = array(
+          'field_photo_small_image' => t("Thumb Image  $gallerythumb"),
+      );
+    }
+
+
+    $prefix = '<div class="image-fiels-style" >';
+    $suffix = '</div>';
+# the drupal checkboxes form field definition
+    $form['images'] = array(
+        '#title' => t('Select images'),
+        '#type' => 'checkboxes',
+        '#attributes' => array('class' => array('checkbox-image-size')),
+        '#options' => $checkoption,
+        '#prefix' => $prefix,
+        '#suffix' => $suffix,
+    );
+  }
+
 
   if (($content_name == 'photogallery' || $content_name == 'videogallery' || $content_name == 'food_news' || $content_name == 'cooking_tips' || $content_name == 'recipe' || $content_name == 'podcast' || $content_name == 'mega_review_critic' || $content_name == 'breaking_news' || $content_name == 'story') && ($field_name == 'field_story_extra_large_image') || ($field_name == 'field_issue_large_cover_image' || $field_name == 'field_issue_supp_large_image' )) {
+
     $largsize = '(' . $imgdim[$content_name]['field_story_large_image']['width'] . 'X' . $imgdim[$content_name]['field_story_large_image']['height'] . ')';
     $mediumsize = '(' . $imgdim[$content_name]['field_story_medium_image']['width'] . 'X' . $imgdim[$content_name]['field_story_medium_image']['height'] . ')';
     $extrasmallsize = '(' . $imgdim[$content_name]['field_story_extra_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_extra_small_image']['height'] . ')';
     $writer_image = '(' . $imgdim[$content_name]['field_recipe_writer_image']['width'] . 'X' . $imgdim[$content_name]['field_recipe_writer_image']['height'] . ')';
     $issue_img_size = '(' . $imgdim[$content_name]['field_issue_supp_small_image']['width'] . 'X' . $imgdim[$content_name]['field_issue_supp_small_image']['height'] . ')';
     $smallsize = '(' . $imgdim[$content_name]['field_story_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_small_image']['height'] . ')';
+    $gallerythumb = '(' . $imgdim[$content_name]['field_images']['width'] . 'X' . $imgdim[$content_name]['field_images']['height'] . ')';
+
     if ($content_name == 'photogallery') {
 
       $checkoption = array(

@@ -42,16 +42,16 @@ class ItgPhotogalleryMigration extends XMLMigration {
       'photoby' => t('photoby'),
       'archive' => t('archive'),
       //'socialmediaintegration' => t('socialmediaintegration'),
-      'facebooknarrative' => t('facebooknarrative'),
-      'facebookimage' => t('facebookimage'),
-      'facebookimage_alt' => t('facebookimage_alt'),
-      'facebookimage_title' => t('facebookimage_title'),
+     // 'facebooknarrative' => t('facebooknarrative'),
+      //'facebookimage' => t('facebookimage'),
+      //'facebookimage_alt' => t('facebookimage_alt'),
+      //'facebookimage_title' => t('facebookimage_title'),
       //'facebookvideonarrative' => t('facebookvideonarrative'),
       //'facebookvideo' => t('facebookvideo'),
-      'twitternarrative' => t('twitternarrative'),
-      'twitterimage' => t('twitterimage'),
-      'twitterimage_alt' => t('twitterimage_alt'),
-      'twitterimage_title' => t('twitterimage_title'),
+      //'twitternarrative' => t('twitternarrative'),
+      //'twitterimage' => t('twitterimage'),
+      //'twitterimage_alt' => t('twitterimage_alt'),
+      //'twitterimage_title' => t('twitterimage_title'),
       //'twittervideodescription' => t('twittervideodescription'),
       //'twittervideo' => t('twittervideo'),
       'timetwitter' => t('timetwitter'),
@@ -80,7 +80,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
       'modified' => t('modified'),
       'featured_ordering' => t('featured_ordering'),
       'description' => t('description'),
-      'metatags/description' => t('metatags/description'),
+      'metadescription' => t('metadescription'),
     );
 
 
@@ -89,7 +89,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
 
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
-    $items_url = $xml_folder . 'photogallery.xml';
+    $items_url = $xml_folder . 'indiatoday-galleries.xml';
 
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -178,20 +178,20 @@ class ItgPhotogalleryMigration extends XMLMigration {
     $this->addFieldMapping('field_photo_by', 'photoby')->xpath('photoby');
 
     //code for social media
-    $this->addFieldMapping('field_story_facebook_narrative', 'facebooknarrative')->xpath('facebooknarrative');
+    /*$this->addFieldMapping('field_story_facebook_narrative', 'facebooknarrative')->xpath('facebooknarrative');
     $this->addFieldMapping('field_story_facebook_image', 'facebookimage')->xpath('facebookimage');
     $this->addFieldMapping('field_story_facebook_image:file_replace')
         ->defaultValue(FILE_EXISTS_REPLACE);
     $this->addFieldMapping('field_story_facebook_image:preserve_files')
         ->defaultValue(TRUE);
     $this->addFieldMapping('field_story_facebook_image:alt', 'facebookimage_alt')->xpath('facebookimage_alt');
-    $this->addFieldMapping('field_story_facebook_image:title', 'facebookimage_title')->xpath('facebookimage_title');
+    $this->addFieldMapping('field_story_facebook_image:title', 'facebookimage_title')->xpath('facebookimage_title');*/
 
     //$this->addFieldMapping('field_story_facebook_video', 'facebookvideo')->xpath('facebookvideo');
     $this->addFieldMapping('field_story_posted_by_facebook', 'postedbyfacebook')->xpath('postedbyfacebook');
     $this->addFieldMapping('field_story_time_facebook', 'timefacebook')->xpath('timefacebook');
 
-    $this->addFieldMapping('field_story_tweet', 'twitternarrative')->xpath('twitternarrative');
+    /*$this->addFieldMapping('field_story_tweet', 'twitternarrative')->xpath('twitternarrative');
     $this->addFieldMapping('field_story_tweet_image', 'twitterimage')->xpath('twitterimage');
     $this->addFieldMapping('field_story_tweet_image:file_replace')
         ->defaultValue(FILE_EXISTS_REPLACE);
@@ -199,7 +199,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
         ->defaultValue(TRUE);
     $this->addFieldMapping('field_story_tweet_image:alt', 'twitterimage_alt')->xpath('twitterimage_alt');
     $this->addFieldMapping('field_story_tweet_image:title', 'twitterimage_title')->xpath('twitterimage_title');
-    //$this->addFieldMapping('field_story_twitter_video_desc', 'twittervideodescription')->xpath('twittervideodescription');
+    //$this->addFieldMapping('field_story_twitter_video_desc', 'twittervideodescription')->xpath('twittervideodescription');*/
     //$this->addFieldMapping('field_story_twitter_video', 'twittervideo')->xpath('twittervideo');
     $this->addFieldMapping('field_story_time_twitter', 'timetwitter')->xpath('timetwitter');
     $this->addFieldMapping('field_story_posted_by_twitter', 'postedbytwitter')->xpath('postedbytwitter');
@@ -214,7 +214,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
     $this->addFieldMapping('pathauto')->defaultValue(0);
     $this->addFieldMapping('path', 'sef_url')->xpath('metatags/sef_url');
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
-    $this->addFieldMapping('metatag_description', 'metatags/description')->xpath('metatags/description');
+    $this->addFieldMapping('metatag_description', 'metadescription')->xpath('metatags/metadescription');
     $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
     //For New field
     $this->addFieldMapping('field_story_expert_description', 'short_description')->xpath('short_description');
@@ -372,11 +372,30 @@ class ItgPhotogalleryMigration extends XMLMigration {
       'timestamp',
       'field_story_facebook_video',
       'field_story_twitter_video',
+      'field_story_facebook_image',
+      'field_story_facebook_image:preserve_files',
+      'field_story_facebook_image:file_replace',
+      'field_story_facebook_image:alt',
+      'field_story_facebook_image:title',
+      'field_story_facebook_narrative',
+      'field_story_tweet',
+      'field_story_tweet_image',
+      'field_story_tweet_image:preserve_files',
+      'field_story_tweet_image:file_replace',
+      'field_story_tweet_image:alt',
+      'field_story_tweet_image:title',
+      'field_cm_related_content_detail',
+      'field_story_extra_data',
+      'field_story_comment_question',
     ));
   }
 
   public function prepareRow($row) {
 
+    if(empty($row->xml->modified) || (string) $row->xml->modified == 0) {
+      $row->xml->modified = (string) $row->xml->created;
+    }
+    
     if (!empty($row->xml->extralargeimage)) {
       $row->xml->extralargeimage = itg_dbmigrate_imagepath_url((string) $row->xml->extralargeimage);
     }
@@ -414,7 +433,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
     }
 
     // Category migrate
-    $data_category = '';
+   /* $data_category = '';
 
     if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {
       foreach ($row->xml->categories->category as $final_category) {
@@ -425,8 +444,29 @@ class ItgPhotogalleryMigration extends XMLMigration {
         $data_category[]['tid'] = $orignal_category;
       }
     }
+    $row->category_new = $data_category;*/
+    
+     $data_category = '';
+    if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {
+      $cat = array();
+      $tid_array = array();
+      foreach ($row->xml->categories->category as $final_category) {
+        $cat = explode('#', $final_category);
+        foreach ($cat as $cc) {
+          if(!empty($cc)) {
+            $tid_array[] = get_itg_destination_id('migrate_map_itgphoto', $cc);
+          }
+        }
+      }
+      $tid_array[] = 1208521;
+      $all_category = array_unique($tid_array);
+      foreach ($all_category as $chunk_data) {
+        $data_category[]['tid'] = $chunk_data;
+      }
+    }
     $row->category_new = $data_category;
-
+    
+    
     // Story tags migration
     $data_tags = '';
 
@@ -438,7 +478,6 @@ class ItgPhotogalleryMigration extends XMLMigration {
       }
     }
     $row->tag_new = $data_tags;
-
 
     //social media integration checkboxes
     if (isset($row->xml->socialmediaintegration) && !empty($row->xml->socialmediaintegration)) {
@@ -465,21 +504,6 @@ class ItgPhotogalleryMigration extends XMLMigration {
       $row->xml->primary_category = $orignal_pcategory;
     }
 
-    //social media integration checkboxes
-    if (isset($row->xml->socialmediaintegration) && !empty($row->xml->socialmediaintegration)) {
-      foreach ($row->xml->socialmediaintegration as $key => $social_option) {
-        if ((string) $social_option->facebook == true) {
-          $final_social[]['value'] = 'facebook';
-        }
-        if ((string) $social_option->facebook_instant_article == true) {
-          $final_social[]['value'] = 'facebook_instant_article';
-        }
-        if ((string) $social_option->twitter == true) {
-          $final_social[]['value'] = 'twitter';
-        }
-      }
-    }
-    $row->final_social_checkbox = $final_social;
 
     if ((string) $row->xml->credittoall == 'yes') {
       $row->xml->credittoall = 1;
@@ -524,7 +548,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
       $row->xml->created_by = $orignal_crated_uid;
     }
     else {
-      $row->xml->created_by = 1;
+      $row->xml->created_by = 970; //siteadmin
     }
     $node->uid = (string) $row->xml->created_by;
   }
@@ -570,7 +594,15 @@ class ItgPhotogalleryMigration extends XMLMigration {
           $strap_headline = (string) $value->strap_headline;
           $image_id = (string) $value->imageid;
           $img_meta_key = (string) $value->image_metakey;
-          $api_image_url = itg_dbmigrate_imagepath_url((string) $value->api_image);
+          $api_image_url = '';
+          if(!empty($value->api_image)){
+            $api_image_url = itg_dbmigrate_imagepath_url((string) $value->api_image);
+          }
+           $small_image_url = '';
+          if(!empty($value->gallery_smallimage)){
+            $small_image_url = itg_dbmigrate_imagepath_url((string) $value->gallery_smallimage);
+          }
+          $enable = (string) $value->enable;
           // photoby
           $data_byline = '';
           if (isset($value->photo_by) && !empty($value->photo_by)) {
@@ -615,6 +647,20 @@ class ItgPhotogalleryMigration extends XMLMigration {
             }
           }
           
+           // Small image
+          $small_image_file = '';
+          $small_image_files = '';
+          if (!empty($small_image_url)) {
+            try{
+            $small_file = file_save_data(file_get_contents($small_image_url), file_default_scheme() . '://' . basename($small_image_url), FILE_EXISTS_RENAME);
+            $small_file->status = 1;
+            $small_image_file = (array) $small_file;
+            $small_image_files = array(LANGUAGE_NONE => array($small_image_file));
+            }
+            catch(Exception $e) {
+              // echo 'Message: ' .$e->getMessage();
+            }
+          }
           
           $values = array(
             'field_name' => 'field_gallery_image',
@@ -628,8 +674,9 @@ class ItgPhotogalleryMigration extends XMLMigration {
             'field_image_id' => array(LANGUAGE_NONE => array(array('value' => $image_id))),
             'field_image_metakey' => array(LANGUAGE_NONE => array(array('value' => $img_meta_key))),
             'field_api_image' => $api_image_files,
+            'field_photo_small_image' => $small_image_files,
+            'field_photo_enable' => array(LANGUAGE_NONE => array(array( 'value' => $enable))),
           );
-
           $field_collection_item = entity_create('field_collection_item', $values);
           $field_collection_item->setHostEntity('node', $node);
           $field_collection_item->save(TRUE);
@@ -671,7 +718,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
                 'image_metakey' => $img_meta_key_new,
                 'strap_headline' => $strap_headline_new,
                 'api_image' => $api_image_url_new,
-                'photo_by' => (string) $value->photo_by,
+                'photo_by' => $data_byline_new,
                 'syndication' => $syndication_new,
                 'audio' => (string) $value->audio,
               ))

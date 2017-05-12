@@ -36,7 +36,7 @@ if (function_exists(itg_story_clone_data))
 }
 if(!empty($position) && $position == 'left') {
   ?>
-<div class="n-title search-detail"><h2><span class="smily-im"><?php print $smilies; ?></span><?php print l(mb_strimwidth($label, 0, 65, ".."), $clone_arr_response->url, array("attributes" => array("target" => "_blank", "title" => $label))); ?></h2></div>
+<div class="n-title search-detail"><h2 title="<?php print strip_tags($label); ?>"><span class="smily-im"><?php print $smilies; ?></span><?php print l(mb_strimwidth($label, 0, 65, ".."), $clone_arr_response->url, array("attributes" => array("target" => "_blank", "title" => $label))); ?></h2></div>
 <?php } else { ?>
-<div class="n-title search-detail"><h2><?php print l(mb_strimwidth($label, 0, 65, ".."), $clone_arr_response->url, array("attributes" => array("target" => "_blank", "title" => $label))); ?><span class="smily-im"><?php print $smilies; ?></span></h2></div>
+<div class="n-title search-detail"><h2 title="<?php print strip_tags($label); ?>"><?php print l(mb_strimwidth($label, 0, 65, ".."), $clone_arr_response->url, array("attributes" => array("target" => "_blank", "title" => $label))); ?><span class="smily-im"><?php print $smilies; ?></span></h2></div>
 <?php } ?>

@@ -32,7 +32,7 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
   if ($node->type == 'survey') {
     
     // Add JS for front
-    drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_survey_front.js');
+    drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_survey_front.js', array('scope' => 'footer'));
     
     // Survey End date
     $survey_expiry_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours');
@@ -59,7 +59,7 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
     
     // Add JS for one question at a time
     if($survey_question_format == 'One question at a time') {
-      drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_survey_questions.js');
+      drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_survey_questions.js', array('scope' => 'footer'));
     }
     
     $num = 0;

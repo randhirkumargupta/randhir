@@ -102,6 +102,13 @@ function itg_layout_manager_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_layout_autocomplete.inc',
   );
+  
+  $items['itg-delete-layout/%'] = array(
+    'page callback' => 'itg_layout_delete',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_layout_manager.delete.inc',
+  );
   return $items;
 }
 
@@ -376,12 +383,13 @@ function itg_layout_manager_block_view($delta = '') {
             $breadcrumb = frontend_breadcrumb_display($id);
           }
       } else {
-          $array_url = array('livetv' => 'Live TV',
+          $array_url = array(
+              'livetv' => 'Live TV',
               'itg_active_polls' => 'Poll',
               'anchors-list' => 'Anchors',
-              'blog-listing' => 'Blog',
-              'podcasts-listing' => 'Podcast',
-              'programmes' => 'Programmes',
+              'blog' => 'Blog',
+              'podcast' => 'Podcast',
+              'program' => 'Programmes',
               'snap-post' => 'Snappost', 
               'itg-quiz' => 'Quiz',
               'itg-survey' => 'Survey',
@@ -396,8 +404,8 @@ function itg_layout_manager_block_view($delta = '') {
                 $arg0 = arg(0);
             }
             
-            if (!empty($array_url[$arg0])) {
-              $breadcrumb = frontend_breadcrumb_display('', '', $array_url[$arg0]);
+            if (!empty($array_url[strtolower($arg0)])) {
+                $breadcrumb = frontend_breadcrumb_display('', '', $array_url[strtolower($arg0)]);
             }
           }
       }

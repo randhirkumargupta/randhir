@@ -153,8 +153,50 @@
             }
         });
     });
+    
+    function isValidDate(str) {
+  var d = moment(str,'D/M/YYYY');
+  if(d == null || !d.isValid()) return false;
+
+  return str.indexOf(d.format('D/M/YYYY')) >= 0 
+      || str.indexOf(d.format('DD/MM/YYYY')) >= 0
+      || str.indexOf(d.format('D/M/YY')) >= 0 
+      || str.indexOf(d.format('DD/MM/YY')) >= 0;
+}
+
 
 // extra lagre
+
+jQuery('.image_courtesy').on('keyup',function() {
+  jQuery('.image_courtesy_img').val(jQuery(this).val());
+});
+jQuery('.image_keyword').on('keyup',function() {
+  jQuery('.image_keyword_img').val(jQuery(this).val());
+});
+
+jQuery('.image_tags').on('keyup',function() {
+  jQuery('.image_tags_img').val(jQuery(this).val());
+});
+jQuery('.image_place').on('keyup',function() {
+  jQuery('.image_place_img').val(jQuery(this).val());
+});
+jQuery('.image_photo_grapher').on('keyup',function() {
+  jQuery('.image_photo_grapher_img').val(jQuery(this).val());
+});
+jQuery('.image_date').on('keyup',function() {
+  jQuery('.image_date_img').val(jQuery(this).val());
+});
+jQuery('.image_description').on('keyup',function() {
+  jQuery('.image_description_img').val(jQuery(this).val());
+});
+jQuery('.is_synd_all').click(function() {
+  if(jQuery(this).is(':checked')) {
+    
+    jQuery('.is_synd_all_for').prop('checked',true);
+  }else {
+   jQuery('.is_synd_all_for').prop('checked',false);
+  }
+});
 
 jQuery('.alt_text').on('keyup',function() {
   jQuery('.alt_text_image').val(jQuery(this).val());
@@ -229,119 +271,165 @@ jQuery('.image_title').on('keyup',function() {
 
 
     }
+    function isvalid_mdy(s){
+    var day, A= s.match(/[1-9][\d]*/g);
+    try{
+        A[0]-= 1;
+        day= new Date(+A[2], A[0], +A[1]);
+        if(day.getMonth()== A[0] && day.getDate()== A[1]) return 1;
+        throw new Error('Bad Date ');
+    }
+    catch(er){
+        return er.message;
+    }
+}
     jQuery('.maptofield').click(function() {
-        showloader();
-        var form_value = jQuery('#image_teg_form').serialize();
-        jQuery.ajax({
-            url: Drupal.settings.basePath + 'saveimageinfo',
-            type: 'post',
-            data: {'form_value': form_value},
-            success: function(data) {
-                var getbame = jQuery('#btn_name').val();
-                var getis_custom_form = jQuery('#is_custom_form').val();
-                var original_img_id = jQuery('#orig_image_fiedlid').val();
-                var exist_original_id = parent.jQuery('#original_image_fids').val();
-                var is_solr = jQuery('#is_solr').val();
-                if (original_img_id != "" && is_solr != '1') {
-                    if (exist_original_id == "") {
-                        parent.jQuery('#original_image_fids').val(original_img_id);
-                    } else {
-                        original_img_id = exist_original_id + '#' + original_img_id
-                        parent.jQuery('#original_image_fids').val(original_img_id);
-                    }
-                }
-                parent.jQuery('#')
-                if (jQuery('#ckeditor_yes').val() == 1)
-                {
-                    if (jQuery('.is_synd').is(':checked')) {
-                        var synd_class = "data-syndication='yes'";
-                    } else {
-                        synd_class = "data-syndication='no'";
-                    }
-                    var imagename = jQuery('#imcurl').val();
-                    var getimagename = '<img ' + synd_class + ' src="' + imagename + '"  alt="" />';
-                    parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text').val(getimagename);
+       var flg = 0;
+    jQuery('.datevalidate').each(function() {
+       var errorid = jQuery(this).attr('id');
+        jQuery('.' + errorid).hide();
+      var valdate = jQuery(this).val();
+      if (valdate != "") {
+        var ret = isvalid_mdy(valdate);
+      
+        if (ret != 1) {
+         
+          jQuery('.' + errorid).show();
+          flg = 1;
+
+        } else {
+          jQuery('.' + errorid).hide();
+        }
+      }
+
+
+    })
+    var form_value = jQuery('#image_teg_form').serialize();
+    if (flg == 0) {
+      showloader();
+      jQuery.ajax({
+        url: Drupal.settings.basePath + 'saveimageinfo',
+        type: 'post',
+        data: {'form_value': form_value},
+        success: function(data) {
+          var getbame = jQuery('#btn_name').val();
+          var getis_custom_form = jQuery('#is_custom_form').val();
+          var original_img_id = jQuery('#orig_image_fiedlid').val();
+          var exist_original_id = parent.jQuery('#original_image_fids').val();
+          var is_solr = jQuery('#is_solr').val();
+          if (original_img_id != "" && is_solr != '1') {
+            if (exist_original_id == "") {
+              parent.jQuery('#original_image_fids').val(original_img_id);
+            } else {
+              original_img_id = exist_original_id + '#' + original_img_id
+              parent.jQuery('#original_image_fids').val(original_img_id);
+            }
+          }
+          parent.jQuery('#')
+          if (jQuery('#ckeditor_yes').val() == 1)
+          {
+            if (jQuery('.is_synd').is(':checked')) {
+              var synd_class = "data-syndication='yes'";
+            } else {
+              synd_class = "data-syndication='no'";
+            }
+            var imagename = jQuery('#imcurl').val();
+            var getimagename = '<img ' + synd_class + ' src="' + imagename + '"  alt="" />';
+            parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text').val(getimagename);
 //
 //                    parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(0)').val(jQuery('#imcurl').val());
 //                    parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(2)').val(jQuery('#imcwidth').val());
 //                    parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(3)').val(jQuery('#imcheigth').val());
-                    parent.jQuery.colorbox.close();
+            parent.jQuery.colorbox.close();
+          } else {
+
+            jQuery('.imagefid').each(function() {
+              var getvalue = jQuery(this).val();
+              getvalue = getvalue.split('#');
+              var newbname = getbame;
+
+              if (getbame.indexOf("field_gallery_image") >= 0)
+              {
+                if (getbame.indexOf(getvalue[1]) < 0) {
+                  var replaced = getbame.replace(/field_images/g, getvalue[1]);
                 } else {
-
-                    jQuery('.imagefid').each(function() {
-                        var getvalue = jQuery(this).val();
-                        getvalue = getvalue.split('#');
-                        var newbname = getbame;
-                        var replaced = newbname.substring(newbname.indexOf("[") + 1);
-                        replaced = getvalue[1] + '[' + replaced;
-                        var field_name = jQuery('#field_name').val();
-                        if (getis_custom_form == 1) {
-                            parent.jQuery('[name="' + field_name + '[fid]"]').val(image_fiedlid);
-                            parent.jQuery('.div_' + field_name).hide();
-                            parent.jQuery("body").find("input[name='" + getbame).trigger('mousedown');
-                        }
-                        parent.jQuery('[name="' + replaced + '[fid]"]').val(getvalue[0]);
-                        parent.jQuery("body").find("input[name='" + replaced + "[filefield_itg_image_repository][button]").trigger('mousedown');
-                        parent.jQuery('[name="' + getbame + '[fid]"]').val(image_fiedlid);
-                        parent.jQuery("body").find("input[name='" + getbame + "[filefield_itg_image_repository][button]").trigger('mousedown');
-                        parent.jQuery(document).ajaxComplete(function(event, request, settings) {
-
-                            if (settings.url.indexOf(field_name) >= 0) {
-                                if (image_alttext == "")
-                                {
-                                    var imagealt = jQuery('#imgtag img').attr('src');
-                                    var image_alttext = imagealt.substring(imagealt.lastIndexOf("/") + 1, imagealt.length);
-                                    image_alttext = image_alttext.substr(0, image_alttext.lastIndexOf('.'));
-                                }
-                                if (image_title == "")
-                                {
-                                    var imagetitle = jQuery('#imgtag img').attr('src');
-                                    var image_title = imagetitle.substring(imagetitle.lastIndexOf("/") + 1, imagetitle.length);
-                                    image_title = image_title.substr(0, image_title.lastIndexOf('.'));
-                                }
-                                var image_alttext = jQuery('#alt_text_image').val();
-                                var image_title = jQuery('#image_title_exta').val();
-                                setTimeout(function() {
-                                    if (image_alttext != "")
-                                    {
-                                       // parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
-                                       // parent.jQuery('[name="' + replaced + '[alt]"]').val(image_alttext);
-                                    }
-                                    if (image_title != "")
-                                    {
-                                        //parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
-                                       // parent.jQuery('[name="' + replaced + '[title]"]').val(image_title);
-                                    }
-
-                                    var credit = parent.jQuery('#edit-field-credit-name-und-0-value').val();
-                                    var captionid = getbame + '[field_image_caption][und][0][value]';
-                                    captionid = captionid.replace('[field_images][und][0]', "");
-                                    var captionid1 = getbame + '[field_credit][und][0][value]';
-                                    captionid1 = captionid1.replace('[field_images][und][0]', "");
-                                    var syndi = getbame + '[field_image_syndication][und][yes]';
-                                    syndi = syndi.replace('[field_images][und][0]', "");
-                                    //  parent.jQuery('[name="' + captionid + '"]').val(image_title);
-                                    if (jQuery('.is_synd').is(':checked')) {
-                                        parent.jQuery('[name="' + syndi + '"]').prop('checked', true);
-                                    }
-                                    parent.jQuery('[name="' + captionid1 + '"]').val(credit);
-                                    hideloader();
-                                    parent.jQuery.colorbox.close();
-                                }, 500);
-                            }
-
-                        });
-                    });
+                  replaced = newbname;
                 }
 
-            },
-            error: function(xhr, desc, err) {
-                console.log(xhr);
-                console.log("Details: " + desc + "\nError:" + err);
-            }
-        });
+              } else {
+                var replaced = newbname.substring(newbname.indexOf("[") + 1);
+                replaced = getvalue[1] + '[' + replaced;
+              }
 
-    })
+              var field_name = jQuery('#field_name').val();
+              if (getis_custom_form == 1) {
+                parent.jQuery('[name="' + field_name + '[fid]"]').val(image_fiedlid);
+                parent.jQuery('.div_' + field_name).hide();
+                parent.jQuery("body").find("input[name='" + getbame).trigger('mousedown');
+              }
+
+              parent.jQuery('[name="' + replaced + '[fid]"]').val(getvalue[0]);
+              parent.jQuery("body").find("input[name='" + replaced + "[filefield_itg_image_repository][button]").trigger('mousedown');
+              parent.jQuery('[name="' + getbame + '[fid]"]').val(image_fiedlid);
+              parent.jQuery("body").find("input[name='" + getbame + "[filefield_itg_image_repository][button]").trigger('mousedown');
+              parent.jQuery(document).ajaxComplete(function(event, request, settings) {
+
+                if (settings.url.indexOf(field_name) >= 0) {
+                  if (image_alttext == "")
+                  {
+                    var imagealt = jQuery('#imgtag img').attr('src');
+                    var image_alttext = imagealt.substring(imagealt.lastIndexOf("/") + 1, imagealt.length);
+                    image_alttext = image_alttext.substr(0, image_alttext.lastIndexOf('.'));
+                  }
+                  if (image_title == "")
+                  {
+                    var imagetitle = jQuery('#imgtag img').attr('src');
+                    var image_title = imagetitle.substring(imagetitle.lastIndexOf("/") + 1, imagetitle.length);
+                    image_title = image_title.substr(0, image_title.lastIndexOf('.'));
+                  }
+                  var image_alttext = jQuery('#alt_text_image').val();
+                  var image_title = jQuery('#image_title_exta').val();
+                  setTimeout(function() {
+                    if (image_alttext != "")
+                    {
+                      // parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
+                      // parent.jQuery('[name="' + replaced + '[alt]"]').val(image_alttext);
+                    }
+                    if (image_title != "")
+                    {
+                      //parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
+                      // parent.jQuery('[name="' + replaced + '[title]"]').val(image_title);
+                    }
+
+                    var credit = parent.jQuery('#edit-field-credit-name-und-0-value').val();
+                    var captionid = getbame + '[field_image_caption][und][0][value]';
+                    captionid = captionid.replace('[field_images][und][0]', "");
+                    var captionid1 = getbame + '[field_credit][und][0][value]';
+                    captionid1 = captionid1.replace('[field_images][und][0]', "");
+                    var syndi = getbame + '[field_image_syndication][und][yes]';
+                    syndi = syndi.replace('[field_images][und][0]', "");
+                    //  parent.jQuery('[name="' + captionid + '"]').val(image_title);
+                    if (jQuery('.is_synd').is(':checked')) {
+                      parent.jQuery('[name="' + syndi + '"]').prop('checked', true);
+                    }
+                    parent.jQuery('[name="' + captionid1 + '"]').val(credit);
+                    hideloader();
+                    parent.jQuery.colorbox.close();
+                  }, 500);
+                }
+
+              });
+            });
+          }
+
+        },
+        error: function(xhr, desc, err) {
+          console.log(xhr);
+          console.log("Details: " + desc + "\nError:" + err);
+        }
+      });
+    }
+  });
 
 
 

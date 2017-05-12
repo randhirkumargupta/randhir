@@ -186,7 +186,7 @@ function ugc_comment_form($form, &$form_state) {
   $settings['bad_word'] = implode(',', $op);
   $settings['block_email'] = implode(',', $em);
   drupal_add_js(array('itg_ugc_comment' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_ugc_comment') . '/js/itg_ugc_comment.js');
+  drupal_add_js(drupal_get_path('module', 'itg_ugc_comment') . '/js/itg_ugc_comment.js', array('scope' => 'footer'));
   // Add js file to form.
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
@@ -388,7 +388,7 @@ function itg_user_block_api_form($form, &$form_state) {
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
   drupal_add_js(array('itg_ugc_user_block' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_ugc_comment') . '/js/itg_ugc_user_block.js');
+  drupal_add_js(drupal_get_path('module', 'itg_ugc_comment') . '/js/itg_ugc_user_block.js', array('scope' => 'footer'));
   
   return $form;
 }
@@ -478,6 +478,7 @@ function itg_get_comment_question($nid) {
     $db_or->condition('uc.bundle', 'videogallery');
     $db_or->condition('uc.bundle', 'photogallery');
     $db_or->condition('uc.bundle', 'blog');
+    $db_or->condition('uc.bundle', 'podcast');
     $query = db_select('field_data_field_story_comment_question', 'uc')
         ->fields('uc', array('field_story_comment_question_value'))
         ->condition($db_or)

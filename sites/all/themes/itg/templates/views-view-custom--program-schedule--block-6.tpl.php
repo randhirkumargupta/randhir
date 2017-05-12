@@ -8,6 +8,6 @@
   }
   ?>
     
-    <h4><?php print $row['title']; ?></h4>
+    <h4  title="<?php print strip_tags($row['title']) ; ?>"><?php print strip_tags($row['title']); ?></h4>
     <p><?php print $row['field_story_new_title']; ?></p>
 <?php endforeach; ?>

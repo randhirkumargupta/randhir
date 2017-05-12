@@ -28,7 +28,7 @@ global $base_url;
 
       </div>
       <div class="detail">
-        <h3>
+        <h3 title="<?php echo strip_tags($row['title']);?>">
           <?php
           if (function_exists('itg_common_get_smiley_title')) {
             print l(itg_common_get_smiley_title($row['nid'], 0, 35), "node/" . $row['nid'], array("html" => TRUE));
@@ -39,14 +39,14 @@ global $base_url;
           ?>
         </h3>
         <?php if (strtolower($row['type']) == 'story'): ?>
-          <p><?php print $row['field_story_kicker_text']; ?></p>
+          <p><?php print strip_tags($row['field_story_kicker_text']); ?></p>
         <?php elseif ($row['type'] == 'photogallery'): ?>
-          <p><?php print $row['field_gallery_kicer']; ?></p>
+          <p><?php print strip_tags($row['field_gallery_kicer']); ?></p>
         <?php elseif ($row['type'] == 'photogallery'): ?>
-          <p><?php print $row['field_story_expert_description']; ?></p>
+          <p><?php print strip_tags($row['field_story_expert_description']); ?></p>
         <?php endif; ?>
        <?php if (!empty($row['field_video_kicker'])) {
-        print '<p>' .mb_strimwidth($row['field_video_kicker'], 0, 70, "..")  . '</p>';
+        print '<p>' .mb_strimwidth(strip_tags($row['field_video_kicker']), 0, 70, "..")  . '</p>';
       }?>
 
       </div>

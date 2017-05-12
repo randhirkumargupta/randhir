@@ -61,7 +61,7 @@ function itg_ask_expert_form_alter(&$form, &$form_state, $form_id) {
 
         // set term_id from url in hidden field
         if (empty($form['nid']['#value'])) {
-            $form['field_user_source_term_id'][LANGUAGE_NONE][0]['value']['#value'] = 147; //130
+            $form['field_user_source_term_id'][LANGUAGE_NONE][0]['value']['#value'] = ''; //130
         }
         $form['actions']['submit']['#value'] = 'Submit';
         $form['#after_build'][] = 'itg_ask_expert_after_build';
@@ -99,7 +99,7 @@ function itg_ask_expert_after_build($form, &$form_state) {
     $settings['base_url'] = $base_url;
     $settings['uid'] = $user->uid;
     drupal_add_js(array('itg_ask_expert' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_ask_expert') . '/js/itg_ask_expert.js');
+    drupal_add_js(drupal_get_path('module', 'itg_ask_expert') . '/js/itg_ask_expert.js', array('scope' => 'footer'));
     return $form;
 }
 
@@ -234,13 +234,20 @@ function itg_ask_expert_node_insert($node) {
           $mail_content = $body_state;
           $mail_subject = $ask_expert_submit_query->field_mail_subject_expert[LANGUAGE_NONE][0]['value'];
         }
+        $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+            <html xmlns:v="urn:schemas-microsoft-com:vml">
+              <head><title></title></head>
+              <body style="margin:0; padding:0;">';
+        $content .= $mail_content;
+        $content .= '</body>';
+        $content .= '</html>';
 //        $mail_content = itg_ask_expert_get_mail_content($node);
         $params = array(
-            'body' => $mail_content,
+            'body' => $content,
             'subject' => $mail_subject,
         );
-        $to = implode(',', $expert_arr);
-
+//        $to = implode(',', $expert_arr);
+        $to = 'gourav.walia@kelltontech.com';
         $mail = drupal_mail('itg_ask_expert', 'send_mail_to_expert', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
         if ($mail['result']) {
             return TRUE;
@@ -263,7 +270,8 @@ function itg_ask_expert_node_update($node) {
     if ($node->type == 'ask_an_expert') {
         module_load_include('inc', 'itg_ask_expert', 'include/itg_ask_expert_mail');
         // get term id to fetch all role related to term id
-        $to = $node->field_user_email[LANGUAGE_NONE][0]['value'];
+//        $to = $node->field_user_email[LANGUAGE_NONE][0]['value'];
+        $to = 'gourav.walia@kelltontech.com';
         $name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
         $node_url = l($node->title, $base_url . '/node/' . $node->nid);
         
@@ -275,9 +283,15 @@ function itg_ask_expert_node_update($node) {
           $body_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $body_name);
           $mail_content = $body_url;
         }
-        
+        $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+            <html xmlns:v="urn:schemas-microsoft-com:vml">
+              <head><title></title></head>
+              <body style="margin:0; padding:0;">';
+        $content .= $mail_content;
+        $content .= '</body>';
+        $content .= '</html>';
         $params = array(
-            'body' => $mail_content,
+            'body' => $content,
             'subject' => $mail_subject,
         );
         $mail = drupal_mail('itg_ask_expert', 'send_mail_to_expert', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
@@ -303,7 +317,7 @@ function itg_ask_expert_mail($key, &$message, $params) {
         case 'send_mail_to_expert':
             $headers = array(
                 'MIME-Version' => '1.0',
-                'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+                'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
                 'Content-Transfer-Encoding' => '8Bit',
                 'X-Mailer' => 'Drupal'
             );

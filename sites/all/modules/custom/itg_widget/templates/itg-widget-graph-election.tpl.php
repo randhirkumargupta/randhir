@@ -10,14 +10,20 @@ if (!empty($data)) : global $base_url; ?>
      $classrow="col-md-$rowcounter";
  } else if(count($data)>2)
  {
-     $classrow="col-el-".count($data);
+   if(count($data) >5) {
+     $datacount =5;
+   }else {
+      $datacount =count($data);
+   }
+     $classrow="col-el-".$datacount;
+    
  }
+ //p($data);
 foreach ($data as $index => $row):  ?>
     <div class="<?php echo $classrow;?> mt-50">
         <div class="itg-widget">
             <div class="droppable <?php print $gray_bg_layout; ?>">
                 <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
-
 
                     <div class="data-holder"> 
                         <div class="graph-design">
@@ -39,18 +45,25 @@ foreach ($data as $index => $row):  ?>
 
 
                         foreach ($jsondata->election->items as $elction_telly_data) {
-                          
+                          $total_result = (int)$elction_telly_data->pWon + (int)$elction_telly_data->pLead;
                             print '<tr><td class="party-color" style="background:'.$elction_telly_data->pColor.'"></td><td class="padtext">'.ucfirst($elction_telly_data->pName).'</td>
 <td>'.$elction_telly_data->pLead.'</td>
 <td>'.$elction_telly_data->pWon.'</td>
-<td>'.$elction_telly_data->pWon.'</td></tr>';
+<td>'.$total_result.'</td></tr>';
                         }
 
                         print '
 </tbody>
 
 
-</table>';
+</table><div class="social-share">
+                    <ul>
+                        <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
+                        <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fb_share_title . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $src . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+                        <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($search_title) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
+                        <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="google def-cur-pointer"></a></li>
+                    </ul>
+                </div>';
                         ?>  
                     </div>
                 </div>             
@@ -59,10 +72,6 @@ foreach ($data as $index => $row):  ?>
     </div>
 
    
-    </head>
-    <body>
-        
-
 
       
     <?php endforeach; ?>

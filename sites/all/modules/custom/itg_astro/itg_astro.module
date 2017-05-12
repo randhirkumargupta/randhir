@@ -203,9 +203,9 @@ function itg_astro_after_build($form, &$form_state) {
   // Initialize globals.
   global $user, $base_url;
   // Pass sign name to js file.
-  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/itg_astro.js');
-  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/moment.js');
-  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js');
+  
+  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/moment.js', array('scope' => 'footer'));
+  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js', array('scope' => 'footer'));
 
   // Add description of audi/video field to their placeholder.
   if (!empty($form['field_astro_video'][LANGUAGE_NONE][0]['description']['#description'])) {
@@ -220,12 +220,7 @@ function itg_astro_after_build($form, &$form_state) {
       ':input[name="field_astro_type[und]"]' => array('value' => '224'),
     ),
   );
-  if (!isset($form['#node']->nid)) {
-    // Hide remove button of first field on add form.
-    drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-astro-numerology-values-und-0-remove-button").hide();              
-            });', array('type' => 'inline', 'scope' => 'footer'));
-  }
+  
   // Change Zodiac field item label name and add * on mandotory fields.
   $zodiac_name = itg_astro_zodiac_thumbnail();
   for ($i = 0; $i <= 11; $i++) {
@@ -259,8 +254,9 @@ function itg_astro_after_build($form, &$form_state) {
   $settings['uid'] = $user->uid;
   $settings['base_url'] = $base_url;
   $settings['type'] = 'astro';
-  $settings['nid'] = $form['nid']['#value'];
+  $settings['nid'] = isset($form['nid']['#value']) ? $form['nid']['#value'] : '';
   drupal_add_js(array('uid' => $settings), 'setting');
+  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/itg_astro.js', array('scope' => 'footer'));
 
   return $form;
 }

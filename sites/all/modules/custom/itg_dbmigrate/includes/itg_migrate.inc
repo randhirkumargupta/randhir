@@ -1,5 +1,5 @@
 <?php
-//exit;
+//exit;z
 /**
  * @file
  * Because the name of this file is the module name plus '.migrate.inc', when
@@ -19,7 +19,7 @@
  */
 function itg_dbmigrate_migrate_api() {
   //exit;
-  //watchdog("test shravan@", '<pre>'. print_r($_GET, TRUE) .'</pre>'); 
+ // watchdog("test arun@", '<pre>'. print_r($_GET, TRUE) .'</pre>');
   // Usually field mappings are established by code in the migration constructor -
   // a call to addFieldMapping(). They may also be passed as arguments when
   // registering a migration - in this case, they are stored in the database
@@ -45,7 +45,7 @@ function itg_dbmigrate_migrate_api() {
       'og',
       'registration',
     ),
-    
+
     'taxonomy_term_insert' => array(
       'metatag',
       'pathauto',
@@ -59,12 +59,12 @@ function itg_dbmigrate_migrate_api() {
     ),
 
   );
-  
+
   $api = array(
     // Required - tells the Migrate module that you are implementing version 2
     // of the Migrate API.
     'api' => 2,
-  
+
     'groups' => array(
       'itg_section' => array(
         'title' => t('Itg section Imports'),
@@ -112,18 +112,20 @@ function itg_dbmigrate_migrate_api() {
       'itg_story_list' => array(
         'title' => t('Story Migrate by xml chunks'),
       ),
-      /*'itg_magazine' => array(
-        'title' => t('Itg magazine Imports'),
-      ),
        'itg_issue' => array(
         'title' => t('Itg issue Imports'),
       ),
-      'itg_supplement' => array(
+      'itg_supplements' => array(
         'title' => t('Itg Supplement Imports'),
       ),
+      /*'itg_magazine' => array(
+        'title' => t('Itg magazine Imports'),
+      ),
+      
+      
       'itg_foodnews' => array(
         'title' => t('Itg Food News Imports'),
-      ),      
+      ),
       'itg_sponsor' => array(
         'title' => t('Itg sponsor Imports'),
       ),
@@ -138,10 +140,15 @@ function itg_dbmigrate_migrate_api() {
       ),
       'itg_recipe' => array(
         'title' => t('Itg recipe Imports'),//pending
-      ),      
+      ),
       'itg_megareview' => array(
         'title' => t('Itg Megareview Imports'),
-      ),*/      
+      ),*/
+
+      'itg_best_college' => array(
+        'title' => t('Itg Best College Migration'),
+      ),
+
     ),
 
     // Here we register the individual migrations. The keys (ItgCategory, ItgStory
@@ -164,7 +171,7 @@ function itg_dbmigrate_migrate_api() {
       'ItgSubSubCategory' => array(
         'class_name' => 'ItgSubSubCategoryMigration',
         'group_name' => 'itg_subsubcategory',
-      ),      
+      ),
       'ItgStory' => array(
         'class_name' => 'ItgStoryMigration',
         'group_name' => 'itg_story',
@@ -201,30 +208,33 @@ function itg_dbmigrate_migrate_api() {
         'class_name' => 'ItgCountryMigration',
         'group_name' => 'itg_country',
       ),
+
       'ItgState' => array(
         'class_name' => 'ItgStateMigration',
         'group_name' => 'itg_state',
+      ),
+       'ItgIssue' => array(
+        'class_name' => 'ItgIssueMigration',
+        'group_name' => 'itg_issue',
       ),
       'ItgPhoto' => array(
         'class_name' => 'ItgPhotoMigration',
         'group_name' => 'itg_Photo_category',
       ),
+       'ItgSupplements' => array(
+        'class_name' => 'ItgSupplementsMigration',
+        'group_name' => 'itg_supplement',
+      ),
+     
       /*'ItgMagazine' => array(
         'class_name' => 'ItgMagazineMigration',
         'group_name' => 'itg_magazine',
       ),
-      'ItgIssue' => array(
-        'class_name' => 'ItgIssueMigration',
-        'group_name' => 'itg_issue',
-      ),
-      'ItgSupplement' => array(
-        'class_name' => 'ItgSupplementMigration',
-        'group_name' => 'itg_supplement',
-      ),
+     
       'ItgFoodNews' => array(
         'class_name' => 'ItgFoodNewsMigration',
         'group_name' => 'itg_foodnews',
-      ),      
+      ),
       'ItgSponsor' => array(
         'class_name' => 'ItgSponsorMigration',
         'group_name' => 'itg_sponsor',
@@ -244,13 +254,14 @@ function itg_dbmigrate_migrate_api() {
       'ItgRecipe' => array(
         'class_name' => 'ItgRecipeMigration',
         'group_name' => 'itg_recipe',
-      ),      
+      ),
       'ItgMegareview' => array(
         'class_name' => 'ItgMegareviewMigration',
         'group_name' => 'itg_megareview',
-      ),*/      
+      ),*/
+
     ),
-    
+
   );
   return $api;
 }

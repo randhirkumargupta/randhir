@@ -10,7 +10,12 @@
 function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
   global $base_url;
   global $user;
-
+  
+  if($user->uid) {
+  $cookie = $_COOKIE['Drupal_visitor_itgcms_quiz_'.arg(1).'_'.$user->uid];
+  } else {
+   $cookie = $_COOKIE['Drupal_visitor_itgcms_quiz_'.arg(1)];  
+  }
   //Get node of current quiz (load all questions ans answer options to generate quiz form)
   if ($node_id) {
     $current_nid = $node_id;
@@ -26,7 +31,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
   if ($node->type == 'quiz') {
 
     // Add JS for front
-    drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz_front.js');
+    drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz_front.js', array('scope' => 'footer'));
 
     // If quiz is not published
     if (!$node->status) {
@@ -83,7 +88,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
     // Add JS for one question at a time
     $quiz_question_format = $node->field_survey_questions_format[LANGUAGE_NONE][0]['value'];
     if ($quiz_question_format == 'One question at a time') {
-      drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz_questions.js');
+      drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz_questions.js', array('scope' => 'footer'));
     }
 
     // If question display type is "random", shuffle the array
@@ -343,6 +348,11 @@ $question_media = "";
               '#type' => 'markup',
               '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>This quiz has been expired. So you can not submit!</strong></div>',
           );
+        } elseif(isset($cookie)){
+        $form['quiz_has_been_already_taken' . $num] = array(
+            '#type' => 'markup',
+            '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>Sorry! You can not proceed, you have already taken this Quiz!</strong></div>',
+        );
         }
         else {
           $form['quiz_submit_' . $num] = array(
@@ -433,6 +443,11 @@ $question_media = "";
         $form['quiz_has_been_expired' . $num] = array(
             '#type' => 'markup',
             '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>This quiz has been expired. So you can not submit!</strong></div>',
+        );
+      } elseif(isset($cookie)){
+        $form['quiz_has_been_already_taken' . $num] = array(
+            '#type' => 'markup',
+            '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>Sorry! You can not proceed, you have already taken this Quiz!</strong></div>',
         );
       }
       else {

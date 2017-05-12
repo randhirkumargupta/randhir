@@ -54,10 +54,10 @@ function itg_widget_how_made_it_ordering_data($info) {
       $cat_id = arg(2);
     }
     $result = get_view_nodes_form_custom_table_for_widgets_special($widget_name, $cat_id, HOW_MADE_MAX_RANGE, HOW_MADE_MIN_RANGE);
-    $entity_data = array();
-    foreach ($result as $entity_data_node) {
-      $entity_data[] = $entity_data_node;
-    }
-    return $entity_data;
+//    $entity_data = array();
+//    foreach ($result as $entity_data_node) {
+//      $entity_data[] = $entity_data_node;
+//    }
+    return $result;
   }
 }

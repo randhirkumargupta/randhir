@@ -169,6 +169,12 @@ function itg_preprocess_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__itg_blog_page';
   }
   
+  $progarm_cat_id = variable_get('program_category_id_for_programmes');
+  
+  if($arg[0] == 'taxonomy' && $arg[1] == 'term' && $arg[2] == $progarm_cat_id) {
+    $variables['theme_hook_suggestions'][] = 'page__taxonomy_term_program';
+  }
+  
 }
 
 /**
@@ -177,13 +183,13 @@ function itg_preprocess_page(&$variables) {
 function itg_breadcrumb($variables) {
   $breadcrumb = $variables['breadcrumb'];
   $crumbs = '';
-  if (!empty($breadcrumb) && arg(0) == 'site-search') {
+  if (!empty($breadcrumb) && arg(0) == 'topic') {
     $crumbs = '<div id="breadcrumbs"><ul><li></li>';
     foreach ($breadcrumb as $value) {
       $crumbs .= '<li>' . $value . '</li>';
     }
 
-    if (arg(0) == 'site-search') {
+    if (arg(0) == 'topic') {
       if (!empty($_GET['keyword'])) {
         $keyword = '<li>' . $_GET['keyword'] . '</li>';
       }

@@ -952,6 +952,43 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   }
 }
 
+.node-ugc-form{
+  .form-field-name-field-ugc-photo-image{
+    fieldset{
+      border: none;
+      legend{
+        float: left;
+        width: 200px;
+        &:after{
+          content:'*';
+          color: #f00;
+        }
+      }
+      .fieldset-wrapper{
+        overflow: hidden;
+        .tabledrag-toggle-weight-wrapper, table thead{display: none;}
+        table{
+          tbody{
+            tr{
+              td{
+                .tabledrag-handle{display: none;}
+                .form-submit{
+                  border: none;
+                  background: #fff;
+                  color: #F00;
+                  font-size: 12px;
+                }
+              }
+            }
+          }
+          & + .form-type-managed-file{margin-top: 10px;}
+        }
+        
+      }
+    }
+  }
+}
+
 .view-personalization-my-content{
   .views-table{
     width: 100%;
@@ -1741,6 +1778,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       background-color: #000;
       float: left;
       width: 100%;
+      height: 74px;
       overflow: hidden;
       h2{
         color: #fff;
@@ -1805,6 +1843,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     padding: 10px 0 0;
     max-height: 115px;
     overflow-y: auto;
+    margin-top: 0;
   }
   .poll-wrapper .poll-data .poll-replace-id .past-poll li:last-child,
   .poll-wrapper .poll-data .poll-replace-id .past-poll li{
@@ -1830,7 +1869,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   width: 100%;
   padding: 10px;
   text-align: center;
-  .add-more-block, .add-more-block-front, .removes-more-block{
+  .add-more-block, .add-more-block-front, .removes-more-block, .add-more-block-front-section{
     display: inline-block;
     vertical-align: top;
     padding: 10px 20px;
@@ -3963,17 +4002,21 @@ span.personal-social-share-links {
 }
 .page-personalization-my-following{
     .region-personalization{text-align: center;}
-    #block-views-follow-tags-block,
-    #block-views-follow-tags-block-1{
+    #block-itg-personalization-personalization-to-be-follow,
+    #block-itg-personalization-personalization-following{
         background-color: #f2f2f2;
         margin: 20px 10px 0;
         display: inline-block;
         vertical-align: top;
         width: 400px;
         padding: 15px;
-        .view-follow-tags{
-            .views-row{
-                padding:10px;
+        h2{
+          font: 400 24px/28px Roboto;
+          margin: 20px 0;
+        }
+        .to_be_follow{
+            .featured-name{
+                padding:10px 75px 10px 10px;
                 text-align: left;
                 border: 1px solid #d9d9d9;
                 background-color: #fff;
@@ -3981,15 +4024,12 @@ span.personal-social-share-links {
                 position: relative;
                 margin: 15px;
                 border-radius: 5px;
+                font: 400 16px/20px Roboto;
+                word-wrap: break-word;
                 &:hover{
                   background-color: #efefef;
                 }
-                .views-field-name{
-                    padding-right: 75px;
-                    font: 400 16px/20px Roboto;
-                    word-wrap: break-word;
-                }
-                .views-field-ops{
+                span{
                     font: 400 14px/20px Roboto;
                     position: absolute;
                     right: 5px;
@@ -5802,8 +5842,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       }
     }
   }  
-  .page-personalization-my-following #block-views-follow-tags-block, 
-  .page-personalization-my-following #block-views-follow-tags-block-1{width: 100%; float: left; margin: 20px 0 0; padding: 15px 0;}
+  .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow, 
+  .page-personalization-my-following #block-itg-personalization-personalization-following{width: 100%; float: left; margin: 20px 0 0; padding: 15px 0;}
   #block-itg-personalization-user-my-point{
     .header-point{
       padding: 20px 0;

@@ -65,38 +65,31 @@ else {
       <?php $block = module_invoke('system', 'block_view', 'user-menu'); ?>
       <?php print render($block['content']); ?> 
     </li>
-    <li><a href="javascript:void(0)" class="search-icon" title=""><i class="fa fa-search"></i></a></li>
+    <li class="search-icon-parent">
+      <a href="javascript:void(0)" class="search-icon-default" title=""><i class="fa fa-search"></i></a>
+      <a href="javascript:void(0)" class="search-icon-search" title=""><i class="fa fa-search"></i></a>
+      <div class="globle-search">
+        <input class="search-text" placeholder="Type here" type="text" value="" />
+      </div>
+    </li>
     <li><a href="<?php print base_path() ?>livetv" class="live-tv" title=""><img src="<?php print base_path() ?>sites/all/themes/itg/images/live-tv-icon.png" alt="Live Tv" /></a></li> 
   </ul>
-  <div class="globle-search">
-    <input class="search-text" placeholder="Type here" type="text" value=""></div>
-  <!--      <div class="menu-login desktop-hide">
-          <div class="container ">   
-              <div class="user-menu">
-                  <a href="signup?width=500&height=500&iframe=true" class="user-icon colorbox-load"><i class="fa fa-user"></i></a>
-  <?php
-  //$block = module_invoke('system', 'block_view', 'user-menu');
-  // print render($block['content']);
-  ?>
-              </div>
-          </div>
-      </div>-->
 </div>
 <div class="itg-logo-container">
   <div class="container top-nav">                  
     <div class="social-nav mhide">
       <ul class="social-nav mhide">
-        <li><a href="https://www.facebook.com/IndiaToday/" class="user-activity def-cur-pointer" rel="1" data-tag="homepage" data-activity="fb_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-facebook"></i></a></li>
-        <li><a href="https://twitter.com/indiatoday" class="user-activity def-cur-pointer" rel="1" data-tag="homepage" data-activity="twitter_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-twitter"></i></a></li>
-        <li><a href="https://plus.google.com/+indiatoday" class="user-activity def-cur-pointer" rel="1" data-tag="homepage" data-activity="google_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+        <li><a href="https://www.facebook.com/IndiaToday/" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="fb_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="https://twitter.com/indiatoday" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="twitter_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://plus.google.com/+indiatoday" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="google_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-google-plus"></i></a></li>
         <li><a href="#" title=""><i class="fa fa-rss"></i></a></li>
         <li><a href="#" title=""><i class="fa fa-mobile"></i></a></li>
         <li><a href="#" title=""><i class="fa fa-volume-up"></i></a></li>
         <li class="search-icon-parent">
-          <a href="javascript:void(0)" class="search-icon-header" title=""><i class="fa fa-search"></i></a>
+          <a href="javascript:void(0)" class="search-icon-default" title=""><i class="fa fa-search"></i></a>
           <a href="javascript:void(0)" class="search-icon-search" title=""><i class="fa fa-search"></i></a>
           <div class="globle-search">
-            <input id="header-search-box" class="search-text" placeholder="Type here" type="text" value="">
+            <input class="search-text" placeholder="Type here" type="text" value="" />
           </div>
         </li>                            
       </ul>
@@ -134,8 +127,15 @@ else {
               $parent_class = $menu_link_data['parent_class'];
               $active_cls = $menu_link_data['active_cls'];
               $url_type = $menu_link_data['url_type'];
+              $style_tag = '';
+              $color_value = '';
+              if(!empty($sponsored_class)) {
+                $color_value = $menu_data['db_data']['bk_color'];
+              }
               ?>
-              <li class="<?php print $image_class; ?>"><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)))); ?></li>
+              <li <?php echo $style_tag; ?> class="<?php print $image_class; ?>">
+                  <?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('style' => array("background : $color_value" ) , 'target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)))); ?>
+              </li>
               <?php
             }
           endforeach;

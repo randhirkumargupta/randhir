@@ -89,13 +89,14 @@ if (!in_array('administrator', $user->roles)) {
   <?php
     // get role array
     $role_display = $user->roles;
+    $myaccount = l('My account', 'users/'.$user->uid, array('attributes' => array('class' => 'user-profile', 'title' => 'My account')));
     // skip key for authenticated user
     
     unset($role_display[2]);
     // get value in comma seprated
     $role_display = implode(',', $role_display);
-    
-    print 'User role - '.$role_display;
+    print '<i class="fa fa-user" aria-hidden="true"></i>';
+    print '  Username - '. $user->name.' | Role - '.$role_display.' | '.$myaccount;
    ?>
 </span>                                                  
 <div class="bell-notice"></div>

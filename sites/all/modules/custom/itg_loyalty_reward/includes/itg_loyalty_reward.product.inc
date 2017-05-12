@@ -233,7 +233,7 @@ function _insert_product_into_cart($node_info_array) {
 function itg_loyalty_reward_cart() {
   global $user, $base_url;
   // Add js file.
-  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js');
+  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js', array('scope' => 'footer'));
   drupal_add_js(array('itg_loyalty_reward' => array('base_url' => $base_url)), array('type' => 'setting'));
   $data = _get_cart_full_details($user->uid);
   $remain_point = itg_loyalty_reward_remaining_point($user->uid);
@@ -379,7 +379,7 @@ function _get_order_item() {
 function itg_loyalty_reward_order_summary() {  
   global $user;
   // Add js file.
-  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js');
+  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js', array('scope' => 'footer'));
   $user_detail = user_load($user->uid);
   $data['product_detail'] = _get_cart_full_details($user->uid);
   $fname = $user_detail->field_first_name['und'][0]['value'];
