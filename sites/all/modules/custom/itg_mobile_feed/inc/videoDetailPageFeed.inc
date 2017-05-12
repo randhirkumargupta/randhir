@@ -29,7 +29,7 @@ function videoDetailPageFeed() {
  * @return array 
  */
 function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $type) {
-  //echo print_ar(arg());exit();
+  echo print_ar(arg());exit();
 
   //$nid = 571;
   //$nid = 461;
@@ -42,21 +42,21 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
   if(!$term_feed_path){
     //$term_feed_path = getcwd() . "/sites/default/files/xml_it/videos"; 
     $term_feed_path = "public://xml_it/videos";
-    drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
+    $filepath = drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
   }
    elseif($type){
      if($type == "photogallery"){
           $term_feed_path = "public://xml_it/photos";
-	 drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
+	 $filepath = drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
      } 
      
      elseif($type == "story"){
           $term_feed_path = "public://xml_it/stories";
-	 drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
+	 $filepath = drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
      } 
      elseif($type == "videogallery"){
           $term_feed_path = "public://xml_it/videos";
-	 drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
+	 $filepath = drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
      } 
   }
   //field_image_caption
