@@ -4,7 +4,7 @@
       <?php foreach ($data as $key => $entity) {
          
         ?>
-        <li class="" id="dont-miss-<?php print $key ?>">
+        <li>
           <?php if (!empty($entity['esi_file_uri'])) { ?>
             <span class="dm-pic">
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$entity['nid']}") ?>">
