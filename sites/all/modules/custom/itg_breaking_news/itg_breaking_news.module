@@ -217,19 +217,12 @@ function itg_breaking_news_views_pre_render(&$view) {
  * {@inheritdoc}
  */
 function itg_breaking_news_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-    // Get the Form Id
-    if ($form["#id"] == 'views-exposed-form-breaking-news-page') {
-        $form['#after_build'][] = 'itg_breaking_news_views_exposed_after_build';
-        $form['title']['#autocomplete_path'] = 'content-title-list/breaking_news/autocomplete';
-        $form['title']['#attributes'] = array('placeholder' => t('Title'));
-
-        // code to reset breaking news listing when user click on back button
-        drupal_add_js('jQuery(document).ready(function() {                  
-                 jQuery("form").each(function() {            
-                 this.reset();
-               });              
-          });', array('type' => 'inline', 'scope' => 'footer'));
-    }
+  // Get the Form Id
+  if ($form["#id"] == 'views-exposed-form-breaking-news-page') {
+    $form['#after_build'][] = 'itg_breaking_news_views_exposed_after_build';
+    $form['title']['#autocomplete_path'] = 'content-title-list/breaking_news/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
 }
 
 /**
@@ -241,12 +234,9 @@ function itg_breaking_news_after_build($form, &$form_state) {
     global $user, $base_url;
   
     $form['field_content_type']['#attributes']['class'][] = 'element-hidden';
+    
     if (!isset($form['#node']->nid)) {
-        // hide remove button of first field on add form 
-        drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-story-highlights-und-0-remove-button").hide();
-              jQuery("#edit-field-breaking-content-details-und-0-remove-button").hide();
-            });', array('type' => 'inline', 'scope' => 'footer'));
+      $node_id = 0;
     }
 
     //$form['field_breaking_content_details']['#prefix'] = '<div id="custom_another_item"><a href="javascript:void(0)" id="custom_add_another_item">Add another item</a></div>';
@@ -258,6 +248,7 @@ function itg_breaking_news_after_build($form, &$form_state) {
     $settings = array();
     $settings['base_url'] = $base_url;
     $settings['uid'] = $user->uid;
+    $settings['no_id'] = $node_id;
     drupal_add_js(array('itg_breaking_news' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_breaking_news') . '/js/itg_breaking_news.js', array('scope' => 'footer'));
     return $form;

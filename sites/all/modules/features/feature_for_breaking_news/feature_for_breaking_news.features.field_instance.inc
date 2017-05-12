@@ -859,7 +859,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'bundle' => 'breaking_news',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Highlights',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',

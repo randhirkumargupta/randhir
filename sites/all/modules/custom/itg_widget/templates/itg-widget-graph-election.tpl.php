@@ -18,6 +18,7 @@ if (!empty($data)) : global $base_url; ?>
      $classrow="col-el-".$datacount;
     
  }
+ //p($data);
 foreach ($data as $index => $row):  ?>
     <div class="<?php echo $classrow;?> mt-50">
         <div class="itg-widget">
