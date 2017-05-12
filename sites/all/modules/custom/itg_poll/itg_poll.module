@@ -103,7 +103,7 @@ function alter_submit_status_message(&$form, $form_state) {
  * @return array
  */
 function itg_poll_after_build($form, &$form_state) {
-  drupal_add_js(drupal_get_path('module', 'itg_poll') . '/js/itg_pollnew.js', array('weight' => 3, 'scope' => 'footer'));
+ 
   global $user, $base_url;
 //  unset($form['metatags']['intro_text']['#markup']);
 //  $form['title']['#title'] = 'Poll Question';
@@ -112,8 +112,10 @@ function itg_poll_after_build($form, &$form_state) {
 //  unset($form['metatags']['#description']);
   $settings = array();
   $settings['base_url'] = $base_url;
+  $settings['action_page'] = arg(2);
   $settings['uid'] = $user->uid;
   drupal_add_js(array('itg_poll' => array('settings' => $settings)), array('type' => 'setting'));
+   drupal_add_js(drupal_get_path('module', 'itg_poll') . '/js/itg_pollnew.js', array('weight' => 3, 'scope' => 'footer'));
   global $user;
   foreach ($form['field_poll_answer'][LANGUAGE_NONE] as $key => $item) {
     if (is_numeric($key)) {

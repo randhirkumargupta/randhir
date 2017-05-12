@@ -7,6 +7,11 @@
 
   Drupal.behaviors.itg_poll_form = {
     attach: function(context, settings) {
+      var action_page = settings.itg_poll.settings.action_page;
+      if (action_page == 'edit') {
+        jQuery('#edit-field-poll-answer-option').remove();
+        jQuery('#edit-field-poll-question').remove();
+      }
       $('#edit-field-poll-itg-state').hide();
       jQuery('input[name="field_poll_start_date[und][0][value][date]"]').keydown(false);
       jQuery('input[name="field_poll_end_date[und][0][value][date]"]').keydown(false);
@@ -122,7 +127,3 @@
   }
 })(jQuery);
 
-jQuery('document').ready(function() {
-  jQuery('#edit-field-poll-answer-option').remove();
-  jQuery('#edit-field-poll-question').remove();
-});
