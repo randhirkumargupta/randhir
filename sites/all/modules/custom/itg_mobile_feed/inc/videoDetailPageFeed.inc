@@ -42,23 +42,28 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
   if(!$term_feed_path){
     //$term_feed_path = getcwd() . "/sites/default/files/xml_it/videos"; 
     $term_feed_path = "public://xml_it/videos";
-    drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
+    $term_feed_path = drupal_realpath($term_feed_path);
   }
    elseif($type){
      if($type == "photogallery"){
           $term_feed_path = "public://xml_it/photos";
-	 drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
+	 $term_feed_path = drupal_realpath($term_feed_path);
      } 
      
      elseif($type == "story"){
           $term_feed_path = "public://xml_it/stories";
-	 drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
+	 $term_feed_path = drupal_realpath($term_feed_path);
      } 
      elseif($type == "videogallery"){
           $term_feed_path = "public://xml_it/videos";
-	 drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
+	 $term_feed_path = drupal_realpath($term_feed_path);
      } 
   }
+  echo "<pre>ttt";
+  echo $term_feed_path;
+  echo "<pre>"; 
+  //print_r($output); 
+  die;
   //field_image_caption
   $output = "";
   if (!$nid) {
@@ -153,12 +158,7 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
     //echo "redis set - ". $result_set['set_flag']; exit();
   }
 }
-  echo $file_name;
-  echo "<pre>ttt";
-  echo $term_feed_path;
-  echo "<pre>"; 
-  //print_r($output); 
-  die;
+  
   if($output){
         $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
     }
