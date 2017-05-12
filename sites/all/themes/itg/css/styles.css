@@ -5875,6 +5875,10 @@ h1.category-heading {
   padding: 45px 20px 10px 0px;
 }
 
+[id*="block-itg-widget-featured-photo-carousel"] .flexslider .slides img {
+  max-height: 363px;
+}
+
 .view-photo-list-of-category, .view-video-list-of-category {
   position: relative;
 }
