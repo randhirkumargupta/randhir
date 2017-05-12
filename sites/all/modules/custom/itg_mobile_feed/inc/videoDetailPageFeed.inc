@@ -226,7 +226,7 @@ function getVideoTagDetail($video_path_info,$file_id = NULL) {
                         <part>".$video_path_mp4."</part>
                     </videoparts_mp4>
                     <videoparts_m3u8>
-                        <part></part>
+                        <part>".$videoparts_3gp."</part>
                     </videoparts_m3u8>
                     <flvvideoparts>
                         <part>".$flv_url."</part>
@@ -310,8 +310,8 @@ function videoCheckExistFile($fid, $nid, $field_video_upload) {
         $query = db_select('field_data_field_migrated_video_url', 'fmv');
         $query->condition('fmv.entity_id', $field_video_upload);
         $query->fields('fmv', array('field_migrated_video_url_value'));        
-        $results = $query->execute()->fetchAll();
-        print_ar($results); exit();
+        $results = $query->execute()->fetchAll(); 
+        //print_ar($results); exit();
         $uri = $results[0]->field_migrated_video_url_value;
         $dailymtion_flag = "no";
         $dailymotion_path = $uri;
