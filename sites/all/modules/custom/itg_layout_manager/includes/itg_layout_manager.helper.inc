@@ -684,7 +684,7 @@ function get_highlights_widget($nid) {
             $emoji_image = "<img src='".$emoji1_src."' title= '".$emoji1_title."' alt='' /> ";
             $count_message = ' <span class="'.$field_class.'">('.$emoji_count.')</span> ';
             // Prepare reaction link.
-            $emoji_reaction .= l($emoji_image , 'javascript:void(0)' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $field_class , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "data-click" => "nice" , "data-nodeid" => $highlights_arr['value'] , "class" => array($anchor_pointer_class ,  "user-activity-highlight"))));
+            $emoji_reaction .= l($emoji_image , 'javascript:void(0)' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "data-rel" => $field_class , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "data-click" => "nice" , "data-nodeid" => $highlights_arr['value'] , "class" => array($anchor_pointer_class ,  "user-activity-highlight"))));
             $emoji_reaction .= $count_message;
           }
 
@@ -696,7 +696,7 @@ function get_highlights_widget($nid) {
               $emoji_count = itg_common_mongo_activity_count($field_class, 'front_user_activity_highlight');
             }
             $emoji_image = "<img src='".$emoji2_src."' title= '".$emoji2_title."' alt='' /> ";
-            $emoji_reaction .= l($emoji_image , 'javascript:void(0)' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $field_class , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "data-click" => "no", "data-nodeid" => $highlights_arr['value'], "class" => array($anchor_pointer_class ,  "user-activity-highlight"))));
+            $emoji_reaction .= l($emoji_image , 'javascript:void(0)' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "data-rel" => $field_class , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "data-click" => "no", "data-nodeid" => $highlights_arr['value'], "class" => array($anchor_pointer_class ,  "user-activity-highlight"))));
             $count_message = ' <span class="'.$field_class.'">('.$emoji_count.')</span> ';
             $emoji_reaction .= $count_message;
           }
@@ -709,7 +709,7 @@ function get_highlights_widget($nid) {
               $emoji_count = itg_common_mongo_activity_count($field_class, 'front_user_activity_highlight');
             }
             $emoji_image = "<img src='".$emoji3_src."' title= '".$emoji3_title."' alt='' />";
-            $emoji_reaction .= l($emoji_image , 'javascript:void(0)' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $field_class , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji", "data-click" => "whatever" ,"data-nodeid" => $highlights_arr['value'], "class" => array($anchor_pointer_class ,  "user-activity-highlight"))));
+            $emoji_reaction .= l($emoji_image , 'javascript:void(0)' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "data-rel" => $field_class , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji", "data-click" => "whatever" ,"data-nodeid" => $highlights_arr['value'], "class" => array($anchor_pointer_class ,  "user-activity-highlight"))));
             $count_message = ' <span class="'.$field_class.'">('.$emoji_count.')</span>';
             $emoji_reaction .= $count_message;
           }

@@ -1909,8 +1909,8 @@ function itg_event_backend_highlights_like_dislike($unique_id) {
   $like = "no-of-likes_" . $unique_id;
   $dislike = "no-of-dislikes_" . $unique_id;
 
-  $like_btn = '<div class="agbutton"><button class="btn-highlights-like" id="like_count" rel="' . $unique_id . '"><i class="fa fa-thumbs-o-up"></i> <span id="' . $like . '">' . $like_count_common . '</span></button>';
-  $dislike_btn = '<button class="btn-highlights-dislike" id="dislike_count" rel="' . $unique_id . '"><i class="fa fa-thumbs-o-down"></i> <span id="' . $dislike . '">' . $dislike_count_common . '</span></button>';
+  $like_btn = '<div class="agbutton"><button class="btn-highlights-like" id="like_count" data-rel="' . $unique_id . '"><i class="fa fa-thumbs-o-up"></i> <span id="' . $like . '">' . $like_count_common . '</span></button>';
+  $dislike_btn = '<button class="btn-highlights-dislike" id="dislike_count" data-rel="' . $unique_id . '"><i class="fa fa-thumbs-o-down"></i> <span id="' . $dislike . '">' . $dislike_count_common . '</span></button>';
   $error_msg = '<p class="error-msg" id="' . $pid . '"></p></div>';
   return $like_btn . $dislike_btn . $error_msg;
 }
