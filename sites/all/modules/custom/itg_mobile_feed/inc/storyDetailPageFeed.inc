@@ -140,15 +140,16 @@ function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="", $
      //echo "redis set - ". $result_set['set_flag']; exit();
   } 
   }
+//header('Content-Type: application/xml; charset=utf-8');
+//echo $output; exit();
     if($output){
         $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
     }
     else{
         $return_flag .="Nid is missing";
     }
-  header('Content-Type: application/xml; charset=utf-8');
-  echo $output; exit();
-  //return $return_flag;
+
+  return $return_flag;
 }
 
 /**

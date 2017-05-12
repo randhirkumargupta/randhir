@@ -166,9 +166,9 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
         $return_flag .="Nid is missing";
     }
 
- //return $return_flag;
- header('Content-Type: application/xml; charset=utf-8');
- echo $output; exit();
+  return $return_flag;
+//header('Content-Type: application/xml; charset=utf-8');
+//echo $output; exit();
 }
 
 
