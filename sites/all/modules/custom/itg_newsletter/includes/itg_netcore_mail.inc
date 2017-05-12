@@ -9,7 +9,9 @@
  * Defining constants
  */
 define('APIKEY', 'b88b53a80447bacd974fea36f91c8695');
-define('NETCORE_LIST_ID', '123456');
+define('NETCORE_LIST_ID', 4); //itgdev
+define('NETCORE_URL', 'https://api.exacttouch.com/API/mailing/');
+
 
 /**
  * Create a mailing list
@@ -17,7 +19,40 @@ define('NETCORE_LIST_ID', '123456');
  *    Containing params for API.
  * @return Array
  */
-function custom_netcore_mail_create_list($data) { 
+
+function itg_netcore_create_list() {
+  //[TYPE] => success
+  
+  /*$data['name'] = 'itgdev';
+  $data['description'] = 'list for itgdev';
+  $netcore_create = itg_netcore_mail_create_list($data);*/
+  
+  /*$data['email'] = 'shravankumar62757@gmail.com';
+  $data['listId'] = NETCORE_LIST_ID;
+  $netcore_create = itg_netcore_mail_add_user($data);*/
+  
+  /*$data['subject'] = 'Test mail for netcore3';
+  $data['fromName'] = 'itg';
+  $data['fromEmail'] = 'care@intoday.in';  
+  $data['content'] = 'hello test data [UNSUBSCRIBEURL]';
+  $netcore_campaign = itg_netcore_mail_create_campaign($data);
+  p($netcore_campaign);*/
+  
+  /*$data['messageId'] = $netcore_campaign['OUTPUT']['MID'];
+  $data['listId'] = NETCORE_LIST_ID;
+  $netcore_create = itg_netcore_mail_scehdule_campaign($data);
+  
+  p($netcore_create);*/
+  
+}
+
+/**
+ * Create a mailing list
+ * @param Array $data
+ *    Containing params for API.
+ * @return Array
+ */
+function itg_netcore_mail_create_list($data) { 
   $data = '<DATASET>
             <CONSTANT><ApiKey>' . APIKEY . '</ApiKey></CONSTANT>
             <INPUT>
@@ -26,8 +61,8 @@ function custom_netcore_mail_create_list($data) {
               <Active>1</Active>
             </INPUT>
           </DATASET>';
-  $url = "https://api.exacttouch.com/API/mailing/?type=list&activity=Add&";
-  $curlResponse = custom_netcore_mail_send_curl_request($url, $data);
+  $url = NETCORE_URL."?type=list&activity=Add&";
+  $curlResponse = itg_netcore_mail_send_curl_request($url, $data);
   return $curlResponse;
 }
 
@@ -37,7 +72,7 @@ function custom_netcore_mail_create_list($data) {
  *    Containing params for API.
  * @return Array
  */
-function custom_netcore_mail_add_user($data) {
+function itg_netcore_mail_add_user($data) {
   $data = "<DATASET>
             <CONSTANT><ApiKey>" . APIKEY . "</ApiKey></CONSTANT>
             <INPUT>
@@ -46,8 +81,8 @@ function custom_netcore_mail_add_user($data) {
               <DoubleOptin>0</DoubleOptin>
             </INPUT>
           </DATASET>";
-  $url = "https://api.exacttouch.com/API/mailing/?type=contact&activity=Add&";
-  $curlResponse = custom_netcore_mail_send_curl_request($url, $data);
+  $url = NETCORE_URL."?type=contact&activity=Add&";
+  $curlResponse = itg_netcore_mail_send_curl_request($url, $data);
   return $curlResponse;
 }
 
@@ -58,7 +93,7 @@ function custom_netcore_mail_add_user($data) {
  *    Containing params for API
  * @return Array
  */
-function custom_netcore_mail_create_campaign($data) {
+function itg_netcore_mail_create_campaign($data) {
   $data = "<DATASET>
             <CONSTANT><ApiKey>" . APIKEY ."</ApiKey></CONSTANT>
             <INPUT>
@@ -73,8 +108,8 @@ function custom_netcore_mail_create_campaign($data) {
               <MessageMobile><![CDATA[]]></MessageMobile>
             </INPUT>
           </DATASET>";
-  $url = "https://api.exacttouch.com/API/mailing/?type=message&activity=Add&";
-  $curlResponse = custom_netcore_mail_send_curl_request($url, $data);
+  $url = NETCORE_URL."?type=message&activity=Add&";
+  $curlResponse = itg_netcore_mail_send_curl_request($url, $data);
   return $curlResponse;
 }
 
@@ -84,7 +119,7 @@ function custom_netcore_mail_create_campaign($data) {
  *    Containing params for API.
  * @return Array
  */
-function custom_netcore_mail_scehdule_campaign($data) {
+function itg_netcore_mail_scehdule_campaign($data) {
   $data = "<DATASET>
             <CONSTANT><ApiKey>" . APIKEY . "</ApiKey></CONSTANT>
             <INPUT>
@@ -92,8 +127,8 @@ function custom_netcore_mail_scehdule_campaign($data) {
               <LID>" . $data['listId'] . "</LID>
             </INPUT>
           </DATASET>";
-  $url = "https://api.exacttouch.com/API/mailing/?type=message&activity=Schedule&";
-  $curlResponse = custom_netcore_mail_send_curl_request($url, $data);
+  $url = NETCORE_URL."?type=message&activity=Schedule&";
+  $curlResponse = itg_netcore_mail_send_curl_request($url, $data);
   return $curlResponse;
 }
 
@@ -105,7 +140,7 @@ function custom_netcore_mail_scehdule_campaign($data) {
  *    Request parameters in XML format.
  * @return Array
  */
-function custom_netcore_mail_send_curl_request($url, $data) {
+function itg_netcore_mail_send_curl_request($url, $data) {
   //intiating cURL
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL, $url);
@@ -117,4 +152,22 @@ function custom_netcore_mail_send_curl_request($url, $data) {
   curl_close($ch);
   //convert the XML result into array
   return json_decode(json_encode(simplexml_load_string($op)), true);
+}
+
+ /**
+ * Remove an email
+ * @param Array $data
+ *    Containing params for API.
+ * @return Array
+ */
+function itg_netcore_mail_unsubscribe_user($data) {
+  $data = "<DATASET>
+            <CONSTANT><ApiKey>" . APIKEY . "</ApiKey></CONSTANT>
+            <INPUT>
+              <Emailaddress>" . $data['email'] . "</Emailaddress>
+            </INPUT>
+          </DATASET>";
+  $url = NETCORE_URL."?type=contact&activity=Delete&";
+  $curlResponse = itg_netcore_mail_send_curl_request($url, $data);
+  return $curlResponse;
 }
