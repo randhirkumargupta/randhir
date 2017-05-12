@@ -17,9 +17,7 @@ function photocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     
     $output_array = array();
     $data_array = array();
-    $photo_list_array = array();
-    $output_array['status_code'] = 200;
-    $output_array['status_message'] = "customised_message";    
+    $photo_list_array = array();      
     $updated_datetime = "";
     
     $term = taxonomy_term_load($tid);
@@ -28,18 +26,28 @@ function photocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     // list array building
     $data = generatePhotoCategoryList($tid, $pageno);
     
+    if($data['lcount'] > 0){
+        $output_array['status_code'] = "1";
+        $output_array['status_message'] = "";  
+    }
+ else {
+        $output_array['status_code'] = "0";
+        $output_array['status_message'] = "customised_message";  
+    }
     
     //data array building
+     $datacount = $data['lcount'];
+     $data_up_time = $data['updated_datetime'];
     
-    $data_array['id'] = $tid;
-    $data_array['title'] = $term_name;
-    $data_array['layout_id'] = 1;
-    $data_array['photo_count'] = $data['lcount'];
-    $data_array['photo_display_count'] = 10;
-    $data_array['photo_pagination_cap'] = 7;
-    $data_array['updated_datetime'] = $data['updated_datetime'];
+    $data_array['id'] = "$tid";
+    $data_array['title'] = "$term_name";
+    $data_array['layout_id'] = "1";
+    $data_array['photo_count'] = "$datacount";
+    $data_array['photo_display_count'] = "10";
+    $data_array['photo_pagination_cap'] = "7";
+    $data_array['updated_datetime'] = "$data_up_time";
     
-    $data_array['photo'] = $data['data'];;
+    $data_array['photo'] = $data['data'];
     $output_array['data'] = $data_array;
     
     return $output_array;
@@ -156,8 +164,8 @@ function generatePhotoCategoryList($tid, $pageno) {
        $photo_list_array[$loop_count]['p_title'] = $title;
        $photo_list_array[$loop_count]['p_small_image'] = $file_small_img_url;
        $photo_list_array[$loop_count]['p_large_image'] = $file_medium_img_url;
-       $photo_list_array[$loop_count]['p_count'] = $toptlapics;
-       $photo_list_array[$loop_count]['p_comment_count'] = $comment_cont;
+       $photo_list_array[$loop_count]['p_count'] = "$toptlapics";
+       $photo_list_array[$loop_count]['p_comment_count'] = "$comment_cont";
        $photo_list_array[$loop_count]['p_share_link'] = "Universal link";
        $photo_list_array[$loop_count]['p_updated_datetime'] = $changed_datetime;
        $loop_count++;
@@ -185,11 +193,18 @@ function photoDetailPageRerourceValue($id){
     $output_array = array();
     $data_array = array();
     $photo_list_array = array();
-    $output_array['status_code'] = 1;
-    $output_array['status_message'] = "customised_message";     
+       
     
     // list array building
-    $data = generatePhotoDeatilList($id);      
+    $data = generatePhotoDeatilList($id); 
+    if($data['data']['photo_count'] > 0){
+        $output_array['status_code'] = "1";
+        $output_array['status_message'] = "";  
+    }
+    else{
+        $output_array['status_code'] = "0";
+        $output_array['status_message'] = "customised_message";  
+    }
     
     $output_array['data'] = $data['data'];
     
@@ -231,8 +246,8 @@ function generatePhotoDeatilList($id){
     $data_array['updated_datetime'] = $changed_datetime;
     $data_array['subcategory_id'] = $tid;
     $data_array['subcategory_title'] = $term_name;
-    $data_array['photo_count'] = $toptlapics;
-    $data_array['comment_count'] = $comment_cont;
+    $data_array['photo_count'] = "$toptlapics";
+    $data_array['comment_count'] = "$comment_cont";
     $data_array['share_link'] = "Universal link";
     $galleryimg = $node->field_gallery_image['und'];
     
@@ -266,6 +281,9 @@ function generatePhotoDetailList($galleryimg){
         $caption = getImgCaption($fid);
         // custom function for get img byline
         $byline = getImgByline($fid);
+        if(!$byline){
+            $byline = "";
+        }
         $photo_list_array[$listcont]['p_id'] = $fid;
         $photo_list_array[$listcont]['p_image'] = $img_url;
         $photo_list_array[$listcont]['p_credit'] = $byline;
