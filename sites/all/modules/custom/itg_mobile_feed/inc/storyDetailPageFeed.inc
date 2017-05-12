@@ -109,9 +109,9 @@ function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="", $
                     <date>$create_date</date>
                     <datetime>" . $create_datetime . "</datetime>
                     <city><![CDATA[" . $city . "]]></city>
-                    <courtesy><![CDATA[]]></courtesy>
-                    <body><![CDATA[" . $full_body . "]]></body>
-                    <body_android><![CDATA[" . $body_android . "]]></body_android>";
+                    <courtesy><![CDATA[]]></courtesy>";
+                    $output .= "<body><![CDATA[" . $full_body . "]]></body>";
+                    $output .= "<body_android><![CDATA[" . $body_android . "]]></body_android>";
     //get video tag
     $videotag = getVideoTag($node);
     if ($videotag) {
@@ -142,7 +142,7 @@ function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="", $
   } 
   }
 //header('Content-Type: application/xml; charset=utf-8');
-echo $output; exit();
+//echo $output; exit();
     if($output){
         $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
     }
