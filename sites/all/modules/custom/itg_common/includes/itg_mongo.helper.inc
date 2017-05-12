@@ -276,3 +276,21 @@ function itg_personalization_get_followed_status($tid) {
     return $cursor;
   }
 }
+
+/**
+ * Helper function to get nid of ugc content.
+ * @param int $nid
+ */
+function itg_personalization_get_uid($nid) {
+  $data = '';
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $people = $con->ugc_details;
+    $cond = array('unid' => (int)$nid);
+    $cursor = $people->find($cond);
+    foreach ($cursor as $key => $document) {
+      $data['uid'] = $document['uid'];
+    }
+    return $data;
+  }
+}

@@ -170,6 +170,9 @@ img{
 .m-bottom40{
     margin-bottom: 40px;
 }
+.text-right{
+  text-align: right;
+}
 .media__video--responsive{
   z-index: 4;
 }
@@ -2211,6 +2214,7 @@ footer{
                 .photo-slider{
                     padding: 0 5px;
                     cursor: pointer;
+                    height: auto;
                 }
                 .slick-prev, .slick-next{
                     background: transparent;
@@ -8884,6 +8888,9 @@ section.sidebar{
 
 
 /*Start CSS LIVE tv */
+div#playerContainer{
+  display: none !important;
+}
 #block-itg-live-tv-live-tv-video-page{
     ul{
         @extend .list-none;
@@ -8905,9 +8912,6 @@ section.sidebar{
               position: absolute;
               left: 0;
               top: 0;
-            }
-            #playerContainer{
-              display: none !important;
             }
         }
         .social-icon{

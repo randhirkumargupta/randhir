@@ -253,6 +253,10 @@ img {
   margin-bottom: 40px;
 }
 
+.text-right {
+  text-align: right;
+}
+
 .media__video--responsive {
   z-index: 4;
 }
@@ -2720,6 +2724,7 @@ footer .multiple-items-footer i.slick-next {
 .story-section .story-right.photo-story .multiple-photo .photo-slider {
   padding: 0 5px;
   cursor: pointer;
+  height: auto;
 }
 .story-section .story-right.photo-story .multiple-photo .slick-prev, .story-section .story-right.photo-story .multiple-photo .slick-next {
   background: transparent;
@@ -10786,6 +10791,10 @@ section.sidebar .block-itg-ads {
 
 /* CSS For Election Page End */
 /*Start CSS LIVE tv */
+div#playerContainer {
+  display: none !important;
+}
+
 #block-itg-live-tv-live-tv-video-page .program-livetv {
   background: #000;
   padding: 25px 0px 73px 20px;
@@ -10814,9 +10823,6 @@ section.sidebar .block-itg-ads {
   position: absolute;
   left: 0;
   top: 0;
-}
-#block-itg-live-tv-live-tv-video-page .program-livetv .live_tv_video #playerContainer {
-  display: none !important;
 }
 #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon {
   width: 108px;

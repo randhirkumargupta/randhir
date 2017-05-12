@@ -11,6 +11,13 @@
   Drupal.behaviors.itg_breaking_news = {
     attach: function (context, settings) {
       var uid = settings.itg_breaking_news.settings.uid;
+      var nid = settings.itg_breaking_news.settings.no_id;
+      
+      if(nid == 0) {
+        jQuery("#edit-field-story-highlights-und-0-remove-button").hide();
+        jQuery("#edit-field-breaking-content-details-und-0-remove-button").hide();
+      }
+      
       var type = $('#edit-field-type-und').val();
       
        $('#custom_add_another_item').click(function() {         
