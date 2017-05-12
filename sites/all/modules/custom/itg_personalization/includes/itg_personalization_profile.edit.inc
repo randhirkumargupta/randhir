@@ -424,6 +424,13 @@ function itg_personalization_edit_profile_form_submit($form, &$form_state) {
 
   // Save user object.
   user_save($user_detail);
+  
+  $_REQUEST['destination'] = 'personalization/edit-profile/general-settings';
+  $success = base64_encode('success');
+    $form_state['redirect'] = array(
+      'personalization/edit-profile/general-settings',
+      array('query' => array('profile' => $success))
+    );
 }
 
 ?>

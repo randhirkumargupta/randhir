@@ -42,4 +42,8 @@
 if (!empty($_GET['ugc']) && $_GET['ugc'] == 'success') {
   print '<div class="ugc_success">' . t('UGC content has been submitted successfully for further review and approval.') . '</div>';
 }
+$success = base64_decode($_GET['profile']);
+if (!empty($_GET['profile']) && $success == 'success') {
+  print '<div class="ugc_success">' . t('Your profile has been updated successfully.') . '</div>';
+}
 ?>
