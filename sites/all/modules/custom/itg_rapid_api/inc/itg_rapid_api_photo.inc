@@ -160,14 +160,14 @@ function generatePhotoCategoryList($tid, $pageno) {
       $create_date = date("Y-m-d H:i:s", $created);
       $changed_datetime = date("Y-m-d H:i:s", $changed);
       // photo detail for listing
-       $photo_list_array[$loop_count]['p_id'] = $nid;
-       $photo_list_array[$loop_count]['p_title'] = $title;
-       $photo_list_array[$loop_count]['p_small_image'] = $file_small_img_url;
-       $photo_list_array[$loop_count]['p_large_image'] = $file_medium_img_url;
+       $photo_list_array[$loop_count]['p_id'] = "$nid";
+       $photo_list_array[$loop_count]['p_title'] = "$title";
+       $photo_list_array[$loop_count]['p_small_image'] = "$file_small_img_url";
+       $photo_list_array[$loop_count]['p_large_image'] = "$file_medium_img_url";
        $photo_list_array[$loop_count]['p_count'] = "$toptlapics";
        $photo_list_array[$loop_count]['p_comment_count'] = "$comment_cont";
        $photo_list_array[$loop_count]['p_share_link'] = "Universal link";
-       $photo_list_array[$loop_count]['p_updated_datetime'] = $changed_datetime;
+       $photo_list_array[$loop_count]['p_updated_datetime'] = "$changed_datetime";
        $loop_count++;
     }
   }
@@ -241,11 +241,11 @@ function generatePhotoDeatilList($id){
     
     //data array building
     
-    $data_array['id'] = $nid;
-    $data_array['title'] = $title;
-    $data_array['updated_datetime'] = $changed_datetime;
-    $data_array['subcategory_id'] = $tid;
-    $data_array['subcategory_title'] = $term_name;
+    $data_array['id'] = "$nid";
+    $data_array['title'] = "$title";
+    $data_array['updated_datetime'] = "$changed_datetime";
+    $data_array['subcategory_id'] = "$tid";
+    $data_array['subcategory_title'] = "$term_name";
     $data_array['photo_count'] = "$toptlapics";
     $data_array['comment_count'] = "$comment_cont";
     $data_array['share_link'] = "Universal link";
@@ -282,12 +282,12 @@ function generatePhotoDetailList($galleryimg){
         // custom function for get img byline
         $byline = getImgByline($fid);
         if(!$byline){
-            $byline = "";
+           // $byline = "";
         }
-        $photo_list_array[$listcont]['p_id'] = $fid;
-        $photo_list_array[$listcont]['p_image'] = $img_url;
-        $photo_list_array[$listcont]['p_credit'] = $byline;
-        $photo_list_array[$listcont]['p_caption'] = $caption;
+        $photo_list_array[$listcont]['p_id'] = "$fid";
+        $photo_list_array[$listcont]['p_image'] = "$img_url";
+        $photo_list_array[$listcont]['p_credit'] = "$byline";
+        $photo_list_array[$listcont]['p_caption'] = "$caption";
         $listcont++;
       }
   }
