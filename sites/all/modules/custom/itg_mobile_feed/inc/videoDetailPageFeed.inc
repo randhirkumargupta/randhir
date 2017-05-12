@@ -154,10 +154,11 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
   }
 }
   echo $file_name;
-  echo "<pre>";
+  echo "<pre>ttt";
   echo $term_feed_path;
   echo "<pre>"; 
-  print_r($output); die;
+  //print_r($output); 
+  die;
   if($output){
         $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
     }
