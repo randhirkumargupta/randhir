@@ -209,7 +209,7 @@ jQuery(document).ready(function () {
     });
     
      jQuery('.user-activity-highlight').click(function (event) {
-        var nd_id = jQuery(this).attr('rel');
+        var nd_id = jQuery(this).attr('data-rel');
         var dtag = jQuery(this).attr('data-tag');
         var nodeId = jQuery(this).attr('data-nodeid');
         var dstatus = jQuery(this).attr('data-status');
