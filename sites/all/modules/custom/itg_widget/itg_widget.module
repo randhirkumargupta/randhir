@@ -941,10 +941,11 @@ function itg_widget_get_graph_data() {
   }
   $itg_query = db_select('node' , 'n');
   $itg_query->join('field_data_field_election_constituency_tall' , 'frq' , 'n.nid = frq.entity_id');
-
   $itg_query->join('field_data_field_section' , 'ast' , 'n.nid = ast.entity_id');
+  $itg_query->leftJoin('field_data_field_election_state' , 'astw' , 'n.nid = astw.entity_id');
   $itg_query->fields('n' , array('nid'));
-  $itg_query->fields('frq' , array('field_election_constituency_tall_value'))
+  $itg_query->fields('frq' , array('field_election_constituency_tall_value'));
+   $itg_query->fields('astw' , array('field_election_state_tid'))
       ->condition('type' , 'election_graph_xml')
       ->condition('ast.field_section_tid' , $cat_id , '=')
       ->condition('status' , 1);
