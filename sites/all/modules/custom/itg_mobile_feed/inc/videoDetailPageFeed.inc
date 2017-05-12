@@ -311,7 +311,7 @@ function videoCheckExistFile($fid, $nid, $field_video_upload) {
         $query->condition('fmv.entity_id', $field_video_upload);
         $query->fields('fmv', array('field_migrated_video_url_value'));        
         $results = $query->execute()->fetchAll();
-        //print_ar($results); exit();
+        print_ar($results); exit();
         $uri = $results[0]->field_migrated_video_url_value;
         $dailymtion_flag = "no";
         $dailymotion_path = $uri;
