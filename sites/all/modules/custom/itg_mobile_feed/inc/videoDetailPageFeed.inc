@@ -29,7 +29,7 @@ function videoDetailPageFeed() {
  * @return array 
  */
 function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $type) {
- echo "<pre>";  print_r(node_load($nid)); echo "</pre>";exit();
+  //echo print_ar(arg());exit();
 
   //$nid = 571;
   //$nid = 461;
@@ -105,7 +105,7 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
     $field_video_upload = $node->field_video_upload['und'][0]['value'];     
     $file_id = file_usage($field_video_upload);
     // get video path
-    $video_path_info = videoCheckExistFile($file_id, $nid);  
+    $video_path_info = videoCheckExistFile($file_id, $nid, $field_video_upload);  
     $metatags_title = $node->metatags;
     $metatags_description = $node->description;
     
@@ -188,7 +188,7 @@ function all_video_format($file_id){
  * @return array
  */
 function getVideoTagDetail($video_path_info,$file_id = NULL) {
-    print_r($video_path_info);exit();
+    //print_r($video_path_info);exit();
     $output = "";
     $video_path_mp4 = $video_path_info['video_path_mp4'];
     $filesize = $video_path_info['filesize'];
@@ -284,7 +284,7 @@ function file_usage($id){
  * @param $fid
  * @return string
  */
-function videoCheckExistFile($fid, $nid) {
+function videoCheckExistFile($fid, $nid, $field_video_upload) {
   //echo "hi".$fid; exit();
   $video_path_info = array();
   $dailymtion_flag = "no";
@@ -308,7 +308,7 @@ function videoCheckExistFile($fid, $nid) {
   else{
         //field_video_upload[und][0][field_migrated_video_url][und][0][value]
         $query = db_select('field_data_field_migrated_video_url', 'fmv');
-        $query->condition('fmv.revision_id', $nid);
+        $query->condition('fmv.entity_id', $field_video_upload);
         $query->fields('fmv', array('field_migrated_video_url_value'));        
         $results = $query->execute()->fetchAll();
         //print_ar($results); exit();
