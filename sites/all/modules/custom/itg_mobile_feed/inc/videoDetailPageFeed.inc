@@ -42,24 +42,23 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
   if(!$term_feed_path){
     //$term_feed_path = getcwd() . "/sites/default/files/xml_it/videos"; 
     $term_feed_path = "public://xml_it/videos";
-    echo $filepath = drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
+    drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
   }
    elseif($type){
      if($type == "photogallery"){
           $term_feed_path = "public://xml_it/photos";
-	 echo $filepath = drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
+	 drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
      } 
      
      elseif($type == "story"){
-         $term_feed_path = "public://xml_it/stories";
-	 echo $filepath = drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
+          $term_feed_path = "public://xml_it/stories";
+	 drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
      } 
      elseif($type == "videogallery"){
-         $term_feed_path = "public://xml_it/videos";
-	 echo $filepath = drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
+          $term_feed_path = "public://xml_it/videos";
+	 drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
      } 
   }
-  die;
   //field_image_caption
   $output = "";
   if (!$nid) {
@@ -156,7 +155,7 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
 }
   
    
-
+  print_r($output); die;
   if($output){
         $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
     }
