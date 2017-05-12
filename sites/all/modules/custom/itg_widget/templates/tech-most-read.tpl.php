@@ -7,7 +7,7 @@
             $video_class = 'video-icon';
         }
           ?>
-        <li class="dont-miss-listing" id="dont-miss-<?php print $key ?>">
+        <li class="dont-miss-listing">
           <?php if (!empty($node_data['uri'])) {
            
             ?>

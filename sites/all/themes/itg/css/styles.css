@@ -253,6 +253,10 @@ img {
   margin-bottom: 40px;
 }
 
+.text-right {
+  text-align: right;
+}
+
 .media__video--responsive {
   z-index: 4;
 }
@@ -2720,6 +2724,7 @@ footer .multiple-items-footer i.slick-next {
 .story-section .story-right.photo-story .multiple-photo .photo-slider {
   padding: 0 5px;
   cursor: pointer;
+  height: auto;
 }
 .story-section .story-right.photo-story .multiple-photo .slick-prev, .story-section .story-right.photo-story .multiple-photo .slick-next {
   background: transparent;
