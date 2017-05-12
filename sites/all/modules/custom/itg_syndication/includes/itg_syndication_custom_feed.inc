@@ -725,15 +725,6 @@ function get_lebel_of_field($entity_type = 'node', $bundle_name, $field_name) {
 function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$form, &$form_state, $form_id) {
   $data = array();
   $predefine_variables_markup = "";
-  drupal_add_js('jQuery(document).ready(function(){
-        jQuery("select#edit-field-syndication-feed-content-und").on(\'change\',function(){
-           var selected =   jQuery(this).val();
-           jQuery(".variables-tabs div").css("display","none");
-           jQuery(".variables-tabs div#tab-"+selected).css("display","block");
-        });
-        //jQuery(".vertical-tabs").css("display","none");
-        jQuery("#edit-body-und-0-value").css({"min-width":"900px","height":"400px"});
-    });', 'inline');
 
   drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication_custom_feed.js', array('type' => 'file', 'scope' => 'footer'));
   /* JS library  added to beutify xml pattern */

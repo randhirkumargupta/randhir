@@ -51,7 +51,6 @@ function itg_reports_email_autocomplete_byline($string) {
       ->fields('u' , array('mail'))
       ->condition('mail' , '%' . db_like($string) . '%' , 'LIKE');
   $itg_result = $itg_query->execute()->fetchAll();
-  $result = array();
   $errors = array_filter($itg_result);
   if (!empty($errors)) {
     foreach ($itg_result as $value) {

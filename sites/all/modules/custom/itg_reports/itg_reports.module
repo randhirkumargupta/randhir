@@ -289,7 +289,7 @@ function itg_reports_form_views_exposed_form_alter(&$form , &$form_state , $form
       break;
     case 'views-exposed-form-itg-active-users-report-page':
       drupal_add_css("#ui-datepicker-div {display:none} " , 'inline');
-      drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file', 'scope' => 'footer'));
+      drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file' , 'scope' => 'footer'));
       $form['created']['max']['#attributes']['placeholder'] = 'Date To';
       $form['created']['min']['#attributes']['placeholder'] = 'Date From';
       $form['field_mobile_number_value']['#attributes']['placeholder'] = 'Search By Mobile  ';
@@ -303,7 +303,7 @@ function itg_reports_form_views_exposed_form_alter(&$form , &$form_state , $form
       $form['date_from']['#attributes']['placeholder'] = 'Date From';
       break;
     case 'views-exposed-form-section-wiser-breakup-report-page':
-      drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file', 'scope' => 'footer'));
+      drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file' , 'scope' => 'footer'));
       drupal_add_css("#ui-datepicker-div {display:none} , #autocomplete {max-height : 400px; max-width: 400px; overflow-x : auto; overflow-y: auto;}" , 'inline');
       $form['name']['#autocomplete_path'] = 'itg-reports-sections/autocomplete';
       $form['tid_raw']['#autocomplete_path'] = 'itg-reports-sections-tid/autocomplete';
@@ -386,7 +386,7 @@ function itg_reports_block_view($delta = '') {
     case 'itg_report_career_graph':
       $output = array();
       $data = itg_report_get_graph_data();
-      drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/canvasjs.min.js', array('scope' => 'footer'));
+      drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/canvasjs.min.js' , array('scope' => 'footer'));
       $errors = array_filter($data);
       if (!empty($errors)) {
         foreach ($data as $key => $chart_data) {
@@ -684,6 +684,15 @@ function itg_reports_views_query_alter(&$view , &$query) {
     }
   }
   if ($view->name == 'report_filed_content' && $view->current_display == 'page') {
+    if (isset($_GET['mail']) && !empty($_GET['mail'])) {
+      $email = trim($_GET['mail']);
+      if (_is_byline_email($email)) {
+        $user_name = _get_byline_name_from_email($email);
+        $strings = _get_byline_ids_from_string($user_name);
+        pr($strings);
+        pr($user_name);
+      }
+    }
     // Add Joins for byline.
     if (isset($_GET['byline_names'])) {
       $join = new views_join();
@@ -693,7 +702,7 @@ function itg_reports_views_query_alter(&$view , &$query) {
       $join->left_field = 'nid';
       $join->type = 'LEFT';
       $query->add_relationship('itg_multi_byline_info' , $join , 'node');
-      if(!empty($_GET['byline_names'])) {
+      if (!empty($_GET['byline_names'])) {
         $bylines = _get_byline_ids_from_string($_GET['byline_names']);
         $query->add_where(0 , "itg_multi_byline_info.byline_id" , $bylines , 'IN');
       }
@@ -706,12 +715,27 @@ function itg_reports_views_query_alter(&$view , &$query) {
       $join->left_field = 'byline_id';
       $join->type = 'LEFT';
       $query->add_relationship('field_data_field_reporter_profile_type' , $join , 'itg_multi_byline_info');
-      if(!empty($_GET['byline_profile_type']) && $_GET['byline_profile_type'] != 'Any') {
+      if (!empty($_GET['byline_profile_type']) && $_GET['byline_profile_type'] != 'Any') {
         $byline_profile_type = $_GET['byline_profile_type'];
         $query->add_where(0 , "field_data_field_reporter_profile_type.field_reporter_profile_type_value" , $byline_profile_type);
       }
     }
   }
+}
+
+function _is_byline_email($email) {
+  $itg_query = db_select('field_data_field_reporter_email_id' , 'ei');
+  $itg_query->fields('ei' , array('field_reporter_email_id_value'));
+  $itg_query->condition('ei.field_reporter_email_id_value' , $email);
+  return $itg_query->execute()->rowCount();
+}
+
+function _get_byline_name_from_email($email) {
+  $itg_query = db_select('node' , 'n');
+  $itg_query->leftJoin('field_data_field_reporter_email_id' , 'ei' , 'ei.entity_id = n.nid');
+  $itg_query->fields('n' , array('title'))
+      ->condition('field_reporter_email_id_value' , $email);
+  return $itg_query->execute()->fetchField();
 }
 
 /**

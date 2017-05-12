@@ -9,7 +9,6 @@ module_load_include('inc' , 'itg_seo' , 'includes/itg_seo_rich_snippet');
 module_load_include('inc' , 'itg_seo' , 'includes/itg_redirect_url');
 module_load_include('inc' , 'itg_seo' , 'includes/itg_sef_redirect_url');
 
-
 function itg_seo_menu() {
   $items['itg-access-denied'] = array(
     'title' => t('Access Denied') ,
@@ -112,7 +111,7 @@ function itg_seo_mb_substr($str , $start , $end) {
  * @return array
  */
 function itg_meta_tags_extra_element_hide($form , &$form_state) {
-  
+
   if (isset($form['#vocabulary']->machine_name) && $form['#vocabulary']->machine_name == 'movies') {
     unset($form['relations']['#title']);
     unset($form['metatags']['#title']);
@@ -162,12 +161,7 @@ function itg_seo_latest_headlines() {
 function itg_additional_settings_element_hide($form , &$form_state , $form_id) {
   global $user;
   if ($user->uid != '1') {
-    drupal_add_js('jQuery(document).ready(function() {              
-              jQuery(".vertical-tabs-list").hide();
-              jQuery(".form-item-menu-enabled").hide();
-              jQuery(".form-item-path-alias").hide();              
-              jQuery(".form-item-path-pathauto").hide();  
-            });' , array('type' => 'inline' , 'scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module' , 'itg_seo') . '/js/itg_additional_settings_element_hide.js' , array('type' => 'file' , 'scope' => 'footer'));
   }
   return $form;
 }
@@ -253,10 +247,7 @@ function itg_seo_node_view($node , $view_mode , $langcode) {
  * @return array
  */
 function event_registration_extra_element_hide($form , &$form_state) {
-  drupal_add_js('jQuery(document).ready(function() {              
-              jQuery(".vertical-tabs").hide();                
-            });' , array('type' => 'inline' , 'scope' => 'footer'));
-
+  drupal_add_js(drupal_get_path('module' , 'itg_seo') . '/js/event_registration_extra_element_hide.js' , array('type' => 'file' , 'scope' => 'footer'));
   return $form;
 }
 
@@ -380,8 +371,8 @@ function is_valid_content_type_for_sef_url($type) {
  * Implements hook_theme_registry_alter().
  */
 function itg_seo_theme_registry_alter(&$theme_registry) {
-  $theme_registry['views_data_export_xml_body']['theme paths'] = array(0 => drupal_get_path('module', 'itg_seo') . '/templates');
-  $theme_registry['views_data_export_xml_body']['theme path'] = drupal_get_path('module', 'itg_seo') . '/templates';
-  $theme_registry['views_data_export_xml_body']['path'] = drupal_get_path('module', 'itg_seo') . '/templates';
+  $theme_registry['views_data_export_xml_body']['theme paths'] = array(0 => drupal_get_path('module' , 'itg_seo') . '/templates');
+  $theme_registry['views_data_export_xml_body']['theme path'] = drupal_get_path('module' , 'itg_seo') . '/templates';
+  $theme_registry['views_data_export_xml_body']['path'] = drupal_get_path('module' , 'itg_seo') . '/templates';
   $theme_registry['views_data_export_xml_body']['template'] = 'views-data-export-xml-body';
 }
