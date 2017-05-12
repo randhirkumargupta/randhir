@@ -10,6 +10,7 @@
  * @return array
  */
 function storyDetailPageFeed() {
+    echo "<pre>"; print_r(node_load(349459)); echo "</pre>"; exit();
   $output = "";
   if (count(arg()) < 2) {
     $output = "Please pass story node nid in url";
