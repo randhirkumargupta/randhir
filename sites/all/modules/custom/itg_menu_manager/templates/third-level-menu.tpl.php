@@ -8,13 +8,7 @@ if (isset($_GET['section']) && !empty($_GET['section'])) {
 }
 else if (isset($node_load->field_page_section['und'][0]['tid']) && $node_load->field_page_section['und'][0]['tid'] == variable_get('ipl_for_widget')) {
   $cat_id = variable_get('ipl_for_widget');
-  drupal_add_js('jQuery(document).ready(function() {                  
-                           jQuery(".live-tv").click(function(){
-
-                   window.location.href=jQuery("#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3)").find("a").attr("href");
-                      });
-          });' , array('type' => 'inline' , 'scope' => 'footer'));
-
+  drupal_add_js(drupal_get_path('module' , 'itg_menu_manager') . '/js/third-level-menu-live-button.js' , array('type' => 'file' , 'scope' => 'footer'));
   $ipl_link = "<button class='live-tv'><i class='fa fa-circle'></i> LIVE TV</button>";
   $cat_flag = TRUE;
 }
@@ -27,12 +21,7 @@ else if ($cat_flag == FALSE) {
   $cat_id = arg(2);
 }
 if ($cat_id == variable_get('ipl_for_widget') && isset($cat_id)) {
-  drupal_add_js('jQuery(document).ready(function() {                  
-                        jQuery("body").addClass("section-sport-ipl-bg");
-                        
-                        jQuery("#block-itg-ads-ad-right-sidebar-1").hide();
-                       
-          });' , array('type' => 'inline' , 'scope' => 'footer'));
+  drupal_add_js(drupal_get_path('module' , 'itg_menu_manager') . '/js/menu-manager-ipl-for-widget.js' , array('type' => 'file' , 'scope' => 'footer'));
 }
 
 if ($cat_id == "") {
