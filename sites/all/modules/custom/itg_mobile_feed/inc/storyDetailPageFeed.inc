@@ -10,7 +10,7 @@
  * @return array
  */
 function storyDetailPageFeed() {
-    echo "<pre>"; print_r(node_load(349459)); echo "</pre>"; exit();
+    //echo "<pre>"; print_r(node_load(349459)); echo "</pre>"; exit();
   $output = "";
   if (count(arg()) < 2) {
     $output = "Please pass story node nid in url";
@@ -142,7 +142,7 @@ function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="", $
   } 
   }
 //header('Content-Type: application/xml; charset=utf-8');
-//echo $output; exit();
+echo $output; exit();
     if($output){
         $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
     }
