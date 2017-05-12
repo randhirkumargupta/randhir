@@ -188,7 +188,7 @@ function all_video_format($file_id){
  * @return array
  */
 function getVideoTagDetail($video_path_info,$file_id = NULL) {
-    //print_ar($video_path_info);exit();
+    print_r($video_path_info);exit();
     $output = "";
     $video_path_mp4 = $video_path_info['video_path_mp4'];
     $filesize = $video_path_info['filesize'];
