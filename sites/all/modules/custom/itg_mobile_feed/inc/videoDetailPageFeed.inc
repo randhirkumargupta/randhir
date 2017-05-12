@@ -42,7 +42,7 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
   if(!$term_feed_path){
     //$term_feed_path = getcwd() . "/sites/default/files/xml_it/videos"; 
     $term_feed_path = "public://xml_it/videos";
-    file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
+    drupal_realpath($term_feed_path, FILE_CREATE_DIRECTORY);
   }
    elseif($type){
      if($type == "photogallery"){
