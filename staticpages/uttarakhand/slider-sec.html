@@ -1,0 +1,164 @@
+<html>
+<head>
+<!-- The below script Makes IE understand the new html5 tags are there and applies our CSS to it -->
+        <!--[if IE]>
+          <script src="http://indiatoday.intoday.in/js/html5.js"></script>
+        <![endif]-->
+<title> Popup Box DIV </title>
+<link rel="stylesheet" href="http://indiatoday.intoday.in/uttarakhand/js/slidy.css">
+<style type="text/css">
+body { font:normal 12px arial; color:#000; margin:0; padding:0}
+/* popup_box DIV-Styles*/
+#popup_box { 
+	display:none; /* Hide the DIV */
+	position:fixed;  
+	_position:absolute; /* hack for internet explorer 6 */  
+	height:450px;  
+	width:640px;  
+	background:#FFFFFF;  
+	left: 300px;
+	top: 60px;
+	z-index:100; /* Layering ( on-top of others), if you have lots of layers: I just maximized, you can change it yourself */
+	margin-left: 15px;  
+	
+	/* additional features, can be omitted */
+	border:2px solid #ccc;  	
+	padding:15px;  
+	font-size:15px;  
+	-moz-box-shadow: 0 0 5px #ccc;
+	-webkit-box-shadow: 0 0 5px #ccc;
+	box-shadow: 0 0 5px #ccc;
+	
+}
+#container {
+	width:100%;
+	height:100%;
+}
+
+a{  
+cursor: pointer;  
+text-decoration:none;  
+} 
+
+/* This is for the positioning of the Close Link */
+#popupBoxClose {
+	font-size:20px;  
+	line-height:15px;  
+	right:5px;  
+	top:5px;  
+	position:absolute;  
+	color:#6fa5e2;  
+	font-weight:500;  	
+}
+h1 { cursor:pointer}
+.kicker { font:normal 12px/18px arial; color:#333; padding:5px;}
+.img-caption{margin-top:5px;}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+    
+    <div style="width:640px; margin:0 auto">
+
+            <div id="slidyBanner" class="slidyContainer">
+                    <div class="slidySlides">
+
+                        <figure class="slidyCurrent">
+                            <!-- Your context goes here -->
+                            <img   src="http://media2.intoday.in/indiatoday/images/stories/2013june/7_062913051919.jpg">
+                          <p class="img-caption"> Damaged houses are seen at a village in Rudraprayag in Uttarakhand on June 20, 2013.<br><em>(To see more pictures, move cursor over the photo)</em></p>
+                      </figure>
+
+                        <!-- Slide 2 -->
+                        <figure>
+                            <img   src="http://media2.intoday.in/indiatoday/images/stories/2013june/2_062913051919.jpg" >
+							<p class="img-caption"> Army soldiers help a stranded elderly woman climb down a mountain in Govindghat.</p>
+                        </figure>
+
+                        <!-- Slide 3 -->
+                        <figure>
+                            <img   src="http://media2.intoday.in/indiatoday/images/stories/2013june/3_062913051919.jpg">
+							<p class="img-caption"> Army soldiers rescue a woman at Pindari Glacier, in Uttarakhand on Thursday, June 27, 2013.</p>
+                        </figure>
+                        
+                        <!-- Slide 4 -->
+                        <figure>
+                            <img   src="http://media2.intoday.in/indiatoday/images/stories/2013june/4_062913051919.jpg">
+							<p class="img-caption"> A boy crosses a temporarily repaired bridge near Pindari Glacier in Uttarakhand.</p>
+                        </figure>
+                        
+                        <!-- Slide 5 -->
+                        <figure>
+                            <img   src="http://media2.intoday.in/indiatoday/images/stories/2013june/5_062913051919.jpg">
+							<p class="img-caption"> A man looks at a wall with pictures of missing people outside Jollygrant airport.</p>
+                        </figure>
+                        
+                        <!-- Slide 6 -->
+                        <figure>
+                            <img   src="http://media2.intoday.in/indiatoday/images/stories/2013june/6_062913051919.jpg">
+							<p class="img-caption"> Rescued pilgrims wait for a helicopter in Gaucher in Uttarakhand.</p>
+                        </figure>
+                       
+                        
+                        <!-- Slide 7 -->
+                        <figure>
+                            <img   src="http://media2.intoday.in/indiatoday/images/stories/2013june/8_062913051919.jpg">
+							<p class="img-caption"> A pilgrim walks across a road damaged by a landslide in Gauchar in Uttarakhand.</p>
+                        </figure>
+                        
+                        <!-- Slide 8 -->
+                        <figure>
+                            <img   src="http://media2.intoday.in/indiatoday/images/stories/2013june/9_062913051919.jpg">
+							<p class="img-caption">Local authorities clear a damaged road caused by landslides in Gauchar. </p>
+                        </figure>
+                        
+                        <!-- Slide 9 -->
+                        <figure>
+                            <img   src="http://media2.intoday.in/indiatoday/images/stories/2013june/10_062913051919.jpg">
+							<p class="img-caption">An aerial view of a landslide hit mountain is seen in Rudrapryag in Uttarakhand. </p>
+                        </figure>
+                        
+                        <!-- Slide 10 -->
+                        <figure>
+                            <img   src="http://media2.intoday.in/indiatoday/images/stories/2013june/11_062913051941.jpg">
+							<p class="img-caption"> Damaged houses are seen by River Ganges in Guptkashi.</p>
+                        </figure>
+                        
+                        <!-- Slide 11 -->
+                        <figure>
+                            <img   src="http://media2.intoday.in/indiatoday/images/stories/2013june/12_062913051941.jpg">
+							<p class="img-caption">Man crosses a swollen river with the help of a rope in Govindghat. </p>
+                        </figure>
+                        
+                        <!-- Slide 12 -->
+                        <figure>
+                            <img   src="http://media2.intoday.in/indiatoday/images/stories/2013june/13_062913053617.jpg">
+							<p class="img-caption"> Man crosses a rope bridge in Govindghat.</p>
+                        </figure>
+                        
+                        <!-- Slide 13 -->
+                        <figure>
+                            <img   src="http://media2.intoday.in/indiatoday/images/stories/2013june/14_062913051941.jpg">
+							<p class="img-caption"> Soldiers help stranded people climb down a mountain in Govindghat.</p>
+                        </figure>
+
+                        <!-- Add more slides as necessary -->
+
+                        
+
+                        
+
+                        
+
+              </div>
+            </div>
+</div>
+<script src="http://indiatoday.intoday.in/uttarakhand/js/slidy.js"></script>
+<script>
+		$('.slidyContainer').slidy({
+		});
+	</script>
+</body>
+</html>
