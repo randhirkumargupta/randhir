@@ -56,12 +56,11 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
   }
   $user_email_arr = itg_newslatter_get_subscribe_users_email();
   $user_email_str = implode(',', $user_email_arr);
+  
   if(isset($subscriberlist) && !empty($subscriberlist)){
     $users_email_cron = array_merge($user_email_arr,$subscriberlist);
     $user_email_str = implode(',', $users_email_cron);
   }
-  
-  
   
   // Get Mail content
   // Mail Content Section from Top 20 Shared/Trending
@@ -83,11 +82,11 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
   }
   
   // code for netcore
-  if (function_exists('custom_netcore_mail_create_campaign')) {
+  if (function_exists('itg_netcore_mail_create_campaign')) {
     $data_email = array();
-    $data_email['subject'] = t('India Today Newsletter').' | ' . $template_node->field_news_title[LANGUAGE_NONE][0]['value'];
+    $data_email['subject'] = $template_node->field_news_title[LANGUAGE_NONE][0]['value'];
     $data_email['fromName'] = 'India Today';
-    $data_email['fromEmail'] = 'support@intoday.in';
+    $data_email['fromEmail'] = 'care@intoday.in';
     $data_email['content'] = $mail_content;
     $create_campaign = itg_netcore_mail_create_campaign($data_email);
     $campaign = array();
@@ -141,8 +140,7 @@ function itg_get_newsletter_mail_content($node, $template_node) {
   $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">
           <table cellspacing="0" cellpadding="0" style="width: 100%;">';
-
-
+  
   foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
 
     $news_detail = entity_load('field_collection_item', array($news_arr['value']));
@@ -190,7 +188,7 @@ function itg_get_newsletter_mail_content($node, $template_node) {
       </td>
     </tr>';
 
-  $content .= '</table><p>&nbsp;</p><p>'.t('Thanks').',</p><p>'.t('India Today Group').'</p></body></html>';
+  $content .= '</table><p>'.t('Thanks').',</p><p>'.t('India Today Group').'</p></body></html>';
   return $content;
 }
 
@@ -206,16 +204,15 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
   $banner = $base_url . str_replace('public://', '/sites/default/files/', $template_node->field_newst_banner[LANGUAGE_NONE][0]['uri']);
   $footerData = $template_node->body[LANGUAGE_NONE][0]['value'];
   $footer = preg_replace("/[0-9]{4}/", date('Y'), $footerData);
-
-
+  
   $content = '<!DOCTYPE html> 
-  <html xmlns:v="urn:schemas-microsoft-com:vml">
-  <head>
-    <title>India Today Newsletter</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-  <body><table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial"><tr><td colspan="2"><img src="' . $banner . '" alt="" /></td></tr>';
+    <html xmlns:v="urn:schemas-microsoft-com:vml">
+    <head>
+      <title>India Today Newsletter</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body><table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial"><tr><td colspan="2"><img src="' . $banner . '" alt="" /></td></tr>';
 
   $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">
