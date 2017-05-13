@@ -185,8 +185,13 @@ function itg_widget_menu() {
     'type' => MENU_CALLBACK ,
     'access arguments' => array('administer nodequeue') ,
   );
+  
+  
   return $items;
 }
+
+
+
 
 /**
  * This function use for update key candidate election status
@@ -326,6 +331,9 @@ function itg_widget_block_info() {
   );
   $blocks['live_score'] = array(
     'info' => t('Live Score')
+  );
+  $blocks['state_election_sosorry'] = array(
+    'info' => t('State Elction SoSorry')
   );
   $blocks['cheaper_dearer'] = array(
     'info' => t('Widget : Cheaper Dearer from custom table')
@@ -513,20 +521,7 @@ function itg_widget_block_view($delta = '') {
             });
             });' , array('type' => 'inline' , 'scope' => 'footer' , 'weight' => 5)
       );
-
-      drupal_add_css('.flex-caption {
-              width: 96%;
-              padding: 2%;
-              left: 0;
-              bottom: 0;
-              background: rgba(0,0,0,.5);
-              color: #fff;
-              text-shadow: 0 -1px 0 rgba(0,0,0,.3);
-              font-size: 14px;
-              line-height: 18px;
-            }' , 'inline');
-
-
+      
       $info['widget'] = 'photo_carousel_list_widget';
       $info['order'] = 'ASC';
       $info['max_limit'] = PHOTO_CAROUSEL_MAX_RANGE;
@@ -586,19 +581,6 @@ function itg_widget_block_view($delta = '') {
             });
             });' , array('type' => 'inline' , 'scope' => 'footer' , 'weight' => 5)
       );
-
-      drupal_add_css('.flex-caption {
-              width: 96%;
-              padding: 2%;
-              left: 0;
-              bottom: 0;
-              background: rgba(0,0,0,.5);
-              color: #fff;
-              text-shadow: 0 -1px 0 rgba(0,0,0,.3);
-              font-size: 14px;
-              line-height: 18px;
-            }' , 'inline');
-
 
       module_load_include('inc' , 'itg_widget' , 'includes/featured_video_carousel');
       $info['widget'] = 'video_carousel_list_widget';
@@ -896,6 +878,15 @@ function itg_widget_block_view($delta = '') {
 
       $block['content'] = theme("live_score_data" , array("data" => $data));
       break;
+    
+    case 'state_election_sosorry':
+      module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_state_election');
+
+      $block['subject'] = '';
+      $data = state_election_sosorry_data();
+
+      $block['content'] = theme("state_election_sosorry_data" , array("data" => $data));
+      break;
     case 'cheaper_dearer':
       module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_budget_predictor');
       $data = itg_budget_predictor_cheaper_dearer_data();
@@ -958,8 +949,7 @@ function itg_widget_block_view($delta = '') {
  * @return array
  */
 function itg_widget_get_graph_data() {
-  //p($cat_id);
-  // Fetch fdata from db.
+ 
   global $theme;
   $cat_id = $_GET['section'];
   if ($theme == FRONT_THEME_NAME) {
@@ -967,10 +957,11 @@ function itg_widget_get_graph_data() {
   }
   $itg_query = db_select('node' , 'n');
   $itg_query->join('field_data_field_election_constituency_tall' , 'frq' , 'n.nid = frq.entity_id');
-
   $itg_query->join('field_data_field_section' , 'ast' , 'n.nid = ast.entity_id');
+  $itg_query->leftJoin('field_data_field_election_state' , 'astw' , 'n.nid = astw.entity_id');
   $itg_query->fields('n' , array('nid'));
-  $itg_query->fields('frq' , array('field_election_constituency_tall_value'))
+  $itg_query->fields('frq' , array('field_election_constituency_tall_value'));
+   $itg_query->fields('astw' , array('field_election_state_tid'))
       ->condition('type' , 'election_graph_xml')
       ->condition('ast.field_section_tid' , $cat_id , '=')
       ->condition('status' , 1);
@@ -980,6 +971,38 @@ function itg_widget_get_graph_data() {
 
   return $itg_result;
 }
+
+
+/**
+ * Function returns data for cutom tables widgets.
+ * 
+ * @param string $widget_name
+ * @param int $range_max
+ * @param int $range_min
+ * @return array
+ */
+function itg_widget_get_graph_data_by_state($section,$state) {
+ 
+  global $theme;
+  
+  $itg_query = db_select('node' , 'n');
+  $itg_query->join('field_data_field_election_constituency_tall' , 'frq' , 'n.nid = frq.entity_id');
+  $itg_query->join('field_data_field_section' , 'ast' , 'n.nid = ast.entity_id');
+  $itg_query->leftJoin('field_data_field_election_state' , 'astw' , 'n.nid = astw.entity_id');
+  $itg_query->fields('n' , array('nid'));
+  $itg_query->fields('frq' , array('field_election_constituency_tall_value'));
+   $itg_query->fields('astw' , array('field_election_state_tid'))
+      ->condition('type' , 'election_graph_xml')
+      ->condition('ast.field_section_tid' , $section , '=')
+            ->condition('astw.field_election_state_tid' , $state , '=')
+      ->condition('status' , 1);
+  // ->range(0, 5);
+  //$itg_query->condition('ast.field_astro_type_tid', $astro_type);
+  $itg_result = $itg_query->execute()->fetchAll();
+
+  return $itg_result;
+}
+
 
 /**
  * File provide get highlights widget data.

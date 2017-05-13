@@ -14,7 +14,6 @@ module_load_include('inc', 'itg_layout_manager', 'includes/itg_layout_manager.he
 //All form releted function of layout manager.
 module_load_include('inc', 'itg_layout_manager', 'includes/itg_layout_manager.form');
 
-
 /**
  * Implements hook_menu().
  * @return array $items
@@ -22,95 +21,258 @@ module_load_include('inc', 'itg_layout_manager', 'includes/itg_layout_manager.fo
 function itg_layout_manager_menu() {
 
   $items['itg-layout-manager'] = array(
-    'page callback' => 'itg_layout_admin',
-    'access arguments' => array('access itg story'),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_layout_manager.inc',
+      'page callback' => 'itg_layout_admin',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_layout_manager.inc',
   );
 
   $items['insert-layout-setting-ajax'] = array(
-    'page callback' => 'insert_layout_setting_ajax',
-    'access arguments' => array('access itg story'),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_layout_ajax.inc',
+      'page callback' => 'insert_layout_setting_ajax',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_layout_ajax.inc',
   );
 
   $items['itg-layout-list'] = array(
-    'page callback' => 'itg_layout_list',
-    'access arguments' => array('access itg story'),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_layout_manager.inc',
+      'page callback' => 'itg_layout_list',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_layout_manager.inc',
   );
 
   $items['section-widgets-ajax/%'] = array(
-    'page callback' => 'section_widgets_ajax',
-    'access arguments' => array('access itg story'),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_layout_autocomplete.inc',
+      'page callback' => 'section_widgets_ajax',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_layout_autocomplete.inc',
   );
 
   // Autocomplete callback for category name
   $items['itg_category_autocomplete_list/%/%'] = array(
-    'page callback' => 'itg_category_autocomplete_list',
-    'access arguments' => array('access itg story'),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_layout_autocomplete.inc',
-  );    
+      'page callback' => 'itg_category_autocomplete_list',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_layout_autocomplete.inc',
+  );
 
   $items['gethomecarddata'] = array(
-    'page callback' => 'itg_layout_gethomecarddata', // se for get the tags by tagid on image.
-    'type' => MENU_CALLBACK,
-    'access arguments' => array('access content'),
-    'file' => 'includes/itg_layout_manager.inc',
+      'page callback' => 'itg_layout_gethomecarddata', // se for get the tags by tagid on image.
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+      'file' => 'includes/itg_layout_manager.inc',
   );
   $items['getsecttioncarddata'] = array(
-    'page callback' => 'itg_layout_getsecttioncarddata', // se for get the tags by tagid on image.
-    'type' => MENU_CALLBACK,
-    'access arguments' => array('access content'),
-    'file' => 'includes/itg_layout_manager.inc',
+      'page callback' => 'itg_layout_getsecttioncarddata', // se for get the tags by tagid on image.
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+      'file' => 'includes/itg_layout_manager.inc',
   );
   $items['get_map_data'] = array(
-    'page callback' => 'itg_layout_getterm_detials', // se for get the tags by tagid on image.
-    'type' => MENU_CALLBACK,
-    'access arguments' => array('access content'),
-    'file' => 'includes/itg_layout_manager.inc',
+      'page callback' => 'itg_layout_getterm_detials', // se for get the tags by tagid on image.
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+      'file' => 'includes/itg_layout_manager.inc',
   );
-  
+
   $items['layout-search-widgets-list/%'] = array(
-    'page callback' => 'itg_search_widgets_list',
-    'access arguments' => array('access itg story'),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_layout_autocomplete.inc',
+      'page callback' => 'itg_search_widgets_list',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_layout_autocomplete.inc',
   );
-  
+
   $items['pre-layout-drag-widgets'] = array(
-    'page callback' => 'pre_layout_drag_widgets',
-    'access arguments' => array('access itg story'),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_layout_manager.inc',
+      'page callback' => 'pre_layout_drag_widgets',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_layout_manager.inc',
   );
-  
+
   $items['custom-content-widgets/autocomplete'] = array(
-        'page callback' => 'content_custom_widgets_title',
-        'access arguments' => array('access itg story'),
-        'type' => MENU_CALLBACK,
-        'file' => 'includes/itg_layout_autocomplete.inc',
-    );
-  
-  $items['custom-content-widgets'] = array(
-    'page callback' => 'custom_content_widgets',
-    'access arguments' => array('access itg story'),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_layout_autocomplete.inc',
+      'page callback' => 'content_custom_widgets_title',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_layout_autocomplete.inc',
   );
-  
+
+  $items['custom-content-widgets'] = array(
+      'page callback' => 'custom_content_widgets',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_layout_autocomplete.inc',
+  );
+
   $items['itg-delete-layout/%'] = array(
-    'page callback' => 'itg_layout_delete',
-    'access arguments' => array('access itg story'),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_layout_manager.delete.inc',
+      'page callback' => 'itg_layout_delete',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_layout_manager.delete.inc',
+  );
+
+  $items['state-election/%/%'] = array(
+      'page callback' => 'itg_state_election',
+      'page arguments' => array(1, 2),
+      'access arguments' => array('access content'),
   );
   return $items;
+}
+
+/**
+ * This function use for make state election page
+ */
+function itg_state_election() {
+  global $base_url;
+
+  $section = arg(1);
+  $state = arg(2);
+  drupal_add_js(drupal_get_path('theme', 'itg') . '/js/election_map.js', array('scope' => 'header'));
+  $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
+  $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
+
+  foreach ($terms as $values) {
+
+    if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section && $values->tid == $state) {
+
+      $svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
+      $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
+      $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
+      $urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl, 'color_url' => $colorurl);
+    }
+  }
+
+
+  make_graph();
+ 
+  return theme('itg_state_election', array('widget_data' => $data, 'map_data' => $urlarray));
+}
+
+function make_graph() {
+  drupal_add_js('https://code.highcharts.com/highcharts.js', array('type' => 'external', 'scope' => 'header', 'weight' => 5));
+
+  $section = arg(1);
+  $state = arg(2);
+  $data = itg_widget_get_graph_data_by_state($section, $state);
+  foreach ($data as $index => $row) {
+    $jsondata = file_get_contents($row->field_election_constituency_tall_value);
+
+    drupal_add_js(' jQuery(function() {
+                   
+            var ids = "container_' . $index . '";
+            var data =' . $jsondata . ';
+            var combined = [];
+            var colorArray = [];
+            var aName = data.election.aName;
+            var aSeats = data.election.aSeats;
+            var aSeatOthers = data.election.aSeatOthers;
+            var aappos = 0;
+            var aapcolor = "";
+            var aapname = "";
+            var aapseats = "";
+            var ty = 0;
+            for (var x = 0; x < data.election.items.length; x++)
+            {
+                if (data.election.items[x].pName.toLowerCase() != "bjp+") {
+                    colorArray[ty] = data.election.items[x].pColor;
+                    combined.push([data.election.items[x].pName, (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon))]);
+                    ty++;
+                } else {
+                    aapcolor = data.election.items[x].pColor;
+                    aappos = data.election.items[x].pColor;
+                    aapname = data.election.items[x].pName;
+                    aapseats = (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon));
+                }
+            }
+            var showtooltip = true;
+            if (aSeatOthers == 0) {
+                jQuery("#resultawaited").show();
+                colorArray[ty] = "#A2A9AD";
+                combined.push(["Result Awaited", "1"]);
+                showtooltip = false;
+            } else {
+
+                colorArray[(parseInt(data.election.items.length) - 1)] = aapcolor;
+                combined.push([aapname, aapseats]);
+            }
+
+
+            var combined = [];
+            var colorArray = [];
+            var aName = data.election.aName;
+            var aSeats = data.election.aSeats;
+            var aSeatOthers = data.election.aSeatOthers;
+            var aappos = 0;
+            var aapcolor = "";
+            var aapname = "";
+            var aapseats = "";
+            var colindex = 0;
+            var shets =[];
+            var apname =[];
+            var apcolor =[];
+            for (var x = 0; x < data.election.items.length; x++)
+            {
+                if (data.election.items[x].pName.toLowerCase() != "bjp+") {
+                    colorArray[colindex] = data.election.items[x].pColor;
+                    apname.push(data.election.items[x].pName);
+                    apcolor.push(data.election.items[x].pColor);
+                    shets.push(parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon));
+                    combined.push([data.election.items[x].pName, (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon))]);
+                    colindex++;
+                } else {
+                    aapcolor = data.election.items[x].pColor;
+                    aappos = data.election.items[x].pColor;
+                    aapname = data.election.items[x].pName;
+                    aapseats = (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon));
+                }
+            }
+            var showtooltip = true;
+            if (aSeatOthers == 0) {
+                jQuery("#resultawaited").show();
+                colorArray[colindex] = "#A2A9AD";
+                combined.push(["Result Awaited", "1"]);
+                showtooltip = false;
+            } else {
+
+                colorArray[(parseInt(data.election.items.length) - 1)] = aapcolor;
+                combined.push([aapname, aapseats]);
+            }
+     loadStateTable(apname,shets,apcolor);
+           jQuery("#" + ids).highcharts({
+      colors: colorArray,
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: 0,
+            plotShadow: false
+        },
+        title: {
+           text: "Total "+aSeatOthers +"/"+ aSeats,
+        },
+       tooltip: {
+                    enabled: showtooltip,
+                    pointFormat: "<b>{point.y}</b>"
+                },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: "pointer",
+                dataLabels: {
+                 enabled: false
+                }
+            }
+        },
+        
+        series: [{
+            type: "pie",
+            name: "Seats",
+			data: combined
+        }]
+    });           
+
+
+
+                
+        });', array('type' => 'inline', 'scope' => 'footer'));
+  }
 }
 
 /**
@@ -120,76 +282,76 @@ function itg_layout_manager_menu() {
 function itg_layout_manager_block_info() {
 
   $blocks['header_block'] = array(
-        'info' => t('Header Block'),
-        'cache' => DRUPAL_CACHE_GLOBAL,
-    );
+      'info' => t('Header Block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
-    $blocks['footer_block'] = array(
-        'info' => t('Footer Block'),
-        'cache' => DRUPAL_CACHE_GLOBAL,
-    );
+  $blocks['footer_block'] = array(
+      'info' => t('Footer Block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
-    $blocks['layout_manager_form_block'] = array(
-        'info' => t('Layout manager form Block'),
-        'cache' => DRUPAL_CACHE_GLOBAL,
-    );
+  $blocks['layout_manager_form_block'] = array(
+      'info' => t('Layout manager form Block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
-    $blocks['layout_widget_list_block'] = array(
-        'info' => t('Layout widget list block'),
-        'cache' => DRUPAL_CACHE_GLOBAL,
-    );
+  $blocks['layout_widget_list_block'] = array(
+      'info' => t('Layout widget list block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
-    $blocks['layout_button_block'] = array(
-        'info' => t('Layout button block'),
-        'cache' => DRUPAL_CACHE_GLOBAL,
-    );
-    // for section cards
-    $blocks['layout_section_widgets'] = array(
-        'info' => t('Layout section widget block'),
-        'cache' => DRUPAL_CACHE_GLOBAL,
-    );
-    // for section widgets
-    $blocks['layout_section_widget2'] = array(
-        'info' => t('Layout section widget2 block'),
-        'cache' => DRUPAL_CACHE_GLOBAL,
-    );
+  $blocks['layout_button_block'] = array(
+      'info' => t('Layout button block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  // for section cards
+  $blocks['layout_section_widgets'] = array(
+      'info' => t('Layout section widget block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  // for section widgets
+  $blocks['layout_section_widget2'] = array(
+      'info' => t('Layout section widget2 block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
-    $blocks['header_snap_post_block'] = array(
-        'info' => t('Snap post Header Block'),
-        'cache' => DRUPAL_CACHE_GLOBAL,
-    );
+  $blocks['header_snap_post_block'] = array(
+      'info' => t('Snap post Header Block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
-    $blocks['header_sosorry_block'] = array(
-        'info' => t('So sorry Header Block'),
-        'cache' => DRUPAL_CACHE_GLOBAL,
-    );
+  $blocks['header_sosorry_block'] = array(
+      'info' => t('So sorry Header Block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
-    $blocks['layout_custom_widget_list_block'] = array(
-        'info' => t('Layout custom widget list block'),
-        'cache' => DRUPAL_CACHE_GLOBAL,
-    );
+  $blocks['layout_custom_widget_list_block'] = array(
+      'info' => t('Layout custom widget list block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
-    $blocks['layout_special_widget_list_block'] = array(
-        'info' => t('Layout Special widget list block'),
-        'cache' => DRUPAL_CACHE_GLOBAL,
-    );
-    
-    $blocks['highlights_widget_list_block'] = array(
-        'info' => t('Layout highlights widget list block'),
-        'cache' => DRUPAL_CACHE_GLOBAL,
-    );
+  $blocks['layout_special_widget_list_block'] = array(
+      'info' => t('Layout Special widget list block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
-    $blocks['front_end_breadcrumb'] = array(
-        'info' => t('Front end breadcrumb'),
-        'cache' => DRUPAL_CACHE_GLOBAL,
-    );
-    
-    $blocks['custom_content_widget_block'] = array(
-        'info' => t('Custom content widget block'),
-        'cache' => DRUPAL_CACHE_GLOBAL,
-    );
+  $blocks['highlights_widget_list_block'] = array(
+      'info' => t('Layout highlights widget list block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
-    return $blocks;
+  $blocks['front_end_breadcrumb'] = array(
+      'info' => t('Front end breadcrumb'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  $blocks['custom_content_widget_block'] = array(
+      'info' => t('Custom content widget block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
 }
 
 /**
@@ -384,12 +546,13 @@ function itg_layout_manager_block_view($delta = '') {
             $breadcrumb = frontend_breadcrumb_display($id);
           }
       } else {
-          $array_url = array('livetv' => 'Live TV',
+          $array_url = array(
+              'livetv' => 'Live TV',
               'itg_active_polls' => 'Poll',
               'anchors-list' => 'Anchors',
-              'blog-listing' => 'Blog',
-              'podcasts-listing' => 'Podcast',
-              'programmes' => 'Programmes',
+              'blog' => 'Blog',
+              'podcast' => 'Podcast',
+              'program' => 'Programmes',
               'snap-post' => 'Snappost', 
               'itg-quiz' => 'Quiz',
               'itg-survey' => 'Survey',
@@ -404,12 +567,11 @@ function itg_layout_manager_block_view($delta = '') {
                 $arg0 = arg(0);
             }
             
-            if (!empty($array_url[$arg0])) {
-              $breadcrumb = frontend_breadcrumb_display('', '', $array_url[$arg0]);
+            if (!empty($array_url[strtolower($arg0)])) {
+                $breadcrumb = frontend_breadcrumb_display('', '', $array_url[strtolower($arg0)]);
             }
           }
       }
-
       $block['content'] = theme('frontend_breadcrumb_display_block', array('data' => $breadcrumb));
     break;
     case 'custom_content_widget_block':
@@ -442,94 +604,96 @@ function itg_layout_manager_theme($existing, $type, $theme, $path) {
   }
 
   $themes = array(
-    'footer_block' => array(
-        'variable' => array('data' => NULL),
-        'template' => 'itg-footer',
-        'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
-    ),
-    'header_block' => array(
-        'variable' => array('data' => NULL),
-        'template' => 'itg-header',
-        'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
-    ),
-    'layout_manager_block' => array(
-        'arguments' => array('form' => NULL),
-        'template' => 'layout-manager-form-block',
-        'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
-    ),
-    'itg_layout_admin_page' => $layout,
-    'layout_widgets_list_block' => array(
-        'arguments' => array('form' => NULL),
-        'template' => 'layout-widgets-list-block',
-        'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
-    ),
-    'layout_buttons_block' => array(
-        'arguments' => array('form' => NULL),
-        'template' => 'layout-buttons-block',
-        'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
-    ),
-    'layout_section_widgets_block' => array(
-        'arguments' => array('form' => NULL),
-        'template' => 'layout-section-widgets-block',
-        'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
-    ),
-    'layout_section_widget2_block' => array(
-        'arguments' => array('form' => NULL),
-        'template' => 'layout-section-widget2-block',
-        'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
-    ),
-    'header_snap_post_block' => array(
-        'variable' => array('data' => NULL),
-        'template' => 'itg-header-snap-post',
-        'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
-    ),
-    'header_so_sorry_block' => array(
-        'variable' => array('data' => NULL),
-        'template' => 'itg-header-sosorry',
-        'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
-    ),
-    'layout_custom_widgets_list_block' => array(
-        'arguments' => array('form' => NULL),
-        'template' => 'layout-custom-widgets-list-block',
-        'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
-    ),
-    'layout_special_widgets_list_block' => array(
-        'arguments' => array('form' => NULL),
-        'template' => 'layout-special-widgets-list-block',
-        'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
-    ),
-    'html_custom_widget' => array(
-        'arguments' => array('form' => NULL),
-        'template' => 'layout-html-custom-widget',
-        'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
-    ),
-    'layout_highlights_widgets_list_block' => array(
-        'arguments' => array('form' => NULL),
-        'template' => 'layout-highlights-widgets-list-block',
-        'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
-    ),
-    'itg_highlights_widget' => array(
-        'arguments' => array('form' => NULL),
-        'template' => 'layout-itg-highlights-widget',
-        'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
-    ),
-    'frontend_breadcrumb_display_block' => array(
-        'arguments' => array('form' => NULL),
-        'template' => 'frontend-breadcrumb-display',
-        'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
-    ),
-    'layout_content_custom_widgets_list_block' => array(
-        'arguments' => array('form' => NULL),
-        'template' => 'layout-content-custom-widgets-list-block',
-        'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
-    ),
-      
+      'footer_block' => array(
+          'variable' => array('data' => NULL),
+          'template' => 'itg-footer',
+          'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
+      ),
+      'header_block' => array(
+          'variable' => array('data' => NULL),
+          'template' => 'itg-header',
+          'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
+      ),
+      'layout_manager_block' => array(
+          'arguments' => array('form' => NULL),
+          'template' => 'layout-manager-form-block',
+          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+      ),
+      'itg_layout_admin_page' => $layout,
+      'layout_widgets_list_block' => array(
+          'arguments' => array('form' => NULL),
+          'template' => 'layout-widgets-list-block',
+          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+      ),
+      'layout_buttons_block' => array(
+          'arguments' => array('form' => NULL),
+          'template' => 'layout-buttons-block',
+          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+      ),
+      'layout_section_widgets_block' => array(
+          'arguments' => array('form' => NULL),
+          'template' => 'layout-section-widgets-block',
+          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+      ),
+      'layout_section_widget2_block' => array(
+          'arguments' => array('form' => NULL),
+          'template' => 'layout-section-widget2-block',
+          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+      ),
+      'header_snap_post_block' => array(
+          'variable' => array('data' => NULL),
+          'template' => 'itg-header-snap-post',
+          'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
+      ),
+      'header_so_sorry_block' => array(
+          'variable' => array('data' => NULL),
+          'template' => 'itg-header-sosorry',
+          'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
+      ),
+      'layout_custom_widgets_list_block' => array(
+          'arguments' => array('form' => NULL),
+          'template' => 'layout-custom-widgets-list-block',
+          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+      ),
+      'layout_special_widgets_list_block' => array(
+          'arguments' => array('form' => NULL),
+          'template' => 'layout-special-widgets-list-block',
+          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+      ),
+      'html_custom_widget' => array(
+          'arguments' => array('form' => NULL),
+          'template' => 'layout-html-custom-widget',
+          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+      ),
+      'layout_highlights_widgets_list_block' => array(
+          'arguments' => array('form' => NULL),
+          'template' => 'layout-highlights-widgets-list-block',
+          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+      ),
+      'itg_highlights_widget' => array(
+          'arguments' => array('form' => NULL),
+          'template' => 'layout-itg-highlights-widget',
+          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+      ),
+      'frontend_breadcrumb_display_block' => array(
+          'arguments' => array('form' => NULL),
+          'template' => 'frontend-breadcrumb-display',
+          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+      ),
+      'layout_content_custom_widgets_list_block' => array(
+          'arguments' => array('form' => NULL),
+          'template' => 'layout-content-custom-widgets-list-block',
+          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+      ),
+      'itg_state_election' => array(
+          'arguments' => array('form' => NULL),
+          'template' => 'layout-state-election',
+          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+      ),
   );
 
   return $themes;
 }
-
-
 
 /**
  * 
@@ -547,14 +711,13 @@ function itg_layout_clean_url($string) {
  * {@inheritdoc}
  */
 function itg_layout_gethomecarddata_new_pre($sectinno) {
-    
+
   global $theme;
 
- if($sectinno >= '25')
- {
-     
-     $sectinno = $sectinno+1;
- }
+  if ($sectinno >= '25') {
+
+    $sectinno = $sectinno + 1;
+  }
 
   $arg = arg();
   $widget_name1 = 'itg-block-' . ($sectinno);
@@ -563,39 +726,35 @@ function itg_layout_gethomecarddata_new_pre($sectinno) {
   $block_name = array($widget_name1, $widget_name2, $widget_name3);
   $section = 'home_page';
   $template_name = 'page--front';
-  
+
   $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
 
-  if($data=="" && $sectinno<80)
-  {
-  return itg_layout_gethomecarddata_new_pre($sectinno + 3); 
+  if ($data == "" && $sectinno < 80) {
+    return itg_layout_gethomecarddata_new_pre($sectinno + 3);
   }
 
   $widget_data = $data;
 
   if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name'])) {
     return 1;
-  } else {
-    return 0;  
   }
-    
-  
+  else {
+    return 0;
+  }
 }
-
 
 /**
  * Implements hook_manager_preprocess_page().
  * {@inheritdoc}
  */
-function itg_layout_getsectioncarddata_new_pre($sectinno,$section) {
-    
+function itg_layout_getsectioncarddata_new_pre($sectinno, $section) {
+
   global $theme;
 
- if($sectinno >= '25')
- {
-     
-     $sectinno = $sectinno+1;
- }
+  if ($sectinno >= '25') {
+
+    $sectinno = $sectinno + 1;
+  }
 
   $arg = arg();
   $widget_name1 = 'itg-block-' . ($sectinno);
@@ -607,21 +766,20 @@ function itg_layout_getsectioncarddata_new_pre($sectinno,$section) {
 
   $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
 
-  if($data=="" && $sectinno<80)
-  {
-  return itg_layout_getsectioncarddata_new_pre($sectinno + 3,$section); 
+  if ($data == "" && $sectinno < 80) {
+    return itg_layout_getsectioncarddata_new_pre($sectinno + 3, $section);
   }
 
   $widget_data = $data;
 
   if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name'])) {
     return 1;
-  } else {
-    return 0;  
   }
-    
-  
+  else {
+    return 0;
+  }
 }
+
 /**
  * Implements hook_manager_preprocess_page().
  * {@inheritdoc}
@@ -655,30 +813,32 @@ function itg_layout_manager_preprocess_page(&$vars) {
     $query->condition('ttd.vid', CATEGORY_MANAGMENT);
     $parent_id = $query->execute()->fetchField();
     if ($parent_id == 0) {
-        $tpl_name = get_template_name_by_section_name($arg[2]);
-      
-        $tid_val = $arg[2]; //section id
-        /* if (!isset($tpl_name)) {
-          $tid_val = '';
-          $tpl_name = '';
-          }
-         */
-        if (!empty($tpl_name)) {
-            drupal_set_title('');
-            $data = get_layout_details($tid_val, $tpl_name, 'front');
-            $vars['widget_data'] = $data;
-            $tpl_name = str_replace('--', '__', $tpl_name);
-            $vars['theme_hook_suggestions'][] = $tpl_name;
-            //$vars['itg_ad'] = get_ad_script($tid_val);
-        } else {
-          $vars['theme_hook_suggestions'][] = 'page__taxonomy_term';
-          // remove the extra vocavolary information on page buttom.
-          unset($vars['page']['content']['system_main']);
+      $tpl_name = get_template_name_by_section_name($arg[2]);
+
+      $tid_val = $arg[2]; //section id
+      /* if (!isset($tpl_name)) {
+        $tid_val = '';
+        $tpl_name = '';
         }
-   } else {
+       */
+      if (!empty($tpl_name)) {
+        drupal_set_title('');
+        $data = get_layout_details($tid_val, $tpl_name, 'front');
+        $vars['widget_data'] = $data;
+        $tpl_name = str_replace('--', '__', $tpl_name);
+        $vars['theme_hook_suggestions'][] = $tpl_name;
+        //$vars['itg_ad'] = get_ad_script($tid_val);
+      }
+      else {
+        $vars['theme_hook_suggestions'][] = 'page__taxonomy_term';
+        // remove the extra vocavolary information on page buttom.
+        unset($vars['page']['content']['system_main']);
+      }
+    }
+    else {
       $vars['theme_hook_suggestions'][] = 'page__taxonomy_term';
       // remove the extra vocavolary information on page buttom.
       unset($vars['page']['content']['system_main']);
-   }
+    }
   }
 }

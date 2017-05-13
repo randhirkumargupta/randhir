@@ -1037,11 +1037,11 @@ function itg_category_manager_taxonomy_term_insert($term) {
       'uid' => $user->uid ,
       'changed' => time() ,
     );
+    
 //    if (!empty($term->path['alias'])) {
 //      $term->path['alias'] = rtrim($term->path['alias'], '/');
 //      $data['sef_url'] = $term->path['alias'];
 //      $pathdata = $data['sef_url'];
-//      
 //    }
 
     $get_parents = taxonomy_get_parents($term->tid);
@@ -1056,10 +1056,9 @@ function itg_category_manager_taxonomy_term_insert($term) {
       }
       $pathdata = $parent_path . '/' . strtolower($path_name);
       $newpath = itg_category_manager_custom_path($pathdata);
-//      $term->path = array('alias' => $newpath , 'pathauto' => FALSE);
       $term->path['alias'] = $newpath;
     }
-    $data['sef_url'] = $term->path['alias'];
+    $data['sef_url'] = (!empty($term->path['alias'])) ? $term->path['alias'] : itg_category_manager_custom_path($term->name);
 
     drupal_write_record('itg_sef_url' , $data);
   }

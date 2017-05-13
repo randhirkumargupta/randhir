@@ -84,6 +84,44 @@ function feature_for_state_manager_views_default_views() {
   $handler->display->display_options['filters']['machine_name']['value'] = array(
     'state_managment' => 'state_managment',
   );
+  /* Filter criterion: Field: Category (field_section) */
+  $handler->display->display_options['filters']['field_section_tid']['id'] = 'field_section_tid';
+  $handler->display->display_options['filters']['field_section_tid']['table'] = 'field_data_field_section';
+  $handler->display->display_options['filters']['field_section_tid']['field'] = 'field_section_tid';
+  $handler->display->display_options['filters']['field_section_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_section_tid']['expose']['operator_id'] = 'field_section_tid_op';
+  $handler->display->display_options['filters']['field_section_tid']['expose']['label'] = 'Section';
+  $handler->display->display_options['filters']['field_section_tid']['expose']['operator'] = 'field_section_tid_op';
+  $handler->display->display_options['filters']['field_section_tid']['expose']['identifier'] = 'field_section_tid';
+  $handler->display->display_options['filters']['field_section_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
+  $handler->display->display_options['filters']['field_section_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_section_tid']['vocabulary'] = 'category_management';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -114,6 +152,11 @@ function feature_for_state_manager_views_default_views() {
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['name']['link_to_taxonomy'] = TRUE;
+  /* Field: Field: Category */
+  $handler->display->display_options['fields']['field_section']['id'] = 'field_section';
+  $handler->display->display_options['fields']['field_section']['table'] = 'field_data_field_section';
+  $handler->display->display_options['fields']['field_section']['field'] = 'field_section';
+  $handler->display->display_options['fields']['field_section']['label'] = 'Section';
   /* Field: Taxonomy term: Term edit link */
   $handler->display->display_options['fields']['edit_term']['id'] = 'edit_term';
   $handler->display->display_options['fields']['edit_term']['table'] = 'taxonomy_term_data';

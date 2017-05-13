@@ -281,17 +281,15 @@ function itg_fia_xml_format_rss_item($kicker, $target_nids, $fb_instant_image, $
   $output .= "    <head>\n";
   $output .= "    <meta charset='utf-8'>\n";
   $output .= "    <link rel='canonical' href='" . $link . "'>\n";
+  $output .= "    <link rel='stylesheet' title='default' href='#'>";
   $output .= "    <meta property='op:markup_version' content='v1.0'>\n";
-  $output .= "    <body>\n";
   $output .= "    </head>\n\n";
+  $output .= "    <body>\n";
   $output .= "    <article>\n";
   $output .= "    <header>\n";
-  
   // <!-- The header image shown inside your article --> 
-  $output .= "    <figure data-mode=aspect-fit>\n";
-  $output .= "    <video loop>\n";
-  $output .= "    <source src='" . $fb_instant_image . "' type='video/mov' />\n";
-  $output .= "    </video>\n\n";
+  $output .= "    <figure>\n";
+  $output .= "    <img src='" . $fb_instant_image . "' />\n";
   $output .= "    </figure>\n\n";
   $output .= "      <h1>" . $title . "</h1>\n";
   $output .= "      <h2>" . $kicker . "</h2>\n";
@@ -301,20 +299,16 @@ function itg_fia_xml_format_rss_item($kicker, $target_nids, $fb_instant_image, $
   $output .= "      <address>" . $name . "</address>\n";
   $output .= "      <time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>\n";
   $output .= "      <time class='op-modified' dateTime='" . $modified . "'>" . $op_modified . "</time>\n";
-  
   $output .= "    </header>\n\n";
   $output .= "    <div property='content:encoded'>". $node_body_content . "</div>\n";
-  
   $output .= "    <footer>\n";
   // <!-- Credits for your article -->
   $output .= "    <aside>The footer section can be used for acknowledgements, author bios, related articles, or any other supplemental information.</aside>\n";
   // <!-- Copyright details for your article -->
   $output .= "    <small>© Facebook</small>\n";
   $output .= "    </footer>\n\n";
-
   $output .= "    </article>\n\n";
   $output .= "    </body>\n\n";
-  
   $output .= "    </html>\n\n";
   $output .= "    ]]>\n\n";
   $output .= "    </content:encoded>\n\n";

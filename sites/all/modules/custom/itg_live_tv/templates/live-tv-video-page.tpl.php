@@ -37,7 +37,7 @@ $live_tv_get_details = itg_get_live_tv_code($device[0]);
                          if (filter_var($live_tv_get_details, FILTER_VALIDATE_URL))
                          {
                            ?>
-                        <iframe frameborder="0" style="z-index:4" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="<?php print $live_tv_get_details; ?>">
+                        <iframe frameborder="0" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="<?php print $live_tv_get_details; ?>">
                         </iframe>
                            <?php
                          } else {

@@ -59,7 +59,7 @@
         </a>
       <?php else : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[2]['nid']); ?>">
-            <img src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image237x133.jpg" />
+            <img src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image237x133.jpg" alt="" />
         </a>
       <?php endif; ?>
       <?php if (!empty($data[2]['title'])) : ?>

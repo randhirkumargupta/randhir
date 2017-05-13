@@ -95,6 +95,7 @@ function itg_ugc_rules_action_info() {
 function itg_ugc_send_follow_story_content_mail($node) {
   if ($node->type == 'story')
   {
+    if (isset($node->op)) {
     $get_user_id = itg_get_follow_story_user($node->nid, 1);
     if(!empty($get_user_id)) {
       foreach ($get_user_id as $follow_user) {
@@ -130,6 +131,7 @@ function itg_ugc_send_follow_story_content_mail($node) {
 //          }
         }
       }
+    }
     }
   }
 }
@@ -193,8 +195,10 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#value'] = $mongo_details['title'];
       $form['body'][LANGUAGE_NONE][0]['#default_value'] = $mongo_details['description'];
       $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['unid'];
+      if($user->uid != 1) {
       $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#prefix'] = '<div style="display: none">';
       $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#suffix'] = '</div>';
+      }
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
       $form['field_stroy_city'][LANGUAGE_NONE]['#default_value'] = $mongo_details['city'];
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
@@ -214,8 +218,10 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $form['title']['#default_value'] = $mongo_details['title'];
       $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['title'];
       $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['unid'];
+      if($user->uid != 1) {
       $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#prefix'] = '<div style="display: none">';
       $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#suffix'] = '</div>';
+      }
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
       $form['field_stroy_city'][LANGUAGE_NONE]['#default_value'] = $mongo_details['city'];
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
@@ -240,9 +246,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $form['title']['#default_value'] = $mongo_details['title'];
       $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['title'];
       $form['field_podcast_kicker_message'][LANGUAGE_NONE][0]['#default_value'] = $mongo_details['description'];
-      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['unid'];
-      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#prefix'] = '<div style="display: none">';
-      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#suffix'] = '</div>';
+      $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['unid'];
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
       foreach ($form['field_podcast_audio_upload']['und'] as $delta => $field) {
@@ -799,7 +803,7 @@ function itg_ugc_node_status_update($nid, $title) {
     module_load_include('inc', 'itg_ugc', 'include/itg_ugc_mail');
     $mail_content = itg_ugc_get_mail_content($uname, $type, 'Published', $to);
     drupal_set_message(t($ugc_content_details['title'] . ' has been Published successfully.'));
-    $_GET['destination'] = 'ugc-inqueue-content';
+    drupal_goto('ugc-inqueue-content');
   }
   else
   {
