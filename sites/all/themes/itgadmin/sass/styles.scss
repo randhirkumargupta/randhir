@@ -11793,3 +11793,10 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     margin: 0;
     padding: 0 !important;
 }
+.node-reporter-form{
+  .form-field-name-field-reporter-profile-type, .form-field-name-field-byline-company, .form-field-name-field-byline-department{
+    .form-type-select > label:after{
+      @extend .astrick;
+    }
+  }
+}
