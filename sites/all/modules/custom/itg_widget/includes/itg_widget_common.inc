@@ -1049,7 +1049,7 @@ function itg_widget_form_views_exposed_form_alter(&$form , &$form_state , $form_
       $form['byline_profile_type'] = array(
         '#type' => 'select' ,
         '#title' => 'Profile Type' ,
-        '#default_value' => ($_GET['byline_profile_type']) ? $_GET['byline_profile_type'] : "" ,
+        '#default_value' => ($_GET['byline_profile_type']) ? $_GET['byline_profile_type'] : "Any" ,
         '#options' => drupal_map_assoc($options) ,
       );
       $form['#info']['filter-byline-names']['value'] = 'byline_names';
