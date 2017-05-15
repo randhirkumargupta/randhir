@@ -199,6 +199,8 @@ function itg_sso_reg_form_alter(&$form, &$form_state, $form_id) {
  * Implements itg_user_login_after_build().
  */
 function itg_user_login_after_build($form, &$form_state) {
+ $form['name']['#attributes']['autocomplete'] = 'off';
+ $form['pass']['#attributes']['autocomplete'] = 'off';
  $form['name']['#title'] = t('Enter your email/mobile number'); 
  $form['name']['#description'] = t('You may login with either your assigned mobile or your e-mail address.'); 
  return $form; 
