@@ -56,11 +56,23 @@ function loyality_reward_points_configuration_form() {
         '#maxlength' => 6,
         '#default_value' => variable_get('lrp_online_registration_for_any_events'),
     );
-    $form['lrp_participation_in_poll_campaign_survey'] = array(
+    $form['lrp_participation_in_poll'] = array(
         '#type' => 'textfield',
-        '#title' => t('Participation in Poll/Campaign/Survey'),
+        '#title' => t('Participation in Poll'),
         '#maxlength' => 6,
-        '#default_value' => variable_get('lrp_participation_in_poll_campaign_survey'),
+        '#default_value' => variable_get('lrp_participation_in_poll'),
+    );
+    $form['lrp_participation_in_campaign'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Participation in Campaign'),
+        '#maxlength' => 6,
+        '#default_value' => variable_get('lrp_participation_in_campaign'),
+    );
+    $form['lrp_participation_in_survey'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Participation in Survey'),
+        '#maxlength' => 6,
+        '#default_value' => variable_get('lrp_participation_in_survey'),
     );
     $form['lrp_refer_a_friend'] = array(
         '#type' => 'textfield',
@@ -298,7 +310,9 @@ function loyality_reward_points_configuration_form_validate($form, &$form_state)
     $newsletter_sub = $form_values['lrp_newsletter_subscription'];
     $ugc_contribution = $form_values['lrp_ugc_contribution'];
     $online_reg = $form_values['lrp_online_registration_for_any_events'];
-    $participate = $form_values['lrp_participation_in_poll_campaign_survey'];
+    $participate = $form_values['lrp_participation_in_poll'];
+    $campaign = $form_values['lrp_participation_in_campaign'];
+    $survey = $form_values['lrp_participation_in_survey'];
     $refer_friend = $form_values['lrp_refer_a_friend'];
     $loyality_points_expiry = $form_values['lrp_loyality_points_expiry'];
 
@@ -339,7 +353,15 @@ function loyality_reward_points_configuration_form_validate($form, &$form_state)
     }
 
     if ($participate !== '' && (!is_numeric($participate) || $participate < 1)) {
-        form_set_error('lrp_participation_in_poll_campaign_survey', t('Participation in poll/campaign/survey field value must be numeric and greater than zero.'));
+        form_set_error('lrp_participation_in_poll', t('Participation in poll field value must be numeric and greater than zero.'));
+    }
+    
+    if ($campaign !== '' && (!is_numeric($campaign) || $campaign < 1)) {
+        form_set_error('lrp_participation_in_campaign', t('Participation in campaign field value must be numeric and greater than zero.'));
+    }
+    
+    if ($survey !== '' && (!is_numeric($survey) || $survey < 1)) {
+        form_set_error('lrp_participation_in_survey', t('Participation in poll survey value must be numeric and greater than zero.'));
     }
 
     if ($refer_friend !== '' && (!is_numeric($refer_friend) || $refer_friend < 1)) {
