@@ -39,20 +39,26 @@ function feature_for_election_graph_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_election_state',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
-      'target_id' => array(
-        0 => 'target_id',
+      'tid' => array(
+        0 => 'tid',
       ),
     ),
     'locked' => 0,
-    'module' => 'entityreference',
+    'module' => 'taxonomy',
     'settings' => array(
-      'handler' => 'base',
-      'handler_settings' => array(),
-      'target_type' => 'node',
+      'allowed_values' => array(
+        0 => array(
+          'vocabulary' => 'state_managment',
+          'parent' => 0,
+        ),
+      ),
     ),
     'translatable' => 0,
-    'type' => 'entityreference',
+    'type' => 'taxonomy_term_reference',
   );
 
   return $field_bases;

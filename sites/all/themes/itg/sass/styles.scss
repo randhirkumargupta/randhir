@@ -4382,6 +4382,11 @@ h1.category-heading{
         }
     }
 }
+[id*="block-itg-widget-featured-photo-carousel"]{
+  .flexslider .slides img {
+    max-height: 363px;
+  }
+}
 .view-photo-list-of-category, .view-video-list-of-category{
     @include pos(relative);
     .view-filters{
@@ -8888,6 +8893,9 @@ section.sidebar{
 
 
 /*Start CSS LIVE tv */
+div#playerContainer{
+  display: none !important;
+}
 #block-itg-live-tv-live-tv-video-page{
     ul{
         @extend .list-none;
@@ -8909,9 +8917,6 @@ section.sidebar{
               position: absolute;
               left: 0;
               top: 0;
-            }
-            #playerContainer{
-              display: none !important;
             }
         }
         .social-icon{

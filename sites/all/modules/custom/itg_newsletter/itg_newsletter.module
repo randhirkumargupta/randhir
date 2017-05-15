@@ -219,9 +219,9 @@ function itg_newslatter_section_content_type_validate($form , &$form_state) {
   $field_cm_select_type = $form_state['values']['field_cm_select_type']['und'][0]['value'];
   if($field_newsl_newsletter_content == 'select_section') {
     if(empty($field_cm_select_type)) {
-      drupal_add_js('jQuery(document).ready(function(){
+      /*drupal_add_js('jQuery(document).ready(function(){
         jQuery("#edit-field-story-category").css("display","none");
-      });' , 'inline');
+      });' , 'inline');*/
       form_set_error("field_cm_select_type" , t('Content type can\'t be empty'));
     }
   }
@@ -848,10 +848,8 @@ function itg_newslatter_register_form() {
       'effect' => "fade" ,
     ) ,
   );
-
-  drupal_add_js("jQuery(document).ready(function(){ jQuery('#itg-newslatter-register-form label').hide(); });" , 'inline');
-  drupal_add_js("jQuery(document).ajaxSuccess (function () { jQuery('#edit-email').val(''); 
-                 jQuery('#edit-name').val(''); jQuery('#edit-mobile').val(''); });" , 'inline');
+  
+  drupal_add_js(drupal_get_path('module' , 'itg_newsletter') . '/js/newslatter-custom-register.js' , array('type' => 'file' , 'scope' => 'footer'));
   return $form;
 }
 
