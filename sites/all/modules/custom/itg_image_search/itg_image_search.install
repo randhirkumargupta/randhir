@@ -51,6 +51,6 @@ function itg_image_search_uninstall() {
 /**
  * Clear menu cache to match new configuration place
  */
-function itg_mobile_services_update_7001() {
+function itg_image_search_update_7001() {
   cache_clear_all(NULL, 'cache_menu');
 }
