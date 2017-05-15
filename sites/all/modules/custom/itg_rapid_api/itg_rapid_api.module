@@ -8,6 +8,7 @@
  */
 module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_photo');
 module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_video');
+module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_news');
 
 /**
  * Implements hook_services_resources().
