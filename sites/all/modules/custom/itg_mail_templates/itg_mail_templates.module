@@ -15,43 +15,7 @@ function itg_mail_templates_form_alter(&$form, &$form_state, $form_id) {
     $form['actions']['preview']['#access'] = FALSE;
     $form['actions']['delete']['#access'] = FALSE;
     $form['title']['#attributes'] = array('readonly' => 'readonly');
-//    $form['title']['#default_value'] = 'Ask an Expert';
-    drupal_add_js("jQuery(document).ready(function(){
-          var default_title = jQuery('#edit-field-mail-templates-category-und option:selected').text(); 
-          jQuery('#edit-title').val(default_title);
-        });", array('type' => 'inline', 'scope' => 'footer'));
-
-    drupal_add_js("jQuery('#edit-field-mail-templates-category-und').change(function(){
-          var select_option = jQuery('#edit-field-mail-templates-category-und option:selected').text(); 
-          jQuery('#edit-title').val(select_option);
-        });", array('type' => 'inline', 'scope' => 'footer'));
-    drupal_add_js("var selected_value = jQuery('.form-field-name-field-mail-templates-category select option:selected').val();
-        jQuery('.node-mail_templates-form').find('.mail-template-category').hide().siblings('.' + selected_value).show();
-        jQuery('.form-field-name-field-mail-templates-category').on('change', 'select', function(){
-        var selected_value = jQuery(this).val();
-        jQuery('.node-mail_templates-form').find('.mail-template-category').hide().siblings('.' + selected_value).show();
-      });", array('type' => 'inline', 'scope' => 'footer'));
-    
-    drupal_add_js("jQuery('#edit-field-mail-templates-category-und').change(function(){
-      var select_option = jQuery('#edit-field-mail-templates-category-und option:selected').val();
-      var select_option_title = jQuery('#edit-field-mail-templates-category-und option:selected').text();
-          jQuery('#mail-templates-node-form').trigger('reset');
-          jQuery('#edit-field-mail-templates-category-und').val(select_option);
-          jQuery('#edit-title').val(select_option_title);
-        });", array('type' => 'inline', 'scope' => 'footer'));
-
-//    if (!isset($_REQUEST['destination'])) {
-//        $destination = '';
-//    }
-//    else {
-//        $destination_array = explode('?', $_REQUEST['destination']);
-//        $destination = $destination_array[0];
-//    }
-////    $form['actions']['submit']['#weight'] = 10;
-//    $form['actions']['cancel'] = array(
-//        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-//        '#weight' => 10,
-//    );
+    drupal_add_js(drupal_get_path('module' , 'itg_mail_templates') . '/js/itg_mail_templates.js' , array('weight' => 1, array('scope' => 'footer')));
   }
 }
 

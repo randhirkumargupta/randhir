@@ -46,4 +46,8 @@ $success = base64_decode($_GET['profile']);
 if (!empty($_GET['profile']) && $success == 'success') {
   print '<div class="ugc_success">' . t('Your profile has been updated successfully.') . '</div>';
 }
+$refer = base64_decode($_GET['refer']);
+if (!empty($_GET['refer']) && $refer == 'success') {
+  print '<div class="ugc_success">' . t('Thank you!') . '</div>';
+}
 ?>
