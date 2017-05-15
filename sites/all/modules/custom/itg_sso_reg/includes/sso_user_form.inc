@@ -525,10 +525,10 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
 
         $account = user_save(NULL, $edit);
 
-        if(function_exists('itg_personalization_reddem_referfriend')) {
-          itg_personalization_reddem_referfriend($_SESSION['referral_key']);
-          unset($_SESSION['referral_key']);
-        }
+//        if(function_exists('itg_personalization_reddem_referfriend')) {
+//          itg_personalization_reddem_referfriend($_SESSION['referral_key']);
+//          unset($_SESSION['referral_key']);
+//        }
         // Set operation.
         $op = 'register_no_approval_required';
         // Send an email.
