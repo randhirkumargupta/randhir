@@ -950,7 +950,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state) {
       // Call loyalty & rewards function to save points for a user
       if(function_exists('itg_loyalty_reward_earnpoint')) {
         if($user->uid) {
-          //itg_loyalty_reward_earnpoint($form_state['values']['nid'], 'participate', $user->uid);
+          itg_loyalty_reward_earnpoint($form_state['values']['nid'], 'campaign', $user->uid);
         }
       }
   }

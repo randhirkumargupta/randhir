@@ -910,7 +910,7 @@ function itg_survey_pqs_associate_poll_with_story($nid) {
     $poll_banner_image = theme('image_style', array('style_name' => 'home_page_poll_images_style', 'path' => $node->field_poll_banner[$node->language][0]['uri']));
   }
   else {
-   $poll_banner_image = '<img src ="'.$base_url . "/" . drupal_get_path('theme', 'itg').'/images/itg_image370x208.jpg">';
+   $poll_banner_image = '<img src ="'.$base_url . "/" . drupal_get_path('theme', 'itg').'/images/itg_image370x208.jpg" alt="" title="" />';
 
   }
 
@@ -1231,7 +1231,7 @@ function itg_survey_survey_form_submit($form, &$form_state) {
     // Call loyalty & rewards function to save points for a user
     if (function_exists('itg_loyalty_reward_earnpoint')) {
       if ($user->uid) {
-        //itg_loyalty_reward_earnpoint($form_state['values']['nid'], 'participate', $user->uid);
+        itg_loyalty_reward_earnpoint($form_state['values']['nid'], 'survey', $user->uid);
       }
     }
   }
