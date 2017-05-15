@@ -333,7 +333,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 </div>
 <?php } ?>  
 
-                                            <div class="data-holder" widget-style="election-other-story" id="itg-block-5">
+                                            <div class="data-holder" data-widget-style="election-other-story" id="itg-block-5">
                                               <?php
                                                 if (isset($widget_data['itg-block-5']['widget'])) {
                                                   print $widget_data['itg-block-5']['widget']; 
@@ -368,7 +368,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 </div>
 <?php } ?>  
 
-                                            <div class="data-holder" widget-style="election-other-story" id="itg-block-6">
+                                            <div class="data-holder" data-widget-style="election-other-story" id="itg-block-6">
                                               <?php
                                                 if (isset($widget_data['itg-block-6']['widget'])) {
                                                   print $widget_data['itg-block-6']['widget']; 
@@ -535,7 +535,7 @@ if (count($graphdata) > 2) {
                                                 </div>
 <?php } ?>  
 
-                                            <div class="data-holder" id="itg-block-10" widget-style="election-so-sorry">
+                                            <div class="data-holder" id="itg-block-10" data-widget-style="election-so-sorry">
                                               <?php
                                                 if (isset($widget_data['itg-block-10']['widget'])) {
                                                   print $widget_data['itg-block-10']['widget']; 
