@@ -22,7 +22,7 @@
                                     print $row['field_story_medium_image'];
                                 }
                                 else {
-                                    print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/ditg_image370x208.jpg' />";
+                                    print "<img alt='' src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/ditg_image370x208.jpg' title='' />";
                                 }
                                 ?>    
 
