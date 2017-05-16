@@ -15,7 +15,17 @@
                         jQuery('.mobile-error').html(item);
                     }
                     if (index == 'mail') {
+                        console.log(item);
                         jQuery('.email-error').html(item);
+                    }
+                    if (index == 'fname') {
+                        jQuery('.fname-msg').html(item);
+                    }
+                    if (index == 'lname') {
+                        jQuery('.lname-msg').html(item);
+                    }
+                    if (index == 'password') {
+                        jQuery('.pass-msg').html(item);
                     }
                 });
             }
