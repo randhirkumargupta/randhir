@@ -3145,7 +3145,7 @@
     overflow: hidden;
   }
 
-  body.page-taxonomy-term .row {
+  body.page-taxonomy-term #main .row {
     overflow: hidden;
   }
 }
