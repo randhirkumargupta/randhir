@@ -10691,6 +10691,7 @@ section.sidebar .block-itg-ads {
   line-height: 20px;
   padding: 0;
   width: 145px;
+  z-index: 9;
 }
 .election-page .itg-map .map-result-detail {
   position: absolute;
@@ -10760,6 +10761,10 @@ section.sidebar .block-itg-ads {
   height: 19px;
   margin-bottom: 10px;
 }
+.election-page .election-graph .social-share li {
+  display: inline-block;
+  vertical-align: middle;
+}
 .election-page .graph-design .highcharts-container {
   height: 260px !important;
 }
@@ -10794,6 +10799,40 @@ section.sidebar .block-itg-ads {
 }
 
 /* CSS For Election Page End */
+/* CSS FOR state-election-map-wrapper */
+.state-election-map-wrapper .elction_map, .state-election-map-wrapper .left-chart {
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 3px 0 #ddd;
+  width: 100%;
+}
+.state-election-map-wrapper .left-chart {
+  margin-top: 40px;
+  position: relative;
+}
+.state-election-map-wrapper .left-chart .graph-design {
+  float: left;
+  width: 60%;
+}
+.state-election-map-wrapper .left-chart .graph-design svg > text {
+  fill: #009ef0 !important;
+  font-family: Roboto;
+}
+.state-election-map-wrapper .left-chart .graph-table-wrapper {
+  float: left;
+  width: 40%;
+  margin-top: 50px;
+}
+.state-election-map-wrapper .left-chart .graph-table-wrapper table {
+  width: 100%;
+  font-family: Roboto;
+}
+.state-election-map-wrapper .left-chart .graph-table-wrapper table th, .state-election-map-wrapper .left-chart .graph-table-wrapper table td {
+  padding: 3px;
+}
+
 /*Start CSS LIVE tv */
 div#playerContainer {
   display: none !important;

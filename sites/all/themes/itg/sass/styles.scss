@@ -8764,6 +8764,7 @@ section.sidebar{
             line-height: 20px;
             padding: 0;
             width: 145px;
+            z-index: 9;
         }     
         .map-result-detail{
             position: absolute;
@@ -8835,6 +8836,12 @@ section.sidebar{
               }              
             }
         }
+        .social-share{
+          li{
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
     }
     .graph-design{                
         .highcharts-container{
@@ -8891,6 +8898,43 @@ section.sidebar{
 }
 /* CSS For Election Page End */
 
+/* CSS FOR state-election-map-wrapper */
+.state-election-map-wrapper{
+  .elction_map, .left-chart{
+    display: inline-block;
+    vertical-align: top;
+    padding: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 3px 0 #ddd;
+    width: 100%;
+  }
+  .left-chart{
+    margin-top: 40px;
+    position: relative;
+    .graph-design{
+      float: left;
+      width: 60%;
+      svg{
+        > text{
+          fill: #009ef0 !important;
+          font-family: Roboto;
+        }
+      }
+    }
+    .graph-table-wrapper{
+      float: left;
+      width: 40%;
+      margin-top: 50px;
+      table{
+        width: 100%;
+        font-family: Roboto;
+        th, td{
+          padding: 3px;
+        }
+      }
+    }
+  }
+}
 
 /*Start CSS LIVE tv */
 div#playerContainer{

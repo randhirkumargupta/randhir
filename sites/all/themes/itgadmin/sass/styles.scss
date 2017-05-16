@@ -6468,6 +6468,9 @@ div.node{
       text-indent: -9999px;
       width: 28px;
     }
+    .ajax-progress{
+      display: none;
+    }
   }  
 }
 #edit-field-story-extra-large-image{
@@ -11804,5 +11807,14 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   span.error{
     font-size: 12px;
     margin-top: -10px;
+  }
+}
+.view-movies-master{
+  .view-filters{
+    .views-exposed-form{
+      .views-widget-filter-tid{
+        width: 300px;
+      }
+    }
   }
 }
