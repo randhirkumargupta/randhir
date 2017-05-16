@@ -574,8 +574,6 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
   if (function_exists("itg_mail_templates_get_mailcontent")) {
     $get_mail_data = itg_mail_templates_get_mailcontent($task_type, $expiry_task);
     $subject = $get_mail_data->field_mail_subject_task_idea[LANGUAGE_NONE][0]['value'];
-    $to_assignee = str_replace('[itg_mail_token:itg_task_assignee]', $var->ur_mail, $get_mail_data->field_to_assignee[LANGUAGE_NONE][0]['value']);
-    $to_assigner = str_replace('[itg_mail_token:itg_task_assigner]', $var->mail, $get_mail_data->field_to_assigner[LANGUAGE_NONE][0]['value']);
   }
   
   global $base_url;
@@ -596,6 +594,7 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
       'subject' => $subject,
     );
     $to_assignee = 'gourav.walia@kelltontech.com';
+//    $to_user_mail = array($var->mail, $var->ur_mail);
     $mail = drupal_mail('itg_task_allocation', 'exp_task_rem', $to_assignee, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
       return TRUE;
@@ -626,6 +625,7 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
       'subject' => $subject,
     );
     $to_assigner = 'gourav.walia@kelltontech.com';
+//    $to_user_mail = array($var->mail, $var->ur_mail);
     $mail = drupal_mail('itg_task_allocation', 'exp_task_rem', $to_assigner, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
       return TRUE;

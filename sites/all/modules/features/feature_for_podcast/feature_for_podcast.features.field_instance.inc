@@ -717,7 +717,7 @@ function feature_for_podcast_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_extra_large_image',
     'label' => 'Extra large image',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'alt_field' => 1,
       'default_image' => 0,
@@ -740,6 +740,8 @@ function feature_for_podcast_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,

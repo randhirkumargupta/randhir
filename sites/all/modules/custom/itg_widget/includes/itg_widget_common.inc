@@ -3173,3 +3173,4 @@ function itg_widget_get_active_taxonomy($taxonomy = array()) {
   }
   return $taxonomy;
 }
+

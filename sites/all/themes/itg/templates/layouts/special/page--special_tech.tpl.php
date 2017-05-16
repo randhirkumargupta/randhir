@@ -563,7 +563,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-13" widget-style="buying-guid" >
+                    <div class="data-holder" id="itg-block-13" data-widget-style="buying-guid" >
                       <?php
                         if (isset($widget_data['itg-block-13']['widget'])) {
                           print $widget_data['itg-block-13']['widget']; 
@@ -595,7 +595,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-14" widget-style="tech-tips" >
+                    <div class="data-holder" id="itg-block-14" data-widget-style="tech-tips" >
                       <?php
                         if (isset($widget_data['itg-block-14']['widget'])) {
                           print $widget_data['itg-block-14']['widget']; 
@@ -634,7 +634,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-15" widget-style="in-depth">
+                    <div class="data-holder" id="itg-block-15" data-widget-style="in-depth">
                       <?php
                         if (isset($widget_data['itg-block-15']['widget'])) {
                           print $widget_data['itg-block-15']['widget']; 
@@ -666,7 +666,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-16" widget-style="talking-point">
+                    <div class="data-holder" id="itg-block-16" data-widget-style="talking-point">
                       <?php
                         if (isset($widget_data['itg-block-4']['widget'])) {
                           print $widget_data['itg-block-4']['widget']; 

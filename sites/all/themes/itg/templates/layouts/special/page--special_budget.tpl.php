@@ -389,7 +389,7 @@ if (!empty($device[0])) {
                                         </div>
   <?php } ?>  
 
-                                      <div class="data-holder" id="itg-block-7" widget-style="india-inc-on-budget">
+                                      <div class="data-holder" id="itg-block-7" data-widget-style="india-inc-on-budget">
                                         <?php
                                           if (isset($widget_data['itg-block-7']['widget'])) {
                                             print $widget_data['itg-block-7']['widget']; 
@@ -422,7 +422,7 @@ if (!empty($device[0])) {
                                         </div>
   <?php } ?>  
 
-                                      <div class="data-holder" id="itg-block-8" widget-style="budget-decoded">
+                                      <div class="data-holder" id="itg-block-8" data-widget-style="budget-decoded">
                                         <?php
                                           if (isset($widget_data['itg-block-8']['widget'])) {
                                             print $widget_data['itg-block-8']['widget']; 
@@ -455,7 +455,7 @@ if (!empty($device[0])) {
                                         </div>
   <?php } ?>  
 
-                                      <div class="data-holder" id="itg-block-9" widget-style="budget-reactions">
+                                      <div class="data-holder" id="itg-block-9" data-widget-style="budget-reactions">
                                         <?php
                                           if (isset($widget_data['itg-block-9']['widget'])) {
                                             print $widget_data['itg-block-9']['widget']; 

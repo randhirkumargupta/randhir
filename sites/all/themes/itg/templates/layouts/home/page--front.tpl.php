@@ -598,7 +598,7 @@ if ($theme != 'itgadmin') {
                         </div>
                         <?php } ?>  
 
-                      <div class="data-holder" id="itg-block-13" widget-style="home-watch">
+                      <div class="data-holder" id="itg-block-13" data-widget-style="home-watch">
                         <?php
                         if (isset($widget_data['itg-block-13']['widget'])) {
                           print $widget_data['itg-block-13']['widget'];
@@ -711,7 +711,7 @@ if ($theme != 'itgadmin') {
                         </div>
                         <?php } ?>  
 
-                      <div class="data-holder" id="itg-block-16" widget-style="home-shows">
+                      <div class="data-holder" id="itg-block-16" data-widget-style="home-shows">
                         <?php
                         if (isset($widget_data['itg-block-16']['widget'])) {
                           print $widget_data['itg-block-16']['widget'];
