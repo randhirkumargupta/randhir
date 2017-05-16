@@ -557,6 +557,7 @@ function itg_term_form_views_exposed_form_alter(&$form , &$form_state) {
  * @param object reference $query
  */
 function itg_term_views_query_alter(&$view , &$query) {
+
   if (isset($view->name) && $view->name === 'tags_management') {
     if (isset($_GET['created']['max']['date'])) {
 
@@ -574,6 +575,36 @@ function itg_term_views_query_alter(&$view , &$query) {
           }
         }
       }
+    }
+  }
+   if (isset($view->name) && $view->name === 'task') {
+    if (isset($_GET['field_task_team_member_target_id']) && !empty($_GET['field_task_team_member_target_id'])) {
+    
+        foreach ($query->where[1]['conditions'] as $idx => $condition) {
+          if ($condition['field'] == 'field_data_field_task_team_member.field_task_team_member_target_id') {
+     
+          $user_info = user_load_by_mail($_GET['field_task_team_member_target_id']);
+     
+            $view->query->where[1]['conditions'][$idx]['value'] = $user_info->uid;
+          
+        }
+      }
+    }
+  }
+  
+   if (isset($view->name) && $view->name == 'movies_master') {
+    
+    if (isset($_GET['date_filter']['value']['year']) && !empty($_GET['date_filter']['value']['year'])) {
+    
+        foreach ($query->where[1]['conditions'] as $idx => $condition) {
+         
+          if (!empty($condition['value'][':taxonomy_term_data_date_filter'])) {
+
+            $view->query->where[1]['conditions'][$idx]['value'][':taxonomy_term_data_date_filter'] = $_GET['date_filter']['value']['year']-1;
+          
+        }
+      }
+  
     }
   }
 }
