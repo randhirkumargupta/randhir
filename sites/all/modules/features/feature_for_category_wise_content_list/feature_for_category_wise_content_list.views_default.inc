@@ -291,6 +291,12 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['fields']['weight']['table'] = 'itg_widget_order';
   $handler->display->display_options['fields']['weight']['field'] = 'weight';
   $handler->display->display_options['fields']['weight']['separator'] = '';
+  /* Field: Content: video_duration */
+  $handler->display->display_options['fields']['field_video_duration']['id'] = 'field_video_duration';
+  $handler->display->display_options['fields']['field_video_duration']['table'] = 'field_data_field_video_duration';
+  $handler->display->display_options['fields']['field_video_duration']['field'] = 'field_video_duration';
+  $handler->display->display_options['fields']['field_video_duration']['label'] = '';
+  $handler->display->display_options['fields']['field_video_duration']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Section wise ordering content: weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
@@ -324,7 +330,7 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['value'] = '1208791';
+  $handler->display->display_options['filters']['cat_id']['value'] = '1207726';
   $handler->display->display_options['block_description'] = 'Section Wise Content On Recency';
 
   /* Display: Section Wise Content grid view */
@@ -431,6 +437,12 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['fields']['field_video_kicker']['field'] = 'field_video_kicker';
   $handler->display->display_options['fields']['field_video_kicker']['label'] = '';
   $handler->display->display_options['fields']['field_video_kicker']['element_label_colon'] = FALSE;
+  /* Field: Content: video_duration */
+  $handler->display->display_options['fields']['field_video_duration']['id'] = 'field_video_duration';
+  $handler->display->display_options['fields']['field_video_duration']['table'] = 'field_data_field_video_duration';
+  $handler->display->display_options['fields']['field_video_duration']['field'] = 'field_video_duration';
+  $handler->display->display_options['fields']['field_video_duration']['label'] = '';
+  $handler->display->display_options['fields']['field_video_duration']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Section wise ordering content: weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';

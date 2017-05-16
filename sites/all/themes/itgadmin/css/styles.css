@@ -775,7 +775,7 @@ a.ckeditor_links:hover {
   text-decoration: underline;
 }
 
-.astrick, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-1 .form-type-textfield > label:after, [id*="field-newsl-add-news-values"] tbody tr:first-child td .field-name-field-news-cid .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-pti-words-limit .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-survey-end-date fieldset > legend:after, .edit-field-pti-magazine-kicker .form-type-textfield > label:after, .node-story-form .form-field-name-field-story-category .form-type-hierarchical-select > label:after, .node-story-form .form-field-name-field-story-issue-date .fieldset-legend:after {
+.astrick, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-1 .form-type-textfield > label:after, [id*="field-newsl-add-news-values"] tbody tr:first-child td .field-name-field-news-cid .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-pti-words-limit .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-survey-end-date fieldset > legend:after, .edit-field-pti-magazine-kicker .form-type-textfield > label:after, .node-story-form .form-field-name-field-story-category .form-type-hierarchical-select > label:after, .node-story-form .form-field-name-field-story-issue-date .fieldset-legend:after, .node-reporter-form .form-field-name-field-reporter-profile-type .form-type-select > label:after, .node-reporter-form .form-field-name-field-byline-company .form-type-select > label:after, .node-reporter-form .form-field-name-field-byline-department .form-type-select > label:after {
   content: '*';
   color: red;
 }
@@ -12484,4 +12484,9 @@ div#edit-byline-names-wrapper {
   text-align: right;
   margin: 0;
   padding: 0 !important;
+}
+
+.tag-box-input-date span.error {
+  font-size: 12px;
+  margin-top: -10px;
 }

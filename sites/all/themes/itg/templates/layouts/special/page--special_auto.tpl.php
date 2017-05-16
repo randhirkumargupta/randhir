@@ -179,7 +179,7 @@ if ($theme != 'itgadmin') {
                                   <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                 </div>  
                               <?php } ?>                   
-                            <div class="data-holder" widget-style="auto-road-trip" id="itg-block-3">
+                            <div class="data-holder" data-widget-style="auto-road-trip" id="itg-block-3">
                               <?php
                                 if (isset($widget_data['itg-block-3']['widget'])) {
                                   print $widget_data['itg-block-3']['widget']; 
@@ -413,7 +413,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-9" widget-style="auto-tips-and-tricks">
+                    <div class="data-holder" id="itg-block-9" data-widget-style="auto-tips-and-tricks">
                       <?php
                         if (isset($widget_data['itg-block-9']['widget'])) {
                           print $widget_data['itg-block-9']['widget']; 
