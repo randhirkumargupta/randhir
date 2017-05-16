@@ -29,10 +29,10 @@ if (!empty($data)) {
               }
               ?>
             
-           <a  href="<?php print $entity_data_node['node_url']; ?>?category=<?php print $entity_data_node['cat']; ?>&sid=<?php print $entity_data_node['sid']; ?>">
+           <a href="<?php print $entity_data_node['node_url']; ?>?category=<?php print $entity_data_node['cat']; ?>&sid=<?php print $entity_data_node['sid']; ?>">
               <span class="flex-count"><i class="fa fa-camera"></i> <?php echo $entity_data_node['count'] . ' ' . $itext; ?></span>
               <span class="pic-tit" title="<?php echo $entity_data_node['title']; ?>"><?php print $entity_data_node['title']; ?></span>
-              <span class="overlay"></span>
+              <span title="<?php echo $entity_data_node['image_title']; ?>" class="overlay"></span>
             </a>
           </div>  
 
@@ -45,22 +45,3 @@ if (!empty($data)) {
   </div>
 
 <?php } ?>
-
-<!--This Uncompressed CSS is for photo rolling slider to set title and image count visibleness for centered image.  -->
-<style>
-  .carousel .slides .slideItem[style*="width: 645px"] span{
-    opacity: 1;
-    -webkit-transition: all 500ms ease .2s;
-    -moz-transition: all 500ms ease .2s;
-    -o-transition: all 500ms ease .2s;
-    transition: all 500ms ease .2s;
-  }
-  .carousel .slides .slideItem[style*="width: 645px"] span.overlay{
-    opacity: 0;
-    -webkit-transition: all 500ms ease .2s;
-    -moz-transition: all 500ms ease .2s;
-    -o-transition: all 500ms ease .2s;
-    transition: all 500ms ease .2s;
-  }
-</style>  
-

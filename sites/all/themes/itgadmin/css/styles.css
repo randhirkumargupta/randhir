@@ -6724,6 +6724,9 @@ div.node #comments h2 {
   text-indent: -9999px;
   width: 28px;
 }
+[id*="field-story-highlights-values"] + div.clearfix .ajax-progress, [id*="field-story-highlights-values"] + div.description + div.clearfix .ajax-progress {
+  display: none;
+}
 
 #edit-field-story-extra-large-image img {
   cursor: pointer;
@@ -12489,4 +12492,8 @@ div#edit-byline-names-wrapper {
 .tag-box-input-date span.error {
   font-size: 12px;
   margin-top: -10px;
+}
+
+.view-movies-master .view-filters .views-exposed-form .views-widget-filter-tid {
+  width: 300px;
 }
