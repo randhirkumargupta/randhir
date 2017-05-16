@@ -158,6 +158,7 @@ function generateNewsCategoryList($tid, $pageno) {
       $comment_cont = getCommentsCount($nid);
 
       // create date formating
+      $firebase_url = get_node_firebase_weburl($nid);
       $create_date = date("F d, Y", $created);
       $create_datetime = date("Y-m-d H:i:s", $created);
       $changed_datetime = date("Y-m-d H:i:s", $changed);
@@ -165,7 +166,7 @@ function generateNewsCategoryList($tid, $pageno) {
             $news_list_array[$listcount]['n_id'] = "$nid";
             $news_list_array[$listcount]['n_type'] = "$type";
             $news_list_array[$listcount]['n_is_sponsored'] = "0";
-            $news_list_array[$listcount]['n_share_link'] = "Universal_link";
+            $news_list_array[$listcount]['n_share_link'] = "$firebase_url";
             $news_list_array[$listcount]['n_title'] = "$title";
             $news_list_array[$listcount]['n_short_desc'] = "$field_story_kicker_text_value";
             $news_list_array[$listcount]['n_primary_tag'] = "tag_name";
@@ -311,6 +312,7 @@ function getVideolist($nid){
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
 
       // create date formating
+      $firebase_url = get_node_firebase_weburl($nid);
       $create_date = date("F d, Y", $created);
       $create_datetime = date("Y-m-d H:i:s", $created);
       $changed_datetime = date("Y-m-d H:i:s", $changed);
@@ -327,7 +329,7 @@ function getVideolist($nid){
         $videolist['nv_download_url'] = "MP4 URL";
         $videolist['nv_view_count'] = "";
         $videolist['nv_comment_count'] = "";
-        $videolist['nv_share_url'] = "Universal link";
+        $videolist['nv_share_url'] = "$firebase_url";
         $videolist['nv_updated_datetime'] = "$changed_datetime";
         $videolist['nv_duration'] = "$field_video_duration_value";
         $videolist['nv_show_ad'] = "0";

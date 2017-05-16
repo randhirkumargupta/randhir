@@ -156,6 +156,7 @@ function generateVideoCategoryList($tid, $pageno) {
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
 
       // create date formating
+      $firebase_url = get_node_firebase_weburl($nid);
       $create_date = date("F d, Y", $created);
       $create_datetime = date("Y-m-d H:i:s", $created);
       $changed_datetime = date("Y-m-d H:i:s", $changed);
@@ -172,7 +173,7 @@ function generateVideoCategoryList($tid, $pageno) {
         $photo_list_array[$listcount]['v_download_url'] = "MP4 URL";
         $photo_list_array[$listcount]['v_view_count'] = "0";
         $photo_list_array[$listcount]['v_comment_count'] = "10";
-        $photo_list_array[$listcount]['v_share_url'] = "Universal link";
+        $photo_list_array[$listcount]['v_share_url'] = "$firebase_url";
         $photo_list_array[$listcount]['v_updated_datetime'] = "$changed_datetime";
         $photo_list_array[$listcount]['v_duration'] = "$field_video_duration_value";
         $photo_list_array[$listcount]['v_show_ad'] = "0";
@@ -348,6 +349,7 @@ function generateProgramCategoryList($tid, $pageno) {
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
 
       // create date formating
+      $firebase_url = get_node_firebase_weburl($nid);
       $create_date = date("Y-m-d H:i:s", $created);
       $create_datetime = date("Y-m-d H:i:s", $created);
       $changed_datetime = date("Y-m-d H:i:s", $changed);
@@ -364,7 +366,7 @@ function generateProgramCategoryList($tid, $pageno) {
         $photo_list_array[$listcount]['p_download_url'] = "MP4 URL";
         $photo_list_array[$listcount]['p_view_count'] = "0";
         $photo_list_array[$listcount]['p_comment_count'] = "10";
-        $photo_list_array[$listcount]['p_share_url'] = "Universal link";
+        $photo_list_array[$listcount]['p_share_url'] = "$firebase_url";
         $photo_list_array[$listcount]['p_updated_datetime'] = "$changed_datetime";
         $photo_list_array[$listcount]['p_duration'] = "$field_video_duration_value";
         $photo_list_array[$listcount]['p_show_ad'] = "0";

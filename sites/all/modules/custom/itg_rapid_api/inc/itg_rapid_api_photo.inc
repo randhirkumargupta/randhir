@@ -156,7 +156,7 @@ function generatePhotoCategoryList($tid, $pageno) {
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
 
       // create date formating
-      
+      $firebase_url = get_node_firebase_weburl($nid);
       $create_date = date("Y-m-d H:i:s", $created);
       $changed_datetime = date("Y-m-d H:i:s", $changed);
       // photo detail for listing
@@ -166,7 +166,7 @@ function generatePhotoCategoryList($tid, $pageno) {
        $photo_list_array[$loop_count]['p_large_image'] = "$file_medium_img_url";
        $photo_list_array[$loop_count]['p_count'] = "$toptlapics";
        $photo_list_array[$loop_count]['p_comment_count'] = "$comment_cont";
-       $photo_list_array[$loop_count]['p_share_link'] = "Universal link";
+       $photo_list_array[$loop_count]['p_share_link'] = "$firebase_url";
        $photo_list_array[$loop_count]['p_updated_datetime'] = "$changed_datetime";
        $loop_count++;
     }
@@ -240,7 +240,7 @@ function generatePhotoDeatilList($id){
     $comment_cont = getCommentsCount($nid);
     
     //data array building
-    
+    $firebase_url = get_node_firebase_weburl($nid);
     $data_array['id'] = "$nid";
     $data_array['title'] = "$title";
     $data_array['updated_datetime'] = "$changed_datetime";
@@ -248,7 +248,7 @@ function generatePhotoDeatilList($id){
     $data_array['subcategory_title'] = "$term_name";
     $data_array['photo_count'] = "$toptlapics";
     $data_array['comment_count'] = "$comment_cont";
-    $data_array['share_link'] = "Universal link";
+    $data_array['share_link'] = "$firebase_url";
     $galleryimg = $node->field_gallery_image['und'];
     
     // list array building
