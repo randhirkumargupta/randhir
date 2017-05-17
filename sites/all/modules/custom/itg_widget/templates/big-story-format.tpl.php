@@ -86,7 +86,7 @@ if (!empty($data['node_data'])) :
           $short_url = shorten_url($actual_link, 'goo.gl');
           ?>
         <h1 title="<?php echo strip_tags($node_title); ?>" class="big-story-first big-story-<?php print $data['node_data']->nid . ' ' . $red_dot_class ?>">
-            <?php echo l($node_title, "node/" . $data['node_data']->nid, array('html' => TRUE , "attributes" => array("title" => $node_title))); ?>
+            <?php echo l($node_title, "node/" . $data['node_data']->nid, array('html' => TRUE , "attributes" => array("title" => $share_title))); ?>
           </h1>
         <?php endif; ?>
         <p>
