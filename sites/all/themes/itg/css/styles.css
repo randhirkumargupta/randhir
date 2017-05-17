@@ -4269,6 +4269,16 @@ h1.category-heading {
   display: none;
 }
 
+.view-category-wise-content-list .pic {
+  position: relative;
+}
+.view-category-wise-content-list .pic figcaption {
+  position: absolute;
+  bottom: 5px;
+  left: 7px;
+  color: #fff;
+}
+
 .view-blog-listing .catagory-listing .detail .blog-anchor {
   color: #bb0a0a;
 }
@@ -14002,6 +14012,14 @@ span.close_btt {
 .page-quiz-user-list table th:last-child {
   border-radius: 0 5px 0 0;
   border-right: 1px solid #e0e0e0;
+}
+
+.page-podcast #page-title {
+  display: none;
+}
+
+.nested-taxonomy-tree a:hover {
+  color: #a00606 !important;
 }
 
 @media (min-width: 768px) {
