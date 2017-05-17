@@ -7073,7 +7073,7 @@ div.node #comments h2 {
   height: 100%;
 }
 
-.ui-draggable {
+.ui-draggable.ui-draggable-dragging {
   background-color: rgba(31, 181, 173, 0.8);
   color: #fff;
   cursor: all-scroll;
@@ -12485,4 +12485,8 @@ div#edit-byline-names-wrapper {
 
 .view-movies-master .view-filters .views-exposed-form .views-widget-filter-tid {
   width: 300px;
+}
+
+fieldset#edit-xmlsitemap {
+  display: none !important;
 }
