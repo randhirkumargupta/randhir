@@ -66,6 +66,11 @@ function itg_mail_templates_tokenstable() {
                 <td>A token that will be used for ITG Loyalty Expiry.</td>
               </tr>
               <tr>
+                <td>ITG Loyalty My Following</td>
+                <td>[itg_mail_token:itg_my_following]</td>
+                <td>A token that will be used for ITG My Following.</td>
+              </tr>
+              <tr>
                 <td>ITG Loyalty User</td>
                 <td>[itg_mail_token:itg_loyalty_user]</td>
                 <td>A token that will be used for ITG Loyalty User Name.</td>
@@ -116,9 +121,10 @@ function itg_mail_templates_tokenstable() {
                 <td>[itg_mail_token:itg_product_name]</td>
                 <td>A token that will be used for ITG Product Name.</td>
               </tr>
-              <tr>  
+              
+              <tr>
                 <td colspan="3"><b>Tokens For User/Site</b></td>
-              </tr> 
+              </tr>
               <tr>
                 <td>ITG User First Name</td>
                 <td>[itg_mail_token:itg_account_user_fname]</td>

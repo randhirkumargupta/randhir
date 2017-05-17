@@ -751,6 +751,7 @@ function itg_following_details_callback() {
   }
 }
 
+
 /**
  * Implements hook_user_login().
  */
@@ -784,3 +785,4 @@ function itg_personalization_refer_friend_existence($mail) {
   $result = $query->execute();
   return $record = $result->fetchAll(PDO::FETCH_ASSOC);
 }
+
