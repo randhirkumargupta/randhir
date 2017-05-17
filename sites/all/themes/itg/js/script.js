@@ -586,6 +586,7 @@ jQuery(document).ready(function () {
 
   jQuery(document).on('click', '.all-menu', function () {
     jQuery('#newlist').slideToggle();
+    jQuery('.third-level-menu #overflow').hide();
   });
 
   jQuery(document).on('click', function () {
@@ -983,7 +984,7 @@ jQuery(window).load(function () {
     e.stopPropagation();
   });
   jQuery(document).on('click', function () {
-    jQuery('#overflow').hide();
+    jQuery('.third-level-menu #overflow').hide();
   });
 
 });
