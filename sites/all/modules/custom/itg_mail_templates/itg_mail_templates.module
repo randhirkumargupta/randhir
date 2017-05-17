@@ -24,11 +24,26 @@ function itg_mail_templates_form_alter(&$form, &$form_state, $form_id) {
  * {@inheritdoc}
  */
 function itg_mail_templates_node_validate($node, $form, &$form_state) {
+  
   if (empty($form['nid']['#value'])) {
     $title = isset($node->title) ? $node->title : '';
     $data_val['title'] = array();
 
     if ($node->title == 'Quiz Completion') {
+      $result = db_query("SELECT title from {node} n WHERE n.title = :title AND n.type = :type", array(":title" => $title, ":type" => "mail_templates"))->fetchField();
+      if (!empty($result)) {
+        form_set_error('title', t("Mail Template for @title already Exists, you can only update this mail template", array('@title' => $title)));
+      }
+    }
+
+    if ($node->title == 'My Following') {
+      $result = db_query("SELECT title from {node} n WHERE n.title = :title AND n.type = :type", array(":title" => $title, ":type" => "mail_templates"))->fetchField();
+      if (!empty($result)) {
+        form_set_error('title', t("Mail Template for @title already Exists, you can only update this mail template", array('@title' => $title)));
+      }
+    }
+    
+    if ($node->title == 'Redeem Points') {
       $result = db_query("SELECT title from {node} n WHERE n.title = :title AND n.type = :type", array(":title" => $title, ":type" => "mail_templates"))->fetchField();
       if (!empty($result)) {
         form_set_error('title', t("Mail Template for @title already Exists, you can only update this mail template", array('@title' => $title)));
@@ -367,8 +382,16 @@ function itg_mail_templates_get_mailcontent($key, $task_event, $ugc_status) {
   }
 
   if (is_string($key)) {
-    $get_title = explode("_", $key);
-    $title = $get_title[1];
+    if ($key == 'My Following') {
+      $title = $key;
+    }
+    elseif ($key == 'Redeem Points') {
+      $title = $key;
+    } 
+    else {
+      $get_title = explode("_", $key);
+      $title = $get_title[1];
+    }
     $query = db_select('node', 'n');
     $query->fields('n');
     $query->condition('n.status', 1, '=');
