@@ -160,19 +160,20 @@ function mail_templates_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Loyalty Points',
+    'label' => 'Loyalty Points/Redeem Points/My Following',
     'weight' => '7',
     'children' => array(
       0 => 'field_mail_body_loyalty',
       1 => 'field_mail_subject_loyalty',
+      2 => 'field_my_following_redeem_points',
     ),
     'format_type' => 'div',
     'format_settings' => array(
-      'label' => 'Loyalty Points',
+      'label' => 'Loyalty Points/Redeem Points/My Following',
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
-        'classes' => 'mail-template-category loyalty_points_expiration',
+        'classes' => 'mail-template-category loyalty_points_expiration my_following redeem_points',
         'description' => '',
         'show_label' => '1',
         'label_element' => 'h2',
@@ -229,7 +230,7 @@ function mail_templates_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Photo Gallery',
-    'weight' => '14',
+    'weight' => '15',
     'children' => array(
       0 => 'field_mail_body_photo_gallery',
       1 => 'field_mail_subject_photo_gallery',
@@ -264,7 +265,7 @@ function mail_templates_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Podcast',
-    'weight' => '13',
+    'weight' => '14',
     'children' => array(
       0 => 'field_mail_body_podcast',
       1 => 'field_mail_subject_podcast',
@@ -368,7 +369,7 @@ function mail_templates_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Quiz Completion',
-    'weight' => '16',
+    'weight' => '20',
     'children' => array(
       0 => 'field_mail_body_quiz_completion',
       1 => 'field_mail_subject_quiz_completi',
@@ -477,8 +478,6 @@ function mail_templates_field_group_info() {
       1 => 'field_mail_subject_body',
       2 => 'field_mail_subject_task_idea',
       3 => 'field_new_task_status',
-      4 => 'field_to_assignee',
-      5 => 'field_to_assigner',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -544,7 +543,7 @@ function mail_templates_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Upload Video',
-    'weight' => '15',
+    'weight' => '18',
     'children' => array(
       0 => 'field_mail_body_video',
       1 => 'field_mail_subject_video',
@@ -574,7 +573,7 @@ function mail_templates_field_group_info() {
   t('Blog');
   t('CMS mail template');
   t('Follow Story');
-  t('Loyalty Points');
+  t('Loyalty Points/Redeem Points/My Following');
   t('Password Changed');
   t('Photo Gallery');
   t('Podcast');
