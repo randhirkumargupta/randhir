@@ -726,7 +726,7 @@ function itg_content_inactive() {
  * @return string
  *   Returns node title.
  */
-function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255) {
+function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255 , $is_long_headline = FALSE) {
   $arg = arg();
   $titlte = "";
   $positions_array = array();
@@ -773,7 +773,7 @@ function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255) {
       $right_smiles .='</span>';
     }
   }  
-  if (count($result) && !is_numeric($arg[1]) && $arg[0] != 'node') {
+  if (count($result) && !$is_long_headline) {
     if(!empty($left_smiles) || !empty($right_smiles)) {
       $titlte = ucfirst(mb_strimwidth($result[0]['field_story_short_headline_value'], $min_limit, $max_limit, ".."));    
     }
