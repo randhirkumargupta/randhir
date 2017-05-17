@@ -19,7 +19,6 @@ class views_handler_mail_templates extends views_handler_field {
 
   function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
-
     unset($form['alter']['alter_text']);
     unset($form['alter']['text']['#dependency']);
     unset($form['alter']['text']['#process']);
@@ -44,6 +43,11 @@ class views_handler_mail_templates extends views_handler_field {
     elseif ($values->_field_data['nid']['entity']->field_mail_templates_category['und'][0]['value'] == 'quiz_completion') {
       return t('Quiz Completion');
     }
+    elseif ($values->_field_data['nid']['entity']->field_mail_templates_category['und'][0]['value'] == 'my_following') {
+      return t('My Following');
+    }
+    elseif ($values->_field_data['nid']['entity']->field_mail_templates_category['und'][0]['value'] == 'redeem_points') {
+      return t('Redeem Points');
+    }
   }
-
 }

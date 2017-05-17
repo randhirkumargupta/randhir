@@ -20,6 +20,7 @@
  *   Modified mail content.
  */
 function itg_common_get_mail_content($data, $to, $key = NULL, $subject = NULL) {
+  
   // refer a friend code end here
   if ($key == 'refer_friend') {
     $mail_content = itg_common_notification_mail_content($data, $key);
@@ -29,7 +30,17 @@ function itg_common_get_mail_content($data, $to, $key = NULL, $subject = NULL) {
       );
       watchdog('Refer_a_friend_mail', '<pre>'.print_r($params, true).'</pre>');
       $mail = drupal_mail('itg_common', $key, $email, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  } elseif ($key == 'personalization_mail') {
+    
+    $params = array(
+      'body' => $data,  
+      'subject' => $subject,
+    );
+//    $to = 'gourav.walia@kelltontech.com';
+    watchdog('Personalization Mail', '<pre>'.print_r($params, true).'</pre>');
+    $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   }
+  
   else {
     // refer a friend code end here
     $mail_content = itg_common_notification_mail_content($data, $key);
@@ -79,7 +90,7 @@ function itg_common_notification_mail_content($data , $key) {
 //      return theme('itg_loyalty_point_notification', array('data' => $data));    
       break;
     case 'personalization_mail':
-      return theme('itg_personalization_personalization_mail', array('data' => $data));
+//      return theme('itg_personalization_personalization_mail', array('data' => $data));
       break;
   }
   

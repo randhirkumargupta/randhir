@@ -1889,14 +1889,14 @@ function mail_templates_conditional_fields_default_fields() {
         ),
       ),
       'selector' => '',
-      'values_set' => 1,
+      'values_set' => 3,
       'value_form' => 'loyalty_points_expiration',
-      'value' => array(
-        0 => array(
-          'value' => 'loyalty_points_expiration',
-        ),
+      'values' => array(
+        0 => 'loyalty_points_expiration',
+        1 => 'my_following',
+        2 => 'redeem_points',
       ),
-      'values' => array(),
+      'value' => array(),
     ),
   );
 
@@ -7559,14 +7559,14 @@ function mail_templates_conditional_fields_default_fields() {
         ),
       ),
       'selector' => '',
-      'values_set' => 1,
+      'values_set' => 3,
       'value_form' => 'loyalty_points_expiration',
-      'value' => array(
-        0 => array(
-          'value' => 'loyalty_points_expiration',
-        ),
+      'values' => array(
+        0 => 'loyalty_points_expiration',
+        1 => 'my_following',
+        2 => 'redeem_points',
       ),
-      'values' => array(),
+      'value' => array(),
     ),
   );
 
