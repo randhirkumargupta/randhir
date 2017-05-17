@@ -118,7 +118,7 @@ function itg_mail_templates_tokenstable() {
               </tr>
               <tr>  
                 <td colspan="3"><b>Tokens For User/Site</b></td>
-              </tr>
+              </tr> 
               <tr>
                 <td>ITG User First Name</td>
                 <td>[itg_mail_token:itg_account_user_fname]</td>
