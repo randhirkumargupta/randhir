@@ -978,8 +978,12 @@ jQuery(window).load(function () {
     navigationResize();
   }
 
-  jQuery('.third-level-menu li.more span').click(function () {
-    jQuery(this).next().slideToggle();
+  jQuery('.third-level-menu li.more span').click(function (e) {
+    jQuery(this).next().stop().slideToggle();
+    e.stopPropagation();
+  });
+  jQuery(document).on('click', function () {
+    jQuery('#overflow').hide();
   });
 
 });
