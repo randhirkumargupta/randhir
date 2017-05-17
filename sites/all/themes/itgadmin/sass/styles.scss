@@ -6846,7 +6846,7 @@ div.node{
     }
   }
 }
-.ui-draggable{
+.ui-draggable.ui-draggable-dragging{
   background-color: rgba(31, 181, 173, .8);
   color: #fff;
   cursor: all-scroll;
@@ -11810,4 +11810,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       }
     }
   }
+}
+fieldset#edit-xmlsitemap{
+  display: none !important;
 }
