@@ -98,6 +98,69 @@ function itg_seo_form_alter(&$form , &$form_state , $form_id) {
     //$form['additional_settings']['#access'] = FALSE;
     $form['#after_build'][] = 'itg_additional_settings_element_hide';
   }
+  
+  // code for pathauto
+  $node_form_array = array(
+    'photogallery_node_form' ,
+    'story_node_form' ,
+    'videogallery_node_form' ,
+    'podcast_node_form' ,
+    'food_news_node_form' ,
+    'cooking_tips_node_form' ,
+    'recipe_node_form' ,
+    'blog_node_form' ,
+    'reporter_node_form' ,
+    'itg_funalytics_node_form' ,
+    'mega_review_critic_node_form' ,
+    'page_node_form' ,
+  );
+  if (in_array($form['#form_id'] , $node_form_array)) {
+    $form['#after_build'][] = 'itg_custom_meta_tags_alias_set';
+    // Handel case when pathauto checkbox status.
+    $form['actions']['submit']['#submit'][] = 'itg_custom_pathauto_save_sef_status';
+    $form['#after_build'][] = 'itg_custom_pathauto_sef_checkbox_status';
+  }
+}
+
+
+/**
+ * Extra meta tags element hide from form
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_custom_meta_tags_alias_set($form , &$form_state) {
+  $nodeid = arg(1);
+  if (isset($form['path']) && !empty($form['path'])) {
+    $edited_sef_url = itg_get_sef_url($form['path']['alias']['#value'] , $nodeid);
+    //pr($edited_sef_url);
+    $form['path']['alias']['#value'] = $edited_sef_url; // itg_common_custompath_insert_val($form['path']['alias']['#value']);
+  }
+  return $form;
+}
+
+function itg_custom_pathauto_sef_checkbox_status($form , &$form_state) {
+  if (!empty($form['#node']->nid)) {
+    $entity_type = $form['#node']->type;
+    $entity_id = $form['#node']->nid;
+    $state = itg_pathauto_get_sef_url_state($entity_id , $entity_type);
+    if (isset($state)) {
+      $pathauto_state = $state;
+    }
+    else {
+      $pathauto_state = 0;
+    }
+  }
+  else {
+    //Give default sef checked while node/add form.
+    $pathauto_state = 1;
+  }
+  // Handel checked unchecked of sef url;
+  $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
+  $form['path']['pathauto']['#default_value'] = $pathauto_state;
+  $form['path']['pathauto']['#value'] = $pathauto_state;
+  $form['path']['pathauto']['#checked'] = $pathauto_state;
+  return $form;
 }
 
 function itg_seo_mb_substr($str , $start , $end) {
@@ -375,4 +438,22 @@ function itg_seo_theme_registry_alter(&$theme_registry) {
   $theme_registry['views_data_export_xml_body']['theme path'] = drupal_get_path('module' , 'itg_seo') . '/templates';
   $theme_registry['views_data_export_xml_body']['path'] = drupal_get_path('module' , 'itg_seo') . '/templates';
   $theme_registry['views_data_export_xml_body']['template'] = 'views-data-export-xml-body';
+}
+
+
+/**
+ * {@inheritdoc}
+ */
+function itg_seo_pathauto_alias_alter(&$alias , array &$context) {
+  if (function_exists('is_valid_content_type_for_sef_url') && is_valid_content_type_for_sef_url($context['data']['node']->type)) {
+    // Handel case if user selected  Generate automatic Sef URL
+    // $alias is overridden
+    // If you don't want to overridden then use conatinate.
+    // Example : $alias .= '.html';
+    $alias = $context['data']['node']->path['alias'];
+    $node_id = $context['data']['node']->nid;
+    $node_type = $context['data']['node']->type;
+    $pathauto_state = 1;
+    itg_custom_pathauto_state_save($node_type , $node_id , $pathauto_state);
+  }
 }
