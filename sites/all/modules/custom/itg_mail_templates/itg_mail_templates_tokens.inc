@@ -116,7 +116,6 @@ function itg_mail_templates_tokenstable() {
                 <td>[itg_mail_token:itg_product_name]</td>
                 <td>A token that will be used for ITG Product Name.</td>
               </tr>
-              
               <tr>
                 <td colspan="3"><b>Tokens For User/Site</b></td>
               </tr>
