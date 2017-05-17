@@ -32,8 +32,8 @@
 
             $("#edit-title").on('keyup blur', function () {
                 if (this.value != '') {
-                    //$('#edit-field-story-long-head-line-und-0-value').val(this.value);
-                    //$('#edit-field-story-short-headline-und-0-value').val(this.value);
+                    $('#edit-field-story-long-head-line-und-0-value').val(this.value);
+                    $('#edit-field-story-short-headline-und-0-value').val(this.value);
                     $('#breaking_text').removeAttr('disabled');
                 } else {
                     $('#breaking_text').prop('disabled', true);
