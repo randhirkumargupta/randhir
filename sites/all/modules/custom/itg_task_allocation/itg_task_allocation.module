@@ -12,7 +12,7 @@
 function itg_task_allocation_init() {
   global $theme;
   if ($theme == 'itgadmin') {
-    drupal_add_js(drupal_get_path('module', 'itg_task_allocation') . '/js/itg_task_allocation.js');
+    drupal_add_js(drupal_get_path('module', 'itg_task_allocation') . '/js/itg_task_allocation.js', array('scope' => 'footer'));
   }
 }
 
@@ -60,7 +60,7 @@ function itg_task_allocation_expirestatus_enddatemail() {
     $query->fields('s', array('field_task_comment_change_status_value'));
     $query->fields('u', array('mail'));
     $query->fields('ur', array('mail'));
-//    $query->condition('s.field_task_comment_change_status_value', 'open', '=');
+    $query->condition('s.field_task_comment_change_status_value', 'open', '=');
     $query->condition('f.field_task_finish_date_and_time_value', $current_time, '<=');
     $result = $query->execute();
   foreach ($result as $value) {   
@@ -116,11 +116,9 @@ function itg_task_allocation_form_comment_node_task_idea_allocation_tracking_for
   //hide($form['author']);
   $form['author']['_author']['#markup'] = $form['author']['name']['#value'];
   $_GET['destination'] = 'assigned-task-list';
-  drupal_add_js('jQuery(document).ready(function() {                  
-                     jQuery(".comment-add").hide(); 
-                     jQuery(".comment-reply").hide(); 
-          });', array('type' => 'inline', 'scope' => 'footer'));
-  //$form['#after_build'][] = 'itg_task_allocation_form_after_build';
+  
+  drupal_add_js(drupal_get_path('module', 'itg_task_allocation') . '/js/itg_task_comment.js', array('weight' => 1, 'scope' => 'footer'));
+  
   // Add cancel button to create/edit astro page
   $form['actions']['cancel'] = array(
     '#markup' => l(t('Cancel'), 'assigned-task-list', array('attributes' => array('class' => 'button'))),
@@ -143,12 +141,12 @@ function itg_task_allocation_form_after_build($form, &$form_state) {
     $form['actions']['submit']['#value'] = 'Create';
   }
 
-  drupal_add_js(drupal_get_path('module', 'itg_task_allocation') . '/js/itg_task_allocation.js', array('weight' => 1));
-  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'task-idea-allocation-tracking') {
-    drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-task-task-idea-und-0-remove-button").hide();              
-            });', array('type' => 'inline', 'scope' => 'footer'));
-  }
+  $settings['checkurl'] = arg(2);
+  
+  drupal_add_js(array('itg_task_allocation' => array('settings' => $settings)) , array('type' => 'setting'));
+  
+  drupal_add_js(drupal_get_path('module', 'itg_task_allocation') . '/js/itg_task_allocation.js', array('weight' => 1, 'scope' => 'footer'));
+  
   return $form;
 }
 
@@ -367,7 +365,6 @@ function task_get_mail_content($node, $event, $to, $user_name) {
                 <head><title></title></head>
                 <body style="margin:0; padding:0;">';
   $content .= $mail_content;
-  $content .= '<br /><br />Thanks,<br>ITG Team';
   $content .= '</body>';
   $content .= '</html>';
   
@@ -375,6 +372,7 @@ function task_get_mail_content($node, $event, $to, $user_name) {
     'body' => $content,
     'subject' => $task_subject,
   );
+  $to = 'gourav.walia@kelltontech.com';
   $mail = drupal_mail('itg_task_allocation', 'send_mail_to_task', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
     return TRUE;
@@ -418,6 +416,9 @@ function itg_task_allocation_mail($key, &$message, $params) {
 
       $message['subject'] = $params['subject'];
       $message['body'][] = $params['body'];
+      foreach ($headers as $key => $value) {
+        $message['headers'][$key] = $value;
+      }
       break;
   }
 }
@@ -573,8 +574,6 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
   if (function_exists("itg_mail_templates_get_mailcontent")) {
     $get_mail_data = itg_mail_templates_get_mailcontent($task_type, $expiry_task);
     $subject = $get_mail_data->field_mail_subject_task_idea[LANGUAGE_NONE][0]['value'];
-    $to_assignee = str_replace('[itg_mail_token:itg_task_assignee]', $var->ur_mail, $get_mail_data->field_to_assignee[LANGUAGE_NONE][0]['value']);
-    $to_assigner = str_replace('[itg_mail_token:itg_task_assigner]', $var->mail, $get_mail_data->field_to_assigner[LANGUAGE_NONE][0]['value']);
   }
   
   global $base_url;
@@ -594,6 +593,8 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
       'body' => $content,
       'subject' => $subject,
     );
+    $to_assignee = 'gourav.walia@kelltontech.com';
+//    $to_user_mail = array($var->mail, $var->ur_mail);
     $mail = drupal_mail('itg_task_allocation', 'exp_task_rem', $to_assignee, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
       return TRUE;
@@ -623,6 +624,8 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
       'body' => $content,
       'subject' => $subject,
     );
+    $to_assigner = 'gourav.walia@kelltontech.com';
+//    $to_user_mail = array($var->mail, $var->ur_mail);
     $mail = drupal_mail('itg_task_allocation', 'exp_task_rem', $to_assigner, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
       return TRUE;

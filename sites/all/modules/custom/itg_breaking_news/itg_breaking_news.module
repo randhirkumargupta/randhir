@@ -90,6 +90,7 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
     global $user;
 
     if ($form_id == 'breaking_news_node_form') {
+      $form['title']['#title'] = t('Page title');
       // code to hide source field
         if ($user->uid != '1') {
             $form['field_source']['#access'] = FALSE;
@@ -130,7 +131,34 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
             '#weight' => 21,
             '#value' => t('Cancel'),
         );
-
+        
+        $form['field_section']['#states'] = array(
+          'visible' => array(
+            array(
+              array(':input[name="field_breaking_display_on[und]"]' => array('value' => 'both')),
+              'or',
+              array(':input[name="field_breaking_display_on[und]"]' => array('value' => 'section')),
+            ),
+          )
+        );
+        
+        
+        $form['field_breaking_display_on']['#states'] = array(
+          'visible' => array(
+            ':input[name="field_type[und]"]' => array('value' => 'Breaking News'),
+          ),
+          'required' => array(
+            ':input[name="field_type[und]"]' => array('value' => 'Breaking News'),
+          )
+        );
+        
+        
+        $form['field_story_snap_post']['#states'] = array(
+            'visible' => array(
+                ':input[name="field_type[und]"]' => array('value' => 'Breaking News'),
+            )
+        );
+        
         // Hide/show highlights field based on type
         $form['field_story_highlights']['#states'] = array(
             'visible' => array(
@@ -189,19 +217,12 @@ function itg_breaking_news_views_pre_render(&$view) {
  * {@inheritdoc}
  */
 function itg_breaking_news_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-    // Get the Form Id
-    if ($form["#id"] == 'views-exposed-form-breaking-news-page') {
-        $form['#after_build'][] = 'itg_breaking_news_views_exposed_after_build';
-        $form['title']['#autocomplete_path'] = 'content-title-list/breaking_news/autocomplete';
-        $form['title']['#attributes'] = array('placeholder' => t('Title'));
-
-        // code to reset breaking news listing when user click on back button
-        drupal_add_js('jQuery(document).ready(function() {                  
-                 jQuery("form").each(function() {            
-                 this.reset();
-               });              
-          });', array('type' => 'inline', 'scope' => 'footer'));
-    }
+  // Get the Form Id
+  if ($form["#id"] == 'views-exposed-form-breaking-news-page') {
+    $form['#after_build'][] = 'itg_breaking_news_views_exposed_after_build';
+    $form['title']['#autocomplete_path'] = 'content-title-list/breaking_news/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
 }
 
 /**
@@ -213,12 +234,9 @@ function itg_breaking_news_after_build($form, &$form_state) {
     global $user, $base_url;
   
     $form['field_content_type']['#attributes']['class'][] = 'element-hidden';
+    
     if (!isset($form['#node']->nid)) {
-        // hide remove button of first field on add form 
-        drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-story-highlights-und-0-remove-button").hide();
-              jQuery("#edit-field-breaking-content-details-und-0-remove-button").hide();
-            });', array('type' => 'inline', 'scope' => 'footer'));
+      $node_id = 0;
     }
 
     //$form['field_breaking_content_details']['#prefix'] = '<div id="custom_another_item"><a href="javascript:void(0)" id="custom_add_another_item">Add another item</a></div>';
@@ -230,8 +248,9 @@ function itg_breaking_news_after_build($form, &$form_state) {
     $settings = array();
     $settings['base_url'] = $base_url;
     $settings['uid'] = $user->uid;
+    $settings['no_id'] = $node_id;
     drupal_add_js(array('itg_breaking_news' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_breaking_news') . '/js/itg_breaking_news.js');
+    drupal_add_js(drupal_get_path('module', 'itg_breaking_news') . '/js/itg_breaking_news.js', array('scope' => 'footer'));
     return $form;
 }
 
@@ -255,7 +274,7 @@ function itg_breaking_news_node_validate($node, $form, &$form_state) {
     if ($node->type == 'breaking_news') {
         $section = $node->field_section[LANGUAGE_NONE];
         $type = $node->field_type[LANGUAGE_NONE][0]['value'];
-        $display_on = $node->field_display_on[LANGUAGE_NONE][0]['value'];
+        $display_on = $node->field_breaking_display_on[LANGUAGE_NONE][0]['value'];
 
 //        if ($type == 'Live Blog') {
 //            // filter empty array if type is live blog
@@ -264,10 +283,20 @@ function itg_breaking_news_node_validate($node, $form, &$form_state) {
 //            }
 //        }
         // check if section is selected and category not select
-        if ($type == 'Breaking News' && $display_on == 'Section') {
+        if ($type == 'Breaking News' && $display_on == 'section') {
             if (empty($section[0]['tid'])) {
                 form_set_error('field_section', t("Section Field is required!"));
             }
+        }
+        
+        if ($type == 'Breaking News' && $display_on == 'both') {
+            if (empty($section[0]['tid'])) {
+                form_set_error('field_section', t("Section Field is required!"));
+            }
+        }
+        
+        if ($type == 'Breaking News' && empty($display_on)) {
+                form_set_error('field_breaking_display_on', t("Display on Field is required!"));
         }
     }
 }
@@ -306,4 +335,18 @@ function itg_breaking_news_views_api() {
     return array(
         'api' => 3,
     );
+}
+
+/**
+ * Implementation of hook_views_query_alter
+ * @param array reference $view
+ * @param array reference $query
+ */
+function itg_breaking_news_views_query_alter(&$view, &$query) {
+  if (isset($view->name) && $view->name === 'breaking_news' && $view->current_display == 'block_1') {
+    $query->add_where(5, 'node.created', strtotime(date('d-m-Y 00:00:00')), '>=');
+  }
+  if (isset($view->name) && $view->name === 'breaking_news' && $view->current_display == 'block_2') {
+    $query->add_where(5, 'node.created', strtotime(date('d-m-Y 00:00:00')), '>=');
+  }
 }

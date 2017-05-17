@@ -13,6 +13,7 @@
   <?php print drupal_render($form['field_type']); ?>
   <?php print drupal_render($form['field_story_expires']); ?>
   <?php print drupal_render($form['field_story_snap_post']); ?>
+  <?php print drupal_render($form['field_constituancy']); ?>
   <?php //print drupal_render($form['field_content_type']); ?>
   <?php print drupal_render($form['title']); ?>
            </div>
@@ -27,7 +28,7 @@
 
 
 <div id="DisplayOn">
-  <?php print drupal_render($form['field_display_on']); ?>
+  <?php print drupal_render($form['field_breaking_display_on']); ?>
   <?php print drupal_render($form['field_section']); ?>
              </div>
 <?php print drupal_render($form['field_story_itg_tags']); ?>
@@ -46,6 +47,13 @@
   <h2 class="highlight-title">Highlights</h2>
   <?php print drupal_render($form['field_story_highlights']); ?>
 </div>
+
+  <div id="AkamaiSettings" class="itg-sidebar-form-section">
+                <h2 class="story-title"><?php print t('Akamai Setting'); ?></h2>
+                <div class="itg-form-section">
+                    <?php print drupal_render($form['akamai_timeout']); ?>
+                </div>
+          </div>
 
 <!--<div id="Relatedcontent">
   <h2 class="story-title">Related content</h2>

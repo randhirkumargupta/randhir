@@ -14,12 +14,15 @@ global $base_url;
                 <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
                 <li><a href="#" title=""><i class="fa fa-google-plus"></i></a></li>
                 <li><a href="#" title=""><i class="fa fa-rss"></i></a></li>                
-                <li><a href="javascript:void(0)" class="search-icon" title=""><i class="fa fa-search"></i></a></li>
+                <li class="search-icon-parent">
+                  <a href="javascript:void(0)" class="search-icon-default" title=""><i class="fa fa-search"></i></a>
+                  <a href="javascript:void(0)" class="search-icon-search" title=""><i class="fa fa-search"></i></a>
+                  <div class="globle-search">
+                    <input class="search-text" placeholder="Type here" type="text" value="" />
+                  </div>
+                </li>
                 <li class="footer-expand-icon"></li>
             </ul>
-            <div class="globle-search">
-                <input class="search-text" placeholder="Type here" type="text" value="">
-            </div>
         </div>
         <div class="footer-expand-icon"></div>
     </div>

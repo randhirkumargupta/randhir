@@ -10,7 +10,7 @@
  *
  * {@inheritdoc}
  */
-function itg_personalization_edit_profile_form() {
+function itg_personalization_edit_profile_form($form, &$form_state) {
   global $user;
   //prepare url for change mobile and email
   $edit_email_url = $edit_email_link= $edit_mobile_url = $edit_mobile_link = '';
@@ -133,6 +133,80 @@ function itg_personalization_edit_profile_form() {
     '#options' => $options,
     '#default_value' => $default_qualification,
   );
+  
+  // Get options.
+  $itg_country_vid = taxonomy_vocabulary_machine_name_load('country');
+  $itg_country_term = taxonomy_get_tree($itg_country_vid->vid, 0, NULL, TRUE);
+  $country = array('_none' => '- Select -');
+  foreach ($itg_country_term as $term) {
+    $country[$term->tid] = $term->name;
+  }
+  $default_country = '';
+  if (!empty($user_detail->field_user_counrty['und'][0]['tid'])) {
+    $default_country = $user_detail->field_user_counrty['und'][0]['tid'];
+  }
+  
+  $form['country'] = array(
+    '#title' => t('Country'),
+    '#type' => 'select',
+    '#options' => $country,
+    '#default_value' => $default_country,
+    '#ajax' => array(
+    'event' => 'change',
+    'wrapper' => 'state-wrapper',
+    'callback' => 'itg_personalization_state_ajax_callback',
+    'method' => 'replace',
+  ),
+  );
+
+  if(!empty($form_state['values']['country'])) {
+    $state = get_state_by_country($form_state['values']['country']);
+  } else {
+    $state = get_state_by_country($user_detail->field_user_counrty['und'][0]['tid']);
+  }
+  
+  $default_state = '';
+  if (!empty($user_detail->field_personalization_state['und'][0]['tid'])) {
+    $default_state = $user_detail->field_personalization_state['und'][0]['tid'];
+  } else {
+    $default_state = isset($form_state['values']['user_state']) ? $form_state['values']['user_state'] : '';
+  }
+  
+  $form['user_state'] = array(
+    '#type' => 'select',
+    '#prefix' => '<div id="state-wrapper">',
+    '#suffix' => '</div>',
+    '#default_value' => $default_state, 
+    '#title' => t('State'),
+    '#options' => $state,
+    '#ajax' => array(
+    'event' => 'change',
+    'wrapper' => 'city-wrapper',
+    'callback' => 'itg_personalization_city_ajax_callback',
+    'method' => 'replace',
+  ),
+  );
+  
+  if(!empty($form_state['values']['user_state'])) {
+    $city = get_city_by_state($form_state['values']['user_state']);
+  } else {
+    $city = get_city_by_state($user_detail->field_personalization_state['und'][0]['tid']);
+  }
+  $default_city = '';
+  if (!empty($user_detail->field_personalization_city['und'][0]['tid'])) {
+    $default_city = $user_detail->field_personalization_city['und'][0]['tid'];
+  } else {
+    $default_city = isset($form_state['values']['user_city']) ? $form_state['values']['user_city'] : '';
+  }
+  $form['user_city'] = array(
+    '#type' => 'select',
+    '#prefix' => '<div id="city-wrapper">',
+    '#suffix' => '</div>',
+    '#default_value' => $default_city, 
+    '#title' => t('City'),
+    '#options' => $city,
+  );
+
   $form['address'] = array(
     '#title' => t('Address'),
     '#type' => 'textarea',
@@ -165,6 +239,74 @@ function itg_personalization_edit_profile_form() {
   );
 
   return $form;
+}
+
+/**
+ * Ajax callback for state dropdown
+ * @param array $form
+ * @param array $form_state
+ * @return int
+ */
+function itg_personalization_state_ajax_callback($form, &$form_state) {
+  return $form['user_state'];
+}
+
+/**
+ * Ajax callback for city dropdown
+ * @param array $form
+ * @param array $form_state
+ * @return int
+ */
+function itg_personalization_city_ajax_callback($form, &$form_state) {
+  return $form['user_city'];
+}
+
+/**
+ * 
+ * @param type $country_id
+ * @return type
+ */
+function get_state_by_country($country_id) {
+    $query = db_select('field_data_field_state_county', 'c');
+    $query->fields('c', array('entity_id'));
+    if (!empty($country_id)) {
+    $query->condition('c.field_state_county_tid', $country_id);
+    }
+    $result = $query->execute();
+    $state_list = array('_none' => '- Select state -');
+    while ($record = $result->fetchAssoc()) {
+      if(function_exists('get_term_name_from_tid_for_report')) {
+        $name = get_term_name_from_tid_for_report($record['entity_id']);
+      }
+      $state_list[$record['entity_id']] = $name;
+    }
+
+    return $state_list;
+}
+
+/**
+ * 
+ * @param type $state_id
+ * @return type
+ */
+function get_city_by_state($state_id) {
+  
+    $query = db_select('field_data_field_city_states', 'c');
+    $query->fields('c', array('entity_id'));
+    if (!empty($state_id)) {
+    $query->condition('c.field_city_states_tid', $state_id);
+    }
+    $result = $query->execute();
+    $city_list = array('_none' => '- Select city -');
+    while ($record = $result->fetchAssoc()) {
+      if(function_exists('get_term_name_from_tid_for_report')) {
+        $name = get_term_name_from_tid_for_report($record['entity_id']);
+      }
+      $city_list[$record['entity_id']] = $name;
+    }
+
+    return $city_list;
+  
 }
 
 /**
@@ -232,6 +374,8 @@ function itg_personalization_edit_profile_form_submit($form, &$form_state) {
   // Update Qualification field.
   if (!empty($inputs['qualification']) && $inputs['qualification'] !== '_none') {
     $user_detail->field_user_qualification['und'][0]['tid'] = check_plain($inputs['qualification']);
+  }else {
+    unset($user_detail->field_user_qualification['und']);
   }
 
   // Update address field.
@@ -242,6 +386,27 @@ function itg_personalization_edit_profile_form_submit($form, &$form_state) {
   // Update zipcode field.
   if (!empty($inputs['zip_code'])) {
     $user_detail->field_user_pincode['und'][0]['value'] = check_plain($inputs['zip_code']);
+  }
+  
+  //update country
+  if (!empty($inputs['country'])  && $inputs['country'] !== '_none') {
+    $user_detail->field_user_counrty['und'][0]['tid'] = check_plain($inputs['country']);
+  }else {
+    unset($user_detail->field_user_counrty['und']);
+  }
+  
+  //update state
+  if (!empty($inputs['user_state']) && $inputs['user_state'] !== '_none') {
+    $user_detail->field_personalization_state['und'][0]['tid'] = check_plain($inputs['user_state']);
+  }else {
+    unset($user_detail->field_personalization_state['und']);
+  }
+  
+  //update city
+  if (!empty($inputs['user_city']) && $inputs['user_city'] !== '_none') {
+    $user_detail->field_personalization_city['und'][0]['tid'] = check_plain($inputs['user_city']);
+  }else {
+    unset($user_detail->field_personalization_city['und']);
   }
 
   //Update News Letters field.  
@@ -259,6 +424,13 @@ function itg_personalization_edit_profile_form_submit($form, &$form_state) {
 
   // Save user object.
   user_save($user_detail);
+  
+  $_REQUEST['destination'] = 'personalization/edit-profile/general-settings';
+  $success = base64_encode('success');
+    $form_state['redirect'] = array(
+      'personalization/edit-profile/general-settings',
+      array('query' => array('profile' => $success))
+    );
 }
 
 ?>

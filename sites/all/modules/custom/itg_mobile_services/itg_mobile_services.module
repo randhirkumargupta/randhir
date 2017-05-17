@@ -21,64 +21,64 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       unset($form['actions']['preview']);
 
       $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), 'clients-listing', array(
-          'attributes' => array(
-            'class' => 'button'
-          )
-        )),
-        '#weight' => 21,
-        '#value' => t('Cancel')
+          '#markup' => l(t('Cancel'), 'clients-listing', array(
+              'attributes' => array(
+                  'class' => 'button'
+              )
+          )),
+          '#weight' => 21,
+          '#value' => t('Cancel')
       );
 
       $form['field_service_regional']['#states'] = array(
-        'visible' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('checked' => TRUE),
-        ),
+          'visible' => array(
+              ':input[name="field_content_sharing_mode[und]"]' => array('checked' => TRUE),
+          ),
       );
 
       $form['group_service_ftp']['#states'] = array(
-        'visible' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
-        ),
-        'required' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
-        ),
+          'visible' => array(
+              ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
+          ),
+          'required' => array(
+              ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
+          ),
       );
 
       $form['field_ftp_ip_address']['#states'] = array(
-        'visible' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
-        ),
-        'required' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
-        ),
+          'visible' => array(
+              ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
+          ),
+          'required' => array(
+              ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
+          ),
       );
 
       $form['field_ftp_username']['#states'] = array(
-        'visible' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
-        ),
-        'required' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
-        ),
+          'visible' => array(
+              ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
+          ),
+          'required' => array(
+              ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
+          ),
       );
 
       $form['field_ftp_password']['#states'] = array(
-        'visible' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
-        ),
-        'required' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
-        ),
+          'visible' => array(
+              ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
+          ),
+          'required' => array(
+              ':input[name="field_content_sharing_mode[und]"]' => array('value' => '2'),
+          ),
       );
 
       $form['field_service_email_address']['#states'] = array(
-        'visible' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '3'),
-        ),
-        'required' => array(
-          ':input[name="field_content_sharing_mode[und]"]' => array('value' => '3'),
-        ),
+          'visible' => array(
+              ':input[name="field_content_sharing_mode[und]"]' => array('value' => '3'),
+          ),
+          'required' => array(
+              ':input[name="field_content_sharing_mode[und]"]' => array('value' => '3'),
+          ),
       );
 
 
@@ -96,30 +96,30 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       unset($form['actions']['preview']);
 
       $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), 'service-listing', array(
-          'attributes' => array(
-            'class' => 'button'
-          )
-        )),
-        '#weight' => 21,
-        '#value' => t('Cancel')
+          '#markup' => l(t('Cancel'), 'service-listing', array(
+              'attributes' => array(
+                  'class' => 'button'
+              )
+          )),
+          '#weight' => 21,
+          '#value' => t('Cancel')
       );
 
 
       $form['field_service_title']['#prefix'] = '<div id="service_xml_replace_wrapper">';
       $form['field_service_title']['#suffix'] = '</div>';
 
-      drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', 'file');
+      drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', array('scope' => 'footer'));
 
       /* JS library  added to beutify xml pattern */
-      drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/jquery.format.js', 'file');
+      drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/jquery.format.js', array('scope' => 'footer'));
       /* check for default value */
 
       $form['field_service_delivery_mode'][LANGUAGE_NONE]['#ajax'] = array(
-        'callback' => 'itg_mobile_services_xml_callback',
-        'wrapper' => 'service_xml_replace_wrapper',
-        'effect' => 'fade',
-        'event' => 'change', // On change of the selection this action would take place
+          'callback' => 'itg_mobile_services_xml_callback',
+          'wrapper' => 'service_xml_replace_wrapper',
+          'effect' => 'fade',
+          'event' => 'change', // On change of the selection this action would take place
       );
 
       $form['#validate'][] = 'itg_mobile_services_validator';
@@ -138,13 +138,13 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       $form['title']['#default_value'] = 'service association';
 
       $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), 'service-association-listing', array(
-          'attributes' => array(
-            'class' => 'button'
-          )
-        )),
-        '#weight' => 21,
-        '#value' => t('Cancel')
+          '#markup' => l(t('Cancel'), 'service-association-listing', array(
+              'attributes' => array(
+                  'class' => 'button'
+              )
+          )),
+          '#weight' => 21,
+          '#value' => t('Cancel')
       );
 
       $form['field_service_title']['#prefix'] = '<div id="service_title_replace_wrapper">';
@@ -154,10 +154,10 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       $form['field_service_char_limit']['#suffix'] = '</div>';
 
       $form['field_service_association_title'][LANGUAGE_NONE]['#ajax'] = array(
-        'callback' => 'itg_mobile_services_custom_callback',
-        'method' => 'replace', // the data would replace the field
-        'effect' => 'fade',
-        'event' => 'change', // On change of the selection this action would take place
+          'callback' => 'itg_mobile_services_custom_callback',
+          'method' => 'replace', // the data would replace the field
+          'effect' => 'fade',
+          'event' => 'change', // On change of the selection this action would take place
       );
 
       $form['#validate'][] = 'itg_mobile_client_association_validator';
@@ -169,12 +169,12 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       $form['metatags']['#type'] = 'hidden';
       // hide preview button
       variable_set('node_preview_vas-service-content', '0');
-      if(isset($form['#node'])) {
+      if (isset($form['#node'])) {
         $target_id = $form['#node']->{'field_service_association_title'}[LANGUAGE_NONE][0]['target_id'];
         $astro_service = itg_mobile_services_check_astro_service($target_id);
       }
-      
-      if((!empty($_GET['type']) && $_GET['type'] == 'astro') || !empty($astro_service)) {
+
+      if ((!empty($_GET['type']) && $_GET['type'] == 'astro') || !empty($astro_service)) {
         $title = empty($form['nid']['#value']) ? 'Create Astro Vas Service Content' : 'Edit Astro Vas Service Content';
       }
       else {
@@ -182,13 +182,13 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       }
       drupal_set_title(t($title));
       $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), 'service-content-listing', array(
-          'attributes' => array(
-            'class' => 'button'
-          )
-        )),
-        '#weight' => 21,
-        '#value' => t('Cancel')
+          '#markup' => l(t('Cancel'), 'service-content-listing', array(
+              'attributes' => array(
+                  'class' => 'button'
+              )
+          )),
+          '#weight' => 21,
+          '#value' => t('Cancel')
       );
 
       $form['#prefix'] = '<div id="client_error_wrapper">';
@@ -198,10 +198,10 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       $form['title']['#suffix'] = '</div>';
 
       $form['field_service_association_title'][LANGUAGE_NONE]['#ajax'] = array(
-        'callback' => 'itg_mobile_content_custom_callback',
-        'wrapper' => 'client_entity_wrapper',
-        'effect' => 'fade',
-        'event' => 'change', // On change of the selection this action would take place
+          'callback' => 'itg_mobile_content_custom_callback',
+          'wrapper' => 'client_entity_wrapper',
+          'effect' => 'fade',
+          'event' => 'change', // On change of the selection this action would take place
       );
 
       if ($_SESSION['service_title_id']) {
@@ -211,29 +211,29 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       }
 
       $form['content_enable_button'] = array(
-        '#type' => 'button',
-        '#weight' => 8,
-        '#value' => t('Generate Content'),
-        '#attributes' => array(
-          'id' => 'content-enable-button',
-        ),
+          '#type' => 'button',
+          '#weight' => 8,
+          '#value' => t('Generate Content'),
+          '#attributes' => array(
+              'id' => 'content-enable-button',
+          ),
       );
 
       $form['reset_date_button'] = array(
-        '#type' => 'button',
-        '#weight' => 7,
-        '#value' => t('Reset Date'),
-        '#attributes' => array(
-          'id' => 'reset-date-button',
-        ),
+          '#type' => 'button',
+          '#weight' => 7,
+          '#value' => t('Reset Date'),
+          '#attributes' => array(
+              'id' => 'reset-date-button',
+          ),
       );
 
       $form['content_format'] = array(
-        '#type' => 'hidden',
-        '#value' => '',
-        '#attributes' => array(
-          'id' => 'content-format-hidden',
-        ),
+          '#type' => 'hidden',
+          '#value' => '',
+          '#attributes' => array(
+              'id' => 'content-format-hidden',
+          ),
       );
       // Add the "- Select One -" option to the $form array.
       $form['field_service_association_title']['#pre_render'] = array('itg_mobile_services_add_option');
@@ -324,7 +324,27 @@ function itg_mobile_vas_service_content_submit($form, &$form_state) {
  */
 function itg_mobile_services_node_insert($node) {
   if ($node->type == 'vas_service_content') {
+    itg_mobile_services_handel_astro_image($node);
     save_cron_details_of_mobile_services($node);
+  }
+}
+
+function itg_mobile_services_handel_astro_image($node) {
+  $items = field_get_items('node', $node, 'field_service_content');
+
+  foreach ($items as $key => $imagecollection) {
+    $entitydata = entity_load('field_collection_item', $imagecollection);
+    $v_fid = $entitydata[$imagecollection['value']]->field_story_large_image;
+    $fids = $v_fid[LANGUAGE_NONE][0]['fid'];
+    $deleted = db_delete('itg_astro_last_image')
+            ->condition('key_index', $key)
+            ->execute();
+    $nid = db_insert('itg_astro_last_image')
+            ->fields(array(
+                'image_fid' => $fids,
+                'key_index' => $key,
+            ))
+            ->execute();
   }
 }
 
@@ -336,6 +356,7 @@ function itg_mobile_services_node_update($node) {
   if ($node->type == 'vas_service_content') {
     $arg = arg(2);
     if (isset($arg) && $arg != 'delete') {
+      itg_mobile_services_handel_astro_image($node);
       save_cron_details_of_mobile_services($node);
     }
   }
@@ -924,11 +945,11 @@ function itg_mobile_services_custom_callback($form, &$form_state) {
   $form['field_service_title'][LANGUAGE_NONE][0]['value']['#value'] = ($service_title) ? $service_title : '';
   $form['field_service_char_limit'][LANGUAGE_NONE][0]['value']['#value'] = ($service_char_limit) ? $service_char_limit : '';
   return array(
-    '#type' => 'ajax',
-    '#commands' => array(
-      ajax_command_replace("#service_title_replace_wrapper", render($form['field_service_title'])),
-      ajax_command_replace("#char_limit_replace_wrapper", render($form['field_service_char_limit']))
-    )
+      '#type' => 'ajax',
+      '#commands' => array(
+          ajax_command_replace("#service_title_replace_wrapper", render($form['field_service_title'])),
+          ajax_command_replace("#char_limit_replace_wrapper", render($form['field_service_char_limit']))
+      )
   );
 }
 
@@ -990,8 +1011,8 @@ function itg_mobile_services_xml_callback($form, &$form_state) {
 
   $commands[] = ajax_command_invoke(NULL, "feed_pattern", array($xml_result));
   return array(
-    '#type' => 'ajax',
-    '#commands' => $commands,
+      '#type' => 'ajax',
+      '#commands' => $commands,
   );
 }
 
@@ -1031,25 +1052,43 @@ function itg_mobile_services_views_pre_render(&$view) {
  */
 function itg_mobile_services_menu() {
   $items['countchar_validation'] = array(
-    'page callback' => 'itg_countchar_validation',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
+      'page callback' => 'itg_countchar_validation',
+      'access arguments' => array('access content'),
+      'type' => MENU_CALLBACK,
   );
 
   $items['mobile_services/%/autocomplete'] = array(
-    'page callback' => 'itg_mobile_services_get_content_title',
-    'access arguments' => array('access itg story'),
-    'type' => MENU_CALLBACK,
+      'page callback' => 'itg_mobile_services_get_content_title',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,
   );
 
   $items['mobile_services/feed/%'] = array(
-    'page callback' => 'itg_mobile_get_feed_byurl',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_mobile_services.inc',
+      'page callback' => 'itg_mobile_get_feed_byurl',
+      'access arguments' => array('access content'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_mobile_services.inc',
   );
   return $items;
 }
+
+/**
+ * This function get the Latest feed url:
+ */
+function itg_mobile_get_latest_feed_byurl($url)
+{
+  //p($url);
+  $query = db_select('itg_syndication_feed_url', 'feed');
+  # get the desired fields from the database
+  $query->condition('feed.client_feed_url', $url)
+      ->condition('feed.status', 1, '=');
+  $query->fields('feed', array('id', 'xml_name', 'created_date'))
+      ->orderBy('id', 'DESC');
+    
+   $results = $query->execute()->fetchAll();
+   return $results;
+}
+
 
 /**
  * Implements ajax callback function for itg_countchar_validation
@@ -1078,34 +1117,34 @@ function itg_mobile_services_form_views_exposed_form_alter(&$form, &$form_state,
   switch ($form['#id']) {
     case 'views-exposed-form-clients-details-page':
       $form['field_client_title_tid']['#attributes'] = array(
-        'placeholder' => t('Title')
+          'placeholder' => t('Title')
       );
       $form['title']['#autocomplete_path'] = 'content-title-list/clients_creation/autocomplete';
       break;
     case 'views-exposed-form-clients-details-page-1':
       $form['title']['#attributes'] = array(
-        'placeholder' => t('Title')
+          'placeholder' => t('Title')
       );
       $form['title']['#autocomplete_path'] = 'content-title-list/service_creation/autocomplete';
       $form['expire_type'] = array(
-        '#type' => 'select',
-        '#title' => t('Expire Type'),
-        '#options' => array('0' => t('--SELECT--'), 'expired' => t('Expired'), 'live' => t('Live')),
-        '#prefix' => '<div id="custom-expire-type">',
-        '#suffix' => '</div>'
+          '#type' => 'select',
+          '#title' => t('Expire Type'),
+          '#options' => array('live' => t('Live'), 'expired' => t('Expired')),
+          '#prefix' => '<div id="custom-expire-type">',
+          '#suffix' => '</div>'
       );
       //drupal_add_js("jQuery(document).ready(function() { jQuery('#custom-expire-type').width('125'); });", 'inline');
       break;
     case 'views-exposed-form-clients-details-page-3':
       $form['field_service_title_value']['#attributes'] = array(
-        'placeholder' => t('Title')
+          'placeholder' => t('Title')
       );
       $form['title']['#autocomplete_path'] = 'content-title-list/vas_service_content/autocomplete';
       break;
     case 'views-exposed-form-clients-details-page-2':
-     // pr($form);
+      // pr($form);
       $form['title']['#attributes'] = array(
-        'placeholder' => t('Title')
+          'placeholder' => t('Title')
       );
 
       $form['title']['#autocomplete_path'] = 'mobile_services/service_creation/autocomplete';
@@ -1124,9 +1163,9 @@ function get_service_association($target_id) {
   }
   if (is_numeric($target_id)) {
     $query = db_select('node', 'node')
-        ->fields('service_asso', array('title'))
-        ->fields('sat', array('entity_id'))
-        ->fields('cs', array('field_client_selection_target_id', 'revision_id'));
+            ->fields('service_asso', array('title'))
+            ->fields('sat', array('entity_id'))
+            ->fields('cs', array('field_client_selection_target_id', 'revision_id'));
 
     $query->leftJoin('field_data_field_client_selection', 'cs', "node.nid = cs.entity_id");
     $query->leftJoin('field_data_field_service_association_title', 'sat', "node.nid = sat.entity_id");
@@ -1167,46 +1206,41 @@ function itg_mobile_services_get_content_title($title) {
  */
 function itg_mobile_services_views_query_alter(&$view, &$query) {
   if ((isset($view->name) && $view->name === 'clients_details' && $view->current_display == 'page_3')) {
-      unset($_SESSION['service_title_id']);
-      unset($_SESSION['service_frequency_id']);
+    unset($_SESSION['service_title_id']);
+    unset($_SESSION['service_frequency_id']);
   }
   if ((isset($view->name) && $view->name === 'clients_details' && $view->current_display == 'page_1')) {
-       if (isset($_GET['expire_type']) && $_GET['expire_type'] == 'live') {
-         
-          $joins = new views_join;
-          $joins->construct('field_data_field_story_expiry_date', 'node', // left table
+    if ($_GET['expire_type'] == 'live' || $_GET['expire_type'] == "") {
+
+      $joins = new views_join;
+      $joins->construct('field_data_field_story_expiry_date', 'node', // left table
               'nid', // left field
               'entity_id', // field
               '', 'LEFT'
-          );
-          // Add join to query; 'node' is the left table name
-          $view->query->add_relationship('field_data_field_story_expiry_date', $joins, 'node');
-          $today_date = date("Y-m-d H:i:s");
-          $service_expire_where_condition = array(
-            'field' => "field_data_field_story_expiry_date.field_story_expiry_date_value",
-            'value' => $today_date,
-            'operator' => '>=',
-          );
-          array_push($query->where[1]['conditions'], $service_expire_where_condition);
-      } else if (isset($_GET['expire_type']) && $_GET['expire_type'] == 'expired') {
-        
-          $joins = new views_join;
-          $joins->construct('field_data_field_story_expiry_date', 'node', // left table
+      );
+      // Add join to query; 'node' is the left table name
+      $view->query->add_relationship('field_data_field_story_expiry_date', $joins, 'node');
+      $today_date = date("Y-m-d H:i:s");
+      $query->where[2]['conditions'][0]['value'][':field_data_field_story_expiry_date_field_story_expiry_date_value'] = $today_date;
+    }
+    else if (isset($_GET['expire_type']) && $_GET['expire_type'] == 'expired') {
+      unset($query->where[2]);
+      $joins = new views_join;
+      $joins->construct('field_data_field_story_expiry_date', 'node', // left table
               'nid', // left field
               'entity_id', // field
               '', 'LEFT'
-          );
-          // Add join to query; 'node' is the left table name
-          $view->query->add_relationship('field_data_field_story_expiry_date', $joins, 'node');
-          $today_date = date("Y-m-d H:i:s");
-          $service_expire_where_condition = array(
-            'field' => "field_data_field_story_expiry_date.field_story_expiry_date_value",
-            'value' => $today_date,
-            'operator' => '<=',
-          );
-          array_push($query->where[1]['conditions'], $service_expire_where_condition); 
-        
-      }
+      );
+      // Add join to query; 'node' is the left table name
+      $view->query->add_relationship('field_data_field_story_expiry_date', $joins, 'node');
+      $today_date = date("Y-m-d H:i:s");
+      $service_expire_where_condition = array(
+          'field' => "field_data_field_story_expiry_date.field_story_expiry_date_value",
+          'value' => $today_date,
+          'operator' => '<=',
+      );
+      array_push($query->where[1]['conditions'], $service_expire_where_condition);
+    }
   }
 }
 
@@ -1219,10 +1253,10 @@ function itg_mobile_services_views_query_alter(&$view, &$query) {
  */
 function itg_mobile_service_check_token($cid, $association_nid) {
   return db_select('itg_client_token', 't')
-          ->fields('t', array('id'))
-          ->condition('cid', $cid, '=')
-          ->condition('sid', $association_nid, '=')
-          ->range(0, 1)->execute()->rowCount();
+                  ->fields('t', array('id'))
+                  ->condition('cid', $cid, '=')
+                  ->condition('sid', $association_nid, '=')
+                  ->range(0, 1)->execute()->rowCount();
 }
 
 /**
@@ -1243,12 +1277,13 @@ function itg_mobile_services_get_assoc_service() {
   $query->distinct();
   $query->fields('node', array('nid', 'title'));
   $query->join('field_data_field_service_association_title', 'sat', "node.nid = sat.field_service_association_title_target_id");
-  $query->join('field_data_field_story_expiry_date', 'expiry_date', "node.nid= expiry_date.entity_id");
+  $query->leftJoin('field_data_field_story_expiry_date', 'expiry_date', "node.nid= expiry_date.entity_id");
   $query->join('field_data_field_astro_service', 'astro_service', "node.nid= astro_service.entity_id");
   if (empty($node_nid)) {
-    $query->where("expiry_date.field_story_expiry_date_value >= CURDATE()");
+    $query->where("expiry_date.field_story_expiry_date_value >= CURDATE() or expiry_date.field_story_expiry_date_value IS NULL");
     $query->condition('astro_service.field_astro_service_value', $astry_type, '=');
   }
+  
   $query->condition('node.type', 'service_creation', '=');
 
   $result = $query->execute();
@@ -1277,8 +1312,8 @@ function itg_mobile_services_get_service_list() {
   $query->leftJoin('field_data_field_story_expiry_date', 'expiry_date', "node.nid= expiry_date.entity_id");
   if (empty($node_nid)) {
     $query->where("expiry_date.field_story_expiry_date_value >= CURDATE() or expiry_date.field_story_expiry_date_value IS NULL");
-   // $query->db_or()->condition()->isNull('expiry_date.field_story_expiry_date_value');
-  } //print strtr((string) $query, $query->arguments());die;
+  }
+  //print strtr((string) $query, $query->arguments());die;
   $query->condition('node.type', 'service_creation', '=');
   $result = $query->execute();
   $record = $result->fetchAll();
@@ -1298,9 +1333,9 @@ function itg_mobile_services_field_attach_form($entity_type, $entity, &$form, &$
   $options = array('language' => field_valid_language($langcode));
   // Merge default options.
   $default_options = array(
-    'default' => FALSE,
-    'deleted' => FALSE,
-    'language' => NULL,
+      'default' => FALSE,
+      'deleted' => FALSE,
+      'language' => NULL,
   );
   $options += $default_options;
   list(,, $bundle) = entity_extract_ids($entity_type, $entity);
@@ -1314,10 +1349,10 @@ function itg_mobile_services_field_attach_form($entity_type, $entity, &$form, &$
     if ((($field['cardinality'] == FIELD_CARDINALITY_UNLIMITED) && ($field['type'] == "field_collection")) && ($field['bundles']['node'][0] == "vas_service_content") && isset($form[$field['field_name']][LANGUAGE_NONE]['add_more'])) {
       // add a simple select list, this defaults to numb 3
       $form[$field['field_name']]['add_more_number'] = array(
-        '#type' => 'select',
-        '#options' => drupal_map_assoc(range(0, 100)),
-        '#default_value' => 1,
-        '#attributes' => array('style' => 'display:none;'),
+          '#type' => 'select',
+          '#options' => drupal_map_assoc(range(0, 100)),
+          '#default_value' => 1,
+          '#attributes' => array('style' => 'display:none;'),
       );
       $form[$field['field_name']][LANGUAGE_NONE]['add_more']['#submit'][] = 'itg_mobile_services_field_add_more_submit';
       $form[$field['field_name']][LANGUAGE_NONE]['add_more']['#value'] = 'Add more rows';
@@ -1332,6 +1367,8 @@ function itg_mobile_services_field_attach_form($entity_type, $entity, &$form, &$
  */
 function itg_mobile_services_field_add_more_submit($form, &$form_state) {
   global $base_url;
+  $getlastimages = itg_mobile_services_get_astro_last_images();
+ 
   $button = $form_state['triggering_element'];
   // Go one level up in the form, to the widgets container.
   $element = drupal_array_get_nested_value($form, array_slice($button['#array_parents'], 0, -1));
@@ -1377,9 +1414,12 @@ function itg_mobile_services_field_add_more_submit($form, &$form_state) {
     $service_content_details[$date_key]['entity_id'] = $entity_id;
   }
   $i = -1;
+  $a = 0;
+ 
   $zodiac_name = itg_astro_zodiac_thumbnail();
   foreach ($form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'] as $key => $filed_collection) {
     if (is_numeric($key)) {
+
       $date = date_create($start_date);
       date_add($date, date_interval_create_from_date_string($i . " days"));
       $tomorrow = date_format($date, "m/d/Y");
@@ -1392,8 +1432,16 @@ function itg_mobile_services_field_add_more_submit($form, &$form_state) {
       else {
         $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_story_expert_description[LANGUAGE_NONE][0]['value'] = $service_content_details[$schema_tomorrow]['content'];
       }
+      if ($service_content_details[$schema_tomorrow]['image'] == "") {
+             $imagefids = $getlastimages[$key];
+            
+      }
+      else {
+        $imagefids = $service_content_details[$schema_tomorrow]['image'];
+      }
+      
       $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_client_short_description[LANGUAGE_NONE][0]['value'] = $service_content_details[$schema_tomorrow]['title'];
-      $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_story_large_image[LANGUAGE_NONE][0]['fid'] = $service_content_details[$schema_tomorrow]['image'];
+      $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_story_large_image[LANGUAGE_NONE][0]['fid'] = $imagefids;
       $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_story_large_image[LANGUAGE_NONE][0]['alt'] = $service_content_details[$schema_tomorrow]['image_description'];
       $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_story_large_image[LANGUAGE_NONE][0]['title'] = $service_content_details[$schema_tomorrow]['image_keyword'];
       // for Audio
@@ -1406,13 +1454,33 @@ function itg_mobile_services_field_add_more_submit($form, &$form_state) {
       $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_service_audio_keyword[LANGUAGE_NONE][0]['value'] = $service_content_details[$schema_tomorrow]['audio_keyword'];
 
       $i++;
+      $a++;
+      
     }
+  
   }
   unset($_SESSION['field_astro_zodiac']);
   $settings['service_content_first_row_hide'] = TRUE;
   $settings['basePath'] = $base_url;
   drupal_add_js(array('itg_mobile_services' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_service.js', array('weight' => 3, 'scope' => 'footer'));
+}
+
+/**
+ * Custom function for get all the last insert astro images
+ */
+function itg_mobile_services_get_astro_last_images() {
+  $newreturn = array();
+  $query = db_select('itg_astro_last_image', 'iali');
+  $query->fields('iali');
+  $query->orderBy('key_index','ASC');
+  $result = $query->execute()->fetchAll();
+  $i=1;
+  foreach ($result as $keyresuly) {
+    $newreturn[$i] = $keyresuly->image_fid;
+    $i++;
+  }
+  return $newreturn; 
 }
 
 /**
@@ -1538,7 +1606,7 @@ function itg_mobile_services_check_astro_service($entity_id) {
  * @param int $service_frequency_id
  */
 function itg_mobile_content_reset_callback($association_nid, $service_frequency_id) {
-  global $base_url;  
+  global $base_url;
   if (is_numeric($association_nid)) {
     $result = get_service_association($association_nid);
     $name = '';
@@ -1584,10 +1652,10 @@ function itg_mobile_content_reset_callback($association_nid, $service_frequency_
  */
 function itg_mobile_services_cronapi($op, $job = NULL) {
   $items['mobile_services_feeds'] = array(
-    'description' => 'send mobile vas feeds to Mail, ftp, url.',
-    'weight' => 5,
-    'callback' => 'itg_mobile_services_cron',
-    'file' => 'includes/itg_mobile_services.inc',
+      'description' => 'send mobile vas feeds to Mail, ftp, url.',
+      'weight' => 5,
+      'callback' => 'itg_mobile_services_cron',
+      'file' => 'includes/itg_mobile_services.inc',
   );
   return $items;
 }
@@ -1638,17 +1706,17 @@ function itg_mobile_service_custom_submit($form, &$form_state) {
         $response_result['video_id'] = $response['id'];
         $response_result['fid'] = $response['fid'];
         $nid = db_insert('dailymotion_response_details')
-            ->fields(array(
-              'title' => $response['title'],
-              'channel' => $response['channel'],
-              'fid' => $response['fid'],
-              'tags' => $response['tags'],
-              'video_id' => $response['id'],
-              'nid' => $node_id,
-              'upload_time' => REQUEST_TIME,
-              'video_duration' => $response['duration'],
-            ))
-            ->execute();
+                ->fields(array(
+                    'title' => $response['title'],
+                    'channel' => $response['channel'],
+                    'fid' => $response['fid'],
+                    'tags' => $response['tags'],
+                    'video_id' => $response['id'],
+                    'nid' => $node_id,
+                    'upload_time' => REQUEST_TIME,
+                    'video_duration' => $response['duration'],
+                ))
+                ->execute();
         itg_videogallery_unlink_video_playlist($response_result, $playlist_name, $tags_value);
         itg_videogallery_edit_dailymotion($response_result, $playlist_name, $node_id);
       }
@@ -1662,12 +1730,12 @@ function itg_mobile_service_custom_submit($form, &$form_state) {
  */
 function itg_mobile_services_theme($existing, $type, $theme, $path) {
   $themes = array(
-    'vas_service_content_node_form' => array(
-      'arguments' => array('form' => NULL),
-      'template' => 'vas-service-content-node-form',
-      'path' => drupal_get_path('module', 'itg_mobile_services') . '/templates',
-      'render element' => 'form',
-    ),
+      'vas_service_content_node_form' => array(
+          'arguments' => array('form' => NULL),
+          'template' => 'vas-service-content-node-form',
+          'path' => drupal_get_path('module', 'itg_mobile_services') . '/templates',
+          'render element' => 'form',
+      ),
   );
   return $themes;
 }

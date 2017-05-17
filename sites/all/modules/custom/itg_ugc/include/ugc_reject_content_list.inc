@@ -116,7 +116,7 @@ function itg_ugc_reject_content() {
       $sl_no = 1;
       
       foreach ($userData as $row) {
-        $link = '<span class="view-link"><a href="ugc-view-content/'.$row['_id'].'/'.$arg[0].'">'.t('view').'</a></span>';
+        $link = '<span class="view-link"><a class="colorbox-load" href="ugc-view-content/'.$row['_id'].'/'.$arg[0].'?width=500&height=300">'.t('view').'</a></span>';
         
         if ($row['status'] == 0)
         {

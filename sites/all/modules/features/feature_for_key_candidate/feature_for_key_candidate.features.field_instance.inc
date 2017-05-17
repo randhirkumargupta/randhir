@@ -29,7 +29,7 @@ function feature_for_key_candidate_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_section',
     'label' => 'Category',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,

@@ -19,7 +19,7 @@
                 }
                 ?>
             </a>
-            <p>
+            <p title="<?php echo strip_tags($desc);?> ">
               <?php //echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
             <?php
                   if (function_exists('itg_common_get_smiley_title')) {

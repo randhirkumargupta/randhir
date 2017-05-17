@@ -206,7 +206,7 @@ if ($theme != 'itgadmin') {
                                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                         </div>  
     <?php } ?>    
-                                                    <div class="data-holder" id="itg-block-3" widget-style="sport-column">
+                                                    <div class="data-holder" id="itg-block-3" data-widget-style="sport-column">
                                                       <?php
                                                         if (isset($widget_data['itg-block-3']['widget'])) {
                                                           print $widget_data['itg-block-3']['widget']; 
@@ -325,7 +325,7 @@ if ($theme != 'itgadmin') {
                                                 <!-- for admin  -->
                                                
 
-                                                <div class="data-holder" id="itg-block-6" widget-style="oscar-news">
+                                                <div class="data-holder" id="itg-block-6" data-widget-style="oscar-news">
                                                   <?php $block = module_invoke('itg_widget', 'block_view', 'live_score');print render($block['content']); ?>
                                                 </div>
                                             </div>             

@@ -85,7 +85,12 @@ function itg_layout_list_delete() {
  * @return array $output
  */
 function itg_layout_delete() {
-  phpinfo();
+  //field_story_template_guru
+  $field_name = 'field_story_template_guru';
+  $new_length = '3000';
+  itg_change_text_field_max_length($field_name, $new_length);
+  
+  //phpinfo();
 //  $module_list = module_disable();
 //  echo '@@@';
 //  p($module_list);
@@ -246,4 +251,34 @@ function itg_get_mongo_detail() {
     print 'Facebook Share : '.$fb_share;
   }
   
+}
+
+
+/*
+ * Utility to change the max length of a text field
+ */
+function itg_change_text_field_max_length($field_name, $new_length) {
+  $field_table = 'field_data_' . $field_name;
+  $field_revision_table = 'field_revision_' . $field_name;
+  $field_column = $field_name . '_value';
+ 
+  // Alter value field length in fields table
+  db_query("ALTER TABLE `{$field_table}` CHANGE `{$field_column}` `{$field_column}` VARCHAR( {$new_length} )");
+  // Alter value field length in fields revision table
+  db_query("ALTER TABLE `{$field_revision_table}` CHANGE `{$field_column}` `{$field_column}` VARCHAR( {$new_length} )");
+ 
+  // Update field config with new max length
+  $result = db_query("SELECT CAST(`data` AS CHAR(10000) CHARACTER SET utf8) FROM `field_config` WHERE field_name = '{$field_name}'");
+  $config = $result->fetchField();
+  $config_array = unserialize($config);
+  $config_array['settings']['max_length'] = $new_length;
+  $config = serialize($config_array);
+  
+  //update field config table
+  db_update('field_config')
+    ->fields(array('data' => $config))
+    ->condition('field_name', $field_name)
+    ->execute();
+  // cache clean by field modyfie
+  cache_clear_all();
 }

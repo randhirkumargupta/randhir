@@ -65,6 +65,16 @@ jQuery.ajax({type: "GET",url: stateURL,dataType: "jsonp", cache: "true",crossDom
 }
 
 
+function loadStateTable(pArray,sArray,cArray)
+{
+	var tRow = '<tr><td>PARTIES</td><td ><span>TOTAL</span></td></tr>';
+	
+	for(var i = 0;i < pArray.length;i++)
+	{
+		tRow += '<tr><td style="background-color:'+cArray[i]+';color:#fff">'+pArray[i]+'</td><td style="background-color:#eeeeee; text-align:center;"><span>'+sArray[i]+'</span></td></tr>';
+	}
+	jQuery("#tRow").html(tRow);
+}
 function getconssvg(mapurls,cid)
 {
    
@@ -82,7 +92,6 @@ jQuery.ajax({type: "GET",url: statemapurl,dataType: "jsonp", cache: "true",cross
    jQuery("#conssvg").html(data.loksabha.htm);
    var consID = cid;
 	if(consID.length == 4){consID = "0"+consID;}
-	
 	 getStateMapDetails(mapurls,consID);
 
  }

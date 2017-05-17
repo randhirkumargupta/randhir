@@ -17,7 +17,9 @@
             <span class="posted-on"><?php print $row['created'] ?></span>        
             <?php endif;?>
              <?php if(!empty($row['title'])) : ?>
-        <?php print $row['title'] ?>
+            <p title="<?php print strip_tags($row['title']) ; ?>">
+                  <?php print $row['title'] ?>
+            </p>
     <?php endif;?>
 
         </div>

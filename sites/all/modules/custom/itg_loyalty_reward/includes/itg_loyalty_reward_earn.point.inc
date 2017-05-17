@@ -14,7 +14,7 @@
  */
 function itg_loyalty_reward_testpoints() {
   global $base_url;
-  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js');
+  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js', array('scope' => 'footer'));
 
   // Pass data to js file.
   drupal_add_js(array('itg_loyalty_reward' => array('base_url' => $base_url),
@@ -293,9 +293,17 @@ function itg_loyalty_reward_dedicated_point($type) {
       'label' => 'Online Registration for Any Events',
       'point' => variable_get('lrp_online_registration_for_any_events'),
     ),
-    'participate' => array(
-      'label' => 'Participation in Poll/Campaign/Survey',
-      'point' => variable_get('lrp_participation_in_poll_campaign_survey'),
+    'poll' => array(
+      'label' => 'Participation in Poll',
+      'point' => variable_get('lrp_participation_in_poll'),
+    ),
+    'campaign' => array(
+      'label' => 'Participation in Campaign',
+      'point' => variable_get('lrp_participation_in_campaign'),
+    ),
+    'survey' => array(
+      'label' => 'Participation in Survey',
+      'point' => variable_get('lrp_participation_in_survey'),
     ),
     'raf' => array(
       'label' => 'Refer a Friend',

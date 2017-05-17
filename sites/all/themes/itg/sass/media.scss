@@ -436,6 +436,19 @@
     font-size: 11px;
   }
   /*search page css end */
+  
+  #block-itg-live-tv-live-tv-video-page{
+    .program-livetv{
+      .live_tv_video{
+        max-width: 82%;
+        padding-bottom: 46.5%;
+      }
+      .social-icon{
+        width: 18%;
+        padding-top: 10px;
+      }
+    }
+  }
 }   
 
 
@@ -575,12 +588,23 @@
   }
   /*budget page css end*/
 
-
+  #block-itg-live-tv-live-tv-video-page{
+    .program-livetv{
+      .live_tv_video{
+        max-width: 83%;
+        padding-bottom: 47%;
+      }
+      .social-icon{
+        width: 17%;
+        padding-top: 40px;
+      }
+    }
+  }
 
 }
 
 @media only screen and (max-width:768px){
-
+  .block-itg-ads{overflow: hidden;}
   .widget-wrapper {
     overflow: initial;
   }
@@ -751,7 +775,7 @@
         }
       }
       .globle-search{
-        @include pos(absolute,0px,94px,null,null);
+        @include pos(absolute,-2px,25px,null,null);
         @include transition(all 0.5s ease-in-out );
         width:0px;
         overflow:hidden;
@@ -759,7 +783,11 @@
         .search-text{
           height:25px;
           line-height:25px;
-        }                    
+          width: 100%;
+        }
+        &.active{
+          width:140px;
+        }
       }
     }
   }
@@ -1596,6 +1624,11 @@
     width: 245px;
   }
   /*election page css end*/
+  
+  #block-itg-menu-manager-third-level-menu{
+    z-index: 999999;
+    position: relative;
+  }
 
 }
 
@@ -1946,9 +1979,12 @@
     }
     .program-livetv{
       padding: 10px;
-      .social-icon, .live_tv_video{
-        @include calculate-width(1);
-        @include float(none);
+      .social-icon{
+        width: 100%;
+      } 
+      .live_tv_video{
+        max-width: none;
+        padding-bottom: 56.25%;
       }
       .social-icon {
         li{
@@ -2465,9 +2501,28 @@
     }
   }
   /*CSS End Photo landing page*/   
+  
+  .story-section .story-right.photo-story .fa-chevron-left, .story-section .story-right.photo-story .fa-chevron-right{
+    width: 25px;
+    height: 35px;
+    top: 55px;
+    font-size: 18px;
+    line-height: 37px;
+  }
+  .story-section .story-right.photo-story .multiple-photo{
+    padding: 0;
+  }
 
 }
-
+@media only screen and (max-width:340px){
+  .story-section .story-right.photo-story .fa-chevron-left, .story-section .story-right.photo-story .fa-chevron-right{
+    width: 25px;
+    height: 35px;
+    top: 40px;
+    font-size: 18px;
+    line-height: 37px;
+  }
+}   
 /*Start header CSS Desktop version*/
 @media only screen and (min-width:769px){        
   .list-none{
@@ -2795,6 +2850,8 @@
   /*CSS start sidebar */
   section.sidebar{
     border: 1px solid #ddd;
+    width: 100%;
+    max-width: 370px;
   }
   .sidebars{
     margin-top: 0px;
@@ -2809,7 +2866,10 @@
   h1.category-heading{
     @include font(32px,46px,400);                
   } 
-  .view-category-wise-content-list, .view-blog-listing, .page-podcasts-listing .view-podcasts-listing{           
+  .view-category-wise-content-list, 
+  .view-blog-listing, 
+  .page-podcast .view-podcasts-listing,           
+  .page-podcasts-listing .view-podcasts-listing{           
     .catagory-listing{        
       .pic{
         width: 170px; 
@@ -3039,6 +3099,7 @@
         width: 15.5%; 
         padding: 0;
         border-bottom: none;
+        border-right: 1px solid #181818;
         margin-bottom: 0;
         ul{
           display: inherit;
@@ -3131,11 +3192,18 @@
   .second-level-menu.before-load{
     height: 37px; overflow: hidden;
   }
+  body.page-taxonomy-term{
+    #main .row{
+      overflow: hidden;
+    }
+  }
+  
 }
 /*End CSS Desktop version*/
 
 
-@media only screen and (min-width:768px) and (max-width:1200px){       
+@media only screen and (min-width:768px) and (max-width:1200px){   
+  .story-section .snap-post .agbutton, .story-section .snap-post .discription{text-align: center;}
   .widget-wrapper.top_stories_ordering .data-holder .block-itg-widget{
     overflow: scroll;
     max-height: 663px;
@@ -3166,5 +3234,15 @@
       }
     }
   }
-
+  #block-views-photo-landing-slider-block .social-icon ul{
+    display: table;
+    li{
+      display: table-cell;
+      text-align: center;
+      float: none;
+      a{
+        padding: 0 5px;
+      }
+    }
+  }
 }

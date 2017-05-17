@@ -27,9 +27,7 @@ function ads_features_user_default_permissions() {
     'name' => 'delete any ads_management content',
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',
   );
@@ -39,9 +37,7 @@ function ads_features_user_default_permissions() {
     'name' => 'delete own ads_management content',
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',
   );

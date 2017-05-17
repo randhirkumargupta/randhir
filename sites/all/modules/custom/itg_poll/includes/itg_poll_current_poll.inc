@@ -19,7 +19,8 @@ function itg_poll_get_all_current_poll() {
     $poll_banner_image = theme('image_style', array('style_name' => 'poll_banner_active_poll_front_end', 'path' => $node->field_poll_banner[$node->language][0]['uri']));
   }
   else {
-    $poll_banner_image = '';
+    $poll_banner_image = '<img src ="'.$base_url . "/" . drupal_get_path('theme', 'itg').'/images/itg_image370x208.jpg" alt="" title="">';
+
   }
 
   $poll_image_exist_class = '';

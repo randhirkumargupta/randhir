@@ -447,6 +447,14 @@
   }
 
   /*search page css end */
+  #block-itg-live-tv-live-tv-video-page .program-livetv .live_tv_video {
+    max-width: 82%;
+    padding-bottom: 46.5%;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon {
+    width: 18%;
+    padding-top: 10px;
+  }
 }
 @media only screen and (max-width: 991px) {
   /*CSS start education page special*/
@@ -577,8 +585,20 @@
   }
 
   /*budget page css end*/
+  #block-itg-live-tv-live-tv-video-page .program-livetv .live_tv_video {
+    max-width: 83%;
+    padding-bottom: 47%;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon {
+    width: 17%;
+    padding-top: 40px;
+  }
 }
 @media only screen and (max-width: 768px) {
+  .block-itg-ads {
+    overflow: hidden;
+  }
+
   .widget-wrapper {
     overflow: initial;
   }
@@ -755,8 +775,8 @@
   }
   #block-itg-layout-manager-header-block .head-live-tv .globle-search {
     position: absolute;
-    top: 0px;
-    right: 94px;
+    top: -2px;
+    right: 25px;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     -ms-transition: all 0.5s ease-in-out;
@@ -769,6 +789,10 @@
   #block-itg-layout-manager-header-block .head-live-tv .globle-search .search-text {
     height: 25px;
     line-height: 25px;
+    width: 100%;
+  }
+  #block-itg-layout-manager-header-block .head-live-tv .globle-search.active {
+    width: 140px;
   }
 
   /*footer*/
@@ -1554,6 +1578,10 @@
   }
 
   /*election page css end*/
+  #block-itg-menu-manager-third-level-menu {
+    z-index: 999999;
+    position: relative;
+  }
 }
 @media only screen and (max-width: 767px) {
   /*css start oscar-layout-page */
@@ -1850,9 +1878,12 @@
   #block-itg-live-tv-live-tv-video-page .program-livetv {
     padding: 10px;
   }
-  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon, #block-itg-live-tv-live-tv-video-page .program-livetv .live_tv_video {
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon {
     width: 100%;
-    float: none;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .live_tv_video {
+    max-width: none;
+    padding-bottom: 56.25%;
   }
   #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon li {
     display: inline-block;
@@ -2347,6 +2378,26 @@
   }
 
   /*CSS End Photo landing page*/
+  .story-section .story-right.photo-story .fa-chevron-left, .story-section .story-right.photo-story .fa-chevron-right {
+    width: 25px;
+    height: 35px;
+    top: 55px;
+    font-size: 18px;
+    line-height: 37px;
+  }
+
+  .story-section .story-right.photo-story .multiple-photo {
+    padding: 0;
+  }
+}
+@media only screen and (max-width: 340px) {
+  .story-section .story-right.photo-story .fa-chevron-left, .story-section .story-right.photo-story .fa-chevron-right {
+    width: 25px;
+    height: 35px;
+    top: 40px;
+    font-size: 18px;
+    line-height: 37px;
+  }
 }
 /*Start header CSS Desktop version*/
 @media only screen and (min-width: 769px) {
@@ -2701,6 +2752,8 @@
   /*CSS start sidebar */
   section.sidebar {
     border: 1px solid #ddd;
+    width: 100%;
+    max-width: 370px;
   }
 
   .sidebars {
@@ -2720,29 +2773,47 @@
     line-height: 46px;
   }
 
-  .view-category-wise-content-list .catagory-listing .pic, .view-blog-listing .catagory-listing .pic, .page-podcasts-listing .view-podcasts-listing .catagory-listing .pic {
+  .view-category-wise-content-list .catagory-listing .pic,
+  .view-blog-listing .catagory-listing .pic,
+  .page-podcast .view-podcasts-listing .catagory-listing .pic,
+  .page-podcasts-listing .view-podcasts-listing .catagory-listing .pic {
     width: 170px;
     margin-right: 20px;
   }
-  .view-category-wise-content-list .catagory-listing .detail h3, .view-blog-listing .catagory-listing .detail h3, .page-podcasts-listing .view-podcasts-listing .catagory-listing .detail h3 {
+  .view-category-wise-content-list .catagory-listing .detail h3,
+  .view-blog-listing .catagory-listing .detail h3,
+  .page-podcast .view-podcasts-listing .catagory-listing .detail h3,
+  .page-podcasts-listing .view-podcasts-listing .catagory-listing .detail h3 {
     font-size: 20px;
     font-size: 1.25rem;
     font-weight: 700;
     line-height: 24px;
   }
-  .view-category-wise-content-list .catagory-listing .detail p, .view-blog-listing .catagory-listing .detail p, .page-podcasts-listing .view-podcasts-listing .catagory-listing .detail p {
+  .view-category-wise-content-list .catagory-listing .detail p,
+  .view-blog-listing .catagory-listing .detail p,
+  .page-podcast .view-podcasts-listing .catagory-listing .detail p,
+  .page-podcasts-listing .view-podcasts-listing .catagory-listing .detail p {
     display: block;
   }
-  .view-category-wise-content-list .item-list ul.pager, .view-blog-listing .item-list ul.pager, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager {
+  .view-category-wise-content-list .item-list ul.pager,
+  .view-blog-listing .item-list ul.pager,
+  .page-podcast .view-podcasts-listing .item-list ul.pager,
+  .page-podcasts-listing .view-podcasts-listing .item-list ul.pager {
     margin: 10px 0;
     list-style-type: none;
     text-align: center;
   }
-  .view-category-wise-content-list .item-list ul.pager li, .view-blog-listing .item-list ul.pager li, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li {
+  .view-category-wise-content-list .item-list ul.pager li,
+  .view-blog-listing .item-list ul.pager li,
+  .page-podcast .view-podcasts-listing .item-list ul.pager li,
+  .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li {
     display: inline-block;
     vertical-align: top;
   }
-  .view-category-wise-content-list .item-list ul.pager li.pager-current, .view-blog-listing .item-list ul.pager li.pager-current, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-current {
+  .view-category-wise-content-list .item-list ul.pager li.pager-current,
+  .view-blog-listing .item-list ul.pager li.pager-current,
+  .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-current,
+  .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-current {
     height: 25px;
     width: 25px;
     line-height: 25px;
@@ -2751,7 +2822,10 @@
     border-radius: 50%;
     font-family: "Roboto", sans-serif;
   }
-  .view-category-wise-content-list .item-list ul.pager li.pager-item a, .view-blog-listing .item-list ul.pager li.pager-item a, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-item a {
+  .view-category-wise-content-list .item-list ul.pager li.pager-item a,
+  .view-blog-listing .item-list ul.pager li.pager-item a,
+  .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-item a,
+  .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-item a {
     display: block;
     height: 25px;
     width: 25px;
@@ -2761,16 +2835,55 @@
     color: #323232;
     font-family: "Roboto", sans-serif;
   }
-  .view-category-wise-content-list .item-list ul.pager li.pager-item a:hover, .view-blog-listing .item-list ul.pager li.pager-item a:hover, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-item a:hover {
+  .view-category-wise-content-list .item-list ul.pager li.pager-item a:hover,
+  .view-blog-listing .item-list ul.pager li.pager-item a:hover,
+  .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-item a:hover,
+  .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-item a:hover {
     background-color: #337ab7;
     color: #fff;
     border-radius: 50%;
   }
-  .view-category-wise-content-list .item-list ul.pager li.pager-next a, .view-category-wise-content-list .item-list ul.pager li.pager-last a, .view-category-wise-content-list .item-list ul.pager li.pager-first a, .view-category-wise-content-list .item-list ul.pager li.pager-previous a, .view-blog-listing .item-list ul.pager li.pager-next a, .view-blog-listing .item-list ul.pager li.pager-last a, .view-blog-listing .item-list ul.pager li.pager-first a, .view-blog-listing .item-list ul.pager li.pager-previous a, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-next a, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last a, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first a, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous a {
+  .view-category-wise-content-list .item-list ul.pager li.pager-next a, .view-category-wise-content-list .item-list ul.pager li.pager-last a, .view-category-wise-content-list .item-list ul.pager li.pager-first a, .view-category-wise-content-list .item-list ul.pager li.pager-previous a,
+  .view-blog-listing .item-list ul.pager li.pager-next a,
+  .view-blog-listing .item-list ul.pager li.pager-last a,
+  .view-blog-listing .item-list ul.pager li.pager-first a,
+  .view-blog-listing .item-list ul.pager li.pager-previous a,
+  .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-next a,
+  .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-last a,
+  .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-first a,
+  .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-previous a,
+  .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-next a,
+  .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last a,
+  .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first a,
+  .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous a {
     color: #323232;
     line-height: 25px;
   }
-  .view-category-wise-content-list .item-list ul.pager li.pager-next.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-next.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-last.last, .view-blog-listing .item-list ul.pager li.pager-next.pager-first.first, .view-blog-listing .item-list ul.pager li.pager-next.pager-last.last, .view-blog-listing .item-list ul.pager li.pager-last.pager-first.first, .view-blog-listing .item-list ul.pager li.pager-last.pager-last.last, .view-blog-listing .item-list ul.pager li.pager-first.pager-first.first, .view-blog-listing .item-list ul.pager li.pager-first.pager-last.last, .view-blog-listing .item-list ul.pager li.pager-previous.pager-first.first, .view-blog-listing .item-list ul.pager li.pager-previous.pager-last.last, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-next.pager-first.first, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-next.pager-last.last, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last.pager-first.first, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last.pager-last.last, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first.pager-first.first, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first.pager-last.last, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous.pager-first.first, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous.pager-last.last {
+  .view-category-wise-content-list .item-list ul.pager li.pager-next.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-next.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-last.last,
+  .view-blog-listing .item-list ul.pager li.pager-next.pager-first.first,
+  .view-blog-listing .item-list ul.pager li.pager-next.pager-last.last,
+  .view-blog-listing .item-list ul.pager li.pager-last.pager-first.first,
+  .view-blog-listing .item-list ul.pager li.pager-last.pager-last.last,
+  .view-blog-listing .item-list ul.pager li.pager-first.pager-first.first,
+  .view-blog-listing .item-list ul.pager li.pager-first.pager-last.last,
+  .view-blog-listing .item-list ul.pager li.pager-previous.pager-first.first,
+  .view-blog-listing .item-list ul.pager li.pager-previous.pager-last.last,
+  .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-next.pager-first.first,
+  .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-next.pager-last.last,
+  .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-last.pager-first.first,
+  .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-last.pager-last.last,
+  .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-first.pager-first.first,
+  .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-first.pager-last.last,
+  .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-previous.pager-first.first,
+  .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-previous.pager-last.last,
+  .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-next.pager-first.first,
+  .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-next.pager-last.last,
+  .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last.pager-first.first,
+  .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last.pager-last.last,
+  .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first.pager-first.first,
+  .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first.pager-last.last,
+  .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous.pager-first.first,
+  .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous.pager-last.last {
     display: none;
   }
 
@@ -2949,6 +3062,7 @@
     width: 15.5%;
     padding: 0;
     border-bottom: none;
+    border-right: 1px solid #181818;
     margin-bottom: 0;
   }
   #block-views-video-landing-header-block .video-header-left .social-likes ul {
@@ -3031,9 +3145,17 @@
     height: 37px;
     overflow: hidden;
   }
+
+  body.page-taxonomy-term #main .row {
+    overflow: hidden;
+  }
 }
 /*End CSS Desktop version*/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
+  .story-section .snap-post .agbutton, .story-section .snap-post .discription {
+    text-align: center;
+  }
+
   .widget-wrapper.top_stories_ordering .data-holder .block-itg-widget {
     overflow: scroll;
     max-height: 663px;
@@ -3052,5 +3174,17 @@
   }
   #block-views-video-landing-header-block .social-likes ul li {
     float: left;
+  }
+
+  #block-views-photo-landing-slider-block .social-icon ul {
+    display: table;
+  }
+  #block-views-photo-landing-slider-block .social-icon ul li {
+    display: table-cell;
+    text-align: center;
+    float: none;
+  }
+  #block-views-photo-landing-slider-block .social-icon ul li a {
+    padding: 0 5px;
   }
 }

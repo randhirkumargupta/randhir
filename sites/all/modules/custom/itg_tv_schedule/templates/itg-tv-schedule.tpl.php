@@ -23,21 +23,26 @@ $sun = $base_url . "/tv-show/SUN";
 $class = 'class="active"';
 $day = strtoupper(date("D"));
 $clicked_day = arg(1);
-if($clicked_day == "")
+if($clicked_day == "" && empty($_GET['date_zone']))
 {
    $clicked_day= $day;
+}
+
+if (!empty($_GET['date_zone']) && empty(arg(1))) {
+  $get_day_date = get_tv_schedule_date($_GET['date_zone'], 'no');
+  $assign_day  = $get_day_date['program'];
 }
 ?>
 <!-- Listing shows and days option -->
 <div class="tv-schedule-parent">
     <ul class="no-bullet schedule-days">
-        <li><a <?php if(arg(1) == 'MON'){ print $class; }elseif($day == 'MON' && $clicked_day == 'MON'){ print $class; } ?> href="<?php print $mon; ?>"><?php print t('Monday'); ?></a></li>
-        <li><a <?php if(arg(1) == 'TUE'){ print $class; }elseif($day == 'TUE' && $clicked_day == 'TUE'){ print $class; } ?> href="<?php print $tue; ?>"><?php print t('Tuesday'); ?></a></li>
-        <li><a <?php if(arg(1) == 'WED'){ print $class; }elseif($day == 'WED' && $clicked_day == 'WED'){ print $class; } ?>href="<?php print $wed; ?>"><?php print t('Wednesday'); ?></a></li>
-        <li><a <?php if(arg(1) == 'THU'){ print $class; }elseif($day == 'THU' && $clicked_day == 'THU'){ print $class; } ?>href="<?php print $thu; ?>"><?php print t('Thursday'); ?></a></li>
-        <li><a <?php if(arg(1) == 'FRI'){ print $class; }elseif($day == 'FRI' && $clicked_day == 'FRI'){ print $class; } ?>href="<?php print $fri; ?>"><?php print t('Friday'); ?></a></li>
-        <li><a <?php if(arg(1) == 'SAT'){ print $class; }elseif($day == 'SAT' && $clicked_day == 'SAT'){ print $class; } ?>href="<?php print $sat; ?>"><?php print t('Saturday'); ?></a></li>
-        <li><a <?php if(arg(1) == 'SUN'){ print $class; }elseif($day == 'SUN' && $clicked_day == 'SUN'){ print $class; } ?>href="<?php print $sun; ?>"><?php print t('Sunday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'MON'){ print $class; }elseif($assign_day == 'MON'){ print $class; } elseif($day == 'MON' && $clicked_day == 'MON'){ print $class; } ?> href="<?php print $mon; ?>"><?php print t('Monday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'TUE'){ print $class; }elseif($assign_day == 'TUE'){ print $class; } ?> href="<?php print $tue; ?>"><?php print t('Tuesday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'WED'){ print $class; }elseif($assign_day == 'WED'){ print $class; } ?>href="<?php print $wed; ?>"><?php print t('Wednesday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'THU'){ print $class; }elseif($assign_day == 'THU'){ print $class; } ?>href="<?php print $thu; ?>"><?php print t('Thursday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'FRI'){ print $class; }elseif($assign_day == 'FRI'){ print $class; } ?>href="<?php print $fri; ?>"><?php print t('Friday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'SAT'){ print $class; }elseif($assign_day == 'SAT'){ print $class; } ?>href="<?php print $sat; ?>"><?php print t('Saturday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'SUN'){ print $class; }elseif($assign_day == 'SUN'){ print $class; } ?>href="<?php print $sun; ?>"><?php print t('Sunday'); ?></a></li>
     </ul>
     <!-- Showing Search box and time zone drop down list -->
      
@@ -64,7 +69,8 @@ if($clicked_day == "")
             <div class="tv-schedule-task"> 
                 <span><?php
                     if ($total == $counter && $day == $val['day'] && $current_day == $val['program date']) {
-                        echo '<a href = "http://indiatoday.intoday.in/livetv.jsp">' . ucfirst($val['program']) . '</a>';
+                        //echo '<a href = "http://indiatoday.intoday.in/livetv.jsp">' . ucfirst($val['program']) . '</a>';
+                        echo '<a href = "livetv">' . ucfirst($val['program']) . '</a>';
                         //print $val['program'];
                     }
                     else {
@@ -336,6 +342,7 @@ if($clicked_day == "")
 
         jQuery('body').on('click', '.itg-close-popup', function() {
             jQuery(this).parent().parent().parent().hide();
+            window.location.href =  window.location.href.split("?")[0];
         });
 
     });

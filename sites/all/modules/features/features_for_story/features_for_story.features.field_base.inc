@@ -732,7 +732,7 @@ function features_for_story_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_listicle_color',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'format' => array(
@@ -746,6 +746,24 @@ function features_for_story_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
+  );
+
+  // Exported field_base: 'field_listicle_color_new'.
+  $field_bases['field_listicle_color_new'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_listicle_color_new',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'jquery_colorpicker',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'jquery_colorpicker',
   );
 
   // Exported field_base: 'field_map_embed_code'.
@@ -2214,6 +2232,11 @@ function features_for_story_field_default_field_bases() {
     'settings' => array(
       'handler' => 'base',
       'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
         'sort' => array(
           'type' => 'none',
         ),
@@ -2821,7 +2844,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 3000,
     ),
     'translatable' => 0,
     'type' => 'text',

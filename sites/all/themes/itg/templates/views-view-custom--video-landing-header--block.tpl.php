@@ -28,7 +28,6 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
 ?>
 <?php foreach ($rows as $row): ?>
     <div class="container">
-        <div class="ad-blocker"></div>
         <div class ="video-landing-header">
             <div class="row">
                 <div class="col-md-12">
@@ -135,6 +134,7 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                                 }
                                 $usebitrates = implode(',', $allbitrates);
                                 $getvideo_bitrate_url = itg_videogallery_make_bitrate_url($video_value->field_migrated_video_url_value, $usebitrates);
+                                //$getfile_its_url = itg_videogallery_get_video_bitrate($nid);
                                 ?>
                                     <div class="iframe-video">
 
@@ -146,9 +146,10 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                                                         title: "<?php print $row['title']; ?>",
                                                         image: "<?php echo $image_url; ?>",
                                                         sources: [
+//                                                            {
+//                                                                file: "<?php echo $getvideo_bitrate_url; ?>"
+//                                                            },
                                                             {
-                                                                file: "<?php echo $getvideo_bitrate_url; ?>"
-                                                            }, {
                                                                 file: "<?php print $video_value->field_migrated_video_url_value; ?>"
                                                             }]
                                                     }],
@@ -225,7 +226,7 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                             <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                                 <div class="show-embed-code-div">
                                     <div class="copy-sample-code">
-                                    <textarea readonly="true"><iframe src=<?php print $base_url.'/embed/videogallery-embed?gid='.$argum;?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>
+                                    <textarea readonly><iframe src=<?php print $base_url.'/embed/videogallery-embed?gid='.$argum;?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>
                                     </div>
                                 </div>
                             </li>
@@ -272,14 +273,36 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                                                 
                                             
                                             ?></span></a></li>
-                                <li><?php print $row['ops']; ?></li>
+                                <?php
+                            if ($user->uid > 0) {
+                                if (function_exists(itg_get_front_activity_info)) {
+                                    $opt = itg_get_front_activity_info($video_node->nid, $video_node->type, $user->uid, 'read_later', $status = '');
+                                }
+
+                                if (empty($opt['status']) || $opt['status'] == 0) {
+                                    ?> 
+                                    <li class="later"><a title = "Save" href="javascript:void(0)" class="user-activity" rel="<?php print $video_node->nid; ?>" data-tag="<?php print $video_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-clock-o"></i></a></li>
+                                    <?php
+                                }
+                                else {
+                                    ?>
+                                    <li><a title = "Save" href="javascript:" class="def-cur-pointer active"><i class="fa fa-clock-o"></i></a></li>
+                                    <?php
+                                }
+                            }
+                            else {
+                                if (function_exists(itg_sso_url)) {
+                                    print '<li>' . itg_sso_url('<i class="fa fa-clock-o"></i>', t('Save')) . '</li>';
+                                }
+                            }
+                            ?>
                                 <li><a class="def-cur-pointer" title ="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i> <span>Share</span></a></li>
                                 <li><a class="user-activity def-cur-pointer" rel="<?php print $video_node->nid; ?>" data-tag="<?php print $video_node->type; ?>" data-activity="twitter_share" data-status="1" title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($video_node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i> <span>Twitter</span></a></li>
                                 <li><a href="mailto:?body=<?php print urlencode($actual_link); ?>" title="Email"><i class="fa fa-envelope"></i> <span>Email</span></a></li>
                                 <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                                     <div class="show-embed-code-div">
                                         <div class="copy-sample-code">
-                                        <textarea readonly="true"><iframe src=<?php print $base_url.'/embed/videogallery-embed?gid='.$argum;?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>    
+                                        <textarea readonly><iframe src=<?php print $base_url.'/embed/videogallery-embed?gid='.$argum;?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>    
                                         </div>
                                     </div>
                                 </li>

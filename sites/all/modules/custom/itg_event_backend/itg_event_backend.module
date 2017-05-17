@@ -389,7 +389,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
  * @return array
  */
 function itg_event_backend_sponsor($form, &$form_state) {
-  drupal_add_js(drupal_get_path('module', 'itg_event_backend') . '/js/itg_event_sponsor.js', array('weight' => 3));
+  drupal_add_js(drupal_get_path('module', 'itg_event_backend') . '/js/itg_event_sponsor.js', array('weight' => 3, 'scope' => 'footer'));
   global $user, $base_url;
   unset($form['metatags']['intro_text']['#markup']);
   $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
@@ -435,7 +435,7 @@ function itg_event_backend_after_build($form, &$form_state) {
       '#weight' => -9,
     );
   }
-  drupal_add_js(drupal_get_path('module', 'itg_event_backend') . '/js/itg_event_backend.js', array('weight' => 3));
+  drupal_add_js(drupal_get_path('module', 'itg_event_backend') . '/js/itg_event_backend.js', array('weight' => 3, 'scope' => 'footer'));
   if (isset($form_state['values']['nid'])) {
     $settings = array();
     $settings['base_url'] = $base_url;
@@ -1909,8 +1909,8 @@ function itg_event_backend_highlights_like_dislike($unique_id) {
   $like = "no-of-likes_" . $unique_id;
   $dislike = "no-of-dislikes_" . $unique_id;
 
-  $like_btn = '<div class="agbutton"><button class="btn-highlights-like" id="like_count" rel="' . $unique_id . '"><i class="fa fa-thumbs-o-up"></i> <span id="' . $like . '">' . $like_count_common . '</span></button>';
-  $dislike_btn = '<button class="btn-highlights-dislike" id="dislike_count" rel="' . $unique_id . '"><i class="fa fa-thumbs-o-down"></i> <span id="' . $dislike . '">' . $dislike_count_common . '</span></button>';
+  $like_btn = '<div class="agbutton"><button class="btn-highlights-like" id="like_count" data-rel="' . $unique_id . '"><i class="fa fa-thumbs-o-up"></i> <span id="' . $like . '">' . $like_count_common . '</span></button>';
+  $dislike_btn = '<button class="btn-highlights-dislike" id="dislike_count" data-rel="' . $unique_id . '"><i class="fa fa-thumbs-o-down"></i> <span id="' . $dislike . '">' . $dislike_count_common . '</span></button>';
   $error_msg = '<p class="error-msg" id="' . $pid . '"></p></div>';
   return $like_btn . $dislike_btn . $error_msg;
 }
@@ -1925,7 +1925,7 @@ function itg_event_backend_live_content() {
   if (module_exists('itg_live_tv')) {
     $banner_video = itg_live_tv_page_video();
   }
-  $video = '<div class="row top-block-highlight"><div class="highlights-video col-md-7"><h2 style="live-event-title">' . $title . '</h2><div class="live-event-video">' . $banner_video . '</div></div>';
+  $video = '<div class="row top-block-highlight"><div class="highlights-video col-md-7"><h2 class="live-event-title">' . $title . '</h2><div class="live-event-video">' . $banner_video . '</div></div>';
   $highlights_content = '<div class="highlights-container col-md-5">' . itg_event_backend_highlights_block_content() . '</div></div>';
   return $video . $highlights_content;
 }

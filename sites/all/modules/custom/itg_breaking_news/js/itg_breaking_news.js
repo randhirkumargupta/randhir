@@ -11,6 +11,13 @@
   Drupal.behaviors.itg_breaking_news = {
     attach: function (context, settings) {
       var uid = settings.itg_breaking_news.settings.uid;
+      var nid = settings.itg_breaking_news.settings.no_id;
+      
+      if(nid == 0) {
+        jQuery("#edit-field-story-highlights-und-0-remove-button").hide();
+        jQuery("#edit-field-breaking-content-details-und-0-remove-button").hide();
+      }
+      
       var type = $('#edit-field-type-und').val();
       
        $('#custom_add_another_item').click(function() {         
@@ -26,13 +33,17 @@
         if (this.value == 'Live Blog') {
           $(".field-name-field-mark-as-breaking-band").hide();
           $(".field-name-field-breaking-publish-time").hide();
+          $(".form-item-field-section-und").hide();
           $("input[id*=field-mark-as-breaking-band]").removeAttr('checked');
           $(".highlight-title").show();
+          $('#edit-field-section-und').prop('selectedIndex',0);
+          $('#edit-field-breaking-display-on-und').prop('selectedIndex',0);
           $('#edit-field-section > .form-type-select > label').html('Section');
         }
         else {
           $(".highlight-title").hide();
           $(".field-name-field-mark-as-breaking-band").show();
+          $(".form-item-field-section-und").show();
           $(".field-name-field-breaking-publish-time").show();
           $('#edit-field-section > .form-type-select > label').html('Section<span class="form-required">*</span>');
         }
@@ -48,6 +59,7 @@
       if (type == 'Live Blog') {
         $(".field-name-field-mark-as-breaking-band").hide();
         $(".field-name-field-breaking-publish-time").hide();
+        $(".form-item-field-section-und").hide();
       }
       
       // type check for edit form

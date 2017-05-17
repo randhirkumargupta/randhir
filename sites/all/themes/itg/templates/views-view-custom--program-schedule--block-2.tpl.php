@@ -19,7 +19,7 @@
     }
     ?></li>
         <li>
-            <span class="title"><?php print l($row['title'], $baseurl.'/speaker-details?speaker='.$row['nid'], array('attributes' => array('target'=>'_blank'))); ?></span>
+            <span class="title"  title="<?php print strip_tags($row['title']) ; ?>"><?php print l(strip_tags($row['title']), $baseurl.'/speaker-details?speaker='.$row['nid'], array('attributes' => array('target'=>'_blank'))); ?></span>
             <span class="designation"><?php print $row['field_story_new_title']; ?></span>
         </li>
         </ul>

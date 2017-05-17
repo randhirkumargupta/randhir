@@ -90,7 +90,7 @@ jQuery(document).ready(function () {
 
     jQuery('.checked-list').html(checkedlist);
     if (checkedlist) {
-        jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save</span>');
+        jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save order</span>');
     }
     else {
         jQuery('.save-checklist-ordre').html('<span class="empty-checklist">No content associated for this story yet !</span>');

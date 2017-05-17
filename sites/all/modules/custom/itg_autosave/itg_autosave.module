@@ -181,7 +181,7 @@ function itg_autosave_node_insert($node) {
  */
 function itg_autosave_after_build($form, &$form_alter) {
   // Add js file for autosave ajax.      
-  drupal_add_js(drupal_get_path('module', 'itg_autosave') . '/js/itg_autosave.js');
+  drupal_add_js(drupal_get_path('module', 'itg_autosave') . '/js/itg_autosave.js', array('scope' => 'footer'));
   // Set form ids to js file.
   $itg_autosave_form = new itg_auto_save();
   $itg_autosave_form->itg_save_set_form_ids($form['nid']['#value'], $form['type']['#value']);          

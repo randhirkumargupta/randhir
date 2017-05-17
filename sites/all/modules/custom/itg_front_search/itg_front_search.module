@@ -209,7 +209,7 @@ function itg_front_search_views_pre_render(&$view) {
     }
 
     drupal_add_js(array('itg_front_search' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_front_search') . '/js/itg_front_search.js', array('weight' => 1));
+    drupal_add_js(drupal_get_path('module', 'itg_front_search') . '/js/itg_front_search.js', array('weight' => 1, 'scope' => 'footer'));
 
     foreach ($view->result as $related_result) {
        if ($related_result->bs_status == '1') {
@@ -252,7 +252,7 @@ function itg_front_search_views_pre_render(&$view) {
       }
 
       $bundle_name = array('All' => 'All', 'Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery', 'Podcast' => 'Podcast', 'Magazine' => 'Magazine');
-      $search_url = 'site-search';
+      $search_url = 'topic';
     }
 
 
@@ -276,7 +276,9 @@ function itg_front_search_views_pre_render(&$view) {
       
       $lnk_class = '';
 
-
+      if($key == 'All' && empty($all_bundle)) {
+       $lnk_class = "active"; 
+      }
       if (in_array($key, $all_bundle)) {
         $lnk_class = "active";
       }

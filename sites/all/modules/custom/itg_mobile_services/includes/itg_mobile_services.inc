@@ -379,6 +379,7 @@ function itg_mobile_web_url_mobile($service_fetch_link, $file_path, $status) {
   $query->execute();
 }
 
+
 /**
  * function for show list of feed by url
  * @return string
@@ -391,7 +392,6 @@ function itg_mobile_get_feed_byurl() {
   
   $url = $base_url . '/' . $request_url[1] . '/' . $request_url[2] . '/' . $request_url[3];
   $path = file_create_url('public://');
-
   $query = db_select('itg_syndication_feed_url', 'feed')->extend('PagerDefault');
   # get the desired fields from the database
   $query->condition('feed.client_feed_url', $url)

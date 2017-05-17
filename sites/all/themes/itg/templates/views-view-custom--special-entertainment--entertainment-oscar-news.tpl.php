@@ -19,7 +19,7 @@
    <?php }else{
 ?>
 <div class="<?php echo $video_class;?>"><?php print $row['field_story_extra_large_image_1'];?></div>
-<div>
+<div title="<?php print strip_tags($row['title']) ; ?>">
   <?php 
       if (function_exists('itg_common_get_smiley_title')) {
         echo l(itg_common_get_smiley_title($row['nid'], 0, 140), "node/" . $row['nid'], array("html" => TRUE ));
