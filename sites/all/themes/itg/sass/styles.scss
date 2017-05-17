@@ -3200,6 +3200,17 @@ h1.category-heading{
         @include pager;        
     }    
 }
+.view-category-wise-content-list{
+  .pic{
+    position: relative;
+    figcaption {
+      position: absolute;
+      bottom: 5px;
+      left: 7px;
+      color: #fff;
+    }
+  }
+}
 .view-blog-listing .catagory-listing .detail .blog-anchor{color: #bb0a0a;}
 /*End category wise content list css*/
 /*Start anchors listing css*/
@@ -11455,6 +11466,7 @@ span.close_btt {
   }
 }
 .page-podcast #page-title {display:none}
+.nested-taxonomy-tree a:hover {color: #a00606 !important}
 
 
 
