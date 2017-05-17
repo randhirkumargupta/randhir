@@ -918,14 +918,83 @@ function itg_custom_get_user_details($uid) {
  * Implements hook_init.
  * {@inheritdoc}
  */
-function itg_common_token_info_alter(&$info) {  
-//  $i =0;
-//  foreach ($info['tokens']['node'] as $key => $val) {
-//    $dd = $i;
-//    $i++;
-//  }
-//  echo $dd;exit;
-  //unset($info['node']['field_circular_reference']);
+function itg_common_token_info_alter(&$info) {
+  
+  if (!isset($info['tokens']['node']['title'])) {
+    $title_token = array('name' => 'Title', 'description' => 'The title of the node.');
+    $info['tokens']['node']['title'] = $title_token;
+  }
+  
+  if (!isset($info['tokens']['node']['log'])) {
+    $log_token = array('name' => 'Revision log message', 'description' => 'The explanation of the most recent changes made to the node.');
+    $info['tokens']['node']['log'] = $log_token;
+  }
+  
+  if (!isset($info['tokens']['node']['nid'])) {
+    $nid_token = array('name' => 'Content ID', 'description' => 'The unique ID of the content item, or "node".');
+    $info['tokens']['node']['nid'] = $nid_token;
+  }
+  
+  if (!isset($info['tokens']['node']['vid'])) {
+    $vid_token = array('name' => 'Revision ID', 'description' => 'The unique ID of the node\'s latest revision.');
+    $info['tokens']['node']['vid'] = $vid_token;
+  }
+  
+  if (!isset($info['tokens']['node']['body'])) {
+    $body_token = array('name' => 'Body', 'description' => 'The main body text of the node. The following properties may be appended to the token: value (Text), summary (Summary), format (Text format)', 'dynamic' => 1);
+    $info['tokens']['node']['body'] = $body_token;
+  }
+  
+  if (!isset($info['tokens']['node']['summary'])) {
+    $summary_token = array('name' => 'Summary', 'description' => 'The summary of the node\'s main body text.');
+    $info['tokens']['node']['summary'] = $summary_token;
+  }
+  
+  if (!isset($info['tokens']['node']['language'])) {
+    $ln_token = array('name' => 'Language', 'description' => 'The language the node is written in.');
+    $info['tokens']['node']['language'] = $ln_token;
+  }
+  
+  if (!isset($info['tokens']['node']['url'])) {
+    $url_token = array('name' => 'URL', 'description' => 'The URL of the node.', 'type' => 'url');
+    $info['tokens']['node']['url'] = $url_token;
+  }
+  
+  if (!isset($info['tokens']['node']['created'])) {
+    $created_token = array('name' => 'Date created', 'description' => 'The date the node was posted.', 'type' => 'date');
+    $info['tokens']['node']['created'] = $created_token;
+  }
+  
+  if (!isset($info['tokens']['node']['author'])) {
+    $author_token = array('name' => 'Author', 'description' => 'The author of the node.', 'type' => 'user');
+    $info['tokens']['node']['author'] = $author_token;
+  }
+  
+  if (!isset($info['tokens']['node']['metatag'])) {
+    $meta_token = array('name' => 'Meta tags', 'description' => 'Meta tags for this node.', 'type' => 'metatag');
+    $info['tokens']['node']['metatag'] = $meta_token;
+  }
+  
+  if (!isset($info['tokens']['term']['name'])) {
+    $username_token = array('name' => 'Name', 'description' => 'The name of the taxonomy term.');
+    $info['tokens']['term']['name'] = $title_token;
+  }
+  
+  if (!isset($info['tokens']['term']['vocabulary'])) {
+    $username_token = array('name' => 'Vocabulary', 'description' => 'The vocabulary the taxonomy term belongs to.', 'type' => 'vocabulary');
+    $info['tokens']['term']['vocabulary'] = $title_token;
+  }
+  
+  if (!isset($info['tokens']['user']['name'])) {
+    $username_token = array('name' => 'Name', 'description' => 'The login name of the user account.');
+    $info['tokens']['user']['name'] = $title_token;
+  }
+  
+  if (!isset($info['tokens']['user']['uid'])) {
+    $username_token = array('name' => 'User ID', 'description' => 'The unique ID of the user account.');
+    $info['tokens']['user']['uid'] = $title_token;
+  }  
+
 }
 
 /**
