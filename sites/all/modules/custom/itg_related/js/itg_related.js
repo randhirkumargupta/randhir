@@ -157,7 +157,7 @@ jQuery(document).ready(function(){
             }
             parent.jQuery('.checked-list').html(checkedlist);
             if(item.length){
-                parent.jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save</span>');
+                parent.jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save order</span>');
             }
             else{
                 parent.jQuery('.save-checklist-ordre').html('<span class="empty-checklist">No content associated for this story yet !</span>');
