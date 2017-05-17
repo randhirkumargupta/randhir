@@ -37,8 +37,9 @@
                 var widget_name = '';
 
                 $(".templates-widgets li").draggable({
-                    appendTo: "body",
-                    helper: "clone",
+                    helper: 'clone',
+                    scroll: 'true',
+                    refreshPositions: true,
                     drag: function(event, ui) {
                         widget_name = $(this).attr('data-widget');                        
                         widget_info = $(this).attr('data-widget-info');                        
