@@ -12478,6 +12478,10 @@ div#edit-byline-names-wrapper {
   padding: 0 !important;
 }
 
+.tag-box-input-date {
+  display: inline-block;
+  vertical-align: top;
+}
 .tag-box-input-date span.error {
   font-size: 12px;
   margin-top: -10px;
