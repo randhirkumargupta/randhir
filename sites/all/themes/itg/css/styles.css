@@ -14162,6 +14162,16 @@ span.close_btt {
   display: block;
 }
 
+.top-n-most-popular-stories .widget-wrapper .data-holder {
+  height: calc(100% - 22px);
+}
+.top-n-most-popular-stories .widget-wrapper .data-holder .mCSB_inside > .mCSB_container {
+  margin-right: 0;
+}
+.top-n-most-popular-stories .widget-wrapper .data-holder .mCSB_scrollTools {
+  width: 3px;
+}
+
 @media (min-width: 768px) {
   .modal-dialog {
     width: 960px;
