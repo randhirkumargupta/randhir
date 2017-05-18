@@ -1,7 +1,7 @@
 <?php
 global $base_url;
 ?>
-<h2>Most <span>Watched</span></h2>
+<h2><?php print t('Most');?> <span><?php print t('Watched'); ?></span></h2>
 <ul class="photo-list">
 <?php foreach ($rows as $key => $value) : ?>
     <li class="col-md-3">

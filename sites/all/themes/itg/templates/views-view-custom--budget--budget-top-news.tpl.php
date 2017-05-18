@@ -29,7 +29,7 @@
 
                             </a>
                             <h3 title="<?php echo strip_tags($desc);?>">
-                              <?php // echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
+                              
                             <?php
                               if (function_exists('itg_common_get_smiley_title')) {
                                 echo l(itg_common_get_smiley_title($row['nid'], 0, 60), "node/" . $row['nid'], array("html" => TRUE));
@@ -74,7 +74,7 @@
         </div>    
     </div>
     <div class="col-md-6 other-news">
-        <h4 class="heading desktop-hide">OTHER NEWS</h4>
+        <h4 class="heading desktop-hide"><?php print t('OTHER NEWS'); ?></h4>
         <div class="auto-block-2">
             <div class="special-top-news special-top-bg">
 
@@ -87,7 +87,7 @@
                         if ($index > 2) {
                             ?>
                             <li title="<?php echo strip_tags($desc);?>">
-                              <?php //echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
+                              
                             <?php
                               if (function_exists('itg_common_get_smiley_title')) {
                                 echo l(itg_common_get_smiley_title($row['nid'], 0, 75), "node/" . $row['nid'], array("html" => TRUE));

@@ -46,7 +46,7 @@
       <?php if(!empty($display_title)) { ?>
       <div class="title"><?php print $display_title; ?></div>
       <?php } else { ?>
-      <div class="title">Breaking</div>
+      <div class="title"><?php print t('Breaking'); ?></div>
       <?php } ?>
       <div class="new-detail">  
           <div class="marquee-container">

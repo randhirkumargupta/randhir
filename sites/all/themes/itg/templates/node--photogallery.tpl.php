@@ -11,7 +11,7 @@ if (!empty($node->field_photogallery_configuration['und'])) {
     $config[] = $value['value'];
   }
 }
-//print views_embed_view('photo_list_of_category', 'block_1');
+
 if (function_exists('taboola_view')) {
   taboola_view();
 }
