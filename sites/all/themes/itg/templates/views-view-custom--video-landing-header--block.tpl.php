@@ -3,7 +3,6 @@
 global $base_url;
 $nid = check_plain(arg(1));
 $video_node = node_load(arg(1));
-//pr($video_node);
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $short_url = shorten_url($actual_link, 'goo.gl');
 $fb_title = addslashes($video_node->title);
@@ -246,7 +245,7 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                             <?php else: ?>
                                 <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                             <?php endif; ?>
-    <!--<li class="mhide"><a href="#" title="Submit Video"><i class="fa fa-share"></i> <span>Submit Video</span></a></li>-->
+    
                         </ul>
                     </div>
                     <div class="clearfix"></div>
@@ -322,7 +321,7 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                                 <?php else: ?>
                                     <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                                 <?php endif; ?>
-    <!--<li class="mhide"><a href="#" title="Submit Video"><i class="fa fa-share"></i> <span>Submit Video</span></a></li>-->
+    
                             </ul>
                         </div>
                         <?php print $description_slider; ?>

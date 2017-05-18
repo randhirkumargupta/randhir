@@ -44,6 +44,5 @@
 <div class="node node-preview">
   <div class="field"><div class="field-label"><?php print t('Magazine Title'); ?>: </div><div class="field-items"><?php print $title; ?></div></div>
   <div class="field"><div class="field-label"><?php print t('Magazine Cover Image'); ?>: </div><div class="field-items"><img src="<?php print image_style_url("thumbnail", $node->field_magazine_cover_photo[LANGUAGE_NONE][0]['uri']); ?>" /></div></div>
-  <!--<div class="field"><div class="field-label">Print Issue Date : </div><div class="field-items"><?php //print date('d/m/Y', strtotime($node->field_print_magazine_issue_date[LANGUAGE_NONE][0]['value'])); ?></div></div>-->
-  <div class="field"><div class="field-label"><?php print t('Status'); ?>: </div><div class="field-items"><?php print $node->field_magazine_publish[LANGUAGE_NONE][0]['value'] ? 'Published' : 'Unpublished'; ?></div></div>
+  <div class="field"><div class="field-label"><?php print t('Status'); ?>: </div><div class="field-items"><?php print $node->field_magazine_publish[LANGUAGE_NONE][0]['value'] ? t('Published') : t('Unpublished'); ?></div></div>
 </div>

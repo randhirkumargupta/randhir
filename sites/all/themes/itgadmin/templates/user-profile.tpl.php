@@ -38,11 +38,8 @@
    <?php 
    global $user;
    $edit_link = 'user/'.$user->uid.'/edit';
-  // print "<span class='user-edit-link'>".l('Edit Profile', $edit_link)."</span>";
    ?>
   <?php if ($user_profile): ?>
-    <?php // print render($user_profile['field_user_picture']);
-    ?>
   <div class="field-name-field-user-picture">
   <div class="field-items">
   <?php
@@ -64,8 +61,6 @@
     <?php print render($user_profile['field_first_name']); ?>
     <?php print render($user_profile['field_last_name']); ?>
     <?php print render($user_profile['field_mobile_number']); ?>
-    <?php //echo "<pre>";?>
-    <?php //print_r ($elements['#account']->name); ?>
     <div class="field">
       <div class="field-label"><?php print t('User name'); ?>:</div>
       <div class="field-items"><?php print_r($elements['#account']->name); ?></div>
@@ -104,25 +99,21 @@ if($user->uid == $view_user_id) {
       $last_record = itg_last_node_user($elements['#account']->uid);
       $last_record_type = ucfirst(str_replace('_', '', $last_record['type']));
       if(!empty($last_record)) {
-      $last_record_display = '<strong>Last Content Filed:</strong> '.$last_record_type.' - '.$last_record['title'];
-//      print '<div class="my-stats-left">' . $last_record_display . '</div>';
+      $last_record_display = '<strong>'.t('Last Content Filed:').'</strong> '.$last_record_type.' - '.$last_record['title'];
       }
       else
       {
-      $last_record_display = 'Last Content Filed : N/A';
-//      print '<div class="my-stats-left">' . $last_record_display . '</div>';
+      $last_record_display = t('Last Content Filed').' : N/A';
       }
-      // $last_publish_record = itg_last_node_published_user($elements['#account']->uid,'1');
       $last_publish_record = itg_last_publish_user_node($elements['#account']->uid,1);
       
       if(!empty($last_publish_record)) {
-        //$last_title = node_load($last_publish_record['nid'], $last_publish_record['vid']);
         $last_type = ucfirst(str_replace('_', '', $last_publish_record['type']));
-        $last_record_publish = '<strong>Last Content Publish: </strong>'.ucwords($last_type).' - '.$last_publish_record['title'];
+        $last_record_publish = '<strong>'.t('Last Content Publish:').' </strong>'.ucwords($last_type).' - '.$last_publish_record['title'];
       }
       else
       {
-        $last_record_publish = 'Last Content publish : N/A';
+        $last_record_publish = t('Last Content publish : N/A');
       }
       
 ?>
@@ -186,7 +177,6 @@ foreach ($node_type as $final_type) {
       $permissions= user_role_permissions($elements['#account']->roles);
       foreach($permissions as $key => $value) {
         foreach($value as $key1 => $value1) {
-          //pr($key1);
           // make create permission array
           if (strstr($key1, 'create')) {
         if (!strstr($key1, 'url')) {
@@ -214,9 +204,6 @@ foreach ($node_type as $final_type) {
         
         // make role permission array
         if(strstr($key1,'assign')) {
-          // $role_arr = explode(' ', $key1);
-         // pr($role_arr);
-          // $final_role_arr[] = ucwords(str_replace('_', ' ', $role_arr[1]));
           $final_role_arr[] = ucwords($key1);
         }
       }
@@ -228,18 +215,18 @@ foreach ($node_type as $final_type) {
       $comma_role_arr = implode (", ", $final_role_arr);
       $comma_del_arr = implode (", ", $final_del_arr);
       
-$output = "<h2>My Permissions</h2><table class='views-table'>
+$output = "<h2>".t('My Permissions')."</h2><table class='views-table'>
         <thead>
         <tr>
-        <th>Operations</th>
-        <th>Types</th>
+        <th>".t('Operations')."</th>
+        <th>".t('Types')."</th>
               </tr>
               </thead>
 <tr>
-        <td>Create/Edit</td>
+        <td>".t('Create/Edit')."</td>
         <td>$comma_create_arr</td>
               </tr><tr>
-        <td>Delete</td>
+        <td>".t('Delete')."</td>
         <td>$comma_del_arr</td>
           
               </tr>";
@@ -248,11 +235,7 @@ foreach($user->roles as $key=>$value) {
   if($key != 2) {
 $user_check = itg_common_check_role_access($key);
   }
-//if($user_check){
-//$routput = "<tr><td>Role</td>
-//        <td>$comma_role_arr</td>
-//                        </tr>"; 
-//}
+
 }
 
 $output .= $routput."</table>";

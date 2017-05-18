@@ -13,7 +13,7 @@
       global $user;
       ?>
       <div class="basic-details content-box">
-        <h2>Basic Gallery Details</h2>
+        <h2><?php print t('Basic Gallery Details'); ?></h2>
         <div class="content-details">
           <div class="field">
             <div class="field-label"><?php print t('Gallery Title'); ?>:</div>
@@ -34,7 +34,7 @@
       if (!empty($browsemedia)):
         ?>
         <div class="BrowseMedia">
-          <h2>Gallery Cover Image </h2>
+          <h2><?php print t('Gallery Cover Image'); ?> </h2>
           <div class="content-details">
             <?php print render($content['field_story_extra_large_image']); ?>
           </div>
@@ -47,7 +47,7 @@
       <?php $social_media = render($content['field_story_social_media_integ']); ?>
       <?php if (!empty($social_media)): ?>
         <div class="BrowseMedia">
-          <h2>Social media </h2>
+          <h2><?php print t('Social media'); ?> </h2>
           <div class="content-details">
             <?php
             print render($content['field_story_social_media_integ']);
@@ -82,7 +82,7 @@
             if (!empty($photocategory)): print render($content['field_story_category']);
             endif;
             ?>
-            <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label">Primary Category:&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
+            <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label"><?php print t('Primary Category:'); ?>&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
 
           </div>  
         </div>
@@ -106,12 +106,6 @@
             $output .= '<div class="photo-title"><strong>' . $imagecollection['field_image_caption'][LANGUAGE_NONE][0]['value'] . '</strong></div>';
           }
 
-//    if (isset($imagecollection['field_credit'][LANGUAGE_NONE]) && !empty($imagecollection['field_credit'][LANGUAGE_NONE][0]['value'])) {
-//      $output .= '<div class="photo-credit"><span>' . $imagecollection['field_credit'][LANGUAGE_NONE][0]['value'] . '</span></div>';
-//    } elseif (isset($node->field_credit_name[LANGUAGE_NONE][0]) && isset($node->field_credit_to_all[LANGUAGE_NONE][0])) {
-//      $output .= '<div class="photo-credit"><span>' . $node->field_credit_name['und'][0]['value'] . '</span></div>';
-//    }
-
           if (isset($imagecollection['field_photo_byline'][LANGUAGE_NONE]) && !empty($imagecollection['field_photo_byline'][LANGUAGE_NONE][0]['target_id'])) {
             if (module_exists('itg_photogallery')) {
               $res_id = $imagecollection['field_photo_byline'][LANGUAGE_NONE][0]['target_id'];
@@ -129,14 +123,14 @@
               $audiouri = _itg_photogallery_fid($audfid);
               $output .= '<audio controls>
                               <source src="' . file_create_url($audiouri) . '" type="audio/mpeg">
-                              Your browser does not support the audio element.
+                              '.t('Your browser does not support the audio element').'.
                             </audio>';
             } elseif (isset($node->field_common_audio_file[LANGUAGE_NONE]) && !empty($node->field_common_audio_file[LANGUAGE_NONE][0]['uri'])) {
               if (isset($node->field_common_audio[LANGUAGE_NONE]) && $node->field_common_audio[LANGUAGE_NONE][0]['value'] == 1) {
                 $audiouri = $node->field_common_audio_file[LANGUAGE_NONE][0]['uri'];
                 $output .= '<div class="audio-div"><audio controls>
                                   <source src="' . file_create_url($audiouri) . '" type="audio/mpeg">
-                                  Your browser does not support the audio element.
+                                  '.t('Your browser does not support the audio element').'.
                                 </audio></div>';
               }
             }
@@ -171,7 +165,7 @@
           <div class="content-details">
             <?php
             $isfeatured = render($content['field_featured']);
-            if (!empty($isfeatured)): print '<div class="field field-name-field-featured field-type-list-text field-label-above"><div class="field-label">Set As Featured:&nbsp;</div><div class="field-items"><div class="field-item even">Yes</div></div></div>';
+            if (!empty($isfeatured)): print '<div class="field field-name-field-featured field-type-list-text field-label-above"><div class="field-label">'.t('Set As Featured').':&nbsp;</div><div class="field-items"><div class="field-item even">'.t('Yes').'</div></div></div>';
             endif;
             ?>          
           </div>  
@@ -212,7 +206,7 @@
     <?php } else {
       ?>
       <div class="promote-sidebar">
-        <div class="promote-lock">Someone  is already working on this</div>
+        <div class="promote-lock"><?php print t('Someone  is already working on this');  ?></div>
       </div> 
     <?php }
     ?>
