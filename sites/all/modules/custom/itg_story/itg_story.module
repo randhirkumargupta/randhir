@@ -833,7 +833,7 @@ function itg_story_node_view($node , $view_mode , $langcode) {
     }
 
     if (function_exists('itg_common_get_smiley_title')) {
-      $node->content['story_title'] = itg_common_get_smiley_title($node->nid , 0 , 255);
+      $node->content['story_title'] = itg_common_get_smiley_title($node->nid , 0 , 255 , TRUE);
     }
     else {
       $node->content['story_title'] = $node->title;
