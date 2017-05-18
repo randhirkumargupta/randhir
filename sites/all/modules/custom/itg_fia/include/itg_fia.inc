@@ -29,7 +29,8 @@ function itg_fia_xml_node_feed($query) {
     if ($node->workbench_moderation['current']->state == 'published') {
       $op_pub = date('F j, h:i a', $node->workbench_moderation['current']->timestamp);
       $pubdate = date('Y-m-d\Th:i:s\Z', $node->workbench_moderation['current']->timestamp);
-    } else {
+    }
+    else {
       $op_pub = date('F j, h:i a', $node->created);
       $pubdate = date('Y-m-d\Th:i:s\Z', $node->created);
     }
@@ -108,7 +109,8 @@ function itg_fia_xml_node_feed($query) {
                      <source src="' . $audio_url . '">
                   </audio>
                  </figure>';
-      } else {
+      }
+      else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] . 
                '<figure>
@@ -126,7 +128,8 @@ function itg_fia_xml_node_feed($query) {
                '<figure>
                   <img src="'.$img_path.'" />
                 </figure>';
-      } else {
+      }
+      else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] . 
                '<figure>
@@ -158,7 +161,8 @@ function itg_fia_xml_node_feed($query) {
                      }
                   </script>
                 </figure>';
-      } else {
+      }
+      else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] . 
                 '<figure class="op-map">
@@ -198,7 +202,8 @@ function itg_fia_xml_node_feed($query) {
                   <img src="'.$imgs_path.'" />
                 </figure>
               </figure>';
-          } else {
+          }
+          else {
             $last_postion = end($bk);
             $body_vals[$last_postion] = $body_vals[$last_postion] . 
               '<figure class="op-slideshow">
@@ -217,15 +222,15 @@ function itg_fia_xml_node_feed($query) {
       if (in_array($embed_code_pos, $bk)) {
         $body_vals[$embed_code_pos] = $body_vals[$embed_code_pos] . 
                 '<figure class="op-interactive">' . $embed_code_data . '</figure>';
-      } else {
+      }
+      else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] . 
                '<figure class="op-interactive">' . $embed_code_data . '</figure>';
       }
     }
-
-    
-    $node_body_content = implode(" ", $body_vals);
+    $node_body = implode("<p>", $body_vals);
+    $node_body_content = '<p>' . $node_body;
     $node->link = url("node/$node->nid", ['absolute' => TRUE]);
     $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
     $items .= itg_fia_xml_format_rss_item($kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $node->title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
