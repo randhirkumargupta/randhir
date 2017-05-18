@@ -20,7 +20,6 @@
                 $('#edit-metatags').show();
                 $('#edit-scheduler-settings').show();
                 $('#edit-metatags-und-advanced').hide();
-
             }
             // Disable date filed direct enter date
             jQuery('input[name="field_event_start_date[und][0][value][date]"]').keydown(false);

@@ -11,8 +11,6 @@
       var arg_url = settings.itg_common.settings.arg_url;
       var formstatus = settings.itg_common.settings.formstatus;
       
-      //jQuery("#edit-metatags-und-title-value").val("");
-      
       if (formstatus == 1 && fid == 'taxonomy_form_term') {
         jQuery("#edit-relations .fieldset-title").hide();
         jQuery(".form-item-weight").hide();

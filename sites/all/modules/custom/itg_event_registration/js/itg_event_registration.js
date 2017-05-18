@@ -206,20 +206,3 @@ jQuery(document).ready(function() {
 
 
 });
-
-//jQuery(document).ready(function(){
-//    jQuery('.field-name-field-erf-ticket-type .form-radio').click(function(){
-//        var val = jQuery(this).val();
-//        var base_url = Drupal.settings.baseUrl.baseUrl;
-//        jQuery.ajax({
-//        type: 'POST',
-//        url: base_url + "/itg_reg_group_msg",
-//        data: {'case': val},
-//        success: function(resultData) {
-//            alert(resultData);
-//            jQuery('.group-price-msg').show();
-//            jQuery('.group-price-msg').text(resultData);
-//        }
-//     });
-// });
-//});

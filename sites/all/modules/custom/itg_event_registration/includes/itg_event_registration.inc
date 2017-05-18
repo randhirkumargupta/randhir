@@ -15,12 +15,9 @@ function itg_event_registration_form($form, &$form_state) {
     $path = drupal_lookup_path("source", $arg[1] . '/' . $arg[2]);
     $event_nid = explode('/', $path);
     $node = node_load($event_nid[1]);
-    //$node = menu_get_object("node", 1, $path);
-
   } elseif (is_numeric($arg[1]) && $arg[0] == "node") {
     $node = node_load($arg[1]);
-  } else {
-    //$event_id = itg_event_registration_get_event_nid();
+  } else {    
     $node = node_load($event_id);
   }
 
@@ -34,7 +31,7 @@ function itg_event_registration_form($form, &$form_state) {
     }
     else {
       // TODO: Fix date format
-     // $current_date = strtotime(date('Y-m-d') . ' 00:00:00');
+     
       $current_date = strtotime(date('Y-m-d  H:i:s'));
       $event_reg_start_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
       $event_reg_close_date = strtotime($node->field_registration_close_date[LANGUAGE_NONE][0]['value']);
@@ -106,8 +103,7 @@ function itg_event_registration_users_list() {
           }
         }
         $i++;
-      }
-    
+      }    
 
       $output_header = '<div class="dib full"><strong>Event: ' . $node_event->title . '</strong><div>'.l('Download', 'event-registration/users-list/download/' . $node_event->nid, array('attributes' => array('class' => array('btn-save', 'fright')))). '</div></div>
 

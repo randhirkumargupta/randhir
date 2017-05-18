@@ -121,22 +121,15 @@ define('BACKEND_URL', 'http://uat-it-backend.indiatodayonline.in');
 define('SSO_URL', 'http://uat-sso.indiatodayonline.in');
 define('ACCORD_URL', 'http://businesstoday.accordhostings.com/TopIndicesCtrl.aspx');
 
-
-
 //define('FRONT_URL', 'http://itgd-mum-lb-dev-frontend-app-1144451114.ap-south-1.elb.amazonaws.com');
 //define('BACKEND_URL', 'http://itgd-mum-lb-dev-backend-app-678057722.ap-south-1.elb.amazonaws.com');
 //define('FRONT_URL', 'http://localhost/itg-cms');
 //define('BACKEND_URL', 'http://192.168.14.45/itg-cms');
 
-
-
-
 // set comment config in variable
 if (function_exists('global_comment_last_record')) {
   variable_set('COMMENT_CONFIG', global_comment_last_record());
 }
-
-
 
 /**
  * Function for debugging arrays and objects.
