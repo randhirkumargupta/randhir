@@ -12,7 +12,7 @@
 
             <?php if (!empty($links)): ?>
                 <div class='<?php print $hook ?>-links clearfix'>
-                    <?php // print render($links) ?>
+                   
                 </div>
             <?php endif; ?>
 
@@ -26,15 +26,13 @@
 
             <?php if (!empty($content)): ?>
                 <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
-                    <?php // print render($content) ?>
-
-                    <?php if ($view_mode == 'full'): ?>
+                  <?php if ($view_mode == 'full'): ?>
                         <div class="content-node-view">
                             <h2><?php print t('Basic Details'); ?></h2>
                             <div class="content-details">
                                 <div class="field">
                                     <div class="field-label"><?php print t('Strap headline (Short Headline)'); ?></div>
-                                    <div class="field-items"><?php print $title; ?></div>
+                                    <div class="field-items"><?php print t($title); ?></div>
                                 </div>
                                 <?php
                                 $long_headline = render($content['field_recipe_long_headline']);
@@ -132,7 +130,7 @@
                                     print render($content['field_story_category']);
                                     ?>
         <?php endif; ?>
-                                <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label">Primary Category:&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
+                                <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label"><?php print t('Primary Category:'); ?>&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
 
                             </div>
                         </div>

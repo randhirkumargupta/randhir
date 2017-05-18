@@ -12,7 +12,6 @@
 
             <?php if (!empty($links)): ?>
                 <div class='<?php print $hook ?>-links clearfix'>
-                    <?php //print render($links) ?>
                 </div>
             <?php endif; ?>
 
@@ -27,19 +26,11 @@
             <?php if (!empty($title_prefix)) print render($title_prefix); ?>
 
             <?php if (!empty($title) && !$page): ?>
-            <!--        <h2 <?php if (!empty($title_attributes)) print $title_attributes ?>>
-                <?php if (!empty($new)): ?><span class='new'><?php print $new ?></span><?php endif; ?>
-                      <a href="<?php print $node_url ?>"><?php print $title ?></a>
-                      
-                    </h2>-->
             <?php endif; ?>
-
             <?php if (!empty($title_suffix)) print render($title_suffix); ?>
 
             <?php if (!empty($content)): ?>
                 <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
-                    <?php //print render($content) ?>
-
                     <?php if ($view_mode == 'full'): ?>
                         <div class="content-node-view">
                             <h2><?php print t('Basic Details'); ?></h2>
@@ -95,23 +86,16 @@
                                 if ($node->field_primary_category['und'][0]['value'] != "" && isset($node->field_primary_category['und'])) {
                                     $termdata = itg_videogallery_get_term_name($node->field_primary_category['und'][0]['value']);
                                 }
-                                //print render($content['field_story_category']);
                                 $selection = render($content['field_story_category']);
                                 if (!empty($selection)):
                                     print render($content['field_story_category']);
                                     ?>
                                 <?php endif; ?>
-                                <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label">Primary Category:&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
-
+                                <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label"><?php print t('Primary Category'); ?>:&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
                             </div>
                         </div>
-
                     <?php endif; ?>
-                    <?php
-                    //print render($content['comment_form']);
-                    //print render($content['comments']);
-                    ?>
-                </div>
+                   </div>
             <?php endif; ?>
 
             <?php if ($layout): ?>
