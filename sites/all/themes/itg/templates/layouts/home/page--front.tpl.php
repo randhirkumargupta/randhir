@@ -227,14 +227,14 @@ if ($theme != 'itgadmin') {
                 <div class="itg-widget-child tab-data tab-data-2 hide">
                   <div class="droppable <?php print $gray_bg_layout; ?>"> 
                     <div class="widget-wrapper <?php print $widget_data['itg-block-6']['widget_name']; ?>"> 
-<?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                      <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
                         <div class="widget-settings">
                           <div class="widget-title-wrapper">
                             <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-6']['block_title']; ?>" name="itg-block-6" class="block_title_id" placeholder="Enter Title" />
                           </div>
                           <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                         </div>  
-<?php } ?>                   
+                      <?php } ?>                   
                       <div class="data-holder" id="itg-block-6">
                       <?php
                       if (isset($widget_data['itg-block-6']['widget'])) {
@@ -638,7 +638,7 @@ if ($theme != 'itgadmin') {
                           <div class="widget-title-wrapper">
                             <?php if (isset($widget_data['itg-block-14']['block_title'])) { ?>
                               <span class="widget-title" data-id="itg-block-14"><?php print $widget_data['itg-block-14']['block_title']; ?></span>
-    <?php } ?>
+                        <?php } ?>
                             <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-14']['block_title']; ?>" name="itg-block-14" class="block_title_id" placeholder="Enter Title" />
                           </div>
                           <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
@@ -668,7 +668,7 @@ if ($theme != 'itgadmin') {
                         <span class="widget-title"><?php print $widget_data['itg-block-15']['block_title']; ?></span>
                       <?php } ?>
                       <!-- for admin  -->
-  <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                        <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
                         <div class="widget-settings">
                           <div class="widget-title-wrapper">
                             <span class="widget-title" data-id="itg-block-15"><?php print $widget_data['itg-block-15']['block_title']; ?></span>
@@ -701,7 +701,7 @@ if ($theme != 'itgadmin') {
                         <span class="widget-title"><?php print $widget_data['itg-block-16']['block_title']; ?></span>
                       <?php } ?>
                       <!-- for admin  -->
-  <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                      <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
                         <div class="widget-settings">
                           <div class="widget-title-wrapper">
                             <span class="widget-title" data-id="itg-block-16"><?php print $widget_data['itg-block-16']['block_title']; ?></span>
@@ -709,7 +709,7 @@ if ($theme != 'itgadmin') {
                           </div>
                           <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                         </div>
-                        <?php } ?>  
+                      <?php } ?>  
 
                       <div class="data-holder" id="itg-block-16" data-widget-style="home-shows">
                         <?php
@@ -736,7 +736,6 @@ if ($theme != 'itgadmin') {
           <!--End of Common section-->  
           <?php
           if ($theme != 'itgadmin') {
-            //print '</div>';
           }
           ?>
           <!--Common section add more strat here-->
@@ -778,7 +777,7 @@ if ($theme != 'itgadmin') {
                             <span class="widget-title"><?php print $widget_data[$widget_name1]['block_title']; ?></span>
                           <?php } ?>
                           <!-- for admin  -->
-      <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                          <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
                             <div class="widget-settings">
                               <div class="widget-title-wrapper">
                                 <span class="widget-title" data-id="<?php print $widget_name1; ?>"><?php print $widget_data[$widget_name1]['block_title']; ?></span>
@@ -812,7 +811,7 @@ if ($theme != 'itgadmin') {
                             <span class="widget-title"><?php print $widget_data[$widget_name2]['block_title']; ?></span>
                           <?php } ?>
                           <!-- for admin  -->
-      <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                          <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
                             <div class="widget-settings">
                               <div class="widget-title-wrapper">
                                 <span class="widget-title" data-id="<?php print $widget_name2; ?>"><?php print $widget_data[$widget_name2]['block_title']; ?></span>
@@ -846,7 +845,7 @@ if ($theme != 'itgadmin') {
                             <span class="widget-title"><?php print $widget_data[$widget_name3]['block_title']; ?></span>
                           <?php } ?>
                           <!-- for admin  -->
-      <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                          <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
                             <div class="widget-settings">
                               <div class="widget-title-wrapper">
                                 <span class="widget-title" data-id="<?php print $widget_name3; ?>"><?php print $widget_data[$widget_name3]['block_title']; ?></span>
@@ -1023,6 +1022,6 @@ if ($theme != 'itgadmin') {
 <div class="activate-message" style="display:none">
   <div class="message-body">
     <span class="close-popup"><i class="fa fa-times" aria-hidden="true"></i></span>
-    <p>Your Account Activated Successfully!</p>
+    <p><?php print t('Your Account Activated Successfully!'); ?></p>
   </div>
 </div>
