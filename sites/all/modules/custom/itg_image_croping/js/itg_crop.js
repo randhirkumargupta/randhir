@@ -41,8 +41,6 @@
         return false;
     });
 
-
-
 //  cancel image
     jQuery('.cancel-image').click(function() {
         if (jQuery('.div-upload-img').hasClass('active'))
@@ -53,8 +51,8 @@
             jQuery('#search-preview').show();
         }
     });
+    
     jQuery('.generate-Image').click(function() {
-
         jQuery('.image-fiels-style').show();
 
     });
@@ -124,21 +122,17 @@
 
     });
 
-
-
     jQuery('.original-image').click(function() {
         showloader();
         var content_type = jQuery('#data_content_name').val();
         var field_name = jQuery('#data_field_name').val();
         var image_fiedlid = jQuery('#image_fiedlid').val();
-      var original_img_id = jQuery('#orig_image_fiedlid').val();
+        var original_img_id = jQuery('#orig_image_fiedlid').val();
         var is_solr = jQuery('#is_solr').val();
         var imagefield = []; // more efficient than new Array()
         jQuery(".checkbox-image-size").each(function() {
-            if (jQuery(this).is(':checked'))
-            {
+            if (jQuery(this).is(':checked')) {
                 imagefield.push(jQuery(this).val());
-
             }
         });
         var resize_image_height = jQuery('#image_original_hight').val();
@@ -150,18 +144,15 @@
             success: function(data) {
 
                 var image_fiedlid = data;
-                if (image_fiedlid != "")
-                {
+                if (image_fiedlid != "") {
                     // get the image tagging page
                     jQuery.ajax({
                         url: Drupal.settings.basePath + 'imagetotag',
                         type: 'post',
                         data: {'fid': image_fiedlid, 'is_solr': is_solr, 'original_img_id': original_img_id,'field_name': field_name, 'image_fields': imagefield},
                         success: function(data) {
-
                             jQuery('#file-preview').html(data);
                             hideloader();
-
                         },
                         error: function(xhr, desc, err) {
                             console.log(xhr);
@@ -169,7 +160,6 @@
                         }
                     });
                 }
-
 
             },
             error: function(xhr, desc, err) {
@@ -180,32 +170,6 @@
 
     });
 
-//    jQuery('.original-image').click(function() {
-//        showloader();
-//        var field_name = jQuery('#data_field_name').val();
-//        var image_fiedlid = jQuery('#image_fiedlid').val();jQuery(".checkbox-image-size").each(function() {
-//            if (jQuery(this).is(':checked'))
-//            {
-//                imagefield.push(jQuery(this).val());
-//
-//            }
-//        });
-//        
-//        jQuery.ajax({
-//            url: Drupal.settings.basePath + 'imagetotag',
-//            type: 'post',
-//            data: {'fid': image_fiedlid, 'field_name': field_name},
-//            success: function(data) {
-//                jQuery('#file-preview').html(data);
-//                hideloader();
-//
-//            },
-//            error: function(xhr, desc, err) {
-//                console.log(xhr);
-//                console.log("Details: " + desc + "\nError:" + err);
-//            }
-//        });
-//    });
     jQuery('#select-aspect-ratio').change(function() {
         var get_aspect_ratio = jQuery(this).val();
         var field_name = jQuery('#data_field_name').val();

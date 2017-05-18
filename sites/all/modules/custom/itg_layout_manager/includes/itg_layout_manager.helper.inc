@@ -723,13 +723,11 @@ function get_highlights_widget($nid) {
     $text = '';
     $output .= '<div class="wrap-listing">';
     foreach ($highlights_node->field_highlights[LANGUAGE_NONE] as $highlights_arr) {
-      $highlights_detail = entity_load('field_collection_item', array($highlights_arr['value']));
-      
+      $highlights_detail = entity_load('field_collection_item', array($highlights_arr['value']));      
       
       if(!empty($highlights_detail[$highlights_arr['value']]->field_highlights_url[LANGUAGE_NONE][0]['value'])) {
         $highlight_title = l($highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'], $highlights_detail[$highlights_arr['value']]->field_highlights_url[LANGUAGE_NONE][0]['value'], array('attributes' => array('target' => '_blank')));
-      }
-      
+      }      
       else {
           $highlight_title = $highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'];
       }
@@ -751,7 +749,6 @@ function get_highlights_widget($nid) {
             }
           }
         }
-
 
         $emoji_reaction = '<span class="emoji-container">';
         $anchor_pointer_class = "def-cur-pointer";
