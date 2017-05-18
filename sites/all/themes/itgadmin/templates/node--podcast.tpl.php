@@ -3,7 +3,6 @@
         <?php if ($view_mode == 'full'): ?>
             <a href="javascript:;" class="close-preview">&nbsp;</a>
 
-
             <div class="basic-details content-box">
                 <h2><?php print t('Basic Details'); ?></h2>
                 <div class="content-details">
@@ -18,12 +17,6 @@
 
        <?php if(!isset($node->op) && $node->op != 'Preview'){ 
 ?>
-<!--        <div class="Story-details">
-            <h2><?php //print t('Audio Upload'); ?></h2>
-            <div class="content-details">
-                <?php //print render($content['field_podcast_audio_upload']); ?>
-            </div>
-        </div> -->
         <?php  } else {  ?>
             <div class="Story-details">
                 <h2><?php print t('Audio Upload'); ?></h2>
@@ -53,7 +46,7 @@
                               $audiouri = _itg_photogallery_fid($audfid);
                               $output .= '<div class="audio-div"><audio controls>
                             <source src="' . file_create_url($audiouri) . '" type="audio/mpeg">
-                            Your browser does not support the audio element.
+                            '.t('Your browser does not support the audio element.').'
                           </audio> </div>';
                             }
                           }
@@ -65,9 +58,7 @@
                         $output .= '</li>';
 
                     endforeach;
-                    //p($output)
                     ?>
-                    <?php //print render($content['field_podcast_audio_upload']); ?>
                     <div class="photogallery-list flexslider">
                       <ul class="slides"><?php print $output; ?></ul>
                     </div>
@@ -80,7 +71,7 @@
             if (!empty($browsemedia)):
                 ?>
                 <div class="BrowseMedia">
-                    <h2>Image Upload </h2>
+                    <h2><?php print t('Image Upload'); ?> </h2>
                     <div class="content-details">
                         <?php print render($content['field_story_extra_large_image']); ?>
                     </div>
@@ -112,7 +103,7 @@
                 ?>
                 <?php print render($content['field_story_category']); ?>
             <?php endif; ?>
-            <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label">Primary Category:&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
+            <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label"><?php print t('Primary Category:'); ?>&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
 
 
         <?php endif; // end of view mode full condition   ?></div>
